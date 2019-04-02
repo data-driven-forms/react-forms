@@ -13,12 +13,31 @@
     "test": "lerna run test",
     "test-ci": "lerna run test-ci",
     "test:update": "lerna run test -- -u",
-    "release": "lerna run release"
+    "release": "semantic-release"
   },
   "workspaces": [
     "packages/**"
   ],
   "devDependencies": {
-    "lerna": "^3.13.1"
+    "@khala/npm-release-monorepo": "^2.2.0",
+    "@semantic-release/git": "^7.0.8",
+    "@semantic-release/npm": "^5.1.4",
+    "atob-lite": "^2.0.0",
+    "lerna": "^3.13.1",
+    "semantic-release": "^15.13.3"
+  },
+  "release": {
+    "monorepo": "./packages",
+    "plugins": [
+      "@khala/npm-release-monorepo",
+      {
+        "path": "@semantic-release/git",
+        "assets": [
+          "package.json"
+        ],
+        "message": "Release of new version: ${nextRelease.version} <no> [skip ci]",
+        "successComment": ":tada: This ${issue.pull_request ? 'PR is included' : 'issue has been resolved'} in version ${nextRelease.version} :tada:\n\nThe release is available on \n\n- [GitHub release](<github_release_url>)\n\n- [npm package (@latest dist-tag)](<npm_release_url>)\n\nDemo can be found [here](http://data-driven-forms.surge.sh/)!"
+      }
+    ]
   }
 }

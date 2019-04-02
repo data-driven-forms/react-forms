@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactMarkdown from '../md-helper';
+import TableOfContent from '../helpers/list-of-content';
 
 const text = `
 You can validate a form by using of \`dataType\` or \`validate\`.
 
 DataTypes is used when you need validate only a data type of a value. For more complicated validators, you have to use validate.
 
-## dataType
+### dataType
 
 You can specify a type of a component by providing \`dataType\`, which will automatically validates the component.
 
@@ -25,7 +26,7 @@ Currently, there are four types supported:
 ['integer', 'number', 'bool', 'string']
 \`\`\`
 
-### Overwriting deffault messages
+### Overwriting default messages
 
 Validators is a singleton. You can change its default messages:
 
@@ -60,7 +61,7 @@ Types of validators:
 ]
 \`\`\`
 
-## validate
+### validate
 
 You need to provide a \`validate\` array in the schema:
 
@@ -81,7 +82,7 @@ A item of the validate array is
 * a) object containing type and other specific values (see Default validators)
 * b) function
 
-### Default validators
+#### Default validators
 
 There are standard validators, which you can import from react-form-renderer package.
 
@@ -152,7 +153,7 @@ Validation functions are triggered only when field has a value with exception of
 
 Each validator type has additional configuration options in addition to custom error message.
 
-### Custom function
+#### Custom function
 
 As validator you can provide your custom function:
 
@@ -175,7 +176,7 @@ const isOdd = (value) => value % 2 === 0 ? undefined : 'Value is odd!';
 
 The function takes \`value\` as an argument and should return undefined when pasess or string as an error message when fails.
 
-### Async validator
+#### Async validator
 
 You can use a Async function as a validator. However, the returned promise will overwrite all other validators 
 (because it is returned last),
@@ -212,7 +213,6 @@ validate: [
 ...
 \`\`\`
 
-
 ### validateOnMount
 
 By providing \`validateOnMount\` the validation will be triggered immediately after mounting of the component.
@@ -233,4 +233,8 @@ By providing \`validateOnMount\` the validation will be triggered immediately af
 
 `;
 
-export default <ReactMarkdown source={ text } />;
+export default <React.Fragment>
+  <TableOfContent text= { text } />
+  <ReactMarkdown source={ text } />
+</React.Fragment>;
+

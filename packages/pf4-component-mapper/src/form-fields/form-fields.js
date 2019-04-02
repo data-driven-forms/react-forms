@@ -26,6 +26,9 @@ const selectComponent = ({
   isVisible,
   onText,
   offText,
+  formOptions,
+  assignFieldProvider,
+  initialValue,
   ...rest
 }) => ({
   [componentTypes.TEXT_FIELD]: () => (
@@ -61,7 +64,7 @@ const selectComponent = ({
     />
   )),
   [componentTypes.SWITCH]: () => {
-    const { formOptions, isValid, ...newRest } = rest;
+    const { isValid, ...newRest } = rest;
     return <Switch
       { ...newRest }
       { ...input }

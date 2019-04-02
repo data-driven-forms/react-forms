@@ -7,6 +7,7 @@ import FormRendererPage from './pages/form-renderer-page';
 import Navigation from './common/examples-nav';
 import ComponentExample from './common/example-common';
 import DocPage from './common/doc-page';
+import ContributionPage from './pages/contribution';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -55,6 +56,7 @@ const App = () => (
               <Route exact path="/component-example/:component" component={ ComponentExample } />
               <Route exact path="/renderer/:component" component={ DocPage } />
               <Route exact path="/others/:component" component={ DocPage } />
+              <Route exact path="/contribution" component={ ContributionPage } />
             </Switch>
           </Grid>
         </Grid>

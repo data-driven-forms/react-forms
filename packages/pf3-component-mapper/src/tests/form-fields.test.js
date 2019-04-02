@@ -1,10 +1,9 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import { SwitchField, CheckboxGroup, SelectField, Radio, TextareaField, TextField } from '../form-fields/form-fields';
+import { SwitchField, CheckboxGroup, Radio, TextareaField, TextField } from '../form-fields/form-fields';
 import { mount } from 'enzyme';
 import MockFieldProvider from './mock-field-provider';
 import MultipleChoiceList from '../form-fields/multiple-choice-list';
-import Select from 'react-select';
 
 describe('FormFields', () => {
   describe('<SwitchField />', () => {
@@ -117,61 +116,6 @@ describe('FormFields', () => {
     it('should render multiple choice variant', () => {
       const wrapper = mount(<CheckboxGroup { ...initialProps } options={ [] } />);
       expect(wrapper.find(MultipleChoiceList)).toHaveLength(1);
-    });
-  });
-
-  describe('<SelectField />', () => {
-    let initialProps;
-    const changeSpy = jest.fn();
-    beforeEach(() => {
-      initialProps = {
-        input: {
-          name: 'select-input',
-          onChange: changeSpy,
-        },
-        meta: {},
-        options: [{
-          label: 'option 1',
-          value: 1,
-        }, {
-          label: 'option 2',
-          value: 2,
-        }],
-      };
-    });
-
-    afterEach(() => {
-      changeSpy.mockReset();
-    });
-
-    it('should mount correctly', () => {
-      const wrapper = mount(<SelectField { ...initialProps } />);
-      expect(wrapper).toBeTruthy();
-    });
-
-    it('should call on change with correct value on single select', () => {
-      const wrapper = mount(<SelectField { ...initialProps } />);
-      wrapper.find(Select).instance().props.onChange({
-        value: 2,
-      });
-      expect(changeSpy).toHaveBeenCalledWith(2);
-    });
-
-    it('should call on change with correct value on multi select', () => {
-      const wrapper = mount(
-        <SelectField
-          { ...initialProps }
-          multi
-          input= {{
-            name: 'select-input',
-            onChange: changeSpy,
-            value: [],
-          }}
-        />);
-      wrapper.find(Select).instance().props.onChange(
-        [{ value: 2, label: 'x' }, { value: 1, label: 'a' }],
-      );
-      expect(changeSpy).toHaveBeenCalledWith([ 1, 2 ]);
     });
   });
 

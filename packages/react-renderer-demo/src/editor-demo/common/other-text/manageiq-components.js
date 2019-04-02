@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactMarkdown from '../md-helper';
+import TableOfContent from '../helpers/list-of-content';
 
 const text =  `
 ### Duallist select
@@ -81,7 +82,7 @@ By default, the value contains all options from the right side select. However, 
 
 **3** Then you can send values to endpoints/API!
 
-### \`<HR>\` component
+### Horizontal rule
 
 Just a \`hr\` component for using in forms.
 
@@ -93,4 +94,7 @@ Just a \`hr\` component for using in forms.
 \`\`\`
 `;
 
-export default <ReactMarkdown source={ text } />;
+export default <React.Fragment>
+  <TableOfContent text={ text } />
+  <ReactMarkdown source={ text } />
+</React.Fragment>;

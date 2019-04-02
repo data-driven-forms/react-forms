@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactMarkdown from '../md-helper';
 import { layoutComponents } from '@data-driven-forms/react-form-renderer';
+import TableOfContent from '../helpers/list-of-content';
 
 const getTypes = (firstLine, apostrohpe = false) =>
   Object
@@ -226,4 +227,8 @@ const CustomSubForm = ({ formOptions, fields, ...rest }) => (
 FormOptions are passed to every field (default and custom). If you extend it, the child of the sub form will receive your modified formOptions. You can even change te rendering function if you wish.
 `;
 
-export default <ReactMarkdown source={ text } />;
+export default <React.Fragment>
+  <TableOfContent text= { text } />
+  <ReactMarkdown source={ text } />
+</React.Fragment>;
+

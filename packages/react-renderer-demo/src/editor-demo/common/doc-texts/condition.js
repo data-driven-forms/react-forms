@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactMarkdown from '../md-helper';
+import TableOfContent from '../helpers/list-of-content';
 
 const text =  `
 You can show a field only if it meets a condition:
+
 
 ### Schema
 
@@ -26,7 +28,6 @@ You can show a field only if it meets a condition:
 \`\`\`
 
 \`when\` - is name of field where the value is stored, **always required!**
-
 
 ### Conditions
 
@@ -115,7 +116,14 @@ condition: {
 // Foo = 'bar' => false
 \`\`\`
 
+### Clearing values
+
+If you need to clear values after switching fields, please see [here](/renderer/unmounting). 
 
 `;
 
-export default <ReactMarkdown source={ text } />;
+export default <React.Fragment>
+  <TableOfContent text= { text } />
+  <ReactMarkdown source={ text } />
+</React.Fragment>;
+

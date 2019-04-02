@@ -1,17 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormControl, HelpBlock, Checkbox, Radio as PfRadio, Col, FormGroup } from 'patternfly-react';
-import ReactSelect from 'react-select';
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 import { validationError } from './helpers';
 import MultipleChoiceList from './multiple-choice-list';
-import customStyles from './select-styles';
 import RequiredLabel from './required-label';
 import Switch from './switch-field';
 import { DateTimePicker } from './date-time-picker/date-time-picker';
-import './react-select.scss';
-
-const selectValue = option => option.sort((a, b) => a.label.localeCompare(b.label, 'en', { sensitivity: 'base' })).map(item => item.value);
+import Select from './select';
 
 const selectComponent = ({
   componentType,
@@ -30,6 +26,7 @@ const selectComponent = ({
   noCheckboxLabel,
   assignFieldProvider,
   initialValue,
+  loadOptions,
   ...rest
 }) => ({
   [componentTypes.TEXT_FIELD]: () =>
@@ -48,25 +45,17 @@ const selectComponent = ({
         <PfRadio { ...input } onChange={ () => { input.onChange(option.value); } } disabled={ isDisabled || isReadOnly }>{ option.label }</PfRadio>) }
     />
   )),
-  [componentTypes.SELECT_COMPONENT]: () => (
-    <ReactSelect
-      className={ `final-form-select ${invalid ? 'has-error' : ''}` }
-      styles={ customStyles }
-      { ...input }
-      options={options} // eslint-disable-line
-      placeholder={ placeholder || 'Please choose' }
-      value={ options.filter(({ value }) => rest.multi ? input.value.includes(value) : value === input.value) }
-      isMulti={ rest.multi }
-      isSearchable={ !!isSearchable }
-      isClearable={ false }
-      hideSelectedOptions={ false }
-      closeMenuOnSelect={ !rest.multi }
-      noOptionsMessage={ () => 'No option found' }
-      isDisabled={ isDisabled || isReadOnly }
-      onChange={ option =>
-        input.onChange(rest.multi ? selectValue(option) : option ? option.value : undefined) } // eslint-disable-line no-nested-ternary
-      { ...rest }
-    />),
+  [componentTypes.SELECT_COMPONENT]: () => <Select
+    loadOptions={ loadOptions }
+    options={ options }
+    invalid={ invalid }
+    input={ input }
+    placeholder={ placeholder }
+    rest={ rest }
+    isSearchable={ isSearchable }
+    isDisabled={ isDisabled }
+    isReadOnly={ isReadOnly }
+  />,
   [componentTypes.SWITCH]: () =>
     <Switch
       { ...rest }

@@ -116,6 +116,14 @@ class Navigation extends Component  {
                 { this.renderExamplesItems('/others', otherExamples) }
               </List>
             </Collapse>
+            <ListItem
+              button
+              component={ props =>  <RouterLink to="/contribution" { ...props } /> }
+            >
+              <Typography variant="button" gutterBottom style={{ textTransform: 'capitalize', fontWeight: 'initial' }}>
+                Contribution
+              </Typography>
+            </ListItem>
           </List>
         </Drawer>
       </div>

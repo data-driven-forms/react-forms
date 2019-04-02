@@ -29,7 +29,7 @@ const MultipleChoiceList = ({ validate, FieldProvider, ...props }) => (
         <FormGroup label={ label } fieldId={ rest.id || rest.key || rest.name } isValid={ showError } >
           { options.map(option =>
             (<FieldProvider
-              {...rest}
+              formOptions={rest.formOptions}
               id={ `${rest.id}-${option.value}` }
               key={ option.value }
               { ...option }
