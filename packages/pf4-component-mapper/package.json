@@ -3,6 +3,7 @@
   "version": "0.4.2",
   "description": "Starter pf4-component-mapper for data-driven-forms.",
   "main": "dist/index.js",
+  "license": "Apache-2.0",
   "scripts": {
     "start": "webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
     "build": "webpack --env prod --config ./config/webpack.config.js",

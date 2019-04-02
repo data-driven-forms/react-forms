@@ -3,6 +3,7 @@
   "version": "0.4.7",
   "description": "Patternfly 3 component mapper",
   "main": "dist/index.js",
+  "license": "Apache-2.0",
   "scripts": {
     "start": "webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
     "build": "webpack --env prod --config ./config/webpack.config.js",
