@@ -10,7 +10,7 @@
     "vendor": "webpack --env vendor --config ./config/webpack.config.js",
     "test": "jest --coverage",
     "test-ci": "jest && codecov",
-    "release": "semantic-release"
+    "release": "semantic-release -e semantic-release-monorepo"
   },
   "repository": "git@github.com:data-driven-forms/react-forms.git",
   "keywords": [
