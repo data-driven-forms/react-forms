@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SubForm /> should render sub form with description 1`] = `
+<Fragment>
+  <p>
+    Bar
+  </p>
+  <div>
+    Form item
+  </div>
+</Fragment>
+`;
+
+exports[`<SubForm /> should render sub form with title 1`] = `
+<Fragment>
+  <h3>
+    Foo
+  </h3>
+  <div>
+    Form item
+  </div>
+</Fragment>
+`;
+
+exports[`<SubForm /> should render sub form with title and description 1`] = `
+<Fragment>
+  <h3>
+    Foo
+  </h3>
+  <p>
+    Bar
+  </p>
+  <div>
+    Form item
+  </div>
+</Fragment>
+`;

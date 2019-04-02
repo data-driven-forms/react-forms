@@ -1,0 +1,23 @@
+.pull-right {
+  margin-top: 0 !important;
+  float: right;
+}
+
+.field-array {
+  display: grid;
+}
+
+.field-array .pf-c-form__group {
+  grid-column-start: 1;
+  grid-column-end: 12;
+}
+
+.field-array .pf-c-form__group.pf-m-action {
+  grid-column-start: 12;
+  grid-column-end: 12;
+  align-self: end;
+}
+
+.data-driven-forms__pf4-button-group {
+  margin-bottom: 16px
+}

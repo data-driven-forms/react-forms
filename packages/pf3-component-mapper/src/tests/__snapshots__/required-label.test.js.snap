@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RequiredLabel /> should render correctly 1`] = `
+<RequiredLabel
+  label="Foo"
+>
+  <span
+    style={
+      Object {
+        "color": "#ff0000",
+      }
+    }
+  >
+    * 
+  </span>
+   
+  Foo
+</RequiredLabel>
+`;

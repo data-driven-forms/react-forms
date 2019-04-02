@@ -1,0 +1,24 @@
+{
+  "name": "react-forms",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:data-driven-forms/react-forms.git",
+  "author": "Martin Marosi <marvusm.mmi@gmail.com>",
+  "license": "Apache-2.0",
+  "private": true,
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "build": "lerna run build",
+    "vendor": "lerna run vendor",
+    "test": "lerna run test",
+    "test-ci": "lerna run test-ci",
+    "test:update": "lerna run test -- -u",
+    "release": "lerna run release"
+  },
+  "workspaces": [
+    "packages/**"
+  ],
+  "devDependencies": {
+    "lerna": "^3.13.1"
+  }
+}

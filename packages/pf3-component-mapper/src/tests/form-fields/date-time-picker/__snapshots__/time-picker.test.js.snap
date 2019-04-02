@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TimePicker /> should render correcntly 1`] = `
+<TimePicker
+  onHourChange={[MockFunction]}
+  onMinuteChange={[MockFunction]}
+  selectedDay={2019-01-17T03:24:00.000Z}
+>
+  <table
+    className="time-picker-layout-wrapper"
+  >
+    <tbody>
+      <tr>
+        <td
+          className="chevron-button"
+          onClick={[Function]}
+        >
+          <Icon
+            name="chevron-up"
+            type="fa"
+          >
+            <FontAwesome
+              name="chevron-up"
+            >
+              <span
+                aria-hidden={true}
+                className="fa fa-chevron-up"
+              />
+            </FontAwesome>
+          </Icon>
+        </td>
+        <td />
+        <td
+          className="chevron-button"
+          onClick={[Function]}
+        >
+          <Icon
+            name="chevron-up"
+            type="fa"
+          >
+            <FontAwesome
+              name="chevron-up"
+            >
+              <span
+                aria-hidden={true}
+                className="fa fa-chevron-up"
+              />
+            </FontAwesome>
+          </Icon>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span>
+            <input
+              className="time-picker-hours-input"
+              max={23}
+              min={0}
+              onChange={[Function]}
+              type="number"
+              value="04"
+            />
+          </span>
+        </td>
+        <td>
+          :
+        </td>
+        <td>
+          <span>
+            <input
+              className="time-picker-hours-input"
+              max={59}
+              min={0}
+              onChange={[Function]}
+              type="number"
+              value="24"
+            />
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td
+          className="chevron-button"
+          onClick={[Function]}
+        >
+          <Icon
+            name="chevron-down"
+            type="fa"
+          >
+            <FontAwesome
+              name="chevron-down"
+            >
+              <span
+                aria-hidden={true}
+                className="fa fa-chevron-down"
+              />
+            </FontAwesome>
+          </Icon>
+        </td>
+        <td />
+        <td
+          className="chevron-button"
+          onClick={[Function]}
+        >
+          <Icon
+            name="chevron-down"
+            type="fa"
+          >
+            <FontAwesome
+              name="chevron-down"
+            >
+              <span
+                aria-hidden={true}
+                className="fa fa-chevron-down"
+              />
+            </FontAwesome>
+          </Icon>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</TimePicker>
+`;

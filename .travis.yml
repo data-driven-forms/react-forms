@@ -1,0 +1,34 @@
+language: node_js
+node_js:
+  - "8"
+
+sudo: required
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
+  - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+  - yarn install
+  - npm install -g codecov
+
+
+
+script: ./scripts/react-form-renderer.sh
+
+deploy:
+- provider: script
+  on:
+    branch: master
+  script:
+  - yarn run release
+  skip_cleanup: true
+- provider: surge
+  on:
+    branch: master
+  project: ./packages/react-renderer-demo/public/
+  domain: data-driven-forms.surge.sh 
+  skip_cleanup: true
+
+cache:
+  yarn: true
+  directories:
+    - ~/.npm
+

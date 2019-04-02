@@ -1,0 +1,110 @@
+{
+  "name": "@data-driven-forms/react-render-demo",
+  "version": "1.0.0",
+  "description": "Demo for data driven forms.",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
+    "build": "webpack --env prod --config ./config/webpack.config.js",
+    "vendor": "webpack --env vendor --config ./config/webpack.config.js --progress",
+    "test": "jest --coverage",
+    "test-ci": "jest && codecov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/data-driven-forms/react-starter.git"
+  },
+  "keywords": [
+    "react",
+    "forms",
+    "javascript",
+    "starter app"
+  ],
+  "author": "Martin Marosi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/data-driven-forms/react-starter/issues"
+  },
+  "homepage": "https://github.com/data-driven-forms/react-starter#readme",
+  "jest": {
+    "setupFiles": [
+      "./config/jest.setup.js"
+    ],
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/.{snap}*",
+      "!src/vendor.js"
+    ],
+    "coverageReporters": [
+      "text",
+      "html",
+      "lcov"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|scss)$": "identity-obj-proxy"
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "9.x",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-lodash": "^3.3.4",
+    "css-loader": "^1.0.1",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "enzyme-to-json": "^3.3.4",
+    "eslint": "5.x",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-config-react-app": "^3.0.5",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-flowtype": "2.x",
+    "eslint-plugin-import": "2.x",
+    "eslint-plugin-jsx-a11y": "6.x",
+    "eslint-plugin-react": "^7.11.1",
+    "html-webpack-plugin": "^3.2.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^23.6.0",
+    "mini-css-extract-plugin": "^0.4.4",
+    "node-sass": "^4.10.0",
+    "regenerator-runtime": "^0.12.1",
+    "resolve-url-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10",
+    "webpack-merge": "^4.1.4"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "@data-driven-forms/mui-component-mapper": "latest",
+    "@data-driven-forms/pf3-component-mapper": "latest",
+    "@data-driven-forms/pf4-component-mapper": "latest",
+    "@data-driven-forms/react-form-renderer": "latest",
+    "@material-ui/core": "^3.8.3",
+    "@material-ui/icons": "^3.0.2",
+    "@patternfly/patternfly-next": "^1.0.84",
+    "@patternfly/react-core": "~1.51.6",
+    "@patternfly/react-icons": "~2.8.0",
+    "@patternfly/react-tokens": "^1.9.6",
+    "brace": "^0.11.1",
+    "patternfly-react": "^2.25.1",
+    "prop-types": "^15.6.2",
+    "react": "^16.7.0",
+    "react-ace": "^6.3.2",
+    "react-copy-to-clipboard": "^5.0.1",
+    "react-dom": "^16.7.0",
+    "react-markdown": "^4.0.6",
+    "react-router-dom": "^4.3.1"
+  }
+}

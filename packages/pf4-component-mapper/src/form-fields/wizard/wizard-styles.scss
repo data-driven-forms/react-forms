@@ -1,0 +1,10 @@
+.wizard-button-toolbar {
+  justify-content: flex-end;
+  margin-top: 1em;
+  button {
+    margin: 0 8px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

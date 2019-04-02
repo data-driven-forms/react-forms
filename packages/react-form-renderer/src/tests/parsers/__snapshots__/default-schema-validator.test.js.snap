@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Default schema validator should fail if field component from form fields mapper is not a valid React component. 1`] = `"FormComponent \\"invalidComponent\\" from formFieldsMapper is not a valid React component!"`;
+
+exports[`Default schema validator should fail if field component property is not in form fields mapper. 1`] = `
+"
+          Component of type \\"blarghs\\" is not present in formFieldsMapper.
+          Please make sure \\"blarghs is included in your formFieldsMapper.\\"
+          FormFieldsMapper has these values: [foo,invalidComponent,tabs]
+        "
+`;
+
+exports[`Default schema validator should fail if field condition have notMatch property and have not is/pattern. 1`] = `
+"
+      Error occured in field definition with name: \\"foo\\".
+      Field condition must have \\"pattern\\" or \\"is\\" property when \\"notMatch\\" is set! Properties received: [when,isEmpty,notMatch].
+    "
+`;
+
+exports[`Default schema validator should fail if field condition is missing is key. 1`] = `
+"
+      Error occured in field definition with name: \\"foo\\".
+      Field condition must have one of \\"is\\", \\"isEmpty\\", \\"isNotEmpty\\", \\"pattern\\" property! Properties received: [when].
+    "
+`;
+
+exports[`Default schema validator should fail if field condition is missing when key. 1`] = `
+"
+      Error occured in field definition with \\"name\\" property: \\"foo\\".
+      Field condition must have \\"when\\" property! Properties received: [].
+    "
+`;
+
+exports[`Default schema validator should fail if field condition is not correct type. 1`] = `
+"
+      Error occured in field definition with name: \\"foo\\".
+      Field condition must be an object, received string!
+    "
+`;
+
+exports[`Default schema validator should fail if field condition pattern property is not correct type. 1`] = `
+"
+      Error occured in field definition with name: \\"foo\\".
+      Field condition must have \\"pattern\\" of instance \\"RegExp\\"! Instance received: [Number].
+    "
+`;
+
+exports[`Default schema validator should fail if field condition when property is not correct type. 1`] = `
+"
+      Error occured in field definition with name: \\"foo\\".
+      Field condition property \\"when\\" must be oof type \\"string\\", number received!].
+    "
+`;
+
+exports[`Default schema validator should fail if field item does not have component property 1`] = `"Each fields item must have \\"component\\" property!"`;
+
+exports[`Default schema validator should fail if field item does not have name property 1`] = `"Each fields item must have \\"name\\" or \\"key\\" property! Name is used as a unique identifier of form fields."`;
+
+exports[`Default schema validator should fail if field validate is not an array. 1`] = `
+"
+      Error occured in field definition with name: \\"foo\\".
+      Field validate property must be an Array, object received!
+    "
+`;
+
+exports[`Default schema validator should fail if field validate item is an object and does not have type property. 1`] = `
+"
+        Error occured in field definition with name: \\"foo\\".
+        Field validator at index: 0 does not have \\"type\\" property! Properties received: [].
+      "
+`;
+
+exports[`Default schema validator should fail if field validate item is an object and validator type does not exist. 1`] = `
+"
+        Error occured in field definition with name: \\"foo\\".
+        Field validator at index: 0 does not have correct \\"type\\" property!
+        Received \\"magic\\", expected one of: [required-validator,min-length-validator,max-length-validator,exact-length-validator,min-items-validator,min-number-value,max-number-value,pattern-validator].
+      "
+`;
+
+exports[`Default schema validator should fail if field validate item is not an object or a function. 1`] = `
+"
+        Error occured in field definition with name: \\"foo\\".
+        Field validator at index: 0 must be an object or a function, string received!
+      "
+`;
+
+exports[`Default schema validator should fail if input is not a object 1`] = `"Form Schema must be an object, received array!"`;
+
+exports[`Default schema validator should fail if input object does fields key that is not array 1`] = `"Component of type schema must contain \\"fields\\" property of type array, received type: object!"`;
+
+exports[`Default schema validator should fail if input object does not have fields key 1`] = `"Component of type schema must contain \\"fields\\" property of type array, received undefined!"`;

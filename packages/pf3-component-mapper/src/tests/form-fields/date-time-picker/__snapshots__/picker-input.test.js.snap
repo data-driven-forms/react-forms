@@ -1,0 +1,246 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PickerInput /> should render picker input correctly 1`] = `
+<PickerInput
+  handleOverlayToggle={[MockFunction]}
+>
+  <InputGroup
+    bsClass="input-group"
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
+  >
+    <span
+      className="input-group"
+      style={
+        Object {
+          "cursor": "pointer",
+        }
+      }
+    >
+      <FormControl
+        bsClass="form-control"
+        className="picker-input"
+        componentClass="input"
+        onClick={[Function]}
+        readOnly={true}
+        style={
+          Object {
+            "backgroundColor": "white",
+            "color": "black",
+            "cursor": "pointer",
+          }
+        }
+        type="text"
+        value=""
+      >
+        <input
+          className="picker-input form-control"
+          onClick={[Function]}
+          readOnly={true}
+          style={
+            Object {
+              "backgroundColor": "white",
+              "color": "black",
+              "cursor": "pointer",
+            }
+          }
+          type="text"
+          value=""
+        />
+      </FormControl>
+      <InputGroupAddon
+        bsClass="input-group-addon"
+        onClick={[Function]}
+      >
+        <span
+          className="input-group-addon"
+          onClick={[Function]}
+        >
+          <Icon
+            name="calendar"
+            type="fa"
+          >
+            <FontAwesome
+              name="calendar"
+            >
+              <span
+                aria-hidden={true}
+                className="fa fa-calendar"
+              />
+            </FontAwesome>
+          </Icon>
+        </span>
+      </InputGroupAddon>
+    </span>
+  </InputGroup>
+</PickerInput>
+`;
+
+exports[`<PickerInput /> should render picker input disbaled variant correctly 1`] = `
+<PickerInput
+  handleOverlayToggle={[MockFunction]}
+  isDisabled={true}
+>
+  <InputGroup
+    bsClass="input-group"
+    disabled={true}
+    style={
+      Object {
+        "cursor": "not-allowed",
+      }
+    }
+  >
+    <span
+      className="input-group"
+      disabled={true}
+      style={
+        Object {
+          "cursor": "not-allowed",
+        }
+      }
+    >
+      <FormControl
+        bsClass="form-control"
+        className="picker-input"
+        componentClass="input"
+        disabled={true}
+        onClick={[Function]}
+        readOnly={true}
+        style={
+          Object {
+            "backgroundColor": "white",
+            "color": "black",
+            "cursor": "not-allowed",
+          }
+        }
+        type="text"
+        value=""
+      >
+        <input
+          className="picker-input form-control"
+          disabled={true}
+          onClick={[Function]}
+          readOnly={true}
+          style={
+            Object {
+              "backgroundColor": "white",
+              "color": "black",
+              "cursor": "not-allowed",
+            }
+          }
+          type="text"
+          value=""
+        />
+      </FormControl>
+      <InputGroupAddon
+        bsClass="input-group-addon"
+        disabled={true}
+        onClick={[Function]}
+      >
+        <span
+          className="input-group-addon"
+          disabled={true}
+          onClick={[Function]}
+        >
+          <Icon
+            name="calendar"
+            type="fa"
+          >
+            <FontAwesome
+              name="calendar"
+            >
+              <span
+                aria-hidden={true}
+                className="fa fa-calendar"
+              />
+            </FontAwesome>
+          </Icon>
+        </span>
+      </InputGroupAddon>
+    </span>
+  </InputGroup>
+</PickerInput>
+`;
+
+exports[`<PickerInput /> should render picker input time variant correctly 1`] = `
+<PickerInput
+  handleOverlayToggle={[MockFunction]}
+  variant="time"
+>
+  <InputGroup
+    bsClass="input-group"
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
+  >
+    <span
+      className="input-group"
+      style={
+        Object {
+          "cursor": "pointer",
+        }
+      }
+    >
+      <FormControl
+        bsClass="form-control"
+        className="picker-input"
+        componentClass="input"
+        onClick={[Function]}
+        readOnly={true}
+        style={
+          Object {
+            "backgroundColor": "white",
+            "color": "black",
+            "cursor": "pointer",
+          }
+        }
+        type="text"
+        value=""
+      >
+        <input
+          className="picker-input form-control"
+          onClick={[Function]}
+          readOnly={true}
+          style={
+            Object {
+              "backgroundColor": "white",
+              "color": "black",
+              "cursor": "pointer",
+            }
+          }
+          type="text"
+          value=""
+        />
+      </FormControl>
+      <InputGroupAddon
+        bsClass="input-group-addon"
+        onClick={[Function]}
+      >
+        <span
+          className="input-group-addon"
+          onClick={[Function]}
+        >
+          <Icon
+            name="time"
+            type="fa"
+          >
+            <FontAwesome
+              name="time"
+            >
+              <span
+                aria-hidden={true}
+                className="fa fa-time"
+              />
+            </FontAwesome>
+          </Icon>
+        </span>
+      </InputGroupAddon>
+    </span>
+  </InputGroup>
+</PickerInput>
+`;

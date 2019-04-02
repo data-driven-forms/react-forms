@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Navbar /> should render correctly 1`] = `
+<Navbar
+  month={2018-12-16T23:00:00.000Z}
+>
+  <table
+    className="year-interval-header"
+  >
+    <tbody>
+      <tr>
+        <td
+          onClick={[Function]}
+        >
+          <Icon
+            name="angle-left"
+            type="fa"
+          >
+            <FontAwesome
+              name="angle-left"
+            >
+              <span
+                aria-hidden={true}
+                className="fa fa-angle-left"
+              />
+            </FontAwesome>
+          </Icon>
+        </td>
+        <td>
+          <button
+            className="navbar-center-button"
+            onClick={[Function]}
+            type="button"
+          >
+            December 2018
+          </button>
+        </td>
+        <td
+          onClick={[Function]}
+        >
+          <Icon
+            name="angle-right"
+            type="fa"
+          >
+            <FontAwesome
+              name="angle-right"
+            >
+              <span
+                aria-hidden={true}
+                className="fa fa-angle-right"
+              />
+            </FontAwesome>
+          </Icon>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</Navbar>
+`;
+
+exports[`<Navbar /> should render year navbar variant correctly 1`] = `
+<Navbar
+  isYear={true}
+  month={2018-12-16T23:00:00.000Z}
+>
+  <table
+    className="year-interval-header"
+  >
+    <tbody>
+      <tr>
+        <td
+          onClick={[Function]}
+        >
+          <Icon
+            name="angle-left"
+            type="fa"
+          >
+            <FontAwesome
+              name="angle-left"
+            >
+              <span
+                aria-hidden={true}
+                className="fa fa-angle-left"
+              />
+            </FontAwesome>
+          </Icon>
+        </td>
+        <td>
+          <button
+            className="navbar-center-button"
+            onClick={[Function]}
+            type="button"
+          >
+            2018
+          </button>
+        </td>
+        <td
+          onClick={[Function]}
+        >
+          <Icon
+            name="angle-right"
+            type="fa"
+          >
+            <FontAwesome
+              name="angle-right"
+            >
+              <span
+                aria-hidden={true}
+                className="fa fa-angle-right"
+              />
+            </FontAwesome>
+          </Icon>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</Navbar>
+`;

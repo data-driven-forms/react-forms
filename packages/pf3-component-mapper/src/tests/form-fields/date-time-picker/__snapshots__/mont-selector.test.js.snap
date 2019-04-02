@@ -1,0 +1,280 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MonthSelector /> should render correcntly 1`] = `
+<MonthSelector
+  monthChange={[MockFunction]}
+  onNextClick={[MockFunction]}
+  onPreviousClick={[MockFunction]}
+  selectedDay={2018-12-16T23:00:00.000Z}
+  toggleSelectingMonth={[MockFunction]}
+>
+  <div
+    className="DayPicker"
+  >
+    <div
+      className="DayPicker-wrapper"
+      tabIndex="0"
+    >
+      <Navbar
+        month={2018-12-16T23:00:00.000Z}
+        onNextClick={[MockFunction]}
+        onPreviousClick={[MockFunction]}
+      >
+        <table
+          className="year-interval-header"
+        >
+          <tbody>
+            <tr>
+              <td
+                onClick={[Function]}
+              >
+                <Icon
+                  name="angle-left"
+                  type="fa"
+                >
+                  <FontAwesome
+                    name="angle-left"
+                  >
+                    <span
+                      aria-hidden={true}
+                      className="fa fa-angle-left"
+                    />
+                  </FontAwesome>
+                </Icon>
+              </td>
+              <td>
+                <button
+                  className="navbar-center-button"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  December 2018
+                </button>
+              </td>
+              <td
+                onClick={[Function]}
+              >
+                <Icon
+                  name="angle-right"
+                  type="fa"
+                >
+                  <FontAwesome
+                    name="angle-right"
+                  >
+                    <span
+                      aria-hidden={true}
+                      className="fa fa-angle-right"
+                    />
+                  </FontAwesome>
+                </Icon>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </Navbar>
+      <table
+        className="pf3-datetime-months-table"
+      >
+        <tbody>
+          <tr
+            key="month-row-0"
+          >
+            <td
+              key="months-cell-January"
+              style={
+                Object {
+                  "width": 14,
+                }
+              }
+            >
+              <button
+                className=""
+                onClick={[Function]}
+              >
+                January
+              </button>
+            </td>
+            <td
+              key="months-cell-February"
+              style={
+                Object {
+                  "width": 14,
+                }
+              }
+            >
+              <button
+                className=""
+                onClick={[Function]}
+              >
+                February
+              </button>
+            </td>
+            <td
+              key="months-cell-March"
+              style={
+                Object {
+                  "width": 14,
+                }
+              }
+            >
+              <button
+                className=""
+                onClick={[Function]}
+              >
+                March
+              </button>
+            </td>
+          </tr>
+          <tr
+            key="month-row-1"
+          >
+            <td
+              key="months-cell-April"
+              style={
+                Object {
+                  "width": 14,
+                }
+              }
+            >
+              <button
+                className=""
+                onClick={[Function]}
+              >
+                April
+              </button>
+            </td>
+            <td
+              key="months-cell-May"
+              style={
+                Object {
+                  "width": 14,
+                }
+              }
+            >
+              <button
+                className=""
+                onClick={[Function]}
+              >
+                May
+              </button>
+            </td>
+            <td
+              key="months-cell-June"
+              style={
+                Object {
+                  "width": 14,
+                }
+              }
+            >
+              <button
+                className=""
+                onClick={[Function]}
+              >
+                June
+              </button>
+            </td>
+          </tr>
+          <tr
+            key="month-row-2"
+          >
+            <td
+              key="months-cell-July"
+              style={
+                Object {
+                  "width": 14,
+                }
+              }
+            >
+              <button
+                className=""
+                onClick={[Function]}
+              >
+                July
+              </button>
+            </td>
+            <td
+              key="months-cell-August"
+              style={
+                Object {
+                  "width": 14,
+                }
+              }
+            >
+              <button
+                className=""
+                onClick={[Function]}
+              >
+                August
+              </button>
+            </td>
+            <td
+              key="months-cell-September"
+              style={
+                Object {
+                  "width": 14,
+                }
+              }
+            >
+              <button
+                className=""
+                onClick={[Function]}
+              >
+                September
+              </button>
+            </td>
+          </tr>
+          <tr
+            key="month-row-3"
+          >
+            <td
+              key="months-cell-October"
+              style={
+                Object {
+                  "width": 14,
+                }
+              }
+            >
+              <button
+                className=""
+                onClick={[Function]}
+              >
+                October
+              </button>
+            </td>
+            <td
+              key="months-cell-November"
+              style={
+                Object {
+                  "width": 14,
+                }
+              }
+            >
+              <button
+                className=""
+                onClick={[Function]}
+              >
+                November
+              </button>
+            </td>
+            <td
+              key="months-cell-December"
+              style={
+                Object {
+                  "width": 14,
+                }
+              }
+            >
+              <button
+                className="selected"
+                onClick={[Function]}
+              >
+                December
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</MonthSelector>
+`;

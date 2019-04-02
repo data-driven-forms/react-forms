@@ -1,0 +1,238 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FormTabs /> should render form tabs 1`] = `
+<FormTabs
+  fields={
+    Array [
+      Object {
+        "component": "tabs",
+        "fields": Array [
+          Object {
+            "component": "foo",
+            "name": "foo",
+          },
+        ],
+        "key": "tab1",
+        "title": "Tab 1",
+      },
+      Object {
+        "component": "tabs",
+        "fields": Array [],
+        "key": "tab2",
+        "title": "Tab 2",
+      },
+    ]
+  }
+  formOptions={
+    Object {
+      "renderForm": [Function],
+    }
+  }
+>
+  <Uncontrolled(TabContainer)
+    defaultActiveKey={0}
+    id="basic-tabs-pf"
+  >
+    <TabContainer
+      activeKey={0}
+      id="basic-tabs-pf"
+      onSelect={[Function]}
+    >
+      <div
+        id="basic-tabs-pf"
+      >
+        <Nav
+          bsClass="nav nav-tabs nav-tabs-pf"
+          justified={false}
+          pullLeft={false}
+          pullRight={false}
+          stacked={false}
+        >
+          <ul
+            className="nav nav-tabs nav-tabs-pf"
+            role="tablist"
+          >
+            <NavItem
+              active={true}
+              activeKey={0}
+              aria-controls="basic-tabs-pf-pane-0"
+              disabled={false}
+              eventKey={0}
+              id="basic-tabs-pf-tab-0"
+              key=".$tab1"
+              onKeyDown={[Function]}
+              onSelect={[Function]}
+              role="tab"
+            >
+              <li
+                className="active"
+                role="presentation"
+              >
+                <SafeAnchor
+                  aria-controls="basic-tabs-pf-pane-0"
+                  aria-selected={true}
+                  componentClass="a"
+                  disabled={false}
+                  id="basic-tabs-pf-tab-0"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                  role="tab"
+                >
+                  <a
+                    aria-controls="basic-tabs-pf-pane-0"
+                    aria-selected={true}
+                    href="#"
+                    id="basic-tabs-pf-tab-0"
+                    onClick={[Function]}
+                    onKeyDown={[Function]}
+                    role="tab"
+                  >
+                    Tab 1
+                  </a>
+                </SafeAnchor>
+              </li>
+            </NavItem>
+            <NavItem
+              active={false}
+              activeKey={0}
+              aria-controls="basic-tabs-pf-pane-1"
+              disabled={false}
+              eventKey={1}
+              id="basic-tabs-pf-tab-1"
+              key=".$tab2"
+              onKeyDown={[Function]}
+              onSelect={[Function]}
+              role="tab"
+              tabIndex={-1}
+            >
+              <li
+                className=""
+                role="presentation"
+              >
+                <SafeAnchor
+                  aria-controls="basic-tabs-pf-pane-1"
+                  aria-selected={false}
+                  componentClass="a"
+                  disabled={false}
+                  id="basic-tabs-pf-tab-1"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                  role="tab"
+                  tabIndex={-1}
+                >
+                  <a
+                    aria-controls="basic-tabs-pf-pane-1"
+                    aria-selected={false}
+                    href="#"
+                    id="basic-tabs-pf-tab-1"
+                    onClick={[Function]}
+                    onKeyDown={[Function]}
+                    role="tab"
+                    tabIndex={-1}
+                  >
+                    Tab 2
+                  </a>
+                </SafeAnchor>
+              </li>
+            </NavItem>
+          </ul>
+        </Nav>
+        <TabContent
+          animation={true}
+          bsClass="tab"
+          componentClass="div"
+          mountOnEnter={false}
+          unmountOnExit={false}
+        >
+          <div
+            className="tab-content"
+          >
+            <TabPane
+              bsClass="tab-pane"
+              eventKey={0}
+              key="tab1"
+            >
+              <Fade
+                appear={false}
+                in={true}
+                mountOnEnter={false}
+                onEnter={[Function]}
+                onExited={[Function]}
+                timeout={300}
+                unmountOnExit={false}
+              >
+                <Transition
+                  appear={false}
+                  enter={true}
+                  exit={true}
+                  in={true}
+                  mountOnEnter={false}
+                  onEnter={[Function]}
+                  onEntered={[Function]}
+                  onEntering={[Function]}
+                  onExit={[Function]}
+                  onExited={[Function]}
+                  onExiting={[Function]}
+                  timeout={300}
+                  unmountOnExit={false}
+                >
+                  <div
+                    aria-hidden={false}
+                    aria-labelledby="basic-tabs-pf-tab-0"
+                    className="fade tab-pane active in"
+                    id="basic-tabs-pf-pane-0"
+                    role="tabpanel"
+                  >
+                    <div />
+                  </div>
+                </Transition>
+              </Fade>
+            </TabPane>
+            <TabPane
+              bsClass="tab-pane"
+              eventKey={1}
+              key="tab2"
+            >
+              <Fade
+                appear={false}
+                in={false}
+                mountOnEnter={false}
+                onEnter={[Function]}
+                onExited={[Function]}
+                timeout={300}
+                unmountOnExit={false}
+              >
+                <Transition
+                  appear={false}
+                  enter={true}
+                  exit={true}
+                  in={false}
+                  mountOnEnter={false}
+                  onEnter={[Function]}
+                  onEntered={[Function]}
+                  onEntering={[Function]}
+                  onExit={[Function]}
+                  onExited={[Function]}
+                  onExiting={[Function]}
+                  timeout={300}
+                  unmountOnExit={false}
+                >
+                  <div
+                    aria-hidden={true}
+                    aria-labelledby="basic-tabs-pf-tab-1"
+                    className="fade tab-pane"
+                    id="basic-tabs-pf-pane-1"
+                    role="tabpanel"
+                  >
+                    <div />
+                  </div>
+                </Transition>
+              </Fade>
+            </TabPane>
+          </div>
+        </TabContent>
+      </div>
+    </TabContainer>
+  </Uncontrolled(TabContainer)>
+</FormTabs>
+`;

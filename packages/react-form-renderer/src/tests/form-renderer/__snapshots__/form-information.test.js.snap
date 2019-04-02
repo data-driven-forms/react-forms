@@ -1,0 +1,481 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FormControls /> should render with description 1`] = `
+<ContextWrapper>
+  <FormRenderer
+    buttonsLabels={Object {}}
+    clearOnUnmount={false}
+    disableSubmit={Array []}
+    formFieldsMapper={Object {}}
+    formType="pf3"
+    initialValues={Object {}}
+    layoutMapper={
+      Object {
+        "Button": [Function],
+        "ButtonGroup": [Function],
+        "Col": [Function],
+        "Description": [Function],
+        "FormGroup": [Function],
+        "FormWrapper": [Function],
+        "Title": [Function],
+      }
+    }
+    onSubmit={[MockFunction]}
+    resetAble={false}
+    schema={
+      Object {
+        "description": "Description",
+        "fields": Array [],
+      }
+    }
+    schemaType="default"
+    showFormControls={true}
+    uiSchema={Object {}}
+  >
+    <ReactFinalForm
+      initialValues={Object {}}
+      mutators={
+        Object {
+          "insert": [Function],
+          "move": [Function],
+          "pop": [Function],
+          "push": [Function],
+          "remove": [Function],
+          "shift": [Function],
+          "swap": [Function],
+          "unshift": [Function],
+          "update": [Function],
+        }
+      }
+      onSubmit={[MockFunction]}
+      render={[Function]}
+      subscription={
+        Object {
+          "pristine": true,
+          "submitting": true,
+          "valid": true,
+        }
+      }
+    >
+      <Component>
+        <form>
+          <Component>
+            <div>
+              Description
+            </div>
+          </Component>
+          <FormControls
+            buttonOrder={
+              Array [
+                "submit",
+                "reset",
+                "cancel",
+              ]
+            }
+            canReset={false}
+            canSubmit={false}
+            cancelLabel="Cancel"
+            onReset={[Function]}
+            onSubmit={[Function]}
+            pristine={true}
+            resetLabel="Reset"
+            submitLabel="Submit"
+          >
+            <Component
+              xs={12}
+            >
+              <div
+                xs={12}
+              >
+                <Component>
+                  <div>
+                    <Component>
+                      <div>
+                        <Component
+                          key="form-submit"
+                          label="Submit"
+                          onClick={[Function]}
+                          type="button"
+                          variant="primary"
+                        >
+                          <button
+                            onClick={[Function]}
+                            type="button"
+                            variant="primary"
+                          >
+                            Submit
+                          </button>
+                        </Component>
+                      </div>
+                    </Component>
+                  </div>
+                </Component>
+              </div>
+            </Component>
+          </FormControls>
+        </form>
+      </Component>
+    </ReactFinalForm>
+  </FormRenderer>
+</ContextWrapper>
+`;
+
+exports[`<FormControls /> should render with title 1`] = `
+<ContextWrapper>
+  <FormRenderer
+    buttonsLabels={Object {}}
+    clearOnUnmount={false}
+    disableSubmit={Array []}
+    formFieldsMapper={Object {}}
+    formType="pf3"
+    initialValues={Object {}}
+    layoutMapper={
+      Object {
+        "Button": [Function],
+        "ButtonGroup": [Function],
+        "Col": [Function],
+        "Description": [Function],
+        "FormGroup": [Function],
+        "FormWrapper": [Function],
+        "Title": [Function],
+      }
+    }
+    onSubmit={[MockFunction]}
+    resetAble={false}
+    schema={
+      Object {
+        "fields": Array [],
+        "title": "Title",
+      }
+    }
+    schemaType="default"
+    showFormControls={true}
+    uiSchema={Object {}}
+  >
+    <ReactFinalForm
+      initialValues={Object {}}
+      mutators={
+        Object {
+          "insert": [Function],
+          "move": [Function],
+          "pop": [Function],
+          "push": [Function],
+          "remove": [Function],
+          "shift": [Function],
+          "swap": [Function],
+          "unshift": [Function],
+          "update": [Function],
+        }
+      }
+      onSubmit={[MockFunction]}
+      render={[Function]}
+      subscription={
+        Object {
+          "pristine": true,
+          "submitting": true,
+          "valid": true,
+        }
+      }
+    >
+      <Component>
+        <form>
+          <Component>
+            <div>
+              Title
+            </div>
+          </Component>
+          <FormControls
+            buttonOrder={
+              Array [
+                "submit",
+                "reset",
+                "cancel",
+              ]
+            }
+            canReset={false}
+            canSubmit={false}
+            cancelLabel="Cancel"
+            onReset={[Function]}
+            onSubmit={[Function]}
+            pristine={true}
+            resetLabel="Reset"
+            submitLabel="Submit"
+          >
+            <Component
+              xs={12}
+            >
+              <div
+                xs={12}
+              >
+                <Component>
+                  <div>
+                    <Component>
+                      <div>
+                        <Component
+                          key="form-submit"
+                          label="Submit"
+                          onClick={[Function]}
+                          type="button"
+                          variant="primary"
+                        >
+                          <button
+                            onClick={[Function]}
+                            type="button"
+                            variant="primary"
+                          >
+                            Submit
+                          </button>
+                        </Component>
+                      </div>
+                    </Component>
+                  </div>
+                </Component>
+              </div>
+            </Component>
+          </FormControls>
+        </form>
+      </Component>
+    </ReactFinalForm>
+  </FormRenderer>
+</ContextWrapper>
+`;
+
+exports[`<FormControls /> should render with title and description 1`] = `
+<ContextWrapper>
+  <FormRenderer
+    buttonsLabels={Object {}}
+    clearOnUnmount={false}
+    disableSubmit={Array []}
+    formFieldsMapper={Object {}}
+    formType="pf3"
+    initialValues={Object {}}
+    layoutMapper={
+      Object {
+        "Button": [Function],
+        "ButtonGroup": [Function],
+        "Col": [Function],
+        "Description": [Function],
+        "FormGroup": [Function],
+        "FormWrapper": [Function],
+        "Title": [Function],
+      }
+    }
+    onSubmit={[MockFunction]}
+    resetAble={false}
+    schema={
+      Object {
+        "description": "Description",
+        "fields": Array [],
+        "title": "Title",
+      }
+    }
+    schemaType="default"
+    showFormControls={true}
+    uiSchema={Object {}}
+  >
+    <ReactFinalForm
+      initialValues={Object {}}
+      mutators={
+        Object {
+          "insert": [Function],
+          "move": [Function],
+          "pop": [Function],
+          "push": [Function],
+          "remove": [Function],
+          "shift": [Function],
+          "swap": [Function],
+          "unshift": [Function],
+          "update": [Function],
+        }
+      }
+      onSubmit={[MockFunction]}
+      render={[Function]}
+      subscription={
+        Object {
+          "pristine": true,
+          "submitting": true,
+          "valid": true,
+        }
+      }
+    >
+      <Component>
+        <form>
+          <Component>
+            <div>
+              Title
+            </div>
+          </Component>
+          <Component>
+            <div>
+              Description
+            </div>
+          </Component>
+          <FormControls
+            buttonOrder={
+              Array [
+                "submit",
+                "reset",
+                "cancel",
+              ]
+            }
+            canReset={false}
+            canSubmit={false}
+            cancelLabel="Cancel"
+            onReset={[Function]}
+            onSubmit={[Function]}
+            pristine={true}
+            resetLabel="Reset"
+            submitLabel="Submit"
+          >
+            <Component
+              xs={12}
+            >
+              <div
+                xs={12}
+              >
+                <Component>
+                  <div>
+                    <Component>
+                      <div>
+                        <Component
+                          key="form-submit"
+                          label="Submit"
+                          onClick={[Function]}
+                          type="button"
+                          variant="primary"
+                        >
+                          <button
+                            onClick={[Function]}
+                            type="button"
+                            variant="primary"
+                          >
+                            Submit
+                          </button>
+                        </Component>
+                      </div>
+                    </Component>
+                  </div>
+                </Component>
+              </div>
+            </Component>
+          </FormControls>
+        </form>
+      </Component>
+    </ReactFinalForm>
+  </FormRenderer>
+</ContextWrapper>
+`;
+
+exports[`<FormControls /> should render without title and description 1`] = `
+<ContextWrapper>
+  <FormRenderer
+    buttonsLabels={Object {}}
+    clearOnUnmount={false}
+    disableSubmit={Array []}
+    formFieldsMapper={Object {}}
+    formType="pf3"
+    initialValues={Object {}}
+    layoutMapper={
+      Object {
+        "Button": [Function],
+        "ButtonGroup": [Function],
+        "Col": [Function],
+        "Description": [Function],
+        "FormGroup": [Function],
+        "FormWrapper": [Function],
+        "Title": [Function],
+      }
+    }
+    onSubmit={[MockFunction]}
+    resetAble={false}
+    schema={
+      Object {
+        "fields": Array [],
+      }
+    }
+    schemaType="default"
+    showFormControls={true}
+    uiSchema={Object {}}
+  >
+    <ReactFinalForm
+      initialValues={Object {}}
+      mutators={
+        Object {
+          "insert": [Function],
+          "move": [Function],
+          "pop": [Function],
+          "push": [Function],
+          "remove": [Function],
+          "shift": [Function],
+          "swap": [Function],
+          "unshift": [Function],
+          "update": [Function],
+        }
+      }
+      onSubmit={[MockFunction]}
+      render={[Function]}
+      subscription={
+        Object {
+          "pristine": true,
+          "submitting": true,
+          "valid": true,
+        }
+      }
+    >
+      <Component>
+        <form>
+          <FormControls
+            buttonOrder={
+              Array [
+                "submit",
+                "reset",
+                "cancel",
+              ]
+            }
+            canReset={false}
+            canSubmit={false}
+            cancelLabel="Cancel"
+            onReset={[Function]}
+            onSubmit={[Function]}
+            pristine={true}
+            resetLabel="Reset"
+            submitLabel="Submit"
+          >
+            <Component
+              xs={12}
+            >
+              <div
+                xs={12}
+              >
+                <Component>
+                  <div>
+                    <Component>
+                      <div>
+                        <Component
+                          key="form-submit"
+                          label="Submit"
+                          onClick={[Function]}
+                          type="button"
+                          variant="primary"
+                        >
+                          <button
+                            onClick={[Function]}
+                            type="button"
+                            variant="primary"
+                          >
+                            Submit
+                          </button>
+                        </Component>
+                      </div>
+                    </Component>
+                  </div>
+                </Component>
+              </div>
+            </Component>
+          </FormControls>
+        </form>
+      </Component>
+    </ReactFinalForm>
+  </FormRenderer>
+</ContextWrapper>
+`;

@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SubForm component should render SubForm correctly 1`] = `
+<Fragment>
+  <Title
+    size="xl"
+  >
+    cosiTitle
+  </Title>
+  <div>
+    Here would be form
+  </div>
+</Fragment>
+`;
+
+exports[`SubForm component should render SubForm with description correctly 1`] = `
+<Fragment>
+  <Title
+    size="xl"
+  >
+    cosiTitle
+  </Title>
+  <TextContent
+    className=""
+  >
+    <Text
+      className=""
+      component="small"
+      style={
+        Object {
+          "marginBottom": 0,
+        }
+      }
+    >
+      description here!
+    </Text>
+  </TextContent>
+  <div>
+    Here would be form
+  </div>
+</Fragment>
+`;
+
+exports[`SubForm component should render SubForm without title correctly 1`] = `
+<Fragment>
+  <div>
+    Here would be form
+  </div>
+</Fragment>
+`;

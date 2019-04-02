@@ -1,0 +1,360 @@
+.picker-input[readonly]:hover {
+  border-color: #7dc3e8;
+}
+
+.picker-input[disabled]:hover {
+  border-color: inital;
+}
+
+.pf3-calendar {
+  position: absolute;
+  z-index: 50;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  min-height: 1px;
+  outline: none;
+  .calendar-layout-wrapper {
+    border: 1px solid #bbb;;
+    background: #fff;
+    margin-top: 4px;
+  }
+  .time-picker {
+    padding: 4px;
+    border-left: 1px solid #bbb;
+    height: 100%;
+  }
+  &::before {
+    position: absolute;
+    top:0;
+    left: 10px;
+    content: "";
+    border: 1px solid #bbb;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 4px 4px 4px;
+    border-color: transparent transparent #bbb transparent;
+  }
+  .DayPicker-TodayButton {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    &:hover {
+      background-color: #f1f1f1;
+    }
+  }
+  .DayPicker-Day--disabled {
+    pointer-events: none;
+  }
+  .DayPicker-wrapper {
+    outline: none;
+    padding-bottom: 5px;
+  }
+  .DayPicker-Caption {
+    display: none;
+  }
+  .year-interval-header {
+    width: 100%;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    .year-interval-button, .navbar-center-button {
+      display: block;
+      width: 100%;
+      font-size: 14px;
+      font-weight: 400;
+      padding: 5px;
+      background-color: #fafafa;
+      background-image: none;
+      border-color: #d1d1d1;
+      color: #8b8d8f;
+      opacity: 1;
+      cursor: not-allowed;
+      box-shadow: none;
+      background: #fff;
+      border: none;
+      line-height: 1.5;
+      border-radius: 1px;
+      margin-bottom: 0;
+      text-align: center;
+      -ms-touch-action: manipulation;
+      touch-action: manipulation;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    .navbar-center-button {
+      color: #4d5258;
+      cursor: pointer;
+      &:hover {
+        background-color: #f1f1f1;
+        background-image: none;
+        border-color: #bbb;
+        color: #4d5258;
+      }
+    }
+    td:first-child, td:last-child {
+      &.disabled {
+        background-color: #ededed;
+        background-image: none;
+        border-color: #8b8d8f;
+        color: #8b8d8f;
+        outline: 0;
+        border-radius: 0;
+        cursor: not-allowed;
+      }
+    }
+    td:first-child, td:last-child {
+      color: #4d5258;
+      width: 40px;
+      padding: 5px;
+      font-size: 14px;
+      line-height: 1.5;
+      border-radius: 1px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      white-space: nowrap;
+      margin-bottom: 0;
+      font-weight: 600;
+      text-align: center;
+      vertical-align: middle;
+      -ms-touch-action: manipulation;
+      touch-action: manipulation;
+      cursor: pointer;
+      margin-bottom: 0;
+      font-weight: 600;
+      text-align: center;
+      vertical-align: middle;
+      -ms-touch-action: manipulation;
+      touch-action: manipulation;
+      &:hover {
+        background-color: #f1f1f1;
+      }
+      >span {
+        width: 100%;
+      }
+    }
+  }
+  .DayPicker {
+    border-radius: 0;
+    font-size: 1rem;
+    padding: 4px;
+    display: inline-block;
+    margin-top: 4px;
+    .DayPicker-Weekdays {
+      .DayPicker-Weekday {
+        background: #ffffff;
+        color: #000000;
+        font-size: 14px;
+        font-weight: 600;
+        abbr {
+          cursor: default;
+        }
+        float: left;
+        height: 30px;
+        width: 30px;
+        text-align: center;
+        vertical-align: middle;
+        padding: 2px 6px;
+        font-size: 12px;
+        line-height: 23px;
+      }
+    }
+    .DayPicker-Body {
+      .DayPicker-Day {
+        position: relative;
+        font-family: "Open Sans", Helvetica, Arial, sans-serif;
+        border: none;
+        box-shadow: none;
+        outline: 0;
+        display: inline-block;
+        margin-bottom: 0;
+        text-align: center;
+        vertical-align: middle;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        border-radius: 0;
+        cursor: pointer;
+        background-image: none;
+        border: 1px solid #0000;
+        white-space: nowrap;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        height: 30px;
+        width: 30px;
+        text-align: center;
+        vertical-align: middle;
+        padding: 2px 6px;
+        font-size: 12px;
+        line-height: 23px;
+        &:hover {
+          background-color: #def3ff;
+        }
+        &.DayPicker-Day--today {
+          background-color: antiquewhite;
+          color: #000000;
+          font-weight: 400;
+          &:hover {
+            background-color: antiquewhite;
+          }
+          &::before {
+            position: absolute;
+            content: "";
+            right: 2px;
+            bottom: 2px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 0 6px 6px;
+            border-color: transparent transparent #007bff transparent;
+          }
+        }
+        &.DayPicker-Day--selected {
+          background-color: #0088ce;
+          color: #fff;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .pf3-calendar-date-header {
+    .header-month {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .calendar-button {
+      background: none;
+      color: inherit;
+      border: none;
+      padding: 0;
+      font: inherit;
+      cursor: pointer;
+      outline: inherit;
+      min-width: 30px;
+      &:first-child {
+        float: left;
+        margin-left: 6px;
+      }
+      &:last-child {
+        float: right;
+        margin-right: 6px;
+      }
+      .calendar-button-text {
+        display: none
+      }
+    }
+  }
+  .pf3-datetime-months-table {
+    text-align: center;
+    padding: 0;
+    box-sizing: border-box;
+    td.disabled {
+      background-color: #ededed;
+      background-image: none;
+      border-color: #8b8d8f;
+      color: #8b8d8f;
+      outline: 0;
+      border-radius: 0;
+      cursor: not-allowed;
+    }
+    button {
+      background: none;
+      width: 100%;
+      color: inherit;
+      border: none;
+      padding: 0;
+      font: inherit;
+      cursor: pointer;
+      outline: inherit;
+      color: #4d5258;
+      display: inline-block;
+      margin-bottom: 0;
+      font-size: 12px;
+      font-weight: 600;
+      text-align: center;
+      vertical-align: middle;
+      touch-action: manipulation;
+      cursor: pointer;
+      white-space: nowrap;
+      padding: 2px 6px;
+      font-size: 12px;
+      line-height: 1.66666667;
+      border-radius: 1px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      font-family: inherit;
+      overflow: visible;
+      margin: 0;
+      &:hover{
+        background-color: #f1f1f1;
+        background-image: none;
+        border-color: #bbb;
+        color: #4d5258;
+      }
+      &.selected {
+        background-color: #f1f1f1;
+        background-image: none;
+        border-color: #bbb;
+        color: #4d5258;
+        box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        outline: 0;
+      }
+      &.disabled {
+        background-color: #ededed;
+        background-image: none;
+        border-color: #8b8d8f;
+        color: #8b8d8f;
+        outline: 0;
+        border-radius: 0;
+        cursor: not-allowed;
+        button {
+          pointer-events: none;
+        }
+      }
+    }
+  }
+  .time-picker-layout-wrapper {
+    font-size: 14px;
+    margin: 0 20px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    input[type=number].time-picker-hours-input {
+      &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      border: none;
+      border-bottom: 1px solid #bbb;
+      text-align: center;
+      outline: none;
+      &:focus {
+        border-bottom-color: #0088ce;
+        outline: 0;
+        box-shadow: inset 0 1px 1px -1px rgba(0,0,0,.075), 0 0 8px -8px rgba(0, 136, 206, 0.6);
+      }
+    }
+    td {
+      padding: 10px;
+      text-align: center;
+      &.chevron-button {
+        cursor: pointer;
+        &:hover {
+          background-color: #f1f1f1;
+          background-image: none;
+          border-color: #bbb;
+          color: #4d5258;
+        }
+      }
+    }
+  }
+}

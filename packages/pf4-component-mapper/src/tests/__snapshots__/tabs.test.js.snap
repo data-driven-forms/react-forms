@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tabs component should render tabs correctly 1`] = `
+<Tabs
+  activeKey={0}
+  className=""
+  isFilled={false}
+  isSecondary={false}
+  leftScrollAriaLabel="Scroll left"
+  onSelect={[Function]}
+  rightScrollAriaLabel="Scroll Right"
+>
+  <Tab
+    className=""
+    eventKey={0}
+    key="cosiKey"
+    title="cosiTitle"
+  >
+    <div
+      className="pf-c-form"
+    >
+      <div>
+        Here would be form
+      </div>
+    </div>
+  </Tab>
+  <Tab
+    className=""
+    eventKey={1}
+    key="cosiKey2"
+    title="cosiTitle2"
+  >
+    <div
+      className="pf-c-form"
+    >
+      <div>
+        Here would be form
+      </div>
+    </div>
+  </Tab>
+</Tabs>
+`;

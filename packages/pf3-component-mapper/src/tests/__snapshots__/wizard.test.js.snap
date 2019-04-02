@@ -1,0 +1,1414 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Wizard /> should render Wizard correctly 1`] = `
+<Wizard
+  FieldProvider={[Function]}
+  buttonLabels={
+    Object {
+      "back": "Back",
+      "cancel": "Cancel",
+      "next": "Next",
+      "submit": "Submit",
+    }
+  }
+  fields={
+    Array [
+      Object {
+        "fields": Array [],
+        "name": "step-1",
+        "nextStep": "step-2",
+        "stepKey": 1,
+        "title": "Step 1",
+      },
+      Object {
+        "fields": Array [],
+        "name": "step-2",
+        "stepKey": "step-2",
+        "title": "Step 2",
+      },
+    ]
+  }
+  formOptions={
+    Object {
+      "getState": [Function],
+      "onCancel": [MockFunction],
+      "onSubmit": [MockFunction],
+      "submit": [Function],
+      "valid": true,
+    }
+  }
+  inModal={false}
+  name="Wizard"
+>
+  <WizardStep
+    FieldProvider={[Function]}
+    buttonLabels={
+      Object {
+        "back": "Back",
+        "cancel": "Cancel",
+        "next": "Next",
+        "submit": "Submit",
+      }
+    }
+    disableBack={true}
+    fields={Array []}
+    formOptions={
+      Object {
+        "getState": [Function],
+        "handleSubmit": [Function],
+        "onCancel": [MockFunction],
+        "onSubmit": [MockFunction],
+        "submit": [Function],
+        "valid": true,
+      }
+    }
+    handleNext={[Function]}
+    handlePrev={[Function]}
+    name="step-1"
+    nextStep="step-2"
+    stepKey={1}
+    title="Step 1"
+  >
+    <WizardBody
+      className=""
+    >
+      <ModalBody
+        bsClass="modal-body"
+        className="wizard-pf-body clearfix"
+        componentClass="div"
+      >
+        <div
+          className="wizard-pf-body clearfix modal-body"
+        >
+          <WizardRow
+            className=""
+          >
+            <section
+              className="wizard-pf-row"
+            >
+              <WizardMain
+                className=""
+              >
+                <div
+                  className="wizard-pf-main"
+                >
+                  <div
+                    className="form-horizontal"
+                  />
+                </div>
+              </WizardMain>
+            </section>
+          </WizardRow>
+        </div>
+      </ModalBody>
+    </WizardBody>
+    <WizardStepButtons
+      FieldProvider={[Function]}
+      buttonLabels={
+        Object {
+          "back": "Back",
+          "cancel": "Cancel",
+          "next": "Next",
+          "submit": "Submit",
+        }
+      }
+      disableBack={true}
+      formOptions={
+        Object {
+          "getState": [Function],
+          "handleSubmit": [Function],
+          "onCancel": [MockFunction],
+          "onSubmit": [MockFunction],
+          "submit": [Function],
+          "valid": true,
+        }
+      }
+      handleNext={[Function]}
+      handlePrev={[Function]}
+      name="step-1"
+      nextStep="step-2"
+      stepKey={1}
+      title="Step 1"
+    >
+      <WizardFooter
+        className=""
+      >
+        <ModalFooter
+          bsClass="modal-footer"
+          className="wizard-pf-footer"
+          componentClass="div"
+        >
+          <div
+            className="wizard-pf-footer modal-footer"
+          >
+            <_default
+              color="secondary"
+              onClick={[MockFunction]}
+              style={
+                Object {
+                  "marginRight": 20,
+                }
+              }
+              type="button"
+              variant="contained"
+            >
+              <Button
+                active={false}
+                block={false}
+                bsClass="btn"
+                bsStyle="default"
+                color="secondary"
+                disabled={false}
+                onClick={[MockFunction]}
+                style={
+                  Object {
+                    "marginRight": 20,
+                  }
+                }
+                type="button"
+                variant="contained"
+              >
+                <button
+                  className="btn btn-default"
+                  color="secondary"
+                  disabled={false}
+                  onClick={[MockFunction]}
+                  style={
+                    Object {
+                      "marginRight": 20,
+                    }
+                  }
+                  type="button"
+                  variant="contained"
+                >
+                  Cancel
+                </button>
+              </Button>
+            </_default>
+            <_default
+              disabled={true}
+              onClick={[Function]}
+              type="button"
+              variant="contained"
+            >
+              <Button
+                active={false}
+                block={false}
+                bsClass="btn"
+                bsStyle="default"
+                disabled={true}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "marginLeft": 3,
+                  }
+                }
+                type="button"
+                variant="contained"
+              >
+                <button
+                  className="btn btn-default"
+                  disabled={true}
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "marginLeft": 3,
+                    }
+                  }
+                  type="button"
+                  variant="contained"
+                >
+                  <Icon
+                    name="angle-left"
+                    type="fa"
+                  >
+                    <FontAwesome
+                      name="angle-left"
+                    >
+                      <span
+                        aria-hidden={true}
+                        className="fa fa-angle-left"
+                      />
+                    </FontAwesome>
+                  </Icon>
+                  Back
+                </button>
+              </Button>
+            </_default>
+            <SimpleNext
+              FieldProvider={[Function]}
+              buttonLabels={
+                Object {
+                  "back": "Back",
+                  "cancel": "Cancel",
+                  "next": "Next",
+                  "submit": "Submit",
+                }
+              }
+              getState={[Function]}
+              handleNext={[Function]}
+              next="step-2"
+              onCancel={[MockFunction]}
+              onSubmit={[MockFunction]}
+              submit={[Function]}
+              valid={true}
+            >
+              <_default
+                bsStyle="primary"
+                onClick={[Function]}
+                type="button"
+              >
+                <Button
+                  active={false}
+                  block={false}
+                  bsClass="btn"
+                  bsStyle="primary"
+                  disabled={false}
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "marginLeft": 3,
+                    }
+                  }
+                  type="button"
+                >
+                  <button
+                    className="btn btn-primary"
+                    disabled={false}
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "marginLeft": 3,
+                      }
+                    }
+                    type="button"
+                  >
+                    Next
+                    <Icon
+                      name="angle-right"
+                      type="fa"
+                    >
+                      <FontAwesome
+                        name="angle-right"
+                      >
+                        <span
+                          aria-hidden={true}
+                          className="fa fa-angle-right"
+                        />
+                      </FontAwesome>
+                    </Icon>
+                  </button>
+                </Button>
+              </_default>
+            </SimpleNext>
+          </div>
+        </ModalFooter>
+      </WizardFooter>
+    </WizardStepButtons>
+  </WizardStep>
+</Wizard>
+`;
+
+exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = `
+<Wizard
+  FieldProvider={[Function]}
+  buttonLabels={
+    Object {
+      "back": "Back",
+      "cancel": "Cancel",
+      "next": "Next",
+      "submit": "Submit",
+    }
+  }
+  fields={
+    Array [
+      Object {
+        "fields": Array [],
+        "name": "step-1",
+        "nextStep": Object {
+          "stepMapper": Object {
+            "step": "step-2",
+          },
+          "when": "step",
+        },
+        "stepKey": 1,
+        "title": "Step 1",
+      },
+      Object {
+        "fields": Array [],
+        "name": "step-2",
+        "stepKey": "step-2",
+        "title": "Step 2",
+      },
+    ]
+  }
+  formOptions={
+    Object {
+      "getState": [Function],
+      "onCancel": [MockFunction],
+      "onSubmit": [MockFunction],
+      "submit": [Function],
+      "valid": true,
+    }
+  }
+  inModal={false}
+  name="Wizard"
+>
+  <WizardStep
+    FieldProvider={[Function]}
+    buttonLabels={
+      Object {
+        "back": "Back",
+        "cancel": "Cancel",
+        "next": "Next",
+        "submit": "Submit",
+      }
+    }
+    disableBack={true}
+    fields={Array []}
+    formOptions={
+      Object {
+        "getState": [Function],
+        "handleSubmit": [Function],
+        "onCancel": [MockFunction],
+        "onSubmit": [MockFunction],
+        "submit": [Function],
+        "valid": true,
+      }
+    }
+    handleNext={[Function]}
+    handlePrev={[Function]}
+    name="step-1"
+    nextStep={
+      Object {
+        "stepMapper": Object {
+          "step": "step-2",
+        },
+        "when": "step",
+      }
+    }
+    stepKey={1}
+    title="Step 1"
+  >
+    <WizardBody
+      className=""
+    >
+      <ModalBody
+        bsClass="modal-body"
+        className="wizard-pf-body clearfix"
+        componentClass="div"
+      >
+        <div
+          className="wizard-pf-body clearfix modal-body"
+        >
+          <WizardRow
+            className=""
+          >
+            <section
+              className="wizard-pf-row"
+            >
+              <WizardMain
+                className=""
+              >
+                <div
+                  className="wizard-pf-main"
+                >
+                  <div
+                    className="form-horizontal"
+                  />
+                </div>
+              </WizardMain>
+            </section>
+          </WizardRow>
+        </div>
+      </ModalBody>
+    </WizardBody>
+    <WizardStepButtons
+      FieldProvider={[Function]}
+      buttonLabels={
+        Object {
+          "back": "Back",
+          "cancel": "Cancel",
+          "next": "Next",
+          "submit": "Submit",
+        }
+      }
+      disableBack={true}
+      formOptions={
+        Object {
+          "getState": [Function],
+          "handleSubmit": [Function],
+          "onCancel": [MockFunction],
+          "onSubmit": [MockFunction],
+          "submit": [Function],
+          "valid": true,
+        }
+      }
+      handleNext={[Function]}
+      handlePrev={[Function]}
+      name="step-1"
+      nextStep={
+        Object {
+          "stepMapper": Object {
+            "step": "step-2",
+          },
+          "when": "step",
+        }
+      }
+      stepKey={1}
+      title="Step 1"
+    >
+      <WizardFooter
+        className=""
+      >
+        <ModalFooter
+          bsClass="modal-footer"
+          className="wizard-pf-footer"
+          componentClass="div"
+        >
+          <div
+            className="wizard-pf-footer modal-footer"
+          >
+            <_default
+              color="secondary"
+              onClick={[MockFunction]}
+              style={
+                Object {
+                  "marginRight": 20,
+                }
+              }
+              type="button"
+              variant="contained"
+            >
+              <Button
+                active={false}
+                block={false}
+                bsClass="btn"
+                bsStyle="default"
+                color="secondary"
+                disabled={false}
+                onClick={[MockFunction]}
+                style={
+                  Object {
+                    "marginRight": 20,
+                  }
+                }
+                type="button"
+                variant="contained"
+              >
+                <button
+                  className="btn btn-default"
+                  color="secondary"
+                  disabled={false}
+                  onClick={[MockFunction]}
+                  style={
+                    Object {
+                      "marginRight": 20,
+                    }
+                  }
+                  type="button"
+                  variant="contained"
+                >
+                  Cancel
+                </button>
+              </Button>
+            </_default>
+            <_default
+              disabled={true}
+              onClick={[Function]}
+              type="button"
+              variant="contained"
+            >
+              <Button
+                active={false}
+                block={false}
+                bsClass="btn"
+                bsStyle="default"
+                disabled={true}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "marginLeft": 3,
+                  }
+                }
+                type="button"
+                variant="contained"
+              >
+                <button
+                  className="btn btn-default"
+                  disabled={true}
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "marginLeft": 3,
+                    }
+                  }
+                  type="button"
+                  variant="contained"
+                >
+                  <Icon
+                    name="angle-left"
+                    type="fa"
+                  >
+                    <FontAwesome
+                      name="angle-left"
+                    >
+                      <span
+                        aria-hidden={true}
+                        className="fa fa-angle-left"
+                      />
+                    </FontAwesome>
+                  </Icon>
+                  Back
+                </button>
+              </Button>
+            </_default>
+            <ConditionalNext
+              FieldProvider={[Function]}
+              buttonLabels={
+                Object {
+                  "back": "Back",
+                  "cancel": "Cancel",
+                  "next": "Next",
+                  "submit": "Submit",
+                }
+              }
+              getState={[Function]}
+              handleNext={[Function]}
+              nextStep={
+                Object {
+                  "stepMapper": Object {
+                    "step": "step-2",
+                  },
+                  "when": "step",
+                }
+              }
+              onCancel={[MockFunction]}
+              onSubmit={[MockFunction]}
+              submit={[Function]}
+              valid={true}
+            >
+              <MockFieldProvider
+                name="step"
+                subscription={
+                  Object {
+                    "value": true,
+                  }
+                }
+              >
+                <SimpleNext
+                  buttonLabels={
+                    Object {
+                      "back": "Back",
+                      "cancel": "Cancel",
+                      "next": "Next",
+                      "submit": "Submit",
+                    }
+                  }
+                  getState={[Function]}
+                  handleNext={[Function]}
+                  onCancel={[MockFunction]}
+                  onSubmit={[MockFunction]}
+                  submit={[Function]}
+                  valid={true}
+                >
+                  <_default
+                    bsStyle="primary"
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    <Button
+                      active={false}
+                      block={false}
+                      bsClass="btn"
+                      bsStyle="primary"
+                      disabled={false}
+                      onClick={[Function]}
+                      style={
+                        Object {
+                          "marginLeft": 3,
+                        }
+                      }
+                      type="button"
+                    >
+                      <button
+                        className="btn btn-primary"
+                        disabled={false}
+                        onClick={[Function]}
+                        style={
+                          Object {
+                            "marginLeft": 3,
+                          }
+                        }
+                        type="button"
+                      >
+                        Next
+                        <Icon
+                          name="angle-right"
+                          type="fa"
+                        >
+                          <FontAwesome
+                            name="angle-right"
+                          >
+                            <span
+                              aria-hidden={true}
+                              className="fa fa-angle-right"
+                            />
+                          </FontAwesome>
+                        </Icon>
+                      </button>
+                    </Button>
+                  </_default>
+                </SimpleNext>
+              </MockFieldProvider>
+            </ConditionalNext>
+          </div>
+        </ModalFooter>
+      </WizardFooter>
+    </WizardStepButtons>
+  </WizardStep>
+</Wizard>
+`;
+
+exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
+<Wizard
+  FieldProvider={[Function]}
+  buttonLabels={
+    Object {
+      "back": "Back",
+      "cancel": "Cancel",
+      "next": "Next",
+      "submit": "Submit",
+    }
+  }
+  fields={
+    Array [
+      Object {
+        "fields": Array [],
+        "name": "step-1",
+        "nextStep": "step-2",
+        "stepKey": 1,
+        "title": "Step 1",
+      },
+      Object {
+        "fields": Array [],
+        "name": "step-2",
+        "stepKey": "step-2",
+        "title": "Step 2",
+      },
+    ]
+  }
+  formOptions={
+    Object {
+      "getState": [Function],
+      "onCancel": [MockFunction],
+      "onSubmit": [MockFunction],
+      "submit": [Function],
+      "valid": true,
+    }
+  }
+  inModal={false}
+  name="Wizard"
+  stepsInfo={
+    Array [
+      Object {
+        "title": "step1",
+      },
+      Object {
+        "title": "step2",
+      },
+    ]
+  }
+>
+  <WizardSteps
+    className=""
+    steps={
+      Array [
+        <WizardStep
+          activeStep={1}
+          className=""
+          label="1"
+          onClick={[Function]}
+          step={1}
+          stepIndex={1}
+          title="step1"
+        />,
+        <WizardStep
+          activeStep={1}
+          className=""
+          label="2"
+          onClick={[Function]}
+          step={2}
+          stepIndex={2}
+          title="step2"
+        />,
+      ]
+    }
+  >
+    <div
+      className="wizard-pf-steps"
+    >
+      <ul
+        className="wizard-pf-steps-indicator"
+      >
+        <WizardStep
+          activeStep={1}
+          className=""
+          key="1"
+          label="1"
+          onClick={[Function]}
+          step={1}
+          stepIndex={1}
+          title="step1"
+        >
+          <li
+            className="wizard-pf-step active"
+          >
+            <a
+              href="#"
+              onClick={[Function]}
+            >
+              <span
+                className="wizard-pf-step-number"
+              >
+                1
+              </span>
+              <span
+                className="wizard-pf-step-title"
+              >
+                step1
+              </span>
+            </a>
+          </li>
+        </WizardStep>
+        <WizardStep
+          activeStep={1}
+          className=""
+          key="2"
+          label="2"
+          onClick={[Function]}
+          step={2}
+          stepIndex={2}
+          title="step2"
+        >
+          <li
+            className="wizard-pf-step"
+          >
+            <a
+              href="#"
+              onClick={[Function]}
+            >
+              <span
+                className="wizard-pf-step-number"
+              >
+                2
+              </span>
+              <span
+                className="wizard-pf-step-title"
+              >
+                step2
+              </span>
+            </a>
+          </li>
+        </WizardStep>
+      </ul>
+    </div>
+  </WizardSteps>
+  <WizardStep
+    FieldProvider={[Function]}
+    buttonLabels={
+      Object {
+        "back": "Back",
+        "cancel": "Cancel",
+        "next": "Next",
+        "submit": "Submit",
+      }
+    }
+    disableBack={true}
+    fields={Array []}
+    formOptions={
+      Object {
+        "getState": [Function],
+        "handleSubmit": [Function],
+        "onCancel": [MockFunction],
+        "onSubmit": [MockFunction],
+        "submit": [Function],
+        "valid": true,
+      }
+    }
+    handleNext={[Function]}
+    handlePrev={[Function]}
+    name="step-1"
+    nextStep="step-2"
+    stepKey={1}
+    title="Step 1"
+  >
+    <WizardBody
+      className=""
+    >
+      <ModalBody
+        bsClass="modal-body"
+        className="wizard-pf-body clearfix"
+        componentClass="div"
+      >
+        <div
+          className="wizard-pf-body clearfix modal-body"
+        >
+          <WizardRow
+            className=""
+          >
+            <section
+              className="wizard-pf-row"
+            >
+              <WizardMain
+                className=""
+              >
+                <div
+                  className="wizard-pf-main"
+                >
+                  <div
+                    className="form-horizontal"
+                  />
+                </div>
+              </WizardMain>
+            </section>
+          </WizardRow>
+        </div>
+      </ModalBody>
+    </WizardBody>
+    <WizardStepButtons
+      FieldProvider={[Function]}
+      buttonLabels={
+        Object {
+          "back": "Back",
+          "cancel": "Cancel",
+          "next": "Next",
+          "submit": "Submit",
+        }
+      }
+      disableBack={true}
+      formOptions={
+        Object {
+          "getState": [Function],
+          "handleSubmit": [Function],
+          "onCancel": [MockFunction],
+          "onSubmit": [MockFunction],
+          "submit": [Function],
+          "valid": true,
+        }
+      }
+      handleNext={[Function]}
+      handlePrev={[Function]}
+      name="step-1"
+      nextStep="step-2"
+      stepKey={1}
+      title="Step 1"
+    >
+      <WizardFooter
+        className=""
+      >
+        <ModalFooter
+          bsClass="modal-footer"
+          className="wizard-pf-footer"
+          componentClass="div"
+        >
+          <div
+            className="wizard-pf-footer modal-footer"
+          >
+            <_default
+              color="secondary"
+              onClick={[MockFunction]}
+              style={
+                Object {
+                  "marginRight": 20,
+                }
+              }
+              type="button"
+              variant="contained"
+            >
+              <Button
+                active={false}
+                block={false}
+                bsClass="btn"
+                bsStyle="default"
+                color="secondary"
+                disabled={false}
+                onClick={[MockFunction]}
+                style={
+                  Object {
+                    "marginRight": 20,
+                  }
+                }
+                type="button"
+                variant="contained"
+              >
+                <button
+                  className="btn btn-default"
+                  color="secondary"
+                  disabled={false}
+                  onClick={[MockFunction]}
+                  style={
+                    Object {
+                      "marginRight": 20,
+                    }
+                  }
+                  type="button"
+                  variant="contained"
+                >
+                  Cancel
+                </button>
+              </Button>
+            </_default>
+            <_default
+              disabled={true}
+              onClick={[Function]}
+              type="button"
+              variant="contained"
+            >
+              <Button
+                active={false}
+                block={false}
+                bsClass="btn"
+                bsStyle="default"
+                disabled={true}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "marginLeft": 3,
+                  }
+                }
+                type="button"
+                variant="contained"
+              >
+                <button
+                  className="btn btn-default"
+                  disabled={true}
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "marginLeft": 3,
+                    }
+                  }
+                  type="button"
+                  variant="contained"
+                >
+                  <Icon
+                    name="angle-left"
+                    type="fa"
+                  >
+                    <FontAwesome
+                      name="angle-left"
+                    >
+                      <span
+                        aria-hidden={true}
+                        className="fa fa-angle-left"
+                      />
+                    </FontAwesome>
+                  </Icon>
+                  Back
+                </button>
+              </Button>
+            </_default>
+            <SimpleNext
+              FieldProvider={[Function]}
+              buttonLabels={
+                Object {
+                  "back": "Back",
+                  "cancel": "Cancel",
+                  "next": "Next",
+                  "submit": "Submit",
+                }
+              }
+              getState={[Function]}
+              handleNext={[Function]}
+              next="step-2"
+              onCancel={[MockFunction]}
+              onSubmit={[MockFunction]}
+              submit={[Function]}
+              valid={true}
+            >
+              <_default
+                bsStyle="primary"
+                onClick={[Function]}
+                type="button"
+              >
+                <Button
+                  active={false}
+                  block={false}
+                  bsClass="btn"
+                  bsStyle="primary"
+                  disabled={false}
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "marginLeft": 3,
+                    }
+                  }
+                  type="button"
+                >
+                  <button
+                    className="btn btn-primary"
+                    disabled={false}
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "marginLeft": 3,
+                      }
+                    }
+                    type="button"
+                  >
+                    Next
+                    <Icon
+                      name="angle-right"
+                      type="fa"
+                    >
+                      <FontAwesome
+                        name="angle-right"
+                      >
+                        <span
+                          aria-hidden={true}
+                          className="fa fa-angle-right"
+                        />
+                      </FontAwesome>
+                    </Icon>
+                  </button>
+                </Button>
+              </_default>
+            </SimpleNext>
+          </div>
+        </ModalFooter>
+      </WizardFooter>
+    </WizardStepButtons>
+  </WizardStep>
+</Wizard>
+`;
+
+exports[`<Wizard /> should render Wizard with title correctly 1`] = `
+<Wizard
+  FieldProvider={[Function]}
+  buttonLabels={
+    Object {
+      "back": "Back",
+      "cancel": "Cancel",
+      "next": "Next",
+      "submit": "Submit",
+    }
+  }
+  fields={
+    Array [
+      Object {
+        "fields": Array [],
+        "name": "step-1",
+        "nextStep": "step-2",
+        "stepKey": 1,
+        "title": "Step 1",
+      },
+      Object {
+        "fields": Array [],
+        "name": "step-2",
+        "stepKey": "step-2",
+        "title": "Step 2",
+      },
+    ]
+  }
+  formOptions={
+    Object {
+      "getState": [Function],
+      "onCancel": [MockFunction],
+      "onSubmit": [MockFunction],
+      "submit": [Function],
+      "valid": true,
+    }
+  }
+  inModal={false}
+  name="Wizard"
+  title="Wizard title"
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={false}
+    closeLabel="Close"
+  >
+    <div
+      className="modal-header"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h4"
+      >
+        <h4
+          className="modal-title"
+        >
+          Wizard title
+        </h4>
+      </ModalTitle>
+    </div>
+  </ModalHeader>
+  <WizardStep
+    FieldProvider={[Function]}
+    buttonLabels={
+      Object {
+        "back": "Back",
+        "cancel": "Cancel",
+        "next": "Next",
+        "submit": "Submit",
+      }
+    }
+    disableBack={true}
+    fields={Array []}
+    formOptions={
+      Object {
+        "getState": [Function],
+        "handleSubmit": [Function],
+        "onCancel": [MockFunction],
+        "onSubmit": [MockFunction],
+        "submit": [Function],
+        "valid": true,
+      }
+    }
+    handleNext={[Function]}
+    handlePrev={[Function]}
+    name="step-1"
+    nextStep="step-2"
+    stepKey={1}
+    title="Step 1"
+  >
+    <WizardBody
+      className=""
+    >
+      <ModalBody
+        bsClass="modal-body"
+        className="wizard-pf-body clearfix"
+        componentClass="div"
+      >
+        <div
+          className="wizard-pf-body clearfix modal-body"
+        >
+          <WizardRow
+            className=""
+          >
+            <section
+              className="wizard-pf-row"
+            >
+              <WizardMain
+                className=""
+              >
+                <div
+                  className="wizard-pf-main"
+                >
+                  <div
+                    className="form-horizontal"
+                  />
+                </div>
+              </WizardMain>
+            </section>
+          </WizardRow>
+        </div>
+      </ModalBody>
+    </WizardBody>
+    <WizardStepButtons
+      FieldProvider={[Function]}
+      buttonLabels={
+        Object {
+          "back": "Back",
+          "cancel": "Cancel",
+          "next": "Next",
+          "submit": "Submit",
+        }
+      }
+      disableBack={true}
+      formOptions={
+        Object {
+          "getState": [Function],
+          "handleSubmit": [Function],
+          "onCancel": [MockFunction],
+          "onSubmit": [MockFunction],
+          "submit": [Function],
+          "valid": true,
+        }
+      }
+      handleNext={[Function]}
+      handlePrev={[Function]}
+      name="step-1"
+      nextStep="step-2"
+      stepKey={1}
+      title="Step 1"
+    >
+      <WizardFooter
+        className=""
+      >
+        <ModalFooter
+          bsClass="modal-footer"
+          className="wizard-pf-footer"
+          componentClass="div"
+        >
+          <div
+            className="wizard-pf-footer modal-footer"
+          >
+            <_default
+              color="secondary"
+              onClick={[MockFunction]}
+              style={
+                Object {
+                  "marginRight": 20,
+                }
+              }
+              type="button"
+              variant="contained"
+            >
+              <Button
+                active={false}
+                block={false}
+                bsClass="btn"
+                bsStyle="default"
+                color="secondary"
+                disabled={false}
+                onClick={[MockFunction]}
+                style={
+                  Object {
+                    "marginRight": 20,
+                  }
+                }
+                type="button"
+                variant="contained"
+              >
+                <button
+                  className="btn btn-default"
+                  color="secondary"
+                  disabled={false}
+                  onClick={[MockFunction]}
+                  style={
+                    Object {
+                      "marginRight": 20,
+                    }
+                  }
+                  type="button"
+                  variant="contained"
+                >
+                  Cancel
+                </button>
+              </Button>
+            </_default>
+            <_default
+              disabled={true}
+              onClick={[Function]}
+              type="button"
+              variant="contained"
+            >
+              <Button
+                active={false}
+                block={false}
+                bsClass="btn"
+                bsStyle="default"
+                disabled={true}
+                onClick={[Function]}
+                style={
+                  Object {
+                    "marginLeft": 3,
+                  }
+                }
+                type="button"
+                variant="contained"
+              >
+                <button
+                  className="btn btn-default"
+                  disabled={true}
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "marginLeft": 3,
+                    }
+                  }
+                  type="button"
+                  variant="contained"
+                >
+                  <Icon
+                    name="angle-left"
+                    type="fa"
+                  >
+                    <FontAwesome
+                      name="angle-left"
+                    >
+                      <span
+                        aria-hidden={true}
+                        className="fa fa-angle-left"
+                      />
+                    </FontAwesome>
+                  </Icon>
+                  Back
+                </button>
+              </Button>
+            </_default>
+            <SimpleNext
+              FieldProvider={[Function]}
+              buttonLabels={
+                Object {
+                  "back": "Back",
+                  "cancel": "Cancel",
+                  "next": "Next",
+                  "submit": "Submit",
+                }
+              }
+              getState={[Function]}
+              handleNext={[Function]}
+              next="step-2"
+              onCancel={[MockFunction]}
+              onSubmit={[MockFunction]}
+              submit={[Function]}
+              valid={true}
+            >
+              <_default
+                bsStyle="primary"
+                onClick={[Function]}
+                type="button"
+              >
+                <Button
+                  active={false}
+                  block={false}
+                  bsClass="btn"
+                  bsStyle="primary"
+                  disabled={false}
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "marginLeft": 3,
+                    }
+                  }
+                  type="button"
+                >
+                  <button
+                    className="btn btn-primary"
+                    disabled={false}
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "marginLeft": 3,
+                      }
+                    }
+                    type="button"
+                  >
+                    Next
+                    <Icon
+                      name="angle-right"
+                      type="fa"
+                    >
+                      <FontAwesome
+                        name="angle-right"
+                      >
+                        <span
+                          aria-hidden={true}
+                          className="fa fa-angle-right"
+                        />
+                      </FontAwesome>
+                    </Icon>
+                  </button>
+                </Button>
+              </_default>
+            </SimpleNext>
+          </div>
+        </ModalFooter>
+      </WizardFooter>
+    </WizardStepButtons>
+  </WizardStep>
+</Wizard>
+`;
