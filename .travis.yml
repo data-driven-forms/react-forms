@@ -8,11 +8,14 @@ before_install:
   - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
   - cp .npmrc.template $HOME/.npmrc
   - yarn install
-  - npm install -g codecov
 
 
 
 script: ./scripts/react-form-renderer.sh
+
+after_success:
+  - npm install -g codecov
+  - npm run codecov
 
 deploy:
 - provider: script

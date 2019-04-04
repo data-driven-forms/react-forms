@@ -13,7 +13,8 @@
     "test": "lerna run test",
     "test-ci": "lerna run test-ci",
     "test:update": "lerna run test -- -u",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "codecov": "codecov"
   },
   "workspaces": [
     "packages/**"
