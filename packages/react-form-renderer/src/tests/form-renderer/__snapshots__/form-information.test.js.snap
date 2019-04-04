@@ -115,6 +115,11 @@ exports[`<FormControls /> should render with description 1`] = `
           </FormControls>
         </form>
       </Component>
+      <button
+        onClick={[Function]}
+      >
+        Foo bar
+      </button>
     </ReactFinalForm>
   </FormRenderer>
 </ContextWrapper>
@@ -235,6 +240,11 @@ exports[`<FormControls /> should render with title 1`] = `
           </FormControls>
         </form>
       </Component>
+      <button
+        onClick={[Function]}
+      >
+        Foo bar
+      </button>
     </ReactFinalForm>
   </FormRenderer>
 </ContextWrapper>
@@ -361,6 +371,11 @@ exports[`<FormControls /> should render with title and description 1`] = `
           </FormControls>
         </form>
       </Component>
+      <button
+        onClick={[Function]}
+      >
+        Foo bar
+      </button>
     </ReactFinalForm>
   </FormRenderer>
 </ContextWrapper>
@@ -475,6 +490,11 @@ exports[`<FormControls /> should render without title and description 1`] = `
           </FormControls>
         </form>
       </Component>
+      <button
+        onClick={[Function]}
+      >
+        Foo bar
+      </button>
     </ReactFinalForm>
   </FormRenderer>
 </ContextWrapper>

@@ -2484,6 +2484,11 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
         </FormControls>
       </form>
     </Component>
+    <button
+      onClick={[Function]}
+    >
+      Foo bar
+    </button>
   </ReactFinalForm>
 </FormRenderer>
 `;

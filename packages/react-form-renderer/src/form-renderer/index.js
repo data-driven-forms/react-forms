@@ -21,6 +21,8 @@ const renderControls = ({ formStyle, ...props }) => formStyle !== 'wizard' ? <Fo
 
 const isDisabled = (disableStates, getState) => disableStates.map(item => getState()[item]).find(item => !!item);
 
+const foo = () => console.log('Foo');
+
 const FormRenderer = ({
   layoutMapper,
   formFieldsMapper,
@@ -105,6 +107,7 @@ const FormRenderer = ({
               </FormWrapper>
             ) }
           </RendererContext.Consumer>
+          <button onClick={ foo }>Foo bar</button>
         </RendererContext.Provider>
       ) }
     />

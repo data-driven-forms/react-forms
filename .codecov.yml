@@ -19,6 +19,8 @@ parsers:
       loop: yes
       method: no
       macro: no
+  javascript:
+    enable_partials: yes
 
 comment:
   layout: "header, diff"
