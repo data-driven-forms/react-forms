@@ -9,7 +9,7 @@
     "build": "webpack --env prod --config ./config/webpack.config.js",
     "vendor": "webpack --env vendor --config ./config/webpack.config.js",
     "test": "jest --coverage",
-    "test-ci": "jest && codecov",
+    "test-ci": "jest",
     "release": "semantic-release"
   },
   "repository": "git@github.com:data-driven-forms/react-forms.git",

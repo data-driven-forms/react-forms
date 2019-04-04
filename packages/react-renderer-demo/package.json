@@ -7,9 +7,7 @@
   "scripts": {
     "start": "webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
     "build": "webpack --env prod --config ./config/webpack.config.js",
-    "vendor": "webpack --env vendor --config ./config/webpack.config.js --progress",
-    "test": "jest --coverage",
-    "test-ci": "jest && codecov"
+    "vendor": "webpack --env vendor --config ./config/webpack.config.js --progress"
   },
   "repository": {
     "type": "git",
