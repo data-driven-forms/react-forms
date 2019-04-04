@@ -38,6 +38,7 @@ const FormRenderer = ({
   buttonOrder,
   buttonClassName,
   clearOnUnmount,
+  validate,
 }) => {
   const inputSchema = schemaMapper(schemaType)(schema, uiSchema);
   let schemaError;
@@ -61,6 +62,7 @@ const FormRenderer = ({
         ...inputSchema.defaultValues,
         ...initialValues,
       }}
+      validate={ validate }
       subscription={{ pristine: true, submitting: true, valid: true }}
       render={ ({ handleSubmit, pristine, valid, form: { reset, mutators, getState, submit, ...form }}) => (
         <RendererContext.Provider value={ configureContext({
@@ -128,6 +130,7 @@ FormRenderer.propTypes = {
   buttonOrder: PropTypes.arrayOf(PropTypes.string),
   buttonClassName: PropTypes.string,
   clearOnUnmount: PropTypes.bool,
+  validate: PropTypes.func,
 };
 
 FormRenderer.defaultProps = {
