@@ -101,7 +101,7 @@
   },
   "peerDependencies": {
     "@data-driven-forms/react-form-renderer": "^1.9.3",
-    "@patternfly/react-core": "^1.51.6",
+    "@patternfly/react-core": "^2.9.2",
     "@patternfly/react-icons": "^2.8.0"
   },
   "dependencies": {
