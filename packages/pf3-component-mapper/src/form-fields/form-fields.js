@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormControl, HelpBlock, Checkbox, Radio as PfRadio, Col, FormGroup } from 'patternfly-react';
+import { FormControl, HelpBlock, Checkbox, Radio as PfRadio, FormGroup, ControlLabel } from 'patternfly-react';
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 import { validationError } from './helpers';
 import MultipleChoiceList from './multiple-choice-list';
@@ -33,7 +33,7 @@ const selectComponent = ({
     <FormControl { ...input } placeholder={ placeholder } disabled={ isDisabled } readOnly={ isReadOnly } { ...rest } />,
   [componentTypes.TEXTAREA_FIELD]: () =>
     <FormControl { ...input } disabled={ isDisabled } readOnly={ isReadOnly } { ...rest } componentClass="textarea" placeholder={ placeholder }/>,
-  [componentTypes.CHECKBOX]: () => <Checkbox { ...input } disabled={ isDisabled || isReadOnly }>{ !noCheckboxLabel && label }</Checkbox>,
+  [componentTypes.CHECKBOX]: () => <Checkbox { ...input } disabled={ isDisabled || isReadOnly }>{ label }</Checkbox>,
   [componentTypes.RADIO]: () => options.map(option => (
     <FieldProvider
       key={ `${input.name}-${option.value}` }
@@ -80,20 +80,19 @@ const FinalFormField = ({
   description,
   hideLabel,
   isVisible,
+  noCheckboxLabel,
   ...rest
 }) => {
   const invalid = validationError(meta, validateOnMount);
   return (
     <FormGroup validationState={ invalid ? 'error' : null }>
-      { label &&
-          <Col md={ hideLabel ? 0 : 2 } componentClass="label" className="control-label">
-            { !hideLabel && (rest.isRequired ? <RequiredLabel label={ label } /> : label) }
-          </Col> }
-      <Col md={ !label ? 12 : 10 }>
-        { selectComponent({ ...rest, invalid, label })() }
-        { description && <HelpBlock style={{ color: '#767676' }}>{ description }</HelpBlock> }
-        { renderHelperText(invalid && meta.error, helperText) }
-      </Col>
+      { label && !hideLabel && !noCheckboxLabel &&
+          <ControlLabel>
+            { rest.isRequired ? <RequiredLabel label={ label } /> : label }
+          </ControlLabel> }
+      { selectComponent({ ...rest, invalid, label })() }
+      { description && <HelpBlock style={{ color: '#767676' }}>{ description }</HelpBlock> }
+      { renderHelperText(invalid && meta.error, helperText) }
     </FormGroup>
   );
 };

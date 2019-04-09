@@ -49,33 +49,35 @@ class Switch extends React.Component {
   render() {
     const { onText, offText, disabled, isReadOnly, bsSize, ...props } = this.props;
     return (
-      <label
-        className={ `pf3-switch${disabled || isReadOnly ? ' disabled' : ''}${bsSize === 'mini' || bsSize === 'mn' ? ' mini' : ''}` }
-        style={{ width: this.state.labelWidth + DIVIDER_SIZE + COMBINED_MARGIN }}
-      >
-        <input type="checkbox" { ...props } disabled={ disabled || isReadOnly } />
-        <span className={ `pf3-switch-slider${props.checked ? ' checked' : ''}` }>
-          <span
-            className="on-text"
-            style={{
-              ...createLabelStyles(this.state.labelWidth),
-              ...createTransform(this.state.labelWidth, props.checked),
-            }}
-          >
-            { onText }
+      <div>
+        <label
+          className={ `pf3-switch${disabled || isReadOnly ? ' disabled' : ''}${bsSize === 'mini' || bsSize === 'mn' ? ' mini' : ''}` }
+          style={{ width: this.state.labelWidth + DIVIDER_SIZE + COMBINED_MARGIN }}
+        >
+          <input type="checkbox" { ...props } disabled={ disabled || isReadOnly } />
+          <span className={ `pf3-switch-slider${props.checked ? ' checked' : ''}` }>
+            <span
+              className="on-text"
+              style={{
+                ...createLabelStyles(this.state.labelWidth),
+                ...createTransform(this.state.labelWidth, props.checked),
+              }}
+            >
+              { onText }
+            </span>
+            <span className="divider" style={ createTransform(this.state.labelWidth, props.checked) }/>
+            <span
+              className="off-text"
+              style={{
+                ...createLabelStyles(this.state.labelWidth, false),
+                ...createTransform(this.state.labelWidth, props.checked, true),
+              }}
+            >
+              { offText }
+            </span>
           </span>
-          <span className="divider" style={ createTransform(this.state.labelWidth, props.checked) }/>
-          <span
-            className="off-text"
-            style={{
-              ...createLabelStyles(this.state.labelWidth, false),
-              ...createTransform(this.state.labelWidth, props.checked, true),
-            }}
-          >
-            { offText }
-          </span>
-        </span>
-      </label>
+        </label>
+      </div>
     );
   }
 }

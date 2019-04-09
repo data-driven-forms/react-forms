@@ -1,6 +1,6 @@
 import React from 'react';
 import RequiredLabel from './required-label';
-import { Checkbox, Col, FormGroup } from 'patternfly-react';
+import { Checkbox, Col, FormGroup, ControlLabel } from 'patternfly-react';
 import { composeValidators } from '@data-driven-forms/react-form-renderer';
 
 const MultipleChoiceList = ({ validate, FieldProvider, ...props }) => (
@@ -20,13 +20,13 @@ const MultipleChoiceList = ({ validate, FieldProvider, ...props }) => (
       const groupValues = rest.input.value;
       return (
         <FormGroup validationState={ showError ? 'error' : null }>
-          <Col md={ 2 } componentClass="label" className="control-label">
+          <ControlLabel>
             { (isRequired ? <RequiredLabel label={ label } /> : label) }
-          </Col>
-          <Col md={ 10 }>
+          </ControlLabel>
+          <div>
             { options.map(option =>
               (<FieldProvider
-                formOptions={rest.formOptions}
+                formOptions={ rest.formOptions }
                 id={ `${rest.id}-${option.value}` }
                 key={ option.value }
                 { ...option }
@@ -49,7 +49,7 @@ const MultipleChoiceList = ({ validate, FieldProvider, ...props }) => (
                   );
                 } }
               />)) }
-          </Col>
+          </div>
         </FormGroup>
       );
     } }
