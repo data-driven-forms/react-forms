@@ -16,10 +16,16 @@ const WizardStep = ({
 }) => {
   return (
     <Fragment>
-      <TextContent>
-        <Text component={ TextVariants.h5 } >{ title }</Text>
-        <Text component={ TextVariants.p } >{ description }</Text>
-      </TextContent>
+      { typeof title === 'string' ? (
+        <TextContent>
+          <Text component={ TextVariants.h2 } >{ title }</Text>
+        </TextContent>
+      ) : title }
+      { typeof description === 'string' ? (
+        <TextContent>
+          <Text component={ TextVariants.p } >{ description }</Text>
+        </TextContent>
+      ) : description }
       { fields.map(item => formOptions.renderForm([ item ], formOptions)) }
       <WizardStepButtons
         formOptions={ formOptions }
