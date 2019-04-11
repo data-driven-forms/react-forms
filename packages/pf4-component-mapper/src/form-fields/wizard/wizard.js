@@ -45,11 +45,16 @@ class Wizard extends React.Component {
 
     return (
       <Fragment>
-        <TextContent>
-          <Text component={ TextVariants.h2 } >{ title }</Text>
-          <Text component={ TextVariants.p } >{ description }</Text>
-          <Text component={ TextVariants.h5 } >{ `Step ${this.state.prevSteps.length + 1}` }</Text>
-        </TextContent>
+        { typeof title === 'string' ? (
+          <TextContent>
+            <Text component={ TextVariants.h2 } >{ title }</Text>
+          </TextContent>
+        ) : title }
+        { typeof description === 'string' ? (
+          <TextContent>
+            <Text component={ TextVariants.p } >{ description }</Text>
+          </TextContent>
+        ) : description }
         { cloneElement(currentStep, {
           handleNext: this.handleNext,
           handlePrev: this.handlePrev,
