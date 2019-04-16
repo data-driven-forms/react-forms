@@ -3,15 +3,17 @@
 exports[`Tabs component should render tabs correctly 1`] = `
 <Tabs
   activeKey={0}
+  aria-label={null}
   className=""
+  id={null}
   isFilled={false}
   isSecondary={false}
   leftScrollAriaLabel="Scroll left"
   onSelect={[Function]}
   rightScrollAriaLabel="Scroll Right"
+  variant="div"
 >
-  <Tab
-    className=""
+  <ForwardRef
     eventKey={0}
     key="cosiKey"
     title="cosiTitle"
@@ -23,9 +25,8 @@ exports[`Tabs component should render tabs correctly 1`] = `
         Here would be form
       </div>
     </div>
-  </Tab>
-  <Tab
-    className=""
+  </ForwardRef>
+  <ForwardRef
     eventKey={1}
     key="cosiKey2"
     title="cosiTitle2"
@@ -37,6 +38,6 @@ exports[`Tabs component should render tabs correctly 1`] = `
         Here would be form
       </div>
     </div>
-  </Tab>
+  </ForwardRef>
 </Tabs>
 `;
