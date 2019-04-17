@@ -11,7 +11,7 @@ const renderTabContet = (items, formOptions) =>
 const FormTabs = ({ fields, formOptions }) => (
   <TabContainer id="basic-tabs-pf" defaultActiveKey={ 0 }>
     <div>
-      <Nav bsClass="nav nav-tabs nav-tabs-pf">
+      <Nav bsClass="nav nav-tabs">
         { renderTabHeader(fields) }
       </Nav>
       <TabContent animation>

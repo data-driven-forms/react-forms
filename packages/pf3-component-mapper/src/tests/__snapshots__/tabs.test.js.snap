@@ -42,14 +42,14 @@ exports[`<FormTabs /> should render form tabs 1`] = `
         id="basic-tabs-pf"
       >
         <Nav
-          bsClass="nav nav-tabs nav-tabs-pf"
+          bsClass="nav nav-tabs"
           justified={false}
           pullLeft={false}
           pullRight={false}
           stacked={false}
         >
           <ul
-            className="nav nav-tabs nav-tabs-pf"
+            className="nav nav-tabs"
             role="tablist"
           >
             <NavItem
