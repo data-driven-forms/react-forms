@@ -1,11 +1,11 @@
 import { mount } from 'enzyme';
-import { Col, FormGroup, Button, ButtonGroup, Icon, HelpBlock, Form } from 'patternfly-react';
+import { FormGroup, Button, ButtonGroup, Icon, HelpBlock, Form } from 'patternfly-react';
 import { layoutComponents } from '@data-driven-forms/react-form-renderer';
 import layoutMapper from '../form-fields/layout-components';
 
 describe('Layout mapper', () => {
   it('should return PF3 Col', () => {
-    expect(mount(layoutMapper[layoutComponents.COL]({})).find(Col)).toHaveLength(1);
+    expect(mount(layoutMapper[layoutComponents.COL]({})).find('div')).toHaveLength(1);
   });
 
   it('should return PF3 Button', () => {

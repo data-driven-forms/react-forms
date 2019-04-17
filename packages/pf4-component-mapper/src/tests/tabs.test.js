@@ -36,7 +36,7 @@ describe('Tabs component', () => {
     const wrapper = mount(<Tabs { ...props } />);
     expect(wrapper.instance().state.activeTabKey).toEqual(0);
 
-    const secondTabButton = wrapper.find('[className="pf-c-tabs__button"]').at(1);
+    const secondTabButton = wrapper.find('.pf-c-tabs__button').at(6);
     secondTabButton.simulate('click');
 
     expect(wrapper.instance().state.activeTabKey).toEqual(1);
