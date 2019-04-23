@@ -15,3 +15,10 @@ $input-default-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 div.field-group {
   margin-bottom: 25px;
 }
+
+.pf3-select_multi-values-wrapper {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
