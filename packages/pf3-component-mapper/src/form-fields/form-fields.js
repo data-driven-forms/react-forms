@@ -45,17 +45,19 @@ const selectComponent = ({
         <PfRadio { ...input } onChange={ () => { input.onChange(option.value); } } disabled={ isDisabled || isReadOnly }>{ option.label }</PfRadio>) }
     />
   )),
-  [componentTypes.SELECT_COMPONENT]: () => <Select
-    loadOptions={ loadOptions }
-    options={ options }
-    invalid={ invalid }
-    input={ input }
-    placeholder={ placeholder }
-    rest={ rest }
-    isSearchable={ isSearchable }
-    isDisabled={ isDisabled }
-    isReadOnly={ isReadOnly }
-  />,
+  [componentTypes.SELECT_COMPONENT]: () => <div>
+    <Select
+      loadOptions={ loadOptions }
+      options={ options }
+      invalid={ invalid }
+      input={ input }
+      placeholder={ placeholder }
+      rest={ rest }
+      isSearchable={ isSearchable }
+      isDisabled={ isDisabled }
+      isReadOnly={ isReadOnly }
+    />
+  </div>,
   [componentTypes.SWITCH]: () =>
     <Switch
       { ...rest }

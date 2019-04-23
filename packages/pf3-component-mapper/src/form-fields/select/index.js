@@ -1,10 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactSelect from 'react-select';
+import ReactSelect, { components } from 'react-select';
 import customStyles from './select-styles';
 import './react-select.scss';
 
 const selectValue = option => option.sort((a, b) => a.label.localeCompare(b.label, 'en', { sensitivity: 'base' })).map(item => item.value);
+
+const ValueContainer = ({ children, ...props }) => {
+  if (props.isMulti) {
+    return (
+      <components.ValueContainer { ...props }>
+        <div className="pf3-select_multi-values-wrapper">
+          { children[0] }
+        </div>
+        { children.slice(1) }
+      </components.ValueContainer>
+    );
+  }
+
+  return (
+    <components.ValueContainer { ...props }>
+      { children }
+    </components.ValueContainer>
+  );
+};
 
 class Select extends Component {
   constructor(props){
@@ -70,6 +89,9 @@ class Select extends Component {
       isDisabled={ isDisabled || isReadOnly }
       onChange={ option =>
         input.onChange(rest.multi ? selectValue(option) : option ? option.value : undefined) } // eslint-disable-line no-nested-ternary
+      components={{
+        ValueContainer,
+      }}
       { ...rest }
     />;
   }
