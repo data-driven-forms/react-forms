@@ -108,5 +108,6 @@
     "material-ui-pickers": "^2.1.1",
     "moment": "^2.23.0",
     "react-select": "^2.2.0"
-  }
+  },
+  "postpublish": "export RELEASE_DEMO=true"
 }

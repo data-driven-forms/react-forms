@@ -104,5 +104,6 @@
   "peerDependencies": {
     "react": "^16.6.0",
     "react-dom": "^16.6.0"
-  }
+  },
+  "postpublish": "export RELEASE_DEMO=true"
 }

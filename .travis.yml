@@ -2,6 +2,10 @@ language: node_js
 node_js:
   - "8"
 
+env:
+  global:
+    - RELEASE_DEMO=false
+
 sudo: required
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
@@ -14,6 +18,9 @@ after_success:
   - npm install -g codecov
   - npm run codecov
 
+after_failure:
+  - cat yarn-error.log
+
 deploy:
 - provider: script
   on:
@@ -23,6 +30,7 @@ deploy:
 - provider: surge
   on:
     branch: master
+    condition: $RELEASE_DEMO = true
   project: ./packages/react-renderer-demo/public/
   domain: data-driven-forms.surge.sh 
   skip_cleanup: true

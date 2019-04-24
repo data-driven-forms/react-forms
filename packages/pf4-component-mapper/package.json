@@ -106,5 +106,6 @@
   },
   "dependencies": {
     "@patternfly/patternfly-next": "^1.0.87"
-  }
+  },
+  "postpublish": "export RELEASE_DEMO=true"
 }
