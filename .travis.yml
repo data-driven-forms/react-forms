@@ -27,10 +27,14 @@ deploy:
     branch: master
   script: ./scripts/release.sh
   skip_cleanup: true
+- provider: script
+  on:
+    branch: master
+    script: echo env(RELEASE_DEMO)
 - provider: surge
   on:
     branch: master
-    condition: $RELEASE_DEMO = true
+    condition: RELEASE_DEMO = true
   project: ./packages/react-renderer-demo/public/
   domain: data-driven-forms.surge.sh 
   skip_cleanup: true
