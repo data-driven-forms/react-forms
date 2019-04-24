@@ -32,7 +32,6 @@ class Wizard extends React.Component {
 
   render() {
     const { title, description, FieldProvider, formOptions, buttonLabels, buttonsClassName } = this.props;
-    console.log('Foo: ', buttonsClassName)
     const handleSubmit = () =>
       formOptions.onSubmit(this.handleSubmit(formOptions.getState().values, [ ...this.state.prevSteps, this.state.activeStep ]));
 

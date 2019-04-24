@@ -25,12 +25,39 @@ describe('<FormTabs />', () => {
       }],
       formOptions: {
         renderForm: ({ name, component }) => <div key={ name }>{ component }</div>,
+        getState: () => ({
+          errors: {},
+        }),
       },
     };
   });
 
   it('should render form tabs', () => {
     const wrapper = mount(<FormTabs { ...initialProps } />);
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
+
+  it('should render form tabs with error state', () => {
+    const validationSchema = {
+      ...initialProps,
+      fields: [{
+        component: componentTypes.TABS,
+        title: 'Tab 1',
+        key: 'tab1',
+        validateFields: [ 'foo' ],
+        fields: [{
+          name: 'foo',
+          component: 'foo',
+        }],
+      }],
+      formOptions: {
+        renderForm: ({ name, component }) => <div key={ name }>{ component }</div>,
+        getState: () => ({
+          errors: { foo: true },
+        }),
+      },
+    };
+    const wrapper = mount(<FormTabs { ...validationSchema } />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 

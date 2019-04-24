@@ -18,4 +18,17 @@ export default ({ activeMapper }) =>
     </Typography>
     <pre>TAB_ITEM</pre> <Typography variant="body1">as an import from componentTypes</Typography>
     <pre>tab-item</pre> <Typography variant="body1">as a string</Typography>
+    { activeMapper === 'pf3' &&
+    (
+      <Fragment>
+        <Typography variant="h6" gutterBottom>
+        Validation
+        </Typography>
+        <Typography variant="body1">Because of schema flexibility there is no simple and efficient way to signal invalid tab content.</Typography>
+        <Typography variant="body1">
+          If you want to add some visual feedback for this case, please specify field names to <pre style={{ display: 'inline' }}>validateFields</pre> attribute.
+        </Typography>
+      </Fragment>
+    ) }
+
   </Fragment>;
