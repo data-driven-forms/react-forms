@@ -1,8 +1,10 @@
 import React, { cloneElement, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import {
   TextContent,
   Text,
   TextVariants,
+  Title,
 } from '@patternfly/react-core';
 import WizardStep from './wizard-step';
 import './wizard-styles.scss';
@@ -29,7 +31,8 @@ class Wizard extends React.Component {
   findCurrentStep = activeStep => this.props.fields.find(({ stepKey }) => stepKey === activeStep)
 
   render() {
-    const { title, description, FieldProvider, formOptions } = this.props;
+    const { title, description, FieldProvider, formOptions, buttonLabels, buttonsClassName } = this.props;
+    console.log('Foo: ', buttonsClassName)
     const handleSubmit = () =>
       formOptions.onSubmit(this.handleSubmit(formOptions.getState().values, [ ...this.state.prevSteps, this.state.activeStep ]));
 
@@ -40,15 +43,15 @@ class Wizard extends React.Component {
           ...formOptions,
           handleSubmit,
         }}
+        buttonLabels={ buttonLabels }
         FieldProvider={ FieldProvider }
+        buttonsClassName={ buttonsClassName }
       />);
 
     return (
       <Fragment>
         { typeof title === 'string' ? (
-          <TextContent>
-            <Text component={ TextVariants.h2 } >{ title }</Text>
-          </TextContent>
+          <Title size="3xl" >{ title }</Title>
         ) : title }
         { typeof description === 'string' ? (
           <TextContent>
@@ -65,6 +68,35 @@ class Wizard extends React.Component {
   }
 }
 
-const WizardFunction = props => <Wizard { ...props }/>;
+Wizard.propTypes = {
+  buttonLabels: PropTypes.shape({
+    submit: PropTypes.string.isRequired,
+    cancel: PropTypes.string.isRequired,
+    back: PropTypes.string.isRequired,
+    next: PropTypes.string.isRequired,
+  }).isRequired,
+  buttonsClassName: PropTypes.string,
+};
+
+const defaultLabels = {
+  submit: 'Submit',
+  cancel: 'Cancel',
+  back: 'Back',
+  next: 'Next',
+};
+
+const WizardFunction = ({ buttonLabels, ...props }) => <Wizard { ...props } buttonLabels={{ ...defaultLabels, ...buttonLabels }}/>;
+
+WizardFunction.propTypes = {
+  buttonLabels: PropTypes.shape({
+    submit: PropTypes.string,
+    cancel: PropTypes.string,
+    back: PropTypes.string,
+  }),
+};
+
+WizardFunction.defaultProps = {
+  buttonLabels: {},
+};
 
 export default WizardFunction;
