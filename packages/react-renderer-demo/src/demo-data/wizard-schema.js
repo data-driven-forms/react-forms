@@ -4,7 +4,10 @@ const wizardSchema = {
   fields: [{
     component: componentTypes.WIZARD,
     name: 'wizzard',
-    assignFieldProvider: true,
+    buttonLabels: {
+      submit: 'Add new source',
+    },
+    buttonsClassName: 'Foo',
     fields: [{
       title: 'Get started with adding source',
       name: 'step-1',

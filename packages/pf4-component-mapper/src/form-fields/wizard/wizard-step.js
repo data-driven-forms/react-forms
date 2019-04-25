@@ -3,6 +3,7 @@ import {
   TextContent,
   Text,
   TextVariants,
+  Title,
 } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 import WizardStepButtons from './step-buttons';
@@ -17,9 +18,7 @@ const WizardStep = ({
   return (
     <Fragment>
       { typeof title === 'string' ? (
-        <TextContent>
-          <Text component={ TextVariants.h2 } >{ title }</Text>
-        </TextContent>
+        <Title size="2xl" >{ title }</Title>
       ) : title }
       { typeof description === 'string' ? (
         <TextContent>

@@ -224,6 +224,7 @@ export const baseExamples = [{
     fields: [
       {
         component: componentTypes.TAB_ITEM,
+        validateFields: [ 'apple' ],
         key: '1',
         title: 'Fruits',
         description: 'Here you can find fruits',
@@ -233,6 +234,9 @@ export const baseExamples = [{
             label: 'Apple',
             title: 'Apple',
             component: componentTypes.TEXT_FIELD,
+            validate: [{
+              type: validatorTypes.REQUIRED,
+            }],
           },
         ],
       },

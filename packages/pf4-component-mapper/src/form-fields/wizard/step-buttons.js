@@ -7,13 +7,15 @@ const SimpleNext = ({
   valid,
   handleNext,
   submit,
+  nextLabel,
 }) => (
   <Button
     variant="primary"
     type="button"
+    isDisabled={ !valid }
     onClick={ () => valid ? handleNext(next) : submit() }
   >
-    Continue
+    { nextLabel }
   </Button>
 );
 
@@ -22,6 +24,7 @@ SimpleNext.propTypes = {
   valid: PropTypes.bool,
   handleNext: PropTypes.func.isRequired,
   submit: PropTypes.func.isRequired,
+  nextLabel: PropTypes.string.isRequired,
 };
 
 const ConditionalNext = ({
@@ -45,25 +48,38 @@ ConditionalNext.propTypes = {
   FieldProvider: PropTypes.func.isRequired,
 };
 
-const submitButton = handleSubmit => <Button type="button" variant="primary" onClick={ handleSubmit }>Submit</Button>;
+const submitButton = (handleSubmit, submitLabel) => <Button type="button" variant="primary" onClick={ handleSubmit }>{ submitLabel }</Button>;
 
-const renderNextButton = ({ nextStep, handleSubmit, ...rest }) =>
+const renderNextButton = ({ nextStep, handleSubmit, submitLabel, ...rest }) =>
   !nextStep
-    ? submitButton(handleSubmit)
+    ? submitButton(handleSubmit, submitLabel)
     : typeof nextStep === 'object'
       ? <ConditionalNext nextStep={ nextStep } { ...rest }/>
       : <SimpleNext next={ nextStep } { ...rest } />;
 
-const WizardStepButtons = ({ formOptions, disableBack, handlePrev, nextStep, FieldProvider, handleNext }) => (
-  <Toolbar className="wizard-button-toolbar">
+const WizardStepButtons = ({
+  formOptions,
+  disableBack,
+  handlePrev,
+  nextStep,
+  FieldProvider,
+  handleNext,
+  buttonsClassName,
+  buttonLabels: {
+    cancel,
+    submit,
+    back,
+    next,
+  }}) => (
+  <Toolbar className={ `wizard-button-toolbar ${buttonsClassName ? buttonsClassName : ''}` }>
     <ToolbarGroup>
       { formOptions.onCancel && (
         <ToolbarItem>
-          <Button type="button" variant="secondary" onClick={ formOptions.onCancel }>Cancel</Button>
+          <Button type="button" variant="secondary" onClick={ formOptions.onCancel }>{ cancel }</Button>
         </ToolbarItem>
       ) }
       <ToolbarItem>
-        <Button type="button" variant="secondary" isDisabled={ disableBack } onClick={ handlePrev }>Back</Button>
+        <Button type="button" variant="secondary" isDisabled={ disableBack } onClick={ handlePrev }>{ back }</Button>
       </ToolbarItem>
       <ToolbarItem>
         { renderNextButton({
@@ -71,6 +87,8 @@ const WizardStepButtons = ({ formOptions, disableBack, handlePrev, nextStep, Fie
           handleNext,
           nextStep,
           FieldProvider,
+          nextLabel: next,
+          submitLabel: submit,
         }) }
       </ToolbarItem>
     </ToolbarGroup>
@@ -93,6 +111,13 @@ WizardStepButtons.propTypes = {
     }),
   ]),
   FieldProvider: PropTypes.func.isRequired,
+  buttonLabels: PropTypes.shape({
+    submit: PropTypes.string.isRequired,
+    cancel: PropTypes.string.isRequired,
+    back: PropTypes.string.isRequired,
+    next: PropTypes.string.isRequired,
+  }).isRequired,
+  buttonsClassName: PropTypes.string,
 };
 
 export default WizardStepButtons;
