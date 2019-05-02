@@ -199,16 +199,18 @@ const customStyles = {
       fontWeight: '600',
       minHeight: 20,
     };
+    const clearableWidth = isClearable && hasValue ? 20 : 0;
     return ({
       ...provided,
       minHeight: 24,
       overflow: 'visible',
       flexWrap: 'initial',
-      width: `calc(100% - ${isClearable ? '48px' : '20px'})`,
+      flex: 'none',
+      width: `calc(100% - ${isClearable && hasValue ? '48px' : '28px'})`,
       '& input': {
         position: 'absolute',
         top: selectContainer ? Math.max(selectContainer.offsetHeight, 30) : 30,
-        width: `${menuIsOpen ? '100%' : '0%'} !important`,
+        width: `${menuIsOpen ? `calc(100% + ${clearableWidth}px)` : '0%'} !important`,
         padding: menuIsOpen ? '2px 6px !important' : '0',
         border: menuIsOpen ? '1px solid #bbb !important' : 'none',
         borderRadius: menuIsOpen ? 1 : 0,

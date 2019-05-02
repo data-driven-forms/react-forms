@@ -783,7 +783,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                             }
                           >
                             <div
-                              className="css-1namjr2"
+                              className="css-dosfk1"
                             >
                               <SingleValue
                                 clearValue={[Function]}
