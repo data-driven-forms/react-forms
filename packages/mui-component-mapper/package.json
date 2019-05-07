@@ -8,33 +8,9 @@
     "start": "webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
     "build": "webpack --env prod --config ./config/webpack.config.js",
     "vendor": "webpack --env vendor --config ./config/webpack.config.js",
-    "test": "jest --coverage",
-    "test-ci": "jest",
     "release": "semantic-release"
   },
   "repository": "git@github.com:data-driven-forms/react-forms.git",
-  "jest": {
-    "setupFiles": [
-      "./config/jest.setup.js"
-    ],
-    "coverageDirectory": "./coverage/",
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}",
-      "!**/node_modules/**",
-      "!**/.{snap}*",
-      "!src/vendor.js"
-    ],
-    "coverageReporters": [
-      "text",
-      "html",
-      "lcov"
-    ],
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|scss)$": "identity-obj-proxy"
-    }
-  },
   "devDependencies": {
     "@babel/core": "^7.1.6",
     "@babel/plugin-proposal-class-properties": "^7.2.3",
@@ -64,8 +40,6 @@
     "eslint-plugin-jsx-a11y": "6.x",
     "eslint-plugin-react": "^7.11.1",
     "html-webpack-plugin": "^3.2.0",
-    "identity-obj-proxy": "^3.0.0",
-    "jest": "^23.6.0",
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.10.0",
     "prop-types": "^15.6.2",

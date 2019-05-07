@@ -15,7 +15,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
       ],
       "results": Array [
         Object {
-          "isThrow": false,
+          "type": "return",
           "value": Promise {},
         },
       ],
@@ -50,7 +50,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
         ],
         "results": Array [
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": Promise {},
           },
         ],
@@ -93,7 +93,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                 ],
                 "results": Array [
                   Object {
-                    "isThrow": false,
+                    "type": "return",
                     "value": Promise {},
                   },
                 ],
