@@ -23,10 +23,6 @@ deploy:
     branch: master
   script: ./scripts/release.sh
   skip_cleanup: true
-- provider: script
-  on:
-    branch: master
-    script: echo env(RELEASE_DEMO)
 - provider: surge
   on:
     branch: master
