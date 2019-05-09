@@ -44,16 +44,19 @@ describe('<FormTabs />', () => {
         component: componentTypes.TABS,
         title: 'Tab 1',
         key: 'tab1',
-        validateFields: [ 'foo' ],
+        validateFields: [ 'foo', 'nested.field' ],
         fields: [{
           name: 'foo',
+          component: 'foo',
+        }, {
+          name: 'nested.field',
           component: 'foo',
         }],
       }],
       formOptions: {
         renderForm: ({ name, component }) => <div key={ name }>{ component }</div>,
         getState: () => ({
-          errors: { foo: true },
+          errors: { foo: true, nested: { field: true }},
         }),
       },
     };
