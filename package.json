@@ -11,7 +11,7 @@
     "build": "lerna run build",
     "vendor": "lerna run vendor",
     "test": "jest --coverage",
-    "test-ci": "jest",
+    "test-ci": "jest --coverage",
     "test:update": "jest -u",
     "release": "semantic-release",
     "codecov": "codecov",
