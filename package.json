@@ -10,9 +10,9 @@
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
     "vendor": "lerna run vendor",
-    "test": "lerna run test",
-    "test-ci": "lerna run test-ci",
-    "test:update": "lerna run test -- -u",
+    "test": "jest --coverage",
+    "test-ci": "jest",
+    "test:update": "jest -u",
     "release": "semantic-release",
     "codecov": "codecov",
     "start-demo": "lerna run start --scope=@data-driven-forms/react-render-demo"
@@ -20,11 +20,28 @@
   "workspaces": [
     "packages/**"
   ],
+  "jest": {
+    "verbose": true,
+    "setupFiles": [
+      "<rootDir>/config/jest.setup.js"
+    ],
+    "collectCoverageFrom": [
+      "<rootDir>/packages/**/src/**/*.js",
+      "!<rootDir>/packages/react-renderer-demo/**/*.js",
+      "!<rootDir>/packages/**/dist"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|scss)$": "identity-obj-proxy"
+    }
+  },
   "devDependencies": {
     "@khala/npm-release-monorepo": "^2.2.0",
     "@semantic-release/git": "^7.0.8",
     "@semantic-release/npm": "^5.1.4",
     "atob-lite": "^2.0.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.8.0",
     "lerna": "^3.13.1",
     "semantic-release": "^15.13.3"
   },
