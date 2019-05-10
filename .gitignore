@@ -64,3 +64,5 @@ typings/
 .next
 
 yarn.lock
+
+packages/react-renderer-demo/public/vendor.css

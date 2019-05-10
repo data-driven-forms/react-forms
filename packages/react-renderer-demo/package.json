@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
-    "build": "webpack --env prod --config ./config/webpack.config.js",
+    "start": "yarn vendor && webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
+    "build": "yarn vendor && webpack --env prod --config ./config/webpack.config.js",
     "vendor": "webpack --env vendor --config ./config/webpack.config.js --progress"
   },
   "repository": {

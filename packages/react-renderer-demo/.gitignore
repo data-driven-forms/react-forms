@@ -68,7 +68,5 @@ yarn.lock
 
 public/*.js
 public/*.css
-!public/vendor.css
-!public/vendor4.css
 !public/*.html
 !public/404.html
