@@ -75,6 +75,16 @@ Wizard.propTypes = {
     next: PropTypes.string.isRequired,
   }).isRequired,
   buttonsClassName: PropTypes.string,
+  title: PropTypes.any,
+  description: PropTypes.any,
+  FieldProvider: PropTypes.PropTypes.oneOfType([ PropTypes.object, PropTypes.func ]).isRequired,
+  formOptions: PropTypes.shape({
+    getState: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+  }),
+  fields: PropTypes.arrayOf(PropTypes.shape({
+    stepKey: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 const defaultLabels = {
