@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import MultipleChoiceList from '../form-fields/multiple-choice-list';
-import MockFieldProvider from './mock-field-provider';
+import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 import RequiredLabel from '../form-fields/required-label';
 
 describe('<MultipleChoiceList />', () => {

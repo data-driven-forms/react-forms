@@ -2,7 +2,7 @@ import React from 'react';
 import toJson from 'enzyme-to-json';
 import { SwitchField, CheckboxGroup, Radio, TextareaField, TextField } from '../form-fields/form-fields';
 import { mount } from 'enzyme';
-import MockFieldProvider from './mock-field-provider';
+import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 import MultipleChoiceList from '../form-fields/multiple-choice-list';
 
 describe('FormFields', () => {
