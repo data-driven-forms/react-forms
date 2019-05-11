@@ -1,0 +1,519 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Wizard /> should render correctly 1`] = `
+<WizardFunction
+  FieldProvider={[Function]}
+  buttonLabels={Object {}}
+  description="wizard description"
+  fields={
+    Array [
+      Object {
+        "fields": Array [],
+        "name": "foo",
+        "stepKey": "1",
+      },
+    ]
+  }
+  formOptions={
+    Object {
+      "getState": [Function],
+      "onCancel": [MockFunction],
+      "onSubmit": [MockFunction],
+      "renderForm": [Function],
+      "submit": [MockFunction],
+      "valid": true,
+    }
+  }
+  title="Wizard"
+>
+  <Wizard
+    FieldProvider={[Function]}
+    buttonLabels={
+      Object {
+        "back": "Back",
+        "cancel": "Cancel",
+        "next": "Next",
+        "submit": "Submit",
+      }
+    }
+    description="wizard description"
+    fields={
+      Array [
+        Object {
+          "fields": Array [],
+          "name": "foo",
+          "stepKey": "1",
+        },
+      ]
+    }
+    formOptions={
+      Object {
+        "getState": [Function],
+        "onCancel": [MockFunction],
+        "onSubmit": [MockFunction],
+        "renderForm": [Function],
+        "submit": [MockFunction],
+        "valid": true,
+      }
+    }
+    title="Wizard"
+  >
+    <Title
+      size="3xl"
+    >
+      <h1
+        className="pf-c-title pf-m-3xl"
+      >
+        Wizard
+      </h1>
+    </Title>
+    <TextContent
+      className=""
+    >
+      <div
+        className="pf-c-content"
+      >
+        <Text
+          className=""
+          component="p"
+        >
+          <p
+            className=""
+            data-pf-content={true}
+          >
+            wizard description
+          </p>
+        </Text>
+      </div>
+    </TextContent>
+    <WizardStep
+      FieldProvider={[Function]}
+      buttonLabels={
+        Object {
+          "back": "Back",
+          "cancel": "Cancel",
+          "next": "Next",
+          "submit": "Submit",
+        }
+      }
+      disableBack={true}
+      fields={Array []}
+      formOptions={
+        Object {
+          "getState": [Function],
+          "handleSubmit": [Function],
+          "onCancel": [MockFunction],
+          "onSubmit": [MockFunction],
+          "renderForm": [Function],
+          "submit": [MockFunction],
+          "valid": true,
+        }
+      }
+      handleNext={[Function]}
+      handlePrev={[Function]}
+      name="foo"
+      stepKey="1"
+    >
+      <WizardStepButtons
+        FieldProvider={[Function]}
+        buttonLabels={
+          Object {
+            "back": "Back",
+            "cancel": "Cancel",
+            "next": "Next",
+            "submit": "Submit",
+          }
+        }
+        disableBack={true}
+        formOptions={
+          Object {
+            "getState": [Function],
+            "handleSubmit": [Function],
+            "onCancel": [MockFunction],
+            "onSubmit": [MockFunction],
+            "renderForm": [Function],
+            "submit": [MockFunction],
+            "valid": true,
+          }
+        }
+        handleNext={[Function]}
+        handlePrev={[Function]}
+        name="foo"
+        stepKey="1"
+      >
+        <Toolbar
+          className="wizard-button-toolbar "
+        >
+          <div
+            className="pf-l-toolbar wizard-button-toolbar "
+          >
+            <ToolbarGroup
+              className={null}
+            >
+              <div
+                className="pf-l-toolbar__group"
+              >
+                <ToolbarItem
+                  className={null}
+                >
+                  <div
+                    className="pf-l-toolbar__item"
+                  >
+                    <Button
+                      aria-label={null}
+                      className=""
+                      component="button"
+                      isActive={false}
+                      isBlock={false}
+                      isDisabled={false}
+                      isFocus={false}
+                      isHover={false}
+                      onClick={[MockFunction]}
+                      type="button"
+                      variant="secondary"
+                    >
+                      <button
+                        aria-disabled={null}
+                        aria-label={null}
+                        className="pf-c-button pf-m-secondary"
+                        disabled={false}
+                        onClick={[MockFunction]}
+                        tabIndex={null}
+                        type="button"
+                      >
+                        Cancel
+                      </button>
+                    </Button>
+                  </div>
+                </ToolbarItem>
+                <ToolbarItem
+                  className={null}
+                >
+                  <div
+                    className="pf-l-toolbar__item"
+                  >
+                    <Button
+                      aria-label={null}
+                      className=""
+                      component="button"
+                      isActive={false}
+                      isBlock={false}
+                      isDisabled={true}
+                      isFocus={false}
+                      isHover={false}
+                      onClick={[Function]}
+                      type="button"
+                      variant="secondary"
+                    >
+                      <button
+                        aria-disabled={null}
+                        aria-label={null}
+                        className="pf-c-button pf-m-secondary pf-m-disabled"
+                        disabled={true}
+                        onClick={[Function]}
+                        tabIndex={null}
+                        type="button"
+                      >
+                        Back
+                      </button>
+                    </Button>
+                  </div>
+                </ToolbarItem>
+                <ToolbarItem
+                  className={null}
+                >
+                  <div
+                    className="pf-l-toolbar__item"
+                  >
+                    <Button
+                      aria-label={null}
+                      className=""
+                      component="button"
+                      isActive={false}
+                      isBlock={false}
+                      isDisabled={false}
+                      isFocus={false}
+                      isHover={false}
+                      onClick={[Function]}
+                      type="button"
+                      variant="primary"
+                    >
+                      <button
+                        aria-disabled={null}
+                        aria-label={null}
+                        className="pf-c-button pf-m-primary"
+                        disabled={false}
+                        onClick={[Function]}
+                        tabIndex={null}
+                        type="button"
+                      >
+                        Submit
+                      </button>
+                    </Button>
+                  </div>
+                </ToolbarItem>
+              </div>
+            </ToolbarGroup>
+          </div>
+        </Toolbar>
+      </WizardStepButtons>
+    </WizardStep>
+  </Wizard>
+</WizardFunction>
+`;
+
+exports[`<Wizard /> should render correctly with custom title and description 1`] = `
+<WizardFunction
+  FieldProvider={[Function]}
+  buttonLabels={Object {}}
+  description={
+    <div>
+      description
+    </div>
+  }
+  fields={
+    Array [
+      Object {
+        "fields": Array [],
+        "name": "foo",
+        "stepKey": "1",
+      },
+    ]
+  }
+  formOptions={
+    Object {
+      "getState": [Function],
+      "onCancel": [MockFunction],
+      "onSubmit": [MockFunction],
+      "renderForm": [Function],
+      "submit": [MockFunction],
+      "valid": true,
+    }
+  }
+  title={
+    <div>
+      Title
+    </div>
+  }
+>
+  <Wizard
+    FieldProvider={[Function]}
+    buttonLabels={
+      Object {
+        "back": "Back",
+        "cancel": "Cancel",
+        "next": "Next",
+        "submit": "Submit",
+      }
+    }
+    description={
+      <div>
+        description
+      </div>
+    }
+    fields={
+      Array [
+        Object {
+          "fields": Array [],
+          "name": "foo",
+          "stepKey": "1",
+        },
+      ]
+    }
+    formOptions={
+      Object {
+        "getState": [Function],
+        "onCancel": [MockFunction],
+        "onSubmit": [MockFunction],
+        "renderForm": [Function],
+        "submit": [MockFunction],
+        "valid": true,
+      }
+    }
+    title={
+      <div>
+        Title
+      </div>
+    }
+  >
+    <div>
+      Title
+    </div>
+    <div>
+      description
+    </div>
+    <WizardStep
+      FieldProvider={[Function]}
+      buttonLabels={
+        Object {
+          "back": "Back",
+          "cancel": "Cancel",
+          "next": "Next",
+          "submit": "Submit",
+        }
+      }
+      disableBack={true}
+      fields={Array []}
+      formOptions={
+        Object {
+          "getState": [Function],
+          "handleSubmit": [Function],
+          "onCancel": [MockFunction],
+          "onSubmit": [MockFunction],
+          "renderForm": [Function],
+          "submit": [MockFunction],
+          "valid": true,
+        }
+      }
+      handleNext={[Function]}
+      handlePrev={[Function]}
+      name="foo"
+      stepKey="1"
+    >
+      <WizardStepButtons
+        FieldProvider={[Function]}
+        buttonLabels={
+          Object {
+            "back": "Back",
+            "cancel": "Cancel",
+            "next": "Next",
+            "submit": "Submit",
+          }
+        }
+        disableBack={true}
+        formOptions={
+          Object {
+            "getState": [Function],
+            "handleSubmit": [Function],
+            "onCancel": [MockFunction],
+            "onSubmit": [MockFunction],
+            "renderForm": [Function],
+            "submit": [MockFunction],
+            "valid": true,
+          }
+        }
+        handleNext={[Function]}
+        handlePrev={[Function]}
+        name="foo"
+        stepKey="1"
+      >
+        <Toolbar
+          className="wizard-button-toolbar "
+        >
+          <div
+            className="pf-l-toolbar wizard-button-toolbar "
+          >
+            <ToolbarGroup
+              className={null}
+            >
+              <div
+                className="pf-l-toolbar__group"
+              >
+                <ToolbarItem
+                  className={null}
+                >
+                  <div
+                    className="pf-l-toolbar__item"
+                  >
+                    <Button
+                      aria-label={null}
+                      className=""
+                      component="button"
+                      isActive={false}
+                      isBlock={false}
+                      isDisabled={false}
+                      isFocus={false}
+                      isHover={false}
+                      onClick={[MockFunction]}
+                      type="button"
+                      variant="secondary"
+                    >
+                      <button
+                        aria-disabled={null}
+                        aria-label={null}
+                        className="pf-c-button pf-m-secondary"
+                        disabled={false}
+                        onClick={[MockFunction]}
+                        tabIndex={null}
+                        type="button"
+                      >
+                        Cancel
+                      </button>
+                    </Button>
+                  </div>
+                </ToolbarItem>
+                <ToolbarItem
+                  className={null}
+                >
+                  <div
+                    className="pf-l-toolbar__item"
+                  >
+                    <Button
+                      aria-label={null}
+                      className=""
+                      component="button"
+                      isActive={false}
+                      isBlock={false}
+                      isDisabled={true}
+                      isFocus={false}
+                      isHover={false}
+                      onClick={[Function]}
+                      type="button"
+                      variant="secondary"
+                    >
+                      <button
+                        aria-disabled={null}
+                        aria-label={null}
+                        className="pf-c-button pf-m-secondary pf-m-disabled"
+                        disabled={true}
+                        onClick={[Function]}
+                        tabIndex={null}
+                        type="button"
+                      >
+                        Back
+                      </button>
+                    </Button>
+                  </div>
+                </ToolbarItem>
+                <ToolbarItem
+                  className={null}
+                >
+                  <div
+                    className="pf-l-toolbar__item"
+                  >
+                    <Button
+                      aria-label={null}
+                      className=""
+                      component="button"
+                      isActive={false}
+                      isBlock={false}
+                      isDisabled={false}
+                      isFocus={false}
+                      isHover={false}
+                      onClick={[Function]}
+                      type="button"
+                      variant="primary"
+                    >
+                      <button
+                        aria-disabled={null}
+                        aria-label={null}
+                        className="pf-c-button pf-m-primary"
+                        disabled={false}
+                        onClick={[Function]}
+                        tabIndex={null}
+                        type="button"
+                      >
+                        Submit
+                      </button>
+                    </Button>
+                  </div>
+                </ToolbarItem>
+              </div>
+            </ToolbarGroup>
+          </div>
+        </Toolbar>
+      </WizardStepButtons>
+    </WizardStep>
+  </Wizard>
+</WizardFunction>
+`;

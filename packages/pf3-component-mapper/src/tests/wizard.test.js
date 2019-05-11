@@ -1,7 +1,7 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
 import { mount } from 'enzyme';
-import MockFieldProvider from './mock-field-provider';
+import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 import Wizard from '../form-fields/wizzard/wizzard';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';

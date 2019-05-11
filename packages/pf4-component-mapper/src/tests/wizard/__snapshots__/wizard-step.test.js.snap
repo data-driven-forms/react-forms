@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<WizardStep /> should render correctly 1`] = `
+<Fragment>
+  <Title
+    size="2xl"
+  >
+    title
+  </Title>
+  <TextContent
+    className=""
+  >
+    <Text
+      className=""
+      component="p"
+    >
+      description
+    </Text>
+  </TextContent>
+  <div
+    key="foo"
+  >
+    foo
+  </div>
+  <WizardStepButtons
+    FieldProvider={[Function]}
+    buttonLabels={
+      Object {
+        "back": "Back",
+        "cancel": "Cancel",
+        "next": "Next",
+        "submit": "Submit",
+      }
+    }
+    formOptions={
+      Object {
+        "handleSubmit": [MockFunction],
+        "onCancel": [MockFunction],
+        "renderForm": [Function],
+      }
+    }
+    handleNext={[MockFunction]}
+    handlePrev={[MockFunction]}
+  />
+</Fragment>
+`;
+
+exports[`<WizardStep /> should render custom description 1`] = `
+<Fragment>
+  <Title
+    size="2xl"
+  >
+    title
+  </Title>
+  <div>
+    description
+  </div>
+  <div
+    key="foo"
+  >
+    foo
+  </div>
+  <WizardStepButtons
+    FieldProvider={[Function]}
+    buttonLabels={
+      Object {
+        "back": "Back",
+        "cancel": "Cancel",
+        "next": "Next",
+        "submit": "Submit",
+      }
+    }
+    formOptions={
+      Object {
+        "handleSubmit": [MockFunction],
+        "onCancel": [MockFunction],
+        "renderForm": [Function],
+      }
+    }
+    handleNext={[MockFunction]}
+    handlePrev={[MockFunction]}
+  />
+</Fragment>
+`;
+
+exports[`<WizardStep /> should render custom title 1`] = `
+<Fragment>
+  <div>
+    title
+  </div>
+  <TextContent
+    className=""
+  >
+    <Text
+      className=""
+      component="p"
+    >
+      description
+    </Text>
+  </TextContent>
+  <div
+    key="foo"
+  >
+    foo
+  </div>
+  <WizardStepButtons
+    FieldProvider={[Function]}
+    buttonLabels={
+      Object {
+        "back": "Back",
+        "cancel": "Cancel",
+        "next": "Next",
+        "submit": "Submit",
+      }
+    }
+    formOptions={
+      Object {
+        "handleSubmit": [MockFunction],
+        "onCancel": [MockFunction],
+        "renderForm": [Function],
+      }
+    }
+    handleNext={[MockFunction]}
+    handlePrev={[MockFunction]}
+  />
+</Fragment>
+`;
