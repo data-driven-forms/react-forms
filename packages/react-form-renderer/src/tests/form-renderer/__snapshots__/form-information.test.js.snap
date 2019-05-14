@@ -33,6 +33,11 @@ exports[`<FormControls /> should render with description 1`] = `
     uiSchema={Object {}}
   >
     <ReactFinalForm
+      decorators={
+        Array [
+          [Function],
+        ]
+      }
       initialValues={Object {}}
       mutators={
         Object {
@@ -153,6 +158,11 @@ exports[`<FormControls /> should render with title 1`] = `
     uiSchema={Object {}}
   >
     <ReactFinalForm
+      decorators={
+        Array [
+          [Function],
+        ]
+      }
       initialValues={Object {}}
       mutators={
         Object {
@@ -274,6 +284,11 @@ exports[`<FormControls /> should render with title and description 1`] = `
     uiSchema={Object {}}
   >
     <ReactFinalForm
+      decorators={
+        Array [
+          [Function],
+        ]
+      }
       initialValues={Object {}}
       mutators={
         Object {
@@ -398,6 +413,11 @@ exports[`<FormControls /> should render without title and description 1`] = `
     uiSchema={Object {}}
   >
     <ReactFinalForm
+      decorators={
+        Array [
+          [Function],
+        ]
+      }
       initialValues={Object {}}
       mutators={
         Object {

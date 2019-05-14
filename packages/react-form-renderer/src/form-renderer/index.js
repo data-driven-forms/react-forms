@@ -2,6 +2,8 @@ import React from 'react';
 import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import PropTypes from 'prop-types';
+import createFocusDecorator from 'final-form-focus';
+
 import miqParser from '../parsers/miq-parser/miq-parser';
 import mozillaParser from '../parsers/mozilla-parser/mozilla-schema-parser';
 import RendererContext, { configureContext } from './renderer-context';
@@ -58,6 +60,7 @@ const FormRenderer = ({
     <Form
       onSubmit={ onSubmit }
       mutators={{ ...arrayMutators }}
+      decorators={ [ createFocusDecorator() ] }
       initialValues={{
         ...inputSchema.defaultValues,
         ...initialValues,
