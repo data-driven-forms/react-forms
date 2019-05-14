@@ -177,6 +177,11 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
   }
 >
   <ReactFinalForm
+    decorators={
+      Array [
+        [Function],
+      ]
+    }
     initialValues={
       Object {
         "disabled": "I am disabled.",

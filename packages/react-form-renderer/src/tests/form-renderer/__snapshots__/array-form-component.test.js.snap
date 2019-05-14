@@ -71,6 +71,11 @@ exports[`renderForm function should render array field correctly 1`] = `
     uiSchema={Object {}}
   >
     <ReactFinalForm
+      decorators={
+        Array [
+          [Function],
+        ]
+      }
       initialValues={Object {}}
       mutators={
         Object {
@@ -845,6 +850,11 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
     uiSchema={Object {}}
   >
     <ReactFinalForm
+      decorators={
+        Array [
+          [Function],
+        ]
+      }
       initialValues={Object {}}
       mutators={
         Object {
