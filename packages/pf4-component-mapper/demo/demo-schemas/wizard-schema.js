@@ -4,7 +4,11 @@ export const wizardSchema = {
   fields: [{
     component: componentTypes.WIZARD,
     name: 'wizzard',
+    //inModal: true,
     assignFieldProvider: true,
+    title: 'Title',
+    description: 'Description',
+    buttonsPosition: 'left',
     fields: [{
       title: 'Get started with adding source',
       name: 'step-1',
@@ -43,6 +47,7 @@ export const wizardSchema = {
       title: 'Configure AWS',
       name: 'step-2',
       stepKey: 'aws',
+      substepOf: 'Summary',
       nextStep: 'summary',
       fields: [{
         component: componentTypes.TEXT_FIELD,
@@ -67,6 +72,165 @@ export const wizardSchema = {
       }],
       stepKey: 'summary',
       name: 'summary',
+      substepOf: 'Summary',
+      title: 'Summary',
+    }],
+  }],
+};
+
+export const wizardSchemaSimple = {
+  fields: [{
+    component: componentTypes.WIZARD,
+    name: 'wizzard',
+    assignFieldProvider: true,
+    title: 'Title',
+    description: 'Description',
+    buttonsPosition: 'left',
+    fields: [{
+      title: 'Get started with adding source',
+      name: 'step-1',
+      stepKey: 1,
+      nextStep: 'aws',
+      fields: [{
+        component: componentTypes.TEXTAREA_FIELD,
+        name: 'source-name',
+        type: 'text',
+        label: 'Source name',
+      }],
+    }, {
+      title: 'Configure AWS',
+      name: 'step-2',
+      stepKey: 'aws',
+      nextStep: 'summary',
+      fields: [{
+        component: componentTypes.TEXT_FIELD,
+        name: 'aws-field',
+        label: 'Aws field part',
+        isRequired: true,
+        validate: [{
+          type: validatorTypes.REQUIRED,
+        }],
+      }],
+    }, {
+      fields: [{
+        name: 'summary',
+        component: 'summary',
+        assignFieldProvider: true,
+      }],
+      stepKey: 'summary',
+      name: 'summary',
+      title: 'Summary',
+    }],
+  }],
+};
+
+export const wizardSchemaSubsteps = {
+  fields: [{
+    component: componentTypes.WIZARD,
+    name: 'wizzard',
+    assignFieldProvider: true,
+    title: 'Title',
+    description: 'Description',
+    buttonsPosition: 'left',
+    fields: [{
+      title: 'Get started with adding source',
+      name: 'step-1',
+      stepKey: 1,
+      nextStep: 'aws',
+      fields: [{
+        component: componentTypes.TEXTAREA_FIELD,
+        name: 'source-name',
+        type: 'text',
+        label: 'Source name',
+      }],
+    }, {
+      title: 'Configure AWS',
+      name: 'step-2',
+      stepKey: 'aws',
+      nextStep: 'summary',
+      substepOf: 'Summary',
+      fields: [{
+        component: componentTypes.TEXT_FIELD,
+        name: 'aws-field',
+        label: 'Aws field part',
+      }],
+    }, {
+      fields: [{
+        name: 'summary',
+        component: 'summary',
+        assignFieldProvider: true,
+      }],
+      stepKey: 'summary',
+      name: 'summary',
+      title: 'Summary',
+      substepOf: 'Summary',
+    }],
+  }],
+};
+
+export const wizardSchemaMoreSubsteps = {
+  fields: [{
+    component: componentTypes.WIZARD,
+    name: 'wizzard',
+    assignFieldProvider: true,
+    title: 'Title',
+    description: 'Description',
+    buttonsPosition: 'left',
+    fields: [{
+      title: 'Get started with adding source',
+      name: 'step-1',
+      stepKey: 1,
+      nextStep: 'aws',
+      fields: [{
+        component: componentTypes.TEXTAREA_FIELD,
+        name: 'source-name',
+        type: 'text',
+        label: 'Source name',
+      }],
+    }, {
+      title: 'Configure AWS',
+      name: 'step-2',
+      stepKey: 'aws',
+      nextStep: 'aws2',
+      substepOf: 'Summary',
+      fields: [{
+        component: componentTypes.TEXT_FIELD,
+        name: 'aws-field',
+        label: 'Aws field part',
+      }],
+    }, {
+      title: 'Configure AWS part 2',
+      name: 'step-88',
+      stepKey: 'aws2',
+      nextStep: 'summary',
+      substepOf: 'Summary',
+      fields: [{
+        component: componentTypes.TEXT_FIELD,
+        name: 'aws-field',
+        label: 'Aws field part',
+      }],
+    },
+    {
+      fields: [{
+        name: 'summary',
+        component: 'summary',
+        assignFieldProvider: true,
+      }],
+      stepKey: 'summary',
+      name: 'summary',
+      title: 'Summary',
+      substepOf: 'Finish',
+      nextStep: 'summary2',
+    }, {
+      fields: [{
+        name: 'summary',
+        component: 'summary',
+        assignFieldProvider: true,
+      }],
+      stepKey: 'summary2',
+      name: 'summary2',
+      title: 'Summary2',
+      substepOf: 'Finish',
     }],
   }],
 };

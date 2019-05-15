@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Wizard /> should render correctly 1`] = `
+exports[`<Wizard /> should render correctly and unmount 1`] = `
 <WizardFunction
   FieldProvider={[Function]}
   buttonLabels={Object {}}
@@ -58,183 +58,784 @@ exports[`<Wizard /> should render correctly 1`] = `
     }
     title="Wizard"
   >
-    <Title
-      size="3xl"
-    >
-      <h1
-        className="pf-c-title pf-m-3xl"
-      >
-        Wizard
-      </h1>
-    </Title>
-    <TextContent>
+    <Modal>
       <div
-        className="pf-c-content"
+        className="pf-c-wizard no-shadow   "
+        role="dialog"
       >
-        <Text
-          component="p"
-        >
-          <p
-            className=""
-            data-pf-content={true}
-          >
-            wizard description
-          </p>
-        </Text>
-      </div>
-    </TextContent>
-    <WizardStep
-      FieldProvider={[Function]}
-      buttonLabels={
-        Object {
-          "back": "Back",
-          "cancel": "Cancel",
-          "next": "Next",
-          "submit": "Submit",
-        }
-      }
-      disableBack={true}
-      fields={Array []}
-      formOptions={
-        Object {
-          "getState": [Function],
-          "handleSubmit": [Function],
-          "onCancel": [MockFunction],
-          "onSubmit": [MockFunction],
-          "renderForm": [Function],
-          "submit": [MockFunction],
-          "valid": true,
-        }
-      }
-      handleNext={[Function]}
-      handlePrev={[Function]}
-      name="foo"
-      stepKey="1"
-    >
-      <WizardStepButtons
-        FieldProvider={[Function]}
-        buttonLabels={
-          Object {
-            "back": "Back",
-            "cancel": "Cancel",
-            "next": "Next",
-            "submit": "Submit",
-          }
-        }
-        disableBack={true}
-        formOptions={
-          Object {
-            "getState": [Function],
-            "handleSubmit": [Function],
-            "onCancel": [MockFunction],
-            "onSubmit": [MockFunction],
-            "renderForm": [Function],
-            "submit": [MockFunction],
-            "valid": true,
-          }
-        }
-        handleNext={[Function]}
-        handlePrev={[Function]}
-        name="foo"
-        stepKey="1"
-      >
-        <Toolbar
-          className="wizard-button-toolbar "
+        <WizardHeader
+          description="wizard description"
+          onClose={[MockFunction]}
+          title="Wizard"
         >
           <div
-            className="pf-l-toolbar wizard-button-toolbar "
+            className="pf-c-wizard__header"
           >
-            <ToolbarGroup
-              className={null}
+            <Button
+              className="pf-c-wizard__close"
+              onClick={[MockFunction]}
+              variant="plain"
+            >
+              <button
+                aria-disabled={null}
+                aria-label={null}
+                className="pf-c-button pf-m-plain pf-c-wizard__close"
+                disabled={false}
+                onClick={[MockFunction]}
+                tabIndex={null}
+                type="button"
+              >
+                <TimesIcon
+                  aria-hidden="true"
+                  color="currentColor"
+                  noVerticalAlign={false}
+                  size="sm"
+                  title={null}
+                >
+                  <svg
+                    aria-hidden="true"
+                    aria-labelledby={null}
+                    fill="currentColor"
+                    height="1em"
+                    role="img"
+                    style={
+                      Object {
+                        "verticalAlign": "-0.125em",
+                      }
+                    }
+                    viewBox="0 0 352 512"
+                    width="1em"
+                  >
+                    <path
+                      d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                      transform=""
+                    />
+                  </svg>
+                </TimesIcon>
+              </button>
+            </Button>
+            <Title
+              aria-label="Wizard"
+              className="pf-c-wizard__title"
+              size="3xl"
+            >
+              <h1
+                aria-label="Wizard"
+                className="pf-c-title pf-m-3xl pf-c-wizard__title"
+              >
+                Wizard
+              </h1>
+            </Title>
+            <p
+              className="pf-c-wizard__description"
+            >
+              wizard description
+            </p>
+          </div>
+        </WizardHeader>
+        <div
+          className="pf-c-wizard__outer-wrap"
+        >
+          <WizardNav>
+            <nav
+              className="pf-c-wizard__nav"
+            >
+              <ol
+                className="pf-c-wizard__nav-list"
+              >
+                <WizardNavItem
+                  isCurrent={true}
+                  isDisabled={false}
+                  onNavItemClick={[Function]}
+                  step={0}
+                >
+                  <li
+                    className="pf-c-wizard__nav-item"
+                  >
+                    <a
+                      aria-current="page"
+                      aria-disabled={false}
+                      className="pf-c-wizard__nav-link pf-m-current"
+                      onClick={[Function]}
+                    />
+                  </li>
+                </WizardNavItem>
+              </ol>
+            </nav>
+          </WizardNav>
+          <WizardStep
+            FieldProvider={[Function]}
+            buttonLabels={
+              Object {
+                "back": "Back",
+                "cancel": "Cancel",
+                "next": "Next",
+                "submit": "Submit",
+              }
+            }
+            disableBack={true}
+            fields={Array []}
+            formOptions={
+              Object {
+                "getState": [Function],
+                "handleSubmit": [Function],
+                "onCancel": [MockFunction],
+                "onSubmit": [MockFunction],
+                "renderForm": [Function],
+                "submit": [MockFunction],
+                "valid": true,
+              }
+            }
+            handleNext={[Function]}
+            handlePrev={[Function]}
+            name="foo"
+            stepKey="1"
+          >
+            <WizardBody
+              hasBodyPadding={true}
+            >
+              <main
+                className="pf-c-wizard__main"
+              >
+                <div
+                  className="pf-c-wizard__main-body"
+                >
+                  <div
+                    className="pf-c-form"
+                  />
+                </div>
+              </main>
+            </WizardBody>
+            <WizardStepButtons
+              FieldProvider={[Function]}
+              buttonLabels={
+                Object {
+                  "back": "Back",
+                  "cancel": "Cancel",
+                  "next": "Next",
+                  "submit": "Submit",
+                }
+              }
+              disableBack={true}
+              formOptions={
+                Object {
+                  "getState": [Function],
+                  "handleSubmit": [Function],
+                  "onCancel": [MockFunction],
+                  "onSubmit": [MockFunction],
+                  "renderForm": [Function],
+                  "submit": [MockFunction],
+                  "valid": true,
+                }
+              }
+              handleNext={[Function]}
+              handlePrev={[Function]}
+              name="foo"
+              stepKey="1"
+            >
+              <footer
+                className="pf-c-wizard__footer "
+              >
+                <Button
+                  onClick={[Function]}
+                  type="button"
+                  variant="primary"
+                >
+                  <button
+                    aria-disabled={null}
+                    aria-label={null}
+                    className="pf-c-button pf-m-primary"
+                    disabled={false}
+                    onClick={[Function]}
+                    tabIndex={null}
+                    type="button"
+                  >
+                    Submit
+                  </button>
+                </Button>
+                <Button
+                  isDisabled={true}
+                  onClick={[Function]}
+                  type="button"
+                  variant="secondary"
+                >
+                  <button
+                    aria-disabled={null}
+                    aria-label={null}
+                    className="pf-c-button pf-m-secondary pf-m-disabled"
+                    disabled={true}
+                    onClick={[Function]}
+                    tabIndex={null}
+                    type="button"
+                  >
+                    Back
+                  </button>
+                </Button>
+                <Button
+                  onClick={[MockFunction]}
+                  type="button"
+                  variant="link"
+                >
+                  <button
+                    aria-disabled={null}
+                    aria-label={null}
+                    className="pf-c-button pf-m-link"
+                    disabled={false}
+                    onClick={[MockFunction]}
+                    tabIndex={null}
+                    type="button"
+                  >
+                    Cancel
+                  </button>
+                </Button>
+              </footer>
+            </WizardStepButtons>
+          </WizardStep>
+        </div>
+      </div>
+    </Modal>
+  </Wizard>
+</WizardFunction>
+`;
+
+exports[`<Wizard /> should render correctly and unmount 2`] = `null`;
+
+exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
+<WizardFunction
+  FieldProvider={[Function]}
+  buttonLabels={Object {}}
+  description="wizard description"
+  fields={
+    Array [
+      Object {
+        "fields": Array [],
+        "name": "foo",
+        "stepKey": "1",
+      },
+    ]
+  }
+  formOptions={
+    Object {
+      "getState": [Function],
+      "onCancel": [MockFunction],
+      "onSubmit": [MockFunction],
+      "renderForm": [Function],
+      "submit": [MockFunction],
+      "valid": true,
+    }
+  }
+  inModal={true}
+  title="Wizard"
+>
+  <Wizard
+    FieldProvider={[Function]}
+    buttonLabels={
+      Object {
+        "back": "Back",
+        "cancel": "Cancel",
+        "next": "Next",
+        "submit": "Submit",
+      }
+    }
+    description="wizard description"
+    fields={
+      Array [
+        Object {
+          "fields": Array [],
+          "name": "foo",
+          "stepKey": "1",
+        },
+      ]
+    }
+    formOptions={
+      Object {
+        "getState": [Function],
+        "onCancel": [MockFunction],
+        "onSubmit": [MockFunction],
+        "renderForm": [Function],
+        "submit": [MockFunction],
+        "valid": true,
+      }
+    }
+    inModal={true}
+    title="Wizard"
+  >
+    <Modal
+      container={
+        <div>
+          <div
+            class="pf-c-backdrop"
+          >
+            <div
+              class="pf-l-bullseye"
             >
               <div
-                className="pf-l-toolbar__group"
+                aria-modal="true"
+                class="pf-c-wizard    "
+                role="dialog"
               >
-                <ToolbarItem
-                  className={null}
+                <div
+                  class="pf-c-wizard__header"
                 >
-                  <div
-                    className="pf-l-toolbar__item"
+                  <button
+                    class="pf-c-button pf-m-plain pf-c-wizard__close"
+                    type="button"
                   >
-                    <Button
-                      onClick={[MockFunction]}
-                      type="button"
-                      variant="secondary"
+                    <svg
+                      aria-hidden="true"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      style="vertical-align: -0.125em;"
+                      viewBox="0 0 352 512"
+                      width="1em"
                     >
-                      <button
-                        aria-disabled={null}
-                        aria-label={null}
-                        className="pf-c-button pf-m-secondary"
-                        disabled={false}
-                        onClick={[MockFunction]}
-                        tabIndex={null}
-                        type="button"
+                      <path
+                        d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                        transform=""
+                      />
+                    </svg>
+                  </button>
+                  <h1
+                    aria-label="Wizard"
+                    class="pf-c-title pf-m-3xl pf-c-wizard__title"
+                  >
+                    Wizard
+                  </h1>
+                  <p
+                    class="pf-c-wizard__description"
+                  >
+                    wizard description
+                  </p>
+                </div>
+                <div
+                  class="pf-c-wizard__outer-wrap"
+                >
+                  <nav
+                    class="pf-c-wizard__nav"
+                  >
+                    <ol
+                      class="pf-c-wizard__nav-list"
+                    >
+                      <li
+                        class="pf-c-wizard__nav-item"
                       >
-                        Cancel
-                      </button>
-                    </Button>
-                  </div>
-                </ToolbarItem>
-                <ToolbarItem
-                  className={null}
+                        <a
+                          aria-current="page"
+                          aria-disabled="false"
+                          class="pf-c-wizard__nav-link pf-m-current"
+                        />
+                      </li>
+                    </ol>
+                  </nav>
+                  <main
+                    class="pf-c-wizard__main"
+                  >
+                    <div
+                      class="pf-c-wizard__main-body"
+                    >
+                      <div
+                        class="pf-c-form"
+                      />
+                    </div>
+                  </main>
+                  <footer
+                    class="pf-c-wizard__footer "
+                  >
+                    <button
+                      class="pf-c-button pf-m-primary"
+                      type="button"
+                    >
+                      Submit
+                    </button>
+                    <button
+                      class="pf-c-button pf-m-secondary pf-m-disabled"
+                      disabled=""
+                      type="button"
+                    >
+                      Back
+                    </button>
+                    <button
+                      class="pf-c-button pf-m-link"
+                      type="button"
+                    >
+                      Cancel
+                    </button>
+                  </footer>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+      inModal={true}
+    >
+      <Portal
+        containerInfo={
+          <div>
+            <div
+              class="pf-c-backdrop"
+            >
+              <div
+                class="pf-l-bullseye"
+              >
+                <div
+                  aria-modal="true"
+                  class="pf-c-wizard    "
+                  role="dialog"
                 >
                   <div
-                    className="pf-l-toolbar__item"
+                    class="pf-c-wizard__header"
                   >
-                    <Button
-                      isDisabled={true}
-                      onClick={[Function]}
+                    <button
+                      class="pf-c-button pf-m-plain pf-c-wizard__close"
                       type="button"
-                      variant="secondary"
                     >
-                      <button
-                        aria-disabled={null}
-                        aria-label={null}
-                        className="pf-c-button pf-m-secondary pf-m-disabled"
-                        disabled={true}
-                        onClick={[Function]}
-                        tabIndex={null}
-                        type="button"
+                      <svg
+                        aria-hidden="true"
+                        fill="currentColor"
+                        height="1em"
+                        role="img"
+                        style="vertical-align: -0.125em;"
+                        viewBox="0 0 352 512"
+                        width="1em"
                       >
-                        Back
-                      </button>
-                    </Button>
+                        <path
+                          d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                          transform=""
+                        />
+                      </svg>
+                    </button>
+                    <h1
+                      aria-label="Wizard"
+                      class="pf-c-title pf-m-3xl pf-c-wizard__title"
+                    >
+                      Wizard
+                    </h1>
+                    <p
+                      class="pf-c-wizard__description"
+                    >
+                      wizard description
+                    </p>
                   </div>
-                </ToolbarItem>
-                <ToolbarItem
-                  className={null}
-                >
                   <div
-                    className="pf-l-toolbar__item"
+                    class="pf-c-wizard__outer-wrap"
                   >
-                    <Button
-                      onClick={[Function]}
-                      type="button"
-                      variant="primary"
+                    <nav
+                      class="pf-c-wizard__nav"
+                    >
+                      <ol
+                        class="pf-c-wizard__nav-list"
+                      >
+                        <li
+                          class="pf-c-wizard__nav-item"
+                        >
+                          <a
+                            aria-current="page"
+                            aria-disabled="false"
+                            class="pf-c-wizard__nav-link pf-m-current"
+                          />
+                        </li>
+                      </ol>
+                    </nav>
+                    <main
+                      class="pf-c-wizard__main"
+                    >
+                      <div
+                        class="pf-c-wizard__main-body"
+                      >
+                        <div
+                          class="pf-c-form"
+                        />
+                      </div>
+                    </main>
+                    <footer
+                      class="pf-c-wizard__footer "
                     >
                       <button
-                        aria-disabled={null}
-                        aria-label={null}
-                        className="pf-c-button pf-m-primary"
-                        disabled={false}
-                        onClick={[Function]}
-                        tabIndex={null}
+                        class="pf-c-button pf-m-primary"
                         type="button"
                       >
                         Submit
                       </button>
-                    </Button>
+                      <button
+                        class="pf-c-button pf-m-secondary pf-m-disabled"
+                        disabled=""
+                        type="button"
+                      >
+                        Back
+                      </button>
+                      <button
+                        class="pf-c-button pf-m-link"
+                        type="button"
+                      >
+                        Cancel
+                      </button>
+                    </footer>
                   </div>
-                </ToolbarItem>
+                </div>
               </div>
-            </ToolbarGroup>
+            </div>
           </div>
-        </Toolbar>
-      </WizardStepButtons>
-    </WizardStep>
+        }
+      >
+        <Backdrop>
+          <div
+            className="pf-c-backdrop"
+          >
+            <Bullseye
+              className=""
+              component="div"
+            >
+              <div
+                className="pf-l-bullseye"
+              >
+                <div
+                  aria-modal="true"
+                  className="pf-c-wizard    "
+                  role="dialog"
+                >
+                  <WizardHeader
+                    description="wizard description"
+                    onClose={[MockFunction]}
+                    title="Wizard"
+                  >
+                    <div
+                      className="pf-c-wizard__header"
+                    >
+                      <Button
+                        className="pf-c-wizard__close"
+                        onClick={[MockFunction]}
+                        variant="plain"
+                      >
+                        <button
+                          aria-disabled={null}
+                          aria-label={null}
+                          className="pf-c-button pf-m-plain pf-c-wizard__close"
+                          disabled={false}
+                          onClick={[MockFunction]}
+                          tabIndex={null}
+                          type="button"
+                        >
+                          <TimesIcon
+                            aria-hidden="true"
+                            color="currentColor"
+                            noVerticalAlign={false}
+                            size="sm"
+                            title={null}
+                          >
+                            <svg
+                              aria-hidden="true"
+                              aria-labelledby={null}
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              style={
+                                Object {
+                                  "verticalAlign": "-0.125em",
+                                }
+                              }
+                              viewBox="0 0 352 512"
+                              width="1em"
+                            >
+                              <path
+                                d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                                transform=""
+                              />
+                            </svg>
+                          </TimesIcon>
+                        </button>
+                      </Button>
+                      <Title
+                        aria-label="Wizard"
+                        className="pf-c-wizard__title"
+                        size="3xl"
+                      >
+                        <h1
+                          aria-label="Wizard"
+                          className="pf-c-title pf-m-3xl pf-c-wizard__title"
+                        >
+                          Wizard
+                        </h1>
+                      </Title>
+                      <p
+                        className="pf-c-wizard__description"
+                      >
+                        wizard description
+                      </p>
+                    </div>
+                  </WizardHeader>
+                  <div
+                    className="pf-c-wizard__outer-wrap"
+                  >
+                    <WizardNav>
+                      <nav
+                        className="pf-c-wizard__nav"
+                      >
+                        <ol
+                          className="pf-c-wizard__nav-list"
+                        >
+                          <WizardNavItem
+                            isCurrent={true}
+                            isDisabled={false}
+                            onNavItemClick={[Function]}
+                            step={0}
+                          >
+                            <li
+                              className="pf-c-wizard__nav-item"
+                            >
+                              <a
+                                aria-current="page"
+                                aria-disabled={false}
+                                className="pf-c-wizard__nav-link pf-m-current"
+                                onClick={[Function]}
+                              />
+                            </li>
+                          </WizardNavItem>
+                        </ol>
+                      </nav>
+                    </WizardNav>
+                    <WizardStep
+                      FieldProvider={[Function]}
+                      buttonLabels={
+                        Object {
+                          "back": "Back",
+                          "cancel": "Cancel",
+                          "next": "Next",
+                          "submit": "Submit",
+                        }
+                      }
+                      disableBack={true}
+                      fields={Array []}
+                      formOptions={
+                        Object {
+                          "getState": [Function],
+                          "handleSubmit": [Function],
+                          "onCancel": [MockFunction],
+                          "onSubmit": [MockFunction],
+                          "renderForm": [Function],
+                          "submit": [MockFunction],
+                          "valid": true,
+                        }
+                      }
+                      handleNext={[Function]}
+                      handlePrev={[Function]}
+                      name="foo"
+                      stepKey="1"
+                    >
+                      <WizardBody
+                        hasBodyPadding={true}
+                      >
+                        <main
+                          className="pf-c-wizard__main"
+                        >
+                          <div
+                            className="pf-c-wizard__main-body"
+                          >
+                            <div
+                              className="pf-c-form"
+                            />
+                          </div>
+                        </main>
+                      </WizardBody>
+                      <WizardStepButtons
+                        FieldProvider={[Function]}
+                        buttonLabels={
+                          Object {
+                            "back": "Back",
+                            "cancel": "Cancel",
+                            "next": "Next",
+                            "submit": "Submit",
+                          }
+                        }
+                        disableBack={true}
+                        formOptions={
+                          Object {
+                            "getState": [Function],
+                            "handleSubmit": [Function],
+                            "onCancel": [MockFunction],
+                            "onSubmit": [MockFunction],
+                            "renderForm": [Function],
+                            "submit": [MockFunction],
+                            "valid": true,
+                          }
+                        }
+                        handleNext={[Function]}
+                        handlePrev={[Function]}
+                        name="foo"
+                        stepKey="1"
+                      >
+                        <footer
+                          className="pf-c-wizard__footer "
+                        >
+                          <Button
+                            onClick={[Function]}
+                            type="button"
+                            variant="primary"
+                          >
+                            <button
+                              aria-disabled={null}
+                              aria-label={null}
+                              className="pf-c-button pf-m-primary"
+                              disabled={false}
+                              onClick={[Function]}
+                              tabIndex={null}
+                              type="button"
+                            >
+                              Submit
+                            </button>
+                          </Button>
+                          <Button
+                            isDisabled={true}
+                            onClick={[Function]}
+                            type="button"
+                            variant="secondary"
+                          >
+                            <button
+                              aria-disabled={null}
+                              aria-label={null}
+                              className="pf-c-button pf-m-secondary pf-m-disabled"
+                              disabled={true}
+                              onClick={[Function]}
+                              tabIndex={null}
+                              type="button"
+                            >
+                              Back
+                            </button>
+                          </Button>
+                          <Button
+                            onClick={[MockFunction]}
+                            type="button"
+                            variant="link"
+                          >
+                            <button
+                              aria-disabled={null}
+                              aria-label={null}
+                              className="pf-c-button pf-m-link"
+                              disabled={false}
+                              onClick={[MockFunction]}
+                              tabIndex={null}
+                              type="button"
+                            >
+                              Cancel
+                            </button>
+                          </Button>
+                        </footer>
+                      </WizardStepButtons>
+                    </WizardStep>
+                  </div>
+                </div>
+              </div>
+            </Bullseye>
+          </div>
+        </Backdrop>
+      </Portal>
+    </Modal>
   </Wizard>
 </WizardFunction>
 `;
+
+exports[`<Wizard /> should render correctly in modal and unmount 2`] = `null`;
 
 exports[`<Wizard /> should render correctly with custom title and description 1`] = `
 <WizardFunction
@@ -310,161 +911,262 @@ exports[`<Wizard /> should render correctly with custom title and description 1`
       </div>
     }
   >
-    <div>
-      Title
-    </div>
-    <div>
-      description
-    </div>
-    <WizardStep
-      FieldProvider={[Function]}
-      buttonLabels={
-        Object {
-          "back": "Back",
-          "cancel": "Cancel",
-          "next": "Next",
-          "submit": "Submit",
-        }
-      }
-      disableBack={true}
-      fields={Array []}
-      formOptions={
-        Object {
-          "getState": [Function],
-          "handleSubmit": [Function],
-          "onCancel": [MockFunction],
-          "onSubmit": [MockFunction],
-          "renderForm": [Function],
-          "submit": [MockFunction],
-          "valid": true,
-        }
-      }
-      handleNext={[Function]}
-      handlePrev={[Function]}
-      name="foo"
-      stepKey="1"
-    >
-      <WizardStepButtons
-        FieldProvider={[Function]}
-        buttonLabels={
-          Object {
-            "back": "Back",
-            "cancel": "Cancel",
-            "next": "Next",
-            "submit": "Submit",
-          }
-        }
-        disableBack={true}
-        formOptions={
-          Object {
-            "getState": [Function],
-            "handleSubmit": [Function],
-            "onCancel": [MockFunction],
-            "onSubmit": [MockFunction],
-            "renderForm": [Function],
-            "submit": [MockFunction],
-            "valid": true,
-          }
-        }
-        handleNext={[Function]}
-        handlePrev={[Function]}
-        name="foo"
-        stepKey="1"
+    <Modal>
+      <div
+        className="pf-c-wizard no-shadow   "
+        role="dialog"
       >
-        <Toolbar
-          className="wizard-button-toolbar "
+        <WizardHeader
+          description={
+            <div>
+              description
+            </div>
+          }
+          onClose={[MockFunction]}
+          title={
+            <div>
+              Title
+            </div>
+          }
         >
           <div
-            className="pf-l-toolbar wizard-button-toolbar "
+            className="pf-c-wizard__header"
           >
-            <ToolbarGroup
-              className={null}
+            <Button
+              className="pf-c-wizard__close"
+              onClick={[MockFunction]}
+              variant="plain"
             >
-              <div
-                className="pf-l-toolbar__group"
+              <button
+                aria-disabled={null}
+                aria-label={null}
+                className="pf-c-button pf-m-plain pf-c-wizard__close"
+                disabled={false}
+                onClick={[MockFunction]}
+                tabIndex={null}
+                type="button"
               >
-                <ToolbarItem
-                  className={null}
+                <TimesIcon
+                  aria-hidden="true"
+                  color="currentColor"
+                  noVerticalAlign={false}
+                  size="sm"
+                  title={null}
                 >
-                  <div
-                    className="pf-l-toolbar__item"
+                  <svg
+                    aria-hidden="true"
+                    aria-labelledby={null}
+                    fill="currentColor"
+                    height="1em"
+                    role="img"
+                    style={
+                      Object {
+                        "verticalAlign": "-0.125em",
+                      }
+                    }
+                    viewBox="0 0 352 512"
+                    width="1em"
                   >
-                    <Button
-                      onClick={[MockFunction]}
-                      type="button"
-                      variant="secondary"
-                    >
-                      <button
-                        aria-disabled={null}
-                        aria-label={null}
-                        className="pf-c-button pf-m-secondary"
-                        disabled={false}
-                        onClick={[MockFunction]}
-                        tabIndex={null}
-                        type="button"
-                      >
-                        Cancel
-                      </button>
-                    </Button>
+                    <path
+                      d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                      transform=""
+                    />
+                  </svg>
+                </TimesIcon>
+              </button>
+            </Button>
+            <Title
+              aria-label={
+                <div>
+                  Title
+                </div>
+              }
+              className="pf-c-wizard__title"
+              size="3xl"
+            >
+              <h1
+                aria-label={
+                  <div>
+                    Title
                   </div>
-                </ToolbarItem>
-                <ToolbarItem
-                  className={null}
-                >
-                  <div
-                    className="pf-l-toolbar__item"
-                  >
-                    <Button
-                      isDisabled={true}
-                      onClick={[Function]}
-                      type="button"
-                      variant="secondary"
-                    >
-                      <button
-                        aria-disabled={null}
-                        aria-label={null}
-                        className="pf-c-button pf-m-secondary pf-m-disabled"
-                        disabled={true}
-                        onClick={[Function]}
-                        tabIndex={null}
-                        type="button"
-                      >
-                        Back
-                      </button>
-                    </Button>
-                  </div>
-                </ToolbarItem>
-                <ToolbarItem
-                  className={null}
-                >
-                  <div
-                    className="pf-l-toolbar__item"
-                  >
-                    <Button
-                      onClick={[Function]}
-                      type="button"
-                      variant="primary"
-                    >
-                      <button
-                        aria-disabled={null}
-                        aria-label={null}
-                        className="pf-c-button pf-m-primary"
-                        disabled={false}
-                        onClick={[Function]}
-                        tabIndex={null}
-                        type="button"
-                      >
-                        Submit
-                      </button>
-                    </Button>
-                  </div>
-                </ToolbarItem>
+                }
+                className="pf-c-title pf-m-3xl pf-c-wizard__title"
+              >
+                <div>
+                  Title
+                </div>
+              </h1>
+            </Title>
+            <p
+              className="pf-c-wizard__description"
+            >
+              <div>
+                description
               </div>
-            </ToolbarGroup>
+            </p>
           </div>
-        </Toolbar>
-      </WizardStepButtons>
-    </WizardStep>
+        </WizardHeader>
+        <div
+          className="pf-c-wizard__outer-wrap"
+        >
+          <WizardNav>
+            <nav
+              className="pf-c-wizard__nav"
+            >
+              <ol
+                className="pf-c-wizard__nav-list"
+              >
+                <WizardNavItem
+                  isCurrent={true}
+                  isDisabled={false}
+                  onNavItemClick={[Function]}
+                  step={0}
+                >
+                  <li
+                    className="pf-c-wizard__nav-item"
+                  >
+                    <a
+                      aria-current="page"
+                      aria-disabled={false}
+                      className="pf-c-wizard__nav-link pf-m-current"
+                      onClick={[Function]}
+                    />
+                  </li>
+                </WizardNavItem>
+              </ol>
+            </nav>
+          </WizardNav>
+          <WizardStep
+            FieldProvider={[Function]}
+            buttonLabels={
+              Object {
+                "back": "Back",
+                "cancel": "Cancel",
+                "next": "Next",
+                "submit": "Submit",
+              }
+            }
+            disableBack={true}
+            fields={Array []}
+            formOptions={
+              Object {
+                "getState": [Function],
+                "handleSubmit": [Function],
+                "onCancel": [MockFunction],
+                "onSubmit": [MockFunction],
+                "renderForm": [Function],
+                "submit": [MockFunction],
+                "valid": true,
+              }
+            }
+            handleNext={[Function]}
+            handlePrev={[Function]}
+            name="foo"
+            stepKey="1"
+          >
+            <WizardBody
+              hasBodyPadding={true}
+            >
+              <main
+                className="pf-c-wizard__main"
+              >
+                <div
+                  className="pf-c-wizard__main-body"
+                >
+                  <div
+                    className="pf-c-form"
+                  />
+                </div>
+              </main>
+            </WizardBody>
+            <WizardStepButtons
+              FieldProvider={[Function]}
+              buttonLabels={
+                Object {
+                  "back": "Back",
+                  "cancel": "Cancel",
+                  "next": "Next",
+                  "submit": "Submit",
+                }
+              }
+              disableBack={true}
+              formOptions={
+                Object {
+                  "getState": [Function],
+                  "handleSubmit": [Function],
+                  "onCancel": [MockFunction],
+                  "onSubmit": [MockFunction],
+                  "renderForm": [Function],
+                  "submit": [MockFunction],
+                  "valid": true,
+                }
+              }
+              handleNext={[Function]}
+              handlePrev={[Function]}
+              name="foo"
+              stepKey="1"
+            >
+              <footer
+                className="pf-c-wizard__footer "
+              >
+                <Button
+                  onClick={[Function]}
+                  type="button"
+                  variant="primary"
+                >
+                  <button
+                    aria-disabled={null}
+                    aria-label={null}
+                    className="pf-c-button pf-m-primary"
+                    disabled={false}
+                    onClick={[Function]}
+                    tabIndex={null}
+                    type="button"
+                  >
+                    Submit
+                  </button>
+                </Button>
+                <Button
+                  isDisabled={true}
+                  onClick={[Function]}
+                  type="button"
+                  variant="secondary"
+                >
+                  <button
+                    aria-disabled={null}
+                    aria-label={null}
+                    className="pf-c-button pf-m-secondary pf-m-disabled"
+                    disabled={true}
+                    onClick={[Function]}
+                    tabIndex={null}
+                    type="button"
+                  >
+                    Back
+                  </button>
+                </Button>
+                <Button
+                  onClick={[MockFunction]}
+                  type="button"
+                  variant="link"
+                >
+                  <button
+                    aria-disabled={null}
+                    aria-label={null}
+                    className="pf-c-button pf-m-link"
+                    disabled={false}
+                    onClick={[MockFunction]}
+                    tabIndex={null}
+                    type="button"
+                  >
+                    Cancel
+                  </button>
+                </Button>
+              </footer>
+            </WizardStepButtons>
+          </WizardStep>
+        </div>
+      </div>
+    </Modal>
   </Wizard>
 </WizardFunction>
 `;

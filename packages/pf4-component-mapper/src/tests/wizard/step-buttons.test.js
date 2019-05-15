@@ -40,7 +40,7 @@ describe('<WizardSTepButtons', () => {
   it('should call next with correct arguments when next step is string', () => {
     const handleNext = jest.fn();
     const wrapper = mount(<WizardStepButtons { ...initialProps } handleNext={ handleNext }  nextStep="next-step" />);
-    wrapper.find('button').at(2).simulate('click');
+    wrapper.find('button').at(0).simulate('click');
     expect(handleNext).toHaveBeenCalledWith('next-step');
   });
 
@@ -58,7 +58,7 @@ describe('<WizardSTepButtons', () => {
             qux: 'quaxx',
           },
         }} />);
-    wrapper.find('button').at(2).simulate('click');
+    wrapper.find('button').at(0).simulate('click');
     expect(handleNext).toHaveBeenCalledWith('bar');
   });
 
@@ -69,14 +69,14 @@ describe('<WizardSTepButtons', () => {
       formOptions={{ ...initialProps.formOptions, handleSubmit }}
       nextStep={ undefined }
     />);
-    wrapper.find('button').at(2).simulate('click');
+    wrapper.find('button').at(0).simulate('click');
     expect(handleSubmit).toHaveBeenCalled();
   });
 
   it('should call cancel function', () => {
     const onCancel = jest.fn();
     const wrapper = mount(<WizardStepButtons { ...initialProps } formOptions={{ ...initialProps.formOptions, onCancel }} />);
-    wrapper.find('button').first().simulate('click');
+    wrapper.find('button').last().simulate('click');
     expect(onCancel).toHaveBeenCalled();
   });
 

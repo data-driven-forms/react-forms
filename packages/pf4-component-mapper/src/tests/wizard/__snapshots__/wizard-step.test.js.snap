@@ -2,23 +2,19 @@
 
 exports[`<WizardStep /> should render correctly 1`] = `
 <Fragment>
-  <Title
-    size="2xl"
+  <WizardBody
+    hasBodyPadding={true}
   >
-    title
-  </Title>
-  <TextContent>
-    <Text
-      component="p"
+    <div
+      className="pf-c-form"
     >
-      description
-    </Text>
-  </TextContent>
-  <div
-    key="foo"
-  >
-    foo
-  </div>
+      <div
+        key="foo"
+      >
+        foo
+      </div>
+    </div>
+  </WizardBody>
   <WizardStepButtons
     FieldProvider={[Function]}
     buttonLabels={
@@ -44,19 +40,19 @@ exports[`<WizardStep /> should render correctly 1`] = `
 
 exports[`<WizardStep /> should render custom description 1`] = `
 <Fragment>
-  <Title
-    size="2xl"
+  <WizardBody
+    hasBodyPadding={true}
   >
-    title
-  </Title>
-  <div>
-    description
-  </div>
-  <div
-    key="foo"
-  >
-    foo
-  </div>
+    <div
+      className="pf-c-form"
+    >
+      <div
+        key="foo"
+      >
+        foo
+      </div>
+    </div>
+  </WizardBody>
   <WizardStepButtons
     FieldProvider={[Function]}
     buttonLabels={
@@ -82,21 +78,19 @@ exports[`<WizardStep /> should render custom description 1`] = `
 
 exports[`<WizardStep /> should render custom title 1`] = `
 <Fragment>
-  <div>
-    title
-  </div>
-  <TextContent>
-    <Text
-      component="p"
-    >
-      description
-    </Text>
-  </TextContent>
-  <div
-    key="foo"
+  <WizardBody
+    hasBodyPadding={true}
   >
-    foo
-  </div>
+    <div
+      className="pf-c-form"
+    >
+      <div
+        key="foo"
+      >
+        foo
+      </div>
+    </div>
+  </WizardBody>
   <WizardStepButtons
     FieldProvider={[Function]}
     buttonLabels={

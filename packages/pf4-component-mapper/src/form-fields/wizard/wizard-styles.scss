@@ -1,10 +1,7 @@
-.wizard-button-toolbar {
+.no-shadow {
+  box-shadow: none;
+}
+
+.pull-right {
   justify-content: flex-end;
-  margin-top: 1em;
-  button {
-    margin: 0 8px;
-    &:last-child {
-      margin-right: 0;
-    }
-  }
 }
