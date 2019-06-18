@@ -52,10 +52,10 @@ const selectComponent = ({
       invalid={ invalid }
       input={ input }
       placeholder={ placeholder }
-      rest={ rest }
       isSearchable={ isSearchable }
       isDisabled={ isDisabled }
       isReadOnly={ isReadOnly }
+      { ...rest }
     />
   </div>,
   [componentTypes.SWITCH]: () =>

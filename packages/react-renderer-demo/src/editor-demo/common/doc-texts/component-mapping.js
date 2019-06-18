@@ -196,7 +196,7 @@ const schema = {
     name: 'address',
     fields: [{
       component: componentTypes.TEXT_FIELD,
-      name: 'city',
+      name: 'address.city',
       label: 'City',
       validate: [...],
       ...
@@ -225,6 +225,18 @@ const CustomSubForm = ({ formOptions, fields, ...rest }) => (
 \`\`\`
 
 FormOptions are passed to every field (default and custom). If you extend it, the child of the sub form will receive your modified formOptions. You can even change te rendering function if you wish.
+
+### Using standalone mapper components
+In some cases you might want to use components from mapper outside of the form renderer or make some additional modifications to them. In PF3 and PF4 mappers you can import them and use them directly. There are two different sets of components you can use: \`components\` and \`rawComponents\`.
+
+\`Components\` are pre wrapped in form groups, require the same props as in schema in addition to \`input\` and \`meta\` objects. These are intended to be used outside of form renderer or to be wrapped with additional logic.
+
+\`RawComponents\` are only the actual form inputs without any additional logic. Most of these component are equal to components provided by PF3 or PF4. That is why we export only those that you wont find in your chosen design system.
+
+\`\`\`JSX
+import { components, rawComponents } from '@data-driven-forms/pf3-component-mapper'
+\`\`\`
+
 `;
 
 export default <React.Fragment>

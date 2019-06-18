@@ -121,6 +121,7 @@ exports[`renderForm function should render array field correctly 1`] = `
                   "blur": [Function],
                   "change": [Function],
                   "clearOnUnmount": false,
+                  "destroyOnUnregister": false,
                   "focus": [Function],
                   "getFieldState": [Function],
                   "getRegisteredFields": [Function],
@@ -178,6 +179,7 @@ exports[`renderForm function should render array field correctly 1`] = `
                     "blur": [Function],
                     "change": [Function],
                     "clearOnUnmount": false,
+                    "destroyOnUnregister": false,
                     "focus": [Function],
                     "getFieldState": [Function],
                     "getRegisteredFields": [Function],
@@ -230,6 +232,7 @@ exports[`renderForm function should render array field correctly 1`] = `
                       "blur": [Function],
                       "change": [Function],
                       "clearOnUnmount": false,
+                      "destroyOnUnregister": false,
                       "focus": [Function],
                       "getFieldState": [Function],
                       "getRegisteredFields": [Function],
@@ -282,6 +285,7 @@ exports[`renderForm function should render array field correctly 1`] = `
                         "blur": [Function],
                         "change": [Function],
                         "clearOnUnmount": false,
+                        "destroyOnUnregister": false,
                         "focus": [Function],
                         "getFieldState": [Function],
                         "getRegisteredFields": [Function],
@@ -321,6 +325,7 @@ exports[`renderForm function should render array field correctly 1`] = `
                         "batch": [Function],
                         "blur": [Function],
                         "change": [Function],
+                        "destroyOnUnregister": false,
                         "focus": [Function],
                         "getFieldState": [Function],
                         "getRegisteredFields": [Function],
@@ -366,6 +371,7 @@ exports[`renderForm function should render array field correctly 1`] = `
                           "blur": [Function],
                           "change": [Function],
                           "clearOnUnmount": false,
+                          "destroyOnUnregister": false,
                           "focus": [Function],
                           "getFieldState": [Function],
                           "getRegisteredFields": [Function],
@@ -445,6 +451,7 @@ exports[`renderForm function should render array field correctly 1`] = `
                             "blur": [Function],
                             "change": [Function],
                             "clearOnUnmount": false,
+                            "destroyOnUnregister": false,
                             "focus": [Function],
                             "getFieldState": [Function],
                             "getRegisteredFields": [Function],
@@ -526,6 +533,7 @@ exports[`renderForm function should render array field correctly 1`] = `
                               "blur": [Function],
                               "change": [Function],
                               "clearOnUnmount": false,
+                              "destroyOnUnregister": false,
                               "focus": [Function],
                               "getFieldState": [Function],
                               "getRegisteredFields": [Function],
@@ -588,18 +596,19 @@ exports[`renderForm function should render array field correctly 1`] = `
                           }
                           validate={Array []}
                         >
-                          <ReactFinalForm(ReactFinalFormFieldArray(4.8.1)(2.0.1))
+                          <ReactFinalForm(ReactFinalFormFieldArray(4.16.1)(2.0.1))
                             key="foo"
                             name="foo"
                             validate={[Function]}
                           >
-                            <ReactFinalFormFieldArray(4.8.1)(2.0.1)
+                            <ReactFinalFormFieldArray(4.16.1)(2.0.1)
                               name="foo"
                               reactFinalForm={
                                 Object {
                                   "batch": [Function],
                                   "blur": [Function],
                                   "change": [Function],
+                                  "destroyOnUnregister": false,
                                   "focus": [Function],
                                   "getFieldState": [Function],
                                   "getRegisteredFields": [Function],
@@ -681,8 +690,8 @@ exports[`renderForm function should render array field correctly 1`] = `
                                   </FormGroup>
                                 </div>
                               </Col>
-                            </ReactFinalFormFieldArray(4.8.1)(2.0.1)>
-                          </ReactFinalForm(ReactFinalFormFieldArray(4.8.1)(2.0.1))>
+                            </ReactFinalFormFieldArray(4.16.1)(2.0.1)>
+                          </ReactFinalForm(ReactFinalFormFieldArray(4.16.1)(2.0.1))>
                         </DynamicArray>
                       </renderArrayField>
                     </Component>
@@ -909,6 +918,7 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
                   "blur": [Function],
                   "change": [Function],
                   "clearOnUnmount": false,
+                  "destroyOnUnregister": false,
                   "focus": [Function],
                   "getFieldState": [Function],
                   "getRegisteredFields": [Function],
@@ -976,6 +986,7 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
                     "blur": [Function],
                     "change": [Function],
                     "clearOnUnmount": false,
+                    "destroyOnUnregister": false,
                     "focus": [Function],
                     "getFieldState": [Function],
                     "getRegisteredFields": [Function],
@@ -1038,6 +1049,7 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
                       "blur": [Function],
                       "change": [Function],
                       "clearOnUnmount": false,
+                      "destroyOnUnregister": false,
                       "focus": [Function],
                       "getFieldState": [Function],
                       "getRegisteredFields": [Function],
@@ -1100,6 +1112,7 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
                         "blur": [Function],
                         "change": [Function],
                         "clearOnUnmount": false,
+                        "destroyOnUnregister": false,
                         "focus": [Function],
                         "getFieldState": [Function],
                         "getRegisteredFields": [Function],
@@ -1139,6 +1152,7 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
                         "batch": [Function],
                         "blur": [Function],
                         "change": [Function],
+                        "destroyOnUnregister": false,
                         "focus": [Function],
                         "getFieldState": [Function],
                         "getRegisteredFields": [Function],
@@ -1194,6 +1208,7 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
                           "blur": [Function],
                           "change": [Function],
                           "clearOnUnmount": false,
+                          "destroyOnUnregister": false,
                           "focus": [Function],
                           "getFieldState": [Function],
                           "getRegisteredFields": [Function],
@@ -1283,6 +1298,7 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
                             "blur": [Function],
                             "change": [Function],
                             "clearOnUnmount": false,
+                            "destroyOnUnregister": false,
                             "focus": [Function],
                             "getFieldState": [Function],
                             "getRegisteredFields": [Function],
@@ -1373,6 +1389,7 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
                               "blur": [Function],
                               "change": [Function],
                               "clearOnUnmount": false,
+                              "destroyOnUnregister": false,
                               "focus": [Function],
                               "getFieldState": [Function],
                               "getRegisteredFields": [Function],
@@ -1468,6 +1485,7 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
                                   "blur": [Function],
                                   "change": [Function],
                                   "clearOnUnmount": false,
+                                  "destroyOnUnregister": false,
                                   "focus": [Function],
                                   "getFieldState": [Function],
                                   "getRegisteredFields": [Function],
@@ -1515,6 +1533,7 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
                                     "blur": [Function],
                                     "change": [Function],
                                     "clearOnUnmount": false,
+                                    "destroyOnUnregister": false,
                                     "focus": [Function],
                                     "getFieldState": [Function],
                                     "getRegisteredFields": [Function],
@@ -1558,6 +1577,7 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
                                       "blur": [Function],
                                       "change": [Function],
                                       "clearOnUnmount": false,
+                                      "destroyOnUnregister": false,
                                       "focus": [Function],
                                       "getFieldState": [Function],
                                       "getRegisteredFields": [Function],
@@ -1601,6 +1621,7 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
                                         "blur": [Function],
                                         "change": [Function],
                                         "clearOnUnmount": false,
+                                        "destroyOnUnregister": false,
                                         "focus": [Function],
                                         "getFieldState": [Function],
                                         "getRegisteredFields": [Function],
@@ -1640,6 +1661,7 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
                                         "batch": [Function],
                                         "blur": [Function],
                                         "change": [Function],
+                                        "destroyOnUnregister": false,
                                         "focus": [Function],
                                         "getFieldState": [Function],
                                         "getRegisteredFields": [Function],
@@ -1676,6 +1698,7 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
                                           "blur": [Function],
                                           "change": [Function],
                                           "clearOnUnmount": false,
+                                          "destroyOnUnregister": false,
                                           "focus": [Function],
                                           "getFieldState": [Function],
                                           "getRegisteredFields": [Function],
@@ -1759,6 +1782,7 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
                                   "blur": [Function],
                                   "change": [Function],
                                   "clearOnUnmount": false,
+                                  "destroyOnUnregister": false,
                                   "focus": [Function],
                                   "getFieldState": [Function],
                                   "getRegisteredFields": [Function],
@@ -1807,6 +1831,7 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
                                     "blur": [Function],
                                     "change": [Function],
                                     "clearOnUnmount": false,
+                                    "destroyOnUnregister": false,
                                     "focus": [Function],
                                     "getFieldState": [Function],
                                     "getRegisteredFields": [Function],
@@ -1850,6 +1875,7 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
                                       "blur": [Function],
                                       "change": [Function],
                                       "clearOnUnmount": false,
+                                      "destroyOnUnregister": false,
                                       "focus": [Function],
                                       "getFieldState": [Function],
                                       "getRegisteredFields": [Function],
@@ -1893,6 +1919,7 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
                                         "blur": [Function],
                                         "change": [Function],
                                         "clearOnUnmount": false,
+                                        "destroyOnUnregister": false,
                                         "focus": [Function],
                                         "getFieldState": [Function],
                                         "getRegisteredFields": [Function],
@@ -1931,6 +1958,7 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
                                         "batch": [Function],
                                         "blur": [Function],
                                         "change": [Function],
+                                        "destroyOnUnregister": false,
                                         "focus": [Function],
                                         "getFieldState": [Function],
                                         "getRegisteredFields": [Function],
@@ -1968,6 +1996,7 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
                                           "blur": [Function],
                                           "change": [Function],
                                           "clearOnUnmount": false,
+                                          "destroyOnUnregister": false,
                                           "focus": [Function],
                                           "getFieldState": [Function],
                                           "getRegisteredFields": [Function],

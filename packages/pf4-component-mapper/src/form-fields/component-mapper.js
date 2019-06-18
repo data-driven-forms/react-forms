@@ -30,3 +30,14 @@ const mapper = {
 };
 
 export default mapper;
+
+export const components = {
+  TextField,
+  TextAreaField,
+  CheckboxField,
+  RadioField,
+  SelectField,
+  DatePickerField,
+  TimePickerField,
+  SwitchField,
+};
