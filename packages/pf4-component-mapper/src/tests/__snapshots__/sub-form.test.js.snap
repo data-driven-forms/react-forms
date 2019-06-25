@@ -20,11 +20,8 @@ exports[`SubForm component should render SubForm with description correctly 1`] 
   >
     cosiTitle
   </Title>
-  <TextContent
-    className=""
-  >
+  <TextContent>
     <Text
-      className=""
       component="small"
       style={
         Object {

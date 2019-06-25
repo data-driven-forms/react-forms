@@ -55,10 +55,8 @@ exports[`FormFields should render Checkbox correctly 1`] = `
       name="Name of the field"
     >
       <FormGroup
-        className=""
         fieldId="someIdKey"
         helperTextInvalid={false}
-        isInline={false}
         isRequired={false}
         isValid={true}
       >
@@ -69,7 +67,7 @@ exports[`FormFields should render Checkbox correctly 1`] = `
             aria-label="Name of the field"
             className=""
             id="someIdKey"
-            isChecked={null}
+            isChecked={false}
             isDisabled={false}
             isValid={true}
             name="Name of the field"
@@ -239,10 +237,7 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
       >
         <div>
           <FormGroup
-            className=""
             fieldId="someIdKey"
-            isInline={false}
-            isRequired={false}
             isValid={false}
           >
             <div
@@ -262,7 +257,7 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
                     aria-label="One"
                     className=""
                     id="someIdKey-1"
-                    isChecked={null}
+                    isChecked={false}
                     isDisabled={false}
                     isValid={true}
                     label="One"
@@ -277,6 +272,7 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
                       <input
                         aria-invalid={false}
                         aria-label="One"
+                        checked={false}
                         className="pf-c-check__input"
                         disabled={false}
                         id="someIdKey-1"
@@ -309,7 +305,7 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
                     aria-label="Two"
                     className=""
                     id="someIdKey-2"
-                    isChecked={null}
+                    isChecked={false}
                     isDisabled={false}
                     isValid={true}
                     label="Two"
@@ -324,6 +320,7 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
                       <input
                         aria-invalid={false}
                         aria-label="Two"
+                        checked={false}
                         className="pf-c-check__input"
                         disabled={false}
                         id="someIdKey-2"
@@ -356,7 +353,7 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
                     aria-label="Three"
                     className=""
                     id="someIdKey-3"
-                    isChecked={null}
+                    isChecked={false}
                     isDisabled={false}
                     isValid={true}
                     label="Three"
@@ -371,6 +368,7 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
                       <input
                         aria-invalid={false}
                         aria-label="Three"
+                        checked={false}
                         className="pf-c-check__input"
                         disabled={false}
                         id="someIdKey-3"
@@ -435,11 +433,8 @@ exports[`FormFields should render DatePicker correctly 1`] = `
     type="date"
   >
     <FormGroup
-      className=""
       fieldId="someIdKey"
       helperTextInvalid={false}
-      isInline={false}
-      isRequired={false}
       isValid={true}
     >
       <div
@@ -454,7 +449,6 @@ exports[`FormFields should render DatePicker correctly 1`] = `
           isRequired={false}
           isValid={true}
           name="Name of the field"
-          onChange={[Function]}
           type="date"
           value=""
         >
@@ -548,11 +542,8 @@ exports[`FormFields should render Radio correctly 1`] = `
     }
   >
     <FormGroup
-      className=""
       fieldId="someIdKey"
       helperTextInvalid={false}
-      isInline={false}
-      isRequired={false}
       isValid={true}
     >
       <div
@@ -572,7 +563,6 @@ exports[`FormFields should render Radio correctly 1`] = `
               aria-label="One"
               className=""
               id="Foo-1"
-              isChecked={null}
               isDisabled={false}
               isValid={true}
               label="One"
@@ -584,7 +574,6 @@ exports[`FormFields should render Radio correctly 1`] = `
               >
                 <input
                   aria-invalid={false}
-                  aria-label={null}
                   className="pf-c-radio__input"
                   disabled={false}
                   id="Foo-1"
@@ -616,7 +605,6 @@ exports[`FormFields should render Radio correctly 1`] = `
               aria-label="Two"
               className=""
               id="Foo-2"
-              isChecked={null}
               isDisabled={false}
               isValid={true}
               label="Two"
@@ -628,7 +616,6 @@ exports[`FormFields should render Radio correctly 1`] = `
               >
                 <input
                   aria-invalid={false}
-                  aria-label={null}
                   className="pf-c-radio__input"
                   disabled={false}
                   id="Foo-2"
@@ -660,7 +647,6 @@ exports[`FormFields should render Radio correctly 1`] = `
               aria-label="Three"
               className=""
               id="Foo-3"
-              isChecked={null}
               isDisabled={false}
               isValid={true}
               label="Three"
@@ -672,7 +658,6 @@ exports[`FormFields should render Radio correctly 1`] = `
               >
                 <input
                   aria-invalid={false}
-                  aria-label={null}
                   className="pf-c-radio__input"
                   disabled={false}
                   id="Foo-3"
@@ -764,11 +749,8 @@ exports[`FormFields should render Select correctly 1`] = `
     }
   >
     <FormGroup
-      className=""
       fieldId="someIdKey"
       helperTextInvalid={false}
-      isInline={false}
-      isRequired={false}
       isValid={true}
     >
       <div
@@ -907,11 +889,8 @@ exports[`FormFields should render Switch correctly 1`] = `
         name="Name of the field"
       >
         <FormGroup
-          className=""
           fieldId="someIdKey"
           helperTextInvalid={false}
-          isInline={false}
-          isRequired={false}
           isValid={true}
           label={false}
         >
@@ -1021,11 +1000,8 @@ exports[`FormFields should render TextArea correctly 1`] = `
     name="Name of the field"
   >
     <FormGroup
-      className=""
       fieldId="someIdKey"
       helperTextInvalid={false}
-      isInline={false}
-      isRequired={false}
       isValid={true}
     >
       <div
@@ -1094,11 +1070,8 @@ exports[`FormFields should render TextField correctly 1`] = `
     name="Name of the field"
   >
     <FormGroup
-      className=""
       fieldId="someIdKey"
       helperTextInvalid={false}
-      isInline={false}
-      isRequired={false}
       isValid={true}
     >
       <div
@@ -1113,7 +1086,6 @@ exports[`FormFields should render TextField correctly 1`] = `
           isRequired={false}
           isValid={true}
           name="Name of the field"
-          onChange={[Function]}
           type="text"
           value=""
         >
@@ -1175,24 +1147,18 @@ exports[`FormFields should render TextField with description correctly 1`] = `
     name="Name of the field"
   >
     <FormGroup
-      className=""
       fieldId="someIdKey"
       helperTextInvalid={false}
-      isInline={false}
-      isRequired={false}
       isValid={true}
     >
       <div
         className="pf-c-form__group"
       >
-        <TextContent
-          className=""
-        >
+        <TextContent>
           <div
             className="pf-c-content"
           >
             <Text
-              className=""
               component="small"
             >
               <small
@@ -1213,7 +1179,6 @@ exports[`FormFields should render TextField with description correctly 1`] = `
           isRequired={false}
           isValid={true}
           name="Name of the field"
-          onChange={[Function]}
           type="text"
           value=""
         >
@@ -1271,11 +1236,8 @@ exports[`FormFields should render TextField without id correctly 1`] = `
     name="Name of the field"
   >
     <FormGroup
-      className=""
       fieldId="Name of the field"
       helperTextInvalid={false}
-      isInline={false}
-      isRequired={false}
       isValid={true}
     >
       <div
@@ -1290,7 +1252,6 @@ exports[`FormFields should render TextField without id correctly 1`] = `
           isRequired={false}
           isValid={true}
           name="Name of the field"
-          onChange={[Function]}
           type="text"
           value=""
         >
@@ -1351,11 +1312,8 @@ exports[`FormFields should render TimePicker correctly 1`] = `
     type="time"
   >
     <FormGroup
-      className=""
       fieldId="someIdKey"
       helperTextInvalid={false}
-      isInline={false}
-      isRequired={false}
       isValid={true}
     >
       <div
@@ -1370,7 +1328,6 @@ exports[`FormFields should render TimePicker correctly 1`] = `
           isRequired={false}
           isValid={true}
           name="Name of the field"
-          onChange={[Function]}
           type="time"
           value=""
         >
@@ -1538,10 +1495,7 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
       >
         <div>
           <FormGroup
-            className=""
             fieldId="someIdKey"
-            isInline={false}
-            isRequired={false}
             isValid={false}
           >
             <div
@@ -1561,7 +1515,7 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
                     aria-label="One"
                     className=""
                     id="someIdKey-1"
-                    isChecked={null}
+                    isChecked={false}
                     isDisabled={false}
                     isValid={true}
                     label="One"
@@ -1576,6 +1530,7 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
                       <input
                         aria-invalid={false}
                         aria-label="One"
+                        checked={false}
                         className="pf-c-check__input"
                         disabled={false}
                         id="someIdKey-1"
@@ -1608,7 +1563,7 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
                     aria-label="Two"
                     className=""
                     id="someIdKey-2"
-                    isChecked={null}
+                    isChecked={false}
                     isDisabled={false}
                     isValid={true}
                     label="Two"
@@ -1623,6 +1578,7 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
                       <input
                         aria-invalid={false}
                         aria-label="Two"
+                        checked={false}
                         className="pf-c-check__input"
                         disabled={false}
                         id="someIdKey-2"
@@ -1655,7 +1611,7 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
                     aria-label="Three"
                     className=""
                     id="someIdKey-3"
-                    isChecked={null}
+                    isChecked={false}
                     isDisabled={false}
                     isValid={true}
                     label="Three"
@@ -1670,6 +1626,7 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
                       <input
                         aria-invalid={false}
                         aria-label="Three"
+                        checked={false}
                         className="pf-c-check__input"
                         disabled={false}
                         id="someIdKey-3"
@@ -1769,11 +1726,8 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
     }
   >
     <FormGroup
-      className=""
       fieldId="someIdKey"
       helperTextInvalid={false}
-      isInline={false}
-      isRequired={false}
       isValid={true}
     >
       <div
@@ -1794,7 +1748,6 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
               aria-label="One"
               className=""
               id="Foo-1"
-              isChecked={null}
               isDisabled={false}
               isValid={true}
               label="One"
@@ -1806,7 +1759,6 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
               >
                 <input
                   aria-invalid={false}
-                  aria-label={null}
                   className="pf-c-radio__input"
                   disabled={false}
                   id="Foo-1"
@@ -1839,7 +1791,6 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
               aria-label="Two"
               className=""
               id="Foo-2"
-              isChecked={null}
               isDisabled={false}
               isValid={true}
               label="Two"
@@ -1851,7 +1802,6 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
               >
                 <input
                   aria-invalid={false}
-                  aria-label={null}
                   className="pf-c-radio__input"
                   disabled={false}
                   id="Foo-2"
@@ -1884,7 +1834,6 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
               aria-label="Three"
               className=""
               id="Foo-3"
-              isChecked={null}
               isDisabled={false}
               isValid={true}
               label="Three"
@@ -1896,7 +1845,6 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
               >
                 <input
                   aria-invalid={false}
-                  aria-label={null}
                   className="pf-c-radio__input"
                   disabled={false}
                   id="Foo-3"
@@ -1990,11 +1938,8 @@ exports[`FormFields should render disabled Select correctly 1`] = `
     }
   >
     <FormGroup
-      className=""
       fieldId="someIdKey"
       helperTextInvalid={false}
-      isInline={false}
-      isRequired={false}
       isValid={true}
     >
       <div
@@ -2136,11 +2081,8 @@ exports[`FormFields should render disabled Switch correctly 1`] = `
         name="Name of the field"
       >
         <FormGroup
-          className=""
           fieldId="someIdKey"
           helperTextInvalid={false}
-          isInline={false}
-          isRequired={false}
           isValid={true}
           label={false}
         >
@@ -2273,11 +2215,8 @@ exports[`FormFields should render disabled Switch correctly 2`] = `
         name="Name of the field"
       >
         <FormGroup
-          className=""
           fieldId="someIdKey"
           helperTextInvalid={false}
-          isInline={false}
-          isRequired={false}
           isValid={true}
           label={false}
         >
@@ -2389,11 +2328,8 @@ exports[`FormFields should render disabled TextArea correctly 1`] = `
     name="Name of the field"
   >
     <FormGroup
-      className=""
       fieldId="someIdKey"
       helperTextInvalid={false}
-      isInline={false}
-      isRequired={false}
       isValid={true}
     >
       <div
@@ -2464,11 +2400,8 @@ exports[`FormFields should render touched TextField id correctly 1`] = `
     name="Name of the field"
   >
     <FormGroup
-      className=""
       fieldId="someIdKey"
       helperTextInvalid={false}
-      isInline={false}
-      isRequired={false}
       isValid={true}
     >
       <div
@@ -2483,7 +2416,6 @@ exports[`FormFields should render touched TextField id correctly 1`] = `
           isRequired={false}
           isValid={true}
           name="Name of the field"
-          onChange={[Function]}
           type="text"
           value=""
         >
