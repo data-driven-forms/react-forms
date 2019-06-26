@@ -4,6 +4,7 @@ import { TextField, TextareaField, SelectField, CheckboxGroup, Radio, SwitchFiel
 import SubForm from './sub-form';
 import Tabs from './tabs';
 import Wizard from './wizzard/wizzard';
+import Select from './select';
 
 const mapper = {
   [componentTypes.TEXT_FIELD]: TextField,
@@ -21,3 +22,20 @@ const mapper = {
 };
 
 export default mapper;
+
+export const components = {
+  TextField,
+  TextareaField,
+  SelectField,
+  CheckboxGroup,
+  SubForm,
+  Radio,
+  Tabs,
+  DatePickerField,
+  SwitchField,
+  Wizard,
+};
+
+export const rawComponents = {
+  Select,
+};

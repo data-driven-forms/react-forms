@@ -80,6 +80,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
       >
         <div>
           <Select
+            id="select-input"
             input={
               Object {
                 "name": "select-input",
@@ -100,6 +101,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
               }
             }
             loadingMessage="Loading..."
+            name="select-input"
             options={
               Array [
                 Object {
@@ -111,12 +113,6 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                   "value": 2,
                 },
               ]
-            }
-            rest={
-              Object {
-                "id": "select-input",
-                "name": "select-input",
-              }
             }
           >
             <StateManager
@@ -134,13 +130,31 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
               id="select-input"
               isClearable={false}
               isSearchable={false}
+              loadOptions={
+                [MockFunction] {
+                  "calls": Array [
+                    Array [],
+                  ],
+                  "results": Array [
+                    Object {
+                      "type": "return",
+                      "value": Promise {},
+                    },
+                  ],
+                }
+              }
               name="select-input"
               noOptionsMessage={[Function]}
               onChange={[Function]}
               options={
                 Array [
                   Object {
-                    "label": "label",
+                    "label": "option 1",
+                    "value": 1,
+                  },
+                  Object {
+                    "label": "option 2",
+                    "value": 2,
                   },
                 ]
               }
@@ -200,6 +214,19 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                 isOptionDisabled={[Function]}
                 isRtl={false}
                 isSearchable={false}
+                loadOptions={
+                  [MockFunction] {
+                    "calls": Array [
+                      Array [],
+                    ],
+                    "results": Array [
+                      Object {
+                        "type": "return",
+                        "value": Promise {},
+                      },
+                    ],
+                  }
+                }
                 loadingMessage={[Function]}
                 maxMenuHeight={300}
                 menuIsOpen={false}
@@ -219,7 +246,12 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                 options={
                   Array [
                     Object {
-                      "label": "label",
+                      "label": "option 1",
+                      "value": 1,
+                    },
+                    Object {
+                      "label": "option 2",
+                      "value": 2,
                     },
                   ]
                 }
@@ -275,7 +307,12 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                   options={
                     Array [
                       Object {
-                        "label": "label",
+                        "label": "option 1",
+                        "value": 1,
+                      },
+                      Object {
+                        "label": "option 2",
+                        "value": 2,
                       },
                     ]
                   }
@@ -307,6 +344,17 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                       "isOptionDisabled": [Function],
                       "isRtl": false,
                       "isSearchable": false,
+                      "loadOptions": [MockFunction] {
+                        "calls": Array [
+                          Array [],
+                        ],
+                        "results": Array [
+                          Object {
+                            "type": "return",
+                            "value": Promise {},
+                          },
+                        ],
+                      },
                       "loadingMessage": [Function],
                       "maxMenuHeight": 300,
                       "menuIsOpen": false,
@@ -325,7 +373,12 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                       "openMenuOnFocus": false,
                       "options": Array [
                         Object {
-                          "label": "label",
+                          "label": "option 1",
+                          "value": 1,
+                        },
+                        Object {
+                          "label": "option 2",
+                          "value": 2,
                         },
                       ],
                       "pageSize": 5,
@@ -414,7 +467,12 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                       options={
                         Array [
                           Object {
-                            "label": "label",
+                            "label": "option 1",
+                            "value": 1,
+                          },
+                          Object {
+                            "label": "option 2",
+                            "value": 2,
                           },
                         ]
                       }
@@ -446,6 +504,17 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                           "isOptionDisabled": [Function],
                           "isRtl": false,
                           "isSearchable": false,
+                          "loadOptions": [MockFunction] {
+                            "calls": Array [
+                              Array [],
+                            ],
+                            "results": Array [
+                              Object {
+                                "type": "return",
+                                "value": Promise {},
+                              },
+                            ],
+                          },
                           "loadingMessage": [Function],
                           "maxMenuHeight": 300,
                           "menuIsOpen": false,
@@ -464,7 +533,12 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                           "openMenuOnFocus": false,
                           "options": Array [
                             Object {
-                              "label": "label",
+                              "label": "option 1",
+                              "value": 1,
+                            },
+                            Object {
+                              "label": "option 2",
+                              "value": 2,
                             },
                           ],
                           "pageSize": 5,
@@ -544,7 +618,12 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                           options={
                             Array [
                               Object {
-                                "label": "label",
+                                "label": "option 1",
+                                "value": 1,
+                              },
+                              Object {
+                                "label": "option 2",
+                                "value": 2,
                               },
                             ]
                           }
@@ -576,6 +655,17 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                               "isOptionDisabled": [Function],
                               "isRtl": false,
                               "isSearchable": false,
+                              "loadOptions": [MockFunction] {
+                                "calls": Array [
+                                  Array [],
+                                ],
+                                "results": Array [
+                                  Object {
+                                    "type": "return",
+                                    "value": Promise {},
+                                  },
+                                ],
+                              },
                               "loadingMessage": [Function],
                               "maxMenuHeight": 300,
                               "menuIsOpen": false,
@@ -594,7 +684,12 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                               "openMenuOnFocus": false,
                               "options": Array [
                                 Object {
-                                  "label": "label",
+                                  "label": "option 1",
+                                  "value": 1,
+                                },
+                                Object {
+                                  "label": "option 2",
+                                  "value": 2,
                                 },
                               ],
                               "pageSize": 5,
@@ -669,7 +764,12 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                             options={
                               Array [
                                 Object {
-                                  "label": "label",
+                                  "label": "option 1",
+                                  "value": 1,
+                                },
+                                Object {
+                                  "label": "option 2",
+                                  "value": 2,
                                 },
                               ]
                             }
@@ -701,6 +801,17 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                                 "isOptionDisabled": [Function],
                                 "isRtl": false,
                                 "isSearchable": false,
+                                "loadOptions": [MockFunction] {
+                                  "calls": Array [
+                                    Array [],
+                                  ],
+                                  "results": Array [
+                                    Object {
+                                      "type": "return",
+                                      "value": Promise {},
+                                    },
+                                  ],
+                                },
                                 "loadingMessage": [Function],
                                 "maxMenuHeight": 300,
                                 "menuIsOpen": false,
@@ -719,7 +830,12 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                                 "openMenuOnFocus": false,
                                 "options": Array [
                                   Object {
-                                    "label": "label",
+                                    "label": "option 1",
+                                    "value": 1,
+                                  },
+                                  Object {
+                                    "label": "option 2",
+                                    "value": 2,
                                   },
                                 ],
                                 "pageSize": 5,
@@ -802,7 +918,12 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                                 options={
                                   Array [
                                     Object {
-                                      "label": "label",
+                                      "label": "option 1",
+                                      "value": 1,
+                                    },
+                                    Object {
+                                      "label": "option 2",
+                                      "value": 2,
                                     },
                                   ]
                                 }
@@ -834,6 +955,17 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                                     "isOptionDisabled": [Function],
                                     "isRtl": false,
                                     "isSearchable": false,
+                                    "loadOptions": [MockFunction] {
+                                      "calls": Array [
+                                        Array [],
+                                      ],
+                                      "results": Array [
+                                        Object {
+                                          "type": "return",
+                                          "value": Promise {},
+                                        },
+                                      ],
+                                    },
                                     "loadingMessage": [Function],
                                     "maxMenuHeight": 300,
                                     "menuIsOpen": false,
@@ -852,7 +984,12 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                                     "openMenuOnFocus": false,
                                     "options": Array [
                                       Object {
-                                        "label": "label",
+                                        "label": "option 1",
+                                        "value": 1,
+                                      },
+                                      Object {
+                                        "label": "option 2",
+                                        "value": 2,
                                       },
                                     ],
                                     "pageSize": 5,
@@ -959,7 +1096,12 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                           options={
                             Array [
                               Object {
-                                "label": "label",
+                                "label": "option 1",
+                                "value": 1,
+                              },
+                              Object {
+                                "label": "option 2",
+                                "value": 2,
                               },
                             ]
                           }
@@ -991,6 +1133,17 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                               "isOptionDisabled": [Function],
                               "isRtl": false,
                               "isSearchable": false,
+                              "loadOptions": [MockFunction] {
+                                "calls": Array [
+                                  Array [],
+                                ],
+                                "results": Array [
+                                  Object {
+                                    "type": "return",
+                                    "value": Promise {},
+                                  },
+                                ],
+                              },
                               "loadingMessage": [Function],
                               "maxMenuHeight": 300,
                               "menuIsOpen": false,
@@ -1009,7 +1162,12 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                               "openMenuOnFocus": false,
                               "options": Array [
                                 Object {
-                                  "label": "label",
+                                  "label": "option 1",
+                                  "value": 1,
+                                },
+                                Object {
+                                  "label": "option 2",
+                                  "value": 2,
                                 },
                               ],
                               "pageSize": 5,
@@ -1088,7 +1246,12 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                               options={
                                 Array [
                                   Object {
-                                    "label": "label",
+                                    "label": "option 1",
+                                    "value": 1,
+                                  },
+                                  Object {
+                                    "label": "option 2",
+                                    "value": 2,
                                   },
                                 ]
                               }
@@ -1120,6 +1283,17 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                                   "isOptionDisabled": [Function],
                                   "isRtl": false,
                                   "isSearchable": false,
+                                  "loadOptions": [MockFunction] {
+                                    "calls": Array [
+                                      Array [],
+                                    ],
+                                    "results": Array [
+                                      Object {
+                                        "type": "return",
+                                        "value": Promise {},
+                                      },
+                                    ],
+                                  },
                                   "loadingMessage": [Function],
                                   "maxMenuHeight": 300,
                                   "menuIsOpen": false,
@@ -1138,7 +1312,12 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                                   "openMenuOnFocus": false,
                                   "options": Array [
                                     Object {
-                                      "label": "label",
+                                      "label": "option 1",
+                                      "value": 1,
+                                    },
+                                    Object {
+                                      "label": "option 2",
+                                      "value": 2,
                                     },
                                   ],
                                   "pageSize": 5,
@@ -1225,7 +1404,12 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                               options={
                                 Array [
                                   Object {
-                                    "label": "label",
+                                    "label": "option 1",
+                                    "value": 1,
+                                  },
+                                  Object {
+                                    "label": "option 2",
+                                    "value": 2,
                                   },
                                 ]
                               }
@@ -1257,6 +1441,17 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                                   "isOptionDisabled": [Function],
                                   "isRtl": false,
                                   "isSearchable": false,
+                                  "loadOptions": [MockFunction] {
+                                    "calls": Array [
+                                      Array [],
+                                    ],
+                                    "results": Array [
+                                      Object {
+                                        "type": "return",
+                                        "value": Promise {},
+                                      },
+                                    ],
+                                  },
                                   "loadingMessage": [Function],
                                   "maxMenuHeight": 300,
                                   "menuIsOpen": false,
@@ -1275,7 +1470,12 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                                   "openMenuOnFocus": false,
                                   "options": Array [
                                     Object {
-                                      "label": "label",
+                                      "label": "option 1",
+                                      "value": 1,
+                                    },
+                                    Object {
+                                      "label": "option 2",
+                                      "value": 2,
                                     },
                                   ],
                                   "pageSize": 5,

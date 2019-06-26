@@ -55,11 +55,11 @@ class Select extends Component {
       invalid,
       input,
       placeholder,
-      rest,
       isSearchable,
       isDisabled,
       isReadOnly,
       loadingMessage,
+      ...rest
     } = this.props;
 
     const { options, isLoading } = this.state;

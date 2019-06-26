@@ -67,14 +67,11 @@ exports[`<Wizard /> should render correctly 1`] = `
         Wizard
       </h1>
     </Title>
-    <TextContent
-      className=""
-    >
+    <TextContent>
       <div
         className="pf-c-content"
       >
         <Text
-          className=""
           component="p"
         >
           <p
@@ -160,15 +157,6 @@ exports[`<Wizard /> should render correctly 1`] = `
                     className="pf-l-toolbar__item"
                   >
                     <Button
-                      aria-label={null}
-                      className=""
-                      component="button"
-                      isActive={false}
-                      isBlock={false}
-                      isDisabled={false}
-                      isFocus={false}
-                      isHover={false}
-                      isInline={false}
                       onClick={[MockFunction]}
                       type="button"
                       variant="secondary"
@@ -194,15 +182,7 @@ exports[`<Wizard /> should render correctly 1`] = `
                     className="pf-l-toolbar__item"
                   >
                     <Button
-                      aria-label={null}
-                      className=""
-                      component="button"
-                      isActive={false}
-                      isBlock={false}
                       isDisabled={true}
-                      isFocus={false}
-                      isHover={false}
-                      isInline={false}
                       onClick={[Function]}
                       type="button"
                       variant="secondary"
@@ -228,15 +208,6 @@ exports[`<Wizard /> should render correctly 1`] = `
                     className="pf-l-toolbar__item"
                   >
                     <Button
-                      aria-label={null}
-                      className=""
-                      component="button"
-                      isActive={false}
-                      isBlock={false}
-                      isDisabled={false}
-                      isFocus={false}
-                      isHover={false}
-                      isInline={false}
                       onClick={[Function]}
                       type="button"
                       variant="primary"
@@ -419,15 +390,6 @@ exports[`<Wizard /> should render correctly with custom title and description 1`
                     className="pf-l-toolbar__item"
                   >
                     <Button
-                      aria-label={null}
-                      className=""
-                      component="button"
-                      isActive={false}
-                      isBlock={false}
-                      isDisabled={false}
-                      isFocus={false}
-                      isHover={false}
-                      isInline={false}
                       onClick={[MockFunction]}
                       type="button"
                       variant="secondary"
@@ -453,15 +415,7 @@ exports[`<Wizard /> should render correctly with custom title and description 1`
                     className="pf-l-toolbar__item"
                   >
                     <Button
-                      aria-label={null}
-                      className=""
-                      component="button"
-                      isActive={false}
-                      isBlock={false}
                       isDisabled={true}
-                      isFocus={false}
-                      isHover={false}
-                      isInline={false}
                       onClick={[Function]}
                       type="button"
                       variant="secondary"
@@ -487,15 +441,6 @@ exports[`<Wizard /> should render correctly with custom title and description 1`
                     className="pf-l-toolbar__item"
                   >
                     <Button
-                      aria-label={null}
-                      className=""
-                      component="button"
-                      isActive={false}
-                      isBlock={false}
-                      isDisabled={false}
-                      isFocus={false}
-                      isHover={false}
-                      isInline={false}
                       onClick={[Function]}
                       type="button"
                       variant="primary"
