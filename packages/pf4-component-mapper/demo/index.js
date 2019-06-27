@@ -6,14 +6,14 @@ import miqSchema from './demo-schemas/miq-schema';
 import { uiArraySchema, arraySchema, schema, uiSchema, conditionalSchema } from './demo-schemas/widget-schema';
 import { formFieldsMapper, layoutMapper } from '../src';
 import { Title, Button, Toolbar, ToolbarGroup } from '@patternfly/react-core';
-import { wizardSchema } from './demo-schemas/wizard-schema';
+import { wizardSchema, wizardSchemaSimple, wizardSchemaSubsteps, wizardSchemaMoreSubsteps } from './demo-schemas/wizard-schema';
 import sandboxSchema from './demo-schemas/sandbox';
 
 const Summary = props => <div>Custom summary component.</div>;
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { schema: wizardSchema, schemaString: 'default', additionalOptions: { showFormControls: false }};
+        this.state = { schema: wizardSchema, schemaString: 'default', additionalOptions: { showFormControls: false, wizard: true, }};
     }
 
     render() {
@@ -22,7 +22,7 @@ class App extends React.Component {
             <Title size="4xl">Pf4 component mapper</Title>
             <Toolbar style={{ marginBottom: 20, marginTop: 20 }}>
                 <ToolbarGroup>
-                    <Button onClick={() => this.setState(state => ({ schema: wizardSchema, schemaString: 'default', additionalOptions: { showFormControls: false } }))}>Wizard</Button>
+                    <Button onClick={() => this.setState(state => ({ schema: wizardSchema, schemaString: 'default', additionalOptions: { showFormControls: false, wizard: true } }))}>Wizard</Button>
                 </ToolbarGroup>
                 <ToolbarGroup>
                     <Button onClick={() => this.setState(state => ({ schema: arraySchema, schemaString: 'mozilla', ui: uiArraySchema, additionalOptions: {}}))}>arraySchema</Button>
@@ -53,6 +53,44 @@ class App extends React.Component {
                 uiSchema={this.state.ui}
                 {...this.state.additionalOptions}
             />
+            {this.state.additionalOptions.wizard && <>
+                <div>Substeps</div>
+                <FormRenderer
+                    onSubmit={console.log}
+                    formFieldsMapper={{
+                        ...formFieldsMapper,
+                        summary: Summary
+                    }}
+                    onCancel={() => console.log('Cancel action')}
+                    layoutMapper={layoutMapper}
+                    schema={wizardSchemaSubsteps}
+                    {...this.state.additionalOptions}
+                    />
+                <div>More substep</div>
+                <FormRenderer
+                    onSubmit={console.log}
+                    formFieldsMapper={{
+                        ...formFieldsMapper,
+                        summary: Summary
+                    }}
+                    onCancel={() => console.log('Cancel action')}
+                    layoutMapper={layoutMapper}
+                    schema={wizardSchemaMoreSubsteps}
+                    {...this.state.additionalOptions}
+                    />
+                <div>Simple wizard</div>
+                <FormRenderer
+                    onSubmit={console.log}
+                    formFieldsMapper={{
+                        ...formFieldsMapper,
+                        summary: Summary
+                    }}
+                    onCancel={() => console.log('Cancel action')}
+                    layoutMapper={layoutMapper}
+                    schema={wizardSchemaSimple}
+                    {...this.state.additionalOptions}
+                    />
+            </>}
         </div>
     </div>)
     };

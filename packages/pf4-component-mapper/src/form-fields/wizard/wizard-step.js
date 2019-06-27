@@ -1,10 +1,5 @@
 import React, { Fragment } from 'react';
-import {
-  TextContent,
-  Text,
-  TextVariants,
-  Title,
-} from '@patternfly/react-core';
+import { WizardBody } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 import WizardStepButtons from './step-buttons';
 
@@ -17,15 +12,11 @@ const WizardStep = ({
 }) => {
   return (
     <Fragment>
-      { typeof title === 'string' ? (
-        <Title size="2xl" >{ title }</Title>
-      ) : title }
-      { typeof description === 'string' ? (
-        <TextContent>
-          <Text component={ TextVariants.p } >{ description }</Text>
-        </TextContent>
-      ) : description }
-      { fields.map(item => formOptions.renderForm([ item ], formOptions)) }
+      <WizardBody hasBodyPadding={ true }>
+        <div className="pf-c-form">
+          { fields.map(item => formOptions.renderForm([ item ], formOptions)) }
+        </div>
+      </WizardBody>
       <WizardStepButtons
         formOptions={ formOptions }
         { ...rest }

@@ -1,89 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<WizardSTepButtons should add custom className to toolbar 1`] = `
-<Toolbar
-  className="wizard-button-toolbar foo-class"
+<footer
+  className="pf-c-wizard__footer foo-class"
 >
-  <ToolbarGroup
-    className={null}
+  <Button
+    onClick={[MockFunction]}
+    type="button"
+    variant="primary"
   >
-    <ToolbarItem
-      className={null}
-    >
-      <Button
-        onClick={[MockFunction]}
-        type="button"
-        variant="secondary"
-      >
-        Cancel
-      </Button>
-    </ToolbarItem>
-    <ToolbarItem
-      className={null}
-    >
-      <Button
-        onClick={[MockFunction]}
-        type="button"
-        variant="secondary"
-      >
-        Back
-      </Button>
-    </ToolbarItem>
-    <ToolbarItem
-      className={null}
-    >
-      <Button
-        onClick={[MockFunction]}
-        type="button"
-        variant="primary"
-      >
-        Submit
-      </Button>
-    </ToolbarItem>
-  </ToolbarGroup>
-</Toolbar>
+    Submit
+  </Button>
+  <Button
+    onClick={[MockFunction]}
+    type="button"
+    variant="secondary"
+  >
+    Back
+  </Button>
+  <Button
+    onClick={[MockFunction]}
+    type="button"
+    variant="link"
+  >
+    Cancel
+  </Button>
+</footer>
 `;
 
 exports[`<WizardSTepButtons should render correctly 1`] = `
-<Toolbar
-  className="wizard-button-toolbar "
+<footer
+  className="pf-c-wizard__footer "
 >
-  <ToolbarGroup
-    className={null}
+  <Button
+    onClick={[MockFunction]}
+    type="button"
+    variant="primary"
   >
-    <ToolbarItem
-      className={null}
-    >
-      <Button
-        onClick={[MockFunction]}
-        type="button"
-        variant="secondary"
-      >
-        Cancel
-      </Button>
-    </ToolbarItem>
-    <ToolbarItem
-      className={null}
-    >
-      <Button
-        onClick={[MockFunction]}
-        type="button"
-        variant="secondary"
-      >
-        Back
-      </Button>
-    </ToolbarItem>
-    <ToolbarItem
-      className={null}
-    >
-      <Button
-        onClick={[MockFunction]}
-        type="button"
-        variant="primary"
-      >
-        Submit
-      </Button>
-    </ToolbarItem>
-  </ToolbarGroup>
-</Toolbar>
+    Submit
+  </Button>
+  <Button
+    onClick={[MockFunction]}
+    type="button"
+    variant="secondary"
+  >
+    Back
+  </Button>
+  <Button
+    onClick={[MockFunction]}
+    type="button"
+    variant="link"
+  >
+    Cancel
+  </Button>
+</footer>
 `;

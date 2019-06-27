@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Toolbar, ToolbarGroup, ToolbarItem, Button } from '@patternfly/react-core';
+import { Button } from '@patternfly/react-core';
 
 const SimpleNext = ({
   next,
@@ -70,30 +70,19 @@ const WizardStepButtons = ({
     submit,
     back,
     next,
-  }}) => (
-  <Toolbar className={ `wizard-button-toolbar ${buttonsClassName ? buttonsClassName : ''}` }>
-    <ToolbarGroup>
-      { formOptions.onCancel && (
-        <ToolbarItem>
-          <Button type="button" variant="secondary" onClick={ formOptions.onCancel }>{ cancel }</Button>
-        </ToolbarItem>
-      ) }
-      <ToolbarItem>
-        <Button type="button" variant="secondary" isDisabled={ disableBack } onClick={ handlePrev }>{ back }</Button>
-      </ToolbarItem>
-      <ToolbarItem>
-        { renderNextButton({
-          ...formOptions,
-          handleNext,
-          nextStep,
-          FieldProvider,
-          nextLabel: next,
-          submitLabel: submit,
-        }) }
-      </ToolbarItem>
-    </ToolbarGroup>
-  </Toolbar>
-);
+  }}) =>
+  <footer className={ `pf-c-wizard__footer ${buttonsClassName ? buttonsClassName : ''}` }>
+    { renderNextButton({
+      ...formOptions,
+      handleNext,
+      nextStep,
+      FieldProvider,
+      nextLabel: next,
+      submitLabel: submit,
+    }) }
+    <Button type="button" variant="secondary" isDisabled={ disableBack } onClick={ handlePrev }>{ back }</Button>
+    <Button type="button" variant="link" onClick={ formOptions.onCancel }>{ cancel }</Button>
+  </footer>;
 
 WizardStepButtons.propTypes = {
   formOptions: PropTypes.shape({
