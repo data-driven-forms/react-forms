@@ -231,11 +231,13 @@ const output = {
                   label: 'Dropdown',
                   title: 'Dropdown',
                   dataType: 'string',
+                  isSearchable: true,
+                  isClearable: true,
                   component: components.SELECT_COMPONENT,
                   options: [
                     {
-                      label: '<None>',
-                      value: null,
+                      label: 'dropdown_list_1 dropdown_list_1 dropdown_list_1 dropdown_list_1 dropdown_list_1 dropdown_list_1 dropdown_list_1 dropdown_list_1 dropdown_list_1 dropdown_list_1 ',
+                      value: 'foo',
                     },
                     {
                       label: 'One',
@@ -282,11 +284,13 @@ const output = {
                   title: 'Dropdown multiselect',
                   dataType: 'string',
                   component: components.SELECT_COMPONENT,
+                  isSearchable: true,
                   multi: true,
+                  simpleValue: false,
                   options: [
                     {
                       label: '<None>',
-                      value: null,
+                      value: undefined,
                     },
                     {
                       label: 'One',
@@ -299,6 +303,26 @@ const output = {
                     {
                       label: 'Two',
                       value: '2',
+                    },
+                    {
+                      label: 'Four',
+                      value: '4',
+                    },
+                    {
+                      label: 'Five',
+                      value: '5',
+                    },
+                    {
+                      label: 'Six',
+                      value: '6',
+                    },
+                    {
+                      label: 'Seven',
+                      value: '7',
+                    },
+                    {
+                      label: 'Eight',
+                      value: '8',
                     },
                   ],
                 },
@@ -326,7 +350,27 @@ const output = {
                       value: '3',
                     },
                   ],
-                },
+                }, {
+                  name: 'dropdown_list_5',
+                  label: 'Creatable multi select',
+                  component: components.SELECT_COMPONENT,
+                  multi: true,
+                  selectVariant: 'createable',
+                  options: [
+                    {
+                      label: 'One',
+                      value: '1',
+                    },
+                    {
+                      label: 'Two',
+                      value: '2',
+                    },
+                    {
+                      label: 'Three',
+                      value: '3',
+                    },
+                  ],
+                }
               ],
               component: components.SUB_FORM,
             },

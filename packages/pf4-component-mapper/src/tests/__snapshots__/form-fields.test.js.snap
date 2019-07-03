@@ -683,54 +683,16 @@ exports[`FormFields should render Radio correctly 1`] = `
 `;
 
 exports[`FormFields should render Select correctly 1`] = `
-<SelectField
-  dataType="someDataType"
-  id="someIdKey"
-  input={
-    Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
-    }
-  }
-  options={
-    Array [
-      Object {
-        "label": "One",
-        "value": "1",
-      },
-      Object {
-        "label": "Two",
-        "value": "2",
-      },
-      Object {
-        "label": "Three",
-        "value": "3",
-      },
-    ]
-  }
+<FormGroup
+  fieldId="someIdKey"
+  helperTextInvalid={false}
+  isValid={true}
 >
-  <FieldInterface
-    componentType="select-field"
-    dataType="someDataType"
+  <DataDrivenSelect
     id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    meta={
-      Object {
-        "error": false,
-        "touched": false,
-      }
-    }
+    isClearable={false}
+    isSearchable={false}
+    isValid={true}
     name="Name of the field"
     options={
       Array [
@@ -1865,56 +1827,17 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
 `;
 
 exports[`FormFields should render disabled Select correctly 1`] = `
-<SelectField
-  dataType="someDataType"
-  id="someIdKey"
-  input={
-    Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  isDisabled={true}
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
-    }
-  }
-  options={
-    Array [
-      Object {
-        "label": "One",
-        "value": "1",
-      },
-      Object {
-        "label": "Two",
-        "value": "2",
-      },
-      Object {
-        "label": "Three",
-        "value": "3",
-      },
-    ]
-  }
+<FormGroup
+  fieldId="someIdKey"
+  helperTextInvalid={false}
+  isValid={true}
 >
-  <FieldInterface
-    componentType="select-field"
-    dataType="someDataType"
+  <DataDrivenSelect
     id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
+    isClearable={false}
     isDisabled={true}
-    meta={
-      Object {
-        "error": false,
-        "touched": false,
-      }
-    }
+    isSearchable={false}
+    isValid={true}
     name="Name of the field"
     options={
       Array [
