@@ -81,6 +81,6 @@ describe('<SelectField />', () => {
     wrapper.find(Select).instance().props.onChange(
       [{ value: 2, label: 'x' }, { value: 1, label: 'a' }],
     );
-    expect(changeSpy).toHaveBeenCalledWith([ 1, 2 ]);
+    expect(changeSpy).toHaveBeenCalledWith([ 2, 1 ]);
   });
 });

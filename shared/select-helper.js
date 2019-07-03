@@ -4,7 +4,7 @@
  * @param {boolean} multi mark multi select variat
  * @param {Any} value current value of input
  */
-export const getSelectSimpleValue = (options, multi, selectedValue = []) => options.filter(({ value }) => multi ? selectedValue.includes(value) : value === selectedValue)
+export const getSelectSimpleValue = (options, multi, selectedValue) => options.filter(({ value }) => multi ? selectedValue.includes(value) : value === selectedValue)
 
 /**
  * Returns sorted simple multi select value

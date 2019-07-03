@@ -66,7 +66,7 @@ const style = {
   singleValue: (provided, { selectProps: { isClearable }}) => ({
     ...provided,
     left: 14,
-    maxWidth: `calc(100% - ${isClearable ? '64px' : '28px'})`,
+    maxWidth: `calc(100% - ${isClearable ? '64px' : '32px'})`,
   }),
   multiValueRemove: provided => ({
     ...provided,

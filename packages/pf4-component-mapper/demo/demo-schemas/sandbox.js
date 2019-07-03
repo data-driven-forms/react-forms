@@ -232,7 +232,7 @@ const output = {
                   title: 'Dropdown',
                   dataType: 'string',
                   isSearchable: true,
-                  isClearable: true,
+                  isClearable: false,
                   component: components.SELECT_COMPONENT,
                   options: [
                     {

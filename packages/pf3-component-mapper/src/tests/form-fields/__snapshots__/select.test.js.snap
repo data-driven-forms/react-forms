@@ -114,6 +114,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                 },
               ]
             }
+            simpleValue={true}
           >
             <StateManager
               className="final-form-select "
