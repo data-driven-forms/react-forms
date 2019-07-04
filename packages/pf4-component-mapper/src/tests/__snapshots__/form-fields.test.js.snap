@@ -710,82 +710,10 @@ exports[`FormFields should render Select correctly 1`] = `
         },
       ]
     }
-  >
-    <FormGroup
-      fieldId="someIdKey"
-      helperTextInvalid={false}
-      isValid={true}
-    >
-      <div
-        className="pf-c-form__group"
-      >
-        <FormSelect
-          className=""
-          id="someIdKey"
-          isDisabled={false}
-          isValid={true}
-          name="Name of the field"
-          onBlur={[Function]}
-          onChange={[Function]}
-          onFocus={[Function]}
-          value=""
-        >
-          <select
-            aria-invalid={false}
-            className="pf-c-form-control"
-            disabled={false}
-            id="someIdKey"
-            name="Name of the field"
-            onBlur={[Function]}
-            onChange={[Function]}
-            onFocus={[Function]}
-            value=""
-          >
-            <FormSelectOption
-              key="1"
-              label="One"
-              value="1"
-            >
-              <option
-                className=""
-                disabled={false}
-                value="1"
-              >
-                One
-              </option>
-            </FormSelectOption>
-            <FormSelectOption
-              key="2"
-              label="Two"
-              value="2"
-            >
-              <option
-                className=""
-                disabled={false}
-                value="2"
-              >
-                Two
-              </option>
-            </FormSelectOption>
-            <FormSelectOption
-              key="3"
-              label="Three"
-              value="3"
-            >
-              <option
-                className=""
-                disabled={false}
-                value="3"
-              >
-                Three
-              </option>
-            </FormSelectOption>
-          </select>
-        </FormSelect>
-      </div>
-    </FormGroup>
-  </FieldInterface>
-</SelectField>
+    placeholder="Choose..."
+    value=""
+  />
+</FormGroup>
 `;
 
 exports[`FormFields should render Switch correctly 1`] = `
@@ -1855,82 +1783,10 @@ exports[`FormFields should render disabled Select correctly 1`] = `
         },
       ]
     }
-  >
-    <FormGroup
-      fieldId="someIdKey"
-      helperTextInvalid={false}
-      isValid={true}
-    >
-      <div
-        className="pf-c-form__group"
-      >
-        <FormSelect
-          className=""
-          id="someIdKey"
-          isDisabled={true}
-          isValid={true}
-          name="Name of the field"
-          onBlur={[Function]}
-          onChange={[Function]}
-          onFocus={[Function]}
-          value=""
-        >
-          <select
-            aria-invalid={false}
-            className="pf-c-form-control"
-            disabled={true}
-            id="someIdKey"
-            name="Name of the field"
-            onBlur={[Function]}
-            onChange={[Function]}
-            onFocus={[Function]}
-            value=""
-          >
-            <FormSelectOption
-              key="1"
-              label="One"
-              value="1"
-            >
-              <option
-                className=""
-                disabled={false}
-                value="1"
-              >
-                One
-              </option>
-            </FormSelectOption>
-            <FormSelectOption
-              key="2"
-              label="Two"
-              value="2"
-            >
-              <option
-                className=""
-                disabled={false}
-                value="2"
-              >
-                Two
-              </option>
-            </FormSelectOption>
-            <FormSelectOption
-              key="3"
-              label="Three"
-              value="3"
-            >
-              <option
-                className=""
-                disabled={false}
-                value="3"
-              >
-                Three
-              </option>
-            </FormSelectOption>
-          </select>
-        </FormSelect>
-      </div>
-    </FormGroup>
-  </FieldInterface>
-</SelectField>
+    placeholder="Choose..."
+    value=""
+  />
+</FormGroup>
 `;
 
 exports[`FormFields should render disabled Switch correctly 1`] = `

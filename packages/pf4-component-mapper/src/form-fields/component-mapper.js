@@ -13,6 +13,7 @@ import {
   SwitchField,
 } from './form-fields';
 import Wizard from './wizard/wizard';
+import { Select } from './select/select';
 
 const mapper = {
   [componentTypes.TEXT_FIELD]: TextField,
@@ -40,4 +41,8 @@ export const components = {
   DatePickerField,
   TimePickerField,
   SwitchField,
+};
+
+export const rawComponents = {
+  Select,
 };

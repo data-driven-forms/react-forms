@@ -128,9 +128,10 @@ const selectProvider = type => ({
   createable: CreatableSelect,
 })[type || 'default'];
 
-export const Select = ({ selectVariant, simpleValue, ...props }) => {
+export const Select = ({ selectVariant, ...props }) => {
   const Select = selectProvider(selectVariant);
   const isSearchable = selectVariant === 'createable' || props.isSearchable;
+  const simpleValue = selectVariant === 'createable' ? false : props.simpleValue;
   return (
     <Select
       styles={ selectStyles }
