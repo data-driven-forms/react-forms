@@ -34,17 +34,17 @@
 }
 
 .pf4-ddforms-multiselect-chipgroup-button {
-  padding: 4px 6px;
-  font-size: 12px;
-  background-color: #ededed;
-  border: 1px solid #ededed;
-  margin: 0;
-  max-height: 26px;
+  padding: 4px 6px !important;
+  font-size: 12px !important;
+  background-color: #ededed !important;
+  border: 1px solid #ededed !important;
+  margin: 0 !important;
+  max-height: 26px !important;
   &:hover{
-    border-color: #151515;
+    border-color: #151515 !important;
   }
   >span {
-    color: #151515;
+    color: #151515 !important;
   }
 }
 
@@ -53,5 +53,5 @@
   padding-left: 8px;
   align-items: center;
   flex-wrap: wrap;
-  width: calc(100% - 32px)
+  width: calc(100% - 48px)
 }

@@ -233,6 +233,7 @@ const output = {
                   dataType: 'string',
                   isSearchable: true,
                   isClearable: false,
+                  multi: true,
                   component: components.SELECT_COMPONENT,
                   options: [
                     {
