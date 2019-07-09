@@ -3,9 +3,7 @@
 exports[`Tabs component should render tabs correctly 1`] = `
 <Tabs
   activeKey={0}
-  aria-label={null}
   className=""
-  id={null}
   isFilled={false}
   isSecondary={false}
   leftScrollAriaLabel="Scroll left"

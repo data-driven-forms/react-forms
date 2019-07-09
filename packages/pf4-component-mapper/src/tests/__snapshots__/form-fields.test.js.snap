@@ -449,6 +449,7 @@ exports[`FormFields should render DatePicker correctly 1`] = `
           isRequired={false}
           isValid={true}
           name="Name of the field"
+          onChange={[Function]}
           type="date"
           value=""
         >
@@ -757,7 +758,6 @@ exports[`FormFields should render Select correctly 1`] = `
         className="pf-c-form__group"
       >
         <FormSelect
-          aria-label={null}
           className=""
           id="someIdKey"
           isDisabled={false}
@@ -770,7 +770,6 @@ exports[`FormFields should render Select correctly 1`] = `
         >
           <select
             aria-invalid={false}
-            aria-label={null}
             className="pf-c-form-control"
             disabled={false}
             id="someIdKey"
@@ -781,8 +780,6 @@ exports[`FormFields should render Select correctly 1`] = `
             value=""
           >
             <FormSelectOption
-              className=""
-              isDisabled={false}
               key="1"
               label="One"
               value="1"
@@ -796,8 +793,6 @@ exports[`FormFields should render Select correctly 1`] = `
               </option>
             </FormSelectOption>
             <FormSelectOption
-              className=""
-              isDisabled={false}
               key="2"
               label="Two"
               value="2"
@@ -811,8 +806,6 @@ exports[`FormFields should render Select correctly 1`] = `
               </option>
             </FormSelectOption>
             <FormSelectOption
-              className=""
-              isDisabled={false}
               key="3"
               label="Three"
               value="3"
@@ -1014,7 +1007,6 @@ exports[`FormFields should render TextArea correctly 1`] = `
           isRequired={false}
           isValid={true}
           name="Name of the field"
-          onChange={[Function]}
           value=""
         >
           <textarea
@@ -1086,6 +1078,7 @@ exports[`FormFields should render TextField correctly 1`] = `
           isRequired={false}
           isValid={true}
           name="Name of the field"
+          onChange={[Function]}
           type="text"
           value=""
         >
@@ -1179,6 +1172,7 @@ exports[`FormFields should render TextField with description correctly 1`] = `
           isRequired={false}
           isValid={true}
           name="Name of the field"
+          onChange={[Function]}
           type="text"
           value=""
         >
@@ -1252,6 +1246,7 @@ exports[`FormFields should render TextField without id correctly 1`] = `
           isRequired={false}
           isValid={true}
           name="Name of the field"
+          onChange={[Function]}
           type="text"
           value=""
         >
@@ -1328,6 +1323,7 @@ exports[`FormFields should render TimePicker correctly 1`] = `
           isRequired={false}
           isValid={true}
           name="Name of the field"
+          onChange={[Function]}
           type="time"
           value=""
         >
@@ -1946,7 +1942,6 @@ exports[`FormFields should render disabled Select correctly 1`] = `
         className="pf-c-form__group"
       >
         <FormSelect
-          aria-label={null}
           className=""
           id="someIdKey"
           isDisabled={true}
@@ -1959,7 +1954,6 @@ exports[`FormFields should render disabled Select correctly 1`] = `
         >
           <select
             aria-invalid={false}
-            aria-label={null}
             className="pf-c-form-control"
             disabled={true}
             id="someIdKey"
@@ -1970,8 +1964,6 @@ exports[`FormFields should render disabled Select correctly 1`] = `
             value=""
           >
             <FormSelectOption
-              className=""
-              isDisabled={false}
               key="1"
               label="One"
               value="1"
@@ -1985,8 +1977,6 @@ exports[`FormFields should render disabled Select correctly 1`] = `
               </option>
             </FormSelectOption>
             <FormSelectOption
-              className=""
-              isDisabled={false}
               key="2"
               label="Two"
               value="2"
@@ -2000,8 +1990,6 @@ exports[`FormFields should render disabled Select correctly 1`] = `
               </option>
             </FormSelectOption>
             <FormSelectOption
-              className=""
-              isDisabled={false}
               key="3"
               label="Three"
               value="3"
@@ -2343,7 +2331,6 @@ exports[`FormFields should render disabled TextArea correctly 1`] = `
           isRequired={false}
           isValid={true}
           name="Name of the field"
-          onChange={[Function]}
           value=""
         >
           <textarea
@@ -2416,6 +2403,7 @@ exports[`FormFields should render touched TextField id correctly 1`] = `
           isRequired={false}
           isValid={true}
           name="Name of the field"
+          onChange={[Function]}
           type="text"
           value=""
         >
