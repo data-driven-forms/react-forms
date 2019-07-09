@@ -10,8 +10,22 @@ const thresholdWarn = func => {
 
 export default validatorType => ({
   [validators.REQUIRED]: required,
-  [validators.MIN_LENGTH]: ({ treshold, threshold, ...rest }) => thresholdWarn(() => length({ minimum: threshold || treshold, ...rest })),
-  [validators.MAX_LENGTH]: ({ treshold, threshold, ...rest }) => thresholdWarn(() => length({ maximum: threshold || treshold, ...rest })),
+  [validators.MIN_LENGTH]: ({ treshold, threshold, ...rest }) => thresholdWarn(() => {
+    let value = threshold;
+    if (treshold) {
+      value = treshold;
+    }
+
+    return length({ minimum: value, ...rest });
+  }),
+  [validators.MAX_LENGTH]: ({ treshold, threshold, ...rest }) => thresholdWarn(() => {
+    let value = threshold;
+    if (treshold) {
+      value = treshold;
+    }
+
+    return length({ maximum: value, ...rest });
+  }),
   [validators.EXACT_LENGTH]: ({ treshold, threshold, ...rest }) => thresholdWarn(() => length({ is: threshold || treshold, ...rest })),
   [validators.MIN_ITEMS_VALIDATOR]: ({ treshold, threshold, ...rest }) =>
     thresholdWarn(() => length({ minimum: threshold || treshold, message: `Must have at least ${threshold || treshold} items.`, ...rest })),
