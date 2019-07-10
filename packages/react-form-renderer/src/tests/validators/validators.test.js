@@ -29,39 +29,45 @@ describe('New validators', () => {
 
   describe('Length validator', () => {
     it('should pass exact lenght of 5 characters validation', () => {
-      expect(validatorMapper(validators.EXACT_LENGTH)({ treshold: 5 })('12345')).toBeUndefined();
+      expect(validatorMapper(validators.EXACT_LENGTH)({ threshold: 5 })('12345')).toBeUndefined();
     });
 
     it('should fail exact lenght of 5 characters validation', () => {
-      expect(validatorMapper(validators.EXACT_LENGTH)({ treshold: 5 })('1234')).toBe('Should be 5 characters long.');
+      expect(validatorMapper(validators.EXACT_LENGTH)({ threshold: 5 })('1234')).toBe('Should be 5 characters long.');
     });
 
     it('should fail exact lenght of 5 characters validation with custom message', () => {
-      expect(validatorMapper(validators.EXACT_LENGTH)({ treshold: 5, message: 'Not 5 long' })('123456')).toBe('Not 5 long');
+      expect(validatorMapper(validators.EXACT_LENGTH)({ threshold: 5, message: 'Not 5 long' })('123456')).toBe('Not 5 long');
     });
 
     it('should pass min length of 3 characters validation', () => {
-      expect(validatorMapper(validators.MIN_LENGTH)({ treshold: 3 })('12345')).toBeUndefined();
+      expect(validatorMapper(validators.MIN_LENGTH)({ threshold: 3 })('12345')).toBeUndefined();
     });
 
     it('should not pass min length of 3 characters validation', () => {
-      expect(validatorMapper(validators.MIN_LENGTH)({ treshold: 3 })('12')).toBe('Must have at least 3 characters.');
+      expect(validatorMapper(validators.MIN_LENGTH)({ threshold: 3 })('12')).toBe('Must have at least 3 characters.');
     });
 
     it('should not pass min length of 3 characters validation with custom message', () => {
-      expect(validatorMapper(validators.MIN_LENGTH)({ treshold: 3, message: 'Too short!' })('12')).toBe('Too short!');
+      expect(validatorMapper(validators.MIN_LENGTH)({ threshold: 3, message: 'Too short!' })('12')).toBe('Too short!');
     });
 
     it('should pass max lenght of 3 characters long validation', () => {
-      expect(validatorMapper(validators.MAX_LENGTH)({ treshold: 3 })('12')).toBeUndefined();
+      expect(validatorMapper(validators.MAX_LENGTH)({ threshold: 3 })('12')).toBeUndefined();
     });
 
     it('should not pass max lenght of 3 characters validation', () => {
-      expect(validatorMapper(validators.MAX_LENGTH)({ treshold: 3 })('1234')).toBe('Can have maximum of 3 characters.');
+      expect(validatorMapper(validators.MAX_LENGTH)({ threshold: 3 })('1234')).toBe('Can have maximum of 3 characters.');
     });
 
     it('should not pass max lenght of 3 characters validation with custom message', () => {
-      expect(validatorMapper(validators.MAX_LENGTH)({ treshold: 3, message: 'Too long!' })('1234')).toBe('Too long!');
+      expect(validatorMapper(validators.MAX_LENGTH)({ threshold: 3, message: 'Too long!' })('1234')).toBe('Too long!');
+    });
+
+    it('should correctly pick threshold when using deprecated value', () => {
+      expect(validatorMapper(validators.MIN_LENGTH)({ treshold: 3, message: 'Too short!' })('1')).toBe('Too short!');
+      expect(validatorMapper(validators.MIN_LENGTH)({ threshold: 3, message: 'Too short!' })('1')).toBe('Too short!');
+      expect(validatorMapper(validators.MIN_LENGTH)({ threshold: 5, treshold: 3, message: 'Too short!' })('12345')).toBeUndefined();
     });
   });
 
@@ -100,7 +106,7 @@ describe('New validators', () => {
       expect(validatorMapper(validators.MIN_NUMBER_VALUE)({ value: 99 })()).toBeUndefined();
     });
 
-    it('should not pass the validation (includeTreshold is false)', () => {
+    it('should not pass the validation (includethreshold is false)', () => {
       expect(validatorMapper(validators.MIN_NUMBER_VALUE)({ value: 99, includeThreshold: false })(99)).toEqual('Value must be greater than 99.');
     });
 
@@ -122,7 +128,7 @@ describe('New validators', () => {
       expect(validatorMapper(validators.MAX_NUMBER_VALUE)({ value: 99 })()).toBeUndefined();
     });
 
-    it('should not pass the validation (includeTreshold is false)', () => {
+    it('should not pass the validation (includethreshold is false)', () => {
       expect(validatorMapper(validators.MAX_NUMBER_VALUE)({ value: 99, includeThreshold: false })(99)).toEqual('Value must be less than 99');
     });
 
@@ -202,7 +208,7 @@ describe('New validators', () => {
 
     it('should fail validations and return globally overriden messages', () => {
       expect(validatorMapper(validators.REQUIRED)()()).toEqual('Foo required');
-      expect(validatorMapper(validators.MIN_LENGTH)({ treshold: 5 })('12')).toEqual('Bar');
+      expect(validatorMapper(validators.MIN_LENGTH)({ threshold: 5 })('12')).toEqual('Bar');
     });
   });
 });
