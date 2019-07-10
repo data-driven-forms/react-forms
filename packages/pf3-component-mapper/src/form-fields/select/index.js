@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactSelect, { components } from 'react-select';
 import customStyles from './select-styles';
+import { selectChange, getSelectSimpleValue } from '../../../../../shared/select-helper';
 import './react-select.scss';
-
-const selectValue = option => option.sort((a, b) => a.label.localeCompare(b.label, 'en', { sensitivity: 'base' })).map(item => item.value);
 
 const ValueContainer = ({ children, ...props }) => {
   if (props.isMulti) {
@@ -59,6 +58,7 @@ class Select extends Component {
       isDisabled,
       isReadOnly,
       loadingMessage,
+      simpleValue,
       ...rest
     } = this.props;
 
@@ -79,7 +79,6 @@ class Select extends Component {
       { ...input }
       options={ options }
       placeholder={ placeholder || 'Please choose' }
-      value={ options.filter(({ value }) => rest.multi ? input.value.includes(value) : value === input.value) }
       isMulti={ rest.multi }
       isSearchable={ !!isSearchable }
       isClearable={ false }
@@ -87,17 +86,18 @@ class Select extends Component {
       closeMenuOnSelect={ !rest.multi }
       noOptionsMessage={ () => 'No option found' }
       isDisabled={ isDisabled || isReadOnly }
-      onChange={ option =>
-        input.onChange(rest.multi ? selectValue(option) : option ? option.value : undefined) } // eslint-disable-line no-nested-ternary
       components={{
         ValueContainer,
       }}
+      onChange={ option => selectChange(input.onChange, option, rest.multi, simpleValue) }
+      value={ simpleValue ? getSelectSimpleValue(options, rest.multi, input.value) : input.value }
       { ...rest }
     />;
   }
 }
 
 Select.propTypes = {
+  simpleValue: PropTypes.bool,
   loadOptions: PropTypes.func,
   options: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string,
@@ -111,6 +111,7 @@ Select.propTypes = {
     PropTypes.bool,
   ]),
   input: PropTypes.shape({
+    onChange: PropTypes.func.isRequired,
     value: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.array,
@@ -131,6 +132,7 @@ Select.defaultProps = {
     value: [],
   },
   loadingMessage: 'Loading...',
+  simpleValue: true,
 };
 
 export default Select;

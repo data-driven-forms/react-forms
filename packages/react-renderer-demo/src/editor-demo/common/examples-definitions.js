@@ -122,6 +122,7 @@ export const baseExamples = [{
     component: componentTypes.SELECT_COMPONENT,
     label: 'Select',
     name: 'select',
+    simpleValue: true,
     options: [
       { label: 'Dogs', value: '1' },
       { label: 'Cats', value: '2' },
@@ -153,6 +154,12 @@ export const baseExamples = [{
   {
     name: 'isSearchable',
     title: 'Searchable',
+  }, {
+    name: 'isClearable',
+    title: 'Clearable',
+  }, {
+    name: 'simpleValue',
+    title: 'Simple value'
   }],
 },
 {

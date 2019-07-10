@@ -114,6 +114,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                 },
               ]
             }
+            simpleValue={true}
           >
             <StateManager
               className="final-form-select "
@@ -178,13 +179,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                   "valueContainer": [Function],
                 }
               }
-              value={
-                Array [
-                  Object {
-                    "label": "label",
-                  },
-                ]
-              }
+              value={Array []}
             >
               <Select
                 backspaceRemovesValue={true}
@@ -279,13 +274,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                 }
                 tabIndex="0"
                 tabSelectsValue={true}
-                value={
-                  Array [
-                    Object {
-                      "label": "label",
-                    },
-                  ]
-                }
+                value={Array []}
               >
                 <SelectContainer
                   className="final-form-select "
@@ -293,7 +282,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                   cx={[Function]}
                   getStyles={[Function]}
                   getValue={[Function]}
-                  hasValue={true}
+                  hasValue={false}
                   innerProps={
                     Object {
                       "id": "select-input",
@@ -403,11 +392,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                       },
                       "tabIndex": "0",
                       "tabSelectsValue": true,
-                      "value": Array [
-                        Object {
-                          "label": "label",
-                        },
-                      ],
+                      "value": Array [],
                     }
                   }
                   setValue={[Function]}
@@ -451,7 +436,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                       cx={[Function]}
                       getStyles={[Function]}
                       getValue={[Function]}
-                      hasValue={true}
+                      hasValue={false}
                       innerProps={
                         Object {
                           "onMouseDown": [Function],
@@ -563,11 +548,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                           },
                           "tabIndex": "0",
                           "tabSelectsValue": true,
-                          "value": Array [
-                            Object {
-                              "label": "label",
-                            },
-                          ],
+                          "value": Array [],
                         }
                       }
                       setValue={[Function]}
@@ -611,7 +592,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                           cx={[Function]}
                           getStyles={[Function]}
                           getValue={[Function]}
-                          hasValue={true}
+                          hasValue={false}
                           isDisabled={false}
                           isMulti={false}
                           isRtl={false}
@@ -714,11 +695,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                               },
                               "tabIndex": "0",
                               "tabSelectsValue": true,
-                              "value": Array [
-                                Object {
-                                  "label": "label",
-                                },
-                              ],
+                              "value": Array [],
                             }
                           }
                           setValue={[Function]}
@@ -757,7 +734,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                             cx={[Function]}
                             getStyles={[Function]}
                             getValue={[Function]}
-                            hasValue={true}
+                            hasValue={false}
                             isDisabled={false}
                             isMulti={false}
                             isRtl={false}
@@ -860,11 +837,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                                 },
                                 "tabIndex": "0",
                                 "tabSelectsValue": true,
-                                "value": Array [
-                                  Object {
-                                    "label": "label",
-                                  },
-                                ],
+                                "value": Array [],
                               }
                             }
                             setValue={[Function]}
@@ -901,20 +874,17 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                             <div
                               className="css-dosfk1"
                             >
-                              <SingleValue
+                              <Placeholder
                                 clearValue={[Function]}
                                 cx={[Function]}
-                                data={
-                                  Object {
-                                    "label": "label",
-                                  }
-                                }
                                 getStyles={[Function]}
                                 getValue={[Function]}
-                                hasValue={true}
+                                hasValue={false}
                                 isDisabled={false}
+                                isFocused={false}
                                 isMulti={false}
                                 isRtl={false}
+                                key="placeholder"
                                 options={
                                   Array [
                                     Object {
@@ -1014,11 +984,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                                     },
                                     "tabIndex": "0",
                                     "tabSelectsValue": true,
-                                    "value": Array [
-                                      Object {
-                                        "label": "label",
-                                      },
-                                    ],
+                                    "value": Array [],
                                   }
                                 }
                                 setValue={[Function]}
@@ -1053,11 +1019,11 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                                 }
                               >
                                 <div
-                                  className="css-upzbt3-singleValue"
+                                  className="css-mi5ixc-placeholder"
                                 >
-                                  label
+                                  Please choose
                                 </div>
-                              </SingleValue>
+                              </Placeholder>
                               <DummyInput
                                 disabled={false}
                                 id="react-select-3-input"
@@ -1089,7 +1055,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                           cx={[Function]}
                           getStyles={[Function]}
                           getValue={[Function]}
-                          hasValue={true}
+                          hasValue={false}
                           isDisabled={false}
                           isMulti={false}
                           isRtl={false}
@@ -1192,11 +1158,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                               },
                               "tabIndex": "0",
                               "tabSelectsValue": true,
-                              "value": Array [
-                                Object {
-                                  "label": "label",
-                                },
-                              ],
+                              "value": Array [],
                             }
                           }
                           setValue={[Function]}
@@ -1238,7 +1200,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                               cx={[Function]}
                               getStyles={[Function]}
                               getValue={[Function]}
-                              hasValue={true}
+                              hasValue={false}
                               isDisabled={false}
                               isFocused={false}
                               isMulti={false}
@@ -1342,11 +1304,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                                   },
                                   "tabIndex": "0",
                                   "tabSelectsValue": true,
-                                  "value": Array [
-                                    Object {
-                                      "label": "label",
-                                    },
-                                  ],
+                                  "value": Array [],
                                 }
                               }
                               setValue={[Function]}
@@ -1389,7 +1347,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                               cx={[Function]}
                               getStyles={[Function]}
                               getValue={[Function]}
-                              hasValue={true}
+                              hasValue={false}
                               innerProps={
                                 Object {
                                   "aria-hidden": "true",
@@ -1500,11 +1458,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                                   },
                                   "tabIndex": "0",
                                   "tabSelectsValue": true,
-                                  "value": Array [
-                                    Object {
-                                      "label": "label",
-                                    },
-                                  ],
+                                  "value": Array [],
                                 }
                               }
                               setValue={[Function]}
@@ -1571,6 +1525,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                     <input
                       name="select-input"
                       type="hidden"
+                      value=""
                     />
                   </div>
                 </SelectContainer>

@@ -1,0 +1,57 @@
+.pf4-ddforms-select-menu-option {
+  display: flex;
+  align-items: center;
+  &.focused {
+    background-color: #ededed;
+  }
+}
+
+.pf4-ddforms-multiselect-chip {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  box-sizing: border-box;
+  line-height: 24px;
+  position: relative;
+  margin-right: 4px;
+  font-size: 12px;
+  max-height: 26px;
+  >.multi-value-remove-button {
+    display: flex;
+  }
+  &::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: "";
+    border: 1px solid #72767b;
+    border-radius: 3px;
+    pointer-events: none;
+  }
+}
+
+.pf4-ddforms-multiselect-chipgroup-button {
+  padding: 4px 6px !important;
+  font-size: 12px !important;
+  background-color: #ededed !important;
+  border: 1px solid #ededed !important;
+  margin: 0 !important;
+  max-height: 26px !important;
+  &:hover{
+    border-color: #151515 !important;
+  }
+  >span {
+    color: #151515 !important;
+  }
+}
+
+.pf4-ddforms-multi-value {
+  display: flex;
+  padding-left: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  width: calc(100% - 48px)
+}

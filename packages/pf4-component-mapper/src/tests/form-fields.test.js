@@ -1,7 +1,16 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import { TextField, TextAreaField, CheckboxField, RadioField, SelectField, TimePickerField, DatePickerField, SwitchField } from '../form-fields/form-fields';
-import { mount } from 'enzyme';
+import {
+  TextField,
+  TextAreaField,
+  CheckboxField,
+  RadioField,
+  SelectField,
+  TimePickerField,
+  DatePickerField,
+  SwitchField,
+} from '../form-fields/form-fields';
+import { mount, shallow } from 'enzyme';
 
 const FieldProvider = ({ render, ...props }) => <div>{ render({ input: { name: 'Foo', onChange: jest.fn() }, meta: { error: false, touched: false }, ...props }) }</div>;
 
@@ -111,16 +120,16 @@ describe('FormFields', () => {
   });
 
   it('should render Select correctly', () => {
-    const wrapper = mount(
+    const wrapper = shallow(
       <SelectField { ...propsWithOptions } />
-    );
+    ).dive();
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render disabled Select correctly', () => {
-    const wrapper = mount(
+    const wrapper = shallow(
       <SelectField { ...propsWithOptions } isDisabled={ true } />
-    );
+    ).dive();
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
