@@ -33,7 +33,7 @@ const App = () => (
           <Typography variant="h6" color="inherit">
             This documentation is still work in progress. Please report any bugs, mistakes, suggestions etc. to the demo GitHub repository.
           </Typography>
-          <Link color="inherit" target="_blank" rel="noopener" href="https://github.com/data-driven-forms/react-renderer-demo">
+          <Link color="inherit" target="_blank" rel="noopener" href="https://github.com/data-driven-forms/react-forms">
             <IconButton color="inherit">
               <SvgIcon>
                 <GhIcon />
