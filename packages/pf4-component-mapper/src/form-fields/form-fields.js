@@ -43,7 +43,14 @@ const selectComponent = ({
     <Select { ...input } { ...rest } options={ options } isDisabled={ isDisabled || isReadOnly } />
   ),
   [componentTypes.CHECKBOX]: () =>
-    <Checkbox { ...input } label={ rest.title || rest.label } aria-label={ rest.name } { ...rest } isDisabled={ isDisabled || isReadOnly }/>,
+    <Checkbox
+      isChecked={ input.checked }
+      { ...input }
+      label={ rest.title || rest.label }
+      aria-label={ rest.name }
+      { ...rest }
+      isDisabled={ isDisabled || isReadOnly }
+    />,
   [componentTypes.RADIO]: () => options.map(option => (
     <FieldProvider
       { ...rest }

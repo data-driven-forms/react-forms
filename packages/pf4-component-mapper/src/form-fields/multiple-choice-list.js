@@ -29,7 +29,7 @@ const MultipleChoiceList = ({ validate, FieldProvider, ...props }) => (
         <FormGroup label={ label } fieldId={ rest.id || rest.key || rest.name } isValid={ showError } >
           { options.map(option =>
             (<FieldProvider
-              formOptions={rest.formOptions}
+              formOptions={ rest.formOptions }
               id={ `${rest.id}-${option.value}` }
               key={ option.value }
               { ...option }
@@ -41,6 +41,7 @@ const MultipleChoiceList = ({ validate, FieldProvider, ...props }) => (
                   <Checkbox
                     label={ rest.label }
                     aria-label={ option['aria-label'] || option.label }
+                    isChecked={ input.checked }
                     { ...input }
                     { ...rest }
                     isDisabled={ isDisabled || isReadOnly }
