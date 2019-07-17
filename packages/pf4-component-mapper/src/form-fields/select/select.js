@@ -7,7 +7,7 @@ import { TimesCircleIcon, CaretDownIcon, CheckIcon } from '@patternfly/react-ico
 
 import selectStyles from './select-styles';
 import './select-styles.scss';
-import { selectChange, getSelectSimpleValue } from '../../../../../shared/select-helper';
+import { selectChange, getSelectSimpleValue } from './select-helper';
 
 const Input = props => <components.Input { ...props } isMulti={ props.selectProps.isMulti } />;
 

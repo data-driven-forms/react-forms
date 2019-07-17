@@ -11,11 +11,13 @@ exports[`renderForm function #condition should render condition field only if th
   <ReactFinalForm
     mutators={
       Object {
+        "concat": [Function],
         "insert": [Function],
         "move": [Function],
         "pop": [Function],
         "push": [Function],
         "remove": [Function],
+        "removeBatch": [Function],
         "shift": [Function],
         "swap": [Function],
         "unshift": [Function],
@@ -61,11 +63,13 @@ exports[`renderForm function #condition should render condition field only if th
                 "initialize": [Function],
                 "isValidationPaused": [Function],
                 "mutators": Object {
+                  "concat": [Function],
                   "insert": [Function],
                   "move": [Function],
                   "pop": [Function],
                   "push": [Function],
                   "remove": [Function],
+                  "removeBatch": [Function],
                   "shift": [Function],
                   "swap": [Function],
                   "unshift": [Function],
@@ -74,6 +78,7 @@ exports[`renderForm function #condition should render condition field only if th
                 "pauseValidation": [Function],
                 "registerField": [Function],
                 "reset": [Function],
+                "resetFieldState": [Function],
                 "resumeValidation": [Function],
                 "setConfig": [Function],
                 "submit": [Function],
@@ -104,11 +109,13 @@ exports[`renderForm function #condition should render condition field only if th
   <ReactFinalForm
     mutators={
       Object {
+        "concat": [Function],
         "insert": [Function],
         "move": [Function],
         "pop": [Function],
         "push": [Function],
         "remove": [Function],
+        "removeBatch": [Function],
         "shift": [Function],
         "swap": [Function],
         "unshift": [Function],
@@ -154,11 +161,13 @@ exports[`renderForm function #condition should render condition field only if th
                 "initialize": [Function],
                 "isValidationPaused": [Function],
                 "mutators": Object {
+                  "concat": [Function],
                   "insert": [Function],
                   "move": [Function],
                   "pop": [Function],
                   "push": [Function],
                   "remove": [Function],
+                  "removeBatch": [Function],
                   "shift": [Function],
                   "swap": [Function],
                   "unshift": [Function],
@@ -167,6 +176,7 @@ exports[`renderForm function #condition should render condition field only if th
                 "pauseValidation": [Function],
                 "registerField": [Function],
                 "reset": [Function],
+                "resetFieldState": [Function],
                 "resumeValidation": [Function],
                 "setConfig": [Function],
                 "submit": [Function],
@@ -231,11 +241,13 @@ exports[`renderForm function #condition should render condition field only if th
   <ReactFinalForm
     mutators={
       Object {
+        "concat": [Function],
         "insert": [Function],
         "move": [Function],
         "pop": [Function],
         "push": [Function],
         "remove": [Function],
+        "removeBatch": [Function],
         "shift": [Function],
         "swap": [Function],
         "unshift": [Function],
@@ -283,11 +295,13 @@ exports[`renderForm function #condition should render condition field only if th
                 "initialize": [Function],
                 "isValidationPaused": [Function],
                 "mutators": Object {
+                  "concat": [Function],
                   "insert": [Function],
                   "move": [Function],
                   "pop": [Function],
                   "push": [Function],
                   "remove": [Function],
+                  "removeBatch": [Function],
                   "shift": [Function],
                   "swap": [Function],
                   "unshift": [Function],
@@ -296,6 +310,7 @@ exports[`renderForm function #condition should render condition field only if th
                 "pauseValidation": [Function],
                 "registerField": [Function],
                 "reset": [Function],
+                "resetFieldState": [Function],
                 "resumeValidation": [Function],
                 "setConfig": [Function],
                 "submit": [Function],
@@ -360,11 +375,13 @@ exports[`renderForm function #condition should render condition field only if th
   <ReactFinalForm
     mutators={
       Object {
+        "concat": [Function],
         "insert": [Function],
         "move": [Function],
         "pop": [Function],
         "push": [Function],
         "remove": [Function],
+        "removeBatch": [Function],
         "shift": [Function],
         "swap": [Function],
         "unshift": [Function],
@@ -412,11 +429,13 @@ exports[`renderForm function #condition should render condition field only if th
                 "initialize": [Function],
                 "isValidationPaused": [Function],
                 "mutators": Object {
+                  "concat": [Function],
                   "insert": [Function],
                   "move": [Function],
                   "pop": [Function],
                   "push": [Function],
                   "remove": [Function],
+                  "removeBatch": [Function],
                   "shift": [Function],
                   "swap": [Function],
                   "unshift": [Function],
@@ -425,6 +444,7 @@ exports[`renderForm function #condition should render condition field only if th
                 "pauseValidation": [Function],
                 "registerField": [Function],
                 "reset": [Function],
+                "resetFieldState": [Function],
                 "resumeValidation": [Function],
                 "setConfig": [Function],
                 "submit": [Function],
@@ -489,11 +509,13 @@ exports[`renderForm function #condition should render condition field only if th
   <ReactFinalForm
     mutators={
       Object {
+        "concat": [Function],
         "insert": [Function],
         "move": [Function],
         "pop": [Function],
         "push": [Function],
         "remove": [Function],
+        "removeBatch": [Function],
         "shift": [Function],
         "swap": [Function],
         "unshift": [Function],
@@ -539,11 +561,13 @@ exports[`renderForm function #condition should render condition field only if th
                 "initialize": [Function],
                 "isValidationPaused": [Function],
                 "mutators": Object {
+                  "concat": [Function],
                   "insert": [Function],
                   "move": [Function],
                   "pop": [Function],
                   "push": [Function],
                   "remove": [Function],
+                  "removeBatch": [Function],
                   "shift": [Function],
                   "swap": [Function],
                   "unshift": [Function],
@@ -552,6 +576,7 @@ exports[`renderForm function #condition should render condition field only if th
                 "pauseValidation": [Function],
                 "registerField": [Function],
                 "reset": [Function],
+                "resetFieldState": [Function],
                 "resumeValidation": [Function],
                 "setConfig": [Function],
                 "submit": [Function],
@@ -616,11 +641,13 @@ exports[`renderForm function #condition should render condition field only if th
   <ReactFinalForm
     mutators={
       Object {
+        "concat": [Function],
         "insert": [Function],
         "move": [Function],
         "pop": [Function],
         "push": [Function],
         "remove": [Function],
+        "removeBatch": [Function],
         "shift": [Function],
         "swap": [Function],
         "unshift": [Function],
@@ -666,11 +693,13 @@ exports[`renderForm function #condition should render condition field only if th
                 "initialize": [Function],
                 "isValidationPaused": [Function],
                 "mutators": Object {
+                  "concat": [Function],
                   "insert": [Function],
                   "move": [Function],
                   "pop": [Function],
                   "push": [Function],
                   "remove": [Function],
+                  "removeBatch": [Function],
                   "shift": [Function],
                   "swap": [Function],
                   "unshift": [Function],
@@ -679,6 +708,7 @@ exports[`renderForm function #condition should render condition field only if th
                 "pauseValidation": [Function],
                 "registerField": [Function],
                 "reset": [Function],
+                "resetFieldState": [Function],
                 "resumeValidation": [Function],
                 "setConfig": [Function],
                 "submit": [Function],
@@ -743,11 +773,13 @@ exports[`renderForm function #condition should render condition field only if th
   <ReactFinalForm
     mutators={
       Object {
+        "concat": [Function],
         "insert": [Function],
         "move": [Function],
         "pop": [Function],
         "push": [Function],
         "remove": [Function],
+        "removeBatch": [Function],
         "shift": [Function],
         "swap": [Function],
         "unshift": [Function],
@@ -793,11 +825,13 @@ exports[`renderForm function #condition should render condition field only if th
                 "initialize": [Function],
                 "isValidationPaused": [Function],
                 "mutators": Object {
+                  "concat": [Function],
                   "insert": [Function],
                   "move": [Function],
                   "pop": [Function],
                   "push": [Function],
                   "remove": [Function],
+                  "removeBatch": [Function],
                   "shift": [Function],
                   "swap": [Function],
                   "unshift": [Function],
@@ -806,6 +840,7 @@ exports[`renderForm function #condition should render condition field only if th
                 "pauseValidation": [Function],
                 "registerField": [Function],
                 "reset": [Function],
+                "resetFieldState": [Function],
                 "resumeValidation": [Function],
                 "setConfig": [Function],
                 "submit": [Function],
@@ -836,11 +871,13 @@ exports[`renderForm function #condition should render condition field only if th
   <ReactFinalForm
     mutators={
       Object {
+        "concat": [Function],
         "insert": [Function],
         "move": [Function],
         "pop": [Function],
         "push": [Function],
         "remove": [Function],
+        "removeBatch": [Function],
         "shift": [Function],
         "swap": [Function],
         "unshift": [Function],
@@ -886,11 +923,13 @@ exports[`renderForm function #condition should render condition field only if th
                 "initialize": [Function],
                 "isValidationPaused": [Function],
                 "mutators": Object {
+                  "concat": [Function],
                   "insert": [Function],
                   "move": [Function],
                   "pop": [Function],
                   "push": [Function],
                   "remove": [Function],
+                  "removeBatch": [Function],
                   "shift": [Function],
                   "swap": [Function],
                   "unshift": [Function],
@@ -899,6 +938,7 @@ exports[`renderForm function #condition should render condition field only if th
                 "pauseValidation": [Function],
                 "registerField": [Function],
                 "reset": [Function],
+                "resetFieldState": [Function],
                 "resumeValidation": [Function],
                 "setConfig": [Function],
                 "submit": [Function],
@@ -963,11 +1003,13 @@ exports[`renderForm function #condition should render condition field only if th
   <ReactFinalForm
     mutators={
       Object {
+        "concat": [Function],
         "insert": [Function],
         "move": [Function],
         "pop": [Function],
         "push": [Function],
         "remove": [Function],
+        "removeBatch": [Function],
         "shift": [Function],
         "swap": [Function],
         "unshift": [Function],
@@ -1013,11 +1055,13 @@ exports[`renderForm function #condition should render condition field only if th
                 "initialize": [Function],
                 "isValidationPaused": [Function],
                 "mutators": Object {
+                  "concat": [Function],
                   "insert": [Function],
                   "move": [Function],
                   "pop": [Function],
                   "push": [Function],
                   "remove": [Function],
+                  "removeBatch": [Function],
                   "shift": [Function],
                   "swap": [Function],
                   "unshift": [Function],
@@ -1026,6 +1070,7 @@ exports[`renderForm function #condition should render condition field only if th
                 "pauseValidation": [Function],
                 "registerField": [Function],
                 "reset": [Function],
+                "resetFieldState": [Function],
                 "resumeValidation": [Function],
                 "setConfig": [Function],
                 "submit": [Function],
@@ -1056,11 +1101,13 @@ exports[`renderForm function #condition should render condition field only if th
   <ReactFinalForm
     mutators={
       Object {
+        "concat": [Function],
         "insert": [Function],
         "move": [Function],
         "pop": [Function],
         "push": [Function],
         "remove": [Function],
+        "removeBatch": [Function],
         "shift": [Function],
         "swap": [Function],
         "unshift": [Function],
@@ -1106,11 +1153,13 @@ exports[`renderForm function #condition should render condition field only if th
                 "initialize": [Function],
                 "isValidationPaused": [Function],
                 "mutators": Object {
+                  "concat": [Function],
                   "insert": [Function],
                   "move": [Function],
                   "pop": [Function],
                   "push": [Function],
                   "remove": [Function],
+                  "removeBatch": [Function],
                   "shift": [Function],
                   "swap": [Function],
                   "unshift": [Function],
@@ -1119,6 +1168,7 @@ exports[`renderForm function #condition should render condition field only if th
                 "pauseValidation": [Function],
                 "registerField": [Function],
                 "reset": [Function],
+                "resetFieldState": [Function],
                 "resumeValidation": [Function],
                 "setConfig": [Function],
                 "submit": [Function],
@@ -1183,11 +1233,13 @@ exports[`renderForm function #condition should render condition field only if th
   <ReactFinalForm
     mutators={
       Object {
+        "concat": [Function],
         "insert": [Function],
         "move": [Function],
         "pop": [Function],
         "push": [Function],
         "remove": [Function],
+        "removeBatch": [Function],
         "shift": [Function],
         "swap": [Function],
         "unshift": [Function],
@@ -1235,11 +1287,13 @@ exports[`renderForm function #condition should render condition field only if th
                 "initialize": [Function],
                 "isValidationPaused": [Function],
                 "mutators": Object {
+                  "concat": [Function],
                   "insert": [Function],
                   "move": [Function],
                   "pop": [Function],
                   "push": [Function],
                   "remove": [Function],
+                  "removeBatch": [Function],
                   "shift": [Function],
                   "swap": [Function],
                   "unshift": [Function],
@@ -1248,6 +1302,7 @@ exports[`renderForm function #condition should render condition field only if th
                 "pauseValidation": [Function],
                 "registerField": [Function],
                 "reset": [Function],
+                "resetFieldState": [Function],
                 "resumeValidation": [Function],
                 "setConfig": [Function],
                 "submit": [Function],
@@ -1312,11 +1367,13 @@ exports[`renderForm function #condition should render condition field only if th
   <ReactFinalForm
     mutators={
       Object {
+        "concat": [Function],
         "insert": [Function],
         "move": [Function],
         "pop": [Function],
         "push": [Function],
         "remove": [Function],
+        "removeBatch": [Function],
         "shift": [Function],
         "swap": [Function],
         "unshift": [Function],
@@ -1364,11 +1421,13 @@ exports[`renderForm function #condition should render condition field only if th
                 "initialize": [Function],
                 "isValidationPaused": [Function],
                 "mutators": Object {
+                  "concat": [Function],
                   "insert": [Function],
                   "move": [Function],
                   "pop": [Function],
                   "push": [Function],
                   "remove": [Function],
+                  "removeBatch": [Function],
                   "shift": [Function],
                   "swap": [Function],
                   "unshift": [Function],
@@ -1377,6 +1436,7 @@ exports[`renderForm function #condition should render condition field only if th
                 "pauseValidation": [Function],
                 "registerField": [Function],
                 "reset": [Function],
+                "resetFieldState": [Function],
                 "resumeValidation": [Function],
                 "setConfig": [Function],
                 "submit": [Function],
@@ -1450,11 +1510,13 @@ exports[`renderForm function should render array field 1`] = `
   <ReactFinalForm
     mutators={
       Object {
+        "concat": [Function],
         "insert": [Function],
         "move": [Function],
         "pop": [Function],
         "push": [Function],
         "remove": [Function],
+        "removeBatch": [Function],
         "shift": [Function],
         "swap": [Function],
         "unshift": [Function],
@@ -1534,11 +1596,13 @@ exports[`renderForm function should render array field 1`] = `
                   "initialize": [Function],
                   "isValidationPaused": [Function],
                   "mutators": Object {
+                    "concat": [Function],
                     "insert": [Function],
                     "move": [Function],
                     "pop": [Function],
                     "push": [Function],
                     "remove": [Function],
+                    "removeBatch": [Function],
                     "shift": [Function],
                     "swap": [Function],
                     "unshift": [Function],
@@ -1547,6 +1611,7 @@ exports[`renderForm function should render array field 1`] = `
                   "pauseValidation": [Function],
                   "registerField": [Function],
                   "reset": [Function],
+                  "resetFieldState": [Function],
                   "resumeValidation": [Function],
                   "setConfig": [Function],
                   "submit": [Function],
@@ -1677,12 +1742,12 @@ exports[`renderForm function should render array field 1`] = `
                     }
                     validate={Array []}
                   >
-                    <ReactFinalForm(ReactFinalFormFieldArray(4.16.1)(2.0.1))
+                    <ReactFinalForm(ReactFinalFormFieldArray(4.18.2)(2.0.1))
                       key="foo"
                       name="foo"
                       validate={[Function]}
                     >
-                      <ReactFinalFormFieldArray(4.16.1)(2.0.1)
+                      <ReactFinalFormFieldArray(4.18.2)(2.0.1)
                         name="foo"
                         reactFinalForm={
                           Object {
@@ -1697,11 +1762,13 @@ exports[`renderForm function should render array field 1`] = `
                             "initialize": [Function],
                             "isValidationPaused": [Function],
                             "mutators": Object {
+                              "concat": [Function],
                               "insert": [Function],
                               "move": [Function],
                               "pop": [Function],
                               "push": [Function],
                               "remove": [Function],
+                              "removeBatch": [Function],
                               "shift": [Function],
                               "swap": [Function],
                               "unshift": [Function],
@@ -1710,6 +1777,7 @@ exports[`renderForm function should render array field 1`] = `
                             "pauseValidation": [Function],
                             "registerField": [Function],
                             "reset": [Function],
+                            "resetFieldState": [Function],
                             "resumeValidation": [Function],
                             "setConfig": [Function],
                             "submit": [Function],
@@ -1749,8 +1817,8 @@ exports[`renderForm function should render array field 1`] = `
                             </Component>
                           </div>
                         </Component>
-                      </ReactFinalFormFieldArray(4.16.1)(2.0.1)>
-                    </ReactFinalForm(ReactFinalFormFieldArray(4.16.1)(2.0.1))>
+                      </ReactFinalFormFieldArray(4.18.2)(2.0.1)>
+                    </ReactFinalForm(ReactFinalFormFieldArray(4.18.2)(2.0.1))>
                   </DynamicArray>
                 </renderArrayField>
               </Component>
@@ -1774,11 +1842,13 @@ exports[`renderForm function should render single field form with custom compone
   <ReactFinalForm
     mutators={
       Object {
+        "concat": [Function],
         "insert": [Function],
         "move": [Function],
         "pop": [Function],
         "push": [Function],
         "remove": [Function],
+        "removeBatch": [Function],
         "shift": [Function],
         "swap": [Function],
         "unshift": [Function],
@@ -1848,11 +1918,13 @@ exports[`renderForm function should render single field form with custom compone
                     "initialize": [Function],
                     "isValidationPaused": [Function],
                     "mutators": Object {
+                      "concat": [Function],
                       "insert": [Function],
                       "move": [Function],
                       "pop": [Function],
                       "push": [Function],
                       "remove": [Function],
+                      "removeBatch": [Function],
                       "shift": [Function],
                       "swap": [Function],
                       "unshift": [Function],
@@ -1861,6 +1933,7 @@ exports[`renderForm function should render single field form with custom compone
                     "pauseValidation": [Function],
                     "registerField": [Function],
                     "reset": [Function],
+                    "resetFieldState": [Function],
                     "resumeValidation": [Function],
                     "setConfig": [Function],
                     "submit": [Function],
@@ -1894,11 +1967,13 @@ exports[`renderForm function should render single field from defined componentTy
   <ReactFinalForm
     mutators={
       Object {
+        "concat": [Function],
         "insert": [Function],
         "move": [Function],
         "pop": [Function],
         "push": [Function],
         "remove": [Function],
+        "removeBatch": [Function],
         "shift": [Function],
         "swap": [Function],
         "unshift": [Function],
@@ -1969,11 +2044,13 @@ exports[`renderForm function should render single field from defined componentTy
                   "initialize": [Function],
                   "isValidationPaused": [Function],
                   "mutators": Object {
+                    "concat": [Function],
                     "insert": [Function],
                     "move": [Function],
                     "pop": [Function],
                     "push": [Function],
                     "remove": [Function],
+                    "removeBatch": [Function],
                     "shift": [Function],
                     "swap": [Function],
                     "unshift": [Function],
@@ -1982,6 +2059,7 @@ exports[`renderForm function should render single field from defined componentTy
                   "pauseValidation": [Function],
                   "registerField": [Function],
                   "reset": [Function],
+                  "resetFieldState": [Function],
                   "resumeValidation": [Function],
                   "setConfig": [Function],
                   "submit": [Function],
@@ -2086,11 +2164,13 @@ exports[`renderForm function should render single field from with custom compone
   <ReactFinalForm
     mutators={
       Object {
+        "concat": [Function],
         "insert": [Function],
         "move": [Function],
         "pop": [Function],
         "push": [Function],
         "remove": [Function],
+        "removeBatch": [Function],
         "shift": [Function],
         "swap": [Function],
         "unshift": [Function],

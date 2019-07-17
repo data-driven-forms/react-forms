@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactSelect, { components } from 'react-select';
 import customStyles from './select-styles';
-import { selectChange, getSelectSimpleValue } from '../../../../../shared/select-helper';
+import { selectChange, getSelectSimpleValue } from './select-helper';
 import './react-select.scss';
 
 const ValueContainer = ({ children, ...props }) => {
