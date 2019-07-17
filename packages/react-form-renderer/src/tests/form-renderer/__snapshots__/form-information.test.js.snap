@@ -41,11 +41,13 @@ exports[`<FormControls /> should render with description 1`] = `
       initialValues={Object {}}
       mutators={
         Object {
+          "concat": [Function],
           "insert": [Function],
           "move": [Function],
           "pop": [Function],
           "push": [Function],
           "remove": [Function],
+          "removeBatch": [Function],
           "shift": [Function],
           "swap": [Function],
           "unshift": [Function],
@@ -166,11 +168,13 @@ exports[`<FormControls /> should render with title 1`] = `
       initialValues={Object {}}
       mutators={
         Object {
+          "concat": [Function],
           "insert": [Function],
           "move": [Function],
           "pop": [Function],
           "push": [Function],
           "remove": [Function],
+          "removeBatch": [Function],
           "shift": [Function],
           "swap": [Function],
           "unshift": [Function],
@@ -292,11 +296,13 @@ exports[`<FormControls /> should render with title and description 1`] = `
       initialValues={Object {}}
       mutators={
         Object {
+          "concat": [Function],
           "insert": [Function],
           "move": [Function],
           "pop": [Function],
           "push": [Function],
           "remove": [Function],
+          "removeBatch": [Function],
           "shift": [Function],
           "swap": [Function],
           "unshift": [Function],
@@ -421,11 +427,13 @@ exports[`<FormControls /> should render without title and description 1`] = `
       initialValues={Object {}}
       mutators={
         Object {
+          "concat": [Function],
           "insert": [Function],
           "move": [Function],
           "pop": [Function],
           "push": [Function],
           "remove": [Function],
+          "removeBatch": [Function],
           "shift": [Function],
           "swap": [Function],
           "unshift": [Function],
