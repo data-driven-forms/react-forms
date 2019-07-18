@@ -7,7 +7,6 @@ import { TimesCircleIcon, CaretDownIcon, CheckIcon } from '@patternfly/react-ico
 
 import selectStyles from './select-styles';
 import './select-styles.scss';
-import { selectChange, getSelectSimpleValue } from './select-helper';
 
 const Input = props => <components.Input { ...props } isMulti={ props.selectProps.isMulti } />;
 
@@ -146,8 +145,12 @@ export const Select = ({ selectVariant, ...props }) => {
         Input,
       }}
       { ...props }
-      onChange={ option => selectChange(props.onChange, option, props.isMulti, simpleValue) }
-      value={ simpleValue ? getSelectSimpleValue(props.options, props.isMulti, props.value) : props.value }
+      onChange={ option => simpleValue
+        ? props.onChange(props.isMulti
+          ? option.map(item => item.value)
+          : option ? option.value : undefined)
+        : props.onChange(option) }
+      value={ simpleValue ? props.options.filter(({ value }) => props.isMulti ? props.value.includes(value) : value === props.value) : props.value }
       isSearchable={ isSearchable }
     />
   );

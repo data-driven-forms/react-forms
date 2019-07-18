@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactSelect, { components } from 'react-select';
 import customStyles from './select-styles';
-import { selectChange, getSelectSimpleValue } from './select-helper';
 import './react-select.scss';
 
 const ValueContainer = ({ children, ...props }) => {
@@ -89,8 +88,12 @@ class Select extends Component {
       components={{
         ValueContainer,
       }}
-      onChange={ option => selectChange(input.onChange, option, rest.multi, simpleValue) }
-      value={ simpleValue ? getSelectSimpleValue(options, rest.multi, input.value) : input.value }
+      onChange={ option => simpleValue
+        ? input.onChange(rest.multi
+          ? option.map(item => item.value)
+          : option ? option.value : undefined)
+        : input.onChange(option) }
+      value={ simpleValue ? options.filter(({ value }) => rest.multi ? input.value.includes(value) : value === input.value) : input.value }
       { ...rest }
     />;
   }
