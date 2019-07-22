@@ -20,7 +20,7 @@ export const navStyles = theme => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing(3),
   },
   listRoot: {
     width: '100%',
@@ -28,6 +28,6 @@ export const navStyles = theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   nested: {
-    paddingLeft: theme.spacing.unit * 4,
+    paddingLeft: theme.spacing(4),
   },
 });

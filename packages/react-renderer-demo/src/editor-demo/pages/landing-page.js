@@ -6,7 +6,6 @@ import DemoForms from './demo';
 const LandingPage = () => (
   <Grid
     container
-    spacing={ 16 }
   >
     <Typography variant="h5">React Form Renderer</Typography>
     <Grid item xs={ 12 }>
