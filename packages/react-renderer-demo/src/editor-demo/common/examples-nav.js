@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React, { useState, forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -15,27 +14,29 @@ import { navStyles } from './nav-styles';
 import { baseExamples } from './examples-definitions';
 import { otherExamples } from './other-pages';
 import { docs } from './documenation-pages';
+import { makeStyles } from '@material-ui/core/styles';
 
-class Navigation extends Component  {
-  state = {
-    expandComponents: false,
-    expandDocumentation: false,
-    expandOthers: false,
-  }
+const useStyles = makeStyles(navStyles);
 
-  hanleExpandComponents = () => this.setState(({ expandComponents }) => ({ expandComponents: !expandComponents }))
+const Navigation = () => {
+  const [ expandComponents, setExpandComponents ] = useState(false);
+  const [ expandDocumentation, setExpandDocumentation ] = useState(false);
+  const [ expandOthers, setExpandOthers ] = useState(false);
+  const classes = useStyles();
 
-  hanleExpandDocumentation = () => this.setState(({ expandDocumentation }) => ({ expandDocumentation: !expandDocumentation }))
+  const hanleExpandComponents = () => setExpandComponents(expandComponents => !expandComponents);
 
-  hanleExpandOthers = () => this.setState(({ expandOthers }) => ({ expandOthers: !expandOthers }))
+  const hanleExpandDocumentation = () => setExpandDocumentation(expandDocumentation => !expandDocumentation);
 
-  renderExamplesItems = (basePath, items, sort = true) => sort ?
+  const hanleExpandOthers = () => setExpandOthers(expandOthers => !expandOthers);
+
+  const renderExamplesItems = (basePath, items, sort = true) => sort ?
     items.sort((a, b) => a.linkText.localeCompare(b.linkText)).map(({ component, linkText }) => (
       <ListItem
         key={ component }
         button
-        className={ this.props.classes.nested }
-        component={ props =>  <RouterLink key={ component } to={ `${basePath}/${component}` } { ...props } /> }
+        className={ classes.nested }
+        component={ forwardRef((props, ref) => <RouterLink key={ component } to={ `${basePath}/${component}` } { ...props } />) }
       >
         <Typography variant="button" gutterBottom style={{ textTransform: 'capitalize', fontWeight: 'initial' }}>
           { linkText }
@@ -46,93 +47,84 @@ class Navigation extends Component  {
       <ListItem
         key={ component }
         button
-        className={ this.props.classes.nested }
-        component={ props =>  <RouterLink key={ component } to={ `${basePath}/${component}` } { ...props } /> }
+        className={ classes.nested }
+        component={ forwardRef((props, ref) => <RouterLink key={ component } to={ `${basePath}/${component}` } { ...props } />) }
       >
         <Typography variant="button" gutterBottom style={{ textTransform: 'capitalize', fontWeight: 'initial' }}>
           { linkText }
         </Typography>
       </ListItem>));
 
-  render(){
-    const { classes } = this.props;
-    const { expandComponents, expandDocumentation, expandOthers } = this.state;
-
-    return (
-      <div className={ classes.root }>
-        <Drawer
-          className={ classes.drawer }
-          variant="permanent"
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-          anchor="left"
+  return (
+    <div className={ classes.root }>
+      <Drawer
+        className={ classes.drawer }
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        anchor="left"
+      >
+        <List
+          component="nav"
+          subheader={ <ListSubheader component="div">Data driven forms</ListSubheader> }
+          className={ classes.listRoot }
         >
-          <List
-            component="nav"
-            subheader={ <ListSubheader component="div">Data driven forms</ListSubheader> }
-            className={ classes.listRoot }
+          <ListItem
+            button
+            component={ forwardRef((props, ref) =>  <RouterLink to="/" { ...props } />) }
           >
-            <ListItem
-              button
-              component={ props =>  <RouterLink to="/" { ...props } /> }
-            >
-              <Typography variant="button" gutterBottom style={{ textTransform: 'capitalize', fontWeight: 'initial' }}>
+            <Typography variant="button" gutterBottom style={{ textTransform: 'capitalize', fontWeight: 'initial' }}>
                 Form demos
-              </Typography>
-            </ListItem>
-            <ListItem
-              button
-              component={ props =>  <RouterLink to="/live-editor" { ...props } /> }
-            >
-              <Typography variant="button" gutterBottom style={{ textTransform: 'capitalize', fontWeight: 'initial' }}>
+            </Typography>
+          </ListItem>
+          <ListItem
+            button
+            component={ forwardRef((props, ref) =>  <RouterLink to="/live-editor" { ...props } />) }
+          >
+            <Typography variant="button" gutterBottom style={{ textTransform: 'capitalize', fontWeight: 'initial' }}>
                 Live Form Editor
-              </Typography>
-            </ListItem>
-            <ListItem button onClick={ this.hanleExpandDocumentation }>
-              <ListItemText primary="React form renderer" />
-              { expandDocumentation ? <ExpandLess /> : <ExpandMore /> }
-            </ListItem>
-            <Collapse in={ expandDocumentation } timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                { this.renderExamplesItems('/renderer', docs, false) }
-              </List>
-            </Collapse>
-            <ListItem button onClick={ this.hanleExpandComponents } className={ classes.listItem }>
-              <ListItemText primary="Component definitions" />
-              { expandComponents ? <ExpandLess /> : <ExpandMore /> }
-            </ListItem>
-            <Collapse in={ expandComponents } timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                { this.renderExamplesItems('/component-example', baseExamples) }
-              </List>
-            </Collapse>
-            <ListItem button onClick={ this.hanleExpandOthers } className={ classes.listItem }>
-              <ListItemText primary="Others" />
-              { expandComponents ? <ExpandLess /> : <ExpandMore /> }
-            </ListItem>
-            <Collapse in={ expandOthers } timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                { this.renderExamplesItems('/others', otherExamples) }
-              </List>
-            </Collapse>
-            <ListItem
-              button
-              component={ props =>  <RouterLink to="/contribution" { ...props } /> }
-            >
-              <Typography variant="button" gutterBottom style={{ textTransform: 'capitalize', fontWeight: 'initial' }}>
+            </Typography>
+          </ListItem>
+          <ListItem button onClick={ hanleExpandDocumentation }>
+            <ListItemText primary="React form renderer" />
+            { expandDocumentation ? <ExpandLess /> : <ExpandMore /> }
+          </ListItem>
+          <Collapse in={ expandDocumentation } timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              { renderExamplesItems('/renderer', docs, false) }
+            </List>
+          </Collapse>
+          <ListItem button onClick={ hanleExpandComponents } className={ classes.listItem }>
+            <ListItemText primary="Component definitions" />
+            { expandComponents ? <ExpandLess /> : <ExpandMore /> }
+          </ListItem>
+          <Collapse in={ expandComponents } timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              { renderExamplesItems('/component-example', baseExamples) }
+            </List>
+          </Collapse>
+          <ListItem button onClick={ hanleExpandOthers } className={ classes.listItem }>
+            <ListItemText primary="Others" />
+            { expandComponents ? <ExpandLess /> : <ExpandMore /> }
+          </ListItem>
+          <Collapse in={ expandOthers } timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              { renderExamplesItems('/others', otherExamples) }
+            </List>
+          </Collapse>
+          <ListItem
+            button
+            component={ forwardRef((props, ref) => <RouterLink to="/contribution" { ...props } />) }
+          >
+            <Typography variant="button" gutterBottom style={{ textTransform: 'capitalize', fontWeight: 'initial' }}>
                 Contribution
-              </Typography>
-            </ListItem>
-          </List>
-        </Drawer>
-      </div>
-    );
-  }
-}
-
-Navigation.propTypes = {
-  classes: PropTypes.object.isRequired,
+            </Typography>
+          </ListItem>
+        </List>
+      </Drawer>
+    </div>
+  );
 };
 
-export default withStyles(navStyles)(Navigation);
+export default Navigation;

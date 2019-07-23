@@ -230,7 +230,7 @@ class ComponentExample extends Component {
     return (
       <Grid
         container
-        spacing={ 16 }
+        spacing={ 3 }
       >
         <Grid item xs={ 12 } >
           <Typography variant="h4" gutterBottom>
@@ -270,7 +270,7 @@ class ComponentExample extends Component {
                 >
                   <CopyToClipboard text={ editedValue } onCopy={ this.handleTooltipOpen }>
                     <Button variant="outlined" color="secondary" style={{ margin: 10 }}>
-        Copy
+                      Copy
                     </Button>
                   </CopyToClipboard>
                 </Tooltip>

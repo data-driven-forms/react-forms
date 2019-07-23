@@ -42,7 +42,7 @@ class DemoForms extends Component {
   handleSchemaChange = (_event, value) => this.setState({ activeSchema: value });
   render() {
     return (
-      <Grid container spacing={ 16 }>
+      <Grid container spacing={ 4 }>
         <Grid item xs={ 2 }>
           <FormControl component="fieldset">
             <FormLabel component="legend">Select form mapper</FormLabel>

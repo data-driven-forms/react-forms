@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles'
 import Grid from '@material-ui/core/Grid';
 import LandingPage from './pages/landing-page';
 import FormRendererPage from './pages/form-renderer-page';
@@ -26,7 +27,7 @@ const theme = createMuiTheme({
 });
 
 const App = () => (
-  <MuiThemeProvider theme={ theme }>
+  <ThemeProvider theme={ theme }>
     <div>
       <AppBar position="fixed" style={{ marginBottom: 64, zIndex: 2000 }}>
         <Toolbar>
@@ -48,7 +49,7 @@ const App = () => (
         <Navigation />
       </div>
       <div className="grow-1" style={{ margin: 16 }}>
-        <Grid container spacing={ 16 }>
+        <Grid container spacing={ 0 }>
           <Grid item xs={ 12 }>
             <Switch>
               <Route exact path="/" component={ LandingPage } />
@@ -62,7 +63,7 @@ const App = () => (
         </Grid>
       </div>
     </div>
-  </MuiThemeProvider>
+  </ThemeProvider>
 );
 
 export default App;

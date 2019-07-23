@@ -2,8 +2,14 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const resolve = require('path').resolve;
 const merge = require('webpack-merge');
+const path = require('path');
 
 const commonConfig = {
+  resolve: {
+    alias: {
+      'docs/components': path.resolve(__dirname, './../src/editor-demo/docs-components'),
+    },
+  },
   module: {
     rules: [{
       test: /\.(js|jsx)$/,
