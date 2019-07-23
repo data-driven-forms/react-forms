@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Grid from '@material-ui/core/Grid';
 
 const renderTabHeader = items => items.map(({ title, key }) => <Tab key={ key } label={ title } />);
 const renderTabContet = ({ key, fields }, formOptions) => <Fragment key={ key }>{ formOptions.renderForm(fields, formOptions) }</Fragment>;
