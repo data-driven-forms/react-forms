@@ -390,10 +390,13 @@ const initialize = (schema, uiSchema = {}) => {
     inputSchema = orderSchema(schema, uiSchema['ui:order']);
   }
 
-  return {
+  const cosi = {
     schema: convertSchema(inputSchema, uiSchema),
     defaultValues,
   };
+
+  console.log(cosi);
+  return cosi;
 };
 
 export default initialize;

@@ -380,6 +380,33 @@ export const arraySchema = {
   },
 };
 
+export const array1Schema = {
+  definitions: {
+    Thing: {
+      type: 'string',
+      properties: {
+        name: {
+          type: 'string',
+          default: 'Default name',
+        },
+      },
+    },
+  },
+  type: 'object',
+  properties: {
+    minItemsList: {
+      type: 'array',
+      title: 'A list with a minimal number of items',
+      minItems: 3,
+      items: {
+        title: 'A string',
+        type: 'string',
+        default: 'lorem ipsum',
+      },
+    },
+  },
+};
+
 export const uiArraySchema = {
   listOfStrings: {
     items: {

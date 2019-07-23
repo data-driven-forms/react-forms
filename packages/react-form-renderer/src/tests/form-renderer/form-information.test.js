@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import FormRenderer from '../../form-renderer';
 import { layoutComponents } from '../../constants';
-import RendererContext, { configureContext } from '../../form-renderer/renderer-context';
+import RendererContext from '../../form-renderer/renderer-context';
 
 describe('<FormControls />', () => {
   let initialProps;
@@ -30,7 +30,7 @@ describe('<FormControls />', () => {
 
     ContextWrapper = ({ children, ...props }) => (
       <RendererContext.Provider
-        value={ configureContext({ layoutMapper, ...props }) }
+        value={{ layoutMapper, ...props }}
       >
         { children }
       </RendererContext.Provider>

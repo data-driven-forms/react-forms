@@ -4,7 +4,7 @@ import toJson from 'enzyme-to-json';
 import { Form, FormSpy } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import renderForm from '../../form-renderer/render-form';
-import RendererContext, { configureContext } from '../../form-renderer/renderer-context';
+import RendererContext from '../../form-renderer/renderer-context';
 import { components, validators, layoutComponents } from '../../constants';
 import FormRenderer from '../../form-renderer';
 
@@ -12,13 +12,13 @@ describe('renderForm function', () => {
   let layoutMapper;
 
   const ContextWrapper = ({ children, ...props }) => (
-    <RendererContext.Provider value={ configureContext({
+    <RendererContext.Provider value={{
       ...props,
       formOptions: {
         renderForm,
         ...props.formOptions,
       },
-    }) }>
+    }}>
       <Form onSubmit={ jest.fn() } mutators={{ ...arrayMutators }}>
         { () =>  children }
       </Form>

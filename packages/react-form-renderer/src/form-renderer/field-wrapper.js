@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { components } from '../constants';
 import FieldProvider from './field-provider';
+import { FieldArray } from 'react-final-form-arrays';
 import { shouldWrapInField, composeValidators } from './helpers';
 
 const shouldAssignFormOptions = componentType => [ components.FIELD_ARRAY, components.FIXED_LIST ].includes(componentType);
@@ -12,6 +13,7 @@ const FieldWrapper = ({ componentType, validate, component, ...rest }) => {
   const componentProps = {
     type: assignSpecialType(componentType),
     FieldProvider,
+    FieldArrayProvider: FieldArray,
     ...rest,
     component,
   };

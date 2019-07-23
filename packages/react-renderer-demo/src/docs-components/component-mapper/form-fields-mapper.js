@@ -39,7 +39,7 @@ const layoutComponent = {
   [layoutComponents.DESCRIPTION]: Description,
 };
 
-const TextField = ({ formOptions, customProp, label, input, isRequired, meta: { error, touched }, FieldProvider, dataType, ...props }) => (
+const TextField = ({ formOptions, customProp, label, input, isRequired, meta: { error, touched }, FieldProvider, dataType, FieldArrayProvider, ...props }) => (
   <div className={ `ddorg__demo-formGroup ${isRequired ? 'required' : ''} ${error ? 'error' : ''}` }>
     <label htmlFor={ input.name }>{ label }</label>
     <input id={ input.name } { ...input } { ...props } />
@@ -48,7 +48,7 @@ const TextField = ({ formOptions, customProp, label, input, isRequired, meta: { 
   </div>
 );
 
-const CustomComponent = ({ FieldProvider, ...rest }) => (
+const CustomComponent = ({ FieldProvider, FieldArrayProvider, ...rest }) => (
   <FieldProvider { ...rest }>
     { ({ input, meta, ...props }) => <TextField input={ input } meta={ input } { ...props } /> }
   </FieldProvider>

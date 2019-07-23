@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import miqSchema from './demo-schemas/miq-schema';
-import { uiArraySchema, arraySchema, schema, uiSchema, conditionalSchema } from './demo-schemas/widget-schema';
+import { uiArraySchema, arraySchema, array1Schema, schema, uiSchema, conditionalSchema } from './demo-schemas/widget-schema';
 import { formFieldsMapper, layoutMapper } from '../src';
 import { Title, Button, Toolbar, ToolbarGroup } from '@patternfly/react-core';
 import { wizardSchema, wizardSchemaSimple, wizardSchemaSubsteps, wizardSchemaMoreSubsteps } from './demo-schemas/wizard-schema';
@@ -13,7 +13,7 @@ const Summary = props => <div>Custom summary component.</div>;
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { schema: wizardSchema, schemaString: 'default', additionalOptions: { showFormControls: false, wizard: true, }};
+        this.state = { schema: array1Schema, schemaString: 'mozilla', ui: uiArraySchema, additionalOptions: {}};
     }
 
     render() {
