@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
 import Typography from '@material-ui/core/Typography';
 import AceEditor from 'react-ace';
 import Link from '@material-ui/core/Link';
@@ -18,8 +17,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import 'brace/theme/tomorrow_night';
 
-// TO DO remove all react-markdown occurances with mdx
-
 const useHeadingStyles = makeStyles(() => ({
   heading: {
     marginBottom: 10,
@@ -33,17 +30,27 @@ const useHeadingStyles = makeStyles(() => ({
   },
 }));
 
+const Heading = ({ level, children, ...rest }) => {
+  const classes = useHeadingStyles();
+  return (
+    <React.Fragment>
+      <a id={ headerToId(children) } />
+      <Typography className={ classes.heading } variant={ `h${level + 2}` }>{ children }<ShareButton text={ headerToId(children) }/></Typography>
+    </React.Fragment>
+  );
+};
+
 const renderers = {
-  paragraph: ({ children }) => <Typography variant="body1" gutterBottom>{ children }</Typography>,
-  code: ({ value, language }) =>
+  p: ({ children }) => <Typography variant="body1" gutterBottom>{ children }</Typography>,
+  code: ({ children, lang, ...rest }) => (
     <div style={{ background: '#1d1f21', paddingTop: 5, paddingBottom: 5, marginTop: 10, marginBottom: 10 }}>
       <AceEditor
         readOnly
-        mode={ typeof language === 'string' ? language.toLowerCase() : 'jsx' }
+        mode={ typeof lang === 'string' ? lang.toLowerCase() : 'jsx' }
         theme="tomorrow_night"
         name="UNIQUE_ID_OF_DIV"
         editorProps={{ $blockScrolling: true }}
-        value={ value }
+        value={ children }
         fontSize={ 14 }
         maxLines={ Infinity }
         showPrintMargin={ false }
@@ -57,35 +64,39 @@ const renderers = {
           editor.getSession().setUseWorker(false);
         } }
       />
-    </div>,
+    </div>),
   link: ({ href, children }) => <Link href={ href }>{ children }</Link>,
-  heading: ({ level, children }) => {
-    const classes = useHeadingStyles();
-    return (
-      <React.Fragment>
-        <a id={ headerToId(children[0].props.value) } />
-        <Typography className={ classes.heading } variant={ `h${level + 2}` }>{ children }<ShareButton text={ headerToId(children[0].props.value) }/></Typography>
-      </React.Fragment>
-    );
-  },
-  list: ({ children }) => <List>{ children }</List>,
-  listItem: ({ children }) =>
+  h1: props => <Heading { ...props } level={ 1 }/>,
+  h2: props => <Heading { ...props } level={ 2 }/>,
+  h3: props => <Heading { ...props } level={ 3 }/>,
+  h4: props => <Heading { ...props } level={ 4 }/>,
+  h5: props => <Heading { ...props } level={ 5 }/>,
+  h6: props => <Heading { ...props } level={ 6 }/>,
+  ul: ({ children }) => <List>{ children }</List>,
+  li: ({ children }) =>
     <ListItem>
       <ListItemText
         primary={ children }
       />
     </ListItem>,
-  table: ({ children }) =>
+  table: ({ children }) => (
     <Paper style={{ marginBottom: 10, marginTop: 10 }}>
-      <Table>{ children }</Table>
-    </Paper>,
-  tableBody: ({ children }) =>  <TableBody>{ children }</TableBody>,
-  tableHead: ({ children }) =>  <TableHead>{ children }</TableHead>,
-  tableRow: ({ children }) =>  <TableRow>{ children }</TableRow>,
-  tableCell: ({ children }) =>  <TableCell>{ children }</TableCell>,
+      <Table>
+        <TableHead>
+          { children[0].props.children }
+        </TableHead>
+        <TableBody>
+          { children[1].props.children }
+        </TableBody>
+      </Table>
+    </Paper>
+  ),
+  tr: ({ children }) =>  <TableRow>{ children }</TableRow>,
+  td: ({ children }) =>  <TableCell>{ children }</TableCell>,
+  th: ({ children }) =>  <TableCell>{ children }</TableCell>,
   inlineCode: ({ children }) => <code style={{ background: 'white', borderRadius: 3, fontFamily: 'courier, monospace', padding: '3px'  }}>
     { children }
   </code>,
 };
 
-export default ({ source }) => <ReactMarkdown escapeHtml={ false } source={ source } renderers={ renderers } />;
+export default renderers;

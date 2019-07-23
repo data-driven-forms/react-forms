@@ -1,0 +1,28 @@
+.ddorg__demo-formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  p {
+    margin-top: 0;
+    margin-bottom: 4px;
+  }
+  &.required {
+    label::after {
+      content: "*";
+      color: red;
+      margin-left: 2px
+    }
+    p.error-text {
+      color: orangered
+    }
+  }
+}

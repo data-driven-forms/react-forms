@@ -21,7 +21,7 @@ export const docs = [{
   contentText: FormSchemasText,
 }, {
   component: 'component-mapping',
-  linkText: 'Component mapping',
+  linkText: 'Create component mapper',
   contentText: ComponentMappingText,
 }, {
   component: 'conditions',
