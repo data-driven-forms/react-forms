@@ -40,7 +40,7 @@ class Wizard extends React.Component {
       />);
 
     return (
-      <Grid container spacing={ 16 }>
+      <Grid container spacing={ 6 }>
         <Grid item xs={ 12 }>
           <Typography component="h3">{ title }</Typography>
           <Typography paragraph>{ description }</Typography>

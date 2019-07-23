@@ -5,7 +5,8 @@ import FormRenderer from '@data-driven-forms/react-form-renderer';
 
 import Grid from '@material-ui/core/Grid';
 import { formFieldsMapper, layoutMapper } from '../src'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 import Typography from '@material-ui/core/Typography';
 import sandbox from './demo-schemas/sandbox';
 
@@ -17,10 +18,10 @@ const theme = createMuiTheme({
   
 
 const App = () => (
-    <MuiThemeProvider theme={ theme }>
+    <ThemeProvider theme={ theme }>
         <Grid 
             container
-            spacing={16}
+            spacing={4}
             justify="center"
             alignItems="center"
         >
@@ -37,7 +38,7 @@ const App = () => (
                 />
             </Grid>
         </Grid>
-    </MuiThemeProvider>
+    </ThemeProvider>
 )
 
 ReactDOM.render(<App />, document.getElementById('root'));

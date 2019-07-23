@@ -17,11 +17,13 @@ const MultipleChoiceList = ({ validate, FieldProvider, ...props }) => (
       meta,
       options,
       isDisabled,
+      formOptions,
+      componentType,
       ...rest
     }) => {
       const { error, touched } = meta;
       const showError = touched && error;
-      const groupValues = rest.input.value;
+      const groupValues = Array.isArray(rest.input.value) ? rest.input.value : [];
       return (
         <Grid container >
           <FormControl component="fieldset" >
@@ -35,18 +37,21 @@ const MultipleChoiceList = ({ validate, FieldProvider, ...props }) => (
                   { ...option }
                   name={ props.name }
                   type="checkbox"
-                  render={ ({ input, meta, ...rest }) => {
-                    const indexValue = groupValues.indexOf(input.value);
+                  render={ ({ input, meta, value, formOptions, ...rest }) => {
+                    const indexValue = groupValues.indexOf(option.value);
                     return (
                       <FormControlLabel
                         control={ <Checkbox
+                          label={ rest.label }
                           aria-label={ option['aria-label'] || option.label }
                           { ...input }
                           { ...rest }
+                          checked={ indexValue !== -1 }
                           disabled={ isDisabled }
-                          onChange={ () => (indexValue === -1
-                            ? input.onChange([ ...groupValues, input.value ])
-                            : input.onChange([ ...groupValues.slice(0, indexValue), ...groupValues.slice(indexValue + 1) ])) }
+                          onChange={ () => {
+                            return (indexValue === -1
+                              ? input.onChange([ ...groupValues, option.value ])
+                              : input.onChange([ ...groupValues.slice(0, indexValue), ...groupValues.slice(indexValue + 1) ]));} }
                         >
                           { option.label }
                         </Checkbox> }

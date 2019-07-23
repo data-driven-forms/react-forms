@@ -155,7 +155,6 @@ describe('renderForm function', () => {
     const formFields = [{
       component: 'custom-component',
       name: 'foo',
-      assignFieldProvider: true,
     }];
 
     const wrapper = mount(

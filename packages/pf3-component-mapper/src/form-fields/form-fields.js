@@ -24,7 +24,6 @@ const selectComponent = ({
   labelText,
   formOptions,
   noCheckboxLabel,
-  assignFieldProvider,
   initialValue,
   loadOptions,
   ...rest

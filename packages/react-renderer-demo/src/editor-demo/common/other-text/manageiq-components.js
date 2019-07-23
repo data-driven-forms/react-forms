@@ -43,7 +43,6 @@ The component will split values from options to left/right select lists accordin
 {   
     component: 'dual-list-select',
     name: 'duallist',
-    assignFieldProvider: true, // not in version 1.5+!
     options: [
       { key: 'key', label: 'label' }, ...
     ],

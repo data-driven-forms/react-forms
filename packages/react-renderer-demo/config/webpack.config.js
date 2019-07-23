@@ -1,3 +1,4 @@
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const resolve = require('path').resolve;
@@ -51,7 +52,7 @@ const devConfig = {
 };
 
 const prodConfig = {
-  mode: 'development',
+  mode: 'production',
   entry: './demo/index.js',
   output: {
     path: resolve('./public'),

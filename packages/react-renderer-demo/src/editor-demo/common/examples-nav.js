@@ -1,5 +1,4 @@
 import React, { useState, forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -72,6 +71,7 @@ const Navigation = () => {
         >
           <ListItem
             button
+            className={ classes.listItem }
             component={ forwardRef((props, ref) =>  <RouterLink to="/" { ...props } />) }
           >
             <Typography variant="button" gutterBottom style={{ textTransform: 'capitalize', fontWeight: 'initial' }}>
@@ -80,13 +80,14 @@ const Navigation = () => {
           </ListItem>
           <ListItem
             button
+            className={ classes.listItem }
             component={ forwardRef((props, ref) =>  <RouterLink to="/live-editor" { ...props } />) }
           >
             <Typography variant="button" gutterBottom style={{ textTransform: 'capitalize', fontWeight: 'initial' }}>
                 Live Form Editor
             </Typography>
           </ListItem>
-          <ListItem button onClick={ hanleExpandDocumentation }>
+          <ListItem className={ classes.listItem } button onClick={ hanleExpandDocumentation }>
             <ListItemText primary="React form renderer" />
             { expandDocumentation ? <ExpandLess /> : <ExpandMore /> }
           </ListItem>
@@ -115,6 +116,7 @@ const Navigation = () => {
           </Collapse>
           <ListItem
             button
+            className={ classes.listItem }
             component={ forwardRef((props, ref) => <RouterLink to="/contribution" { ...props } />) }
           >
             <Typography variant="button" gutterBottom style={{ textTransform: 'capitalize', fontWeight: 'initial' }}>

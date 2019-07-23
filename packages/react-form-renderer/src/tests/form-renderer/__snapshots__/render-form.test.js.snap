@@ -1859,7 +1859,6 @@ exports[`renderForm function should render single field form with custom compone
   >
     <FormConditionWrapper>
       <FieldWrapper
-        assignFieldProvider={true}
         component={[Function]}
         componentType="custom-component"
         formOptions={
@@ -1876,7 +1875,6 @@ exports[`renderForm function should render single field form with custom compone
       >
         <customComponent
           FieldProvider={[Function]}
-          assignFieldProvider={true}
           formOptions={
             Object {
               "renderForm": [Function],
@@ -1886,21 +1884,18 @@ exports[`renderForm function should render single field form with custom compone
           validate={[Function]}
         >
           <FieldProvider
-            assignFieldProvider={true}
             formOptions={Object {}}
             name="foo"
             render={[Function]}
             validate={[Function]}
           >
             <ReactFinalForm(Field)
-              assignFieldProvider={true}
               formOptions={Object {}}
               name="foo"
               render={[Function]}
               validate={[Function]}
             >
               <Field
-                assignFieldProvider={true}
                 formOptions={Object {}}
                 format={[Function]}
                 name="foo"

@@ -14,20 +14,14 @@ const ArrayFieldWrapper = ({ children }) => (
 );
 
 const layoutMapper = {
-  [layoutComponents.FORM_WRAPPER]: ({ children, ...props }) => <Grid container spacing={ 16 } { ...props }>{ children }</Grid>,
-  [layoutComponents.BUTTON]: ({ label, variant, children, ...props }) => <Grid item><Button color={ variant } variant="contained" { ...props }>{ label || children }</Button></Grid>,
-  [layoutComponents.COL]: ({ children, xs, ...rest }) => <Grid item xs={ xs || 12 } key={ rest.key || rest.name }>{ children }</Grid>,
+  [layoutComponents.FORM_WRAPPER]: ({ children, ...props }) => <form { ...props }>{ children }</form>,
+  [layoutComponents.BUTTON]: ({ label, variant, children, ...props }) => <Button color={ variant } variant="contained" { ...props }>{ label || children }</Button>,
+  [layoutComponents.COL]: ({ children, xs, ...rest }) => <div key={ rest.key || rest.name }>{ children }</div>,
   [layoutComponents.FORM_GROUP]: ({ children }) => <Fragment>{ children }</Fragment>,
   [layoutComponents.BUTTON_GROUP]: ({ children }) => (
-    <Grid
-      container
-      spacing={ 16 }
-      direction="row"
-      justify="flex-end"
-      alignItems="center"
-    >
+    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
       { children }
-    </Grid>),
+    </div>),
   [layoutComponents.ICON]: props => <div>Icon</div>,
   [layoutComponents.ARRAY_FIELD_WRAPPER]: props => <div>Array field</div>,
   [layoutComponents.HELP_BLOCK]: props => <div>Help block</div>,

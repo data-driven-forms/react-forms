@@ -2,7 +2,7 @@ const drawerWidth = 240;
 
 export const navStyles = theme => ({
   root: {
-    display: 'flex',
+    display: 'flex !important',
   },
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -28,6 +28,11 @@ export const navStyles = theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   nested: {
-    paddingLeft: theme.spacing(4),
+    padding: '8px 16px !important',
+    justifyContent: 'flex-start !important',
+  },
+  listItem: {
+    padding: '8px 16px !important',
+    justifyContent: 'flex-start !important',
   },
 });

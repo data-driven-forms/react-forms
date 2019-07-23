@@ -328,7 +328,6 @@ export const baseExamples = [{
     fields: [{
       component: componentTypes.WIZARD,
       name: 'wizzard',
-      assignFieldProvider: true,
       fields: [{
         title: 'Get started with adding source',
         name: 'step-1',
@@ -387,7 +386,6 @@ export const baseExamples = [{
         fields: [{
           name: 'summary',
           component: 'summary',
-          assignFieldProvider: true,
         }],
         stepKey: 'summary',
         name: 'summary',
@@ -395,5 +393,4 @@ export const baseExamples = [{
     }],
   },
   variants: [],
-},
-];
+}];

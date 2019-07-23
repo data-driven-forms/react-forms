@@ -19,14 +19,14 @@ class FormTabs extends Component {
     const { fields, formOptions } = this.props;
     const { activeTab } = this.state;
     return (
-      <Grid item xs={ 12 } container spacing={ 16 } style={{ paddingLeft: 0, paddingRight: 0 }}>
+      <div>
         <AppBar position="static">
           <Tabs value={ activeTab } onChange={ this.handleTabChange }>
             { renderTabHeader(fields) }
           </Tabs>
         </AppBar>
         { renderTabContet(fields[activeTab], formOptions) }
-      </Grid>
+      </div>
     );
   }
 }

@@ -5,7 +5,6 @@ export const wizardSchema = {
     component: componentTypes.WIZARD,
     name: 'wizzard',
     //inModal: true,
-    assignFieldProvider: true,
     title: 'Title',
     description: 'Description',
     buttonsPosition: 'left',
@@ -68,7 +67,6 @@ export const wizardSchema = {
       fields: [{
         name: 'summary',
         component: 'summary',
-        assignFieldProvider: true,
       }],
       stepKey: 'summary',
       name: 'summary',
@@ -82,7 +80,6 @@ export const wizardSchemaSimple = {
   fields: [{
     component: componentTypes.WIZARD,
     name: 'wizzard',
-    assignFieldProvider: true,
     title: 'Title',
     description: 'Description',
     buttonsPosition: 'left',
@@ -115,7 +112,6 @@ export const wizardSchemaSimple = {
       fields: [{
         name: 'summary',
         component: 'summary',
-        assignFieldProvider: true,
       }],
       stepKey: 'summary',
       name: 'summary',
@@ -128,7 +124,6 @@ export const wizardSchemaSubsteps = {
   fields: [{
     component: componentTypes.WIZARD,
     name: 'wizzard',
-    assignFieldProvider: true,
     title: 'Title',
     description: 'Description',
     buttonsPosition: 'left',
@@ -158,7 +153,6 @@ export const wizardSchemaSubsteps = {
       fields: [{
         name: 'summary',
         component: 'summary',
-        assignFieldProvider: true,
       }],
       stepKey: 'summary',
       name: 'summary',
@@ -172,7 +166,6 @@ export const wizardSchemaMoreSubsteps = {
   fields: [{
     component: componentTypes.WIZARD,
     name: 'wizzard',
-    assignFieldProvider: true,
     title: 'Title',
     description: 'Description',
     buttonsPosition: 'left',
@@ -214,7 +207,6 @@ export const wizardSchemaMoreSubsteps = {
       fields: [{
         name: 'summary',
         component: 'summary',
-        assignFieldProvider: true,
       }],
       stepKey: 'summary',
       name: 'summary',
@@ -225,7 +217,6 @@ export const wizardSchemaMoreSubsteps = {
       fields: [{
         name: 'summary',
         component: 'summary',
-        assignFieldProvider: true,
       }],
       stepKey: 'summary2',
       name: 'summary2',

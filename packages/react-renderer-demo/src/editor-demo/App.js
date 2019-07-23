@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles'
+import { ThemeProvider } from '@material-ui/styles';
 import Grid from '@material-ui/core/Grid';
 import LandingPage from './pages/landing-page';
 import FormRendererPage from './pages/form-renderer-page';
