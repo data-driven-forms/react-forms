@@ -26,7 +26,6 @@ const selectComponent = ({
   onText,
   offText,
   formOptions,
-  assignFieldProvider,
   initialValue,
   ...rest
 }) => ({

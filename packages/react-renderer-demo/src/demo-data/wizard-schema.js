@@ -66,7 +66,6 @@ const wizardSchema = {
       fields: [{
         name: 'summary',
         component: 'summary',
-        assignFieldProvider: true,
       }],
       stepKey: 'summary',
       name: 'summary',

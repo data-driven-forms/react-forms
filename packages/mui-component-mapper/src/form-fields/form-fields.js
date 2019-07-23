@@ -86,12 +86,12 @@ const selectComponent = ({
         <FormLabel component="legend">{ label }</FormLabel>
         { options.map(option => (
           <FieldProvider
-            formOptions={formOptions}
+            formOptions={ formOptions }
             key={ `${input.name}-${option.value}` }
             name={ input.name }
             value={ option.value }
             type="radio"
-            render={ ({ input }) => (
+            render={ ({ input, formOptions }) => (
               <FormControlLabel
                 value="female"
                 control={ <MuiRadio
@@ -140,7 +140,7 @@ const selectComponent = ({
           { ...input }
           readOnly={ isReadOnly }
           disabled={ isDisabled || isReadOnly }
-          checked={ input.value }
+          checked={ !!input.value }
           onChange={ ({ target: { checked }}) => input.onChange(checked) }
         /> }
         label={ label }

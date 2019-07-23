@@ -29,7 +29,7 @@ class ComponentExample extends Component {
   render () {
     const { linkText, contentText } = this.state;
     return (
-      <Grid container spacing={ 16 } >
+      <Grid container spacing={ 6 } >
         <Grid item xs={ 12 } >
           <Typography variant="h4" gutterBottom >
             { linkText }

@@ -40,4 +40,6 @@ const GetStartedForm = () => (
   </div>
 );
 
+GetStartedForm.displayName = 'GetStartedForm';
+
 export default GetStartedForm;

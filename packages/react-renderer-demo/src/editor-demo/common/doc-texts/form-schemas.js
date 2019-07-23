@@ -103,7 +103,6 @@ Detailed descriptions of each attribute is below.
 |\`validate?\`|Array of Objects|
 |\`condition?\`|Object|
 |\`dataType\`|string|
-|\`assignFieldProvider?\`|bool|
 |SubForm only||
 |\`fields\`| Array (only for \`SUB_FORM\`)|
 |\`title?\`|string|
@@ -245,8 +244,6 @@ There are currently four defined data types:
 \`\`\`jsx
 ['integer', 'number', 'bool', 'string']
 \`\`\`
-
-#### assignFieldProvider: bool?
 
 FieldProvider is just a fancy name for [Field component](https://github.com/final-form/react-final-form#field--reactcomponenttypefieldprops).
 

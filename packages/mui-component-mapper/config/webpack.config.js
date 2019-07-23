@@ -1,3 +1,4 @@
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const resolve = require('path').resolve;
@@ -38,6 +39,10 @@ const devConfig = {
   plugins: [ htmlPlugin ],
 };
 
+const externals = {
+  react: 'react',
+};
+
 const prodConfig = {
   mode: 'production',
   entry: './src/index.js',
@@ -47,6 +52,21 @@ const prodConfig = {
     libraryTarget: 'umd',
     filename: 'index.js',
   },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          warnings: 'verbose',
+          mangle: false,
+          toplevel: false,
+          nameCache: null,
+          ie8: false,
+          keep_fnames: true,
+        },
+      }),
+    ],
+  },
+  externals,
 };
 
 const vendorConfig = {

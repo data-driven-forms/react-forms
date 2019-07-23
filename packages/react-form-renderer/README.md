@@ -134,7 +134,7 @@ Detailed descriptions of each attribute is below.
 |`validate?`|Array of Objects|
 |`condition?`|Object|
 |`dataType`|string|
-|`assignFieldProvider?`|bool|
+|`?`|bool|
 |SubForm only||
 |`fields`| Array (only for `SUB_FORM`)|
 |`title?`|string|
@@ -268,29 +268,6 @@ const field = {
 There are currently four defined data types:
 ```javascript
 ['integer', 'number', 'bool', 'string']
-```
-
-#### <a name="assign-field-provider"></a> `assignFieldProvider: bool?` [DEPRECATED]
-FieldProvider is just a fancy name for [Field component](https://github.com/final-form/react-final-form#field--reactcomponenttypefieldprops). Following component types are wrapped in the FieldProvider by default:
-
-```javascript
-import { componentTypes } from '@data-driven-forms/react-form-renderer';
-
-const wrappedComponents = [
-  componentTypes.TEXT_FIELD,
-  componentTypes.TEXTAREA_FIELD,
-  componentTypes.FIELD_ARRAY,
-  componentTypes.SELECT_COMPONENT,
-  componentTypes.FIXED_LIST,
-  componentTypes.CHECKBOX,
-  componentTypes.RADIO,
-  componentTypes.DATE_PICKER,
-  componentTypes.TIME_PICKER,
-  componentTypes.TAG_CONTROL,
-];
-```
-
-Because we can't possibly guess all viable component types, by using `assignFieldProvider` attribute you will add the `FieldProvider` component to your Form Field props. This wrapper will add necessary props to your component that will handle form state updates. It is reccomended to read about field component in React Final Form docs. 
 
 #### `condition: Object?`
 Condition is used to define condition fields. For instance, field **A** should render only when field **B** has value **Foo**.
@@ -496,8 +473,6 @@ const MyForm = () => (
 
 Unlike the layout components, the form fields are completely customizable, and the implementation is restricted to only one rule. In order to correctly change the form state, you have to use provided `input` and `meta` props to your input fields. These objects provide functions like `onChange`, `onBlur`, error messages, valid state and more. Again you should probably read more about that in the [React Final Form docs](https://github.com/final-form/react-final-form#field--reactcomponenttypefieldprops).
 
-Some of the component types are wrapped in the Field component [by default](#assign-field-provider) and if you need to use different component type, you can pass it as a prop by adding the `assignFieldProvider: true` attribute to the field.
-
 In an example below you can see an implementation of a simple input component using both predefined component type and a custom one.
 
 ```JSX
@@ -541,7 +516,6 @@ const schema = {
     name: 'last-name',
     label: 'Last Name',
     type: 'text',
-    assignFieldProvider: true,
     validate: [{
       type: validatorTypes.REQUIRED,
     }]

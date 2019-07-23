@@ -562,7 +562,7 @@ class FormRendererPage extends Component {
     return (
       <Grid
         container
-        spacing={ 16 }
+        spacing={ 6 }
       >
         <Grid
           item
@@ -592,7 +592,7 @@ class FormRendererPage extends Component {
           </div>
 
           <div>
-            <Grid container spacing={ 16 }>
+            <Grid container spacing={ 6 }>
               <Grid item xs={ 12 } md={ 6 }>
                 <Typography variant="h6">
                   Avaiable components:
@@ -618,7 +618,7 @@ class FormRendererPage extends Component {
           xs={ 6 }
         >
           <Paper square style={{ padding: 16, paddingLeft: 24 }}>
-            <Grid container spacing={ 16 }>
+            <Grid container spacing={ 6 }>
               <Grid item xs={ 12 }>
                 <FormRenderer
                   formFieldsMapper={ formFieldsMapper }

@@ -21,7 +21,6 @@ const output = {
                   label: 'Text Box',
                   title: 'Text Box',
                   component: components.SWITCH,
-                  assignFieldProvider: true,
                   bsSize: 'mn',
                   onText: 'True',
                   offText: 'False',
@@ -31,7 +30,6 @@ const output = {
                   label: 'Switch conditional',
                   title: 'Text Box',
                   component: components.SWITCH,
-                  assignFieldProvider: true,
                   isDisabled: true,
                   condition: {
                     when: 'text_box_1',
@@ -43,7 +41,6 @@ const output = {
                   label: 'Text Box',
                   title: 'Text Box',
                   component: components.SWITCH,
-                  assignFieldProvider: true,
                   isReadOnly: true,
                 },
                 {
@@ -51,7 +48,6 @@ const output = {
                   label: 'Text Box',
                   title: 'Text Box',
                   component: components.SWITCH,
-                  assignFieldProvider: true,
                   placeholder: 'hello',
                   onText: 'turned onsssssssssssssssssss',
                   offText: 'turnedOff',

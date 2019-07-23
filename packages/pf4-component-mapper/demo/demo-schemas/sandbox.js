@@ -21,20 +21,17 @@ const output = {
                   label: 'Switch',
                   title: 'Switch',
                   component: components.SWITCH,
-                  assignFieldProvider: true,
                 },
                 {
                   name: 'switch_2',
                   label: 'Switch disabled',
                   component: components.SWITCH,
-                  assignFieldProvider: true,
                   isDisabled: true,
                 },
                 {
                   name: 'switch_3',
                   label: 'Switch readOnly',
                   component: components.SWITCH,
-                  assignFieldProvider: true,
                   isReadOnly: true,
                 },
                 {
