@@ -145,11 +145,13 @@ export const Select = ({ selectVariant, ...props }) => {
         Input,
       }}
       { ...props }
-      onChange={ option => simpleValue
-        ? props.onChange(props.isMulti
-          ? option.map(item => item.value)
-          : option ? option.value : undefined)
-        : props.onChange(option) }
+      onChange={ (option) => {
+        const o =  !option && props.isMulti ? [] : option;
+        return simpleValue
+          ? props.onChange(props.isMulti
+            ? o.map(item => item.value)
+            : o ? o.value : undefined)
+          : props.onChange(o);} }
       value={ simpleValue ? props.options.filter(({ value }) => props.isMulti ? props.value.includes(value) : value === props.value) : props.value }
       isSearchable={ isSearchable }
     />
