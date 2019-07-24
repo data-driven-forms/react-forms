@@ -1,3 +1,4 @@
+const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const resolve = require('path').resolve;
 const merge = require('webpack-merge');
@@ -40,6 +41,18 @@ const devConfig = {
 const prodConfig = {
   mode: 'production',
   entry: './src/index.js',
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        terserOptions: {
+          keep_classnames: true,
+          keep_fnames: true,
+        },
+      }),
+    ],
+  },
   output: {
     path: resolve('./dist'),
     library: '[name]',
