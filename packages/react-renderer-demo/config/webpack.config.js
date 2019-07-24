@@ -1,4 +1,4 @@
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const resolve = require('path').resolve;
@@ -54,6 +54,18 @@ const devConfig = {
 const prodConfig = {
   mode: 'production',
   entry: './demo/index.js',
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        terserOptions: {
+          keep_classnames: true,
+          keep_fnames: true,
+        },
+      }),
+    ],
+  },
   output: {
     path: resolve('./public'),
     filename: 'index.js',
