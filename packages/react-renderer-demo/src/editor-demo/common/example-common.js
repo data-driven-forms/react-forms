@@ -66,7 +66,6 @@ const mapperVariants = {
 class ComponentExample extends Component {
   constructor(props) {
     super(props);
-    window.magix = this.frameRef;
     const baseStructure = baseExamples.find(item => item.component === props.match.params.component);
     this.state = {
       ...baseStructure,
