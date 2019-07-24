@@ -15,11 +15,11 @@ const fieldComponents = [
 
 export const shouldWrapInField = componentType => fieldComponents.includes(componentType);
 
-export const composeValidators = (validators = []) => value =>
+export const composeValidators = (validators = []) => (value, allValues) =>
   validators.reduce(
     (error, validator) => error
       || (typeof validator === 'function'
-        ? validator(value)
+        ? validator(value, allValues)
         : undefined),
     undefined,
   );
