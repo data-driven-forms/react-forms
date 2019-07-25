@@ -84,6 +84,7 @@ const RawComponent = (props) => {
     const text = getRawJsx(reqSource(`./${props.source}.js`).default);
     setContent({ md: text, Component: foo });
   }, [ props.source ]);
+
   return (
     <Grid container spacing={ 0 }>
       { content.md && (

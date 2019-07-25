@@ -11,6 +11,9 @@ const commonConfig = {
       'docs/components': path.resolve(__dirname, './../src/editor-demo/docs-components'),
     },
   },
+  node: {
+    fs: 'empty',
+  },
   module: {
     rules: [{
       test: /\.(js|jsx)$/,
@@ -24,6 +27,12 @@ const commonConfig = {
     }, {
       test: /\.(png|jpg|gif|svg|woff|ttf|eot)/,
       loader: 'url-loader',
+    }, {
+      test: /\.mdx?$/,
+      use: [
+        'babel-loader',
+        '@mdx-js/loader',
+      ],
     },
     ],
   },

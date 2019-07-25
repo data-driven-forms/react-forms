@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { MDXProvider } from '@mdx-js/react';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Grid from '@material-ui/core/Grid';
@@ -17,6 +18,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import Link from '@material-ui/core/Link';
 import GhIcon from './common/gh-svg-icon';
+import renderers from './common/md-helper/mdx-components';
 
 import './styles.scss';
 
@@ -49,18 +51,20 @@ const App = () => (
         <Navigation />
       </div>
       <div className="grow-1" style={{ margin: 16 }}>
-        <Grid container spacing={ 0 }>
-          <Grid item xs={ 12 }>
-            <Switch>
-              <Route exact path="/" component={ LandingPage } />
-              <Route exact path="/live-editor" component={ FormRendererPage } />
-              <Route exact path="/component-example/:component" component={ ComponentExample } />
-              <Route exact path="/renderer/:component" component={ DocPage } />
-              <Route exact path="/others/:component" component={ DocPage } />
-              <Route exact path="/contribution" component={ ContributionPage } />
-            </Switch>
+        <MDXProvider components={ renderers }>
+          <Grid container spacing={ 0 }>
+            <Grid item xs={ 12 }>
+              <Switch>
+                <Route exact path="/" component={ LandingPage } />
+                <Route exact path="/live-editor" component={ FormRendererPage } />
+                <Route exact path="/component-example/:component" component={ ComponentExample } />
+                <Route exact path="/renderer/:component" component={ DocPage } />
+                <Route exact path="/others/:component" component={ DocPage } />
+                <Route exact path="/contribution" component={ ContributionPage } />
+              </Switch>
+            </Grid>
           </Grid>
-        </Grid>
+        </MDXProvider>
       </div>
     </div>
   </ThemeProvider>
