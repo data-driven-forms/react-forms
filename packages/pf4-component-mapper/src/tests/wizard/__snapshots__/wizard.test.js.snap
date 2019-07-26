@@ -583,10 +583,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
           <div
             className="pf-c-backdrop"
           >
-            <Bullseye
-              className=""
-              component="div"
-            >
+            <Bullseye>
               <div
                 className="pf-l-bullseye"
               >
