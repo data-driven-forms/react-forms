@@ -8,7 +8,7 @@ exports[`Tabs component should render tabs correctly 1`] = `
   isSecondary={false}
   leftScrollAriaLabel="Scroll left"
   onSelect={[Function]}
-  rightScrollAriaLabel="Scroll Right"
+  rightScrollAriaLabel="Scroll right"
   variant="div"
 >
   <ForwardRef
