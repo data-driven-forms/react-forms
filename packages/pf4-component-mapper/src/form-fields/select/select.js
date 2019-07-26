@@ -127,36 +127,71 @@ const selectProvider = type => ({
   createable: CreatableSelect,
 })[type || 'default'];
 
-export const Select = ({ selectVariant, ...props }) => {
-  const Select = selectProvider(selectVariant);
-  const isSearchable = selectVariant === 'createable' || props.isSearchable;
-  const simpleValue = selectVariant === 'createable' ? false : props.simpleValue;
-  return (
-    <Select
-      styles={ selectStyles }
-      menuPlacement="auto"
-      components={{
-        MultiValueContainer,
-        ValueContainer,
-        MultiValueRemove,
-        DropdownIndicator,
-        ClearIndicator,
-        Option,
-        Input,
-      }}
-      { ...props }
-      onChange={ (option) => {
-        const o =  !option && props.isMulti ? [] : option;
-        return simpleValue
-          ? props.onChange(props.isMulti
-            ? o.map(item => item.value)
-            : o ? o.value : undefined)
-          : props.onChange(o);} }
-      value={ simpleValue ? props.options.filter(({ value }) => props.isMulti ? props.value.includes(value) : value === props.value) : props.value }
-      isSearchable={ isSearchable }
-    />
-  );
-};
+export class Select extends React.Component {
+  state = {
+    isLoading: true,
+    options: this.props.options || [],
+  };
+
+  componentDidMount() {
+    const { loadOptions } = this.props;
+
+    if (!loadOptions) {
+      this.setState({
+        isLoading: false,
+      });
+    } else {
+      return loadOptions()
+      .then((data) => this.setState({
+        options: data,
+        isLoading: false,
+      }));
+    }
+  }
+
+  render() {
+    const { selectVariant, loadOptions, loadingMessage, ... props } = this.props;
+    const { isLoading, options } = this.state;
+    const Select = selectProvider(selectVariant);
+    const isSearchable = selectVariant === 'createable' || props.isSearchable;
+    const simpleValue = selectVariant === 'createable' ? false : props.simpleValue;
+
+    if (isLoading){
+      return (<Select
+        styles={ selectStyles }
+        isDisabled={ true }
+        placeholder={ loadingMessage }
+      />);
+    }
+
+    return (
+      <Select
+        styles={ selectStyles }
+        menuPlacement="auto"
+        components={{
+          MultiValueContainer,
+          ValueContainer,
+          MultiValueRemove,
+          DropdownIndicator,
+          ClearIndicator,
+          Option,
+          Input,
+        }}
+        { ...props }
+        onChange={ (option) => {
+          const o =  !option && props.isMulti ? [] : option;
+          return simpleValue
+            ? props.onChange(props.isMulti
+              ? o.map(item => item.value)
+              : o ? o.value : undefined)
+            : props.onChange(o);} }
+        value={ simpleValue ? options.filter(({ value }) => props.isMulti ? props.value.includes(value) : value === props.value) : props.value }
+        isSearchable={ isSearchable }
+        options={ options }
+      />
+    );
+  }
+}
 
 Select.propTypes = {
   selectVariant: PropTypes.oneOf([ 'default', 'createable' ]),
@@ -171,6 +206,8 @@ Select.propTypes = {
   })).isRequired,
   onChange: PropTypes.func.isRequired,
   isMulti: PropTypes.bool,
+  loadOptions: PropTypes.func,
+  loadingMessage: PropTypes.node,
 };
 
 Select.defaultProps = {
@@ -178,6 +215,7 @@ Select.defaultProps = {
   showMoreLabel: 'more',
   showLessLabel: 'Show less',
   simpleValue: true,
+  loadingMessage: 'Loading...',
 };
 
 const DataDrivenSelect = ({ input, multi, ...props }) => (

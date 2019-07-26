@@ -1,7 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import ReactSelect, { components } from 'react-select';
-import { TimesCircleIcon, CaretDownIcon, CheckIcon } from '@patternfly/react-icons';
+import { components } from 'react-select';
 
 import DataDrivenSelect, { Select } from '../../form-fields/select/select';
 
@@ -133,6 +132,19 @@ describe('<Select />', () => {
       showMoreLabel: 'more',
       simpleValue: true,
       value: [ 1, 2  ],
+      loadingMessage: 'Loading...',
+    });
+  });
+
+  it('should load Async options correctly', (done) => {
+    const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'label' }]));
+
+    const wrapper = mount(<Select { ...initialProps } options={ undefined } loadOptions={ asyncLoading }/>);
+
+    setImmediate(() => {
+      wrapper.update();
+      expect(wrapper.find(Select).first().instance().state.options).toEqual([{ label: 'label' }]);
+      done();
     });
   });
 });
