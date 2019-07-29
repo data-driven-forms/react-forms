@@ -21,6 +21,7 @@ const App = () => (
             uiSchema={uiArraySchema}
             buttonOrder={['cancel', 'reset', 'submit']}
             buttonClassName="Foo"
+            onStateUpdate={console.log}
         />
     </div>
 )

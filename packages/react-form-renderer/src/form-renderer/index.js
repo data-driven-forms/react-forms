@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from 'react-final-form';
+import { Form, FormSpy } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import PropTypes from 'prop-types';
 import createFocusDecorator from 'final-form-focus';
@@ -41,6 +41,7 @@ const FormRenderer = ({
   buttonClassName,
   clearOnUnmount,
   validate,
+  onStateUpdate,
 }) => {
   const inputSchema = schemaMapper(schemaType)(schema, uiSchema);
   let schemaError;
@@ -107,6 +108,7 @@ const FormRenderer = ({
                   disableSubmit: isDisabled(disableSubmit, getState),
                   ...buttonsLabels,
                 }) }
+                { onStateUpdate && <FormSpy onChange={ onStateUpdate } /> }
               </FormWrapper>
             ) }
           </RendererContext.Consumer>
@@ -134,6 +136,7 @@ FormRenderer.propTypes = {
   buttonClassName: PropTypes.string,
   clearOnUnmount: PropTypes.bool,
   validate: PropTypes.func,
+  onStateUpdate: PropTypes.func,
 };
 
 FormRenderer.defaultProps = {
