@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import { Form } from 'react-final-form';
+import { Form, FormSpy } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import renderForm from '../../form-renderer/render-form';
 import RendererContext, { configureContext } from '../../form-renderer/renderer-context';
@@ -17,7 +17,7 @@ describe('renderForm function', () => {
       formOptions: {
         renderForm,
         ...props.formOptions,
-      }
+      },
     }) }>
       <Form onSubmit={ jest.fn() } mutators={{ ...arrayMutators }}>
         { () =>  children }
@@ -546,5 +546,35 @@ describe('renderForm function', () => {
       wrapper.update();
       expect(wrapper.find(Form).instance().form.getState().values.foocon).toEqual(undefined);
     });
+  });
+
+  describe('#formSpy', () => {
+    const TextField = ({ input, meta, label, formOptions, helperText, isRequired, dataType, isDisabled, isReadOnly, ...rest }) => (
+      <div>
+        <label>{ label }</label>
+        <input { ...input } { ...rest } />
+        { meta.error && <div><span>{ meta.error }</span></div> }
+      </div>
+    );
+    it('should add formSpy and call update function on each state change', () => {
+      const onStateUpdate = jest.fn();
+      const wrapper = mount(
+        <FormRenderer
+          onStateUpdate={ onStateUpdate }
+          layoutMapper={ layoutMapper }
+          formFieldsMapper={{
+            [components.TEXT_FIELD]: TextField,
+          }}
+          schema={{ fields: [{ component: components.TEXT_FIELD, name: 'foo', label: 'bar' }]}}
+          onSubmit={ jest.fn() }
+          clearOnUnmount
+        />
+      );
+      expect(wrapper.find(FormSpy)).toHaveLength(1);
+      wrapper.find('input').first().simulate('change', { target: { value: 'bar' }});
+      wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
+      expect(onStateUpdate).toHaveBeenCalledTimes(3);
+    });
+
   });
 });
