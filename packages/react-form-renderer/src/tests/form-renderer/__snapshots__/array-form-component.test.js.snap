@@ -693,6 +693,7 @@ exports[`renderForm function should render array field correctly 1`] = `
                                         className="pull-right"
                                       >
                                         <div
+                                          className="pull-right"
                                           style={
                                             Object {
                                               "backgroundColor": "ivory",
@@ -740,59 +741,79 @@ exports[`renderForm function should render array field correctly 1`] = `
             canReset={false}
             canSubmit={false}
             cancelLabel="Cancel"
-            onReset={[Function]}
-            onSubmit={[Function]}
-            pristine={true}
+            handleSubmit={[Function]}
             resetLabel="Reset"
             submitLabel="Submit"
           >
-            <Col
-              xs={12}
-            >
-              <div
-                xs={12}
+            <ReactFinalForm(FormSpy)>
+              <FormSpy
+                reactFinalForm={
+                  Object {
+                    "batch": [Function],
+                    "blur": [Function],
+                    "change": [Function],
+                    "destroyOnUnregister": false,
+                    "focus": [Function],
+                    "getFieldState": [Function],
+                    "getRegisteredFields": [Function],
+                    "getState": [Function],
+                    "initialize": [Function],
+                    "isValidationPaused": [Function],
+                    "mutators": Object {
+                      "concat": [Function],
+                      "insert": [Function],
+                      "move": [Function],
+                      "pop": [Function],
+                      "push": [Function],
+                      "remove": [Function],
+                      "removeBatch": [Function],
+                      "shift": [Function],
+                      "swap": [Function],
+                      "unshift": [Function],
+                      "update": [Function],
+                    },
+                    "pauseValidation": [Function],
+                    "registerField": [Function],
+                    "reset": [Function],
+                    "resetFieldState": [Function],
+                    "resumeValidation": [Function],
+                    "setConfig": [Function],
+                    "submit": [Function],
+                    "subscribe": [Function],
+                  }
+                }
               >
-                <FormGroup>
+                <ButtonGroup>
                   <div
                     style={
                       Object {
-                        "backgroundColor": "tomato",
+                        "backgroundColor": "ivory",
                       }
                     }
                   >
-                    <ButtonGroup>
-                      <div
+                    <Button
+                      key="form-submit"
+                      label="Submit"
+                      onClick={[Function]}
+                      type="button"
+                      variant="primary"
+                    >
+                      <button
+                        onClick={[Function]}
                         style={
                           Object {
-                            "backgroundColor": "ivory",
+                            "backgroundColor": "red",
                           }
                         }
+                        type="button"
                       >
-                        <Button
-                          key="form-submit"
-                          label="Submit"
-                          onClick={[Function]}
-                          type="button"
-                          variant="primary"
-                        >
-                          <button
-                            onClick={[Function]}
-                            style={
-                              Object {
-                                "backgroundColor": "red",
-                              }
-                            }
-                            type="button"
-                          >
-                            Submit
-                          </button>
-                        </Button>
-                      </div>
-                    </ButtonGroup>
+                        Submit
+                      </button>
+                    </Button>
                   </div>
-                </FormGroup>
-              </div>
-            </Col>
+                </ButtonGroup>
+              </FormSpy>
+            </ReactFinalForm(FormSpy)>
           </FormControls>
         </form>
       </WrapperForm>
@@ -2178,59 +2199,79 @@ exports[`renderForm function should render fixed array field correctly 1`] = `
             canReset={false}
             canSubmit={false}
             cancelLabel="Cancel"
-            onReset={[Function]}
-            onSubmit={[Function]}
-            pristine={true}
+            handleSubmit={[Function]}
             resetLabel="Reset"
             submitLabel="Submit"
           >
-            <Col
-              xs={12}
-            >
-              <div
-                xs={12}
+            <ReactFinalForm(FormSpy)>
+              <FormSpy
+                reactFinalForm={
+                  Object {
+                    "batch": [Function],
+                    "blur": [Function],
+                    "change": [Function],
+                    "destroyOnUnregister": false,
+                    "focus": [Function],
+                    "getFieldState": [Function],
+                    "getRegisteredFields": [Function],
+                    "getState": [Function],
+                    "initialize": [Function],
+                    "isValidationPaused": [Function],
+                    "mutators": Object {
+                      "concat": [Function],
+                      "insert": [Function],
+                      "move": [Function],
+                      "pop": [Function],
+                      "push": [Function],
+                      "remove": [Function],
+                      "removeBatch": [Function],
+                      "shift": [Function],
+                      "swap": [Function],
+                      "unshift": [Function],
+                      "update": [Function],
+                    },
+                    "pauseValidation": [Function],
+                    "registerField": [Function],
+                    "reset": [Function],
+                    "resetFieldState": [Function],
+                    "resumeValidation": [Function],
+                    "setConfig": [Function],
+                    "submit": [Function],
+                    "subscribe": [Function],
+                  }
+                }
               >
-                <FormGroup>
+                <ButtonGroup>
                   <div
                     style={
                       Object {
-                        "backgroundColor": "tomato",
+                        "backgroundColor": "ivory",
                       }
                     }
                   >
-                    <ButtonGroup>
-                      <div
+                    <Button
+                      key="form-submit"
+                      label="Submit"
+                      onClick={[Function]}
+                      type="button"
+                      variant="primary"
+                    >
+                      <button
+                        onClick={[Function]}
                         style={
                           Object {
-                            "backgroundColor": "ivory",
+                            "backgroundColor": "red",
                           }
                         }
+                        type="button"
                       >
-                        <Button
-                          key="form-submit"
-                          label="Submit"
-                          onClick={[Function]}
-                          type="button"
-                          variant="primary"
-                        >
-                          <button
-                            onClick={[Function]}
-                            style={
-                              Object {
-                                "backgroundColor": "red",
-                              }
-                            }
-                            type="button"
-                          >
-                            Submit
-                          </button>
-                        </Button>
-                      </div>
-                    </ButtonGroup>
+                        Submit
+                      </button>
+                    </Button>
                   </div>
-                </FormGroup>
-              </div>
-            </Col>
+                </ButtonGroup>
+              </FormSpy>
+            </ReactFinalForm(FormSpy)>
           </FormControls>
         </form>
       </WrapperForm>

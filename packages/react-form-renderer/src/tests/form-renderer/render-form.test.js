@@ -570,7 +570,10 @@ describe('renderForm function', () => {
           clearOnUnmount
         />
       );
-      expect(wrapper.find(FormSpy)).toHaveLength(1);
+      /**
+       * there is one FormSpy for form controls
+       */
+      expect(wrapper.find(FormSpy)).toHaveLength(2);
       wrapper.find('input').first().simulate('change', { target: { value: 'bar' }});
       wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
       expect(onStateUpdate).toHaveBeenCalledTimes(3);

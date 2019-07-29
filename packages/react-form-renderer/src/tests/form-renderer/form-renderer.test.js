@@ -82,5 +82,17 @@ describe('<FormRenderer />', () => {
     const wrapper = mount(<FormRenderer { ...initialProps } showFormControls={ false }/>);
     expect(wrapper.find(FormControls).first()).toHaveLength(0);
   });
+
+  it('should render custom form controls', () => {
+    const onSubmit = jest.fn();
+    const FormControls = ({ form: { submit }}) => (
+      <div>
+        <button id="custom-submit-button" onClick={ submit } type="button">Handle submit</button>
+      </div>
+    );
+    const wrapper = mount(<FormRenderer { ...initialProps } onSubmit={ onSubmit } renderFormButtons={ FormControls }/>);
+    wrapper.find('#custom-submit-button').simulate('click');
+    expect(onSubmit).toHaveBeenCalled();
+  });
 });
 

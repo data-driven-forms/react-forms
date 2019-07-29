@@ -91,7 +91,7 @@ const RawComponent = (props) => {
         <Grid item xs={ 12 }>
           <ExpansionPanel>
             <ExpansionPanelSummary expandIcon={ <CodeIcon /> }>
-              { content.Component && <Typography className={ classes.heading }>{ content.Component.displayName }</Typography> }
+              { content.Component && <Typography className={ classes.heading }>{ content.Component.name }</Typography> }
             </ExpansionPanelSummary>
             <ExpansionPanelDetails style={{ padding: 0 }}>
               <MdRenderer style={{ width: '100%' }} source={ content.md } />

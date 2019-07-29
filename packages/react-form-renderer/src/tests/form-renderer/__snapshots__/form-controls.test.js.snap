@@ -2,300 +2,380 @@
 
 exports[`<FormControls /> should add missing buttons if not defined in button order 1`] = `
 <ContextWrapper>
-  <FormControls
-    buttonOrder={Array []}
-    canReset={true}
-    canSubmit={true}
-    cancelLabel="Cancel"
-    onCancel={[MockFunction]}
-    onReset={[MockFunction]}
+  <ReactFinalForm
     onSubmit={[MockFunction]}
-    pristine={true}
-    resetLabel="Reset"
-    submitLabel="Submit"
   >
-    <Component
-      xs={12}
+    <FormControls
+      buttonOrder={Array []}
+      canReset={true}
+      canSubmit={true}
+      cancelLabel="Cancel"
+      onCancel={[MockFunction]}
+      onReset={[MockFunction]}
+      onSubmit={[MockFunction]}
+      pristine={true}
+      resetLabel="Reset"
+      submitLabel="Submit"
     >
-      <div
-        xs={12}
-      >
-        <Component>
-          <div>
-            <Component>
-              <div>
-                <Component
-                  key="form-submit"
-                  label="Submit"
-                  onClick={[MockFunction]}
+      <ReactFinalForm(FormSpy)>
+        <FormSpy
+          reactFinalForm={
+            Object {
+              "batch": [Function],
+              "blur": [Function],
+              "change": [Function],
+              "destroyOnUnregister": false,
+              "focus": [Function],
+              "getFieldState": [Function],
+              "getRegisteredFields": [Function],
+              "getState": [Function],
+              "initialize": [Function],
+              "isValidationPaused": [Function],
+              "mutators": Object {},
+              "pauseValidation": [Function],
+              "registerField": [Function],
+              "reset": [Function],
+              "resetFieldState": [Function],
+              "resumeValidation": [Function],
+              "setConfig": [Function],
+              "submit": [Function],
+              "subscribe": [Function],
+            }
+          }
+        >
+          <Component>
+            <div>
+              <Component
+                key="form-submit"
+                label="Submit"
+                onClick={[Function]}
+                type="button"
+                variant="primary"
+              >
+                <button
+                  onClick={[Function]}
                   type="button"
                   variant="primary"
                 >
-                  <button
-                    onClick={[MockFunction]}
-                    type="button"
-                    variant="primary"
-                  >
-                    Submit
-                  </button>
-                </Component>
-                <Component
+                  Submit
+                </button>
+              </Component>
+              <Component
+                disabled={true}
+                key="form-reset"
+                label="Reset"
+                onClick={[Function]}
+                type="button"
+              >
+                <button
                   disabled={true}
-                  key="form-reset"
-                  label="Reset"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Reset
+                </button>
+              </Component>
+              <Component
+                key="form-cancel"
+                label="Cancel"
+                onClick={[MockFunction]}
+                type="button"
+              >
+                <button
                   onClick={[MockFunction]}
                   type="button"
                 >
-                  <button
-                    disabled={true}
-                    onClick={[MockFunction]}
-                    type="button"
-                  >
-                    Reset
-                  </button>
-                </Component>
-                <Component
-                  key="form-cancel"
-                  label="Cancel"
-                  onClick={[MockFunction]}
-                  type="button"
-                >
-                  <button
-                    onClick={[MockFunction]}
-                    type="button"
-                  >
-                    Cancel
-                  </button>
-                </Component>
-              </div>
-            </Component>
-          </div>
-        </Component>
-      </div>
-    </Component>
-  </FormControls>
+                  Cancel
+                </button>
+              </Component>
+            </div>
+          </Component>
+        </FormSpy>
+      </ReactFinalForm(FormSpy)>
+    </FormControls>
+  </ReactFinalForm>
 </ContextWrapper>
 `;
 
 exports[`<FormControls /> should render all controls and with default labels 1`] = `
 <ContextWrapper>
-  <FormControls
-    buttonOrder={
-      Array [
-        "submit",
-        "reset",
-        "cancel",
-      ]
-    }
-    canReset={true}
-    canSubmit={false}
-    cancelLabel="Cancel"
-    disableSubmit={true}
-    onCancel={[MockFunction]}
-    onReset={[MockFunction]}
+  <ReactFinalForm
     onSubmit={[MockFunction]}
-    pristine={true}
-    resetLabel="Reset"
-    submitLabel="Submit"
   >
-    <Component
-      xs={12}
+    <FormControls
+      buttonOrder={
+        Array [
+          "submit",
+          "reset",
+          "cancel",
+        ]
+      }
+      canReset={true}
+      canSubmit={false}
+      cancelLabel="Cancel"
+      disableSubmit={true}
+      onCancel={[MockFunction]}
+      onReset={[MockFunction]}
+      onSubmit={[MockFunction]}
+      pristine={true}
+      resetLabel="Reset"
+      submitLabel="Submit"
     >
-      <div
-        xs={12}
-      >
-        <Component>
-          <div>
-            <Component>
-              <div>
-                <Component
+      <ReactFinalForm(FormSpy)>
+        <FormSpy
+          reactFinalForm={
+            Object {
+              "batch": [Function],
+              "blur": [Function],
+              "change": [Function],
+              "destroyOnUnregister": false,
+              "focus": [Function],
+              "getFieldState": [Function],
+              "getRegisteredFields": [Function],
+              "getState": [Function],
+              "initialize": [Function],
+              "isValidationPaused": [Function],
+              "mutators": Object {},
+              "pauseValidation": [Function],
+              "registerField": [Function],
+              "reset": [Function],
+              "resetFieldState": [Function],
+              "resumeValidation": [Function],
+              "setConfig": [Function],
+              "submit": [Function],
+              "subscribe": [Function],
+            }
+          }
+        >
+          <Component>
+            <div>
+              <Component
+                disabled={true}
+                key="form-submit"
+                label="Submit"
+                onClick={[Function]}
+                type="button"
+                variant="primary"
+              >
+                <button
                   disabled={true}
-                  key="form-submit"
-                  label="Submit"
-                  onClick={[MockFunction]}
+                  onClick={[Function]}
                   type="button"
                   variant="primary"
                 >
-                  <button
-                    disabled={true}
-                    onClick={[MockFunction]}
-                    type="button"
-                    variant="primary"
-                  >
-                    Submit
-                  </button>
-                </Component>
-                <Component
+                  Submit
+                </button>
+              </Component>
+              <Component
+                disabled={true}
+                key="form-reset"
+                label="Reset"
+                onClick={[Function]}
+                type="button"
+              >
+                <button
                   disabled={true}
-                  key="form-reset"
-                  label="Reset"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Reset
+                </button>
+              </Component>
+              <Component
+                key="form-cancel"
+                label="Cancel"
+                onClick={[MockFunction]}
+                type="button"
+              >
+                <button
                   onClick={[MockFunction]}
                   type="button"
                 >
-                  <button
-                    disabled={true}
-                    onClick={[MockFunction]}
-                    type="button"
-                  >
-                    Reset
-                  </button>
-                </Component>
-                <Component
-                  key="form-cancel"
-                  label="Cancel"
-                  onClick={[MockFunction]}
-                  type="button"
-                >
-                  <button
-                    onClick={[MockFunction]}
-                    type="button"
-                  >
-                    Cancel
-                  </button>
-                </Component>
-              </div>
-            </Component>
-          </div>
-        </Component>
-      </div>
-    </Component>
-  </FormControls>
+                  Cancel
+                </button>
+              </Component>
+            </div>
+          </Component>
+        </FormSpy>
+      </ReactFinalForm(FormSpy)>
+    </FormControls>
+  </ReactFinalForm>
 </ContextWrapper>
 `;
 
 exports[`<FormControls /> should render buttons in correct order 1`] = `
 <ContextWrapper>
-  <FormControls
-    buttonOrder={
-      Array [
-        "cancel",
-        "submit",
-        "reset",
-      ]
-    }
-    canReset={true}
-    canSubmit={true}
-    cancelLabel="Cancel"
-    onCancel={[MockFunction]}
-    onReset={[MockFunction]}
+  <ReactFinalForm
     onSubmit={[MockFunction]}
-    pristine={true}
-    resetLabel="Reset"
-    submitLabel="Submit"
   >
-    <Component
-      xs={12}
+    <FormControls
+      buttonOrder={
+        Array [
+          "cancel",
+          "submit",
+          "reset",
+        ]
+      }
+      canReset={true}
+      canSubmit={true}
+      cancelLabel="Cancel"
+      onCancel={[MockFunction]}
+      onReset={[MockFunction]}
+      onSubmit={[MockFunction]}
+      pristine={true}
+      resetLabel="Reset"
+      submitLabel="Submit"
     >
-      <div
-        xs={12}
-      >
-        <Component>
-          <div>
-            <Component>
-              <div>
-                <Component
-                  key="form-cancel"
-                  label="Cancel"
+      <ReactFinalForm(FormSpy)>
+        <FormSpy
+          reactFinalForm={
+            Object {
+              "batch": [Function],
+              "blur": [Function],
+              "change": [Function],
+              "destroyOnUnregister": false,
+              "focus": [Function],
+              "getFieldState": [Function],
+              "getRegisteredFields": [Function],
+              "getState": [Function],
+              "initialize": [Function],
+              "isValidationPaused": [Function],
+              "mutators": Object {},
+              "pauseValidation": [Function],
+              "registerField": [Function],
+              "reset": [Function],
+              "resetFieldState": [Function],
+              "resumeValidation": [Function],
+              "setConfig": [Function],
+              "submit": [Function],
+              "subscribe": [Function],
+            }
+          }
+        >
+          <Component>
+            <div>
+              <Component
+                key="form-cancel"
+                label="Cancel"
+                onClick={[MockFunction]}
+                type="button"
+              >
+                <button
                   onClick={[MockFunction]}
                   type="button"
                 >
-                  <button
-                    onClick={[MockFunction]}
-                    type="button"
-                  >
-                    Cancel
-                  </button>
-                </Component>
-                <Component
-                  key="form-submit"
-                  label="Submit"
-                  onClick={[MockFunction]}
+                  Cancel
+                </button>
+              </Component>
+              <Component
+                key="form-submit"
+                label="Submit"
+                onClick={[Function]}
+                type="button"
+                variant="primary"
+              >
+                <button
+                  onClick={[Function]}
                   type="button"
                   variant="primary"
                 >
-                  <button
-                    onClick={[MockFunction]}
-                    type="button"
-                    variant="primary"
-                  >
-                    Submit
-                  </button>
-                </Component>
-                <Component
+                  Submit
+                </button>
+              </Component>
+              <Component
+                disabled={true}
+                key="form-reset"
+                label="Reset"
+                onClick={[Function]}
+                type="button"
+              >
+                <button
                   disabled={true}
-                  key="form-reset"
-                  label="Reset"
-                  onClick={[MockFunction]}
+                  onClick={[Function]}
                   type="button"
                 >
-                  <button
-                    disabled={true}
-                    onClick={[MockFunction]}
-                    type="button"
-                  >
-                    Reset
-                  </button>
-                </Component>
-              </div>
-            </Component>
-          </div>
-        </Component>
-      </div>
-    </Component>
-  </FormControls>
+                  Reset
+                </button>
+              </Component>
+            </div>
+          </Component>
+        </FormSpy>
+      </ReactFinalForm(FormSpy)>
+    </FormControls>
+  </ReactFinalForm>
 </ContextWrapper>
 `;
 
 exports[`<FormControls /> should render only submit button 1`] = `
 <ContextWrapper>
-  <FormControls
-    buttonOrder={
-      Array [
-        "submit",
-        "reset",
-        "cancel",
-      ]
-    }
-    canReset={false}
-    canSubmit={false}
-    cancelLabel="Cancel"
-    onReset={[MockFunction]}
+  <ReactFinalForm
     onSubmit={[MockFunction]}
-    pristine={true}
-    resetLabel="Reset"
-    submitLabel="Submit"
   >
-    <Component
-      xs={12}
+    <FormControls
+      buttonOrder={
+        Array [
+          "submit",
+          "reset",
+          "cancel",
+        ]
+      }
+      canReset={false}
+      canSubmit={false}
+      cancelLabel="Cancel"
+      onReset={[MockFunction]}
+      onSubmit={[MockFunction]}
+      pristine={true}
+      resetLabel="Reset"
+      submitLabel="Submit"
     >
-      <div
-        xs={12}
-      >
-        <Component>
-          <div>
-            <Component>
-              <div>
-                <Component
-                  key="form-submit"
-                  label="Submit"
-                  onClick={[MockFunction]}
+      <ReactFinalForm(FormSpy)>
+        <FormSpy
+          reactFinalForm={
+            Object {
+              "batch": [Function],
+              "blur": [Function],
+              "change": [Function],
+              "destroyOnUnregister": false,
+              "focus": [Function],
+              "getFieldState": [Function],
+              "getRegisteredFields": [Function],
+              "getState": [Function],
+              "initialize": [Function],
+              "isValidationPaused": [Function],
+              "mutators": Object {},
+              "pauseValidation": [Function],
+              "registerField": [Function],
+              "reset": [Function],
+              "resetFieldState": [Function],
+              "resumeValidation": [Function],
+              "setConfig": [Function],
+              "submit": [Function],
+              "subscribe": [Function],
+            }
+          }
+        >
+          <Component>
+            <div>
+              <Component
+                key="form-submit"
+                label="Submit"
+                onClick={[Function]}
+                type="button"
+                variant="primary"
+              >
+                <button
+                  onClick={[Function]}
                   type="button"
                   variant="primary"
                 >
-                  <button
-                    onClick={[MockFunction]}
-                    type="button"
-                    variant="primary"
-                  >
-                    Submit
-                  </button>
-                </Component>
-              </div>
-            </Component>
-          </div>
-        </Component>
-      </div>
-    </Component>
-  </FormControls>
+                  Submit
+                </button>
+              </Component>
+            </div>
+          </Component>
+        </FormSpy>
+      </ReactFinalForm(FormSpy)>
+    </FormControls>
+  </ReactFinalForm>
 </ContextWrapper>
 `;

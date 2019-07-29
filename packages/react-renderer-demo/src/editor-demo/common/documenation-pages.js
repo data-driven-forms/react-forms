@@ -6,6 +6,7 @@ import Condition from './doc-texts/condition';
 import Validators from './doc-texts/validators';
 import FieldProvider from './doc-texts/field-provider';
 import Unmounting from './doc-texts/unmounting';
+import FormControls from './doc-texts/form-controls';
 
 export const docs = [{
   component: 'installation',
@@ -39,4 +40,8 @@ export const docs = [{
   component: 'field-provider',
   linkText: 'FieldProvider',
   contentText: FieldProvider,
+}, {
+  component: 'form-controls',
+  linkText: 'Form buttons',
+  contentText: FormControls,
 }];

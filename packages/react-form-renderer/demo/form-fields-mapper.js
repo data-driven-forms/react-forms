@@ -1,7 +1,7 @@
 import React from 'react';
 import { components } from '../src/constants';
 
-const TextField = ({ input, meta, label, formOptions, helperText, isRequired, dataType, isDisabled, isReadOnly, ...rest }) => (
+const TextField = ({ FieldProvider, isVisible, input, meta, label, formOptions, helperText, isRequired, dataType, isDisabled, isReadOnly, ...rest }) => (
   <div>
     <label>{ label } &nbsp;</label>
     <input { ...input } { ...rest } />
@@ -9,7 +9,7 @@ const TextField = ({ input, meta, label, formOptions, helperText, isRequired, da
   </div>
 );
 
-const SelectField = ({ input, meta, label, formOptions, helperText, isRequired, dataType, isDisabled, isReadOnly, options, ...rest }) => (
+const SelectField = ({ FieldProvider, isVisible, input, meta, label, formOptions, helperText, isRequired, dataType, isDisabled, isReadOnly, options, ...rest }) => (
   <div>
     <label>{ label } &nbsp;</label>
     <select { ...input } { ...rest }>
