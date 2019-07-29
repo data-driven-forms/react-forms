@@ -58,12 +58,14 @@ const selectComponent = ({
       value={ option.value }
       type="radio"
       render={ ({ input }) => (
-        <Radio { ...input }
+        <Radio
+          { ...input }
+          isChecked={ input.checked }
           label={ option.label }
           id={ `${input.name}-${option.value}` }
           aria-label={ option.label }
           isDisabled={ isDisabled || isReadOnly }
-          onChange={ () => { input.onChange(option.value); } } />) }
+          onChange={ () => input.onChange(option.value) } />) }
     />
   )),
   [componentTypes.SWITCH]: () => {
