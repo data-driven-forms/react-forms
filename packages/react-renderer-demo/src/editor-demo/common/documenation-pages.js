@@ -2,6 +2,7 @@ import GetStartedText from './doc-texts/get-started';
 import InstallationText from './doc-texts/installation';
 import FormSchemasText from './doc-texts/form-schemas';
 import ComponentMappingText from './doc-texts/component-mapping';
+import ComponentApi from './doc-texts/component-api';
 import Condition from './doc-texts/condition';
 import Validators from './doc-texts/validators';
 import FieldProvider from './doc-texts/field-provider';
@@ -23,6 +24,10 @@ export const docs = [{
   component: 'component-mapping',
   linkText: 'Create component mapper',
   contentText: ComponentMappingText,
+}, {
+  component: 'component-api',
+  linkText: 'Components API',
+  contentText: ComponentApi,
 }, {
   component: 'conditions',
   linkText: 'Conditional fields',
