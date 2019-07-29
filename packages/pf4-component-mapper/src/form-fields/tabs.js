@@ -24,11 +24,13 @@ class FormTabs extends React.Component {
   ));
 
   render() {
-    const { fields, formOptions, dataType, FieldProvider, ...rest } = this.props;
-    return <Tabs activeKey={ this.state.activeTabKey } onSelect={ this.handleTabClick } { ...rest }>
-      { this.renderTabItems(fields, formOptions) }
-    </Tabs>
-    ;}
+    const { fields, formOptions, dataType, FieldProvider, validate, ...rest } = this.props;
+    return (
+      <Tabs activeKey={ this.state.activeTabKey } onSelect={ this.handleTabClick } { ...rest }>
+        { this.renderTabItems(fields, formOptions) }
+      </Tabs>
+    );
+  }
 }
 
 FormTabs.propTypes = {
