@@ -6,6 +6,8 @@ import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-rend
 import { formFieldsMapper, layoutMapper } from '@data-driven-forms/mui-component-mapper';
 import { formFieldsMapper as pf4FormFieldsMapper, layoutMapper as pf4LayoutMapper } from '@data-driven-forms/pf4-component-mapper';
 import { formFieldsMapper as pf3FormFieldsMapper, layoutMapper as pf3LayoutMapper } from '@data-driven-forms/pf3-component-mapper';
+import { makeStyles } from '@material-ui/core/styles';
+import Snackbar from '@material-ui/core/Snackbar';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Select from '@material-ui/core/Select';
@@ -25,9 +27,9 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Tooltip from '@material-ui/core/Tooltip';
 import MuiWizzard from '../demo-missing-fields/mui-wizzard/wizzard';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 import 'brace/mode/jsx';
 import 'brace/mode/json';
@@ -61,6 +63,44 @@ const mapperVariants = {
     layoutMapper: pf3LayoutMapper,
   },
   pf4: { formFieldsMapper: { ...pf4FormFieldsMapper, summary: () => <div>Pf4 summary</div> }, layoutMapper: pf4LayoutMapper },
+};
+
+const useStyles = makeStyles(theme => ({
+  close: {
+    padding: theme.spacing(0.5),
+  },
+}));
+
+const CopySnackbar = ({ open, handleClose }) => {
+  const classes = useStyles();
+  return (
+    <Snackbar
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'right',
+      }}
+      open={ open }
+      autoHideDuration={ 6000 }
+      onClose={ handleClose }
+      message={ <span>Field was coppied to clipboard</span> }
+      action={ [
+        <IconButton
+          key="close"
+          aria-label="close"
+          color="inherit"
+          className={ classes.close }
+          onClick={ handleClose }
+        >
+          <CloseIcon />
+        </IconButton>,
+      ] }
+    />
+  );
+};
+
+CopySnackbar.propTypes = {
+  open: PropTypes.bool,
+  handleClose: PropTypes.func.isRequired,
 };
 
 class ComponentExample extends Component {
@@ -255,25 +295,12 @@ class ComponentExample extends Component {
         <Grid item xs={ 4 } >
           <div style={{ background: '#272822', height: 510 }}>
             <Grid item xs={ 12 } container={ true } justify='flex-end' style={{ position: 'relative', zIndex: 100 }}>
-              <ClickAwayListener onClickAway={ this.handleTooltipClose }>
-                <Tooltip
-                  PopperProps={{
-                    disablePortal: true,
-                  }}
-                  onClose={ this.handleTooltipClose }
-                  open={ openTooltip }
-                  disableFocusListener
-                  disableHoverListener
-                  disableTouchListener
-                  title="Copied"
-                >
-                  <CopyToClipboard text={ editedValue } onCopy={ this.handleTooltipOpen }>
-                    <Button variant="outlined" color="secondary" style={{ margin: 10 }}>
-                      Copy
-                    </Button>
-                  </CopyToClipboard>
-                </Tooltip>
-              </ClickAwayListener>
+              <CopyToClipboard text={ editedValue } onCopy={ this.handleTooltipOpen }>
+                <Button variant="outlined" color="secondary" style={{ margin: 10 }}>
+                  Copy
+                </Button>
+              </CopyToClipboard>
+              <CopySnackbar open={ openTooltip } handleClose={ this.handleTooltipClose } />
             </Grid>
             <AceEditor
               readOnly
