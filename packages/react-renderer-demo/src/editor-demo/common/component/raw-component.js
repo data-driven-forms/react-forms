@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 
-import brace from 'brace';
-import AceEditor from 'react-ace';
-
 import { makeStyles } from '@material-ui/core/styles';
 import CodeIcon from '@material-ui/icons/Code';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -13,8 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 
-import 'brace/mode/jsx';
-import 'brace/theme/tomorrow_night';
+import CodeEditor from './code-editor';
 
 const reqSource = require.context(
   '!raw-loader!docs/components/',
@@ -48,29 +44,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const renderers = {
-  code: ({ value, language }) =>(
+  code: ({ value, language }) => (
     <div style={{ width: '100%', paddingTop: 10, background: '#1d1f21' }}>
-      <AceEditor
-        readOnly
-        mode={ typeof language === 'string' ? language.toLowerCase() : 'jsx' }
-        theme="tomorrow_night"
-        name="UNIQUE_ID_OF_DIV"
-        editorProps={{ $blockScrolling: true }}
-        value={ value }
-        fontSize={ 14 }
-        maxLines={ Infinity }
-        showPrintMargin={ false }
-        showGutter={ true }
-        highlightActiveLine={ false }
-        style={{ width: '100%', paddingTop: 10 }}
-        setOptions={{
-          showLineNumbers: true,
-        }}
-        onLoad={ (editor) => {
-          editor.getSession().setUseWorker(false);
-        } }
-      />
-    </div>),
+      <CodeEditor value={ value } language={ language } />
+    </div>
+  ),
 };
 
 const MdRenderer = props => <ReactMarkdown renderers={ renderers } { ...props } />;
