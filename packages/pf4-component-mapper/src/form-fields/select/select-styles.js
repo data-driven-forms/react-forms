@@ -5,7 +5,7 @@ const style = {
       outline: 'none',
     },
   }),
-  control: (provided, { isFocused }) => ({
+  control: (provided, { isFocused, isMulti }) => ({
     ...provided,
     borderRadius: 0,
     borderColor: '#EDEDED',
@@ -19,9 +19,11 @@ const style = {
     '&:hover': {
       borderBottomColor: '#007bba',
     },
-  }),
-  clearIndicator: provided => ({
-    ...provided,
+    input: {
+      backgroundColor: 'red',
+      position: 'relative !important',
+      left: isMulti ? '5px !important' : '14px !important',
+    },
   }),
   indicatorSeparator: () => ({}),
   dropdownIndicator: provided => ({
@@ -79,7 +81,6 @@ const style = {
   input: (provided, props) => ({
     ...provided,
     position: 'relative',
-    left: props.isMulti ? 5 : 14,
   }),
   multiValueLabel: provided => ({
     ...provided,

@@ -8,15 +8,6 @@ import { TimesCircleIcon, CaretDownIcon, CheckIcon } from '@patternfly/react-ico
 import selectStyles from './select-styles';
 import './select-styles.scss';
 
-const Input = props => <components.Input { ...props } isMulti={ props.selectProps.isMulti } />;
-
-Input.propTypes = {
-  isHidden: PropTypes.bool,
-  selectProps: PropTypes.shape({
-    isMulti: PropTypes.bool,
-  }).isRequired,
-};
-
 const MultiValueContainer = (props, ...rest) => (
   <div className="pf4-ddforms-multiselect-chip" title={ props.data.label }>
     <span>{ props.children[0] }</span>
@@ -175,7 +166,6 @@ export class Select extends React.Component {
           DropdownIndicator,
           ClearIndicator,
           Option,
-          Input,
         }}
         { ...props }
         onChange={ (option) => {
