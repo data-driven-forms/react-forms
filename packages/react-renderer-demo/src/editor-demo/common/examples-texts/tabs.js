@@ -26,7 +26,7 @@ export default ({ activeMapper }) =>
         </Typography>
         <Typography variant="body1">Because of schema flexibility there is no simple and efficient way to signal invalid tab content.</Typography>
         <Typography variant="body1">
-          If you want to add some visual feedback for this case, please specify field names to <pre style={{ display: 'inline' }}>validateFields</pre> attribute.
+          If you want to add some visual feedback for this case, please specify field names to <strong>validateFields</strong> attribute.
         </Typography>
       </Fragment>
     ) }
