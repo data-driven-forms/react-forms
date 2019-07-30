@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import Typography from '@material-ui/core/Typography';
-import AceEditor from 'react-ace';
 import Link from '@material-ui/core/Link';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -16,7 +15,7 @@ import { headerToId } from '../helpers/list-of-content';
 import ShareButton from './share-button';
 import { makeStyles } from '@material-ui/core/styles';
 
-import 'brace/theme/tomorrow_night';
+import CodeEditor from '../component/code-editor';
 
 // TO DO remove all react-markdown occurances with mdx
 
@@ -35,29 +34,11 @@ const useHeadingStyles = makeStyles(() => ({
 
 const renderers = {
   paragraph: ({ children }) => <Typography variant="body1" gutterBottom>{ children }</Typography>,
-  code: ({ value, language }) =>
+  code: ({ value, language }) => (
     <div style={{ background: '#1d1f21', paddingTop: 5, paddingBottom: 5, marginTop: 10, marginBottom: 10 }}>
-      <AceEditor
-        readOnly
-        mode={ typeof language === 'string' ? language.toLowerCase() : 'jsx' }
-        theme="tomorrow_night"
-        name="UNIQUE_ID_OF_DIV"
-        editorProps={{ $blockScrolling: true }}
-        value={ value }
-        fontSize={ 14 }
-        maxLines={ Infinity }
-        showPrintMargin={ false }
-        showGutter={ true }
-        highlightActiveLine={ false }
-        style={{ width: '80%', margin: 10 }}
-        setOptions={{
-          showLineNumbers: true,
-        }}
-        onLoad={ (editor) => {
-          editor.getSession().setUseWorker(false);
-        } }
-      />
-    </div>,
+      <CodeEditor language={ language } value={ value }/>
+    </div>
+  ),
   link: ({ href, children }) => <Link href={ href }>{ children }</Link>,
   heading: ({ level, children }) => {
     const classes = useHeadingStyles();

@@ -1,7 +1,6 @@
 import React, { Component  } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import AceEditor from 'react-ace';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -9,10 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { componentTypes as components, validatorTypes as validators, defaultSchemaValidator } from '@data-driven-forms/react-form-renderer';
 import { formFieldsMapper, layoutMapper } from '@data-driven-forms/mui-component-mapper';
-import 'brace/mode/jsx';
-import 'brace/mode/json';
-import 'brace/snippets/json';
-import 'brace/theme/monokai';
+
+import CodeEditor from '../common/component/code-editor';
 
 const baseStructure = {
   fields: [
@@ -568,26 +565,12 @@ class FormRendererPage extends Component {
           item
           xs={ 6 }
         >
-          <div>
-            <AceEditor
+          <div style={{ width: '100%', paddingTop: 10, background: '#1d1f21' }}>
+            <CodeEditor
+              readOnly={ false }
               mode="json"
-              theme="monokai"
               onChange={ this.onChange }
-              name="UNIQUE_ID_OF_DIV"
-              editorProps={{ $blockScrolling: true }}
               value={ value }
-              fontSize={ 14 }
-              style={{ width: '100%' }}
-              showPrintMargin={ true }
-              showGutter={ true }
-              highlightActiveLine={ true }
-              setOptions={{
-                enableBasicAutocompletion: true,
-                enableLiveAutocompletion: true,
-                enableSnippets: true,
-                showLineNumbers: true,
-                tabSize: 2,
-              }}
             />
           </div>
 

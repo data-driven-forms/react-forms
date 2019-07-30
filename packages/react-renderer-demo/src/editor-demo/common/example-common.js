@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
-import AceEditor from 'react-ace';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
 import { formFieldsMapper, layoutMapper } from '@data-driven-forms/mui-component-mapper';
 import { formFieldsMapper as pf4FormFieldsMapper, layoutMapper as pf4LayoutMapper } from '@data-driven-forms/pf4-component-mapper';
@@ -31,10 +30,7 @@ import MuiWizzard from '../demo-missing-fields/mui-wizzard/wizzard';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
-import 'brace/mode/jsx';
-import 'brace/mode/json';
-import 'brace/snippets/json';
-import 'brace/theme/monokai';
+import CodeEditor from './component/code-editor';
 
 // Text inputs are first, then all other actions are sorted by title
 const comparator = (a, b) => {
@@ -293,7 +289,7 @@ class ComponentExample extends Component {
           </Typography>
         </Grid>
         <Grid item xs={ 4 } >
-          <div style={{ background: '#272822', height: 510 }}>
+          <div style={{ background: '#1d1f21', height: 510 }}>
             <Grid item xs={ 12 } container={ true } justify='flex-end' style={{ position: 'relative', zIndex: 100 }}>
               <CopyToClipboard text={ editedValue } onCopy={ this.handleTooltipOpen }>
                 <Button variant="outlined" color="secondary" style={{ margin: 10 }}>
@@ -302,19 +298,17 @@ class ComponentExample extends Component {
               </CopyToClipboard>
               <CopySnackbar open={ openTooltip } handleClose={ this.handleTooltipClose } />
             </Grid>
-            <AceEditor
+            <CodeEditor
               readOnly
               mode="json"
-              theme="monokai"
               onChange={ this.onChange }
-              name="UNIQUE_ID_OF_DIV"
               editorProps={{ $blockScrolling: true }}
               value={ editedValue }
               fontSize={ 14 }
               showPrintMargin={ false }
               showGutter={ true }
               highlightActiveLine={ true }
-              style={{ width: '100%', top: -45 }}
+              style={{ top: -45 }}
               setOptions={{
                 enableBasicAutocompletion: true,
                 enableLiveAutocompletion: true,
