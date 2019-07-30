@@ -65,7 +65,7 @@ All those components provides a shared group of props:
 |isClearable|boolean|Allows to clear the selected option|
 |isSearchable|boolean|Allows to search in the options|
 
-<ExampleLink to='select' />
+<ExampleLink to='select-field' />
 
 #### Checkbox
 
