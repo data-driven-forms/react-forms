@@ -19,8 +19,6 @@ const schemaMapper = type => ({
   default: schema => ({ schema }),
 })[type];
 
-const renderControls = ({ formStyle, ...props }) => formStyle !== 'wizard' ? <FormControls { ...props }/> : null;
-
 const isDisabled = (disableStates, getState) => disableStates.map(item => getState()[item]).find(item => !!item);
 
 const FormRenderer = ({
@@ -42,6 +40,7 @@ const FormRenderer = ({
   clearOnUnmount,
   validate,
   onStateUpdate,
+  renderFormButtons,
 }) => {
   const inputSchema = schemaMapper(schemaType)(schema, uiSchema);
   let schemaError;
@@ -68,7 +67,7 @@ const FormRenderer = ({
       }}
       validate={ validate }
       subscription={{ pristine: true, submitting: true, valid: true }}
-      render={ ({ handleSubmit, pristine, valid, form: { reset, mutators, getState, submit, ...form }}) => (
+      render={ ({ handleSubmit, pristine, valid, form: { reset, mutators, getState, submit, ...form }, ...state }) => (
         <RendererContext.Provider value={ configureContext({
           layoutMapper,
           formFieldsMapper,
@@ -93,22 +92,20 @@ const FormRenderer = ({
                 { inputSchema.schema.title && renderTitle(inputSchema.schema.title) }
                 { inputSchema.schema.description && renderDescription(inputSchema.schema.description) }
                 { renderForm(inputSchema.schema.fields) }
-                { showFormControls && renderControls({
-                  buttonOrder,
-                  buttonClassName,
-                  onSubmit: handleSubmit,
-                  onCancel,
-                  canReset,
-                  onReset: () => {
-                    if (canReset) {
-                      onReset && onReset();
-                      reset();
-                    }},
-                  pristine,
-                  disableSubmit: isDisabled(disableSubmit, getState),
-                  ...buttonsLabels,
-                }) }
                 { onStateUpdate && <FormSpy onChange={ onStateUpdate } /> }
+                { showFormControls && (
+                  <FormControls
+                    buttonOrder={ buttonOrder }
+                    FormButtons={ renderFormButtons }
+                    buttonClassName={ buttonClassName }
+                    onCancel={ onCancel }
+                    canReset={ canReset }
+                    onReset={ onReset }
+                    handleSubmit={ handleSubmit }
+                    disableSubmit={ isDisabled(disableSubmit, getState) }
+                    { ...buttonsLabels }
+                  />
+                ) }
               </FormWrapper>
             ) }
           </RendererContext.Consumer>
@@ -137,6 +134,7 @@ FormRenderer.propTypes = {
   clearOnUnmount: PropTypes.bool,
   validate: PropTypes.func,
   onStateUpdate: PropTypes.func,
+  renderFormButtons: PropTypes.oneOfType([ PropTypes.node, PropTypes.element, PropTypes.func ]),
 };
 
 FormRenderer.defaultProps = {

@@ -17,7 +17,15 @@ const layoutMapper = {
   [layoutComponents.BUTTON]: ({ label, variant, children, ...props }) => <Button bsStyle={ variant } { ...props }>{ label || children }</Button>,
   [layoutComponents.COL]: ({ children, xs, ...rest }) => <div key={ rest.key || rest.name }>{ children }</div>,
   [layoutComponents.FORM_GROUP]: FormGroup,
-  [layoutComponents.BUTTON_GROUP]: ({ children, ...props }) => <ButtonGroup className="pull-right" { ...props }>{ children }</ButtonGroup>,
+  [layoutComponents.BUTTON_GROUP]: ({ children, ...props }) => (
+    <ButtonGroup
+      className="pull-right"
+      style={{ display: 'inline-block' }}
+      { ...props }
+    >
+      { children }
+    </ButtonGroup>
+  ),
   [layoutComponents.ICON]: props => <Icon { ...props } />,
   [layoutComponents.ARRAY_FIELD_WRAPPER]: ArrayFieldWrapper,
   [layoutComponents.HELP_BLOCK]: HelpBlock,

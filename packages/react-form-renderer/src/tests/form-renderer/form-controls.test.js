@@ -1,4 +1,5 @@
 import React from 'react';
+import { Form } from 'react-final-form';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import FormControls from '../../form-renderer/form-controls';
@@ -17,11 +18,15 @@ describe('<FormControls />', () => {
       [layoutComponents.BUTTON_GROUP]: ({ children, ...props }) => <div { ...props }>{ children }</div>,
     };
     ContextWrapper = ({ children, ...props }) => (
-      <RendererContext.Provider
-        value={ configureContext({ layoutMapper: initialLayout, ...props }) }
-      >
-        { children }
-      </RendererContext.Provider>
+      <Form onSubmit={ jest.fn() }>
+        { () => (
+          <RendererContext.Provider
+            value={ configureContext({ layoutMapper: initialLayout, ...props }) }
+          >
+            { children }
+          </RendererContext.Provider>
+        ) }
+      </Form>
     );
     initialProps = {
       onSubmit: jest.fn(),
@@ -55,28 +60,6 @@ describe('<FormControls />', () => {
       </ContextWrapper>
     );
     expect(toJson(wrapper)).toMatchSnapshot();
-  });
-
-  it('should enable reset button if pristine is false', () => {
-    const wrapper = mount(
-      <ContextWrapper>
-        <FormControls { ...initialProps } pristine={ false } />
-      </ContextWrapper>
-    );
-
-    wrapper.find('button').at(1).simulate('click');
-    expect(initialProps.onReset).toHaveBeenCalled();
-  });
-
-  it('should enable submit button if canSubmit is true', () => {
-    const wrapper = mount(
-      <ContextWrapper>
-        <FormControls { ...initialProps } canSubmit />
-      </ContextWrapper>
-    );
-
-    wrapper.find('button').first().simulate('click');
-    expect(initialProps.onSubmit).toHaveBeenCalled();
   });
 
   it('should render buttons in correct order', () => {
