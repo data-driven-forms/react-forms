@@ -599,7 +599,7 @@ class FormRendererPage extends Component {
                 </Typography>
                 <div>
                   <List>
-                    { Object.values(components).map(item => item === 'wizard' ? null : (
+                    { [ ...new Set(Object.values(components)) ].map(item => item === 'wizard' ? null : (
                       <ListItem key={ item }>
                         <ListItemText
                           primary={ item }

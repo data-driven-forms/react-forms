@@ -79,7 +79,7 @@ const WizardStepButtons = ({ formOptions, disableBack, handlePrev, nextStep, Fie
 
 WizardStepButtons.propTypes = {
   formOptions: PropTypes.shape({
-    onCancel: PropTypes.func.isRequired,
+    onCancel: PropTypes.func,
     handleSubmit: PropTypes.func.isRequired,
   }).isRequired,
   disableBack: PropTypes.bool,
