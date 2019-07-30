@@ -43,7 +43,6 @@ class ClearIndicator extends Component {
         onMouseEnter={ () => this.setState(() => ({ fill: CHIP_CLEAR_BACKGROUND_HOVER_COLOR })) }
         onMouseLeave={ () => this.setState(() => ({ fill: CHIP_CLEAR_BACKGROUND_COLOR })) }
         fill={ fill }
-        { ...this.props.getStyles('clearIndicator', this.props) }
       />
     );
   }
