@@ -49,6 +49,32 @@ describe('FormFields', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
+  it('should save TextField type=number as a number', () => {
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <TextField { ...props } input={{ ...props.input, onChange }} type='number'/>
+    );
+
+    wrapper.find('input').instance().value = '55';
+    wrapper.find('input').simulate('change');
+    wrapper.update();
+
+    expect(onChange).toHaveBeenCalledWith(55);
+  });
+
+  it('should save TextField as a string', () => {
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <TextField { ...props } input={{ ...props.input, onChange }}/>
+    );
+
+    wrapper.find('input').instance().value = '55';
+    wrapper.find('input').simulate('change');
+    wrapper.update();
+
+    expect(onChange).toHaveBeenCalledWith('55');
+  });
+
   it('should render TextField with description correctly', () => {
     const wrapper = mount(
       <TextField { ...props } description="This is description" />

@@ -35,6 +35,7 @@ const selectComponent = ({
       { ...rest }
       isReadOnly={ isReadOnly }
       isDisabled={ isDisabled }
+      onChange={ (value) => input.onChange(rest.type === 'number' ? Number(value) : value) }
     />
   ),
   [componentTypes.TEXTAREA_FIELD]: () => <TextArea disabled={ isDisabled || isReadOnly } { ...input } { ...rest } />,
