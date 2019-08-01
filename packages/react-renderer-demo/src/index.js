@@ -1,12 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import Docs from './editor-demo/App';
+import Docs from './App';
 
 const App = () => (
   <BrowserRouter>
-    <Fragment>
-      <Docs />
-    </Fragment>
+    <Docs />
   </BrowserRouter>
 );
 

@@ -6,6 +6,7 @@ import AceEditor from 'react-ace';
 
 import 'brace/mode/jsx';
 import 'brace/mode/json';
+import 'brace/mode/sh';
 import 'brace/snippets/json';
 import 'brace/theme/tomorrow_night';
 

@@ -4,6 +4,11 @@ export const navStyles = theme => ({
   root: {
     display: 'flex !important',
   },
+  navHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+  },
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
