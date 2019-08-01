@@ -28,14 +28,14 @@ describe('<Select />', () => {
 
   it('should return single simple value', () => {
     const wrapper = mount(<Select { ...initialProps }/>);
-    const option = wrapper.find('.pf4-ddforms-select-menu-option').first().find('div').last();
+    const option = wrapper.find('.ddorg__pf4-component-mapper__select__menu--option').first().find('div').last();
     option.simulate('click');
     expect(onChange).toHaveBeenCalledWith(1);
   });
 
   it('should return single object value', () => {
     const wrapper = mount(<Select { ...initialProps } simpleValue={ false }/>);
-    const option = wrapper.find('.pf4-ddforms-select-menu-option').first().find('div').last();
+    const option = wrapper.find('.ddorg__pf4-component-mapper__select__menu--option').first().find('div').last();
     option.simulate('click');
     expect(onChange).toHaveBeenCalledWith({ ...initialProps.options[0] });
   });
@@ -48,12 +48,12 @@ describe('<Select />', () => {
     /**
      * select first option
      */
-    const option1 = wrapper.find('.pf4-ddforms-select-menu-option').first().find('div').last();
+    const option1 = wrapper.find('.ddorg__pf4-component-mapper__select__menu--option').first().find('div').last();
     option1.simulate('click');
     /**
      * select second option
      */
-    const option2 = wrapper.find('.pf4-ddforms-select-menu-option').last().find('div').last();
+    const option2 = wrapper.find('.ddorg__pf4-component-mapper__select__menu--option').last().find('div').last();
     option2.simulate('click');
     wrapper.update();
     expect(onChange).toHaveBeenCalledTimes(2);
@@ -75,12 +75,12 @@ describe('<Select />', () => {
     /**
      * select first option
      */
-    const option1 = wrapper.find('.pf4-ddforms-select-menu-option').first().find('div').last();
+    const option1 = wrapper.find('.ddorg__pf4-component-mapper__select__menu--option').first().find('div').last();
     option1.simulate('click');
     /**
      * select second option
      */
-    const option2 = wrapper.find('.pf4-ddforms-select-menu-option').last().find('div').last();
+    const option2 = wrapper.find('.ddorg__pf4-component-mapper__select__menu--option').last().find('div').last();
     option2.simulate('click');
     wrapper.update();
     expect(onChange).toHaveBeenCalledTimes(2);
@@ -91,10 +91,10 @@ describe('<Select />', () => {
     const value = [ 1, 2 ];
     const wrapper = mount(<Select { ...initialProps } value={ value } isMulti closeMenuOnSelect={ false }/>);
 
-    expect(wrapper.find('.pf4-ddforms-multiselect-chip')).toHaveLength(1);
-    const expandButton = wrapper.find('button.pf4-ddforms-multiselect-chipgroup-button');
+    expect(wrapper.find('.ddorg__pf4-component-mapper__select__multivalue--container')).toHaveLength(1);
+    const expandButton = wrapper.find('button.pf-c-button.pf-m-plain.ddorg__pf4-component-mapper__select__value--container-chipgroup');
     expandButton.simulate('click');
-    expect(wrapper.find('.pf4-ddforms-multiselect-chip')).toHaveLength(2);
+    expect(wrapper.find('.ddorg__pf4-component-mapper__select__multivalue--container')).toHaveLength(2);
   });
 
   it('should call on change when removing chip', () => {

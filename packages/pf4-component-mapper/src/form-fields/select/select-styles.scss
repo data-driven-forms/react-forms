@@ -1,57 +1,153 @@
-.pf4-ddforms-select-menu-option {
-  display: flex;
-  align-items: center;
-  &.focused {
-    background-color: #ededed;
-  }
-}
+.ddorg__pf4-component-mapper__select {
+  .ddorg__pf4-component-mapper__select__control {
+      box-shadow: none;
+      cursor: pointer;
+      border-radius: 0;
+      border: 0;
+      &::before {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          content: "";
+          border: var(--pf-global--BorderWidth--sm) solid;
+          border-color: var(--pf-global--Color--light-200);
+          border-bottom-color: var(--pf-global--Color--dark-100);
+      }
+      &:hover::before {
 
-.pf4-ddforms-multiselect-chip {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center;
-  box-sizing: border-box;
-  line-height: 24px;
-  position: relative;
-  margin-right: 4px;
-  font-size: 12px;
-  max-height: 26px;
-  >.multi-value-remove-button {
+           border-bottom-color: var(--pf-global--active-color--100);
+      }
+
+       &.ddorg__pf4-component-mapper__select__control--is-focused::before {
+          border-bottom-width: var(--pf-global--BorderWidth--md);
+          border-bottom-color: var(--pf-global--active-color--100);
+      }
+      .ddorg__pf4-component-mapper__select__indicators {
+          padding-right: 6px;
+          z-index: 1;
+          .ddorg__pf4-component-mapper__select__indicator-separator {
+              display: none;
+          }
+          svg:first-child {
+              fill: var(--pf-global--Color--400);
+
+               &:hover {
+                  fill: var(--pf-global--Color--dark-100);
+              }
+          }
+      }
+  }
+
+   .ddorg__pf4-component-mapper__select__menu {
+      cursor: pointer;
+      border-radius: 0;
+      z-index: 2;
+  }
+
+   .ddorg__pf4-component-mapper__select__menu--option {
+      display: flex;
+      align-items: center;
+
+       &.focused {
+          background-color: var(--pf-global--Color--light-200);
+      }
+
+       svg {
+          width: 0.6em;
+          margin-right: 10px;
+          fill: var(--pf-global--active-color--100);
+      }
+
+       div.pf-c-check {
+          padding-left: 1rem;
+          & + .ddorg__pf4-component-mapper__select__option {
+              padding-left: 0;
+          }
+      }
+  }
+
+  .ddorg__pf4-component-mapper__select__menu--option div {
+      background: transparent;
+      cursor: pointer;
+      color: var(--pf-global--Color--300);
+  }
+
+  .ddorg__pf4-component-mapper__select__single-value {
+    padding-left: 8px;
+  }
+
+  .ddorg__pf4-component-mapper__select__multivalue--container {
     display: flex;
-  }
-  &::before {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    content: "";
-    border: 1px solid #72767b;
-    border-radius: 3px;
-    pointer-events: none;
-  }
-}
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    box-sizing: border-box;
+    line-height: 24px;
+    position: relative;
+    margin-right: 4px;
+    font-size: 12px;
+    max-height: 26px;
 
-.pf4-ddforms-multiselect-chipgroup-button {
-  padding: 4px 6px !important;
-  font-size: 12px !important;
-  background-color: #ededed !important;
-  border: 1px solid #ededed !important;
-  margin: 0 !important;
-  max-height: 26px !important;
-  &:hover{
-    border-color: #151515 !important;
-  }
-  >span {
-    color: #151515 !important;
-  }
-}
+    > .ddorg__pf4-component-mapper__select__multivalue--remove {
+      display: flex;
 
-.pf4-ddforms-multi-value {
-  display: flex;
-  padding-left: 8px;
-  align-items: center;
-  flex-wrap: wrap;
-  width: calc(100% - 48px)
+      svg {
+        fill: var(--pf-global--Color--400);
+      }
+
+      > :hover {
+        background: transparent;
+        svg {
+            fill: var(--pf-global--Color--dark-100);
+        }
+      }
+    }
+
+    &::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      content: "";
+      border: var(--pf-global--BorderWidth--sm) solid var(--pf-global--Color--dark-200);
+      border-radius: 3px;
+      pointer-events: none;
+    }
+  }
+
+   .ddorg__pf4-component-mapper__select__value--container {
+      display: flex;
+      padding-left: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      max-width: calc(100% - 2.5rem);
+
+       .ddorg__pf4-component-mapper__select__multivalue--container {
+          align-items: initial;
+          .ddorg__pf4-component-mapper__select__multi-value__label {
+            max-width: 240px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+          }
+      }
+
+       .ddorg__pf4-component-mapper__select__value--container-chipgroup {
+          padding: 4px 6px;
+          font-size: 12px;
+          background-color: var(--pf-global--BorderColor--300);
+          border: var(--pf-global--BorderWidth--sm) solid var(--pf-global--BorderColor--300);
+          margin: 0;
+          max-height: 26px;
+              &:hover{
+                  border-color: var(--pf-global--Color--dark-100);
+              }
+              > span {
+                  color: var(--pf-global--Color--dark-100);
+              }
+          }
+  }
 }
