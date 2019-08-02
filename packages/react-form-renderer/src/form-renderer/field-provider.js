@@ -1,6 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Children } from 'react';
 import { Field } from 'react-final-form';
 import PropTypes from 'prop-types';
+
+import enhancedOnChange from './enhanced-on-change';
+import { dataTypes } from '../constants';
 
 class FieldProvider extends Component{
   componentWillUnmount(){
@@ -10,8 +13,42 @@ class FieldProvider extends Component{
   }
 
   render(){
-    const { clearOnUnmount, ...props } = this.props;
-    return <Field { ...props } />;
+    const { clearOnUnmount, component, render, dataType, children, ...props } = this.props;
+    if (component) {
+      const FieldComponent = component;
+      return <Field { ...props } render={ ({ input: { onChange, ...input }, ...fieldsProps }) => (
+        <FieldComponent
+          { ...fieldsProps }
+          input={{
+            ...input,
+            onChange: (...args) => enhancedOnChange(dataType, onChange, ...args),
+          }}
+        />
+      ) } />;
+    }
+
+    if (render) {
+      return <Field { ...props } render={ ({ input: { onChange, ...input }, ...fieldsProps }) => render({
+        ...fieldsProps,
+        input: {
+          ...input,
+          onChange: (...args) => enhancedOnChange(dataType, onChange, ...args),
+        },
+      }) } />;
+    }
+
+    const ChildComponent = children;
+    return (
+      <Field { ...props }>
+        { ({ input: { onChange, ...input }, ...fieldsProps }) =>
+          Children.only(
+            <ChildComponent
+              { ...fieldsProps }
+              input={{ ...input, onChange: (...args) => enhancedOnChange(dataType, onChange, ...args)  }}
+            />
+          ) }
+      </Field>
+    );
   }
 }
 
@@ -20,6 +57,10 @@ FieldProvider.propTypes = {
     clearOnUnmount: PropTypes.bool,
     change: PropTypes.func,
   }),
+  component: PropTypes.oneOfType(PropTypes.node, PropTypes.element, PropTypes.func),
+  render: PropTypes.func,
+  children: PropTypes.oneOfType(PropTypes.node, PropTypes.element, PropTypes.func),
+  dataType: PropTypes.oneOf(Object.values(dataTypes)),
   name: PropTypes.string,
   clearOnUnmount: PropTypes.bool,
 };

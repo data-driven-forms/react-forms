@@ -41,7 +41,6 @@ const prepareValidator = (validator) => ((typeof validator === 'function')
 
 const prepareFieldProps = field => ({
   ...field,
-  dataType: undefined,
   validate: field.validate
     ? [
       ...field.validate.map((validator) => prepareValidator(validator)),

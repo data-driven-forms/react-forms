@@ -163,4 +163,7 @@ export const dataTypeValidator = type => ({
   number: options => pattern({
     pattern: /^\d*[.]{0,1}\d*$/, message: 'Values mut be number', ...options,
   }),
+  float: options => pattern({
+    pattern: /^\d*[.]{0,1}\d*$/, message: 'Values mut be number', ...options,
+  }),
 })[type];
