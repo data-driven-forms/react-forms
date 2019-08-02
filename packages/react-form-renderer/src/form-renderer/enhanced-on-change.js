@@ -4,7 +4,7 @@ import { dataTypes } from '../constants';
  * Pick a value from event object and returns it
  * @param {Object|Any} event event value returned from form field
  */
-const sanytyzeValue = event =>
+const sanitizeValue = event =>
   (typeof event === 'object' && event.target && event.target.value)
     ? event.target.value
     : event;
@@ -40,6 +40,6 @@ const convertType = (dataType, value) => ({
  * @param {Any} value value to be type casted
  * @param  {...any} args rest of orininal function arguments
  */
-const enhancedOnChange = (dataType, onChange, value, ...args) => onChange(convertType(dataType, sanytyzeValue(value)), ...args);
+const enhancedOnChange = (dataType, onChange, value, ...args) => onChange(convertType(dataType, sanitizeValue(value)), ...args);
 
 export default enhancedOnChange;

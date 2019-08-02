@@ -71,5 +71,5 @@ export const dataTypes = {
   FLOAT: 'float',
   NUMBER: 'number',
   BOOLEAN: 'boolean',
-  STRING: 'stirng',
+  STRING: 'string',
 };
