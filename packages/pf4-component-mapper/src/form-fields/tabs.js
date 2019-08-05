@@ -38,6 +38,9 @@ FormTabs.propTypes = {
   formOptions: PropTypes.shape({
     renderForm: PropTypes.func.isRequired,
   }).isRequired,
+  dataType: PropTypes.any,
+  FieldProvider: PropTypes.any,
+  validate: PropTypes.any,
 };
 
 export default FormTabs;

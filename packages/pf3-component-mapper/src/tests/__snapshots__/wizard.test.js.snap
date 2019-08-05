@@ -141,7 +141,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
           <div
             className="wizard-pf-footer modal-footer"
           >
-            <_default
+            <ButtonOverride
               color="secondary"
               onClick={[MockFunction]}
               style={
@@ -184,8 +184,8 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                   Cancel
                 </button>
               </Button>
-            </_default>
-            <_default
+            </ButtonOverride>
+            <ButtonOverride
               disabled={true}
               onClick={[Function]}
               type="button"
@@ -234,7 +234,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                   Back
                 </button>
               </Button>
-            </_default>
+            </ButtonOverride>
             <SimpleNext
               FieldProvider={[Function]}
               buttonLabels={
@@ -253,7 +253,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
               submit={[Function]}
               valid={true}
             >
-              <_default
+              <ButtonOverride
                 bsStyle="primary"
                 onClick={[Function]}
                 type="button"
@@ -299,7 +299,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                     </Icon>
                   </button>
                 </Button>
-              </_default>
+              </ButtonOverride>
             </SimpleNext>
           </div>
         </ModalFooter>
@@ -469,7 +469,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
           <div
             className="wizard-pf-footer modal-footer"
           >
-            <_default
+            <ButtonOverride
               color="secondary"
               onClick={[MockFunction]}
               style={
@@ -512,8 +512,8 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                   Cancel
                 </button>
               </Button>
-            </_default>
-            <_default
+            </ButtonOverride>
+            <ButtonOverride
               disabled={true}
               onClick={[Function]}
               type="button"
@@ -562,7 +562,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                   Back
                 </button>
               </Button>
-            </_default>
+            </ButtonOverride>
             <ConditionalNext
               FieldProvider={[Function]}
               buttonLabels={
@@ -612,7 +612,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                   submit={[Function]}
                   valid={true}
                 >
-                  <_default
+                  <ButtonOverride
                     bsStyle="primary"
                     onClick={[Function]}
                     type="button"
@@ -658,7 +658,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                         </Icon>
                       </button>
                     </Button>
-                  </_default>
+                  </ButtonOverride>
                 </SimpleNext>
               </MockFieldProvider>
             </ConditionalNext>
@@ -915,7 +915,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
           <div
             className="wizard-pf-footer modal-footer"
           >
-            <_default
+            <ButtonOverride
               color="secondary"
               onClick={[MockFunction]}
               style={
@@ -958,8 +958,8 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                   Cancel
                 </button>
               </Button>
-            </_default>
-            <_default
+            </ButtonOverride>
+            <ButtonOverride
               disabled={true}
               onClick={[Function]}
               type="button"
@@ -1008,7 +1008,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                   Back
                 </button>
               </Button>
-            </_default>
+            </ButtonOverride>
             <SimpleNext
               FieldProvider={[Function]}
               buttonLabels={
@@ -1027,7 +1027,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
               submit={[Function]}
               valid={true}
             >
-              <_default
+              <ButtonOverride
                 bsStyle="primary"
                 onClick={[Function]}
                 type="button"
@@ -1073,7 +1073,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                     </Icon>
                   </button>
                 </Button>
-              </_default>
+              </ButtonOverride>
             </SimpleNext>
           </div>
         </ModalFooter>
@@ -1245,7 +1245,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
           <div
             className="wizard-pf-footer modal-footer"
           >
-            <_default
+            <ButtonOverride
               color="secondary"
               onClick={[MockFunction]}
               style={
@@ -1288,8 +1288,8 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                   Cancel
                 </button>
               </Button>
-            </_default>
-            <_default
+            </ButtonOverride>
+            <ButtonOverride
               disabled={true}
               onClick={[Function]}
               type="button"
@@ -1338,7 +1338,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                   Back
                 </button>
               </Button>
-            </_default>
+            </ButtonOverride>
             <SimpleNext
               FieldProvider={[Function]}
               buttonLabels={
@@ -1357,7 +1357,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
               submit={[Function]}
               valid={true}
             >
-              <_default
+              <ButtonOverride
                 bsStyle="primary"
                 onClick={[Function]}
                 type="button"
@@ -1403,7 +1403,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                     </Icon>
                   </button>
                 </Button>
-              </_default>
+              </ButtonOverride>
             </SimpleNext>
           </div>
         </ModalFooter>

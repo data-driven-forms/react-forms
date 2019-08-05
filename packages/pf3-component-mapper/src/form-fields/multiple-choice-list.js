@@ -1,7 +1,9 @@
 import React from 'react';
-import RequiredLabel from './required-label';
-import { Checkbox, Col, FormGroup, ControlLabel } from 'patternfly-react';
+import PropTypes from 'prop-types';
+import { Checkbox,  FormGroup, ControlLabel } from 'patternfly-react';
 import { composeValidators } from '@data-driven-forms/react-form-renderer';
+
+import RequiredLabel from './required-label';
 
 const MultipleChoiceList = ({ validate, FieldProvider, ...props }) => (
   <FieldProvider { ...props } validate={ composeValidators(props.validate || []) }>
@@ -55,5 +57,11 @@ const MultipleChoiceList = ({ validate, FieldProvider, ...props }) => (
     } }
   </FieldProvider>
 );
+
+MultipleChoiceList.propTypes = {
+  validate: PropTypes.func,
+  FieldProvider: PropTypes.oneOfType([ PropTypes.node, PropTypes.func ]),
+  name: PropTypes.string.isRequired,
+};
 
 export default MultipleChoiceList;

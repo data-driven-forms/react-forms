@@ -6,6 +6,7 @@ import { composeValidators } from '@data-driven-forms/react-form-renderer';
 const propTypes = {
   validate: PropTypes.oneOfType([ PropTypes.array, PropTypes.func ]),
   FieldProvider: PropTypes.oneOfType([ PropTypes.node, PropTypes.func ]),
+  name: PropTypes.string.isRequired,
 };
 
 const MultipleChoiceList = ({ validate, FieldProvider, ...props }) => (
