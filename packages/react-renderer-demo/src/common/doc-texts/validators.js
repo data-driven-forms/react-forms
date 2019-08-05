@@ -96,6 +96,10 @@ validatorTypes = {
    * Regexp pattern validator
    */
   PATTERN_VALIDATOR: 'pattern-validator',
+  /**
+   * URL validator
+   * /
+  URL: 'url-validator',
 }
 
 const validate = [{

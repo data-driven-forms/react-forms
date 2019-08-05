@@ -64,6 +64,22 @@ export const prepareMsg = (msg, type, values) => {
   return { id: msg, defaultMessage: msg, values };
 };
 
+export const assign =
+  Object.assign ||
+  /* istanbul ignore next */
+  function (obj) {
+    for (let i = 1, len = arguments.length; i < len; ++i) {
+      let source = arguments[i];
+      if (source != null) {for (let key in source) {
+        if (HAS_PROP.call(source, key)) {
+          obj[key] = source[key];
+        }
+      }}
+    }
+
+    return obj;
+  };
+
 export const prepare = func => (value, allValues, ...args) => func(value, allValues, ...args);
 
 export const isNumber = num => !isNaN(num) && (num !== 0 || ('' + num).trim() !== '');

@@ -211,4 +211,51 @@ describe('New validators', () => {
       expect(validatorMapper(validators.MIN_LENGTH)({ threshold: 5 })('12')).toEqual('Bar');
     });
   });
+
+  describe('URL validator', () => {
+    const failMessage = 'String is not URL.';
+    it('should pass validation without any configuration', () => {
+      expect(validatorMapper(validators.URL)({})('https://www.google.com/')).toBeUndefined();
+      expect(validatorMapper(validators.URL)({})('http://www.google.com/')).toBeUndefined();
+    });
+
+    it('should fail validation withouth any configuration', () => {
+      expect(validatorMapper(validators.URL)({})('https://www.')).toBe(failMessage);
+    });
+
+    it('should validate only URL with ftp protocol', () => {
+      expect(validatorMapper(validators.URL)({ protocol: 'ftp' })('https://www.google.com/')).toBe(failMessage);
+      expect(validatorMapper(validators.URL)({ protocol: 'ftp' })('ftp://www.google.com/')).toBeUndefined();
+    });
+
+    it('should validate only URL with ftp and shh protocols', () => {
+      expect(validatorMapper(validators.URL)({ protocols: [ 'ftp', 'ssh' ]})('https://www.google.com/')).toBe(failMessage);
+      expect(validatorMapper(validators.URL)({ protocols: [ 'ftp', 'ssh' ]})('ftp://www.google.com/')).toBeUndefined();
+      expect(validatorMapper(validators.URL)({ protocols: [ 'ftp', 'ssh' ]})('ssh://www.google.com/')).toBeUndefined();
+    });
+
+    it('should validate only IPv4 adress as valid URL', () => {
+      expect(validatorMapper(validators.URL)({ ipv4: false })('http://123.123.123.222/')).toBe(failMessage);
+      expect(validatorMapper(validators.URL)({})('http://123.123.123.222')).toBeUndefined();
+    });
+
+    it('should validate only IPv4 adress as valid URL without protocol', () => {
+      expect(validatorMapper(validators.URL)({ protocolIdentifier: false })('123.123.123.222')).toBeUndefined();
+    });
+
+    it('should validate only as invalid URL without initial //', () => {
+      expect(validatorMapper(validators.URL)({})('//www.google.com')).toBeUndefined();
+      expect(validatorMapper(validators.URL)({ emptyProtocol: false })('//www.google.com')).toBe(failMessage);
+    });
+
+    it('should validate only IPv6 adress as valid URL', () => {
+      expect(validatorMapper(validators.URL)({ ipv6: false })('http://2001:db8:85a3::8a2e:370:7334:3838/')).toBe(failMessage);
+      expect(validatorMapper(validators.URL)({})('http://2001:db8:85a3::8a2e:370:7334:3838')).toBeUndefined();
+      expect(validatorMapper(validators.URL)({ protocolIdentifier: false })('2001:db8:85a3::8a2e:370:7334:3838')).toBeUndefined();
+      expect(validatorMapper(validators.URL)({ protocolIdentifier: false })('::1')).toBeUndefined();
+      expect(validatorMapper(validators.URL)({ protocolIdentifier: false })('1::')).toBeUndefined();
+      expect(validatorMapper(validators.URL)({ protocolIdentifier: false })('1::xxx')).toBe(failMessage);
+      expect(validatorMapper(validators.URL)({ protocolIdentifier: false, ipv4: false })('192.168.1.1')).toBe(failMessage);
+    });
+  });
 });
