@@ -109,9 +109,8 @@ Select.defaultProps = {
   loadingMessage: 'Loading...',
 };
 
-const DataDrivenSelect = ({ input, multi, ...props }) => (
+const DataDrivenSelect = ({ multi, ...props }) => (
   <Select
-    { ...input }
     hideSelectedOptions={ false }
     isMulti={ multi }
     { ...props }
@@ -120,10 +119,8 @@ const DataDrivenSelect = ({ input, multi, ...props }) => (
 );
 
 DataDrivenSelect.propTypes = {
-  input: PropTypes.shape({
-    value: PropTypes.any,
-    onChange: PropTypes.func,
-  }).isRequired,
+  value: PropTypes.any,
+  onChange: PropTypes.func,
   multi: PropTypes.bool,
   placeholder: PropTypes.string,
 };

@@ -109,11 +109,9 @@ describe('<Select />', () => {
     const props = {
       multi: true,
       options: [{ label: 'a', value: 1 }, { label: 'b', value: 2 }],
-      input: {
-        name: 'foo',
-        onChange: Function,
-        value: [ 1, 2 ],
-      },
+      name: 'foo',
+      onChange: Function,
+      value: [ 1, 2 ],
     };
     const wrapper = mount(<DataDrivenSelect { ...props }/>);
     const mappedProps = wrapper.find(Select).props();
