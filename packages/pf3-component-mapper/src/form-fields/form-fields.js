@@ -106,6 +106,7 @@ FinalFormField.propTypes = {
   description: PropTypes.string,
   hideLabel: PropTypes.bool,
   isVisible: PropTypes.bool,
+  noCheckboxLabel: PropTypes.bool,
 };
 
 const CheckboxGroupField = ({ options, ...rest }) =>
