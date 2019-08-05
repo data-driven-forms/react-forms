@@ -8,6 +8,6 @@ Because almost everything in html inputs is outputed as a string, adding the `da
 ### Available dataTypes
 
 ```jsx
-['integer', 'float', 'number', 'bool', 'string']
+['integer', 'float', 'number', 'boolean', 'string']
 ```
 <RawComponent source="data-types/data-types-example" />

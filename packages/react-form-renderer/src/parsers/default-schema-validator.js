@@ -1,6 +1,6 @@
 import DefaultSchemaError from './schema-errors';
 import isValidComponent from './isValidComponent';
-import { validators, components } from '../constants';
+import { validators, components, dataTypes } from '../constants';
 
 const componentBlackList = [ components.FIELD_ARRAY, components.FIXED_LIST, 'tab-item' ];
 
@@ -94,6 +94,22 @@ const checkValidators = (validate, fieldName) => {
   });
 };
 
+const checkDataType = (type, fieldName) => {
+  if (typeof type !== 'string') {
+    throw new DefaultSchemaError(`
+    Error occured in field definition with name: "${fieldName}".
+    Unknow dataType. Data type must be string
+    `);
+  }
+
+  if (!Object.values(dataTypes).includes(type)) {
+    throw new DefaultSchemaError(`
+    Error occured in field definition with name: "${fieldName}".
+    Unknow dataType ${type}. Must be one these values: ${Object.values(dataTypes)}
+    `);
+  }
+};
+
 const iterateOverFields = (fields, formFieldsMapper, layoutMapper, parent = {}) => {
   fields.forEach(field => {
     if (Array.isArray(field)) {
@@ -129,6 +145,10 @@ const iterateOverFields = (fields, formFieldsMapper, layoutMapper, parent = {}) 
 
     if (field.hasOwnProperty('validate')) {
       checkValidators(field.validate, field.name);
+    }
+
+    if (field.hasOwnProperty('dataType')) {
+      checkDataType(field.dataType, field.name);
     }
 
     if (field.hasOwnProperty('fields')) {
