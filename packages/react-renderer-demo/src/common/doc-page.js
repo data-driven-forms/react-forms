@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import { docs } from './documenation-pages';
 import { otherExamples } from './other-pages';
+import Container from '@material-ui/core/Container';
 
 class ComponentExample extends Component {
   constructor(props) {
@@ -29,16 +30,21 @@ class ComponentExample extends Component {
   render () {
     const { linkText, contentText } = this.state;
     return (
-      <Grid container spacing={ 6 } >
-        <Grid item xs={ 12 } >
-          <Typography variant="h4" gutterBottom >
-            { linkText }
-          </Typography>
+      <Container>
+        <Grid
+          container
+          direction="row"
+        >
+          <Grid item xs={ 12 } >
+            <Typography variant="h4" gutterBottom >
+              { linkText }
+            </Typography>
+          </Grid>
+          <Grid item xs={ 12 } >
+            { contentText }
+          </Grid>
         </Grid>
-        <Grid item xs={ 12 } >
-          { contentText }
-        </Grid>
-      </Grid>
+      </Container>
     );
   }
 }

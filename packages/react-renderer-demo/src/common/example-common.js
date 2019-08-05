@@ -265,7 +265,8 @@ class ComponentExample extends Component {
     return (
       <Grid
         container
-        spacing={ 3 }
+        direction="row"
+        spacing={4}
       >
         <Grid item xs={ 12 } >
           <Typography variant="h4" gutterBottom>
@@ -289,8 +290,8 @@ class ComponentExample extends Component {
           </Typography>
         </Grid>
         <Grid item xs={ 4 } >
-          <div style={{ background: '#1d1f21', height: 510 }}>
-            <Grid item xs={ 12 } container={ true } justify='flex-end' style={{ position: 'relative', zIndex: 100 }}>
+          <div style={{ background: '#1d1f21', position: 'relative' }}>
+            <Grid item xs={ 12 } container={ true } justify='flex-end' style={{ position: 'absolute', zIndex: 100 }}>
               <CopyToClipboard text={ editedValue } onCopy={ this.handleTooltipOpen }>
                 <Button variant="outlined" color="secondary" style={{ margin: 10 }}>
                   Copy
@@ -308,7 +309,7 @@ class ComponentExample extends Component {
               showPrintMargin={ false }
               showGutter={ true }
               highlightActiveLine={ true }
-              style={{ top: -45 }}
+              style={{ width: '100%' }}
               setOptions={{
                 enableBasicAutocompletion: true,
                 enableLiveAutocompletion: true,

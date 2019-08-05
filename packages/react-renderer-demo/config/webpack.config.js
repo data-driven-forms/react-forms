@@ -8,7 +8,7 @@ const path = require('path');
 const commonConfig = {
   resolve: {
     alias: {
-      'docs/components': path.resolve(__dirname, './../src/editor-demo/docs-components'),
+      'docs/components': path.resolve(__dirname, './../src/docs-components'),
     },
   },
   node: {

@@ -4,15 +4,16 @@ import { formFieldsMapper, layoutMapper } from '@data-driven-forms/mui-component
 import { formFieldsMapper as pf3FormFieldsMapper, layoutMapper as pf3LayoutMapper } from '@data-driven-forms/pf3-component-mapper';
 import { formFieldsMapper as pf4FormFieldsMapper, layoutMapper as pf4LayoutMapper } from '@data-driven-forms/pf4-component-mapper';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
-import { schema, uiSchema, conditionalSchema } from '../../demo-data/widget-schema';
-import MiqSchema from '../../demo-data/miq-schema';
-import wizardSchema from '../../demo-data/wizard-schema';
+import { schema, uiSchema, conditionalSchema } from '../demo-data/widget-schema';
+import MiqSchema from '../demo-data/miq-schema';
+import wizardSchema from '../demo-data/wizard-schema';
 import MuiWizzard from '../demo-missing-fields/mui-wizzard/wizzard';
 
 class DemoForms extends Component {
@@ -42,7 +43,7 @@ class DemoForms extends Component {
   handleSchemaChange = (_event, value) => this.setState({ activeSchema: value });
   render() {
     return (
-      <Grid container spacing={ 4 }>
+      <Grid container direction="row" justify="space-evenly">
         <Grid item xs={ 2 }>
           <FormControl component="fieldset">
             <FormLabel component="legend">Select form mapper</FormLabel>
@@ -74,15 +75,17 @@ class DemoForms extends Component {
           </FormControl>
         </Grid>
         <Grid item xs={ 10 }>
-          <div className={ this.state.activeMapper } style={{ padding: 16 }}>
-            <FormRenderer
-              { ...this.state.mappers[this.state.activeMapper] }
-              { ...this.state.schemas[this.state.activeSchema] }
-              onSubmit={ console.log }
-              onCancel={ () => console.log('action canceled') }
-              showFormControls={ this.state.activeSchema !== 'wizard' }
-            />
-          </div>
+          <Paper>
+            <div className={ this.state.activeMapper } style={{ padding: 16 }}>
+              <FormRenderer
+                { ...this.state.mappers[this.state.activeMapper] }
+                { ...this.state.schemas[this.state.activeSchema] }
+                onSubmit={ console.log }
+                onCancel={ () => console.log('action canceled') }
+                showFormControls={ this.state.activeSchema !== 'wizard' }
+              />
+            </div>
+          </Paper>
         </Grid>
       </Grid>
     );
