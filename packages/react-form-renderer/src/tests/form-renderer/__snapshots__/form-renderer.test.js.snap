@@ -851,6 +851,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
             autoFocus={false}
             component={[Function]}
             componentType="text-field"
+            dataType="string"
             default="I'm a hidden string."
             formOptions={
               Object {
@@ -905,6 +906,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               FieldProvider={[Function]}
               autoFocus={false}
               component={[Function]}
+              dataType="string"
               default="I'm a hidden string."
               formOptions={
                 Object {
@@ -954,7 +956,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               <ReactFinalForm(Field)
                 FieldProvider={[Function]}
                 autoFocus={false}
-                component={[Function]}
                 default="I'm a hidden string."
                 formOptions={
                   Object {
@@ -998,13 +999,13 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 }
                 label="secret"
                 name="secret"
+                render={[Function]}
                 type="text"
                 validate={[Function]}
               >
                 <Field
                   FieldProvider={[Function]}
                   autoFocus={false}
-                  component={[Function]}
                   default="I'm a hidden string."
                   formOptions={
                     Object {
@@ -1085,6 +1086,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                       "subscribe": [Function],
                     }
                   }
+                  render={[Function]}
                   type="text"
                   validate={[Function]}
                 >
@@ -1180,6 +1182,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
             autoFocus={false}
             component={[Function]}
             componentType="text-field"
+            dataType="string"
             default="I am disabled."
             formOptions={
               Object {
@@ -1235,6 +1238,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               FieldProvider={[Function]}
               autoFocus={false}
               component={[Function]}
+              dataType="string"
               default="I am disabled."
               formOptions={
                 Object {
@@ -1285,7 +1289,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               <ReactFinalForm(Field)
                 FieldProvider={[Function]}
                 autoFocus={false}
-                component={[Function]}
                 default="I am disabled."
                 formOptions={
                   Object {
@@ -1329,6 +1332,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 }
                 label="A disabled field"
                 name="disabled"
+                render={[Function]}
                 title="A disabled field"
                 type="text"
                 validate={[Function]}
@@ -1336,7 +1340,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 <Field
                   FieldProvider={[Function]}
                   autoFocus={false}
-                  component={[Function]}
                   default="I am disabled."
                   formOptions={
                     Object {
@@ -1417,6 +1420,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                       "subscribe": [Function],
                     }
                   }
+                  render={[Function]}
                   title="A disabled field"
                   type="text"
                   validate={[Function]}
@@ -1514,6 +1518,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
             autoFocus={false}
             component={[Function]}
             componentType="text-field"
+            dataType="string"
             default="I am read-only."
             formOptions={
               Object {
@@ -1569,6 +1574,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               FieldProvider={[Function]}
               autoFocus={false}
               component={[Function]}
+              dataType="string"
               default="I am read-only."
               formOptions={
                 Object {
@@ -1619,7 +1625,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               <ReactFinalForm(Field)
                 FieldProvider={[Function]}
                 autoFocus={false}
-                component={[Function]}
                 default="I am read-only."
                 formOptions={
                   Object {
@@ -1663,6 +1668,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 }
                 label="A readonly field"
                 name="readonly"
+                render={[Function]}
                 title="A readonly field"
                 type="text"
                 validate={[Function]}
@@ -1670,7 +1676,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 <Field
                   FieldProvider={[Function]}
                   autoFocus={false}
-                  component={[Function]}
                   default="I am read-only."
                   formOptions={
                     Object {
@@ -1751,6 +1756,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                       "subscribe": [Function],
                     }
                   }
+                  render={[Function]}
                   title="A readonly field"
                   type="text"
                   validate={[Function]}
@@ -1848,6 +1854,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
             autoFocus={false}
             component={[Function]}
             componentType="text-field"
+            dataType="string"
             default="I am yellow"
             formOptions={
               Object {
@@ -1903,6 +1910,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               FieldProvider={[Function]}
               autoFocus={false}
               component={[Function]}
+              dataType="string"
               default="I am yellow"
               formOptions={
                 Object {
@@ -1953,7 +1961,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               <ReactFinalForm(Field)
                 FieldProvider={[Function]}
                 autoFocus={false}
-                component={[Function]}
                 default="I am yellow"
                 formOptions={
                   Object {
@@ -1997,6 +2004,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 }
                 label="Custom widget with options"
                 name="widgetOptions"
+                render={[Function]}
                 title="Custom widget with options"
                 type="text"
                 validate={[Function]}
@@ -2004,7 +2012,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 <Field
                   FieldProvider={[Function]}
                   autoFocus={false}
-                  component={[Function]}
                   default="I am yellow"
                   formOptions={
                     Object {
@@ -2085,6 +2092,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                       "subscribe": [Function],
                     }
                   }
+                  render={[Function]}
                   title="Custom widget with options"
                   type="text"
                   validate={[Function]}
@@ -2182,6 +2190,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
             autoFocus={false}
             component={[Function]}
             componentType="select-field"
+            dataType="string"
             formOptions={
               Object {
                 "batch": [Function],
@@ -2252,6 +2261,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               FieldProvider={[Function]}
               autoFocus={false}
               component={[Function]}
+              dataType="string"
               formOptions={
                 Object {
                   "batch": [Function],
@@ -2317,7 +2327,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               <ReactFinalForm(Field)
                 FieldProvider={[Function]}
                 autoFocus={false}
-                component={[Function]}
                 formOptions={
                   Object {
                     "batch": [Function],
@@ -2376,6 +2385,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                     },
                   ]
                 }
+                render={[Function]}
                 title="Custom select widget with options"
                 type="string"
                 validate={[Function]}
@@ -2383,7 +2393,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 <Field
                   FieldProvider={[Function]}
                   autoFocus={false}
-                  component={[Function]}
                   formOptions={
                     Object {
                       "batch": [Function],
@@ -2479,6 +2488,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                       "subscribe": [Function],
                     }
                   }
+                  render={[Function]}
                   title="Custom select widget with options"
                   type="string"
                   validate={[Function]}

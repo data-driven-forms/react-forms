@@ -90,3 +90,17 @@ exports[`Default schema validator should fail if input is not a object 1`] = `"F
 exports[`Default schema validator should fail if input object does fields key that is not array 1`] = `"Component of type schema must contain \\"fields\\" property of type array, received type: object!"`;
 
 exports[`Default schema validator should fail if input object does not have fields key 1`] = `"Component of type schema must contain \\"fields\\" property of type array, received undefined!"`;
+
+exports[`Default schema validator should fail validation when using wrong data type 1`] = `
+"
+    Error occured in field definition with name: \\"foo\\".
+    Unknow dataType foo. Must be one these values: integer,float,number,boolean,string
+    "
+`;
+
+exports[`Default schema validator should fail validation when using wrong data type 2`] = `
+"
+    Error occured in field definition with name: \\"foo\\".
+    Unknow dataType. Data type must be string
+    "
+`;

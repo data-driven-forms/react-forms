@@ -161,6 +161,9 @@ export const dataTypeValidator = type => ({
   }),
   boolean: options => booleanValidator({ message: 'Field value has to be boolean', ...options }),
   number: options => pattern({
-    pattern: /^\d*[.]{0,1}\d*$/, message: 'Values mut be number', ...options,
+    pattern: /^\d*[.]{0,1}\d*$/, message: 'Values must be number', ...options,
+  }),
+  float: options => pattern({
+    pattern: /^\d*[.]{0,1}\d*$/, message: 'Values must be number', ...options,
   }),
 })[type];

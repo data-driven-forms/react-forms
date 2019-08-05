@@ -141,6 +141,19 @@ describe('Default schema validator', () => {
     }]}, formFieldsMapper)).toThrowErrorMatchingSnapshot();
   });
 
+  it('should fail validation when using wrong data type', () => {
+    expect(() => defaultSchemaValidator({ fields: [{
+      component: 'foo',
+      name: 'foo',
+      dataType: 'foo',
+    }]}, formFieldsMapper)).toThrowErrorMatchingSnapshot();
+    expect(() => defaultSchemaValidator({ fields: [{
+      component: 'foo',
+      name: 'foo',
+      dataType: {},
+    }]}, formFieldsMapper)).toThrowErrorMatchingSnapshot();
+  });
+
   it('should pass validation', () => {
     expect(() => defaultSchemaValidator(output, {
       ...formFieldsMapper, 'sub-form': () => <div />,

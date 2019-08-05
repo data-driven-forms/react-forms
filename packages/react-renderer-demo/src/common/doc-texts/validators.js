@@ -3,29 +3,6 @@ import ReactMarkdown from '../md-helper';
 import TableOfContent from '../helpers/list-of-content';
 
 const text = `
-You can validate a form by using of \`dataType\` or \`validate\`.
-
-DataTypes is used when you need validate only a data type of a value. For more complicated validators, you have to use validate.
-
-### dataType
-
-You can specify a type of a component by providing \`dataType\`, which will automatically validates the component.
-
-\`\`\`jsx
-{
-  component: 'text-field',
-  name: 'number',
-  type: 'number',
-  label: 'Integer number',
-  dataType: 'integer',
-}
-\`\`\`
-
-Currently, there are four types supported:
-\`\`\`jsx
-['integer', 'number', 'bool', 'string']
-\`\`\`
-
 ### Overwriting default messages
 
 Validators is a singleton. You can change its default messages:

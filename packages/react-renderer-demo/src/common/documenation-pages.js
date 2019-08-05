@@ -8,6 +8,7 @@ import Validators from './doc-texts/validators';
 import FieldProvider from './doc-texts/field-provider';
 import Unmounting from './doc-texts/unmounting';
 import FormControls from './doc-texts/form-controls';
+import DataTypes from './doc-texts/data-types';
 
 export const docs = [{
   component: 'installation',
@@ -41,6 +42,10 @@ export const docs = [{
   component: 'validators',
   linkText: 'Validators',
   contentText: Validators,
+}, {
+  component: 'data-types',
+  linkText: 'Data types',
+  contentText: DataTypes,
 }, {
   component: 'field-provider',
   linkText: 'FieldProvider',

@@ -62,3 +62,14 @@ export const layoutComponents = {
   TITLE: 'Title',
   DESCRIPTION: 'Description',
 };
+
+/**
+ * @enum {String}
+ */
+export const dataTypes = {
+  INTEGER: 'integer',
+  FLOAT: 'float',
+  NUMBER: 'number',
+  BOOLEAN: 'boolean',
+  STRING: 'string',
+};
