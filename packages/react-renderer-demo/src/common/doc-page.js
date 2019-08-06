@@ -30,21 +30,19 @@ class ComponentExample extends Component {
   render () {
     const { linkText, contentText } = this.state;
     return (
-      <Container>
-        <Grid
-          container
-          direction="row"
-        >
-          <Grid item xs={ 12 } >
-            <Typography variant="h4" gutterBottom >
-              { linkText }
-            </Typography>
-          </Grid>
-          <Grid item xs={ 12 } >
-            { contentText }
-          </Grid>
+      <Grid
+        container
+        direction="row"
+      >
+        <Grid item xs={ 12 } >
+          <Typography variant="h4" gutterBottom >
+            { linkText }
+          </Typography>
         </Grid>
-      </Container>
+        <Grid item xs={ 12 } >
+          { contentText }
+        </Grid>
+      </Grid>
     );
   }
 }
