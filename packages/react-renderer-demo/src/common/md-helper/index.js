@@ -20,6 +20,10 @@ import CodeEditor from '../component/code-editor';
 // TO DO remove all react-markdown occurances with mdx
 
 const useHeadingStyles = makeStyles(() => ({
+  anchorOffset: {
+    position: 'relative',
+    top: -92, // compensate for fixed header size and spacing
+  },
   heading: {
     marginBottom: 10,
     marginTop: 10,
@@ -44,7 +48,7 @@ const renderers = {
     const classes = useHeadingStyles();
     return (
       <React.Fragment>
-        <a id={ headerToId(children[0].props.value) } />
+        <a id={ headerToId(children[0].props.value) } className={ classes.anchorOffset } />
         <Typography className={ classes.heading } variant={ `h${level + 2}` }>{ children }<ShareButton text={ headerToId(children[0].props.value) }/></Typography>
       </React.Fragment>
     );
