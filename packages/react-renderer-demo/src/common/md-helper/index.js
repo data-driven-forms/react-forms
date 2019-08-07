@@ -48,7 +48,7 @@ const renderers = {
     const classes = useHeadingStyles();
     return (
       <React.Fragment>
-        <a id={ headerToId(children[0].props.value) } className={ classes.anchorOffset } />
+        <a id={ headerToId(children[0].props.value) } className={ classes.anchorOffset } data-mdlink="md-heading" />
         <Typography className={ classes.heading } variant={ `h${level + 2}` }>{ children }<ShareButton text={ headerToId(children[0].props.value) }/></Typography>
       </React.Fragment>
     );

@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -47,19 +48,59 @@ const useStyles = makeStyles(theme => ({
   listItemText: {
     color: 'red',
   },
+  listItemActive: {
+    position: 'relative',
+    background: theme.palette.common.white,
+    '&::before': {
+      position: 'absolute',
+      left: -0,
+      display: 'block',
+      content: '""',
+      width: 2,
+      height: '100%',
+      background: theme.palette.grey[700],
+    },
+  },
+  contentHeader: {
+    paddingLeft: 16,
+    paddingRight: 16,
+  },
 }));
 
+const scrollListener = (setActive) => {
+  const min = 120;
+  const max = 150;
+  const elem = Array.from(document.querySelectorAll('[data-mdlink]'))
+  .find(elem => {
+    const { top } = elem.getBoundingClientRect();
+    return top > min && top < max;
+  });
+  if (elem) {
+    setActive(elem.id);
+  }
+};
+
 const ListOfContents = ({ text }) => {
+  const [ activeItem, setActive ] = useState();
+  useEffect(() => {
+    document.addEventListener('scroll', () => scrollListener(setActive));
+    scrollListener(setActive);
+    return () => document.removeEventListener('scroll', scrollListener);
+  }, []);
   const classes = useStyles();
 
   const regex = /^###?#? .*/gm;
   const found = text.match(regex);
   return (
     <Fragment>
-      <Typography component="h3">Content</Typography>
+      <Typography className={ classes.contentHeader } component="h3">Content</Typography>
       <List dense>
         { found.map(text =>(
-          <ListItem key={ text }>
+          <ListItem
+            onClick={ () => setActive(headerToId(text)) }
+            className={ clsx({ [classes.listItemActive]: headerToId(text) === activeItem }) }
+            key={ text }
+          >
             <ListItemText
               className={ classes.listItemText }
               primary={ <ListHeader text={ text } /> }
