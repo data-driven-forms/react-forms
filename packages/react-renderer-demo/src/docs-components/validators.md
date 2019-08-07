@@ -1,195 +1,58 @@
-### Overwriting default messages
+import RawComponent from '../common/component/raw-component';
 
-Validators is a singleton. You can change its default messages:
 
-```jsx
-import { Validators } from '@data-driven-forms/react-form-renderer';
 
-Validators.messages = {
-  ...Validators.messages,
-  required: 'Required field!',
-};
-```
+## Validate field
 
-Types of validators:
-``` jsx
-[
-  even
-  equalTo,                  // equal => \`Must be equal to \${equal}\`
-  greaterThan,              // number => ....
-  greaterThanOrEqualTo,     // number => ....
-  lessThan,                 // number => ....
-  lessThanOrEqualTo,        // number => ....
-  mustBeBool,
-  mustBeString,
-  notANumber,
-  odd,
-  otherThan,                // number => ....
-  pattern,                  // pattern => ....
-  required,
-  tooLong,                  // count => ....
-  tooShort,                 // count => ....
-  wrongLength,              // count => ....
-]
-```
+You need to provide a `validate` array in the schema to add validation to your form fields.
 
-### validate
-
-You need to provide a \`validate\` array in the schema:
-
-```jsx
-{
-  component: 'text-field',
-  name: 'field',
-  label: 'Validated field!',
-  validate: [
-    {
-      type: 'required-validator',
-    }
-  ]
-}
-```
-
-A item of the validate array is 
-* a) object containing type and other specific values (see Default validators)
+A item of the validate array can be:
+* a) object containing type and other specific configuration attributes (see validators description)
 * b) function
 
-#### Default validators
+### Required validator
 
-There are standard validators, which you can import from react-form-renderer package.
+<RawComponent source="validators/required-validator" />
 
-```jsx
-import { validatorTypes } from '@data-driven-forms/react-form-renderer';
+### Length validators
 
-validatorTypes = {
-  REQUIRED: 'required-validator',
-  /**
-   * Minimum length of the input value
-   */
-  MIN_LENGTH: 'min-length-validator',
-  /**
-   * Maximum length of the input value
-   */
-  MAX_LENGTH: 'max-length-validator',
-  /**
-   * Exact length of input value
-   */
-  EXACT_LENGTH: 'exact-length-validator',
-  /**
-   * Minimum count of fields in some dynamic list of fields
-   */
-  MIN_ITEMS_VALIDATOR: 'min-items-validator',
-  /**
-   * Minimum value of number input
-   */
-  MIN_NUMBER_VALUE: 'min-number-value',
-  /**
-   * Maximum value of number input
-   */
-  MAX_NUMBER_VALUE: 'max-number-value',
-  /**
-   * Regexp pattern validator
-   */
-  PATTERN_VALIDATOR: 'pattern-validator',
-  /**
-   * URL validator
-   */
-  URL: 'url-validator',
-}
+<RawComponent source="validators/length-validators" />
 
-const validate = [{
-  type: validatorTypes.REQUIRED,
-  message: 'This is custom error message'
-}, {
-  type: validatorTypes.MIN_LENGTH,
-  threshold: integer
-}, {
-  type: validatorTypes.MAX_LENGTH,
-  threshold: integer
-}, {
-  type: validatorTypes.EXACT_LENGTH,
-  threshold: integer
-}, {
-  type: validatorTypes.MIN_ITEMS_VALIDATOR,
-  threshold: integer
-}, {
-  type: validatorTypes.MIN_NUMBER_VALUE
-  value: integer
-}, {
-  type: validatorTypes.MAX_NUMBER_VALUE
-  value: integer
-}, {
-  type: PATTERN_VALIDATOR,
-  pattern: string // regex pattern
-  showPatter: bool? // if message is not define turns on/of pattern in error message
-}]
-```
+### Number value validators
 
-Validation functions are triggered only when field has a value with exception of required validator.
+<RawComponent source="validators/number-validator" />
 
-Each validator type has additional configuration options in addition to custom error message.
+### Pattern validators
 
-#### Custom function
+<RawComponent source="validators/pattern-validator" />
+
+### URL validators
+
+<RawComponent source="validators/url-validator" />
+
+### Custom function
 
 As validator you can provide your custom function:
 
-```jsx
-{
-  component: 'text-field',
-  name: 'field',
-  label: 'Validated field!',
-  validate: [
-    isOdd,
-  ]
-}
-```
-
-```jsx
-const isOdd = (value) => value % 2 === 0 ? undefined : 'Value is odd!';
-// undefined - passes
-// something [string as error message] - fails
-```
+<RawComponent source="validators/custom-function" />
 
 The function takes `value` as an argument and should return undefined when pasess or string as an error message when fails.
 
-#### Async validator
+### Async validator
 
 You can use a Async function as a validator. However, the returned promise will overwrite all other validators 
 (because it is returned last),
 so you need combine all validators into one function.
 
-Example (Async + Required):
+<RawComponent source="validators/async-validator" />
 
-```jsx
-export const asyncValidator = value => API.get(`/api/isNameValid?name=${value}`)
-  .then((json) => {
-    if (!json.valid) {                         // async validator
-      return "Name is not valid!";
-    }
-    if (value === '' || value === undefined) { // required validator
-      return "Name can't be blank";
-    }
-    return undefined;
-  });
-```
+
+Validator inputs and results are being cached so you will get immediate feedback for recurring values before the validation is actually finished.
 
 If you do not want to trigger the async validator after every stroke, you can use a debounce promise [library](https://github.com/slorber/awesome-debounce-promise)
 (or any other implementation of debouncing.)
 
-Example:
-
-```jsx
-const asyncValidatorDebounced = debouncePromise(asyncValidator);
-
-...
-
-validate: [
-  asyncValidatorDebounced,
-],
-...
-```
-
-### validateOnMount
+## ValidateOnMount pf3 only
 
 By providing `validateOnMount` the validation will be triggered immediately after mounting of the component.
 
@@ -207,35 +70,15 @@ By providing `validateOnMount` the validation will be triggered immediately afte
 }
 ```
 
-### Record Level validation
+## Record Level validation
 
 This form of validation enables you to create validation function for whole form. It is usefull for some cross validation between multiple fields etc.
 Detailed information can be found [here](https://github.com/final-form/react-final-form#validate-values-object--object--promiseobject).
 
-```jsx
-import FormRender from '@data-driven-forms/react-form-renderer';
+<RawComponent source="validators/record-level-validation" />
 
-const validate = values => {
-  const errors = {};
+## Overwriting default messages
 
-  if(!values.firstName) {
-    errors.firstName = 'First name is required';
-  }
+You can either specify message attribute while adding validator or override validation message of specific validator globally via Validators config.
 
-  if(values.something > 60 && !values.dependentField) {
-    errors.dependentField = "Dependent field must be filled if something is bigger than 60";
-  }
-
-  return errors;
-}
-
-const DataDrivenForm = () => (
-  <FormRender
-    formFieldsMapper={formFieldsMapper}
-    layoutMapper={layoutMapper}
-    schema={schema}
-    validate={validate}
-    ...
-  />
-);
-```
+<RawComponent source="validators/global-message" />
