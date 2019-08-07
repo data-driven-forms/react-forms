@@ -18,6 +18,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import 'brace/theme/tomorrow_night';
 
 const useHeadingStyles = makeStyles(() => ({
+  anchorOffset: {
+    position: 'relative',
+    top: -92, // compensate for fixed header size and spacing
+  },
   heading: {
     marginBottom: 10,
     marginTop: 10,
@@ -34,7 +38,7 @@ const Heading = ({ level, children, ...rest }) => {
   const classes = useHeadingStyles();
   return (
     <React.Fragment>
-      <a id={ headerToId(children) } />
+      <a id={ headerToId(children) } className={ classes.anchorOffset } />
       <Typography className={ classes.heading } variant={ `h${level + 2}` }>{ children }<ShareButton text={ headerToId(children) }/></Typography>
     </React.Fragment>
   );
