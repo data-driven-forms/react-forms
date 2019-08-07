@@ -18,6 +18,10 @@ const useLinkStyles = makeStyles(theme => ({
     width: 'calc(240px - 32px)',
     whiteSpace: 'nowrap',
     display: 'block',
+    paddingLeft: 16,
+    paddingRight: 16,
+    paddingTop: 8,
+    paddingBottom: 8,
   },
 }));
 
@@ -45,8 +49,11 @@ ListHeader.propTypes = {
 };
 
 const useStyles = makeStyles(theme => ({
+  listItem: {
+    padding: 0,
+  },
   listItemText: {
-    color: 'red',
+    margin: 0,
   },
   listItemActive: {
     position: 'relative',
@@ -98,7 +105,7 @@ const ListOfContents = ({ text }) => {
         { found.map(text =>(
           <ListItem
             onClick={ () => setActive(headerToId(text)) }
-            className={ clsx({ [classes.listItemActive]: headerToId(text) === activeItem }) }
+            className={ clsx(classes.listItem, { [classes.listItemActive]: headerToId(text) === activeItem }) }
             key={ text }
           >
             <ListItemText
