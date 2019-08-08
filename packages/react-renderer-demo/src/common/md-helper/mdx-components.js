@@ -21,6 +21,7 @@ const useHeadingStyles = makeStyles(() => ({
   anchorOffset: {
     position: 'relative',
     top: -92, // compensate for fixed header size and spacing
+    display: 'block',
   },
   heading: {
     marginBottom: 10,
