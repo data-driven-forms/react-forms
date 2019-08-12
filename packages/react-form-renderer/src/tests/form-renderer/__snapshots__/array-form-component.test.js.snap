@@ -622,12 +622,12 @@ exports[`renderForm function should render array field correctly 1`] = `
                           }
                           validate={Array []}
                         >
-                          <ReactFinalForm(ReactFinalFormFieldArray(4.18.2)(2.0.1))
+                          <ReactFinalForm(ReactFinalFormFieldArray(4.18.4)(2.0.1))
                             key="foo"
                             name="foo"
                             validate={[Function]}
                           >
-                            <ReactFinalFormFieldArray(4.18.2)(2.0.1)
+                            <ReactFinalFormFieldArray(4.18.4)(2.0.1)
                               name="foo"
                               reactFinalForm={
                                 Object {
@@ -720,8 +720,8 @@ exports[`renderForm function should render array field correctly 1`] = `
                                   </FormGroup>
                                 </div>
                               </Col>
-                            </ReactFinalFormFieldArray(4.18.2)(2.0.1)>
-                          </ReactFinalForm(ReactFinalFormFieldArray(4.18.2)(2.0.1))>
+                            </ReactFinalFormFieldArray(4.18.4)(2.0.1)>
+                          </ReactFinalForm(ReactFinalFormFieldArray(4.18.4)(2.0.1))>
                         </DynamicArray>
                       </renderArrayField>
                     </Component>

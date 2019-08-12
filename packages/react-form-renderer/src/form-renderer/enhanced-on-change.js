@@ -4,10 +4,17 @@ import { dataTypes } from '../constants';
  * Pick a value from event object and returns it
  * @param {Object|Any} event event value returned from form field
  */
-const sanitizeValue = event =>
-  (typeof event === 'object' && event.target && event.target.value)
-    ? event.target.value
-    : event;
+const sanitizeValue = event => {
+  if (typeof event === 'object' && event.target) {
+    if (event.target.type === 'checkbox') {
+      return event.target.checked;
+    }
+
+    return event.target.value;
+  }
+
+  return event;
+};
 
 /**
  * Casts string true/false to boolean
