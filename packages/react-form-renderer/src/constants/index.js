@@ -48,6 +48,10 @@ export const validators = {
      * Regexp pattern validator
      */
   PATTERN_VALIDATOR: 'pattern-validator',
+  /**
+   * URL validator
+   */
+  URL: 'url-validator',
 };
 
 export const layoutComponents = {

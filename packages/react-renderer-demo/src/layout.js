@@ -87,10 +87,10 @@ const useStyles = makeStyles(theme => ({
     backgroundImage: 'linear-gradient(135deg, #41108E 0%, rgba(165, 37, 193, 1) 44.76%, #FC9957 100%)',
     backgroundSize: '100vw 100vh',
     backgroundRepeat: 'no-repeat',
-    zIndex: 9,
+    zIndex: 900,
   },
   toolbarOverride: {
-    zIndex: 10,
+    zIndex: 1000,
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
