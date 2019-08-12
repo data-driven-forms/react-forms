@@ -40,4 +40,9 @@ export const navStyles = theme => ({
     padding: '8px 16px !important',
     justifyContent: 'flex-start !important',
   },
+  searchButton: {
+    width: '100%',
+    paddingLeft: 16,
+    paddingRight: 16,
+  },
 });
