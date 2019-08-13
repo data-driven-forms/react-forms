@@ -1,4 +1,12 @@
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .ddorg__pf4-component-mapper__select {
+  .spinning {
+    animation: spin 2s linear infinite;
+  }
   .ddorg__pf4-component-mapper__select__control {
       box-shadow: none;
       cursor: pointer;

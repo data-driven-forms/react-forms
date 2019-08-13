@@ -1,6 +1,13 @@
 import React from 'react';
-import { CaretDownIcon } from '@patternfly/react-icons';
+import PropTypes from 'prop-types';
+import { CaretDownIcon, CircleNotchIcon } from '@patternfly/react-icons';
 
-const DropdownIndicator = () => <CaretDownIcon />;
+const DropdownIndicator = ({ selectProps: { isFetching }}) => isFetching ? <CircleNotchIcon className="spinning" /> : <CaretDownIcon />;
+
+DropdownIndicator.propTypes = {
+  selectProps: PropTypes.shape({
+    isFetching: PropTypes.bool,
+  }).isRequired,
+};
 
 export default DropdownIndicator;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { components } from 'react-select';
-
+import ReactSelect from 'react-select';
 import DataDrivenSelect, { Select } from '../../form-fields/select/select';
 
 describe('<Select />', () => {
@@ -129,6 +129,7 @@ describe('<Select />', () => {
       showLessLabel: 'Show less',
       showMoreLabel: 'more',
       simpleValue: true,
+      updatingMessage: 'Loading data...',
       value: [ 1, 2  ],
       loadingMessage: 'Loading...',
     });
@@ -141,8 +142,27 @@ describe('<Select />', () => {
 
     setImmediate(() => {
       wrapper.update();
-      expect(wrapper.find(Select).first().instance().state.options).toEqual([{ label: 'label' }]);
+      expect(wrapper.find(Select).first().instance().state.allOptions).toEqual([{ label: 'label' }]);
       done();
+    });
+  });
+
+  it('should load Async options after filtering', (done) => {
+    const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'label' }]));
+
+    const wrapper = mount(<Select { ...initialProps } options={ undefined } loadOptions={ asyncLoading }/>);
+
+    setImmediate(() => {
+      wrapper.update();
+      const search = wrapper.find('input');
+      search.getDOMNode().value = 'foo';
+      search.simulate('change');
+      setImmediate(() => {
+        wrapper.update();
+        expect(asyncLoading.mock.calls).toHaveLength(2);
+        expect(asyncLoading.mock.calls[1]).toEqual([ 'foo' ]);
+        done();
+      });
     });
   });
 });
