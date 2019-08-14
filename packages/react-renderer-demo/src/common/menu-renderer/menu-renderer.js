@@ -17,12 +17,13 @@ const renderItems = (items, level = 0, previousLinks = [ '' ]) => {
     return items.map(item => renderItems(item, level, previousLinks));
   }
 
-  const { fields, title, link, linkText, component, ...props } = items;
+  const { fields, title, link, linkText, component, open, ...props } = items;
 
   if (fields) {
     return (
       <Mapper.wrapper
-        key={ `${link}-${title}` }
+        key={ `${link}-${title}-${open}` }
+        open={ open }
         fields={ fields }
         title={ title }
         link={ link }
