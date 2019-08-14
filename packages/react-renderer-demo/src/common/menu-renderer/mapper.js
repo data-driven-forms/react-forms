@@ -19,6 +19,7 @@ const Item = ({ href, linkText, component }) => {
   return (
     <ListItem
       button
+      selected={ href === window.location.pathname }
       key={ href || linkText }
       className={ classes.nested }
       component={ forwardRef((props, ref) => <RouterNavLink key={ component } to={ href } { ...props } />) }
