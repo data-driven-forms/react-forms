@@ -5,7 +5,7 @@ import { dataTypes } from '../constants';
  * @param {Object|Any} event event value returned from form field
  */
 const sanitizeValue = event => {
-  if (typeof event === 'object' && event.target) {
+  if (typeof event === 'object' && event !== null && event.target) {
     if (event.target.type === 'checkbox') {
       return event.target.checked;
     }
