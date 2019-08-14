@@ -97,13 +97,47 @@ const memoizeSearch = () => {
   };
 };
 
+const findSelected = (schema, currentLocation, level = 1) => {
+  if (schema.fields) {
+    return {
+      ...schema,
+      open: schema.link === currentLocation[level],
+      level,
+      fields: findSelected(schema.fields, currentLocation, level + 1),
+    };
+  }
+
+  if (Array.isArray(schema)) {
+    return schema.map(field => findSelected(field, currentLocation, level));
+  }
+
+  return schema;
+};
+
+const memoizeCurrent = () => {
+  const cache = {};
+
+  return (schema, currentLocation) => {
+    const value = currentLocation.join('-');
+
+    if (value in cache) {
+      return cache[value];
+    }
+
+    cache[value] = findSelected(schema, currentLocation);
+    return cache[value];
+  };
+};
+
 const search = memoizeSearch();
+const current = memoizeCurrent();
 
 const Menu = ({ schema }) => {
   const [ value, setValue ] = useState('');
   const classes = useStyles();
+  const currentLocation = window.location.pathname.split('/');
 
-  const schemaFiltered = value !== '' ? search(schema, value) : schema;
+  const schemaFiltered = value !== '' ? search(schema, value) : current(schema, currentLocation);
 
   return (
     <React.Fragment>
