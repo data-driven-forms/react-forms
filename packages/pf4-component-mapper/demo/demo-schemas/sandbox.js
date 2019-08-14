@@ -1,6 +1,25 @@
 /* eslint-disable camelcase */
 import { componentTypes as components, validatorTypes as validators } from '@data-driven-forms/react-form-renderer';
 
+const asyncOptions = [
+  { label: 'async-option-1', value: 'async-option-1' },
+  { label: 'async-option-2', value: 'async-option-2' },
+  { label: 'async-option-3', value: 'async-option-3' },
+  { label: 'async option pepa 1', value: 'async-option-4' },
+  { label: 'async option pepa 2', value: 'async-option-5' },
+];
+
+const baseOptions = asyncOptions.slice(0, 3);
+
+const asyncLoadOptions = (searchValue) => new Promise(resolve => setTimeout(() => {
+  console.log('async searchValue: ', searchValue);
+  if (searchValue && searchValue.trim() !== '') {
+    return resolve(asyncOptions.filter(({ label }) => label.toLocaleLowerCase().includes(searchValue.trim().toLocaleLowerCase())));
+  }
+
+  return resolve(baseOptions);
+}, 2000));
+
 const output = {
   title: 'Testing dialog',
   description: 'Description of testing Dialog',
@@ -224,6 +243,17 @@ const output = {
               key: '641',
               fields: [
                 {
+                  name: 'async-drop-down',
+                  label: 'Async dropdown',
+                  title: 'Dropdown',
+                  dataType: 'string',
+                  isSearchable: true,
+                  isClearable: false,
+                  multi: true,
+                  component: components.SELECT_COMPONENT,
+                  loadOptions: asyncLoadOptions,
+                },
+                {
                   name: 'dropdown_list_1',
                   label: 'Dropdown',
                   title: 'Dropdown',
@@ -368,7 +398,7 @@ const output = {
                       value: '3',
                     },
                   ],
-                }
+                },
               ],
               component: components.SUB_FORM,
             },
