@@ -4,6 +4,14 @@
 }
 
 .ddorg__pf4-component-mapper__select {
+  &.single-select {
+    .ddorg__pf4-component-mapper__select__placeholder {
+      margin-left: 8px;
+    }
+    .ddorg__pf4-component-mapper__select__input {
+      margin-left: 6px;
+    }
+  }
   .spinning {
     animation: spin 2s linear infinite;
   }
@@ -45,6 +53,13 @@
                   fill: var(--pf-global--Color--dark-100);
               }
           }
+          button.pf-c-button.pf-m-plain {
+            padding-right: 0.5rem;
+            padding-left: 1rem;
+            margin-left: auto;
+            padding-bottom: 0;
+            margin-right: 0.5rem;
+        }
       }
   }
 
@@ -131,7 +146,7 @@
       padding-left: 8px;
       align-items: center;
       flex-wrap: wrap;
-      max-width: calc(100% - 2.5rem);
+      max-width: calc(100% - 70px);
 
        .ddorg__pf4-component-mapper__select__multivalue--container {
           align-items: initial;

@@ -287,6 +287,7 @@ const output = {
                   title: 'Dropdown default value',
                   dataType: 'string',
                   component: components.SELECT_COMPONENT,
+                  isClearable: true,
                   options: [
                     {
                       label: '<None>',
@@ -360,6 +361,7 @@ const output = {
                   title: 'Dropdown sort by value',
                   dataType: 'string',
                   component: components.SELECT_COMPONENT,
+                  isSearchable: true,
                   options: [
                     {
                       label: '<None>',
@@ -383,6 +385,7 @@ const output = {
                   label: 'Creatable multi select',
                   component: components.SELECT_COMPONENT,
                   multi: true,
+                  isClearable: true,
                   selectVariant: 'createable',
                   options: [
                     {
