@@ -98,7 +98,7 @@ export class Select extends React.Component {
         noOptionsMessage={ this.renderNoOptionsMessage() }
         onInputChange={ this.onInputChange }
         { ...props }
-        className="ddorg__pf4-component-mapper__select"
+        className={ `ddorg__pf4-component-mapper__select${props.isMulti ? ' multi-select' : ' single-select'}` }
         classNamePrefix="ddorg__pf4-component-mapper__select"
         onChange={ (option) => {
           const o =  !option && props.isMulti ? [] : option;
