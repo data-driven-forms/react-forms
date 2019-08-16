@@ -36,7 +36,7 @@ describe('<SelectField />', () => {
   });
 
   it('should mount Async correctly', (done) => {
-    const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'label' }]));
+    const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'asyncLabel' }]));
 
     const wrapper = mount(<SelectField { ...initialProps } loadOptions={ asyncLoading }/>);
 
@@ -48,13 +48,13 @@ describe('<SelectField />', () => {
   });
 
   it('should load Async options correctly', (done) => {
-    const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'label' }]));
+    const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'asyncLabel' }]));
 
     const wrapper = mount(<SelectField { ...initialProps } loadOptions={ asyncLoading }/>);
 
     setImmediate(() => {
       wrapper.update();
-      expect(wrapper.find(SelectPF3).first().instance().state.options).toEqual([{ label: 'label' }]);
+      expect(wrapper.find(SelectPF3).first().instance().state.options).toEqual([{ label: 'asyncLabel' }]);
       done();
     });
   });

@@ -58,6 +58,7 @@ class Select extends Component {
       isReadOnly,
       loadingMessage,
       simpleValue,
+      options: _options, // catch options from props, if they are undefined (bcs they would overwrite the state)
       ...rest
     } = this.props;
 
