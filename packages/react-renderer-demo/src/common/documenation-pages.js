@@ -9,6 +9,7 @@ import FieldProvider from './doc-texts/field-provider';
 import Unmounting from './doc-texts/unmounting';
 import FormControls from './doc-texts/form-controls';
 import DataTypes from './doc-texts/data-types';
+import RendererApi from './doc-texts/renderer-api';
 
 export const docs = [{
   component: 'installation',
@@ -26,6 +27,10 @@ export const docs = [{
   component: 'component-mapping',
   linkText: 'Create component mapper',
   contentText: ComponentMappingText,
+}, {
+  component: 'renderer-api',
+  linkText: 'FormRenderer API',
+  contentText: RendererApi,
 }, {
   component: 'component-api',
   linkText: 'Components API',

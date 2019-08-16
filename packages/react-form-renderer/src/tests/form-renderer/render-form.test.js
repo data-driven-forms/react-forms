@@ -576,7 +576,7 @@ describe('renderForm function', () => {
       expect(wrapper.find(FormSpy)).toHaveLength(2);
       wrapper.find('input').first().simulate('change', { target: { value: 'bar' }});
       wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
-      expect(onStateUpdate).toHaveBeenCalledTimes(3);
+      expect(onStateUpdate).toHaveBeenCalledTimes(4);
     });
 
   });
