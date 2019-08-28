@@ -1,5 +1,5 @@
 import { mount } from 'enzyme';
-import { FormGroup, Button, ButtonGroup, Icon, HelpBlock, Form } from 'patternfly-react';
+import { FormGroup, Button, Icon, HelpBlock, Form } from 'patternfly-react';
 import { layoutComponents } from '@data-driven-forms/react-form-renderer';
 import layoutMapper from '../form-fields/layout-components';
 
@@ -18,10 +18,6 @@ describe('Layout mapper', () => {
 
   it('should return PF3 FormGroup', () => {
     expect(layoutMapper[layoutComponents.FORM_GROUP]).toEqual(FormGroup);
-  });
-
-  it('should return PF3 ButtonGroup', () => {
-    expect(mount(layoutMapper[layoutComponents.BUTTON_GROUP]({})).find(ButtonGroup)).toHaveLength(1);
   });
 
   it('should return PF3 Icon', () => {

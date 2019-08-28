@@ -3,6 +3,7 @@
 exports[`<FormControls /> should render with description 1`] = `
 <ContextWrapper>
   <FormRenderer
+    buttonClassName=""
     buttonsLabels={Object {}}
     clearOnUnmount={false}
     disableSubmit={Array []}
@@ -72,6 +73,7 @@ exports[`<FormControls /> should render with description 1`] = `
             </div>
           </Component>
           <FormControls
+            buttonClassName=""
             buttonOrder={
               Array [
                 "submit",
@@ -124,8 +126,12 @@ exports[`<FormControls /> should render with description 1`] = `
                   }
                 }
               >
-                <Component>
-                  <div>
+                <Component
+                  className=""
+                >
+                  <div
+                    className=""
+                  >
                     <Component
                       key="form-submit"
                       label="Submit"
@@ -156,6 +162,7 @@ exports[`<FormControls /> should render with description 1`] = `
 exports[`<FormControls /> should render with title 1`] = `
 <ContextWrapper>
   <FormRenderer
+    buttonClassName=""
     buttonsLabels={Object {}}
     clearOnUnmount={false}
     disableSubmit={Array []}
@@ -225,6 +232,7 @@ exports[`<FormControls /> should render with title 1`] = `
             </div>
           </Component>
           <FormControls
+            buttonClassName=""
             buttonOrder={
               Array [
                 "submit",
@@ -277,8 +285,12 @@ exports[`<FormControls /> should render with title 1`] = `
                   }
                 }
               >
-                <Component>
-                  <div>
+                <Component
+                  className=""
+                >
+                  <div
+                    className=""
+                  >
                     <Component
                       key="form-submit"
                       label="Submit"
@@ -309,6 +321,7 @@ exports[`<FormControls /> should render with title 1`] = `
 exports[`<FormControls /> should render with title and description 1`] = `
 <ContextWrapper>
   <FormRenderer
+    buttonClassName=""
     buttonsLabels={Object {}}
     clearOnUnmount={false}
     disableSubmit={Array []}
@@ -384,6 +397,7 @@ exports[`<FormControls /> should render with title and description 1`] = `
             </div>
           </Component>
           <FormControls
+            buttonClassName=""
             buttonOrder={
               Array [
                 "submit",
@@ -436,8 +450,12 @@ exports[`<FormControls /> should render with title and description 1`] = `
                   }
                 }
               >
-                <Component>
-                  <div>
+                <Component
+                  className=""
+                >
+                  <div
+                    className=""
+                  >
                     <Component
                       key="form-submit"
                       label="Submit"
@@ -468,6 +486,7 @@ exports[`<FormControls /> should render with title and description 1`] = `
 exports[`<FormControls /> should render without title and description 1`] = `
 <ContextWrapper>
   <FormRenderer
+    buttonClassName=""
     buttonsLabels={Object {}}
     clearOnUnmount={false}
     disableSubmit={Array []}
@@ -531,6 +550,7 @@ exports[`<FormControls /> should render without title and description 1`] = `
       <Component>
         <form>
           <FormControls
+            buttonClassName=""
             buttonOrder={
               Array [
                 "submit",
@@ -583,8 +603,12 @@ exports[`<FormControls /> should render without title and description 1`] = `
                   }
                 }
               >
-                <Component>
-                  <div>
+                <Component
+                  className=""
+                >
+                  <div
+                    className=""
+                  >
                     <Component
                       key="form-submit"
                       label="Submit"

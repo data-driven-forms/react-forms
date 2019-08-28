@@ -147,4 +147,5 @@ FormRenderer.defaultProps = {
   uiSchema: {},
   showFormControls: true,
   clearOnUnmount: false,
+  buttonClassName: '',
 };

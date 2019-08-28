@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { layoutComponents } from '@data-driven-forms/react-form-renderer';
-import { FormGroup, ButtonGroup, Icon, HelpBlock, Form } from 'patternfly-react';
-import Button from './button';
+import { Button, FormGroup, Icon, HelpBlock, Form } from 'patternfly-react';
+import './layout-components.scss';
 
 const ArrayFieldWrapper = ({ children }) => (
   <div style={{
@@ -27,18 +27,20 @@ FormButton.propTypes = {
   children: PropTypes.oneOfType([ PropTypes.node, PropTypes.arrayOf(PropTypes.node) ]),
 };
 
-const ButtonGroupWrapper = ({ children, ...props }) => (
-  <ButtonGroup
-    className="pull-right"
-    style={{ display: 'inline-block' }}
-    { ...props }
+const ButtonGroupWrapper = ({ children, className, ...props }) => (
+  <div className={ `ddorg__pf3-layout-components__button-group ${className}` } { ...props }
   >
     { children }
-  </ButtonGroup>
+  </div>
 );
 
 ButtonGroupWrapper.propTypes = {
   children: PropTypes.oneOfType([ PropTypes.node, PropTypes.arrayOf(PropTypes.node) ]).isRequired,
+  className: PropTypes.string,
+};
+
+ButtonGroupWrapper.defaultProps = {
+  className: '',
 };
 
 const TitleWrapper = ({ children }) => <h3>{ children }</h3>;
