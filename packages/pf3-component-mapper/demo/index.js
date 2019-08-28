@@ -23,6 +23,7 @@ class App extends React.Component {
             formFieldsMapper={formFieldsMapper}
             layoutMapper={layoutMapper}
             schema={sandbox}
+            onCancel={() => console.log('cancel')}
           />
         </Row>
       </Grid>

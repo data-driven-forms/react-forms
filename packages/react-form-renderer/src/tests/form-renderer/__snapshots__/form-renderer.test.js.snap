@@ -2,6 +2,7 @@
 
 exports[`<FormRenderer /> should render form from schema 1`] = `
 <FormRenderer
+  buttonClassName=""
   buttonsLabels={Object {}}
   clearOnUnmount={false}
   disableSubmit={Array []}
@@ -2597,6 +2598,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
           </FieldWrapper>
         </FormConditionWrapper>
         <FormControls
+          buttonClassName=""
           buttonOrder={
             Array [
               "submit",
@@ -2649,7 +2651,9 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 }
               }
             >
-              <Component>
+              <Component
+                className=""
+              >
                 <div>
                   <Component
                     key="form-submit"
