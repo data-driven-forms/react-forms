@@ -102,10 +102,6 @@ const renderers = {
   inlineCode: ({ children }) => <code style={{ background: 'white', borderRadius: 3, fontFamily: 'courier, monospace', padding: '3px'  }}>
     { children }
   </code>,
-  wrapper: ({ children, ...props }) => {
-    console.log(children, props);
-    return <React.Fragment>{ children }</React.Fragment>;
-  },
 };
 
 export default renderers;

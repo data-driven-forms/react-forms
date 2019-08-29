@@ -13,6 +13,7 @@ import ComponentExample from './common/example-common';
 import DocPage from './common/doc-page';
 import renderers from './common/md-helper/mdx-components';
 import Layout from './layout';
+import RendererDocPage from './common/component/renderer-doc-page';
 
 import './app.scss';
 
@@ -42,7 +43,7 @@ const App = () => {
                 <Route exact path="/show-case" component={ ShowCase } />
                 <Route exact path="/live-editor" component={ FormRendererPage } />
                 <Route exact path="/component-example/:component" component={ ComponentExample } />
-                <Route exact path="/renderer/:component" component={ DocPage } />
+                <Route exact path="/renderer/:component" component={ RendererDocPage } />
                 <Route exact path="/others/:component" component={ DocPage } />
               </div>
             </Switch>

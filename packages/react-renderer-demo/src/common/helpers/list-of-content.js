@@ -114,7 +114,7 @@ const ListOfContents = ({ text }) => {
   const classes = useStyles();
 
   const regex = /^###?#? .*/gm;
-  const found = text.match(regex);
+  const found = text.match(regex) || [];
   return (
     <Fragment>
       <Typography className={ classes.contentHeader } component="h3">Content</Typography>

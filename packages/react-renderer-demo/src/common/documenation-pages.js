@@ -31,7 +31,7 @@ export const docs = [{
   linkText: 'Components API',
   contentText: ComponentApi,
 }, {
-  component: 'conditions',
+  component: 'condition',
   linkText: 'Conditional fields',
   contentText: Condition,
 }, {
