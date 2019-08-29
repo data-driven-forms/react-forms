@@ -1,64 +1,46 @@
 import React from 'react';
-import ReactMarkdown from '../md-helper';
+import makeStyles from '@material-ui/styles/makeStyles';
 
-const text =  `
-**Description**
+import MdxContent from 'docs/components/unmounting.md';
+import ListOfContent from '../helpers/list-of-content';
 
-When using dynamic forms where more fields share the same name, the value is preserved when a user switch the field. You can disable this behavior by setting 
-\`clearOnUnmount\` option in the renderer component or in the schema of the field. The option in the schema has always higher priority. (When 
-\`clearOnUnmount\` is set in the renderer and the field is set to \`false\`, the field value will not be cleared.)
+const reqSource = require.context(
+  '!raw-loader!docs/components/',
+  true,
+  /\.md/,
+);
 
-**Examples**
-
-Renderer
-
-\`\`\`jsx
-<FormRenderer
-  layoutMapper={ layoutMapper }
-  formFieldsMapper={ formFieldsMapper }
-  schema={ schema }
-  onSubmit={ submit }
-  clearOnUnmount
-/>
-\`\`\`
-
-Schema
-
-\`\`\`jsx
-{
-  component: componentTypes.TEXT_FIELD,
-  name: 'shared_field',
-  label: 'Value of this field will be cleared after unmounting! Be aware!',
-  key: 1,
-  clearOnUnmount: true,
-  condition: {
-    when: 'something',
-    is: 'something',
+const useStyles = makeStyles(() => ({
+  demoWrapper: {
+    displa: 'flex',
   },
-}, {
-  component: componentTypes.TEXT_FIELD,
-  name: 'shared_field',
-  label: 'Value of this field will be cleared after unmounting! Be aware!',
-  key: 2,
-  clearOnUnmount: true,
-  condition: {
-    when: 'something',
-    is: 'something else',
+  mdxWrapper: {
+    width: 'calc(100% - 240px)',
   },
-}, {
-  component: componentTypes.TEXT_FIELD,
-  name: 'shared_field',
-  label: 'Value of this field will not be cleared after unmounting! Be aware!',
-  key: 3,
-  clearOnUnmount: false, // default value
-  condition: {
-    when: 'something',
-    is: 'something else and something',
+  contentWrapper: {
+    width: 240,
+    position: 'fixed',
+    right: 0,
+    top: 96,
+    overflow: 'auto',
+    height: 'calc(100vh - 96px)',
   },
-},
-\`\`\`
+}));
 
+const ClearOnMount = () => {
 
-`;
+  const classes = useStyles();
+  return (
+    <div className={ classes.demoWrapper }>
+      <div className={ classes.mdxWrapper }>
+        <MdxContent />
+      </div>
+      <div className={ classes.contentWrapper }>
+        <ListOfContent text={ reqSource('./unmounting.md').default } />
+      </div>
+    </div>
+  );
+};
 
-export default <ReactMarkdown source={ text } />;
+export default (<ClearOnMount />);
+
