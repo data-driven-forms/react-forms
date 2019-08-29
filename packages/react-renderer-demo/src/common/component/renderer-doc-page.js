@@ -2,6 +2,7 @@ import React, { useState, useEffect, lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import makeStyles from '@material-ui/styles/makeStyles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import ListOfContents from '../helpers/list-of-content';
 
@@ -28,6 +29,12 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+const PageLoadingIndicator = () => (
+  <div style={{ height: 'calc(100vh - 96px)', display: 'flex', justifyContent: 'center' }}>
+    <CircularProgress/>
+  </div>
+);
+
 const RendererDocPage = ({ match: { params: { component }}}) => {
   const [ Component, setComponent ] = useState();
   const classes = useStyles();
@@ -36,7 +43,7 @@ const RendererDocPage = ({ match: { params: { component }}}) => {
     setComponent(OtherComponent);
   }, [ component ]);
   return (
-    <Suspense fallback={ <div>Loading</div> }>
+    <Suspense fallback={ <PageLoadingIndicator/> }>
       <div className={ classes.demoWrapper }>
         <div className={ classes.mdxWrapper }>
           { Component && (
