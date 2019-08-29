@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ReactMarkdown from 'react-markdown';
-
 import { makeStyles } from '@material-ui/core/styles';
 import CodeIcon from '@material-ui/icons/Code';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -23,13 +21,6 @@ const req = require.context(
   /\.js/,
 );
 
-const getRawJsx = text =>
-  `
-\`\`\`jsx
-${text}
-\`\`\`
-`;
-
 const useStyles = makeStyles(theme => ({
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -43,36 +34,26 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const renderers = {
-  code: ({ value, language }) => (
-    <div style={{ width: '100%', paddingTop: 10, background: '#1d1f21' }}>
-      <CodeEditor value={ value } language={ language } />
-    </div>
-  ),
-};
-
-const MdRenderer = props => <ReactMarkdown renderers={ renderers } { ...props } />;
-
 const RawComponent = (props) => {
   const [ content, setContent ] = useState({});
   const classes = useStyles();
 
   useEffect(() => {
     const foo = req(`./${props.source}.js`).default;
-    const text = getRawJsx(reqSource(`./${props.source}.js`).default);
-    setContent({ md: text, Component: foo });
+    const text = reqSource(`./${props.source}.js`).default;
+    setContent({ text, Component: foo });
   }, [ props.source ]);
 
   return (
     <Grid container spacing={ 0 }>
-      { content.md && (
+      { content.text && (
         <Grid item xs={ 12 }>
           <ExpansionPanel>
             <ExpansionPanelSummary expandIcon={ <CodeIcon /> }>
               { content.Component && <Typography className={ classes.heading }>{ content.Component.name }</Typography> }
             </ExpansionPanelSummary>
             <ExpansionPanelDetails style={{ padding: 0 }}>
-              <MdRenderer style={{ width: '100%' }} source={ content.md } />
+              <CodeEditor value={ content.text } />
             </ExpansionPanelDetails>
           </ExpansionPanel>
         </Grid>
