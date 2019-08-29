@@ -12,7 +12,7 @@ Form Renderer provides a lot of customization via props.
 |<NavLink to="/renderer/component-mapping">formFieldsMapper</NavLink>|object|Defines types of form field components. Field components can change the state of the form.|
 |<NavLink to="/renderer/component-mapping">layoutMapper</NavLink>|object|Defines types of layout components, which can't change the state of the form.|
 |onSubmit|func|A submit callback which receives two arguments: `values` and `formApi`.|
-|<NavLink to="/renderer/form-schemas">schema</NavLink>|object|A schema which defines structure of the form.|
+|schema|object|A schema which defines structure of the form.|
 
 #### Optional props
 
