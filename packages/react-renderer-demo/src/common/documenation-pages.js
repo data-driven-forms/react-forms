@@ -1,6 +1,5 @@
 import GetStartedText from './doc-texts/get-started';
 import InstallationText from './doc-texts/installation';
-import FormSchemasText from './doc-texts/form-schemas';
 import ComponentMappingText from './doc-texts/component-mapping';
 import ComponentApi from './doc-texts/component-api';
 import Condition from './doc-texts/condition';
@@ -19,10 +18,6 @@ export const docs = [{
   component: 'get-started',
   linkText: 'Getting started',
   contentText: GetStartedText,
-}, {
-  component: 'form-schemas',
-  linkText: 'Form schemas',
-  contentText: FormSchemasText,
 }, {
   component: 'component-mapping',
   linkText: 'Create component mapper',
@@ -53,7 +48,7 @@ export const docs = [{
   contentText: DataTypes,
 }, {
   component: 'field-provider',
-  linkText: 'FieldProvider',
+  linkText: 'Custom components',
   contentText: FieldProvider,
 }, {
   component: 'form-controls',

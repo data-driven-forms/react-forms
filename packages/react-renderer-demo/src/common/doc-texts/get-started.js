@@ -1,19 +1,45 @@
-import React, { Fragment } from 'react';
-import ReactMarkdown from '../md-helper';
-import RawComponent from '../component/raw-component';
+import React from 'react';
+import makeStyles from '@material-ui/styles/makeStyles';
 
-const text =  `React form renderer is a component designed for ManageIQ and
-Insights projects that takes json form definitions
-and renders them into react components.
-It uses [React final form](https://github.com/final-form/react-final-form) for the form state management.
-It is highly recommended to check their documentations first to fully understand how
-the [data-driven-forms](https://github.com/data-driven-forms) libraries work.`;
+import MdxContent from 'docs/components/get-started.md';
+import ListOfContent from '../helpers/list-of-content';
 
-const GetStarted = () => (
-  <Fragment>
-    <ReactMarkdown source={ text } />
-    <RawComponent source="get-started"/>
-  </Fragment>
+const reqSource = require.context(
+  '!raw-loader!docs/components/',
+  true,
+  /\.md/,
 );
 
-export default <GetStarted />;
+const useStyles = makeStyles(() => ({
+  demoWrapper: {
+    displa: 'flex',
+  },
+  mdxWrapper: {
+    width: 'calc(100% - 240px)',
+  },
+  contentWrapper: {
+    width: 240,
+    position: 'fixed',
+    right: 0,
+    top: 96,
+    overflow: 'auto',
+    height: 'calc(100vh - 96px)',
+  },
+}));
+
+const GetStarted = () => {
+
+  const classes = useStyles();
+  return (
+    <div className={ classes.demoWrapper }>
+      <div className={ classes.mdxWrapper }>
+        <MdxContent />
+      </div>
+      <div className={ classes.contentWrapper }>
+        <ListOfContent text={ reqSource('./get-started.md').default } />
+      </div>
+    </div>
+  );
+};
+
+export default (<GetStarted />);
