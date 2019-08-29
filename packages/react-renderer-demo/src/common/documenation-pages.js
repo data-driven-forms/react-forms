@@ -48,7 +48,7 @@ export const docs = [{
   contentText: DataTypes,
 }, {
   component: 'field-provider',
-  linkText: 'FieldProvider',
+  linkText: 'Custom components',
   contentText: FieldProvider,
 }, {
   component: 'form-controls',
