@@ -78,6 +78,8 @@ const prodConfig = {
   output: {
     path: resolve('./public'),
     filename: 'index.js',
+    chunkFilename: '[name].chunk.js',
+    publicPath: '/',
   },
 };
 

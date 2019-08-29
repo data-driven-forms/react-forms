@@ -1,4 +1,4 @@
-import ExampleLink from './exampleLink';
+import ExampleLink from './component-api/exampleLink';
 
 ### Components API
 
