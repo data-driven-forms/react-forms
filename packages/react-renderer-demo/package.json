@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "start": "yarn vendor && webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
-    "build": "yarn vendor && webpack --env prod --config ./config/webpack.config.js",
+    "build": "rm -rf build/* && yarn vendor && webpack --env prod --config ./config/webpack.config.js",
     "vendor": "webpack --env vendor --config ./config/webpack.config.js --progress"
   },
   "repository": {

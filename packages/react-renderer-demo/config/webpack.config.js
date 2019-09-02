@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const resolve = require('path').resolve;
 const merge = require('webpack-merge');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const commonConfig = {
   resolve: {
@@ -60,6 +61,15 @@ const devConfig = {
   plugins: [ htmlPlugin ],
 };
 
+const demoTemplates = [ './index.html', './200.html', './404.html' ];
+const templatePlugins =  demoTemplates.map(function(templateName) {
+  return new HtmlWebPackPlugin({
+    hash: false,
+    filename: templateName,
+    template: './demo/index.ejs',
+  });
+});
+
 const prodConfig = {
   mode: 'production',
   entry: './demo/index.js',
@@ -77,10 +87,11 @@ const prodConfig = {
   },
   output: {
     path: resolve('./public'),
-    filename: 'index.js',
-    chunkFilename: '[name].chunk.js',
+    filename: 'index.[contenthash].js',
+    chunkFilename: '[name].chunk.[contenthash].js',
     publicPath: '/',
   },
+  plugins: [].concat(templatePlugins),
 };
 
 const vendorConfig = {
