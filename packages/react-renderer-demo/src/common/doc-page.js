@@ -5,7 +5,6 @@ import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import { docs } from './documenation-pages';
 import { otherExamples } from './other-pages';
-import Container from '@material-ui/core/Container';
 
 class ComponentExample extends Component {
   constructor(props) {
