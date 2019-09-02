@@ -12,6 +12,7 @@ script: ./scripts/react-form-renderer.sh
 
 after_success:
   - npm install -g codecov
+  - npm install -g firebase-tools
   - npm run codecov
 
 after_failure:
@@ -23,11 +24,10 @@ deploy:
     branch: master
   script: ./scripts/release.sh
   skip_cleanup: true
-- provider: surge
+- provider: script
   on:
     branch: master
-  project: ./packages/react-renderer-demo/public/
-  domain: data-driven-forms.surge.sh 
+  script: firebase deploy --token $FIREBASE_TOKEN
   skip_cleanup: true
 
 cache:

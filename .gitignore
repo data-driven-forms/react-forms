@@ -66,3 +66,6 @@ typings/
 yarn.lock
 
 packages/react-renderer-demo/public/vendor.css
+
+# Firebase
+.firebase
