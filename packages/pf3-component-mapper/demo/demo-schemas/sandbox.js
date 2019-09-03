@@ -10,7 +10,7 @@ const output = {
         {
           title: 'Tab 1',
           description: 'Text boxes and text areas',
-          key: '553',
+          name: '553',
           fields: [
             {
               title: 'Text boxes',
