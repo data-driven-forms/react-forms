@@ -4,8 +4,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-const renderTabHeader = items => items.map(({ title, key }) => <Tab key={ key } label={ title } />);
-const renderTabContet = ({ key, fields }, formOptions) => <Fragment key={ key }>{ formOptions.renderForm(fields, formOptions) }</Fragment>;
+const renderTabHeader = items => items.map(({ title, key, name }) => <Tab key={ name || key } label={ title } />);
+const renderTabContet = ({ key, name, fields }, formOptions) => <Fragment key={ name || key }>{ formOptions.renderForm(fields, formOptions) }</Fragment>;
 
 class FormTabs extends Component {
   state = {

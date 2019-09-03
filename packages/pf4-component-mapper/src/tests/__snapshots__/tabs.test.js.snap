@@ -13,7 +13,7 @@ exports[`Tabs component should render tabs correctly 1`] = `
 >
   <ForwardRef
     eventKey={0}
-    key="cosiKey"
+    key="cosiName"
     title="cosiTitle"
   >
     <div
@@ -26,7 +26,7 @@ exports[`Tabs component should render tabs correctly 1`] = `
   </ForwardRef>
   <ForwardRef
     eventKey={1}
-    key="cosiKey2"
+    key="cosiName2"
     title="cosiTitle2"
   >
     <div
