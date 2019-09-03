@@ -232,7 +232,7 @@ export const baseExamples = [{
       {
         component: componentTypes.TAB_ITEM,
         validateFields: [ 'apple' ],
-        key: '1',
+        name: '1',
         title: 'Fruits',
         description: 'Here you can find fruits',
         fields: [
@@ -249,7 +249,7 @@ export const baseExamples = [{
       },
       {
         component: componentTypes.TAB_ITEM,
-        key: '2',
+        name: '2',
         title: 'Vegetables',
         description: 'Here you can find vegetables',
         fields: [
