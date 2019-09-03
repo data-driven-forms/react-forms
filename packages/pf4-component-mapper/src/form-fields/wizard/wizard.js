@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { WizardHeader, WizardNav, WizardNavItem, Backdrop, Bullseye } from '@patternfly/react-core';
 import WizardStep from './wizard-step';
 import './wizard-styles.scss';
+import get from 'lodash/get';
+import set from 'lodash/set';
 
 const Modal = ({ children, container, inModal }) => inModal ? createPortal(<Backdrop>
   <Bullseye>
@@ -42,7 +44,8 @@ class Wizard extends React.Component {
       this.container = document.createElement('div');
       document.body.appendChild(this.container);
     }
-    this.setState({loading: false});
+
+    this.setState({ loading: false });
   }
 
   componentWillUnmount() {
@@ -66,9 +69,10 @@ class Wizard extends React.Component {
     ];
   }
 
-  handleNext = nextStep =>
+  handleNext = (nextStep, getRegisteredFields) =>
     this.setState(prevState =>
       ({
+        registeredFieldsHistory: { ...prevState.registeredFieldsHistory, [prevState.activeStep]: getRegisteredFields() },
         activeStep: nextStep,
         prevSteps: prevState.prevSteps.includes(prevState.activeStep) ? prevState.prevSteps : [ ...prevState.prevSteps, prevState.activeStep ],
         activeStepIndex: prevState.activeStepIndex + 1,
@@ -82,10 +86,22 @@ class Wizard extends React.Component {
     visitedSteps.map(key =>this.findCurrentStep(key).fields.map(({ name }) => name))
     .reduce((acc, curr) => curr.concat(acc.map(item => item)), []);
 
-  handleSubmit = (values, visitedSteps) =>
-    Object.keys(values)
-    .filter(key => this.findActiveFields(visitedSteps).includes(key))
-    .reduce((acc, curr) => ({ ...acc, [curr]: values[curr] }), {});
+  handleSubmit = (values, visitedSteps, getRegisteredFields) => {
+    // Add the final step fields to history
+    const finalRegisteredFieldsHistory = {
+      ...this.state.registeredFieldsHistory,
+      [this.state.activeStep]: getRegisteredFields(),
+    };
+
+    const finalObject = {};
+
+    // Find only visited fields
+    Object.values([ ...visitedSteps, this.state.activeStep ]
+    .reduce((obj, key) => ({ ...obj, [key]: finalRegisteredFieldsHistory[key] }), { }))
+    .flat(Infinity).forEach((key) => set(finalObject, key, get(values, key)));
+
+    return finalObject;
+  }
 
   findCurrentStep = activeStep => this.props.fields.find(({ stepKey }) => stepKey === activeStep)
 
@@ -139,7 +155,7 @@ class Wizard extends React.Component {
   };
 
   render() {
-    if(this.state.loading) {
+    if (this.state.loading) {
       return null;
     }
 
@@ -149,7 +165,13 @@ class Wizard extends React.Component {
     const { activeStepIndex, navSchema, maxStepIndex } = this.state;
 
     const handleSubmit = () =>
-      formOptions.onSubmit(this.handleSubmit(formOptions.getState().values, [ ...this.state.prevSteps, this.state.activeStep ]));
+      formOptions.onSubmit(
+        this.handleSubmit(
+          formOptions.getState().values,
+          [ ...this.state.prevSteps, this.state.activeStep ],
+          formOptions.getRegisteredFields,
+        )
+      );
 
     const currentStep = (
       <WizardStep
@@ -192,10 +214,10 @@ class Wizard extends React.Component {
     });
 
     return (
-      <Modal inModal={inModal} container={this.container}>
+      <Modal inModal={ inModal } container={ this.container }>
         <div className={ `pf-c-wizard ${inModal ? '' : 'no-shadow'} ${isCompactNav ? 'pf-m-compact-nav' : ''} ${setFullWidth ? 'pf-m-full-width' : ''} ${setFullHeight ? 'pf-m-full-height' : ''}` }
-        role="dialog"
-        aria-modal={ inModal ? 'true' : undefined }
+          role="dialog"
+          aria-modal={ inModal ? 'true' : undefined }
         >
           { title && <WizardHeader
             title={ title }
@@ -207,7 +229,7 @@ class Wizard extends React.Component {
               { createStepsMap() }
             </WizardNav>
             { cloneElement(currentStep, {
-              handleNext: this.handleNext,
+              handleNext: (nextStep) => this.handleNext(nextStep, formOptions.getRegisteredFields),
               handlePrev: this.handlePrev,
               disableBack: this.state.activeStepIndex === 0,
             }) }
@@ -233,6 +255,7 @@ Wizard.propTypes = {
     getState: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     onCancel: PropTypes.func,
+    getRegisteredFields: PropTypes.func.isRequired,
   }),
   fields: PropTypes.arrayOf(PropTypes.shape({
     stepKey: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]).isRequired,

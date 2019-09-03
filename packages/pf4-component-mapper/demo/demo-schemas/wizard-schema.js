@@ -13,7 +13,7 @@ export const wizardSchema = {
       name: 'step-1',
       stepKey: 1,
       nextStep: {
-        when: 'source-type',
+        when: 'source.source-type',
         stepMapper: {
           aws: 'aws',
           google: 'google',
@@ -21,12 +21,12 @@ export const wizardSchema = {
       },
       fields: [{
         component: componentTypes.TEXTAREA_FIELD,
-        name: 'source-name',
+        name: 'source.source-name',
         type: 'text',
         label: 'Source name',
       }, {
         component: componentTypes.SELECT_COMPONENT,
-        name: 'source-type',
+        name: 'source.source-type',
         label: 'Source type',
         isRequired: true,
         options: [{
@@ -60,7 +60,7 @@ export const wizardSchema = {
       nextStep: 'summary',
       fields: [{
         component: componentTypes.TEXT_FIELD,
-        name: 'google-field',
+        name: 'google.google-field',
         label: 'Google field part',
       }],
     }, {

@@ -11,6 +11,10 @@ import FieldProvider from '../../../../../__mocks__/mock-field-provider';
 describe('<Wizard />', () => {
   let initialProps;
   let schema;
+  let nestedSchema;
+  let getRegisteredFieldsSchemaMock;
+  let getRegisteredFieldsNestedSchemaMock;
+  let getValuesNestedSchema;
 
   beforeEach(() => {
     initialProps = {
@@ -30,6 +34,7 @@ describe('<Wizard />', () => {
         onSubmit: jest.fn(),
         submit: jest.fn(),
         valid: true,
+        getRegisteredFields: jest.fn(),
       },
       fields: [{
         stepKey: '1',
@@ -54,6 +59,48 @@ describe('<Wizard />', () => {
         name: 'bar-field',
       }],
     }];
+
+    getRegisteredFieldsSchemaMock = jest.fn();
+
+    getRegisteredFieldsSchemaMock
+    .mockReturnValueOnce('foo-field')
+    .mockReturnValueOnce('bar-field');
+
+    nestedSchema = [{
+      title: 'foo-step',
+      stepKey: '1',
+      name: 'foo',
+      fields: [{
+        name: 'nested.foo-field',
+      }],
+      nextStep: '2',
+    }, {
+      stepKey: '2',
+      title: 'bar-step',
+      name: 'bar',
+      fields: [{
+        name: 'nested.second.bar-field',
+      }],
+    }];
+
+    getRegisteredFieldsNestedSchemaMock = jest.fn();
+
+    getRegisteredFieldsNestedSchemaMock
+    .mockReturnValueOnce('nested.foo-field')
+    .mockReturnValueOnce('nested.second.bar-field');
+
+    getValuesNestedSchema = () => ({
+      values: {
+        'nested.foo-field': 'foo-field-value',
+        'nested.second.bar-field': 'bar-field-value',
+        'not-visited-field': 'not-visted-field-value',
+      },
+    });
+  });
+
+  afterEach(() => {
+    getRegisteredFieldsSchemaMock.mockReset();
+    getRegisteredFieldsNestedSchemaMock.mockReset();
   });
 
   it('should render correctly and unmount', () => {
@@ -86,7 +133,11 @@ describe('<Wizard />', () => {
 
   it('should go to next step correctly and submit data', () => {
     const onSubmit = jest.fn();
-    const wrapper = mount(<Wizard { ...initialProps } formOptions={{ ...initialProps.formOptions, onSubmit }} fields={ schema } />);
+    const wrapper = mount(<Wizard
+      { ...initialProps }
+      formOptions={{ ...initialProps.formOptions, onSubmit, getRegisteredFields: getRegisteredFieldsSchemaMock }}
+      fields={ schema }
+    />);
     // go to next step
     wrapper.find('button').at(1).simulate('click');
     wrapper.update();
@@ -98,6 +149,29 @@ describe('<Wizard />', () => {
     expect(onSubmit).toHaveBeenCalledWith({
       'foo-field': 'foo-field-value',
       'bar-field': 'bar-field-value',
+    });
+  });
+
+  it('should submit data when nested schema', () => {
+    const onSubmit = jest.fn();
+    const wrapper = mount(<Wizard
+      { ...initialProps }
+      formOptions={{ ...initialProps.formOptions, onSubmit, getRegisteredFields: getRegisteredFieldsNestedSchemaMock, getState: getValuesNestedSchema }}
+      fields={ nestedSchema }
+    />);
+    // go to next step
+    wrapper.find('button').at(1).simulate('click');
+    wrapper.update();
+
+    // submit wizard
+    wrapper.find('button').at(1).simulate('click');
+    expect(onSubmit).toHaveBeenCalledWith({
+      nested: {
+        'foo-field': 'foo-field-value',
+        second: {
+          'bar-field': 'bar-field-value',
+        },
+      },
     });
   });
 

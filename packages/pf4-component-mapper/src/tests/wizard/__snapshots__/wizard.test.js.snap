@@ -16,6 +16,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
   }
   formOptions={
     Object {
+      "getRegisteredFields": [MockFunction],
       "getState": [Function],
       "onCancel": [MockFunction],
       "onSubmit": [MockFunction],
@@ -48,6 +49,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
     }
     formOptions={
       Object {
+        "getRegisteredFields": [MockFunction],
         "getState": [Function],
         "onCancel": [MockFunction],
         "onSubmit": [MockFunction],
@@ -177,6 +179,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
             fields={Array []}
             formOptions={
               Object {
+                "getRegisteredFields": [MockFunction],
                 "getState": [Function],
                 "handleSubmit": [Function],
                 "onCancel": [MockFunction],
@@ -219,6 +222,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
               disableBack={true}
               formOptions={
                 Object {
+                  "getRegisteredFields": [MockFunction],
                   "getState": [Function],
                   "handleSubmit": [Function],
                   "onCancel": [MockFunction],
@@ -316,6 +320,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
   }
   formOptions={
     Object {
+      "getRegisteredFields": [MockFunction],
       "getState": [Function],
       "onCancel": [MockFunction],
       "onSubmit": [MockFunction],
@@ -349,6 +354,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
     }
     formOptions={
       Object {
+        "getRegisteredFields": [MockFunction],
         "getState": [Function],
         "onCancel": [MockFunction],
         "onSubmit": [MockFunction],
@@ -706,6 +712,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                       fields={Array []}
                       formOptions={
                         Object {
+                          "getRegisteredFields": [MockFunction],
                           "getState": [Function],
                           "handleSubmit": [Function],
                           "onCancel": [MockFunction],
@@ -748,6 +755,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                         disableBack={true}
                         formOptions={
                           Object {
+                            "getRegisteredFields": [MockFunction],
                             "getState": [Function],
                             "handleSubmit": [Function],
                             "onCancel": [MockFunction],
@@ -854,6 +862,7 @@ exports[`<Wizard /> should render correctly with custom title and description 1`
   }
   formOptions={
     Object {
+      "getRegisteredFields": [MockFunction],
       "getState": [Function],
       "onCancel": [MockFunction],
       "onSubmit": [MockFunction],
@@ -894,6 +903,7 @@ exports[`<Wizard /> should render correctly with custom title and description 1`
     }
     formOptions={
       Object {
+        "getRegisteredFields": [MockFunction],
         "getState": [Function],
         "onCancel": [MockFunction],
         "onSubmit": [MockFunction],
@@ -1047,6 +1057,7 @@ exports[`<Wizard /> should render correctly with custom title and description 1`
             fields={Array []}
             formOptions={
               Object {
+                "getRegisteredFields": [MockFunction],
                 "getState": [Function],
                 "handleSubmit": [Function],
                 "onCancel": [MockFunction],
@@ -1089,6 +1100,7 @@ exports[`<Wizard /> should render correctly with custom title and description 1`
               disableBack={true}
               formOptions={
                 Object {
+                  "getRegisteredFields": [MockFunction],
                   "getState": [Function],
                   "handleSubmit": [Function],
                   "onCancel": [MockFunction],
