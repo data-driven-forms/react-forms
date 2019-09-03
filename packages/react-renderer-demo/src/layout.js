@@ -104,7 +104,7 @@ const useStyles = makeStyles(theme => ({
 
 const Layout = ({ children, location: { pathname }}) => {
   const classes = useStyles();
-  const [ open, setOpen ] = React.useState(false);
+  const [ open, setOpen ] = React.useState(pathname !== '/');
   const searchRef = React.useRef(null);
 
   function handleDrawerOpen() {
