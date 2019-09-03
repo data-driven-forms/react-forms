@@ -23,7 +23,8 @@
   "jest": {
     "verbose": true,
     "setupFiles": [
-      "<rootDir>/config/jest.setup.js"
+      "<rootDir>/config/jest.setup.js",
+      "core-js"
     ],
     "collectCoverageFrom": [
       "<rootDir>/packages/**/src/**/*.js",
@@ -40,6 +41,7 @@
     "@semantic-release/git": "^7.0.8",
     "@semantic-release/npm": "^5.1.4",
     "atob-lite": "^2.0.0",
+    "core-js": "^3.2.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.8.0",
     "lerna": "^3.13.1",
