@@ -132,7 +132,7 @@ const memoizeCurrent = () => {
 const search = memoizeSearch();
 const current = memoizeCurrent();
 
-const Menu = ({ schema }) => {
+const Menu = ({ schema, searchRef }) => {
   const [ value, setValue ] = useState('');
   const classes = useStyles();
   const currentLocation = window.location.pathname.split('/');
@@ -149,6 +149,8 @@ const Menu = ({ schema }) => {
         value={ value }
         onChange={ e => setValue(e.target.value) }
         className={ classes.searchButton }
+        inputRef={ searchRef }
+        autoFocus
       />
       <MenuRenderer schema={ schemaFiltered } />
     </React.Fragment>

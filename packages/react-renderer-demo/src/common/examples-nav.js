@@ -13,7 +13,7 @@ import schema from './menu-renderer/schema-demo';
 
 const useStyles = makeStyles(navStyles);
 
-const Navigation = ({ closeNav }) => {
+const Navigation = ({ closeNav, searchRef }) => {
   const classes = useStyles();
 
   return (
@@ -32,7 +32,7 @@ const Navigation = ({ closeNav }) => {
         </ListSubheader>) }
       className={ classes.listRoot }
     >
-      <Menu schema={ schema } />
+      <Menu searchRef={ searchRef } schema={ schema } />
     </List>
   );
 };

@@ -105,9 +105,11 @@ const useStyles = makeStyles(theme => ({
 const Layout = ({ children, location: { pathname }}) => {
   const classes = useStyles();
   const [ open, setOpen ] = React.useState(false);
+  const searchRef = React.useRef(null);
 
   function handleDrawerOpen() {
     setOpen(true);
+    setTimeout(() => searchRef.current.focus(), 500);
   }
 
   function handleDrawerClose() {
@@ -140,7 +142,7 @@ const Layout = ({ children, location: { pathname }}) => {
             paper: classes.drawerPaper,
           }}
         >
-          <Navigation closeNav={ handleDrawerClose }/>
+          <Navigation searchRef={ searchRef } closeNav={ handleDrawerClose }/>
           <Divider />
         </Drawer>
         <main
