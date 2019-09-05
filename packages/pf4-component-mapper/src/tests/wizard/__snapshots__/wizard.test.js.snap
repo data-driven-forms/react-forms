@@ -240,23 +240,28 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
               <footer
                 className="pf-c-wizard__footer "
               >
-                <Button
-                  onClick={[Function]}
-                  type="button"
-                  variant="primary"
+                <SubmitButton
+                  handleSubmit={[Function]}
+                  submitLabel="Submit"
                 >
-                  <button
-                    aria-disabled={null}
-                    aria-label={null}
-                    className="pf-c-button pf-m-primary"
-                    disabled={false}
+                  <Button
                     onClick={[Function]}
-                    tabIndex={null}
                     type="button"
+                    variant="primary"
                   >
-                    Submit
-                  </button>
-                </Button>
+                    <button
+                      aria-disabled={null}
+                      aria-label={null}
+                      className="pf-c-button pf-m-primary"
+                      disabled={false}
+                      onClick={[Function]}
+                      tabIndex={null}
+                      type="button"
+                    >
+                      Submit
+                    </button>
+                  </Button>
+                </SubmitButton>
                 <Button
                   isDisabled={true}
                   onClick={[Function]}
@@ -773,23 +778,28 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                         <footer
                           className="pf-c-wizard__footer "
                         >
-                          <Button
-                            onClick={[Function]}
-                            type="button"
-                            variant="primary"
+                          <SubmitButton
+                            handleSubmit={[Function]}
+                            submitLabel="Submit"
                           >
-                            <button
-                              aria-disabled={null}
-                              aria-label={null}
-                              className="pf-c-button pf-m-primary"
-                              disabled={false}
+                            <Button
                               onClick={[Function]}
-                              tabIndex={null}
                               type="button"
+                              variant="primary"
                             >
-                              Submit
-                            </button>
-                          </Button>
+                              <button
+                                aria-disabled={null}
+                                aria-label={null}
+                                className="pf-c-button pf-m-primary"
+                                disabled={false}
+                                onClick={[Function]}
+                                tabIndex={null}
+                                type="button"
+                              >
+                                Submit
+                              </button>
+                            </Button>
+                          </SubmitButton>
                           <Button
                             isDisabled={true}
                             onClick={[Function]}
@@ -1118,23 +1128,28 @@ exports[`<Wizard /> should render correctly with custom title and description 1`
               <footer
                 className="pf-c-wizard__footer "
               >
-                <Button
-                  onClick={[Function]}
-                  type="button"
-                  variant="primary"
+                <SubmitButton
+                  handleSubmit={[Function]}
+                  submitLabel="Submit"
                 >
-                  <button
-                    aria-disabled={null}
-                    aria-label={null}
-                    className="pf-c-button pf-m-primary"
-                    disabled={false}
+                  <Button
                     onClick={[Function]}
-                    tabIndex={null}
                     type="button"
+                    variant="primary"
                   >
-                    Submit
-                  </button>
-                </Button>
+                    <button
+                      aria-disabled={null}
+                      aria-label={null}
+                      className="pf-c-button pf-m-primary"
+                      disabled={false}
+                      onClick={[Function]}
+                      tabIndex={null}
+                      type="button"
+                    >
+                      Submit
+                    </button>
+                  </Button>
+                </SubmitButton>
                 <Button
                   isDisabled={true}
                   onClick={[Function]}

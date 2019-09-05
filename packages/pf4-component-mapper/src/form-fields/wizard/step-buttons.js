@@ -48,16 +48,17 @@ ConditionalNext.propTypes = {
   FieldProvider: PropTypes.func.isRequired,
 };
 
-const submitButton = (handleSubmit, submitLabel) => <Button type="button" variant="primary" onClick={ handleSubmit }>{ submitLabel }</Button>;
+const SubmitButton = ({ handleSubmit, submitLabel }) => <Button type="button" variant="primary" onClick={ handleSubmit }>{ submitLabel }</Button>;
 
 const renderNextButton = ({ nextStep, handleSubmit, submitLabel, ...rest }) =>
   !nextStep
-    ? submitButton(handleSubmit, submitLabel)
+    ? <SubmitButton handleSubmit={ handleSubmit } submitLabel={ submitLabel } />
     : typeof nextStep === 'object'
       ? <ConditionalNext nextStep={ nextStep } { ...rest }/>
       : <SimpleNext next={ nextStep } { ...rest } />;
 
 const WizardStepButtons = ({
+  buttons: Buttons,
   formOptions,
   disableBack,
   handlePrev,
@@ -72,16 +73,40 @@ const WizardStepButtons = ({
     next,
   }}) =>
   <footer className={ `pf-c-wizard__footer ${buttonsClassName ? buttonsClassName : ''}` }>
-    { renderNextButton({
-      ...formOptions,
-      handleNext,
-      nextStep,
-      FieldProvider,
-      nextLabel: next,
-      submitLabel: submit,
-    }) }
-    <Button type="button" variant="secondary" isDisabled={ disableBack } onClick={ handlePrev }>{ back }</Button>
-    <Button type="button" variant="link" onClick={ formOptions.onCancel }>{ cancel }</Button>
+    { Buttons ? <Buttons
+      ConditionalNext={ ConditionalNext }
+      SubmitButton={ SubmitButton }
+      SimpleNext={ SimpleNext }
+      formOptions={ formOptions }
+      disableBack={ disableBack }
+      handlePrev={ handlePrev }
+      nextStep={ nextStep }
+      FieldProvider={ FieldProvider }
+      handleNext={ handleNext }
+      buttonsClassName={ buttonsClassName }
+      buttonLabels={{ cancel, submit, back, next }}
+      renderNextButton={ args => renderNextButton({
+        ...formOptions,
+        handleNext,
+        nextStep,
+        FieldProvider,
+        nextLabel: next,
+        submitLabel: submit,
+        ...args,
+      }) }
+    />
+      : <React.Fragment>
+        { renderNextButton({
+          ...formOptions,
+          handleNext,
+          nextStep,
+          FieldProvider,
+          nextLabel: next,
+          submitLabel: submit,
+        }) }
+        <Button type="button" variant="secondary" isDisabled={ disableBack } onClick={ handlePrev }>{ back }</Button>
+        <Button type="button" variant="link" onClick={ formOptions.onCancel }>{ cancel }</Button>
+      </React.Fragment> }
   </footer>;
 
 WizardStepButtons.propTypes = {
@@ -107,6 +132,7 @@ WizardStepButtons.propTypes = {
     next: PropTypes.string.isRequired,
   }).isRequired,
   buttonsClassName: PropTypes.string,
+  buttons: PropTypes.oneOfType([ PropTypes.node, PropTypes.func ]),
 };
 
 export default WizardStepButtons;

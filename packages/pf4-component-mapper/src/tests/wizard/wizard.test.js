@@ -124,6 +124,22 @@ describe('<Wizard />', () => {
     expect(toJSon(wrapper)).toMatchSnapshot();
   });
 
+  it('should render correctly with custom buttons', () => {
+    const Buttons = () => <div>Hello</div>;
+
+    const wrapper = mount(<Wizard { ...initialProps } fields={ [{
+      title: 'foo-step',
+      stepKey: '1',
+      name: 'foo',
+      buttons: Buttons,
+      fields: [{
+        name: 'foo-field',
+      }],
+      nextStep: '2',
+    }] }/>);
+    expect(wrapper.find(Buttons).length).toEqual(1);
+  });
+
   it('should call submit function', () => {
     const onSubmit = jest.fn();
     const wrapper = mount(<Wizard { ...initialProps } formOptions={{ ...initialProps.formOptions, onSubmit }} />);
