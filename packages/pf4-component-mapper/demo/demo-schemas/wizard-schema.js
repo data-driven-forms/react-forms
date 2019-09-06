@@ -1,4 +1,32 @@
+import React, { useState } from 'react';
 import { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
+import { Button } from '@patternfly/react-core';
+
+const ValidateButtons = ({ disableBack, handlePrev, buttonLabels: { back, cancel }, formOptions, renderNextButton }) => {
+  const [ state, setState ] = useState('init');
+
+  const setValidating = () => {
+    setState('validating');
+    setTimeout(() => setState('done'), 2000);
+  };
+
+  return (
+    <React.Fragment>
+      { state === 'init' ? <Button
+        variant="primary"
+        type="button"
+        isDisabled={ !formOptions.valid }
+        onClick={ setValidating }
+      >
+        Validate
+      </Button> :
+        state === 'validating' ? <Button type="button" variant="primary" isDisabled={ true } onClick={ () => {} }>Validating...</Button> :
+          renderNextButton() }
+      <Button type="button" variant="secondary" isDisabled={ disableBack } onClick={ handlePrev }>{ back }</Button>
+      <Button type="button" variant="link" onClick={ formOptions.onCancel }>{ cancel }</Button>
+    </React.Fragment>
+  );
+};
 
 export const wizardSchema = {
   fields: [{
@@ -48,10 +76,15 @@ export const wizardSchema = {
       stepKey: 'aws',
       substepOf: 'Summary',
       nextStep: 'summary',
+      buttons: ValidateButtons,
       fields: [{
         component: componentTypes.TEXT_FIELD,
         name: 'aws-field',
         label: 'Aws field part',
+        validate: [{
+          type: validatorTypes.REQUIRED,
+        }],
+        isRequired: true,
       }],
     }, {
       stepKey: 'google',

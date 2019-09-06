@@ -43,7 +43,8 @@ You can rewrite only selection of them, e.g.
 | nextStep  | object/stepKey of next step | See below |
 | fields  | array | As usual |
 | substep | string | Substep title (steps are grouped by this title) |
-| title | string | Step title
+| title | string | Step title |
+| buttons | node, func | Custom buttons component
 
 - nextStep can be stepKey of the next step
 - or you can branch the way by using of object:
@@ -58,6 +59,41 @@ nextStep: {
         },
 },
 ```
+
+#### Buttons
+
+Each step can implement its own buttons.
+
+```jsx
+const Buttons = () => <div>Hello</div>;
+
+[{
+  title: 'foo-step',
+  stepKey: '1',
+  name: 'foo',
+  buttons: Buttons,
+  fields: [{
+   name: 'foo-field',
+  }],
+}]
+```
+
+The components receives these props:
+
+|Props|Decription|
+| --- | -------- |
+|ConditionalNext|Conditional next button|
+|SubmitButton|Default submit button.|
+|SimpleNext|Default next button.|
+|formOptions|formOptions|
+|disableBack|If it's first step, disable back is true.|
+|handlePrev|Function to handle back button.|
+|nextStep|Next step field from the schema.|
+|FieldProvider|FieldProvider|
+|handleNext|Function to handle next click.|
+|buttonsClassName|Classname of buttons.|
+|buttonLabels|Object with labels.|
+|renderNextButton|Function which completely handle the next/submit button.|
 
 
 ### How to do substeps
