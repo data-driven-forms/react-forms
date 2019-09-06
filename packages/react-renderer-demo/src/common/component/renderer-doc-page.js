@@ -39,7 +39,15 @@ const RendererDocPage = ({ match: { params: { component }}}) => {
   const [ Component, setComponent ] = useState();
   const classes = useStyles();
   useEffect(() => {
-    const OtherComponent = lazy(() => import(`docs/components/${component}.md`));
+    const OtherComponent = lazy(() => import(`docs/components/${component}.md`).then((m) => {
+      setImmediate(() => {
+        const h = window.location.hash;
+        window.location.hash = '';
+        window.location.hash = h.replace('#', '');
+      });
+      return m;
+    }));
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     setComponent(OtherComponent);
   }, [ component ]);
   return (
