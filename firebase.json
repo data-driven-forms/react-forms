@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "data-driven-form",
+    "site": "data-driven-forms",
     "public": "packages/react-renderer-demo/public",
     "ignore": [
       "firebase.json",
