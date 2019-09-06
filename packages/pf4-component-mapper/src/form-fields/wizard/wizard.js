@@ -6,6 +6,7 @@ import WizardStep from './wizard-step';
 import './wizard-styles.scss';
 import get from 'lodash/get';
 import set from 'lodash/set';
+import flattenDeep from 'lodash/flattenDeep';
 
 const Modal = ({ children, container, inModal }) => inModal ? createPortal(<Backdrop>
   <Bullseye>
@@ -96,9 +97,9 @@ class Wizard extends React.Component {
     const finalObject = {};
 
     // Find only visited fields
-    Object.values([ ...visitedSteps, this.state.activeStep ]
-    .reduce((obj, key) => ({ ...obj, [key]: finalRegisteredFieldsHistory[key] }), { }))
-    .flat(Infinity).forEach((key) => set(finalObject, key, get(values, key)));
+    flattenDeep(Object.values([ ...visitedSteps, this.state.activeStep ]
+    .reduce((obj, key) => ({ ...obj, [key]: finalRegisteredFieldsHistory[key] }), { })))
+    .forEach((key) => set(finalObject, key, get(values, key)));
 
     return finalObject;
   }
