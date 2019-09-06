@@ -42,7 +42,7 @@ const LandingPage = () => {
       <div className={ classes.landingPageContainer }>
         <LandingPageTitle />
         <Typography className={ classes.landingPageText }>
-          React form renderer is a component designed for ManageIQ and Redhat Cloud Services projects that takes
+          React form renderer is a component designed for ManageIQ and Red Hat Cloud Services projects that takes
           json form definitions and renders them into react components.
         </Typography>
         <div className={ classes.getStartedLink }>
