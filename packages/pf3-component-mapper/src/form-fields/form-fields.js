@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormControl, HelpBlock, Checkbox, Radio as PfRadio, FormGroup, ControlLabel } from 'patternfly-react';
+import { FormControl, HelpBlock, Checkbox, FormGroup, ControlLabel } from 'patternfly-react';
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 import { validationError } from './helpers';
 import MultipleChoiceList from './multiple-choice-list';
@@ -8,6 +8,7 @@ import RequiredLabel from './required-label';
 import Switch from './switch-field';
 import { DateTimePicker } from './date-time-picker/date-time-picker';
 import Select from './select';
+import RagioGroup from './radio';
 
 const selectComponent = ({
   componentType,
@@ -33,17 +34,15 @@ const selectComponent = ({
   [componentTypes.TEXTAREA_FIELD]: () =>
     <FormControl { ...input } disabled={ isDisabled } readOnly={ isReadOnly } { ...rest } componentClass="textarea" placeholder={ placeholder }/>,
   [componentTypes.CHECKBOX]: () => <Checkbox { ...input } disabled={ isDisabled || isReadOnly }>{ label }</Checkbox>,
-  [componentTypes.RADIO]: () => options.map(option => (
-    <FieldProvider
-      key={ `${input.name}-${option.value}` }
-      name={ input.name }
-      value={ option.value }
-      type="radio"
-      formOptions={ formOptions }
-      render={ ({ input }) => (
-        <PfRadio { ...input } onChange={ () => { input.onChange(option.value); } } disabled={ isDisabled || isReadOnly }>{ option.label }</PfRadio>) }
+  [componentTypes.RADIO]: () => (
+    <RagioGroup
+      options={ options }
+      FieldProvider={ FieldProvider }
+      isDisabled={ isDisabled }
+      isReadOnly={ isReadOnly }
+      input={ input }
     />
-  )),
+  ),
   [componentTypes.SELECT_COMPONENT]: () => <div>
     <Select
       loadOptions={ loadOptions }

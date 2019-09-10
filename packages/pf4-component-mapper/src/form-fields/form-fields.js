@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import MultipleChoiceList from './multiple-choice-list';
 import {
   TextInput,
-  Radio,
   Checkbox,
   TextArea,
   FormGroup,
@@ -14,6 +13,7 @@ import {
 } from '@patternfly/react-core';
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 import Select from './select/select';
+import RadioGroup from './radio';
 
 const selectComponent = ({
   componentType,
@@ -50,24 +50,15 @@ const selectComponent = ({
       { ...rest }
       isDisabled={ isDisabled || isReadOnly }
     />,
-  [componentTypes.RADIO]: () => options.map(option => (
-    <FieldProvider
+  [componentTypes.RADIO]: () => (
+    <RadioGroup
+      options={ options }
+      FieldProvider={ FieldProvider }
+      isDisabled={ isDisabled }
+      isReadOnly={ isReadOnly }
+      input={ input }
       { ...rest }
-      key={ `${input.name}-${option.value}` }
-      name={ input.name }
-      value={ option.value }
-      type="radio"
-      render={ ({ input }) => (
-        <Radio
-          { ...input }
-          isChecked={ input.checked }
-          label={ option.label }
-          id={ `${input.name}-${option.value}` }
-          aria-label={ option.label }
-          isDisabled={ isDisabled || isReadOnly }
-          onChange={ () => input.onChange(option.value) } />) }
-    />
-  )),
+    />),
   [componentTypes.SWITCH]: () => {
     const { isValid, ...newRest } = rest;
     return <Switch

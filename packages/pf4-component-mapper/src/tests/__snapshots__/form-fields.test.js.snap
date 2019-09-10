@@ -550,132 +550,161 @@ exports[`FormFields should render Radio correctly 1`] = `
       <div
         className="pf-c-form__group"
       >
-        <FieldProvider
+        <RadioGroup
+          FieldProvider={[Function]}
           id="someIdKey"
+          input={
+            Object {
+              "name": "Name of the field",
+              "value": "",
+            }
+          }
           isValid={true}
-          key="Name of the field-1"
           name="Name of the field"
-          render={[Function]}
-          type="radio"
-          value="1"
+          options={
+            Array [
+              Object {
+                "label": "One",
+                "value": "1",
+              },
+              Object {
+                "label": "Two",
+                "value": "2",
+              },
+              Object {
+                "label": "Three",
+                "value": "3",
+              },
+            ]
+          }
         >
-          <div>
-            <Radio
-              aria-label="One"
-              className=""
-              id="Foo-1"
-              isDisabled={false}
-              isValid={true}
-              label="One"
-              name="Foo"
-              onChange={[Function]}
-            >
-              <div
-                className="pf-c-radio"
+          <FieldProvider
+            id="someIdKey"
+            isValid={true}
+            key="Name of the field-1"
+            name="Name of the field"
+            render={[Function]}
+            type="radio"
+            value="1"
+          >
+            <div>
+              <Radio
+                aria-label="One"
+                className=""
+                id="Foo-1"
+                isDisabled={false}
+                isValid={true}
+                label="One"
+                name="Foo"
+                onChange={[Function]}
               >
-                <input
-                  aria-invalid={false}
-                  className="pf-c-radio__input"
-                  disabled={false}
-                  id="Foo-1"
-                  name="Foo"
-                  onChange={[Function]}
-                  type="radio"
-                />
-                <label
-                  className="pf-c-radio__label"
-                  htmlFor="Foo-1"
+                <div
+                  className="pf-c-radio"
                 >
-                  One
-                </label>
-              </div>
-            </Radio>
-          </div>
-        </FieldProvider>
-        <FieldProvider
-          id="someIdKey"
-          isValid={true}
-          key="Name of the field-2"
-          name="Name of the field"
-          render={[Function]}
-          type="radio"
-          value="2"
-        >
-          <div>
-            <Radio
-              aria-label="Two"
-              className=""
-              id="Foo-2"
-              isDisabled={false}
-              isValid={true}
-              label="Two"
-              name="Foo"
-              onChange={[Function]}
-            >
-              <div
-                className="pf-c-radio"
+                  <input
+                    aria-invalid={false}
+                    className="pf-c-radio__input"
+                    disabled={false}
+                    id="Foo-1"
+                    name="Foo"
+                    onChange={[Function]}
+                    type="radio"
+                  />
+                  <label
+                    className="pf-c-radio__label"
+                    htmlFor="Foo-1"
+                  >
+                    One
+                  </label>
+                </div>
+              </Radio>
+            </div>
+          </FieldProvider>
+          <FieldProvider
+            id="someIdKey"
+            isValid={true}
+            key="Name of the field-2"
+            name="Name of the field"
+            render={[Function]}
+            type="radio"
+            value="2"
+          >
+            <div>
+              <Radio
+                aria-label="Two"
+                className=""
+                id="Foo-2"
+                isDisabled={false}
+                isValid={true}
+                label="Two"
+                name="Foo"
+                onChange={[Function]}
               >
-                <input
-                  aria-invalid={false}
-                  className="pf-c-radio__input"
-                  disabled={false}
-                  id="Foo-2"
-                  name="Foo"
-                  onChange={[Function]}
-                  type="radio"
-                />
-                <label
-                  className="pf-c-radio__label"
-                  htmlFor="Foo-2"
+                <div
+                  className="pf-c-radio"
                 >
-                  Two
-                </label>
-              </div>
-            </Radio>
-          </div>
-        </FieldProvider>
-        <FieldProvider
-          id="someIdKey"
-          isValid={true}
-          key="Name of the field-3"
-          name="Name of the field"
-          render={[Function]}
-          type="radio"
-          value="3"
-        >
-          <div>
-            <Radio
-              aria-label="Three"
-              className=""
-              id="Foo-3"
-              isDisabled={false}
-              isValid={true}
-              label="Three"
-              name="Foo"
-              onChange={[Function]}
-            >
-              <div
-                className="pf-c-radio"
+                  <input
+                    aria-invalid={false}
+                    className="pf-c-radio__input"
+                    disabled={false}
+                    id="Foo-2"
+                    name="Foo"
+                    onChange={[Function]}
+                    type="radio"
+                  />
+                  <label
+                    className="pf-c-radio__label"
+                    htmlFor="Foo-2"
+                  >
+                    Two
+                  </label>
+                </div>
+              </Radio>
+            </div>
+          </FieldProvider>
+          <FieldProvider
+            id="someIdKey"
+            isValid={true}
+            key="Name of the field-3"
+            name="Name of the field"
+            render={[Function]}
+            type="radio"
+            value="3"
+          >
+            <div>
+              <Radio
+                aria-label="Three"
+                className=""
+                id="Foo-3"
+                isDisabled={false}
+                isValid={true}
+                label="Three"
+                name="Foo"
+                onChange={[Function]}
               >
-                <input
-                  aria-invalid={false}
-                  className="pf-c-radio__input"
-                  disabled={false}
-                  id="Foo-3"
-                  name="Foo"
-                  onChange={[Function]}
-                  type="radio"
-                />
-                <label
-                  className="pf-c-radio__label"
-                  htmlFor="Foo-3"
+                <div
+                  className="pf-c-radio"
                 >
-                  Three
-                </label>
-              </div>
-            </Radio>
-          </div>
-        </FieldProvider>
+                  <input
+                    aria-invalid={false}
+                    className="pf-c-radio__input"
+                    disabled={false}
+                    id="Foo-3"
+                    name="Foo"
+                    onChange={[Function]}
+                    type="radio"
+                  />
+                  <label
+                    className="pf-c-radio__label"
+                    htmlFor="Foo-3"
+                  >
+                    Three
+                  </label>
+                </div>
+              </Radio>
+            </div>
+          </FieldProvider>
+        </RadioGroup>
       </div>
     </FormGroup>
   </FieldInterface>
@@ -1651,135 +1680,165 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
       <div
         className="pf-c-form__group"
       >
-        <FieldProvider
+        <RadioGroup
+          FieldProvider={[Function]}
           disabled={true}
           id="someIdKey"
+          input={
+            Object {
+              "name": "Name of the field",
+              "value": "",
+            }
+          }
           isValid={true}
-          key="Name of the field-1"
           name="Name of the field"
-          render={[Function]}
-          type="radio"
-          value="1"
+          options={
+            Array [
+              Object {
+                "label": "One",
+                "value": "1",
+              },
+              Object {
+                "label": "Two",
+                "value": "2",
+              },
+              Object {
+                "label": "Three",
+                "value": "3",
+              },
+            ]
+          }
         >
-          <div>
-            <Radio
-              aria-label="One"
-              className=""
-              id="Foo-1"
-              isDisabled={false}
-              isValid={true}
-              label="One"
-              name="Foo"
-              onChange={[Function]}
-            >
-              <div
-                className="pf-c-radio"
+          <FieldProvider
+            disabled={true}
+            id="someIdKey"
+            isValid={true}
+            key="Name of the field-1"
+            name="Name of the field"
+            render={[Function]}
+            type="radio"
+            value="1"
+          >
+            <div>
+              <Radio
+                aria-label="One"
+                className=""
+                id="Foo-1"
+                isDisabled={false}
+                isValid={true}
+                label="One"
+                name="Foo"
+                onChange={[Function]}
               >
-                <input
-                  aria-invalid={false}
-                  className="pf-c-radio__input"
-                  disabled={false}
-                  id="Foo-1"
-                  name="Foo"
-                  onChange={[Function]}
-                  type="radio"
-                />
-                <label
-                  className="pf-c-radio__label"
-                  htmlFor="Foo-1"
+                <div
+                  className="pf-c-radio"
                 >
-                  One
-                </label>
-              </div>
-            </Radio>
-          </div>
-        </FieldProvider>
-        <FieldProvider
-          disabled={true}
-          id="someIdKey"
-          isValid={true}
-          key="Name of the field-2"
-          name="Name of the field"
-          render={[Function]}
-          type="radio"
-          value="2"
-        >
-          <div>
-            <Radio
-              aria-label="Two"
-              className=""
-              id="Foo-2"
-              isDisabled={false}
-              isValid={true}
-              label="Two"
-              name="Foo"
-              onChange={[Function]}
-            >
-              <div
-                className="pf-c-radio"
+                  <input
+                    aria-invalid={false}
+                    className="pf-c-radio__input"
+                    disabled={false}
+                    id="Foo-1"
+                    name="Foo"
+                    onChange={[Function]}
+                    type="radio"
+                  />
+                  <label
+                    className="pf-c-radio__label"
+                    htmlFor="Foo-1"
+                  >
+                    One
+                  </label>
+                </div>
+              </Radio>
+            </div>
+          </FieldProvider>
+          <FieldProvider
+            disabled={true}
+            id="someIdKey"
+            isValid={true}
+            key="Name of the field-2"
+            name="Name of the field"
+            render={[Function]}
+            type="radio"
+            value="2"
+          >
+            <div>
+              <Radio
+                aria-label="Two"
+                className=""
+                id="Foo-2"
+                isDisabled={false}
+                isValid={true}
+                label="Two"
+                name="Foo"
+                onChange={[Function]}
               >
-                <input
-                  aria-invalid={false}
-                  className="pf-c-radio__input"
-                  disabled={false}
-                  id="Foo-2"
-                  name="Foo"
-                  onChange={[Function]}
-                  type="radio"
-                />
-                <label
-                  className="pf-c-radio__label"
-                  htmlFor="Foo-2"
+                <div
+                  className="pf-c-radio"
                 >
-                  Two
-                </label>
-              </div>
-            </Radio>
-          </div>
-        </FieldProvider>
-        <FieldProvider
-          disabled={true}
-          id="someIdKey"
-          isValid={true}
-          key="Name of the field-3"
-          name="Name of the field"
-          render={[Function]}
-          type="radio"
-          value="3"
-        >
-          <div>
-            <Radio
-              aria-label="Three"
-              className=""
-              id="Foo-3"
-              isDisabled={false}
-              isValid={true}
-              label="Three"
-              name="Foo"
-              onChange={[Function]}
-            >
-              <div
-                className="pf-c-radio"
+                  <input
+                    aria-invalid={false}
+                    className="pf-c-radio__input"
+                    disabled={false}
+                    id="Foo-2"
+                    name="Foo"
+                    onChange={[Function]}
+                    type="radio"
+                  />
+                  <label
+                    className="pf-c-radio__label"
+                    htmlFor="Foo-2"
+                  >
+                    Two
+                  </label>
+                </div>
+              </Radio>
+            </div>
+          </FieldProvider>
+          <FieldProvider
+            disabled={true}
+            id="someIdKey"
+            isValid={true}
+            key="Name of the field-3"
+            name="Name of the field"
+            render={[Function]}
+            type="radio"
+            value="3"
+          >
+            <div>
+              <Radio
+                aria-label="Three"
+                className=""
+                id="Foo-3"
+                isDisabled={false}
+                isValid={true}
+                label="Three"
+                name="Foo"
+                onChange={[Function]}
               >
-                <input
-                  aria-invalid={false}
-                  className="pf-c-radio__input"
-                  disabled={false}
-                  id="Foo-3"
-                  name="Foo"
-                  onChange={[Function]}
-                  type="radio"
-                />
-                <label
-                  className="pf-c-radio__label"
-                  htmlFor="Foo-3"
+                <div
+                  className="pf-c-radio"
                 >
-                  Three
-                </label>
-              </div>
-            </Radio>
-          </div>
-        </FieldProvider>
+                  <input
+                    aria-invalid={false}
+                    className="pf-c-radio__input"
+                    disabled={false}
+                    id="Foo-3"
+                    name="Foo"
+                    onChange={[Function]}
+                    type="radio"
+                  />
+                  <label
+                    className="pf-c-radio__label"
+                    htmlFor="Foo-3"
+                  >
+                    Three
+                  </label>
+                </div>
+              </Radio>
+            </div>
+          </FieldProvider>
+        </RadioGroup>
       </div>
     </FormGroup>
   </FieldInterface>

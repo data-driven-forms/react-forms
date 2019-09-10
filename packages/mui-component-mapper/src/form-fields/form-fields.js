@@ -17,6 +17,8 @@ import MuiSelect from './select-field';
 import { MuiPickersUtilsProvider, TimePicker, DatePicker } from 'material-ui-pickers';
 import MomentUtils from '@date-io/moment';
 
+import RadioGroup from './radio';
+
 import './form-fields.scss';
 const selectValue = option => option.sort((a, b) => a.label.localeCompare(b.label, 'en', { sensitivity: 'base' })).map(item => item.value);
 
@@ -81,30 +83,13 @@ const selectComponent = ({
     />
   ),
   [componentTypes.RADIO]: () => (
-    <div  className="mui-ddform-radio-group">
-      <FormControl component="fieldset">
-        <FormLabel component="legend">{ label }</FormLabel>
-        { options.map(option => (
-          <FieldProvider
-            formOptions={ formOptions }
-            key={ `${input.name}-${option.value}` }
-            name={ input.name }
-            value={ option.value }
-            type="radio"
-            render={ ({ input, formOptions }) => (
-              <FormControlLabel
-                value="female"
-                control={ <MuiRadio
-                  { ...input }
-                  disabled={ isDisabled }
-                  onChange={ () => input.onChange(option.value) }/> }
-                label={ option.label }
-              />
-            ) }
-          />
-        )) }
-      </FormControl>
-    </div>
+    <RadioGroup
+      FieldProvider={ FieldProvider }
+      options={ options }
+      isDisabled={ isDisabled }
+      input={ input }
+      label={ label }
+    />
   ),
   [componentTypes.SELECT_COMPONENT]: () => (
     <MuiSelect
