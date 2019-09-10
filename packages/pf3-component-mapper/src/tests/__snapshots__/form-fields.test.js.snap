@@ -121,66 +121,87 @@ exports[`FormFields <Radio /> should render correctly 1`] = `
       <div
         className="form-group"
       >
-        <MockFieldProvider
-          key="radio-1"
-          name="radio"
-          render={[Function]}
-          type="radio"
-          value={1}
+        <RadioGroup
+          FieldProvider={[Function]}
+          input={
+            Object {
+              "name": "radio",
+            }
+          }
+          options={
+            Array [
+              Object {
+                "label": "option 1",
+                "value": 1,
+              },
+              Object {
+                "label": "option 2",
+                "value": 2,
+              },
+            ]
+          }
         >
-          <Radio
-            bsClass="radio"
-            disabled={false}
-            inline={false}
-            onChange={[Function]}
-            title=""
+          <MockFieldProvider
+            key="radio-1"
+            name="radio"
+            render={[Function]}
+            type="radio"
+            value={1}
           >
-            <div
-              className="radio"
+            <Radio
+              bsClass="radio"
+              disabled={false}
+              inline={false}
+              onChange={[Function]}
+              title=""
             >
-              <label
-                title=""
+              <div
+                className="radio"
               >
-                <input
-                  disabled={false}
-                  onChange={[Function]}
-                  type="radio"
-                />
-                option 1
-              </label>
-            </div>
-          </Radio>
-        </MockFieldProvider>
-        <MockFieldProvider
-          key="radio-2"
-          name="radio"
-          render={[Function]}
-          type="radio"
-          value={2}
-        >
-          <Radio
-            bsClass="radio"
-            disabled={false}
-            inline={false}
-            onChange={[Function]}
-            title=""
+                <label
+                  title=""
+                >
+                  <input
+                    disabled={false}
+                    onChange={[Function]}
+                    type="radio"
+                  />
+                  option 1
+                </label>
+              </div>
+            </Radio>
+          </MockFieldProvider>
+          <MockFieldProvider
+            key="radio-2"
+            name="radio"
+            render={[Function]}
+            type="radio"
+            value={2}
           >
-            <div
-              className="radio"
+            <Radio
+              bsClass="radio"
+              disabled={false}
+              inline={false}
+              onChange={[Function]}
+              title=""
             >
-              <label
-                title=""
+              <div
+                className="radio"
               >
-                <input
-                  disabled={false}
-                  onChange={[Function]}
-                  type="radio"
-                />
-                option 2
-              </label>
-            </div>
-          </Radio>
-        </MockFieldProvider>
+                <label
+                  title=""
+                >
+                  <input
+                    disabled={false}
+                    onChange={[Function]}
+                    type="radio"
+                  />
+                  option 2
+                </label>
+              </div>
+            </Radio>
+          </MockFieldProvider>
+        </RadioGroup>
       </div>
     </FormGroup>
   </FieldInterface>
