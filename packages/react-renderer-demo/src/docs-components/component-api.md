@@ -87,9 +87,18 @@ All those components provides a shared group of props:
 
 #### Datepicker
 
+This component is using [react-day-picker](https://react-day-picker.js.org/docs/) as a base component.
+
 |Prop|Type|Description|
 |----|:--:|----------:|
 |placeholder|node/string|A placeholder|
+|variant|['date-time', 'date']|variant of date picker|,
+|locale|string|Defines date picker locale. See react-day-picker [docs](https://react-day-picker.js.org/docs/localization#moment) for more info |
+|todayButtonLabel|string|Label for today button|
+|showTodayButton|bool|show/hide today button|
+|isDisabled|bool|disable component|
+|disabledDays|array|Mark specific days or a range of days as disabled. [More info](https://react-day-picker.js.org/examples/disabled)|
+|closeOnDaySelect|bool|Close the calendar popover after selecting date.|
 
 <ExampleLink to='date-picker' />
 

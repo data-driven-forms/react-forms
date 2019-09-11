@@ -159,7 +159,7 @@ export const baseExamples = [{
     title: 'Clearable',
   }, {
     name: 'simpleValue',
-    title: 'Simple value'
+    title: 'Simple value',
   }],
 },
 {
@@ -200,8 +200,25 @@ export const baseExamples = [{
     title: 'Label',
     component: 'input',
     value: 'Date Picker',
-  },
-  ],
+  }, {
+    title: 'Variant',
+    name: 'variant',
+    options: [ 'date-time', 'date' ],
+  }, {
+    name: 'showTodayButton',
+    title: 'Show today button',
+  }, {
+    name: 'todayButtonLabel',
+    component: 'input',
+    value: 'Today',
+    title: 'Today button label',
+  }, {
+    name: 'closeOnDaySelect',
+    title: 'Close on day select',
+  }, {
+    name: 'isClearable',
+    title: 'Clearable',
+  }],
 },
 {
   component: componentTypes.TIME_PICKER,

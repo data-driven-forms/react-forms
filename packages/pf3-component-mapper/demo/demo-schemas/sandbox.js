@@ -34,7 +34,7 @@ const output = {
                   condition: {
                     when: 'text_box_1',
                     is: true,
-                  }
+                  },
                 },
                 {
                   name: 'text_box_1111',
@@ -149,20 +149,20 @@ const output = {
                   label: 'Check Box',
                   title: 'Check Box',
                   component: components.CHECKBOX,
-                  "options": [
+                  'options': [
                     {
-                      "label": "Dog",
-                      "value": "1"
+                      'label': 'Dog',
+                      value: '1',
                     },
                     {
-                      "label": "Cats",
-                      "value": "2"
+                      'label': 'Cats',
+                      'value': '2',
                     },
                     {
-                      "label": "Hamsters",
-                      "value": "3"
-                    }
-                  ]
+                      'label': 'Hamsters',
+                      'value': '3',
+                    },
+                  ],
                 },
                 {
                   name: 'check_box_2',
@@ -401,8 +401,15 @@ const output = {
                 {
                   name: 'date_control_1',
                   label: 'Datepicker',
-                  title: 'Datepicker',
+                  title: 'Datepicker with disabled days',
                   component: components.DATE_PICKER,
+                  isClearable: true,
+                  disabledDays: [
+                    new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 5),
+                    {
+                      before: new Date(),
+                    },
+                  ],
                 },
                 {
                   name: 'date_control_2',
