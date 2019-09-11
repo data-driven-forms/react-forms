@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
 import { formFieldsMapper, layoutMapper } from '@data-driven-forms/mui-component-mapper';
@@ -103,31 +103,13 @@ class ComponentExample extends Component {
   constructor(props) {
     super(props);
     const baseStructure = baseExamples.find(item => item.component === props.match.params.component);
-    this.state = {
-      ...baseStructure,
-      variants: [
-        ...baseStructure.variants,
-        { name: 'name', title: 'Name', value: baseStructure.value.fields[0].name, component: 'input' },
-        ...(baseStructure.canBeRequired ? [{
-          name: 'isRequired',
-          title: 'Required',
-          validate: [{
-            type: validatorTypes.REQUIRED,
-          }],
-        }] : []),
-      ],
-      value: JSON.stringify(baseStructure.value, null, 2),
-      parsedSchema: baseStructure.value,
-      activeMapper: 'mui',
-      frameHeight: 360,
-      openTooltip: false,
-    };
-  }
-
-  componentDidUpdate({ match: { params: { component }}}){
-    if (component !== this.props.match.params.component) {
-      const baseStructure = baseExamples.find(item => item.component === this.props.match.params.component);
-      this.setState({
+    if (!baseStructure) {
+      this.state = {
+        notFound: true,
+        component: props.match.params.component,
+      };
+    } else {
+      this.state = {
         ...baseStructure,
         variants: [
           ...baseStructure.variants,
@@ -142,7 +124,39 @@ class ComponentExample extends Component {
         ],
         value: JSON.stringify(baseStructure.value, null, 2),
         parsedSchema: baseStructure.value,
-      });
+        activeMapper: 'mui',
+        frameHeight: 360,
+        openTooltip: false,
+      };
+    }
+  }
+
+  componentDidUpdate({ match: { params: { component }}}){
+    if (component !== this.props.match.params.component) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      const baseStructure = baseExamples.find(item => item.component === this.props.match.params.component);
+      if (baseStructure) {
+        this.setState({
+          component: undefined,
+          notFound: undefined,
+          ...baseStructure,
+          variants: [
+            ...baseStructure.variants,
+            { name: 'name', title: 'Name', value: baseStructure.value.fields[0].name, component: 'input' },
+            ...(baseStructure.canBeRequired ? [{
+              name: 'isRequired',
+              title: 'Required',
+              validate: [{
+                type: validatorTypes.REQUIRED,
+              }],
+            }] : []),
+          ],
+          value: JSON.stringify(baseStructure.value, null, 2),
+          parsedSchema: baseStructure.value,
+        });
+      } else {
+        this.setState({ notFound: true, component: this.props.match.params.component });
+      }
     }
   }
 
@@ -254,7 +268,10 @@ class ComponentExample extends Component {
 
   }
   render () {
-    const { value, parsedSchema, linkText, ContentText, activeMapper, component, openTooltip, variants } = this.state;
+    const { value, parsedSchema, linkText, ContentText, activeMapper, component, openTooltip, variants, notFound } = this.state;
+    if (notFound || parsedSchema === undefined) {
+      return <Redirect to="/not-found" />;
+    }
 
     const editedValue = value.replace(/^{\n {2}"fields": \[\n/, '')
     .replace(/ {2}\]\n}$/, '')
@@ -266,7 +283,7 @@ class ComponentExample extends Component {
       <Grid
         container
         direction="row"
-        spacing={4}
+        spacing={ 4 }
       >
         <Grid item xs={ 12 } >
           <Typography variant="h4" gutterBottom>

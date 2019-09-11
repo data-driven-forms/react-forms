@@ -9,6 +9,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Layout from './layout';
 import renderers from './common/md-helper/mdx-components';
+import NotFoundPage from './pages/not-found-page';
 import './app.scss';
 
 const FormRendererPage = lazy(() => import('./pages/form-renderer-page'));
@@ -49,11 +50,14 @@ const App = () => {
                 <Route exact path="/" component={ LandingPage } />
                 <div style={{ paddingTop: 86, paddingLeft: 32, paddingRight: 32 }}>
                   <CssBaseline />
-                  <Route exact path="/show-case" component={ ShowCase } />
-                  <Route exact path="/live-editor" component={ FormRendererPage } />
-                  <Route exact path="/component-example/:component" component={ ComponentExample } />
-                  <Route exact path="/renderer/:component" component={ RendererDocPage } />
-                  <Route exact path="/others/:component" component={ DocPage } />
+                  <Switch>
+                    <Route exact path="/show-case" component={ ShowCase } />
+                    <Route exact path="/live-editor" component={ FormRendererPage } />
+                    <Route exact path="/component-example/:component" component={ ComponentExample } />
+                    <Route exact path="/renderer/:component" component={ RendererDocPage } />
+                    <Route exact path="/others/:component" component={ DocPage } />
+                    <Route component={ NotFoundPage } />
+                  </Switch>
                 </div>
               </Switch>
             </Suspense>
