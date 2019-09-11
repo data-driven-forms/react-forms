@@ -50,7 +50,7 @@ All those components provides a shared group of props:
 |----|:--:|----------:|
 |placeholder|node/string|A placeholder|
 
-<ExampleLink to='text-area' />
+<ExampleLink to='textarea-field' />
 
 #### Select
 
