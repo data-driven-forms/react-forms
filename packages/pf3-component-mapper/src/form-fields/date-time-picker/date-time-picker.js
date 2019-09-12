@@ -93,6 +93,8 @@ export class DateTimePicker extends React.Component {
     ),
   }), () => this.props.onChange(this.state.selectedDay))
 
+  clearValue = () => this.setState({ selectedDay: undefined })
+
   render() {
     const { isOpen, selectedDay, selectingYear, selectingMonth } = this.state;
     const {
@@ -103,6 +105,7 @@ export class DateTimePicker extends React.Component {
       showTodayButton,
       isDisabled,
       disabledDays,
+      isClearable,
     } = this.props;
     return (
       <div style={{ position: 'relative' }} ref={ this.wrapperRef } >
@@ -113,6 +116,8 @@ export class DateTimePicker extends React.Component {
           variant={ variant }
           locale={ locale }
           isDisabled={ isDisabled }
+          isClearable={ isClearable }
+          clearValue={ this.clearValue }
         />
         <Overlay
           show={ isOpen }
@@ -156,6 +161,7 @@ DateTimePicker.propTypes = {
   value: PropTypes.instanceOf(Date),
   closeOnDaySelect: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
+  isClearable: PropTypes.bool,
 };
 
 DateTimePicker.defaultProps = {
@@ -167,5 +173,6 @@ DateTimePicker.defaultProps = {
   closeOnDaySelect: false,
   isDisabled: false,
   disabledDays: [{}],
+  isClearable: false,
 };
 

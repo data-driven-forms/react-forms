@@ -78,7 +78,7 @@
     ]
   },
   "dependencies": {
-    "react-day-picker": "^7.2.4",
+    "react-day-picker": "^7.3.2",
     "react-select": "^2.1.2"
   },
   "resolutions": {

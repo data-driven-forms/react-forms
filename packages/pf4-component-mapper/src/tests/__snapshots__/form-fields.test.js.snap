@@ -856,8 +856,8 @@ exports[`FormFields should render Switch correctly 1`] = `
                     <input
                       aria-label=""
                       aria-labelledby="someIdKey-on"
-                      checked={false}
                       className="pf-c-switch__input"
+                      defaultChecked={false}
                       disabled={false}
                       id="someIdKey"
                       name="Name of the field"
@@ -1995,8 +1995,8 @@ exports[`FormFields should render disabled Switch correctly 1`] = `
                     <input
                       aria-label=""
                       aria-labelledby="someIdKey-on"
-                      checked={false}
                       className="pf-c-switch__input"
+                      defaultChecked={false}
                       disabled={true}
                       id="someIdKey"
                       name="Name of the field"
@@ -2162,8 +2162,8 @@ exports[`FormFields should render disabled Switch correctly 2`] = `
                     <input
                       aria-label=""
                       aria-labelledby="someIdKey-on"
-                      checked={false}
                       className="pf-c-switch__input"
+                      defaultChecked={false}
                       disabled={true}
                       id="someIdKey"
                       name="Name of the field"
