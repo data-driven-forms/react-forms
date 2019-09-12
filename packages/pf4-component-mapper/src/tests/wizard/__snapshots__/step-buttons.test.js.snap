@@ -8,20 +8,20 @@ exports[`<WizardSTepButtons should add custom className to toolbar 1`] = `
     handleSubmit={[MockFunction]}
     submitLabel="Submit"
   />
-  <Button
+  <Component
     onClick={[MockFunction]}
     type="button"
     variant="secondary"
   >
     Back
-  </Button>
-  <Button
+  </Component>
+  <Component
     onClick={[MockFunction]}
     type="button"
     variant="link"
   >
     Cancel
-  </Button>
+  </Component>
 </footer>
 `;
 
@@ -33,19 +33,19 @@ exports[`<WizardSTepButtons should render correctly 1`] = `
     handleSubmit={[MockFunction]}
     submitLabel="Submit"
   />
-  <Button
+  <Component
     onClick={[MockFunction]}
     type="button"
     variant="secondary"
   >
     Back
-  </Button>
-  <Button
+  </Component>
+  <Component
     onClick={[MockFunction]}
     type="button"
     variant="link"
   >
     Cancel
-  </Button>
+  </Component>
 </footer>
 `;

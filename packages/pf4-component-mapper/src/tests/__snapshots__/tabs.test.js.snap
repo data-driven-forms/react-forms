@@ -1,15 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Tabs component should render tabs correctly 1`] = `
-<Tabs
+<Component
   activeKey={0}
-  className=""
-  isFilled={false}
-  isSecondary={false}
-  leftScrollAriaLabel="Scroll left"
   onSelect={[Function]}
-  rightScrollAriaLabel="Scroll right"
-  variant="div"
 >
   <ForwardRef
     eventKey={0}
@@ -37,5 +31,5 @@ exports[`Tabs component should render tabs correctly 1`] = `
       </div>
     </div>
   </ForwardRef>
-</Tabs>
+</Component>
 `;
