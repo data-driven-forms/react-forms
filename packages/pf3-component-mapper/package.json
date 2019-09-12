@@ -78,6 +78,7 @@
     ]
   },
   "dependencies": {
+    "@data-driven-forms/common": "*",
     "react-day-picker": "^7.3.2",
     "react-select": "^2.1.2"
   },

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import ReactSelect from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 
+import { SelectDefaultProps, SelectPropTypes } from '../../../../common/src/select-proptypes';
+
 import MultiValueContainer from './multi-value-container';
 import ValueContainer from './value-container';
 import MultiValueRemove from './multi-value-remove';
@@ -116,30 +118,23 @@ export class Select extends React.Component {
 }
 
 Select.propTypes = {
+  ...SelectPropTypes,
   selectVariant: PropTypes.oneOf([ 'default', 'createable' ]),
-  isSearchable: PropTypes.bool,
   showMoreLabel: PropTypes.string,
   showLessLabel: PropTypes.string,
-  simpleValue: PropTypes.bool,
   value: PropTypes.any,
-  options: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.any,
-    label: PropTypes.any,
-  })),
   onChange: PropTypes.func.isRequired,
-  isMulti: PropTypes.bool,
-  loadOptions: PropTypes.func,
   loadingMessage: PropTypes.node,
   updatingMessage: PropTypes.node,
   noOptionsMessage: PropTypes.func,
+  input: PropTypes.any,
 };
 
 Select.defaultProps = {
+  ...SelectDefaultProps,
   selectVariant: 'default',
   showMoreLabel: 'more',
   showLessLabel: 'Show less',
-  simpleValue: true,
-  loadingMessage: 'Loading...',
   updatingMessage: 'Loading data...',
   options: [],
 };

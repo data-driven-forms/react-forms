@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import ReactSelect, { components } from 'react-select';
+import PropTypes from 'prop-types';
+
+import { SelectPropTypes, SelectDefaultProps } from '@data-driven-forms/common/src/select-proptypes';
+import { ChildrenPropTypes } from '@data-driven-forms/common/src/children-proptype';
+
 import customStyles from './select-styles';
 import './react-select.scss';
 
@@ -21,6 +25,11 @@ const ValueContainer = ({ children, ...props }) => {
       { children }
     </components.ValueContainer>
   );
+};
+
+ValueContainer.propTypes = {
+  ...ChildrenPropTypes,
+  isMulti: PropTypes.bool,
 };
 
 class Select extends Component {
@@ -101,42 +110,11 @@ class Select extends Component {
 }
 
 Select.propTypes = {
-  simpleValue: PropTypes.bool,
-  loadOptions: PropTypes.func,
-  options: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string,
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
-  })),
-  invalid: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
-  input: PropTypes.shape({
-    onChange: PropTypes.func.isRequired,
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.array,
-      PropTypes.any,
-    ]),
-  }),
-  initialValue: PropTypes.any,
-  placeholder: PropTypes.string,
-  rest: PropTypes.any,
-  isSearchable: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  isReadOnly: PropTypes.bool,
-  loadingMessage: PropTypes.string,
+  ...SelectPropTypes,
 };
 
 Select.defaultProps = {
-  input: {
-    value: [],
-  },
-  loadingMessage: 'Loading...',
-  simpleValue: true,
+  ...SelectDefaultProps,
 };
 
 export default Select;
