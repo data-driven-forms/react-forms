@@ -71,6 +71,10 @@ export const baseExamples = [{
 },
 {
   component: componentTypes.CHECKBOX,
+  prev: {
+    link: '/renderer/form-controls',
+    label: 'Form Controls',
+  },
   linkText: 'Checkbox',
   ContentText: GenericComponentText,
   value: { fields: [{
@@ -410,4 +414,12 @@ export const baseExamples = [{
     }],
   },
   variants: [],
+  next: {
+    link: '/others/miq-components',
+    label: 'ManageIQ components',
+  },
+  prev: {
+    link: '/component-example/time-picker',
+    label: 'Time Picker',
+  },
 }];

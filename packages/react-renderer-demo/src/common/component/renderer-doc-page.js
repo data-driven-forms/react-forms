@@ -1,6 +1,6 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import makeStyles from '@material-ui/styles/makeStyles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -38,18 +38,26 @@ const PageLoadingIndicator = () => (
 const RendererDocPage = ({ match: { params: { component }}}) => {
   const [ Component, setComponent ] = useState();
   const classes = useStyles();
+
   useEffect(() => {
-    const OtherComponent = lazy(() => import(`docs/components/${component}.md`).then((m) => {
-      setImmediate(() => {
-        const h = window.location.hash;
-        window.location.hash = '';
-        window.location.hash = h.replace('#', '');
-      });
-      return m;
-    }));
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-    setComponent(OtherComponent);
+    if (component) {
+      const OtherComponent = lazy(() => import(`docs/components/${component}.md`).then((m) => {
+        setImmediate(() => {
+          const h = window.location.hash;
+          window.location.hash = '';
+          window.location.hash = h.replace('#', '');
+        });
+        return m;
+      }));
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      setComponent(OtherComponent);
+    }
   }, [ component ]);
+
+  if (!component) {
+    return <Redirect to="/renderer/installation" />;
+  }
+
   return (
     <Suspense fallback={ <PageLoadingIndicator/> }>
       <div className={ classes.demoWrapper }>

@@ -83,6 +83,6 @@
     "react-ace": "^6.3.2",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.8.6",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^5.0.1"
   }
 }

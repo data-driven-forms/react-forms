@@ -154,7 +154,7 @@ class ComponentExample extends Component {
           value: JSON.stringify(baseStructure.value, null, 2),
           parsedSchema: baseStructure.value,
         });
-      } else {
+      } else if (!baseStructure && !!component) {
         this.setState({ notFound: true, component: this.props.match.params.component });
       }
     }
@@ -269,7 +269,11 @@ class ComponentExample extends Component {
   }
   render () {
     const { value, parsedSchema, linkText, ContentText, activeMapper, component, openTooltip, variants, notFound } = this.state;
-    if (notFound || parsedSchema === undefined) {
+    if (!this.props.match.params.component) {
+      return <Redirect to="/component-example/checkbox" />;
+    }
+
+    if (notFound) {
       return <Redirect to="/not-found" />;
     }
 
