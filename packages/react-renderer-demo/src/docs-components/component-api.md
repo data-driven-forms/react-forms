@@ -85,6 +85,15 @@ All those components provides a shared group of props:
 
 <ExampleLink to='radio' />
 
+#### Switch
+
+|Prop|Type|Description|
+|----|:--:|----------:|
+|onText|string|A text which is shown when the switch is on (checked)|
+|offText|string|A text which is shown when the switch is off|
+
+<ExampleLink to='switch-field' />
+
 #### Datepicker
 
 This component is using [react-day-picker](https://react-day-picker.js.org/docs/) as a base component.

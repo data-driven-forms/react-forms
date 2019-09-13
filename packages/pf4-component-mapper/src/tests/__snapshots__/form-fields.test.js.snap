@@ -824,6 +824,7 @@ exports[`FormFields should render Switch correctly 1`] = `
                     "isChecked": false,
                     "isDisabled": undefined,
                     "label": undefined,
+                    "labelOff": undefined,
                     "name": "Name of the field",
                     "onChange": [Function],
                     "value": "",
@@ -1963,6 +1964,7 @@ exports[`FormFields should render disabled Switch correctly 1`] = `
                     "isChecked": false,
                     "isDisabled": true,
                     "label": undefined,
+                    "labelOff": undefined,
                     "name": "Name of the field",
                     "onChange": [Function],
                     "value": "",
@@ -2130,6 +2132,7 @@ exports[`FormFields should render disabled Switch correctly 2`] = `
                     "isChecked": false,
                     "isDisabled": true,
                     "label": undefined,
+                    "labelOff": undefined,
                     "name": "Name of the field",
                     "onChange": [Function],
                     "value": "",
@@ -2361,4 +2364,162 @@ exports[`FormFields should render touched TextField id correctly 1`] = `
     </FormGroup>
   </FieldInterface>
 </TextField>
+`;
+
+exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
+<SwitchField
+  FieldProvider={[Function]}
+  dataType="someDataType"
+  id="someIdKey"
+  input={
+    Object {
+      "name": "Name of the field",
+      "value": "",
+    }
+  }
+  meta={
+    Object {
+      "error": false,
+      "touched": false,
+    }
+  }
+  offText="Turned off"
+  onText="I am on"
+>
+  <FieldProvider
+    dataType="someDataType"
+    id="someIdKey"
+    input={
+      Object {
+        "name": "Name of the field",
+        "value": "",
+      }
+    }
+    meta={
+      Object {
+        "error": false,
+        "touched": false,
+      }
+    }
+    offText="Turned off"
+    onText="I am on"
+    render={[Function]}
+  >
+    <div>
+      <FieldInterface
+        componentType="switch-field"
+        dataType="someDataType"
+        hideLabel={true}
+        id="someIdKey"
+        input={
+          Object {
+            "name": "Name of the field",
+            "value": "",
+          }
+        }
+        meta={
+          Object {
+            "error": false,
+            "touched": false,
+          }
+        }
+        name="Name of the field"
+        offText="Turned off"
+        onText="I am on"
+      >
+        <FormGroup
+          fieldId="someIdKey"
+          helperTextInvalid={false}
+          isValid={true}
+          label={false}
+        >
+          <div
+            className="pf-c-form__group"
+          >
+            <Component
+              id="someIdKey"
+              isChecked={false}
+              label="I am on"
+              labelOff="Turned off"
+              name="Name of the field"
+              onChange={[Function]}
+              value=""
+            >
+              <ComponentWithOuia
+                component={[Function]}
+                componentProps={
+                  Object {
+                    "id": "someIdKey",
+                    "isChecked": false,
+                    "isDisabled": undefined,
+                    "label": "I am on",
+                    "labelOff": "Turned off",
+                    "name": "Name of the field",
+                    "onChange": [Function],
+                    "value": "",
+                  }
+                }
+                consumerContext={null}
+              >
+                <Switch
+                  aria-label=""
+                  className=""
+                  id="someIdKey"
+                  isChecked={false}
+                  isDisabled={false}
+                  label="I am on"
+                  labelOff="Turned off"
+                  name="Name of the field"
+                  onChange={[Function]}
+                  ouiaContext={
+                    Object {
+                      "isOuia": false,
+                      "ouiaId": null,
+                    }
+                  }
+                  value=""
+                >
+                  <label
+                    className="pf-c-switch"
+                    htmlFor="someIdKey"
+                  >
+                    <input
+                      aria-label=""
+                      aria-labelledby="someIdKey-on"
+                      className="pf-c-switch__input"
+                      defaultChecked={false}
+                      disabled={false}
+                      id="someIdKey"
+                      name="Name of the field"
+                      onChange={[Function]}
+                      type="checkbox"
+                      value=""
+                    />
+                    <span
+                      className="pf-c-switch__toggle"
+                    />
+                    <span
+                      aria-hidden="true"
+                      className="pf-c-switch__label pf-m-on"
+                      id="someIdKey-on"
+                    >
+                      I am on
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="pf-c-switch__label pf-m-off"
+                      id="someIdKey-off"
+                    >
+                      Turned off
+                    </span>
+                  </label>
+                </Switch>
+              </ComponentWithOuia>
+            </Component>
+          </div>
+        </FormGroup>
+      </FieldInterface>
+    </div>
+  </FieldProvider>
+</SwitchField>
 `;

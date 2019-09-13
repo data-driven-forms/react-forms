@@ -167,4 +167,14 @@ describe('FormFields', () => {
     );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
+
+  it('should render with onText/OffText Switch correctly', () => {
+    const wrapper = mount(
+      <SwitchField { ...props } onText="I am on" offText="Turned off" FieldProvider={ FieldProvider }/>
+    );
+
+    expect(wrapper.find('.pf-m-on').text().includes('I am on')).toEqual(true);
+    expect(wrapper.find('.pf-m-on').text().includes('Turned off')).toEqual(false);
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
 });
