@@ -182,6 +182,14 @@ export const baseExamples = [{
     title: 'Label',
     component: 'input',
     value: 'Switch',
+  }, {
+    name: 'onText',
+    title: 'onText',
+    component: 'input',
+  }, {
+    name: 'offText',
+    title: 'offText',
+    component: 'input',
   },
   ],
 },
