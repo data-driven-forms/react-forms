@@ -89,7 +89,7 @@ const Footer = ({ open }) => {
               <div>
                 <Typography variant="h5">Contribution</Typography>
                 <Typography>
-                      Please report any bugs, mistakes, suggestions and don't forget to contribute to the Data driven forms repository.
+                      Please report any bugs, mistakes, suggestions and don't forget to contribute to the data-driven-forms/react-forms repository.
                 </Typography>
               </div>
             </Paper>
