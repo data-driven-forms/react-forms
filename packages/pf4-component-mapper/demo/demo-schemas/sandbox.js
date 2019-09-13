@@ -37,7 +37,8 @@ const output = {
               fields: [
                 {
                   name: 'switch_1',
-                  label: 'Switch',
+                  onText: 'Switch is on',
+                  offText: 'Switch is off',
                   title: 'Switch',
                   component: components.SWITCH,
                 },

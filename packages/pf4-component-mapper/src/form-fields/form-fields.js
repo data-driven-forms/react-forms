@@ -67,7 +67,8 @@ const selectComponent = ({
       onChange={ (element, state) => input.onChange(state) }
       isChecked={ !!input.value }
       isDisabled={ isDisabled || isReadOnly }
-      label={ rest.label }
+      label={ onText || rest.label }
+      labelOff={ offText || rest.label }
     />;},
 })[componentType];
 
