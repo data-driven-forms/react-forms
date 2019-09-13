@@ -42,8 +42,8 @@ const LandingPage = () => {
       <div className={ classes.landingPageContainer }>
         <LandingPageTitle />
         <Typography className={ classes.landingPageText }>
-          React form renderer is a component designed for ManageIQ and Red Hat Cloud Services projects that takes
-          json form definitions and renders them into react components.
+          Data Driven Forms is a component designed for ManageIQ and Red&nbsp;Hat&nbsp;Cloud&nbsp;Services projects that takes
+          JSON form definitions and renders them into react components.
         </Typography>
         <div className={ classes.getStartedLink }>
           <Link to="/renderer/installation" style={{ textDecoration: 'none' }}>
