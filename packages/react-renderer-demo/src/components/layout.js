@@ -170,7 +170,9 @@ const Layout = ({ children }) => {
               </IconButton>
             </a>
           </div>
-          { children }
+          <div style={{ marginTop: 64 }}>
+            { children }
+          </div>
         </main>
       </div>
     </React.Fragment>
