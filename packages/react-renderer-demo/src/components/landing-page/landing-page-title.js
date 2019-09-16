@@ -1,7 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import LogoSvgIcon from '../common/logo-svg-icon';
+import LogoSvgIcon from '../common/landing-page-logo';
 
 const useStyles = makeStyles(theme => ({
   landingHeading: {
