@@ -8,7 +8,7 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SvgIcon from '@material-ui/core/SvgIcon';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 
 import GhIcon from './common/gh-svg-icon';
 import Navigation from './navigation/app-navigation';
@@ -105,6 +105,7 @@ const Layout = ({ children }) => {
   const classes = useStyles();
   const [ open, setOpen ] = useState(false);
   const searchRef = useRef(null);
+  const router = useRouter();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -115,7 +116,7 @@ const Layout = ({ children }) => {
     setOpen(false);
   };
 
-  const pathname = Router && Router.router && Router.router.pathname;
+  const pathname = router.pathname;
   return (
     <React.Fragment>
       <div className={ classes.root }>
