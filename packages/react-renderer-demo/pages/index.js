@@ -1,14 +1,61 @@
 import React from 'react';
-import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import Link from 'next/link';
 
-import Layout from '../src/components/layout';
+import LandingPageTitle from '../src/components/landing-page/landing-page-title';
+import LandingPageCards from '../src/components/landing-page/landing-page-cards';
 
-export default function Index() {
+const useStyles = makeStyles(theme => ({
+  landingPageContainer: {
+    marginTop: 128,
+    paddingBottom: 48,
+  },
+  landingPageText: {
+    marginTop: 48,
+    textAlign: 'center',
+    color: theme.palette.common.white,
+    maxWidth: 540,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  getStartedLink: {
+    display: 'block',
+    textAlign: 'center',
+    marginTop: 48,
+  },
+  getStartedButton: {
+    border: `1px solid ${theme.palette.common.white}`,
+    borderRadius: 2,
+    color: theme.palette.common.white,
+    paddingLeft: 16,
+    paddingRight: 16,
+    textTransform: 'none',
+  },
+}));
+
+const LandingPage = () => {
+  const classes = useStyles();
   return (
-    <h1>
-      There wil be dragons
-    </h1>
+    <React.Fragment>
+      <div className={ classes.landingPageContainer }>
+        <LandingPageTitle />
+        <Typography className={ classes.landingPageText }>
+          Data Driven Forms is a component designed for ManageIQ and Red&nbsp;Hat&nbsp;Cloud&nbsp;Services projects that takes
+          JSON form definitions and renders them into react components.
+        </Typography>
+        <div className={ classes.getStartedLink }>
+          <Link href="/renderer/installation">
+            <Button variant="outlined"  className={ classes.getStartedButton }>
+              Get started
+            </Button>
+          </Link>
+        </div>
+      </div>
+      <LandingPageCards />
+    </React.Fragment>
   );
-}
+};
+
+export default LandingPage;
