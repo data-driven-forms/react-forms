@@ -13,6 +13,7 @@ import GhIcon from './common/gh-svg-icon';
 import { withRouter } from 'react-router-dom';
 import Navigation from './common/examples-nav';
 import Footer from './components/footer';
+import ConnectedLinks from './common/component/connected-links';
 
 export const drawerWidth = 240;
 
@@ -169,6 +170,7 @@ const Layout = ({ children, location: { pathname }}) => {
             </a>
           </div>
           { children }
+          <ConnectedLinks />
         </main>
       </div>
       <Footer open={ open } />
