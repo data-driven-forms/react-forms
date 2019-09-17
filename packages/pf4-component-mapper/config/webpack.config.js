@@ -58,7 +58,7 @@ const externals = {
 };
 
 const prodConfig = {
-  mode: 'production',
+  mode: 'development',
   entry: './src/index.js',
   optimization: {
     minimizer: [
@@ -78,6 +78,7 @@ const prodConfig = {
     libraryTarget: 'umd',
     filename: 'index.js',
     umdNamedDefine: true,
+    globalObject: 'this',
   },
   externals,
 };
