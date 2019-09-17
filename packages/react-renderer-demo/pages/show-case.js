@@ -7,6 +7,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import Typography from '@material-ui/core/Typography';
 
 import { schema, uiSchema, conditionalSchema } from '../src/schemas/widget-schema';
 import MiqSchema from '../src/schemas/miq-schema';
@@ -16,8 +17,7 @@ import MapperContext from '../src/components/mappers-context';
 
 const Forms = ({ mappers }) => {
   const [ activeMapper, setActiveMapper ] = useState({
-    value: 'pf4',
-    label: 'Pf4',
+    value: 'mui',
     mod: mappers.mui,
   });
   const [ activeSchema, setActiveSchema ] = useState('conditional');
@@ -87,6 +87,9 @@ const DemoForms = () =>  {
   console.log(mappers);
   return (
     <Grid container direction="row" justify="space-evenly">
+      <Grid item xs={ 12 }>
+        <Typography gutterBottom variant="h5">React Form Renderer</Typography>
+      </Grid>
       { mappers.loaded && <Forms mappers={ mappers.mappers } /> }
     </Grid>
   );

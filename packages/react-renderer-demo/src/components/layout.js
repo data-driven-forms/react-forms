@@ -45,6 +45,11 @@ const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
   },
+  contentWrapper: {
+    paddingTop: 86,
+    paddingRight: 32,
+    paddingLeft: 32,
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -106,10 +111,10 @@ const useStyles = makeStyles(theme => ({
 
 const Layout = ({ children }) => {
   const classes = useStyles();
-  const [ open, setOpen ] = useState(false);
+  const router = useRouter();
+  const [ open, setOpen ] = useState(router.pathname !== '/');
   const [ mappers, setMappers ] = useState({ loaded: false, mappers: {}});
   const searchRef = useRef(null);
-  const router = useRouter();
 
   useEffect(() => {
     const promises = [
@@ -196,7 +201,7 @@ const Layout = ({ children }) => {
               </IconButton>
             </a>
           </div>
-          <div style={{ marginTop: 64 }}>
+          <div className={ classes.contentWrapper }>
             { children }
           </div>
         </main>
