@@ -5,6 +5,8 @@ import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../src/theme';
 import Layout from '../src/components/layout';
+import { MDXProvider } from '@mdx-js/react';
+import MdxComponents from '../src/components/mdx/mdx-components';
 
 import './vendor.css';
 
@@ -28,9 +30,11 @@ export default class MyApp extends App {
         <ThemeProvider theme={ theme }>
           { /* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */ }
           <CssBaseline />
-          <Layout>
-            <Component { ...pageProps } />
-          </Layout>
+          <MDXProvider components={ MdxComponents }>
+            <Layout>
+              <Component { ...pageProps } />
+            </Layout>
+          </MDXProvider>
         </ThemeProvider>
       </React.Fragment>
     );

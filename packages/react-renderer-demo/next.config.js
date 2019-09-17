@@ -1,7 +1,12 @@
 const withCSS = require('@zeit/next-css');
 const resolve = require('resolve');
+const withMDX = require('@next/mdx')({
+  extension: /\.mdx?$/,
+});
+const path = require('path');
 
-module.exports = withCSS({
+module.exports = withMDX(withCSS({
+  pageExtensions: [ 'js', 'jsx', 'md', 'mdx' ],
   webpack: (config, options) => {
     const { dir, isServer } = options;
     config.externals = [];
@@ -38,6 +43,12 @@ module.exports = withCSS({
       });
     }
 
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@docs/raw-component': path.resolve(__dirname, './src/components/common/raw-component'),
+      '@docs/doc-components': path.resolve(__dirname, './src/doc-components'),
+    };
+
     config.module.rules.push({
       test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
       use: {
@@ -54,4 +65,4 @@ module.exports = withCSS({
 
     return config;
   },
-});
+}));

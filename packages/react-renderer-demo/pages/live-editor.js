@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { componentTypes as components, validatorTypes as validators, defaultSchemaValidator } from '@data-driven-forms/react-form-renderer';
 
-import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic';
 
 import MapperContext from '../src/components/mappers-context';
 const CodeEditor = dynamic(import('../src/components/code-editor'), {
