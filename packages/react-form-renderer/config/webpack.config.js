@@ -60,6 +60,7 @@ const prodConfig = {
     globalObject: 'this',
     umdNamedDefine: true,
     filename: 'index.js',
+    globalObject: 'this',
   },
 };
 
