@@ -57,6 +57,8 @@ const prodConfig = {
     path: resolve('./dist'),
     library: '[name]',
     libraryTarget: 'umd',
+    globalObject: 'this',
+    umdNamedDefine: true,
     filename: 'index.js',
   },
 };

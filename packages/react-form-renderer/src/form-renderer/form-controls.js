@@ -1,7 +1,6 @@
 import React from 'react';
 import { FormSpy } from 'react-final-form';
 import PropTypes from 'prop-types';
-import { __ } from '../global-functions';
 import RendererContext from './renderer-context';
 
 const completeButtons = buttonOrder => {
@@ -92,9 +91,9 @@ FormControls.propTypes = {
 };
 
 FormControls.defaultProps = {
-  submitLabel: __('Submit'),
-  cancelLabel: __('Cancel'),
-  resetLabel: __('Reset'),
+  submitLabel: 'Submit',
+  cancelLabel: 'Cancel',
+  resetLabel: 'Reset',
   canReset: false,
   canSubmit: false,
   buttonOrder: [ 'submit', 'reset', 'cancel' ],
