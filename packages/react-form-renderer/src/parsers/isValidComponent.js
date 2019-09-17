@@ -8,7 +8,7 @@ const isClassComponent = (component) => (
 
 const isFunctionComponent = component => (
   typeof component === 'function' &&
-      String(component).includes('.createElement')
+      (String(component).includes('.createElement') || String(component).includes('jsx'))
 ) ? true : false;
 
 const isReactComponent = (component) => (
