@@ -1,4 +1,4 @@
-import RawComponent from '../common/component/raw-component';
+import RawComponent from '@docs/raw-component';
 
 ## React form renderer
 
@@ -9,4 +9,4 @@ It uses [React final form](https://github.com/final-form/react-final-form) for t
 It is highly recommended to check their documentations first to fully understand how
 the [data-driven-forms](https://github.com/data-driven-forms/react-forms) libraries work.
 
-<RawComponent source="get-started/get-started" />
+<RawComponent source="get-started" />
