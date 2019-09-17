@@ -1,6 +1,6 @@
 // import { baseExamples } from '../examples-definitions';
 // import { otherExamples } from '../other-pages';
-// import { docs } from '../documenation-pages';
+import { docs } from './documentation-pages';
 
 const schema =  [
   {
@@ -15,7 +15,7 @@ const schema =  [
     title: 'React form renderer',
     link: 'renderer',
     fields: [
-      //...docs,
+      ...docs,
     ],
   },
   {
