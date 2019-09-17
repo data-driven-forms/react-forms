@@ -27,7 +27,7 @@ const Item = ({ href, linkText, component }) => {
       className={ classes.nested }
       component={ forwardRef((props, ref) => (
         <RouterNavLink key={ component } href={ href }>
-          <Link { ...props } />
+          <Link style={{ color: 'rgba(0, 0, 0, 0.87)' }} { ...props } />
         </RouterNavLink>
       )) }
     >

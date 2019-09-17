@@ -12,10 +12,9 @@ import MenuRenderer from './menu-renderer';
 import schema from './schema';
 
 const useStyles = makeStyles(navStyles);
+
 const Navigation = ({ closeNav, searchRef }) => {
-
   const classes = useStyles();
-
   return (
     <List
       component="nav"
