@@ -1,0 +1,77 @@
+{
+  "name": "@data-driven-forms/react-render-demo",
+  "version": "1.0.0",
+  "description": "Demo for data driven forms.",
+  "main": "dist/index.js",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "vendor": "webpack --env vendor --config ./config/webpack.config.js --progress",
+    "deploy": "firebase deploy --only functions"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/data-driven-forms/react-starter.git"
+  },
+  "keywords": [
+    "react",
+    "forms",
+    "javascript",
+    "starter app"
+  ],
+  "author": "Martin Marosi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/data-driven-forms/react-starter/issues"
+  },
+  "homepage": "https://github.com/data-driven-forms/react-starter#readme",
+  "devDependencies": {
+    "@mdx-js/loader": "^1.4.5",
+    "@zeit/next-css": "^1.0.1",
+    "eslint": "5.x",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-config-react-app": "^3.0.5",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-flowtype": "2.x",
+    "eslint-plugin-import": "2.x",
+    "eslint-plugin-jsx-a11y": "6.x",
+    "eslint-plugin-react": "^7.11.1",
+    "file-loader": "^4.2.0",
+    "firebase-admin": "~7.1.1",
+    "firebase-functions": "^2.2.1",
+    "url-loader": "^2.1.0"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "@data-driven-forms/mui-component-mapper": "*",
+    "@data-driven-forms/pf3-component-mapper": "*",
+    "@data-driven-forms/pf4-component-mapper": "*",
+    "@data-driven-forms/react-form-renderer": "*",
+    "@material-ui/core": "^4.2.1",
+    "@material-ui/icons": "^4.2.1",
+    "@material-ui/styles": "^4.4.1",
+    "@mdx-js/loader": "^1.4.5",
+    "@mdx-js/react": "^1.4.5",
+    "@next/mdx": "^9.0.5",
+    "@patternfly/patternfly-next": "^1.0.175",
+    "@patternfly/react-core": "~3.16.10",
+    "@patternfly/react-icons": "~3.9.2",
+    "@patternfly/react-tokens": "^2.5.1",
+    "brace": "^0.11.1",
+    "clsx": "^1.0.4",
+    "next": "^9.0.5",
+    "patternfly-react": "^2.25.1",
+    "prop-types": "^15.6.2",
+    "raw-loader": "^3.1.0",
+    "react": "^16.8.6",
+    "react-ace": "^6.3.2",
+    "react-copy-to-clipboard": "^5.0.1",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1"
+  },
+  "engines": {
+    "node": "8"
+  }
+}
