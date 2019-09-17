@@ -1,7 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
+import { componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
@@ -12,6 +13,8 @@ import { useRouter } from 'next/router';
 
 import GhIcon from './common/gh-svg-icon';
 import Navigation from './navigation/app-navigation';
+import MapperContext from './mappers-context';
+import MuiWizzard from '../components/missing-demo-fields/mui-wizard/mui-wizard';
 
 const drawerWidth = 240;
 
@@ -104,12 +107,34 @@ const useStyles = makeStyles(theme => ({
 const Layout = ({ children }) => {
   const classes = useStyles();
   const [ open, setOpen ] = useState(false);
+  const [ mappers, setMappers ] = useState({ loaded: false, mappers: {}});
   const searchRef = useRef(null);
   const router = useRouter();
 
+  useEffect(() => {
+    const promises = [
+      import('@data-driven-forms/pf3-component-mapper'),
+      import('@data-driven-forms/pf4-component-mapper'),
+      import('@data-driven-forms/mui-component-mapper'),
+    ];
+    Promise.all(promises).then(([ pf3, pf4, mui ]) => setMappers({ loaded: true, mappers: { pf3: {
+      ...pf3,
+      formFieldsMapper: {
+        ...pf3.formFieldsMapper,
+        summary: () => <div>Pf3 summary</div>,
+      },
+    }, pf4: {
+      ...pf4,
+      formFieldsMapper: { ...pf4.formFieldsMapper, summary: () => <div>Pf4 summary</div> },
+    }, mui: {
+      ...mui,
+      formFieldsMapper: { ...mui.formFieldsMapper, [componentTypes.WIZARD]: MuiWizzard, summary: () => <div>Mui summary</div>  },
+    }}}));
+  }, []);
+
   const handleDrawerOpen = () => {
     setOpen(true);
-    // setTimeout(() => searchRef.current.focus(), 500);
+    setTimeout(() => searchRef.current.focus(), 500);
   };
 
   const handleDrawerClose = () => {
@@ -118,7 +143,7 @@ const Layout = ({ children }) => {
 
   const pathname = router.pathname;
   return (
-    <React.Fragment>
+    <MapperContext.Provider value={ mappers }>
       <div className={ classes.root }>
         <Toolbar
           className={ clsx(classes.appBar, classes.toolbarOverride, {
@@ -176,7 +201,8 @@ const Layout = ({ children }) => {
           </div>
         </main>
       </div>
-    </React.Fragment>
+
+    </MapperContext.Provider>
   );
 };
 
