@@ -4,6 +4,7 @@ import componentMapper from '../form-fields/component-mapper';
 import SubForm from '../form-fields/sub-form';
 import FormTabs from '../form-fields/tabs';
 import Wizard from '../form-fields/wizzard/wizzard';
+import { InputAddonGroup, InputAddonButtonGroup } from '../form-fields/input-group-fields';
 
 describe('Component mapper', () => {
   it('should return TextField component', () => {
@@ -40,5 +41,13 @@ describe('Component mapper', () => {
 
   it('should return Wizard component', () => {
     expect(componentMapper[componentTypes.WIZARD]).toEqual(Wizard);
+  });
+
+  it('should return input addon group component', () => {
+    expect(componentMapper[componentTypes.INPUT_ADDON_GROUP]).toEqual(InputAddonGroup);
+  });
+
+  it('should return input addon buttom group component', () => {
+    expect(componentMapper[componentTypes.INPUT_ADDON_BUTTON_GROUP]).toEqual(InputAddonButtonGroup);
   });
 });

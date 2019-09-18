@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormControl, HelpBlock, Checkbox, FormGroup, ControlLabel, FieldLevelHelp } from 'patternfly-react';
+import { FormControl, HelpBlock, Checkbox, FormGroup, ControlLabel, InputGroup, FieldLevelHelp } from 'patternfly-react';
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 import { validationError } from './helpers';
 import MultipleChoiceList from './multiple-choice-list';
@@ -9,7 +9,6 @@ import Switch from './switch-field';
 import { DateTimePicker } from './date-time-picker/date-time-picker';
 
 import RagioGroup from './radio';
-import PlainText from './plain-text';
 import Select from './select';
 
 const selectComponent = ({
@@ -81,6 +80,20 @@ export const renderHelperText = (error, description) => (error // eslint-disable
   ? <HelpBlock>{ error }</HelpBlock>
   : description ? <HelpBlock>{ description }</HelpBlock> : null);
 
+const renderInputGroup = (inputAddon, params, formOptions, { ...rest }) => {
+  if (inputAddon) {
+    return (
+      <InputGroup>
+        { inputAddon.before && inputAddon.before.fields && formOptions.renderForm(inputAddon.before.fields, rest) }
+        { selectComponent({ ...rest, ...params })() }
+        { inputAddon.after && inputAddon.after.fields && formOptions.renderForm(inputAddon.after.fields, rest) }
+      </InputGroup>
+    );
+  }
+
+  return (selectComponent({ ...rest, ...params })());
+};
+
 const FinalFormField = ({
   meta,
   validateOnMount,
@@ -89,6 +102,7 @@ const FinalFormField = ({
   description,
   hideLabel,
   isVisible,
+  inputAddon,
   noCheckboxLabel,
   ...rest
 }) => {
@@ -100,7 +114,7 @@ const FinalFormField = ({
             { rest.isRequired ? <RequiredLabel label={ label } /> : label }
             { helperText && <FieldLevelHelp content={ helperText } /> }
           </ControlLabel> }
-      { selectComponent({ ...rest, invalid, label, meta, helperText })() }
+      { renderInputGroup(inputAddon, { invalid, label, meta, helperText }, rest.formOptions, rest) }
       { renderHelperText(invalid && meta.error, description) }
     </FormGroup>
   );
@@ -114,6 +128,7 @@ FinalFormField.propTypes = {
   description: PropTypes.string,
   hideLabel: PropTypes.bool,
   isVisible: PropTypes.bool,
+  inputAddon: PropTypes.shape({ fields: PropTypes.array }),
   noCheckboxLabel: PropTypes.bool,
 };
 
@@ -180,4 +195,3 @@ export const SwitchField = ({ FieldProvider, ...props }) =>
   <FieldProvider { ...props } render={ props => <FieldInterface { ...props } name={ props.input.name } componentType={ componentTypes.SWITCH } /> }/>;
 export const DatePickerField = props =>
   <FieldInterface { ...props } name={ props.input.name } variant={ props.variant } componentType={ componentTypes.DATE_PICKER } />;
-export const PlainTextField = ({ input, label }) =>  <PlainText { ...input } label={ label } />;

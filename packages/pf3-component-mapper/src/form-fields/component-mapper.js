@@ -8,14 +8,20 @@ import {
   Radio,
   SwitchField,
   DatePickerField,
-  PlainTextField,
 } from './form-fields';
 import SubForm from './sub-form';
 import Tabs from './tabs';
 import Wizard from './wizzard/wizzard';
 import Select from './select';
+import PlainTextField from './plain-text';
+import Button from './button';
+import {
+  InputAddonButtonGroup,
+  InputAddonGroup,
+} from './input-group-fields';
 
 const mapper = {
+  [componentTypes.BUTTON]: Button,
   [componentTypes.TEXT_FIELD]: TextField,
   [componentTypes.TEXTAREA_FIELD]: TextareaField,
   [componentTypes.SELECT_COMPONENT]: SelectField,
@@ -28,6 +34,8 @@ const mapper = {
   [componentTypes.SWITCH]: SwitchField,
   [componentTypes.WIZARD]: Wizard,
   [componentTypes.PLAIN_TEXT]: PlainTextField,
+  [componentTypes.INPUT_ADDON_BUTTON_GROUP]: InputAddonButtonGroup,
+  [componentTypes.INPUT_ADDON_GROUP]: InputAddonGroup,
 };
 
 export default mapper;

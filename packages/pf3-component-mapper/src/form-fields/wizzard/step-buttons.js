@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../button';
+import './button.scss';
 import { Icon, Wizard } from 'patternfly-react';
 
 const SimpleNext = ({
@@ -13,6 +14,7 @@ const SimpleNext = ({
   <Button
     bsStyle="primary"
     type="button"
+    className="margin-left-3"
     onClick={ () => valid ? handleNext(next) : submit() }
   >
     { buttonLabels.next }<Icon type="fa" name="angle-right" />
@@ -48,7 +50,11 @@ ConditionalNext.propTypes = {
   FieldProvider: PropTypes.func.isRequired,
 };
 
-const submitButton = (handleSubmit, submitText) => <Button type="button" bsStyle="primary" onClick={ handleSubmit }>
+const submitButton = (handleSubmit, submitText) => <Button
+  className="margin-left-3"
+  type="button"
+  bsStyle="primary"
+  onClick={ handleSubmit }>
   { submitText }
 </Button>;
 
@@ -64,6 +70,7 @@ const WizardStepButtons = ({ formOptions, disableBack, handlePrev, nextStep, Fie
     { formOptions.onCancel && (
       <Button
         style={{ marginRight: 20 }}
+        className="margin-left-3"
         type="button" variant="contained"
         color="secondary" onClick={ formOptions.onCancel }>
         { buttonLabels.cancel }
@@ -73,6 +80,7 @@ const WizardStepButtons = ({ formOptions, disableBack, handlePrev, nextStep, Fie
     <Button
       type="button"
       variant="contained"
+      className="margin-left-3"
       disabled={ disableBack }
       onClick={ handlePrev }>
       <Icon type="fa" name="angle-left" />{ buttonLabels.back }
