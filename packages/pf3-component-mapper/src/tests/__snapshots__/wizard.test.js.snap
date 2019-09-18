@@ -208,11 +208,6 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                       bsStyle="default"
                       disabled={true}
                       onClick={[Function]}
-                      style={
-                        Object {
-                          "marginLeft": 3,
-                        }
-                      }
                       type="button"
                       variant="contained"
                     >
@@ -263,8 +258,9 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                     submit={[Function]}
                     valid={true}
                   >
-                    <ButtonOverride
+                    <Button
                       bsStyle="primary"
+                      className="margin-left-3"
                       onClick={[Function]}
                       type="button"
                     >
@@ -273,43 +269,19 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                         block={false}
                         bsClass="btn"
                         bsStyle="primary"
+                        className="margin-left-3"
                         disabled={false}
                         onClick={[Function]}
-                        style={
-                          Object {
-                            "marginLeft": 3,
-                          }
-                        }
                         type="button"
                       >
                         <button
-                          className="btn btn-primary"
+                          className="margin-left-3 btn btn-primary"
                           disabled={false}
                           onClick={[Function]}
-                          style={
-                            Object {
-                              "marginLeft": 3,
-                            }
-                          }
                           type="button"
-                        >
-                          Next
-                          <Icon
-                            name="angle-right"
-                            type="fa"
-                          >
-                            <FontAwesome
-                              name="angle-right"
-                            >
-                              <span
-                                aria-hidden={true}
-                                className="fa fa-angle-right"
-                              />
-                            </FontAwesome>
-                          </Icon>
-                        </button>
+                        />
                       </Button>
-                    </ButtonOverride>
+                    </Button>
                   </SimpleNext>
                 </div>
               </ModalFooter>
@@ -549,11 +521,6 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                       bsStyle="default"
                       disabled={true}
                       onClick={[Function]}
-                      style={
-                        Object {
-                          "marginLeft": 3,
-                        }
-                      }
                       type="button"
                       variant="contained"
                     >
@@ -1352,11 +1319,6 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                       bsStyle="default"
                       disabled={true}
                       onClick={[Function]}
-                      style={
-                        Object {
-                          "marginLeft": 3,
-                        }
-                      }
                       type="button"
                       variant="contained"
                     >
