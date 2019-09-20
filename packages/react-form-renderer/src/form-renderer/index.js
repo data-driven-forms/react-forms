@@ -41,6 +41,7 @@ const FormRenderer = ({
   validate,
   onStateUpdate,
   renderFormButtons,
+  subscription,
 }) => {
   const inputSchema = schemaMapper(schemaType)(schema, uiSchema);
   let schemaError;
@@ -66,7 +67,7 @@ const FormRenderer = ({
         ...initialValues,
       }}
       validate={ validate }
-      subscription={{ pristine: true, submitting: true, valid: true }}
+      subscription={{ pristine: true, submitting: true, valid: true, ...subscription }}
       render={ ({ handleSubmit, pristine, valid, form: { reset, mutators, getState, submit, ...form }, ...state }) => (
         <RendererContext.Provider value={ configureContext({
           layoutMapper,
@@ -135,6 +136,7 @@ FormRenderer.propTypes = {
   validate: PropTypes.func,
   onStateUpdate: PropTypes.func,
   renderFormButtons: PropTypes.oneOfType([ PropTypes.node, PropTypes.element, PropTypes.func ]),
+  subscription: PropTypes.shape({ [PropTypes.string]: PropTypes.bool }),
 };
 
 FormRenderer.defaultProps = {
