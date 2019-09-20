@@ -31,5 +31,6 @@ Form Renderer provides a lot of customization via props.
 |initialValues|object|An object of fields names as keys and values as their values.||
 |schemaType|one of `['mozilla', 'miq', 'default']`|Data driven forms includes two basic parsers: mozilla and manageiq service dialogs.|'default'|
 |showFormControls|bool|You can disable showing form buttons. Use it with wizard component which has its own buttons.|true|
+|subscription|object|You can pass your own [subscription](https://final-form.org/docs/react-final-form/types/FormProps#subscription), which will be added to default settings.|`{ pristine: true, submitting: true, valid: true }`|
 |uiSchema|object|Use when you need to use mozilla schema.|{ }|
 |<NavLink to="/renderer/validators">validate</NavLink>|func|A function which receives all form values and returns an object with errors.||
