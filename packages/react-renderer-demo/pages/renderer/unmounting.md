@@ -1,4 +1,10 @@
-import RawComponent from '../common/component/raw-component';
+import Grid from '@material-ui/core/Grid'
+import RawComponent from '@docs/raw-component';
+
+import ListOfContents from '../../src/helpers/list-of-contents';
+
+<Grid container item>
+<Grid item xs={12} md={10}>
 
 ## Description
 
@@ -10,7 +16,7 @@ When using dynamic forms where more fields share the same name, the value is pre
 
 ### Form example
 
-<RawComponent source="unmounting/clear-on-unmount" />
+<RawComponent source="clear-on-unmount" />
 
 
 ### Form level configuration
@@ -60,3 +66,9 @@ When using dynamic forms where more fields share the same name, the value is pre
   },
 },
 ```
+
+</Grid>
+<Grid item xs={false} md={2}>
+  <ListOfContents file="renderer/unmounting" />
+</Grid>
+</Grid>
