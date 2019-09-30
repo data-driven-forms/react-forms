@@ -1,3 +1,12 @@
+import Grid from '@material-ui/core/Grid'
+
+import ListOfContents from '../../src/helpers/list-of-contents';
+
+<Grid container item>
+<Grid item xs={12} md={10}>
+
+## Conditional fields
+
 You can show a field only if it meets a condition:
 
 ## Schema
@@ -120,3 +129,9 @@ condition: {
 ## Clearing values
 
 If you need to clear values after switching fields, please see [here](/renderer/unmounting).
+
+</Grid>
+<Grid item xs={false} md={2}>
+  <ListOfContents file="renderer/condition" />
+</Grid>
+</Grid>
