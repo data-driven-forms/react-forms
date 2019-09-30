@@ -1,4 +1,10 @@
-import RawComponent from '../common/component/raw-component';
+import Grid from '@material-ui/core/Grid'
+import RawComponent from '@docs/raw-component';
+
+import ListOfContents from '../../src/helpers/list-of-contents';
+
+<Grid container item>
+<Grid item xs={12} md={10}>
 
 ## Introduction
 
@@ -10,4 +16,10 @@ Because almost everything in html inputs is outputed as a string, adding the `da
  ```jsx
 ['integer', 'float', 'number', 'boolean', 'string']
 ```
-<RawComponent source="data-types/data-types-example" />
+<RawComponent source="data-types-example" />
+
+</Grid>
+<Grid item xs={false} md={2}>
+  <ListOfContents file="renderer/data-types" />
+</Grid>
+</Grid>
