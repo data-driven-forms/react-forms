@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import ExampleLink from './component-api/exampleLink';
 
 ### Components API
@@ -35,6 +36,7 @@ All those components provides a shared group of props:
 |isRequired|boolean|Is the field required?|
 |isDisabled|boolean|Is the field disabled?|
 |isReadOnly|boolean|Is the field readOnly?|
+|initialValue|custom|There are two ways how to set initial values in the form: you can use either the <NavLink to="/renderer/renderer-api">initialValues</NavLink> prop for the whole form or you can set the value in the schema for each field separately. For more information, please see [here](https://final-form.org/docs/react-final-form/types/FieldProps#initialvalue).|
 
 #### Text field
 
