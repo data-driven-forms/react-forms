@@ -14,7 +14,7 @@ You can read more about that in [Component mapping](/renderer/component-mapping)
 
 Each component will receive FieldProvider as a prop. Be aware that pre-defined component types are
 automatically wrapped in FieldProvider. This is done to make it easier to create component mappers for
-standard form components. List of standard components is avaiable [here](/renderer/form-schemas).
+standard form components. List of standard components is available [here](/renderer/component-api).
 
 ## Using FieldProvider
 
