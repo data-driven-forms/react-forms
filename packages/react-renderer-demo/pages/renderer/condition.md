@@ -1,6 +1,14 @@
-import { NavLink } from 'react-router-dom';
+import Link from 'next/link';
 
 ### Conditional fields
+import Grid from '@material-ui/core/Grid'
+
+import ListOfContents from '../../src/helpers/list-of-contents';
+
+<Grid container item>
+<Grid item xs={12} md={10}>
+
+## Conditional fields
 
 You can show a field only if it meets a condition:
 
@@ -123,4 +131,10 @@ condition: {
 
 ### Clearing values
 
-If you need to clear values after switching fields, please see <NavLink to="/renderer/unmounting">here</NavLink>.
+If you need to clear values after switching fields, please see <Link href="/renderer/unmounting"><a>here</a></Link>.
+
+</Grid>
+<Grid item xs={false} md={2}>
+  <ListOfContents file="renderer/condition" />
+</Grid>
+</Grid>
