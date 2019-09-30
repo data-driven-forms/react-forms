@@ -1,6 +1,10 @@
-import RawComponent from '../common/component/raw-component';
+import Grid from '@material-ui/core/Grid'
+import RawComponent from '@docs/raw-component';
 
+import ListOfContents from '../../src/helpers/list-of-contents';
 
+<Grid container item>
+<Grid item xs={12} md={10}>
 
 ## Validate field
 
@@ -82,3 +86,9 @@ Detailed information can be found [here](https://github.com/final-form/react-fin
 You can either specify message attribute while adding validator or override validation message of specific validator globally via Validators config.
 
 <RawComponent source="validators/global-message" />
+
+</Grid>
+<Grid item xs={false} md={2}>
+  <ListOfContents file="renderer/validators" />
+</Grid>
+</Grid>

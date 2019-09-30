@@ -14,7 +14,7 @@ const schema = {
     component: componentTypes.TEXT_FIELD,
     name: 'default-config',
     label: 'Default validator',
-    helperText: 'type some address like: http://data-driven-forms.surge.sh/',
+    helperText: 'type some address like: https://data-driven-forms.org/',
     validate: [{
       type: validatorTypes.URL,
     }],
@@ -22,7 +22,7 @@ const schema = {
     component: componentTypes.TEXT_FIELD,
     name: 'protocol-config',
     label: 'Custom protocol',
-    helperText: 'type some address with custom ddf protocol like: ddf://data-driven-forms.surge.sh/',
+    helperText: 'type some address with custom ddf protocol like: ddf://data-driven-forms.org/',
     validate: [{
       type: validatorTypes.URL,
       protocol: 'ddf',
@@ -31,7 +31,7 @@ const schema = {
     component: componentTypes.TEXT_FIELD,
     name: 'without-config',
     label: 'Without protocol',
-    helperText: 'type some address with like: data-driven-forms.surge.sh/',
+    helperText: 'type some address with like: data-driven-forms.org/',
     validate: [{
       type: validatorTypes.URL,
       protocolIdentifier: false,
