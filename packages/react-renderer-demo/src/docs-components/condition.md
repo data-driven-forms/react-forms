@@ -1,6 +1,10 @@
+import { NavLink } from 'react-router-dom';
+
+### Conditional fields
+
 You can show a field only if it meets a condition:
 
-## Schema
+### Schema
 
 ```jsx
 {
@@ -23,9 +27,9 @@ You can show a field only if it meets a condition:
 
 `when` - is name of field where the value is stored, **always required!**
 
-## Conditions
+### Conditions
 
-### Is
+#### Is
 
 `is` - test if the value is equal
 
@@ -38,7 +42,7 @@ condition: {
 // Foo == 'Bar' => true
 // Foo == 'Not a Bar' => false
 ```
-### Is empty
+#### Is empty
 
 `isEmpty` - tests if the value is empty (using [lodash function](https://lodash.com/docs/4.17.11#isEmpty))
 
@@ -58,7 +62,7 @@ condition: {
 // Foo = false => true
 // Foo = true => false
 ```
-### Is not empty
+#### Is not empty
 
 `isNotEmpty` - tests if the value is not empty (using [lodash function](https://lodash.com/docs/4.17.11#isEmpty))
 
@@ -78,7 +82,7 @@ condition: {
 // Foo = true => false
 // Foo = true => true
 ```
-### Pattern
+#### Pattern
 
 `pattern` - tests if the value matches the pattern
 
@@ -92,7 +96,7 @@ condition: {
 // Foo = 'Foo foo baar!' => true
 ```
 
-### Not match
+#### Not match
 
 `notMatch` - reverse `is`/`pattern` condition
 
@@ -117,6 +121,6 @@ condition: {
 // Foo = 'bar' => false
 ```
 
-## Clearing values
+### Clearing values
 
-If you need to clear values after switching fields, please see [here](/renderer/unmounting).
+If you need to clear values after switching fields, please see <NavLink to="/renderer/unmounting">here</NavLink>.
