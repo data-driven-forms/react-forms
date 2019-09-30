@@ -1,10 +1,16 @@
-import RawComponent from '../common/component/raw-component';
+import Grid from '@material-ui/core/Grid'
+import RawComponent from '@docs/raw-component';
+
+import ListOfContents from '../../src/helpers/list-of-contents';
+
+<Grid container item>
+<Grid item xs={12} md={10}>
 
 ### Custom form buttons
 
 If you need completely customized buttons, you can pass a component to form renderer via `renderFormButtons` prop.
 
-<RawComponent source="form-controls/custom-buttons" />
+<RawComponent source="custom-buttons" />
 
 #### Form Buttons render props
 
@@ -20,3 +26,9 @@ Your component will receive same props as provided by react-final-form FormSpy c
 |validating|bool|`true` true if the form is currently being validated asynchronously.|
 |values|object|The current values of the form.|
 |form|object|reat final form [FormApi](https://github.com/final-form/final-form#formapi).|
+
+</Grid>
+<Grid item xs={false} md={2}>
+  <ListOfContents file="renderer/form-controls" />
+</Grid>
+</Grid>
