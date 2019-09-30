@@ -1,6 +1,15 @@
-import { NavLink } from 'react-router-dom';
+import Link from 'next/link';
 
 ### Field Provider
+import Grid from '@material-ui/core/Grid'
+import RawComponent from '@docs/raw-component';
+
+import ListOfContents from '../../src/helpers/list-of-contents';
+
+<Grid container item>
+<Grid item xs={12} md={10}>
+
+## Custom components
 
 React form renderer is using [react-final-form](https://github.com/final-form/react-final-form) for form state management.
 Most of its features are not directly available for consistency and performance reasons. If you want to create any custom
@@ -13,11 +22,11 @@ which adds additional methods that will help you to control your form state.
 ### Accessing FieldProvider
 
 To use Fieldprovider, you first need to register a component to your component mapper.
-You can read more about that in <NavLink to="/renderer/component-mapping">Component mapping</NavLink>.
+You can read more about that in <Link href="/renderer/component-mapping"><a>Component mapping</a></Link>.
 
 Each component will receive FieldProvider as a prop. Be aware that pre-defined component types are
 automatically wrapped in FieldProvider. This is done to make it easier to create component mappers for
-standard form components. List of standard components is available <NavLink to="/renderer/component-api">here</NavLink>.
+standard form components. List of standard components is available <Link href="/renderer/component-api"><a>here</a></Link>.
 
 ### Using FieldProvider
 
@@ -108,3 +117,9 @@ and informations about the formState.
   valid: bool //true if all fields have no validation or submission errors. false otherwise.
 }
 ```
+
+</Grid>
+<Grid item xs={false} md={2}>
+  <ListOfContents file="renderer/field-provider" />
+</Grid>
+</Grid>
