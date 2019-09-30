@@ -1,4 +1,10 @@
-import ExampleLink from './component-api/exampleLink';
+import Grid from '@material-ui/core/Grid'
+
+import ListOfContents from '../../src/helpers/list-of-contents';
+import ExampleLink from '../../src/components/common/example-link';
+
+<Grid container item>
+<Grid item xs={12} md={10}>
 
 ### Components API
 
@@ -169,3 +175,9 @@ Wizard step <br/>
 |fields|array|An array of form fields|
 
 <ExampleLink to='wizard' />
+
+</Grid>
+<Grid item xs={false} md={2}>
+  <ListOfContents file="renderer/component-api" />
+</Grid>
+</Grid>
