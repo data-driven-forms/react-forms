@@ -150,7 +150,7 @@ const ListOfContents = ({ file }) => {
 };
 
 ListOfContents.propTypes = {
-  text: PropTypes.string.isRequired,
+  file: PropTypes.string.isRequired,
 };
 
 export default ListOfContents;
