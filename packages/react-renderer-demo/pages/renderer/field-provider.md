@@ -1,3 +1,13 @@
+import Grid from '@material-ui/core/Grid'
+import RawComponent from '@docs/raw-component';
+
+import ListOfContents from '../../src/helpers/list-of-contents';
+
+<Grid container item>
+<Grid item xs={12} md={10}>
+
+## Custom components
+
 React form renderer is using [react-final-form](https://github.com/final-form/react-final-form) for form state management.
 Most of its features are not directly available for consistency and performance reasons. If you want to create any custom
 components, you can access these features via **FieldProvider** prop.
@@ -105,3 +115,9 @@ and informations about the formState.
   valid: bool //true if all fields have no validation or submission errors. false otherwise.
 }
 ```
+
+</Grid>
+<Grid item xs={false} md={2}>
+  <ListOfContents file="renderer/field-provider" />
+</Grid>
+</Grid>
