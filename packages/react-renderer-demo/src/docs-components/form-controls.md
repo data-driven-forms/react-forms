@@ -8,7 +8,7 @@ If you need completely customized buttons, you can pass a component to form rend
 
 #### Form Buttons render props
 
-Your component will receive same props as provided by react-final-form FormSpy component. For most use cases you will need just a few of these which are listed below. If you require full list please visit [react-final-form documentation](https://github.com/final-form/final-form#formstate).
+Your component will receive same props as provided by react-final-form FormSpy component. For most use cases you will need just a few of these which are listed below. If you require full list please visit [react-final-form documentation](https://final-form.org/docs/final-form/types/FormState).
 
 |Prop|Type|Description|
 |----|----|-----------|
@@ -19,4 +19,4 @@ Your component will receive same props as provided by react-final-form FormSpy c
 |valid|bool|`true` if neither the form nor any of its fields has a validation or submission error.|
 |validating|bool|`true` true if the form is currently being validated asynchronously.|
 |values|object|The current values of the form.|
-|form|object|reat final form [FormApi](https://github.com/final-form/final-form#formapi).|
+|form|object|react final form [FormApi](https://final-form.org/docs/final-form/types/FormApi).|

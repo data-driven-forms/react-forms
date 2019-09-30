@@ -1,7 +1,5 @@
 import RawComponent from '../common/component/raw-component';
 
-
-
 ## Validate field
 
 You need to provide a `validate` array in the schema to add validation to your form fields.
@@ -40,7 +38,7 @@ The function takes `value` as an argument and should return undefined when pases
 
 ### Async validator
 
-You can use a Async function as a validator. However, the returned promise will overwrite all other validators 
+You can use a Async function as a validator. However, the returned promise will overwrite all other validators
 (because it is returned last),
 so you need combine all validators into one function.
 
@@ -72,8 +70,8 @@ By providing `validateOnMount` the validation will be triggered immediately afte
 
 ## Record Level validation
 
-This form of validation enables you to create validation function for whole form. It is usefull for some cross validation between multiple fields etc.
-Detailed information can be found [here](https://github.com/final-form/react-final-form#validate-values-object--object--promiseobject).
+This form of validation enables you to create validation function for whole form. It is useful for some cross validation between multiple fields etc.
+Detailed information can be found [here](https://final-form.org/docs/react-final-form/examples/record-level-validation).
 
 <RawComponent source="validators/record-level-validation" />
 
