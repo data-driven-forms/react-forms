@@ -4,9 +4,9 @@ import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../src/theme';
-import Layout from '../src/components/layout';
+import Layout from '@docs/components/layout';
 import { MDXProvider } from '@mdx-js/react';
-import MdxComponents from '../src/components/mdx/mdx-components';
+import MdxComponents from '@docs/components/mdx/mdx-components';
 
 import './vendor.css';
 
