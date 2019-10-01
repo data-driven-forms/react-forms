@@ -1,4 +1,4 @@
-// import { baseExamples } from '../examples-definitions';
+import { baseExamples } from './examples-definitions';
 // import { otherExamples } from '../other-pages';
 import { docs } from './documentation-pages';
 
@@ -22,7 +22,7 @@ const schema =  [
     title: 'Component definitions',
     link: 'component-example',
     fields: [
-      //...baseExamples.sort((a, b) => a.linkText.localeCompare(b.linkText)),
+      ...baseExamples.sort((a, b) => a.linkText.localeCompare(b.linkText)),
     ],
   },
   {
