@@ -16,6 +16,7 @@ export const components = {
   SWITCH: 'switch-field',
   TEXTAREA: 'textarea-field',
   SELECT: 'select-field',
+  PLAIN_TEXT: 'plain-text',
 };
   /** Validator functions placeholder */
 export const validators = {

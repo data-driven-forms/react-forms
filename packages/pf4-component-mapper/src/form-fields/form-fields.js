@@ -14,6 +14,7 @@ import {
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 import Select from './select/select';
 import RadioGroup from './radio';
+import PlainText from './plain-text';
 
 const selectComponent = ({
   componentType,
@@ -177,3 +178,4 @@ export const SwitchField = ({ FieldProvider, ...props }) =>
     { ...props }
     render={ props => <FieldInterface { ...props } hideLabel={ true } name={ props.input.name } componentType={ componentTypes.SWITCH } /> }
   />;
+export const PlainTextField = ({ label, name }) => <PlainText label={ label } name={ name } />;
