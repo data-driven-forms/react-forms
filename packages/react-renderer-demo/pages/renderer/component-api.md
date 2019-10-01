@@ -3,7 +3,7 @@ import ExampleLink from './component-api/exampleLink';
 import Grid from '@material-ui/core/Grid'
 
 import ListOfContents from '../../src/helpers/list-of-contents';
-import ExampleLink from '../../src/components/common/example-link';
+import ExampleLink from '@docs/components/common/example-link';
 
 <Grid container item>
 <Grid item xs={12} md={10}>
