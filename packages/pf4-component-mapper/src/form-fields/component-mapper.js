@@ -11,6 +11,7 @@ import {
   DatePickerField,
   TimePickerField,
   SwitchField,
+  PlainTextField,
 } from './form-fields';
 import Wizard from './wizard/wizard';
 import { Select } from './select/select';
@@ -28,6 +29,7 @@ const mapper = {
   [componentTypes.TAG_CONTROL]: props => <div>Unsupported tag control</div>,
   [componentTypes.WIZARD]: Wizard,
   [componentTypes.SWITCH]: SwitchField,
+  [componentTypes.PLAIN_TEXT]: PlainTextField,
 };
 
 export default mapper;
@@ -41,6 +43,7 @@ export const components = {
   DatePickerField,
   TimePickerField,
   SwitchField,
+  PlainTextField,
 };
 
 export const rawComponents = {

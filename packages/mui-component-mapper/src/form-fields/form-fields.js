@@ -20,6 +20,7 @@ import MomentUtils from '@date-io/moment';
 import RadioGroup from './radio';
 
 import './form-fields.scss';
+import PlainText from './plain-text';
 const selectValue = option => option.sort((a, b) => a.label.localeCompare(b.label, 'en', { sensitivity: 'base' })).map(item => item.value);
 
 const selectComponent = ({
@@ -250,3 +251,4 @@ export const SwitchField = ({ FieldProvider, ...props }) =>
   <FieldProvider { ...props } render={ props => <FieldInterface { ...props } name={ props.input.name } componentType={ componentTypes.SWITCH } /> }/>;
 export const DatePickerField = props => <FieldInterface { ...props } name={ props.input.name } componentType={ componentTypes.DATE_PICKER } />;
 export const TimePickerField = props => <FieldInterface { ...props } name={ props.input.name } componentType={ componentTypes.TIME_PICKER } />;
+export const PlainTextField = ({ label, name }) => <PlainText name={ name } label={ label }/>;

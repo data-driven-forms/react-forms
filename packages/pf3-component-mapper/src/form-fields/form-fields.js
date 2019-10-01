@@ -9,6 +9,7 @@ import Switch from './switch-field';
 import { DateTimePicker } from './date-time-picker/date-time-picker';
 import Select from './select';
 import RagioGroup from './radio';
+import PlainText from './plain-text';
 
 const selectComponent = ({
   componentType,
@@ -169,3 +170,4 @@ export const SwitchField = ({ FieldProvider, ...props }) =>
   <FieldProvider { ...props } render={ props => <FieldInterface { ...props } name={ props.input.name } componentType={ componentTypes.SWITCH } /> }/>;
 export const DatePickerField = props =>
   <FieldInterface { ...props } name={ props.input.name } variant={ props.variant } componentType={ componentTypes.DATE_PICKER } />;
+export const PlainTextField = ({ input, label }) =>  <PlainText { ...input } label={ label } />;

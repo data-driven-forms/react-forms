@@ -29,6 +29,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import MuiWizzard from '../demo-missing-fields/mui-wizzard/wizzard';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize'
 
 import CodeEditor from './component/code-editor';
 
@@ -235,6 +236,22 @@ class ComponentExample extends Component {
               value={ this.state.variants[index].value || '' }
               onChange={ ({ target: { value }}) => this.handleExampleVariantChange(value, index) }
               margin="normal"
+            />
+          </Grid>
+        );
+      }
+
+      if (component === 'textarea'){
+        return (
+          <Grid item xs={ 12 } key={ name }>
+            <TextField
+              id={ name }
+              label={ title }
+              value={ this.state.variants[index].value || '' }
+              onChange={ ({ target: { value }}) => this.handleExampleVariantChange(value, index) }
+              margin="normal"
+              fullWidth
+              multiline
             />
           </Grid>
         );
