@@ -13,7 +13,7 @@ import { schema, uiSchema, conditionalSchema } from '../src/schemas/widget-schem
 import MiqSchema from '../src/schemas/miq-schema';
 import wizardSchema from '../src/schemas/wizard-schema';
 
-import MapperContext from '../src/components/mappers-context';
+import MapperContext from '@docs/components/mappers-context';
 
 const Forms = ({ mappers }) => {
   const [ activeMapper, setActiveMapper ] = useState({

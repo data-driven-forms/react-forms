@@ -10,8 +10,8 @@ import { componentTypes as components, validatorTypes as validators, defaultSche
 
 import dynamic from 'next/dynamic';
 
-import MapperContext from '../src/components/mappers-context';
-const CodeEditor = dynamic(import('../src/components/code-editor'), {
+import MapperContext from '@docs/components/mappers-context';
+const CodeEditor = dynamic(import('@docs/components/code-editor'), {
   ssr: false
 });
 
