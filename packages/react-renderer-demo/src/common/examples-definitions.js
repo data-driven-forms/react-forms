@@ -350,6 +350,25 @@ export const baseExamples = [{
     value: 'Checkbox',
   }],
 }, {
+  component: componentTypes.PLAIN_TEXT,
+  linkText: 'Plain Text',
+  ContentText: GenericComponentText,
+  variants: [{
+    name: 'label',
+    title: 'Label',
+    component: 'textarea',
+    value: `Lorem ipsum sem velit. Mauris scelerisque tortor sed lorem dapibus, bibendum scelerisque ligula consequat. Quisque fringilla luctus.
+Vestibulum vulputate inceptos himenaeos.`,
+  }],
+  value: {
+    fields: [{
+      component: componentTypes.PLAIN_TEXT,
+      name: 'plain-text-component',
+      label: `Lorem ipsum sem velit. Mauris scelerisque tortor sed lorem dapibus, bibendum scelerisque ligula consequat. Quisque fringilla luctus.
+Vestibulum vulputate inceptos himenaeos.`,
+    }],
+  },
+}, {
   component: componentTypes.WIZARD,
   linkText: 'Wizard',
   ContentText: WizardText,
