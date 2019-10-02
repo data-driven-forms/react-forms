@@ -1,5 +1,5 @@
 import { baseExamples } from './examples-definitions';
-// import { otherExamples } from '../other-pages';
+import otherExamples from './other-pages/';
 import { docs } from './documentation-pages';
 
 const schema =  [
@@ -29,7 +29,7 @@ const schema =  [
     title: 'Others',
     link: 'others',
     fields: [
-      //...otherExamples,
+      ...otherExamples,
     ],
   },
 ];
