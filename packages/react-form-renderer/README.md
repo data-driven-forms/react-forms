@@ -162,9 +162,8 @@ import { componentTypes } from '@data-driven-forms/react-form-renderer';
 componentTypes = {
   TEXT_FIELD: 'text-field',
   TEXTAREA_FIELD: 'textarea-field', // deprecated, please use TEXTAREA
-  FIELD_ARRAY: 'field-array', 
+  FIELD_ARRAY: 'field-array',
   SELECT_COMPONENT: 'select-field', // deprecated, please use SELECT
-  FIXED_LIST: 'fixed-list',
   CHECKBOX: 'checkbox',
   SUB_FORM: 'sub-form',
   RADIO: 'radio',
@@ -337,7 +336,7 @@ const field = {
 
 Remember that the components define the interface. If your label is an image, pass the image source with isImage flag maybe and handle rendering in the component.
 
-### Field array and Fixed list
+### Field array
 TO DO add documentaion here
 
 ## <a name="component-mappers"></a> Component Mapping
@@ -357,12 +356,9 @@ import { layoutComponents } from '@data-driven-forms/react-form-renderer';
 const layoutComponents = {
   [layoutComponents.FORM_WRAPPER]: 'FormWrapper',
   [layoutComponents.BUTTON]: 'Button',
-  [layoutComponents.COL]: 'Col',
-  [layoutComponents.FORM_GROUP]: 'FormGroup',
   [layoutComponents.BUTTON_GROUP]: 'ButtonGroup',
-  [layoutComponents.ICON]: 'Icon',
-  [layoutComponents.ARRAY_FIELD_WRAPPER]: 'ArrayFieldWrapper',
-  [layoutComponents.HELP_BLOCK]: 'HelpBlock'
+  [layoutComponents.TITLE]: 'Title',
+  [layoutComponents.DESCRIPTION]: 'Description',
 }
 ```
 
@@ -407,29 +403,6 @@ const layoutMapper = {
 }
 ```
 
-#### Col
-Col represents wrapper arround one Form Field (hence the name Col). It does not have to mirror bootstrap Col, which is just the name we have decided to go with. If you for instance don't need any Col (or other wrapping) component, and you are handling this inside the actual Field component, you can use `<React.Fragment>` component. This way you will not create any element in your DOM. On the other hand, it might be usefull to implement it as a container for your components. Because we can't possibly create layout that suit 100% of our use cases, we can use this wrapper to pass additional styles to field components.
-
-```JSX
-import './form/styles.scss';
-
-const Col = ({ children }) => (
-  <div className="form-row">{children}</div>
-)
-```
-
-#### FormGroup
-
-Very similar to Col component.
-
-```JSX
-import './form/styles.scss';
-
-const FormGroup = ({ children }) => (
-  <div className="form-group">{children}</div>
-)
-```
-
 #### ButtonGroup
 Wrapper for your form buttons
 
@@ -441,8 +414,23 @@ const ButtonGroup = ({ children }) => (
 )
 ```
 
-#### Icon, Array Field Wrapper, Help Block
-TO DO when array field docs are done
+#### Title
+Title of your form
+
+```JSX
+const Title = ({ children }) => (
+  <h1>{children}</h1>
+)
+```
+
+#### Description
+Description of your form
+
+```JSX
+const Title = ({ children }) => (
+  <h2>{children}</h2>
+)
+```
 
 #### Putting it all together
 
@@ -452,12 +440,9 @@ import FormRenderer, { layoutComponents } from '@data-driven-forms/react-form-re
 const layoutMapper = {
   [layoutComponents.FORM_WRAPPER]: FormWrapper,
   [layoutComponents.BUTTON]: Button,
-  [layoutComponents.COL]: Col,
-  [layoutComponents.FORM_GROUP]: FormGroup,
   [layoutComponents.BUTTON_GROUP]: ButtonGroup,
-  [layoutComponents.ICON]: Icon,
-  [layoutComponents.ARRAY_FIELD_WRAPPER]: ArrayFieldWrapper,
-  [layoutComponents.HELP_BLOCK]: HelpBlock
+  [layoutComponents.TITLE]: Title,
+  [layoutComponents.DESCRIPTION]: Description,
 }
 
 const MyForm = () => (

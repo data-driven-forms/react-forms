@@ -353,7 +353,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                       <button
                         aria-disabled={null}
                         aria-label={null}
-                        className="pf-c-button pf-m-secondary"
+                        className="pf-c-button pf-m-secondary pf-m-disabled"
                         disabled={true}
                         onClick={[Function]}
                         tabIndex={null}
@@ -569,7 +569,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                       Submit
                     </button>
                     <button
-                      class="pf-c-button pf-m-secondary"
+                      class="pf-c-button pf-m-secondary pf-m-disabled"
                       disabled=""
                       type="button"
                     >
@@ -679,7 +679,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                         Submit
                       </button>
                       <button
-                        class="pf-c-button pf-m-secondary"
+                        class="pf-c-button pf-m-secondary pf-m-disabled"
                         disabled=""
                         type="button"
                       >
@@ -1000,7 +1000,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                 <button
                                   aria-disabled={null}
                                   aria-label={null}
-                                  className="pf-c-button pf-m-secondary"
+                                  className="pf-c-button pf-m-secondary pf-m-disabled"
                                   disabled={true}
                                   onClick={[Function]}
                                   tabIndex={null}
@@ -1459,7 +1459,7 @@ exports[`<Wizard /> should render correctly with custom title and description 1`
                       <button
                         aria-disabled={null}
                         aria-label={null}
-                        className="pf-c-button pf-m-secondary"
+                        className="pf-c-button pf-m-secondary pf-m-disabled"
                         disabled={true}
                         onClick={[Function]}
                         tabIndex={null}

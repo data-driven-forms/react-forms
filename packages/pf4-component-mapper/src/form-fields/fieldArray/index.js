@@ -113,42 +113,22 @@ DynamicArray.propTypes = {
   itemDefault: PropTypes.any,
 };
 
-const FixedArrayField = ({ title, description, fields, additionalItems, formOptions }) => (
-  <Fragment>
-    { title && <GridItem sm={ 12 }><h3>{ title }</h3></GridItem> }
-    { description && <GridItem sm={ 12 }><p>{ description }</p></GridItem> }
-    { formOptions.renderForm(fields) }
-    { formOptions.renderForm([ additionalItems ]) }
-  </Fragment>
-);
-
-FixedArrayField.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
-  additionalItems: PropTypes.object.isRequired,
-};
-
 const renderArrayField = props => {
-  const { fieldKey, arrayValidator, hasFixedItems, ...rest } = props;
+  const { arrayValidator, ...rest } = props;
   return (
-    hasFixedItems ? <FixedArrayField { ...props } /> : (
-      <DynamicArray
-        fieldKey={ rest.input.name }
-        { ...rest }
-        arrayValidator={ arrayValidator }
-      />
-    )
+    <DynamicArray
+      fieldKey={ rest.input.name }
+      { ...rest }
+      arrayValidator={ arrayValidator }
+    />
   );
 };
 
 renderArrayField.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  fields: PropTypes.array.isRequired,
-  validate: PropTypes.array,
-  itemDefault: PropTypes.any,
+  arrayValidator: PropTypes.array,
+  input: PropTypes.any,
 };
+
 renderArrayField.defaultProps = {
   validate: [],
 };

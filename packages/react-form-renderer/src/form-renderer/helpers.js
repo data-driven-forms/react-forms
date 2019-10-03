@@ -5,7 +5,6 @@ const fieldComponents = [
   components.TEXTAREA_FIELD,
   components.FIELD_ARRAY,
   components.SELECT_COMPONENT,
-  components.FIXED_LIST,
   components.CHECKBOX,
   components.RADIO,
   components.DATE_PICKER,

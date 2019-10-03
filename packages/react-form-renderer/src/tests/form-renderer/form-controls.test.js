@@ -14,7 +14,6 @@ describe('<FormControls />', () => {
     initialLayout = {
       [layoutComponents.BUTTON]: ({ label, ...props }) => <button { ...props }>{ label }</button>,
       [layoutComponents.COL]: ({ children, ...props }) => <div { ...props }>{ children }</div>,
-      [layoutComponents.FORM_GROUP]: ({ children, ...props }) => <div { ...props }>{ children }</div>,
       [layoutComponents.BUTTON_GROUP]: ({ children, ...props }) => <div { ...props }>{ children }</div>,
     };
     ContextWrapper = ({ children, ...props }) => (

@@ -2,7 +2,7 @@ import DefaultSchemaError from './schema-errors';
 import isValidComponent from './isValidComponent';
 import { validators, components, dataTypes } from '../constants';
 
-const componentBlackList = [ components.FIELD_ARRAY, components.FIXED_LIST, 'tab-item' ];
+const componentBlackList = [ components.FIELD_ARRAY, 'tab-item' ];
 
 const checkFieldsArray = (obj, objectKey) => {
   if (!obj.hasOwnProperty('fields')) {

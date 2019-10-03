@@ -40,7 +40,7 @@ describe('Mozilla json schema parser', () => {
     expect(defaultValues).toEqual({ tasks: { done: false }});
   });
 
-  it('should parse array schema', () => {
+  it.skip('should parse array schema', () => {
     const  formSchema = arraySchema;
     const uiSchema = uiArraySchema;
     const  { schema, defaultValues } = mozillaSchemaParser(formSchema, uiSchema);

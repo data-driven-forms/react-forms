@@ -32,7 +32,6 @@ const mapper = {
   [componentTypes.SWITCH]: SwitchField,
   [componentTypes.PLAIN_TEXT]: PlainTextField,
   [componentTypes.FIELD_ARRAY]: FieldArray,
-  [componentTypes.FIXED_LIST]: FieldArray,
 };
 
 export default mapper;

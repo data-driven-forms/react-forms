@@ -24,15 +24,10 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
   initialValues={Object {}}
   layoutMapper={
     Object {
-      "ArrayFieldWrapper": [Function],
       "Button": [Function],
       "ButtonGroup": [Function],
-      "Col": [Function],
       "Description": [Function],
-      "FormGroup": [Function],
       "FormWrapper": [Function],
-      "HelpBlock": [Function],
-      "Icon": [Function],
       "Title": [Function],
     }
   }

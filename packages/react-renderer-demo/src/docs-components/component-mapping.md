@@ -26,18 +26,13 @@ import { layoutComponents } from '@data-driven-forms/react-form-renderer';
 const layoutComponents = {
   [layoutComponents.FORM_WRAPPER]: 'FormWrapper',
   [layoutComponents.BUTTON]: 'Button',
-  [layoutComponents.COL]: 'Col',
-  [layoutComponents.FORM_GROUP]: 'FormGroup',
   [layoutComponents.BUTTON_GROUP]: 'ButtonGroup',
-  [layoutComponents.ICON]: 'Icon',
-  [layoutComponents.ARRAY_FIELD_WRAPPER]: 'ArrayFieldWrapper',
-  [layoutComponents.HELP_BLOCK]: 'HelpBlock',
   [layoutComponents.TITLE]: 'Title',
   [layoutComponents.DESCRIPTION]: 'Description',
 }
 ```
 
-Required components are: `FORM_WRAPPER`, `BUTTON`, `COL`, `FORM_GROUP` and `BUTTON_GROUP`. The rest is used only if you use certain
+Required components are: `FORM_WRAPPER`, `BUTTON` and `BUTTON_GROUP`. The rest is used only if you use certain
 components in your schema.
 
 Check the example below to see a simple implementation of layout components.
@@ -50,11 +45,6 @@ Check the example below to see a simple implementation of layout components.
 |Prop|Type|Description|Value|Customizable|
 |----|----|-----------|-----|------------|
 |children|node|Content of the form||Based on form schema|
-
-#### Col
-|Prop|Type|Description|Value|Customizable|
-|----|----|-----------|-----|------------|
-|children|node|Wrapper around form field||Based on form schema|
 
 #### Button
 |Prop|Type|Description|Value|Customizable|

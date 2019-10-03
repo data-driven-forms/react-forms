@@ -90,33 +90,6 @@ describe('renderForm function', () => {
     expect(wrapper.find(Form).instance().form.getState().values.foo).toBeUndefined();
   });
 
-  it('should render fixed array field correctly', () => {
-    const formFields = [{
-      component: components.FIXED_LIST,
-      name: 'foo',
-      key: 'bar',
-      title: 'Title',
-      description: 'description',
-      fields: [{
-        component: components.TEXT_FIELD,
-        name: 'nested component',
-        label: 'foo',
-      }],
-      additionalItems: {
-        key: 1,
-        name: 'foo',
-        component: components.TEXT_FIELD,
-        fields: [],
-      },
-    }];
-
-    const wrapper = mount(
-      <ContextWrapper schema={{ fields: formFields }}/>
-    );
-
-    expect(toJson(wrapper)).toMatchSnapshot();
-  });
-
   it('should extract dynamic field name if its in dot notation', () => {
     const formFields = [{
       component: components.FIELD_ARRAY,
