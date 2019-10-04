@@ -21,11 +21,7 @@ export const length = memoize(({
   equal = selectNum(equal, is);
   min = selectNum(min, minimum);
   max = selectNum(max, maximum);
-  return prepare (value => {
-    if (!value) {
-      return;
-    }
-
+  return prepare ((value = []) => {
     if (equal !== null && value.length !== equal) {
       const msg = prepareMsg(message, 'wrongLength', { count: equal }).defaultMessage;
       return typeof msg === 'string' ? msg : msg(equal);

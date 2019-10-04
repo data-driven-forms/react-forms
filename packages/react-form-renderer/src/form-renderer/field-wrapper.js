@@ -18,7 +18,7 @@ const FieldWrapper = ({ componentType, validate, component, ...rest }) => {
     component,
   };
   if (shouldAssignFormOptions(componentType)) {
-    componentProps.arrayValidator = value => {
+    componentProps.arrayValidator = (value = []) => {
       if (!Array.isArray(value)) {
         return;
       }

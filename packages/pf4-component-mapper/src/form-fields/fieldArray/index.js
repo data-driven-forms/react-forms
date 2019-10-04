@@ -7,23 +7,21 @@ import './final-form-array.scss';
 
 const ArrayItem = ({
   fields,
-  fieldKey,
   fieldIndex,
   name,
   remove,
   formOptions,
+  length,
+  minItems,
 }) => {
   const widths = {
-    label: fields[0].label ? 7 : 0,
-    field: fields[0].label ? 4 : 11,
+    label: fields[0].label ? 5 : 0,
+    field: fields[0].label ? 7 : 12,
   };
 
-  const editedFields = fields.map((field) => {
-    const itemName = field.name
-      ? field.name.substring(field.name.lastIndexOf('.') + 1)
-      : `${fieldKey}[${fieldIndex}]`;
-    const fieldName = name ? `${name}${itemName && itemName !== 'items' ? itemName : ''}` : `${fieldKey}[${fieldIndex}]`;
-    return { ...field, name: fieldName, key: name, hideLabel: true };
+  const editedFields = fields.map((field, index) => {
+    const computedName = field.name ? `${name}.${field.name}` : name;
+    return { ...field, name: computedName, key: `${name}-${index}`, hideLabel: true };
   });
 
   return (
@@ -33,17 +31,29 @@ const ArrayItem = ({
           <hr className="ddf-final-form-hr" />
         </GridItem>
       </Grid>
-      <Grid className="wrapper">
-        { widths.label > 0 && <GridItem className="ddf-final-form-group-label" sm={ widths.label }>
-          { <label htmlFor={ editedFields[0].name }>{ fields[0].label }</label> }
-        </GridItem> }
-        <GridItem sm={ widths.field } className="final-form-array-item">
-          { formOptions.renderForm(editedFields) }
+      <Grid>
+        <GridItem sm={ 11 }>
+          { editedFields.map((field, index) => (
+            <Grid key={ `${field.label}-${index}` } className="ddf-final-form-array-grid">
+              { widths.label > 0 &&
+              <GridItem sm={ widths.label } key={ `${field.label}-${index}` }>
+                <label htmlFor={ field.name }>{ field.label }</label>
+              </GridItem> }
+              <GridItem sm={ widths.field }>
+                { formOptions.renderForm([ field ]) }
+              </GridItem>
+            </Grid>
+          )) }
         </GridItem>
         <GridItem sm={ 1 }>
+          { length > minItems &&
           <Bullseye>
             <CloseIcon onClick={ () => remove(fieldIndex) } className="ddf-final-form-group-remove-icon"/>
-          </Bullseye>
+          </Bullseye> }
+          { length <= minItems &&
+          <Bullseye>
+            <CloseIcon className="ddf-final-form-group-remove-icon disabled"/>
+          </Bullseye> }
         </GridItem>
       </Grid>
     </React.Fragment>
@@ -51,7 +61,6 @@ const ArrayItem = ({
 };
 
 ArrayItem.propTypes = {
-  fieldKey: PropTypes.string.isRequired,
   name: PropTypes.string,
   fieldIndex: PropTypes.number.isRequired,
   fields: PropTypes.arrayOf(PropTypes.object),
@@ -60,43 +69,54 @@ ArrayItem.propTypes = {
 };
 
 const DynamicArray = ({
-  fieldKey,
   arrayValidator,
-  title,
+  label,
   description,
-  fields,
-  itemDefault,
+  fields: formFields,
+  defaultItem,
   formOptions,
   meta,
   reactFinalForm,
   FieldArrayProvider,
+  minItems,
+  maxItems,
+  noItemsMessage,
   ...rest
 }) => {
   const { dirty, submitFailed, error } = meta;
   const isError = (dirty || submitFailed) && error && typeof error === 'string';
 
   return (
-    <FieldArrayProvider key={ fieldKey } name={ rest.input.name } validate={ arrayValidator }>
-      { (cosi) => (
+    <FieldArrayProvider key={ rest.input.name } name={ rest.input.name } validate={ arrayValidator }>
+      { ({ fields: { map, value = [], push, remove }}) => (
         <Fragment>
-          { title && <GridItem sm={ 12 }><h3>{ title }</h3></GridItem> }
+          { label && <GridItem sm={ 12 }><h3>{ label }</h3></GridItem> }
           { description && <GridItem sm={ 12 }><p>{ description }</p></GridItem> }
-          { cosi.fields.map((name, index) => (
+          { value.length <= 0 && <Bullseye>
+            <GridItem sm={ 12 }>{ noItemsMessage }</GridItem>
+          </Bullseye> }
+          { map((name, index) => (
             <ArrayItem
-              key={ `${name || fieldKey}-${index}` }
-              fields={ fields }
+              key={ `${name}-${index}` }
+              fields={ formFields }
               name={ name }
-              fieldKey={ fieldKey }
               fieldIndex={ index }
-              remove={ cosi.fields.remove }
+              remove={ remove }
               formOptions={ formOptions }
+              length={ value.length }
+              minItems={ minItems }
             />)) }
           <Grid>
             <GridItem sm={ 11 }>{ isError && <FormHelperText isHidden={ false } isError={ true }>{ error }</FormHelperText> }</GridItem>
             <GridItem sm={ 1 } className="final-form-array-add-container">
+              { value.length < maxItems &&
               <Bullseye>
-                <AddCircleOIcon onClick={ () => cosi.fields.push(itemDefault) } className="ddf-final-form-group-add-icon"/>
-              </Bullseye>
+                <AddCircleOIcon onClick={ () => push(defaultItem) } className="ddf-final-form-group-add-icon"/>
+              </Bullseye> }
+              { value.length >= maxItems &&
+              <Bullseye>
+                <AddCircleOIcon className="ddf-final-form-group-add-icon disabled"/>
+              </Bullseye> }
             </GridItem>
           </Grid>
         </Fragment>
@@ -105,32 +125,20 @@ const DynamicArray = ({
 };
 
 DynamicArray.propTypes = {
-  fieldKey: PropTypes.string,
   arrayValidator: PropTypes.func,
-  title: PropTypes.string,
-  description: PropTypes.string,
+  label: PropTypes.node,
+  description: PropTypes.node,
   fields: PropTypes.arrayOf(PropTypes.object),
-  itemDefault: PropTypes.any,
+  defaultItem: PropTypes.any,
+  minItems: PropTypes.number,
+  maxItems: PropTypes.number,
+  noItemsMessage: PropTypes.node,
 };
 
-const renderArrayField = props => {
-  const { arrayValidator, ...rest } = props;
-  return (
-    <DynamicArray
-      fieldKey={ rest.input.name }
-      { ...rest }
-      arrayValidator={ arrayValidator }
-    />
-  );
+DynamicArray.defaultProps = {
+  maxItems: Infinity,
+  minItems: 0,
+  noItemsMessage: 'No items added',
 };
 
-renderArrayField.propTypes = {
-  arrayValidator: PropTypes.array,
-  input: PropTypes.any,
-};
-
-renderArrayField.defaultProps = {
-  validate: [],
-};
-
-export default renderArrayField;
+export default DynamicArray;

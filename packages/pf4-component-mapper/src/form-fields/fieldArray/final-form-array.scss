@@ -2,9 +2,13 @@
     color: var(--pf-global--icon--Color--light);
     height: 70%;
 
-    &:hover {
+    &:hover:not(.disabled) {
         color: var(--pf-global--icon--Color--dark);
         cursor: pointer;
+    }
+
+    &.disabled {
+        opacity: 0.5
     }
 };
 
@@ -17,9 +21,13 @@
     min-height: 24px;
     min-width: 24px;
 
-    &:hover {
+    &:hover:not(.disabled) {
         color: var(--pf-global--icon--Color--dark);
         cursor: pointer;
+    }
+
+    &.disabled {
+        opacity: 0.5
     }
 };
 
@@ -30,4 +38,8 @@
 
 .ddf-final-form-hr {
     color: var(global_BorderColor_100);
+}
+
+.ddf-final-form-array-grid:not(:last-child) {
+    margin-bottom: var(--pf-global--spacer--md);
 }

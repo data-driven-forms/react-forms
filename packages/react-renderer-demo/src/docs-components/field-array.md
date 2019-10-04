@@ -12,3 +12,30 @@ Simillarly to <NavLink to='/renderer/field-provider'>FieldProvider</NavLink> Dat
 Each component receives as a prop `FieldArrayProvider`. You can wrap you component into it and they you have an access to all functionallity.
 
 <RawComponent source="field-array/form-fields-mapper" />
+
+### Validators
+
+You can use user a few provided validators (you can also use your <NavLink to='/renderer/validators'>own</NavLink>.)
+
+```jsx
+MIN_ITEMS_VALIDATOR: ({threshold})
+MAX_LENGTH: ({threshold})
+EXACT_LENGTH: ({threshold})
+```
+
+
+### PF4 implementation
+
+PF4 component mapper provides an experimental implementation of PF4 field arrays.
+
+|Prop|Type|Description|
+|:---|:--:|----------:|
+|label|`node`|Label of the array.|
+|description|`node`|Description of the array.|
+|fields|`array`|A group of fields, which are being added to the array.|
+|defaultItem|`any`|Default item which is inserted into a newly created fields group.|
+|minItems|`number`|Remove button is disabled, if the length of the array is equal or smaller.|
+|maxItems|`number`|Add button is disabled, if the length of the array is equal or bigger.|
+|noItemsMessage|`node`|A message which is shown, when there are no items in the array.|
+
+<RawComponent source="field-array/pf4-demo" />
