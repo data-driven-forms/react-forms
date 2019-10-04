@@ -65,7 +65,11 @@ ArrayItem.propTypes = {
   fieldIndex: PropTypes.number.isRequired,
   fields: PropTypes.arrayOf(PropTypes.object),
   remove: PropTypes.func.isRequired,
-  formOptions: PropTypes.object.isRequired,
+  formOptions: PropTypes.shape({
+    renderForm: PropTypes.func.isRequired,
+  }).isRequired,
+  length: PropTypes.number,
+  minItems: PropTypes.number,
 };
 
 const DynamicArray = ({
@@ -76,7 +80,6 @@ const DynamicArray = ({
   defaultItem,
   formOptions,
   meta,
-  reactFinalForm,
   FieldArrayProvider,
   minItems,
   maxItems,
@@ -128,11 +131,16 @@ DynamicArray.propTypes = {
   arrayValidator: PropTypes.func,
   label: PropTypes.node,
   description: PropTypes.node,
-  fields: PropTypes.arrayOf(PropTypes.object),
+  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
   defaultItem: PropTypes.any,
   minItems: PropTypes.number,
   maxItems: PropTypes.number,
   noItemsMessage: PropTypes.node,
+  formOptions: PropTypes.shape({
+    renderForm: PropTypes.func.isRequired,
+  }).isRequired,
+  FieldArrayProvider: PropTypes.node.isRequired,
+  meta: PropTypes.object.isRequired,
 };
 
 DynamicArray.defaultProps = {

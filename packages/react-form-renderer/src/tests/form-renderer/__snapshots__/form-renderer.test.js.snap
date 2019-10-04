@@ -914,6 +914,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               }
             >
               <FieldProvider
+                FieldArrayProvider={[Function]}
                 FieldProvider={[Function]}
                 autoFocus={false}
                 component={[Function]}
@@ -965,6 +966,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 validate={[Function]}
               >
                 <ReactFinalForm(Field)
+                  FieldArrayProvider={[Function]}
                   FieldProvider={[Function]}
                   autoFocus={false}
                   default="I'm a hidden string."
@@ -1015,6 +1017,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                   validate={[Function]}
                 >
                   <Field
+                    FieldArrayProvider={[Function]}
                     FieldProvider={[Function]}
                     autoFocus={false}
                     default="I'm a hidden string."
@@ -1102,6 +1105,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                     validate={[Function]}
                   >
                     <Component
+                      FieldArrayProvider={[Function]}
                       FieldProvider={[Function]}
                       autoFocus={false}
                       default="I'm a hidden string."
@@ -1250,6 +1254,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               }
             >
               <FieldProvider
+                FieldArrayProvider={[Function]}
                 FieldProvider={[Function]}
                 autoFocus={false}
                 component={[Function]}
@@ -1302,6 +1307,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 validate={[Function]}
               >
                 <ReactFinalForm(Field)
+                  FieldArrayProvider={[Function]}
                   FieldProvider={[Function]}
                   autoFocus={false}
                   default="I am disabled."
@@ -1353,6 +1359,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                   validate={[Function]}
                 >
                   <Field
+                    FieldArrayProvider={[Function]}
                     FieldProvider={[Function]}
                     autoFocus={false}
                     default="I am disabled."
@@ -1441,6 +1448,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                     validate={[Function]}
                   >
                     <Component
+                      FieldArrayProvider={[Function]}
                       FieldProvider={[Function]}
                       autoFocus={false}
                       default="I am disabled."
@@ -1590,6 +1598,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               }
             >
               <FieldProvider
+                FieldArrayProvider={[Function]}
                 FieldProvider={[Function]}
                 autoFocus={false}
                 component={[Function]}
@@ -1642,6 +1651,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 validate={[Function]}
               >
                 <ReactFinalForm(Field)
+                  FieldArrayProvider={[Function]}
                   FieldProvider={[Function]}
                   autoFocus={false}
                   default="I am read-only."
@@ -1693,6 +1703,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                   validate={[Function]}
                 >
                   <Field
+                    FieldArrayProvider={[Function]}
                     FieldProvider={[Function]}
                     autoFocus={false}
                     default="I am read-only."
@@ -1781,6 +1792,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                     validate={[Function]}
                   >
                     <Component
+                      FieldArrayProvider={[Function]}
                       FieldProvider={[Function]}
                       autoFocus={false}
                       default="I am read-only."
@@ -1930,6 +1942,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               }
             >
               <FieldProvider
+                FieldArrayProvider={[Function]}
                 FieldProvider={[Function]}
                 autoFocus={false}
                 component={[Function]}
@@ -1982,6 +1995,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 validate={[Function]}
               >
                 <ReactFinalForm(Field)
+                  FieldArrayProvider={[Function]}
                   FieldProvider={[Function]}
                   autoFocus={false}
                   default="I am yellow"
@@ -2033,6 +2047,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                   validate={[Function]}
                 >
                   <Field
+                    FieldArrayProvider={[Function]}
                     FieldProvider={[Function]}
                     autoFocus={false}
                     default="I am yellow"
@@ -2121,6 +2136,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                     validate={[Function]}
                   >
                     <Component
+                      FieldArrayProvider={[Function]}
                       FieldProvider={[Function]}
                       autoFocus={false}
                       default="I am yellow"
@@ -2285,6 +2301,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               }
             >
               <FieldProvider
+                FieldArrayProvider={[Function]}
                 FieldProvider={[Function]}
                 autoFocus={false}
                 component={[Function]}
@@ -2352,6 +2369,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 validate={[Function]}
               >
                 <ReactFinalForm(Field)
+                  FieldArrayProvider={[Function]}
                   FieldProvider={[Function]}
                   autoFocus={false}
                   formOptions={
@@ -2418,6 +2436,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                   validate={[Function]}
                 >
                   <Field
+                    FieldArrayProvider={[Function]}
                     FieldProvider={[Function]}
                     autoFocus={false}
                     formOptions={
@@ -2521,6 +2540,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                     validate={[Function]}
                   >
                     <Component
+                      FieldArrayProvider={[Function]}
                       FieldProvider={[Function]}
                       autoFocus={false}
                       formOptions={
@@ -2732,15 +2752,10 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
   initialValues={Object {}}
   layoutMapper={
     Object {
-      "ArrayFieldWrapper": [Function],
       "Button": [Function],
       "ButtonGroup": [Function],
-      "Col": [Function],
       "Description": [Function],
-      "FormGroup": [Function],
       "FormWrapper": [Function],
-      "HelpBlock": [Function],
-      "Icon": [Function],
       "Title": [Function],
     }
   }
