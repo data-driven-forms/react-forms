@@ -37,7 +37,7 @@ const ArrayItem = ({
             <Grid key={ `${field.label}-${index}` } className="ddf-final-form-array-grid">
               { widths.label > 0 &&
               <GridItem sm={ widths.label } key={ `${field.label}-${index}` }>
-                <label htmlFor={ field.name }>{ field.label }</label>
+                <label htmlFor={ field.name }>{ field.label }{ field.isRequired && <span className='pf-c-form__label-required'>*</span> }</label>
               </GridItem> }
               <GridItem sm={ widths.field }>
                 { formOptions.renderForm([ field ]) }
@@ -90,8 +90,8 @@ const DynamicArray = ({
     <FieldArrayProvider key={ rest.input.name } name={ rest.input.name } validate={ arrayValidator }>
       { ({ fields: { map, value = [], push, remove }}) => (
         <Fragment>
-          { label && <GridItem sm={ 12 }><h3>{ label }</h3></GridItem> }
-          { description && <GridItem sm={ 12 }><p>{ description }</p></GridItem> }
+          { label && <GridItem sm={ 12 }>{ label }</GridItem> }
+          { description && <GridItem sm={ 12 }>{ description }</GridItem> }
           { value.length <= 0 && <Bullseye>
             <GridItem sm={ 12 }>{ noItemsMessage }</GridItem>
           </Bullseye> }
