@@ -94,5 +94,27 @@ describe('<FormRenderer />', () => {
     wrapper.find('#custom-submit-button').simulate('click');
     expect(onSubmit).toHaveBeenCalled();
   });
+
+  it('should render hidden field', () => {
+    const onSubmit = jest.fn();
+    const FormControls = ({ form: { submit }}) => (
+      <div>
+        <button id="custom-submit-button" onClick={ submit } type="button">Handle submit</button>
+      </div>
+    );
+    const wrapper = mount(<FormRenderer { ...initialProps } schemaType="default" schema={{
+      fields: [{
+        component: [ components.TEXT_FIELD ],
+        name: 'visible',
+        label: 'Visible',
+      }, {
+        component: [ components.TEXT_FIELD ],
+        name: 'hidden',
+        label: 'Hidden',
+        hideField: true,
+      }],
+    }} onSubmit={ onSubmit } renderFormButtons={ FormControls }/>);
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
 });
 

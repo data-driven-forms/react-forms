@@ -17,6 +17,7 @@ const output = {
       title: 'Text Box with help',
       helperText: 'Helper text',
       component: components.TEXT_FIELD,
+      hideField: true,
     },
     {
       name: 'text_box_3',
