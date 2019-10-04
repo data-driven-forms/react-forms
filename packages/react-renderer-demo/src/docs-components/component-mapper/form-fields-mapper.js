@@ -66,14 +66,14 @@ const FormFieldsMapper = () => {
       name: 'first-name',
       label: 'First name',
       isRequired: true,
-      validate: [ value => !value || value.lenght === 0 ? 'Required' : undefined ],
+      validate: [ value => !value || value.length === 0 ? 'Required' : undefined ],
       customProp: true,
     }, {
       component: componentTypes.TEXT_FIELD,
       name: 'last-name',
       label: 'Last name',
       isRequired: true,
-      validate: [ value => !value || value.lenght === 0 ? 'Required' : undefined ],
+      validate: [ value => !value || value.length === 0 ? 'Required' : undefined ],
     }, {
       component: componentTypes.TEXT_FIELD,
       name: 'age',
