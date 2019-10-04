@@ -7,24 +7,39 @@ import Condition from './condition';
 import { memoize } from '../validators/helpers';
 import FieldWrapper from './field-wrapper';
 
+const FormFieldHideWrapper = ({ hideField, children }) => hideField ? (
+  <div hidden>{ children }</div>
+) : children;
+
+FormFieldHideWrapper.propTypes = {
+  hideField: PropTypes.bool,
+  children: PropTypes.oneOfType([ PropTypes.node, PropTypes.arrayOf(PropTypes.node) ]).isRequired,
+};
+
+FormFieldHideWrapper.defaultProps = {
+  hideField: false,
+};
+
 const FormConditionWrapper = ({ condition, children }) => (condition ? (
   <Condition { ...condition }>
     { children }
   </Condition>
 ) : children);
 
-const renderSingleField = ({ component, condition, ...rest }) => (
+const renderSingleField = ({ component, condition, hideField, ...rest }) => (
   <Fragment key={ rest.key || rest.name }>
     <RendererContext.Consumer>
       { ({ formFieldsMapper, formOptions }) => (
         <FormConditionWrapper condition={ condition }>
-          <FieldWrapper
-            componentType={ component }
-            component={ formFieldsMapper[component] }
-            formOptions={ formOptions }
-            name={ rest.name || rest.key }
-            { ...rest }
-          />
+          <FormFieldHideWrapper hideField={ hideField }>
+            <FieldWrapper
+              componentType={ component }
+              component={ formFieldsMapper[component] }
+              formOptions={ formOptions }
+              name={ rest.name || rest.key }
+              { ...rest }
+            />
+          </FormFieldHideWrapper>
         </FormConditionWrapper>
       ) }
     </RendererContext.Consumer>
