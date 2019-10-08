@@ -3,6 +3,7 @@ import { Overlay } from 'patternfly-react';
 import PropTypes from 'prop-types';
 import PickerInput from './picker-input';
 import PopoverRoot from './popover-root';
+import { createDisabledDays } from './helpers';
 
 const selectValidDate = (newDate, disabledDays) => {
   const { after, before } = disabledDays.find(item => typeof item === 'object' && !(item instanceof Date)) || {};
@@ -107,6 +108,7 @@ export class DateTimePicker extends React.Component {
       disabledDays,
       isClearable,
     } = this.props;
+    const cleanDisabledDays = createDisabledDays(disabledDays);
     return (
       <div style={{ position: 'relative' }} ref={ this.wrapperRef } >
         <PickerInput
@@ -142,7 +144,7 @@ export class DateTimePicker extends React.Component {
             locale={ locale }
             todayButtonLabel={ todayButtonLabel }
             showTodayButton={ showTodayButton }
-            disabledDays={ disabledDays }
+            disabledDays={ cleanDisabledDays }
           />
         </Overlay>
       </div>
