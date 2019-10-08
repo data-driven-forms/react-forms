@@ -118,7 +118,7 @@ This component is using [react-day-picker](https://react-day-picker.js.org/docs/
 |todayButtonLabel|string|Label for today button|
 |showTodayButton|bool|show/hide today button|
 |isDisabled|bool|disable component|
-|disabledDays|array|Mark specific days or a range of days as disabled. [More info](https://react-day-picker.js.org/examples/disabled)|
+|disabledDays|array|Mark specific days or a range of days as disabled. [More info](https://react-day-picker.js.org/examples/disabled). In order to store this prop to JSON we allow using string. Any string accepted by Date constructor is valid value. There is an alias for current date: `today`|
 |closeOnDaySelect|bool|Close the calendar popover after selecting date.|
 
 <ExampleLink to='date-picker' />

@@ -405,9 +405,10 @@ const output = {
                   component: components.DATE_PICKER,
                   isClearable: true,
                   disabledDays: [
+                    'today',
                     new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 5),
                     {
-                      before: new Date(),
+                      before: 'Tue Oct 08 2019 10:23:03 GMT+0200 (Central European Summer Time)',
                     },
                   ],
                 },
