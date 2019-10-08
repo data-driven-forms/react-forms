@@ -33,6 +33,9 @@ export const docs = [{
   component: 'field-provider',
   linkText: 'Custom components',
 }, {
+  component: 'field-array',
+  linkText: 'FieldArray Provider',
+}, {
   component: 'form-controls',
   linkText: 'Form buttons',
   next: {

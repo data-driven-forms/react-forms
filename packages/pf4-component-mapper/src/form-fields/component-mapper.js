@@ -15,6 +15,7 @@ import {
 } from './form-fields';
 import Wizard from './wizard/wizard';
 import { Select } from './select/select';
+import FieldArray from './fieldArray/index';
 
 const mapper = {
   [componentTypes.TEXT_FIELD]: TextField,
@@ -30,6 +31,7 @@ const mapper = {
   [componentTypes.WIZARD]: Wizard,
   [componentTypes.SWITCH]: SwitchField,
   [componentTypes.PLAIN_TEXT]: PlainTextField,
+  [componentTypes.FIELD_ARRAY]: FieldArray,
 };
 
 export default mapper;

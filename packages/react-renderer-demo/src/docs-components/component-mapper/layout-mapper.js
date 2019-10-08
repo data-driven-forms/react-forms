@@ -45,12 +45,7 @@ const ButtonGroup = ({ children, ...props }) => (
 const layoutComponent = {
   [layoutComponents.FORM_WRAPPER]: FormWrapper,
   [layoutComponents.BUTTON]: Button,
-  [layoutComponents.COL]: Fragment,
-  [layoutComponents.FORM_GROUP]: Fragment,
   [layoutComponents.BUTTON_GROUP]: ButtonGroup,
-  [layoutComponents.ICON]: Fragment,
-  [layoutComponents.ARRAY_FIELD_WRAPPER]: Fragment,
-  [layoutComponents.HELP_BLOCK]: Fragment,
   [layoutComponents.TITLE]: Title,
   [layoutComponents.DESCRIPTION]: Description,
 };

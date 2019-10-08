@@ -14,9 +14,7 @@ exports[`<FormControls /> should render with description 1`] = `
       Object {
         "Button": [Function],
         "ButtonGroup": [Function],
-        "Col": [Function],
         "Description": [Function],
-        "FormGroup": [Function],
         "FormWrapper": [Function],
         "Title": [Function],
       }
@@ -173,9 +171,7 @@ exports[`<FormControls /> should render with title 1`] = `
       Object {
         "Button": [Function],
         "ButtonGroup": [Function],
-        "Col": [Function],
         "Description": [Function],
-        "FormGroup": [Function],
         "FormWrapper": [Function],
         "Title": [Function],
       }
@@ -332,9 +328,7 @@ exports[`<FormControls /> should render with title and description 1`] = `
       Object {
         "Button": [Function],
         "ButtonGroup": [Function],
-        "Col": [Function],
         "Description": [Function],
-        "FormGroup": [Function],
         "FormWrapper": [Function],
         "Title": [Function],
       }
@@ -497,9 +491,7 @@ exports[`<FormControls /> should render without title and description 1`] = `
       Object {
         "Button": [Function],
         "ButtonGroup": [Function],
-        "Col": [Function],
         "Description": [Function],
-        "FormGroup": [Function],
         "FormWrapper": [Function],
         "Title": [Function],
       }

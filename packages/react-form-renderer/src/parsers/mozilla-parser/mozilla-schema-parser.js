@@ -113,7 +113,7 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) => Object.keys
      * https://github.com/mozilla-services/react-jsonschema-form#addable-option
      */
   } else if (isAddableWithFixedFields(fields, key)) {
-    return { title: fields[key].title, component: components.FIXED_LIST,
+    return { title: fields[key].title, //component: components.FIXED_LIST,
       ...convertSchema( // eslint-disable-line no-use-before-define
         { ...fields[key], type: 'array', items: fields[key].items, additionalItems: fields[key].additionalItems },
         uiSchema[key], key
@@ -331,7 +331,7 @@ const convertSchema = (schema, uiSchema = {}, key) => {
         { type: 'array', items: schema.additionalItems },
         { items: uiSchema.additionalItems }, `${key}.additionalItems`
       );
-      nestedSchema.component = components.FIXED_LIST;
+      //nestedSchema.component = components.FIXED_LIST;
       /**
          * Another condition for dynamic form fields
          * Dynamic nested schema
@@ -390,10 +390,10 @@ const initialize = (schema, uiSchema = {}) => {
     inputSchema = orderSchema(schema, uiSchema['ui:order']);
   }
 
-  return {
+  return ({
     schema: convertSchema(inputSchema, uiSchema),
     defaultValues,
-  };
+  });
 };
 
 export default initialize;

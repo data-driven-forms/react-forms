@@ -2,7 +2,7 @@ import DefaultSchemaError from './schema-errors';
 import isValidComponent from './isValidComponent';
 import { validators, components, dataTypes } from '../constants';
 
-const componentBlackList = [ components.FIELD_ARRAY, components.FIXED_LIST, 'tab-item' ];
+const componentBlackList = [ components.FIELD_ARRAY, 'tab-item' ];
 
 const checkFieldsArray = (obj, objectKey) => {
   if (!obj.hasOwnProperty('fields')) {
@@ -135,7 +135,7 @@ const iterateOverFields = (fields, formFieldsMapper, layoutMapper, parent = {}) 
 
     }
 
-    if (!field.hasOwnProperty('name') && !field.hasOwnProperty('title') && !field.hasOwnProperty('key')) {
+    if (!field.hasOwnProperty('name') && !field.hasOwnProperty('title') && !field.hasOwnProperty('key') && parent.component !== 'field-array') {
       throw new DefaultSchemaError(`Each fields item must have "name" or "key" property! Name is used as a unique identifier of form fields.`);
     }
 

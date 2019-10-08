@@ -102,6 +102,9 @@ const renderers = {
   inlineCode: ({ children }) => <code style={{ background: 'white', borderRadius: 3, fontFamily: 'courier, monospace', padding: '3px'  }}>
     { children }
   </code>,
+  b: ({ children }) => <Typography variant="button" display="block" gutterBottom>
+    { children }
+  </Typography>,
 };
 
 export default renderers;

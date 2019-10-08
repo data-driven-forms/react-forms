@@ -80,7 +80,8 @@
   },
   "dependencies": {
     "@patternfly/patternfly-next": "^1.0.175",
-    "react-select": "^3.0.4"
+    "react-select": "^3.0.4",
+    "react-final-form-arrays": "2.0.3"
   },
   "postpublish": "export RELEASE_DEMO=true"
 }

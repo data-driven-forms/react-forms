@@ -4,7 +4,7 @@ import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import FormControls from '../../form-renderer/form-controls';
 import { layoutComponents } from '../../constants';
-import RendererContext, { configureContext } from '../../form-renderer/renderer-context';
+import RendererContext from '../../form-renderer/renderer-context';
 
 describe('<FormControls />', () => {
   let initialProps;
@@ -14,14 +14,13 @@ describe('<FormControls />', () => {
     initialLayout = {
       [layoutComponents.BUTTON]: ({ label, ...props }) => <button { ...props }>{ label }</button>,
       [layoutComponents.COL]: ({ children, ...props }) => <div { ...props }>{ children }</div>,
-      [layoutComponents.FORM_GROUP]: ({ children, ...props }) => <div { ...props }>{ children }</div>,
       [layoutComponents.BUTTON_GROUP]: ({ children, ...props }) => <div { ...props }>{ children }</div>,
     };
     ContextWrapper = ({ children, ...props }) => (
       <Form onSubmit={ jest.fn() }>
         { () => (
           <RendererContext.Provider
-            value={ configureContext({ layoutMapper: initialLayout, ...props }) }
+            value={{ layoutMapper: initialLayout, ...props }}
           >
             { children }
           </RendererContext.Provider>

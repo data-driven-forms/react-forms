@@ -29,17 +29,12 @@ const Button = ({ children, label, variant, ...props }) => <button style={ getBu
 const layoutComponent = {
   [layoutComponents.FORM_WRAPPER]: FormWrapper,
   [layoutComponents.BUTTON]: Button,
-  [layoutComponents.COL]: Fragment,
-  [layoutComponents.FORM_GROUP]: Fragment,
   [layoutComponents.BUTTON_GROUP]: Fragment,
-  [layoutComponents.ICON]: Fragment,
-  [layoutComponents.ARRAY_FIELD_WRAPPER]: Fragment,
-  [layoutComponents.HELP_BLOCK]: Fragment,
   [layoutComponents.TITLE]: Title,
   [layoutComponents.DESCRIPTION]: Description,
 };
 
-const TextField = ({ formOptions, customProp, label, input, isRequired, meta: { error, touched }, FieldProvider, dataType, ...props }) => (
+const TextField = ({ formOptions, customProp, label, input, isRequired, meta: { error, touched }, FieldProvider, dataType, FieldArrayProvider, ...props }) => (
   <div className={ `ddorg__demo-formGroup ${isRequired ? 'required' : ''} ${error ? 'error' : ''}` }>
     <label htmlFor={ input.name }>{ label }</label>
     <input id={ input.name } { ...input } { ...props } />
@@ -48,7 +43,7 @@ const TextField = ({ formOptions, customProp, label, input, isRequired, meta: { 
   </div>
 );
 
-const CustomComponent = ({ FieldProvider, ...rest }) => (
+const CustomComponent = ({ FieldProvider, FieldArrayProvider, ...rest }) => (
   <FieldProvider { ...rest }>
     { ({ input, meta, ...props }) => <TextField input={ input } meta={ input } { ...props } /> }
   </FieldProvider>

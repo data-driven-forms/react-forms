@@ -207,6 +207,7 @@ const FieldInterface = ({
   condition,
   componentType,
   initialKey,
+  FieldArrayProvider, // eslint-disable-line react/prop-types
   ...props
 }) => (
   <Grid xs={ 12 } item style={{ marginBottom: 16, padding: 0 }}>

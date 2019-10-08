@@ -1,6 +1,5 @@
 import { mount } from 'enzyme';
 import { Toolbar, Button, ActionGroup, TextContent, Text } from '@patternfly/react-core';
-import { PlusIcon } from '@patternfly/react-icons';
 import { layoutComponents } from '@data-driven-forms/react-form-renderer';
 import layoutMapper from '../form-fields/layout-components';
 
@@ -12,10 +11,6 @@ describe('Layout mapper', () => {
   it('should return PF4 ButtonGroup', () => {
     expect(mount(layoutMapper[layoutComponents.BUTTON_GROUP]({})).find(Toolbar)).toHaveLength(1);
     expect(mount(layoutMapper[layoutComponents.BUTTON_GROUP]({})).find(ActionGroup)).toHaveLength(1);
-  });
-
-  it('should return PF4 Icon', () => {
-    expect(mount(layoutMapper[layoutComponents.ICON]({ name: 'Foo' })).find(PlusIcon)).toHaveLength(1);
   });
 
   it('should return PF4 Title', () => {

@@ -6,7 +6,7 @@ import createFocusDecorator from 'final-form-focus';
 
 import miqParser from '../parsers/miq-parser/miq-parser';
 import mozillaParser from '../parsers/mozilla-parser/mozilla-schema-parser';
-import RendererContext, { configureContext } from './renderer-context';
+import RendererContext from './renderer-context';
 import FormControls from './form-controls';
 import renderForm from './render-form';
 import defaultSchemaValidator from '../parsers/default-schema-validator';
@@ -69,7 +69,7 @@ const FormRenderer = ({
       validate={ validate }
       subscription={{ pristine: true, submitting: true, valid: true, ...subscription }}
       render={ ({ handleSubmit, pristine, valid, form: { reset, mutators, getState, submit, ...form }, ...state }) => (
-        <RendererContext.Provider value={ configureContext({
+        <RendererContext.Provider value={{
           layoutMapper,
           formFieldsMapper,
           formOptions: {
@@ -86,7 +86,7 @@ const FormRenderer = ({
             ...mutators,
             ...form,
           },
-        }) }>
+        }}>
           <RendererContext.Consumer>
             { ({ layoutMapper: { FormWrapper }}) => (
               <FormWrapper>

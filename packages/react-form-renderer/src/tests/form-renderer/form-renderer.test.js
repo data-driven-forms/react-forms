@@ -28,13 +28,8 @@ describe('<FormRenderer />', () => {
     };
 
     layoutMapper = {
-      [layoutComponents.COL]: ({ children }) => <div>{ children }</div>,
-      [layoutComponents.FORM_GROUP]: ({ children }) => <div>{ children }</div>,
       [layoutComponents.BUTTON_GROUP]: ({ children }) => <div>{ children }</div>,
-      [layoutComponents.HELP_BLOCK]: ({ children }) => <div>{ children }</div>,
       [layoutComponents.BUTTON]: ({ label, bsStyle, ...rest }) => <button { ...rest }>{ label }</button>,
-      [layoutComponents.ICON]: ({ type, name }) => <div>Icon: { name }</div>,
-      [layoutComponents.ARRAY_FIELD_WRAPPER]: ({ children }) => <div>{ children }</div>,
       [layoutComponents.FORM_WRAPPER]: ({ children }) => <form>{ children }</form>,
       [layoutComponents.TITLE]: ({ children }) => <div>{ children }</div>,
       [layoutComponents.DESCRIPTION]: ({ children }) => <div>{ children }</div>,

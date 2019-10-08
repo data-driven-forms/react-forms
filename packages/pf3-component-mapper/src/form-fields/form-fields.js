@@ -130,6 +130,7 @@ const FieldInterface = ({
   condition,
   componentType,
   initialKey,
+  FieldArrayProvider, // eslint-disable-line
   ...props
 }) => (
   fieldMapper(componentType)({

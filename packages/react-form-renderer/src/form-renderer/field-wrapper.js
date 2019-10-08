@@ -3,21 +3,22 @@ import PropTypes from 'prop-types';
 
 import { components } from '../constants';
 import FieldProvider from './field-provider';
+import { FieldArray } from 'react-final-form-arrays';
 import { shouldWrapInField, composeValidators } from './helpers';
 
-const shouldAssignFormOptions = componentType => [ components.FIELD_ARRAY, components.FIXED_LIST ].includes(componentType);
+const shouldAssignFormOptions = componentType => components.FIELD_ARRAY === componentType;
 const assignSpecialType = componentType => [ components.CHECKBOX, components.RADIO ].includes(componentType) ? componentType : undefined;
 
 const FieldWrapper = ({ componentType, validate, component, ...rest }) => {
   const componentProps = {
     type: assignSpecialType(componentType),
     FieldProvider,
+    FieldArrayProvider: FieldArray,
     ...rest,
     component,
   };
   if (shouldAssignFormOptions(componentType)) {
-    componentProps.hasFixedItems = componentType === components.FIXED_LIST;
-    componentProps.arrayValidator = value => {
+    componentProps.arrayValidator = (value = []) => {
       if (!Array.isArray(value)) {
         return;
       }

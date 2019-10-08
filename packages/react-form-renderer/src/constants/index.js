@@ -3,7 +3,6 @@ export const components = {
   TEXTAREA_FIELD: 'textarea-field',
   FIELD_ARRAY: 'field-array',
   SELECT_COMPONENT: 'select-field',
-  FIXED_LIST: 'fixed-list',
   CHECKBOX: 'checkbox',
   SUB_FORM: 'sub-form',
   RADIO: 'radio',
@@ -58,12 +57,7 @@ export const validators = {
 export const layoutComponents = {
   FORM_WRAPPER: 'FormWrapper',
   BUTTON: 'Button',
-  COL: 'Col',
-  FORM_GROUP: 'FormGroup',
   BUTTON_GROUP: 'ButtonGroup',
-  ICON: 'Icon',
-  ARRAY_FIELD_WRAPPER: 'ArrayFieldWrapper',
-  HELP_BLOCK: 'HelpBlock',
   TITLE: 'Title',
   DESCRIPTION: 'Description',
 };

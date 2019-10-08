@@ -4,7 +4,7 @@ import toJson from 'enzyme-to-json';
 import { Form, FormSpy } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import renderForm from '../../form-renderer/render-form';
-import RendererContext, { configureContext } from '../../form-renderer/renderer-context';
+import RendererContext from '../../form-renderer/renderer-context';
 import { components, validators, layoutComponents } from '../../constants';
 import FormRenderer from '../../form-renderer';
 
@@ -12,13 +12,13 @@ describe('renderForm function', () => {
   let layoutMapper;
 
   const ContextWrapper = ({ children, ...props }) => (
-    <RendererContext.Provider value={ configureContext({
+    <RendererContext.Provider value={{
       ...props,
       formOptions: {
         renderForm,
         ...props.formOptions,
       },
-    }) }>
+    }}>
       <Form onSubmit={ jest.fn() } mutators={{ ...arrayMutators }}>
         { () =>  children }
       </Form>
@@ -29,12 +29,7 @@ describe('renderForm function', () => {
     layoutMapper = {
       [layoutComponents.FORM_WRAPPER]: ({ children }) => <div>{ children }</div>,
       [layoutComponents.BUTTON]: ({ label, ...rest }) =>  <button { ...rest }>{ label }</button>,
-      [layoutComponents.COL]: ({ children }) => <div>{ children }</div>,
-      [layoutComponents.FORM_GROUP]: ({ children }) => <div>{ children }</div>,
       [layoutComponents.BUTTON_GROUP]: ({ children }) => <div>{ children }</div>,
-      [layoutComponents.ICON]: props => <div>Icon</div>,
-      [layoutComponents.ARRAY_FIELD_WRAPPER]: ({ children }) => <div>{ children }</div>,
-      [layoutComponents.HELP_BLOCK]: ({ children }) => <div>{ children }</div>,
       [layoutComponents.TITLE]: ({ children }) => <div>{ children }</div>,
       [layoutComponents.DESCRIPTION]: ({ children }) => <div>{ children }</div>,
     };
@@ -167,56 +162,6 @@ describe('renderForm function', () => {
       </ContextWrapper>
     );
     expect(toJson(wrapper)).toMatchSnapshot();
-  });
-
-  it('should render array field', () => {
-    const formFields = [{
-      component: components.FIELD_ARRAY,
-      name: 'foo',
-      key: 'bar',
-      fields: [],
-    }];
-
-    const wrapper = mount(
-      <ContextWrapper layoutMapper={ layoutMapper }>
-        { renderForm(formFields) }
-      </ContextWrapper>
-    );
-    expect(toJson(wrapper)).toMatchSnapshot();
-  });
-
-  it('should correctly assign array field validators', () => {
-    const formFields = [{
-      component: components.FIELD_ARRAY,
-      name: 'foo',
-      key: 'bar',
-      validate: [{
-        type: validators.REQUIRED,
-      }, {
-        type: validators.MIN_ITEMS_VALIDATOR,
-        treshold: 3,
-      }],
-      fields: [{
-        component: components.TEXT_FIELD,
-        name: 'name',
-        type: 'text',
-      }],
-    }];
-
-    const wrapper = mount(
-      <ContextWrapper
-        layoutMapper={ layoutMapper }
-        formFieldsMapper={{
-          [components.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div { ...props }>TextField</div>,
-        }}
-      >
-        { renderForm(formFields) }
-      </ContextWrapper>
-    );
-
-    const form = wrapper.find(Form);
-    form.instance().form.mutators.push('foo');
-    expect(form.instance().state.state.errors.foo).toBeTruthy();
   });
 
   describe('#condition', ()=> {

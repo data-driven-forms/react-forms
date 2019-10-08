@@ -135,6 +135,7 @@ const FieldInterface = ({
   condition,
   componentType,
   initialKey,
+  FieldArrayProvider, // catch it and don't send it to components
   ...props
 }) => (
   fieldMapper(componentType)({
