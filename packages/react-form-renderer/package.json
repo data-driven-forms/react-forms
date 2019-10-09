@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "start": "webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
-    "build": "webpack --env prod --config ./config/webpack.config.js",
+    "build": "rollup -c ./rollup.config.js",
     "release": "semantic-release"
   },
   "repository": "git@github.com:data-driven-forms/react-forms.git",
@@ -17,6 +17,7 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
@@ -47,6 +48,14 @@
     "react-dom": "^16.6.3",
     "regenerator-runtime": "^0.12.1",
     "resolve-url-loader": "^3.0.0",
+    "rollup": "^1.23.1",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-globals": "^1.4.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-size-snapshot": "^0.10.0",
+    "rollup-plugin-terser": "^5.1.2",
     "sass-loader": "^7.1.0",
     "semantic-release": "15.12.0",
     "style-loader": "^0.23.1",
@@ -69,10 +78,10 @@
     ]
   },
   "dependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
     "final-form": "^4.12.0",
     "final-form-arrays": "^3.0.1",
     "final-form-focus": "^1.1.2",
+    "lodash": "^4.17.15",
     "react-final-form": "^4.1.0",
     "react-final-form-arrays": "^2.0.1"
   },
