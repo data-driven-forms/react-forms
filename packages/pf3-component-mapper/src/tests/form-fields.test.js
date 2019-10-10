@@ -164,6 +164,20 @@ describe('FormFields', () => {
       const wrapper = mount(<TextField { ...initialProps } placeholder={ 'placeholder' } />);
       expect(toJson(wrapper)).toMatchSnapshot();
     });
+
+    it('should render correctly with helperText', () => {
+      const wrapper = mount(<TextField { ...initialProps } label='label' helperText="I am a helper text"/>);
+
+      expect(wrapper.find('FieldLevelHelp')).toHaveLength(1);
+      expect(wrapper.find('FieldLevelHelp').props().content).toEqual('I am a helper text');
+    });
+
+    it('should render correctly with description', () => {
+      const wrapper = mount(<TextField { ...initialProps } description="I am a description"/>);
+
+      expect(wrapper.find('HelpBlock')).toHaveLength(1);
+      expect(wrapper.find('HelpBlock').text()).toEqual('I am a description');
+    });
   });
 
   describe('<TextareaField />', () => {

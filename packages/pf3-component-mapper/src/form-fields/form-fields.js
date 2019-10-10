@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormControl, HelpBlock, Checkbox, FormGroup, ControlLabel } from 'patternfly-react';
+import { FormControl, HelpBlock, Checkbox, FormGroup, ControlLabel, FieldLevelHelp } from 'patternfly-react';
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 import { validationError } from './helpers';
 import MultipleChoiceList from './multiple-choice-list';
@@ -69,9 +69,9 @@ const selectComponent = ({
   [componentTypes.DATE_PICKER]: () => <DateTimePicker onChange={ input.onChange } isDisabled={ isDisabled } { ...rest } />,
 })[componentType];
 
-const renderHelperText = (error, helperText) => (error // eslint-disable-line no-nested-ternary
+const renderHelperText = (error, description) => (error // eslint-disable-line no-nested-ternary
   ? <HelpBlock>{ error }</HelpBlock>
-  : helperText ? <HelpBlock>{ helperText }</HelpBlock> : null);
+  : description ? <HelpBlock>{ description }</HelpBlock> : null);
 
 const FinalFormField = ({
   meta,
@@ -90,10 +90,10 @@ const FinalFormField = ({
       { label && !hideLabel && !noCheckboxLabel &&
           <ControlLabel>
             { rest.isRequired ? <RequiredLabel label={ label } /> : label }
+            { helperText && <FieldLevelHelp content={ helperText } /> }
           </ControlLabel> }
       { selectComponent({ ...rest, invalid, label })() }
-      { description && <HelpBlock style={{ color: '#767676' }}>{ description }</HelpBlock> }
-      { renderHelperText(invalid && meta.error, helperText) }
+      { renderHelperText(invalid && meta.error, description) }
     </FormGroup>
   );
 };
