@@ -5,7 +5,7 @@ import customStyles from './select-styles';
 import isEqual from 'lodash/isEqual';
 import './react-select.scss';
 
-const prepareFunction = (fn = '') => fn.toString().replace(/\s+/g, ' ');
+const fnToString = (fn = '') => fn.toString().replace(/\s+/g, ' ');
 
 const ValueContainer = ({ children, ...props }) => {
   if (props.isMulti) {
@@ -41,10 +41,16 @@ class Select extends Component {
     this.setState({ isLoading: true });
 
     return loadOptions()
-    .then((data) => this.setState({
-      options: data,
-      isLoading: false,
-    }));
+    .then((data) => {
+      if (!data.map(({ value }) => value).includes(this.props.input.value)) {
+        this.props.input.onChange(undefined);
+      }
+
+      return this.setState({
+        options: data,
+        isLoading: false,
+      });
+    });
   }
 
   componentDidMount(){
@@ -57,10 +63,14 @@ class Select extends Component {
 
   componentDidUpdate(prevProps) {
     if (!isEqual(this.props.options, prevProps.options)) {
+      if (!this.props.options.map(({ value }) => value).includes(this.props.input.value)) {
+        this.props.input.onChange(undefined);
+      }
+
       this.setState({ options: this.props.options });
     }
 
-    if (this.props.loadOptions && prepareFunction(this.props.loadOptions) !== prepareFunction(prevProps.loadOptions)){
+    if (this.props.loadOptions && fnToString(this.props.loadOptions) !== fnToString(prevProps.loadOptions)){
       return this.updateOptions();
     }
   }
