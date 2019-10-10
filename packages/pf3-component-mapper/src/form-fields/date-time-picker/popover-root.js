@@ -6,7 +6,6 @@ import YearSelector from './year-selector';
 import TimePicker from './time-picker';
 import DayPicker from 'react-day-picker/DayPicker';
 import MomentLocaleUtils from 'react-day-picker/moment';
-import 'react-day-picker/lib/style.css';
 import './date-picker-styles.scss';
 
 const PopoverRoot = ({

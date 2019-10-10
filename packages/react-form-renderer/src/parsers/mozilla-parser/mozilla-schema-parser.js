@@ -1,4 +1,4 @@
-import setWith from 'lodash/setWith';
+import { setWith } from 'lodash';
 import { components, validators } from '../../constants';
 import {
   validatorBuilder,

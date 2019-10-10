@@ -69,3 +69,6 @@ packages/react-renderer-demo/public/vendor.css
 
 # Firebase
 .firebase
+
+# Rollup build info
+**/size-snapshot.json
