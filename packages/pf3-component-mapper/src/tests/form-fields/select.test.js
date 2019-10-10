@@ -4,6 +4,7 @@ import { SelectField } from '../../form-fields/form-fields';
 import SelectPF3 from '../../form-fields/select/index';
 import { mount } from 'enzyme';
 import Select from 'react-select';
+import isEqual from 'lodash/isEqual';
 
 describe('<SelectField />', () => {
   let initialProps;
@@ -82,5 +83,46 @@ describe('<SelectField />', () => {
       [{ value: 2, label: 'x' }, { value: 1, label: 'a' }],
     );
     expect(changeSpy).toHaveBeenCalledWith([ 2, 1 ]);
+  });
+
+  it('should change the options when options prop is changed', () => {
+    const wrapper = mount(<SelectField { ...initialProps } />);
+
+    let innerSelectProps = wrapper.find(Select).props().options;
+
+    expect(isEqual(innerSelectProps, initialProps.options)).toEqual(true);
+
+    const NEW_OPTIONS = [{ label: 'Different label', value: 'Different value' }];
+    wrapper.setProps({ options: NEW_OPTIONS });
+    wrapper.update();
+    innerSelectProps = wrapper.find(Select).props().options;
+
+    expect(isEqual(innerSelectProps, NEW_OPTIONS)).toEqual(true);
+  });
+
+  it.only('should change the options when loadOptions prop is changed', (done) => {
+    const INITIAL_OPTIONS = [{ label: 'asyncLabel' }];
+    const asyncLoading = () => Promise.resolve(INITIAL_OPTIONS);
+    const wrapper = mount(<SelectField { ...initialProps } loadOptions={ asyncLoading }/>);
+
+    setImmediate(() => {
+      wrapper.update();
+      let innerSelectProps = wrapper.find(Select).props().options;
+
+      expect(isEqual(innerSelectProps, INITIAL_OPTIONS)).toEqual(true);
+
+      const NEW_OPTIONS = [{ label: 'Different label', value: 'Different value' }];
+      const asyncLoadingNew = () => Promise.resolve(NEW_OPTIONS);
+
+      wrapper.setProps({ loadOptions: asyncLoadingNew });
+
+      setImmediate(() => {
+        wrapper.update();
+        innerSelectProps = wrapper.find(Select).props().options;
+
+        expect(isEqual(innerSelectProps, NEW_OPTIONS)).toEqual(true);
+        done();
+      });
+    });
   });
 });
