@@ -5,6 +5,8 @@ import PickerInput from './picker-input';
 import PopoverRoot from './popover-root';
 import { createDisabledDays } from './helpers';
 
+import 'react-day-picker/lib/style.css';
+
 const selectValidDate = (newDate, disabledDays) => {
   const { after, before } = disabledDays.find(item => typeof item === 'object' && !(item instanceof Date)) || {};
   if (before && newDate < before) {

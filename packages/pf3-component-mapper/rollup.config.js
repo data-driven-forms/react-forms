@@ -5,8 +5,8 @@ import replace from 'rollup-plugin-replace';
 import nodeGlobals from 'rollup-plugin-node-globals';
 import { terser } from 'rollup-plugin-terser';
 import { sizeSnapshot } from 'rollup-plugin-size-snapshot';
-import sass from 'rollup-plugin-sass';
 import async from 'rollup-plugin-async';
+import postcss from 'rollup-plugin-postcss';
 
 const globals = {
   react: 'React',
@@ -51,8 +51,8 @@ export default [{
       keep_classnames: true,
       keep_fnames: true,
     }),
-    sass({
-      insert: true,
+    postcss({
+      inject: true,
     }),
   ],
 }];
