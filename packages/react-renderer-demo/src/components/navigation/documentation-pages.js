@@ -1,10 +1,6 @@
 export const docs = [{
   component: 'installation',
   linkText: 'Installation',
-  prev: {
-    link: '/live-editor',
-    label: 'Live Form Editor',
-  },
 }, {
   component: 'get-started',
   linkText: 'Getting started',
@@ -35,8 +31,4 @@ export const docs = [{
 }, {
   component: 'form-controls',
   linkText: 'Form buttons',
-  next: {
-    link: '/component-example/checkbox',
-    label: 'Checkbox',
-  },
 }];

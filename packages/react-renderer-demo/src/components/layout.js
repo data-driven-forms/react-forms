@@ -11,10 +11,14 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import { useRouter } from 'next/router';
 
+import { flatSchema } from './navigation/schema';
 import GhIcon from './common/gh-svg-icon';
 import Navigation from './navigation/app-navigation';
 import MapperContext from './mappers-context';
 import MuiWizzard from '../components/missing-demo-fields/mui-wizard/mui-wizard';
+import MenuContext from './navigation/menu-context';
+import findConnectedLinks from './navigation/find-connected-links';
+import ConnectedLinks from './common/connected-links';
 
 const drawerWidth = 240;
 
@@ -115,6 +119,7 @@ const Layout = ({ children }) => {
   const router = useRouter();
   const [ open, setOpen ] = useState(router.pathname !== '/');
   const [ mappers, setMappers ] = useState({ loaded: false, mappers: {}});
+  const [ links, setLinks ] = useState({});
   const searchRef = useRef(null);
 
   useEffect(() => {
@@ -138,6 +143,10 @@ const Layout = ({ children }) => {
     }}}));
   }, []);
 
+  useEffect(() => {
+    setLinks(findConnectedLinks(router.asPath, flatSchema) || {});
+  }, [ router.asPath ]);
+
   const handleDrawerOpen = () => {
     setOpen(true);
     setTimeout(() => searchRef.current.focus(), 500);
@@ -150,63 +159,66 @@ const Layout = ({ children }) => {
   const pathname = router.pathname;
   return (
     <MapperContext.Provider value={ mappers }>
-      <div className={ classes.root }>
-        <Toolbar
-          className={ clsx(classes.appBar, classes.toolbarOverride, {
-            [classes.appBarShift]: open,
-          }) }>
+      <MenuContext.Provider value={ links }>
+        <div className={ classes.root }>
+          <Toolbar
+            className={ clsx(classes.appBar, classes.toolbarOverride, {
+              [classes.appBarShift]: open,
+            }) }>
 
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={ handleDrawerOpen }
-            edge="start"
-            className={ clsx(classes.menuButton, open && classes.hide) }
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={ handleDrawerOpen }
+              edge="start"
+              className={ clsx(classes.menuButton, open && classes.hide) }
+            >
+              <MenuIcon className={ classes.menuIcons } />
+            </IconButton>
+          </Toolbar>
+          <Drawer
+            className={ classes.drawer }
+            variant="persistent"
+            anchor="left"
+            open={ open }
+            classes={{
+              paper: classes.drawerPaper,
+            }}
           >
-            <MenuIcon className={ classes.menuIcons } />
-          </IconButton>
-        </Toolbar>
-        <Drawer
-          className={ classes.drawer }
-          variant="persistent"
-          anchor="left"
-          open={ open }
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-          <Navigation searchRef={ searchRef } closeNav={ handleDrawerClose }/>
-          <Divider />
-        </Drawer>
+            <Navigation searchRef={ searchRef } closeNav={ handleDrawerClose }/>
+            <Divider />
+          </Drawer>
 
-        <main
-          className={ clsx(classes.content, {
-            [classes.contentShift]: open,
-            [classes.mainGradient]: pathname === '/',
-            [classes.mainGradientShift]: pathname === '/' && open,
-          }) }
-        >
-          <div className={ clsx(classes.drawerHeader, classes.appBar, classes.rightAppBar, {
-            [classes.appBarShift]: open,
-          }) }>
-            <a href="https://github.com/data-driven-forms/react-forms" rel="noopener noreferrer" target="_blank">
-              <IconButton
-                color="inherit"
-                aria-label="gh repository"
-                edge="start"
-                className={ clsx(classes.menuButton) }
-              >
-                <SvgIcon>
-                  <GhIcon className={ classes.menuIcons } />
-                </SvgIcon>
-              </IconButton>
-            </a>
-          </div>
-          <div className={ classes.contentWrapper }>
-            { children }
-          </div>
-        </main>
-      </div>
+          <main
+            className={ clsx(classes.content, {
+              [classes.contentShift]: open,
+              [classes.mainGradient]: pathname === '/',
+              [classes.mainGradientShift]: pathname === '/' && open,
+            }) }
+          >
+            <div className={ clsx(classes.drawerHeader, classes.appBar, classes.rightAppBar, {
+              [classes.appBarShift]: open,
+            }) }>
+              <a href="https://github.com/data-driven-forms/react-forms" rel="noopener noreferrer" target="_blank">
+                <IconButton
+                  color="inherit"
+                  aria-label="gh repository"
+                  edge="start"
+                  className={ clsx(classes.menuButton) }
+                >
+                  <SvgIcon>
+                    <GhIcon className={ classes.menuIcons } />
+                  </SvgIcon>
+                </IconButton>
+              </a>
+            </div>
+            <div className={ classes.contentWrapper }>
+              { children }
+              <ConnectedLinks />
+            </div>
+          </main>
+        </div>
+      </MenuContext.Provider>
 
     </MapperContext.Provider>
   );

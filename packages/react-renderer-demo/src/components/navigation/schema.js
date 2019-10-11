@@ -1,6 +1,7 @@
 import { baseExamples } from './examples-definitions';
 import otherExamples from './other-pages/';
 import { docs } from './documentation-pages';
+import flatMap from 'lodash/flatMap';
 
 const schema =  [
   {
@@ -14,6 +15,7 @@ const schema =  [
   {
     title: 'React form renderer',
     link: 'renderer',
+    noRoute: true,
     fields: [
       ...docs,
     ],
@@ -21,6 +23,7 @@ const schema =  [
   {
     title: 'Component definitions',
     link: 'component-example',
+    noRoute: true,
     fields: [
       ...baseExamples.sort((a, b) => a.linkText.localeCompare(b.linkText)),
     ],
@@ -28,54 +31,48 @@ const schema =  [
   {
     title: 'Others',
     link: 'others',
+    noRoute: true,
     fields: [
       ...otherExamples,
     ],
   },
 ];
 
-const generateLinks = (data, prevLink, prefix = '', escapeLink) =>  data.map((item, index) => {
-  let result = { ...item };
-  if (result.fields) {
-    result.fields = generateLinks(
-      result.fields,
-      {
-        link: `/${result.link || result.component}`,
-        label: result.linkText || result.title,
-      },
-      `/${result.link || result.component}`,
-      data[index + 1] ? {
-        link: `${prefix}/${data[index + 1].link || data[index + 1].component}`,
-        label: data[index + 1].linkText || data[index + 1].title,
-      } : undefined
-    );
-  }
+const getNextLink = (item, itemIndex, source) => {
+  const nextIndex = itemIndex + 1;
+  const nextItem = (nextIndex < source.length && source[nextIndex].noRoute) ?
+    (nextIndex + 1 < source.length) ? source[nextIndex + 1] : {} : source[nextIndex] || {};
 
-  if (index > 0 && !result.prev) {
-    result.prev = {
-      link: `${prefix}/${data[index - 1].link || data[index - 1].component}`,
-      label: data[index - 1].linkText || data[index - 1].title,
-    };
-  }
+  return {
+    link: nextItem.link,
+    label: nextItem.linkText || nextItem.title,
+  };
+};
 
-  if (!result.prev) {
-    result.prev = prevLink;
-  }
+const getPrevLink = (item, itemIndex, source) => {
+  const prevIndex = itemIndex - 1;
+  const prevItem = (prevIndex >= 0 && source[prevIndex].noRoute) ?
+    (prevIndex - 1 >= 0) ? source[prevIndex - 1] : {} : source[prevIndex] || {};
 
-  if (data[index + 1] && !result.next) {
-    result.next = {
-      link: `${prefix}/${data[index + 1].link || data[index + 1].component}`,
-      label: data[index + 1].linkText || data[index + 1].title,
-    };
-  }
+  return {
+    link: prevItem.link,
+    label: prevItem.linkText || prevItem.title,
+  };
+};
 
-  if (index === data.length - 1 && escapeLink && !result.next) {
-    result.next = escapeLink;
-  }
+export const flatSchema = flatMap(schema, item => item.fields ? [ item, ...item.fields.map(child => {
+  child.link = child.link || child.component;
+  return ({
+    ...child,
+    link: `${item.link}${child.link.match(/^\?/) ? '' : '/'}${child.link}` });
+}),
+] : [ item ]).reduce((acc, curr, currentIndex, source) => ([
+  ...acc,
+  {
+    ...curr,
+    prev: getPrevLink(curr, currentIndex, source),
+    next: getNextLink(curr, currentIndex, source),
+  },
+]), []);
 
-  return result;
-});
-
-const links = generateLinks(schema);
-
-export default links;
+export default schema;
