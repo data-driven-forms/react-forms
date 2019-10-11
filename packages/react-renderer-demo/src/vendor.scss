@@ -14524,4 +14524,209 @@ padding-bottom: 16px;
   display: -ms-flexbox;
   display: flex;
 }
+
+.pficon {
+  display: inline-block;
+  font-family: "PatternFlyIcons-webfont";
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 1;
+  speak: none;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pficon-info:before {
+  content: "\e92b";
+}
+
+.popover-pf-info {
+  color: #292e34;
+}
+.popover-pf-info:hover,
+.popover-pf-info:active {
+  color: #00659c;
+}
+}
+
+@font-face {
+  font-family: 'PatternFlyIcons-webfont';
+  src: url('fonts/PatternFlyIcons-webfont.woff2') format('woff2'),
+      url('fonts/PatternFlyIcons-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.popover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1060;
+  display: none;
+  max-width: 220px;
+  padding: 1px;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.66666667;
+  line-break: auto;
+  text-align: left;
+  text-align: start;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  letter-spacing: normal;
+  word-break: normal;
+  word-spacing: normal;
+  word-wrap: normal;
+  white-space: normal;
+  font-size: 12px;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  border: 1px solid #bbb;
+  border-radius: 1px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+.popover.top {
+  margin-top: -10px;
+}
+.popover.right {
+  margin-left: 10px;
+}
+.popover.bottom {
+  margin-top: 10px;
+}
+.popover.left {
+  margin-left: -10px;
+}
+.popover > .arrow {
+  border-width: 11px;
+}
+.popover > .arrow,
+.popover > .arrow:after {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+.popover > .arrow:after {
+  content: "";
+  border-width: 10px;
+}
+.popover.top > .arrow {
+  bottom: -11px;
+  left: 50%;
+  margin-left: -11px;
+  border-top-color: #999999;
+  border-top-color: #bbb;
+  border-bottom-width: 0;
+}
+.popover.top > .arrow:after {
+  bottom: 1px;
+  margin-left: -10px;
+  content: " ";
+  border-top-color: #fff;
+  border-bottom-width: 0;
+}
+.popover.right > .arrow {
+  top: 50%;
+  left: -11px;
+  margin-top: -11px;
+  border-right-color: #999999;
+  border-right-color: #bbb;
+  border-left-width: 0;
+}
+.popover.right > .arrow:after {
+  bottom: -10px;
+  left: 1px;
+  content: " ";
+  border-right-color: #fff;
+  border-left-width: 0;
+}
+.popover.bottom > .arrow {
+  top: -11px;
+  left: 50%;
+  margin-left: -11px;
+  border-top-width: 0;
+  border-bottom-color: #999999;
+  border-bottom-color: #bbb;
+}
+.popover.bottom > .arrow:after {
+  top: 1px;
+  margin-left: -10px;
+  content: " ";
+  border-top-width: 0;
+  border-bottom-color: #fff;
+}
+.popover.left > .arrow {
+  top: 50%;
+  right: -11px;
+  margin-top: -11px;
+  border-right-width: 0;
+  border-left-color: #999999;
+  border-left-color: #bbb;
+}
+.popover.left > .arrow:after {
+  right: 1px;
+  bottom: -10px;
+  content: " ";
+  border-right-width: 0;
+  border-left-color: #fff;
+}
+.popover-title {
+  padding: 8px 14px;
+  margin: 0;
+  font-size: 12px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #e8e8e8;
+  border-radius: 0px 0px 0 0;
+}
+.popover-content {
+  padding: 9px 14px;
+}
+
+.popover {
+  box-shadow: 0 2px 2px rgba(3, 3, 3, 0.08);
+  padding: 0;
+}
+.popover.bottom .popover-title:before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  -ms-transform: translateX(-50%);
+      transform: translateX(-50%);
+  border-top-width: 0;
+  border-width: 10px;
+  border-color: transparent;
+  border-bottom-color: #f5f5f5;
+  border-style: solid;
+}
+.popover-content {
+  color: #4d5258;
+  line-height: 18px;
+  padding: 10px 14px;
+}
+.popover-title {
+  border-bottom: none;
+  border-radius: 0;
+  color: #4d5258;
+  font-size: 13px;
+  font-weight: 700;
+  min-height: 34px;
+}
+.popover-title .close {
+  height: 22px;
+  position: absolute;
+  right: 8px;
+  top: 6px;
+}
+.popover-title.closable {
+  padding-right: 30px;
 }
