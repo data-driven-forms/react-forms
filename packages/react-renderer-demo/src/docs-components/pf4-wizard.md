@@ -14,6 +14,7 @@ Don't forget hide form controls by settinng \`showFormControls\` to \`false\` as
 | setFullWidth  | bool  | undefined  | see Patternfly  |
 | setFullHeight  | bool  | undefined  | see Patternfly  |
 | isDynamic  | bool  | undefined  | will dynamically generate steps navigation (=progressive wizard), please use if you use any condition fields which changes any field in other steps (wizards with conditional steps are dynamic by default) |
+|showTitles|bool|undefined|If true, step titles will be shown in the wizard body|
 
 ### Default buttonLabels
 
@@ -44,7 +45,10 @@ You can rewrite only selection of them, e.g.
 | fields  | array | As usual |
 | substep | string | Substep title (steps are grouped by this title) |
 | title | string | Step title |
-| buttons | node, func | Custom buttons component
+| buttons | node, func | Custom buttons component|
+|showTitle|bool|If true, step titles will (not if false) be shown in the wizard body|
+|Custom title|node|Use if you want to render as the title different/custom title (for example, title with a popover|
+
 
 - nextStep can be stepKey of the next step
 - or you can branch the way by using of object:

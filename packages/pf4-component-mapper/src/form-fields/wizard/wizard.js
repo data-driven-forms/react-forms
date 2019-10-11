@@ -161,7 +161,7 @@ class Wizard extends React.Component {
     }
 
     const {
-      title, description, FieldProvider, formOptions, buttonLabels, buttonsClassName, inModal, setFullWidth, setFullHeight, isCompactNav,
+      title, description, FieldProvider, formOptions, buttonLabels, buttonsClassName, inModal, setFullWidth, setFullHeight, isCompactNav, showTitles,
     } = this.props;
     const { activeStepIndex, navSchema, maxStepIndex } = this.state;
 
@@ -184,6 +184,7 @@ class Wizard extends React.Component {
         buttonLabels={ buttonLabels }
         FieldProvider={ FieldProvider }
         buttonsClassName={ buttonsClassName }
+        showTitles={ showTitles }
       />);
 
     const createStepsMap = () => navSchema
@@ -266,6 +267,7 @@ Wizard.propTypes = {
   setFullWidth: PropTypes.bool,
   setFullHeight: PropTypes.bool,
   isDynamic: PropTypes.bool,
+  showTitles: PropTypes.bool,
 };
 
 const defaultLabels = {
