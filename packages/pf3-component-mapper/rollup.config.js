@@ -23,9 +23,14 @@ const babelOptions = {
 
 const commonjsOptions = {
   ignoreGlobal: true,
-  include: /node_modules/,
+  include: [
+    /node_modules/,
+    '../../node_modules/**',
+
+  ],
   namedExports: {
     '../react-form-renderer/dist/index.js': [ 'composeValidators' ],
+    '../../node_modules/react-day-picker/DayPicker.js': [ 'DayPicker' ],
   },
 };
 
@@ -42,8 +47,8 @@ export default [{
   plugins: [
     async(),
     nodeResolve(),
-    babel(babelOptions),
     commonjs(commonjsOptions),
+    babel(babelOptions),
     nodeGlobals(), // Wait for https://github.com/cssinjs/jss/pull/893
     replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
     sizeSnapshot({ snapshotPath: 'size-snapshot.json' }),
