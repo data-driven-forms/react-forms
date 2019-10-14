@@ -43,7 +43,7 @@ You can rewrite only selection of them, e.g.
 | stepKey  | string, number | For first step: 1, otherwise anything |
 | nextStep  | object/stepKey of next step | See below |
 | fields  | array | As usual |
-| substep | string | Substep title (steps are grouped by this title) |
+| substepOf | string | Substep title (steps are grouped by this title) |
 | title | string | Step title |
 | buttons | node, func | Custom buttons component|
 |showTitle|bool|If true, step titles will (not if false) be shown in the wizard body|
@@ -102,7 +102,7 @@ The components receives these props:
 
 ### How to do substeps
 
-Field in Wizard fields should contain `substep` <`string`> which is title of the primary step. Steps with the same substep are grouped together by the title of primary step.
+Field in Wizard fields should contain `substepOf` <`string`> which is title of the primary step. Steps with the same substepOf are grouped together by the title of primary step.
 
 #### Example
 
@@ -128,12 +128,12 @@ Schema: [
     stepKey: 'security',
     title: 'Security',
     nextStep: 'credentials',
-    substep: 'Configuration'
+    substepOf: 'Configuration'
   },{
     stepKey: 'credentials',
     title: 'Credentials',
     nextStep: 'summary',
-    substep: 'Configuration'
+    substepOf: 'Configuration'
   },{
     stepKey: 'summary',
     title: 'Summary'
@@ -141,7 +141,7 @@ Schema: [
 ]
 ```
 
-Progressive Wizard works same way. It checks if previous step has the same \`substep\` value and if so, it grouped them together.
+Progressive Wizard works same way. It checks if previous step has the same \`substepOf\` value and if so, it grouped them together.
 If the value is different, a new primary step is created with the step as a substep.
 
 ### First step
