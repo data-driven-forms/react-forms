@@ -429,6 +429,7 @@ const output = {
                   label: 'Datepicker with past days',
                   title: 'Datepicker with past days',
                   component: components.DATE_PICKER,
+                  variant: 'date-time',
                 },
               ],
               component: components.SUB_FORM,
