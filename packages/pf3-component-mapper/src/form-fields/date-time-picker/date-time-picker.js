@@ -7,6 +7,12 @@ import { createDisabledDays } from './helpers';
 
 import 'react-day-picker/lib/style.css';
 
+const getPlaceholder = (variant, placeholder) => placeholder
+  ? placeholder
+  : variant === 'date'
+    ? 'Click in this input to select date'
+    : 'Click in this input to select date and time';
+
 const selectValidDate = (newDate, disabledDays) => {
   const { after, before } = disabledDays.find(item => typeof item === 'object' && !(item instanceof Date)) || {};
   if (before && newDate < before) {
@@ -110,12 +116,13 @@ export class DateTimePicker extends React.Component {
       disabledDays,
       isClearable,
     } = this.props;
+    const inputPlaceholder = getPlaceholder(variant, placeholder);
     const cleanDisabledDays = createDisabledDays(disabledDays);
     return (
       <div style={{ position: 'relative' }} ref={ this.wrapperRef } >
         <PickerInput
           handleOverlayToggle={ this.handleOverlayToggle }
-          placeholder={ placeholder }
+          placeholder={ inputPlaceholder }
           selectedDay={ selectedDay }
           variant={ variant }
           locale={ locale }
@@ -171,7 +178,6 @@ DateTimePicker.propTypes = {
 DateTimePicker.defaultProps = {
   variant: 'date',
   locale: 'en',
-  placeholder: 'Click in this input to select date',
   showTodayButton: true,
   todayButtonLabel: 'Today',
   closeOnDaySelect: false,
