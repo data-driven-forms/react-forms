@@ -6,6 +6,9 @@ export const docs = [{
     label: 'Live Form Editor',
   },
 }, {
+  component: 'development-setup',
+  linkText: 'Development setup',
+}, {
   component: 'get-started',
   linkText: 'Getting started',
 }, {

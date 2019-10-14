@@ -1,6 +1,6 @@
 [![Data Driven Form logo](images/logo.png)](https://data-driven-forms.org/)
 
-Patternfly 3 component mapper for [Data Driven Forms](https://github.com/data-driven-forms/react-forms).
+Material-UI component mapper for [Data Driven Forms](https://github.com/data-driven-forms/react-forms).
 
 :book: For more information please visit the [documentation](https://data-driven-forms.org/). :book:
 
@@ -10,7 +10,7 @@ Used by [ManageIQ](http://manageiq.org/), Red Hat Cloud Services.
 
 - [Installation](#installation)
   - [React Form Renderer](#react-form-renderer)
-  - [PatternFly 3 Mapper](#patternfly-3-mapper)
+  - [MUI mapper](#mui-mapper)
 - [Usage](#usage)
 - [Basic provided components](#basic-provided-components)
 - [Useful links](#useful-links)
@@ -37,14 +37,14 @@ $ yarn add @data-driven-forms/react-form-renderer
 
 Optionally you can install one of provided mappers:
 
-#### [PatternFly 3 Mapper](https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper)
+#### [MUI mapper](https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper)
 
 ```console
-$ npm install @data-driven-forms/pf3-component-mapper -S
+$ npm install @data-driven-forms/mui-component-mapper -S
 ```
 
 ```console
-$ yarn add @data-driven-forms/pf3-component-mapper
+$ yarn add @data-driven-forms/mui-component-mapper
 ```
 
 
@@ -55,7 +55,7 @@ For using Data Driven Forms in your component you need the renderer and a compon
 ```jsx
 import React from 'react';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
-import { formFieldsMapper, layoutMapper } from '@data-driven-forms/pf3-component-mapper';
+import { formFieldsMapper, layoutMapper } from '@data-driven-forms/mui-component-mapper';
 
 const schema = {
   fields: [{
@@ -95,12 +95,11 @@ Data Driven Forms supports all kinds of component, basic set is consisted of:
 ### Useful links
 
 - [Data Driven Forms documentation](https://data-driven-forms.org/)
-- [PatternFly 3 Design documentation](https://www.patternfly.org/v3/)
+- [Material-UI documentation](https://material-ui.com/)
 - NPM
   - [React Form Renderer](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)
-  - [PatternFly 3 Mapper](https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper)
-- Examples of schemas (PatternFly 3)
-  - [ManageIQ Form Components](https://github.com/ManageIQ/manageiq-ui-classic/tree/master/app/javascript/components)
+  - [MaterialUI Mapper](https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper)
+
 
 ### Development setup
 
@@ -123,7 +122,7 @@ yarn build
 Each package has a small playground `package/demo`, where you can test your changes.
 
 ```console
-cd packages/pf3-component-mapper
+cd packages/mui-component-mapper
 yarn start
 ```
 
@@ -143,7 +142,7 @@ Tests needed to be run from the core folder.
 ```console
 yarn test
 
-yarn test packages/pf3-component-mapper
+yarn test packages/mui-component-mapper
 ```
 
 #### Commits
@@ -155,7 +154,7 @@ Format:
 ```
 [type]([package]): message
 
-fix(pf3): title accepts node
+fix(mui): title accepts node
 ```
 
 Types:
