@@ -9,7 +9,7 @@ Simillarly to <NavLink to='/renderer/field-provider'>FieldProvider</NavLink> Dat
 
 #### Using FieldArrayProvider
 
-Each component receives as a prop `FieldArrayProvider`. You can wrap you component into it and they you have an access to all functionallity.
+Component mapped to `componentTypes.FIELD_ARRAY` (`field_array`) receives as a prop `FieldArrayProvider`. You can wrap your component into it and they you have an access to all functionallity.
 
 <RawComponent source="field-array/form-fields-mapper" />
 
