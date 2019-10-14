@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 const SubForm = ({
@@ -6,12 +6,15 @@ const SubForm = ({
   fields,
   title,
   description,
+  FieldProvider: _FieldProvider,
+  validate: _validate,
+  ...rest
 }) => (
-  <Fragment>
+  <div { ...rest }>
     { title && <h3>{ title }</h3> }
     { description && <p>{ description }</p> }
     { formOptions.renderForm(fields, formOptions) }
-  </Fragment>
+  </div>
 );
 
 SubForm.propTypes = {
@@ -22,6 +25,8 @@ SubForm.propTypes = {
   ]).isRequired,
   title: PropTypes.string,
   description: PropTypes.string,
+  FieldProvider: PropTypes.any,
+  validate: PropTypes.any,
 };
 
 export default SubForm;

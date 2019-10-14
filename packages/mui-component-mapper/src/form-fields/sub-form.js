@@ -8,8 +8,11 @@ const SubForm = ({
   fields,
   title,
   description,
+  FieldProvider: _FieldProvider,
+  validate: _validate,
+  ...rest
 }) => (
-  <Grid item xs={ 12 } container style={{ paddingRight: 0, paddingLeft: 0 }}>
+  <Grid item xs={ 12 } container style={{ paddingRight: 0, paddingLeft: 0 }} { ...rest }>
     { title && <Grid item xs={ 12 }><Typography variant="h5">{ title }</Typography></Grid> }
     { description && <Grid item xs={ 12 }><Typography paragraph>{ description }</Typography></Grid> }
     <Grid item xs={ 12 } container>
@@ -26,6 +29,8 @@ SubForm.propTypes = {
   ]).isRequired,
   title: PropTypes.string,
   description: PropTypes.string,
+  FieldProvider: PropTypes.any,
+  validate: PropTypes.any,
 };
 
 export default SubForm;
