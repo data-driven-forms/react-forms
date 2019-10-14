@@ -34,6 +34,7 @@ export const wizardSchema = {
     name: 'wizzard',
     //inModal: true,
     title: 'Title',
+    showTitles: true,
     description: 'Description',
     buttonsPosition: 'left',
     fields: [{
@@ -91,6 +92,7 @@ export const wizardSchema = {
       title: 'Configure google',
       name: 'step-3',
       nextStep: 'summary',
+      showTitle: false,
       fields: [{
         component: componentTypes.TEXT_FIELD,
         name: 'google.google-field',
@@ -162,6 +164,7 @@ export const wizardSchemaSubsteps = {
     buttonsPosition: 'left',
     fields: [{
       title: 'Get started with adding source',
+      showTitle: true,
       name: 'step-1',
       stepKey: 1,
       nextStep: 'aws',

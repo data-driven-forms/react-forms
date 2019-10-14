@@ -76,7 +76,7 @@ exports[`<WizardStep /> should render custom description 1`] = `
 </Fragment>
 `;
 
-exports[`<WizardStep /> should render custom title 1`] = `
+exports[`<WizardStep /> should render title with showTitle 1`] = `
 <Fragment>
   <WizardBody
     hasBodyPadding={true}
@@ -84,6 +84,13 @@ exports[`<WizardStep /> should render custom title 1`] = `
     <div
       className="pf-c-form"
     >
+      <RenderTitle
+        title={
+          <div>
+            title
+          </div>
+        }
+      />
       <div
         key="foo"
       >
