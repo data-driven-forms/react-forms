@@ -149,18 +149,18 @@ const output = {
                   label: 'Check Box',
                   title: 'Check Box',
                   component: components.CHECKBOX,
-                  'options': [
+                  options: [
                     {
-                      'label': 'Dog',
+                      label: 'Dog',
                       value: '1',
                     },
                     {
-                      'label': 'Cats',
-                      'value': '2',
+                      label: 'Cats',
+                      value: '2',
                     },
                     {
-                      'label': 'Hamsters',
-                      'value': '3',
+                      label: 'Hamsters',
+                      value: '3',
                     },
                   ],
                 },
@@ -398,6 +398,18 @@ const output = {
               title: 'Datepickers',
               key: '642',
               fields: [
+                {
+                  component: components.SELECT,
+                  name: 'date_control_select',
+                  label: 'Select',
+                  options: [{
+                    value: 'foo',
+                    label: 'Foo',
+                  }, {
+                    value: 'bar',
+                    label: 'Bar',
+                  }],
+                },
                 {
                   name: 'date_control_1',
                   label: 'Datepicker',
