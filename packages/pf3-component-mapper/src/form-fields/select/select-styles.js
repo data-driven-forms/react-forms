@@ -107,6 +107,7 @@ const customStyles = {
     paddingTop: isSearchable ? 36 : 5,
     paddingBottom: 5,
     marginTop: 1,
+    zIndex: 3,
   }),
   control: provided => ({
     ...provided,
