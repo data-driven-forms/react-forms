@@ -5,8 +5,8 @@ import replace from 'rollup-plugin-replace';
 import nodeGlobals from 'rollup-plugin-node-globals';
 import { terser } from 'rollup-plugin-terser';
 import { sizeSnapshot } from 'rollup-plugin-size-snapshot';
-import sass from 'rollup-plugin-sass';
 import async from 'rollup-plugin-async';
+import postcss from 'rollup-plugin-postcss';
 
 const globals = {
   react: 'React',
@@ -23,9 +23,14 @@ const babelOptions = {
 
 const commonjsOptions = {
   ignoreGlobal: true,
-  include: /node_modules/,
+  include: [
+    /node_modules/,
+    '../../node_modules/**',
+
+  ],
   namedExports: {
     '../react-form-renderer/dist/index.js': [ 'composeValidators' ],
+    '../../node_modules/react-day-picker/DayPicker.js': [ 'DayPicker' ],
   },
 };
 
@@ -42,8 +47,8 @@ export default [{
   plugins: [
     async(),
     nodeResolve(),
-    babel(babelOptions),
     commonjs(commonjsOptions),
+    babel(babelOptions),
     nodeGlobals(), // Wait for https://github.com/cssinjs/jss/pull/893
     replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
     sizeSnapshot({ snapshotPath: 'size-snapshot.json' }),
@@ -51,8 +56,8 @@ export default [{
       keep_classnames: true,
       keep_fnames: true,
     }),
-    sass({
-      insert: true,
+    postcss({
+      inject: true,
     }),
   ],
 }];

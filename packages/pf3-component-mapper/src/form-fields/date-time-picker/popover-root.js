@@ -4,7 +4,7 @@ import Navbar from './navbar';
 import MonthSelector from './month-selector';
 import YearSelector from './year-selector';
 import TimePicker from './time-picker';
-import DayPicker from 'react-day-picker/DayPicker';
+import * as DayPicker from 'react-day-picker/DayPicker';
 import MomentLocaleUtils from 'react-day-picker/moment';
 import './date-picker-styles.scss';
 
@@ -54,7 +54,7 @@ const PopoverRoot = ({
                     onPreviousClick={ () => yearChange(selectedDay ? selectedDay.getFullYear() - 1 : new Date().getFullYear() - 1) }
                   />)
                 :
-                <DayPicker
+                <DayPicker.DayPicker
                   onDayClick={ onDayClick }
                   selectedDays={ selectedDay }
                   month={ selectedDay }
