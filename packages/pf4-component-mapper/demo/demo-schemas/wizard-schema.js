@@ -7,7 +7,7 @@ const ValidateButtons = ({ disableBack, handlePrev, buttonLabels: { back, cancel
 
   const setValidating = () => {
     setState('validating');
-    setTimeout(() => setState('done'), 2000);
+    setTimeout(() => setState('done'), 0);
   };
 
   return (
@@ -97,6 +97,9 @@ export const wizardSchema = {
         component: componentTypes.TEXT_FIELD,
         name: 'google.google-field',
         label: 'Google field part',
+        validate: [{
+          type: validatorTypes.REQUIRED,
+        }],
       }],
     }, {
       fields: [{
@@ -201,6 +204,7 @@ export const wizardSchemaSubsteps = {
 export const wizardSchemaMoreSubsteps = {
   fields: [{
     component: componentTypes.WIZARD,
+    isDynamic: true,
     name: 'wizzard',
     title: 'Title',
     description: 'Description',

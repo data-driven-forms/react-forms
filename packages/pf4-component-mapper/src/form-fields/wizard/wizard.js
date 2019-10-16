@@ -21,21 +21,13 @@ class Wizard extends React.Component {
     // find if wizard contains any dynamic steps (nextStep is mapper object)
     const isDynamic = this.props.isDynamic ? true : this.props.fields.find(({ nextStep }) => typeof nextStep === 'object') ? true : false;
 
-    // insert into navigation schema first step if dynamic, otherwise create the whole schema
-    // if the wizard is dynamic, the navigation is build progressively
-    const firstStep = this.props.fields.find(({ stepKey }) => stepKey === 1 || stepKey === '1');
-
-    const navSchema = isDynamic ?
-      [{ title: firstStep.title, index: 0, primary: true, substepOf: firstStep.substepOf }]
-      : this.createSchema();
-
     this.state = {
       activeStep: this.props.fields[0].stepKey,
       prevSteps: [],
       activeStepIndex: 0,
       maxStepIndex: 0,
       isDynamic, // wizard contains nextStep mapper
-      navSchema, // schema of navigation
+      navSchema: this.createSchema(),
       loading: true,
     };
   }
@@ -55,21 +47,6 @@ class Wizard extends React.Component {
     }
   }
 
-  insertDynamicStep = (nextStep, navSchema) => {
-    const { title, substepOf } = this.props.fields.find(({ stepKey }) => stepKey === nextStep);
-    const lastStep = navSchema[navSchema.length - 1];
-
-    return [
-      ...navSchema,
-      {
-        title,
-        substepOf,
-        index: lastStep.index + 1,
-        primary: (!substepOf) || (substepOf && substepOf !== lastStep.substepOf),
-      },
-    ];
-  }
-
   handleNext = (nextStep, getRegisteredFields) =>
     this.setState(prevState =>
       ({
@@ -78,7 +55,7 @@ class Wizard extends React.Component {
         prevSteps: prevState.prevSteps.includes(prevState.activeStep) ? prevState.prevSteps : [ ...prevState.prevSteps, prevState.activeStep ],
         activeStepIndex: prevState.activeStepIndex + 1,
         maxStepIndex: (prevState.activeStepIndex + 1) > prevState.maxStepIndex ? prevState.maxStepIndex + 1 : prevState.maxStepIndex,
-        navSchema: this.state.isDynamic ? this.insertDynamicStep(nextStep, prevState.navSchema) : prevState.navSchema,
+        navSchema: this.state.isDynamic ? this.createSchema() : prevState.navSchema,
       }));
 
   handlePrev = () => this.jumpToStep(this.state.activeStepIndex - 1);
@@ -116,11 +93,12 @@ class Wizard extends React.Component {
           activeStepIndex: index,
         }));
 
-      // jumping in dynamic form disables returning to back (!)
-      if (this.state.isDynamic) {
+      // jumping in dynamic form disables returning to back if jumped on compileMapper step (!)
+      if (this.state.isDynamic && typeof this.findCurrentStep(this.state.prevSteps[index]).nextStep === 'object') {
         this.setState((prevState) => ({
           navSchema: prevState.navSchema.slice(0, index + 1),
           prevSteps: prevState.prevSteps.slice(0, index + 1),
+          maxStepIndex: prevState.prevSteps.slice(0, index + 1).length,
         }));
       }
 
@@ -136,6 +114,7 @@ class Wizard extends React.Component {
 
   // builds schema used for generating of the navigation links
   createSchema = () => {
+    const { formOptions } = this.props;
     let schema = [];
     let field = this.props.fields.find(({ stepKey }) => stepKey === 1 || stepKey === '1'); // find first wizard step
     let index = 0;
@@ -149,7 +128,19 @@ class Wizard extends React.Component {
           primary: (!schema[schema.length - 1] || !field.substepOf || field.substepOf !== schema[schema.length - 1].substepOf) },
       ];
 
-      field = this.props.fields.find(({ stepKey }) => stepKey === field.nextStep);
+      let nextStep = field.nextStep;
+
+      if (typeof field.nextStep === 'object') {
+        const { values } = formOptions.getState();
+
+        nextStep = nextStep.stepMapper[get(values, nextStep.when)];
+      }
+
+      if (nextStep) {
+        field = this.props.fields.find(({ stepKey }) => stepKey === nextStep);
+      } else {
+        field = undefined;
+      }
     }
 
     return schema;
