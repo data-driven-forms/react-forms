@@ -63,10 +63,6 @@ Check the example below to see a simple implementation of layout components.
 |----|----|-----------|-----|------------|
 |children|node|Form field group||Based on form schema|
 
-#### Icon, Array Field Wrapper, Help Block
-TO DO when array field docs are done
-
-
 ## Creating formFieldsMapper
 
 Form fields mapper defines components that are rendered from input schema. Each component in mapper must have an unique key,
@@ -89,6 +85,7 @@ const componentTypes = {
   [componentTypes.SWITCH]: 'switch-field',
   [componentTypes.TEXTAREA]: 'textarea-field',
   [componentTypes.SELECT]: 'select-field',
+  [componentTypes.PLAIN_TEXT]: 'plain-text',
 }
 ```
 
