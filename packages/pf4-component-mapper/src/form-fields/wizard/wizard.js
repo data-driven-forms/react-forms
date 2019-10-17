@@ -59,10 +59,6 @@ class Wizard extends React.Component {
 
   handlePrev = () => this.jumpToStep(this.state.activeStepIndex - 1);
 
-  findActiveFields = visitedSteps =>
-    visitedSteps.map(key =>this.findCurrentStep(key).fields.map(({ name }) => name))
-    .reduce((acc, curr) => curr.concat(acc.map(item => item)), []);
-
   handleSubmit = (values, visitedSteps, getRegisteredFields) => {
     // Add the final step fields to history
     const finalRegisteredFieldsHistory = {
