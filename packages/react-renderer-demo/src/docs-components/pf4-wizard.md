@@ -15,6 +15,7 @@ Don't forget hide form controls by settinng \`showFormControls\` to \`false\` as
 | setFullHeight  | bool  | undefined  | see Patternfly  |
 | isDynamic  | bool  | undefined  | will dynamically generate steps navigation (=progressive wizard), please use if you use any condition fields which changes any field in other steps (wizards with conditional steps are dynamic by default) |
 |showTitles|bool|undefined|If true, step titles will be shown in the wizard body|
+|predictSteps|bool|undefined|If true, dynamic wizard will predict steps in the navigation.|
 
 ### Default buttonLabels
 
@@ -48,6 +49,7 @@ You can rewrite only selection of them, e.g.
 | buttons | node, func | Custom buttons component|
 |showTitle|bool|If true, step titles will (not if false) be shown in the wizard body|
 |Custom title|node|Use if you want to render as the title different/custom title (for example, title with a popover|
+|disableForwardJumping|bool|When use return to this step, jumping forward in the navigation is disabled.|
 
 
 - nextStep can be stepKey of the next step
@@ -164,6 +166,8 @@ First step should have `stepKey: 1` or as a string: `'1'`
 - steps are visible as user visits them
 - user can jump only back
 - use `isDynamic` prop to enforce it
+- use `predictSteps` to allow navigation to show future steps
+    - if you have any conditional fields in the step, you should use `disableForwardJumping` in the step definition, to disable jumping forward in the navigation, otherwise user could miss the changed fields in next steps.
 
 ![progressivewizard](https://user-images.githubusercontent.com/32869456/58427241-5b370a80-809f-11e9-8e79-a4a829b8d181.gif)
 
