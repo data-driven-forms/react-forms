@@ -3,6 +3,7 @@ import GenericComponentText from './examples-texts/generic-mui-component';
 import TabsText from './examples-texts/tabs';
 import CustomComponentText from './examples-texts/custom-component';
 import WizardText from './examples-texts/wizard';
+import SelectText from './examples-texts/select';
 
 export const baseExamples = [{
   component: componentTypes.TEXT_FIELD,
@@ -120,7 +121,7 @@ export const baseExamples = [{
 {
   component: componentTypes.SELECT_COMPONENT,
   linkText: 'Select',
-  ContentText: GenericComponentText,
+  ContentText: SelectText,
   canBeRequired: true,
   value: { fields: [{
     component: componentTypes.SELECT_COMPONENT,
