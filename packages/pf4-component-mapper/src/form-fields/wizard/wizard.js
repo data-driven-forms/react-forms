@@ -27,7 +27,7 @@ class Wizard extends React.Component {
       activeStepIndex: 0,
       maxStepIndex: 0,
       isDynamic, // wizard contains nextStep mapper
-      navSchema: this.createSchema(),
+      navSchema: this.createSchema({ currentIndex: 0, isDynamic }),
       loading: true,
     };
   }
@@ -48,15 +48,14 @@ class Wizard extends React.Component {
   }
 
   handleNext = (nextStep, getRegisteredFields) =>
-    this.setState(prevState =>
-      ({
-        registeredFieldsHistory: { ...prevState.registeredFieldsHistory, [prevState.activeStep]: getRegisteredFields() },
-        activeStep: nextStep,
-        prevSteps: prevState.prevSteps.includes(prevState.activeStep) ? prevState.prevSteps : [ ...prevState.prevSteps, prevState.activeStep ],
-        activeStepIndex: prevState.activeStepIndex + 1,
-        maxStepIndex: (prevState.activeStepIndex + 1) > prevState.maxStepIndex ? prevState.maxStepIndex + 1 : prevState.maxStepIndex,
-        navSchema: this.state.isDynamic ? this.createSchema() : prevState.navSchema,
-      }));
+    this.setState(prevState => ({
+      registeredFieldsHistory: { ...prevState.registeredFieldsHistory, [prevState.activeStep]: getRegisteredFields() },
+      activeStep: nextStep,
+      prevSteps: prevState.prevSteps.includes(prevState.activeStep) ? prevState.prevSteps : [ ...prevState.prevSteps, prevState.activeStep ],
+      activeStepIndex: prevState.activeStepIndex + 1,
+      maxStepIndex: (prevState.activeStepIndex + 1) > prevState.maxStepIndex ? prevState.maxStepIndex + 1 : prevState.maxStepIndex,
+      navSchema: this.state.isDynamic ? this.createSchema({ currentIndex: prevState.activeStepIndex + 1 }) : prevState.navSchema,
+    }));
 
   handlePrev = () => this.jumpToStep(this.state.activeStepIndex - 1);
 
@@ -93,12 +92,21 @@ class Wizard extends React.Component {
           activeStepIndex: index,
         }));
 
-      // jumping in dynamic form disables returning to back if jumped on compileMapper step (!)
-      if (this.state.isDynamic && typeof this.findCurrentStep(this.state.prevSteps[index]).nextStep === 'object') {
+      const currentStep = this.findCurrentStep(this.state.prevSteps[index]);
+      const currentStepHasStepMapper = typeof currentStep.nextStep === 'object';
+
+      if (this.state.isDynamic && (currentStepHasStepMapper || !this.props.predictSteps)) {
         this.setState((prevState) => ({
           navSchema: prevState.navSchema.slice(0, index + 1),
           prevSteps: prevState.prevSteps.slice(0, index + 1),
           maxStepIndex: prevState.prevSteps.slice(0, index + 1).length,
+        }));
+      }
+
+      if (currentStep.disableForwardJumping) {
+        this.setState((prevState) => ({
+          prevSteps: prevState.prevSteps.slice(0, index + 1),
+          maxStepIndex: prevState.prevSteps.slice(0, index).length,
         }));
       }
 
@@ -113,26 +121,34 @@ class Wizard extends React.Component {
   };
 
   // builds schema used for generating of the navigation links
-  createSchema = () => {
-    const { formOptions } = this.props;
+  createSchema = ({ currentIndex, isDynamic }) => {
+    if (typeof isDynamic === 'undefined'){
+      isDynamic = this.state.isDynamic;
+    }
+
+    const { formOptions, predictSteps } = this.props;
+    const { values } = formOptions.getState();
     let schema = [];
     let field = this.props.fields.find(({ stepKey }) => stepKey === 1 || stepKey === '1'); // find first wizard step
-    let index = 0;
+    let index = -1;
 
     while (field){
+      index += 1;
       schema = [
         ...schema,
         { title: field.title,
           substepOf: field.substepOf,
-          index: index++,
+          index,
           primary: (!schema[schema.length - 1] || !field.substepOf || field.substepOf !== schema[schema.length - 1].substepOf) },
       ];
+
+      if (isDynamic && !predictSteps && currentIndex === index) {
+        break;
+      }
 
       let nextStep = field.nextStep;
 
       if (typeof field.nextStep === 'object') {
-        const { values } = formOptions.getState();
-
         nextStep = nextStep.stepMapper[get(values, nextStep.when)];
       }
 
@@ -259,6 +275,7 @@ Wizard.propTypes = {
   setFullHeight: PropTypes.bool,
   isDynamic: PropTypes.bool,
   showTitles: PropTypes.bool,
+  predictSteps: PropTypes.bool,
 };
 
 const defaultLabels = {
