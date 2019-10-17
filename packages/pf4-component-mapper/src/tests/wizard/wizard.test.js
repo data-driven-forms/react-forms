@@ -480,4 +480,168 @@ describe('<Wizard />', () => {
 
     expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).prop('aria-disabled')).toEqual(false);
   });
+
+  describe('predicting steps', () => {
+    const FIRST_TITLE = 'Get started with adding source';
+    const SECOND_TITLE_AWS = 'Configure AWS';
+    const SECOND_TITLE_GOOLE = 'Configure google';
+    const THIRD_TITLE = 'Summary';
+
+    const wizardSchema = {
+      fields: [{
+        component: componentTypes.WIZARD,
+        name: 'wizard',
+        predictSteps: true,
+        fields: [{
+          title: FIRST_TITLE,
+          stepKey: 1,
+          nextStep: {
+            when: 'source.source-type',
+            stepMapper: {
+              aws: 'aws',
+              google: 'google',
+            },
+          },
+          fields: [{
+            name: 'source.source-type',
+            label: 'Source type',
+            component: componentTypes.TEXT_FIELD,
+          }],
+        }, {
+          title: SECOND_TITLE_AWS,
+          stepKey: 'aws',
+          nextStep: 'summary',
+          fields: [{
+            component: componentTypes.TEXT_FIELD,
+            name: 'aws-field',
+            label: 'Aws field part',
+          }],
+        }, {
+          title: SECOND_TITLE_GOOLE,
+          stepKey: 'google',
+          nextStep: 'summary',
+          fields: [{
+            component: componentTypes.TEXT_FIELD,
+            name: 'google.google-field',
+            label: 'Google field part',
+          }],
+        }, {
+          title: THIRD_TITLE,
+          fields: [],
+          stepKey: 'summary',
+        }],
+      }],
+    };
+
+    const nextButtonClick = (wrapper) =>  {
+      wrapper.find('button').at(0).simulate('click');
+      wrapper.update();
+    };
+
+    const backButtonClick = (wrapper) =>  {
+      wrapper.find('button').at(1).simulate('click');
+      wrapper.update();
+    };
+
+    const changeValue = (wrapper, value) => {
+      wrapper.find('input').instance().value = value;
+      wrapper.find('input').simulate('change');
+      wrapper.update();
+    };
+
+    it('predict steps with dynamic wizard', () => {
+      const wrapper = mount(<FormRenderer
+        schema={ wizardSchema }
+        formFieldsMapper={ formFieldsMapper }
+        layoutMapper={ layoutMapper }
+        onSubmit={ jest.fn() }
+        onCancel={ jest.fn() }
+        showFormControls={ false }
+      />);
+
+      expect(wrapper.find('WizardNavItem')).toHaveLength(1);
+      expect(wrapper.find('WizardNavItem').at(0).text()).toEqual(FIRST_TITLE);
+
+      changeValue(wrapper, 'aws');
+      nextButtonClick(wrapper);
+
+      expect(wrapper.find('WizardNavItem')).toHaveLength(3);
+      expect(wrapper.find('WizardNavItem').at(0).text()).toEqual(FIRST_TITLE);
+      expect(wrapper.find('WizardNavItem').at(1).text()).toEqual(SECOND_TITLE_AWS);
+      expect(wrapper.find('WizardNavItem').at(2).text()).toEqual(THIRD_TITLE);
+    });
+
+    it('reset nav when jumped into compileMapper step', () => {
+      const wrapper = mount(<FormRenderer
+        schema={ wizardSchema }
+        formFieldsMapper={ formFieldsMapper }
+        layoutMapper={ layoutMapper }
+        onSubmit={ jest.fn() }
+        onCancel={ jest.fn() }
+        showFormControls={ false }
+      />);
+
+      changeValue(wrapper, 'aws');
+      nextButtonClick(wrapper);
+
+      expect(wrapper.find('WizardNavItem')).toHaveLength(3);
+
+      backButtonClick(wrapper);
+
+      expect(wrapper.find('WizardNavItem')).toHaveLength(1);
+      expect(wrapper.find('WizardNavItem').at(0).text()).toEqual(FIRST_TITLE);
+    });
+
+    it('disable nav when jumped into disableForwardJumping step', () => {
+      const wizardSchema = {
+        fields: [{
+          component: componentTypes.WIZARD,
+          name: 'wizard',
+          predictSteps: true,
+          fields: [{
+            title: FIRST_TITLE,
+            stepKey: 1,
+            nextStep: 'aws',
+            disableForwardJumping: true,
+            fields: [{
+              name: 'source.source-type',
+              label: 'Source type',
+              component: componentTypes.TEXT_FIELD,
+            }],
+          }, {
+            title: SECOND_TITLE_AWS,
+            stepKey: 'aws',
+            nextStep: 'summary',
+            fields: [{
+              component: componentTypes.TEXT_FIELD,
+              name: 'aws-field',
+              label: 'Aws field part',
+            }],
+          }],
+        }],
+      };
+
+      const wrapper = mount(<FormRenderer
+        schema={ wizardSchema }
+        formFieldsMapper={ formFieldsMapper }
+        layoutMapper={ layoutMapper }
+        onSubmit={ jest.fn() }
+        onCancel={ jest.fn() }
+        showFormControls={ false }
+      />);
+
+      changeValue(wrapper, 'aws');
+      nextButtonClick(wrapper);
+
+      expect(wrapper.find('WizardNavItem')).toHaveLength(2);
+      expect(wrapper.find('WizardNavItem').at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find('WizardNavItem').at(1).props().isDisabled).toEqual(false);
+
+      backButtonClick(wrapper);
+
+      expect(wrapper.find('WizardNavItem')).toHaveLength(2);
+      expect(wrapper.find('WizardNavItem').at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find('WizardNavItem').at(1).props().isDisabled).toEqual(true);
+    });
+  });
 });

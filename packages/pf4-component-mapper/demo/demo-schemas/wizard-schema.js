@@ -7,7 +7,7 @@ const ValidateButtons = ({ disableBack, handlePrev, buttonLabels: { back, cancel
 
   const setValidating = () => {
     setState('validating');
-    setTimeout(() => setState('done'), 2000);
+    setTimeout(() => setState('done'), 0);
   };
 
   return (
@@ -32,6 +32,7 @@ export const wizardSchema = {
   fields: [{
     component: componentTypes.WIZARD,
     name: 'wizzard',
+    predictSteps: true,
     //inModal: true,
     title: 'Title',
     showTitles: true,
@@ -97,6 +98,9 @@ export const wizardSchema = {
         component: componentTypes.TEXT_FIELD,
         name: 'google.google-field',
         label: 'Google field part',
+        validate: [{
+          type: validatorTypes.REQUIRED,
+        }],
       }],
     }, {
       fields: [{
@@ -201,10 +205,12 @@ export const wizardSchemaSubsteps = {
 export const wizardSchemaMoreSubsteps = {
   fields: [{
     component: componentTypes.WIZARD,
+    isDynamic: true,
     name: 'wizzard',
-    title: 'Title',
+    title: 'Dynamic with steps predicting',
     description: 'Description',
     buttonsPosition: 'left',
+    predictSteps: true,
     fields: [{
       title: 'Get started with adding source',
       name: 'step-1',
@@ -228,15 +234,16 @@ export const wizardSchemaMoreSubsteps = {
         label: 'Aws field part',
       }],
     }, {
-      title: 'Configure AWS part 2',
+      title: 'Configure AWS part 2 - disabled jumping',
       name: 'step-88',
+      disableForwardJumping: true,
       stepKey: 'aws2',
       nextStep: 'summary',
       substepOf: 'Summary',
       fields: [{
         component: componentTypes.TEXT_FIELD,
-        name: 'aws-field',
-        label: 'Aws field part',
+        name: 'aws-field-1',
+        label: 'Aws field part 1',
       }],
     },
     {
