@@ -52,8 +52,6 @@ const useStyles = makeStyles(theme => ({
   },
   contentWrapper: {
     paddingTop: 86,
-    paddingRight: 32,
-    paddingLeft: 32,
     paddingBottom: 32,
   },
   menuButton: {
@@ -214,10 +212,15 @@ const Layout = ({ children }) => {
               </a>
             </div>
             <div className={ classes.contentWrapper }>
-              { children }
+              <div style={{
+                paddingRight: 32,
+                paddingLeft: 32,
+              }}>
+                { children }
+              </div>
               <ConnectedLinks />
+              <Footer />
             </div>
-            <Footer />
           </main>
         </div>
       </MenuContext.Provider>
