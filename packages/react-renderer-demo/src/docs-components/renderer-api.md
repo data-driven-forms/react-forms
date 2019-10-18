@@ -34,3 +34,27 @@ Form Renderer provides a lot of customization via props.
 |subscription|object|You can pass your own [subscription](https://final-form.org/docs/react-final-form/types/FormProps#subscription), which will be added to default settings.|`{ pristine: true, submitting: true, valid: true }`|
 |uiSchema|object|Use when you need to use mozilla schema.|{ }|
 |<NavLink to="/renderer/validators">validate</NavLink>|func|A function which receives all form values and returns an object with errors.||
+
+### Schema
+
+The root object of the schema represents the <NavLink to="/renderer/component-mapping#formwrapper">Form</NavLink> component, which accepts only these three props:
+
+|Prop|Type|Description|
+|----|:--:|----------:|
+|label, title|node|<NavLink to="/renderer/component-mapping#title">Title</NavLink> of the form. Optional.|
+|description|node|<NavLink to="/renderer/component-mapping#description">Description</NavLink> of the form. Optional.|
+|fields|array of objects|<NavLink to="/renderer/component-api">Components</NavLink> of the form. Required!|
+
+#### Example
+
+```javascript
+schema = {
+  title: 'Your name',
+  description: 'Add your name',
+  fields: [{
+    name: 'userName',
+    label: 'Your name is',
+    component: componentTypes.TEXT_FIELD,
+  }]
+};
+```

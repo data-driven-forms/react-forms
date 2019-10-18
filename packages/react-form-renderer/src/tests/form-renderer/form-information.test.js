@@ -21,7 +21,7 @@ describe('<FormControls />', () => {
     layoutMapper = {
       [layoutComponents.BUTTON]: ({ label, ...props }) => <button { ...props }>{ label }</button>,
       [layoutComponents.BUTTON_GROUP]: ({ children, ...props }) => <div { ...props }>{ children }</div>,
-      [layoutComponents.TITLE]: ({ children }) => <div>{ children }</div>,
+      [layoutComponents.TITLE]: ({ children }) => <h1>{ children }</h1>,
       [layoutComponents.DESCRIPTION]: ({ children }) => <div>{ children }</div>,
       [layoutComponents.FORM_WRAPPER]: ({ children }) => <form>{ children }</form>,
     };
@@ -40,13 +40,24 @@ describe('<FormControls />', () => {
     };
   });
 
+  const TITLE = 'tiiiitle';
+
   it('should render with title', () => {
     const wrapper = mount(
       <ContextWrapper>
-        <FormRenderer { ...initialProps } schema={{ ...schema, title: 'Title' }}/>
+        <FormRenderer { ...initialProps } schema={{ ...schema, title: TITLE }}/>
       </ContextWrapper>
     );
-    expect(toJson(wrapper)).toMatchSnapshot();
+    expect(wrapper.find('h1').text().includes(TITLE)).toEqual(true);
+  });
+
+  it('should render with label', () => {
+    const wrapper = mount(
+      <ContextWrapper>
+        <FormRenderer { ...initialProps } schema={{ ...schema, label: TITLE }}/>
+      </ContextWrapper>
+    );
+    expect(wrapper.find('h1').text().includes(TITLE)).toEqual(true);
   });
 
   it('should render with description', () => {
