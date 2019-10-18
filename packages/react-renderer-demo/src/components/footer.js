@@ -11,8 +11,8 @@ import Paper from '@material-ui/core/Paper';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import Typography from '@material-ui/core/Typography';
 
-import GhIcon from '../common/gh-svg-icon';
-import NpmSvgIcon from '../common/npm-svg-icon';
+import GhIcon from './common/gh-svg-icon';
+import NpmSvgIcon from './common/npm-svg-icon';
 
 const RepoLink = ({ href, label }) => {
   const classes = makeStyles(theme => ({

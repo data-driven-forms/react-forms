@@ -19,6 +19,7 @@ import MuiWizzard from '../components/missing-demo-fields/mui-wizard/mui-wizard'
 import MenuContext from './navigation/menu-context';
 import findConnectedLinks from './navigation/find-connected-links';
 import ConnectedLinks from './common/connected-links';
+import Footer from './footer';
 
 const drawerWidth = 240;
 
@@ -216,6 +217,7 @@ const Layout = ({ children }) => {
               { children }
               <ConnectedLinks />
             </div>
+            <Footer />
           </main>
         </div>
       </MenuContext.Provider>
