@@ -12,7 +12,8 @@ import MenuContext from '../navigation/menu-context';
 
 const useStyles = makeStyles(() => ({
   linksContainer: {
-    paddingRight: 32,
+    paddingLeft: 32,
+    paddingRight: 64,
     marginTop: 16,
     marginBottom: 16,
   },
@@ -30,7 +31,7 @@ const ConnectedLinks = () => {
   const classNames = useStyles();
   return (
     <Grid container justify="space-between" className={ clsx(classNames.linksContainer, {
-      [classNames.withSideNav]: pathname.includes('/renderer/'),
+      [classNames.withSideNav]: pathname.includes('/renderer/') && !(pathname === '/renderer/installation' || pathname === '/renderer/get-started'),
     }) }>
       <Grid item>
         { prev && prev.link && (
