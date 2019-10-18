@@ -13,7 +13,7 @@ describe('Layout mapper', () => {
   });
 
   it('should return PF3 Title', () => {
-    expect(mount(layoutMapper[layoutComponents.TITLE]({})).find('h3')).toHaveLength(1);
+    expect(mount(layoutMapper[layoutComponents.TITLE]({})).find('h1')).toHaveLength(1);
   });
 
   it('should return PF3 Description', () => {
