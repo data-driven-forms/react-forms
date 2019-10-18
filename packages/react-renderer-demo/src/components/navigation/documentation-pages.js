@@ -2,6 +2,9 @@ export const docs = [{
   component: 'installation',
   linkText: 'Installation',
 }, {
+  component: 'development-setup',
+  linkText: 'Development Setup',
+}, {
   component: 'get-started',
   linkText: 'Getting started',
 }, {
