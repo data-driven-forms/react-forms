@@ -571,7 +571,7 @@ describe('<Wizard />', () => {
       expect(wrapper.find('WizardNavItem').at(2).text()).toEqual(THIRD_TITLE);
     });
 
-    it('reset nav when jumped into compileMapper step', () => {
+    it('disable nav when jumped into compileMapper step', () => {
       const wrapper = mount(<FormRenderer
         schema={ wizardSchema }
         formFieldsMapper={ formFieldsMapper }
@@ -588,8 +588,9 @@ describe('<Wizard />', () => {
 
       backButtonClick(wrapper);
 
-      expect(wrapper.find('WizardNavItem')).toHaveLength(1);
-      expect(wrapper.find('WizardNavItem').at(0).text()).toEqual(FIRST_TITLE);
+      expect(wrapper.find('WizardNavItem').at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find('WizardNavItem').at(1).props().isDisabled).toEqual(true);
+      expect(wrapper.find('WizardNavItem').at(2).props().isDisabled).toEqual(true);
     });
 
     it('disable nav when jumped into disableForwardJumping step', () => {

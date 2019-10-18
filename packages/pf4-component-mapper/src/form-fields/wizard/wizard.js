@@ -26,7 +26,7 @@ class Wizard extends React.Component {
       prevSteps: [],
       activeStepIndex: 0,
       maxStepIndex: 0,
-      isDynamic, // wizard contains nextStep mapper
+      isDynamic,
       navSchema: this.createSchema({ currentIndex: 0, isDynamic }),
       loading: true,
     };
@@ -47,15 +47,19 @@ class Wizard extends React.Component {
     }
   }
 
-  handleNext = (nextStep, getRegisteredFields) =>
+  handleNext = (nextStep, getRegisteredFields) => {
+    const newActiveIndex = this.state.activeStepIndex + 1;
+    const shouldInsertStepIntoHistory = this.state.prevSteps.includes(this.state.activeStep);
+
     this.setState(prevState => ({
       registeredFieldsHistory: { ...prevState.registeredFieldsHistory, [prevState.activeStep]: getRegisteredFields() },
       activeStep: nextStep,
-      prevSteps: prevState.prevSteps.includes(prevState.activeStep) ? prevState.prevSteps : [ ...prevState.prevSteps, prevState.activeStep ],
-      activeStepIndex: prevState.activeStepIndex + 1,
-      maxStepIndex: (prevState.activeStepIndex + 1) > prevState.maxStepIndex ? prevState.maxStepIndex + 1 : prevState.maxStepIndex,
-      navSchema: this.state.isDynamic ? this.createSchema({ currentIndex: prevState.activeStepIndex + 1 }) : prevState.navSchema,
+      prevSteps: shouldInsertStepIntoHistory ? prevState.prevSteps : [ ...prevState.prevSteps, prevState.activeStep ],
+      activeStepIndex: newActiveIndex,
+      maxStepIndex: newActiveIndex > prevState.maxStepIndex ? newActiveIndex : prevState.maxStepIndex,
+      navSchema: this.state.isDynamic ? this.createSchema({ currentIndex: newActiveIndex }) : prevState.navSchema,
     }));
+  }
 
   handlePrev = () => this.jumpToStep(this.state.activeStepIndex - 1);
 
@@ -78,45 +82,59 @@ class Wizard extends React.Component {
 
   findCurrentStep = activeStep => this.props.fields.find(({ stepKey }) => stepKey === activeStep)
 
-  // jumping in the wizzard by clicking on nav links
   jumpToStep = (index, valid) => {
-    if (this.state.prevSteps[index]) {
-      this.setState((prevState) =>
-        ({
+    const clickOnPreviousStep = this.state.prevSteps[index];
+    if (clickOnPreviousStep) {
+      let originalActiveStep;
+      this.setState((prevState) => {
+        const includeActiveStep = prevState.prevSteps.includes(prevState.activeStep);
+        originalActiveStep = prevState.activeStep;
+
+        return ({
           activeStep: this.state.prevSteps[index],
-          prevSteps: prevState.prevSteps.includes(prevState.activeStep) ? prevState.prevSteps : [ ...prevState.prevSteps, prevState.activeStep ],
+          prevSteps: includeActiveStep ? prevState.prevSteps : [ ...prevState.prevSteps, prevState.activeStep ],
           activeStepIndex: index,
-        }));
+        });
+      }, () => this.setState((prevState) => {
+        const INDEXING_BY_ZERO = 1;
 
-      const currentStep = this.findCurrentStep(this.state.prevSteps[index]);
-      const currentStepHasStepMapper = typeof currentStep.nextStep === 'object';
+        let newState;
 
-      if (this.state.isDynamic && (currentStepHasStepMapper || !this.props.predictSteps)) {
-        this.setState((prevState) => ({
-          navSchema: prevState.navSchema.slice(0, index + 1),
-          prevSteps: prevState.prevSteps.slice(0, index + 1),
-          maxStepIndex: prevState.prevSteps.slice(0, index + 1).length,
-        }));
-      }
+        const currentStep = this.findCurrentStep(prevState.prevSteps[index]);
+        const currentStepHasStepMapper = typeof currentStep.nextStep === 'object';
 
-      if (currentStep.disableForwardJumping) {
-        this.setState((prevState) => ({
-          prevSteps: prevState.prevSteps.slice(0, index + 1),
-          maxStepIndex: prevState.prevSteps.slice(0, index).length,
-        }));
-      }
+        const dynamicStepShouldDisableNav = prevState.isDynamic && (currentStepHasStepMapper || !this.props.predictSteps);
 
-      // invalid state disables jumping forward until it fixed (!)
-      if (valid === false) {
-        this.setState((prevState) => ({
-          prevSteps: prevState.prevSteps.slice(0, index + 2),
-          maxStepIndex: prevState.prevSteps.slice(0, index + 1).length,
-        }));
-      }
+        if (dynamicStepShouldDisableNav) {
+          const newPrevSteps = prevState.prevSteps.slice(0, index);
+          newState = {
+            navSchema: this.props.predictSteps ? this.createSchema({ currentIndex: index }) : prevState.navSchema.slice(0, index + INDEXING_BY_ZERO),
+            prevSteps: newPrevSteps,
+            maxStepIndex: newPrevSteps.length,
+          };
+        } else if (currentStep.disableForwardJumping) {
+          const newPrevSteps = prevState.prevSteps.slice(0, index);
+          newState = {
+            prevSteps: newPrevSteps,
+            maxStepIndex: newPrevSteps.length,
+          };
+        }
+
+        if (valid === false) {
+          const indexOfCurrentStep = prevState.prevSteps.indexOf(originalActiveStep);
+
+          newState = {
+            ...newState,
+            prevSteps: prevState.prevSteps.slice(0, indexOfCurrentStep + INDEXING_BY_ZERO),
+            maxStepIndex: prevState.prevSteps.slice(0, indexOfCurrentStep + INDEXING_BY_ZERO).length - INDEXING_BY_ZERO,
+          };
+        }
+
+        return newState;
+      }));
     }
   };
 
-  // builds schema used for generating of the navigation links
   createSchema = ({ currentIndex, isDynamic }) => {
     if (typeof isDynamic === 'undefined'){
       isDynamic = this.state.isDynamic;
