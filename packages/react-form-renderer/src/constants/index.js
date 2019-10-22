@@ -10,7 +10,6 @@ export const components = {
   TAB_ITEM: 'tab-item',
   DATE_PICKER: 'date-picker',
   TIME_PICKER: 'time-picker',
-  TAG_CONTROL: 'tag-control',
   WIZARD: 'wizard',
   SWITCH: 'switch-field',
   TEXTAREA: 'textarea-field',

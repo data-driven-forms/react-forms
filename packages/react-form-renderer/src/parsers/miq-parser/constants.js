@@ -8,7 +8,6 @@ export const componentMap = {
   DialogFieldDropDownList: components.SELECT_COMPONENT,
   DialogFieldDateControl: components.DATE_PICKER,
   DialogFieldDateTimeControl: components.TIME_PICKER,
-  DialogFieldTagControl: components.TAG_CONTROL,
 };
 
 // for true values

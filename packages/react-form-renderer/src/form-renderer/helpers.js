@@ -9,7 +9,6 @@ const fieldComponents = [
   components.RADIO,
   components.DATE_PICKER,
   components.TIME_PICKER,
-  components.TAG_CONTROL,
 ];
 
 export const shouldWrapInField = componentType => fieldComponents.includes(componentType);
