@@ -58,10 +58,15 @@ Check the example below to see a simple implementation of layout components.
 |----|----|-----------|-----|------------|
 |children|node|Wrapper around form buttons||No|
 
-#### FormGroup
-|Prop|Type|Description|Value|Customizable|
-|----|----|-----------|-----|------------|
-|children|node|Form field group||Based on form schema|
+#### Title
+|Prop|Type|Description|Customizable|
+|----|----|-----------|------------|
+|children|node|Form title|no|
+
+#### Description
+|Prop|Type|Description|Customizable|
+|----|----|-----------|------------|
+|children|node|Form description|no|
 
 ## Creating formFieldsMapper
 
