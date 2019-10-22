@@ -5,6 +5,7 @@ import SelectPF3 from '../../form-fields/select/index';
 import { mount } from 'enzyme';
 import Select from 'react-select';
 import isEqual from 'lodash/isEqual';
+import ReactSelect, { components } from 'react-select';
 
 describe('<SelectField />', () => {
   let initialProps;
@@ -178,6 +179,24 @@ describe('<SelectField />', () => {
           done();
         });
       });
+    });
+
+    it('should pick correct value for single select when passed array', () => {
+      const wrapper = mount(<SelectField { ...initialProps } input={{ ...initialProps.input, value: [ 2 ]}}/>);
+      expect(wrapper.find(ReactSelect).instance().state.value).toEqual([{ value: 2, label: 'option 2' }]);
+    });
+
+    it('should pick correct array value for single select when passed array', () => {
+      let wrapper = mount(<SelectField { ...initialProps } input={{ ...initialProps.input, value: [ 2 ]}} pluckSingleValue={ false }/>);
+      expect(wrapper.find(ReactSelect).instance().state.value).toEqual([]);
+
+      wrapper = mount(<SelectField
+        { ...initialProps }
+        options={ [ ...initialProps.options, { label: 'array options', value: [ 2 ]}] }
+        input={{ ...initialProps.input, value: [ 2 ]}}
+        pluckSingleValue={ false }
+      />);
+      expect(wrapper.find(ReactSelect).instance().state.value).toEqual([{ label: 'array options', value: [ 2 ]}]);
     });
   });
 });

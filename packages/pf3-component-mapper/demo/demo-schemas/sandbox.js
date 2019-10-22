@@ -261,6 +261,7 @@ const output = {
                   title: 'Dropdown',
                   dataType: 'string',
                   component: components.SELECT_COMPONENT,
+                  initialValue: [ '1' ],
                   isSearchable: true,
                   options: [
                     {

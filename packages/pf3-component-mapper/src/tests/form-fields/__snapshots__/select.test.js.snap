@@ -114,6 +114,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                 },
               ]
             }
+            pluckSingleValue={true}
             simpleValue={true}
           >
             <StateManager
