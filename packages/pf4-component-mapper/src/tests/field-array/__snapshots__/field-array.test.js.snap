@@ -36,7 +36,6 @@ exports[`FieldArray should render array field correctly 1`] = `
         "sub-form": [Function],
         "switch-field": [Function],
         "tabs": [Function],
-        "tag-control": [Function],
         "text-field": [Function],
         "textarea-field": [Function],
         "time-picker": [Function],

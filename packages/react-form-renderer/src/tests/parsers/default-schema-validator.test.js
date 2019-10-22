@@ -164,7 +164,6 @@ describe('Default schema validator', () => {
       'select-field': () => <div />,
       'date-picker': () => <div />,
       'time-picker': () => <div />,
-      'tag-control': () => <div />,
     })).not.toThrow();
   });
 });

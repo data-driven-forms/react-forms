@@ -30,7 +30,6 @@ const mapper = {
   [components.TAB_ITEM]: props => <div>tab item</div>,
   [components.DATE_PICKER]: props => <div>date picker</div>,
   [components.TIME_PICKER]: props => <div>time picker</div>,
-  [components.TAG_CONTROL]: props => <div>tag control</div>,
 };
 
 export default mapper;
