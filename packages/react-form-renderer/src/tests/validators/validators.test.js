@@ -189,6 +189,41 @@ describe('New validators', () => {
     it('should return numberValidator and fail', () => {
       expect(dataTypeValidator('integer')({ message: 'Should be super interger' })('Foo')).toEqual('Should be super interger');
     });
+
+    describe('data-type arrays', () => {
+      it('should pass validation of an array of strings', () => {
+        expect(dataTypeValidator('string')()([ 'Foo', 'Bar', 'Baz' ])).toBeUndefined();
+      });
+
+      it('should fail validation of an array of strings', () => {
+        expect(dataTypeValidator('string')()([ 'Foo', 'Bar', 2 ])).toBe('Field value has to be string');
+      });
+
+      it('should pass validation of an array of integers', () => {
+        expect(dataTypeValidator('integer')()([ 1, 2, 3 ])).toBeUndefined();
+      });
+
+      it('should fail validation of an array of strings', () => {
+        expect(dataTypeValidator('integer')()([ 1, 2, 2.1 ])).toBe('Value must be integer');
+        expect(dataTypeValidator('integer')()([ 1, 2, 'foo' ])).toBe('Value must be integer');
+      });
+
+      it('should pass validation of an array of numbers', () => {
+        expect(dataTypeValidator('number')()([ 1, 2, 3.1 ])).toBeUndefined();
+      });
+
+      it('should fail validation of an array of numbers', () => {
+        expect(dataTypeValidator('number')()([ 1, 2, 'foo' ])).toBe('Values must be number');
+      });
+
+      it('should pass validation of an array of booleans', () => {
+        expect(dataTypeValidator('boolean')()([ true, true, false, false ])).toBeUndefined();
+      });
+
+      it('should fail validation of an array of booleans', () => {
+        expect(dataTypeValidator('boolean')()([ 'foo', 2, true ])).toBe('Field value has to be boolean');
+      });
+    });
   });
   describe('Validators default messages overrides', () => {
     beforeAll(() => {
