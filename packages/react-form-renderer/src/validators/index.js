@@ -46,6 +46,15 @@ export const pattern = memoize(({ pattern, message } = {}) => {
       return;
     }
 
+    if (Array.isArray(value)) {
+      const error = value.find(item => {
+        const parsedValue = typeof item === 'string' ? item : item.toString();
+        return pattern && !parsedValue.match(verifiedPattern);
+      });
+      const msg = prepareMsg(message, 'pattern').defaultMessage;
+      return error ? typeof msg === 'string' ? msg : msg(pattern) : undefined;
+    }
+
     const parsedValue = typeof value === 'string' ? value : value.toString();
     if (pattern && !parsedValue.match(verifiedPattern)) {
       const msg = prepareMsg(message, 'pattern').defaultMessage;
@@ -133,6 +142,11 @@ const stringValidator = memoize(({ message } = {}) => {
       return;
     }
 
+    if (Array.isArray(value)) {
+      const error = value.find(item => typeof item !== 'string');
+      return error ? prepareMsg(message, 'mustBeString').defaultMessage : undefined;
+    }
+
     if (typeof value !== 'string') {
       return prepareMsg(message, 'mustBeString').defaultMessage;
     }
@@ -143,6 +157,11 @@ const booleanValidator = memoize(({ message } = {}) =>
   prepare(value => {
     if (!value) {
       return;
+    }
+
+    if (Array.isArray(value)) {
+      const error = value.find(item => typeof item !== 'boolean');
+      return error ? prepareMsg(message, 'mustBeBool').defaultMessage : undefined;
     }
 
     if (typeof value !== 'boolean') {
