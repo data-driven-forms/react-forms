@@ -66,7 +66,7 @@ const selectComponent = ({
       checked={ input.value }
       onChange={ ({ target: { checked }}) => input.onChange(checked) }
     />,
-  [componentTypes.DATE_PICKER]: () => <DateTimePicker onChange={ input.onChange } isDisabled={ isDisabled } { ...rest } />,
+  [componentTypes.DATE_PICKER]: () => <DateTimePicker onChange={ input.onChange } value={ input.value } isDisabled={ isDisabled } { ...rest } />,
 })[componentType];
 
 const renderHelperText = (error, description) => (error // eslint-disable-line no-nested-ternary
