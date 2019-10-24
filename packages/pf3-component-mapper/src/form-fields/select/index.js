@@ -86,10 +86,12 @@ class Select extends Component {
       loadingMessage,
       simpleValue,
       options: _options, // catch options from props, if they are undefined (bcs they would overwrite the state)
+      pluckSingleValue,
       ...rest
     } = this.props;
 
     const { options, isLoading } = this.state;
+    const { value, ...inputRest } = input;
 
     if (isLoading) {
       return <ReactSelect
@@ -100,10 +102,12 @@ class Select extends Component {
       />;
     }
 
+    const selectValue = pluckSingleValue ? rest.multi ? value : Array.isArray(value) && value[0] ? value[0] : value : value;
+
     return <ReactSelect
       className={ `final-form-select ${invalid ? 'has-error' : ''}` }
       styles={ customStyles }
-      { ...input }
+      { ...inputRest }
       options={ options }
       placeholder={ placeholder || 'Please choose' }
       isMulti={ rest.multi }
@@ -121,7 +125,7 @@ class Select extends Component {
           ? option.map(item => item.value)
           : option ? option.value : undefined)
         : input.onChange(option) }
-      value={ simpleValue ? options.filter(({ value }) => rest.multi ? input.value.includes(value) : value === input.value) : input.value }
+      value={ simpleValue ? options.filter(({ value }) => rest.multi ? input.value.includes(value) : isEqual(value, selectValue)) : selectValue }
       { ...rest }
     />;
   }
@@ -135,6 +139,7 @@ Select.propTypes = {
     value: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
+      PropTypes.array,
     ]),
   })),
   invalid: PropTypes.oneOfType([
@@ -156,6 +161,7 @@ Select.propTypes = {
   isDisabled: PropTypes.bool,
   isReadOnly: PropTypes.bool,
   loadingMessage: PropTypes.string,
+  pluckSingleValue: PropTypes.bool,
 };
 
 Select.defaultProps = {
@@ -164,6 +170,7 @@ Select.defaultProps = {
   },
   loadingMessage: 'Loading...',
   simpleValue: true,
+  pluckSingleValue: true,
 };
 
 export default Select;
