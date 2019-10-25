@@ -4,12 +4,12 @@ import { FormControl, Icon, Form } from 'patternfly-react';
 import MomentLocaleUtils from 'react-day-picker/moment';
 import './date-picker-styles.scss';
 
-const PickerInput = ({ variant, selectedDay, locale, handleOverlayToggle, isDisabled, isClearable, clearValue, ...props }) =>(
+const PickerInput = ({ variant, selectedDay, locale, handleOverlayToggle, isDisabled, isClearable, clearValue, inputFormat, ...props }) =>(
   <Form.InputGroup style={{ cursor: isDisabled ? 'not-allowed' : 'pointer' }} disabled={ isDisabled }>
     <FormControl
       readOnly={ true }
       { ...props }
-      value={ selectedDay ? MomentLocaleUtils.formatDate(selectedDay, variant === 'date-time' ? 'LLL' : 'L', locale) : '' }
+      value={ selectedDay ? MomentLocaleUtils.formatDate(selectedDay, inputFormat || variant === 'date-time' ? 'LLL' : 'L', locale) : '' }
       type="text"
       style={{
         cursor: isDisabled ? 'not-allowed' : 'pointer',
@@ -39,6 +39,7 @@ PickerInput.propTypes = {
   isDisabled: PropTypes.bool,
   isClearable: PropTypes.bool,
   clearValue: PropTypes.func.isRequired,
+  inputFormat: PropTypes.string,
 };
 
 export default PickerInput;

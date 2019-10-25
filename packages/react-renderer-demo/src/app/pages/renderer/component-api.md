@@ -127,6 +127,7 @@ This component is using [react-day-picker](https://react-day-picker.js.org/docs/
 |isDisabled|bool|disable component|
 |disabledDays|array|Mark specific days or a range of days as disabled. [More info](https://react-day-picker.js.org/examples/disabled). In order to store this prop to JSON we allow using string. Any string accepted by Date constructor is valid value. There is an alias for current date: `today`|
 |closeOnDaySelect|bool|Close the calendar popover after selecting date.|
+|inputFormat|string|Set date format for the input. [Using same convetion as moment.js](https://devhints.io/moment)|
 
 <ExampleLink to='date-picker' />
 
