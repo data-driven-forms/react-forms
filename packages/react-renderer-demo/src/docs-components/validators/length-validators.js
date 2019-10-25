@@ -28,7 +28,7 @@ const schema = {
   }],
 };
 
-const LenghtValidators = () => (
+const LengthValidators = () => (
   <div className="pf4">
     <FormRenderer
       layoutMapper={ layoutMapper }
@@ -39,5 +39,5 @@ const LenghtValidators = () => (
   </div>
 );
 
-export default LenghtValidators;
+export default LengthValidators;
 
