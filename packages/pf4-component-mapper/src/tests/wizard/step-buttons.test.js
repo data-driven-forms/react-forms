@@ -2,8 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
 
-import WizardStepButtons from '../../form-fields/wizard/step-buttons';
-import FieldProvider from '../../../../../__mocks__/mock-field-provider';
+import WizardStepButtons, { selectNext } from '../../form-fields/wizard/step-buttons';
 
 describe('<WizardSTepButtons', () => {
   let initialProps;
@@ -23,7 +22,6 @@ describe('<WizardSTepButtons', () => {
       },
       handlePrev: jest.fn(),
       handleNext: jest.fn(),
-      FieldProvider,
     };
   });
 
@@ -50,7 +48,10 @@ describe('<WizardSTepButtons', () => {
       <WizardStepButtons
         { ...initialProps }
         handleNext={ handleNext }
-        FieldProvider={ props => <FieldProvider input={{ value: 'foo' }} { ...props } /> }
+        formOptions={{
+          ...initialProps.formOptions,
+          getState: () => ({ values: { foo: 'foo' }}),
+        }}
         nextStep={{
           when: 'foo',
           stepMapper: {
@@ -85,5 +86,43 @@ describe('<WizardSTepButtons', () => {
     const wrapper = mount(<WizardStepButtons { ...initialProps } handlePrev={ handlePrev } disableBack={ false }/>);
     wrapper.find('button').at(1).simulate('click');
     expect(handlePrev).toHaveBeenCalled();
+  });
+
+  describe('.selectNext', () => {
+    const VALUE = 'value';
+    const EXPECTED_NEXT_STEP = 'barisko';
+
+    const GET_STATE = () => ({
+      values: {
+        foo: VALUE,
+      },
+    });
+
+    it('should return string nextstep', () => {
+      const NEXTSTEP = EXPECTED_NEXT_STEP;
+
+      expect(selectNext(NEXTSTEP, GET_STATE)).toEqual(EXPECTED_NEXT_STEP);
+    }),
+
+    it('should return stepmapper nextstep', () => {
+      const NEXTSTEP = {
+        when: 'foo',
+        stepMapper: {
+          [VALUE]: EXPECTED_NEXT_STEP,
+        },
+      };
+
+      expect(selectNext(NEXTSTEP, GET_STATE)).toEqual(EXPECTED_NEXT_STEP);
+    });
+
+    it('should return custom func nextstep', () => {
+      const NEXTSTEP = ({ values }) => {
+        if (values.foo === VALUE) {
+          return EXPECTED_NEXT_STEP;
+        }
+      };
+
+      expect(selectNext(NEXTSTEP, GET_STATE)).toEqual(EXPECTED_NEXT_STEP);
+    });
   });
 });

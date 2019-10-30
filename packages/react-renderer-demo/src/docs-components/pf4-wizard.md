@@ -66,6 +66,12 @@ nextStep: {
 },
 ```
 
+- another option is to use custom function. The custom function receives as the first argument an object with values and the function has to return a `stepKey` in string.
+
+```jsx
+nextStep: ({ values }) => (values.aws === '123' &&& values.password === 'secret') ? 'secretStep' : 'genericStep'
+```
+
 #### Buttons
 
 Each step can implement its own buttons.
