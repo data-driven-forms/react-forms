@@ -8,6 +8,8 @@ import get from 'lodash/get';
 import set from 'lodash/set';
 import flattenDeep from 'lodash/flattenDeep';
 
+const DYNAMIC_WIZARD_TYPES = [ 'function', 'object' ];
+
 const Modal = ({ children, container, inModal }) => inModal ? createPortal(<Backdrop>
   <Bullseye>
     { children }
@@ -19,7 +21,7 @@ class Wizard extends React.Component {
     super(props);
 
     // find if wizard contains any dynamic steps (nextStep is mapper object)
-    const isDynamic = this.props.isDynamic ? true : this.props.fields.find(({ nextStep }) => typeof nextStep === 'object') ? true : false;
+    const isDynamic = this.props.isDynamic || this.props.fields.some(({ nextStep }) => DYNAMIC_WIZARD_TYPES.includes(typeof nextStep));
 
     this.state = {
       activeStep: this.props.fields[0].stepKey,
@@ -98,29 +100,27 @@ class Wizard extends React.Component {
       }, () => this.setState((prevState) => {
         const INDEXING_BY_ZERO = 1;
 
-        let newState;
+        let newState = {};
 
         const currentStep = this.findCurrentStep(prevState.prevSteps[index]);
-        const currentStepHasStepMapper = typeof currentStep.nextStep === 'object';
+        const currentStepHasStepMapper = DYNAMIC_WIZARD_TYPES.includes(typeof currentStep.nextStep);
 
         const dynamicStepShouldDisableNav = prevState.isDynamic && (currentStepHasStepMapper || !this.props.predictSteps);
 
+        const invalidStepShouldDisableNav = valid === false;
+
         if (dynamicStepShouldDisableNav) {
-          const newPrevSteps = prevState.prevSteps.slice(0, index);
           newState = {
             navSchema: this.props.predictSteps ? this.createSchema({ currentIndex: index }) : prevState.navSchema.slice(0, index + INDEXING_BY_ZERO),
-            prevSteps: newPrevSteps,
-            maxStepIndex: newPrevSteps.length,
+            prevSteps: prevState.prevSteps.slice(0, index),
+            maxStepIndex: index,
           };
         } else if (currentStep.disableForwardJumping) {
-          const newPrevSteps = prevState.prevSteps.slice(0, index);
           newState = {
-            prevSteps: newPrevSteps,
-            maxStepIndex: newPrevSteps.length,
+            prevSteps: prevState.prevSteps.slice(0, index),
+            maxStepIndex: index,
           };
-        }
-
-        if (valid === false) {
+        } else if (invalidStepShouldDisableNav) {
           const indexOfCurrentStep = prevState.prevSteps.indexOf(originalActiveStep);
 
           newState = {
@@ -164,6 +164,10 @@ class Wizard extends React.Component {
 
       if (typeof field.nextStep === 'object') {
         nextStep = nextStep.stepMapper[get(values, nextStep.when)];
+      }
+
+      if (typeof field.nextStep === 'function') {
+        nextStep = field.nextStep({ values });
       }
 
       if (nextStep) {

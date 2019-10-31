@@ -49,6 +49,7 @@ export const wizardSchema = {
           google: 'google',
         },
       },
+      nextStep1: ({ values }) => values.source && values.source['source-type'],
       fields: [{
         component: componentTypes.TEXTAREA_FIELD,
         name: 'source.source-name',
