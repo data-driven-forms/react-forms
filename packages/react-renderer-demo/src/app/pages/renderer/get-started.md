@@ -1,4 +1,4 @@
-import RawComponent from '../common/component/raw-component';
+import RawComponent from '@docs/raw-component';
 
 ## React form renderer
 
