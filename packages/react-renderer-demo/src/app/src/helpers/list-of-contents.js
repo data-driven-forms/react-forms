@@ -6,6 +6,13 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
+import { useRouter } from 'next/router';
+
+const reqSource = require.context(
+  '!raw-loader!@docs/pages',
+  true,
+  /\.md/,
+);
 
 export const headerToId = (header) => header.replace(/#/g, '').replace(/ /g, '').toLowerCase();
 
@@ -27,12 +34,13 @@ const useLinkStyles = makeStyles(theme => ({
 
 const ListHeader = ({ text }) => {
   const classes = useLinkStyles();
+  const router = useRouter();
   const level = (text.match(/#/g) || []).length;
   const labelText = text.replace(/#/g, '');
   return (
     <a
       className={ classes.link }
-      href={ `${window.location.origin}${window.location.pathname}#${headerToId(text)}` }
+      href={ `${router.pathname}#${headerToId(text)}` }
       title={ labelText }
     >
       { [ ...new Array(level - 2) ].map((_v, index) => (
@@ -49,6 +57,10 @@ ListHeader.propTypes = {
 };
 
 const useStyles = makeStyles(theme => ({
+  fixedContainer: {
+    position: 'fixed',
+    paddingLeft: 16,
+  },
   listItem: {
     padding: 0,
   },
@@ -104,7 +116,7 @@ const scrollListener = (setActive) => {
   }
 };
 
-const ListOfContents = ({ text }) => {
+const ListOfContents = ({ file }) => {
   const [ activeItem, setActive ] = useState();
   useEffect(() => {
     document.addEventListener('scroll', () => scrollListener(setActive));
@@ -112,11 +124,12 @@ const ListOfContents = ({ text }) => {
     return () => document.removeEventListener('scroll', scrollListener);
   }, []);
   const classes = useStyles();
+  const text = reqSource(`./${file}.md`).default;
 
   const regex = /^###?#? .*/gm;
   const found = text.match(regex) || [];
   return (
-    <Fragment>
+    <div className={ classes.fixedContainer }>
       <Typography className={ classes.contentHeader } component="h3">Content</Typography>
       <List dense>
         { found.map(text =>(
@@ -132,12 +145,12 @@ const ListOfContents = ({ text }) => {
           </ListItem>
         )) }
       </List>
-    </Fragment>
+    </div>
   );
 };
 
 ListOfContents.propTypes = {
-  text: PropTypes.string.isRequired,
+  file: PropTypes.string.isRequired,
 };
 
 export default ListOfContents;

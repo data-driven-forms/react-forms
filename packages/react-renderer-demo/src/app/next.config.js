@@ -48,6 +48,8 @@ module.exports = withMDX(withCSS({
       ...config.resolve.alias,
       '@docs/raw-component': path.resolve(__dirname, './src/components/common/raw-component'),
       '@docs/doc-components': path.resolve(__dirname, './src/doc-components'),
+      '@docs/components': path.resolve(__dirname, './src/components'),
+      '@docs/pages': path.resolve(__dirname, './pages'),
     };
 
     config.module.rules.push({

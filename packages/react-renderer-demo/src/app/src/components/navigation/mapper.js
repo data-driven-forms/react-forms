@@ -26,7 +26,7 @@ const Item = ({ href, linkText, component }) => {
       key={ href || linkText }
       className={ classes.nested }
       component={ forwardRef((props, ref) => (
-        <RouterNavLink key={ component } href={ href }>
+        <RouterNavLink key={ component } href={ href.replace('/?', '?') }>
           <Link style={{ color: 'rgba(0, 0, 0, 0.87)' }} { ...props } />
         </RouterNavLink>
       )) }
