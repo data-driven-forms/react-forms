@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 import LandingPageTitle from '@docs/components/landing-page/landing-page-title';
 import LandingPageCards from '@docs/components/landing-page/landing-page-cards';
@@ -46,7 +46,7 @@ const LandingPage = () => {
           JSON form definitions and renders them into react components.
         </Typography>
         <div className={ classes.getStartedLink }>
-          <Link to="/renderer/installation" style={{ textDecoration: 'none' }}>
+          <Link href="/renderer/installation">
             <Button variant="outlined" className={ classes.getStartedButton }>
               Get started
             </Button>

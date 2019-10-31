@@ -21,8 +21,6 @@ import findConnectedLinks from './navigation/find-connected-links';
 import ConnectedLinks from './common/connected-links';
 import Footer from './footer';
 
-import { withRouter } from 'react-router-dom';
-
 export const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -235,4 +233,4 @@ Layout.propTypes = {
   children: PropTypes.oneOfType([ PropTypes.node, PropTypes.arrayOf(PropTypes.node) ]),
 };
 
-export default withRouter(Layout);
+export default Layout;
