@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 
-import CodeEditor from '../common/component/code-editor';
+import CodeEditor from '@docs/components/code-editor';
 
 const value = `import React from 'react';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
