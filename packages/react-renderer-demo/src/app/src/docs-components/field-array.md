@@ -1,9 +1,9 @@
-import { NavLink } from 'react-router-dom';
-import RawComponent from '../common/component/raw-component';
+import NavLink from 'next/link';
+import RawComponent from '@docs/raw-component';
 
 ### Field Array Provider
 
-Simillarly to <NavLink to='/renderer/field-provider'>FieldProvider</NavLink> Data driven forms provide an option how to inlude <a href='https://github.com/final-form/react-final-form-arrays'>React Final Form Arrays</a> in your form.
+Simillarly to <NavLink href='/renderer/field-provider'><a>FieldProvider</a></NavLink> Data driven forms provide an option how to inlude <a href='https://github.com/final-form/react-final-form-arrays'>React Final Form Arrays</a> in your form.
 
 <b>Please visit their documentation to learn about functionality.</b>
 
@@ -49,7 +49,7 @@ You don't need to name the nested components, then the values are saved as an ar
 
 ### Validators
 
-You can use user a few provided validators (you can also use your <NavLink to='/renderer/validators'>own</NavLink>.)
+You can use user a few provided validators (you can also use your <NavLink href='/renderer/validators'><a>own</a></NavLink>.)
 
 ```jsx
 MIN_ITEMS_VALIDATOR: ({threshold})

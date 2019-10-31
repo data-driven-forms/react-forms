@@ -1,15 +1,15 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
-import { componentTypes } from '@data-driven-forms/react-form-renderer';
-
+import PropTypes from 'prop-types';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 import Drawer from '@material-ui/core/Drawer';
+import Toolbar from '@material-ui/core/Toolbar';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import { useRouter } from 'next/router';
+import {componentTypes} from '@data-driven-forms/react-form-renderer';
 
 import { flatSchema } from './navigation/schema';
 import GhIcon from './common/gh-svg-icon';
@@ -21,7 +21,7 @@ import findConnectedLinks from './navigation/find-connected-links';
 import ConnectedLinks from './common/connected-links';
 import Footer from './footer';
 
-const drawerWidth = 240;
+export const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
   mainGradient: {
@@ -114,8 +114,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Layout = ({ children }) => {
-  const classes = useStyles();
   const router = useRouter();
+  const classes = useStyles();
   const [ open, setOpen ] = useState(router.pathname !== '/');
   const [ mappers, setMappers ] = useState({ loaded: false, mappers: {}});
   const [ links, setLinks ] = useState({});
@@ -127,6 +127,7 @@ const Layout = ({ children }) => {
       import('@data-driven-forms/pf4-component-mapper'),
       import('@data-driven-forms/mui-component-mapper'),
     ];
+
     Promise.all(promises).then(([ pf3, pf4, mui ]) => setMappers({ loaded: true, mappers: { pf3: {
       ...pf3,
       formFieldsMapper: {
@@ -151,11 +152,10 @@ const Layout = ({ children }) => {
     setTimeout(() => searchRef.current.focus(), 500);
   };
 
-  const handleDrawerClose = () => {
+  function handleDrawerClose() {
     setOpen(false);
-  };
+  }
 
-  const pathname = router.pathname;
   return (
     <MapperContext.Provider value={ mappers }>
       <MenuContext.Provider value={ links }>
@@ -191,8 +191,8 @@ const Layout = ({ children }) => {
           <main
             className={ clsx(classes.content, {
               [classes.contentShift]: open,
-              [classes.mainGradient]: pathname === '/',
-              [classes.mainGradientShift]: pathname === '/' && open,
+              [classes.mainGradient]: router.pathname === '/',
+              [classes.mainGradientShift]: router.pathname === '/' && open,
             }) }
           >
             <div className={ clsx(classes.drawerHeader, classes.appBar, classes.rightAppBar, {
@@ -227,6 +227,10 @@ const Layout = ({ children }) => {
 
     </MapperContext.Provider>
   );
+};
+
+Layout.propTypes = {
+  children: PropTypes.oneOfType([ PropTypes.node, PropTypes.arrayOf(PropTypes.node) ]),
 };
 
 export default Layout;

@@ -59,5 +59,8 @@
         "successComment": ":tada: This ${issue.pull_request ? 'PR is included' : 'issue has been resolved'} in version ${nextRelease.version} :tada:\n\nThe release is available on \n\n- [GitHub release](<github_release_url>)\n\n- [npm package (@latest dist-tag)](<npm_release_url>)\n\nDemo can be found [here](http://data-driven-forms.surge.sh/)!"
       }
     ]
+  },
+  "dependencies": {
+    "n": "^6.0.1"
   }
 }

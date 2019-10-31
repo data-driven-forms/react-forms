@@ -5,10 +5,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 
-import dynamic from 'next/dynamic'
-const CodeEditor = dynamic(import('../code-editor'), {
-  ssr: false
-});
+import dynamic from 'next/dynamic';
+const CodeEditor = dynamic(import('@docs/components/code-editor'))
 
 const value = `import React from 'react';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';

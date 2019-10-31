@@ -1,0 +1,14 @@
+{
+    "hosting": {
+      "public": "dist/public",
+      "rewrites": [
+        {
+          "source": "**/**",
+          "function": "next"
+        }
+      ]
+    },
+    "functions": {
+      "source": "dist/functions"
+    }
+  }

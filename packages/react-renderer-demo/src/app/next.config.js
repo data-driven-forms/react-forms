@@ -7,6 +7,7 @@ const path = require('path');
 
 module.exports = withMDX(withCSS({
   pageExtensions: [ 'js', 'jsx', 'md', 'mdx' ],
+  distDir: '../../dist/functions/next',
   webpack: (config, options) => {
     const { dir, isServer } = options;
     config.externals = [];
