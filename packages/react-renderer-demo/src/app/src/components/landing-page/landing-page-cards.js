@@ -32,6 +32,7 @@ const Form = () => (
 const useStyles = makeStyles(theme => ({
   cardsContainer: {
     backgroundColor: theme.palette.common.white,
+    minHeight: '100vh',
   },
   codeSnippet: {
     margin: '8px 0px',

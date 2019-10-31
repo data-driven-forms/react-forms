@@ -4,8 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 
-import LandingPageTitle from '../components/landing-page-title';
-import LandingPageCards from '../components/landing-page-cards';
+import LandingPageTitle from '@docs/components/landing-page/landing-page-title';
+import LandingPageCards from '@docs/components/landing-page/landing-page-cards';
 
 const useStyles = makeStyles(theme => ({
   landingPageContainer: {
