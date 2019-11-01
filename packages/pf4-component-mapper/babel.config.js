@@ -1,4 +1,1 @@
-module.exports = {
-  extends: '../../babel.config.js',
-};
-
+../common/babel.config.js
