@@ -31,7 +31,7 @@ export class DateTimePicker extends React.Component {
     super(props);
     this.state = {
       positionLeft: 0,
-      selectedDay: typeof props.value === 'string' ? new Date(props.value) : props.value,
+      selectedDay: props.value ? typeof props.value === 'string' ? new Date(props.value) : props.value : undefined,
       selectingMonth: false,
       selectingYear: false,
       isOpen: false,
