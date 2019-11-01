@@ -1,5 +1,7 @@
 [![Data Driven Form logo](images/logo.png)](https://data-driven-forms.org/)
 
+[![Build Status](https://travis-ci.org/data-driven-forms/react-forms.svg?branch=master)](https://travis-ci.org/data-driven-forms/react-forms)
+
 Data Driven Forms is a React library used for rendering and managing forms with a lot of provided features based on [React Final Form](https://github.com/final-form/react-final-form).
 
 :question: Why to use Data Driven Forms? :question:
