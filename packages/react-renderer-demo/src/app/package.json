@@ -49,9 +49,9 @@
     "@data-driven-forms/pf3-component-mapper": "*",
     "@data-driven-forms/pf4-component-mapper": "*",
     "@data-driven-forms/react-form-renderer": "*",
-    "@material-ui/core": "^4.2.1",
-    "@material-ui/icons": "^4.2.1",
-    "@material-ui/styles": "^4.4.1",
+    "@material-ui/core": "^4.5.2",
+    "@material-ui/icons": "^4.5.1",
+    "@material-ui/styles": "^4.5.2",
     "@mdx-js/loader": "^1.4.5",
     "@mdx-js/react": "^1.4.5",
     "@next/mdx": "^9.0.5",
@@ -65,13 +65,13 @@
     "patternfly-react": "^2.25.1",
     "prop-types": "^15.6.2",
     "raw-loader": "^3.1.0",
-    "react": "^16.11.0",
+    "react": "16.10.2",
     "react-ace": "^6.3.2",
     "react-copy-to-clipboard": "^5.0.1",
-    "react-dom": "^16.11.0",
+    "react-dom": "16.10.2",
     "react-router-dom": "^5.0.1"
   },
   "engines": {
-    "node": "8"
+    "node": ">=8"
   }
 }
