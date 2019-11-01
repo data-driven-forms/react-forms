@@ -31,7 +31,7 @@ export class DateTimePicker extends React.Component {
     super(props);
     this.state = {
       positionLeft: 0,
-      selectedDay: props.value,
+      selectedDay: typeof props.value === 'string' ? new Date(props.value) : props.value,
       selectingMonth: false,
       selectingYear: false,
       isOpen: false,
@@ -169,7 +169,7 @@ DateTimePicker.propTypes = {
   showTodayButton: PropTypes.bool,
   isDisabled: PropTypes.bool,
   disabledDays: PropTypes.array,
-  value: PropTypes.instanceOf(Date),
+  value: PropTypes.oneOfType([ PropTypes.instanceOf(Date), PropTypes.string ]),
   closeOnDaySelect: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   isClearable: PropTypes.bool,

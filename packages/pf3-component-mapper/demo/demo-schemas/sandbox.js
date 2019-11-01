@@ -431,6 +431,7 @@ const output = {
                   title: 'Datepicker with past days',
                   component: components.DATE_PICKER,
                   variant: 'date-time',
+                  initialValue: '2019-11-04T12:31:00.000Z',
                 },
               ],
               component: components.SUB_FORM,
