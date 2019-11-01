@@ -20,7 +20,7 @@
     "starter app"
   ],
   "author": "Martin Marosi",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/data-driven-forms/react-starter/issues"
   },
