@@ -26,4 +26,9 @@ describe('#enhancedOnChange', () => {
     };
     expect(enhancedOnChange(undefined, value => value, value)).toEqual('Me');
   });
+
+  it('should correctly convert array datatype from strings to integers', () => {
+    const value = [ '1', '2', 3 ];
+    expect(enhancedOnChange('integer', value => value, value)).toEqual([ 1, 2, 3 ]);
+  });
 });
