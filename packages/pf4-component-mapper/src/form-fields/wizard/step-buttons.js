@@ -42,7 +42,7 @@ SimpleNext.propTypes = {
   submit: PropTypes.func.isRequired,
   nextLabel: PropTypes.string.isRequired,
   getState: PropTypes.func.isRequired,
-  nextStep: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]).isRequired,
+  nextStep: PropTypes.oneOfType([ PropTypes.string, PropTypes.object, PropTypes.func ]).isRequired,
 };
 
 const SubmitButton = ({ handleSubmit, submitLabel }) => <Button type="button" variant="primary" onClick={ handleSubmit }>{ submitLabel }</Button>;
@@ -117,6 +117,7 @@ WizardStepButtons.propTypes = {
       when: PropTypes.string.isRequired,
       stepMapper: PropTypes.object.isRequired,
     }),
+    PropTypes.func,
   ]),
   FieldProvider: PropTypes.func,
   buttonLabels: PropTypes.shape({

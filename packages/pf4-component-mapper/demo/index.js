@@ -6,7 +6,7 @@ import miqSchema from './demo-schemas/miq-schema';
 import { uiArraySchema, arraySchema, array1Schema, schema, uiSchema, conditionalSchema, arraySchemaDDF } from './demo-schemas/widget-schema';
 import { formFieldsMapper, layoutMapper } from '../src';
 import { Title, Button, Toolbar, ToolbarGroup } from '@patternfly/react-core';
-import { wizardSchema, wizardSchemaSimple, wizardSchemaSubsteps, wizardSchemaMoreSubsteps } from './demo-schemas/wizard-schema';
+import { wizardSchema, wizardSchemaWithFunction, wizardSchemaSimple, wizardSchemaSubsteps, wizardSchemaMoreSubsteps } from './demo-schemas/wizard-schema';
 import sandboxSchema from './demo-schemas/sandbox';
 
 const Summary = props => <div>Custom summary component.</div>;
@@ -62,6 +62,18 @@ class App extends React.Component {
                 {...this.state.additionalOptions}
             />
             {this.state.additionalOptions.wizard && <>
+                <div>Nextstep function</div>
+                <FormRenderer
+                    onSubmit={console.log}
+                    formFieldsMapper={{
+                        ...formFieldsMapper,
+                        summary: Summary
+                    }}
+                    onCancel={() => console.log('Cancel action')}
+                    layoutMapper={layoutMapper}
+                    schema={wizardSchemaWithFunction}
+                    {...this.state.additionalOptions}
+                    />
                 <div>Substeps</div>
                 <FormRenderer
                     onSubmit={console.log}
