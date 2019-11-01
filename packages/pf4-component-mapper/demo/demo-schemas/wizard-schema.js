@@ -49,7 +49,87 @@ export const wizardSchema = {
           google: 'google',
         },
       },
-      nextStep1: ({ values }) => values.source && values.source['source-type'],
+      fields: [{
+        component: componentTypes.TEXTAREA_FIELD,
+        name: 'source.source-name',
+        type: 'text',
+        label: 'Source name',
+      }, {
+        component: componentTypes.SELECT_COMPONENT,
+        name: 'source.source-type',
+        label: 'Source type',
+        isRequired: true,
+        options: [{
+          label: 'Please Choose',
+        }, {
+          value: 'aws',
+          label: 'Aws',
+        }, {
+          value: 'google',
+          label: 'Google',
+        }],
+        validate: [{
+          type: validatorTypes.REQUIRED,
+        }],
+      }],
+    }, {
+      title: 'Configure AWS',
+      name: 'step-2',
+      stepKey: 'aws',
+      substepOf: 'Summary',
+      nextStep: 'summary',
+      buttons: ValidateButtons,
+      fields: [{
+        component: componentTypes.TEXT_FIELD,
+        name: 'aws-field',
+        label: 'Aws field part',
+        validate: [{
+          type: validatorTypes.REQUIRED,
+        }],
+        isRequired: true,
+      }],
+    }, {
+      stepKey: 'google',
+      title: 'Configure google',
+      name: 'step-3',
+      nextStep: 'summary',
+      showTitle: false,
+      fields: [{
+        component: componentTypes.TEXT_FIELD,
+        name: 'google.google-field',
+        label: 'Google field part',
+        validate: [{
+          type: validatorTypes.REQUIRED,
+        }],
+      }],
+    }, {
+      fields: [{
+        name: 'summary',
+        component: 'summary',
+      }],
+      stepKey: 'summary',
+      name: 'summary',
+      substepOf: 'Summary',
+      title: 'Summary',
+    }],
+  }],
+};
+
+export const wizardSchemaWithFunction = {
+  fields: [{
+    component: componentTypes.WIZARD,
+    name: 'wizzard',
+    predictSteps: true,
+    //inModal: true,
+    title: 'Title',
+    showTitles: true,
+    description: 'Description',
+    buttonsPosition: 'left',
+    fields: [{
+      title: 'Get started with adding source',
+      name: 'step-1',
+      stepKey: 1,
+      nextStep: ({ values }) => values.source && values.source['source-type'],
       fields: [{
         component: componentTypes.TEXTAREA_FIELD,
         name: 'source.source-name',
