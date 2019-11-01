@@ -1,7 +1,7 @@
 {
   "name": "@data-driven-forms/mui-component-mapper",
   "version": "0.0.5",
-  "description": "Component mapper for\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5DMaterial ui component mapper form data-driven-forms.",
+  "description": "Component mapper for Material ui component mapper form data-driven-forms.",
   "main": "dist/index.js",
   "license": "Apache-2.0",
   "scripts": {
