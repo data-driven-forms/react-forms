@@ -13,6 +13,24 @@ const output = {
           name: '553',
           fields: [
             {
+              component: 'select-field',
+              name: 'select-field-1',
+              label: 'Dropdown 1',
+              visible: true,
+              dataType: 'number',
+              options: [
+                {
+                  value: 1,
+                  label: 'foo',
+                },
+                {
+                  value: 2,
+                  label: 'bar',
+                },
+              ],
+              multi: true,
+            },
+            {
               title: 'Text boxes',
               key: '637',
               fields: [

@@ -47,6 +47,12 @@ const convertType = (dataType, value) => ({
  * @param {Any} value value to be type casted
  * @param  {...any} args rest of orininal function arguments
  */
-const enhancedOnChange = (dataType, onChange, value, ...args) => onChange(convertType(dataType, sanitizeValue(value)), ...args);
+const enhancedOnChange = (dataType, onChange, value, ...args) => {
+  const sanitizedValue = sanitizeValue(value);
+  return onChange(
+    Array.isArray(sanitizedValue)
+      ? sanitizedValue.map(item => convertType(dataType, sanitizeValue(item)))
+      : convertType(dataType, sanitizedValue),
+    ...args);};
 
 export default enhancedOnChange;
