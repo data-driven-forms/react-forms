@@ -1,0 +1,23 @@
+version: 2.1
+jobs:
+  build:
+    working_directory: ~/react-forms
+    docker:
+      - image: circleci/node
+    steps:
+      - checkout
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      - run:
+          name: install-deps
+          command: yarn
+      - run:
+          name: build-packages
+          command: yarn build
+      - run:
+          name: test
+          command: yarn test
+      - run:
+          name: code-coverage
+          command: './node_modules/.bin/nyc report --reporter=text-lcov'
