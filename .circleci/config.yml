@@ -23,3 +23,31 @@ jobs:
       - codecov/upload:
           file: coverage/*.json
           flags: frontend
+       - persist_to_workspace:
+        root: ~/react-forms
+        paths:
+          - "*"
+  deploy:
+    working_directory: ~/react-forms
+    docker:
+      - image: circleci/node
+    steps:
+      - attach_workspace:
+          at: ~/react-forms
+      - run:
+          name: Authenticate with registry
+          command: |
+            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+            yarn release
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
