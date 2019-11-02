@@ -23,10 +23,10 @@ jobs:
       - codecov/upload:
           file: coverage/*.json
           flags: frontend
-       - persist_to_workspace:
-        root: ~/react-forms
-        paths:
-          - "*"
+      - persist_to_workspace:
+          root: ~/react-forms
+          paths:
+              - "*"
   deploy:
     working_directory: ~/react-forms
     docker:
