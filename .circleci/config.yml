@@ -47,9 +47,13 @@ jobs:
       - attach_workspace:
           at: ~/react-forms
       - run:
+          name: Install Firebase Tools
+          command: |
+              npm install --prefix=./firebase-deploy firebase-tools
+      - run:
           name: Deploy docs to firebase
           command: |
-              echo "There will be firebase reploy"
+             ./firebase-deploy/node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
 
 
 workflows:
