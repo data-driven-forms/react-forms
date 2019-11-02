@@ -19,7 +19,7 @@ jobs:
           command: yarn build
       - run:
           name: test
-          command: yarn test
+          command: yarn test:ci
       - codecov/upload:
           file: coverage/*.json
           flags: frontend
@@ -37,7 +37,7 @@ jobs:
       - run:
           name: Release new version
           command: |
-            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+            echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/react-forms/.npmrc
             yarn release
   deploy:
     working_directory: ~/react-forms
