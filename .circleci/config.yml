@@ -27,6 +27,18 @@ jobs:
           root: ~/react-forms
           paths:
               - "*"
+  release:
+    working_directory: ~/react-forms
+    docker:
+      - image: circleci/node
+    steps:
+      - attach_workspace:
+          at: ~/react-forms
+      - run:
+          name: Release new version
+          command: |
+            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+            yarn release
   deploy:
     working_directory: ~/react-forms
     docker:
@@ -35,16 +47,22 @@ jobs:
       - attach_workspace:
           at: ~/react-forms
       - run:
-          name: Authenticate with registry
+          name: Deploy docs to firebase
           command: |
-            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-            yarn release
+              echo "There will be firebase reploy"
+
 
 workflows:
   version: 2
   build_and_deploy:
     jobs:
       - build
+      - release:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
       - deploy:
           requires:
             - build
