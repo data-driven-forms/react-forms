@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.4
 jobs:
   build:
     working_directory: ~/react-forms
@@ -18,6 +20,6 @@ jobs:
       - run:
           name: test
           command: yarn test
-      - run:
-          name: code-coverage
-          command: './node_modules/.bin/nyc report --reporter=text-lcov'
+      - codecov/upload:
+          file: coverage/*.json
+          flags: frontend
