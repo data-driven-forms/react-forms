@@ -104,6 +104,14 @@ describe('Default schema validator', () => {
     }]}, formFieldsMapper)).toThrowErrorMatchingSnapshot();
   });
 
+  it('should not fail if validate is undefined.', () => {
+    expect(() => defaultSchemaValidator({ fields: [{
+      component: 'foo',
+      name: 'foo',
+      validate: undefined,
+    }]}, formFieldsMapper)).not.toThrow();
+  });
+
   it('should not fail if field validate item is a function.', () => {
     const functionValidator = (value) => 'cosi';
     expect(() => defaultSchemaValidator({ fields: [{

@@ -60,6 +60,10 @@ const checkCondition = (condition, fieldName) => {
 };
 
 const checkValidators = (validate, fieldName) => {
+  if (validate === undefined) {
+    return;
+  }
+
   if (!Array.isArray(validate)) {
     throw new DefaultSchemaError(`
       Error occured in field definition with name: "${fieldName}".

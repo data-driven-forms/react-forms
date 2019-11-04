@@ -42,6 +42,7 @@ const output = {
                   bsSize: 'mn',
                   onText: 'True',
                   offText: 'False',
+                  validate: undefined,
                 },
                 {
                   name: 'text_box_111',
