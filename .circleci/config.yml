@@ -22,7 +22,6 @@ jobs:
           command: yarn test:ci
       - codecov/upload:
           file: coverage/*.json
-          flags: frontend
       - persist_to_workspace:
           root: ~/react-forms
           paths:
