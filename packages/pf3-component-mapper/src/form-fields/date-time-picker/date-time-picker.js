@@ -31,7 +31,7 @@ export class DateTimePicker extends React.Component {
     super(props);
     this.state = {
       positionLeft: 0,
-      selectedDay: props.value ? typeof props.value === 'string' ? new Date(props.value) : props.value : undefined,
+      selectedDay: this.createDate(),
       selectingMonth: false,
       selectingYear: false,
       isOpen: false,
@@ -45,67 +45,69 @@ export class DateTimePicker extends React.Component {
     });
   }
 
+  createDate = () => this.props.value ? typeof this.props.value === 'string' ? new Date(this.props.value) : this.props.value : undefined;
+
   handleOverlayToggle = isOpen => this.setState({ isOpen })
 
-  handleDayChange = day => this.setState(prevProps => ({
-    selectedDay: new Date(
+  handleDayChange = day => {
+    const prevDate = this.createDate();
+    const newDate = new Date(
       day.getFullYear(),
       day.getMonth(),
       day.getDate(),
-      prevProps.selectedDay && prevProps.selectedDay.getHours() || new Date().getHours(),
-      prevProps.selectedDay && prevProps.selectedDay.getMinutes() || new Date().getMinutes()
-    ),
-    isOpen: !this.props.closeOnDaySelect,
-  }), () => this.props.onChange(this.state.selectedDay));
+      prevDate && prevDate.getHours() || new Date().getHours(),
+      prevDate && prevDate.getMinutes() || new Date().getMinutes()
+    );
+    this.setState({
+      isOpen: this.props.closeOnDaySelect,
+    });
+    return this.props.onChange(newDate);
+  };
 
-  handleYearChange = year => this.setState(({ selectedDay = new Date() }) => ({
-    selectedDay: selectValidDate(new Date(
+  handleYearChange = year => {
+    const prevDate = this.createDate();
+    const newDate = selectValidDate(new Date(
       year,
-      selectedDay.getMonth(),
-      selectedDay.getDate(),
-      selectedDay.getHours(),
-      selectedDay.getMinutes()
-    ), this.props.disabledDays),
-  }), () => this.props.onChange(this.state.selectedDay))
+      prevDate.getMonth(),
+      prevDate.getDate(),
+      prevDate.getHours(),
+      prevDate.getMinutes()
+    ), this.props.disabledDays);
+    return this.props.onChange(newDate);
+  }
 
-  handleMonthChange = month => this.setState(({ selectedDay = new Date() }) => ({
-    selectedDay: selectValidDate(new Date(
-      selectedDay.getFullYear(),
+  handleMonthChange = month => {
+    const prevDate = this.createDate();
+    const newDate = selectValidDate(new Date(
+      prevDate.getFullYear(),
       month,
-      selectedDay.getDate(),
-      selectedDay.getHours(),
-      selectedDay.getMinutes()
-    ), this.props.disabledDays),
-  }), () => this.props.onChange(this.state.selectedDay));
+      prevDate.getDate(),
+      prevDate.getHours(),
+      prevDate.getMinutes()
+    ), this.props.disabledDays);
+    return this.props.onChange(newDate);
+  }
 
   toggleSelectingMonth = selectingMonth => this.setState({ selectingMonth })
 
   toggleSelectingYear = selectingYear => this.setState({ selectingYear })
 
-  handleChangeHours = hours => this.setState(({ selectedDay = new Date() }) => ({
-    selectedDay: new Date(
-      selectedDay.getFullYear(),
-      selectedDay.getMonth(),
-      selectedDay.getDate(),
-      hours,
-      selectedDay.getMinutes()
-    ),
-  }), () => this.props.onChange(this.state.selectedDay))
+  handleChangeHours = hours => {
+    const prevDate = this.createDate() || new Date();
+    prevDate.setHours(hours);
+    return this.props.onChange(new Date(prevDate));
+  }
 
-  handleChangeMinutes = minutes => this.setState(({ selectedDay = new Date() }) => ({
-    selectedDay: new Date(
-      selectedDay.getFullYear(),
-      selectedDay.getMonth(),
-      selectedDay.getDate(),
-      selectedDay.getHours(),
-      minutes
-    ),
-  }), () => this.props.onChange(this.state.selectedDay))
+  handleChangeMinutes = minutes => {
+    const prevDate = this.createDate() || new Date();
+    prevDate.setMinutes(minutes);
+    return this.props.onChange(new Date(prevDate));
+  }
 
-  clearValue = () => this.setState({ selectedDay: undefined })
+  clearValue = () => this.props.onChange(undefined)
 
   render() {
-    const { isOpen, selectedDay, selectingYear, selectingMonth } = this.state;
+    const { isOpen, selectingYear, selectingMonth } = this.state;
     const {
       placeholder,
       variant,
@@ -116,6 +118,7 @@ export class DateTimePicker extends React.Component {
       disabledDays,
       isClearable,
     } = this.props;
+    const value = this.createDate();
     const inputPlaceholder = getPlaceholder(variant, placeholder);
     const cleanDisabledDays = createDisabledDays(disabledDays);
     return (
@@ -123,7 +126,7 @@ export class DateTimePicker extends React.Component {
         <PickerInput
           handleOverlayToggle={ this.handleOverlayToggle }
           placeholder={ inputPlaceholder }
-          selectedDay={ selectedDay }
+          selectedDay={ value }
           variant={ variant }
           locale={ locale }
           isDisabled={ isDisabled }
@@ -140,7 +143,7 @@ export class DateTimePicker extends React.Component {
         >
           <PopoverRoot
             onDayClick={ this.handleDayChange }
-            selectedDay={ selectedDay }
+            selectedDay={ value }
             toggleSelectingMonth={ this.toggleSelectingMonth }
             toggleSelectingYear={ this.toggleSelectingYear }
             selectingYear={ selectingYear }
@@ -173,6 +176,7 @@ DateTimePicker.propTypes = {
   closeOnDaySelect: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   isClearable: PropTypes.bool,
+  pristine: PropTypes.bool,
 };
 
 DateTimePicker.defaultProps = {

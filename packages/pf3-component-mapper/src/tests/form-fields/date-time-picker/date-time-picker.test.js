@@ -19,4 +19,3 @@ describe('<DateTimePicker />', () => {
     expect(wrapper.state().selectedDay).toBeUndefined();
   });
 });
-
