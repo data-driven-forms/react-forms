@@ -7,22 +7,33 @@ const output = {
   fields: [
     {
       name: 'text_box_1',
-      label: 'Text Box',
+      label: 'Text Box 1',
       title: 'Text Box',
       component: components.TEXT_FIELD,
     },
     {
+      name: 'text_box_1_condition',
+      label: 'Text Box conditional',
+      title: 'Text Box',
+      component: components.TEXT_FIELD,
+      condition: [{
+        when: [ 'text_box_1', 'text_box_4' ],
+        is: 'a',
+      }, {
+        when: 'text_box_3',
+        is: 'x',
+      }],
+    },
+    {
       name: 'text_box_2',
-      label: 'Text Box with help',
-      title: 'Text Box with help',
+      label: 'Text Box 2',
       helperText: 'Helper text',
       component: components.TEXT_FIELD,
       hideField: true,
     },
     {
       name: 'text_box_3',
-      label: 'Text Box required',
-      title: 'Text Box required',
+      label: 'Text Box 3',
       isRequired: true,
       component: components.TEXT_FIELD,
       validate: [
@@ -31,16 +42,18 @@ const output = {
     },
     {
       name: 'text_box_4',
-      label: 'Text Box readonly',
-      title: 'Text Box readonly',
+      label: 'Text Box 4',
       isReadOnly: true,
       component: components.TEXT_FIELD,
     },
     {
-      name: 'text_box_5',
-      label: 'Text Box default',
-      title: 'Text Box default',
+      name: 'foo',
+      label: 'Uaaaaaaaaaaaaaaaaa',
       component: components.TEXT_FIELD,
+      condition: {
+        when: 'text_box_1',
+        is: 'a',
+      },
     },
     {
       name: 'text_box_6',

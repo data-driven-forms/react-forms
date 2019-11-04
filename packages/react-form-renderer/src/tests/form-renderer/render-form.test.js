@@ -308,6 +308,70 @@ describe('renderForm function', () => {
       wrapper.update();
       expect(toJson(wrapper)).toMatchSnapshot();
     });
+
+    it('should render condition field only if one of depency fields has correct value', () => {
+      const formFields = [{
+        component: 'custom-component',
+        name: 'foo',
+        condition: {
+          when: [ 'a', 'b' ],
+          is: 'x',
+        },
+      }];
+      const wrapper = mount(
+        <ContextWrapper formFieldsMapper={{
+          'custom-component': ({ FieldProvider, dataType, formOptions, ...props }) => <div { ...props }>Custom component</div>,
+        }}>
+          { renderForm(formFields) }
+        </ContextWrapper>
+      );
+      expect(toJson(wrapper)).toMatchSnapshot();
+
+      wrapper.find(Form).instance().form.change('a', 'x');
+      wrapper.update();
+      expect(toJson(wrapper)).toMatchSnapshot();
+      wrapper.find(Form).instance().form.change('a', undefined);
+      wrapper.update();
+      expect(toJson(wrapper)).toMatchSnapshot();
+      wrapper.find(Form).instance().form.change('b', 'x');
+      wrapper.update();
+      expect(toJson(wrapper)).toMatchSnapshot();
+    });
+
+    it('should render condition field only if contition is array and passes all validations', () => {
+      const formFields = [{
+        component: 'custom-component',
+        name: 'foo',
+        condition: [{
+          when: [ 'a', 'b' ],
+          is: 'x',
+        }, {
+          when: 'c',
+          pattern: /fuzz/,
+        }],
+      }];
+      const wrapper = mount(
+        <ContextWrapper formFieldsMapper={{
+          'custom-component': ({ FieldProvider, dataType, formOptions, ...props }) => <div { ...props }>Custom component</div>,
+        }}>
+          { renderForm(formFields) }
+        </ContextWrapper>
+      );
+      expect(toJson(wrapper)).toMatchSnapshot();
+
+      wrapper.find(Form).instance().form.change('a', 'x');
+      wrapper.update();
+      expect(toJson(wrapper)).toMatchSnapshot();
+      wrapper.find(Form).instance().form.change('a', undefined);
+      wrapper.update();
+      expect(toJson(wrapper)).toMatchSnapshot();
+      wrapper.find(Form).instance().form.change('c', 'something fuzz is great');
+      wrapper.update();
+      expect(toJson(wrapper)).toMatchSnapshot();
+      wrapper.find(Form).instance().form.change('a', 'x');
+      wrapper.update();
+      expect(toJson(wrapper)).toMatchSnapshot();
+    });
   });
 
   describe('#clearOnUmount', () => {

@@ -16,7 +16,6 @@ const submitTest = (...args) => new Promise(resolve => {
 })
 
 const FormButtons = props => {
-    console.log('form buttons props', props)
     return (
         <div>
             <button disabled={props.submitting} type="button" onClick={props.form.submit}>Submit</button>

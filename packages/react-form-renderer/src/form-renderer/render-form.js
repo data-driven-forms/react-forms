@@ -21,7 +21,7 @@ FormFieldHideWrapper.defaultProps = {
 };
 
 const FormConditionWrapper = ({ condition, children }) => (condition ? (
-  <Condition { ...condition }>
+  <Condition condition={ condition }>
     { children }
   </Condition>
 ) : children);

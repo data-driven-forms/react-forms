@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renderForm function #condition should render condition field only if the condition is met 1`] = `
+exports[`renderForm function #condition should render condition field only if contition is array and passes all validations 1`] = `
 <ContextWrapper
   formFieldsMapper={
     Object {
@@ -28,28 +28,40 @@ exports[`renderForm function #condition should render condition field only if th
   >
     <FormConditionWrapper
       condition={
-        Object {
-          "is": "fuzz",
-          "when": "bar",
-        }
+        Array [
+          Object {
+            "is": "x",
+            "when": Array [
+              "a",
+              "b",
+            ],
+          },
+          Object {
+            "pattern": /fuzz/,
+            "when": "c",
+          },
+        ]
       }
     >
       <Condition
-        is="fuzz"
-        when="bar"
-      >
-        <ReactFinalForm(Field)
-          name="bar"
-          subscription={
+        condition={
+          Array [
             Object {
-              "value": true,
-            }
-          }
-        >
-          <Field
-            format={[Function]}
-            name="bar"
-            parse={[Function]}
+              "is": "x",
+              "when": Array [
+                "a",
+                "b",
+              ],
+            },
+            Object {
+              "pattern": /fuzz/,
+              "when": "c",
+            },
+          ]
+        }
+      >
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
             reactFinalForm={
               Object {
                 "batch": [Function],
@@ -85,13 +97,1001 @@ exports[`renderForm function #condition should render condition field only if th
                 "subscribe": [Function],
               }
             }
-            subscription={
+          />
+        </ReactFinalForm(FormSpy)>
+      </Condition>
+    </FormConditionWrapper>
+  </ReactFinalForm>
+</ContextWrapper>
+`;
+
+exports[`renderForm function #condition should render condition field only if contition is array and passes all validations 2`] = `
+<ContextWrapper
+  formFieldsMapper={
+    Object {
+      "custom-component": [Function],
+    }
+  }
+>
+  <ReactFinalForm
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
+    onSubmit={[MockFunction]}
+  >
+    <FormConditionWrapper
+      condition={
+        Array [
+          Object {
+            "is": "x",
+            "when": Array [
+              "a",
+              "b",
+            ],
+          },
+          Object {
+            "pattern": /fuzz/,
+            "when": "c",
+          },
+        ]
+      }
+    >
+      <Condition
+        condition={
+          Array [
+            Object {
+              "is": "x",
+              "when": Array [
+                "a",
+                "b",
+              ],
+            },
+            Object {
+              "pattern": /fuzz/,
+              "when": "c",
+            },
+          ]
+        }
+      >
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
+            reactFinalForm={
               Object {
-                "value": true,
+                "batch": [Function],
+                "blur": [Function],
+                "change": [Function],
+                "destroyOnUnregister": false,
+                "focus": [Function],
+                "getFieldState": [Function],
+                "getRegisteredFields": [Function],
+                "getState": [Function],
+                "initialize": [Function],
+                "isValidationPaused": [Function],
+                "mutators": Object {
+                  "concat": [Function],
+                  "insert": [Function],
+                  "move": [Function],
+                  "pop": [Function],
+                  "push": [Function],
+                  "remove": [Function],
+                  "removeBatch": [Function],
+                  "shift": [Function],
+                  "swap": [Function],
+                  "unshift": [Function],
+                  "update": [Function],
+                },
+                "pauseValidation": [Function],
+                "registerField": [Function],
+                "reset": [Function],
+                "resetFieldState": [Function],
+                "resumeValidation": [Function],
+                "setConfig": [Function],
+                "submit": [Function],
+                "subscribe": [Function],
               }
             }
           />
-        </ReactFinalForm(Field)>
+        </ReactFinalForm(FormSpy)>
+      </Condition>
+    </FormConditionWrapper>
+  </ReactFinalForm>
+</ContextWrapper>
+`;
+
+exports[`renderForm function #condition should render condition field only if contition is array and passes all validations 3`] = `
+<ContextWrapper
+  formFieldsMapper={
+    Object {
+      "custom-component": [Function],
+    }
+  }
+>
+  <ReactFinalForm
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
+    onSubmit={[MockFunction]}
+  >
+    <FormConditionWrapper
+      condition={
+        Array [
+          Object {
+            "is": "x",
+            "when": Array [
+              "a",
+              "b",
+            ],
+          },
+          Object {
+            "pattern": /fuzz/,
+            "when": "c",
+          },
+        ]
+      }
+    >
+      <Condition
+        condition={
+          Array [
+            Object {
+              "is": "x",
+              "when": Array [
+                "a",
+                "b",
+              ],
+            },
+            Object {
+              "pattern": /fuzz/,
+              "when": "c",
+            },
+          ]
+        }
+      >
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
+            reactFinalForm={
+              Object {
+                "batch": [Function],
+                "blur": [Function],
+                "change": [Function],
+                "destroyOnUnregister": false,
+                "focus": [Function],
+                "getFieldState": [Function],
+                "getRegisteredFields": [Function],
+                "getState": [Function],
+                "initialize": [Function],
+                "isValidationPaused": [Function],
+                "mutators": Object {
+                  "concat": [Function],
+                  "insert": [Function],
+                  "move": [Function],
+                  "pop": [Function],
+                  "push": [Function],
+                  "remove": [Function],
+                  "removeBatch": [Function],
+                  "shift": [Function],
+                  "swap": [Function],
+                  "unshift": [Function],
+                  "update": [Function],
+                },
+                "pauseValidation": [Function],
+                "registerField": [Function],
+                "reset": [Function],
+                "resetFieldState": [Function],
+                "resumeValidation": [Function],
+                "setConfig": [Function],
+                "submit": [Function],
+                "subscribe": [Function],
+              }
+            }
+          />
+        </ReactFinalForm(FormSpy)>
+      </Condition>
+    </FormConditionWrapper>
+  </ReactFinalForm>
+</ContextWrapper>
+`;
+
+exports[`renderForm function #condition should render condition field only if contition is array and passes all validations 4`] = `
+<ContextWrapper
+  formFieldsMapper={
+    Object {
+      "custom-component": [Function],
+    }
+  }
+>
+  <ReactFinalForm
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
+    onSubmit={[MockFunction]}
+  >
+    <FormConditionWrapper
+      condition={
+        Array [
+          Object {
+            "is": "x",
+            "when": Array [
+              "a",
+              "b",
+            ],
+          },
+          Object {
+            "pattern": /fuzz/,
+            "when": "c",
+          },
+        ]
+      }
+    >
+      <Condition
+        condition={
+          Array [
+            Object {
+              "is": "x",
+              "when": Array [
+                "a",
+                "b",
+              ],
+            },
+            Object {
+              "pattern": /fuzz/,
+              "when": "c",
+            },
+          ]
+        }
+      >
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
+            reactFinalForm={
+              Object {
+                "batch": [Function],
+                "blur": [Function],
+                "change": [Function],
+                "destroyOnUnregister": false,
+                "focus": [Function],
+                "getFieldState": [Function],
+                "getRegisteredFields": [Function],
+                "getState": [Function],
+                "initialize": [Function],
+                "isValidationPaused": [Function],
+                "mutators": Object {
+                  "concat": [Function],
+                  "insert": [Function],
+                  "move": [Function],
+                  "pop": [Function],
+                  "push": [Function],
+                  "remove": [Function],
+                  "removeBatch": [Function],
+                  "shift": [Function],
+                  "swap": [Function],
+                  "unshift": [Function],
+                  "update": [Function],
+                },
+                "pauseValidation": [Function],
+                "registerField": [Function],
+                "reset": [Function],
+                "resetFieldState": [Function],
+                "resumeValidation": [Function],
+                "setConfig": [Function],
+                "submit": [Function],
+                "subscribe": [Function],
+              }
+            }
+          />
+        </ReactFinalForm(FormSpy)>
+      </Condition>
+    </FormConditionWrapper>
+  </ReactFinalForm>
+</ContextWrapper>
+`;
+
+exports[`renderForm function #condition should render condition field only if contition is array and passes all validations 5`] = `
+<ContextWrapper
+  formFieldsMapper={
+    Object {
+      "custom-component": [Function],
+    }
+  }
+>
+  <ReactFinalForm
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
+    onSubmit={[MockFunction]}
+  >
+    <FormConditionWrapper
+      condition={
+        Array [
+          Object {
+            "is": "x",
+            "when": Array [
+              "a",
+              "b",
+            ],
+          },
+          Object {
+            "pattern": /fuzz/,
+            "when": "c",
+          },
+        ]
+      }
+    >
+      <Condition
+        condition={
+          Array [
+            Object {
+              "is": "x",
+              "when": Array [
+                "a",
+                "b",
+              ],
+            },
+            Object {
+              "pattern": /fuzz/,
+              "when": "c",
+            },
+          ]
+        }
+      >
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
+            reactFinalForm={
+              Object {
+                "batch": [Function],
+                "blur": [Function],
+                "change": [Function],
+                "destroyOnUnregister": false,
+                "focus": [Function],
+                "getFieldState": [Function],
+                "getRegisteredFields": [Function],
+                "getState": [Function],
+                "initialize": [Function],
+                "isValidationPaused": [Function],
+                "mutators": Object {
+                  "concat": [Function],
+                  "insert": [Function],
+                  "move": [Function],
+                  "pop": [Function],
+                  "push": [Function],
+                  "remove": [Function],
+                  "removeBatch": [Function],
+                  "shift": [Function],
+                  "swap": [Function],
+                  "unshift": [Function],
+                  "update": [Function],
+                },
+                "pauseValidation": [Function],
+                "registerField": [Function],
+                "reset": [Function],
+                "resetFieldState": [Function],
+                "resumeValidation": [Function],
+                "setConfig": [Function],
+                "submit": [Function],
+                "subscribe": [Function],
+              }
+            }
+          >
+            <FormFieldHideWrapper
+              hideField={false}
+            >
+              <FieldWrapper
+                component={[Function]}
+                componentType="custom-component"
+                formOptions={
+                  Object {
+                    "renderForm": [Function],
+                  }
+                }
+                name="foo"
+                validate={
+                  Array [
+                    undefined,
+                  ]
+                }
+              >
+                <customComponent
+                  FieldProvider={[Function]}
+                  formOptions={
+                    Object {
+                      "renderForm": [Function],
+                    }
+                  }
+                  name="foo"
+                  validate={[Function]}
+                >
+                  <div
+                    name="foo"
+                    validate={[Function]}
+                  >
+                    Custom component
+                  </div>
+                </customComponent>
+              </FieldWrapper>
+            </FormFieldHideWrapper>
+          </FormSpy>
+        </ReactFinalForm(FormSpy)>
+      </Condition>
+    </FormConditionWrapper>
+  </ReactFinalForm>
+</ContextWrapper>
+`;
+
+exports[`renderForm function #condition should render condition field only if one of depency fields has correct value 1`] = `
+<ContextWrapper
+  formFieldsMapper={
+    Object {
+      "custom-component": [Function],
+    }
+  }
+>
+  <ReactFinalForm
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
+    onSubmit={[MockFunction]}
+  >
+    <FormConditionWrapper
+      condition={
+        Object {
+          "is": "x",
+          "when": Array [
+            "a",
+            "b",
+          ],
+        }
+      }
+    >
+      <Condition
+        condition={
+          Object {
+            "is": "x",
+            "when": Array [
+              "a",
+              "b",
+            ],
+          }
+        }
+      >
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
+            reactFinalForm={
+              Object {
+                "batch": [Function],
+                "blur": [Function],
+                "change": [Function],
+                "destroyOnUnregister": false,
+                "focus": [Function],
+                "getFieldState": [Function],
+                "getRegisteredFields": [Function],
+                "getState": [Function],
+                "initialize": [Function],
+                "isValidationPaused": [Function],
+                "mutators": Object {
+                  "concat": [Function],
+                  "insert": [Function],
+                  "move": [Function],
+                  "pop": [Function],
+                  "push": [Function],
+                  "remove": [Function],
+                  "removeBatch": [Function],
+                  "shift": [Function],
+                  "swap": [Function],
+                  "unshift": [Function],
+                  "update": [Function],
+                },
+                "pauseValidation": [Function],
+                "registerField": [Function],
+                "reset": [Function],
+                "resetFieldState": [Function],
+                "resumeValidation": [Function],
+                "setConfig": [Function],
+                "submit": [Function],
+                "subscribe": [Function],
+              }
+            }
+          />
+        </ReactFinalForm(FormSpy)>
+      </Condition>
+    </FormConditionWrapper>
+  </ReactFinalForm>
+</ContextWrapper>
+`;
+
+exports[`renderForm function #condition should render condition field only if one of depency fields has correct value 2`] = `
+<ContextWrapper
+  formFieldsMapper={
+    Object {
+      "custom-component": [Function],
+    }
+  }
+>
+  <ReactFinalForm
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
+    onSubmit={[MockFunction]}
+  >
+    <FormConditionWrapper
+      condition={
+        Object {
+          "is": "x",
+          "when": Array [
+            "a",
+            "b",
+          ],
+        }
+      }
+    >
+      <Condition
+        condition={
+          Object {
+            "is": "x",
+            "when": Array [
+              "a",
+              "b",
+            ],
+          }
+        }
+      >
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
+            reactFinalForm={
+              Object {
+                "batch": [Function],
+                "blur": [Function],
+                "change": [Function],
+                "destroyOnUnregister": false,
+                "focus": [Function],
+                "getFieldState": [Function],
+                "getRegisteredFields": [Function],
+                "getState": [Function],
+                "initialize": [Function],
+                "isValidationPaused": [Function],
+                "mutators": Object {
+                  "concat": [Function],
+                  "insert": [Function],
+                  "move": [Function],
+                  "pop": [Function],
+                  "push": [Function],
+                  "remove": [Function],
+                  "removeBatch": [Function],
+                  "shift": [Function],
+                  "swap": [Function],
+                  "unshift": [Function],
+                  "update": [Function],
+                },
+                "pauseValidation": [Function],
+                "registerField": [Function],
+                "reset": [Function],
+                "resetFieldState": [Function],
+                "resumeValidation": [Function],
+                "setConfig": [Function],
+                "submit": [Function],
+                "subscribe": [Function],
+              }
+            }
+          >
+            <FormFieldHideWrapper
+              hideField={false}
+            >
+              <FieldWrapper
+                component={[Function]}
+                componentType="custom-component"
+                formOptions={
+                  Object {
+                    "renderForm": [Function],
+                  }
+                }
+                name="foo"
+                validate={
+                  Array [
+                    undefined,
+                  ]
+                }
+              >
+                <customComponent
+                  FieldProvider={[Function]}
+                  formOptions={
+                    Object {
+                      "renderForm": [Function],
+                    }
+                  }
+                  name="foo"
+                  validate={[Function]}
+                >
+                  <div
+                    name="foo"
+                    validate={[Function]}
+                  >
+                    Custom component
+                  </div>
+                </customComponent>
+              </FieldWrapper>
+            </FormFieldHideWrapper>
+          </FormSpy>
+        </ReactFinalForm(FormSpy)>
+      </Condition>
+    </FormConditionWrapper>
+  </ReactFinalForm>
+</ContextWrapper>
+`;
+
+exports[`renderForm function #condition should render condition field only if one of depency fields has correct value 3`] = `
+<ContextWrapper
+  formFieldsMapper={
+    Object {
+      "custom-component": [Function],
+    }
+  }
+>
+  <ReactFinalForm
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
+    onSubmit={[MockFunction]}
+  >
+    <FormConditionWrapper
+      condition={
+        Object {
+          "is": "x",
+          "when": Array [
+            "a",
+            "b",
+          ],
+        }
+      }
+    >
+      <Condition
+        condition={
+          Object {
+            "is": "x",
+            "when": Array [
+              "a",
+              "b",
+            ],
+          }
+        }
+      >
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
+            reactFinalForm={
+              Object {
+                "batch": [Function],
+                "blur": [Function],
+                "change": [Function],
+                "destroyOnUnregister": false,
+                "focus": [Function],
+                "getFieldState": [Function],
+                "getRegisteredFields": [Function],
+                "getState": [Function],
+                "initialize": [Function],
+                "isValidationPaused": [Function],
+                "mutators": Object {
+                  "concat": [Function],
+                  "insert": [Function],
+                  "move": [Function],
+                  "pop": [Function],
+                  "push": [Function],
+                  "remove": [Function],
+                  "removeBatch": [Function],
+                  "shift": [Function],
+                  "swap": [Function],
+                  "unshift": [Function],
+                  "update": [Function],
+                },
+                "pauseValidation": [Function],
+                "registerField": [Function],
+                "reset": [Function],
+                "resetFieldState": [Function],
+                "resumeValidation": [Function],
+                "setConfig": [Function],
+                "submit": [Function],
+                "subscribe": [Function],
+              }
+            }
+          />
+        </ReactFinalForm(FormSpy)>
+      </Condition>
+    </FormConditionWrapper>
+  </ReactFinalForm>
+</ContextWrapper>
+`;
+
+exports[`renderForm function #condition should render condition field only if one of depency fields has correct value 4`] = `
+<ContextWrapper
+  formFieldsMapper={
+    Object {
+      "custom-component": [Function],
+    }
+  }
+>
+  <ReactFinalForm
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
+    onSubmit={[MockFunction]}
+  >
+    <FormConditionWrapper
+      condition={
+        Object {
+          "is": "x",
+          "when": Array [
+            "a",
+            "b",
+          ],
+        }
+      }
+    >
+      <Condition
+        condition={
+          Object {
+            "is": "x",
+            "when": Array [
+              "a",
+              "b",
+            ],
+          }
+        }
+      >
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
+            reactFinalForm={
+              Object {
+                "batch": [Function],
+                "blur": [Function],
+                "change": [Function],
+                "destroyOnUnregister": false,
+                "focus": [Function],
+                "getFieldState": [Function],
+                "getRegisteredFields": [Function],
+                "getState": [Function],
+                "initialize": [Function],
+                "isValidationPaused": [Function],
+                "mutators": Object {
+                  "concat": [Function],
+                  "insert": [Function],
+                  "move": [Function],
+                  "pop": [Function],
+                  "push": [Function],
+                  "remove": [Function],
+                  "removeBatch": [Function],
+                  "shift": [Function],
+                  "swap": [Function],
+                  "unshift": [Function],
+                  "update": [Function],
+                },
+                "pauseValidation": [Function],
+                "registerField": [Function],
+                "reset": [Function],
+                "resetFieldState": [Function],
+                "resumeValidation": [Function],
+                "setConfig": [Function],
+                "submit": [Function],
+                "subscribe": [Function],
+              }
+            }
+          >
+            <FormFieldHideWrapper
+              hideField={false}
+            >
+              <FieldWrapper
+                component={[Function]}
+                componentType="custom-component"
+                formOptions={
+                  Object {
+                    "renderForm": [Function],
+                  }
+                }
+                name="foo"
+                validate={
+                  Array [
+                    undefined,
+                  ]
+                }
+              >
+                <customComponent
+                  FieldProvider={[Function]}
+                  formOptions={
+                    Object {
+                      "renderForm": [Function],
+                    }
+                  }
+                  name="foo"
+                  validate={[Function]}
+                >
+                  <div
+                    name="foo"
+                    validate={[Function]}
+                  >
+                    Custom component
+                  </div>
+                </customComponent>
+              </FieldWrapper>
+            </FormFieldHideWrapper>
+          </FormSpy>
+        </ReactFinalForm(FormSpy)>
+      </Condition>
+    </FormConditionWrapper>
+  </ReactFinalForm>
+</ContextWrapper>
+`;
+
+exports[`renderForm function #condition should render condition field only if the condition is met 1`] = `
+<ContextWrapper
+  formFieldsMapper={
+    Object {
+      "custom-component": [Function],
+    }
+  }
+>
+  <ReactFinalForm
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
+    onSubmit={[MockFunction]}
+  >
+    <FormConditionWrapper
+      condition={
+        Object {
+          "is": "fuzz",
+          "when": "bar",
+        }
+      }
+    >
+      <Condition
+        condition={
+          Object {
+            "is": "fuzz",
+            "when": "bar",
+          }
+        }
+      >
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
+            reactFinalForm={
+              Object {
+                "batch": [Function],
+                "blur": [Function],
+                "change": [Function],
+                "destroyOnUnregister": false,
+                "focus": [Function],
+                "getFieldState": [Function],
+                "getRegisteredFields": [Function],
+                "getState": [Function],
+                "initialize": [Function],
+                "isValidationPaused": [Function],
+                "mutators": Object {
+                  "concat": [Function],
+                  "insert": [Function],
+                  "move": [Function],
+                  "pop": [Function],
+                  "push": [Function],
+                  "remove": [Function],
+                  "removeBatch": [Function],
+                  "shift": [Function],
+                  "swap": [Function],
+                  "unshift": [Function],
+                  "update": [Function],
+                },
+                "pauseValidation": [Function],
+                "registerField": [Function],
+                "reset": [Function],
+                "resetFieldState": [Function],
+                "resumeValidation": [Function],
+                "setConfig": [Function],
+                "submit": [Function],
+                "subscribe": [Function],
+              }
+            }
+          />
+        </ReactFinalForm(FormSpy)>
       </Condition>
     </FormConditionWrapper>
   </ReactFinalForm>
@@ -133,21 +1133,15 @@ exports[`renderForm function #condition should render condition field only if th
       }
     >
       <Condition
-        is="fuzz"
-        when="bar"
-      >
-        <ReactFinalForm(Field)
-          name="bar"
-          subscription={
-            Object {
-              "value": true,
-            }
+        condition={
+          Object {
+            "is": "fuzz",
+            "when": "bar",
           }
-        >
-          <Field
-            format={[Function]}
-            name="bar"
-            parse={[Function]}
+        }
+      >
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
             reactFinalForm={
               Object {
                 "batch": [Function],
@@ -181,11 +1175,6 @@ exports[`renderForm function #condition should render condition field only if th
                 "setConfig": [Function],
                 "submit": [Function],
                 "subscribe": [Function],
-              }
-            }
-            subscription={
-              Object {
-                "value": true,
               }
             }
           >
@@ -226,8 +1215,8 @@ exports[`renderForm function #condition should render condition field only if th
                 </customComponent>
               </FieldWrapper>
             </FormFieldHideWrapper>
-          </Field>
-        </ReactFinalForm(Field)>
+          </FormSpy>
+        </ReactFinalForm(FormSpy)>
       </Condition>
     </FormConditionWrapper>
   </ReactFinalForm>
@@ -270,22 +1259,16 @@ exports[`renderForm function #condition should render condition field only if th
       }
     >
       <Condition
-        is="fuzz"
-        notMatch={true}
-        when="bar"
-      >
-        <ReactFinalForm(Field)
-          name="bar"
-          subscription={
-            Object {
-              "value": true,
-            }
+        condition={
+          Object {
+            "is": "fuzz",
+            "notMatch": true,
+            "when": "bar",
           }
-        >
-          <Field
-            format={[Function]}
-            name="bar"
-            parse={[Function]}
+        }
+      >
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
             reactFinalForm={
               Object {
                 "batch": [Function],
@@ -319,11 +1302,6 @@ exports[`renderForm function #condition should render condition field only if th
                 "setConfig": [Function],
                 "submit": [Function],
                 "subscribe": [Function],
-              }
-            }
-            subscription={
-              Object {
-                "value": true,
               }
             }
           >
@@ -364,8 +1342,8 @@ exports[`renderForm function #condition should render condition field only if th
                 </customComponent>
               </FieldWrapper>
             </FormFieldHideWrapper>
-          </Field>
-        </ReactFinalForm(Field)>
+          </FormSpy>
+        </ReactFinalForm(FormSpy)>
       </Condition>
     </FormConditionWrapper>
   </ReactFinalForm>
@@ -408,22 +1386,16 @@ exports[`renderForm function #condition should render condition field only if th
       }
     >
       <Condition
-        is="fuzz"
-        notMatch={true}
-        when="bar"
-      >
-        <ReactFinalForm(Field)
-          name="bar"
-          subscription={
-            Object {
-              "value": true,
-            }
+        condition={
+          Object {
+            "is": "fuzz",
+            "notMatch": true,
+            "when": "bar",
           }
-        >
-          <Field
-            format={[Function]}
-            name="bar"
-            parse={[Function]}
+        }
+      >
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
             reactFinalForm={
               Object {
                 "batch": [Function],
@@ -457,11 +1429,6 @@ exports[`renderForm function #condition should render condition field only if th
                 "setConfig": [Function],
                 "submit": [Function],
                 "subscribe": [Function],
-              }
-            }
-            subscription={
-              Object {
-                "value": true,
               }
             }
           >
@@ -502,8 +1469,8 @@ exports[`renderForm function #condition should render condition field only if th
                 </customComponent>
               </FieldWrapper>
             </FormFieldHideWrapper>
-          </Field>
-        </ReactFinalForm(Field)>
+          </FormSpy>
+        </ReactFinalForm(FormSpy)>
       </Condition>
     </FormConditionWrapper>
   </ReactFinalForm>
@@ -545,21 +1512,15 @@ exports[`renderForm function #condition should render condition field only if th
       }
     >
       <Condition
-        isEmpty={true}
-        when="bar"
-      >
-        <ReactFinalForm(Field)
-          name="bar"
-          subscription={
-            Object {
-              "value": true,
-            }
+        condition={
+          Object {
+            "isEmpty": true,
+            "when": "bar",
           }
-        >
-          <Field
-            format={[Function]}
-            name="bar"
-            parse={[Function]}
+        }
+      >
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
             reactFinalForm={
               Object {
                 "batch": [Function],
@@ -593,11 +1554,6 @@ exports[`renderForm function #condition should render condition field only if th
                 "setConfig": [Function],
                 "submit": [Function],
                 "subscribe": [Function],
-              }
-            }
-            subscription={
-              Object {
-                "value": true,
               }
             }
           >
@@ -638,8 +1594,8 @@ exports[`renderForm function #condition should render condition field only if th
                 </customComponent>
               </FieldWrapper>
             </FormFieldHideWrapper>
-          </Field>
-        </ReactFinalForm(Field)>
+          </FormSpy>
+        </ReactFinalForm(FormSpy)>
       </Condition>
     </FormConditionWrapper>
   </ReactFinalForm>
@@ -681,21 +1637,15 @@ exports[`renderForm function #condition should render condition field only if th
       }
     >
       <Condition
-        isEmpty={true}
-        when="bar"
-      >
-        <ReactFinalForm(Field)
-          name="bar"
-          subscription={
-            Object {
-              "value": true,
-            }
+        condition={
+          Object {
+            "isEmpty": true,
+            "when": "bar",
           }
-        >
-          <Field
-            format={[Function]}
-            name="bar"
-            parse={[Function]}
+        }
+      >
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
             reactFinalForm={
               Object {
                 "batch": [Function],
@@ -729,11 +1679,6 @@ exports[`renderForm function #condition should render condition field only if th
                 "setConfig": [Function],
                 "submit": [Function],
                 "subscribe": [Function],
-              }
-            }
-            subscription={
-              Object {
-                "value": true,
               }
             }
           >
@@ -774,8 +1719,8 @@ exports[`renderForm function #condition should render condition field only if th
                 </customComponent>
               </FieldWrapper>
             </FormFieldHideWrapper>
-          </Field>
-        </ReactFinalForm(Field)>
+          </FormSpy>
+        </ReactFinalForm(FormSpy)>
       </Condition>
     </FormConditionWrapper>
   </ReactFinalForm>
@@ -817,21 +1762,15 @@ exports[`renderForm function #condition should render condition field only if th
       }
     >
       <Condition
-        isNotEmpty={true}
-        when="bar"
-      >
-        <ReactFinalForm(Field)
-          name="bar"
-          subscription={
-            Object {
-              "value": true,
-            }
+        condition={
+          Object {
+            "isNotEmpty": true,
+            "when": "bar",
           }
-        >
-          <Field
-            format={[Function]}
-            name="bar"
-            parse={[Function]}
+        }
+      >
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
             reactFinalForm={
               Object {
                 "batch": [Function],
@@ -867,13 +1806,8 @@ exports[`renderForm function #condition should render condition field only if th
                 "subscribe": [Function],
               }
             }
-            subscription={
-              Object {
-                "value": true,
-              }
-            }
           />
-        </ReactFinalForm(Field)>
+        </ReactFinalForm(FormSpy)>
       </Condition>
     </FormConditionWrapper>
   </ReactFinalForm>
@@ -915,21 +1849,15 @@ exports[`renderForm function #condition should render condition field only if th
       }
     >
       <Condition
-        isNotEmpty={true}
-        when="bar"
-      >
-        <ReactFinalForm(Field)
-          name="bar"
-          subscription={
-            Object {
-              "value": true,
-            }
+        condition={
+          Object {
+            "isNotEmpty": true,
+            "when": "bar",
           }
-        >
-          <Field
-            format={[Function]}
-            name="bar"
-            parse={[Function]}
+        }
+      >
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
             reactFinalForm={
               Object {
                 "batch": [Function],
@@ -963,11 +1891,6 @@ exports[`renderForm function #condition should render condition field only if th
                 "setConfig": [Function],
                 "submit": [Function],
                 "subscribe": [Function],
-              }
-            }
-            subscription={
-              Object {
-                "value": true,
               }
             }
           >
@@ -1008,8 +1931,8 @@ exports[`renderForm function #condition should render condition field only if th
                 </customComponent>
               </FieldWrapper>
             </FormFieldHideWrapper>
-          </Field>
-        </ReactFinalForm(Field)>
+          </FormSpy>
+        </ReactFinalForm(FormSpy)>
       </Condition>
     </FormConditionWrapper>
   </ReactFinalForm>
@@ -1051,21 +1974,15 @@ exports[`renderForm function #condition should render condition field only if th
       }
     >
       <Condition
-        pattern={/fuzz/}
-        when="bar"
-      >
-        <ReactFinalForm(Field)
-          name="bar"
-          subscription={
-            Object {
-              "value": true,
-            }
+        condition={
+          Object {
+            "pattern": /fuzz/,
+            "when": "bar",
           }
-        >
-          <Field
-            format={[Function]}
-            name="bar"
-            parse={[Function]}
+        }
+      >
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
             reactFinalForm={
               Object {
                 "batch": [Function],
@@ -1101,13 +2018,8 @@ exports[`renderForm function #condition should render condition field only if th
                 "subscribe": [Function],
               }
             }
-            subscription={
-              Object {
-                "value": true,
-              }
-            }
           />
-        </ReactFinalForm(Field)>
+        </ReactFinalForm(FormSpy)>
       </Condition>
     </FormConditionWrapper>
   </ReactFinalForm>
@@ -1149,21 +2061,15 @@ exports[`renderForm function #condition should render condition field only if th
       }
     >
       <Condition
-        pattern={/fuzz/}
-        when="bar"
-      >
-        <ReactFinalForm(Field)
-          name="bar"
-          subscription={
-            Object {
-              "value": true,
-            }
+        condition={
+          Object {
+            "pattern": /fuzz/,
+            "when": "bar",
           }
-        >
-          <Field
-            format={[Function]}
-            name="bar"
-            parse={[Function]}
+        }
+      >
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
             reactFinalForm={
               Object {
                 "batch": [Function],
@@ -1197,11 +2103,6 @@ exports[`renderForm function #condition should render condition field only if th
                 "setConfig": [Function],
                 "submit": [Function],
                 "subscribe": [Function],
-              }
-            }
-            subscription={
-              Object {
-                "value": true,
               }
             }
           >
@@ -1242,8 +2143,8 @@ exports[`renderForm function #condition should render condition field only if th
                 </customComponent>
               </FieldWrapper>
             </FormFieldHideWrapper>
-          </Field>
-        </ReactFinalForm(Field)>
+          </FormSpy>
+        </ReactFinalForm(FormSpy)>
       </Condition>
     </FormConditionWrapper>
   </ReactFinalForm>
@@ -1286,22 +2187,16 @@ exports[`renderForm function #condition should render condition field only if th
       }
     >
       <Condition
-        notMatch={true}
-        pattern={/fuzz/}
-        when="bar"
-      >
-        <ReactFinalForm(Field)
-          name="bar"
-          subscription={
-            Object {
-              "value": true,
-            }
+        condition={
+          Object {
+            "notMatch": true,
+            "pattern": /fuzz/,
+            "when": "bar",
           }
-        >
-          <Field
-            format={[Function]}
-            name="bar"
-            parse={[Function]}
+        }
+      >
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
             reactFinalForm={
               Object {
                 "batch": [Function],
@@ -1335,11 +2230,6 @@ exports[`renderForm function #condition should render condition field only if th
                 "setConfig": [Function],
                 "submit": [Function],
                 "subscribe": [Function],
-              }
-            }
-            subscription={
-              Object {
-                "value": true,
               }
             }
           >
@@ -1380,8 +2270,8 @@ exports[`renderForm function #condition should render condition field only if th
                 </customComponent>
               </FieldWrapper>
             </FormFieldHideWrapper>
-          </Field>
-        </ReactFinalForm(Field)>
+          </FormSpy>
+        </ReactFinalForm(FormSpy)>
       </Condition>
     </FormConditionWrapper>
   </ReactFinalForm>
@@ -1424,22 +2314,16 @@ exports[`renderForm function #condition should render condition field only if th
       }
     >
       <Condition
-        notMatch={true}
-        pattern={/fuzz/}
-        when="bar"
-      >
-        <ReactFinalForm(Field)
-          name="bar"
-          subscription={
-            Object {
-              "value": true,
-            }
+        condition={
+          Object {
+            "notMatch": true,
+            "pattern": /fuzz/,
+            "when": "bar",
           }
-        >
-          <Field
-            format={[Function]}
-            name="bar"
-            parse={[Function]}
+        }
+      >
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
             reactFinalForm={
               Object {
                 "batch": [Function],
@@ -1473,11 +2357,6 @@ exports[`renderForm function #condition should render condition field only if th
                 "setConfig": [Function],
                 "submit": [Function],
                 "subscribe": [Function],
-              }
-            }
-            subscription={
-              Object {
-                "value": true,
               }
             }
           >
@@ -1518,8 +2397,8 @@ exports[`renderForm function #condition should render condition field only if th
                 </customComponent>
               </FieldWrapper>
             </FormFieldHideWrapper>
-          </Field>
-        </ReactFinalForm(Field)>
+          </FormSpy>
+        </ReactFinalForm(FormSpy)>
       </Condition>
     </FormConditionWrapper>
   </ReactFinalForm>
