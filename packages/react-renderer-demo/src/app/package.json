@@ -72,6 +72,6 @@
     "react-router-dom": "^5.0.1"
   },
   "engines": {
-    "node": ">=8"
+    "node": "10"
   }
 }
