@@ -9,7 +9,8 @@
     "build": "next build",
     "start": "next start",
     "vendor": "webpack --env vendor --config ./config/webpack.config.js --progress",
-    "deploy": "firebase deploy --only functions"
+    "deploy": "firebase deploy --only functions",
+    "analyze": "ANALYZE=true next build"
   },
   "repository": {
     "type": "git",
@@ -57,7 +58,6 @@
     "@next/mdx": "^9.0.5",
     "@patternfly/patternfly-next": "^1.0.175",
     "@patternfly/react-core": "~3.16.10",
-    "@patternfly/react-icons": "~3.9.2",
     "@patternfly/react-tokens": "^2.5.1",
     "brace": "^0.11.1",
     "clsx": "^1.0.4",

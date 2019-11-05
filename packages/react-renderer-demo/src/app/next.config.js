@@ -5,7 +5,11 @@ const withMDX = require('@next/mdx')({
 });
 const path = require('path');
 
-module.exports = withMDX(withCSS({
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+module.exports = withBundleAnalyzer(withMDX(withCSS({
   pageExtensions: [ 'js', 'jsx', 'md', 'mdx' ],
   distDir: '../../dist/functions/next',
   webpack: (config, options) => {
@@ -68,4 +72,4 @@ module.exports = withMDX(withCSS({
 
     return config;
   },
-}));
+})));
