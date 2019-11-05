@@ -10,6 +10,7 @@ describe('<FormControls />', () => {
   let initialProps;
   let ContextWrapper;
   let initialLayout;
+
   beforeEach(() => {
     initialLayout = {
       [layoutComponents.BUTTON]: ({ label, ...props }) => <button { ...props }>{ label }</button>,
@@ -34,6 +35,12 @@ describe('<FormControls />', () => {
       canReset: true,
       pristine: true,
     };
+  });
+
+  afterEach(() => {
+    initialProps.onCancel.mockReset();
+    initialProps.onSubmit.mockReset();
+    initialProps.onReset.mockReset();
   });
 
   it('should render all controls and with default labels', () => {
@@ -77,5 +84,28 @@ describe('<FormControls />', () => {
       </ContextWrapper>
     );
     expect(toJson(wrapper)).toMatchSnapshot();
+  });
+
+  it('should call cancel with form values', () => {
+    const wrapper = mount(
+      <ContextWrapper>
+        <FormControls { ...initialProps } />
+      </ContextWrapper>
+    );
+
+    const CANCEL_INDEX = 2;
+    const FIELD_NAME = 'xxx';
+    const FIELD_VALUE = 'yyy';
+
+    const expectedValues =  {
+      [FIELD_NAME]: FIELD_VALUE,
+    };
+
+    wrapper.find(Form).instance().form.change(FIELD_NAME, FIELD_VALUE);
+    wrapper.update();
+
+    wrapper.find('button').at(CANCEL_INDEX).simulate('click');
+
+    expect(initialProps.onCancel).toHaveBeenCalledWith(expectedValues);
   });
 });

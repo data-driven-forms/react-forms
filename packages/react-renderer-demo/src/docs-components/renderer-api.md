@@ -25,7 +25,7 @@ Form Renderer provides a lot of customization via props.
 |<NavLink to="/renderer/unmounting">clearOnUnmount</NavLink>|bool|Will clear values of unmounted components. You can also set this to specific component in the form schema.|false|
 |canReset|bool|Show/hide reset button.|false|
 |onReset|func|A reset callback. You don't need to manually clear the form values!||
-|onCancel|func|A cancel callback.||
+|onCancel|func|A cancel callback, which receives `values` as the first argument.||
 |onStateUpdate|func|A function which will be called with every form update, i.e. `({ values }) => setValues(values)`||
 |disableSubmit|array of strings|You can specify a form attributes (see [here](https://final-form.org/docs/final-form/types/FormState)) which will make the submit button disabled. |[ ]|
 |initialValues|object|An object of fields names as keys and values as their values.||
