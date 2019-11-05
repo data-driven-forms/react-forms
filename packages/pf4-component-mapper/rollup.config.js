@@ -12,7 +12,6 @@ const globals = {
   react: 'React',
   'react-dom': 'ReactDOM',
   '@patternfly/react-core': 'PatternflyReact',
-  '@patternfly/react-icons': 'PatternflyReactIcons',
   '@data-driven-forms/react-form-renderer': '@data-driven-forms/react-form-renderer',
 };
 
