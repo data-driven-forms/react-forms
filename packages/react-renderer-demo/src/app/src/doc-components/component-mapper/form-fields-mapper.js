@@ -1,5 +1,7 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import FormRender, { layoutComponents, componentTypes } from '@data-driven-forms/react-form-renderer';
+
+import './form-fields-mapper-docs.css';
 
 const wrapperStyles = {
   padding: 16,
