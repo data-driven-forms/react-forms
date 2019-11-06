@@ -58,6 +58,4 @@ class Wizard extends React.Component {
   }
 }
 
-const WizardFunction = props => <Wizard { ...props }/>;
-
-export default WizardFunction;
+export default Wizard;
