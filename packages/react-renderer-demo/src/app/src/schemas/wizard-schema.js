@@ -1,22 +1,7 @@
-//import dynamic from 'next/dynamic';
-//const FormRenderer = dynamic(import('@data-driven-forms/react-form-renderer'), {
-//  ssr: false,
-//});
-
-//const { componentTypes, validatorTypes } = FormRenderer;
+import { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 
 const wizardSchema = {
   fields: [{
-    component: 'text-field',
-    name: 'foo',
-    label: 'bar'
-  }],
-};
-
-export default wizardSchema;
-
-/**
- * {
     component: componentTypes.WIZARD,
     name: 'wizzard',
     buttonLabels: {
@@ -71,19 +56,13 @@ export default wizardSchema;
       stepKey: 'google',
       title: 'Configure google',
       name: 'step-3',
-      nextStep: 'summary',
       fields: [{
         component: componentTypes.TEXT_FIELD,
         name: 'google-field',
         label: 'Google field part',
       }],
-    }, {
-      fields: [{
-        name: 'summary',
-        component: 'summary',
-      }],
-      stepKey: 'summary',
-      name: 'summary',
     }],
-  }
- */
+  }],
+};
+
+export default wizardSchema;
