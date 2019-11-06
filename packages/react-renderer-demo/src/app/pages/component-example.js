@@ -34,6 +34,11 @@ const CodeEditor = dynamic(import('@docs/components/code-editor'), {
   ssr: false,
 });
 
+const Summary = ({ title }) => <div>{ title }</div>;
+Summary.propTypes = {
+  title: PropTypes.string.isRequired,
+};
+
 // Text inputs are first, then all other actions are sorted by title
 const comparator = (a, b) => {
   if (a.component === 'input') {
@@ -125,21 +130,21 @@ class ComponentExample extends Component {
         formFieldsMapper: {
           ...props.mappers.mui.formFieldsMapper,
           [componentTypes.WIZARD]: MuiWizard,
-          summary: () => <div>Mui summary</div>,
+          summary: Summary,
         },
         layoutMapper: props.mappers.mui.layoutMapper,
       },
       pf3: {
         formFieldsMapper: {
           ...props.mappers.pf3.formFieldsMapper,
-          summary: () => <div>Pf3 summary</div>,
+          summary: Summary,
         },
         layoutMapper: props.mappers.pf3.layoutMapper,
       },
       pf4: {
         formFieldsMapper: {
           ...props.mappers.pf4.formFieldsMapper,
-          summary: () => <div>Pf4 summary</div>,
+          summary: Summary,
         },
         layoutMapper: props.mappers.pf4.layoutMapper,
       },
