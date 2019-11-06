@@ -1,4 +1,5 @@
 import React, { useState, forwardRef } from 'react';
+import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -22,7 +23,7 @@ const Item = ({ href, linkText, component }) => {
   return (
     <ListItem
       button
-      selected={ href === router.pathname }
+      selected={ href.replace('/?', '?') === router.asPath }
       key={ href || linkText }
       className={ classes.nested }
       component={ forwardRef((props, ref) => (
@@ -40,6 +41,12 @@ const Item = ({ href, linkText, component }) => {
       </Typography>
     </ListItem>
   );
+};
+
+Item.propTypes = {
+  href: PropTypes.string.isRequired,
+  linkText: PropTypes.string,
+  component: PropTypes.node,
 };
 
 const FinalList = ({
