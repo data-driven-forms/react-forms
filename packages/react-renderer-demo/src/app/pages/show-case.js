@@ -11,7 +11,6 @@ import Typography from '@material-ui/core/Typography';
 
 import { schema, uiSchema, conditionalSchema } from '../src/schemas/widget-schema';
 import MiqSchema from '../src/schemas/miq-schema';
-import wizardSchema from '../src/schemas/wizard-schema';
 
 import MapperContext from '@docs/components/mappers-context';
 
@@ -29,7 +28,6 @@ const Forms = ({ mappers }) => {
     miq: { schema: MiqSchema, uiSchema: {}, schemaType: 'miq' },
     conditional: { schema: conditionalSchema, uiSchema: {}, schemaType: 'mozilla' },
     widgets: { schema, uiSchema, schemaType: 'mozilla' },
-    wizard: { schema: wizardSchema, uiSchema: {}, schemaType: 'default' },
   };
   return (
     <React.Fragment>
@@ -59,7 +57,6 @@ const Forms = ({ mappers }) => {
             <FormControlLabel value="conditional" control={ <Radio /> } label="Conditional schema" />
             <FormControlLabel value="miq" control={ <Radio /> } label="Manageiq tab schema" />
             <FormControlLabel value="widgets" control={ <Radio /> } label="Widgets schema" />
-            <FormControlLabel value="wizard" control={ <Radio /> } label="Wizard schema" />
           </RadioGroup>
         </FormControl>
       </Grid>
