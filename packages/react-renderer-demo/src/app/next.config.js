@@ -1,3 +1,4 @@
+const TerserPlugin = require('terser-webpack-plugin');
 const withCSS = require('@zeit/next-css');
 const resolve = require('resolve');
 const withMDX = require('@next/mdx')({
@@ -70,6 +71,16 @@ module.exports = withBundleAnalyzer(withMDX(withCSS({
       fs: 'empty',
     };
 
+    config.optimization.minimizer = [
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        terserOptions: {
+          keep_classnames: true, // eslint-disable-line
+          keep_fnames: true, // eslint-disable-line
+        },
+      }),
+    ];
     return config;
   },
 })));

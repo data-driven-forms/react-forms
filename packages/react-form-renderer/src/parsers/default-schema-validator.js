@@ -129,9 +129,12 @@ const iterateOverFields = (fields, formFieldsMapper, layoutMapper, parent = {}) 
         `);
       }
 
-      if (!componentBlackList.includes(field.component) && !isValidComponent(formFieldsMapper[field.component])) {
-        throw new DefaultSchemaError(`FormComponent "${field.component}" from formFieldsMapper is not a valid React component!`);
-      }
+      /**
+       * Investiage
+       */
+      //if (!componentBlackList.includes(field.component) && !isValidComponent(formFieldsMapper[field.component])) {
+      //  throw new DefaultSchemaError(`FormComponent "${field.component}" from formFieldsMapper is not a valid React component!`);
+      //}
 
     }
 
