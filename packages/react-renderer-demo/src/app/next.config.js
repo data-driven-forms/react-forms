@@ -72,7 +72,6 @@ module.exports = withBundleAnalyzer(withMDX(withCSS({
     };
 
     config.optimization.minimizer = [
-      ...config.optimization.minimizer,
       new TerserPlugin({
         cache: true,
         parallel: true,
