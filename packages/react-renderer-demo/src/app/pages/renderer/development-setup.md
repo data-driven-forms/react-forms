@@ -34,6 +34,15 @@ cd packages/pf3-component-mapper
 yarn start
 ```
 
+#### Run documentation
+
+The documentation is a server-side rendered React application based on [NextJS framework](https://nextjs.org/).
+
+```console
+cd packages/react-renderer-demo
+yarn dev
+```
+
 #### How to clean?
 
 ```console

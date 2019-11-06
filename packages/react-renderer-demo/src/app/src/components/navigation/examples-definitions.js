@@ -3,6 +3,7 @@ import GenericComponentText from './examples-texts/generic-mui-component';
 import TabsText from './examples-texts/tabs';
 import CustomComponentText from './examples-texts/custom-component';
 import WizardText from './examples-texts/wizard';
+import SelectText from './examples-texts/select';
 
 export const baseExamples = [{
   component: componentTypes.TEXT_FIELD,
@@ -125,7 +126,7 @@ export const baseExamples = [{
   component: componentTypes.SELECT_COMPONENT,
   link: `?component=${componentTypes.SELECT_COMPONENT}`,
   linkText: 'Select',
-  ContentText: GenericComponentText,
+  ContentText: SelectText,
   canBeRequired: true,
   value: { fields: [{
     component: componentTypes.SELECT_COMPONENT,
@@ -360,6 +361,26 @@ export const baseExamples = [{
     component: 'input',
     value: 'Checkbox',
   }],
+}, {
+  component: componentTypes.PLAIN_TEXT,
+  link: '?component=plain-text',
+  linkText: 'Plain Text',
+  ContentText: GenericComponentText,
+  variants: [{
+    name: 'label',
+    title: 'Label',
+    component: 'textarea',
+    value: `Lorem ipsum sem velit. Mauris scelerisque tortor sed lorem dapibus, bibendum scelerisque ligula consequat. Quisque fringilla luctus.
+Vestibulum vulputate inceptos himenaeos.`,
+  }],
+  value: {
+    fields: [{
+      component: componentTypes.PLAIN_TEXT,
+      name: 'plain-text-component',
+      label: `Lorem ipsum sem velit. Mauris scelerisque tortor sed lorem dapibus, bibendum scelerisque ligula consequat. Quisque fringilla luctus.
+Vestibulum vulputate inceptos himenaeos.`,
+    }],
+  },
 }, {
   component: componentTypes.WIZARD,
   link: `?component=${componentTypes.WIZARD}`,

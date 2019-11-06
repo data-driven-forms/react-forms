@@ -1,5 +1,6 @@
 import Grid from '@material-ui/core/Grid'
-import Link from 'next/link';
+import RouterLink from 'next/link';
+import Link from '@material-ui/core/Link';
 
 import ListOfContents from '../../src/helpers/list-of-contents';
 import ExampleLink from '@docs/components/common/example-link';
@@ -52,7 +53,7 @@ All those components provides a shared group of props:
 |isRequired|boolean|Is the field required?|
 |isDisabled|boolean|Is the field disabled?|
 |isReadOnly|boolean|Is the field readOnly?|
-|initialValue|custom|There are two ways how to set initial values in the form: you can use either the <Link href="/renderer/renderer-api"><a>initialValues</a></Link> prop for the whole form or you can set the value in the schema for each field separately. For more information, please see [here](https://final-form.org/docs/react-final-form/types/FieldProps#initialvalue).|
+|initialValue|custom|There are two ways how to set initial values in the form: you can use either the <RouterLink href="/renderer/renderer-api"><Link>initialValues</Link></RouterLink> prop for the whole form or you can set the value in the schema for each field separately. For more information, please see [here](https://final-form.org/docs/react-final-form/types/FieldProps#initialvalue).|
 
 #### Text field
 

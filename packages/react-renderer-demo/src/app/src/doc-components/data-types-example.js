@@ -13,7 +13,7 @@ const schema = {
   }, {
     component: componentTypes.TEXT_FIELD,
     name: 'untyped-number',
-    label: 'Number withouth type',
+    label: 'Number without type',
     type: 'number',
   }, {
     component: componentTypes.TEXT_FIELD,

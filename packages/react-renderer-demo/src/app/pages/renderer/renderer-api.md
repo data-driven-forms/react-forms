@@ -32,7 +32,7 @@ Form Renderer provides a lot of customization via props.
 |<RouterLink href="/renderer/unmounting"><Link>clearOnUnmount</Link></RouterLink>|bool|Will clear values of unmounted components. You can also set this to specific component in the form schema.|false|
 |canReset|bool|Show/hide reset button.|false|
 |onReset|func|A reset callback. You don't need to manually clear the form values!||
-|onCancel|func|A cancel callback.||
+|onCancel|func|A cancel callback, which receives `values` as the first argument.||
 |onStateUpdate|func|A function which will be called with every form update, i.e. `({ values }) => setValues(values)`||
 |disableSubmit|array of strings|You can specify a form attributes (see [here](https://final-form.org/docs/final-form/types/FormState)) which will make the submit button disabled. |[ ]|
 |initialValues|object|An object of fields names as keys and values as their values.||
@@ -41,6 +41,30 @@ Form Renderer provides a lot of customization via props.
 |subscription|object|You can pass your own [subscription](https://final-form.org/docs/react-final-form/types/FormProps#subscription), which will be added to default settings.|`{ pristine: true, submitting: true, valid: true }`|
 |uiSchema|object|Use when you need to use mozilla schema.|{ }|
 |<RouterLink href="/renderer/validators"><Link>validate</Link></RouterLink>|func|A function which receives all form values and returns an object with errors.||
+
+### Schema
+
+The root object of the schema represents the <RouterLink href="/renderer/component-mapping#formwrapper"><Link>Form</Link></RouterLink> component, which accepts only these three props:
+
+|Prop|Type|Description|
+|----|:--:|----------:|
+|label, title|node|<RouterLink href="/renderer/component-mapping#title"><Link>Title</Link></RouterLink> of the form. Optional.|
+|description|node|<RouterLink href="/renderer/component-mapping#description"><Link>Description</Link></RouterLink> of the form. Optional.|
+|fields|array of objects|<RouterLink href="/renderer/component-api"><Link>Components</Link></RouterLink> of the form. Required!|
+
+#### Example
+
+```javascript
+schema = {
+  title: 'Your name',
+  description: 'Add your name',
+  fields: [{
+    name: 'userName',
+    label: 'Your name is',
+    component: componentTypes.TEXT_FIELD,
+  }]
+};
+```
 
 </Grid>
 <Grid item xs={false} md={2}>

@@ -260,6 +260,22 @@ class ComponentExample extends Component {
         );
       }
 
+      if (component === 'textarea'){
+        return (
+          <Grid item xs={ 12 } key={ name }>
+            <TextField
+              id={ name }
+              label={ title }
+              value={ this.state.variants[index].value || '' }
+              onChange={ ({ target: { value }}) => this.handleExampleVariantChange(value, index) }
+              margin="normal"
+              fullWidth
+              multiline
+            />
+          </Grid>
+        );
+      }
+
       return (
         <Grid item xs={ 12 } key={ name }>
           <FormGroup >
