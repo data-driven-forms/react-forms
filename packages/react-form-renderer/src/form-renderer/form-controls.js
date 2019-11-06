@@ -38,7 +38,7 @@ const FormControls = ({
       : (
         <RendererContext.Consumer>
           { ({ layoutMapper: { Button, ButtonGroup }}) => {
-            const { submitting, pristine, validating, form: { submit, reset }} = formSpyProps;
+            const { submitting, pristine, validating, form: { submit, reset }, values } = formSpyProps;
             const buttons = {
               submit: (
                 <Button
@@ -64,7 +64,7 @@ const FormControls = ({
                   label={ resetLabel }
                 />
               ) : null,
-              cancel: onCancel ? <Button key="form-cancel" type="button" onClick={ onCancel } label={ cancelLabel } /> : null,
+              cancel: onCancel ? <Button key="form-cancel" type="button" onClick={ () => onCancel(values) } label={ cancelLabel } /> : null,
             };
             return (
               <ButtonGroup className={ buttonClassName }>

@@ -78,11 +78,11 @@ exports[`<FormControls /> should add missing buttons if not defined in button or
               <Component
                 key="form-cancel"
                 label="Cancel"
-                onClick={[MockFunction]}
+                onClick={[Function]}
                 type="button"
               >
                 <button
-                  onClick={[MockFunction]}
+                  onClick={[Function]}
                   type="button"
                 >
                   Cancel
@@ -184,11 +184,11 @@ exports[`<FormControls /> should render all controls and with default labels 1`]
               <Component
                 key="form-cancel"
                 label="Cancel"
-                onClick={[MockFunction]}
+                onClick={[Function]}
                 type="button"
               >
                 <button
-                  onClick={[MockFunction]}
+                  onClick={[Function]}
                   type="button"
                 >
                   Cancel
@@ -257,11 +257,11 @@ exports[`<FormControls /> should render buttons in correct order 1`] = `
               <Component
                 key="form-cancel"
                 label="Cancel"
-                onClick={[MockFunction]}
+                onClick={[Function]}
                 type="button"
               >
                 <button
-                  onClick={[MockFunction]}
+                  onClick={[Function]}
                   type="button"
                 >
                   Cancel
