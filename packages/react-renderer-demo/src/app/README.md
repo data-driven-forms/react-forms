@@ -1,6 +1,6 @@
-[![Data Driven Form logo](images/logo.png)](https://data-driven-forms.org/)
+[![Data Driven Form logo](https://raw.githubusercontent.com/data-driven-forms/react-forms/master/images/logo.png)](https://data-driven-forms.org/)
 
-A documentation page for [Data Driven Forms](https://github.com/data-driven-forms/react-forms).
+A documentation page for [Data Driven Forms](https://github.com/data-driven-forms/react-forms). A server-side application based on [NextJS](https://nextjs.org/).
 
 :book: For more information please visit the [documentation](https://data-driven-forms.org/). :book:
 
@@ -11,38 +11,35 @@ Used by [ManageIQ](http://manageiq.org/), Red Hat Cloud Services.
 - [Development setup](#development-setup)
   - [Tests](#tests)
   - [Commits](#commits)
-  - [Changes to documentation](#changes-to-documentation)
 - [Contribution](#contribution)
 - [LICENSE](#license)
 
 ### Development setup
 
-Data Driven Forms is a monorepo which uses [Lerna](https://github.com/lerna/lerna), so you can use all its commands as well.
-
 1. Install
 
 ```console
+cd ../..
 yarn install
 ```
 
 2. Build
 
 ```console
+cd ../..
 yarn build
 ```
 
 3. Run a package
 
-Each package has a small playground `package/demo`, where you can test your changes.
-
 ```console
-cd packages/react-renderer-demo
-yarn start
+yarn dev
 ```
 
-4. How to clean?
+1. How to clean?
 
 ```console
+cd ../..
 rm yarn.lock
 yarn lerna clean # will delete all node_modules
 ```
@@ -51,40 +48,11 @@ All packages are linked together by default, so if you run a `yarn build` in a p
 
 #### Tests
 
-Tests needed to be run from the core folder.
-
-```console
-yarn test
-
-yarn test packages/pf3-component-mapper
-```
+Documentation does not contain any test files currently.
 
 #### Commits
 
-Data Driven Forms uses [Semantic Release](https://github.com/semantic-release/commit-analyzer)
-
-Format:
-
-```
-[type]([package]): message
-
-fix(pf3): title accepts node
-```
-
-Types:
-- `feat`: a new feature, will trigger new `_.X._` release
-- `fix`: a fix, will trigger new `_._.X` release
-
-Packages:
-- Please describe which package is being changed `pf3`, `renderer`, ...
-
 Please, do not use Semantic Release, if you update only the demo.
-
-All packages are releasing together and they share the version number.
-
-#### Changes to documentation
-
-If your changes influence API or add new features, you should describe these new options in the `demo` repository. Thanks!
 
 ### Contribution
 
