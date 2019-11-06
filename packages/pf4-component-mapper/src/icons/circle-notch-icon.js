@@ -8,7 +8,7 @@ const CircleNotchIcon = props => (
     viewBox="0 0 512 512"
     aria-labelledby="icon-title-284"
     role="img"
-    style={{ 'vertical-align': '-0.375em;' }}
+    style={{ verticalAlign: '-0.375em' }}
     tabIndex="0"
     { ...props }
   >

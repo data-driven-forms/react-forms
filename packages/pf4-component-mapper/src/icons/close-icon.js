@@ -8,7 +8,7 @@ const CloseIcon = props => (
     viewBox="0 64 731 1024"
     aria-labelledby="icon-title-293"
     role="img"
-    style={{ 'vertical-align': '-0.375em;' }}
+    style={{ verticalAlign: '-0.375em' }}
     tabIndex="0"
     { ...props }
   >
