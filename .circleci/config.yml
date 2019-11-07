@@ -50,10 +50,13 @@ jobs:
           command: |
               npm install --prefix=./firebase-deploy firebase-tools
       - run:
-          name: Deploy docs to firebase
+          name: Move to demo
           command: |
-             ./firebase-deploy/node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
-
+            cd packages/react-renderer-demo
+      - run:
+          name: Deploy demo
+          command: |
+             yarn deploy --token=$FIREBASE_TOKEN
 
 workflows:
   version: 2
