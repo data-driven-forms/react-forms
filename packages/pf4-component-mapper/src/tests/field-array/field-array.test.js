@@ -3,8 +3,9 @@ import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import FormRenderer, { componentTypes as components } from '@data-driven-forms/react-form-renderer';
 import { TextInput } from '@patternfly/react-core';
-import { CloseIcon, AddCircleOIcon } from '@patternfly/react-icons';
 
+import AddCircleOIcon from '../../icons/add-circle-o-icon';
+import CloseIcon from '../../icons/close-icon';
 import { formFieldsMapper, layoutMapper } from '../../index';
 
 describe('FieldArray', () => {

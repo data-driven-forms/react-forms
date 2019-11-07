@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build": "lerna run build",
+    "build": "lerna run build --ignore @data-driven-forms/react-render-demo",
     "vendor": "lerna run vendor",
     "test": "jest --coverage",
     "test:ci": "jest --coverage --runInBand",
@@ -69,5 +69,8 @@
         "successComment": ":tada: This ${issue.pull_request ? 'PR is included' : 'issue has been resolved'} in version ${nextRelease.version} :tada:\n\nThe release is available on \n\n- [react-form-renderer (@latest dist-tag)](/https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)\n\n- [pf3-component-mapper (@latest dist-tag)](/https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper)\n\n- [pf4-component-mapper (@latest dist-tag)](/https://www.npmjs.com/package/@data-driven-forms/pf4-component-mapper)\n\n- [mui-component-mapper (@latest dist-tag)](/https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper)\n\nDemo can be found [here](http://data-driven-forms.org/)!"
       }
     ]
+  },
+  "dependencies": {
+    "n": "^6.0.1"
   }
 }
