@@ -29,7 +29,7 @@ jobs:
   release:
     working_directory: ~/react-forms
     docker:
-      - image: circleci/node
+      - image: circleci/node:10
     steps:
       - attach_workspace:
           at: ~/react-forms
@@ -41,7 +41,7 @@ jobs:
   deploy:
     working_directory: ~/react-forms
     docker:
-      - image: circleci/node
+      - image: circleci/node:10
     steps:
       - attach_workspace:
           at: ~/react-forms
@@ -50,13 +50,9 @@ jobs:
           command: |
               npm install --prefix=./firebase-deploy firebase-tools
       - run:
-          name: Move to demo
-          command: |
-            cd packages/react-renderer-demo
-      - run:
           name: Deploy demo
           command: |
-             yarn deploy --token=$FIREBASE_TOKEN
+             yarn --cwd packages/react-renderer-demo/ deploy --token=$FIREBASE_TOKEN
 
 workflows:
   version: 2
