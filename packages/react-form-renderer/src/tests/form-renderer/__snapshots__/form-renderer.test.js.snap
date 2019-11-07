@@ -3154,6 +3154,7 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                 change={[Function]}
                 dirty={false}
                 dirtyFields={Object {}}
+                dirtyFieldsSinceLastSubmit={Object {}}
                 dirtySinceLastSubmit={false}
                 errors={Object {}}
                 focus={[Function]}

@@ -467,12 +467,12 @@ exports[`FieldArray should render array field correctly 1`] = `
                         minItems={0}
                         noItemsMessage="No items added"
                       >
-                        <ReactFinalForm(ReactFinalFormFieldArray(4.18.5)(2.0.1))
+                        <ReactFinalForm(ReactFinalFormFieldArray(4.18.6)(2.0.1))
                           key="foo"
                           name="foo"
                           validate={[Function]}
                         >
-                          <ReactFinalFormFieldArray(4.18.5)(2.0.1)
+                          <ReactFinalFormFieldArray(4.18.6)(2.0.1)
                             name="foo"
                             reactFinalForm={
                               Object {
@@ -585,8 +585,8 @@ exports[`FieldArray should render array field correctly 1`] = `
                                 </GridItem>
                               </div>
                             </Grid>
-                          </ReactFinalFormFieldArray(4.18.5)(2.0.1)>
-                        </ReactFinalForm(ReactFinalFormFieldArray(4.18.5)(2.0.1))>
+                          </ReactFinalFormFieldArray(4.18.6)(2.0.1)>
+                        </ReactFinalForm(ReactFinalFormFieldArray(4.18.6)(2.0.1))>
                       </DynamicArray>
                     </Field>
                   </ReactFinalForm(Field)>
