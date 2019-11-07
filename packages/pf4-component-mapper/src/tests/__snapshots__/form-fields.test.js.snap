@@ -857,8 +857,8 @@ exports[`FormFields should render Switch correctly 1`] = `
                     <input
                       aria-label=""
                       aria-labelledby="someIdKey-on"
+                      checked={false}
                       className="pf-c-switch__input"
-                      defaultChecked={false}
                       disabled={false}
                       id="someIdKey"
                       name="Name of the field"
@@ -959,6 +959,7 @@ exports[`FormFields should render TextArea correctly 1`] = `
           isRequired={false}
           isValid={true}
           name="Name of the field"
+          resizeOrientation="both"
           value=""
         >
           <textarea
@@ -1997,8 +1998,8 @@ exports[`FormFields should render disabled Switch correctly 1`] = `
                     <input
                       aria-label=""
                       aria-labelledby="someIdKey-on"
+                      checked={false}
                       className="pf-c-switch__input"
-                      defaultChecked={false}
                       disabled={true}
                       id="someIdKey"
                       name="Name of the field"
@@ -2165,8 +2166,8 @@ exports[`FormFields should render disabled Switch correctly 2`] = `
                     <input
                       aria-label=""
                       aria-labelledby="someIdKey-on"
+                      checked={false}
                       className="pf-c-switch__input"
-                      defaultChecked={false}
                       disabled={true}
                       id="someIdKey"
                       name="Name of the field"
@@ -2270,6 +2271,7 @@ exports[`FormFields should render disabled TextArea correctly 1`] = `
           isRequired={false}
           isValid={true}
           name="Name of the field"
+          resizeOrientation="both"
           value=""
         >
           <textarea
@@ -2486,8 +2488,8 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
                     <input
                       aria-label=""
                       aria-labelledby="someIdKey-on"
+                      checked={false}
                       className="pf-c-switch__input"
-                      defaultChecked={false}
                       disabled={false}
                       id="someIdKey"
                       name="Name of the field"

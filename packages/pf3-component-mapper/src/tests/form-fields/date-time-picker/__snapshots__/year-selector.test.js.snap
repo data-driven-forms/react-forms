@@ -42,7 +42,11 @@ exports[`<YearSelector /> should render correctly 1`] = `
                       <span
                         aria-hidden={true}
                         className="fa fa-angle-left"
-                      />
+                      >
+                        <span>
+                          Prev interval
+                        </span>
+                      </span>
                     </FontAwesome>
                   </Icon>
                 </td>
@@ -67,7 +71,11 @@ exports[`<YearSelector /> should render correctly 1`] = `
                       <span
                         aria-hidden={true}
                         className="fa fa-angle-right"
-                      />
+                      >
+                        <span>
+                          Next interval
+                        </span>
+                      </span>
                     </FontAwesome>
                   </Icon>
                 </td>
