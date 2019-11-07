@@ -5,7 +5,7 @@ exports[`Tabs component should render tabs correctly 1`] = `
   activeKey={0}
   onSelect={[Function]}
 >
-  <Tab
+  <ForwardRef
     eventKey={0}
     key="cosiName"
     title="cosiTitle"
@@ -17,8 +17,8 @@ exports[`Tabs component should render tabs correctly 1`] = `
         Here would be form
       </div>
     </div>
-  </Tab>
-  <Tab
+  </ForwardRef>
+  <ForwardRef
     eventKey={1}
     key="cosiName2"
     title="cosiTitle2"
@@ -30,6 +30,6 @@ exports[`Tabs component should render tabs correctly 1`] = `
         Here would be form
       </div>
     </div>
-  </Tab>
+  </ForwardRef>
 </Component>
 `;

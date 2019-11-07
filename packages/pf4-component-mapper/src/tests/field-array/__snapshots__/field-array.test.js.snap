@@ -39,7 +39,6 @@ exports[`FieldArray should render array field correctly 1`] = `
         "text-field": [Function],
         "textarea-field": [Function],
         "time-picker": [Function],
-        "undefined": [Function],
         "wizard": [Function],
       }
     }
@@ -557,17 +556,17 @@ exports[`FieldArray should render array field correctly 1`] = `
                                             aria-labelledby="icon-title-25"
                                             className="ddf-final-form-group-add-icon"
                                             fill="currentColor"
-                                            height="3em"
+                                            height="1em"
                                             onClick={[Function]}
                                             role="img"
                                             style={
                                               Object {
-                                                "vertical-align": "-0.375em;",
+                                                "verticalAlign": "-0.375em",
                                               }
                                             }
                                             tabIndex="0"
                                             viewBox="0 64 1024 1024"
-                                            width="3em"
+                                            width="1em"
                                           >
                                             <title
                                               id="icon-title-25"

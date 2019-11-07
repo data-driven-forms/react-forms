@@ -5,7 +5,7 @@ jobs:
   build:
     working_directory: ~/react-forms
     docker:
-      - image: circleci/node
+      - image: circleci/node:10
     steps:
       - checkout
       - run:
