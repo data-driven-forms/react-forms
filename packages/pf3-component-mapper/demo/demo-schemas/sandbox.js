@@ -13,6 +13,24 @@ const output = {
           name: '553',
           fields: [
             {
+              component: 'select-field',
+              name: 'select-field-1',
+              label: 'Dropdown 1',
+              visible: true,
+              dataType: 'number',
+              options: [
+                {
+                  value: 1,
+                  label: 'foo',
+                },
+                {
+                  value: 2,
+                  label: 'bar',
+                },
+              ],
+              multi: true,
+            },
+            {
               title: 'Text boxes',
               key: '637',
               fields: [
@@ -24,6 +42,7 @@ const output = {
                   bsSize: 'mn',
                   onText: 'True',
                   offText: 'False',
+                  validate: undefined,
                 },
                 {
                   name: 'text_box_111',
@@ -261,6 +280,7 @@ const output = {
                   title: 'Dropdown',
                   dataType: 'string',
                   component: components.SELECT_COMPONENT,
+                  initialValue: [ '1' ],
                   isSearchable: true,
                   options: [
                     {
@@ -430,6 +450,7 @@ const output = {
                   title: 'Datepicker with past days',
                   component: components.DATE_PICKER,
                   variant: 'date-time',
+                  initialValue: '2019-11-04T12:31:00.000Z',
                 },
               ],
               component: components.SUB_FORM,
@@ -449,56 +470,6 @@ const output = {
                   label: 'Timepicker with past days',
                   title: 'Timepicker with past days',
                   component: components.TIME_PICKER,
-                },
-              ],
-              component: components.SUB_FORM,
-            },
-          ],
-          component: components.TAB_ITEM,
-        },
-        {
-          title: 'Tab 5',
-          description: 'New tab 4',
-          key: '557',
-          fields: [
-            {
-              title: 'Tag control',
-              key: '644',
-              fields: [
-                {
-                  name: 'tag_control_1',
-                  label: 'Tag Control',
-                  title: 'Tag Control',
-                  dataType: 'string',
-                  component: components.TAG_CONTROL,
-                },
-                {
-                  name: 'tag_control_2',
-                  label: 'Tag Control single value',
-                  title: 'Tag Control single value',
-                  dataType: 'string',
-                  component: components.TAG_CONTROL,
-                },
-                {
-                  name: 'tag_control_3',
-                  label: 'Tag Control category',
-                  title: 'Tag Control category',
-                  dataType: 'string',
-                  component: components.TAG_CONTROL,
-                  options: [
-                    {
-
-                    },
-                    {
-
-                    },
-                    {
-
-                    },
-                    {
-
-                    },
-                  ],
                 },
               ],
               component: components.SUB_FORM,

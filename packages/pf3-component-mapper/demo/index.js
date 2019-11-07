@@ -12,12 +12,16 @@ import Switch from "../src/form-fields/switch-field";
 
 class App extends React.Component {
   render() {
+    const initialValues = {
+      date_control_1: new Date()
+    }
     return (
     <div>
       <h1>Pf3 component mapper</h1>
       <Grid>
         <Row>
           <FormRenderer
+            initialValues={initialValues}
             onSubmit={console.log}
             schemaType="default"
             formFieldsMapper={formFieldsMapper}

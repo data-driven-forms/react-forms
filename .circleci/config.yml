@@ -1,0 +1,74 @@
+version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.4
+jobs:
+  build:
+    working_directory: ~/react-forms
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      - run:
+          name: install-deps
+          command: yarn
+      - run:
+          name: build-packages
+          command: yarn build
+      - run:
+          name: test
+          command: yarn test:ci
+      - codecov/upload:
+          file: coverage/*.json
+      - persist_to_workspace:
+          root: ~/react-forms
+          paths:
+              - "*"
+  release:
+    working_directory: ~/react-forms
+    docker:
+      - image: circleci/node
+    steps:
+      - attach_workspace:
+          at: ~/react-forms
+      - run:
+          name: Release new version
+          command: |
+            echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/react-forms/.npmrc
+            yarn release
+  deploy:
+    working_directory: ~/react-forms
+    docker:
+      - image: circleci/node
+    steps:
+      - attach_workspace:
+          at: ~/react-forms
+      - run:
+          name: Install Firebase Tools
+          command: |
+              npm install --prefix=./firebase-deploy firebase-tools
+      - run:
+          name: Deploy docs to firebase
+          command: |
+             ./firebase-deploy/node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
+
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+      - release:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master

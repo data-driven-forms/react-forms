@@ -16,6 +16,32 @@ describe('<Wizard />', () => {
   let getRegisteredFieldsNestedSchemaMock;
   let getValuesNestedSchema;
 
+  const nextButtonClick = (wrapper) =>  {
+    wrapper.find('button').at(0).simulate('click');
+    wrapper.update();
+  };
+
+  const nextButtonClickWithHeader = (wrapper) =>  {
+    wrapper.find('button').at(1).simulate('click');
+    wrapper.update();
+  };
+
+  const backButtonClick = (wrapper) =>  {
+    wrapper.find('button').at(1).simulate('click');
+    wrapper.update();
+  };
+
+  const backButtonClickWithHeader = (wrapper) =>  {
+    wrapper.find('button').at(2).simulate('click');
+    wrapper.update();
+  };
+
+  const changeValue = (wrapper, value) => {
+    wrapper.find('input').instance().value = value;
+    wrapper.find('input').simulate('change');
+    wrapper.update();
+  };
+
   beforeEach(() => {
     initialProps = {
       FieldProvider,
@@ -143,7 +169,8 @@ describe('<Wizard />', () => {
   it('should call submit function', () => {
     const onSubmit = jest.fn();
     const wrapper = mount(<Wizard { ...initialProps } formOptions={{ ...initialProps.formOptions, onSubmit }} />);
-    wrapper.find('button').at(1).simulate('click');
+    nextButtonClickWithHeader(wrapper);
+
     expect(onSubmit).toHaveBeenCalled();
   });
 
@@ -154,14 +181,13 @@ describe('<Wizard />', () => {
       formOptions={{ ...initialProps.formOptions, onSubmit, getRegisteredFields: getRegisteredFieldsSchemaMock }}
       fields={ schema }
     />);
-    // go to next step
-    wrapper.find('button').at(1).simulate('click');
-    wrapper.update();
+    nextButtonClickWithHeader(wrapper);
+
     expect(wrapper.children().instance().state.activeStep).toEqual('2');
     expect(wrapper.children().instance().state.prevSteps).toEqual([ '1' ]);
 
-    // submit wizard
-    wrapper.find('button').at(1).simulate('click');
+    nextButtonClickWithHeader(wrapper);
+
     expect(onSubmit).toHaveBeenCalledWith({
       'foo-field': 'foo-field-value',
       'bar-field': 'bar-field-value',
@@ -175,12 +201,10 @@ describe('<Wizard />', () => {
       formOptions={{ ...initialProps.formOptions, onSubmit, getRegisteredFields: getRegisteredFieldsNestedSchemaMock, getState: getValuesNestedSchema }}
       fields={ nestedSchema }
     />);
-    // go to next step
-    wrapper.find('button').at(1).simulate('click');
-    wrapper.update();
 
-    // submit wizard
-    wrapper.find('button').at(1).simulate('click');
+    nextButtonClickWithHeader(wrapper);
+    nextButtonClickWithHeader(wrapper);
+
     expect(onSubmit).toHaveBeenCalledWith({
       nested: {
         'foo-field': 'foo-field-value',
@@ -205,8 +229,7 @@ describe('<Wizard />', () => {
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(1);
     expect(wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).text()).toEqual('foo-step');
 
-    wrapper.find('button').at(1).simulate('click');
-    wrapper.update();
+    nextButtonClickWithHeader(wrapper);
 
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(2);
     expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).text()).toEqual('bar-step');
@@ -217,8 +240,7 @@ describe('<Wizard />', () => {
 
     expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('foo-field');
 
-    wrapper.find('button').at(1).simulate('click');
-    wrapper.update();
+    nextButtonClickWithHeader(wrapper);
 
     expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar-field');
 
@@ -233,7 +255,6 @@ describe('<Wizard />', () => {
     wrapper.update();
 
     expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar-field');
-
   });
 
   it('should build simple navigation with substeps', () => {
@@ -283,9 +304,7 @@ describe('<Wizard />', () => {
 
     expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('foo-field');
 
-    // go next
-    wrapper.find('button').at(1).simulate('click');
-    wrapper.update();
+    nextButtonClickWithHeader(wrapper);
 
     expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar-field');
 
@@ -301,9 +320,7 @@ describe('<Wizard />', () => {
 
     expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar-field');
 
-    // go back
-    wrapper.find('button').at(2).simulate('click');
-    wrapper.update();
+    backButtonClickWithHeader(wrapper);
 
     expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('foo-field');
 
@@ -336,9 +353,7 @@ describe('<Wizard />', () => {
     expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('foo-field');
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(1);
 
-    // go next
-    wrapper.find('button').at(1).simulate('click');
-    wrapper.update();
+    nextButtonClickWithHeader(wrapper);
 
     expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar-field');
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(3);
@@ -351,9 +366,7 @@ describe('<Wizard />', () => {
     // visited step perished from navigation
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(1);
 
-    // go next
-    wrapper.find('button').at(1).simulate('click');
-    wrapper.update();
+    nextButtonClickWithHeader(wrapper);
 
     expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar-field');
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(3);
@@ -413,45 +426,28 @@ describe('<Wizard />', () => {
     expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('foo');
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(4);
 
-    // go next
-    wrapper.find('button').at(0).simulate('click');
-    wrapper.update();
+    nextButtonClick(wrapper);
 
     expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar');
 
-    // go next
-    wrapper.find('button').at(0).simulate('click');
-    wrapper.update();
+    nextButtonClick(wrapper);
 
     // however, it is not possible because form is invalid
     expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar');
 
-    // let's write
-    wrapper.find('input').instance().value = 'hello';
-    wrapper.find('input').simulate('change');
-    wrapper.update();
-
-    // go next
-    wrapper.find('button').at(0).simulate('click');
-    wrapper.update();
+    changeValue(wrapper, 'hello');
+    nextButtonClick(wrapper);
 
     // voila
     expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('conan');
     expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).prop('aria-disabled')).toEqual(false);
 
-    // go back and make it invalid
-    wrapper.find('button').at(1).simulate('click');
-    wrapper.update();
+    backButtonClick(wrapper);
 
     expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar');
 
-    wrapper.find('input').instance().value = '';
-    wrapper.find('input').simulate('change');
-    wrapper.update();
-
-    // go next
-    wrapper.find('button').at(0).simulate('click');
-    wrapper.update();
+    changeValue(wrapper, '');
+    nextButtonClick(wrapper);
 
     // it is invalid :(
     expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar');
@@ -468,15 +464,9 @@ describe('<Wizard />', () => {
     expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).prop('aria-disabled')).toEqual(true);
 
     // make form valid again
-    wrapper.find('button').at(0).simulate('click');
-    wrapper.update();
-
-    wrapper.find('input').instance().value = 'hello';
-    wrapper.find('input').simulate('change');
-    wrapper.update();
-
-    wrapper.find('button').at(0).simulate('click');
-    wrapper.update();
+    nextButtonClick(wrapper);
+    changeValue(wrapper, 'hello');
+    nextButtonClick(wrapper);
 
     expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).prop('aria-disabled')).toEqual(false);
   });
@@ -533,22 +523,6 @@ describe('<Wizard />', () => {
       }],
     };
 
-    const nextButtonClick = (wrapper) =>  {
-      wrapper.find('button').at(0).simulate('click');
-      wrapper.update();
-    };
-
-    const backButtonClick = (wrapper) =>  {
-      wrapper.find('button').at(1).simulate('click');
-      wrapper.update();
-    };
-
-    const changeValue = (wrapper, value) => {
-      wrapper.find('input').instance().value = value;
-      wrapper.find('input').simulate('change');
-      wrapper.update();
-    };
-
     it('predict steps with dynamic wizard', () => {
       const wrapper = mount(<FormRenderer
         schema={ wizardSchema }
@@ -571,7 +545,7 @@ describe('<Wizard />', () => {
       expect(wrapper.find('WizardNavItem').at(2).text()).toEqual(THIRD_TITLE);
     });
 
-    it('reset nav when jumped into compileMapper step', () => {
+    it('disable nav when jumped into compileMapper step', () => {
       const wrapper = mount(<FormRenderer
         schema={ wizardSchema }
         formFieldsMapper={ formFieldsMapper }
@@ -588,8 +562,144 @@ describe('<Wizard />', () => {
 
       backButtonClick(wrapper);
 
-      expect(wrapper.find('WizardNavItem')).toHaveLength(1);
-      expect(wrapper.find('WizardNavItem').at(0).text()).toEqual(FIRST_TITLE);
+      expect(wrapper.find('WizardNavItem').at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find('WizardNavItem').at(1).props().isDisabled).toEqual(true);
+      expect(wrapper.find('WizardNavItem').at(2).props().isDisabled).toEqual(true);
+    });
+
+    it('disable nav when jumped into compileMapper step', () => {
+      const wrapper = mount(<FormRenderer
+        schema={ wizardSchema }
+        formFieldsMapper={ formFieldsMapper }
+        layoutMapper={ layoutMapper }
+        onSubmit={ jest.fn() }
+        onCancel={ jest.fn() }
+        showFormControls={ false }
+      />);
+
+      changeValue(wrapper, 'aws');
+      nextButtonClick(wrapper);
+
+      expect(wrapper.find('WizardNavItem')).toHaveLength(3);
+
+      backButtonClick(wrapper);
+
+      expect(wrapper.find('WizardNavItem').at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find('WizardNavItem').at(1).props().isDisabled).toEqual(true);
+      expect(wrapper.find('WizardNavItem').at(2).props().isDisabled).toEqual(true);
+    });
+
+    it('disable nav when jumped into compileMapper step from invalid step', () => {
+      const wizardSchema = {
+        fields: [{
+          component: componentTypes.WIZARD,
+          name: 'wizard',
+          predictSteps: true,
+          fields: [{
+            title: FIRST_TITLE,
+            stepKey: 1,
+            nextStep: {
+              when: 'source.source-type',
+              stepMapper: {
+                aws: 'aws',
+              },
+            },
+            fields: [{
+              name: 'source.source-type',
+              label: 'Source type',
+              component: componentTypes.TEXT_FIELD,
+            }],
+          }, {
+            title: SECOND_TITLE_AWS,
+            stepKey: 'aws',
+            nextStep: 'summary',
+            fields: [{
+              component: componentTypes.TEXT_FIELD,
+              name: 'aws-field',
+              label: 'Aws field part',
+              validate: [{ type: validatorTypes.REQUIRED }],
+            }],
+          }],
+        }],
+      };
+
+      const wrapper = mount(<FormRenderer
+        schema={ wizardSchema }
+        formFieldsMapper={ formFieldsMapper }
+        layoutMapper={ layoutMapper }
+        onSubmit={ jest.fn() }
+        onCancel={ jest.fn() }
+        showFormControls={ false }
+      />);
+
+      changeValue(wrapper, 'aws');
+      nextButtonClick(wrapper);
+
+      expect(wrapper.find('WizardNavItem')).toHaveLength(2);
+      expect(wrapper.find('WizardNavItem').at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find('WizardNavItem').at(1).props().isDisabled).toEqual(false);
+
+      changeValue(wrapper, undefined);
+      backButtonClick(wrapper);
+
+      expect(wrapper.find('WizardNavItem').at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find('WizardNavItem').at(1).props().isDisabled).toEqual(true);
+    });
+
+    it('disable nav when jumped into step with function nextStep', () => {
+      const NEXTSTEP_FUNCTION = jest.fn().mockReturnValue('aws');
+      const wizardSchemaWithNextStepFunction = {
+        fields: [{
+          component: componentTypes.WIZARD,
+          name: 'wizard',
+          predictSteps: true,
+          fields: [{
+            title: FIRST_TITLE,
+            stepKey: 1,
+            nextStep: NEXTSTEP_FUNCTION,
+            fields: [{
+              name: 'source.source-type',
+              label: 'Source type',
+              component: componentTypes.TEXT_FIELD,
+            }],
+          }, {
+            title: SECOND_TITLE_AWS,
+            stepKey: 'aws',
+            nextStep: 'summary',
+            fields: [{
+              component: componentTypes.TEXT_FIELD,
+              name: 'aws-field',
+              label: 'Aws field part',
+            }],
+          }],
+        }],
+      };
+
+      const EXPECTED_VALUES = { source: {
+        'source-type': 'aws',
+      }};
+
+      const wrapper = mount(<FormRenderer
+        schema={ wizardSchemaWithNextStepFunction }
+        formFieldsMapper={ formFieldsMapper }
+        layoutMapper={ layoutMapper }
+        onSubmit={ jest.fn() }
+        onCancel={ jest.fn() }
+        showFormControls={ false }
+      />);
+
+      changeValue(wrapper, 'aws');
+      nextButtonClick(wrapper);
+
+      expect(wrapper.find('WizardNavItem')).toHaveLength(2);
+
+      backButtonClick(wrapper);
+
+      expect(wrapper.find('WizardNavItem').at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find('WizardNavItem').at(1).props().isDisabled).toEqual(true);
+
+      const firstArgumentOfLastNextStepCall = NEXTSTEP_FUNCTION.mock.calls[NEXTSTEP_FUNCTION.mock.calls.length - 1][0];
+      expect(firstArgumentOfLastNextStepCall).toEqual({ values: EXPECTED_VALUES });
     });
 
     it('disable nav when jumped into disableForwardJumping step', () => {

@@ -456,56 +456,6 @@ const output = {
           component: components.TAB_ITEM,
         },
         {
-          title: 'Tab 5',
-          description: 'New tab 4',
-          key: '557',
-          fields: [
-            {
-              title: 'Tag control',
-              key: '644',
-              fields: [
-                {
-                  name: 'tag_control_1',
-                  label: 'Tag Control',
-                  title: 'Tag Control',
-                  dataType: 'string',
-                  component: components.TAG_CONTROL,
-                },
-                {
-                  name: 'tag_control_2',
-                  label: 'Tag Control single value',
-                  title: 'Tag Control single value',
-                  dataType: 'string',
-                  component: components.TAG_CONTROL,
-                },
-                {
-                  name: 'tag_control_3',
-                  label: 'Tag Control category',
-                  title: 'Tag Control category',
-                  dataType: 'string',
-                  component: components.TAG_CONTROL,
-                  options: [
-                    {
-
-                    },
-                    {
-
-                    },
-                    {
-
-                    },
-                    {
-
-                    },
-                  ],
-                },
-              ],
-              component: components.SUB_FORM,
-            },
-          ],
-          component: components.TAB_ITEM,
-        },
-        {
           title: 'Mixed',
           description: '',
           key: '558',

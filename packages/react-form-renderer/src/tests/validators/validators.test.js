@@ -28,15 +28,15 @@ describe('New validators', () => {
   });
 
   describe('Length validator', () => {
-    it('should pass exact lenght of 5 characters validation', () => {
+    it('should pass exact length of 5 characters validation', () => {
       expect(validatorMapper(validators.EXACT_LENGTH)({ threshold: 5 })('12345')).toBeUndefined();
     });
 
-    it('should fail exact lenght of 5 characters validation', () => {
+    it('should fail exact length of 5 characters validation', () => {
       expect(validatorMapper(validators.EXACT_LENGTH)({ threshold: 5 })('1234')).toBe('Should be 5 characters long.');
     });
 
-    it('should fail exact lenght of 5 characters validation with custom message', () => {
+    it('should fail exact length of 5 characters validation with custom message', () => {
       expect(validatorMapper(validators.EXACT_LENGTH)({ threshold: 5, message: 'Not 5 long' })('123456')).toBe('Not 5 long');
     });
 
@@ -52,15 +52,15 @@ describe('New validators', () => {
       expect(validatorMapper(validators.MIN_LENGTH)({ threshold: 3, message: 'Too short!' })('12')).toBe('Too short!');
     });
 
-    it('should pass max lenght of 3 characters long validation', () => {
+    it('should pass max length of 3 characters long validation', () => {
       expect(validatorMapper(validators.MAX_LENGTH)({ threshold: 3 })('12')).toBeUndefined();
     });
 
-    it('should not pass max lenght of 3 characters validation', () => {
+    it('should not pass max length of 3 characters validation', () => {
       expect(validatorMapper(validators.MAX_LENGTH)({ threshold: 3 })('1234')).toBe('Can have maximum of 3 characters.');
     });
 
-    it('should not pass max lenght of 3 characters validation with custom message', () => {
+    it('should not pass max length of 3 characters validation with custom message', () => {
       expect(validatorMapper(validators.MAX_LENGTH)({ threshold: 3, message: 'Too long!' })('1234')).toBe('Too long!');
     });
 
@@ -188,6 +188,41 @@ describe('New validators', () => {
 
     it('should return numberValidator and fail', () => {
       expect(dataTypeValidator('integer')({ message: 'Should be super interger' })('Foo')).toEqual('Should be super interger');
+    });
+
+    describe('data-type arrays', () => {
+      it('should pass validation of an array of strings', () => {
+        expect(dataTypeValidator('string')()([ 'Foo', 'Bar', 'Baz' ])).toBeUndefined();
+      });
+
+      it('should fail validation of an array of strings', () => {
+        expect(dataTypeValidator('string')()([ 'Foo', 'Bar', 2 ])).toBe('Field value has to be string');
+      });
+
+      it('should pass validation of an array of integers', () => {
+        expect(dataTypeValidator('integer')()([ 1, 2, 3 ])).toBeUndefined();
+      });
+
+      it('should fail validation of an array of strings', () => {
+        expect(dataTypeValidator('integer')()([ 1, 2, 2.1 ])).toBe('Value must be integer');
+        expect(dataTypeValidator('integer')()([ 1, 2, 'foo' ])).toBe('Value must be integer');
+      });
+
+      it('should pass validation of an array of numbers', () => {
+        expect(dataTypeValidator('number')()([ 1, 2, 3.1 ])).toBeUndefined();
+      });
+
+      it('should fail validation of an array of numbers', () => {
+        expect(dataTypeValidator('number')()([ 1, 2, 'foo' ])).toBe('Values must be number');
+      });
+
+      it('should pass validation of an array of booleans', () => {
+        expect(dataTypeValidator('boolean')()([ true, true, false, false ])).toBeUndefined();
+      });
+
+      it('should fail validation of an array of booleans', () => {
+        expect(dataTypeValidator('boolean')()([ 'foo', 2, true ])).toBe('Field value has to be boolean');
+      });
     });
   });
   describe('Validators default messages overrides', () => {

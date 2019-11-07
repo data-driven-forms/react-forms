@@ -2,16 +2,16 @@
   "name": "react-forms",
   "version": "1.9.6",
   "main": "index.js",
-  "repository": "git@github.com:data-driven-forms/react-forms.git",
+  "repository": "https://github.com/data-driven-forms/react-forms.git",
   "author": "Martin Marosi <marvusm.mmi@gmail.com>",
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build": "lerna run build",
+    "build": "lerna run build --ignore @data-driven-forms/react-render-demo",
     "vendor": "lerna run vendor",
     "test": "jest --coverage",
-    "test-ci": "jest --coverage",
+    "test:ci": "jest --coverage --runInBand",
     "test:update": "jest -u",
     "release": "semantic-release",
     "codecov": "codecov",
@@ -37,7 +37,8 @@
   },
   "devDependencies": {
     "@khala/npm-release-monorepo": "^2.2.0",
-    "@semantic-release/git": "^7.0.8",
+    "@khala/wildcard-release-notes": "^2.2.3",
+    "@semantic-release/github": "^5.5.5",
     "@semantic-release/npm": "^5.1.4",
     "atob-lite": "^2.0.0",
     "identity-obj-proxy": "^3.0.0",
@@ -50,13 +51,22 @@
     "monorepo": "./packages",
     "plugins": [
       "@khala/npm-release-monorepo",
+      [
+        "@khala/wildcard-release-notes",
+        {
+          "patterns": {
+            "minor": "^feat\\(",
+            "patch": "^(fix|patch)\\("
+          }
+        }
+      ],
       {
-        "path": "@semantic-release/git",
+        "path": "@semantic-release/github",
         "assets": [
           "package.json"
         ],
         "message": "Release of new version: ${nextRelease.version} <no> [skip ci]",
-        "successComment": ":tada: This ${issue.pull_request ? 'PR is included' : 'issue has been resolved'} in version ${nextRelease.version} :tada:\n\nThe release is available on \n\n- [GitHub release](<github_release_url>)\n\n- [npm package (@latest dist-tag)](<npm_release_url>)\n\nDemo can be found [here](http://data-driven-forms.surge.sh/)!"
+        "successComment": ":tada: This ${issue.pull_request ? 'PR is included' : 'issue has been resolved'} in version ${nextRelease.version} :tada:\n\nThe release is available on \n\n- [react-form-renderer (@latest dist-tag)](/https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)\n\n- [pf3-component-mapper (@latest dist-tag)](/https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper)\n\n- [pf4-component-mapper (@latest dist-tag)](/https://www.npmjs.com/package/@data-driven-forms/pf4-component-mapper)\n\n- [mui-component-mapper (@latest dist-tag)](/https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper)\n\nDemo can be found [here](http://data-driven-forms.org/)!"
       }
     ]
   },

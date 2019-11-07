@@ -1,19 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@patternfly/react-core';
+import get from 'lodash/get';
+
+export const selectNext = (nextStep, getState) => {
+  if (typeof nextStep === 'string') {
+    return nextStep;
+  }
+
+  if (typeof nextStep === 'function') {
+    return nextStep({ values: getState().values });
+  }
+
+  const selectedValue = get(getState().values, nextStep.when);
+
+  return nextStep.stepMapper[selectedValue];
+};
 
 const SimpleNext = ({
-  next,
+  nextStep,
   valid,
   handleNext,
   submit,
   nextLabel,
-}) => (
+  getState,
+}) =>  (
   <Button
     variant="primary"
     type="button"
     isDisabled={ !valid }
-    onClick={ () => valid ? handleNext(next) : submit() }
+    onClick={ () => valid ? handleNext(selectNext(nextStep, getState)) : submit() }
   >
     { nextLabel }
   </Button>
@@ -25,37 +41,16 @@ SimpleNext.propTypes = {
   handleNext: PropTypes.func.isRequired,
   submit: PropTypes.func.isRequired,
   nextLabel: PropTypes.string.isRequired,
-};
-
-const ConditionalNext = ({
-  nextStep,
-  FieldProvider,
-  ...rest
-}) => (
-  <FieldProvider
-    name={ nextStep.when }
-    subscription={{ value: true }}
-  >
-    { ({ input: { value }}) => <SimpleNext next={ nextStep.stepMapper[value] } { ...rest } /> }
-  </FieldProvider>
-);
-
-ConditionalNext.propTypes = {
-  nextStep: PropTypes.shape({
-    when: PropTypes.string.isRequired,
-    stepMapper: PropTypes.object.isRequired,
-  }).isRequired,
-  FieldProvider: PropTypes.func.isRequired,
+  getState: PropTypes.func.isRequired,
+  nextStep: PropTypes.oneOfType([ PropTypes.string, PropTypes.object, PropTypes.func ]).isRequired,
 };
 
 const SubmitButton = ({ handleSubmit, submitLabel }) => <Button type="button" variant="primary" onClick={ handleSubmit }>{ submitLabel }</Button>;
 
 const renderNextButton = ({ nextStep, handleSubmit, submitLabel, ...rest }) =>
-  !nextStep
-    ? <SubmitButton handleSubmit={ handleSubmit } submitLabel={ submitLabel } />
-    : typeof nextStep === 'object'
-      ? <ConditionalNext nextStep={ nextStep } { ...rest }/>
-      : <SimpleNext next={ nextStep } { ...rest } />;
+  nextStep
+    ? <SimpleNext nextStep={ nextStep } { ...rest } />
+    : <SubmitButton handleSubmit={ handleSubmit } submitLabel={ submitLabel } />;
 
 const WizardStepButtons = ({
   buttons: Buttons,
@@ -74,7 +69,7 @@ const WizardStepButtons = ({
   }}) =>
   <footer className={ `pf-c-wizard__footer ${buttonsClassName ? buttonsClassName : ''}` }>
     { Buttons ? <Buttons
-      ConditionalNext={ ConditionalNext }
+      ConditionalNext={ SimpleNext }
       SubmitButton={ SubmitButton }
       SimpleNext={ SimpleNext }
       formOptions={ formOptions }
@@ -89,18 +84,17 @@ const WizardStepButtons = ({
         ...formOptions,
         handleNext,
         nextStep,
-        FieldProvider,
         nextLabel: next,
         submitLabel: submit,
         ...args,
       }) }
+      selectNext={ selectNext }
     />
       : <React.Fragment>
         { renderNextButton({
           ...formOptions,
           handleNext,
           nextStep,
-          FieldProvider,
           nextLabel: next,
           submitLabel: submit,
         }) }
@@ -123,8 +117,9 @@ WizardStepButtons.propTypes = {
       when: PropTypes.string.isRequired,
       stepMapper: PropTypes.object.isRequired,
     }),
+    PropTypes.func,
   ]),
-  FieldProvider: PropTypes.func.isRequired,
+  FieldProvider: PropTypes.func,
   buttonLabels: PropTypes.shape({
     submit: PropTypes.string.isRequired,
     cancel: PropTypes.string.isRequired,

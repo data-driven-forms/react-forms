@@ -57,6 +57,8 @@ const FormRenderer = ({
     return <SchemaErrorComponent name={ schemaError.name } message={ schemaError.message } />;
   }
 
+  const label = inputSchema.schema.title || inputSchema.schema.label;
+
   return (
     <Form
       onSubmit={ onSubmit }
@@ -90,7 +92,7 @@ const FormRenderer = ({
           <RendererContext.Consumer>
             { ({ layoutMapper: { FormWrapper }}) => (
               <FormWrapper>
-                { inputSchema.schema.title && renderTitle(inputSchema.schema.title) }
+                { label && renderTitle(label) }
                 { inputSchema.schema.description && renderDescription(inputSchema.schema.description) }
                 { renderForm(inputSchema.schema.fields) }
                 { onStateUpdate && <FormSpy onChange={ onStateUpdate } /> }

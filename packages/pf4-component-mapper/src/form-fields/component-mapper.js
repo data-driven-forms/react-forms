@@ -27,7 +27,6 @@ const mapper = {
   [componentTypes.TABS]: Tabs,
   [componentTypes.DATE_PICKER]: DatePickerField,
   [componentTypes.TIME_PICKER]: TimePickerField,
-  [componentTypes.TAG_CONTROL]: props => <div>Unsupported tag control</div>,
   [componentTypes.WIZARD]: Wizard,
   [componentTypes.SWITCH]: SwitchField,
   [componentTypes.PLAIN_TEXT]: PlainTextField,

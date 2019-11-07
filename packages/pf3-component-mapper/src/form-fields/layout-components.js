@@ -34,7 +34,7 @@ ButtonGroupWrapper.defaultProps = {
   className: '',
 };
 
-const TitleWrapper = ({ children }) => <h3>{ children }</h3>;
+const TitleWrapper = ({ children }) => <h1>{ children }</h1>;
 
 TitleWrapper.propTypes = {
   children: PropTypes.oneOfType([ PropTypes.node, PropTypes.arrayOf(PropTypes.node) ]).isRequired,

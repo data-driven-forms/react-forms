@@ -28,6 +28,7 @@ const selectComponent = ({
   noCheckboxLabel,
   initialValue,
   loadOptions,
+  meta,
   ...rest
 }) => ({
   [componentTypes.TEXT_FIELD]: () =>
@@ -66,7 +67,7 @@ const selectComponent = ({
       checked={ input.value }
       onChange={ ({ target: { checked }}) => input.onChange(checked) }
     />,
-  [componentTypes.DATE_PICKER]: () => <DateTimePicker onChange={ input.onChange } isDisabled={ isDisabled } { ...rest } />,
+  [componentTypes.DATE_PICKER]: () => <DateTimePicker pristine={ meta.pristine } onChange={ input.onChange } value={ input.value } isDisabled={ isDisabled } { ...rest } />,
 })[componentType];
 
 const renderHelperText = (error, description) => (error // eslint-disable-line no-nested-ternary
@@ -92,7 +93,7 @@ const FinalFormField = ({
             { rest.isRequired ? <RequiredLabel label={ label } /> : label }
             { helperText && <FieldLevelHelp content={ helperText } /> }
           </ControlLabel> }
-      { selectComponent({ ...rest, invalid, label })() }
+      { selectComponent({ ...rest, invalid, label, meta })() }
       { renderHelperText(invalid && meta.error, description) }
     </FormGroup>
   );
