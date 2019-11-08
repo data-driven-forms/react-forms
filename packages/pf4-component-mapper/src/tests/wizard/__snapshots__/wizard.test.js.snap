@@ -365,7 +365,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                   </ComponentWithOuia>
                 </Component>
                 <Component
-                  onClick={[MockFunction]}
+                  onClick={[Function]}
                   type="button"
                   variant="link"
                 >
@@ -374,7 +374,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                     componentProps={
                       Object {
                         "children": "Cancel",
-                        "onClick": [MockFunction],
+                        "onClick": [Function],
                         "type": "button",
                         "variant": "link",
                       }
@@ -382,7 +382,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                     consumerContext={null}
                   >
                     <Button
-                      onClick={[MockFunction]}
+                      onClick={[Function]}
                       ouiaContext={
                         Object {
                           "isOuia": false,
@@ -397,7 +397,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                         aria-label={null}
                         className="pf-c-button pf-m-link"
                         disabled={false}
-                        onClick={[MockFunction]}
+                        onClick={[Function]}
                         tabIndex={null}
                         type="button"
                       >
@@ -1012,7 +1012,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                             </ComponentWithOuia>
                           </Component>
                           <Component
-                            onClick={[MockFunction]}
+                            onClick={[Function]}
                             type="button"
                             variant="link"
                           >
@@ -1021,7 +1021,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                               componentProps={
                                 Object {
                                   "children": "Cancel",
-                                  "onClick": [MockFunction],
+                                  "onClick": [Function],
                                   "type": "button",
                                   "variant": "link",
                                 }
@@ -1029,7 +1029,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                               consumerContext={null}
                             >
                               <Button
-                                onClick={[MockFunction]}
+                                onClick={[Function]}
                                 ouiaContext={
                                   Object {
                                     "isOuia": false,
@@ -1044,7 +1044,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                   aria-label={null}
                                   className="pf-c-button pf-m-link"
                                   disabled={false}
-                                  onClick={[MockFunction]}
+                                  onClick={[Function]}
                                   tabIndex={null}
                                   type="button"
                                 >
@@ -1471,7 +1471,7 @@ exports[`<Wizard /> should render correctly with custom title and description 1`
                   </ComponentWithOuia>
                 </Component>
                 <Component
-                  onClick={[MockFunction]}
+                  onClick={[Function]}
                   type="button"
                   variant="link"
                 >
@@ -1480,7 +1480,7 @@ exports[`<Wizard /> should render correctly with custom title and description 1`
                     componentProps={
                       Object {
                         "children": "Cancel",
-                        "onClick": [MockFunction],
+                        "onClick": [Function],
                         "type": "button",
                         "variant": "link",
                       }
@@ -1488,7 +1488,7 @@ exports[`<Wizard /> should render correctly with custom title and description 1`
                     consumerContext={null}
                   >
                     <Button
-                      onClick={[MockFunction]}
+                      onClick={[Function]}
                       ouiaContext={
                         Object {
                           "isOuia": false,
@@ -1503,7 +1503,7 @@ exports[`<Wizard /> should render correctly with custom title and description 1`
                         aria-label={null}
                         className="pf-c-button pf-m-link"
                         disabled={false}
-                        onClick={[MockFunction]}
+                        onClick={[Function]}
                         tabIndex={null}
                         type="button"
                       >

@@ -55,7 +55,7 @@ class App extends React.Component {
                     ...formFieldsMapper,
                     summary: Summary
                 }}
-                onCancel={() => console.log('Cancel action')}
+                onCancel={console.log}
                 layoutMapper={layoutMapper}
                 schema={this.state.schema}
                 uiSchema={this.state.ui}
