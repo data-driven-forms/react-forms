@@ -117,6 +117,7 @@ export class DateTimePicker extends React.Component {
       isDisabled,
       disabledDays,
       isClearable,
+      inputFormat,
     } = this.props;
     const value = this.createDate();
     const inputPlaceholder = getPlaceholder(variant, placeholder);
@@ -132,6 +133,7 @@ export class DateTimePicker extends React.Component {
           isDisabled={ isDisabled }
           isClearable={ isClearable }
           clearValue={ this.clearValue }
+          inputFormat={ inputFormat }
         />
         <Overlay
           show={ isOpen }
@@ -176,7 +178,7 @@ DateTimePicker.propTypes = {
   closeOnDaySelect: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   isClearable: PropTypes.bool,
-  pristine: PropTypes.bool,
+  inputFormat: PropTypes.string,
 };
 
 DateTimePicker.defaultProps = {
