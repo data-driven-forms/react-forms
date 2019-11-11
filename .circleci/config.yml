@@ -53,6 +53,10 @@ jobs:
           when: on_fail
           name: Uploading predeploy failure artifact to assist with debugging
           path: /home/circleci/.npm/_logs/*.log
+      - persist_to_workspace:
+          root: ~/react-forms
+          paths:
+              - "*"
   deploy:
     working_directory: ~/react-forms
     docker:
@@ -61,13 +65,17 @@ jobs:
       - attach_workspace:
           at: ~/react-forms
       - run:
+          name: 'Switch to correct folder'
+          command: |
+              cd ~/react-forms/packages/react-renderer-demo
+      - run:
           name: Install Firebase Tools
           command: |
               npm install --prefix=./firebase-deploy firebase-tools
       - run:
           name: Deploy demo
           command: |
-             yarn --cwd packages/react-renderer-demo/ deploy --token=$FIREBASE_TOKEN
+             ~/react-forms/firebase-deploy/node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
       - save_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
           paths:
