@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import { useRouter } from 'next/router';
-import {componentTypes} from '@data-driven-forms/react-form-renderer';
+import { componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import { flatSchema } from './navigation/schema';
 import GhIcon from './common/gh-svg-icon';
@@ -187,30 +187,31 @@ const Layout = ({ children }) => {
             <Navigation searchRef={ searchRef } closeNav={ handleDrawerClose }/>
             <Divider />
           </Drawer>
+          <div className={ clsx(classes.drawerHeader, classes.appBar, classes.rightAppBar, {
+            [classes.appBarShift]: open,
+          }) }>
+            <a href="https://github.com/data-driven-forms/react-forms" rel="noopener noreferrer" target="_blank">
+              <IconButton
+                color="inherit"
+                aria-label="gh repository"
+                edge="start"
+                className={ clsx(classes.menuButton) }
+              >
+                <SvgIcon>
+                  <GhIcon className={ classes.menuIcons } />
+                </SvgIcon>
+              </IconButton>
+            </a>
+          </div>
 
           <main
             className={ clsx(classes.content, {
               [classes.contentShift]: open,
               [classes.mainGradient]: router.pathname === '/',
               [classes.mainGradientShift]: router.pathname === '/' && open,
+              'DocSearch-content': true,
             }) }
           >
-            <div className={ clsx(classes.drawerHeader, classes.appBar, classes.rightAppBar, {
-              [classes.appBarShift]: open,
-            }) }>
-              <a href="https://github.com/data-driven-forms/react-forms" rel="noopener noreferrer" target="_blank">
-                <IconButton
-                  color="inherit"
-                  aria-label="gh repository"
-                  edge="start"
-                  className={ clsx(classes.menuButton) }
-                >
-                  <SvgIcon>
-                    <GhIcon className={ classes.menuIcons } />
-                  </SvgIcon>
-                </IconButton>
-              </a>
-            </div>
             <div className={ classes.contentWrapper }>
               <div style={{
                 paddingRight: 32,
