@@ -39,10 +39,17 @@ const useHeadingStyles = makeStyles(() => ({
 
 const Heading = ({ level, children, ...rest }) => {
   const classes = useHeadingStyles();
+  const id = headerToId(children);
   return (
     <React.Fragment>
-      <a id={ headerToId(children) } className={ classes.anchorOffset } data-mdlink="md-heading" />
-      <Typography className={ classes.heading } variant={ `h${level + 2}` }>{ children }<ShareButton text={ headerToId(children) }/></Typography>
+      <a id={ id } className={ classes.anchorOffset } data-mdlink="md-heading" />
+      <Typography
+        id={ `heading-${id}` }
+        className={ classes.heading }
+        variant={ `h${level + 2}` }>
+        { children }
+        <ShareButton text={ id }/>
+      </Typography>
     </React.Fragment>
   );
 };

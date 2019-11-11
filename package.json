@@ -66,7 +66,7 @@
           "package.json"
         ],
         "message": "Release of new version: ${nextRelease.version} <no> [skip ci]",
-        "successComment": ":tada: This ${issue.pull_request ? 'PR is included' : 'issue has been resolved'} in version ${nextRelease.version} :tada:\n\nThe release is available on \n\n- [react-form-renderer (@latest dist-tag)](/https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)\n\n- [pf3-component-mapper (@latest dist-tag)](/https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper)\n\n- [pf4-component-mapper (@latest dist-tag)](/https://www.npmjs.com/package/@data-driven-forms/pf4-component-mapper)\n\n- [mui-component-mapper (@latest dist-tag)](/https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper)\n\nDemo can be found [here](http://data-driven-forms.org/)!"
+        "successComment": ":tada: This ${issue.pull_request ? 'PR is included' : 'issue has been resolved'} in version ${nextRelease.version} :tada:\n\nThe release is available on \n\n- [react-form-renderer (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)\n\n- [pf3-component-mapper (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper)\n\n- [pf4-component-mapper (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/pf4-component-mapper)\n\n- [mui-component-mapper (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper)\n\nDemo can be found [here](http://data-driven-forms.org/)!"
       }
     ]
   },
