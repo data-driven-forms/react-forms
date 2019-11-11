@@ -49,6 +49,10 @@ jobs:
           name: Predeploy demo
           command: |
               yarn --cwd packages/react-renderer-demo/ predeploy
+      - store_artifacts:
+          when: on_fail
+          name: Uploading predeploy failure artifact to assist with debugging
+          path: /home/circleci/.npm/_logs/*.log
   deploy:
     working_directory: ~/react-forms
     docker:
