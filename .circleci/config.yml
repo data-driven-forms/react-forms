@@ -38,6 +38,17 @@ jobs:
           command: |
             echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/react-forms/.npmrc
             yarn release
+  predeploy:
+    working_directory: ~/react-forms
+    docker:
+      - image: circleci/node:10
+    steps:
+      - attach_workspace:
+          at: ~/react-forms
+      - run:
+          name: Predeploy demo
+          command: |
+              yarn --cwd packages/react-renderer-demo/ predeploy
   deploy:
     working_directory: ~/react-forms
     docker:
@@ -53,12 +64,20 @@ jobs:
           name: Deploy demo
           command: |
              yarn --cwd packages/react-renderer-demo/ deploy --token=$FIREBASE_TOKEN
+      - save_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/react-forms/node_modules
+            - ~/react-forms/packages/react-renderer-demo/dist/functions/next/cache
 
 workflows:
   version: 2
   build_and_deploy:
     jobs:
       - build
+      - predeploy:
+          requires:
+            - build
       - release:
           requires:
             - build
@@ -68,6 +87,7 @@ workflows:
       - deploy:
           requires:
             - build
+            - predeploy
           filters:
             branches:
               only: master
