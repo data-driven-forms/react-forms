@@ -16,7 +16,7 @@ exports[`<WizardSTepButtons should add custom className to toolbar 1`] = `
     Back
   </Component>
   <Component
-    onClick={[MockFunction]}
+    onClick={[Function]}
     type="button"
     variant="link"
   >
@@ -41,7 +41,7 @@ exports[`<WizardSTepButtons should render correctly 1`] = `
     Back
   </Component>
   <Component
-    onClick={[MockFunction]}
+    onClick={[Function]}
     type="button"
     variant="link"
   >

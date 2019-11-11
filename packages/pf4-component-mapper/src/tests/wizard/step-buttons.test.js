@@ -19,6 +19,7 @@ describe('<WizardSTepButtons', () => {
         handleSubmit: jest.fn(),
         submit: jest.fn(),
         valid: true,
+        getState: jest.fn(),
       },
       handlePrev: jest.fn(),
       handleNext: jest.fn(),
@@ -74,11 +75,15 @@ describe('<WizardSTepButtons', () => {
     expect(handleSubmit).toHaveBeenCalled();
   });
 
-  it('should call cancel function', () => {
+  it('should call cancel function with values', () => {
+    const VALUES = { aws: 'yes', password: '123456643' };
     const onCancel = jest.fn();
-    const wrapper = mount(<WizardStepButtons { ...initialProps } formOptions={{ ...initialProps.formOptions, onCancel }} />);
+    const wrapper = mount(<WizardStepButtons
+      { ...initialProps }
+      formOptions={{ ...initialProps.formOptions, onCancel, getState: () => ({ values: VALUES }) }}
+    />);
     wrapper.find('button').last().simulate('click');
-    expect(onCancel).toHaveBeenCalled();
+    expect(onCancel).toHaveBeenCalledWith(VALUES);
   });
 
   it('should call prev function', () => {

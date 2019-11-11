@@ -99,7 +99,7 @@ const WizardStepButtons = ({
           submitLabel: submit,
         }) }
         <Button type="button" variant="secondary" isDisabled={ disableBack } onClick={ handlePrev }>{ back }</Button>
-        <Button type="button" variant="link" onClick={ formOptions.onCancel }>{ cancel }</Button>
+        <Button type="button" variant="link" onClick={ () => formOptions.onCancel(formOptions.getState().values) }>{ cancel }</Button>
       </React.Fragment> }
   </footer>;
 
@@ -107,6 +107,7 @@ WizardStepButtons.propTypes = {
   formOptions: PropTypes.shape({
     onCancel: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
+    getState: PropTypes.func.isRequired,
   }).isRequired,
   disableBack: PropTypes.bool,
   handlePrev: PropTypes.func.isRequired,

@@ -15,6 +15,7 @@ describe('<Wizard />', () => {
   let getRegisteredFieldsSchemaMock;
   let getRegisteredFieldsNestedSchemaMock;
   let getValuesNestedSchema;
+  let initialValues;
 
   const nextButtonClick = (wrapper) =>  {
     wrapper.find('button').at(0).simulate('click');
@@ -36,6 +37,11 @@ describe('<Wizard />', () => {
     wrapper.update();
   };
 
+  const cancelButtonClickWithHeader = (wrapper) =>  {
+    wrapper.find('button').at(3).simulate('click');
+    wrapper.update();
+  };
+
   const changeValue = (wrapper, value) => {
     wrapper.find('input').instance().value = value;
     wrapper.find('input').simulate('change');
@@ -43,6 +49,11 @@ describe('<Wizard />', () => {
   };
 
   beforeEach(() => {
+    initialValues = {
+      'foo-field': 'foo-field-value',
+      'bar-field': 'bar-field-value',
+      'not-visited-field': 'not-visted-field-value',
+    };
     initialProps = {
       FieldProvider,
       title: 'Wizard',
@@ -50,11 +61,7 @@ describe('<Wizard />', () => {
       formOptions: {
         renderForm: ([{ name }]) => <div key={ name }>{ name }</div>,
         getState: () => ({
-          values: {
-            'foo-field': 'foo-field-value',
-            'bar-field': 'bar-field-value',
-            'not-visited-field': 'not-visted-field-value',
-          },
+          values: initialValues,
         }),
         onCancel: jest.fn(),
         onSubmit: jest.fn(),
@@ -192,6 +199,19 @@ describe('<Wizard />', () => {
       'foo-field': 'foo-field-value',
       'bar-field': 'bar-field-value',
     });
+  });
+
+  it('should pass values to cancel', () => {
+    const onCancel = jest.fn();
+    const wrapper = mount(<Wizard
+      { ...initialProps }
+      fields={ schema }
+      formOptions={{ ...initialProps.formOptions, onCancel }}
+    />);
+
+    cancelButtonClickWithHeader(wrapper);
+
+    expect(onCancel).toHaveBeenCalledWith(initialValues);
   });
 
   it('should submit data when nested schema', () => {
