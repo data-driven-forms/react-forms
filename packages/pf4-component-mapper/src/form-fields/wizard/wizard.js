@@ -249,7 +249,7 @@ class Wizard extends React.Component {
           { title && <WizardHeader
             title={ title }
             description={ description }
-            onClose={ formOptions.onCancel }
+            onClose={ () => formOptions.onCancel(formOptions.getState().values) }
           /> }
           <div className="pf-c-wizard__outer-wrap">
             <WizardNav>

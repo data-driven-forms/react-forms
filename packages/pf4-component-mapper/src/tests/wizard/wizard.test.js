@@ -42,6 +42,11 @@ describe('<Wizard />', () => {
     wrapper.update();
   };
 
+  const closeIconClickWithHeader = (wrapper) =>  {
+    wrapper.find('button').at(0).simulate('click');
+    wrapper.update();
+  };
+
   const changeValue = (wrapper, value) => {
     wrapper.find('input').instance().value = value;
     wrapper.find('input').simulate('change');
@@ -201,7 +206,7 @@ describe('<Wizard />', () => {
     });
   });
 
-  it('should pass values to cancel', () => {
+  it('should pass values to cancel button', () => {
     const onCancel = jest.fn();
     const wrapper = mount(<Wizard
       { ...initialProps }
@@ -210,6 +215,19 @@ describe('<Wizard />', () => {
     />);
 
     cancelButtonClickWithHeader(wrapper);
+
+    expect(onCancel).toHaveBeenCalledWith(initialValues);
+  });
+
+  it('should pass values to cancel - close icon', () => {
+    const onCancel = jest.fn();
+    const wrapper = mount(<Wizard
+      { ...initialProps }
+      fields={ schema }
+      formOptions={{ ...initialProps.formOptions, onCancel }}
+    />);
+
+    closeIconClickWithHeader(wrapper);
 
     expect(onCancel).toHaveBeenCalledWith(initialValues);
   });

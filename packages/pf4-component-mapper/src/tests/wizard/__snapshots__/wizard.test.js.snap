@@ -67,7 +67,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
       >
         <WizardHeader
           description="wizard description"
-          onClose={[MockFunction]}
+          onClose={[Function]}
           title="Wizard"
         >
           <div
@@ -75,7 +75,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
           >
             <Component
               className="pf-c-wizard__close"
-              onClick={[MockFunction]}
+              onClick={[Function]}
               variant="plain"
             >
               <ComponentWithOuia
@@ -91,7 +91,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                       title={null}
                     />,
                     "className": "pf-c-wizard__close",
-                    "onClick": [MockFunction],
+                    "onClick": [Function],
                     "variant": "plain",
                   }
                 }
@@ -99,7 +99,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
               >
                 <Button
                   className="pf-c-wizard__close"
-                  onClick={[MockFunction]}
+                  onClick={[Function]}
                   ouiaContext={
                     Object {
                       "isOuia": false,
@@ -113,7 +113,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                     aria-label={null}
                     className="pf-c-button pf-m-plain pf-c-wizard__close"
                     disabled={false}
-                    onClick={[MockFunction]}
+                    onClick={[Function]}
                     tabIndex={null}
                     type="button"
                   >
@@ -714,7 +714,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                 >
                   <WizardHeader
                     description="wizard description"
-                    onClose={[MockFunction]}
+                    onClose={[Function]}
                     title="Wizard"
                   >
                     <div
@@ -722,7 +722,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                     >
                       <Component
                         className="pf-c-wizard__close"
-                        onClick={[MockFunction]}
+                        onClick={[Function]}
                         variant="plain"
                       >
                         <ComponentWithOuia
@@ -738,7 +738,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                 title={null}
                               />,
                               "className": "pf-c-wizard__close",
-                              "onClick": [MockFunction],
+                              "onClick": [Function],
                               "variant": "plain",
                             }
                           }
@@ -746,7 +746,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                         >
                           <Button
                             className="pf-c-wizard__close"
-                            onClick={[MockFunction]}
+                            onClick={[Function]}
                             ouiaContext={
                               Object {
                                 "isOuia": false,
@@ -760,7 +760,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                               aria-label={null}
                               className="pf-c-button pf-m-plain pf-c-wizard__close"
                               disabled={false}
-                              onClick={[MockFunction]}
+                              onClick={[Function]}
                               tabIndex={null}
                               type="button"
                             >
@@ -1157,7 +1157,7 @@ exports[`<Wizard /> should render correctly with custom title and description 1`
               description
             </div>
           }
-          onClose={[MockFunction]}
+          onClose={[Function]}
           title={
             <div>
               Title
@@ -1169,7 +1169,7 @@ exports[`<Wizard /> should render correctly with custom title and description 1`
           >
             <Component
               className="pf-c-wizard__close"
-              onClick={[MockFunction]}
+              onClick={[Function]}
               variant="plain"
             >
               <ComponentWithOuia
@@ -1185,7 +1185,7 @@ exports[`<Wizard /> should render correctly with custom title and description 1`
                       title={null}
                     />,
                     "className": "pf-c-wizard__close",
-                    "onClick": [MockFunction],
+                    "onClick": [Function],
                     "variant": "plain",
                   }
                 }
@@ -1193,7 +1193,7 @@ exports[`<Wizard /> should render correctly with custom title and description 1`
               >
                 <Button
                   className="pf-c-wizard__close"
-                  onClick={[MockFunction]}
+                  onClick={[Function]}
                   ouiaContext={
                     Object {
                       "isOuia": false,
@@ -1207,7 +1207,7 @@ exports[`<Wizard /> should render correctly with custom title and description 1`
                     aria-label={null}
                     className="pf-c-button pf-m-plain pf-c-wizard__close"
                     disabled={false}
-                    onClick={[MockFunction]}
+                    onClick={[Function]}
                     tabIndex={null}
                     type="button"
                   >
