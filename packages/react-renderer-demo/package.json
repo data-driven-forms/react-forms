@@ -9,7 +9,7 @@
         "dev": "next \"src/app/\"",
         "preserve": "npm run build-public && npm run build-funcs && npm run build-app && npm run copy-deps && npm run install-deps",
         "serve": "cross-env NODE_ENV=production firebase serve",
-        "create-deploy-files": "npm run build-public; npm run build-funcs; npm run build-app; npm run copy-deps",
+        "create-deploy-files": "yarn build-public && yarn build-funcs && yarn build-app && yarn copy-deps",
         "deploy": "NODE_ENV=production firebase deploy",
         "clean": "rimraf \"dist/functions/**\" && rimraf \"dist/public\"",
         "build-public": "cpx \"src/public/**/*.*\" \"dist/public\" -C",
