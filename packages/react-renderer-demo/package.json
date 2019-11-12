@@ -46,7 +46,8 @@
         "react-ace": "^6.3.2",
         "react-copy-to-clipboard": "^5.0.1",
         "react-dom": "^16.10.2",
-        "react-router-dom": "^5.0.1"
+        "react-router-dom": "^5.0.1",
+        "react-sticky-box": "^0.8.0"
     },
     "devDependencies": {
         "@babel/cli": "^7.2.0",

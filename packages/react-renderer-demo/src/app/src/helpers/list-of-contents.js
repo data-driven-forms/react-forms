@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,6 +7,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import { useRouter } from 'next/router';
+import StickyBox from 'react-sticky-box';
 
 const reqSource = require.context(
   '!raw-loader!@docs/pages',
@@ -58,7 +59,6 @@ ListHeader.propTypes = {
 
 const useStyles = makeStyles(theme => ({
   fixedContainer: {
-    position: 'fixed',
     paddingLeft: 16,
   },
   listItem: {
@@ -129,23 +129,25 @@ const ListOfContents = ({ file }) => {
   const regex = /^###?#? .*/gm;
   const found = text.match(regex) || [];
   return (
-    <div className={ classes.fixedContainer }>
-      <Typography className={ classes.contentHeader } component="h3">Content</Typography>
-      <List dense>
-        { found.map(text =>(
-          <ListItem
-            onClick={ () => setActive(headerToId(text)) }
-            className={ clsx(classes.listItem, { [classes.listItemActive]: headerToId(text) === activeItem }) }
-            key={ text }
-          >
-            <ListItemText
-              className={ classes.listItemText }
-              primary={ <ListHeader text={ text } /> }
-            />
-          </ListItem>
-        )) }
-      </List>
-    </div>
+    <StickyBox offsetTop={ 96 } offsetBottom={ 20 }>
+      <div className={ classes.fixedContainer }>
+        <Typography className={ classes.contentHeader } component="h3">Content</Typography>
+        <List dense>
+          { found.map(text =>(
+            <ListItem
+              onClick={ () => setActive(headerToId(text)) }
+              className={ clsx(classes.listItem, { [classes.listItemActive]: headerToId(text) === activeItem }) }
+              key={ text }
+            >
+              <ListItemText
+                className={ classes.listItemText }
+                primary={ <ListHeader text={ text } /> }
+              />
+            </ListItem>
+          )) }
+        </List>
+      </div>
+    </StickyBox>
   );
 };
 
