@@ -74,7 +74,7 @@ module.exports = withBundleAnalyzer(withMDX(withCSS({
     config.optimization.minimizer = [
       new TerserPlugin({
         cache: true,
-        parallel: true,
+        parallel: false,
         terserOptions: {
           keep_classnames: true, // eslint-disable-line
           keep_fnames: true, // eslint-disable-line
