@@ -1,5 +1,5 @@
 import { mount } from 'enzyme';
-import { Toolbar, Button, ActionGroup, TextContent, Text } from '@patternfly/react-core';
+import { Button, ActionGroup, TextContent, Text } from '@patternfly/react-core';
 import { layoutComponents } from '@data-driven-forms/react-form-renderer';
 import layoutMapper from '../form-fields/layout-components';
 
@@ -9,7 +9,6 @@ describe('Layout mapper', () => {
   });
 
   it('should return PF4 ButtonGroup', () => {
-    expect(mount(layoutMapper[layoutComponents.BUTTON_GROUP]({})).find(Toolbar)).toHaveLength(1);
     expect(mount(layoutMapper[layoutComponents.BUTTON_GROUP]({})).find(ActionGroup)).toHaveLength(1);
   });
 
