@@ -1,17 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { layoutComponents } from '@data-driven-forms/react-form-renderer';
-import { Form, Toolbar, ToolbarGroup, ToolbarItem, Button, ActionGroup, TextContent, Text, TextVariants } from '@patternfly/react-core';
+import { Form, Button, ActionGroup, TextContent, Text, TextVariants } from '@patternfly/react-core';
 import './layout-components-styles.scss';
 
 const ButtonLayout = ({ label, bsStyle, children, ...props }) =>
-  <ToolbarGroup className="data-driven-forms__pf4-button-group">
-    <ToolbarItem>
-      <Button variant={ bsStyle || 'secondary' } { ...props }>
-        { label }{ children }
-      </Button>
-    </ToolbarItem>
-  </ToolbarGroup>;
+  <Button variant={ bsStyle || 'secondary' } { ...props }>
+    { label }{ children }
+  </Button>;
 
 ButtonLayout.propTypes = {
   label: PropTypes.string.isRequired,
@@ -24,9 +20,7 @@ ButtonLayout.propTypes = {
 
 const ButtonGroupLayout = ({ children, ...props }) =>
   <ActionGroup { ...props } >
-    <Toolbar>
-      { children }
-    </Toolbar>
+    { children }
   </ActionGroup>;
 
 ButtonGroupLayout.propTypes = {

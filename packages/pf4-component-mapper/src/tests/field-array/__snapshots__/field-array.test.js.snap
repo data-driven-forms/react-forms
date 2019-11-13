@@ -660,80 +660,60 @@ exports[`FieldArray should render array field correctly 1`] = `
                       <div
                         className="pf-c-form__actions"
                       >
-                        <Toolbar>
-                          <div
-                            className="pf-l-toolbar"
+                        <ButtonLayout
+                          key="form-submit"
+                          label="Submit"
+                          onClick={[Function]}
+                          type="button"
+                          variant="primary"
+                        >
+                          <Component
+                            onClick={[Function]}
+                            type="button"
+                            variant="primary"
                           >
-                            <ButtonLayout
-                              key="form-submit"
-                              label="Submit"
-                              onClick={[Function]}
-                              type="button"
-                              variant="primary"
+                            <ComponentWithOuia
+                              component={[Function]}
+                              componentProps={
+                                Object {
+                                  "children": Array [
+                                    "Submit",
+                                    undefined,
+                                  ],
+                                  "disabled": undefined,
+                                  "onClick": [Function],
+                                  "type": "button",
+                                  "variant": "primary",
+                                }
+                              }
+                              consumerContext={null}
                             >
-                              <ToolbarGroup
-                                className="data-driven-forms__pf4-button-group"
+                              <Button
+                                onClick={[Function]}
+                                ouiaContext={
+                                  Object {
+                                    "isOuia": false,
+                                    "ouiaId": null,
+                                  }
+                                }
+                                type="button"
+                                variant="primary"
                               >
-                                <div
-                                  className="pf-l-toolbar__group data-driven-forms__pf4-button-group"
+                                <button
+                                  aria-disabled={null}
+                                  aria-label={null}
+                                  className="pf-c-button pf-m-primary"
+                                  disabled={false}
+                                  onClick={[Function]}
+                                  tabIndex={null}
+                                  type="button"
                                 >
-                                  <ToolbarItem>
-                                    <div
-                                      className="pf-l-toolbar__item"
-                                    >
-                                      <Component
-                                        onClick={[Function]}
-                                        type="button"
-                                        variant="primary"
-                                      >
-                                        <ComponentWithOuia
-                                          component={[Function]}
-                                          componentProps={
-                                            Object {
-                                              "children": Array [
-                                                "Submit",
-                                                undefined,
-                                              ],
-                                              "disabled": undefined,
-                                              "onClick": [Function],
-                                              "type": "button",
-                                              "variant": "primary",
-                                            }
-                                          }
-                                          consumerContext={null}
-                                        >
-                                          <Button
-                                            onClick={[Function]}
-                                            ouiaContext={
-                                              Object {
-                                                "isOuia": false,
-                                                "ouiaId": null,
-                                              }
-                                            }
-                                            type="button"
-                                            variant="primary"
-                                          >
-                                            <button
-                                              aria-disabled={null}
-                                              aria-label={null}
-                                              className="pf-c-button pf-m-primary"
-                                              disabled={false}
-                                              onClick={[Function]}
-                                              tabIndex={null}
-                                              type="button"
-                                            >
-                                              Submit
-                                            </button>
-                                          </Button>
-                                        </ComponentWithOuia>
-                                      </Component>
-                                    </div>
-                                  </ToolbarItem>
-                                </div>
-                              </ToolbarGroup>
-                            </ButtonLayout>
-                          </div>
-                        </Toolbar>
+                                  Submit
+                                </button>
+                              </Button>
+                            </ComponentWithOuia>
+                          </Component>
+                        </ButtonLayout>
                       </div>
                     </div>
                   </ActionGroup>
