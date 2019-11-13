@@ -1,7 +1,12 @@
 import RouterLink from 'next/link';
 import Link from '@material-ui/core/Link';
-
+import Grid from '@material-ui/core/Grid'
 import RawComponent from '@docs/raw-component';
+
+import ListOfContents from '../../src/helpers/list-of-contents';
+
+<Grid container item>
+<Grid item xs={12} md={10}>
 
 ### Field Array Provider
 
@@ -75,3 +80,9 @@ PF4 component mapper provides an experimental implementation of PF4 field arrays
 |noItemsMessage|`node`|A message which is shown, when there are no items in the array.|
 
 <RawComponent source="field-array/pf4-demo" />
+
+</Grid>
+<Grid item xs={false} md={2}>
+  <ListOfContents file="renderer/field-array" />
+</Grid>
+</Grid>
