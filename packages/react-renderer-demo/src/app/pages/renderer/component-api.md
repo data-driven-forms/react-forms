@@ -8,9 +8,9 @@ import ExampleLink from '@docs/components/common/example-link';
 <Grid container item>
 <Grid item xs={12} md={10}>
 
-### Components API
+# Components API
 
-### Common props for all form fields
+# Common props for all form fields
 
 There is very short list of that can be applied to every form field
 
@@ -38,7 +38,7 @@ Others: <br/>
 &nbsp;&nbsp;tab/tab item <br/>
 &nbsp;&nbsp;wizard <br/>
 
-### FormGroup wrapped components
+# FormGroup wrapped components
 
 Basic components are wrapped in formGroup. FormGroup provides a standard API to show labels, helper texts, errors, etc.
 
@@ -55,7 +55,7 @@ All those components provides a shared group of props:
 |isReadOnly|boolean|Is the field readOnly?|
 |initialValue|custom|There are two ways how to set initial values in the form: you can use either the <RouterLink href="/renderer/renderer-api"><Link>initialValues</Link></RouterLink> prop for the whole form or you can set the value in the schema for each field separately. For more information, please see [here](https://final-form.org/docs/react-final-form/types/FieldProps#initialvalue).|
 
-#### Text field
+## Text field
 
 |Prop|Type|Description|
 |----|:--:|----------:|
@@ -63,7 +63,7 @@ All those components provides a shared group of props:
 
 <ExampleLink to='text-field' />
 
-#### Text area
+## Text area
 
 |Prop|Type|Description|
 |----|:--:|----------:|
@@ -71,7 +71,7 @@ All those components provides a shared group of props:
 
 <ExampleLink to='textarea-field' />
 
-#### Select
+## Select
 
 |Prop|Type|Description|
 |----|:--:|----------:|
@@ -86,7 +86,7 @@ All those components provides a shared group of props:
 
 <ExampleLink to='select-field' />
 
-#### Checkbox
+## Checkbox
 
 |Prop|Type|Description|
 |----|:--:|----------:|
@@ -96,7 +96,7 @@ All those components provides a shared group of props:
 <br />
 <ExampleLink to='checkbox' text='Single checkbox example'/>
 
-#### Radio
+## Radio
 
 |Prop|Type|Description|
 |----|:--:|----------:|
@@ -104,7 +104,7 @@ All those components provides a shared group of props:
 
 <ExampleLink to='radio' />
 
-#### Switch
+## Switch
 
 |Prop|Type|Description|
 |----|:--:|----------:|
@@ -113,7 +113,7 @@ All those components provides a shared group of props:
 
 <ExampleLink to='switch-field' />
 
-#### Datepicker
+## Datepicker
 
 This component is using [react-day-picker](https://react-day-picker.js.org/docs/) as a base component.
 
@@ -131,7 +131,7 @@ This component is using [react-day-picker](https://react-day-picker.js.org/docs/
 
 <ExampleLink to='date-picker' />
 
-#### Timepicker
+## Timepicker
 
 |Prop|Type|Description|
 |----|:--:|----------:|
@@ -139,9 +139,9 @@ This component is using [react-day-picker](https://react-day-picker.js.org/docs/
 
 <ExampleLink to='time-picker' />
 
-### Others components
+# Others components
 
-#### Subform
+## Subform
 
 |Prop|Type|Description|
 |----|:--:|----------:|
@@ -151,7 +151,7 @@ This component is using [react-day-picker](https://react-day-picker.js.org/docs/
 
 <ExampleLink to='sub-form' />
 
-#### Tab/tab item
+## Tab/tab item
 
 Tab <br/>
 
@@ -168,7 +168,7 @@ Tab item <br/>
 
 <ExampleLink to='tabs' />
 
-#### Wizard
+## Wizard
 
 Wizard <br />
 

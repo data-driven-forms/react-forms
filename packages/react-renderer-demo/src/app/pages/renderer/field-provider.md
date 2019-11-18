@@ -1,7 +1,7 @@
 import RouterNav from 'next/link';
 import Link from '@material-ui/core/Link';
 
-### Field Provider
+# Field Provider
 import Grid from '@material-ui/core/Grid'
 import RawComponent from '@docs/raw-component';
 
@@ -20,7 +20,7 @@ FieldProvider is a wrapper component around standard
 [react-final-form Field component](https://final-form.org/docs/react-final-form/api/Field)
 which adds additional methods that will help you to control your form state.
 
-### Accessing FieldProvider
+# Accessing FieldProvider
 
 To use Fieldprovider, you first need to register a component to your component mapper.
 You can read more about that in <RouterNav href="/renderer/component-mapping"><Link>Component mapping</Link></RouterNav>.
@@ -29,9 +29,9 @@ Each component will receive FieldProvider as a prop. Be aware that pre-defined c
 automatically wrapped in FieldProvider. This is done to make it easier to create component mappers for
 standard form components. List of standard components is available <RouterNav href="/renderer/component-api"><Link>here</Link></RouterNav>.
 
-### Using FieldProvider
+# Using FieldProvider
 
-#### Register component
+## Register component
 
 ```jsx
 import NewComponent from './new-component'
@@ -41,7 +41,7 @@ const formFieldsMapper = {
 }
 ```
 
-#### Implementation of component
+## Implementation of component
 
 Next example shows simple input field with label and error message.
 
@@ -67,9 +67,9 @@ const NewComponent = ({ FieldProvider, formOptions, name ...rest }) => (
 export default NewComponent
 ```
 
-### What are input and meta?
+# What are input and meta?
 
-#### Input
+## Input
 
 Input is an object which contains field values and methods that change form state. See the selection of most important attributes:
 
@@ -85,7 +85,7 @@ Input is an object which contains field values and methods that change form stat
 
 Every user interaction that updates field value in form state should also call `input.onChange` with correct value.
 
-#### Meta
+## Meta
 
 Meta is a object which contains meta information about field with given name. There is a lot of information about every field.
 [Full list is here](https://final-form.org/docs/react-final-form/types/FieldRenderProps#metaactive). These are commonly used meta informations
@@ -99,7 +99,7 @@ Meta is a object which contains meta information about field with given name. Th
 }
 ```
 
-### FormOptions
+# FormOptions
 
 In addition to FieldProvider, every component will also receive prop `formOptions`.
 This property contains a number of useful methods and attributes that will give you additional level of control

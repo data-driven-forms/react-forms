@@ -1,6 +1,6 @@
 import RawComponent from '@docs/raw-component';
 
-### React form renderer
+# React form renderer
 
 React form renderer is a component designed for ManageIQ and
 Insights projects that takes JSON form definitions

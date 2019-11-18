@@ -6,20 +6,20 @@ import ListOfContents from '../../src/helpers/list-of-contents';
 <Grid container item>
 <Grid item xs={12} md={10}>
 
-## Description
+# Description
 
 When using dynamic forms where more fields share the same name, the value is preserved when a user switches the field. You can disable this behavior by setting 
 `clearOnUnmount` option in the renderer component or in the schema of the field. The option in the schema has always higher priority. (When 
 `clearOnUnmount` is set in the renderer and the field has it this attribute set to `false`, the field value will not be cleared.)
 
-## Examples
+# Examples
 
-### Form example
+## Form example
 
 <RawComponent source="clear-on-unmount" />
 
 
-### Form level configuration
+## Form level configuration
 
 ```jsx
 <FormRenderer
@@ -31,7 +31,7 @@ When using dynamic forms where more fields share the same name, the value is pre
 />
 ```
 
-### Field level configuration
+## Field level configuration
 
 ```jsx
 {

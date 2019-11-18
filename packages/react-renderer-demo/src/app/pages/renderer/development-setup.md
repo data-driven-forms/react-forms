@@ -5,17 +5,17 @@ import ListOfContents from '../../src/helpers/list-of-contents';
 <Grid container item>
 <Grid item xs={12} md={10}>
 
-### Development setup
+# Development setup
 
 Data Driven Forms is a monorepo which uses [Lerna](https://github.com/lerna/lerna), so you can use all its commands as well.
 
-#### Install
+## Install
 
 ```console
 yarn install
 ```
 
-#### Build
+## Build
 
 ```console
 yarn build
@@ -25,7 +25,7 @@ All packages are linked together by default, so if you run a `yarn build` in a p
 
 Don't forget to build all packages, which are linked together!
 
-#### Run a package
+## Run a package
 
 Each package has a small playground `package/demo`, where you can test your changes.
 
@@ -34,7 +34,7 @@ cd packages/pf3-component-mapper
 yarn start
 ```
 
-#### Run documentation
+## Run documentation
 
 The documentation is a server-side rendered React application based on [NextJS framework](https://nextjs.org/).
 
@@ -43,14 +43,14 @@ cd packages/react-renderer-demo
 yarn dev
 ```
 
-#### How to clean?
+## How to clean?
 
 ```console
 rm yarn.lock
 yarn lerna clean # will delete all node_modules
 ```
 
-### Tests
+# Tests
 
 Tests needed to be run from the core folder.
 
@@ -60,7 +60,7 @@ yarn test
 yarn test packages/pf3-component-mapper
 ```
 
-### Commits
+# Commits
 
 Data Driven Forms uses [Semantic Release](https://github.com/semantic-release/commit-analyzer)
 
@@ -83,7 +83,7 @@ Please, do not use Semantic Release, if you update only the demo.
 
 All packages are releasing together and they share the version number.
 
-### Changes to documentation
+# Changes to documentation
 
 If your changes influence API or add new features, you should describe these new options in the `demo` repository. Thanks!
 

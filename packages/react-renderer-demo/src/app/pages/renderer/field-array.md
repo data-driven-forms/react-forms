@@ -8,19 +8,19 @@ import ListOfContents from '../../src/helpers/list-of-contents';
 <Grid container item>
 <Grid item xs={12} md={10}>
 
-### Field Array Provider
+# Field Array Provider
 
 Simillarly to <RouterLink href='/renderer/field-provider'><Link>FieldProvider</Link></RouterLink> Data driven forms provide an option how to inlude <a href='https://github.com/final-form/react-final-form-arrays'>React Final Form Arrays</a> in your form.
 
 <b>Please visit their documentation to learn about functionality.</b>
 
-#### Using FieldArrayProvider
+## Using FieldArrayProvider
 
 Component mapped to `componentTypes.FIELD_ARRAY` (`field_array`) receives as a prop `FieldArrayProvider`. You can wrap your component into it and they you have an access to all functionallity.
 
 <RawComponent source="field-array/form-fields-mapper" />
 
-### Naming
+# Naming
 
 FieldArray supports [final form notation](https://final-form.org/docs/final-form/field-names).
 
@@ -54,7 +54,7 @@ You don't need to name the nested components, then the values are saved as an ar
 }
 ```
 
-### Validators
+# Validators
 
 You can use user a few provided validators (you can also use your <RouterLink href='/renderer/validators'><Link>own</Link></RouterLink>.)
 
@@ -65,7 +65,7 @@ EXACT_LENGTH: ({threshold})
 ```
 
 
-### PF4 implementation
+# PF4 implementation
 
 PF4 component mapper provides an experimental implementation of PF4 field arrays.
 

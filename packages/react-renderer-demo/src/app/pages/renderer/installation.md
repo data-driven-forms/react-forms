@@ -1,4 +1,4 @@
-### Installation
+# Installation
 
 ```console
 npm install --save @data-driven-forms/react-form-renderer

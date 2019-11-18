@@ -44,7 +44,7 @@ const ListHeader = ({ text }) => {
       href={ `${router.pathname}#${headerToId(text)}` }
       title={ labelText }
     >
-      { [ ...new Array(level - 2) ].map((_v, index) => (
+      { [ ...new Array(level) ].map((_v, index) => (
         <React.Fragment key={ index }>
           &nbsp;&nbsp;
         </React.Fragment>
@@ -126,7 +126,7 @@ const ListOfContents = ({ file }) => {
   const classes = useStyles();
   const text = reqSource(`./${file}.md`).default;
 
-  const regex = /^###?#? .*/gm;
+  const regex = /^#+ .*/gm;
   const found = text.match(regex) || [];
   return (
     <StickyBox offsetTop={ 96 } offsetBottom={ 20 }>

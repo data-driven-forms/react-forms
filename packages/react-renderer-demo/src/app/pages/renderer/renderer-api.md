@@ -7,12 +7,12 @@ import ListOfContents from '../../src/helpers/list-of-contents';
 <Grid container item>
 <Grid item xs={12} md={10}>
 
-### Form Renderer API
+# Form Renderer API
 
 Form Renderer provides a lot of customization via props.
 
 
-#### Required props
+## Required props
 
 |Prop|Type|Description|
 |----|:--:|----------:|
@@ -21,7 +21,7 @@ Form Renderer provides a lot of customization via props.
 |onSubmit|func|A submit callback which receives two arguments: `values` and `formApi`.|
 |schema|object|A schema which defines structure of the form.|
 
-#### Optional props
+## Optional props
 
 |Prop|Type|Description|Default|
 |----|:--:|----------:|------:|
@@ -42,7 +42,7 @@ Form Renderer provides a lot of customization via props.
 |uiSchema|object|Use when you need to use mozilla schema.|{ }|
 |<RouterLink href="/renderer/validators"><Link>validate</Link></RouterLink>|func|A function which receives all form values and returns an object with errors.||
 
-### Schema
+# Schema
 
 The root object of the schema represents the <RouterLink href="/renderer/component-mapping#formwrapper"><Link>Form</Link></RouterLink> component, which accepts only these three props:
 
@@ -52,7 +52,7 @@ The root object of the schema represents the <RouterLink href="/renderer/compone
 |description|node|<RouterLink href="/renderer/component-mapping#description"><Link>Description</Link></RouterLink> of the form. Optional.|
 |fields|array of objects|<RouterLink href="/renderer/component-api"><Link>Components</Link></RouterLink> of the form. Required!|
 
-#### Example
+## Example
 
 ```javascript
 schema = {
