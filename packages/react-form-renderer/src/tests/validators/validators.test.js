@@ -28,6 +28,14 @@ describe('New validators', () => {
   });
 
   describe('Length validator', () => {
+    it('should pass empty value', () => {
+      expect(validatorMapper(validators.EXACT_LENGTH)({ threshold: 5 })('')).toBeUndefined();
+    });
+
+    it('should pass undefined value', () => {
+      expect(validatorMapper(validators.EXACT_LENGTH)({ threshold: 5 })(undefined)).toBeUndefined();
+    });
+
     it('should pass exact length of 5 characters validation', () => {
       expect(validatorMapper(validators.EXACT_LENGTH)({ threshold: 5 })('12345')).toBeUndefined();
     });
