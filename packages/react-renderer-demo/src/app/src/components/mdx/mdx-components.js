@@ -37,7 +37,7 @@ const useHeadingStyles = makeStyles(() => ({
   },
 }));
 
-const Heading = ({ level, children, ...rest }) => {
+const Heading = ({ level, children, variant, component, ...rest }) => {
   const classes = useHeadingStyles();
   const id = headerToId(children);
   return (
@@ -46,7 +46,9 @@ const Heading = ({ level, children, ...rest }) => {
       <Typography
         id={ `heading-${id}` }
         className={ classes.heading }
-        variant={ `h${level + 2}` }>
+        variant={ `h${level}` }
+        component={ component }
+      >
         { children }
         <ShareButton text={ id }/>
       </Typography>
@@ -80,12 +82,12 @@ const MdxComponents = {
       />
     </div>),
   link: ({ href, children }) => <Link href={ href }>{ children }</Link>,
-  h1: props => <Heading { ...props } level={ 1 }/>,
-  h2: props => <Heading { ...props } level={ 2 }/>,
-  h3: props => <Heading { ...props } level={ 3 }/>,
-  h4: props => <Heading { ...props } level={ 4 }/>,
-  h5: props => <Heading { ...props } level={ 5 }/>,
-  h6: props => <Heading { ...props } level={ 6 }/>,
+  h1: props => <Heading { ...props } level={ 4 } component="h1"/>,
+  h2: props => <Heading { ...props } level={ 5 } component="h2"/>,
+  h3: props => <Heading { ...props } level={ 6 } component="h3"/>,
+  h4: props => <Heading { ...props } level={ 6 } component="h4"/>,
+  h5: props => <Heading { ...props } level={ 6 } component="h5"/>,
+  h6: props => <Heading { ...props } level={ 6 } component="h6"/>,
   ul: ({ children }) => <List>{ children }</List>,
   li: ({ children }) =>
     <ListItem>

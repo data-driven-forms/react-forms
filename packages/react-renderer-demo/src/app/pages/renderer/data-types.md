@@ -6,12 +6,12 @@ import ListOfContents from '../../src/helpers/list-of-contents';
 <Grid container item>
 <Grid item xs={12} md={10}>
 
-## Introduction
+# Introduction
 
  You can specify a type of a component by providing `dataType`, which will automatically validates the component value.
 Because almost everything in HTML inputs is outputed as a string, adding the `dataType` props will also cast the value to given type.
 
-### Available dataTypes
+## Available dataTypes
 
  ```jsx
 ['integer', 'float', 'number', 'boolean', 'string']

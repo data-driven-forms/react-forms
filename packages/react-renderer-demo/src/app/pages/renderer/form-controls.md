@@ -6,13 +6,13 @@ import ListOfContents from '../../src/helpers/list-of-contents';
 <Grid container item>
 <Grid item xs={12} md={10}>
 
-### Custom form buttons
+# Custom form buttons
 
 If you need completely customized buttons, you can pass a component to form renderer via `renderFormButtons` prop.
 
 <RawComponent source="custom-buttons" />
 
-#### Form Buttons render props
+## Form Buttons render props
 
 Your component will receive same props as provided by react-final-form FormSpy component. For most use cases you will need just a few of these which are listed below. If you require full list please visit [react-final-form documentation](https://final-form.org/docs/final-form/types/FormState).
 

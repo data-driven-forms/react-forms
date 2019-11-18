@@ -7,7 +7,7 @@ import ListOfContents from '../../src/helpers/list-of-contents';
 <Grid container item>
 <Grid item xs={12} md={10}>
 
-## Introduction
+# Introduction
 
 In order to successfully render a form via FormRenderer you need to assign component mappers. Component mapper is an object of React components,
 where key is a component identifier and value is the Component. The identifiers must be equivalent to `componentTypes` in your schema.
@@ -15,14 +15,14 @@ where key is a component identifier and value is the Component. The identifiers 
 There are two types of component mappers required by FormRenderer: `layoutMapper` and `formFieldsMapper`.
 
 
-### LayoutMapper
+## LayoutMapper
 In layout mapper you have to define your form layout components like form wrapper, form groups etc.
 
 
-### FormFieldsMapper
+## FormFieldsMapper
 Form fields mapper defines form inputs which can mutate the form state.
 
-## Creating layoutMapper
+# Creating layoutMapper
 
 Layout mapper components define the form layout. There are several different components which you have to implement. If you don't need
 any special wrapper for the component, you can define it as `React.Fragment`.
@@ -46,36 +46,36 @@ Check the example below to see a simple implementation of layout components.
 
 <RawComponent source="component-mapper/layout-mapper" />
 
-### Layout components props
+## Layout components props
 
-#### FormWrapper
+### FormWrapper
 |Prop|Type|Description|Value|Customizable|
 |----|----|-----------|-----|------------|
 |children|node|Content of the form||Based on form schema|
 
-#### Button
+### Button
 |Prop|Type|Description|Value|Customizable|
 |----|----|-----------|-----|------------|
 |label|string|Button label|"Submit", "Cancel", "Reset"|Yes, \`buttonsLabels\` FormRenderer prop|
 |variant|string|Variant of button. Submit button will receive "primary" value |"primary", undefined|No|
 |onClick|function|Button click event handler|function|Yes, \`onSubmit\`, \`onCancel\`, \`onReset\` FormRenderer props|
 
-#### ButtonGroup
+### ButtonGroup
 |Prop|Type|Description|Value|Customizable|
 |----|----|-----------|-----|------------|
 |children|node|Wrapper around form buttons||No|
 
-#### Title
+### Title
 |Prop|Type|Description|Customizable|
 |----|----|-----------|------------|
 |children|node|Form title|no|
 
-#### Description
+### Description
 |Prop|Type|Description|Customizable|
 |----|----|-----------|------------|
 |children|node|Form description|no|
 
-## Creating formFieldsMapper
+# Creating formFieldsMapper
 
 Form fields mapper defines components that are rendered from input schema. Each component in mapper must have an unique key,
 which corresponds to `componentType` in input schema. Keys names can be chosen but there are some predefined constants

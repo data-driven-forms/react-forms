@@ -2,7 +2,9 @@ This a custom component. OnSubmit will send only values from visited steps.
 
 Don't forget hide form controls by setting \`showFormControls\` to \`false\` as a prop of the renderer component.
 
-### Props
+# PF4 Wizard
+
+## Props
 
 | Prop  | Type | Default |  Description |
 | ------------- | ------------- | ------------- | ------------- |
@@ -15,7 +17,7 @@ Don't forget hide form controls by setting \`showFormControls\` to \`false\` as 
 | setFullHeight  | bool  | undefined  | see Patternfly  |
 | isDynamic  | bool  | undefined  | will dynamically generate steps navigation (=progressive wizard), please use if you use any condition fields which changes any field in other steps (wizards with conditional steps are dynamic by default) |
 
-### Default buttonLabels
+## Default buttonLabels
 
 ```jsx
 {
@@ -36,7 +38,7 @@ You can rewrite only selection of them, e.g.
 
 (Others will stay default)
 
-### Docs for steps
+## Docs for steps
 
 | Props  | Type  |  Description |
 | ------------- | ------------- | ------------- |
@@ -61,7 +63,7 @@ nextStep: {
 },
 ```
 
-#### Buttons
+### Buttons
 
 Each step can implement its own buttons.
 
@@ -96,11 +98,11 @@ The components receives these props:
 |buttonLabels|Object with labels.|
 |renderNextButton|Function which completely handle the next/submit button.|
 
-### How to do substeps
+## How to do substeps
 
 Field in Wizard fields should contain `substep` <`string`> which is title of the primary step. Steps with the same substep are grouped together by the title of primary step.
 
-#### Example
+### Example
 
 Structure:
 
@@ -140,13 +142,13 @@ Schema: [
 Progressive Wizard works same way. It checks if previous step has the same \`substep\` value and if so, it grouped them together.
 If the value is different, a new primary step is created with the step as a substep.
 
-### First step
+## First step
 
 First step should have `stepKey: 1` or as a string: `'1'`
 
-### Variants of Wizard
+## Variants of Wizard
 
-#### Simple wizard
+### Simple wizard
 
 - steps navigation is visible, user can jump back and forward (after visiting the step)
 - does not contain any conditional steps
@@ -155,7 +157,7 @@ First step should have `stepKey: 1` or as a string: `'1'`
 
 ![simplewizard](https://user-images.githubusercontent.com/32869456/58427234-56725680-809f-11e9-8e22-3ce7286b30d2.gif)
 
-#### Progressive wizard
+### Progressive wizard
 
 - steps are visible as user visits them
 - user can jump only back
@@ -163,7 +165,7 @@ First step should have `stepKey: 1` or as a string: `'1'`
 
 ![progressivewizard](https://user-images.githubusercontent.com/32869456/58427241-5b370a80-809f-11e9-8e79-a4a829b8d181.gif)
 
-### Useful links
+## Useful links
 
 [PF4 wizard implementation](https://www.patternfly.org/v4/documentation/react/components/wizard/)
 

@@ -1,6 +1,8 @@
 This a custom component. OnSubmit will send only values from visited steps.
 
-### Docs for steps
+# Wizard
+
+## Docs for steps
 
 | Props  | Type  |  Description |
 | ------------- | ------------- | ------------- |
@@ -9,7 +11,7 @@ This a custom component. OnSubmit will send only values from visited steps.
 | nextStep  | object/stepKey of next step | See below |
 | fields  | array | As usual |
 
-### Default buttonLabels
+## Default buttonLabels
 
 ```jsx
 {

@@ -1,6 +1,7 @@
 This a custom component. OnSubmit will send only values from visited steps.
+# PF3 Wizard
 
-### Props
+## Props
 
 | Prop  | Type | Default |  Description |
 | ------------- | ------------- | ------------- | ------------- |
@@ -9,7 +10,7 @@ This a custom component. OnSubmit will send only values from visited steps.
 | stepsInfo  | object  | undefined  | Information for stepper  |
 | inModal  | bool  | false  | If form is in a modal (will add a cancel icon to the header)  |
 
-### Default buttonLabels
+## Default buttonLabels
 
 ```jsx
 {
@@ -30,7 +31,7 @@ You can rewrite only selection of them, e.g.
 
 (Others will stay default)
 
-### Format of stepsInfo
+## Format of stepsInfo
 
 ```jsx
 [
@@ -43,7 +44,7 @@ You can rewrite only selection of them, e.g.
 
 ![image](https://user-images.githubusercontent.com/32869456/52336077-393c4e00-2a04-11e9-9aad-d591515cdba6.png)
 
-### Docs for steps
+## Docs for steps
 
 | Props  | Type  |  Description |
 | ------------- | ------------- | ------------- |
@@ -65,7 +66,7 @@ nextStep: {
 },
 ```
 
-### Useful links
+## Useful links
 
 [PF3 wizard implementation](https://github.com/patternfly/patternfly-react/tree/master/packages/patternfly-3/patternfly-react/src/components/Wizard)
 

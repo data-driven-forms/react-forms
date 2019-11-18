@@ -1,7 +1,6 @@
-### Async Select
+# PF4 Async Select
 
 PF4 Select allows to load the options asynchronously.
-
 
 |prop name|type|description|
 |---------|----|-----------|
@@ -9,7 +8,7 @@ PF4 Select allows to load the options asynchronously.
 |loadingMessage|`node`|A message shown during the initial loading.|
 |updatingMessage|`node`|A message shown during the loading|
 
-#### loadOptions example
+## loadOptions example
 
 `loadOptions` receives a search input text as an argument.
 
