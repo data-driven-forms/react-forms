@@ -13,6 +13,7 @@ import Paper from '@material-ui/core/Paper';
 import { headerToId } from '../../helpers/list-of-contents';
 import ShareButton from './share-button';
 import { makeStyles } from '@material-ui/core/styles';
+import { useRouter } from 'next/router';
 
 import dynamic from 'next/dynamic';
 const CodeEditor = dynamic(import('../code-editor'), {
@@ -21,13 +22,14 @@ const CodeEditor = dynamic(import('../code-editor'), {
 
 const useHeadingStyles = makeStyles(() => ({
   anchorOffset: {
+    textDecoration: 'none',
+    color: 'inherit',
+    paddingTop: 92, // compensate for fixed header size and spacing
+    marginTop: -92,  // compensate for fixed header size and spacing
     position: 'relative',
-    top: -92, // compensate for fixed header size and spacing
-    display: 'block',
+    display: 'inline-block',
   },
   heading: {
-    marginBottom: 10,
-    marginTop: 10,
     '& button': {
       visibility: 'hidden',
     },
@@ -38,11 +40,12 @@ const useHeadingStyles = makeStyles(() => ({
 }));
 
 const Heading = ({ level, children, variant, component, ...rest }) => {
+  const router = useRouter();
   const classes = useHeadingStyles();
   const id = headerToId(children);
+  const path = `${router.pathname}#${id}`;
   return (
-    <React.Fragment>
-      <a id={ id } className={ classes.anchorOffset } data-mdlink="md-heading" />
+    <a id={ id } href={ path } className={ classes.anchorOffset } data-mdlink="md-heading">
       <Typography
         id={ `heading-${id}` }
         className={ classes.heading }
@@ -50,9 +53,9 @@ const Heading = ({ level, children, variant, component, ...rest }) => {
         component={ component }
       >
         { children }
-        <ShareButton text={ id }/>
+        <ShareButton path={ path }/>
       </Typography>
-    </React.Fragment>
+    </a>
   );
 };
 

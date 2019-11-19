@@ -10,7 +10,8 @@
     "start": "next start",
     "vendor": "webpack --env vendor --config ./config/webpack.config.js --progress",
     "deploy": "firebase deploy --only functions",
-    "analyze": "ANALYZE=true next build"
+    "analyze": "ANALYZE=true next build",
+    "lint": "eslint ./src"
   },
   "repository": {
     "type": "git",

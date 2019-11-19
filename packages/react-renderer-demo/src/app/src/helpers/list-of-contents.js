@@ -84,28 +84,11 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: 16,
     paddingRight: 16,
   },
-  listItemActive: {
-    position: 'relative',
-    background: theme.palette.common.white,
-    '&::before': {
-      position: 'absolute',
-      left: -0,
-      display: 'block',
-      content: '""',
-      width: 2,
-      height: '100%',
-      background: theme.palette.grey[700],
-    },
-  },
-  contentHeader: {
-    paddingLeft: 16,
-    paddingRight: 16,
-  },
 }));
 
 const scrollListener = (setActive) => {
-  const min = 120;
-  const max = 150;
+  const min = -10;
+  const max = 20;
   const elem = Array.from(document.querySelectorAll('[data-mdlink]'))
   .find(elem => {
     const { top } = elem.getBoundingClientRect();
