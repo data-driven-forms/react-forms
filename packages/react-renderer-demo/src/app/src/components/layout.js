@@ -209,14 +209,16 @@ const Layout = ({ children }) => {
               [classes.contentShift]: open,
               [classes.mainGradient]: router.pathname === '/',
               [classes.mainGradientShift]: router.pathname === '/' && open,
-              'DocSearch-content': true,
             }) }
           >
             <div className={ classes.contentWrapper }>
-              <div style={{
-                paddingRight: 32,
-                paddingLeft: 32,
-              }}>
+              <div
+                className="DocSearch-content"
+                style={{
+                  paddingRight: 32,
+                  paddingLeft: 32,
+
+                }}>
                 { children }
               </div>
               <ConnectedLinks />
