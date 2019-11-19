@@ -16,6 +16,8 @@ Don't forget hide form controls by setting \`showFormControls\` to \`false\` as 
 | setFullWidth  | bool  | undefined  | see Patternfly  |
 | setFullHeight  | bool  | undefined  | see Patternfly  |
 | isDynamic  | bool  | undefined  | will dynamically generate steps navigation (=progressive wizard), please use if you use any condition fields which changes any field in other steps (wizards with conditional steps are dynamic by default) |
+|showTitles|bool|undefined|If true, step titles will be shown in the wizard body|
+|predictSteps|bool|undefined|If true, dynamic wizard will predict steps in the navigation.|
 
 ## Default buttonLabels
 
@@ -27,7 +29,6 @@ Don't forget hide form controls by setting \`showFormControls\` to \`false\` as 
   submit: 'Submit',
 }
 ```
-
 You can rewrite only selection of them, e.g.
 
 ```jsx
@@ -45,9 +46,13 @@ You can rewrite only selection of them, e.g.
 | stepKey  | string, number | For first step: 1, otherwise anything |
 | nextStep  | object/stepKey of next step | See below |
 | fields  | array | As usual |
-| substep | string | Substep title (steps are grouped by this title) |
+| substepOf | string | Substep title (steps are grouped by this title) |
 | title | string | Step title |
-| buttons | node, func | Custom buttons component
+| buttons | node, func | Custom buttons component|
+|showTitle|bool|If true, step titles will (not if false) be shown in the wizard body|
+|customTitle|node|Use if you want to render as the title different/custom title (for example, title with a popover|
+|disableForwardJumping|bool|When use return to this step, jumping forward in the navigation is disabled.|
+
 
 - nextStep can be stepKey of the next step
 - or you can branch the way by using of object:
@@ -61,6 +66,12 @@ nextStep: {
           ...
         },
 },
+```
+
+- another option is to use custom function. The custom function receives as the first argument an object with values and the function has to return a `stepKey` in string.
+
+```jsx
+nextStep: ({ values }) => (values.aws === '123' &&& values.password === 'secret') ? 'secretStep' : 'genericStep'
 ```
 
 ### Buttons
@@ -98,9 +109,10 @@ The components receives these props:
 |buttonLabels|Object with labels.|
 |renderNextButton|Function which completely handle the next/submit button.|
 
+
 ## How to do substeps
 
-Field in Wizard fields should contain `substep` <`string`> which is title of the primary step. Steps with the same substep are grouped together by the title of primary step.
+Field in Wizard fields should contain `substepOf` <`string`> which is title of the primary step. Steps with the same substepOf are grouped together by the title of primary step.
 
 ### Example
 
@@ -126,12 +138,12 @@ Schema: [
     stepKey: 'security',
     title: 'Security',
     nextStep: 'credentials',
-    substep: 'Configuration'
+    substepOf: 'Configuration'
   },{
     stepKey: 'credentials',
     title: 'Credentials',
     nextStep: 'summary',
-    substep: 'Configuration'
+    substepOf: 'Configuration'
   },{
     stepKey: 'summary',
     title: 'Summary'
@@ -139,7 +151,7 @@ Schema: [
 ]
 ```
 
-Progressive Wizard works same way. It checks if previous step has the same \`substep\` value and if so, it grouped them together.
+Progressive Wizard works same way. It checks if previous step has the same \`substepOf\` value and if so, it grouped them together.
 If the value is different, a new primary step is created with the step as a substep.
 
 ## First step
@@ -162,6 +174,8 @@ First step should have `stepKey: 1` or as a string: `'1'`
 - steps are visible as user visits them
 - user can jump only back
 - use `isDynamic` prop to enforce it
+- use `predictSteps` to allow navigation to show future steps
+    - if you have any conditional fields in the step, you should use `disableForwardJumping` in the step definition, to disable jumping forward in the navigation, otherwise user could miss the changed fields in next steps.
 
 ![progressivewizard](https://user-images.githubusercontent.com/32869456/58427241-5b370a80-809f-11e9-8e79-a4a829b8d181.gif)
 
