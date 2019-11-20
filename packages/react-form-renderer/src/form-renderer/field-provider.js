@@ -6,6 +6,13 @@ import enhancedOnChange from './enhanced-on-change';
 import { dataTypes } from '../constants';
 
 class FieldProvider extends Component{
+  componentDidMount() {
+    if (this.props.initializeOnMount) {
+      const initialValue = this.props.initialValue || this.props.formOptions.getFieldState(this.props.name).initial;
+      this.props.formOptions.change(this.props.name, initialValue);
+    }
+  }
+
   componentWillUnmount(){
     if ((this.props.formOptions.clearOnUnmount || this.props.clearOnUnmount) && this.props.clearOnUnmount !== false) {
       this.props.formOptions.change(this.props.name, undefined);
@@ -56,6 +63,7 @@ FieldProvider.propTypes = {
   formOptions: PropTypes.shape({
     clearOnUnmount: PropTypes.bool,
     change: PropTypes.func,
+    getFieldState: PropTypes.func,
   }),
   component: PropTypes.oneOfType(PropTypes.node, PropTypes.element, PropTypes.func),
   render: PropTypes.func,
@@ -63,6 +71,8 @@ FieldProvider.propTypes = {
   dataType: PropTypes.oneOf(Object.values(dataTypes)),
   name: PropTypes.string,
   clearOnUnmount: PropTypes.bool,
+  initializeOnMount: PropTypes.bool,
+  initialValue: PropTypes.any,
 };
 
 FieldProvider.defaultProps = {
