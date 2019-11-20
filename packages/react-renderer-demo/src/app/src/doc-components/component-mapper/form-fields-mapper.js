@@ -1,3 +1,4 @@
+/* eslint react/prop-types: "off" */
 import React, { Fragment } from 'react';
 import FormRender, { layoutComponents, componentTypes } from '@data-driven-forms/react-form-renderer';
 
@@ -30,17 +31,12 @@ const Button = ({ children, label, variant, ...props }) => <button style={ getBu
 const layoutComponent = {
   [layoutComponents.FORM_WRAPPER]: FormWrapper,
   [layoutComponents.BUTTON]: Button,
-  [layoutComponents.COL]: Fragment,
-  [layoutComponents.FORM_GROUP]: Fragment,
-  [layoutComponents.BUTTON_GROUP]: Fragment,
-  [layoutComponents.ICON]: Fragment,
-  [layoutComponents.ARRAY_FIELD_WRAPPER]: Fragment,
-  [layoutComponents.HELP_BLOCK]: Fragment,
+  [layoutComponents.BUTTON_GROUP]: ({ key, children }) => <Fragment key={ key }>{ children }</Fragment>,
   [layoutComponents.TITLE]: Title,
   [layoutComponents.DESCRIPTION]: Description,
 };
 
-const TextField = ({ formOptions, customProp, label, input, isRequired, meta: { error, touched }, FieldProvider, dataType, ...props }) => (
+const TextField = ({ formOptions, customProp, label, input, isRequired, meta: { error, touched }, FieldProvider, FieldArrayProvider, dataType, ...props }) => (
   <div className={ `ddorg__demo-formGroup ${isRequired ? 'required' : ''} ${error ? 'error' : ''}` }>
     <label htmlFor={ input.name }>{ label }</label>
     <input id={ input.name } { ...input } { ...props } />

@@ -25,6 +25,9 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     marginTop: 48,
   },
+  getStartedAnchor: {
+    textDecoration: 'none',
+  },
   getStartedButton: {
     border: `1px solid ${theme.palette.common.white}`,
     borderRadius: 2,
@@ -47,9 +50,11 @@ const LandingPage = () => {
         </Typography>
         <div className={ classes.getStartedLink }>
           <Link href="/renderer/installation">
-            <Button variant="outlined" className={ classes.getStartedButton }>
-              Get started
-            </Button>
+            <a className={ classes.getStartedAnchor }>
+              <Button variant="outlined" className={ classes.getStartedButton }>
+                Get started
+              </Button>
+            </a>
           </Link>
         </div>
       </div>
