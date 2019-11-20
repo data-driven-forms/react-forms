@@ -23,6 +23,9 @@ export const docs = [{
   component: 'unmounting',
   linkText: 'Clear On Unmount',
 }, {
+  component: 'initialize-mount',
+  linkText: 'Initialize On Mount',
+}, {
   component: 'validators',
   linkText: 'Validators',
 }, {
