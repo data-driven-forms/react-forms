@@ -1,3 +1,4 @@
+/* eslint react/prop-types: "off" */
 import React, { Fragment, useState } from 'react';
 import FormRender, { layoutComponents, componentTypes } from '@data-driven-forms/react-form-renderer';
 
@@ -30,7 +31,7 @@ const Button = ({ children, label, variant, ...props }) => <button style={ getBu
 const layoutComponent = {
   [layoutComponents.FORM_WRAPPER]: FormWrapper,
   [layoutComponents.BUTTON]: Button,
-  [layoutComponents.BUTTON_GROUP]: Fragment,
+  [layoutComponents.BUTTON_GROUP]: ({ key, children }) => <Fragment key={ key }>{ children }</Fragment>,
   [layoutComponents.TITLE]: Fragment,
   [layoutComponents.DESCRIPTION]: Fragment,
 };

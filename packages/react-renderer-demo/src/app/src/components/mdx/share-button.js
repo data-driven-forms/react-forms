@@ -10,13 +10,11 @@ const HashTagSvg = (props) => (
 
 const ShareButton = ({ path }) => (
   <CopyToClipboard text={ path }>
-    <a href={ path }>
-      <IconButton size="medium">
-        <SvgIcon fontSize="small" viewBox="0 0 48 48">
-          <HashTagSvg />
-        </SvgIcon>
-      </IconButton>
-    </a>
+    <IconButton size="medium">
+      <SvgIcon fontSize="small" viewBox="0 0 48 48">
+        <HashTagSvg />
+      </SvgIcon>
+    </IconButton>
   </CopyToClipboard>
 );
 

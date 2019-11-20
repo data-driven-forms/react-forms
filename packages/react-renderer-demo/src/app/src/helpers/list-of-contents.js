@@ -86,25 +86,31 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const scrollListener = (setActive) => {
-  const min = -10;
-  const max = 20;
-  const elem = Array.from(document.querySelectorAll('[data-mdlink]'))
-  .find(elem => {
-    const { top } = elem.getBoundingClientRect();
-    return top > min && top < max;
-  });
-  if (elem) {
-    setActive(elem.id);
-  }
-};
-
 const ListOfContents = ({ file }) => {
   const [ activeItem, setActive ] = useState();
+  let isMounted = true;
+
+  const scrollListener = (setActive) => {
+    const min = -10;
+    const max = 20;
+    const elem = Array.from(document.querySelectorAll('[data-mdlink]'))
+    .find(elem => {
+      const { top } = elem.getBoundingClientRect();
+      return top > min && top < max;
+    });
+    if (isMounted && elem) {
+      setActive(elem.id);
+    }
+  };
+
   useEffect(() => {
     document.addEventListener('scroll', () => scrollListener(setActive));
     scrollListener(setActive);
-    return () => document.removeEventListener('scroll', scrollListener);
+
+    return () => {
+      isMounted = false;
+      document.removeEventListener('scroll', scrollListener);
+    };
   }, []);
   const classes = useStyles();
   const text = reqSource(`./${file}.md`).default;

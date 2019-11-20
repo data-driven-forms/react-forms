@@ -1,19 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import RouterLink from 'next/link';
-import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 
-const ExampleLink = ({ to, text = 'To example' }) => (
-  <React.Fragment>
-    <div style={{ float: 'right' }}>
-      <RouterLink href={ `/component-example/${to}` }>
-        <Button><Link>{ text }</Link></Button>
-      </RouterLink>
-    </div>
-    <br/>
-  </React.Fragment>
-);
+const useStyles = makeStyles({
+  toExampleLink: {
+    textDecoration: 'none',
+  },
+});
+
+const ExampleLink = ({ to, text = 'To example' }) => {
+  const classes = useStyles();
+  return (
+    <React.Fragment>
+      <div style={{ float: 'right' }}>
+        <RouterLink href={ `/component-example/${to}` }>
+          <a className={ classes.toExampleLink }>
+            <Button color="primary" >{ text }</Button>
+          </a>
+        </RouterLink>
+      </div>
+      <br/>
+    </React.Fragment>
+  );};
 
 ExampleLink.propTypes = {
   to: PropTypes.string.isRequired,

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import FormRender, { layoutComponents } from '@data-driven-forms/react-form-renderer';
 
 const wrapperStyles = {
