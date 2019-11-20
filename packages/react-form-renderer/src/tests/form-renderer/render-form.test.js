@@ -7,6 +7,7 @@ import renderForm from '../../form-renderer/render-form';
 import RendererContext from '../../form-renderer/renderer-context';
 import { components, validators, layoutComponents } from '../../constants';
 import FormRenderer from '../../form-renderer';
+import { componentTypes } from '../..';
 
 describe('renderForm function', () => {
   let layoutMapper;
@@ -501,6 +502,7 @@ describe('renderForm function', () => {
         { meta.error && <div><span>{ meta.error }</span></div> }
       </div>
     );
+
     it('should add formSpy and call update function on each state change', () => {
       const onStateUpdate = jest.fn();
       const wrapper = mount(
@@ -523,6 +525,172 @@ describe('renderForm function', () => {
       wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
       expect(onStateUpdate).toHaveBeenCalledTimes(4);
     });
+  });
 
+  describe('#initializeOnMount', () => {
+    const SHOWER_FIELD = 'shower_FIELD';
+    const INITIALIZED_FIELD = 'initialized_FIELD';
+    const SHOW_VALUE = 'show';
+
+    const INITIAL_VALUE = 'some initial value';
+    const SHOWER_FIELD_INDEX = 0;
+    const INITIALIZED_FIELD_INDEX = 1;
+    const NEW_VALUE = 'something different';
+    const NOT_SHOW_VALUE = 'bla';
+    const SCHEMA_INITIAL_VALUE = 'schema initial value';
+
+    const formFields = (initializeOnMount = false, initialValue) => ({
+      fields: [{
+        component: componentTypes.TEXT_FIELD,
+        name: SHOWER_FIELD,
+      }, {
+        component: componentTypes.TEXT_FIELD,
+        name: INITIALIZED_FIELD,
+        initializeOnMount,
+        initialValue,
+        condition: {
+          when: SHOWER_FIELD,
+          is: SHOW_VALUE,
+        },
+      }],
+    });
+
+    const TextField = ({ input, meta, formOptions, ...rest }) => (
+      <div>
+        <input { ...input } { ...rest } />
+      </div>
+    );
+
+    const updateInput = (wrapper, position, value) => {
+      wrapper.find('input').at(position).simulate('change', { target: { value }});
+      wrapper.update();
+    };
+
+    const getFormValue = (wrapper, name) =>
+      wrapper.find(Form).instance().form.getState().values[name];
+
+    const mountInitializedField = (wrapper) => updateInput(wrapper, SHOWER_FIELD_INDEX, SHOW_VALUE);
+    const unmountInitializedField = (wrapper) => updateInput(wrapper, SHOWER_FIELD_INDEX, NOT_SHOW_VALUE);
+    const setInitializedToNewValue = (wrapper) => updateInput(wrapper, INITIALIZED_FIELD_INDEX, NEW_VALUE);
+    const expectNewValue = (wrapper) => expect(getFormValue(wrapper, INITIALIZED_FIELD)).toEqual(NEW_VALUE);
+    const expectInitialValue = (wrapper) => expect(getFormValue(wrapper, INITIALIZED_FIELD)).toEqual(INITIAL_VALUE);
+    const expectSchemaInitialValue = (wrapper) => expect(getFormValue(wrapper, INITIALIZED_FIELD)).toEqual(SCHEMA_INITIAL_VALUE);
+
+    it('should reset value after mount when set on fields', () => {
+      const SET_INITIALIZE_ON_MOUNT = true;
+
+      const wrapper = mount(
+        <FormRenderer
+          layoutMapper={ layoutMapper }
+          formFieldsMapper={{
+            [components.TEXT_FIELD]: TextField,
+          }}
+          schema={ formFields(SET_INITIALIZE_ON_MOUNT) }
+          onSubmit={ jest.fn() }
+          initialValues={{
+            [INITIALIZED_FIELD]: INITIAL_VALUE,
+          }}
+        />
+      );
+
+      expectInitialValue(wrapper);
+
+      mountInitializedField(wrapper);
+      setInitializedToNewValue(wrapper);
+
+      expectNewValue(wrapper);
+
+      unmountInitializedField(wrapper);
+      expectNewValue(wrapper);
+
+      mountInitializedField(wrapper);
+      expectInitialValue(wrapper);
+    });
+
+    it('should not reset value after mount when set on fields', () => {
+      const UNSET_INITIALIZE_ON_MOUNT = false;
+
+      const wrapper = mount(
+        <FormRenderer
+          layoutMapper={ layoutMapper }
+          formFieldsMapper={{
+            [components.TEXT_FIELD]: TextField,
+          }}
+          schema={ formFields(UNSET_INITIALIZE_ON_MOUNT) }
+          onSubmit={ jest.fn() }
+          initialValues={{
+            [INITIALIZED_FIELD]: INITIAL_VALUE,
+          }}
+        />
+      );
+
+      expectInitialValue(wrapper);
+
+      mountInitializedField(wrapper);
+      setInitializedToNewValue(wrapper);
+
+      expectNewValue(wrapper);
+
+      unmountInitializedField(wrapper);
+      expectNewValue(wrapper);
+
+      mountInitializedField(wrapper);
+      expectNewValue(wrapper);
+    });
+
+    it('should reset value after mount when set on fields and use initialValue from schema instead of renderer initialValues', () => {
+      const SET_INITIALIZE_ON_MOUNT = true;
+
+      const wrapper = mount(
+        <FormRenderer
+          layoutMapper={ layoutMapper }
+          formFieldsMapper={{
+            [components.TEXT_FIELD]: TextField,
+          }}
+          schema={ formFields(SET_INITIALIZE_ON_MOUNT, SCHEMA_INITIAL_VALUE) }
+          onSubmit={ jest.fn() }
+          initialValues={{
+            [INITIALIZED_FIELD]: INITIAL_VALUE,
+          }}
+        />
+      );
+
+      mountInitializedField(wrapper);
+      setInitializedToNewValue(wrapper);
+
+      expectNewValue(wrapper);
+
+      unmountInitializedField(wrapper);
+      expectNewValue(wrapper);
+
+      mountInitializedField(wrapper);
+      expectSchemaInitialValue(wrapper);
+    });
+
+    it('should reset value after mount when set on fields and use initialValue from schema', () => {
+      const SET_INITIALIZE_ON_MOUNT = true;
+
+      const wrapper = mount(
+        <FormRenderer
+          layoutMapper={ layoutMapper }
+          formFieldsMapper={{
+            [components.TEXT_FIELD]: TextField,
+          }}
+          schema={ formFields(SET_INITIALIZE_ON_MOUNT, SCHEMA_INITIAL_VALUE) }
+          onSubmit={ jest.fn() }
+        />
+      );
+
+      mountInitializedField(wrapper);
+      setInitializedToNewValue(wrapper);
+
+      expectNewValue(wrapper);
+
+      unmountInitializedField(wrapper);
+      expectNewValue(wrapper);
+
+      mountInitializedField(wrapper);
+      expectSchemaInitialValue(wrapper);
+    });
   });
 });
