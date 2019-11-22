@@ -20,6 +20,7 @@ import MenuContext from './navigation/menu-context';
 import findConnectedLinks from './navigation/find-connected-links';
 import ConnectedLinks from './common/connected-links';
 import Footer from './footer';
+import DocSearch from './docsearch';
 
 export const drawerWidth = 240;
 
@@ -190,6 +191,7 @@ const Layout = ({ children }) => {
           <div className={ clsx(classes.drawerHeader, classes.appBar, classes.rightAppBar, {
             [classes.appBarShift]: open,
           }) }>
+            <DocSearch />
             <a href="https://github.com/data-driven-forms/react-forms" rel="noopener noreferrer" target="_blank">
               <IconButton
                 color="inherit"
