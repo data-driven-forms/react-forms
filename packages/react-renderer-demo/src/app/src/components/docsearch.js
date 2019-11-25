@@ -3,6 +3,8 @@ import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Search from '@material-ui/icons/Search';
+import docsearch from 'docsearch.js';
+import { useRouter } from 'next/router';
 
 const useStyles = makeStyles(() => ({
   docSearchWrapper: {
@@ -43,15 +45,20 @@ const useStyles = makeStyles(() => ({
 
 const DocSearch = () => {
   const classes = useStyles();
+  const { push } = useRouter();
   useEffect(() => {
-    if (window.docsearch) {
-      window.docsearch({
-        apiKey: '5e9dbd314423e38339595e183d1ae7b6',
-        indexName: 'data-driven-forms',
-        inputSelector: '#data-driven-forms-search',
-        debug: false,
-      });
-    }
+    docsearch({
+      apiKey: '5e9dbd314423e38339595e183d1ae7b6',
+      indexName: 'data-driven-forms',
+      inputSelector: '#data-driven-forms-search',
+      handleSelected: (input, event, suggestion) => {
+        event.button = 0;
+        const resultUrl = new URL(suggestion.url);
+        push(resultUrl.pathname);
+        input.close();
+      },
+      // debug: true, // Set debug to true if you want to inspect the dropdown.
+    });
   }, []);
   return (
     <form className={ classes.docSearchWrapper }>
