@@ -20,7 +20,11 @@ import MenuContext from './navigation/menu-context';
 import findConnectedLinks from './navigation/find-connected-links';
 import ConnectedLinks from './common/connected-links';
 import Footer from './footer';
-import DocSearch from './docsearch';
+
+import dynamic from 'next/dynamic';
+const DocSearch = dynamic(import('./docsearch'), {
+  ssr: false,
+});
 
 export const drawerWidth = 240;
 
