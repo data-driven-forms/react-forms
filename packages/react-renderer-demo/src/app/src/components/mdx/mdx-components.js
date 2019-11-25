@@ -21,13 +21,9 @@ const CodeEditor = dynamic(import('../code-editor'), {
 });
 
 const useHeadingStyles = makeStyles(() => ({
-  anchorOffset: {
+  anchor: {
     textDecoration: 'none',
     color: 'inherit',
-    paddingTop: 92, // compensate for fixed header size and spacing
-    marginTop: -92,  // compensate for fixed header size and spacing
-    position: 'relative',
-    display: 'block',
   },
   heading: {
     '& button': {
@@ -37,6 +33,10 @@ const useHeadingStyles = makeStyles(() => ({
       visibility: 'initial',
     },
   },
+  offset: {
+    paddingTop: 92, // compensate for fixed header size and spacing
+    marginTop: -92,  // compensate for fixed header size and spacing
+  },
 }));
 
 const Heading = ({ level, children, variant, component, ...rest }) => {
@@ -45,17 +45,19 @@ const Heading = ({ level, children, variant, component, ...rest }) => {
   const id = headerToId(children);
   const path = `${router.pathname}#${id}`;
   return (
-    <a id={ id } href={ path } className={ classes.anchorOffset } data-mdlink="md-heading">
+    <div id={ id } className={ classes.offset } data-scroll="true">
       <Typography
         id={ `heading-${id}` }
         className={ classes.heading }
         variant={ `h${level}` }
         component={ component }
       >
-        { children }
-        <ShareButton path={ path }/>
+        <a href={ path } className={ classes.anchor } data-mdlink="md-heading">
+          { children }
+          <ShareButton path={ path }/>
+        </a>
       </Typography>
-    </a>
+    </div>
   );
 };
 

@@ -93,7 +93,7 @@ const ListOfContents = ({ file }) => {
   const scrollListener = (setActive) => {
     const min = -10;
     const max = 20;
-    const elem = Array.from(document.querySelectorAll('[data-mdlink]'))
+    const elem = Array.from(document.querySelectorAll('[data-scroll]'))
     .find(elem => {
       const { top } = elem.getBoundingClientRect();
       return top > min && top < max;
