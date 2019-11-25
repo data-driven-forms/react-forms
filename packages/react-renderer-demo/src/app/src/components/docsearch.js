@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import TextField from '@material-ui/core/TextField'
-import InputAdornment from '@material-ui/core/InputAdornment'
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Search from '@material-ui/icons/Search';
 
@@ -8,23 +8,23 @@ const useStyles = makeStyles(() => ({
   docSearchWrapper: {
     marginRight: 16,
     '& .algolia-docsearch-suggestion.algolia-docsearch-suggestion__main.algolia-docsearch-suggestion__secondary': {
-      textDecoration: 'none'
+      textDecoration: 'none',
     },
     '& .algolia-autocomplete .algolia-docsearch-suggestion--title': {
-      marginBottom: 0
+      marginBottom: 0,
     },
     '& .ds-dropdown-menu': {
       '& [class^=ds-dataset-]': {
         borderRadius: 0,
       },
       '&:before': {
-        display: 'none'
-      }
+        display: 'none',
+      },
     },
   },
   docSearchInput: {
     '& input': {
-      color: 'white'
+      color: 'white',
     },
     '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
       borderBottomColor: 'white',
@@ -37,19 +37,21 @@ const useStyles = makeStyles(() => ({
     },
   },
   docSearchIcon: {
-    fill: 'white'
-  }
+    fill: 'white',
+  },
 }));
 
 const DocSearch = () => {
-  const classes = useStyles()
+  const classes = useStyles();
   useEffect(() => {
-    window.docsearch({
-      apiKey: '5e9dbd314423e38339595e183d1ae7b6',
-      indexName: 'data-driven-forms',
-      inputSelector: '#data-driven-forms-search',
-      debug: false
-    });
+    if (window.docsearch) {
+      window.docsearch({
+        apiKey: '5e9dbd314423e38339595e183d1ae7b6',
+        indexName: 'data-driven-forms',
+        inputSelector: '#data-driven-forms-search',
+        debug: false,
+      });
+    }
   }, []);
   return (
     <form className={ classes.docSearchWrapper }>
