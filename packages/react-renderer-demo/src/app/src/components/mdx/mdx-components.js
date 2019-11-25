@@ -27,7 +27,7 @@ const useHeadingStyles = makeStyles(() => ({
     paddingTop: 92, // compensate for fixed header size and spacing
     marginTop: -92,  // compensate for fixed header size and spacing
     position: 'relative',
-    display: 'inline-block',
+    display: 'block',
   },
   heading: {
     '& button': {

@@ -10,7 +10,7 @@ import ExampleLink from '@docs/components/common/example-link';
 
 # Components API
 
-# Common props for all form fields
+## Common props for all form fields
 
 There is very short list of that can be applied to every form field
 
