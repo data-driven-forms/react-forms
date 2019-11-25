@@ -162,7 +162,8 @@ const Layout = ({ children }) => {
       <MenuContext.Provider value={ links }>
         <div className={ classes.root }>
           <Toolbar
-            className={ clsx(classes.appBar, classes.toolbarOverride, {
+            className={ clsx(classes.appBar, {
+              [classes.toolbarOverride]: !open,
               [classes.appBarShift]: open,
             }) }>
 
