@@ -3,7 +3,7 @@ import { components } from 'react-select';
 import PropTypes from 'prop-types';
 import { Checkbox } from '@patternfly/react-core';
 
-import CheckIcon from '../../icons/check-icon';
+import CheckIcon from '@patternfly/react-icons/dist/js/icons/check-icon';
 
 const Option = (props) => (
   <div
