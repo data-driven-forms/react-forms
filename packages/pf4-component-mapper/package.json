@@ -23,6 +23,7 @@
     "@babel/preset-react": "^7.0.0",
     "@data-driven-forms/react-form-renderer": "*",
     "@patternfly/react-core": "^3.104.0",
+    "@patternfly/react-icons": "^3.14.23",
     "@semantic-release/git": "^7.0.5",
     "@semantic-release/npm": "^5.1.1",
     "babel-core": "^7.0.0-bridge.0",
@@ -88,8 +89,8 @@
   },
   "dependencies": {
     "@patternfly/patternfly-next": "^1.0.175",
-    "react-select": "^3.0.4",
-    "react-final-form-arrays": "2.0.3"
+    "react-final-form-arrays": "2.0.3",
+    "react-select": "^3.0.4"
   },
   "postpublish": "export RELEASE_DEMO=true"
 }
