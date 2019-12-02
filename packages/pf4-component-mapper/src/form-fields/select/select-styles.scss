@@ -43,6 +43,10 @@
       .ddorg__pf4-component-mapper__select__indicators {
           padding-right: 6px;
           z-index: 1;
+          >button.pf-c-button.pf-m-plain {
+            display: flex;
+            justify-content: center;
+          }
           .ddorg__pf4-component-mapper__select__indicator-separator {
               display: none;
           }
@@ -53,13 +57,6 @@
                   fill: var(--pf-global--Color--dark-100);
               }
           }
-          button.pf-c-button.pf-m-plain {
-            padding-right: 0.5rem;
-            padding-left: 1rem;
-            margin-left: auto;
-            padding-bottom: 0;
-            margin-right: 0.5rem;
-        }
       }
   }
 
