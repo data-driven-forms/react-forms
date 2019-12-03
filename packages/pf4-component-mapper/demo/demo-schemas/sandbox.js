@@ -249,7 +249,7 @@ const output = {
                   title: 'Dropdown',
                   dataType: 'string',
                   isSearchable: true,
-                  isClearable: false,
+                  isClearable: true,
                   multi: true,
                   component: components.SELECT_COMPONENT,
                   loadOptions: asyncLoadOptions,
