@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/%40data-driven-forms%2Fmui-component-mapper.svg)](https://badge.fury.io/js/%40data-driven-forms%2Fmui-component-mapper)
+
 [![Data Driven Form logo](images/logo.png)](https://data-driven-forms.org/)
 
 Material-UI component mapper for [Data Driven Forms](https://github.com/data-driven-forms/react-forms).

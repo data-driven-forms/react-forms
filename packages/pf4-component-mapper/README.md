@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/%40data-driven-forms%2Fpf4-component-mapper.svg)](https://badge.fury.io/js/%40data-driven-forms%2Fpf4-component-mapper)
+
 [![Data Driven Form logo](images/logo.png)](https://data-driven-forms.org/)
 
 Patternfly 4 component mapper for [Data Driven Forms](https://github.com/data-driven-forms/react-forms).

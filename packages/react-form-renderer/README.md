@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/%40data-driven-forms%2Freact-form-renderer.svg)](https://badge.fury.io/js/%40data-driven-forms%2Freact-form-renderer)
+
 [![Data Driven Form logo](images/logo.png)](https://data-driven-forms.org/)
 
 Data Driven Forms is a React library used for rendering and managing forms with a lot of provided features based on [React Final Form](https://github.com/final-form/react-final-form).
