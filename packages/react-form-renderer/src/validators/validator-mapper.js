@@ -35,5 +35,5 @@ export default validatorType => ({
     numericality({ [includeThreshold ? '<=' : '<']: value, ...rest }),
   [validators.MIN_NUMBER_VALUE]: ({ value, includeThreshold = true, ...rest }) =>
     numericality({ [includeThreshold ? '>=' : '>']: value, ...rest }),
-  [validators.URL]: options =>  pattern({ pattern: url(options), message: 'String is not URL.' }),
+  [validators.URL]: ({ message, ...options }) =>  pattern({ pattern: url(options), message: message || 'String is not URL.' }),
 })[validatorType];

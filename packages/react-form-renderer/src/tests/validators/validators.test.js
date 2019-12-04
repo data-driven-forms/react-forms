@@ -266,6 +266,12 @@ describe('New validators', () => {
       expect(validatorMapper(validators.URL)({})('https://www.')).toBe(failMessage);
     });
 
+    it('should return custom message', () => {
+      const customMessage = 'customMessage';
+
+      expect(validatorMapper(validators.URL)({ message: customMessage })('https://www.')).toBe(customMessage);
+    });
+
     it('should validate only URL with ftp protocol', () => {
       expect(validatorMapper(validators.URL)({ protocol: 'ftp' })('https://www.google.com/')).toBe(failMessage);
       expect(validatorMapper(validators.URL)({ protocol: 'ftp' })('ftp://www.google.com/')).toBeUndefined();
