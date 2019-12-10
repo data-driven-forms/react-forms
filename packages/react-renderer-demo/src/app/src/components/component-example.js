@@ -97,7 +97,7 @@ CopySnackbar.propTypes = {
 class ComponentExample extends Component {
   constructor(props) {
     super(props);
-    const baseStructure = baseExamples.find(item => item.component === props.router.query.component);
+    const baseStructure = baseExamples.find(item => item.component === props.component);
     if (!baseStructure) {
       this.state = {
         notFound: true,
@@ -149,35 +149,6 @@ class ComponentExample extends Component {
         layoutMapper: props.mappers.pf4.layoutMapper,
       },
     };
-  }
-
-  componentDidUpdate({ router: { query: { component }}}){
-    if (component !== this.props.router.query.component) {
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-      const baseStructure = baseExamples.find(item => item.component === this.props.router.query.component);
-      if (baseStructure) {
-        this.setState({
-          component: undefined,
-          notFound: undefined,
-          ...baseStructure,
-          variants: [
-            ...baseStructure.variants,
-            { name: 'name', title: 'Name', value: baseStructure.value.fields[0].name, component: 'input' },
-            ...(baseStructure.canBeRequired ? [{
-              name: 'isRequired',
-              title: 'Required',
-              validate: [{
-                type: validatorTypes.REQUIRED,
-              }],
-            }] : []),
-          ],
-          value: JSON.stringify(baseStructure.value, null, 2),
-          parsedSchema: baseStructure.value,
-        });
-      } else if (!baseStructure && !!component) {
-        this.setState({ notFound: true, component: this.props.router.query.component });
-      }
-    }
   }
 
   handleMapperChange = (_event, value) => {
@@ -305,16 +276,7 @@ class ComponentExample extends Component {
 
   }
   render () {
-    const { value, parsedSchema, linkText, ContentText, activeMapper, component, openTooltip, variants, notFound } = this.state;
-    if (!this.props.router.query.component) {
-      this.props.router.push('/component-example?component=checkbox');
-      return null;
-    }
-
-    if (notFound) {
-      this.props.router.push('/not-found');
-      return null;
-    }
+    const { value, parsedSchema, linkText, ContentText, activeMapper, component, openTooltip, variants } = this.state;
 
     const editedValue = value.replace(/^{\n {2}"fields": \[\n/, '')
     .replace(/ {2}\]\n}$/, '')
@@ -371,9 +333,6 @@ class ComponentExample extends Component {
               highlightActiveLine={ true }
               style={{ width: '100%' }}
               setOptions={{
-                enableBasicAutocompletion: true,
-                enableLiveAutocompletion: true,
-                enableSnippets: true,
                 showLineNumbers: true,
                 tabSize: 2,
               }}
@@ -433,6 +392,7 @@ class ComponentExample extends Component {
 }
 
 ComponentExample.propTypes = {
+  component: PropTypes.string.isRequired,
   router: PropTypes.shape({
     query: PropTypes.shape({
       component: PropTypes.string,
@@ -442,12 +402,12 @@ ComponentExample.propTypes = {
   mappers: PropTypes.object,
 };
 
-export default () => {
+export default (props) => {
   const router = useRouter();
   return (
     <MapperContext.Consumer>
       { ({ loaded, mappers }) =>
-        loaded && <ComponentExample router={ router } mappers={ mappers } /> }
+        loaded && <ComponentExample { ...props } router={ router } mappers={ mappers } /> }
     </MapperContext.Consumer>
   );
 };
