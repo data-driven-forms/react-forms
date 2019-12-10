@@ -130,6 +130,7 @@ describe('<Select />', () => {
       showMoreLabel: 'more',
       simpleValue: true,
       updatingMessage: 'Loading data...',
+      menuIsPortal: false,
       value: [ 1, 2  ],
       loadingMessage: 'Loading...',
     });
