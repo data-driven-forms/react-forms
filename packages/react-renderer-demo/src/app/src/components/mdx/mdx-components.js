@@ -64,7 +64,7 @@ const Heading = ({ level, children, variant, component, ...rest }) => {
 const MdxComponents = {
   p: ({ children }) => <Typography variant="body1" gutterBottom>{ children }</Typography>,
   code: ({ children, lang, ...rest }) => (
-    <div style={{ background: '#1d1f21', paddingTop: 5, paddingBottom: 5, marginTop: 10, marginBottom: 10 }}>
+    <div style={{ background: '#1d1f21', paddingTop: 5, paddingBottom: 5, marginTop: 10, marginBottom: 10 }} className="DocCode">
       <CodeEditor
         readOnly
         mode={ typeof lang === 'string' ? lang.toLowerCase() : 'jsx' }
@@ -101,7 +101,7 @@ const MdxComponents = {
       />
     </ListItem>,
   table: ({ children }) => (
-    <Paper style={{ marginBottom: 10, marginTop: 10 }}>
+    <Paper style={{ marginBottom: 10, marginTop: 10 }} className="DocTable">
       <Table>
         <TableHead>
           { children[0].props.children }
