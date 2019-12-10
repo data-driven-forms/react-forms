@@ -1,16 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from 'patternfly-react';
 import MomentLocaleUtils from 'react-day-picker/moment';
 import './date-picker-styles.scss';
+import { NextInterval, PrevInterval } from './intervals';
 
 const Navbar = ({ onNextClick, onPreviousClick, month, onMonthClick, isYear, toggleSelectingYear, locale, disablePrev, disableNext }) => (
   <table className="year-interval-header">
     <tbody>
       <tr>
-        <td className={ disablePrev ? 'disabled' : '' } onMouseDown={ () => !disablePrev && onPreviousClick() }>
-          <Icon name="angle-left"><span>Prev interval</span></Icon>
-        </td>
+        <PrevInterval className={ disablePrev ? 'disabled' : '' } onMouseDown={ () => !disablePrev && onPreviousClick() }/>
         <td>
           { isYear
             ? <button className="navbar-center-button" type="button" onClick={ () => toggleSelectingYear(true) }>{ month.getFullYear() }</button>
@@ -24,9 +22,7 @@ const Navbar = ({ onNextClick, onPreviousClick, month, onMonthClick, isYear, tog
               </button>
             ) }
         </td>
-        <td className={ disableNext ? 'disabled' : '' } onMouseDown={ () =>!disableNext &&  onNextClick() }>
-          <Icon name="angle-right" ><span>Next interval</span></Icon>
-        </td>
+        <NextInterval className={ disableNext ? 'disabled' : '' } onMouseDown={ () =>!disableNext &&  onNextClick() }/>
       </tr>
     </tbody>
   </table>

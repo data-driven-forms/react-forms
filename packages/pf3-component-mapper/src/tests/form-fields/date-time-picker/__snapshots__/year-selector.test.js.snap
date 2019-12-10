@@ -29,27 +29,30 @@ exports[`<YearSelector /> should render correctly 1`] = `
           >
             <tbody>
               <tr>
-                <td
+                <PrevInterval
                   onClick={[Function]}
                 >
-                  <Icon
-                    name="angle-left"
-                    type="fa"
+                  <td
+                    onClick={[Function]}
                   >
-                    <FontAwesome
+                    <Icon
+                      aria-label="Prev interval"
                       name="angle-left"
+                      type="fa"
                     >
-                      <span
-                        aria-hidden={true}
-                        className="fa fa-angle-left"
+                      <FontAwesome
+                        aria-label="Prev interval"
+                        name="angle-left"
                       >
-                        <span>
-                          Prev interval
-                        </span>
-                      </span>
-                    </FontAwesome>
-                  </Icon>
-                </td>
+                        <span
+                          aria-hidden={true}
+                          aria-label="Prev interval"
+                          className="fa fa-angle-left"
+                        />
+                      </FontAwesome>
+                    </Icon>
+                  </td>
+                </PrevInterval>
                 <td>
                   <button
                     className="year-interval-button"
@@ -58,27 +61,30 @@ exports[`<YearSelector /> should render correctly 1`] = `
                     2000 - 2019
                   </button>
                 </td>
-                <td
+                <NextInterval
                   onClick={[Function]}
                 >
-                  <Icon
-                    name="angle-right"
-                    type="fa"
+                  <td
+                    onClick={[Function]}
                   >
-                    <FontAwesome
+                    <Icon
+                      aria-label="Next interval"
                       name="angle-right"
+                      type="fa"
                     >
-                      <span
-                        aria-hidden={true}
-                        className="fa fa-angle-right"
+                      <FontAwesome
+                        aria-label="Next interval"
+                        name="angle-right"
                       >
-                        <span>
-                          Next interval
-                        </span>
-                      </span>
-                    </FontAwesome>
-                  </Icon>
-                </td>
+                        <span
+                          aria-hidden={true}
+                          aria-label="Next interval"
+                          className="fa fa-angle-right"
+                        />
+                      </FontAwesome>
+                    </Icon>
+                  </td>
+                </NextInterval>
               </tr>
             </tbody>
           </table>
