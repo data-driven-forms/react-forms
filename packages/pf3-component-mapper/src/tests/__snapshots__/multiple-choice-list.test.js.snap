@@ -379,6 +379,15 @@ exports[`<MultipleChoiceList /> should render in error state 1`] = `
               </MockFieldProvider>
             </FieldProvider>
           </div>
+          <HelpBlock
+            bsClass="help-block"
+          >
+            <span
+              className="help-block"
+            >
+              Error message
+            </span>
+          </HelpBlock>
         </div>
       </FormGroup>
     </MockFieldProvider>

@@ -70,7 +70,7 @@ const selectComponent = ({
   [componentTypes.DATE_PICKER]: () => <DateTimePicker pristine={ meta.pristine } onChange={ input.onChange } value={ input.value } isDisabled={ isDisabled } { ...rest } />,
 })[componentType];
 
-const renderHelperText = (error, description) => (error // eslint-disable-line no-nested-ternary
+export const renderHelperText = (error, description) => (error // eslint-disable-line no-nested-ternary
   ? <HelpBlock>{ error }</HelpBlock>
   : description ? <HelpBlock>{ description }</HelpBlock> : null);
 
