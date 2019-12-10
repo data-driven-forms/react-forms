@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Checkbox,  FormGroup, ControlLabel } from 'patternfly-react';
+import { Checkbox,  FormGroup, ControlLabel, FieldLevelHelp } from 'patternfly-react';
 import { composeValidators } from '@data-driven-forms/react-form-renderer';
 
 import RequiredLabel from './required-label';
+import { renderHelperText } from './form-fields';
 
 const MultipleChoiceList = ({ validate, FieldProvider, ...props }) => (
   <FieldProvider { ...props } validate={ composeValidators(props.validate || []) }>
@@ -15,6 +16,7 @@ const MultipleChoiceList = ({ validate, FieldProvider, ...props }) => (
       options,
       isDisabled,
       isReadOnly,
+      description,
       ...rest
     }) => {
       const { error, touched } = meta;
@@ -24,6 +26,7 @@ const MultipleChoiceList = ({ validate, FieldProvider, ...props }) => (
         <FormGroup validationState={ showError ? 'error' : null }>
           <ControlLabel>
             { (isRequired ? <RequiredLabel label={ label } /> : label) }
+            { helperText && <FieldLevelHelp content={ helperText } /> }
           </ControlLabel>
           <div>
             { options.map(option =>
@@ -52,6 +55,7 @@ const MultipleChoiceList = ({ validate, FieldProvider, ...props }) => (
                 } }
               />)) }
           </div>
+          { renderHelperText(showError && meta.error, description) }
         </FormGroup>
       );
     } }

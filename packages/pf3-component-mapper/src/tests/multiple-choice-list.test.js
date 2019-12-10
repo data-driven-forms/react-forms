@@ -4,6 +4,7 @@ import toJson from 'enzyme-to-json';
 import MultipleChoiceList from '../form-fields/multiple-choice-list';
 import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 import RequiredLabel from '../form-fields/required-label';
+import { FieldLevelHelp, HelpBlock } from 'patternfly-react';
 
 describe('<MultipleChoiceList />', () => {
   let initialProps;
@@ -70,5 +71,20 @@ describe('<MultipleChoiceList />', () => {
   it('should render required variant', () => {
     const wrapper = mount(<MultipleChoiceList { ...initialProps } isRequired label="Foo" />);
     expect(wrapper.find(RequiredLabel)).toHaveLength(1);
+  });
+
+  it('should render helper text variant', () => {
+    const wrapper = mount(<MultipleChoiceList { ...initialProps } isRequired label="Foo" helperText="Helper text"/>);
+    expect(wrapper.find(FieldLevelHelp)).toHaveLength(1);
+
+    expect(wrapper.find(FieldLevelHelp).first().props().content).toEqual('Helper text');
+    expect(wrapper.find(HelpBlock)).toHaveLength(0);
+  });
+
+  it('should render description variant', () => {
+    const wrapper = mount(<MultipleChoiceList { ...initialProps } isRequired label="Foo" description="Description"/>);
+    expect(wrapper.find(FieldLevelHelp)).toHaveLength(0);
+    expect(wrapper.find(HelpBlock)).toHaveLength(1);
+    expect(wrapper.find(HelpBlock).first().text()).toEqual('Description');
   });
 });

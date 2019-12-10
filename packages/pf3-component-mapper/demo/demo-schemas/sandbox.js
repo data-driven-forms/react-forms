@@ -13,6 +13,28 @@ const output = {
           name: '553',
           fields: [
             {
+              name: 'check_box_1',
+              label: 'Check Box',
+              title: 'Check Box',
+              helperText: 'aaaa',
+              description: 'description',
+              component: components.CHECKBOX,
+              options: [
+                {
+                  label: 'Dog',
+                  value: '1',
+                },
+                {
+                  label: 'Cats',
+                  value: '2',
+                },
+                {
+                  label: 'Hamsters',
+                  value: '3',
+                },
+              ],
+            },
+            {
               component: 'select-field',
               name: 'select-field-1',
               label: 'Dropdown 1',
