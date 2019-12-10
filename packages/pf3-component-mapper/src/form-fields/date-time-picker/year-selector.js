@@ -1,21 +1,17 @@
 import React from 'react';
-import { Icon } from 'patternfly-react';
 import PropTypes from 'prop-types';
 import './date-picker-styles.scss';
+import { PrevInterval, NextInterval } from './intervals';
 
 const YearIntervalSelector = ({ currentInterval, prevInterval, nextInterval }) => (
   <table className="year-interval-header">
     <tbody>
       <tr>
-        <td  onClick={ prevInterval }>
-          <Icon name="angle-left"><span>Prev interval</span></Icon>
-        </td>
+        <PrevInterval onClick={ prevInterval }/>
         <td>
           <button className="year-interval-button" disabled>{ `${currentInterval[0]} - ${currentInterval[1]}` }</button>
         </td>
-        <td onClick={ nextInterval }>
-          <Icon name="angle-right" ><span>Next interval</span></Icon>
-        </td>
+        <NextInterval onClick={ nextInterval }/>
       </tr>
     </tbody>
   </table>
