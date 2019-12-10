@@ -48,7 +48,7 @@ Next example shows simple input field with label and error message.
 ```jsx
 import React from 'react';
 
-const NewComponent = ({ FieldProvider, formOptions, name ...rest }) => (
+const NewComponent = ({ FieldProvider, formOptions, name, ...rest }) => (
   <div>
     <FieldProvider {...rest} name={name}>
       {({ input, meta, ...props }) => {
