@@ -7,7 +7,7 @@ import SelectText from './examples-texts/select';
 
 export const baseExamples = [{
   component: componentTypes.TEXT_FIELD,
-  link: `?component=${componentTypes.TEXT_FIELD}`,
+  link: componentTypes.TEXT_FIELD,
   linkText: 'Text Field',
   ContentText: GenericComponentText,
   value: { fields: [{
@@ -42,7 +42,7 @@ export const baseExamples = [{
   }],
 }, {
   component: componentTypes.TEXTAREA_FIELD,
-  link: `?component=${componentTypes.TEXTAREA_FIELD}`,
+  link: componentTypes.TEXTAREA_FIELD,
   linkText: 'Text area',
   ContentText: GenericComponentText,
   canBeRequired: true,
@@ -74,7 +74,7 @@ export const baseExamples = [{
 },
 {
   component: componentTypes.CHECKBOX,
-  link: `?component=${componentTypes.CHECKBOX}`,
+  link: componentTypes.CHECKBOX,
   prev: {
     link: '/renderer/form-controls',
     label: 'Form Controls',
@@ -98,7 +98,7 @@ export const baseExamples = [{
 },
 {
   component: componentTypes.RADIO,
-  link: `?component=${componentTypes.RADIO}`,
+  link: componentTypes.RADIO,
   linkText: 'Radio',
   ContentText: GenericComponentText,
   canBeRequired: true,
@@ -124,7 +124,7 @@ export const baseExamples = [{
 },
 {
   component: componentTypes.SELECT_COMPONENT,
-  link: `?component=${componentTypes.SELECT_COMPONENT}`,
+  link: componentTypes.SELECT_COMPONENT,
   linkText: 'Select',
   ContentText: SelectText,
   canBeRequired: true,
@@ -174,7 +174,7 @@ export const baseExamples = [{
 },
 {
   component: componentTypes.SWITCH,
-  link: `?component=${componentTypes.SWITCH}`,
+  link: componentTypes.SWITCH,
   linkText: 'Switch',
   ContentText: GenericComponentText,
   value: { fields: [{
@@ -206,7 +206,7 @@ export const baseExamples = [{
 },
 {
   component: componentTypes.DATE_PICKER,
-  link: `?component=${componentTypes.DATE_PICKER}`,
+  link: componentTypes.DATE_PICKER,
   linkText: 'Date picker',
   ContentText: GenericComponentText,
   canBeRequired: true,
@@ -242,7 +242,7 @@ export const baseExamples = [{
 },
 {
   component: componentTypes.TIME_PICKER,
-  link: `?component=${componentTypes.TIME_PICKER}`,
+  link: componentTypes.TIME_PICKER,
   linkText: 'Time picker',
   ContentText: GenericComponentText,
   canBeRequired: true,
@@ -261,7 +261,7 @@ export const baseExamples = [{
 },
 {
   component: componentTypes.TABS,
-  link: `?component=${componentTypes.TABS}`,
+  link: componentTypes.TABS,
   linkText: 'Tabs / Tab item',
   ContentText: TabsText,
   value: { fields: [{
@@ -306,7 +306,7 @@ export const baseExamples = [{
 },
 {
   component: componentTypes.SUB_FORM,
-  link: `?component=${componentTypes.SUB_FORM}`,
+  link: componentTypes.SUB_FORM,
   linkText: 'Subform',
   ContentText: CustomComponentText,
   value: { fields: [{
@@ -339,7 +339,7 @@ export const baseExamples = [{
 },
 {
   component: 'checkbox-multiple',
-  link: '?component=checkbox-multiple',
+  link: 'checkbox-multiple',
   linkText: 'Checkbox multiple',
   ContentText: GenericComponentText,
   value: { fields: [{
@@ -363,7 +363,7 @@ export const baseExamples = [{
   }],
 }, {
   component: componentTypes.PLAIN_TEXT,
-  link: '?component=plain-text',
+  link: 'plain-text',
   linkText: 'Plain Text',
   ContentText: GenericComponentText,
   variants: [{
@@ -383,7 +383,7 @@ Vestibulum vulputate inceptos himenaeos.`,
   },
 }, {
   component: componentTypes.WIZARD,
-  link: `?component=${componentTypes.WIZARD}`,
+  link: componentTypes.WIZARD,
   linkText: 'Wizard',
   ContentText: WizardText,
   value: {

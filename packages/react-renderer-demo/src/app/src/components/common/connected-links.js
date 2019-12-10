@@ -35,7 +35,7 @@ const ConnectedLinks = () => {
     }) }>
       <Grid item>
         { prev && prev.link && (
-          <Link href={ `/${prev.link.replace(/component-example\//, 'component-example?')}` }>
+          <Link href={ `/${prev.link}` }>
             <a className={ classNames.link }>
               <Button>
                 <ChevronLeft />
@@ -47,7 +47,7 @@ const ConnectedLinks = () => {
       </Grid>
       <Grid item>
         { next && next.link && (
-          <Link href={ `/${next.link.replace(/component-example\//, 'component-example?')}` }>
+          <Link href={ `/${next.link}` }>
             <a className={ classNames.link }>
               <Button >
                 { next.label }
