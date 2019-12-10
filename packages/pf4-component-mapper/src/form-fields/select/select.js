@@ -68,7 +68,7 @@ export class Select extends React.Component {
     : () => this.props.noOptionsMessage;
 
   render() {
-    const { selectVariant, loadOptions, loadingMessage, noOptionsMessage, ... props } = this.props;
+    const { selectVariant, loadOptions, loadingMessage, noOptionsMessage, menuIsPortal, ... props } = this.props;
     const { isLoading, allOptions } = this.state;
     const Select = selectProvider(selectVariant);
     const isSearchable = selectVariant === 'createable' || props.isSearchable;
@@ -82,6 +82,8 @@ export class Select extends React.Component {
         options={ allOptions }
       />);
     }
+
+    const menuPortalTarget = menuIsPortal ? document.body : undefined;
 
     return (
       <Select
@@ -97,9 +99,16 @@ export class Select extends React.Component {
         isFetching={ Object.values(this.state.promises).some(value => value) }
         noOptionsMessage={ this.renderNoOptionsMessage() }
         onInputChange={ this.onInputChange }
+        menuPortalTarget={ menuPortalTarget }
         { ...props }
         className={ `ddorg__pf4-component-mapper__select${props.isMulti ? ' multi-select' : ' single-select'}` }
         classNamePrefix="ddorg__pf4-component-mapper__select"
+        styles={{
+          menuPortal: provided => ({
+            ...provided,
+            'z-index': 'initial',
+          }),
+        }}
         onChange={ (option) => {
           const o =  !option && props.isMulti ? [] : option;
           return simpleValue
@@ -132,6 +141,7 @@ Select.propTypes = {
   loadingMessage: PropTypes.node,
   updatingMessage: PropTypes.node,
   noOptionsMessage: PropTypes.func,
+  menuIsPortal: PropTypes.bool,
 };
 
 Select.defaultProps = {
@@ -142,6 +152,7 @@ Select.defaultProps = {
   loadingMessage: 'Loading...',
   updatingMessage: 'Loading data...',
   options: [],
+  menuIsPortal: false,
 };
 
 const DataDrivenSelect = ({ multi, ...props }) => (
