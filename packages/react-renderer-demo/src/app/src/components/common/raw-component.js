@@ -48,7 +48,7 @@ const RawComponent = (props) => {
   }, [ props.source ]);
 
   return (
-    <Grid container spacing={ 0 }>
+    <Grid container spacing={ 0 } className="DocRawComponent">
       { content.text && (
         <Grid item xs={ 12 }>
           <ExpansionPanel>
