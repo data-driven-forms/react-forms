@@ -54,7 +54,7 @@ const DocSearch = () => {
       handleSelected: (input, event, suggestion) => {
         event.button = 0;
         const resultUrl = new URL(suggestion.url);
-        push(resultUrl.pathname);
+        push(`${resultUrl.pathname}${resultUrl.hash ? resultUrl.hash : ''}`);
         input.close();
       },
       // debug: true, // Set debug to true if you want to inspect the dropdown.
