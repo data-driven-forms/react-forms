@@ -29,13 +29,17 @@ const selectComponent = ({
   initialValue,
   loadOptions,
   meta,
+  helperText,
   ...rest
 }) => ({
   [componentTypes.TEXT_FIELD]: () =>
     <FormControl { ...input } placeholder={ placeholder } disabled={ isDisabled } readOnly={ isReadOnly } { ...rest } />,
   [componentTypes.TEXTAREA_FIELD]: () =>
     <FormControl { ...input } disabled={ isDisabled } readOnly={ isReadOnly } { ...rest } componentClass="textarea" placeholder={ placeholder }/>,
-  [componentTypes.CHECKBOX]: () => <Checkbox { ...input } disabled={ isDisabled || isReadOnly }>{ label }</Checkbox>,
+  [componentTypes.CHECKBOX]: () =>(<Checkbox { ...input } disabled={ isDisabled || isReadOnly }>
+    { label }
+    { helperText && <FieldLevelHelp content={ helperText } /> }
+  </Checkbox>),
   [componentTypes.RADIO]: () => (
     <RagioGroup
       options={ options }
@@ -93,7 +97,7 @@ const FinalFormField = ({
             { rest.isRequired ? <RequiredLabel label={ label } /> : label }
             { helperText && <FieldLevelHelp content={ helperText } /> }
           </ControlLabel> }
-      { selectComponent({ ...rest, invalid, label, meta })() }
+      { selectComponent({ ...rest, invalid, label, meta, helperText })() }
       { renderHelperText(invalid && meta.error, description) }
     </FormGroup>
   );

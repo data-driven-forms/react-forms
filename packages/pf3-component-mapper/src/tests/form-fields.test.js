@@ -4,6 +4,7 @@ import { SwitchField, CheckboxGroup, Radio, TextareaField, TextField } from '../
 import { mount } from 'enzyme';
 import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 import MultipleChoiceList from '../form-fields/multiple-choice-list';
+import { FieldLevelHelp } from 'patternfly-react';
 
 describe('FormFields', () => {
   describe('<SwitchField />', () => {
@@ -111,6 +112,13 @@ describe('FormFields', () => {
     it('should render single checkbox variant', () => {
       const wrapper = mount(<CheckboxGroup { ...initialProps } />);
       expect(toJson(wrapper)).toMatchSnapshot();
+      expect(wrapper.find(FieldLevelHelp)).toHaveLength(0);
+    });
+
+    it('should render single checkbox variant with a helper text', () => {
+      const wrapper = mount(<CheckboxGroup { ...initialProps } helperText="Helper text"/>);
+      expect(toJson(wrapper)).toMatchSnapshot();
+      expect(wrapper.find(FieldLevelHelp)).toHaveLength(1);
     });
 
     it('should render multiple choice variant', () => {

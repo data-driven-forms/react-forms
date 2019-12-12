@@ -69,6 +69,136 @@ exports[`FormFields <CheckboxGroup /> should render single checkbox variant 1`] 
 </CheckboxGroup>
 `;
 
+exports[`FormFields <CheckboxGroup /> should render single checkbox variant with a helper text 1`] = `
+<CheckboxGroup
+  FieldProvider={[Function]}
+  helperText="Helper text"
+  input={
+    Object {
+      "name": "single-check-box",
+    }
+  }
+  meta={Object {}}
+>
+  <FieldInterface
+    FieldProvider={[Function]}
+    componentType="checkbox"
+    helperText="Helper text"
+    input={
+      Object {
+        "name": "single-check-box",
+      }
+    }
+    meta={Object {}}
+    name="single-check-box"
+  >
+    <FinalFormField
+      FieldProvider={[Function]}
+      componentType="checkbox"
+      helperText="Helper text"
+      id="single-check-box"
+      input={
+        Object {
+          "name": "single-check-box",
+        }
+      }
+      meta={Object {}}
+      name="single-check-box"
+      noCheckboxLabel={true}
+    >
+      <FormGroup
+        bsClass="form-group"
+        validationState={null}
+      >
+        <div
+          className="form-group"
+        >
+          <Checkbox
+            bsClass="checkbox"
+            disabled={false}
+            inline={false}
+            name="single-check-box"
+            title=""
+          >
+            <div
+              className="checkbox"
+            >
+              <label
+                title=""
+              >
+                <input
+                  disabled={false}
+                  name="single-check-box"
+                  type="checkbox"
+                />
+                <FieldLevelHelp
+                  buttonClass=""
+                  content="Helper text"
+                  placement="top"
+                  rootClose={true}
+                >
+                  <OverlayTrigger
+                    defaultOverlayShown={false}
+                    overlay={
+                      <Popover
+                        bsClass="popover"
+                        id="popover"
+                        placement="right"
+                      >
+                        Helper text
+                      </Popover>
+                    }
+                    placement="top"
+                    rootClose={true}
+                    trigger={
+                      Array [
+                        "click",
+                      ]
+                    }
+                  >
+                    <Button
+                      active={false}
+                      block={false}
+                      bsClass="btn"
+                      bsStyle="link"
+                      className="popover-pf-info"
+                      disabled={false}
+                      onClick={[Function]}
+                    >
+                      <button
+                        className="popover-pf-info btn btn-link"
+                        disabled={false}
+                        onClick={[Function]}
+                        type="button"
+                      >
+                        <Icon
+                          name="info"
+                          type="pf"
+                        >
+                          <PatternflyIcon
+                            className=""
+                            name="info"
+                          >
+                            <span
+                              aria-hidden="true"
+                              className="pficon pficon-info"
+                            />
+                          </PatternflyIcon>
+                        </Icon>
+                      </button>
+                    </Button>
+                  </OverlayTrigger>
+                </FieldLevelHelp>
+              </label>
+            </div>
+          </Checkbox>
+        </div>
+      </FormGroup>
+    </FinalFormField>
+  </FieldInterface>
+</CheckboxGroup>
+`;
+
 exports[`FormFields <Radio /> should render correctly 1`] = `
 <Radio
   FieldProvider={[Function]}
