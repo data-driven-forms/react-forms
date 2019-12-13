@@ -679,7 +679,7 @@ exports[`FieldArray should render array field correctly 1`] = `
                                     "Submit",
                                     undefined,
                                   ],
-                                  "disabled": undefined,
+                                  "isDisabled": undefined,
                                   "onClick": [Function],
                                   "type": "button",
                                   "variant": "primary",

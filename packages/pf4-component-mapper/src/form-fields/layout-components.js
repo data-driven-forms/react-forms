@@ -4,14 +4,15 @@ import { layoutComponents } from '@data-driven-forms/react-form-renderer';
 import { Form, Button, ActionGroup, TextContent, Text, TextVariants } from '@patternfly/react-core';
 import './layout-components-styles.scss';
 
-const ButtonLayout = ({ label, bsStyle, children, ...props }) =>
-  <Button variant={ bsStyle || 'secondary' } { ...props }>
+const ButtonLayout = ({ label, bsStyle, children, disabled, ...props }) =>
+  <Button variant={ bsStyle || 'secondary' } isDisabled={ disabled } { ...props }>
     { label }{ children }
   </Button>;
 
 ButtonLayout.propTypes = {
   label: PropTypes.string.isRequired,
   bsStyle: PropTypes.string,
+  disabled: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
