@@ -21,4 +21,11 @@ describe('Layout mapper', () => {
     expect(mount(layoutMapper[layoutComponents.TITLE]({})).find(TextContent)).toHaveLength(1);
     expect(mount(layoutMapper[layoutComponents.TITLE]({})).find(Text)).toHaveLength(1);
   });
+
+  it('should return PF4 Button disabled', () => {
+    const wrapper = mount(layoutMapper[layoutComponents.BUTTON]({ disabled: true }));
+
+    expect(wrapper.find(Button)).toHaveLength(1);
+    expect(wrapper.find(Button).props().isDisabled).toEqual(true);
+  });
 });
