@@ -55,7 +55,7 @@
         "cpx": "^1.5.0",
         "cross-env": "^5.2.0",
         "firebase-functions-test": "^0.1.6",
-        "firebase-tools": "^6.1.0",
+        "firebase-tools": "^7.7.10",
         "rimraf": "^2.6.0",
         "terser-webpack-plugin": "^2.2.1"
     }
