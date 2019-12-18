@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty as lodashIsEmpty } from 'lodash';
-import { Field } from 'react-final-form';
+import { FormSpy } from 'react-final-form';
 
 const isEmptyValue = (value) => typeof value === 'number' || value === true ? false : lodashIsEmpty(value);
 
-const Condition = ({ when, is, isNotEmpty, isEmpty, children, pattern, notMatch }) => {
-  const shouldRender = value => {
+const Condition = ({ condition, children }) => {
+  const fieldCondition = (value, { is, isNotEmpty, isEmpty, pattern, notMatch }) => {
     if (isNotEmpty){
       return !isEmptyValue(value);
     }
@@ -24,14 +24,33 @@ const Condition = ({ when, is, isNotEmpty, isEmpty, children, pattern, notMatch 
     return notMatch ? !isMatched : isMatched;
   };
 
+  const shouldRender = (values, conditionItem) => {
+    if (typeof conditionItem.when === 'string') {
+      return fieldCondition(values[conditionItem.when], conditionItem);
+    }
+
+    if (Array.isArray(conditionItem.when)) {
+      return conditionItem.when.map(fieldName => fieldCondition(values[fieldName], conditionItem)).find(condition => !!condition);
+    }
+
+    return false;
+  };
+
   return (
-    <Field name={ when } subscription={{ value: true }}>
-      { ({ input: { value }}) => (shouldRender(value) ? children : null) }
-    </Field>
+    <FormSpy>
+      { ({ values }) => {
+        const visible = Array.isArray(condition)
+          ? !condition.map(conditionItem => !!shouldRender(values, conditionItem)).some(result => result === false)
+          : shouldRender(values, condition);
+
+        return visible ? children : null;
+      } }
+    </FormSpy>
   );
+
 };
 
-Condition.propTypes = {
+const conditionProps = {
   when: PropTypes.string.isRequired,
   is: PropTypes.oneOfType([
     PropTypes.array,
@@ -51,6 +70,17 @@ Condition.propTypes = {
     PropTypes.instanceOf(RegExp),
   ]),
   notMatch: PropTypes.any,
+};
+
+Condition.propTypes = {
+  condition: PropTypes.oneOfType([
+    PropTypes.shape(conditionProps),
+    PropTypes.arrayOf(PropTypes.shape(conditionProps)),
+  ]),
+  children: PropTypes.oneOf([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node),
+  ]).isRequired,
 };
 
 export default Condition;

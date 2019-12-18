@@ -15,7 +15,14 @@ const checkFieldsArray = (obj, objectKey) => {
 };
 
 const checkCondition = (condition, fieldName) => {
-  if (Array.isArray(condition) || typeof condition !== 'object') {
+  /**
+   * validate array condition
+   */
+  if (Array.isArray(condition)) {
+    return condition.forEach(item => checkCondition(item, fieldName));
+  }
+
+  if (typeof condition !== 'object') {
     throw new DefaultSchemaError(`
       Error occured in field definition with name: "${fieldName}".
       Field condition must be an object, received ${Array.isArray(condition) ? 'array' : typeof condition}!
@@ -29,7 +36,7 @@ const checkCondition = (condition, fieldName) => {
     `);
   }
 
-  if (typeof condition.when !== 'string') {
+  if (!(typeof condition.when === 'string' || Array.isArray(condition.when))) {
     throw new DefaultSchemaError(`
       Error occured in field definition with name: "${fieldName}".
       Field condition property "when" must be oof type "string", ${typeof condition.when} received!].
