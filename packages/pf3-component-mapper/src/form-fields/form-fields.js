@@ -7,9 +7,13 @@ import MultipleChoiceList from './multiple-choice-list';
 import RequiredLabel from './required-label';
 import Switch from './switch-field';
 import { DateTimePicker } from './date-time-picker/date-time-picker';
-import Select from './select';
+
 import RagioGroup from './radio';
 import PlainText from './plain-text';
+
+import Select from '@data-driven-forms/common/src/select';
+import './select/react-select.scss';
+import Option from './select/option';
 
 const selectComponent = ({
   componentType,
@@ -51,6 +55,10 @@ const selectComponent = ({
   ),
   [componentTypes.SELECT_COMPONENT]: () => <div>
     <Select
+      components={{
+        Option,
+      }}
+      classNamePrefix="ddorg__pf3-component-mapper__select"
       loadOptions={ loadOptions }
       options={ options }
       invalid={ invalid }

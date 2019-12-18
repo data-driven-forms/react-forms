@@ -22,3 +22,32 @@ div.field-group {
   position: relative;
   width: 100%;
 }
+
+.ddorg__pf3-component-mapper__select {
+  .ddorg__pf3-component-mapper__select__option {
+    background-color: #ffffff;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 1px 0;
+    padding: 1px 10px;
+    font-weight: 400;
+    cursor: pointer;
+    display: flex;
+    >*:first-child {
+      flex-grow: 1;
+    }
+  }
+  .ddorg__pf3-component-mapper__select__option--is-focused {
+    color: #4d5258;
+    background-color: #edf8ff;
+  }
+  .ddorg__pf3-component-mapper__select__option--is-selected {
+    background-color: #0088ce;
+    border-color: #0088ce;
+    color: #fff;
+    >.selected-indicator {
+      flex-grow: 0;
+      align-self: center;
+    }
+  }
+}

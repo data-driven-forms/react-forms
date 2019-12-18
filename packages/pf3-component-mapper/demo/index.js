@@ -10,6 +10,22 @@ import wizardSchema from './demo-schemas/wizard-schema';
 import sandbox from './demo-schemas/sandbox';
 import Switch from "../src/form-fields/switch-field";
 
+const selectSchema = {
+  fields: [{
+    component: 'select-field',
+    name: 'select',
+    label: 'Select',
+    menuIsOpen: true,
+    options: [{
+      label: 'foo',
+      value: 123
+    }, {
+      label: 'bar',
+      value: 231
+    }]
+  }]
+}
+
 class App extends React.Component {
   render() {
     const initialValues = {
@@ -26,7 +42,7 @@ class App extends React.Component {
             schemaType="default"
             formFieldsMapper={formFieldsMapper}
             layoutMapper={layoutMapper}
-            schema={sandbox}
+            schema={selectSchema}
             onCancel={() => console.log('cancel')}
           />
         </Row>
