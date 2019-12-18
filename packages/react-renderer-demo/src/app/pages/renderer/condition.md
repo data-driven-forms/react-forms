@@ -34,7 +34,7 @@ You can show a field only if it meets a condition:
 
 `when` - is name of field where the value is stored, **always required!**. It can be either string `'field-name'` or array of strings `['field-1', 'field-2']`.
 
-#### OR condition. At least one condition must be met
+### OR condition. At least one condition must be met
 
 If either of of fields with name `a` and `b` will have value `x` condition is met.
 
@@ -51,7 +51,7 @@ If either of of fields with name `a` and `b` will have value `x` condition is me
 }
 ```
 
-#### AND condition. All conditions must be met
+### AND condition. All conditions must be met
 
 Field `controlled-field-1` must have value `Bar` and field `controlled-field-2` must include `FooBar` somewhere in its value to display field `BarFoo`.
 
