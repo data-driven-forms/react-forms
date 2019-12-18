@@ -15,7 +15,13 @@ const selectSchema = {
     component: 'select-field',
     name: 'select',
     label: 'Select',
+    isRequired: true,
+    validateOnMount: true,
     menuIsOpen: true,
+    isClearable: true,
+    validate: [{
+      type: 'required-validator'
+    }],
     options: [{
       label: 'foo',
       value: 123

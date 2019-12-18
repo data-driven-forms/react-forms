@@ -14,6 +14,8 @@ import PlainText from './plain-text';
 import Select from '@data-driven-forms/common/src/select';
 import './select/react-select.scss';
 import Option from './select/option';
+import DropdownIndicator from './select/dropdown-indicator';
+import ClearIndicator from './select/clear-indicator';
 
 const selectComponent = ({
   componentType,
@@ -56,12 +58,14 @@ const selectComponent = ({
   [componentTypes.SELECT_COMPONENT]: () => <div>
     <Select
       components={{
+        ClearIndicator,
         Option,
+        DropdownIndicator,
       }}
       classNamePrefix="ddorg__pf3-component-mapper__select"
       loadOptions={ loadOptions }
       options={ options }
-      invalid={ invalid }
+      invalid={ !!invalid }
       input={ input }
       placeholder={ placeholder }
       isSearchable={ isSearchable }

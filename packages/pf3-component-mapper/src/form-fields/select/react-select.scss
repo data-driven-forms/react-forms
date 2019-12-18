@@ -24,6 +24,49 @@ div.field-group {
 }
 
 .ddorg__pf3-component-mapper__select {
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  padding: 0;
+  border: 1px solid transparent;
+  border-color: rgb(187, 187, 187);
+  display: inline-flex;
+  min-width: 250px;
+  max-width: calc(100% - 2px);
+  &.has-error {
+    border: 1px solid;
+    border-color: #cc0000;
+  }
+  .ddorg__pf3-component-mapper__select__control {
+    border: none;
+    width: 100%;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    box-shadow: 0 2px 3px rgba(3, 3, 3, 0.1);
+    padding: 0;
+    min-height: initial;
+    background-color: #f1f1f1;
+    color: #4d5258;
+    background-image: linear-gradient(to bottom, #fafafa 0%, #ededed 100%);
+    background-repeat: repeat-x;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 12px;
+    border-radius: 1px;
+    font-weight: 600;
+    &:hover {
+      background-color: #f1f1f1;
+      background-image: none;
+      border-color: #bbbbbb;
+      color: #4d5258;
+    }
+  }
+  .ddorg__pf3-component-mapper__select__menu {
+    background: #fff;
+    margin: 0;
+    margin-top: 8px;
+    border-radius: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
   .ddorg__pf3-component-mapper__select__option {
     background-color: #ffffff;
     border-color: transparent;
@@ -49,5 +92,22 @@ div.field-group {
       flex-grow: 0;
       align-self: center;
     }
+  }
+  .ddorg__pf3-component-mapper__select__indicator-separator {
+    display: none;
+  }
+  .ddorg__pf3-component-mapper__select__indicators {
+    padding: 0;
+    padding-right: 8px;
+    &:hover {
+      color: rgb(77, 82, 88),
+    };
+  }
+  .ddorg__pf3-component-mapper__select__close-indicator {
+    margin-right: 4px;
+    padding: 0;
+    color: #4d5258;
+    background: none;
+    border: none;
   }
 }

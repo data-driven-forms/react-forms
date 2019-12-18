@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
 const Option = (props) => {
-  console.log(props);
   return (
     <div className={ clsx('ddorg__pf3-component-mapper__select__option', {
       'ddorg__pf3-component-mapper__select__option--is-focused': props.isFocused,

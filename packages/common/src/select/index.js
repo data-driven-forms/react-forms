@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import ReactSelect from 'react-select';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 
 class Select extends Component {
   render() {
+    console.log(this.props.invalid)
     return (
-      <ReactSelect className={ this.props.classNamePrefix } { ...this.props } />
+      <ReactSelect className={ clsx(this.props.classNamePrefix, {
+        'has-error': this.props.invalid,
+      }) } { ...this.props } />
     );
   }
 }
@@ -14,10 +18,12 @@ Select.propTypes = {
   options: PropTypes.array,
   onChange: PropTypes.func,
   classNamePrefix: PropTypes.string.isRequired,
+  invalid: PropTypes.bool,
 };
 
 Select.defaultProps = {
   options: [],
+  invalid: false,
 };
 
 const DataDrivenSelect = ({ multi, ...props }) => {
