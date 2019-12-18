@@ -196,7 +196,8 @@ class Wizard extends React.Component {
           formOptions.getState().values,
           [ ...this.state.prevSteps, this.state.activeStep ],
           formOptions.getRegisteredFields,
-        )
+        ),
+        formOptions
       );
 
     const currentStep = (

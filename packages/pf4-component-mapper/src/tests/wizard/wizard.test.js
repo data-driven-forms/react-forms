@@ -186,11 +186,13 @@ describe('<Wizard />', () => {
     expect(onSubmit).toHaveBeenCalled();
   });
 
-  it('should go to next step correctly and submit data', () => {
+  it('should go to next step correctly and submit data and formOptions', () => {
     const onSubmit = jest.fn();
+    const formOptions = { ...initialProps.formOptions, onSubmit, getRegisteredFields: getRegisteredFieldsSchemaMock };
+
     const wrapper = mount(<Wizard
       { ...initialProps }
-      formOptions={{ ...initialProps.formOptions, onSubmit, getRegisteredFields: getRegisteredFieldsSchemaMock }}
+      formOptions={ formOptions }
       fields={ schema }
     />);
     nextButtonClickWithHeader(wrapper);
@@ -203,7 +205,7 @@ describe('<Wizard />', () => {
     expect(onSubmit).toHaveBeenCalledWith({
       'foo-field': 'foo-field-value',
       'bar-field': 'bar-field-value',
-    });
+    }, formOptions);
   });
 
   it('should pass values to cancel button', () => {
@@ -234,9 +236,16 @@ describe('<Wizard />', () => {
 
   it('should submit data when nested schema', () => {
     const onSubmit = jest.fn();
+    const formOptions = {
+      ...initialProps.formOptions,
+      onSubmit,
+      getRegisteredFields: getRegisteredFieldsNestedSchemaMock,
+      getState: getValuesNestedSchema,
+    };
+
     const wrapper = mount(<Wizard
       { ...initialProps }
-      formOptions={{ ...initialProps.formOptions, onSubmit, getRegisteredFields: getRegisteredFieldsNestedSchemaMock, getState: getValuesNestedSchema }}
+      formOptions={ formOptions }
       fields={ nestedSchema }
     />);
 
@@ -250,7 +259,7 @@ describe('<Wizard />', () => {
           'bar-field': 'bar-field-value',
         },
       },
-    });
+    }, formOptions);
   });
 
   it('should build simple navigation', () => {
