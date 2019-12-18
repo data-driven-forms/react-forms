@@ -19,6 +19,7 @@ const selectSchema = {
     validateOnMount: true,
     menuIsOpen: true,
     isClearable: true,
+    multi: true,
     validate: [{
       type: 'required-validator'
     }],
@@ -28,6 +29,9 @@ const selectSchema = {
     }, {
       label: 'bar',
       value: 231
+    }, {
+      label: 'Super long option label, Super long option label, Super long option label, Super long option label, Super long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option label',
+      value: 'x'
     }]
   }]
 }

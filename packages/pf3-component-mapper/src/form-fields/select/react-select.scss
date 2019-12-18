@@ -110,4 +110,36 @@ div.field-group {
     background: none;
     border: none;
   }
+
+  .ddorg__pf3-component-mapper__select__multi-value {
+    background: none;
+    margin: 0;
+    margin-right: 2px;
+    min-width: unset;
+    .ddorg__pf3-component-mapper__select__multi-value__label {
+      &::after {
+        content: ","
+      }
+    }
+    &:last-of-type {
+      .ddorg__pf3-component-mapper__select__multi-value__label {
+        &::after {
+          content: ""
+        }
+      }
+    }
+    .ddorg__pf3-component-mapper__select__multi-value__label {
+      padding: 0;
+      font-size: inherit;
+    }
+    .ddorg__pf3-component-mapper__select__multi-value__remove {
+      display: none
+    }
+  }
+  .ddorg__pf3-component-mapper__select__value-container--is-multi {
+    flex-wrap: nowrap;
+  }
+  .ddorg__pf3-component-mapper__select__value-container {
+    margin-right: 8px;
+  }
 }
