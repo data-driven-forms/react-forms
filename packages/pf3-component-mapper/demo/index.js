@@ -20,6 +20,7 @@ const selectSchema = {
     menuIsOpen: true,
     isClearable: true,
     multi: false,
+    placeholder: 'Super long option label, Super long option label, Super long option label, Super long option label, Super long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option label',
     validate: [{
       type: 'required-validator'
     }],
