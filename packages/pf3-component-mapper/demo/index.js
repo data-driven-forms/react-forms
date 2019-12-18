@@ -19,7 +19,7 @@ const selectSchema = {
     validateOnMount: true,
     menuIsOpen: true,
     isClearable: true,
-    multi: true,
+    multi: false,
     validate: [{
       type: 'required-validator'
     }],

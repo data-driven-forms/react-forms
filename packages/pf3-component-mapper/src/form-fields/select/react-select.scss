@@ -142,4 +142,12 @@ div.field-group {
   .ddorg__pf3-component-mapper__select__value-container {
     margin-right: 8px;
   }
+  .ddorg__pf3-component-mapper__select__single-value {
+    font-size: 12px;
+    margin-left: 0;
+    font-weight: 600;
+    color: rgb(54, 54, 54);
+    text-overflow: clip;
+    max-width: 100%
+  }
 }
