@@ -287,6 +287,8 @@ export class P3Select extends Component {
         <div className={ `${props.classNamePrefix}-button` }>
           <DropdownButton
             onToggle={ () => this.handleToggleOpen() }
+            disabled={ props.isDisabled }
+            noCaret={ props.isDisabled }
             open={ isOpen }
             id={ props.id || props.input.name }
             title={ <SelectTitle
@@ -336,7 +338,7 @@ export class P3Select extends Component {
         components={{
           ClearIndicator,
           Option,
-          DropdownIndicator,
+          DropdownIndicator: props.isDisabled ? null : DropdownIndicator,
         }}
       />
     );

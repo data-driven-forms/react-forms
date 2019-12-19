@@ -199,6 +199,23 @@ div.field-group {
       }
     }
   }
+  &.ddorg__pf3-component-mapper__select--is-disabled {
+    cursor: not-allowed;
+    pointer-events: unset;
+    border-color: #d1d1d1;
+    * {
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+    .ddorg__pf3-component-mapper__select__control {
+      background-color: #fafafa;
+      background-image: none ;
+      border-color: #d1d1d1;
+      color: #8b8d8f;
+      opacity: 1;
+      box-shadow: none;
+    }
+  }
 }
 .ddorg__pf3-component-mapper__select-dropdown {
   &.is-empty {

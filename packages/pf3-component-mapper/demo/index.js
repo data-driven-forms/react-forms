@@ -15,6 +15,7 @@ const selectSchema = {
     component: 'select-field',
     name: 'select-single',
     label: 'Select single',
+    isDisabled: true,
     options: [{
       label: 'foo',
       value: 123
@@ -28,6 +29,7 @@ const selectSchema = {
     label: 'Select search',
     isRequired: true,
     validateOnMount: true,
+    isDisabled: true,
     isClearable: true,
     multi: true,
     isSearchable: true,
