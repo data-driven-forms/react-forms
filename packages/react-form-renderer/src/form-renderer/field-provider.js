@@ -28,7 +28,9 @@ class FieldProvider extends Component{
           { ...fieldsProps }
           input={{
             ...input,
-            onChange: (...args) => enhancedOnChange(dataType, onChange, ...args),
+            onChange: (...args) => {
+              enhancedOnChange(dataType, onChange, fieldsProps.meta.initial, this.props.formOptions.deletedValue, ...args);
+            },
           }}
         />
       ) } />;
@@ -39,7 +41,7 @@ class FieldProvider extends Component{
         ...fieldsProps,
         input: {
           ...input,
-          onChange: (...args) => enhancedOnChange(dataType, onChange, ...args),
+          onChange: (...args) => enhancedOnChange(dataType, onChange, fieldsProps.meta.initial, this.props.formOptions.deletedValue, ...args),
         },
       }) } />;
     }
@@ -51,7 +53,7 @@ class FieldProvider extends Component{
           Children.only(
             <ChildComponent
               { ...fieldsProps }
-              input={{ ...input, onChange: (...args) => enhancedOnChange(dataType, onChange, ...args)  }}
+              input={{ ...input, onChange: (...args) => enhancedOnChange(dataType, onChange, fieldsProps.meta.initial, this.props.formOptions.deletedValue, ...args)  }}
             />
           ) }
       </Field>
@@ -64,6 +66,7 @@ FieldProvider.propTypes = {
     clearOnUnmount: PropTypes.bool,
     change: PropTypes.func,
     getFieldState: PropTypes.func,
+    deletedValue: PropTypes.any,
   }),
   component: PropTypes.oneOfType(PropTypes.node, PropTypes.element, PropTypes.func),
   render: PropTypes.func,
