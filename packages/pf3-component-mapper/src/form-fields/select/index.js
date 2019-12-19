@@ -1,9 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component, createRef, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ReactSelect, { components } from 'react-select';
 import customStyles from './select-styles';
 import isEqual from 'lodash/isEqual';
 import './react-select.scss';
+
+/**
+ * New implementation of select of PF4
+ */
+
+import NewSelect from '@data-driven-forms/common/src/select';
+import './react-select.scss';
+import Option from './option';
+import DropdownIndicator from './dropdown-indicator';
+import ClearIndicator from './clear-indicator';
+import { DropdownButton, FormControl } from 'patternfly-react';
+import clsx from 'clsx';
 
 const fnToString = (fn = '') => fn.toString().replace(/\s+/g, ' ');
 
@@ -174,3 +186,161 @@ Select.defaultProps = {
 };
 
 export default Select;
+
+const getDropdownText = (value, placeholder) => {
+  if (Array.isArray(value)) {
+    if (value.length === 0) {
+      return [ placeholder, true ];
+    }
+
+    if (typeof value[0] === 'object') {
+      return [ value.map(({ label }) => label).join(', '), false ];
+    }
+
+    return [ value.join(', '), false ];
+  }
+
+  if (typeof value === 'object') {
+    return [ value.label, false ];
+  }
+
+  if (!value) {
+    return [ placeholder, true ];
+  }
+
+  return [ value, false ];
+};
+
+class SearchInput extends Component {
+  inputRef = createRef(null);
+  componentDidMount() {
+    this.inputRef.current.focus();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log(prevProps, this.props);
+  }
+
+  shouldComponentUpdate(nextProps) {
+
+    return nextProps.value !== this.props.value;
+  }
+
+  componentWillUnmount() {
+    this.inputRef.current.blur();
+  }
+
+  render() {
+    return <input ref={ this.inputRef } type="text" { ...this.props } className="form-control" />;
+  }
+
+}
+
+const SelectTitle = ({ title, classNamePrefix, isClearable, value, onClear }) => (
+  <Fragment>
+    <span key="searchable-select-value-label" className={ `${classNamePrefix}-value` }>{ title }</span>
+    { isClearable && value && (
+      <div
+        className={ `${classNamePrefix}-searchebale-clear` }
+        onClick={ (event) => {
+          event.stopPropagation();
+          return onClear(undefined);
+        } } >
+        <i className="fa fa-times"/>
+      </div>
+    ) }
+  </Fragment>
+);
+
+export class P3Select extends Component {
+  state = {
+    isOpen: false,
+  }
+  handleToggleOpen = () => this.setState(({ isOpen }) => ({ isOpen: !isOpen }))
+
+  componentDidUpdate(prevProps, prevState) {
+    //console.log('root update', prevState, this.state);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextState.isOpen !== this.state.isOpen) {
+      return true;
+    }
+
+    if (JSON.stringify(nextProps) !== JSON.stringify(this.props)) {
+      return true;
+    }
+
+    return false;
+  }
+
+  render () {
+    const { input, ...props } = this.props;
+    const { isOpen } = this.state;
+    const [ title, isPlaceholder ] = getDropdownText(input.value, props.placeholder);
+    if (props.isSearchable) {
+      const searchableInput = {
+        ...input,
+        onChange: props.isMulti || props.multi
+          ? input.onChange
+          : (...args) => {
+            this.handleToggleOpen();
+            return input.onChange(...args);
+          },
+      };
+      return (
+        <div className={ `${props.classNamePrefix}-button` }>
+          <DropdownButton
+            onToggle={ () => this.handleToggleOpen() }
+            open={ isOpen }
+            id={ props.id || props.input.name }
+            title={ <SelectTitle
+              classNamePrefix={ this.props.classNamePrefix }
+              value={ input.value }
+              isClearable={ props.isClearable }
+              title={ title }
+              onClear={ input.onChange }
+            /> }
+            className={ clsx(`${props.classNamePrefix}-dropdown`, {
+              'is-empty': isPlaceholder,
+            }) }>
+            { isOpen &&
+            <NewSelect
+              input={ searchableInput }
+              { ...props }
+              className={ clsx(props.classNamePrefix, {
+                sercheable: props.isSearchable,
+              }) }
+              controlShouldRenderValue={ false }
+              hideSelectedOptions={ false }
+              isClearable={ false }
+              tabSelectsValue={ false }
+              menuIsOpen
+              backspaceRemovesValue={ false }
+              isMulti={ props.isMulti || props.multi }
+              placeholder="Search..."
+              components={{
+                ClearIndicator,
+                Option,
+                DropdownIndicator: null,
+                IndicatorSeparator: null,
+                Placeholder: () => null,
+                Input: ({ selectProps, cx, isHidden, isDisabled, innerRef, getStyles, ...props }) => <SearchInput id={ this.props.input.name } { ...props } />,
+              }} /> }
+          </DropdownButton>
+        </div>
+      );
+    }
+
+    return (
+      <NewSelect { ...props }
+        className={ props.classNamePrefix }
+        components={{
+          ClearIndicator,
+          Option,
+          DropdownIndicator,
+        }} />
+    );
+
+  }
+}

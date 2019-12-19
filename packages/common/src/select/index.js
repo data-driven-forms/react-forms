@@ -5,11 +5,10 @@ import clsx from 'clsx';
 
 class Select extends Component {
   render() {
-    console.log(this.props.invalid)
     return (
       <ReactSelect className={ clsx(this.props.classNamePrefix, {
         'has-error': this.props.invalid,
-      }) } { ...this.props } />
+      }) } { ...this.props } {...this.props.input} />
     );
   }
 }

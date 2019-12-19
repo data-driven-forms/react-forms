@@ -152,6 +152,90 @@ div.field-group {
     position: relative;
   }
   .ddorg__pf3-component-mapper__select__placeholder {
+    padding: 0;
     position: relative;
+  }
+  &.sercheable {
+    border: none;
+    .ddorg__pf3-component-mapper__select__control {
+      box-shadow: none;
+      background: unset;
+      background-color: transparent;
+    }
+    .ddorg__pf3-component-mapper__select__input {
+      border: 1px solid red;
+      width: 100%;
+    }
+    .ddorg__pf3-component-mapper__select__value-container {
+      display: flex;
+      margin-right: 0;
+      width: calc(100% - 2px);
+      background-color: transparent;
+      height: unset;
+      >* {
+        flex: 1
+      }
+    }
+    .ddorg__pf3-component-mapper__select__indicators {
+      display: none;
+    }
+    .ddorg__pf3-component-mapper__select__menu {
+      margin: 0;
+      border: 1px solid #ddd;
+      border-top: none;
+      box-shadow: none;
+    }
+    .ddorg__pf3-component-mapper__select__menu {
+      left: -1px;
+      box-sizing: content-box;
+    }
+    input {
+      border: 1px solid #bbb;
+      &:focus {
+        border-color: #0088ce;
+        outline: 0;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 136, 206, 0.6);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 136, 206, 0.6);
+      }
+    }
+  }
+}
+.ddorg__pf3-component-mapper__select-dropdown {
+  &.is-empty {
+    color: rgb(153, 153, 153)
+  };
+  min-width: 250px;
+  max-width: calc(100% - 2px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ddorg__pf3-component-mapper__select-button {
+  .ddorg__pf3-component-mapper__select-searchebale-clear {
+    margin-right: 4px;
+  }
+  .ddorg__pf3-component-mapper__select {
+    max-width: unset;
+    width: 100%;
+    min-width: 248px;
+  }
+  .dropdown {
+    max-width: 100%;
+    >button {
+      max-width: 100%;
+      display: flex;
+      .ddorg__pf3-component-mapper__select-value {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: 4px;
+        text-align: initial;
+      }
+    }
+  }
+  .dropdown-menu {
+    width: 100%;
+    border-bottom: none;
+    border-color: #ddd;
   }
 }

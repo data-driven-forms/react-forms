@@ -13,14 +13,37 @@ import Switch from "../src/form-fields/switch-field";
 const selectSchema = {
   fields: [{
     component: 'select-field',
+    name: 'select-search',
+    label: 'Select search',
+    isRequired: true,
+    validateOnMount: true,
+    isClearable: true,
+    multi: true,
+    isSearchable: true,
+    placeholder: 'Placeholder',
+    validate: [{
+      type: 'required-validator'
+    }],
+    options: [{
+      label: 'foo',
+      value: 123
+    }, {
+      label: 'bar',
+      value: 231
+    }, {
+      label: 'Super long option label, Super long option label, Super long option label, Super long option label, Super long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option label',
+      value: 'x'
+    }]
+  }, {
+    component: 'select-field',
     name: 'select',
     label: 'Select',
     isRequired: true,
     validateOnMount: true,
-    menuIsOpen: true,
     isClearable: true,
     multi: false,
-    placeholder: 'Super long option label, Super long option label, Super long option label, Super long option label, Super long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option label',
+    isSearchable: true,
+    placeholder: 'Placeholder',
     validate: [{
       type: 'required-validator'
     }],
