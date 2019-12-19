@@ -6,16 +6,16 @@ import isEqual from 'lodash/isEqual';
 import './react-select.scss';
 
 /**
- * New implementation of select of PF4
+ * New implementation of select of PF3
  */
 
 import NewSelect from '@data-driven-forms/common/src/select';
-import './react-select.scss';
 import Option from './option';
 import DropdownIndicator from './dropdown-indicator';
 import ClearIndicator from './clear-indicator';
 import { DropdownButton, FormControl } from 'patternfly-react';
 import clsx from 'clsx';
+import './react-select.scss';
 
 const fnToString = (fn = '') => fn.toString().replace(/\s+/g, ' ');
 
@@ -325,7 +325,8 @@ export class P3Select extends Component {
                 DropdownIndicator: null,
                 IndicatorSeparator: null,
                 Placeholder: () => null,
-                Input: ({ selectProps, cx, isHidden, isDisabled, innerRef, getStyles, ...props }) => <SearchInput id={ this.props.input.name } { ...props } />,
+                Input: ({ selectProps, cx, isHidden, isDisabled, innerRef, getStyles, ...props }) =>
+                  <SearchInput id={ this.props.input.name } { ...props } />,
               }} /> }
           </DropdownButton>
         </div>
@@ -333,13 +334,16 @@ export class P3Select extends Component {
     }
 
     return (
-      <NewSelect { ...props }
+      <NewSelect
+        { ...this.props }
+        input={ input }
         className={ props.classNamePrefix }
         components={{
           ClearIndicator,
           Option,
           DropdownIndicator,
-        }} />
+        }}
+      />
     );
 
   }

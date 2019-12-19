@@ -13,6 +13,17 @@ import Switch from "../src/form-fields/switch-field";
 const selectSchema = {
   fields: [{
     component: 'select-field',
+    name: 'select-single',
+    label: 'Select single',
+    options: [{
+      label: 'foo',
+      value: 123
+    }, {
+      label: 'bar',
+      value: 231
+    }]
+  }, {
+    component: 'select-field',
     name: 'select-search',
     label: 'Select search',
     isRequired: true,
@@ -62,16 +73,13 @@ const selectSchema = {
 
 class App extends React.Component {
   render() {
-    const initialValues = {
-      date_control_1: new Date()
-    }
     return (
     <div>
       <h1>Pf3 component mapper</h1>
       <Grid>
         <Row>
           <FormRenderer
-            initialValues={initialValues}
+            initialValues={{}}
             onSubmit={console.log}
             schemaType="default"
             formFieldsMapper={formFieldsMapper}
