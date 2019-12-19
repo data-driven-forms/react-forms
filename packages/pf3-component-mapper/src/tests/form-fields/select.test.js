@@ -3,9 +3,8 @@ import toJson from 'enzyme-to-json';
 import { SelectField } from '../../form-fields/form-fields';
 import SelectPF3 from '../../form-fields/select/index';
 import { mount } from 'enzyme';
-import Select from 'react-select';
 import isEqual from 'lodash/isEqual';
-import ReactSelect, { components } from 'react-select';
+import ReactSelect from 'react-select';
 
 describe('<SelectField />', () => {
   let initialProps;
@@ -63,7 +62,7 @@ describe('<SelectField />', () => {
 
   it('should call on change with correct value on single select', () => {
     const wrapper = mount(<SelectField { ...initialProps } />);
-    wrapper.find(Select).instance().props.onChange({
+    wrapper.find(ReactSelect).instance().props.onChange({
       value: 2,
     });
     expect(changeSpy).toHaveBeenCalledWith(2);
@@ -80,7 +79,7 @@ describe('<SelectField />', () => {
           value: [],
         }}
       />);
-    wrapper.find(Select).instance().props.onChange(
+    wrapper.find(ReactSelect).instance().props.onChange(
       [{ value: 2, label: 'x' }, { value: 1, label: 'a' }],
     );
     expect(changeSpy).toHaveBeenCalledWith([ 2, 1 ]);
@@ -99,15 +98,15 @@ describe('<SelectField />', () => {
     it('should change the options when options prop is changed', () => {
       const wrapper = mount(<SelectField { ...initialProps } />);
 
-      let innerSelectProps = wrapper.find(Select).props().options;
+      let innerSelectProps = wrapper.find(ReactSelect).props().options;
 
       expect(isEqual(innerSelectProps, initialProps.options)).toEqual(true);
 
       wrapper.setProps({ options: NEW_OPTIONS });
       wrapper.update();
-      innerSelectProps = wrapper.find(Select).props().options;
+      innerSelectProps = wrapper.find(ReactSelect).props().options;
 
-      expect(isEqual(innerSelectProps, NEW_OPTIONS)).toEqual(true);
+      expect(innerSelectProps).toEqual(NEW_OPTIONS);
     });
 
     it('should change the options when loadOptions prop is changed', (done) => {
@@ -115,7 +114,7 @@ describe('<SelectField />', () => {
 
       setImmediate(() => {
         wrapper.update();
-        let innerSelectProps = wrapper.find(Select).props().options;
+        let innerSelectProps = wrapper.find(ReactSelect).props().options;
 
         expect(isEqual(innerSelectProps, initialProps.options)).toEqual(true);
 
@@ -123,7 +122,7 @@ describe('<SelectField />', () => {
 
         setImmediate(() => {
           wrapper.update();
-          innerSelectProps = wrapper.find(Select).props().options;
+          innerSelectProps = wrapper.find(ReactSelect).props().options;
 
           expect(isEqual(innerSelectProps, NEW_OPTIONS)).toEqual(true);
           done();

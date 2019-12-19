@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormControl, HelpBlock, Checkbox, FormGroup, ControlLabel, FieldLevelHelp, DropdownButton } from 'patternfly-react';
+import { FormControl, HelpBlock, Checkbox, FormGroup, ControlLabel, FieldLevelHelp } from 'patternfly-react';
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 import { validationError } from './helpers';
 import MultipleChoiceList from './multiple-choice-list';
@@ -10,7 +10,7 @@ import { DateTimePicker } from './date-time-picker/date-time-picker';
 
 import RagioGroup from './radio';
 import PlainText from './plain-text';
-import { P3Select } from './select';
+import Select from './select';
 
 const selectComponent = ({
   componentType,
@@ -51,7 +51,7 @@ const selectComponent = ({
     />
   ),
   [componentTypes.SELECT_COMPONENT]: () => <div>
-    <P3Select
+    <Select
       classNamePrefix="ddorg__pf3-component-mapper__select"
       loadOptions={ loadOptions }
       options={ options }
