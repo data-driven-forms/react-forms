@@ -21,7 +21,7 @@ const handleSelectChange = (option, simpleValue, isMulti, onChange) => {
 
 class Select extends Component {
   render() {
-    const { input, invalid, classNamePrefix, options, simpleValue, isMulti, pluckSingleValue, ...props } = this.props;
+    const { input, invalid, classNamePrefix, simpleValue, isMulti, pluckSingleValue, options, ...props } = this.props;
     const { value, onChange, ...inputProps } = input;
 
     const selectValue = pluckSingleValue ? isMulti ? value : Array.isArray(value) && value[0] ? value[0] : value : value;
@@ -33,8 +33,8 @@ class Select extends Component {
         }) }
         { ...props }
         { ...inputProps }
-        classNamePrefix={ classNamePrefix }
         options={ options }
+        classNamePrefix={ classNamePrefix }
         isMulti={ isMulti }
         value={ getSelectValue(selectValue, simpleValue, isMulti, options) }
         onChange={ option => handleSelectChange(option, simpleValue, isMulti, onChange) }
@@ -50,7 +50,7 @@ Select.propTypes = {
   invalid: PropTypes.bool,
   simpleValue: PropTypes.bool,
   isMulti: PropTypes.bool,
-  pluckSingleValue: PropTypes.bool
+  pluckSingleValue: PropTypes.bool,
 };
 
 Select.defaultProps = {

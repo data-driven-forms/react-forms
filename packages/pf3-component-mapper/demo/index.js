@@ -10,8 +10,36 @@ import wizardSchema from './demo-schemas/wizard-schema';
 import sandbox from './demo-schemas/sandbox';
 import Switch from "../src/form-fields/switch-field";
 
+const loadOptions = () => new Promise((res) => {
+  setTimeout(() => {
+    fetch('https://dog.ceo/api/breeds/list/all')
+      .then(data => data.json())
+      .then(({ message: { bulldog } }) => bulldog.map(dog => ({ label: dog, value: dog })))
+      .then(data => res(data))
+  }, 250)
+}) 
+
 const selectSchema = {
   fields: [{
+    component: 'select-field',
+    name: 'async-single',
+    label: 'Async single',
+    multi: true,
+    loadOptions
+  },{
+    component: 'select-field',
+    name: 'async-single-search',
+    label: 'Async single search',
+    isSearchable: true,
+    loadOptions
+  }, {
+    component: 'select-field',
+    name: 'async-multi-search',
+    label: 'Async multi search',
+    isSearchable: true,
+    multi: true,
+    loadOptions
+  }, {
     component: 'select-field',
     name: 'select-single',
     label: 'Select single',

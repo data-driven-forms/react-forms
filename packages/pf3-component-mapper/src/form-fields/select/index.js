@@ -10,14 +10,13 @@ import './react-select.scss';
  */
 
 import NewSelect from '@data-driven-forms/common/src/select';
+import { DropdownButton } from 'patternfly-react';
+import fnToString from '@data-driven-forms/common/src/utils/fn-to-string';
+import clsx from 'clsx';
 import Option from './option';
 import DropdownIndicator from './dropdown-indicator';
 import ClearIndicator from './clear-indicator';
-import { DropdownButton, FormControl } from 'patternfly-react';
-import clsx from 'clsx';
 import './react-select.scss';
-
-const fnToString = (fn = '') => fn.toString().replace(/\s+/g, ' ');
 
 const ValueContainer = ({ children, ...props }) => {
   if (props.isMulti) {
@@ -231,7 +230,7 @@ class SearchInput extends Component {
 
 }
 
-const SelectTitle = ({ title, classNamePrefix, isClearable, value, onClear }) => (
+const SelectTitle = ({ title, classNamePrefix, isClearable, value, onClear, isFetching, isDisabled }) => (
   <Fragment>
     <span key="searchable-select-value-label" className={ `${classNamePrefix}-value` }>{ title }</span>
     { isClearable && value && (
@@ -244,21 +243,78 @@ const SelectTitle = ({ title, classNamePrefix, isClearable, value, onClear }) =>
         <i className="fa fa-times"/>
       </div>
     ) }
+    { !isDisabled && isFetching && (
+      <i className="ddorg__pf3-component-mapper__select__dropdown-indicator fa fa-circle-o-notch spin" />
+    ) }
+    { !isDisabled && !isFetching && (
+      <i className="ddorg__pf3-component-mapper__select__dropdown-indicator fa fa-angle-down"/>
+    ) }
   </Fragment>
 );
 
-export class P3Select extends Component {
-  state = {
+export class P3Select extends Component {  constructor(props){
+  super(props);
+  this.state = {
+    isFetching: false,
     isOpen: false,
-  }
+    options: props.options || [],
+  };
+}
   handleToggleOpen = () => this.setState(({ isOpen }) => ({ isOpen: !isOpen }))
 
-  componentDidUpdate(prevProps, prevState) {
-    //console.log('root update', prevState, this.state);
+  componentDidMount(){
+    const { loadOptions } = this.props;
+    if (loadOptions) {
+      return this.updateOptions();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!isEqual(this.props.options, prevProps.options)) {
+      if (!this.props.options.map(({ value }) => value).includes(this.props.input.value)) {
+        this.props.input.onChange(undefined);
+      }
+
+      this.setState({ options: this.props.options });
+    }
+
+    if (this.props.loadOptions && fnToString(this.props.loadOptions) !== fnToString(prevProps.loadOptions)){
+      return this.updateOptions();
+    }
+  }
+
+  updateOptions = () => {
+    const { loadOptions } = this.props;
+
+    this.setState({ isFetching: true });
+
+    return loadOptions()
+    .then((data) => {
+      if (!data.map(({ value }) => value).includes(this.props.input.value)) {
+        this.props.input.onChange(undefined);
+      }
+
+      return this.setState({
+        options: data,
+        isFetching: false,
+      });
+    });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     if (nextState.isOpen !== this.state.isOpen) {
+      return true;
+    }
+
+    if (nextState.isFetching !== this.state.isFetching) {
+      return true;
+    }
+
+    if (isEqual(this.state.options, nextState.options)) {
+      return true;
+    }
+
+    if (this.props.loadOptions && fnToString(this.props.loadOptions) !== fnToString(nextProps.loadOptions)){
       return true;
     }
 
@@ -270,10 +326,10 @@ export class P3Select extends Component {
   }
 
   render () {
-    const { input, ...props } = this.props;
-    const { isOpen } = this.state;
-    const [ title, isPlaceholder ] = getDropdownText(input.value, props.placeholder, props.options);
+    const { input, loadOptions, options: _options, ...props } = this.props;
+    const { isOpen, options, isFetching } = this.state;
     if (props.isSearchable) {
+      const [ title, isPlaceholder ] = getDropdownText(input.value, props.placeholder, options);
       const searchableInput = {
         ...input,
         onChange: props.isMulti || props.multi
@@ -288,10 +344,12 @@ export class P3Select extends Component {
           <DropdownButton
             onToggle={ () => this.handleToggleOpen() }
             disabled={ props.isDisabled }
-            noCaret={ props.isDisabled }
+            noCaret
             open={ isOpen }
             id={ props.id || props.input.name }
             title={ <SelectTitle
+              isDisabled={ props.isDisabled }
+              isFetching={ isFetching }
               classNamePrefix={ this.props.classNamePrefix }
               value={ input.value }
               isClearable={ props.isClearable }
@@ -302,29 +360,31 @@ export class P3Select extends Component {
               'is-empty': isPlaceholder,
             }) }>
             { isOpen &&
-            <NewSelect
-              input={ searchableInput }
-              { ...props }
-              className={ clsx(props.classNamePrefix, {
-                sercheable: props.isSearchable,
-              }) }
-              controlShouldRenderValue={ false }
-              hideSelectedOptions={ false }
-              isClearable={ false }
-              tabSelectsValue={ false }
-              menuIsOpen
-              backspaceRemovesValue={ false }
-              isMulti={ props.isMulti || props.multi }
-              placeholder="Search..."
-              components={{
-                ClearIndicator,
-                Option,
-                DropdownIndicator: null,
-                IndicatorSeparator: null,
-                Placeholder: () => null,
-                Input: ({ selectProps, cx, isHidden, isDisabled, innerRef, getStyles, ...props }) =>
-                  <SearchInput id={ this.props.input.name } { ...props } />,
-              }} /> }
+              <NewSelect
+                isFetching={ isFetching }
+                input={ searchableInput }
+                { ...props }
+                options={ options }
+                className={ clsx(props.classNamePrefix, {
+                  sercheable: props.isSearchable,
+                }) }
+                controlShouldRenderValue={ false }
+                hideSelectedOptions={ false }
+                isClearable={ false }
+                tabSelectsValue={ false }
+                menuIsOpen
+                backspaceRemovesValue={ false }
+                isMulti={ props.isMulti || props.multi }
+                placeholder="Search..."
+                components={{
+                  ClearIndicator,
+                  Option,
+                  DropdownIndicator: null,
+                  IndicatorSeparator: null,
+                  Placeholder: () => null,
+                  Input: ({ selectProps, cx, isHidden, isDisabled, innerRef, getStyles, ...props }) =>
+                    <SearchInput id={ this.props.input.name } { ...props } />,
+                }} /> }
           </DropdownButton>
         </div>
       );
@@ -333,6 +393,8 @@ export class P3Select extends Component {
     return (
       <NewSelect
         { ...this.props }
+        isFetching={ isFetching }
+        options={ options }
         input={ input }
         className={ props.classNamePrefix }
         components={{
@@ -345,3 +407,7 @@ export class P3Select extends Component {
 
   }
 }
+
+P3Select.defaultProps = {
+  placeholder: 'Search...',
+};
