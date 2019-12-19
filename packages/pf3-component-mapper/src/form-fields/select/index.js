@@ -187,7 +187,7 @@ Select.defaultProps = {
 
 export default Select;
 
-const getDropdownText = (value, placeholder) => {
+const getDropdownText = (value, placeholder, options) => {
   if (Array.isArray(value)) {
     if (value.length === 0) {
       return [ placeholder, true ];
@@ -197,7 +197,7 @@ const getDropdownText = (value, placeholder) => {
       return [ value.map(({ label }) => label).join(', '), false ];
     }
 
-    return [ value.join(', '), false ];
+    return [ value.map(item => options.find(({ value }) => value === item).label).join(', '), false ];
   }
 
   if (typeof value === 'object') {
@@ -208,7 +208,7 @@ const getDropdownText = (value, placeholder) => {
     return [ placeholder, true ];
   }
 
-  return [ value, false ];
+  return [ options.find(option => option.value === value).label, false ];
 };
 
 class SearchInput extends Component {
@@ -217,12 +217,7 @@ class SearchInput extends Component {
     this.inputRef.current.focus();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log(prevProps, this.props);
-  }
-
   shouldComponentUpdate(nextProps) {
-
     return nextProps.value !== this.props.value;
   }
 
@@ -277,7 +272,7 @@ export class P3Select extends Component {
   render () {
     const { input, ...props } = this.props;
     const { isOpen } = this.state;
-    const [ title, isPlaceholder ] = getDropdownText(input.value, props.placeholder);
+    const [ title, isPlaceholder ] = getDropdownText(input.value, props.placeholder, props.options);
     if (props.isSearchable) {
       const searchableInput = {
         ...input,

@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import ReactSelect from 'react-select';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import isEqual from 'lodash/isEqual';
 
 const getSelectValue = (stateValue, simpleValue, isMulti, allOptions) => simpleValue
   ? allOptions.filter(({ value }) => isMulti
     ? stateValue.includes(value)
-    : value === stateValue)
+    : isEqual(value, stateValue))
   : stateValue;
 
 const handleSelectChange = (option, simpleValue, isMulti, onChange) => {
@@ -20,8 +21,10 @@ const handleSelectChange = (option, simpleValue, isMulti, onChange) => {
 
 class Select extends Component {
   render() {
-    const { input, invalid, classNamePrefix, options, simpleValue, isMulti, ...props } = this.props;
+    const { input, invalid, classNamePrefix, options, simpleValue, isMulti, pluckSingleValue, ...props } = this.props;
     const { value, onChange, ...inputProps } = input;
+
+    const selectValue = pluckSingleValue ? isMulti ? value : Array.isArray(value) && value[0] ? value[0] : value : value;
 
     return (
       <ReactSelect
@@ -33,7 +36,7 @@ class Select extends Component {
         classNamePrefix={ classNamePrefix }
         options={ options }
         isMulti={ isMulti }
-        value={ getSelectValue(value, simpleValue, isMulti, options) }
+        value={ getSelectValue(selectValue, simpleValue, isMulti, options) }
         onChange={ option => handleSelectChange(option, simpleValue, isMulti, onChange) }
       />
     );
@@ -47,12 +50,14 @@ Select.propTypes = {
   invalid: PropTypes.bool,
   simpleValue: PropTypes.bool,
   isMulti: PropTypes.bool,
+  pluckSingleValue: PropTypes.bool
 };
 
 Select.defaultProps = {
   options: [],
   invalid: false,
   simpleValue: true,
+  pluckSingleValue: true,
 };
 
 const DataDrivenSelect = ({ multi, ...props }) => {
