@@ -48,34 +48,29 @@ const convertType = (dataType, value) => ({
  */
 const checkEmpty = value => {
   if (typeof value === 'number') {
-    return value;
+    return false;
   }
 
   if (typeof value === 'string' && value.length > 0) {
-    return value;
+    return false;
   }
 
   if (!isEmpty(value)) {
-    return value;
+    return false;
   }
 
-  return undefined;
+  return true;
 };
 
 /**
  * Casts input value into selected data type
- * @param {FieldDataTypes} dataType intended data type of output value
- * @param {Function} onChange original function to be modified
- * @param {Any} initial initial value of field
- * @param {Any} value value to be type casted
- * @param  {...any} args rest of orininal function arguments
  */
-const enhancedOnChange = (dataType, onChange, initial, deletedValue, value, ...args) => {
+const enhancedOnChange = ({ dataType, onChange, initial, deletedValue, dirty, ...rest }, value, ...args) => {
   const sanitizedValue = sanitizeValue(value);
   const result = Array.isArray(sanitizedValue)
     ? sanitizedValue.map(item => convertType(dataType, sanitizeValue(item)))
     : convertType(dataType, sanitizedValue);
-  if (typeof checkEmpty(result) === 'undefined' && typeof initial !== 'undefined') {
+  if (checkEmpty(result) && typeof initial !== 'undefined') {
     return onChange(deletedValue, ...args);
   }
 
