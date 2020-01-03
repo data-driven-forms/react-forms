@@ -23,11 +23,11 @@ which adds additional methods that will help you to control your form state.
 # Accessing FieldProvider
 
 To use Fieldprovider, you first need to register a component to your component mapper.
-You can read more about that in <RouterNav href="/renderer/component-mapping"><Link>Component mapping</Link></RouterNav>.
+You can read more about that in <RouterNav href="/renderer/component-mapping"><Link href="/renderer/component-mapping">Component mapping</Link></RouterNav>.
 
 Each component will receive FieldProvider as a prop. Be aware that pre-defined component types are
 automatically wrapped in FieldProvider. This is done to make it easier to create component mappers for
-standard form components. List of standard components is available <RouterNav href="/renderer/component-api"><Link>here</Link></RouterNav>.
+standard form components. List of standard components is available <RouterNav href="/renderer/component-api"><Link href="/renderer/component-api">here</Link></RouterNav>.
 
 # Using FieldProvider
 

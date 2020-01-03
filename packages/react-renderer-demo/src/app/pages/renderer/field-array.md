@@ -10,7 +10,7 @@ import ListOfContents from '../../src/helpers/list-of-contents';
 
 # Field Array Provider
 
-Simillarly to <RouterLink href='/renderer/field-provider'><Link>FieldProvider</Link></RouterLink> Data driven forms provide an option how to inlude <a href='https://github.com/final-form/react-final-form-arrays'>React Final Form Arrays</a> in your form.
+Simillarly to <RouterLink href='/renderer/field-provider'><Link href='/renderer/field-provider'>FieldProvider</Link></RouterLink> Data driven forms provide an option how to inlude <a href='https://github.com/final-form/react-final-form-arrays'>React Final Form Arrays</a> in your form.
 
 <b>Please visit their documentation to learn about functionality.</b>
 
@@ -56,7 +56,7 @@ You don't need to name the nested components, then the values are saved as an ar
 
 # Validators
 
-You can use user a few provided validators (you can also use your <RouterLink href='/renderer/validators'><Link>own</Link></RouterLink>.)
+You can use user a few provided validators (you can also use your <RouterLink href='/renderer/validators'><Link href='/renderer/validators'>own</Link></RouterLink>.)
 
 ```jsx
 MIN_ITEMS_VALIDATOR: ({threshold})

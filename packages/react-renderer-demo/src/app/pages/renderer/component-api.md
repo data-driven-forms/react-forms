@@ -53,7 +53,7 @@ All those components provides a shared group of props:
 |isRequired|boolean|Is the field required?|
 |isDisabled|boolean|Is the field disabled?|
 |isReadOnly|boolean|Is the field readOnly?|
-|initialValue|custom|There are two ways how to set initial values in the form: you can use either the <RouterLink href="/renderer/renderer-api"><Link>initialValues</Link></RouterLink> prop for the whole form or you can set the value in the schema for each field separately. For more information, please see [here](https://final-form.org/docs/react-final-form/types/FieldProps#initialvalue).|
+|initialValue|custom|There are two ways how to set initial values in the form: you can use either the <RouterLink href="/renderer/renderer-api"><Link href="/renderer/renderer-api">initialValues</Link></RouterLink> prop for the whole form or you can set the value in the schema for each field separately. For more information, please see [here](https://final-form.org/docs/react-final-form/types/FieldProps#initialvalue).|
 
 ## Text field
 
