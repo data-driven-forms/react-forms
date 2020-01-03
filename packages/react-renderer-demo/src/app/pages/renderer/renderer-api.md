@@ -31,7 +31,7 @@ Form Renderer provides a lot of customization via props.
 |<RouterLink href="/renderer/form-controls"><Link>renderFormButtons</Link></RouterLink>|one of `[node, element, func]`|You can provide your own form buttons component. This component will receive all needed props.||
 |<RouterLink href="/renderer/unmounting"><Link>clearOnUnmount</Link></RouterLink>|bool|Will clear values of unmounted components. You can also set this to specific component in the form schema.|false|
 |canReset|bool|Show/hide reset button.|false|
-|<RouterLink href="/renderer/deleted-value"><Link>deletedValue</Link></RouterLink>|any|Value that will be set to field with **initialValue** after deleting it. Useful for forms while editing.|undefined|
+|<RouterLink href="/renderer/cleared-value"><Link>clearedValue</Link></RouterLink>|any|Value that will be set to field with **initialValue** after deleting it. Useful for forms while editing.|undefined|
 |onReset|func|A reset callback. You don't need to manually clear the form values!||
 |onCancel|func|A cancel callback, which receives `values` as the first argument.||
 |onStateUpdate|func|A function which will be called with every form update, i.e. `({ values }) => setValues(values)`||

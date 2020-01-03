@@ -33,9 +33,8 @@ class FieldProvider extends Component{
                 ...fieldsProps.meta,
                 dataType,
                 onChange,
-                deletedValue: this.props.formOptions.deletedValue,
+                clearedValue: this.props.formOptions.clearedValue,
               }, ...args);
-              // enhancedOnChange(dataType, onChange, fieldsProps.meta.initial, this.props.formOptions.deletedValue, ...args);
             },
           }}
         />
@@ -52,7 +51,7 @@ class FieldProvider extends Component{
               ...fieldsProps.meta,
               dataType,
               onChange,
-              deletedValue: this.props.formOptions.deletedValue,
+              clearedValue: this.props.formOptions.clearedValue,
             }, ...args),
         },
       }) } />;
@@ -70,7 +69,7 @@ class FieldProvider extends Component{
                   ...fieldsProps.meta,
                   dataType,
                   onChange,
-                  deletedValue: this.props.formOptions.deletedValue,
+                  clearedValue: this.props.formOptions.clearedValue,
                 }, ...args)  }}
             />
           ) }
@@ -84,7 +83,7 @@ FieldProvider.propTypes = {
     clearOnUnmount: PropTypes.bool,
     change: PropTypes.func,
     getFieldState: PropTypes.func,
-    deletedValue: PropTypes.any,
+    clearedValue: PropTypes.any,
   }),
   component: PropTypes.oneOfType(PropTypes.node, PropTypes.element, PropTypes.func),
   render: PropTypes.func,

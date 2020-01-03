@@ -27,7 +27,7 @@ const App = () => (
             initialValues={{
                 text_box_1: 'hue'
             }}
-            deletedValue={'bla'}
+            clearedValue={'bla'}
             layoutMapper={layoutMapper}
             formFieldsMapper={formFieldsMapper}
             onSubmit={console.log}

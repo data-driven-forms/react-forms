@@ -65,13 +65,13 @@ const checkEmpty = value => {
 /**
  * Casts input value into selected data type
  */
-const enhancedOnChange = ({ dataType, onChange, initial, deletedValue, dirty, ...rest }, value, ...args) => {
+const enhancedOnChange = ({ dataType, onChange, initial, clearedValue, dirty, ...rest }, value, ...args) => {
   const sanitizedValue = sanitizeValue(value);
   const result = Array.isArray(sanitizedValue)
     ? sanitizedValue.map(item => convertType(dataType, sanitizeValue(item)))
     : convertType(dataType, sanitizedValue);
   if (checkEmpty(result) && typeof initial !== 'undefined') {
-    return onChange(deletedValue, ...args);
+    return onChange(clearedValue, ...args);
   }
 
   return onChange(result, ...args);

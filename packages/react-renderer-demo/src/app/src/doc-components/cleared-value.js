@@ -23,7 +23,7 @@ const DataTypesExample = () => {
         initialValues={{
           'field-with-initial-value': 'Delete me!',
         }}
-        deletedValue={ null }
+        clearedValue={ null }
         layoutMapper={ layoutMapper }
         formFieldsMapper={ formFieldsMapper }
         schema={ schema }

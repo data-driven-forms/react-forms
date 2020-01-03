@@ -32,8 +32,8 @@ export const docs = [{
   component: 'data-types',
   linkText: 'Data types',
 }, {
-  component: 'deleted-value',
-  linkText: 'Empty field value',
+  component: 'cleared-value',
+  linkText: 'Cleared field value',
 }, {
   component: 'field-provider',
   linkText: 'Custom components',

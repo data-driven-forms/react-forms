@@ -24,6 +24,7 @@ exports[`FieldArray should render array field correctly 1`] = `
     buttonClassName=""
     buttonsLabels={Object {}}
     clearOnUnmount={false}
+    clearedValue="foo"
     disableSubmit={Array []}
     formFieldsMapper={
       Object {
@@ -135,8 +136,8 @@ exports[`FieldArray should render array field correctly 1`] = `
                     "blur": [Function],
                     "change": [Function],
                     "clearOnUnmount": false,
+                    "clearedValue": "foo",
                     "concat": [Function],
-                    "deletedValue": undefined,
                     "destroyOnUnregister": false,
                     "focus": [Function],
                     "getFieldState": [Function],
@@ -197,8 +198,8 @@ exports[`FieldArray should render array field correctly 1`] = `
                       "blur": [Function],
                       "change": [Function],
                       "clearOnUnmount": false,
+                      "clearedValue": "foo",
                       "concat": [Function],
-                      "deletedValue": undefined,
                       "destroyOnUnregister": false,
                       "focus": [Function],
                       "getFieldState": [Function],
@@ -253,8 +254,8 @@ exports[`FieldArray should render array field correctly 1`] = `
                         "blur": [Function],
                         "change": [Function],
                         "clearOnUnmount": false,
+                        "clearedValue": "foo",
                         "concat": [Function],
-                        "deletedValue": undefined,
                         "destroyOnUnregister": false,
                         "focus": [Function],
                         "getFieldState": [Function],
@@ -310,8 +311,8 @@ exports[`FieldArray should render array field correctly 1`] = `
                           "blur": [Function],
                           "change": [Function],
                           "clearOnUnmount": false,
+                          "clearedValue": "foo",
                           "concat": [Function],
-                          "deletedValue": undefined,
                           "destroyOnUnregister": false,
                           "focus": [Function],
                           "getFieldState": [Function],
@@ -404,8 +405,8 @@ exports[`FieldArray should render array field correctly 1`] = `
                             "blur": [Function],
                             "change": [Function],
                             "clearOnUnmount": false,
+                            "clearedValue": "foo",
                             "concat": [Function],
-                            "deletedValue": undefined,
                             "destroyOnUnregister": false,
                             "focus": [Function],
                             "getFieldState": [Function],
