@@ -177,7 +177,7 @@ condition: {
 
 ## Clearing values
 
-If you need to clear values after switching fields, please see <Link href="/renderer/unmounting"><a>here</a></Link>.
+If you need to clear values after switching fields, please see <Link href="/renderer/unmounting"><a href="/renderer/unmounting">here</a></Link>.
 
 </Grid>
 <Grid item xs={false} md={2}>
