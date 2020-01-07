@@ -12,11 +12,7 @@ const ClearIndicator = ({
 
 ClearIndicator.propTypes = {
   innerProps: PropTypes.object.isRequired,
-  clearValue: PropTypes.func,
-};
-
-ClearIndicator.defaultProps = {
-  clearValue: () => undefined,
+  clearValue: PropTypes.func.isRequired,
 };
 
 export default ClearIndicator;

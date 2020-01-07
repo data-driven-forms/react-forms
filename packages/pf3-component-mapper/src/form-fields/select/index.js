@@ -1,8 +1,9 @@
 import React, { Component, createRef, Fragment } from 'react';
 import isEqual from 'lodash/isEqual';
 import './react-select.scss';
+import PropTypes from 'prop-types';
 
-import NewSelect from '@data-driven-forms/common/src/select';
+import DataDrivenSelect from '@data-driven-forms/common/src/select';
 import { DropdownButton } from 'patternfly-react';
 import fnToString from '@data-driven-forms/common/src/utils/fn-to-string';
 import clsx from 'clsx';
@@ -10,6 +11,7 @@ import Option from './option';
 import DropdownIndicator from './dropdown-indicator';
 import ClearIndicator from './clear-indicator';
 import './react-select.scss';
+import { optionsPropType } from '@data-driven-forms/common/src/prop-types-templates';
 
 const getDropdownText = (value, placeholder, options) => {
   if (Array.isArray(value)) {
@@ -55,6 +57,10 @@ class SearchInput extends Component {
 
 }
 
+SearchInput.propTypes = {
+  value: PropTypes.any,
+};
+
 const SelectTitle = ({ title, classNamePrefix, isClearable, value, onClear, isFetching, isDisabled }) => (
   <Fragment>
     <span key="searchable-select-value-label" className={ `${classNamePrefix}-value` }>{ title }</span>
@@ -76,6 +82,16 @@ const SelectTitle = ({ title, classNamePrefix, isClearable, value, onClear, isFe
     ) }
   </Fragment>
 );
+
+SelectTitle.propTypes = {
+  title: PropTypes.string.isRequired,
+  classNamePrefix: PropTypes.string,
+  isClearable: PropTypes.bool,
+  value: PropTypes.any,
+  onClear: PropTypes.func,
+  isFetching: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+};
 
 class Select extends Component {  constructor(props){
   super(props);
@@ -171,7 +187,7 @@ class Select extends Component {  constructor(props){
             disabled={ props.isDisabled }
             noCaret
             open={ isOpen }
-            id={ props.id || props.input.name }
+            id={ props.id || input.name }
             title={ <SelectTitle
               isDisabled={ props.isDisabled }
               isFetching={ isFetching }
@@ -185,7 +201,7 @@ class Select extends Component {  constructor(props){
               'is-empty': isPlaceholder,
             }) }>
             { isOpen &&
-              <NewSelect
+              <DataDrivenSelect
                 isFetching={ isFetching }
                 input={ searchableInput }
                 { ...props }
@@ -216,7 +232,7 @@ class Select extends Component {  constructor(props){
     }
 
     return (
-      <NewSelect
+      <DataDrivenSelect
         { ...this.props }
         isFetching={ isFetching }
         options={ options }
@@ -235,6 +251,17 @@ class Select extends Component {  constructor(props){
 
 Select.defaultProps = {
   placeholder: 'Search...',
+};
+
+Select.propTypes = {
+  input: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    value: PropTypes.any,
+  }).isRequired,
+  classNamePrefix: PropTypes.string,
+  loadOptions: PropTypes.func,
+  options: optionsPropType,
 };
 
 export default Select;
