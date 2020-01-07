@@ -22,3 +22,267 @@ div.field-group {
   position: relative;
   width: 100%;
 }
+
+@keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.ddorg__pf3-component-mapper__select {
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  padding: 0;
+  border: 1px solid transparent;
+  border-color: rgb(187, 187, 187);
+  display: inline-flex;
+  min-width: 250px;
+  max-width: calc(100% - 2px);
+  &.has-error {
+    border: 1px solid;
+    border-color: #cc0000;
+  }
+  .ddorg__pf3-component-mapper__select__control {
+    border: none;
+    width: 100%;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    box-shadow: 0 2px 3px rgba(3, 3, 3, 0.1);
+    padding: 0;
+    min-height: initial;
+    background-color: #f1f1f1;
+    color: #4d5258;
+    background-image: linear-gradient(to bottom, #fafafa 0%, #ededed 100%);
+    background-repeat: repeat-x;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 12px;
+    border-radius: 1px;
+    font-weight: 600;
+    &:hover {
+      background-color: #f1f1f1;
+      background-image: none;
+      border-color: #bbbbbb;
+      color: #4d5258;
+    }
+    &.ddorg__pf3-component-mapper__select__control--menu-is-open {
+      box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+      background-color: #f1f1f1;
+      border-color: #bbb;
+      .ddorg__pf3-component-mapper__select__placeholder {
+        color: #4d5258;
+      }
+    }
+  }
+  .ddorg__pf3-component-mapper__select__menu {
+    background: #fff;
+    margin: 0;
+    margin-top: 1px;
+    border-radius: 0;
+    border-top: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .ddorg__pf3-component-mapper__select__option {
+    background-color: #ffffff;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 1px 0;
+    padding: 1px 10px;
+    font-weight: 400;
+    cursor: pointer;
+    display: flex;
+    >*:first-child {
+      flex-grow: 1;
+    }
+  }
+  .ddorg__pf3-component-mapper__select__option--is-focused {
+    color: #4d5258;
+    background-color: #edf8ff;
+  }
+  .ddorg__pf3-component-mapper__select__option--is-selected {
+    background-color: #0088ce;
+    border-color: #0088ce;
+    color: #fff;
+    >.selected-indicator {
+      flex-grow: 0;
+      align-self: center;
+    }
+  }
+  .ddorg__pf3-component-mapper__select__indicator-separator {
+    display: none;
+  }
+  .ddorg__pf3-component-mapper__select__indicators {
+    padding: 0;
+    padding-right: 6px;
+    &:hover {
+      color: rgb(77, 82, 88),
+    };
+  }
+  .ddorg__pf3-component-mapper__select__close-indicator {
+    margin-right: 4px;
+    padding: 0;
+    color: #4d5258;
+    background: none;
+    border: none;
+  }
+
+  .ddorg__pf3-component-mapper__select__multi-value {
+    background: none;
+    margin: 0;
+    margin-right: 2px;
+    min-width: unset;
+    .ddorg__pf3-component-mapper__select__multi-value__label {
+      &::after {
+        content: ","
+      }
+    }
+    &:last-of-type {
+      .ddorg__pf3-component-mapper__select__multi-value__label {
+        &::after {
+          content: ""
+        }
+      }
+    }
+    .ddorg__pf3-component-mapper__select__multi-value__label {
+      padding: 0;
+      font-size: inherit;
+    }
+    .ddorg__pf3-component-mapper__select__multi-value__remove {
+      display: none
+    }
+  }
+  .ddorg__pf3-component-mapper__select__value-container--is-multi {
+    flex-wrap: nowrap;
+  }
+  .ddorg__pf3-component-mapper__select__value-container {
+    margin-right: 8px;
+    height: 24px;
+  }
+  .ddorg__pf3-component-mapper__select__single-value {
+    font-size: 12px;
+    margin-left: 0;
+    font-weight: 600;
+    color: rgb(54, 54, 54);
+    max-width: 100%;
+    position: relative;
+  }
+  .ddorg__pf3-component-mapper__select__placeholder {
+    padding: 0;
+    position: relative;
+    color: rgb(153, 153, 153);
+  }
+  &.sercheable {
+    border: none;
+    .ddorg__pf3-component-mapper__select__control {
+      box-shadow: none;
+      background: unset;
+      background-color: transparent;
+    }
+    .ddorg__pf3-component-mapper__select__input {
+      border: 1px solid red;
+      width: 100%;
+    }
+    .ddorg__pf3-component-mapper__select__value-container {
+      display: flex;
+      margin-right: 0;
+      width: calc(100% - 2px);
+      background-color: transparent;
+      height: unset;
+      >* {
+        flex: 1
+      }
+    }
+    .ddorg__pf3-component-mapper__select__indicators {
+      display: none;
+    }
+    .ddorg__pf3-component-mapper__select__menu {
+      margin: 0;
+      border: 1px solid #ddd;
+      border-top: none;
+      box-shadow: none;
+    }
+    .ddorg__pf3-component-mapper__select__menu {
+      left: -1px;
+      box-sizing: content-box;
+    }
+    input {
+      border: 1px solid #bbb;
+      &:focus {
+        border-color: #0088ce;
+        outline: 0;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 136, 206, 0.6);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 136, 206, 0.6);
+      }
+    }
+  }
+  &.ddorg__pf3-component-mapper__select--is-disabled {
+    cursor: not-allowed;
+    pointer-events: unset;
+    border-color: #d1d1d1;
+    * {
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+    .ddorg__pf3-component-mapper__select__control {
+      background-color: #fafafa;
+      background-image: none ;
+      border-color: #d1d1d1;
+      color: #8b8d8f;
+      opacity: 1;
+      box-shadow: none;
+    }
+  }
+}
+.ddorg__pf3-component-mapper__select-dropdown {
+  &.is-empty {
+    color: rgb(153, 153, 153)
+  };
+  min-width: 250px;
+  max-width: calc(100% - 2px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ddorg__pf3-component-mapper__select-button {
+  .ddorg__pf3-component-mapper__select-searchebale-clear {
+    margin-right: 4px;
+  }
+  .ddorg__pf3-component-mapper__select {
+    max-width: unset;
+    width: 100%;
+    min-width: 248px;
+  }
+  .dropdown {
+    max-width: 100%;
+    >button {
+      max-width: 100%;
+      display: flex;
+      .ddorg__pf3-component-mapper__select-value {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: 4px;
+        text-align: initial;
+      }
+    }
+  }
+  .dropdown-menu {
+    width: 100%;
+    border-bottom: none;
+    border-color: #ddd;
+  }
+}
+
+.ddorg__pf3-component-mapper__select__dropdown-indicator {
+  &.spin {
+    animation: rotate 1.1s infinite linear;
+  }
+  &.placeholder {
+    color: rgb(153, 153, 153);
+  }
+}

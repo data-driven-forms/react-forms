@@ -10,23 +10,111 @@ import wizardSchema from './demo-schemas/wizard-schema';
 import sandbox from './demo-schemas/sandbox';
 import Switch from "../src/form-fields/switch-field";
 
+const loadOptions = () => new Promise((res) => {
+  setTimeout(() => {
+    fetch('https://dog.ceo/api/breeds/list/all')
+      .then(data => data.json())
+      .then(({ message: { bulldog } }) => bulldog.map(dog => ({ label: dog, value: dog })))
+      .then(data => res(data))
+  }, 250)
+}) 
+
+const selectSchema = {
+  fields: [{
+    component: 'select-field',
+    name: 'async-single',
+    label: 'Async single',
+    multi: true,
+    loadOptions
+  },{
+    component: 'select-field',
+    name: 'async-single-search',
+    label: 'Async single search',
+    isSearchable: true,
+    loadOptions
+  }, {
+    component: 'select-field',
+    name: 'async-multi-search',
+    label: 'Async multi search',
+    isSearchable: true,
+    multi: true,
+    loadOptions
+  }, {
+    component: 'select-field',
+    name: 'select-single',
+    label: 'Select single',
+    isDisabled: true,
+    options: [{
+      label: 'foo',
+      value: 123
+    }, {
+      label: 'bar',
+      value: 231
+    }]
+  }, {
+    component: 'select-field',
+    name: 'select-search',
+    label: 'Select search',
+    isRequired: true,
+    validateOnMount: true,
+    isDisabled: true,
+    isClearable: true,
+    multi: true,
+    isSearchable: true,
+    placeholder: 'Placeholder',
+    validate: [{
+      type: 'required-validator'
+    }],
+    options: [{
+      label: 'foo',
+      value: 123
+    }, {
+      label: 'bar',
+      value: 231
+    }, {
+      label: 'Super long option label, Super long option label, Super long option label, Super long option label, Super long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option label',
+      value: 'x'
+    }]
+  }, {
+    component: 'select-field',
+    name: 'select',
+    label: 'Select',
+    isRequired: true,
+    validateOnMount: true,
+    isClearable: true,
+    multi: false,
+    isSearchable: true,
+    placeholder: 'Placeholder',
+    validate: [{
+      type: 'required-validator'
+    }],
+    options: [{
+      label: 'foo',
+      value: 123
+    }, {
+      label: 'bar',
+      value: 231
+    }, {
+      label: 'Super long option label, Super long option label, Super long option label, Super long option label, Super long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option labelSuper long option label, Super long option label',
+      value: 'x'
+    }]
+  }]
+}
+
 class App extends React.Component {
   render() {
-    const initialValues = {
-      date_control_1: new Date()
-    }
     return (
     <div>
       <h1>Pf3 component mapper</h1>
       <Grid>
         <Row>
           <FormRenderer
-            initialValues={initialValues}
+            initialValues={{}}
             onSubmit={console.log}
             schemaType="default"
             formFieldsMapper={formFieldsMapper}
             layoutMapper={layoutMapper}
-            schema={sandbox}
+            schema={selectSchema}
             onCancel={() => console.log('cancel')}
           />
         </Row>

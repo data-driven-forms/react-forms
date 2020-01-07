@@ -4,8 +4,7 @@
   "description": "Common components, helpers and other pieces of code",
   "license": "Apache-2.0",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": "git@github.com:data-driven-forms/react-forms.git",
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -47,7 +46,10 @@
     "webpack-merge": "^4.1.4"
   },
   "dependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.1.0"
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "clsx": "^1.0.4",
+    "lodash": "^4.17.15",
+    "react-select": "^3.0.8"
   },
   "peerDependencies": {
     "react": "^16.6.0",

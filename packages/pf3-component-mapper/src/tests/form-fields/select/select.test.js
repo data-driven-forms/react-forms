@@ -1,11 +1,12 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import { SelectField } from '../../form-fields/form-fields';
-import SelectPF3 from '../../form-fields/select/index';
 import { mount } from 'enzyme';
-import Select from 'react-select';
 import isEqual from 'lodash/isEqual';
-import ReactSelect, { components } from 'react-select';
+import ReactSelect from 'react-select';
+import { DropdownButton } from 'patternfly-react';
+import DataDrivenSelect from '@data-driven-forms/common/src/select';
+
+import SelectField from '../../../form-fields/select';
 
 describe('<SelectField />', () => {
   let initialProps;
@@ -13,6 +14,7 @@ describe('<SelectField />', () => {
 
   beforeEach(() => {
     initialProps = {
+      classNamePrefix: 'pf3-select',
       input: {
         name: 'select-input',
         onChange: changeSpy,
@@ -56,14 +58,14 @@ describe('<SelectField />', () => {
 
     setImmediate(() => {
       wrapper.update();
-      expect(wrapper.find(SelectPF3).first().instance().state.options).toEqual([{ label: 'asyncLabel' }]);
+      expect(wrapper.find(SelectField).first().instance().state.options).toEqual([{ label: 'asyncLabel' }]);
       done();
     });
   });
 
   it('should call on change with correct value on single select', () => {
     const wrapper = mount(<SelectField { ...initialProps } />);
-    wrapper.find(Select).instance().props.onChange({
+    wrapper.find(ReactSelect).instance().props.onChange({
       value: 2,
     });
     expect(changeSpy).toHaveBeenCalledWith(2);
@@ -80,7 +82,7 @@ describe('<SelectField />', () => {
           value: [],
         }}
       />);
-    wrapper.find(Select).instance().props.onChange(
+    wrapper.find(ReactSelect).instance().props.onChange(
       [{ value: 2, label: 'x' }, { value: 1, label: 'a' }],
     );
     expect(changeSpy).toHaveBeenCalledWith([ 2, 1 ]);
@@ -99,15 +101,15 @@ describe('<SelectField />', () => {
     it('should change the options when options prop is changed', () => {
       const wrapper = mount(<SelectField { ...initialProps } />);
 
-      let innerSelectProps = wrapper.find(Select).props().options;
+      let innerSelectProps = wrapper.find(ReactSelect).props().options;
 
       expect(isEqual(innerSelectProps, initialProps.options)).toEqual(true);
 
       wrapper.setProps({ options: NEW_OPTIONS });
       wrapper.update();
-      innerSelectProps = wrapper.find(Select).props().options;
+      innerSelectProps = wrapper.find(ReactSelect).props().options;
 
-      expect(isEqual(innerSelectProps, NEW_OPTIONS)).toEqual(true);
+      expect(innerSelectProps).toEqual(NEW_OPTIONS);
     });
 
     it('should change the options when loadOptions prop is changed', (done) => {
@@ -115,7 +117,7 @@ describe('<SelectField />', () => {
 
       setImmediate(() => {
         wrapper.update();
-        let innerSelectProps = wrapper.find(Select).props().options;
+        let innerSelectProps = wrapper.find(ReactSelect).props().options;
 
         expect(isEqual(innerSelectProps, initialProps.options)).toEqual(true);
 
@@ -123,7 +125,7 @@ describe('<SelectField />', () => {
 
         setImmediate(() => {
           wrapper.update();
-          innerSelectProps = wrapper.find(Select).props().options;
+          innerSelectProps = wrapper.find(ReactSelect).props().options;
 
           expect(isEqual(innerSelectProps, NEW_OPTIONS)).toEqual(true);
           done();
@@ -197,6 +199,66 @@ describe('<SelectField />', () => {
         pluckSingleValue={ false }
       />);
       expect(wrapper.find(ReactSelect).instance().state.value).toEqual([{ label: 'array options', value: [ 2 ]}]);
+    });
+
+    describe('searcheable', () => {
+      let isSearchableProps;
+      beforeEach(() => {
+        isSearchableProps = {
+          ...initialProps,
+          input: {
+            name: 'searchable',
+            onChange: jest.fn(),
+          },
+          meta: {},
+          isSearchable: true,
+          placeholder: 'searchable',
+        };
+      });
+      it('should componse isSearchable variant correctly', () => {
+        const wrapper = mount(<SelectField { ...isSearchableProps }/>);
+        expect(wrapper.find(DropdownButton)).toHaveLength(1);
+      });
+
+      it('should correctly assign dropdown text', () => {
+        const wrapper = mount(<SelectField { ...isSearchableProps } input={{ ...isSearchableProps.input, value: 1 }}/>);
+        expect(wrapper.find(`span.${initialProps.classNamePrefix}-value`).text()).toEqual('option 1');
+
+        wrapper.setProps({ input: { ...isSearchableProps, value: { label: 'Foo', value: 'Foo' }}});
+        expect(wrapper.find(`span.${initialProps.classNamePrefix}-value`).text()).toEqual('Foo');
+
+        wrapper.setProps({ input: { ...isSearchableProps, value: [ 1, 2 ]}});
+        expect(wrapper.find(`span.${initialProps.classNamePrefix}-value`).text()).toEqual('option 1, option 2');
+
+        wrapper.setProps({ input: { ...isSearchableProps, value: isSearchableProps.options }});
+        expect(wrapper.find(`span.${initialProps.classNamePrefix}-value`).text()).toEqual('option 1, option 2');
+
+        wrapper.setProps({ input: { ...isSearchableProps, value: undefined }});
+        expect(wrapper.find(`span.${initialProps.classNamePrefix}-value`).text()).toEqual('searchable');
+
+        wrapper.setProps({ input: { ...isSearchableProps, value: []}});
+        expect(wrapper.find(`span.${initialProps.classNamePrefix}-value`).text()).toEqual('searchable');
+      });
+
+      it('should open dropdown search in options', () => {
+        const wrapper = mount(<SelectField { ...isSearchableProps }/>);
+        wrapper.find('button#searchable').simulate('click');
+        wrapper.update();
+        expect(wrapper.find(DataDrivenSelect)).toHaveLength(1);
+        expect(wrapper.find('.ddorg__pf3-component-mapper__select__option')).toHaveLength(2);
+        const input = wrapper.find('input.form-control');
+        input.getDOMNode().value = '1',
+        input.simulate('change');
+        wrapper.update();
+        expect(wrapper.find('.ddorg__pf3-component-mapper__select__option')).toHaveLength(1);
+      });
+
+      it('should clear the select value', () => {
+        const onChange = jest.fn();
+        const wrapper = mount(<SelectField { ...isSearchableProps } isClearable input={{...isSearchableProps, value: 1, onChange }}/>);
+        wrapper.find(`div.${initialProps.classNamePrefix}-searchebale-clear`).simulate('click');
+        expect(onChange).toHaveBeenCalledWith(undefined);
+      });
     });
   });
 });

@@ -7,9 +7,10 @@ import MultipleChoiceList from './multiple-choice-list';
 import RequiredLabel from './required-label';
 import Switch from './switch-field';
 import { DateTimePicker } from './date-time-picker/date-time-picker';
-import Select from './select';
+
 import RagioGroup from './radio';
 import PlainText from './plain-text';
+import Select from './select';
 
 const selectComponent = ({
   componentType,
@@ -51,9 +52,10 @@ const selectComponent = ({
   ),
   [componentTypes.SELECT_COMPONENT]: () => <div>
     <Select
+      classNamePrefix="ddorg__pf3-component-mapper__select"
       loadOptions={ loadOptions }
       options={ options }
-      invalid={ invalid }
+      invalid={ !!invalid }
       input={ input }
       placeholder={ placeholder }
       isSearchable={ isSearchable }

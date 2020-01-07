@@ -88,8 +88,9 @@
     ]
   },
   "dependencies": {
+    "clsx": "^1.0.4",
     "react-day-picker": "^7.3.2",
-    "react-select": "^2.1.2"
+    "react-select": "^3.0.8"
   },
   "resolutions": {
     "terser": "3.14.1"
