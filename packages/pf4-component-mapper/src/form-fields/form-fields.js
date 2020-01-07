@@ -40,7 +40,7 @@ const selectComponent = ({
   ),
   [componentTypes.TEXTAREA_FIELD]: () => <TextArea disabled={ isDisabled || isReadOnly } { ...input } { ...rest } />,
   [componentTypes.SELECT_COMPONENT]: () => (
-    <Select { ...input } { ...rest } options={ options } isDisabled={ isDisabled || isReadOnly } />
+    <Select input={ input } { ...rest } options={ options } isDisabled={ isDisabled || isReadOnly } />
   ),
   [componentTypes.CHECKBOX]: () =>
     <Checkbox

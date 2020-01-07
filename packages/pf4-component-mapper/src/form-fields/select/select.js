@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactSelect from 'react-select';
-import CreatableSelect from 'react-select/creatable';
+import DataDrivenSelect from '@data-driven-forms/common/src/select';
 
 import MultiValueContainer from './multi-value-container';
 import ValueContainer from './value-container';
@@ -11,10 +10,6 @@ import ClearIndicator from './clear-indicator';
 import Option from './option';
 
 import './select-styles.scss';
-
-const selectProvider = type => ({
-  createable: CreatableSelect,
-})[type] || ReactSelect;
 
 export class Select extends React.Component {
   isMounted = true;
@@ -68,25 +63,12 @@ export class Select extends React.Component {
     : () => this.props.noOptionsMessage;
 
   render() {
-    const { selectVariant, loadOptions, loadingMessage, noOptionsMessage, menuIsPortal, ... props } = this.props;
+    const { loadOptions, loadingMessage, noOptionsMessage, ...props } = this.props;
     const { isLoading, allOptions } = this.state;
-    const Select = selectProvider(selectVariant);
-    const isSearchable = selectVariant === 'createable' || props.isSearchable;
-    const simpleValue = selectVariant === 'createable' ? false : props.simpleValue;
-    if (isLoading){
-      return (<Select
-        className="ddorg__pf4-component-mapper__select"
-        classNamePrefix="ddorg__pf4-component-mapper__select"
-        isDisabled={ true }
-        placeholder={ loadingMessage }
-        options={ allOptions }
-      />);
-    }
-
-    const menuPortalTarget = menuIsPortal ? document.body : undefined;
 
     return (
-      <Select
+      <DataDrivenSelect
+        { ...props }
         menuPlacement="auto"
         components={{
           MultiValueContainer,
@@ -96,12 +78,10 @@ export class Select extends React.Component {
           ClearIndicator,
           Option,
         }}
-        isFetching={ Object.values(this.state.promises).some(value => value) }
+        isFetching={ Object.values(this.state.promises).some(value => value) || isLoading }
         noOptionsMessage={ this.renderNoOptionsMessage() }
         onInputChange={ this.onInputChange }
-        menuPortalTarget={ menuPortalTarget }
-        { ...props }
-        className={ `ddorg__pf4-component-mapper__select${props.isMulti ? ' multi-select' : ' single-select'}` }
+        className={ `ddorg__pf4-component-mapper__select${(props.isMulti || props.multi) ? ' multi-select' : ' single-select'}` }
         classNamePrefix="ddorg__pf4-component-mapper__select"
         styles={{
           menuPortal: provided => ({
@@ -109,15 +89,6 @@ export class Select extends React.Component {
             'z-index': 'initial',
           }),
         }}
-        onChange={ (option) => {
-          const o =  !option && props.isMulti ? [] : option;
-          return simpleValue
-            ? props.onChange(props.isMulti
-              ? o.map(item => item.value)
-              : o ? o.value : undefined)
-            : props.onChange(o);} }
-        value={ simpleValue ? allOptions.filter(({ value }) => props.isMulti ? props.value.includes(value) : value === props.value) : props.value }
-        isSearchable={ isSearchable }
         options={ allOptions }
       />
     );
@@ -125,56 +96,26 @@ export class Select extends React.Component {
 }
 
 Select.propTypes = {
-  selectVariant: PropTypes.oneOf([ 'default', 'createable' ]),
-  isSearchable: PropTypes.bool,
-  showMoreLabel: PropTypes.string,
-  showLessLabel: PropTypes.string,
-  simpleValue: PropTypes.bool,
   value: PropTypes.any,
   options: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.any,
     label: PropTypes.any,
   })),
-  onChange: PropTypes.func.isRequired,
+  input: PropTypes.shape({
+    onChange: PropTypes.func.isRequired,
+  }),
   isMulti: PropTypes.bool,
   loadOptions: PropTypes.func,
   loadingMessage: PropTypes.node,
   updatingMessage: PropTypes.node,
   noOptionsMessage: PropTypes.func,
-  menuIsPortal: PropTypes.bool,
 };
 
 Select.defaultProps = {
-  selectVariant: 'default',
-  showMoreLabel: 'more',
-  showLessLabel: 'Show less',
-  simpleValue: true,
   loadingMessage: 'Loading...',
   updatingMessage: 'Loading data...',
   options: [],
   menuIsPortal: false,
 };
 
-const DataDrivenSelect = ({ multi, ...props }) => (
-  <Select
-    hideSelectedOptions={ false }
-    isMulti={ multi }
-    { ...props }
-    closeMenuOnSelect={ !multi }
-  />
-);
-
-DataDrivenSelect.propTypes = {
-  value: PropTypes.any,
-  onChange: PropTypes.func,
-  multi: PropTypes.bool,
-  placeholder: PropTypes.string,
-};
-
-DataDrivenSelect.defaultProps = {
-  placeholder: 'Choose...',
-  isSearchable: false,
-  isClearable: false,
-};
-
-export default DataDrivenSelect;
+export default Select;

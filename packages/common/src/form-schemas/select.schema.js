@@ -4,7 +4,7 @@ const loadOptions = () => new Promise((res) => {
     .then(data => data.json())
     .then(({ message: { bulldog }}) => bulldog.map(dog => ({ label: dog, value: dog })))
     .then(data => res(data));
-  }, 250);
+  }, 1000);
 });
 
 const selectSchema = {
@@ -50,6 +50,7 @@ const selectSchema = {
     multi: true,
     isSearchable: true,
     placeholder: 'Placeholder',
+    initialValue: [ 123 ],
     validate: [{
       type: 'required-validator',
     }],
