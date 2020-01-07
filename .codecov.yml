@@ -23,3 +23,4 @@ parsers:
 
 ignore: 
   - "packages/react-renderer-demo"
+  - "**/*.schema.js"
