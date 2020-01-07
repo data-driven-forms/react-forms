@@ -21,9 +21,11 @@ class FieldProvider extends Component{
 
   render(){
     const { clearOnUnmount, component, render, dataType, children, ...props } = this.props;
+    const fieldClearedValue = props.hasOwnProperty('clearedValue') ? props.clearedValue : props.formOptions.clearedValue;
+    const { clearedValue, ...fieldProps } = props;
     if (component) {
       const FieldComponent = component;
-      return <Field { ...props } render={ ({ input: { onChange, ...input }, ...fieldsProps }) => (
+      return <Field { ...fieldProps } render={ ({ input: { onChange, ...input }, ...fieldsProps }) => (
         <FieldComponent
           { ...fieldsProps }
           input={{
@@ -33,7 +35,7 @@ class FieldProvider extends Component{
                 ...fieldsProps.meta,
                 dataType,
                 onChange,
-                clearedValue: this.props.formOptions.clearedValue,
+                clearedValue: fieldClearedValue,
               }, ...args);
             },
           }}
@@ -42,7 +44,7 @@ class FieldProvider extends Component{
     }
 
     if (render) {
-      return <Field { ...props } render={ ({ input: { onChange, ...input }, ...fieldsProps }) => render({
+      return <Field { ...fieldProps } render={ ({ input: { onChange, ...input }, ...fieldsProps }) => render({
         ...fieldsProps,
         input: {
           ...input,
@@ -51,7 +53,7 @@ class FieldProvider extends Component{
               ...fieldsProps.meta,
               dataType,
               onChange,
-              clearedValue: this.props.formOptions.clearedValue,
+              clearedValue: fieldClearedValue,
             }, ...args),
         },
       }) } />;
@@ -59,7 +61,7 @@ class FieldProvider extends Component{
 
     const ChildComponent = children;
     return (
-      <Field { ...props }>
+      <Field { ...fieldProps }>
         { ({ input: { onChange, ...input }, ...fieldsProps }) =>
           Children.only(
             <ChildComponent
@@ -69,7 +71,7 @@ class FieldProvider extends Component{
                   ...fieldsProps.meta,
                   dataType,
                   onChange,
-                  clearedValue: this.props.formOptions.clearedValue,
+                  clearedValue: fieldClearedValue,
                 }, ...args)  }}
             />
           ) }

@@ -34,7 +34,7 @@ describe('#enhancedOnChange', () => {
     expect(enhancedOnChange({ dataType: 'integer', onChange: value => value, clearedValue }, value)).toEqual([ 1, 2, 3 ]);
   });
 
-  describe('#setting delete value', () => {
+  describe('#setting cleared value', () => {
     it('should not set any delete value after sending empty value', () => {
       const value = undefined;
       expect(enhancedOnChange({ onChange: value => value, clearedValue }, value)).toEqual(undefined);

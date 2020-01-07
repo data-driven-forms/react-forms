@@ -25,7 +25,8 @@ const App = () => (
     <div style={{ padding: 20 }}>
         <FormRenderer
             initialValues={{
-                text_box_1: 'hue'
+                text_box_1: 'hue',
+                text_box_3: 'initial'
             }}
             clearedValue={'bla'}
             layoutMapper={layoutMapper}
