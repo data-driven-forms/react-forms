@@ -36,6 +36,7 @@ const output = {
       label: 'Text Box 3',
       isRequired: true,
       component: components.TEXT_FIELD,
+      clearedValue: 'override',
       validate: [
         { type: validators.MIN_LENGTH, treshold: 12, message: 'bar' },
       ],

@@ -1,3 +1,4 @@
+import isEmpty from 'lodash/isEmpty';
 import { dataTypes } from '../constants';
 
 /**
@@ -41,18 +42,39 @@ const convertType = (dataType, value) => ({
 })[dataType] || value;
 
 /**
- * Casts input value into selected data type
- * @param {FieldDataTypes} dataType intended data type of output value
- * @param {Function} onChange original function to be modified
- * @param {Any} value value to be type casted
- * @param  {...any} args rest of orininal function arguments
+ * Checks the value and returns undefined if its empty. Converst epmtry strings, arrays and objects.
+ * If value is empty its overriden to undefined for further processing.
+ * @param {Any} value Any JS variable to be check if is empty
  */
-const enhancedOnChange = (dataType, onChange, value, ...args) => {
+const checkEmpty = value => {
+  if (typeof value === 'number') {
+    return false;
+  }
+
+  if (typeof value === 'string' && value.length > 0) {
+    return false;
+  }
+
+  if (!isEmpty(value)) {
+    return false;
+  }
+
+  return true;
+};
+
+/**
+ * Casts input value into selected data type
+ */
+const enhancedOnChange = ({ dataType, onChange, initial, clearedValue, dirty, ...rest }, value, ...args) => {
   const sanitizedValue = sanitizeValue(value);
-  return onChange(
-    Array.isArray(sanitizedValue)
-      ? sanitizedValue.map(item => convertType(dataType, sanitizeValue(item)))
-      : convertType(dataType, sanitizedValue),
-    ...args);};
+  const result = Array.isArray(sanitizedValue)
+    ? sanitizedValue.map(item => convertType(dataType, sanitizeValue(item)))
+    : convertType(dataType, sanitizedValue);
+  if (checkEmpty(result) && typeof initial !== 'undefined') {
+    return onChange(clearedValue, ...args);
+  }
+
+  return onChange(result, ...args);
+};
 
 export default enhancedOnChange;

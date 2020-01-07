@@ -21,37 +21,58 @@ class FieldProvider extends Component{
 
   render(){
     const { clearOnUnmount, component, render, dataType, children, ...props } = this.props;
+    const fieldClearedValue = props.hasOwnProperty('clearedValue') ? props.clearedValue : props.formOptions.clearedValue;
+    const { clearedValue, ...fieldProps } = props;
     if (component) {
       const FieldComponent = component;
-      return <Field { ...props } render={ ({ input: { onChange, ...input }, ...fieldsProps }) => (
+      return <Field { ...fieldProps } render={ ({ input: { onChange, ...input }, ...fieldsProps }) => (
         <FieldComponent
           { ...fieldsProps }
           input={{
             ...input,
-            onChange: (...args) => enhancedOnChange(dataType, onChange, ...args),
+            onChange: (...args) => {
+              enhancedOnChange({
+                ...fieldsProps.meta,
+                dataType,
+                onChange,
+                clearedValue: fieldClearedValue,
+              }, ...args);
+            },
           }}
         />
       ) } />;
     }
 
     if (render) {
-      return <Field { ...props } render={ ({ input: { onChange, ...input }, ...fieldsProps }) => render({
+      return <Field { ...fieldProps } render={ ({ input: { onChange, ...input }, ...fieldsProps }) => render({
         ...fieldsProps,
         input: {
           ...input,
-          onChange: (...args) => enhancedOnChange(dataType, onChange, ...args),
+          onChange: (...args) =>
+            enhancedOnChange({
+              ...fieldsProps.meta,
+              dataType,
+              onChange,
+              clearedValue: fieldClearedValue,
+            }, ...args),
         },
       }) } />;
     }
 
     const ChildComponent = children;
     return (
-      <Field { ...props }>
+      <Field { ...fieldProps }>
         { ({ input: { onChange, ...input }, ...fieldsProps }) =>
           Children.only(
             <ChildComponent
               { ...fieldsProps }
-              input={{ ...input, onChange: (...args) => enhancedOnChange(dataType, onChange, ...args)  }}
+              input={{ ...input, onChange: (...args) =>
+                enhancedOnChange({
+                  ...fieldsProps.meta,
+                  dataType,
+                  onChange,
+                  clearedValue: fieldClearedValue,
+                }, ...args)  }}
             />
           ) }
       </Field>
@@ -64,6 +85,7 @@ FieldProvider.propTypes = {
     clearOnUnmount: PropTypes.bool,
     change: PropTypes.func,
     getFieldState: PropTypes.func,
+    clearedValue: PropTypes.any,
   }),
   component: PropTypes.oneOfType(PropTypes.node, PropTypes.element, PropTypes.func),
   render: PropTypes.func,

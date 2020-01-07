@@ -42,6 +42,7 @@ const FormRenderer = ({
   onStateUpdate,
   renderFormButtons,
   subscription,
+  clearedValue,
 }) => {
   const inputSchema = schemaMapper(schemaType)(schema, uiSchema);
   let schemaError;
@@ -80,6 +81,7 @@ const FormRenderer = ({
             onCancel,
             getState,
             valid,
+            clearedValue,
             submit,
             handleSubmit,
             reset,
@@ -139,6 +141,7 @@ FormRenderer.propTypes = {
   onStateUpdate: PropTypes.func,
   renderFormButtons: PropTypes.oneOfType([ PropTypes.node, PropTypes.element, PropTypes.func ]),
   subscription: PropTypes.shape({ [PropTypes.string]: PropTypes.bool }),
+  clearedValue: PropTypes.any,
 };
 
 FormRenderer.defaultProps = {
