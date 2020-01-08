@@ -2,6 +2,7 @@ import React from 'react';
 import WizardStep from './wizard-step';
 import PropTypes from 'prop-types';
 import { Wizard as PfWizard, Modal, Icon } from 'patternfly-react';
+import handleEnter from '@data-driven-forms/common/src/wizard/enter-handler';
 
 const defaultButtonLabels = {
   cancel: 'Cancel',
@@ -51,7 +52,8 @@ class Wizard extends React.Component {
     };
 
     return (
-      <React.Fragment>
+      <div
+        onKeyDown={ e => handleEnter(e, formOptions, this.state.activeStep, this.findCurrentStep, this.handleNext, handleSubmit) }>
         { title && <Modal.Header>
           { inModal &&  <button className="close" onClick={ formOptions.onCancel } aria-hidden="true" aria-label="Close">
             <Icon type="pf" name="close" />
@@ -71,7 +73,7 @@ class Wizard extends React.Component {
           }}
           FieldProvider={ FieldProvider }
         />
-      </React.Fragment>
+      </div>
     );
   }
 }
