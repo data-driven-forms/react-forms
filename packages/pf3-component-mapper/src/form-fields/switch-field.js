@@ -56,9 +56,13 @@ class Switch extends React.Component {
           tabIndex={ disabled || isReadOnly ? -1 : 0 }
           onKeyDown={ (e) => {
             const SPACEBAR_CODE = 32;
+            const ENTER_CODE = 13;
             if (e.keyCode === SPACEBAR_CODE) {
               e.preventDefault();
               props.onChange({ target: { checked: !props.checked }});
+            } else if (e.keyCode === ENTER_CODE) {
+              e.preventDefault();
+              props.formOptions.handleSubmit();
             }
           } }
         >
