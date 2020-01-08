@@ -53,6 +53,14 @@ class Switch extends React.Component {
         <label
           className={ `pf3-switch${disabled || isReadOnly ? ' disabled' : ''}${bsSize === 'mini' || bsSize === 'mn' ? ' mini' : ''}` }
           style={{ width: this.state.labelWidth + DIVIDER_SIZE + COMBINED_MARGIN }}
+          tabIndex={ disabled || isReadOnly ? -1 : 0 }
+          onKeyDown={ (e) => {
+            const SPACEBAR_CODE = 32;
+            if (e.keyCode === SPACEBAR_CODE) {
+              e.preventDefault();
+              props.onChange({ target: { checked: !props.checked }});
+            }
+          } }
         >
           <input type="checkbox" { ...props } disabled={ disabled || isReadOnly } />
           <span className={ `pf3-switch-slider${props.checked ? ' checked' : ''}` }>
