@@ -108,10 +108,13 @@ exports[`FieldArray should render array field correctly 1`] = `
         }
       }
     >
-      <Form>
+      <Form
+        onSubmit={[Function]}
+      >
         <form
           className="pf-c-form"
           noValidate={true}
+          onSubmit={[Function]}
         >
           <FormConditionWrapper>
             <FormFieldHideWrapper
@@ -668,12 +671,12 @@ exports[`FieldArray should render array field correctly 1`] = `
                           key="form-submit"
                           label="Submit"
                           onClick={[Function]}
-                          type="button"
+                          type="submit"
                           variant="primary"
                         >
                           <Component
                             onClick={[Function]}
-                            type="button"
+                            type="submit"
                             variant="primary"
                           >
                             <ComponentWithOuia
@@ -686,7 +689,7 @@ exports[`FieldArray should render array field correctly 1`] = `
                                   ],
                                   "isDisabled": undefined,
                                   "onClick": [Function],
-                                  "type": "button",
+                                  "type": "submit",
                                   "variant": "primary",
                                 }
                               }
@@ -700,7 +703,7 @@ exports[`FieldArray should render array field correctly 1`] = `
                                     "ouiaId": null,
                                   }
                                 }
-                                type="button"
+                                type="submit"
                                 variant="primary"
                               >
                                 <button
@@ -710,7 +713,7 @@ exports[`FieldArray should render array field correctly 1`] = `
                                   disabled={false}
                                   onClick={[Function]}
                                   tabIndex={null}
-                                  type="button"
+                                  type="submit"
                                 >
                                   Submit
                                 </button>

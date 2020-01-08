@@ -47,7 +47,7 @@ class Switch extends React.Component {
   }
 
   render() {
-    const { onText, offText, disabled, isReadOnly, bsSize, ...props } = this.props;
+    const { onText, offText, disabled, isReadOnly, bsSize, formOptions, ...props } = this.props;
     return (
       <div>
         <label
@@ -62,7 +62,7 @@ class Switch extends React.Component {
               props.onChange({ target: { checked: !props.checked }});
             } else if (e.keyCode === ENTER_CODE) {
               e.preventDefault();
-              props.formOptions.handleSubmit();
+              formOptions.handleSubmit();
             }
           } }
         >
@@ -102,6 +102,9 @@ Switch.propTypes = {
   checked: PropTypes.oneOfType([ PropTypes.bool, PropTypes.string ]),
   onChange: PropTypes.func.isRequired,
   bsSize: PropTypes.oneOf([ 'mn', 'mini' ]),
+  formOptions: PropTypes.shape({
+    handleSubmit: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 Switch.defaultProps = {

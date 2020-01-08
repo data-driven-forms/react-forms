@@ -213,7 +213,9 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
       }
     }
   >
-    <Component>
+    <Component
+      onSubmit={[Function]}
+    >
       <form>
         <Component>
           <div>
@@ -2736,12 +2738,12 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                     key="form-submit"
                     label="Submit"
                     onClick={[Function]}
-                    type="button"
+                    type="submit"
                     variant="primary"
                   >
                     <button
                       onClick={[Function]}
-                      type="button"
+                      type="submit"
                       variant="primary"
                     >
                       Submit
@@ -2890,7 +2892,9 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
       }
     }
   >
-    <Component>
+    <Component
+      onSubmit={[Function]}
+    >
       <form>
         <FormConditionWrapper>
           <FormFieldHideWrapper

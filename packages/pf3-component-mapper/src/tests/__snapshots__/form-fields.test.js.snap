@@ -411,11 +411,13 @@ exports[`FormFields <SwitchField /> should render Switch correctly 1`] = `
             <div>
               <label
                 className="pf3-switch"
+                onKeyDown={[Function]}
                 style={
                   Object {
                     "width": 80,
                   }
                 }
+                tabIndex={0}
               >
                 <input
                   checked=""
@@ -551,11 +553,13 @@ exports[`FormFields <SwitchField /> should render Switch with label correctly 1`
             <div>
               <label
                 className="pf3-switch"
+                onKeyDown={[Function]}
                 style={
                   Object {
                     "width": 80,
                   }
                 }
+                tabIndex={0}
               >
                 <input
                   checked=""
@@ -681,11 +685,13 @@ exports[`FormFields <SwitchField /> should render Switch with onText (custom pro
             <div>
               <label
                 className="pf3-switch"
+                onKeyDown={[Function]}
                 style={
                   Object {
                     "width": 80,
                   }
                 }
+                tabIndex={0}
               >
                 <input
                   checked=""
@@ -811,11 +817,13 @@ exports[`FormFields <SwitchField /> should render Switch with placeholder correc
             <div>
               <label
                 className="pf3-switch"
+                onKeyDown={[Function]}
                 style={
                   Object {
                     "width": 80,
                   }
                 }
+                tabIndex={0}
               >
                 <input
                   checked=""
@@ -942,11 +950,13 @@ exports[`FormFields <SwitchField /> should render disabled Switch correctly 1`] 
             <div>
               <label
                 className="pf3-switch disabled"
+                onKeyDown={[Function]}
                 style={
                   Object {
                     "width": 80,
                   }
                 }
+                tabIndex={-1}
               >
                 <input
                   checked=""
@@ -1074,11 +1084,13 @@ exports[`FormFields <SwitchField /> should render mini Switch correctly 1`] = `
             <div>
               <label
                 className="pf3-switch mini"
+                onKeyDown={[Function]}
                 style={
                   Object {
                     "width": 80,
                   }
                 }
+                tabIndex={0}
               >
                 <input
                   checked=""
@@ -1205,11 +1217,13 @@ exports[`FormFields <SwitchField /> should render readOnly Switch correctly 1`] 
             <div>
               <label
                 className="pf3-switch disabled"
+                onKeyDown={[Function]}
                 style={
                   Object {
                     "width": 80,
                   }
                 }
+                tabIndex={-1}
               >
                 <input
                   checked=""
@@ -1337,11 +1351,13 @@ exports[`FormFields <SwitchField /> should render sm Switch correctly 1`] = `
             <div>
               <label
                 className="pf3-switch mini"
+                onKeyDown={[Function]}
                 style={
                   Object {
                     "width": 80,
                   }
                 }
+                tabIndex={0}
               >
                 <input
                   checked=""
