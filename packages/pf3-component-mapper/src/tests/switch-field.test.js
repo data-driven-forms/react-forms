@@ -83,7 +83,7 @@ describe('Switch-field', () => {
   describe('Switch', () => {
     it('should call componentDidUpdate Switch correctly', () => {
       const wrapper = mount(
-        <Switch bsSize='mn' onChange={ jest.fn() } />
+        <Switch bsSize='mn' onChange={ jest.fn() } formOptions={{ handleSubmit: jest.fn() }}/>
       );
       const switchInstance = wrapper.find(Switch).instance();
       const spy = jest.spyOn(switchInstance, 'setState');
@@ -93,6 +93,96 @@ describe('Switch-field', () => {
       spy.mockReset();
       wrapper.setProps({ offText: 'verylongoffteeeeeeeext' });
       expect(spy).not.toHaveBeenCalled();
+    });
+
+    it('should call submit when press enter', () => {
+      const submitSpy = jest.fn();
+      const preventDefault = jest.fn();
+      const onChange = jest.fn();
+
+      const wrapper = mount(
+        <Switch bsSize='mn' formOptions={{ handleSubmit: submitSpy }} onChange={ onChange }/>
+      );
+
+      wrapper.find('label').props().onKeyDown({ keyCode: 13, preventDefault });
+
+      expect(preventDefault).toHaveBeenCalled();
+      expect(submitSpy).toHaveBeenCalled();
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it('should call onChange when press spacebar', () => {
+      const submitSpy = jest.fn();
+      const preventDefault = jest.fn();
+      const onChange = jest.fn();
+      const checked = false;
+
+      const wrapper = mount(
+        <Switch bsSize='mn' formOptions={{ handleSubmit: submitSpy }} onChange={ onChange } checked={ checked }/>
+      );
+
+      wrapper.find('label').props().onKeyDown({ keyCode: 32, preventDefault });
+
+      expect(preventDefault).toHaveBeenCalled();
+      expect(submitSpy).not.toHaveBeenCalled();
+      expect(onChange).toHaveBeenCalledWith({ target: { checked: true }});
+    });
+
+    it('should call onChange when press spacebar - checked true', () => {
+      const submitSpy = jest.fn();
+      const preventDefault = jest.fn();
+      const onChange = jest.fn();
+      const checked = true;
+
+      const wrapper = mount(
+        <Switch bsSize='mn' formOptions={{ handleSubmit: submitSpy }} onChange={ onChange } checked={ checked }/>
+      );
+
+      wrapper.find('label').props().onKeyDown({ keyCode: 32, preventDefault });
+
+      expect(preventDefault).toHaveBeenCalled();
+      expect(submitSpy).not.toHaveBeenCalled();
+      expect(onChange).toHaveBeenCalledWith({ target: { checked: false }});
+    });
+
+    it('should call nothing when press something else than enter and spacebar', () => {
+      const submitSpy = jest.fn();
+      const preventDefault = jest.fn();
+      const onChange = jest.fn();
+
+      const wrapper = mount(
+        <Switch bsSize='mn' formOptions={{ handleSubmit: submitSpy }} onChange={ onChange }/>
+      );
+
+      wrapper.find('label').props().onKeyDown({ keyCode: 88, preventDefault });
+
+      expect(preventDefault).not.toHaveBeenCalled();
+      expect(submitSpy).not.toHaveBeenCalled();
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it('tabIndex is 0 by default', () => {
+      const wrapper = mount(
+        <Switch bsSize='mn' formOptions={{ handleSubmit: jest.fn() }} onChange={ jest.fn() }/>
+      );
+
+      expect(wrapper.find('label').props().tabIndex).toEqual(0);
+    });
+
+    it('tabIndex is -1 when isReadOnly', () => {
+      const wrapper = mount(
+        <Switch bsSize='mn' formOptions={{ handleSubmit: jest.fn() }} onChange={ jest.fn() } isReadOnly={ true }/>
+      );
+
+      expect(wrapper.find('label').props().tabIndex).toEqual(-1);
+    });
+
+    it('tabIndex is -1 when disabled', () => {
+      const wrapper = mount(
+        <Switch bsSize='mn' formOptions={{ handleSubmit: jest.fn() }} onChange={ jest.fn() } disabled={ true }/>
+      );
+
+      expect(wrapper.find('label').props().tabIndex).toEqual(-1);
     });
   });
 });

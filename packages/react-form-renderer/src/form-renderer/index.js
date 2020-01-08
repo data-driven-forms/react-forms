@@ -93,7 +93,7 @@ const FormRenderer = ({
         }}>
           <RendererContext.Consumer>
             { ({ layoutMapper: { FormWrapper }}) => (
-              <FormWrapper>
+              <FormWrapper onSubmit={ handleSubmit }>
                 { label && renderTitle(label) }
                 { inputSchema.schema.description && renderDescription(inputSchema.schema.description) }
                 { renderForm(inputSchema.schema.fields) }

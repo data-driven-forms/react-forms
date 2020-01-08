@@ -63,6 +63,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
     <Modal>
       <div
         className="pf-c-wizard no-shadow   "
+        onKeyDown={[Function]}
         role="dialog"
       >
         <WizardHeader
@@ -710,6 +711,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                 <div
                   aria-modal="true"
                   className="pf-c-wizard    "
+                  onKeyDown={[Function]}
                   role="dialog"
                 >
                   <WizardHeader
@@ -1149,6 +1151,7 @@ exports[`<Wizard /> should render correctly with custom title and description 1`
     <Modal>
       <div
         className="pf-c-wizard no-shadow   "
+        onKeyDown={[Function]}
         role="dialog"
       >
         <WizardHeader

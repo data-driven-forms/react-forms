@@ -7,6 +7,7 @@ import './wizard-styles.scss';
 import get from 'lodash/get';
 import set from 'lodash/set';
 import flattenDeep from 'lodash/flattenDeep';
+import handleEnter from '@data-driven-forms/common/src/wizard/enter-handler';
 
 const DYNAMIC_WIZARD_TYPES = [ 'function', 'object' ];
 
@@ -246,6 +247,7 @@ class Wizard extends React.Component {
         <div className={ `pf-c-wizard ${inModal ? '' : 'no-shadow'} ${isCompactNav ? 'pf-m-compact-nav' : ''} ${setFullWidth ? 'pf-m-full-width' : ''} ${setFullHeight ? 'pf-m-full-height' : ''}` }
           role="dialog"
           aria-modal={ inModal ? 'true' : undefined }
+          onKeyDown={ e => handleEnter(e, formOptions, this.state.activeStep, this.findCurrentStep, this.handleNext, handleSubmit) }
         >
           { title && <WizardHeader
             title={ title }
@@ -284,6 +286,7 @@ Wizard.propTypes = {
     onSubmit: PropTypes.func.isRequired,
     onCancel: PropTypes.func,
     getRegisteredFields: PropTypes.func.isRequired,
+    valid: PropTypes.bool.isRequired,
   }),
   fields: PropTypes.arrayOf(PropTypes.shape({
     stepKey: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]).isRequired,

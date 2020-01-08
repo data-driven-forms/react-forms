@@ -63,7 +63,9 @@ exports[`<FormControls /> should render with description 1`] = `
         }
       }
     >
-      <Component>
+      <Component
+        onSubmit={[Function]}
+      >
         <form>
           <Component>
             <div>
@@ -134,12 +136,12 @@ exports[`<FormControls /> should render with description 1`] = `
                       key="form-submit"
                       label="Submit"
                       onClick={[Function]}
-                      type="button"
+                      type="submit"
                       variant="primary"
                     >
                       <button
                         onClick={[Function]}
-                        type="button"
+                        type="submit"
                         variant="primary"
                       >
                         Submit
@@ -221,7 +223,9 @@ exports[`<FormControls /> should render with title and description 1`] = `
         }
       }
     >
-      <Component>
+      <Component
+        onSubmit={[Function]}
+      >
         <form>
           <Component>
             <h1>
@@ -297,12 +301,12 @@ exports[`<FormControls /> should render with title and description 1`] = `
                       key="form-submit"
                       label="Submit"
                       onClick={[Function]}
-                      type="button"
+                      type="submit"
                       variant="primary"
                     >
                       <button
                         onClick={[Function]}
-                        type="button"
+                        type="submit"
                         variant="primary"
                       >
                         Submit
@@ -382,7 +386,9 @@ exports[`<FormControls /> should render without title and description 1`] = `
         }
       }
     >
-      <Component>
+      <Component
+        onSubmit={[Function]}
+      >
         <form>
           <FormControls
             buttonClassName=""
@@ -448,12 +454,12 @@ exports[`<FormControls /> should render without title and description 1`] = `
                       key="form-submit"
                       label="Submit"
                       onClick={[Function]}
-                      type="button"
+                      type="submit"
                       variant="primary"
                     >
                       <button
                         onClick={[Function]}
-                        type="button"
+                        type="submit"
                         variant="primary"
                       >
                         Submit

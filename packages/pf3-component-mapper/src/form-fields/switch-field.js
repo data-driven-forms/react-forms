@@ -47,12 +47,24 @@ class Switch extends React.Component {
   }
 
   render() {
-    const { onText, offText, disabled, isReadOnly, bsSize, ...props } = this.props;
+    const { onText, offText, disabled, isReadOnly, bsSize, formOptions, ...props } = this.props;
     return (
       <div>
         <label
           className={ `pf3-switch${disabled || isReadOnly ? ' disabled' : ''}${bsSize === 'mini' || bsSize === 'mn' ? ' mini' : ''}` }
           style={{ width: this.state.labelWidth + DIVIDER_SIZE + COMBINED_MARGIN }}
+          tabIndex={ disabled || isReadOnly ? -1 : 0 }
+          onKeyDown={ (e) => {
+            const SPACEBAR_CODE = 32;
+            const ENTER_CODE = 13;
+            if (e.keyCode === SPACEBAR_CODE) {
+              e.preventDefault();
+              props.onChange({ target: { checked: !props.checked }});
+            } else if (e.keyCode === ENTER_CODE) {
+              e.preventDefault();
+              formOptions.handleSubmit();
+            }
+          } }
         >
           <input type="checkbox" { ...props } disabled={ disabled || isReadOnly } />
           <span className={ `pf3-switch-slider${props.checked ? ' checked' : ''}` }>
@@ -90,6 +102,9 @@ Switch.propTypes = {
   checked: PropTypes.oneOfType([ PropTypes.bool, PropTypes.string ]),
   onChange: PropTypes.func.isRequired,
   bsSize: PropTypes.oneOf([ 'mn', 'mini' ]),
+  formOptions: PropTypes.shape({
+    handleSubmit: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 Switch.defaultProps = {

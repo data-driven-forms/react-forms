@@ -43,7 +43,7 @@ const FormControls = ({
               submit: (
                 <Button
                   key="form-submit"
-                  type="button"
+                  type="submit"
                   variant="primary"
                   disabled={ submitting || validating || disableSubmit }
                   onClick={ submit }

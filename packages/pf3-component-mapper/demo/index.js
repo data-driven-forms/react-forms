@@ -114,7 +114,7 @@ class App extends React.Component {
             schemaType="default"
             formFieldsMapper={formFieldsMapper}
             layoutMapper={layoutMapper}
-            schema={selectSchema}
+            schema={sandbox}
             onCancel={() => console.log('cancel')}
           />
         </Row>

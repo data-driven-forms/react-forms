@@ -1,21 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@patternfly/react-core';
-import get from 'lodash/get';
-
-export const selectNext = (nextStep, getState) => {
-  if (typeof nextStep === 'string') {
-    return nextStep;
-  }
-
-  if (typeof nextStep === 'function') {
-    return nextStep({ values: getState().values });
-  }
-
-  const selectedValue = get(getState().values, nextStep.when);
-
-  return nextStep.stepMapper[selectedValue];
-};
+import selectNext from '@data-driven-forms/common/src/wizard/select-next';
 
 const SimpleNext = ({
   nextStep,

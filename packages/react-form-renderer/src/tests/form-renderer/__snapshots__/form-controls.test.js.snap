@@ -49,12 +49,12 @@ exports[`<FormControls /> should add missing buttons if not defined in button or
                 key="form-submit"
                 label="Submit"
                 onClick={[Function]}
-                type="button"
+                type="submit"
                 variant="primary"
               >
                 <button
                   onClick={[Function]}
-                  type="button"
+                  type="submit"
                   variant="primary"
                 >
                   Submit
@@ -154,13 +154,13 @@ exports[`<FormControls /> should render all controls and with default labels 1`]
                 key="form-submit"
                 label="Submit"
                 onClick={[Function]}
-                type="button"
+                type="submit"
                 variant="primary"
               >
                 <button
                   disabled={true}
                   onClick={[Function]}
-                  type="button"
+                  type="submit"
                   variant="primary"
                 >
                   Submit
@@ -271,12 +271,12 @@ exports[`<FormControls /> should render buttons in correct order 1`] = `
                 key="form-submit"
                 label="Submit"
                 onClick={[Function]}
-                type="button"
+                type="submit"
                 variant="primary"
               >
                 <button
                   onClick={[Function]}
-                  type="button"
+                  type="submit"
                   variant="primary"
                 >
                   Submit
@@ -360,12 +360,12 @@ exports[`<FormControls /> should render only submit button 1`] = `
                 key="form-submit"
                 label="Submit"
                 onClick={[Function]}
-                type="button"
+                type="submit"
                 variant="primary"
               >
                 <button
                   onClick={[Function]}
-                  type="button"
+                  type="submit"
                   variant="primary"
                 >
                   Submit

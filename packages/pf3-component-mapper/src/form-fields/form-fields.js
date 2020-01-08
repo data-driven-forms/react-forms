@@ -72,6 +72,7 @@ const selectComponent = ({
       disabled={ isDisabled }
       checked={ input.value }
       onChange={ ({ target: { checked }}) => input.onChange(checked) }
+      formOptions={ formOptions }
     />,
   [componentTypes.DATE_PICKER]: () => <DateTimePicker pristine={ meta.pristine } onChange={ input.onChange } value={ input.value } isDisabled={ isDisabled } { ...rest } />,
 })[componentType];
