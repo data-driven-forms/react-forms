@@ -41,6 +41,7 @@
     "@semantic-release/github": "^5.5.5",
     "@semantic-release/npm": "^5.1.4",
     "atob-lite": "^2.0.0",
+    "babel-plugin-transform-imports": "^2.0.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.8.0",
     "lerna": "^3.13.1",
