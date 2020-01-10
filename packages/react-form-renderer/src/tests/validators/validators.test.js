@@ -1,5 +1,5 @@
 import { validators } from '../../constants';
-import { dataTypeValidator } from '../../validators/';
+import { dataTypeValidator, numericality } from '../../validators/';
 import validatorMapper from '../../validators/validator-mapper';
 import Validator from '../../validators/validators';
 import messages from '../../validators/messages';
@@ -165,7 +165,57 @@ describe('New validators', () => {
     });
   });
 
+  describe('numericality validators', () => {
+    it('is not number', () => {
+      expect(numericality({ equal: 5 })('string')).toEqual('Value is not a number');
+    });
+
+    it('is not equal', () => {
+      expect(numericality({ '=': 5 })(6)).toEqual('must be equal to 5.');
+    });
+
+    it('is not different', () => {
+      expect(numericality({ '!=': 5 })(5)).toEqual('Value must be other than 5.');
+    });
+
+    it('is not goe', () => {
+      expect(numericality({ '>=': 5 })(4)).toEqual('Value must be greater than or equal to 5.');
+    });
+
+    it('is not loe', () => {
+      expect(numericality({ '<=': 5 })(6)).toEqual('Value must be less than or equal to 5');
+    });
+
+    it('is not greater', () => {
+      expect(numericality({ '>': 5 })(5)).toEqual('Value must be greater than 5.');
+    });
+
+    it('is not less', () => {
+      expect(numericality({ '<': 5 })(5)).toEqual('Value must be less than 5');
+    });
+
+    it('is not even', () => {
+      expect(numericality({ even: true })(5)).toEqual('Number must be even');
+    });
+
+    it('is not odd', () => {
+      expect(numericality({ odd: true })(4)).toEqual('Number must be odd');
+    });
+  });
+
   describe('data type validator', () => {
+    it('should return float and pass', () => {
+      expect(dataTypeValidator('float')()(123.232)).toBeUndefined();
+    });
+
+    it('should return float and pass 2', () => {
+      expect(dataTypeValidator('float')()(123)).toBeUndefined();
+    });
+
+    it('should return float validator and fail', () => {
+      expect(dataTypeValidator('float')({ message: 'Should be float' })('string')).toEqual('Should be float');
+    });
+
     it('should return string validator and pass', () => {
       expect(dataTypeValidator('string')({ message: 'String message' })('Foo')).toBeUndefined();
     });
