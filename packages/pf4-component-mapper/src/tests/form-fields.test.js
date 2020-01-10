@@ -11,7 +11,7 @@ import {
   SwitchField,
 } from '../form-fields/form-fields';
 import { mount, shallow } from 'enzyme';
-import { Radio } from '@patternfly/react-core';
+import { Radio, Checkbox } from '@patternfly/react-core';
 
 describe('FormFields', () => {
   let FieldProvider;
@@ -99,6 +99,18 @@ describe('FormFields', () => {
       <CheckboxField { ...propsWithOptions } FieldProvider={ FieldProvider } disabled={ true }/>
     );
     expect(toJson(wrapper)).toMatchSnapshot();
+  });
+
+  it('Multiple checkbox - should call on change correctly', () => {
+    const wrapper = mount(
+      <CheckboxField { ...propsWithOptions } FieldProvider={ FieldProvider } />
+    );
+
+    expect(onChangeSpy).not.toHaveBeenCalled();
+
+    wrapper.find(Checkbox).first().props().onChange();
+
+    expect(onChangeSpy).toHaveBeenCalled();
   });
 
   it('should render TextArea correctly', () => {
