@@ -11,10 +11,20 @@ import {
   SwitchField,
 } from '../form-fields/form-fields';
 import { mount, shallow } from 'enzyme';
-
-const FieldProvider = ({ render, ...props }) => <div>{ render({ input: { name: 'Foo', onChange: jest.fn() }, meta: { error: false, touched: false }, ...props }) }</div>;
+import { Radio } from '@patternfly/react-core';
 
 describe('FormFields', () => {
+  let FieldProvider;
+  let onChangeSpy;
+
+  beforeEach(() => {
+    onChangeSpy = jest.fn();
+
+    FieldProvider = ({ render, ...props }) => <div>
+      { render({ input: { name: 'Foo', onChange: onChangeSpy }, meta: { error: false, touched: false }, ...props }) }
+    </div>;
+  });
+
   const props = {
     input: {
       name: 'Name of the field',
@@ -117,6 +127,16 @@ describe('FormFields', () => {
       <RadioField { ...propsWithOptions } FieldProvider={ FieldProvider } disabled={ true } />
     );
     expect(toJson(wrapper)).toMatchSnapshot();
+  });
+
+  it('radio - should call fieldProvider onChange correctly', () => {
+    const wrapper = mount(
+      <RadioField { ...propsWithOptions } FieldProvider={ FieldProvider } disabled={ true } />
+    );
+
+    wrapper.find(Radio).first().props().onChange();
+
+    expect(onChangeSpy).toHaveBeenCalled();
   });
 
   it('should render Select correctly', () => {
