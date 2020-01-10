@@ -72,10 +72,30 @@ describe('New validators', () => {
       expect(validatorMapper(validators.MAX_LENGTH)({ threshold: 3, message: 'Too long!' })('1234')).toBe('Too long!');
     });
 
+    it('should pass max length of 3 characters long validation with typo (backwards compatibility)', () => {
+      expect(validatorMapper(validators.MAX_LENGTH)({ treshold: 3 })('12')).toBeUndefined();
+    });
+
     it('should correctly pick threshold when using deprecated value', () => {
       expect(validatorMapper(validators.MIN_LENGTH)({ treshold: 3, message: 'Too short!' })('1')).toBe('Too short!');
       expect(validatorMapper(validators.MIN_LENGTH)({ threshold: 3, message: 'Too short!' })('1')).toBe('Too short!');
       expect(validatorMapper(validators.MIN_LENGTH)({ threshold: 5, treshold: 3, message: 'Too short!' })('12345')).toBeUndefined();
+    });
+
+    it('should pass min items of 3 validation with typo', () => {
+      expect(validatorMapper(validators.MIN_ITEMS_VALIDATOR)({ treshold: 3 })([ '1', '2', '3' ])).toBeUndefined();
+    });
+
+    it('should pass min items of 3 validation', () => {
+      expect(validatorMapper(validators.MIN_ITEMS_VALIDATOR)({ threshold: 3 })([ '1', '2', '3' ])).toBeUndefined();
+    });
+
+    it('should pass min items of 3 validation', () => {
+      expect(validatorMapper(validators.MIN_ITEMS_VALIDATOR)({ threshold: 3, message: 'Too few' })([ '1', '2' ])).toBe('Too few');
+    });
+
+    it('should pass min items of 3 validation with more items', () => {
+      expect(validatorMapper(validators.MIN_ITEMS_VALIDATOR)({ threshold: 3 })([ '1', '2', '3', '4' ])).toBeUndefined();
     });
   });
 
