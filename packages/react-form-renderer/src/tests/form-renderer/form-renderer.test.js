@@ -6,6 +6,7 @@ import FormRenderer from '../../form-renderer';
 import { widgets, uiWidgets } from '../../demo-schemas/mozilla-schemas';
 import { components, layoutComponents } from '../../constants';
 import FormControls from '../../form-renderer/form-controls';
+import SchemaErrorComponent from '../../form-renderer/schema-error-component';
 
 describe('<FormRenderer />', () => {
   let layoutMapper;
@@ -48,6 +49,32 @@ describe('<FormRenderer />', () => {
   it('should render form from schema', () => {
     const wrapper = mount(<FormRenderer { ...initialProps } />);
     expect(toJson(wrapper)).toMatchSnapshot();
+  });
+
+  it('should render errorComponent form from schema', () => {
+    const _console = console;
+
+    const spy = jest.fn();
+    const logSpy = jest.fn();
+    // eslint-disable-next-line no-console
+    console.error = spy;
+    // eslint-disable-next-line no-console
+    console.log = logSpy;
+
+    const schemaWithError = {
+      fields: [{
+        name: 'field without component key',
+      }],
+    };
+
+    const wrapper = mount(<FormRenderer { ...initialProps } schema={ schemaWithError } schemaType={ undefined }/>);
+
+    expect(wrapper.find(SchemaErrorComponent));
+    expect(spy).toHaveBeenCalled();
+    expect(logSpy).toHaveBeenCalledWith('error: ', expect.any(String));
+
+    // eslint-disable-next-line no-global-assign
+    console = _console;
   });
 
   it('should call form reset callback', () => {
