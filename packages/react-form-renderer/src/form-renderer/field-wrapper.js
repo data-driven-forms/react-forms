@@ -24,7 +24,7 @@ const FieldWrapper = ({ componentType, validate, component, ...rest }) => {
       }
 
       const arrayValidator = composeValidators(validate);
-      let result = arrayValidator(value ? value.length > 0 ? value : undefined : undefined);
+      let result = arrayValidator(value && value.length > 0 ? value : undefined);
       if (typeof result === 'function') {
         result = result(value);
       }
