@@ -46,6 +46,7 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
           },
         ]
       }
+      render={[Function]}
       validate={[Function]}
     >
       <MockFieldProvider
@@ -67,10 +68,21 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
             },
           ]
         }
+        render={[Function]}
         validate={[Function]}
       >
         <Wrapper
           meta={Object {}}
+          rest={
+            Object {
+              "children": undefined,
+              "input": Object {
+                "onChange": [MockFunction],
+                "value": Array [],
+              },
+              "validate": [Function],
+            }
+          }
         >
           <FormGroup
             bsClass="form-group"
@@ -109,37 +121,44 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
                     type="checkbox"
                     value={0}
                   >
-                    <Checkbox
+                    <FinalCheckbox
                       aria-label="Foo"
-                      bsClass="checkbox"
-                      disabled={false}
                       id="undefined-0"
-                      inline={false}
                       label="Foo"
                       onChange={[Function]}
-                      title=""
                       type="checkbox"
                       value={0}
                     >
-                      <div
-                        className="checkbox"
+                      <Checkbox
+                        aria-label="Foo"
+                        bsClass="checkbox"
+                        disabled={false}
+                        id="undefined-0"
+                        inline={false}
+                        onChange={[Function]}
+                        title=""
+                        type="checkbox"
+                        value={0}
                       >
-                        <label
-                          title=""
+                        <div
+                          className="checkbox"
                         >
-                          <input
-                            aria-label="Foo"
-                            disabled={false}
-                            id="undefined-0"
-                            label="Foo"
-                            onChange={[Function]}
-                            type="checkbox"
-                            value={0}
-                          />
-                          Foo
-                        </label>
-                      </div>
-                    </Checkbox>
+                          <label
+                            title=""
+                          >
+                            <input
+                              aria-label="Foo"
+                              disabled={false}
+                              id="undefined-0"
+                              onChange={[Function]}
+                              type="checkbox"
+                              value={0}
+                            />
+                            Foo
+                          </label>
+                        </div>
+                      </Checkbox>
+                    </FinalCheckbox>
                   </MockFieldProvider>
                 </FieldProvider>
                 <FieldProvider
@@ -163,37 +182,44 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
                     type="checkbox"
                     value={1}
                   >
-                    <Checkbox
+                    <FinalCheckbox
                       aria-label="Bar"
-                      bsClass="checkbox"
-                      disabled={false}
                       id="undefined-1"
-                      inline={false}
                       label="Bar"
                       onChange={[Function]}
-                      title=""
                       type="checkbox"
                       value={1}
                     >
-                      <div
-                        className="checkbox"
+                      <Checkbox
+                        aria-label="Bar"
+                        bsClass="checkbox"
+                        disabled={false}
+                        id="undefined-1"
+                        inline={false}
+                        onChange={[Function]}
+                        title=""
+                        type="checkbox"
+                        value={1}
                       >
-                        <label
-                          title=""
+                        <div
+                          className="checkbox"
                         >
-                          <input
-                            aria-label="Bar"
-                            disabled={false}
-                            id="undefined-1"
-                            label="Bar"
-                            onChange={[Function]}
-                            type="checkbox"
-                            value={1}
-                          />
-                          Bar
-                        </label>
-                      </div>
-                    </Checkbox>
+                          <label
+                            title=""
+                          >
+                            <input
+                              aria-label="Bar"
+                              disabled={false}
+                              id="undefined-1"
+                              onChange={[Function]}
+                              type="checkbox"
+                              value={1}
+                            />
+                            Bar
+                          </label>
+                        </div>
+                      </Checkbox>
+                    </FinalCheckbox>
                   </MockFieldProvider>
                 </FieldProvider>
               </div>
@@ -252,6 +278,7 @@ exports[`<MultipleChoiceList /> should render in error state 1`] = `
           },
         ]
       }
+      render={[Function]}
       validate={[Function]}
     >
       <MockFieldProvider
@@ -279,13 +306,25 @@ exports[`<MultipleChoiceList /> should render in error state 1`] = `
             },
           ]
         }
+        render={[Function]}
         validate={[Function]}
       >
         <Wrapper
+          error="Error message"
           meta={
             Object {
               "error": "Error message",
               "touched": true,
+            }
+          }
+          rest={
+            Object {
+              "children": undefined,
+              "input": Object {
+                "onChange": [MockFunction],
+                "value": Array [],
+              },
+              "validate": [Function],
             }
           }
           showError="Error message"
@@ -333,37 +372,44 @@ exports[`<MultipleChoiceList /> should render in error state 1`] = `
                     type="checkbox"
                     value={0}
                   >
-                    <Checkbox
+                    <FinalCheckbox
                       aria-label="Foo"
-                      bsClass="checkbox"
-                      disabled={false}
                       id="undefined-0"
-                      inline={false}
                       label="Foo"
                       onChange={[Function]}
-                      title=""
                       type="checkbox"
                       value={0}
                     >
-                      <div
-                        className="checkbox"
+                      <Checkbox
+                        aria-label="Foo"
+                        bsClass="checkbox"
+                        disabled={false}
+                        id="undefined-0"
+                        inline={false}
+                        onChange={[Function]}
+                        title=""
+                        type="checkbox"
+                        value={0}
                       >
-                        <label
-                          title=""
+                        <div
+                          className="checkbox"
                         >
-                          <input
-                            aria-label="Foo"
-                            disabled={false}
-                            id="undefined-0"
-                            label="Foo"
-                            onChange={[Function]}
-                            type="checkbox"
-                            value={0}
-                          />
-                          Foo
-                        </label>
-                      </div>
-                    </Checkbox>
+                          <label
+                            title=""
+                          >
+                            <input
+                              aria-label="Foo"
+                              disabled={false}
+                              id="undefined-0"
+                              onChange={[Function]}
+                              type="checkbox"
+                              value={0}
+                            />
+                            Foo
+                          </label>
+                        </div>
+                      </Checkbox>
+                    </FinalCheckbox>
                   </MockFieldProvider>
                 </FieldProvider>
                 <FieldProvider
@@ -393,37 +439,44 @@ exports[`<MultipleChoiceList /> should render in error state 1`] = `
                     type="checkbox"
                     value={1}
                   >
-                    <Checkbox
+                    <FinalCheckbox
                       aria-label="Bar"
-                      bsClass="checkbox"
-                      disabled={false}
                       id="undefined-1"
-                      inline={false}
                       label="Bar"
                       onChange={[Function]}
-                      title=""
                       type="checkbox"
                       value={1}
                     >
-                      <div
-                        className="checkbox"
+                      <Checkbox
+                        aria-label="Bar"
+                        bsClass="checkbox"
+                        disabled={false}
+                        id="undefined-1"
+                        inline={false}
+                        onChange={[Function]}
+                        title=""
+                        type="checkbox"
+                        value={1}
                       >
-                        <label
-                          title=""
+                        <div
+                          className="checkbox"
                         >
-                          <input
-                            aria-label="Bar"
-                            disabled={false}
-                            id="undefined-1"
-                            label="Bar"
-                            onChange={[Function]}
-                            type="checkbox"
-                            value={1}
-                          />
-                          Bar
-                        </label>
-                      </div>
-                    </Checkbox>
+                          <label
+                            title=""
+                          >
+                            <input
+                              aria-label="Bar"
+                              disabled={false}
+                              id="undefined-1"
+                              onChange={[Function]}
+                              type="checkbox"
+                              value={1}
+                            />
+                            Bar
+                          </label>
+                        </div>
+                      </Checkbox>
+                    </FinalCheckbox>
                   </MockFieldProvider>
                 </FieldProvider>
               </div>

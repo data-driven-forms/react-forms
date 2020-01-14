@@ -200,7 +200,10 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
         ]
       }
     >
-      <FieldProvider
+      <MultipleChoiceList
+        Checkbox={[Function]}
+        FieldProvider={[Function]}
+        Wrapper={[Function]}
         componentType="checkbox"
         id="someIdKey"
         input={
@@ -232,165 +235,253 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
             },
           ]
         }
-        render={[Function]}
-        validate={[Function]}
       >
-        <div>
-          <FormGroup
-            fieldId="someIdKey"
-            isValid={false}
-          >
-            <div
-              className="pf-c-form__group"
+        <FieldProvider
+          componentType="checkbox"
+          id="someIdKey"
+          input={
+            Object {
+              "name": "Name of the field",
+              "value": "",
+            }
+          }
+          meta={
+            Object {
+              "error": false,
+              "touched": false,
+            }
+          }
+          name="Name of the field"
+          options={
+            Array [
+              Object {
+                "label": "One",
+                "value": "1",
+              },
+              Object {
+                "label": "Two",
+                "value": "2",
+              },
+              Object {
+                "label": "Three",
+                "value": "3",
+              },
+            ]
+          }
+          render={[Function]}
+          validate={[Function]}
+        >
+          <div>
+            <Wrapper
+              error={false}
+              meta={
+                Object {
+                  "error": false,
+                  "touched": false,
+                }
+              }
+              rest={
+                Object {
+                  "componentType": "checkbox",
+                  "id": "someIdKey",
+                  "input": Object {
+                    "name": "Name of the field",
+                    "value": "",
+                  },
+                  "name": "Name of the field",
+                  "validate": [Function],
+                }
+              }
+              showError={false}
             >
-              <FieldProvider
-                id="someIdKey-1"
-                key="1"
-                label="One"
-                name="Name of the field"
-                render={[Function]}
-                type="checkbox"
-                value="1"
+              <FormGroup
+                fieldId="someIdKey"
+                helperTextInvalid={false}
+                isValid={true}
               >
-                <div>
-                  <Checkbox
-                    aria-label="One"
-                    className=""
+                <div
+                  className="pf-c-form__group"
+                >
+                  <FieldProvider
                     id="someIdKey-1"
-                    isChecked={false}
-                    isDisabled={false}
-                    isValid={true}
+                    key="1"
                     label="One"
                     name="Name of the field"
-                    onChange={[Function]}
+                    render={[Function]}
                     type="checkbox"
                     value="1"
                   >
-                    <div
-                      className="pf-c-check"
-                    >
-                      <input
-                        aria-invalid={false}
+                    <div>
+                      <FinalCheckbox
                         aria-label="One"
-                        checked={false}
-                        className="pf-c-check__input"
-                        disabled={false}
                         id="someIdKey-1"
+                        label="One"
                         name="Name of the field"
                         onChange={[Function]}
                         type="checkbox"
                         value="1"
-                      />
-                      <label
-                        className="pf-c-check__label"
-                        htmlFor="someIdKey-1"
                       >
-                        One
-                      </label>
+                        <Checkbox
+                          aria-label="One"
+                          className=""
+                          id="someIdKey-1"
+                          isChecked={false}
+                          isDisabled={false}
+                          isValid={true}
+                          label="One"
+                          name="Name of the field"
+                          onChange={[Function]}
+                          type="checkbox"
+                          value="1"
+                        >
+                          <div
+                            className="pf-c-check"
+                          >
+                            <input
+                              aria-invalid={false}
+                              aria-label="One"
+                              checked={false}
+                              className="pf-c-check__input"
+                              disabled={false}
+                              id="someIdKey-1"
+                              name="Name of the field"
+                              onChange={[Function]}
+                              type="checkbox"
+                              value="1"
+                            />
+                            <label
+                              className="pf-c-check__label"
+                              htmlFor="someIdKey-1"
+                            >
+                              One
+                            </label>
+                          </div>
+                        </Checkbox>
+                      </FinalCheckbox>
                     </div>
-                  </Checkbox>
-                </div>
-              </FieldProvider>
-              <FieldProvider
-                id="someIdKey-2"
-                key="2"
-                label="Two"
-                name="Name of the field"
-                render={[Function]}
-                type="checkbox"
-                value="2"
-              >
-                <div>
-                  <Checkbox
-                    aria-label="Two"
-                    className=""
+                  </FieldProvider>
+                  <FieldProvider
                     id="someIdKey-2"
-                    isChecked={false}
-                    isDisabled={false}
-                    isValid={true}
+                    key="2"
                     label="Two"
                     name="Name of the field"
-                    onChange={[Function]}
+                    render={[Function]}
                     type="checkbox"
                     value="2"
                   >
-                    <div
-                      className="pf-c-check"
-                    >
-                      <input
-                        aria-invalid={false}
+                    <div>
+                      <FinalCheckbox
                         aria-label="Two"
-                        checked={false}
-                        className="pf-c-check__input"
-                        disabled={false}
                         id="someIdKey-2"
+                        label="Two"
                         name="Name of the field"
                         onChange={[Function]}
                         type="checkbox"
                         value="2"
-                      />
-                      <label
-                        className="pf-c-check__label"
-                        htmlFor="someIdKey-2"
                       >
-                        Two
-                      </label>
+                        <Checkbox
+                          aria-label="Two"
+                          className=""
+                          id="someIdKey-2"
+                          isChecked={false}
+                          isDisabled={false}
+                          isValid={true}
+                          label="Two"
+                          name="Name of the field"
+                          onChange={[Function]}
+                          type="checkbox"
+                          value="2"
+                        >
+                          <div
+                            className="pf-c-check"
+                          >
+                            <input
+                              aria-invalid={false}
+                              aria-label="Two"
+                              checked={false}
+                              className="pf-c-check__input"
+                              disabled={false}
+                              id="someIdKey-2"
+                              name="Name of the field"
+                              onChange={[Function]}
+                              type="checkbox"
+                              value="2"
+                            />
+                            <label
+                              className="pf-c-check__label"
+                              htmlFor="someIdKey-2"
+                            >
+                              Two
+                            </label>
+                          </div>
+                        </Checkbox>
+                      </FinalCheckbox>
                     </div>
-                  </Checkbox>
-                </div>
-              </FieldProvider>
-              <FieldProvider
-                id="someIdKey-3"
-                key="3"
-                label="Three"
-                name="Name of the field"
-                render={[Function]}
-                type="checkbox"
-                value="3"
-              >
-                <div>
-                  <Checkbox
-                    aria-label="Three"
-                    className=""
+                  </FieldProvider>
+                  <FieldProvider
                     id="someIdKey-3"
-                    isChecked={false}
-                    isDisabled={false}
-                    isValid={true}
+                    key="3"
                     label="Three"
                     name="Name of the field"
-                    onChange={[Function]}
+                    render={[Function]}
                     type="checkbox"
                     value="3"
                   >
-                    <div
-                      className="pf-c-check"
-                    >
-                      <input
-                        aria-invalid={false}
+                    <div>
+                      <FinalCheckbox
                         aria-label="Three"
-                        checked={false}
-                        className="pf-c-check__input"
-                        disabled={false}
                         id="someIdKey-3"
+                        label="Three"
                         name="Name of the field"
                         onChange={[Function]}
                         type="checkbox"
                         value="3"
-                      />
-                      <label
-                        className="pf-c-check__label"
-                        htmlFor="someIdKey-3"
                       >
-                        Three
-                      </label>
+                        <Checkbox
+                          aria-label="Three"
+                          className=""
+                          id="someIdKey-3"
+                          isChecked={false}
+                          isDisabled={false}
+                          isValid={true}
+                          label="Three"
+                          name="Name of the field"
+                          onChange={[Function]}
+                          type="checkbox"
+                          value="3"
+                        >
+                          <div
+                            className="pf-c-check"
+                          >
+                            <input
+                              aria-invalid={false}
+                              aria-label="Three"
+                              checked={false}
+                              className="pf-c-check__input"
+                              disabled={false}
+                              id="someIdKey-3"
+                              name="Name of the field"
+                              onChange={[Function]}
+                              type="checkbox"
+                              value="3"
+                            />
+                            <label
+                              className="pf-c-check__label"
+                              htmlFor="someIdKey-3"
+                            >
+                              Three
+                            </label>
+                          </div>
+                        </Checkbox>
+                      </FinalCheckbox>
                     </div>
-                  </Checkbox>
+                  </FieldProvider>
                 </div>
-              </FieldProvider>
-            </div>
-          </FormGroup>
-        </div>
-      </FieldProvider>
+              </FormGroup>
+            </Wrapper>
+          </div>
+        </FieldProvider>
+      </MultipleChoiceList>
     </MultipleChoiceList>
   </FieldInterface>
 </CheckboxField>
@@ -1406,7 +1497,10 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
         ]
       }
     >
-      <FieldProvider
+      <MultipleChoiceList
+        Checkbox={[Function]}
+        FieldProvider={[Function]}
+        Wrapper={[Function]}
         componentType="checkbox"
         disabled={true}
         id="someIdKey"
@@ -1439,165 +1533,255 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
             },
           ]
         }
-        render={[Function]}
-        validate={[Function]}
       >
-        <div>
-          <FormGroup
-            fieldId="someIdKey"
-            isValid={false}
-          >
-            <div
-              className="pf-c-form__group"
+        <FieldProvider
+          componentType="checkbox"
+          disabled={true}
+          id="someIdKey"
+          input={
+            Object {
+              "name": "Name of the field",
+              "value": "",
+            }
+          }
+          meta={
+            Object {
+              "error": false,
+              "touched": false,
+            }
+          }
+          name="Name of the field"
+          options={
+            Array [
+              Object {
+                "label": "One",
+                "value": "1",
+              },
+              Object {
+                "label": "Two",
+                "value": "2",
+              },
+              Object {
+                "label": "Three",
+                "value": "3",
+              },
+            ]
+          }
+          render={[Function]}
+          validate={[Function]}
+        >
+          <div>
+            <Wrapper
+              error={false}
+              meta={
+                Object {
+                  "error": false,
+                  "touched": false,
+                }
+              }
+              rest={
+                Object {
+                  "componentType": "checkbox",
+                  "disabled": true,
+                  "id": "someIdKey",
+                  "input": Object {
+                    "name": "Name of the field",
+                    "value": "",
+                  },
+                  "name": "Name of the field",
+                  "validate": [Function],
+                }
+              }
+              showError={false}
             >
-              <FieldProvider
-                id="someIdKey-1"
-                key="1"
-                label="One"
-                name="Name of the field"
-                render={[Function]}
-                type="checkbox"
-                value="1"
+              <FormGroup
+                fieldId="someIdKey"
+                helperTextInvalid={false}
+                isValid={true}
               >
-                <div>
-                  <Checkbox
-                    aria-label="One"
-                    className=""
+                <div
+                  className="pf-c-form__group"
+                >
+                  <FieldProvider
                     id="someIdKey-1"
-                    isChecked={false}
-                    isDisabled={false}
-                    isValid={true}
+                    key="1"
                     label="One"
                     name="Name of the field"
-                    onChange={[Function]}
+                    render={[Function]}
                     type="checkbox"
                     value="1"
                   >
-                    <div
-                      className="pf-c-check"
-                    >
-                      <input
-                        aria-invalid={false}
+                    <div>
+                      <FinalCheckbox
                         aria-label="One"
-                        checked={false}
-                        className="pf-c-check__input"
-                        disabled={false}
                         id="someIdKey-1"
+                        label="One"
                         name="Name of the field"
                         onChange={[Function]}
                         type="checkbox"
                         value="1"
-                      />
-                      <label
-                        className="pf-c-check__label"
-                        htmlFor="someIdKey-1"
                       >
-                        One
-                      </label>
+                        <Checkbox
+                          aria-label="One"
+                          className=""
+                          id="someIdKey-1"
+                          isChecked={false}
+                          isDisabled={false}
+                          isValid={true}
+                          label="One"
+                          name="Name of the field"
+                          onChange={[Function]}
+                          type="checkbox"
+                          value="1"
+                        >
+                          <div
+                            className="pf-c-check"
+                          >
+                            <input
+                              aria-invalid={false}
+                              aria-label="One"
+                              checked={false}
+                              className="pf-c-check__input"
+                              disabled={false}
+                              id="someIdKey-1"
+                              name="Name of the field"
+                              onChange={[Function]}
+                              type="checkbox"
+                              value="1"
+                            />
+                            <label
+                              className="pf-c-check__label"
+                              htmlFor="someIdKey-1"
+                            >
+                              One
+                            </label>
+                          </div>
+                        </Checkbox>
+                      </FinalCheckbox>
                     </div>
-                  </Checkbox>
-                </div>
-              </FieldProvider>
-              <FieldProvider
-                id="someIdKey-2"
-                key="2"
-                label="Two"
-                name="Name of the field"
-                render={[Function]}
-                type="checkbox"
-                value="2"
-              >
-                <div>
-                  <Checkbox
-                    aria-label="Two"
-                    className=""
+                  </FieldProvider>
+                  <FieldProvider
                     id="someIdKey-2"
-                    isChecked={false}
-                    isDisabled={false}
-                    isValid={true}
+                    key="2"
                     label="Two"
                     name="Name of the field"
-                    onChange={[Function]}
+                    render={[Function]}
                     type="checkbox"
                     value="2"
                   >
-                    <div
-                      className="pf-c-check"
-                    >
-                      <input
-                        aria-invalid={false}
+                    <div>
+                      <FinalCheckbox
                         aria-label="Two"
-                        checked={false}
-                        className="pf-c-check__input"
-                        disabled={false}
                         id="someIdKey-2"
+                        label="Two"
                         name="Name of the field"
                         onChange={[Function]}
                         type="checkbox"
                         value="2"
-                      />
-                      <label
-                        className="pf-c-check__label"
-                        htmlFor="someIdKey-2"
                       >
-                        Two
-                      </label>
+                        <Checkbox
+                          aria-label="Two"
+                          className=""
+                          id="someIdKey-2"
+                          isChecked={false}
+                          isDisabled={false}
+                          isValid={true}
+                          label="Two"
+                          name="Name of the field"
+                          onChange={[Function]}
+                          type="checkbox"
+                          value="2"
+                        >
+                          <div
+                            className="pf-c-check"
+                          >
+                            <input
+                              aria-invalid={false}
+                              aria-label="Two"
+                              checked={false}
+                              className="pf-c-check__input"
+                              disabled={false}
+                              id="someIdKey-2"
+                              name="Name of the field"
+                              onChange={[Function]}
+                              type="checkbox"
+                              value="2"
+                            />
+                            <label
+                              className="pf-c-check__label"
+                              htmlFor="someIdKey-2"
+                            >
+                              Two
+                            </label>
+                          </div>
+                        </Checkbox>
+                      </FinalCheckbox>
                     </div>
-                  </Checkbox>
-                </div>
-              </FieldProvider>
-              <FieldProvider
-                id="someIdKey-3"
-                key="3"
-                label="Three"
-                name="Name of the field"
-                render={[Function]}
-                type="checkbox"
-                value="3"
-              >
-                <div>
-                  <Checkbox
-                    aria-label="Three"
-                    className=""
+                  </FieldProvider>
+                  <FieldProvider
                     id="someIdKey-3"
-                    isChecked={false}
-                    isDisabled={false}
-                    isValid={true}
+                    key="3"
                     label="Three"
                     name="Name of the field"
-                    onChange={[Function]}
+                    render={[Function]}
                     type="checkbox"
                     value="3"
                   >
-                    <div
-                      className="pf-c-check"
-                    >
-                      <input
-                        aria-invalid={false}
+                    <div>
+                      <FinalCheckbox
                         aria-label="Three"
-                        checked={false}
-                        className="pf-c-check__input"
-                        disabled={false}
                         id="someIdKey-3"
+                        label="Three"
                         name="Name of the field"
                         onChange={[Function]}
                         type="checkbox"
                         value="3"
-                      />
-                      <label
-                        className="pf-c-check__label"
-                        htmlFor="someIdKey-3"
                       >
-                        Three
-                      </label>
+                        <Checkbox
+                          aria-label="Three"
+                          className=""
+                          id="someIdKey-3"
+                          isChecked={false}
+                          isDisabled={false}
+                          isValid={true}
+                          label="Three"
+                          name="Name of the field"
+                          onChange={[Function]}
+                          type="checkbox"
+                          value="3"
+                        >
+                          <div
+                            className="pf-c-check"
+                          >
+                            <input
+                              aria-invalid={false}
+                              aria-label="Three"
+                              checked={false}
+                              className="pf-c-check__input"
+                              disabled={false}
+                              id="someIdKey-3"
+                              name="Name of the field"
+                              onChange={[Function]}
+                              type="checkbox"
+                              value="3"
+                            />
+                            <label
+                              className="pf-c-check__label"
+                              htmlFor="someIdKey-3"
+                            >
+                              Three
+                            </label>
+                          </div>
+                        </Checkbox>
+                      </FinalCheckbox>
                     </div>
-                  </Checkbox>
+                  </FieldProvider>
                 </div>
-              </FieldProvider>
-            </div>
-          </FormGroup>
-        </div>
-      </FieldProvider>
+              </FormGroup>
+            </Wrapper>
+          </div>
+        </FieldProvider>
+      </MultipleChoiceList>
     </MultipleChoiceList>
   </FieldInterface>
 </CheckboxField>
