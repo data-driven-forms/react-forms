@@ -31,6 +31,7 @@ const MultipleChoiceList = ({ validate, FieldProvider, Wrapper, Checkbox, ...pro
           meta={ meta }
           description={ description }
           rest={ rest }
+          error={ error }
         >
           { options.map(option =>
             (<FieldProvider
