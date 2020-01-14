@@ -290,12 +290,6 @@ class ComponentExample extends Component {
         direction="row"
         spacing={ 4 }
       >
-        <Grid item xs={ 12 } >
-          <Typography variant="h4" gutterBottom>
-            { linkText }
-          </Typography>
-
-        </Grid>
         <Grid item xs={ 4 } >
           <Typography variant="h5" gutterBottom>
               Schema
