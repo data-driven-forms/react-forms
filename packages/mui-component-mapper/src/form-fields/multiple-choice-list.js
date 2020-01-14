@@ -11,15 +11,15 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 
 import MultipleChoiceListCommon, { wrapperProps } from '@data-driven-forms/common/src/multiple-choice-list';
 
-const FinalCheckbox = (props) => (
+const FinalCheckbox = ({ isDisabled, label, ...props }) => (
   <FormControlLabel
     control={ <Checkbox
       { ...props }
-      disabled={ props.isDisabled }
+      disabled={ isDisabled }
     >
-      { props.label }
+      { label }
     </Checkbox> }
-    label={ props.label }
+    label={ label }
   />
 );
 
