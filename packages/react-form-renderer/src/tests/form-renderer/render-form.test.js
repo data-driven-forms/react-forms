@@ -51,6 +51,22 @@ describe('renderForm function', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
+  it('should render single field (array in array) from defined componentTypes', () => {
+    const formFields = [ [{
+      component: components.TEXT_FIELD,
+      name: 'foo',
+    }] ];
+    const wrapper = mount(
+      <ContextWrapper formFieldsMapper={{
+        [components.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <h1 { ...props }>TextField</h1>,
+      }}>
+        { renderForm(formFields) }
+      </ContextWrapper>
+    );
+
+    expect(wrapper.find('h1')).toHaveLength(1);
+  });
+
   it('should correctly assign dataType validator if no additional validators given', () => {
     const formFields = [{
       component: components.TEXT_FIELD,

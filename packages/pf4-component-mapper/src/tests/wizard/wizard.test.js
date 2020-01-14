@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 import toJSon from 'enzyme-to-json';
 
 import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
+import * as enterHandle from '@data-driven-forms/common/src/wizard/enter-handler';
 
 import { formFieldsMapper, layoutMapper } from '../../index';
 import Wizard from '../../form-fields/wizard/wizard';
@@ -147,6 +148,33 @@ describe('<Wizard />', () => {
     wrapper.unmount();
     wrapper.update();
     expect(toJSon(wrapper)).toMatchSnapshot();
+  });
+
+  it('should call enter handler when pressing enter', () => {
+    enterHandle.default = jest.fn();
+
+    const wrapper = mount(<Wizard { ...initialProps } />);
+
+    expect(enterHandle.default).not.toHaveBeenCalled();
+
+    const wizard = wrapper.find('.pf-c-wizard');
+
+    const event = { someEvent: true };
+    const formOptions = expect.any(Object);
+    const handleNext = expect.any(Function);
+    const handleSubmit = expect.any(Function);
+    const findCurrentStep = expect.any(Function);
+
+    wizard.props().onKeyDown(event);
+
+    expect(enterHandle.default).toHaveBeenCalledWith(
+      event,
+      formOptions,
+      '1',
+      findCurrentStep,
+      handleNext,
+      handleSubmit
+    );
   });
 
   it('should render correctly in modal and unmount', () => {

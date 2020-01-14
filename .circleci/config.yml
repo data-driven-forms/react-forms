@@ -22,6 +22,7 @@ jobs:
           command: yarn test:ci
       - codecov/upload:
           file: coverage/*.json
+          token: aa1b6b4d-79a1-49f6-bcb2-d6069134a772
       - persist_to_workspace:
           root: ~/react-forms
           paths:

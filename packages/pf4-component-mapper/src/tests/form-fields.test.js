@@ -11,10 +11,20 @@ import {
   SwitchField,
 } from '../form-fields/form-fields';
 import { mount, shallow } from 'enzyme';
-
-const FieldProvider = ({ render, ...props }) => <div>{ render({ input: { name: 'Foo', onChange: jest.fn() }, meta: { error: false, touched: false }, ...props }) }</div>;
+import { Radio, Checkbox } from '@patternfly/react-core';
 
 describe('FormFields', () => {
+  let FieldProvider;
+  let onChangeSpy;
+
+  beforeEach(() => {
+    onChangeSpy = jest.fn();
+
+    FieldProvider = ({ render, ...props }) => <div>
+      { render({ input: { name: 'Foo', onChange: onChangeSpy }, meta: { error: false, touched: false }, ...props }) }
+    </div>;
+  });
+
   const props = {
     input: {
       name: 'Name of the field',
@@ -91,6 +101,18 @@ describe('FormFields', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
+  it('Multiple checkbox - should call on change correctly', () => {
+    const wrapper = mount(
+      <CheckboxField { ...propsWithOptions } FieldProvider={ FieldProvider } />
+    );
+
+    expect(onChangeSpy).not.toHaveBeenCalled();
+
+    wrapper.find(Checkbox).first().props().onChange();
+
+    expect(onChangeSpy).toHaveBeenCalled();
+  });
+
   it('should render TextArea correctly', () => {
     const wrapper = mount(
       <TextAreaField { ...props } />
@@ -117,6 +139,16 @@ describe('FormFields', () => {
       <RadioField { ...propsWithOptions } FieldProvider={ FieldProvider } disabled={ true } />
     );
     expect(toJson(wrapper)).toMatchSnapshot();
+  });
+
+  it('radio - should call fieldProvider onChange correctly', () => {
+    const wrapper = mount(
+      <RadioField { ...propsWithOptions } FieldProvider={ FieldProvider } disabled={ true } />
+    );
+
+    wrapper.find(Radio).first().props().onChange();
+
+    expect(onChangeSpy).toHaveBeenCalled();
   });
 
   it('should render Select correctly', () => {

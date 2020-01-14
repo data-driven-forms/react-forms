@@ -1,5 +1,5 @@
 import { validators } from '../../constants';
-import { dataTypeValidator } from '../../validators/';
+import { dataTypeValidator, numericality } from '../../validators/';
 import validatorMapper from '../../validators/validator-mapper';
 import Validator from '../../validators/validators';
 import messages from '../../validators/messages';
@@ -72,10 +72,30 @@ describe('New validators', () => {
       expect(validatorMapper(validators.MAX_LENGTH)({ threshold: 3, message: 'Too long!' })('1234')).toBe('Too long!');
     });
 
+    it('should pass max length of 3 characters long validation with typo (backwards compatibility)', () => {
+      expect(validatorMapper(validators.MAX_LENGTH)({ treshold: 3 })('12')).toBeUndefined();
+    });
+
     it('should correctly pick threshold when using deprecated value', () => {
       expect(validatorMapper(validators.MIN_LENGTH)({ treshold: 3, message: 'Too short!' })('1')).toBe('Too short!');
       expect(validatorMapper(validators.MIN_LENGTH)({ threshold: 3, message: 'Too short!' })('1')).toBe('Too short!');
       expect(validatorMapper(validators.MIN_LENGTH)({ threshold: 5, treshold: 3, message: 'Too short!' })('12345')).toBeUndefined();
+    });
+
+    it('should pass min items of 3 validation with typo', () => {
+      expect(validatorMapper(validators.MIN_ITEMS_VALIDATOR)({ treshold: 3 })([ '1', '2', '3' ])).toBeUndefined();
+    });
+
+    it('should pass min items of 3 validation', () => {
+      expect(validatorMapper(validators.MIN_ITEMS_VALIDATOR)({ threshold: 3 })([ '1', '2', '3' ])).toBeUndefined();
+    });
+
+    it('should pass min items of 3 validation', () => {
+      expect(validatorMapper(validators.MIN_ITEMS_VALIDATOR)({ threshold: 3, message: 'Too few' })([ '1', '2' ])).toBe('Too few');
+    });
+
+    it('should pass min items of 3 validation with more items', () => {
+      expect(validatorMapper(validators.MIN_ITEMS_VALIDATOR)({ threshold: 3 })([ '1', '2', '3', '4' ])).toBeUndefined();
     });
   });
 
@@ -145,7 +165,57 @@ describe('New validators', () => {
     });
   });
 
+  describe('numericality validators', () => {
+    it('is not number', () => {
+      expect(numericality({ equal: 5 })('string')).toEqual('Value is not a number');
+    });
+
+    it('is not equal', () => {
+      expect(numericality({ '=': 5 })(6)).toEqual('must be equal to 5.');
+    });
+
+    it('is not different', () => {
+      expect(numericality({ '!=': 5 })(5)).toEqual('Value must be other than 5.');
+    });
+
+    it('is not goe', () => {
+      expect(numericality({ '>=': 5 })(4)).toEqual('Value must be greater than or equal to 5.');
+    });
+
+    it('is not loe', () => {
+      expect(numericality({ '<=': 5 })(6)).toEqual('Value must be less than or equal to 5');
+    });
+
+    it('is not greater', () => {
+      expect(numericality({ '>': 5 })(5)).toEqual('Value must be greater than 5.');
+    });
+
+    it('is not less', () => {
+      expect(numericality({ '<': 5 })(5)).toEqual('Value must be less than 5');
+    });
+
+    it('is not even', () => {
+      expect(numericality({ even: true })(5)).toEqual('Number must be even');
+    });
+
+    it('is not odd', () => {
+      expect(numericality({ odd: true })(4)).toEqual('Number must be odd');
+    });
+  });
+
   describe('data type validator', () => {
+    it('should return float and pass', () => {
+      expect(dataTypeValidator('float')()(123.232)).toBeUndefined();
+    });
+
+    it('should return float and pass 2', () => {
+      expect(dataTypeValidator('float')()(123)).toBeUndefined();
+    });
+
+    it('should return float validator and fail', () => {
+      expect(dataTypeValidator('float')({ message: 'Should be float' })('string')).toEqual('Should be float');
+    });
+
     it('should return string validator and pass', () => {
       expect(dataTypeValidator('string')({ message: 'String message' })('Foo')).toBeUndefined();
     });
