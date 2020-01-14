@@ -1,5 +1,6 @@
 import React from 'react';
-import { composeValidators } from '@data-driven-forms/react-form-renderer';
+import PropTypes from 'prop-types';
+
 import Grid from '@material-ui/core/Grid';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -8,65 +9,47 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
-const MultipleChoiceList = ({ validate, FieldProvider, ...props }) => (
-  <FieldProvider { ...props } validate={ composeValidators(props.validate || []) }>
-    { ({
-      label,
-      isRequired,
-      helperText,
-      meta,
-      options,
-      isDisabled,
-      formOptions,
-      componentType,
-      ...rest
-    }) => {
-      const { error, touched } = meta;
-      const showError = touched && error;
-      const groupValues = Array.isArray(rest.input.value) ? rest.input.value : [];
-      return (
-        <Grid container >
-          <FormControl component="fieldset" >
-            <FormLabel>{ label }</FormLabel>
-            <FormGroup>
-              { options.map(option =>
-                (<FieldProvider
-                  { ...rest }
-                  id={ `${rest.id}-${option.value}` }
-                  key={ option.value }
-                  { ...option }
-                  name={ props.name }
-                  type="checkbox"
-                  render={ ({ input, meta, value, formOptions, ...rest }) => {
-                    const indexValue = groupValues.indexOf(option.value);
-                    return (
-                      <FormControlLabel
-                        control={ <Checkbox
-                          label={ rest.label }
-                          aria-label={ option['aria-label'] || option.label }
-                          { ...input }
-                          { ...rest }
-                          checked={ indexValue !== -1 }
-                          disabled={ isDisabled }
-                          onChange={ () => {
-                            return (indexValue === -1
-                              ? input.onChange([ ...groupValues, option.value ])
-                              : input.onChange([ ...groupValues.slice(0, indexValue), ...groupValues.slice(indexValue + 1) ]));} }
-                        >
-                          { option.label }
-                        </Checkbox> }
-                        label={ option.label }
-                      />
-                    );
-                  } }
-                />)) }
-            </FormGroup>
-            <FormHelperText>{ showError ? error : null }</FormHelperText>
-          </FormControl>
-        </Grid>
-      );
-    } }
-  </FieldProvider>
+import MultipleChoiceListCommon, { wrapperProps } from '@data-driven-forms/common/src/multiple-choice-list';
+
+const FinalCheckbox = ({ isDisabled, label, ...props }) => (
+  <FormControlLabel
+    control={ <Checkbox
+      { ...props }
+      disabled={ isDisabled }
+    >
+      { label }
+    </Checkbox> }
+    label={ label }
+  />
+);
+
+FinalCheckbox.propTypes = {
+  isDisabled: PropTypes.bool,
+  label: PropTypes.node,
+};
+
+const Wrapper = ({ showError, label, error, children }) =>(
+  <Grid container >
+    <FormControl component="fieldset" >
+      <FormLabel>{ label }</FormLabel>
+      <FormGroup>
+        { children }
+      </FormGroup>
+      <FormHelperText>{ showError ? error : null }</FormHelperText>
+    </FormControl>
+  </Grid>
+);
+
+Wrapper.propTypes = {
+  ...wrapperProps,
+};
+
+const MultipleChoiceList = (props) => (
+  <MultipleChoiceListCommon
+    { ...props }
+    Wrapper={ Wrapper }
+    Checkbox={ FinalCheckbox }
+  />
 );
 
 export default MultipleChoiceList;
