@@ -150,7 +150,7 @@ describe('<Wizard />', () => {
     expect(toJSon(wrapper)).toMatchSnapshot();
   });
 
-  it.only('should call enter handler when pressing enter', () => {
+  it('should call enter handler when pressing enter', () => {
     enterHandle.default = jest.fn();
 
     const wrapper = mount(<Wizard { ...initialProps } />);
