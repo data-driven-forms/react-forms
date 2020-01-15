@@ -122,7 +122,6 @@ const FormRenderer = ({
 export default FormRenderer;
 
 FormRenderer.propTypes = {
-  formType: PropTypes.oneOf([ 'pf3', 'pf4' ]),
   onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func,
   onReset: PropTypes.func,
@@ -145,7 +144,6 @@ FormRenderer.propTypes = {
 };
 
 FormRenderer.defaultProps = {
-  formType: 'pf3',
   resetAble: false,
   schemaType: 'default',
   buttonsLabels: {},

@@ -19,7 +19,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
       "time-picker": [Function],
     }
   }
-  formType="pf3"
   initialValues={Object {}}
   layoutMapper={
     Object {
@@ -2779,7 +2778,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
       "time-picker": [Function],
     }
   }
-  formType="pf3"
   initialValues={Object {}}
   layoutMapper={
     Object {
