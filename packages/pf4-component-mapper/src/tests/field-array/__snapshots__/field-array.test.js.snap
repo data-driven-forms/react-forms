@@ -42,7 +42,6 @@ exports[`FieldArray should render array field correctly 1`] = `
         "wizard": [Function],
       }
     }
-    formType="pf3"
     initialValues={Object {}}
     layoutMapper={
       Object {
@@ -54,7 +53,6 @@ exports[`FieldArray should render array field correctly 1`] = `
       }
     }
     onSubmit={[MockFunction]}
-    resetAble={false}
     schema={
       Object {
         "fields": Array [
@@ -72,9 +70,7 @@ exports[`FieldArray should render array field correctly 1`] = `
         ],
       }
     }
-    schemaType="default"
     showFormControls={true}
-    uiSchema={Object {}}
   >
     <ReactFinalForm
       decorators={
