@@ -4,20 +4,12 @@ import arrayMutators from 'final-form-arrays';
 import PropTypes from 'prop-types';
 import createFocusDecorator from 'final-form-focus';
 
-import miqParser from '../parsers/miq-parser/miq-parser';
-import mozillaParser from '../parsers/mozilla-parser/mozilla-schema-parser';
 import RendererContext from './renderer-context';
 import FormControls from './form-controls';
 import renderForm from './render-form';
 import defaultSchemaValidator from '../parsers/default-schema-validator';
 import SchemaErrorComponent from './schema-error-component';
 import { renderTitle, renderDescription } from './form-information';
-
-const schemaMapper = type => ({
-  mozilla: (schema, uiSchema) => mozillaParser(schema, uiSchema),
-  miq: schema => miqParser(schema),
-  default: schema => ({ schema }),
-})[type];
 
 const isDisabled = (disableStates, getState) => disableStates.map(item => getState()[item]).find(item => !!item);
 
@@ -28,12 +20,9 @@ const FormRenderer = ({
   onCancel,
   canReset,
   onReset,
-  schema,
-  schemaType,
   buttonsLabels,
   disableSubmit,
   initialValues,
-  uiSchema,
   showFormControls,
   buttonOrder,
   buttonClassName,
@@ -43,11 +32,11 @@ const FormRenderer = ({
   renderFormButtons,
   subscription,
   clearedValue,
+  schema,
 }) => {
-  const inputSchema = schemaMapper(schemaType)(schema, uiSchema);
   let schemaError;
   try {
-    defaultSchemaValidator(inputSchema.schema, formFieldsMapper, layoutMapper);
+    defaultSchemaValidator(schema, formFieldsMapper, layoutMapper);
   } catch (error) {
     schemaError = error;
     console.error(error);
@@ -58,17 +47,14 @@ const FormRenderer = ({
     return <SchemaErrorComponent name={ schemaError.name } message={ schemaError.message } />;
   }
 
-  const label = inputSchema.schema.title || inputSchema.schema.label;
+  const label = schema.title || schema.label;
 
   return (
     <Form
       onSubmit={ onSubmit }
       mutators={{ ...arrayMutators }}
       decorators={ [ createFocusDecorator() ] }
-      initialValues={{
-        ...inputSchema.defaultValues,
-        ...initialValues,
-      }}
+      initialValues={ initialValues }
       validate={ validate }
       subscription={{ pristine: true, submitting: true, valid: true, ...subscription }}
       render={ ({ handleSubmit, pristine, valid, form: { reset, mutators, getState, submit, ...form }, ...state }) => (
@@ -95,8 +81,8 @@ const FormRenderer = ({
             { ({ layoutMapper: { FormWrapper }}) => (
               <FormWrapper onSubmit={ handleSubmit }>
                 { label && renderTitle(label) }
-                { inputSchema.schema.description && renderDescription(inputSchema.schema.description) }
-                { renderForm(inputSchema.schema.fields) }
+                { schema.description && renderDescription(schema.description) }
+                { renderForm(schema.fields) }
                 { onStateUpdate && <FormSpy onChange={ onStateUpdate } /> }
                 { showFormControls && (
                   <FormControls
@@ -127,11 +113,9 @@ FormRenderer.propTypes = {
   onReset: PropTypes.func,
   canReset: PropTypes.bool,
   schema: PropTypes.object.isRequired,
-  schemaType: PropTypes.oneOf([ 'mozilla', 'miq', 'default' ]),
   buttonsLabels: PropTypes.object,
   disableSubmit: PropTypes.arrayOf(PropTypes.string),
   initialValues: PropTypes.object,
-  uiSchema: PropTypes.object,
   showFormControls: PropTypes.bool,
   buttonOrder: PropTypes.arrayOf(PropTypes.string),
   buttonClassName: PropTypes.string,
@@ -145,11 +129,9 @@ FormRenderer.propTypes = {
 
 FormRenderer.defaultProps = {
   resetAble: false,
-  schemaType: 'default',
   buttonsLabels: {},
   disableSubmit: [],
   initialValues: {},
-  uiSchema: {},
   showFormControls: true,
   clearOnUnmount: false,
   buttonClassName: '',

@@ -26,9 +26,7 @@ exports[`<FormControls /> should render with description 1`] = `
         "fields": Array [],
       }
     }
-    schemaType="default"
     showFormControls={true}
-    uiSchema={Object {}}
   >
     <ReactFinalForm
       decorators={
@@ -185,9 +183,7 @@ exports[`<FormControls /> should render with title and description 1`] = `
         "title": "Title",
       }
     }
-    schemaType="default"
     showFormControls={true}
-    uiSchema={Object {}}
   >
     <ReactFinalForm
       decorators={
@@ -347,9 +343,7 @@ exports[`<FormControls /> should render without title and description 1`] = `
         "fields": Array [],
       }
     }
-    schemaType="default"
     showFormControls={true}
-    uiSchema={Object {}}
   >
     <ReactFinalForm
       decorators={

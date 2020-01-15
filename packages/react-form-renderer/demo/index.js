@@ -35,7 +35,6 @@ const App = () => (
             onCancel={console.log}
             canReset
             onReset={() => console.log('i am resseting')}
-            schemaType="default"
             schema={sandboxSchema}
             buttonOrder={['cancel', 'reset', 'submit']}
             buttonClassName="Foo"

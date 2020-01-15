@@ -37,10 +37,8 @@ Form Renderer provides a lot of customization via props.
 |onStateUpdate|func|A function which will be called with every form update, i.e. `({ values }) => setValues(values)`||
 |disableSubmit|array of strings|You can specify a form attributes (see [here](https://final-form.org/docs/final-form/types/FormState)) which will make the submit button disabled. |[ ]|
 |initialValues|object|An object of fields names as keys and values as their values.||
-|schemaType|one of `['mozilla', 'miq', 'default']`|Data driven forms includes two basic parsers: mozilla and manageiq service dialogs.|'default'|
 |showFormControls|bool|You can disable showing form buttons. Use it with wizard component which has its own buttons.|true|
 |subscription|object|You can pass your own [subscription](https://final-form.org/docs/react-final-form/types/FormProps#subscription), which will be added to default settings.|`{ pristine: true, submitting: true, valid: true }`|
-|uiSchema|object|Use when you need to use mozilla schema.|{ }|
 |<RouterLink href="/renderer/validators"><Link href="/renderer/validators">validate</Link></RouterLink>|func|A function which receives all form values and returns an object with errors.||
 
 # Schema

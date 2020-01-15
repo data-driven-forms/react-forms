@@ -11,7 +11,7 @@ import sandboxSchema from './demo-schemas/sandbox';
 
 const Summary = props => <div>Custom summary component.</div>;
 
-const fieldArrayState = { schema: arraySchemaDDF, schemaString: 'default', ui: uiArraySchema, additionalOptions: {
+const fieldArrayState = { schema: arraySchemaDDF, additionalOptions: {
     initialValues: {
         number: [1,2,3,4],
         minMax: [null, null, null, null]
@@ -30,27 +30,17 @@ class App extends React.Component {
             <Title size="4xl">Pf4 component mapper</Title>
             <Toolbar style={{ marginBottom: 20, marginTop: 20 }}>
                 <ToolbarGroup>
-                    <Button onClick={() => this.setState(state => ({ schema: wizardSchema, schemaString: 'default', additionalOptions: { showFormControls: false, wizard: true } }))}>Wizard</Button>
+                    <Button onClick={() => this.setState(state => ({ schema: wizardSchema, additionalOptions: { showFormControls: false, wizard: true } }))}>Wizard</Button>
                 </ToolbarGroup>
                 <ToolbarGroup>
                     <Button onClick={() => this.setState(state => fieldArrayState)}>arraySchema</Button>
                 </ToolbarGroup>
                 <ToolbarGroup>
-                    <Button onClick={() => this.setState(state => ({ schema: schema, schemaString: 'mozilla', ui: uiSchema, additionalOptions: {}}))}>schema</Button>
-                </ToolbarGroup>
-                <ToolbarGroup>
-                    <Button onClick={() => this.setState(state => ({ schema: miqSchema, schemaString: 'miq', additionalOptions: {}}))}>miq</Button>
-                </ToolbarGroup>
-                <ToolbarGroup>
-                    <Button onClick={() => this.setState(state => ({ schema: conditionalSchema, schemaString: 'mozilla', ui: uiSchema, additionalOptions: {}}))}>conditional</Button>
-                </ToolbarGroup>
-                <ToolbarGroup>
-                    <Button onClick={() => this.setState(state => ({ schema: sandboxSchema, schemaString: 'default', additionalOptions: {}}))}>Sandbox</Button>
+                    <Button onClick={() => this.setState(state => ({ schema: sandboxSchema, additionalOptions: {}}))}>Sandbox</Button>
                 </ToolbarGroup>
             </Toolbar>
             <FormRenderer
                 onSubmit={console.log}
-                schemaType={this.state.schemaString}
                 formFieldsMapper={{
                     ...formFieldsMapper,
                     summary: Summary

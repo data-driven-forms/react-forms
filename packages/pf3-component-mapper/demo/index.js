@@ -111,7 +111,6 @@ class App extends React.Component {
           <FormRenderer
             initialValues={{}}
             onSubmit={console.log}
-            schemaType="default"
             formFieldsMapper={formFieldsMapper}
             layoutMapper={layoutMapper}
             schema={sandbox}
