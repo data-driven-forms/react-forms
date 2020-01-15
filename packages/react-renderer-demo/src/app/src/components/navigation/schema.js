@@ -5,10 +5,6 @@ import flatMap from 'lodash/flatMap';
 
 const schema =  [
   {
-    linkText: 'Demo',
-    link: 'show-case',
-  },
-  {
     linkText: 'Live Form Editor',
     link: 'live-editor',
   },

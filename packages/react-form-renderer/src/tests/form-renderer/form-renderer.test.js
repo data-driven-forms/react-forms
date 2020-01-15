@@ -3,7 +3,6 @@ import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { Form } from 'react-final-form';
 import FormRenderer from '../../form-renderer';
-import { widgets, uiWidgets } from '../../demo-schemas/mozilla-schemas';
 import { components, layoutComponents } from '../../constants';
 import FormControls from '../../form-renderer/form-controls';
 import SchemaErrorComponent from '../../form-renderer/schema-error-component';
@@ -12,6 +11,8 @@ describe('<FormRenderer />', () => {
   let layoutMapper;
   let formFieldsMapper;
   let initialProps;
+  let schema;
+
   beforeEach(() => {
     formFieldsMapper = {
       [components.TEXT_FIELD]: () => <div className="nested-item">Text field</div>,
@@ -35,15 +36,22 @@ describe('<FormRenderer />', () => {
       [layoutComponents.DESCRIPTION]: ({ children }) => <div>{ children }</div>,
     };
 
+    schema = {
+      fields: [{
+        component: components.TEXT_FIELD,
+        name: 'component1',
+      }, {
+        component: components.SELECT,
+        name: 'secret',
+      }],
+    };
+
     initialProps = {
       formFieldsMapper,
       layoutMapper,
       onSubmit: jest.fn(),
-      schemaType: 'mozilla',
-      schema: widgets,
-      uischema: uiWidgets,
+      schema,
     };
-
   });
 
   it('should render form from schema', () => {
@@ -67,7 +75,7 @@ describe('<FormRenderer />', () => {
       }],
     };
 
-    const wrapper = mount(<FormRenderer { ...initialProps } schema={ schemaWithError } schemaType={ undefined }/>);
+    const wrapper = mount(<FormRenderer { ...initialProps } schema={ schemaWithError } />);
 
     expect(wrapper.find(SchemaErrorComponent));
     expect(spy).toHaveBeenCalled();
@@ -123,18 +131,23 @@ describe('<FormRenderer />', () => {
         <button id="custom-submit-button" onClick={ submit } type="button">Handle submit</button>
       </div>
     );
-    const wrapper = mount(<FormRenderer { ...initialProps } schemaType="default" schema={{
-      fields: [{
-        component: [ components.TEXT_FIELD ],
-        name: 'visible',
-        label: 'Visible',
-      }, {
-        component: [ components.TEXT_FIELD ],
-        name: 'hidden',
-        label: 'Hidden',
-        hideField: true,
-      }],
-    }} onSubmit={ onSubmit } renderFormButtons={ FormControls }/>);
+    const wrapper = mount(<FormRenderer
+      { ...initialProps }
+      schema={{
+        fields: [{
+          component: [ components.TEXT_FIELD ],
+          name: 'visible',
+          label: 'Visible',
+        }, {
+          component: [ components.TEXT_FIELD ],
+          name: 'hidden',
+          label: 'Hidden',
+          hideField: true,
+        }],
+      }}
+      onSubmit={ onSubmit }
+      renderFormButtons={ FormControls }
+    />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });

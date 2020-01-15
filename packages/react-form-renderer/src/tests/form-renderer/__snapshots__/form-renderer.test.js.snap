@@ -19,7 +19,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
       "time-picker": [Function],
     }
   }
-  formType="pf3"
   initialValues={Object {}}
   layoutMapper={
     Object {
@@ -31,145 +30,21 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
     }
   }
   onSubmit={[MockFunction]}
-  resetAble={false}
   schema={
     Object {
-      "properties": Object {
-        "boolean": Object {
-          "properties": Object {
-            "defaultCheckbox": Object {
-              "description": "This is the checkbox-description",
-              "title": "checkbox (default)",
-              "type": "boolean",
-            },
-            "radio": Object {
-              "description": "This is the radio-description",
-              "title": "radio buttons",
-              "type": "boolean",
-            },
-            "select": Object {
-              "description": "This is the select-description",
-              "title": "select box",
-              "type": "boolean",
-            },
-          },
-          "title": "Boolean field",
-          "type": "object",
+      "fields": Array [
+        Object {
+          "component": "text-field",
+          "name": "component1",
         },
-        "disabled": Object {
-          "default": "I am disabled.",
-          "title": "A disabled field",
-          "type": "string",
+        Object {
+          "component": "select-field",
+          "name": "secret",
         },
-        "readonly": Object {
-          "default": "I am read-only.",
-          "title": "A readonly field",
-          "type": "string",
-        },
-        "secret": Object {
-          "default": "I'm a hidden string.",
-          "type": "string",
-        },
-        "selectWidgetOptions": Object {
-          "enum": Array [
-            "foo",
-            "bar",
-          ],
-          "enumNames": Array [
-            "Foo",
-            "Bar",
-          ],
-          "title": "Custom select widget with options",
-          "type": "string",
-        },
-        "string": Object {
-          "properties": Object {
-            "color": Object {
-              "default": "#151ce6",
-              "title": "color picker",
-              "type": "string",
-            },
-            "defaultInput": Object {
-              "title": "text input (default)",
-              "type": "string",
-            },
-            "textarea": Object {
-              "title": "textarea",
-              "type": "string",
-            },
-          },
-          "title": "String field",
-          "type": "object",
-        },
-        "stringFormats": Object {
-          "properties": Object {
-            "email": Object {
-              "format": "email",
-              "type": "string",
-            },
-            "uri": Object {
-              "format": "uri",
-              "type": "string",
-            },
-          },
-          "title": "String formats",
-          "type": "object",
-        },
-        "widgetOptions": Object {
-          "default": "I am yellow",
-          "title": "Custom widget with options",
-          "type": "string",
-        },
-      },
-      "title": "Widgets",
-      "type": "object",
+      ],
     }
   }
-  schemaType="mozilla"
   showFormControls={true}
-  uiSchema={Object {}}
-  uischema={
-    Object {
-      "boolean": Object {
-        "radio": Object {
-          "ui:widget": "radio",
-        },
-        "select": Object {
-          "ui:widget": "select",
-        },
-      },
-      "disabled": Object {
-        "ui:disabled": true,
-      },
-      "readonly": Object {
-        "ui:readonly": true,
-      },
-      "secret": Object {
-        "ui:widget": "hidden",
-      },
-      "selectWidgetOptions": Object {
-        "ui:options": Object {
-          "backgroundColor": "pink",
-        },
-      },
-      "string": Object {
-        "color": Object {
-          "ui:widget": "color",
-        },
-        "textarea": Object {
-          "ui:options": Object {
-            "rows": 5,
-          },
-          "ui:widget": "textarea",
-        },
-      },
-      "widgetOptions": Object {
-        "ui:options": Object {
-          "backgroundColor": "yellow",
-        },
-      },
-    }
-  }
 >
   <ReactFinalForm
     decorators={
@@ -177,17 +52,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
         [Function],
       ]
     }
-    initialValues={
-      Object {
-        "disabled": "I am disabled.",
-        "readonly": "I am read-only.",
-        "secret": "I'm a hidden string.",
-        "string": Object {
-          "color": "#151ce6",
-        },
-        "widgetOptions": "I am yellow",
-      }
-    }
+    initialValues={Object {}}
     mutators={
       Object {
         "concat": [Function],
@@ -217,660 +82,13 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
       onSubmit={[Function]}
     >
       <form>
-        <Component>
-          <div>
-            Widgets
-          </div>
-        </Component>
         <FormConditionWrapper>
           <FormFieldHideWrapper
             hideField={false}
           >
             <FieldWrapper
-              autoFocus={false}
-              component={[Function]}
-              componentType="sub-form"
-              fields={
-                Array [
-                  Object {
-                    "autoFocus": false,
-                    "component": "text-field",
-                    "dataType": "string",
-                    "description": undefined,
-                    "helperText": undefined,
-                    "initialKey": "email",
-                    "inline": undefined,
-                    "isDisabled": undefined,
-                    "isReadOnly": undefined,
-                    "label": "email",
-                    "name": "stringFormats.email",
-                    "rows": undefined,
-                    "type": "email",
-                    "validate": Array [],
-                  },
-                  Object {
-                    "autoFocus": false,
-                    "component": "text-field",
-                    "dataType": "string",
-                    "description": undefined,
-                    "helperText": undefined,
-                    "initialKey": "uri",
-                    "inline": undefined,
-                    "isDisabled": undefined,
-                    "isReadOnly": undefined,
-                    "label": "uri",
-                    "name": "stringFormats.uri",
-                    "rows": undefined,
-                    "type": "uri",
-                    "validate": Array [],
-                  },
-                ]
-              }
-              formOptions={
-                Object {
-                  "batch": [Function],
-                  "blur": [Function],
-                  "change": [Function],
-                  "clearOnUnmount": false,
-                  "clearedValue": undefined,
-                  "concat": [Function],
-                  "destroyOnUnregister": false,
-                  "focus": [Function],
-                  "getFieldState": [Function],
-                  "getRegisteredFields": [Function],
-                  "getState": [Function],
-                  "handleSubmit": [Function],
-                  "initialize": [Function],
-                  "insert": [Function],
-                  "isValidationPaused": [Function],
-                  "move": [Function],
-                  "onCancel": undefined,
-                  "onSubmit": [MockFunction],
-                  "pauseValidation": [Function],
-                  "pop": [Function],
-                  "pristine": true,
-                  "push": [Function],
-                  "registerField": [Function],
-                  "remove": [Function],
-                  "removeBatch": [Function],
-                  "renderForm": [Function],
-                  "reset": [Function],
-                  "resetFieldState": [Function],
-                  "resumeValidation": [Function],
-                  "setConfig": [Function],
-                  "shift": [Function],
-                  "submit": [Function],
-                  "subscribe": [Function],
-                  "swap": [Function],
-                  "unshift": [Function],
-                  "update": [Function],
-                  "valid": true,
-                }
-              }
-              key="stringFormats"
-              name="stringFormats"
-              title="String formats"
-              validate={
-                Array [
-                  undefined,
-                ]
-              }
-            >
-              <Component
-                FieldProvider={[Function]}
-                autoFocus={false}
-                fields={
-                  Array [
-                    Object {
-                      "autoFocus": false,
-                      "component": "text-field",
-                      "dataType": "string",
-                      "description": undefined,
-                      "helperText": undefined,
-                      "initialKey": "email",
-                      "inline": undefined,
-                      "isDisabled": undefined,
-                      "isReadOnly": undefined,
-                      "label": "email",
-                      "name": "stringFormats.email",
-                      "rows": undefined,
-                      "type": "email",
-                      "validate": Array [],
-                    },
-                    Object {
-                      "autoFocus": false,
-                      "component": "text-field",
-                      "dataType": "string",
-                      "description": undefined,
-                      "helperText": undefined,
-                      "initialKey": "uri",
-                      "inline": undefined,
-                      "isDisabled": undefined,
-                      "isReadOnly": undefined,
-                      "label": "uri",
-                      "name": "stringFormats.uri",
-                      "rows": undefined,
-                      "type": "uri",
-                      "validate": Array [],
-                    },
-                  ]
-                }
-                formOptions={
-                  Object {
-                    "batch": [Function],
-                    "blur": [Function],
-                    "change": [Function],
-                    "clearOnUnmount": false,
-                    "clearedValue": undefined,
-                    "concat": [Function],
-                    "destroyOnUnregister": false,
-                    "focus": [Function],
-                    "getFieldState": [Function],
-                    "getRegisteredFields": [Function],
-                    "getState": [Function],
-                    "handleSubmit": [Function],
-                    "initialize": [Function],
-                    "insert": [Function],
-                    "isValidationPaused": [Function],
-                    "move": [Function],
-                    "onCancel": undefined,
-                    "onSubmit": [MockFunction],
-                    "pauseValidation": [Function],
-                    "pop": [Function],
-                    "pristine": true,
-                    "push": [Function],
-                    "registerField": [Function],
-                    "remove": [Function],
-                    "removeBatch": [Function],
-                    "renderForm": [Function],
-                    "reset": [Function],
-                    "resetFieldState": [Function],
-                    "resumeValidation": [Function],
-                    "setConfig": [Function],
-                    "shift": [Function],
-                    "submit": [Function],
-                    "subscribe": [Function],
-                    "swap": [Function],
-                    "unshift": [Function],
-                    "update": [Function],
-                    "valid": true,
-                  }
-                }
-                name="stringFormats"
-                title="String formats"
-                validate={[Function]}
-              >
-                <div
-                  className="nested-item"
-                >
-                  sub form
-                </div>
-              </Component>
-            </FieldWrapper>
-          </FormFieldHideWrapper>
-        </FormConditionWrapper>
-        <FormConditionWrapper>
-          <FormFieldHideWrapper
-            hideField={false}
-          >
-            <FieldWrapper
-              autoFocus={false}
-              component={[Function]}
-              componentType="sub-form"
-              fields={
-                Array [
-                  Object {
-                    "autoFocus": false,
-                    "component": "checkbox",
-                    "dataType": "boolean",
-                    "description": "This is the checkbox-description",
-                    "helperText": undefined,
-                    "initialKey": "defaultCheckbox",
-                    "inline": undefined,
-                    "isDisabled": undefined,
-                    "isReadOnly": undefined,
-                    "label": "checkbox (default)",
-                    "name": "boolean.defaultCheckbox",
-                    "rows": undefined,
-                    "title": "checkbox (default)",
-                    "type": "checkbox",
-                    "validate": Array [],
-                  },
-                  Object {
-                    "autoFocus": false,
-                    "component": "checkbox",
-                    "dataType": "boolean",
-                    "description": "This is the radio-description",
-                    "helperText": undefined,
-                    "initialKey": "radio",
-                    "inline": undefined,
-                    "isDisabled": undefined,
-                    "isReadOnly": undefined,
-                    "label": "radio buttons",
-                    "name": "boolean.radio",
-                    "rows": undefined,
-                    "title": "radio buttons",
-                    "type": "checkbox",
-                    "validate": Array [],
-                  },
-                  Object {
-                    "autoFocus": false,
-                    "component": "checkbox",
-                    "dataType": "boolean",
-                    "description": "This is the select-description",
-                    "helperText": undefined,
-                    "initialKey": "select",
-                    "inline": undefined,
-                    "isDisabled": undefined,
-                    "isReadOnly": undefined,
-                    "label": "select box",
-                    "name": "boolean.select",
-                    "rows": undefined,
-                    "title": "select box",
-                    "type": "checkbox",
-                    "validate": Array [],
-                  },
-                ]
-              }
-              formOptions={
-                Object {
-                  "batch": [Function],
-                  "blur": [Function],
-                  "change": [Function],
-                  "clearOnUnmount": false,
-                  "clearedValue": undefined,
-                  "concat": [Function],
-                  "destroyOnUnregister": false,
-                  "focus": [Function],
-                  "getFieldState": [Function],
-                  "getRegisteredFields": [Function],
-                  "getState": [Function],
-                  "handleSubmit": [Function],
-                  "initialize": [Function],
-                  "insert": [Function],
-                  "isValidationPaused": [Function],
-                  "move": [Function],
-                  "onCancel": undefined,
-                  "onSubmit": [MockFunction],
-                  "pauseValidation": [Function],
-                  "pop": [Function],
-                  "pristine": true,
-                  "push": [Function],
-                  "registerField": [Function],
-                  "remove": [Function],
-                  "removeBatch": [Function],
-                  "renderForm": [Function],
-                  "reset": [Function],
-                  "resetFieldState": [Function],
-                  "resumeValidation": [Function],
-                  "setConfig": [Function],
-                  "shift": [Function],
-                  "submit": [Function],
-                  "subscribe": [Function],
-                  "swap": [Function],
-                  "unshift": [Function],
-                  "update": [Function],
-                  "valid": true,
-                }
-              }
-              key="boolean"
-              name="boolean"
-              title="Boolean field"
-              validate={
-                Array [
-                  undefined,
-                ]
-              }
-            >
-              <Component
-                FieldProvider={[Function]}
-                autoFocus={false}
-                fields={
-                  Array [
-                    Object {
-                      "autoFocus": false,
-                      "component": "checkbox",
-                      "dataType": "boolean",
-                      "description": "This is the checkbox-description",
-                      "helperText": undefined,
-                      "initialKey": "defaultCheckbox",
-                      "inline": undefined,
-                      "isDisabled": undefined,
-                      "isReadOnly": undefined,
-                      "label": "checkbox (default)",
-                      "name": "boolean.defaultCheckbox",
-                      "rows": undefined,
-                      "title": "checkbox (default)",
-                      "type": "checkbox",
-                      "validate": Array [],
-                    },
-                    Object {
-                      "autoFocus": false,
-                      "component": "checkbox",
-                      "dataType": "boolean",
-                      "description": "This is the radio-description",
-                      "helperText": undefined,
-                      "initialKey": "radio",
-                      "inline": undefined,
-                      "isDisabled": undefined,
-                      "isReadOnly": undefined,
-                      "label": "radio buttons",
-                      "name": "boolean.radio",
-                      "rows": undefined,
-                      "title": "radio buttons",
-                      "type": "checkbox",
-                      "validate": Array [],
-                    },
-                    Object {
-                      "autoFocus": false,
-                      "component": "checkbox",
-                      "dataType": "boolean",
-                      "description": "This is the select-description",
-                      "helperText": undefined,
-                      "initialKey": "select",
-                      "inline": undefined,
-                      "isDisabled": undefined,
-                      "isReadOnly": undefined,
-                      "label": "select box",
-                      "name": "boolean.select",
-                      "rows": undefined,
-                      "title": "select box",
-                      "type": "checkbox",
-                      "validate": Array [],
-                    },
-                  ]
-                }
-                formOptions={
-                  Object {
-                    "batch": [Function],
-                    "blur": [Function],
-                    "change": [Function],
-                    "clearOnUnmount": false,
-                    "clearedValue": undefined,
-                    "concat": [Function],
-                    "destroyOnUnregister": false,
-                    "focus": [Function],
-                    "getFieldState": [Function],
-                    "getRegisteredFields": [Function],
-                    "getState": [Function],
-                    "handleSubmit": [Function],
-                    "initialize": [Function],
-                    "insert": [Function],
-                    "isValidationPaused": [Function],
-                    "move": [Function],
-                    "onCancel": undefined,
-                    "onSubmit": [MockFunction],
-                    "pauseValidation": [Function],
-                    "pop": [Function],
-                    "pristine": true,
-                    "push": [Function],
-                    "registerField": [Function],
-                    "remove": [Function],
-                    "removeBatch": [Function],
-                    "renderForm": [Function],
-                    "reset": [Function],
-                    "resetFieldState": [Function],
-                    "resumeValidation": [Function],
-                    "setConfig": [Function],
-                    "shift": [Function],
-                    "submit": [Function],
-                    "subscribe": [Function],
-                    "swap": [Function],
-                    "unshift": [Function],
-                    "update": [Function],
-                    "valid": true,
-                  }
-                }
-                name="boolean"
-                title="Boolean field"
-                validate={[Function]}
-              >
-                <div
-                  className="nested-item"
-                >
-                  sub form
-                </div>
-              </Component>
-            </FieldWrapper>
-          </FormFieldHideWrapper>
-        </FormConditionWrapper>
-        <FormConditionWrapper>
-          <FormFieldHideWrapper
-            hideField={false}
-          >
-            <FieldWrapper
-              autoFocus={false}
-              component={[Function]}
-              componentType="sub-form"
-              fields={
-                Array [
-                  Object {
-                    "autoFocus": false,
-                    "component": "text-field",
-                    "dataType": "string",
-                    "description": undefined,
-                    "helperText": undefined,
-                    "initialKey": "defaultInput",
-                    "inline": undefined,
-                    "isDisabled": undefined,
-                    "isReadOnly": undefined,
-                    "label": "text input (default)",
-                    "name": "string.defaultInput",
-                    "rows": undefined,
-                    "title": "text input (default)",
-                    "type": "text",
-                    "validate": Array [],
-                  },
-                  Object {
-                    "autoFocus": false,
-                    "component": "text-field",
-                    "dataType": "string",
-                    "description": undefined,
-                    "helperText": undefined,
-                    "initialKey": "textarea",
-                    "inline": undefined,
-                    "isDisabled": undefined,
-                    "isReadOnly": undefined,
-                    "label": "textarea",
-                    "name": "string.textarea",
-                    "rows": undefined,
-                    "title": "textarea",
-                    "type": "text",
-                    "validate": Array [],
-                  },
-                  Object {
-                    "autoFocus": false,
-                    "component": "text-field",
-                    "dataType": "string",
-                    "default": "#151ce6",
-                    "description": undefined,
-                    "helperText": undefined,
-                    "initialKey": "color",
-                    "inline": undefined,
-                    "isDisabled": undefined,
-                    "isReadOnly": undefined,
-                    "label": "color picker",
-                    "name": "string.color",
-                    "rows": undefined,
-                    "title": "color picker",
-                    "type": "text",
-                    "validate": Array [],
-                  },
-                ]
-              }
-              formOptions={
-                Object {
-                  "batch": [Function],
-                  "blur": [Function],
-                  "change": [Function],
-                  "clearOnUnmount": false,
-                  "clearedValue": undefined,
-                  "concat": [Function],
-                  "destroyOnUnregister": false,
-                  "focus": [Function],
-                  "getFieldState": [Function],
-                  "getRegisteredFields": [Function],
-                  "getState": [Function],
-                  "handleSubmit": [Function],
-                  "initialize": [Function],
-                  "insert": [Function],
-                  "isValidationPaused": [Function],
-                  "move": [Function],
-                  "onCancel": undefined,
-                  "onSubmit": [MockFunction],
-                  "pauseValidation": [Function],
-                  "pop": [Function],
-                  "pristine": true,
-                  "push": [Function],
-                  "registerField": [Function],
-                  "remove": [Function],
-                  "removeBatch": [Function],
-                  "renderForm": [Function],
-                  "reset": [Function],
-                  "resetFieldState": [Function],
-                  "resumeValidation": [Function],
-                  "setConfig": [Function],
-                  "shift": [Function],
-                  "submit": [Function],
-                  "subscribe": [Function],
-                  "swap": [Function],
-                  "unshift": [Function],
-                  "update": [Function],
-                  "valid": true,
-                }
-              }
-              key="string"
-              name="string"
-              title="String field"
-              validate={
-                Array [
-                  undefined,
-                ]
-              }
-            >
-              <Component
-                FieldProvider={[Function]}
-                autoFocus={false}
-                fields={
-                  Array [
-                    Object {
-                      "autoFocus": false,
-                      "component": "text-field",
-                      "dataType": "string",
-                      "description": undefined,
-                      "helperText": undefined,
-                      "initialKey": "defaultInput",
-                      "inline": undefined,
-                      "isDisabled": undefined,
-                      "isReadOnly": undefined,
-                      "label": "text input (default)",
-                      "name": "string.defaultInput",
-                      "rows": undefined,
-                      "title": "text input (default)",
-                      "type": "text",
-                      "validate": Array [],
-                    },
-                    Object {
-                      "autoFocus": false,
-                      "component": "text-field",
-                      "dataType": "string",
-                      "description": undefined,
-                      "helperText": undefined,
-                      "initialKey": "textarea",
-                      "inline": undefined,
-                      "isDisabled": undefined,
-                      "isReadOnly": undefined,
-                      "label": "textarea",
-                      "name": "string.textarea",
-                      "rows": undefined,
-                      "title": "textarea",
-                      "type": "text",
-                      "validate": Array [],
-                    },
-                    Object {
-                      "autoFocus": false,
-                      "component": "text-field",
-                      "dataType": "string",
-                      "default": "#151ce6",
-                      "description": undefined,
-                      "helperText": undefined,
-                      "initialKey": "color",
-                      "inline": undefined,
-                      "isDisabled": undefined,
-                      "isReadOnly": undefined,
-                      "label": "color picker",
-                      "name": "string.color",
-                      "rows": undefined,
-                      "title": "color picker",
-                      "type": "text",
-                      "validate": Array [],
-                    },
-                  ]
-                }
-                formOptions={
-                  Object {
-                    "batch": [Function],
-                    "blur": [Function],
-                    "change": [Function],
-                    "clearOnUnmount": false,
-                    "clearedValue": undefined,
-                    "concat": [Function],
-                    "destroyOnUnregister": false,
-                    "focus": [Function],
-                    "getFieldState": [Function],
-                    "getRegisteredFields": [Function],
-                    "getState": [Function],
-                    "handleSubmit": [Function],
-                    "initialize": [Function],
-                    "insert": [Function],
-                    "isValidationPaused": [Function],
-                    "move": [Function],
-                    "onCancel": undefined,
-                    "onSubmit": [MockFunction],
-                    "pauseValidation": [Function],
-                    "pop": [Function],
-                    "pristine": true,
-                    "push": [Function],
-                    "registerField": [Function],
-                    "remove": [Function],
-                    "removeBatch": [Function],
-                    "renderForm": [Function],
-                    "reset": [Function],
-                    "resetFieldState": [Function],
-                    "resumeValidation": [Function],
-                    "setConfig": [Function],
-                    "shift": [Function],
-                    "submit": [Function],
-                    "subscribe": [Function],
-                    "swap": [Function],
-                    "unshift": [Function],
-                    "update": [Function],
-                    "valid": true,
-                  }
-                }
-                name="string"
-                title="String field"
-                validate={[Function]}
-              >
-                <div
-                  className="nested-item"
-                >
-                  sub form
-                </div>
-              </Component>
-            </FieldWrapper>
-          </FormFieldHideWrapper>
-        </FormConditionWrapper>
-        <FormConditionWrapper>
-          <FormFieldHideWrapper
-            hideField={false}
-          >
-            <FieldWrapper
-              autoFocus={false}
               component={[Function]}
               componentType="text-field"
-              dataType="string"
-              default="I'm a hidden string."
               formOptions={
                 Object {
                   "batch": [Function],
@@ -912,22 +130,17 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                   "valid": true,
                 }
               }
-              label="secret"
-              name="secret"
-              type="text"
+              name="component1"
               validate={
                 Array [
-                  [Function],
+                  undefined,
                 ]
               }
             >
               <FieldProvider
                 FieldArrayProvider={[Function]}
                 FieldProvider={[Function]}
-                autoFocus={false}
                 component={[Function]}
-                dataType="string"
-                default="I'm a hidden string."
                 formOptions={
                   Object {
                     "batch": [Function],
@@ -969,16 +182,12 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                     "valid": true,
                   }
                 }
-                label="secret"
-                name="secret"
-                type="text"
+                name="component1"
                 validate={[Function]}
               >
                 <ReactFinalForm(Field)
                   FieldArrayProvider={[Function]}
                   FieldProvider={[Function]}
-                  autoFocus={false}
-                  default="I'm a hidden string."
                   formOptions={
                     Object {
                       "batch": [Function],
@@ -1020,17 +229,13 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                       "valid": true,
                     }
                   }
-                  label="secret"
-                  name="secret"
+                  name="component1"
                   render={[Function]}
-                  type="text"
                   validate={[Function]}
                 >
                   <Field
                     FieldArrayProvider={[Function]}
                     FieldProvider={[Function]}
-                    autoFocus={false}
-                    default="I'm a hidden string."
                     formOptions={
                       Object {
                         "batch": [Function],
@@ -1073,7 +278,328 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                       }
                     }
                     format={[Function]}
-                    label="secret"
+                    name="component1"
+                    parse={[Function]}
+                    reactFinalForm={
+                      Object {
+                        "batch": [Function],
+                        "blur": [Function],
+                        "change": [Function],
+                        "destroyOnUnregister": false,
+                        "focus": [Function],
+                        "getFieldState": [Function],
+                        "getRegisteredFields": [Function],
+                        "getState": [Function],
+                        "initialize": [Function],
+                        "isValidationPaused": [Function],
+                        "mutators": Object {
+                          "concat": [Function],
+                          "insert": [Function],
+                          "move": [Function],
+                          "pop": [Function],
+                          "push": [Function],
+                          "remove": [Function],
+                          "removeBatch": [Function],
+                          "shift": [Function],
+                          "swap": [Function],
+                          "unshift": [Function],
+                          "update": [Function],
+                        },
+                        "pauseValidation": [Function],
+                        "registerField": [Function],
+                        "reset": [Function],
+                        "resetFieldState": [Function],
+                        "resumeValidation": [Function],
+                        "setConfig": [Function],
+                        "submit": [Function],
+                        "subscribe": [Function],
+                      }
+                    }
+                    render={[Function]}
+                    validate={[Function]}
+                  >
+                    <Component
+                      FieldArrayProvider={[Function]}
+                      FieldProvider={[Function]}
+                      formOptions={
+                        Object {
+                          "batch": [Function],
+                          "blur": [Function],
+                          "change": [Function],
+                          "clearOnUnmount": false,
+                          "clearedValue": undefined,
+                          "concat": [Function],
+                          "destroyOnUnregister": false,
+                          "focus": [Function],
+                          "getFieldState": [Function],
+                          "getRegisteredFields": [Function],
+                          "getState": [Function],
+                          "handleSubmit": [Function],
+                          "initialize": [Function],
+                          "insert": [Function],
+                          "isValidationPaused": [Function],
+                          "move": [Function],
+                          "onCancel": undefined,
+                          "onSubmit": [MockFunction],
+                          "pauseValidation": [Function],
+                          "pop": [Function],
+                          "pristine": true,
+                          "push": [Function],
+                          "registerField": [Function],
+                          "remove": [Function],
+                          "removeBatch": [Function],
+                          "renderForm": [Function],
+                          "reset": [Function],
+                          "resetFieldState": [Function],
+                          "resumeValidation": [Function],
+                          "setConfig": [Function],
+                          "shift": [Function],
+                          "submit": [Function],
+                          "subscribe": [Function],
+                          "swap": [Function],
+                          "unshift": [Function],
+                          "update": [Function],
+                          "valid": true,
+                        }
+                      }
+                      input={
+                        Object {
+                          "name": "component1",
+                          "onBlur": [Function],
+                          "onChange": [Function],
+                          "onFocus": [Function],
+                          "value": "",
+                        }
+                      }
+                      meta={
+                        Object {
+                          "active": false,
+                          "data": Object {},
+                          "dirty": false,
+                          "dirtySinceLastSubmit": false,
+                          "error": undefined,
+                          "initial": undefined,
+                          "invalid": false,
+                          "modified": false,
+                          "pristine": true,
+                          "submitError": undefined,
+                          "submitFailed": false,
+                          "submitSucceeded": false,
+                          "submitting": false,
+                          "touched": false,
+                          "valid": true,
+                          "visited": false,
+                        }
+                      }
+                    >
+                      <div
+                        className="nested-item"
+                      >
+                        Text field
+                      </div>
+                    </Component>
+                  </Field>
+                </ReactFinalForm(Field)>
+              </FieldProvider>
+            </FieldWrapper>
+          </FormFieldHideWrapper>
+        </FormConditionWrapper>
+        <FormConditionWrapper>
+          <FormFieldHideWrapper
+            hideField={false}
+          >
+            <FieldWrapper
+              component={[Function]}
+              componentType="select-field"
+              formOptions={
+                Object {
+                  "batch": [Function],
+                  "blur": [Function],
+                  "change": [Function],
+                  "clearOnUnmount": false,
+                  "clearedValue": undefined,
+                  "concat": [Function],
+                  "destroyOnUnregister": false,
+                  "focus": [Function],
+                  "getFieldState": [Function],
+                  "getRegisteredFields": [Function],
+                  "getState": [Function],
+                  "handleSubmit": [Function],
+                  "initialize": [Function],
+                  "insert": [Function],
+                  "isValidationPaused": [Function],
+                  "move": [Function],
+                  "onCancel": undefined,
+                  "onSubmit": [MockFunction],
+                  "pauseValidation": [Function],
+                  "pop": [Function],
+                  "pristine": true,
+                  "push": [Function],
+                  "registerField": [Function],
+                  "remove": [Function],
+                  "removeBatch": [Function],
+                  "renderForm": [Function],
+                  "reset": [Function],
+                  "resetFieldState": [Function],
+                  "resumeValidation": [Function],
+                  "setConfig": [Function],
+                  "shift": [Function],
+                  "submit": [Function],
+                  "subscribe": [Function],
+                  "swap": [Function],
+                  "unshift": [Function],
+                  "update": [Function],
+                  "valid": true,
+                }
+              }
+              name="secret"
+              validate={
+                Array [
+                  undefined,
+                ]
+              }
+            >
+              <FieldProvider
+                FieldArrayProvider={[Function]}
+                FieldProvider={[Function]}
+                component={[Function]}
+                formOptions={
+                  Object {
+                    "batch": [Function],
+                    "blur": [Function],
+                    "change": [Function],
+                    "clearOnUnmount": false,
+                    "clearedValue": undefined,
+                    "concat": [Function],
+                    "destroyOnUnregister": false,
+                    "focus": [Function],
+                    "getFieldState": [Function],
+                    "getRegisteredFields": [Function],
+                    "getState": [Function],
+                    "handleSubmit": [Function],
+                    "initialize": [Function],
+                    "insert": [Function],
+                    "isValidationPaused": [Function],
+                    "move": [Function],
+                    "onCancel": undefined,
+                    "onSubmit": [MockFunction],
+                    "pauseValidation": [Function],
+                    "pop": [Function],
+                    "pristine": true,
+                    "push": [Function],
+                    "registerField": [Function],
+                    "remove": [Function],
+                    "removeBatch": [Function],
+                    "renderForm": [Function],
+                    "reset": [Function],
+                    "resetFieldState": [Function],
+                    "resumeValidation": [Function],
+                    "setConfig": [Function],
+                    "shift": [Function],
+                    "submit": [Function],
+                    "subscribe": [Function],
+                    "swap": [Function],
+                    "unshift": [Function],
+                    "update": [Function],
+                    "valid": true,
+                  }
+                }
+                name="secret"
+                validate={[Function]}
+              >
+                <ReactFinalForm(Field)
+                  FieldArrayProvider={[Function]}
+                  FieldProvider={[Function]}
+                  formOptions={
+                    Object {
+                      "batch": [Function],
+                      "blur": [Function],
+                      "change": [Function],
+                      "clearOnUnmount": false,
+                      "clearedValue": undefined,
+                      "concat": [Function],
+                      "destroyOnUnregister": false,
+                      "focus": [Function],
+                      "getFieldState": [Function],
+                      "getRegisteredFields": [Function],
+                      "getState": [Function],
+                      "handleSubmit": [Function],
+                      "initialize": [Function],
+                      "insert": [Function],
+                      "isValidationPaused": [Function],
+                      "move": [Function],
+                      "onCancel": undefined,
+                      "onSubmit": [MockFunction],
+                      "pauseValidation": [Function],
+                      "pop": [Function],
+                      "pristine": true,
+                      "push": [Function],
+                      "registerField": [Function],
+                      "remove": [Function],
+                      "removeBatch": [Function],
+                      "renderForm": [Function],
+                      "reset": [Function],
+                      "resetFieldState": [Function],
+                      "resumeValidation": [Function],
+                      "setConfig": [Function],
+                      "shift": [Function],
+                      "submit": [Function],
+                      "subscribe": [Function],
+                      "swap": [Function],
+                      "unshift": [Function],
+                      "update": [Function],
+                      "valid": true,
+                    }
+                  }
+                  name="secret"
+                  render={[Function]}
+                  validate={[Function]}
+                >
+                  <Field
+                    FieldArrayProvider={[Function]}
+                    FieldProvider={[Function]}
+                    formOptions={
+                      Object {
+                        "batch": [Function],
+                        "blur": [Function],
+                        "change": [Function],
+                        "clearOnUnmount": false,
+                        "clearedValue": undefined,
+                        "concat": [Function],
+                        "destroyOnUnregister": false,
+                        "focus": [Function],
+                        "getFieldState": [Function],
+                        "getRegisteredFields": [Function],
+                        "getState": [Function],
+                        "handleSubmit": [Function],
+                        "initialize": [Function],
+                        "insert": [Function],
+                        "isValidationPaused": [Function],
+                        "move": [Function],
+                        "onCancel": undefined,
+                        "onSubmit": [MockFunction],
+                        "pauseValidation": [Function],
+                        "pop": [Function],
+                        "pristine": true,
+                        "push": [Function],
+                        "registerField": [Function],
+                        "remove": [Function],
+                        "removeBatch": [Function],
+                        "renderForm": [Function],
+                        "reset": [Function],
+                        "resetFieldState": [Function],
+                        "resumeValidation": [Function],
+                        "setConfig": [Function],
+                        "shift": [Function],
+                        "submit": [Function],
+                        "subscribe": [Function],
+                        "swap": [Function],
+                        "unshift": [Function],
+                        "update": [Function],
+                        "valid": true,
+                      }
+                    }
+                    format={[Function]}
                     name="secret"
                     parse={[Function]}
                     reactFinalForm={
@@ -1112,14 +638,11 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                       }
                     }
                     render={[Function]}
-                    type="text"
                     validate={[Function]}
                   >
                     <Component
                       FieldArrayProvider={[Function]}
                       FieldProvider={[Function]}
-                      autoFocus={false}
-                      default="I'm a hidden string."
                       formOptions={
                         Object {
                           "batch": [Function],
@@ -1167,1464 +690,9 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                           "onBlur": [Function],
                           "onChange": [Function],
                           "onFocus": [Function],
-                          "value": "I'm a hidden string.",
-                        }
-                      }
-                      label="secret"
-                      meta={
-                        Object {
-                          "active": false,
-                          "data": Object {},
-                          "dirty": false,
-                          "dirtySinceLastSubmit": false,
-                          "error": undefined,
-                          "initial": "I'm a hidden string.",
-                          "invalid": false,
-                          "modified": false,
-                          "pristine": true,
-                          "submitError": undefined,
-                          "submitFailed": false,
-                          "submitSucceeded": false,
-                          "submitting": false,
-                          "touched": false,
-                          "valid": true,
-                          "visited": false,
-                        }
-                      }
-                      type="text"
-                    >
-                      <div
-                        className="nested-item"
-                      >
-                        Text field
-                      </div>
-                    </Component>
-                  </Field>
-                </ReactFinalForm(Field)>
-              </FieldProvider>
-            </FieldWrapper>
-          </FormFieldHideWrapper>
-        </FormConditionWrapper>
-        <FormConditionWrapper>
-          <FormFieldHideWrapper
-            hideField={false}
-          >
-            <FieldWrapper
-              autoFocus={false}
-              component={[Function]}
-              componentType="text-field"
-              dataType="string"
-              default="I am disabled."
-              formOptions={
-                Object {
-                  "batch": [Function],
-                  "blur": [Function],
-                  "change": [Function],
-                  "clearOnUnmount": false,
-                  "clearedValue": undefined,
-                  "concat": [Function],
-                  "destroyOnUnregister": false,
-                  "focus": [Function],
-                  "getFieldState": [Function],
-                  "getRegisteredFields": [Function],
-                  "getState": [Function],
-                  "handleSubmit": [Function],
-                  "initialize": [Function],
-                  "insert": [Function],
-                  "isValidationPaused": [Function],
-                  "move": [Function],
-                  "onCancel": undefined,
-                  "onSubmit": [MockFunction],
-                  "pauseValidation": [Function],
-                  "pop": [Function],
-                  "pristine": true,
-                  "push": [Function],
-                  "registerField": [Function],
-                  "remove": [Function],
-                  "removeBatch": [Function],
-                  "renderForm": [Function],
-                  "reset": [Function],
-                  "resetFieldState": [Function],
-                  "resumeValidation": [Function],
-                  "setConfig": [Function],
-                  "shift": [Function],
-                  "submit": [Function],
-                  "subscribe": [Function],
-                  "swap": [Function],
-                  "unshift": [Function],
-                  "update": [Function],
-                  "valid": true,
-                }
-              }
-              label="A disabled field"
-              name="disabled"
-              title="A disabled field"
-              type="text"
-              validate={
-                Array [
-                  [Function],
-                ]
-              }
-            >
-              <FieldProvider
-                FieldArrayProvider={[Function]}
-                FieldProvider={[Function]}
-                autoFocus={false}
-                component={[Function]}
-                dataType="string"
-                default="I am disabled."
-                formOptions={
-                  Object {
-                    "batch": [Function],
-                    "blur": [Function],
-                    "change": [Function],
-                    "clearOnUnmount": false,
-                    "clearedValue": undefined,
-                    "concat": [Function],
-                    "destroyOnUnregister": false,
-                    "focus": [Function],
-                    "getFieldState": [Function],
-                    "getRegisteredFields": [Function],
-                    "getState": [Function],
-                    "handleSubmit": [Function],
-                    "initialize": [Function],
-                    "insert": [Function],
-                    "isValidationPaused": [Function],
-                    "move": [Function],
-                    "onCancel": undefined,
-                    "onSubmit": [MockFunction],
-                    "pauseValidation": [Function],
-                    "pop": [Function],
-                    "pristine": true,
-                    "push": [Function],
-                    "registerField": [Function],
-                    "remove": [Function],
-                    "removeBatch": [Function],
-                    "renderForm": [Function],
-                    "reset": [Function],
-                    "resetFieldState": [Function],
-                    "resumeValidation": [Function],
-                    "setConfig": [Function],
-                    "shift": [Function],
-                    "submit": [Function],
-                    "subscribe": [Function],
-                    "swap": [Function],
-                    "unshift": [Function],
-                    "update": [Function],
-                    "valid": true,
-                  }
-                }
-                label="A disabled field"
-                name="disabled"
-                title="A disabled field"
-                type="text"
-                validate={[Function]}
-              >
-                <ReactFinalForm(Field)
-                  FieldArrayProvider={[Function]}
-                  FieldProvider={[Function]}
-                  autoFocus={false}
-                  default="I am disabled."
-                  formOptions={
-                    Object {
-                      "batch": [Function],
-                      "blur": [Function],
-                      "change": [Function],
-                      "clearOnUnmount": false,
-                      "clearedValue": undefined,
-                      "concat": [Function],
-                      "destroyOnUnregister": false,
-                      "focus": [Function],
-                      "getFieldState": [Function],
-                      "getRegisteredFields": [Function],
-                      "getState": [Function],
-                      "handleSubmit": [Function],
-                      "initialize": [Function],
-                      "insert": [Function],
-                      "isValidationPaused": [Function],
-                      "move": [Function],
-                      "onCancel": undefined,
-                      "onSubmit": [MockFunction],
-                      "pauseValidation": [Function],
-                      "pop": [Function],
-                      "pristine": true,
-                      "push": [Function],
-                      "registerField": [Function],
-                      "remove": [Function],
-                      "removeBatch": [Function],
-                      "renderForm": [Function],
-                      "reset": [Function],
-                      "resetFieldState": [Function],
-                      "resumeValidation": [Function],
-                      "setConfig": [Function],
-                      "shift": [Function],
-                      "submit": [Function],
-                      "subscribe": [Function],
-                      "swap": [Function],
-                      "unshift": [Function],
-                      "update": [Function],
-                      "valid": true,
-                    }
-                  }
-                  label="A disabled field"
-                  name="disabled"
-                  render={[Function]}
-                  title="A disabled field"
-                  type="text"
-                  validate={[Function]}
-                >
-                  <Field
-                    FieldArrayProvider={[Function]}
-                    FieldProvider={[Function]}
-                    autoFocus={false}
-                    default="I am disabled."
-                    formOptions={
-                      Object {
-                        "batch": [Function],
-                        "blur": [Function],
-                        "change": [Function],
-                        "clearOnUnmount": false,
-                        "clearedValue": undefined,
-                        "concat": [Function],
-                        "destroyOnUnregister": false,
-                        "focus": [Function],
-                        "getFieldState": [Function],
-                        "getRegisteredFields": [Function],
-                        "getState": [Function],
-                        "handleSubmit": [Function],
-                        "initialize": [Function],
-                        "insert": [Function],
-                        "isValidationPaused": [Function],
-                        "move": [Function],
-                        "onCancel": undefined,
-                        "onSubmit": [MockFunction],
-                        "pauseValidation": [Function],
-                        "pop": [Function],
-                        "pristine": true,
-                        "push": [Function],
-                        "registerField": [Function],
-                        "remove": [Function],
-                        "removeBatch": [Function],
-                        "renderForm": [Function],
-                        "reset": [Function],
-                        "resetFieldState": [Function],
-                        "resumeValidation": [Function],
-                        "setConfig": [Function],
-                        "shift": [Function],
-                        "submit": [Function],
-                        "subscribe": [Function],
-                        "swap": [Function],
-                        "unshift": [Function],
-                        "update": [Function],
-                        "valid": true,
-                      }
-                    }
-                    format={[Function]}
-                    label="A disabled field"
-                    name="disabled"
-                    parse={[Function]}
-                    reactFinalForm={
-                      Object {
-                        "batch": [Function],
-                        "blur": [Function],
-                        "change": [Function],
-                        "destroyOnUnregister": false,
-                        "focus": [Function],
-                        "getFieldState": [Function],
-                        "getRegisteredFields": [Function],
-                        "getState": [Function],
-                        "initialize": [Function],
-                        "isValidationPaused": [Function],
-                        "mutators": Object {
-                          "concat": [Function],
-                          "insert": [Function],
-                          "move": [Function],
-                          "pop": [Function],
-                          "push": [Function],
-                          "remove": [Function],
-                          "removeBatch": [Function],
-                          "shift": [Function],
-                          "swap": [Function],
-                          "unshift": [Function],
-                          "update": [Function],
-                        },
-                        "pauseValidation": [Function],
-                        "registerField": [Function],
-                        "reset": [Function],
-                        "resetFieldState": [Function],
-                        "resumeValidation": [Function],
-                        "setConfig": [Function],
-                        "submit": [Function],
-                        "subscribe": [Function],
-                      }
-                    }
-                    render={[Function]}
-                    title="A disabled field"
-                    type="text"
-                    validate={[Function]}
-                  >
-                    <Component
-                      FieldArrayProvider={[Function]}
-                      FieldProvider={[Function]}
-                      autoFocus={false}
-                      default="I am disabled."
-                      formOptions={
-                        Object {
-                          "batch": [Function],
-                          "blur": [Function],
-                          "change": [Function],
-                          "clearOnUnmount": false,
-                          "clearedValue": undefined,
-                          "concat": [Function],
-                          "destroyOnUnregister": false,
-                          "focus": [Function],
-                          "getFieldState": [Function],
-                          "getRegisteredFields": [Function],
-                          "getState": [Function],
-                          "handleSubmit": [Function],
-                          "initialize": [Function],
-                          "insert": [Function],
-                          "isValidationPaused": [Function],
-                          "move": [Function],
-                          "onCancel": undefined,
-                          "onSubmit": [MockFunction],
-                          "pauseValidation": [Function],
-                          "pop": [Function],
-                          "pristine": true,
-                          "push": [Function],
-                          "registerField": [Function],
-                          "remove": [Function],
-                          "removeBatch": [Function],
-                          "renderForm": [Function],
-                          "reset": [Function],
-                          "resetFieldState": [Function],
-                          "resumeValidation": [Function],
-                          "setConfig": [Function],
-                          "shift": [Function],
-                          "submit": [Function],
-                          "subscribe": [Function],
-                          "swap": [Function],
-                          "unshift": [Function],
-                          "update": [Function],
-                          "valid": true,
-                        }
-                      }
-                      input={
-                        Object {
-                          "name": "disabled",
-                          "onBlur": [Function],
-                          "onChange": [Function],
-                          "onFocus": [Function],
-                          "value": "I am disabled.",
-                        }
-                      }
-                      label="A disabled field"
-                      meta={
-                        Object {
-                          "active": false,
-                          "data": Object {},
-                          "dirty": false,
-                          "dirtySinceLastSubmit": false,
-                          "error": undefined,
-                          "initial": "I am disabled.",
-                          "invalid": false,
-                          "modified": false,
-                          "pristine": true,
-                          "submitError": undefined,
-                          "submitFailed": false,
-                          "submitSucceeded": false,
-                          "submitting": false,
-                          "touched": false,
-                          "valid": true,
-                          "visited": false,
-                        }
-                      }
-                      title="A disabled field"
-                      type="text"
-                    >
-                      <div
-                        className="nested-item"
-                      >
-                        Text field
-                      </div>
-                    </Component>
-                  </Field>
-                </ReactFinalForm(Field)>
-              </FieldProvider>
-            </FieldWrapper>
-          </FormFieldHideWrapper>
-        </FormConditionWrapper>
-        <FormConditionWrapper>
-          <FormFieldHideWrapper
-            hideField={false}
-          >
-            <FieldWrapper
-              autoFocus={false}
-              component={[Function]}
-              componentType="text-field"
-              dataType="string"
-              default="I am read-only."
-              formOptions={
-                Object {
-                  "batch": [Function],
-                  "blur": [Function],
-                  "change": [Function],
-                  "clearOnUnmount": false,
-                  "clearedValue": undefined,
-                  "concat": [Function],
-                  "destroyOnUnregister": false,
-                  "focus": [Function],
-                  "getFieldState": [Function],
-                  "getRegisteredFields": [Function],
-                  "getState": [Function],
-                  "handleSubmit": [Function],
-                  "initialize": [Function],
-                  "insert": [Function],
-                  "isValidationPaused": [Function],
-                  "move": [Function],
-                  "onCancel": undefined,
-                  "onSubmit": [MockFunction],
-                  "pauseValidation": [Function],
-                  "pop": [Function],
-                  "pristine": true,
-                  "push": [Function],
-                  "registerField": [Function],
-                  "remove": [Function],
-                  "removeBatch": [Function],
-                  "renderForm": [Function],
-                  "reset": [Function],
-                  "resetFieldState": [Function],
-                  "resumeValidation": [Function],
-                  "setConfig": [Function],
-                  "shift": [Function],
-                  "submit": [Function],
-                  "subscribe": [Function],
-                  "swap": [Function],
-                  "unshift": [Function],
-                  "update": [Function],
-                  "valid": true,
-                }
-              }
-              label="A readonly field"
-              name="readonly"
-              title="A readonly field"
-              type="text"
-              validate={
-                Array [
-                  [Function],
-                ]
-              }
-            >
-              <FieldProvider
-                FieldArrayProvider={[Function]}
-                FieldProvider={[Function]}
-                autoFocus={false}
-                component={[Function]}
-                dataType="string"
-                default="I am read-only."
-                formOptions={
-                  Object {
-                    "batch": [Function],
-                    "blur": [Function],
-                    "change": [Function],
-                    "clearOnUnmount": false,
-                    "clearedValue": undefined,
-                    "concat": [Function],
-                    "destroyOnUnregister": false,
-                    "focus": [Function],
-                    "getFieldState": [Function],
-                    "getRegisteredFields": [Function],
-                    "getState": [Function],
-                    "handleSubmit": [Function],
-                    "initialize": [Function],
-                    "insert": [Function],
-                    "isValidationPaused": [Function],
-                    "move": [Function],
-                    "onCancel": undefined,
-                    "onSubmit": [MockFunction],
-                    "pauseValidation": [Function],
-                    "pop": [Function],
-                    "pristine": true,
-                    "push": [Function],
-                    "registerField": [Function],
-                    "remove": [Function],
-                    "removeBatch": [Function],
-                    "renderForm": [Function],
-                    "reset": [Function],
-                    "resetFieldState": [Function],
-                    "resumeValidation": [Function],
-                    "setConfig": [Function],
-                    "shift": [Function],
-                    "submit": [Function],
-                    "subscribe": [Function],
-                    "swap": [Function],
-                    "unshift": [Function],
-                    "update": [Function],
-                    "valid": true,
-                  }
-                }
-                label="A readonly field"
-                name="readonly"
-                title="A readonly field"
-                type="text"
-                validate={[Function]}
-              >
-                <ReactFinalForm(Field)
-                  FieldArrayProvider={[Function]}
-                  FieldProvider={[Function]}
-                  autoFocus={false}
-                  default="I am read-only."
-                  formOptions={
-                    Object {
-                      "batch": [Function],
-                      "blur": [Function],
-                      "change": [Function],
-                      "clearOnUnmount": false,
-                      "clearedValue": undefined,
-                      "concat": [Function],
-                      "destroyOnUnregister": false,
-                      "focus": [Function],
-                      "getFieldState": [Function],
-                      "getRegisteredFields": [Function],
-                      "getState": [Function],
-                      "handleSubmit": [Function],
-                      "initialize": [Function],
-                      "insert": [Function],
-                      "isValidationPaused": [Function],
-                      "move": [Function],
-                      "onCancel": undefined,
-                      "onSubmit": [MockFunction],
-                      "pauseValidation": [Function],
-                      "pop": [Function],
-                      "pristine": true,
-                      "push": [Function],
-                      "registerField": [Function],
-                      "remove": [Function],
-                      "removeBatch": [Function],
-                      "renderForm": [Function],
-                      "reset": [Function],
-                      "resetFieldState": [Function],
-                      "resumeValidation": [Function],
-                      "setConfig": [Function],
-                      "shift": [Function],
-                      "submit": [Function],
-                      "subscribe": [Function],
-                      "swap": [Function],
-                      "unshift": [Function],
-                      "update": [Function],
-                      "valid": true,
-                    }
-                  }
-                  label="A readonly field"
-                  name="readonly"
-                  render={[Function]}
-                  title="A readonly field"
-                  type="text"
-                  validate={[Function]}
-                >
-                  <Field
-                    FieldArrayProvider={[Function]}
-                    FieldProvider={[Function]}
-                    autoFocus={false}
-                    default="I am read-only."
-                    formOptions={
-                      Object {
-                        "batch": [Function],
-                        "blur": [Function],
-                        "change": [Function],
-                        "clearOnUnmount": false,
-                        "clearedValue": undefined,
-                        "concat": [Function],
-                        "destroyOnUnregister": false,
-                        "focus": [Function],
-                        "getFieldState": [Function],
-                        "getRegisteredFields": [Function],
-                        "getState": [Function],
-                        "handleSubmit": [Function],
-                        "initialize": [Function],
-                        "insert": [Function],
-                        "isValidationPaused": [Function],
-                        "move": [Function],
-                        "onCancel": undefined,
-                        "onSubmit": [MockFunction],
-                        "pauseValidation": [Function],
-                        "pop": [Function],
-                        "pristine": true,
-                        "push": [Function],
-                        "registerField": [Function],
-                        "remove": [Function],
-                        "removeBatch": [Function],
-                        "renderForm": [Function],
-                        "reset": [Function],
-                        "resetFieldState": [Function],
-                        "resumeValidation": [Function],
-                        "setConfig": [Function],
-                        "shift": [Function],
-                        "submit": [Function],
-                        "subscribe": [Function],
-                        "swap": [Function],
-                        "unshift": [Function],
-                        "update": [Function],
-                        "valid": true,
-                      }
-                    }
-                    format={[Function]}
-                    label="A readonly field"
-                    name="readonly"
-                    parse={[Function]}
-                    reactFinalForm={
-                      Object {
-                        "batch": [Function],
-                        "blur": [Function],
-                        "change": [Function],
-                        "destroyOnUnregister": false,
-                        "focus": [Function],
-                        "getFieldState": [Function],
-                        "getRegisteredFields": [Function],
-                        "getState": [Function],
-                        "initialize": [Function],
-                        "isValidationPaused": [Function],
-                        "mutators": Object {
-                          "concat": [Function],
-                          "insert": [Function],
-                          "move": [Function],
-                          "pop": [Function],
-                          "push": [Function],
-                          "remove": [Function],
-                          "removeBatch": [Function],
-                          "shift": [Function],
-                          "swap": [Function],
-                          "unshift": [Function],
-                          "update": [Function],
-                        },
-                        "pauseValidation": [Function],
-                        "registerField": [Function],
-                        "reset": [Function],
-                        "resetFieldState": [Function],
-                        "resumeValidation": [Function],
-                        "setConfig": [Function],
-                        "submit": [Function],
-                        "subscribe": [Function],
-                      }
-                    }
-                    render={[Function]}
-                    title="A readonly field"
-                    type="text"
-                    validate={[Function]}
-                  >
-                    <Component
-                      FieldArrayProvider={[Function]}
-                      FieldProvider={[Function]}
-                      autoFocus={false}
-                      default="I am read-only."
-                      formOptions={
-                        Object {
-                          "batch": [Function],
-                          "blur": [Function],
-                          "change": [Function],
-                          "clearOnUnmount": false,
-                          "clearedValue": undefined,
-                          "concat": [Function],
-                          "destroyOnUnregister": false,
-                          "focus": [Function],
-                          "getFieldState": [Function],
-                          "getRegisteredFields": [Function],
-                          "getState": [Function],
-                          "handleSubmit": [Function],
-                          "initialize": [Function],
-                          "insert": [Function],
-                          "isValidationPaused": [Function],
-                          "move": [Function],
-                          "onCancel": undefined,
-                          "onSubmit": [MockFunction],
-                          "pauseValidation": [Function],
-                          "pop": [Function],
-                          "pristine": true,
-                          "push": [Function],
-                          "registerField": [Function],
-                          "remove": [Function],
-                          "removeBatch": [Function],
-                          "renderForm": [Function],
-                          "reset": [Function],
-                          "resetFieldState": [Function],
-                          "resumeValidation": [Function],
-                          "setConfig": [Function],
-                          "shift": [Function],
-                          "submit": [Function],
-                          "subscribe": [Function],
-                          "swap": [Function],
-                          "unshift": [Function],
-                          "update": [Function],
-                          "valid": true,
-                        }
-                      }
-                      input={
-                        Object {
-                          "name": "readonly",
-                          "onBlur": [Function],
-                          "onChange": [Function],
-                          "onFocus": [Function],
-                          "value": "I am read-only.",
-                        }
-                      }
-                      label="A readonly field"
-                      meta={
-                        Object {
-                          "active": false,
-                          "data": Object {},
-                          "dirty": false,
-                          "dirtySinceLastSubmit": false,
-                          "error": undefined,
-                          "initial": "I am read-only.",
-                          "invalid": false,
-                          "modified": false,
-                          "pristine": true,
-                          "submitError": undefined,
-                          "submitFailed": false,
-                          "submitSucceeded": false,
-                          "submitting": false,
-                          "touched": false,
-                          "valid": true,
-                          "visited": false,
-                        }
-                      }
-                      title="A readonly field"
-                      type="text"
-                    >
-                      <div
-                        className="nested-item"
-                      >
-                        Text field
-                      </div>
-                    </Component>
-                  </Field>
-                </ReactFinalForm(Field)>
-              </FieldProvider>
-            </FieldWrapper>
-          </FormFieldHideWrapper>
-        </FormConditionWrapper>
-        <FormConditionWrapper>
-          <FormFieldHideWrapper
-            hideField={false}
-          >
-            <FieldWrapper
-              autoFocus={false}
-              component={[Function]}
-              componentType="text-field"
-              dataType="string"
-              default="I am yellow"
-              formOptions={
-                Object {
-                  "batch": [Function],
-                  "blur": [Function],
-                  "change": [Function],
-                  "clearOnUnmount": false,
-                  "clearedValue": undefined,
-                  "concat": [Function],
-                  "destroyOnUnregister": false,
-                  "focus": [Function],
-                  "getFieldState": [Function],
-                  "getRegisteredFields": [Function],
-                  "getState": [Function],
-                  "handleSubmit": [Function],
-                  "initialize": [Function],
-                  "insert": [Function],
-                  "isValidationPaused": [Function],
-                  "move": [Function],
-                  "onCancel": undefined,
-                  "onSubmit": [MockFunction],
-                  "pauseValidation": [Function],
-                  "pop": [Function],
-                  "pristine": true,
-                  "push": [Function],
-                  "registerField": [Function],
-                  "remove": [Function],
-                  "removeBatch": [Function],
-                  "renderForm": [Function],
-                  "reset": [Function],
-                  "resetFieldState": [Function],
-                  "resumeValidation": [Function],
-                  "setConfig": [Function],
-                  "shift": [Function],
-                  "submit": [Function],
-                  "subscribe": [Function],
-                  "swap": [Function],
-                  "unshift": [Function],
-                  "update": [Function],
-                  "valid": true,
-                }
-              }
-              label="Custom widget with options"
-              name="widgetOptions"
-              title="Custom widget with options"
-              type="text"
-              validate={
-                Array [
-                  [Function],
-                ]
-              }
-            >
-              <FieldProvider
-                FieldArrayProvider={[Function]}
-                FieldProvider={[Function]}
-                autoFocus={false}
-                component={[Function]}
-                dataType="string"
-                default="I am yellow"
-                formOptions={
-                  Object {
-                    "batch": [Function],
-                    "blur": [Function],
-                    "change": [Function],
-                    "clearOnUnmount": false,
-                    "clearedValue": undefined,
-                    "concat": [Function],
-                    "destroyOnUnregister": false,
-                    "focus": [Function],
-                    "getFieldState": [Function],
-                    "getRegisteredFields": [Function],
-                    "getState": [Function],
-                    "handleSubmit": [Function],
-                    "initialize": [Function],
-                    "insert": [Function],
-                    "isValidationPaused": [Function],
-                    "move": [Function],
-                    "onCancel": undefined,
-                    "onSubmit": [MockFunction],
-                    "pauseValidation": [Function],
-                    "pop": [Function],
-                    "pristine": true,
-                    "push": [Function],
-                    "registerField": [Function],
-                    "remove": [Function],
-                    "removeBatch": [Function],
-                    "renderForm": [Function],
-                    "reset": [Function],
-                    "resetFieldState": [Function],
-                    "resumeValidation": [Function],
-                    "setConfig": [Function],
-                    "shift": [Function],
-                    "submit": [Function],
-                    "subscribe": [Function],
-                    "swap": [Function],
-                    "unshift": [Function],
-                    "update": [Function],
-                    "valid": true,
-                  }
-                }
-                label="Custom widget with options"
-                name="widgetOptions"
-                title="Custom widget with options"
-                type="text"
-                validate={[Function]}
-              >
-                <ReactFinalForm(Field)
-                  FieldArrayProvider={[Function]}
-                  FieldProvider={[Function]}
-                  autoFocus={false}
-                  default="I am yellow"
-                  formOptions={
-                    Object {
-                      "batch": [Function],
-                      "blur": [Function],
-                      "change": [Function],
-                      "clearOnUnmount": false,
-                      "clearedValue": undefined,
-                      "concat": [Function],
-                      "destroyOnUnregister": false,
-                      "focus": [Function],
-                      "getFieldState": [Function],
-                      "getRegisteredFields": [Function],
-                      "getState": [Function],
-                      "handleSubmit": [Function],
-                      "initialize": [Function],
-                      "insert": [Function],
-                      "isValidationPaused": [Function],
-                      "move": [Function],
-                      "onCancel": undefined,
-                      "onSubmit": [MockFunction],
-                      "pauseValidation": [Function],
-                      "pop": [Function],
-                      "pristine": true,
-                      "push": [Function],
-                      "registerField": [Function],
-                      "remove": [Function],
-                      "removeBatch": [Function],
-                      "renderForm": [Function],
-                      "reset": [Function],
-                      "resetFieldState": [Function],
-                      "resumeValidation": [Function],
-                      "setConfig": [Function],
-                      "shift": [Function],
-                      "submit": [Function],
-                      "subscribe": [Function],
-                      "swap": [Function],
-                      "unshift": [Function],
-                      "update": [Function],
-                      "valid": true,
-                    }
-                  }
-                  label="Custom widget with options"
-                  name="widgetOptions"
-                  render={[Function]}
-                  title="Custom widget with options"
-                  type="text"
-                  validate={[Function]}
-                >
-                  <Field
-                    FieldArrayProvider={[Function]}
-                    FieldProvider={[Function]}
-                    autoFocus={false}
-                    default="I am yellow"
-                    formOptions={
-                      Object {
-                        "batch": [Function],
-                        "blur": [Function],
-                        "change": [Function],
-                        "clearOnUnmount": false,
-                        "clearedValue": undefined,
-                        "concat": [Function],
-                        "destroyOnUnregister": false,
-                        "focus": [Function],
-                        "getFieldState": [Function],
-                        "getRegisteredFields": [Function],
-                        "getState": [Function],
-                        "handleSubmit": [Function],
-                        "initialize": [Function],
-                        "insert": [Function],
-                        "isValidationPaused": [Function],
-                        "move": [Function],
-                        "onCancel": undefined,
-                        "onSubmit": [MockFunction],
-                        "pauseValidation": [Function],
-                        "pop": [Function],
-                        "pristine": true,
-                        "push": [Function],
-                        "registerField": [Function],
-                        "remove": [Function],
-                        "removeBatch": [Function],
-                        "renderForm": [Function],
-                        "reset": [Function],
-                        "resetFieldState": [Function],
-                        "resumeValidation": [Function],
-                        "setConfig": [Function],
-                        "shift": [Function],
-                        "submit": [Function],
-                        "subscribe": [Function],
-                        "swap": [Function],
-                        "unshift": [Function],
-                        "update": [Function],
-                        "valid": true,
-                      }
-                    }
-                    format={[Function]}
-                    label="Custom widget with options"
-                    name="widgetOptions"
-                    parse={[Function]}
-                    reactFinalForm={
-                      Object {
-                        "batch": [Function],
-                        "blur": [Function],
-                        "change": [Function],
-                        "destroyOnUnregister": false,
-                        "focus": [Function],
-                        "getFieldState": [Function],
-                        "getRegisteredFields": [Function],
-                        "getState": [Function],
-                        "initialize": [Function],
-                        "isValidationPaused": [Function],
-                        "mutators": Object {
-                          "concat": [Function],
-                          "insert": [Function],
-                          "move": [Function],
-                          "pop": [Function],
-                          "push": [Function],
-                          "remove": [Function],
-                          "removeBatch": [Function],
-                          "shift": [Function],
-                          "swap": [Function],
-                          "unshift": [Function],
-                          "update": [Function],
-                        },
-                        "pauseValidation": [Function],
-                        "registerField": [Function],
-                        "reset": [Function],
-                        "resetFieldState": [Function],
-                        "resumeValidation": [Function],
-                        "setConfig": [Function],
-                        "submit": [Function],
-                        "subscribe": [Function],
-                      }
-                    }
-                    render={[Function]}
-                    title="Custom widget with options"
-                    type="text"
-                    validate={[Function]}
-                  >
-                    <Component
-                      FieldArrayProvider={[Function]}
-                      FieldProvider={[Function]}
-                      autoFocus={false}
-                      default="I am yellow"
-                      formOptions={
-                        Object {
-                          "batch": [Function],
-                          "blur": [Function],
-                          "change": [Function],
-                          "clearOnUnmount": false,
-                          "clearedValue": undefined,
-                          "concat": [Function],
-                          "destroyOnUnregister": false,
-                          "focus": [Function],
-                          "getFieldState": [Function],
-                          "getRegisteredFields": [Function],
-                          "getState": [Function],
-                          "handleSubmit": [Function],
-                          "initialize": [Function],
-                          "insert": [Function],
-                          "isValidationPaused": [Function],
-                          "move": [Function],
-                          "onCancel": undefined,
-                          "onSubmit": [MockFunction],
-                          "pauseValidation": [Function],
-                          "pop": [Function],
-                          "pristine": true,
-                          "push": [Function],
-                          "registerField": [Function],
-                          "remove": [Function],
-                          "removeBatch": [Function],
-                          "renderForm": [Function],
-                          "reset": [Function],
-                          "resetFieldState": [Function],
-                          "resumeValidation": [Function],
-                          "setConfig": [Function],
-                          "shift": [Function],
-                          "submit": [Function],
-                          "subscribe": [Function],
-                          "swap": [Function],
-                          "unshift": [Function],
-                          "update": [Function],
-                          "valid": true,
-                        }
-                      }
-                      input={
-                        Object {
-                          "name": "widgetOptions",
-                          "onBlur": [Function],
-                          "onChange": [Function],
-                          "onFocus": [Function],
-                          "value": "I am yellow",
-                        }
-                      }
-                      label="Custom widget with options"
-                      meta={
-                        Object {
-                          "active": false,
-                          "data": Object {},
-                          "dirty": false,
-                          "dirtySinceLastSubmit": false,
-                          "error": undefined,
-                          "initial": "I am yellow",
-                          "invalid": false,
-                          "modified": false,
-                          "pristine": true,
-                          "submitError": undefined,
-                          "submitFailed": false,
-                          "submitSucceeded": false,
-                          "submitting": false,
-                          "touched": false,
-                          "valid": true,
-                          "visited": false,
-                        }
-                      }
-                      title="Custom widget with options"
-                      type="text"
-                    >
-                      <div
-                        className="nested-item"
-                      >
-                        Text field
-                      </div>
-                    </Component>
-                  </Field>
-                </ReactFinalForm(Field)>
-              </FieldProvider>
-            </FieldWrapper>
-          </FormFieldHideWrapper>
-        </FormConditionWrapper>
-        <FormConditionWrapper>
-          <FormFieldHideWrapper
-            hideField={false}
-          >
-            <FieldWrapper
-              autoFocus={false}
-              component={[Function]}
-              componentType="select-field"
-              dataType="string"
-              formOptions={
-                Object {
-                  "batch": [Function],
-                  "blur": [Function],
-                  "change": [Function],
-                  "clearOnUnmount": false,
-                  "clearedValue": undefined,
-                  "concat": [Function],
-                  "destroyOnUnregister": false,
-                  "focus": [Function],
-                  "getFieldState": [Function],
-                  "getRegisteredFields": [Function],
-                  "getState": [Function],
-                  "handleSubmit": [Function],
-                  "initialize": [Function],
-                  "insert": [Function],
-                  "isValidationPaused": [Function],
-                  "move": [Function],
-                  "onCancel": undefined,
-                  "onSubmit": [MockFunction],
-                  "pauseValidation": [Function],
-                  "pop": [Function],
-                  "pristine": true,
-                  "push": [Function],
-                  "registerField": [Function],
-                  "remove": [Function],
-                  "removeBatch": [Function],
-                  "renderForm": [Function],
-                  "reset": [Function],
-                  "resetFieldState": [Function],
-                  "resumeValidation": [Function],
-                  "setConfig": [Function],
-                  "shift": [Function],
-                  "submit": [Function],
-                  "subscribe": [Function],
-                  "swap": [Function],
-                  "unshift": [Function],
-                  "update": [Function],
-                  "valid": true,
-                }
-              }
-              label="Custom select widget with options"
-              name="selectWidgetOptions"
-              options={
-                Array [
-                  Object {
-                    "disabled": undefined,
-                    "label": "Please Choose",
-                  },
-                  Object {
-                    "label": "Foo",
-                    "value": "foo",
-                  },
-                  Object {
-                    "label": "Bar",
-                    "value": "bar",
-                  },
-                ]
-              }
-              title="Custom select widget with options"
-              type="string"
-              validate={
-                Array [
-                  [Function],
-                ]
-              }
-            >
-              <FieldProvider
-                FieldArrayProvider={[Function]}
-                FieldProvider={[Function]}
-                autoFocus={false}
-                component={[Function]}
-                dataType="string"
-                formOptions={
-                  Object {
-                    "batch": [Function],
-                    "blur": [Function],
-                    "change": [Function],
-                    "clearOnUnmount": false,
-                    "clearedValue": undefined,
-                    "concat": [Function],
-                    "destroyOnUnregister": false,
-                    "focus": [Function],
-                    "getFieldState": [Function],
-                    "getRegisteredFields": [Function],
-                    "getState": [Function],
-                    "handleSubmit": [Function],
-                    "initialize": [Function],
-                    "insert": [Function],
-                    "isValidationPaused": [Function],
-                    "move": [Function],
-                    "onCancel": undefined,
-                    "onSubmit": [MockFunction],
-                    "pauseValidation": [Function],
-                    "pop": [Function],
-                    "pristine": true,
-                    "push": [Function],
-                    "registerField": [Function],
-                    "remove": [Function],
-                    "removeBatch": [Function],
-                    "renderForm": [Function],
-                    "reset": [Function],
-                    "resetFieldState": [Function],
-                    "resumeValidation": [Function],
-                    "setConfig": [Function],
-                    "shift": [Function],
-                    "submit": [Function],
-                    "subscribe": [Function],
-                    "swap": [Function],
-                    "unshift": [Function],
-                    "update": [Function],
-                    "valid": true,
-                  }
-                }
-                label="Custom select widget with options"
-                name="selectWidgetOptions"
-                options={
-                  Array [
-                    Object {
-                      "disabled": undefined,
-                      "label": "Please Choose",
-                    },
-                    Object {
-                      "label": "Foo",
-                      "value": "foo",
-                    },
-                    Object {
-                      "label": "Bar",
-                      "value": "bar",
-                    },
-                  ]
-                }
-                title="Custom select widget with options"
-                type="string"
-                validate={[Function]}
-              >
-                <ReactFinalForm(Field)
-                  FieldArrayProvider={[Function]}
-                  FieldProvider={[Function]}
-                  autoFocus={false}
-                  formOptions={
-                    Object {
-                      "batch": [Function],
-                      "blur": [Function],
-                      "change": [Function],
-                      "clearOnUnmount": false,
-                      "clearedValue": undefined,
-                      "concat": [Function],
-                      "destroyOnUnregister": false,
-                      "focus": [Function],
-                      "getFieldState": [Function],
-                      "getRegisteredFields": [Function],
-                      "getState": [Function],
-                      "handleSubmit": [Function],
-                      "initialize": [Function],
-                      "insert": [Function],
-                      "isValidationPaused": [Function],
-                      "move": [Function],
-                      "onCancel": undefined,
-                      "onSubmit": [MockFunction],
-                      "pauseValidation": [Function],
-                      "pop": [Function],
-                      "pristine": true,
-                      "push": [Function],
-                      "registerField": [Function],
-                      "remove": [Function],
-                      "removeBatch": [Function],
-                      "renderForm": [Function],
-                      "reset": [Function],
-                      "resetFieldState": [Function],
-                      "resumeValidation": [Function],
-                      "setConfig": [Function],
-                      "shift": [Function],
-                      "submit": [Function],
-                      "subscribe": [Function],
-                      "swap": [Function],
-                      "unshift": [Function],
-                      "update": [Function],
-                      "valid": true,
-                    }
-                  }
-                  label="Custom select widget with options"
-                  name="selectWidgetOptions"
-                  options={
-                    Array [
-                      Object {
-                        "disabled": undefined,
-                        "label": "Please Choose",
-                      },
-                      Object {
-                        "label": "Foo",
-                        "value": "foo",
-                      },
-                      Object {
-                        "label": "Bar",
-                        "value": "bar",
-                      },
-                    ]
-                  }
-                  render={[Function]}
-                  title="Custom select widget with options"
-                  type="string"
-                  validate={[Function]}
-                >
-                  <Field
-                    FieldArrayProvider={[Function]}
-                    FieldProvider={[Function]}
-                    autoFocus={false}
-                    formOptions={
-                      Object {
-                        "batch": [Function],
-                        "blur": [Function],
-                        "change": [Function],
-                        "clearOnUnmount": false,
-                        "clearedValue": undefined,
-                        "concat": [Function],
-                        "destroyOnUnregister": false,
-                        "focus": [Function],
-                        "getFieldState": [Function],
-                        "getRegisteredFields": [Function],
-                        "getState": [Function],
-                        "handleSubmit": [Function],
-                        "initialize": [Function],
-                        "insert": [Function],
-                        "isValidationPaused": [Function],
-                        "move": [Function],
-                        "onCancel": undefined,
-                        "onSubmit": [MockFunction],
-                        "pauseValidation": [Function],
-                        "pop": [Function],
-                        "pristine": true,
-                        "push": [Function],
-                        "registerField": [Function],
-                        "remove": [Function],
-                        "removeBatch": [Function],
-                        "renderForm": [Function],
-                        "reset": [Function],
-                        "resetFieldState": [Function],
-                        "resumeValidation": [Function],
-                        "setConfig": [Function],
-                        "shift": [Function],
-                        "submit": [Function],
-                        "subscribe": [Function],
-                        "swap": [Function],
-                        "unshift": [Function],
-                        "update": [Function],
-                        "valid": true,
-                      }
-                    }
-                    format={[Function]}
-                    label="Custom select widget with options"
-                    name="selectWidgetOptions"
-                    options={
-                      Array [
-                        Object {
-                          "disabled": undefined,
-                          "label": "Please Choose",
-                        },
-                        Object {
-                          "label": "Foo",
-                          "value": "foo",
-                        },
-                        Object {
-                          "label": "Bar",
-                          "value": "bar",
-                        },
-                      ]
-                    }
-                    parse={[Function]}
-                    reactFinalForm={
-                      Object {
-                        "batch": [Function],
-                        "blur": [Function],
-                        "change": [Function],
-                        "destroyOnUnregister": false,
-                        "focus": [Function],
-                        "getFieldState": [Function],
-                        "getRegisteredFields": [Function],
-                        "getState": [Function],
-                        "initialize": [Function],
-                        "isValidationPaused": [Function],
-                        "mutators": Object {
-                          "concat": [Function],
-                          "insert": [Function],
-                          "move": [Function],
-                          "pop": [Function],
-                          "push": [Function],
-                          "remove": [Function],
-                          "removeBatch": [Function],
-                          "shift": [Function],
-                          "swap": [Function],
-                          "unshift": [Function],
-                          "update": [Function],
-                        },
-                        "pauseValidation": [Function],
-                        "registerField": [Function],
-                        "reset": [Function],
-                        "resetFieldState": [Function],
-                        "resumeValidation": [Function],
-                        "setConfig": [Function],
-                        "submit": [Function],
-                        "subscribe": [Function],
-                      }
-                    }
-                    render={[Function]}
-                    title="Custom select widget with options"
-                    type="string"
-                    validate={[Function]}
-                  >
-                    <Component
-                      FieldArrayProvider={[Function]}
-                      FieldProvider={[Function]}
-                      autoFocus={false}
-                      formOptions={
-                        Object {
-                          "batch": [Function],
-                          "blur": [Function],
-                          "change": [Function],
-                          "clearOnUnmount": false,
-                          "clearedValue": undefined,
-                          "concat": [Function],
-                          "destroyOnUnregister": false,
-                          "focus": [Function],
-                          "getFieldState": [Function],
-                          "getRegisteredFields": [Function],
-                          "getState": [Function],
-                          "handleSubmit": [Function],
-                          "initialize": [Function],
-                          "insert": [Function],
-                          "isValidationPaused": [Function],
-                          "move": [Function],
-                          "onCancel": undefined,
-                          "onSubmit": [MockFunction],
-                          "pauseValidation": [Function],
-                          "pop": [Function],
-                          "pristine": true,
-                          "push": [Function],
-                          "registerField": [Function],
-                          "remove": [Function],
-                          "removeBatch": [Function],
-                          "renderForm": [Function],
-                          "reset": [Function],
-                          "resetFieldState": [Function],
-                          "resumeValidation": [Function],
-                          "setConfig": [Function],
-                          "shift": [Function],
-                          "submit": [Function],
-                          "subscribe": [Function],
-                          "swap": [Function],
-                          "unshift": [Function],
-                          "update": [Function],
-                          "valid": true,
-                        }
-                      }
-                      input={
-                        Object {
-                          "name": "selectWidgetOptions",
-                          "onBlur": [Function],
-                          "onChange": [Function],
-                          "onFocus": [Function],
                           "value": "",
                         }
                       }
-                      label="Custom select widget with options"
                       meta={
                         Object {
                           "active": false,
@@ -2645,24 +713,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                           "visited": false,
                         }
                       }
-                      options={
-                        Array [
-                          Object {
-                            "disabled": undefined,
-                            "label": "Please Choose",
-                          },
-                          Object {
-                            "label": "Foo",
-                            "value": "foo",
-                          },
-                          Object {
-                            "label": "Bar",
-                            "value": "bar",
-                          },
-                        ]
-                      }
-                      title="Custom select widget with options"
-                      type="string"
                     >
                       <div
                         className="nested-item"
@@ -2779,7 +829,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
       "time-picker": [Function],
     }
   }
-  formType="pf3"
   initialValues={Object {}}
   layoutMapper={
     Object {
@@ -2792,7 +841,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
   }
   onSubmit={[MockFunction]}
   renderFormButtons={[Function]}
-  resetAble={false}
   schema={
     Object {
       "fields": Array [
@@ -2814,51 +862,7 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
       ],
     }
   }
-  schemaType="default"
   showFormControls={true}
-  uiSchema={Object {}}
-  uischema={
-    Object {
-      "boolean": Object {
-        "radio": Object {
-          "ui:widget": "radio",
-        },
-        "select": Object {
-          "ui:widget": "select",
-        },
-      },
-      "disabled": Object {
-        "ui:disabled": true,
-      },
-      "readonly": Object {
-        "ui:readonly": true,
-      },
-      "secret": Object {
-        "ui:widget": "hidden",
-      },
-      "selectWidgetOptions": Object {
-        "ui:options": Object {
-          "backgroundColor": "pink",
-        },
-      },
-      "string": Object {
-        "color": Object {
-          "ui:widget": "color",
-        },
-        "textarea": Object {
-          "ui:options": Object {
-            "rows": 5,
-          },
-          "ui:widget": "textarea",
-        },
-      },
-      "widgetOptions": Object {
-        "ui:options": Object {
-          "backgroundColor": "yellow",
-        },
-      },
-    }
-  }
 >
   <ReactFinalForm
     decorators={

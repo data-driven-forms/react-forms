@@ -8,7 +8,6 @@ exports[`<FormControls /> should render with description 1`] = `
     clearOnUnmount={false}
     disableSubmit={Array []}
     formFieldsMapper={Object {}}
-    formType="pf3"
     initialValues={Object {}}
     layoutMapper={
       Object {
@@ -20,16 +19,13 @@ exports[`<FormControls /> should render with description 1`] = `
       }
     }
     onSubmit={[MockFunction]}
-    resetAble={false}
     schema={
       Object {
         "description": "Description",
         "fields": Array [],
       }
     }
-    schemaType="default"
     showFormControls={true}
-    uiSchema={Object {}}
   >
     <ReactFinalForm
       decorators={
@@ -167,7 +163,6 @@ exports[`<FormControls /> should render with title and description 1`] = `
     clearOnUnmount={false}
     disableSubmit={Array []}
     formFieldsMapper={Object {}}
-    formType="pf3"
     initialValues={Object {}}
     layoutMapper={
       Object {
@@ -179,7 +174,6 @@ exports[`<FormControls /> should render with title and description 1`] = `
       }
     }
     onSubmit={[MockFunction]}
-    resetAble={false}
     schema={
       Object {
         "description": "Description",
@@ -187,9 +181,7 @@ exports[`<FormControls /> should render with title and description 1`] = `
         "title": "Title",
       }
     }
-    schemaType="default"
     showFormControls={true}
-    uiSchema={Object {}}
   >
     <ReactFinalForm
       decorators={
@@ -332,7 +324,6 @@ exports[`<FormControls /> should render without title and description 1`] = `
     clearOnUnmount={false}
     disableSubmit={Array []}
     formFieldsMapper={Object {}}
-    formType="pf3"
     initialValues={Object {}}
     layoutMapper={
       Object {
@@ -344,15 +335,12 @@ exports[`<FormControls /> should render without title and description 1`] = `
       }
     }
     onSubmit={[MockFunction]}
-    resetAble={false}
     schema={
       Object {
         "fields": Array [],
       }
     }
-    schemaType="default"
     showFormControls={true}
-    uiSchema={Object {}}
   >
     <ReactFinalForm
       decorators={

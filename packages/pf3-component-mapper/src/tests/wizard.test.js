@@ -224,7 +224,6 @@ describe('<Wizard />', () => {
         onCancel={ () => {} }
         showFormControls={ false }
         onSubmit={ jest.fn() }
-        schemaType="default"
         initialValues={{ 'source-type': 'google' }}
       />
     );
