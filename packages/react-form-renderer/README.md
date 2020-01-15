@@ -21,7 +21,6 @@ Data Driven Forms is a React library used for rendering and managing forms with 
 - Cross-field validation!
 - Asynchronous validation supported!
 - Supporting Wizard forms!
-- Supporting Mozzila form schema!
 - Supporting [Final Form Field Array](https://github.com/final-form/react-final-form-arrays)!
 - ... and a lot more!
 
