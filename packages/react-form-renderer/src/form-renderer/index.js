@@ -128,7 +128,6 @@ FormRenderer.propTypes = {
 };
 
 FormRenderer.defaultProps = {
-  resetAble: false,
   buttonsLabels: {},
   disableSubmit: [],
   initialValues: {},

@@ -19,7 +19,6 @@ exports[`<FormControls /> should render with description 1`] = `
       }
     }
     onSubmit={[MockFunction]}
-    resetAble={false}
     schema={
       Object {
         "description": "Description",
@@ -175,7 +174,6 @@ exports[`<FormControls /> should render with title and description 1`] = `
       }
     }
     onSubmit={[MockFunction]}
-    resetAble={false}
     schema={
       Object {
         "description": "Description",
@@ -337,7 +335,6 @@ exports[`<FormControls /> should render without title and description 1`] = `
       }
     }
     onSubmit={[MockFunction]}
-    resetAble={false}
     schema={
       Object {
         "fields": Array [],
