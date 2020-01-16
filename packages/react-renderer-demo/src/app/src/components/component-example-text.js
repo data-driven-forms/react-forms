@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { baseExamples } from '@docs/components/navigation/examples-definitions';
 import ComponentExample from '@docs/components/component-example';
 
-const ComponentExampleText = (props) => {
+const ComponentExampleText = () => {
   const router = useRouter();
 
   const activeMapper = router.query.mapper || 'mui';

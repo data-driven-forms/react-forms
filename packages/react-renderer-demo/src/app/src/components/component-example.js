@@ -28,6 +28,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import RouterLink from 'next/link';
 import Link from '@material-ui/core/Link';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import dynamic from 'next/dynamic';
 
@@ -279,8 +280,8 @@ class ComponentExample extends Component {
     } finally {
       this.setState({ value });
     }
-
   }
+
   render () {
     const { value, parsedSchema, component, openTooltip, variants } = this.state;
     const { activeMapper, classes } = this.props;
@@ -422,12 +423,19 @@ export default (props) => {
   const router = useRouter();
   const classes = useStyles();
 
-  console.log(classes);
-
   return (
     <MapperContext.Consumer>
       { ({ loaded, mappers }) =>
-        loaded && <ComponentExample { ...props } router={ router } mappers={ mappers } classes={ classes }/> }
+        loaded ?
+          <ComponentExample { ...props } router={ router } mappers={ mappers } classes={ classes }/> :
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
+            <CircularProgress disableShrink />
+          </Grid> }
     </MapperContext.Consumer>
   );
 };
