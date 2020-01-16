@@ -62,6 +62,12 @@ const useStyles = makeStyles(theme => ({
   close: {
     padding: theme.spacing(0.5),
   },
+  radioLink: {
+    color: 'rgba(0, 0, 0, 0.87)',
+    '&:hover': {
+      textDecoration: 'none',
+    },
+  },
 }));
 
 const CopySnackbar = ({ open, handleClose }) => {
@@ -277,7 +283,7 @@ class ComponentExample extends Component {
   }
   render () {
     const { value, parsedSchema, component, openTooltip, variants } = this.state;
-    const { activeMapper } = this.props;
+    const { activeMapper, classes } = this.props;
 
     const editedValue = value.replace(/^{\n {2}"fields": \[\n/, '')
     .replace(/ {2}\]\n}$/, '')
@@ -353,9 +359,21 @@ class ComponentExample extends Component {
                   onChange={ this.handleMapperChange }
                   style={{ flexDirection: 'row' }}
                 >
-                  <RouterLink href={ `${this.props.router.pathname}?mapper=mui` }><Link href={ `${this.props.router.pathname}?mapper=mui` }><FormControlLabel value="mui" control={ <Radio /> } label="MUI" /></Link></RouterLink>
-                  <RouterLink href={ `${this.props.router.pathname}?mapper=pf3` }><Link href={ `${this.props.router.pathname}?mapper=pf3` }><FormControlLabel value="pf3" control={ <Radio /> } label="PF3" /></Link></RouterLink>
-                  <RouterLink href={ `${this.props.router.pathname}?mapper=pf4` }><Link href={ `${this.props.router.pathname}?mapper=pf4` }><FormControlLabel value="pf4" control={ <Radio /> } label="PF4" /></Link></RouterLink>
+                  <RouterLink href={ `${this.props.router.pathname}?mapper=mui` }>
+                    <Link href={ `${this.props.router.pathname}?mapper=mui` } className={ classes.radioLink }>
+                      <FormControlLabel value="mui" control={ <Radio /> } label="MUI"/>
+                    </Link>
+                  </RouterLink>
+                  <RouterLink href={ `${this.props.router.pathname}?mapper=pf3` }>
+                    <Link href={ `${this.props.router.pathname}?mapper=pf3` } className={ classes.radioLink }>
+                      <FormControlLabel value="pf3" control={ <Radio /> } label="PF3"/>
+                    </Link>
+                  </RouterLink>
+                  <RouterLink href={ `${this.props.router.pathname}?mapper=pf4` }>
+                    <Link href={ `${this.props.router.pathname}?mapper=pf4` } className={ classes.radioLink }>
+                      <FormControlLabel value="pf4" control={ <Radio /> } label="PF4"/>
+                    </Link>
+                  </RouterLink>
                 </RadioGroup>
               </FormControl>
             </div>
@@ -395,14 +413,21 @@ ComponentExample.propTypes = {
   }),
   mappers: PropTypes.object,
   activeMapper: PropTypes.string.isRequired,
+  classes: PropTypes.shape({
+    radioLink: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default (props) => {
   const router = useRouter();
+  const classes = useStyles();
+
+  console.log(classes);
+
   return (
     <MapperContext.Consumer>
       { ({ loaded, mappers }) =>
-        loaded && <ComponentExample { ...props } router={ router } mappers={ mappers } /> }
+        loaded && <ComponentExample { ...props } router={ router } mappers={ mappers } classes={ classes }/> }
     </MapperContext.Consumer>
   );
 };
