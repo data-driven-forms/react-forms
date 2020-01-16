@@ -291,22 +291,12 @@ class ComponentExample extends Component {
         direction="row"
         spacing={ 4 }
       >
-        <Grid item xs={ 4 } >
-          <Typography variant="h5" gutterBottom>
+        <Grid item xs={ 12 } md={ 4 } >
+          <Grid item xs={ 12 }>
+            <Typography variant="h5" gutterBottom>
               Schema
-          </Typography>
-        </Grid>
-        <Grid item xs={ 3 } >
-          <Typography variant="h5" gutterBottom>
-              Props
-          </Typography>
-        </Grid>
-        <Grid item xs={ 5 } >
-          <Typography variant="h5" gutterBottom>
-              Preview
-          </Typography>
-        </Grid>
-        <Grid item xs={ 4 } >
+            </Typography>
+          </Grid>
           <div style={{ background: '#1d1f21', position: 'relative' }}>
             <Grid item xs={ 12 } container={ true } justify='flex-end' style={{ position: 'absolute', zIndex: 100 }}>
               <CopyToClipboard text={ editedValue } onCopy={ this.handleTooltipOpen }>
@@ -334,14 +324,24 @@ class ComponentExample extends Component {
             />
           </div>
         </Grid>
-        <Grid item xs={ 3 }>
+        <Grid item xs={ 12 } md={ 3 }>
+          <Grid item xs={ 12 }>
+            <Typography variant="h5" gutterBottom>
+              Props
+            </Typography>
+          </Grid>
           <Card square>
             <CardContent>
               { this.renderActions(variants) }
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={ 5 } >
+        <Grid item xs={ 12 } md={ 5 } >
+          <Grid item xs={ 12 }>
+            <Typography variant="h5" gutterBottom>
+              Preview
+            </Typography>
+          </Grid>
           <Card square style={{ overflow: 'initial' }}>
             <div style={{ padding: 8 }}>
               <FormControl component="fieldset">

@@ -13,10 +13,10 @@ const ComponentExampleText = (props) => {
 
   const baseStructure = baseExamples.find(item => item.component === component);
 
-  return <React.Fragment>
+  return (<React.Fragment>
     <ComponentExample activeMapper={ activeMapper } component={ component }/>
-    <baseStructure.ContentText activeMapper={ activeMapper } component={ component }/>;
-  </React.Fragment>;
+    <baseStructure.ContentText activeMapper={ activeMapper } component={ component }/>
+  </React.Fragment>);
 };
 
 export default ComponentExampleText;
