@@ -10,22 +10,13 @@ import MdxComponents from '@docs/components/mdx/mdx-components';
 
 import './vendor.css';
 
-export default class MyApp extends App {
+class MyApp extends App {
   componentDidMount() {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
-  }
-
-  static async getInitialProps ({ Component, router, ctx }) {
-    let page = {};
-    if (Component.getInitialProps) {
-      page = await Component.getInitialProps(ctx);
-    }
-
-    return { page };
   }
 
   render() {
@@ -49,3 +40,13 @@ export default class MyApp extends App {
     );
   }
 }
+
+MyApp.getInitialProps = async (ctx) => {
+  const appProps = await App.getInitialProps(ctx);
+
+  console.log(appProps);
+
+  return { ...appProps };
+};
+
+export default MyApp;

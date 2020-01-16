@@ -70,10 +70,12 @@ MyDocument.getInitialProps = async ctx => {
       enhanceApp: App => props => sheets.collect(<App { ...props } />),
     });
 
+  //console.log('ctx.query.mapper', ctx.query.mapper)
   const initialProps = await Document.getInitialProps(ctx);
 
   return {
     ...initialProps,
+    //activeMapper: ctx.query.mapper,
     // Styles fragment is rendered after the app and page rendering finish.
     styles: [
       <React.Fragment key="styles">
