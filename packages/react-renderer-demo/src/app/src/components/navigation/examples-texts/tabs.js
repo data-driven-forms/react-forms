@@ -13,7 +13,7 @@ export default ({ activeMapper }) =>
     <Typography variant="body1">
   For using this component, you have to append TabItem component (containing form fields) to fields property.
     </Typography>
-    <Typography variant="h6" gutterBottom>
+    <Typography gutterBottom>
     Component constant
     </Typography>
     <pre>TAB_ITEM</pre> <Typography variant="body1">as an import from componentTypes</Typography>
@@ -21,7 +21,7 @@ export default ({ activeMapper }) =>
     { activeMapper === 'pf3' &&
     (
       <Fragment>
-        <Typography variant="h6" gutterBottom>
+        <Typography gutterBottom>
         Validation
         </Typography>
         <Typography variant="body1">Because of schema flexibility there is no simple and efficient way to signal invalid tab content.</Typography>
@@ -30,5 +30,4 @@ export default ({ activeMapper }) =>
         </Typography>
       </Fragment>
     ) }
-
   </Fragment>;

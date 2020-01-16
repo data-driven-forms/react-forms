@@ -39,7 +39,7 @@ const useHeadingStyles = makeStyles(() => ({
   },
 }));
 
-const Heading = ({ level, children, variant, component, ...rest }) => {
+export const Heading = ({ level, children, variant, component, ...rest }) => {
   const router = useRouter();
   const classes = useHeadingStyles();
   const id = headerToId(children);

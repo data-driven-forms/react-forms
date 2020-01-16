@@ -392,11 +392,6 @@ class ComponentExample extends Component {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={ 12 } >
-          <Typography variant="h5" gutterBottom>
-              Notes
-          </Typography>
-        </Grid>
       </Grid>
     );
   }
