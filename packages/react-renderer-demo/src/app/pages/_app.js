@@ -9,6 +9,7 @@ import { MDXProvider } from '@mdx-js/react';
 import MdxComponents from '@docs/components/mdx/mdx-components';
 
 import './vendor.css';
+import './layout.css';
 
 export default class MyApp extends App {
   componentDidMount() {

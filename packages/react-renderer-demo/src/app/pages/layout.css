@@ -1,0 +1,16 @@
+@-webkit-keyframes shake {
+    25%, 75% {
+    box-shadow: 0px 0px 60px 30px rgba(255, 255, 255, 0.98);
+    }
+
+    0%, 50%, 100% {
+      box-shadow: none;
+    }
+}
+
+.shake::after {
+    display: 'block';
+    content: "";
+    position: absolute;
+    animation: 7s ease-out 0s 1 shake;
+}

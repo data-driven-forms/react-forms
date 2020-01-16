@@ -161,6 +161,8 @@ const Layout = ({ children }) => {
     setOpen(false);
   }
 
+  const showAnimation = router.pathname === '/';
+
   return (
     <MapperContext.Provider value={ mappers }>
       <MenuContext.Provider value={ links }>
@@ -176,7 +178,7 @@ const Layout = ({ children }) => {
               aria-label="open drawer"
               onClick={ handleDrawerOpen }
               edge="start"
-              className={ clsx(classes.menuButton, open && classes.hide) }
+              className={ clsx(classes.menuButton, open && classes.hide, showAnimation && 'shake') }
             >
               <MenuIcon className={ classes.menuIcons } />
             </IconButton>
