@@ -1,5 +1,5 @@
-import ComponentExample from '../../src/components/component-example';
+import ComponentText from '@docs/components/component-example-text';
 
 # Time picker
 
-<ComponentExample component="time-picker" />
+<ComponentText />

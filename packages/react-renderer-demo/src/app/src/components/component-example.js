@@ -26,6 +26,8 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import MuiWizard from '@docs/components/missing-demo-fields/mui-wizard/mui-wizard';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import RouterLink from 'next/link';
+import Link from '@material-ui/core/Link';
 
 import dynamic from 'next/dynamic';
 
@@ -97,7 +99,10 @@ CopySnackbar.propTypes = {
 class ComponentExample extends Component {
   constructor(props) {
     super(props);
-    const baseStructure = baseExamples.find(item => item.component === props.component);
+
+    const { component } = this.props;
+
+    const baseStructure = baseExamples.find(item => item.component === component);
     if (!baseStructure) {
       this.state = {
         notFound: true,
@@ -119,7 +124,6 @@ class ComponentExample extends Component {
         ],
         value: JSON.stringify(baseStructure.value, null, 2),
         parsedSchema: baseStructure.value,
-        activeMapper: 'mui',
         frameHeight: 360,
         openTooltip: false,
       };
@@ -149,10 +153,6 @@ class ComponentExample extends Component {
         layoutMapper: props.mappers.pf4.layoutMapper,
       },
     };
-  }
-
-  handleMapperChange = (_event, value) => {
-    this.setState({ activeMapper: value });
   }
 
   handleTooltipClose = () => {
@@ -276,7 +276,8 @@ class ComponentExample extends Component {
 
   }
   render () {
-    const { value, parsedSchema, linkText, ContentText, activeMapper, component, openTooltip, variants } = this.state;
+    const { value, parsedSchema, component, openTooltip, variants } = this.state;
+    const { activeMapper } = this.props;
 
     const editedValue = value.replace(/^{\n {2}"fields": \[\n/, '')
     .replace(/ {2}\]\n}$/, '')
@@ -352,9 +353,9 @@ class ComponentExample extends Component {
                   onChange={ this.handleMapperChange }
                   style={{ flexDirection: 'row' }}
                 >
-                  <FormControlLabel value="mui" control={ <Radio /> } label="MUI" />
-                  <FormControlLabel value="pf3" control={ <Radio /> } label="PF3" />
-                  <FormControlLabel value="pf4" control={ <Radio /> } label="PF4" />
+                  <RouterLink href={ `${this.props.router.pathname}?mapper=mui` }><Link href={ `${this.props.router.pathname}?mapper=mui` }><FormControlLabel value="mui" control={ <Radio /> } label="MUI" /></Link></RouterLink>
+                  <RouterLink href={ `${this.props.router.pathname}?mapper=pf3` }><Link href={ `${this.props.router.pathname}?mapper=pf3` }><FormControlLabel value="pf3" control={ <Radio /> } label="PF3" /></Link></RouterLink>
+                  <RouterLink href={ `${this.props.router.pathname}?mapper=pf4` }><Link href={ `${this.props.router.pathname}?mapper=pf4` }><FormControlLabel value="pf4" control={ <Radio /> } label="PF4" /></Link></RouterLink>
                 </RadioGroup>
               </FormControl>
             </div>
@@ -377,9 +378,6 @@ class ComponentExample extends Component {
               Notes
           </Typography>
         </Grid>
-        <Grid item xs={ 12 } >
-          <ContentText activeMapper={ activeMapper } component={ component } />
-        </Grid>
       </Grid>
     );
   }
@@ -390,10 +388,13 @@ ComponentExample.propTypes = {
   router: PropTypes.shape({
     query: PropTypes.shape({
       component: PropTypes.string,
+      mapper: PropTypes.string,
     }),
     push: PropTypes.func.isRequired,
+    pathname: PropTypes.string,
   }),
   mappers: PropTypes.object,
+  activeMapper: PropTypes.string.isRequired,
 };
 
 export default (props) => {

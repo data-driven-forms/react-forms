@@ -1,5 +1,5 @@
-import ComponentExample from '../../src/components/component-example';
+import ComponentText from '@docs/components/component-example-text';
 
 # Switch
 
-<ComponentExample component="switch-field" />
+<ComponentText />

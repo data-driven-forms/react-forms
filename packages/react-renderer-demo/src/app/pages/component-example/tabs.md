@@ -1,5 +1,5 @@
-import ComponentExample from '../../src/components/component-example';
+import ComponentText from '@docs/components/component-example-text';
 
 # Tabs
 
-<ComponentExample component="tabs" />
+<ComponentText />
