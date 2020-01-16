@@ -19,15 +19,6 @@ export default class MyApp extends App {
     }
   }
 
-  static async getInitialProps ({ Component, router, ctx }) {
-    let page = {};
-    if (Component.getInitialProps) {
-      page = await Component.getInitialProps(ctx);
-    }
-
-    return { page };
-  }
-
   render() {
     const { Component, pageProps } = this.props;
 
