@@ -26,6 +26,9 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import MuiWizard from '@docs/components/missing-demo-fields/mui-wizard/mui-wizard';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import RouterLink from 'next/link';
+import Link from '@material-ui/core/Link';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import dynamic from 'next/dynamic';
 
@@ -59,6 +62,12 @@ const comparator = (a, b) => {
 const useStyles = makeStyles(theme => ({
   close: {
     padding: theme.spacing(0.5),
+  },
+  radioLink: {
+    color: 'rgba(0, 0, 0, 0.87)',
+    '&:hover': {
+      textDecoration: 'none',
+    },
   },
 }));
 
@@ -97,7 +106,10 @@ CopySnackbar.propTypes = {
 class ComponentExample extends Component {
   constructor(props) {
     super(props);
-    const baseStructure = baseExamples.find(item => item.component === props.component);
+
+    const { component } = this.props;
+
+    const baseStructure = baseExamples.find(item => item.component === component);
     if (!baseStructure) {
       this.state = {
         notFound: true,
@@ -119,7 +131,6 @@ class ComponentExample extends Component {
         ],
         value: JSON.stringify(baseStructure.value, null, 2),
         parsedSchema: baseStructure.value,
-        activeMapper: 'mui',
         frameHeight: 360,
         openTooltip: false,
       };
@@ -149,10 +160,6 @@ class ComponentExample extends Component {
         layoutMapper: props.mappers.pf4.layoutMapper,
       },
     };
-  }
-
-  handleMapperChange = (_event, value) => {
-    this.setState({ activeMapper: value });
   }
 
   handleTooltipClose = () => {
@@ -273,10 +280,11 @@ class ComponentExample extends Component {
     } finally {
       this.setState({ value });
     }
-
   }
+
   render () {
-    const { value, parsedSchema, linkText, ContentText, activeMapper, component, openTooltip, variants } = this.state;
+    const { value, parsedSchema, component, openTooltip, variants } = this.state;
+    const { activeMapper, classes } = this.props;
 
     const editedValue = value.replace(/^{\n {2}"fields": \[\n/, '')
     .replace(/ {2}\]\n}$/, '')
@@ -290,22 +298,12 @@ class ComponentExample extends Component {
         direction="row"
         spacing={ 4 }
       >
-        <Grid item xs={ 4 } >
-          <Typography variant="h5" gutterBottom>
+        <Grid item xs={ 12 } md={ 4 } >
+          <Grid item xs={ 12 }>
+            <Typography variant="h5" gutterBottom>
               Schema
-          </Typography>
-        </Grid>
-        <Grid item xs={ 3 } >
-          <Typography variant="h5" gutterBottom>
-              Props
-          </Typography>
-        </Grid>
-        <Grid item xs={ 5 } >
-          <Typography variant="h5" gutterBottom>
-              Preview
-          </Typography>
-        </Grid>
-        <Grid item xs={ 4 } >
+            </Typography>
+          </Grid>
           <div style={{ background: '#1d1f21', position: 'relative' }}>
             <Grid item xs={ 12 } container={ true } justify='flex-end' style={{ position: 'absolute', zIndex: 100 }}>
               <CopyToClipboard text={ editedValue } onCopy={ this.handleTooltipOpen }>
@@ -333,14 +331,24 @@ class ComponentExample extends Component {
             />
           </div>
         </Grid>
-        <Grid item xs={ 3 }>
+        <Grid item xs={ 12 } md={ 3 }>
+          <Grid item xs={ 12 }>
+            <Typography variant="h5" gutterBottom>
+              Props
+            </Typography>
+          </Grid>
           <Card square>
             <CardContent>
               { this.renderActions(variants) }
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={ 5 } >
+        <Grid item xs={ 12 } md={ 5 } >
+          <Grid item xs={ 12 }>
+            <Typography variant="h5" gutterBottom>
+              Preview
+            </Typography>
+          </Grid>
           <Card square style={{ overflow: 'initial' }}>
             <div style={{ padding: 8 }}>
               <FormControl component="fieldset">
@@ -352,9 +360,21 @@ class ComponentExample extends Component {
                   onChange={ this.handleMapperChange }
                   style={{ flexDirection: 'row' }}
                 >
-                  <FormControlLabel value="mui" control={ <Radio /> } label="MUI" />
-                  <FormControlLabel value="pf3" control={ <Radio /> } label="PF3" />
-                  <FormControlLabel value="pf4" control={ <Radio /> } label="PF4" />
+                  <RouterLink href={ `${this.props.router.pathname}?mapper=mui` }>
+                    <Link href={ `${this.props.router.pathname}?mapper=mui` } className={ classes.radioLink }>
+                      <FormControlLabel value="mui" control={ <Radio /> } label="MUI"/>
+                    </Link>
+                  </RouterLink>
+                  <RouterLink href={ `${this.props.router.pathname}?mapper=pf3` }>
+                    <Link href={ `${this.props.router.pathname}?mapper=pf3` } className={ classes.radioLink }>
+                      <FormControlLabel value="pf3" control={ <Radio /> } label="PF3"/>
+                    </Link>
+                  </RouterLink>
+                  <RouterLink href={ `${this.props.router.pathname}?mapper=pf4` }>
+                    <Link href={ `${this.props.router.pathname}?mapper=pf4` } className={ classes.radioLink }>
+                      <FormControlLabel value="pf4" control={ <Radio /> } label="PF4"/>
+                    </Link>
+                  </RouterLink>
                 </RadioGroup>
               </FormControl>
             </div>
@@ -377,9 +397,6 @@ class ComponentExample extends Component {
               Notes
           </Typography>
         </Grid>
-        <Grid item xs={ 12 } >
-          <ContentText activeMapper={ activeMapper } component={ component } />
-        </Grid>
       </Grid>
     );
   }
@@ -390,18 +407,35 @@ ComponentExample.propTypes = {
   router: PropTypes.shape({
     query: PropTypes.shape({
       component: PropTypes.string,
+      mapper: PropTypes.string,
     }),
     push: PropTypes.func.isRequired,
+    pathname: PropTypes.string,
   }),
   mappers: PropTypes.object,
+  activeMapper: PropTypes.string.isRequired,
+  classes: PropTypes.shape({
+    radioLink: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default (props) => {
   const router = useRouter();
+  const classes = useStyles();
+
   return (
     <MapperContext.Consumer>
       { ({ loaded, mappers }) =>
-        loaded && <ComponentExample { ...props } router={ router } mappers={ mappers } /> }
+        loaded ?
+          <ComponentExample { ...props } router={ router } mappers={ mappers } classes={ classes }/> :
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
+            <CircularProgress disableShrink />
+          </Grid> }
     </MapperContext.Consumer>
   );
 };
