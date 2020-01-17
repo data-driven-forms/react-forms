@@ -3,14 +3,17 @@ import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Markdown from 'markdown-to-jsx';
 import { Heading } from '../src/components/mdx/mdx-components';
+import mdxComponents from '@docs/components/mdx/mdx-components';
 
-const parseData = data => data.map((release) => {
-  return (
-    <React.Fragment key={ release.name }>
-      <Markdown>{ release.body }</Markdown>
-    </React.Fragment>
-  );
-});
+const options = {
+  overrides: { a: mdxComponents.link },
+};
+
+const parseData = data => data.map((release) => (
+  <React.Fragment key={ release.name }>
+    <Markdown options={ options }>{ release.body }</Markdown>
+  </React.Fragment>
+));
 
 const ReleasesPage = () => {
   const [ data, setData ] = useState(undefined);

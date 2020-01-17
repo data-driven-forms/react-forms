@@ -8,9 +8,6 @@ const schema =  [
     linkText: 'Live Form Editor',
     link: 'live-editor',
   }, {
-    linkText: 'Releases',
-    link: 'releases',
-  }, {
     title: 'React form renderer',
     link: 'renderer',
     noRoute: true,
@@ -33,6 +30,9 @@ const schema =  [
     fields: [
       ...otherExamples,
     ],
+  }, {
+    linkText: 'Releases',
+    link: 'releases',
   },
 ];
 
