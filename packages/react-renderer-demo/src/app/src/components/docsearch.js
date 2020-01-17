@@ -54,7 +54,18 @@ const DocSearch = () => {
       handleSelected: (input, event, suggestion) => {
         event.button = 0;
         const resultUrl = new URL(suggestion.url);
-        push(`${resultUrl.pathname}${resultUrl.hash ? resultUrl.hash : ''}`);
+
+        let query = '';
+        if (resultUrl.pathname.startsWith('/component-example/')) {
+          [ 'mui', 'pf4', 'pf3' ].find(mapper => {
+            if (resultUrl.hash.includes(mapper)){
+              query = `?mapper=${mapper}`;
+              return true;
+            }
+          });
+        }
+
+        push(`${resultUrl.pathname}${query}${resultUrl.hash ? resultUrl.hash : ''}`);
         input.close();
       },
       // debug: true, // Set debug to true if you want to inspect the dropdown.
