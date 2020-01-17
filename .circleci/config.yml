@@ -35,6 +35,9 @@ jobs:
       - attach_workspace:
           at: ~/react-forms
       - run:
+          name: 'Setup environment variables'
+          command: 'export TRAVIS_REPO_SLUG=data-driven-forms/react-forms'
+      - run:
           name: Release new version
           command: |
             echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/react-forms/.npmrc
