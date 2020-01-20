@@ -1513,16 +1513,18 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@khala/npm-release-monorepo@^2.2.0":
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/@khala/npm-release-monorepo/-/npm-release-monorepo-2.2.3.tgz#8b836db544fc01354432308ab0e2ea90f1002894"
+"@khala/npm-release-monorepo@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@khala/npm-release-monorepo/-/npm-release-monorepo-2.3.0.tgz#3608dede657e42d0e6f712b903c190f1c46fa0e5"
+  integrity sha512-1dPFJZuEOY67YTgp9WBxWOsi16Fffyn735TqjUHsdfFL9A4VaT3oVSZKJNn5sW/HHEsO8AYJ1GMtzepAdK5ewQ==
   dependencies:
-    "@semantic-release/npm" "^5.1.9"
+    "@semantic-release/npm" "^5.3.4"
     recursive-readdir "^2.2.2"
 
-"@khala/wildcard-release-notes@^2.2.3":
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/@khala/wildcard-release-notes/-/wildcard-release-notes-2.2.3.tgz#e24462d6751c7def2d5db057b08caae6cd94e8e6"
+"@khala/wildcard-release-notes@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@khala/wildcard-release-notes/-/wildcard-release-notes-2.3.0.tgz#f1bcdca5c5bceca7dd461ab7d3ad47a4bd42c387"
+  integrity sha512-1tVXQlD2BqoXu7aBl0HX8hUYthx5E2LIK5LwOnkMoq18fMLHgdHXZbx+Ob73VwdYmvaUvFpxQ9sGiqGuN7TVEA==
   dependencies:
     execa "^1.0.0"
     recursive-readdir "^2.2.2"
@@ -2351,19 +2353,20 @@
     focus-trap-react "^4.0.1"
     tippy.js "3.4.1"
 
-"@patternfly/react-core@~3.16.10":
-  version "3.16.19"
-  resolved "https://registry.yarnpkg.com/@patternfly/react-core/-/react-core-3.16.19.tgz#d954cc552e54769a65d0b8a7c73eb57658823675"
+"@patternfly/react-core@~3.129.3":
+  version "3.129.3"
+  resolved "https://registry.yarnpkg.com/@patternfly/react-core/-/react-core-3.129.3.tgz#e54e135af9b15a3286ef17acd35997b8fdcf32b8"
+  integrity sha512-QiTTUqA0y55YbDtzjlzKmZ6pGQqxyCF14TBQFH3rXI2RV8Z4C6HyyILm09BD/D/ITQIhT82dp+6nRY/mQOqlkw==
   dependencies:
-    "@patternfly/react-icons" "^3.9.2"
-    "@patternfly/react-styles" "^3.2.2"
-    "@patternfly/react-tokens" "^2.5.2"
-    "@tippy.js/react" "^1.1.1"
+    "@patternfly/react-icons" "^3.14.28"
+    "@patternfly/react-styles" "^3.6.15"
+    "@patternfly/react-tokens" "^2.7.14"
     emotion "^9.2.9"
     exenv "^1.2.2"
     focus-trap-react "^4.0.1"
+    tippy.js "5.1.2"
 
-"@patternfly/react-icons@^3.14.19", "@patternfly/react-icons@^3.9.2":
+"@patternfly/react-icons@^3.14.19":
   version "3.14.19"
   resolved "https://registry.yarnpkg.com/@patternfly/react-icons/-/react-icons-3.14.19.tgz#03c08b9eaab2ff51d2be855160265e62ca110c7a"
   dependencies:
@@ -2376,7 +2379,33 @@
   dependencies:
     "@fortawesome/free-brands-svg-icons" "^5.8.1"
 
-"@patternfly/react-styles@^3.2.2", "@patternfly/react-styles@^3.6.6":
+"@patternfly/react-icons@^3.14.28":
+  version "3.14.32"
+  resolved "https://registry.yarnpkg.com/@patternfly/react-icons/-/react-icons-3.14.32.tgz#77d655374157a5a276c300ad31a5f5e4aa19165d"
+  integrity sha512-k0pNzam+vDyjL/RkmM829CKEZ6h9C2TTAL1zORKvxytL8wsBBg37fTrlAFURbqYdRFHnZBFJsXMtXjmxm6vAVQ==
+  dependencies:
+    "@fortawesome/free-brands-svg-icons" "^5.8.1"
+
+"@patternfly/react-styles@^3.6.15":
+  version "3.6.15"
+  resolved "https://registry.yarnpkg.com/@patternfly/react-styles/-/react-styles-3.6.15.tgz#b58201014570df0eb91984d5cf1d5d58dba11e15"
+  integrity sha512-9phudtz138QV82o60XvbNkeYPzLgz0DekEeu8cIX2A2yO1WzZbgXL5VPWB8bF/y+9EFyl+w8tu3ReQcvh7ULEw==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.0.0-beta.48"
+    camel-case "^3.0.0"
+    css "^2.2.3"
+    cssom "^0.3.4"
+    cssstyle "^0.3.1"
+    emotion "^9.2.9"
+    emotion-server "^9.2.9"
+    fbjs-scripts "^0.8.3"
+    fs-extra "^6.0.1"
+    jsdom "^15.1.0"
+    relative "^3.0.2"
+    resolve-from "^4.0.0"
+    typescript "3.4.5"
+
+"@patternfly/react-styles@^3.6.6":
   version "3.6.6"
   resolved "https://registry.yarnpkg.com/@patternfly/react-styles/-/react-styles-3.6.6.tgz#d4b481fbd34adc28b3129842aea4834c384d4382"
   dependencies:
@@ -2394,9 +2423,14 @@
     resolve-from "^4.0.0"
     typescript "3.4.5"
 
-"@patternfly/react-tokens@^2.5.1", "@patternfly/react-tokens@^2.5.2", "@patternfly/react-tokens@^2.7.6":
+"@patternfly/react-tokens@^2.5.1", "@patternfly/react-tokens@^2.7.6":
   version "2.7.6"
   resolved "https://registry.yarnpkg.com/@patternfly/react-tokens/-/react-tokens-2.7.6.tgz#8a8f4422aca1ead3cf4f024f323d33a793953aaa"
+
+"@patternfly/react-tokens@^2.7.14":
+  version "2.7.14"
+  resolved "https://registry.yarnpkg.com/@patternfly/react-tokens/-/react-tokens-2.7.14.tgz#88ee42018e92c4bc51cce7e7e606cd3d68853e5e"
+  integrity sha512-HVa1fe7H4NRRv6lmezpvW2TfIDF7bSbKvhMmCVqBk80Fd3wfLcPhacnWdt6PLWq7WX4dVx7dF7+v4sFh8RczSg==
 
 "@protobufjs/aspromise@^1.1.1", "@protobufjs/aspromise@^1.1.2":
   version "1.1.2"
@@ -2492,9 +2526,27 @@
     p-retry "^4.0.0"
     url-join "^4.0.0"
 
-"@semantic-release/npm@^5.0.5", "@semantic-release/npm@^5.1.1", "@semantic-release/npm@^5.1.4", "@semantic-release/npm@^5.1.9":
+"@semantic-release/npm@^5.0.5", "@semantic-release/npm@^5.1.1", "@semantic-release/npm@^5.1.4":
   version "5.3.4"
   resolved "https://registry.yarnpkg.com/@semantic-release/npm/-/npm-5.3.4.tgz#2998cd9455aaedf278334d4a5b56f8e0b715919d"
+  dependencies:
+    "@semantic-release/error" "^2.2.0"
+    aggregate-error "^3.0.0"
+    execa "^3.2.0"
+    fs-extra "^8.0.0"
+    lodash "^4.17.15"
+    nerf-dart "^1.0.0"
+    normalize-url "^4.0.0"
+    npm "^6.10.3"
+    rc "^1.2.8"
+    read-pkg "^5.0.0"
+    registry-auth-token "^4.0.0"
+    tempy "^0.3.0"
+
+"@semantic-release/npm@^5.3.4":
+  version "5.3.5"
+  resolved "https://registry.yarnpkg.com/@semantic-release/npm/-/npm-5.3.5.tgz#4a83952056d32e1401e1078c3910a159afc0cba8"
+  integrity sha512-AOREQ6rUT8OAiqXvWCp0kMNjcdnLLq1JdP0voZL4l5zf6Tgs/65YA7ctP+9shthW01Ps85Nu0pILW3p9GkaYuw==
   dependencies:
     "@semantic-release/error" "^2.2.0"
     aggregate-error "^3.0.0"
@@ -2528,13 +2580,6 @@
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-1.2.0.tgz#63ce3638cb85231f3704164c90a18ef816da3fb7"
   integrity sha512-mwhXGkRV5dlvQc4EgPDxDxO6WuMBVymGFd1CA+2Y+z5dG9MNspoQ+AWjl/Ld1MnpCL8AKbosZlDVohqcIwuWsw==
-
-"@tippy.js/react@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@tippy.js/react/-/react-1.1.1.tgz#91476726529e31d4c9f9074d995d0fa31f3b6e2d"
-  dependencies:
-    prop-types "^15.6.2"
-    tippy.js "^3.2.0"
 
 "@types/babel__core@^7.1.0":
   version "7.1.3"
@@ -13469,7 +13514,7 @@ pnp-webpack-plugin@1.5.0:
   dependencies:
     ts-pnp "^1.1.2"
 
-popper.js@^1.14.1, popper.js@^1.14.4, popper.js@^1.14.6:
+popper.js@^1.14.1, popper.js@^1.14.4, popper.js@^1.14.6, popper.js@^1.16.0:
   version "1.16.0"
   resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.16.0.tgz#2e1816bcbbaa518ea6c2e15a466f4cb9c6e2fbb3"
 
@@ -16887,11 +16932,18 @@ tiny-warning@^1.0.0, tiny-warning@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/tiny-warning/-/tiny-warning-1.0.3.tgz#94a30db453df4c643d0fd566060d60a875d84754"
 
-tippy.js@3.4.1, tippy.js@^3.2.0:
+tippy.js@3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-3.4.1.tgz#f0eb3081824ad6c5d364336451ad77ae2f543da8"
   dependencies:
     popper.js "^1.14.6"
+
+tippy.js@5.1.2:
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-5.1.2.tgz#5ac91233c59ab482ef5988cffe6e08bd26528e66"
+  integrity sha512-Qtrv2wqbRbaKMUb6bWWBQWPayvcDKNrGlvihxtsyowhT7RLGEh1STWuy6EMXC6QLkfKPB2MLnf8W2mzql9VDAw==
+  dependencies:
+    popper.js "^1.16.0"
 
 tmp@0.0.33, tmp@^0.0.33:
   version "0.0.33"

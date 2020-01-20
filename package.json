@@ -36,8 +36,8 @@
     }
   },
   "devDependencies": {
-    "@khala/npm-release-monorepo": "^2.2.0",
-    "@khala/wildcard-release-notes": "^2.2.3",
+    "@khala/npm-release-monorepo": "^2.3.0",
+    "@khala/wildcard-release-notes": "^2.3.0",
     "@semantic-release/github": "^5.5.5",
     "@semantic-release/npm": "^5.1.4",
     "atob-lite": "^2.0.0",
