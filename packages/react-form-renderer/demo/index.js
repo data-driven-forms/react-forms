@@ -16,7 +16,7 @@ const submitTest = (...args) => new Promise(resolve => {
 const FormButtons = props => {
     return (
         <div>
-            <button disabled={props.submitting} type="button" onClick={props.form.submit}>Submit</button>
+            <button disabled={props.submitting} type="submit">Submit</button>
         </div>
     )
 }
@@ -31,7 +31,7 @@ const App = () => (
             clearedValue={'bla'}
             layoutMapper={layoutMapper}
             formFieldsMapper={formFieldsMapper}
-            onSubmit={console.log}
+            onSubmit={() => console.log(554)}
             onCancel={console.log}
             canReset
             onReset={() => console.log('i am resseting')}

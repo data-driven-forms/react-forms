@@ -666,12 +666,10 @@ exports[`FieldArray should render array field correctly 1`] = `
                         <ButtonLayout
                           key="form-submit"
                           label="Submit"
-                          onClick={[Function]}
                           type="submit"
                           variant="primary"
                         >
                           <Component
-                            onClick={[Function]}
                             type="submit"
                             variant="primary"
                           >
@@ -684,7 +682,6 @@ exports[`FieldArray should render array field correctly 1`] = `
                                     undefined,
                                   ],
                                   "isDisabled": undefined,
-                                  "onClick": [Function],
                                   "type": "submit",
                                   "variant": "primary",
                                 }
@@ -692,7 +689,6 @@ exports[`FieldArray should render array field correctly 1`] = `
                               consumerContext={null}
                             >
                               <Button
-                                onClick={[Function]}
                                 ouiaContext={
                                   Object {
                                     "isOuia": false,
@@ -707,7 +703,6 @@ exports[`FieldArray should render array field correctly 1`] = `
                                   aria-label={null}
                                   className="pf-c-button pf-m-primary"
                                   disabled={false}
-                                  onClick={[Function]}
                                   tabIndex={null}
                                   type="submit"
                                 >

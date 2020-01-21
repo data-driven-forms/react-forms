@@ -131,12 +131,10 @@ exports[`<FormControls /> should render with description 1`] = `
                     <Component
                       key="form-submit"
                       label="Submit"
-                      onClick={[Function]}
                       type="submit"
                       variant="primary"
                     >
                       <button
-                        onClick={[Function]}
                         type="submit"
                         variant="primary"
                       >
@@ -292,12 +290,10 @@ exports[`<FormControls /> should render with title and description 1`] = `
                     <Component
                       key="form-submit"
                       label="Submit"
-                      onClick={[Function]}
                       type="submit"
                       variant="primary"
                     >
                       <button
-                        onClick={[Function]}
                         type="submit"
                         variant="primary"
                       >
@@ -441,12 +437,10 @@ exports[`<FormControls /> should render without title and description 1`] = `
                     <Component
                       key="form-submit"
                       label="Submit"
-                      onClick={[Function]}
                       type="submit"
                       variant="primary"
                     >
                       <button
-                        onClick={[Function]}
                         type="submit"
                         variant="primary"
                       >

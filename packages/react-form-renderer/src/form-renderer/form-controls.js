@@ -38,7 +38,7 @@ const FormControls = ({
       : (
         <RendererContext.Consumer>
           { ({ layoutMapper: { Button, ButtonGroup }}) => {
-            const { submitting, pristine, validating, form: { submit, reset }, values } = formSpyProps;
+            const { submitting, pristine, validating, form: { reset }, values } = formSpyProps;
             const buttons = {
               submit: (
                 <Button
@@ -46,7 +46,6 @@ const FormControls = ({
                   type="submit"
                   variant="primary"
                   disabled={ submitting || validating || disableSubmit }
-                  onClick={ submit }
                   label={ submitLabel }
                 />
               ),
