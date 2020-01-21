@@ -28,7 +28,6 @@ describe('data types', () => {
   let initialProps;
   beforeEach(() => {
     initialProps = {
-      onSubmit: jest.fn(),
       layoutMapper,
       formFieldsMapper: {
         [componentTypes.TEXT_FIELD]: DataTypeInput,
@@ -62,7 +61,10 @@ describe('data types', () => {
     expect(onSubmit).not.toHaveBeenCalled();
 
     input.simulate('change', { target: { value: '123' }});
-    wrapper.find('button').first().simulate('click');
+    wrapper.update();
+
+    wrapper.find('form').first().simulate('submit');
+
     expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({
       'data-type-text': 123,
     }), expect.anything(), expect.anything());
@@ -82,7 +84,7 @@ describe('data types', () => {
     const wrapper = mount(<FormRenderer { ...initialProps } onSubmit={ onSubmit } schema={ propSchema } />);
     const input = wrapper.find('input');
     input.simulate('change', { target: { value: '123' }});
-    wrapper.find('button').first().simulate('click');
+    wrapper.find('form').first().simulate('submit');
     expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({
       'data-type-text': 123,
     }), expect.anything(), expect.anything());
@@ -102,7 +104,7 @@ describe('data types', () => {
     const wrapper = mount(<FormRenderer { ...initialProps } onSubmit={ onSubmit } schema={ renderSchema } />);
     const input = wrapper.find('input');
     input.simulate('change', { target: { value: '123' }});
-    wrapper.find('button').first().simulate('click');
+    wrapper.find('form').first().simulate('submit');
     expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({
       'data-type-text': 123,
     }), expect.anything(), expect.anything());
@@ -122,7 +124,7 @@ describe('data types', () => {
     const wrapper = mount(<FormRenderer { ...initialProps } onSubmit={ onSubmit } schema={ childSchema } />);
     const input = wrapper.find('input');
     input.simulate('change', { target: { value: '123' }});
-    wrapper.find('button').first().simulate('click');
+    wrapper.find('form').first().simulate('submit');
     expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({
       'data-type-text': 123,
     }), expect.anything(), expect.anything());

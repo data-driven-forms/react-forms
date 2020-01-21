@@ -48,12 +48,10 @@ exports[`<FormControls /> should add missing buttons if not defined in button or
               <Component
                 key="form-submit"
                 label="Submit"
-                onClick={[Function]}
                 type="submit"
                 variant="primary"
               >
                 <button
-                  onClick={[Function]}
                   type="submit"
                   variant="primary"
                 >
@@ -153,13 +151,11 @@ exports[`<FormControls /> should render all controls and with default labels 1`]
                 disabled={true}
                 key="form-submit"
                 label="Submit"
-                onClick={[Function]}
                 type="submit"
                 variant="primary"
               >
                 <button
                   disabled={true}
-                  onClick={[Function]}
                   type="submit"
                   variant="primary"
                 >
@@ -270,12 +266,10 @@ exports[`<FormControls /> should render buttons in correct order 1`] = `
               <Component
                 key="form-submit"
                 label="Submit"
-                onClick={[Function]}
                 type="submit"
                 variant="primary"
               >
                 <button
-                  onClick={[Function]}
                   type="submit"
                   variant="primary"
                 >
@@ -359,12 +353,10 @@ exports[`<FormControls /> should render only submit button 1`] = `
               <Component
                 key="form-submit"
                 label="Submit"
-                onClick={[Function]}
                 type="submit"
                 variant="primary"
               >
                 <button
-                  onClick={[Function]}
                   type="submit"
                   variant="primary"
                 >

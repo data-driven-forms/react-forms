@@ -787,12 +787,10 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                   <Component
                     key="form-submit"
                     label="Submit"
-                    onClick={[Function]}
                     type="submit"
                     variant="primary"
                   >
                     <button
-                      onClick={[Function]}
                       type="submit"
                       variant="primary"
                     >
