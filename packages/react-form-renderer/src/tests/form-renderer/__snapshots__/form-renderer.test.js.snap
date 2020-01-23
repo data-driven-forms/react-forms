@@ -960,6 +960,7 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
             >
               <Component
                 FieldProvider={[Function]}
+                FormSpyProvider={[Function]}
                 formOptions={
                   Object {
                     "batch": [Function],
@@ -1079,6 +1080,7 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
               >
                 <Component
                   FieldProvider={[Function]}
+                  FormSpyProvider={[Function]}
                   formOptions={
                     Object {
                       "batch": [Function],

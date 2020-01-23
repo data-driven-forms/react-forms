@@ -21,7 +21,7 @@ const fieldArrayState = { schema: arraySchemaDDF, additionalOptions: {
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = fieldArrayState
+        this.state = { schema: wizardSchema, additionalOptions: { showFormControls: false, wizard: true } }
     }
 
     render() {

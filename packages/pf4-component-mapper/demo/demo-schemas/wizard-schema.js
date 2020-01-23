@@ -32,6 +32,7 @@ export const wizardSchema = {
   fields: [{
     component: componentTypes.WIZARD,
     name: 'wizzard',
+    crossroads: ['source.source-type'],
     predictSteps: true,
     //inModal: true,
     title: 'Title',
