@@ -1,30 +1,26 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import toJSon from 'enzyme-to-json';
+import { TextInput } from '@patternfly/react-core';
 
 import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import * as enterHandle from '@data-driven-forms/common/src/wizard/enter-handler';
 
 import { formFieldsMapper, layoutMapper } from '../../index';
 import Wizard from '../../form-fields/wizard/wizard';
-import FieldProvider from '../../../../../__mocks__/mock-field-provider';
 
 describe('<Wizard />', () => {
   let initialProps;
   let schema;
   let nestedSchema;
-  let getRegisteredFieldsSchemaMock;
-  let getRegisteredFieldsNestedSchemaMock;
-  let getValuesNestedSchema;
   let initialValues;
+  let schemaWithHeader;
+  let Title;
+  let Description;
+  let initialValuesNestedSchema;
 
   const nextButtonClick = (wrapper) =>  {
     wrapper.find('button').at(0).simulate('click');
-    wrapper.update();
-  };
-
-  const nextButtonClickWithHeader = (wrapper) =>  {
-    wrapper.find('button').at(1).simulate('click');
     wrapper.update();
   };
 
@@ -33,13 +29,8 @@ describe('<Wizard />', () => {
     wrapper.update();
   };
 
-  const backButtonClickWithHeader = (wrapper) =>  {
+  const cancelButtonClick = (wrapper) =>  {
     wrapper.find('button').at(2).simulate('click');
-    wrapper.update();
-  };
-
-  const cancelButtonClickWithHeader = (wrapper) =>  {
-    wrapper.find('button').at(3).simulate('click');
     wrapper.update();
   };
 
@@ -60,90 +51,106 @@ describe('<Wizard />', () => {
       'bar-field': 'bar-field-value',
       'not-visited-field': 'not-visted-field-value',
     };
-    initialProps = {
-      FieldProvider,
-      title: 'Wizard',
-      description: 'wizard description',
-      formOptions: {
-        renderForm: ([{ name }]) => <div key={ name }>{ name }</div>,
-        getState: () => ({
-          values: initialValues,
-        }),
-        onCancel: jest.fn(),
-        onSubmit: jest.fn(),
-        submit: jest.fn(),
-        valid: true,
-        getRegisteredFields: jest.fn(),
-      },
-      fields: [{
-        stepKey: '1',
-        name: 'foo',
-        fields: [],
-      }],
+
+    schema = {
+      fields: [
+        {
+          name: 'wizard',
+          component: 'wizard',
+          fields: [{
+            title: 'foo-step',
+            stepKey: '1',
+            name: 'foo',
+            fields: [{
+              name: 'foo-field',
+              component: 'text-field',
+            }],
+            nextStep: '2',
+          }, {
+            stepKey: '2',
+            title: 'bar-step',
+            name: 'bar',
+            fields: [{
+              name: 'bar-field',
+              component: 'text-field',
+            }],
+          }]},
+      ],
     };
 
-    schema = [{
-      title: 'foo-step',
-      stepKey: '1',
-      name: 'foo',
-      fields: [{
-        name: 'foo-field',
-      }],
-      nextStep: '2',
-    }, {
-      stepKey: '2',
-      title: 'bar-step',
-      name: 'bar',
-      fields: [{
-        name: 'bar-field',
-      }],
-    }];
+    initialProps = {
+      schema,
+      formFieldsMapper,
+      layoutMapper,
+      onSubmit: jest.fn(),
+      onCancel: jest.fn(),
+      showFormControls: false,
+    };
 
-    getRegisteredFieldsSchemaMock = jest.fn();
+    nestedSchema = {
+      fields: [
+        {
+          name: 'wizard',
+          component: 'wizard',
+          fields: [{
+            title: 'foo-step',
+            stepKey: '1',
+            name: 'foo',
+            fields: [{
+              name: 'nested.foo-field',
+              component: 'text-field',
+            }],
+            nextStep: '2',
+          }, {
+            stepKey: '2',
+            title: 'bar-step',
+            name: 'bar',
+            fields: [{
+              name: 'nested.second.bar-field',
+              component: 'text-field',
+            }],
+          }],
+        },
+      ],
+    };
 
-    getRegisteredFieldsSchemaMock
-    .mockReturnValueOnce('foo-field')
-    .mockReturnValueOnce('bar-field');
-
-    nestedSchema = [{
-      title: 'foo-step',
-      stepKey: '1',
-      name: 'foo',
-      fields: [{
-        name: 'nested.foo-field',
-      }],
-      nextStep: '2',
-    }, {
-      stepKey: '2',
-      title: 'bar-step',
-      name: 'bar',
-      fields: [{
-        name: 'nested.second.bar-field',
-      }],
-    }];
-
-    getRegisteredFieldsNestedSchemaMock = jest.fn();
-
-    getRegisteredFieldsNestedSchemaMock
-    .mockReturnValueOnce('nested.foo-field')
-    .mockReturnValueOnce('nested.second.bar-field');
-
-    getValuesNestedSchema = () => ({
-      values: {
-        'nested.foo-field': 'foo-field-value',
-        'nested.second.bar-field': 'bar-field-value',
-        'not-visited-field': 'not-visted-field-value',
+    initialValuesNestedSchema = {
+      nested: {
+        'foo-field': 'foo-field-value',
+        second: {
+          'bar-field': 'bar-field-value',
+        },
       },
-    });
-  });
+      'not-visited-field': 'not-visted-field-value',
+    };
 
-  afterEach(() => {
-    getRegisteredFieldsSchemaMock.mockReset();
-    getRegisteredFieldsNestedSchemaMock.mockReset();
+    Title = () => 'Title';
+    Description = () => 'description';
+
+    schemaWithHeader = {
+      fields: [
+        {
+          name: 'wizard',
+          component: 'wizard',
+          title: <Title />,
+          description: <Description />,
+          inModal: true,
+          fields: [{
+            title: 'foo-step',
+            stepKey: '1',
+            name: 'foo',
+            fields: [{
+              name: 'foo-field',
+              component: 'text-field',
+            }],
+          }]},
+      ],
+    };
   });
 
   it('should render correctly and unmount', () => {
-    const wrapper = mount(<Wizard { ...initialProps } />);
+    const wrapper = mount(<FormRenderer { ...initialProps }/>);
+
     expect(toJSon(wrapper)).toMatchSnapshot();
     wrapper.unmount();
     wrapper.update();
@@ -153,7 +160,7 @@ describe('<Wizard />', () => {
   it('should call enter handler when pressing enter', () => {
     enterHandle.default = jest.fn();
 
-    const wrapper = mount(<Wizard { ...initialProps } />);
+    const wrapper = mount(<FormRenderer { ...initialProps }/>);
 
     expect(enterHandle.default).not.toHaveBeenCalled();
 
@@ -178,7 +185,34 @@ describe('<Wizard />', () => {
   });
 
   it('should render correctly in modal and unmount', () => {
-    const wrapper = mount(<Wizard inModal { ...initialProps } />);
+    schema = {
+      fields: [
+        {
+          name: 'wizard',
+          component: 'wizard',
+          inModal: true,
+          fields: [{
+            title: 'foo-step',
+            stepKey: '1',
+            name: 'foo',
+            fields: [{
+              name: 'foo-field',
+              component: 'text-field',
+            }],
+            nextStep: '2',
+          }, {
+            stepKey: '2',
+            title: 'bar-step',
+            name: 'bar',
+            fields: [{
+              name: 'bar-field',
+              component: 'text-field',
+            }],
+          }]},
+      ],
+    };
+
+    const wrapper = mount(<FormRenderer { ...initialProps } schema={ schema }/>);
     expect(toJSon(wrapper)).toMatchSnapshot();
     wrapper.unmount();
     wrapper.update();
@@ -186,49 +220,62 @@ describe('<Wizard />', () => {
   });
 
   it('should render correctly with custom title and description', () => {
-    const wrapper = mount(<Wizard { ...initialProps } title={ <div>Title</div> } description={ <div>description</div> } />);
-    expect(toJSon(wrapper)).toMatchSnapshot();
+    const wrapper = mount(<FormRenderer { ...initialProps } schema={ schemaWithHeader }/>);
+
+    expect(wrapper.find(Title)).toHaveLength(1);
+    expect(wrapper.find(Description)).toHaveLength(1);
   });
 
   it('should render correctly with custom buttons', () => {
     const Buttons = () => <div>Hello</div>;
 
-    const wrapper = mount(<Wizard { ...initialProps } fields={ [{
-      title: 'foo-step',
-      stepKey: '1',
-      name: 'foo',
-      buttons: Buttons,
-      fields: [{
-        name: 'foo-field',
-      }],
-      nextStep: '2',
-    }] }/>);
-    expect(wrapper.find(Buttons).length).toEqual(1);
+    schema = {
+      fields: [
+        {
+          name: 'wizard',
+          component: 'wizard',
+          fields: [{
+            title: 'foo-step',
+            stepKey: '1',
+            name: 'foo',
+            buttons: Buttons,
+            fields: [{
+              name: 'foo-field',
+              component: 'text-field',
+            }],
+          }]},
+      ],
+    };
+
+    const wrapper = mount(<FormRenderer { ...initialProps } schema={ schema }/>);
+
+    expect(wrapper.find(Buttons)).toHaveLength(1);
   });
 
   it('should call submit function', () => {
     const onSubmit = jest.fn();
-    const wrapper = mount(<Wizard { ...initialProps } formOptions={{ ...initialProps.formOptions, onSubmit }} />);
-    nextButtonClickWithHeader(wrapper);
+
+    const wrapper = mount(<FormRenderer { ...initialProps } onSubmit={ onSubmit }/>);
+
+    nextButtonClick(wrapper);
+    nextButtonClick(wrapper);
 
     expect(onSubmit).toHaveBeenCalled();
   });
 
   it('should go to next step correctly and submit data and formOptions', () => {
     const onSubmit = jest.fn();
-    const formOptions = { ...initialProps.formOptions, onSubmit, getRegisteredFields: getRegisteredFieldsSchemaMock };
 
-    const wrapper = mount(<Wizard
-      { ...initialProps }
-      formOptions={ formOptions }
-      fields={ schema }
-    />);
-    nextButtonClickWithHeader(wrapper);
+    const wrapper = mount(<FormRenderer { ...initialProps } onSubmit={ onSubmit } initialValues={ initialValues }/>);
 
-    expect(wrapper.children().instance().state.activeStep).toEqual('2');
-    expect(wrapper.children().instance().state.prevSteps).toEqual([ '1' ]);
+    nextButtonClick(wrapper);
 
-    nextButtonClickWithHeader(wrapper);
+    expect(wrapper.find(Wizard).children().instance().state.activeStep).toEqual('2');
+    expect(wrapper.find(Wizard).children().instance().state.prevSteps).toEqual([ '1' ]);
+
+    nextButtonClick(wrapper);
+
+    const formOptions = expect.any(Object);
 
     expect(onSubmit).toHaveBeenCalledWith({
       'foo-field': 'foo-field-value',
@@ -238,24 +285,18 @@ describe('<Wizard />', () => {
 
   it('should pass values to cancel button', () => {
     const onCancel = jest.fn();
-    const wrapper = mount(<Wizard
-      { ...initialProps }
-      fields={ schema }
-      formOptions={{ ...initialProps.formOptions, onCancel }}
-    />);
 
-    cancelButtonClickWithHeader(wrapper);
+    const wrapper = mount(<FormRenderer { ...initialProps } onCancel={ onCancel } initialValues={ initialValues }/>);
+
+    cancelButtonClick(wrapper);
 
     expect(onCancel).toHaveBeenCalledWith(initialValues);
   });
 
   it('should pass values to cancel - close icon', () => {
     const onCancel = jest.fn();
-    const wrapper = mount(<Wizard
-      { ...initialProps }
-      fields={ schema }
-      formOptions={{ ...initialProps.formOptions, onCancel }}
-    />);
+
+    const wrapper = mount(<FormRenderer { ...initialProps } onCancel={ onCancel } initialValues={ initialValues } schema={ schemaWithHeader }/>);
 
     closeIconClickWithHeader(wrapper);
 
@@ -264,21 +305,15 @@ describe('<Wizard />', () => {
 
   it('should submit data when nested schema', () => {
     const onSubmit = jest.fn();
-    const formOptions = {
-      ...initialProps.formOptions,
-      onSubmit,
-      getRegisteredFields: getRegisteredFieldsNestedSchemaMock,
-      getState: getValuesNestedSchema,
-    };
 
-    const wrapper = mount(<Wizard
-      { ...initialProps }
-      formOptions={ formOptions }
-      fields={ nestedSchema }
-    />);
+    const wrapper = mount(
+      <FormRenderer { ...initialProps } schema={ nestedSchema } onSubmit={ onSubmit } initialValues={ initialValuesNestedSchema }/>
+    );
 
-    nextButtonClickWithHeader(wrapper);
-    nextButtonClickWithHeader(wrapper);
+    nextButtonClick(wrapper);
+    nextButtonClick(wrapper);
+
+    const formOptions = expect.any(Object);
 
     expect(onSubmit).toHaveBeenCalledWith({
       nested: {
@@ -291,7 +326,7 @@ describe('<Wizard />', () => {
   });
 
   it('should build simple navigation', () => {
-    const wrapper = mount(<Wizard { ...initialProps } fields={ schema } />);
+    const wrapper = mount(<FormRenderer { ...initialProps }/>);
 
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(2);
     expect(wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).text()).toEqual('foo-step');
@@ -299,151 +334,208 @@ describe('<Wizard />', () => {
   });
 
   it('should build progressive navigation', () => {
-    const wrapper = mount(<Wizard { ...initialProps } isDynamic fields={ schema }  />);
+    schema = {
+      fields: [
+        {
+          name: 'wizard',
+          component: 'wizard',
+          isDynamic: true,
+          fields: [{
+            title: 'foo-step',
+            stepKey: '1',
+            name: 'foo',
+            fields: [{
+              name: 'foo-field',
+              component: 'text-field',
+            }],
+            nextStep: '2',
+          }, {
+            stepKey: '2',
+            title: 'bar-step',
+            name: 'bar',
+            fields: [{
+              name: 'bar-field',
+              component: 'text-field',
+            }],
+          }]},
+      ],
+    };
+
+    const wrapper = mount(<FormRenderer { ...initialProps } schema={ schema }/>);
 
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(1);
     expect(wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).text()).toEqual('foo-step');
 
-    nextButtonClickWithHeader(wrapper);
+    nextButtonClick(wrapper);
 
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(2);
     expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).text()).toEqual('bar-step');
   });
 
   it('should jump when click simple navigation', () => {
-    const wrapper = mount(<Wizard { ...initialProps } fields={ schema } />);
+    const wrapper = mount(<FormRenderer { ...initialProps }/>);
 
-    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('foo-field');
+    expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
 
-    nextButtonClickWithHeader(wrapper);
+    nextButtonClick(wrapper);
 
-    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar-field');
+    expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
 
     // click on first nav link
     wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).simulate('click');
     wrapper.update();
 
-    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('foo-field');
+    expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
 
     // go back
     wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).simulate('click');
     wrapper.update();
 
-    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar-field');
+    expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
   });
 
   it('should build simple navigation with substeps', () => {
-    const wrapper = mount(<Wizard { ...initialProps } fields={ [{
-      title: 'foo-step',
-      stepKey: '1',
-      name: 'foo',
+    schema = {
       fields: [{
-        name: 'foo-field',
+        component: 'wizard',
+        name: 'wizard',
+        fields: [{
+          title: 'foo-step',
+          stepKey: '1',
+          name: 'foo',
+          fields: [{
+            name: 'foo-field',
+            component: 'text-field',
+          }],
+          nextStep: '2',
+        }, {
+          stepKey: '2',
+          title: 'bar-step',
+          name: 'bar',
+          substepOf: 'barbar',
+          fields: [{
+            name: 'bar-field',
+            component: 'text-field',
+          }],
+        }],
       }],
-      nextStep: '2',
-    }, {
-      stepKey: '2',
-      title: 'bar-step',
-      name: 'bar',
-      substepOf: 'barbar',
-      fields: [{
-        name: 'bar-field',
-      }],
-    }] } />);
+    };
+
+    const wrapper = mount(<FormRenderer { ...initialProps } schema={ schema }/>);
 
     expect(wrapper.find('.pf-c-wizard__nav-list')).toHaveLength(2);
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(3);
     expect(wrapper.find('.pf-c-wizard__nav-item').at(1).childAt(0).text()).toEqual('barbar');
     expect(wrapper.find('.pf-c-wizard__nav-list').last().childAt(0).childAt(0).text()).toEqual('bar-step');
-
   });
 
-  it('should jumb with substeps', () => {
-    const wrapper = mount(<Wizard { ...initialProps } fields={ [{
-      title: 'foo-step',
-      stepKey: '1',
-      name: 'foo',
+  it('should jump with substeps', () => {
+    schema = {
       fields: [{
-        name: 'foo-field',
+        component: 'wizard',
+        name: 'wizard',
+        fields: [{
+          title: 'foo-step',
+          stepKey: '1',
+          name: 'foo',
+          fields: [{
+            name: 'foo-field',
+            component: 'text-field',
+          }],
+          nextStep: '2',
+        }, {
+          stepKey: '2',
+          title: 'bar-step',
+          name: 'bar',
+          substepOf: 'barbar',
+          fields: [{
+            name: 'bar-field',
+            component: 'text-field',
+          }],
+        }],
       }],
-      nextStep: '2',
-    }, {
-      stepKey: '2',
-      title: 'bar-step',
-      name: 'bar',
-      substepOf: 'barbar',
-      fields: [{
-        name: 'bar-field',
-      }],
-    }] } />);
+    };
 
-    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('foo-field');
+    const wrapper = mount(<FormRenderer { ...initialProps } schema={ schema }/>);
 
-    nextButtonClickWithHeader(wrapper);
+    expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
 
-    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar-field');
+    nextButtonClick(wrapper);
+
+    expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
 
     // click on first nav link
     wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).simulate('click');
     wrapper.update();
 
-    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('foo-field');
+    expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
 
     // go back through the primary step
     wrapper.find('.pf-c-wizard__nav-item').at(1).childAt(0).simulate('click');
     wrapper.update();
 
-    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar-field');
+    expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
 
-    backButtonClickWithHeader(wrapper);
+    backButtonClick(wrapper);
 
-    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('foo-field');
+    expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
 
     // go back through the substep
     wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).simulate('click');
     wrapper.update();
 
-    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar-field');
+    expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
   });
 
-  it('should jumb with substeps and dynamic', () => {
-    const wrapper = mount(<Wizard { ...initialProps } isDynamic fields={ [{
-      title: 'foo-step',
-      stepKey: '1',
-      name: 'foo',
+  it('should jump with substeps and dynamic', () => {
+    schema = {
       fields: [{
-        name: 'foo-field',
+        component: 'wizard',
+        name: 'wizard',
+        isDynamic: true,
+        fields: [{
+          title: 'foo-step',
+          stepKey: '1',
+          name: 'foo',
+          fields: [{
+            name: 'foo-field',
+            component: 'text-field',
+          }],
+          nextStep: '2',
+        }, {
+          stepKey: '2',
+          title: 'bar-step',
+          name: 'bar',
+          substepOf: 'barbar',
+          fields: [{
+            name: 'bar-field',
+            component: 'text-field',
+          }],
+        }],
       }],
-      nextStep: '2',
-    }, {
-      stepKey: '2',
-      title: 'bar-step',
-      name: 'bar',
-      substepOf: 'barbar',
-      fields: [{
-        name: 'bar-field',
-      }],
-    }] } />);
+    };
 
-    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('foo-field');
+    const wrapper = mount(<FormRenderer { ...initialProps } schema={ schema }/>);
+
+    expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(1);
 
-    nextButtonClickWithHeader(wrapper);
+    nextButtonClick(wrapper);
 
-    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar-field');
+    expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(3);
 
     // click on first nav link
     wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).simulate('click');
     wrapper.update();
 
-    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('foo-field');
+    expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
     // visited step perished from navigation
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(1);
 
-    nextButtonClickWithHeader(wrapper);
+    nextButtonClick(wrapper);
 
-    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar-field');
+    expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(3);
   });
 

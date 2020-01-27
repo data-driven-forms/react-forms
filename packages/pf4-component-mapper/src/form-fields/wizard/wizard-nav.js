@@ -2,6 +2,7 @@ import React from 'react';
 import { WizardNavItem, WizardNav } from '@patternfly/react-core';
 import isEqual from 'lodash/isEqual';
 import get from 'lodash/get';
+import { PropTypes } from 'prop-types';
 
 const memoValues = (initialValue) => {
   let valueCache = initialValue;
@@ -51,6 +52,16 @@ const WizardNavigationInternal = React.memo(({
     </WizardNavItem>;
   }));
 }, isEqual);
+
+WizardNavigationInternal.propTypes = {
+  activeStepIndex: PropTypes.number.isRequired,
+  formOptions: PropTypes.shape({
+    valid: PropTypes.bool.isRequired,
+  }).isRequired,
+  maxStepIndex: PropTypes.number.isRequired,
+  jumpToStep: PropTypes.func.isRequired,
+  navSchema: PropTypes.array.isRequired,
+};
 
 class WizardNavigationClass extends React.Component {
   constructor(props) {
@@ -111,5 +122,16 @@ class WizardNavigationClass extends React.Component {
     );
   }
 }
+
+WizardNavigationClass.propTypes = {
+  activeStepIndex: PropTypes.number.isRequired,
+  formOptions: PropTypes.object.isRequired,
+  maxStepIndex: PropTypes.number.isRequired,
+  jumpToStep: PropTypes.func.isRequired,
+  setPrevSteps: PropTypes.func.isRequired,
+  navSchema: PropTypes.array.isRequired,
+  values: PropTypes.object.isRequired,
+  crossroads: PropTypes.arrayOf(PropTypes.string),
+};
 
 export default WizardNavigationClass;

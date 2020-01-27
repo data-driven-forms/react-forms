@@ -183,6 +183,21 @@ class Wizard extends React.Component {
     return schema;
   };
 
+  handleSubmitFinal = () => this.props.formOptions.onSubmit(
+    this.handleSubmit(
+      this.props.formOptions.getState().values,
+      [ ...this.state.prevSteps, this.state.activeStep ],
+      this.props.formOptions.getRegisteredFields,
+    ),
+    this.props.formOptions
+  );
+
+  setPrevSteps = () => this.setState((prevState) => ({
+    navSchema: this.createSchema({ currentIndex: this.state.activeStepIndex }),
+    prevSteps: prevState.prevSteps.slice(0, this.state.activeStepIndex),
+    maxStepIndex: this.state.activeStepIndex,
+  }))
+
   render() {
     if (this.state.loading) {
       return null;
@@ -205,22 +220,12 @@ class Wizard extends React.Component {
     } = this.props;
     const { activeStepIndex, navSchema, maxStepIndex, isDynamic } = this.state;
 
-    const handleSubmit = () =>
-      formOptions.onSubmit(
-        this.handleSubmit(
-          formOptions.getState().values,
-          [ ...this.state.prevSteps, this.state.activeStep ],
-          formOptions.getRegisteredFields,
-        ),
-        formOptions
-      );
-
     const currentStep = (
       <WizardStep
         { ...this.findCurrentStep(this.state.activeStep) }
         formOptions={{
           ...formOptions,
-          handleSubmit,
+          handleSubmit: this.handleSubmitFinal,
         }}
         buttonLabels={ buttonLabels }
         FieldProvider={ FieldProvider }
@@ -233,7 +238,7 @@ class Wizard extends React.Component {
         <div className={ `pf-c-wizard ${inModal ? '' : 'no-shadow'} ${isCompactNav ? 'pf-m-compact-nav' : ''} ${setFullWidth ? 'pf-m-full-width' : ''} ${setFullHeight ? 'pf-m-full-height' : ''}` }
           role="dialog"
           aria-modal={ inModal ? 'true' : undefined }
-          onKeyDown={ e => handleEnter(e, formOptions, this.state.activeStep, this.findCurrentStep, this.handleNext, handleSubmit) }
+          onKeyDown={ e => handleEnter(e, formOptions, this.state.activeStep, this.findCurrentStep, this.handleNext,  this.handleSubmitFinal) }
         >
           { title && <WizardHeader
             title={ title }
@@ -253,11 +258,7 @@ class Wizard extends React.Component {
                     crossroads={ crossroads }
                     isDynamic={ isDynamic }
                     values={ values }
-                    setPrevSteps={ () => this.setState((prevState) => ({
-                      navSchema: this.createSchema({ currentIndex: activeStepIndex }),
-                      prevSteps: prevState.prevSteps.slice(0, activeStepIndex),
-                      maxStepIndex: activeStepIndex,
-                    })) }
+                    setPrevSteps={ this.setPrevSteps }
                   />
                 ) }
               </FormSpyProvider>
