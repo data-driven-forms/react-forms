@@ -7,6 +7,7 @@ const SubForm = ({
   title,
   description,
   FieldProvider: _FieldProvider,
+  FormSpyProvider: _FormSpyProvider,
   validate: _validate,
   ...rest
 }) => (
@@ -26,6 +27,7 @@ SubForm.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   FieldProvider: PropTypes.any,
+  FormSpyProvider: PropTypes.any,
   validate: PropTypes.any,
 };
 
