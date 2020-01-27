@@ -2,7 +2,7 @@ import React from 'react';
 import { WizardNavItem, WizardNav } from '@patternfly/react-core';
 import isEqual from 'lodash/isEqual';
 import get from 'lodash/get';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 
 const memoValues = (initialValue) => {
   let valueCache = initialValue;

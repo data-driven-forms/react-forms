@@ -920,5 +920,155 @@ describe('<Wizard />', () => {
       expect(wrapper.find('WizardNavItem').at(0).props().isDisabled).toEqual(false);
       expect(wrapper.find('WizardNavItem').at(1).props().isDisabled).toEqual(true);
     });
+
+    it('crossroads variable predicts in realtime', () => {
+      const wizardSchema = {
+        fields: [{
+          component: componentTypes.WIZARD,
+          name: 'wizard',
+          predictSteps: true,
+          crossroads: [ 'source.source-type' ],
+          fields: [{
+            title: 'first-step',
+            stepKey: 1,
+            nextStep: {
+              when: 'source.source-type',
+              stepMapper: {
+                aws: 'aws',
+                google: 'summary',
+              },
+            },
+            fields: [{
+              name: 'source.source-type',
+              label: 'Source type',
+              component: componentTypes.TEXT_FIELD,
+            }],
+          }, {
+            title: 'second-step',
+            stepKey: 'aws',
+            nextStep: 'summary',
+            fields: [],
+          },
+          {
+            title: 'summary',
+            stepKey: 'summary',
+            fields: [],
+          }],
+        }],
+      };
+
+      const wrapper = mount(<FormRenderer
+        { ...initialProps }
+        schema={ wizardSchema }
+      />);
+
+      expect(wrapper.find('WizardNavItem')).toHaveLength(1);
+
+      changeValue(wrapper, 'aws');
+
+      // predict steps for aws
+      expect(wrapper.find('WizardNavItem')).toHaveLength(3);
+      expect(wrapper.find('WizardNavItem').at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find('WizardNavItem').at(1).props().isDisabled).toEqual(true);
+      expect(wrapper.find('WizardNavItem').at(2).props().isDisabled).toEqual(true);
+
+      changeValue(wrapper, 'google');
+
+      // predict steps for google
+      expect(wrapper.find('WizardNavItem')).toHaveLength(2);
+      expect(wrapper.find('WizardNavItem').at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find('WizardNavItem').at(1).props().isDisabled).toEqual(true);
+
+      nextButtonClick(wrapper);
+
+      expect(wrapper.find('WizardNavItem')).toHaveLength(2);
+      expect(wrapper.find('WizardNavItem').at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find('WizardNavItem').at(1).props().isDisabled).toEqual(false);
+
+      // click on first nav link
+      wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).simulate('click');
+      wrapper.update();
+
+      // keep the second step enabled
+      expect(wrapper.find('WizardNavItem')).toHaveLength(2);
+      expect(wrapper.find('WizardNavItem').at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find('WizardNavItem').at(1).props().isDisabled).toEqual(false);
+
+      changeValue(wrapper, 'aws');
+
+      expect(wrapper.find('WizardNavItem')).toHaveLength(3);
+      expect(wrapper.find('WizardNavItem').at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find('WizardNavItem').at(1).props().isDisabled).toEqual(true);
+      expect(wrapper.find('WizardNavItem').at(2).props().isDisabled).toEqual(true);
+
+      changeValue(wrapper, 'google');
+
+      expect(wrapper.find('WizardNavItem')).toHaveLength(2);
+      expect(wrapper.find('WizardNavItem').at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find('WizardNavItem').at(1).props().isDisabled).toEqual(true);
+    });
+
+    it('crossroads variable predicts in realtime - disableForwardJumping', () => {
+      const wizardSchema = {
+        fields: [{
+          component: componentTypes.WIZARD,
+          name: 'wizard',
+          predictSteps: true,
+          crossroads: [ 'source.source-type' ],
+          fields: [{
+            title: 'first-step',
+            stepKey: 1,
+            nextStep: {
+              when: 'source.source-type',
+              stepMapper: {
+                aws: 'aws',
+                google: 'summary',
+              },
+            },
+            disableForwardJumping: true,
+            fields: [{
+              name: 'source.source-type',
+              label: 'Source type',
+              component: componentTypes.TEXT_FIELD,
+            }],
+          }, {
+            title: 'second-step',
+            stepKey: 'aws',
+            nextStep: 'summary',
+            fields: [],
+          },
+          {
+            title: 'summary',
+            stepKey: 'summary',
+            fields: [],
+          }],
+        }],
+      };
+
+      const wrapper = mount(<FormRenderer
+        { ...initialProps }
+        schema={ wizardSchema }
+      />);
+
+      expect(wrapper.find('WizardNavItem')).toHaveLength(1);
+
+      changeValue(wrapper, 'google');
+
+      // predict steps for google
+      expect(wrapper.find('WizardNavItem')).toHaveLength(2);
+      expect(wrapper.find('WizardNavItem').at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find('WizardNavItem').at(1).props().isDisabled).toEqual(true);
+
+      nextButtonClick(wrapper);
+
+      // click on first nav link
+      wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).simulate('click');
+      wrapper.update();
+
+      // keep the second step enabled
+      expect(wrapper.find('WizardNavItem')).toHaveLength(2);
+      expect(wrapper.find('WizardNavItem').at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find('WizardNavItem').at(1).props().isDisabled).toEqual(true);
+    });
   });
 });
