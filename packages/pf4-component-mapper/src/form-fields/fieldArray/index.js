@@ -83,6 +83,7 @@ const DynamicArray = ({
   formOptions,
   meta,
   FieldArrayProvider,
+  FormSpyProvider, // eslint-disable-line react/prop-types
   minItems,
   maxItems,
   noItemsMessage,

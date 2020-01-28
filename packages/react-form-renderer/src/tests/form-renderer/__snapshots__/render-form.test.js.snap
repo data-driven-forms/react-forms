@@ -538,6 +538,7 @@ exports[`renderForm function #condition should render condition field only if co
               >
                 <customComponent
                   FieldProvider={[Function]}
+                  FormSpyProvider={[Function]}
                   formOptions={
                     Object {
                       "renderForm": [Function],
@@ -547,6 +548,7 @@ exports[`renderForm function #condition should render condition field only if co
                   validate={[Function]}
                 >
                   <div
+                    FormSpyProvider={[Function]}
                     name="foo"
                     validate={[Function]}
                   >
@@ -762,6 +764,7 @@ exports[`renderForm function #condition should render condition field only if on
               >
                 <customComponent
                   FieldProvider={[Function]}
+                  FormSpyProvider={[Function]}
                   formOptions={
                     Object {
                       "renderForm": [Function],
@@ -771,6 +774,7 @@ exports[`renderForm function #condition should render condition field only if on
                   validate={[Function]}
                 >
                   <div
+                    FormSpyProvider={[Function]}
                     name="foo"
                     validate={[Function]}
                   >
@@ -986,6 +990,7 @@ exports[`renderForm function #condition should render condition field only if on
               >
                 <customComponent
                   FieldProvider={[Function]}
+                  FormSpyProvider={[Function]}
                   formOptions={
                     Object {
                       "renderForm": [Function],
@@ -995,6 +1000,7 @@ exports[`renderForm function #condition should render condition field only if on
                   validate={[Function]}
                 >
                   <div
+                    FormSpyProvider={[Function]}
                     name="foo"
                     validate={[Function]}
                   >
@@ -1198,6 +1204,7 @@ exports[`renderForm function #condition should render condition field only if th
               >
                 <customComponent
                   FieldProvider={[Function]}
+                  FormSpyProvider={[Function]}
                   formOptions={
                     Object {
                       "renderForm": [Function],
@@ -1207,6 +1214,7 @@ exports[`renderForm function #condition should render condition field only if th
                   validate={[Function]}
                 >
                   <div
+                    FormSpyProvider={[Function]}
                     name="foo"
                     validate={[Function]}
                   >
@@ -1325,6 +1333,7 @@ exports[`renderForm function #condition should render condition field only if th
               >
                 <customComponent
                   FieldProvider={[Function]}
+                  FormSpyProvider={[Function]}
                   formOptions={
                     Object {
                       "renderForm": [Function],
@@ -1334,6 +1343,7 @@ exports[`renderForm function #condition should render condition field only if th
                   validate={[Function]}
                 >
                   <div
+                    FormSpyProvider={[Function]}
                     name="foo"
                     validate={[Function]}
                   >
@@ -1452,6 +1462,7 @@ exports[`renderForm function #condition should render condition field only if th
               >
                 <customComponent
                   FieldProvider={[Function]}
+                  FormSpyProvider={[Function]}
                   formOptions={
                     Object {
                       "renderForm": [Function],
@@ -1461,6 +1472,7 @@ exports[`renderForm function #condition should render condition field only if th
                   validate={[Function]}
                 >
                   <div
+                    FormSpyProvider={[Function]}
                     name="foo"
                     validate={[Function]}
                   >
@@ -1577,6 +1589,7 @@ exports[`renderForm function #condition should render condition field only if th
               >
                 <customComponent
                   FieldProvider={[Function]}
+                  FormSpyProvider={[Function]}
                   formOptions={
                     Object {
                       "renderForm": [Function],
@@ -1586,6 +1599,7 @@ exports[`renderForm function #condition should render condition field only if th
                   validate={[Function]}
                 >
                   <div
+                    FormSpyProvider={[Function]}
                     name="foo"
                     validate={[Function]}
                   >
@@ -1702,6 +1716,7 @@ exports[`renderForm function #condition should render condition field only if th
               >
                 <customComponent
                   FieldProvider={[Function]}
+                  FormSpyProvider={[Function]}
                   formOptions={
                     Object {
                       "renderForm": [Function],
@@ -1711,6 +1726,7 @@ exports[`renderForm function #condition should render condition field only if th
                   validate={[Function]}
                 >
                   <div
+                    FormSpyProvider={[Function]}
                     name="foo"
                     validate={[Function]}
                   >
@@ -1914,6 +1930,7 @@ exports[`renderForm function #condition should render condition field only if th
               >
                 <customComponent
                   FieldProvider={[Function]}
+                  FormSpyProvider={[Function]}
                   formOptions={
                     Object {
                       "renderForm": [Function],
@@ -1923,6 +1940,7 @@ exports[`renderForm function #condition should render condition field only if th
                   validate={[Function]}
                 >
                   <div
+                    FormSpyProvider={[Function]}
                     name="foo"
                     validate={[Function]}
                   >
@@ -2126,6 +2144,7 @@ exports[`renderForm function #condition should render condition field only if th
               >
                 <customComponent
                   FieldProvider={[Function]}
+                  FormSpyProvider={[Function]}
                   formOptions={
                     Object {
                       "renderForm": [Function],
@@ -2135,6 +2154,7 @@ exports[`renderForm function #condition should render condition field only if th
                   validate={[Function]}
                 >
                   <div
+                    FormSpyProvider={[Function]}
                     name="foo"
                     validate={[Function]}
                   >
@@ -2253,6 +2273,7 @@ exports[`renderForm function #condition should render condition field only if th
               >
                 <customComponent
                   FieldProvider={[Function]}
+                  FormSpyProvider={[Function]}
                   formOptions={
                     Object {
                       "renderForm": [Function],
@@ -2262,6 +2283,7 @@ exports[`renderForm function #condition should render condition field only if th
                   validate={[Function]}
                 >
                   <div
+                    FormSpyProvider={[Function]}
                     name="foo"
                     validate={[Function]}
                   >
@@ -2380,6 +2402,7 @@ exports[`renderForm function #condition should render condition field only if th
               >
                 <customComponent
                   FieldProvider={[Function]}
+                  FormSpyProvider={[Function]}
                   formOptions={
                     Object {
                       "renderForm": [Function],
@@ -2389,6 +2412,7 @@ exports[`renderForm function #condition should render condition field only if th
                   validate={[Function]}
                 >
                   <div
+                    FormSpyProvider={[Function]}
                     name="foo"
                     validate={[Function]}
                   >
@@ -2452,6 +2476,7 @@ exports[`renderForm function should render single field form with custom compone
         >
           <customComponent
             FieldProvider={[Function]}
+            FormSpyProvider={[Function]}
             formOptions={
               Object {
                 "renderForm": [Function],
@@ -2461,18 +2486,21 @@ exports[`renderForm function should render single field form with custom compone
             validate={[Function]}
           >
             <FieldProvider
+              FormSpyProvider={[Function]}
               formOptions={Object {}}
               name="foo"
               render={[Function]}
               validate={[Function]}
             >
               <ReactFinalForm(Field)
+                FormSpyProvider={[Function]}
                 formOptions={Object {}}
                 name="foo"
                 render={[Function]}
                 validate={[Function]}
               >
                 <Field
+                  FormSpyProvider={[Function]}
                   formOptions={Object {}}
                   format={[Function]}
                   name="foo"
@@ -2782,6 +2810,7 @@ exports[`renderForm function should render single field from with custom compone
         >
           <customComponent
             FieldProvider={[Function]}
+            FormSpyProvider={[Function]}
             formOptions={
               Object {
                 "renderForm": [Function],
@@ -2791,6 +2820,7 @@ exports[`renderForm function should render single field from with custom compone
             validate={[Function]}
           >
             <div
+              FormSpyProvider={[Function]}
               name="foo"
               validate={[Function]}
             >

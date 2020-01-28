@@ -1,13 +1,14 @@
 import React, { cloneElement } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-import { WizardHeader, WizardNav, WizardNavItem, Backdrop, Bullseye } from '@patternfly/react-core';
+import { WizardHeader, Backdrop, Bullseye, WizardNav } from '@patternfly/react-core';
 import WizardStep from './wizard-step';
 import './wizard-styles.scss';
 import get from 'lodash/get';
 import set from 'lodash/set';
 import flattenDeep from 'lodash/flattenDeep';
 import handleEnter from '@data-driven-forms/common/src/wizard/enter-handler';
+import WizardNavigation from './wizard-nav';
 
 const DYNAMIC_WIZARD_TYPES = [ 'function', 'object' ];
 
@@ -106,11 +107,12 @@ class Wizard extends React.Component {
         const currentStep = this.findCurrentStep(prevState.prevSteps[index]);
         const currentStepHasStepMapper = DYNAMIC_WIZARD_TYPES.includes(typeof currentStep.nextStep);
 
+        const hardcodedCrossroads = this.props.crossroads;
         const dynamicStepShouldDisableNav = prevState.isDynamic && (currentStepHasStepMapper || !this.props.predictSteps);
 
         const invalidStepShouldDisableNav = valid === false;
 
-        if (dynamicStepShouldDisableNav) {
+        if (dynamicStepShouldDisableNav && !hardcodedCrossroads) {
           newState = {
             navSchema: this.props.predictSteps ? this.createSchema({ currentIndex: index }) : prevState.navSchema.slice(0, index + INDEXING_BY_ZERO),
             prevSteps: prevState.prevSteps.slice(0, index),
@@ -181,32 +183,49 @@ class Wizard extends React.Component {
     return schema;
   };
 
+  handleSubmitFinal = () => this.props.formOptions.onSubmit(
+    this.handleSubmit(
+      this.props.formOptions.getState().values,
+      [ ...this.state.prevSteps, this.state.activeStep ],
+      this.props.formOptions.getRegisteredFields,
+    ),
+    this.props.formOptions
+  );
+
+  setPrevSteps = () => this.setState((prevState) => ({
+    navSchema: this.createSchema({ currentIndex: this.state.activeStepIndex }),
+    prevSteps: prevState.prevSteps.slice(0, this.state.activeStepIndex),
+    maxStepIndex: this.state.activeStepIndex,
+  }))
+
   render() {
     if (this.state.loading) {
       return null;
     }
 
     const {
-      title, description, FieldProvider, formOptions, buttonLabels, buttonsClassName, inModal, setFullWidth, setFullHeight, isCompactNav, showTitles,
+      title,
+      description,
+      FieldProvider,
+      formOptions,
+      buttonLabels,
+      buttonsClassName,
+      inModal,
+      setFullWidth,
+      setFullHeight,
+      isCompactNav,
+      showTitles,
+      FormSpyProvider,
+      crossroads,
     } = this.props;
-    const { activeStepIndex, navSchema, maxStepIndex } = this.state;
-
-    const handleSubmit = () =>
-      formOptions.onSubmit(
-        this.handleSubmit(
-          formOptions.getState().values,
-          [ ...this.state.prevSteps, this.state.activeStep ],
-          formOptions.getRegisteredFields,
-        ),
-        formOptions
-      );
+    const { activeStepIndex, navSchema, maxStepIndex, isDynamic } = this.state;
 
     const currentStep = (
       <WizardStep
         { ...this.findCurrentStep(this.state.activeStep) }
         formOptions={{
           ...formOptions,
-          handleSubmit,
+          handleSubmit: this.handleSubmitFinal,
         }}
         buttonLabels={ buttonLabels }
         FieldProvider={ FieldProvider }
@@ -214,40 +233,12 @@ class Wizard extends React.Component {
         showTitles={ showTitles }
       />);
 
-    const createStepsMap = () => navSchema
-    .filter(field => field.primary)
-    .map(step => {
-      const substeps = step.substepOf && navSchema.filter(field => field.substepOf === step.substepOf);
-
-      return <WizardNavItem
-        key={ step.substepOf || step.title }
-        text={ step.substepOf || step.title }
-        isCurrent={ substeps ? activeStepIndex >= step.index && activeStepIndex < step.index + substeps.length : activeStepIndex === step.index }
-        isDisabled={ formOptions.valid ? maxStepIndex < step.index : step.index > activeStepIndex }
-        onNavItemClick={ (ind) => this.jumpToStep(ind, formOptions.valid) }
-        step={ step.index }
-      >
-        { substeps && <WizardNav returnList>
-          { substeps.map(substep => <WizardNavItem
-            key={ substep.title }
-            text={ substep.title }
-            isCurrent={ activeStepIndex === substep.index }
-            isDisabled={ formOptions.valid ?
-              maxStepIndex < substep.index
-              : substep.index > activeStepIndex }
-            onNavItemClick={ (ind) => this.jumpToStep(ind, formOptions.valid) }
-            step={ substep.index }
-          />) }
-        </WizardNav> }
-      </WizardNavItem>;
-    });
-
     return (
       <Modal inModal={ inModal } container={ this.container }>
         <div className={ `pf-c-wizard ${inModal ? '' : 'no-shadow'} ${isCompactNav ? 'pf-m-compact-nav' : ''} ${setFullWidth ? 'pf-m-full-width' : ''} ${setFullHeight ? 'pf-m-full-height' : ''}` }
           role="dialog"
           aria-modal={ inModal ? 'true' : undefined }
-          onKeyDown={ e => handleEnter(e, formOptions, this.state.activeStep, this.findCurrentStep, this.handleNext, handleSubmit) }
+          onKeyDown={ e => handleEnter(e, formOptions, this.state.activeStep, this.findCurrentStep, this.handleNext,  this.handleSubmitFinal) }
         >
           { title && <WizardHeader
             title={ title }
@@ -256,7 +247,21 @@ class Wizard extends React.Component {
           /> }
           <div className="pf-c-wizard__outer-wrap">
             <WizardNav>
-              { createStepsMap() }
+              <FormSpyProvider>
+                { ({ values }) => (
+                  <WizardNavigation
+                    navSchema={ navSchema }
+                    activeStepIndex={ activeStepIndex }
+                    formOptions={ formOptions }
+                    maxStepIndex={ maxStepIndex }
+                    jumpToStep={ this.jumpToStep }
+                    crossroads={ crossroads }
+                    isDynamic={ isDynamic }
+                    values={ values }
+                    setPrevSteps={ this.setPrevSteps }
+                  />
+                ) }
+              </FormSpyProvider>
             </WizardNav>
             { cloneElement(currentStep, {
               handleNext: (nextStep) => this.handleNext(nextStep, formOptions.getRegisteredFields),
@@ -281,6 +286,7 @@ Wizard.propTypes = {
   title: PropTypes.any,
   description: PropTypes.any,
   FieldProvider: PropTypes.PropTypes.oneOfType([ PropTypes.object, PropTypes.func ]).isRequired,
+  FormSpyProvider: PropTypes.PropTypes.oneOfType([ PropTypes.object, PropTypes.func ]).isRequired,
   formOptions: PropTypes.shape({
     getState: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
@@ -298,6 +304,7 @@ Wizard.propTypes = {
   isDynamic: PropTypes.bool,
   showTitles: PropTypes.bool,
   predictSteps: PropTypes.bool,
+  crossroads: PropTypes.arrayOf(PropTypes.string),
 };
 
 const defaultLabels = {

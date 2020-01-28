@@ -136,6 +136,7 @@ const FieldInterface = ({
   componentType,
   initialKey,
   FieldArrayProvider, // catch it and don't send it to components
+  FormSpyProvider, // eslint-disable-line react/prop-types
   ...props
 }) => (
   fieldMapper(componentType)({

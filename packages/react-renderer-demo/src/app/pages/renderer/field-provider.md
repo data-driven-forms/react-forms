@@ -119,6 +119,10 @@ and informations about the formState.
 }
 ```
 
+# FormSpy provider
+
+Every component also receives component `FormSpyProvider` as a prop. You can find more info <a href="https://final-form.org/docs/react-final-form/api/FormSpy" rel="noopener noreferrer" target="_blank">here!</a>
+
 </Grid>
 <Grid item xs={false} md={2}>
   <ListOfContents file="renderer/field-provider" />
