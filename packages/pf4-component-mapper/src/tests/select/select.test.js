@@ -2,6 +2,8 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { components } from 'react-select';
 import ReactSelect from 'react-select';
+import isEqual from 'lodash/isEqual';
+
 import DataDrivenSelect, { Select } from '../../form-fields/select/select';
 
 describe('<Select />', () => {
@@ -163,6 +165,102 @@ describe('<Select />', () => {
         expect(asyncLoading.mock.calls).toHaveLength(2);
         expect(asyncLoading.mock.calls[1]).toEqual([ 'foo' ]);
         done();
+      });
+    });
+  });
+
+  describe('reloading props', () => {
+    const NEW_OPTIONS = [{ label: 'Different label', value: 2 }];
+    let asyncLoading;
+    let asyncLoadingNew;
+
+    beforeEach(() => {
+      asyncLoading = () => Promise.resolve(initialProps.options);
+      asyncLoadingNew = () => Promise.resolve(NEW_OPTIONS);
+    });
+
+    it('should change the options when options prop is changed', () => {
+      const wrapper = mount(<Select { ...initialProps } />);
+
+      let innerSelectProps = wrapper.find(ReactSelect).props().options;
+
+      expect(isEqual(innerSelectProps, initialProps.options)).toEqual(true);
+
+      wrapper.setProps({ options: NEW_OPTIONS });
+      wrapper.update();
+      innerSelectProps = wrapper.find(ReactSelect).props().options;
+
+      expect(innerSelectProps).toEqual(NEW_OPTIONS);
+    });
+
+    it('should change the options when loadOptions prop is changed', (done) => {
+      const wrapper = mount(<Select { ...initialProps } loadOptions={ asyncLoading }/>);
+
+      setImmediate(() => {
+        wrapper.update();
+        let innerSelectProps = wrapper.find(ReactSelect).props().options;
+
+        expect(isEqual(innerSelectProps, initialProps.options)).toEqual(true);
+
+        wrapper.setProps({ loadOptions: asyncLoadingNew });
+
+        setImmediate(() => {
+          wrapper.update();
+          innerSelectProps = wrapper.find(ReactSelect).props().options;
+
+          expect(isEqual(innerSelectProps, NEW_OPTIONS)).toEqual(true);
+          done();
+        });
+      });
+    });
+
+    it('should change the value when new options do not include it', () => {
+      const wrapper = mount(<Select { ...initialProps } value={ 1 }/>);
+
+      wrapper.setProps({ options: NEW_OPTIONS });
+      wrapper.update();
+
+      expect(onChange).toHaveBeenCalledWith(undefined);
+    });
+
+    it('not should change the value when new options include it', () => {
+      const wrapper = mount(<Select { ...initialProps } value={ 2 }/>);
+
+      wrapper.setProps({ options: NEW_OPTIONS });
+      wrapper.update();
+
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it('should reset the value when loadOptions prop is changed and new options do not include the value', (done) => {
+      const wrapper = mount(<Select { ...initialProps } loadOptions={ asyncLoading } value={ 1 }/>);
+
+      setImmediate(() => {
+        wrapper.update();
+        wrapper.setProps({ loadOptions: asyncLoadingNew });
+
+        setImmediate(() => {
+          wrapper.update();
+
+          expect(onChange).toHaveBeenCalledWith(undefined);
+          done();
+        });
+      });
+    });
+
+    it('should not reset the value when loadOptions prop is changed and new options includes the value', (done) => {
+      const wrapper = mount(<Select { ...initialProps } loadOptions={ asyncLoading } value={ 2 }/>);
+
+      setImmediate(() => {
+        wrapper.update();
+        wrapper.setProps({ loadOptions: asyncLoadingNew });
+
+        setImmediate(() => {
+          wrapper.update();
+
+          expect(onChange).not.toHaveBeenCalled();
+          done();
+        });
       });
     });
   });

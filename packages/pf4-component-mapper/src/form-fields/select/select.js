@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactSelect from 'react-select';
 import CreatableSelect from 'react-select/creatable';
+import isEqual from 'lodash/isEqual';
+
+import fnToString from '@data-driven-forms/common/src/utils/fn-to-string';
 
 import MultiValueContainer from './multi-value-container';
 import ValueContainer from './value-container';
@@ -25,19 +28,41 @@ export class Select extends React.Component {
   };
 
   componentDidMount() {
-    const { loadOptions } = this.props;
-    if (!loadOptions) {
-      this.setState({
-        isLoading: false,
-      });
+    if (!this.props.loadOptions) {
+      this.setState({ isLoading: false });
     } else {
-      return loadOptions()
-      .then((data) => {
-        return this.setState({
-          allOptions: data,
-          isLoading: false,
-        });});
+      return this.updateOptions();
     }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!isEqual(this.props.options, prevProps.options)) {
+      if (!this.props.options.map(({ value }) => value).includes(this.props.value)) {
+        this.props.onChange(undefined);
+      }
+
+      this.setState({ allOptions: this.props.options });
+    }
+
+    if (this.props.loadOptions && fnToString(this.props.loadOptions) !== fnToString(prevProps.loadOptions)){
+      return this.updateOptions();
+    }
+  }
+
+  updateOptions = () => {
+    this.setState({ isLoading: true });
+
+    return this.props.loadOptions().then(data => {
+      if (!data.map(({ value }) => value).includes(this.props.value)) {
+        this.props.onChange(undefined);
+      }
+
+      return this.setState({
+        allOptions: data,
+        isLoading: false,
+        promises: {},
+      });
+    });
   }
 
   componentWillUnmount() {
