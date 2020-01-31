@@ -138,7 +138,7 @@ describe('<Select />', () => {
     });
   });
 
-  it('should load Async options correctly', (done) => {
+  it('should load single select Async options correctly', (done) => {
     const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'label' }]));
 
     const wrapper = mount(<Select { ...initialProps } options={ undefined } loadOptions={ asyncLoading }/>);
@@ -146,6 +146,75 @@ describe('<Select />', () => {
     setImmediate(() => {
       wrapper.update();
       expect(wrapper.find(Select).first().instance().state.allOptions).toEqual([{ label: 'label' }]);
+      done();
+    });
+  });
+
+  it('should load multi select Async options correctly and set initial value to undefined', (done) => {
+    const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'label', value: '123' }]));
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <Select
+        { ...initialProps }
+        value={ [ 'does not exists in options' ] }
+        isMulti
+        options={ undefined }
+        loadOptions={ asyncLoading }
+        onChange={ onChange }
+        simpleValue
+      />
+    );
+
+    setImmediate(() => {
+      wrapper.update();
+      expect(wrapper.find(Select).first().instance().state.allOptions).toEqual([{ label: 'label', value: '123' }]);
+      expect(onChange).toHaveBeenCalledWith(undefined);
+      done();
+    });
+  });
+
+  it('should load multi select Async options correctly and set initial value to ["123"]', (done) => {
+    const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'label', value: '123' }]));
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <Select
+        { ...initialProps }
+        value={ [ '123', 'Not in options' ] }
+        isMulti
+        options={ undefined }
+        loadOptions={ asyncLoading }
+        onChange={ onChange }
+        simpleValue
+      />
+    );
+
+    setImmediate(() => {
+      wrapper.update();
+      expect(wrapper.find(Select).first().instance().state.allOptions).toEqual([{ label: 'label', value: '123' }]);
+      expect(onChange).toHaveBeenCalledWith([ '123' ]);
+      done();
+    });
+  });
+
+  it('should load multi select Async options correctly and set initial value to ["123"] if initial value is an object', (done) => {
+    const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'label', value: '123' }]));
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <Select
+        { ...initialProps }
+        value={ [{ value: '123', label: 'label' }, 'Not in options' ] }
+        isMulti
+        options={ undefined }
+        loadOptions={ asyncLoading }
+        onChange={ onChange }
+        simpleValue
+      />
+    );
+
+    setImmediate(() => {
+      wrapper.update();
+      expect(wrapper.find(Select).first().instance().state.allOptions).toEqual([{ label: 'label', value: '123' }]);
+      expect(onChange).toHaveBeenCalledWith([{ label: 'label', value: '123' }]);
       done();
     });
   });

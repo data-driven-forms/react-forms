@@ -53,7 +53,12 @@ export class Select extends React.Component {
     this.setState({ isLoading: true });
 
     return this.props.loadOptions().then(data => {
-      if (!data.map(({ value }) => value).includes(this.props.value)) {
+      if (Array.isArray(this.props.value)) {
+        const selectValue = this.props.value.filter(value => typeof value === 'object'
+          ? data.find((option) => value.value === option.value)
+          : data.find((option) => value === option.value));
+        this.props.onChange(selectValue.length === 0 ? undefined : selectValue);
+      } else if (!data.find(({ value }) => value === this.props.value)) {
         this.props.onChange(undefined);
       }
 
