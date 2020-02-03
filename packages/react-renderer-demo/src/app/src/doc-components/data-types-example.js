@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import FormRenderer, { componentTypes, dataTypes } from '@data-driven-forms/react-form-renderer';
 import { layoutMapper, formFieldsMapper } from '@data-driven-forms/pf4-component-mapper';
-import { Title } from '@patternfly/react-core';
+import { Title } from '@patternfly/react-core/dist/js/components/Title/Title';
 
 const schema = {
   fields: [{
