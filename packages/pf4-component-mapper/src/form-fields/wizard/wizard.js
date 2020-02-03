@@ -1,7 +1,12 @@
 import React, { cloneElement } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-import { WizardHeader, Backdrop, Bullseye, WizardNav } from '@patternfly/react-core';
+
+import { WizardHeader } from '@patternfly/react-core/dist/js/components/Wizard/WizardHeader';
+import { WizardNav } from '@patternfly/react-core/dist/js/components/Wizard/WizardNav';
+import { Backdrop } from '@patternfly/react-core/dist/js/components/Backdrop/Backdrop';
+import { Bullseye } from '@patternfly/react-core/dist/js/layouts/Bullseye/index';
+
 import WizardStep from './wizard-step';
 import './wizard-styles.scss';
 import get from 'lodash/get';

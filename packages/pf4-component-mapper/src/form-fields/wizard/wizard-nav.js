@@ -1,5 +1,8 @@
 import React from 'react';
-import { WizardNavItem, WizardNav } from '@patternfly/react-core';
+
+import { WizardNavItem } from '@patternfly/react-core/dist/js/components/Wizard/WizardNavItem';
+import { WizardNav } from '@patternfly/react-core/dist/js/components/Wizard/WizardNav';
+
 import isEqual from 'lodash/isEqual';
 import get from 'lodash/get';
 import PropTypes from 'prop-types';

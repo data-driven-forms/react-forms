@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MultipleChoiceList from './multiple-choice-list';
-import {
-  TextInput,
-  Checkbox,
-  TextArea,
-  FormGroup,
-  TextContent,
-  Text,
-  TextVariants,
-  Switch,
-} from '@patternfly/react-core';
+
+import { Text, TextVariants } from '@patternfly/react-core/dist/js/components/Text/Text';
+import { TextContent } from '@patternfly/react-core/dist/js/components/Text/TextContent';
+import { FormGroup } from '@patternfly/react-core/dist/js/components/Form/FormGroup';
+import { Switch } from '@patternfly/react-core/dist/js/components/Switch/Switch';
+import { TextArea } from '@patternfly/react-core/dist/js/components/TextArea/TextArea';
+import { Checkbox } from '@patternfly/react-core/dist/js/components/Checkbox/Checkbox';
+import { TextInput } from '@patternfly/react-core/dist/js/components/TextInput/TextInput';
+
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 import Select from './select/select';
 import RadioGroup from './radio';

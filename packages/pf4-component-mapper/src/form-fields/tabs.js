@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, Tab } from '@patternfly/react-core';
+
+import { Tab } from '@patternfly/react-core/dist/js/components/Tabs/Tab';
+import { Tabs } from '@patternfly/react-core/dist/js/components/Tabs/Tabs';
 
 class FormTabs extends React.Component {
   state = {

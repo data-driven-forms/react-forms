@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
-import { WizardBody, Title } from '@patternfly/react-core';
+import { WizardBody } from '@patternfly/react-core/dist/js/components/Wizard/WizardBody';
+import { Title } from '@patternfly/react-core/dist/js/components/Title/Title';
 import PropTypes from 'prop-types';
 import WizardStepButtons from './step-buttons';
 

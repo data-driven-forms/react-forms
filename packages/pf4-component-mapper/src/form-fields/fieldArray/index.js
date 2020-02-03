@@ -1,6 +1,9 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, GridItem, Bullseye, FormHelperText } from '@patternfly/react-core';
+
+import { Grid, GridItem } from '@patternfly/react-core/dist/js/layouts/Grid/index';
+import { Bullseye } from '@patternfly/react-core/dist/js/layouts/Bullseye/index';
+import { FormHelperText } from '@patternfly/react-core/dist/js/components/Form/FormHelperText';
 
 import CloseIcon from '@patternfly/react-icons/dist/js/icons/close-icon';
 import AddCircleOIcon from '@patternfly/react-icons/dist/js/icons/add-circle-o-icon';

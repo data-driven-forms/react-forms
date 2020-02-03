@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Radio } from '@patternfly/react-core';
+
+import { Radio } from '@patternfly/react-core/dist/js/components/Radio/Radio';
 
 const RadioGroup = ({ FieldProvider, options, isDisabled, isReadOnly, input, ...props }) => options.map(option => (
   <FieldProvider
