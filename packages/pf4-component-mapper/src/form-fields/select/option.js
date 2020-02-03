@@ -1,7 +1,7 @@
 import React from 'react';
 import { components } from 'react-select';
 import PropTypes from 'prop-types';
-import { Checkbox } from '@patternfly/react-core';
+import { Checkbox } from '@patternfly/react-core/dist/js/components/Checkbox/Checkbox';
 
 import CheckIcon from '@patternfly/react-icons/dist/js/icons/check-icon';
 

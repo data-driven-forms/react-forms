@@ -1054,37 +1054,49 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                     <div
                                                       className="pf-c-form__group"
                                                     >
-                                                      <TextInput
-                                                        aria-label={null}
-                                                        className=""
+                                                      <ForwardRef
                                                         id="foo-field"
-                                                        isDisabled={false}
-                                                        isReadOnly={false}
-                                                        isRequired={false}
                                                         isValid={true}
                                                         name="foo-field"
                                                         onBlur={[Function]}
                                                         onChange={[Function]}
                                                         onFocus={[Function]}
-                                                        type="text"
                                                         value=""
                                                       >
-                                                        <input
-                                                          aria-invalid={false}
+                                                        <TextInputBase
                                                           aria-label={null}
-                                                          className="pf-c-form-control"
-                                                          disabled={false}
+                                                          className=""
                                                           id="foo-field"
+                                                          innerRef={null}
+                                                          isDisabled={false}
+                                                          isReadOnly={false}
+                                                          isRequired={false}
+                                                          isValid={true}
                                                           name="foo-field"
                                                           onBlur={[Function]}
                                                           onChange={[Function]}
                                                           onFocus={[Function]}
-                                                          readOnly={false}
-                                                          required={false}
                                                           type="text"
+                                                          validated="default"
                                                           value=""
-                                                        />
-                                                      </TextInput>
+                                                        >
+                                                          <input
+                                                            aria-invalid={false}
+                                                            aria-label={null}
+                                                            className="pf-c-form-control"
+                                                            disabled={false}
+                                                            id="foo-field"
+                                                            name="foo-field"
+                                                            onBlur={[Function]}
+                                                            onChange={[Function]}
+                                                            onFocus={[Function]}
+                                                            readOnly={false}
+                                                            required={false}
+                                                            type="text"
+                                                            value=""
+                                                          />
+                                                        </TextInputBase>
+                                                      </ForwardRef>
                                                     </div>
                                                   </FormGroup>
                                                 </FieldInterface>
@@ -1775,6 +1787,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                           type="text"
                                           value=""
                                         />
+                                        
                                       </div>
                                     </div>
                                   </div>
@@ -1878,6 +1891,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                             type="text"
                                             value=""
                                           />
+                                          
                                         </div>
                                       </div>
                                     </div>
@@ -2623,37 +2637,49 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                               <div
                                                                 className="pf-c-form__group"
                                                               >
-                                                                <TextInput
-                                                                  aria-label={null}
-                                                                  className=""
+                                                                <ForwardRef
                                                                   id="foo-field"
-                                                                  isDisabled={false}
-                                                                  isReadOnly={false}
-                                                                  isRequired={false}
                                                                   isValid={true}
                                                                   name="foo-field"
                                                                   onBlur={[Function]}
                                                                   onChange={[Function]}
                                                                   onFocus={[Function]}
-                                                                  type="text"
                                                                   value=""
                                                                 >
-                                                                  <input
-                                                                    aria-invalid={false}
+                                                                  <TextInputBase
                                                                     aria-label={null}
-                                                                    className="pf-c-form-control"
-                                                                    disabled={false}
+                                                                    className=""
                                                                     id="foo-field"
+                                                                    innerRef={null}
+                                                                    isDisabled={false}
+                                                                    isReadOnly={false}
+                                                                    isRequired={false}
+                                                                    isValid={true}
                                                                     name="foo-field"
                                                                     onBlur={[Function]}
                                                                     onChange={[Function]}
                                                                     onFocus={[Function]}
-                                                                    readOnly={false}
-                                                                    required={false}
                                                                     type="text"
+                                                                    validated="default"
                                                                     value=""
-                                                                  />
-                                                                </TextInput>
+                                                                  >
+                                                                    <input
+                                                                      aria-invalid={false}
+                                                                      aria-label={null}
+                                                                      className="pf-c-form-control"
+                                                                      disabled={false}
+                                                                      id="foo-field"
+                                                                      name="foo-field"
+                                                                      onBlur={[Function]}
+                                                                      onChange={[Function]}
+                                                                      onFocus={[Function]}
+                                                                      readOnly={false}
+                                                                      required={false}
+                                                                      type="text"
+                                                                      value=""
+                                                                    />
+                                                                  </TextInputBase>
+                                                                </ForwardRef>
                                                               </div>
                                                             </FormGroup>
                                                           </FieldInterface>

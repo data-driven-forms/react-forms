@@ -531,33 +531,43 @@ exports[`FormFields should render DatePicker correctly 1`] = `
       <div
         className="pf-c-form__group"
       >
-        <TextInput
-          aria-label={null}
-          className=""
+        <ForwardRef
           id="someIdKey"
-          isDisabled={false}
-          isReadOnly={false}
-          isRequired={false}
           isValid={true}
           name="Name of the field"
-          onChange={[Function]}
           type="date"
           value=""
         >
-          <input
-            aria-invalid={false}
+          <TextInputBase
             aria-label={null}
-            className="pf-c-form-control"
-            disabled={false}
+            className=""
             id="someIdKey"
+            innerRef={null}
+            isDisabled={false}
+            isReadOnly={false}
+            isRequired={false}
+            isValid={true}
             name="Name of the field"
             onChange={[Function]}
-            readOnly={false}
-            required={false}
             type="date"
+            validated="default"
             value=""
-          />
-        </TextInput>
+          >
+            <input
+              aria-invalid={false}
+              aria-label={null}
+              className="pf-c-form-control"
+              disabled={false}
+              id="someIdKey"
+              name="Name of the field"
+              onChange={[Function]}
+              readOnly={false}
+              required={false}
+              type="date"
+              value=""
+            />
+          </TextInputBase>
+        </ForwardRef>
       </div>
     </FormGroup>
   </FieldInterface>
@@ -1051,6 +1061,7 @@ exports[`FormFields should render TextArea correctly 1`] = `
           isValid={true}
           name="Name of the field"
           resizeOrientation="both"
+          validated="default"
           value=""
         >
           <textarea
@@ -1113,33 +1124,42 @@ exports[`FormFields should render TextField correctly 1`] = `
       <div
         className="pf-c-form__group"
       >
-        <TextInput
-          aria-label={null}
-          className=""
+        <ForwardRef
           id="someIdKey"
-          isDisabled={false}
-          isReadOnly={false}
-          isRequired={false}
           isValid={true}
           name="Name of the field"
-          onChange={[Function]}
-          type="text"
           value=""
         >
-          <input
-            aria-invalid={false}
+          <TextInputBase
             aria-label={null}
-            className="pf-c-form-control"
-            disabled={false}
+            className=""
             id="someIdKey"
+            innerRef={null}
+            isDisabled={false}
+            isReadOnly={false}
+            isRequired={false}
+            isValid={true}
             name="Name of the field"
             onChange={[Function]}
-            readOnly={false}
-            required={false}
             type="text"
+            validated="default"
             value=""
-          />
-        </TextInput>
+          >
+            <input
+              aria-invalid={false}
+              aria-label={null}
+              className="pf-c-form-control"
+              disabled={false}
+              id="someIdKey"
+              name="Name of the field"
+              onChange={[Function]}
+              readOnly={false}
+              required={false}
+              type="text"
+              value=""
+            />
+          </TextInputBase>
+        </ForwardRef>
       </div>
     </FormGroup>
   </FieldInterface>
@@ -1207,33 +1227,42 @@ exports[`FormFields should render TextField with description correctly 1`] = `
             </Text>
           </div>
         </TextContent>
-        <TextInput
-          aria-label={null}
-          className=""
+        <ForwardRef
           id="someIdKey"
-          isDisabled={false}
-          isReadOnly={false}
-          isRequired={false}
           isValid={true}
           name="Name of the field"
-          onChange={[Function]}
-          type="text"
           value=""
         >
-          <input
-            aria-invalid={false}
+          <TextInputBase
             aria-label={null}
-            className="pf-c-form-control"
-            disabled={false}
+            className=""
             id="someIdKey"
+            innerRef={null}
+            isDisabled={false}
+            isReadOnly={false}
+            isRequired={false}
+            isValid={true}
             name="Name of the field"
             onChange={[Function]}
-            readOnly={false}
-            required={false}
             type="text"
+            validated="default"
             value=""
-          />
-        </TextInput>
+          >
+            <input
+              aria-invalid={false}
+              aria-label={null}
+              className="pf-c-form-control"
+              disabled={false}
+              id="someIdKey"
+              name="Name of the field"
+              onChange={[Function]}
+              readOnly={false}
+              required={false}
+              type="text"
+              value=""
+            />
+          </TextInputBase>
+        </ForwardRef>
       </div>
     </FormGroup>
   </FieldInterface>
@@ -1281,33 +1310,42 @@ exports[`FormFields should render TextField without id correctly 1`] = `
       <div
         className="pf-c-form__group"
       >
-        <TextInput
-          aria-label={null}
-          className=""
+        <ForwardRef
           id="Name of the field"
-          isDisabled={false}
-          isReadOnly={false}
-          isRequired={false}
           isValid={true}
           name="Name of the field"
-          onChange={[Function]}
-          type="text"
           value=""
         >
-          <input
-            aria-invalid={false}
+          <TextInputBase
             aria-label={null}
-            className="pf-c-form-control"
-            disabled={false}
+            className=""
             id="Name of the field"
+            innerRef={null}
+            isDisabled={false}
+            isReadOnly={false}
+            isRequired={false}
+            isValid={true}
             name="Name of the field"
             onChange={[Function]}
-            readOnly={false}
-            required={false}
             type="text"
+            validated="default"
             value=""
-          />
-        </TextInput>
+          >
+            <input
+              aria-invalid={false}
+              aria-label={null}
+              className="pf-c-form-control"
+              disabled={false}
+              id="Name of the field"
+              name="Name of the field"
+              onChange={[Function]}
+              readOnly={false}
+              required={false}
+              type="text"
+              value=""
+            />
+          </TextInputBase>
+        </ForwardRef>
       </div>
     </FormGroup>
   </FieldInterface>
@@ -1358,33 +1396,43 @@ exports[`FormFields should render TimePicker correctly 1`] = `
       <div
         className="pf-c-form__group"
       >
-        <TextInput
-          aria-label={null}
-          className=""
+        <ForwardRef
           id="someIdKey"
-          isDisabled={false}
-          isReadOnly={false}
-          isRequired={false}
           isValid={true}
           name="Name of the field"
-          onChange={[Function]}
           type="time"
           value=""
         >
-          <input
-            aria-invalid={false}
+          <TextInputBase
             aria-label={null}
-            className="pf-c-form-control"
-            disabled={false}
+            className=""
             id="someIdKey"
+            innerRef={null}
+            isDisabled={false}
+            isReadOnly={false}
+            isRequired={false}
+            isValid={true}
             name="Name of the field"
             onChange={[Function]}
-            readOnly={false}
-            required={false}
             type="time"
+            validated="default"
             value=""
-          />
-        </TextInput>
+          >
+            <input
+              aria-invalid={false}
+              aria-label={null}
+              className="pf-c-form-control"
+              disabled={false}
+              id="someIdKey"
+              name="Name of the field"
+              onChange={[Function]}
+              readOnly={false}
+              required={false}
+              type="time"
+              value=""
+            />
+          </TextInputBase>
+        </ForwardRef>
       </div>
     </FormGroup>
   </FieldInterface>
@@ -2456,6 +2504,7 @@ exports[`FormFields should render disabled TextArea correctly 1`] = `
           isValid={true}
           name="Name of the field"
           resizeOrientation="both"
+          validated="default"
           value=""
         >
           <textarea
@@ -2519,33 +2568,42 @@ exports[`FormFields should render touched TextField id correctly 1`] = `
       <div
         className="pf-c-form__group"
       >
-        <TextInput
-          aria-label={null}
-          className=""
+        <ForwardRef
           id="someIdKey"
-          isDisabled={false}
-          isReadOnly={false}
-          isRequired={false}
           isValid={true}
           name="Name of the field"
-          onChange={[Function]}
-          type="text"
           value=""
         >
-          <input
-            aria-invalid={false}
+          <TextInputBase
             aria-label={null}
-            className="pf-c-form-control"
-            disabled={false}
+            className=""
             id="someIdKey"
+            innerRef={null}
+            isDisabled={false}
+            isReadOnly={false}
+            isRequired={false}
+            isValid={true}
             name="Name of the field"
             onChange={[Function]}
-            readOnly={false}
-            required={false}
             type="text"
+            validated="default"
             value=""
-          />
-        </TextInput>
+          >
+            <input
+              aria-invalid={false}
+              aria-label={null}
+              className="pf-c-form-control"
+              disabled={false}
+              id="someIdKey"
+              name="Name of the field"
+              onChange={[Function]}
+              readOnly={false}
+              required={false}
+              type="text"
+              value=""
+            />
+          </TextInputBase>
+        </ForwardRef>
       </div>
     </FormGroup>
   </FieldInterface>

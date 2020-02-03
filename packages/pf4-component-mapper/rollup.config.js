@@ -5,13 +5,24 @@ import replace from 'rollup-plugin-replace';
 import nodeGlobals from 'rollup-plugin-node-globals';
 import { terser } from 'rollup-plugin-terser';
 import { sizeSnapshot } from 'rollup-plugin-size-snapshot';
+import { createFilter } from 'rollup-pluginutils';
 import sass from 'rollup-plugin-sass';
 import async from 'rollup-plugin-async';
+
+const pf4Externals = createFilter([
+  'react',
+  'react-dom',
+  'prop-types',
+  '@data-driven-forms/react-form-renderer',
+  '@patternfly/react-core/**',
+  '@patternfly/react-icons/**',
+], null, { resolve: false });
 
 const globals = {
   react: 'React',
   'react-dom': 'ReactDOM',
-  '@patternfly/react-core': 'PatternflyReact',
+  '@patternfly/react-core': '@patternfly/react-core',
+  '@patternfly/react-icons': '@patternfly/react-icons',
   '@data-driven-forms/react-form-renderer': '@data-driven-forms/react-form-renderer',
 };
 
@@ -38,7 +49,7 @@ export default [{
     exports: 'named',
     globals,
   },
-  external: Object.keys(globals),
+  external: pf4Externals,
   plugins: [
     async(),
     nodeResolve(),

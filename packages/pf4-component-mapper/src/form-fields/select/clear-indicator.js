@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, ButtonVariant } from '@patternfly/react-core';
+
+import { Button, ButtonVariant } from '@patternfly/react-core/dist/js/components/Button/Button';
 
 import TimesCircleIcon from '@patternfly/react-icons/dist/js/icons/times-circle-icon';
 

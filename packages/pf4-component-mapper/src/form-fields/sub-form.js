@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Title } from '@patternfly/react-core';
-import { TextContent, Text, TextVariants, Grid, GridItem } from '@patternfly/react-core';
+
+import { Text, TextVariants } from '@patternfly/react-core/dist/js/components/Text/Text';
+import { TextContent } from '@patternfly/react-core/dist/js/components/Text/TextContent';
+import { Grid, GridItem } from '@patternfly/react-core/dist/js/layouts/Grid/index';
+import { Title } from '@patternfly/react-core/dist/js/components/Title/Title';
 
 const SubForm = ({
   fields,
