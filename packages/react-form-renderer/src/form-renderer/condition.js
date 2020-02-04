@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isEmpty as lodashIsEmpty } from 'lodash';
+import lodashIsEmpty from 'lodash/isEmpty';
 import { FormSpy } from 'react-final-form';
+import get from 'lodash/get';
 
 const isEmptyValue = (value) => typeof value === 'number' || value === true ? false : lodashIsEmpty(value);
 
@@ -26,11 +27,11 @@ const Condition = ({ condition, children }) => {
 
   const shouldRender = (values, conditionItem) => {
     if (typeof conditionItem.when === 'string') {
-      return fieldCondition(values[conditionItem.when], conditionItem);
+      return fieldCondition(get(values, conditionItem.when), conditionItem);
     }
 
     if (Array.isArray(conditionItem.when)) {
-      return conditionItem.when.map(fieldName => fieldCondition(values[fieldName], conditionItem)).find(condition => !!condition);
+      return conditionItem.when.map(fieldName => fieldCondition(get(values, fieldName), conditionItem)).find(condition => !!condition);
     }
 
     return false;
