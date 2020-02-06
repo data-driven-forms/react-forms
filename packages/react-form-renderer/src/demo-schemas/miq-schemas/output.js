@@ -10,11 +10,11 @@ const output = {
         {
           title: 'Tab 1',
           description: 'Text boxes and text areas',
-          key: '553',
+          name: '553',
           fields: [
             {
               title: 'Text boxes',
-              key: '637',
+              name: '637',
               fields: [
                 {
                   name: 'text_box_1',
@@ -91,7 +91,7 @@ const output = {
             },
             {
               title: 'Text areas',
-              key: '638',
+              name: '638',
               fields: [
                 {
                   name: 'textarea_box_1',
@@ -108,11 +108,11 @@ const output = {
         {
           title: 'Tab 2',
           description: 'Checks',
-          key: '554',
+          name: '554',
           fields: [
             {
               title: 'Check boxes',
-              key: '639',
+              name: '639',
               fields: [
                 {
                   name: 'check_box_1',
@@ -131,7 +131,7 @@ const output = {
             },
             {
               title: 'Radios',
-              key: '640',
+              name: '640',
               fields: [
                 {
                   name: 'radio_button_1',
@@ -205,11 +205,11 @@ const output = {
         {
           title: 'Tab 3',
           description: '',
-          key: '555',
+          name: '555',
           fields: [
             {
               title: 'Dropdowns',
-              key: '641',
+              name: '641',
               fields: [
                 {
                   name: 'dropdown_list_1',
@@ -321,11 +321,11 @@ const output = {
         {
           title: 'Tab 4',
           description: '',
-          key: '556',
+          name: '556',
           fields: [
             {
               title: 'Datepickers',
-              key: '642',
+              name: '642',
               fields: [
                 {
                   name: 'date_control_1',
@@ -344,7 +344,7 @@ const output = {
             },
             {
               title: 'Timepickers',
-              key: '643',
+              name: '643',
               fields: [
                 {
                   name: 'date_time_control_1',
@@ -367,11 +367,11 @@ const output = {
         {
           title: 'Mixed',
           description: '',
-          key: '558',
+          name: '558',
           fields: [
             {
               title: 'New Section',
-              key: '645',
+              name: '645',
               fields: [
                 {
                   name: 'text_box_10',
@@ -457,7 +457,7 @@ const output = {
         },
       ],
       component: components.TABS,
-      key: '57',
+      name: '57',
     },
   ],
 };
