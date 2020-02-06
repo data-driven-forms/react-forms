@@ -1,7 +1,6 @@
 import RouterNav from 'next/link';
 import Link from '@material-ui/core/Link';
 
-# Field Provider
 import Grid from '@material-ui/core/Grid'
 import RawComponent from '@docs/raw-component';
 
@@ -9,6 +8,8 @@ import ListOfContents from '../../src/helpers/list-of-contents';
 
 <Grid container item>
 <Grid item xs={12} md={10}>
+
+# Field Provider
 
 ## Custom components
 
