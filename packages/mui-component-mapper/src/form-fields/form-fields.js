@@ -135,6 +135,12 @@ const selectComponent = ({
         fullWidth
         margin="normal"
         label={ label }
+        helperText={ helperText }
+        disabled={ isDisabled || isReadOnly }
+        placeholder={ placeholder }
+        required={ isRequired }
+        error={ invalid }
+        readOnly={ isReadOnly }
         { ...input }
         value={ input.value || null }
       />
@@ -146,6 +152,12 @@ const selectComponent = ({
         fullWidth
         margin="normal"
         label={ label }
+        helperText={ helperText }
+        disabled={ isDisabled || isReadOnly }
+        placeholder={ placeholder }
+        required={ isRequired }
+        error={ invalid }
+        readOnly={ isReadOnly }
         { ...input }
         value={ input.value || null }
       />
