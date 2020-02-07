@@ -17,7 +17,7 @@ FinalCheckbox.propTypes = {
 const Wrapper = ({ showError, isRequired, helperText, label, meta, children, rest }) =>(
   <FormGroup
     label={ label }
-    fieldId={ rest.id || rest.key || rest.name }
+    fieldId={ rest.name }
     isValid={ !showError }
     isRequired={ isRequired }
     helperText={ helperText }
