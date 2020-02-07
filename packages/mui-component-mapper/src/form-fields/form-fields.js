@@ -132,19 +132,23 @@ const selectComponent = ({
       { ...rest }
     />),
   [componentTypes.SWITCH]: () => (
-    <FormGroup row>
-      <FormControlLabel
-        control={ <Switch
-          { ...rest }
-          { ...input }
-          readOnly={ isReadOnly }
-          disabled={ isDisabled || isReadOnly }
-          checked={ !!input.value }
-          onChange={ ({ target: { checked }}) => input.onChange(checked) }
-        /> }
-        label={ label }
-      />
-    </FormGroup>),
+    <FormControl required={ isRequired } error={ invalid } component="fieldset">
+      <FormGroup>
+        <FormControlLabel
+          control={ <Switch
+            { ...rest }
+            { ...input }
+            readOnly={ isReadOnly }
+            disabled={ isDisabled || isReadOnly }
+            checked={ !!input.value }
+            onChange={ ({ target: { checked }}) => input.onChange(checked) }
+          /> }
+          label={ input.value ? onText || label : offText || label }
+        />
+        { (invalid || helperText) && <FormHelperText>{ invalid || helperText }</FormHelperText> }
+      </FormGroup>
+    </FormControl>
+  ),
   [componentTypes.DATE_PICKER]: () => (
     <MuiPickersUtilsProvider locale={ locale } utils={ MomentUtils }>
       <DatePicker
