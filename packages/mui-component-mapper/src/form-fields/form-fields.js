@@ -161,6 +161,7 @@ const FinalFormField = ({
   hideLabel,
   isVisible,
   label,
+  helperText,
   ...rest
 }) => {
   const invalid = validationError(meta, validateOnMount);
@@ -170,6 +171,7 @@ const FinalFormField = ({
         ...rest,
         invalid,
         label: invalid ? meta.error : label,
+        helperText: helperText || description,
       })() }
     </Grid>
   );
