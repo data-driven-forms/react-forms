@@ -6,10 +6,7 @@ import MultipleChoiceList from './multiple-choice-list';
 import Grid from '@material-ui/core/Grid';
 import MuiTextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
-import MuiRadio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import MuiSelect from './select-field';
@@ -41,7 +38,7 @@ const selectComponent = ({
   onText,
   offText,
   error,
-  locale,
+  locale = 'en',
   ...rest
 }) => ({
   [componentTypes.TEXT_FIELD]: () => (
@@ -139,6 +136,7 @@ const selectComponent = ({
         margin="normal"
         label={ label }
         { ...input }
+        value={ input.value || null }
       />
     </MuiPickersUtilsProvider>
   ),
@@ -149,6 +147,7 @@ const selectComponent = ({
         margin="normal"
         label={ label }
         { ...input }
+        value={ input.value || null }
       />
     </MuiPickersUtilsProvider>
   ),
