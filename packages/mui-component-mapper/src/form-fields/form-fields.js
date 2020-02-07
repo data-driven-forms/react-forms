@@ -79,7 +79,7 @@ const selectComponent = ({
   ),
   [componentTypes.CHECKBOX]: () => (
     <FormControl required={ isRequired } error={ invalid } component="fieldset">
-      <FormGroup error={ invalid }>
+      <FormGroup>
         <FormControlLabel
           control={ <Checkbox
             { ...input }
