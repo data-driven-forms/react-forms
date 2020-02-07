@@ -9,13 +9,11 @@ describe('subform', () => {
   const props = {
     fields: [
       {
-        key: 'cosiKey',
         title: 'cosiTitle',
         name: 'cosiName',
         fields: [],
       },
       {
-        key: 'cosiKey2',
         title: 'cosiTitle2',
         name: 'cosiName2',
         fields: [],

@@ -18,7 +18,7 @@ const miqParser = (
   componentsMap = componentMap,
 ) => {
   const title = inputSchema.label;
-  const key = inputSchema.id;
+  const name = inputSchema.id;
   const tabs = inputSchema.content[0].dialog_tabs;
   const formTabs = [];
   const defaultValues = {};
@@ -86,7 +86,7 @@ const miqParser = (
       });
       groups.push({
         title: group.label,
-        key: group.id,
+        name: group.id,
         fields: fieldsArray,
         component: components.SUB_FORM,
       });
@@ -94,7 +94,7 @@ const miqParser = (
     formTabs.push({
       title: tab.label,
       description: tab.description,
-      key: tab.id,
+      name: tab.id,
       fields: groups,
       component: components.TAB_ITEM,
     });
@@ -106,7 +106,7 @@ const miqParser = (
     fields: [{
       fields: formTabs,
       component: components.TABS,
-      key,
+      name,
     }],
   };
 

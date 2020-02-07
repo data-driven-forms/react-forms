@@ -36,9 +36,8 @@ When using dynamic forms where more fields share the same name, the value is pre
 ```jsx
 {
   component: componentTypes.TEXT_FIELD,
-  name: 'shared_field',
+  name: 'shared_field_1',
   label: 'Value of this field will be cleared after unmounting! Be aware!',
-  key: 1,
   clearOnUnmount: true,
   condition: {
     when: 'something',
@@ -46,9 +45,8 @@ When using dynamic forms where more fields share the same name, the value is pre
   },
 }, {
   component: componentTypes.TEXT_FIELD,
-  name: 'shared_field',
+  name: 'shared_field_2',
   label: 'Value of this field will be cleared after unmounting! Be aware!',
-  key: 2,
   clearOnUnmount: true,
   condition: {
     when: 'something',
@@ -56,9 +54,8 @@ When using dynamic forms where more fields share the same name, the value is pre
   },
 }, {
   component: componentTypes.TEXT_FIELD,
-  name: 'shared_field',
+  name: 'shared_field_3',
   label: 'Value of this field will not be cleared after unmounting! Be aware!',
-  key: 3,
   clearOnUnmount: false, // default value
   condition: {
     when: 'something',

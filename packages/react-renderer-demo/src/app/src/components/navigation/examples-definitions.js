@@ -314,7 +314,6 @@ export const baseExamples = [{
     title: 'Subform',
     description: 'This is a subform',
     name: 'subform',
-    key: '1',
     fields: [
       {
         name: 'carrot',

@@ -5,7 +5,6 @@ import { shallow } from 'enzyme';
 
 describe('SubForm component', () => {
   const props = {
-    key: 'cosiKey',
     title: 'cosiTitle',
     name: 'cosiName',
     fields: [],
