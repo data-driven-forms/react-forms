@@ -7,6 +7,8 @@ import Grid from '@material-ui/core/Grid';
 import MuiTextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
 import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import MuiSelect from './select-field';
@@ -39,6 +41,7 @@ const selectComponent = ({
   offText,
   error,
   locale = 'en',
+  originalLabel,
   ...rest
 }) => ({
   [componentTypes.TEXT_FIELD]: () => (
@@ -75,10 +78,20 @@ const selectComponent = ({
     />
   ),
   [componentTypes.CHECKBOX]: () => (
-    <FormControlLabel
-      control={ <Checkbox { ...input } disabled={ isDisabled } value={ input.name } /> }
-      label={ label }
-    />
+    <FormControl required={ isRequired } error={ invalid } component="fieldset">
+      <FormGroup error={ invalid }>
+        <FormControlLabel
+          control={ <Checkbox
+            { ...input }
+            disabled={ isDisabled || isReadOnly }
+            value={ input.name }
+          /> }
+          disabled={ isDisabled || isReadOnly }
+          label={ originalLabel }
+        />
+        { (invalid || helperText) && <FormHelperText>{ invalid || helperText }</FormHelperText> }
+      </FormGroup>
+    </FormControl>
   ),
   [componentTypes.RADIO]: () => (
     <RadioGroup
@@ -183,6 +196,7 @@ const FinalFormField = ({
         invalid,
         label: invalid ? meta.error : label,
         helperText: helperText || description,
+        originalLabel: label,
       })() }
     </Grid>
   );
