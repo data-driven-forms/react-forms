@@ -10,6 +10,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
 import MultipleChoiceListCommon, { wrapperProps } from '@data-driven-forms/common/src/multiple-choice-list';
+import { validationError } from './helpers';
 
 const FinalCheckbox = ({ isDisabled, label, ...props }) => (
   <FormControlLabel
@@ -28,17 +29,21 @@ FinalCheckbox.propTypes = {
   label: PropTypes.node,
 };
 
-const Wrapper = ({ showError, label, error, children }) =>(
-  <Grid container >
-    <FormControl component="fieldset" >
-      <FormLabel>{ label }</FormLabel>
-      <FormGroup>
-        { children }
-      </FormGroup>
-      <FormHelperText>{ showError ? error : null }</FormHelperText>
-    </FormControl>
-  </Grid>
-);
+const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperText, description }) => {
+  const invalid = validationError(meta, validateOnMount);
+
+  return (
+    <Grid container>
+      <FormControl required={ isRequired } error={ invalid } component="fieldset" >
+        <FormLabel>{ label }</FormLabel>
+        <FormGroup>
+          { children }
+        </FormGroup>
+        { (invalid || helperText || description) && <FormHelperText>{ invalid || helperText || description }</FormHelperText> }
+      </FormControl>
+    </Grid>
+  );
+};
 
 Wrapper.propTypes = {
   ...wrapperProps,
