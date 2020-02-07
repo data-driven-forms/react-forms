@@ -97,9 +97,12 @@ const selectComponent = ({
     <RadioGroup
       FieldProvider={ FieldProvider }
       options={ options }
-      isDisabled={ isDisabled }
+      isDisabled={ isDisabled || isReadOnly }
       input={ input }
-      label={ label }
+      label={ originalLabel }
+      isRequired={ isRequired }
+      invalid={ invalid }
+      helperText={ helperText }
     />
   ),
   [componentTypes.SELECT_COMPONENT]: () => (
