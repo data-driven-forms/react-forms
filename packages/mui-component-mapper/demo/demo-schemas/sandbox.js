@@ -1,526 +1,79 @@
 /* eslint-disable camelcase */
 import { componentTypes as components, validatorTypes as validators } from '@data-driven-forms/react-form-renderer';
 
+const options = [{ value: 1, label: 'cats' }, { value: 'dog', label: 'fog' }];
+
+const genereateField = (component, name = 'standard', optionsOptional = {}) => [{
+  name: `${component} -- ${name} -- header`,
+  component: 'plain-text',
+  label: `${component} -- ${name}`,
+}, {
+  label: `${component} -- ${name}`,
+  name: `${component} -- ${name}`,
+  component,
+  options: component === 'select-field' || component === 'radio' ? options : undefined,
+  ...optionsOptional,
+},   {
+  name: `${component} -- ${name} -- divider 2 `,
+  component: 'plain-text',
+  label: '\n.  \n.',
+}];
+
+const componentList = [
+  'text-field',
+  'checkbox',
+  'date-picker',
+  'radio',
+  'select-field',
+  'switch-field',
+  'textarea-field',
+  'time-picker',
+];
+
 const output = {
-  title: 'Testing dialog',
-  description: 'Description of testing Dialog',
-  fields: [
-    {
-      fields: [
-        {
-          title: 'Tab 1',
-          description: 'Text boxes and text areas',
-          name: '553',
-          fields: [
-            {
-              title: 'Text boxes',
-              name: '637',
-              fields: [
-                {
-                  name: 'text_box_1',
-                  label: 'Text Box',
-                  title: 'Text Box',
-                  component: components.SWITCH,
-                  bsSize: 'mn',
-                  onText: 'True',
-                  offText: 'False',
-                },
-                {
-                  name: 'text_box_111',
-                  label: 'Switch conditional',
-                  title: 'Text Box',
-                  component: components.SWITCH,
-                  isDisabled: true,
-                  condition: {
-                    when: 'text_box_1',
-                    is: true,
-                  },
-                },
-                {
-                  name: 'text_box_1111',
-                  label: 'Text Box',
-                  title: 'Text Box',
-                  component: components.SWITCH,
-                  isReadOnly: true,
-                },
-                {
-                  name: 'text_box_11111',
-                  label: 'Text Box',
-                  title: 'Text Box',
-                  component: components.SWITCH,
-                  placeholder: 'hello',
-                  onText: 'turned onsssssssssssssssssss',
-                  offText: 'turnedOff',
-                },
-                {
-                  name: 'text_box_2',
-                  label: 'Text Box with help',
-                  title: 'Text Box with help',
-                  helperText: 'Helper text',
-                  component: components.TEXT_FIELD,
-                },
-                {
-                  name: 'text_box_3',
-                  label: 'Text Box required',
-                  title: 'Text Box required',
-                  isRequired: true,
-                  component: components.TEXT_FIELD,
-                  validate: [
-                    { type: validators.REQUIRED },
-                  ],
-                },
-                {
-                  name: 'text_box_4',
-                  label: 'Text Box readonly',
-                  title: 'Text Box readonly',
-                  isReadOnly: true,
-                  component: components.TEXT_FIELD,
-                },
-                {
-                  name: 'text_box_5',
-                  label: 'Text Box default',
-                  title: 'Text Box default',
-                  component: components.TEXT_FIELD,
-                },
-                {
-                  name: 'text_box_6',
-                  label: 'Text Box unvisible',
-                  title: 'Text Box unvisible',
-                  isVisible: false,
-                  component: components.TEXT_FIELD,
-                },
-                {
-                  name: 'text_box_7',
-                  label: 'Text Box with validator',
-                  title: 'Text Box with validator',
-                  validate: [
-                    {
-                      type: validators.PATTERN_VALIDATOR,
-                      pattern: '^[0-9]+$',
-                    },
-                  ],
-                  component: components.TEXT_FIELD,
-                },
-                {
-                  name: 'text_box_8',
-                  label: 'Text Box integer value',
-                  title: 'Text Box integer value',
-                  dataType: 'integer',
-                  component: components.TEXT_FIELD,
-                  type: 'number',
-                },
-                {
-                  name: 'text_box_9',
-                  label: 'Text Box string value',
-                  title: 'Text Box string value',
-                  dataType: 'string',
-                  component: components.TEXT_FIELD,
-                },
-              ],
-              component: components.SUB_FORM,
-            },
-            {
-              title: 'Text areas',
-              name: '638',
-              fields: [
-                {
-                  name: 'textarea_box_1',
-                  label: 'Text Area',
-                  title: 'Text Area',
-                  component: components.TEXTAREA_FIELD,
-                },
-              ],
-              component: components.SUB_FORM,
-            },
-          ],
-          component: components.TAB_ITEM,
-        },
-        {
-          title: 'Tab 2',
-          description: 'Checks',
-          name: '554',
-          fields: [
-            {
-              title: 'Check boxes',
-              name: '639',
-              fields: [
-                {
-                  name: 'check_box_1',
-                  label: 'Check Box',
-                  title: 'Check Box',
-                  component: components.CHECKBOX,
-                },
-                {
-                  name: 'check_box_2',
-                  label: 'Do you like?',
-                  component: components.CHECKBOX,
-                  options: [
-                    { label: 'Dogs', value: '1' },
-                    { label: 'Cats', value: '2' },
-                    { label: 'Hamsters', value: '3' },
-                  ],
-                },
-              ],
-              component: components.SUB_FORM,
-            },
-            {
-              title: 'Radios',
-              name: '640',
-              fields: [
-                {
-                  name: 'radio_button_1',
-                  label: 'Radio Button',
-                  title: 'Radio Button',
-                  dataType: 'string',
-                  component: components.RADIO,
-                  options: [
-                    {
-                      label: 'One',
-                      value: '1',
-                    },
-                    {
-                      label: 'Two',
-                      value: '2',
-                    },
-                    {
-                      label: 'Three',
-                      value: '3',
-                    },
-                  ],
-                },
-                {
-                  name: 'radio_button_2',
-                  label: 'Radio Button sorted by',
-                  title: 'Radio Button sorted by',
-                  dataType: 'string',
-                  component: components.RADIO,
-                  options: [
-                    {
-                      label: 'One',
-                      value: '1',
-                    },
-                    {
-                      label: 'Two',
-                      value: '2',
-                    },
-                    {
-                      label: 'Three',
-                      value: '3',
-                    },
-                  ],
-                },
-                {
-                  name: 'radio_button_4',
-                  label: 'Radio Button default',
-                  title: 'Radio Button default',
-                  dataType: 'string',
-                  component: components.RADIO,
-                  options: [
-                    {
-                      label: 'One',
-                      value: '1',
-                    },
-                    {
-                      label: 'Two',
-                      value: '2',
-                    },
-                    {
-                      label: 'Three',
-                      value: '3',
-                    },
-                  ],
-                },
-              ],
-              component: components.SUB_FORM,
-            },
-          ],
-          component: components.TAB_ITEM,
-        },
-        {
-          title: 'Tab 3',
-          description: '',
-          name: '555',
-          fields: [
-            {
-              title: 'Dropdowns',
-              name: '641',
-              fields: [
-                {
-                  name: 'dropdown_list_1',
-                  label: 'Dropdown',
-                  title: 'Dropdown',
-                  dataType: 'string',
-                  component: components.SELECT_COMPONENT,
-                  isSearchable: true,
-                  options: [
-                    {
-                      label: '<None>',
-                      value: null,
-                    },
-                    {
-                      label: 'One',
-                      value: '1',
-                    },
-                    {
-                      label: 'Three',
-                      value: '3',
-                    },
-                    {
-                      label: 'Two',
-                      value: '2',
-                    },
-                  ],
-                },
-                {
-                  name: 'dropdown_list_2',
-                  label: 'Dropdown default value',
-                  title: 'Dropdown default value',
-                  dataType: 'string',
-                  component: components.SELECT_COMPONENT,
-                  options: [
-                    {
-                      label: '<None>',
-                      value: null,
-                    },
-                    {
-                      label: 'One',
-                      value: '1',
-                    },
-                    {
-                      label: 'Three',
-                      value: '3',
-                    },
-                    {
-                      label: 'Two',
-                      value: '2',
-                    },
-                  ],
-                },
-                {
-                  name: 'dropdown_list_3',
-                  label: 'Dropdown multiselect',
-                  title: 'Dropdown multiselect',
-                  dataType: 'string',
-                  component: components.SELECT_COMPONENT,
-                  multi: true,
-                  options: [
-                    {
-                      label: '<None>',
-                      value: null,
-                    },
-                    {
-                      label: 'One',
-                      value: '1',
-                    },
-                    {
-                      label: 'Three',
-                      value: '3',
-                    },
-                    {
-                      label: 'Two',
-                      value: '2',
-                    },
-                  ],
-                },
-                {
-                  name: 'dropdown_list_4',
-                  label: 'Dropdown sort by value',
-                  title: 'Dropdown sort by value',
-                  dataType: 'string',
-                  component: components.SELECT_COMPONENT,
-                  options: [
-                    {
-                      label: '<None>',
-                      value: null,
-                    },
-                    {
-                      label: 'One',
-                      value: '1',
-                    },
-                    {
-                      label: 'Two',
-                      value: '2',
-                    },
-                    {
-                      label: 'Three',
-                      value: '3',
-                    },
-                  ],
-                },
-                {
-                  name: 'select_clear',
-                  label: 'Clearable dropdown',
-                  title: 'Clearable dropdown',
-                  component: components.SELECT_COMPONENT,
-                  multi: true,
-                  isClearable: true,
-                  options: [
-                    {
-                      label: '<None>',
-                      value: null,
-                    },
-                    {
-                      label: 'One',
-                      value: '1',
-                    },
-                    {
-                      label: 'Three',
-                      value: '3',
-                    },
-                    {
-                      label: 'Two',
-                      value: '2',
-                    },
-                  ],
-                },
-              ],
-              component: components.SUB_FORM,
-            },
-          ],
-          component: components.TAB_ITEM,
-        },
-        {
-          title: 'Tab 4',
-          description: '',
-          name: '556',
-          fields: [
-            {
-              title: 'Datepickers',
-              name: '642',
-              fields: [
-                {
-                  name: 'date_control_1',
-                  label: 'Datepicker',
-                  title: 'Datepicker',
-                  component: components.DATE_PICKER,
-                },
-                {
-                  name: 'date_control_2',
-                  label: 'Datepicker with past days',
-                  title: 'Datepicker with past days',
-                  component: components.DATE_PICKER,
-                },
-              ],
-              component: components.SUB_FORM,
-            },
-            {
-              title: 'Timepickers',
-              name: '643',
-              fields: [
-                {
-                  name: 'date_time_control_1',
-                  label: 'Timepicker',
-                  title: 'Timepicker',
-                  component: components.TIME_PICKER,
-                },
-                {
-                  name: 'date_time_control_2',
-                  label: 'Timepicker with past days',
-                  title: 'Timepicker with past days',
-                  component: components.TIME_PICKER,
-                },
-              ],
-              component: components.SUB_FORM,
-            },
-          ],
-          component: components.TAB_ITEM,
-        },
-        {
-          title: 'Mixed',
-          description: '',
-          name: '558',
-          fields: [
-            {
-              title: 'New Section',
-              name: '645',
-              fields: [
-                {
-                  name: 'text_box_10',
-                  label: 'Text Box',
-                  title: 'Text Box',
-                  component: components.TEXT_FIELD,
-                },
-                {
-                  name: 'textarea_box_2',
-                  label: 'Text Area',
-                  title: 'Text Area',
-                  component: components.TEXTAREA_FIELD,
-                },
-                {
-                  name: 'check_box_3',
-                  label: 'Check Box',
-                  title: 'Check Box',
-                  component: components.CHECKBOX,
-                },
-                {
-                  name: 'check_box_4',
-                  label: 'Check Box',
-                  title: 'Check Box',
-                  component: components.CHECKBOX,
-                },
-                {
-                  name: 'dropdown_list_5',
-                  label: 'Dropdown',
-                  title: 'Dropdown',
-                  dataType: 'string',
-                  component: components.SELECT_COMPONENT,
-                  options: [
-                    {
-                      label: '<None>',
-                      value: null,
-                    },
-                    {
-                      label: 'One',
-                      value: '1',
-                    },
-                    {
-                      label: 'Three',
-                      value: '3',
-                    },
-                    {
-                      label: 'Two',
-                      value: '2',
-                    },
-                  ],
-                },
-                {
-                  name: 'radio_button_3',
-                  label: 'Radio Button',
-                  title: 'Radio Button',
-                  dataType: 'string',
-                  component: components.RADIO,
-                  options: [
-                    {
-                      label: 'One',
-                      value: '1',
-                    },
-                    {
-                      label: 'Two',
-                      value: '2',
-                    },
-                    {
-                      label: 'Three',
-                      value: '3',
-                    },
-                  ],
-                },
-                {
-                  name: 'date_time_control_3',
-                  label: 'Timepicker',
-                  title: 'Timepicker',
-                  component: components.TIME_PICKER,
-                },
-              ],
-              component: components.SUB_FORM,
-            },
-          ],
-          component: components.TAB_ITEM,
-        },
-      ],
-      component: components.TABS,
-      name: '57',
-    },
-  ],
+  fields: [{
+    component: 'tabs',
+    name: 'tabs',
+    fields: componentList.reduce((acc, curr) => [
+      ...acc,
+      {
+        component: 'tab-item',
+        name: curr,
+        title: curr,
+        fields: [
+          ...genereateField(curr),
+          ...genereateField(curr, 'helper text', { helperText: 'This is helper text' }),
+          ...genereateField(curr, 'placeholder', { placeholder: 'This is placeholder' }),
+          ...genereateField(curr, 'description', { description: 'This is this description' }),
+          ...genereateField(curr, 'required error', { validate: [{ type: validators.REQUIRED }]}),
+          ...genereateField(curr, 'isDisabled', { isDisabled: true }),
+          ...genereateField(curr, 'isReadOnly', { isReadOnly: true }),
+          ...genereateField(curr, 'is required', { isRequired: true }),
+          ...(curr === 'select-field' ? [
+            ...genereateField(curr, 'isClearable', { isClearable: true }),
+            ...genereateField(curr, 'isSearchable', { isSearchable: true }),
+            ...genereateField(curr, 'isMulti', { isMulti: true }),
+            ...genereateField(curr, 'multi', { multi: true }),
+          ] : []),
+          ...(curr === 'checkbox' ? [
+            ...genereateField(curr, 'multipleoptions', { options }),
+            ...genereateField(curr, 'multipleoptions helper text', { helperText: 'This is helper text', options }),
+            ...genereateField(curr, 'multipleoptions placeholder', { placeholder: 'This is placeholder', options }),
+            ...genereateField(curr, 'multipleoptions description', { description: 'This is this description', options }),
+            ...genereateField(curr, 'multipleoptions required error', { validate: [{ type: validators.REQUIRED }], options }),
+            ...genereateField(curr, 'multipleoptions isDisabled', { isDisabled: true, options }),
+            ...genereateField(curr, 'multipleoptions isReadOnly', { isReadOnly: true, options }),
+            ...genereateField(curr, 'multipleoptions is required', { isRequired: true, options }),
+          ] : []),
+          ...(curr === 'switch-field' ? [
+            ...genereateField(curr, 'onText', { onText: 'Turned on' }),
+            ...genereateField(curr, 'offText', { offText: 'Turned off' }),
+            ...genereateField(curr, 'onText&&offText', { onText: 'Turned on', offText: 'Turned off' }),
+          ] : []),
+        ],
+      },
+    ], []),
+  }],
 };
 
 export const defaultValues = {

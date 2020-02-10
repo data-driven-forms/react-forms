@@ -4,10 +4,22 @@ import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import { wrapperProps } from '@data-driven-forms/common/src/multiple-choice-list';
 
-const RadioGroup = ({ FieldProvider, options, isDisabled, input, label }) => (
+const RadioGroup = ({
+  FieldProvider,
+  options,
+  isDisabled,
+  input,
+  label,
+  isRequired,
+  helperText,
+  invalid,
+  isReadOnly,
+}) => (
   <div  className="mui-ddform-radio-group">
-    <FormControl component="fieldset">
+    <FormControl required={ isRequired } error={ !!invalid } component="fieldset">
       <FormLabel component="legend">{ label }</FormLabel>
       { options.map(option => (
         <FieldProvider
@@ -20,17 +32,23 @@ const RadioGroup = ({ FieldProvider, options, isDisabled, input, label }) => (
               control={ <Radio
                 { ...input }
                 disabled={ isDisabled }
-                onChange={ () => input.onChange(option.value) }/> }
+                onChange={ () => input.onChange(option.value) }
+                inputProps={{
+                  readOnly: isReadOnly,
+                }}
+              /> }
               label={ option.label }
             />
           ) }
         />
       )) }
+      { (invalid || helperText) && <FormHelperText>{ invalid || helperText }</FormHelperText> }
     </FormControl>
   </div>
 );
 
 RadioGroup.propTypes = {
+  ...wrapperProps,
   FieldProvider: PropTypes.oneOfType([ PropTypes.node, PropTypes.func ]),
   options: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.any,
@@ -42,6 +60,7 @@ RadioGroup.propTypes = {
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
   }),
+  children: PropTypes.any,
 };
 
 RadioGroup.defaultProps = {

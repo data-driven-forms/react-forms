@@ -25,10 +25,10 @@ const App = () => (
             justify="center"
             alignItems="center"
         >
-            <Grid item xs={8}>
+            <Grid item xs={12}>
                 <Typography variant="h3" >Material UI component mapper</Typography>
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={12}>
                 <FormRenderer
                     onSubmit={console.log}
                     formFieldsMapper={formFieldsMapper}

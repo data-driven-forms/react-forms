@@ -21,7 +21,7 @@ const MultipleChoiceList = ({ validate, FieldProvider, Wrapper, Checkbox, ...pro
     }) => {
       const { error, touched } = meta;
       const showError = touched && error;
-      const groupValues = rest.input.value;
+      const groupValues = rest.input.value || [];
       return (
         <Wrapper
           showError={ showError }

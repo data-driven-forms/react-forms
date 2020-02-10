@@ -10,10 +10,14 @@ import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
 import MenuItem from '@material-ui/core/MenuItem';
 import CancelIcon from '@material-ui/icons/Cancel';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormLabel from '@material-ui/core/FormLabel';
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    display: 'flex',
   },
   input: {
     display: 'flex',
@@ -318,8 +322,10 @@ function IntegrationReactSelect (props) {
       },
     }),
   };
+
   return (
-    <div className={ classes.root }>
+    <FormControl required={ rest.isRequired } error={ !!invalid } component="fieldset" className={ classes.root }>
+      <FormLabel>{ rest.label }</FormLabel>
       <NoSsr>
         <Select
           classes={ classes }
@@ -330,7 +336,8 @@ function IntegrationReactSelect (props) {
           isDisabled={ !!rest.isDisabled }
         />
       </NoSsr>
-    </div>
+      { (invalid || rest.helperText || rest.description) && <FormHelperText>{ invalid || rest.helperText || rest.description }</FormHelperText> }
+    </FormControl>
   );
 }
 

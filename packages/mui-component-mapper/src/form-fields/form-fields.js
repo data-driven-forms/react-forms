@@ -6,13 +6,13 @@ import MultipleChoiceList from './multiple-choice-list';
 import Grid from '@material-ui/core/Grid';
 import MuiTextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
-import MuiRadio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import MuiSelect from './select-field';
+import FormLabel from '@material-ui/core/FormLabel';
 
 import { MuiPickersUtilsProvider, TimePicker, DatePicker } from 'material-ui-pickers';
 import MomentUtils from '@date-io/moment';
@@ -41,7 +41,7 @@ const selectComponent = ({
   onText,
   offText,
   error,
-  locale,
+  locale = 'en',
   ...rest
 }) => ({
   [componentTypes.TEXT_FIELD]: () => (
@@ -63,7 +63,7 @@ const selectComponent = ({
   [componentTypes.TEXTAREA_FIELD]: () => (
     <MuiTextField
       { ...input }
-      error={ invalid }
+      error={ !!invalid }
       required={ isRequired }
       helperText={ helperText }
       disabled={ isDisabled }
@@ -78,18 +78,35 @@ const selectComponent = ({
     />
   ),
   [componentTypes.CHECKBOX]: () => (
-    <FormControlLabel
-      control={ <Checkbox { ...input } disabled={ isDisabled } value={ input.name } /> }
-      label={ label }
-    />
+    <FormControl required={ isRequired } error={ !!invalid } component="fieldset">
+      <FormGroup>
+        <FormControlLabel
+          control={ <Checkbox
+            { ...input }
+            disabled={ isDisabled || isReadOnly }
+            value={ input.name }
+            inputProps={{
+              readOnly: isReadOnly,
+            }}
+          /> }
+          disabled={ isDisabled || isReadOnly }
+          label={ <FormLabel>{ label }</FormLabel> }
+        />
+        { (invalid || helperText) && <FormHelperText>{ invalid || helperText }</FormHelperText> }
+      </FormGroup>
+    </FormControl>
   ),
   [componentTypes.RADIO]: () => (
     <RadioGroup
       FieldProvider={ FieldProvider }
       options={ options }
-      isDisabled={ isDisabled }
+      isDisabled={ isDisabled || isReadOnly }
       input={ input }
       label={ label }
+      isRequired={ isRequired }
+      invalid={ invalid }
+      helperText={ helperText }
+      isReadOnly={ isReadOnly }
     />
   ),
   [componentTypes.SELECT_COMPONENT]: () => (
@@ -116,29 +133,44 @@ const selectComponent = ({
       }}
       onChange={ option =>
         input.onChange(rest.multi ? selectValue(option) : option ? option.value : undefined) } // eslint-disable-line no-nested-ternary
+      input={ input }
+      label={ label }
+      isRequired={ isRequired }
+      helperText={ helperText }
       { ...rest }
     />),
   [componentTypes.SWITCH]: () => (
-    <FormGroup row>
-      <FormControlLabel
-        control={ <Switch
-          { ...rest }
-          { ...input }
-          readOnly={ isReadOnly }
-          disabled={ isDisabled || isReadOnly }
-          checked={ !!input.value }
-          onChange={ ({ target: { checked }}) => input.onChange(checked) }
-        /> }
-        label={ label }
-      />
-    </FormGroup>),
+    <FormControl required={ isRequired } error={ !!invalid } component="fieldset">
+      <FormGroup>
+        <FormControlLabel
+          control={ <Switch
+            { ...rest }
+            { ...input }
+            readOnly={ isReadOnly }
+            disabled={ isDisabled || isReadOnly }
+            checked={ !!input.value }
+            onChange={ ({ target: { checked }}) => input.onChange(checked) }
+          /> }
+          label={ <FormLabel>{ input.value ? onText || label : offText || label }</FormLabel> }
+        />
+        { (invalid || helperText) && <FormHelperText>{ invalid || helperText }</FormHelperText> }
+      </FormGroup>
+    </FormControl>
+  ),
   [componentTypes.DATE_PICKER]: () => (
     <MuiPickersUtilsProvider locale={ locale } utils={ MomentUtils }>
       <DatePicker
         fullWidth
         margin="normal"
         label={ label }
+        helperText={ helperText }
+        disabled={ isDisabled || isReadOnly }
+        placeholder={ placeholder }
+        required={ isRequired }
+        error={ !!invalid }
+        readOnly={ isReadOnly }
         { ...input }
+        value={ input.value || null }
       />
     </MuiPickersUtilsProvider>
   ),
@@ -148,7 +180,14 @@ const selectComponent = ({
         fullWidth
         margin="normal"
         label={ label }
+        helperText={ helperText }
+        disabled={ isDisabled || isReadOnly }
+        placeholder={ placeholder }
+        required={ isRequired }
+        error={ !!invalid }
+        readOnly={ isReadOnly }
         { ...input }
+        value={ input.value || null }
       />
     </MuiPickersUtilsProvider>
   ),
@@ -160,7 +199,7 @@ const FinalFormField = ({
   description,
   hideLabel,
   isVisible,
-  label,
+  helperText,
   ...rest
 }) => {
   const invalid = validationError(meta, validateOnMount);
@@ -169,7 +208,7 @@ const FinalFormField = ({
       { selectComponent({
         ...rest,
         invalid,
-        label: invalid ? meta.error : label,
+        helperText: invalid ? meta.error : helperText || description,
       })() }
     </Grid>
   );
