@@ -12,6 +12,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import MuiSelect from './select-field';
+import FormLabel from '@material-ui/core/FormLabel';
 
 import { MuiPickersUtilsProvider, TimePicker, DatePicker } from 'material-ui-pickers';
 import MomentUtils from '@date-io/moment';
@@ -41,7 +42,6 @@ const selectComponent = ({
   offText,
   error,
   locale = 'en',
-  originalLabel,
   ...rest
 }) => ({
   [componentTypes.TEXT_FIELD]: () => (
@@ -85,9 +85,12 @@ const selectComponent = ({
             { ...input }
             disabled={ isDisabled || isReadOnly }
             value={ input.name }
+            inputProps={{
+              readOnly: isReadOnly,
+            }}
           /> }
           disabled={ isDisabled || isReadOnly }
-          label={ originalLabel }
+          label={ <FormLabel>{ label }</FormLabel> }
         />
         { (invalid || helperText) && <FormHelperText>{ invalid || helperText }</FormHelperText> }
       </FormGroup>
@@ -99,10 +102,11 @@ const selectComponent = ({
       options={ options }
       isDisabled={ isDisabled || isReadOnly }
       input={ input }
-      label={ originalLabel }
+      label={ label }
       isRequired={ isRequired }
       invalid={ invalid }
       helperText={ helperText }
+      isReadOnly={ isReadOnly }
     />
   ),
   [componentTypes.SELECT_COMPONENT]: () => (
@@ -130,7 +134,7 @@ const selectComponent = ({
       onChange={ option =>
         input.onChange(rest.multi ? selectValue(option) : option ? option.value : undefined) } // eslint-disable-line no-nested-ternary
       input={ input }
-      label={ originalLabel }
+      label={ label }
       isRequired={ isRequired }
       helperText={ helperText }
       { ...rest }
@@ -147,7 +151,7 @@ const selectComponent = ({
             checked={ !!input.value }
             onChange={ ({ target: { checked }}) => input.onChange(checked) }
           /> }
-          label={ input.value ? onText || label : offText || label }
+          label={ <FormLabel>{ input.value ? onText || label : offText || label }</FormLabel> }
         />
         { (invalid || helperText) && <FormHelperText>{ invalid || helperText }</FormHelperText> }
       </FormGroup>
@@ -195,7 +199,6 @@ const FinalFormField = ({
   description,
   hideLabel,
   isVisible,
-  label,
   helperText,
   ...rest
 }) => {
@@ -205,9 +208,7 @@ const FinalFormField = ({
       { selectComponent({
         ...rest,
         invalid,
-        label,
         helperText: invalid ? meta.error : helperText || description,
-        originalLabel: label,
       })() }
     </Grid>
   );

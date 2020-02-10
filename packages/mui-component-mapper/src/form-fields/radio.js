@@ -16,6 +16,7 @@ const RadioGroup = ({
   isRequired,
   helperText,
   invalid,
+  isReadOnly,
 }) => (
   <div  className="mui-ddform-radio-group">
     <FormControl required={ isRequired } error={ !!invalid } component="fieldset">
@@ -31,7 +32,11 @@ const RadioGroup = ({
               control={ <Radio
                 { ...input }
                 disabled={ isDisabled }
-                onChange={ () => input.onChange(option.value) }/> }
+                onChange={ () => input.onChange(option.value) }
+                inputProps={{
+                  readOnly: isReadOnly,
+                }}
+              /> }
               label={ option.label }
             />
           ) }
