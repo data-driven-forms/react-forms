@@ -34,7 +34,7 @@ const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperTex
 
   return (
     <Grid container>
-      <FormControl required={ isRequired } error={ invalid } component="fieldset" >
+      <FormControl required={ isRequired } error={ !!invalid } component="fieldset" >
         <FormLabel>{ label }</FormLabel>
         <FormGroup>
           { children }

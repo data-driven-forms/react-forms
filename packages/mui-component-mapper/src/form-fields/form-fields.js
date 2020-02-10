@@ -63,7 +63,7 @@ const selectComponent = ({
   [componentTypes.TEXTAREA_FIELD]: () => (
     <MuiTextField
       { ...input }
-      error={ invalid }
+      error={ !!invalid }
       required={ isRequired }
       helperText={ helperText }
       disabled={ isDisabled }
@@ -78,7 +78,7 @@ const selectComponent = ({
     />
   ),
   [componentTypes.CHECKBOX]: () => (
-    <FormControl required={ isRequired } error={ invalid } component="fieldset">
+    <FormControl required={ isRequired } error={ !!invalid } component="fieldset">
       <FormGroup>
         <FormControlLabel
           control={ <Checkbox
@@ -129,10 +129,14 @@ const selectComponent = ({
       }}
       onChange={ option =>
         input.onChange(rest.multi ? selectValue(option) : option ? option.value : undefined) } // eslint-disable-line no-nested-ternary
+      input={ input }
+      label={ originalLabel }
+      isRequired={ isRequired }
+      helperText={ helperText }
       { ...rest }
     />),
   [componentTypes.SWITCH]: () => (
-    <FormControl required={ isRequired } error={ invalid } component="fieldset">
+    <FormControl required={ isRequired } error={ !!invalid } component="fieldset">
       <FormGroup>
         <FormControlLabel
           control={ <Switch
@@ -159,7 +163,7 @@ const selectComponent = ({
         disabled={ isDisabled || isReadOnly }
         placeholder={ placeholder }
         required={ isRequired }
-        error={ invalid }
+        error={ !!invalid }
         readOnly={ isReadOnly }
         { ...input }
         value={ input.value || null }
@@ -176,7 +180,7 @@ const selectComponent = ({
         disabled={ isDisabled || isReadOnly }
         placeholder={ placeholder }
         required={ isRequired }
-        error={ invalid }
+        error={ !!invalid }
         readOnly={ isReadOnly }
         { ...input }
         value={ input.value || null }

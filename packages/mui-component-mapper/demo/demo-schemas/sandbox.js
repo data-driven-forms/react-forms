@@ -16,7 +16,7 @@ const genereateField = (component, name = 'standard', optionsOptional = {}) => [
 },   {
   name: `${component} -- ${name} -- divider 2 `,
   component: 'plain-text',
-  label: `<----->`,
+  label: '\n.  \n.',
 }];
 
 const componentList = [

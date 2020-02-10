@@ -18,7 +18,7 @@ const RadioGroup = ({
   invalid,
 }) => (
   <div  className="mui-ddform-radio-group">
-    <FormControl required={ isRequired } error={ invalid } component="fieldset">
+    <FormControl required={ isRequired } error={ !!invalid } component="fieldset">
       <FormLabel component="legend">{ label }</FormLabel>
       { options.map(option => (
         <FieldProvider
