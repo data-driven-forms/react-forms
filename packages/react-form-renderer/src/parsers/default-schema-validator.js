@@ -149,8 +149,8 @@ const iterateOverFields = (fields, formFieldsMapper, layoutMapper, parent = {}) 
 
     }
 
-    if (!field.hasOwnProperty('name') && !field.hasOwnProperty('title') && !field.hasOwnProperty('key') && parent.component !== 'field-array') {
-      throw new DefaultSchemaError(`Each fields item must have "name" or "key" property! Name is used as a unique identifier of form fields.`);
+    if (!field.hasOwnProperty('name') && parent.component !== 'field-array') {
+      throw new DefaultSchemaError(`Each fields item must have "name" property! Name is used as a unique identifier of form fields.`);
     }
 
     if (field.hasOwnProperty('condition')) {

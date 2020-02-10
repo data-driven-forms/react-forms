@@ -5,12 +5,11 @@ import { shallow } from 'enzyme';
 
 describe('SubForm component', () => {
   const props = {
-    key: 'cosiKey',
     title: 'cosiTitle',
     name: 'cosiName',
     fields: [],
     formOptions: {
-      renderForm: (fields, formOptions) => <div>{ 'Here would be form' }</div>,
+      renderForm: () => <div>Here would be form</div>,
     },
   };
 
@@ -30,8 +29,8 @@ describe('SubForm component', () => {
   });
 
   it('should render SubForm without title correctly', () => {
-    const { key, name, fields, formOptions } = props;
-    const propsWithoutTitle = { key, name, fields, formOptions };
+    const { name, fields, formOptions } = props;
+    const propsWithoutTitle = { name, fields, formOptions };
     const wrapper = shallow(
       <SubForm { ...propsWithoutTitle } />
     );

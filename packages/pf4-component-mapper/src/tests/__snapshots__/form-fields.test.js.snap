@@ -295,7 +295,7 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
               showError={false}
             >
               <FormGroup
-                fieldId="someIdKey"
+                fieldId="Name of the field"
                 helperTextInvalid={false}
                 isValid={true}
               >
@@ -1643,7 +1643,7 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
               showError={false}
             >
               <FormGroup
-                fieldId="someIdKey"
+                fieldId="Name of the field"
                 helperTextInvalid={false}
                 isValid={true}
               >

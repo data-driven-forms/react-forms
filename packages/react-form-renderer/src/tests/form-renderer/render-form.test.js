@@ -465,9 +465,8 @@ describe('renderForm function', () => {
         name: 'foo',
       }, {
         component,
-        name: 'foocon',
+        name: 'unmnounted',
         label: 'Label 1',
-        key: 1,
         clearOnUnmount,
         condition: {
           when: 'foo',
@@ -475,9 +474,8 @@ describe('renderForm function', () => {
         },
       }, {
         component,
-        name: 'foocon',
+        name: 'unmnounted',
         label: 'Label 2',
-        key: 2,
         clearOnUnmount,
         condition: {
           when: 'foo',
@@ -513,10 +511,10 @@ describe('renderForm function', () => {
       wrapper.update();
       wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.foocon).toEqual('foovalue');
+      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toEqual('foovalue');
       wrapper.find('input').first().simulate('change', { target: { value: 'barrr' }});
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.foocon).toBe(undefined);
+      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toBe(undefined);
     });
 
     it('should clear values after unmount when set on form', () => {
@@ -539,10 +537,10 @@ describe('renderForm function', () => {
       wrapper.update();
       wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.foocon).toEqual('foovalue');
+      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toEqual('foovalue');
       wrapper.find('input').first().simulate('change', { target: { value: 'barrr' }});
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.foocon).toBe(undefined);
+      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toBe(undefined);
     });
 
     it('should not clear values after unmount when not set', () => {
@@ -564,10 +562,10 @@ describe('renderForm function', () => {
       wrapper.update();
       wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.foocon).toEqual('foovalue');
+      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toEqual('foovalue');
       wrapper.find('input').first().simulate('change', { target: { value: 'barrr' }});
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.foocon).toEqual('foovalue');
+      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toEqual('foovalue');
     });
 
     it('should not clear values after unmount when set in form and not in fields', () => {
@@ -590,10 +588,10 @@ describe('renderForm function', () => {
       wrapper.update();
       wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.foocon).toEqual('foovalue');
+      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toEqual('foovalue');
       wrapper.find('input').first().simulate('change', { target: { value: 'barrr' }});
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.foocon).toEqual('foovalue');
+      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toEqual('foovalue');
     });
 
     it('should not clear values after unmount (default component)', () => {
@@ -612,10 +610,10 @@ describe('renderForm function', () => {
       wrapper.update();
       wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.foocon).toEqual('foovalue');
+      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toEqual('foovalue');
       wrapper.find('input').first().simulate('change', { target: { value: 'barrr' }});
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.foocon).toEqual('foovalue');
+      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toEqual('foovalue');
     });
 
     it('should clear values after unmount (default component)', () => {
@@ -635,10 +633,10 @@ describe('renderForm function', () => {
       wrapper.update();
       wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.foocon).toEqual('foovalue');
+      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toEqual('foovalue');
       wrapper.find('input').first().simulate('change', { target: { value: 'barrr' }});
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.foocon).toEqual(undefined);
+      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toEqual(undefined);
     });
   });
 

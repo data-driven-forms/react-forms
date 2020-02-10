@@ -12,7 +12,7 @@ describe('<FormTabs />', () => {
       fields: [{
         component: componentTypes.TABS,
         title: 'Tab 1',
-        key: 'tab1',
+        name: 'tab1',
         fields: [{
           name: 'foo',
           component: 'foo',
@@ -20,7 +20,7 @@ describe('<FormTabs />', () => {
       }, {
         component: componentTypes.TABS,
         title: 'Tab 2',
-        key: 'tab2',
+        name: 'tab2',
         fields: [],
       }],
       formOptions: {
@@ -43,7 +43,7 @@ describe('<FormTabs />', () => {
       fields: [{
         component: componentTypes.TABS,
         title: 'Tab 1',
-        key: 'tab1',
+        name: 'tab1',
         validateFields: [ 'foo', 'nested.field' ],
         fields: [{
           name: 'foo',

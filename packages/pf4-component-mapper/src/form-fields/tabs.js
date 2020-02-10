@@ -17,8 +17,8 @@ class FormTabs extends React.Component {
     });
   };
 
-  renderTabItems = (fields, formOptions) => fields.map(({ key, fields, title, name }, index) => (
-    <Tab key={ name || key } eventKey={ index } title={ title }>
+  renderTabItems = (fields, formOptions) => fields.map(({ fields, title, name }, index) => (
+    <Tab key={ name } eventKey={ index } title={ title }>
       <div className='pf-c-form'>
         { formOptions.renderForm(fields, formOptions) }
       </div>

@@ -16,11 +16,11 @@ describe('Default schema validator', () => {
     expect(() => defaultSchemaValidator([])).toThrowErrorMatchingSnapshot();
   });
 
-  it('should fail if input object does not have fields key', () => {
+  it('should fail if input object does not have fields names', () => {
     expect(() => defaultSchemaValidator({})).toThrowErrorMatchingSnapshot();
   });
 
-  it('should fail if input object does fields key that is not array', () => {
+  it('should fail if input object does fields names that is not array', () => {
     expect(() => defaultSchemaValidator({ fields: {}})).toThrowErrorMatchingSnapshot();
   });
 
@@ -31,6 +31,12 @@ describe('Default schema validator', () => {
   it('should fail if field item does not have name property', () => {
     expect(() => defaultSchemaValidator({ fields: [{
       component: 'foo',
+    }]}, formFieldsMapper)).toThrowErrorMatchingSnapshot();
+  });
+
+  it('should fail if field item does not have name property but have key', () => {
+    expect(() => defaultSchemaValidator({ fields: [{
+      component: 'foo', key: 'some key',
     }]}, formFieldsMapper)).toThrowErrorMatchingSnapshot();
   });
 

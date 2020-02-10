@@ -54,7 +54,9 @@ exports[`Default schema validator should fail if field condition when property i
 
 exports[`Default schema validator should fail if field item does not have component property 1`] = `"Each fields item must have \\"component\\" property!"`;
 
-exports[`Default schema validator should fail if field item does not have name property 1`] = `"Each fields item must have \\"name\\" or \\"key\\" property! Name is used as a unique identifier of form fields."`;
+exports[`Default schema validator should fail if field item does not have name property 1`] = `"Each fields item must have \\"name\\" property! Name is used as a unique identifier of form fields."`;
+
+exports[`Default schema validator should fail if field item does not have name property but have key 1`] = `"Each fields item must have \\"name\\" property! Name is used as a unique identifier of form fields."`;
 
 exports[`Default schema validator should fail if field validate is not an array. 1`] = `
 "
@@ -87,9 +89,9 @@ exports[`Default schema validator should fail if field validate item is not an o
 
 exports[`Default schema validator should fail if input is not a object 1`] = `"Form Schema must be an object, received array!"`;
 
-exports[`Default schema validator should fail if input object does fields key that is not array 1`] = `"Component of type schema must contain \\"fields\\" property of type array, received type: object!"`;
+exports[`Default schema validator should fail if input object does fields names that is not array 1`] = `"Component of type schema must contain \\"fields\\" property of type array, received type: object!"`;
 
-exports[`Default schema validator should fail if input object does not have fields key 1`] = `"Component of type schema must contain \\"fields\\" property of type array, received undefined!"`;
+exports[`Default schema validator should fail if input object does not have fields names 1`] = `"Component of type schema must contain \\"fields\\" property of type array, received undefined!"`;
 
 exports[`Default schema validator should fail validation when using wrong data type 1`] = `
 "

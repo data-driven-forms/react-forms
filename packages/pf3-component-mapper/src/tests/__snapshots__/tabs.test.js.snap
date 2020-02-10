@@ -12,13 +12,13 @@ exports[`<FormTabs /> should render form tabs 1`] = `
             "name": "foo",
           },
         ],
-        "key": "tab1",
+        "name": "tab1",
         "title": "Tab 1",
       },
       Object {
         "component": "tabs",
         "fields": Array [],
-        "key": "tab2",
+        "name": "tab2",
         "title": "Tab 2",
       },
     ]
@@ -260,7 +260,7 @@ exports[`<FormTabs /> should render form tabs with error state 1`] = `
             "name": "nested.field",
           },
         ],
-        "key": "tab1",
+        "name": "tab1",
         "title": "Tab 1",
         "validateFields": Array [
           "foo",
