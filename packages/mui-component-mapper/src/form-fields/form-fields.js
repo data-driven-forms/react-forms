@@ -201,8 +201,8 @@ const FinalFormField = ({
       { selectComponent({
         ...rest,
         invalid,
-        label: invalid ? meta.error : label,
-        helperText: helperText || description,
+        label,
+        helperText: invalid ? meta.error : helperText || description,
         originalLabel: label,
       })() }
     </Grid>
