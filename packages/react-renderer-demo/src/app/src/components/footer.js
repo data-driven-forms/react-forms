@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 
 import GhIcon from './common/gh-svg-icon';
 import NpmSvgIcon from './common/npm-svg-icon';
+import TwitterIcon from './common/twitter-svg-icon';
 
 const RepoLink = ({ href, label }) => {
   const classes = makeStyles(theme => ({
@@ -97,11 +98,16 @@ const Footer = ({ open }) => {
           <Grid xs={ 12 } md={ 4 } item>
             <Paper elevation={ 0 } className={ classes.foooterCard }>
               <List
-                subheader={ <ListSubheader className={ classes.listHeader }>Links to &nbsp; <SvgIcon><GhIcon /></SvgIcon></ListSubheader> }
+                subheader={ <ListSubheader className={ classes.listHeader }>Link to &nbsp; <SvgIcon><GhIcon /></SvgIcon></ListSubheader> }
               >
                 <RepoLink
                   href="https://github.com/data-driven-forms/react-forms"
                   label="React forms"
+                />
+                <ListSubheader className={ classes.listHeader }>Link to &nbsp; <SvgIcon><TwitterIcon /></SvgIcon></ListSubheader>
+                <RepoLink
+                  href="https://twitter.com/DataDrivenForms"
+                  label="@DataDrivenForms"
                 />
               </List>
               <List
