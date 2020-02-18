@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormSpy } from 'react-final-form';
 
-import { components } from '../constants';
-import FieldProvider from './field-provider';
 import { FieldArray } from 'react-final-form-arrays';
-import { shouldWrapInField, composeValidators } from './helpers';
+import { shouldWrapInField } from './helpers';
+import componentTypes from '../components/component-types';
+import FieldProvider from '../components/field-provider';
+import composeValidators from '../components/compose-validators';
 
-const shouldAssignFormOptions = componentType => components.FIELD_ARRAY === componentType;
-const assignSpecialType = componentType => [ components.CHECKBOX, components.RADIO ].includes(componentType) ? componentType : undefined;
+const shouldAssignFormOptions = componentType => componentTypes.FIELD_ARRAY === componentType;
+const assignSpecialType = componentType => [ componentTypes.CHECKBOX, componentTypes.RADIO ].includes(componentType) ? componentType : undefined;
 
 const FieldWrapper = ({ componentType, validate, component, ...rest }) => {
   const componentProps = {

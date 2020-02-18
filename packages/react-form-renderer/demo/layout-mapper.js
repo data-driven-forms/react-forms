@@ -1,5 +1,5 @@
 import React from 'react';
-import { layoutComponents } from '../src/constants';
+import layoutComponentTypes from '../src/components/layout-component-types';
 
 const Button = ({ variant, label, ...rest }) => (
   <button
@@ -18,11 +18,11 @@ const Title = ({ children }) => <h3>{ children }</h3>;
 const Description = ({ children }) => <p>{ children }</p>;
 
 const layoutMapper = {
-  [layoutComponents.FORM_WRAPPER]: WrapperForm,
-  [layoutComponents.BUTTON]: Button,
-  [layoutComponents.BUTTON_GROUP]: ButtonGroup,
-  [layoutComponents.TITLE]: Title,
-  [layoutComponents.DESCRIPTION]: Description,
+  [layoutComponentTypes.FORM_WRAPPER]: WrapperForm,
+  [layoutComponentTypes.BUTTON]: Button,
+  [layoutComponentTypes.BUTTON_GROUP]: ButtonGroup,
+  [layoutComponentTypes.TITLE]: Title,
+  [layoutComponentTypes.DESCRIPTION]: Description,
 };
 
 export default layoutMapper;

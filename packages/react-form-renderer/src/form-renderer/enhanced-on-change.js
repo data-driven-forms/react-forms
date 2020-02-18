@@ -1,5 +1,5 @@
 import isEmpty from 'lodash/isEmpty';
-import { dataTypes } from '../constants';
+import dataTypes from '../components/data-types';
 
 /**
  * Pick a value from event object and returns it

@@ -1,5 +1,5 @@
 import React from 'react';
-import RendererContext from './renderer-context';
+import RendererContext from '../components/renderer-context';
 
 export const renderTitle = title => <RendererContext.Consumer>
   { ({ layoutMapper: { Title }}) => (

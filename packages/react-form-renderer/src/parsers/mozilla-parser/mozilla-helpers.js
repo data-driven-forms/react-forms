@@ -1,4 +1,5 @@
-import { validators, components } from '../../constants';
+import validatorTypes from "../../components/validator-types";
+import componentTypes from "../../components/component-types";
 
 /**
  * Function that creates field level validation
@@ -11,21 +12,21 @@ import { validators, components } from '../../constants';
 export const validatorBuilder = ({ schema, fields = {}, key }) => {
   const result = [];
   if (schema.required && schema.required.includes(key)) {
-    result.push({ type: validators.REQUIRED });
+    result.push({ type: validatorTypes.REQUIRED });
     fields[key].isRequired = true;
   }
 
   if (fields[key] && fields[key].minLength) {
-    result.push({ type: validators.MIN_LENGTH, treshold: fields[key].minLength });
+    result.push({ type: validatorTypes.MIN_LENGTH, treshold: fields[key].minLength });
     delete fields[key].minLength;
   }
 
   if (fields[key] && fields[key].pattern) {
-    result.push({ type: validators.PATTERN_VALIDATOR, pattern: fields[key].pattern });
+    result.push({ type: validatorTypes.PATTERN_VALIDATOR, pattern: fields[key].pattern });
   }
 
   if (schema.minItems) {
-    result.push({ type: validators.MIN_ITEMS_VALIDATOR, treshold: schema.minItems });
+    result.push({ type: validatorTypes.MIN_ITEMS_VALIDATOR, treshold: schema.minItems });
   }
 
   return result;
@@ -45,25 +46,25 @@ export const validatorBuilder = ({ schema, fields = {}, key }) => {
  * @returns {ComponentDefinition}
  */
 export const componentMapper = (type, dataType) => ({
-  string: { component: components.TEXT_FIELD, type: 'text', dataType },
-  uri: { component: components.TEXT_FIELD, type: 'uri', dataType },
-  date: { component: components.TEXT_FIELD, type: 'date', dataType },
-  'date-time': { component: components.TEXT_FIELD, type: 'datetime-local', dataType },
-  color: { component: components.TEXT_FIELD, type: 'color', dataType },
-  hidden: { component: components.TEXT_FIELD, type: 'hidden', dataType },
-  tel: { component: components.TEXT_FIELD, type: 'tel', dataType },
-  email: { component: components.TEXT_FIELD, type: 'email', dataType },
-  password: { component: components.TEXT_FIELD, type: 'password', dataType },
-  integer: { component: components.TEXT_FIELD, type: 'number', step: 1, dataType },
-  updown: { component: components.TEXT_FIELD, type: 'number', dataType },
-  number: { component: components.TEXT_FIELD, type: 'number', dataType },
-  range: { component: components.TEXT_FIELD, type: 'range', dataType },
-  textarea: { component: components.TEXTAREA_FIELD, dataType },
-  select: { component: components.SELECT_COMPONENT, dataType },
-  boolean: { component: components.CHECKBOX, type: 'checkbox', dataType },
-  checkbox: { component: components.CHECKBOX, type: 'checkbox', dataType },
-  checkboxes: { component: components.CHECKBOX, type: 'checkbox', dataType },
-  radio: { component: components.RADIO, type: 'radio', dataType },
+  string: { component: componentTypes.TEXT_FIELD, type: 'text', dataType },
+  uri: { component: componentTypes.TEXT_FIELD, type: 'uri', dataType },
+  date: { component: componentTypes.TEXT_FIELD, type: 'date', dataType },
+  'date-time': { component: componentTypes.TEXT_FIELD, type: 'datetime-local', dataType },
+  color: { component: componentTypes.TEXT_FIELD, type: 'color', dataType },
+  hidden: { component: componentTypes.TEXT_FIELD, type: 'hidden', dataType },
+  tel: { component: componentTypes.TEXT_FIELD, type: 'tel', dataType },
+  email: { component: componentTypes.TEXT_FIELD, type: 'email', dataType },
+  password: { component: componentTypes.TEXT_FIELD, type: 'password', dataType },
+  integer: { component: componentTypes.TEXT_FIELD, type: 'number', step: 1, dataType },
+  updown: { component: componentTypes.TEXT_FIELD, type: 'number', dataType },
+  number: { component: componentTypes.TEXT_FIELD, type: 'number', dataType },
+  range: { component: componentTypes.TEXT_FIELD, type: 'range', dataType },
+  textarea: { component: componentTypes.TEXTAREA_FIELD, dataType },
+  select: { component: componentTypes.SELECT_COMPONENT, dataType },
+  boolean: { component: componentTypes.CHECKBOX, type: 'checkbox', dataType },
+  checkbox: { component: componentTypes.CHECKBOX, type: 'checkbox', dataType },
+  checkboxes: { component: componentTypes.CHECKBOX, type: 'checkbox', dataType },
+  radio: { component: componentTypes.RADIO, type: 'radio', dataType },
 })[type];
 
 /**

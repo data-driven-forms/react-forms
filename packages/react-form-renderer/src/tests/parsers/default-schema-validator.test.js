@@ -1,7 +1,7 @@
 import output from '../../demo-schemas/miq-schemas/output';
 import React from 'react';
 import defaultSchemaValidator from '../../parsers/default-schema-validator';
-import { components } from '../../constants/';
+import componentTypes from '../../components/component-types';
 
 describe('Default schema validator', () => {
   let formFieldsMapper;
@@ -9,7 +9,7 @@ describe('Default schema validator', () => {
     formFieldsMapper = {
       foo: props => <div>Component</div>,
       invalidComponent: 'baz',
-      [components.TABS]: ({ children }) => <div>{ children }</div>,
+      [componentTypes.TABS]: ({ children }) => <div>{ children }</div>,
     };
   });
   it('should fail if input is not a object', () => {

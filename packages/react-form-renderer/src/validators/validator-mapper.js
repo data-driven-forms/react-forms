@@ -1,7 +1,7 @@
 import { required, length, pattern, numericality } from './';
 
-import { validators } from '../constants';
 import url from './url-validator';
+import validatorTypes from '../components/validator-types';
 
 const thresholdWarn = func => {
   console.warn(`Attribute "treshold" is deprecated due to a typo in Length validators and will be removed in next major release.
@@ -10,8 +10,8 @@ const thresholdWarn = func => {
 };
 
 export default validatorType => ({
-  [validators.REQUIRED]: required,
-  [validators.MIN_LENGTH]: ({ treshold, threshold, ...rest }) => thresholdWarn(() => {
+  [validatorTypes.REQUIRED]: required,
+  [validatorTypes.MIN_LENGTH]: ({ treshold, threshold, ...rest }) => thresholdWarn(() => {
     let value = threshold;
     if (treshold) {
       value = treshold;
@@ -19,7 +19,7 @@ export default validatorType => ({
 
     return length({ minimum: value, ...rest });
   }),
-  [validators.MAX_LENGTH]: ({ treshold, threshold, ...rest }) => thresholdWarn(() => {
+  [validatorTypes.MAX_LENGTH]: ({ treshold, threshold, ...rest }) => thresholdWarn(() => {
     let value = threshold;
     if (treshold) {
       value = treshold;
@@ -27,13 +27,13 @@ export default validatorType => ({
 
     return length({ maximum: value, ...rest });
   }),
-  [validators.EXACT_LENGTH]: ({ treshold, threshold, ...rest }) => thresholdWarn(() => length({ is: threshold || treshold, ...rest })),
-  [validators.MIN_ITEMS_VALIDATOR]: ({ treshold, threshold, ...rest }) =>
+  [validatorTypes.EXACT_LENGTH]: ({ treshold, threshold, ...rest }) => thresholdWarn(() => length({ is: threshold || treshold, ...rest })),
+  [validatorTypes.MIN_ITEMS_VALIDATOR]: ({ treshold, threshold, ...rest }) =>
     thresholdWarn(() => length({ minimum: threshold || treshold, message: `Must have at least ${threshold || treshold} items.`, ...rest })),
-  [validators.PATTERN_VALIDATOR]: pattern,
-  [validators.MAX_NUMBER_VALUE]: ({ value, includeThreshold = true, ...rest }) =>
+  [validatorTypes.PATTERN_VALIDATOR]: pattern,
+  [validatorTypes.MAX_NUMBER_VALUE]: ({ value, includeThreshold = true, ...rest }) =>
     numericality({ [includeThreshold ? '<=' : '<']: value, ...rest }),
-  [validators.MIN_NUMBER_VALUE]: ({ value, includeThreshold = true, ...rest }) =>
+  [validatorTypes.MIN_NUMBER_VALUE]: ({ value, includeThreshold = true, ...rest }) =>
     numericality({ [includeThreshold ? '>=' : '>']: value, ...rest }),
-  [validators.URL]: ({ message, ...options }) =>  pattern({ pattern: url(options), message: message || 'String is not URL.' }),
+  [validatorTypes.URL]: ({ message, ...options }) =>  pattern({ pattern: url(options), message: message || 'String is not URL.' }),
 })[validatorType];

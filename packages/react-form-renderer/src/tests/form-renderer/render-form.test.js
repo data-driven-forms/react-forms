@@ -4,10 +4,11 @@ import toJson from 'enzyme-to-json';
 import { Form, FormSpy } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import renderForm from '../../form-renderer/render-form';
-import RendererContext from '../../form-renderer/renderer-context';
-import { components, validators, layoutComponents } from '../../constants';
-import FormRenderer from '../../form-renderer';
-import { componentTypes } from '../..';
+import RendererContext from '../../components/renderer-context';
+import FormRenderer from '../../components/form-renderer';
+import validatorTypes from '../../components/validator-types';
+import componentTypes from '../../components/component-types';
+import layoutComponentTypes from '../../components/layout-component-types';
 
 describe('renderForm function', () => {
   let layoutMapper;
@@ -29,23 +30,23 @@ describe('renderForm function', () => {
 
   beforeEach(() => {
     layoutMapper = {
-      [layoutComponents.FORM_WRAPPER]: ({ children }) => <div>{ children }</div>,
-      [layoutComponents.BUTTON]: ({ label, ...rest }) =>  <button { ...rest }>{ label }</button>,
-      [layoutComponents.BUTTON_GROUP]: ({ children }) => <div>{ children }</div>,
-      [layoutComponents.TITLE]: ({ children }) => <div>{ children }</div>,
-      [layoutComponents.DESCRIPTION]: ({ children }) => <div>{ children }</div>,
+      [layoutComponentTypes.FORM_WRAPPER]: ({ children }) => <div>{ children }</div>,
+      [layoutComponentTypes.BUTTON]: ({ label, ...rest }) =>  <button { ...rest }>{ label }</button>,
+      [layoutComponentTypes.BUTTON_GROUP]: ({ children }) => <div>{ children }</div>,
+      [layoutComponentTypes.TITLE]: ({ children }) => <div>{ children }</div>,
+      [layoutComponentTypes.DESCRIPTION]: ({ children }) => <div>{ children }</div>,
     };
     CustomComponent = ({ FieldProvider, dataType, formOptions, ...props }) => <div { ...props }>Custom component</div>;
   });
 
   it('should render single field from defined componentTypes', () => {
     const formFields = [{
-      component: components.TEXT_FIELD,
+      component: componentTypes.TEXT_FIELD,
       name: 'foo',
     }];
     const wrapper = mount(
       <ContextWrapper formFieldsMapper={{
-        [components.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div { ...props }>TextField</div>,
+        [componentTypes.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div { ...props }>TextField</div>,
       }}>
         { renderForm(formFields) }
       </ContextWrapper>
@@ -55,12 +56,12 @@ describe('renderForm function', () => {
 
   it('should render single field (array in array) from defined componentTypes', () => {
     const formFields = [ [{
-      component: components.TEXT_FIELD,
+      component: componentTypes.TEXT_FIELD,
       name: 'foo',
     }] ];
     const wrapper = mount(
       <ContextWrapper formFieldsMapper={{
-        [components.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <h1 { ...props }>TextField</h1>,
+        [componentTypes.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <h1 { ...props }>TextField</h1>,
       }}>
         { renderForm(formFields) }
       </ContextWrapper>
@@ -71,13 +72,13 @@ describe('renderForm function', () => {
 
   it('should correctly assign dataType validator if no additional validators given', () => {
     const formFields = [{
-      component: components.TEXT_FIELD,
+      component: componentTypes.TEXT_FIELD,
       name: 'foo',
       dataType: 'string',
     }];
     const wrapper = mount(
       <ContextWrapper formFieldsMapper={{
-        [components.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div { ...props }>TextField</div>,
+        [componentTypes.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div { ...props }>TextField</div>,
       }}>
         { renderForm(formFields) }
       </ContextWrapper>
@@ -89,17 +90,17 @@ describe('renderForm function', () => {
 
   it('should correctly assign required validator with custom message', () => {
     const formFields = [{
-      component: components.TEXT_FIELD,
+      component: componentTypes.TEXT_FIELD,
       name: 'foo',
       dataType: 'string',
       validate: [{
-        type: validators.REQUIRED,
+        type: validatorTypes.REQUIRED,
         message: 'Bar',
       }],
     }];
     const wrapper = mount(
       <ContextWrapper formFieldsMapper={{
-        [components.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div { ...props }>TextField</div>,
+        [componentTypes.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div { ...props }>TextField</div>,
       }}>
         { renderForm(formFields) }
       </ContextWrapper>
@@ -111,7 +112,7 @@ describe('renderForm function', () => {
   it('should correctly assign function validator with custom message and fail', () => {
     const cannotBeOdd = value => value % 2 === 0 ? undefined : 'Odd';
     const formFields = [{
-      component: components.TEXT_FIELD,
+      component: componentTypes.TEXT_FIELD,
       name: 'foo',
       dataType: 'string',
       validate: [
@@ -120,7 +121,7 @@ describe('renderForm function', () => {
     }];
     const wrapper = mount(
       <ContextWrapper formFieldsMapper={{
-        [components.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div { ...props }>TextField</div>,
+        [componentTypes.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div { ...props }>TextField</div>,
       }}>
         { renderForm(formFields) }
       </ContextWrapper>
@@ -132,7 +133,7 @@ describe('renderForm function', () => {
   it('should correctly assign function validator with custom message and pass', () => {
     const cannotBeEven = value => value % 2 === 0 ? 'Even' : undefined;
     const formFields = [{
-      component: components.TEXT_FIELD,
+      component: componentTypes.TEXT_FIELD,
       name: 'foo',
       dataType: 'string',
       validate: [
@@ -141,7 +142,7 @@ describe('renderForm function', () => {
     }];
     const wrapper = mount(
       <ContextWrapper formFieldsMapper={{
-        [components.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div { ...props }>TextField</div>,
+        [componentTypes.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div { ...props }>TextField</div>,
       }}>
         { renderForm(formFields) }
       </ContextWrapper>
@@ -599,9 +600,9 @@ describe('renderForm function', () => {
         <FormRenderer
           layoutMapper={ layoutMapper }
           formFieldsMapper={{
-            [components.TEXT_FIELD]: TextField,
+            [componentTypes.TEXT_FIELD]: TextField,
           }}
-          schema={ formFields(undefined, components.TEXT_FIELD) }
+          schema={ formFields(undefined, componentTypes.TEXT_FIELD) }
           onSubmit={ jest.fn() }
         />
       );
@@ -621,9 +622,9 @@ describe('renderForm function', () => {
         <FormRenderer
           layoutMapper={ layoutMapper }
           formFieldsMapper={{
-            [components.TEXT_FIELD]: TextField,
+            [componentTypes.TEXT_FIELD]: TextField,
           }}
-          schema={ formFields(undefined, components.TEXT_FIELD) }
+          schema={ formFields(undefined, componentTypes.TEXT_FIELD) }
           onSubmit={ jest.fn() }
           clearOnUnmount
         />
@@ -656,9 +657,9 @@ describe('renderForm function', () => {
           onStateUpdate={ onStateUpdate }
           layoutMapper={ layoutMapper }
           formFieldsMapper={{
-            [components.TEXT_FIELD]: TextField,
+            [componentTypes.TEXT_FIELD]: TextField,
           }}
-          schema={{ fields: [{ component: components.TEXT_FIELD, name: 'foo', label: 'bar' }]}}
+          schema={{ fields: [{ component: componentTypes.TEXT_FIELD, name: 'foo', label: 'bar' }]}}
           onSubmit={ jest.fn() }
           clearOnUnmount
         />
@@ -729,7 +730,7 @@ describe('renderForm function', () => {
         <FormRenderer
           layoutMapper={ layoutMapper }
           formFieldsMapper={{
-            [components.TEXT_FIELD]: TextField,
+            [componentTypes.TEXT_FIELD]: TextField,
           }}
           schema={ formFields(SET_INITIALIZE_ON_MOUNT) }
           onSubmit={ jest.fn() }
@@ -760,7 +761,7 @@ describe('renderForm function', () => {
         <FormRenderer
           layoutMapper={ layoutMapper }
           formFieldsMapper={{
-            [components.TEXT_FIELD]: TextField,
+            [componentTypes.TEXT_FIELD]: TextField,
           }}
           schema={ formFields(UNSET_INITIALIZE_ON_MOUNT) }
           onSubmit={ jest.fn() }
@@ -791,7 +792,7 @@ describe('renderForm function', () => {
         <FormRenderer
           layoutMapper={ layoutMapper }
           formFieldsMapper={{
-            [components.TEXT_FIELD]: TextField,
+            [componentTypes.TEXT_FIELD]: TextField,
           }}
           schema={ formFields(SET_INITIALIZE_ON_MOUNT, SCHEMA_INITIAL_VALUE) }
           onSubmit={ jest.fn() }
@@ -820,7 +821,7 @@ describe('renderForm function', () => {
         <FormRenderer
           layoutMapper={ layoutMapper }
           formFieldsMapper={{
-            [components.TEXT_FIELD]: TextField,
+            [componentTypes.TEXT_FIELD]: TextField,
           }}
           schema={ formFields(SET_INITIALIZE_ON_MOUNT, SCHEMA_INITIAL_VALUE) }
           onSubmit={ jest.fn() }

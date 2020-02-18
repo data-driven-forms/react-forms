@@ -1,8 +1,10 @@
 import DefaultSchemaError from './schema-errors';
 import isValidComponent from './isValidComponent';
-import { validators, components, dataTypes } from '../constants';
+import componentTypes from '../components/component-types';
+import validatorTypes from '../components/validator-types';
+import dataTypes from '../components/data-types';
 
-const componentBlackList = [ components.FIELD_ARRAY, 'tab-item' ];
+const componentBlackList = [ componentTypes.FIELD_ARRAY, 'tab-item' ];
 
 const checkFieldsArray = (obj, objectKey) => {
   if (!obj.hasOwnProperty('fields')) {
@@ -94,11 +96,11 @@ const checkValidators = (validate, fieldName) => {
       `);
       }
 
-      if (!Object.values(validators).includes(validator.type)) {
+      if (!Object.values(validatorTypes).includes(validator.type)) {
         throw new DefaultSchemaError(`
         Error occured in field definition with name: "${fieldName}".
         Field validator at index: ${index} does not have correct "type" property!
-        Received "${validator.type}", expected one of: [${Object.values(validators)}].
+        Received "${validator.type}", expected one of: [${Object.values(validatorTypes)}].
       `);
       }
     }
@@ -127,8 +129,8 @@ const iterateOverFields = (fields, formFieldsMapper, layoutMapper, parent = {}) 
       return iterateOverFields(field, formFieldsMapper, layoutMapper);
     }
 
-    if (parent.component !== components.WIZARD){
-      if (parent.component !== components.WIZARD && !field.hasOwnProperty('component')) {
+    if (parent.component !== componentTypes.WIZARD){
+      if (parent.component !== componentTypes.WIZARD && !field.hasOwnProperty('component')) {
         throw new DefaultSchemaError(`Each fields item must have "component" property!`);
       }
 

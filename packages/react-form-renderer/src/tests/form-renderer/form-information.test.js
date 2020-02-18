@@ -1,9 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import FormRenderer from '../../form-renderer';
-import { layoutComponents } from '../../constants';
-import RendererContext from '../../form-renderer/renderer-context';
+import FormRenderer from '../../components/form-renderer';
+import RendererContext from '../../components/renderer-context';
+import layoutComponentTypes from '../../components/layout-component-types';
 
 describe('<FormControls />', () => {
   let initialProps;
@@ -19,11 +19,11 @@ describe('<FormControls />', () => {
     formFieldsMapper = {};
 
     layoutMapper = {
-      [layoutComponents.BUTTON]: ({ label, ...props }) => <button { ...props }>{ label }</button>,
-      [layoutComponents.BUTTON_GROUP]: ({ children, ...props }) => <div { ...props }>{ children }</div>,
-      [layoutComponents.TITLE]: ({ children }) => <h1>{ children }</h1>,
-      [layoutComponents.DESCRIPTION]: ({ children }) => <div>{ children }</div>,
-      [layoutComponents.FORM_WRAPPER]: ({ children }) => <form>{ children }</form>,
+      [layoutComponentTypes.BUTTON]: ({ label, ...props }) => <button { ...props }>{ label }</button>,
+      [layoutComponentTypes.BUTTON_GROUP]: ({ children, ...props }) => <div { ...props }>{ children }</div>,
+      [layoutComponentTypes.TITLE]: ({ children }) => <h1>{ children }</h1>,
+      [layoutComponentTypes.DESCRIPTION]: ({ children }) => <div>{ children }</div>,
+      [layoutComponentTypes.FORM_WRAPPER]: ({ children }) => <form>{ children }</form>,
     };
 
     ContextWrapper = ({ children, ...props }) => (

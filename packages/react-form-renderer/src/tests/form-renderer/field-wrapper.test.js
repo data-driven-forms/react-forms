@@ -4,7 +4,7 @@ import { componentTypes } from '@data-driven-forms/react-form-renderer';
 import { Form } from 'react-final-form';
 
 import FieldWrapper from '../../form-renderer/field-wrapper';
-import FieldProvider from '../../form-renderer/field-provider';
+import FieldProvider from '../../components/field-provider';
 
 describe('fieldWrapper', () => {
   const Component = (props) => <div>{ JSON.stringify(props, null, 2) }</div>;

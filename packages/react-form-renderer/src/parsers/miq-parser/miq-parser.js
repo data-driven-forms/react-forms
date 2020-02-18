@@ -1,5 +1,6 @@
-import { components, validators } from '../../constants';
 import { neededAttributes, neededFalseAttributes, componentMap } from './constants';
+import validatorTypes from '../../components/validator-types';
+import componentTypes from '../../components/component-types';
 
 const getAttributes = (field, newField, attributes, boolValue) => {
   attributes.forEach((info) => {
@@ -36,7 +37,7 @@ const miqParser = (
 
         if (field.validator_rule) {
           newField.validate = [{
-            type: validators.PATTERN_VALIDATOR,
+            type: validatorTypes.PATTERN_VALIDATOR,
             pattern: field.validator_rule,
           }];
         }
@@ -44,14 +45,14 @@ const miqParser = (
         if (field.required) {
           newField.validate = newField.validate || [];
           newField.validate.push({
-            type: validators.REQUIRED,
+            type: validatorTypes.REQUIRED,
           });
         }
 
         newField.component = componentsMap[field.type];
 
         if (field.default_value) {
-          if (newField.component === components.CHECKBOX) {
+          if (newField.component === componentTypes.CHECKBOX) {
             defaultValues[field.name] = 'true';
           } else {
             defaultValues[field.name] = field.default_value;
@@ -88,7 +89,7 @@ const miqParser = (
         title: group.label,
         name: group.id,
         fields: fieldsArray,
-        component: components.SUB_FORM,
+        component: componentTypes.SUB_FORM,
       });
     });
     formTabs.push({
@@ -96,7 +97,7 @@ const miqParser = (
       description: tab.description,
       name: tab.id,
       fields: groups,
-      component: components.TAB_ITEM,
+      component: componentTypes.TAB_ITEM,
     });
   });
 
@@ -105,7 +106,7 @@ const miqParser = (
     description,
     fields: [{
       fields: formTabs,
-      component: components.TABS,
+      component: componentTypes.TABS,
       name,
     }],
   };

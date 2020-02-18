@@ -1,7 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import FormRenderer, { componentTypes } from '../../';
+import FormRenderer from '../../components/form-renderer';
 import { layoutMapper } from '../../../../../__mocks__/mock-layout-mapper';
+import componentTypes from '../../components/component-types';
 
 const DataTypeInput = ({ input, dataType: _dataType, type, label }) => (
   <div>

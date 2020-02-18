@@ -1,13 +1,13 @@
-import { components } from '../../constants';
+import componentTypes from '../../components/component-types';
 
 export const componentMap = {
-  DialogFieldTextBox: components.TEXT_FIELD,
-  DialogFieldRadioButton: components.RADIO,
-  DialogFieldCheckBox: components.CHECKBOX,
-  DialogFieldTextAreaBox: components.TEXTAREA_FIELD,
-  DialogFieldDropDownList: components.SELECT_COMPONENT,
-  DialogFieldDateControl: components.DATE_PICKER,
-  DialogFieldDateTimeControl: components.TIME_PICKER,
+  DialogFieldTextBox: componentTypes.TEXT_FIELD,
+  DialogFieldRadioButton: componentTypes.RADIO,
+  DialogFieldCheckBox: componentTypes.CHECKBOX,
+  DialogFieldTextAreaBox: componentTypes.TEXTAREA_FIELD,
+  DialogFieldDropDownList: componentTypes.SELECT_COMPONENT,
+  DialogFieldDateControl: componentTypes.DATE_PICKER,
+  DialogFieldDateTimeControl: componentTypes.TIME_PICKER,
 };
 
 // for true values
