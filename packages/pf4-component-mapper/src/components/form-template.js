@@ -9,7 +9,7 @@ import { Form } from '@patternfly/react-core/dist/js/components/Form/Form';
 import { ActionGroup } from '@patternfly/react-core/dist/js/components/Form/ActionGroup';
 import { Button as PF4Button } from '@patternfly/react-core/dist/js/components/Button/Button';
 
-import './layout-components-styles.scss';
+import './form-template.scss';
 
 export const Button = ({ label, bsStyle, children, disabled, ...props }) => (
   <PF4Button variant={bsStyle || 'secondary'} isDisabled={disabled} {...props}>
