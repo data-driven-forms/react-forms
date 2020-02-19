@@ -31,7 +31,7 @@ const GetStartedForm = () => (
   <div className="pf4">
     <FormRender
       formFieldsMapper={ formFieldsMapper }
-      layoutMapper={ layoutMapper }
+      formTemplate={ formTemplate }
       schema={ schema }
       onSubmit={ console.log }
       onCancel={ () => console.log('Cancel action') }

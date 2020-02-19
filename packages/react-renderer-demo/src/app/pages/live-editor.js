@@ -504,7 +504,7 @@ const LiveEditor = () => {
     }
 
     try {
-      defaultSchemaValidator(schema, mappers.mappers.pf4.formFieldsMapper, mappers.mappers.pf4.layoutMapper);
+      defaultSchemaValidator(schema, mappers.mappers.pf4.formFieldsMapper);
       setState(state => ({ ...state, parsedSchema: schema }));
     } catch (error) {
       console.warn('not correct json schema', error);
@@ -565,7 +565,6 @@ const LiveEditor = () => {
                 <div className="pf4">
                   <FormRenderer
                     formFieldsMapper={ mappers.mappers.pf4.formFieldsMapper }
-                    layoutMapper={ mappers.mappers.pf4.layoutMapper }
                     schema={ parsedSchema }
                     onSubmit={ console.log }
                     onCancel={ () => console.log('Cancel clicked') }

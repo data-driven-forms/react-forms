@@ -65,12 +65,11 @@ const Forms = ({ mappers }) => {
 
           <div className={ activeMapper.value } style={{ padding: 16 }}>
             <FormRenderer
-              layoutMapper={ mappers[activeMapper.value].layoutMapper }
+              formTemplate={ mappers[activeMapper.value].layoutMapper({ showFormControls: activeSchema !== 'wizard' }) }
               formFieldsMapper={ mappers[activeMapper.value].formFieldsMapper }
               { ...schemas[activeSchema] }
               onSubmit={ console.log }
               onCancel={ () => console.log('action canceled') }
-              showFormControls={ activeSchema !== 'wizard' }
             />
           </div>
         </Paper>

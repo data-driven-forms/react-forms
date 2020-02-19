@@ -1,7 +1,6 @@
 import React from 'react';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
-import { layoutMapper, formFieldsMapper } from '@data-driven-forms/pf4-component-mapper';
-
+import { formTemplate, formFieldsMapper } from '@data-driven-forms/pf4-component-mapper';
 const schema = {
   title: 'Start typing',
   fields: [{
@@ -16,7 +15,7 @@ const schema = {
 const CustomValidator = () => (
   <div className="pf4">
     <FormRenderer
-      layoutMapper={ layoutMapper }
+      formTemplate={ formTemplate }
       formFieldsMapper={ formFieldsMapper }
       schema={ schema }
       onSubmit={ console.log }
