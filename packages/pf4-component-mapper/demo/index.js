@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import miqSchema from './demo-schemas/miq-schema';
 import { uiArraySchema, arraySchema, array1Schema, schema, uiSchema, conditionalSchema, arraySchemaDDF } from './demo-schemas/widget-schema';
-import { componentMapper, layoutMapper } from '../src';
+import { componentMapper, formTemplate } from '../src';
 import { Title, Button, Toolbar, ToolbarGroup } from '@patternfly/react-core';
 import { wizardSchema, wizardSchemaWithFunction, wizardSchemaSimple, wizardSchemaSubsteps, wizardSchemaMoreSubsteps } from './demo-schemas/wizard-schema';
 import sandboxSchema from './demo-schemas/sandbox';
@@ -48,8 +48,8 @@ class App extends React.Component {
                     ...componentMapper,
                     summary: Summary
                 }}
+                formTemplate={formTemplate({showFormControls: this.state.additionalOptions.showFormControls})}
                 onCancel={console.log}
-                layoutMapper={layoutMapper}
                 schema={this.state.schema}
                 uiSchema={this.state.ui}
                 {...this.state.additionalOptions}
@@ -63,7 +63,7 @@ class App extends React.Component {
                         summary: Summary
                     }}
                     onCancel={() => console.log('Cancel action')}
-                    layoutMapper={layoutMapper}
+                    formTemplate={formTemplate({showFormControls: this.state.additionalOptions.showFormControls})}
                     schema={wizardSchemaWithFunction}
                     {...this.state.additionalOptions}
                     />
@@ -75,8 +75,8 @@ class App extends React.Component {
                         summary: Summary
                     }}
                     onCancel={() => console.log('Cancel action')}
-                    layoutMapper={layoutMapper}
                     schema={wizardSchemaSubsteps}
+                    formTemplate={formTemplate({showFormControls: this.state.additionalOptions.showFormControls})}
                     {...this.state.additionalOptions}
                     />
                 <div>More substep</div>
@@ -87,8 +87,8 @@ class App extends React.Component {
                         summary: Summary
                     }}
                     onCancel={() => console.log('Cancel action')}
-                    layoutMapper={layoutMapper}
                     schema={wizardSchemaMoreSubsteps}
+                    formTemplate={formTemplate({showFormControls: this.state.additionalOptions.showFormControls})}
                     {...this.state.additionalOptions}
                     />
                 <div>Simple wizard</div>
@@ -99,8 +99,8 @@ class App extends React.Component {
                         summary: Summary
                     }}
                     onCancel={() => console.log('Cancel action')}
-                    layoutMapper={layoutMapper}
                     schema={wizardSchemaSimple}
+                    formTemplate={formTemplate({showFormControls: this.state.additionalOptions.showFormControls})}
                     {...this.state.additionalOptions}
                     />
             </>}

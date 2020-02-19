@@ -1,31 +1,36 @@
+import React from 'react';
 import { mount } from 'enzyme';
-import { Button, ActionGroup, TextContent, Text } from '@patternfly/react-core';
-import { layoutComponents } from '@data-driven-forms/react-form-renderer';
-import layoutMapper from '../components/layout-components';
+import { Button as PF4Button, ActionGroup, TextContent, Text } from '@patternfly/react-core';
+
+import { Button, Title, ButtonGroup, Description } from '../components/form-template';
 
 describe('Layout mapper', () => {
   it('should return PF4 Button', () => {
-    expect(mount(layoutMapper[layoutComponents.BUTTON]({})).find(Button)).toHaveLength(1);
+    expect(mount(<Button />).find(PF4Button)).toHaveLength(1);
   });
 
   it('should return PF4 ButtonGroup', () => {
-    expect(mount(layoutMapper[layoutComponents.BUTTON_GROUP]({})).find(ActionGroup)).toHaveLength(1);
+    expect(mount(<ButtonGroup />).find(ActionGroup)).toHaveLength(1);
   });
 
   it('should return PF4 Title', () => {
-    expect(mount(layoutMapper[layoutComponents.TITLE]({})).find(TextContent)).toHaveLength(1);
-    expect(mount(layoutMapper[layoutComponents.TITLE]({})).find(Text)).toHaveLength(1);
+    const wrapper = mount(<Title />);
+
+    expect(wrapper.find(TextContent)).toHaveLength(1);
+    expect(wrapper.find(Text)).toHaveLength(1);
   });
 
   it('should return PF4 Description', () => {
-    expect(mount(layoutMapper[layoutComponents.TITLE]({})).find(TextContent)).toHaveLength(1);
-    expect(mount(layoutMapper[layoutComponents.TITLE]({})).find(Text)).toHaveLength(1);
+    const wrapper = mount(<Description />);
+
+    expect(wrapper.find(TextContent)).toHaveLength(1);
+    expect(wrapper.find(Text)).toHaveLength(1);
   });
 
   it('should return PF4 Button disabled', () => {
-    const wrapper = mount(layoutMapper[layoutComponents.BUTTON]({ disabled: true }));
+    const wrapper = mount(<Button disabled={true} />);
 
-    expect(wrapper.find(Button)).toHaveLength(1);
-    expect(wrapper.find(Button).props().isDisabled).toEqual(true);
+    expect(wrapper.find(PF4Button)).toHaveLength(1);
+    expect(wrapper.find(PF4Button).props().isDisabled).toEqual(true);
   });
 });
