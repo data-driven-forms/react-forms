@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import FormRenderer from '../../components/form-renderer';
-import { layoutMapper } from '../../../../../__mocks__/mock-layout-mapper';
+import formTemplate from '../../../../../__mocks__/mock-form-template';
 import componentTypes from '../../components/component-types';
 
 const DataTypeInput = ({ input, dataType: _dataType, type, label }) => (
@@ -29,7 +29,7 @@ describe('data types', () => {
   let initialProps;
   beforeEach(() => {
     initialProps = {
-      layoutMapper,
+      formTemplate,
       formFieldsMapper: {
         [componentTypes.TEXT_FIELD]: DataTypeInput,
         'prop-component': PropComponent,

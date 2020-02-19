@@ -2,10 +2,7 @@
 
 exports[`<FormRenderer /> should render form from schema 1`] = `
 <FormRenderer
-  buttonClassName=""
-  buttonsLabels={Object {}}
   clearOnUnmount={false}
-  disableSubmit={Array []}
   formFieldsMapper={
     Object {
       "checkbox": [Function],
@@ -19,16 +16,8 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
       "time-picker": [Function],
     }
   }
+  formTemplate={[Function]}
   initialValues={Object {}}
-  layoutMapper={
-    Object {
-      "Button": [Function],
-      "ButtonGroup": [Function],
-      "Description": [Function],
-      "FormWrapper": [Function],
-      "Title": [Function],
-    }
-  }
   onSubmit={[MockFunction]}
   schema={
     Object {
@@ -44,7 +33,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
       ],
     }
   }
-  showFormControls={true}
 >
   <ReactFinalForm
     decorators={
@@ -78,10 +66,82 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
       }
     }
   >
-    <Component
-      onSubmit={[Function]}
+    <FormTemplate
+      FormSpy={[Function]}
+      formFields={
+        Array [
+          <React.Fragment>
+            <Context.Consumer>
+              [Function]
+            </Context.Consumer>
+          </React.Fragment>,
+          <React.Fragment>
+            <Context.Consumer>
+              [Function]
+            </Context.Consumer>
+          </React.Fragment>,
+        ]
+      }
+      formOptions={
+        Object {
+          "batch": [Function],
+          "blur": [Function],
+          "change": [Function],
+          "clearOnUnmount": false,
+          "clearedValue": undefined,
+          "concat": [Function],
+          "destroyOnUnregister": false,
+          "focus": [Function],
+          "getFieldState": [Function],
+          "getRegisteredFields": [Function],
+          "getState": [Function],
+          "handleSubmit": [Function],
+          "initialize": [Function],
+          "insert": [Function],
+          "isValidationPaused": [Function],
+          "move": [Function],
+          "onCancel": undefined,
+          "onReset": undefined,
+          "onSubmit": [MockFunction],
+          "pauseValidation": [Function],
+          "pop": [Function],
+          "pristine": true,
+          "push": [Function],
+          "registerField": [Function],
+          "remove": [Function],
+          "removeBatch": [Function],
+          "renderForm": [Function],
+          "reset": [Function],
+          "resetFieldState": [Function],
+          "resumeValidation": [Function],
+          "setConfig": [Function],
+          "shift": [Function],
+          "submit": [Function],
+          "subscribe": [Function],
+          "swap": [Function],
+          "unshift": [Function],
+          "update": [Function],
+          "valid": true,
+        }
+      }
+      schema={
+        Object {
+          "fields": Array [
+            Object {
+              "component": "text-field",
+              "name": "component1",
+            },
+            Object {
+              "component": "select-field",
+              "name": "secret",
+            },
+          ],
+        }
+      }
     >
-      <form>
+      <form
+        onSubmit={[Function]}
+      >
         <FormConditionWrapper>
           <FormFieldHideWrapper
             hideField={false}
@@ -108,6 +168,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                   "isValidationPaused": [Function],
                   "move": [Function],
                   "onCancel": undefined,
+                  "onReset": undefined,
                   "onSubmit": [MockFunction],
                   "pauseValidation": [Function],
                   "pop": [Function],
@@ -160,6 +221,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                     "isValidationPaused": [Function],
                     "move": [Function],
                     "onCancel": undefined,
+                    "onReset": undefined,
                     "onSubmit": [MockFunction],
                     "pauseValidation": [Function],
                     "pop": [Function],
@@ -207,6 +269,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                       "isValidationPaused": [Function],
                       "move": [Function],
                       "onCancel": undefined,
+                      "onReset": undefined,
                       "onSubmit": [MockFunction],
                       "pauseValidation": [Function],
                       "pop": [Function],
@@ -255,6 +318,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                         "isValidationPaused": [Function],
                         "move": [Function],
                         "onCancel": undefined,
+                        "onReset": undefined,
                         "onSubmit": [MockFunction],
                         "pauseValidation": [Function],
                         "pop": [Function],
@@ -340,6 +404,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                           "isValidationPaused": [Function],
                           "move": [Function],
                           "onCancel": undefined,
+                          "onReset": undefined,
                           "onSubmit": [MockFunction],
                           "pauseValidation": [Function],
                           "pop": [Function],
@@ -430,6 +495,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                   "isValidationPaused": [Function],
                   "move": [Function],
                   "onCancel": undefined,
+                  "onReset": undefined,
                   "onSubmit": [MockFunction],
                   "pauseValidation": [Function],
                   "pop": [Function],
@@ -482,6 +548,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                     "isValidationPaused": [Function],
                     "move": [Function],
                     "onCancel": undefined,
+                    "onReset": undefined,
                     "onSubmit": [MockFunction],
                     "pauseValidation": [Function],
                     "pop": [Function],
@@ -529,6 +596,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                       "isValidationPaused": [Function],
                       "move": [Function],
                       "onCancel": undefined,
+                      "onReset": undefined,
                       "onSubmit": [MockFunction],
                       "pauseValidation": [Function],
                       "pop": [Function],
@@ -577,6 +645,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                         "isValidationPaused": [Function],
                         "move": [Function],
                         "onCancel": undefined,
+                        "onReset": undefined,
                         "onSubmit": [MockFunction],
                         "pauseValidation": [Function],
                         "pop": [Function],
@@ -662,6 +731,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                           "isValidationPaused": [Function],
                           "move": [Function],
                           "onCancel": undefined,
+                          "onReset": undefined,
                           "onSubmit": [MockFunction],
                           "pauseValidation": [Function],
                           "pop": [Function],
@@ -726,94 +796,75 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
             </FieldWrapper>
           </FormFieldHideWrapper>
         </FormConditionWrapper>
-        <FormControls
-          buttonClassName=""
-          buttonOrder={
-            Array [
-              "submit",
-              "reset",
-              "cancel",
-            ]
-          }
-          canReset={false}
-          canSubmit={false}
-          cancelLabel="Cancel"
-          handleSubmit={[Function]}
-          resetLabel="Reset"
-          submitLabel="Submit"
-        >
-          <ReactFinalForm(FormSpy)>
-            <FormSpy
-              reactFinalForm={
-                Object {
-                  "batch": [Function],
-                  "blur": [Function],
-                  "change": [Function],
-                  "destroyOnUnregister": false,
-                  "focus": [Function],
-                  "getFieldState": [Function],
-                  "getRegisteredFields": [Function],
-                  "getState": [Function],
-                  "initialize": [Function],
-                  "isValidationPaused": [Function],
-                  "mutators": Object {
-                    "concat": [Function],
-                    "insert": [Function],
-                    "move": [Function],
-                    "pop": [Function],
-                    "push": [Function],
-                    "remove": [Function],
-                    "removeBatch": [Function],
-                    "shift": [Function],
-                    "swap": [Function],
-                    "unshift": [Function],
-                    "update": [Function],
-                  },
-                  "pauseValidation": [Function],
-                  "registerField": [Function],
-                  "reset": [Function],
-                  "resetFieldState": [Function],
-                  "resumeValidation": [Function],
-                  "setConfig": [Function],
-                  "submit": [Function],
-                  "subscribe": [Function],
-                }
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
+            reactFinalForm={
+              Object {
+                "batch": [Function],
+                "blur": [Function],
+                "change": [Function],
+                "destroyOnUnregister": false,
+                "focus": [Function],
+                "getFieldState": [Function],
+                "getRegisteredFields": [Function],
+                "getState": [Function],
+                "initialize": [Function],
+                "isValidationPaused": [Function],
+                "mutators": Object {
+                  "concat": [Function],
+                  "insert": [Function],
+                  "move": [Function],
+                  "pop": [Function],
+                  "push": [Function],
+                  "remove": [Function],
+                  "removeBatch": [Function],
+                  "shift": [Function],
+                  "swap": [Function],
+                  "unshift": [Function],
+                  "update": [Function],
+                },
+                "pauseValidation": [Function],
+                "registerField": [Function],
+                "reset": [Function],
+                "resetFieldState": [Function],
+                "resumeValidation": [Function],
+                "setConfig": [Function],
+                "submit": [Function],
+                "subscribe": [Function],
               }
+            }
+          >
+            <button
+              disabled={false}
+              type="submit"
             >
-              <Component
-                className=""
-              >
-                <div>
-                  <Component
-                    key="form-submit"
-                    label="Submit"
-                    type="submit"
-                    variant="primary"
-                  >
-                    <button
-                      type="submit"
-                      variant="primary"
-                    >
-                      Submit
-                    </button>
-                  </Component>
-                </div>
-              </Component>
-            </FormSpy>
-          </ReactFinalForm(FormSpy)>
-        </FormControls>
+              Submit
+            </button>
+            <button
+              disabled={true}
+              onClick={[Function]}
+              type="button"
+            >
+              Reset
+            </button>
+            <button
+              disabled={true}
+              onClick={[Function]}
+              type="button"
+            >
+              Cancel
+            </button>
+          </FormSpy>
+        </ReactFinalForm(FormSpy)>
       </form>
-    </Component>
+    </FormTemplate>
   </ReactFinalForm>
 </FormRenderer>
 `;
 
 exports[`<FormRenderer /> should render hidden field 1`] = `
 <FormRenderer
-  buttonClassName=""
-  buttonsLabels={Object {}}
   clearOnUnmount={false}
-  disableSubmit={Array []}
   formFieldsMapper={
     Object {
       "checkbox": [Function],
@@ -827,18 +878,9 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
       "time-picker": [Function],
     }
   }
+  formTemplate={[Function]}
   initialValues={Object {}}
-  layoutMapper={
-    Object {
-      "Button": [Function],
-      "ButtonGroup": [Function],
-      "Description": [Function],
-      "FormWrapper": [Function],
-      "Title": [Function],
-    }
-  }
   onSubmit={[MockFunction]}
-  renderFormButtons={[Function]}
   schema={
     Object {
       "fields": Array [
@@ -860,7 +902,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
       ],
     }
   }
-  showFormControls={true}
 >
   <ReactFinalForm
     decorators={
@@ -894,10 +935,89 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
       }
     }
   >
-    <Component
-      onSubmit={[Function]}
+    <FormTemplate
+      FormSpy={[Function]}
+      formFields={
+        Array [
+          <React.Fragment>
+            <Context.Consumer>
+              [Function]
+            </Context.Consumer>
+          </React.Fragment>,
+          <React.Fragment>
+            <Context.Consumer>
+              [Function]
+            </Context.Consumer>
+          </React.Fragment>,
+        ]
+      }
+      formOptions={
+        Object {
+          "batch": [Function],
+          "blur": [Function],
+          "change": [Function],
+          "clearOnUnmount": false,
+          "clearedValue": undefined,
+          "concat": [Function],
+          "destroyOnUnregister": false,
+          "focus": [Function],
+          "getFieldState": [Function],
+          "getRegisteredFields": [Function],
+          "getState": [Function],
+          "handleSubmit": [Function],
+          "initialize": [Function],
+          "insert": [Function],
+          "isValidationPaused": [Function],
+          "move": [Function],
+          "onCancel": undefined,
+          "onReset": undefined,
+          "onSubmit": [MockFunction],
+          "pauseValidation": [Function],
+          "pop": [Function],
+          "pristine": true,
+          "push": [Function],
+          "registerField": [Function],
+          "remove": [Function],
+          "removeBatch": [Function],
+          "renderForm": [Function],
+          "reset": [Function],
+          "resetFieldState": [Function],
+          "resumeValidation": [Function],
+          "setConfig": [Function],
+          "shift": [Function],
+          "submit": [Function],
+          "subscribe": [Function],
+          "swap": [Function],
+          "unshift": [Function],
+          "update": [Function],
+          "valid": true,
+        }
+      }
+      schema={
+        Object {
+          "fields": Array [
+            Object {
+              "component": Array [
+                "text-field",
+              ],
+              "label": "Visible",
+              "name": "visible",
+            },
+            Object {
+              "component": Array [
+                "text-field",
+              ],
+              "hideField": true,
+              "label": "Hidden",
+              "name": "hidden",
+            },
+          ],
+        }
+      }
     >
-      <form>
+      <form
+        onSubmit={[Function]}
+      >
         <FormConditionWrapper>
           <FormFieldHideWrapper
             hideField={false}
@@ -928,6 +1048,7 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                   "isValidationPaused": [Function],
                   "move": [Function],
                   "onCancel": undefined,
+                  "onReset": undefined,
                   "onSubmit": [MockFunction],
                   "pauseValidation": [Function],
                   "pop": [Function],
@@ -980,6 +1101,7 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                     "isValidationPaused": [Function],
                     "move": [Function],
                     "onCancel": undefined,
+                    "onReset": undefined,
                     "onSubmit": [MockFunction],
                     "pauseValidation": [Function],
                     "pop": [Function],
@@ -1048,6 +1170,7 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                     "isValidationPaused": [Function],
                     "move": [Function],
                     "onCancel": undefined,
+                    "onReset": undefined,
                     "onSubmit": [MockFunction],
                     "pauseValidation": [Function],
                     "pop": [Function],
@@ -1100,6 +1223,7 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                       "isValidationPaused": [Function],
                       "move": [Function],
                       "onCancel": undefined,
+                      "onReset": undefined,
                       "onSubmit": [MockFunction],
                       "pauseValidation": [Function],
                       "pop": [Function],
@@ -1136,153 +1260,68 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
             </div>
           </FormFieldHideWrapper>
         </FormConditionWrapper>
-        <FormControls
-          FormButtons={[Function]}
-          buttonClassName=""
-          buttonOrder={
-            Array [
-              "submit",
-              "reset",
-              "cancel",
-            ]
-          }
-          canReset={false}
-          canSubmit={false}
-          cancelLabel="Cancel"
-          handleSubmit={[Function]}
-          resetLabel="Reset"
-          submitLabel="Submit"
-        >
-          <ReactFinalForm(FormSpy)>
-            <FormSpy
-              reactFinalForm={
-                Object {
-                  "batch": [Function],
-                  "blur": [Function],
-                  "change": [Function],
-                  "destroyOnUnregister": false,
-                  "focus": [Function],
-                  "getFieldState": [Function],
-                  "getRegisteredFields": [Function],
-                  "getState": [Function],
-                  "initialize": [Function],
-                  "isValidationPaused": [Function],
-                  "mutators": Object {
-                    "concat": [Function],
-                    "insert": [Function],
-                    "move": [Function],
-                    "pop": [Function],
-                    "push": [Function],
-                    "remove": [Function],
-                    "removeBatch": [Function],
-                    "shift": [Function],
-                    "swap": [Function],
-                    "unshift": [Function],
-                    "update": [Function],
-                  },
-                  "pauseValidation": [Function],
-                  "registerField": [Function],
-                  "reset": [Function],
-                  "resetFieldState": [Function],
-                  "resumeValidation": [Function],
-                  "setConfig": [Function],
-                  "submit": [Function],
-                  "subscribe": [Function],
-                }
+        <ReactFinalForm(FormSpy)>
+          <FormSpy
+            reactFinalForm={
+              Object {
+                "batch": [Function],
+                "blur": [Function],
+                "change": [Function],
+                "destroyOnUnregister": false,
+                "focus": [Function],
+                "getFieldState": [Function],
+                "getRegisteredFields": [Function],
+                "getState": [Function],
+                "initialize": [Function],
+                "isValidationPaused": [Function],
+                "mutators": Object {
+                  "concat": [Function],
+                  "insert": [Function],
+                  "move": [Function],
+                  "pop": [Function],
+                  "push": [Function],
+                  "remove": [Function],
+                  "removeBatch": [Function],
+                  "shift": [Function],
+                  "swap": [Function],
+                  "unshift": [Function],
+                  "update": [Function],
+                },
+                "pauseValidation": [Function],
+                "registerField": [Function],
+                "reset": [Function],
+                "resetFieldState": [Function],
+                "resumeValidation": [Function],
+                "setConfig": [Function],
+                "submit": [Function],
+                "subscribe": [Function],
               }
+            }
+          >
+            <button
+              disabled={false}
+              type="submit"
             >
-              <FormControls
-                batch={[Function]}
-                blur={[Function]}
-                change={[Function]}
-                dirty={false}
-                dirtyFields={Object {}}
-                dirtyFieldsSinceLastSubmit={Object {}}
-                dirtySinceLastSubmit={false}
-                errors={Object {}}
-                focus={[Function]}
-                form={
-                  Object {
-                    "batch": [Function],
-                    "blur": [Function],
-                    "change": [Function],
-                    "destroyOnUnregister": false,
-                    "focus": [Function],
-                    "getFieldState": [Function],
-                    "getRegisteredFields": [Function],
-                    "getState": [Function],
-                    "initialize": [Function],
-                    "isValidationPaused": [Function],
-                    "mutators": Object {
-                      "concat": [Function],
-                      "insert": [Function],
-                      "move": [Function],
-                      "pop": [Function],
-                      "push": [Function],
-                      "remove": [Function],
-                      "removeBatch": [Function],
-                      "shift": [Function],
-                      "swap": [Function],
-                      "unshift": [Function],
-                      "update": [Function],
-                    },
-                    "pauseValidation": [Function],
-                    "registerField": [Function],
-                    "reset": [Function],
-                    "resetFieldState": [Function],
-                    "resumeValidation": [Function],
-                    "setConfig": [Function],
-                    "submit": [Function],
-                    "subscribe": [Function],
-                  }
-                }
-                hasSubmitErrors={false}
-                hasValidationErrors={false}
-                initialValues={Object {}}
-                initialize={[Function]}
-                invalid={false}
-                modified={Object {}}
-                mutators={
-                  Object {
-                    "concat": [Function],
-                    "insert": [Function],
-                    "move": [Function],
-                    "pop": [Function],
-                    "push": [Function],
-                    "remove": [Function],
-                    "removeBatch": [Function],
-                    "shift": [Function],
-                    "swap": [Function],
-                    "unshift": [Function],
-                    "update": [Function],
-                  }
-                }
-                pristine={true}
-                reset={[Function]}
-                submitFailed={false}
-                submitSucceeded={false}
-                submitting={false}
-                touched={Object {}}
-                valid={true}
-                validating={false}
-                values={Object {}}
-                visited={Object {}}
-              >
-                <div>
-                  <button
-                    id="custom-submit-button"
-                    onClick={[Function]}
-                    type="button"
-                  >
-                    Handle submit
-                  </button>
-                </div>
-              </FormControls>
-            </FormSpy>
-          </ReactFinalForm(FormSpy)>
-        </FormControls>
+              Submit
+            </button>
+            <button
+              disabled={true}
+              onClick={[Function]}
+              type="button"
+            >
+              Reset
+            </button>
+            <button
+              disabled={true}
+              onClick={[Function]}
+              type="button"
+            >
+              Cancel
+            </button>
+          </FormSpy>
+        </ReactFinalForm(FormSpy)>
       </form>
-    </Component>
+    </FormTemplate>
   </ReactFinalForm>
 </FormRenderer>
 `;

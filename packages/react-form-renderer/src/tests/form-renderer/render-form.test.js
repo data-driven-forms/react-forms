@@ -8,10 +8,9 @@ import RendererContext from '../../components/renderer-context';
 import FormRenderer from '../../components/form-renderer';
 import validatorTypes from '../../components/validator-types';
 import componentTypes from '../../components/component-types';
-import layoutComponentTypes from '../../components/layout-component-types';
+import formTemplate from '../../../../../__mocks__/mock-form-template';
 
 describe('renderForm function', () => {
-  let layoutMapper;
   let CustomComponent;
 
   const ContextWrapper = ({ children, ...props }) => (
@@ -29,13 +28,6 @@ describe('renderForm function', () => {
   );
 
   beforeEach(() => {
-    layoutMapper = {
-      [layoutComponentTypes.FORM_WRAPPER]: ({ children }) => <div>{ children }</div>,
-      [layoutComponentTypes.BUTTON]: ({ label, ...rest }) =>  <button { ...rest }>{ label }</button>,
-      [layoutComponentTypes.BUTTON_GROUP]: ({ children }) => <div>{ children }</div>,
-      [layoutComponentTypes.TITLE]: ({ children }) => <div>{ children }</div>,
-      [layoutComponentTypes.DESCRIPTION]: ({ children }) => <div>{ children }</div>,
-    };
     CustomComponent = ({ FieldProvider, dataType, formOptions, ...props }) => <div { ...props }>Custom component</div>;
   });
 
@@ -496,7 +488,7 @@ describe('renderForm function', () => {
     it('should clear values after unmount when set on fields', () => {
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
+          formTemplate={ formTemplate }
           formFieldsMapper={{
             'custom-component': ({ FieldProvider, ...props }) => <FieldProvider
               { ...props }
@@ -521,7 +513,7 @@ describe('renderForm function', () => {
     it('should clear values after unmount when set on form', () => {
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
+          formTemplate={ formTemplate }
           formFieldsMapper={{
             'custom-component': ({ FieldProvider, ...props }) => <FieldProvider
               { ...props }
@@ -547,7 +539,7 @@ describe('renderForm function', () => {
     it('should not clear values after unmount when not set', () => {
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
+          formTemplate={ formTemplate }
           formFieldsMapper={{
             'custom-component': ({ FieldProvider, ...props }) => <FieldProvider
               { ...props }
@@ -572,7 +564,7 @@ describe('renderForm function', () => {
     it('should not clear values after unmount when set in form and not in fields', () => {
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
+          formTemplate={ formTemplate }
           formFieldsMapper={{
             'custom-component': ({ FieldProvider, ...props }) => <FieldProvider
               { ...props }
@@ -598,7 +590,7 @@ describe('renderForm function', () => {
     it('should not clear values after unmount (default component)', () => {
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
+          formTemplate={ formTemplate }
           formFieldsMapper={{
             [componentTypes.TEXT_FIELD]: TextField,
           }}
@@ -620,7 +612,7 @@ describe('renderForm function', () => {
     it('should clear values after unmount (default component)', () => {
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
+          formTemplate={ formTemplate }
           formFieldsMapper={{
             [componentTypes.TEXT_FIELD]: TextField,
           }}
@@ -655,7 +647,7 @@ describe('renderForm function', () => {
       const wrapper = mount(
         <FormRenderer
           onStateUpdate={ onStateUpdate }
-          layoutMapper={ layoutMapper }
+          formTemplate={ formTemplate }
           formFieldsMapper={{
             [componentTypes.TEXT_FIELD]: TextField,
           }}
@@ -728,7 +720,7 @@ describe('renderForm function', () => {
 
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
+          formTemplate={ formTemplate }
           formFieldsMapper={{
             [componentTypes.TEXT_FIELD]: TextField,
           }}
@@ -759,7 +751,7 @@ describe('renderForm function', () => {
 
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
+          formTemplate={ formTemplate }
           formFieldsMapper={{
             [componentTypes.TEXT_FIELD]: TextField,
           }}
@@ -790,7 +782,7 @@ describe('renderForm function', () => {
 
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
+          formTemplate={ formTemplate }
           formFieldsMapper={{
             [componentTypes.TEXT_FIELD]: TextField,
           }}
@@ -819,7 +811,7 @@ describe('renderForm function', () => {
 
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
+          formTemplate={ formTemplate }
           formFieldsMapper={{
             [componentTypes.TEXT_FIELD]: TextField,
           }}

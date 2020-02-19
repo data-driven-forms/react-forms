@@ -3,13 +3,11 @@ import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { Form } from 'react-final-form';
 import FormRenderer from '../../components/form-renderer';
-import FormControls from '../../form-renderer/form-controls';
 import SchemaErrorComponent from '../../form-renderer/schema-error-component';
 import componentTypes from '../../components/component-types';
-import layoutComponentTypes from '../../components/layout-component-types';
+import formTemplate from '../../../../../__mocks__/mock-form-template';
 
 describe('<FormRenderer />', () => {
-  let layoutMapper;
   let formFieldsMapper;
   let initialProps;
   let schema;
@@ -29,14 +27,6 @@ describe('<FormRenderer />', () => {
       [componentTypes.SELECT]: () => <div className="nested-item">Select field</div>,
     };
 
-    layoutMapper = {
-      [layoutComponentTypes.BUTTON_GROUP]: ({ children }) => <div>{ children }</div>,
-      [layoutComponentTypes.BUTTON]: ({ label, bsStyle, ...rest }) => <button { ...rest }>{ label }</button>,
-      [layoutComponentTypes.FORM_WRAPPER]: ({ children }) => <form>{ children }</form>,
-      [layoutComponentTypes.TITLE]: ({ children }) => <div>{ children }</div>,
-      [layoutComponentTypes.DESCRIPTION]: ({ children }) => <div>{ children }</div>,
-    };
-
     schema = {
       fields: [{
         component: componentTypes.TEXT_FIELD,
@@ -49,7 +39,7 @@ describe('<FormRenderer />', () => {
 
     initialProps = {
       formFieldsMapper,
-      layoutMapper,
+      formTemplate,
       onSubmit: jest.fn(),
       schema,
     };
@@ -108,30 +98,9 @@ describe('<FormRenderer />', () => {
     expect(onReset).toHaveBeenCalledTimes(1);
   });
 
-  it('should not render form controls', () => {
-    const wrapper = mount(<FormRenderer { ...initialProps } showFormControls={ false }/>);
-    expect(wrapper.find(FormControls).first()).toHaveLength(0);
-  });
-
-  it('should render custom form controls', () => {
-    const onSubmit = jest.fn();
-    const FormControls = ({ form: { submit }}) => (
-      <div>
-        <button id="custom-submit-button" onClick={ submit } type="button">Handle submit</button>
-      </div>
-    );
-    const wrapper = mount(<FormRenderer { ...initialProps } onSubmit={ onSubmit } renderFormButtons={ FormControls }/>);
-    wrapper.find('#custom-submit-button').simulate('click');
-    expect(onSubmit).toHaveBeenCalled();
-  });
-
   it('should render hidden field', () => {
     const onSubmit = jest.fn();
-    const FormControls = ({ form: { submit }}) => (
-      <div>
-        <button id="custom-submit-button" onClick={ submit } type="button">Handle submit</button>
-      </div>
-    );
+
     const wrapper = mount(<FormRenderer
       { ...initialProps }
       schema={{
@@ -147,7 +116,6 @@ describe('<FormRenderer />', () => {
         }],
       }}
       onSubmit={ onSubmit }
-      renderFormButtons={ FormControls }
     />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
