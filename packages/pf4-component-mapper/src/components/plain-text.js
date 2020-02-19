@@ -6,13 +6,17 @@ import { TextContent } from '@patternfly/react-core/dist/js/components/Text/Text
 
 const PlainText = ({ label, name }) => (
   <TextContent>
-    { label.split('\n').map((paragraph, index) => <Text component={ TextVariants.p } key={ `${name}-${index}` }>{ paragraph }</Text>) }
+    {label.split('\n').map((paragraph, index) => (
+      <Text component={TextVariants.p} key={`${name}-${index}`}>
+        {paragraph}
+      </Text>
+    ))}
   </TextContent>
 );
 
 PlainText.propTypes = {
   label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
 };
 
 export default PlainText;

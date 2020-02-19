@@ -4,66 +4,91 @@ import babel from 'rollup-plugin-babel';
 import replace from 'rollup-plugin-replace';
 import nodeGlobals from 'rollup-plugin-node-globals';
 import { terser } from 'rollup-plugin-terser';
-import { sizeSnapshot } from 'rollup-plugin-size-snapshot';
 import { createFilter } from 'rollup-pluginutils';
 import sass from 'rollup-plugin-sass';
 import async from 'rollup-plugin-async';
+import sourcemaps from 'rollup-plugin-sourcemaps';
 
-const pf4Externals = createFilter([
-  'react',
-  'react-dom',
-  'prop-types',
-  '@data-driven-forms/react-form-renderer',
-  '@patternfly/react-core/**',
-  '@patternfly/react-icons/**',
-], null, { resolve: false });
+import glob from 'glob';
+import path from 'path';
+
+const outputPaths = glob.sync(path.resolve(__dirname, './src/components/*.js'));
+
+const pf4Externals = createFilter(
+  [
+    'react',
+    'react-dom',
+    'prop-types',
+    '@data-driven-forms/react-form-renderer',
+    '@data-driven-forms/react-form-renderer/dist/cjs/**',
+    '@patternfly/react-core/**',
+    '@patternfly/react-icons/**'
+  ],
+  null,
+  { resolve: false }
+);
 
 const globals = {
   react: 'React',
   'react-dom': 'ReactDOM',
   '@patternfly/react-core': '@patternfly/react-core',
   '@patternfly/react-icons': '@patternfly/react-icons',
-  '@data-driven-forms/react-form-renderer': '@data-driven-forms/react-form-renderer',
+  '@data-driven-forms/react-form-renderer': '@data-driven-forms/react-form-renderer'
 };
 
 const babelOptions = {
   exclude: /node_modules/,
   runtimeHelpers: true,
-  configFile: '../../babel.config.js',
+  configFile: '../../babel.config.js'
 };
 
 const commonjsOptions = {
   ignoreGlobal: true,
-  include: /node_modules/,
-  namedExports: {
-    '../react-form-renderer/dist/index.js': [ 'composeValidators' ],
-  },
+  include: /node_modules/
 };
 
-export default [{
-  input: './src/index.js',
-  output: {
-    file: './dist/index.js',
-    format: 'umd',
-    name: '@data-driven-forms/pf4-component-mapper',
-    exports: 'named',
-    globals,
-  },
-  external: pf4Externals,
-  plugins: [
-    async(),
-    nodeResolve(),
-    babel(babelOptions),
-    commonjs(commonjsOptions),
-    nodeGlobals(), // Wait for https://github.com/cssinjs/jss/pull/893
-    replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
-    sizeSnapshot({ snapshotPath: 'size-snapshot.json' }),
-    terser({
-      keep_classnames: true,
-      keep_fnames: true,
-    }),
-    sass({
-      insert: true,
-    }),
-  ],
-}];
+const plugins = [
+  async(),
+  nodeResolve(),
+  babel(babelOptions),
+  commonjs(commonjsOptions),
+  nodeGlobals(),
+  replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
+  terser({
+    keep_classnames: true,
+    keep_fnames: true
+  }),
+  sass({
+    insert: true
+  }),
+  sourcemaps()
+];
+
+export default [
+  ...['cjs', 'esm'].map((env) => ({
+    input: ['./src/index.js', ...outputPaths],
+    output: {
+      dir: `./dist/${env}`,
+      format: env,
+      name: '@data-driven-forms/pf4-component-mapper',
+      exports: 'named',
+      globals,
+      sourcemap: true
+    },
+    external: pf4Externals,
+    plugins
+  })),
+  {
+    input: './src/index.js',
+    output: {
+      file: `./dist/umd/index.js`,
+      format: 'umd',
+      name: '@data-driven-forms/pf4-component-mapper',
+      exports: 'named',
+      globals,
+      sourcemap: true
+    },
+    external: pf4Externals,
+    plugins
+  }
+];

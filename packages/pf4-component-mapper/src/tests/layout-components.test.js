@@ -1,7 +1,7 @@
 import { mount } from 'enzyme';
 import { Button, ActionGroup, TextContent, Text } from '@patternfly/react-core';
 import { layoutComponents } from '@data-driven-forms/react-form-renderer';
-import layoutMapper from '../form-fields/layout-components';
+import layoutMapper from '../components/layout-components';
 
 describe('Layout mapper', () => {
   it('should return PF4 Button', () => {

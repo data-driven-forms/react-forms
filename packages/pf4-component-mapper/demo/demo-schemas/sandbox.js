@@ -151,6 +151,13 @@ const output = {
                   label: 'Check Box',
                   title: 'Check Box',
                   component: components.CHECKBOX,
+                  options: [{
+                    value: 1,
+                    label: 'Option 1'
+                  }, {
+                    value: 2,
+                    label: 'Option 2'
+                  }]
                 },
                 {
                   name: 'check_box_2',
