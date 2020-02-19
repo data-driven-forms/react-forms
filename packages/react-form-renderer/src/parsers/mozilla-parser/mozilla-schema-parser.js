@@ -1,5 +1,4 @@
 import { setWith } from 'lodash';
-import { components, validators } from '../../constants';
 import {
   validatorBuilder,
   componentMapper,
@@ -15,6 +14,8 @@ import {
   createDynamicListWithFixed,
   buildConditionalFields,
 } from './mozilla-helpers';
+import validatorTypes from '../../components/validator-types';
+import componentTypes from '../../components/component-types';
 
 const keyReplacements = {
   multipleOf: 'step',
@@ -44,7 +45,7 @@ let defaultValues = {};
  */
 const prepareSubForm = ({ schema, fields, uiSchema, key }) => ({ name: key,
   title: uiSchema[key] && uiSchema[key]['ui:title'] || fields[key].title,
-  component: components.SUB_FORM,
+  component: componentTypes.SUB_FORM,
   autoFocus: autofocusField === key,
   validate: validatorBuilder({ schema, fields, key }),
   description: uiSchema[key] && uiSchema[key]['ui:description'],
@@ -103,7 +104,7 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) => Object.keys
   if (isAddableSubForm(fields, key)) {
     return {
       title: fields[key].title,
-      component: components.SUB_FORM,
+      component: componentTypes.SUB_FORM,
       ...convertSchema({ ...fields[key] },  // eslint-disable-line no-use-before-define
         uiSchema[key],
         key),
@@ -173,7 +174,7 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) => Object.keys
   if (field.dataType === 'number' || field.dataType === 'integer') {
     if (field.minimum) {
       field.validate = [ ...field.validate, {
-        type: validators.MIN_NUMBER_VALUE,
+        type: validatorTypes.MIN_NUMBER_VALUE,
         value: field.minimum,
       }];
       delete field.minimum;
@@ -181,7 +182,7 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) => Object.keys
 
     if (field.maximum) {
       field.validate = [ ...field.validate, {
-        type: validators.MAX_NUMBER_VALUE,
+        type: validatorTypes.MAX_NUMBER_VALUE,
         value: field.maximum,
       }];
       delete field.maximum;
@@ -205,14 +206,14 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) => Object.keys
      */
   if (field.anyOf) {
     field.enum = field.anyOf.map(({ title, ...rest }) => ({ label: title, value: rest.enum[0] }));
-    field.component = components.SELECT_COMPONENT;
+    field.component = componentTypes.SELECT_COMPONENT;
     delete field.anyOf;
   }
 
   /**
      * Add default option for select and define options if none were defined
      */
-  if (field.component === components.SELECT_COMPONENT || field.component === components.RADIO) {
+  if (field.component === componentTypes.SELECT_COMPONENT || field.component === componentTypes.RADIO) {
     if (!field.enum) {
       field.enum = [{ label: 'Yes', value: true }, { label: 'No', value: false }];
     }
@@ -220,7 +221,7 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) => Object.keys
     /**
          * Need update PF select component. No option to have empty default state
          */
-    if (!field.isRequired && field.component === components.SELECT_COMPONENT) {
+    if (!field.isRequired && field.component === componentTypes.SELECT_COMPONENT) {
       field.enum.unshift({
         label: 'Please Choose',
         disabled: field.isRequired,
@@ -306,7 +307,7 @@ const convertSchema = (schema, uiSchema = {}, key) => {
       meta.title = schema.title;
       nestedSchema = convertSchema(schema.items, uiSchema.items, key);
       nestedSchema.validate = validatorBuilder({ schema, fields: schema.items.properties, key });
-      nestedSchema.component = components.FIELD_ARRAY;
+      nestedSchema.component = componentTypes.FIELD_ARRAY;
       nestedSchema.itemDefault = Object.keys(schema.items.properties).reduce((acc, curr) => ({
         ...acc,
         [curr]: schema.items.properties[curr].default,
@@ -338,7 +339,7 @@ const convertSchema = (schema, uiSchema = {}, key) => {
          */
     } else if (schema.items && typeof schema.items === 'object' && schema.items.type === 'array') {
       nestedSchema.name = key;
-      nestedSchema.component = components.FIELD_ARRAY;
+      nestedSchema.component = componentTypes.FIELD_ARRAY;
       nestedSchema.fields = [ convertSchema({
         ...schema.items,
       }, uiSchema && uiSchema.items, `${key}`) ];
@@ -348,7 +349,7 @@ const convertSchema = (schema, uiSchema = {}, key) => {
          */
     } else if (schema.items && typeof schema.items === 'object') {
       setWith(defaultValues, key, schema.default, Object);
-      nestedSchema.component = components.FIELD_ARRAY;
+      nestedSchema.component = componentTypes.FIELD_ARRAY;
       nestedSchema.itemDefault = schema.itemDefault;
       nestedSchema.validate = validatorBuilder({ schema, fields: schema.items, key: `${key}` }),
       nestedSchema.fields = createFieldsFromObject({ properties: { items: schema.items }}, uiSchema, key);

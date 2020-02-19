@@ -1,23 +1,14 @@
-import { components } from '../constants';
+import componentTypes from '../components/component-types';
 
 const fieldComponents = [
-  components.TEXT_FIELD,
-  components.TEXTAREA_FIELD,
-  components.FIELD_ARRAY,
-  components.SELECT_COMPONENT,
-  components.CHECKBOX,
-  components.RADIO,
-  components.DATE_PICKER,
-  components.TIME_PICKER,
+  componentTypes.TEXT_FIELD,
+  componentTypes.TEXTAREA_FIELD,
+  componentTypes.FIELD_ARRAY,
+  componentTypes.SELECT_COMPONENT,
+  componentTypes.CHECKBOX,
+  componentTypes.RADIO,
+  componentTypes.DATE_PICKER,
+  componentTypes.TIME_PICKER,
 ];
 
 export const shouldWrapInField = componentType => fieldComponents.includes(componentType);
-
-export const composeValidators = (validators = []) => (value, allValues) =>
-  validators.reduce(
-    (error, validator) => error
-      || (typeof validator === 'function'
-        ? validator(value, allValues)
-        : undefined),
-    undefined,
-  );

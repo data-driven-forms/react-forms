@@ -2,8 +2,8 @@ import React, { Component, Children } from 'react';
 import { Field } from 'react-final-form';
 import PropTypes from 'prop-types';
 
-import enhancedOnChange from './enhanced-on-change';
-import { dataTypes } from '../constants';
+import enhancedOnChange from '../form-renderer/enhanced-on-change';
+import dataTypes from './data-types';
 
 class FieldProvider extends Component{
   componentDidMount() {

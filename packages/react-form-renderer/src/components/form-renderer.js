@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import createFocusDecorator from 'final-form-focus';
 
 import RendererContext from './renderer-context';
-import FormControls from './form-controls';
-import renderForm from './render-form';
+import FormControls from '../form-renderer/form-controls';
+import renderForm from '../form-renderer/render-form';
 import defaultSchemaValidator from '../parsers/default-schema-validator';
-import SchemaErrorComponent from './schema-error-component';
-import { renderTitle, renderDescription } from './form-information';
+import SchemaErrorComponent from '../form-renderer/schema-error-component';
+import { renderTitle, renderDescription } from '../form-renderer/form-information';
 
 const isDisabled = (disableStates, getState) => disableStates.map(item => getState()[item]).find(item => !!item);
 
@@ -105,8 +105,6 @@ const FormRenderer = ({
     />
   );};
 
-export default FormRenderer;
-
 FormRenderer.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func,
@@ -135,3 +133,5 @@ FormRenderer.defaultProps = {
   clearOnUnmount: false,
   buttonClassName: '',
 };
+
+export default FormRenderer;

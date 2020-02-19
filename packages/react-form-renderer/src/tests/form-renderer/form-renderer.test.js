@@ -2,10 +2,11 @@ import React from 'react';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { Form } from 'react-final-form';
-import FormRenderer from '../../form-renderer';
-import { components, layoutComponents } from '../../constants';
+import FormRenderer from '../../components/form-renderer';
 import FormControls from '../../form-renderer/form-controls';
 import SchemaErrorComponent from '../../form-renderer/schema-error-component';
+import componentTypes from '../../components/component-types';
+import layoutComponentTypes from '../../components/layout-component-types';
 
 describe('<FormRenderer />', () => {
   let layoutMapper;
@@ -15,33 +16,33 @@ describe('<FormRenderer />', () => {
 
   beforeEach(() => {
     formFieldsMapper = {
-      [components.TEXT_FIELD]: () => <div className="nested-item">Text field</div>,
-      [components.TEXTAREA_FIELD]: () => <div className="nested-item">Textarea field</div>,
-      [components.SELECT_COMPONENT]: () => <div className="nested-item">Select field</div>,
-      [components.CHECKBOX]: () => <div className="nested-item">checkbox field</div>,
-      [components.SUB_FORM]: () => <div className="nested-item">sub form</div>,
-      [components.RADIO]: () => <div className="nested-item">Radio field</div>,
-      [components.TABS]: () => <div className="nested-item">Tabs field</div>,
-      [components.DATE_PICKER]: () => <div className="nested-item">Date picker</div>,
-      [components.TIME_PICKER]: () => <div className="nested-item">Time picker</div>,
-      [components.TEXTAREA]: () => <div className="nested-item">Textarea field</div>,
-      [components.SELECT]: () => <div className="nested-item">Select field</div>,
+      [componentTypes.TEXT_FIELD]: () => <div className="nested-item">Text field</div>,
+      [componentTypes.TEXTAREA_FIELD]: () => <div className="nested-item">Textarea field</div>,
+      [componentTypes.SELECT_COMPONENT]: () => <div className="nested-item">Select field</div>,
+      [componentTypes.CHECKBOX]: () => <div className="nested-item">checkbox field</div>,
+      [componentTypes.SUB_FORM]: () => <div className="nested-item">sub form</div>,
+      [componentTypes.RADIO]: () => <div className="nested-item">Radio field</div>,
+      [componentTypes.TABS]: () => <div className="nested-item">Tabs field</div>,
+      [componentTypes.DATE_PICKER]: () => <div className="nested-item">Date picker</div>,
+      [componentTypes.TIME_PICKER]: () => <div className="nested-item">Time picker</div>,
+      [componentTypes.TEXTAREA]: () => <div className="nested-item">Textarea field</div>,
+      [componentTypes.SELECT]: () => <div className="nested-item">Select field</div>,
     };
 
     layoutMapper = {
-      [layoutComponents.BUTTON_GROUP]: ({ children }) => <div>{ children }</div>,
-      [layoutComponents.BUTTON]: ({ label, bsStyle, ...rest }) => <button { ...rest }>{ label }</button>,
-      [layoutComponents.FORM_WRAPPER]: ({ children }) => <form>{ children }</form>,
-      [layoutComponents.TITLE]: ({ children }) => <div>{ children }</div>,
-      [layoutComponents.DESCRIPTION]: ({ children }) => <div>{ children }</div>,
+      [layoutComponentTypes.BUTTON_GROUP]: ({ children }) => <div>{ children }</div>,
+      [layoutComponentTypes.BUTTON]: ({ label, bsStyle, ...rest }) => <button { ...rest }>{ label }</button>,
+      [layoutComponentTypes.FORM_WRAPPER]: ({ children }) => <form>{ children }</form>,
+      [layoutComponentTypes.TITLE]: ({ children }) => <div>{ children }</div>,
+      [layoutComponentTypes.DESCRIPTION]: ({ children }) => <div>{ children }</div>,
     };
 
     schema = {
       fields: [{
-        component: components.TEXT_FIELD,
+        component: componentTypes.TEXT_FIELD,
         name: 'component1',
       }, {
-        component: components.SELECT,
+        component: componentTypes.SELECT,
         name: 'secret',
       }],
     };
@@ -135,11 +136,11 @@ describe('<FormRenderer />', () => {
       { ...initialProps }
       schema={{
         fields: [{
-          component: [ components.TEXT_FIELD ],
+          component: [ componentTypes.TEXT_FIELD ],
           name: 'visible',
           label: 'Visible',
         }, {
-          component: [ components.TEXT_FIELD ],
+          component: [ componentTypes.TEXT_FIELD ],
           name: 'hidden',
           label: 'Hidden',
           hideField: true,

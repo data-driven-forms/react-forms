@@ -3,8 +3,8 @@ import { Form } from 'react-final-form';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import FormControls from '../../form-renderer/form-controls';
-import { layoutComponents } from '../../constants';
-import RendererContext from '../../form-renderer/renderer-context';
+import RendererContext from '../../components/renderer-context';
+import layoutComponentTypes from '../../components/layout-component-types';
 
 describe('<FormControls />', () => {
   let initialProps;
@@ -13,9 +13,9 @@ describe('<FormControls />', () => {
 
   beforeEach(() => {
     initialLayout = {
-      [layoutComponents.BUTTON]: ({ label, ...props }) => <button { ...props }>{ label }</button>,
-      [layoutComponents.COL]: ({ children, ...props }) => <div { ...props }>{ children }</div>,
-      [layoutComponents.BUTTON_GROUP]: ({ children, ...props }) => <div { ...props }>{ children }</div>,
+      [layoutComponentTypes.BUTTON]: ({ label, ...props }) => <button { ...props }>{ label }</button>,
+      [layoutComponentTypes.COL]: ({ children, ...props }) => <div { ...props }>{ children }</div>,
+      [layoutComponentTypes.BUTTON_GROUP]: ({ children, ...props }) => <div { ...props }>{ children }</div>,
     };
     ContextWrapper = ({ children, ...props }) => (
       <Form onSubmit={ jest.fn() }>

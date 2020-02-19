@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
-import { components, validators } from '../../constants/';
+import componentTypes from '../../components/component-types';
+import validatorTypes from '../../components/validator-types';
 
 const output = {
   title: 'Testing dialog',
@@ -20,23 +21,23 @@ const output = {
                   name: 'text_box_1',
                   label: 'Text Box',
                   title: 'Text Box',
-                  component: components.TEXT_FIELD,
+                  component: componentTypes.TEXT_FIELD,
                 },
                 {
                   name: 'text_box_2',
                   label: 'Text Box with help',
                   title: 'Text Box with help',
                   helperText: 'Helper text',
-                  component: components.TEXT_FIELD,
+                  component: componentTypes.TEXT_FIELD,
                 },
                 {
                   name: 'text_box_3',
                   label: 'Text Box required',
                   title: 'Text Box required',
                   isRequired: true,
-                  component: components.TEXT_FIELD,
+                  component: componentTypes.TEXT_FIELD,
                   validate: [
-                    { type: validators.REQUIRED },
+                    { type: validatorTypes.REQUIRED },
                   ],
                 },
                 {
@@ -44,20 +45,20 @@ const output = {
                   label: 'Text Box readonly',
                   title: 'Text Box readonly',
                   isReadOnly: true,
-                  component: components.TEXT_FIELD,
+                  component: componentTypes.TEXT_FIELD,
                 },
                 {
                   name: 'text_box_5',
                   label: 'Text Box default',
                   title: 'Text Box default',
-                  component: components.TEXT_FIELD,
+                  component: componentTypes.TEXT_FIELD,
                 },
                 {
                   name: 'text_box_6',
                   label: 'Text Box unvisible',
                   title: 'Text Box unvisible',
                   isVisible: false,
-                  component: components.TEXT_FIELD,
+                  component: componentTypes.TEXT_FIELD,
                 },
                 {
                   name: 'text_box_7',
@@ -65,18 +66,18 @@ const output = {
                   title: 'Text Box with validator',
                   validate: [
                     {
-                      type: validators.PATTERN_VALIDATOR,
+                      type: validatorTypes.PATTERN_VALIDATOR,
                       pattern: '[0-9]',
                     },
                   ],
-                  component: components.TEXT_FIELD,
+                  component: componentTypes.TEXT_FIELD,
                 },
                 {
                   name: 'text_box_8',
                   label: 'Text Box integer value',
                   title: 'Text Box integer value',
                   dataType: 'integer',
-                  component: components.TEXT_FIELD,
+                  component: componentTypes.TEXT_FIELD,
                   type: 'number',
                 },
                 {
@@ -84,10 +85,10 @@ const output = {
                   label: 'Text Box string value',
                   title: 'Text Box string value',
                   dataType: 'string',
-                  component: components.TEXT_FIELD,
+                  component: componentTypes.TEXT_FIELD,
                 },
               ],
-              component: components.SUB_FORM,
+              component: componentTypes.SUB_FORM,
             },
             {
               title: 'Text areas',
@@ -97,13 +98,13 @@ const output = {
                   name: 'textarea_box_1',
                   label: 'Text Area',
                   title: 'Text Area',
-                  component: components.TEXTAREA_FIELD,
+                  component: componentTypes.TEXTAREA_FIELD,
                 },
               ],
-              component: components.SUB_FORM,
+              component: componentTypes.SUB_FORM,
             },
           ],
-          component: components.TAB_ITEM,
+          component: componentTypes.TAB_ITEM,
         },
         {
           title: 'Tab 2',
@@ -118,16 +119,16 @@ const output = {
                   name: 'check_box_1',
                   label: 'Check Box',
                   title: 'Check Box',
-                  component: components.CHECKBOX,
+                  component: componentTypes.CHECKBOX,
                 },
                 {
                   name: 'check_box_2',
                   label: 'Check Box checked',
                   title: 'Check Box checked',
-                  component: components.CHECKBOX,
+                  component: componentTypes.CHECKBOX,
                 },
               ],
-              component: components.SUB_FORM,
+              component: componentTypes.SUB_FORM,
             },
             {
               title: 'Radios',
@@ -138,7 +139,7 @@ const output = {
                   label: 'Radio Button',
                   title: 'Radio Button',
                   dataType: 'string',
-                  component: components.RADIO,
+                  component: componentTypes.RADIO,
                   options: [
                     {
                       label: 'One',
@@ -159,7 +160,7 @@ const output = {
                   label: 'Radio Button sorted by',
                   title: 'Radio Button sorted by',
                   dataType: 'string',
-                  component: components.RADIO,
+                  component: componentTypes.RADIO,
                   options: [
                     {
                       label: 'One',
@@ -180,7 +181,7 @@ const output = {
                   label: 'Radio Button default',
                   title: 'Radio Button default',
                   dataType: 'string',
-                  component: components.RADIO,
+                  component: componentTypes.RADIO,
                   options: [
                     {
                       label: 'One',
@@ -197,10 +198,10 @@ const output = {
                   ],
                 },
               ],
-              component: components.SUB_FORM,
+              component: componentTypes.SUB_FORM,
             },
           ],
-          component: components.TAB_ITEM,
+          component: componentTypes.TAB_ITEM,
         },
         {
           title: 'Tab 3',
@@ -216,7 +217,7 @@ const output = {
                   label: 'Dropdown',
                   title: 'Dropdown',
                   dataType: 'string',
-                  component: components.SELECT_COMPONENT,
+                  component: componentTypes.SELECT_COMPONENT,
                   options: [
                     {
                       label: '<None>',
@@ -241,7 +242,7 @@ const output = {
                   label: 'Dropdown default value',
                   title: 'Dropdown default value',
                   dataType: 'string',
-                  component: components.SELECT_COMPONENT,
+                  component: componentTypes.SELECT_COMPONENT,
                   options: [
                     {
                       label: '<None>',
@@ -266,7 +267,7 @@ const output = {
                   label: 'Dropdown multiselect',
                   title: 'Dropdown multiselect',
                   dataType: 'string',
-                  component: components.SELECT_COMPONENT,
+                  component: componentTypes.SELECT_COMPONENT,
                   multi: true,
                   options: [
                     {
@@ -292,7 +293,7 @@ const output = {
                   label: 'Dropdown sort by value',
                   title: 'Dropdown sort by value',
                   dataType: 'string',
-                  component: components.SELECT_COMPONENT,
+                  component: componentTypes.SELECT_COMPONENT,
                   options: [
                     {
                       label: '<None>',
@@ -313,10 +314,10 @@ const output = {
                   ],
                 },
               ],
-              component: components.SUB_FORM,
+              component: componentTypes.SUB_FORM,
             },
           ],
-          component: components.TAB_ITEM,
+          component: componentTypes.TAB_ITEM,
         },
         {
           title: 'Tab 4',
@@ -331,16 +332,16 @@ const output = {
                   name: 'date_control_1',
                   label: 'Datepicker',
                   title: 'Datepicker',
-                  component: components.DATE_PICKER,
+                  component: componentTypes.DATE_PICKER,
                 },
                 {
                   name: 'date_control_2',
                   label: 'Datepicker with past days',
                   title: 'Datepicker with past days',
-                  component: components.DATE_PICKER,
+                  component: componentTypes.DATE_PICKER,
                 },
               ],
-              component: components.SUB_FORM,
+              component: componentTypes.SUB_FORM,
             },
             {
               title: 'Timepickers',
@@ -350,19 +351,19 @@ const output = {
                   name: 'date_time_control_1',
                   label: 'Timepicker',
                   title: 'Timepicker',
-                  component: components.TIME_PICKER,
+                  component: componentTypes.TIME_PICKER,
                 },
                 {
                   name: 'date_time_control_2',
                   label: 'Timepicker with past days',
                   title: 'Timepicker with past days',
-                  component: components.TIME_PICKER,
+                  component: componentTypes.TIME_PICKER,
                 },
               ],
-              component: components.SUB_FORM,
+              component: componentTypes.SUB_FORM,
             },
           ],
-          component: components.TAB_ITEM,
+          component: componentTypes.TAB_ITEM,
         },
         {
           title: 'Mixed',
@@ -377,32 +378,32 @@ const output = {
                   name: 'text_box_10',
                   label: 'Text Box',
                   title: 'Text Box',
-                  component: components.TEXT_FIELD,
+                  component: componentTypes.TEXT_FIELD,
                 },
                 {
                   name: 'textarea_box_2',
                   label: 'Text Area',
                   title: 'Text Area',
-                  component: components.TEXTAREA_FIELD,
+                  component: componentTypes.TEXTAREA_FIELD,
                 },
                 {
                   name: 'check_box_3',
                   label: 'Check Box',
                   title: 'Check Box',
-                  component: components.CHECKBOX,
+                  component: componentTypes.CHECKBOX,
                 },
                 {
                   name: 'check_box_4',
                   label: 'Check Box',
                   title: 'Check Box',
-                  component: components.CHECKBOX,
+                  component: componentTypes.CHECKBOX,
                 },
                 {
                   name: 'dropdown_list_5',
                   label: 'Dropdown',
                   title: 'Dropdown',
                   dataType: 'string',
-                  component: components.SELECT_COMPONENT,
+                  component: componentTypes.SELECT_COMPONENT,
                   options: [
                     {
                       label: '<None>',
@@ -427,7 +428,7 @@ const output = {
                   label: 'Radio Button',
                   title: 'Radio Button',
                   dataType: 'string',
-                  component: components.RADIO,
+                  component: componentTypes.RADIO,
                   options: [
                     {
                       label: 'One',
@@ -447,16 +448,16 @@ const output = {
                   name: 'date_time_control_3',
                   label: 'Timepicker',
                   title: 'Timepicker',
-                  component: components.TIME_PICKER,
+                  component: componentTypes.TIME_PICKER,
                 },
               ],
-              component: components.SUB_FORM,
+              component: componentTypes.SUB_FORM,
             },
           ],
-          component: components.TAB_ITEM,
+          component: componentTypes.TAB_ITEM,
         },
       ],
-      component: components.TABS,
+      component: componentTypes.TABS,
       name: '57',
     },
   ],

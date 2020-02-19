@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormSpy } from 'react-final-form';
 import PropTypes from 'prop-types';
-import RendererContext from './renderer-context';
+import RendererContext from '../components/renderer-context';
 
 const completeButtons = buttonOrder => {
   const expectedOrder = [ ...buttonOrder ];

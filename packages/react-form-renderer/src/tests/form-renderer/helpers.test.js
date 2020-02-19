@@ -1,4 +1,5 @@
-import { composeValidators, shouldWrapInField } from '../../form-renderer/helpers';
+import { shouldWrapInField } from '../../form-renderer/helpers';
+import composeValidators from '../../components/compose-validators';
 
 describe('Form helpers', () => {
   describe('Compose validators helper', () => {

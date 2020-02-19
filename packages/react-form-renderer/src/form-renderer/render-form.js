@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { dataTypeValidator } from '../validators';
 import validatorMapper from '../validators/validator-mapper';
-import RendererContext from './renderer-context';
+import RendererContext from '../components/renderer-context';
 import Condition from './condition';
 import { memoize } from '../validators/helpers';
 import FieldWrapper from './field-wrapper';
