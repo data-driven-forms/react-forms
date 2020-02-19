@@ -38,7 +38,7 @@ const output = {
       component: componentTypes.TEXT_FIELD,
       clearedValue: 'override',
       validate: [
-        { type: validatorTypes.MIN_LENGTH, treshold: 12, message: 'bar' },
+        { type: validatorTypes.MIN_LENGTH, threshold: 12, message: 'bar' },
       ],
     },
     {

@@ -17,7 +17,7 @@ export const validatorBuilder = ({ schema, fields = {}, key }) => {
   }
 
   if (fields[key] && fields[key].minLength) {
-    result.push({ type: validatorTypes.MIN_LENGTH, treshold: fields[key].minLength });
+    result.push({ type: validatorTypes.MIN_LENGTH, threshold: fields[key].minLength });
     delete fields[key].minLength;
   }
 
@@ -26,7 +26,7 @@ export const validatorBuilder = ({ schema, fields = {}, key }) => {
   }
 
   if (schema.minItems) {
-    result.push({ type: validatorTypes.MIN_ITEMS_VALIDATOR, treshold: schema.minItems });
+    result.push({ type: validatorTypes.MIN_ITEMS_VALIDATOR, threshold: schema.minItems });
   }
 
   return result;
