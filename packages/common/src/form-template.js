@@ -106,7 +106,7 @@ const formTemplate = ({
   ...options
 }) => ({ schema: { title, description, label }, formFields, FormSpy, formOptions }) => (
   <FormWrapper onSubmit={formOptions.handleSubmit} {...formWrapperProps}>
-    {title || (label && <Title>{title || label}</Title>)}
+    {(title || label) && <Title>{title || label}</Title>}
     {description && <Description>{description}</Description>}
     {formFields}
     {showFormControls && (

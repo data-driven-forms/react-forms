@@ -5,7 +5,7 @@ import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 import Wizard from '../form-fields/wizzard/wizzard';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
-import { formFieldsMapper, layoutMapper } from '../';
+import { formFieldsMapper, formTemplate } from '../';
 
 describe('<Wizard />', () => {
   const cancelSpy = jest.fn();
@@ -220,9 +220,8 @@ describe('<Wizard />', () => {
       <FormRenderer
         schema={ conditionalSchema }
         formFieldsMapper={ formFieldsMapper }
-        layoutMapper={ layoutMapper }
+        formTemplate={ formTemplate({showFormControls: false}) }
         onCancel={ () => {} }
-        showFormControls={ false }
         onSubmit={ jest.fn() }
         initialValues={{ 'source-type': 'google' }}
       />
