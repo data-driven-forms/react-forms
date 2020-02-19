@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import miqSchema from './demo-schemas/miq-schema';
 import { uiArraySchema, arraySchema, array1Schema, schema, uiSchema, conditionalSchema, arraySchemaDDF } from './demo-schemas/widget-schema';
-import { formFieldsMapper, layoutMapper } from '../src';
+import { componentMapper, layoutMapper } from '../src';
 import { Title, Button, Toolbar, ToolbarGroup } from '@patternfly/react-core';
 import { wizardSchema, wizardSchemaWithFunction, wizardSchemaSimple, wizardSchemaSubsteps, wizardSchemaMoreSubsteps } from './demo-schemas/wizard-schema';
 import sandboxSchema from './demo-schemas/sandbox';
@@ -45,7 +45,7 @@ class App extends React.Component {
                     'async-drop-down': 'async-option-2'
                 }}
                 formFieldsMapper={{
-                    ...formFieldsMapper,
+                    ...componentMapper,
                     summary: Summary
                 }}
                 onCancel={console.log}
@@ -59,7 +59,7 @@ class App extends React.Component {
                 <FormRenderer
                     onSubmit={console.log}
                     formFieldsMapper={{
-                        ...formFieldsMapper,
+                        ...componentMapper,
                         summary: Summary
                     }}
                     onCancel={() => console.log('Cancel action')}
@@ -71,7 +71,7 @@ class App extends React.Component {
                 <FormRenderer
                     onSubmit={console.log}
                     formFieldsMapper={{
-                        ...formFieldsMapper,
+                        ...componentMapper,
                         summary: Summary
                     }}
                     onCancel={() => console.log('Cancel action')}
@@ -83,7 +83,7 @@ class App extends React.Component {
                 <FormRenderer
                     onSubmit={console.log}
                     formFieldsMapper={{
-                        ...formFieldsMapper,
+                        ...componentMapper,
                         summary: Summary
                     }}
                     onCancel={() => console.log('Cancel action')}
@@ -95,7 +95,7 @@ class App extends React.Component {
                 <FormRenderer
                     onSubmit={console.log}
                     formFieldsMapper={{
-                        ...formFieldsMapper,
+                        ...componentMapper,
                         summary: Summary
                     }}
                     onCancel={() => console.log('Cancel action')}

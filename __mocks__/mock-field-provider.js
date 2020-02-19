@@ -13,7 +13,7 @@ const MockFieldProvider = ({ input, render, meta, component, children, ...rest }
     return children({ ...rest, input: fieldInput, meta: fieldMeta });
   }
 
-  if (typeof component === 'object') {
+  if (typeof component === 'object' || typeof component === 'function') {
     return createElement(component, { ...rest, input: fieldInput, meta: fieldMeta, children });
   }
 

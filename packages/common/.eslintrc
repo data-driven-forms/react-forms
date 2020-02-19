@@ -21,7 +21,7 @@
     "it": true,
     "arguments": true
   },
-  "extends": ["react-app", "prettier", "eslint:recommended", "plugin:react/recommended"],
+  "extends": ["react-app", "eslint:recommended", "plugin:react/recommended", "plugin:prettier/recommended"],
   "env": {
     "es6": true,
     "browser": true,
@@ -31,10 +31,6 @@
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/display-name": "off",
-    "array-bracket-spacing": ["error", "always", {
-      "objectsInArrays": false
-    }],
-    "comma-dangle": [1, "always-multiline"],
     "comma-spacing": ["error", {
       "after": true
     }],
@@ -48,13 +44,6 @@
       "MemberExpression": 0,
       "ImportDeclaration": 1,
       "ObjectExpression": 1
-    }],
-    "react/jsx-curly-spacing": ["error", "always", {
-      "children": true,
-      "allowMultiline": false,
-      "spacing": {
-        "objectLiterals": "never"
-      }
     }],
     "key-spacing": "error",
     "keyword-spacing": "error",
@@ -95,6 +84,7 @@
     "space-infix-ops": "error",
     "wrap-iife": "error",
     "yoda": ["error", "never"],
-    "jsx-a11y/href-no-hash": "off"
+    "jsx-a11y/href-no-hash": "off",
+    "react/jsx-curly-spacing": "off"
   }
 }

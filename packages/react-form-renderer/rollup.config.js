@@ -6,26 +6,27 @@ import nodeGlobals from 'rollup-plugin-node-globals';
 import { terser } from 'rollup-plugin-terser';
 import glob from 'glob';
 import path from 'path';
+import sourcemaps from 'rollup-plugin-sourcemaps';
 
 const outputPaths = glob.sync(path.resolve(__dirname, './src/components/*.js'));
 
 const globals = {
   react: 'React',
-  'react-dom': 'ReactDOM',
+  'react-dom': 'ReactDOM'
 };
 
 const babelOptions = {
   exclude: /node_modules/,
   runtimeHelpers: true,
-  configFile: '../../babel.config.js',
+  configFile: '../../babel.config.js'
 };
 
 const commonjsOptions = {
   ignoreGlobal: true,
   include: /node_modules/,
   namedExports: {
-    './src/form-renderer/helpers': [ 'composeValidators' ],
-  },
+    './src/form-renderer/helpers': ['composeValidators']
+  }
 };
 
 function onwarn(warning) {
@@ -40,33 +41,38 @@ const plugins = [
   replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
   terser({
     keep_classnames: true,
-    keep_fnames: true,
+    keep_fnames: true
   }),
+  sourcemaps()
 ];
 
-export default [ ...[ 'cjs', 'esm' ].map(env => ({
-  onwarn,
-  input: [ './src/index.js', ...outputPaths ],
-  output: {
-    dir: `./dist/${env}`,
-    format: env,
-    name: '@data-driven-forms/react-form-renderer',
-    exports: 'named',
-    globals,
-  },
-  external: Object.keys(globals),
-  plugins,
-})), {
-  onwarn,
-  input: './src/index.js',
-  output: {
-    file: `./dist/umd/index.js`,
-    format: 'umd',
-    name: '@data-driven-forms/react-form-renderer',
-    exports: 'named',
-    globals,
-  },
-  external: Object.keys(globals),
-  plugins,
-
-}];
+export default [
+  ...['cjs', 'esm'].map((env) => ({
+    onwarn,
+    input: ['./src/index.js', ...outputPaths],
+    output: {
+      dir: `./dist/${env}`,
+      format: env,
+      name: '@data-driven-forms/react-form-renderer',
+      exports: 'named',
+      globals,
+      sourcemap: true
+    },
+    external: Object.keys(globals),
+    plugins
+  })),
+  {
+    onwarn,
+    input: './src/index.js',
+    output: {
+      file: `./dist/umd/index.js`,
+      format: 'umd',
+      name: '@data-driven-forms/react-form-renderer',
+      exports: 'named',
+      globals,
+      sourcemap: true
+    },
+    external: Object.keys(globals),
+    plugins
+  }
+];

@@ -2,7 +2,7 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
 
-import WizardStep, { RenderTitle } from '../../form-fields/wizard/wizard-step';
+import WizardStep, { RenderTitle } from '../../components/wizard/wizard-step';
 import FieldProvider from '../../../../../__mocks__/mock-field-provider';
 
 describe('<WizardStep />', () => {

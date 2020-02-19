@@ -1,24 +1,22 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import WizardNavigationClass from '../../form-fields/wizard/wizard-nav';
+import WizardNavigationClass from '../../components/wizard/wizard-nav';
 
 describe('WizardNav', () => {
   it('WizardNavigationClass rerender nav schema only when values are changed', () => {
-    const initialProps  = {
+    const initialProps = {
       activeStepIndex: 0,
       formOptions: { valid: true },
       maxStepIndex: 0,
       jumpToStep: jest.fn(),
-      navSchema: [
-        { title: 'step' },
-      ],
+      navSchema: [{ title: 'step' }],
       setPrevSteps: jest.fn(),
       values: { name: 'value 1' },
-      crossroads: [ 'name' ],
+      crossroads: ['name']
     };
 
-    const wrapper = mount(<WizardNavigationClass { ...initialProps }/>);
+    const wrapper = mount(<WizardNavigationClass {...initialProps} />);
 
     expect(initialProps.setPrevSteps).not.toHaveBeenCalled();
 
@@ -42,20 +40,18 @@ describe('WizardNav', () => {
   it('WizardNavigationClass change maxStepIndex to activeStepIndex when switching', () => {
     const activeStepIndex = 3;
 
-    const initialProps  = {
+    const initialProps = {
       activeStepIndex,
       formOptions: { valid: true },
       maxStepIndex: 5,
       jumpToStep: jest.fn(),
-      navSchema: [
-        { title: 'step' },
-      ],
+      navSchema: [{ title: 'step' }],
       setPrevSteps: jest.fn(),
       values: { name: 'value 1' },
-      crossroads: [ 'name' ],
+      crossroads: ['name']
     };
 
-    const wrapper = mount(<WizardNavigationClass { ...initialProps }/>);
+    const wrapper = mount(<WizardNavigationClass {...initialProps} />);
 
     expect(initialProps.setPrevSteps).not.toHaveBeenCalled();
 

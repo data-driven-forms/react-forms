@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FormFields should render Checkbox correctly 1`] = `
-<CheckboxField
+<Checkbox
   dataType="someDataType"
   id="someIdKey"
   input={
@@ -17,8 +17,7 @@ exports[`FormFields should render Checkbox correctly 1`] = `
     }
   }
 >
-  <FieldInterface
-    componentType="checkbox"
+  <SingleCheckbox
     dataType="someDataType"
     id="someIdKey"
     input={
@@ -33,18 +32,10 @@ exports[`FormFields should render Checkbox correctly 1`] = `
         "touched": false,
       }
     }
-    name="Name of the field"
   >
-    <FinalFormField
-      componentType="checkbox"
-      hideLabel={false}
+    <FormGroup
+      hideLabel={true}
       id="someIdKey"
-      input={
-        Object {
-          "name": "Name of the field",
-          "value": "",
-        }
-      }
       isRequired={false}
       meta={
         Object {
@@ -52,20 +43,20 @@ exports[`FormFields should render Checkbox correctly 1`] = `
           "touched": false,
         }
       }
-      name="Name of the field"
     >
       <FormGroup
         fieldId="someIdKey"
         helperTextInvalid={false}
         isRequired={false}
         isValid={true}
+        label={false}
       >
         <div
           className="pf-c-form__group"
         >
           <Checkbox
-            aria-label="Name of the field"
             className=""
+            dataType="someDataType"
             id="someIdKey"
             isChecked={false}
             isDisabled={false}
@@ -79,8 +70,8 @@ exports[`FormFields should render Checkbox correctly 1`] = `
             >
               <input
                 aria-invalid={false}
-                aria-label="Name of the field"
                 className="pf-c-check__input"
+                dataType="someDataType"
                 disabled={false}
                 id="someIdKey"
                 name="Name of the field"
@@ -92,13 +83,13 @@ exports[`FormFields should render Checkbox correctly 1`] = `
           </Checkbox>
         </div>
       </FormGroup>
-    </FinalFormField>
-  </FieldInterface>
-</CheckboxField>
+    </FormGroup>
+  </SingleCheckbox>
+</Checkbox>
 `;
 
 exports[`FormFields should render Checkbox with options correctly 1`] = `
-<CheckboxField
+<Checkbox
   FieldProvider={[Function]}
   dataType="someDataType"
   id="someIdKey"
@@ -131,9 +122,8 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
     ]
   }
 >
-  <FieldInterface
+  <MultipleChoiceList
     FieldProvider={[Function]}
-    componentType="checkbox"
     dataType="someDataType"
     id="someIdKey"
     input={
@@ -148,7 +138,6 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
         "touched": false,
       }
     }
-    name="Name of the field"
     options={
       Array [
         Object {
@@ -167,8 +156,10 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
     }
   >
     <MultipleChoiceList
+      Checkbox={[Function]}
       FieldProvider={[Function]}
-      componentType="checkbox"
+      Wrapper={[Function]}
+      dataType="someDataType"
       id="someIdKey"
       input={
         Object {
@@ -200,11 +191,8 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
         ]
       }
     >
-      <MultipleChoiceList
-        Checkbox={[Function]}
-        FieldProvider={[Function]}
-        Wrapper={[Function]}
-        componentType="checkbox"
+      <FieldProvider
+        dataType="someDataType"
         id="someIdKey"
         input={
           Object {
@@ -235,43 +223,45 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
             },
           ]
         }
+        render={[Function]}
+        validate={[Function]}
       >
-        <FieldProvider
-          componentType="checkbox"
-          id="someIdKey"
-          input={
-            Object {
-              "name": "Name of the field",
-              "value": "",
+        <div>
+          <MockFieldProvider
+            dataType="someDataType"
+            id="someIdKey"
+            input={
+              Object {
+                "name": "Foo",
+                "onChange": [MockFunction],
+              }
             }
-          }
-          meta={
-            Object {
-              "error": false,
-              "touched": false,
+            meta={
+              Object {
+                "error": false,
+                "touched": false,
+              }
             }
-          }
-          name="Name of the field"
-          options={
-            Array [
-              Object {
-                "label": "One",
-                "value": "1",
-              },
-              Object {
-                "label": "Two",
-                "value": "2",
-              },
-              Object {
-                "label": "Three",
-                "value": "3",
-              },
-            ]
-          }
-          render={[Function]}
-          validate={[Function]}
-        >
-          <div>
+            name="Name of the field"
+            options={
+              Array [
+                Object {
+                  "label": "One",
+                  "value": "1",
+                },
+                Object {
+                  "label": "Two",
+                  "value": "2",
+                },
+                Object {
+                  "label": "Three",
+                  "value": "3",
+                },
+              ]
+            }
+            render={[Function]}
+            validate={[Function]}
+          >
             <Wrapper
               error={false}
               meta={
@@ -282,11 +272,12 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
               }
               rest={
                 Object {
-                  "componentType": "checkbox",
+                  "children": undefined,
+                  "dataType": "someDataType",
                   "id": "someIdKey",
                   "input": Object {
-                    "name": "Name of the field",
-                    "value": "",
+                    "name": "Foo",
+                    "onChange": [MockFunction],
                   },
                   "name": "Name of the field",
                   "validate": [Function],
@@ -295,200 +286,273 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
               showError={false}
             >
               <FormGroup
-                fieldId="Name of the field"
-                helperTextInvalid={false}
-                isValid={true}
+                isRequired={false}
+                meta={
+                  Object {
+                    "error": false,
+                    "touched": false,
+                  }
+                }
               >
-                <div
-                  className="pf-c-form__group"
+                <FormGroup
+                  helperTextInvalid={false}
+                  isRequired={false}
+                  isValid={true}
                 >
-                  <FieldProvider
-                    id="someIdKey-1"
-                    key="1"
-                    label="One"
-                    name="Name of the field"
-                    render={[Function]}
-                    type="checkbox"
-                    value="1"
+                  <div
+                    className="pf-c-form__group"
                   >
-                    <div>
-                      <FinalCheckbox
-                        aria-label="One"
-                        id="someIdKey-1"
-                        label="One"
-                        name="Name of the field"
-                        onChange={[Function]}
-                        type="checkbox"
-                        value="1"
-                      >
-                        <Checkbox
-                          aria-label="One"
-                          className=""
+                    <FieldProvider
+                      id="someIdKey-1"
+                      key="1"
+                      label="One"
+                      name="Name of the field"
+                      render={[Function]}
+                      type="checkbox"
+                      value="1"
+                    >
+                      <div>
+                        <MockFieldProvider
                           id="someIdKey-1"
-                          isChecked={false}
-                          isDisabled={false}
-                          isValid={true}
+                          input={
+                            Object {
+                              "name": "Foo",
+                              "onChange": [MockFunction],
+                            }
+                          }
                           label="One"
+                          meta={
+                            Object {
+                              "error": false,
+                              "touched": false,
+                            }
+                          }
                           name="Name of the field"
-                          onChange={[Function]}
+                          render={[Function]}
                           type="checkbox"
                           value="1"
                         >
-                          <div
-                            className="pf-c-check"
+                          <FinalCheckbox
+                            aria-label="One"
+                            id="someIdKey-1"
+                            label="One"
+                            name="Name of the field"
+                            onChange={[Function]}
+                            type="checkbox"
+                            value="1"
                           >
-                            <input
-                              aria-invalid={false}
+                            <Checkbox
                               aria-label="One"
-                              checked={false}
-                              className="pf-c-check__input"
-                              disabled={false}
+                              className=""
                               id="someIdKey-1"
+                              isChecked={false}
+                              isDisabled={false}
+                              isValid={true}
+                              label="One"
                               name="Name of the field"
                               onChange={[Function]}
                               type="checkbox"
                               value="1"
-                            />
-                            <label
-                              className="pf-c-check__label"
-                              htmlFor="someIdKey-1"
                             >
-                              One
-                            </label>
-                          </div>
-                        </Checkbox>
-                      </FinalCheckbox>
-                    </div>
-                  </FieldProvider>
-                  <FieldProvider
-                    id="someIdKey-2"
-                    key="2"
-                    label="Two"
-                    name="Name of the field"
-                    render={[Function]}
-                    type="checkbox"
-                    value="2"
-                  >
-                    <div>
-                      <FinalCheckbox
-                        aria-label="Two"
-                        id="someIdKey-2"
-                        label="Two"
-                        name="Name of the field"
-                        onChange={[Function]}
-                        type="checkbox"
-                        value="2"
-                      >
-                        <Checkbox
-                          aria-label="Two"
-                          className=""
+                              <div
+                                className="pf-c-check"
+                              >
+                                <input
+                                  aria-invalid={false}
+                                  aria-label="One"
+                                  checked={false}
+                                  className="pf-c-check__input"
+                                  disabled={false}
+                                  id="someIdKey-1"
+                                  name="Name of the field"
+                                  onChange={[Function]}
+                                  type="checkbox"
+                                  value="1"
+                                />
+                                <label
+                                  className="pf-c-check__label"
+                                  htmlFor="someIdKey-1"
+                                >
+                                  One
+                                </label>
+                              </div>
+                            </Checkbox>
+                          </FinalCheckbox>
+                        </MockFieldProvider>
+                      </div>
+                    </FieldProvider>
+                    <FieldProvider
+                      id="someIdKey-2"
+                      key="2"
+                      label="Two"
+                      name="Name of the field"
+                      render={[Function]}
+                      type="checkbox"
+                      value="2"
+                    >
+                      <div>
+                        <MockFieldProvider
                           id="someIdKey-2"
-                          isChecked={false}
-                          isDisabled={false}
-                          isValid={true}
+                          input={
+                            Object {
+                              "name": "Foo",
+                              "onChange": [MockFunction],
+                            }
+                          }
                           label="Two"
+                          meta={
+                            Object {
+                              "error": false,
+                              "touched": false,
+                            }
+                          }
                           name="Name of the field"
-                          onChange={[Function]}
+                          render={[Function]}
                           type="checkbox"
                           value="2"
                         >
-                          <div
-                            className="pf-c-check"
+                          <FinalCheckbox
+                            aria-label="Two"
+                            id="someIdKey-2"
+                            label="Two"
+                            name="Name of the field"
+                            onChange={[Function]}
+                            type="checkbox"
+                            value="2"
                           >
-                            <input
-                              aria-invalid={false}
+                            <Checkbox
                               aria-label="Two"
-                              checked={false}
-                              className="pf-c-check__input"
-                              disabled={false}
+                              className=""
                               id="someIdKey-2"
+                              isChecked={false}
+                              isDisabled={false}
+                              isValid={true}
+                              label="Two"
                               name="Name of the field"
                               onChange={[Function]}
                               type="checkbox"
                               value="2"
-                            />
-                            <label
-                              className="pf-c-check__label"
-                              htmlFor="someIdKey-2"
                             >
-                              Two
-                            </label>
-                          </div>
-                        </Checkbox>
-                      </FinalCheckbox>
-                    </div>
-                  </FieldProvider>
-                  <FieldProvider
-                    id="someIdKey-3"
-                    key="3"
-                    label="Three"
-                    name="Name of the field"
-                    render={[Function]}
-                    type="checkbox"
-                    value="3"
-                  >
-                    <div>
-                      <FinalCheckbox
-                        aria-label="Three"
-                        id="someIdKey-3"
-                        label="Three"
-                        name="Name of the field"
-                        onChange={[Function]}
-                        type="checkbox"
-                        value="3"
-                      >
-                        <Checkbox
-                          aria-label="Three"
-                          className=""
+                              <div
+                                className="pf-c-check"
+                              >
+                                <input
+                                  aria-invalid={false}
+                                  aria-label="Two"
+                                  checked={false}
+                                  className="pf-c-check__input"
+                                  disabled={false}
+                                  id="someIdKey-2"
+                                  name="Name of the field"
+                                  onChange={[Function]}
+                                  type="checkbox"
+                                  value="2"
+                                />
+                                <label
+                                  className="pf-c-check__label"
+                                  htmlFor="someIdKey-2"
+                                >
+                                  Two
+                                </label>
+                              </div>
+                            </Checkbox>
+                          </FinalCheckbox>
+                        </MockFieldProvider>
+                      </div>
+                    </FieldProvider>
+                    <FieldProvider
+                      id="someIdKey-3"
+                      key="3"
+                      label="Three"
+                      name="Name of the field"
+                      render={[Function]}
+                      type="checkbox"
+                      value="3"
+                    >
+                      <div>
+                        <MockFieldProvider
                           id="someIdKey-3"
-                          isChecked={false}
-                          isDisabled={false}
-                          isValid={true}
+                          input={
+                            Object {
+                              "name": "Foo",
+                              "onChange": [MockFunction],
+                            }
+                          }
                           label="Three"
+                          meta={
+                            Object {
+                              "error": false,
+                              "touched": false,
+                            }
+                          }
                           name="Name of the field"
-                          onChange={[Function]}
+                          render={[Function]}
                           type="checkbox"
                           value="3"
                         >
-                          <div
-                            className="pf-c-check"
+                          <FinalCheckbox
+                            aria-label="Three"
+                            id="someIdKey-3"
+                            label="Three"
+                            name="Name of the field"
+                            onChange={[Function]}
+                            type="checkbox"
+                            value="3"
                           >
-                            <input
-                              aria-invalid={false}
+                            <Checkbox
                               aria-label="Three"
-                              checked={false}
-                              className="pf-c-check__input"
-                              disabled={false}
+                              className=""
                               id="someIdKey-3"
+                              isChecked={false}
+                              isDisabled={false}
+                              isValid={true}
+                              label="Three"
                               name="Name of the field"
                               onChange={[Function]}
                               type="checkbox"
                               value="3"
-                            />
-                            <label
-                              className="pf-c-check__label"
-                              htmlFor="someIdKey-3"
                             >
-                              Three
-                            </label>
-                          </div>
-                        </Checkbox>
-                      </FinalCheckbox>
-                    </div>
-                  </FieldProvider>
-                </div>
+                              <div
+                                className="pf-c-check"
+                              >
+                                <input
+                                  aria-invalid={false}
+                                  aria-label="Three"
+                                  checked={false}
+                                  className="pf-c-check__input"
+                                  disabled={false}
+                                  id="someIdKey-3"
+                                  name="Name of the field"
+                                  onChange={[Function]}
+                                  type="checkbox"
+                                  value="3"
+                                />
+                                <label
+                                  className="pf-c-check__label"
+                                  htmlFor="someIdKey-3"
+                                >
+                                  Three
+                                </label>
+                              </div>
+                            </Checkbox>
+                          </FinalCheckbox>
+                        </MockFieldProvider>
+                      </div>
+                    </FieldProvider>
+                  </div>
+                </FormGroup>
               </FormGroup>
             </Wrapper>
-          </div>
-        </FieldProvider>
-      </MultipleChoiceList>
+          </MockFieldProvider>
+        </div>
+      </FieldProvider>
     </MultipleChoiceList>
-  </FieldInterface>
-</CheckboxField>
+  </MultipleChoiceList>
+</Checkbox>
 `;
 
 exports[`FormFields should render DatePicker correctly 1`] = `
-<DatePickerField
+<DatePicker
   dataType="someDataType"
   id="someIdKey"
   input={
@@ -504,36 +568,28 @@ exports[`FormFields should render DatePicker correctly 1`] = `
     }
   }
 >
-  <FieldInterface
-    componentType="text-field"
-    dataType="someDataType"
+  <FormGroup
     id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
+    isRequired={false}
     meta={
       Object {
         "error": false,
         "touched": false,
       }
     }
-    name="Name of the field"
-    type="date"
   >
     <FormGroup
       fieldId="someIdKey"
       helperTextInvalid={false}
+      isRequired={false}
       isValid={true}
     >
       <div
         className="pf-c-form__group"
       >
         <ForwardRef
+          dataType="someDataType"
           id="someIdKey"
-          isValid={true}
           name="Name of the field"
           type="date"
           value=""
@@ -541,6 +597,7 @@ exports[`FormFields should render DatePicker correctly 1`] = `
           <TextInputBase
             aria-label={null}
             className=""
+            dataType="someDataType"
             id="someIdKey"
             innerRef={null}
             isDisabled={false}
@@ -557,6 +614,7 @@ exports[`FormFields should render DatePicker correctly 1`] = `
               aria-invalid={false}
               aria-label={null}
               className="pf-c-form-control"
+              dataType="someDataType"
               disabled={false}
               id="someIdKey"
               name="Name of the field"
@@ -570,12 +628,12 @@ exports[`FormFields should render DatePicker correctly 1`] = `
         </ForwardRef>
       </div>
     </FormGroup>
-  </FieldInterface>
-</DatePickerField>
+  </FormGroup>
+</DatePicker>
 `;
 
 exports[`FormFields should render Radio correctly 1`] = `
-<RadioField
+<Radio
   FieldProvider={[Function]}
   dataType="someDataType"
   id="someIdKey"
@@ -608,44 +666,20 @@ exports[`FormFields should render Radio correctly 1`] = `
     ]
   }
 >
-  <FieldInterface
-    FieldProvider={[Function]}
-    componentType="radio"
-    dataType="someDataType"
+  <FormGroup
     id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
+    isRequired={false}
     meta={
       Object {
         "error": false,
         "touched": false,
       }
     }
-    name="Name of the field"
-    options={
-      Array [
-        Object {
-          "label": "One",
-          "value": "1",
-        },
-        Object {
-          "label": "Two",
-          "value": "2",
-        },
-        Object {
-          "label": "Three",
-          "value": "3",
-        },
-      ]
-    }
   >
     <FormGroup
       fieldId="someIdKey"
       helperTextInvalid={false}
+      isRequired={false}
       isValid={true}
     >
       <div
@@ -653,15 +687,13 @@ exports[`FormFields should render Radio correctly 1`] = `
       >
         <RadioGroup
           FieldProvider={[Function]}
-          id="someIdKey"
+          dataType="someDataType"
           input={
             Object {
               "name": "Name of the field",
               "value": "",
             }
           }
-          isValid={true}
-          name="Name of the field"
           options={
             Array [
               Object {
@@ -680,8 +712,7 @@ exports[`FormFields should render Radio correctly 1`] = `
           }
         >
           <FieldProvider
-            id="someIdKey"
-            isValid={true}
+            dataType="someDataType"
             key="Name of the field-1"
             name="Name of the field"
             render={[Function]}
@@ -689,41 +720,60 @@ exports[`FormFields should render Radio correctly 1`] = `
             value="1"
           >
             <div>
-              <Radio
-                aria-label="One"
-                className=""
-                id="Foo-1"
-                isDisabled={false}
-                isValid={true}
-                label="One"
-                name="Foo"
-                onChange={[Function]}
+              <MockFieldProvider
+                dataType="someDataType"
+                input={
+                  Object {
+                    "name": "Foo",
+                    "onChange": [MockFunction],
+                  }
+                }
+                meta={
+                  Object {
+                    "error": false,
+                    "touched": false,
+                  }
+                }
+                name="Name of the field"
+                render={[Function]}
+                type="radio"
+                value="1"
               >
-                <div
-                  className="pf-c-radio"
+                <Radio
+                  aria-label="One"
+                  className=""
+                  id="Foo-1"
+                  isDisabled={false}
+                  isValid={true}
+                  label="One"
+                  name="Foo"
+                  onChange={[Function]}
                 >
-                  <input
-                    aria-invalid={false}
-                    className="pf-c-radio__input"
-                    disabled={false}
-                    id="Foo-1"
-                    name="Foo"
-                    onChange={[Function]}
-                    type="radio"
-                  />
-                  <label
-                    className="pf-c-radio__label"
-                    htmlFor="Foo-1"
+                  <div
+                    className="pf-c-radio"
                   >
-                    One
-                  </label>
-                </div>
-              </Radio>
+                    <input
+                      aria-invalid={false}
+                      className="pf-c-radio__input"
+                      disabled={false}
+                      id="Foo-1"
+                      name="Foo"
+                      onChange={[Function]}
+                      type="radio"
+                    />
+                    <label
+                      className="pf-c-radio__label"
+                      htmlFor="Foo-1"
+                    >
+                      One
+                    </label>
+                  </div>
+                </Radio>
+              </MockFieldProvider>
             </div>
           </FieldProvider>
           <FieldProvider
-            id="someIdKey"
-            isValid={true}
+            dataType="someDataType"
             key="Name of the field-2"
             name="Name of the field"
             render={[Function]}
@@ -731,41 +781,60 @@ exports[`FormFields should render Radio correctly 1`] = `
             value="2"
           >
             <div>
-              <Radio
-                aria-label="Two"
-                className=""
-                id="Foo-2"
-                isDisabled={false}
-                isValid={true}
-                label="Two"
-                name="Foo"
-                onChange={[Function]}
+              <MockFieldProvider
+                dataType="someDataType"
+                input={
+                  Object {
+                    "name": "Foo",
+                    "onChange": [MockFunction],
+                  }
+                }
+                meta={
+                  Object {
+                    "error": false,
+                    "touched": false,
+                  }
+                }
+                name="Name of the field"
+                render={[Function]}
+                type="radio"
+                value="2"
               >
-                <div
-                  className="pf-c-radio"
+                <Radio
+                  aria-label="Two"
+                  className=""
+                  id="Foo-2"
+                  isDisabled={false}
+                  isValid={true}
+                  label="Two"
+                  name="Foo"
+                  onChange={[Function]}
                 >
-                  <input
-                    aria-invalid={false}
-                    className="pf-c-radio__input"
-                    disabled={false}
-                    id="Foo-2"
-                    name="Foo"
-                    onChange={[Function]}
-                    type="radio"
-                  />
-                  <label
-                    className="pf-c-radio__label"
-                    htmlFor="Foo-2"
+                  <div
+                    className="pf-c-radio"
                   >
-                    Two
-                  </label>
-                </div>
-              </Radio>
+                    <input
+                      aria-invalid={false}
+                      className="pf-c-radio__input"
+                      disabled={false}
+                      id="Foo-2"
+                      name="Foo"
+                      onChange={[Function]}
+                      type="radio"
+                    />
+                    <label
+                      className="pf-c-radio__label"
+                      htmlFor="Foo-2"
+                    >
+                      Two
+                    </label>
+                  </div>
+                </Radio>
+              </MockFieldProvider>
             </div>
           </FieldProvider>
           <FieldProvider
-            id="someIdKey"
-            isValid={true}
+            dataType="someDataType"
             key="Name of the field-3"
             name="Name of the field"
             render={[Function]}
@@ -773,56 +842,76 @@ exports[`FormFields should render Radio correctly 1`] = `
             value="3"
           >
             <div>
-              <Radio
-                aria-label="Three"
-                className=""
-                id="Foo-3"
-                isDisabled={false}
-                isValid={true}
-                label="Three"
-                name="Foo"
-                onChange={[Function]}
+              <MockFieldProvider
+                dataType="someDataType"
+                input={
+                  Object {
+                    "name": "Foo",
+                    "onChange": [MockFunction],
+                  }
+                }
+                meta={
+                  Object {
+                    "error": false,
+                    "touched": false,
+                  }
+                }
+                name="Name of the field"
+                render={[Function]}
+                type="radio"
+                value="3"
               >
-                <div
-                  className="pf-c-radio"
+                <Radio
+                  aria-label="Three"
+                  className=""
+                  id="Foo-3"
+                  isDisabled={false}
+                  isValid={true}
+                  label="Three"
+                  name="Foo"
+                  onChange={[Function]}
                 >
-                  <input
-                    aria-invalid={false}
-                    className="pf-c-radio__input"
-                    disabled={false}
-                    id="Foo-3"
-                    name="Foo"
-                    onChange={[Function]}
-                    type="radio"
-                  />
-                  <label
-                    className="pf-c-radio__label"
-                    htmlFor="Foo-3"
+                  <div
+                    className="pf-c-radio"
                   >
-                    Three
-                  </label>
-                </div>
-              </Radio>
+                    <input
+                      aria-invalid={false}
+                      className="pf-c-radio__input"
+                      disabled={false}
+                      id="Foo-3"
+                      name="Foo"
+                      onChange={[Function]}
+                      type="radio"
+                    />
+                    <label
+                      className="pf-c-radio__label"
+                      htmlFor="Foo-3"
+                    >
+                      Three
+                    </label>
+                  </div>
+                </Radio>
+              </MockFieldProvider>
             </div>
           </FieldProvider>
         </RadioGroup>
       </div>
     </FormGroup>
-  </FieldInterface>
-</RadioField>
+  </FormGroup>
+</Radio>
 `;
 
 exports[`FormFields should render Select correctly 1`] = `
 <FormGroup
   fieldId="someIdKey"
   helperTextInvalid={false}
+  isRequired={false}
   isValid={true}
 >
   <DataDrivenSelect
-    id="someIdKey"
+    dataType="someDataType"
     isClearable={false}
     isSearchable={false}
-    isValid={true}
     name="Name of the field"
     options={
       Array [
@@ -847,7 +936,7 @@ exports[`FormFields should render Select correctly 1`] = `
 `;
 
 exports[`FormFields should render Switch correctly 1`] = `
-<SwitchField
+<Switch
   FieldProvider={[Function]}
   dataType="someDataType"
   id="someIdKey"
@@ -865,6 +954,7 @@ exports[`FormFields should render Switch correctly 1`] = `
   }
 >
   <FieldProvider
+    component={[Function]}
     dataType="someDataType"
     id="someIdKey"
     input={
@@ -879,18 +969,16 @@ exports[`FormFields should render Switch correctly 1`] = `
         "touched": false,
       }
     }
-    render={[Function]}
   >
     <div>
-      <FieldInterface
-        componentType="switch-field"
+      <MockFieldProvider
+        component={[Function]}
         dataType="someDataType"
-        hideLabel={true}
         id="someIdKey"
         input={
           Object {
-            "name": "Name of the field",
-            "value": "",
+            "name": "Foo",
+            "onChange": [MockFunction],
           }
         }
         meta={
@@ -899,119 +987,149 @@ exports[`FormFields should render Switch correctly 1`] = `
             "touched": false,
           }
         }
-        name="Name of the field"
       >
-        <FormGroup
-          fieldId="someIdKey"
-          helperTextInvalid={false}
-          isValid={true}
-          label={false}
+        <SwitchGroup
+          dataType="someDataType"
+          id="someIdKey"
+          input={
+            Object {
+              "name": "Foo",
+              "onChange": [MockFunction],
+            }
+          }
+          meta={
+            Object {
+              "error": false,
+              "touched": false,
+            }
+          }
         >
-          <div
-            className="pf-c-form__group"
+          <FormGroup
+            hideLabel={true}
+            id="someIdKey"
+            isRequired={false}
+            meta={
+              Object {
+                "error": false,
+                "touched": false,
+              }
+            }
           >
-            <Component
-              id="someIdKey"
-              isChecked={false}
-              name="Name of the field"
-              onChange={[Function]}
-              value=""
+            <FormGroup
+              fieldId="someIdKey"
+              helperTextInvalid={false}
+              isRequired={false}
+              isValid={true}
+              label={false}
             >
-              <ComponentWithOuia
-                component={[Function]}
-                componentProps={
-                  Object {
-                    "id": "someIdKey",
-                    "isChecked": false,
-                    "isDisabled": undefined,
-                    "label": undefined,
-                    "labelOff": undefined,
-                    "name": "Name of the field",
-                    "onChange": [Function],
-                    "value": "",
-                  }
-                }
-                consumerContext={null}
+              <div
+                className="pf-c-form__group"
               >
-                <Switch
-                  aria-label=""
-                  className=""
+                <Component
+                  dataType="someDataType"
                   id="someIdKey"
                   isChecked={false}
-                  isDisabled={false}
-                  label=""
-                  labelOff=""
-                  name="Name of the field"
+                  name="Foo"
                   onChange={[Function]}
-                  ouiaContext={
-                    Object {
-                      "isOuia": false,
-                      "ouiaId": null,
-                    }
-                  }
-                  value=""
                 >
-                  <label
-                    className="pf-c-switch"
-                    htmlFor="someIdKey"
+                  <ComponentWithOuia
+                    component={[Function]}
+                    componentProps={
+                      Object {
+                        "children": undefined,
+                        "dataType": "someDataType",
+                        "id": "someIdKey",
+                        "isChecked": false,
+                        "isDisabled": undefined,
+                        "label": undefined,
+                        "labelOff": undefined,
+                        "name": "Foo",
+                        "onChange": [Function],
+                      }
+                    }
+                    consumerContext={null}
                   >
-                    <input
+                    <Switch
                       aria-label=""
-                      aria-labelledby="someIdKey-on"
-                      checked={false}
-                      className="pf-c-switch__input"
-                      disabled={false}
+                      className=""
+                      dataType="someDataType"
                       id="someIdKey"
-                      name="Name of the field"
+                      isChecked={false}
+                      isDisabled={false}
+                      label=""
+                      labelOff=""
+                      name="Foo"
                       onChange={[Function]}
-                      type="checkbox"
-                      value=""
-                    />
-                    <span
-                      className="pf-c-switch__toggle"
+                      ouiaContext={
+                        Object {
+                          "isOuia": false,
+                          "ouiaId": null,
+                        }
+                      }
                     >
-                      <div
-                        aria-hidden="true"
-                        className="pf-c-switch__toggle-icon"
+                      <label
+                        className="pf-c-switch"
+                        htmlFor="someIdKey"
                       >
-                        <CheckIcon
-                          color="currentColor"
-                          noVerticalAlign={true}
-                          size="sm"
-                          title={null}
+                        <input
+                          aria-label=""
+                          aria-labelledby="someIdKey-on"
+                          checked={false}
+                          className="pf-c-switch__input"
+                          dataType="someDataType"
+                          disabled={false}
+                          id="someIdKey"
+                          name="Foo"
+                          onChange={[Function]}
+                          type="checkbox"
+                        />
+                        <span
+                          className="pf-c-switch__toggle"
                         >
-                          <svg
-                            aria-hidden={true}
-                            aria-labelledby={null}
-                            fill="currentColor"
-                            height="1em"
-                            role="img"
-                            style={null}
-                            viewBox="0 0 512 512"
-                            width="1em"
+                          <div
+                            aria-hidden="true"
+                            className="pf-c-switch__toggle-icon"
                           >
-                            <path
-                              d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
-                              transform=""
-                            />
-                          </svg>
-                        </CheckIcon>
-                      </div>
-                    </span>
-                  </label>
-                </Switch>
-              </ComponentWithOuia>
-            </Component>
-          </div>
-        </FormGroup>
-      </FieldInterface>
+                            <CheckIcon
+                              color="currentColor"
+                              noVerticalAlign={true}
+                              size="sm"
+                              title={null}
+                            >
+                              <svg
+                                aria-hidden={true}
+                                aria-labelledby={null}
+                                fill="currentColor"
+                                height="1em"
+                                role="img"
+                                style={null}
+                                viewBox="0 0 512 512"
+                                width="1em"
+                              >
+                                <path
+                                  d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                                  transform=""
+                                />
+                              </svg>
+                            </CheckIcon>
+                          </div>
+                        </span>
+                      </label>
+                    </Switch>
+                  </ComponentWithOuia>
+                </Component>
+              </div>
+            </FormGroup>
+          </FormGroup>
+        </SwitchGroup>
+      </MockFieldProvider>
     </div>
   </FieldProvider>
-</SwitchField>
+</Switch>
 `;
 
 exports[`FormFields should render TextArea correctly 1`] = `
-<TextAreaField
+<TextArea
   dataType="someDataType"
   id="someIdKey"
   input={
@@ -1027,27 +1145,20 @@ exports[`FormFields should render TextArea correctly 1`] = `
     }
   }
 >
-  <FieldInterface
-    componentType="textarea-field"
-    dataType="someDataType"
+  <FormGroup
     id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
+    isRequired={false}
     meta={
       Object {
         "error": false,
         "touched": false,
       }
     }
-    name="Name of the field"
   >
     <FormGroup
       fieldId="someIdKey"
       helperTextInvalid={false}
+      isRequired={false}
       isValid={true}
     >
       <div
@@ -1056,7 +1167,7 @@ exports[`FormFields should render TextArea correctly 1`] = `
         <TextArea
           aria-label={null}
           className=""
-          id="someIdKey"
+          dataType="someDataType"
           isRequired={false}
           isValid={true}
           name="Name of the field"
@@ -1068,7 +1179,7 @@ exports[`FormFields should render TextArea correctly 1`] = `
             aria-invalid={false}
             aria-label={null}
             className="pf-c-form-control"
-            id="someIdKey"
+            dataType="someDataType"
             name="Name of the field"
             onChange={[Function]}
             required={false}
@@ -1077,8 +1188,8 @@ exports[`FormFields should render TextArea correctly 1`] = `
         </TextArea>
       </div>
     </FormGroup>
-  </FieldInterface>
-</TextAreaField>
+  </FormGroup>
+</TextArea>
 `;
 
 exports[`FormFields should render TextField correctly 1`] = `
@@ -1098,41 +1209,35 @@ exports[`FormFields should render TextField correctly 1`] = `
     }
   }
 >
-  <FieldInterface
-    componentType="text-field"
-    dataType="someDataType"
+  <FormGroup
     id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
+    isRequired={false}
     meta={
       Object {
         "error": false,
         "touched": false,
       }
     }
-    name="Name of the field"
   >
     <FormGroup
       fieldId="someIdKey"
       helperTextInvalid={false}
+      isRequired={false}
       isValid={true}
     >
       <div
         className="pf-c-form__group"
       >
         <ForwardRef
+          dataType="someDataType"
           id="someIdKey"
-          isValid={true}
           name="Name of the field"
           value=""
         >
           <TextInputBase
             aria-label={null}
             className=""
+            dataType="someDataType"
             id="someIdKey"
             innerRef={null}
             isDisabled={false}
@@ -1149,6 +1254,7 @@ exports[`FormFields should render TextField correctly 1`] = `
               aria-invalid={false}
               aria-label={null}
               className="pf-c-form-control"
+              dataType="someDataType"
               disabled={false}
               id="someIdKey"
               name="Name of the field"
@@ -1162,7 +1268,7 @@ exports[`FormFields should render TextField correctly 1`] = `
         </ForwardRef>
       </div>
     </FormGroup>
-  </FieldInterface>
+  </FormGroup>
 </TextField>
 `;
 
@@ -1184,28 +1290,21 @@ exports[`FormFields should render TextField with description correctly 1`] = `
     }
   }
 >
-  <FieldInterface
-    componentType="text-field"
-    dataType="someDataType"
+  <FormGroup
     description="This is description"
     id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
+    isRequired={false}
     meta={
       Object {
         "error": false,
         "touched": false,
       }
     }
-    name="Name of the field"
   >
     <FormGroup
       fieldId="someIdKey"
       helperTextInvalid={false}
+      isRequired={false}
       isValid={true}
     >
       <div
@@ -1228,14 +1327,15 @@ exports[`FormFields should render TextField with description correctly 1`] = `
           </div>
         </TextContent>
         <ForwardRef
+          dataType="someDataType"
           id="someIdKey"
-          isValid={true}
           name="Name of the field"
           value=""
         >
           <TextInputBase
             aria-label={null}
             className=""
+            dataType="someDataType"
             id="someIdKey"
             innerRef={null}
             isDisabled={false}
@@ -1252,6 +1352,7 @@ exports[`FormFields should render TextField with description correctly 1`] = `
               aria-invalid={false}
               aria-label={null}
               className="pf-c-form-control"
+              dataType="someDataType"
               disabled={false}
               id="someIdKey"
               name="Name of the field"
@@ -1265,7 +1366,7 @@ exports[`FormFields should render TextField with description correctly 1`] = `
         </ForwardRef>
       </div>
     </FormGroup>
-  </FieldInterface>
+  </FormGroup>
 </TextField>
 `;
 
@@ -1285,40 +1386,35 @@ exports[`FormFields should render TextField without id correctly 1`] = `
     }
   }
 >
-  <FieldInterface
-    componentType="text-field"
-    dataType="someDataType"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
+  <FormGroup
+    id="Name of the field"
+    isRequired={false}
     meta={
       Object {
         "error": false,
         "touched": false,
       }
     }
-    name="Name of the field"
   >
     <FormGroup
       fieldId="Name of the field"
       helperTextInvalid={false}
+      isRequired={false}
       isValid={true}
     >
       <div
         className="pf-c-form__group"
       >
         <ForwardRef
+          dataType="someDataType"
           id="Name of the field"
-          isValid={true}
           name="Name of the field"
           value=""
         >
           <TextInputBase
             aria-label={null}
             className=""
+            dataType="someDataType"
             id="Name of the field"
             innerRef={null}
             isDisabled={false}
@@ -1335,6 +1431,7 @@ exports[`FormFields should render TextField without id correctly 1`] = `
               aria-invalid={false}
               aria-label={null}
               className="pf-c-form-control"
+              dataType="someDataType"
               disabled={false}
               id="Name of the field"
               name="Name of the field"
@@ -1348,12 +1445,12 @@ exports[`FormFields should render TextField without id correctly 1`] = `
         </ForwardRef>
       </div>
     </FormGroup>
-  </FieldInterface>
+  </FormGroup>
 </TextField>
 `;
 
 exports[`FormFields should render TimePicker correctly 1`] = `
-<TimePickerField
+<TimePicker
   dataType="someDataType"
   id="someIdKey"
   input={
@@ -1369,36 +1466,28 @@ exports[`FormFields should render TimePicker correctly 1`] = `
     }
   }
 >
-  <FieldInterface
-    componentType="text-field"
-    dataType="someDataType"
+  <FormGroup
     id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
+    isRequired={false}
     meta={
       Object {
         "error": false,
         "touched": false,
       }
     }
-    name="Name of the field"
-    type="time"
   >
     <FormGroup
       fieldId="someIdKey"
       helperTextInvalid={false}
+      isRequired={false}
       isValid={true}
     >
       <div
         className="pf-c-form__group"
       >
         <ForwardRef
+          dataType="someDataType"
           id="someIdKey"
-          isValid={true}
           name="Name of the field"
           type="time"
           value=""
@@ -1406,6 +1495,7 @@ exports[`FormFields should render TimePicker correctly 1`] = `
           <TextInputBase
             aria-label={null}
             className=""
+            dataType="someDataType"
             id="someIdKey"
             innerRef={null}
             isDisabled={false}
@@ -1422,6 +1512,7 @@ exports[`FormFields should render TimePicker correctly 1`] = `
               aria-invalid={false}
               aria-label={null}
               className="pf-c-form-control"
+              dataType="someDataType"
               disabled={false}
               id="someIdKey"
               name="Name of the field"
@@ -1435,12 +1526,12 @@ exports[`FormFields should render TimePicker correctly 1`] = `
         </ForwardRef>
       </div>
     </FormGroup>
-  </FieldInterface>
-</TimePickerField>
+  </FormGroup>
+</TimePicker>
 `;
 
 exports[`FormFields should render disabled Checkbox with options correctly 1`] = `
-<CheckboxField
+<Checkbox
   FieldProvider={[Function]}
   dataType="someDataType"
   disabled={true}
@@ -1474,9 +1565,8 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
     ]
   }
 >
-  <FieldInterface
+  <MultipleChoiceList
     FieldProvider={[Function]}
-    componentType="checkbox"
     dataType="someDataType"
     disabled={true}
     id="someIdKey"
@@ -1492,7 +1582,6 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
         "touched": false,
       }
     }
-    name="Name of the field"
     options={
       Array [
         Object {
@@ -1511,8 +1600,10 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
     }
   >
     <MultipleChoiceList
+      Checkbox={[Function]}
       FieldProvider={[Function]}
-      componentType="checkbox"
+      Wrapper={[Function]}
+      dataType="someDataType"
       disabled={true}
       id="someIdKey"
       input={
@@ -1545,11 +1636,8 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
         ]
       }
     >
-      <MultipleChoiceList
-        Checkbox={[Function]}
-        FieldProvider={[Function]}
-        Wrapper={[Function]}
-        componentType="checkbox"
+      <FieldProvider
+        dataType="someDataType"
         disabled={true}
         id="someIdKey"
         input={
@@ -1581,44 +1669,46 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
             },
           ]
         }
+        render={[Function]}
+        validate={[Function]}
       >
-        <FieldProvider
-          componentType="checkbox"
-          disabled={true}
-          id="someIdKey"
-          input={
-            Object {
-              "name": "Name of the field",
-              "value": "",
+        <div>
+          <MockFieldProvider
+            dataType="someDataType"
+            disabled={true}
+            id="someIdKey"
+            input={
+              Object {
+                "name": "Foo",
+                "onChange": [MockFunction],
+              }
             }
-          }
-          meta={
-            Object {
-              "error": false,
-              "touched": false,
+            meta={
+              Object {
+                "error": false,
+                "touched": false,
+              }
             }
-          }
-          name="Name of the field"
-          options={
-            Array [
-              Object {
-                "label": "One",
-                "value": "1",
-              },
-              Object {
-                "label": "Two",
-                "value": "2",
-              },
-              Object {
-                "label": "Three",
-                "value": "3",
-              },
-            ]
-          }
-          render={[Function]}
-          validate={[Function]}
-        >
-          <div>
+            name="Name of the field"
+            options={
+              Array [
+                Object {
+                  "label": "One",
+                  "value": "1",
+                },
+                Object {
+                  "label": "Two",
+                  "value": "2",
+                },
+                Object {
+                  "label": "Three",
+                  "value": "3",
+                },
+              ]
+            }
+            render={[Function]}
+            validate={[Function]}
+          >
             <Wrapper
               error={false}
               meta={
@@ -1629,12 +1719,13 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
               }
               rest={
                 Object {
-                  "componentType": "checkbox",
+                  "children": undefined,
+                  "dataType": "someDataType",
                   "disabled": true,
                   "id": "someIdKey",
                   "input": Object {
-                    "name": "Name of the field",
-                    "value": "",
+                    "name": "Foo",
+                    "onChange": [MockFunction],
                   },
                   "name": "Name of the field",
                   "validate": [Function],
@@ -1643,200 +1734,273 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
               showError={false}
             >
               <FormGroup
-                fieldId="Name of the field"
-                helperTextInvalid={false}
-                isValid={true}
+                isRequired={false}
+                meta={
+                  Object {
+                    "error": false,
+                    "touched": false,
+                  }
+                }
               >
-                <div
-                  className="pf-c-form__group"
+                <FormGroup
+                  helperTextInvalid={false}
+                  isRequired={false}
+                  isValid={true}
                 >
-                  <FieldProvider
-                    id="someIdKey-1"
-                    key="1"
-                    label="One"
-                    name="Name of the field"
-                    render={[Function]}
-                    type="checkbox"
-                    value="1"
+                  <div
+                    className="pf-c-form__group"
                   >
-                    <div>
-                      <FinalCheckbox
-                        aria-label="One"
-                        id="someIdKey-1"
-                        label="One"
-                        name="Name of the field"
-                        onChange={[Function]}
-                        type="checkbox"
-                        value="1"
-                      >
-                        <Checkbox
-                          aria-label="One"
-                          className=""
+                    <FieldProvider
+                      id="someIdKey-1"
+                      key="1"
+                      label="One"
+                      name="Name of the field"
+                      render={[Function]}
+                      type="checkbox"
+                      value="1"
+                    >
+                      <div>
+                        <MockFieldProvider
                           id="someIdKey-1"
-                          isChecked={false}
-                          isDisabled={false}
-                          isValid={true}
+                          input={
+                            Object {
+                              "name": "Foo",
+                              "onChange": [MockFunction],
+                            }
+                          }
                           label="One"
+                          meta={
+                            Object {
+                              "error": false,
+                              "touched": false,
+                            }
+                          }
                           name="Name of the field"
-                          onChange={[Function]}
+                          render={[Function]}
                           type="checkbox"
                           value="1"
                         >
-                          <div
-                            className="pf-c-check"
+                          <FinalCheckbox
+                            aria-label="One"
+                            id="someIdKey-1"
+                            label="One"
+                            name="Name of the field"
+                            onChange={[Function]}
+                            type="checkbox"
+                            value="1"
                           >
-                            <input
-                              aria-invalid={false}
+                            <Checkbox
                               aria-label="One"
-                              checked={false}
-                              className="pf-c-check__input"
-                              disabled={false}
+                              className=""
                               id="someIdKey-1"
+                              isChecked={false}
+                              isDisabled={false}
+                              isValid={true}
+                              label="One"
                               name="Name of the field"
                               onChange={[Function]}
                               type="checkbox"
                               value="1"
-                            />
-                            <label
-                              className="pf-c-check__label"
-                              htmlFor="someIdKey-1"
                             >
-                              One
-                            </label>
-                          </div>
-                        </Checkbox>
-                      </FinalCheckbox>
-                    </div>
-                  </FieldProvider>
-                  <FieldProvider
-                    id="someIdKey-2"
-                    key="2"
-                    label="Two"
-                    name="Name of the field"
-                    render={[Function]}
-                    type="checkbox"
-                    value="2"
-                  >
-                    <div>
-                      <FinalCheckbox
-                        aria-label="Two"
-                        id="someIdKey-2"
-                        label="Two"
-                        name="Name of the field"
-                        onChange={[Function]}
-                        type="checkbox"
-                        value="2"
-                      >
-                        <Checkbox
-                          aria-label="Two"
-                          className=""
+                              <div
+                                className="pf-c-check"
+                              >
+                                <input
+                                  aria-invalid={false}
+                                  aria-label="One"
+                                  checked={false}
+                                  className="pf-c-check__input"
+                                  disabled={false}
+                                  id="someIdKey-1"
+                                  name="Name of the field"
+                                  onChange={[Function]}
+                                  type="checkbox"
+                                  value="1"
+                                />
+                                <label
+                                  className="pf-c-check__label"
+                                  htmlFor="someIdKey-1"
+                                >
+                                  One
+                                </label>
+                              </div>
+                            </Checkbox>
+                          </FinalCheckbox>
+                        </MockFieldProvider>
+                      </div>
+                    </FieldProvider>
+                    <FieldProvider
+                      id="someIdKey-2"
+                      key="2"
+                      label="Two"
+                      name="Name of the field"
+                      render={[Function]}
+                      type="checkbox"
+                      value="2"
+                    >
+                      <div>
+                        <MockFieldProvider
                           id="someIdKey-2"
-                          isChecked={false}
-                          isDisabled={false}
-                          isValid={true}
+                          input={
+                            Object {
+                              "name": "Foo",
+                              "onChange": [MockFunction],
+                            }
+                          }
                           label="Two"
+                          meta={
+                            Object {
+                              "error": false,
+                              "touched": false,
+                            }
+                          }
                           name="Name of the field"
-                          onChange={[Function]}
+                          render={[Function]}
                           type="checkbox"
                           value="2"
                         >
-                          <div
-                            className="pf-c-check"
+                          <FinalCheckbox
+                            aria-label="Two"
+                            id="someIdKey-2"
+                            label="Two"
+                            name="Name of the field"
+                            onChange={[Function]}
+                            type="checkbox"
+                            value="2"
                           >
-                            <input
-                              aria-invalid={false}
+                            <Checkbox
                               aria-label="Two"
-                              checked={false}
-                              className="pf-c-check__input"
-                              disabled={false}
+                              className=""
                               id="someIdKey-2"
+                              isChecked={false}
+                              isDisabled={false}
+                              isValid={true}
+                              label="Two"
                               name="Name of the field"
                               onChange={[Function]}
                               type="checkbox"
                               value="2"
-                            />
-                            <label
-                              className="pf-c-check__label"
-                              htmlFor="someIdKey-2"
                             >
-                              Two
-                            </label>
-                          </div>
-                        </Checkbox>
-                      </FinalCheckbox>
-                    </div>
-                  </FieldProvider>
-                  <FieldProvider
-                    id="someIdKey-3"
-                    key="3"
-                    label="Three"
-                    name="Name of the field"
-                    render={[Function]}
-                    type="checkbox"
-                    value="3"
-                  >
-                    <div>
-                      <FinalCheckbox
-                        aria-label="Three"
-                        id="someIdKey-3"
-                        label="Three"
-                        name="Name of the field"
-                        onChange={[Function]}
-                        type="checkbox"
-                        value="3"
-                      >
-                        <Checkbox
-                          aria-label="Three"
-                          className=""
+                              <div
+                                className="pf-c-check"
+                              >
+                                <input
+                                  aria-invalid={false}
+                                  aria-label="Two"
+                                  checked={false}
+                                  className="pf-c-check__input"
+                                  disabled={false}
+                                  id="someIdKey-2"
+                                  name="Name of the field"
+                                  onChange={[Function]}
+                                  type="checkbox"
+                                  value="2"
+                                />
+                                <label
+                                  className="pf-c-check__label"
+                                  htmlFor="someIdKey-2"
+                                >
+                                  Two
+                                </label>
+                              </div>
+                            </Checkbox>
+                          </FinalCheckbox>
+                        </MockFieldProvider>
+                      </div>
+                    </FieldProvider>
+                    <FieldProvider
+                      id="someIdKey-3"
+                      key="3"
+                      label="Three"
+                      name="Name of the field"
+                      render={[Function]}
+                      type="checkbox"
+                      value="3"
+                    >
+                      <div>
+                        <MockFieldProvider
                           id="someIdKey-3"
-                          isChecked={false}
-                          isDisabled={false}
-                          isValid={true}
+                          input={
+                            Object {
+                              "name": "Foo",
+                              "onChange": [MockFunction],
+                            }
+                          }
                           label="Three"
+                          meta={
+                            Object {
+                              "error": false,
+                              "touched": false,
+                            }
+                          }
                           name="Name of the field"
-                          onChange={[Function]}
+                          render={[Function]}
                           type="checkbox"
                           value="3"
                         >
-                          <div
-                            className="pf-c-check"
+                          <FinalCheckbox
+                            aria-label="Three"
+                            id="someIdKey-3"
+                            label="Three"
+                            name="Name of the field"
+                            onChange={[Function]}
+                            type="checkbox"
+                            value="3"
                           >
-                            <input
-                              aria-invalid={false}
+                            <Checkbox
                               aria-label="Three"
-                              checked={false}
-                              className="pf-c-check__input"
-                              disabled={false}
+                              className=""
                               id="someIdKey-3"
+                              isChecked={false}
+                              isDisabled={false}
+                              isValid={true}
+                              label="Three"
                               name="Name of the field"
                               onChange={[Function]}
                               type="checkbox"
                               value="3"
-                            />
-                            <label
-                              className="pf-c-check__label"
-                              htmlFor="someIdKey-3"
                             >
-                              Three
-                            </label>
-                          </div>
-                        </Checkbox>
-                      </FinalCheckbox>
-                    </div>
-                  </FieldProvider>
-                </div>
+                              <div
+                                className="pf-c-check"
+                              >
+                                <input
+                                  aria-invalid={false}
+                                  aria-label="Three"
+                                  checked={false}
+                                  className="pf-c-check__input"
+                                  disabled={false}
+                                  id="someIdKey-3"
+                                  name="Name of the field"
+                                  onChange={[Function]}
+                                  type="checkbox"
+                                  value="3"
+                                />
+                                <label
+                                  className="pf-c-check__label"
+                                  htmlFor="someIdKey-3"
+                                >
+                                  Three
+                                </label>
+                              </div>
+                            </Checkbox>
+                          </FinalCheckbox>
+                        </MockFieldProvider>
+                      </div>
+                    </FieldProvider>
+                  </div>
+                </FormGroup>
               </FormGroup>
             </Wrapper>
-          </div>
-        </FieldProvider>
-      </MultipleChoiceList>
+          </MockFieldProvider>
+        </div>
+      </FieldProvider>
     </MultipleChoiceList>
-  </FieldInterface>
-</CheckboxField>
+  </MultipleChoiceList>
+</Checkbox>
 `;
 
 exports[`FormFields should render disabled Radio correctly 1`] = `
-<RadioField
+<Radio
   FieldProvider={[Function]}
   dataType="someDataType"
   disabled={true}
@@ -1870,45 +2034,20 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
     ]
   }
 >
-  <FieldInterface
-    FieldProvider={[Function]}
-    componentType="radio"
-    dataType="someDataType"
-    disabled={true}
+  <FormGroup
     id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
+    isRequired={false}
     meta={
       Object {
         "error": false,
         "touched": false,
       }
     }
-    name="Name of the field"
-    options={
-      Array [
-        Object {
-          "label": "One",
-          "value": "1",
-        },
-        Object {
-          "label": "Two",
-          "value": "2",
-        },
-        Object {
-          "label": "Three",
-          "value": "3",
-        },
-      ]
-    }
   >
     <FormGroup
       fieldId="someIdKey"
       helperTextInvalid={false}
+      isRequired={false}
       isValid={true}
     >
       <div
@@ -1916,16 +2055,14 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
       >
         <RadioGroup
           FieldProvider={[Function]}
+          dataType="someDataType"
           disabled={true}
-          id="someIdKey"
           input={
             Object {
               "name": "Name of the field",
               "value": "",
             }
           }
-          isValid={true}
-          name="Name of the field"
           options={
             Array [
               Object {
@@ -1944,9 +2081,8 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
           }
         >
           <FieldProvider
+            dataType="someDataType"
             disabled={true}
-            id="someIdKey"
-            isValid={true}
             key="Name of the field-1"
             name="Name of the field"
             render={[Function]}
@@ -1954,42 +2090,62 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
             value="1"
           >
             <div>
-              <Radio
-                aria-label="One"
-                className=""
-                id="Foo-1"
-                isDisabled={false}
-                isValid={true}
-                label="One"
-                name="Foo"
-                onChange={[Function]}
+              <MockFieldProvider
+                dataType="someDataType"
+                disabled={true}
+                input={
+                  Object {
+                    "name": "Foo",
+                    "onChange": [MockFunction],
+                  }
+                }
+                meta={
+                  Object {
+                    "error": false,
+                    "touched": false,
+                  }
+                }
+                name="Name of the field"
+                render={[Function]}
+                type="radio"
+                value="1"
               >
-                <div
-                  className="pf-c-radio"
+                <Radio
+                  aria-label="One"
+                  className=""
+                  id="Foo-1"
+                  isDisabled={false}
+                  isValid={true}
+                  label="One"
+                  name="Foo"
+                  onChange={[Function]}
                 >
-                  <input
-                    aria-invalid={false}
-                    className="pf-c-radio__input"
-                    disabled={false}
-                    id="Foo-1"
-                    name="Foo"
-                    onChange={[Function]}
-                    type="radio"
-                  />
-                  <label
-                    className="pf-c-radio__label"
-                    htmlFor="Foo-1"
+                  <div
+                    className="pf-c-radio"
                   >
-                    One
-                  </label>
-                </div>
-              </Radio>
+                    <input
+                      aria-invalid={false}
+                      className="pf-c-radio__input"
+                      disabled={false}
+                      id="Foo-1"
+                      name="Foo"
+                      onChange={[Function]}
+                      type="radio"
+                    />
+                    <label
+                      className="pf-c-radio__label"
+                      htmlFor="Foo-1"
+                    >
+                      One
+                    </label>
+                  </div>
+                </Radio>
+              </MockFieldProvider>
             </div>
           </FieldProvider>
           <FieldProvider
+            dataType="someDataType"
             disabled={true}
-            id="someIdKey"
-            isValid={true}
             key="Name of the field-2"
             name="Name of the field"
             render={[Function]}
@@ -1997,42 +2153,62 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
             value="2"
           >
             <div>
-              <Radio
-                aria-label="Two"
-                className=""
-                id="Foo-2"
-                isDisabled={false}
-                isValid={true}
-                label="Two"
-                name="Foo"
-                onChange={[Function]}
+              <MockFieldProvider
+                dataType="someDataType"
+                disabled={true}
+                input={
+                  Object {
+                    "name": "Foo",
+                    "onChange": [MockFunction],
+                  }
+                }
+                meta={
+                  Object {
+                    "error": false,
+                    "touched": false,
+                  }
+                }
+                name="Name of the field"
+                render={[Function]}
+                type="radio"
+                value="2"
               >
-                <div
-                  className="pf-c-radio"
+                <Radio
+                  aria-label="Two"
+                  className=""
+                  id="Foo-2"
+                  isDisabled={false}
+                  isValid={true}
+                  label="Two"
+                  name="Foo"
+                  onChange={[Function]}
                 >
-                  <input
-                    aria-invalid={false}
-                    className="pf-c-radio__input"
-                    disabled={false}
-                    id="Foo-2"
-                    name="Foo"
-                    onChange={[Function]}
-                    type="radio"
-                  />
-                  <label
-                    className="pf-c-radio__label"
-                    htmlFor="Foo-2"
+                  <div
+                    className="pf-c-radio"
                   >
-                    Two
-                  </label>
-                </div>
-              </Radio>
+                    <input
+                      aria-invalid={false}
+                      className="pf-c-radio__input"
+                      disabled={false}
+                      id="Foo-2"
+                      name="Foo"
+                      onChange={[Function]}
+                      type="radio"
+                    />
+                    <label
+                      className="pf-c-radio__label"
+                      htmlFor="Foo-2"
+                    >
+                      Two
+                    </label>
+                  </div>
+                </Radio>
+              </MockFieldProvider>
             </div>
           </FieldProvider>
           <FieldProvider
+            dataType="someDataType"
             disabled={true}
-            id="someIdKey"
-            isValid={true}
             key="Name of the field-3"
             name="Name of the field"
             render={[Function]}
@@ -2040,57 +2216,78 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
             value="3"
           >
             <div>
-              <Radio
-                aria-label="Three"
-                className=""
-                id="Foo-3"
-                isDisabled={false}
-                isValid={true}
-                label="Three"
-                name="Foo"
-                onChange={[Function]}
+              <MockFieldProvider
+                dataType="someDataType"
+                disabled={true}
+                input={
+                  Object {
+                    "name": "Foo",
+                    "onChange": [MockFunction],
+                  }
+                }
+                meta={
+                  Object {
+                    "error": false,
+                    "touched": false,
+                  }
+                }
+                name="Name of the field"
+                render={[Function]}
+                type="radio"
+                value="3"
               >
-                <div
-                  className="pf-c-radio"
+                <Radio
+                  aria-label="Three"
+                  className=""
+                  id="Foo-3"
+                  isDisabled={false}
+                  isValid={true}
+                  label="Three"
+                  name="Foo"
+                  onChange={[Function]}
                 >
-                  <input
-                    aria-invalid={false}
-                    className="pf-c-radio__input"
-                    disabled={false}
-                    id="Foo-3"
-                    name="Foo"
-                    onChange={[Function]}
-                    type="radio"
-                  />
-                  <label
-                    className="pf-c-radio__label"
-                    htmlFor="Foo-3"
+                  <div
+                    className="pf-c-radio"
                   >
-                    Three
-                  </label>
-                </div>
-              </Radio>
+                    <input
+                      aria-invalid={false}
+                      className="pf-c-radio__input"
+                      disabled={false}
+                      id="Foo-3"
+                      name="Foo"
+                      onChange={[Function]}
+                      type="radio"
+                    />
+                    <label
+                      className="pf-c-radio__label"
+                      htmlFor="Foo-3"
+                    >
+                      Three
+                    </label>
+                  </div>
+                </Radio>
+              </MockFieldProvider>
             </div>
           </FieldProvider>
         </RadioGroup>
       </div>
     </FormGroup>
-  </FieldInterface>
-</RadioField>
+  </FormGroup>
+</Radio>
 `;
 
 exports[`FormFields should render disabled Select correctly 1`] = `
 <FormGroup
   fieldId="someIdKey"
   helperTextInvalid={false}
+  isRequired={false}
   isValid={true}
 >
   <DataDrivenSelect
-    id="someIdKey"
+    dataType="someDataType"
     isClearable={false}
     isDisabled={true}
     isSearchable={false}
-    isValid={true}
     name="Name of the field"
     options={
       Array [
@@ -2115,7 +2312,7 @@ exports[`FormFields should render disabled Select correctly 1`] = `
 `;
 
 exports[`FormFields should render disabled Switch correctly 1`] = `
-<SwitchField
+<Switch
   FieldProvider={[Function]}
   dataType="someDataType"
   id="someIdKey"
@@ -2134,6 +2331,7 @@ exports[`FormFields should render disabled Switch correctly 1`] = `
   }
 >
   <FieldProvider
+    component={[Function]}
     dataType="someDataType"
     id="someIdKey"
     input={
@@ -2149,18 +2347,16 @@ exports[`FormFields should render disabled Switch correctly 1`] = `
         "touched": false,
       }
     }
-    render={[Function]}
   >
     <div>
-      <FieldInterface
-        componentType="switch-field"
+      <MockFieldProvider
+        component={[Function]}
         dataType="someDataType"
-        hideLabel={true}
         id="someIdKey"
         input={
           Object {
-            "name": "Name of the field",
-            "value": "",
+            "name": "Foo",
+            "onChange": [MockFunction],
           }
         }
         isDisabled={true}
@@ -2170,120 +2366,151 @@ exports[`FormFields should render disabled Switch correctly 1`] = `
             "touched": false,
           }
         }
-        name="Name of the field"
       >
-        <FormGroup
-          fieldId="someIdKey"
-          helperTextInvalid={false}
-          isValid={true}
-          label={false}
+        <SwitchGroup
+          dataType="someDataType"
+          id="someIdKey"
+          input={
+            Object {
+              "name": "Foo",
+              "onChange": [MockFunction],
+            }
+          }
+          isDisabled={true}
+          meta={
+            Object {
+              "error": false,
+              "touched": false,
+            }
+          }
         >
-          <div
-            className="pf-c-form__group"
+          <FormGroup
+            hideLabel={true}
+            id="someIdKey"
+            isRequired={false}
+            meta={
+              Object {
+                "error": false,
+                "touched": false,
+              }
+            }
           >
-            <Component
-              id="someIdKey"
-              isChecked={false}
-              isDisabled={true}
-              name="Name of the field"
-              onChange={[Function]}
-              value=""
+            <FormGroup
+              fieldId="someIdKey"
+              helperTextInvalid={false}
+              isRequired={false}
+              isValid={true}
+              label={false}
             >
-              <ComponentWithOuia
-                component={[Function]}
-                componentProps={
-                  Object {
-                    "id": "someIdKey",
-                    "isChecked": false,
-                    "isDisabled": true,
-                    "label": undefined,
-                    "labelOff": undefined,
-                    "name": "Name of the field",
-                    "onChange": [Function],
-                    "value": "",
-                  }
-                }
-                consumerContext={null}
+              <div
+                className="pf-c-form__group"
               >
-                <Switch
-                  aria-label=""
-                  className=""
+                <Component
+                  dataType="someDataType"
                   id="someIdKey"
                   isChecked={false}
                   isDisabled={true}
-                  label=""
-                  labelOff=""
-                  name="Name of the field"
+                  name="Foo"
                   onChange={[Function]}
-                  ouiaContext={
-                    Object {
-                      "isOuia": false,
-                      "ouiaId": null,
-                    }
-                  }
-                  value=""
                 >
-                  <label
-                    className="pf-c-switch"
-                    htmlFor="someIdKey"
+                  <ComponentWithOuia
+                    component={[Function]}
+                    componentProps={
+                      Object {
+                        "children": undefined,
+                        "dataType": "someDataType",
+                        "id": "someIdKey",
+                        "isChecked": false,
+                        "isDisabled": true,
+                        "label": undefined,
+                        "labelOff": undefined,
+                        "name": "Foo",
+                        "onChange": [Function],
+                      }
+                    }
+                    consumerContext={null}
                   >
-                    <input
+                    <Switch
                       aria-label=""
-                      aria-labelledby="someIdKey-on"
-                      checked={false}
-                      className="pf-c-switch__input"
-                      disabled={true}
+                      className=""
+                      dataType="someDataType"
                       id="someIdKey"
-                      name="Name of the field"
+                      isChecked={false}
+                      isDisabled={true}
+                      label=""
+                      labelOff=""
+                      name="Foo"
                       onChange={[Function]}
-                      type="checkbox"
-                      value=""
-                    />
-                    <span
-                      className="pf-c-switch__toggle"
+                      ouiaContext={
+                        Object {
+                          "isOuia": false,
+                          "ouiaId": null,
+                        }
+                      }
                     >
-                      <div
-                        aria-hidden="true"
-                        className="pf-c-switch__toggle-icon"
+                      <label
+                        className="pf-c-switch"
+                        htmlFor="someIdKey"
                       >
-                        <CheckIcon
-                          color="currentColor"
-                          noVerticalAlign={true}
-                          size="sm"
-                          title={null}
+                        <input
+                          aria-label=""
+                          aria-labelledby="someIdKey-on"
+                          checked={false}
+                          className="pf-c-switch__input"
+                          dataType="someDataType"
+                          disabled={true}
+                          id="someIdKey"
+                          name="Foo"
+                          onChange={[Function]}
+                          type="checkbox"
+                        />
+                        <span
+                          className="pf-c-switch__toggle"
                         >
-                          <svg
-                            aria-hidden={true}
-                            aria-labelledby={null}
-                            fill="currentColor"
-                            height="1em"
-                            role="img"
-                            style={null}
-                            viewBox="0 0 512 512"
-                            width="1em"
+                          <div
+                            aria-hidden="true"
+                            className="pf-c-switch__toggle-icon"
                           >
-                            <path
-                              d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
-                              transform=""
-                            />
-                          </svg>
-                        </CheckIcon>
-                      </div>
-                    </span>
-                  </label>
-                </Switch>
-              </ComponentWithOuia>
-            </Component>
-          </div>
-        </FormGroup>
-      </FieldInterface>
+                            <CheckIcon
+                              color="currentColor"
+                              noVerticalAlign={true}
+                              size="sm"
+                              title={null}
+                            >
+                              <svg
+                                aria-hidden={true}
+                                aria-labelledby={null}
+                                fill="currentColor"
+                                height="1em"
+                                role="img"
+                                style={null}
+                                viewBox="0 0 512 512"
+                                width="1em"
+                              >
+                                <path
+                                  d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                                  transform=""
+                                />
+                              </svg>
+                            </CheckIcon>
+                          </div>
+                        </span>
+                      </label>
+                    </Switch>
+                  </ComponentWithOuia>
+                </Component>
+              </div>
+            </FormGroup>
+          </FormGroup>
+        </SwitchGroup>
+      </MockFieldProvider>
     </div>
   </FieldProvider>
-</SwitchField>
+</Switch>
 `;
 
 exports[`FormFields should render disabled Switch correctly 2`] = `
-<SwitchField
+<Switch
   FieldProvider={[Function]}
   dataType="someDataType"
   id="someIdKey"
@@ -2302,6 +2529,7 @@ exports[`FormFields should render disabled Switch correctly 2`] = `
   }
 >
   <FieldProvider
+    component={[Function]}
     dataType="someDataType"
     id="someIdKey"
     input={
@@ -2317,18 +2545,16 @@ exports[`FormFields should render disabled Switch correctly 2`] = `
         "touched": false,
       }
     }
-    render={[Function]}
   >
     <div>
-      <FieldInterface
-        componentType="switch-field"
+      <MockFieldProvider
+        component={[Function]}
         dataType="someDataType"
-        hideLabel={true}
         id="someIdKey"
         input={
           Object {
-            "name": "Name of the field",
-            "value": "",
+            "name": "Foo",
+            "onChange": [MockFunction],
           }
         }
         isDisabled={true}
@@ -2338,120 +2564,151 @@ exports[`FormFields should render disabled Switch correctly 2`] = `
             "touched": false,
           }
         }
-        name="Name of the field"
       >
-        <FormGroup
-          fieldId="someIdKey"
-          helperTextInvalid={false}
-          isValid={true}
-          label={false}
+        <SwitchGroup
+          dataType="someDataType"
+          id="someIdKey"
+          input={
+            Object {
+              "name": "Foo",
+              "onChange": [MockFunction],
+            }
+          }
+          isDisabled={true}
+          meta={
+            Object {
+              "error": false,
+              "touched": false,
+            }
+          }
         >
-          <div
-            className="pf-c-form__group"
+          <FormGroup
+            hideLabel={true}
+            id="someIdKey"
+            isRequired={false}
+            meta={
+              Object {
+                "error": false,
+                "touched": false,
+              }
+            }
           >
-            <Component
-              id="someIdKey"
-              isChecked={false}
-              isDisabled={true}
-              name="Name of the field"
-              onChange={[Function]}
-              value=""
+            <FormGroup
+              fieldId="someIdKey"
+              helperTextInvalid={false}
+              isRequired={false}
+              isValid={true}
+              label={false}
             >
-              <ComponentWithOuia
-                component={[Function]}
-                componentProps={
-                  Object {
-                    "id": "someIdKey",
-                    "isChecked": false,
-                    "isDisabled": true,
-                    "label": undefined,
-                    "labelOff": undefined,
-                    "name": "Name of the field",
-                    "onChange": [Function],
-                    "value": "",
-                  }
-                }
-                consumerContext={null}
+              <div
+                className="pf-c-form__group"
               >
-                <Switch
-                  aria-label=""
-                  className=""
+                <Component
+                  dataType="someDataType"
                   id="someIdKey"
                   isChecked={false}
                   isDisabled={true}
-                  label=""
-                  labelOff=""
-                  name="Name of the field"
+                  name="Foo"
                   onChange={[Function]}
-                  ouiaContext={
-                    Object {
-                      "isOuia": false,
-                      "ouiaId": null,
-                    }
-                  }
-                  value=""
                 >
-                  <label
-                    className="pf-c-switch"
-                    htmlFor="someIdKey"
+                  <ComponentWithOuia
+                    component={[Function]}
+                    componentProps={
+                      Object {
+                        "children": undefined,
+                        "dataType": "someDataType",
+                        "id": "someIdKey",
+                        "isChecked": false,
+                        "isDisabled": true,
+                        "label": undefined,
+                        "labelOff": undefined,
+                        "name": "Foo",
+                        "onChange": [Function],
+                      }
+                    }
+                    consumerContext={null}
                   >
-                    <input
+                    <Switch
                       aria-label=""
-                      aria-labelledby="someIdKey-on"
-                      checked={false}
-                      className="pf-c-switch__input"
-                      disabled={true}
+                      className=""
+                      dataType="someDataType"
                       id="someIdKey"
-                      name="Name of the field"
+                      isChecked={false}
+                      isDisabled={true}
+                      label=""
+                      labelOff=""
+                      name="Foo"
                       onChange={[Function]}
-                      type="checkbox"
-                      value=""
-                    />
-                    <span
-                      className="pf-c-switch__toggle"
+                      ouiaContext={
+                        Object {
+                          "isOuia": false,
+                          "ouiaId": null,
+                        }
+                      }
                     >
-                      <div
-                        aria-hidden="true"
-                        className="pf-c-switch__toggle-icon"
+                      <label
+                        className="pf-c-switch"
+                        htmlFor="someIdKey"
                       >
-                        <CheckIcon
-                          color="currentColor"
-                          noVerticalAlign={true}
-                          size="sm"
-                          title={null}
+                        <input
+                          aria-label=""
+                          aria-labelledby="someIdKey-on"
+                          checked={false}
+                          className="pf-c-switch__input"
+                          dataType="someDataType"
+                          disabled={true}
+                          id="someIdKey"
+                          name="Foo"
+                          onChange={[Function]}
+                          type="checkbox"
+                        />
+                        <span
+                          className="pf-c-switch__toggle"
                         >
-                          <svg
-                            aria-hidden={true}
-                            aria-labelledby={null}
-                            fill="currentColor"
-                            height="1em"
-                            role="img"
-                            style={null}
-                            viewBox="0 0 512 512"
-                            width="1em"
+                          <div
+                            aria-hidden="true"
+                            className="pf-c-switch__toggle-icon"
                           >
-                            <path
-                              d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
-                              transform=""
-                            />
-                          </svg>
-                        </CheckIcon>
-                      </div>
-                    </span>
-                  </label>
-                </Switch>
-              </ComponentWithOuia>
-            </Component>
-          </div>
-        </FormGroup>
-      </FieldInterface>
+                            <CheckIcon
+                              color="currentColor"
+                              noVerticalAlign={true}
+                              size="sm"
+                              title={null}
+                            >
+                              <svg
+                                aria-hidden={true}
+                                aria-labelledby={null}
+                                fill="currentColor"
+                                height="1em"
+                                role="img"
+                                style={null}
+                                viewBox="0 0 512 512"
+                                width="1em"
+                              >
+                                <path
+                                  d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                                  transform=""
+                                />
+                              </svg>
+                            </CheckIcon>
+                          </div>
+                        </span>
+                      </label>
+                    </Switch>
+                  </ComponentWithOuia>
+                </Component>
+              </div>
+            </FormGroup>
+          </FormGroup>
+        </SwitchGroup>
+      </MockFieldProvider>
     </div>
   </FieldProvider>
-</SwitchField>
+</Switch>
 `;
 
 exports[`FormFields should render disabled TextArea correctly 1`] = `
-<TextAreaField
+<TextArea
   dataType="someDataType"
   id="someIdKey"
   input={
@@ -2468,28 +2725,20 @@ exports[`FormFields should render disabled TextArea correctly 1`] = `
     }
   }
 >
-  <FieldInterface
-    componentType="textarea-field"
-    dataType="someDataType"
+  <FormGroup
     id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    isDisabled={true}
+    isRequired={false}
     meta={
       Object {
         "error": false,
         "touched": false,
       }
     }
-    name="Name of the field"
   >
     <FormGroup
       fieldId="someIdKey"
       helperTextInvalid={false}
+      isRequired={false}
       isValid={true}
     >
       <div
@@ -2498,8 +2747,8 @@ exports[`FormFields should render disabled TextArea correctly 1`] = `
         <TextArea
           aria-label={null}
           className=""
+          dataType="someDataType"
           disabled={true}
-          id="someIdKey"
           isRequired={false}
           isValid={true}
           name="Name of the field"
@@ -2511,8 +2760,8 @@ exports[`FormFields should render disabled TextArea correctly 1`] = `
             aria-invalid={false}
             aria-label={null}
             className="pf-c-form-control"
+            dataType="someDataType"
             disabled={true}
-            id="someIdKey"
             name="Name of the field"
             onChange={[Function]}
             required={false}
@@ -2521,8 +2770,8 @@ exports[`FormFields should render disabled TextArea correctly 1`] = `
         </TextArea>
       </div>
     </FormGroup>
-  </FieldInterface>
-</TextAreaField>
+  </FormGroup>
+</TextArea>
 `;
 
 exports[`FormFields should render touched TextField id correctly 1`] = `
@@ -2542,41 +2791,35 @@ exports[`FormFields should render touched TextField id correctly 1`] = `
     }
   }
 >
-  <FieldInterface
-    componentType="text-field"
-    dataType="someDataType"
+  <FormGroup
     id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
+    isRequired={false}
     meta={
       Object {
         "error": false,
         "touched": true,
       }
     }
-    name="Name of the field"
   >
     <FormGroup
       fieldId="someIdKey"
       helperTextInvalid={false}
+      isRequired={false}
       isValid={true}
     >
       <div
         className="pf-c-form__group"
       >
         <ForwardRef
+          dataType="someDataType"
           id="someIdKey"
-          isValid={true}
           name="Name of the field"
           value=""
         >
           <TextInputBase
             aria-label={null}
             className=""
+            dataType="someDataType"
             id="someIdKey"
             innerRef={null}
             isDisabled={false}
@@ -2593,6 +2836,7 @@ exports[`FormFields should render touched TextField id correctly 1`] = `
               aria-invalid={false}
               aria-label={null}
               className="pf-c-form-control"
+              dataType="someDataType"
               disabled={false}
               id="someIdKey"
               name="Name of the field"
@@ -2606,12 +2850,12 @@ exports[`FormFields should render touched TextField id correctly 1`] = `
         </ForwardRef>
       </div>
     </FormGroup>
-  </FieldInterface>
+  </FormGroup>
 </TextField>
 `;
 
 exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
-<SwitchField
+<Switch
   FieldProvider={[Function]}
   dataType="someDataType"
   id="someIdKey"
@@ -2631,6 +2875,7 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
   onText="I am on"
 >
   <FieldProvider
+    component={[Function]}
     dataType="someDataType"
     id="someIdKey"
     input={
@@ -2647,18 +2892,16 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
     }
     offText="Turned off"
     onText="I am on"
-    render={[Function]}
   >
     <div>
-      <FieldInterface
-        componentType="switch-field"
+      <MockFieldProvider
+        component={[Function]}
         dataType="someDataType"
-        hideLabel={true}
         id="someIdKey"
         input={
           Object {
-            "name": "Name of the field",
-            "value": "",
+            "name": "Foo",
+            "onChange": [MockFunction],
           }
         }
         meta={
@@ -2667,103 +2910,135 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
             "touched": false,
           }
         }
-        name="Name of the field"
         offText="Turned off"
         onText="I am on"
       >
-        <FormGroup
-          fieldId="someIdKey"
-          helperTextInvalid={false}
-          isValid={true}
-          label={false}
+        <SwitchGroup
+          dataType="someDataType"
+          id="someIdKey"
+          input={
+            Object {
+              "name": "Foo",
+              "onChange": [MockFunction],
+            }
+          }
+          meta={
+            Object {
+              "error": false,
+              "touched": false,
+            }
+          }
+          offText="Turned off"
+          onText="I am on"
         >
-          <div
-            className="pf-c-form__group"
+          <FormGroup
+            hideLabel={true}
+            id="someIdKey"
+            isRequired={false}
+            meta={
+              Object {
+                "error": false,
+                "touched": false,
+              }
+            }
           >
-            <Component
-              id="someIdKey"
-              isChecked={false}
-              label="I am on"
-              labelOff="Turned off"
-              name="Name of the field"
-              onChange={[Function]}
-              value=""
+            <FormGroup
+              fieldId="someIdKey"
+              helperTextInvalid={false}
+              isRequired={false}
+              isValid={true}
+              label={false}
             >
-              <ComponentWithOuia
-                component={[Function]}
-                componentProps={
-                  Object {
-                    "id": "someIdKey",
-                    "isChecked": false,
-                    "isDisabled": undefined,
-                    "label": "I am on",
-                    "labelOff": "Turned off",
-                    "name": "Name of the field",
-                    "onChange": [Function],
-                    "value": "",
-                  }
-                }
-                consumerContext={null}
+              <div
+                className="pf-c-form__group"
               >
-                <Switch
-                  aria-label=""
-                  className=""
+                <Component
+                  dataType="someDataType"
                   id="someIdKey"
                   isChecked={false}
-                  isDisabled={false}
                   label="I am on"
                   labelOff="Turned off"
-                  name="Name of the field"
+                  name="Foo"
                   onChange={[Function]}
-                  ouiaContext={
-                    Object {
-                      "isOuia": false,
-                      "ouiaId": null,
-                    }
-                  }
-                  value=""
                 >
-                  <label
-                    className="pf-c-switch"
-                    htmlFor="someIdKey"
+                  <ComponentWithOuia
+                    component={[Function]}
+                    componentProps={
+                      Object {
+                        "children": undefined,
+                        "dataType": "someDataType",
+                        "id": "someIdKey",
+                        "isChecked": false,
+                        "isDisabled": undefined,
+                        "label": "I am on",
+                        "labelOff": "Turned off",
+                        "name": "Foo",
+                        "onChange": [Function],
+                      }
+                    }
+                    consumerContext={null}
                   >
-                    <input
+                    <Switch
                       aria-label=""
-                      aria-labelledby="someIdKey-on"
-                      checked={false}
-                      className="pf-c-switch__input"
-                      disabled={false}
+                      className=""
+                      dataType="someDataType"
                       id="someIdKey"
-                      name="Name of the field"
+                      isChecked={false}
+                      isDisabled={false}
+                      label="I am on"
+                      labelOff="Turned off"
+                      name="Foo"
                       onChange={[Function]}
-                      type="checkbox"
-                      value=""
-                    />
-                    <span
-                      className="pf-c-switch__toggle"
-                    />
-                    <span
-                      aria-hidden="true"
-                      className="pf-c-switch__label pf-m-on"
-                      id="someIdKey-on"
+                      ouiaContext={
+                        Object {
+                          "isOuia": false,
+                          "ouiaId": null,
+                        }
+                      }
                     >
-                      I am on
-                    </span>
-                    <span
-                      aria-hidden="true"
-                      className="pf-c-switch__label pf-m-off"
-                      id="someIdKey-off"
-                    >
-                      Turned off
-                    </span>
-                  </label>
-                </Switch>
-              </ComponentWithOuia>
-            </Component>
-          </div>
-        </FormGroup>
-      </FieldInterface>
+                      <label
+                        className="pf-c-switch"
+                        htmlFor="someIdKey"
+                      >
+                        <input
+                          aria-label=""
+                          aria-labelledby="someIdKey-on"
+                          checked={false}
+                          className="pf-c-switch__input"
+                          dataType="someDataType"
+                          disabled={false}
+                          id="someIdKey"
+                          name="Foo"
+                          onChange={[Function]}
+                          type="checkbox"
+                        />
+                        <span
+                          className="pf-c-switch__toggle"
+                        />
+                        <span
+                          aria-hidden="true"
+                          className="pf-c-switch__label pf-m-on"
+                          id="someIdKey-on"
+                        >
+                          I am on
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          className="pf-c-switch__label pf-m-off"
+                          id="someIdKey-off"
+                        >
+                          Turned off
+                        </span>
+                      </label>
+                    </Switch>
+                  </ComponentWithOuia>
+                </Component>
+              </div>
+            </FormGroup>
+          </FormGroup>
+        </SwitchGroup>
+      </MockFieldProvider>
     </div>
   </FieldProvider>
-</SwitchField>
+</Switch>
 `;
