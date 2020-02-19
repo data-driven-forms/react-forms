@@ -1,6 +1,6 @@
 /* eslint react/prop-types: "off" */
 import React, { Fragment, useState } from 'react';
-import FormRender, { layoutComponents, componentTypes } from '@data-driven-forms/react-form-renderer';
+import FormRender, { componentTypes } from '@data-driven-forms/react-form-renderer';
 
 const wrapperStyles = {
   padding: 16,
@@ -27,14 +27,6 @@ const getButtonStyle = variant => ({
 });
 
 const Button = ({ children, label, variant, ...props }) => <button style={ getButtonStyle(variant) } { ...props }>{ label }</button>;
-
-const layoutComponent = {
-  [layoutComponents.FORM_WRAPPER]: FormWrapper,
-  [layoutComponents.BUTTON]: Button,
-  [layoutComponents.BUTTON_GROUP]: ({ key, children }) => <Fragment key={ key }>{ children }</Fragment>,
-  [layoutComponents.TITLE]: Fragment,
-  [layoutComponents.DESCRIPTION]: Fragment,
-};
 
 const TextField = ({ formOptions, label, input, isRequired, meta: { error, touched }, FieldProvider, dataType, FieldArrayProvider, ...props }) => (
   <div className={ `ddorg__demo-formGroup ${isRequired ? 'required' : ''} ${error ? 'error' : ''}` }>
@@ -151,7 +143,7 @@ const FieldArrayProvider = () => {
     <React.Fragment>
       <FormRender
         formFieldsMapper={ formFieldsMapper }
-        layoutMapper={ layoutComponent }
+        formTemplate={ () => null }
         schema={ schema }
         onSubmit={ onSubmit }
         onStateUpdate={ ({ values }) => setValues(values) }

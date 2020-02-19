@@ -1,6 +1,6 @@
 /* eslint react/prop-types: "off" */
 import React, { Fragment } from 'react';
-import FormRender, { layoutComponents, componentTypes } from '@data-driven-forms/react-form-renderer';
+import FormRender, { componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import './form-fields-mapper-docs.css';
 
@@ -27,14 +27,6 @@ const getButtonStyle = variant => ({
 });
 
 const Button = ({ children, label, variant, ...props }) => <button style={ getButtonStyle(variant) } { ...props }>{ label }</button>;
-
-const layoutComponent = {
-  [layoutComponents.FORM_WRAPPER]: FormWrapper,
-  [layoutComponents.BUTTON]: Button,
-  [layoutComponents.BUTTON_GROUP]: ({ key, children }) => <Fragment key={ key }>{ children }</Fragment>,
-  [layoutComponents.TITLE]: Title,
-  [layoutComponents.DESCRIPTION]: Description,
-};
 
 const TextField = ({ formOptions, customProp, label, input, isRequired, meta: { error, touched }, FieldProvider, FieldArrayProvider, dataType, ...props }) => (
   <div className={ `ddorg__demo-formGroup ${isRequired ? 'required' : ''} ${error ? 'error' : ''}` }>
@@ -89,7 +81,7 @@ const FormFieldsMapper = () => {
     <div>
       <FormRender
         formFieldsMapper={ formFieldsMapper }
-        layoutMapper={ layoutComponent }
+        formTemplate={ () => null }
         schema={ schema }
         onSubmit={ console.log }
         onCancel={ () => console.log('cancel action') }
