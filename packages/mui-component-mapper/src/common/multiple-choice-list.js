@@ -14,19 +14,18 @@ import { validationError } from './helpers';
 
 const FinalCheckbox = ({ isDisabled, label, ...props }) => (
   <FormControlLabel
-    control={ <Checkbox
-      { ...props }
-      disabled={ isDisabled }
-    >
-      { label }
-    </Checkbox> }
-    label={ label }
+    control={
+      <Checkbox {...props} disabled={isDisabled}>
+        {label}
+      </Checkbox>
+    }
+    label={label}
   />
 );
 
 FinalCheckbox.propTypes = {
   isDisabled: PropTypes.bool,
-  label: PropTypes.node,
+  label: PropTypes.node
 };
 
 const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperText, description }) => {
@@ -34,27 +33,25 @@ const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperTex
 
   return (
     <Grid container>
-      <FormControl required={ isRequired } error={ !!invalid } component="fieldset" >
-        <FormLabel>{ label }</FormLabel>
-        <FormGroup>
-          { children }
-        </FormGroup>
-        { (invalid || helperText || description) && <FormHelperText>{ invalid || helperText || description }</FormHelperText> }
+      <FormControl required={isRequired} error={!!invalid} component="fieldset">
+        <FormLabel>{label}</FormLabel>
+        <FormGroup>{children}</FormGroup>
+        {(invalid || helperText || description) && <FormHelperText>{invalid || helperText || description}</FormHelperText>}
       </FormControl>
     </Grid>
   );
 };
 
 Wrapper.propTypes = {
-  ...wrapperProps,
+  ...wrapperProps
 };
 
-const MultipleChoiceList = (props) => (
-  <MultipleChoiceListCommon
-    { ...props }
-    Wrapper={ Wrapper }
-    Checkbox={ FinalCheckbox }
-  />
-);
+const MultipleChoiceList = (props) => <MultipleChoiceListCommon {...props} name={props.input.name} Wrapper={Wrapper} Checkbox={FinalCheckbox} />;
+
+MultipleChoiceList.propTypes = {
+  input: PropTypes.shape({
+    name: PropTypes.string.isRequired
+  })
+};
 
 export default MultipleChoiceList;

@@ -14,64 +14,57 @@ import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormLabel from '@material-ui/core/FormLabel';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    display: 'flex',
+    display: 'flex'
   },
   input: {
     display: 'flex',
     padding: 0,
-    height: 'auto',
+    height: 'auto'
   },
   valueContainer: {
     display: 'flex',
     flexWrap: 'wrap',
     flex: 1,
     alignItems: 'center',
-    overflow: 'hidden',
+    overflow: 'hidden'
   },
   chip: {
-    margin: theme.spacing(0.5, 0.25),
+    margin: theme.spacing(0.5, 0.25)
   },
   chipFocused: {
-    backgroundColor: emphasize(
-      theme.palette.type === 'light' ? theme.palette.grey[300] : theme.palette.grey[700],
-      0.08,
-    ),
+    backgroundColor: emphasize(theme.palette.type === 'light' ? theme.palette.grey[300] : theme.palette.grey[700], 0.08)
   },
   noOptionsMessage: {
-    padding: theme.spacing(1, 2),
+    padding: theme.spacing(1, 2)
   },
   singleValue: {
-    fontSize: 16,
+    fontSize: 16
   },
   placeholder: {
     position: 'absolute',
     left: 2,
     bottom: 6,
-    fontSize: 16,
+    fontSize: 16
   },
   paper: {
     position: 'absolute',
     zIndex: 1,
     marginTop: theme.spacing(1),
     left: 0,
-    right: 0,
+    right: 0
   },
   divider: {
-    height: theme.spacing(2),
-  },
+    height: theme.spacing(2)
+  }
 }));
 
 function NoOptionsMessage(props) {
   return (
-    <Typography
-      color="textSecondary"
-      className={ props.selectProps.classes.noOptionsMessage }
-      { ...props.innerProps }
-    >
-      { props.children }
+    <Typography color="textSecondary" className={props.selectProps.classes.noOptionsMessage} {...props.innerProps}>
+      {props.children}
     </Typography>
   );
 }
@@ -85,20 +78,20 @@ NoOptionsMessage.propTypes = {
    * Props to be passed on to the wrapper.
    */
   innerProps: PropTypes.object.isRequired,
-  selectProps: PropTypes.object.isRequired,
+  selectProps: PropTypes.object.isRequired
 };
 
 function inputComponent({ inputRef, ...props }) {
-  return <div ref={ inputRef } { ...props } />;
+  return <div ref={inputRef} {...props} />;
 }
 
 inputComponent.propTypes = {
   inputRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({
-      current: PropTypes.any.isRequired,
-    }),
-  ]),
+      current: PropTypes.any.isRequired
+    })
+  ])
 };
 
 function Control(props) {
@@ -106,7 +99,7 @@ function Control(props) {
     children,
     innerProps,
     innerRef,
-    selectProps: { classes, TextFieldProps },
+    selectProps: { classes, TextFieldProps }
   } = props;
 
   return (
@@ -118,10 +111,10 @@ function Control(props) {
           className: classes.input,
           ref: innerRef,
           children,
-          ...innerProps,
-        },
+          ...innerProps
+        }
       }}
-      { ...TextFieldProps }
+      {...TextFieldProps}
     />
   );
 }
@@ -135,30 +128,30 @@ Control.propTypes = {
    * The mouse down event and the innerRef to pass down to the controller element.
    */
   innerProps: PropTypes.shape({
-    onMouseDown: PropTypes.func.isRequired,
+    onMouseDown: PropTypes.func.isRequired
   }).isRequired,
   innerRef: PropTypes.oneOfType([
-    PropTypes.oneOf([ null ]),
+    PropTypes.oneOf([null]),
     PropTypes.func,
     PropTypes.shape({
-      current: PropTypes.any.isRequired,
-    }),
+      current: PropTypes.any.isRequired
+    })
   ]).isRequired,
-  selectProps: PropTypes.object.isRequired,
+  selectProps: PropTypes.object.isRequired
 };
 
 function Option(props) {
   return (
     <MenuItem
-      ref={ props.innerRef }
-      selected={ props.isFocused }
+      ref={props.innerRef}
+      selected={props.isFocused}
       component="div"
       style={{
-        fontWeight: props.isSelected ? 500 : 400,
+        fontWeight: props.isSelected ? 500 : 400
       }}
-      { ...props.innerProps }
+      {...props.innerProps}
     >
-      { props.children }
+      {props.children}
     </MenuItem>
   );
 }
@@ -177,17 +170,17 @@ Option.propTypes = {
     onClick: PropTypes.func.isRequired,
     onMouseMove: PropTypes.func.isRequired,
     onMouseOver: PropTypes.func.isRequired,
-    tabIndex: PropTypes.number.isRequired,
+    tabIndex: PropTypes.number.isRequired
   }).isRequired,
   /**
    * Inner ref to DOM Node
    */
   innerRef: PropTypes.oneOfType([
-    PropTypes.oneOf([ null ]),
+    PropTypes.oneOf([null]),
     PropTypes.func,
     PropTypes.shape({
-      current: PropTypes.any.isRequired,
-    }),
+      current: PropTypes.any.isRequired
+    })
   ]).isRequired,
   /**
    * Whether the option is focused.
@@ -196,14 +189,14 @@ Option.propTypes = {
   /**
    * Whether the option is selected.
    */
-  isSelected: PropTypes.bool.isRequired,
+  isSelected: PropTypes.bool.isRequired
 };
 
 function Placeholder(props) {
   const { selectProps, innerProps = {}, children } = props;
   return (
-    <Typography color="textSecondary" className={ selectProps.classes.placeholder } { ...innerProps }>
-      { children }
+    <Typography color="textSecondary" className={selectProps.classes.placeholder} {...innerProps}>
+      {children}
     </Typography>
   );
 }
@@ -217,13 +210,13 @@ Placeholder.propTypes = {
    * props passed to the wrapping element for the group.
    */
   innerProps: PropTypes.object,
-  selectProps: PropTypes.object.isRequired,
+  selectProps: PropTypes.object.isRequired
 };
 
 function SingleValue(props) {
   return (
-    <Typography className={ props.selectProps.classes.singleValue } { ...props.innerProps }>
-      { props.children }
+    <Typography className={props.selectProps.classes.singleValue} {...props.innerProps}>
+      {props.children}
     </Typography>
   );
 }
@@ -237,11 +230,11 @@ SingleValue.propTypes = {
    * Props passed to the wrapping element for the group.
    */
   innerProps: PropTypes.any.isRequired,
-  selectProps: PropTypes.object.isRequired,
+  selectProps: PropTypes.object.isRequired
 };
 
 function ValueContainer(props) {
-  return <div className={ props.selectProps.classes.valueContainer }>{ props.children }</div>;
+  return <div className={props.selectProps.classes.valueContainer}>{props.children}</div>;
 }
 
 ValueContainer.propTypes = {
@@ -249,19 +242,19 @@ ValueContainer.propTypes = {
    * The children to be rendered.
    */
   children: PropTypes.node,
-  selectProps: PropTypes.object.isRequired,
+  selectProps: PropTypes.object.isRequired
 };
 
 function MultiValue(props) {
   return (
     <Chip
-      tabIndex={ -1 }
-      label={ props.children }
-      className={ clsx(props.selectProps.classes.chip, {
-        [props.selectProps.classes.chipFocused]: props.isFocused,
-      }) }
-      onDelete={ props.removeProps.onClick }
-      deleteIcon={ <CancelIcon { ...props.removeProps } /> }
+      tabIndex={-1}
+      label={props.children}
+      className={clsx(props.selectProps.classes.chip, {
+        [props.selectProps.classes.chipFocused]: props.isFocused
+      })}
+      onDelete={props.removeProps.onClick}
+      deleteIcon={<CancelIcon {...props.removeProps} />}
     />
   );
 }
@@ -272,15 +265,15 @@ MultiValue.propTypes = {
   removeProps: PropTypes.shape({
     onClick: PropTypes.func.isRequired,
     onMouseDown: PropTypes.func.isRequired,
-    onTouchEnd: PropTypes.func.isRequired,
+    onTouchEnd: PropTypes.func.isRequired
   }).isRequired,
-  selectProps: PropTypes.object.isRequired,
+  selectProps: PropTypes.object.isRequired
 };
 
 function Menu(props) {
   return (
-    <Paper square className={ props.selectProps.classes.paper } { ...props.innerProps }>
-      { props.children }
+    <Paper square className={props.selectProps.classes.paper} {...props.innerProps}>
+      {props.children}
     </Paper>
   );
 }
@@ -294,7 +287,7 @@ Menu.propTypes = {
    * Props to be passed to the menu wrapper.
    */
   innerProps: PropTypes.object.isRequired,
-  selectProps: PropTypes.object.isRequired,
+  selectProps: PropTypes.object.isRequired
 };
 
 const components = {
@@ -305,38 +298,31 @@ const components = {
   Option,
   Placeholder,
   SingleValue,
-  ValueContainer,
+  ValueContainer
 };
 
-function IntegrationReactSelect (props) {
+function IntegrationReactSelect(props) {
   const classes = useStyles();
   const theme = useTheme();
   const { invalid, ...rest } = props;
 
   const selectStyles = {
-    input: base => ({
+    input: (base) => ({
       ...base,
       color: theme.palette.text.primary,
       '& input': {
-        font: 'inherit',
-      },
-    }),
+        font: 'inherit'
+      }
+    })
   };
 
   return (
-    <FormControl required={ rest.isRequired } error={ !!invalid } component="fieldset" className={ classes.root }>
-      <FormLabel>{ rest.label }</FormLabel>
+    <FormControl required={rest.isRequired} error={!!invalid} component="fieldset" className={classes.root}>
+      <FormLabel>{rest.label}</FormLabel>
       <NoSsr>
-        <Select
-          classes={ classes }
-          styles={ selectStyles }
-          components={ components }
-          error={ !!invalid }
-          { ...rest }
-          isDisabled={ !!rest.isDisabled }
-        />
+        <Select classes={classes} styles={selectStyles} components={components} error={!!invalid} {...rest} isDisabled={!!rest.isDisabled} />
       </NoSsr>
-      { (invalid || rest.helperText || rest.description) && <FormHelperText>{ invalid || rest.helperText || rest.description }</FormHelperText> }
+      {(invalid || rest.helperText || rest.description) && <FormHelperText>{invalid || rest.helperText || rest.description}</FormHelperText>}
     </FormControl>
   );
 }

@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import MUIButton from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import formTemplate from '../../../common/src/form-template';
+import formTemplate from '@data-driven-forms/common/src/form-template';
 
 const Form = ({ children, ...props }) => <form {...props}>{children}</form>;
 const Description = ({ children }) => (
