@@ -2,14 +2,14 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Typography from '@material-ui/core/Typography';
 
-import PlainText from '../form-fields/plain-text';
+import PlainText from '../components/plain-text';
 
 describe('PlainText component', () => {
   it('renders correctly with three paragraphs', () => {
     const label = 'One \n Two \n Three';
     const name = 'name';
 
-    const wrapper = mount(<PlainText name={ name } label={ label }/>);
+    const wrapper = mount(<PlainText name={name} label={label} />);
 
     expect(wrapper.find(Typography)).toHaveLength(3);
   });
@@ -18,7 +18,7 @@ describe('PlainText component', () => {
     const label = 'One';
     const name = 'name';
 
-    const wrapper = mount(<PlainText name={ name } label={ label }/>);
+    const wrapper = mount(<PlainText name={name} label={label} />);
 
     expect(wrapper.find(Typography)).toHaveLength(1);
   });

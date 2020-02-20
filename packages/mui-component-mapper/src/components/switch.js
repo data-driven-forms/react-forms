@@ -11,8 +11,22 @@ import { meta, input } from '@data-driven-forms/common/src/prop-types-templates'
 import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
 
-export const SwitchInternal = ({ input, isReadOnly, isDisabled, isRequired, label, helperText, validateOnMount, meta, onText, offText, ...rest }) => {
+export const SwitchInternal = ({
+  input,
+  isReadOnly,
+  isDisabled,
+  isRequired,
+  label,
+  helperText,
+  description,
+  validateOnMount,
+  meta,
+  onText,
+  offText,
+  ...rest
+}) => {
   const invalid = validationError(meta, validateOnMount);
+  const text = invalid || helperText || description;
 
   return (
     <FormFieldGrid>
@@ -31,7 +45,7 @@ export const SwitchInternal = ({ input, isReadOnly, isDisabled, isRequired, labe
             }
             label={<FormLabel>{input.value ? onText || label : offText || label}</FormLabel>}
           />
-          {(invalid || helperText) && <FormHelperText>{invalid || helperText}</FormHelperText>}
+          {(invalid || text) && <FormHelperText>{invalid || text}</FormHelperText>}
         </FormGroup>
       </FormControl>
     </FormFieldGrid>
@@ -48,7 +62,8 @@ SwitchInternal.propTypes = {
   helperText: PropTypes.node,
   validateOnMount: PropTypes.bool,
   onText: PropTypes.node,
-  offText: PropTypes.node
+  offText: PropTypes.node,
+  description: PropTypes.node
 };
 
 const Switch = ({ FieldProvider, ...props }) => <FieldProvider {...props} component={SwitchInternal} />;

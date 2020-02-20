@@ -12,8 +12,9 @@ import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
 import MultipleChoiceList from '../common/multiple-choice-list';
 
-export const SingleCheckbox = ({ input, isReadOnly, isDisabled, isRequired, label, helperText, validateOnMount, meta }) => {
+export const SingleCheckbox = ({ input, isReadOnly, isDisabled, isRequired, label, helperText, description, validateOnMount, meta }) => {
   const invalid = validationError(meta, validateOnMount);
+  const text = invalid || helperText || description;
 
   return (
     <FormFieldGrid>
@@ -33,7 +34,7 @@ export const SingleCheckbox = ({ input, isReadOnly, isDisabled, isRequired, labe
             disabled={isDisabled || isReadOnly}
             label={<FormLabel>{label}</FormLabel>}
           />
-          {(invalid || helperText) && <FormHelperText>{invalid || helperText}</FormHelperText>}
+          {(invalid || text) && <FormHelperText>{invalid || text}</FormHelperText>}
         </FormGroup>
       </FormControl>
     </FormFieldGrid>
@@ -48,6 +49,7 @@ SingleCheckbox.propTypes = {
   isRequired: PropTypes.bool,
   label: PropTypes.node,
   helperText: PropTypes.node,
+  description: PropTypes.node,
   validateOnMount: PropTypes.bool
 };
 

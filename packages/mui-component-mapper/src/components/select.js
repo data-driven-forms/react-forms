@@ -20,6 +20,7 @@ const TextField = ({
   meta,
   options,
   isSearchable,
+  description,
   ...rest
 }) => {
   const invalid = validationError(meta, validateOnMount);
@@ -51,7 +52,7 @@ const TextField = ({
         input={input}
         label={label}
         isRequired={isRequired}
-        helperText={helperText}
+        helperText={invalid || helperText || description}
         {...rest}
       />
     </FormFieldGrid>
@@ -69,7 +70,8 @@ TextField.propTypes = {
   helperText: PropTypes.node,
   validateOnMount: PropTypes.bool,
   isSearchable: PropTypes.bool,
-  options: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.any.isRequired, label: PropTypes.node.isRequired })).isRequired
+  options: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.any.isRequired, label: PropTypes.node.isRequired })).isRequired,
+  description: PropTypes.node
 };
 
 export default TextField;

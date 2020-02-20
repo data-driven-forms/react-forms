@@ -9,7 +9,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
-import MultipleChoiceList from '../form-fields/multiple-choice-list';
+import MultipleChoiceList from '../common/multiple-choice-list';
 import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 
 describe('<MultipleChoiceList />', () => {
@@ -17,14 +17,20 @@ describe('<MultipleChoiceList />', () => {
   let changeSpy = jest.fn();
   beforeEach(() => {
     initialProps = {
-      FieldProvider: props => <MockFieldProvider { ...props } input={{ onChange: changeSpy, value: props.value || []}} />,
-      options: [{
-        label: 'Foo',
-        value: 0,
-      }, {
-        label: 'Bar',
-        value: 1,
-      }],
+      input: {
+        name: 'name'
+      },
+      FieldProvider: (props) => <MockFieldProvider {...props} input={{ onChange: changeSpy, value: props.value || []}} />,
+      options: [
+        {
+          label: 'Foo',
+          value: 0
+        },
+        {
+          label: 'Bar',
+          value: 1
+        }
+      ]
     };
   });
 
@@ -33,7 +39,7 @@ describe('<MultipleChoiceList />', () => {
   });
 
   it('should render correctly', () => {
-    const wrapper = mount(<MultipleChoiceList { ...initialProps } />);
+    const wrapper = mount(<MultipleChoiceList {...initialProps} />);
 
     expect(wrapper.find(FormControl)).toHaveLength(1);
     expect(wrapper.find(FormGroup)).toHaveLength(1);
@@ -44,21 +50,27 @@ describe('<MultipleChoiceList />', () => {
   });
 
   it('should call FieldProvider on change method', () => {
-    const wrapper = mount(<MultipleChoiceList { ...initialProps } />);
+    const wrapper = mount(<MultipleChoiceList {...initialProps} />);
 
-    wrapper.find('input').last().simulate('change', { target: { checked: true }});
-    expect(changeSpy).toHaveBeenCalledWith([ 1 ]);
+    wrapper
+    .find('input')
+    .last()
+    .simulate('change', { target: { checked: true }});
+    expect(changeSpy).toHaveBeenCalledWith([1]);
   });
 
   it('should call FieldProvider on change method and remove option value form all values', () => {
     const wrapper = mount(
       <MultipleChoiceList
-        { ...initialProps }
-        FieldProvider={ props => <MockFieldProvider { ...props } input={{ onChange: changeSpy, value: props.value || [ 1 ]}} /> }
+        {...initialProps}
+        FieldProvider={(props) => <MockFieldProvider {...props} input={{ onChange: changeSpy, value: props.value || [1]}} />}
       />
     );
 
-    wrapper.find('input').last().simulate('change', { target: { checked: true }});
+    wrapper
+    .find('input')
+    .last()
+    .simulate('change', { target: { checked: true }});
     expect(changeSpy).toHaveBeenCalledWith([]);
   });
 
@@ -67,16 +79,17 @@ describe('<MultipleChoiceList />', () => {
 
     const wrapper = mount(
       <MultipleChoiceList
-        { ...initialProps }
-        FieldProvider={ props => (
+        {...initialProps}
+        FieldProvider={(props) => (
           <MockFieldProvider
-            { ...props }
+            {...props}
             input={{ onChange: changeSpy, value: []}}
             meta={{
               error: ERROR_MESSAGE,
-              touched: true,
+              touched: true
             }}
-          />) }
+          />
+        )}
       />
     );
 

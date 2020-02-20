@@ -11,9 +11,9 @@ import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
 import './radio.scss';
 
-const Radio = ({ FieldProvider, options, isDisabled, input, label, isRequired, helperText, isReadOnly, meta, validateOnMount }) => {
+const Radio = ({ FieldProvider, options, isDisabled, input, label, isRequired, helperText, description, isReadOnly, meta, validateOnMount }) => {
   const invalid = validationError(meta, validateOnMount);
-
+  const text = invalid || helperText || description;
   return (
     <FormFieldGrid className="mui-ddform-radio-group">
       <FormControl required={isRequired} error={!!invalid} component="fieldset">
@@ -41,7 +41,7 @@ const Radio = ({ FieldProvider, options, isDisabled, input, label, isRequired, h
             )}
           />
         ))}
-        {(invalid || helperText) && <FormHelperText>{invalid || helperText}</FormHelperText>}
+        {(invalid || text) && <FormHelperText>{invalid || text}</FormHelperText>}
       </FormControl>
     </FormFieldGrid>
   );
@@ -62,7 +62,8 @@ Radio.propTypes = {
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired
   }),
-  children: PropTypes.any
+  children: PropTypes.any,
+  description: PropTypes.node
 };
 
 Radio.defaultProps = {

@@ -7,25 +7,41 @@ import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
 import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
 
-const DatePicker = ({ input, isReadOnly, isDisabled, placeholder, isRequired, label, helperText, validateOnMount, meta, locale = 'en' }) => (
-  <FormFieldGrid>
-    <MuiPickersUtilsProvider locale={locale} utils={MomentUtils}>
-      <MUIDatePicker
-        fullWidth
-        margin="normal"
-        label={label}
-        helperText={helperText}
-        disabled={isDisabled || isReadOnly}
-        placeholder={placeholder}
-        required={isRequired}
-        error={!!validationError(meta, validateOnMount)}
-        readOnly={isReadOnly}
-        {...input}
-        value={input.value || null}
-      />
-    </MuiPickersUtilsProvider>
-  </FormFieldGrid>
-);
+const DatePicker = ({
+  input,
+  isReadOnly,
+  isDisabled,
+  placeholder,
+  isRequired,
+  label,
+  helperText,
+  description,
+  validateOnMount,
+  meta,
+  locale = 'en'
+}) => {
+  const invalid = validationError(meta, validateOnMount);
+
+  return (
+    <FormFieldGrid>
+      <MuiPickersUtilsProvider locale={locale} utils={MomentUtils}>
+        <MUIDatePicker
+          fullWidth
+          margin="normal"
+          label={label}
+          helperText={invalid || helperText || description}
+          disabled={isDisabled || isReadOnly}
+          placeholder={placeholder}
+          required={isRequired}
+          error={!!invalid}
+          readOnly={isReadOnly}
+          {...input}
+          value={input.value || null}
+        />
+      </MuiPickersUtilsProvider>
+    </FormFieldGrid>
+  );
+};
 
 DatePicker.propTypes = {
   input,
@@ -37,7 +53,8 @@ DatePicker.propTypes = {
   label: PropTypes.node,
   helperText: PropTypes.node,
   validateOnMount: PropTypes.bool,
-  locale: PropTypes.string
+  locale: PropTypes.string,
+  description: PropTypes.node
 };
 
 export default DatePicker;
