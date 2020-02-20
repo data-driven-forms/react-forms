@@ -55,7 +55,7 @@ export const simpleSchemaResult = {
     helperText: 'Hint: Make it strong!',
     validate: [{
       type: 'min-length-validator',
-      treshold: 3,
+      threshold: 3,
     }],
   }, {
     name: 'telephone',
@@ -67,7 +67,7 @@ export const simpleSchemaResult = {
     type: 'tel',
     validate: [{
       type: 'min-length-validator',
-      treshold: 10,
+      threshold: 10,
     }],
   }],
 };
@@ -224,7 +224,7 @@ export const arraySchemaResult = {
     title: 'A list with a minimal number of items',
     validate: [{
       type: 'min-items-validator',
-      treshold: 3,
+      threshold: 3,
     }],
     fields: [{
       label: 'name',
@@ -247,7 +247,7 @@ export const arraySchemaResult = {
     itemDefault: 'unidentified',
     validate: [{
       type: 'min-items-validator',
-      treshold: 5,
+      threshold: 5,
     }],
     fields: [{
       dataType: 'string',
