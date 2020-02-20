@@ -7,13 +7,13 @@ import { WizardNav } from '@patternfly/react-core/dist/js/components/Wizard/Wiza
 import { Backdrop } from '@patternfly/react-core/dist/js/components/Backdrop/Backdrop';
 import { Bullseye } from '@patternfly/react-core/dist/js/layouts/Bullseye/index';
 
-import WizardStep from './wizard-step';
-import './wizard-styles.scss';
+import WizardStep from './wizard/wizard-step';
+import './wizard/wizard-styles.scss';
 import get from 'lodash/get';
 import set from 'lodash/set';
 import flattenDeep from 'lodash/flattenDeep';
 import handleEnter from '@data-driven-forms/common/src/wizard/enter-handler';
-import WizardNavigation from './wizard-nav';
+import WizardNavigation from './wizard/wizard-nav';
 
 const DYNAMIC_WIZARD_TYPES = [ 'function', 'object' ];
 
