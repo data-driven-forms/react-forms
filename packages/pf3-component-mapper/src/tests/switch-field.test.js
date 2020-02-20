@@ -6,7 +6,7 @@ import Switch, {
   createLabelStyles,
   DIVIDER_SIZE,
   COMBINED_MARGIN,
-  TEXT_PADDING,
+  TEXT_PADDING
 } from '../form-fields/switch-field';
 import { computeTextWidth } from '../helpers/html-helper';
 

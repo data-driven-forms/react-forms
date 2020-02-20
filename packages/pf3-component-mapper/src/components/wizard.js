@@ -1,5 +1,5 @@
 import React from 'react';
-import WizardStep from './wizard-step';
+import WizardStep from './wizard/wizard-step';
 import PropTypes from 'prop-types';
 import { Wizard as PfWizard, Modal, Icon } from 'patternfly-react';
 import handleEnter from '@data-driven-forms/common/src/wizard/enter-handler';

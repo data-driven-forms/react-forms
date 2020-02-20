@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Option from '../../../form-fields/select/option';
+import Option from '../../../components/select/option';
 
 describe('<Option />', () => {
   const optionProps = {

@@ -2,10 +2,11 @@ import React from 'react';
 import toJson from 'enzyme-to-json';
 import { mount } from 'enzyme';
 import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
-import Wizard from '../form-fields/wizzard/wizzard';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
-import { formFieldsMapper, formTemplate } from '../';
+import formTemplate from '../components/form-template';
+import componentMapper from '../components/component-mapper';
+import Wizard from '../components/wizard';
 
 describe('<Wizard />', () => {
   const cancelSpy = jest.fn();
@@ -219,7 +220,7 @@ describe('<Wizard />', () => {
     const wrapper = mount(
       <FormRenderer
         schema={ conditionalSchema }
-        formFieldsMapper={ formFieldsMapper }
+        formFieldsMapper={ componentMapper }
         formTemplate={ formTemplate({showFormControls: false}) }
         onCancel={ () => {} }
         onSubmit={ jest.fn() }

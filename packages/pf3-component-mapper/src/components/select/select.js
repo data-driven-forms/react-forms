@@ -251,6 +251,7 @@ class Select extends Component {  constructor(props){
 
 Select.defaultProps = {
   placeholder: 'Search...',
+  classNamePrefix: 'ddorg__pf3-component-mapper__select'
 };
 
 Select.propTypes = {

@@ -6,7 +6,7 @@ import ReactSelect from 'react-select';
 import { DropdownButton } from 'patternfly-react';
 import DataDrivenSelect from '@data-driven-forms/common/src/select';
 
-import SelectField from '../../../form-fields/select';
+import SelectField from '../../../components/select/select';
 
 describe('<SelectField />', () => {
   let initialProps;
