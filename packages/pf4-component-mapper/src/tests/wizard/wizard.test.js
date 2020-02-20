@@ -6,7 +6,7 @@ import { TextInput } from '@patternfly/react-core';
 import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import * as enterHandle from '@data-driven-forms/common/src/wizard/enter-handler';
 
-import { componentMapper, layoutMapper } from '../../index';
+import { componentMapper, formTemplate } from '../../index';
 import Wizard from '../../components/wizard';
 
 describe('<Wizard />', () => {
@@ -101,7 +101,7 @@ describe('<Wizard />', () => {
     initialProps = {
       schema,
       formFieldsMapper: componentMapper,
-      layoutMapper,
+      formTemplate: formTemplate(),
       onSubmit: jest.fn(),
       onCancel: jest.fn(),
       showFormControls: false
@@ -748,10 +748,9 @@ describe('<Wizard />', () => {
       <FormRenderer
         schema={schema}
         formFieldsMapper={componentMapper}
-        layoutMapper={layoutMapper}
+        formTemplate={formTemplate({ showFormControls: false })}
         onSubmit={jest.fn()}
         onCancel={jest.fn()}
-        showFormControls={false}
       />
     );
 
@@ -954,10 +953,9 @@ describe('<Wizard />', () => {
         <FormRenderer
           schema={wizardSchema}
           formFieldsMapper={componentMapper}
-          layoutMapper={layoutMapper}
+          formTemplate={formTemplate({ showFormControls: false })}
           onSubmit={jest.fn()}
           onCancel={jest.fn()}
-          showFormControls={false}
         />
       );
 
@@ -998,10 +996,9 @@ describe('<Wizard />', () => {
         <FormRenderer
           schema={wizardSchema}
           formFieldsMapper={componentMapper}
-          layoutMapper={layoutMapper}
+          formTemplate={formTemplate({ showFormControls: false })}
           onSubmit={jest.fn()}
           onCancel={jest.fn()}
-          showFormControls={false}
         />
       );
 
@@ -1037,10 +1034,9 @@ describe('<Wizard />', () => {
         <FormRenderer
           schema={wizardSchema}
           formFieldsMapper={componentMapper}
-          layoutMapper={layoutMapper}
+          formTemplate={formTemplate({ showFormControls: false })}
           onSubmit={jest.fn()}
           onCancel={jest.fn()}
-          showFormControls={false}
         />
       );
 
@@ -1120,10 +1116,9 @@ describe('<Wizard />', () => {
         <FormRenderer
           schema={wizardSchema}
           formFieldsMapper={componentMapper}
-          layoutMapper={layoutMapper}
+          formTemplate={formTemplate({ showFormControls: false })}
           onSubmit={jest.fn()}
           onCancel={jest.fn()}
-          showFormControls={false}
         />
       );
 
@@ -1211,10 +1206,9 @@ describe('<Wizard />', () => {
         <FormRenderer
           schema={wizardSchemaWithNextStepFunction}
           formFieldsMapper={componentMapper}
-          layoutMapper={layoutMapper}
+          formTemplate={formTemplate({ showFormControls: false })}
           onSubmit={jest.fn()}
           onCancel={jest.fn()}
-          showFormControls={false}
         />
       );
 
@@ -1286,10 +1280,9 @@ describe('<Wizard />', () => {
         <FormRenderer
           schema={wizardSchema}
           formFieldsMapper={componentMapper}
-          layoutMapper={layoutMapper}
+          formTemplate={formTemplate({ showFormControls: false })}
           onSubmit={jest.fn()}
           onCancel={jest.fn()}
-          showFormControls={false}
         />
       );
 

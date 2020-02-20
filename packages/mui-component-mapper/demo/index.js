@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 
 import Grid from '@material-ui/core/Grid';
-import { formFieldsMapper, layoutMapper } from '../src'
+import { formFieldsMapper, formTemplate } from '../src'
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Typography from '@material-ui/core/Typography';
@@ -32,7 +32,7 @@ const App = () => (
                 <FormRenderer
                     onSubmit={console.log}
                     formFieldsMapper={formFieldsMapper}
-                    layoutMapper={layoutMapper}
+                    formTemplate={formTemplate()}
                     schema={sandbox}
                     onCancel={() => console.log('canceling')}
                 />

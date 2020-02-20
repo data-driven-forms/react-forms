@@ -24,7 +24,7 @@ const DataTypesExample = () => {
           'field-with-initial-value': 'Delete me!',
         }}
         clearedValue={ null }
-        layoutMapper={ layoutMapper }
+        formTemplate={ formTemplate }
         formFieldsMapper={ formFieldsMapper }
         schema={ schema }
         onSubmit={ console.log }

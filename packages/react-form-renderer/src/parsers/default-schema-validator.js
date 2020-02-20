@@ -123,10 +123,10 @@ const checkDataType = (type, fieldName) => {
   }
 };
 
-const iterateOverFields = (fields, formFieldsMapper, layoutMapper, parent = {}) => {
+const iterateOverFields = (fields, formFieldsMapper, parent = {}) => {
   fields.forEach(field => {
     if (Array.isArray(field)) {
-      return iterateOverFields(field, formFieldsMapper, layoutMapper);
+      return iterateOverFields(field, formFieldsMapper);
     }
 
     if (parent.component !== componentTypes.WIZARD){
@@ -168,18 +168,18 @@ const iterateOverFields = (fields, formFieldsMapper, layoutMapper, parent = {}) 
     }
 
     if (field.hasOwnProperty('fields')) {
-      iterateOverFields(field.fields, formFieldsMapper, layoutMapper, field);
+      iterateOverFields(field.fields, formFieldsMapper, field);
     }
   });
 };
 
-const defaultSchemaValidator = (schema, formFieldsMapper, layoutMapper = {}) => {
+const defaultSchemaValidator = (schema, formFieldsMapper) => {
   if (Array.isArray(schema) || typeof schema !== 'object') {
     throw new DefaultSchemaError(`Form Schema must be an object, received ${Array.isArray(schema) ? 'array' : typeof schema}!`);
   }
 
   checkFieldsArray(schema, 'schema');
-  iterateOverFields(schema.fields, formFieldsMapper, layoutMapper);
+  iterateOverFields(schema.fields, formFieldsMapper);
 
 };
 

@@ -69,7 +69,7 @@ const InitializeOnMountWizardExample = () => {
   return (
     <div className="pf4">
       <FormRenderer
-        layoutMapper={ layoutMapper }
+        formTemplate={ formTemplate }
         formFieldsMapper={ formFieldsMapper }
         schema={ schema }
         onSubmit={ console.log }

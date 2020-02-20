@@ -2,24 +2,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import FormRenderer from '../src';
-import layoutMapper from './layout-mapper';
 import formFieldsMapper from './form-fields-mapper';
+import FormTemplate from './form-template';
 import sandboxSchema from './sandbox'
-
-const submitTest = (...args) => new Promise(resolve => {
-    setTimeout(() => {
-        console.log('args: ', args)
-        resolve('true')
-    }, 1500)
-})
-
-const FormButtons = props => {
-    return (
-        <div>
-            <button disabled={props.submitting} type="submit">Submit</button>
-        </div>
-    )
-}
 
 const App = () => (
     <div style={{ padding: 20 }}>
@@ -29,16 +14,13 @@ const App = () => (
                 text_box_3: 'initial'
             }}
             clearedValue={'bla'}
-            layoutMapper={layoutMapper}
             formFieldsMapper={formFieldsMapper}
             onSubmit={() => console.log(554)}
             onCancel={console.log}
             canReset
             onReset={() => console.log('i am resseting')}
             schema={sandboxSchema}
-            buttonOrder={['cancel', 'reset', 'submit']}
-            buttonClassName="Foo"
-            renderFormButtons={FormButtons}
+            formTemplate={FormTemplate}
         />
     </div>
 )

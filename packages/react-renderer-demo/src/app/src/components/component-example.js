@@ -143,21 +143,21 @@ class ComponentExample extends Component {
           [componentTypes.WIZARD]: MuiWizard,
           summary: Summary,
         },
-        layoutMapper: props.mappers.mui.layoutMapper,
+        formTemplate: props.mappers.mui.formTemplate,
       },
       pf3: {
         formFieldsMapper: {
           ...props.mappers.pf3.formFieldsMapper,
           summary: Summary,
         },
-        layoutMapper: props.mappers.pf3.layoutMapper,
+        formTemplate: props.mappers.pf3.formTemplate,
       },
       pf4: {
         formFieldsMapper: {
           ...props.mappers.pf4.formFieldsMapper,
           summary: Summary,
         },
-        layoutMapper: props.mappers.pf4.layoutMapper,
+        formTemplate: props.mappers.pf4.formTemplate,
       },
     };
   }
@@ -385,7 +385,7 @@ class ComponentExample extends Component {
                     { ...this.mapperVariants[activeMapper] }
                     schema={ parsedSchema }
                     onSubmit={ console.log /* eslint-disable-line no-console */ }
-                    showFormControls={ component !== 'wizard' }
+                    formTemplate={ this.mapperVariants[activeMapper].formTemplate({ showFormControls: component !== 'wizard' }) }
                   />
                 </div>
               </div>

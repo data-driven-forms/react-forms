@@ -23,7 +23,7 @@ When using dynamic forms where more fields share the same name, the value is pre
 
 ```jsx
 <FormRenderer
-  layoutMapper={ layoutMapper }
+  formTemplate={ formTemplate }
   formFieldsMapper={ formFieldsMapper }
   schema={ schema }
   onSubmit={ submit }

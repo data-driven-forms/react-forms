@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
-import { layoutMapper, formFieldsMapper } from '@data-driven-forms/pf4-component-mapper';
+import { formTemplate, formFieldsMapper } from '@data-driven-forms/pf4-component-mapper';
 import { Title } from '@patternfly/react-core/dist/js/components/Title/Title';
 
 const schema = {
@@ -23,7 +23,7 @@ const schema = {
     component: componentTypes.TEXT_FIELD,
     name: 'dependent-2',
     label: 'Depends on "First condition" field value',
-    helperText: 'Change "First condition" field value to hide this field. When this field appears again it will preserve its previouse value.',
+    helperText: 'Change "First condition" field value to hide this field. When this field appears again it will preserve its previous value.',
     condition: {
       when: 'condition-1',
       is: 'John',
@@ -36,7 +36,7 @@ const ClearOnUnmount = () => {
   return (
     <div className="pf4">
       <FormRenderer
-        layoutMapper={ layoutMapper }
+        formTemplate={ formTemplate() }
         formFieldsMapper={ formFieldsMapper }
         schema={ schema }
         onSubmit={ console.log }
