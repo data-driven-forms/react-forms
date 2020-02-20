@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FormGroup from '../../common/form-group';
-import DataDrivenSelect from './select';
+import FormGroup from '../common/form-group';
+import DataDrivenSelect from './select/select';
 
 const Select = ({ label, isRequired, helperText, meta, description, hideLabel, input, isReadOnly, isDisabled, id, ...rest }) => (
   <FormGroup
