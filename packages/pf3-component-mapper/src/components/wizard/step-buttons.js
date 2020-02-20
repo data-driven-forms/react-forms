@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../button';
+import Button from '../../common/button';
 import { Icon, Wizard } from 'patternfly-react';
 
 const SimpleNext = ({

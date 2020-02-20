@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import SubForm from '../form-fields/sub-form';
+import SubForm from '../components/sub-form';
 
 describe('<SubForm />', () => {
   let initialProps;

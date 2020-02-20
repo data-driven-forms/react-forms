@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 import { NavItem } from 'patternfly-react';
 import toJson from 'enzyme-to-json';
-import FormTabs from '../form-fields/tabs';
+import FormTabs from '../components/tabs';
 
 describe('<FormTabs />', () => {
   let initialProps;
