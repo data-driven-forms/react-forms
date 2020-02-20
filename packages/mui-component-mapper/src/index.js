@@ -1,2 +1,2 @@
-export { default as formFieldsMapper } from './form-fields/component-mapper';
-export { default as formTemplate } from './form-fields/form-template';
+export { default as componentMapper, components } from './components/component-mapper';
+export { default as formTemplate } from './components/form-template';

@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 
 import Grid from '@material-ui/core/Grid';
-import { formFieldsMapper, formTemplate } from '../src'
+import { componentMapper, formTemplate } from '../src'
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Typography from '@material-ui/core/Typography';
@@ -31,7 +31,7 @@ const App = () => (
             <Grid item xs={12}>
                 <FormRenderer
                     onSubmit={console.log}
-                    formFieldsMapper={formFieldsMapper}
+                    formFieldsMapper={componentMapper}
                     formTemplate={formTemplate()}
                     schema={sandbox}
                     onCancel={() => console.log('canceling')}

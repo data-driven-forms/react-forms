@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-import FormTabs from '../form-fields/tabs';
+import FormTabs from '../components/tabs';
 
 describe('tabs', () => {
   const props = {
@@ -12,21 +12,21 @@ describe('tabs', () => {
       {
         title: 'cosiTitle',
         name: 'cosiName',
-        fields: [],
+        fields: []
       },
       {
         title: 'cosiTitle2',
         name: 'cosiName2',
-        fields: [],
-      },
+        fields: []
+      }
     ],
     formOptions: {
-      renderForm: jest.fn().mockImplementation(() => <h1>Content</h1>),
-    },
+      renderForm: jest.fn().mockImplementation(() => <h1>Content</h1>)
+    }
   };
 
   it('should render tabs correctly', () => {
-    const wrapper = mount(<FormTabs { ...props } />);
+    const wrapper = mount(<FormTabs {...props} />);
 
     expect(wrapper.find(AppBar)).toHaveLength(1);
     expect(wrapper.find(Tabs)).toHaveLength(1);
@@ -35,7 +35,7 @@ describe('tabs', () => {
   });
 
   it('should switch tabs correctly', () => {
-    const wrapper = mount(<FormTabs { ...props } />);
+    const wrapper = mount(<FormTabs {...props} />);
     expect(wrapper.instance().state.activeTab).toEqual(0);
 
     const secondTabButton = wrapper.find('button').last();

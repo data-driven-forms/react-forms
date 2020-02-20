@@ -18,7 +18,7 @@ export const meta = PropTypes.shape({
   touched: PropTypes.bool,
   valid: PropTypes.bool,
   validating: PropTypes.bool,
-  visited: PropTypes.bool,
+  visited: PropTypes.bool
 });
 
 export const formGroup = {
@@ -26,5 +26,10 @@ export const formGroup = {
   label: PropTypes.node,
   helperText: PropTypes.node,
   meta,
-  description: PropTypes.node,
+  description: PropTypes.node
 };
+
+export const input = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  value: PropTypes.any
+});

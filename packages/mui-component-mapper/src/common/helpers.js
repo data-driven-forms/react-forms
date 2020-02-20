@@ -5,4 +5,3 @@ export const validationError = (meta, validateOnMount) => {
 
   return meta.touched && meta.error;
 };
-
