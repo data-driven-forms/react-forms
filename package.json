@@ -59,6 +59,7 @@
         "@khala/wildcard-release-notes",
         {
           "patterns": {
+            "major": "^(major|breaking)\\(",
             "minor": "^feat\\(",
             "patch": "^(fix|patch)\\("
           }

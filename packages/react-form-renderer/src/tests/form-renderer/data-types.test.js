@@ -19,12 +19,6 @@ const RenderComponent = ({ FieldProvider, ...props }) => (
   <FieldProvider render={ renderProps => <DataTypeInput { ...renderProps } /> } { ...props } />
 );
 
-const ChildrenComponent = ({ FieldProvider, ...props }) => (
-  <FieldProvider { ...props }>
-    { props => <DataTypeInput { ...props } /> }
-  </FieldProvider>
-);
-
 describe('data types', () => {
   let initialProps;
   beforeEach(() => {
@@ -34,7 +28,6 @@ describe('data types', () => {
         [componentTypes.TEXT_FIELD]: DataTypeInput,
         'prop-component': PropComponent,
         'render-component': RenderComponent,
-        'children-component': ChildrenComponent,
       },
       schema: {
         fields: [{
@@ -103,26 +96,6 @@ describe('data types', () => {
       }],
     };
     const wrapper = mount(<FormRenderer { ...initialProps } onSubmit={ onSubmit } schema={ renderSchema } />);
-    const input = wrapper.find('input');
-    input.simulate('change', { target: { value: '123' }});
-    wrapper.find('form').first().simulate('submit');
-    expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({
-      'data-type-text': 123,
-    }), expect.anything(), expect.anything());
-  });
-
-  it('should correctly add dataType to component which uses children', () => {
-    const onSubmit = jest.fn();
-    const childSchema = {
-      fields: [{
-        component: 'children-component',
-        name: 'data-type-text',
-        label: 'Data type test',
-        type: 'text',
-        dataType: 'integer',
-      }],
-    };
-    const wrapper = mount(<FormRenderer { ...initialProps } onSubmit={ onSubmit } schema={ childSchema } />);
     const input = wrapper.find('input');
     input.simulate('change', { target: { value: '123' }});
     wrapper.find('form').first().simulate('submit');

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../../common/button';
 import { Icon, Wizard } from 'patternfly-react';
-import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
 const SimpleNext = ({ next, valid, handleNext, submit, buttonLabels }) => (
   <Button bsStyle="primary" type="button" onClick={() => (valid ? handleNext(next) : submit())}>
@@ -20,9 +19,11 @@ SimpleNext.propTypes = {
 };
 
 const ConditionalNext = ({ nextStep, FieldProvider, ...rest }) => (
-  <FieldProvider name={nextStep.when} subscription={{ value: true }}>
-    {({ input: { value }}) => <SimpleNext next={nextStep.stepMapper[value]} {...rest} />}
-  </FieldProvider>
+  <FieldProvider
+    name={nextStep.when}
+    subscription={{ value: true }}
+    render={({ input: { value }}) => <SimpleNext next={nextStep.stepMapper[value]} {...rest} />}
+  />
 );
 
 ConditionalNext.propTypes = {

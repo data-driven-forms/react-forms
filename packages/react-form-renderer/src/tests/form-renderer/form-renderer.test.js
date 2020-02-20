@@ -14,7 +14,11 @@ describe('<FormRenderer />', () => {
 
   beforeEach(() => {
     formFieldsMapper = {
-      [componentTypes.TEXT_FIELD]: () => <div className="nested-item">Text field</div>,
+      [componentTypes.TEXT_FIELD]: ({ input }) => (
+        <div className="nested-item">
+          <input {...input} id={input.name} />
+        </div>
+      ),
       [componentTypes.TEXTAREA_FIELD]: () => <div className="nested-item">Textarea field</div>,
       [componentTypes.SELECT_COMPONENT]: () => <div className="nested-item">Select field</div>,
       [componentTypes.CHECKBOX]: () => <div className="nested-item">checkbox field</div>,
@@ -77,25 +81,12 @@ describe('<FormRenderer />', () => {
   });
 
   it('should call form reset callback', () => {
-    const wrapper = mount(<FormRenderer { ...initialProps } canReset />);
-    const form = wrapper.find(Form);
-    form.instance().form.change('secret', 'not so secret');
-    wrapper.update();
-    expect(form.instance().form.getState().pristine).toBe(false);
-    wrapper.find('button').at(1).simulate('click');
-    expect(form.instance().form.getState().pristine).toBe(true);
-  });
-
-  it('should call form reset callback and custom onReset callback', () => {
     const onReset = jest.fn();
-    const wrapper = mount(<FormRenderer { ...initialProps } canReset onReset={ onReset }/>);
-    const form = wrapper.find(Form);
-    form.instance().form.change('secret', 'not so secret');
+    const wrapper = mount(<FormRenderer { ...initialProps } canReset onReset={onReset} />);
+    wrapper.find('input#component1').simulate('change', { target: { value: 'foo' }});
     wrapper.update();
-    expect(form.instance().form.getState().pristine).toBe(false);
     wrapper.find('button').at(1).simulate('click');
-    expect(form.instance().form.getState().pristine).toBe(true);
-    expect(onReset).toHaveBeenCalledTimes(1);
+    expect(onReset).toHaveBeenCalled();
   });
 
   it('should render hidden field', () => {
@@ -105,11 +96,11 @@ describe('<FormRenderer />', () => {
       { ...initialProps }
       schema={{
         fields: [{
-          component: [ componentTypes.TEXT_FIELD ],
+          component: componentTypes.TEXT_FIELD,
           name: 'visible',
           label: 'Visible',
         }, {
-          component: [ componentTypes.TEXT_FIELD ],
+          component: componentTypes.TEXT_FIELD,
           name: 'hidden',
           label: 'Hidden',
           hideField: true,

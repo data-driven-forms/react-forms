@@ -606,6 +606,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                 >
                   <MockFieldProvider
                     name="step"
+                    render={[Function]}
                     subscription={
                       Object {
                         "value": true,
