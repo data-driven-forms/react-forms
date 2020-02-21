@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import { Button } from '@patternfly/react-core';
+import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
-const ValidateButtons = ({ disableBack, handlePrev, buttonLabels: { back, cancel }, formOptions, renderNextButton }) => {
+const ValidateButtons = ({ disableBack, handlePrev, buttonLabels: { back, cancel }, renderNextButton }) => {
   const [ state, setState ] = useState('init');
+  const formOptions = useFormApi();
 
   const setValidating = () => {
     setState('validating');

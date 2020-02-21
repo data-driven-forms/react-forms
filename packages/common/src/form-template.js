@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
 export const isDisabled = (disableStates, getState) => disableStates.map((item) => getState()[item]).find((item) => !!item);
 
@@ -104,28 +105,32 @@ const formTemplate = ({
   showFormControls = true,
   disableSubmit = [],
   ...options
-}) => ({ schema: { title, description, label }, formFields, FormSpy, formOptions }) => (
-  <FormWrapper onSubmit={formOptions.handleSubmit} {...formWrapperProps}>
-    {(title || label) && <Title>{title || label}</Title>}
-    {description && <Description>{description}</Description>}
-    {formFields}
-    {showFormControls && (
-      <FormSpy>
-        {(formSpyProps) => (
-          <FormControls
-            Button={Button}
-            FormSpy={FormSpy}
-            ButtonGroup={ButtonGroup}
-            onReset={formOptions.onReset}
-            onCancel={formOptions.onCancel}
-            disableSubmit={isDisabled(disableSubmit, formOptions.getState)}
-            formSpyProps={formSpyProps}
-            {...options}
-          />
-        )}
-      </FormSpy>
-    )}
-  </FormWrapper>
-);
+}) => ({ schema: { title, description, label }, formFields, FormSpy }) => {
+  const { onReset, onCancel, getState, handleSubmit } = useFormApi();
+
+  return (
+    <FormWrapper onSubmit={handleSubmit} {...formWrapperProps}>
+      {(title || label) && <Title>{title || label}</Title>}
+      {description && <Description>{description}</Description>}
+      {formFields}
+      {showFormControls && (
+        <FormSpy>
+          {(formSpyProps) => (
+            <FormControls
+              Button={Button}
+              FormSpy={FormSpy}
+              ButtonGroup={ButtonGroup}
+              onReset={onReset}
+              onCancel={onCancel}
+              disableSubmit={isDisabled(disableSubmit, getState)}
+              formSpyProps={formSpyProps}
+              {...options}
+            />
+          )}
+        </FormSpy>
+      )}
+    </FormWrapper>
+  );
+};
 
 export default formTemplate;

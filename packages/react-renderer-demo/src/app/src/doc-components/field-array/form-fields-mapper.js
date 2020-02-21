@@ -1,14 +1,12 @@
 /* eslint react/prop-types: "off" */
 import React, { Fragment, useState } from 'react';
-import FormRender, { componentTypes } from '@data-driven-forms/react-form-renderer';
+import FormRender, { componentTypes, useFormApi } from '@data-driven-forms/react-form-renderer';
 
 const wrapperStyles = {
   padding: 16,
   borderRadius: 4,
   fontFamily: 'Roboto',
 };
-
-const FormWrapper = ({ children, ...props }) => (<form style={ wrapperStyles } { ...props }>{ children }</form>);
 
 const getBackgroundColor = variant => ({
   primary: 'RebeccaPurple',
@@ -28,7 +26,7 @@ const getButtonStyle = variant => ({
 
 const Button = ({ children, label, variant, ...props }) => <button style={ getButtonStyle(variant) } { ...props }>{ label }</button>;
 
-const TextField = ({ formOptions, label, input, isRequired, meta: { error, touched }, FieldProvider, dataType, FieldArrayProvider, ...props }) => (
+const TextField = ({ label, input, isRequired, meta: { error, touched }, FieldProvider, dataType, FieldArrayProvider, ...props }) => (
   <div className={ `ddorg__demo-formGroup ${isRequired ? 'required' : ''} ${error ? 'error' : ''}` }>
     <label htmlFor={ input.name }>{ label }</label>
     <br />
@@ -43,13 +41,13 @@ const ArrayItem = ({
   fieldIndex,
   name,
   remove,
-  formOptions,
 }) => {
+  const {renderForm} = useFormApi();
   const editedFields = fields.map((field) => ({ ...field, name: `${name}.${field.name}` }));
 
   return (
     <React.Fragment>
-      { formOptions.renderForm(editedFields) }
+      { renderForm(editedFields) }
       <br />
       <Button
         onClick={ () => remove(fieldIndex) }
@@ -71,7 +69,6 @@ const FieldArray = ({
   description,
   fields,
   itemDefault,
-  formOptions,
   meta,
   FieldArrayProvider,
   ...rest
@@ -93,7 +90,6 @@ const FieldArray = ({
               fieldKey={ fieldKey }
               fieldIndex={ index }
               remove={ cosi.fields.remove }
-              formOptions={ formOptions }
             />)) }
           { isError && error }
           <br />

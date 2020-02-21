@@ -1,6 +1,14 @@
 import React from 'react';
+import { useFormApi } from '@data-driven-forms/react-form-renderer';
+import { useFormApi as useFormApiInternal } from '../packages/react-form-renderer/src';
+const path = require('path')
 
-const FormTemplate = ({ schema: { title, label, description }, formFields, formOptions, FormSpy }) => {
+const FormTemplate = ({ schema: { title, label, description }, formFields, FormSpy }) => {
+  // When testing inside the renderer package, it cannot import things from itself!
+  const isInternal = path.dirname(module.parent.filename).includes('/react-form-renderer/');
+
+  const formOptions = isInternal ? useFormApiInternal() : useFormApi();
+
   return (
     <form onSubmit={ formOptions.handleSubmit }>
       { title || label && <h1>{ title || label }</h1> }

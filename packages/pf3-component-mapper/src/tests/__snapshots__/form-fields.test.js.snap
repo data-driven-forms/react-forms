@@ -296,25 +296,17 @@ exports[`FormFields <Radio /> should render correctly 1`] = `
 `;
 
 exports[`FormFields <Switch /> should render Switch correctly 1`] = `
-<Switch
-  FieldProvider={[Function]}
-  dataType="someDataType"
-  id="someIdKey"
-  input={
+<RenderWithProvider
+  value={
     Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
+      "formOptions": Object {
+        "handleSubmit": [MockFunction],
+      },
     }
   }
 >
-  <FieldProvider
-    component={[Function]}
+  <Switch
+    FieldProvider={[Function]}
     dataType="someDataType"
     id="someIdKey"
     input={
@@ -330,25 +322,26 @@ exports[`FormFields <Switch /> should render Switch correctly 1`] = `
       }
     }
   >
-    <div>
-      <MockFieldProvider
-        component={[Function]}
-        dataType="someDataType"
-        id="someIdKey"
-        input={
-          Object {
-            "name": "Foo",
-            "onChange": [MockFunction],
-          }
+    <FieldProvider
+      component={[Function]}
+      dataType="someDataType"
+      id="someIdKey"
+      input={
+        Object {
+          "name": "Name of the field",
+          "value": "",
         }
-        meta={
-          Object {
-            "error": false,
-            "touched": false,
-          }
+      }
+      meta={
+        Object {
+          "error": false,
+          "touched": false,
         }
-      >
-        <SwitchGroup
+      }
+    >
+      <div>
+        <MockFieldProvider
+          component={[Function]}
           dataType="someDataType"
           id="someIdKey"
           input={
@@ -364,7 +357,15 @@ exports[`FormFields <Switch /> should render Switch correctly 1`] = `
             }
           }
         >
-          <FormGroup
+          <SwitchGroup
+            dataType="someDataType"
+            id="someIdKey"
+            input={
+              Object {
+                "name": "Foo",
+                "onChange": [MockFunction],
+              }
+            }
             meta={
               Object {
                 "error": false,
@@ -373,102 +374,102 @@ exports[`FormFields <Switch /> should render Switch correctly 1`] = `
             }
           >
             <FormGroup
-              bsClass="form-group"
-              validationState={null}
+              meta={
+                Object {
+                  "error": false,
+                  "touched": false,
+                }
+              }
             >
-              <div
-                className="form-group"
+              <FormGroup
+                bsClass="form-group"
+                validationState={null}
               >
-                <Switch
-                  dataType="someDataType"
-                  id="someIdKey"
-                  name="Foo"
-                  offText="OFF"
-                  onChange={[Function]}
-                  onText="ON"
+                <div
+                  className="form-group"
                 >
-                  <div>
-                    <label
-                      className="pf3-switch"
-                      onKeyDown={[Function]}
-                      style={
-                        Object {
-                          "width": 80,
-                        }
-                      }
-                      tabIndex={0}
-                    >
-                      <input
-                        dataType="someDataType"
-                        id="someIdKey"
-                        name="Foo"
-                        onChange={[Function]}
-                        type="checkbox"
-                      />
-                      <span
-                        className="pf3-switch-slider"
-                      >
-                        <span
-                          className="on-text"
-                          style={
-                            Object {
-                              "left": -46,
-                              "width": 46,
-                            }
+                  <Switch
+                    dataType="someDataType"
+                    id="someIdKey"
+                    name="Foo"
+                    offText="OFF"
+                    onChange={[Function]}
+                    onText="ON"
+                  >
+                    <div>
+                      <label
+                        className="pf3-switch"
+                        onKeyDown={[Function]}
+                        style={
+                          Object {
+                            "width": 80,
                           }
-                        >
-                          ON
-                        </span>
-                        <span
-                          className="divider"
-                          style={Object {}}
+                        }
+                        tabIndex={0}
+                      >
+                        <input
+                          dataType="someDataType"
+                          id="someIdKey"
+                          name="Foo"
+                          onChange={[Function]}
+                          type="checkbox"
                         />
                         <span
-                          className="off-text"
-                          style={
-                            Object {
-                              "left": 34,
-                              "width": 46,
-                            }
-                          }
+                          className="pf3-switch-slider"
                         >
-                          OFF
+                          <span
+                            className="on-text"
+                            style={
+                              Object {
+                                "left": -46,
+                                "width": 46,
+                              }
+                            }
+                          >
+                            ON
+                          </span>
+                          <span
+                            className="divider"
+                            style={Object {}}
+                          />
+                          <span
+                            className="off-text"
+                            style={
+                              Object {
+                                "left": 34,
+                                "width": 46,
+                              }
+                            }
+                          >
+                            OFF
+                          </span>
                         </span>
-                      </span>
-                    </label>
-                  </div>
-                </Switch>
-              </div>
+                      </label>
+                    </div>
+                  </Switch>
+                </div>
+              </FormGroup>
             </FormGroup>
-          </FormGroup>
-        </SwitchGroup>
-      </MockFieldProvider>
-    </div>
-  </FieldProvider>
-</Switch>
+          </SwitchGroup>
+        </MockFieldProvider>
+      </div>
+    </FieldProvider>
+  </Switch>
+</RenderWithProvider>
 `;
 
 exports[`FormFields <Switch /> should render Switch with label correctly 1`] = `
-<Switch
-  FieldProvider={[Function]}
-  dataType="someDataType"
-  id="someIdKey"
-  input={
+<RenderWithProvider
+  value={
     Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  label="Label"
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
+      "formOptions": Object {
+        "handleSubmit": [MockFunction],
+      },
     }
   }
 >
-  <FieldProvider
-    component={[Function]}
+  <Switch
+    FieldProvider={[Function]}
     dataType="someDataType"
     id="someIdKey"
     input={
@@ -485,26 +486,27 @@ exports[`FormFields <Switch /> should render Switch with label correctly 1`] = `
       }
     }
   >
-    <div>
-      <MockFieldProvider
-        component={[Function]}
-        dataType="someDataType"
-        id="someIdKey"
-        input={
-          Object {
-            "name": "Foo",
-            "onChange": [MockFunction],
-          }
+    <FieldProvider
+      component={[Function]}
+      dataType="someDataType"
+      id="someIdKey"
+      input={
+        Object {
+          "name": "Name of the field",
+          "value": "",
         }
-        label="Label"
-        meta={
-          Object {
-            "error": false,
-            "touched": false,
-          }
+      }
+      label="Label"
+      meta={
+        Object {
+          "error": false,
+          "touched": false,
         }
-      >
-        <SwitchGroup
+      }
+    >
+      <div>
+        <MockFieldProvider
+          component={[Function]}
           dataType="someDataType"
           id="someIdKey"
           input={
@@ -521,7 +523,15 @@ exports[`FormFields <Switch /> should render Switch with label correctly 1`] = `
             }
           }
         >
-          <FormGroup
+          <SwitchGroup
+            dataType="someDataType"
+            id="someIdKey"
+            input={
+              Object {
+                "name": "Foo",
+                "onChange": [MockFunction],
+              }
+            }
             label="Label"
             meta={
               Object {
@@ -531,112 +541,113 @@ exports[`FormFields <Switch /> should render Switch with label correctly 1`] = `
             }
           >
             <FormGroup
-              bsClass="form-group"
-              validationState={null}
+              label="Label"
+              meta={
+                Object {
+                  "error": false,
+                  "touched": false,
+                }
+              }
             >
-              <div
-                className="form-group"
+              <FormGroup
+                bsClass="form-group"
+                validationState={null}
               >
-                <ControlLabel
-                  bsClass="control-label"
-                  srOnly={false}
+                <div
+                  className="form-group"
                 >
-                  <label
-                    className="control-label"
+                  <ControlLabel
+                    bsClass="control-label"
+                    srOnly={false}
                   >
-                    Label
-                  </label>
-                </ControlLabel>
-                <Switch
-                  dataType="someDataType"
-                  id="someIdKey"
-                  name="Foo"
-                  offText="OFF"
-                  onChange={[Function]}
-                  onText="ON"
-                >
-                  <div>
                     <label
-                      className="pf3-switch"
-                      onKeyDown={[Function]}
-                      style={
-                        Object {
-                          "width": 80,
-                        }
-                      }
-                      tabIndex={0}
+                      className="control-label"
                     >
-                      <input
-                        dataType="someDataType"
-                        id="someIdKey"
-                        name="Foo"
-                        onChange={[Function]}
-                        type="checkbox"
-                      />
-                      <span
-                        className="pf3-switch-slider"
-                      >
-                        <span
-                          className="on-text"
-                          style={
-                            Object {
-                              "left": -46,
-                              "width": 46,
-                            }
+                      Label
+                    </label>
+                  </ControlLabel>
+                  <Switch
+                    dataType="someDataType"
+                    id="someIdKey"
+                    name="Foo"
+                    offText="OFF"
+                    onChange={[Function]}
+                    onText="ON"
+                  >
+                    <div>
+                      <label
+                        className="pf3-switch"
+                        onKeyDown={[Function]}
+                        style={
+                          Object {
+                            "width": 80,
                           }
-                        >
-                          ON
-                        </span>
-                        <span
-                          className="divider"
-                          style={Object {}}
+                        }
+                        tabIndex={0}
+                      >
+                        <input
+                          dataType="someDataType"
+                          id="someIdKey"
+                          name="Foo"
+                          onChange={[Function]}
+                          type="checkbox"
                         />
                         <span
-                          className="off-text"
-                          style={
-                            Object {
-                              "left": 34,
-                              "width": 46,
-                            }
-                          }
+                          className="pf3-switch-slider"
                         >
-                          OFF
+                          <span
+                            className="on-text"
+                            style={
+                              Object {
+                                "left": -46,
+                                "width": 46,
+                              }
+                            }
+                          >
+                            ON
+                          </span>
+                          <span
+                            className="divider"
+                            style={Object {}}
+                          />
+                          <span
+                            className="off-text"
+                            style={
+                              Object {
+                                "left": 34,
+                                "width": 46,
+                              }
+                            }
+                          >
+                            OFF
+                          </span>
                         </span>
-                      </span>
-                    </label>
-                  </div>
-                </Switch>
-              </div>
+                      </label>
+                    </div>
+                  </Switch>
+                </div>
+              </FormGroup>
             </FormGroup>
-          </FormGroup>
-        </SwitchGroup>
-      </MockFieldProvider>
-    </div>
-  </FieldProvider>
-</Switch>
+          </SwitchGroup>
+        </MockFieldProvider>
+      </div>
+    </FieldProvider>
+  </Switch>
+</RenderWithProvider>
 `;
 
 exports[`FormFields <Switch /> should render Switch with onText (custom prop) correctly 1`] = `
-<Switch
-  FieldProvider={[Function]}
-  dataType="someDataType"
-  id="someIdKey"
-  input={
+<RenderWithProvider
+  value={
     Object {
-      "name": "Name of the field",
-      "value": "",
+      "formOptions": Object {
+        "handleSubmit": [MockFunction],
+      },
     }
   }
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
-    }
-  }
-  onText="OnText"
 >
-  <FieldProvider
-    component={[Function]}
+  <Switch
+    FieldProvider={[Function]}
     dataType="someDataType"
     id="someIdKey"
     input={
@@ -653,26 +664,27 @@ exports[`FormFields <Switch /> should render Switch with onText (custom prop) co
     }
     onText="OnText"
   >
-    <div>
-      <MockFieldProvider
-        component={[Function]}
-        dataType="someDataType"
-        id="someIdKey"
-        input={
-          Object {
-            "name": "Foo",
-            "onChange": [MockFunction],
-          }
+    <FieldProvider
+      component={[Function]}
+      dataType="someDataType"
+      id="someIdKey"
+      input={
+        Object {
+          "name": "Name of the field",
+          "value": "",
         }
-        meta={
-          Object {
-            "error": false,
-            "touched": false,
-          }
+      }
+      meta={
+        Object {
+          "error": false,
+          "touched": false,
         }
-        onText="OnText"
-      >
-        <SwitchGroup
+      }
+      onText="OnText"
+    >
+      <div>
+        <MockFieldProvider
+          component={[Function]}
           dataType="someDataType"
           id="someIdKey"
           input={
@@ -689,111 +701,120 @@ exports[`FormFields <Switch /> should render Switch with onText (custom prop) co
           }
           onText="OnText"
         >
-          <FormGroup
+          <SwitchGroup
+            dataType="someDataType"
+            id="someIdKey"
+            input={
+              Object {
+                "name": "Foo",
+                "onChange": [MockFunction],
+              }
+            }
             meta={
               Object {
                 "error": false,
                 "touched": false,
               }
             }
+            onText="OnText"
           >
             <FormGroup
-              bsClass="form-group"
-              validationState={null}
+              meta={
+                Object {
+                  "error": false,
+                  "touched": false,
+                }
+              }
             >
-              <div
-                className="form-group"
+              <FormGroup
+                bsClass="form-group"
+                validationState={null}
               >
-                <Switch
-                  dataType="someDataType"
-                  id="someIdKey"
-                  name="Foo"
-                  offText="OFF"
-                  onChange={[Function]}
-                  onText="OnText"
+                <div
+                  className="form-group"
                 >
-                  <div>
-                    <label
-                      className="pf3-switch"
-                      onKeyDown={[Function]}
-                      style={
-                        Object {
-                          "width": 80,
-                        }
-                      }
-                      tabIndex={0}
-                    >
-                      <input
-                        dataType="someDataType"
-                        id="someIdKey"
-                        name="Foo"
-                        onChange={[Function]}
-                        type="checkbox"
-                      />
-                      <span
-                        className="pf3-switch-slider"
-                      >
-                        <span
-                          className="on-text"
-                          style={
-                            Object {
-                              "left": -46,
-                              "width": 46,
-                            }
+                  <Switch
+                    dataType="someDataType"
+                    id="someIdKey"
+                    name="Foo"
+                    offText="OFF"
+                    onChange={[Function]}
+                    onText="OnText"
+                  >
+                    <div>
+                      <label
+                        className="pf3-switch"
+                        onKeyDown={[Function]}
+                        style={
+                          Object {
+                            "width": 80,
                           }
-                        >
-                          OnText
-                        </span>
-                        <span
-                          className="divider"
-                          style={Object {}}
+                        }
+                        tabIndex={0}
+                      >
+                        <input
+                          dataType="someDataType"
+                          id="someIdKey"
+                          name="Foo"
+                          onChange={[Function]}
+                          type="checkbox"
                         />
                         <span
-                          className="off-text"
-                          style={
-                            Object {
-                              "left": 34,
-                              "width": 46,
-                            }
-                          }
+                          className="pf3-switch-slider"
                         >
-                          OFF
+                          <span
+                            className="on-text"
+                            style={
+                              Object {
+                                "left": -46,
+                                "width": 46,
+                              }
+                            }
+                          >
+                            OnText
+                          </span>
+                          <span
+                            className="divider"
+                            style={Object {}}
+                          />
+                          <span
+                            className="off-text"
+                            style={
+                              Object {
+                                "left": 34,
+                                "width": 46,
+                              }
+                            }
+                          >
+                            OFF
+                          </span>
                         </span>
-                      </span>
-                    </label>
-                  </div>
-                </Switch>
-              </div>
+                      </label>
+                    </div>
+                  </Switch>
+                </div>
+              </FormGroup>
             </FormGroup>
-          </FormGroup>
-        </SwitchGroup>
-      </MockFieldProvider>
-    </div>
-  </FieldProvider>
-</Switch>
+          </SwitchGroup>
+        </MockFieldProvider>
+      </div>
+    </FieldProvider>
+  </Switch>
+</RenderWithProvider>
 `;
 
 exports[`FormFields <Switch /> should render Switch with placeholder correctly 1`] = `
-<Switch
-  FieldProvider={[Function]}
-  dataType="someDataType"
-  id="someIdKey"
-  input={
+<RenderWithProvider
+  value={
     Object {
-      "name": "Name of the field",
-      "value": "",
+      "formOptions": Object {
+        "handleSubmit": [MockFunction],
+      },
     }
   }
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
-    }
-  }
-  placeholder="Placeholder"
 >
-  <FieldProvider
-    component={[Function]}
+  <Switch
+    FieldProvider={[Function]}
     dataType="someDataType"
     id="someIdKey"
     input={
@@ -810,26 +831,27 @@ exports[`FormFields <Switch /> should render Switch with placeholder correctly 1
     }
     placeholder="Placeholder"
   >
-    <div>
-      <MockFieldProvider
-        component={[Function]}
-        dataType="someDataType"
-        id="someIdKey"
-        input={
-          Object {
-            "name": "Foo",
-            "onChange": [MockFunction],
-          }
+    <FieldProvider
+      component={[Function]}
+      dataType="someDataType"
+      id="someIdKey"
+      input={
+        Object {
+          "name": "Name of the field",
+          "value": "",
         }
-        meta={
-          Object {
-            "error": false,
-            "touched": false,
-          }
+      }
+      meta={
+        Object {
+          "error": false,
+          "touched": false,
         }
-        placeholder="Placeholder"
-      >
-        <SwitchGroup
+      }
+      placeholder="Placeholder"
+    >
+      <div>
+        <MockFieldProvider
+          component={[Function]}
           dataType="someDataType"
           id="someIdKey"
           input={
@@ -846,111 +868,120 @@ exports[`FormFields <Switch /> should render Switch with placeholder correctly 1
           }
           placeholder="Placeholder"
         >
-          <FormGroup
+          <SwitchGroup
+            dataType="someDataType"
+            id="someIdKey"
+            input={
+              Object {
+                "name": "Foo",
+                "onChange": [MockFunction],
+              }
+            }
             meta={
               Object {
                 "error": false,
                 "touched": false,
               }
             }
+            placeholder="Placeholder"
           >
             <FormGroup
-              bsClass="form-group"
-              validationState={null}
+              meta={
+                Object {
+                  "error": false,
+                  "touched": false,
+                }
+              }
             >
-              <div
-                className="form-group"
+              <FormGroup
+                bsClass="form-group"
+                validationState={null}
               >
-                <Switch
-                  dataType="someDataType"
-                  id="someIdKey"
-                  name="Foo"
-                  offText="OFF"
-                  onChange={[Function]}
-                  onText="ON"
+                <div
+                  className="form-group"
                 >
-                  <div>
-                    <label
-                      className="pf3-switch"
-                      onKeyDown={[Function]}
-                      style={
-                        Object {
-                          "width": 80,
-                        }
-                      }
-                      tabIndex={0}
-                    >
-                      <input
-                        dataType="someDataType"
-                        id="someIdKey"
-                        name="Foo"
-                        onChange={[Function]}
-                        type="checkbox"
-                      />
-                      <span
-                        className="pf3-switch-slider"
-                      >
-                        <span
-                          className="on-text"
-                          style={
-                            Object {
-                              "left": -46,
-                              "width": 46,
-                            }
+                  <Switch
+                    dataType="someDataType"
+                    id="someIdKey"
+                    name="Foo"
+                    offText="OFF"
+                    onChange={[Function]}
+                    onText="ON"
+                  >
+                    <div>
+                      <label
+                        className="pf3-switch"
+                        onKeyDown={[Function]}
+                        style={
+                          Object {
+                            "width": 80,
                           }
-                        >
-                          ON
-                        </span>
-                        <span
-                          className="divider"
-                          style={Object {}}
+                        }
+                        tabIndex={0}
+                      >
+                        <input
+                          dataType="someDataType"
+                          id="someIdKey"
+                          name="Foo"
+                          onChange={[Function]}
+                          type="checkbox"
                         />
                         <span
-                          className="off-text"
-                          style={
-                            Object {
-                              "left": 34,
-                              "width": 46,
-                            }
-                          }
+                          className="pf3-switch-slider"
                         >
-                          OFF
+                          <span
+                            className="on-text"
+                            style={
+                              Object {
+                                "left": -46,
+                                "width": 46,
+                              }
+                            }
+                          >
+                            ON
+                          </span>
+                          <span
+                            className="divider"
+                            style={Object {}}
+                          />
+                          <span
+                            className="off-text"
+                            style={
+                              Object {
+                                "left": 34,
+                                "width": 46,
+                              }
+                            }
+                          >
+                            OFF
+                          </span>
                         </span>
-                      </span>
-                    </label>
-                  </div>
-                </Switch>
-              </div>
+                      </label>
+                    </div>
+                  </Switch>
+                </div>
+              </FormGroup>
             </FormGroup>
-          </FormGroup>
-        </SwitchGroup>
-      </MockFieldProvider>
-    </div>
-  </FieldProvider>
-</Switch>
+          </SwitchGroup>
+        </MockFieldProvider>
+      </div>
+    </FieldProvider>
+  </Switch>
+</RenderWithProvider>
 `;
 
 exports[`FormFields <Switch /> should render disabled Switch correctly 1`] = `
-<Switch
-  FieldProvider={[Function]}
-  dataType="someDataType"
-  id="someIdKey"
-  input={
+<RenderWithProvider
+  value={
     Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  isDisabled={true}
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
+      "formOptions": Object {
+        "handleSubmit": [MockFunction],
+      },
     }
   }
 >
-  <FieldProvider
-    component={[Function]}
+  <Switch
+    FieldProvider={[Function]}
     dataType="someDataType"
     id="someIdKey"
     input={
@@ -967,26 +998,27 @@ exports[`FormFields <Switch /> should render disabled Switch correctly 1`] = `
       }
     }
   >
-    <div>
-      <MockFieldProvider
-        component={[Function]}
-        dataType="someDataType"
-        id="someIdKey"
-        input={
-          Object {
-            "name": "Foo",
-            "onChange": [MockFunction],
-          }
+    <FieldProvider
+      component={[Function]}
+      dataType="someDataType"
+      id="someIdKey"
+      input={
+        Object {
+          "name": "Name of the field",
+          "value": "",
         }
-        isDisabled={true}
-        meta={
-          Object {
-            "error": false,
-            "touched": false,
-          }
+      }
+      isDisabled={true}
+      meta={
+        Object {
+          "error": false,
+          "touched": false,
         }
-      >
-        <SwitchGroup
+      }
+    >
+      <div>
+        <MockFieldProvider
+          component={[Function]}
           dataType="someDataType"
           id="someIdKey"
           input={
@@ -1003,7 +1035,16 @@ exports[`FormFields <Switch /> should render disabled Switch correctly 1`] = `
             }
           }
         >
-          <FormGroup
+          <SwitchGroup
+            dataType="someDataType"
+            id="someIdKey"
+            input={
+              Object {
+                "name": "Foo",
+                "onChange": [MockFunction],
+              }
+            }
+            isDisabled={true}
             meta={
               Object {
                 "error": false,
@@ -1012,105 +1053,105 @@ exports[`FormFields <Switch /> should render disabled Switch correctly 1`] = `
             }
           >
             <FormGroup
-              bsClass="form-group"
-              validationState={null}
+              meta={
+                Object {
+                  "error": false,
+                  "touched": false,
+                }
+              }
             >
-              <div
-                className="form-group"
+              <FormGroup
+                bsClass="form-group"
+                validationState={null}
               >
-                <Switch
-                  dataType="someDataType"
-                  disabled={true}
-                  id="someIdKey"
-                  name="Foo"
-                  offText="OFF"
-                  onChange={[Function]}
-                  onText="ON"
+                <div
+                  className="form-group"
                 >
-                  <div>
-                    <label
-                      className="pf3-switch disabled"
-                      onKeyDown={[Function]}
-                      style={
-                        Object {
-                          "width": 80,
-                        }
-                      }
-                      tabIndex={-1}
-                    >
-                      <input
-                        dataType="someDataType"
-                        disabled={true}
-                        id="someIdKey"
-                        name="Foo"
-                        onChange={[Function]}
-                        type="checkbox"
-                      />
-                      <span
-                        className="pf3-switch-slider"
-                      >
-                        <span
-                          className="on-text"
-                          style={
-                            Object {
-                              "left": -46,
-                              "width": 46,
-                            }
+                  <Switch
+                    dataType="someDataType"
+                    disabled={true}
+                    id="someIdKey"
+                    name="Foo"
+                    offText="OFF"
+                    onChange={[Function]}
+                    onText="ON"
+                  >
+                    <div>
+                      <label
+                        className="pf3-switch disabled"
+                        onKeyDown={[Function]}
+                        style={
+                          Object {
+                            "width": 80,
                           }
-                        >
-                          ON
-                        </span>
-                        <span
-                          className="divider"
-                          style={Object {}}
+                        }
+                        tabIndex={-1}
+                      >
+                        <input
+                          dataType="someDataType"
+                          disabled={true}
+                          id="someIdKey"
+                          name="Foo"
+                          onChange={[Function]}
+                          type="checkbox"
                         />
                         <span
-                          className="off-text"
-                          style={
-                            Object {
-                              "left": 34,
-                              "width": 46,
-                            }
-                          }
+                          className="pf3-switch-slider"
                         >
-                          OFF
+                          <span
+                            className="on-text"
+                            style={
+                              Object {
+                                "left": -46,
+                                "width": 46,
+                              }
+                            }
+                          >
+                            ON
+                          </span>
+                          <span
+                            className="divider"
+                            style={Object {}}
+                          />
+                          <span
+                            className="off-text"
+                            style={
+                              Object {
+                                "left": 34,
+                                "width": 46,
+                              }
+                            }
+                          >
+                            OFF
+                          </span>
                         </span>
-                      </span>
-                    </label>
-                  </div>
-                </Switch>
-              </div>
+                      </label>
+                    </div>
+                  </Switch>
+                </div>
+              </FormGroup>
             </FormGroup>
-          </FormGroup>
-        </SwitchGroup>
-      </MockFieldProvider>
-    </div>
-  </FieldProvider>
-</Switch>
+          </SwitchGroup>
+        </MockFieldProvider>
+      </div>
+    </FieldProvider>
+  </Switch>
+</RenderWithProvider>
 `;
 
 exports[`FormFields <Switch /> should render mini Switch correctly 1`] = `
-<Switch
-  FieldProvider={[Function]}
-  bsSize="mini"
-  dataType="someDataType"
-  id="someIdKey"
-  input={
+<RenderWithProvider
+  value={
     Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
+      "formOptions": Object {
+        "handleSubmit": [MockFunction],
+      },
     }
   }
 >
-  <FieldProvider
+  <Switch
+    FieldProvider={[Function]}
     bsSize="mini"
-    component={[Function]}
     dataType="someDataType"
     id="someIdKey"
     input={
@@ -1126,27 +1167,28 @@ exports[`FormFields <Switch /> should render mini Switch correctly 1`] = `
       }
     }
   >
-    <div>
-      <MockFieldProvider
-        bsSize="mini"
-        component={[Function]}
-        dataType="someDataType"
-        id="someIdKey"
-        input={
-          Object {
-            "name": "Foo",
-            "onChange": [MockFunction],
-          }
+    <FieldProvider
+      bsSize="mini"
+      component={[Function]}
+      dataType="someDataType"
+      id="someIdKey"
+      input={
+        Object {
+          "name": "Name of the field",
+          "value": "",
         }
-        meta={
-          Object {
-            "error": false,
-            "touched": false,
-          }
+      }
+      meta={
+        Object {
+          "error": false,
+          "touched": false,
         }
-      >
-        <SwitchGroup
+      }
+    >
+      <div>
+        <MockFieldProvider
           bsSize="mini"
+          component={[Function]}
           dataType="someDataType"
           id="someIdKey"
           input={
@@ -1162,7 +1204,16 @@ exports[`FormFields <Switch /> should render mini Switch correctly 1`] = `
             }
           }
         >
-          <FormGroup
+          <SwitchGroup
+            bsSize="mini"
+            dataType="someDataType"
+            id="someIdKey"
+            input={
+              Object {
+                "name": "Foo",
+                "onChange": [MockFunction],
+              }
+            }
             meta={
               Object {
                 "error": false,
@@ -1171,103 +1222,103 @@ exports[`FormFields <Switch /> should render mini Switch correctly 1`] = `
             }
           >
             <FormGroup
-              bsClass="form-group"
-              validationState={null}
+              meta={
+                Object {
+                  "error": false,
+                  "touched": false,
+                }
+              }
             >
-              <div
-                className="form-group"
+              <FormGroup
+                bsClass="form-group"
+                validationState={null}
               >
-                <Switch
-                  bsSize="mini"
-                  dataType="someDataType"
-                  id="someIdKey"
-                  name="Foo"
-                  offText="OFF"
-                  onChange={[Function]}
-                  onText="ON"
+                <div
+                  className="form-group"
                 >
-                  <div>
-                    <label
-                      className="pf3-switch mini"
-                      onKeyDown={[Function]}
-                      style={
-                        Object {
-                          "width": 80,
-                        }
-                      }
-                      tabIndex={0}
-                    >
-                      <input
-                        dataType="someDataType"
-                        id="someIdKey"
-                        name="Foo"
-                        onChange={[Function]}
-                        type="checkbox"
-                      />
-                      <span
-                        className="pf3-switch-slider"
-                      >
-                        <span
-                          className="on-text"
-                          style={
-                            Object {
-                              "left": -46,
-                              "width": 46,
-                            }
+                  <Switch
+                    bsSize="mini"
+                    dataType="someDataType"
+                    id="someIdKey"
+                    name="Foo"
+                    offText="OFF"
+                    onChange={[Function]}
+                    onText="ON"
+                  >
+                    <div>
+                      <label
+                        className="pf3-switch mini"
+                        onKeyDown={[Function]}
+                        style={
+                          Object {
+                            "width": 80,
                           }
-                        >
-                          ON
-                        </span>
-                        <span
-                          className="divider"
-                          style={Object {}}
+                        }
+                        tabIndex={0}
+                      >
+                        <input
+                          dataType="someDataType"
+                          id="someIdKey"
+                          name="Foo"
+                          onChange={[Function]}
+                          type="checkbox"
                         />
                         <span
-                          className="off-text"
-                          style={
-                            Object {
-                              "left": 34,
-                              "width": 46,
-                            }
-                          }
+                          className="pf3-switch-slider"
                         >
-                          OFF
+                          <span
+                            className="on-text"
+                            style={
+                              Object {
+                                "left": -46,
+                                "width": 46,
+                              }
+                            }
+                          >
+                            ON
+                          </span>
+                          <span
+                            className="divider"
+                            style={Object {}}
+                          />
+                          <span
+                            className="off-text"
+                            style={
+                              Object {
+                                "left": 34,
+                                "width": 46,
+                              }
+                            }
+                          >
+                            OFF
+                          </span>
                         </span>
-                      </span>
-                    </label>
-                  </div>
-                </Switch>
-              </div>
+                      </label>
+                    </div>
+                  </Switch>
+                </div>
+              </FormGroup>
             </FormGroup>
-          </FormGroup>
-        </SwitchGroup>
-      </MockFieldProvider>
-    </div>
-  </FieldProvider>
-</Switch>
+          </SwitchGroup>
+        </MockFieldProvider>
+      </div>
+    </FieldProvider>
+  </Switch>
+</RenderWithProvider>
 `;
 
 exports[`FormFields <Switch /> should render readOnly Switch correctly 1`] = `
-<Switch
-  FieldProvider={[Function]}
-  dataType="someDataType"
-  id="someIdKey"
-  input={
+<RenderWithProvider
+  value={
     Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  isReadOnly={true}
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
+      "formOptions": Object {
+        "handleSubmit": [MockFunction],
+      },
     }
   }
 >
-  <FieldProvider
-    component={[Function]}
+  <Switch
+    FieldProvider={[Function]}
     dataType="someDataType"
     id="someIdKey"
     input={
@@ -1284,26 +1335,27 @@ exports[`FormFields <Switch /> should render readOnly Switch correctly 1`] = `
       }
     }
   >
-    <div>
-      <MockFieldProvider
-        component={[Function]}
-        dataType="someDataType"
-        id="someIdKey"
-        input={
-          Object {
-            "name": "Foo",
-            "onChange": [MockFunction],
-          }
+    <FieldProvider
+      component={[Function]}
+      dataType="someDataType"
+      id="someIdKey"
+      input={
+        Object {
+          "name": "Name of the field",
+          "value": "",
         }
-        isReadOnly={true}
-        meta={
-          Object {
-            "error": false,
-            "touched": false,
-          }
+      }
+      isReadOnly={true}
+      meta={
+        Object {
+          "error": false,
+          "touched": false,
         }
-      >
-        <SwitchGroup
+      }
+    >
+      <div>
+        <MockFieldProvider
+          component={[Function]}
           dataType="someDataType"
           id="someIdKey"
           input={
@@ -1320,7 +1372,16 @@ exports[`FormFields <Switch /> should render readOnly Switch correctly 1`] = `
             }
           }
         >
-          <FormGroup
+          <SwitchGroup
+            dataType="someDataType"
+            id="someIdKey"
+            input={
+              Object {
+                "name": "Foo",
+                "onChange": [MockFunction],
+              }
+            }
+            isReadOnly={true}
             meta={
               Object {
                 "error": false,
@@ -1329,105 +1390,105 @@ exports[`FormFields <Switch /> should render readOnly Switch correctly 1`] = `
             }
           >
             <FormGroup
-              bsClass="form-group"
-              validationState={null}
+              meta={
+                Object {
+                  "error": false,
+                  "touched": false,
+                }
+              }
             >
-              <div
-                className="form-group"
+              <FormGroup
+                bsClass="form-group"
+                validationState={null}
               >
-                <Switch
-                  dataType="someDataType"
-                  id="someIdKey"
-                  isReadOnly={true}
-                  name="Foo"
-                  offText="OFF"
-                  onChange={[Function]}
-                  onText="ON"
+                <div
+                  className="form-group"
                 >
-                  <div>
-                    <label
-                      className="pf3-switch disabled"
-                      onKeyDown={[Function]}
-                      style={
-                        Object {
-                          "width": 80,
-                        }
-                      }
-                      tabIndex={-1}
-                    >
-                      <input
-                        dataType="someDataType"
-                        disabled={true}
-                        id="someIdKey"
-                        name="Foo"
-                        onChange={[Function]}
-                        type="checkbox"
-                      />
-                      <span
-                        className="pf3-switch-slider"
-                      >
-                        <span
-                          className="on-text"
-                          style={
-                            Object {
-                              "left": -46,
-                              "width": 46,
-                            }
+                  <Switch
+                    dataType="someDataType"
+                    id="someIdKey"
+                    isReadOnly={true}
+                    name="Foo"
+                    offText="OFF"
+                    onChange={[Function]}
+                    onText="ON"
+                  >
+                    <div>
+                      <label
+                        className="pf3-switch disabled"
+                        onKeyDown={[Function]}
+                        style={
+                          Object {
+                            "width": 80,
                           }
-                        >
-                          ON
-                        </span>
-                        <span
-                          className="divider"
-                          style={Object {}}
+                        }
+                        tabIndex={-1}
+                      >
+                        <input
+                          dataType="someDataType"
+                          disabled={true}
+                          id="someIdKey"
+                          name="Foo"
+                          onChange={[Function]}
+                          type="checkbox"
                         />
                         <span
-                          className="off-text"
-                          style={
-                            Object {
-                              "left": 34,
-                              "width": 46,
-                            }
-                          }
+                          className="pf3-switch-slider"
                         >
-                          OFF
+                          <span
+                            className="on-text"
+                            style={
+                              Object {
+                                "left": -46,
+                                "width": 46,
+                              }
+                            }
+                          >
+                            ON
+                          </span>
+                          <span
+                            className="divider"
+                            style={Object {}}
+                          />
+                          <span
+                            className="off-text"
+                            style={
+                              Object {
+                                "left": 34,
+                                "width": 46,
+                              }
+                            }
+                          >
+                            OFF
+                          </span>
                         </span>
-                      </span>
-                    </label>
-                  </div>
-                </Switch>
-              </div>
+                      </label>
+                    </div>
+                  </Switch>
+                </div>
+              </FormGroup>
             </FormGroup>
-          </FormGroup>
-        </SwitchGroup>
-      </MockFieldProvider>
-    </div>
-  </FieldProvider>
-</Switch>
+          </SwitchGroup>
+        </MockFieldProvider>
+      </div>
+    </FieldProvider>
+  </Switch>
+</RenderWithProvider>
 `;
 
 exports[`FormFields <Switch /> should render sm Switch correctly 1`] = `
-<Switch
-  FieldProvider={[Function]}
-  bsSize="mn"
-  dataType="someDataType"
-  id="someIdKey"
-  input={
+<RenderWithProvider
+  value={
     Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
+      "formOptions": Object {
+        "handleSubmit": [MockFunction],
+      },
     }
   }
 >
-  <FieldProvider
+  <Switch
+    FieldProvider={[Function]}
     bsSize="mn"
-    component={[Function]}
     dataType="someDataType"
     id="someIdKey"
     input={
@@ -1443,27 +1504,28 @@ exports[`FormFields <Switch /> should render sm Switch correctly 1`] = `
       }
     }
   >
-    <div>
-      <MockFieldProvider
-        bsSize="mn"
-        component={[Function]}
-        dataType="someDataType"
-        id="someIdKey"
-        input={
-          Object {
-            "name": "Foo",
-            "onChange": [MockFunction],
-          }
+    <FieldProvider
+      bsSize="mn"
+      component={[Function]}
+      dataType="someDataType"
+      id="someIdKey"
+      input={
+        Object {
+          "name": "Name of the field",
+          "value": "",
         }
-        meta={
-          Object {
-            "error": false,
-            "touched": false,
-          }
+      }
+      meta={
+        Object {
+          "error": false,
+          "touched": false,
         }
-      >
-        <SwitchGroup
+      }
+    >
+      <div>
+        <MockFieldProvider
           bsSize="mn"
+          component={[Function]}
           dataType="someDataType"
           id="someIdKey"
           input={
@@ -1479,7 +1541,16 @@ exports[`FormFields <Switch /> should render sm Switch correctly 1`] = `
             }
           }
         >
-          <FormGroup
+          <SwitchGroup
+            bsSize="mn"
+            dataType="someDataType"
+            id="someIdKey"
+            input={
+              Object {
+                "name": "Foo",
+                "onChange": [MockFunction],
+              }
+            }
             meta={
               Object {
                 "error": false,
@@ -1488,80 +1559,89 @@ exports[`FormFields <Switch /> should render sm Switch correctly 1`] = `
             }
           >
             <FormGroup
-              bsClass="form-group"
-              validationState={null}
+              meta={
+                Object {
+                  "error": false,
+                  "touched": false,
+                }
+              }
             >
-              <div
-                className="form-group"
+              <FormGroup
+                bsClass="form-group"
+                validationState={null}
               >
-                <Switch
-                  bsSize="mn"
-                  dataType="someDataType"
-                  id="someIdKey"
-                  name="Foo"
-                  offText="OFF"
-                  onChange={[Function]}
-                  onText="ON"
+                <div
+                  className="form-group"
                 >
-                  <div>
-                    <label
-                      className="pf3-switch mini"
-                      onKeyDown={[Function]}
-                      style={
-                        Object {
-                          "width": 80,
-                        }
-                      }
-                      tabIndex={0}
-                    >
-                      <input
-                        dataType="someDataType"
-                        id="someIdKey"
-                        name="Foo"
-                        onChange={[Function]}
-                        type="checkbox"
-                      />
-                      <span
-                        className="pf3-switch-slider"
-                      >
-                        <span
-                          className="on-text"
-                          style={
-                            Object {
-                              "left": -46,
-                              "width": 46,
-                            }
+                  <Switch
+                    bsSize="mn"
+                    dataType="someDataType"
+                    id="someIdKey"
+                    name="Foo"
+                    offText="OFF"
+                    onChange={[Function]}
+                    onText="ON"
+                  >
+                    <div>
+                      <label
+                        className="pf3-switch mini"
+                        onKeyDown={[Function]}
+                        style={
+                          Object {
+                            "width": 80,
                           }
-                        >
-                          ON
-                        </span>
-                        <span
-                          className="divider"
-                          style={Object {}}
+                        }
+                        tabIndex={0}
+                      >
+                        <input
+                          dataType="someDataType"
+                          id="someIdKey"
+                          name="Foo"
+                          onChange={[Function]}
+                          type="checkbox"
                         />
                         <span
-                          className="off-text"
-                          style={
-                            Object {
-                              "left": 34,
-                              "width": 46,
-                            }
-                          }
+                          className="pf3-switch-slider"
                         >
-                          OFF
+                          <span
+                            className="on-text"
+                            style={
+                              Object {
+                                "left": -46,
+                                "width": 46,
+                              }
+                            }
+                          >
+                            ON
+                          </span>
+                          <span
+                            className="divider"
+                            style={Object {}}
+                          />
+                          <span
+                            className="off-text"
+                            style={
+                              Object {
+                                "left": 34,
+                                "width": 46,
+                              }
+                            }
+                          >
+                            OFF
+                          </span>
                         </span>
-                      </span>
-                    </label>
-                  </div>
-                </Switch>
-              </div>
+                      </label>
+                    </div>
+                  </Switch>
+                </div>
+              </FormGroup>
             </FormGroup>
-          </FormGroup>
-        </SwitchGroup>
-      </MockFieldProvider>
-    </div>
-  </FieldProvider>
-</Switch>
+          </SwitchGroup>
+        </MockFieldProvider>
+      </div>
+    </FieldProvider>
+  </Switch>
+</RenderWithProvider>
 `;
 
 exports[`FormFields <TextField /> should render correctly 1`] = `

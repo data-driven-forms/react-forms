@@ -1,6 +1,7 @@
 import React, { cloneElement } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
+import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
 import { WizardHeader } from '@patternfly/react-core/dist/js/components/Wizard/WizardHeader';
 import { WizardNav } from '@patternfly/react-core/dist/js/components/Wizard/WizardNav';
@@ -15,7 +16,7 @@ import flattenDeep from 'lodash/flattenDeep';
 import handleEnter from '@data-driven-forms/common/src/wizard/enter-handler';
 import WizardNavigation from './wizard/wizard-nav';
 
-const DYNAMIC_WIZARD_TYPES = [ 'function', 'object' ];
+const DYNAMIC_WIZARD_TYPES = ['function', 'object'];
 
 const Modal = ({ children, container, inModal }) =>
   inModal
@@ -67,7 +68,7 @@ class Wizard extends React.Component {
     this.setState((prevState) => ({
       registeredFieldsHistory: { ...prevState.registeredFieldsHistory, [prevState.activeStep]: getRegisteredFields() },
       activeStep: nextStep,
-      prevSteps: shouldInsertStepIntoHistory ? prevState.prevSteps : [ ...prevState.prevSteps, prevState.activeStep ],
+      prevSteps: shouldInsertStepIntoHistory ? prevState.prevSteps : [...prevState.prevSteps, prevState.activeStep],
       activeStepIndex: newActiveIndex,
       maxStepIndex: newActiveIndex > prevState.maxStepIndex ? newActiveIndex : prevState.maxStepIndex,
       navSchema: this.state.isDynamic ? this.createSchema({ currentIndex: newActiveIndex }) : prevState.navSchema
@@ -87,7 +88,7 @@ class Wizard extends React.Component {
 
     // Find only visited fields
     flattenDeep(
-      Object.values([ ...visitedSteps, this.state.activeStep ].reduce((obj, key) => ({ ...obj, [key]: finalRegisteredFieldsHistory[key] }), {}))
+      Object.values([...visitedSteps, this.state.activeStep].reduce((obj, key) => ({ ...obj, [key]: finalRegisteredFieldsHistory[key] }), {}))
     ).forEach((key) => set(finalObject, key, get(values, key)));
 
     return finalObject;
@@ -106,7 +107,7 @@ class Wizard extends React.Component {
 
           return {
             activeStep: this.state.prevSteps[index],
-            prevSteps: includeActiveStep ? prevState.prevSteps : [ ...prevState.prevSteps, prevState.activeStep ],
+            prevSteps: includeActiveStep ? prevState.prevSteps : [...prevState.prevSteps, prevState.activeStep],
             activeStepIndex: index
           };
         },
@@ -204,7 +205,7 @@ class Wizard extends React.Component {
     this.props.formOptions.onSubmit(
       this.handleSubmit(
         this.props.formOptions.getState().values,
-        [ ...this.state.prevSteps, this.state.activeStep ],
+        [...this.state.prevSteps, this.state.activeStep],
         this.props.formOptions.getRegisteredFields
       ),
       this.props.formOptions
@@ -315,7 +316,7 @@ Wizard.propTypes = {
   }),
   fields: PropTypes.arrayOf(
     PropTypes.shape({
-      stepKey: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]).isRequired
+      stepKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
     })
   ).isRequired,
   isCompactNav: PropTypes.bool,
@@ -335,7 +336,11 @@ const defaultLabels = {
   next: 'Next'
 };
 
-const WizardFunction = ({ buttonLabels, ...props }) => <Wizard {...props} buttonLabels={{ ...defaultLabels, ...buttonLabels }} />;
+const WizardFunction = ({ buttonLabels, ...props }) => {
+  const formOptions = useFormApi();
+
+  return <Wizard {...props} buttonLabels={{ ...defaultLabels, ...buttonLabels }} formOptions={formOptions} />;
+};
 
 WizardFunction.propTypes = {
   buttonLabels: PropTypes.shape({

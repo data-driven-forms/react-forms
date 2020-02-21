@@ -5,6 +5,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
 import FormTabs from '../components/tabs';
+import RenderWithProvider from '../../../../__mocks__/with-provider';
 
 describe('tabs', () => {
   const props = {
@@ -19,14 +20,19 @@ describe('tabs', () => {
         name: 'cosiName2',
         fields: []
       }
-    ],
-    formOptions: {
-      renderForm: jest.fn().mockImplementation(() => <h1>Content</h1>)
-    }
+    ]
+  };
+
+  const formOptions = {
+    renderForm: jest.fn().mockImplementation(() => <h1>Content</h1>)
   };
 
   it('should render tabs correctly', () => {
-    const wrapper = mount(<FormTabs {...props} />);
+    const wrapper = mount(
+      <RenderWithProvider value={{ formOptions }}>
+        <FormTabs {...props} />
+      </RenderWithProvider>
+    );
 
     expect(wrapper.find(AppBar)).toHaveLength(1);
     expect(wrapper.find(Tabs)).toHaveLength(1);
@@ -35,12 +41,39 @@ describe('tabs', () => {
   });
 
   it('should switch tabs correctly', () => {
-    const wrapper = mount(<FormTabs {...props} />);
-    expect(wrapper.instance().state.activeTab).toEqual(0);
+    const wrapper = mount(
+      <RenderWithProvider value={{ formOptions }}>
+        <FormTabs {...props} />
+      </RenderWithProvider>
+    );
+
+    expect(
+      wrapper
+      .find(Tab)
+      .first()
+      .props().selected
+    ).toEqual(true);
+    expect(
+      wrapper
+      .find(Tab)
+      .last()
+      .props().selected
+    ).toEqual(false);
 
     const secondTabButton = wrapper.find('button').last();
     secondTabButton.simulate('click');
+    wrapper.update();
 
-    expect(wrapper.instance().state.activeTab).toEqual(1);
-  });
+    expect(
+      wrapper
+      .find(Tab)
+      .first()
+      .props().selected
+    ).toEqual(false);
+    expect(
+      wrapper
+      .find(Tab)
+      .last()
+      .props().selected
+    ).toEqual(true);  });
 });

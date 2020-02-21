@@ -82,48 +82,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
           </React.Fragment>,
         ]
       }
-      formOptions={
-        Object {
-          "batch": [Function],
-          "blur": [Function],
-          "change": [Function],
-          "clearOnUnmount": false,
-          "clearedValue": undefined,
-          "concat": [Function],
-          "destroyOnUnregister": false,
-          "focus": [Function],
-          "getFieldState": [Function],
-          "getRegisteredFields": [Function],
-          "getState": [Function],
-          "handleSubmit": [Function],
-          "initialize": [Function],
-          "insert": [Function],
-          "isValidationPaused": [Function],
-          "move": [Function],
-          "onCancel": undefined,
-          "onReset": undefined,
-          "onSubmit": [MockFunction],
-          "pauseValidation": [Function],
-          "pop": [Function],
-          "pristine": true,
-          "push": [Function],
-          "registerField": [Function],
-          "remove": [Function],
-          "removeBatch": [Function],
-          "renderForm": [Function],
-          "reset": [Function],
-          "resetFieldState": [Function],
-          "resumeValidation": [Function],
-          "setConfig": [Function],
-          "shift": [Function],
-          "submit": [Function],
-          "subscribe": [Function],
-          "swap": [Function],
-          "unshift": [Function],
-          "update": [Function],
-          "valid": true,
-        }
-      }
       schema={
         Object {
           "fields": Array [
@@ -149,48 +107,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
             <FieldWrapper
               component={[Function]}
               componentType="text-field"
-              formOptions={
-                Object {
-                  "batch": [Function],
-                  "blur": [Function],
-                  "change": [Function],
-                  "clearOnUnmount": false,
-                  "clearedValue": undefined,
-                  "concat": [Function],
-                  "destroyOnUnregister": false,
-                  "focus": [Function],
-                  "getFieldState": [Function],
-                  "getRegisteredFields": [Function],
-                  "getState": [Function],
-                  "handleSubmit": [Function],
-                  "initialize": [Function],
-                  "insert": [Function],
-                  "isValidationPaused": [Function],
-                  "move": [Function],
-                  "onCancel": undefined,
-                  "onReset": undefined,
-                  "onSubmit": [MockFunction],
-                  "pauseValidation": [Function],
-                  "pop": [Function],
-                  "pristine": true,
-                  "push": [Function],
-                  "registerField": [Function],
-                  "remove": [Function],
-                  "removeBatch": [Function],
-                  "renderForm": [Function],
-                  "reset": [Function],
-                  "resetFieldState": [Function],
-                  "resumeValidation": [Function],
-                  "setConfig": [Function],
-                  "shift": [Function],
-                  "submit": [Function],
-                  "subscribe": [Function],
-                  "swap": [Function],
-                  "unshift": [Function],
-                  "update": [Function],
-                  "valid": true,
-                }
-              }
               name="component1"
               validate={
                 Array [
@@ -198,58 +114,17 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 ]
               }
             >
-              <FieldProvider
+              <TemporaryWrapper
                 FieldArrayProvider={[Function]}
                 FieldProvider={[Function]}
                 component={[Function]}
-                formOptions={
-                  Object {
-                    "batch": [Function],
-                    "blur": [Function],
-                    "change": [Function],
-                    "clearOnUnmount": false,
-                    "clearedValue": undefined,
-                    "concat": [Function],
-                    "destroyOnUnregister": false,
-                    "focus": [Function],
-                    "getFieldState": [Function],
-                    "getRegisteredFields": [Function],
-                    "getState": [Function],
-                    "handleSubmit": [Function],
-                    "initialize": [Function],
-                    "insert": [Function],
-                    "isValidationPaused": [Function],
-                    "move": [Function],
-                    "onCancel": undefined,
-                    "onReset": undefined,
-                    "onSubmit": [MockFunction],
-                    "pauseValidation": [Function],
-                    "pop": [Function],
-                    "pristine": true,
-                    "push": [Function],
-                    "registerField": [Function],
-                    "remove": [Function],
-                    "removeBatch": [Function],
-                    "renderForm": [Function],
-                    "reset": [Function],
-                    "resetFieldState": [Function],
-                    "resumeValidation": [Function],
-                    "setConfig": [Function],
-                    "shift": [Function],
-                    "submit": [Function],
-                    "subscribe": [Function],
-                    "swap": [Function],
-                    "unshift": [Function],
-                    "update": [Function],
-                    "valid": true,
-                  }
-                }
                 name="component1"
                 validate={[Function]}
               >
-                <ReactFinalForm(Field)
+                <FieldProvider
                   FieldArrayProvider={[Function]}
                   FieldProvider={[Function]}
+                  component={[Function]}
                   formOptions={
                     Object {
                       "batch": [Function],
@@ -293,10 +168,9 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                     }
                   }
                   name="component1"
-                  render={[Function]}
                   validate={[Function]}
                 >
-                  <Field
+                  <ReactFinalForm(Field)
                     FieldArrayProvider={[Function]}
                     FieldProvider={[Function]}
                     formOptions={
@@ -341,48 +215,11 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                         "valid": true,
                       }
                     }
-                    format={[Function]}
                     name="component1"
-                    parse={[Function]}
-                    reactFinalForm={
-                      Object {
-                        "batch": [Function],
-                        "blur": [Function],
-                        "change": [Function],
-                        "destroyOnUnregister": false,
-                        "focus": [Function],
-                        "getFieldState": [Function],
-                        "getRegisteredFields": [Function],
-                        "getState": [Function],
-                        "initialize": [Function],
-                        "isValidationPaused": [Function],
-                        "mutators": Object {
-                          "concat": [Function],
-                          "insert": [Function],
-                          "move": [Function],
-                          "pop": [Function],
-                          "push": [Function],
-                          "remove": [Function],
-                          "removeBatch": [Function],
-                          "shift": [Function],
-                          "swap": [Function],
-                          "unshift": [Function],
-                          "update": [Function],
-                        },
-                        "pauseValidation": [Function],
-                        "registerField": [Function],
-                        "reset": [Function],
-                        "resetFieldState": [Function],
-                        "resumeValidation": [Function],
-                        "setConfig": [Function],
-                        "submit": [Function],
-                        "subscribe": [Function],
-                      }
-                    }
                     render={[Function]}
                     validate={[Function]}
                   >
-                    <Component
+                    <Field
                       FieldArrayProvider={[Function]}
                       FieldProvider={[Function]}
                       formOptions={
@@ -427,45 +264,132 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                           "valid": true,
                         }
                       }
-                      input={
+                      format={[Function]}
+                      name="component1"
+                      parse={[Function]}
+                      reactFinalForm={
                         Object {
-                          "name": "component1",
-                          "onBlur": [Function],
-                          "onChange": [Function],
-                          "onFocus": [Function],
-                          "value": "",
+                          "batch": [Function],
+                          "blur": [Function],
+                          "change": [Function],
+                          "destroyOnUnregister": false,
+                          "focus": [Function],
+                          "getFieldState": [Function],
+                          "getRegisteredFields": [Function],
+                          "getState": [Function],
+                          "initialize": [Function],
+                          "isValidationPaused": [Function],
+                          "mutators": Object {
+                            "concat": [Function],
+                            "insert": [Function],
+                            "move": [Function],
+                            "pop": [Function],
+                            "push": [Function],
+                            "remove": [Function],
+                            "removeBatch": [Function],
+                            "shift": [Function],
+                            "swap": [Function],
+                            "unshift": [Function],
+                            "update": [Function],
+                          },
+                          "pauseValidation": [Function],
+                          "registerField": [Function],
+                          "reset": [Function],
+                          "resetFieldState": [Function],
+                          "resumeValidation": [Function],
+                          "setConfig": [Function],
+                          "submit": [Function],
+                          "subscribe": [Function],
                         }
                       }
-                      meta={
-                        Object {
-                          "active": false,
-                          "data": Object {},
-                          "dirty": false,
-                          "dirtySinceLastSubmit": false,
-                          "error": undefined,
-                          "initial": undefined,
-                          "invalid": false,
-                          "modified": false,
-                          "pristine": true,
-                          "submitError": undefined,
-                          "submitFailed": false,
-                          "submitSucceeded": false,
-                          "submitting": false,
-                          "touched": false,
-                          "valid": true,
-                          "visited": false,
-                        }
-                      }
+                      render={[Function]}
+                      validate={[Function]}
                     >
-                      <div
-                        className="nested-item"
+                      <Component
+                        FieldArrayProvider={[Function]}
+                        FieldProvider={[Function]}
+                        formOptions={
+                          Object {
+                            "batch": [Function],
+                            "blur": [Function],
+                            "change": [Function],
+                            "clearOnUnmount": false,
+                            "clearedValue": undefined,
+                            "concat": [Function],
+                            "destroyOnUnregister": false,
+                            "focus": [Function],
+                            "getFieldState": [Function],
+                            "getRegisteredFields": [Function],
+                            "getState": [Function],
+                            "handleSubmit": [Function],
+                            "initialize": [Function],
+                            "insert": [Function],
+                            "isValidationPaused": [Function],
+                            "move": [Function],
+                            "onCancel": undefined,
+                            "onReset": undefined,
+                            "onSubmit": [MockFunction],
+                            "pauseValidation": [Function],
+                            "pop": [Function],
+                            "pristine": true,
+                            "push": [Function],
+                            "registerField": [Function],
+                            "remove": [Function],
+                            "removeBatch": [Function],
+                            "renderForm": [Function],
+                            "reset": [Function],
+                            "resetFieldState": [Function],
+                            "resumeValidation": [Function],
+                            "setConfig": [Function],
+                            "shift": [Function],
+                            "submit": [Function],
+                            "subscribe": [Function],
+                            "swap": [Function],
+                            "unshift": [Function],
+                            "update": [Function],
+                            "valid": true,
+                          }
+                        }
+                        input={
+                          Object {
+                            "name": "component1",
+                            "onBlur": [Function],
+                            "onChange": [Function],
+                            "onFocus": [Function],
+                            "value": "",
+                          }
+                        }
+                        meta={
+                          Object {
+                            "active": false,
+                            "data": Object {},
+                            "dirty": false,
+                            "dirtySinceLastSubmit": false,
+                            "error": undefined,
+                            "initial": undefined,
+                            "invalid": false,
+                            "modified": false,
+                            "pristine": true,
+                            "submitError": undefined,
+                            "submitFailed": false,
+                            "submitSucceeded": false,
+                            "submitting": false,
+                            "touched": false,
+                            "valid": true,
+                            "visited": false,
+                          }
+                        }
                       >
-                        Text field
-                      </div>
-                    </Component>
-                  </Field>
-                </ReactFinalForm(Field)>
-              </FieldProvider>
+                        <div
+                          className="nested-item"
+                        >
+                          Text field
+                        </div>
+                      </Component>
+                    </Field>
+                  </ReactFinalForm(Field)>
+                </FieldProvider>
+              </TemporaryWrapper>
             </FieldWrapper>
           </FormFieldHideWrapper>
         </FormConditionWrapper>
@@ -476,48 +400,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
             <FieldWrapper
               component={[Function]}
               componentType="select-field"
-              formOptions={
-                Object {
-                  "batch": [Function],
-                  "blur": [Function],
-                  "change": [Function],
-                  "clearOnUnmount": false,
-                  "clearedValue": undefined,
-                  "concat": [Function],
-                  "destroyOnUnregister": false,
-                  "focus": [Function],
-                  "getFieldState": [Function],
-                  "getRegisteredFields": [Function],
-                  "getState": [Function],
-                  "handleSubmit": [Function],
-                  "initialize": [Function],
-                  "insert": [Function],
-                  "isValidationPaused": [Function],
-                  "move": [Function],
-                  "onCancel": undefined,
-                  "onReset": undefined,
-                  "onSubmit": [MockFunction],
-                  "pauseValidation": [Function],
-                  "pop": [Function],
-                  "pristine": true,
-                  "push": [Function],
-                  "registerField": [Function],
-                  "remove": [Function],
-                  "removeBatch": [Function],
-                  "renderForm": [Function],
-                  "reset": [Function],
-                  "resetFieldState": [Function],
-                  "resumeValidation": [Function],
-                  "setConfig": [Function],
-                  "shift": [Function],
-                  "submit": [Function],
-                  "subscribe": [Function],
-                  "swap": [Function],
-                  "unshift": [Function],
-                  "update": [Function],
-                  "valid": true,
-                }
-              }
               name="secret"
               validate={
                 Array [
@@ -525,58 +407,17 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 ]
               }
             >
-              <FieldProvider
+              <TemporaryWrapper
                 FieldArrayProvider={[Function]}
                 FieldProvider={[Function]}
                 component={[Function]}
-                formOptions={
-                  Object {
-                    "batch": [Function],
-                    "blur": [Function],
-                    "change": [Function],
-                    "clearOnUnmount": false,
-                    "clearedValue": undefined,
-                    "concat": [Function],
-                    "destroyOnUnregister": false,
-                    "focus": [Function],
-                    "getFieldState": [Function],
-                    "getRegisteredFields": [Function],
-                    "getState": [Function],
-                    "handleSubmit": [Function],
-                    "initialize": [Function],
-                    "insert": [Function],
-                    "isValidationPaused": [Function],
-                    "move": [Function],
-                    "onCancel": undefined,
-                    "onReset": undefined,
-                    "onSubmit": [MockFunction],
-                    "pauseValidation": [Function],
-                    "pop": [Function],
-                    "pristine": true,
-                    "push": [Function],
-                    "registerField": [Function],
-                    "remove": [Function],
-                    "removeBatch": [Function],
-                    "renderForm": [Function],
-                    "reset": [Function],
-                    "resetFieldState": [Function],
-                    "resumeValidation": [Function],
-                    "setConfig": [Function],
-                    "shift": [Function],
-                    "submit": [Function],
-                    "subscribe": [Function],
-                    "swap": [Function],
-                    "unshift": [Function],
-                    "update": [Function],
-                    "valid": true,
-                  }
-                }
                 name="secret"
                 validate={[Function]}
               >
-                <ReactFinalForm(Field)
+                <FieldProvider
                   FieldArrayProvider={[Function]}
                   FieldProvider={[Function]}
+                  component={[Function]}
                   formOptions={
                     Object {
                       "batch": [Function],
@@ -620,10 +461,9 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                     }
                   }
                   name="secret"
-                  render={[Function]}
                   validate={[Function]}
                 >
-                  <Field
+                  <ReactFinalForm(Field)
                     FieldArrayProvider={[Function]}
                     FieldProvider={[Function]}
                     formOptions={
@@ -668,48 +508,11 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                         "valid": true,
                       }
                     }
-                    format={[Function]}
                     name="secret"
-                    parse={[Function]}
-                    reactFinalForm={
-                      Object {
-                        "batch": [Function],
-                        "blur": [Function],
-                        "change": [Function],
-                        "destroyOnUnregister": false,
-                        "focus": [Function],
-                        "getFieldState": [Function],
-                        "getRegisteredFields": [Function],
-                        "getState": [Function],
-                        "initialize": [Function],
-                        "isValidationPaused": [Function],
-                        "mutators": Object {
-                          "concat": [Function],
-                          "insert": [Function],
-                          "move": [Function],
-                          "pop": [Function],
-                          "push": [Function],
-                          "remove": [Function],
-                          "removeBatch": [Function],
-                          "shift": [Function],
-                          "swap": [Function],
-                          "unshift": [Function],
-                          "update": [Function],
-                        },
-                        "pauseValidation": [Function],
-                        "registerField": [Function],
-                        "reset": [Function],
-                        "resetFieldState": [Function],
-                        "resumeValidation": [Function],
-                        "setConfig": [Function],
-                        "submit": [Function],
-                        "subscribe": [Function],
-                      }
-                    }
                     render={[Function]}
                     validate={[Function]}
                   >
-                    <Component
+                    <Field
                       FieldArrayProvider={[Function]}
                       FieldProvider={[Function]}
                       formOptions={
@@ -754,45 +557,132 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                           "valid": true,
                         }
                       }
-                      input={
+                      format={[Function]}
+                      name="secret"
+                      parse={[Function]}
+                      reactFinalForm={
                         Object {
-                          "name": "secret",
-                          "onBlur": [Function],
-                          "onChange": [Function],
-                          "onFocus": [Function],
-                          "value": "",
+                          "batch": [Function],
+                          "blur": [Function],
+                          "change": [Function],
+                          "destroyOnUnregister": false,
+                          "focus": [Function],
+                          "getFieldState": [Function],
+                          "getRegisteredFields": [Function],
+                          "getState": [Function],
+                          "initialize": [Function],
+                          "isValidationPaused": [Function],
+                          "mutators": Object {
+                            "concat": [Function],
+                            "insert": [Function],
+                            "move": [Function],
+                            "pop": [Function],
+                            "push": [Function],
+                            "remove": [Function],
+                            "removeBatch": [Function],
+                            "shift": [Function],
+                            "swap": [Function],
+                            "unshift": [Function],
+                            "update": [Function],
+                          },
+                          "pauseValidation": [Function],
+                          "registerField": [Function],
+                          "reset": [Function],
+                          "resetFieldState": [Function],
+                          "resumeValidation": [Function],
+                          "setConfig": [Function],
+                          "submit": [Function],
+                          "subscribe": [Function],
                         }
                       }
-                      meta={
-                        Object {
-                          "active": false,
-                          "data": Object {},
-                          "dirty": false,
-                          "dirtySinceLastSubmit": false,
-                          "error": undefined,
-                          "initial": undefined,
-                          "invalid": false,
-                          "modified": false,
-                          "pristine": true,
-                          "submitError": undefined,
-                          "submitFailed": false,
-                          "submitSucceeded": false,
-                          "submitting": false,
-                          "touched": false,
-                          "valid": true,
-                          "visited": false,
-                        }
-                      }
+                      render={[Function]}
+                      validate={[Function]}
                     >
-                      <div
-                        className="nested-item"
+                      <Component
+                        FieldArrayProvider={[Function]}
+                        FieldProvider={[Function]}
+                        formOptions={
+                          Object {
+                            "batch": [Function],
+                            "blur": [Function],
+                            "change": [Function],
+                            "clearOnUnmount": false,
+                            "clearedValue": undefined,
+                            "concat": [Function],
+                            "destroyOnUnregister": false,
+                            "focus": [Function],
+                            "getFieldState": [Function],
+                            "getRegisteredFields": [Function],
+                            "getState": [Function],
+                            "handleSubmit": [Function],
+                            "initialize": [Function],
+                            "insert": [Function],
+                            "isValidationPaused": [Function],
+                            "move": [Function],
+                            "onCancel": undefined,
+                            "onReset": undefined,
+                            "onSubmit": [MockFunction],
+                            "pauseValidation": [Function],
+                            "pop": [Function],
+                            "pristine": true,
+                            "push": [Function],
+                            "registerField": [Function],
+                            "remove": [Function],
+                            "removeBatch": [Function],
+                            "renderForm": [Function],
+                            "reset": [Function],
+                            "resetFieldState": [Function],
+                            "resumeValidation": [Function],
+                            "setConfig": [Function],
+                            "shift": [Function],
+                            "submit": [Function],
+                            "subscribe": [Function],
+                            "swap": [Function],
+                            "unshift": [Function],
+                            "update": [Function],
+                            "valid": true,
+                          }
+                        }
+                        input={
+                          Object {
+                            "name": "secret",
+                            "onBlur": [Function],
+                            "onChange": [Function],
+                            "onFocus": [Function],
+                            "value": "",
+                          }
+                        }
+                        meta={
+                          Object {
+                            "active": false,
+                            "data": Object {},
+                            "dirty": false,
+                            "dirtySinceLastSubmit": false,
+                            "error": undefined,
+                            "initial": undefined,
+                            "invalid": false,
+                            "modified": false,
+                            "pristine": true,
+                            "submitError": undefined,
+                            "submitFailed": false,
+                            "submitSucceeded": false,
+                            "submitting": false,
+                            "touched": false,
+                            "valid": true,
+                            "visited": false,
+                          }
+                        }
                       >
-                        Select field
-                      </div>
-                    </Component>
-                  </Field>
-                </ReactFinalForm(Field)>
-              </FieldProvider>
+                        <div
+                          className="nested-item"
+                        >
+                          Select field
+                        </div>
+                      </Component>
+                    </Field>
+                  </ReactFinalForm(Field)>
+                </FieldProvider>
+              </TemporaryWrapper>
             </FieldWrapper>
           </FormFieldHideWrapper>
         </FormConditionWrapper>
@@ -951,48 +841,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
           </React.Fragment>,
         ]
       }
-      formOptions={
-        Object {
-          "batch": [Function],
-          "blur": [Function],
-          "change": [Function],
-          "clearOnUnmount": false,
-          "clearedValue": undefined,
-          "concat": [Function],
-          "destroyOnUnregister": false,
-          "focus": [Function],
-          "getFieldState": [Function],
-          "getRegisteredFields": [Function],
-          "getState": [Function],
-          "handleSubmit": [Function],
-          "initialize": [Function],
-          "insert": [Function],
-          "isValidationPaused": [Function],
-          "move": [Function],
-          "onCancel": undefined,
-          "onReset": undefined,
-          "onSubmit": [MockFunction],
-          "pauseValidation": [Function],
-          "pop": [Function],
-          "pristine": true,
-          "push": [Function],
-          "registerField": [Function],
-          "remove": [Function],
-          "removeBatch": [Function],
-          "renderForm": [Function],
-          "reset": [Function],
-          "resetFieldState": [Function],
-          "resumeValidation": [Function],
-          "setConfig": [Function],
-          "shift": [Function],
-          "submit": [Function],
-          "subscribe": [Function],
-          "swap": [Function],
-          "unshift": [Function],
-          "update": [Function],
-          "valid": true,
-        }
-      }
       schema={
         Object {
           "fields": Array [
@@ -1029,48 +877,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                   "text-field",
                 ]
               }
-              formOptions={
-                Object {
-                  "batch": [Function],
-                  "blur": [Function],
-                  "change": [Function],
-                  "clearOnUnmount": false,
-                  "clearedValue": undefined,
-                  "concat": [Function],
-                  "destroyOnUnregister": false,
-                  "focus": [Function],
-                  "getFieldState": [Function],
-                  "getRegisteredFields": [Function],
-                  "getState": [Function],
-                  "handleSubmit": [Function],
-                  "initialize": [Function],
-                  "insert": [Function],
-                  "isValidationPaused": [Function],
-                  "move": [Function],
-                  "onCancel": undefined,
-                  "onReset": undefined,
-                  "onSubmit": [MockFunction],
-                  "pauseValidation": [Function],
-                  "pop": [Function],
-                  "pristine": true,
-                  "push": [Function],
-                  "registerField": [Function],
-                  "remove": [Function],
-                  "removeBatch": [Function],
-                  "renderForm": [Function],
-                  "reset": [Function],
-                  "resetFieldState": [Function],
-                  "resumeValidation": [Function],
-                  "setConfig": [Function],
-                  "shift": [Function],
-                  "submit": [Function],
-                  "subscribe": [Function],
-                  "swap": [Function],
-                  "unshift": [Function],
-                  "update": [Function],
-                  "valid": true,
-                }
-              }
               label="Visible"
               name="visible"
               validate={
@@ -1082,48 +888,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
               <Component
                 FieldProvider={[Function]}
                 FormSpyProvider={[Function]}
-                formOptions={
-                  Object {
-                    "batch": [Function],
-                    "blur": [Function],
-                    "change": [Function],
-                    "clearOnUnmount": false,
-                    "clearedValue": undefined,
-                    "concat": [Function],
-                    "destroyOnUnregister": false,
-                    "focus": [Function],
-                    "getFieldState": [Function],
-                    "getRegisteredFields": [Function],
-                    "getState": [Function],
-                    "handleSubmit": [Function],
-                    "initialize": [Function],
-                    "insert": [Function],
-                    "isValidationPaused": [Function],
-                    "move": [Function],
-                    "onCancel": undefined,
-                    "onReset": undefined,
-                    "onSubmit": [MockFunction],
-                    "pauseValidation": [Function],
-                    "pop": [Function],
-                    "pristine": true,
-                    "push": [Function],
-                    "registerField": [Function],
-                    "remove": [Function],
-                    "removeBatch": [Function],
-                    "renderForm": [Function],
-                    "reset": [Function],
-                    "resetFieldState": [Function],
-                    "resumeValidation": [Function],
-                    "setConfig": [Function],
-                    "shift": [Function],
-                    "submit": [Function],
-                    "subscribe": [Function],
-                    "swap": [Function],
-                    "unshift": [Function],
-                    "update": [Function],
-                    "valid": true,
-                  }
-                }
                 label="Visible"
                 name="visible"
                 validate={[Function]}
@@ -1151,48 +915,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                     "text-field",
                   ]
                 }
-                formOptions={
-                  Object {
-                    "batch": [Function],
-                    "blur": [Function],
-                    "change": [Function],
-                    "clearOnUnmount": false,
-                    "clearedValue": undefined,
-                    "concat": [Function],
-                    "destroyOnUnregister": false,
-                    "focus": [Function],
-                    "getFieldState": [Function],
-                    "getRegisteredFields": [Function],
-                    "getState": [Function],
-                    "handleSubmit": [Function],
-                    "initialize": [Function],
-                    "insert": [Function],
-                    "isValidationPaused": [Function],
-                    "move": [Function],
-                    "onCancel": undefined,
-                    "onReset": undefined,
-                    "onSubmit": [MockFunction],
-                    "pauseValidation": [Function],
-                    "pop": [Function],
-                    "pristine": true,
-                    "push": [Function],
-                    "registerField": [Function],
-                    "remove": [Function],
-                    "removeBatch": [Function],
-                    "renderForm": [Function],
-                    "reset": [Function],
-                    "resetFieldState": [Function],
-                    "resumeValidation": [Function],
-                    "setConfig": [Function],
-                    "shift": [Function],
-                    "submit": [Function],
-                    "subscribe": [Function],
-                    "swap": [Function],
-                    "unshift": [Function],
-                    "update": [Function],
-                    "valid": true,
-                  }
-                }
                 label="Hidden"
                 name="hidden"
                 validate={
@@ -1204,48 +926,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                 <Component
                   FieldProvider={[Function]}
                   FormSpyProvider={[Function]}
-                  formOptions={
-                    Object {
-                      "batch": [Function],
-                      "blur": [Function],
-                      "change": [Function],
-                      "clearOnUnmount": false,
-                      "clearedValue": undefined,
-                      "concat": [Function],
-                      "destroyOnUnregister": false,
-                      "focus": [Function],
-                      "getFieldState": [Function],
-                      "getRegisteredFields": [Function],
-                      "getState": [Function],
-                      "handleSubmit": [Function],
-                      "initialize": [Function],
-                      "insert": [Function],
-                      "isValidationPaused": [Function],
-                      "move": [Function],
-                      "onCancel": undefined,
-                      "onReset": undefined,
-                      "onSubmit": [MockFunction],
-                      "pauseValidation": [Function],
-                      "pop": [Function],
-                      "pristine": true,
-                      "push": [Function],
-                      "registerField": [Function],
-                      "remove": [Function],
-                      "removeBatch": [Function],
-                      "renderForm": [Function],
-                      "reset": [Function],
-                      "resetFieldState": [Function],
-                      "resumeValidation": [Function],
-                      "setConfig": [Function],
-                      "shift": [Function],
-                      "submit": [Function],
-                      "subscribe": [Function],
-                      "swap": [Function],
-                      "unshift": [Function],
-                      "update": [Function],
-                      "valid": true,
-                    }
-                  }
                   label="Hidden"
                   name="hidden"
                   validate={[Function]}

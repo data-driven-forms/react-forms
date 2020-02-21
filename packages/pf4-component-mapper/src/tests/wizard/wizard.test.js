@@ -101,10 +101,9 @@ describe('<Wizard />', () => {
     initialProps = {
       schema,
       formFieldsMapper: componentMapper,
-      formTemplate: formTemplate(),
+      formTemplate: formTemplate({ showFormControls: false }),
       onSubmit: jest.fn(),
-      onCancel: jest.fn(),
-      showFormControls: false
+      onCancel: jest.fn()
     };
 
     nestedSchema = {

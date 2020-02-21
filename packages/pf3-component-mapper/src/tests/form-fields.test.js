@@ -9,14 +9,21 @@ import Switch from '../components/switch';
 import Checkbox from '../components/checkbox';
 import Radio from '../components/radio';
 import Textarea from '../components/textarea';
+import RenderWithProvider from '../../../../__mocks__/with-provider';
 
 describe('FormFields', () => {
   describe('<Switch />', () => {
     let FieldProvider;
     let onChangeSpy;
     let props;
+    let formOptions;
+
     beforeEach(() => {
       onChangeSpy = jest.fn();
+
+      formOptions = {
+        handleSubmit: jest.fn()
+      };
 
       FieldProvider = (props) => (
         <div>
@@ -39,47 +46,83 @@ describe('FormFields', () => {
     });
 
     it('should render Switch correctly', () => {
-      const wrapper = mount(<Switch {...props} />);
+      const wrapper = mount(
+        <RenderWithProvider value={{ formOptions }}>
+          <Switch {...props} />
+        </RenderWithProvider>
+      );
       expect(toJson(wrapper)).toMatchSnapshot();
     });
 
     it('should render mini Switch correctly', () => {
-      const wrapper = mount(<Switch {...props} bsSize="mini" />);
+      const wrapper = mount(
+        <RenderWithProvider value={{ formOptions }}>
+          <Switch {...props} bsSize="mini" />
+        </RenderWithProvider>
+      );
       expect(toJson(wrapper)).toMatchSnapshot();
     });
 
     it('should render sm Switch correctly', () => {
-      const wrapper = mount(<Switch {...props} bsSize="mn" />);
+      const wrapper = mount(
+        <RenderWithProvider value={{ formOptions }}>
+          <Switch {...props} bsSize="mn" />
+        </RenderWithProvider>
+      );
       expect(toJson(wrapper)).toMatchSnapshot();
     });
 
     it('should render Switch with label correctly', () => {
-      const wrapper = mount(<Switch {...props} label={'Label'} />);
+      const wrapper = mount(
+        <RenderWithProvider value={{ formOptions }}>
+          <Switch {...props} label={'Label'} />
+        </RenderWithProvider>
+      );
       expect(toJson(wrapper)).toMatchSnapshot();
     });
 
     it('should render Switch with placeholder correctly', () => {
-      const wrapper = mount(<Switch {...props} placeholder={'Placeholder'} />);
+      const wrapper = mount(
+        <RenderWithProvider value={{ formOptions }}>
+          <Switch {...props} placeholder={'Placeholder'} />
+        </RenderWithProvider>
+      );
       expect(toJson(wrapper)).toMatchSnapshot();
     });
 
     it('should render Switch with onText (custom prop) correctly', () => {
-      const wrapper = mount(<Switch {...props} onText={'OnText'} />);
+      const wrapper = mount(
+        <RenderWithProvider value={{ formOptions }}>
+          <Switch {...props} onText={'OnText'} />
+        </RenderWithProvider>
+      );
       expect(toJson(wrapper)).toMatchSnapshot();
     });
 
     it('should render disabled Switch correctly', () => {
-      const wrapper = mount(<Switch {...props} isDisabled />);
+      const wrapper = mount(
+        <RenderWithProvider value={{ formOptions }}>
+          <Switch {...props} isDisabled />
+        </RenderWithProvider>
+      );
       expect(toJson(wrapper)).toMatchSnapshot();
     });
 
     it('should render readOnly Switch correctly', () => {
-      const wrapper = mount(<Switch {...props} isReadOnly />);
+      const wrapper = mount(
+        <RenderWithProvider value={{ formOptions }}>
+          <Switch {...props} isReadOnly />
+        </RenderWithProvider>
+      );
       expect(toJson(wrapper)).toMatchSnapshot();
     });
 
     it('should call onChange method', () => {
-      const wrapper = mount(<Switch {...props} name="Foo" FieldProvider={FieldProvider} />);
+      const wrapper = mount(
+        <RenderWithProvider value={{ formOptions }}>
+          <Switch {...props} name="Foo" FieldProvider={FieldProvider} />
+        </RenderWithProvider>
+      );
       wrapper.find('input').simulate('change');
       expect(onChangeSpy).toHaveBeenCalled();
     });

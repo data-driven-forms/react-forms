@@ -21,7 +21,7 @@ const FormRenderer = ({
   onStateUpdate,
   subscription,
   clearedValue,
-  schema,
+  schema
 }) => {
   let schemaError;
   try {
@@ -33,21 +33,25 @@ const FormRenderer = ({
   }
 
   if (schemaError) {
-    return <SchemaErrorComponent name={ schemaError.name } message={ schemaError.message } />;
+    return <SchemaErrorComponent name={schemaError.name} message={schemaError.message} />;
   }
 
-  const FormTemplate = formTemplate ? formTemplate : () => <div>{ `FormRenderer is missing 'formTemplate' prop:
-  ({formFields, formOptions, formSpy, schema}) => <FormTemplate {...} />` }</div>;
+  const FormTemplate = formTemplate
+    ? formTemplate
+    : () => (
+      <div>{`FormRenderer is missing 'formTemplate' prop:
+  ({formFields, formSpy, schema}) => <FormTemplate {...} />`}</div>
+    );
 
   return (
     <Form
-      onSubmit={ onSubmit }
+      onSubmit={onSubmit}
       mutators={{ ...arrayMutators }}
-      decorators={ [ createFocusDecorator() ] }
-      initialValues={ initialValues }
-      validate={ validate }
+      decorators={[createFocusDecorator()]}
+      initialValues={initialValues}
+      validate={validate}
       subscription={{ pristine: true, submitting: true, valid: true, ...subscription }}
-      render={ ({ handleSubmit, pristine, valid, form: { reset, mutators, getState, submit, ...form }, ...state }) => {
+      render={({ handleSubmit, pristine, valid, form: { reset, mutators, getState, submit, ...form }, ...state }) => {
         const formOptions = {
           pristine,
           onSubmit,
@@ -62,25 +66,24 @@ const FormRenderer = ({
           clearOnUnmount,
           renderForm,
           ...mutators,
-          ...form,
+          ...form
         };
 
         return (
-          <RendererContext.Provider value={{
-            formFieldsMapper,
-            formOptions,
-          }}>
-            <FormTemplate
-              formFields={ renderForm(schema.fields) }
-              formOptions={ formOptions }
-              FormSpy={ FormSpy }
-              schema={ schema }
-            />
-            { onStateUpdate && <FormSpy onChange={ onStateUpdate } /> }
+          <RendererContext.Provider
+            value={{
+              formFieldsMapper,
+              formOptions
+            }}
+          >
+            <FormTemplate formFields={renderForm(schema.fields)} FormSpy={FormSpy} schema={schema} />
+            {onStateUpdate && <FormSpy onChange={onStateUpdate} />}
           </RendererContext.Provider>
-        );} }
+        );
+      }}
     />
-  );};
+  );
+};
 
 FormRenderer.propTypes = {
   onSubmit: PropTypes.func.isRequired,
@@ -92,12 +95,12 @@ FormRenderer.propTypes = {
   validate: PropTypes.func,
   onStateUpdate: PropTypes.func,
   subscription: PropTypes.shape({ [PropTypes.string]: PropTypes.bool }),
-  clearedValue: PropTypes.any,
+  clearedValue: PropTypes.any
 };
 
 FormRenderer.defaultProps = {
   initialValues: {},
-  clearOnUnmount: false,
+  clearOnUnmount: false
 };
 
 export default FormRenderer;

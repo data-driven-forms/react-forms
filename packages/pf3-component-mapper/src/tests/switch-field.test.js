@@ -9,6 +9,7 @@ import Switch, {
   TEXT_PADDING
 } from '../form-fields/switch-field';
 import { computeTextWidth } from '../helpers/html-helper';
+import RenderWithProvider from '../../../../__mocks__/with-provider';
 
 jest.mock('../helpers/html-helper', () => ({ computeTextWidth: jest.fn() }));
 
@@ -28,83 +29,62 @@ describe('Switch-field', () => {
 
   describe('createLabelWidth', () => {
     it('return left width object', () => {
-      expect(createLabelStyles(width)).toEqual(
-        {
-          width: computedWidth,
-          left: -computedWidth,
-        }
-      );
+      expect(createLabelStyles(width)).toEqual({
+        width: computedWidth,
+        left: -computedWidth
+      });
     });
 
     it('return right width object', () => {
-      expect(createLabelStyles(width, false)).toEqual(
-        {
-          width: computedWidth,
-          left: DIVIDER_SIZE,
-        }
-      );
+      expect(createLabelStyles(width, false)).toEqual({
+        width: computedWidth,
+        left: DIVIDER_SIZE
+      });
     });
   });
 
   describe('createTransform', () => {
     it('return object when isChecked', () => {
-      expect(createTransform(width, true)).toEqual(
-        {
-          WebkitTransform: `translateX(${computedWidth}px)`,
-          msTransform: `translateX(${computedWidth}px)`,
-          transform: `translateX(${computedWidth}px)`,
-        }
-      );
+      expect(createTransform(width, true)).toEqual({
+        WebkitTransform: `translateX(${computedWidth}px)`,
+        msTransform: `translateX(${computedWidth}px)`,
+        transform: `translateX(${computedWidth}px)`
+      });
     });
 
     it('return empty object when is not checked', () => {
-      expect(createTransform(width, false)).toEqual(
-        {}
-      );
+      expect(createTransform(width, false)).toEqual({});
     });
 
     it('return object when isChecked and is offText', () => {
-      expect(createTransform(width, true, true)).toEqual(
-        {
-          WebkitTransform: `translateX(${computedWidthWithDivider}px)`,
-          msTransform: `translateX(${computedWidthWithDivider}px)`,
-          transform: `translateX(${computedWidthWithDivider}px)`,
-        }
-      );
+      expect(createTransform(width, true, true)).toEqual({
+        WebkitTransform: `translateX(${computedWidthWithDivider}px)`,
+        msTransform: `translateX(${computedWidthWithDivider}px)`,
+        transform: `translateX(${computedWidthWithDivider}px)`
+      });
     });
 
     it('return empty object when is not Checked and is offText', () => {
-      expect(createTransform(width, false, true)).toEqual(
-        {}
-      );
+      expect(createTransform(width, false, true)).toEqual({});
     });
   });
 
   describe('Switch', () => {
-    it('should call componentDidUpdate Switch correctly', () => {
-      const wrapper = mount(
-        <Switch bsSize='mn' onChange={ jest.fn() } formOptions={{ handleSubmit: jest.fn() }}/>
-      );
-      const switchInstance = wrapper.find(Switch).instance();
-      const spy = jest.spyOn(switchInstance, 'setState');
-      expect(spy).not.toHaveBeenCalled();
-      wrapper.setProps({ offText: 'verylongoffteeeeeeeext' });
-      expect(spy).toHaveBeenCalled();
-      spy.mockReset();
-      wrapper.setProps({ offText: 'verylongoffteeeeeeeext' });
-      expect(spy).not.toHaveBeenCalled();
-    });
-
     it('should call submit when press enter', () => {
       const submitSpy = jest.fn();
       const preventDefault = jest.fn();
       const onChange = jest.fn();
 
       const wrapper = mount(
-        <Switch bsSize='mn' formOptions={{ handleSubmit: submitSpy }} onChange={ onChange }/>
+        <RenderWithProvider value={{ formOptions: { handleSubmit: submitSpy } }}>
+          <Switch bsSize="mn" onChange={onChange} />
+        </RenderWithProvider>
       );
 
-      wrapper.find('label').props().onKeyDown({ keyCode: 13, preventDefault });
+      wrapper
+      .find('label')
+      .props()
+      .onKeyDown({ keyCode: 13, preventDefault });
 
       expect(preventDefault).toHaveBeenCalled();
       expect(submitSpy).toHaveBeenCalled();
@@ -118,10 +98,15 @@ describe('Switch-field', () => {
       const checked = false;
 
       const wrapper = mount(
-        <Switch bsSize='mn' formOptions={{ handleSubmit: submitSpy }} onChange={ onChange } checked={ checked }/>
+        <RenderWithProvider value={{ formOptions: { handleSubmit: submitSpy } }}>
+          <Switch bsSize="mn" onChange={onChange} checked={checked} />
+        </RenderWithProvider>
       );
 
-      wrapper.find('label').props().onKeyDown({ keyCode: 32, preventDefault });
+      wrapper
+      .find('label')
+      .props()
+      .onKeyDown({ keyCode: 32, preventDefault });
 
       expect(preventDefault).toHaveBeenCalled();
       expect(submitSpy).not.toHaveBeenCalled();
@@ -135,10 +120,15 @@ describe('Switch-field', () => {
       const checked = true;
 
       const wrapper = mount(
-        <Switch bsSize='mn' formOptions={{ handleSubmit: submitSpy }} onChange={ onChange } checked={ checked }/>
+        <RenderWithProvider value={{ formOptions: { handleSubmit: submitSpy } }}>
+          <Switch bsSize="mn" onChange={onChange} checked={checked} />
+        </RenderWithProvider>
       );
 
-      wrapper.find('label').props().onKeyDown({ keyCode: 32, preventDefault });
+      wrapper
+      .find('label')
+      .props()
+      .onKeyDown({ keyCode: 32, preventDefault });
 
       expect(preventDefault).toHaveBeenCalled();
       expect(submitSpy).not.toHaveBeenCalled();
@@ -151,10 +141,15 @@ describe('Switch-field', () => {
       const onChange = jest.fn();
 
       const wrapper = mount(
-        <Switch bsSize='mn' formOptions={{ handleSubmit: submitSpy }} onChange={ onChange }/>
+        <RenderWithProvider value={{ formOptions: { handleSubmit: submitSpy } }}>
+          <Switch bsSize="mn" onChange={onChange} />
+        </RenderWithProvider>
       );
 
-      wrapper.find('label').props().onKeyDown({ keyCode: 88, preventDefault });
+      wrapper
+      .find('label')
+      .props()
+      .onKeyDown({ keyCode: 88, preventDefault });
 
       expect(preventDefault).not.toHaveBeenCalled();
       expect(submitSpy).not.toHaveBeenCalled();
@@ -163,7 +158,9 @@ describe('Switch-field', () => {
 
     it('tabIndex is 0 by default', () => {
       const wrapper = mount(
-        <Switch bsSize='mn' formOptions={{ handleSubmit: jest.fn() }} onChange={ jest.fn() }/>
+        <RenderWithProvider value={{ formOptions: { handleSubmit: jest.fn() } }}>
+          <Switch bsSize="mn" onChange={jest.fn()} />
+        </RenderWithProvider>
       );
 
       expect(wrapper.find('label').props().tabIndex).toEqual(0);
@@ -171,7 +168,9 @@ describe('Switch-field', () => {
 
     it('tabIndex is -1 when isReadOnly', () => {
       const wrapper = mount(
-        <Switch bsSize='mn' formOptions={{ handleSubmit: jest.fn() }} onChange={ jest.fn() } isReadOnly={ true }/>
+        <RenderWithProvider value={{ formOptions: { handleSubmit: jest.fn() } }}>
+          <Switch bsSize="mn" onChange={jest.fn()} isReadOnly={true} />
+        </RenderWithProvider>
       );
 
       expect(wrapper.find('label').props().tabIndex).toEqual(-1);
@@ -179,7 +178,9 @@ describe('Switch-field', () => {
 
     it('tabIndex is -1 when disabled', () => {
       const wrapper = mount(
-        <Switch bsSize='mn' formOptions={{ handleSubmit: jest.fn() }} onChange={ jest.fn() } disabled={ true }/>
+        <RenderWithProvider value={{ formOptions: { handleSubmit: jest.fn() } }}>
+          <Switch bsSize="mn" onChange={jest.fn()} disabled={true} />
+        </RenderWithProvider>
       );
 
       expect(wrapper.find('label').props().tabIndex).toEqual(-1);
