@@ -1,98 +1,113 @@
-import React from 'react';
+import React, { useState } from 'react';
 import WizardStep from './wizard/wizard-step';
 import PropTypes from 'prop-types';
 import { Wizard as PfWizard, Modal, Icon } from 'patternfly-react';
 import handleEnter from '@data-driven-forms/common/src/wizard/enter-handler';
+import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
 const defaultButtonLabels = {
   cancel: 'Cancel',
   back: 'Back',
   next: 'Next',
-  submit: 'Submit',
+  submit: 'Submit'
 };
 
-class Wizard extends React.Component {
-  state = {
-    activeStep: this.props.fields[0].stepKey,
-    prevSteps: [],
-  }
+const Wizard = ({ title, FieldProvider, buttonLabels, stepsInfo, fields, inModal }) => {
+  const formOptions = useFormApi();
 
-  handleNext = nextStep => this.setState(prevState => ({ activeStep: nextStep, prevSteps: [ ...prevState.prevSteps, prevState.activeStep ]}));
+  const [activeStep, setActiveStep] = useState(fields[0].stepKey);
+  const [prevSteps, setPrevSteps] = useState([]);
 
-  handlePrev = () => this.setState(({ prevSteps }) => ({ activeStep: prevSteps.pop(), prevSteps: [ ...prevSteps ]}))
+  const handleNext = (nextStep) => {
+    setPrevSteps([...prevSteps, activeStep]);
+    setActiveStep(nextStep);
+  };
 
-  findActiveFields = visitedSteps =>
-    visitedSteps.map(key =>this.findCurrentStep(key).fields.map(({ name }) => name))
-    .reduce((acc, curr) => curr.concat(acc.map(item => item)), []);
+  const handlePrev = () => {
+    const newSteps = prevSteps.slice(0, x.length - 1);
 
-  handleSubmit = (values, visitedSteps) =>
+    setActiveStep(newSteps[newSteps.length]);
+    setPrevSteps(newSteps);
+  };
+
+  const findActiveFields = (visitedSteps) =>
+    visitedSteps
+      .map((key) => this.findCurrentStep(key).fields.map(({ name }) => name))
+      .reduce((acc, curr) => curr.concat(acc.map((item) => item)), []);
+
+  const getValues = (values, visitedSteps) =>
     Object.keys(values)
-    .filter(key => this.findActiveFields(visitedSteps).includes(key))
-    .reduce((acc, curr) => ({ ...acc, [curr]: values[curr] }), {});
+      .filter((key) => findActiveFields(visitedSteps).includes(key))
+      .reduce((acc, curr) => ({ ...acc, [curr]: values[curr] }), {});
 
-  findCurrentStep = activeStep => this.props.fields.find(({ stepKey }) => stepKey === activeStep)
+  const handleSubmit = () => formOptions.onSubmit(getValues(formOptions.getState().values, [...prevSteps, activeStep]));
 
-  renderSteps = () => this.props.stepsInfo.map((step, stepIndex) => <PfWizard.Step
-    activeStep={ this.state.prevSteps.length + 1 }
-    title={ step.title }
-    label={ `${stepIndex + 1}` }
-    step={ stepIndex + 1 }
-    key={ stepIndex + 1 }
-    stepIndex={ stepIndex + 1 }
-  />);
+  const findCurrentStep = (activeStep) => fields.find(({ stepKey }) => stepKey === activeStep);
 
-  render() {
-    const { title, FieldProvider, formOptions, buttonLabels, stepsInfo, inModal } = this.props;
-    const handleSubmit = () =>
-      formOptions.onSubmit(this.handleSubmit(formOptions.getState().values, [ ...this.state.prevSteps, this.state.activeStep ]));
+  const renderSteps = () =>
+    stepsInfo.map((step, stepIndex) => (
+      <PfWizard.Step
+        activeStep={prevSteps.length + 1}
+        title={step.title}
+        label={`${stepIndex + 1}`}
+        step={stepIndex + 1}
+        key={stepIndex + 1}
+        stepIndex={stepIndex + 1}
+      />
+    ));
 
-    const fullButtonLabels = {
-      ...defaultButtonLabels,
-      ...buttonLabels,
-    };
+  const fullButtonLabels = {
+    ...defaultButtonLabels,
+    ...buttonLabels
+  };
 
-    return (
-      <div
-        onKeyDown={ e => handleEnter(e, formOptions, this.state.activeStep, this.findCurrentStep, this.handleNext, handleSubmit) }>
-        { title && <Modal.Header>
-          { inModal &&  <button className="close" onClick={ formOptions.onCancel } aria-hidden="true" aria-label="Close">
-            <Icon type="pf" name="close" />
-          </button> }
-          <Modal.Title>{ title }</Modal.Title>
-        </Modal.Header> }
-        { stepsInfo && <PfWizard.Steps steps={ this.renderSteps() } /> }
-        <WizardStep
-          handleNext={ this.handleNext }
-          handlePrev={ this.handlePrev }
-          disableBack={ this.state.prevSteps.length === 0 }
-          buttonLabels={ fullButtonLabels }
-          { ...this.findCurrentStep(this.state.activeStep) }
-          formOptions={{
-            ...formOptions,
-            handleSubmit,
-          }}
-          FieldProvider={ FieldProvider }
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div onKeyDown={(e) => handleEnter(e, formOptions, activeStep, findCurrentStep, handleNext, handleSubmit)}>
+      {title && (
+        <Modal.Header>
+          {inModal && (
+            <button className="close" onClick={formOptions.onCancel} aria-hidden="true" aria-label="Close">
+              <Icon type="pf" name="close" />
+            </button>
+          )}
+          <Modal.Title>{title}</Modal.Title>
+        </Modal.Header>
+      )}
+      {stepsInfo && <PfWizard.Steps steps={renderSteps()} />}
+      <WizardStep
+        handleNext={handleNext}
+        handlePrev={handlePrev}
+        disableBack={prevSteps.length === 0}
+        buttonLabels={fullButtonLabels}
+        {...findCurrentStep(activeStep)}
+        formOptions={{
+          ...formOptions,
+          handleSubmit
+        }}
+        FieldProvider={FieldProvider}
+      />
+    </div>
+  );
+};
 
 Wizard.propTypes = {
   title: PropTypes.string,
-  FieldProvider: PropTypes.PropTypes.oneOfType([ PropTypes.object, PropTypes.func ]).isRequired,
-  formOptions: PropTypes.object,
+  FieldProvider: PropTypes.PropTypes.oneOfType([PropTypes.object, PropTypes.func]).isRequired,
   buttonLabels: PropTypes.object,
   stepsInfo: PropTypes.array,
   inModal: PropTypes.bool,
+  fields: PropTypes.array(
+    PropTypes.shape({
+      stepKey: PropTypes.string
+    })
+  ).isRequired
 };
 
 Wizard.defaultProps = {
   title: undefined,
   buttonLabels: defaultButtonLabels,
   stepsInfo: undefined,
-  inModal: false,
-  formOptions: undefined,
+  inModal: false
 };
 
 export default Wizard;
