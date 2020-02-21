@@ -9,6 +9,7 @@ export { default as composeValidators } from './components/compose-validators';
 export { default as Validators } from './validators/validators';
 export { default as defaultSchemaValidator } from './parsers/default-schema-validator';
 export { default as useFormApi } from './hooks/useFormApi';
+export { default as RendererContext } from './components/renderer-context';
 
 export const schemaParsers = {
   mozillaParser,
