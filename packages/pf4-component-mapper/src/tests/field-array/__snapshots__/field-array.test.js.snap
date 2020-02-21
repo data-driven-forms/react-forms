@@ -103,48 +103,6 @@ exports[`FieldArray should render array field correctly 1`] = `
             </React.Fragment>,
           ]
         }
-        formOptions={
-          Object {
-            "batch": [Function],
-            "blur": [Function],
-            "change": [Function],
-            "clearOnUnmount": false,
-            "clearedValue": undefined,
-            "concat": [Function],
-            "destroyOnUnregister": false,
-            "focus": [Function],
-            "getFieldState": [Function],
-            "getRegisteredFields": [Function],
-            "getState": [Function],
-            "handleSubmit": [Function],
-            "initialize": [Function],
-            "insert": [Function],
-            "isValidationPaused": [Function],
-            "move": [Function],
-            "onCancel": undefined,
-            "onReset": undefined,
-            "onSubmit": [MockFunction],
-            "pauseValidation": [Function],
-            "pop": [Function],
-            "pristine": true,
-            "push": [Function],
-            "registerField": [Function],
-            "remove": [Function],
-            "removeBatch": [Function],
-            "renderForm": [Function],
-            "reset": [Function],
-            "resetFieldState": [Function],
-            "resumeValidation": [Function],
-            "setConfig": [Function],
-            "shift": [Function],
-            "submit": [Function],
-            "subscribe": [Function],
-            "swap": [Function],
-            "unshift": [Function],
-            "update": [Function],
-            "valid": true,
-          }
-        }
         schema={
           Object {
             "fields": Array [
