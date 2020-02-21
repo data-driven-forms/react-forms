@@ -6,7 +6,7 @@ import enhancedOnChange from '../form-renderer/enhanced-on-change';
 import dataTypes from './data-types';
 import useFormApi from '../hooks/useFormApi';
 
-const FieldProvider = ({ name, initializeOnMount, ...props }) => {
+const FieldProvider = ({ name, initializeOnMount, component, render, ...props }) => {
   const fieldProps = useField(name, props);
   const formOptions = useFormApi();
   useEffect(() => {
@@ -23,8 +23,8 @@ const FieldProvider = ({ name, initializeOnMount, ...props }) => {
   }, []);
 
   const fieldClearedValue = props.hasOwnProperty('clearedValue') ? props.clearedValue : formOptions.clearedValue;
-  if (props.component) {
-    const FieldComponent = props.component;
+  if (component) {
+    const FieldComponent = component;
     return (
       <FieldComponent
         {...props}
@@ -48,8 +48,8 @@ const FieldProvider = ({ name, initializeOnMount, ...props }) => {
     );
   }
 
-  if (props.render) {
-    return props.render({
+  if (render) {
+    return render({
       ...props,
       formOptions,
       ...fieldProps,

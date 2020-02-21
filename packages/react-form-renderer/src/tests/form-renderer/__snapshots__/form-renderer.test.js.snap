@@ -124,7 +124,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 <Component
                   FieldArrayProvider={[Function]}
                   FieldProvider={[Function]}
-                  component={[Function]}
                   formOptions={
                     Object {
                       "batch": [Function],
@@ -243,7 +242,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 <Component
                   FieldArrayProvider={[Function]}
                   FieldProvider={[Function]}
-                  component={[Function]}
                   formOptions={
                     Object {
                       "batch": [Function],
@@ -490,7 +488,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                 <Component
                   FieldArrayProvider={[Function]}
                   FieldProvider={[Function]}
-                  component={[Function]}
                   formOptions={
                     Object {
                       "batch": [Function],
@@ -615,7 +612,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                   <Component
                     FieldArrayProvider={[Function]}
                     FieldProvider={[Function]}
-                    component={[Function]}
                     formOptions={
                       Object {
                         "batch": [Function],

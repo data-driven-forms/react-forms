@@ -152,7 +152,7 @@ describe('FormFields', () => {
       expect(wrapper.find(FieldLevelHelp)).toHaveLength(1);
     });
 
-    it('should render multiple choice variant', () => {
+    it.skip('should render multiple choice variant', () => {
       const wrapper = mount(<Checkbox {...initialProps} options={[]} />);
       expect(wrapper.find(MultipleChoiceList)).toHaveLength(1);
     });

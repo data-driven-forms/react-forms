@@ -106,6 +106,7 @@ const output = {
                   title: 'Text Box required',
                   isRequired: true,
                   component: components.TEXT_FIELD,
+                  validateOnMount: true,
                   validate: [
                     { type: validators.REQUIRED },
                   ],

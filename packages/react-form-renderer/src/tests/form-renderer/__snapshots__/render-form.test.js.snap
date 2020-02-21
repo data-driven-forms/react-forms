@@ -52,7 +52,6 @@ exports[`renderForm function #condition should render condition field only if co
               validate={[Function]}
             >
               <TextField
-                component={[Function]}
                 formOptions={
                   Object {
                     "renderForm": [Function],
@@ -132,7 +131,6 @@ exports[`renderForm function #condition should render condition field only if co
               validate={[Function]}
             >
               <TextField
-                component={[Function]}
                 formOptions={
                   Object {
                     "renderForm": [Function],
@@ -279,7 +277,6 @@ exports[`renderForm function #condition should render condition field only if on
               validate={[Function]}
             >
               <TextField
-                component={[Function]}
                 formOptions={
                   Object {
                     "renderForm": [Function],
@@ -359,7 +356,6 @@ exports[`renderForm function #condition should render condition field only if on
               validate={[Function]}
             >
               <TextField
-                component={[Function]}
                 formOptions={
                   Object {
                     "renderForm": [Function],
@@ -493,7 +489,6 @@ exports[`renderForm function should render single field from defined componentTy
             <Component
               FieldArrayProvider={[Function]}
               FieldProvider={[Function]}
-              component={[Function]}
               formOptions={
                 Object {
                   "renderForm": [Function],
@@ -535,7 +530,6 @@ exports[`renderForm function should render single field from defined componentTy
             >
               <div
                 FieldArrayProvider={[Function]}
-                component={[Function]}
                 formOptions={
                   Object {
                     "renderForm": [Function],
@@ -638,7 +632,6 @@ exports[`renderForm function should render single field from with custom compone
               validate={[Function]}
             >
               <TextField
-                component={[Function]}
                 formOptions={
                   Object {
                     "renderForm": [Function],
