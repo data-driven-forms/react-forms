@@ -1,6 +1,9 @@
 import React from 'react';
+import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
-const FormTemplate = ({ schema: { title, label, description }, formFields, formOptions, FormSpy }) => {
+const FormTemplate = ({ schema: { title, label, description }, formFields, FormSpy }) => {
+  const formOptions = useFormApi();
+
   return (
     <form onSubmit={ formOptions.handleSubmit }>
       { title || label && <h1>{ title || label }</h1> }

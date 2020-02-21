@@ -8,8 +8,9 @@ export { default as validatorTypes } from './components/validator-types';
 export { default as composeValidators } from './components/compose-validators';
 export { default as Validators } from './validators/validators';
 export { default as defaultSchemaValidator } from './parsers/default-schema-validator';
+export { default as useFormApi } from './hooks/useFormApi';
 
 export const schemaParsers = {
   mozillaParser,
-  miqParser,
+  miqParser
 };

@@ -28,7 +28,7 @@ const getButtonStyle = variant => ({
 
 const Button = ({ children, label, variant, ...props }) => <button style={ getButtonStyle(variant) } { ...props }>{ label }</button>;
 
-const TextField = ({ formOptions, customProp, label, input, isRequired, meta: { error, touched }, FieldProvider, FieldArrayProvider, dataType, ...props }) => (
+const TextField = ({ customProp, label, input, isRequired, meta: { error, touched }, FieldProvider, FieldArrayProvider, dataType, ...props }) => (
   <div className={ `ddorg__demo-formGroup ${isRequired ? 'required' : ''} ${error ? 'error' : ''}` }>
     <label htmlFor={ input.name }>{ label }</label>
     <input id={ input.name } { ...input } { ...props } />

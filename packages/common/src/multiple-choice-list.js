@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { composeValidators } from '@data-driven-forms/react-form-renderer';
+import { composeValidators, useFormApi } from '@data-driven-forms/react-form-renderer';
 
 import { formGroup } from './prop-types-templates';
 
-const MultipleChoiceList = ({ validate, FieldProvider, Wrapper, Checkbox, ...props }) => (
+const MultipleChoiceList = ({ validate, FieldProvider, Wrapper, Checkbox, ...props }) => {
+  const formOptions = useFormApi();
+
+  return (
   <FieldProvider
     { ...props }
     validate={ composeValidators(props.validate || []) }
@@ -35,7 +38,7 @@ const MultipleChoiceList = ({ validate, FieldProvider, Wrapper, Checkbox, ...pro
         >
           { options.map(option =>
             (<FieldProvider
-              formOptions={ rest.formOptions }
+              formOptions={ formOptions }
               id={ `${rest.id}-${option.value}` }
               key={ option.value }
               { ...option }
@@ -60,7 +63,7 @@ const MultipleChoiceList = ({ validate, FieldProvider, Wrapper, Checkbox, ...pro
         </Wrapper>);
     } }
   />
-);
+)};
 
 MultipleChoiceList.propTypes = {
   validate: PropTypes.func,

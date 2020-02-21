@@ -1,38 +1,32 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
+import { useFormApi } from '@data-driven-forms/react-form-renderer';
+
 const renderTabHeader = (items) => items.map(({ title, key, name }) => <Tab key={name} label={title} />);
 const renderTabContet = ({ name, fields }, formOptions) => <Fragment key={name}>{formOptions.renderForm(fields, formOptions)}</Fragment>;
 
-class FormTabs extends Component {
-  state = {
-    activeTab: 0
-  };
+const FormTabs = ({ fields }) => {
+  const formOptions = useFormApi();
+  const [activeTab, setActiveTab] = useState(0);
 
-  handleTabChange = (event, tabIndex) => this.setState({ activeTab: tabIndex });
-
-  render() {
-    const { fields, formOptions } = this.props;
-    const { activeTab } = this.state;
-    return (
-      <div>
-        <AppBar position="static">
-          <Tabs value={activeTab} onChange={this.handleTabChange}>
-            {renderTabHeader(fields)}
-          </Tabs>
-        </AppBar>
-        {renderTabContet(fields[activeTab], formOptions)}
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <AppBar position="static">
+        <Tabs value={activeTab} onChange={(_e, tabIndex) => setActiveTab(tabIndex)}>
+          {renderTabHeader(fields)}
+        </Tabs>
+      </AppBar>
+      {renderTabContet(fields[activeTab], formOptions)}
+    </div>
+  );
+};
 
 FormTabs.propTypes = {
-  fields: PropTypes.array.isRequired,
-  formOptions: PropTypes.object.isRequired
+  fields: PropTypes.array.isRequired
 };
 
 export default FormTabs;

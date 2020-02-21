@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
 import { Grid, GridItem } from '@patternfly/react-core/dist/js/layouts/Grid';
 import { Bullseye } from '@patternfly/react-core/dist/js/layouts/Bullseye';
@@ -10,7 +11,9 @@ import AddCircleOIcon from '@patternfly/react-icons/dist/js/icons/add-circle-o-i
 
 import './final-form-array.scss';
 
-const ArrayItem = ({ fields, fieldIndex, name, remove, formOptions, length, minItems }) => {
+const ArrayItem = ({ fields, fieldIndex, name, remove, length, minItems }) => {
+  const { renderForm } = useFormApi();
+
   const widths = {
     label: fields[0].label ? 5 : 0,
     field: fields[0].label ? 7 : 12
@@ -40,7 +43,7 @@ const ArrayItem = ({ fields, fieldIndex, name, remove, formOptions, length, minI
                   </label>
                 </GridItem>
               )}
-              <GridItem sm={widths.field}>{formOptions.renderForm([ field ])}</GridItem>
+              <GridItem sm={widths.field}>{renderForm([field])}</GridItem>
             </Grid>
           ))}
         </GridItem>
@@ -66,9 +69,6 @@ ArrayItem.propTypes = {
   fieldIndex: PropTypes.number.isRequired,
   fields: PropTypes.arrayOf(PropTypes.object),
   remove: PropTypes.func.isRequired,
-  formOptions: PropTypes.shape({
-    renderForm: PropTypes.func.isRequired
-  }).isRequired,
   length: PropTypes.number,
   minItems: PropTypes.number
 };
@@ -79,7 +79,6 @@ const DynamicArray = ({
   description,
   fields: formFields,
   defaultItem,
-  formOptions,
   meta,
   FieldArrayProvider,
   FormSpyProvider, // eslint-disable-line react/prop-types
@@ -109,7 +108,6 @@ const DynamicArray = ({
               name={name}
               fieldIndex={index}
               remove={remove}
-              formOptions={formOptions}
               length={value.length}
               minItems={minItems}
             />
@@ -150,9 +148,6 @@ DynamicArray.propTypes = {
   minItems: PropTypes.number,
   maxItems: PropTypes.number,
   noItemsMessage: PropTypes.node,
-  formOptions: PropTypes.shape({
-    renderForm: PropTypes.func.isRequired
-  }).isRequired,
   FieldArrayProvider: PropTypes.node.isRequired,
   meta: PropTypes.object.isRequired
 };
