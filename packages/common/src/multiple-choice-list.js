@@ -10,6 +10,7 @@ const MultipleChoiceList = ({ validate, FieldProvider, Wrapper, Checkbox, ...pro
   return (
   <FieldProvider
     { ...props }
+    name={input.name}
     validate={ composeValidators(props.validate || []) }
     render={ ({
       label,
@@ -67,7 +68,7 @@ const MultipleChoiceList = ({ validate, FieldProvider, Wrapper, Checkbox, ...pro
 
 MultipleChoiceList.propTypes = {
   validate: PropTypes.func,
-  FieldProvider: PropTypes.oneOfType([ PropTypes.node, PropTypes.func ]),
+  FieldProvider: PropTypes.oneOfType([ PropTypes.node, PropTypes.func ]).isRequired,
   name: PropTypes.string.isRequired,
   Wrapper: PropTypes.oneOfType([ PropTypes.node, PropTypes.func ]),
   Checkbox: PropTypes.oneOfType([ PropTypes.node, PropTypes.func ]),
