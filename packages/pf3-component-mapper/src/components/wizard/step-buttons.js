@@ -48,31 +48,27 @@ const renderNextButton = ({ nextStep, handleSubmit, buttonLabels, ...rest }) =>
     <SimpleNext next={nextStep} buttonLabels={buttonLabels} {...rest} />
   );
 
-const WizardStepButtons = ({ disableBack, handlePrev, nextStep, FieldProvider, handleNext, buttonLabels }) => {
-  const formOptions = useFormApi();
-
-  return (
-    <Wizard.Footer>
-      {formOptions.onCancel && (
-        <Button style={{ marginRight: 20 }} type="button" variant="contained" color="secondary" onClick={formOptions.onCancel}>
-          {buttonLabels.cancel}
-        </Button>
-      )}
-
-      <Button type="button" variant="contained" disabled={disableBack} onClick={handlePrev}>
-        <Icon type="fa" name="angle-left" />
-        {buttonLabels.back}
+const WizardStepButtons = ({ disableBack, handlePrev, nextStep, FieldProvider, formOptions, handleNext, buttonLabels }) => (
+  <Wizard.Footer>
+    {formOptions.onCancel && (
+      <Button style={{ marginRight: 20 }} type="button" variant="contained" color="secondary" onClick={formOptions.onCancel}>
+        {buttonLabels.cancel}
       </Button>
-      {renderNextButton({
-        ...formOptions,
-        handleNext,
-        nextStep,
-        FieldProvider,
-        buttonLabels
-      })}
-    </Wizard.Footer>
-  );
-};
+    )}
+
+    <Button type="button" variant="contained" disabled={disableBack} onClick={handlePrev}>
+      <Icon type="fa" name="angle-left" />
+      {buttonLabels.back}
+    </Button>
+    {renderNextButton({
+      ...formOptions,
+      handleNext,
+      nextStep,
+      FieldProvider,
+      buttonLabels
+    })}
+  </Wizard.Footer>
+);
 
 WizardStepButtons.propTypes = {
   disableBack: PropTypes.bool,
@@ -86,7 +82,10 @@ WizardStepButtons.propTypes = {
     })
   ]),
   FieldProvider: PropTypes.func.isRequired,
-  buttonLabels: PropTypes.object.isRequired
+  buttonLabels: PropTypes.object.isRequired,
+  formOptions: PropTypes.shape({
+    onCancel: PropTypes.func.isRequired
+  }).isRequired
 };
 
 WizardStepButtons.defaultProps = {

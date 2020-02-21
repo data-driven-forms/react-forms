@@ -1,68 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SubForm component should render SubForm correctly 1`] = `
-<Grid
-  gutter="md"
+<SubForm
+  fields={Array []}
   name="cosiName"
->
-  <GridItem
-    sm={12}
-  >
-    <Title
-      size="xl"
-    >
-      cosiTitle
-    </Title>
-  </GridItem>
-  <div>
-    Here would be form
-  </div>
-</Grid>
+  title="cosiTitle"
+/>
 `;
 
 exports[`SubForm component should render SubForm with description correctly 1`] = `
-<Grid
-  gutter="md"
+<SubForm
+  description="description here!"
+  fields={Array []}
   name="cosiName"
->
-  <GridItem
-    sm={12}
-  >
-    <Title
-      size="xl"
-    >
-      cosiTitle
-    </Title>
-  </GridItem>
-  <GridItem
-    sm={12}
-  >
-    <TextContent>
-      <Text
-        component="small"
-        style={
-          Object {
-            "marginBottom": 0,
-          }
-        }
-      >
-        description here!
-      </Text>
-    </TextContent>
-  </GridItem>
-  <div>
-    Here would be form
-  </div>
-</Grid>
+  title="cosiTitle"
+/>
 `;
 
 exports[`SubForm component should render SubForm without title correctly 1`] = `
-<Grid
-  gutter="md"
+<SubForm
+  fields={Array []}
   name="cosiName"
->
-  <div>
-    Here would be form
-  </div>
-</Grid>
+/>
 `;

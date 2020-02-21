@@ -1,5 +1,4 @@
 import React from 'react';
-import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
 import { WizardNavItem } from '@patternfly/react-core/dist/js/components/Wizard/WizardNavItem';
 import { WizardNav } from '@patternfly/react-core/dist/js/components/Wizard/WizardNav';
@@ -21,9 +20,7 @@ const memoValues = (initialValue) => {
   };
 };
 
-const WizardNavigationInternal = React.memo(({ navSchema, activeStepIndex, maxStepIndex, jumpToStep }) => {
-  const { valid } = useFormApi();
-
+const WizardNavigationInternal = React.memo(({ navSchema, activeStepIndex, maxStepIndex, jumpToStep, formOptions: { valid } }) => {
   return navSchema
   .filter((field) => field.primary)
   .map((step) => {
@@ -61,7 +58,10 @@ WizardNavigationInternal.propTypes = {
   activeStepIndex: PropTypes.number.isRequired,
   maxStepIndex: PropTypes.number.isRequired,
   jumpToStep: PropTypes.func.isRequired,
-  navSchema: PropTypes.array.isRequired
+  navSchema: PropTypes.array.isRequired,
+  formOptions: PropTypes.shape({
+    valid: PropTypes.bool.isRequired
+  }).isRequired
 };
 
 class WizardNavigationClass extends React.Component {
@@ -110,13 +110,21 @@ class WizardNavigationClass extends React.Component {
   }
 
   render() {
-    const { activeStepIndex, maxStepIndex, jumpToStep, navSchema } = this.props;
+    const { activeStepIndex, maxStepIndex, jumpToStep, navSchema, formOptions } = this.props;
 
     const { maxStepIndex: maxStepIndexState } = this.state;
 
     const maxIndex = typeof maxStepIndexState === 'number' ? maxStepIndexState : maxStepIndex;
 
-    return <WizardNavigationInternal navSchema={navSchema} activeStepIndex={activeStepIndex} maxStepIndex={maxIndex} jumpToStep={jumpToStep} />;
+    return (
+      <WizardNavigationInternal
+        navSchema={navSchema}
+        activeStepIndex={activeStepIndex}
+        maxStepIndex={maxIndex}
+        jumpToStep={jumpToStep}
+        formOptions={formOptions}
+      />
+    );
   }
 }
 
@@ -127,7 +135,8 @@ WizardNavigationClass.propTypes = {
   setPrevSteps: PropTypes.func.isRequired,
   navSchema: PropTypes.array.isRequired,
   values: PropTypes.object.isRequired,
-  crossroads: PropTypes.arrayOf(PropTypes.string)
+  crossroads: PropTypes.arrayOf(PropTypes.string),
+  formOptions: PropTypes.object.isRequired
 };
 
 export default WizardNavigationClass;

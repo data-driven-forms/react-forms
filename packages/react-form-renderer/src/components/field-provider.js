@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import enhancedOnChange from '../form-renderer/enhanced-on-change';
 import dataTypes from './data-types';
+import useFormApi from '../hooks/useFormApi';
 
 class FieldProvider extends Component{
   componentDidMount() {
@@ -101,5 +102,10 @@ FieldProvider.defaultProps = {
   formOptions: {},
 };
 
-export default FieldProvider;
+const TemporaryWrapper = (props) => {
+  const formOptions = useFormApi();
 
+  return <FieldProvider {...props} formOptions={formOptions} />;
+};
+
+export default TemporaryWrapper;

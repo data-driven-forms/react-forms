@@ -4,16 +4,22 @@ import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { formTemplate } from '../index';
 import { Title, Description, Button } from '../components/form-template';
+import RenderWithProvider from '../../../../__mocks__/with-provider';
 
 describe('FormTemplate PF4 Common', () => {
   let initialProps;
   let ContextWrapper;
   let FormTemplate;
+  let formOptions;
 
   beforeEach(() => {
-    ContextWrapper = ({ children, ...props }) => <Form onSubmit={jest.fn()}>{() => children}</Form>;
+    formOptions = { onSubmit: jest.fn(), onReset: jest.fn(), onCancel: jest.fn(), canReset: true, pristine: true };
+    ContextWrapper = ({ children, ...props }) => (
+      <RenderWithProvider value={{ formOptions }}>
+        <Form onSubmit={jest.fn()}>{() => children}</Form>
+      </RenderWithProvider>
+    );
     initialProps = {
-      formOptions: { onSubmit: jest.fn(), onReset: jest.fn(), onCancel: jest.fn(), canReset: true, pristine: true },
       formFields: <div>Formfields</div>,
       schema: {},
       FormSpy
@@ -105,9 +111,9 @@ describe('FormTemplate PF4 Common', () => {
     .last()
     .simulate('click');
 
-    expect(initialProps.formOptions.onSubmit).not.toHaveBeenCalled();
-    expect(initialProps.formOptions.onReset).not.toHaveBeenCalled();
-    expect(initialProps.formOptions.onCancel).toHaveBeenCalled();
+    expect(formOptions.onSubmit).not.toHaveBeenCalled();
+    expect(formOptions.onReset).not.toHaveBeenCalled();
+    expect(formOptions.onCancel).toHaveBeenCalled();
   });
 
   it('should render only submit button', () => {
@@ -173,6 +179,6 @@ describe('FormTemplate PF4 Common', () => {
     .at(CANCEL_INDEX)
     .simulate('click');
 
-    expect(initialProps.formOptions.onCancel).toHaveBeenCalledWith(expectedValues);
+    expect(formOptions.onCancel).toHaveBeenCalledWith(expectedValues);
   });
 });

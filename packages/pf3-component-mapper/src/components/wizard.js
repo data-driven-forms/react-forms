@@ -24,16 +24,16 @@ const Wizard = ({ title, FieldProvider, buttonLabels, stepsInfo, fields, inModal
   };
 
   const handlePrev = () => {
-    const newSteps = prevSteps.slice(0, x.length - 1);
+    const newSteps = prevSteps.slice(0, Math.max(prevSteps.length - 1, 1));
 
-    setActiveStep(newSteps[newSteps.length]);
+    setActiveStep(newSteps[newSteps.length - 1]);
     setPrevSteps(newSteps);
   };
 
+  const findCurrentStep = (activeStep) => fields.find(({ stepKey }) => stepKey === activeStep);
+
   const findActiveFields = (visitedSteps) =>
-    visitedSteps
-      .map((key) => this.findCurrentStep(key).fields.map(({ name }) => name))
-      .reduce((acc, curr) => curr.concat(acc.map((item) => item)), []);
+    visitedSteps.map((key) => findCurrentStep(key).fields.map(({ name }) => name)).reduce((acc, curr) => curr.concat(acc.map((item) => item)), []);
 
   const getValues = (values, visitedSteps) =>
     Object.keys(values)
@@ -41,8 +41,6 @@ const Wizard = ({ title, FieldProvider, buttonLabels, stepsInfo, fields, inModal
       .reduce((acc, curr) => ({ ...acc, [curr]: values[curr] }), {});
 
   const handleSubmit = () => formOptions.onSubmit(getValues(formOptions.getState().values, [...prevSteps, activeStep]));
-
-  const findCurrentStep = (activeStep) => fields.find(({ stepKey }) => stepKey === activeStep);
 
   const renderSteps = () =>
     stepsInfo.map((step, stepIndex) => (
@@ -96,7 +94,7 @@ Wizard.propTypes = {
   buttonLabels: PropTypes.object,
   stepsInfo: PropTypes.array,
   inModal: PropTypes.bool,
-  fields: PropTypes.array(
+  fields: PropTypes.arrayOf(
     PropTypes.shape({
       stepKey: PropTypes.string
     })

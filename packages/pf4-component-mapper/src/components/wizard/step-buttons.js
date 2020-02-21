@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@patternfly/react-core/dist/js/components/Button/Button';
 import selectNext from '@data-driven-forms/common/src/wizard/select-next';
-import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
 const SimpleNext = ({ nextStep, valid, handleNext, submit, nextLabel, getState }) => (
   <Button variant="primary" type="button" isDisabled={!valid} onClick={() => (valid ? handleNext(selectNext(nextStep, getState)) : submit())}>
@@ -37,56 +36,53 @@ const WizardStepButtons = ({
   FieldProvider,
   handleNext,
   buttonsClassName,
-  buttonLabels: { cancel, submit, back, next }
-}) => {
-  const formOptions = useFormApi();
-
-  return (
-    <footer className={`pf-c-wizard__footer ${buttonsClassName ? buttonsClassName : ''}`}>
-      {Buttons ? (
-        <Buttons
-          ConditionalNext={SimpleNext}
-          SubmitButton={SubmitButton}
-          SimpleNext={SimpleNext}
-          disableBack={disableBack}
-          handlePrev={handlePrev}
-          nextStep={nextStep}
-          FieldProvider={FieldProvider}
-          handleNext={handleNext}
-          buttonsClassName={buttonsClassName}
-          buttonLabels={{ cancel, submit, back, next }}
-          renderNextButton={(args) =>
-            renderNextButton({
-              ...formOptions,
-              handleNext,
-              nextStep,
-              nextLabel: next,
-              submitLabel: submit,
-              ...args
-            })
-          }
-          selectNext={selectNext}
-        />
-      ) : (
-        <React.Fragment>
-          {renderNextButton({
+  buttonLabels: { cancel, submit, back, next },
+  formOptions
+}) => (
+  <footer className={`pf-c-wizard__footer ${buttonsClassName ? buttonsClassName : ''}`}>
+    {Buttons ? (
+      <Buttons
+        ConditionalNext={SimpleNext}
+        SubmitButton={SubmitButton}
+        SimpleNext={SimpleNext}
+        disableBack={disableBack}
+        handlePrev={handlePrev}
+        nextStep={nextStep}
+        FieldProvider={FieldProvider}
+        handleNext={handleNext}
+        buttonsClassName={buttonsClassName}
+        buttonLabels={{ cancel, submit, back, next }}
+        renderNextButton={(args) =>
+          renderNextButton({
             ...formOptions,
             handleNext,
             nextStep,
             nextLabel: next,
-            submitLabel: submit
-          })}
-          <Button type="button" variant="secondary" isDisabled={disableBack} onClick={handlePrev}>
-            {back}
-          </Button>
-          <Button type="button" variant="link" onClick={() => formOptions.onCancel(formOptions.getState().values)}>
-            {cancel}
-          </Button>
-        </React.Fragment>
-      )}
-    </footer>
-  );
-};
+            submitLabel: submit,
+            ...args
+          })
+        }
+        selectNext={selectNext}
+      />
+    ) : (
+      <React.Fragment>
+        {renderNextButton({
+          ...formOptions,
+          handleNext,
+          nextStep,
+          nextLabel: next,
+          submitLabel: submit
+        })}
+        <Button type="button" variant="secondary" isDisabled={disableBack} onClick={handlePrev}>
+          {back}
+        </Button>
+        <Button type="button" variant="link" onClick={() => formOptions.onCancel(formOptions.getState().values)}>
+          {cancel}
+        </Button>
+      </React.Fragment>
+    )}
+  </footer>
+);
 
 WizardStepButtons.propTypes = {
   disableBack: PropTypes.bool,
@@ -108,7 +104,11 @@ WizardStepButtons.propTypes = {
     next: PropTypes.string.isRequired
   }).isRequired,
   buttonsClassName: PropTypes.string,
-  buttons: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+  buttons: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  formOptions: PropTypes.shape({
+    getState: PropTypes.func.isRequired,
+    onCancel: PropTypes.func.isRequired,
+  })
 };
 
 export default WizardStepButtons;

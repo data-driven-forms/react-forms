@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 import Subform from '../components/sub-form';
+import RenderWithProvider from '../../../../__mocks__/with-provider';
 
 describe('subform', () => {
   const props = {
@@ -18,17 +19,24 @@ describe('subform', () => {
         name: 'cosiName2',
         fields: []
       }
-    ],
-    formOptions: {
-      renderForm: jest.fn().mockImplementation(() => <h1>Content</h1>)
-    }
+    ]
   };
 
   const TITLE = 'TIIIITLE';
   const DESCRIPTION = 'THIS IS DESCRIPTION';
 
   it('should render correctly', () => {
-    const wrapper = mount(<Subform {...props} />);
+    const wrapper = mount(
+      <RenderWithProvider
+        value={{
+          formOptions: {
+            renderForm: jest.fn().mockImplementation(() => <h1>Content</h1>)
+          }
+        }}
+      >
+        <Subform {...props} />
+      </RenderWithProvider>
+    );
 
     expect(wrapper.find(Grid)).toHaveLength(2);
     expect(wrapper.find(Typography)).toHaveLength(0);
@@ -36,7 +44,17 @@ describe('subform', () => {
   });
 
   it('should render correctly with title', () => {
-    const wrapper = mount(<Subform {...props} title={TITLE} />);
+    const wrapper = mount(
+      <RenderWithProvider
+        value={{
+          formOptions: {
+            renderForm: jest.fn().mockImplementation(() => <h1>Content</h1>)
+          }
+        }}
+      >
+        <Subform {...props} title={TITLE} />
+      </RenderWithProvider>
+    );
 
     expect(wrapper.find(Grid)).toHaveLength(3);
     expect(wrapper.find(Typography)).toHaveLength(1);
@@ -50,7 +68,17 @@ describe('subform', () => {
   });
 
   it('should render correctly with description', () => {
-    const wrapper = mount(<Subform {...props} description={DESCRIPTION} />);
+    const wrapper = mount(
+      <RenderWithProvider
+        value={{
+          formOptions: {
+            renderForm: jest.fn().mockImplementation(() => <h1>Content</h1>)
+          }
+        }}
+      >
+        <Subform {...props} description={DESCRIPTION} />
+      </RenderWithProvider>
+    );
 
     expect(wrapper.find(Grid)).toHaveLength(3);
     expect(wrapper.find(Typography)).toHaveLength(1);
@@ -64,7 +92,17 @@ describe('subform', () => {
   });
 
   it('should render correctly with title and description', () => {
-    const wrapper = mount(<Subform {...props} title={TITLE} description={DESCRIPTION} />);
+    const wrapper = mount(
+      <RenderWithProvider
+        value={{
+          formOptions: {
+            renderForm: jest.fn().mockImplementation(() => <h1>Content</h1>)
+          }
+        }}
+      >
+        <Subform {...props} title={TITLE} description={DESCRIPTION} />
+      </RenderWithProvider>
+    );
 
     expect(wrapper.find(Grid)).toHaveLength(4);
     expect(wrapper.find(Typography)).toHaveLength(2);

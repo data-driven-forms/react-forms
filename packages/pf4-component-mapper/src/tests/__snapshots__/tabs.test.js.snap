@@ -1,35 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Tabs component should render tabs correctly 1`] = `
-<Component
-  activeKey={0}
-  onSelect={[Function]}
->
-  <Tab
-    eventKey={0}
-    key="cosiName"
-    title="cosiTitle"
-  >
-    <div
-      className="pf-c-form"
-    >
-      <div>
-        Here would be form
-      </div>
-    </div>
-  </Tab>
-  <Tab
-    eventKey={1}
-    key="cosiName2"
-    title="cosiTitle2"
-  >
-    <div
-      className="pf-c-form"
-    >
-      <div>
-        Here would be form
-      </div>
-    </div>
-  </Tab>
-</Component>
+<FormTabs
+  fields={
+    Array [
+      Object {
+        "fields": Array [],
+        "name": "cosiName",
+        "title": "cosiTitle",
+      },
+      Object {
+        "fields": Array [],
+        "name": "cosiName2",
+        "title": "cosiTitle2",
+      },
+    ]
+  }
+/>
 `;
