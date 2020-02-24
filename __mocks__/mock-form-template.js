@@ -1,20 +1,21 @@
 import React from 'react';
-import { useFormApi } from '@data-driven-forms/react-form-renderer';
-import { useFormApi as useFormApiInternal } from '../packages/react-form-renderer/src';
+import { useFormApi, FormSpy } from '@data-driven-forms/react-form-renderer';
+import { useFormApi as useFormApiInternal, FormSpy as FormSpyInternal } from '../packages/react-form-renderer/src';
 const path = require('path')
 
-const FormTemplate = ({ schema: { title, label, description }, formFields, FormSpy }) => {
+const FormTemplate = ({ schema: { title, label, description }, formFields }) => {
   // When testing inside the renderer package, it cannot import things from itself!
   const isInternal = path.dirname(module.parent.filename).includes('/react-form-renderer/');
 
   const formOptions = isInternal ? useFormApiInternal() : useFormApi();
+  const FormSpyFinal = isInternal ? FormSpyInternal : FormSpy;
 
   return (
     <form onSubmit={ formOptions.handleSubmit }>
       { title || label && <h1>{ title || label }</h1> }
       { description && <h2>{ description }</h2> }
       { formFields }
-      <FormSpy>
+      <FormSpyFinal>
         { ({ submitting, pristine, validating, form: { reset }, values }) => (
           <React.Fragment>
             <button
@@ -41,7 +42,7 @@ const FormTemplate = ({ schema: { title, label, description }, formFields, FormS
             Cancel
             </button>
           </React.Fragment>) }
-      </FormSpy>
+      </FormSpyFinal>
     </form>
   );
 };

@@ -67,7 +67,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
     }
   >
     <FormTemplate
-      FormSpy={[Function]}
       formFields={
         Array [
           <React.Fragment>
@@ -826,7 +825,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
     }
   >
     <FormTemplate
-      FormSpy={[Function]}
       formFields={
         Array [
           <React.Fragment>
@@ -887,7 +885,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
             >
               <Component
                 FieldProvider={[Function]}
-                FormSpyProvider={[Function]}
                 label="Visible"
                 name="visible"
                 validate={[Function]}
@@ -925,7 +922,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
               >
                 <Component
                   FieldProvider={[Function]}
-                  FormSpyProvider={[Function]}
                   label="Hidden"
                   name="hidden"
                   validate={[Function]}

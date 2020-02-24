@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, FormSpy } from 'react-final-form';
+import { Form } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { formTemplate } from '../index';
@@ -21,8 +21,7 @@ describe('FormTemplate PF4 Common', () => {
     );
     initialProps = {
       formFields: <div>Formfields</div>,
-      schema: {},
-      FormSpy
+      schema: {}
     };
   });
 

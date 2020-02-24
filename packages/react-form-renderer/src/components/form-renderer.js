@@ -39,8 +39,7 @@ const FormRenderer = ({
   const FormTemplate = formTemplate
     ? formTemplate
     : () => (
-      <div>{`FormRenderer is missing 'formTemplate' prop:
-  ({formFields, formSpy, schema}) => <FormTemplate {...} />`}</div>
+      <div>{`FormRenderer is missing 'formTemplate' prop: ({formFields, schema}) => <FormTemplate {...} />`}</div>
     );
 
   return (
@@ -76,7 +75,7 @@ const FormRenderer = ({
               formOptions
             }}
           >
-            <FormTemplate formFields={renderForm(schema.fields)} FormSpy={FormSpy} schema={schema} />
+            <FormTemplate formFields={renderForm(schema.fields)} schema={schema} />
             {onStateUpdate && <FormSpy onChange={onStateUpdate} />}
           </RendererContext.Provider>
         );

@@ -449,12 +449,10 @@ exports[`renderForm function should render single field from with custom compone
         >
           <CustomComponent
             FieldProvider={[Function]}
-            FormSpyProvider={[Function]}
             name="foo"
             validate={[Function]}
           >
             <div
-              FormSpyProvider={[Function]}
               name="foo"
               validate={[Function]}
             >

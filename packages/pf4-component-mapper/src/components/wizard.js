@@ -1,7 +1,7 @@
 import React, { cloneElement } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-import { useFormApi } from '@data-driven-forms/react-form-renderer';
+import { useFormApi, FormSpy } from '@data-driven-forms/react-form-renderer';
 
 import { WizardHeader } from '@patternfly/react-core/dist/js/components/Wizard/WizardHeader';
 import { WizardNav } from '@patternfly/react-core/dist/js/components/Wizard/WizardNav';
@@ -235,7 +235,6 @@ class Wizard extends React.Component {
       setFullHeight,
       isCompactNav,
       showTitles,
-      FormSpyProvider,
       crossroads
     } = this.props;
     const { activeStepIndex, navSchema, maxStepIndex, isDynamic } = this.state;
@@ -267,7 +266,7 @@ class Wizard extends React.Component {
           {title && <WizardHeader title={title} description={description} onClose={() => formOptions.onCancel(formOptions.getState().values)} />}
           <div className="pf-c-wizard__outer-wrap">
             <WizardNav>
-              <FormSpyProvider>
+              <FormSpy>
                 {({ values }) => (
                   <WizardNavigation
                     navSchema={navSchema}
@@ -281,7 +280,7 @@ class Wizard extends React.Component {
                     setPrevSteps={this.setPrevSteps}
                   />
                 )}
-              </FormSpyProvider>
+              </FormSpy>
             </WizardNav>
             {cloneElement(currentStep, {
               handleNext: (nextStep) => this.handleNext(nextStep, formOptions.getRegisteredFields),
@@ -306,7 +305,6 @@ Wizard.propTypes = {
   title: PropTypes.any,
   description: PropTypes.any,
   FieldProvider: PropTypes.PropTypes.oneOfType([ PropTypes.object, PropTypes.func ]).isRequired,
-  FormSpyProvider: PropTypes.PropTypes.oneOfType([ PropTypes.object, PropTypes.func ]).isRequired,
   formOptions: PropTypes.shape({
     getState: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,

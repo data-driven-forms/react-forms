@@ -1,9 +1,9 @@
 import React from 'react';
-import { useFormApi } from '@data-driven-forms/react-form-renderer';
+import { useFormApi, FormSpy } from '@data-driven-forms/react-form-renderer';
 
 const isDisabled = (disableStates, getState) => disableStates.map((item) => getState()[item]).find((item) => !!item);
 
-const FormTemplate = ({ schema: { title, description }, formFields, FormSpy }) => {
+const FormTemplate = ({ schema: { title, description }, formFields }) => {
   console.log('render of the form');
 
   const { handleSubmit, getState, onReset, onCancel } = useFormApi();

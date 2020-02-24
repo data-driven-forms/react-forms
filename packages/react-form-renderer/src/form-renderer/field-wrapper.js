@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormSpy } from 'react-final-form';
 
 import { FieldArray } from 'react-final-form-arrays';
 import { shouldWrapInField } from './helpers';
@@ -40,7 +39,7 @@ const FieldWrapper = ({ componentType, validate, component, ...rest }) => {
   const Component = component;
   return shouldWrapInField(componentType)
     ? <FieldProvider { ...componentProps } />
-    : <Component validate={ composeValidators(validate) } { ...rest } FieldProvider={ FieldProvider } FormSpyProvider={ FormSpy } />;
+    : <Component validate={ composeValidators(validate) } { ...rest } FieldProvider={ FieldProvider } />;
 };
 
 FieldWrapper.propTypes = {

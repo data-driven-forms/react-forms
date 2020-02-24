@@ -93,7 +93,6 @@ exports[`FieldArray should render array field correctly 1`] = `
       }
     >
       <Component
-        FormSpy={[Function]}
         formFields={
           Array [
             <React.Fragment>
