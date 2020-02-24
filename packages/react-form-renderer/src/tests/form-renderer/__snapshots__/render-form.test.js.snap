@@ -479,7 +479,6 @@ exports[`renderForm function should render single field from defined componentTy
           }
         >
           <FieldProvider
-            FieldArrayProvider={[Function]}
             FieldProvider={[Function]}
             component={[Function]}
             formOptions={Object {}}
@@ -487,7 +486,6 @@ exports[`renderForm function should render single field from defined componentTy
             validate={[Function]}
           >
             <Component
-              FieldArrayProvider={[Function]}
               FieldProvider={[Function]}
               formOptions={
                 Object {
@@ -529,7 +527,6 @@ exports[`renderForm function should render single field from defined componentTy
               validate={[Function]}
             >
               <div
-                FieldArrayProvider={[Function]}
                 formOptions={
                   Object {
                     "renderForm": [Function],
