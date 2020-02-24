@@ -4,6 +4,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
+import FormRenderer, { validatorTypes } from '@data-driven-forms/react-form-renderer';
+import { formFieldsMapper, layoutMapper } from '../index';
 import FormTabs from '../form-fields/tabs';
 
 describe('tabs', () => {
@@ -31,7 +33,7 @@ describe('tabs', () => {
     expect(wrapper.find(AppBar)).toHaveLength(1);
     expect(wrapper.find(Tabs)).toHaveLength(1);
     expect(wrapper.find(Tab)).toHaveLength(2);
-    expect(wrapper.find('h1')).toHaveLength(1);
+    expect(wrapper.find('h1')).toHaveLength(2);
   });
 
   it('should switch tabs correctly', () => {
@@ -42,5 +44,51 @@ describe('tabs', () => {
     secondTabButton.simulate('click');
 
     expect(wrapper.instance().state.activeTab).toEqual(1);
+  });
+
+  it('validate all tabs', () => {
+    const onSubmit = jest.fn();
+    const wrapper = mount(<FormRenderer
+      formFieldsMapper={ formFieldsMapper }
+      layoutMapper={ layoutMapper }
+      onSubmit={ (values) => onSubmit(values) }
+      schema={{ fields: [{
+        component: 'tabs',
+        name: 'tabs1',
+        title: 'tabs1',
+        fields: [{
+          name: 'tabitem1',
+          component: 'tab-item',
+          fields: [{
+            component: 'text-field',
+            name: 'name',
+            validate: [{ type: validatorTypes.REQUIRED }],
+          }],
+        }, {
+          name: 'tabitem2',
+          component: 'tab-item',
+          fields: [{
+            component: 'text-field',
+            name: 'password',
+            validate: [{ type: validatorTypes.REQUIRED }],
+          }],
+        }],
+      }]}}
+    />);
+
+    wrapper.find('input').first().simulate('change', { target: { value: 'NAME' }});
+    wrapper.update();
+
+    wrapper.find('form').simulate('submit');
+    wrapper.update();
+
+    expect(onSubmit).not.toHaveBeenCalled();
+
+    wrapper.find('input').last().simulate('change', { target: { value: 'PASSWORD' }});
+    wrapper.update();
+
+    wrapper.find('form').simulate('submit');
+
+    expect(onSubmit).toHaveBeenCalledWith({ name: 'NAME', password: 'PASSWORD' });
   });
 });
