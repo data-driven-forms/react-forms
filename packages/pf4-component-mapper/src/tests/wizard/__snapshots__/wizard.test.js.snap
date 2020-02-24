@@ -257,48 +257,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                         },
                       ]
                     }
-                    formOptions={
-                      Object {
-                        "batch": [Function],
-                        "blur": [Function],
-                        "change": [Function],
-                        "clearOnUnmount": false,
-                        "clearedValue": undefined,
-                        "concat": [Function],
-                        "destroyOnUnregister": false,
-                        "focus": [Function],
-                        "getFieldState": [Function],
-                        "getRegisteredFields": [Function],
-                        "getState": [Function],
-                        "handleSubmit": [Function],
-                        "initialize": [Function],
-                        "insert": [Function],
-                        "isValidationPaused": [Function],
-                        "move": [Function],
-                        "onCancel": [MockFunction],
-                        "onReset": undefined,
-                        "onSubmit": [MockFunction],
-                        "pauseValidation": [Function],
-                        "pop": [Function],
-                        "pristine": true,
-                        "push": [Function],
-                        "registerField": [Function],
-                        "remove": [Function],
-                        "removeBatch": [Function],
-                        "renderForm": [Function],
-                        "reset": [Function],
-                        "resetFieldState": [Function],
-                        "resumeValidation": [Function],
-                        "setConfig": [Function],
-                        "shift": [Function],
-                        "submit": [Function],
-                        "subscribe": [Function],
-                        "swap": [Function],
-                        "unshift": [Function],
-                        "update": [Function],
-                        "valid": true,
-                      }
-                    }
                     name="wizard"
                     validate={[Function]}
                   >
@@ -1411,48 +1369,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                           "title": "bar-step",
                         },
                       ]
-                    }
-                    formOptions={
-                      Object {
-                        "batch": [Function],
-                        "blur": [Function],
-                        "change": [Function],
-                        "clearOnUnmount": false,
-                        "clearedValue": undefined,
-                        "concat": [Function],
-                        "destroyOnUnregister": false,
-                        "focus": [Function],
-                        "getFieldState": [Function],
-                        "getRegisteredFields": [Function],
-                        "getState": [Function],
-                        "handleSubmit": [Function],
-                        "initialize": [Function],
-                        "insert": [Function],
-                        "isValidationPaused": [Function],
-                        "move": [Function],
-                        "onCancel": [MockFunction],
-                        "onReset": undefined,
-                        "onSubmit": [MockFunction],
-                        "pauseValidation": [Function],
-                        "pop": [Function],
-                        "pristine": true,
-                        "push": [Function],
-                        "registerField": [Function],
-                        "remove": [Function],
-                        "removeBatch": [Function],
-                        "renderForm": [Function],
-                        "reset": [Function],
-                        "resetFieldState": [Function],
-                        "resumeValidation": [Function],
-                        "setConfig": [Function],
-                        "shift": [Function],
-                        "submit": [Function],
-                        "subscribe": [Function],
-                        "swap": [Function],
-                        "unshift": [Function],
-                        "update": [Function],
-                        "valid": true,
-                      }
                     }
                     inModal={true}
                     name="wizard"
