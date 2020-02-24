@@ -4,11 +4,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-import './tabs.scss';
-
 const renderTabHeader = items => items.map(({ title, key, name }) => <Tab key={ name } label={ title } />);
 const renderTabContet = (tabs, formOptions, activeTab) => tabs.map(({ fields, name }, idx) => (
-  <div key={ name } className={ idx !== activeTab ? 'mui-ddform-hidden-tabs' : '' }>{ formOptions.renderForm(fields, formOptions) }</div>
+  <div key={ name } hidden={ idx !== activeTab }>{ formOptions.renderForm(fields, formOptions) }</div>
 ));
 
 class FormTabs extends Component {
