@@ -56,6 +56,7 @@ const selectComponent = ({
       required={ isRequired }
       inputProps={{
         readOnly: isReadOnly,
+        required: false,
       }}
       { ...rest }
     />
@@ -73,6 +74,7 @@ const selectComponent = ({
       multiline
       inputProps={{
         readOnly: isReadOnly,
+        required: false,
       }}
       { ...rest }
     />
