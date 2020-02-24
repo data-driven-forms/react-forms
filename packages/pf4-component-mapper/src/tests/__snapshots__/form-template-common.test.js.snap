@@ -19,7 +19,6 @@ exports[`FormTemplate PF4 Common should add missing buttons if not defined in bu
       onSubmit={[MockFunction]}
     >
       <Component
-        FormSpy={[Function]}
         buttonOrder={Array []}
         canReset={true}
         canSubmit={true}
@@ -282,7 +281,6 @@ exports[`FormTemplate PF4 Common should render all controls and with default lab
       onSubmit={[MockFunction]}
     >
       <Component
-        FormSpy={[Function]}
         formFields={
           <div>
             Formfields
@@ -542,7 +540,6 @@ exports[`FormTemplate PF4 Common should render buttons in correct order 1`] = `
       onSubmit={[MockFunction]}
     >
       <Component
-        FormSpy={[Function]}
         buttonOrder={
           Array [
             "cancel",
@@ -811,7 +808,6 @@ exports[`FormTemplate PF4 Common should render only submit button 1`] = `
       onSubmit={[MockFunction]}
     >
       <Component
-        FormSpy={[Function]}
         canReset={false}
         formFields={
           <div>

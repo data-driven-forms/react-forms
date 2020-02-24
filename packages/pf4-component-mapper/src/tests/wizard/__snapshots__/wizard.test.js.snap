@@ -93,7 +93,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
     }
   >
     <Component
-      FormSpy={[Function]}
       formFields={
         Array [
           <React.Fragment>
@@ -190,7 +189,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
               >
                 <WizardFunction
                   FieldProvider={[Function]}
-                  FormSpyProvider={[Function]}
                   buttonLabels={Object {}}
                   fields={
                     Array [
@@ -224,7 +222,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                 >
                   <Wizard
                     FieldProvider={[Function]}
-                    FormSpyProvider={[Function]}
                     buttonLabels={
                       Object {
                         "back": "Back",
@@ -1468,7 +1465,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
     }
   >
     <Component
-      FormSpy={[Function]}
       formFields={
         Array [
           <React.Fragment>
@@ -1567,7 +1563,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
               >
                 <WizardFunction
                   FieldProvider={[Function]}
-                  FormSpyProvider={[Function]}
                   buttonLabels={Object {}}
                   fields={
                     Array [
@@ -1602,7 +1597,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                 >
                   <Wizard
                     FieldProvider={[Function]}
-                    FormSpyProvider={[Function]}
                     buttonLabels={
                       Object {
                         "back": "Back",
