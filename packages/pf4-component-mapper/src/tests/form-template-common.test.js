@@ -160,17 +160,8 @@ describe('FormTemplate PF4 Common', () => {
     expect(wrapper.find(Button)).toHaveLength(3);
 
     const CANCEL_INDEX = 2;
-    const FIELD_NAME = 'xxx';
-    const FIELD_VALUE = 'yyy';
 
-    const expectedValues = {
-      [FIELD_NAME]: FIELD_VALUE
-    };
-
-    wrapper
-    .find(Form)
-    .instance()
-    .form.change(FIELD_NAME, FIELD_VALUE);
+    const expectedValues = {};
     wrapper.update();
 
     wrapper

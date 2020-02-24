@@ -122,7 +122,7 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
     ]
   }
 >
-  <MultipleChoiceList
+  <SingleCheckbox
     FieldProvider={[Function]}
     dataType="someDataType"
     id="someIdKey"
@@ -138,416 +138,61 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
         "touched": false,
       }
     }
-    options={
-      Array [
-        Object {
-          "label": "One",
-          "value": "1",
-        },
-        Object {
-          "label": "Two",
-          "value": "2",
-        },
-        Object {
-          "label": "Three",
-          "value": "3",
-        },
-      ]
-    }
   >
-    <MultipleChoiceList
-      Checkbox={[Function]}
-      FieldProvider={[Function]}
-      Wrapper={[Function]}
-      dataType="someDataType"
+    <FormGroup
+      hideLabel={true}
       id="someIdKey"
-      input={
-        Object {
-          "name": "Name of the field",
-          "value": "",
-        }
-      }
+      isRequired={false}
       meta={
         Object {
           "error": false,
           "touched": false,
         }
       }
-      name="Name of the field"
-      options={
-        Array [
-          Object {
-            "label": "One",
-            "value": "1",
-          },
-          Object {
-            "label": "Two",
-            "value": "2",
-          },
-          Object {
-            "label": "Three",
-            "value": "3",
-          },
-        ]
-      }
     >
-      <FieldProvider
-        dataType="someDataType"
-        id="someIdKey"
-        input={
-          Object {
-            "name": "Name of the field",
-            "value": "",
-          }
-        }
-        meta={
-          Object {
-            "error": false,
-            "touched": false,
-          }
-        }
-        name="Name of the field"
-        options={
-          Array [
-            Object {
-              "label": "One",
-              "value": "1",
-            },
-            Object {
-              "label": "Two",
-              "value": "2",
-            },
-            Object {
-              "label": "Three",
-              "value": "3",
-            },
-          ]
-        }
-        render={[Function]}
-        validate={[Function]}
+      <FormGroup
+        fieldId="someIdKey"
+        helperTextInvalid={false}
+        isRequired={false}
+        isValid={true}
+        label={false}
       >
-        <div>
-          <MockFieldProvider
+        <div
+          className="pf-c-form__group"
+        >
+          <Checkbox
+            FieldProvider={[Function]}
+            className=""
             dataType="someDataType"
             id="someIdKey"
-            input={
-              Object {
-                "name": "Foo",
-                "onChange": [MockFunction],
-              }
-            }
-            meta={
-              Object {
-                "error": false,
-                "touched": false,
-              }
-            }
+            isChecked={false}
+            isDisabled={false}
+            isValid={true}
             name="Name of the field"
-            options={
-              Array [
-                Object {
-                  "label": "One",
-                  "value": "1",
-                },
-                Object {
-                  "label": "Two",
-                  "value": "2",
-                },
-                Object {
-                  "label": "Three",
-                  "value": "3",
-                },
-              ]
-            }
-            render={[Function]}
-            validate={[Function]}
+            onChange={[Function]}
+            value=""
           >
-            <Wrapper
-              error={false}
-              meta={
-                Object {
-                  "error": false,
-                  "touched": false,
-                }
-              }
-              rest={
-                Object {
-                  "children": undefined,
-                  "dataType": "someDataType",
-                  "id": "someIdKey",
-                  "input": Object {
-                    "name": "Foo",
-                    "onChange": [MockFunction],
-                  },
-                  "name": "Name of the field",
-                  "validate": [Function],
-                }
-              }
-              showError={false}
+            <div
+              className="pf-c-check"
             >
-              <FormGroup
-                isRequired={false}
-                meta={
-                  Object {
-                    "error": false,
-                    "touched": false,
-                  }
-                }
-              >
-                <FormGroup
-                  helperTextInvalid={false}
-                  isRequired={false}
-                  isValid={true}
-                >
-                  <div
-                    className="pf-c-form__group"
-                  >
-                    <FieldProvider
-                      id="someIdKey-1"
-                      key="1"
-                      label="One"
-                      name="Name of the field"
-                      render={[Function]}
-                      type="checkbox"
-                      value="1"
-                    >
-                      <div>
-                        <MockFieldProvider
-                          id="someIdKey-1"
-                          input={
-                            Object {
-                              "name": "Foo",
-                              "onChange": [MockFunction],
-                            }
-                          }
-                          label="One"
-                          meta={
-                            Object {
-                              "error": false,
-                              "touched": false,
-                            }
-                          }
-                          name="Name of the field"
-                          render={[Function]}
-                          type="checkbox"
-                          value="1"
-                        >
-                          <FinalCheckbox
-                            aria-label="One"
-                            id="someIdKey-1"
-                            label="One"
-                            name="Name of the field"
-                            onChange={[Function]}
-                            type="checkbox"
-                            value="1"
-                          >
-                            <Checkbox
-                              aria-label="One"
-                              className=""
-                              id="someIdKey-1"
-                              isChecked={false}
-                              isDisabled={false}
-                              isValid={true}
-                              label="One"
-                              name="Name of the field"
-                              onChange={[Function]}
-                              type="checkbox"
-                              value="1"
-                            >
-                              <div
-                                className="pf-c-check"
-                              >
-                                <input
-                                  aria-invalid={false}
-                                  aria-label="One"
-                                  checked={false}
-                                  className="pf-c-check__input"
-                                  disabled={false}
-                                  id="someIdKey-1"
-                                  name="Name of the field"
-                                  onChange={[Function]}
-                                  type="checkbox"
-                                  value="1"
-                                />
-                                <label
-                                  className="pf-c-check__label"
-                                  htmlFor="someIdKey-1"
-                                >
-                                  One
-                                </label>
-                              </div>
-                            </Checkbox>
-                          </FinalCheckbox>
-                        </MockFieldProvider>
-                      </div>
-                    </FieldProvider>
-                    <FieldProvider
-                      id="someIdKey-2"
-                      key="2"
-                      label="Two"
-                      name="Name of the field"
-                      render={[Function]}
-                      type="checkbox"
-                      value="2"
-                    >
-                      <div>
-                        <MockFieldProvider
-                          id="someIdKey-2"
-                          input={
-                            Object {
-                              "name": "Foo",
-                              "onChange": [MockFunction],
-                            }
-                          }
-                          label="Two"
-                          meta={
-                            Object {
-                              "error": false,
-                              "touched": false,
-                            }
-                          }
-                          name="Name of the field"
-                          render={[Function]}
-                          type="checkbox"
-                          value="2"
-                        >
-                          <FinalCheckbox
-                            aria-label="Two"
-                            id="someIdKey-2"
-                            label="Two"
-                            name="Name of the field"
-                            onChange={[Function]}
-                            type="checkbox"
-                            value="2"
-                          >
-                            <Checkbox
-                              aria-label="Two"
-                              className=""
-                              id="someIdKey-2"
-                              isChecked={false}
-                              isDisabled={false}
-                              isValid={true}
-                              label="Two"
-                              name="Name of the field"
-                              onChange={[Function]}
-                              type="checkbox"
-                              value="2"
-                            >
-                              <div
-                                className="pf-c-check"
-                              >
-                                <input
-                                  aria-invalid={false}
-                                  aria-label="Two"
-                                  checked={false}
-                                  className="pf-c-check__input"
-                                  disabled={false}
-                                  id="someIdKey-2"
-                                  name="Name of the field"
-                                  onChange={[Function]}
-                                  type="checkbox"
-                                  value="2"
-                                />
-                                <label
-                                  className="pf-c-check__label"
-                                  htmlFor="someIdKey-2"
-                                >
-                                  Two
-                                </label>
-                              </div>
-                            </Checkbox>
-                          </FinalCheckbox>
-                        </MockFieldProvider>
-                      </div>
-                    </FieldProvider>
-                    <FieldProvider
-                      id="someIdKey-3"
-                      key="3"
-                      label="Three"
-                      name="Name of the field"
-                      render={[Function]}
-                      type="checkbox"
-                      value="3"
-                    >
-                      <div>
-                        <MockFieldProvider
-                          id="someIdKey-3"
-                          input={
-                            Object {
-                              "name": "Foo",
-                              "onChange": [MockFunction],
-                            }
-                          }
-                          label="Three"
-                          meta={
-                            Object {
-                              "error": false,
-                              "touched": false,
-                            }
-                          }
-                          name="Name of the field"
-                          render={[Function]}
-                          type="checkbox"
-                          value="3"
-                        >
-                          <FinalCheckbox
-                            aria-label="Three"
-                            id="someIdKey-3"
-                            label="Three"
-                            name="Name of the field"
-                            onChange={[Function]}
-                            type="checkbox"
-                            value="3"
-                          >
-                            <Checkbox
-                              aria-label="Three"
-                              className=""
-                              id="someIdKey-3"
-                              isChecked={false}
-                              isDisabled={false}
-                              isValid={true}
-                              label="Three"
-                              name="Name of the field"
-                              onChange={[Function]}
-                              type="checkbox"
-                              value="3"
-                            >
-                              <div
-                                className="pf-c-check"
-                              >
-                                <input
-                                  aria-invalid={false}
-                                  aria-label="Three"
-                                  checked={false}
-                                  className="pf-c-check__input"
-                                  disabled={false}
-                                  id="someIdKey-3"
-                                  name="Name of the field"
-                                  onChange={[Function]}
-                                  type="checkbox"
-                                  value="3"
-                                />
-                                <label
-                                  className="pf-c-check__label"
-                                  htmlFor="someIdKey-3"
-                                >
-                                  Three
-                                </label>
-                              </div>
-                            </Checkbox>
-                          </FinalCheckbox>
-                        </MockFieldProvider>
-                      </div>
-                    </FieldProvider>
-                  </div>
-                </FormGroup>
-              </FormGroup>
-            </Wrapper>
-          </MockFieldProvider>
+              <input
+                FieldProvider={[Function]}
+                aria-invalid={false}
+                className="pf-c-check__input"
+                dataType="someDataType"
+                disabled={false}
+                id="someIdKey"
+                name="Name of the field"
+                onChange={[Function]}
+                type="checkbox"
+                value=""
+              />
+            </div>
+          </Checkbox>
         </div>
-      </FieldProvider>
-    </MultipleChoiceList>
-  </MultipleChoiceList>
+      </FormGroup>
+    </FormGroup>
+  </SingleCheckbox>
 </Checkbox>
 `;
 
@@ -1565,7 +1210,7 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
     ]
   }
 >
-  <MultipleChoiceList
+  <SingleCheckbox
     FieldProvider={[Function]}
     dataType="someDataType"
     disabled={true}
@@ -1582,420 +1227,62 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
         "touched": false,
       }
     }
-    options={
-      Array [
-        Object {
-          "label": "One",
-          "value": "1",
-        },
-        Object {
-          "label": "Two",
-          "value": "2",
-        },
-        Object {
-          "label": "Three",
-          "value": "3",
-        },
-      ]
-    }
   >
-    <MultipleChoiceList
-      Checkbox={[Function]}
-      FieldProvider={[Function]}
-      Wrapper={[Function]}
-      dataType="someDataType"
-      disabled={true}
+    <FormGroup
+      hideLabel={true}
       id="someIdKey"
-      input={
-        Object {
-          "name": "Name of the field",
-          "value": "",
-        }
-      }
+      isRequired={false}
       meta={
         Object {
           "error": false,
           "touched": false,
         }
       }
-      name="Name of the field"
-      options={
-        Array [
-          Object {
-            "label": "One",
-            "value": "1",
-          },
-          Object {
-            "label": "Two",
-            "value": "2",
-          },
-          Object {
-            "label": "Three",
-            "value": "3",
-          },
-        ]
-      }
     >
-      <FieldProvider
-        dataType="someDataType"
-        disabled={true}
-        id="someIdKey"
-        input={
-          Object {
-            "name": "Name of the field",
-            "value": "",
-          }
-        }
-        meta={
-          Object {
-            "error": false,
-            "touched": false,
-          }
-        }
-        name="Name of the field"
-        options={
-          Array [
-            Object {
-              "label": "One",
-              "value": "1",
-            },
-            Object {
-              "label": "Two",
-              "value": "2",
-            },
-            Object {
-              "label": "Three",
-              "value": "3",
-            },
-          ]
-        }
-        render={[Function]}
-        validate={[Function]}
+      <FormGroup
+        fieldId="someIdKey"
+        helperTextInvalid={false}
+        isRequired={false}
+        isValid={true}
+        label={false}
       >
-        <div>
-          <MockFieldProvider
+        <div
+          className="pf-c-form__group"
+        >
+          <Checkbox
+            FieldProvider={[Function]}
+            className=""
             dataType="someDataType"
             disabled={true}
             id="someIdKey"
-            input={
-              Object {
-                "name": "Foo",
-                "onChange": [MockFunction],
-              }
-            }
-            meta={
-              Object {
-                "error": false,
-                "touched": false,
-              }
-            }
+            isChecked={false}
+            isDisabled={false}
+            isValid={true}
             name="Name of the field"
-            options={
-              Array [
-                Object {
-                  "label": "One",
-                  "value": "1",
-                },
-                Object {
-                  "label": "Two",
-                  "value": "2",
-                },
-                Object {
-                  "label": "Three",
-                  "value": "3",
-                },
-              ]
-            }
-            render={[Function]}
-            validate={[Function]}
+            onChange={[Function]}
+            value=""
           >
-            <Wrapper
-              error={false}
-              meta={
-                Object {
-                  "error": false,
-                  "touched": false,
-                }
-              }
-              rest={
-                Object {
-                  "children": undefined,
-                  "dataType": "someDataType",
-                  "disabled": true,
-                  "id": "someIdKey",
-                  "input": Object {
-                    "name": "Foo",
-                    "onChange": [MockFunction],
-                  },
-                  "name": "Name of the field",
-                  "validate": [Function],
-                }
-              }
-              showError={false}
+            <div
+              className="pf-c-check"
             >
-              <FormGroup
-                isRequired={false}
-                meta={
-                  Object {
-                    "error": false,
-                    "touched": false,
-                  }
-                }
-              >
-                <FormGroup
-                  helperTextInvalid={false}
-                  isRequired={false}
-                  isValid={true}
-                >
-                  <div
-                    className="pf-c-form__group"
-                  >
-                    <FieldProvider
-                      id="someIdKey-1"
-                      key="1"
-                      label="One"
-                      name="Name of the field"
-                      render={[Function]}
-                      type="checkbox"
-                      value="1"
-                    >
-                      <div>
-                        <MockFieldProvider
-                          id="someIdKey-1"
-                          input={
-                            Object {
-                              "name": "Foo",
-                              "onChange": [MockFunction],
-                            }
-                          }
-                          label="One"
-                          meta={
-                            Object {
-                              "error": false,
-                              "touched": false,
-                            }
-                          }
-                          name="Name of the field"
-                          render={[Function]}
-                          type="checkbox"
-                          value="1"
-                        >
-                          <FinalCheckbox
-                            aria-label="One"
-                            id="someIdKey-1"
-                            label="One"
-                            name="Name of the field"
-                            onChange={[Function]}
-                            type="checkbox"
-                            value="1"
-                          >
-                            <Checkbox
-                              aria-label="One"
-                              className=""
-                              id="someIdKey-1"
-                              isChecked={false}
-                              isDisabled={false}
-                              isValid={true}
-                              label="One"
-                              name="Name of the field"
-                              onChange={[Function]}
-                              type="checkbox"
-                              value="1"
-                            >
-                              <div
-                                className="pf-c-check"
-                              >
-                                <input
-                                  aria-invalid={false}
-                                  aria-label="One"
-                                  checked={false}
-                                  className="pf-c-check__input"
-                                  disabled={false}
-                                  id="someIdKey-1"
-                                  name="Name of the field"
-                                  onChange={[Function]}
-                                  type="checkbox"
-                                  value="1"
-                                />
-                                <label
-                                  className="pf-c-check__label"
-                                  htmlFor="someIdKey-1"
-                                >
-                                  One
-                                </label>
-                              </div>
-                            </Checkbox>
-                          </FinalCheckbox>
-                        </MockFieldProvider>
-                      </div>
-                    </FieldProvider>
-                    <FieldProvider
-                      id="someIdKey-2"
-                      key="2"
-                      label="Two"
-                      name="Name of the field"
-                      render={[Function]}
-                      type="checkbox"
-                      value="2"
-                    >
-                      <div>
-                        <MockFieldProvider
-                          id="someIdKey-2"
-                          input={
-                            Object {
-                              "name": "Foo",
-                              "onChange": [MockFunction],
-                            }
-                          }
-                          label="Two"
-                          meta={
-                            Object {
-                              "error": false,
-                              "touched": false,
-                            }
-                          }
-                          name="Name of the field"
-                          render={[Function]}
-                          type="checkbox"
-                          value="2"
-                        >
-                          <FinalCheckbox
-                            aria-label="Two"
-                            id="someIdKey-2"
-                            label="Two"
-                            name="Name of the field"
-                            onChange={[Function]}
-                            type="checkbox"
-                            value="2"
-                          >
-                            <Checkbox
-                              aria-label="Two"
-                              className=""
-                              id="someIdKey-2"
-                              isChecked={false}
-                              isDisabled={false}
-                              isValid={true}
-                              label="Two"
-                              name="Name of the field"
-                              onChange={[Function]}
-                              type="checkbox"
-                              value="2"
-                            >
-                              <div
-                                className="pf-c-check"
-                              >
-                                <input
-                                  aria-invalid={false}
-                                  aria-label="Two"
-                                  checked={false}
-                                  className="pf-c-check__input"
-                                  disabled={false}
-                                  id="someIdKey-2"
-                                  name="Name of the field"
-                                  onChange={[Function]}
-                                  type="checkbox"
-                                  value="2"
-                                />
-                                <label
-                                  className="pf-c-check__label"
-                                  htmlFor="someIdKey-2"
-                                >
-                                  Two
-                                </label>
-                              </div>
-                            </Checkbox>
-                          </FinalCheckbox>
-                        </MockFieldProvider>
-                      </div>
-                    </FieldProvider>
-                    <FieldProvider
-                      id="someIdKey-3"
-                      key="3"
-                      label="Three"
-                      name="Name of the field"
-                      render={[Function]}
-                      type="checkbox"
-                      value="3"
-                    >
-                      <div>
-                        <MockFieldProvider
-                          id="someIdKey-3"
-                          input={
-                            Object {
-                              "name": "Foo",
-                              "onChange": [MockFunction],
-                            }
-                          }
-                          label="Three"
-                          meta={
-                            Object {
-                              "error": false,
-                              "touched": false,
-                            }
-                          }
-                          name="Name of the field"
-                          render={[Function]}
-                          type="checkbox"
-                          value="3"
-                        >
-                          <FinalCheckbox
-                            aria-label="Three"
-                            id="someIdKey-3"
-                            label="Three"
-                            name="Name of the field"
-                            onChange={[Function]}
-                            type="checkbox"
-                            value="3"
-                          >
-                            <Checkbox
-                              aria-label="Three"
-                              className=""
-                              id="someIdKey-3"
-                              isChecked={false}
-                              isDisabled={false}
-                              isValid={true}
-                              label="Three"
-                              name="Name of the field"
-                              onChange={[Function]}
-                              type="checkbox"
-                              value="3"
-                            >
-                              <div
-                                className="pf-c-check"
-                              >
-                                <input
-                                  aria-invalid={false}
-                                  aria-label="Three"
-                                  checked={false}
-                                  className="pf-c-check__input"
-                                  disabled={false}
-                                  id="someIdKey-3"
-                                  name="Name of the field"
-                                  onChange={[Function]}
-                                  type="checkbox"
-                                  value="3"
-                                />
-                                <label
-                                  className="pf-c-check__label"
-                                  htmlFor="someIdKey-3"
-                                >
-                                  Three
-                                </label>
-                              </div>
-                            </Checkbox>
-                          </FinalCheckbox>
-                        </MockFieldProvider>
-                      </div>
-                    </FieldProvider>
-                  </div>
-                </FormGroup>
-              </FormGroup>
-            </Wrapper>
-          </MockFieldProvider>
+              <input
+                FieldProvider={[Function]}
+                aria-invalid={false}
+                className="pf-c-check__input"
+                dataType="someDataType"
+                disabled={false}
+                id="someIdKey"
+                name="Name of the field"
+                onChange={[Function]}
+                type="checkbox"
+                value=""
+              />
+            </div>
+          </Checkbox>
         </div>
-      </FieldProvider>
-    </MultipleChoiceList>
-  </MultipleChoiceList>
+      </FormGroup>
+    </FormGroup>
+  </SingleCheckbox>
 </Checkbox>
 `;
 

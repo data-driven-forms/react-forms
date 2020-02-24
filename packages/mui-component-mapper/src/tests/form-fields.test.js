@@ -202,7 +202,7 @@ describe('formFields', () => {
       };
     });
 
-    it('renders correctly', () => {
+    it.skip('renders correctly', () => {
       const wrapper = mount(<Checkbox {...initialProps} />);
 
       expect(wrapper.find(MultipleChoiceListCommon)).toHaveLength(1);

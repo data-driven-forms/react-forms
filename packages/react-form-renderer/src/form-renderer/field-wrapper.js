@@ -23,19 +23,19 @@ const FieldWrapper = ({ componentType, validate, component, ...rest }) => {
       if (!Array.isArray(value)) {
         return;
       }
-
+      
       const arrayValidator = composeValidators(validate);
       let result = arrayValidator(value && value.length > 0 ? value : undefined);
       if (typeof result === 'function') {
         result = result(value);
       }
-
+      
       return result;
     };
   } else {
     componentProps.validate = composeValidators(validate);
   }
-
+  
   const Component = component;
   return shouldWrapInField(componentType)
     ? <FieldProvider { ...componentProps } />

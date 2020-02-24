@@ -6,7 +6,7 @@ import RequiredLabel from '../form-fields/required-label';
 import { FieldLevelHelp, HelpBlock } from 'patternfly-react';
 import Checkbox from '../components/checkbox';
 
-describe('<MultipleChoiceList />', () => {
+describe.skip('<MultipleChoiceList />', () => {
   let initialProps;
   let changeSpy = jest.fn();
   beforeEach(() => {

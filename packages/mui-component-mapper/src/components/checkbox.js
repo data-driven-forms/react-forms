@@ -53,8 +53,13 @@ SingleCheckbox.propTypes = {
   validateOnMount: PropTypes.bool
 };
 
-const Checkbox = ({ options, ...rest }) =>
-  options ? <MultipleChoiceList {...rest} options={options}></MultipleChoiceList> : <SingleCheckbox {...rest} />;
+const Checkbox = ({ options, ...rest }) => {
+  /**
+   * ignore multiple choice list for now
+   * <MultipleChoiceList options={options} {...props} />
+   */
+  return <SingleCheckbox {...rest} />;
+};
 
 Checkbox.propTypes = {
   options: PropTypes.array

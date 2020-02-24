@@ -12,7 +12,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import MultipleChoiceList from '../common/multiple-choice-list';
 import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 
-describe('<MultipleChoiceList />', () => {
+describe.skip('<MultipleChoiceList />', () => {
   let initialProps;
   let changeSpy = jest.fn();
   beforeEach(() => {
