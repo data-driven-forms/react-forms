@@ -1,11 +1,13 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
 const renderTabHeader = items => items.map(({ title, key, name }) => <Tab key={ name } label={ title } />);
-const renderTabContet = ({ name, fields }, formOptions) => <Fragment key={ name }>{ formOptions.renderForm(fields, formOptions) }</Fragment>;
+const renderTabContet = (tabs, formOptions, activeTab) => tabs.map(({ fields, name }, idx) => (
+  <div key={ name } hidden={ idx !== activeTab }>{ formOptions.renderForm(fields, formOptions) }</div>
+));
 
 class FormTabs extends Component {
   state = {
@@ -24,7 +26,7 @@ class FormTabs extends Component {
             { renderTabHeader(fields) }
           </Tabs>
         </AppBar>
-        { renderTabContet(fields[activeTab], formOptions) }
+        { renderTabContet(fields, formOptions, activeTab) }
       </div>
     );
   }
