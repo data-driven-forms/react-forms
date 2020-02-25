@@ -730,46 +730,6 @@ describe('renderForm function', () => {
     });
   });
 
-  describe('#formSpy', () => {
-    const TextField = (props) => {
-      const { input, meta, label, formOptions, helperText, isRequired, dataType, isDisabled, isReadOnly, ...rest } = useFieldProviderApi(props);
-      return (
-        <div>
-          <label>{label}</label>
-          <input {...input} {...rest} />
-          {meta.error && (
-            <div>
-              <span>{meta.error}</span>
-            </div>
-          )}
-        </div>
-      );
-    };
-
-    it('should add formSpy and call update function on each state change', () => {
-      const onStateUpdate = jest.fn();
-      const wrapper = mount(
-        <FormRenderer
-          onStateUpdate={ onStateUpdate }
-          formTemplate={ formTemplate }
-          formFieldsMapper={{
-            [componentTypes.TEXT_FIELD]: TextField,
-          }}
-          schema={{ fields: [{ component: componentTypes.TEXT_FIELD, name: 'foo', label: 'bar' }]}}
-          onSubmit={ jest.fn() }
-          clearOnUnmount
-        />
-      );
-      /**
-       * there is one FormSpy for form controls
-       */
-      expect(wrapper.find(FormSpy)).toHaveLength(2);
-      wrapper.find('input').first().simulate('change', { target: { value: 'bar' }});
-      wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
-      expect(onStateUpdate).toHaveBeenCalledTimes(4);
-    });
-  });
-
   describe('#initializeOnMount', () => {
     const SHOWER_FIELD = 'shower_FIELD';
     const INITIALIZED_FIELD = 'initialized_FIELD';
