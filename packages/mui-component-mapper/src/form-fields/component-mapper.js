@@ -1,4 +1,3 @@
-import React from 'react';
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 import {
   TextField,

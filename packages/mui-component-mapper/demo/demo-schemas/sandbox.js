@@ -56,6 +56,17 @@ const output = {
             ...genereateField(curr, 'multi', { multi: true }),
           ] : []),
           ...(curr === 'checkbox' ? [
+            ...genereateField(
+              curr,
+              'custom control props',
+              {
+                isRequired: true,
+                formLabelProps: { color: 'secondary' },
+                formGroupsProps: { row: true },
+                formControlProps: { variant: 'filled' },
+                formControlLabelProps: { labelPlacement: 'start', className: 'foo-bar' },
+              }
+            ),
             ...genereateField(curr, 'multipleoptions', { options }),
             ...genereateField(curr, 'multipleoptions helper text', { helperText: 'This is helper text', options }),
             ...genereateField(curr, 'multipleoptions placeholder', { placeholder: 'This is placeholder', options }),

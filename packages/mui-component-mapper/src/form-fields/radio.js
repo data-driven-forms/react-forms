@@ -17,10 +17,14 @@ const RadioGroup = ({
   helperText,
   invalid,
   isReadOnly,
+  formControlProps,
+  formLabelProps,
+  formControlLabelProps,
+  formHelperTextProps,
 }) => (
   <div  className="mui-ddform-radio-group">
-    <FormControl required={ isRequired } error={ !!invalid } component="fieldset">
-      <FormLabel component="legend">{ label }</FormLabel>
+    <FormControl required={ isRequired } error={ !!invalid } component="fieldset" { ...formControlProps }>
+      <FormLabel component="legend" { ...formLabelProps }>{ label }</FormLabel>
       { options.map(option => (
         <FieldProvider
           key={ `${input.name}-${option.value}` }
@@ -38,11 +42,12 @@ const RadioGroup = ({
                 }}
               /> }
               label={ option.label }
+              { ...formControlLabelProps }
             />
           ) }
         />
       )) }
-      { (invalid || helperText) && <FormHelperText>{ invalid || helperText }</FormHelperText> }
+      { (invalid || helperText) && <FormHelperText { ...formHelperTextProps }>{ invalid || helperText }</FormHelperText> }
     </FormControl>
   </div>
 );

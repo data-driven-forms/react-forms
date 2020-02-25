@@ -42,6 +42,11 @@ const selectComponent = ({
   offText,
   error,
   locale = 'en',
+  formControlProps,
+  formGroupProps,
+  formLabelProps,
+  formControlLabelProps,
+  formHelperTextProps,
   ...rest
 }) => ({
   [componentTypes.TEXT_FIELD]: () => (
@@ -80,21 +85,21 @@ const selectComponent = ({
     />
   ),
   [componentTypes.CHECKBOX]: () => (
-    <FormControl required={ isRequired } error={ !!invalid } component="fieldset">
-      <FormGroup>
+    <FormControl required={ isRequired } error={ !!invalid } component="fieldset" { ...formControlProps }>
+      <FormGroup { ...formGroupProps }>
         <FormControlLabel
+          { ...input }
           control={ <Checkbox
-            { ...input }
             disabled={ isDisabled || isReadOnly }
-            value={ input.name }
             inputProps={{
               readOnly: isReadOnly,
             }}
           /> }
           disabled={ isDisabled || isReadOnly }
-          label={ <FormLabel>{ label }</FormLabel> }
+          label={ <FormLabel { ...formLabelProps }>{ label }</FormLabel> }
+          { ...formControlLabelProps }
         />
-        { (invalid || helperText) && <FormHelperText>{ invalid || helperText }</FormHelperText> }
+        { (invalid || helperText) && <FormHelperText { ...formHelperTextProps }>{ invalid || helperText }</FormHelperText> }
       </FormGroup>
     </FormControl>
   ),
@@ -109,6 +114,12 @@ const selectComponent = ({
       invalid={ invalid }
       helperText={ helperText }
       isReadOnly={ isReadOnly }
+      formControlProps={ formControlProps }
+      formGroupProps={ formGroupProps }
+      formLabelProps={ formLabelProps }
+      formControlLabelProps={ formControlLabelProps }
+      formHelperTextProps={ formHelperTextProps }
+      { ...rest }
     />
   ),
   [componentTypes.SELECT_COMPONENT]: () => (
@@ -142,20 +153,21 @@ const selectComponent = ({
       { ...rest }
     />),
   [componentTypes.SWITCH]: () => (
-    <FormControl required={ isRequired } error={ !!invalid } component="fieldset">
-      <FormGroup>
+    <FormControl required={ isRequired } error={ !!invalid } component="fieldset" { ...formControlProps }>
+      <FormGroup { ...formGroupProps }>
         <FormControlLabel
           control={ <Switch
-            { ...rest }
             { ...input }
             readOnly={ isReadOnly }
             disabled={ isDisabled || isReadOnly }
             checked={ !!input.value }
             onChange={ ({ target: { checked }}) => input.onChange(checked) }
           /> }
-          label={ <FormLabel>{ input.value ? onText || label : offText || label }</FormLabel> }
+          label={ <FormLabel { ...formLabelProps }>{ input.value ? onText || label : offText || label }</FormLabel> }
+          { ...formControlLabelProps }
+          { ...rest }
         />
-        { (invalid || helperText) && <FormHelperText>{ invalid || helperText }</FormHelperText> }
+        { (invalid || helperText) && <FormHelperText { ...formHelperTextProps }>{ invalid || helperText }</FormHelperText> }
       </FormGroup>
     </FormControl>
   ),
