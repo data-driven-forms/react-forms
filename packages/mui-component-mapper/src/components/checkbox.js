@@ -11,8 +11,13 @@ import { meta, input } from '@data-driven-forms/common/src/prop-types-templates'
 import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
 import MultipleChoiceList from '../common/multiple-choice-list';
+import { useFieldProviderApi } from '@data-driven-forms/react-form-renderer';
 
-export const SingleCheckbox = ({ input, isReadOnly, isDisabled, isRequired, label, helperText, description, validateOnMount, meta }) => {
+export const SingleCheckbox = (props) => {
+  const { input, isReadOnly, isDisabled, isRequired, label, helperText, description, validateOnMount, meta } = useFieldProviderApi({
+    ...props,
+    type: 'checkbox'
+  });
   const invalid = validationError(meta, validateOnMount);
   const text = invalid || helperText || description;
 

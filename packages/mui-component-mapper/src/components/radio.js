@@ -10,37 +10,40 @@ import { wrapperProps } from '@data-driven-forms/common/src/multiple-choice-list
 import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
 import './radio.scss';
+import { useFieldProviderApi } from '@data-driven-forms/react-form-renderer';
 
-const Radio = ({ FieldProvider, options, isDisabled, input, label, isRequired, helperText, description, isReadOnly, meta, validateOnMount }) => {
+const Radio = ({ name, ...props }) => {
+  const { options, isDisabled, label, isRequired, helperText, description, isReadOnly, meta, validateOnMount } = useFieldProviderApi({
+    ...props,
+    name,
+    type: 'radio'
+  });
   const invalid = validationError(meta, validateOnMount);
   const text = invalid || helperText || description;
   return (
     <FormFieldGrid className="mui-ddform-radio-group">
       <FormControl required={isRequired} error={!!invalid} component="fieldset">
         <FormLabel component="legend">{label}</FormLabel>
-        {options.map((option) => (
-          <FieldProvider
-            key={`${input.name}-${option.value}`}
-            name={input.name}
-            value={option.value}
-            type="radio"
-            render={({ input }) => (
-              <FormControlLabel
-                control={
-                  <MUIRadio
-                    {...input}
-                    disabled={isDisabled || isReadOnly}
-                    onChange={() => input.onChange(option.value)}
-                    inputProps={{
-                      readOnly: isReadOnly
-                    }}
-                  />
-                }
-                label={option.label}
-              />
-            )}
-          />
-        ))}
+        {options.map((option) => {
+          const { input } = useFieldProviderApi({ name, type: 'radio', value: option.value });
+          return (
+            <FormControlLabel
+              key={`${name}-${option.value}`}
+              control={
+                <MUIRadio
+                  {...input}
+                  name={name}
+                  disabled={isDisabled || isReadOnly}
+                  onChange={() => input.onChange(option.value)}
+                  inputProps={{
+                    readOnly: isReadOnly
+                  }}
+                />
+              }
+              label={option.label}
+            />
+          );
+        })}
         {(invalid || text) && <FormHelperText>{invalid || text}</FormHelperText>}
       </FormControl>
     </FormFieldGrid>

@@ -5,10 +5,23 @@ import MuiTextField from '@material-ui/core/TextField';
 import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
 import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
+import { useFieldProviderApi } from '@data-driven-forms/react-form-renderer';
 
-const TextArea = ({ input, isReadOnly, isDisabled, placeholder, isRequired, label, helperText, description, validateOnMount, meta, ...rest }) => {
+const TextArea = (props) => {
+  const {
+    input,
+    isReadOnly,
+    isDisabled,
+    placeholder,
+    isRequired,
+    label,
+    helperText,
+    description,
+    validateOnMount,
+    meta,
+    ...rest
+  } = useFieldProviderApi(props);
   const invalid = validationError(meta, validateOnMount);
-
   return (
     <FormFieldGrid>
       <MuiTextField

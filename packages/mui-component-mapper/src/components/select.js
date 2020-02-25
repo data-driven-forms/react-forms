@@ -5,24 +5,26 @@ import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
 import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
 import MUISelect from './select/integration-select';
+import { useFieldProviderApi } from '@data-driven-forms/react-form-renderer';
 
 const selectValue = (option) => option.sort((a, b) => a.label.localeCompare(b.label, 'en', { sensitivity: 'base' })).map((item) => item.value);
 
-const TextField = ({
-  input,
-  isReadOnly,
-  isDisabled,
-  placeholder,
-  isRequired,
-  label,
-  helperText,
-  validateOnMount,
-  meta,
-  options,
-  isSearchable,
-  description,
-  ...rest
-}) => {
+const Select = (props) => {
+  const {
+    input,
+    isReadOnly,
+    isDisabled,
+    placeholder,
+    isRequired,
+    label,
+    helperText,
+    validateOnMount,
+    meta,
+    options,
+    isSearchable,
+    description,
+    ...rest
+  } = useFieldProviderApi(props);
   const invalid = validationError(meta, validateOnMount);
 
   return (
@@ -59,7 +61,7 @@ const TextField = ({
   );
 };
 
-TextField.propTypes = {
+Select.propTypes = {
   input,
   meta,
   isReadOnly: PropTypes.bool,
@@ -74,4 +76,4 @@ TextField.propTypes = {
   description: PropTypes.node
 };
 
-export default TextField;
+export default Select;
