@@ -277,7 +277,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                 className="pf-c-wizard__nav-list"
                               >
                                 <FormSpy>
-                                  <WizardNavigationClass
+                                  <WizardNavigation
                                     activeStepIndex={0}
                                     formOptions={
                                       Object {
@@ -450,7 +450,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                         </li>
                                       </WizardNavItem>
                                     </Component>
-                                  </WizardNavigationClass>
+                                  </WizardNavigation>
                                 </FormSpy>
                               </ol>
                             </nav>
@@ -1608,7 +1608,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                           className="pf-c-wizard__nav-list"
                                         >
                                           <FormSpy>
-                                            <WizardNavigationClass
+                                            <WizardNavigation
                                               activeStepIndex={0}
                                               formOptions={
                                                 Object {
@@ -1781,7 +1781,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                   </li>
                                                 </WizardNavItem>
                                               </Component>
-                                            </WizardNavigationClass>
+                                            </WizardNavigation>
                                           </FormSpy>
                                         </ol>
                                       </nav>
