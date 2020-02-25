@@ -104,6 +104,7 @@ const formTemplate = ({
   formWrapperProps,
   showFormControls = true,
   disableSubmit = [],
+  onStateUpdate,
   ...options
 }) => ({ schema: { title, description, label }, formFields }) => {
   const { onReset, onCancel, getState, handleSubmit } = useFormApi();
@@ -113,6 +114,7 @@ const formTemplate = ({
       {(title || label) && <Title>{title || label}</Title>}
       {description && <Description>{description}</Description>}
       {formFields}
+      {onStateUpdate && <FormSpy onChange={onStateUpdate} />}
       {showFormControls && (
         <FormSpy>
           {(formSpyProps) => (
