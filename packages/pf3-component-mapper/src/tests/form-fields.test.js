@@ -116,38 +116,33 @@ describe('FormFields', () => {
       );
       expect(toJson(wrapper)).toMatchSnapshot();
     });
-
-    it('should call onChange method', () => {
-      const wrapper = mount(
-        <RenderWithProvider value={{ formOptions }}>
-          <Switch {...props} name="Foo" FieldProvider={FieldProvider} />
-        </RenderWithProvider>
-      );
-      wrapper.find('input').simulate('change');
-      expect(onChangeSpy).toHaveBeenCalled();
-    });
   });
 
   describe('<Checkbox />', () => {
     let initialProps;
     beforeEach(() => {
       initialProps = {
-        FieldProvider: MockFieldProvider,
-        input: {
-          name: 'single-check-box'
-        },
+        name: 'single-check-box',
         meta: {}
       };
     });
 
     it('should render single checkbox variant', () => {
-      const wrapper = mount(<Checkbox {...initialProps} />);
+      const wrapper = mount(
+        <RenderWithProvider>
+          <Checkbox {...initialProps} />
+        </RenderWithProvider>
+      );
       expect(toJson(wrapper)).toMatchSnapshot();
       expect(wrapper.find(FieldLevelHelp)).toHaveLength(0);
     });
 
     it('should render single checkbox variant with a helper text', () => {
-      const wrapper = mount(<Checkbox {...initialProps} helperText="Helper text" />);
+      const wrapper = mount(
+        <RenderWithProvider>
+          <Checkbox {...initialProps} helperText="Helper text" />
+        </RenderWithProvider>
+      );
       expect(toJson(wrapper)).toMatchSnapshot();
       expect(wrapper.find(FieldLevelHelp)).toHaveLength(1);
     });
@@ -162,10 +157,7 @@ describe('FormFields', () => {
     let initialProps;
     beforeEach(() => {
       initialProps = {
-        input: {
-          name: 'radio'
-        },
-        meta: {},
+        name: 'radio',
         options: [
           {
             label: 'option 1',
@@ -175,13 +167,16 @@ describe('FormFields', () => {
             label: 'option 2',
             value: 2
           }
-        ],
-        FieldProvider: MockFieldProvider
+        ]
       };
     });
 
     it('should render correctly', () => {
-      const wrapper = mount(<Radio {...initialProps} />);
+      const wrapper = mount(
+        <RenderWithProvider>
+          <Radio {...initialProps} />
+        </RenderWithProvider>
+      );
       expect(toJson(wrapper)).toMatchSnapshot();
     });
   });
@@ -190,32 +185,45 @@ describe('FormFields', () => {
     let initialProps;
     beforeEach(() => {
       initialProps = {
-        input: {
-          name: 'text-field'
-        },
-        meta: {}
+        name: 'text-field'
       };
     });
 
     it('should render correctly', () => {
-      const wrapper = mount(<TextField {...initialProps} />);
+      const wrapper = mount(
+        <RenderWithProvider>
+          <TextField {...initialProps} />
+        </RenderWithProvider>
+      );
       expect(toJson(wrapper)).toMatchSnapshot();
     });
 
     it('should render correctly with placeholder', () => {
-      const wrapper = mount(<TextField {...initialProps} placeholder={'placeholder'} />);
+      const wrapper = mount(
+        <RenderWithProvider>
+          <TextField {...initialProps} placeholder={'placeholder'} />
+        </RenderWithProvider>
+      );
       expect(toJson(wrapper)).toMatchSnapshot();
     });
 
     it('should render correctly with helperText', () => {
-      const wrapper = mount(<TextField {...initialProps} label="label" helperText="I am a helper text" />);
+      const wrapper = mount(
+        <RenderWithProvider>
+          <TextField {...initialProps} label="label" helperText="I am a helper text" />
+        </RenderWithProvider>
+      );
 
       expect(wrapper.find('FieldLevelHelp')).toHaveLength(1);
       expect(wrapper.find('FieldLevelHelp').props().content).toEqual('I am a helper text');
     });
 
     it('should render correctly with description', () => {
-      const wrapper = mount(<TextField {...initialProps} description="I am a description" />);
+      const wrapper = mount(
+        <RenderWithProvider>
+          <TextField {...initialProps} description="I am a description" />
+        </RenderWithProvider>
+      );
 
       expect(wrapper.find('HelpBlock')).toHaveLength(1);
       expect(wrapper.find('HelpBlock').text()).toEqual('I am a description');
@@ -234,12 +242,20 @@ describe('FormFields', () => {
     });
 
     it('should render correctly', () => {
-      const wrapper = mount(<Textarea {...initialProps} />);
+      const wrapper = mount(
+        <RenderWithProvider>
+          <Textarea {...initialProps} />
+        </RenderWithProvider>
+      );
       expect(toJson(wrapper)).toMatchSnapshot();
     });
 
     it('should render correctly with placeholder', () => {
-      const wrapper = mount(<Textarea {...initialProps} placeholder={'placeholder'} />);
+      const wrapper = mount(
+        <RenderWithProvider>
+          <Textarea {...initialProps} placeholder={'placeholder'} />
+        </RenderWithProvider>
+      );
       expect(toJson(wrapper)).toMatchSnapshot();
     });
   });
