@@ -21,13 +21,18 @@ const ReleasesPage = () => {
 
   useEffect(() => {
     fetch('https://api.github.com/repos/data-driven-forms/react-forms/releases?page=1')
-      .then((res) => res.json())
-      .then((data) => {
-        setData(parseData(data));
-      })
-      .catch(() => {
-        setData('Something wrong happened :(');
-      });
+    .then(res => res.json())
+    .then((data) => {
+      setData(parseData(data));
+    })
+    .catch(() => {
+      setData(<React.Fragment>
+        Cannot obtain data from GitHub, please visit
+        <a href="https://github.com/data-driven-forms/react-forms/releases" rel="noopener noreferrer" target="_blank">
+          GitHub page.
+        </a>
+      </React.Fragment>);
+    });
   }, []);
 
   return (
