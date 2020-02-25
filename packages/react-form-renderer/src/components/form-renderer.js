@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, FormSpy } from 'react-final-form';
+import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import PropTypes from 'prop-types';
 import createFocusDecorator from 'final-form-focus';
@@ -18,7 +18,6 @@ const FormRenderer = ({
   initialValues,
   clearOnUnmount,
   validate,
-  onStateUpdate,
   subscription,
   clearedValue,
   schema
@@ -76,7 +75,6 @@ const FormRenderer = ({
             }}
           >
             <FormTemplate formFields={renderForm(schema.fields)} schema={schema} />
-            {onStateUpdate && <FormSpy onChange={onStateUpdate} />}
           </RendererContext.Provider>
         );
       }}
@@ -92,7 +90,6 @@ FormRenderer.propTypes = {
   initialValues: PropTypes.object,
   clearOnUnmount: PropTypes.bool,
   validate: PropTypes.func,
-  onStateUpdate: PropTypes.func,
   subscription: PropTypes.shape({ [PropTypes.string]: PropTypes.bool }),
   clearedValue: PropTypes.any
 };

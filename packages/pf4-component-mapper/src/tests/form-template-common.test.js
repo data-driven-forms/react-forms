@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from '@data-driven-forms/react-form-renderer';
+import { Form, FormSpy } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { formTemplate } from '../index';
@@ -42,6 +42,7 @@ describe('FormTemplate PF4 Common', () => {
     expect(wrapper.find(Title)).toHaveLength(1);
     expect(wrapper.find(Description)).toHaveLength(0);
     expect(wrapper.find(Button)).toHaveLength(2);
+    expect(wrapper.find(FormSpy)).toHaveLength(1);
   });
 
   it('should hide buttons', () => {
@@ -54,6 +55,22 @@ describe('FormTemplate PF4 Common', () => {
     );
 
     expect(wrapper.find(Button)).toHaveLength(0);
+    expect(wrapper.find(FormSpy)).toHaveLength(0);
+  });
+
+  it('should render formSpy with onChange', () => {
+    const onStateUpdate = jest.fn();
+
+    FormTemplate = formTemplate({ showFormControls: false, onStateUpdate });
+
+    const wrapper = mount(
+      <ContextWrapper>
+        <FormTemplate {...initialProps} />
+      </ContextWrapper>
+    );
+
+    expect(wrapper.find(FormSpy)).toHaveLength(1);
+    expect(wrapper.find(FormSpy).props().onChange).toEqual(onStateUpdate);
   });
 
   it('should render description', () => {
