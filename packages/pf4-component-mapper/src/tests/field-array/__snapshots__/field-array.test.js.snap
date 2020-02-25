@@ -152,7 +152,6 @@ exports[`FieldArray should render array field correctly 1`] = `
                   }
                 >
                   <FieldProvider
-                    FieldArrayProvider={[Function]}
                     FieldProvider={[Function]}
                     arrayValidator={[Function]}
                     component={[Function]}
@@ -169,7 +168,6 @@ exports[`FieldArray should render array field correctly 1`] = `
                     name="foo"
                   >
                     <DynamicArray
-                      FieldArrayProvider={[Function]}
                       FieldProvider={[Function]}
                       arrayValidator={[Function]}
                       fields={

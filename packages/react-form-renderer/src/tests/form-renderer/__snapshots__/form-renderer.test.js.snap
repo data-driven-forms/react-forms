@@ -114,7 +114,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               }
             >
               <FieldProvider
-                FieldArrayProvider={[Function]}
                 FieldProvider={[Function]}
                 component={[Function]}
                 formOptions={Object {}}
@@ -122,7 +121,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 validate={[Function]}
               >
                 <Component
-                  FieldArrayProvider={[Function]}
                   FieldProvider={[Function]}
                   formOptions={
                     Object {
@@ -232,7 +230,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               }
             >
               <FieldProvider
-                FieldArrayProvider={[Function]}
                 FieldProvider={[Function]}
                 component={[Function]}
                 formOptions={Object {}}
@@ -240,7 +237,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 validate={[Function]}
               >
                 <Component
-                  FieldArrayProvider={[Function]}
                   FieldProvider={[Function]}
                   formOptions={
                     Object {
@@ -477,7 +473,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
               }
             >
               <FieldProvider
-                FieldArrayProvider={[Function]}
                 FieldProvider={[Function]}
                 component={[Function]}
                 formOptions={Object {}}
@@ -486,7 +481,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                 validate={[Function]}
               >
                 <Component
-                  FieldArrayProvider={[Function]}
                   FieldProvider={[Function]}
                   formOptions={
                     Object {
@@ -601,7 +595,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                 }
               >
                 <FieldProvider
-                  FieldArrayProvider={[Function]}
                   FieldProvider={[Function]}
                   component={[Function]}
                   formOptions={Object {}}
@@ -610,7 +603,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                   validate={[Function]}
                 >
                   <Component
-                    FieldArrayProvider={[Function]}
                     FieldProvider={[Function]}
                     formOptions={
                       Object {

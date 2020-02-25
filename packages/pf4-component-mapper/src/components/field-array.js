@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { useFormApi } from '@data-driven-forms/react-form-renderer';
+import { useFormApi, FieldArray } from '@data-driven-forms/react-form-renderer';
 
 import { Grid, GridItem } from '@patternfly/react-core/dist/js/layouts/Grid';
 import { Bullseye } from '@patternfly/react-core/dist/js/layouts/Bullseye';
@@ -80,7 +80,6 @@ const DynamicArray = ({
   fields: formFields,
   defaultItem,
   meta,
-  FieldArrayProvider,
   FormSpyProvider, // eslint-disable-line react/prop-types
   minItems,
   maxItems,
@@ -91,7 +90,7 @@ const DynamicArray = ({
   const isError = (dirty || submitFailed) && error && typeof error === 'string';
 
   return (
-    <FieldArrayProvider key={rest.input.name} name={rest.input.name} validate={arrayValidator}>
+    <FieldArray key={rest.input.name} name={rest.input.name} validate={arrayValidator}>
       {({ fields: { map, value = [], push, remove }}) => (
         <Fragment>
           {label && <GridItem sm={12}>{label}</GridItem>}
@@ -135,7 +134,7 @@ const DynamicArray = ({
           </Grid>
         </Fragment>
       )}
-    </FieldArrayProvider>
+    </FieldArray>
   );
 };
 
@@ -148,7 +147,6 @@ DynamicArray.propTypes = {
   minItems: PropTypes.number,
   maxItems: PropTypes.number,
   noItemsMessage: PropTypes.node,
-  FieldArrayProvider: PropTypes.node.isRequired,
   meta: PropTypes.object.isRequired
 };
 

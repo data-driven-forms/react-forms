@@ -592,7 +592,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                           }
                                         >
                                           <FieldProvider
-                                            FieldArrayProvider={[Function]}
                                             FieldProvider={[Function]}
                                             component={[Function]}
                                             formOptions={Object {}}
@@ -600,7 +599,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                             validate={[Function]}
                                           >
                                             <TextField
-                                              FieldArrayProvider={[Function]}
                                               FieldProvider={[Function]}
                                               formOptions={
                                                 Object {
@@ -713,7 +711,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                     className="pf-c-form__group"
                                                   >
                                                     <ForwardRef
-                                                      FieldArrayProvider={[Function]}
                                                       FieldProvider={[Function]}
                                                       formOptions={
                                                         Object {
@@ -766,7 +763,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                       value=""
                                                     >
                                                       <TextInputBase
-                                                        FieldArrayProvider={[Function]}
                                                         FieldProvider={[Function]}
                                                         aria-label={null}
                                                         className=""
@@ -828,7 +824,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                         value=""
                                                       >
                                                         <input
-                                                          FieldArrayProvider={[Function]}
                                                           FieldProvider={[Function]}
                                                           aria-invalid={false}
                                                           aria-label={null}
@@ -1970,7 +1965,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                     }
                                                   >
                                                     <FieldProvider
-                                                      FieldArrayProvider={[Function]}
                                                       FieldProvider={[Function]}
                                                       component={[Function]}
                                                       formOptions={Object {}}
@@ -1978,7 +1972,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                       validate={[Function]}
                                                     >
                                                       <TextField
-                                                        FieldArrayProvider={[Function]}
                                                         FieldProvider={[Function]}
                                                         formOptions={
                                                           Object {
@@ -2091,7 +2084,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                               className="pf-c-form__group"
                                                             >
                                                               <ForwardRef
-                                                                FieldArrayProvider={[Function]}
                                                                 FieldProvider={[Function]}
                                                                 formOptions={
                                                                   Object {
@@ -2144,7 +2136,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                                 value=""
                                                               >
                                                                 <TextInputBase
-                                                                  FieldArrayProvider={[Function]}
                                                                   FieldProvider={[Function]}
                                                                   aria-label={null}
                                                                   className=""
@@ -2206,7 +2197,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                                   value=""
                                                                 >
                                                                   <input
-                                                                    FieldArrayProvider={[Function]}
                                                                     FieldProvider={[Function]}
                                                                     aria-invalid={false}
                                                                     aria-label={null}
