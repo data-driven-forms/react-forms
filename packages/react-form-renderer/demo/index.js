@@ -15,7 +15,7 @@ const App = () => (
             }}
             clearedValue={'bla'}
             formFieldsMapper={formFieldsMapper}
-            onSubmit={() => console.log(554)}
+            onSubmit={(values) => console.log(values)}
             onCancel={console.log}
             canReset
             onReset={() => console.log('i am resseting')}

@@ -1,4 +1,3 @@
-import { shouldWrapInField } from '../../form-renderer/helpers';
 import composeValidators from '../../components/compose-validators';
 
 describe('Form helpers', () => {
@@ -25,16 +24,6 @@ describe('Form helpers', () => {
       const failingValidator = () => 'Foo';
       const nonsense = { foo: 'bar' };
       expect(composeValidators([ nonsense, failingValidator ])('foo')).toEqual('Foo');
-    });
-  });
-
-  describe('Wrap in field helper', () => {
-    it('should return true if correct component type given', () => {
-      expect(shouldWrapInField([ 'text-field' ]));
-    });
-
-    it('should return false if incorrect component type given', () => {
-      expect(shouldWrapInField([ 'text-field' ])).toBeFalsy();
     });
   });
 });
