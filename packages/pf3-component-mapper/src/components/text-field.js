@@ -3,33 +3,37 @@ import PropTypes from 'prop-types';
 
 import FormControl from 'patternfly-react/dist/js/components/Form/FormControl';
 import FormGroup from '../common/form-wrapper';
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
-const TextField = ({
-  meta,
-  validateOnMount,
-  label,
-  hideLabel,
-  isRequired,
-  helperText,
-  description,
-  input,
-  placeholder,
-  isDisabled,
-  isReadOnly,
-  ...props
-}) => (
-  <FormGroup
-    meta={meta}
-    validateOnMount={validateOnMount}
-    label={label}
-    hideLabel={hideLabel}
-    isRequired={isRequired}
-    helperText={helperText}
-    description={description}
-  >
-    <FormControl {...input} placeholder={placeholder} disabled={isDisabled} readOnly={isReadOnly} {...props} />
-  </FormGroup>
-);
+const TextField = (props) => {
+  const {
+    meta,
+    validateOnMount,
+    label,
+    hideLabel,
+    isRequired,
+    helperText,
+    description,
+    input,
+    placeholder,
+    isDisabled,
+    isReadOnly,
+    ...rest
+  } = useFieldApi(props);
+  return (
+    <FormGroup
+      meta={meta}
+      validateOnMount={validateOnMount}
+      label={label}
+      hideLabel={hideLabel}
+      isRequired={isRequired}
+      helperText={helperText}
+      description={description}
+    >
+      <FormControl {...input} placeholder={placeholder} disabled={isDisabled} readOnly={isReadOnly} {...rest} />
+    </FormGroup>
+  );
+};
 
 TextField.propTypes = {
   meta: PropTypes.object,

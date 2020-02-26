@@ -549,67 +549,14 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                             ]
                                           }
                                         >
-                                          <FieldProvider
+                                          <TextField
                                             FieldProvider={[Function]}
-                                            component={[Function]}
-                                            formOptions={Object {}}
                                             name="foo-field"
                                             validate={[Function]}
                                           >
-                                            <TextField
-                                              FieldProvider={[Function]}
-                                              formOptions={
-                                                Object {
-                                                  "batch": [Function],
-                                                  "blur": [Function],
-                                                  "change": [Function],
-                                                  "clearOnUnmount": false,
-                                                  "clearedValue": undefined,
-                                                  "concat": [Function],
-                                                  "destroyOnUnregister": false,
-                                                  "focus": [Function],
-                                                  "getFieldState": [Function],
-                                                  "getRegisteredFields": [Function],
-                                                  "getState": [Function],
-                                                  "handleSubmit": [Function],
-                                                  "initialize": [Function],
-                                                  "insert": [Function],
-                                                  "isValidationPaused": [Function],
-                                                  "move": [Function],
-                                                  "onCancel": [MockFunction],
-                                                  "onReset": undefined,
-                                                  "onSubmit": [MockFunction],
-                                                  "pauseValidation": [Function],
-                                                  "pop": [Function],
-                                                  "pristine": true,
-                                                  "push": [Function],
-                                                  "registerField": [Function],
-                                                  "remove": [Function],
-                                                  "removeBatch": [Function],
-                                                  "renderForm": [Function],
-                                                  "reset": [Function],
-                                                  "resetFieldState": [Function],
-                                                  "resumeValidation": [Function],
-                                                  "setConfig": [Function],
-                                                  "shift": [Function],
-                                                  "submit": [Function],
-                                                  "subscribe": [Function],
-                                                  "swap": [Function],
-                                                  "unshift": [Function],
-                                                  "update": [Function],
-                                                  "valid": true,
-                                                }
-                                              }
-                                              input={
-                                                Object {
-                                                  "checked": undefined,
-                                                  "name": "foo-field",
-                                                  "onBlur": [Function],
-                                                  "onChange": [Function],
-                                                  "onFocus": [Function],
-                                                  "value": "",
-                                                }
-                                              }
+                                            <FormGroup
+                                              id="foo-field"
+                                              isRequired={false}
                                               meta={
                                                 Object {
                                                   "active": false,
@@ -632,44 +579,71 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                   "visited": false,
                                                 }
                                               }
-                                              validate={[Function]}
                                             >
                                               <FormGroup
-                                                id="foo-field"
+                                                fieldId="foo-field"
                                                 isRequired={false}
-                                                meta={
-                                                  Object {
-                                                    "active": false,
-                                                    "data": Object {},
-                                                    "dirty": false,
-                                                    "dirtySinceLastSubmit": false,
-                                                    "error": undefined,
-                                                    "initial": undefined,
-                                                    "invalid": false,
-                                                    "length": undefined,
-                                                    "modified": false,
-                                                    "pristine": true,
-                                                    "submitError": undefined,
-                                                    "submitFailed": false,
-                                                    "submitSucceeded": false,
-                                                    "submitting": false,
-                                                    "touched": false,
-                                                    "valid": true,
-                                                    "validating": false,
-                                                    "visited": false,
-                                                  }
-                                                }
+                                                isValid={true}
                                               >
-                                                <FormGroup
-                                                  fieldId="foo-field"
-                                                  isRequired={false}
-                                                  isValid={true}
+                                                <div
+                                                  className="pf-c-form__group"
                                                 >
-                                                  <div
-                                                    className="pf-c-form__group"
+                                                  <ForwardRef
+                                                    FieldProvider={[Function]}
+                                                    formOptions={
+                                                      Object {
+                                                        "batch": [Function],
+                                                        "blur": [Function],
+                                                        "change": [Function],
+                                                        "clearOnUnmount": false,
+                                                        "clearedValue": undefined,
+                                                        "concat": [Function],
+                                                        "destroyOnUnregister": false,
+                                                        "focus": [Function],
+                                                        "getFieldState": [Function],
+                                                        "getRegisteredFields": [Function],
+                                                        "getState": [Function],
+                                                        "handleSubmit": [Function],
+                                                        "initialize": [Function],
+                                                        "insert": [Function],
+                                                        "isValidationPaused": [Function],
+                                                        "move": [Function],
+                                                        "onCancel": [MockFunction],
+                                                        "onReset": undefined,
+                                                        "onSubmit": [MockFunction],
+                                                        "pauseValidation": [Function],
+                                                        "pop": [Function],
+                                                        "pristine": true,
+                                                        "push": [Function],
+                                                        "registerField": [Function],
+                                                        "remove": [Function],
+                                                        "removeBatch": [Function],
+                                                        "renderForm": [Function],
+                                                        "reset": [Function],
+                                                        "resetFieldState": [Function],
+                                                        "resumeValidation": [Function],
+                                                        "setConfig": [Function],
+                                                        "shift": [Function],
+                                                        "submit": [Function],
+                                                        "subscribe": [Function],
+                                                        "swap": [Function],
+                                                        "unshift": [Function],
+                                                        "update": [Function],
+                                                        "valid": true,
+                                                      }
+                                                    }
+                                                    id="foo-field"
+                                                    name="foo-field"
+                                                    onBlur={[Function]}
+                                                    onChange={[Function]}
+                                                    onFocus={[Function]}
+                                                    validate={[Function]}
+                                                    value=""
                                                   >
-                                                    <ForwardRef
+                                                    <TextInputBase
                                                       FieldProvider={[Function]}
+                                                      aria-label={null}
+                                                      className=""
                                                       formOptions={
                                                         Object {
                                                           "batch": [Function],
@@ -713,17 +687,26 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                         }
                                                       }
                                                       id="foo-field"
+                                                      innerRef={null}
+                                                      isDisabled={false}
+                                                      isReadOnly={false}
+                                                      isRequired={false}
+                                                      isValid={true}
                                                       name="foo-field"
                                                       onBlur={[Function]}
                                                       onChange={[Function]}
                                                       onFocus={[Function]}
+                                                      type="text"
                                                       validate={[Function]}
+                                                      validated="default"
                                                       value=""
                                                     >
-                                                      <TextInputBase
+                                                      <input
                                                         FieldProvider={[Function]}
+                                                        aria-invalid={false}
                                                         aria-label={null}
-                                                        className=""
+                                                        className="pf-c-form-control"
+                                                        disabled={false}
                                                         formOptions={
                                                           Object {
                                                             "batch": [Function],
@@ -767,86 +750,22 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                           }
                                                         }
                                                         id="foo-field"
-                                                        innerRef={null}
-                                                        isDisabled={false}
-                                                        isReadOnly={false}
-                                                        isRequired={false}
-                                                        isValid={true}
                                                         name="foo-field"
                                                         onBlur={[Function]}
                                                         onChange={[Function]}
                                                         onFocus={[Function]}
+                                                        readOnly={false}
+                                                        required={false}
                                                         type="text"
                                                         validate={[Function]}
-                                                        validated="default"
                                                         value=""
-                                                      >
-                                                        <input
-                                                          FieldProvider={[Function]}
-                                                          aria-invalid={false}
-                                                          aria-label={null}
-                                                          className="pf-c-form-control"
-                                                          disabled={false}
-                                                          formOptions={
-                                                            Object {
-                                                              "batch": [Function],
-                                                              "blur": [Function],
-                                                              "change": [Function],
-                                                              "clearOnUnmount": false,
-                                                              "clearedValue": undefined,
-                                                              "concat": [Function],
-                                                              "destroyOnUnregister": false,
-                                                              "focus": [Function],
-                                                              "getFieldState": [Function],
-                                                              "getRegisteredFields": [Function],
-                                                              "getState": [Function],
-                                                              "handleSubmit": [Function],
-                                                              "initialize": [Function],
-                                                              "insert": [Function],
-                                                              "isValidationPaused": [Function],
-                                                              "move": [Function],
-                                                              "onCancel": [MockFunction],
-                                                              "onReset": undefined,
-                                                              "onSubmit": [MockFunction],
-                                                              "pauseValidation": [Function],
-                                                              "pop": [Function],
-                                                              "pristine": true,
-                                                              "push": [Function],
-                                                              "registerField": [Function],
-                                                              "remove": [Function],
-                                                              "removeBatch": [Function],
-                                                              "renderForm": [Function],
-                                                              "reset": [Function],
-                                                              "resetFieldState": [Function],
-                                                              "resumeValidation": [Function],
-                                                              "setConfig": [Function],
-                                                              "shift": [Function],
-                                                              "submit": [Function],
-                                                              "subscribe": [Function],
-                                                              "swap": [Function],
-                                                              "unshift": [Function],
-                                                              "update": [Function],
-                                                              "valid": true,
-                                                            }
-                                                          }
-                                                          id="foo-field"
-                                                          name="foo-field"
-                                                          onBlur={[Function]}
-                                                          onChange={[Function]}
-                                                          onFocus={[Function]}
-                                                          readOnly={false}
-                                                          required={false}
-                                                          type="text"
-                                                          validate={[Function]}
-                                                          value=""
-                                                        />
-                                                      </TextInputBase>
-                                                    </ForwardRef>
-                                                  </div>
-                                                </FormGroup>
+                                                      />
+                                                    </TextInputBase>
+                                                  </ForwardRef>
+                                                </div>
                                               </FormGroup>
-                                            </TextField>
-                                          </FieldProvider>
+                                            </FormGroup>
+                                          </TextField>
                                         </FieldWrapper>
                                       </FormFieldHideWrapper>
                                     </FormConditionWrapper>
@@ -1880,67 +1799,14 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                       ]
                                                     }
                                                   >
-                                                    <FieldProvider
+                                                    <TextField
                                                       FieldProvider={[Function]}
-                                                      component={[Function]}
-                                                      formOptions={Object {}}
                                                       name="foo-field"
                                                       validate={[Function]}
                                                     >
-                                                      <TextField
-                                                        FieldProvider={[Function]}
-                                                        formOptions={
-                                                          Object {
-                                                            "batch": [Function],
-                                                            "blur": [Function],
-                                                            "change": [Function],
-                                                            "clearOnUnmount": false,
-                                                            "clearedValue": undefined,
-                                                            "concat": [Function],
-                                                            "destroyOnUnregister": false,
-                                                            "focus": [Function],
-                                                            "getFieldState": [Function],
-                                                            "getRegisteredFields": [Function],
-                                                            "getState": [Function],
-                                                            "handleSubmit": [Function],
-                                                            "initialize": [Function],
-                                                            "insert": [Function],
-                                                            "isValidationPaused": [Function],
-                                                            "move": [Function],
-                                                            "onCancel": [MockFunction],
-                                                            "onReset": undefined,
-                                                            "onSubmit": [MockFunction],
-                                                            "pauseValidation": [Function],
-                                                            "pop": [Function],
-                                                            "pristine": true,
-                                                            "push": [Function],
-                                                            "registerField": [Function],
-                                                            "remove": [Function],
-                                                            "removeBatch": [Function],
-                                                            "renderForm": [Function],
-                                                            "reset": [Function],
-                                                            "resetFieldState": [Function],
-                                                            "resumeValidation": [Function],
-                                                            "setConfig": [Function],
-                                                            "shift": [Function],
-                                                            "submit": [Function],
-                                                            "subscribe": [Function],
-                                                            "swap": [Function],
-                                                            "unshift": [Function],
-                                                            "update": [Function],
-                                                            "valid": true,
-                                                          }
-                                                        }
-                                                        input={
-                                                          Object {
-                                                            "checked": undefined,
-                                                            "name": "foo-field",
-                                                            "onBlur": [Function],
-                                                            "onChange": [Function],
-                                                            "onFocus": [Function],
-                                                            "value": "",
-                                                          }
-                                                        }
+                                                      <FormGroup
+                                                        id="foo-field"
+                                                        isRequired={false}
                                                         meta={
                                                           Object {
                                                             "active": false,
@@ -1963,44 +1829,71 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                             "visited": false,
                                                           }
                                                         }
-                                                        validate={[Function]}
                                                       >
                                                         <FormGroup
-                                                          id="foo-field"
+                                                          fieldId="foo-field"
                                                           isRequired={false}
-                                                          meta={
-                                                            Object {
-                                                              "active": false,
-                                                              "data": Object {},
-                                                              "dirty": false,
-                                                              "dirtySinceLastSubmit": false,
-                                                              "error": undefined,
-                                                              "initial": undefined,
-                                                              "invalid": false,
-                                                              "length": undefined,
-                                                              "modified": false,
-                                                              "pristine": true,
-                                                              "submitError": undefined,
-                                                              "submitFailed": false,
-                                                              "submitSucceeded": false,
-                                                              "submitting": false,
-                                                              "touched": false,
-                                                              "valid": true,
-                                                              "validating": false,
-                                                              "visited": false,
-                                                            }
-                                                          }
+                                                          isValid={true}
                                                         >
-                                                          <FormGroup
-                                                            fieldId="foo-field"
-                                                            isRequired={false}
-                                                            isValid={true}
+                                                          <div
+                                                            className="pf-c-form__group"
                                                           >
-                                                            <div
-                                                              className="pf-c-form__group"
+                                                            <ForwardRef
+                                                              FieldProvider={[Function]}
+                                                              formOptions={
+                                                                Object {
+                                                                  "batch": [Function],
+                                                                  "blur": [Function],
+                                                                  "change": [Function],
+                                                                  "clearOnUnmount": false,
+                                                                  "clearedValue": undefined,
+                                                                  "concat": [Function],
+                                                                  "destroyOnUnregister": false,
+                                                                  "focus": [Function],
+                                                                  "getFieldState": [Function],
+                                                                  "getRegisteredFields": [Function],
+                                                                  "getState": [Function],
+                                                                  "handleSubmit": [Function],
+                                                                  "initialize": [Function],
+                                                                  "insert": [Function],
+                                                                  "isValidationPaused": [Function],
+                                                                  "move": [Function],
+                                                                  "onCancel": [MockFunction],
+                                                                  "onReset": undefined,
+                                                                  "onSubmit": [MockFunction],
+                                                                  "pauseValidation": [Function],
+                                                                  "pop": [Function],
+                                                                  "pristine": true,
+                                                                  "push": [Function],
+                                                                  "registerField": [Function],
+                                                                  "remove": [Function],
+                                                                  "removeBatch": [Function],
+                                                                  "renderForm": [Function],
+                                                                  "reset": [Function],
+                                                                  "resetFieldState": [Function],
+                                                                  "resumeValidation": [Function],
+                                                                  "setConfig": [Function],
+                                                                  "shift": [Function],
+                                                                  "submit": [Function],
+                                                                  "subscribe": [Function],
+                                                                  "swap": [Function],
+                                                                  "unshift": [Function],
+                                                                  "update": [Function],
+                                                                  "valid": true,
+                                                                }
+                                                              }
+                                                              id="foo-field"
+                                                              name="foo-field"
+                                                              onBlur={[Function]}
+                                                              onChange={[Function]}
+                                                              onFocus={[Function]}
+                                                              validate={[Function]}
+                                                              value=""
                                                             >
-                                                              <ForwardRef
+                                                              <TextInputBase
                                                                 FieldProvider={[Function]}
+                                                                aria-label={null}
+                                                                className=""
                                                                 formOptions={
                                                                   Object {
                                                                     "batch": [Function],
@@ -2044,17 +1937,26 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                                   }
                                                                 }
                                                                 id="foo-field"
+                                                                innerRef={null}
+                                                                isDisabled={false}
+                                                                isReadOnly={false}
+                                                                isRequired={false}
+                                                                isValid={true}
                                                                 name="foo-field"
                                                                 onBlur={[Function]}
                                                                 onChange={[Function]}
                                                                 onFocus={[Function]}
+                                                                type="text"
                                                                 validate={[Function]}
+                                                                validated="default"
                                                                 value=""
                                                               >
-                                                                <TextInputBase
+                                                                <input
                                                                   FieldProvider={[Function]}
+                                                                  aria-invalid={false}
                                                                   aria-label={null}
-                                                                  className=""
+                                                                  className="pf-c-form-control"
+                                                                  disabled={false}
                                                                   formOptions={
                                                                     Object {
                                                                       "batch": [Function],
@@ -2098,86 +2000,22 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                                     }
                                                                   }
                                                                   id="foo-field"
-                                                                  innerRef={null}
-                                                                  isDisabled={false}
-                                                                  isReadOnly={false}
-                                                                  isRequired={false}
-                                                                  isValid={true}
                                                                   name="foo-field"
                                                                   onBlur={[Function]}
                                                                   onChange={[Function]}
                                                                   onFocus={[Function]}
+                                                                  readOnly={false}
+                                                                  required={false}
                                                                   type="text"
                                                                   validate={[Function]}
-                                                                  validated="default"
                                                                   value=""
-                                                                >
-                                                                  <input
-                                                                    FieldProvider={[Function]}
-                                                                    aria-invalid={false}
-                                                                    aria-label={null}
-                                                                    className="pf-c-form-control"
-                                                                    disabled={false}
-                                                                    formOptions={
-                                                                      Object {
-                                                                        "batch": [Function],
-                                                                        "blur": [Function],
-                                                                        "change": [Function],
-                                                                        "clearOnUnmount": false,
-                                                                        "clearedValue": undefined,
-                                                                        "concat": [Function],
-                                                                        "destroyOnUnregister": false,
-                                                                        "focus": [Function],
-                                                                        "getFieldState": [Function],
-                                                                        "getRegisteredFields": [Function],
-                                                                        "getState": [Function],
-                                                                        "handleSubmit": [Function],
-                                                                        "initialize": [Function],
-                                                                        "insert": [Function],
-                                                                        "isValidationPaused": [Function],
-                                                                        "move": [Function],
-                                                                        "onCancel": [MockFunction],
-                                                                        "onReset": undefined,
-                                                                        "onSubmit": [MockFunction],
-                                                                        "pauseValidation": [Function],
-                                                                        "pop": [Function],
-                                                                        "pristine": true,
-                                                                        "push": [Function],
-                                                                        "registerField": [Function],
-                                                                        "remove": [Function],
-                                                                        "removeBatch": [Function],
-                                                                        "renderForm": [Function],
-                                                                        "reset": [Function],
-                                                                        "resetFieldState": [Function],
-                                                                        "resumeValidation": [Function],
-                                                                        "setConfig": [Function],
-                                                                        "shift": [Function],
-                                                                        "submit": [Function],
-                                                                        "subscribe": [Function],
-                                                                        "swap": [Function],
-                                                                        "unshift": [Function],
-                                                                        "update": [Function],
-                                                                        "valid": true,
-                                                                      }
-                                                                    }
-                                                                    id="foo-field"
-                                                                    name="foo-field"
-                                                                    onBlur={[Function]}
-                                                                    onChange={[Function]}
-                                                                    onFocus={[Function]}
-                                                                    readOnly={false}
-                                                                    required={false}
-                                                                    type="text"
-                                                                    validate={[Function]}
-                                                                    value=""
-                                                                  />
-                                                                </TextInputBase>
-                                                              </ForwardRef>
-                                                            </div>
-                                                          </FormGroup>
+                                                                />
+                                                              </TextInputBase>
+                                                            </ForwardRef>
+                                                          </div>
                                                         </FormGroup>
-                                                      </TextField>
-                                                    </FieldProvider>
+                                                      </FormGroup>
+                                                    </TextField>
                                                   </FieldWrapper>
                                                 </FormFieldHideWrapper>
                                               </FormConditionWrapper>

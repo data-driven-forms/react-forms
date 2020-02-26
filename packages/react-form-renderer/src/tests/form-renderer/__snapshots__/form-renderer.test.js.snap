@@ -113,105 +113,24 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 ]
               }
             >
-              <FieldProvider
+              <TextField
                 FieldProvider={[Function]}
-                component={[Function]}
-                formOptions={Object {}}
                 name="component1"
                 validate={[Function]}
               >
-                <Component
-                  FieldProvider={[Function]}
-                  formOptions={
-                    Object {
-                      "batch": [Function],
-                      "blur": [Function],
-                      "change": [Function],
-                      "clearOnUnmount": false,
-                      "clearedValue": undefined,
-                      "concat": [Function],
-                      "destroyOnUnregister": false,
-                      "focus": [Function],
-                      "getFieldState": [Function],
-                      "getRegisteredFields": [Function],
-                      "getState": [Function],
-                      "handleSubmit": [Function],
-                      "initialize": [Function],
-                      "insert": [Function],
-                      "isValidationPaused": [Function],
-                      "move": [Function],
-                      "onCancel": undefined,
-                      "onReset": undefined,
-                      "onSubmit": [MockFunction],
-                      "pauseValidation": [Function],
-                      "pop": [Function],
-                      "pristine": true,
-                      "push": [Function],
-                      "registerField": [Function],
-                      "remove": [Function],
-                      "removeBatch": [Function],
-                      "renderForm": [Function],
-                      "reset": [Function],
-                      "resetFieldState": [Function],
-                      "resumeValidation": [Function],
-                      "setConfig": [Function],
-                      "shift": [Function],
-                      "submit": [Function],
-                      "subscribe": [Function],
-                      "swap": [Function],
-                      "unshift": [Function],
-                      "update": [Function],
-                      "valid": true,
-                    }
-                  }
-                  input={
-                    Object {
-                      "checked": undefined,
-                      "name": "component1",
-                      "onBlur": [Function],
-                      "onChange": [Function],
-                      "onFocus": [Function],
-                      "value": "",
-                    }
-                  }
-                  meta={
-                    Object {
-                      "active": false,
-                      "data": Object {},
-                      "dirty": false,
-                      "dirtySinceLastSubmit": false,
-                      "error": undefined,
-                      "initial": undefined,
-                      "invalid": false,
-                      "length": undefined,
-                      "modified": false,
-                      "pristine": true,
-                      "submitError": undefined,
-                      "submitFailed": false,
-                      "submitSucceeded": false,
-                      "submitting": false,
-                      "touched": false,
-                      "valid": true,
-                      "validating": false,
-                      "visited": false,
-                    }
-                  }
-                  validate={[Function]}
+                <div
+                  className="nested-item"
                 >
-                  <div
-                    className="nested-item"
-                  >
-                    <input
-                      id="component1"
-                      name="component1"
-                      onBlur={[Function]}
-                      onChange={[Function]}
-                      onFocus={[Function]}
-                      value=""
-                    />
-                  </div>
-                </Component>
-              </FieldProvider>
+                  <input
+                    id="component1"
+                    name="component1"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    value=""
+                  />
+                </div>
+              </TextField>
             </FieldWrapper>
           </FormFieldHideWrapper>
         </FormConditionWrapper>
@@ -229,98 +148,17 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 ]
               }
             >
-              <FieldProvider
+              <Component
                 FieldProvider={[Function]}
-                component={[Function]}
-                formOptions={Object {}}
                 name="secret"
                 validate={[Function]}
               >
-                <Component
-                  FieldProvider={[Function]}
-                  formOptions={
-                    Object {
-                      "batch": [Function],
-                      "blur": [Function],
-                      "change": [Function],
-                      "clearOnUnmount": false,
-                      "clearedValue": undefined,
-                      "concat": [Function],
-                      "destroyOnUnregister": false,
-                      "focus": [Function],
-                      "getFieldState": [Function],
-                      "getRegisteredFields": [Function],
-                      "getState": [Function],
-                      "handleSubmit": [Function],
-                      "initialize": [Function],
-                      "insert": [Function],
-                      "isValidationPaused": [Function],
-                      "move": [Function],
-                      "onCancel": undefined,
-                      "onReset": undefined,
-                      "onSubmit": [MockFunction],
-                      "pauseValidation": [Function],
-                      "pop": [Function],
-                      "pristine": true,
-                      "push": [Function],
-                      "registerField": [Function],
-                      "remove": [Function],
-                      "removeBatch": [Function],
-                      "renderForm": [Function],
-                      "reset": [Function],
-                      "resetFieldState": [Function],
-                      "resumeValidation": [Function],
-                      "setConfig": [Function],
-                      "shift": [Function],
-                      "submit": [Function],
-                      "subscribe": [Function],
-                      "swap": [Function],
-                      "unshift": [Function],
-                      "update": [Function],
-                      "valid": true,
-                    }
-                  }
-                  input={
-                    Object {
-                      "checked": undefined,
-                      "name": "secret",
-                      "onBlur": [Function],
-                      "onChange": [Function],
-                      "onFocus": [Function],
-                      "value": "",
-                    }
-                  }
-                  meta={
-                    Object {
-                      "active": false,
-                      "data": Object {},
-                      "dirty": false,
-                      "dirtySinceLastSubmit": false,
-                      "error": undefined,
-                      "initial": undefined,
-                      "invalid": false,
-                      "length": undefined,
-                      "modified": false,
-                      "pristine": true,
-                      "submitError": undefined,
-                      "submitFailed": false,
-                      "submitSucceeded": false,
-                      "submitting": false,
-                      "touched": false,
-                      "valid": true,
-                      "validating": false,
-                      "visited": false,
-                    }
-                  }
-                  validate={[Function]}
+                <div
+                  className="nested-item"
                 >
-                  <div
-                    className="nested-item"
-                  >
-                    Select field
-                  </div>
-                </Component>
-              </FieldProvider>
+                  Select field
+                </div>
+              </Component>
             </FieldWrapper>
           </FormFieldHideWrapper>
         </FormConditionWrapper>
@@ -472,107 +310,25 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                 ]
               }
             >
-              <FieldProvider
+              <TextField
                 FieldProvider={[Function]}
-                component={[Function]}
-                formOptions={Object {}}
                 label="Visible"
                 name="visible"
                 validate={[Function]}
               >
-                <Component
-                  FieldProvider={[Function]}
-                  formOptions={
-                    Object {
-                      "batch": [Function],
-                      "blur": [Function],
-                      "change": [Function],
-                      "clearOnUnmount": false,
-                      "clearedValue": undefined,
-                      "concat": [Function],
-                      "destroyOnUnregister": false,
-                      "focus": [Function],
-                      "getFieldState": [Function],
-                      "getRegisteredFields": [Function],
-                      "getState": [Function],
-                      "handleSubmit": [Function],
-                      "initialize": [Function],
-                      "insert": [Function],
-                      "isValidationPaused": [Function],
-                      "move": [Function],
-                      "onCancel": undefined,
-                      "onReset": undefined,
-                      "onSubmit": [MockFunction],
-                      "pauseValidation": [Function],
-                      "pop": [Function],
-                      "pristine": true,
-                      "push": [Function],
-                      "registerField": [Function],
-                      "remove": [Function],
-                      "removeBatch": [Function],
-                      "renderForm": [Function],
-                      "reset": [Function],
-                      "resetFieldState": [Function],
-                      "resumeValidation": [Function],
-                      "setConfig": [Function],
-                      "shift": [Function],
-                      "submit": [Function],
-                      "subscribe": [Function],
-                      "swap": [Function],
-                      "unshift": [Function],
-                      "update": [Function],
-                      "valid": true,
-                    }
-                  }
-                  input={
-                    Object {
-                      "checked": undefined,
-                      "name": "visible",
-                      "onBlur": [Function],
-                      "onChange": [Function],
-                      "onFocus": [Function],
-                      "value": "",
-                    }
-                  }
-                  label="Visible"
-                  meta={
-                    Object {
-                      "active": false,
-                      "data": Object {},
-                      "dirty": false,
-                      "dirtySinceLastSubmit": false,
-                      "error": undefined,
-                      "initial": undefined,
-                      "invalid": false,
-                      "length": undefined,
-                      "modified": false,
-                      "pristine": true,
-                      "submitError": undefined,
-                      "submitFailed": false,
-                      "submitSucceeded": false,
-                      "submitting": false,
-                      "touched": false,
-                      "valid": true,
-                      "validating": false,
-                      "visited": false,
-                    }
-                  }
-                  validate={[Function]}
+                <div
+                  className="nested-item"
                 >
-                  <div
-                    className="nested-item"
-                  >
-                    <input
-                      id="visible"
-                      name="visible"
-                      onBlur={[Function]}
-                      onChange={[Function]}
-                      onFocus={[Function]}
-                      value=""
-                    />
-                  </div>
-                </Component>
-              </FieldProvider>
+                  <input
+                    id="visible"
+                    name="visible"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    value=""
+                  />
+                </div>
+              </TextField>
             </FieldWrapper>
           </FormFieldHideWrapper>
         </FormConditionWrapper>
@@ -594,107 +350,25 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                   ]
                 }
               >
-                <FieldProvider
+                <TextField
                   FieldProvider={[Function]}
-                  component={[Function]}
-                  formOptions={Object {}}
                   label="Hidden"
                   name="hidden"
                   validate={[Function]}
                 >
-                  <Component
-                    FieldProvider={[Function]}
-                    formOptions={
-                      Object {
-                        "batch": [Function],
-                        "blur": [Function],
-                        "change": [Function],
-                        "clearOnUnmount": false,
-                        "clearedValue": undefined,
-                        "concat": [Function],
-                        "destroyOnUnregister": false,
-                        "focus": [Function],
-                        "getFieldState": [Function],
-                        "getRegisteredFields": [Function],
-                        "getState": [Function],
-                        "handleSubmit": [Function],
-                        "initialize": [Function],
-                        "insert": [Function],
-                        "isValidationPaused": [Function],
-                        "move": [Function],
-                        "onCancel": undefined,
-                        "onReset": undefined,
-                        "onSubmit": [MockFunction],
-                        "pauseValidation": [Function],
-                        "pop": [Function],
-                        "pristine": true,
-                        "push": [Function],
-                        "registerField": [Function],
-                        "remove": [Function],
-                        "removeBatch": [Function],
-                        "renderForm": [Function],
-                        "reset": [Function],
-                        "resetFieldState": [Function],
-                        "resumeValidation": [Function],
-                        "setConfig": [Function],
-                        "shift": [Function],
-                        "submit": [Function],
-                        "subscribe": [Function],
-                        "swap": [Function],
-                        "unshift": [Function],
-                        "update": [Function],
-                        "valid": true,
-                      }
-                    }
-                    input={
-                      Object {
-                        "checked": undefined,
-                        "name": "hidden",
-                        "onBlur": [Function],
-                        "onChange": [Function],
-                        "onFocus": [Function],
-                        "value": "",
-                      }
-                    }
-                    label="Hidden"
-                    meta={
-                      Object {
-                        "active": false,
-                        "data": Object {},
-                        "dirty": false,
-                        "dirtySinceLastSubmit": false,
-                        "error": undefined,
-                        "initial": undefined,
-                        "invalid": false,
-                        "length": undefined,
-                        "modified": false,
-                        "pristine": true,
-                        "submitError": undefined,
-                        "submitFailed": false,
-                        "submitSucceeded": false,
-                        "submitting": false,
-                        "touched": false,
-                        "valid": true,
-                        "validating": false,
-                        "visited": false,
-                      }
-                    }
-                    validate={[Function]}
+                  <div
+                    className="nested-item"
                   >
-                    <div
-                      className="nested-item"
-                    >
-                      <input
-                        id="hidden"
-                        name="hidden"
-                        onBlur={[Function]}
-                        onChange={[Function]}
-                        onFocus={[Function]}
-                        value=""
-                      />
-                    </div>
-                  </Component>
-                </FieldProvider>
+                    <input
+                      id="hidden"
+                      name="hidden"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      value=""
+                    />
+                  </div>
+                </TextField>
               </FieldWrapper>
             </div>
           </FormFieldHideWrapper>

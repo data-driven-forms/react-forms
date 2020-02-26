@@ -1,9 +1,11 @@
 import React from 'react';
-import FormGroup from '../common/form-group';
 import { TextInput } from '@patternfly/react-core/dist/js/components/TextInput/TextInput';
 import PropTypes from 'prop-types';
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+import FormGroup from '../common/form-group';
 
-const DatePicker = ({ label, isRequired, helperText, meta, description, hideLabel, input, isReadOnly, isDisabled, id, ...rest }) => {
+const DatePicker = (props) => {
+  const { label, isRequired, helperText, meta, description, hideLabel, input, isReadOnly, isDisabled, id, ...rest } = useFieldApi(props);
   return (
     <FormGroup
       label={label}

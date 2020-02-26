@@ -47,7 +47,6 @@ exports[`renderForm function #condition should render condition field only if co
           >
             <FieldProvider
               component={[Function]}
-              formOptions={Object {}}
               name="a"
               validate={[Function]}
             >
@@ -126,7 +125,6 @@ exports[`renderForm function #condition should render condition field only if co
           >
             <FieldProvider
               component={[Function]}
-              formOptions={Object {}}
               name="c"
               validate={[Function]}
             >
@@ -272,7 +270,6 @@ exports[`renderForm function #condition should render condition field only if on
           >
             <FieldProvider
               component={[Function]}
-              formOptions={Object {}}
               name="a"
               validate={[Function]}
             >
@@ -351,7 +348,6 @@ exports[`renderForm function #condition should render condition field only if on
           >
             <FieldProvider
               component={[Function]}
-              formOptions={Object {}}
               name="b"
               validate={[Function]}
             >
@@ -478,98 +474,18 @@ exports[`renderForm function should render single field from defined componentTy
             ]
           }
         >
-          <FieldProvider
+          <Component
             FieldProvider={[Function]}
-            component={[Function]}
-            formOptions={Object {}}
             name="foo"
             validate={[Function]}
           >
-            <Component
-              FieldProvider={[Function]}
-              formOptions={
-                Object {
-                  "renderForm": [Function],
-                }
-              }
-              input={
-                Object {
-                  "checked": undefined,
-                  "name": "foo",
-                  "onBlur": [Function],
-                  "onChange": [Function],
-                  "onFocus": [Function],
-                  "value": "",
-                }
-              }
-              meta={
-                Object {
-                  "active": false,
-                  "data": Object {},
-                  "dirty": false,
-                  "dirtySinceLastSubmit": false,
-                  "error": undefined,
-                  "initial": undefined,
-                  "invalid": false,
-                  "length": undefined,
-                  "modified": false,
-                  "pristine": true,
-                  "submitError": undefined,
-                  "submitFailed": false,
-                  "submitSucceeded": false,
-                  "submitting": false,
-                  "touched": false,
-                  "valid": true,
-                  "validating": false,
-                  "visited": false,
-                }
-              }
+            <div
+              name="foo"
               validate={[Function]}
             >
-              <div
-                formOptions={
-                  Object {
-                    "renderForm": [Function],
-                  }
-                }
-                input={
-                  Object {
-                    "checked": undefined,
-                    "name": "foo",
-                    "onBlur": [Function],
-                    "onChange": [Function],
-                    "onFocus": [Function],
-                    "value": "",
-                  }
-                }
-                meta={
-                  Object {
-                    "active": false,
-                    "data": Object {},
-                    "dirty": false,
-                    "dirtySinceLastSubmit": false,
-                    "error": undefined,
-                    "initial": undefined,
-                    "invalid": false,
-                    "length": undefined,
-                    "modified": false,
-                    "pristine": true,
-                    "submitError": undefined,
-                    "submitFailed": false,
-                    "submitSucceeded": false,
-                    "submitting": false,
-                    "touched": false,
-                    "valid": true,
-                    "validating": false,
-                    "visited": false,
-                  }
-                }
-                validate={[Function]}
-              >
-                TextField
-              </div>
-            </Component>
-          </FieldProvider>
+              TextField
+            </div>
+          </Component>
         </FieldWrapper>
       </FormFieldHideWrapper>
     </FormConditionWrapper>
@@ -624,7 +540,6 @@ exports[`renderForm function should render single field from with custom compone
           >
             <FieldProvider
               component={[Function]}
-              formOptions={Object {}}
               name="foo"
               validate={[Function]}
             >

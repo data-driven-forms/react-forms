@@ -12,6 +12,7 @@ import TimePicker from '../components/time-picker';
 import Switch from '../components/switch';
 
 import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
+import RenderWithProvider from '../../../../__mocks__/with-provider';
 
 describe('FormFields', () => {
   let FieldProvider;
@@ -28,16 +29,9 @@ describe('FormFields', () => {
   });
 
   const props = {
-    input: {
-      name: 'Name of the field',
-      value: ''
-    },
+    name: 'Name of the field',
     id: 'someIdKey',
-    dataType: 'someDataType',
-    meta: {
-      error: false,
-      touched: false
-    }
+    dataType: 'someDataType'
   };
   const propsWithOptions = {
     ...props,
@@ -58,42 +52,74 @@ describe('FormFields', () => {
   };
 
   it('should render TextField correctly', () => {
-    const wrapper = mount(<TextField {...props} />);
+    const wrapper = mount(
+      <RenderWithProvider>
+        <TextField {...props} />
+      </RenderWithProvider>
+    );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render TextField with description correctly', () => {
-    const wrapper = mount(<TextField {...props} description="This is description" />);
+    const wrapper = mount(
+      <RenderWithProvider>
+        <TextField {...props} description="This is description" />
+      </RenderWithProvider>
+    );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render TextField without id correctly', () => {
-    const wrapper = mount(<TextField {...props} id={undefined} />);
+    const wrapper = mount(
+      <RenderWithProvider>
+        <TextField {...props} id={undefined} />
+      </RenderWithProvider>
+    );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render touched TextField id correctly', () => {
-    const wrapper = mount(<TextField {...props} meta={{ touched: true, error: false }} />);
+    const wrapper = mount(
+      <RenderWithProvider>
+        <TextField {...props} meta={{ touched: true, error: false }} />
+      </RenderWithProvider>
+    );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render Checkbox correctly', () => {
-    const wrapper = mount(<Checkbox {...props} />);
+    const wrapper = mount(
+      <RenderWithProvider>
+        <Checkbox {...props} />
+      </RenderWithProvider>
+    );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it.skip('should render Checkbox with options correctly', () => {
-    const wrapper = mount(<Checkbox {...propsWithOptions} FieldProvider={FieldProvider} />);
+    const wrapper = mount(
+      <RenderWithProvider>
+        <Checkbox {...propsWithOptions} />
+      </RenderWithProvider>
+    );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it.skip('should render disabled Checkbox with options correctly', () => {
-    const wrapper = mount(<Checkbox {...propsWithOptions} FieldProvider={FieldProvider} disabled={true} />);
+    const wrapper = mount(
+      <RenderWithProvider>
+        <Checkbox {...propsWithOptions} disabled={true} />
+      </RenderWithProvider>
+    );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it.skip('Multiple checkbox - should call on change correctly', () => {
-    const wrapper = mount(<Checkbox {...propsWithOptions} FieldProvider={FieldProvider} />);
+    const wrapper = mount(
+      <RenderWithProvider>
+        <Checkbox {...propsWithOptions} />
+      </RenderWithProvider>
+    );
 
     expect(onChangeSpy).not.toHaveBeenCalled();
 
@@ -107,74 +133,110 @@ describe('FormFields', () => {
   });
 
   it('should render TextArea correctly', () => {
-    const wrapper = mount(<TextArea {...props} />);
+    const wrapper = mount(
+      <RenderWithProvider>
+        <TextArea {...props} />
+      </RenderWithProvider>
+    );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render disabled TextArea correctly', () => {
-    const wrapper = mount(<TextArea {...props} isDisabled={true} />);
+    const wrapper = mount(
+      <RenderWithProvider>
+        <TextArea {...props} isDisabled={true} />
+      </RenderWithProvider>
+    );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render Radio correctly', () => {
-    const wrapper = mount(<Radio {...propsWithOptions} FieldProvider={FieldProvider} />);
+    const wrapper = mount(
+      <RenderWithProvider>
+        <Radio {...propsWithOptions} />
+      </RenderWithProvider>
+    );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render disabled Radio correctly', () => {
-    const wrapper = mount(<Radio {...propsWithOptions} FieldProvider={FieldProvider} disabled={true} />);
+    const wrapper = mount(
+      <RenderWithProvider>
+        <Radio {...propsWithOptions} disabled={true} />
+      </RenderWithProvider>
+    );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it('radio - should call fieldProvider onChange correctly', () => {
-    const wrapper = mount(<Radio {...propsWithOptions} FieldProvider={FieldProvider} disabled={true} />);
-
-    wrapper
-      .find(Pf4Radio)
-      .first()
-      .props()
-      .onChange();
-
-    expect(onChangeSpy).toHaveBeenCalled();
-  });
-
   it('should render Select correctly', () => {
-    const wrapper = shallow(<Select {...propsWithOptions} />).dive();
+    const wrapper = shallow(
+      <RenderWithProvider>
+        <Select {...propsWithOptions} />
+      </RenderWithProvider>
+    ).dive();
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render disabled Select correctly', () => {
-    const wrapper = shallow(<Select {...propsWithOptions} isDisabled={true} />).dive();
+    const wrapper = shallow(
+      <RenderWithProvider>
+        <Select {...propsWithOptions} isDisabled={true} />
+      </RenderWithProvider>
+    ).dive();
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render DatePicker correctly', () => {
-    const wrapper = mount(<DatePicker {...props} />);
+    const wrapper = mount(
+      <RenderWithProvider>
+        <DatePicker {...props} />
+      </RenderWithProvider>
+    );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render TimePicker correctly', () => {
-    const wrapper = mount(<TimePicker {...props} />);
+    const wrapper = mount(
+      <RenderWithProvider>
+        <TimePicker {...props} />
+      </RenderWithProvider>
+    );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render Switch correctly', () => {
-    const wrapper = mount(<Switch {...props} FieldProvider={FieldProvider} />);
+    const wrapper = mount(
+      <RenderWithProvider>
+        <Switch {...props} />
+      </RenderWithProvider>
+    );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render disabled Switch correctly', () => {
-    const wrapper = mount(<Switch {...props} isDisabled={true} FieldProvider={FieldProvider} />);
+    const wrapper = mount(
+      <RenderWithProvider>
+        <Switch {...props} isDisabled={true} />
+      </RenderWithProvider>
+    );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render disabled Switch correctly', () => {
-    const wrapper = mount(<Switch {...props} isDisabled={true} FieldProvider={FieldProvider} />);
+    const wrapper = mount(
+      <RenderWithProvider>
+        <Switch {...props} isDisabled={true} />
+      </RenderWithProvider>
+    );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render with onText/OffText Switch correctly', () => {
-    const wrapper = mount(<Switch {...props} onText="I am on" offText="Turned off" FieldProvider={FieldProvider} />);
+    const wrapper = mount(
+      <RenderWithProvider>
+        <Switch {...props} onText="I am on" offText="Turned off" />
+      </RenderWithProvider>
+    );
 
     expect(
       wrapper

@@ -10,21 +10,23 @@ import { meta, input } from '@data-driven-forms/common/src/prop-types-templates'
 
 import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
-export const SwitchInternal = ({
-  input,
-  isReadOnly,
-  isDisabled,
-  isRequired,
-  label,
-  helperText,
-  description,
-  validateOnMount,
-  meta,
-  onText,
-  offText,
-  ...rest
-}) => {
+export const Switch = (props) => {
+  const {
+    input,
+    isReadOnly,
+    isDisabled,
+    isRequired,
+    label,
+    helperText,
+    description,
+    validateOnMount,
+    meta,
+    onText,
+    offText,
+    ...rest
+  } = useFieldApi({ ...props, type: 'checkbox' });
   const invalid = validationError(meta, validateOnMount);
   const text = invalid || helperText || description;
 
@@ -39,11 +41,10 @@ export const SwitchInternal = ({
                 {...input}
                 readOnly={isReadOnly}
                 disabled={isDisabled || isReadOnly}
-                checked={!!input.value}
                 onChange={({ target: { checked } }) => input.onChange(checked)}
               />
             }
-            label={<FormLabel>{input.value ? onText || label : offText || label}</FormLabel>}
+            label={<FormLabel>{input.checked ? onText || label : offText || label}</FormLabel>}
           />
           {(invalid || text) && <FormHelperText>{invalid || text}</FormHelperText>}
         </FormGroup>
@@ -52,7 +53,7 @@ export const SwitchInternal = ({
   );
 };
 
-SwitchInternal.propTypes = {
+Switch.propTypes = {
   input,
   meta,
   isReadOnly: PropTypes.bool,
@@ -64,12 +65,6 @@ SwitchInternal.propTypes = {
   onText: PropTypes.node,
   offText: PropTypes.node,
   description: PropTypes.node
-};
-
-const Switch = ({ FieldProvider, ...props }) => <FieldProvider {...props} component={SwitchInternal} />;
-
-Switch.propTypes = {
-  FieldProvider: PropTypes.any
 };
 
 export default Switch;

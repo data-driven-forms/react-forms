@@ -4,22 +4,26 @@ import PropTypes from 'prop-types';
 import FormGroup from '../common/form-wrapper';
 import DataDrivenSelect from './select/select';
 import { validationError } from '../form-fields/helpers';
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
-const Select = ({ meta, validateOnMount, label, hideLabel, isRequired, helperText, description, placeholder, isDisabled, isReadOnly, ...props }) => (
-  <FormGroup
-    meta={meta}
-    validateOnMount={validateOnMount}
-    label={label}
-    hideLabel={hideLabel}
-    isRequired={isRequired}
-    helperText={helperText}
-    description={description}
-  >
-    <div>
-      <DataDrivenSelect classNamePrefix="ddorg__pf3-component-mapper__select" invalid={validationError(meta, validateOnMount)} {...props} />
-    </div>
-  </FormGroup>
-);
+const Select = (props) => {
+  const { meta, validateOnMount, label, hideLabel, isRequired, helperText, description, ...rest } = useFieldApi(props);
+  return (
+    <FormGroup
+      meta={meta}
+      validateOnMount={validateOnMount}
+      label={label}
+      hideLabel={hideLabel}
+      isRequired={isRequired}
+      helperText={helperText}
+      description={description}
+    >
+      <div>
+        <DataDrivenSelect classNamePrefix="ddorg__pf3-component-mapper__select" invalid={validationError(meta, validateOnMount)} {...rest} />
+      </div>
+    </FormGroup>
+  );
+};
 
 Select.propTypes = {
   meta: PropTypes.object,

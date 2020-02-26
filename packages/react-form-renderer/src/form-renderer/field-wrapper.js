@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { shouldWrapInField } from './helpers';
 import componentTypes from '../components/component-types';
 import FieldProvider from '../components/field-provider';
 import composeValidators from '../components/compose-validators';
@@ -13,33 +12,28 @@ const FieldWrapper = ({ componentType, validate, component, ...rest }) => {
   const componentProps = {
     type: assignSpecialType(componentType),
     FieldProvider,
-    ...rest,
-    component
+    ...rest
   };
   if (shouldAssignFormOptions(componentType)) {
     componentProps.arrayValidator = (value = []) => {
       if (!Array.isArray(value)) {
         return;
       }
-      
+
       const arrayValidator = composeValidators(validate);
       let result = arrayValidator(value && value.length > 0 ? value : undefined);
       if (typeof result === 'function') {
         result = result(value);
       }
-      
+
       return result;
     };
   } else {
     componentProps.validate = composeValidators(validate);
   }
-  
+
   const Component = component;
-  return shouldWrapInField(componentType) ? (
-    <FieldProvider {...componentProps} />
-  ) : (
-    <Component validate={composeValidators(validate)} {...rest} FieldProvider={FieldProvider} />
-  );
+  return <Component validate={composeValidators(validate)} {...componentProps} />;
 };
 
 FieldWrapper.propTypes = {

@@ -9,7 +9,17 @@ import FormRenderer from '../../components/form-renderer';
 import validatorTypes from '../../components/validator-types';
 import componentTypes from '../../components/component-types';
 import formTemplate from '../../../../../__mocks__/mock-form-template';
+import useFieldApi from '../../hooks/use-field-api';
 
+const TextField = (props) => {
+  const { input, meta } = useFieldApi(props);
+  return (
+    <div>
+      <input {...input} />
+      {meta.error && <div id="error" />}
+    </div>
+  );
+};
 
 describe('renderForm function', () => {
   let CustomComponent;
@@ -79,12 +89,7 @@ describe('renderForm function', () => {
         schema={{ fields: formFields }}
         formTemplate={formTemplate}
         formFieldsMapper={{
-          [componentTypes.TEXT_FIELD]: ({ FieldProvider, dataType, meta, input, ...props }) => (
-            <div>
-              <input {...input} />
-              {meta.error && <div id="error" />}
-            </div>
-          )
+          [componentTypes.TEXT_FIELD]: TextField
         }}
       />
     );
@@ -110,12 +115,7 @@ describe('renderForm function', () => {
         schema={{ fields: formFields }}
         formTemplate={formTemplate}
         formFieldsMapper={{
-          [componentTypes.TEXT_FIELD]: ({ FieldProvider, dataType, meta, ...props }) => (
-            <div {...props}>
-              TextField
-              {meta.error && <div id="error" />}
-            </div>
-          )
+          [componentTypes.TEXT_FIELD]: TextField
         }}
       />
     );
@@ -141,7 +141,7 @@ describe('renderForm function', () => {
         schema={{ fields: formFields }}
         formTemplate={formTemplate}
         formFieldsMapper={{
-        [componentTypes.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div { ...props }>TextField</div>,
+        [componentTypes.TEXT_FIELD]: TextField,
       }} />
     );
 
@@ -166,7 +166,7 @@ describe('renderForm function', () => {
         schema={{ fields: formFields }}
         formTemplate={formTemplate}
         formFieldsMapper={{
-        [componentTypes.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div { ...props }>TextField</div>,
+        [componentTypes.TEXT_FIELD]: TextField,
       }} />
     );
 
@@ -551,13 +551,20 @@ describe('renderForm function', () => {
       }],
     });
 
-    const TextField = ({ input, meta, label, formOptions, helperText, isRequired, dataType, isDisabled, isReadOnly, ...rest }) => (
-      <div>
-        <label>{ label }</label>
-        <input { ...input } { ...rest } />
-        { meta.error && <div><span>{ meta.error }</span></div> }
-      </div>
-    );
+    const TextField = (props) => {
+      const { input, meta, label, formOptions, helperText, isRequired, dataType, isDisabled, isReadOnly, ...rest } = useFieldApi(props);
+      return (
+        <div>
+          <label>{label}</label>
+          <input {...input} {...rest} />
+          {meta.error && (
+            <div>
+              <span>{meta.error}</span>
+            </div>
+          )}
+        </div>
+      );
+    };
 
     it('should clear values after unmount when set on fields', () => {
       const onSubmit = jest.fn()
@@ -565,10 +572,7 @@ describe('renderForm function', () => {
         <FormRenderer
           formTemplate={ formTemplate }
           formFieldsMapper={{
-            'custom-component': ({ FieldProvider, ...props }) => <FieldProvider
-              { ...props }
-              component={ TextField }
-            />,
+            'custom-component': TextField,
           }}
           schema={ formFields(true) }
           onSubmit={ values => onSubmit(values) }
@@ -595,10 +599,7 @@ describe('renderForm function', () => {
         <FormRenderer
           formTemplate={ formTemplate }
           formFieldsMapper={{
-            'custom-component': ({ FieldProvider, ...props }) => <FieldProvider
-              { ...props }
-              component={ TextField }
-            />,
+            'custom-component': TextField
           }}
           schema={ formFields() }
           onSubmit={ values => onSubmit(values) }
@@ -626,10 +627,7 @@ describe('renderForm function', () => {
         <FormRenderer
           formTemplate={ formTemplate }
           formFieldsMapper={{
-            'custom-component': ({ FieldProvider, ...props }) => <FieldProvider
-              { ...props }
-              component={ TextField }
-            />,
+            'custom-component': TextField
           }}
           schema={ formFields() }
           onSubmit={ values => onSubmit(values) }
@@ -656,10 +654,7 @@ describe('renderForm function', () => {
         <FormRenderer
           formTemplate={ formTemplate }
           formFieldsMapper={{
-            'custom-component': ({ FieldProvider, ...props }) => <FieldProvider
-              { ...props }
-              component={ TextField }
-            />,
+            'custom-component': TextField,
           }}
           schema={ formFields(false) }
           onSubmit={ values => onSubmit(values) }
@@ -762,12 +757,6 @@ describe('renderForm function', () => {
         },
       }],
     });
-
-    const TextField = ({ input, meta, formOptions, ...rest }) => (
-      <div>
-        <input { ...input } { ...rest } />
-      </div>
-    );
 
     const updateInput = (wrapper, position, value) => {
       wrapper.find('input').at(position).simulate('change', { target: { value }});
