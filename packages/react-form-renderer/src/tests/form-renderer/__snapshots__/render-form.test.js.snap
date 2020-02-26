@@ -47,7 +47,6 @@ exports[`renderForm function #condition should render condition field only if co
           >
             <FieldProvider
               component={[Function]}
-              formOptions={Object {}}
               name="a"
               validate={[Function]}
             >
@@ -126,7 +125,6 @@ exports[`renderForm function #condition should render condition field only if co
           >
             <FieldProvider
               component={[Function]}
-              formOptions={Object {}}
               name="c"
               validate={[Function]}
             >
@@ -272,7 +270,6 @@ exports[`renderForm function #condition should render condition field only if on
           >
             <FieldProvider
               component={[Function]}
-              formOptions={Object {}}
               name="a"
               validate={[Function]}
             >
@@ -351,7 +348,6 @@ exports[`renderForm function #condition should render condition field only if on
           >
             <FieldProvider
               component={[Function]}
-              formOptions={Object {}}
               name="b"
               validate={[Function]}
             >
@@ -544,7 +540,6 @@ exports[`renderForm function should render single field from with custom compone
           >
             <FieldProvider
               component={[Function]}
-              formOptions={Object {}}
               name="foo"
               validate={[Function]}
             >
