@@ -44,7 +44,7 @@ export const Switch = (props) => {
                 onChange={({ target: { checked } }) => input.onChange(checked)}
               />
             }
-            label={<FormLabel>{input.value ? onText || label : offText || label}</FormLabel>}
+            label={<FormLabel>{input.checked ? onText || label : offText || label}</FormLabel>}
           />
           {(invalid || text) && <FormHelperText>{invalid || text}</FormHelperText>}
         </FormGroup>
