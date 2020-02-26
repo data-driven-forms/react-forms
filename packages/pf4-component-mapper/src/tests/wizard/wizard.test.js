@@ -305,20 +305,11 @@ describe('<Wizard />', () => {
 
     const wrapper = mount(<FormRenderer {...initialProps} onSubmit={onSubmit} initialValues={initialValues} />);
 
+    expect(wrapper.find('.pf-m-current').text()).toEqual('foo-step');
+
     nextButtonClick(wrapper);
 
-    expect(
-      wrapper
-      .find(Wizard)
-      .children()
-      .instance().state.activeStep
-    ).toEqual('2');
-    expect(
-      wrapper
-      .find(Wizard)
-      .children()
-      .instance().state.prevSteps
-    ).toEqual(['1']);
+    expect(wrapper.find('.pf-m-current').text()).toEqual('bar-step');
 
     nextButtonClick(wrapper);
 
