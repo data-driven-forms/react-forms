@@ -15,7 +15,8 @@
     "test:update": "jest -u",
     "release": "semantic-release",
     "codecov": "codecov",
-    "start-demo": "lerna run start --scope=@data-driven-forms/react-render-demo"
+    "start-demo": "lerna run start --scope=@data-driven-forms/react-render-demo",
+    "lint": "yarn eslint ."
   },
   "workspaces": [
     "packages/**"
@@ -42,8 +43,16 @@
     "@semantic-release/npm": "^5.1.4",
     "atob-lite": "^2.0.0",
     "babel-plugin-transform-imports": "^2.0.0",
+    "eslint": "^6.8.0",
+    "eslint-config-i-am-meticulous": "^12.0.0",
     "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-config-react-app": "^5.2.0",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-flowtype": "^4.6.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.18.3",
+    "eslint-plugin-react-hooks": "^2.4.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.8.0",
     "lerna": "^3.13.1",
