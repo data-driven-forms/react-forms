@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useContext } from 'react';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import Grid from '@material-ui/core/Grid';

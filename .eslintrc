@@ -85,6 +85,14 @@
     "wrap-iife": "error",
     "yoda": ["error", "never"],
     "jsx-a11y/href-no-hash": "off",
-    "react/jsx-curly-spacing": "off"
+    "react/jsx-curly-spacing": "off",
+    "no-unused-vars": 1,
+    "react/no-unused-prop-types": 1,
+    "react-hooks/rules-of-hooks": 1,
+    "react/prop-types": 1,
+    "react/no-unescaped-entities": 1,
+    "no-prototype-builtins": 1,
+    "no-mixed-operators": 1,
+    "no-unused-expressions": 1
   }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { componentTypes } from '../src';
 import FieldProvider from '../src/components/field-provider';

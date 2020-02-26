@@ -106,7 +106,7 @@ describe.skip('FieldArray', () => {
     ).toEqual(false);
     expect(
       wrapper
-        .find(CloseIcon)
+      .find(CloseIcon)
       .last()
       .props()
       .className.includes('disabled')

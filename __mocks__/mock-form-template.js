@@ -1,7 +1,9 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react';
 import { useFormApi, FormSpy } from '@data-driven-forms/react-form-renderer';
 import { useFormApi as useFormApiInternal, FormSpy as FormSpyInternal } from '../packages/react-form-renderer/src';
-const path = require('path')
+const path = require('path');
 
 const FormTemplate = ({ schema: { title, label, description }, formFields }) => {
   // When testing inside the renderer package, it cannot import things from itself!

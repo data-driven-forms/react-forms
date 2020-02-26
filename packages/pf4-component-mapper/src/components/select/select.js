@@ -98,7 +98,7 @@ export class Select extends React.Component {
     : () => this.props.noOptionsMessage;
 
   render() {
-    const { selectVariant, loadOptions, loadingMessage, noOptionsMessage, menuIsPortal, ... props } = this.props;
+    const { selectVariant, loadOptions, loadingMessage, noOptionsMessage, menuIsPortal, ...props } = this.props;
     const { isLoading, allOptions } = this.state;
     const Select = selectProvider(selectVariant);
     const isSearchable = selectVariant === 'createable' || props.isSearchable;

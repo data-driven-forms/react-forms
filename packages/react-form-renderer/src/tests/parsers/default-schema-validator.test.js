@@ -7,7 +7,7 @@ describe('Default schema validator', () => {
   let formFieldsMapper;
   beforeEach(() => {
     formFieldsMapper = {
-      foo: props => <div>Component</div>,
+      foo: () => <div>Component</div>,
       invalidComponent: 'baz',
       [componentTypes.TABS]: ({ children }) => <div>{ children }</div>,
     };
@@ -119,7 +119,7 @@ describe('Default schema validator', () => {
   });
 
   it('should not fail if field validate item is a function.', () => {
-    const functionValidator = (value) => 'cosi';
+    const functionValidator = () => 'cosi';
     expect(() => defaultSchemaValidator({ fields: [{
       component: 'foo',
       name: 'foo',

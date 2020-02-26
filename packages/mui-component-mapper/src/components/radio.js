@@ -25,6 +25,8 @@ const Radio = ({ name, ...props }) => {
       <FormControl required={isRequired} error={!!invalid} component="fieldset">
         <FormLabel component="legend">{label}</FormLabel>
         {options.map((option) => {
+          // eslint-diable-line react-hooks/rules-of-hooks
+          // important!!!
           const { input } = useFieldApi({ name, type: 'radio', value: option.value });
           return (
             <FormControlLabel

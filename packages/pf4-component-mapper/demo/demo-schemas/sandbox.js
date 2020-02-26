@@ -272,6 +272,7 @@ const output = {
                   component: components.SELECT_COMPONENT,
                   options: [
                     {
+                      // eslint-disable-next-line max-len
                       label: 'dropdown_list_1 dropdown_list_1 dropdown_list_1 dropdown_list_1 dropdown_list_1 dropdown_list_1 dropdown_list_1 dropdown_list_1 dropdown_list_1 dropdown_list_1 ',
                       value: 'foo',
                     },

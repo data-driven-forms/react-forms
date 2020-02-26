@@ -255,7 +255,7 @@ describe('<SelectField />', () => {
 
       it('should clear the select value', () => {
         const onChange = jest.fn();
-        const wrapper = mount(<SelectField { ...isSearchableProps } isClearable input={{...isSearchableProps, value: 1, onChange }}/>);
+        const wrapper = mount(<SelectField { ...isSearchableProps } isClearable input={{ ...isSearchableProps, value: 1, onChange }}/>);
         wrapper.find(`div.${initialProps.classNamePrefix}-searchebale-clear`).simulate('click');
         expect(onChange).toHaveBeenCalledWith(undefined);
       });

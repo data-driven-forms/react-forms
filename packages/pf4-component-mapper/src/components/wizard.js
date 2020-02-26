@@ -58,14 +58,14 @@ const Wizard = ({
     if (inModal) {
       dispatch({ type: 'setContainer' });
     } else {
-      dispatch({ type: 'finishLoading', payload: { formOptions, fields, predictSteps } });
+      dispatch({ type: 'finishLoading', payload: { formOptions, fields, predictSteps }});
     }
   }, []);
 
   useEffect(() => {
     if (state.container) {
       document.body.appendChild(state.container);
-      dispatch({ type: 'finishLoading', payload: { formOptions, fields, predictSteps } });
+      dispatch({ type: 'finishLoading', payload: { formOptions, fields, predictSteps }});
     }
 
     return () => {
@@ -116,13 +116,13 @@ const Wizard = ({
     />
   );
 
-  const jumpToStep = (index, valid) => dispatch({ type: 'jumpToStep', payload: { index, valid, fields, predictSteps, crossroads, formOptions } });
+  const jumpToStep = (index, valid) => dispatch({ type: 'jumpToStep', payload: { index, valid, fields, predictSteps, crossroads, formOptions }});
 
   const handlePrev = () => jumpToStep(state.activeStepIndex - 1);
 
-  const handleNext = (nextStep) => dispatch({ type: 'handleNext', payload: { nextStep, formOptions, fields, predictSteps } });
+  const handleNext = (nextStep) => dispatch({ type: 'handleNext', payload: { nextStep, formOptions, fields, predictSteps }});
 
-  const setPrevSteps = () => dispatch({ type: 'setPrevSteps', payload: { formOptions, fields, predictSteps } });
+  const setPrevSteps = () => dispatch({ type: 'setPrevSteps', payload: { formOptions, fields, predictSteps }});
 
   const findCurrentStepWrapped = (step) => findCurrentStep(step, fields);
 

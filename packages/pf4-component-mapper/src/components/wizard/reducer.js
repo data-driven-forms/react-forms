@@ -57,12 +57,12 @@ const handleNext = (state, nextStep, formOptions, fields, predictSteps) => {
     maxStepIndex: newActiveIndex > state.maxStepIndex ? newActiveIndex : state.maxStepIndex,
     navSchema: state.isDynamic
       ? createSchema({
-          ...state,
-          predictSteps,
-          fields,
-          formOptions,
-          currentIndex: newActiveIndex
-        })
+        ...state,
+        predictSteps,
+        fields,
+        formOptions,
+        currentIndex: newActiveIndex
+      })
       : state.navSchema
   };
 };
@@ -105,12 +105,12 @@ const jumpToStep = (state, index, valid, fields, predictSteps, crossroads, formO
         ...updatedState,
         navSchema: predictSteps
           ? createSchema({
-              ...updatedState,
-              predictSteps,
-              formOptions,
-              fields,
-              currentIndex: index
-            })
+            ...updatedState,
+            predictSteps,
+            formOptions,
+            fields,
+            currentIndex: index
+          })
           : newState.navSchema.slice(0, index + INDEXING_BY_ZERO),
         prevSteps: newState.prevSteps.slice(0, index),
         maxStepIndex: index

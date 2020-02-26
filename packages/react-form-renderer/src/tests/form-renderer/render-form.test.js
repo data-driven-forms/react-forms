@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import { Form, FormSpy } from 'react-final-form';
+import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import renderForm from '../../form-renderer/render-form';
 import RendererContext from '../../components/renderer-context';
@@ -39,7 +39,7 @@ describe('renderForm function', () => {
   );
 
   beforeEach(() => {
-    const TextField = ({ input }) => <input {...input} id={input.name} />
+    const TextField = ({ input }) => <input {...input} id={input.name} />;
     CustomComponent = ({ FieldProvider, dataType, formOptions, ...props }) => (
       <FieldProvider {...props} component={TextField}/>
     );
@@ -77,7 +77,7 @@ describe('renderForm function', () => {
   });
 
   it('should correctly assign dataType validator if no additional validators given', () => {
-    const onSubmit = jest.fn()
+    const onSubmit = jest.fn();
     const formFields = [{
       component: componentTypes.TEXT_FIELD,
       name: 'foo',
@@ -94,12 +94,12 @@ describe('renderForm function', () => {
       />
     );
     expect(wrapper.find('div#error')).toHaveLength(0);
-    wrapper.find('input[name="foo"]').simulate('change', { target: { value: 1 } });
+    wrapper.find('input[name="foo"]').simulate('change', { target: { value: 1 }});
     expect(wrapper.find('div#error')).toHaveLength(1);
   });
 
   it('should correctly assign required validator with custom message', () => {
-    const onSubmit = jest.fn()
+    const onSubmit = jest.fn();
     const formFields = [{
       component: componentTypes.TEXT_FIELD,
       name: 'foo',
@@ -126,7 +126,7 @@ describe('renderForm function', () => {
 
   it('should correctly assign function validator with custom message and fail', () => {
     const cannotBeOdd = value => value % 2 === 0 ? undefined : 'Odd';
-    const onSubmit = jest.fn()
+    const onSubmit = jest.fn();
     const formFields = [{
       component: componentTypes.TEXT_FIELD,
       name: 'foo',
@@ -141,8 +141,8 @@ describe('renderForm function', () => {
         schema={{ fields: formFields }}
         formTemplate={formTemplate}
         formFieldsMapper={{
-        [componentTypes.TEXT_FIELD]: TextField,
-      }} />
+          [componentTypes.TEXT_FIELD]: TextField,
+        }} />
     );
 
     wrapper.find('form').simulate('submit');
@@ -151,7 +151,7 @@ describe('renderForm function', () => {
 
   it('should correctly assign function validator with custom message and pass', () => {
     const cannotBeEven = value => value % 2 === 0 ? 'Even' : undefined;
-    const onSubmit = jest.fn()
+    const onSubmit = jest.fn();
     const formFields = [{
       component: componentTypes.TEXT_FIELD,
       name: 'foo',
@@ -166,8 +166,8 @@ describe('renderForm function', () => {
         schema={{ fields: formFields }}
         formTemplate={formTemplate}
         formFieldsMapper={{
-        [componentTypes.TEXT_FIELD]: TextField,
-      }} />
+          [componentTypes.TEXT_FIELD]: TextField,
+        }} />
     );
 
     wrapper.find('form').simulate('submit');
@@ -229,7 +229,7 @@ describe('renderForm function', () => {
       );
       expect(wrapper.find(CustomComponent)).toHaveLength(1);
 
-      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'fuzz' } });
+      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'fuzz' }});
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(2);
     });
@@ -257,11 +257,11 @@ describe('renderForm function', () => {
       );
       expect(wrapper.find(CustomComponent)).toHaveLength(2);
 
-      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'kar' } });
+      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'kar' }});
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(2);
 
-      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'fuzz' } });
+      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'fuzz' }});
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(1);
     });
@@ -288,7 +288,7 @@ describe('renderForm function', () => {
       );
       expect(wrapper.find(CustomComponent)).toHaveLength(1);
 
-      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'fuzz' } });
+      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'fuzz' }});
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(2);
     });
@@ -315,11 +315,11 @@ describe('renderForm function', () => {
       );
       expect(wrapper.find(CustomComponent)).toHaveLength(2);
 
-      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'sdsad' } });
+      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'sdsad' }});
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(1);
 
-      wrapper.find('input[name="bar"]').simulate('change', { target: { value: '' } });
+      wrapper.find('input[name="bar"]').simulate('change', { target: { value: '' }});
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(2);
     });
@@ -345,7 +345,7 @@ describe('renderForm function', () => {
       );
       expect(wrapper.find(CustomComponent)).toHaveLength(1);
 
-      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'fuzz' } });
+      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'fuzz' }});
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(2);
     });
@@ -372,11 +372,11 @@ describe('renderForm function', () => {
       );
       expect(wrapper.find(CustomComponent)).toHaveLength(2);
 
-      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'foo fuuzz foo' } });
+      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'foo fuuzz foo' }});
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(2);
 
-      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'fuzz' } });
+      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'fuzz' }});
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(1);
     });
@@ -385,7 +385,7 @@ describe('renderForm function', () => {
       const formFields = [{
         component: 'custom-component',
         name: 'a'
-      },{
+      }, {
         component: 'custom-component',
         name: 'b'
       }, {
@@ -405,13 +405,13 @@ describe('renderForm function', () => {
       );
       expect(toJson(wrapper)).toMatchSnapshot();
 
-      wrapper.find('input[name="a"]').simulate('change', { target: { value: 'x' } });
+      wrapper.find('input[name="a"]').simulate('change', { target: { value: 'x' }});
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(3);
-      wrapper.find('input[name="a"]').simulate('change', { target: { value: undefined } });
+      wrapper.find('input[name="a"]').simulate('change', { target: { value: undefined }});
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(2);
-      wrapper.find('input[name="b"]').simulate('change', { target: { value: 'x' } });
+      wrapper.find('input[name="b"]').simulate('change', { target: { value: 'x' }});
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(3);
     });
@@ -443,17 +443,16 @@ describe('renderForm function', () => {
       );
       expect(toJson(wrapper)).toMatchSnapshot();
 
-      
-      wrapper.find('input[name="a"]').simulate('change', { target: { value: 'x' } });
+      wrapper.find('input[name="a"]').simulate('change', { target: { value: 'x' }});
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(2);
-      wrapper.find('input[name="a"]').simulate('change', { target: { value: undefined } });
+      wrapper.find('input[name="a"]').simulate('change', { target: { value: undefined }});
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(2);
-      wrapper.find('input[name="c"]').simulate('change', { target: { value: 'something fuzz is great' } });
+      wrapper.find('input[name="c"]').simulate('change', { target: { value: 'something fuzz is great' }});
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(2);
-      wrapper.find('input[name="a"]').simulate('change', { target: { value: 'x' } });
+      wrapper.find('input[name="a"]').simulate('change', { target: { value: 'x' }});
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(3);
     });
@@ -481,7 +480,7 @@ describe('renderForm function', () => {
 
       expect(wrapper.find(CustomComponent)).toHaveLength(1);
 
-      wrapper.find('input[name="foo"]').simulate('change', { target: { value: 'fuzz' } });
+      wrapper.find('input[name="foo"]').simulate('change', { target: { value: 'fuzz' }});
       wrapper.update();
 
       expect(wrapper.find(CustomComponent)).toHaveLength(2);
@@ -492,17 +491,17 @@ describe('renderForm function', () => {
         {
           component: 'custom-component',
           name: 'nested.a'
-      }, {
-        component: 'custom-component',
-        name: 'b'
-      }, {
-        component: 'custom-component',
-        name: 'foo',
-        condition: {
-          when: [ 'nested.a', 'b' ],
-          is: 'x',
-        },
-      }];
+        }, {
+          component: 'custom-component',
+          name: 'b'
+        }, {
+          component: 'custom-component',
+          name: 'foo',
+          condition: {
+            when: [ 'nested.a', 'b' ],
+            is: 'x',
+          },
+        }];
       const wrapper = mount(
         <FormRenderer
           formTemplate={formTemplate}
@@ -514,9 +513,9 @@ describe('renderForm function', () => {
       );
 
       expect(wrapper.find(CustomComponent)).toHaveLength(2);
-      wrapper.find('input[name="nested.a"]').simulate('change', { target: { value: 'x' } });
+      wrapper.find('input[name="nested.a"]').simulate('change', { target: { value: 'x' }});
       wrapper.update();
-      wrapper.find('input[name="nested.a"]').simulate('change', { target: { value: undefined } });
+      wrapper.find('input[name="nested.a"]').simulate('change', { target: { value: undefined }});
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(2);
       wrapper.find('input#b').simulate('change', { target: { value: 'x' }});
@@ -567,7 +566,7 @@ describe('renderForm function', () => {
     };
 
     it('should clear values after unmount when set on fields', () => {
-      const onSubmit = jest.fn()
+      const onSubmit = jest.fn();
       const wrapper = mount(
         <FormRenderer
           formTemplate={ formTemplate }
@@ -594,7 +593,7 @@ describe('renderForm function', () => {
     });
 
     it('should clear values after unmount when set on form', () => {
-      const onSubmit = jest.fn()
+      const onSubmit = jest.fn();
       const wrapper = mount(
         <FormRenderer
           formTemplate={ formTemplate }
@@ -622,7 +621,7 @@ describe('renderForm function', () => {
     });
 
     it('should not clear values after unmount when not set', () => {
-      const onSubmit = jest.fn()
+      const onSubmit = jest.fn();
       const wrapper = mount(
         <FormRenderer
           formTemplate={ formTemplate }
@@ -649,7 +648,7 @@ describe('renderForm function', () => {
     });
 
     it('should not clear values after unmount when set in form and not in fields', () => {
-      const onSubmit = jest.fn()
+      const onSubmit = jest.fn();
       const wrapper = mount(
         <FormRenderer
           formTemplate={ formTemplate }
@@ -677,7 +676,7 @@ describe('renderForm function', () => {
     });
 
     it('should not clear values after unmount (default component)', () => {
-      const onSubmit = jest.fn()
+      const onSubmit = jest.fn();
       const wrapper = mount(
         <FormRenderer
           formTemplate={ formTemplate }
@@ -703,7 +702,7 @@ describe('renderForm function', () => {
     });
 
     it('should clear values after unmount (default component)', () => {
-      const onSubmit = jest.fn()
+      const onSubmit = jest.fn();
       const wrapper = mount(
         <FormRenderer
           formTemplate={ formTemplate }
@@ -769,7 +768,7 @@ describe('renderForm function', () => {
 
     it('should reset value after mount when set on fields', () => {
       const SET_INITIALIZE_ON_MOUNT = true;
-      const onSubmit = jest.fn()
+      const onSubmit = jest.fn();
 
       const wrapper = mount(
         <FormRenderer
@@ -809,7 +808,7 @@ describe('renderForm function', () => {
 
     it('should not reset value after mount when set on fields', () => {
       const UNSET_INITIALIZE_ON_MOUNT = false;
-      const onSubmit = jest.fn()
+      const onSubmit = jest.fn();
 
       const wrapper = mount(
         <FormRenderer
@@ -849,7 +848,7 @@ describe('renderForm function', () => {
 
     it('should reset value after mount when set on fields and use initialValue from schema instead of renderer initialValues', () => {
       const SET_INITIALIZE_ON_MOUNT = true;
-      const onSubmit = jest.fn()
+      const onSubmit = jest.fn();
 
       const wrapper = mount(
         <FormRenderer

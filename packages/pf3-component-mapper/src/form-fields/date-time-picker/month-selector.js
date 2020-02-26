@@ -54,6 +54,7 @@ const renderMonthBody = (monthChange, selectedMonth, locale, disabledDays, selec
       { row.map((cell, monthIndex) => (
         <td key={ `months-cell-${cell}` } style={{ width: maxLength + LABEL_PADDING }}>
           <button
+            // eslint-disable-next-line max-len
             className={ `${selectedMonth === index * 3 + monthIndex ? 'selected' : ''} ${checkDisabledMonth(after, before, index * 3 + monthIndex, selectedDay) ? 'disabled' : ''}` }
             disabled={ checkDisabledMonth(after, before, index * 3 + monthIndex, selectedDay) }
             onClick={ () => {

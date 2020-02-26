@@ -11,7 +11,7 @@ import formTemplate from '../components/form-template';
 import formFieldsMapper from '../components/component-mapper';
 import { Radio } from '@material-ui/core';
 
-const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (
+const RendererWrapper = ({ schema = { fields: []}, ...props }) => (
   <FormRenderer onSubmit={jest.fn()} formTemplate={formTemplate()} schema={schema} formFieldsMapper={formFieldsMapper} {...props} />
 );
 
@@ -59,7 +59,7 @@ describe('formFields', () => {
             };
           }
 
-          schema = { fields: [field] };
+          schema = { fields: [field]};
         });
 
         it('renders correctly', () => {
@@ -82,7 +82,7 @@ describe('formFields', () => {
             ...field,
             validate: [{ type: validatorTypes.REQUIRED }]
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [errorField] }} />);
+          const wrapper = mount(<RendererWrapper schema={{ fields: [errorField]}} />);
           wrapper.find('form').simulate('submit');
           expect(
             wrapper
@@ -97,7 +97,7 @@ describe('formFields', () => {
             ...field,
             helperText
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [helpertextField] }} />);
+          const wrapper = mount(<RendererWrapper schema={{ fields: [helpertextField]}} />);
 
           expect(
             wrapper
@@ -112,7 +112,7 @@ describe('formFields', () => {
             ...field,
             description
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [descriptionField] }} />);
+          const wrapper = mount(<RendererWrapper schema={{ fields: [descriptionField]}} />);
 
           expect(
             wrapper
@@ -128,7 +128,7 @@ describe('formFields', () => {
             description,
             helperText
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [descriptionField] }} />);
+          const wrapper = mount(<RendererWrapper schema={{ fields: [descriptionField]}} />);
 
           expect(
             wrapper
@@ -144,7 +144,7 @@ describe('formFields', () => {
             helperText,
             validate: [{ type: validatorTypes.REQUIRED }]
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [errorFields] }} />);
+          const wrapper = mount(<RendererWrapper schema={{ fields: [errorFields]}} />);
           wrapper.find('form').simulate('submit');
 
           expect(
@@ -160,7 +160,7 @@ describe('formFields', () => {
             ...field,
             isRequired: true
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [requiredField] }} />);
+          const wrapper = mount(<RendererWrapper schema={{ fields: [requiredField]}} />);
 
           expect(wrapper.find('.MuiFormLabel-asterisk')).toHaveLength(1);
         });
@@ -170,7 +170,7 @@ describe('formFields', () => {
             ...field,
             isDisabled: true
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField] }} />);
+          const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField]}} />);
 
           if (component === componentTypes.TEXTAREA) {
             expect(
@@ -194,7 +194,7 @@ describe('formFields', () => {
             ...field,
             isReadOnly: true
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField] }} />);
+          const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField]}} />);
 
           if (component === componentTypes.TEXTAREA) {
             expect(

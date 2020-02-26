@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import clsx from 'clsx';
 import Grid from '@material-ui/core/Grid';
@@ -16,7 +18,7 @@ import NpmSvgIcon from './common/npm-svg-icon';
 import TwitterIcon from './common/twitter-svg-icon';
 
 const RepoLink = ({ href, label }) => {
-  const classes = makeStyles(theme => ({
+  const classes = makeStyles(() => ({
     listLink: {
       paddingLeft: 0,
       paddingRight: 0,
@@ -90,7 +92,7 @@ const Footer = ({ open }) => {
               <div>
                 <Typography variant="h5">Contribution</Typography>
                 <Typography>
-                      Please report any bugs, mistakes, suggestions and don't forget to contribute to the data-driven-forms/react-forms repository.
+                      Please report any bugs, mistakes, suggestions and don&apos;t forget to contribute to the data-driven-forms/react-forms repository.
                 </Typography>
               </div>
             </Paper>

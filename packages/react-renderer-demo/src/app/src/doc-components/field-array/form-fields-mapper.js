@@ -2,6 +2,7 @@
 import React, { Fragment, useState } from 'react';
 import FormRender, { componentTypes, useFormApi } from '@data-driven-forms/react-form-renderer';
 
+// eslint-disable-next-line no-unused-vars
 const wrapperStyles = {
   padding: 16,
   borderRadius: 4,
@@ -42,7 +43,7 @@ const ArrayItem = ({
   name,
   remove,
 }) => {
-  const {renderForm} = useFormApi();
+  const { renderForm } = useFormApi();
   const editedFields = fields.map((field) => ({ ...field, name: `${name}.${field.name}` }));
 
   return (

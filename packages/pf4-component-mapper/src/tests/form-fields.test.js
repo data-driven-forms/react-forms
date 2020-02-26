@@ -124,10 +124,10 @@ describe('FormFields', () => {
     expect(onChangeSpy).not.toHaveBeenCalled();
 
     wrapper
-      .find(Pf4Checkbox)
-      .first()
-      .props()
-      .onChange();
+    .find(Pf4Checkbox)
+    .first()
+    .props()
+    .onChange();
 
     expect(onChangeSpy).toHaveBeenCalled();
   });
@@ -240,15 +240,15 @@ describe('FormFields', () => {
 
     expect(
       wrapper
-        .find('.pf-m-on')
-        .text()
-        .includes('I am on')
+      .find('.pf-m-on')
+      .text()
+      .includes('I am on')
     ).toEqual(true);
     expect(
       wrapper
-        .find('.pf-m-on')
-        .text()
-        .includes('Turned off')
+      .find('.pf-m-on')
+      .text()
+      .includes('Turned off')
     ).toEqual(false);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
