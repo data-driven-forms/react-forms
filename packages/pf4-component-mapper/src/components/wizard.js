@@ -7,7 +7,6 @@ import { WizardHeader } from '@patternfly/react-core/dist/js/components/Wizard/W
 import { WizardNav } from '@patternfly/react-core/dist/js/components/Wizard/WizardNav';
 import { Backdrop } from '@patternfly/react-core/dist/js/components/Backdrop/Backdrop';
 import { Bullseye } from '@patternfly/react-core/dist/js/layouts/Bullseye/index';
-import FieldProvider from '@data-driven-forms/react-form-renderer/dist/cjs/field-provider';
 
 import WizardStep from './wizard/wizard-step';
 import './wizard/wizard-styles.scss';
@@ -97,162 +96,10 @@ const Wizard = ({
     return finalObject;
   };
 
-  findCurrentStep = (activeStep) => this.props.fields.find(({ stepKey }) => stepKey === activeStep);
-
-  jumpToStep = (index, valid) => {
-    const clickOnPreviousStep = this.state.prevSteps[index];
-    if (clickOnPreviousStep) {
-      let originalActiveStep;
-      this.setState(
-        (prevState) => {
-          const includeActiveStep = prevState.prevSteps.includes(prevState.activeStep);
-          originalActiveStep = prevState.activeStep;
-
-          return {
-            activeStep: this.state.prevSteps[index],
-            prevSteps: includeActiveStep ? prevState.prevSteps : [...prevState.prevSteps, prevState.activeStep],
-            activeStepIndex: index
-          };
-        },
-        () =>
-          this.setState((prevState) => {
-            const INDEXING_BY_ZERO = 1;
-
-            let newState = {};
-
-            const currentStep = this.findCurrentStep(prevState.prevSteps[index]);
-            const currentStepHasStepMapper = DYNAMIC_WIZARD_TYPES.includes(typeof currentStep.nextStep);
-
-            const hardcodedCrossroads = this.props.crossroads;
-            const dynamicStepShouldDisableNav = prevState.isDynamic && (currentStepHasStepMapper || !this.props.predictSteps);
-
-            const invalidStepShouldDisableNav = valid === false;
-
-            if (dynamicStepShouldDisableNav && !hardcodedCrossroads) {
-              newState = {
-                navSchema: this.props.predictSteps
-                  ? this.createSchema({ currentIndex: index })
-                  : prevState.navSchema.slice(0, index + INDEXING_BY_ZERO),
-                prevSteps: prevState.prevSteps.slice(0, index),
-                maxStepIndex: index
-              };
-            } else if (currentStep.disableForwardJumping) {
-              newState = {
-                prevSteps: prevState.prevSteps.slice(0, index),
-                maxStepIndex: index
-              };
-            } else if (invalidStepShouldDisableNav) {
-              const indexOfCurrentStep = prevState.prevSteps.indexOf(originalActiveStep);
-
-              newState = {
-                ...newState,
-                prevSteps: prevState.prevSteps.slice(0, indexOfCurrentStep + INDEXING_BY_ZERO),
-                maxStepIndex: prevState.prevSteps.slice(0, indexOfCurrentStep + INDEXING_BY_ZERO).length - INDEXING_BY_ZERO
-              };
-            }
-
-            return newState;
-          })
-      );
-    }
-  };
-
-  createSchema = ({ currentIndex, isDynamic }) => {
-    if (typeof isDynamic === 'undefined') {
-      isDynamic = this.state.isDynamic;
-    }
-
-    const { formOptions, predictSteps } = this.props;
-    const { values } = formOptions.getState();
-    let schema = [];
-    let field = this.props.fields.find(({ stepKey }) => stepKey === 1 || stepKey === '1'); // find first wizard step
-    let index = -1;
-
-    while (field) {
-      index += 1;
-      schema = [
-        ...schema,
-        {
-          title: field.title,
-          substepOf: field.substepOf,
-          index,
-          primary: !schema[schema.length - 1] || !field.substepOf || field.substepOf !== schema[schema.length - 1].substepOf
-        }
-      ];
-
-      if (isDynamic && !predictSteps && currentIndex === index) {
-        break;
-      }
-
-      let nextStep = field.nextStep;
-
-      if (typeof field.nextStep === 'object') {
-        nextStep = nextStep.stepMapper[get(values, nextStep.when)];
-      }
-
-      if (typeof field.nextStep === 'function') {
-        nextStep = field.nextStep({ values });
-      }
-
-      if (nextStep) {
-        field = this.props.fields.find(({ stepKey }) => stepKey === nextStep);
-      } else {
-        field = undefined;
-      }
-    }
-
-    return schema;
-  };
-
-  handleSubmitFinal = () =>
-    this.props.formOptions.onSubmit(
-      this.handleSubmit(
-        this.props.formOptions.getState().values,
-        [...this.state.prevSteps, this.state.activeStep],
-        this.props.formOptions.getRegisteredFields
-      ),
-      this.props.formOptions
-    );
-
-  setPrevSteps = () =>
-    this.setState((prevState) => ({
-      navSchema: this.createSchema({ currentIndex: this.state.activeStepIndex }),
-      prevSteps: prevState.prevSteps.slice(0, this.state.activeStepIndex),
-      maxStepIndex: this.state.activeStepIndex
-    }));
-
-  render() {
-    if (this.state.loading) {
-      return null;
-    }
-
-    const {
-      title,
-      description,
-      formOptions,
-      buttonLabels,
-      buttonsClassName,
-      inModal,
-      setFullWidth,
-      setFullHeight,
-      isCompactNav,
-      showTitles,
-      crossroads
-    } = this.props;
-    const { activeStepIndex, navSchema, maxStepIndex, isDynamic } = this.state;
-
-    const currentStep = (
-      <WizardStep
-        {...this.findCurrentStep(this.state.activeStep)}
-        formOptions={{
-          ...formOptions,
-          handleSubmit: this.handleSubmitFinal
-        }}
-        buttonLabels={buttonLabels}
-        FieldProvider={FieldProvider}
-        buttonsClassName={buttonsClassName}
-        showTitles={showTitles}
-      />
+  const handleSubmit = () =>
+    formOptions.onSubmit(
+      prepareValues(formOptions.getState().values, [...state.prevSteps, state.activeStep], formOptions.getRegisteredFields),
+      formOptions
     );
 
   const currentStep = (
