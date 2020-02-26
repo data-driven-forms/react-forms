@@ -1,7 +1,7 @@
 import React from 'react';
 import { componentTypes } from '../src';
 import FieldProvider from '../src/components/field-provider';
-import useFieldProviderApi from '../src/components/useFieldProviderApi';
+import useFieldApi from '../src/components/useFieldApi';
 
 const TextField = (props) => (
   <FieldProvider
@@ -21,7 +21,7 @@ const TextField = (props) => (
 );
 
 const SelectField = (props) => {
-  const { isVisible, input, meta, label, helperText, isRequired, dataType, isDisabled, isReadOnly, options, ...rest } = useFieldProviderApi(props);
+  const { isVisible, input, meta, label, helperText, isRequired, dataType, isDisabled, isReadOnly, options, ...rest } = useFieldApi(props);
   return (
     <div>
       <label>{label} &nbsp;</label>

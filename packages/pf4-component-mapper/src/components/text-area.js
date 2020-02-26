@@ -1,11 +1,11 @@
 import React from 'react';
 import { TextArea as Pf4TextArea } from '@patternfly/react-core/dist/js/components/TextArea/TextArea';
-import { useFieldProviderApi } from '@data-driven-forms/react-form-renderer';
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import PropTypes from 'prop-types';
 import FormGroup from '../common/form-group';
 
 const TextArea = (props) => {
-  const { label, isRequired, helperText, meta, description, hideLabel, input, isReadOnly, isDisabled, id, ...rest } = useFieldProviderApi(props);
+  const { label, isRequired, helperText, meta, description, hideLabel, input, isReadOnly, isDisabled, id, ...rest } = useFieldApi(props);
   return (
     <FormGroup
       label={label}

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 import FormGroup from '../common/form-wrapper';
 import { DateTimePicker } from '../form-fields/date-time-picker/date-time-picker';
-import { useFieldProviderApi } from '@data-driven-forms/react-form-renderer';
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const DatePicker = (props) => {
-  const { meta, validateOnMount, label, hideLabel, isRequired, helperText, description, input, ...rest } = useFieldProviderApi(props);
+  const { meta, validateOnMount, label, hideLabel, isRequired, helperText, description, input, ...rest } = useFieldApi(props);
   return (
     <FormGroup
       meta={meta}

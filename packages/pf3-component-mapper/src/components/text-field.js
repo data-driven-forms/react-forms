@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import FormControl from 'patternfly-react/dist/js/components/Form/FormControl';
 import FormGroup from '../common/form-wrapper';
-import { useFieldProviderApi } from '@data-driven-forms/react-form-renderer';
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const TextField = (props) => {
   const {
@@ -19,7 +19,7 @@ const TextField = (props) => {
     isDisabled,
     isReadOnly,
     ...rest
-  } = useFieldProviderApi(props);
+  } = useFieldApi(props);
   return (
     <FormGroup
       meta={meta}

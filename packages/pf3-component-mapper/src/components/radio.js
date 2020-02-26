@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import FormGroup from '../common/form-wrapper';
-import { useFieldProviderApi } from '@data-driven-forms/react-form-renderer';
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import { Radio as Pf3Radio } from 'patternfly-react';
 
 const Radio = ({ name, isRequired, isDisabled, isReadOnly, validateOnMount, helperText, label, description, hideLabel, options, ...props }) => {
-  const { meta } = useFieldProviderApi({ name, type: 'radio' });
+  const { meta } = useFieldApi({ name, type: 'radio' });
   return (
     <FormGroup
       meta={meta}
@@ -18,7 +18,7 @@ const Radio = ({ name, isRequired, isDisabled, isReadOnly, validateOnMount, help
       description={description}
     >
       {options.map((option) => {
-        const { input } = useFieldProviderApi({ name, type: 'radio', value: option.value });
+        const { input } = useFieldApi({ name, type: 'radio', value: option.value });
         return (
           <Pf3Radio
             key={`${name}-${option.value}`}

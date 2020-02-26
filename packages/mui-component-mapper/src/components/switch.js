@@ -10,7 +10,7 @@ import { meta, input } from '@data-driven-forms/common/src/prop-types-templates'
 
 import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
-import { useFieldProviderApi } from '@data-driven-forms/react-form-renderer';
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 export const Switch = (props) => {
   const {
@@ -26,7 +26,7 @@ export const Switch = (props) => {
     onText,
     offText,
     ...rest
-  } = useFieldProviderApi({ ...props, type: 'checkbox' });
+  } = useFieldApi({ ...props, type: 'checkbox' });
   const invalid = validationError(meta, validateOnMount);
   const text = invalid || helperText || description;
 

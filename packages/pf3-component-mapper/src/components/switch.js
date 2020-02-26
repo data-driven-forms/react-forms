@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import SwitchField from '../form-fields/switch-field';
 
 import FormGroup from '../common/form-wrapper';
-import { useFieldProviderApi } from '@data-driven-forms/react-form-renderer';
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const Switch = (props) => {
   const {
@@ -18,7 +18,7 @@ const Switch = (props) => {
     placeholder,
     isDisabled,
     ...rest
-  } = useFieldProviderApi({ ...props, type: 'checkbox' });
+  } = useFieldApi({ ...props, type: 'checkbox' });
   return (
     <FormGroup
       meta={meta}

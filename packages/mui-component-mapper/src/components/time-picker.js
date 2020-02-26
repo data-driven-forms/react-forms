@@ -6,7 +6,7 @@ import MomentUtils from '@date-io/moment';
 import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
 import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
-import { useFieldProviderApi } from '@data-driven-forms/react-form-renderer';
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const TimePicker = (props) => {
   const {
@@ -21,7 +21,7 @@ const TimePicker = (props) => {
     validateOnMount,
     meta,
     locale = 'en'
-  } = useFieldProviderApi(props);
+  } = useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
 
   return (

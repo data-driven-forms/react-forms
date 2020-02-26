@@ -5,7 +5,7 @@ import MuiTextField from '@material-ui/core/TextField';
 import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
 import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
-import { useFieldProviderApi } from '@data-driven-forms/react-form-renderer';
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const TextArea = (props) => {
   const {
@@ -20,7 +20,7 @@ const TextArea = (props) => {
     validateOnMount,
     meta,
     ...rest
-  } = useFieldProviderApi(props);
+  } = useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
   return (
     <FormFieldGrid>

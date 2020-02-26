@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useFieldProviderApi } from '@data-driven-forms/react-form-renderer';
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import { Radio as Pf4Radio } from '@patternfly/react-core/dist/js/components/Radio';
 import FormGroup from '../common/form-group';
 
 const Radio = ({ name, options, ...props }) => {
-  const { label, isRequired, helperText, meta, description, hideLabel, input, isReadOnly, isDisabled, id, ...rest } = useFieldProviderApi({
+  const { label, isRequired, helperText, meta, description, hideLabel, input, isReadOnly, isDisabled, id, ...rest } = useFieldApi({
     name,
     ...props
   });
@@ -20,7 +20,7 @@ const Radio = ({ name, options, ...props }) => {
       id={id || input.name}
     >
       {options.map((option) => {
-        const { input } = useFieldProviderApi({ name, type: 'radio', value: option.value });
+        const { input } = useFieldApi({ name, type: 'radio', value: option.value });
         return (
           <Pf4Radio
             key={`${name}-${option.value}`}

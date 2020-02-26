@@ -10,10 +10,10 @@ import { wrapperProps } from '@data-driven-forms/common/src/multiple-choice-list
 import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
 import './radio.scss';
-import { useFieldProviderApi } from '@data-driven-forms/react-form-renderer';
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const Radio = ({ name, ...props }) => {
-  const { options, isDisabled, label, isRequired, helperText, description, isReadOnly, meta, validateOnMount } = useFieldProviderApi({
+  const { options, isDisabled, label, isRequired, helperText, description, isReadOnly, meta, validateOnMount } = useFieldApi({
     ...props,
     name,
     type: 'radio'
@@ -25,7 +25,7 @@ const Radio = ({ name, ...props }) => {
       <FormControl required={isRequired} error={!!invalid} component="fieldset">
         <FormLabel component="legend">{label}</FormLabel>
         {options.map((option) => {
-          const { input } = useFieldProviderApi({ name, type: 'radio', value: option.value });
+          const { input } = useFieldApi({ name, type: 'radio', value: option.value });
           return (
             <FormControlLabel
               key={`${name}-${option.value}`}

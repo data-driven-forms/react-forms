@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import FormGroup from '../common/form-wrapper';
 import DataDrivenSelect from './select/select';
 import { validationError } from '../form-fields/helpers';
-import { useFieldProviderApi } from '@data-driven-forms/react-form-renderer';
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const Select = (props) => {
-  const { meta, validateOnMount, label, hideLabel, isRequired, helperText, description, ...rest } = useFieldProviderApi(props);
+  const { meta, validateOnMount, label, hideLabel, isRequired, helperText, description, ...rest } = useFieldApi(props);
   return (
     <FormGroup
       meta={meta}

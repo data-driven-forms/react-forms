@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MultipleChoiceList from '../common/multiple-choice-list';
-import { useFieldProviderApi } from '@data-driven-forms/react-form-renderer';
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormGroup from '../common/form-group';
 import { Checkbox as Pf4Checkbox } from '@patternfly/react-core/dist/js/components/Checkbox/Checkbox';
 
 const SingleCheckbox = (props) => {
-  const { label, isRequired, helperText, meta, description, input, isReadOnly, isDisabled, id, ...rest } = useFieldProviderApi(props);
+  const { label, isRequired, helperText, meta, description, input, isReadOnly, isDisabled, id, ...rest } = useFieldApi(props);
   return (
     <FormGroup isRequired={isRequired} helperText={helperText} meta={meta} description={description} hideLabel id={id || input.name}>
       <Pf4Checkbox

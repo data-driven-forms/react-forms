@@ -5,10 +5,10 @@ import { FieldLevelHelp } from 'patternfly-react/dist/js/components/FieldLevelHe
 import MultipleChoiceList from '../form-fields/multiple-choice-list';
 import FormGroup from '../common/form-wrapper';
 import RequiredLabel from '../form-fields/required-label';
-import { useFieldProviderApi } from '@data-driven-forms/react-form-renderer';
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const SingleCheckbox = (props) => {
-  const { label, helperText, meta, description, input, isRequired, isReadOnly, isDisabled } = useFieldProviderApi(props);
+  const { label, helperText, meta, description, input, isRequired, isReadOnly, isDisabled } = useFieldApi(props);
   return (
     <FormGroup hideLabel meta={meta} description={description}>
       <Pf3Checkbox {...input} disabled={isDisabled || isReadOnly}>

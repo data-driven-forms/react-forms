@@ -9,10 +9,10 @@ import FormRenderer from '../../components/form-renderer';
 import validatorTypes from '../../components/validator-types';
 import componentTypes from '../../components/component-types';
 import formTemplate from '../../../../../__mocks__/mock-form-template';
-import useFieldProviderApi from '../../hooks/use-field-provider-api';
+import useFieldApi from '../../hooks/use-field-api';
 
 const TextField = (props) => {
-  const { input, meta } = useFieldProviderApi(props);
+  const { input, meta } = useFieldApi(props);
   return (
     <div>
       <input {...input} />
@@ -552,7 +552,7 @@ describe('renderForm function', () => {
     });
 
     const TextField = (props) => {
-      const { input, meta, label, formOptions, helperText, isRequired, dataType, isDisabled, isReadOnly, ...rest } = useFieldProviderApi(props);
+      const { input, meta, label, formOptions, helperText, isRequired, dataType, isDisabled, isReadOnly, ...rest } = useFieldApi(props);
       return (
         <div>
           <label>{label}</label>

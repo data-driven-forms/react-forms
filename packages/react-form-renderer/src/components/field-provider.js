@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import dataTypes from './data-types';
-import useFieldProviderApi from '../hooks/use-field-provider-api';
+import useFieldApi from '../hooks/use-field-api';
 
 const FieldProvider = ({ component, render, ...props }) => {
-  const fieldProviderProps = useFieldProviderApi(props);
+  const fieldProviderProps = useFieldApi(props);
   if (component) {
     const FieldComponent = component;
     return <FieldComponent {...fieldProviderProps} />;

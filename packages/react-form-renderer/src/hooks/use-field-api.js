@@ -3,7 +3,7 @@ import { useField } from 'react-final-form';
 import useFormApi from './useFormApi';
 import enhancedOnChange from '../form-renderer/enhanced-on-change';
 
-const useFieldProviderApi = ({ name, initializeOnMount, component, render, ...props }) => {
+const useFieldApi = ({ name, initializeOnMount, component, render, ...props }) => {
   const formOptions = useFormApi();
   const fieldProps = useField(name, props);
 
@@ -56,4 +56,4 @@ const useFieldProviderApi = ({ name, initializeOnMount, component, render, ...pr
   };
 };
 
-export default useFieldProviderApi;
+export default useFieldApi;

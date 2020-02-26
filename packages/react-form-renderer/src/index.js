@@ -13,7 +13,7 @@ export { default as RendererContext } from './components/renderer-context';
 export { default as FormSpy } from './components/form-spy';
 export { default as Form } from './components/form';
 export { default as FieldArray } from './components/field-array';
-export { default as useFieldProviderApi } from './hooks/use-field-provider-api';
+export { default as useFieldApi } from './hooks/use-field-api';
 
 export const schemaParsers = {
   mozillaParser,

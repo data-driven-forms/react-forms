@@ -3,10 +3,10 @@ import { mount } from 'enzyme';
 import FormRenderer from '../../components/form-renderer';
 import formTemplate from '../../../../../__mocks__/mock-form-template';
 import componentTypes from '../../components/component-types';
-import useFieldProviderApi from '../../hooks/use-field-provider-api';
+import useFieldApi from '../../hooks/use-field-api';
 
 const DataTypeInput = (props) => {
-  const { input, dataType: _dataType, type, label } = useFieldProviderApi(props);
+  const { input, dataType: _dataType, type, label } = useFieldApi(props);
   return (
     <div>
       <label htmlFor={input.name}>{label}</label>

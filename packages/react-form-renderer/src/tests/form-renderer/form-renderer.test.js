@@ -5,10 +5,10 @@ import FormRenderer from '../../components/form-renderer';
 import SchemaErrorComponent from '../../form-renderer/schema-error-component';
 import componentTypes from '../../components/component-types';
 import formTemplate from '../../../../../__mocks__/mock-form-template';
-import useFieldProviderApi from '../../hooks/use-field-provider-api';
+import useFieldApi from '../../hooks/use-field-api';
 
 const TextField = (props) => {
-  const { input } = useFieldProviderApi(props);
+  const { input } = useFieldApi(props);
   return (
     <div className="nested-item">
       <input {...input} id={input.name} />
