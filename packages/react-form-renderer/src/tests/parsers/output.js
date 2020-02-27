@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
-import componentTypes from '../../components/component-types';
-import validatorTypes from '../../components/validator-types';
+import { validatorTypes, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 const output = {
   title: 'Testing dialog',

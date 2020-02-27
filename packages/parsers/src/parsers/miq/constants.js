@@ -1,4 +1,4 @@
-import componentTypes from '../../components/component-types';
+import { componentTypes } from '@data-driven-forms/react-form-renderer';
 
 export const componentMap = {
   DialogFieldTextBox: componentTypes.TEXT_FIELD,

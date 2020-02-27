@@ -1,4 +1,6 @@
+import { validatorTypes, componentTypes } from '@data-driven-forms/react-form-renderer';
 import { setWith } from 'lodash';
+
 import {
   validatorBuilder,
   componentMapper,
@@ -13,9 +15,7 @@ import {
   orderSchema,
   createDynamicListWithFixed,
   buildConditionalFields,
-} from './mozilla-helpers';
-import validatorTypes from '../../components/validator-types';
-import componentTypes from '../../components/component-types';
+} from './mozilla/mozilla-helpers';
 
 const keyReplacements = {
   multipleOf: 'step',

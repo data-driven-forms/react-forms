@@ -13,7 +13,7 @@ import {
   uiOrderingSchema,
   anyOfSelectSchema,
   conditionalSchema,
-} from '../../demo-schemas/mozilla-schemas';
+} from './schemas';
 import {
   simpleSchemaResult,
   nestedSchemaResult,
@@ -21,7 +21,7 @@ import {
   numbersSchemaResult,
   widgetsExpectedResult,
 } from './expected-parser-results';
-import mozillaSchemaParser from '../../parsers/mozilla-parser/mozilla-schema-parser';
+import mozillaSchemaParser from '../../parsers/mozilla';
 
 describe('Mozilla json schema parser', () => {
   it('should parse simple form example', () => {
