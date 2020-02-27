@@ -16,6 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import GhIcon from './common/gh-svg-icon';
 import NpmSvgIcon from './common/npm-svg-icon';
 import TwitterIcon from './common/twitter-svg-icon';
+import DiscordIcon from './common/discord-svg-icon';
 
 const RepoLink = ({ href, label }) => {
   const classes = makeStyles(() => ({
@@ -105,14 +106,20 @@ const Footer = ({ open }) => {
                   </ListSubheader>
                 }
               >
-                <RepoLink href="https://github.com/data-driven-forms/react-forms" label="React forms" />
-                <ListSubheader className={classes.listHeader}>
-                  Link to &nbsp;{' '}
-                  <SvgIcon>
-                    <TwitterIcon />
-                  </SvgIcon>
-                </ListSubheader>
-                <RepoLink href="https://twitter.com/DataDrivenForms" label="@DataDrivenForms" />
+                <RepoLink
+                  href="https://github.com/data-driven-forms/react-forms"
+                  label="React forms"
+                />
+                <ListSubheader className={ classes.listHeader }>Link to &nbsp; <SvgIcon><DiscordIcon /></SvgIcon></ListSubheader>
+                <RepoLink
+                  href="https://discord.gg/6sBw6WM"
+                  label="Discord server"
+                />
+                <ListSubheader className={ classes.listHeader }>Link to &nbsp; <SvgIcon><TwitterIcon /></SvgIcon></ListSubheader>
+                <RepoLink
+                  href="https://twitter.com/DataDrivenForms"
+                  label="@DataDrivenForms"
+                />
               </List>
               <List
                 subheader={
