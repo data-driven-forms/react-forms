@@ -52,7 +52,9 @@ const Radio = ({ name, ...props }) => {
     <FormFieldGrid className="mui-ddform-radio-group">
       <FormControl required={isRequired} error={!!invalid} component="fieldset">
         <FormLabel component="legend">{label}</FormLabel>
-        {options.map((option) => <RadioOption key={option.value} name={name} option={option} isDisabled={isDisabled} isReadOnly={isReadOnly} />)}
+        {options.map((option) => (
+          <RadioOption key={option.value} name={name} option={option} isDisabled={isDisabled} isReadOnly={isReadOnly} />
+        ))}
         {(invalid || text) && <FormHelperText>{invalid || text}</FormHelperText>}
       </FormControl>
     </FormFieldGrid>

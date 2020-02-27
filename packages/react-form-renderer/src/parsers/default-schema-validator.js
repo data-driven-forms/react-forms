@@ -5,7 +5,7 @@ import componentTypes from '../components/component-types';
 import validatorTypes from '../components/validator-types';
 import dataTypes from '../components/data-types';
 
-const componentBlackList = [ componentTypes.FIELD_ARRAY, 'tab-item' ];
+const componentBlackList = [componentTypes.FIELD_ARRAY, 'tab-item'];
 
 const checkFieldsArray = (obj, objectKey) => {
   if (!obj.hasOwnProperty('fields')) {
@@ -22,7 +22,7 @@ const checkCondition = (condition, fieldName) => {
    * validate array condition
    */
   if (Array.isArray(condition)) {
-    return condition.forEach(item => checkCondition(item, fieldName));
+    return condition.forEach((item) => checkCondition(item, fieldName));
   }
 
   if (typeof condition !== 'object') {
@@ -46,8 +46,12 @@ const checkCondition = (condition, fieldName) => {
     `);
   }
 
-  if (!condition.hasOwnProperty('is') && !condition.hasOwnProperty('isEmpty')
-  && !condition.hasOwnProperty('isNotEmpty') && !condition.hasOwnProperty('pattern')) {
+  if (
+    !condition.hasOwnProperty('is') &&
+    !condition.hasOwnProperty('isEmpty') &&
+    !condition.hasOwnProperty('isNotEmpty') &&
+    !condition.hasOwnProperty('pattern')
+  ) {
     throw new DefaultSchemaError(`
       Error occured in field definition with name: "${fieldName}".
       Field condition must have one of "is", "isEmpty", "isNotEmpty", "pattern" property! Properties received: [${Object.keys(condition)}].
@@ -89,7 +93,7 @@ const checkValidators = (validate, fieldName) => {
       `);
     }
 
-    if (typeof validator !== 'function'){
+    if (typeof validator !== 'function') {
       if (!validator.hasOwnProperty('type')) {
         throw new DefaultSchemaError(`
         Error occured in field definition with name: "${fieldName}".
@@ -125,12 +129,12 @@ const checkDataType = (type, fieldName) => {
 };
 
 const iterateOverFields = (fields, formFieldsMapper, parent = {}) => {
-  fields.forEach(field => {
+  fields.forEach((field) => {
     if (Array.isArray(field)) {
       return iterateOverFields(field, formFieldsMapper);
     }
 
-    if (parent.component !== componentTypes.WIZARD){
+    if (parent.component !== componentTypes.WIZARD) {
       if (parent.component !== componentTypes.WIZARD && !field.hasOwnProperty('component')) {
         throw new DefaultSchemaError(`Each fields item must have "component" property!`);
       }
@@ -149,7 +153,6 @@ const iterateOverFields = (fields, formFieldsMapper, parent = {}) => {
       //if (!componentBlackList.includes(field.component) && !isValidComponent(formFieldsMapper[field.component])) {
       //  throw new DefaultSchemaError(`FormComponent "${field.component}" from formFieldsMapper is not a valid React component!`);
       //}
-
     }
 
     if (!field.hasOwnProperty('name') && parent.component !== 'field-array') {
@@ -181,7 +184,6 @@ const defaultSchemaValidator = (schema, formFieldsMapper) => {
 
   checkFieldsArray(schema, 'schema');
   iterateOverFields(schema.fields, formFieldsMapper);
-
 };
 
 export default defaultSchemaValidator;

@@ -10,13 +10,13 @@ const useStyles = makeStyles(navStyles);
 
 const createLink = (...args) => args.join('/');
 
-const renderItems = (items, level = 0, previousLinks = [ '' ]) => {
+const renderItems = (items, level = 0, previousLinks = ['']) => {
   if (!items) {
     return null;
   }
 
   if (Array.isArray(items)) {
-    return items.map(item => renderItems(item, level, previousLinks));
+    return items.map((item) => renderItems(item, level, previousLinks));
   }
 
   const { fields, title, link, linkText, component, open, ...props } = items;
@@ -24,39 +24,40 @@ const renderItems = (items, level = 0, previousLinks = [ '' ]) => {
   if (fields) {
     return (
       <Mapper.wrapper
-        key={ `${link}-${title}-${open}` }
-        open={ open }
-        fields={ fields }
-        title={ title }
-        link={ link }
-        level={ level }
-        previousLinks={ previousLinks }
-        renderItems={ renderItems }
-        { ...props }
+        key={`${link}-${title}-${open}`}
+        open={open}
+        fields={fields}
+        title={title}
+        link={link}
+        level={level}
+        previousLinks={previousLinks}
+        renderItems={renderItems}
+        {...props}
       />
-    );}
+    );
+  }
 
   return (
     <Mapper.item
-      href={ createLink(...previousLinks, link || component) }
-      level={ level }
-      key={ `${link || component}-${linkText}` }
-      linkText={ linkText }
-      component={ component }
-      { ...props }
+      href={createLink(...previousLinks, link || component)}
+      level={level}
+      key={`${link || component}-${linkText}`}
+      linkText={linkText}
+      component={component}
+      {...props}
     />
   );
 };
 
 const MenuRenderer = ({ schema }) => {
-  return <React.Fragment>{ renderItems(schema) }</React.Fragment>;
+  return <React.Fragment>{renderItems(schema)}</React.Fragment>;
 };
 
 const searchFunction = (linkText, value) =>
   linkText
-  .toLowerCase()
-  .replace(/ /g, '')
-  .includes(value.toLowerCase().replace(/ /g, ''));
+    .toLowerCase()
+    .replace(/ /g, '')
+    .includes(value.toLowerCase().replace(/ /g, ''));
 
 const filterSchema = (schema, value) => {
   if (schema.fields) {
@@ -65,7 +66,7 @@ const filterSchema = (schema, value) => {
       return {
         ...schema,
         open: true,
-        fields: result,
+        fields: result
       };
     }
 
@@ -73,9 +74,7 @@ const filterSchema = (schema, value) => {
   }
 
   if (Array.isArray(schema)) {
-    const result = schema
-    .map(field => filterSchema(field, value))
-    .filter(x => x);
+    const result = schema.map((field) => filterSchema(field, value)).filter((x) => x);
     if (result.length > 0) {
       return result;
     }
@@ -105,12 +104,12 @@ const findSelected = (schema, currentLocation, level = 1) => {
       ...schema,
       open: schema.link === currentLocation[level],
       level,
-      fields: findSelected(schema.fields, currentLocation, level + 1),
+      fields: findSelected(schema.fields, currentLocation, level + 1)
     };
   }
 
   if (Array.isArray(schema)) {
-    return schema.map(field => findSelected(field, currentLocation, level));
+    return schema.map((field) => findSelected(field, currentLocation, level));
   }
 
   return schema;
@@ -136,7 +135,7 @@ const current = memoizeCurrent();
 
 const Menu = ({ schema, searchRef }) => {
   const router = useRouter();
-  const [ value, setValue ] = useState('');
+  const [value, setValue] = useState('');
   const classes = useStyles();
   const currentLocation = router.pathname.split('/');
 
@@ -149,13 +148,13 @@ const Menu = ({ schema, searchRef }) => {
         placeholder="Search"
         type="search"
         margin="normal"
-        value={ value }
-        onChange={ e => setValue(e.target.value) }
-        className={ classes.searchButton }
-        inputRef={ searchRef }
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        className={classes.searchButton}
+        inputRef={searchRef}
         autoFocus
       />
-      <MenuRenderer schema={ schemaFiltered } />
+      <MenuRenderer schema={schemaFiltered} />
     </React.Fragment>
   );
 };

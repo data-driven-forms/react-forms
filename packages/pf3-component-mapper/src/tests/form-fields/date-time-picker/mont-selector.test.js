@@ -12,19 +12,24 @@ describe('<MonthSelector />', () => {
       toggleSelectingMonth: jest.fn(),
       onNextClick: jest.fn(),
       onPreviousClick: jest.fn(),
-      selectedDay: new Date('December 17, 2018 00:00:00'),
+      selectedDay: new Date('December 17, 2018 00:00:00')
     };
   });
 
   it.skip('should render correcntly', () => {
-    const wrapper = mount(<MonthSelector { ...initialProps }/>);
+    const wrapper = mount(<MonthSelector {...initialProps} />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should select month April 0', () => {
     const monthChange = jest.fn();
-    const wrapper = mount(<MonthSelector { ...initialProps } monthChange={ monthChange }/>);
-    wrapper.find('table').last().find('button').first().simulate('click');
+    const wrapper = mount(<MonthSelector {...initialProps} monthChange={monthChange} />);
+    wrapper
+      .find('table')
+      .last()
+      .find('button')
+      .first()
+      .simulate('click');
     expect(monthChange).toHaveBeenCalledWith(0);
   });
 });

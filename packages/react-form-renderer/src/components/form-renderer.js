@@ -37,9 +37,7 @@ const FormRenderer = ({
 
   const FormTemplate = formTemplate
     ? formTemplate
-    : () => (
-      <div>{`FormRenderer is missing 'formTemplate' prop: ({formFields, schema}) => <FormTemplate {...} />`}</div>
-    );
+    : () => <div>{`FormRenderer is missing 'formTemplate' prop: ({formFields, schema}) => <FormTemplate {...} />`}</div>;
 
   return (
     <Form
@@ -97,7 +95,7 @@ FormRenderer.propTypes = {
   }).isRequired,
   formTemplate: PropTypes.shape({
     [PropTypes.string]: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]).isRequired
-  }).isRequired,
+  }).isRequired
 };
 
 FormRenderer.defaultProps = {

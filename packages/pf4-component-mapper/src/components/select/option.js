@@ -6,17 +6,16 @@ import { Checkbox } from '@patternfly/react-core/dist/js/components/Checkbox/Che
 import CheckIcon from '@patternfly/react-icons/dist/js/icons/check-icon';
 
 const Option = (props) => (
-  <div
-    className={ `ddorg__pf4-component-mapper__select__menu--option ${props.isFocused ? 'focused' : ''}` }
-  >
-    { props.selectProps && props.selectProps && props.selectProps.isCheckbox &&
-            <Checkbox
-              isChecked={ props.isSelected || (props.data && props.data.selected) || false }
-              onChange={ () => props.selectOption(props.data) }
-              id={ `${props.innerProps && props.innerProps.id}-checkbox` }
-            /> }
-    <components.Option { ...props } />
-    { props.isSelected && (props.selectProps && !props.selectProps.isCheckbox) && <CheckIcon size="sm" /> }
+  <div className={`ddorg__pf4-component-mapper__select__menu--option ${props.isFocused ? 'focused' : ''}`}>
+    {props.selectProps && props.selectProps && props.selectProps.isCheckbox && (
+      <Checkbox
+        isChecked={props.isSelected || (props.data && props.data.selected) || false}
+        onChange={() => props.selectOption(props.data)}
+        id={`${props.innerProps && props.innerProps.id}-checkbox`}
+      />
+    )}
+    <components.Option {...props} />
+    {props.isSelected && props.selectProps && !props.selectProps.isCheckbox && <CheckIcon size="sm" />}
   </div>
 );
 
@@ -27,14 +26,14 @@ Option.propTypes = {
   selectOption: PropTypes.func,
   cx: PropTypes.func.isRequired,
   data: PropTypes.shape({
-    selected: PropTypes.bool,
+    selected: PropTypes.bool
   }),
   innerProps: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.string
   }),
   selectProps: PropTypes.shape({
-    isCheckbox: PropTypes.bool,
-  }),
+    isCheckbox: PropTypes.bool
+  })
 };
 
 Option.defaultProps = {
@@ -42,11 +41,11 @@ Option.defaultProps = {
   isSelected: false,
   selectOption: () => undefined,
   selectProps: {
-    isCheckbox: false,
+    isCheckbox: false
   },
   innerProps: {
-    id: 'some-classname',
-  },
+    id: 'some-classname'
+  }
 };
 
 export default Option;

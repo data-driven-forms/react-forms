@@ -73,15 +73,15 @@ describe('New validators', () => {
     });
 
     it('should pass min items of 3 validation', () => {
-      expect(validatorMapper(validatorTypes.MIN_ITEMS_VALIDATOR)({ threshold: 3 })([ '1', '2', '3' ])).toBeUndefined();
+      expect(validatorMapper(validatorTypes.MIN_ITEMS_VALIDATOR)({ threshold: 3 })(['1', '2', '3'])).toBeUndefined();
     });
 
     it('should pass min items of 3 validation', () => {
-      expect(validatorMapper(validatorTypes.MIN_ITEMS_VALIDATOR)({ threshold: 3, message: 'Too few' })([ '1', '2' ])).toBe('Too few');
+      expect(validatorMapper(validatorTypes.MIN_ITEMS_VALIDATOR)({ threshold: 3, message: 'Too few' })(['1', '2'])).toBe('Too few');
     });
 
     it('should pass min items of 3 validation with more items', () => {
-      expect(validatorMapper(validatorTypes.MIN_ITEMS_VALIDATOR)({ threshold: 3 })([ '1', '2', '3', '4' ])).toBeUndefined();
+      expect(validatorMapper(validatorTypes.MIN_ITEMS_VALIDATOR)({ threshold: 3 })(['1', '2', '3', '4'])).toBeUndefined();
     });
   });
 
@@ -256,36 +256,36 @@ describe('New validators', () => {
 
     describe('data-type arrays', () => {
       it('should pass validation of an array of strings', () => {
-        expect(dataTypeValidator('string')()([ 'Foo', 'Bar', 'Baz' ])).toBeUndefined();
+        expect(dataTypeValidator('string')()(['Foo', 'Bar', 'Baz'])).toBeUndefined();
       });
 
       it('should fail validation of an array of strings', () => {
-        expect(dataTypeValidator('string')()([ 'Foo', 'Bar', 2 ])).toBe('Field value has to be string');
+        expect(dataTypeValidator('string')()(['Foo', 'Bar', 2])).toBe('Field value has to be string');
       });
 
       it('should pass validation of an array of integers', () => {
-        expect(dataTypeValidator('integer')()([ 1, 2, 3 ])).toBeUndefined();
+        expect(dataTypeValidator('integer')()([1, 2, 3])).toBeUndefined();
       });
 
       it('should fail validation of an array of strings', () => {
-        expect(dataTypeValidator('integer')()([ 1, 2, 2.1 ])).toBe('Value must be integer');
-        expect(dataTypeValidator('integer')()([ 1, 2, 'foo' ])).toBe('Value must be integer');
+        expect(dataTypeValidator('integer')()([1, 2, 2.1])).toBe('Value must be integer');
+        expect(dataTypeValidator('integer')()([1, 2, 'foo'])).toBe('Value must be integer');
       });
 
       it('should pass validation of an array of numbers', () => {
-        expect(dataTypeValidator('number')()([ 1, 2, 3.1 ])).toBeUndefined();
+        expect(dataTypeValidator('number')()([1, 2, 3.1])).toBeUndefined();
       });
 
       it('should fail validation of an array of numbers', () => {
-        expect(dataTypeValidator('number')()([ 1, 2, 'foo' ])).toBe('Values must be number');
+        expect(dataTypeValidator('number')()([1, 2, 'foo'])).toBe('Values must be number');
       });
 
       it('should pass validation of an array of booleans', () => {
-        expect(dataTypeValidator('boolean')()([ true, true, false, false ])).toBeUndefined();
+        expect(dataTypeValidator('boolean')()([true, true, false, false])).toBeUndefined();
       });
 
       it('should fail validation of an array of booleans', () => {
-        expect(dataTypeValidator('boolean')()([ 'foo', 2, true ])).toBe('Field value has to be boolean');
+        expect(dataTypeValidator('boolean')()(['foo', 2, true])).toBe('Field value has to be boolean');
       });
     });
   });
@@ -295,13 +295,13 @@ describe('New validators', () => {
       Validator.messages = {
         ...Validator.messages,
         required: 'Foo required',
-        tooShort: 'Bar',
+        tooShort: 'Bar'
       };
     });
     afterAll(() => {
       // reset custom messages ovverides for validators
       Validator.messages = {
-        ...messages,
+        ...messages
       };
     });
 
@@ -334,9 +334,9 @@ describe('New validators', () => {
     });
 
     it('should validate only URL with ftp and shh protocols', () => {
-      expect(validatorMapper(validatorTypes.URL)({ protocols: [ 'ftp', 'ssh' ]})('https://www.google.com/')).toBe(failMessage);
-      expect(validatorMapper(validatorTypes.URL)({ protocols: [ 'ftp', 'ssh' ]})('ftp://www.google.com/')).toBeUndefined();
-      expect(validatorMapper(validatorTypes.URL)({ protocols: [ 'ftp', 'ssh' ]})('ssh://www.google.com/')).toBeUndefined();
+      expect(validatorMapper(validatorTypes.URL)({ protocols: ['ftp', 'ssh'] })('https://www.google.com/')).toBe(failMessage);
+      expect(validatorMapper(validatorTypes.URL)({ protocols: ['ftp', 'ssh'] })('ftp://www.google.com/')).toBeUndefined();
+      expect(validatorMapper(validatorTypes.URL)({ protocols: ['ftp', 'ssh'] })('ssh://www.google.com/')).toBeUndefined();
     });
 
     it('should validate only IPv4 adress as valid URL', () => {

@@ -24,69 +24,58 @@ const PopoverRoot = ({
   onMinuteChange,
   todayButtonLabel,
   showTodayButton,
-  disabledDays,
+  disabledDays
 }) => (
   <div className="pf3-calendar">
     <table className="calendar-layout-wrapper">
       <tbody>
         <tr>
           <td>
-            { selectingYear ?
-              <YearSelector
-                selectedDay={ selectedDay }
-                toggleSelectingYear={ toggleSelectingYear }
-                yearChange={ yearChange }
-                disabledDays={ disabledDays }
+            {selectingYear ? (
+              <YearSelector selectedDay={selectedDay} toggleSelectingYear={toggleSelectingYear} yearChange={yearChange} disabledDays={disabledDays} />
+            ) : selectingMonth ? (
+              <MonthSelector
+                selectingMonth={selectingMonth}
+                selectedDay={selectedDay}
+                disabledDays={disabledDays}
+                monthChange={(data) => {
+                  monthChange(data);
+                }}
+                toggleSelectingMonth={toggleSelectingMonth}
+                toggleSelectingYear={toggleSelectingYear}
+                locale={locale}
+                onNextClick={() => yearChange(selectedDay ? selectedDay.getFullYear() + 1 : new Date().getFullYear() + 1)}
+                onPreviousClick={() => yearChange(selectedDay ? selectedDay.getFullYear() - 1 : new Date().getFullYear() - 1)}
               />
-              : selectingMonth
-                ? (
-                  <MonthSelector
-                    selectingMonth={ selectingMonth }
-                    selectedDay={ selectedDay }
-                    disabledDays={ disabledDays }
-                    monthChange={ data => {
-                      monthChange(data);
-                    } }
-                    toggleSelectingMonth={ toggleSelectingMonth }
-                    toggleSelectingYear={ toggleSelectingYear }
-                    locale={ locale }
-                    onNextClick={ () => yearChange(selectedDay ? selectedDay.getFullYear() + 1 : new Date().getFullYear() + 1) }
-                    onPreviousClick={ () => yearChange(selectedDay ? selectedDay.getFullYear() - 1 : new Date().getFullYear() - 1) }
-                  />)
-                :
-                <DayPicker.DayPicker
-                  onDayClick={ onDayClick }
-                  selectedDays={ selectedDay }
-                  month={ selectedDay }
-                  showOutsideDays
-                  todayButton={ showTodayButton && todayButtonLabel }
-                  locale={ locale }
-                  localeUtils={ MomentLocaleUtils }
-                  disabledDays={ disabledDays }
-                  navbarElement={ props => (
-                    <Navbar
-                      { ...props }
-                      onMonthClick={ toggleSelectingMonth }
-                      monthChange={ handleMonthClick }
-                    />
-                  ) }
-                /> }
+            ) : (
+              <DayPicker.DayPicker
+                onDayClick={onDayClick}
+                selectedDays={selectedDay}
+                month={selectedDay}
+                showOutsideDays
+                todayButton={showTodayButton && todayButtonLabel}
+                locale={locale}
+                localeUtils={MomentLocaleUtils}
+                disabledDays={disabledDays}
+                navbarElement={(props) => <Navbar {...props} onMonthClick={toggleSelectingMonth} monthChange={handleMonthClick} />}
+              />
+            )}
           </td>
-          { variant === 'date-time' && (
+          {variant === 'date-time' && (
             <td>
               <div className="time-picker">
                 <TimePicker
-                  onHourChange={ hours => {
+                  onHourChange={(hours) => {
                     onHourChange(hours);
-                  } }
-                  onMinuteChange={ minutes => {
+                  }}
+                  onMinuteChange={(minutes) => {
                     onMinuteChange(minutes);
-                  } }
-                  selectedDay={ selectedDay || new Date() }
+                  }}
+                  selectedDay={selectedDay || new Date()}
                 />
               </div>
             </td>
-          ) }
+          )}
         </tr>
       </tbody>
     </table>
@@ -109,7 +98,7 @@ PopoverRoot.propTypes = {
   onMinuteChange: PropTypes.func.isRequired,
   todayButtonLabel: PropTypes.string,
   showTodayButton: PropTypes.bool,
-  disabledDays: PropTypes.array,
+  disabledDays: PropTypes.array
 };
 
 export default PopoverRoot;

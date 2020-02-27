@@ -1,4 +1,3 @@
-
 const path = require('path');
 const functions = require('firebase-functions');
 const next = require('next');

@@ -34,12 +34,12 @@ import dynamic from 'next/dynamic';
 
 import MapperContext from '@docs/components/mappers-context';
 const CodeEditor = dynamic(import('@docs/components/code-editor'), {
-  ssr: false,
+  ssr: false
 });
 
-const Summary = ({ title }) => <div>{ title }</div>;
+const Summary = ({ title }) => <div>{title}</div>;
 Summary.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
 };
 
 // Text inputs are first, then all other actions are sorted by title
@@ -52,23 +52,27 @@ const comparator = (a, b) => {
     return 1;
   }
 
-  if (a.title < b.title) {return -1;}
+  if (a.title < b.title) {
+    return -1;
+  }
 
-  if (a.title > b.title) {return 1;}
+  if (a.title > b.title) {
+    return 1;
+  }
 
   return 0;
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   close: {
-    padding: theme.spacing(0.5),
+    padding: theme.spacing(0.5)
   },
   radioLink: {
     color: 'rgba(0, 0, 0, 0.87)',
     '&:hover': {
-      textDecoration: 'none',
-    },
-  },
+      textDecoration: 'none'
+    }
+  }
 }));
 
 const CopySnackbar = ({ open, handleClose }) => {
@@ -77,30 +81,24 @@ const CopySnackbar = ({ open, handleClose }) => {
     <Snackbar
       anchorOrigin={{
         vertical: 'bottom',
-        horizontal: 'right',
+        horizontal: 'right'
       }}
-      open={ open }
-      autoHideDuration={ 6000 }
-      onClose={ handleClose }
-      message={ <span>Field was copied to clipboard</span> }
-      action={ [
-        <IconButton
-          key="close"
-          aria-label="close"
-          color="inherit"
-          className={ classes.close }
-          onClick={ handleClose }
-        >
+      open={open}
+      autoHideDuration={6000}
+      onClose={handleClose}
+      message={<span>Field was copied to clipboard</span>}
+      action={[
+        <IconButton key="close" aria-label="close" color="inherit" className={classes.close} onClick={handleClose}>
           <CloseIcon />
-        </IconButton>,
-      ] }
+        </IconButton>
+      ]}
     />
   );
 };
 
 CopySnackbar.propTypes = {
   open: PropTypes.bool,
-  handleClose: PropTypes.func.isRequired,
+  handleClose: PropTypes.func.isRequired
 };
 
 class ComponentExample extends Component {
@@ -109,11 +107,11 @@ class ComponentExample extends Component {
 
     const { component } = this.props;
 
-    const baseStructure = baseExamples.find(item => item.component === component);
+    const baseStructure = baseExamples.find((item) => item.component === component);
     if (!baseStructure) {
       this.state = {
         notFound: true,
-        component: props.router.query.component,
+        component: props.router.query.component
       };
     } else {
       this.state = {
@@ -121,18 +119,24 @@ class ComponentExample extends Component {
         variants: [
           ...baseStructure.variants,
           { name: 'name', title: 'Name', value: baseStructure.value.fields[0].name, component: 'input' },
-          ...(baseStructure.canBeRequired ? [{
-            name: 'isRequired',
-            title: 'Required',
-            validate: [{
-              type: validatorTypes.REQUIRED,
-            }],
-          }] : []),
+          ...(baseStructure.canBeRequired
+            ? [
+                {
+                  name: 'isRequired',
+                  title: 'Required',
+                  validate: [
+                    {
+                      type: validatorTypes.REQUIRED
+                    }
+                  ]
+                }
+              ]
+            : [])
         ],
         value: JSON.stringify(baseStructure.value, null, 2),
         parsedSchema: baseStructure.value,
         frameHeight: 360,
-        openTooltip: false,
+        openTooltip: false
       };
     }
 
@@ -141,137 +145,159 @@ class ComponentExample extends Component {
         formFieldsMapper: {
           ...props.mappers.mui.formFieldsMapper,
           [componentTypes.WIZARD]: MuiWizard,
-          summary: Summary,
+          summary: Summary
         },
-        formTemplate: props.mappers.mui.formTemplate,
+        formTemplate: props.mappers.mui.formTemplate
       },
       pf3: {
         formFieldsMapper: {
           ...props.mappers.pf3.formFieldsMapper,
-          summary: Summary,
+          summary: Summary
         },
-        formTemplate: props.mappers.pf3.formTemplate,
+        formTemplate: props.mappers.pf3.formTemplate
       },
       pf4: {
         formFieldsMapper: {
           ...props.mappers.pf4.formFieldsMapper,
-          summary: Summary,
+          summary: Summary
         },
-        formTemplate: props.mappers.pf4.formTemplate,
-      },
+        formTemplate: props.mappers.pf4.formTemplate
+      }
     };
   }
 
   handleTooltipClose = () => {
     this.setState({ openTooltip: false });
-  }
+  };
 
   handleTooltipOpen = () => {
     this.setState({ openTooltip: true });
-  }
+  };
 
-  handleExampleVariantChange = (value, index) => this.setState(prevState => {
-    const variants = prevState.variants.map((item, i) => {
-      if (i !== index) {
-        return item;
-      }
+  handleExampleVariantChange = (value, index) =>
+    this.setState((prevState) => {
+      const variants = prevState.variants.map((item, i) => {
+        if (i !== index) {
+          return item;
+        }
 
-      return { ...item, value };
+        return { ...item, value };
+      });
+
+      const previousValue = JSON.parse(prevState.value);
+      const newVariants = variants.reduce(
+        (acc, curr) => {
+          return {
+            ...acc,
+            [curr.name]: curr.value,
+            validate:
+              curr.name === 'isRequired' && !curr.value
+                ? acc.validate.filter(({ type }) => type === validatorTypes.REQUIRED)
+                : curr.validate
+                ? [...acc.validate, ...curr.validate]
+                : [...acc.validate]
+          };
+        },
+        { validate: [] }
+      );
+      const newValue = {
+        ...previousValue,
+        fields: previousValue.fields.map((item) => ({
+          ...item,
+          ...newVariants
+        }))
+      };
+      const newState = {
+        variants,
+        value: JSON.stringify(newValue, null, 2),
+        parsedSchema: newValue
+      };
+
+      return newState;
     });
 
-    const previousValue = JSON.parse(prevState.value);
-    const newVariants = variants.reduce((acc, curr) => {
-      return ({
-        ...acc,
-        [curr.name]: curr.value,
-        validate: curr.name === 'isRequired' && !curr.value ? acc.validate.filter(({ type }) =>
-          type === validatorTypes.REQUIRED) : curr.validate ? [ ...acc.validate, ...curr.validate ] : [ ...acc.validate ],
-      });}, { validate: []});
-    const newValue = { ...previousValue, fields: previousValue.fields.map(item => ({
-      ...item,
-      ...newVariants,
-    })) };
-    const newState = {
-      variants,
-      value: JSON.stringify(newValue, null, 2),
-      parsedSchema: newValue,
-    };
+  renderActions = (actions) =>
+    actions.length === 0 ? (
+      <Typography variant="h6">No props</Typography>
+    ) : (
+      actions.sort(comparator).map(({ name, options, title, component }, index) => {
+        if (options) {
+          return (
+            <Grid item xs={12} key={name}>
+              <FormGroup>
+                <FormControl>
+                  <InputLabel htmlFor={name}>{title}</InputLabel>
+                  <Select
+                    value={this.state.variants[index].value || ''}
+                    onChange={({ target: { value } }) => this.handleExampleVariantChange(value, index)}
+                    inputProps={{
+                      name,
+                      id: name
+                    }}
+                  >
+                    {options.map((option) => (
+                      <MenuItem key={option} value={option}>
+                        {option}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </FormGroup>
+            </Grid>
+          );
+        }
 
-    return newState;
-  });
+        if (component === 'input') {
+          return (
+            <Grid item xs={12} key={name}>
+              <TextField
+                id={name}
+                label={title}
+                value={this.state.variants[index].value || ''}
+                onChange={({ target: { value } }) => this.handleExampleVariantChange(value, index)}
+                margin="normal"
+              />
+            </Grid>
+          );
+        }
 
-  renderActions = (actions) => actions.length === 0 ? <Typography variant="h6">No props</Typography> :
-    actions.sort(comparator).map(({ name, options, title, component }, index) => {
-      if (options) {
+        if (component === 'textarea') {
+          return (
+            <Grid item xs={12} key={name}>
+              <TextField
+                id={name}
+                label={title}
+                value={this.state.variants[index].value || ''}
+                onChange={({ target: { value } }) => this.handleExampleVariantChange(value, index)}
+                margin="normal"
+                fullWidth
+                multiline
+              />
+            </Grid>
+          );
+        }
+
         return (
-          <Grid item xs={ 12 } key={ name }>
+          <Grid item xs={12} key={name}>
             <FormGroup>
-              <FormControl>
-                <InputLabel htmlFor={ name }>{ title }</InputLabel>
-                <Select
-                  value={ this.state.variants[index].value || '' }
-                  onChange={ ({ target: { value }}) => this.handleExampleVariantChange(value, index) }
-                  inputProps={{
-                    name,
-                    id: name,
-                  }}
-                >
-                  { options.map(option => (<MenuItem key={ option } value={ option }>{ option }</MenuItem>)) }
-                </Select>
-              </FormControl>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.state.variants[index].value || false}
+                    onChange={(_e, value) => this.handleExampleVariantChange(value, index)}
+                    value="checkedB"
+                    color="primary"
+                  />
+                }
+                label={title}
+              />
             </FormGroup>
           </Grid>
         );
-      }
+      })
+    );
 
-      if (component === 'input'){
-        return (
-          <Grid item xs={ 12 } key={ name }>
-            <TextField
-              id={ name }
-              label={ title }
-              value={ this.state.variants[index].value || '' }
-              onChange={ ({ target: { value }}) => this.handleExampleVariantChange(value, index) }
-              margin="normal"
-            />
-          </Grid>
-        );
-      }
-
-      if (component === 'textarea'){
-        return (
-          <Grid item xs={ 12 } key={ name }>
-            <TextField
-              id={ name }
-              label={ title }
-              value={ this.state.variants[index].value || '' }
-              onChange={ ({ target: { value }}) => this.handleExampleVariantChange(value, index) }
-              margin="normal"
-              fullWidth
-              multiline
-            />
-          </Grid>
-        );
-      }
-
-      return (
-        <Grid item xs={ 12 } key={ name }>
-          <FormGroup >
-            <FormControlLabel
-              control={ <Checkbox
-                checked={ this.state.variants[index].value || false }
-                onChange={ (_e, value) => this.handleExampleVariantChange(value, index) }
-                value="checkedB"
-                color="primary"
-              /> }
-              label={ title }
-            />
-          </FormGroup>
-        </Grid>
-      );
-    })
-
-  onChange = value => {
+  onChange = (value) => {
     try {
       this.setState({ parsedSchema: JSON.parse(value) });
     } catch (error) {
@@ -280,71 +306,66 @@ class ComponentExample extends Component {
     } finally {
       this.setState({ value });
     }
-  }
+  };
 
-  render () {
+  render() {
     const { value, parsedSchema, component, openTooltip, variants } = this.state;
     const { activeMapper, classes } = this.props;
 
-    const editedValue = value.replace(/^{\n {2}"fields": \[\n/, '')
-    .replace(/ {2}\]\n}$/, '')
-    .replace(/\n {4}/g, '\n')
-    .replace(/ {2}"validate": \[\],\n/g, '')
-    .replace(/ {4}/, '');
+    const editedValue = value
+      .replace(/^{\n {2}"fields": \[\n/, '')
+      .replace(/ {2}\]\n}$/, '')
+      .replace(/\n {4}/g, '\n')
+      .replace(/ {2}"validate": \[\],\n/g, '')
+      .replace(/ {4}/, '');
 
     return (
-      <Grid
-        container
-        direction="row"
-        spacing={ 4 }
-      >
-        <Grid item xs={ 12 } md={ 4 } >
-          <Grid item xs={ 12 }>
+      <Grid container direction="row" spacing={4}>
+        <Grid item xs={12} md={4}>
+          <Grid item xs={12}>
             <Typography variant="h5" gutterBottom>
               Schema
             </Typography>
           </Grid>
           <div style={{ background: '#1d1f21', position: 'relative' }}>
-            <Grid item xs={ 12 } container={ true } justify='flex-end' style={{ position: 'absolute', zIndex: 100 }}>
-              <CopyToClipboard text={ editedValue } onCopy={ this.handleTooltipOpen }>
+            <Grid item xs={12} container={true} justify="flex-end" style={{ position: 'absolute', zIndex: 100 }}>
+              <CopyToClipboard text={editedValue} onCopy={this.handleTooltipOpen}>
                 <Button variant="outlined" color="secondary" style={{ margin: 10 }}>
                   Copy
                 </Button>
               </CopyToClipboard>
-              <CopySnackbar open={ openTooltip } handleClose={ this.handleTooltipClose } />
+              <CopySnackbar open={openTooltip} handleClose={this.handleTooltipClose} />
             </Grid>
             <CodeEditor
               readOnly
               mode="json"
-              onChange={ this.onChange }
+              onChange={this.onChange}
               editorProps={{ $blockScrolling: true }}
-              value={ editedValue }
-              fontSize={ 14 }
-              showPrintMargin={ false }
-              showGutter={ true }
-              highlightActiveLine={ true }
+              value={editedValue}
+              fontSize={14}
+              showPrintMargin={false}
+              showGutter={true}
+              highlightActiveLine={true}
               style={{ width: '100%' }}
               setOptions={{
                 showLineNumbers: true,
-                tabSize: 2,
+                tabSize: 2
               }}
             />
           </div>
         </Grid>
-        <Grid item xs={ 12 } md={ 3 }>
-          <Grid item xs={ 12 }>
+        <Grid item xs={12} md={3}>
+          <Grid item xs={12}>
             <Typography variant="h5" gutterBottom>
               Props
             </Typography>
           </Grid>
           <Card square>
-            <CardContent>
-              { this.renderActions(variants) }
-            </CardContent>
+            <CardContent>{this.renderActions(variants)}</CardContent>
           </Card>
         </Grid>
-        <Grid item xs={ 12 } md={ 5 } >
-          <Grid item xs={ 12 }>
+        <Grid item xs={12} md={5}>
+          <Grid item xs={12}>
             <Typography variant="h5" gutterBottom>
               Preview
             </Typography>
@@ -356,36 +377,36 @@ class ComponentExample extends Component {
                 <RadioGroup
                   aria-label="component-mapper"
                   name="component-mapper"
-                  value={ activeMapper }
-                  onChange={ this.handleMapperChange }
+                  value={activeMapper}
+                  onChange={this.handleMapperChange}
                   style={{ flexDirection: 'row' }}
                 >
-                  <RouterLink href={ `${this.props.router.pathname}?mapper=mui` }>
-                    <Link href={ `${this.props.router.pathname}?mapper=mui` } className={ classes.radioLink }>
-                      <FormControlLabel value="mui" control={ <Radio /> } label="MUI"/>
+                  <RouterLink href={`${this.props.router.pathname}?mapper=mui`}>
+                    <Link href={`${this.props.router.pathname}?mapper=mui`} className={classes.radioLink}>
+                      <FormControlLabel value="mui" control={<Radio />} label="MUI" />
                     </Link>
                   </RouterLink>
-                  <RouterLink href={ `${this.props.router.pathname}?mapper=pf3` }>
-                    <Link href={ `${this.props.router.pathname}?mapper=pf3` } className={ classes.radioLink }>
-                      <FormControlLabel value="pf3" control={ <Radio /> } label="PF3"/>
+                  <RouterLink href={`${this.props.router.pathname}?mapper=pf3`}>
+                    <Link href={`${this.props.router.pathname}?mapper=pf3`} className={classes.radioLink}>
+                      <FormControlLabel value="pf3" control={<Radio />} label="PF3" />
                     </Link>
                   </RouterLink>
-                  <RouterLink href={ `${this.props.router.pathname}?mapper=pf4` }>
-                    <Link href={ `${this.props.router.pathname}?mapper=pf4` } className={ classes.radioLink }>
-                      <FormControlLabel value="pf4" control={ <Radio /> } label="PF4"/>
+                  <RouterLink href={`${this.props.router.pathname}?mapper=pf4`}>
+                    <Link href={`${this.props.router.pathname}?mapper=pf4`} className={classes.radioLink}>
+                      <FormControlLabel value="pf4" control={<Radio />} label="PF4" />
                     </Link>
                   </RouterLink>
                 </RadioGroup>
               </FormControl>
             </div>
             <CardContent>
-              <div className={ activeMapper }>
+              <div className={activeMapper}>
                 <div style={{ paddingLeft: 8 }}>
                   <FormRenderer
-                    { ...this.mapperVariants[activeMapper] }
-                    schema={ parsedSchema }
-                    onSubmit={ console.log /* eslint-disable-line no-console */ }
-                    formTemplate={ this.mapperVariants[activeMapper].formTemplate({ showFormControls: component !== 'wizard' }) }
+                    {...this.mapperVariants[activeMapper]}
+                    schema={parsedSchema}
+                    onSubmit={console.log /* eslint-disable-line no-console */}
+                    formTemplate={this.mapperVariants[activeMapper].formTemplate({ showFormControls: component !== 'wizard' })}
                   />
                 </div>
               </div>
@@ -402,16 +423,16 @@ ComponentExample.propTypes = {
   router: PropTypes.shape({
     query: PropTypes.shape({
       component: PropTypes.string,
-      mapper: PropTypes.string,
+      mapper: PropTypes.string
     }),
     push: PropTypes.func.isRequired,
-    pathname: PropTypes.string,
+    pathname: PropTypes.string
   }),
   mappers: PropTypes.object,
   activeMapper: PropTypes.string.isRequired,
   classes: PropTypes.shape({
-    radioLink: PropTypes.string.isRequired,
-  }).isRequired,
+    radioLink: PropTypes.string.isRequired
+  }).isRequired
 };
 
 export default (props) => {
@@ -420,17 +441,15 @@ export default (props) => {
 
   return (
     <MapperContext.Consumer>
-      { ({ loaded, mappers }) =>
-        loaded ?
-          <ComponentExample { ...props } router={ router } mappers={ mappers } classes={ classes }/> :
-          <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-          >
+      {({ loaded, mappers }) =>
+        loaded ? (
+          <ComponentExample {...props} router={router} mappers={mappers} classes={classes} />
+        ) : (
+          <Grid container direction="row" justify="center" alignItems="center">
             <CircularProgress disableShrink />
-          </Grid> }
+          </Grid>
+        )
+      }
     </MapperContext.Consumer>
   );
 };

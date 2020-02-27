@@ -6,7 +6,7 @@ const getAttributes = (field, newField, attributes, boolValue) => {
   attributes.forEach((info) => {
     const attribute = Array.isArray(info) ? info[0] : info;
     const convertedAttribute = Array.isArray(info) ? info[1] : info;
-    if (field[attribute] !== '' && field[attribute] !== null && field[attribute] !== !boolValue){
+    if (field[attribute] !== '' && field[attribute] !== null && field[attribute] !== !boolValue) {
       newField[convertedAttribute] = field[attribute];
     }
   });
@@ -16,7 +16,7 @@ const miqParser = (
   inputSchema,
   neededFieldAttributes = neededAttributes,
   neededFieldFalseAttributes = neededFalseAttributes,
-  componentsMap = componentMap,
+  componentsMap = componentMap
 ) => {
   const title = inputSchema.label;
   const name = inputSchema.id;
@@ -36,16 +36,18 @@ const miqParser = (
         getAttributes(field, newField, neededFieldFalseAttributes, false);
 
         if (field.validator_rule) {
-          newField.validate = [{
-            type: validatorTypes.PATTERN_VALIDATOR,
-            pattern: field.validator_rule,
-          }];
+          newField.validate = [
+            {
+              type: validatorTypes.PATTERN_VALIDATOR,
+              pattern: field.validator_rule
+            }
+          ];
         }
 
         if (field.required) {
           newField.validate = newField.validate || [];
           newField.validate.push({
-            type: validatorTypes.REQUIRED,
+            type: validatorTypes.REQUIRED
           });
         }
 
@@ -89,7 +91,7 @@ const miqParser = (
         title: group.label,
         name: group.id,
         fields: fieldsArray,
-        component: componentTypes.SUB_FORM,
+        component: componentTypes.SUB_FORM
       });
     });
     formTabs.push({
@@ -97,23 +99,25 @@ const miqParser = (
       description: tab.description,
       name: tab.id,
       fields: groups,
-      component: componentTypes.TAB_ITEM,
+      component: componentTypes.TAB_ITEM
     });
   });
 
   const schema = {
     title,
     description,
-    fields: [{
-      fields: formTabs,
-      component: componentTypes.TABS,
-      name,
-    }],
+    fields: [
+      {
+        fields: formTabs,
+        component: componentTypes.TABS,
+        name
+      }
+    ]
   };
 
   return {
     schema,
-    defaultValues,
+    defaultValues
   };
 };
 

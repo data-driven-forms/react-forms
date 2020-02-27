@@ -92,12 +92,12 @@ describe('<FormRenderer />', () => {
   it('should call form reset callback', () => {
     const onReset = jest.fn();
     const wrapper = mount(<FormRenderer {...initialProps} canReset onReset={onReset} />);
-    wrapper.find('input#component1').simulate('change', { target: { value: 'foo' }});
+    wrapper.find('input#component1').simulate('change', { target: { value: 'foo' } });
     wrapper.update();
     wrapper
-    .find('button')
-    .at(1)
-    .simulate('click');
+      .find('button')
+      .at(1)
+      .simulate('click');
     expect(onReset).toHaveBeenCalled();
   });
 

@@ -22,17 +22,17 @@ const output = {
               options: [
                 {
                   label: 'Dog',
-                  value: '1',
+                  value: '1'
                 },
                 {
                   label: 'Cats',
-                  value: '2',
+                  value: '2'
                 },
                 {
                   label: 'Hamsters',
-                  value: '3',
-                },
-              ],
+                  value: '3'
+                }
+              ]
             },
             {
               component: 'select-field',
@@ -43,14 +43,14 @@ const output = {
               options: [
                 {
                   value: 1,
-                  label: 'foo',
+                  label: 'foo'
                 },
                 {
                   value: 2,
-                  label: 'bar',
-                },
+                  label: 'bar'
+                }
               ],
-              multi: true,
+              multi: true
             },
             {
               title: 'Text boxes',
@@ -64,7 +64,7 @@ const output = {
                   bsSize: 'mn',
                   onText: 'True',
                   offText: 'False',
-                  validate: undefined,
+                  validate: undefined
                 },
                 {
                   name: 'text_box_111',
@@ -74,15 +74,15 @@ const output = {
                   isDisabled: true,
                   condition: {
                     when: 'text_box_1',
-                    is: true,
-                  },
+                    is: true
+                  }
                 },
                 {
                   name: 'text_box_1111',
                   label: 'Text Box',
                   title: 'Text Box',
                   component: components.SWITCH,
-                  isReadOnly: true,
+                  isReadOnly: true
                 },
                 {
                   name: 'text_box_11111',
@@ -91,14 +91,14 @@ const output = {
                   component: components.SWITCH,
                   placeholder: 'hello',
                   onText: 'turned onsssssssssssssssssss',
-                  offText: 'turnedOff',
+                  offText: 'turnedOff'
                 },
                 {
                   name: 'text_box_2',
                   label: 'Text Box with help',
                   title: 'Text Box with help',
                   helperText: 'Helper text',
-                  component: components.TEXT_FIELD,
+                  component: components.TEXT_FIELD
                 },
                 {
                   name: 'text_box_3',
@@ -107,29 +107,27 @@ const output = {
                   isRequired: true,
                   component: components.TEXT_FIELD,
                   validateOnMount: true,
-                  validate: [
-                    { type: validators.REQUIRED },
-                  ],
+                  validate: [{ type: validators.REQUIRED }]
                 },
                 {
                   name: 'text_box_4',
                   label: 'Text Box readonly',
                   title: 'Text Box readonly',
                   isReadOnly: true,
-                  component: components.TEXT_FIELD,
+                  component: components.TEXT_FIELD
                 },
                 {
                   name: 'text_box_5',
                   label: 'Text Box default',
                   title: 'Text Box default',
-                  component: components.TEXT_FIELD,
+                  component: components.TEXT_FIELD
                 },
                 {
                   name: 'text_box_6',
                   label: 'Text Box unvisible',
                   title: 'Text Box unvisible',
                   isVisible: false,
-                  component: components.TEXT_FIELD,
+                  component: components.TEXT_FIELD
                 },
                 {
                   name: 'text_box_7',
@@ -138,10 +136,10 @@ const output = {
                   validate: [
                     {
                       type: validators.PATTERN_VALIDATOR,
-                      pattern: '[0-9]',
-                    },
+                      pattern: '[0-9]'
+                    }
                   ],
-                  component: components.TEXT_FIELD,
+                  component: components.TEXT_FIELD
                 },
                 {
                   name: 'text_box_8',
@@ -149,17 +147,17 @@ const output = {
                   title: 'Text Box integer value',
                   dataType: 'integer',
                   component: components.TEXT_FIELD,
-                  type: 'number',
+                  type: 'number'
                 },
                 {
                   name: 'text_box_9',
                   label: 'Text Box string value',
                   title: 'Text Box string value',
                   dataType: 'string',
-                  component: components.TEXT_FIELD,
-                },
+                  component: components.TEXT_FIELD
+                }
               ],
-              component: components.SUB_FORM,
+              component: components.SUB_FORM
             },
             {
               title: 'Text areas',
@@ -169,13 +167,13 @@ const output = {
                   name: 'textarea_box_1',
                   label: 'Text Area',
                   title: 'Text Area',
-                  component: components.TEXTAREA_FIELD,
-                },
+                  component: components.TEXTAREA_FIELD
+                }
               ],
-              component: components.SUB_FORM,
-            },
+              component: components.SUB_FORM
+            }
           ],
-          component: components.TAB_ITEM,
+          component: components.TAB_ITEM
         },
         {
           title: 'Tab 2',
@@ -194,26 +192,26 @@ const output = {
                   options: [
                     {
                       label: 'Dog',
-                      value: '1',
+                      value: '1'
                     },
                     {
                       label: 'Cats',
-                      value: '2',
+                      value: '2'
                     },
                     {
                       label: 'Hamsters',
-                      value: '3',
-                    },
-                  ],
+                      value: '3'
+                    }
+                  ]
                 },
                 {
                   name: 'check_box_2',
                   label: 'Check Box checked',
                   title: 'Check Box checked',
-                  component: components.CHECKBOX,
-                },
+                  component: components.CHECKBOX
+                }
               ],
-              component: components.SUB_FORM,
+              component: components.SUB_FORM
             },
             {
               title: 'Radios',
@@ -228,17 +226,17 @@ const output = {
                   options: [
                     {
                       label: 'One',
-                      value: '1',
+                      value: '1'
                     },
                     {
                       label: 'Two',
-                      value: '2',
+                      value: '2'
                     },
                     {
                       label: 'Three',
-                      value: '3',
-                    },
-                  ],
+                      value: '3'
+                    }
+                  ]
                 },
                 {
                   name: 'radio_button_2',
@@ -249,17 +247,17 @@ const output = {
                   options: [
                     {
                       label: 'One',
-                      value: '1',
+                      value: '1'
                     },
                     {
                       label: 'Two',
-                      value: '2',
+                      value: '2'
                     },
                     {
                       label: 'Three',
-                      value: '3',
-                    },
-                  ],
+                      value: '3'
+                    }
+                  ]
                 },
                 {
                   name: 'radio_button_4',
@@ -270,23 +268,23 @@ const output = {
                   options: [
                     {
                       label: 'One',
-                      value: '1',
+                      value: '1'
                     },
                     {
                       label: 'Two',
-                      value: '2',
+                      value: '2'
                     },
                     {
                       label: 'Three',
-                      value: '3',
-                    },
-                  ],
-                },
+                      value: '3'
+                    }
+                  ]
+                }
               ],
-              component: components.SUB_FORM,
-            },
+              component: components.SUB_FORM
+            }
           ],
-          component: components.TAB_ITEM,
+          component: components.TAB_ITEM
         },
         {
           title: 'Tab 3',
@@ -303,26 +301,26 @@ const output = {
                   title: 'Dropdown',
                   dataType: 'string',
                   component: components.SELECT_COMPONENT,
-                  initialValue: [ '1' ],
+                  initialValue: ['1'],
                   isSearchable: true,
                   options: [
                     {
                       label: '<None>',
-                      value: null,
+                      value: null
                     },
                     {
                       label: 'One',
-                      value: '1',
+                      value: '1'
                     },
                     {
                       label: 'Three',
-                      value: '3',
+                      value: '3'
                     },
                     {
                       label: 'Two',
-                      value: '2',
-                    },
-                  ],
+                      value: '2'
+                    }
+                  ]
                 },
                 {
                   name: 'dropdown_list_2',
@@ -333,21 +331,21 @@ const output = {
                   options: [
                     {
                       label: '<None>',
-                      value: null,
+                      value: null
                     },
                     {
                       label: 'One',
-                      value: '1',
+                      value: '1'
                     },
                     {
                       label: 'Three',
-                      value: '3',
+                      value: '3'
                     },
                     {
                       label: 'Two',
-                      value: '2',
-                    },
-                  ],
+                      value: '2'
+                    }
+                  ]
                 },
                 {
                   name: 'dropdown_list_3',
@@ -359,21 +357,21 @@ const output = {
                   options: [
                     {
                       label: '<None>',
-                      value: null,
+                      value: null
                     },
                     {
                       label: 'One',
-                      value: '1',
+                      value: '1'
                     },
                     {
                       label: 'Three',
-                      value: '3',
+                      value: '3'
                     },
                     {
                       label: 'Two',
-                      value: '2',
-                    },
-                  ],
+                      value: '2'
+                    }
+                  ]
                 },
                 {
                   name: 'dropdown_list_4',
@@ -384,21 +382,21 @@ const output = {
                   options: [
                     {
                       label: '<None>',
-                      value: null,
+                      value: null
                     },
                     {
                       label: 'One',
-                      value: '1',
+                      value: '1'
                     },
                     {
                       label: 'Two',
-                      value: '2',
+                      value: '2'
                     },
                     {
                       label: 'Three',
-                      value: '3',
-                    },
-                  ],
+                      value: '3'
+                    }
+                  ]
                 },
                 {
                   name: 'select_clear',
@@ -410,27 +408,27 @@ const output = {
                   options: [
                     {
                       label: '<None>',
-                      value: null,
+                      value: null
                     },
                     {
                       label: 'One',
-                      value: '1',
+                      value: '1'
                     },
                     {
                       label: 'Three',
-                      value: '3',
+                      value: '3'
                     },
                     {
                       label: 'Two',
-                      value: '2',
-                    },
-                  ],
-                },
+                      value: '2'
+                    }
+                  ]
+                }
               ],
-              component: components.SUB_FORM,
-            },
+              component: components.SUB_FORM
+            }
           ],
-          component: components.TAB_ITEM,
+          component: components.TAB_ITEM
         },
         {
           title: 'Tab 4',
@@ -445,13 +443,16 @@ const output = {
                   component: components.SELECT,
                   name: 'date_control_select',
                   label: 'Select',
-                  options: [{
-                    value: 'foo',
-                    label: 'Foo',
-                  }, {
-                    value: 'bar',
-                    label: 'Bar',
-                  }],
+                  options: [
+                    {
+                      value: 'foo',
+                      label: 'Foo'
+                    },
+                    {
+                      value: 'bar',
+                      label: 'Bar'
+                    }
+                  ]
                 },
                 {
                   name: 'date_control_1',
@@ -463,9 +464,9 @@ const output = {
                     'today',
                     new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 5),
                     {
-                      before: 'Tue Oct 08 2019 10:23:03 GMT+0200 (Central European Summer Time)',
-                    },
-                  ],
+                      before: 'Tue Oct 08 2019 10:23:03 GMT+0200 (Central European Summer Time)'
+                    }
+                  ]
                 },
                 {
                   name: 'date_control_2',
@@ -473,10 +474,10 @@ const output = {
                   title: 'Datepicker with past days',
                   component: components.DATE_PICKER,
                   variant: 'date-time',
-                  initialValue: '2019-11-04T12:31:00.000Z',
-                },
+                  initialValue: '2019-11-04T12:31:00.000Z'
+                }
               ],
-              component: components.SUB_FORM,
+              component: components.SUB_FORM
             },
             {
               title: 'Timepickers',
@@ -486,19 +487,19 @@ const output = {
                   name: 'date_time_control_1',
                   label: 'Timepicker',
                   title: 'Timepicker',
-                  component: components.TIME_PICKER,
+                  component: components.TIME_PICKER
                 },
                 {
                   name: 'date_time_control_2',
                   label: 'Timepicker with past days',
                   title: 'Timepicker with past days',
-                  component: components.TIME_PICKER,
-                },
+                  component: components.TIME_PICKER
+                }
               ],
-              component: components.SUB_FORM,
-            },
+              component: components.SUB_FORM
+            }
           ],
-          component: components.TAB_ITEM,
+          component: components.TAB_ITEM
         },
         {
           title: 'Mixed',
@@ -513,25 +514,25 @@ const output = {
                   name: 'text_box_10',
                   label: 'Text Box',
                   title: 'Text Box',
-                  component: components.TEXT_FIELD,
+                  component: components.TEXT_FIELD
                 },
                 {
                   name: 'textarea_box_2',
                   label: 'Text Area',
                   title: 'Text Area',
-                  component: components.TEXTAREA_FIELD,
+                  component: components.TEXTAREA_FIELD
                 },
                 {
                   name: 'check_box_3',
                   label: 'Check Box',
                   title: 'Check Box',
-                  component: components.CHECKBOX,
+                  component: components.CHECKBOX
                 },
                 {
                   name: 'check_box_4',
                   label: 'Check Box',
                   title: 'Check Box',
-                  component: components.CHECKBOX,
+                  component: components.CHECKBOX
                 },
                 {
                   name: 'dropdown_list_5',
@@ -542,21 +543,21 @@ const output = {
                   options: [
                     {
                       label: '<None>',
-                      value: null,
+                      value: null
                     },
                     {
                       label: 'One',
-                      value: '1',
+                      value: '1'
                     },
                     {
                       label: 'Three',
-                      value: '3',
+                      value: '3'
                     },
                     {
                       label: 'Two',
-                      value: '2',
-                    },
-                  ],
+                      value: '2'
+                    }
+                  ]
                 },
                 {
                   name: 'radio_button_3',
@@ -567,39 +568,42 @@ const output = {
                   options: [
                     {
                       label: 'One',
-                      value: '1',
+                      value: '1'
                     },
                     {
                       label: 'Two',
-                      value: '2',
+                      value: '2'
                     },
                     {
                       label: 'Three',
-                      value: '3',
-                    },
-                  ],
+                      value: '3'
+                    }
+                  ]
                 },
                 {
                   name: 'date_time_control_3',
                   label: 'Timepicker',
                   title: 'Timepicker',
-                  component: components.TIME_PICKER,
-                },
+                  component: components.TIME_PICKER
+                }
               ],
-              component: components.SUB_FORM,
-            },
+              component: components.SUB_FORM
+            }
           ],
-          component: components.TAB_ITEM,
-        },
+          component: components.TAB_ITEM
+        }
       ],
       component: components.TABS,
-      name: '57',
-    },
-  ],
+      name: '57'
+    }
+  ]
 };
 
 export const defaultValues = {
-  text_box_5: '"hello"', check_box_2: 'true', radio_button_4: '2', dropdown_list_2: '2',
+  text_box_5: '"hello"',
+  check_box_2: 'true',
+  radio_button_4: '2',
+  dropdown_list_2: '2'
 };
 
 export default output;

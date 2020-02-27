@@ -27,10 +27,10 @@ export const createTransform = (labelWidth, isChecked, isOffText = false) => {
   let width = COMBINED_MARGIN + labelWidth + dividerSize;
   return isChecked
     ? {
-      WebkitTransform: `translateX(${width}px)`,
-      msTransform: `translateX(${width}px)`,
-      transform: `translateX(${width}px)`
-    }
+        WebkitTransform: `translateX(${width}px)`,
+        msTransform: `translateX(${width}px)`,
+        transform: `translateX(${width}px)`
+      }
     : {};
 };
 
@@ -53,7 +53,7 @@ const Switch = ({ onText, offText, disabled, isReadOnly, bsSize, ...props }) => 
           const ENTER_CODE = 13;
           if (e.keyCode === SPACEBAR_CODE) {
             e.preventDefault();
-            props.onChange({ target: { checked: !props.checked }});
+            props.onChange({ target: { checked: !props.checked } });
           } else if (e.keyCode === ENTER_CODE) {
             e.preventDefault();
             handleSubmit();

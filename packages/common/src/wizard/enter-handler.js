@@ -1,7 +1,7 @@
 import selectNext from './select-next';
 
 const enterHandler = (e, formOptions, activeStep, findCurrentStep, handleNext, handleSubmit) => {
-  if (e.key === 'Enter'){
+  if (e.key === 'Enter') {
     const isNotButton = e.target.type !== 'button';
 
     if (isNotButton) {

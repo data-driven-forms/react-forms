@@ -5,7 +5,7 @@ import { TabContainer, Nav, NavItem, TabContent, TabPane, Icon } from 'patternfl
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
 const renderTabHeader = (items, formOptions) =>
-  items.map(({ title, name, validateFields = []}, index) => {
+  items.map(({ title, name, validateFields = [] }, index) => {
     const errors = formOptions.getState().errors;
     const hasError = validateFields.find((name) => !!get(errors, name));
     return (

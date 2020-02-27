@@ -24,7 +24,7 @@ const FormTabs = ({ fields }) => {
     <div>
       <AppBar position="static">
         <Tabs value={activeTab} onChange={(_e, tabIndex) => setActiveTab(tabIndex)}>
-          <TabHeader items={fields}/>
+          <TabHeader items={fields} />
         </Tabs>
       </AppBar>
       <TabContet {...fields[activeTab]} formOptions={formOptions} />

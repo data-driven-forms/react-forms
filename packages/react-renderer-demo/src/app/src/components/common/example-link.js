@@ -6,8 +6,8 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 
 const useStyles = makeStyles({
   toExampleLink: {
-    textDecoration: 'none',
-  },
+    textDecoration: 'none'
+  }
 });
 
 const ExampleLink = ({ to, text = 'To example' }) => {
@@ -15,19 +15,20 @@ const ExampleLink = ({ to, text = 'To example' }) => {
   return (
     <React.Fragment>
       <div style={{ float: 'right' }}>
-        <RouterLink href={ `/component-example/${to}` }>
-          <a className={ classes.toExampleLink } href={ `/component-example/${to}` }>
-            <Button color="primary" >{ text }</Button>
+        <RouterLink href={`/component-example/${to}`}>
+          <a className={classes.toExampleLink} href={`/component-example/${to}`}>
+            <Button color="primary">{text}</Button>
           </a>
         </RouterLink>
       </div>
-      <br/>
+      <br />
     </React.Fragment>
-  );};
+  );
+};
 
 ExampleLink.propTypes = {
   to: PropTypes.string.isRequired,
-  text: PropTypes.node,
+  text: PropTypes.node
 };
 
 export default ExampleLink;

@@ -22,7 +22,7 @@ const ConditionalNext = ({ nextStep, FieldProvider, ...rest }) => (
   <FieldProvider
     name={nextStep.when}
     subscription={{ value: true }}
-    render={({ input: { value }}) => <SimpleNext next={nextStep.stepMapper[value]} {...rest} />}
+    render={({ input: { value } }) => <SimpleNext next={nextStep.stepMapper[value]} {...rest} />}
   />
 );
 

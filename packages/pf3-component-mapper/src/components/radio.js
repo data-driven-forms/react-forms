@@ -40,7 +40,9 @@ const Radio = ({ name, isRequired, isDisabled, isReadOnly, validateOnMount, help
       helperText={helperText}
       description={description}
     >
-      {options.map((option) => <RadioOption key={option.value} name={name} option={option} isReadOnly={isReadOnly} isDisabled={isDisabled} />)}
+      {options.map((option) => (
+        <RadioOption key={option.value} name={name} option={option} isReadOnly={isReadOnly} isDisabled={isDisabled} />
+      ))}
     </FormGroup>
   );
 };

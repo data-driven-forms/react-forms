@@ -91,7 +91,7 @@ const DynamicArray = ({
 
   return (
     <FieldArray key={rest.input.name} name={rest.input.name} validate={arrayValidator}>
-      {({ fields: { map, value = [], push, remove }}) => (
+      {({ fields: { map, value = [], push, remove } }) => (
         <Fragment>
           {label && <GridItem sm={12}>{label}</GridItem>}
           {description && <GridItem sm={12}>{description}</GridItem>}

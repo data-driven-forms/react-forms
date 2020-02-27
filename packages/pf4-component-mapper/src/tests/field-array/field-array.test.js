@@ -60,9 +60,9 @@ describe.skip('FieldArray', () => {
     expect(wrapper.find('h3[id="desc"]')).toHaveLength(1);
     expect(
       wrapper
-      .find(AddCircleOIcon)
-      .props()
-      .className.includes('disabled')
+        .find(AddCircleOIcon)
+        .props()
+        .className.includes('disabled')
     ).toEqual(false);
     expect(wrapper.find(CloseIcon)).toHaveLength(0);
   });
@@ -84,32 +84,32 @@ describe.skip('FieldArray', () => {
       }
     ];
 
-    const wrapper = mount(<ContextWrapper initialValues={{ foo: ['bar', 'foo']}} schema={{ fields: formFields }} />);
+    const wrapper = mount(<ContextWrapper initialValues={{ foo: ['bar', 'foo'] }} schema={{ fields: formFields }} />);
 
     expect(wrapper.find('label[id="label"]')).toHaveLength(1);
     expect(wrapper.find('h4[id="message"]')).toHaveLength(0);
     expect(wrapper.find('h3[id="desc"]')).toHaveLength(1);
     expect(
       wrapper
-      .find(AddCircleOIcon)
-      .props()
-      .className.includes('disabled')
+        .find(AddCircleOIcon)
+        .props()
+        .className.includes('disabled')
     ).toEqual(false);
     expect(wrapper.find(CloseIcon)).toHaveLength(2);
     expect(wrapper.find(CloseIcon)).toHaveLength(2);
     expect(
       wrapper
-      .find(CloseIcon)
-      .first()
-      .props()
-      .className.includes('disabled')
+        .find(CloseIcon)
+        .first()
+        .props()
+        .className.includes('disabled')
     ).toEqual(false);
     expect(
       wrapper
-      .find(CloseIcon)
-      .last()
-      .props()
-      .className.includes('disabled')
+        .find(CloseIcon)
+        .last()
+        .props()
+        .className.includes('disabled')
     ).toEqual(false);
   });
 
@@ -154,7 +154,7 @@ describe.skip('FieldArray', () => {
       }
     ];
 
-    const wrapper = mount(<ContextWrapper initialValues={{ foo: ['first value']}} schema={{ fields: formFields }} />);
+    const wrapper = mount(<ContextWrapper initialValues={{ foo: ['first value'] }} schema={{ fields: formFields }} />);
 
     expect(wrapper.find(TextInput)).toHaveLength(1);
     wrapper.find(CloseIcon).simulate('click');
@@ -183,7 +183,7 @@ describe.skip('FieldArray', () => {
       }
     ];
 
-    const wrapper = mount(<ContextWrapper initialValues={{ foo: ['bar']}} schema={{ fields: formFields }} />);
+    const wrapper = mount(<ContextWrapper initialValues={{ foo: ['bar'] }} schema={{ fields: formFields }} />);
     expect(wrapper.find({ name: 'foo[0]nested-component' })).toBeTruthy();
   });
 
@@ -203,7 +203,7 @@ describe.skip('FieldArray', () => {
       }
     ];
 
-    const wrapper = mount(<ContextWrapper initialValues={{ foo: ['bar']}} schema={{ fields: formFields }} />);
+    const wrapper = mount(<ContextWrapper initialValues={{ foo: ['bar'] }} schema={{ fields: formFields }} />);
     expect(wrapper.find({ name: 'foo[0]' })).toBeTruthy();
   });
 
@@ -224,13 +224,13 @@ describe.skip('FieldArray', () => {
       }
     ];
 
-    const wrapper = mount(<ContextWrapper initialValues={{ foo: ['bar', 'foo']}} schema={{ fields: formFields }} />);
+    const wrapper = mount(<ContextWrapper initialValues={{ foo: ['bar', 'foo'] }} schema={{ fields: formFields }} />);
 
     expect(
       wrapper
-      .find(AddCircleOIcon)
-      .props()
-      .className.includes('disabled')
+        .find(AddCircleOIcon)
+        .props()
+        .className.includes('disabled')
     ).toEqual(true);
   });
 
@@ -251,22 +251,22 @@ describe.skip('FieldArray', () => {
       }
     ];
 
-    const wrapper = mount(<ContextWrapper initialValues={{ foo: ['bar', 'foo']}} schema={{ fields: formFields }} />);
+    const wrapper = mount(<ContextWrapper initialValues={{ foo: ['bar', 'foo'] }} schema={{ fields: formFields }} />);
 
     expect(wrapper.find(CloseIcon)).toHaveLength(2);
     expect(
       wrapper
-      .find(CloseIcon)
-      .first()
-      .props()
-      .className.includes('disabled')
+        .find(CloseIcon)
+        .first()
+        .props()
+        .className.includes('disabled')
     ).toEqual(true);
     expect(
       wrapper
-      .find(CloseIcon)
-      .last()
-      .props()
-      .className.includes('disabled')
+        .find(CloseIcon)
+        .last()
+        .props()
+        .className.includes('disabled')
     ).toEqual(true);
   });
 });

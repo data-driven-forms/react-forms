@@ -14,7 +14,7 @@ const componentTypes = {
   SWITCH: 'switch-field',
   TEXTAREA: 'textarea-field',
   SELECT: 'select-field',
-  PLAIN_TEXT: 'plain-text',
+  PLAIN_TEXT: 'plain-text'
 };
 
 export default componentTypes;

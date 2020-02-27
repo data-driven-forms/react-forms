@@ -40,7 +40,9 @@ const Radio = ({ name, options, ...props }) => {
       hideLabel={hideLabel}
       id={id || input.name}
     >
-      {options.map((option) => <RadioOption key={option.value} name={name} option={option} isReadOnly={isReadOnly} isDisabled={isDisabled} />)}
+      {options.map((option) => (
+        <RadioOption key={option.value} name={name} option={option} isReadOnly={isReadOnly} isDisabled={isDisabled} />
+      ))}
     </FormGroup>
   );
 };

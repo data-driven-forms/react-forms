@@ -115,17 +115,17 @@ describe('FormTemplate PF4 Common', () => {
     );
     expect(toJson(wrapper)).toMatchSnapshot();
     wrapper
-    .find('button')
-    .first()
-    .simulate('click');
+      .find('button')
+      .first()
+      .simulate('click');
     wrapper
-    .find('button')
-    .at(1)
-    .simulate('click');
+      .find('button')
+      .at(1)
+      .simulate('click');
     wrapper
-    .find('button')
-    .last()
-    .simulate('click');
+      .find('button')
+      .last()
+      .simulate('click');
 
     expect(formOptions.onSubmit).not.toHaveBeenCalled();
     expect(formOptions.onReset).not.toHaveBeenCalled();
@@ -182,9 +182,9 @@ describe('FormTemplate PF4 Common', () => {
     wrapper.update();
 
     wrapper
-    .find('button')
-    .at(CANCEL_INDEX)
-    .simulate('click');
+      .find('button')
+      .at(CANCEL_INDEX)
+      .simulate('click');
 
     expect(formOptions.onCancel).toHaveBeenCalledWith(expectedValues);
   });

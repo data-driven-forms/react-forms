@@ -1,7 +1,7 @@
 import messages from '../../validators/messages';
 
 describe('validator messages', () => {
-  const getMessage = ({ defaultMessage }) => typeof defaultMessage === 'function' ? defaultMessage(5) : defaultMessage;
+  const getMessage = ({ defaultMessage }) => (typeof defaultMessage === 'function' ? defaultMessage(5) : defaultMessage);
 
   it('even', () => {
     expect(getMessage(messages.even)).toEqual('Number must be even');

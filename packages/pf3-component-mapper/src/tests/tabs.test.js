@@ -75,7 +75,7 @@ describe('<FormTabs />', () => {
     formOptions = {
       renderForm: ({ name, component }) => <div key={name}>{component}</div>,
       getState: () => ({
-        errors: { foo: true, nested: { field: true }}
+        errors: { foo: true, nested: { field: true } }
       })
     };
 
@@ -97,32 +97,32 @@ describe('<FormTabs />', () => {
 
     expect(
       wrapper
-      .find(NavItem)
-      .first()
-      .instance().props.active
+        .find(NavItem)
+        .first()
+        .instance().props.active
     ).toEqual(true);
     expect(
       wrapper
-      .find(NavItem)
-      .last()
-      .instance().props.active
+        .find(NavItem)
+        .last()
+        .instance().props.active
     ).toEqual(false);
 
     wrapper
-    .find('a')
-    .last()
-    .simulate('click');
+      .find('a')
+      .last()
+      .simulate('click');
     expect(
       wrapper
-      .find(NavItem)
-      .first()
-      .instance().props.active
+        .find(NavItem)
+        .first()
+        .instance().props.active
     ).toEqual(false);
     expect(
       wrapper
-      .find(NavItem)
-      .last()
-      .instance().props.active
+        .find(NavItem)
+        .last()
+        .instance().props.active
     ).toEqual(true);
   });
 });

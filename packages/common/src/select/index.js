@@ -5,18 +5,13 @@ import clsx from 'clsx';
 import isEqual from 'lodash/isEqual';
 import { input } from '../prop-types-templates';
 
-const getSelectValue = (stateValue, simpleValue, isMulti, allOptions) => simpleValue
-  ? allOptions.filter(({ value }) => isMulti
-    ? stateValue.includes(value)
-    : isEqual(value, stateValue))
-  : stateValue;
+const getSelectValue = (stateValue, simpleValue, isMulti, allOptions) =>
+  simpleValue ? allOptions.filter(({ value }) => (isMulti ? stateValue.includes(value) : isEqual(value, stateValue))) : stateValue;
 
 const handleSelectChange = (option, simpleValue, isMulti, onChange) => {
-  const sanitizedOption =  !option && isMulti ? [] : option;
+  const sanitizedOption = !option && isMulti ? [] : option;
   return simpleValue
-    ? onChange(isMulti
-      ? sanitizedOption.map(item => item.value)
-      : sanitizedOption ? sanitizedOption.value : undefined)
+    ? onChange(isMulti ? sanitizedOption.map((item) => item.value) : sanitizedOption ? sanitizedOption.value : undefined)
     : onChange(sanitizedOption);
 };
 
@@ -25,20 +20,20 @@ class Select extends Component {
     const { input, invalid, classNamePrefix, simpleValue, isMulti, pluckSingleValue, options, ...props } = this.props;
     const { value, onChange, ...inputProps } = input;
 
-    const selectValue = pluckSingleValue ? isMulti ? value : Array.isArray(value) && value[0] ? value[0] : value : value;
+    const selectValue = pluckSingleValue ? (isMulti ? value : Array.isArray(value) && value[0] ? value[0] : value) : value;
 
     return (
       <ReactSelect
-        className={ clsx(classNamePrefix, {
-          'has-error': invalid,
-        }) }
-        { ...props }
-        { ...inputProps }
-        options={ options }
-        classNamePrefix={ classNamePrefix }
-        isMulti={ isMulti }
-        value={ getSelectValue(selectValue, simpleValue, isMulti, options) }
-        onChange={ option => handleSelectChange(option, simpleValue, isMulti, onChange) }
+        className={clsx(classNamePrefix, {
+          'has-error': invalid
+        })}
+        {...props}
+        {...inputProps}
+        options={options}
+        classNamePrefix={classNamePrefix}
+        isMulti={isMulti}
+        value={getSelectValue(selectValue, simpleValue, isMulti, options)}
+        onChange={(option) => handleSelectChange(option, simpleValue, isMulti, onChange)}
       />
     );
   }
@@ -59,20 +54,13 @@ Select.defaultProps = {
   options: [],
   invalid: false,
   simpleValue: true,
-  pluckSingleValue: true,
+  pluckSingleValue: true
 };
 
 const DataDrivenSelect = ({ multi, ...props }) => {
   const isMulti = props.isMulti || multi;
   const closeMenuOnSelect = !isMulti;
-  return (
-    <Select
-      hideSelectedOptions={ false }
-      isMulti={ isMulti }
-      { ...props }
-      closeMenuOnSelect={ closeMenuOnSelect }
-    />
-  );
+  return <Select hideSelectedOptions={false} isMulti={isMulti} {...props} closeMenuOnSelect={closeMenuOnSelect} />;
 };
 
 DataDrivenSelect.propTypes = {
@@ -81,13 +69,13 @@ DataDrivenSelect.propTypes = {
   multi: PropTypes.bool,
   placeholder: PropTypes.string,
   isMulti: PropTypes.bool,
-  classNamePrefix: PropTypes.string.isRequired,
+  classNamePrefix: PropTypes.string.isRequired
 };
 
 DataDrivenSelect.defaultProps = {
   placeholder: 'Choose...',
   isSearchable: false,
-  isClearable: false,
+  isClearable: false
 };
 
 export default DataDrivenSelect;

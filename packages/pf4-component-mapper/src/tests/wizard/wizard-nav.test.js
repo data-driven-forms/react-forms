@@ -26,19 +26,19 @@ describe('WizardNav', () => {
 
     expect(initialProps.setPrevSteps).not.toHaveBeenCalled();
 
-    wrapper.setProps({ values: { name: 'different value' }});
+    wrapper.setProps({ values: { name: 'different value' } });
 
     expect(initialProps.setPrevSteps.mock.calls).toHaveLength(1);
 
-    wrapper.setProps({ values: { name: 'different value' }});
+    wrapper.setProps({ values: { name: 'different value' } });
 
     expect(initialProps.setPrevSteps.mock.calls).toHaveLength(1);
 
-    wrapper.setProps({ values: { name: 'another value' }});
+    wrapper.setProps({ values: { name: 'another value' } });
 
     expect(initialProps.setPrevSteps.mock.calls).toHaveLength(2);
 
-    wrapper.setProps({ values: { name: 'another value', password: 'do not render nav' }});
+    wrapper.setProps({ values: { name: 'another value', password: 'do not render nav' } });
 
     expect(initialProps.setPrevSteps.mock.calls).toHaveLength(2);
   });

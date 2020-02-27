@@ -23,79 +23,79 @@ import Footer from './footer';
 
 import dynamic from 'next/dynamic';
 const DocSearch = dynamic(import('./docsearch'), {
-  ssr: false,
+  ssr: false
 });
 
 export const drawerWidth = 240;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   mainGradient: {
     backgroundImage: 'linear-gradient(135deg, #41108E 0%, rgba(165, 37, 193, 1) 44.76%, #FC9957 100%)',
     backgroundSize: '100vw 100vh',
     backgroundRepeat: 'no-repeat',
-    transition: theme.transitions.create([ 'margin', 'width' ], {
+    transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+      duration: theme.transitions.duration.enteringScreen
+    })
   },
   mainGradientShift: {
     width: `calc(100vw - ${drawerWidth}px)`,
-    transition: theme.transitions.create([ 'margin', 'width' ], {
+    transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+      duration: theme.transitions.duration.leavingScreen
+    })
   },
   root: {
-    display: 'flex',
+    display: 'flex'
   },
   appBar: {
     position: 'fixed',
-    transition: theme.transitions.create([ 'margin', 'width' ], {
+    transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+      duration: theme.transitions.duration.leavingScreen
+    })
   },
   contentWrapper: {
     paddingTop: 86,
-    paddingBottom: 32,
+    paddingBottom: 32
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(2)
   },
   hide: {
-    display: 'none',
+    display: 'none'
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0,
+    flexShrink: 0
   },
   drawerPaper: {
-    width: drawerWidth,
+    width: drawerWidth
   },
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',
     padding: '0 8px',
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-end'
   },
   content: {
     flexGrow: 1,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+      duration: theme.transitions.duration.leavingScreen
     }),
-    marginLeft: -drawerWidth,
+    marginLeft: -drawerWidth
   },
   contentShift: {
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
+      duration: theme.transitions.duration.enteringScreen
     }),
-    marginLeft: 0,
+    marginLeft: 0
   },
   menuIcons: {
-    fill: theme.palette.common.white,
+    fill: theme.palette.common.white
   },
   rightAppBar: {
     right: 0,
@@ -103,54 +103,63 @@ const useStyles = makeStyles(theme => ({
     backgroundImage: 'linear-gradient(135deg, #41108E 0%, rgba(165, 37, 193, 1) 44.76%, #FC9957 100%)',
     backgroundSize: '100vw 100vh',
     backgroundRepeat: 'no-repeat',
-    zIndex: 900,
+    zIndex: 900
   },
   toolbarOverride: {
-    zIndex: 1000,
+    zIndex: 1000
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
-    transition: theme.transitions.create([ 'margin', 'width' ], {
+    transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
+      duration: theme.transitions.duration.enteringScreen
+    })
+  }
 }));
 
 const Layout = ({ children }) => {
   const router = useRouter();
   const classes = useStyles();
-  const [ open, setOpen ] = useState(router.pathname !== '/');
-  const [ mappers, setMappers ] = useState({ loaded: false, mappers: {}});
-  const [ links, setLinks ] = useState({});
+  const [open, setOpen] = useState(router.pathname !== '/');
+  const [mappers, setMappers] = useState({ loaded: false, mappers: {} });
+  const [links, setLinks] = useState({});
   const searchRef = useRef(null);
 
   useEffect(() => {
     const promises = [
       import('@data-driven-forms/pf3-component-mapper'),
       import('@data-driven-forms/pf4-component-mapper'),
-      import('@data-driven-forms/mui-component-mapper'),
+      import('@data-driven-forms/mui-component-mapper')
     ];
 
-    Promise.all(promises).then(([ pf3, pf4, mui ]) => setMappers({ loaded: true, mappers: { pf3: {
-      ...pf3,
-      formFieldsMapper: {
-        ...pf3.formFieldsMapper,
-        summary: () => <div>Pf3 summary</div>,
-      },
-    }, pf4: {
-      ...pf4,
-      formFieldsMapper: { ...pf4.formFieldsMapper, summary: () => <div>Pf4 summary</div> },
-    }, mui: {
-      ...mui,
-      formFieldsMapper: { ...mui.formFieldsMapper, [componentTypes.WIZARD]: MuiWizzard, summary: () => <div>Mui summary</div>  },
-    }}}));
+    Promise.all(promises).then(([pf3, pf4, mui]) =>
+      setMappers({
+        loaded: true,
+        mappers: {
+          pf3: {
+            ...pf3,
+            formFieldsMapper: {
+              ...pf3.formFieldsMapper,
+              summary: () => <div>Pf3 summary</div>
+            }
+          },
+          pf4: {
+            ...pf4,
+            formFieldsMapper: { ...pf4.formFieldsMapper, summary: () => <div>Pf4 summary</div> }
+          },
+          mui: {
+            ...mui,
+            formFieldsMapper: { ...mui.formFieldsMapper, [componentTypes.WIZARD]: MuiWizzard, summary: () => <div>Mui summary</div> }
+          }
+        }
+      })
+    );
   }, []);
 
   useEffect(() => {
     setLinks(findConnectedLinks(router.asPath, flatSchema) || {});
-  }, [ router.asPath ]);
+  }, [router.asPath]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -162,71 +171,68 @@ const Layout = ({ children }) => {
   }
 
   return (
-    <MapperContext.Provider value={ mappers }>
-      <MenuContext.Provider value={ links }>
-        <div className={ classes.root }>
+    <MapperContext.Provider value={mappers}>
+      <MenuContext.Provider value={links}>
+        <div className={classes.root}>
           <Toolbar
-            className={ clsx(classes.appBar, {
+            className={clsx(classes.appBar, {
               [classes.toolbarOverride]: !open,
-              [classes.appBarShift]: open,
-            }) }>
-
+              [classes.appBarShift]: open
+            })}
+          >
             <IconButton
               color="inherit"
               aria-label="open drawer"
-              onClick={ handleDrawerOpen }
+              onClick={handleDrawerOpen}
               edge="start"
-              className={ clsx(classes.menuButton, open && classes.hide) }
+              className={clsx(classes.menuButton, open && classes.hide)}
             >
-              <MenuIcon className={ classes.menuIcons } />
+              <MenuIcon className={classes.menuIcons} />
             </IconButton>
           </Toolbar>
           <Drawer
-            className={ classes.drawer }
+            className={classes.drawer}
             variant="persistent"
             anchor="left"
-            open={ open }
+            open={open}
             classes={{
-              paper: classes.drawerPaper,
+              paper: classes.drawerPaper
             }}
           >
-            <Navigation searchRef={ searchRef } closeNav={ handleDrawerClose }/>
+            <Navigation searchRef={searchRef} closeNav={handleDrawerClose} />
             <Divider />
           </Drawer>
-          <div className={ clsx(classes.drawerHeader, classes.appBar, classes.rightAppBar, {
-            [classes.appBarShift]: open,
-          }) }>
+          <div
+            className={clsx(classes.drawerHeader, classes.appBar, classes.rightAppBar, {
+              [classes.appBarShift]: open
+            })}
+          >
             <DocSearch />
             <a href="https://github.com/data-driven-forms/react-forms" rel="noopener noreferrer" target="_blank">
-              <IconButton
-                color="inherit"
-                aria-label="gh repository"
-                edge="start"
-                className={ clsx(classes.menuButton) }
-              >
+              <IconButton color="inherit" aria-label="gh repository" edge="start" className={clsx(classes.menuButton)}>
                 <SvgIcon>
-                  <GhIcon className={ classes.menuIcons } />
+                  <GhIcon className={classes.menuIcons} />
                 </SvgIcon>
               </IconButton>
             </a>
           </div>
 
           <main
-            className={ clsx(classes.content, {
+            className={clsx(classes.content, {
               [classes.contentShift]: open,
               [classes.mainGradient]: router.pathname === '/',
-              [classes.mainGradientShift]: router.pathname === '/' && open,
-            }) }
+              [classes.mainGradientShift]: router.pathname === '/' && open
+            })}
           >
-            <div className={ classes.contentWrapper }>
+            <div className={classes.contentWrapper}>
               <div
                 className="DocSearch-content"
                 style={{
                   paddingRight: 32,
-                  paddingLeft: 32,
-
-                }}>
-                { children }
+                  paddingLeft: 32
+                }}
+              >
+                {children}
               </div>
               <ConnectedLinks />
               <Footer />
@@ -234,13 +240,12 @@ const Layout = ({ children }) => {
           </main>
         </div>
       </MenuContext.Provider>
-
     </MapperContext.Provider>
   );
 };
 
 Layout.propTypes = {
-  children: PropTypes.oneOfType([ PropTypes.node, PropTypes.arrayOf(PropTypes.node) ]),
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)])
 };
 
 export default Layout;

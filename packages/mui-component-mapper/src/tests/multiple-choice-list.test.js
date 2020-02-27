@@ -20,7 +20,7 @@ describe.skip('<MultipleChoiceList />', () => {
       input: {
         name: 'name'
       },
-      FieldProvider: (props) => <MockFieldProvider {...props} input={{ onChange: changeSpy, value: props.value || []}} />,
+      FieldProvider: (props) => <MockFieldProvider {...props} input={{ onChange: changeSpy, value: props.value || [] }} />,
       options: [
         {
           label: 'Foo',
@@ -53,9 +53,9 @@ describe.skip('<MultipleChoiceList />', () => {
     const wrapper = mount(<MultipleChoiceList {...initialProps} />);
 
     wrapper
-    .find('input')
-    .last()
-    .simulate('change', { target: { checked: true }});
+      .find('input')
+      .last()
+      .simulate('change', { target: { checked: true } });
     expect(changeSpy).toHaveBeenCalledWith([1]);
   });
 
@@ -63,14 +63,14 @@ describe.skip('<MultipleChoiceList />', () => {
     const wrapper = mount(
       <MultipleChoiceList
         {...initialProps}
-        FieldProvider={(props) => <MockFieldProvider {...props} input={{ onChange: changeSpy, value: props.value || [1]}} />}
+        FieldProvider={(props) => <MockFieldProvider {...props} input={{ onChange: changeSpy, value: props.value || [1] }} />}
       />
     );
 
     wrapper
-    .find('input')
-    .last()
-    .simulate('change', { target: { checked: true }});
+      .find('input')
+      .last()
+      .simulate('change', { target: { checked: true } });
     expect(changeSpy).toHaveBeenCalledWith([]);
   });
 
@@ -83,7 +83,7 @@ describe.skip('<MultipleChoiceList />', () => {
         FieldProvider={(props) => (
           <MockFieldProvider
             {...props}
-            input={{ onChange: changeSpy, value: []}}
+            input={{ onChange: changeSpy, value: [] }}
             meta={{
               error: ERROR_MESSAGE,
               touched: true

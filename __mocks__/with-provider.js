@@ -3,7 +3,7 @@ import React from 'react';
 import { RendererContext } from '@data-driven-forms/react-form-renderer';
 import Form from '@data-driven-forms/react-form-renderer/dist/cjs/form';
 
-const RenderWithProvider = ({ value = { formOptions: {}}, children, onSubmit = () => {} }) => {
+const RenderWithProvider = ({ value = { formOptions: {} }, children, onSubmit = () => {} }) => {
   return (
     <Form onSubmit={onSubmit}>
       {() => (
@@ -16,6 +16,7 @@ const RenderWithProvider = ({ value = { formOptions: {}}, children, onSubmit = (
         </RendererContext.Provider>
       )}
     </Form>
-  );};
+  );
+};
 
 export default RenderWithProvider;
