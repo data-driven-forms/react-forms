@@ -37,7 +37,7 @@ describe('tabs', () => {
     expect(wrapper.find(AppBar)).toHaveLength(1);
     expect(wrapper.find(Tabs)).toHaveLength(1);
     expect(wrapper.find(Tab)).toHaveLength(2);
-    expect(wrapper.find('h1')).toHaveLength(1);
+    expect(wrapper.find('h1')).toHaveLength(2);
   });
 
   it('should switch tabs correctly', () => {

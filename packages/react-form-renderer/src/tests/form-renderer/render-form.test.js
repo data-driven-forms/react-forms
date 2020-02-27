@@ -910,7 +910,7 @@ describe('renderForm function', () => {
     const unmountInitializedField = (wrapper) => updateInput(wrapper, SHOWER_FIELD_INDEX, NOT_SHOW_VALUE);
     const setInitializedToNewValue = (wrapper) => updateInput(wrapper, INITIALIZED_FIELD_INDEX, NEW_VALUE);
 
-    it('should reset value after mount when set on fields', () => {
+    it.only('should reset value after mount when set on fields', () => {
       const SET_INITIALIZE_ON_MOUNT = true;
       const onSubmit = jest.fn();
 
@@ -937,17 +937,17 @@ describe('renderForm function', () => {
       onSubmit.mockReset();
 
       form.simulate('submit');
-      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: NEW_VALUE }));
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: INITIAL_VALUE, [SHOWER_FIELD]: SHOW_VALUE }));
       onSubmit.mockReset();
 
       form.simulate('submit');
       unmountInitializedField(wrapper);
-      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: NEW_VALUE }));
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: INITIAL_VALUE, [SHOWER_FIELD]: SHOW_VALUE }));
       onSubmit.mockReset();
 
       form.simulate('submit');
       mountInitializedField(wrapper);
-      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: NEW_VALUE, [SHOWER_FIELD]: NOT_SHOW_VALUE }));
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: INITIAL_VALUE, [SHOWER_FIELD]: NOT_SHOW_VALUE }));
     });
 
     it('should not reset value after mount when set on fields', () => {
@@ -1011,12 +1011,12 @@ describe('renderForm function', () => {
       mountInitializedField(wrapper);
       setInitializedToNewValue(wrapper);
       wrapper.find('form').simulate('submit');
-      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: SHOW_VALUE, [INITIALIZED_FIELD]: NEW_VALUE }));
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: SHOW_VALUE, [INITIALIZED_FIELD]: SCHEMA_INITIAL_VALUE }));
       onSubmit.mockReset();
 
       unmountInitializedField(wrapper);
       wrapper.find('form').simulate('submit');
-      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: NOT_SHOW_VALUE, [INITIALIZED_FIELD]: NEW_VALUE }));
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: NOT_SHOW_VALUE, [INITIALIZED_FIELD]: SCHEMA_INITIAL_VALUE }));
       onSubmit.mockReset();
 
       mountInitializedField(wrapper);
@@ -1043,12 +1043,12 @@ describe('renderForm function', () => {
       mountInitializedField(wrapper);
       setInitializedToNewValue(wrapper);
       wrapper.find('form').simulate('submit');
-      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: SHOW_VALUE, [INITIALIZED_FIELD]: NEW_VALUE }));
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: SHOW_VALUE, [INITIALIZED_FIELD]: SCHEMA_INITIAL_VALUE }));
       onSubmit.mockReset();
 
       unmountInitializedField(wrapper);
       wrapper.find('form').simulate('submit');
-      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: NEW_VALUE, [SHOWER_FIELD]: NOT_SHOW_VALUE }));
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: SCHEMA_INITIAL_VALUE, [SHOWER_FIELD]: NOT_SHOW_VALUE }));
       onSubmit.mockReset();
 
       mountInitializedField(wrapper);

@@ -69,16 +69,24 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
     <FormTemplate
       formFields={
         Array [
-          <React.Fragment>
-            <Context.Consumer>
-              [Function]
-            </Context.Consumer>
-          </React.Fragment>,
-          <React.Fragment>
-            <Context.Consumer>
-              [Function]
-            </Context.Consumer>
-          </React.Fragment>,
+          <SingleField
+            component="text-field"
+            name="component1"
+            validate={
+              Array [
+                undefined,
+              ]
+            }
+          />,
+          <SingleField
+            component="select-field"
+            name="secret"
+            validate={
+              Array [
+                undefined,
+              ]
+            }
+          />,
         ]
       }
       schema={
@@ -99,69 +107,89 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
       <form
         onSubmit={[Function]}
       >
-        <FormConditionWrapper>
-          <FormFieldHideWrapper
-            hideField={false}
-          >
-            <FieldWrapper
-              component={[Function]}
-              componentType="text-field"
-              name="component1"
-              validate={
-                Array [
-                  undefined,
-                ]
-              }
+        <SingleField
+          component="text-field"
+          name="component1"
+          validate={
+            Array [
+              undefined,
+            ]
+          }
+        >
+          <FormConditionWrapper>
+            <FormFieldHideWrapper
+              hideField={false}
             >
-              <TextField
-                FieldProvider={[Function]}
+              <FieldWrapper
+                component={[Function]}
+                componentType="text-field"
                 name="component1"
-                validate={[Function]}
+                validate={
+                  Array [
+                    undefined,
+                  ]
+                }
               >
-                <div
-                  className="nested-item"
+                <TextField
+                  FieldProvider={[Function]}
+                  name="component1"
+                  validate={[Function]}
                 >
-                  <input
-                    id="component1"
-                    name="component1"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    onFocus={[Function]}
-                    value=""
-                  />
-                </div>
-              </TextField>
-            </FieldWrapper>
-          </FormFieldHideWrapper>
-        </FormConditionWrapper>
-        <FormConditionWrapper>
-          <FormFieldHideWrapper
-            hideField={false}
-          >
-            <FieldWrapper
-              component={[Function]}
-              componentType="select-field"
-              name="secret"
-              validate={
-                Array [
-                  undefined,
-                ]
-              }
+                  <div
+                    className="nested-item"
+                  >
+                    <input
+                      id="component1"
+                      name="component1"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      value=""
+                    />
+                  </div>
+                </TextField>
+              </FieldWrapper>
+            </FormFieldHideWrapper>
+          </FormConditionWrapper>
+        </SingleField>
+        <SingleField
+          component="select-field"
+          name="secret"
+          validate={
+            Array [
+              undefined,
+            ]
+          }
+        >
+          <FormConditionWrapper>
+            <FormFieldHideWrapper
+              hideField={false}
             >
-              <Component
-                FieldProvider={[Function]}
+              <FieldWrapper
+                component={[Function]}
+                componentType="select-field"
                 name="secret"
-                validate={[Function]}
+                validate={
+                  Array [
+                    undefined,
+                  ]
+                }
               >
-                <div
-                  className="nested-item"
+                <Component
+                  FieldProvider={[Function]}
+                  name="secret"
+                  validate={[Function]}
                 >
-                  Select field
-                </div>
-              </Component>
-            </FieldWrapper>
-          </FormFieldHideWrapper>
-        </FormConditionWrapper>
+                  <div
+                    className="nested-item"
+                  >
+                    Select field
+                  </div>
+                </Component>
+              </FieldWrapper>
+            </FormFieldHideWrapper>
+          </FormConditionWrapper>
+        </SingleField>
         <FormSpy>
           <button
             disabled={false}
@@ -262,16 +290,27 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
     <FormTemplate
       formFields={
         Array [
-          <React.Fragment>
-            <Context.Consumer>
-              [Function]
-            </Context.Consumer>
-          </React.Fragment>,
-          <React.Fragment>
-            <Context.Consumer>
-              [Function]
-            </Context.Consumer>
-          </React.Fragment>,
+          <SingleField
+            component="text-field"
+            label="Visible"
+            name="visible"
+            validate={
+              Array [
+                undefined,
+              ]
+            }
+          />,
+          <SingleField
+            component="text-field"
+            hideField={true}
+            label="Hidden"
+            name="hidden"
+            validate={
+              Array [
+                undefined,
+              ]
+            }
+          />,
         ]
       }
       schema={
@@ -295,55 +334,25 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
       <form
         onSubmit={[Function]}
       >
-        <FormConditionWrapper>
-          <FormFieldHideWrapper
-            hideField={false}
-          >
-            <FieldWrapper
-              component={[Function]}
-              componentType="text-field"
-              label="Visible"
-              name="visible"
-              validate={
-                Array [
-                  undefined,
-                ]
-              }
-            >
-              <TextField
-                FieldProvider={[Function]}
-                label="Visible"
-                name="visible"
-                validate={[Function]}
-              >
-                <div
-                  className="nested-item"
-                >
-                  <input
-                    id="visible"
-                    name="visible"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    onFocus={[Function]}
-                    value=""
-                  />
-                </div>
-              </TextField>
-            </FieldWrapper>
-          </FormFieldHideWrapper>
-        </FormConditionWrapper>
-        <FormConditionWrapper>
-          <FormFieldHideWrapper
-            hideField={true}
-          >
-            <div
-              hidden={true}
+        <SingleField
+          component="text-field"
+          label="Visible"
+          name="visible"
+          validate={
+            Array [
+              undefined,
+            ]
+          }
+        >
+          <FormConditionWrapper>
+            <FormFieldHideWrapper
+              hideField={false}
             >
               <FieldWrapper
                 component={[Function]}
                 componentType="text-field"
-                label="Hidden"
-                name="hidden"
+                label="Visible"
+                name="visible"
                 validate={
                   Array [
                     undefined,
@@ -352,16 +361,16 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
               >
                 <TextField
                   FieldProvider={[Function]}
-                  label="Hidden"
-                  name="hidden"
+                  label="Visible"
+                  name="visible"
                   validate={[Function]}
                 >
                   <div
                     className="nested-item"
                   >
                     <input
-                      id="hidden"
-                      name="hidden"
+                      id="visible"
+                      name="visible"
                       onBlur={[Function]}
                       onChange={[Function]}
                       onFocus={[Function]}
@@ -370,9 +379,62 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                   </div>
                 </TextField>
               </FieldWrapper>
-            </div>
-          </FormFieldHideWrapper>
-        </FormConditionWrapper>
+            </FormFieldHideWrapper>
+          </FormConditionWrapper>
+        </SingleField>
+        <SingleField
+          component="text-field"
+          hideField={true}
+          label="Hidden"
+          name="hidden"
+          validate={
+            Array [
+              undefined,
+            ]
+          }
+        >
+          <FormConditionWrapper>
+            <FormFieldHideWrapper
+              hideField={true}
+            >
+              <div
+                hidden={true}
+              >
+                <FieldWrapper
+                  component={[Function]}
+                  componentType="text-field"
+                  label="Hidden"
+                  name="hidden"
+                  validate={
+                    Array [
+                      undefined,
+                    ]
+                  }
+                >
+                  <TextField
+                    FieldProvider={[Function]}
+                    label="Hidden"
+                    name="hidden"
+                    validate={[Function]}
+                  >
+                    <div
+                      className="nested-item"
+                    >
+                      <input
+                        id="hidden"
+                        name="hidden"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        value=""
+                      />
+                    </div>
+                  </TextField>
+                </FieldWrapper>
+              </div>
+            </FormFieldHideWrapper>
+          </FormConditionWrapper>
+        </SingleField>
         <FormSpy>
           <button
             disabled={false}

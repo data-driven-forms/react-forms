@@ -55,6 +55,7 @@ const prepareFieldProps = (field) => ({
     : [field.dataType && dataTypeValidator(field.dataType)()]
 });
 
-const renderForm = (fields) => fields.map((field) => (Array.isArray(field) ? renderForm(field) : <SingleField {...prepareFieldProps(field)} />));
+const renderForm = (fields) =>
+  fields.map((field) => (Array.isArray(field) ? renderForm(field) : <SingleField key={fields.name} {...prepareFieldProps(field)} />));
 
 export default renderForm;

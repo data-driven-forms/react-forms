@@ -276,7 +276,7 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) =>
      * The default value must be in the same object structure and must be either object. If the the component is part of dyamic array
      * default values are added to new item when its created.
      */
-    if (Object.hasOwnProperty.prototype.call(field, 'default') && !Array.isArray(field.default)) {
+    if (Object.prototype.hasOwnProperty.call(field, 'default') && !Array.isArray(field.default)) {
       setWith(defaultValues, keyPrefix ? `${keyPrefix}.${key}` : key, field.default, Object);
     }
 

@@ -6,11 +6,9 @@ import Tab from '@material-ui/core/Tab';
 
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
-const TabHeader = ({ fields }) => fields.map(({ title, key, name }) => <Tab key={name} label={title} />);
+const TabContent = ({ name, fields, formOptions }) => <Fragment key={name}>{formOptions.renderForm(fields, formOptions)}</Fragment>;
 
-const TabContet = ({ name, fields, formOptions }) => <Fragment key={name}>{formOptions.renderForm(fields, formOptions)}</Fragment>;
-
-TabContet.propTypes = {
+TabContent.propTypes = {
   name: PropTypes.string.isRequired,
   fields: PropTypes.array.isRequired,
   formOptions: PropTypes.shape({ renderForm: PropTypes.func.isRequired }).isRequired
@@ -24,10 +22,16 @@ const FormTabs = ({ fields }) => {
     <div>
       <AppBar position="static">
         <Tabs value={activeTab} onChange={(_e, tabIndex) => setActiveTab(tabIndex)}>
-          <TabHeader items={fields} />
+          {fields.map(({ title, name }) => (
+            <Tab key={name} label={title} />
+          ))}
         </Tabs>
       </AppBar>
-      <TabContet {...fields[activeTab]} formOptions={formOptions} />
+      {fields.map((field, index) => (
+        <div key={field.name} hidden={index !== activeTab}>
+          <TabContent {...field} name={field.name} formOptions={formOptions} />
+        </div>
+      ))}
     </div>
   );
 };
