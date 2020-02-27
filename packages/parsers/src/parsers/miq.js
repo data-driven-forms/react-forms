@@ -1,6 +1,6 @@
-import { neededAttributes, neededFalseAttributes, componentMap } from './constants';
-import validatorTypes from '../../components/validator-types';
-import componentTypes from '../../components/component-types';
+import { validatorTypes, componentTypes } from '@data-driven-forms/react-form-renderer';
+
+import { neededAttributes, neededFalseAttributes, componentMap } from './miq/constants';
 
 const getAttributes = (field, newField, attributes, boolValue) => {
   attributes.forEach((info) => {

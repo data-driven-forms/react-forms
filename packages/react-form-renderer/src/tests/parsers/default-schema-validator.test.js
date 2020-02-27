@@ -1,4 +1,4 @@
-import output from '../../demo-schemas/miq-schemas/output';
+import output from './output';
 import React from 'react';
 import defaultSchemaValidator from '../../parsers/default-schema-validator';
 import componentTypes from '../../components/component-types';

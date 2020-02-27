@@ -1,6 +1,3 @@
-import mozillaParser from './parsers/mozilla-parser/mozilla-schema-parser';
-import miqParser from './parsers/miq-parser/miq-parser';
-
 export { default } from './components/form-renderer';
 export { default as dataTypes } from './components/data-types';
 export { default as componentTypes } from './components/component-types';
@@ -14,8 +11,3 @@ export { default as FormSpy } from './components/form-spy';
 export { default as Form } from './components/form';
 export { default as FieldArray } from './components/field-array';
 export { default as useFieldApi } from './hooks/use-field-api';
-
-export const schemaParsers = {
-  mozillaParser,
-  miqParser
-};

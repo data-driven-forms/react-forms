@@ -1,5 +1,4 @@
-import validatorTypes from '../../components/validator-types';
-import componentTypes from '../../components/component-types';
+import { validatorTypes, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 /**
  * Function that creates field level validation
