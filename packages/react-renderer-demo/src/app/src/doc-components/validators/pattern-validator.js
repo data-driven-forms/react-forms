@@ -10,7 +10,7 @@ const schema = {
     helperText: 'Value must be equal to Foo',
     validate: [{
       type: validatorTypes.PATTERN_VALIDATOR,
-      pattern: /^Foo$/,
+      pattern: /^Foo$/i,
     }],
   }, {
     component: componentTypes.TEXT_FIELD,
@@ -20,6 +20,7 @@ const schema = {
     validate: [{
       type: validatorTypes.PATTERN_VALIDATOR,
       pattern: '^Foo$',
+      flags: 'i',
     }],
   }],
 };
