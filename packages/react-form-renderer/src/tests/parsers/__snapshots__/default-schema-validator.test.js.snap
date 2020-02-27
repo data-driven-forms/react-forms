@@ -41,7 +41,7 @@ exports[`Default schema validator should fail if field condition is not correct 
 exports[`Default schema validator should fail if field condition pattern property is not correct type. 1`] = `
 "
       Error occured in field definition with name: \\"foo\\".
-      Field condition must have \\"pattern\\" of instance \\"RegExp\\"! Instance received: [Number].
+      Field condition must have \\"pattern\\" of instance \\"RegExp\\" or \\"string\\"! Instance received: [Number].
     "
 `;
 

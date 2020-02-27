@@ -146,8 +146,21 @@ condition: {
   pattern: /bar/,
 }
 
-// Foo = 'This is a bar' => true
-// Foo = 'Foo foo baar!' => true
+// Foo = 'bar' => true
+// Foo = 'baar!' => false
+```
+
+It also accepts string value, then you have to use additional property flags if you need to specify RegExp flags:
+
+```jsx
+condition: {
+  when: 'Foo',
+  pattern: 'bar',
+  flags: 'i'
+}
+
+// Foo = 'bar' => true
+// Foo = 'bAr!' => true
 ```
 
 ### Not match
@@ -161,8 +174,8 @@ condition: {
   notMatch: true,
 }
 
-// Foo = 'This is a bar' => false
-// Foo = 'Foo foo baar!' => true
+// Foo = 'bar' => false
+// Foo = 'baar!' => true
 ```
 
 ```jsx

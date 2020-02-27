@@ -94,6 +94,14 @@ describe('Default schema validator', () => {
     }]}, formFieldsMapper)).toThrowErrorMatchingSnapshot();
   });
 
+  it('should not fail if field condition pattern property is a string', () => {
+    expect(() => defaultSchemaValidator({ fields: [{
+      component: 'foo',
+      name: 'foo',
+      condition: { when: 'Foo', pattern: '^pattern' },
+    }]}, formFieldsMapper)).not.toThrow();
+  });
+
   it('should fail if field condition have notMatch property and have not is/pattern.', () => {
     expect(() => defaultSchemaValidator({ fields: [{
       component: 'foo',
