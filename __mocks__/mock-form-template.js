@@ -14,7 +14,7 @@ const FormTemplate = ({ schema: { title, label, description }, formFields }) => 
 
   return (
     <form onSubmit={ formOptions.handleSubmit }>
-      { title || label && <h1>{ title || label }</h1> }
+      { (title || label) && <h1>{ title || label }</h1> }
       { description && <h2>{ description }</h2> }
       { formFields }
       <FormSpyFinal>

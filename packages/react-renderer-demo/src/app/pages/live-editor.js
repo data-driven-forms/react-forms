@@ -1,3 +1,4 @@
+/* eslint no-console: "off" */
 import React, { useContext, useState  } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';

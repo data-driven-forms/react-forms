@@ -247,7 +247,7 @@ describe('<SelectField />', () => {
         expect(wrapper.find(DataDrivenSelect)).toHaveLength(1);
         expect(wrapper.find('.ddorg__pf3-component-mapper__select__option')).toHaveLength(2);
         const input = wrapper.find('input.form-control');
-        input.getDOMNode().value = '1',
+        input.getDOMNode().value = '1';
         input.simulate('change');
         wrapper.update();
         expect(wrapper.find('.ddorg__pf3-component-mapper__select__option')).toHaveLength(1);

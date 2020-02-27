@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import { Button } from '@patternfly/react-core';
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
@@ -28,6 +29,13 @@ const ValidateButtons = ({ disableBack, handlePrev, buttonLabels: { back, cancel
       <Button type="button" variant="link" onClick={ formOptions.onCancel }>{ cancel }</Button>
     </React.Fragment>
   );
+};
+
+ValidateButtons.propTypes = {
+  disableBack: PropTypes.bool,
+  handlePrev: PropTypes.func.isRequired,
+  buttonLabels: PropTypes.shape({ back: PropTypes.node.isRequired, cancel: PropTypes.node.isRequired }).isRequired,
+  renderNextButton: PropTypes.func.isRequired
 };
 
 export const wizardSchema = {

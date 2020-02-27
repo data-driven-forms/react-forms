@@ -86,13 +86,14 @@
     "yoda": ["error", "never"],
     "jsx-a11y/href-no-hash": "off",
     "react/jsx-curly-spacing": "off",
-    "no-unused-vars": 1,
-    "react/no-unused-prop-types": 1,
-    "react-hooks/rules-of-hooks": 1,
-    "react/prop-types": 1,
-    "react/no-unescaped-entities": 1,
-    "no-prototype-builtins": 1,
-    "no-mixed-operators": 1,
-    "no-unused-expressions": 1
+    "no-unused-vars": "error",
+    "react/no-unused-prop-types": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react/prop-types": "error",
+    "react/no-unescaped-entities": "error",
+    "no-prototype-builtins": "error",
+    "no-mixed-operators": "error",
+    "no-unused-expressions": "error",
+    "no-sequences": "error"
   }
 }

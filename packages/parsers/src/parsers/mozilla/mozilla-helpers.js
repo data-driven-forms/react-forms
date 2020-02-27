@@ -146,8 +146,8 @@ export const createDynamicListWithFixed = (schema, uiSchema, key) => [
   ...schema.items.map(({ type, title, ...rest }, index) => {
     let options;
     if (type === 'boolean') {
-      if (!(!rest.enum && uiSchema.items && !uiSchema.items[index] || !rest.enum && !uiSchema.items)) {
-        options = rest.enum || uiSchema.items && uiSchema.items[index]['ui:widget'] === 'select' ? [{
+      if (!((!rest.enum && uiSchema.items && !uiSchema.items[index]) || (!rest.enum && !uiSchema.items))) {
+        options = rest.enum || (uiSchema.items && uiSchema.items[index]['ui:widget'] === 'select') ? [{
           label: 'Please Choose',
           value: undefined,
           disabled: true,
@@ -159,7 +159,7 @@ export const createDynamicListWithFixed = (schema, uiSchema, key) => [
       validate: validatorBuilder({ schema, key: `${key}` }),
       label: title,
       name: `${key}.items.${index}`,
-      ...componentMapper(uiSchema.items && uiSchema.items[index]['ui:widget'] || type, type),
+      ...componentMapper((uiSchema.items && uiSchema.items[index]['ui:widget']) || type, type),
       options,
       ...rest,
     };

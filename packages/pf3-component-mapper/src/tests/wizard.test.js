@@ -241,8 +241,6 @@ describe('<Wizard />', () => {
     nextButton = wrapper.find('button').last();
     nextButton.simulate('click');
 
-    console.log(nextButton.debug());
-
     expect(submitSpy).toHaveBeenCalled();
   });
 

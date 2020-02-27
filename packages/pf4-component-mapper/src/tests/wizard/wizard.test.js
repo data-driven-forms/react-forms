@@ -7,7 +7,6 @@ import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms
 import * as enterHandle from '@data-driven-forms/common/src/wizard/enter-handler';
 
 import { componentMapper, formTemplate } from '../../index';
-import Wizard from '../../components/wizard';
 
 describe('<Wizard />', () => {
   let initialProps;

@@ -69,8 +69,8 @@ const Forms = ({ mappers }) => {
               formTemplate={ mappers[activeMapper.value].layoutMapper({ showFormControls: activeSchema !== 'wizard' }) }
               formFieldsMapper={ mappers[activeMapper.value].formFieldsMapper }
               { ...schemas[activeSchema] }
-              onSubmit={ console.log }
-              onCancel={ () => console.log('action canceled') }
+              onSubmit={ console.log /* eslint-disable-line no-console */ }
+              onCancel={ () => console.log('action canceled') /* eslint-disable-line no-console */ }
             />
           </div>
         </Paper>
@@ -81,7 +81,6 @@ const Forms = ({ mappers }) => {
 
 const DemoForms = () =>  {
   const mappers = useContext(MapperContext);
-  console.log(mappers);
   return (
     <Grid container direction="row" justify="space-evenly">
       <Grid item xs={ 12 }>

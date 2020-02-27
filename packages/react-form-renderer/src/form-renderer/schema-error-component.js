@@ -11,7 +11,7 @@ const SchemaErrorComponent = ({ name, message }) => (
     <h1 style={{ fontSize: 24, marginBottom: 5 }}>Form could not be rendered, because of invalid form schema.</h1>
     <h2 style={{ fontSize: 20, marginBottom: 5 }}>{ name }:</h2>
     <p style={{ marginBottom: 5 }}>{ message }</p>
-    <p>If you don't know what this error means, please contact site administrator.</p>
+    <p>If you don&apos;t know what this error means, please contact site administrator.</p>
   </div>
 );
 

@@ -27,7 +27,6 @@ const FormGroup = ({ label, isRequired, helperText, meta, description, hideLabel
 };
 
 FormGroup.propTypes = {
-  componentType: PropTypes.string.isRequired,
   label: PropTypes.string,
   isRequired: PropTypes.bool,
   helperText: PropTypes.string,

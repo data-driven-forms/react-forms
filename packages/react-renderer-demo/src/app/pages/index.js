@@ -50,7 +50,7 @@ const LandingPage = () => {
         </Typography>
         <div className={ classes.getStartedLink }>
           <Link href="/renderer/installation">
-            <a className={ classes.getStartedAnchor }>
+            <a className={ classes.getStartedAnchor } href="/renderer/installation">
               <Button variant="outlined" className={ classes.getStartedButton }>
                 Get started
               </Button>

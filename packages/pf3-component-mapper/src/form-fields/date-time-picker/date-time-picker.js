@@ -55,8 +55,8 @@ export class DateTimePicker extends React.Component {
       day.getFullYear(),
       day.getMonth(),
       day.getDate(),
-      prevDate && prevDate.getHours() || new Date().getHours(),
-      prevDate && prevDate.getMinutes() || new Date().getMinutes()
+      (prevDate && prevDate.getHours()) || new Date().getHours(),
+      (prevDate && prevDate.getMinutes()) || new Date().getMinutes()
     );
     this.setState({
       isOpen: this.props.closeOnDaySelect,

@@ -60,7 +60,7 @@ const Wizard = ({
     } else {
       dispatch({ type: 'finishLoading', payload: { formOptions, fields, predictSteps }});
     }
-  }, []);
+  }, [inModal, formOptions, fields, predictSteps]);
 
   useEffect(() => {
     if (state.container) {
@@ -73,7 +73,7 @@ const Wizard = ({
         document.body.removeChild(state.container);
       }
     };
-  }, [state.container]);
+  }, [state.container, formOptions, fields, predictSteps, inModal]);
 
   if (state.loading) {
     return null;

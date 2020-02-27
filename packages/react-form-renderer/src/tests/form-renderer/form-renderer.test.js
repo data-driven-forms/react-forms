@@ -86,8 +86,7 @@ describe('<FormRenderer />', () => {
     expect(spy).toHaveBeenCalled();
     expect(logSpy).toHaveBeenCalledWith('error: ', expect.any(String));
 
-    // eslint-disable-next-line no-global-assign
-    console = _console;
+    console = _console; // eslint-disable-line
   });
 
   it('should call form reset callback', () => {

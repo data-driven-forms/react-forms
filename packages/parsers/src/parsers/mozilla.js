@@ -44,7 +44,7 @@ let defaultValues = {};
  * @returns {Object} subForm schema
  */
 const prepareSubForm = ({ schema, fields, uiSchema, key }) => ({ name: key,
-  title: uiSchema[key] && uiSchema[key]['ui:title'] || fields[key].title,
+  title: (uiSchema[key] && uiSchema[key]['ui:title']) || fields[key].title,
   component: componentTypes.SUB_FORM,
   autoFocus: autofocusField === key,
   validate: validatorBuilder({ schema, fields, key }),
@@ -146,7 +146,7 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) => Object.keys
      */
   let field = {
     name: keyPrefix ? `${keyPrefix}.${key}` : key,
-    label: uiSchema[key] && uiSchema[key]['ui:title'] || fields[key].title,
+    label: (uiSchema[key] && uiSchema[key]['ui:title']) || fields[key].title,
     autofocus: autofocusField === key,
     validate: validatorBuilder({ schema, fields, key }),
     description: uiSchema[key] && uiSchema[key]['ui:description'],
@@ -192,10 +192,10 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) => Object.keys
   /**
      * Create propper value, label options for enum fields like radio, checkboxes etc.
      */
-  if (field.hasOwnProperty('enum')) {
+  if (Object.prototype.hasOwnProperty.call(field, 'enum')) {
     field.enum = field.enum.map((item, index) => ({
       value: item,
-      label: field.enumNames && field.enumNames[index] || item,
+      label: (field.enumNames && field.enumNames[index]) || item,
     }));
     delete field.enumNames;
   }
@@ -244,7 +244,7 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) => Object.keys
      * The default value must be in the same object structure and must be either object. If the the component is part of dyamic array
      * default values are added to new item when its created.
      */
-  if (field.hasOwnProperty('default') && !Array.isArray(field.default)) {
+  if (Object.hasOwnProperty.prototype.call(field, 'default') && !Array.isArray(field.default)) {
     setWith(defaultValues, keyPrefix ? `${keyPrefix}.${key}` : key, field.default, Object);
   }
 
@@ -321,7 +321,7 @@ const convertSchema = (schema, uiSchema = {}, key) => {
         name: key,
         label: schema.title,
         validate: validatorBuilder({ schema, key }),
-        options: schema.items.enum.map((value, index) => ({ value, label: schema.items.enumNames && schema.items.enumNames[index] || value })),
+        options: schema.items.enum.map((value, index) => ({ value, label: (schema.items.enumNames && schema.items.enumNames[index]) || value })),
       };
       /**
          * Dynamic items list with fixed elements
@@ -351,7 +351,7 @@ const convertSchema = (schema, uiSchema = {}, key) => {
       setWith(defaultValues, key, schema.default, Object);
       nestedSchema.component = componentTypes.FIELD_ARRAY;
       nestedSchema.itemDefault = schema.itemDefault;
-      nestedSchema.validate = validatorBuilder({ schema, fields: schema.items, key: `${key}` }),
+      nestedSchema.validate = validatorBuilder({ schema, fields: schema.items, key: `${key}` });
       nestedSchema.fields = createFieldsFromObject({ properties: { items: schema.items }}, uiSchema, key);
     }
 

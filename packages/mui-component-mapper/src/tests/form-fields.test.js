@@ -339,7 +339,6 @@ describe('formFields', () => {
           }
         ]
       };
-      console.log(schema);
       const wrapper = mount(<RendererWrapper schema={schema} />);
       wrapper.find('form').simulate('submit');
 

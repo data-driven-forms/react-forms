@@ -91,7 +91,13 @@ FormRenderer.propTypes = {
   clearOnUnmount: PropTypes.bool,
   validate: PropTypes.func,
   subscription: PropTypes.shape({ [PropTypes.string]: PropTypes.bool }),
-  clearedValue: PropTypes.any
+  clearedValue: PropTypes.any,
+  formFieldsMapper: PropTypes.shape({
+    [PropTypes.string]: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]).isRequired
+  }).isRequired,
+  formTemplate: PropTypes.shape({
+    [PropTypes.string]: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]).isRequired
+  }).isRequired,
 };
 
 FormRenderer.defaultProps = {

@@ -12,7 +12,6 @@ const asyncOptions = [
 const baseOptions = asyncOptions.slice(0, 3);
 
 const asyncLoadOptions = (searchValue) => new Promise(resolve => setTimeout(() => {
-  console.log('async searchValue: ', searchValue);
   if (searchValue && searchValue.trim() !== '') {
     return resolve(asyncOptions.filter(({ label }) => label.toLocaleLowerCase().includes(searchValue.trim().toLocaleLowerCase())));
   }

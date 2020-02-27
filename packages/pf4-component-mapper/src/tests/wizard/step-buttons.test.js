@@ -109,7 +109,7 @@ describe('<WizardSTepButtons', () => {
       const NEXTSTEP = EXPECTED_NEXT_STEP;
 
       expect(selectNext(NEXTSTEP, GET_STATE)).toEqual(EXPECTED_NEXT_STEP);
-    }),
+    });
 
     it('should return stepmapper nextstep', () => {
       const NEXTSTEP = {

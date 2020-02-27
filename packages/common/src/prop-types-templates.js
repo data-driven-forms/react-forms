@@ -33,3 +33,5 @@ export const input = PropTypes.shape({
   name: PropTypes.string.isRequired,
   value: PropTypes.any
 });
+
+export const childrenPropTypes = PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]);

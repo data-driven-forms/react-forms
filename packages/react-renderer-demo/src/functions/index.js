@@ -11,6 +11,6 @@ let app = next({
 let handle = app.getRequestHandler();
 
 exports.next = functions.https.onRequest((req, res) => {
-  console.log('File: ' + req.originalUrl); // log the page.js file that is being requested
+  console.log('File: ' + req.originalUrl); // eslint-disable-line no-console
   return app.prepare().then(() => handle(req, res));
 });

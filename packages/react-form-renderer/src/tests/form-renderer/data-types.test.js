@@ -6,7 +6,7 @@ import componentTypes from '../../components/component-types';
 import useFieldApi from '../../hooks/use-field-api';
 
 const DataTypeInput = (props) => {
-  const { input, dataType: _dataType, type, label } = useFieldApi(props);
+  const { input, type, label } = useFieldApi(props);
   return (
     <div>
       <label htmlFor={input.name}>{label}</label>

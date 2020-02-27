@@ -2,13 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox as Pf4Chekbox } from '@patternfly/react-core/dist/js/components/Checkbox/Checkbox';
 
-import MultipleChoiceListCommon, { wrapperProps } from '@data-driven-forms/common/src/multiple-choice-list';
+import { wrapperProps } from '@data-driven-forms/common/src/multiple-choice-list';
 import FormGroup from './form-group';
 
-const FinalCheckbox = (props) => {
-  console.log('checkbox pf in multiple', props);
-  return <Pf4Chekbox isChecked={props.checked} {...props} />;
-};
+const FinalCheckbox = (props) => <Pf4Chekbox isChecked={props.checked} {...props} />;
 
 FinalCheckbox.propTypes = {
   checked: PropTypes.bool

@@ -62,6 +62,8 @@ const DocSearch = () => {
               query = `?mapper=${mapper}`;
               return true;
             }
+
+            return undefined;
           });
         }
 
@@ -70,7 +72,7 @@ const DocSearch = () => {
       },
       // debug: true, // Set debug to true if you want to inspect the dropdown.
     });
-  }, []);
+  }, [push]);
   return (
     <form className={ classes.docSearchWrapper }>
       <TextField

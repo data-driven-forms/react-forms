@@ -36,7 +36,7 @@ const ConnectedLinks = () => {
       <Grid item>
         { prev && prev.link && (
           <Link href={ `/${prev.link}` }>
-            <a className={ classNames.link }>
+            <a className={ classNames.link } href={ `/${prev.link}` }>
               <Button>
                 <ChevronLeft />
                 { prev.label }
@@ -48,7 +48,7 @@ const ConnectedLinks = () => {
       <Grid item>
         { next && next.link && (
           <Link href={ `/${next.link}` }>
-            <a className={ classNames.link }>
+            <a className={ classNames.link } href={ `/${next.link}` }>
               <Button >
                 { next.label }
                 <ChevronRight />
