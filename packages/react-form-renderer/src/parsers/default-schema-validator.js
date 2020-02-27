@@ -65,10 +65,10 @@ const checkCondition = (condition, fieldName) => {
     `);
   }
 
-  if (condition.hasOwnProperty('pattern') && !(condition.pattern instanceof RegExp)) {
+  if (condition.hasOwnProperty('pattern') && (!(condition.pattern instanceof RegExp) && typeof condition.pattern !== 'string')) {
     throw new DefaultSchemaError(`
       Error occured in field definition with name: "${fieldName}".
-      Field condition must have "pattern" of instance "RegExp"! Instance received: [${condition.pattern.constructor.name}].
+      Field condition must have "pattern" of instance "RegExp" or "string"! Instance received: [${condition.pattern.constructor.name}].
     `);
   }
 };
