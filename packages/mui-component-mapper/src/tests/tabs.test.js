@@ -37,7 +37,7 @@ describe('tabs', () => {
     expect(wrapper.find(AppBar)).toHaveLength(1);
     expect(wrapper.find(Tabs)).toHaveLength(1);
     expect(wrapper.find(Tab)).toHaveLength(2);
-    expect(wrapper.find('h1')).toHaveLength(1);
+    expect(wrapper.find('h1')).toHaveLength(2);
   });
 
   it('should switch tabs correctly', () => {
@@ -49,15 +49,15 @@ describe('tabs', () => {
 
     expect(
       wrapper
-      .find(Tab)
-      .first()
-      .props().selected
+        .find(Tab)
+        .first()
+        .props().selected
     ).toEqual(true);
     expect(
       wrapper
-      .find(Tab)
-      .last()
-      .props().selected
+        .find(Tab)
+        .last()
+        .props().selected
     ).toEqual(false);
 
     const secondTabButton = wrapper.find('button').last();
@@ -66,14 +66,15 @@ describe('tabs', () => {
 
     expect(
       wrapper
-      .find(Tab)
-      .first()
-      .props().selected
+        .find(Tab)
+        .first()
+        .props().selected
     ).toEqual(false);
     expect(
       wrapper
-      .find(Tab)
-      .last()
-      .props().selected
-    ).toEqual(true);  });
+        .find(Tab)
+        .last()
+        .props().selected
+    ).toEqual(true);
+  });
 });

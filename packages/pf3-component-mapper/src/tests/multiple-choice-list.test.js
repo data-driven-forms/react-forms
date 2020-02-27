@@ -15,7 +15,7 @@ describe.skip('<MultipleChoiceList />', () => {
         name: 'Name of the field',
         value: ''
       },
-      FieldProvider: (props) => <MockFieldProvider {...props} input={{ onChange: changeSpy, value: props.value || []}} />,
+      FieldProvider: (props) => <MockFieldProvider {...props} input={{ onChange: changeSpy, value: props.value || [] }} />,
       options: [
         {
           label: 'Foo',
@@ -42,9 +42,9 @@ describe.skip('<MultipleChoiceList />', () => {
     const wrapper = mount(<Checkbox {...initialProps} />);
 
     wrapper
-    .find('input')
-    .last()
-    .simulate('change', { target: { checked: true }});
+      .find('input')
+      .last()
+      .simulate('change', { target: { checked: true } });
     expect(changeSpy).toHaveBeenCalledWith([1]);
   });
 
@@ -52,9 +52,9 @@ describe.skip('<MultipleChoiceList />', () => {
     const wrapper = mount(<Checkbox {...initialProps} value={[1]} />);
 
     wrapper
-    .find('input')
-    .last()
-    .simulate('change', { target: { checked: true }});
+      .find('input')
+      .last()
+      .simulate('change', { target: { checked: true } });
     expect(changeSpy).toHaveBeenCalledWith([]);
   });
 
@@ -65,7 +65,7 @@ describe.skip('<MultipleChoiceList />', () => {
         FieldProvider={(props) => (
           <MockFieldProvider
             {...props}
-            input={{ onChange: changeSpy, value: []}}
+            input={{ onChange: changeSpy, value: [] }}
             meta={{
               error: 'Error message',
               touched: true
@@ -88,9 +88,9 @@ describe.skip('<MultipleChoiceList />', () => {
 
     expect(
       wrapper
-      .find(FieldLevelHelp)
-      .first()
-      .props().content
+        .find(FieldLevelHelp)
+        .first()
+        .props().content
     ).toEqual('Helper text');
     expect(wrapper.find(HelpBlock)).toHaveLength(0);
   });
@@ -101,9 +101,9 @@ describe.skip('<MultipleChoiceList />', () => {
     expect(wrapper.find(HelpBlock)).toHaveLength(1);
     expect(
       wrapper
-      .find(HelpBlock)
-      .first()
-      .text()
+        .find(HelpBlock)
+        .first()
+        .text()
     ).toEqual('Description');
   });
 });

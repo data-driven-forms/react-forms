@@ -19,7 +19,7 @@ describe('<Wizard />', () => {
     onSubmit: submitSpy,
     onCancel: cancelSpy,
     valid: true,
-    getState: () => ({ values: { a: 10 }}),
+    getState: () => ({ values: { a: 10 } }),
     submit: () => {}
   };
 
@@ -190,9 +190,9 @@ describe('<Wizard />', () => {
       </RenderWithProvider>
     );
     wrapper
-    .find('button')
-    .first()
-    .simulate('click');
+      .find('button')
+      .first()
+      .simulate('click');
     wrapper.update();
     expect(cancelSpy).toHaveBeenCalled();
   });
@@ -214,7 +214,7 @@ describe('<Wizard />', () => {
 
   it('should not step when clicked on button with false valid', () => {
     const wrapper = mount(
-      <RenderWithProvider value={{ formOptions: { ...formOptions, valid: false }}}>
+      <RenderWithProvider value={{ formOptions: { ...formOptions, valid: false } }}>
         <Wizard {...props} />
       </RenderWithProvider>
     );
@@ -240,8 +240,6 @@ describe('<Wizard />', () => {
     wrapper.update();
     nextButton = wrapper.find('button').last();
     nextButton.simulate('click');
-
-    console.log(nextButton.debug());
 
     expect(submitSpy).toHaveBeenCalled();
   });

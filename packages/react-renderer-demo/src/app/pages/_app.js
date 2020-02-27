@@ -27,12 +27,12 @@ export default class MyApp extends App {
         <Head>
           <title>Data driven forms</title>
         </Head>
-        <ThemeProvider theme={ theme }>
-          { /* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */ }
+        <ThemeProvider theme={theme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          <MDXProvider components={ MdxComponents }>
+          <MDXProvider components={MdxComponents}>
             <Layout>
-              <Component { ...pageProps } />
+              <Component {...pageProps} />
             </Layout>
           </MDXProvider>
         </ThemeProvider>

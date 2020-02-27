@@ -5,6 +5,29 @@ import FormGroup from '../common/form-wrapper';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import { Radio as Pf3Radio } from 'patternfly-react';
 
+const RadioOption = ({ name, option, isDisabled, isReadOnly }) => {
+  const { input } = useFieldApi({ name, type: 'radio', value: option.value });
+  return (
+    <Pf3Radio
+      key={`${name}-${option.value}`}
+      {...input}
+      onChange={() => {
+        input.onChange(option.value);
+      }}
+      disabled={isDisabled || isReadOnly}
+    >
+      {option.label}
+    </Pf3Radio>
+  );
+};
+
+RadioOption.propTypes = {
+  name: PropTypes.string.isRequired,
+  option: PropTypes.shape({ label: PropTypes.node.isRequired, value: PropTypes.any.isRequired }).isRequired,
+  isDisabled: PropTypes.bool,
+  isReadOnly: PropTypes.bool
+};
+
 const Radio = ({ name, isRequired, isDisabled, isReadOnly, validateOnMount, helperText, label, description, hideLabel, options, ...props }) => {
   const { meta } = useFieldApi({ name, type: 'radio' });
   return (
@@ -17,21 +40,9 @@ const Radio = ({ name, isRequired, isDisabled, isReadOnly, validateOnMount, help
       helperText={helperText}
       description={description}
     >
-      {options.map((option) => {
-        const { input } = useFieldApi({ name, type: 'radio', value: option.value });
-        return (
-          <Pf3Radio
-            key={`${name}-${option.value}`}
-            {...input}
-            onChange={() => {
-              input.onChange(option.value);
-            }}
-            disabled={isDisabled || isReadOnly}
-          >
-            {option.label}
-          </Pf3Radio>
-        );
-      })}
+      {options.map((option) => (
+        <RadioOption key={option.value} name={name} option={option} isReadOnly={isReadOnly} isDisabled={isDisabled} />
+      ))}
     </FormGroup>
   );
 };

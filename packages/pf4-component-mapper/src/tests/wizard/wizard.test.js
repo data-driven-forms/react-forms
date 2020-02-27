@@ -7,7 +7,6 @@ import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms
 import * as enterHandle from '@data-driven-forms/common/src/wizard/enter-handler';
 
 import { componentMapper, formTemplate } from '../../index';
-import Wizard from '../../components/wizard';
 
 describe('<Wizard />', () => {
   let initialProps;
@@ -21,33 +20,33 @@ describe('<Wizard />', () => {
 
   const nextButtonClick = (wrapper) => {
     wrapper
-    .find('button')
-    .at(0)
-    .simulate('click');
+      .find('button')
+      .at(0)
+      .simulate('click');
     wrapper.update();
   };
 
   const backButtonClick = (wrapper) => {
     wrapper
-    .find('button')
-    .at(1)
-    .simulate('click');
+      .find('button')
+      .at(1)
+      .simulate('click');
     wrapper.update();
   };
 
   const cancelButtonClick = (wrapper) => {
     wrapper
-    .find('button')
-    .at(2)
-    .simulate('click');
+      .find('button')
+      .at(2)
+      .simulate('click');
     wrapper.update();
   };
 
   const closeIconClickWithHeader = (wrapper) => {
     wrapper
-    .find('button')
-    .at(0)
-    .simulate('click');
+      .find('button')
+      .at(0)
+      .simulate('click');
     wrapper.update();
   };
 
@@ -373,17 +372,17 @@ describe('<Wizard />', () => {
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(2);
     expect(
       wrapper
-      .find('.pf-c-wizard__nav-item')
-      .first()
-      .childAt(0)
-      .text()
+        .find('.pf-c-wizard__nav-item')
+        .first()
+        .childAt(0)
+        .text()
     ).toEqual('foo-step');
     expect(
       wrapper
-      .find('.pf-c-wizard__nav-item')
-      .last()
-      .childAt(0)
-      .text()
+        .find('.pf-c-wizard__nav-item')
+        .last()
+        .childAt(0)
+        .text()
     ).toEqual('bar-step');
   });
 
@@ -428,10 +427,10 @@ describe('<Wizard />', () => {
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(1);
     expect(
       wrapper
-      .find('.pf-c-wizard__nav-item')
-      .first()
-      .childAt(0)
-      .text()
+        .find('.pf-c-wizard__nav-item')
+        .first()
+        .childAt(0)
+        .text()
     ).toEqual('foo-step');
 
     nextButtonClick(wrapper);
@@ -439,10 +438,10 @@ describe('<Wizard />', () => {
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(2);
     expect(
       wrapper
-      .find('.pf-c-wizard__nav-item')
-      .last()
-      .childAt(0)
-      .text()
+        .find('.pf-c-wizard__nav-item')
+        .last()
+        .childAt(0)
+        .text()
     ).toEqual('bar-step');
   });
 
@@ -457,20 +456,20 @@ describe('<Wizard />', () => {
 
     // click on first nav link
     wrapper
-    .find('.pf-c-wizard__nav-item')
-    .first()
-    .childAt(0)
-    .simulate('click');
+      .find('.pf-c-wizard__nav-item')
+      .first()
+      .childAt(0)
+      .simulate('click');
     wrapper.update();
 
     expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
 
     // go back
     wrapper
-    .find('.pf-c-wizard__nav-item')
-    .last()
-    .childAt(0)
-    .simulate('click');
+      .find('.pf-c-wizard__nav-item')
+      .last()
+      .childAt(0)
+      .simulate('click');
     wrapper.update();
 
     expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
@@ -518,18 +517,18 @@ describe('<Wizard />', () => {
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(3);
     expect(
       wrapper
-      .find('.pf-c-wizard__nav-item')
-      .at(1)
-      .childAt(0)
-      .text()
+        .find('.pf-c-wizard__nav-item')
+        .at(1)
+        .childAt(0)
+        .text()
     ).toEqual('barbar');
     expect(
       wrapper
-      .find('.pf-c-wizard__nav-list')
-      .last()
-      .childAt(0)
-      .childAt(0)
-      .text()
+        .find('.pf-c-wizard__nav-list')
+        .last()
+        .childAt(0)
+        .childAt(0)
+        .text()
     ).toEqual('bar-step');
   });
 
@@ -579,20 +578,20 @@ describe('<Wizard />', () => {
 
     // click on first nav link
     wrapper
-    .find('.pf-c-wizard__nav-item')
-    .first()
-    .childAt(0)
-    .simulate('click');
+      .find('.pf-c-wizard__nav-item')
+      .first()
+      .childAt(0)
+      .simulate('click');
     wrapper.update();
 
     expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
 
     // go back through the primary step
     wrapper
-    .find('.pf-c-wizard__nav-item')
-    .at(1)
-    .childAt(0)
-    .simulate('click');
+      .find('.pf-c-wizard__nav-item')
+      .at(1)
+      .childAt(0)
+      .simulate('click');
     wrapper.update();
 
     expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
@@ -603,10 +602,10 @@ describe('<Wizard />', () => {
 
     // go back through the substep
     wrapper
-    .find('.pf-c-wizard__nav-item')
-    .last()
-    .childAt(0)
-    .simulate('click');
+      .find('.pf-c-wizard__nav-item')
+      .last()
+      .childAt(0)
+      .simulate('click');
     wrapper.update();
 
     expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
@@ -661,10 +660,10 @@ describe('<Wizard />', () => {
 
     // click on first nav link
     wrapper
-    .find('.pf-c-wizard__nav-item')
-    .first()
-    .childAt(0)
-    .simulate('click');
+      .find('.pf-c-wizard__nav-item')
+      .first()
+      .childAt(0)
+      .simulate('click');
     wrapper.update();
 
     expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
@@ -746,11 +745,11 @@ describe('<Wizard />', () => {
 
     expect(
       wrapper
-      .find('.pf-c-wizard__main-body')
-      .children()
-      .last()
-      .childAt(0)
-      .text()
+        .find('.pf-c-wizard__main-body')
+        .children()
+        .last()
+        .childAt(0)
+        .text()
     ).toEqual('foo');
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(4);
 
@@ -758,11 +757,11 @@ describe('<Wizard />', () => {
 
     expect(
       wrapper
-      .find('.pf-c-wizard__main-body')
-      .children()
-      .last()
-      .childAt(0)
-      .text()
+        .find('.pf-c-wizard__main-body')
+        .children()
+        .last()
+        .childAt(0)
+        .text()
     ).toEqual('bar');
 
     nextButtonClick(wrapper);
@@ -770,11 +769,11 @@ describe('<Wizard />', () => {
     // however, it is not possible because form is invalid
     expect(
       wrapper
-      .find('.pf-c-wizard__main-body')
-      .children()
-      .last()
-      .childAt(0)
-      .text()
+        .find('.pf-c-wizard__main-body')
+        .children()
+        .last()
+        .childAt(0)
+        .text()
     ).toEqual('bar');
 
     changeValue(wrapper, 'hello');
@@ -783,29 +782,29 @@ describe('<Wizard />', () => {
     // voila
     expect(
       wrapper
-      .find('.pf-c-wizard__main-body')
-      .children()
-      .last()
-      .childAt(0)
-      .text()
+        .find('.pf-c-wizard__main-body')
+        .children()
+        .last()
+        .childAt(0)
+        .text()
     ).toEqual('conan');
     expect(
       wrapper
-      .find('.pf-c-wizard__nav-item')
-      .last()
-      .childAt(0)
-      .prop('aria-disabled')
+        .find('.pf-c-wizard__nav-item')
+        .last()
+        .childAt(0)
+        .prop('aria-disabled')
     ).toEqual(false);
 
     backButtonClick(wrapper);
 
     expect(
       wrapper
-      .find('.pf-c-wizard__main-body')
-      .children()
-      .last()
-      .childAt(0)
-      .text()
+        .find('.pf-c-wizard__main-body')
+        .children()
+        .last()
+        .childAt(0)
+        .text()
     ).toEqual('bar');
 
     changeValue(wrapper, '');
@@ -814,45 +813,45 @@ describe('<Wizard />', () => {
     // it is invalid :(
     expect(
       wrapper
-      .find('.pf-c-wizard__main-body')
-      .children()
-      .last()
-      .childAt(0)
-      .text()
+        .find('.pf-c-wizard__main-body')
+        .children()
+        .last()
+        .childAt(0)
+        .text()
     ).toEqual('bar');
 
     // let's look if last nav item is disabled (click event is working with 'disabled' <a> element)
     expect(
       wrapper
-      .find('.pf-c-wizard__nav-item')
-      .last()
-      .childAt(0)
-      .prop('aria-disabled')
+        .find('.pf-c-wizard__nav-item')
+        .last()
+        .childAt(0)
+        .prop('aria-disabled')
     ).toEqual(true);
 
     // go to first step
     wrapper
-    .find('.pf-c-wizard__nav-item')
-    .first()
-    .childAt(0)
-    .simulate('click');
+      .find('.pf-c-wizard__nav-item')
+      .first()
+      .childAt(0)
+      .simulate('click');
     wrapper.update();
 
     // still invalid :(
     expect(
       wrapper
-      .find('.pf-c-wizard__main-body')
-      .children()
-      .last()
-      .childAt(0)
-      .text()
+        .find('.pf-c-wizard__main-body')
+        .children()
+        .last()
+        .childAt(0)
+        .text()
     ).toEqual('foo');
     expect(
       wrapper
-      .find('.pf-c-wizard__nav-item')
-      .last()
-      .childAt(0)
-      .prop('aria-disabled')
+        .find('.pf-c-wizard__nav-item')
+        .last()
+        .childAt(0)
+        .prop('aria-disabled')
     ).toEqual(true);
 
     // make form valid again
@@ -862,10 +861,10 @@ describe('<Wizard />', () => {
 
     expect(
       wrapper
-      .find('.pf-c-wizard__nav-item')
-      .last()
-      .childAt(0)
-      .prop('aria-disabled')
+        .find('.pf-c-wizard__nav-item')
+        .last()
+        .childAt(0)
+        .prop('aria-disabled')
     ).toEqual(false);
   });
 
@@ -952,9 +951,9 @@ describe('<Wizard />', () => {
       expect(wrapper.find('WizardNavItem')).toHaveLength(1);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(0)
-        .text()
+          .find('WizardNavItem')
+          .at(0)
+          .text()
       ).toEqual(FIRST_TITLE);
 
       changeValue(wrapper, 'aws');
@@ -963,21 +962,21 @@ describe('<Wizard />', () => {
       expect(wrapper.find('WizardNavItem')).toHaveLength(3);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(0)
-        .text()
+          .find('WizardNavItem')
+          .at(0)
+          .text()
       ).toEqual(FIRST_TITLE);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(1)
-        .text()
+          .find('WizardNavItem')
+          .at(1)
+          .text()
       ).toEqual(SECOND_TITLE_AWS);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(2)
-        .text()
+          .find('WizardNavItem')
+          .at(2)
+          .text()
       ).toEqual(THIRD_TITLE);
     });
 
@@ -1001,21 +1000,21 @@ describe('<Wizard />', () => {
 
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(0)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(0)
+          .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(1)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(1)
+          .props().isDisabled
       ).toEqual(true);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(2)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(2)
+          .props().isDisabled
       ).toEqual(true);
     });
 
@@ -1039,21 +1038,21 @@ describe('<Wizard />', () => {
 
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(0)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(0)
+          .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(1)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(1)
+          .props().isDisabled
       ).toEqual(true);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(2)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(2)
+          .props().isDisabled
       ).toEqual(true);
     });
 
@@ -1118,15 +1117,15 @@ describe('<Wizard />', () => {
       expect(wrapper.find('WizardNavItem')).toHaveLength(2);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(0)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(0)
+          .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(1)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(1)
+          .props().isDisabled
       ).toEqual(false);
 
       changeValue(wrapper, undefined);
@@ -1134,15 +1133,15 @@ describe('<Wizard />', () => {
 
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(0)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(0)
+          .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(1)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(1)
+          .props().isDisabled
       ).toEqual(true);
     });
 
@@ -1211,15 +1210,15 @@ describe('<Wizard />', () => {
 
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(0)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(0)
+          .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(1)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(1)
+          .props().isDisabled
       ).toEqual(true);
 
       const firstArgumentOfLastNextStepCall = NEXTSTEP_FUNCTION.mock.calls[NEXTSTEP_FUNCTION.mock.calls.length - 1][0];
@@ -1282,15 +1281,15 @@ describe('<Wizard />', () => {
       expect(wrapper.find('WizardNavItem')).toHaveLength(2);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(0)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(0)
+          .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(1)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(1)
+          .props().isDisabled
       ).toEqual(false);
 
       backButtonClick(wrapper);
@@ -1298,15 +1297,15 @@ describe('<Wizard />', () => {
       expect(wrapper.find('WizardNavItem')).toHaveLength(2);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(0)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(0)
+          .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(1)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(1)
+          .props().isDisabled
       ).toEqual(true);
     });
 
@@ -1366,21 +1365,21 @@ describe('<Wizard />', () => {
       expect(wrapper.find('WizardNavItem')).toHaveLength(3);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(0)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(0)
+          .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(1)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(1)
+          .props().isDisabled
       ).toEqual(true);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(2)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(2)
+          .props().isDisabled
       ).toEqual(true);
 
       changeValue(wrapper, 'google');
@@ -1389,15 +1388,15 @@ describe('<Wizard />', () => {
       expect(wrapper.find('WizardNavItem')).toHaveLength(2);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(0)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(0)
+          .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(1)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(1)
+          .props().isDisabled
       ).toEqual(true);
 
       nextButtonClick(wrapper);
@@ -1405,38 +1404,38 @@ describe('<Wizard />', () => {
       expect(wrapper.find('WizardNavItem')).toHaveLength(2);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(0)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(0)
+          .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(1)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(1)
+          .props().isDisabled
       ).toEqual(false);
 
       // click on first nav link
       wrapper
-      .find('.pf-c-wizard__nav-item')
-      .first()
-      .childAt(0)
-      .simulate('click');
+        .find('.pf-c-wizard__nav-item')
+        .first()
+        .childAt(0)
+        .simulate('click');
       wrapper.update();
 
       // keep the second step enabled
       expect(wrapper.find('WizardNavItem')).toHaveLength(2);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(0)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(0)
+          .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(1)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(1)
+          .props().isDisabled
       ).toEqual(false);
 
       changeValue(wrapper, 'aws');
@@ -1444,21 +1443,21 @@ describe('<Wizard />', () => {
       expect(wrapper.find('WizardNavItem')).toHaveLength(3);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(0)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(0)
+          .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(1)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(1)
+          .props().isDisabled
       ).toEqual(true);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(2)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(2)
+          .props().isDisabled
       ).toEqual(true);
 
       changeValue(wrapper, 'google');
@@ -1466,15 +1465,15 @@ describe('<Wizard />', () => {
       expect(wrapper.find('WizardNavItem')).toHaveLength(2);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(0)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(0)
+          .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(1)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(1)
+          .props().isDisabled
       ).toEqual(true);
     });
 
@@ -1535,40 +1534,40 @@ describe('<Wizard />', () => {
       expect(wrapper.find('WizardNavItem')).toHaveLength(2);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(0)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(0)
+          .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(1)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(1)
+          .props().isDisabled
       ).toEqual(true);
 
       nextButtonClick(wrapper);
 
       // click on first nav link
       wrapper
-      .find('.pf-c-wizard__nav-item')
-      .first()
-      .childAt(0)
-      .simulate('click');
+        .find('.pf-c-wizard__nav-item')
+        .first()
+        .childAt(0)
+        .simulate('click');
       wrapper.update();
 
       // keep the second step enabled
       expect(wrapper.find('WizardNavItem')).toHaveLength(2);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(0)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(0)
+          .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-        .find('WizardNavItem')
-        .at(1)
-        .props().isDisabled
+          .find('WizardNavItem')
+          .at(1)
+          .props().isDisabled
       ).toEqual(true);
     });
   });

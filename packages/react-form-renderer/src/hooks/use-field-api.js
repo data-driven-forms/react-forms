@@ -25,12 +25,12 @@ const useFieldApi = ({ name, initializeOnMount, component, render, ...props }) =
         fieldProps.input.onChange(undefined);
       }
     };
-  }, []);
+  }, [initializeOnMount, props.initialValue, fieldProps.meta.initial, props.clearOnUnmount, fieldProps.input, formOptions.clearOnUnmount]);
 
   /**
    * Prepare deleted value of field
    */
-  const fieldClearedValue = props.hasOwnProperty('clearedValue') ? props.clearedValue : formOptions.clearedValue;
+  const fieldClearedValue = Object.prototype.hasOwnProperty.call(props, 'clearedValue') ? props.clearedValue : formOptions.clearedValue;
 
   /**
    * construct component props necessary that would live in field provider

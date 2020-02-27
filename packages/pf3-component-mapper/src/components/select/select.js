@@ -16,25 +16,25 @@ import { optionsPropType } from '@data-driven-forms/common/src/prop-types-templa
 const getDropdownText = (value, placeholder, options) => {
   if (Array.isArray(value)) {
     if (value.length === 0) {
-      return [ placeholder, true ];
+      return [placeholder, true];
     }
 
     if (typeof value[0] === 'object') {
-      return [ value.map(({ label }) => label).join(', '), false ];
+      return [value.map(({ label }) => label).join(', '), false];
     }
 
-    return [ value.map(item => options.find(({ value }) => value === item).label).join(', '), false ];
+    return [value.map((item) => options.find(({ value }) => value === item).label).join(', '), false];
   }
 
   if (typeof value === 'object') {
-    return [ value.label, false ];
+    return [value.label, false];
   }
 
   if (!value) {
-    return [ placeholder, true ];
+    return [placeholder, true];
   }
 
-  return [ options.find(option => option.value === value).label, false ];
+  return [options.find((option) => option.value === value).label, false];
 };
 
 class SearchInput extends Component {
@@ -52,34 +52,32 @@ class SearchInput extends Component {
   }
 
   render() {
-    return <input ref={ this.inputRef } type="text" { ...this.props } className="form-control" />;
+    return <input ref={this.inputRef} type="text" {...this.props} className="form-control" />;
   }
-
 }
 
 SearchInput.propTypes = {
-  value: PropTypes.any,
+  value: PropTypes.any
 };
 
 const SelectTitle = ({ title, classNamePrefix, isClearable, value, onClear, isFetching, isDisabled }) => (
   <Fragment>
-    <span key="searchable-select-value-label" className={ `${classNamePrefix}-value` }>{ title }</span>
-    { isClearable && value && (
+    <span key="searchable-select-value-label" className={`${classNamePrefix}-value`}>
+      {title}
+    </span>
+    {isClearable && value && (
       <div
-        className={ `${classNamePrefix}-searchebale-clear` }
-        onClick={ (event) => {
+        className={`${classNamePrefix}-searchebale-clear`}
+        onClick={(event) => {
           event.stopPropagation();
           return onClear(undefined);
-        } } >
-        <i className="fa fa-times"/>
+        }}
+      >
+        <i className="fa fa-times" />
       </div>
-    ) }
-    { !isDisabled && isFetching && (
-      <i className="ddorg__pf3-component-mapper__select__dropdown-indicator fa fa-circle-o-notch spin" />
-    ) }
-    { !isDisabled && !isFetching && (
-      <i className="ddorg__pf3-component-mapper__select__dropdown-indicator fa fa-angle-down"/>
-    ) }
+    )}
+    {!isDisabled && isFetching && <i className="ddorg__pf3-component-mapper__select__dropdown-indicator fa fa-circle-o-notch spin" />}
+    {!isDisabled && !isFetching && <i className="ddorg__pf3-component-mapper__select__dropdown-indicator fa fa-angle-down" />}
   </Fragment>
 );
 
@@ -90,20 +88,21 @@ SelectTitle.propTypes = {
   value: PropTypes.any,
   onClear: PropTypes.func,
   isFetching: PropTypes.bool,
-  isDisabled: PropTypes.bool,
+  isDisabled: PropTypes.bool
 };
 
-class Select extends Component {  constructor(props){
-  super(props);
-  this.state = {
-    isFetching: false,
-    isOpen: false,
-    options: props.options || [],
-  };
-}
-  handleToggleOpen = () => this.setState(({ isOpen }) => ({ isOpen: !isOpen }))
+class Select extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isFetching: false,
+      isOpen: false,
+      options: props.options || []
+    };
+  }
+  handleToggleOpen = () => this.setState(({ isOpen }) => ({ isOpen: !isOpen }));
 
-  componentDidMount(){
+  componentDidMount() {
     const { loadOptions } = this.props;
     if (loadOptions) {
       return this.updateOptions();
@@ -119,7 +118,7 @@ class Select extends Component {  constructor(props){
       this.setState({ options: this.props.options });
     }
 
-    if (this.props.loadOptions && fnToString(this.props.loadOptions) !== fnToString(prevProps.loadOptions)){
+    if (this.props.loadOptions && fnToString(this.props.loadOptions) !== fnToString(prevProps.loadOptions)) {
       return this.updateOptions();
     }
   }
@@ -129,18 +128,17 @@ class Select extends Component {  constructor(props){
 
     this.setState({ isFetching: true });
 
-    return loadOptions()
-    .then((data) => {
+    return loadOptions().then((data) => {
       if (!data.map(({ value }) => value).includes(this.props.input.value)) {
         this.props.input.onChange(undefined);
       }
 
       return this.setState({
         options: data,
-        isFetching: false,
+        isFetching: false
       });
     });
-  }
+  };
 
   shouldComponentUpdate(nextProps, nextState) {
     if (nextState.isOpen !== this.state.isOpen) {
@@ -155,7 +153,7 @@ class Select extends Component {  constructor(props){
       return true;
     }
 
-    if (this.props.loadOptions && fnToString(this.props.loadOptions) !== fnToString(nextProps.loadOptions)){
+    if (this.props.loadOptions && fnToString(this.props.loadOptions) !== fnToString(nextProps.loadOptions)) {
       return true;
     }
 
@@ -166,56 +164,60 @@ class Select extends Component {  constructor(props){
     return false;
   }
 
-  render () {
+  render() {
     const { input, loadOptions, options: _options, ...props } = this.props;
     const { isOpen, options, isFetching } = this.state;
     if (props.isSearchable) {
-      const [ title, isPlaceholder ] = getDropdownText(input.value, props.placeholder, options);
+      const [title, isPlaceholder] = getDropdownText(input.value, props.placeholder, options);
       const searchableInput = {
         ...input,
-        onChange: props.isMulti || props.multi
-          ? input.onChange
-          : (...args) => {
-            this.handleToggleOpen();
-            return input.onChange(...args);
-          },
+        onChange:
+          props.isMulti || props.multi
+            ? input.onChange
+            : (...args) => {
+                this.handleToggleOpen();
+                return input.onChange(...args);
+              }
       };
       return (
-        <div className={ `${props.classNamePrefix}-button` }>
+        <div className={`${props.classNamePrefix}-button`}>
           <DropdownButton
-            onToggle={ () => this.handleToggleOpen() }
-            disabled={ props.isDisabled }
+            onToggle={() => this.handleToggleOpen()}
+            disabled={props.isDisabled}
             noCaret
-            open={ isOpen }
-            id={ props.id || input.name }
-            title={ <SelectTitle
-              isDisabled={ props.isDisabled }
-              isFetching={ isFetching }
-              classNamePrefix={ this.props.classNamePrefix }
-              value={ input.value }
-              isClearable={ props.isClearable }
-              title={ title }
-              onClear={ input.onChange }
-            /> }
-            className={ clsx(`${props.classNamePrefix}-dropdown`, {
-              'is-empty': isPlaceholder,
-            }) }>
-            { isOpen &&
+            open={isOpen}
+            id={props.id || input.name}
+            title={
+              <SelectTitle
+                isDisabled={props.isDisabled}
+                isFetching={isFetching}
+                classNamePrefix={this.props.classNamePrefix}
+                value={input.value}
+                isClearable={props.isClearable}
+                title={title}
+                onClear={input.onChange}
+              />
+            }
+            className={clsx(`${props.classNamePrefix}-dropdown`, {
+              'is-empty': isPlaceholder
+            })}
+          >
+            {isOpen && (
               <DataDrivenSelect
-                isFetching={ isFetching }
-                input={ searchableInput }
-                { ...props }
-                options={ options }
-                className={ clsx(props.classNamePrefix, {
-                  sercheable: props.isSearchable,
-                }) }
-                controlShouldRenderValue={ false }
-                hideSelectedOptions={ false }
-                isClearable={ false }
-                tabSelectsValue={ false }
+                isFetching={isFetching}
+                input={searchableInput}
+                {...props}
+                options={options}
+                className={clsx(props.classNamePrefix, {
+                  sercheable: props.isSearchable
+                })}
+                controlShouldRenderValue={false}
+                hideSelectedOptions={false}
+                isClearable={false}
+                tabSelectsValue={false}
                 menuIsOpen
-                backspaceRemovesValue={ false }
-                isMulti={ props.isMulti || props.multi }
+                backspaceRemovesValue={false}
+                isMulti={props.isMulti || props.multi}
                 placeholder="Search..."
                 components={{
                   ClearIndicator,
@@ -223,9 +225,12 @@ class Select extends Component {  constructor(props){
                   DropdownIndicator: null,
                   IndicatorSeparator: null,
                   Placeholder: () => null,
-                  Input: ({ selectProps, cx, isHidden, isDisabled, innerRef, getStyles, ...props }) =>
-                    <SearchInput id={ this.props.input.name } { ...props } />,
-                }} /> }
+                  Input: ({ selectProps, cx, isHidden, isDisabled, innerRef, getStyles, ...props }) => (
+                    <SearchInput id={this.props.input.name} {...props} />
+                  )
+                }}
+              />
+            )}
           </DropdownButton>
         </div>
       );
@@ -233,19 +238,18 @@ class Select extends Component {  constructor(props){
 
     return (
       <DataDrivenSelect
-        { ...this.props }
-        isFetching={ isFetching }
-        options={ options }
-        input={ input }
-        className={ props.classNamePrefix }
+        {...this.props}
+        isFetching={isFetching}
+        options={options}
+        input={input}
+        className={props.classNamePrefix}
         components={{
           ClearIndicator,
           Option,
-          DropdownIndicator: props.isDisabled ? null : DropdownIndicator,
+          DropdownIndicator: props.isDisabled ? null : DropdownIndicator
         }}
       />
     );
-
   }
 }
 
@@ -258,11 +262,11 @@ Select.propTypes = {
   input: PropTypes.shape({
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-    value: PropTypes.any,
+    value: PropTypes.any
   }).isRequired,
   classNamePrefix: PropTypes.string,
   loadOptions: PropTypes.func,
-  options: optionsPropType,
+  options: optionsPropType
 };
 
 export default Select;

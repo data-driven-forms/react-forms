@@ -19,22 +19,21 @@ const Navigation = ({ closeNav, searchRef }) => {
   return (
     <List
       component="nav"
-      subheader={ (
-        <ListSubheader className={ classes.navHeader } component="div">
+      subheader={
+        <ListSubheader className={classes.navHeader} component="div">
           <span style={{ flexGrow: 1 }}>
             <RouterLink href="/">
-              <Link style={{ cursor: 'pointer' }}>
-                Data driven forms
-              </Link>
+              <Link style={{ cursor: 'pointer' }}>Data driven forms</Link>
             </RouterLink>
           </span>
-          <IconButton edge="end" onClick={ closeNav }>
+          <IconButton edge="end" onClick={closeNav}>
             <ChevronLeftIcon />
           </IconButton>
-        </ListSubheader>) }
-      className={ classes.listRoot }
+        </ListSubheader>
+      }
+      className={classes.listRoot}
     >
-      <MenuRenderer searchRef={ searchRef } schema={ schema } />
+      <MenuRenderer searchRef={searchRef} schema={schema} />
     </List>
   );
 };

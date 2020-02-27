@@ -8,21 +8,19 @@ const Navbar = ({ onNextClick, onPreviousClick, month, onMonthClick, isYear, tog
   <table className="year-interval-header">
     <tbody>
       <tr>
-        <PrevInterval className={ disablePrev ? 'disabled' : '' } onMouseDown={ () => !disablePrev && onPreviousClick() }/>
+        <PrevInterval className={disablePrev ? 'disabled' : ''} onMouseDown={() => !disablePrev && onPreviousClick()} />
         <td>
-          { isYear
-            ? <button className="navbar-center-button" type="button" onClick={ () => toggleSelectingYear(true) }>{ month.getFullYear() }</button>
-            : (
-              <button
-                className="navbar-center-button"
-                onMouseDown={ () => onMonthClick(true) }
-                type="button"
-              >
-                { MomentLocaleUtils.formatMonthTitle(month, locale) }
-              </button>
-            ) }
+          {isYear ? (
+            <button className="navbar-center-button" type="button" onClick={() => toggleSelectingYear(true)}>
+              {month.getFullYear()}
+            </button>
+          ) : (
+            <button className="navbar-center-button" onMouseDown={() => onMonthClick(true)} type="button">
+              {MomentLocaleUtils.formatMonthTitle(month, locale)}
+            </button>
+          )}
         </td>
-        <NextInterval className={ disableNext ? 'disabled' : '' } onMouseDown={ () =>!disableNext &&  onNextClick() }/>
+        <NextInterval className={disableNext ? 'disabled' : ''} onMouseDown={() => !disableNext && onNextClick()} />
       </tr>
     </tbody>
   </table>
@@ -37,7 +35,7 @@ Navbar.propTypes = {
   toggleSelectingYear: PropTypes.func,
   locale: PropTypes.string,
   disableNext: PropTypes.bool,
-  disablePrev: PropTypes.bool,
+  disablePrev: PropTypes.bool
 };
 
 export default Navbar;

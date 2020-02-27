@@ -4,9 +4,15 @@ exports[`<WizardSTepButtons should add custom className to toolbar 1`] = `
 <footer
   className="pf-c-wizard__footer foo-class"
 >
-  <SubmitButton
+  <NextButton
+    getState={[MockFunction]}
+    handleNext={[MockFunction]}
     handleSubmit={[MockFunction]}
+    nextLabel="Next"
+    onCancel={[MockFunction]}
+    submit={[MockFunction]}
     submitLabel="Submit"
+    valid={true}
   />
   <Component
     onClick={[MockFunction]}
@@ -29,9 +35,15 @@ exports[`<WizardSTepButtons should render correctly 1`] = `
 <footer
   className="pf-c-wizard__footer "
 >
-  <SubmitButton
+  <NextButton
+    getState={[MockFunction]}
+    handleNext={[MockFunction]}
     handleSubmit={[MockFunction]}
+    nextLabel="Next"
+    onCancel={[MockFunction]}
+    submit={[MockFunction]}
     submitLabel="Submit"
+    valid={true}
   />
   <Component
     onClick={[MockFunction]}

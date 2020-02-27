@@ -26,163 +26,184 @@ exports[`renderForm function #condition should render condition field only if co
     }
     onSubmit={[MockFunction]}
   >
-    <FormConditionWrapper>
-      <FormFieldHideWrapper
-        hideField={false}
-      >
-        <FieldWrapper
-          component={[Function]}
-          componentType="custom-component"
-          name="a"
-          validate={
-            Array [
-              undefined,
-            ]
-          }
+    <SingleField
+      component="custom-component"
+      name="a"
+      validate={
+        Array [
+          undefined,
+        ]
+      }
+    >
+      <FormConditionWrapper>
+        <FormFieldHideWrapper
+          hideField={false}
         >
-          <CustomComponent
-            FieldProvider={[Function]}
+          <FieldWrapper
+            component={[Function]}
+            componentType="custom-component"
             name="a"
-            validate={[Function]}
+            validate={
+              Array [
+                undefined,
+              ]
+            }
           >
-            <FieldProvider
-              component={[Function]}
+            <CustomComponent
+              FieldProvider={[Function]}
               name="a"
               validate={[Function]}
             >
-              <TextField
-                formOptions={
-                  Object {
-                    "renderForm": [Function],
-                  }
-                }
-                input={
-                  Object {
-                    "checked": undefined,
-                    "name": "a",
-                    "onBlur": [Function],
-                    "onChange": [Function],
-                    "onFocus": [Function],
-                    "value": "",
-                  }
-                }
-                meta={
-                  Object {
-                    "active": false,
-                    "data": Object {},
-                    "dirty": false,
-                    "dirtySinceLastSubmit": false,
-                    "error": undefined,
-                    "initial": undefined,
-                    "invalid": false,
-                    "length": undefined,
-                    "modified": false,
-                    "pristine": true,
-                    "submitError": undefined,
-                    "submitFailed": false,
-                    "submitSucceeded": false,
-                    "submitting": false,
-                    "touched": false,
-                    "valid": true,
-                    "validating": false,
-                    "visited": false,
-                  }
-                }
+              <FieldProvider
+                component={[Function]}
+                name="a"
                 validate={[Function]}
               >
-                <input
-                  id="a"
-                  name="a"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  value=""
-                />
-              </TextField>
-            </FieldProvider>
-          </CustomComponent>
-        </FieldWrapper>
-      </FormFieldHideWrapper>
-    </FormConditionWrapper>
-    <FormConditionWrapper>
-      <FormFieldHideWrapper
-        hideField={false}
-      >
-        <FieldWrapper
-          component={[Function]}
-          componentType="custom-component"
-          name="c"
-          validate={
-            Array [
-              undefined,
-            ]
-          }
+                <TextField
+                  formOptions={
+                    Object {
+                      "renderForm": [Function],
+                    }
+                  }
+                  input={
+                    Object {
+                      "checked": undefined,
+                      "name": "a",
+                      "onBlur": [Function],
+                      "onChange": [Function],
+                      "onFocus": [Function],
+                      "value": "",
+                    }
+                  }
+                  meta={
+                    Object {
+                      "active": false,
+                      "data": Object {},
+                      "dirty": false,
+                      "dirtySinceLastSubmit": false,
+                      "error": undefined,
+                      "initial": undefined,
+                      "invalid": false,
+                      "length": undefined,
+                      "modified": false,
+                      "pristine": true,
+                      "submitError": undefined,
+                      "submitFailed": false,
+                      "submitSucceeded": false,
+                      "submitting": false,
+                      "touched": false,
+                      "valid": true,
+                      "validating": false,
+                      "visited": false,
+                    }
+                  }
+                  validate={[Function]}
+                >
+                  <input
+                    id="a"
+                    name="a"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    value=""
+                  />
+                </TextField>
+              </FieldProvider>
+            </CustomComponent>
+          </FieldWrapper>
+        </FormFieldHideWrapper>
+      </FormConditionWrapper>
+    </SingleField>
+    <SingleField
+      component="custom-component"
+      name="c"
+      validate={
+        Array [
+          undefined,
+        ]
+      }
+    >
+      <FormConditionWrapper>
+        <FormFieldHideWrapper
+          hideField={false}
         >
-          <CustomComponent
-            FieldProvider={[Function]}
+          <FieldWrapper
+            component={[Function]}
+            componentType="custom-component"
             name="c"
-            validate={[Function]}
+            validate={
+              Array [
+                undefined,
+              ]
+            }
           >
-            <FieldProvider
-              component={[Function]}
+            <CustomComponent
+              FieldProvider={[Function]}
               name="c"
               validate={[Function]}
             >
-              <TextField
-                formOptions={
-                  Object {
-                    "renderForm": [Function],
-                  }
-                }
-                input={
-                  Object {
-                    "checked": undefined,
-                    "name": "c",
-                    "onBlur": [Function],
-                    "onChange": [Function],
-                    "onFocus": [Function],
-                    "value": "",
-                  }
-                }
-                meta={
-                  Object {
-                    "active": false,
-                    "data": Object {},
-                    "dirty": false,
-                    "dirtySinceLastSubmit": false,
-                    "error": undefined,
-                    "initial": undefined,
-                    "invalid": false,
-                    "length": undefined,
-                    "modified": false,
-                    "pristine": true,
-                    "submitError": undefined,
-                    "submitFailed": false,
-                    "submitSucceeded": false,
-                    "submitting": false,
-                    "touched": false,
-                    "valid": true,
-                    "validating": false,
-                    "visited": false,
-                  }
-                }
+              <FieldProvider
+                component={[Function]}
+                name="c"
                 validate={[Function]}
               >
-                <input
-                  id="c"
-                  name="c"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  value=""
-                />
-              </TextField>
-            </FieldProvider>
-          </CustomComponent>
-        </FieldWrapper>
-      </FormFieldHideWrapper>
-    </FormConditionWrapper>
-    <FormConditionWrapper
+                <TextField
+                  formOptions={
+                    Object {
+                      "renderForm": [Function],
+                    }
+                  }
+                  input={
+                    Object {
+                      "checked": undefined,
+                      "name": "c",
+                      "onBlur": [Function],
+                      "onChange": [Function],
+                      "onFocus": [Function],
+                      "value": "",
+                    }
+                  }
+                  meta={
+                    Object {
+                      "active": false,
+                      "data": Object {},
+                      "dirty": false,
+                      "dirtySinceLastSubmit": false,
+                      "error": undefined,
+                      "initial": undefined,
+                      "invalid": false,
+                      "length": undefined,
+                      "modified": false,
+                      "pristine": true,
+                      "submitError": undefined,
+                      "submitFailed": false,
+                      "submitSucceeded": false,
+                      "submitting": false,
+                      "touched": false,
+                      "valid": true,
+                      "validating": false,
+                      "visited": false,
+                    }
+                  }
+                  validate={[Function]}
+                >
+                  <input
+                    id="c"
+                    name="c"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    value=""
+                  />
+                </TextField>
+              </FieldProvider>
+            </CustomComponent>
+          </FieldWrapper>
+        </FormFieldHideWrapper>
+      </FormConditionWrapper>
+    </SingleField>
+    <SingleField
+      component="custom-component"
       condition={
         Array [
           Object {
@@ -198,8 +219,14 @@ exports[`renderForm function #condition should render condition field only if co
           },
         ]
       }
+      name="foo"
+      validate={
+        Array [
+          undefined,
+        ]
+      }
     >
-      <Condition
+      <FormConditionWrapper
         condition={
           Array [
             Object {
@@ -216,9 +243,27 @@ exports[`renderForm function #condition should render condition field only if co
           ]
         }
       >
-        <FormSpy />
-      </Condition>
-    </FormConditionWrapper>
+        <Condition
+          condition={
+            Array [
+              Object {
+                "is": "x",
+                "when": Array [
+                  "a",
+                  "b",
+                ],
+              },
+              Object {
+                "pattern": /fuzz/,
+                "when": "c",
+              },
+            ]
+          }
+        >
+          <FormSpy />
+        </Condition>
+      </FormConditionWrapper>
+    </SingleField>
   </ReactFinalForm>
 </ContextWrapper>
 `;
@@ -249,163 +294,184 @@ exports[`renderForm function #condition should render condition field only if on
     }
     onSubmit={[MockFunction]}
   >
-    <FormConditionWrapper>
-      <FormFieldHideWrapper
-        hideField={false}
-      >
-        <FieldWrapper
-          component={[Function]}
-          componentType="custom-component"
-          name="a"
-          validate={
-            Array [
-              undefined,
-            ]
-          }
+    <SingleField
+      component="custom-component"
+      name="a"
+      validate={
+        Array [
+          undefined,
+        ]
+      }
+    >
+      <FormConditionWrapper>
+        <FormFieldHideWrapper
+          hideField={false}
         >
-          <CustomComponent
-            FieldProvider={[Function]}
+          <FieldWrapper
+            component={[Function]}
+            componentType="custom-component"
             name="a"
-            validate={[Function]}
+            validate={
+              Array [
+                undefined,
+              ]
+            }
           >
-            <FieldProvider
-              component={[Function]}
+            <CustomComponent
+              FieldProvider={[Function]}
               name="a"
               validate={[Function]}
             >
-              <TextField
-                formOptions={
-                  Object {
-                    "renderForm": [Function],
-                  }
-                }
-                input={
-                  Object {
-                    "checked": undefined,
-                    "name": "a",
-                    "onBlur": [Function],
-                    "onChange": [Function],
-                    "onFocus": [Function],
-                    "value": "",
-                  }
-                }
-                meta={
-                  Object {
-                    "active": false,
-                    "data": Object {},
-                    "dirty": false,
-                    "dirtySinceLastSubmit": false,
-                    "error": undefined,
-                    "initial": undefined,
-                    "invalid": false,
-                    "length": undefined,
-                    "modified": false,
-                    "pristine": true,
-                    "submitError": undefined,
-                    "submitFailed": false,
-                    "submitSucceeded": false,
-                    "submitting": false,
-                    "touched": false,
-                    "valid": true,
-                    "validating": false,
-                    "visited": false,
-                  }
-                }
+              <FieldProvider
+                component={[Function]}
+                name="a"
                 validate={[Function]}
               >
-                <input
-                  id="a"
-                  name="a"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  value=""
-                />
-              </TextField>
-            </FieldProvider>
-          </CustomComponent>
-        </FieldWrapper>
-      </FormFieldHideWrapper>
-    </FormConditionWrapper>
-    <FormConditionWrapper>
-      <FormFieldHideWrapper
-        hideField={false}
-      >
-        <FieldWrapper
-          component={[Function]}
-          componentType="custom-component"
-          name="b"
-          validate={
-            Array [
-              undefined,
-            ]
-          }
+                <TextField
+                  formOptions={
+                    Object {
+                      "renderForm": [Function],
+                    }
+                  }
+                  input={
+                    Object {
+                      "checked": undefined,
+                      "name": "a",
+                      "onBlur": [Function],
+                      "onChange": [Function],
+                      "onFocus": [Function],
+                      "value": "",
+                    }
+                  }
+                  meta={
+                    Object {
+                      "active": false,
+                      "data": Object {},
+                      "dirty": false,
+                      "dirtySinceLastSubmit": false,
+                      "error": undefined,
+                      "initial": undefined,
+                      "invalid": false,
+                      "length": undefined,
+                      "modified": false,
+                      "pristine": true,
+                      "submitError": undefined,
+                      "submitFailed": false,
+                      "submitSucceeded": false,
+                      "submitting": false,
+                      "touched": false,
+                      "valid": true,
+                      "validating": false,
+                      "visited": false,
+                    }
+                  }
+                  validate={[Function]}
+                >
+                  <input
+                    id="a"
+                    name="a"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    value=""
+                  />
+                </TextField>
+              </FieldProvider>
+            </CustomComponent>
+          </FieldWrapper>
+        </FormFieldHideWrapper>
+      </FormConditionWrapper>
+    </SingleField>
+    <SingleField
+      component="custom-component"
+      name="b"
+      validate={
+        Array [
+          undefined,
+        ]
+      }
+    >
+      <FormConditionWrapper>
+        <FormFieldHideWrapper
+          hideField={false}
         >
-          <CustomComponent
-            FieldProvider={[Function]}
+          <FieldWrapper
+            component={[Function]}
+            componentType="custom-component"
             name="b"
-            validate={[Function]}
+            validate={
+              Array [
+                undefined,
+              ]
+            }
           >
-            <FieldProvider
-              component={[Function]}
+            <CustomComponent
+              FieldProvider={[Function]}
               name="b"
               validate={[Function]}
             >
-              <TextField
-                formOptions={
-                  Object {
-                    "renderForm": [Function],
-                  }
-                }
-                input={
-                  Object {
-                    "checked": undefined,
-                    "name": "b",
-                    "onBlur": [Function],
-                    "onChange": [Function],
-                    "onFocus": [Function],
-                    "value": "",
-                  }
-                }
-                meta={
-                  Object {
-                    "active": false,
-                    "data": Object {},
-                    "dirty": false,
-                    "dirtySinceLastSubmit": false,
-                    "error": undefined,
-                    "initial": undefined,
-                    "invalid": false,
-                    "length": undefined,
-                    "modified": false,
-                    "pristine": true,
-                    "submitError": undefined,
-                    "submitFailed": false,
-                    "submitSucceeded": false,
-                    "submitting": false,
-                    "touched": false,
-                    "valid": true,
-                    "validating": false,
-                    "visited": false,
-                  }
-                }
+              <FieldProvider
+                component={[Function]}
+                name="b"
                 validate={[Function]}
               >
-                <input
-                  id="b"
-                  name="b"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  value=""
-                />
-              </TextField>
-            </FieldProvider>
-          </CustomComponent>
-        </FieldWrapper>
-      </FormFieldHideWrapper>
-    </FormConditionWrapper>
-    <FormConditionWrapper
+                <TextField
+                  formOptions={
+                    Object {
+                      "renderForm": [Function],
+                    }
+                  }
+                  input={
+                    Object {
+                      "checked": undefined,
+                      "name": "b",
+                      "onBlur": [Function],
+                      "onChange": [Function],
+                      "onFocus": [Function],
+                      "value": "",
+                    }
+                  }
+                  meta={
+                    Object {
+                      "active": false,
+                      "data": Object {},
+                      "dirty": false,
+                      "dirtySinceLastSubmit": false,
+                      "error": undefined,
+                      "initial": undefined,
+                      "invalid": false,
+                      "length": undefined,
+                      "modified": false,
+                      "pristine": true,
+                      "submitError": undefined,
+                      "submitFailed": false,
+                      "submitSucceeded": false,
+                      "submitting": false,
+                      "touched": false,
+                      "valid": true,
+                      "validating": false,
+                      "visited": false,
+                    }
+                  }
+                  validate={[Function]}
+                >
+                  <input
+                    id="b"
+                    name="b"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    value=""
+                  />
+                </TextField>
+              </FieldProvider>
+            </CustomComponent>
+          </FieldWrapper>
+        </FormFieldHideWrapper>
+      </FormConditionWrapper>
+    </SingleField>
+    <SingleField
+      component="custom-component"
       condition={
         Object {
           "is": "x",
@@ -415,8 +481,14 @@ exports[`renderForm function #condition should render condition field only if on
           ],
         }
       }
+      name="foo"
+      validate={
+        Array [
+          undefined,
+        ]
+      }
     >
-      <Condition
+      <FormConditionWrapper
         condition={
           Object {
             "is": "x",
@@ -427,9 +499,21 @@ exports[`renderForm function #condition should render condition field only if on
           }
         }
       >
-        <FormSpy />
-      </Condition>
-    </FormConditionWrapper>
+        <Condition
+          condition={
+            Object {
+              "is": "x",
+              "when": Array [
+                "a",
+                "b",
+              ],
+            }
+          }
+        >
+          <FormSpy />
+        </Condition>
+      </FormConditionWrapper>
+    </SingleField>
   </ReactFinalForm>
 </ContextWrapper>
 `;
@@ -460,35 +544,45 @@ exports[`renderForm function should render single field from defined componentTy
     }
     onSubmit={[MockFunction]}
   >
-    <FormConditionWrapper>
-      <FormFieldHideWrapper
-        hideField={false}
-      >
-        <FieldWrapper
-          component={[Function]}
-          componentType="text-field"
-          name="foo"
-          validate={
-            Array [
-              undefined,
-            ]
-          }
+    <SingleField
+      component="text-field"
+      name="foo"
+      validate={
+        Array [
+          undefined,
+        ]
+      }
+    >
+      <FormConditionWrapper>
+        <FormFieldHideWrapper
+          hideField={false}
         >
-          <Component
-            FieldProvider={[Function]}
+          <FieldWrapper
+            component={[Function]}
+            componentType="text-field"
             name="foo"
-            validate={[Function]}
+            validate={
+              Array [
+                undefined,
+              ]
+            }
           >
-            <div
+            <Component
+              FieldProvider={[Function]}
               name="foo"
               validate={[Function]}
             >
-              TextField
-            </div>
-          </Component>
-        </FieldWrapper>
-      </FormFieldHideWrapper>
-    </FormConditionWrapper>
+              <div
+                name="foo"
+                validate={[Function]}
+              >
+                TextField
+              </div>
+            </Component>
+          </FieldWrapper>
+        </FormFieldHideWrapper>
+      </FormConditionWrapper>
+    </SingleField>
   </ReactFinalForm>
 </ContextWrapper>
 `;
@@ -519,84 +613,94 @@ exports[`renderForm function should render single field from with custom compone
     }
     onSubmit={[MockFunction]}
   >
-    <FormConditionWrapper>
-      <FormFieldHideWrapper
-        hideField={false}
-      >
-        <FieldWrapper
-          component={[Function]}
-          componentType="custom-component"
-          name="foo"
-          validate={
-            Array [
-              undefined,
-            ]
-          }
+    <SingleField
+      component="custom-component"
+      name="foo"
+      validate={
+        Array [
+          undefined,
+        ]
+      }
+    >
+      <FormConditionWrapper>
+        <FormFieldHideWrapper
+          hideField={false}
         >
-          <CustomComponent
-            FieldProvider={[Function]}
+          <FieldWrapper
+            component={[Function]}
+            componentType="custom-component"
             name="foo"
-            validate={[Function]}
+            validate={
+              Array [
+                undefined,
+              ]
+            }
           >
-            <FieldProvider
-              component={[Function]}
+            <CustomComponent
+              FieldProvider={[Function]}
               name="foo"
               validate={[Function]}
             >
-              <TextField
-                formOptions={
-                  Object {
-                    "renderForm": [Function],
-                  }
-                }
-                input={
-                  Object {
-                    "checked": undefined,
-                    "name": "foo",
-                    "onBlur": [Function],
-                    "onChange": [Function],
-                    "onFocus": [Function],
-                    "value": "",
-                  }
-                }
-                meta={
-                  Object {
-                    "active": false,
-                    "data": Object {},
-                    "dirty": false,
-                    "dirtySinceLastSubmit": false,
-                    "error": undefined,
-                    "initial": undefined,
-                    "invalid": false,
-                    "length": undefined,
-                    "modified": false,
-                    "pristine": true,
-                    "submitError": undefined,
-                    "submitFailed": false,
-                    "submitSucceeded": false,
-                    "submitting": false,
-                    "touched": false,
-                    "valid": true,
-                    "validating": false,
-                    "visited": false,
-                  }
-                }
+              <FieldProvider
+                component={[Function]}
+                name="foo"
                 validate={[Function]}
               >
-                <input
-                  id="foo"
-                  name="foo"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  value=""
-                />
-              </TextField>
-            </FieldProvider>
-          </CustomComponent>
-        </FieldWrapper>
-      </FormFieldHideWrapper>
-    </FormConditionWrapper>
+                <TextField
+                  formOptions={
+                    Object {
+                      "renderForm": [Function],
+                    }
+                  }
+                  input={
+                    Object {
+                      "checked": undefined,
+                      "name": "foo",
+                      "onBlur": [Function],
+                      "onChange": [Function],
+                      "onFocus": [Function],
+                      "value": "",
+                    }
+                  }
+                  meta={
+                    Object {
+                      "active": false,
+                      "data": Object {},
+                      "dirty": false,
+                      "dirtySinceLastSubmit": false,
+                      "error": undefined,
+                      "initial": undefined,
+                      "invalid": false,
+                      "length": undefined,
+                      "modified": false,
+                      "pristine": true,
+                      "submitError": undefined,
+                      "submitFailed": false,
+                      "submitSucceeded": false,
+                      "submitting": false,
+                      "touched": false,
+                      "valid": true,
+                      "validating": false,
+                      "visited": false,
+                    }
+                  }
+                  validate={[Function]}
+                >
+                  <input
+                    id="foo"
+                    name="foo"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    value=""
+                  />
+                </TextField>
+              </FieldProvider>
+            </CustomComponent>
+          </FieldWrapper>
+        </FormFieldHideWrapper>
+      </FormConditionWrapper>
+    </SingleField>
   </ReactFinalForm>
 </ContextWrapper>
 `;

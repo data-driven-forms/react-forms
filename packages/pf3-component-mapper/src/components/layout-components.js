@@ -4,46 +4,49 @@ import { layoutComponents } from '@data-driven-forms/react-form-renderer';
 import { Button, Form } from 'patternfly-react';
 import './layout-components.scss';
 
-const FormWapper = ({ children, ...props }) => <Form { ...props } >{ children }</Form>;
+const FormWapper = ({ children, ...props }) => <Form {...props}>{children}</Form>;
 
 FormWapper.propTypes = {
-  children: PropTypes.oneOfType([ PropTypes.node, PropTypes.arrayOf(PropTypes.node) ]).isRequired,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired
 };
 
-const FormButton = ({ label, variant, children, ...props }) => <Button bsStyle={ variant } { ...props }>{ label || children }</Button>;
+const FormButton = ({ label, variant, children, ...props }) => (
+  <Button bsStyle={variant} {...props}>
+    {label || children}
+  </Button>
+);
 
 FormButton.propTypes = {
-  label: PropTypes.oneOfType([ PropTypes.string, PropTypes.node, PropTypes.arrayOf(PropTypes.node) ]),
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
   variant: PropTypes.string,
-  children: PropTypes.oneOfType([ PropTypes.node, PropTypes.arrayOf(PropTypes.node) ]),
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)])
 };
 
 const ButtonGroupWrapper = ({ children, className, ...props }) => (
-  <div className={ `ddorg__pf3-layout-components__button-group ${className}` } { ...props }
-  >
-    { children }
+  <div className={`ddorg__pf3-layout-components__button-group ${className}`} {...props}>
+    {children}
   </div>
 );
 
 ButtonGroupWrapper.propTypes = {
-  children: PropTypes.oneOfType([ PropTypes.node, PropTypes.arrayOf(PropTypes.node) ]).isRequired,
-  className: PropTypes.string,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired,
+  className: PropTypes.string
 };
 
 ButtonGroupWrapper.defaultProps = {
-  className: '',
+  className: ''
 };
 
-const TitleWrapper = ({ children }) => <h1>{ children }</h1>;
+const TitleWrapper = ({ children }) => <h1>{children}</h1>;
 
 TitleWrapper.propTypes = {
-  children: PropTypes.oneOfType([ PropTypes.node, PropTypes.arrayOf(PropTypes.node) ]).isRequired,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired
 };
 
-const DescriptionWrapper = ({ children }) => <p>{ children }</p>;
+const DescriptionWrapper = ({ children }) => <p>{children}</p>;
 
 DescriptionWrapper.propTypes = {
-  children: PropTypes.oneOfType([ PropTypes.node, PropTypes.arrayOf(PropTypes.node) ]).isRequired,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired
 };
 
 const layoutMapper = {
@@ -51,7 +54,7 @@ const layoutMapper = {
   [layoutComponents.BUTTON]: FormButton,
   [layoutComponents.BUTTON_GROUP]: ButtonGroupWrapper,
   [layoutComponents.TITLE]: TitleWrapper,
-  [layoutComponents.DESCRIPTION]: DescriptionWrapper,
+  [layoutComponents.DESCRIPTION]: DescriptionWrapper
 };
 
 export default layoutMapper;

@@ -8,7 +8,7 @@ describe('<PickerInput />', () => {
   const handleOverlayToggle = jest.fn();
   beforeEach(() => {
     initialProps = {
-      handleOverlayToggle,
+      handleOverlayToggle
     };
   });
 
@@ -17,28 +17,28 @@ describe('<PickerInput />', () => {
   });
 
   it('should render picker input correctly', () => {
-    const wrapper = mount(<PickerInput { ...initialProps }/>);
+    const wrapper = mount(<PickerInput {...initialProps} />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render picker input disbaled variant correctly', () => {
-    const wrapper = mount(<PickerInput { ...initialProps } isDisabled />);
+    const wrapper = mount(<PickerInput {...initialProps} isDisabled />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render picker input time variant correctly', () => {
-    const wrapper = mount(<PickerInput { ...initialProps } variant="time" />);
+    const wrapper = mount(<PickerInput {...initialProps} variant="time" />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should toggle overlay on input click', () => {
-    const wrapper = mount(<PickerInput { ...initialProps }/>);
+    const wrapper = mount(<PickerInput {...initialProps} />);
     wrapper.find('input').simulate('click');
     expect(handleOverlayToggle).toHaveBeenCalledWith(true);
   });
 
   it('should toggle overlay icon click', () => {
-    const wrapper = mount(<PickerInput { ...initialProps }/>);
+    const wrapper = mount(<PickerInput {...initialProps} />);
     wrapper.find('span.input-group-addon').simulate('click');
     expect(handleOverlayToggle).toHaveBeenCalledWith(true);
   });

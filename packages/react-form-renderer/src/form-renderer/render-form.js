@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { childrenPropTypes } from '@data-driven-forms/common/src/prop-types-templates';
 import { dataTypeValidator } from '../validators';
 import validatorMapper from '../validators/validator-mapper';
 import RendererContext from '../components/renderer-context';
@@ -20,7 +21,12 @@ FormFieldHideWrapper.defaultProps = {
 
 const FormConditionWrapper = ({ condition, children }) => (condition ? <Condition condition={condition}>{children}</Condition> : children);
 
-const renderSingleField = ({ component, condition, hideField, ...rest }) => (
+FormConditionWrapper.propTypes = {
+  condition: PropTypes.object,
+  children: childrenPropTypes.isRequired
+};
+
+const SingleField = ({ component, condition, hideField, ...rest }) => (
   <Fragment key={rest.key || rest.name}>
     <RendererContext.Consumer>
       {({ formFieldsMapper }) => (
@@ -34,8 +40,10 @@ const renderSingleField = ({ component, condition, hideField, ...rest }) => (
   </Fragment>
 );
 
-renderSingleField.propTypes = {
-  component: PropTypes.string.isRequired
+SingleField.propTypes = {
+  component: PropTypes.string.isRequired,
+  condition: PropTypes.object,
+  hideField: PropTypes.bool
 };
 
 const prepareValidator = (validator) => (typeof validator === 'function' ? memoize(validator) : validatorMapper(validator.type)({ ...validator }));
@@ -47,6 +55,7 @@ const prepareFieldProps = (field) => ({
     : [field.dataType && dataTypeValidator(field.dataType)()]
 });
 
-const renderForm = (fields) => fields.map((field) => (Array.isArray(field) ? renderForm(field) : renderSingleField(prepareFieldProps(field))));
+const renderForm = (fields) =>
+  fields.map((field) => (Array.isArray(field) ? renderForm(field) : <SingleField key={fields.name} {...prepareFieldProps(field)} />));
 
 export default renderForm;

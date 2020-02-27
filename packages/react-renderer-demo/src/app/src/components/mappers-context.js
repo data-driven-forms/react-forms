@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 const MapperContext = createContext({
   loaded: false,
-  mappers: {},
+  mappers: {}
 });
 
 export default MapperContext;

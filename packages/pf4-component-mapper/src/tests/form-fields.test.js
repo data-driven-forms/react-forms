@@ -1,6 +1,6 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import { Checkbox as Pf4Checkbox, Radio as Pf4Radio } from '@patternfly/react-core';
+import { Checkbox as Pf4Checkbox } from '@patternfly/react-core';
 import { mount, shallow } from 'enzyme';
 import TextField from '../components/text-field';
 import TextArea from '../components/text-area';
@@ -11,21 +11,13 @@ import DatePicker from '../components/date-picker';
 import TimePicker from '../components/time-picker';
 import Switch from '../components/switch';
 
-import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 
 describe('FormFields', () => {
-  let FieldProvider;
   let onChangeSpy;
 
   beforeEach(() => {
     onChangeSpy = jest.fn();
-
-    FieldProvider = (props) => (
-      <div>
-        <MockFieldProvider {...props} input={{ onChange: onChangeSpy, name: 'Foo' }} meta={{ error: false, touched: false }} />
-      </div>
-    );
   });
 
   const props = {
@@ -124,10 +116,10 @@ describe('FormFields', () => {
     expect(onChangeSpy).not.toHaveBeenCalled();
 
     wrapper
-    .find(Pf4Checkbox)
-    .first()
-    .props()
-    .onChange();
+      .find(Pf4Checkbox)
+      .first()
+      .props()
+      .onChange();
 
     expect(onChangeSpy).toHaveBeenCalled();
   });
@@ -240,15 +232,15 @@ describe('FormFields', () => {
 
     expect(
       wrapper
-      .find('.pf-m-on')
-      .text()
-      .includes('I am on')
+        .find('.pf-m-on')
+        .text()
+        .includes('I am on')
     ).toEqual(true);
     expect(
       wrapper
-      .find('.pf-m-on')
-      .text()
-      .includes('Turned off')
+        .find('.pf-m-on')
+        .text()
+        .includes('Turned off')
     ).toEqual(false);
     expect(toJson(wrapper)).toMatchSnapshot();
   });

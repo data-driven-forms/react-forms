@@ -5,7 +5,7 @@ class DefaultSchemaError extends Error {
     if (typeof Error.captureStackTrace === 'function') {
       Error.captureStackTrace(this, this.constructor);
     } else {
-      this.stack = (new Error(args[0])).stack;
+      this.stack = new Error(args[0]).stack;
     }
   }
 }

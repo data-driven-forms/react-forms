@@ -60,9 +60,9 @@ describe('subform', () => {
     expect(wrapper.find(Typography)).toHaveLength(1);
     expect(
       wrapper
-      .find(Typography)
-      .text()
-      .includes(TITLE)
+        .find(Typography)
+        .text()
+        .includes(TITLE)
     ).toEqual(true);
     expect(wrapper.find('h1')).toHaveLength(1);
   });
@@ -84,9 +84,9 @@ describe('subform', () => {
     expect(wrapper.find(Typography)).toHaveLength(1);
     expect(
       wrapper
-      .find(Typography)
-      .text()
-      .includes(DESCRIPTION)
+        .find(Typography)
+        .text()
+        .includes(DESCRIPTION)
     ).toEqual(true);
     expect(wrapper.find('h1')).toHaveLength(1);
   });
@@ -108,17 +108,17 @@ describe('subform', () => {
     expect(wrapper.find(Typography)).toHaveLength(2);
     expect(
       wrapper
-      .find(Typography)
-      .first()
-      .text()
-      .includes(TITLE)
+        .find(Typography)
+        .first()
+        .text()
+        .includes(TITLE)
     ).toEqual(true);
     expect(
       wrapper
-      .find(Typography)
-      .last()
-      .text()
-      .includes(DESCRIPTION)
+        .find(Typography)
+        .last()
+        .text()
+        .includes(DESCRIPTION)
     ).toEqual(true);
     expect(wrapper.find('h1')).toHaveLength(1);
   });

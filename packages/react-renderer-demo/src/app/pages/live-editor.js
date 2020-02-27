@@ -1,4 +1,5 @@
-import React, { useContext, useState  } from 'react';
+/* eslint no-console: "off" */
+import React, { useContext, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
@@ -12,7 +13,7 @@ import dynamic from 'next/dynamic';
 
 import MapperContext from '@docs/components/mappers-context';
 const CodeEditor = dynamic(import('@docs/components/code-editor'), {
-  ssr: false,
+  ssr: false
 });
 
 const baseStructure = {
@@ -32,26 +33,26 @@ const baseStructure = {
                   name: 'switch_1',
                   label: 'Switch',
                   title: 'Switch',
-                  component: components.SWITCH,
+                  component: components.SWITCH
                 },
                 {
                   name: 'switch_2',
                   label: 'Switch disabled',
                   component: components.SWITCH,
-                  isDisabled: true,
+                  isDisabled: true
                 },
                 {
                   name: 'switch_3',
                   label: 'Switch readOnly',
                   component: components.SWITCH,
-                  isReadOnly: true,
+                  isReadOnly: true
                 },
                 {
                   name: 'text_box_2',
                   label: 'Text Box with help',
                   title: 'Text Box with help',
                   helperText: 'Helper text',
-                  component: components.TEXT_FIELD,
+                  component: components.TEXT_FIELD
                 },
                 {
                   name: 'text_box_3',
@@ -59,29 +60,27 @@ const baseStructure = {
                   title: 'Text Box required',
                   isRequired: true,
                   component: components.TEXT_FIELD,
-                  validate: [
-                    { type: validators.REQUIRED },
-                  ],
+                  validate: [{ type: validators.REQUIRED }]
                 },
                 {
                   name: 'text_box_4',
                   label: 'Text Box readonly',
                   title: 'Text Box readonly',
                   isReadOnly: true,
-                  component: components.TEXT_FIELD,
+                  component: components.TEXT_FIELD
                 },
                 {
                   name: 'text_box_5',
                   label: 'Text Box default',
                   title: 'Text Box default',
-                  component: components.TEXT_FIELD,
+                  component: components.TEXT_FIELD
                 },
                 {
                   name: 'text_box_6',
                   label: 'Text Box unvisible',
                   title: 'Text Box unvisible',
                   isVisible: false,
-                  component: components.TEXT_FIELD,
+                  component: components.TEXT_FIELD
                 },
                 {
                   name: 'text_box_7',
@@ -90,10 +89,10 @@ const baseStructure = {
                   validate: [
                     {
                       type: validators.PATTERN_VALIDATOR,
-                      pattern: '[0-9]',
-                    },
+                      pattern: '[0-9]'
+                    }
                   ],
-                  component: components.TEXT_FIELD,
+                  component: components.TEXT_FIELD
                 },
                 {
                   name: 'text_box_8',
@@ -101,17 +100,17 @@ const baseStructure = {
                   title: 'Text Box integer value',
                   dataType: 'integer',
                   component: components.TEXT_FIELD,
-                  type: 'number',
+                  type: 'number'
                 },
                 {
                   name: 'text_box_9',
                   label: 'Text Box string value',
                   title: 'Text Box string value',
                   dataType: 'string',
-                  component: components.TEXT_FIELD,
-                },
+                  component: components.TEXT_FIELD
+                }
               ],
-              component: components.SUB_FORM,
+              component: components.SUB_FORM
             },
             {
               title: 'Text areas',
@@ -121,13 +120,13 @@ const baseStructure = {
                   name: 'textarea_box_1',
                   label: 'Text Area',
                   title: 'Text Area',
-                  component: components.TEXTAREA_FIELD,
-                },
+                  component: components.TEXTAREA_FIELD
+                }
               ],
-              component: components.SUB_FORM,
-            },
+              component: components.SUB_FORM
+            }
           ],
-          component: components.TAB_ITEM,
+          component: components.TAB_ITEM
         },
         {
           title: 'Tab 2',
@@ -142,16 +141,16 @@ const baseStructure = {
                   name: 'check_box_1',
                   label: 'Check Box',
                   title: 'Check Box',
-                  component: components.CHECKBOX,
+                  component: components.CHECKBOX
                 },
                 {
                   name: 'check_box_2',
                   label: 'Check Box checked',
                   title: 'Check Box checked',
-                  component: components.CHECKBOX,
-                },
+                  component: components.CHECKBOX
+                }
               ],
-              component: components.SUB_FORM,
+              component: components.SUB_FORM
             },
             {
               title: 'Radios',
@@ -166,17 +165,17 @@ const baseStructure = {
                   options: [
                     {
                       label: 'One',
-                      value: '1',
+                      value: '1'
                     },
                     {
                       label: 'Two',
-                      value: '2',
+                      value: '2'
                     },
                     {
                       label: 'Three',
-                      value: '3',
-                    },
-                  ],
+                      value: '3'
+                    }
+                  ]
                 },
                 {
                   name: 'radio_button_2',
@@ -187,17 +186,17 @@ const baseStructure = {
                   options: [
                     {
                       label: 'One',
-                      value: '1',
+                      value: '1'
                     },
                     {
                       label: 'Two',
-                      value: '2',
+                      value: '2'
                     },
                     {
                       label: 'Three',
-                      value: '3',
-                    },
-                  ],
+                      value: '3'
+                    }
+                  ]
                 },
                 {
                   name: 'radio_button_4',
@@ -208,23 +207,23 @@ const baseStructure = {
                   options: [
                     {
                       label: 'One',
-                      value: '1',
+                      value: '1'
                     },
                     {
                       label: 'Two',
-                      value: '2',
+                      value: '2'
                     },
                     {
                       label: 'Three',
-                      value: '3',
-                    },
-                  ],
-                },
+                      value: '3'
+                    }
+                  ]
+                }
               ],
-              component: components.SUB_FORM,
-            },
+              component: components.SUB_FORM
+            }
           ],
-          component: components.TAB_ITEM,
+          component: components.TAB_ITEM
         },
         {
           title: 'Tab 3',
@@ -244,21 +243,21 @@ const baseStructure = {
                   options: [
                     {
                       label: '<None>',
-                      value: null,
+                      value: null
                     },
                     {
                       label: 'One',
-                      value: '1',
+                      value: '1'
                     },
                     {
                       label: 'Three',
-                      value: '3',
+                      value: '3'
                     },
                     {
                       label: 'Two',
-                      value: '2',
-                    },
-                  ],
+                      value: '2'
+                    }
+                  ]
                 },
                 {
                   name: 'dropdown_list_2',
@@ -269,21 +268,21 @@ const baseStructure = {
                   options: [
                     {
                       label: '<None>',
-                      value: null,
+                      value: null
                     },
                     {
                       label: 'One',
-                      value: '1',
+                      value: '1'
                     },
                     {
                       label: 'Three',
-                      value: '3',
+                      value: '3'
                     },
                     {
                       label: 'Two',
-                      value: '2',
-                    },
-                  ],
+                      value: '2'
+                    }
+                  ]
                 },
                 {
                   name: 'dropdown_list_3',
@@ -295,21 +294,21 @@ const baseStructure = {
                   options: [
                     {
                       label: '<None>',
-                      value: null,
+                      value: null
                     },
                     {
                       label: 'One',
-                      value: '1',
+                      value: '1'
                     },
                     {
                       label: 'Three',
-                      value: '3',
+                      value: '3'
                     },
                     {
                       label: 'Two',
-                      value: '2',
-                    },
-                  ],
+                      value: '2'
+                    }
+                  ]
                 },
                 {
                   name: 'dropdown_list_4',
@@ -320,27 +319,27 @@ const baseStructure = {
                   options: [
                     {
                       label: '<None>',
-                      value: null,
+                      value: null
                     },
                     {
                       label: 'One',
-                      value: '1',
+                      value: '1'
                     },
                     {
                       label: 'Two',
-                      value: '2',
+                      value: '2'
                     },
                     {
                       label: 'Three',
-                      value: '3',
-                    },
-                  ],
-                },
+                      value: '3'
+                    }
+                  ]
+                }
               ],
-              component: components.SUB_FORM,
-            },
+              component: components.SUB_FORM
+            }
           ],
-          component: components.TAB_ITEM,
+          component: components.TAB_ITEM
         },
         {
           title: 'Tab 4',
@@ -355,16 +354,16 @@ const baseStructure = {
                   name: 'date_control_1',
                   label: 'Datepicker',
                   title: 'Datepicker',
-                  component: components.DATE_PICKER,
+                  component: components.DATE_PICKER
                 },
                 {
                   name: 'date_control_2',
                   label: 'Datepicker with past days',
                   title: 'Datepicker with past days',
-                  component: components.DATE_PICKER,
-                },
+                  component: components.DATE_PICKER
+                }
               ],
-              component: components.SUB_FORM,
+              component: components.SUB_FORM
             },
             {
               title: 'Timepickers',
@@ -374,19 +373,19 @@ const baseStructure = {
                   name: 'date_time_control_1',
                   label: 'Timepicker',
                   title: 'Timepicker',
-                  component: components.TIME_PICKER,
+                  component: components.TIME_PICKER
                 },
                 {
                   name: 'date_time_control_2',
                   label: 'Timepicker with past days',
                   title: 'Timepicker with past days',
-                  component: components.TIME_PICKER,
-                },
+                  component: components.TIME_PICKER
+                }
               ],
-              component: components.SUB_FORM,
-            },
+              component: components.SUB_FORM
+            }
           ],
-          component: components.TAB_ITEM,
+          component: components.TAB_ITEM
         },
         {
           title: 'Mixed',
@@ -401,25 +400,25 @@ const baseStructure = {
                   name: 'text_box_10',
                   label: 'Text Box',
                   title: 'Text Box',
-                  component: components.TEXT_FIELD,
+                  component: components.TEXT_FIELD
                 },
                 {
                   name: 'textarea_box_2',
                   label: 'Text Area',
                   title: 'Text Area',
-                  component: components.TEXTAREA_FIELD,
+                  component: components.TEXTAREA_FIELD
                 },
                 {
                   name: 'check_box_3',
                   label: 'Check Box',
                   title: 'Check Box',
-                  component: components.CHECKBOX,
+                  component: components.CHECKBOX
                 },
                 {
                   name: 'check_box_4',
                   label: 'Check Box',
                   title: 'Check Box',
-                  component: components.CHECKBOX,
+                  component: components.CHECKBOX
                 },
                 {
                   name: 'dropdown_list_5',
@@ -430,21 +429,21 @@ const baseStructure = {
                   options: [
                     {
                       label: '<None>',
-                      value: null,
+                      value: null
                     },
                     {
                       label: 'One',
-                      value: '1',
+                      value: '1'
                     },
                     {
                       label: 'Three',
-                      value: '3',
+                      value: '3'
                     },
                     {
                       label: 'Two',
-                      value: '2',
-                    },
-                  ],
+                      value: '2'
+                    }
+                  ]
                 },
                 {
                   name: 'radio_button_3',
@@ -455,57 +454,57 @@ const baseStructure = {
                   options: [
                     {
                       label: 'One',
-                      value: '1',
+                      value: '1'
                     },
                     {
                       label: 'Two',
-                      value: '2',
+                      value: '2'
                     },
                     {
                       label: 'Three',
-                      value: '3',
-                    },
-                  ],
+                      value: '3'
+                    }
+                  ]
                 },
                 {
                   name: 'date_time_control_3',
                   label: 'Timepicker',
                   title: 'Timepicker',
-                  component: components.TIME_PICKER,
-                },
+                  component: components.TIME_PICKER
+                }
               ],
-              component: components.SUB_FORM,
-            },
+              component: components.SUB_FORM
+            }
           ],
-          component: components.TAB_ITEM,
-        },
+          component: components.TAB_ITEM
+        }
       ],
       component: components.TABS,
-      name: '57',
-    },
-  ],
+      name: '57'
+    }
+  ]
 };
 
 const LiveEditor = () => {
-  const [ state, setState ] = useState({
+  const [state, setState] = useState({
     value: JSON.stringify(baseStructure, null, 2),
-    parsedSchema: baseStructure,
+    parsedSchema: baseStructure
   });
 
   const mappers = useContext(MapperContext);
 
-  const onChange = value => {
+  const onChange = (value) => {
     let schema;
     try {
       schema = JSON.parse(value);
-      setState(state => ({ ...state, value }));
+      setState((state) => ({ ...state, value }));
     } catch (error) {
       console.warn('not a json', error);
     }
 
     try {
       defaultSchemaValidator(schema, mappers.mappers.pf4.formFieldsMapper);
-      setState(state => ({ ...state, parsedSchema: schema }));
+      setState((state) => ({ ...state, parsedSchema: schema }));
     } catch (error) {
       console.warn('not correct json schema', error);
     }
@@ -513,72 +512,51 @@ const LiveEditor = () => {
 
   const { value, parsedSchema } = state;
   return (
-    <Grid
-      container
-      spacing={ 6 }
-    >
-      <Grid
-        item
-        md={ 6 }
-        xs={ 12 }
-      >
+    <Grid container spacing={6}>
+      <Grid item md={6} xs={12}>
         <div style={{ width: '100%', paddingTop: 10, background: '#1d1f21' }}>
-          <CodeEditor
-            readOnly={ false }
-            mode="json"
-            onChange={ onChange }
-            value={ value }
-            maxLines={ 50 }
-          />
+          <CodeEditor readOnly={false} mode="json" onChange={onChange} value={value} maxLines={50} />
         </div>
         <div>
-          <Grid container spacing={ 6 }>
-            <Grid item xs={ 12 } md={ 6 }>
-              <Typography variant="h6">
-                  Avaiable components:
-              </Typography>
+          <Grid container spacing={6}>
+            <Grid item xs={12} md={6}>
+              <Typography variant="h6">Avaiable components:</Typography>
               <div>
                 <List>
-                  { [ ...new Set(Object.values(components)) ].map(item => item === 'wizard' ? null : (
-                    <ListItem key={ item }>
-                      <ListItemText
-                        primary={ item }
-                      />
-                    </ListItem>
-                  )) }
+                  {[...new Set(Object.values(components))].map((item) =>
+                    item === 'wizard' ? null : (
+                      <ListItem key={item}>
+                        <ListItemText primary={item} />
+                      </ListItem>
+                    )
+                  )}
                 </List>
               </div>
             </Grid>
           </Grid>
         </div>
-
       </Grid>
-      <Grid
-        item
-        md={ 6 }
-        xs={ 12 }
-      >
+      <Grid item md={6} xs={12}>
         <Paper square style={{ padding: 16, paddingLeft: 24 }}>
-          <Grid container spacing={ 6 }>
-            <Grid item xs={ 12 }>
-              { mappers.loaded && (
+          <Grid container spacing={6}>
+            <Grid item xs={12}>
+              {mappers.loaded && (
                 <div className="pf4">
                   <FormRenderer
-                    formFieldsMapper={ mappers.mappers.pf4.formFieldsMapper }
-                    schema={ parsedSchema }
-                    onSubmit={ console.log }
-                    onCancel={ () => console.log('Cancel clicked') }
+                    formFieldsMapper={mappers.mappers.pf4.formFieldsMapper}
+                    schema={parsedSchema}
+                    onSubmit={console.log}
+                    onCancel={() => console.log('Cancel clicked')}
                     canReset
                   />
                 </div>
-              ) }
+              )}
             </Grid>
           </Grid>
         </Paper>
       </Grid>
     </Grid>
   );
-
 };
 
 export default LiveEditor;

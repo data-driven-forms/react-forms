@@ -9,78 +9,70 @@ const MultipleChoiceList = ({ validate, FieldProvider, Wrapper, Checkbox, ...pro
 
   return (
     <FieldProvider
-      { ...props }
+      {...props}
       // eslint-disable-next-line no-undef
       name={input.name}
-      validate={ composeValidators(props.validate || []) }
-      render={ ({
-        label,
-        isRequired,
-        helperText,
-        meta,
-        options,
-        isDisabled,
-        isReadOnly,
-        description,
-        ...rest
-      }) => {
+      validate={composeValidators(props.validate || [])}
+      render={({ label, isRequired, helperText, meta, options, isDisabled, isReadOnly, description, ...rest }) => {
         const { error, touched } = meta;
         const showError = touched && error;
         const groupValues = rest.input.value || [];
         return (
           <Wrapper
-            showError={ showError }
-            isRequired={ isRequired }
-            label={ label }
-            helperText={ helperText }
-            meta={ meta }
-            description={ description }
-            rest={ rest }
-            error={ error }
+            showError={showError}
+            isRequired={isRequired}
+            label={label}
+            helperText={helperText}
+            meta={meta}
+            description={description}
+            rest={rest}
+            error={error}
           >
-            { options.map(option =>
-              (<FieldProvider
-                formOptions={ formOptions }
-                id={ `${rest.id}-${option.value}` }
-                key={ option.value }
-                { ...option }
-                name={ props.name }
+            {options.map((option) => (
+              <FieldProvider
+                formOptions={formOptions}
+                id={`${rest.id}-${option.value}`}
+                key={option.value}
+                {...option}
+                name={props.name}
                 type="checkbox"
-                render={ ({ input, meta, formOptions, componentType, ...rest }) => {
+                render={({ input, meta, formOptions, componentType, ...rest }) => {
                   const indexValue = groupValues.indexOf(input.value);
                   return (
                     <Checkbox
-                      aria-label={ option['aria-label'] || option.label }
-                      { ...input }
-                      { ...rest }
-                      isDisabled={ isDisabled || isReadOnly }
-                      onChange={ () => (indexValue === -1
-                        ? input.onChange([ ...groupValues, input.value ])
-                        : input.onChange([ ...groupValues.slice(0, indexValue), ...groupValues.slice(indexValue + 1) ])) }
-                      label={ rest.label }
+                      aria-label={option['aria-label'] || option.label}
+                      {...input}
+                      {...rest}
+                      isDisabled={isDisabled || isReadOnly}
+                      onChange={() =>
+                        indexValue === -1
+                          ? input.onChange([...groupValues, input.value])
+                          : input.onChange([...groupValues.slice(0, indexValue), ...groupValues.slice(indexValue + 1)])
+                      }
+                      label={rest.label}
                     />
                   );
-                } }
-              />)) }
-          </Wrapper>);
-      } }
+                }}
+              />
+            ))}
+          </Wrapper>
+        );
+      }}
     />
-  );};
+  );
+};
 
 MultipleChoiceList.propTypes = {
   validate: PropTypes.func,
-  FieldProvider: PropTypes.oneOfType([ PropTypes.node, PropTypes.func ]).isRequired,
+  FieldProvider: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
   name: PropTypes.string.isRequired,
-  Wrapper: PropTypes.oneOfType([ PropTypes.node, PropTypes.func ]),
-  Checkbox: PropTypes.oneOfType([ PropTypes.node, PropTypes.func ]),
+  Wrapper: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  Checkbox: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 };
 
 export default MultipleChoiceList;
 
 export const wrapperProps = {
   ...formGroup,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired
 };

@@ -6,7 +6,7 @@ import componentTypes from '../../components/component-types';
 import useFieldApi from '../../hooks/use-field-api';
 
 const DataTypeInput = (props) => {
-  const { input, dataType: _dataType, type, label } = useFieldApi(props);
+  const { input, type, label } = useFieldApi(props);
   return (
     <div>
       <label htmlFor={input.name}>{label}</label>
@@ -21,7 +21,7 @@ describe('data types', () => {
     initialProps = {
       formTemplate,
       formFieldsMapper: {
-        [componentTypes.TEXT_FIELD]: DataTypeInput,
+        [componentTypes.TEXT_FIELD]: DataTypeInput
       },
       schema: {
         fields: [
@@ -46,20 +46,20 @@ describe('data types', () => {
      * should not allow submit
      * validator should prevent submit if anything else than number is passed to the input
      */
-    input.simulate('change', { target: { value: 'sadsad' }});
+    input.simulate('change', { target: { value: 'sadsad' } });
     wrapper
-    .find('button')
-    .first()
-    .simulate('click');
+      .find('button')
+      .first()
+      .simulate('click');
     expect(onSubmit).not.toHaveBeenCalled();
 
-    input.simulate('change', { target: { value: '123' }});
+    input.simulate('change', { target: { value: '123' } });
     wrapper.update();
 
     wrapper
-    .find('form')
-    .first()
-    .simulate('submit');
+      .find('form')
+      .first()
+      .simulate('submit');
 
     expect(onSubmit).toHaveBeenCalledWith(
       expect.objectContaining({

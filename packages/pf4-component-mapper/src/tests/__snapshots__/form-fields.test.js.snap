@@ -363,123 +363,156 @@ exports[`FormFields should render Radio correctly 1`] = `
           <div
             className="pf-c-form__group"
           >
-            <Radio
-              aria-label="One"
-              checked={false}
-              className=""
-              id="Name of the field-1"
-              isDisabled={false}
-              isValid={true}
-              key="Name of the field-1"
-              label="One"
+            <RadioOption
+              key="1"
               name="Name of the field"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
-              type="radio"
-              value="1"
+              option={
+                Object {
+                  "label": "One",
+                  "value": "1",
+                }
+              }
             >
-              <div
-                className="pf-c-radio"
+              <Radio
+                aria-label="One"
+                checked={false}
+                className=""
+                id="Name of the field-1"
+                isDisabled={false}
+                isValid={true}
+                key="Name of the field-1"
+                label="One"
+                name="Name of the field"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                type="radio"
+                value="1"
               >
-                <input
-                  aria-invalid={false}
-                  className="pf-c-radio__input"
-                  disabled={false}
-                  id="Name of the field-1"
-                  name="Name of the field"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  type="radio"
-                  value="1"
-                />
-                <label
-                  className="pf-c-radio__label"
-                  htmlFor="Name of the field-1"
+                <div
+                  className="pf-c-radio"
                 >
-                  One
-                </label>
-              </div>
-            </Radio>
-            <Radio
-              aria-label="Two"
-              checked={false}
-              className=""
-              id="Name of the field-2"
-              isDisabled={false}
-              isValid={true}
-              key="Name of the field-2"
-              label="Two"
+                  <input
+                    aria-invalid={false}
+                    className="pf-c-radio__input"
+                    disabled={false}
+                    id="Name of the field-1"
+                    name="Name of the field"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="radio"
+                    value="1"
+                  />
+                  <label
+                    className="pf-c-radio__label"
+                    htmlFor="Name of the field-1"
+                  >
+                    One
+                  </label>
+                </div>
+              </Radio>
+            </RadioOption>
+            <RadioOption
+              key="2"
               name="Name of the field"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
-              type="radio"
-              value="2"
+              option={
+                Object {
+                  "label": "Two",
+                  "value": "2",
+                }
+              }
             >
-              <div
-                className="pf-c-radio"
+              <Radio
+                aria-label="Two"
+                checked={false}
+                className=""
+                id="Name of the field-2"
+                isDisabled={false}
+                isValid={true}
+                key="Name of the field-2"
+                label="Two"
+                name="Name of the field"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                type="radio"
+                value="2"
               >
-                <input
-                  aria-invalid={false}
-                  className="pf-c-radio__input"
-                  disabled={false}
-                  id="Name of the field-2"
-                  name="Name of the field"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  type="radio"
-                  value="2"
-                />
-                <label
-                  className="pf-c-radio__label"
-                  htmlFor="Name of the field-2"
+                <div
+                  className="pf-c-radio"
                 >
-                  Two
-                </label>
-              </div>
-            </Radio>
-            <Radio
-              aria-label="Three"
-              checked={false}
-              className=""
-              id="Name of the field-3"
-              isDisabled={false}
-              isValid={true}
-              key="Name of the field-3"
-              label="Three"
+                  <input
+                    aria-invalid={false}
+                    className="pf-c-radio__input"
+                    disabled={false}
+                    id="Name of the field-2"
+                    name="Name of the field"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="radio"
+                    value="2"
+                  />
+                  <label
+                    className="pf-c-radio__label"
+                    htmlFor="Name of the field-2"
+                  >
+                    Two
+                  </label>
+                </div>
+              </Radio>
+            </RadioOption>
+            <RadioOption
+              key="3"
               name="Name of the field"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
-              type="radio"
-              value="3"
+              option={
+                Object {
+                  "label": "Three",
+                  "value": "3",
+                }
+              }
             >
-              <div
-                className="pf-c-radio"
+              <Radio
+                aria-label="Three"
+                checked={false}
+                className=""
+                id="Name of the field-3"
+                isDisabled={false}
+                isValid={true}
+                key="Name of the field-3"
+                label="Three"
+                name="Name of the field"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                type="radio"
+                value="3"
               >
-                <input
-                  aria-invalid={false}
-                  className="pf-c-radio__input"
-                  disabled={false}
-                  id="Name of the field-3"
-                  name="Name of the field"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  type="radio"
-                  value="3"
-                />
-                <label
-                  className="pf-c-radio__label"
-                  htmlFor="Name of the field-3"
+                <div
+                  className="pf-c-radio"
                 >
-                  Three
-                </label>
-              </div>
-            </Radio>
+                  <input
+                    aria-invalid={false}
+                    className="pf-c-radio__input"
+                    disabled={false}
+                    id="Name of the field-3"
+                    name="Name of the field"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="radio"
+                    value="3"
+                  />
+                  <label
+                    className="pf-c-radio__label"
+                    htmlFor="Name of the field-3"
+                  >
+                    Three
+                  </label>
+                </div>
+              </Radio>
+            </RadioOption>
           </div>
         </FormGroup>
       </FormGroup>
@@ -1380,123 +1413,156 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
           <div
             className="pf-c-form__group"
           >
-            <Radio
-              aria-label="One"
-              checked={false}
-              className=""
-              id="Name of the field-1"
-              isDisabled={false}
-              isValid={true}
-              key="Name of the field-1"
-              label="One"
+            <RadioOption
+              key="1"
               name="Name of the field"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
-              type="radio"
-              value="1"
+              option={
+                Object {
+                  "label": "One",
+                  "value": "1",
+                }
+              }
             >
-              <div
-                className="pf-c-radio"
+              <Radio
+                aria-label="One"
+                checked={false}
+                className=""
+                id="Name of the field-1"
+                isDisabled={false}
+                isValid={true}
+                key="Name of the field-1"
+                label="One"
+                name="Name of the field"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                type="radio"
+                value="1"
               >
-                <input
-                  aria-invalid={false}
-                  className="pf-c-radio__input"
-                  disabled={false}
-                  id="Name of the field-1"
-                  name="Name of the field"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  type="radio"
-                  value="1"
-                />
-                <label
-                  className="pf-c-radio__label"
-                  htmlFor="Name of the field-1"
+                <div
+                  className="pf-c-radio"
                 >
-                  One
-                </label>
-              </div>
-            </Radio>
-            <Radio
-              aria-label="Two"
-              checked={false}
-              className=""
-              id="Name of the field-2"
-              isDisabled={false}
-              isValid={true}
-              key="Name of the field-2"
-              label="Two"
+                  <input
+                    aria-invalid={false}
+                    className="pf-c-radio__input"
+                    disabled={false}
+                    id="Name of the field-1"
+                    name="Name of the field"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="radio"
+                    value="1"
+                  />
+                  <label
+                    className="pf-c-radio__label"
+                    htmlFor="Name of the field-1"
+                  >
+                    One
+                  </label>
+                </div>
+              </Radio>
+            </RadioOption>
+            <RadioOption
+              key="2"
               name="Name of the field"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
-              type="radio"
-              value="2"
+              option={
+                Object {
+                  "label": "Two",
+                  "value": "2",
+                }
+              }
             >
-              <div
-                className="pf-c-radio"
+              <Radio
+                aria-label="Two"
+                checked={false}
+                className=""
+                id="Name of the field-2"
+                isDisabled={false}
+                isValid={true}
+                key="Name of the field-2"
+                label="Two"
+                name="Name of the field"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                type="radio"
+                value="2"
               >
-                <input
-                  aria-invalid={false}
-                  className="pf-c-radio__input"
-                  disabled={false}
-                  id="Name of the field-2"
-                  name="Name of the field"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  type="radio"
-                  value="2"
-                />
-                <label
-                  className="pf-c-radio__label"
-                  htmlFor="Name of the field-2"
+                <div
+                  className="pf-c-radio"
                 >
-                  Two
-                </label>
-              </div>
-            </Radio>
-            <Radio
-              aria-label="Three"
-              checked={false}
-              className=""
-              id="Name of the field-3"
-              isDisabled={false}
-              isValid={true}
-              key="Name of the field-3"
-              label="Three"
+                  <input
+                    aria-invalid={false}
+                    className="pf-c-radio__input"
+                    disabled={false}
+                    id="Name of the field-2"
+                    name="Name of the field"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="radio"
+                    value="2"
+                  />
+                  <label
+                    className="pf-c-radio__label"
+                    htmlFor="Name of the field-2"
+                  >
+                    Two
+                  </label>
+                </div>
+              </Radio>
+            </RadioOption>
+            <RadioOption
+              key="3"
               name="Name of the field"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
-              type="radio"
-              value="3"
+              option={
+                Object {
+                  "label": "Three",
+                  "value": "3",
+                }
+              }
             >
-              <div
-                className="pf-c-radio"
+              <Radio
+                aria-label="Three"
+                checked={false}
+                className=""
+                id="Name of the field-3"
+                isDisabled={false}
+                isValid={true}
+                key="Name of the field-3"
+                label="Three"
+                name="Name of the field"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                type="radio"
+                value="3"
               >
-                <input
-                  aria-invalid={false}
-                  className="pf-c-radio__input"
-                  disabled={false}
-                  id="Name of the field-3"
-                  name="Name of the field"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  type="radio"
-                  value="3"
-                />
-                <label
-                  className="pf-c-radio__label"
-                  htmlFor="Name of the field-3"
+                <div
+                  className="pf-c-radio"
                 >
-                  Three
-                </label>
-              </div>
-            </Radio>
+                  <input
+                    aria-invalid={false}
+                    className="pf-c-radio__input"
+                    disabled={false}
+                    id="Name of the field-3"
+                    name="Name of the field"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="radio"
+                    value="3"
+                  />
+                  <label
+                    className="pf-c-radio__label"
+                    htmlFor="Name of the field-3"
+                  >
+                    Three
+                  </label>
+                </div>
+              </Radio>
+            </RadioOption>
           </div>
         </FormGroup>
       </FormGroup>

@@ -32,7 +32,7 @@ const Select = (props) => {
       <MUISelect
         fullWidth
         {...input}
-        options={options.filter((option) => option.hasOwnProperty('value') && option.value !== null)}
+        options={options.filter((option) => Object.prototype.hasOwnProperty.call(option, 'value') && option.value !== null)}
         placeholder={placeholder || 'Please choose'}
         value={options.filter(({ value }) => (rest.multi ? input.value.includes(value) : value === input.value))}
         isMulti={rest.multi}

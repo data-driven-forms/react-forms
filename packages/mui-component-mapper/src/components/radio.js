@@ -12,6 +12,34 @@ import { validationError } from '../common/helpers';
 import './radio.scss';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
+const RadioOption = ({ name, option, isDisabled, isReadOnly }) => {
+  const { input } = useFieldApi({ name, type: 'radio', value: option.value });
+  return (
+    <FormControlLabel
+      key={`${name}-${option.value}`}
+      control={
+        <MUIRadio
+          {...input}
+          name={name}
+          disabled={isDisabled || isReadOnly}
+          onChange={() => input.onChange(option.value)}
+          inputProps={{
+            readOnly: isReadOnly
+          }}
+        />
+      }
+      label={option.label}
+    />
+  );
+};
+
+RadioOption.propTypes = {
+  name: PropTypes.string.isRequired,
+  option: PropTypes.shape({ label: PropTypes.string.isRequired, value: PropTypes.any.isRequired }).isRequired,
+  isReadOnly: PropTypes.bool,
+  isDisabled: PropTypes.bool
+};
+
 const Radio = ({ name, ...props }) => {
   const { options, isDisabled, label, isRequired, helperText, description, isReadOnly, meta, validateOnMount } = useFieldApi({
     ...props,
@@ -24,28 +52,9 @@ const Radio = ({ name, ...props }) => {
     <FormFieldGrid className="mui-ddform-radio-group">
       <FormControl required={isRequired} error={!!invalid} component="fieldset">
         <FormLabel component="legend">{label}</FormLabel>
-        {options.map((option) => {
-          // eslint-diable-line react-hooks/rules-of-hooks
-          // important!!!
-          const { input } = useFieldApi({ name, type: 'radio', value: option.value });
-          return (
-            <FormControlLabel
-              key={`${name}-${option.value}`}
-              control={
-                <MUIRadio
-                  {...input}
-                  name={name}
-                  disabled={isDisabled || isReadOnly}
-                  onChange={() => input.onChange(option.value)}
-                  inputProps={{
-                    readOnly: isReadOnly
-                  }}
-                />
-              }
-              label={option.label}
-            />
-          );
-        })}
+        {options.map((option) => (
+          <RadioOption key={option.value} name={name} option={option} isDisabled={isDisabled} isReadOnly={isReadOnly} />
+        ))}
         {(invalid || text) && <FormHelperText>{invalid || text}</FormHelperText>}
       </FormControl>
     </FormFieldGrid>

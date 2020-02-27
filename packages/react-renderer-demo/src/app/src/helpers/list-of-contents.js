@@ -9,15 +9,15 @@ import Typography from '@material-ui/core/Typography';
 import { useRouter } from 'next/router';
 import StickyBox from 'react-sticky-box';
 
-const reqSource = require.context(
-  '!raw-loader!@docs/pages',
-  true,
-  /\.md/,
-);
+const reqSource = require.context('!raw-loader!@docs/pages', true, /\.md/);
 
-export const headerToId = (header) => header.replace(/#/g, '').replace(/ /g, '').toLowerCase();
+export const headerToId = (header) =>
+  header
+    .replace(/#/g, '')
+    .replace(/ /g, '')
+    .toLowerCase();
 
-const useLinkStyles = makeStyles(theme => ({
+const useLinkStyles = makeStyles((theme) => ({
   link: {
     textDecoration: 'none',
     color: theme.palette.text.secondary,
@@ -29,8 +29,8 @@ const useLinkStyles = makeStyles(theme => ({
     paddingLeft: 16,
     paddingRight: 16,
     paddingTop: 8,
-    paddingBottom: 8,
-  },
+    paddingBottom: 8
+  }
 }));
 
 const ListHeader = ({ text }) => {
@@ -39,33 +39,28 @@ const ListHeader = ({ text }) => {
   const level = (text.match(/#/g) || []).length;
   const labelText = text.replace(/#/g, '');
   return (
-    <a
-      className={ classes.link }
-      href={ `${router.pathname}#${headerToId(text)}` }
-      title={ labelText }
-    >
-      { [ ...new Array(level) ].map((_v, index) => (
-        <React.Fragment key={ index }>
-          &nbsp;&nbsp;
-        </React.Fragment>
-      )) }{ labelText }
+    <a className={classes.link} href={`${router.pathname}#${headerToId(text)}`} title={labelText}>
+      {[...new Array(level)].map((_v, index) => (
+        <React.Fragment key={index}>&nbsp;&nbsp;</React.Fragment>
+      ))}
+      {labelText}
     </a>
   );
 };
 
 ListHeader.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   fixedContainer: {
-    paddingLeft: 16,
+    paddingLeft: 16
   },
   listItem: {
-    padding: 0,
+    padding: 0
   },
   listItemText: {
-    margin: 0,
+    margin: 0
   },
   listItemActive: {
     position: 'relative',
@@ -77,24 +72,23 @@ const useStyles = makeStyles(theme => ({
       content: '""',
       width: 2,
       height: '100%',
-      background: theme.palette.grey[700],
-    },
+      background: theme.palette.grey[700]
+    }
   },
   contentHeader: {
     paddingLeft: 16,
-    paddingRight: 16,
-  },
+    paddingRight: 16
+  }
 }));
 
 const ListOfContents = ({ file }) => {
-  const [ activeItem, setActive ] = useState();
+  const [activeItem, setActive] = useState();
   let isMounted = true;
 
   const scrollListener = (setActive) => {
     const min = -10;
     const max = 20;
-    const elem = Array.from(document.querySelectorAll('[data-scroll]'))
-    .find(elem => {
+    const elem = Array.from(document.querySelectorAll('[data-scroll]')).find((elem) => {
       const { top } = elem.getBoundingClientRect();
       return top > min && top < max;
     });
@@ -118,22 +112,21 @@ const ListOfContents = ({ file }) => {
   const regex = /^#+ .*/gm;
   const found = text.match(regex) || [];
   return (
-    <StickyBox offsetTop={ 96 } offsetBottom={ 20 }>
-      <div className={ classes.fixedContainer }>
-        <Typography className={ classes.contentHeader } component="h3">Content</Typography>
+    <StickyBox offsetTop={96} offsetBottom={20}>
+      <div className={classes.fixedContainer}>
+        <Typography className={classes.contentHeader} component="h3">
+          Content
+        </Typography>
         <List dense>
-          { found.map(text =>(
+          {found.map((text) => (
             <ListItem
-              onClick={ () => setActive(headerToId(text)) }
-              className={ clsx(classes.listItem, { [classes.listItemActive]: headerToId(text) === activeItem }) }
-              key={ text }
+              onClick={() => setActive(headerToId(text))}
+              className={clsx(classes.listItem, { [classes.listItemActive]: headerToId(text) === activeItem })}
+              key={text}
             >
-              <ListItemText
-                className={ classes.listItemText }
-                primary={ <ListHeader text={ text } /> }
-              />
+              <ListItemText className={classes.listItemText} primary={<ListHeader text={text} />} />
             </ListItem>
-          )) }
+          ))}
         </List>
       </div>
     </StickyBox>
@@ -141,7 +134,7 @@ const ListOfContents = ({ file }) => {
 };
 
 ListOfContents.propTypes = {
-  file: PropTypes.string.isRequired,
+  file: PropTypes.string.isRequired
 };
 
 export default ListOfContents;

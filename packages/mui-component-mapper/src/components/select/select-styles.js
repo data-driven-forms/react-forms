@@ -1,22 +1,22 @@
 const customStyles = {
   indicatorSeparator: () => ({
-    display: 'none',
+    display: 'none'
   }),
-  input: provided => ({
+  input: (provided) => ({
     ...provided,
     marginLeft: 0,
     fontWeight: '600',
     color: 'rgb(54, 54, 54)',
-    'line-height': '0.8em',
+    'line-height': '0.8em'
   }),
-  placeholder: provided => ({
+  placeholder: (provided) => ({
     ...provided,
     lineHeight: 25,
     padding: '0 6px',
     color: 'rgb(77, 82, 88)',
     fontWeight: '600',
     paddingLeft: 0,
-    marginLeft: 0,
+    marginLeft: 0
   }),
   option: (provided, { isFocused, isSelected, isMulti }) => ({
     ...provided,
@@ -32,22 +32,22 @@ const customStyles = {
       fontFamily: 'FontAwesome',
       color: isMulti && isSelected ? 'white' : null,
       content: isMulti && isSelected ? '" \\f00c "' : null,
-      float: isMulti ? 'right' : 'initial',
-    },
+      float: isMulti ? 'right' : 'initial'
+    }
   }),
-  dropdownIndicator: provided => ({
+  dropdownIndicator: (provided) => ({
     ...provided,
-    color: 'rgb(77, 82, 88)',
+    color: 'rgb(77, 82, 88)'
   }),
-  container: provided => ({
+  container: (provided) => ({
     ...provided,
     transition: 'border-color ease-in-out .15s, box-shadow ease-in-out .15s',
     fontFamily: '"Open Sans", Helvetica, Arial, sans-serif',
     padding: 0,
     border: '1px solid transparent',
-    'border-color': 'rgb(187, 187, 187)',
+    'border-color': 'rgb(187, 187, 187)'
   }),
-  singleValue: (provided, { selectProps: { isSearchable }}) => ({
+  singleValue: (provided, { selectProps: { isSearchable } }) => ({
     ...provided,
     height: 25,
     minHeight: 20,
@@ -56,17 +56,17 @@ const customStyles = {
     marginLeft: 0,
     top: '75%',
     fontWeight: '600',
-    color: 'rgb(54, 54, 54)',
+    color: 'rgb(54, 54, 54)'
   }),
-  menu: provided => ({
+  menu: (provided) => ({
     ...provided,
     background: '#fff',
     margin: 0,
     borderRadius: 0,
     paddingTop: 5,
-    paddingBottom: 5,
+    paddingBottom: 5
   }),
-  control: provided => ({
+  control: (provided) => ({
     ...provided,
     border: 'none',
     transition: 'border-color ease-in-out .15s, box-shadow ease-in-out .15s',
@@ -87,15 +87,15 @@ const customStyles = {
       'background-color': '#f1f1f1',
       'background-image': 'none',
       'border-color': '#bbbbbb',
-      color: '#4d5258',
-    },
+      color: '#4d5258'
+    }
   }),
-  multiValue: provided => ({
+  multiValue: (provided) => ({
     ...provided,
     background: 'transparent',
     marginRight: 0,
     '&:nth-last-child(2)': {
-      marginRight: 2,
+      marginRight: 2
     },
     '&:not(:first-child)': {
       '::before': {
@@ -105,12 +105,12 @@ const customStyles = {
         paddingLeft: 0,
         paddingRight: 0,
         fontWeight: '600',
-        color: 'rgb(54, 54, 54)',
-      },
-    },
+        color: 'rgb(54, 54, 54)'
+      }
+    }
   }),
   multiValueRemove: () => ({
-    display: 'none',
+    display: 'none'
   }),
   multiValueLabel: (provided, state) => ({
     ...provided,
@@ -120,8 +120,8 @@ const customStyles = {
     paddingLeft: 0,
     paddingRight: 0,
     fontWeight: '600',
-    color: 'rgb(54, 54, 54)',
-  }),
+    color: 'rgb(54, 54, 54)'
+  })
 };
 
 export default customStyles;

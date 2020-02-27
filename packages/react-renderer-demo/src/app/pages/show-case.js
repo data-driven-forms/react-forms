@@ -16,11 +16,11 @@ import MiqSchema from '../src/schemas/miq-schema';
 import MapperContext from '@docs/components/mappers-context';
 
 const Forms = ({ mappers }) => {
-  const [ activeMapper, setActiveMapper ] = useState({
+  const [activeMapper, setActiveMapper] = useState({
     value: 'mui',
-    mod: mappers.mui,
+    mod: mappers.mui
   });
-  const [ activeSchema, setActiveSchema ] = useState('conditional');
+  const [activeSchema, setActiveSchema] = useState('conditional');
 
   const handleMapperChange = (_event, value) => setActiveMapper({ value, mod: mappers[value], label: value });
   const handleSchemaChange = (_event, value) => setActiveSchema(value);
@@ -28,49 +28,38 @@ const Forms = ({ mappers }) => {
   const schemas = {
     miq: { schema: MiqSchema, uiSchema: {}, schemaType: 'miq' },
     conditional: { schema: conditionalSchema, uiSchema: {}, schemaType: 'mozilla' },
-    widgets: { schema, uiSchema, schemaType: 'mozilla' },
+    widgets: { schema, uiSchema, schemaType: 'mozilla' }
   };
   return (
     <React.Fragment>
-      <Grid item xs={ 2 }>
+      <Grid item xs={2}>
         <FormControl component="fieldset">
           <FormLabel component="legend">Select form mapper</FormLabel>
-          <RadioGroup
-            aria-label="form-mapper"
-            name="form-mapper"
-            value={ activeMapper.value }
-            onChange={ handleMapperChange }
-          >
-            <FormControlLabel value="mui" control={ <Radio /> } label="Material UI" />
-            <FormControlLabel value="pf3" control={ <Radio /> } label="Patternfly 3" />
-            <FormControlLabel value="pf4" control={ <Radio /> } label="Patternfly 4" />
+          <RadioGroup aria-label="form-mapper" name="form-mapper" value={activeMapper.value} onChange={handleMapperChange}>
+            <FormControlLabel value="mui" control={<Radio />} label="Material UI" />
+            <FormControlLabel value="pf3" control={<Radio />} label="Patternfly 3" />
+            <FormControlLabel value="pf4" control={<Radio />} label="Patternfly 4" />
           </RadioGroup>
         </FormControl>
 
         <FormControl component="fieldset">
           <FormLabel component="legend">Select form schema</FormLabel>
-          <RadioGroup
-            aria-label="form-schema"
-            name="form-schema"
-            value={ activeSchema }
-            onChange={ handleSchemaChange }
-          >
-            <FormControlLabel value="conditional" control={ <Radio /> } label="Conditional schema" />
-            <FormControlLabel value="miq" control={ <Radio /> } label="Manageiq tab schema" />
-            <FormControlLabel value="widgets" control={ <Radio /> } label="Widgets schema" />
+          <RadioGroup aria-label="form-schema" name="form-schema" value={activeSchema} onChange={handleSchemaChange}>
+            <FormControlLabel value="conditional" control={<Radio />} label="Conditional schema" />
+            <FormControlLabel value="miq" control={<Radio />} label="Manageiq tab schema" />
+            <FormControlLabel value="widgets" control={<Radio />} label="Widgets schema" />
           </RadioGroup>
         </FormControl>
       </Grid>
-      <Grid item xs={ 10 }>
+      <Grid item xs={10}>
         <Paper>
-
-          <div className={ activeMapper.value } style={{ padding: 16 }}>
+          <div className={activeMapper.value} style={{ padding: 16 }}>
             <FormRenderer
-              formTemplate={ mappers[activeMapper.value].layoutMapper({ showFormControls: activeSchema !== 'wizard' }) }
-              formFieldsMapper={ mappers[activeMapper.value].formFieldsMapper }
-              { ...schemas[activeSchema] }
-              onSubmit={ console.log }
-              onCancel={ () => console.log('action canceled') }
+              formTemplate={mappers[activeMapper.value].layoutMapper({ showFormControls: activeSchema !== 'wizard' })}
+              formFieldsMapper={mappers[activeMapper.value].formFieldsMapper}
+              {...schemas[activeSchema]}
+              onSubmit={console.log /* eslint-disable-line no-console */}
+              onCancel={() => console.log('action canceled') /* eslint-disable-line no-console */}
             />
           </div>
         </Paper>
@@ -79,15 +68,16 @@ const Forms = ({ mappers }) => {
   );
 };
 
-const DemoForms = () =>  {
+const DemoForms = () => {
   const mappers = useContext(MapperContext);
-  console.log(mappers);
   return (
     <Grid container direction="row" justify="space-evenly">
-      <Grid item xs={ 12 }>
-        <Typography gutterBottom variant="h5">React Form Renderer</Typography>
+      <Grid item xs={12}>
+        <Typography gutterBottom variant="h5">
+          React Form Renderer
+        </Typography>
       </Grid>
-      { mappers.loaded && <Forms mappers={ mappers.mappers } /> }
+      {mappers.loaded && <Forms mappers={mappers.mappers} />}
     </Grid>
   );
 };

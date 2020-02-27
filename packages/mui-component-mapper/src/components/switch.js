@@ -13,20 +13,10 @@ import { validationError } from '../common/helpers';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 export const Switch = (props) => {
-  const {
-    input,
-    isReadOnly,
-    isDisabled,
-    isRequired,
-    label,
-    helperText,
-    description,
-    validateOnMount,
-    meta,
-    onText,
-    offText,
-    ...rest
-  } = useFieldApi({ ...props, type: 'checkbox' });
+  const { input, isReadOnly, isDisabled, isRequired, label, helperText, description, validateOnMount, meta, onText, offText, ...rest } = useFieldApi({
+    ...props,
+    type: 'checkbox'
+  });
   const invalid = validationError(meta, validateOnMount);
   const text = invalid || helperText || description;
 
@@ -41,7 +31,7 @@ export const Switch = (props) => {
                 {...input}
                 readOnly={isReadOnly}
                 disabled={isDisabled || isReadOnly}
-                onChange={({ target: { checked }}) => input.onChange(checked)}
+                onChange={({ target: { checked } }) => input.onChange(checked)}
               />
             }
             label={<FormLabel>{input.checked ? onText || label : offText || label}</FormLabel>}

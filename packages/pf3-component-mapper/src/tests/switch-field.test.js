@@ -76,15 +76,15 @@ describe('Switch-field', () => {
       const onChange = jest.fn();
 
       const wrapper = mount(
-        <RenderWithProvider value={{ formOptions: { handleSubmit: submitSpy }}}>
+        <RenderWithProvider value={{ formOptions: { handleSubmit: submitSpy } }}>
           <Switch bsSize="mn" onChange={onChange} />
         </RenderWithProvider>
       );
 
       wrapper
-      .find('label')
-      .props()
-      .onKeyDown({ keyCode: 13, preventDefault });
+        .find('label')
+        .props()
+        .onKeyDown({ keyCode: 13, preventDefault });
 
       expect(preventDefault).toHaveBeenCalled();
       expect(submitSpy).toHaveBeenCalled();
@@ -98,19 +98,19 @@ describe('Switch-field', () => {
       const checked = false;
 
       const wrapper = mount(
-        <RenderWithProvider value={{ formOptions: { handleSubmit: submitSpy }}}>
+        <RenderWithProvider value={{ formOptions: { handleSubmit: submitSpy } }}>
           <Switch bsSize="mn" onChange={onChange} checked={checked} />
         </RenderWithProvider>
       );
 
       wrapper
-      .find('label')
-      .props()
-      .onKeyDown({ keyCode: 32, preventDefault });
+        .find('label')
+        .props()
+        .onKeyDown({ keyCode: 32, preventDefault });
 
       expect(preventDefault).toHaveBeenCalled();
       expect(submitSpy).not.toHaveBeenCalled();
-      expect(onChange).toHaveBeenCalledWith({ target: { checked: true }});
+      expect(onChange).toHaveBeenCalledWith({ target: { checked: true } });
     });
 
     it('should call onChange when press spacebar - checked true', () => {
@@ -120,19 +120,19 @@ describe('Switch-field', () => {
       const checked = true;
 
       const wrapper = mount(
-        <RenderWithProvider value={{ formOptions: { handleSubmit: submitSpy }}}>
+        <RenderWithProvider value={{ formOptions: { handleSubmit: submitSpy } }}>
           <Switch bsSize="mn" onChange={onChange} checked={checked} />
         </RenderWithProvider>
       );
 
       wrapper
-      .find('label')
-      .props()
-      .onKeyDown({ keyCode: 32, preventDefault });
+        .find('label')
+        .props()
+        .onKeyDown({ keyCode: 32, preventDefault });
 
       expect(preventDefault).toHaveBeenCalled();
       expect(submitSpy).not.toHaveBeenCalled();
-      expect(onChange).toHaveBeenCalledWith({ target: { checked: false }});
+      expect(onChange).toHaveBeenCalledWith({ target: { checked: false } });
     });
 
     it('should call nothing when press something else than enter and spacebar', () => {
@@ -141,15 +141,15 @@ describe('Switch-field', () => {
       const onChange = jest.fn();
 
       const wrapper = mount(
-        <RenderWithProvider value={{ formOptions: { handleSubmit: submitSpy }}}>
+        <RenderWithProvider value={{ formOptions: { handleSubmit: submitSpy } }}>
           <Switch bsSize="mn" onChange={onChange} />
         </RenderWithProvider>
       );
 
       wrapper
-      .find('label')
-      .props()
-      .onKeyDown({ keyCode: 88, preventDefault });
+        .find('label')
+        .props()
+        .onKeyDown({ keyCode: 88, preventDefault });
 
       expect(preventDefault).not.toHaveBeenCalled();
       expect(submitSpy).not.toHaveBeenCalled();
@@ -158,7 +158,7 @@ describe('Switch-field', () => {
 
     it('tabIndex is 0 by default', () => {
       const wrapper = mount(
-        <RenderWithProvider value={{ formOptions: { handleSubmit: jest.fn() }}}>
+        <RenderWithProvider value={{ formOptions: { handleSubmit: jest.fn() } }}>
           <Switch bsSize="mn" onChange={jest.fn()} />
         </RenderWithProvider>
       );
@@ -168,7 +168,7 @@ describe('Switch-field', () => {
 
     it('tabIndex is -1 when isReadOnly', () => {
       const wrapper = mount(
-        <RenderWithProvider value={{ formOptions: { handleSubmit: jest.fn() }}}>
+        <RenderWithProvider value={{ formOptions: { handleSubmit: jest.fn() } }}>
           <Switch bsSize="mn" onChange={jest.fn()} isReadOnly={true} />
         </RenderWithProvider>
       );
@@ -178,7 +178,7 @@ describe('Switch-field', () => {
 
     it('tabIndex is -1 when disabled', () => {
       const wrapper = mount(
-        <RenderWithProvider value={{ formOptions: { handleSubmit: jest.fn() }}}>
+        <RenderWithProvider value={{ formOptions: { handleSubmit: jest.fn() } }}>
           <Switch bsSize="mn" onChange={jest.fn()} disabled={true} />
         </RenderWithProvider>
       );

@@ -3,7 +3,7 @@ const dataTypes = {
   FLOAT: 'float',
   NUMBER: 'number',
   BOOLEAN: 'boolean',
-  STRING: 'string',
+  STRING: 'string'
 };
 
 export default dataTypes;

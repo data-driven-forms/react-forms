@@ -35,10 +35,10 @@ describe('<Select />', () => {
   it('should return single simple value', () => {
     const wrapper = mount(<Select {...initialProps} />);
     const option = wrapper
-    .find('.ddorg__pf4-component-mapper__select__menu--option')
-    .first()
-    .find('div')
-    .last();
+      .find('.ddorg__pf4-component-mapper__select__menu--option')
+      .first()
+      .find('div')
+      .last();
     option.simulate('click');
     expect(onChange).toHaveBeenCalledWith(1);
   });
@@ -46,10 +46,10 @@ describe('<Select />', () => {
   it('should return single object value', () => {
     const wrapper = mount(<Select {...initialProps} simpleValue={false} />);
     const option = wrapper
-    .find('.ddorg__pf4-component-mapper__select__menu--option')
-    .first()
-    .find('div')
-    .last();
+      .find('.ddorg__pf4-component-mapper__select__menu--option')
+      .first()
+      .find('div')
+      .last();
     option.simulate('click');
     expect(onChange).toHaveBeenCalledWith({ ...initialProps.options[0] });
   });
@@ -63,19 +63,19 @@ describe('<Select />', () => {
      * select first option
      */
     const option1 = wrapper
-    .find('.ddorg__pf4-component-mapper__select__menu--option')
-    .first()
-    .find('div')
-    .last();
+      .find('.ddorg__pf4-component-mapper__select__menu--option')
+      .first()
+      .find('div')
+      .last();
     option1.simulate('click');
     /**
      * select second option
      */
     const option2 = wrapper
-    .find('.ddorg__pf4-component-mapper__select__menu--option')
-    .last()
-    .find('div')
-    .last();
+      .find('.ddorg__pf4-component-mapper__select__menu--option')
+      .last()
+      .find('div')
+      .last();
     option2.simulate('click');
     wrapper.update();
     expect(onChange).toHaveBeenCalledTimes(2);
@@ -91,19 +91,19 @@ describe('<Select />', () => {
      * select first option
      */
     const option1 = wrapper
-    .find('.ddorg__pf4-component-mapper__select__menu--option')
-    .first()
-    .find('div')
-    .last();
+      .find('.ddorg__pf4-component-mapper__select__menu--option')
+      .first()
+      .find('div')
+      .last();
     option1.simulate('click');
     /**
      * select second option
      */
     const option2 = wrapper
-    .find('.ddorg__pf4-component-mapper__select__menu--option')
-    .last()
-    .find('div')
-    .last();
+      .find('.ddorg__pf4-component-mapper__select__menu--option')
+      .last()
+      .find('div')
+      .last();
     option2.simulate('click');
     wrapper.update();
     expect(onChange).toHaveBeenCalledTimes(2);
@@ -125,9 +125,9 @@ describe('<Select />', () => {
     const wrapper = mount(<Select {...initialProps} value={value} isMulti closeMenuOnSelect={false} />);
 
     wrapper
-    .find(components.MultiValueRemove)
-    .first()
-    .simulate('click');
+      .find(components.MultiValueRemove)
+      .first()
+      .simulate('click');
     expect(onChange).toHaveBeenCalledWith([2]);
   });
 
@@ -177,9 +177,9 @@ describe('<Select />', () => {
       wrapper.update();
       expect(
         wrapper
-        .find(Select)
-        .first()
-        .instance().state.allOptions
+          .find(Select)
+          .first()
+          .instance().state.allOptions
       ).toEqual([{ label: 'label' }]);
       done();
     });
@@ -204,9 +204,9 @@ describe('<Select />', () => {
       wrapper.update();
       expect(
         wrapper
-        .find(Select)
-        .first()
-        .instance().state.allOptions
+          .find(Select)
+          .first()
+          .instance().state.allOptions
       ).toEqual([{ label: 'label', value: '123' }]);
       expect(onChange).toHaveBeenCalledWith(undefined);
       done();
@@ -232,9 +232,9 @@ describe('<Select />', () => {
       wrapper.update();
       expect(
         wrapper
-        .find(Select)
-        .first()
-        .instance().state.allOptions
+          .find(Select)
+          .first()
+          .instance().state.allOptions
       ).toEqual([{ label: 'label', value: '123' }]);
       expect(onChange).toHaveBeenCalledWith(['123']);
       done();
@@ -260,9 +260,9 @@ describe('<Select />', () => {
       wrapper.update();
       expect(
         wrapper
-        .find(Select)
-        .first()
-        .instance().state.allOptions
+          .find(Select)
+          .first()
+          .instance().state.allOptions
       ).toEqual([{ label: 'label', value: '123' }]);
       expect(onChange).toHaveBeenCalledWith([{ label: 'label', value: '123' }]);
       done();

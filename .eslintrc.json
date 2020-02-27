@@ -21,7 +21,8 @@
     "it": true,
     "arguments": true
   },
-  "extends": ["react-app", "eslint:recommended", "plugin:react/recommended", "prettier/react"],
+  "plugins": ["prettier"],
+  "extends": ["react-app", "eslint:recommended", "plugin:react/recommended", "plugin:prettier/recommended", "prettier/react"],
   "env": {
     "es6": true,
     "browser": true,
@@ -39,16 +40,9 @@
     "curly": ["error", "all"],
     "eol-last": "error",
     "eqeqeq": "error",
-    "indent": ["error", 2, {
-      "SwitchCase": 1,
-      "MemberExpression": 0,
-      "ImportDeclaration": 1,
-      "ObjectExpression": 1
-    }],
     "key-spacing": "error",
     "keyword-spacing": "error",
     "linebreak-style": ["warn", "unix"],
-    "max-len": ["error", 150],
     "new-cap": "error",
     "no-bitwise": "error",
     "no-caller": "error",
@@ -65,10 +59,6 @@
     "no-var": "error",
     "no-with": "error",
     "object-shorthand": "error",
-    "object-curly-spacing": ["error", "always", {
-      "objectsInObjects": false,
-      "arraysInObjects": false
-    }],
     "one-var": ["error", "never"],
     "padding-line-between-statements": ["error", {
       "blankLine": "always",
@@ -86,13 +76,14 @@
     "yoda": ["error", "never"],
     "jsx-a11y/href-no-hash": "off",
     "react/jsx-curly-spacing": "off",
-    "no-unused-vars": 1,
-    "react/no-unused-prop-types": 1,
-    "react-hooks/rules-of-hooks": 1,
-    "react/prop-types": 1,
-    "react/no-unescaped-entities": 1,
-    "no-prototype-builtins": 1,
-    "no-mixed-operators": 1,
-    "no-unused-expressions": 1
+    "no-unused-vars": "error",
+    "react/no-unused-prop-types": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react/prop-types": "error",
+    "react/no-unescaped-entities": "error",
+    "no-prototype-builtins": "error",
+    "no-mixed-operators": "error",
+    "no-unused-expressions": "error",
+    "no-sequences": "error"
   }
 }

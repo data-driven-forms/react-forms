@@ -6,10 +6,10 @@ describe('<Option />', () => {
   const optionProps = {
     getStyles: jest.fn(),
     cx: jest.fn(),
-    selectProps: {},
+    selectProps: {}
   };
   it('should render in selected variant', () => {
-    const wrapper = mount(<Option { ...optionProps }/>);
+    const wrapper = mount(<Option {...optionProps} />);
     expect(wrapper.find('i.selected-indicator.fa.fa-check')).toHaveLength(0);
     wrapper.setProps({ isSelected: true });
     wrapper.update();

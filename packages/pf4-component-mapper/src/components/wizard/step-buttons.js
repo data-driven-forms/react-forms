@@ -10,7 +10,6 @@ const SimpleNext = ({ nextStep, valid, handleNext, submit, nextLabel, getState }
 );
 
 SimpleNext.propTypes = {
-  next: PropTypes.string,
   valid: PropTypes.bool,
   handleNext: PropTypes.func.isRequired,
   submit: PropTypes.func.isRequired,
@@ -25,8 +24,19 @@ const SubmitButton = ({ handleSubmit, submitLabel }) => (
   </Button>
 );
 
-const renderNextButton = ({ nextStep, handleSubmit, submitLabel, ...rest }) =>
+SubmitButton.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  submitLabel: PropTypes.node.isRequired
+};
+
+const NextButton = ({ nextStep, handleSubmit, submitLabel, ...rest }) =>
   nextStep ? <SimpleNext nextStep={nextStep} {...rest} /> : <SubmitButton handleSubmit={handleSubmit} submitLabel={submitLabel} />;
+
+NextButton.propTypes = {
+  nextStep: PropTypes.string,
+  handleSubmit: PropTypes.func.isRequired,
+  submitLabel: PropTypes.string.isRequired
+};
 
 const WizardStepButtons = ({
   buttons: Buttons,
@@ -52,27 +62,14 @@ const WizardStepButtons = ({
         handleNext={handleNext}
         buttonsClassName={buttonsClassName}
         buttonLabels={{ cancel, submit, back, next }}
-        renderNextButton={(args) =>
-          renderNextButton({
-            ...formOptions,
-            handleNext,
-            nextStep,
-            nextLabel: next,
-            submitLabel: submit,
-            ...args
-          })
-        }
+        renderNextButton={(args) => (
+          <NextButton {...formOptions} handleNext={handleNext} nextStep={nextStep} nextLabel={next} submitLabel={submit} {...args} />
+        )}
         selectNext={selectNext}
       />
     ) : (
       <React.Fragment>
-        {renderNextButton({
-          ...formOptions,
-          handleNext,
-          nextStep,
-          nextLabel: next,
-          submitLabel: submit
-        })}
+        <NextButton {...formOptions} handleNext={handleNext} nextStep={nextStep} nextLabel={next} submitLabel={submit} />
         <Button type="button" variant="secondary" isDisabled={disableBack} onClick={handlePrev}>
           {back}
         </Button>
@@ -107,7 +104,7 @@ WizardStepButtons.propTypes = {
   buttons: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   formOptions: PropTypes.shape({
     getState: PropTypes.func.isRequired,
-    onCancel: PropTypes.func.isRequired,
+    onCancel: PropTypes.func.isRequired
   })
 };
 
