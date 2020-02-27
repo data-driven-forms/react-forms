@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { cloneElement } from 'react';
 import WizardStep from './wizard-step';
 import Grid from '@material-ui/core/Grid';

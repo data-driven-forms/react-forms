@@ -214,7 +214,7 @@ describe('<Wizard />', () => {
 
   it('should not step when clicked on button with false valid', () => {
     const wrapper = mount(
-      <RenderWithProvider value={{ formOptions: { ...formOptions, valid: false } }}>
+      <RenderWithProvider value={{ formOptions: { ...formOptions, valid: false }}}>
         <Wizard {...props} />
       </RenderWithProvider>
     );

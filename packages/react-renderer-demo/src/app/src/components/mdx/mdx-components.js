@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
@@ -39,7 +40,7 @@ const useHeadingStyles = makeStyles(() => ({
   },
 }));
 
-export const Heading = ({ level, children, variant, component, ...rest }) => {
+export const Heading = ({ level, children, component }) => {
   const router = useRouter();
   const classes = useHeadingStyles();
   const id = headerToId(children);
@@ -63,7 +64,7 @@ export const Heading = ({ level, children, variant, component, ...rest }) => {
 
 const MdxComponents = {
   p: ({ children }) => <Typography variant="body1" gutterBottom>{ children }</Typography>,
-  code: ({ children, lang, ...rest }) => (
+  code: ({ children, lang }) => (
     <div style={{ background: '#1d1f21', paddingTop: 5, paddingBottom: 5, marginTop: 10, marginBottom: 10 }} className="DocCode">
       <CodeEditor
         readOnly

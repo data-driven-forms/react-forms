@@ -327,4 +327,8 @@ function IntegrationReactSelect(props) {
   );
 }
 
+IntegrationReactSelect.propTypes = {
+  invalid: PropTypes.string
+};
+
 export default IntegrationReactSelect;

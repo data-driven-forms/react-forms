@@ -5,7 +5,7 @@ import FormTabs from '../components/tabs';
 import Wizard from '../components/wizard';
 import TextField from '../components/text-field';
 import Textarea from '../components/textarea';
-import Select from '../components/select'
+import Select from '../components/select';
 import Checkbox from '../components/checkbox';
 import Radio from '../components/radio';
 import Switch from '../components/switch';

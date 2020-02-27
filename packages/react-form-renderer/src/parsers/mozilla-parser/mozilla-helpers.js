@@ -1,5 +1,5 @@
-import validatorTypes from "../../components/validator-types";
-import componentTypes from "../../components/component-types";
+import validatorTypes from '../../components/validator-types';
+import componentTypes from '../../components/component-types';
 
 /**
  * Function that creates field level validation

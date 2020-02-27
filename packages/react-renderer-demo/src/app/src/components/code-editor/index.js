@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import brace from 'brace';
 import AceEditor from 'react-ace';
 
 import 'brace/mode/jsx';

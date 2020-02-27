@@ -41,7 +41,7 @@ export const Switch = (props) => {
                 {...input}
                 readOnly={isReadOnly}
                 disabled={isDisabled || isReadOnly}
-                onChange={({ target: { checked } }) => input.onChange(checked)}
+                onChange={({ target: { checked }}) => input.onChange(checked)}
               />
             }
             label={<FormLabel>{input.checked ? onText || label : offText || label}</FormLabel>}

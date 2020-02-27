@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
@@ -26,7 +27,7 @@ const Item = ({ href, linkText, component }) => {
       selected={ href.replace('/?', '?') === router.asPath }
       key={ href || linkText }
       className={ classes.nested }
-      component={ forwardRef((props, ref) => (
+      component={ forwardRef((props) => (
         <RouterNavLink key={ component } href={ href.replace('/?', '?') }>
           <Link style={{ color: 'rgba(0, 0, 0, 0.87)' }} { ...props } href={ href.replace('/?', '?') } />
         </RouterNavLink>

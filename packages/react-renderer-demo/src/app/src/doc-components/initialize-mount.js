@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
-import { layoutMapper, formFieldsMapper } from '@data-driven-forms/pf4-component-mapper';
+import { formTemplate, formFieldsMapper } from '@data-driven-forms/pf4-component-mapper';
 import { Title } from '@patternfly/react-core/dist/js/components/Title/Title';
 
 const schema = {
@@ -69,7 +69,7 @@ const InitializeOnMountWizardExample = () => {
   return (
     <div className="pf4">
       <FormRenderer
-        formTemplate={ formTemplate }
+        formTemplate={ formTemplate() }
         formFieldsMapper={ formFieldsMapper }
         schema={ schema }
         onSubmit={ console.log }

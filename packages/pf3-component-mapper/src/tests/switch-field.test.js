@@ -76,7 +76,7 @@ describe('Switch-field', () => {
       const onChange = jest.fn();
 
       const wrapper = mount(
-        <RenderWithProvider value={{ formOptions: { handleSubmit: submitSpy } }}>
+        <RenderWithProvider value={{ formOptions: { handleSubmit: submitSpy }}}>
           <Switch bsSize="mn" onChange={onChange} />
         </RenderWithProvider>
       );
@@ -98,7 +98,7 @@ describe('Switch-field', () => {
       const checked = false;
 
       const wrapper = mount(
-        <RenderWithProvider value={{ formOptions: { handleSubmit: submitSpy } }}>
+        <RenderWithProvider value={{ formOptions: { handleSubmit: submitSpy }}}>
           <Switch bsSize="mn" onChange={onChange} checked={checked} />
         </RenderWithProvider>
       );
@@ -120,7 +120,7 @@ describe('Switch-field', () => {
       const checked = true;
 
       const wrapper = mount(
-        <RenderWithProvider value={{ formOptions: { handleSubmit: submitSpy } }}>
+        <RenderWithProvider value={{ formOptions: { handleSubmit: submitSpy }}}>
           <Switch bsSize="mn" onChange={onChange} checked={checked} />
         </RenderWithProvider>
       );
@@ -141,7 +141,7 @@ describe('Switch-field', () => {
       const onChange = jest.fn();
 
       const wrapper = mount(
-        <RenderWithProvider value={{ formOptions: { handleSubmit: submitSpy } }}>
+        <RenderWithProvider value={{ formOptions: { handleSubmit: submitSpy }}}>
           <Switch bsSize="mn" onChange={onChange} />
         </RenderWithProvider>
       );
@@ -158,7 +158,7 @@ describe('Switch-field', () => {
 
     it('tabIndex is 0 by default', () => {
       const wrapper = mount(
-        <RenderWithProvider value={{ formOptions: { handleSubmit: jest.fn() } }}>
+        <RenderWithProvider value={{ formOptions: { handleSubmit: jest.fn() }}}>
           <Switch bsSize="mn" onChange={jest.fn()} />
         </RenderWithProvider>
       );
@@ -168,7 +168,7 @@ describe('Switch-field', () => {
 
     it('tabIndex is -1 when isReadOnly', () => {
       const wrapper = mount(
-        <RenderWithProvider value={{ formOptions: { handleSubmit: jest.fn() } }}>
+        <RenderWithProvider value={{ formOptions: { handleSubmit: jest.fn() }}}>
           <Switch bsSize="mn" onChange={jest.fn()} isReadOnly={true} />
         </RenderWithProvider>
       );
@@ -178,7 +178,7 @@ describe('Switch-field', () => {
 
     it('tabIndex is -1 when disabled', () => {
       const wrapper = mount(
-        <RenderWithProvider value={{ formOptions: { handleSubmit: jest.fn() } }}>
+        <RenderWithProvider value={{ formOptions: { handleSubmit: jest.fn() }}}>
           <Switch bsSize="mn" onChange={jest.fn()} disabled={true} />
         </RenderWithProvider>
       );

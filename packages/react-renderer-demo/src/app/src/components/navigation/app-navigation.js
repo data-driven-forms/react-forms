@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import Link from '@material-ui/core/Link';
 import List from '@material-ui/core/List';

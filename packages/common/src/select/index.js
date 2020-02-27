@@ -3,6 +3,7 @@ import ReactSelect from 'react-select';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import isEqual from 'lodash/isEqual';
+import { input } from '../prop-types-templates';
 
 const getSelectValue = (stateValue, simpleValue, isMulti, allOptions) => simpleValue
   ? allOptions.filter(({ value }) => isMulti
@@ -51,6 +52,7 @@ Select.propTypes = {
   simpleValue: PropTypes.bool,
   isMulti: PropTypes.bool,
   pluckSingleValue: PropTypes.bool,
+  input
 };
 
 Select.defaultProps = {

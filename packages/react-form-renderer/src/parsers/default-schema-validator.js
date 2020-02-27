@@ -1,5 +1,6 @@
+/* eslint-disable no-prototype-builtins */
 import DefaultSchemaError from './schema-errors';
-import isValidComponent from './isValidComponent';
+//import isValidComponent from './isValidComponent';
 import componentTypes from '../components/component-types';
 import validatorTypes from '../components/validator-types';
 import dataTypes from '../components/data-types';

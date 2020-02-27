@@ -83,7 +83,16 @@ FormControls.propTypes = {
   FormButtons: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]),
   FormSpy: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]),
   Button: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]),
-  ButtonGroup: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func])
+  ButtonGroup: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]),
+  formSpyProps: PropTypes.shape({
+    submitting: PropTypes.bool,
+    pristine: PropTypes.bool,
+    validating: PropTypes.bool,
+    form: PropTypes.shape({
+      reset: PropTypes.func
+    }),
+    values: PropTypes.object
+  })
 };
 
 FormControls.defaultProps = {

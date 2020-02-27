@@ -37,8 +37,8 @@ const Wizard = ({ title, FieldProvider, buttonLabels, stepsInfo, fields, inModal
 
   const getValues = (values, visitedSteps) =>
     Object.keys(values)
-      .filter((key) => findActiveFields(visitedSteps).includes(key))
-      .reduce((acc, curr) => ({ ...acc, [curr]: values[curr] }), {});
+    .filter((key) => findActiveFields(visitedSteps).includes(key))
+    .reduce((acc, curr) => ({ ...acc, [curr]: values[curr] }), {});
 
   const handleSubmit = () => formOptions.onSubmit(getValues(formOptions.getState().values, [...prevSteps, activeStep]));
 
