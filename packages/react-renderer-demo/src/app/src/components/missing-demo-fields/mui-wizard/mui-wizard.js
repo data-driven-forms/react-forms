@@ -3,7 +3,7 @@ import React, { cloneElement } from 'react';
 import WizardStep from './wizard-step';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import useFormApi from '../../../../../../../react-form-renderer/src/hooks/useFormApi';
+import useFormApi from '@data-driven-forms/react-form-renderer';
 
 class Wizard extends React.Component {
   state = {

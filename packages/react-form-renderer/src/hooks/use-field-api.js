@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useField } from 'react-final-form';
-import useFormApi from './useFormApi';
+import useFormApi from './use-form-api';
 import enhancedOnChange from '../form-renderer/enhanced-on-change';
 
 const useFieldApi = ({ name, initializeOnMount, component, render, ...props }) => {
