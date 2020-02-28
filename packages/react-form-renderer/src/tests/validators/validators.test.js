@@ -102,6 +102,10 @@ describe('New validators', () => {
       expect(validatorMapper(validatorTypes.PATTERN_VALIDATOR)({ pattern: '^Foo$' })('Foo')).toBeUndefined();
     });
 
+    it('should pass pattern validation with configured regexp pattern as string and with flags', () => {
+      expect(validatorMapper(validatorTypes.PATTERN_VALIDATOR)({ pattern: '^Foo$', flags: 'i' })('foo')).toBeUndefined();
+    });
+
     it('should fail pattern validation with configured regexp pattern as string', () => {
       expect(validatorMapper(validatorTypes.PATTERN_VALIDATOR)({ pattern: '^Foo$' })('Bar')).toBe('Value does not match pattern: ^Foo$.');
     });

@@ -6,7 +6,7 @@ import { DateTimePicker } from '../form-fields/date-time-picker/date-time-picker
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const DatePicker = (props) => {
-  const { meta, validateOnMount, label, hideLabel, isRequired, helperText, description, input, ...rest } = useFieldApi(props);
+  const { meta, validateOnMount, label, hideLabel, isRequired, helperText, description, input, inputAddon, ...rest } = useFieldApi(props);
   return (
     <FormGroup
       meta={meta}
@@ -16,6 +16,7 @@ const DatePicker = (props) => {
       isRequired={isRequired}
       helperText={helperText}
       description={description}
+      inputAddon={inputAddon}
     >
       <DateTimePicker pristine={meta.pristine} onChange={input.onChange} value={input.value} {...rest} />
     </FormGroup>
@@ -33,7 +34,8 @@ DatePicker.propTypes = {
   description: PropTypes.string,
   input: PropTypes.object,
   placeholder: PropTypes.string,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
+  inputAddon: PropTypes.shape({ fields: PropTypes.array })
 };
 
 export default DatePicker;

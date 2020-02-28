@@ -18,6 +18,7 @@ const TextField = (props) => {
     placeholder,
     isDisabled,
     isReadOnly,
+    inputAddon,
     ...rest
   } = useFieldApi(props);
   return (
@@ -29,6 +30,7 @@ const TextField = (props) => {
       isRequired={isRequired}
       helperText={helperText}
       description={description}
+      inputAddon={inputAddon}
     >
       <FormControl {...input} placeholder={placeholder} disabled={isDisabled} readOnly={isReadOnly} {...rest} />
     </FormGroup>
@@ -46,7 +48,8 @@ TextField.propTypes = {
   description: PropTypes.string,
   input: PropTypes.object,
   placeholder: PropTypes.string,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
+  inputAddon: PropTypes.shape({ fields: PropTypes.array })
 };
 
 export default TextField;

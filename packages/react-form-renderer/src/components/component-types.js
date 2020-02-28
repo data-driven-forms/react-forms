@@ -14,7 +14,10 @@ const componentTypes = {
   SWITCH: 'switch-field',
   TEXTAREA: 'textarea-field',
   SELECT: 'select-field',
-  PLAIN_TEXT: 'plain-text'
+  PLAIN_TEXT: 'plain-text',
+  BUTTON: 'button',
+  INPUT_ADDON_GROUP: 'input-addon-group',
+  INPUT_ADDON_BUTTON_GROUP: 'input-addon-button-group'
 };
 
 export default componentTypes;

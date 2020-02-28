@@ -18,6 +18,7 @@ const Textarea = (props) => {
     placeholder,
     isDisabled,
     isReadOnly,
+    inputAddon,
     ...rest
   } = useFieldApi(props);
   return (
@@ -29,6 +30,7 @@ const Textarea = (props) => {
       isRequired={isRequired}
       helperText={helperText}
       description={description}
+      inputAddon={inputAddon}
     >
       <FormControl {...input} disabled={isDisabled} readOnly={isReadOnly} {...rest} componentClass="textarea" placeholder={placeholder} />
     </FormGroup>
@@ -46,7 +48,8 @@ Textarea.propTypes = {
   description: PropTypes.string,
   input: PropTypes.object,
   placeholder: PropTypes.string,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
+  inputAddon: PropTypes.shape({ fields: PropTypes.array })
 };
 
 export default Textarea;

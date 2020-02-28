@@ -1,0 +1,1233 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Input Addon> should render group button before input addon correctly 1`] = `
+<FormRenderer
+  clearOnUnmount={false}
+  formFieldsMapper={
+    Object {
+      "button": [Function],
+      "checkbox": [Function],
+      "date-picker": [Function],
+      "input-addon-button-group": [Function],
+      "input-addon-group": [Function],
+      "plain-text": [Function],
+      "radio": [Function],
+      "select-field": [Function],
+      "sub-form": [Function],
+      "switch-field": [Function],
+      "tabs": [Function],
+      "text-field": [Function],
+      "textarea-field": [Function],
+      "time-picker": [Function],
+      "wizard": [Function],
+    }
+  }
+  initialValues={Object {}}
+  onCancel={[Function]}
+  onSubmit={[MockFunction]}
+  schema={
+    Object {
+      "fields": Array [
+        Object {
+          "component": "text-field",
+          "inputAddon": Object {
+            "before": Object {
+              "fields": Array [
+                Object {
+                  "component": "input-addon-button-group",
+                  "fields": Array [
+                    Object {
+                      "component": "button",
+                      "label": "Set 1",
+                      "name": "set1",
+                      "onClick": [Function],
+                    },
+                    Object {
+                      "component": "button",
+                      "label": "Set 2",
+                      "name": "set2",
+                    },
+                  ],
+                  "name": "i-a-g-2",
+                },
+              ],
+            },
+          },
+          "label": "Text Box With Input Addon",
+          "name": "text_box_21",
+          "title": "Text Box With Input Addon",
+        },
+      ],
+    }
+  }
+  showFormControls={false}
+>
+  <ReactFinalForm
+    decorators={
+      Array [
+        [Function],
+      ]
+    }
+    initialValues={Object {}}
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
+    onSubmit={[MockFunction]}
+    render={[Function]}
+    subscription={
+      Object {
+        "pristine": true,
+        "submitting": true,
+        "valid": true,
+      }
+    }
+  >
+    <Component
+      formFields={
+        Array [
+          <SingleField
+            component="text-field"
+            inputAddon={
+              Object {
+                "before": Object {
+                  "fields": Array [
+                    Object {
+                      "component": "input-addon-button-group",
+                      "fields": Array [
+                        Object {
+                          "component": "button",
+                          "label": "Set 1",
+                          "name": "set1",
+                          "onClick": [Function],
+                        },
+                        Object {
+                          "component": "button",
+                          "label": "Set 2",
+                          "name": "set2",
+                        },
+                      ],
+                      "name": "i-a-g-2",
+                    },
+                  ],
+                },
+              }
+            }
+            label="Text Box With Input Addon"
+            name="text_box_21"
+            title="Text Box With Input Addon"
+            validate={
+              Array [
+                undefined,
+              ]
+            }
+          />,
+        ]
+      }
+      schema={
+        Object {
+          "fields": Array [
+            Object {
+              "component": "text-field",
+              "inputAddon": Object {
+                "before": Object {
+                  "fields": Array [
+                    Object {
+                      "component": "input-addon-button-group",
+                      "fields": Array [
+                        Object {
+                          "component": "button",
+                          "label": "Set 1",
+                          "name": "set1",
+                          "onClick": [Function],
+                        },
+                        Object {
+                          "component": "button",
+                          "label": "Set 2",
+                          "name": "set2",
+                        },
+                      ],
+                      "name": "i-a-g-2",
+                    },
+                  ],
+                },
+              },
+              "label": "Text Box With Input Addon",
+              "name": "text_box_21",
+              "title": "Text Box With Input Addon",
+            },
+          ],
+        }
+      }
+    >
+      <div>
+        FormRenderer is missing 'formTemplate' prop: ({formFields, schema}) =&gt; &lt;FormTemplate {...} /&gt;
+      </div>
+    </Component>
+  </ReactFinalForm>
+</FormRenderer>
+`;
+
+exports[`<Input Addon> should render group mixed before input addon correctly 1`] = `
+<FormRenderer
+  clearOnUnmount={false}
+  formFieldsMapper={
+    Object {
+      "button": [Function],
+      "checkbox": [Function],
+      "date-picker": [Function],
+      "input-addon-button-group": [Function],
+      "input-addon-group": [Function],
+      "plain-text": [Function],
+      "radio": [Function],
+      "select-field": [Function],
+      "sub-form": [Function],
+      "switch-field": [Function],
+      "tabs": [Function],
+      "text-field": [Function],
+      "textarea-field": [Function],
+      "time-picker": [Function],
+      "wizard": [Function],
+    }
+  }
+  initialValues={Object {}}
+  onCancel={[Function]}
+  onSubmit={[MockFunction]}
+  schema={
+    Object {
+      "fields": Array [
+        Object {
+          "component": "text-field",
+          "inputAddon": Object {
+            "before": Object {
+              "fields": Array [
+                Object {
+                  "component": "input-addon-group",
+                  "fields": Array [
+                    Object {
+                      "component": "plain-text",
+                      "label": "-",
+                      "name": "name1",
+                      "variant": "span",
+                    },
+                  ],
+                  "name": "i-a-g-2",
+                },
+                Object {
+                  "component": "input-addon-button-group",
+                  "fields": Array [
+                    Object {
+                      "component": "button",
+                      "label": "Set 3",
+                      "name": "set3",
+                    },
+                  ],
+                  "name": "i-a-g-3",
+                },
+              ],
+            },
+          },
+          "label": "Text Box With Input Addon",
+          "name": "text_box_21",
+          "title": "Text Box With Input Addon",
+        },
+      ],
+    }
+  }
+  showFormControls={false}
+>
+  <ReactFinalForm
+    decorators={
+      Array [
+        [Function],
+      ]
+    }
+    initialValues={Object {}}
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
+    onSubmit={[MockFunction]}
+    render={[Function]}
+    subscription={
+      Object {
+        "pristine": true,
+        "submitting": true,
+        "valid": true,
+      }
+    }
+  >
+    <Component
+      formFields={
+        Array [
+          <SingleField
+            component="text-field"
+            inputAddon={
+              Object {
+                "before": Object {
+                  "fields": Array [
+                    Object {
+                      "component": "input-addon-group",
+                      "fields": Array [
+                        Object {
+                          "component": "plain-text",
+                          "label": "-",
+                          "name": "name1",
+                          "variant": "span",
+                        },
+                      ],
+                      "name": "i-a-g-2",
+                    },
+                    Object {
+                      "component": "input-addon-button-group",
+                      "fields": Array [
+                        Object {
+                          "component": "button",
+                          "label": "Set 3",
+                          "name": "set3",
+                        },
+                      ],
+                      "name": "i-a-g-3",
+                    },
+                  ],
+                },
+              }
+            }
+            label="Text Box With Input Addon"
+            name="text_box_21"
+            title="Text Box With Input Addon"
+            validate={
+              Array [
+                undefined,
+              ]
+            }
+          />,
+        ]
+      }
+      schema={
+        Object {
+          "fields": Array [
+            Object {
+              "component": "text-field",
+              "inputAddon": Object {
+                "before": Object {
+                  "fields": Array [
+                    Object {
+                      "component": "input-addon-group",
+                      "fields": Array [
+                        Object {
+                          "component": "plain-text",
+                          "label": "-",
+                          "name": "name1",
+                          "variant": "span",
+                        },
+                      ],
+                      "name": "i-a-g-2",
+                    },
+                    Object {
+                      "component": "input-addon-button-group",
+                      "fields": Array [
+                        Object {
+                          "component": "button",
+                          "label": "Set 3",
+                          "name": "set3",
+                        },
+                      ],
+                      "name": "i-a-g-3",
+                    },
+                  ],
+                },
+              },
+              "label": "Text Box With Input Addon",
+              "name": "text_box_21",
+              "title": "Text Box With Input Addon",
+            },
+          ],
+        }
+      }
+    >
+      <div>
+        FormRenderer is missing 'formTemplate' prop: ({formFields, schema}) =&gt; &lt;FormTemplate {...} /&gt;
+      </div>
+    </Component>
+  </ReactFinalForm>
+</FormRenderer>
+`;
+
+exports[`<Input Addon> should render single after input addon correctly 1`] = `
+<FormRenderer
+  clearOnUnmount={false}
+  formFieldsMapper={
+    Object {
+      "button": [Function],
+      "checkbox": [Function],
+      "date-picker": [Function],
+      "input-addon-button-group": [Function],
+      "input-addon-group": [Function],
+      "plain-text": [Function],
+      "radio": [Function],
+      "select-field": [Function],
+      "sub-form": [Function],
+      "switch-field": [Function],
+      "tabs": [Function],
+      "text-field": [Function],
+      "textarea-field": [Function],
+      "time-picker": [Function],
+      "wizard": [Function],
+    }
+  }
+  initialValues={Object {}}
+  onCancel={[Function]}
+  onSubmit={[MockFunction]}
+  schema={
+    Object {
+      "fields": Array [
+        Object {
+          "component": "text-field",
+          "inputAddon": Object {
+            "after": Object {
+              "fields": Array [
+                Object {
+                  "component": "plain-text",
+                  "label": "-",
+                  "name": "name1",
+                  "variant": "span",
+                },
+              ],
+            },
+          },
+          "label": "Text Box With Input Addon",
+          "name": "text_box_21",
+          "title": "Text Box With Input Addon",
+        },
+      ],
+    }
+  }
+  showFormControls={false}
+>
+  <ReactFinalForm
+    decorators={
+      Array [
+        [Function],
+      ]
+    }
+    initialValues={Object {}}
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
+    onSubmit={[MockFunction]}
+    render={[Function]}
+    subscription={
+      Object {
+        "pristine": true,
+        "submitting": true,
+        "valid": true,
+      }
+    }
+  >
+    <Component
+      formFields={
+        Array [
+          <SingleField
+            component="text-field"
+            inputAddon={
+              Object {
+                "after": Object {
+                  "fields": Array [
+                    Object {
+                      "component": "plain-text",
+                      "label": "-",
+                      "name": "name1",
+                      "variant": "span",
+                    },
+                  ],
+                },
+              }
+            }
+            label="Text Box With Input Addon"
+            name="text_box_21"
+            title="Text Box With Input Addon"
+            validate={
+              Array [
+                undefined,
+              ]
+            }
+          />,
+        ]
+      }
+      schema={
+        Object {
+          "fields": Array [
+            Object {
+              "component": "text-field",
+              "inputAddon": Object {
+                "after": Object {
+                  "fields": Array [
+                    Object {
+                      "component": "plain-text",
+                      "label": "-",
+                      "name": "name1",
+                      "variant": "span",
+                    },
+                  ],
+                },
+              },
+              "label": "Text Box With Input Addon",
+              "name": "text_box_21",
+              "title": "Text Box With Input Addon",
+            },
+          ],
+        }
+      }
+    >
+      <div>
+        FormRenderer is missing 'formTemplate' prop: ({formFields, schema}) =&gt; &lt;FormTemplate {...} /&gt;
+      </div>
+    </Component>
+  </ReactFinalForm>
+</FormRenderer>
+`;
+
+exports[`<Input Addon> should render single before input addon correctly 1`] = `
+<FormRenderer
+  clearOnUnmount={false}
+  formFieldsMapper={
+    Object {
+      "button": [Function],
+      "checkbox": [Function],
+      "date-picker": [Function],
+      "input-addon-button-group": [Function],
+      "input-addon-group": [Function],
+      "plain-text": [Function],
+      "radio": [Function],
+      "select-field": [Function],
+      "sub-form": [Function],
+      "switch-field": [Function],
+      "tabs": [Function],
+      "text-field": [Function],
+      "textarea-field": [Function],
+      "time-picker": [Function],
+      "wizard": [Function],
+    }
+  }
+  initialValues={Object {}}
+  onCancel={[Function]}
+  onSubmit={[MockFunction]}
+  schema={
+    Object {
+      "fields": Array [
+        Object {
+          "component": "text-field",
+          "inputAddon": Object {
+            "before": Object {
+              "fields": Array [
+                Object {
+                  "component": "plain-text",
+                  "label": "-",
+                  "name": "name1",
+                  "variant": "span",
+                },
+              ],
+            },
+          },
+          "label": "Text Box With Input Addon",
+          "name": "text_box_21",
+          "title": "Text Box With Input Addon",
+        },
+      ],
+    }
+  }
+  showFormControls={false}
+>
+  <ReactFinalForm
+    decorators={
+      Array [
+        [Function],
+      ]
+    }
+    initialValues={Object {}}
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
+    onSubmit={[MockFunction]}
+    render={[Function]}
+    subscription={
+      Object {
+        "pristine": true,
+        "submitting": true,
+        "valid": true,
+      }
+    }
+  >
+    <Component
+      formFields={
+        Array [
+          <SingleField
+            component="text-field"
+            inputAddon={
+              Object {
+                "before": Object {
+                  "fields": Array [
+                    Object {
+                      "component": "plain-text",
+                      "label": "-",
+                      "name": "name1",
+                      "variant": "span",
+                    },
+                  ],
+                },
+              }
+            }
+            label="Text Box With Input Addon"
+            name="text_box_21"
+            title="Text Box With Input Addon"
+            validate={
+              Array [
+                undefined,
+              ]
+            }
+          />,
+        ]
+      }
+      schema={
+        Object {
+          "fields": Array [
+            Object {
+              "component": "text-field",
+              "inputAddon": Object {
+                "before": Object {
+                  "fields": Array [
+                    Object {
+                      "component": "plain-text",
+                      "label": "-",
+                      "name": "name1",
+                      "variant": "span",
+                    },
+                  ],
+                },
+              },
+              "label": "Text Box With Input Addon",
+              "name": "text_box_21",
+              "title": "Text Box With Input Addon",
+            },
+          ],
+        }
+      }
+    >
+      <div>
+        FormRenderer is missing 'formTemplate' prop: ({formFields, schema}) =&gt; &lt;FormTemplate {...} /&gt;
+      </div>
+    </Component>
+  </ReactFinalForm>
+</FormRenderer>
+`;
+
+exports[`<Input Addon> should render single button after input addon correctly 1`] = `
+<FormRenderer
+  clearOnUnmount={false}
+  formFieldsMapper={
+    Object {
+      "button": [Function],
+      "checkbox": [Function],
+      "date-picker": [Function],
+      "input-addon-button-group": [Function],
+      "input-addon-group": [Function],
+      "plain-text": [Function],
+      "radio": [Function],
+      "select-field": [Function],
+      "sub-form": [Function],
+      "switch-field": [Function],
+      "tabs": [Function],
+      "text-field": [Function],
+      "textarea-field": [Function],
+      "time-picker": [Function],
+      "wizard": [Function],
+    }
+  }
+  initialValues={Object {}}
+  onCancel={[Function]}
+  onSubmit={[MockFunction]}
+  schema={
+    Object {
+      "fields": Array [
+        Object {
+          "component": "text-field",
+          "inputAddon": Object {
+            "after": Object {
+              "fields": Array [
+                Object {
+                  "component": "button",
+                  "label": "Set 3",
+                  "name": "set3",
+                },
+              ],
+            },
+          },
+          "label": "Text Box With Input Addon",
+          "name": "text_box_21",
+          "title": "Text Box With Input Addon",
+        },
+      ],
+    }
+  }
+  showFormControls={false}
+>
+  <ReactFinalForm
+    decorators={
+      Array [
+        [Function],
+      ]
+    }
+    initialValues={Object {}}
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
+    onSubmit={[MockFunction]}
+    render={[Function]}
+    subscription={
+      Object {
+        "pristine": true,
+        "submitting": true,
+        "valid": true,
+      }
+    }
+  >
+    <Component
+      formFields={
+        Array [
+          <SingleField
+            component="text-field"
+            inputAddon={
+              Object {
+                "after": Object {
+                  "fields": Array [
+                    Object {
+                      "component": "button",
+                      "label": "Set 3",
+                      "name": "set3",
+                    },
+                  ],
+                },
+              }
+            }
+            label="Text Box With Input Addon"
+            name="text_box_21"
+            title="Text Box With Input Addon"
+            validate={
+              Array [
+                undefined,
+              ]
+            }
+          />,
+        ]
+      }
+      schema={
+        Object {
+          "fields": Array [
+            Object {
+              "component": "text-field",
+              "inputAddon": Object {
+                "after": Object {
+                  "fields": Array [
+                    Object {
+                      "component": "button",
+                      "label": "Set 3",
+                      "name": "set3",
+                    },
+                  ],
+                },
+              },
+              "label": "Text Box With Input Addon",
+              "name": "text_box_21",
+              "title": "Text Box With Input Addon",
+            },
+          ],
+        }
+      }
+    >
+      <div>
+        FormRenderer is missing 'formTemplate' prop: ({formFields, schema}) =&gt; &lt;FormTemplate {...} /&gt;
+      </div>
+    </Component>
+  </ReactFinalForm>
+</FormRenderer>
+`;
+
+exports[`<Input Addon> should render single button before input addon correctly 1`] = `
+<FormRenderer
+  clearOnUnmount={false}
+  formFieldsMapper={
+    Object {
+      "button": [Function],
+      "checkbox": [Function],
+      "date-picker": [Function],
+      "input-addon-button-group": [Function],
+      "input-addon-group": [Function],
+      "plain-text": [Function],
+      "radio": [Function],
+      "select-field": [Function],
+      "sub-form": [Function],
+      "switch-field": [Function],
+      "tabs": [Function],
+      "text-field": [Function],
+      "textarea-field": [Function],
+      "time-picker": [Function],
+      "wizard": [Function],
+    }
+  }
+  initialValues={Object {}}
+  onCancel={[Function]}
+  onSubmit={[MockFunction]}
+  schema={
+    Object {
+      "fields": Array [
+        Object {
+          "component": "text-field",
+          "inputAddon": Object {
+            "before": Object {
+              "fields": Array [
+                Object {
+                  "component": "input-addon-button-group",
+                  "fields": Array [
+                    Object {
+                      "component": "button",
+                      "label": "Set 2",
+                      "name": "set2",
+                    },
+                  ],
+                  "name": "i-a-g-2",
+                },
+              ],
+            },
+          },
+          "label": "Text Box With Input Addon",
+          "name": "text_box_21",
+          "title": "Text Box With Input Addon",
+        },
+      ],
+    }
+  }
+  showFormControls={false}
+>
+  <ReactFinalForm
+    decorators={
+      Array [
+        [Function],
+      ]
+    }
+    initialValues={Object {}}
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
+    onSubmit={[MockFunction]}
+    render={[Function]}
+    subscription={
+      Object {
+        "pristine": true,
+        "submitting": true,
+        "valid": true,
+      }
+    }
+  >
+    <Component
+      formFields={
+        Array [
+          <SingleField
+            component="text-field"
+            inputAddon={
+              Object {
+                "before": Object {
+                  "fields": Array [
+                    Object {
+                      "component": "input-addon-button-group",
+                      "fields": Array [
+                        Object {
+                          "component": "button",
+                          "label": "Set 2",
+                          "name": "set2",
+                        },
+                      ],
+                      "name": "i-a-g-2",
+                    },
+                  ],
+                },
+              }
+            }
+            label="Text Box With Input Addon"
+            name="text_box_21"
+            title="Text Box With Input Addon"
+            validate={
+              Array [
+                undefined,
+              ]
+            }
+          />,
+        ]
+      }
+      schema={
+        Object {
+          "fields": Array [
+            Object {
+              "component": "text-field",
+              "inputAddon": Object {
+                "before": Object {
+                  "fields": Array [
+                    Object {
+                      "component": "input-addon-button-group",
+                      "fields": Array [
+                        Object {
+                          "component": "button",
+                          "label": "Set 2",
+                          "name": "set2",
+                        },
+                      ],
+                      "name": "i-a-g-2",
+                    },
+                  ],
+                },
+              },
+              "label": "Text Box With Input Addon",
+              "name": "text_box_21",
+              "title": "Text Box With Input Addon",
+            },
+          ],
+        }
+      }
+    >
+      <div>
+        FormRenderer is missing 'formTemplate' prop: ({formFields, schema}) =&gt; &lt;FormTemplate {...} /&gt;
+      </div>
+    </Component>
+  </ReactFinalForm>
+</FormRenderer>
+`;
+
+exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
+<FormRenderer
+  clearOnUnmount={false}
+  formFieldsMapper={
+    Object {
+      "button": [Function],
+      "checkbox": [Function],
+      "date-picker": [Function],
+      "input-addon-button-group": [Function],
+      "input-addon-group": [Function],
+      "plain-text": [Function],
+      "radio": [Function],
+      "select-field": [Function],
+      "sub-form": [Function],
+      "switch-field": [Function],
+      "tabs": [Function],
+      "text-field": [Function],
+      "textarea-field": [Function],
+      "time-picker": [Function],
+      "wizard": [Function],
+    }
+  }
+  initialValues={Object {}}
+  onCancel={[Function]}
+  onSubmit={[MockFunction]}
+  schema={
+    Object {
+      "fields": Array [
+        Object {
+          "component": "text-field",
+          "inputAddon": Object {
+            "after": Object {
+              "fields": Array [
+                Object {
+                  "component": "input-addon-group",
+                  "fields": Array [
+                    Object {
+                      "component": "plain-text",
+                      "label": "-",
+                      "name": "name1",
+                      "variant": "span",
+                    },
+                  ],
+                  "name": "i-a-g-2",
+                },
+                Object {
+                  "component": "input-addon-button-group",
+                  "fields": Array [
+                    Object {
+                      "component": "button",
+                      "label": "Set 3",
+                      "name": "set3",
+                    },
+                  ],
+                  "name": "i-a-g-3",
+                },
+              ],
+            },
+            "before": Object {
+              "fields": Array [
+                Object {
+                  "component": "input-addon-button-group",
+                  "fields": Array [
+                    Object {
+                      "component": "button",
+                      "label": "Set 1",
+                      "name": "set1",
+                      "onClick": [Function],
+                    },
+                    Object {
+                      "component": "button",
+                      "label": "Set 2",
+                      "name": "set2",
+                    },
+                  ],
+                  "name": "i-a-g-2",
+                },
+              ],
+            },
+          },
+          "label": "Text Box With Input Addon",
+          "name": "text_box_21",
+          "title": "Text Box With Input Addon",
+        },
+      ],
+    }
+  }
+  showFormControls={false}
+>
+  <ReactFinalForm
+    decorators={
+      Array [
+        [Function],
+      ]
+    }
+    initialValues={Object {}}
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
+    onSubmit={[MockFunction]}
+    render={[Function]}
+    subscription={
+      Object {
+        "pristine": true,
+        "submitting": true,
+        "valid": true,
+      }
+    }
+  >
+    <Component
+      formFields={
+        Array [
+          <SingleField
+            component="text-field"
+            inputAddon={
+              Object {
+                "after": Object {
+                  "fields": Array [
+                    Object {
+                      "component": "input-addon-group",
+                      "fields": Array [
+                        Object {
+                          "component": "plain-text",
+                          "label": "-",
+                          "name": "name1",
+                          "variant": "span",
+                        },
+                      ],
+                      "name": "i-a-g-2",
+                    },
+                    Object {
+                      "component": "input-addon-button-group",
+                      "fields": Array [
+                        Object {
+                          "component": "button",
+                          "label": "Set 3",
+                          "name": "set3",
+                        },
+                      ],
+                      "name": "i-a-g-3",
+                    },
+                  ],
+                },
+                "before": Object {
+                  "fields": Array [
+                    Object {
+                      "component": "input-addon-button-group",
+                      "fields": Array [
+                        Object {
+                          "component": "button",
+                          "label": "Set 1",
+                          "name": "set1",
+                          "onClick": [Function],
+                        },
+                        Object {
+                          "component": "button",
+                          "label": "Set 2",
+                          "name": "set2",
+                        },
+                      ],
+                      "name": "i-a-g-2",
+                    },
+                  ],
+                },
+              }
+            }
+            label="Text Box With Input Addon"
+            name="text_box_21"
+            title="Text Box With Input Addon"
+            validate={
+              Array [
+                undefined,
+              ]
+            }
+          />,
+        ]
+      }
+      schema={
+        Object {
+          "fields": Array [
+            Object {
+              "component": "text-field",
+              "inputAddon": Object {
+                "after": Object {
+                  "fields": Array [
+                    Object {
+                      "component": "input-addon-group",
+                      "fields": Array [
+                        Object {
+                          "component": "plain-text",
+                          "label": "-",
+                          "name": "name1",
+                          "variant": "span",
+                        },
+                      ],
+                      "name": "i-a-g-2",
+                    },
+                    Object {
+                      "component": "input-addon-button-group",
+                      "fields": Array [
+                        Object {
+                          "component": "button",
+                          "label": "Set 3",
+                          "name": "set3",
+                        },
+                      ],
+                      "name": "i-a-g-3",
+                    },
+                  ],
+                },
+                "before": Object {
+                  "fields": Array [
+                    Object {
+                      "component": "input-addon-button-group",
+                      "fields": Array [
+                        Object {
+                          "component": "button",
+                          "label": "Set 1",
+                          "name": "set1",
+                          "onClick": [Function],
+                        },
+                        Object {
+                          "component": "button",
+                          "label": "Set 2",
+                          "name": "set2",
+                        },
+                      ],
+                      "name": "i-a-g-2",
+                    },
+                  ],
+                },
+              },
+              "label": "Text Box With Input Addon",
+              "name": "text_box_21",
+              "title": "Text Box With Input Addon",
+            },
+          ],
+        }
+      }
+    >
+      <div>
+        FormRenderer is missing 'formTemplate' prop: ({formFields, schema}) =&gt; &lt;FormTemplate {...} /&gt;
+      </div>
+    </Component>
+  </ReactFinalForm>
+</FormRenderer>
+`;

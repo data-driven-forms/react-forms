@@ -26,7 +26,14 @@ const ReleasesPage = () => {
         setData(parseData(data));
       })
       .catch(() => {
-        setData('Something wrong happened :(');
+        setData(
+          <React.Fragment>
+            Cannot obtain data from GitHub, please visit
+            <a href="https://github.com/data-driven-forms/react-forms/releases" rel="noopener noreferrer" target="_blank">
+              GitHub page.
+            </a>
+          </React.Fragment>
+        );
       });
   }, []);
 

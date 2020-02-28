@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../../common/button';
+import Button from '../button';
 import { Icon, Wizard } from 'patternfly-react';
 
+import './button.scss';
+
 const SimpleNext = ({ next, valid, handleNext, submit, buttonLabels }) => (
-  <Button bsStyle="primary" type="button" onClick={() => (valid ? handleNext(next) : submit())}>
+  <Button className="margin-left-3" bsStyle="primary" type="button" onClick={() => (valid ? handleNext(next) : submit())}>
     {buttonLabels.next}
     <Icon type="fa" name="angle-right" />
   </Button>
@@ -35,7 +37,7 @@ ConditionalNext.propTypes = {
 };
 
 const submitButton = (handleSubmit, submitText) => (
-  <Button type="button" bsStyle="primary" onClick={handleSubmit}>
+  <Button type="button" bsStyle="primary" onClick={handleSubmit} className="margin-left-3">
     {submitText}
   </Button>
 );
@@ -52,12 +54,19 @@ const renderNextButton = ({ nextStep, handleSubmit, buttonLabels, ...rest }) =>
 const WizardStepButtons = ({ disableBack, handlePrev, nextStep, FieldProvider, formOptions, handleNext, buttonLabels }) => (
   <Wizard.Footer>
     {formOptions.onCancel && (
-      <Button style={{ marginRight: 20 }} type="button" variant="contained" color="secondary" onClick={formOptions.onCancel}>
+      <Button
+        style={{ marginRight: 20 }}
+        className="margin-left-3"
+        type="button"
+        variant="contained"
+        color="secondary"
+        onClick={formOptions.onCancel}
+      >
         {buttonLabels.cancel}
       </Button>
     )}
 
-    <Button type="button" variant="contained" disabled={disableBack} onClick={handlePrev}>
+    <Button type="button" variant="contained" disabled={disableBack} onClick={handlePrev} className="margin-left-3">
       <Icon type="fa" name="angle-left" />
       {buttonLabels.back}
     </Button>

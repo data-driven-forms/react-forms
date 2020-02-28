@@ -5,9 +5,11 @@ import { FieldLevelHelp } from 'patternfly-react/dist/js/components/FieldLevelHe
 import { validationError } from '../form-fields/helpers';
 import RequiredLabel from '../form-fields/required-label';
 import renderHelperText from './render-helper-text';
+import InputAddonWrapper from './render-input-group';
 
-const FormGroup = ({ meta, validateOnMount, label, hideLabel, noCheckboxLabel, isRequired, helperText, description, children }) => {
+const FormGroup = ({ meta, validateOnMount, label, hideLabel, noCheckboxLabel, isRequired, helperText, description, children, inputAddon }) => {
   const invalid = validationError(meta, validateOnMount);
+
   return (
     <Pf3FormGroup validationState={invalid ? 'error' : null}>
       {label && !hideLabel && !noCheckboxLabel && (
@@ -16,7 +18,7 @@ const FormGroup = ({ meta, validateOnMount, label, hideLabel, noCheckboxLabel, i
           {helperText && <FieldLevelHelp content={helperText} />}
         </ControlLabel>
       )}
-      {children}
+      {inputAddon ? <InputAddonWrapper inputAddon={inputAddon}>{children}</InputAddonWrapper> : children}
       {renderHelperText(invalid && meta.error, description)}
     </Pf3FormGroup>
   );
@@ -31,7 +33,8 @@ FormGroup.propTypes = {
   isRequired: PropTypes.bool,
   helperText: PropTypes.string,
   description: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired,
+  inputAddon: PropTypes.shape({ fields: PropTypes.array })
 };
 
 export default FormGroup;

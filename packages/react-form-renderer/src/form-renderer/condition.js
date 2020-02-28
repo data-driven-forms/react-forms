@@ -7,7 +7,7 @@ import get from 'lodash/get';
 const isEmptyValue = (value) => (typeof value === 'number' || value === true ? false : lodashIsEmpty(value));
 
 const Condition = ({ condition, children }) => {
-  const fieldCondition = (value, { is, isNotEmpty, isEmpty, pattern, notMatch }) => {
+  const fieldCondition = (value, { is, isNotEmpty, isEmpty, pattern, notMatch, flags }) => {
     if (isNotEmpty) {
       return !isEmptyValue(value);
     }
@@ -17,7 +17,9 @@ const Condition = ({ condition, children }) => {
     }
 
     if (pattern) {
-      return notMatch ? !pattern.test(value) : pattern.test(value);
+      const regExpPattern = RegExp(pattern, flags);
+
+      return notMatch ? !regExpPattern.test(value) : regExpPattern.test(value);
     }
 
     const isMatched = Array.isArray(is) ? !!is.includes(value) : value === is;

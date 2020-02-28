@@ -9,6 +9,7 @@ import Select from '../components/select';
 import Checkbox from '../components/checkbox';
 import Radio from '../components/radio';
 import Switch from '../components/switch';
+import { InputAddonGroup, InputAddonButtonGroup } from '../components/input-group-fields';
 
 describe('Component mapper', () => {
   it('should return TextField component', () => {
@@ -45,5 +46,13 @@ describe('Component mapper', () => {
 
   it('should return Wizard component', () => {
     expect(componentMapper[componentTypes.WIZARD]).toEqual(Wizard);
+  });
+
+  it('should return input addon group component', () => {
+    expect(componentMapper[componentTypes.INPUT_ADDON_GROUP]).toEqual(InputAddonGroup);
+  });
+
+  it('should return input addon buttom group component', () => {
+    expect(componentMapper[componentTypes.INPUT_ADDON_BUTTON_GROUP]).toEqual(InputAddonButtonGroup);
   });
 });
