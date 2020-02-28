@@ -7,6 +7,7 @@ import { uiArraySchema, arraySchema, array1Schema, schema, uiSchema, conditional
 import { componentMapper, formTemplate } from '../src';
 import { Title, Button, Toolbar, ToolbarGroup } from '@patternfly/react-core';
 import { wizardSchema, wizardSchemaWithFunction, wizardSchemaSimple, wizardSchemaSubsteps, wizardSchemaMoreSubsteps } from './demo-schemas/wizard-schema';
+import superSchema from './demo-schemas/superschema';
 import sandboxSchema from './demo-schemas/sandbox';
 
 const Summary = props => <div>Custom summary component.</div>;
@@ -37,6 +38,9 @@ class App extends React.Component {
                 </ToolbarGroup>
                 <ToolbarGroup>
                     <Button onClick={() => this.setState(state => ({ schema: sandboxSchema, additionalOptions: {}}))}>Sandbox</Button>
+                </ToolbarGroup>
+                <ToolbarGroup>
+                    <Button onClick={() => this.setState(state => ({ schema: superSchema, additionalOptions: {}}))}>Super schema</Button>
                 </ToolbarGroup>
             </Toolbar>
             <FormRenderer

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormGroup from '../common/form-group';
 import { Checkbox as Pf4Checkbox } from '@patternfly/react-core/dist/js/components/Checkbox/Checkbox';
+import IsRequired from '../common/is-required';
 
 const SingleCheckbox = (props) => {
   const { label, isRequired, helperText, meta, description, input, isReadOnly, isDisabled, id, ...rest } = useFieldApi(props);
@@ -13,7 +14,7 @@ const SingleCheckbox = (props) => {
         isChecked={input.checked}
         {...input}
         id={id || input.name}
-        label={label}
+        label={isRequired ? <IsRequired>{label}</IsRequired> : label}
         aria-label={rest.name}
         {...rest}
         isDisabled={isDisabled || isReadOnly}
