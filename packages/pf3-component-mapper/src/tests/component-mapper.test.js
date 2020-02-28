@@ -9,7 +9,7 @@ import Select from '../components/select';
 import Checkbox from '../components/checkbox';
 import Radio from '../components/radio';
 import Switch from '../components/switch';
-import { InputAddonGroup, InputAddonButtonGroup } from '../form-fields/input-group-fields';
+import { InputAddonGroup, InputAddonButtonGroup } from '../components/input-group-fields';
 
 describe('Component mapper', () => {
   it('should return TextField component', () => {

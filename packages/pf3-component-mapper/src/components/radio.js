@@ -28,7 +28,20 @@ RadioOption.propTypes = {
   isReadOnly: PropTypes.bool
 };
 
-const Radio = ({ name, isRequired, isDisabled, isReadOnly, validateOnMount, helperText, label, description, hideLabel, options, ...props }) => {
+const Radio = ({
+  name,
+  isRequired,
+  isDisabled,
+  isReadOnly,
+  validateOnMount,
+  helperText,
+  label,
+  description,
+  hideLabel,
+  options,
+  inputAddon,
+  ...props
+}) => {
   const { meta } = useFieldApi({ name, type: 'radio' });
   return (
     <FormGroup
@@ -39,6 +52,7 @@ const Radio = ({ name, isRequired, isDisabled, isReadOnly, validateOnMount, help
       isRequired={isRequired}
       helperText={helperText}
       description={description}
+      inputAddon={inputAddon}
     >
       {options.map((option) => (
         <RadioOption key={option.value} name={name} option={option} isReadOnly={isReadOnly} isDisabled={isDisabled} />
@@ -58,7 +72,8 @@ Radio.propTypes = {
   description: PropTypes.string,
   placeholder: PropTypes.string,
   isDisabled: PropTypes.bool,
-  options: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, value: PropTypes.any }))
+  options: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, value: PropTypes.any })),
+  inputAddon: PropTypes.shape({ fields: PropTypes.array })
 };
 
 export default Radio;

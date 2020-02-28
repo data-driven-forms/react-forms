@@ -8,9 +8,9 @@ import RequiredLabel from '../form-fields/required-label';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const SingleCheckbox = (props) => {
-  const { label, helperText, meta, description, input, isRequired, isReadOnly, isDisabled } = useFieldApi(props);
+  const { label, helperText, meta, description, input, isRequired, isReadOnly, isDisabled, inputAddon } = useFieldApi(props);
   return (
-    <FormGroup hideLabel meta={meta} description={description}>
+    <FormGroup hideLabel meta={meta} description={description} inputAddon={inputAddon}>
       <Pf3Checkbox {...input} disabled={isDisabled || isReadOnly}>
         {isRequired ? <RequiredLabel label={label} /> : label}
         {helperText && <FieldLevelHelp content={helperText} />}

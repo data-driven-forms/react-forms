@@ -103,7 +103,7 @@ describe('New validators', () => {
     });
 
     it('should pass pattern validation with configured regexp pattern as string and with flags', () => {
-      expect(validatorMapper(validators.PATTERN_VALIDATOR)({ pattern: '^Foo$', flags: 'i' })('foo')).toBeUndefined();
+      expect(validatorMapper(validatorTypes.PATTERN_VALIDATOR)({ pattern: '^Foo$', flags: 'i' })('foo')).toBeUndefined();
     });
 
     it('should fail pattern validation with configured regexp pattern as string', () => {

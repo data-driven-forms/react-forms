@@ -6,7 +6,20 @@ import FormGroup from '../common/form-wrapper';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const Switch = (props) => {
-  const { meta, validateOnMount, label, hideLabel, isRequired, helperText, description, input, placeholder, isDisabled, ...rest } = useFieldApi({
+  const {
+    meta,
+    validateOnMount,
+    label,
+    hideLabel,
+    isRequired,
+    helperText,
+    description,
+    input,
+    placeholder,
+    isDisabled,
+    inputAddon,
+    ...rest
+  } = useFieldApi({
     ...props,
     type: 'checkbox'
   });
@@ -19,6 +32,7 @@ const Switch = (props) => {
       isRequired={isRequired}
       helperText={helperText}
       description={description}
+      inputAddon={inputAddon}
     >
       <SwitchField
         {...rest}
@@ -42,7 +56,8 @@ Switch.propTypes = {
   description: PropTypes.string,
   input: PropTypes.object,
   placeholder: PropTypes.string,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
+  inputAddon: PropTypes.shape({ fields: PropTypes.array })
 };
 
 export default Switch;

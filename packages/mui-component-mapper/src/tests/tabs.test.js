@@ -7,7 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import FormTabs from '../components/tabs';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 import FormRenderer, { validatorTypes } from '@data-driven-forms/react-form-renderer';
-import { formFieldsMapper, layoutMapper } from '../index';
+import { componentMapper, formTemplate } from '../index';
 
 describe('tabs', () => {
   const props = {
@@ -82,35 +82,51 @@ describe('tabs', () => {
 
   it('validate all tabs', () => {
     const onSubmit = jest.fn();
-    const wrapper = mount(<FormRenderer
-      formFieldsMapper={ formFieldsMapper }
-      layoutMapper={ layoutMapper }
-      onSubmit={ (values) => onSubmit(values) }
-      schema={{ fields: [{
-        component: 'tabs',
-        name: 'tabs1',
-        title: 'tabs1',
-        fields: [{
-          name: 'tabitem1',
-          component: 'tab-item',
-          fields: [{
-            component: 'text-field',
-            name: 'name',
-            validate: [{ type: validatorTypes.REQUIRED }],
-          }],
-        }, {
-          name: 'tabitem2',
-          component: 'tab-item',
-          fields: [{
-            component: 'text-field',
-            name: 'password',
-            validate: [{ type: validatorTypes.REQUIRED }],
-          }],
-        }],
-      }]}}
-    />);
+    const wrapper = mount(
+      <FormRenderer
+        formFieldsMapper={componentMapper}
+        formTemplate={formTemplate()}
+        onSubmit={(values) => onSubmit(values)}
+        schema={{
+          fields: [
+            {
+              component: 'tabs',
+              name: 'tabs1',
+              title: 'tabs1',
+              fields: [
+                {
+                  name: 'tabitem1',
+                  component: 'tab-item',
+                  fields: [
+                    {
+                      component: 'text-field',
+                      name: 'name',
+                      validate: [{ type: validatorTypes.REQUIRED }]
+                    }
+                  ]
+                },
+                {
+                  name: 'tabitem2',
+                  component: 'tab-item',
+                  fields: [
+                    {
+                      component: 'text-field',
+                      name: 'password',
+                      validate: [{ type: validatorTypes.REQUIRED }]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }}
+      />
+    );
 
-    wrapper.find('input').first().simulate('change', { target: { value: 'NAME' }});
+    wrapper
+      .find('input')
+      .first()
+      .simulate('change', { target: { value: 'NAME' } });
     wrapper.update();
 
     wrapper.find('form').simulate('submit');
@@ -118,7 +134,10 @@ describe('tabs', () => {
 
     expect(onSubmit).not.toHaveBeenCalled();
 
-    wrapper.find('input').last().simulate('change', { target: { value: 'PASSWORD' }});
+    wrapper
+      .find('input')
+      .last()
+      .simulate('change', { target: { value: 'PASSWORD' } });
     wrapper.update();
 
     wrapper.find('form').simulate('submit');
