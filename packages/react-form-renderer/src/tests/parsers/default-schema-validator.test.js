@@ -2,6 +2,7 @@ import output from './output';
 import React from 'react';
 import defaultSchemaValidator from '../../parsers/default-schema-validator';
 import componentTypes from '../../components/component-types';
+import { validatorTypes as validatorTypesDefault } from '../..';
 
 describe('Default schema validator', () => {
   let formFieldsMapper;
@@ -317,6 +318,28 @@ describe('Default schema validator', () => {
     ).toThrowErrorMatchingSnapshot();
   });
 
+  it('should not fail if field validate item is an object and validator type is custom.', () => {
+    expect(() =>
+      defaultSchemaValidator(
+        {
+          fields: [
+            {
+              component: 'foo',
+              name: 'foo',
+              validate: [
+                {
+                  type: 'magic'
+                }
+              ]
+            }
+          ]
+        },
+        formFieldsMapper,
+        ['magic']
+      )
+    ).not.toThrow();
+  });
+
   it('should fail validation when using wrong data type', () => {
     expect(() =>
       defaultSchemaValidator(
@@ -350,17 +373,21 @@ describe('Default schema validator', () => {
 
   it('should pass validation', () => {
     expect(() =>
-      defaultSchemaValidator(output, {
-        ...formFieldsMapper,
-        'sub-form': () => <div />,
-        'text-field': () => <div />,
-        'textarea-field': () => <div />,
-        checkbox: () => <div />,
-        radio: () => <div />,
-        'select-field': () => <div />,
-        'date-picker': () => <div />,
-        'time-picker': () => <div />
-      })
+      defaultSchemaValidator(
+        output,
+        {
+          ...formFieldsMapper,
+          'sub-form': () => <div />,
+          'text-field': () => <div />,
+          'textarea-field': () => <div />,
+          checkbox: () => <div />,
+          radio: () => <div />,
+          'select-field': () => <div />,
+          'date-picker': () => <div />,
+          'time-picker': () => <div />
+        },
+        Object.values(validatorTypesDefault)
+      )
     ).not.toThrow();
   });
 });

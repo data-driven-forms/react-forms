@@ -127,11 +127,6 @@ exports[`<Input Addon> should render group button before input addon correctly 1
             label="Text Box With Input Addon"
             name="text_box_21"
             title="Text Box With Input Addon"
-            validate={
-              Array [
-                undefined,
-              ]
-            }
           />,
         ]
       }
@@ -318,11 +313,6 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
             label="Text Box With Input Addon"
             name="text_box_21"
             title="Text Box With Input Addon"
-            validate={
-              Array [
-                undefined,
-              ]
-            }
           />,
         ]
       }
@@ -481,11 +471,6 @@ exports[`<Input Addon> should render single after input addon correctly 1`] = `
             label="Text Box With Input Addon"
             name="text_box_21"
             title="Text Box With Input Addon"
-            validate={
-              Array [
-                undefined,
-              ]
-            }
           />,
         ]
       }
@@ -627,11 +612,6 @@ exports[`<Input Addon> should render single before input addon correctly 1`] = `
             label="Text Box With Input Addon"
             name="text_box_21"
             title="Text Box With Input Addon"
-            validate={
-              Array [
-                undefined,
-              ]
-            }
           />,
         ]
       }
@@ -771,11 +751,6 @@ exports[`<Input Addon> should render single button after input addon correctly 1
             label="Text Box With Input Addon"
             name="text_box_21"
             title="Text Box With Input Addon"
-            validate={
-              Array [
-                undefined,
-              ]
-            }
           />,
         ]
       }
@@ -926,11 +901,6 @@ exports[`<Input Addon> should render single button before input addon correctly 
             label="Text Box With Input Addon"
             name="text_box_21"
             title="Text Box With Input Addon"
-            validate={
-              Array [
-                undefined,
-              ]
-            }
           />,
         ]
       }
@@ -1153,11 +1123,6 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
             label="Text Box With Input Addon"
             name="text_box_21"
             title="Text Box With Input Addon"
-            validate={
-              Array [
-                undefined,
-              ]
-            }
           />,
         ]
       }

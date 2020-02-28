@@ -125,11 +125,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
               ]
             }
             name="wizard"
-            validate={
-              Array [
-                undefined,
-              ]
-            }
           />,
         ]
       }
@@ -207,11 +202,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
               ]
             }
             name="wizard"
-            validate={
-              Array [
-                undefined,
-              ]
-            }
           >
             <FormConditionWrapper>
               <FormFieldHideWrapper
@@ -248,11 +238,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                     ]
                   }
                   name="wizard"
-                  validate={
-                    Array [
-                      undefined,
-                    ]
-                  }
                 >
                   <WizardFunction
                     FieldProvider={[Function]}
@@ -605,11 +590,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                       <SingleField
                                         component="text-field"
                                         name="foo-field"
-                                        validate={
-                                          Array [
-                                            undefined,
-                                          ]
-                                        }
                                       >
                                         <FormConditionWrapper>
                                           <FormFieldHideWrapper
@@ -619,11 +599,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                               component={[Function]}
                                               componentType="text-field"
                                               name="foo-field"
-                                              validate={
-                                                Array [
-                                                  undefined,
-                                                ]
-                                              }
                                             >
                                               <TextField
                                                 FieldProvider={[Function]}
@@ -1276,11 +1251,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
             }
             inModal={true}
             name="wizard"
-            validate={
-              Array [
-                undefined,
-              ]
-            }
           />,
         ]
       }
@@ -1360,11 +1330,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
             }
             inModal={true}
             name="wizard"
-            validate={
-              Array [
-                undefined,
-              ]
-            }
           >
             <FormConditionWrapper>
               <FormFieldHideWrapper
@@ -1402,11 +1367,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                   }
                   inModal={true}
                   name="wizard"
-                  validate={
-                    Array [
-                      undefined,
-                    ]
-                  }
                 >
                   <WizardFunction
                     FieldProvider={[Function]}
@@ -1978,11 +1938,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                 <SingleField
                                                   component="text-field"
                                                   name="foo-field"
-                                                  validate={
-                                                    Array [
-                                                      undefined,
-                                                    ]
-                                                  }
                                                 >
                                                   <FormConditionWrapper>
                                                     <FormFieldHideWrapper
@@ -1992,11 +1947,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                         component={[Function]}
                                                         componentType="text-field"
                                                         name="foo-field"
-                                                        validate={
-                                                          Array [
-                                                            undefined,
-                                                          ]
-                                                        }
                                                       >
                                                         <TextField
                                                           FieldProvider={[Function]}

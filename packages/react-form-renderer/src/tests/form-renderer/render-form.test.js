@@ -16,7 +16,7 @@ const TextField = (props) => {
   return (
     <div>
       <input {...input} />
-      {meta.error && <div id="error" />}
+      {meta.error && <div id="error">{meta.error}</div>}
     </div>
   );
 };
@@ -190,6 +190,66 @@ describe('renderForm function', () => {
 
     wrapper.find('form').simulate('submit');
     expect(onSubmit).toHaveBeenCalled();
+  });
+
+  it('should use custom validatoMapper and default validatorMapper', () => {
+    const customType = 'custom';
+    const customValidatorMapper = {
+      [customType]: () => (value) => (value > 5 ? undefined : 'Error')
+    };
+
+    const formFields = [
+      {
+        component: 'custom-component',
+        name: 'foo',
+        validate: [
+          {
+            type: validatorTypes.REQUIRED
+          },
+          {
+            type: customType
+          }
+        ]
+      }
+    ];
+
+    const onSubmit = jest.fn();
+
+    const wrapper = mount(
+      <FormRenderer
+        formTemplate={formTemplate}
+        formFieldsMapper={{
+          'custom-component': CustomComponent
+        }}
+        validatorMapper={customValidatorMapper}
+        schema={formFields}
+        onSubmit={(values) => onSubmit(values)}
+      />
+    );
+
+    expect(wrapper.find('#error').text()).toEqual('Required');
+
+    wrapper
+      .find(Form)
+      .instance()
+      .form.change('bar', '3');
+    wrapper.update();
+
+    expect(wrapper.find('#error').text()).toEqual('Error');
+
+    wrapper.find('form').simulate('submit');
+    expect(onSubmit).not.toHaveBeenCalled();
+
+    wrapper
+      .find(Form)
+      .instance()
+      .form.change('bar', '6');
+    wrapper.update();
+
+    expect(wrapper.find('#error')).toHaveLength(0);
+
+    wrapper.find('form').simulate('submit');
+    expect(onSubmit).toHaveBeenCalledWith({ bar: 6 });
   });
 
   it('should render single field from with custom componentType', () => {
