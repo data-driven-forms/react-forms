@@ -1,5 +1,8 @@
 /* eslint-disable camelcase */
-import { componentTypes as components, validatorTypes as validators } from '@data-driven-forms/react-form-renderer';
+import {
+  componentTypes as components,
+  validatorTypes as validators,
+} from '@data-driven-forms/react-form-renderer';
 
 const output = {
   title: 'Testing dialog',
@@ -64,7 +67,6 @@ const output = {
                   bsSize: 'mn',
                   onText: 'True',
                   offText: 'False',
-                  validate: undefined,
                 },
                 {
                   name: 'text_box_111',
@@ -99,6 +101,64 @@ const output = {
                   title: 'Text Box with help',
                   helperText: 'Helper text',
                   component: components.TEXT_FIELD,
+                },
+                {
+                  name: 'text_box_21',
+                  label: 'Text Box With Input Addon',
+                  title: 'Text Box With Input Addon',
+                  component: components.TEXT_FIELD,
+                  inputAddon: {
+                    before: {
+                      fields: [
+                        {
+                          component: components.INPUT_ADDON_BUTTON_GROUP,
+                          name: 'i-a-g-2',
+                          fields: [
+                            {
+                              component: components.BUTTON,
+                              label: 'Set 1',
+                              name: 'set1',
+                              onClick: () => console.log('fooo'),
+                            },
+                            {
+                              component: components.BUTTON,
+                              label: 'Set 2',
+                              name: 'set2',
+                              onClick: () => console.log('foo2o'),
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                    after: {
+                      fields: [
+                        {
+                          component: components.INPUT_ADDON_GROUP,
+                          name: 'i-a-g-2',
+                          fields: [
+                            {
+                              component: components.PLAIN_TEXT,
+                              label: '-',
+                              name: 'name1',
+                              variant: 'span',
+                            },
+                          ],
+                        },
+                        {
+                          component: components.INPUT_ADDON_BUTTON_GROUP,
+                          name: 'i-a-g-3',
+                          fields: [
+                            {
+                              component: components.BUTTON,
+                              label: 'Set 3',
+                              name: 'set3',
+                              onClick: () => console.log('foo3o'),
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  },
                 },
                 {
                   name: 'text_box_3',

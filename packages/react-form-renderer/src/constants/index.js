@@ -1,4 +1,5 @@
 export const components = {
+  BUTTON: 'button',
   TEXT_FIELD: 'text-field',
   TEXTAREA_FIELD: 'textarea-field',
   FIELD_ARRAY: 'field-array',
@@ -15,6 +16,8 @@ export const components = {
   TEXTAREA: 'textarea-field',
   SELECT: 'select-field',
   PLAIN_TEXT: 'plain-text',
+  INPUT_ADDON_GROUP: 'input-addon-group',
+  INPUT_ADDON_BUTTON_GROUP: 'input-addon-button-group',
 };
   /** Validator functions placeholder */
 export const validators = {
