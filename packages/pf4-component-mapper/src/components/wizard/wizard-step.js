@@ -62,7 +62,8 @@ WizardStep.propTypes = {
   }).isRequired,
   showTitles: PropTypes.bool,
   showTitle: PropTypes.bool,
-  customTitle: PropTypes.node
+  customTitle: PropTypes.node,
+  stepKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 export default WizardStep;

@@ -1,8 +1,5 @@
 /* eslint-disable camelcase */
-import {
-  componentTypes as components,
-  validatorTypes as validators,
-} from '@data-driven-forms/react-form-renderer';
+import { componentTypes as components, validatorTypes as validators } from '@data-driven-forms/react-form-renderer';
 
 const output = {
   title: 'Testing dialog',
@@ -66,7 +63,7 @@ const output = {
                   component: components.SWITCH,
                   bsSize: 'mn',
                   onText: 'True',
-                  offText: 'False',
+                  offText: 'False'
                 },
                 {
                   name: 'text_box_111',
@@ -118,17 +115,17 @@ const output = {
                               component: components.BUTTON,
                               label: 'Set 1',
                               name: 'set1',
-                              onClick: () => console.log('fooo'),
+                              onClick: () => console.log('fooo')
                             },
                             {
                               component: components.BUTTON,
                               label: 'Set 2',
                               name: 'set2',
-                              onClick: () => console.log('foo2o'),
-                            },
-                          ],
-                        },
-                      ],
+                              onClick: () => console.log('foo2o')
+                            }
+                          ]
+                        }
+                      ]
                     },
                     after: {
                       fields: [
@@ -140,9 +137,9 @@ const output = {
                               component: components.PLAIN_TEXT,
                               label: '-',
                               name: 'name1',
-                              variant: 'span',
-                            },
-                          ],
+                              variant: 'span'
+                            }
+                          ]
                         },
                         {
                           component: components.INPUT_ADDON_BUTTON_GROUP,
@@ -152,13 +149,13 @@ const output = {
                               component: components.BUTTON,
                               label: 'Set 3',
                               name: 'set3',
-                              onClick: () => console.log('foo3o'),
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                  },
+                              onClick: () => console.log('foo3o')
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
                 },
                 {
                   name: 'text_box_3',

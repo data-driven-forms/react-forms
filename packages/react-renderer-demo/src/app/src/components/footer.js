@@ -106,20 +106,21 @@ const Footer = ({ open }) => {
                   </ListSubheader>
                 }
               >
-                <RepoLink
-                  href="https://github.com/data-driven-forms/react-forms"
-                  label="React forms"
-                />
-                <ListSubheader className={ classes.listHeader }>Link to &nbsp; <SvgIcon><DiscordIcon /></SvgIcon></ListSubheader>
-                <RepoLink
-                  href="https://discord.gg/6sBw6WM"
-                  label="Discord server"
-                />
-                <ListSubheader className={ classes.listHeader }>Link to &nbsp; <SvgIcon><TwitterIcon /></SvgIcon></ListSubheader>
-                <RepoLink
-                  href="https://twitter.com/DataDrivenForms"
-                  label="@DataDrivenForms"
-                />
+                <RepoLink href="https://github.com/data-driven-forms/react-forms" label="React forms" />
+                <ListSubheader className={classes.listHeader}>
+                  Link to &nbsp;{' '}
+                  <SvgIcon>
+                    <DiscordIcon />
+                  </SvgIcon>
+                </ListSubheader>
+                <RepoLink href="https://discord.gg/6sBw6WM" label="Discord server" />
+                <ListSubheader className={classes.listHeader}>
+                  Link to &nbsp;{' '}
+                  <SvgIcon>
+                    <TwitterIcon />
+                  </SvgIcon>
+                </ListSubheader>
+                <RepoLink href="https://twitter.com/DataDrivenForms" label="@DataDrivenForms" />
               </List>
               <List
                 subheader={

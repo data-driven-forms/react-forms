@@ -37,7 +37,7 @@ export const length = memoize(({ '=': equal, is, max, maximum, min, minimum, mes
 
 export const pattern = memoize(({ pattern, message, flags } = {}) => {
   const verifiedPattern = typeof pattern === 'string' ? new RegExp(pattern, flags) : pattern;
-  return prepare(value => {
+  return prepare((value) => {
     if (!value) {
       return;
     }

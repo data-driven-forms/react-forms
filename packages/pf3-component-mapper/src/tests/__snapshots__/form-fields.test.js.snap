@@ -45,37 +45,35 @@ exports[`FormFields <Checkbox /> should render single checkbox variant 1`] = `
             <div
               className="form-group"
             >
-              <InputGroupWrapper>
-                <Checkbox
-                  bsClass="checkbox"
-                  disabled={false}
-                  inline={false}
-                  name="single-check-box"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  title=""
-                  value=""
+              <Checkbox
+                bsClass="checkbox"
+                disabled={false}
+                inline={false}
+                name="single-check-box"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                title=""
+                value=""
+              >
+                <div
+                  className="checkbox"
                 >
-                  <div
-                    className="checkbox"
+                  <label
+                    title=""
                   >
-                    <label
-                      title=""
-                    >
-                      <input
-                        disabled={false}
-                        name="single-check-box"
-                        onBlur={[Function]}
-                        onChange={[Function]}
-                        onFocus={[Function]}
-                        type="checkbox"
-                        value=""
-                      />
-                    </label>
-                  </div>
-                </Checkbox>
-              </InputGroupWrapper>
+                    <input
+                      disabled={false}
+                      name="single-check-box"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      type="checkbox"
+                      value=""
+                    />
+                  </label>
+                </div>
+              </Checkbox>
             </div>
           </FormGroup>
         </FormGroup>
@@ -132,95 +130,93 @@ exports[`FormFields <Checkbox /> should render single checkbox variant with a he
             <div
               className="form-group"
             >
-              <InputGroupWrapper>
-                <Checkbox
-                  bsClass="checkbox"
-                  disabled={false}
-                  inline={false}
-                  name="single-check-box"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  title=""
-                  value=""
+              <Checkbox
+                bsClass="checkbox"
+                disabled={false}
+                inline={false}
+                name="single-check-box"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                title=""
+                value=""
+              >
+                <div
+                  className="checkbox"
                 >
-                  <div
-                    className="checkbox"
+                  <label
+                    title=""
                   >
-                    <label
-                      title=""
+                    <input
+                      disabled={false}
+                      name="single-check-box"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      type="checkbox"
+                      value=""
+                    />
+                    <FieldLevelHelp
+                      buttonClass=""
+                      content="Helper text"
+                      placement="top"
+                      rootClose={true}
                     >
-                      <input
-                        disabled={false}
-                        name="single-check-box"
-                        onBlur={[Function]}
-                        onChange={[Function]}
-                        onFocus={[Function]}
-                        type="checkbox"
-                        value=""
-                      />
-                      <FieldLevelHelp
-                        buttonClass=""
-                        content="Helper text"
+                      <OverlayTrigger
+                        defaultOverlayShown={false}
+                        overlay={
+                          <Popover
+                            bsClass="popover"
+                            id="popover"
+                            placement="right"
+                          >
+                            Helper text
+                          </Popover>
+                        }
                         placement="top"
                         rootClose={true}
+                        trigger={
+                          Array [
+                            "click",
+                          ]
+                        }
                       >
-                        <OverlayTrigger
-                          defaultOverlayShown={false}
-                          overlay={
-                            <Popover
-                              bsClass="popover"
-                              id="popover"
-                              placement="right"
-                            >
-                              Helper text
-                            </Popover>
-                          }
-                          placement="top"
-                          rootClose={true}
-                          trigger={
-                            Array [
-                              "click",
-                            ]
-                          }
+                        <Button
+                          active={false}
+                          block={false}
+                          bsClass="btn"
+                          bsStyle="link"
+                          className="popover-pf-info"
+                          disabled={false}
+                          onClick={[Function]}
                         >
-                          <Button
-                            active={false}
-                            block={false}
-                            bsClass="btn"
-                            bsStyle="link"
-                            className="popover-pf-info"
+                          <button
+                            className="popover-pf-info btn btn-link"
                             disabled={false}
                             onClick={[Function]}
+                            type="button"
                           >
-                            <button
-                              className="popover-pf-info btn btn-link"
-                              disabled={false}
-                              onClick={[Function]}
-                              type="button"
+                            <Icon
+                              name="info"
+                              type="pf"
                             >
-                              <Icon
+                              <PatternflyIcon
+                                className=""
                                 name="info"
-                                type="pf"
                               >
-                                <PatternflyIcon
-                                  className=""
-                                  name="info"
-                                >
-                                  <span
-                                    aria-hidden="true"
-                                    className="pficon pficon-info"
-                                  />
-                                </PatternflyIcon>
-                              </Icon>
-                            </button>
-                          </Button>
-                        </OverlayTrigger>
-                      </FieldLevelHelp>
-                    </label>
-                  </div>
-                </Checkbox>
-              </InputGroupWrapper>
+                                <span
+                                  aria-hidden="true"
+                                  className="pficon pficon-info"
+                                />
+                              </PatternflyIcon>
+                            </Icon>
+                          </button>
+                        </Button>
+                      </OverlayTrigger>
+                    </FieldLevelHelp>
+                  </label>
+                </div>
+              </Checkbox>
             </div>
           </FormGroup>
         </FormGroup>
@@ -281,98 +277,96 @@ exports[`FormFields <Radio /> should render correctly 1`] = `
           <div
             className="form-group"
           >
-            <InputGroupWrapper>
-              <RadioOption
-                key="1"
-                name="radio"
-                option={
-                  Object {
-                    "label": "option 1",
-                    "value": 1,
-                  }
+            <RadioOption
+              key="1"
+              name="radio"
+              option={
+                Object {
+                  "label": "option 1",
+                  "value": 1,
                 }
-              >
-                <Radio
-                  bsClass="radio"
-                  checked={false}
-                  disabled={false}
-                  inline={false}
-                  key="radio-1"
-                  name="radio"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  title=""
-                  type="radio"
-                  value={1}
-                >
-                  <div
-                    className="radio"
-                  >
-                    <label
-                      title=""
-                    >
-                      <input
-                        checked={false}
-                        disabled={false}
-                        name="radio"
-                        onBlur={[Function]}
-                        onChange={[Function]}
-                        onFocus={[Function]}
-                        type="radio"
-                        value={1}
-                      />
-                      option 1
-                    </label>
-                  </div>
-                </Radio>
-              </RadioOption>
-              <RadioOption
-                key="2"
+              }
+            >
+              <Radio
+                bsClass="radio"
+                checked={false}
+                disabled={false}
+                inline={false}
+                key="radio-1"
                 name="radio"
-                option={
-                  Object {
-                    "label": "option 2",
-                    "value": 2,
-                  }
-                }
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                title=""
+                type="radio"
+                value={1}
               >
-                <Radio
-                  bsClass="radio"
-                  checked={false}
-                  disabled={false}
-                  inline={false}
-                  key="radio-2"
-                  name="radio"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  title=""
-                  type="radio"
-                  value={2}
+                <div
+                  className="radio"
                 >
-                  <div
-                    className="radio"
+                  <label
+                    title=""
                   >
-                    <label
-                      title=""
-                    >
-                      <input
-                        checked={false}
-                        disabled={false}
-                        name="radio"
-                        onBlur={[Function]}
-                        onChange={[Function]}
-                        onFocus={[Function]}
-                        type="radio"
-                        value={2}
-                      />
-                      option 2
-                    </label>
-                  </div>
-                </Radio>
-              </RadioOption>
-            </InputGroupWrapper>
+                    <input
+                      checked={false}
+                      disabled={false}
+                      name="radio"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      type="radio"
+                      value={1}
+                    />
+                    option 1
+                  </label>
+                </div>
+              </Radio>
+            </RadioOption>
+            <RadioOption
+              key="2"
+              name="radio"
+              option={
+                Object {
+                  "label": "option 2",
+                  "value": 2,
+                }
+              }
+            >
+              <Radio
+                bsClass="radio"
+                checked={false}
+                disabled={false}
+                inline={false}
+                key="radio-2"
+                name="radio"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                title=""
+                type="radio"
+                value={2}
+              >
+                <div
+                  className="radio"
+                >
+                  <label
+                    title=""
+                  >
+                    <input
+                      checked={false}
+                      disabled={false}
+                      name="radio"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      type="radio"
+                      value={2}
+                    />
+                    option 2
+                  </label>
+                </div>
+              </Radio>
+            </RadioOption>
           </div>
         </FormGroup>
       </FormGroup>
@@ -442,96 +436,94 @@ exports[`FormFields <Switch /> should render Switch correctly 1`] = `
           <div
             className="form-group"
           >
-            <InputGroupWrapper>
-              <Switch
-                FieldProvider={[Function]}
-                checked={true}
-                dataType="someDataType"
-                formOptions={
-                  Object {
-                    "handleSubmit": [MockFunction],
-                  }
+            <Switch
+              FieldProvider={[Function]}
+              checked={true}
+              dataType="someDataType"
+              formOptions={
+                Object {
+                  "handleSubmit": [MockFunction],
                 }
-                id="someIdKey"
-                offText="OFF"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                onText="ON"
-                type="checkbox"
-              >
-                <div>
-                  <label
-                    className="pf3-switch"
-                    onKeyDown={[Function]}
-                    style={
+              }
+              id="someIdKey"
+              offText="OFF"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onText="ON"
+              type="checkbox"
+            >
+              <div>
+                <label
+                  className="pf3-switch"
+                  onKeyDown={[Function]}
+                  style={
+                    Object {
+                      "width": 80,
+                    }
+                  }
+                  tabIndex={0}
+                >
+                  <input
+                    FieldProvider={[Function]}
+                    checked={true}
+                    dataType="someDataType"
+                    formOptions={
                       Object {
-                        "width": 80,
+                        "handleSubmit": [MockFunction],
                       }
                     }
-                    tabIndex={0}
+                    id="someIdKey"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="checkbox"
+                  />
+                  <span
+                    className="pf3-switch-slider checked"
                   >
-                    <input
-                      FieldProvider={[Function]}
-                      checked={true}
-                      dataType="someDataType"
-                      formOptions={
+                    <span
+                      className="on-text"
+                      style={
                         Object {
-                          "handleSubmit": [MockFunction],
+                          "WebkitTransform": "translateX(46px)",
+                          "left": -46,
+                          "msTransform": "translateX(46px)",
+                          "transform": "translateX(46px)",
+                          "width": 46,
                         }
                       }
-                      id="someIdKey"
-                      onBlur={[Function]}
-                      onChange={[Function]}
-                      onFocus={[Function]}
-                      type="checkbox"
+                    >
+                      ON
+                    </span>
+                    <span
+                      className="divider"
+                      style={
+                        Object {
+                          "WebkitTransform": "translateX(46px)",
+                          "msTransform": "translateX(46px)",
+                          "transform": "translateX(46px)",
+                        }
+                      }
                     />
                     <span
-                      className="pf3-switch-slider checked"
+                      className="off-text"
+                      style={
+                        Object {
+                          "WebkitTransform": "translateX(80px)",
+                          "left": 34,
+                          "msTransform": "translateX(80px)",
+                          "transform": "translateX(80px)",
+                          "width": 46,
+                        }
+                      }
                     >
-                      <span
-                        className="on-text"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(46px)",
-                            "left": -46,
-                            "msTransform": "translateX(46px)",
-                            "transform": "translateX(46px)",
-                            "width": 46,
-                          }
-                        }
-                      >
-                        ON
-                      </span>
-                      <span
-                        className="divider"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(46px)",
-                            "msTransform": "translateX(46px)",
-                            "transform": "translateX(46px)",
-                          }
-                        }
-                      />
-                      <span
-                        className="off-text"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(80px)",
-                            "left": 34,
-                            "msTransform": "translateX(80px)",
-                            "transform": "translateX(80px)",
-                            "width": 46,
-                          }
-                        }
-                      >
-                        OFF
-                      </span>
+                      OFF
                     </span>
-                  </label>
-                </div>
-              </Switch>
-            </InputGroupWrapper>
+                  </span>
+                </label>
+              </div>
+            </Switch>
           </div>
         </FormGroup>
       </FormGroup>
@@ -613,96 +605,94 @@ exports[`FormFields <Switch /> should render Switch with label correctly 1`] = `
                 Label
               </label>
             </ControlLabel>
-            <InputGroupWrapper>
-              <Switch
-                FieldProvider={[Function]}
-                checked={true}
-                dataType="someDataType"
-                formOptions={
-                  Object {
-                    "handleSubmit": [MockFunction],
-                  }
+            <Switch
+              FieldProvider={[Function]}
+              checked={true}
+              dataType="someDataType"
+              formOptions={
+                Object {
+                  "handleSubmit": [MockFunction],
                 }
-                id="someIdKey"
-                offText="OFF"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                onText="ON"
-                type="checkbox"
-              >
-                <div>
-                  <label
-                    className="pf3-switch"
-                    onKeyDown={[Function]}
-                    style={
+              }
+              id="someIdKey"
+              offText="OFF"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onText="ON"
+              type="checkbox"
+            >
+              <div>
+                <label
+                  className="pf3-switch"
+                  onKeyDown={[Function]}
+                  style={
+                    Object {
+                      "width": 80,
+                    }
+                  }
+                  tabIndex={0}
+                >
+                  <input
+                    FieldProvider={[Function]}
+                    checked={true}
+                    dataType="someDataType"
+                    formOptions={
                       Object {
-                        "width": 80,
+                        "handleSubmit": [MockFunction],
                       }
                     }
-                    tabIndex={0}
+                    id="someIdKey"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="checkbox"
+                  />
+                  <span
+                    className="pf3-switch-slider checked"
                   >
-                    <input
-                      FieldProvider={[Function]}
-                      checked={true}
-                      dataType="someDataType"
-                      formOptions={
+                    <span
+                      className="on-text"
+                      style={
                         Object {
-                          "handleSubmit": [MockFunction],
+                          "WebkitTransform": "translateX(46px)",
+                          "left": -46,
+                          "msTransform": "translateX(46px)",
+                          "transform": "translateX(46px)",
+                          "width": 46,
                         }
                       }
-                      id="someIdKey"
-                      onBlur={[Function]}
-                      onChange={[Function]}
-                      onFocus={[Function]}
-                      type="checkbox"
+                    >
+                      ON
+                    </span>
+                    <span
+                      className="divider"
+                      style={
+                        Object {
+                          "WebkitTransform": "translateX(46px)",
+                          "msTransform": "translateX(46px)",
+                          "transform": "translateX(46px)",
+                        }
+                      }
                     />
                     <span
-                      className="pf3-switch-slider checked"
+                      className="off-text"
+                      style={
+                        Object {
+                          "WebkitTransform": "translateX(80px)",
+                          "left": 34,
+                          "msTransform": "translateX(80px)",
+                          "transform": "translateX(80px)",
+                          "width": 46,
+                        }
+                      }
                     >
-                      <span
-                        className="on-text"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(46px)",
-                            "left": -46,
-                            "msTransform": "translateX(46px)",
-                            "transform": "translateX(46px)",
-                            "width": 46,
-                          }
-                        }
-                      >
-                        ON
-                      </span>
-                      <span
-                        className="divider"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(46px)",
-                            "msTransform": "translateX(46px)",
-                            "transform": "translateX(46px)",
-                          }
-                        }
-                      />
-                      <span
-                        className="off-text"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(80px)",
-                            "left": 34,
-                            "msTransform": "translateX(80px)",
-                            "transform": "translateX(80px)",
-                            "width": 46,
-                          }
-                        }
-                      >
-                        OFF
-                      </span>
+                      OFF
                     </span>
-                  </label>
-                </div>
-              </Switch>
-            </InputGroupWrapper>
+                  </span>
+                </label>
+              </div>
+            </Switch>
           </div>
         </FormGroup>
       </FormGroup>
@@ -773,96 +763,94 @@ exports[`FormFields <Switch /> should render Switch with onText (custom prop) co
           <div
             className="form-group"
           >
-            <InputGroupWrapper>
-              <Switch
-                FieldProvider={[Function]}
-                checked={true}
-                dataType="someDataType"
-                formOptions={
-                  Object {
-                    "handleSubmit": [MockFunction],
-                  }
+            <Switch
+              FieldProvider={[Function]}
+              checked={true}
+              dataType="someDataType"
+              formOptions={
+                Object {
+                  "handleSubmit": [MockFunction],
                 }
-                id="someIdKey"
-                offText="OFF"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                onText="OnText"
-                type="checkbox"
-              >
-                <div>
-                  <label
-                    className="pf3-switch"
-                    onKeyDown={[Function]}
-                    style={
+              }
+              id="someIdKey"
+              offText="OFF"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onText="OnText"
+              type="checkbox"
+            >
+              <div>
+                <label
+                  className="pf3-switch"
+                  onKeyDown={[Function]}
+                  style={
+                    Object {
+                      "width": 80,
+                    }
+                  }
+                  tabIndex={0}
+                >
+                  <input
+                    FieldProvider={[Function]}
+                    checked={true}
+                    dataType="someDataType"
+                    formOptions={
                       Object {
-                        "width": 80,
+                        "handleSubmit": [MockFunction],
                       }
                     }
-                    tabIndex={0}
+                    id="someIdKey"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="checkbox"
+                  />
+                  <span
+                    className="pf3-switch-slider checked"
                   >
-                    <input
-                      FieldProvider={[Function]}
-                      checked={true}
-                      dataType="someDataType"
-                      formOptions={
+                    <span
+                      className="on-text"
+                      style={
                         Object {
-                          "handleSubmit": [MockFunction],
+                          "WebkitTransform": "translateX(46px)",
+                          "left": -46,
+                          "msTransform": "translateX(46px)",
+                          "transform": "translateX(46px)",
+                          "width": 46,
                         }
                       }
-                      id="someIdKey"
-                      onBlur={[Function]}
-                      onChange={[Function]}
-                      onFocus={[Function]}
-                      type="checkbox"
+                    >
+                      OnText
+                    </span>
+                    <span
+                      className="divider"
+                      style={
+                        Object {
+                          "WebkitTransform": "translateX(46px)",
+                          "msTransform": "translateX(46px)",
+                          "transform": "translateX(46px)",
+                        }
+                      }
                     />
                     <span
-                      className="pf3-switch-slider checked"
+                      className="off-text"
+                      style={
+                        Object {
+                          "WebkitTransform": "translateX(80px)",
+                          "left": 34,
+                          "msTransform": "translateX(80px)",
+                          "transform": "translateX(80px)",
+                          "width": 46,
+                        }
+                      }
                     >
-                      <span
-                        className="on-text"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(46px)",
-                            "left": -46,
-                            "msTransform": "translateX(46px)",
-                            "transform": "translateX(46px)",
-                            "width": 46,
-                          }
-                        }
-                      >
-                        OnText
-                      </span>
-                      <span
-                        className="divider"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(46px)",
-                            "msTransform": "translateX(46px)",
-                            "transform": "translateX(46px)",
-                          }
-                        }
-                      />
-                      <span
-                        className="off-text"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(80px)",
-                            "left": 34,
-                            "msTransform": "translateX(80px)",
-                            "transform": "translateX(80px)",
-                            "width": 46,
-                          }
-                        }
-                      >
-                        OFF
-                      </span>
+                      OFF
                     </span>
-                  </label>
-                </div>
-              </Switch>
-            </InputGroupWrapper>
+                  </span>
+                </label>
+              </div>
+            </Switch>
           </div>
         </FormGroup>
       </FormGroup>
@@ -933,96 +921,94 @@ exports[`FormFields <Switch /> should render Switch with placeholder correctly 1
           <div
             className="form-group"
           >
-            <InputGroupWrapper>
-              <Switch
-                FieldProvider={[Function]}
-                checked={true}
-                dataType="someDataType"
-                formOptions={
-                  Object {
-                    "handleSubmit": [MockFunction],
-                  }
+            <Switch
+              FieldProvider={[Function]}
+              checked={true}
+              dataType="someDataType"
+              formOptions={
+                Object {
+                  "handleSubmit": [MockFunction],
                 }
-                id="someIdKey"
-                offText="OFF"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                onText="ON"
-                type="checkbox"
-              >
-                <div>
-                  <label
-                    className="pf3-switch"
-                    onKeyDown={[Function]}
-                    style={
+              }
+              id="someIdKey"
+              offText="OFF"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onText="ON"
+              type="checkbox"
+            >
+              <div>
+                <label
+                  className="pf3-switch"
+                  onKeyDown={[Function]}
+                  style={
+                    Object {
+                      "width": 80,
+                    }
+                  }
+                  tabIndex={0}
+                >
+                  <input
+                    FieldProvider={[Function]}
+                    checked={true}
+                    dataType="someDataType"
+                    formOptions={
                       Object {
-                        "width": 80,
+                        "handleSubmit": [MockFunction],
                       }
                     }
-                    tabIndex={0}
+                    id="someIdKey"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="checkbox"
+                  />
+                  <span
+                    className="pf3-switch-slider checked"
                   >
-                    <input
-                      FieldProvider={[Function]}
-                      checked={true}
-                      dataType="someDataType"
-                      formOptions={
+                    <span
+                      className="on-text"
+                      style={
                         Object {
-                          "handleSubmit": [MockFunction],
+                          "WebkitTransform": "translateX(46px)",
+                          "left": -46,
+                          "msTransform": "translateX(46px)",
+                          "transform": "translateX(46px)",
+                          "width": 46,
                         }
                       }
-                      id="someIdKey"
-                      onBlur={[Function]}
-                      onChange={[Function]}
-                      onFocus={[Function]}
-                      type="checkbox"
+                    >
+                      ON
+                    </span>
+                    <span
+                      className="divider"
+                      style={
+                        Object {
+                          "WebkitTransform": "translateX(46px)",
+                          "msTransform": "translateX(46px)",
+                          "transform": "translateX(46px)",
+                        }
+                      }
                     />
                     <span
-                      className="pf3-switch-slider checked"
+                      className="off-text"
+                      style={
+                        Object {
+                          "WebkitTransform": "translateX(80px)",
+                          "left": 34,
+                          "msTransform": "translateX(80px)",
+                          "transform": "translateX(80px)",
+                          "width": 46,
+                        }
+                      }
                     >
-                      <span
-                        className="on-text"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(46px)",
-                            "left": -46,
-                            "msTransform": "translateX(46px)",
-                            "transform": "translateX(46px)",
-                            "width": 46,
-                          }
-                        }
-                      >
-                        ON
-                      </span>
-                      <span
-                        className="divider"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(46px)",
-                            "msTransform": "translateX(46px)",
-                            "transform": "translateX(46px)",
-                          }
-                        }
-                      />
-                      <span
-                        className="off-text"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(80px)",
-                            "left": 34,
-                            "msTransform": "translateX(80px)",
-                            "transform": "translateX(80px)",
-                            "width": 46,
-                          }
-                        }
-                      >
-                        OFF
-                      </span>
+                      OFF
                     </span>
-                  </label>
-                </div>
-              </Switch>
-            </InputGroupWrapper>
+                  </span>
+                </label>
+              </div>
+            </Switch>
           </div>
         </FormGroup>
       </FormGroup>
@@ -1093,98 +1079,96 @@ exports[`FormFields <Switch /> should render disabled Switch correctly 1`] = `
           <div
             className="form-group"
           >
-            <InputGroupWrapper>
-              <Switch
-                FieldProvider={[Function]}
-                checked={true}
-                dataType="someDataType"
-                disabled={true}
-                formOptions={
-                  Object {
-                    "handleSubmit": [MockFunction],
-                  }
+            <Switch
+              FieldProvider={[Function]}
+              checked={true}
+              dataType="someDataType"
+              disabled={true}
+              formOptions={
+                Object {
+                  "handleSubmit": [MockFunction],
                 }
-                id="someIdKey"
-                offText="OFF"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                onText="ON"
-                type="checkbox"
-              >
-                <div>
-                  <label
-                    className="pf3-switch disabled"
-                    onKeyDown={[Function]}
-                    style={
+              }
+              id="someIdKey"
+              offText="OFF"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onText="ON"
+              type="checkbox"
+            >
+              <div>
+                <label
+                  className="pf3-switch disabled"
+                  onKeyDown={[Function]}
+                  style={
+                    Object {
+                      "width": 80,
+                    }
+                  }
+                  tabIndex={-1}
+                >
+                  <input
+                    FieldProvider={[Function]}
+                    checked={true}
+                    dataType="someDataType"
+                    disabled={true}
+                    formOptions={
                       Object {
-                        "width": 80,
+                        "handleSubmit": [MockFunction],
                       }
                     }
-                    tabIndex={-1}
+                    id="someIdKey"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="checkbox"
+                  />
+                  <span
+                    className="pf3-switch-slider checked"
                   >
-                    <input
-                      FieldProvider={[Function]}
-                      checked={true}
-                      dataType="someDataType"
-                      disabled={true}
-                      formOptions={
+                    <span
+                      className="on-text"
+                      style={
                         Object {
-                          "handleSubmit": [MockFunction],
+                          "WebkitTransform": "translateX(46px)",
+                          "left": -46,
+                          "msTransform": "translateX(46px)",
+                          "transform": "translateX(46px)",
+                          "width": 46,
                         }
                       }
-                      id="someIdKey"
-                      onBlur={[Function]}
-                      onChange={[Function]}
-                      onFocus={[Function]}
-                      type="checkbox"
+                    >
+                      ON
+                    </span>
+                    <span
+                      className="divider"
+                      style={
+                        Object {
+                          "WebkitTransform": "translateX(46px)",
+                          "msTransform": "translateX(46px)",
+                          "transform": "translateX(46px)",
+                        }
+                      }
                     />
                     <span
-                      className="pf3-switch-slider checked"
+                      className="off-text"
+                      style={
+                        Object {
+                          "WebkitTransform": "translateX(80px)",
+                          "left": 34,
+                          "msTransform": "translateX(80px)",
+                          "transform": "translateX(80px)",
+                          "width": 46,
+                        }
+                      }
                     >
-                      <span
-                        className="on-text"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(46px)",
-                            "left": -46,
-                            "msTransform": "translateX(46px)",
-                            "transform": "translateX(46px)",
-                            "width": 46,
-                          }
-                        }
-                      >
-                        ON
-                      </span>
-                      <span
-                        className="divider"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(46px)",
-                            "msTransform": "translateX(46px)",
-                            "transform": "translateX(46px)",
-                          }
-                        }
-                      />
-                      <span
-                        className="off-text"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(80px)",
-                            "left": 34,
-                            "msTransform": "translateX(80px)",
-                            "transform": "translateX(80px)",
-                            "width": 46,
-                          }
-                        }
-                      >
-                        OFF
-                      </span>
+                      OFF
                     </span>
-                  </label>
-                </div>
-              </Switch>
-            </InputGroupWrapper>
+                  </span>
+                </label>
+              </div>
+            </Switch>
           </div>
         </FormGroup>
       </FormGroup>
@@ -1255,97 +1239,95 @@ exports[`FormFields <Switch /> should render mini Switch correctly 1`] = `
           <div
             className="form-group"
           >
-            <InputGroupWrapper>
-              <Switch
-                FieldProvider={[Function]}
-                bsSize="mini"
-                checked={true}
-                dataType="someDataType"
-                formOptions={
-                  Object {
-                    "handleSubmit": [MockFunction],
-                  }
+            <Switch
+              FieldProvider={[Function]}
+              bsSize="mini"
+              checked={true}
+              dataType="someDataType"
+              formOptions={
+                Object {
+                  "handleSubmit": [MockFunction],
                 }
-                id="someIdKey"
-                offText="OFF"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                onText="ON"
-                type="checkbox"
-              >
-                <div>
-                  <label
-                    className="pf3-switch mini"
-                    onKeyDown={[Function]}
-                    style={
+              }
+              id="someIdKey"
+              offText="OFF"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onText="ON"
+              type="checkbox"
+            >
+              <div>
+                <label
+                  className="pf3-switch mini"
+                  onKeyDown={[Function]}
+                  style={
+                    Object {
+                      "width": 80,
+                    }
+                  }
+                  tabIndex={0}
+                >
+                  <input
+                    FieldProvider={[Function]}
+                    checked={true}
+                    dataType="someDataType"
+                    formOptions={
                       Object {
-                        "width": 80,
+                        "handleSubmit": [MockFunction],
                       }
                     }
-                    tabIndex={0}
+                    id="someIdKey"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="checkbox"
+                  />
+                  <span
+                    className="pf3-switch-slider checked"
                   >
-                    <input
-                      FieldProvider={[Function]}
-                      checked={true}
-                      dataType="someDataType"
-                      formOptions={
+                    <span
+                      className="on-text"
+                      style={
                         Object {
-                          "handleSubmit": [MockFunction],
+                          "WebkitTransform": "translateX(46px)",
+                          "left": -46,
+                          "msTransform": "translateX(46px)",
+                          "transform": "translateX(46px)",
+                          "width": 46,
                         }
                       }
-                      id="someIdKey"
-                      onBlur={[Function]}
-                      onChange={[Function]}
-                      onFocus={[Function]}
-                      type="checkbox"
+                    >
+                      ON
+                    </span>
+                    <span
+                      className="divider"
+                      style={
+                        Object {
+                          "WebkitTransform": "translateX(46px)",
+                          "msTransform": "translateX(46px)",
+                          "transform": "translateX(46px)",
+                        }
+                      }
                     />
                     <span
-                      className="pf3-switch-slider checked"
+                      className="off-text"
+                      style={
+                        Object {
+                          "WebkitTransform": "translateX(80px)",
+                          "left": 34,
+                          "msTransform": "translateX(80px)",
+                          "transform": "translateX(80px)",
+                          "width": 46,
+                        }
+                      }
                     >
-                      <span
-                        className="on-text"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(46px)",
-                            "left": -46,
-                            "msTransform": "translateX(46px)",
-                            "transform": "translateX(46px)",
-                            "width": 46,
-                          }
-                        }
-                      >
-                        ON
-                      </span>
-                      <span
-                        className="divider"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(46px)",
-                            "msTransform": "translateX(46px)",
-                            "transform": "translateX(46px)",
-                          }
-                        }
-                      />
-                      <span
-                        className="off-text"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(80px)",
-                            "left": 34,
-                            "msTransform": "translateX(80px)",
-                            "transform": "translateX(80px)",
-                            "width": 46,
-                          }
-                        }
-                      >
-                        OFF
-                      </span>
+                      OFF
                     </span>
-                  </label>
-                </div>
-              </Switch>
-            </InputGroupWrapper>
+                  </span>
+                </label>
+              </div>
+            </Switch>
           </div>
         </FormGroup>
       </FormGroup>
@@ -1416,98 +1398,96 @@ exports[`FormFields <Switch /> should render readOnly Switch correctly 1`] = `
           <div
             className="form-group"
           >
-            <InputGroupWrapper>
-              <Switch
-                FieldProvider={[Function]}
-                checked={true}
-                dataType="someDataType"
-                formOptions={
-                  Object {
-                    "handleSubmit": [MockFunction],
-                  }
+            <Switch
+              FieldProvider={[Function]}
+              checked={true}
+              dataType="someDataType"
+              formOptions={
+                Object {
+                  "handleSubmit": [MockFunction],
                 }
-                id="someIdKey"
-                isReadOnly={true}
-                offText="OFF"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                onText="ON"
-                type="checkbox"
-              >
-                <div>
-                  <label
-                    className="pf3-switch disabled"
-                    onKeyDown={[Function]}
-                    style={
+              }
+              id="someIdKey"
+              isReadOnly={true}
+              offText="OFF"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onText="ON"
+              type="checkbox"
+            >
+              <div>
+                <label
+                  className="pf3-switch disabled"
+                  onKeyDown={[Function]}
+                  style={
+                    Object {
+                      "width": 80,
+                    }
+                  }
+                  tabIndex={-1}
+                >
+                  <input
+                    FieldProvider={[Function]}
+                    checked={true}
+                    dataType="someDataType"
+                    disabled={true}
+                    formOptions={
                       Object {
-                        "width": 80,
+                        "handleSubmit": [MockFunction],
                       }
                     }
-                    tabIndex={-1}
+                    id="someIdKey"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="checkbox"
+                  />
+                  <span
+                    className="pf3-switch-slider checked"
                   >
-                    <input
-                      FieldProvider={[Function]}
-                      checked={true}
-                      dataType="someDataType"
-                      disabled={true}
-                      formOptions={
+                    <span
+                      className="on-text"
+                      style={
                         Object {
-                          "handleSubmit": [MockFunction],
+                          "WebkitTransform": "translateX(46px)",
+                          "left": -46,
+                          "msTransform": "translateX(46px)",
+                          "transform": "translateX(46px)",
+                          "width": 46,
                         }
                       }
-                      id="someIdKey"
-                      onBlur={[Function]}
-                      onChange={[Function]}
-                      onFocus={[Function]}
-                      type="checkbox"
+                    >
+                      ON
+                    </span>
+                    <span
+                      className="divider"
+                      style={
+                        Object {
+                          "WebkitTransform": "translateX(46px)",
+                          "msTransform": "translateX(46px)",
+                          "transform": "translateX(46px)",
+                        }
+                      }
                     />
                     <span
-                      className="pf3-switch-slider checked"
+                      className="off-text"
+                      style={
+                        Object {
+                          "WebkitTransform": "translateX(80px)",
+                          "left": 34,
+                          "msTransform": "translateX(80px)",
+                          "transform": "translateX(80px)",
+                          "width": 46,
+                        }
+                      }
                     >
-                      <span
-                        className="on-text"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(46px)",
-                            "left": -46,
-                            "msTransform": "translateX(46px)",
-                            "transform": "translateX(46px)",
-                            "width": 46,
-                          }
-                        }
-                      >
-                        ON
-                      </span>
-                      <span
-                        className="divider"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(46px)",
-                            "msTransform": "translateX(46px)",
-                            "transform": "translateX(46px)",
-                          }
-                        }
-                      />
-                      <span
-                        className="off-text"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(80px)",
-                            "left": 34,
-                            "msTransform": "translateX(80px)",
-                            "transform": "translateX(80px)",
-                            "width": 46,
-                          }
-                        }
-                      >
-                        OFF
-                      </span>
+                      OFF
                     </span>
-                  </label>
-                </div>
-              </Switch>
-            </InputGroupWrapper>
+                  </span>
+                </label>
+              </div>
+            </Switch>
           </div>
         </FormGroup>
       </FormGroup>
@@ -1578,97 +1558,95 @@ exports[`FormFields <Switch /> should render sm Switch correctly 1`] = `
           <div
             className="form-group"
           >
-            <InputGroupWrapper>
-              <Switch
-                FieldProvider={[Function]}
-                bsSize="mn"
-                checked={true}
-                dataType="someDataType"
-                formOptions={
-                  Object {
-                    "handleSubmit": [MockFunction],
-                  }
+            <Switch
+              FieldProvider={[Function]}
+              bsSize="mn"
+              checked={true}
+              dataType="someDataType"
+              formOptions={
+                Object {
+                  "handleSubmit": [MockFunction],
                 }
-                id="someIdKey"
-                offText="OFF"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                onText="ON"
-                type="checkbox"
-              >
-                <div>
-                  <label
-                    className="pf3-switch mini"
-                    onKeyDown={[Function]}
-                    style={
+              }
+              id="someIdKey"
+              offText="OFF"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onText="ON"
+              type="checkbox"
+            >
+              <div>
+                <label
+                  className="pf3-switch mini"
+                  onKeyDown={[Function]}
+                  style={
+                    Object {
+                      "width": 80,
+                    }
+                  }
+                  tabIndex={0}
+                >
+                  <input
+                    FieldProvider={[Function]}
+                    checked={true}
+                    dataType="someDataType"
+                    formOptions={
                       Object {
-                        "width": 80,
+                        "handleSubmit": [MockFunction],
                       }
                     }
-                    tabIndex={0}
+                    id="someIdKey"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="checkbox"
+                  />
+                  <span
+                    className="pf3-switch-slider checked"
                   >
-                    <input
-                      FieldProvider={[Function]}
-                      checked={true}
-                      dataType="someDataType"
-                      formOptions={
+                    <span
+                      className="on-text"
+                      style={
                         Object {
-                          "handleSubmit": [MockFunction],
+                          "WebkitTransform": "translateX(46px)",
+                          "left": -46,
+                          "msTransform": "translateX(46px)",
+                          "transform": "translateX(46px)",
+                          "width": 46,
                         }
                       }
-                      id="someIdKey"
-                      onBlur={[Function]}
-                      onChange={[Function]}
-                      onFocus={[Function]}
-                      type="checkbox"
+                    >
+                      ON
+                    </span>
+                    <span
+                      className="divider"
+                      style={
+                        Object {
+                          "WebkitTransform": "translateX(46px)",
+                          "msTransform": "translateX(46px)",
+                          "transform": "translateX(46px)",
+                        }
+                      }
                     />
                     <span
-                      className="pf3-switch-slider checked"
+                      className="off-text"
+                      style={
+                        Object {
+                          "WebkitTransform": "translateX(80px)",
+                          "left": 34,
+                          "msTransform": "translateX(80px)",
+                          "transform": "translateX(80px)",
+                          "width": 46,
+                        }
+                      }
                     >
-                      <span
-                        className="on-text"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(46px)",
-                            "left": -46,
-                            "msTransform": "translateX(46px)",
-                            "transform": "translateX(46px)",
-                            "width": 46,
-                          }
-                        }
-                      >
-                        ON
-                      </span>
-                      <span
-                        className="divider"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(46px)",
-                            "msTransform": "translateX(46px)",
-                            "transform": "translateX(46px)",
-                          }
-                        }
-                      />
-                      <span
-                        className="off-text"
-                        style={
-                          Object {
-                            "WebkitTransform": "translateX(80px)",
-                            "left": 34,
-                            "msTransform": "translateX(80px)",
-                            "transform": "translateX(80px)",
-                            "width": 46,
-                          }
-                        }
-                      >
-                        OFF
-                      </span>
+                      OFF
                     </span>
-                  </label>
-                </div>
-              </Switch>
-            </InputGroupWrapper>
+                  </span>
+                </label>
+              </div>
+            </Switch>
           </div>
         </FormGroup>
       </FormGroup>
@@ -1716,28 +1694,26 @@ exports[`FormFields <TextField /> should render correctly 1`] = `
           <div
             className="form-group"
           >
-            <InputGroupWrapper>
-              <FormControl
-                bsClass="form-control"
-                componentClass="input"
+            <FormControl
+              bsClass="form-control"
+              componentClass="input"
+              formOptions={Object {}}
+              name="text-field"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              value=""
+            >
+              <input
+                className="form-control"
                 formOptions={Object {}}
                 name="text-field"
                 onBlur={[Function]}
                 onChange={[Function]}
                 onFocus={[Function]}
                 value=""
-              >
-                <input
-                  className="form-control"
-                  formOptions={Object {}}
-                  name="text-field"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  value=""
-                />
-              </FormControl>
-            </InputGroupWrapper>
+              />
+            </FormControl>
           </div>
         </FormGroup>
       </FormGroup>
@@ -1786,10 +1762,19 @@ exports[`FormFields <TextField /> should render correctly with placeholder 1`] =
           <div
             className="form-group"
           >
-            <InputGroupWrapper>
-              <FormControl
-                bsClass="form-control"
-                componentClass="input"
+            <FormControl
+              bsClass="form-control"
+              componentClass="input"
+              formOptions={Object {}}
+              name="text-field"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              placeholder="placeholder"
+              value=""
+            >
+              <input
+                className="form-control"
                 formOptions={Object {}}
                 name="text-field"
                 onBlur={[Function]}
@@ -1797,19 +1782,8 @@ exports[`FormFields <TextField /> should render correctly with placeholder 1`] =
                 onFocus={[Function]}
                 placeholder="placeholder"
                 value=""
-              >
-                <input
-                  className="form-control"
-                  formOptions={Object {}}
-                  name="text-field"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  placeholder="placeholder"
-                  value=""
-                />
-              </FormControl>
-            </InputGroupWrapper>
+              />
+            </FormControl>
           </div>
         </FormGroup>
       </FormGroup>
@@ -1862,26 +1836,24 @@ exports[`FormFields <Textarea /> should render correctly 1`] = `
           <div
             className="form-group"
           >
-            <InputGroupWrapper>
-              <FormControl
-                bsClass="form-control"
-                componentClass="textarea"
+            <FormControl
+              bsClass="form-control"
+              componentClass="textarea"
+              formOptions={Object {}}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              value={Object {}}
+            >
+              <textarea
+                className="form-control"
                 formOptions={Object {}}
                 onBlur={[Function]}
                 onChange={[Function]}
                 onFocus={[Function]}
                 value={Object {}}
-              >
-                <textarea
-                  className="form-control"
-                  formOptions={Object {}}
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  value={Object {}}
-                />
-              </FormControl>
-            </InputGroupWrapper>
+              />
+            </FormControl>
           </div>
         </FormGroup>
       </FormGroup>
@@ -1935,28 +1907,26 @@ exports[`FormFields <Textarea /> should render correctly with placeholder 1`] = 
           <div
             className="form-group"
           >
-            <InputGroupWrapper>
-              <FormControl
-                bsClass="form-control"
-                componentClass="textarea"
+            <FormControl
+              bsClass="form-control"
+              componentClass="textarea"
+              formOptions={Object {}}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              placeholder="placeholder"
+              value={Object {}}
+            >
+              <textarea
+                className="form-control"
                 formOptions={Object {}}
                 onBlur={[Function]}
                 onChange={[Function]}
                 onFocus={[Function]}
                 placeholder="placeholder"
                 value={Object {}}
-              >
-                <textarea
-                  className="form-control"
-                  formOptions={Object {}}
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  placeholder="placeholder"
-                  value={Object {}}
-                />
-              </FormControl>
-            </InputGroupWrapper>
+              />
+            </FormControl>
           </div>
         </FormGroup>
       </FormGroup>

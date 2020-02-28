@@ -402,48 +402,62 @@ describe('renderForm function', () => {
     });
 
     it('should render condition field only if the pattern condition is met (string)', () => {
-      const formFields = [{
-        component: 'custom-component',
-        name: 'foo',
-        condition: {
-          when: 'bar',
-          pattern: 'fuzz',
-        },
-      }];
+      const formFields = [
+        {
+          component: 'custom-component',
+          name: 'foo',
+          condition: {
+            when: 'bar',
+            pattern: 'fuzz'
+          }
+        }
+      ];
       const wrapper = mount(
-        <ContextWrapper formFieldsMapper={{
-          'custom-component': CustomComponent,
-        }}>
-          { renderForm(formFields) }
+        <ContextWrapper
+          formFieldsMapper={{
+            'custom-component': CustomComponent
+          }}
+        >
+          {renderForm(formFields)}
         </ContextWrapper>
       );
       expect(wrapper.find(CustomComponent)).toHaveLength(0);
 
-      wrapper.find(Form).instance().form.change('bar', 'fuzz');
+      wrapper
+        .find(Form)
+        .instance()
+        .form.change('bar', 'fuzz');
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(1);
     });
 
     it('should render condition field only if the pattern condition is met (string with flags)', () => {
-      const formFields = [{
-        component: 'custom-component',
-        name: 'foo',
-        condition: {
-          when: 'bar',
-          pattern: 'fuzz',
-          flags: 'i',
-        },
-      }];
+      const formFields = [
+        {
+          component: 'custom-component',
+          name: 'foo',
+          condition: {
+            when: 'bar',
+            pattern: 'fuzz',
+            flags: 'i'
+          }
+        }
+      ];
       const wrapper = mount(
-        <ContextWrapper formFieldsMapper={{
-          'custom-component': CustomComponent,
-        }}>
-          { renderForm(formFields) }
+        <ContextWrapper
+          formFieldsMapper={{
+            'custom-component': CustomComponent
+          }}
+        >
+          {renderForm(formFields)}
         </ContextWrapper>
       );
       expect(wrapper.find(CustomComponent)).toHaveLength(0);
 
-      wrapper.find(Form).instance().form.change('bar', 'fUzz');
+      wrapper
+        .find(Form)
+        .instance()
+        .form.change('bar', 'fUzz');
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(1);
     });

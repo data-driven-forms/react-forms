@@ -8,7 +8,7 @@ const isEmptyValue = (value) => (typeof value === 'number' || value === true ? f
 
 const Condition = ({ condition, children }) => {
   const fieldCondition = (value, { is, isNotEmpty, isEmpty, pattern, notMatch, flags }) => {
-    if (isNotEmpty){
+    if (isNotEmpty) {
       return !isEmptyValue(value);
     }
 
