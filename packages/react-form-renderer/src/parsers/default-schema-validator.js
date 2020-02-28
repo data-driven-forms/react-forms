@@ -2,7 +2,6 @@
 import DefaultSchemaError from './schema-errors';
 //import isValidComponent from './isValidComponent';
 import componentTypes from '../components/component-types';
-import validatorTypes from '../components/validator-types';
 import dataTypes from '../components/data-types';
 
 const componentBlackList = [componentTypes.FIELD_ARRAY, 'tab-item'];
@@ -73,7 +72,7 @@ const checkCondition = (condition, fieldName) => {
   }
 };
 
-const checkValidators = (validate, fieldName) => {
+const checkValidators = (validate, fieldName, validatorTypes) => {
   if (validate === undefined) {
     return;
   }
@@ -101,11 +100,11 @@ const checkValidators = (validate, fieldName) => {
       `);
       }
 
-      if (!Object.values(validatorTypes).includes(validator.type)) {
+      if (!validatorTypes.includes(validator.type)) {
         throw new DefaultSchemaError(`
         Error occured in field definition with name: "${fieldName}".
         Field validator at index: ${index} does not have correct "type" property!
-        Received "${validator.type}", expected one of: [${Object.values(validatorTypes)}].
+        Received "${validator.type}", expected one of: [${validatorTypes}].
       `);
       }
     }
@@ -128,10 +127,10 @@ const checkDataType = (type, fieldName) => {
   }
 };
 
-const iterateOverFields = (fields, formFieldsMapper, parent = {}) => {
+const iterateOverFields = (fields, formFieldsMapper, validatorTypes, parent = {}) => {
   fields.forEach((field) => {
     if (Array.isArray(field)) {
-      return iterateOverFields(field, formFieldsMapper);
+      return iterateOverFields(field, formFieldsMapper, validatorTypes);
     }
 
     if (parent.component !== componentTypes.WIZARD) {
@@ -164,7 +163,7 @@ const iterateOverFields = (fields, formFieldsMapper, parent = {}) => {
     }
 
     if (field.hasOwnProperty('validate')) {
-      checkValidators(field.validate, field.name);
+      checkValidators(field.validate, field.name, validatorTypes);
     }
 
     if (field.hasOwnProperty('dataType')) {
@@ -172,18 +171,18 @@ const iterateOverFields = (fields, formFieldsMapper, parent = {}) => {
     }
 
     if (field.hasOwnProperty('fields')) {
-      iterateOverFields(field.fields, formFieldsMapper, field);
+      iterateOverFields(field.fields, formFieldsMapper, validatorTypes, field);
     }
   });
 };
 
-const defaultSchemaValidator = (schema, formFieldsMapper) => {
+const defaultSchemaValidator = (schema, formFieldsMapper, validatorTypes = []) => {
   if (Array.isArray(schema) || typeof schema !== 'object') {
     throw new DefaultSchemaError(`Form Schema must be an object, received ${Array.isArray(schema) ? 'array' : typeof schema}!`);
   }
 
   checkFieldsArray(schema, 'schema');
-  iterateOverFields(schema.fields, formFieldsMapper);
+  iterateOverFields(schema.fields, formFieldsMapper, validatorTypes);
 };
 
 export default defaultSchemaValidator;

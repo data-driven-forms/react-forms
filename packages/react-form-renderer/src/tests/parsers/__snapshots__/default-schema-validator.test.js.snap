@@ -76,7 +76,7 @@ exports[`Default schema validator should fail if field validate item is an objec
 "
         Error occured in field definition with name: \\"foo\\".
         Field validator at index: 0 does not have correct \\"type\\" property!
-        Received \\"magic\\", expected one of: [required-validator,min-length-validator,max-length-validator,exact-length-validator,min-items-validator,min-number-value,max-number-value,pattern-validator,url-validator].
+        Received \\"magic\\", expected one of: [].
       "
 `;
 

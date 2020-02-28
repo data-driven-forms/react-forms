@@ -2,7 +2,7 @@
 import React from 'react';
 import { componentTypes } from '../src';
 import FieldProvider from '../src/components/field-provider';
-import useFieldApi from '../src/components/useFieldApi';
+import useFieldApi from '../src/hooks/use-field-api';
 
 const TextField = (props) => (
   <FieldProvider

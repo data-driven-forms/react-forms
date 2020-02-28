@@ -72,20 +72,10 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
           <SingleField
             component="text-field"
             name="component1"
-            validate={
-              Array [
-                undefined,
-              ]
-            }
           />,
           <SingleField
             component="select-field"
             name="secret"
-            validate={
-              Array [
-                undefined,
-              ]
-            }
           />,
         ]
       }
@@ -110,11 +100,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
         <SingleField
           component="text-field"
           name="component1"
-          validate={
-            Array [
-              undefined,
-            ]
-          }
         >
           <FormConditionWrapper>
             <FormFieldHideWrapper
@@ -124,11 +109,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 component={[Function]}
                 componentType="text-field"
                 name="component1"
-                validate={
-                  Array [
-                    undefined,
-                  ]
-                }
               >
                 <TextField
                   FieldProvider={[Function]}
@@ -155,11 +135,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
         <SingleField
           component="select-field"
           name="secret"
-          validate={
-            Array [
-              undefined,
-            ]
-          }
         >
           <FormConditionWrapper>
             <FormFieldHideWrapper
@@ -169,11 +144,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 component={[Function]}
                 componentType="select-field"
                 name="secret"
-                validate={
-                  Array [
-                    undefined,
-                  ]
-                }
               >
                 <Component
                   FieldProvider={[Function]}
@@ -294,22 +264,12 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
             component="text-field"
             label="Visible"
             name="visible"
-            validate={
-              Array [
-                undefined,
-              ]
-            }
           />,
           <SingleField
             component="text-field"
             hideField={true}
             label="Hidden"
             name="hidden"
-            validate={
-              Array [
-                undefined,
-              ]
-            }
           />,
         ]
       }
@@ -338,11 +298,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
           component="text-field"
           label="Visible"
           name="visible"
-          validate={
-            Array [
-              undefined,
-            ]
-          }
         >
           <FormConditionWrapper>
             <FormFieldHideWrapper
@@ -353,11 +308,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                 componentType="text-field"
                 label="Visible"
                 name="visible"
-                validate={
-                  Array [
-                    undefined,
-                  ]
-                }
               >
                 <TextField
                   FieldProvider={[Function]}
@@ -387,11 +337,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
           hideField={true}
           label="Hidden"
           name="hidden"
-          validate={
-            Array [
-              undefined,
-            ]
-          }
         >
           <FormConditionWrapper>
             <FormFieldHideWrapper
@@ -405,11 +350,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                   componentType="text-field"
                   label="Hidden"
                   name="hidden"
-                  validate={
-                    Array [
-                      undefined,
-                    ]
-                  }
                 >
                   <TextField
                     FieldProvider={[Function]}

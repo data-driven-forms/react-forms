@@ -8,6 +8,7 @@ import RendererContext from './renderer-context';
 import renderForm from '../form-renderer/render-form';
 import defaultSchemaValidator from '../parsers/default-schema-validator';
 import SchemaErrorComponent from '../form-renderer/schema-error-component';
+import defaultValidatorMapper from '../validators/validator-mapper';
 
 const FormRenderer = ({
   formFieldsMapper,
@@ -20,11 +21,16 @@ const FormRenderer = ({
   validate,
   subscription,
   clearedValue,
-  schema
+  schema,
+  validatorMapper
 }) => {
   let schemaError;
+
+  const validatorMapperMerged = { ...defaultValidatorMapper, ...validatorMapper };
+
   try {
-    defaultSchemaValidator(schema, formFieldsMapper);
+    const validatorTypes = Object.keys(validatorMapperMerged);
+    defaultSchemaValidator(schema, formFieldsMapper, validatorTypes);
   } catch (error) {
     schemaError = error;
     console.error(error);
@@ -47,35 +53,32 @@ const FormRenderer = ({
       initialValues={initialValues}
       validate={validate}
       subscription={{ pristine: true, submitting: true, valid: true, ...subscription }}
-      render={({ handleSubmit, pristine, valid, form: { reset, mutators, getState, submit, ...form }, ...state }) => {
-        const formOptions = {
-          pristine,
-          onSubmit,
-          onCancel,
-          onReset,
-          getState,
-          valid,
-          clearedValue,
-          submit,
-          handleSubmit,
-          reset,
-          clearOnUnmount,
-          renderForm,
-          ...mutators,
-          ...form
-        };
-
-        return (
-          <RendererContext.Provider
-            value={{
-              formFieldsMapper,
-              formOptions
-            }}
-          >
-            <FormTemplate formFields={renderForm(schema.fields)} schema={schema} />
-          </RendererContext.Provider>
-        );
-      }}
+      render={({ handleSubmit, pristine, valid, form: { reset, mutators, getState, submit, ...form }, ...state }) => (
+        <RendererContext.Provider
+          value={{
+            formFieldsMapper,
+            validatorMapper: validatorMapperMerged,
+            formOptions: {
+              pristine,
+              onSubmit,
+              onCancel,
+              onReset,
+              getState,
+              valid,
+              clearedValue,
+              submit,
+              handleSubmit,
+              reset,
+              clearOnUnmount,
+              renderForm,
+              ...mutators,
+              ...form
+            }
+          }}
+        >
+          <FormTemplate formFields={renderForm(schema.fields)} schema={schema} />
+        </RendererContext.Provider>
+      )}
     />
   );
 };
@@ -95,7 +98,10 @@ FormRenderer.propTypes = {
   }).isRequired,
   formTemplate: PropTypes.shape({
     [PropTypes.string]: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]).isRequired
-  }).isRequired
+  }).isRequired,
+  validatorMapper: PropTypes.shape({
+    [PropTypes.string]: PropTypes.func.isRequired
+  })
 };
 
 FormRenderer.defaultProps = {
