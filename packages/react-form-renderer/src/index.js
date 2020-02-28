@@ -5,7 +5,7 @@ export { default as validatorTypes } from './components/validator-types';
 export { default as composeValidators } from './components/compose-validators';
 export { default as Validators } from './validators/validators';
 export { default as defaultSchemaValidator } from './parsers/default-schema-validator';
-export { default as useFormApi } from './hooks/useFormApi';
+export { default as useFormApi } from './hooks/use-form-api';
 export { default as RendererContext } from './components/renderer-context';
 export { default as FormSpy } from './components/form-spy';
 export { default as Form } from './components/form';
