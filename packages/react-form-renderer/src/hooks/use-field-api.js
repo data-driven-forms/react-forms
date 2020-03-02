@@ -18,16 +18,20 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, dat
       const initialValue = props.initialValue || fieldProps.meta.initial;
       fieldProps.input.onChange(initialValue);
     }
+  }, [initializeOnMount, props.initialValue, fieldProps.meta.initial, fieldProps.input]);
 
-    return () => {
+  useEffect(
+    () => () => {
       /**
        * Delete the value from form state when field is inmounted
        */
       if ((formOptions.clearOnUnmount || props.clearOnUnmount) && props.clearOnUnmount !== false) {
         fieldProps.input.onChange(undefined);
       }
-    };
-  }, [initializeOnMount, props.initialValue, fieldProps.meta.initial, props.clearOnUnmount, fieldProps.input, formOptions.clearOnUnmount]);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   /**
    * Prepare deleted value of field
