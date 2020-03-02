@@ -28,7 +28,7 @@ class Wizard extends React.Component {
   findCurrentStep = (activeStep) => this.props.fields.find(({ stepKey }) => stepKey === activeStep);
 
   render() {
-    const { title, description, FieldProvider, formOptions } = this.props;
+    const { title, description, formOptions } = this.props;
     const handleSubmit = () =>
       formOptions.onSubmit(this.handleSubmit(formOptions.getState().values, [...this.state.prevSteps, this.state.activeStep]));
 
@@ -39,7 +39,6 @@ class Wizard extends React.Component {
           ...formOptions,
           handleSubmit
         }}
-        FieldProvider={FieldProvider}
       />
     );
 

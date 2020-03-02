@@ -112,7 +112,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 name="component1"
               >
                 <TextField
-                  FieldProvider={[Function]}
                   name="component1"
                   validate={[Function]}
                 >
@@ -148,7 +147,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 name="secret"
               >
                 <Component
-                  FieldProvider={[Function]}
                   name="secret"
                   validate={[Function]}
                 >
@@ -313,7 +311,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                 name="visible"
               >
                 <TextField
-                  FieldProvider={[Function]}
                   label="Visible"
                   name="visible"
                   validate={[Function]}
@@ -356,7 +353,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                   name="hidden"
                 >
                   <TextField
-                    FieldProvider={[Function]}
                     label="Hidden"
                     name="hidden"
                     validate={[Function]}

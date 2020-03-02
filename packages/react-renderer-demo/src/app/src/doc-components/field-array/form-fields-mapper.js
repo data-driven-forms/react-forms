@@ -1,6 +1,6 @@
 /* eslint react/prop-types: "off" */
 import React, { Fragment, useState } from 'react';
-import FormRender, { componentTypes, useFormApi } from '@data-driven-forms/react-form-renderer';
+import FormRender, { componentTypes, useFormApi, useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 // eslint-disable-next-line no-unused-vars
 const wrapperStyles = {
@@ -27,15 +27,17 @@ const getButtonStyle = variant => ({
 
 const Button = ({ children, label, variant, ...props }) => <button style={ getButtonStyle(variant) } { ...props }>{ label }</button>;
 
-const TextField = ({ label, input, isRequired, meta: { error, touched }, FieldProvider, dataType, FieldArrayProvider, ...props }) => (
+const TextField = (props) => {
+  const {input, meta: { touched, error }, label, isRequired, ...rest} = useFieldApi(props)
+  return (
   <div className={ `ddorg__demo-formGroup ${isRequired ? 'required' : ''} ${error ? 'error' : ''}` }>
     <label htmlFor={ input.name }>{ label }</label>
     <br />
-    <input id={ input.name } { ...input } { ...props } />
+    <input id={ input.name } { ...input } { ...rest } />
     { touched && error && <p className="error-text">{ error }</p> }
     <br />
   </div>
-);
+)};
 
 const ArrayItem = ({
   fields,

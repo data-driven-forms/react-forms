@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import NavigateBackIcon from '@material-ui/icons/NavigateBefore';
 import Send from '@material-ui/icons/Send';
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const SimpleNext = ({ next, valid, handleNext, submit }) => (
   <Button variant="contained" type="button" color="primary" onClick={() => (valid ? handleNext(next) : submit())}>
@@ -19,18 +20,18 @@ SimpleNext.propTypes = {
   submit: PropTypes.func.isRequired
 };
 
-const ConditionalNext = ({ nextStep, FieldProvider, ...rest }) => (
-  <FieldProvider name={nextStep.when} subscription={{ value: true }}>
-    {({ input: { value } }) => <SimpleNext next={nextStep.stepMapper[value]} {...rest} />}
-  </FieldProvider>
-);
+const ConditionalNext = ({ nextStep, ...rest }) => {
+  const {
+    input: { value }
+  } = useFieldApi({ name: nextStep.when, subscription: { value: true } });
+  return <SimpleNext next={nextStep.stepMapper[value]} {...rest} />;
+};
 
 ConditionalNext.propTypes = {
   nextStep: PropTypes.shape({
     when: PropTypes.string.isRequired,
     stepMapper: PropTypes.object.isRequired
-  }).isRequired,
-  FieldProvider: PropTypes.func.isRequired
+  }).isRequired
 };
 
 const submitButton = (handleSubmit) => (
@@ -48,7 +49,7 @@ const renderNextButton = ({ nextStep, handleSubmit, ...rest }) =>
     <SimpleNext next={nextStep} {...rest} />
   );
 
-const WizardStepButtons = ({ formOptions, disableBack, handlePrev, nextStep, FieldProvider, handleNext }) => (
+const WizardStepButtons = ({ formOptions, disableBack, handlePrev, nextStep, handleNext }) => (
   <div>
     {formOptions.onCancel && (
       <Button type="button" variant="contained" color="secondary" onClick={formOptions.onCancel}>
@@ -63,8 +64,7 @@ const WizardStepButtons = ({ formOptions, disableBack, handlePrev, nextStep, Fie
     {renderNextButton({
       ...formOptions,
       handleNext,
-      nextStep,
-      FieldProvider
+      nextStep
     })}
   </div>
 );
@@ -83,8 +83,7 @@ WizardStepButtons.propTypes = {
       when: PropTypes.string.isRequired,
       stepMapper: PropTypes.object.isRequired
     })
-  ]),
-  FieldProvider: PropTypes.func.isRequired
+  ])
 };
 
 export default WizardStepButtons;

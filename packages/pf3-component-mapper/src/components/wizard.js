@@ -12,7 +12,7 @@ const defaultButtonLabels = {
   submit: 'Submit'
 };
 
-const Wizard = ({ title, FieldProvider, buttonLabels, stepsInfo, fields, inModal }) => {
+const Wizard = ({ title, buttonLabels, stepsInfo, fields, inModal }) => {
   const formOptions = useFormApi();
 
   const [activeStep, setActiveStep] = useState(fields[0].stepKey);
@@ -82,7 +82,6 @@ const Wizard = ({ title, FieldProvider, buttonLabels, stepsInfo, fields, inModal
           ...formOptions,
           handleSubmit
         }}
-        FieldProvider={FieldProvider}
       />
     </div>
   );
@@ -90,7 +89,6 @@ const Wizard = ({ title, FieldProvider, buttonLabels, stepsInfo, fields, inModal
 
 Wizard.propTypes = {
   title: PropTypes.string,
-  FieldProvider: PropTypes.PropTypes.oneOfType([PropTypes.object, PropTypes.func]).isRequired,
   buttonLabels: PropTypes.object,
   stepsInfo: PropTypes.array,
   inModal: PropTypes.bool,

@@ -1,6 +1,6 @@
 /* eslint react/prop-types: "off" */
 import React, { Fragment } from 'react';
-import FormRender, { componentTypes } from '@data-driven-forms/react-form-renderer';
+import FormRender, { componentTypes, useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 import './form-fields-mapper-docs.css';
 
@@ -28,7 +28,7 @@ const getButtonStyle = variant => ({
 
 const Button = ({ children, label, variant, ...props }) => <button style={ getButtonStyle(variant) } { ...props }>{ label }</button>;
 
-const TextField = ({ customProp, label, input, isRequired, meta: { error, touched }, FieldProvider, FieldArrayProvider, dataType, ...props }) => (
+const TextField = ({ customProp, label, input, isRequired, meta: { error, touched }, FieldArrayProvider, dataType, ...props }) => (
   <div className={ `ddorg__demo-formGroup ${isRequired ? 'required' : ''} ${error ? 'error' : ''}` }>
     <label htmlFor={ input.name }>{ label }</label>
     <input id={ input.name } { ...input } { ...props } />
@@ -37,11 +37,10 @@ const TextField = ({ customProp, label, input, isRequired, meta: { error, touche
   </div>
 );
 
-const CustomComponent = ({ FieldProvider, ...rest }) => (
-  <FieldProvider { ...rest }>
-    { ({ input, meta, ...props }) => <TextField input={ input } meta={ input } { ...props } /> }
-  </FieldProvider>
-);
+const CustomComponent = (props) => {
+  const { input, meta, ...rest } = useFieldApi(props)
+  return <TextField input={ input } meta={ input } { ...rest } />
+};
 
 const formFieldsMapper = {
   [componentTypes.TEXT_FIELD]: TextField,

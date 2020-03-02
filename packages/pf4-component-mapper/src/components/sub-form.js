@@ -7,7 +7,7 @@ import { TextContent } from '@patternfly/react-core/dist/js/components/Text/Text
 import { Grid, GridItem } from '@patternfly/react-core/dist/js/layouts/Grid/index';
 import { Title } from '@patternfly/react-core/dist/js/components/Title/Title';
 
-const SubForm = ({ fields, title, description, FieldProvider: _FieldProvider, validate: _validate, ...rest }) => {
+const SubForm = ({ fields, title, description, validate: _validate, ...rest }) => {
   const formOptions = useFormApi();
 
   return (
@@ -36,7 +36,6 @@ SubForm.propTypes = {
   name: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
-  FieldProvider: PropTypes.any,
   validate: PropTypes.any
 };
 

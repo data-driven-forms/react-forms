@@ -241,7 +241,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                   name="wizard"
                 >
                   <WizardFunction
-                    FieldProvider={[Function]}
                     buttonLabels={Object {}}
                     fields={
                       Array [
@@ -274,7 +273,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                     validate={[Function]}
                   >
                     <Wizard
-                      FieldProvider={[Function]}
                       buttonLabels={
                         Object {
                           "back": "Back",
@@ -509,7 +507,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                               </nav>
                             </WizardNav>
                             <WizardStep
-                              FieldProvider={[Function]}
                               buttonLabels={
                                 Object {
                                   "back": "Back",
@@ -603,7 +600,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                               name="foo-field"
                                             >
                                               <TextField
-                                                FieldProvider={[Function]}
                                                 name="foo-field"
                                                 validate={[Function]}
                                               >
@@ -642,7 +638,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                       className="pf-c-form__group"
                                                     >
                                                       <ForwardRef
-                                                        FieldProvider={[Function]}
                                                         formOptions={
                                                           Object {
                                                             "batch": [Function],
@@ -694,7 +689,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                         value=""
                                                       >
                                                         <TextInputBase
-                                                          FieldProvider={[Function]}
                                                           aria-label={null}
                                                           className=""
                                                           formOptions={
@@ -755,7 +749,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                           value=""
                                                         >
                                                           <input
-                                                            FieldProvider={[Function]}
                                                             aria-invalid={false}
                                                             aria-label={null}
                                                             className="pf-c-form-control"
@@ -828,7 +821,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                 </main>
                               </WizardBody>
                               <WizardStepButtons
-                                FieldProvider={[Function]}
                                 buttonLabels={
                                   Object {
                                     "back": "Back",
@@ -1372,7 +1364,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                   name="wizard"
                 >
                   <WizardFunction
-                    FieldProvider={[Function]}
                     buttonLabels={Object {}}
                     fields={
                       Array [
@@ -1406,7 +1397,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                     validate={[Function]}
                   >
                     <Wizard
-                      FieldProvider={[Function]}
                       buttonLabels={
                         Object {
                           "back": "Back",
@@ -1859,7 +1849,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                         </nav>
                                       </WizardNav>
                                       <WizardStep
-                                        FieldProvider={[Function]}
                                         buttonLabels={
                                           Object {
                                             "back": "Back",
@@ -1953,7 +1942,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                         name="foo-field"
                                                       >
                                                         <TextField
-                                                          FieldProvider={[Function]}
                                                           name="foo-field"
                                                           validate={[Function]}
                                                         >
@@ -1992,7 +1980,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                                 className="pf-c-form__group"
                                                               >
                                                                 <ForwardRef
-                                                                  FieldProvider={[Function]}
                                                                   formOptions={
                                                                     Object {
                                                                       "batch": [Function],
@@ -2044,7 +2031,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                                   value=""
                                                                 >
                                                                   <TextInputBase
-                                                                    FieldProvider={[Function]}
                                                                     aria-label={null}
                                                                     className=""
                                                                     formOptions={
@@ -2105,7 +2091,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                                     value=""
                                                                   >
                                                                     <input
-                                                                      FieldProvider={[Function]}
                                                                       aria-invalid={false}
                                                                       aria-label={null}
                                                                       className="pf-c-form-control"
@@ -2178,7 +2163,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                           </main>
                                         </WizardBody>
                                         <WizardStepButtons
-                                          FieldProvider={[Function]}
                                           buttonLabels={
                                             Object {
                                               "back": "Back",
