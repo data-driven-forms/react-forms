@@ -99,6 +99,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
       >
         <SingleField
           component="text-field"
+          key="component1"
           name="component1"
         >
           <FormConditionWrapper>
@@ -134,6 +135,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
         </SingleField>
         <SingleField
           component="select-field"
+          key="secret"
           name="secret"
         >
           <FormConditionWrapper>
@@ -296,6 +298,7 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
       >
         <SingleField
           component="text-field"
+          key="visible"
           label="Visible"
           name="visible"
         >
@@ -335,6 +338,7 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
         <SingleField
           component="text-field"
           hideField={true}
+          key="hidden"
           label="Hidden"
           name="hidden"
         >

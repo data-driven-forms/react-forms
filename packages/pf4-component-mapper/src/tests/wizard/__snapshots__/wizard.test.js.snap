@@ -201,6 +201,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                 },
               ]
             }
+            key="wizard"
             name="wizard"
           >
             <FormConditionWrapper>
@@ -589,6 +590,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                     >
                                       <SingleField
                                         component="text-field"
+                                        key="foo-field"
                                         name="foo-field"
                                       >
                                         <FormConditionWrapper>
@@ -1329,6 +1331,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
               ]
             }
             inModal={true}
+            key="wizard"
             name="wizard"
           >
             <FormConditionWrapper>
@@ -1937,6 +1940,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                               >
                                                 <SingleField
                                                   component="text-field"
+                                                  key="foo-field"
                                                   name="foo-field"
                                                 >
                                                   <FormConditionWrapper>
