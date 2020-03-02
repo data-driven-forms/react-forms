@@ -53,8 +53,6 @@ exports[`FormFields should render Checkbox correctly 1`] = `
             >
               <Checkbox
                 className=""
-                dataType="someDataType"
-                formOptions={Object {}}
                 id="someIdKey"
                 isChecked={false}
                 isDisabled={false}
@@ -72,9 +70,7 @@ exports[`FormFields should render Checkbox correctly 1`] = `
                     aria-invalid={false}
                     checked={false}
                     className="pf-c-check__input"
-                    dataType="someDataType"
                     disabled={false}
-                    formOptions={Object {}}
                     id="someIdKey"
                     name="Name of the field"
                     onBlur={[Function]}
@@ -247,8 +243,6 @@ exports[`FormFields should render DatePicker correctly 1`] = `
             className="pf-c-form__group"
           >
             <ForwardRef
-              dataType="someDataType"
-              formOptions={Object {}}
               id="someIdKey"
               name="Name of the field"
               onBlur={[Function]}
@@ -260,8 +254,6 @@ exports[`FormFields should render DatePicker correctly 1`] = `
               <TextInputBase
                 aria-label={null}
                 className=""
-                dataType="someDataType"
-                formOptions={Object {}}
                 id="someIdKey"
                 innerRef={null}
                 isDisabled={false}
@@ -280,9 +272,7 @@ exports[`FormFields should render DatePicker correctly 1`] = `
                   aria-invalid={false}
                   aria-label={null}
                   className="pf-c-form-control"
-                  dataType="someDataType"
                   disabled={false}
-                  formOptions={Object {}}
                   id="someIdKey"
                   name="Name of the field"
                   onBlur={[Function]}
@@ -627,8 +617,6 @@ exports[`FormFields should render Switch correctly 1`] = `
           >
             <Component
               checked={false}
-              dataType="someDataType"
-              formOptions={Object {}}
               id="someIdKey"
               name="Name of the field"
               onBlur={[Function]}
@@ -641,8 +629,6 @@ exports[`FormFields should render Switch correctly 1`] = `
                 componentProps={
                   Object {
                     "checked": false,
-                    "dataType": "someDataType",
-                    "formOptions": Object {},
                     "id": "someIdKey",
                     "isDisabled": undefined,
                     "label": undefined,
@@ -661,8 +647,6 @@ exports[`FormFields should render Switch correctly 1`] = `
                   aria-label=""
                   checked={false}
                   className=""
-                  dataType="someDataType"
-                  formOptions={Object {}}
                   id="someIdKey"
                   isChecked={true}
                   isDisabled={false}
@@ -689,9 +673,7 @@ exports[`FormFields should render Switch correctly 1`] = `
                       aria-labelledby="someIdKey-on"
                       checked={false}
                       className="pf-c-switch__input"
-                      dataType="someDataType"
                       disabled={false}
-                      formOptions={Object {}}
                       id="someIdKey"
                       name="Name of the field"
                       onBlur={[Function]}
@@ -789,8 +771,7 @@ exports[`FormFields should render TextArea correctly 1`] = `
             <TextArea
               aria-label={null}
               className=""
-              dataType="someDataType"
-              formOptions={Object {}}
+              id="someIdKey"
               isRequired={false}
               isValid={true}
               name="Name of the field"
@@ -805,8 +786,7 @@ exports[`FormFields should render TextArea correctly 1`] = `
                 aria-invalid={false}
                 aria-label={null}
                 className="pf-c-form-control"
-                dataType="someDataType"
-                formOptions={Object {}}
+                id="someIdKey"
                 name="Name of the field"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -868,8 +848,6 @@ exports[`FormFields should render TextField correctly 1`] = `
             className="pf-c-form__group"
           >
             <ForwardRef
-              dataType="someDataType"
-              formOptions={Object {}}
               id="someIdKey"
               name="Name of the field"
               onBlur={[Function]}
@@ -880,8 +858,6 @@ exports[`FormFields should render TextField correctly 1`] = `
               <TextInputBase
                 aria-label={null}
                 className=""
-                dataType="someDataType"
-                formOptions={Object {}}
                 id="someIdKey"
                 innerRef={null}
                 isDisabled={false}
@@ -900,9 +876,7 @@ exports[`FormFields should render TextField correctly 1`] = `
                   aria-invalid={false}
                   aria-label={null}
                   className="pf-c-form-control"
-                  dataType="someDataType"
                   disabled={false}
-                  formOptions={Object {}}
                   id="someIdKey"
                   name="Name of the field"
                   onBlur={[Function]}
@@ -986,8 +960,6 @@ exports[`FormFields should render TextField with description correctly 1`] = `
               </div>
             </TextContent>
             <ForwardRef
-              dataType="someDataType"
-              formOptions={Object {}}
               id="someIdKey"
               name="Name of the field"
               onBlur={[Function]}
@@ -998,8 +970,6 @@ exports[`FormFields should render TextField with description correctly 1`] = `
               <TextInputBase
                 aria-label={null}
                 className=""
-                dataType="someDataType"
-                formOptions={Object {}}
                 id="someIdKey"
                 innerRef={null}
                 isDisabled={false}
@@ -1018,9 +988,7 @@ exports[`FormFields should render TextField with description correctly 1`] = `
                   aria-invalid={false}
                   aria-label={null}
                   className="pf-c-form-control"
-                  dataType="someDataType"
                   disabled={false}
-                  formOptions={Object {}}
                   id="someIdKey"
                   name="Name of the field"
                   onBlur={[Function]}
@@ -1085,8 +1053,6 @@ exports[`FormFields should render TextField without id correctly 1`] = `
             className="pf-c-form__group"
           >
             <ForwardRef
-              dataType="someDataType"
-              formOptions={Object {}}
               id="Name of the field"
               name="Name of the field"
               onBlur={[Function]}
@@ -1097,8 +1063,6 @@ exports[`FormFields should render TextField without id correctly 1`] = `
               <TextInputBase
                 aria-label={null}
                 className=""
-                dataType="someDataType"
-                formOptions={Object {}}
                 id="Name of the field"
                 innerRef={null}
                 isDisabled={false}
@@ -1117,9 +1081,7 @@ exports[`FormFields should render TextField without id correctly 1`] = `
                   aria-invalid={false}
                   aria-label={null}
                   className="pf-c-form-control"
-                  dataType="someDataType"
                   disabled={false}
-                  formOptions={Object {}}
                   id="Name of the field"
                   name="Name of the field"
                   onBlur={[Function]}
@@ -1185,8 +1147,6 @@ exports[`FormFields should render TimePicker correctly 1`] = `
             className="pf-c-form__group"
           >
             <ForwardRef
-              dataType="someDataType"
-              formOptions={Object {}}
               id="someIdKey"
               name="Name of the field"
               onBlur={[Function]}
@@ -1198,8 +1158,6 @@ exports[`FormFields should render TimePicker correctly 1`] = `
               <TextInputBase
                 aria-label={null}
                 className=""
-                dataType="someDataType"
-                formOptions={Object {}}
                 id="someIdKey"
                 innerRef={null}
                 isDisabled={false}
@@ -1218,9 +1176,7 @@ exports[`FormFields should render TimePicker correctly 1`] = `
                   aria-invalid={false}
                   aria-label={null}
                   className="pf-c-form-control"
-                  dataType="someDataType"
                   disabled={false}
-                  formOptions={Object {}}
                   id="someIdKey"
                   name="Name of the field"
                   onBlur={[Function]}
@@ -1679,8 +1635,6 @@ exports[`FormFields should render disabled Switch correctly 1`] = `
           >
             <Component
               checked={false}
-              dataType="someDataType"
-              formOptions={Object {}}
               id="someIdKey"
               isDisabled={true}
               name="Name of the field"
@@ -1694,8 +1648,6 @@ exports[`FormFields should render disabled Switch correctly 1`] = `
                 componentProps={
                   Object {
                     "checked": false,
-                    "dataType": "someDataType",
-                    "formOptions": Object {},
                     "id": "someIdKey",
                     "isDisabled": true,
                     "label": undefined,
@@ -1714,8 +1666,6 @@ exports[`FormFields should render disabled Switch correctly 1`] = `
                   aria-label=""
                   checked={false}
                   className=""
-                  dataType="someDataType"
-                  formOptions={Object {}}
                   id="someIdKey"
                   isChecked={true}
                   isDisabled={true}
@@ -1742,9 +1692,7 @@ exports[`FormFields should render disabled Switch correctly 1`] = `
                       aria-labelledby="someIdKey-on"
                       checked={false}
                       className="pf-c-switch__input"
-                      dataType="someDataType"
                       disabled={true}
-                      formOptions={Object {}}
                       id="someIdKey"
                       name="Name of the field"
                       onBlur={[Function]}
@@ -1844,8 +1792,6 @@ exports[`FormFields should render disabled Switch correctly 2`] = `
           >
             <Component
               checked={false}
-              dataType="someDataType"
-              formOptions={Object {}}
               id="someIdKey"
               isDisabled={true}
               name="Name of the field"
@@ -1859,8 +1805,6 @@ exports[`FormFields should render disabled Switch correctly 2`] = `
                 componentProps={
                   Object {
                     "checked": false,
-                    "dataType": "someDataType",
-                    "formOptions": Object {},
                     "id": "someIdKey",
                     "isDisabled": true,
                     "label": undefined,
@@ -1879,8 +1823,6 @@ exports[`FormFields should render disabled Switch correctly 2`] = `
                   aria-label=""
                   checked={false}
                   className=""
-                  dataType="someDataType"
-                  formOptions={Object {}}
                   id="someIdKey"
                   isChecked={true}
                   isDisabled={true}
@@ -1907,9 +1849,7 @@ exports[`FormFields should render disabled Switch correctly 2`] = `
                       aria-labelledby="someIdKey-on"
                       checked={false}
                       className="pf-c-switch__input"
-                      dataType="someDataType"
                       disabled={true}
-                      formOptions={Object {}}
                       id="someIdKey"
                       name="Name of the field"
                       onBlur={[Function]}
@@ -2008,9 +1948,8 @@ exports[`FormFields should render disabled TextArea correctly 1`] = `
             <TextArea
               aria-label={null}
               className=""
-              dataType="someDataType"
               disabled={true}
-              formOptions={Object {}}
+              id="someIdKey"
               isRequired={false}
               isValid={true}
               name="Name of the field"
@@ -2025,9 +1964,8 @@ exports[`FormFields should render disabled TextArea correctly 1`] = `
                 aria-invalid={false}
                 aria-label={null}
                 className="pf-c-form-control"
-                dataType="someDataType"
                 disabled={true}
-                formOptions={Object {}}
+                id="someIdKey"
                 name="Name of the field"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -2095,8 +2033,6 @@ exports[`FormFields should render touched TextField id correctly 1`] = `
             className="pf-c-form__group"
           >
             <ForwardRef
-              dataType="someDataType"
-              formOptions={Object {}}
               id="someIdKey"
               name="Name of the field"
               onBlur={[Function]}
@@ -2107,8 +2043,6 @@ exports[`FormFields should render touched TextField id correctly 1`] = `
               <TextInputBase
                 aria-label={null}
                 className=""
-                dataType="someDataType"
-                formOptions={Object {}}
                 id="someIdKey"
                 innerRef={null}
                 isDisabled={false}
@@ -2127,9 +2061,7 @@ exports[`FormFields should render touched TextField id correctly 1`] = `
                   aria-invalid={false}
                   aria-label={null}
                   className="pf-c-form-control"
-                  dataType="someDataType"
                   disabled={false}
-                  formOptions={Object {}}
                   id="someIdKey"
                   name="Name of the field"
                   onBlur={[Function]}
@@ -2200,8 +2132,6 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
           >
             <Component
               checked={false}
-              dataType="someDataType"
-              formOptions={Object {}}
               id="someIdKey"
               label="I am on"
               labelOff="Turned off"
@@ -2216,8 +2146,6 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
                 componentProps={
                   Object {
                     "checked": false,
-                    "dataType": "someDataType",
-                    "formOptions": Object {},
                     "id": "someIdKey",
                     "isDisabled": undefined,
                     "label": "I am on",
@@ -2236,8 +2164,6 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
                   aria-label=""
                   checked={false}
                   className=""
-                  dataType="someDataType"
-                  formOptions={Object {}}
                   id="someIdKey"
                   isChecked={true}
                   isDisabled={false}
@@ -2264,9 +2190,7 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
                       aria-labelledby="someIdKey-on"
                       checked={false}
                       className="pf-c-switch__input"
-                      dataType="someDataType"
                       disabled={false}
-                      formOptions={Object {}}
                       id="someIdKey"
                       name="Name of the field"
                       onBlur={[Function]}

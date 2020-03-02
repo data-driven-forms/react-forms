@@ -10,6 +10,7 @@ import CloseIcon from '@patternfly/react-icons/dist/js/icons/close-icon';
 import AddCircleOIcon from '@patternfly/react-icons/dist/js/icons/add-circle-o-icon';
 
 import './final-form-array.scss';
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const ArrayItem = ({ fields, fieldIndex, name, remove, length, minItems }) => {
   const { renderForm } = useFormApi();
@@ -73,19 +74,10 @@ ArrayItem.propTypes = {
   minItems: PropTypes.number
 };
 
-const DynamicArray = ({
-  arrayValidator,
-  label,
-  description,
-  fields: formFields,
-  defaultItem,
-  meta,
-  FormSpyProvider, // eslint-disable-line react/prop-types
-  minItems,
-  maxItems,
-  noItemsMessage,
-  ...rest
-}) => {
+const DynamicArray = ({ ...props }) => {
+  const { arrayValidator, label, description, fields: formFields, defaultItem, meta, minItems, maxItems, noItemsMessage, ...rest } = useFieldApi(
+    props
+  );
   const { dirty, submitFailed, error } = meta;
   const isError = (dirty || submitFailed) && error && typeof error === 'string';
 
@@ -139,15 +131,13 @@ const DynamicArray = ({
 };
 
 DynamicArray.propTypes = {
-  arrayValidator: PropTypes.func,
   label: PropTypes.node,
   description: PropTypes.node,
   fields: PropTypes.arrayOf(PropTypes.object).isRequired,
   defaultItem: PropTypes.any,
   minItems: PropTypes.number,
   maxItems: PropTypes.number,
-  noItemsMessage: PropTypes.node,
-  meta: PropTypes.object.isRequired
+  noItemsMessage: PropTypes.node
 };
 
 DynamicArray.defaultProps = {

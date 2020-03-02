@@ -33,7 +33,7 @@ const NextButton = ({ nextStep, handleSubmit, submitLabel, ...rest }) =>
   nextStep ? <SimpleNext nextStep={nextStep} {...rest} /> : <SubmitButton handleSubmit={handleSubmit} submitLabel={submitLabel} />;
 
 NextButton.propTypes = {
-  nextStep: PropTypes.string,
+  nextStep: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
   handleSubmit: PropTypes.func.isRequired,
   submitLabel: PropTypes.string.isRequired
 };

@@ -88,7 +88,6 @@ const output = {
                   name: 'text_box_6',
                   label: 'Text Box unvisible',
                   title: 'Text Box unvisible',
-                  isVisible: false,
                   component: components.TEXT_FIELD
                 },
                 {

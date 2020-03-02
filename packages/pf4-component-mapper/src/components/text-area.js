@@ -16,7 +16,7 @@ const TextArea = (props) => {
       hideLabel={hideLabel}
       id={id || input.name}
     >
-      <Pf4TextArea disabled={isDisabled || isReadOnly} {...input} {...rest} />
+      <Pf4TextArea disabled={isDisabled || isReadOnly} {...input} id={id || input.name} {...rest} />
     </FormGroup>
   );
 };

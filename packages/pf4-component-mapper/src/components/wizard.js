@@ -174,7 +174,6 @@ Wizard.propTypes = {
   buttonsClassName: PropTypes.string,
   title: PropTypes.any,
   description: PropTypes.any,
-  FormSpyProvider: PropTypes.PropTypes.oneOfType([PropTypes.object, PropTypes.func]).isRequired,
   fields: PropTypes.arrayOf(
     PropTypes.shape({
       stepKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
