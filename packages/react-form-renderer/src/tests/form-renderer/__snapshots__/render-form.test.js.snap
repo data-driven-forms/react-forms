@@ -28,12 +28,8 @@ exports[`renderForm function #condition should render condition field only if co
   >
     <SingleField
       component="custom-component"
+      key="a"
       name="a"
-      validate={
-        Array [
-          undefined,
-        ]
-      }
     >
       <FormConditionWrapper>
         <FormFieldHideWrapper
@@ -43,14 +39,8 @@ exports[`renderForm function #condition should render condition field only if co
             component={[Function]}
             componentType="custom-component"
             name="a"
-            validate={
-              Array [
-                undefined,
-              ]
-            }
           >
             <CustomComponent
-              FieldProvider={[Function]}
               name="a"
               validate={[Function]}
             >
@@ -60,11 +50,6 @@ exports[`renderForm function #condition should render condition field only if co
                 validate={[Function]}
               >
                 <TextField
-                  formOptions={
-                    Object {
-                      "renderForm": [Function],
-                    }
-                  }
                   input={
                     Object {
                       "checked": undefined,
@@ -97,7 +82,6 @@ exports[`renderForm function #condition should render condition field only if co
                       "visited": false,
                     }
                   }
-                  validate={[Function]}
                 >
                   <input
                     id="a"
@@ -116,12 +100,8 @@ exports[`renderForm function #condition should render condition field only if co
     </SingleField>
     <SingleField
       component="custom-component"
+      key="c"
       name="c"
-      validate={
-        Array [
-          undefined,
-        ]
-      }
     >
       <FormConditionWrapper>
         <FormFieldHideWrapper
@@ -131,14 +111,8 @@ exports[`renderForm function #condition should render condition field only if co
             component={[Function]}
             componentType="custom-component"
             name="c"
-            validate={
-              Array [
-                undefined,
-              ]
-            }
           >
             <CustomComponent
-              FieldProvider={[Function]}
               name="c"
               validate={[Function]}
             >
@@ -148,11 +122,6 @@ exports[`renderForm function #condition should render condition field only if co
                 validate={[Function]}
               >
                 <TextField
-                  formOptions={
-                    Object {
-                      "renderForm": [Function],
-                    }
-                  }
                   input={
                     Object {
                       "checked": undefined,
@@ -185,7 +154,6 @@ exports[`renderForm function #condition should render condition field only if co
                       "visited": false,
                     }
                   }
-                  validate={[Function]}
                 >
                   <input
                     id="c"
@@ -219,12 +187,8 @@ exports[`renderForm function #condition should render condition field only if co
           },
         ]
       }
+      key="foo"
       name="foo"
-      validate={
-        Array [
-          undefined,
-        ]
-      }
     >
       <FormConditionWrapper
         condition={
@@ -296,12 +260,8 @@ exports[`renderForm function #condition should render condition field only if on
   >
     <SingleField
       component="custom-component"
+      key="a"
       name="a"
-      validate={
-        Array [
-          undefined,
-        ]
-      }
     >
       <FormConditionWrapper>
         <FormFieldHideWrapper
@@ -311,14 +271,8 @@ exports[`renderForm function #condition should render condition field only if on
             component={[Function]}
             componentType="custom-component"
             name="a"
-            validate={
-              Array [
-                undefined,
-              ]
-            }
           >
             <CustomComponent
-              FieldProvider={[Function]}
               name="a"
               validate={[Function]}
             >
@@ -328,11 +282,6 @@ exports[`renderForm function #condition should render condition field only if on
                 validate={[Function]}
               >
                 <TextField
-                  formOptions={
-                    Object {
-                      "renderForm": [Function],
-                    }
-                  }
                   input={
                     Object {
                       "checked": undefined,
@@ -365,7 +314,6 @@ exports[`renderForm function #condition should render condition field only if on
                       "visited": false,
                     }
                   }
-                  validate={[Function]}
                 >
                   <input
                     id="a"
@@ -384,12 +332,8 @@ exports[`renderForm function #condition should render condition field only if on
     </SingleField>
     <SingleField
       component="custom-component"
+      key="b"
       name="b"
-      validate={
-        Array [
-          undefined,
-        ]
-      }
     >
       <FormConditionWrapper>
         <FormFieldHideWrapper
@@ -399,14 +343,8 @@ exports[`renderForm function #condition should render condition field only if on
             component={[Function]}
             componentType="custom-component"
             name="b"
-            validate={
-              Array [
-                undefined,
-              ]
-            }
           >
             <CustomComponent
-              FieldProvider={[Function]}
               name="b"
               validate={[Function]}
             >
@@ -416,11 +354,6 @@ exports[`renderForm function #condition should render condition field only if on
                 validate={[Function]}
               >
                 <TextField
-                  formOptions={
-                    Object {
-                      "renderForm": [Function],
-                    }
-                  }
                   input={
                     Object {
                       "checked": undefined,
@@ -453,7 +386,6 @@ exports[`renderForm function #condition should render condition field only if on
                       "visited": false,
                     }
                   }
-                  validate={[Function]}
                 >
                   <input
                     id="b"
@@ -481,12 +413,8 @@ exports[`renderForm function #condition should render condition field only if on
           ],
         }
       }
+      key="foo"
       name="foo"
-      validate={
-        Array [
-          undefined,
-        ]
-      }
     >
       <FormConditionWrapper
         condition={
@@ -548,11 +476,6 @@ exports[`renderForm function should render single field from defined componentTy
       component="text-field"
       key="foo"
       name="foo"
-      validate={
-        Array [
-          undefined,
-        ]
-      }
     >
       <FormConditionWrapper>
         <FormFieldHideWrapper
@@ -562,11 +485,6 @@ exports[`renderForm function should render single field from defined componentTy
             component={[Function]}
             componentType="text-field"
             name="foo"
-            validate={
-              Array [
-                undefined,
-              ]
-            }
           >
             <Component
               name="foo"
@@ -615,12 +533,8 @@ exports[`renderForm function should render single field from with custom compone
   >
     <SingleField
       component="custom-component"
+      key="foo"
       name="foo"
-      validate={
-        Array [
-          undefined,
-        ]
-      }
     >
       <FormConditionWrapper>
         <FormFieldHideWrapper
@@ -630,14 +544,8 @@ exports[`renderForm function should render single field from with custom compone
             component={[Function]}
             componentType="custom-component"
             name="foo"
-            validate={
-              Array [
-                undefined,
-              ]
-            }
           >
             <CustomComponent
-              FieldProvider={[Function]}
               name="foo"
               validate={[Function]}
             >
@@ -647,11 +555,6 @@ exports[`renderForm function should render single field from with custom compone
                 validate={[Function]}
               >
                 <TextField
-                  formOptions={
-                    Object {
-                      "renderForm": [Function],
-                    }
-                  }
                   input={
                     Object {
                       "checked": undefined,
@@ -684,7 +587,6 @@ exports[`renderForm function should render single field from with custom compone
                       "visited": false,
                     }
                   }
-                  validate={[Function]}
                 >
                   <input
                     id="foo"
