@@ -62,6 +62,6 @@ SingleField.propTypes = {
   validate: PropTypes.array
 };
 
-const renderForm = (fields) => fields.map((field) => (Array.isArray(field) ? renderForm(field) : <SingleField key={fields.name} {...field} />));
+const renderForm = (fields) => fields.map((field) => (Array.isArray(field) ? renderForm(field) : <SingleField key={field.name} {...field} />));
 
 export default renderForm;
