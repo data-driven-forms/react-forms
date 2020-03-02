@@ -3,9 +3,9 @@ import { useField } from 'react-final-form';
 import useFormApi from './use-form-api';
 import enhancedOnChange from '../form-renderer/enhanced-on-change';
 
-const useFieldApi = ({ name, initializeOnMount, component, render, ...props }) => {
+const useFieldApi = ({ name, initializeOnMount, component, render, validate, dataType, ...props }) => {
   const formOptions = useFormApi();
-  const fieldProps = useField(name, props);
+  const fieldProps = useField(name, { validate, ...props });
 
   useEffect(() => {
     /**
@@ -37,7 +37,6 @@ const useFieldApi = ({ name, initializeOnMount, component, render, ...props }) =
    */
   return {
     ...props,
-    formOptions,
     ...fieldProps,
     input: {
       ...fieldProps.input,
@@ -45,7 +44,7 @@ const useFieldApi = ({ name, initializeOnMount, component, render, ...props }) =
         enhancedOnChange(
           {
             ...fieldProps.meta,
-            dataType: props.dataType,
+            dataType,
             onChange: fieldProps.input.onChange,
             clearedValue: fieldClearedValue
           },
