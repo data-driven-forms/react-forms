@@ -33,7 +33,7 @@ const getValidate = (validate, dataType, mapper) => ({
     : [dataType && dataTypeValidator(dataType)()]
 });
 
-const SingleField = ({ component, condition, hideField, validate, dataType, ...rest }) => {
+const SingleField = ({ component, condition, hideField, validate, ...rest }) => {
   const { formFieldsMapper, validatorMapper } = useContext(RendererContext);
 
   return (
@@ -44,9 +44,8 @@ const SingleField = ({ component, condition, hideField, validate, dataType, ...r
             componentType={component}
             component={formFieldsMapper[component]}
             name={rest.name || rest.key}
-            dataType={dataType}
             {...rest}
-            {...(validate || dataType ? getValidate(validate, dataType, validatorMapper) : {})}
+            {...(validate || rest.dataType ? getValidate(validate, rest.dataType, validatorMapper) : {})}
           />
         </FormFieldHideWrapper>
       </FormConditionWrapper>

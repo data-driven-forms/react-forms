@@ -328,7 +328,7 @@ function IntegrationReactSelect(props) {
 }
 
 IntegrationReactSelect.propTypes = {
-  invalid: PropTypes.string
+  invalid: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 };
 
 export default IntegrationReactSelect;
