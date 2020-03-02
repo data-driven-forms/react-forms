@@ -25,15 +25,15 @@ const Switch = (props) => {
 };
 
 Switch.propTypes = {
-  label: PropTypes.string,
+  label: PropTypes.node,
   isReadOnly: PropTypes.bool,
   isRequired: PropTypes.bool,
-  helperText: PropTypes.string,
-  description: PropTypes.string,
+  helperText: PropTypes.node,
+  description: PropTypes.node,
   isDisabled: PropTypes.bool,
   id: PropTypes.string,
-  onText: PropTypes.string,
-  offText: PropTypes.string
+  onText: PropTypes.node,
+  offText: PropTypes.node
 };
 
 export default Switch;

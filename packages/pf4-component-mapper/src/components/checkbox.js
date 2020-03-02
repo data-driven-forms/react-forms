@@ -28,12 +28,7 @@ SingleCheckbox.propTypes = {
   isReadOnly: PropTypes.bool,
   isRequired: PropTypes.bool,
   helperText: PropTypes.string,
-  meta: PropTypes.object.isRequired,
   description: PropTypes.string,
-  input: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    checked: PropTypes.bool
-  }).isRequired,
   isDisabled: PropTypes.bool,
   id: PropTypes.string
 };
@@ -47,7 +42,7 @@ const Checkbox = ({ options, ...props }) => {
 };
 
 Checkbox.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, value: PropTypes.string }))
+  options: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, value: PropTypes.any }))
 };
 
 export default Checkbox;

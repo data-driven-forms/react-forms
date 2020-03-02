@@ -37,7 +37,8 @@ const FieldWrapper = ({ componentType, validate, component, ...rest }) => {
 FieldWrapper.propTypes = {
   componentType: PropTypes.string,
   validate: PropTypes.arrayOf(PropTypes.func),
-  component: PropTypes.oneOfType([PropTypes.node, PropTypes.func, PropTypes.element]).isRequired
+  component: PropTypes.oneOfType([PropTypes.node, PropTypes.func, PropTypes.element]).isRequired,
+  dataType: PropTypes.string
 };
 
 export default FieldWrapper;

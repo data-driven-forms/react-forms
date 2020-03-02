@@ -638,101 +638,16 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                       className="pf-c-form__group"
                                                     >
                                                       <ForwardRef
-                                                        formOptions={
-                                                          Object {
-                                                            "batch": [Function],
-                                                            "blur": [Function],
-                                                            "change": [Function],
-                                                            "clearOnUnmount": false,
-                                                            "clearedValue": undefined,
-                                                            "concat": [Function],
-                                                            "destroyOnUnregister": false,
-                                                            "focus": [Function],
-                                                            "getFieldState": [Function],
-                                                            "getRegisteredFields": [Function],
-                                                            "getState": [Function],
-                                                            "handleSubmit": [Function],
-                                                            "initialize": [Function],
-                                                            "insert": [Function],
-                                                            "isValidationPaused": [Function],
-                                                            "move": [Function],
-                                                            "onCancel": [MockFunction],
-                                                            "onReset": undefined,
-                                                            "onSubmit": [MockFunction],
-                                                            "pauseValidation": [Function],
-                                                            "pop": [Function],
-                                                            "pristine": true,
-                                                            "push": [Function],
-                                                            "registerField": [Function],
-                                                            "remove": [Function],
-                                                            "removeBatch": [Function],
-                                                            "renderForm": [Function],
-                                                            "reset": [Function],
-                                                            "resetFieldState": [Function],
-                                                            "resumeValidation": [Function],
-                                                            "setConfig": [Function],
-                                                            "shift": [Function],
-                                                            "submit": [Function],
-                                                            "subscribe": [Function],
-                                                            "swap": [Function],
-                                                            "unshift": [Function],
-                                                            "update": [Function],
-                                                            "valid": true,
-                                                          }
-                                                        }
                                                         id="foo-field"
                                                         name="foo-field"
                                                         onBlur={[Function]}
                                                         onChange={[Function]}
                                                         onFocus={[Function]}
-                                                        validate={[Function]}
                                                         value=""
                                                       >
                                                         <TextInputBase
                                                           aria-label={null}
                                                           className=""
-                                                          formOptions={
-                                                            Object {
-                                                              "batch": [Function],
-                                                              "blur": [Function],
-                                                              "change": [Function],
-                                                              "clearOnUnmount": false,
-                                                              "clearedValue": undefined,
-                                                              "concat": [Function],
-                                                              "destroyOnUnregister": false,
-                                                              "focus": [Function],
-                                                              "getFieldState": [Function],
-                                                              "getRegisteredFields": [Function],
-                                                              "getState": [Function],
-                                                              "handleSubmit": [Function],
-                                                              "initialize": [Function],
-                                                              "insert": [Function],
-                                                              "isValidationPaused": [Function],
-                                                              "move": [Function],
-                                                              "onCancel": [MockFunction],
-                                                              "onReset": undefined,
-                                                              "onSubmit": [MockFunction],
-                                                              "pauseValidation": [Function],
-                                                              "pop": [Function],
-                                                              "pristine": true,
-                                                              "push": [Function],
-                                                              "registerField": [Function],
-                                                              "remove": [Function],
-                                                              "removeBatch": [Function],
-                                                              "renderForm": [Function],
-                                                              "reset": [Function],
-                                                              "resetFieldState": [Function],
-                                                              "resumeValidation": [Function],
-                                                              "setConfig": [Function],
-                                                              "shift": [Function],
-                                                              "submit": [Function],
-                                                              "subscribe": [Function],
-                                                              "swap": [Function],
-                                                              "unshift": [Function],
-                                                              "update": [Function],
-                                                              "valid": true,
-                                                            }
-                                                          }
                                                           id="foo-field"
                                                           innerRef={null}
                                                           isDisabled={false}
@@ -744,7 +659,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                           onChange={[Function]}
                                                           onFocus={[Function]}
                                                           type="text"
-                                                          validate={[Function]}
                                                           validated="default"
                                                           value=""
                                                         >
@@ -753,48 +667,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                             aria-label={null}
                                                             className="pf-c-form-control"
                                                             disabled={false}
-                                                            formOptions={
-                                                              Object {
-                                                                "batch": [Function],
-                                                                "blur": [Function],
-                                                                "change": [Function],
-                                                                "clearOnUnmount": false,
-                                                                "clearedValue": undefined,
-                                                                "concat": [Function],
-                                                                "destroyOnUnregister": false,
-                                                                "focus": [Function],
-                                                                "getFieldState": [Function],
-                                                                "getRegisteredFields": [Function],
-                                                                "getState": [Function],
-                                                                "handleSubmit": [Function],
-                                                                "initialize": [Function],
-                                                                "insert": [Function],
-                                                                "isValidationPaused": [Function],
-                                                                "move": [Function],
-                                                                "onCancel": [MockFunction],
-                                                                "onReset": undefined,
-                                                                "onSubmit": [MockFunction],
-                                                                "pauseValidation": [Function],
-                                                                "pop": [Function],
-                                                                "pristine": true,
-                                                                "push": [Function],
-                                                                "registerField": [Function],
-                                                                "remove": [Function],
-                                                                "removeBatch": [Function],
-                                                                "renderForm": [Function],
-                                                                "reset": [Function],
-                                                                "resetFieldState": [Function],
-                                                                "resumeValidation": [Function],
-                                                                "setConfig": [Function],
-                                                                "shift": [Function],
-                                                                "submit": [Function],
-                                                                "subscribe": [Function],
-                                                                "swap": [Function],
-                                                                "unshift": [Function],
-                                                                "update": [Function],
-                                                                "valid": true,
-                                                              }
-                                                            }
                                                             id="foo-field"
                                                             name="foo-field"
                                                             onBlur={[Function]}
@@ -803,7 +675,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                             readOnly={false}
                                                             required={false}
                                                             type="text"
-                                                            validate={[Function]}
                                                             value=""
                                                           />
                                                         </TextInputBase>
@@ -1499,7 +1370,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                             <input
                                               aria-invalid="false"
                                               class="pf-c-form-control"
-                                              formoptions="[object Object]"
                                               id="foo-field"
                                               name="foo-field"
                                               type="text"
@@ -1604,7 +1474,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                               <input
                                                 aria-invalid="false"
                                                 class="pf-c-form-control"
-                                                formoptions="[object Object]"
                                                 id="foo-field"
                                                 name="foo-field"
                                                 type="text"
@@ -1980,101 +1849,16 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                                 className="pf-c-form__group"
                                                               >
                                                                 <ForwardRef
-                                                                  formOptions={
-                                                                    Object {
-                                                                      "batch": [Function],
-                                                                      "blur": [Function],
-                                                                      "change": [Function],
-                                                                      "clearOnUnmount": false,
-                                                                      "clearedValue": undefined,
-                                                                      "concat": [Function],
-                                                                      "destroyOnUnregister": false,
-                                                                      "focus": [Function],
-                                                                      "getFieldState": [Function],
-                                                                      "getRegisteredFields": [Function],
-                                                                      "getState": [Function],
-                                                                      "handleSubmit": [Function],
-                                                                      "initialize": [Function],
-                                                                      "insert": [Function],
-                                                                      "isValidationPaused": [Function],
-                                                                      "move": [Function],
-                                                                      "onCancel": [MockFunction],
-                                                                      "onReset": undefined,
-                                                                      "onSubmit": [MockFunction],
-                                                                      "pauseValidation": [Function],
-                                                                      "pop": [Function],
-                                                                      "pristine": true,
-                                                                      "push": [Function],
-                                                                      "registerField": [Function],
-                                                                      "remove": [Function],
-                                                                      "removeBatch": [Function],
-                                                                      "renderForm": [Function],
-                                                                      "reset": [Function],
-                                                                      "resetFieldState": [Function],
-                                                                      "resumeValidation": [Function],
-                                                                      "setConfig": [Function],
-                                                                      "shift": [Function],
-                                                                      "submit": [Function],
-                                                                      "subscribe": [Function],
-                                                                      "swap": [Function],
-                                                                      "unshift": [Function],
-                                                                      "update": [Function],
-                                                                      "valid": true,
-                                                                    }
-                                                                  }
                                                                   id="foo-field"
                                                                   name="foo-field"
                                                                   onBlur={[Function]}
                                                                   onChange={[Function]}
                                                                   onFocus={[Function]}
-                                                                  validate={[Function]}
                                                                   value=""
                                                                 >
                                                                   <TextInputBase
                                                                     aria-label={null}
                                                                     className=""
-                                                                    formOptions={
-                                                                      Object {
-                                                                        "batch": [Function],
-                                                                        "blur": [Function],
-                                                                        "change": [Function],
-                                                                        "clearOnUnmount": false,
-                                                                        "clearedValue": undefined,
-                                                                        "concat": [Function],
-                                                                        "destroyOnUnregister": false,
-                                                                        "focus": [Function],
-                                                                        "getFieldState": [Function],
-                                                                        "getRegisteredFields": [Function],
-                                                                        "getState": [Function],
-                                                                        "handleSubmit": [Function],
-                                                                        "initialize": [Function],
-                                                                        "insert": [Function],
-                                                                        "isValidationPaused": [Function],
-                                                                        "move": [Function],
-                                                                        "onCancel": [MockFunction],
-                                                                        "onReset": undefined,
-                                                                        "onSubmit": [MockFunction],
-                                                                        "pauseValidation": [Function],
-                                                                        "pop": [Function],
-                                                                        "pristine": true,
-                                                                        "push": [Function],
-                                                                        "registerField": [Function],
-                                                                        "remove": [Function],
-                                                                        "removeBatch": [Function],
-                                                                        "renderForm": [Function],
-                                                                        "reset": [Function],
-                                                                        "resetFieldState": [Function],
-                                                                        "resumeValidation": [Function],
-                                                                        "setConfig": [Function],
-                                                                        "shift": [Function],
-                                                                        "submit": [Function],
-                                                                        "subscribe": [Function],
-                                                                        "swap": [Function],
-                                                                        "unshift": [Function],
-                                                                        "update": [Function],
-                                                                        "valid": true,
-                                                                      }
-                                                                    }
                                                                     id="foo-field"
                                                                     innerRef={null}
                                                                     isDisabled={false}
@@ -2086,7 +1870,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                                     onChange={[Function]}
                                                                     onFocus={[Function]}
                                                                     type="text"
-                                                                    validate={[Function]}
                                                                     validated="default"
                                                                     value=""
                                                                   >
@@ -2095,48 +1878,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                                       aria-label={null}
                                                                       className="pf-c-form-control"
                                                                       disabled={false}
-                                                                      formOptions={
-                                                                        Object {
-                                                                          "batch": [Function],
-                                                                          "blur": [Function],
-                                                                          "change": [Function],
-                                                                          "clearOnUnmount": false,
-                                                                          "clearedValue": undefined,
-                                                                          "concat": [Function],
-                                                                          "destroyOnUnregister": false,
-                                                                          "focus": [Function],
-                                                                          "getFieldState": [Function],
-                                                                          "getRegisteredFields": [Function],
-                                                                          "getState": [Function],
-                                                                          "handleSubmit": [Function],
-                                                                          "initialize": [Function],
-                                                                          "insert": [Function],
-                                                                          "isValidationPaused": [Function],
-                                                                          "move": [Function],
-                                                                          "onCancel": [MockFunction],
-                                                                          "onReset": undefined,
-                                                                          "onSubmit": [MockFunction],
-                                                                          "pauseValidation": [Function],
-                                                                          "pop": [Function],
-                                                                          "pristine": true,
-                                                                          "push": [Function],
-                                                                          "registerField": [Function],
-                                                                          "remove": [Function],
-                                                                          "removeBatch": [Function],
-                                                                          "renderForm": [Function],
-                                                                          "reset": [Function],
-                                                                          "resetFieldState": [Function],
-                                                                          "resumeValidation": [Function],
-                                                                          "setConfig": [Function],
-                                                                          "shift": [Function],
-                                                                          "submit": [Function],
-                                                                          "subscribe": [Function],
-                                                                          "swap": [Function],
-                                                                          "unshift": [Function],
-                                                                          "update": [Function],
-                                                                          "valid": true,
-                                                                        }
-                                                                      }
                                                                       id="foo-field"
                                                                       name="foo-field"
                                                                       onBlur={[Function]}
@@ -2145,7 +1886,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                                       readOnly={false}
                                                                       required={false}
                                                                       type="text"
-                                                                      validate={[Function]}
                                                                       value=""
                                                                     />
                                                                   </TextInputBase>

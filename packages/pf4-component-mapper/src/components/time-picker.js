@@ -26,12 +26,8 @@ TimePicker.propTypes = {
   isReadOnly: PropTypes.bool,
   isRequired: PropTypes.bool,
   helperText: PropTypes.string,
-  meta: PropTypes.object.isRequired,
   description: PropTypes.string,
   hideLabel: PropTypes.string,
-  input: PropTypes.shape({
-    name: PropTypes.string.isRequired
-  }).isRequired,
   isDisabled: PropTypes.bool,
   id: PropTypes.string
 };
