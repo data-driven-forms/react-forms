@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
-const SubForm = ({ fields, title, description, FieldProvider: _FieldProvider, FormSpyProvider: _FormSpyProvider, validate: _validate, ...rest }) => {
+const SubForm = ({ fields, title, description, FormSpyProvider: _FormSpyProvider, validate: _validate, ...rest }) => {
   const { renderForm } = useFormApi();
   return (
     <Grid item xs={12} container style={{ paddingRight: 0, paddingLeft: 0 }} {...rest}>
@@ -30,7 +30,6 @@ SubForm.propTypes = {
   fields: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
   title: PropTypes.string,
   description: PropTypes.string,
-  FieldProvider: PropTypes.any,
   FormSpyProvider: PropTypes.any,
   validate: PropTypes.any
 };

@@ -43,7 +43,6 @@ const WizardStepButtons = ({
   disableBack,
   handlePrev,
   nextStep,
-  FieldProvider,
   handleNext,
   buttonsClassName,
   buttonLabels: { cancel, submit, back, next },
@@ -58,7 +57,6 @@ const WizardStepButtons = ({
         disableBack={disableBack}
         handlePrev={handlePrev}
         nextStep={nextStep}
-        FieldProvider={FieldProvider}
         handleNext={handleNext}
         buttonsClassName={buttonsClassName}
         buttonLabels={{ cancel, submit, back, next }}
@@ -93,7 +91,6 @@ WizardStepButtons.propTypes = {
     }),
     PropTypes.func
   ]),
-  FieldProvider: PropTypes.func,
   buttonLabels: PropTypes.shape({
     submit: PropTypes.string.isRequired,
     cancel: PropTypes.string.isRequired,

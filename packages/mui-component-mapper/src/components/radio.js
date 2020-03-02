@@ -63,7 +63,6 @@ const Radio = ({ name, ...props }) => {
 
 Radio.propTypes = {
   ...wrapperProps,
-  FieldProvider: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   options: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.any,
@@ -72,10 +71,6 @@ Radio.propTypes = {
   ),
   label: PropTypes.node.isRequired,
   isDisabled: PropTypes.bool,
-  input: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired
-  }),
   children: PropTypes.any,
   description: PropTypes.node
 };

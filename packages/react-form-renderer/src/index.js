@@ -10,4 +10,5 @@ export { default as RendererContext } from './components/renderer-context';
 export { default as FormSpy } from './components/form-spy';
 export { default as Form } from './components/form';
 export { default as FieldArray } from './components/field-array';
+export { default as FieldProvider } from './components/field-provider';
 export { default as useFieldApi } from './hooks/use-field-api';

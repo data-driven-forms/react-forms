@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../button';
 import { Icon, Wizard } from 'patternfly-react';
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 import './button.scss';
 
@@ -20,20 +21,18 @@ SimpleNext.propTypes = {
   buttonLabels: PropTypes.object.isRequired
 };
 
-const ConditionalNext = ({ nextStep, FieldProvider, ...rest }) => (
-  <FieldProvider
-    name={nextStep.when}
-    subscription={{ value: true }}
-    render={({ input: { value } }) => <SimpleNext next={nextStep.stepMapper[value]} {...rest} />}
-  />
-);
+const ConditionalNext = ({ nextStep, ...rest }) => {
+  const {
+    input: { value }
+  } = useFieldApi({ name: nextStep.when, subscription: { value: true } });
+  return <SimpleNext next={nextStep.stepMapper[value]} {...rest} />;
+};
 
 ConditionalNext.propTypes = {
   nextStep: PropTypes.shape({
     when: PropTypes.string.isRequired,
     stepMapper: PropTypes.object.isRequired
-  }).isRequired,
-  FieldProvider: PropTypes.func.isRequired
+  }).isRequired
 };
 
 const submitButton = (handleSubmit, submitText) => (
@@ -51,7 +50,7 @@ const renderNextButton = ({ nextStep, handleSubmit, buttonLabels, ...rest }) =>
     <SimpleNext next={nextStep} buttonLabels={buttonLabels} {...rest} />
   );
 
-const WizardStepButtons = ({ disableBack, handlePrev, nextStep, FieldProvider, formOptions, handleNext, buttonLabels }) => (
+const WizardStepButtons = ({ disableBack, handlePrev, nextStep, formOptions, handleNext, buttonLabels }) => (
   <Wizard.Footer>
     {formOptions.onCancel && (
       <Button
@@ -74,7 +73,6 @@ const WizardStepButtons = ({ disableBack, handlePrev, nextStep, FieldProvider, f
       ...formOptions,
       handleNext,
       nextStep,
-      FieldProvider,
       buttonLabels
     })}
   </Wizard.Footer>
@@ -91,7 +89,6 @@ WizardStepButtons.propTypes = {
       stepMapper: PropTypes.object.isRequired
     })
   ]),
-  FieldProvider: PropTypes.func.isRequired,
   buttonLabels: PropTypes.object.isRequired,
   formOptions: PropTypes.shape({
     onCancel: PropTypes.func.isRequired

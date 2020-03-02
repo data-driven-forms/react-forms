@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
-const SubForm = ({ fields, title, description, FieldProvider: _FieldProvider, FormSpyProvider: _FormSpyProvider, validate: _validate, ...rest }) => {
+const SubForm = ({ fields, title, description, FormSpyProvider: _FormSpyProvider, validate: _validate, ...rest }) => {
   const formOptions = useFormApi();
   return (
     <div {...rest}>
@@ -17,7 +17,6 @@ SubForm.propTypes = {
   fields: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
   title: PropTypes.string,
   description: PropTypes.string,
-  FieldProvider: PropTypes.any,
   FormSpyProvider: PropTypes.any,
   validate: PropTypes.any
 };

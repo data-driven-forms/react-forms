@@ -51,7 +51,6 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
         onKeyDown={[Function]}
       >
         <WizardStep
-          FieldProvider={[Function]}
           buttonLabels={
             Object {
               "back": "Back",
@@ -113,7 +112,6 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
             </ModalBody>
           </WizardBody>
           <WizardStepButtons
-            FieldProvider={[Function]}
             buttonLabels={
               Object {
                 "back": "Back",
@@ -219,7 +217,6 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                     </Button>
                   </Button>
                   <SimpleNext
-                    FieldProvider={[Function]}
                     buttonLabels={
                       Object {
                         "back": "Back",
@@ -328,7 +325,6 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
         onKeyDown={[Function]}
       >
         <WizardStep
-          FieldProvider={[Function]}
           buttonLabels={
             Object {
               "back": "Back",
@@ -397,7 +393,6 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
             </ModalBody>
           </WizardBody>
           <WizardStepButtons
-            FieldProvider={[Function]}
             buttonLabels={
               Object {
                 "back": "Back",
@@ -510,7 +505,6 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                     </Button>
                   </Button>
                   <ConditionalNext
-                    FieldProvider={[Function]}
                     buttonLabels={
                       Object {
                         "back": "Back",
@@ -534,57 +528,47 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                     submit={[Function]}
                     valid={true}
                   >
-                    <MockFieldProvider
-                      name="step"
-                      render={[Function]}
-                      subscription={
+                    <SimpleNext
+                      buttonLabels={
                         Object {
-                          "value": true,
+                          "back": "Back",
+                          "cancel": "Cancel",
+                          "next": "Next",
+                          "submit": "Submit",
                         }
                       }
+                      getState={[Function]}
+                      handleNext={[Function]}
+                      onCancel={[MockFunction]}
+                      onSubmit={[MockFunction]}
+                      submit={[Function]}
+                      valid={true}
                     >
-                      <SimpleNext
-                        buttonLabels={
-                          Object {
-                            "back": "Back",
-                            "cancel": "Cancel",
-                            "next": "Next",
-                            "submit": "Submit",
-                          }
-                        }
-                        getState={[Function]}
-                        handleNext={[Function]}
-                        onCancel={[MockFunction]}
-                        onSubmit={[MockFunction]}
-                        submit={[Function]}
-                        valid={true}
+                      <Button
+                        bsStyle="primary"
+                        className="margin-left-3"
+                        onClick={[Function]}
+                        type="button"
                       >
                         <Button
+                          active={false}
+                          block={false}
+                          bsClass="btn"
                           bsStyle="primary"
                           className="margin-left-3"
+                          disabled={false}
                           onClick={[Function]}
                           type="button"
                         >
-                          <Button
-                            active={false}
-                            block={false}
-                            bsClass="btn"
-                            bsStyle="primary"
-                            className="margin-left-3"
+                          <button
+                            className="margin-left-3 btn btn-primary"
                             disabled={false}
                             onClick={[Function]}
                             type="button"
-                          >
-                            <button
-                              className="margin-left-3 btn btn-primary"
-                              disabled={false}
-                              onClick={[Function]}
-                              type="button"
-                            />
-                          </Button>
+                          />
                         </Button>
-                      </SimpleNext>
-                    </MockFieldProvider>
+                      </Button>
+                    </SimpleNext>
                   </ConditionalNext>
                 </div>
               </ModalFooter>
@@ -752,7 +736,6 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
           </div>
         </WizardSteps>
         <WizardStep
-          FieldProvider={[Function]}
           buttonLabels={
             Object {
               "back": "Back",
@@ -814,7 +797,6 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
             </ModalBody>
           </WizardBody>
           <WizardStepButtons
-            FieldProvider={[Function]}
             buttonLabels={
               Object {
                 "back": "Back",
@@ -920,7 +902,6 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                     </Button>
                   </Button>
                   <SimpleNext
-                    FieldProvider={[Function]}
                     buttonLabels={
                       Object {
                         "back": "Back",
@@ -1045,7 +1026,6 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
           </div>
         </ModalHeader>
         <WizardStep
-          FieldProvider={[Function]}
           buttonLabels={
             Object {
               "back": "Back",
@@ -1107,7 +1087,6 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
             </ModalBody>
           </WizardBody>
           <WizardStepButtons
-            FieldProvider={[Function]}
             buttonLabels={
               Object {
                 "back": "Back",
@@ -1213,7 +1192,6 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                     </Button>
                   </Button>
                   <SimpleNext
-                    FieldProvider={[Function]}
                     buttonLabels={
                       Object {
                         "back": "Back",

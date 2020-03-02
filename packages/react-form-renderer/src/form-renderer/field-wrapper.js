@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import componentTypes from '../components/component-types';
-import FieldProvider from '../components/field-provider';
 import composeValidators from '../components/compose-validators';
 
 const shouldAssignFormOptions = (componentType) => componentTypes.FIELD_ARRAY === componentType;
@@ -11,7 +10,6 @@ const assignSpecialType = (componentType) => ([componentTypes.CHECKBOX, componen
 const FieldWrapper = ({ componentType, validate, component, ...rest }) => {
   const componentProps = {
     type: assignSpecialType(componentType),
-    FieldProvider,
     ...rest
   };
   if (shouldAssignFormOptions(componentType)) {

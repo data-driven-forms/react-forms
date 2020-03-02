@@ -35,7 +35,6 @@ const Wizard = ({
   predictSteps,
   title,
   description,
-  FieldProvider,
   buttonLabels,
   buttonsClassName,
   setFullWidth,
@@ -110,7 +109,6 @@ const Wizard = ({
         handleSubmit
       }}
       buttonLabels={buttonLabels}
-      FieldProvider={FieldProvider}
       buttonsClassName={buttonsClassName}
       showTitles={showTitles}
     />
@@ -176,7 +174,6 @@ Wizard.propTypes = {
   buttonsClassName: PropTypes.string,
   title: PropTypes.any,
   description: PropTypes.any,
-  FieldProvider: PropTypes.PropTypes.oneOfType([PropTypes.object, PropTypes.func]).isRequired,
   FormSpyProvider: PropTypes.PropTypes.oneOfType([PropTypes.object, PropTypes.func]).isRequired,
   fields: PropTypes.arrayOf(
     PropTypes.shape({
