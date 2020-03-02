@@ -546,6 +546,7 @@ exports[`renderForm function should render single field from defined componentTy
   >
     <SingleField
       component="text-field"
+      key="foo"
       name="foo"
       validate={
         Array [
@@ -568,7 +569,6 @@ exports[`renderForm function should render single field from defined componentTy
             }
           >
             <Component
-              FieldProvider={[Function]}
               name="foo"
               validate={[Function]}
             >

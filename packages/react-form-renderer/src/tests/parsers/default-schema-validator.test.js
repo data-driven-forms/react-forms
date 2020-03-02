@@ -390,4 +390,95 @@ describe('Default schema validator', () => {
       )
     ).not.toThrow();
   });
+
+  describe('actionMapper validation', () => {
+    const name = 'somecomponent';
+    const prop = 'loadOptions';
+    const action = 'customAction';
+    const actionTypes = [action];
+
+    it('should not fail if action exists', () => {
+      expect(() =>
+        defaultSchemaValidator(
+          {
+            fields: [
+              {
+                component: 'foo',
+                name,
+                actions: {
+                  [prop]: [action]
+                }
+              }
+            ]
+          },
+          formFieldsMapper,
+          [],
+          actionTypes
+        )
+      ).not.toThrow();
+    });
+
+    it('should fail if action doesnt exist in the mapper', () => {
+      expect(() =>
+        defaultSchemaValidator(
+          {
+            fields: [
+              {
+                component: 'foo',
+                name,
+                actions: {
+                  [prop]: ['nonsense']
+                }
+              }
+            ]
+          },
+          formFieldsMapper,
+          [],
+          actionTypes
+        )
+      ).toThrowErrorMatchingSnapshot();
+    });
+
+    it('should fail if action is missing action key', () => {
+      expect(() =>
+        defaultSchemaValidator(
+          {
+            fields: [
+              {
+                component: 'foo',
+                name,
+                actions: {
+                  [prop]: []
+                }
+              }
+            ]
+          },
+          formFieldsMapper,
+          [],
+          actionTypes
+        )
+      ).toThrowErrorMatchingSnapshot();
+    });
+
+    it('should fail if action is undefined', () => {
+      expect(() =>
+        defaultSchemaValidator(
+          {
+            fields: [
+              {
+                component: 'foo',
+                name,
+                actions: {
+                  [prop]: undefined
+                }
+              }
+            ]
+          },
+          formFieldsMapper,
+          [],
+          actionTypes
+        )
+      ).toThrowErrorMatchingSnapshot();
+    });
+  });
 });

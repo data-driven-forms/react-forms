@@ -22,7 +22,8 @@ const FormRenderer = ({
   subscription,
   clearedValue,
   schema,
-  validatorMapper
+  validatorMapper,
+  actionMapper
 }) => {
   let schemaError;
 
@@ -30,7 +31,8 @@ const FormRenderer = ({
 
   try {
     const validatorTypes = Object.keys(validatorMapperMerged);
-    defaultSchemaValidator(schema, formFieldsMapper, validatorTypes);
+    const actionTypes = actionMapper ? Object.keys(actionMapper) : [];
+    defaultSchemaValidator(schema, formFieldsMapper, validatorTypes, actionTypes);
   } catch (error) {
     schemaError = error;
     console.error(error);
@@ -58,6 +60,7 @@ const FormRenderer = ({
           value={{
             formFieldsMapper,
             validatorMapper: validatorMapperMerged,
+            actionMapper,
             formOptions: {
               pristine,
               onSubmit,
@@ -94,13 +97,14 @@ FormRenderer.propTypes = {
   subscription: PropTypes.shape({ [PropTypes.string]: PropTypes.bool }),
   clearedValue: PropTypes.any,
   formFieldsMapper: PropTypes.shape({
-    [PropTypes.string]: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]).isRequired
+    [PropTypes.string]: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func])
   }).isRequired,
-  formTemplate: PropTypes.shape({
-    [PropTypes.string]: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]).isRequired
-  }).isRequired,
+  formTemplate: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]).isRequired,
   validatorMapper: PropTypes.shape({
-    [PropTypes.string]: PropTypes.func.isRequired
+    [PropTypes.string]: PropTypes.func
+  }),
+  actionMapper: PropTypes.shape({
+    [PropTypes.string]: PropTypes.func
   })
 };
 

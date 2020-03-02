@@ -1030,7 +1030,7 @@ describe('renderForm function', () => {
     const unmountInitializedField = (wrapper) => updateInput(wrapper, SHOWER_FIELD_INDEX, NOT_SHOW_VALUE);
     const setInitializedToNewValue = (wrapper) => updateInput(wrapper, INITIALIZED_FIELD_INDEX, NEW_VALUE);
 
-    it.only('should reset value after mount when set on fields', () => {
+    it('should reset value after mount when set on fields', () => {
       const SET_INITIALIZE_ON_MOUNT = true;
       const onSubmit = jest.fn();
 
@@ -1176,5 +1176,64 @@ describe('renderForm function', () => {
       expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: SCHEMA_INITIAL_VALUE, [SHOWER_FIELD]: SHOW_VALUE }));
       onSubmit.mockReset();
     });
+  });
+
+  it('should use actionMapper', () => {
+    const id = '23asd86';
+
+    const intl = jest.fn().mockImplementation((id) => `translated ${id}`);
+
+    const action = 'loadLabel';
+    const customActionMapper = {
+      [action]: intl
+    };
+
+    const formFields = [
+      {
+        component: 'custom-component',
+        name: 'foo',
+        label: 'standard label',
+        actions: {
+          label: [action, id]
+        }
+      },
+      {
+        component: 'custom-component',
+        name: 'bar',
+        label: 'standard label'
+      }
+    ];
+
+    const CustomComponent = (props) => {
+      const { label } = useFieldApi(props);
+      return <label>{label}</label>;
+    };
+
+    const wrapper = mount(
+      <FormRenderer
+        formTemplate={formTemplate}
+        formFieldsMapper={{
+          'custom-component': CustomComponent
+        }}
+        schema={{ fields: formFields }}
+        onSubmit={jest.fn()}
+        actionMapper={customActionMapper}
+      />
+    );
+
+    expect(intl).toHaveBeenCalledWith(id);
+    expect(intl.mock.calls).toHaveLength(1);
+    expect(
+      wrapper
+        .find('label')
+        .first()
+        .text()
+    ).toEqual(`translated ${id}`);
+    expect(
+      wrapper
+        .find('label')
+        .last()
+        .text()
+    ).toEqual('standard label');
   });
 });

@@ -127,7 +127,35 @@ const checkDataType = (type, fieldName) => {
   }
 };
 
-const iterateOverFields = (fields, formFieldsMapper, validatorTypes, parent = {}) => {
+const checkActions = (actions, name, actionTypes) => {
+  Object.keys(actions).forEach((prop) => {
+    if (!Array.isArray(actions[prop])) {
+      throw new DefaultSchemaError(`
+      Action on prop "${prop}" in component "${name}" is not an array.
+      Please, make sure you defined your action in the schema.
+      ActionMapper has these values: [${actionTypes}]
+    `);
+    }
+
+    if (!actions[prop][0]) {
+      throw new DefaultSchemaError(`
+      Action on prop "${prop}" in component "${name}" has not defined action type as the first element.
+      Please, make sure you defined your action in the schema.
+      ActionMapper has these values: [${actionTypes}]
+    `);
+    }
+
+    if (!actionTypes.includes(actions[prop][0])) {
+      throw new DefaultSchemaError(`
+      Action on prop "${prop}" in component "${name}" does not exist in ActionMapper.
+      ActionMapper has these values: [${actionTypes}].
+      Use one of them or define new action in the mapper.
+    `);
+    }
+  });
+};
+
+const iterateOverFields = (fields, formFieldsMapper, validatorTypes, actionTypes, parent = {}) => {
   fields.forEach((field) => {
     if (Array.isArray(field)) {
       return iterateOverFields(field, formFieldsMapper, validatorTypes);
@@ -171,18 +199,22 @@ const iterateOverFields = (fields, formFieldsMapper, validatorTypes, parent = {}
     }
 
     if (field.hasOwnProperty('fields')) {
-      iterateOverFields(field.fields, formFieldsMapper, validatorTypes, field);
+      iterateOverFields(field.fields, formFieldsMapper, validatorTypes, actionTypes, field);
+    }
+
+    if (field.hasOwnProperty('actions')) {
+      checkActions(field.actions, field.name, actionTypes);
     }
   });
 };
 
-const defaultSchemaValidator = (schema, formFieldsMapper, validatorTypes = []) => {
+const defaultSchemaValidator = (schema, formFieldsMapper, validatorTypes = [], actionTypes = []) => {
   if (Array.isArray(schema) || typeof schema !== 'object') {
     throw new DefaultSchemaError(`Form Schema must be an object, received ${Array.isArray(schema) ? 'array' : typeof schema}!`);
   }
 
   checkFieldsArray(schema, 'schema');
-  iterateOverFields(schema.fields, formFieldsMapper, validatorTypes);
+  iterateOverFields(schema.fields, formFieldsMapper, validatorTypes, actionTypes);
 };
 
 export default defaultSchemaValidator;

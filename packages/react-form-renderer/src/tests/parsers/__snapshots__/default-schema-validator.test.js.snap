@@ -1,5 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Default schema validator actionMapper validation should fail if action doesnt exist in the mapper 1`] = `
+"
+      Action on prop \\"loadOptions\\" in component \\"somecomponent\\" does not exist in ActionMapper.
+      ActionMapper has these values: [customAction].
+      Use one of them or define new action in the mapper.
+    "
+`;
+
+exports[`Default schema validator actionMapper validation should fail if action is missing action key 1`] = `
+"
+      Action on prop \\"loadOptions\\" in component \\"somecomponent\\" has not defined action type as the first element.
+      Please, make sure you defined your action in the schema.
+      ActionMapper has these values: [customAction]
+    "
+`;
+
+exports[`Default schema validator actionMapper validation should fail if action is undefined 1`] = `
+"
+      Action on prop \\"loadOptions\\" in component \\"somecomponent\\" is not an array.
+      Please, make sure you defined your action in the schema.
+      ActionMapper has these values: [customAction]
+    "
+`;
+
 exports[`Default schema validator should fail if field component from form fields mapper is not a valid React component. 1`] = `"FormComponent \\"invalidComponent\\" from formFieldsMapper is not a valid React component!"`;
 
 exports[`Default schema validator should fail if field component property is not in form fields mapper. 1`] = `
