@@ -253,7 +253,7 @@ describe('FormFields', () => {
 
   describe('formFields generated tests', () => {
     const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (
-      <FormRenderer onSubmit={jest.fn()} formTemplate={formTemplate()} schema={schema} formFieldsMapper={componentMapper} {...props} />
+      <FormRenderer onSubmit={jest.fn()} formTemplate={formTemplate()} schema={schema} componentMapper={componentMapper} {...props} />
     );
     let field;
     let schema;

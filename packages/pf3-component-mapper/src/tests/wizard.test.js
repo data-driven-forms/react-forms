@@ -269,7 +269,7 @@ describe('<Wizard />', () => {
     const wrapper = mount(
       <FormRenderer
         schema={conditionalSchema}
-        formFieldsMapper={componentMapper}
+        componentMapper={componentMapper}
         formTemplate={formTemplate({ showFormControls: false })}
         onCancel={() => {}}
         onSubmit={jest.fn()}

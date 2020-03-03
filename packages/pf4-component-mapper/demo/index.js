@@ -48,7 +48,7 @@ class App extends React.Component {
                 initialValues={{
                     'async-drop-down': 'async-option-2'
                 }}
-                formFieldsMapper={{
+                componentMapper={{
                     ...componentMapper,
                     summary: Summary
                 }}
@@ -62,7 +62,7 @@ class App extends React.Component {
                 <div>Nextstep function</div>
                 <FormRenderer
                     onSubmit={console.log}
-                    formFieldsMapper={{
+                    componentMapper={{
                         ...componentMapper,
                         summary: Summary
                     }}
@@ -74,7 +74,7 @@ class App extends React.Component {
                 <div>Substeps</div>
                 <FormRenderer
                     onSubmit={console.log}
-                    formFieldsMapper={{
+                    componentMapper={{
                         ...componentMapper,
                         summary: Summary
                     }}
@@ -86,7 +86,7 @@ class App extends React.Component {
                 <div>More substep</div>
                 <FormRenderer
                     onSubmit={console.log}
-                    formFieldsMapper={{
+                    componentMapper={{
                         ...componentMapper,
                         summary: Summary
                     }}
@@ -98,7 +98,7 @@ class App extends React.Component {
                 <div>Simple wizard</div>
                 <FormRenderer
                     onSubmit={console.log}
-                    formFieldsMapper={{
+                    componentMapper={{
                         ...componentMapper,
                         summary: Summary
                     }}

@@ -24,7 +24,7 @@ export const components = {
   SubForm
 };
 
-const mapper = {
+const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField,
   [componentTypes.TEXTAREA_FIELD]: TextArea,
   [componentTypes.SELECT_COMPONENT]: Select,
@@ -38,4 +38,4 @@ const mapper = {
   [componentTypes.PLAIN_TEXT]: PlainText
 };
 
-export default mapper;
+export default componentMapper;

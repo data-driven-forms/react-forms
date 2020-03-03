@@ -20,7 +20,7 @@ describe('data types', () => {
   beforeEach(() => {
     initialProps = {
       formTemplate,
-      formFieldsMapper: {
+      componentMapper: {
         [componentTypes.TEXT_FIELD]: DataTypeInput
       },
       schema: {

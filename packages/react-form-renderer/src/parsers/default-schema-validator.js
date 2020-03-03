@@ -155,10 +155,10 @@ const checkActions = (actions, name, actionTypes) => {
   });
 };
 
-const iterateOverFields = (fields, formFieldsMapper, validatorTypes, actionTypes, parent = {}) => {
+const iterateOverFields = (fields, componentMapper, validatorTypes, actionTypes, parent = {}) => {
   fields.forEach((field) => {
     if (Array.isArray(field)) {
-      return iterateOverFields(field, formFieldsMapper, validatorTypes);
+      return iterateOverFields(field, componentMapper, validatorTypes);
     }
 
     if (parent.component !== componentTypes.WIZARD) {
@@ -166,19 +166,19 @@ const iterateOverFields = (fields, formFieldsMapper, validatorTypes, actionTypes
         throw new DefaultSchemaError(`Each fields item must have "component" property!`);
       }
 
-      if (!componentBlackList.includes(field.component) && !formFieldsMapper.hasOwnProperty(field.component)) {
+      if (!componentBlackList.includes(field.component) && !componentMapper.hasOwnProperty(field.component)) {
         throw new DefaultSchemaError(`
-          Component of type "${field.component}" is not present in formFieldsMapper.
-          Please make sure "${field.component} is included in your formFieldsMapper."
-          FormFieldsMapper has these values: [${Object.keys(formFieldsMapper)}]
+          Component of type "${field.component}" is not present in componentMapper.
+          Please make sure "${field.component} is included in your componentMapper."
+          componentMapper has these values: [${Object.keys(componentMapper)}]
         `);
       }
 
       /**
        * Investiage
        */
-      //if (!componentBlackList.includes(field.component) && !isValidComponent(formFieldsMapper[field.component])) {
-      //  throw new DefaultSchemaError(`FormComponent "${field.component}" from formFieldsMapper is not a valid React component!`);
+      //if (!componentBlackList.includes(field.component) && !isValidComponent(componentMapper[field.component])) {
+      //  throw new DefaultSchemaError(`FormComponent "${field.component}" from componentMapper is not a valid React component!`);
       //}
     }
 
@@ -199,7 +199,7 @@ const iterateOverFields = (fields, formFieldsMapper, validatorTypes, actionTypes
     }
 
     if (field.hasOwnProperty('fields')) {
-      iterateOverFields(field.fields, formFieldsMapper, validatorTypes, actionTypes, field);
+      iterateOverFields(field.fields, componentMapper, validatorTypes, actionTypes, field);
     }
 
     if (field.hasOwnProperty('actions')) {
@@ -208,13 +208,13 @@ const iterateOverFields = (fields, formFieldsMapper, validatorTypes, actionTypes
   });
 };
 
-const defaultSchemaValidator = (schema, formFieldsMapper, validatorTypes = [], actionTypes = []) => {
+const defaultSchemaValidator = (schema, componentMapper, validatorTypes = [], actionTypes = []) => {
   if (Array.isArray(schema) || typeof schema !== 'object') {
     throw new DefaultSchemaError(`Form Schema must be an object, received ${Array.isArray(schema) ? 'array' : typeof schema}!`);
   }
 
   checkFieldsArray(schema, 'schema');
-  iterateOverFields(schema.fields, formFieldsMapper, validatorTypes, actionTypes);
+  iterateOverFields(schema.fields, componentMapper, validatorTypes, actionTypes);
 };
 
 export default defaultSchemaValidator;

@@ -16,13 +16,13 @@ where key is a component identifier and value is the Component. The identifiers 
 
 TODO
 
-## FormFieldsMapper
-Form fields mapper defines form inputs which can mutate the form state.
+## ComponentMapper
+Component mapper defines form inputs which can mutate the form state.
 
 # Creating FormTemplate
 
 
-# Creating formFieldsMapper
+# Creating componentMapper
 
 Form fields mapper defines components that are rendered from input schema. Each component in mapper must have an unique key,
 which corresponds to `componentType` in input schema. Keys names can be chosen but there are some predefined constants

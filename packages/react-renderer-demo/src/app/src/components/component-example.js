@@ -142,23 +142,23 @@ class ComponentExample extends Component {
 
     this.mapperVariants = {
       mui: {
-        formFieldsMapper: {
-          ...props.mappers.mui.formFieldsMapper,
+        componentMapper: {
+          ...props.mappers.mui.componentMapper,
           [componentTypes.WIZARD]: MuiWizard,
           summary: Summary
         },
         formTemplate: props.mappers.mui.formTemplate
       },
       pf3: {
-        formFieldsMapper: {
-          ...props.mappers.pf3.formFieldsMapper,
+        componentMapper: {
+          ...props.mappers.pf3.componentMapper,
           summary: Summary
         },
         formTemplate: props.mappers.pf3.formTemplate
       },
       pf4: {
-        formFieldsMapper: {
-          ...props.mappers.pf4.formFieldsMapper,
+        componentMapper: {
+          ...props.mappers.pf4.componentMapper,
           summary: Summary
         },
         formTemplate: props.mappers.pf4.formTemplate

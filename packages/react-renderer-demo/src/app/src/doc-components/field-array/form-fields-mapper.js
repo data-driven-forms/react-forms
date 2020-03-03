@@ -108,7 +108,7 @@ const FieldArray = ({
     </FieldArrayProvider>);
 };
 
-const formFieldsMapper = {
+const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField,
   [componentTypes.FIELD_ARRAY]: FieldArray,
 };
@@ -141,7 +141,7 @@ const FieldArrayProvider = () => {
   return (
     <React.Fragment>
       <FormRender
-        formFieldsMapper={ formFieldsMapper }
+        componentMapper={ componentMapper }
         formTemplate={ () => null }
         schema={ schema }
         onSubmit={ onSubmit }

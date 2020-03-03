@@ -1,6 +1,6 @@
 import React from 'react';
 import FormRender, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
-import { formFieldsMapper, formTemplate } from '@data-driven-forms/pf4-component-mapper';
+import { componentMapper, formTemplate } from '@data-driven-forms/pf4-component-mapper';
 
 const schema = {
   fields: [{
@@ -30,7 +30,7 @@ const schema = {
 const GetStartedForm = () => (
   <div className="pf4">
     <FormRender
-      formFieldsMapper={ formFieldsMapper }
+      componentMapper={ componentMapper }
       formTemplate={ formTemplate() }
       schema={ schema }
       onSubmit={ console.log }

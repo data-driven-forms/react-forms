@@ -17,12 +17,12 @@ const TextField = (props) => {
 };
 
 describe('<FormRenderer />', () => {
-  let formFieldsMapper;
+  let componentMapper;
   let initialProps;
   let schema;
 
   beforeEach(() => {
-    formFieldsMapper = {
+    componentMapper = {
       [componentTypes.TEXT_FIELD]: TextField,
       [componentTypes.TEXTAREA_FIELD]: () => <div className="nested-item">Textarea field</div>,
       [componentTypes.SELECT_COMPONENT]: () => <div className="nested-item">Select field</div>,
@@ -50,7 +50,7 @@ describe('<FormRenderer />', () => {
     };
 
     initialProps = {
-      formFieldsMapper,
+      componentMapper,
       formTemplate,
       onSubmit: jest.fn(),
       schema

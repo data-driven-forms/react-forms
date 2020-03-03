@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
-import { layoutMapper, formFieldsMapper } from '@data-driven-forms/pf4-component-mapper';
+import { componentMapper } from '@data-driven-forms/pf4-component-mapper';
 import { Title } from '@patternfly/react-core/dist/js/components/Title/Title';
 
 const schema = {
@@ -25,7 +25,7 @@ const DataTypesExample = () => {
         }}
         clearedValue={ null }
         formTemplate={ formTemplate }
-        formFieldsMapper={ formFieldsMapper }
+        componentMapper={ componentMapper }
         schema={ schema }
         onSubmit={ console.log }
         onStateUpdate={ ({ values }) => setValues(values) }

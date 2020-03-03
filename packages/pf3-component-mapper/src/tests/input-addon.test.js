@@ -3,7 +3,7 @@ import toJson from 'enzyme-to-json';
 import { mount } from 'enzyme';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { componentTypes as components } from '@data-driven-forms/react-form-renderer';
-import { formFieldsMapper, layoutMapper } from '../';
+import { componentMapper, layoutMapper } from '../';
 
 const schema = {
   fields: [
@@ -33,7 +33,7 @@ describe('<Input Addon>', () => {
     const wrapper = mount(
       <FormRenderer
         schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }] }}
-        formFieldsMapper={formFieldsMapper}
+        componentMapper={componentMapper}
         layoutMapper={layoutMapper}
         onCancel={() => {}}
         showFormControls={false}
@@ -64,7 +64,7 @@ describe('<Input Addon>', () => {
     const wrapper = mount(
       <FormRenderer
         schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }] }}
-        formFieldsMapper={formFieldsMapper}
+        componentMapper={componentMapper}
         layoutMapper={layoutMapper}
         onCancel={() => {}}
         showFormControls={false}
@@ -90,7 +90,7 @@ describe('<Input Addon>', () => {
     const wrapper = mount(
       <FormRenderer
         schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }] }}
-        formFieldsMapper={formFieldsMapper}
+        componentMapper={componentMapper}
         layoutMapper={layoutMapper}
         onCancel={() => {}}
         showFormControls={false}
@@ -115,7 +115,7 @@ describe('<Input Addon>', () => {
     const wrapper = mount(
       <FormRenderer
         schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }] }}
-        formFieldsMapper={formFieldsMapper}
+        componentMapper={componentMapper}
         layoutMapper={layoutMapper}
         onCancel={() => {}}
         showFormControls={false}
@@ -152,7 +152,7 @@ describe('<Input Addon>', () => {
     const wrapper = mount(
       <FormRenderer
         schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }] }}
-        formFieldsMapper={formFieldsMapper}
+        componentMapper={componentMapper}
         layoutMapper={layoutMapper}
         onCancel={() => {}}
         showFormControls={false}
@@ -195,7 +195,7 @@ describe('<Input Addon>', () => {
     const wrapper = mount(
       <FormRenderer
         schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }] }}
-        formFieldsMapper={formFieldsMapper}
+        componentMapper={componentMapper}
         layoutMapper={layoutMapper}
         onCancel={() => {}}
         showFormControls={false}
@@ -259,7 +259,7 @@ describe('<Input Addon>', () => {
     const wrapper = mount(
       <FormRenderer
         schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }] }}
-        formFieldsMapper={formFieldsMapper}
+        componentMapper={componentMapper}
         layoutMapper={layoutMapper}
         onCancel={() => {}}
         showFormControls={false}

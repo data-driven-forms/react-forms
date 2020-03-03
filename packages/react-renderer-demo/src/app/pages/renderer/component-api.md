@@ -17,7 +17,7 @@ There is very short list of that can be applied to every form field
 |Prop|Type|Description|
 |----|:--:|----------:|
 |name|string|Unique field identifier. Value of this field will be under same key|
-|component|string|Component identifier from formFieldsMapper. Rendered component is chosen by this value|
+|component|string|Component identifier from componentMapper. Rendered component is chosen by this value|
 |hideField|boolean|Equivalent to html attribute `hidden`. Hides the field but it remains in DOM. Note that the field is still impacted by the form state. Validation will still apply on hidden field but the error message will not be displayed.|
 
 Each mapper provided in `react-forms` provides a default API for standard components. Standard components are:

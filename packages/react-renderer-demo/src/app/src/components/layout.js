@@ -139,18 +139,18 @@ const Layout = ({ children }) => {
         mappers: {
           pf3: {
             ...pf3,
-            formFieldsMapper: {
-              ...pf3.formFieldsMapper,
+            componentMapper: {
+              ...pf3.componentMapper,
               summary: () => <div>Pf3 summary</div>
             }
           },
           pf4: {
             ...pf4,
-            formFieldsMapper: { ...pf4.formFieldsMapper, summary: () => <div>Pf4 summary</div> }
+            componentMapper: { ...pf4.componentMapper, summary: () => <div>Pf4 summary</div> }
           },
           mui: {
             ...mui,
-            formFieldsMapper: { ...mui.formFieldsMapper, [componentTypes.WIZARD]: MuiWizzard, summary: () => <div>Mui summary</div> }
+            componentMapper: { ...mui.componentMapper, [componentTypes.WIZARD]: MuiWizzard, summary: () => <div>Mui summary</div> }
           }
         }
       })

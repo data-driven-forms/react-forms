@@ -84,7 +84,7 @@ describe('tabs', () => {
     const onSubmit = jest.fn();
     const wrapper = mount(
       <FormRenderer
-        formFieldsMapper={componentMapper}
+        componentMapper={componentMapper}
         formTemplate={formTemplate()}
         onSubmit={(values) => onSubmit(values)}
         schema={{

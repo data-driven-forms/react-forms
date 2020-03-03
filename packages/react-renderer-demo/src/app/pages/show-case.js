@@ -56,7 +56,7 @@ const Forms = ({ mappers }) => {
           <div className={activeMapper.value} style={{ padding: 16 }}>
             <FormRenderer
               formTemplate={mappers[activeMapper.value].layoutMapper({ showFormControls: activeSchema !== 'wizard' })}
-              formFieldsMapper={mappers[activeMapper.value].formFieldsMapper}
+              componentMapper={mappers[activeMapper.value].componentMapper}
               {...schemas[activeSchema]}
               onSubmit={console.log /* eslint-disable-line no-console */}
               onCancel={() => console.log('action canceled') /* eslint-disable-line no-console */}

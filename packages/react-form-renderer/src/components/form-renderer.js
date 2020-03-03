@@ -11,7 +11,7 @@ import SchemaErrorComponent from '../form-renderer/schema-error-component';
 import defaultValidatorMapper from '../validators/validator-mapper';
 
 const FormRenderer = ({
-  formFieldsMapper,
+  componentMapper,
   formTemplate,
   onSubmit,
   onCancel,
@@ -32,7 +32,7 @@ const FormRenderer = ({
   try {
     const validatorTypes = Object.keys(validatorMapperMerged);
     const actionTypes = actionMapper ? Object.keys(actionMapper) : [];
-    defaultSchemaValidator(schema, formFieldsMapper, validatorTypes, actionTypes);
+    defaultSchemaValidator(schema, componentMapper, validatorTypes, actionTypes);
   } catch (error) {
     schemaError = error;
     console.error(error);
@@ -58,7 +58,7 @@ const FormRenderer = ({
       render={({ handleSubmit, pristine, valid, form: { reset, mutators, getState, submit, ...form }, ...state }) => (
         <RendererContext.Provider
           value={{
-            formFieldsMapper,
+            componentMapper,
             validatorMapper: validatorMapperMerged,
             actionMapper,
             formOptions: {
@@ -96,7 +96,7 @@ FormRenderer.propTypes = {
   validate: PropTypes.func,
   subscription: PropTypes.shape({ [PropTypes.string]: PropTypes.bool }),
   clearedValue: PropTypes.any,
-  formFieldsMapper: PropTypes.shape({
+  componentMapper: PropTypes.shape({
     [PropTypes.string]: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func])
   }).isRequired,
   formTemplate: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]).isRequired,

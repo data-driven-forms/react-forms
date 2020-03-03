@@ -37,7 +37,7 @@ standard form components. List of standard components is available <RouterNav hr
 ```jsx
 import NewComponent from './new-component'
 
-const formFieldsMapper = {
+const componentMapper = {
   'new-component': NewComponent
 }
 ```

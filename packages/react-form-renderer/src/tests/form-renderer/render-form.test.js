@@ -55,7 +55,7 @@ describe('renderForm function', () => {
     ];
     const wrapper = mount(
       <ContextWrapper
-        formFieldsMapper={{
+        componentMapper={{
           [componentTypes.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div {...props}>TextField</div>
         }}
       >
@@ -76,7 +76,7 @@ describe('renderForm function', () => {
     ];
     const wrapper = mount(
       <ContextWrapper
-        formFieldsMapper={{
+        componentMapper={{
           [componentTypes.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <h1 {...props}>TextField</h1>
         }}
       >
@@ -101,7 +101,7 @@ describe('renderForm function', () => {
         onSubmit={onSubmit}
         schema={{ fields: formFields }}
         formTemplate={formTemplate}
-        formFieldsMapper={{
+        componentMapper={{
           [componentTypes.TEXT_FIELD]: TextField
         }}
       />
@@ -131,7 +131,7 @@ describe('renderForm function', () => {
         onSubmit={onSubmit}
         schema={{ fields: formFields }}
         formTemplate={formTemplate}
-        formFieldsMapper={{
+        componentMapper={{
           [componentTypes.TEXT_FIELD]: TextField
         }}
       />
@@ -157,7 +157,7 @@ describe('renderForm function', () => {
         onSubmit={onSubmit}
         schema={{ fields: formFields }}
         formTemplate={formTemplate}
-        formFieldsMapper={{
+        componentMapper={{
           [componentTypes.TEXT_FIELD]: TextField
         }}
       />
@@ -183,7 +183,7 @@ describe('renderForm function', () => {
         onSubmit={onSubmit}
         schema={{ fields: formFields }}
         formTemplate={formTemplate}
-        formFieldsMapper={{
+        componentMapper={{
           [componentTypes.TEXT_FIELD]: TextField
         }}
       />
@@ -229,7 +229,7 @@ describe('renderForm function', () => {
     const wrapper = mount(
       <FormRenderer
         formTemplate={formTemplate}
-        formFieldsMapper={{
+        componentMapper={{
           'custom-component': TextField
         }}
         validatorMapper={customValidatorMapper}
@@ -268,7 +268,7 @@ describe('renderForm function', () => {
     ];
     const wrapper = mount(
       <ContextWrapper
-        formFieldsMapper={{
+        componentMapper={{
           'custom-component': CustomComponent
         }}
       >
@@ -289,7 +289,7 @@ describe('renderForm function', () => {
 
     const wrapper = mount(
       <ContextWrapper
-        formFieldsMapper={{
+        componentMapper={{
           'custom-component': CustomComponent
         }}
       >
@@ -318,7 +318,7 @@ describe('renderForm function', () => {
       ];
       const wrapper = mount(
         <ContextWrapper
-          formFieldsMapper={{
+          componentMapper={{
             'custom-component': CustomComponent
           }}
         >
@@ -351,7 +351,7 @@ describe('renderForm function', () => {
 
       const wrapper = mount(
         <ContextWrapper
-          formFieldsMapper={{
+          componentMapper={{
             'custom-component': CustomComponent
           }}
         >
@@ -387,7 +387,7 @@ describe('renderForm function', () => {
 
       const wrapper = mount(
         <ContextWrapper
-          formFieldsMapper={{
+          componentMapper={{
             'custom-component': CustomComponent
           }}
         >
@@ -419,7 +419,7 @@ describe('renderForm function', () => {
 
       const wrapper = mount(
         <ContextWrapper
-          formFieldsMapper={{
+          componentMapper={{
             'custom-component': CustomComponent
           }}
         >
@@ -454,7 +454,7 @@ describe('renderForm function', () => {
       ];
       const wrapper = mount(
         <ContextWrapper
-          formFieldsMapper={{
+          componentMapper={{
             'custom-component': CustomComponent
           }}
         >
@@ -485,7 +485,7 @@ describe('renderForm function', () => {
       ];
       const wrapper = mount(
         <ContextWrapper
-          formFieldsMapper={{
+          componentMapper={{
             'custom-component': CustomComponent
           }}
         >
@@ -517,7 +517,7 @@ describe('renderForm function', () => {
       ];
       const wrapper = mount(
         <ContextWrapper
-          formFieldsMapper={{
+          componentMapper={{
             'custom-component': CustomComponent
           }}
         >
@@ -548,7 +548,7 @@ describe('renderForm function', () => {
       ];
       const wrapper = mount(
         <ContextWrapper
-          formFieldsMapper={{
+          componentMapper={{
             'custom-component': CustomComponent
           }}
         >
@@ -587,7 +587,7 @@ describe('renderForm function', () => {
       ];
       const wrapper = mount(
         <ContextWrapper
-          formFieldsMapper={{
+          componentMapper={{
             'custom-component': CustomComponent
           }}
         >
@@ -634,7 +634,7 @@ describe('renderForm function', () => {
       ];
       const wrapper = mount(
         <ContextWrapper
-          formFieldsMapper={{
+          componentMapper={{
             'custom-component': CustomComponent
           }}
         >
@@ -675,7 +675,7 @@ describe('renderForm function', () => {
 
       const wrapper = mount(
         <ContextWrapper
-          formFieldsMapper={{
+          componentMapper={{
             'custom-component': CustomComponent
           }}
         >
@@ -715,7 +715,7 @@ describe('renderForm function', () => {
           formTemplate={formTemplate}
           schema={{ fields: formFields }}
           onSubmit={jest.fn()}
-          formFieldsMapper={{
+          componentMapper={{
             'custom-component': CustomComponent
           }}
         />
@@ -783,7 +783,7 @@ describe('renderForm function', () => {
       const wrapper = mount(
         <FormRenderer
           formTemplate={formTemplate}
-          formFieldsMapper={{
+          componentMapper={{
             'custom-component': TextField
           }}
           schema={formFields(true)}
@@ -817,7 +817,7 @@ describe('renderForm function', () => {
       const wrapper = mount(
         <FormRenderer
           formTemplate={formTemplate}
-          formFieldsMapper={{
+          componentMapper={{
             'custom-component': TextField
           }}
           schema={formFields()}
@@ -854,7 +854,7 @@ describe('renderForm function', () => {
       const wrapper = mount(
         <FormRenderer
           formTemplate={formTemplate}
-          formFieldsMapper={{
+          componentMapper={{
             'custom-component': TextField
           }}
           schema={formFields()}
@@ -890,7 +890,7 @@ describe('renderForm function', () => {
       const wrapper = mount(
         <FormRenderer
           formTemplate={formTemplate}
-          formFieldsMapper={{
+          componentMapper={{
             'custom-component': TextField
           }}
           schema={formFields(false)}
@@ -927,7 +927,7 @@ describe('renderForm function', () => {
       const wrapper = mount(
         <FormRenderer
           formTemplate={formTemplate}
-          formFieldsMapper={{
+          componentMapper={{
             [componentTypes.TEXT_FIELD]: TextField
           }}
           schema={formFields(undefined, componentTypes.TEXT_FIELD)}
@@ -962,7 +962,7 @@ describe('renderForm function', () => {
       const wrapper = mount(
         <FormRenderer
           formTemplate={formTemplate}
-          formFieldsMapper={{
+          componentMapper={{
             [componentTypes.TEXT_FIELD]: TextField
           }}
           schema={formFields(undefined, componentTypes.TEXT_FIELD)}
@@ -1044,7 +1044,7 @@ describe('renderForm function', () => {
       const wrapper = mount(
         <FormRenderer
           formTemplate={formTemplate}
-          formFieldsMapper={{
+          componentMapper={{
             [componentTypes.TEXT_FIELD]: TextField
           }}
           schema={formFields(SET_INITIALIZE_ON_MOUNT)}
@@ -1084,7 +1084,7 @@ describe('renderForm function', () => {
       const wrapper = mount(
         <FormRenderer
           formTemplate={formTemplate}
-          formFieldsMapper={{
+          componentMapper={{
             [componentTypes.TEXT_FIELD]: TextField
           }}
           schema={formFields(UNSET_INITIALIZE_ON_MOUNT)}
@@ -1124,7 +1124,7 @@ describe('renderForm function', () => {
       const wrapper = mount(
         <FormRenderer
           formTemplate={formTemplate}
-          formFieldsMapper={{
+          componentMapper={{
             [componentTypes.TEXT_FIELD]: TextField
           }}
           schema={formFields(SET_INITIALIZE_ON_MOUNT, SCHEMA_INITIAL_VALUE)}
@@ -1159,7 +1159,7 @@ describe('renderForm function', () => {
       const wrapper = mount(
         <FormRenderer
           formTemplate={formTemplate}
-          formFieldsMapper={{
+          componentMapper={{
             [componentTypes.TEXT_FIELD]: TextField
           }}
           schema={formFields(SET_INITIALIZE_ON_MOUNT, SCHEMA_INITIAL_VALUE)}
@@ -1219,7 +1219,7 @@ describe('renderForm function', () => {
     const wrapper = mount(
       <FormRenderer
         formTemplate={formTemplate}
-        formFieldsMapper={{
+        componentMapper={{
           'custom-component': CustomComponent
         }}
         schema={{ fields: formFields }}

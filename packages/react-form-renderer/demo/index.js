@@ -2,7 +2,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import FormRenderer from '../src';
-import formFieldsMapper from './form-fields-mapper';
+import componentMapper from './form-fields-mapper';
 import FormTemplate from './form-template';
 import sandboxSchema from './sandbox'
 
@@ -21,7 +21,7 @@ const App = () => (
                 text_box_3: 'initial'
             }}
             clearedValue={'bla'}
-            formFieldsMapper={formFieldsMapper}
+            componentMapper={componentMapper}
             onSubmit={(values) => console.log(values)}
             onCancel={console.log}
             canReset

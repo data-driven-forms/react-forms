@@ -3,7 +3,7 @@
 exports[`<Wizard /> should render correctly and unmount 1`] = `
 <FormRenderer
   clearOnUnmount={false}
-  formFieldsMapper={
+  componentMapper={
     Object {
       "checkbox": [Function],
       "date-picker": [Function],
@@ -992,7 +992,7 @@ exports[`<Wizard /> should render correctly and unmount 2`] = `null`;
 exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
 <FormRenderer
   clearOnUnmount={false}
-  formFieldsMapper={
+  componentMapper={
     Object {
       "checkbox": [Function],
       "date-picker": [Function],
