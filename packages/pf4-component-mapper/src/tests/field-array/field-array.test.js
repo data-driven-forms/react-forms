@@ -13,7 +13,7 @@ import { componentMapper, formTemplate } from '../../index';
  */
 describe.skip('FieldArray', () => {
   const ContextWrapper = ({ initialValues = {}, ...rest }) => (
-    <FormRenderer formFieldsMapper={componentMapper} formTemplate={formTemplate()} initialValues={initialValues} onSubmit={jest.fn()} {...rest} />
+    <FormRenderer componentMapper={componentMapper} formTemplate={formTemplate()} initialValues={initialValues} onSubmit={jest.fn()} {...rest} />
   );
 
   it('should render array field correctly', () => {

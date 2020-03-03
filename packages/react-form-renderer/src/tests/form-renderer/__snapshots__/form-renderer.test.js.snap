@@ -3,7 +3,7 @@
 exports[`<FormRenderer /> should render form from schema 1`] = `
 <FormRenderer
   clearOnUnmount={false}
-  formFieldsMapper={
+  componentMapper={
     Object {
       "checkbox": [Function],
       "date-picker": [Function],
@@ -191,7 +191,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
 exports[`<FormRenderer /> should render hidden field 1`] = `
 <FormRenderer
   clearOnUnmount={false}
-  formFieldsMapper={
+  componentMapper={
     Object {
       "checkbox": [Function],
       "date-picker": [Function],

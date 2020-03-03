@@ -42,12 +42,12 @@ const CustomComponent = (props) => {
   return <TextField input={ input } meta={ input } { ...rest } />
 };
 
-const formFieldsMapper = {
+const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField,
   'custom-component-type': CustomComponent,
 };
 
-const FormFieldsMapper = () => {
+const ComponentMapper = () => {
   const schema = {
     fields: [{
       component: componentTypes.TEXT_FIELD,
@@ -79,7 +79,7 @@ const FormFieldsMapper = () => {
   return (
     <div>
       <FormRender
-        formFieldsMapper={ formFieldsMapper }
+        componentMapper={ componentMapper }
         formTemplate={ () => null }
         schema={ schema }
         onSubmit={ console.log }
@@ -89,6 +89,4 @@ const FormFieldsMapper = () => {
   );
 };
 
-FormFieldsMapper.displayName = 'FormFieldsMapper';
-
-export default FormFieldsMapper;
+export default ComponentMapper;

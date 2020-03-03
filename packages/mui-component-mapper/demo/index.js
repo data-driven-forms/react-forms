@@ -31,7 +31,7 @@ const App = () => (
             <Grid item xs={12}>
                 <FormRenderer
                     onSubmit={console.log}
-                    formFieldsMapper={componentMapper}
+                    componentMapper={componentMapper}
                     formTemplate={formTemplate()}
                     schema={sandbox}
                     onCancel={() => console.log('canceling')}

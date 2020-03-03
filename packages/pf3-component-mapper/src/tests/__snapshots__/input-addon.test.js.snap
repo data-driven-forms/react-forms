@@ -3,7 +3,7 @@
 exports[`<Input Addon> should render group button before input addon correctly 1`] = `
 <FormRenderer
   clearOnUnmount={false}
-  formFieldsMapper={
+  componentMapper={
     Object {
       "button": [Function],
       "checkbox": [Function],
@@ -177,7 +177,7 @@ exports[`<Input Addon> should render group button before input addon correctly 1
 exports[`<Input Addon> should render group mixed before input addon correctly 1`] = `
 <FormRenderer
   clearOnUnmount={false}
-  formFieldsMapper={
+  componentMapper={
     Object {
       "button": [Function],
       "checkbox": [Function],
@@ -369,7 +369,7 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
 exports[`<Input Addon> should render single after input addon correctly 1`] = `
 <FormRenderer
   clearOnUnmount={false}
-  formFieldsMapper={
+  componentMapper={
     Object {
       "button": [Function],
       "checkbox": [Function],
@@ -510,7 +510,7 @@ exports[`<Input Addon> should render single after input addon correctly 1`] = `
 exports[`<Input Addon> should render single before input addon correctly 1`] = `
 <FormRenderer
   clearOnUnmount={false}
-  formFieldsMapper={
+  componentMapper={
     Object {
       "button": [Function],
       "checkbox": [Function],
@@ -651,7 +651,7 @@ exports[`<Input Addon> should render single before input addon correctly 1`] = `
 exports[`<Input Addon> should render single button after input addon correctly 1`] = `
 <FormRenderer
   clearOnUnmount={false}
-  formFieldsMapper={
+  componentMapper={
     Object {
       "button": [Function],
       "checkbox": [Function],
@@ -789,7 +789,7 @@ exports[`<Input Addon> should render single button after input addon correctly 1
 exports[`<Input Addon> should render single button before input addon correctly 1`] = `
 <FormRenderer
   clearOnUnmount={false}
-  formFieldsMapper={
+  componentMapper={
     Object {
       "button": [Function],
       "checkbox": [Function],
@@ -945,7 +945,7 @@ exports[`<Input Addon> should render single button before input addon correctly 
 exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
 <FormRenderer
   clearOnUnmount={false}
-  formFieldsMapper={
+  componentMapper={
     Object {
       "button": [Function],
       "checkbox": [Function],

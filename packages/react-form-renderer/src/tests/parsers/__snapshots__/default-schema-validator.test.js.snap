@@ -28,9 +28,9 @@ exports[`Default schema validator should fail if field component from form field
 
 exports[`Default schema validator should fail if field component property is not in form fields mapper. 1`] = `
 "
-          Component of type \\"blarghs\\" is not present in formFieldsMapper.
-          Please make sure \\"blarghs is included in your formFieldsMapper.\\"
-          FormFieldsMapper has these values: [foo,invalidComponent,tabs]
+          Component of type \\"blarghs\\" is not present in componentMapper.
+          Please make sure \\"blarghs is included in your componentMapper.\\"
+          componentMapper has these values: [foo,invalidComponent,tabs]
         "
 `;
 

@@ -16,7 +16,7 @@ Form Renderer provides a lot of customization via props.
 
 |Prop|Type|Description|
 |----|:--:|----------:|
-|<RouterLink href="/renderer/component-mapping"><Link href="/renderer/component-mapping">formFieldsMapper</Link></RouterLink>|object|Defines types of form field components. Field components can change the state of the form.|
+|<RouterLink href="/renderer/component-mapping"><Link href="/renderer/component-mapping">componentMapper</Link></RouterLink>|object|Defines types of form field components. Field components can change the state of the form.|
 |<RouterLink href="/renderer/component-mapping"><Link href="/renderer/component-mapping">layoutMapper</Link></RouterLink>|object|Defines types of layout components, which can't change the state of the form.|
 |onSubmit|func|A submit callback which receives two arguments: `values` and `formApi`.|
 |schema|object|A schema which defines structure of the form.|

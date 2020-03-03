@@ -12,7 +12,7 @@ const CodeEditor = dynamic(import('@docs/components/code-editor'), {
 
 const value = `import React from 'react';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
-import { formFieldsMapper, formTemplate } from '@data-driven-forms/pf4-component-mapper';
+import { componentMapper, formTemplate } from '@data-driven-forms/pf4-component-mapper';
 
 const schema = {
   fields: [{
@@ -25,7 +25,7 @@ const schema = {
 const Form = () => (
   <FormRenderer
     schema={schema}
-    formFieldsMapper={formFieldsMapper}
+    componentMapper={componentMapper}
     formTemplate={formTemplate()}
     onSubmit={console.log}
   />

@@ -5,9 +5,9 @@ import componentTypes from '../../components/component-types';
 import { validatorTypes as validatorTypesDefault } from '../..';
 
 describe('Default schema validator', () => {
-  let formFieldsMapper;
+  let componentMapper;
   beforeEach(() => {
-    formFieldsMapper = {
+    componentMapper = {
       foo: () => <div>Component</div>,
       invalidComponent: 'baz',
       [componentTypes.TABS]: ({ children }) => <div>{children}</div>
@@ -39,7 +39,7 @@ describe('Default schema validator', () => {
             }
           ]
         },
-        formFieldsMapper
+        componentMapper
       )
     ).toThrowErrorMatchingSnapshot();
   });
@@ -55,7 +55,7 @@ describe('Default schema validator', () => {
             }
           ]
         },
-        formFieldsMapper
+        componentMapper
       )
     ).toThrowErrorMatchingSnapshot();
   });
@@ -71,7 +71,7 @@ describe('Default schema validator', () => {
             }
           ]
         },
-        formFieldsMapper
+        componentMapper
       )
     ).toThrowErrorMatchingSnapshot();
   });
@@ -87,7 +87,7 @@ describe('Default schema validator', () => {
             }
           ]
         },
-        formFieldsMapper
+        componentMapper
       )
     ).toThrowErrorMatchingSnapshot();
   });
@@ -104,7 +104,7 @@ describe('Default schema validator', () => {
             }
           ]
         },
-        formFieldsMapper
+        componentMapper
       )
     ).toThrowErrorMatchingSnapshot();
   });
@@ -121,7 +121,7 @@ describe('Default schema validator', () => {
             }
           ]
         },
-        formFieldsMapper
+        componentMapper
       )
     ).toThrowErrorMatchingSnapshot();
   });
@@ -138,7 +138,7 @@ describe('Default schema validator', () => {
             }
           ]
         },
-        formFieldsMapper
+        componentMapper
       )
     ).toThrowErrorMatchingSnapshot();
   });
@@ -155,7 +155,7 @@ describe('Default schema validator', () => {
             }
           ]
         },
-        formFieldsMapper
+        componentMapper
       )
     ).toThrowErrorMatchingSnapshot();
   });
@@ -172,7 +172,7 @@ describe('Default schema validator', () => {
             }
           ]
         },
-        formFieldsMapper
+        componentMapper
       )
     ).toThrowErrorMatchingSnapshot();
   });
@@ -189,7 +189,7 @@ describe('Default schema validator', () => {
             }
           ]
         },
-        formFieldsMapper
+        componentMapper
       )
     ).not.toThrow();
   });
@@ -206,7 +206,7 @@ describe('Default schema validator', () => {
             }
           ]
         },
-        formFieldsMapper
+        componentMapper
       )
     ).toThrowErrorMatchingSnapshot();
   });
@@ -223,7 +223,7 @@ describe('Default schema validator', () => {
             }
           ]
         },
-        formFieldsMapper
+        componentMapper
       )
     ).toThrowErrorMatchingSnapshot();
   });
@@ -240,7 +240,7 @@ describe('Default schema validator', () => {
             }
           ]
         },
-        formFieldsMapper
+        componentMapper
       )
     ).not.toThrow();
   });
@@ -258,7 +258,7 @@ describe('Default schema validator', () => {
             }
           ]
         },
-        formFieldsMapper
+        componentMapper
       )
     ).not.toThrow();
   });
@@ -275,7 +275,7 @@ describe('Default schema validator', () => {
             }
           ]
         },
-        formFieldsMapper
+        componentMapper
       )
     ).toThrowErrorMatchingSnapshot();
   });
@@ -292,7 +292,7 @@ describe('Default schema validator', () => {
             }
           ]
         },
-        formFieldsMapper
+        componentMapper
       )
     ).toThrowErrorMatchingSnapshot();
   });
@@ -313,7 +313,7 @@ describe('Default schema validator', () => {
             }
           ]
         },
-        formFieldsMapper
+        componentMapper
       )
     ).toThrowErrorMatchingSnapshot();
   });
@@ -334,7 +334,7 @@ describe('Default schema validator', () => {
             }
           ]
         },
-        formFieldsMapper,
+        componentMapper,
         ['magic']
       )
     ).not.toThrow();
@@ -352,7 +352,7 @@ describe('Default schema validator', () => {
             }
           ]
         },
-        formFieldsMapper
+        componentMapper
       )
     ).toThrowErrorMatchingSnapshot();
     expect(() =>
@@ -366,7 +366,7 @@ describe('Default schema validator', () => {
             }
           ]
         },
-        formFieldsMapper
+        componentMapper
       )
     ).toThrowErrorMatchingSnapshot();
   });
@@ -376,7 +376,7 @@ describe('Default schema validator', () => {
       defaultSchemaValidator(
         output,
         {
-          ...formFieldsMapper,
+          ...componentMapper,
           'sub-form': () => <div />,
           'text-field': () => <div />,
           'textarea-field': () => <div />,
@@ -411,7 +411,7 @@ describe('Default schema validator', () => {
               }
             ]
           },
-          formFieldsMapper,
+          componentMapper,
           [],
           actionTypes
         )
@@ -432,7 +432,7 @@ describe('Default schema validator', () => {
               }
             ]
           },
-          formFieldsMapper,
+          componentMapper,
           [],
           actionTypes
         )
@@ -453,7 +453,7 @@ describe('Default schema validator', () => {
               }
             ]
           },
-          formFieldsMapper,
+          componentMapper,
           [],
           actionTypes
         )
@@ -474,7 +474,7 @@ describe('Default schema validator', () => {
               }
             ]
           },
-          formFieldsMapper,
+          componentMapper,
           [],
           actionTypes
         )

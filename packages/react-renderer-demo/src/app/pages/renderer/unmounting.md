@@ -24,7 +24,7 @@ When using dynamic forms where more fields share the same name, the value is pre
 ```jsx
 <FormRenderer
   formTemplate={ formTemplate }
-  formFieldsMapper={ formFieldsMapper }
+  componentMapper={ componentMapper }
   schema={ schema }
   onSubmit={ submit }
   clearOnUnmount

@@ -99,7 +99,7 @@ describe('<Wizard />', () => {
 
     initialProps = {
       schema,
-      formFieldsMapper: componentMapper,
+      componentMapper,
       formTemplate: formTemplate({ showFormControls: false }),
       onSubmit: jest.fn(),
       onCancel: jest.fn()
@@ -736,7 +736,7 @@ describe('<Wizard />', () => {
     const wrapper = mount(
       <FormRenderer
         schema={schema}
-        formFieldsMapper={componentMapper}
+        componentMapper={componentMapper}
         formTemplate={formTemplate({ showFormControls: false })}
         onSubmit={jest.fn()}
         onCancel={jest.fn()}
@@ -941,7 +941,7 @@ describe('<Wizard />', () => {
       const wrapper = mount(
         <FormRenderer
           schema={wizardSchema}
-          formFieldsMapper={componentMapper}
+          componentMapper={componentMapper}
           formTemplate={formTemplate({ showFormControls: false })}
           onSubmit={jest.fn()}
           onCancel={jest.fn()}
@@ -984,7 +984,7 @@ describe('<Wizard />', () => {
       const wrapper = mount(
         <FormRenderer
           schema={wizardSchema}
-          formFieldsMapper={componentMapper}
+          componentMapper={componentMapper}
           formTemplate={formTemplate({ showFormControls: false })}
           onSubmit={jest.fn()}
           onCancel={jest.fn()}
@@ -1022,7 +1022,7 @@ describe('<Wizard />', () => {
       const wrapper = mount(
         <FormRenderer
           schema={wizardSchema}
-          formFieldsMapper={componentMapper}
+          componentMapper={componentMapper}
           formTemplate={formTemplate({ showFormControls: false })}
           onSubmit={jest.fn()}
           onCancel={jest.fn()}
@@ -1104,7 +1104,7 @@ describe('<Wizard />', () => {
       const wrapper = mount(
         <FormRenderer
           schema={wizardSchema}
-          formFieldsMapper={componentMapper}
+          componentMapper={componentMapper}
           formTemplate={formTemplate({ showFormControls: false })}
           onSubmit={jest.fn()}
           onCancel={jest.fn()}
@@ -1194,7 +1194,7 @@ describe('<Wizard />', () => {
       const wrapper = mount(
         <FormRenderer
           schema={wizardSchemaWithNextStepFunction}
-          formFieldsMapper={componentMapper}
+          componentMapper={componentMapper}
           formTemplate={formTemplate({ showFormControls: false })}
           onSubmit={jest.fn()}
           onCancel={jest.fn()}
@@ -1268,7 +1268,7 @@ describe('<Wizard />', () => {
       const wrapper = mount(
         <FormRenderer
           schema={wizardSchema}
-          formFieldsMapper={componentMapper}
+          componentMapper={componentMapper}
           formTemplate={formTemplate({ showFormControls: false })}
           onSubmit={jest.fn()}
           onCancel={jest.fn()}

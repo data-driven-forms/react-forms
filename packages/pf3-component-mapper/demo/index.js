@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { Grid, Row } from 'patternfly-react';
-import { formFieldsMapper, formTemplate } from '../src'
+import { componentMapper, formTemplate } from '../src'
 import { schema, uiSchema, conditionalSchema, arraySchema, uiArraySchema } from './demo-schemas/widget-schema';
 import miqSchema from './demo-schemas/miq-schema';
 import wizardSchema from './demo-schemas/wizard-schema';
@@ -111,7 +111,7 @@ class App extends React.Component {
           <FormRenderer
             initialValues={{}}
             onSubmit={console.log}
-            formFieldsMapper={formFieldsMapper}
+            componentMapper={componentMapper}
             formTemplate={formTemplate()}
             schema={sandbox}
             onCancel={() => console.log('cancel')}

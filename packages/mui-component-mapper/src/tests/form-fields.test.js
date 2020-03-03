@@ -8,11 +8,11 @@ import Checkbox from '../components/checkbox';
 import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 import formTemplate from '../components/form-template';
-import formFieldsMapper from '../components/component-mapper';
+import componentMapper from '../components/component-mapper';
 import { Radio } from '@material-ui/core';
 
 const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (
-  <FormRenderer onSubmit={jest.fn()} formTemplate={formTemplate()} schema={schema} formFieldsMapper={formFieldsMapper} {...props} />
+  <FormRenderer onSubmit={jest.fn()} formTemplate={formTemplate()} schema={schema} componentMapper={componentMapper} {...props} />
 );
 
 describe('formFields', () => {
@@ -68,7 +68,7 @@ describe('formFields', () => {
           if (component === componentTypes.RADIO) {
             expect(wrapper.find(Radio)).toHaveLength(options.length);
           } else {
-            expect(wrapper.find(formFieldsMapper[component])).toHaveLength(1);
+            expect(wrapper.find(componentMapper[component])).toHaveLength(1);
           }
 
           expect(wrapper.find(FormLabel).text()).toEqual(field.label);

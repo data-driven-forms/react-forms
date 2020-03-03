@@ -1,6 +1,6 @@
 import React from 'react';
 import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
-import { layoutMapper, formFieldsMapper } from '@data-driven-forms/pf4-component-mapper';
+import { componentMapper } from '@data-driven-forms/pf4-component-mapper';
 import { Button } from '@material-ui/core';
 
 const schema = {
@@ -32,7 +32,7 @@ const FormControls = () => (
   <div className="pf4">
     <FormRenderer
       formTemplate={ formTemplate }
-      formFieldsMapper={ formFieldsMapper }
+      componentMapper={ componentMapper }
       schema={ schema }
       onSubmit={ asyncSubmit }
       renderFormButtons={ FormButtons }

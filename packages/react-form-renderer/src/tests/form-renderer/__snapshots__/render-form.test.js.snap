@@ -2,7 +2,7 @@
 
 exports[`renderForm function #condition should render condition field only if contition is array and passes all validations 1`] = `
 <ContextWrapper
-  formFieldsMapper={
+  componentMapper={
     Object {
       "custom-component": [Function],
     }
@@ -234,7 +234,7 @@ exports[`renderForm function #condition should render condition field only if co
 
 exports[`renderForm function #condition should render condition field only if one of depency fields has correct value 1`] = `
 <ContextWrapper
-  formFieldsMapper={
+  componentMapper={
     Object {
       "custom-component": [Function],
     }
@@ -448,7 +448,7 @@ exports[`renderForm function #condition should render condition field only if on
 
 exports[`renderForm function should render single field from defined componentTypes 1`] = `
 <ContextWrapper
-  formFieldsMapper={
+  componentMapper={
     Object {
       "text-field": [Function],
     }
@@ -507,7 +507,7 @@ exports[`renderForm function should render single field from defined componentTy
 
 exports[`renderForm function should render single field from with custom componentType 1`] = `
 <ContextWrapper
-  formFieldsMapper={
+  componentMapper={
     Object {
       "custom-component": [Function],
     }
