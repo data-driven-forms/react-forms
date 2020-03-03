@@ -5,6 +5,7 @@ import { mount } from 'enzyme';
 import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 import MultipleChoiceList from '../form-fields/multiple-choice-list';
 import { FieldLevelHelp } from 'patternfly-react';
+import Pf3Checkbox from 'patternfly-react/dist/js/components/Form/Checkbox';
 import Switch from '../components/switch';
 import Checkbox from '../components/checkbox';
 import Radio from '../components/radio';
@@ -147,9 +148,26 @@ describe('FormFields', () => {
       expect(wrapper.find(FieldLevelHelp)).toHaveLength(1);
     });
 
-    it.skip('should render multiple choice variant', () => {
-      const wrapper = mount(<Checkbox {...initialProps} options={[]} />);
+    it('should render multiple choice variant', () => {
+      const wrapper = mount(
+        <RenderWithProvider>
+          <Checkbox
+            {...initialProps}
+            options={[
+              {
+                label: 'option 1',
+                value: 1
+              },
+              {
+                label: 'option 2',
+                value: 2
+              }
+            ]}
+          />
+        </RenderWithProvider>
+      );
       expect(wrapper.find(MultipleChoiceList)).toHaveLength(1);
+      expect(wrapper.find(Pf3Checkbox)).toHaveLength(2);
     });
   });
 

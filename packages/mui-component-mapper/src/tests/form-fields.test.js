@@ -216,10 +216,7 @@ describe('formFields', () => {
     });
   });
 
-  /**
-   * fix after multiple checkbox is back in
-   */
-  describe.skip('MultipleCheckbox', () => {
+  describe('MultipleCheckbox', () => {
     let initialProps;
     beforeEach(() => {
       initialProps = {
@@ -233,7 +230,7 @@ describe('formFields', () => {
       };
     });
 
-    it.skip('renders correctly', () => {
+    it('renders correctly', () => {
       const wrapper = mount(
         <RenderWithProvider>
           <Checkbox {...initialProps} />
