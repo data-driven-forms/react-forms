@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Pf3Checkbox from 'patternfly-react/dist/js/components/Form/Checkbox';
 import { FieldLevelHelp } from 'patternfly-react/dist/js/components/FieldLevelHelp';
-// import MultipleChoiceList from '../form-fields/multiple-choice-list';
+import MultipleChoiceList from '../form-fields/multiple-choice-list';
 import FormGroup from '../common/form-wrapper';
 import RequiredLabel from '../form-fields/required-label';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
@@ -28,13 +28,7 @@ SingleCheckbox.propTypes = {
   description: PropTypes.string
 };
 
-const Checkbox = ({ options, ...props }) => {
-  /**
-   * ignore multiple choice list for now
-   * <MultipleChoiceList options={options} {...props} />
-   */
-  return <SingleCheckbox {...props} />;
-};
+const Checkbox = ({ options, ...props }) => (options ? <MultipleChoiceList options={options} {...props} /> : <SingleCheckbox {...props} />);
 
 Checkbox.propTypes = {
   options: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, value: PropTypes.any }))
