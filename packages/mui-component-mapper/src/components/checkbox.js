@@ -10,7 +10,7 @@ import { meta, input } from '@data-driven-forms/common/src/prop-types-templates'
 
 import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
-//import MultipleChoiceList from '../common/multiple-choice-list';
+import MultipleChoiceList from '../common/multiple-choice-list';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 export const SingleCheckbox = (props) => {
@@ -58,13 +58,7 @@ SingleCheckbox.propTypes = {
   validateOnMount: PropTypes.bool
 };
 
-const Checkbox = ({ options, ...rest }) => {
-  /**
-   * ignore multiple choice list for now
-   * <MultipleChoiceList options={options} {...props} />
-   */
-  return <SingleCheckbox {...rest} />;
-};
+const Checkbox = ({ options, ...props }) => (options ? <MultipleChoiceList options={options} {...props} /> : <SingleCheckbox {...props} />);
 
 Checkbox.propTypes = {
   options: PropTypes.array

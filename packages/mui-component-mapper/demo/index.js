@@ -8,7 +8,7 @@ import { componentMapper, formTemplate } from '../src'
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Typography from '@material-ui/core/Typography';
-import sandbox from './demo-schemas/sandbox';
+import demoSchema from '@data-driven-forms/common/src/demoschema';
 
 const theme = createMuiTheme({
     typography: {
@@ -33,7 +33,7 @@ const App = () => (
                     onSubmit={console.log}
                     componentMapper={componentMapper}
                     formTemplate={formTemplate()}
-                    schema={sandbox}
+                    schema={demoSchema}
                     onCancel={() => console.log('canceling')}
                 />
             </Grid>
