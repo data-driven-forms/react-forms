@@ -733,7 +733,7 @@ describe('renderForm function', () => {
     });
   });
 
-  describe.skip('#clearOnUmount', () => {
+  describe('#clearOnUmount', () => {
     const formFields = (clearOnUnmount = undefined, component = 'custom-component') => ({
       fields: [
         {

@@ -28,7 +28,7 @@ const genereateField = (component, name = 'standard', optionsOptional = {}) => [
 
 const componentList = ['text-field', 'checkbox', 'date-picker', 'radio', 'select-field', 'switch-field', 'textarea-field', 'time-picker'];
 
-const output = {
+const superSchema = {
   fields: [
     {
       component: 'tabs',
@@ -85,11 +85,4 @@ const output = {
   ]
 };
 
-export const defaultValues = {
-  text_box_5: '"hello"',
-  check_box_2: 'true',
-  radio_button_4: '2',
-  dropdown_list_2: '2'
-};
-
-export default output;
+export default superSchema;

@@ -1,6 +1,6 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import { Checkbox as Pf4Checkbox, FormGroup, Radio as PF4Radio } from '@patternfly/react-core';
+import { FormGroup, Radio as PF4Radio } from '@patternfly/react-core';
 import { mount, shallow } from 'enzyme';
 import TextField from '../components/text-field';
 import TextArea from '../components/text-area';
@@ -17,15 +17,9 @@ import formTemplate from '../components/form-template';
 import componentMapper from '../components/component-mapper';
 import validatorTypes from '../../../react-form-renderer/src/components/validator-types';
 import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
-import { MultipleChoiceListCommon } from '@data-driven-forms/common/src/multiple-choice-list';
+import MultipleChoiceListCommon from '@data-driven-forms/common/src/multiple-choice-list';
 
 describe('FormFields', () => {
-  let onChangeSpy;
-
-  beforeEach(() => {
-    onChangeSpy = jest.fn();
-  });
-
   const props = {
     name: 'Name of the field',
     id: 'someIdKey',
@@ -94,7 +88,7 @@ describe('FormFields', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it.skip('should render Checkbox with options correctly', () => {
+  it('should render Checkbox with options correctly', () => {
     const wrapper = mount(
       <RenderWithProvider>
         <Checkbox {...propsWithOptions} />
@@ -103,31 +97,13 @@ describe('FormFields', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it.skip('should render disabled Checkbox with options correctly', () => {
+  it('should render disabled Checkbox with options correctly', () => {
     const wrapper = mount(
       <RenderWithProvider>
         <Checkbox {...propsWithOptions} disabled={true} />
       </RenderWithProvider>
     );
     expect(toJson(wrapper)).toMatchSnapshot();
-  });
-
-  it.skip('Multiple checkbox - should call on change correctly', () => {
-    const wrapper = mount(
-      <RenderWithProvider>
-        <Checkbox {...propsWithOptions} />
-      </RenderWithProvider>
-    );
-
-    expect(onChangeSpy).not.toHaveBeenCalled();
-
-    wrapper
-      .find(Pf4Checkbox)
-      .first()
-      .props()
-      .onChange();
-
-    expect(onChangeSpy).toHaveBeenCalled();
   });
 
   it('should render TextArea correctly', () => {
@@ -480,10 +456,7 @@ describe('FormFields', () => {
       });
     });
 
-    /**
-     * fix after multiple checkbox is back in
-     */
-    describe.skip('MultipleCheckbox', () => {
+    describe('MultipleCheckbox', () => {
       let initialProps;
       beforeEach(() => {
         initialProps = {
@@ -497,7 +470,7 @@ describe('FormFields', () => {
         };
       });
 
-      it.skip('renders correctly', () => {
+      it('renders correctly', () => {
         const wrapper = mount(
           <RenderWithProvider>
             <Checkbox {...initialProps} />

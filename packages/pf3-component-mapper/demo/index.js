@@ -1,14 +1,16 @@
 /* eslint-disable */
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import FormRenderer from '@data-driven-forms/react-form-renderer';
-import { Grid, Row } from 'patternfly-react';
+import { Grid, Row, Button } from 'patternfly-react';
 import { componentMapper, formTemplate } from '../src'
 import { schema, uiSchema, conditionalSchema, arraySchema, uiArraySchema } from './demo-schemas/widget-schema';
 import miqSchema from './demo-schemas/miq-schema';
 import wizardSchema from './demo-schemas/wizard-schema';
 import sandbox from './demo-schemas/sandbox';
 import Switch from "../src/form-fields/switch-field";
+
+import demoSchema from '@data-driven-forms/common/src/demoschema';
 
 const loadOptions = () => new Promise((res) => {
   setTimeout(() => {
@@ -101,25 +103,31 @@ const selectSchema = {
   }]
 }
 
-class App extends React.Component {
-  render() {
-    return (
+const App = () => {
+  const [schema, setSchema] = useState(sandbox)
+
+  return (
     <div>
-      <h1>Pf3 component mapper</h1>
-      <Grid>
-        <Row>
-          <FormRenderer
-            initialValues={{}}
-            onSubmit={console.log}
-            componentMapper={componentMapper}
-            formTemplate={formTemplate()}
-            schema={sandbox}
-            onCancel={() => console.log('cancel')}
-          />
-        </Row>
-      </Grid>
-    </div>
-  )}
+    <h1>Pf3 component mapper</h1>
+    <Grid>
+      <Row>
+        <Button onClick={() => setSchema(sandbox)}>Default schema</Button>
+        <Button onClick={() => setSchema(demoSchema)}>Super schema</Button>
+        <Button onClick={() => setSchema(wizardSchema)}>Wizard schema</Button>
+      </Row>
+      <Row>
+        <FormRenderer
+          initialValues={{}}
+          onSubmit={console.log}
+          componentMapper={componentMapper}
+          formTemplate={formTemplate()}
+          schema={schema}
+          onCancel={() => console.log('cancel')}
+        />
+      </Row>
+    </Grid>
+  </div>
+  )
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));

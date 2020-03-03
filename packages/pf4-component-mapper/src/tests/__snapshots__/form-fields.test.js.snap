@@ -91,111 +91,618 @@ exports[`FormFields should render Checkbox correctly 1`] = `
 `;
 
 exports[`FormFields should render Checkbox with options correctly 1`] = `
-<Checkbox
-  FieldProvider={[Function]}
-  dataType="someDataType"
-  id="someIdKey"
-  input={
-    Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
-    }
-  }
-  options={
-    Array [
-      Object {
-        "label": "One",
-        "value": "1",
-      },
-      Object {
-        "label": "Two",
-        "value": "2",
-      },
-      Object {
-        "label": "Three",
-        "value": "3",
-      },
-    ]
-  }
->
-  <SingleCheckbox
-    FieldProvider={[Function]}
-    dataType="someDataType"
-    id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    meta={
-      Object {
-        "error": false,
-        "touched": false,
-      }
-    }
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
   >
-    <FormGroup
-      hideLabel={true}
+    <Checkbox
+      dataType="someDataType"
       id="someIdKey"
-      isRequired={false}
-      meta={
-        Object {
-          "error": false,
-          "touched": false,
-        }
+      name="Name of the field"
+      options={
+        Array [
+          Object {
+            "label": "One",
+            "value": "1",
+          },
+          Object {
+            "label": "Two",
+            "value": "2",
+          },
+          Object {
+            "label": "Three",
+            "value": "3",
+          },
+        ]
       }
     >
-      <FormGroup
-        fieldId="someIdKey"
-        helperTextInvalid={false}
-        isRequired={false}
-        isValid={true}
-        label={false}
+      <MultipleChoiceList
+        dataType="someDataType"
+        id="someIdKey"
+        name="Name of the field"
+        options={
+          Array [
+            Object {
+              "label": "One",
+              "value": "1",
+            },
+            Object {
+              "label": "Two",
+              "value": "2",
+            },
+            Object {
+              "label": "Three",
+              "value": "3",
+            },
+          ]
+        }
       >
-        <div
-          className="pf-c-form__group"
+        <MultipleChoiceList
+          Checkbox={[Function]}
+          Wrapper={[Function]}
+          dataType="someDataType"
+          id="someIdKey"
+          name="Name of the field"
+          options={
+            Array [
+              Object {
+                "label": "One",
+                "value": "1",
+              },
+              Object {
+                "label": "Two",
+                "value": "2",
+              },
+              Object {
+                "label": "Three",
+                "value": "3",
+              },
+            ]
+          }
         >
-          <Checkbox
-            FieldProvider={[Function]}
-            className=""
-            dataType="someDataType"
-            id="someIdKey"
-            isChecked={false}
-            isDisabled={false}
-            isValid={true}
+          <Wrapper
+            meta={
+              Object {
+                "active": false,
+                "data": Object {},
+                "dirty": false,
+                "dirtySinceLastSubmit": false,
+                "error": undefined,
+                "initial": undefined,
+                "invalid": false,
+                "length": undefined,
+                "modified": false,
+                "pristine": true,
+                "submitError": undefined,
+                "submitFailed": false,
+                "submitSucceeded": false,
+                "submitting": false,
+                "touched": false,
+                "valid": true,
+                "validating": false,
+                "visited": false,
+              }
+            }
             name="Name of the field"
-            onChange={[Function]}
-            value=""
+            rest={
+              Object {
+                "id": "someIdKey",
+              }
+            }
+            showError={false}
           >
-            <div
-              className="pf-c-check"
+            <FormGroup
+              id="Name of the field"
+              isRequired={false}
+              meta={
+                Object {
+                  "active": false,
+                  "data": Object {},
+                  "dirty": false,
+                  "dirtySinceLastSubmit": false,
+                  "error": undefined,
+                  "initial": undefined,
+                  "invalid": false,
+                  "length": undefined,
+                  "modified": false,
+                  "pristine": true,
+                  "submitError": undefined,
+                  "submitFailed": false,
+                  "submitSucceeded": false,
+                  "submitting": false,
+                  "touched": false,
+                  "valid": true,
+                  "validating": false,
+                  "visited": false,
+                }
+              }
+              name="Name of the field"
+              rest={
+                Object {
+                  "id": "someIdKey",
+                }
+              }
+              showError={false}
             >
-              <input
-                FieldProvider={[Function]}
-                aria-invalid={false}
-                className="pf-c-check__input"
-                dataType="someDataType"
-                disabled={false}
-                id="someIdKey"
-                name="Name of the field"
-                onChange={[Function]}
-                type="checkbox"
-                value=""
-              />
-            </div>
-          </Checkbox>
-        </div>
-      </FormGroup>
-    </FormGroup>
-  </SingleCheckbox>
-</Checkbox>
+              <FormGroup
+                fieldId="Name of the field"
+                isRequired={false}
+                isValid={true}
+              >
+                <div
+                  className="pf-c-form__group"
+                >
+                  <SingleCheckbox
+                    Checkbox={[Function]}
+                    aria-label="One"
+                    id="someIdKey-1"
+                    key="someIdKey-1"
+                    label="One"
+                    name="Name of the field"
+                    option={
+                      Object {
+                        "label": "One",
+                        "value": "1",
+                      }
+                    }
+                    value="1"
+                  >
+                    <FinalCheckbox
+                      aria-label="One"
+                      checked={false}
+                      id="someIdKey-1"
+                      label="One"
+                      meta={
+                        Object {
+                          "active": false,
+                          "data": Object {},
+                          "dirty": false,
+                          "dirtySinceLastSubmit": false,
+                          "error": undefined,
+                          "initial": undefined,
+                          "invalid": false,
+                          "length": undefined,
+                          "modified": false,
+                          "pristine": true,
+                          "submitError": undefined,
+                          "submitFailed": false,
+                          "submitSucceeded": false,
+                          "submitting": false,
+                          "touched": false,
+                          "valid": true,
+                          "validating": false,
+                          "visited": false,
+                        }
+                      }
+                      name="Name of the field"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      option={
+                        Object {
+                          "label": "One",
+                          "value": "1",
+                        }
+                      }
+                      type="checkbox"
+                      value="1"
+                    >
+                      <Checkbox
+                        aria-label="One"
+                        checked={false}
+                        className=""
+                        id="someIdKey-1"
+                        isChecked={false}
+                        isDisabled={false}
+                        isValid={true}
+                        label="One"
+                        meta={
+                          Object {
+                            "active": false,
+                            "data": Object {},
+                            "dirty": false,
+                            "dirtySinceLastSubmit": false,
+                            "error": undefined,
+                            "initial": undefined,
+                            "invalid": false,
+                            "length": undefined,
+                            "modified": false,
+                            "pristine": true,
+                            "submitError": undefined,
+                            "submitFailed": false,
+                            "submitSucceeded": false,
+                            "submitting": false,
+                            "touched": false,
+                            "valid": true,
+                            "validating": false,
+                            "visited": false,
+                          }
+                        }
+                        name="Name of the field"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        option={
+                          Object {
+                            "label": "One",
+                            "value": "1",
+                          }
+                        }
+                        type="checkbox"
+                        value="1"
+                      >
+                        <div
+                          className="pf-c-check"
+                        >
+                          <input
+                            aria-invalid={false}
+                            aria-label="One"
+                            checked={false}
+                            className="pf-c-check__input"
+                            disabled={false}
+                            id="someIdKey-1"
+                            meta={
+                              Object {
+                                "active": false,
+                                "data": Object {},
+                                "dirty": false,
+                                "dirtySinceLastSubmit": false,
+                                "error": undefined,
+                                "initial": undefined,
+                                "invalid": false,
+                                "length": undefined,
+                                "modified": false,
+                                "pristine": true,
+                                "submitError": undefined,
+                                "submitFailed": false,
+                                "submitSucceeded": false,
+                                "submitting": false,
+                                "touched": false,
+                                "valid": true,
+                                "validating": false,
+                                "visited": false,
+                              }
+                            }
+                            name="Name of the field"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            option={
+                              Object {
+                                "label": "One",
+                                "value": "1",
+                              }
+                            }
+                            type="checkbox"
+                            value="1"
+                          />
+                          <label
+                            className="pf-c-check__label"
+                            htmlFor="someIdKey-1"
+                          >
+                            One
+                          </label>
+                        </div>
+                      </Checkbox>
+                    </FinalCheckbox>
+                  </SingleCheckbox>
+                  <SingleCheckbox
+                    Checkbox={[Function]}
+                    aria-label="Two"
+                    id="someIdKey-2"
+                    key="someIdKey-2"
+                    label="Two"
+                    name="Name of the field"
+                    option={
+                      Object {
+                        "label": "Two",
+                        "value": "2",
+                      }
+                    }
+                    value="2"
+                  >
+                    <FinalCheckbox
+                      aria-label="Two"
+                      checked={false}
+                      id="someIdKey-2"
+                      label="Two"
+                      meta={
+                        Object {
+                          "active": false,
+                          "data": Object {},
+                          "dirty": false,
+                          "dirtySinceLastSubmit": false,
+                          "error": undefined,
+                          "initial": undefined,
+                          "invalid": false,
+                          "length": undefined,
+                          "modified": false,
+                          "pristine": true,
+                          "submitError": undefined,
+                          "submitFailed": false,
+                          "submitSucceeded": false,
+                          "submitting": false,
+                          "touched": false,
+                          "valid": true,
+                          "validating": false,
+                          "visited": false,
+                        }
+                      }
+                      name="Name of the field"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      option={
+                        Object {
+                          "label": "Two",
+                          "value": "2",
+                        }
+                      }
+                      type="checkbox"
+                      value="2"
+                    >
+                      <Checkbox
+                        aria-label="Two"
+                        checked={false}
+                        className=""
+                        id="someIdKey-2"
+                        isChecked={false}
+                        isDisabled={false}
+                        isValid={true}
+                        label="Two"
+                        meta={
+                          Object {
+                            "active": false,
+                            "data": Object {},
+                            "dirty": false,
+                            "dirtySinceLastSubmit": false,
+                            "error": undefined,
+                            "initial": undefined,
+                            "invalid": false,
+                            "length": undefined,
+                            "modified": false,
+                            "pristine": true,
+                            "submitError": undefined,
+                            "submitFailed": false,
+                            "submitSucceeded": false,
+                            "submitting": false,
+                            "touched": false,
+                            "valid": true,
+                            "validating": false,
+                            "visited": false,
+                          }
+                        }
+                        name="Name of the field"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        option={
+                          Object {
+                            "label": "Two",
+                            "value": "2",
+                          }
+                        }
+                        type="checkbox"
+                        value="2"
+                      >
+                        <div
+                          className="pf-c-check"
+                        >
+                          <input
+                            aria-invalid={false}
+                            aria-label="Two"
+                            checked={false}
+                            className="pf-c-check__input"
+                            disabled={false}
+                            id="someIdKey-2"
+                            meta={
+                              Object {
+                                "active": false,
+                                "data": Object {},
+                                "dirty": false,
+                                "dirtySinceLastSubmit": false,
+                                "error": undefined,
+                                "initial": undefined,
+                                "invalid": false,
+                                "length": undefined,
+                                "modified": false,
+                                "pristine": true,
+                                "submitError": undefined,
+                                "submitFailed": false,
+                                "submitSucceeded": false,
+                                "submitting": false,
+                                "touched": false,
+                                "valid": true,
+                                "validating": false,
+                                "visited": false,
+                              }
+                            }
+                            name="Name of the field"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            option={
+                              Object {
+                                "label": "Two",
+                                "value": "2",
+                              }
+                            }
+                            type="checkbox"
+                            value="2"
+                          />
+                          <label
+                            className="pf-c-check__label"
+                            htmlFor="someIdKey-2"
+                          >
+                            Two
+                          </label>
+                        </div>
+                      </Checkbox>
+                    </FinalCheckbox>
+                  </SingleCheckbox>
+                  <SingleCheckbox
+                    Checkbox={[Function]}
+                    aria-label="Three"
+                    id="someIdKey-3"
+                    key="someIdKey-3"
+                    label="Three"
+                    name="Name of the field"
+                    option={
+                      Object {
+                        "label": "Three",
+                        "value": "3",
+                      }
+                    }
+                    value="3"
+                  >
+                    <FinalCheckbox
+                      aria-label="Three"
+                      checked={false}
+                      id="someIdKey-3"
+                      label="Three"
+                      meta={
+                        Object {
+                          "active": false,
+                          "data": Object {},
+                          "dirty": false,
+                          "dirtySinceLastSubmit": false,
+                          "error": undefined,
+                          "initial": undefined,
+                          "invalid": false,
+                          "length": undefined,
+                          "modified": false,
+                          "pristine": true,
+                          "submitError": undefined,
+                          "submitFailed": false,
+                          "submitSucceeded": false,
+                          "submitting": false,
+                          "touched": false,
+                          "valid": true,
+                          "validating": false,
+                          "visited": false,
+                        }
+                      }
+                      name="Name of the field"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      option={
+                        Object {
+                          "label": "Three",
+                          "value": "3",
+                        }
+                      }
+                      type="checkbox"
+                      value="3"
+                    >
+                      <Checkbox
+                        aria-label="Three"
+                        checked={false}
+                        className=""
+                        id="someIdKey-3"
+                        isChecked={false}
+                        isDisabled={false}
+                        isValid={true}
+                        label="Three"
+                        meta={
+                          Object {
+                            "active": false,
+                            "data": Object {},
+                            "dirty": false,
+                            "dirtySinceLastSubmit": false,
+                            "error": undefined,
+                            "initial": undefined,
+                            "invalid": false,
+                            "length": undefined,
+                            "modified": false,
+                            "pristine": true,
+                            "submitError": undefined,
+                            "submitFailed": false,
+                            "submitSucceeded": false,
+                            "submitting": false,
+                            "touched": false,
+                            "valid": true,
+                            "validating": false,
+                            "visited": false,
+                          }
+                        }
+                        name="Name of the field"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        option={
+                          Object {
+                            "label": "Three",
+                            "value": "3",
+                          }
+                        }
+                        type="checkbox"
+                        value="3"
+                      >
+                        <div
+                          className="pf-c-check"
+                        >
+                          <input
+                            aria-invalid={false}
+                            aria-label="Three"
+                            checked={false}
+                            className="pf-c-check__input"
+                            disabled={false}
+                            id="someIdKey-3"
+                            meta={
+                              Object {
+                                "active": false,
+                                "data": Object {},
+                                "dirty": false,
+                                "dirtySinceLastSubmit": false,
+                                "error": undefined,
+                                "initial": undefined,
+                                "invalid": false,
+                                "length": undefined,
+                                "modified": false,
+                                "pristine": true,
+                                "submitError": undefined,
+                                "submitFailed": false,
+                                "submitSucceeded": false,
+                                "submitting": false,
+                                "touched": false,
+                                "valid": true,
+                                "validating": false,
+                                "visited": false,
+                              }
+                            }
+                            name="Name of the field"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            option={
+                              Object {
+                                "label": "Three",
+                                "value": "3",
+                              }
+                            }
+                            type="checkbox"
+                            value="3"
+                          />
+                          <label
+                            className="pf-c-check__label"
+                            htmlFor="someIdKey-3"
+                          >
+                            Three
+                          </label>
+                        </div>
+                      </Checkbox>
+                    </FinalCheckbox>
+                  </SingleCheckbox>
+                </div>
+              </FormGroup>
+            </FormGroup>
+          </Wrapper>
+        </MultipleChoiceList>
+      </MultipleChoiceList>
+    </Checkbox>
+  </ReactFinalForm>
+</RenderWithProvider>
 `;
 
 exports[`FormFields should render DatePicker correctly 1`] = `
@@ -1198,114 +1705,632 @@ exports[`FormFields should render TimePicker correctly 1`] = `
 `;
 
 exports[`FormFields should render disabled Checkbox with options correctly 1`] = `
-<Checkbox
-  FieldProvider={[Function]}
-  dataType="someDataType"
-  disabled={true}
-  id="someIdKey"
-  input={
-    Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
-    }
-  }
-  options={
-    Array [
-      Object {
-        "label": "One",
-        "value": "1",
-      },
-      Object {
-        "label": "Two",
-        "value": "2",
-      },
-      Object {
-        "label": "Three",
-        "value": "3",
-      },
-    ]
-  }
->
-  <SingleCheckbox
-    FieldProvider={[Function]}
-    dataType="someDataType"
-    disabled={true}
-    id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    meta={
-      Object {
-        "error": false,
-        "touched": false,
-      }
-    }
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
   >
-    <FormGroup
-      hideLabel={true}
+    <Checkbox
+      dataType="someDataType"
+      disabled={true}
       id="someIdKey"
-      isRequired={false}
-      meta={
-        Object {
-          "error": false,
-          "touched": false,
-        }
+      name="Name of the field"
+      options={
+        Array [
+          Object {
+            "label": "One",
+            "value": "1",
+          },
+          Object {
+            "label": "Two",
+            "value": "2",
+          },
+          Object {
+            "label": "Three",
+            "value": "3",
+          },
+        ]
       }
     >
-      <FormGroup
-        fieldId="someIdKey"
-        helperTextInvalid={false}
-        isRequired={false}
-        isValid={true}
-        label={false}
+      <MultipleChoiceList
+        dataType="someDataType"
+        disabled={true}
+        id="someIdKey"
+        name="Name of the field"
+        options={
+          Array [
+            Object {
+              "label": "One",
+              "value": "1",
+            },
+            Object {
+              "label": "Two",
+              "value": "2",
+            },
+            Object {
+              "label": "Three",
+              "value": "3",
+            },
+          ]
+        }
       >
-        <div
-          className="pf-c-form__group"
+        <MultipleChoiceList
+          Checkbox={[Function]}
+          Wrapper={[Function]}
+          dataType="someDataType"
+          disabled={true}
+          id="someIdKey"
+          name="Name of the field"
+          options={
+            Array [
+              Object {
+                "label": "One",
+                "value": "1",
+              },
+              Object {
+                "label": "Two",
+                "value": "2",
+              },
+              Object {
+                "label": "Three",
+                "value": "3",
+              },
+            ]
+          }
         >
-          <Checkbox
-            FieldProvider={[Function]}
-            className=""
-            dataType="someDataType"
-            disabled={true}
-            id="someIdKey"
-            isChecked={false}
-            isDisabled={false}
-            isValid={true}
+          <Wrapper
+            meta={
+              Object {
+                "active": false,
+                "data": Object {},
+                "dirty": false,
+                "dirtySinceLastSubmit": false,
+                "error": undefined,
+                "initial": undefined,
+                "invalid": false,
+                "length": undefined,
+                "modified": false,
+                "pristine": true,
+                "submitError": undefined,
+                "submitFailed": false,
+                "submitSucceeded": false,
+                "submitting": false,
+                "touched": false,
+                "valid": true,
+                "validating": false,
+                "visited": false,
+              }
+            }
             name="Name of the field"
-            onChange={[Function]}
-            value=""
+            rest={
+              Object {
+                "disabled": true,
+                "id": "someIdKey",
+              }
+            }
+            showError={false}
           >
-            <div
-              className="pf-c-check"
+            <FormGroup
+              id="Name of the field"
+              isRequired={false}
+              meta={
+                Object {
+                  "active": false,
+                  "data": Object {},
+                  "dirty": false,
+                  "dirtySinceLastSubmit": false,
+                  "error": undefined,
+                  "initial": undefined,
+                  "invalid": false,
+                  "length": undefined,
+                  "modified": false,
+                  "pristine": true,
+                  "submitError": undefined,
+                  "submitFailed": false,
+                  "submitSucceeded": false,
+                  "submitting": false,
+                  "touched": false,
+                  "valid": true,
+                  "validating": false,
+                  "visited": false,
+                }
+              }
+              name="Name of the field"
+              rest={
+                Object {
+                  "disabled": true,
+                  "id": "someIdKey",
+                }
+              }
+              showError={false}
             >
-              <input
-                FieldProvider={[Function]}
-                aria-invalid={false}
-                className="pf-c-check__input"
-                dataType="someDataType"
-                disabled={false}
-                id="someIdKey"
-                name="Name of the field"
-                onChange={[Function]}
-                type="checkbox"
-                value=""
-              />
-            </div>
-          </Checkbox>
-        </div>
-      </FormGroup>
-    </FormGroup>
-  </SingleCheckbox>
-</Checkbox>
+              <FormGroup
+                fieldId="Name of the field"
+                isRequired={false}
+                isValid={true}
+              >
+                <div
+                  className="pf-c-form__group"
+                >
+                  <SingleCheckbox
+                    Checkbox={[Function]}
+                    aria-label="One"
+                    disabled={true}
+                    id="someIdKey-1"
+                    key="someIdKey-1"
+                    label="One"
+                    name="Name of the field"
+                    option={
+                      Object {
+                        "label": "One",
+                        "value": "1",
+                      }
+                    }
+                    value="1"
+                  >
+                    <FinalCheckbox
+                      aria-label="One"
+                      checked={false}
+                      disabled={true}
+                      id="someIdKey-1"
+                      label="One"
+                      meta={
+                        Object {
+                          "active": false,
+                          "data": Object {},
+                          "dirty": false,
+                          "dirtySinceLastSubmit": false,
+                          "error": undefined,
+                          "initial": undefined,
+                          "invalid": false,
+                          "length": undefined,
+                          "modified": false,
+                          "pristine": true,
+                          "submitError": undefined,
+                          "submitFailed": false,
+                          "submitSucceeded": false,
+                          "submitting": false,
+                          "touched": false,
+                          "valid": true,
+                          "validating": false,
+                          "visited": false,
+                        }
+                      }
+                      name="Name of the field"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      option={
+                        Object {
+                          "label": "One",
+                          "value": "1",
+                        }
+                      }
+                      type="checkbox"
+                      value="1"
+                    >
+                      <Checkbox
+                        aria-label="One"
+                        checked={false}
+                        className=""
+                        disabled={true}
+                        id="someIdKey-1"
+                        isChecked={false}
+                        isDisabled={false}
+                        isValid={true}
+                        label="One"
+                        meta={
+                          Object {
+                            "active": false,
+                            "data": Object {},
+                            "dirty": false,
+                            "dirtySinceLastSubmit": false,
+                            "error": undefined,
+                            "initial": undefined,
+                            "invalid": false,
+                            "length": undefined,
+                            "modified": false,
+                            "pristine": true,
+                            "submitError": undefined,
+                            "submitFailed": false,
+                            "submitSucceeded": false,
+                            "submitting": false,
+                            "touched": false,
+                            "valid": true,
+                            "validating": false,
+                            "visited": false,
+                          }
+                        }
+                        name="Name of the field"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        option={
+                          Object {
+                            "label": "One",
+                            "value": "1",
+                          }
+                        }
+                        type="checkbox"
+                        value="1"
+                      >
+                        <div
+                          className="pf-c-check"
+                        >
+                          <input
+                            aria-invalid={false}
+                            aria-label="One"
+                            checked={false}
+                            className="pf-c-check__input"
+                            disabled={false}
+                            id="someIdKey-1"
+                            meta={
+                              Object {
+                                "active": false,
+                                "data": Object {},
+                                "dirty": false,
+                                "dirtySinceLastSubmit": false,
+                                "error": undefined,
+                                "initial": undefined,
+                                "invalid": false,
+                                "length": undefined,
+                                "modified": false,
+                                "pristine": true,
+                                "submitError": undefined,
+                                "submitFailed": false,
+                                "submitSucceeded": false,
+                                "submitting": false,
+                                "touched": false,
+                                "valid": true,
+                                "validating": false,
+                                "visited": false,
+                              }
+                            }
+                            name="Name of the field"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            option={
+                              Object {
+                                "label": "One",
+                                "value": "1",
+                              }
+                            }
+                            type="checkbox"
+                            value="1"
+                          />
+                          <label
+                            className="pf-c-check__label"
+                            htmlFor="someIdKey-1"
+                          >
+                            One
+                          </label>
+                        </div>
+                      </Checkbox>
+                    </FinalCheckbox>
+                  </SingleCheckbox>
+                  <SingleCheckbox
+                    Checkbox={[Function]}
+                    aria-label="Two"
+                    disabled={true}
+                    id="someIdKey-2"
+                    key="someIdKey-2"
+                    label="Two"
+                    name="Name of the field"
+                    option={
+                      Object {
+                        "label": "Two",
+                        "value": "2",
+                      }
+                    }
+                    value="2"
+                  >
+                    <FinalCheckbox
+                      aria-label="Two"
+                      checked={false}
+                      disabled={true}
+                      id="someIdKey-2"
+                      label="Two"
+                      meta={
+                        Object {
+                          "active": false,
+                          "data": Object {},
+                          "dirty": false,
+                          "dirtySinceLastSubmit": false,
+                          "error": undefined,
+                          "initial": undefined,
+                          "invalid": false,
+                          "length": undefined,
+                          "modified": false,
+                          "pristine": true,
+                          "submitError": undefined,
+                          "submitFailed": false,
+                          "submitSucceeded": false,
+                          "submitting": false,
+                          "touched": false,
+                          "valid": true,
+                          "validating": false,
+                          "visited": false,
+                        }
+                      }
+                      name="Name of the field"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      option={
+                        Object {
+                          "label": "Two",
+                          "value": "2",
+                        }
+                      }
+                      type="checkbox"
+                      value="2"
+                    >
+                      <Checkbox
+                        aria-label="Two"
+                        checked={false}
+                        className=""
+                        disabled={true}
+                        id="someIdKey-2"
+                        isChecked={false}
+                        isDisabled={false}
+                        isValid={true}
+                        label="Two"
+                        meta={
+                          Object {
+                            "active": false,
+                            "data": Object {},
+                            "dirty": false,
+                            "dirtySinceLastSubmit": false,
+                            "error": undefined,
+                            "initial": undefined,
+                            "invalid": false,
+                            "length": undefined,
+                            "modified": false,
+                            "pristine": true,
+                            "submitError": undefined,
+                            "submitFailed": false,
+                            "submitSucceeded": false,
+                            "submitting": false,
+                            "touched": false,
+                            "valid": true,
+                            "validating": false,
+                            "visited": false,
+                          }
+                        }
+                        name="Name of the field"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        option={
+                          Object {
+                            "label": "Two",
+                            "value": "2",
+                          }
+                        }
+                        type="checkbox"
+                        value="2"
+                      >
+                        <div
+                          className="pf-c-check"
+                        >
+                          <input
+                            aria-invalid={false}
+                            aria-label="Two"
+                            checked={false}
+                            className="pf-c-check__input"
+                            disabled={false}
+                            id="someIdKey-2"
+                            meta={
+                              Object {
+                                "active": false,
+                                "data": Object {},
+                                "dirty": false,
+                                "dirtySinceLastSubmit": false,
+                                "error": undefined,
+                                "initial": undefined,
+                                "invalid": false,
+                                "length": undefined,
+                                "modified": false,
+                                "pristine": true,
+                                "submitError": undefined,
+                                "submitFailed": false,
+                                "submitSucceeded": false,
+                                "submitting": false,
+                                "touched": false,
+                                "valid": true,
+                                "validating": false,
+                                "visited": false,
+                              }
+                            }
+                            name="Name of the field"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            option={
+                              Object {
+                                "label": "Two",
+                                "value": "2",
+                              }
+                            }
+                            type="checkbox"
+                            value="2"
+                          />
+                          <label
+                            className="pf-c-check__label"
+                            htmlFor="someIdKey-2"
+                          >
+                            Two
+                          </label>
+                        </div>
+                      </Checkbox>
+                    </FinalCheckbox>
+                  </SingleCheckbox>
+                  <SingleCheckbox
+                    Checkbox={[Function]}
+                    aria-label="Three"
+                    disabled={true}
+                    id="someIdKey-3"
+                    key="someIdKey-3"
+                    label="Three"
+                    name="Name of the field"
+                    option={
+                      Object {
+                        "label": "Three",
+                        "value": "3",
+                      }
+                    }
+                    value="3"
+                  >
+                    <FinalCheckbox
+                      aria-label="Three"
+                      checked={false}
+                      disabled={true}
+                      id="someIdKey-3"
+                      label="Three"
+                      meta={
+                        Object {
+                          "active": false,
+                          "data": Object {},
+                          "dirty": false,
+                          "dirtySinceLastSubmit": false,
+                          "error": undefined,
+                          "initial": undefined,
+                          "invalid": false,
+                          "length": undefined,
+                          "modified": false,
+                          "pristine": true,
+                          "submitError": undefined,
+                          "submitFailed": false,
+                          "submitSucceeded": false,
+                          "submitting": false,
+                          "touched": false,
+                          "valid": true,
+                          "validating": false,
+                          "visited": false,
+                        }
+                      }
+                      name="Name of the field"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      option={
+                        Object {
+                          "label": "Three",
+                          "value": "3",
+                        }
+                      }
+                      type="checkbox"
+                      value="3"
+                    >
+                      <Checkbox
+                        aria-label="Three"
+                        checked={false}
+                        className=""
+                        disabled={true}
+                        id="someIdKey-3"
+                        isChecked={false}
+                        isDisabled={false}
+                        isValid={true}
+                        label="Three"
+                        meta={
+                          Object {
+                            "active": false,
+                            "data": Object {},
+                            "dirty": false,
+                            "dirtySinceLastSubmit": false,
+                            "error": undefined,
+                            "initial": undefined,
+                            "invalid": false,
+                            "length": undefined,
+                            "modified": false,
+                            "pristine": true,
+                            "submitError": undefined,
+                            "submitFailed": false,
+                            "submitSucceeded": false,
+                            "submitting": false,
+                            "touched": false,
+                            "valid": true,
+                            "validating": false,
+                            "visited": false,
+                          }
+                        }
+                        name="Name of the field"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        option={
+                          Object {
+                            "label": "Three",
+                            "value": "3",
+                          }
+                        }
+                        type="checkbox"
+                        value="3"
+                      >
+                        <div
+                          className="pf-c-check"
+                        >
+                          <input
+                            aria-invalid={false}
+                            aria-label="Three"
+                            checked={false}
+                            className="pf-c-check__input"
+                            disabled={false}
+                            id="someIdKey-3"
+                            meta={
+                              Object {
+                                "active": false,
+                                "data": Object {},
+                                "dirty": false,
+                                "dirtySinceLastSubmit": false,
+                                "error": undefined,
+                                "initial": undefined,
+                                "invalid": false,
+                                "length": undefined,
+                                "modified": false,
+                                "pristine": true,
+                                "submitError": undefined,
+                                "submitFailed": false,
+                                "submitSucceeded": false,
+                                "submitting": false,
+                                "touched": false,
+                                "valid": true,
+                                "validating": false,
+                                "visited": false,
+                              }
+                            }
+                            name="Name of the field"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            option={
+                              Object {
+                                "label": "Three",
+                                "value": "3",
+                              }
+                            }
+                            type="checkbox"
+                            value="3"
+                          />
+                          <label
+                            className="pf-c-check__label"
+                            htmlFor="someIdKey-3"
+                          >
+                            Three
+                          </label>
+                        </div>
+                      </Checkbox>
+                    </FinalCheckbox>
+                  </SingleCheckbox>
+                </div>
+              </FormGroup>
+            </FormGroup>
+          </Wrapper>
+        </MultipleChoiceList>
+      </MultipleChoiceList>
+    </Checkbox>
+  </ReactFinalForm>
+</RenderWithProvider>
 `;
 
 exports[`FormFields should render disabled Radio correctly 1`] = `

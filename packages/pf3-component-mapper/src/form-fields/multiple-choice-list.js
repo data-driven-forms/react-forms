@@ -32,12 +32,6 @@ Wrapper.propTypes = {
   ...wrapperProps
 };
 
-const MultipleChoiceList = (props) => <MultipleChoiceListCommon name={props.input.name} {...props} Wrapper={Wrapper} Checkbox={FinalCheckbox} />;
-
-MultipleChoiceList.propTypes = {
-  input: PropTypes.shape({
-    name: PropTypes.string.isRequired
-  }).isRequired
-};
+const MultipleChoiceList = (props) => <MultipleChoiceListCommon {...props} Wrapper={Wrapper} Checkbox={FinalCheckbox} />;
 
 export default MultipleChoiceList;

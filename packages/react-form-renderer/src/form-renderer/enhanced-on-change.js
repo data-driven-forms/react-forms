@@ -8,7 +8,7 @@ import dataTypes from '../components/data-types';
 const sanitizeValue = (event) => {
   if (typeof event === 'object' && event !== null && event.target) {
     if (event.target.type === 'checkbox') {
-      return event.target.checked;
+      return event;
     }
 
     return event.target.value;
@@ -68,9 +68,16 @@ const checkEmpty = (value) => {
  */
 const enhancedOnChange = ({ dataType, onChange, initial, clearedValue, dirty, ...rest }, value, ...args) => {
   const sanitizedValue = sanitizeValue(value);
-  const result = Array.isArray(sanitizedValue)
-    ? sanitizedValue.map((item) => convertType(dataType, sanitizeValue(item)))
-    : convertType(dataType, sanitizedValue);
+
+  let result;
+  if (typeof sanitizedValue == 'object' && sanitizedValue.target && sanitizedValue.target.type === 'checkbox') {
+    result = sanitizedValue;
+  } else {
+    result = Array.isArray(sanitizedValue)
+      ? sanitizedValue.map((item) => convertType(dataType, sanitizeValue(item)))
+      : convertType(dataType, sanitizedValue);
+  }
+
   if (checkEmpty(result) && typeof initial !== 'undefined') {
     return onChange(clearedValue, ...args);
   }

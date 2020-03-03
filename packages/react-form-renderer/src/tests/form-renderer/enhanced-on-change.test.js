@@ -8,7 +8,7 @@ describe('#enhancedOnChange', () => {
     expect(enhancedOnChange({ onChange: (value) => value, clearedValue }, value)).toEqual('foo');
   });
 
-  it('should return value from event if input is of type checkbox', () => {
+  it('should return event if input is of type checkbox', () => {
     const value = {
       target: {
         type: 'checkbox',
@@ -16,7 +16,7 @@ describe('#enhancedOnChange', () => {
         checked: false
       }
     };
-    expect(enhancedOnChange({ onChange: (value) => value, clearedValue }, value)).toEqual(false);
+    expect(enhancedOnChange({ onChange: (value) => value, clearedValue }, value)).toEqual(value);
   });
 
   it('should return value from event', () => {

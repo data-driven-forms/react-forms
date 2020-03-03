@@ -46,7 +46,7 @@ Wrapper.propTypes = {
   ...wrapperProps
 };
 
-const MultipleChoiceList = (props) => <MultipleChoiceListCommon {...props} name={props.input.name} Wrapper={Wrapper} Checkbox={FinalCheckbox} />;
+const MultipleChoiceList = (props) => <MultipleChoiceListCommon {...props} Wrapper={Wrapper} Checkbox={FinalCheckbox} />;
 
 MultipleChoiceList.propTypes = {
   input: PropTypes.shape({
