@@ -105,6 +105,21 @@ const output = {
       title: 'Text Box string value',
       dataType: 'string',
       component: componentTypes.TEXT_FIELD
+    },
+    {
+      name: 'dataShower',
+      label: 'Test select',
+      component: 'dataShower',
+      loadOptions: () => new Promise((resolve) => setTimeout(() => resolve({ custom: 'data' }), 1500))
+    },
+    {
+      name: 'dataShower',
+      label: 'Test select',
+      component: 'dataShower',
+      actions: {
+        loadOptions: ['loadData', { x: 'y', pp: 'adsad' }],
+        label: ['loadLabel', 'cosi']
+      }
     }
   ]
 };

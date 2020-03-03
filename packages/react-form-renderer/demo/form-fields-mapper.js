@@ -42,6 +42,33 @@ const SelectField = (props) => {
   );
 };
 
+const AsyncComponent = (props) => {
+  const { loadOptions, label } = useFieldApi(props);
+  const [loaded, setLoaded] = React.useState(false);
+  const [data, setData] = React.useState({ message: 'nodata' });
+
+  React.useEffect(() => {
+    if (loadOptions) {
+      loadOptions()
+        .then((data) => setData(data))
+        .then(() => setLoaded(true));
+    } else {
+      setLoaded(true);
+    }
+  }, [loadOptions]);
+
+  if (!loaded) {
+    return 'loading....';
+  }
+
+  return (
+    <React.Fragment>
+      <h1>{label}</h1>
+      {JSON.stringify(data, null, 2)}
+    </React.Fragment>
+  );
+};
+
 const mapper = {
   [componentTypes.TEXT_FIELD]: TextField,
   [componentTypes.TEXTAREA_FIELD]: TextField,
@@ -52,7 +79,8 @@ const mapper = {
   [componentTypes.TABS]: (props) => <div>tabs</div>,
   [componentTypes.TAB_ITEM]: (props) => <div>tab item</div>,
   [componentTypes.DATE_PICKER]: (props) => <div>date picker</div>,
-  [componentTypes.TIME_PICKER]: (props) => <div>time picker</div>
+  [componentTypes.TIME_PICKER]: (props) => <div>time picker</div>,
+  dataShower: AsyncComponent
 };
 
 export default mapper;

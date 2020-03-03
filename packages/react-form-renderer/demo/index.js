@@ -6,6 +6,13 @@ import formFieldsMapper from './form-fields-mapper';
 import FormTemplate from './form-template';
 import sandboxSchema from './sandbox'
 
+const intl = (name) => `translated ${name}`
+
+const actionMapper = {
+    loadData: (data) => () => new Promise((resolve) => setTimeout(() => resolve({ custom: 'ererewr', ...data }), 1700)),
+    loadLabel: intl
+}
+
 const App = () => (
     <div style={{ padding: 20 }}>
         <FormRenderer
@@ -21,6 +28,7 @@ const App = () => (
             onReset={() => console.log('i am resseting')}
             schema={sandboxSchema}
             formTemplate={FormTemplate}
+            actionMapper={actionMapper}
         />
     </div>
 )
