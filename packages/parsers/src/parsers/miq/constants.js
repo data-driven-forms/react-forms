@@ -4,8 +4,8 @@ export const componentMap = {
   DialogFieldTextBox: componentTypes.TEXT_FIELD,
   DialogFieldRadioButton: componentTypes.RADIO,
   DialogFieldCheckBox: componentTypes.CHECKBOX,
-  DialogFieldTextAreaBox: componentTypes.TEXTAREA_FIELD,
-  DialogFieldDropDownList: componentTypes.SELECT_COMPONENT,
+  DialogFieldTextAreaBox: componentTypes.TEXTAREA,
+  DialogFieldDropDownList: componentTypes.SELECT,
   DialogFieldDateControl: componentTypes.DATE_PICKER,
   DialogFieldDateTimeControl: componentTypes.TIME_PICKER
 };

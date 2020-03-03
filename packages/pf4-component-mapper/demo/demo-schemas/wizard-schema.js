@@ -69,13 +69,13 @@ export const wizardSchema = {
           },
           fields: [
             {
-              component: componentTypes.TEXTAREA_FIELD,
+              component: componentTypes.TEXTAREA,
               name: 'source.source-name',
               type: 'text',
               label: 'Source name'
             },
             {
-              component: componentTypes.SELECT_COMPONENT,
+              component: componentTypes.SELECT,
               name: 'source.source-type',
               label: 'Source type',
               isRequired: true,
@@ -176,13 +176,13 @@ export const wizardSchemaWithFunction = {
           nextStep: ({ values }) => values.source && values.source['source-type'],
           fields: [
             {
-              component: componentTypes.TEXTAREA_FIELD,
+              component: componentTypes.TEXTAREA,
               name: 'source.source-name',
               type: 'text',
               label: 'Source name'
             },
             {
-              component: componentTypes.SELECT_COMPONENT,
+              component: componentTypes.SELECT,
               name: 'source.source-type',
               label: 'Source type',
               isRequired: true,
@@ -280,7 +280,7 @@ export const wizardSchemaSimple = {
           nextStep: 'aws',
           fields: [
             {
-              component: componentTypes.TEXTAREA_FIELD,
+              component: componentTypes.TEXTAREA,
               name: 'source-name',
               type: 'text',
               label: 'Source name'
@@ -339,7 +339,7 @@ export const wizardSchemaSubsteps = {
           nextStep: 'aws',
           fields: [
             {
-              component: componentTypes.TEXTAREA_FIELD,
+              component: componentTypes.TEXTAREA,
               name: 'source-name',
               type: 'text',
               label: 'Source name'
@@ -395,7 +395,7 @@ export const wizardSchemaMoreSubsteps = {
           nextStep: 'aws',
           fields: [
             {
-              component: componentTypes.TEXTAREA_FIELD,
+              component: componentTypes.TEXTAREA,
               name: 'source-name',
               type: 'text',
               label: 'Source name'

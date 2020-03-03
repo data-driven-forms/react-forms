@@ -235,14 +235,14 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) =>
      */
     if (field.anyOf) {
       field.enum = field.anyOf.map(({ title, ...rest }) => ({ label: title, value: rest.enum[0] }));
-      field.component = componentTypes.SELECT_COMPONENT;
+      field.component = componentTypes.SELECT;
       delete field.anyOf;
     }
 
     /**
      * Add default option for select and define options if none were defined
      */
-    if (field.component === componentTypes.SELECT_COMPONENT || field.component === componentTypes.RADIO) {
+    if (field.component === componentTypes.SELECT || field.component === componentTypes.RADIO) {
       if (!field.enum) {
         field.enum = [
           { label: 'Yes', value: true },
@@ -253,7 +253,7 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) =>
       /**
        * Need update PF select component. No option to have empty default state
        */
-      if (!field.isRequired && field.component === componentTypes.SELECT_COMPONENT) {
+      if (!field.isRequired && field.component === componentTypes.SELECT) {
         field.enum.unshift({
           label: 'Please Choose',
           disabled: field.isRequired

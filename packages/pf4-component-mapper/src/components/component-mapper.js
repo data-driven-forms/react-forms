@@ -16,8 +16,8 @@ import PlainText from './plain-text';
 
 const mapper = {
   [componentTypes.TEXT_FIELD]: TextField,
-  [componentTypes.TEXTAREA_FIELD]: TextArea,
-  [componentTypes.SELECT_COMPONENT]: Select,
+  [componentTypes.TEXTAREA]: TextArea,
+  [componentTypes.SELECT]: Select,
   [componentTypes.CHECKBOX]: Checkbox,
   [componentTypes.SUB_FORM]: SubForm,
   [componentTypes.RADIO]: Radio,

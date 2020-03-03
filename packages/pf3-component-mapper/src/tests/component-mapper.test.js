@@ -17,11 +17,11 @@ describe('Component mapper', () => {
   });
 
   it('should return TextareaField component', () => {
-    expect(componentMapper[componentTypes.TEXTAREA_FIELD]).toEqual(Textarea);
+    expect(componentMapper[componentTypes.TEXTAREA]).toEqual(Textarea);
   });
 
   it('should return SelectField component', () => {
-    expect(componentMapper[componentTypes.SELECT_COMPONENT]).toEqual(Select);
+    expect(componentMapper[componentTypes.SELECT]).toEqual(Select);
   });
 
   it('should return CheckboxGroup component', () => {

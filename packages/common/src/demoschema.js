@@ -16,7 +16,7 @@ const genereateField = (component, name = 'standard', optionsOptional = {}) => [
     label: `${component} -- ${name}`,
     name: `${component} -- ${name}`,
     component,
-    options: component === 'select-field' || component === 'radio' ? options : undefined,
+    options: component === 'select' || component === 'radio' ? options : undefined,
     ...optionsOptional
   },
   {
@@ -26,7 +26,7 @@ const genereateField = (component, name = 'standard', optionsOptional = {}) => [
   }
 ];
 
-const componentList = ['text-field', 'checkbox', 'date-picker', 'radio', 'select-field', 'switch-field', 'textarea-field', 'time-picker'];
+const componentList = ['text-field', 'checkbox', 'date-picker', 'radio', 'select', 'switch', 'textarea', 'time-picker'];
 
 const superSchema = {
   fields: [
@@ -49,7 +49,7 @@ const superSchema = {
               ...genereateField(curr, 'isDisabled', { isDisabled: true }),
               ...genereateField(curr, 'isReadOnly', { isReadOnly: true }),
               ...genereateField(curr, 'is required', { isRequired: true }),
-              ...(curr === 'select-field'
+              ...(curr === 'select'
                 ? [
                     ...genereateField(curr, 'isClearable', { isClearable: true }),
                     ...genereateField(curr, 'isSearchable', { isSearchable: true }),
@@ -69,7 +69,7 @@ const superSchema = {
                     ...genereateField(curr, 'multipleoptions is required', { isRequired: true, options })
                   ]
                 : []),
-              ...(curr === 'switch-field'
+              ...(curr === 'switch'
                 ? [
                     ...genereateField(curr, 'onText', { onText: 'Turned on' }),
                     ...genereateField(curr, 'offText', { offText: 'Turned off' }),

@@ -69,7 +69,7 @@ All those components provides a shared group of props:
 |----|:--:|----------:|
 |placeholder|node/string|A placeholder|
 
-<ExampleLink to='textarea-field' />
+<ExampleLink to='textarea' />
 
 ## Select
 
@@ -84,7 +84,7 @@ All those components provides a shared group of props:
 |isClearable|boolean|Allows to clear the selected option|
 |isSearchable|boolean|Allows to search in the options|
 
-<ExampleLink to='select-field' />
+<ExampleLink to='select' />
 
 ## Checkbox
 
@@ -111,7 +111,7 @@ All those components provides a shared group of props:
 |onText|string|A text which is shown when the switch is on (checked)|
 |offText|string|A text which is shown when the switch is off|
 
-<ExampleLink to='switch-field' />
+<ExampleLink to='switch' />
 
 ## Datepicker
 

@@ -120,7 +120,7 @@ const baseStructure = {
                   name: 'textarea_box_1',
                   label: 'Text Area',
                   title: 'Text Area',
-                  component: components.TEXTAREA_FIELD
+                  component: components.TEXTAREA
                 }
               ],
               component: components.SUB_FORM
@@ -239,7 +239,7 @@ const baseStructure = {
                   label: 'Dropdown',
                   title: 'Dropdown',
                   dataType: 'string',
-                  component: components.SELECT_COMPONENT,
+                  component: components.SELECT,
                   options: [
                     {
                       label: '<None>',
@@ -264,7 +264,7 @@ const baseStructure = {
                   label: 'Dropdown default value',
                   title: 'Dropdown default value',
                   dataType: 'string',
-                  component: components.SELECT_COMPONENT,
+                  component: components.SELECT,
                   options: [
                     {
                       label: '<None>',
@@ -289,7 +289,7 @@ const baseStructure = {
                   label: 'Dropdown multiselect',
                   title: 'Dropdown multiselect',
                   dataType: 'string',
-                  component: components.SELECT_COMPONENT,
+                  component: components.SELECT,
                   multi: true,
                   options: [
                     {
@@ -315,7 +315,7 @@ const baseStructure = {
                   label: 'Dropdown sort by value',
                   title: 'Dropdown sort by value',
                   dataType: 'string',
-                  component: components.SELECT_COMPONENT,
+                  component: components.SELECT,
                   options: [
                     {
                       label: '<None>',
@@ -406,7 +406,7 @@ const baseStructure = {
                   name: 'textarea_box_2',
                   label: 'Text Area',
                   title: 'Text Area',
-                  component: components.TEXTAREA_FIELD
+                  component: components.TEXTAREA
                 },
                 {
                   name: 'check_box_3',
@@ -425,7 +425,7 @@ const baseStructure = {
                   label: 'Dropdown',
                   title: 'Dropdown',
                   dataType: 'string',
-                  component: components.SELECT_COMPONENT,
+                  component: components.SELECT,
                   options: [
                     {
                       label: '<None>',

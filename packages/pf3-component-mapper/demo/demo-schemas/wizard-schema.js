@@ -22,13 +22,13 @@ const wizardSchema = {
           },
           fields: [
             {
-              component: componentTypes.TEXTAREA_FIELD,
+              component: componentTypes.TEXTAREA,
               name: 'source-name',
               type: 'text',
               label: 'Source name'
             },
             {
-              component: componentTypes.SELECT_COMPONENT,
+              component: componentTypes.SELECT,
               name: 'source-type',
               label: 'Source type',
               isRequired: true,

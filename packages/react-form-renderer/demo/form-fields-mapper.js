@@ -71,8 +71,8 @@ const AsyncComponent = (props) => {
 
 const mapper = {
   [componentTypes.TEXT_FIELD]: TextField,
-  [componentTypes.TEXTAREA_FIELD]: TextField,
-  [componentTypes.SELECT_COMPONENT]: SelectField,
+  [componentTypes.TEXTAREA]: TextField,
+  [componentTypes.SELECT]: SelectField,
   [componentTypes.CHECKBOX]: (props) => <div>checkbox</div>,
   [componentTypes.SUB_FORM]: (props) => <div>sub form</div>,
   [componentTypes.RADIO]: (props) => <div>radio</div>,

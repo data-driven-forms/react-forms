@@ -23,26 +23,26 @@ const loadOptions = () => new Promise((res) => {
 
 const selectSchema = {
   fields: [{
-    component: 'select-field',
+    component: 'select',
     name: 'async-single',
     label: 'Async single',
     multi: true,
     loadOptions
   },{
-    component: 'select-field',
+    component: 'select',
     name: 'async-single-search',
     label: 'Async single search',
     isSearchable: true,
     loadOptions
   }, {
-    component: 'select-field',
+    component: 'select',
     name: 'async-multi-search',
     label: 'Async multi search',
     isSearchable: true,
     multi: true,
     loadOptions
   }, {
-    component: 'select-field',
+    component: 'select',
     name: 'select-single',
     label: 'Select single',
     isDisabled: true,
@@ -54,7 +54,7 @@ const selectSchema = {
       value: 231
     }]
   }, {
-    component: 'select-field',
+    component: 'select',
     name: 'select-search',
     label: 'Select search',
     isRequired: true,
@@ -78,7 +78,7 @@ const selectSchema = {
       value: 'x'
     }]
   }, {
-    component: 'select-field',
+    component: 'select',
     name: 'select',
     label: 'Select',
     isRequired: true,

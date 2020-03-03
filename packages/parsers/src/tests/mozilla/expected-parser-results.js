@@ -46,7 +46,7 @@ export const simpleSchemaResult = {
     {
       name: 'bio',
       dataType: 'string',
-      component: 'textarea-field',
+      component: 'textarea',
       label: 'Bio',
       title: 'Bio',
       autoFocus: false,
@@ -138,7 +138,7 @@ export const nestedSchemaResult = {
           label: 'Task details',
           title: 'Task details',
           description: 'Enter the task details',
-          component: 'textarea-field',
+          component: 'textarea',
           type: 'string',
           validate: [],
           autoFocus: false
@@ -218,7 +218,7 @@ export const arraySchemaResult = {
           name: 'fixedItemsList.items.0',
           dataType: 'string',
           label: 'A string value',
-          component: 'textarea-field',
+          component: 'textarea',
           default: 'lorem ipsum',
           validate: []
         },
@@ -227,7 +227,7 @@ export const arraySchemaResult = {
           dataType: 'boolean',
           label: 'a boolean value',
           validate: [],
-          component: 'select-field',
+          component: 'select',
           options: [
             {
               disabled: true,
@@ -473,7 +473,7 @@ export const numbersSchemaResult = {
       label: 'Number enum',
       title: 'Number enum',
       autoFocus: false,
-      component: 'select-field',
+      component: 'select',
       type: 'number',
       options: [
         {
@@ -643,7 +643,7 @@ export const widgetsExpectedResult = {
           initialKey: 'select',
           title: 'select box',
           label: 'select box',
-          component: 'select-field',
+          component: 'select',
           type: 'boolean',
           dataType: 'boolean',
           description: 'This is the select-description',
@@ -690,7 +690,7 @@ export const widgetsExpectedResult = {
           rows: 5,
           type: 'string',
           dataType: 'string',
-          component: 'textarea-field',
+          component: 'textarea',
           title: 'textarea',
           label: 'textarea'
         },
@@ -757,7 +757,7 @@ export const widgetsExpectedResult = {
       name: 'selectWidgetOptions',
       type: 'string',
       dataType: 'string',
-      component: 'select-field',
+      component: 'select',
       title: 'Custom select widget with options',
       label: 'Custom select widget with options',
       options: [
