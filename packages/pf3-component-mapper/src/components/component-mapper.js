@@ -17,8 +17,8 @@ import { InputAddonButtonGroup, InputAddonGroup } from './input-group-fields';
 const componentMapper = {
   [componentTypes.BUTTON]: Button,
   [componentTypes.TEXT_FIELD]: TextField,
-  [componentTypes.TEXTAREA_FIELD]: Textarea,
-  [componentTypes.SELECT_COMPONENT]: Select,
+  [componentTypes.TEXTAREA]: Textarea,
+  [componentTypes.SELECT]: Select,
   [componentTypes.CHECKBOX]: Checkbox,
   [componentTypes.SUB_FORM]: SubForm,
   [componentTypes.RADIO]: Radio,

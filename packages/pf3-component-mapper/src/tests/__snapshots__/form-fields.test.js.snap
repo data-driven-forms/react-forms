@@ -1700,7 +1700,7 @@ exports[`FormFields <Textarea /> should render correctly 1`] = `
     <Textarea
       input={
         Object {
-          "name": "textarea-field",
+          "name": "textarea",
         }
       }
       meta={Object {}}
@@ -1768,7 +1768,7 @@ exports[`FormFields <Textarea /> should render correctly with placeholder 1`] = 
     <Textarea
       input={
         Object {
-          "name": "textarea-field",
+          "name": "textarea",
         }
       }
       meta={Object {}}

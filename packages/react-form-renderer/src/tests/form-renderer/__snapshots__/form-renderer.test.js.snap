@@ -8,11 +8,11 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
       "checkbox": [Function],
       "date-picker": [Function],
       "radio": [Function],
-      "select-field": [Function],
+      "select": [Function],
       "sub-form": [Function],
       "tabs": [Function],
       "text-field": [Function],
-      "textarea-field": [Function],
+      "textarea": [Function],
       "time-picker": [Function],
     }
   }
@@ -27,7 +27,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
           "name": "component1",
         },
         Object {
-          "component": "select-field",
+          "component": "select",
           "name": "secret",
         },
       ],
@@ -74,7 +74,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
             name="component1"
           />,
           <SingleField
-            component="select-field"
+            component="select"
             name="secret"
           />,
         ]
@@ -87,7 +87,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               "name": "component1",
             },
             Object {
-              "component": "select-field",
+              "component": "select",
               "name": "secret",
             },
           ],
@@ -133,7 +133,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
           </FormConditionWrapper>
         </SingleField>
         <SingleField
-          component="select-field"
+          component="select"
           key="secret"
           name="secret"
         >
@@ -143,7 +143,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
             >
               <FieldWrapper
                 component={[Function]}
-                componentType="select-field"
+                componentType="select"
                 name="secret"
               >
                 <Component
@@ -196,11 +196,11 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
       "checkbox": [Function],
       "date-picker": [Function],
       "radio": [Function],
-      "select-field": [Function],
+      "select": [Function],
       "sub-form": [Function],
       "tabs": [Function],
       "text-field": [Function],
-      "textarea-field": [Function],
+      "textarea": [Function],
       "time-picker": [Function],
     }
   }

@@ -35,8 +35,8 @@ const output = {
               ]
             },
             {
-              component: 'select-field',
-              name: 'select-field-1',
+              component: 'select',
+              name: 'select-1',
               label: 'Dropdown 1',
               visible: true,
               dataType: 'number',
@@ -223,7 +223,7 @@ const output = {
                   name: 'textarea_box_1',
                   label: 'Text Area',
                   title: 'Text Area',
-                  component: components.TEXTAREA_FIELD
+                  component: components.TEXTAREA
                 }
               ],
               component: components.SUB_FORM
@@ -356,7 +356,7 @@ const output = {
                   label: 'Dropdown',
                   title: 'Dropdown',
                   dataType: 'string',
-                  component: components.SELECT_COMPONENT,
+                  component: components.SELECT,
                   initialValue: ['1'],
                   isSearchable: true,
                   options: [
@@ -383,7 +383,7 @@ const output = {
                   label: 'Dropdown default value',
                   title: 'Dropdown default value',
                   dataType: 'string',
-                  component: components.SELECT_COMPONENT,
+                  component: components.SELECT,
                   options: [
                     {
                       label: '<None>',
@@ -408,7 +408,7 @@ const output = {
                   label: 'Dropdown multiselect',
                   title: 'Dropdown multiselect',
                   dataType: 'string',
-                  component: components.SELECT_COMPONENT,
+                  component: components.SELECT,
                   multi: true,
                   options: [
                     {
@@ -434,7 +434,7 @@ const output = {
                   label: 'Dropdown sort by value',
                   title: 'Dropdown sort by value',
                   dataType: 'string',
-                  component: components.SELECT_COMPONENT,
+                  component: components.SELECT,
                   options: [
                     {
                       label: '<None>',
@@ -458,7 +458,7 @@ const output = {
                   name: 'select_clear',
                   label: 'Clearable dropdown',
                   title: 'Clearable dropdown',
-                  component: components.SELECT_COMPONENT,
+                  component: components.SELECT,
                   multi: true,
                   isClearable: true,
                   options: [
@@ -576,7 +576,7 @@ const output = {
                   name: 'textarea_box_2',
                   label: 'Text Area',
                   title: 'Text Area',
-                  component: components.TEXTAREA_FIELD
+                  component: components.TEXTAREA
                 },
                 {
                   name: 'check_box_3',
@@ -595,7 +595,7 @@ const output = {
                   label: 'Dropdown',
                   title: 'Dropdown',
                   dataType: 'string',
-                  component: components.SELECT_COMPONENT,
+                  component: components.SELECT,
                   options: [
                     {
                       label: '<None>',

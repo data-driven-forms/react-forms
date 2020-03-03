@@ -41,9 +41,9 @@ const componentTypes = {
   [componentTypes.DATE_PICKER]: 'date-picker',
   [componentTypes.TIME_PICKER]: 'time-picker',
   [componentTypes.WIZARD]: 'wizard',
-  [componentTypes.SWITCH]: 'switch-field',
-  [componentTypes.TEXTAREA]: 'textarea-field',
-  [componentTypes.SELECT]: 'select-field',
+  [componentTypes.SWITCH]: 'switch',
+  [componentTypes.TEXTAREA]: 'textarea',
+  [componentTypes.SELECT]: 'select',
   [componentTypes.PLAIN_TEXT]: 'plain-text',
 }
 ```

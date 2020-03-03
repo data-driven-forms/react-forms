@@ -253,7 +253,7 @@ describe('FormFields', () => {
     beforeEach(() => {
       initialProps = {
         input: {
-          name: 'textarea-field'
+          name: 'textarea'
         },
         meta: {}
       };

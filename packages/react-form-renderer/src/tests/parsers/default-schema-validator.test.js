@@ -379,10 +379,10 @@ describe('Default schema validator', () => {
           ...componentMapper,
           'sub-form': () => <div />,
           'text-field': () => <div />,
-          'textarea-field': () => <div />,
+          textarea: () => <div />,
           checkbox: () => <div />,
           radio: () => <div />,
-          'select-field': () => <div />,
+          select: () => <div />,
           'date-picker': () => <div />,
           'time-picker': () => <div />
         },

@@ -107,7 +107,7 @@ describe('Mozilla json schema parser', () => {
     const expectedSchema = expect.objectContaining({
       fields: expect.arrayContaining([
         expect.objectContaining({
-          component: 'select-field',
+          component: 'select',
           dataType: 'string',
           name: 'authentication',
           options: [
@@ -164,7 +164,7 @@ describe('Mozilla json schema parser', () => {
         expect.arrayContaining([
           expect.objectContaining({
             name: 'authentication',
-            component: 'select-field',
+            component: 'select',
             type: 'text',
             options: [
               {

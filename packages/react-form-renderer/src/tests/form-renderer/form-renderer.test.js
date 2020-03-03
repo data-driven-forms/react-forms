@@ -24,8 +24,8 @@ describe('<FormRenderer />', () => {
   beforeEach(() => {
     componentMapper = {
       [componentTypes.TEXT_FIELD]: TextField,
-      [componentTypes.TEXTAREA_FIELD]: () => <div className="nested-item">Textarea field</div>,
-      [componentTypes.SELECT_COMPONENT]: () => <div className="nested-item">Select field</div>,
+      [componentTypes.TEXTAREA]: () => <div className="nested-item">Textarea field</div>,
+      [componentTypes.SELECT]: () => <div className="nested-item">Select field</div>,
       [componentTypes.CHECKBOX]: () => <div className="nested-item">checkbox field</div>,
       [componentTypes.SUB_FORM]: () => <div className="nested-item">sub form</div>,
       [componentTypes.RADIO]: () => <div className="nested-item">Radio field</div>,

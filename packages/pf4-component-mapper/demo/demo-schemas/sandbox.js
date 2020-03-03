@@ -128,7 +128,7 @@ const output = {
                   name: 'textarea_box_1',
                   label: 'Text Area',
                   title: 'Text Area',
-                  component: components.TEXTAREA_FIELD
+                  component: components.TEXTAREA
                 }
               ],
               component: components.SUB_FORM
@@ -260,7 +260,7 @@ const output = {
                   isSearchable: true,
                   isClearable: true,
                   multi: true,
-                  component: components.SELECT_COMPONENT,
+                  component: components.SELECT,
                   loadOptions: asyncLoadOptions
                 },
                 {
@@ -271,7 +271,7 @@ const output = {
                   isSearchable: true,
                   isClearable: false,
                   multi: true,
-                  component: components.SELECT_COMPONENT,
+                  component: components.SELECT,
                   options: [
                     {
                       // eslint-disable-next-line max-len
@@ -298,7 +298,7 @@ const output = {
                   label: 'Dropdown default value',
                   title: 'Dropdown default value',
                   dataType: 'string',
-                  component: components.SELECT_COMPONENT,
+                  component: components.SELECT,
                   isClearable: true,
                   options: [
                     {
@@ -324,7 +324,7 @@ const output = {
                   label: 'Dropdown multiselect',
                   title: 'Dropdown multiselect',
                   dataType: 'string',
-                  component: components.SELECT_COMPONENT,
+                  component: components.SELECT,
                   isSearchable: true,
                   multi: true,
                   simpleValue: false,
@@ -372,7 +372,7 @@ const output = {
                   label: 'Dropdown sort by value',
                   title: 'Dropdown sort by value',
                   dataType: 'string',
-                  component: components.SELECT_COMPONENT,
+                  component: components.SELECT,
                   isSearchable: true,
                   options: [
                     {
@@ -396,7 +396,7 @@ const output = {
                 {
                   name: 'dropdown_list_5',
                   label: 'Creatable multi select',
-                  component: components.SELECT_COMPONENT,
+                  component: components.SELECT,
                   multi: true,
                   isClearable: true,
                   selectVariant: 'createable',
@@ -486,7 +486,7 @@ const output = {
                   name: 'textarea_box_2',
                   label: 'Text Area',
                   title: 'Text Area',
-                  component: components.TEXTAREA_FIELD
+                  component: components.TEXTAREA
                 },
                 {
                   name: 'check_box_3',
@@ -505,7 +505,7 @@ const output = {
                   label: 'Dropdown',
                   title: 'Dropdown',
                   dataType: 'string',
-                  component: components.SELECT_COMPONENT,
+                  component: components.SELECT,
                   options: [
                     {
                       label: '<None>',

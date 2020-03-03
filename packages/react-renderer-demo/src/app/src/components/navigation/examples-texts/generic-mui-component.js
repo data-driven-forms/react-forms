@@ -14,13 +14,13 @@ export default ({ activeMapper, component }) => {
       case 'date-picker':
         component = 'textinput';
         break;
-      case 'select-field':
+      case 'select':
         component = 'select';
         break;
-      case 'switch-field':
+      case 'switch':
         component = 'switch';
         break;
-      case 'textarea-field':
+      case 'textarea':
         component = 'textarea';
         break;
       case 'text-field':
@@ -38,13 +38,13 @@ export default ({ activeMapper, component }) => {
       case 'date-picker':
         component = 'text-field';
         break;
-      case 'select-field':
+      case 'select':
         component = 'select';
         break;
-      case 'switch-field':
+      case 'switch':
         component = 'switch';
         break;
-      case 'textarea-field':
+      case 'textarea':
         component = 'text-field';
         break;
       case 'time-picker':
