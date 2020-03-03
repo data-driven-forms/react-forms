@@ -3,28 +3,36 @@ import FormRender, { componentTypes, validatorTypes } from '@data-driven-forms/r
 import { componentMapper, FormTemplate } from '@data-driven-forms/pf4-component-mapper';
 
 const schema = {
-  fields: [{
-    name: 'first-name',
-    label: 'First name',
-    component: componentTypes.TEXT_FIELD,
-    isRequired: true,
-    validate: [{
-      type: validatorTypes.REQUIRED,
-    }],
-  }, {
-    name: 'last-name',
-    label: 'Last name',
-    component: componentTypes.TEXT_FIELD,
-    isRequired: true,
-    validate: [{
-      type: validatorTypes.REQUIRED,
-    }],
-  }, {
-    name: 'age',
-    label: 'Age',
-    component: componentTypes.TEXT_FIELD,
-    type: 'number',
-  }],
+  fields: [
+    {
+      name: 'first-name',
+      label: 'First name',
+      component: componentTypes.TEXT_FIELD,
+      isRequired: true,
+      validate: [
+        {
+          type: validatorTypes.REQUIRED
+        }
+      ]
+    },
+    {
+      name: 'last-name',
+      label: 'Last name',
+      component: componentTypes.TEXT_FIELD,
+      isRequired: true,
+      validate: [
+        {
+          type: validatorTypes.REQUIRED
+        }
+      ]
+    },
+    {
+      name: 'age',
+      label: 'Age',
+      component: componentTypes.TEXT_FIELD,
+      type: 'number'
+    }
+  ]
 };
 
 const GetStartedForm = () => (
@@ -39,7 +47,5 @@ const GetStartedForm = () => (
     />
   </div>
 );
-
-GetStartedForm.displayName = 'GetStartedForm';
 
 export default GetStartedForm;
