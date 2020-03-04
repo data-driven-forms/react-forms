@@ -8,7 +8,6 @@ const path = require('path');
 const FormTemplate = ({ schema: { title, label, description }, formFields }) => {
   // When testing inside the renderer package, it cannot import things from itself!
   const isInternal = path.dirname(module.parent.filename).includes('/react-form-renderer/');
-
   const formOptions = isInternal ? useFormApiInternal() : useFormApi();
   const FormSpyFinal = isInternal ? FormSpyInternal : FormSpy;
 

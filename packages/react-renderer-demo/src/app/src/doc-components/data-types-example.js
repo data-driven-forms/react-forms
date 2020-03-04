@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import FormRenderer, { componentTypes, dataTypes } from '@data-driven-forms/react-form-renderer';
-import { formTemplate, componentMapper } from '@data-driven-forms/pf4-component-mapper';
+import { FormTemplate, componentMapper } from '@data-driven-forms/pf4-component-mapper';
 import { Title } from '@patternfly/react-core/dist/js/components/Title/Title';
 
 const schema = {
@@ -29,7 +29,7 @@ const DataTypesExample = () => {
   return (
     <div className="pf4">
       <FormRenderer
-        formTemplate={ formTemplate() }
+        FormTemplate={ FormTemplate }
         componentMapper={ componentMapper }
         schema={ schema }
         onSubmit={ console.log }

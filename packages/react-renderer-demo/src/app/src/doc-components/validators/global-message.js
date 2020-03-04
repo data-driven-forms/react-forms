@@ -32,7 +32,7 @@ const schema = {
 const OverridingMessage = () => (
   <div className="pf4">
     <FormRenderer
-      formTemplate={ formTemplate }
+      FormTemplate={ formTemplate }
       componentMapper={ componentMapper }
       schema={ schema }
       onSubmit={ console.log }

@@ -108,6 +108,7 @@ const output = {
     },
     {
       name: 'dataShower',
+      id: 'shower 1',
       label: 'Test select',
       component: 'dataShower',
       loadOptions: () => new Promise((resolve) => setTimeout(() => resolve({ custom: 'data' }), 1500))
@@ -115,6 +116,7 @@ const output = {
     {
       name: 'dataShower',
       label: 'Test select',
+      id: 'shower 2',
       component: 'dataShower',
       actions: {
         loadOptions: ['loadData', { x: 'y', pp: 'adsad' }],

@@ -142,7 +142,7 @@ const FieldArrayProvider = () => {
     <React.Fragment>
       <FormRender
         componentMapper={ componentMapper }
-        formTemplate={ () => null }
+        FormTemplate={ () => null }
         schema={ schema }
         onSubmit={ onSubmit }
         onStateUpdate={ ({ values }) => setValues(values) }

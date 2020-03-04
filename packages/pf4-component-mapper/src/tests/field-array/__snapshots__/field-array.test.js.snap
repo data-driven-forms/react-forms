@@ -39,7 +39,7 @@ exports[`FieldArray should render array field correctly 1`] = `
         "wizard": [Function],
       }
     }
-    formTemplate={[Function]}
+    FormTemplate={[Function]}
     initialValues={Object {}}
     onSubmit={[MockFunction]}
     schema={

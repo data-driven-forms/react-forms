@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import formTemplate from '@data-driven-forms/common/src/form-template';
+import FormTemplate from '@data-driven-forms/common/src/form-template';
 
 import { Text, TextVariants } from '@patternfly/react-core/dist/js/components/Text/Text';
 import { TextContent } from '@patternfly/react-core/dist/js/components/Text/TextContent';
@@ -51,6 +51,8 @@ Description.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
 };
 
-const PF4FormTemplate = (options) => formTemplate({ FormWrapper: Form, Button, ButtonGroup, Title, Description, ...options });
+const PF4FormTemplate = (props) => (
+  <FormTemplate FormWrapper={Form} Button={Button} ButtonGroup={ButtonGroup} Title={Title} Description={Description} {...props} />
+);
 
 export default PF4FormTemplate;

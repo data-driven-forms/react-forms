@@ -6,7 +6,7 @@ import { TextInput } from '@patternfly/react-core';
 import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import * as enterHandle from '@data-driven-forms/common/src/wizard/enter-handler';
 
-import { componentMapper, formTemplate } from '../../index';
+import { componentMapper, FormTemplate } from '../../index';
 
 describe('<Wizard />', () => {
   let initialProps;
@@ -100,7 +100,7 @@ describe('<Wizard />', () => {
     initialProps = {
       schema,
       componentMapper,
-      formTemplate: formTemplate({ showFormControls: false }),
+      FormTemplate: (props) => <FormTemplate showFormControls={false} {...props} />,
       onSubmit: jest.fn(),
       onCancel: jest.fn()
     };
@@ -737,7 +737,7 @@ describe('<Wizard />', () => {
       <FormRenderer
         schema={schema}
         componentMapper={componentMapper}
-        formTemplate={formTemplate({ showFormControls: false })}
+        FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
         onSubmit={jest.fn()}
         onCancel={jest.fn()}
       />
@@ -942,7 +942,7 @@ describe('<Wizard />', () => {
         <FormRenderer
           schema={wizardSchema}
           componentMapper={componentMapper}
-          formTemplate={formTemplate({ showFormControls: false })}
+          FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
           onSubmit={jest.fn()}
           onCancel={jest.fn()}
         />
@@ -985,7 +985,7 @@ describe('<Wizard />', () => {
         <FormRenderer
           schema={wizardSchema}
           componentMapper={componentMapper}
-          formTemplate={formTemplate({ showFormControls: false })}
+          FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
           onSubmit={jest.fn()}
           onCancel={jest.fn()}
         />
@@ -1023,7 +1023,7 @@ describe('<Wizard />', () => {
         <FormRenderer
           schema={wizardSchema}
           componentMapper={componentMapper}
-          formTemplate={formTemplate({ showFormControls: false })}
+          FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
           onSubmit={jest.fn()}
           onCancel={jest.fn()}
         />
@@ -1105,7 +1105,7 @@ describe('<Wizard />', () => {
         <FormRenderer
           schema={wizardSchema}
           componentMapper={componentMapper}
-          formTemplate={formTemplate({ showFormControls: false })}
+          FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
           onSubmit={jest.fn()}
           onCancel={jest.fn()}
         />
@@ -1195,7 +1195,7 @@ describe('<Wizard />', () => {
         <FormRenderer
           schema={wizardSchemaWithNextStepFunction}
           componentMapper={componentMapper}
-          formTemplate={formTemplate({ showFormControls: false })}
+          FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
           onSubmit={jest.fn()}
           onCancel={jest.fn()}
         />
@@ -1269,7 +1269,7 @@ describe('<Wizard />', () => {
         <FormRenderer
           schema={wizardSchema}
           componentMapper={componentMapper}
-          formTemplate={formTemplate({ showFormControls: false })}
+          FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
           onSubmit={jest.fn()}
           onCancel={jest.fn()}
         />

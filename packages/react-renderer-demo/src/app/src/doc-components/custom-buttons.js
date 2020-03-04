@@ -31,7 +31,7 @@ const asyncSubmit = (values, api) => new Promise(resolve => setTimeout(() => res
 const FormControls = () => (
   <div className="pf4">
     <FormRenderer
-      formTemplate={ formTemplate }
+      FormTemplate={ formTemplate }
       componentMapper={ componentMapper }
       schema={ schema }
       onSubmit={ asyncSubmit }

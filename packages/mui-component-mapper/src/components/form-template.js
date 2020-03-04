@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import MUIButton from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import formTemplate from '@data-driven-forms/common/src/form-template';
+import FormTemplate from '@data-driven-forms/common/src/form-template';
 
 const Form = ({ children, ...props }) => <form {...props}>{children}</form>;
 const Description = ({ children }) => (
@@ -28,6 +28,8 @@ const Button = ({ label, variant, children, ...props }) => (
   </MUIButton>
 );
 
-const MuiFormTemplate = (options) => formTemplate({ FormWrapper: Form, Button, ButtonGroup, Title, Description, ...options });
+const MuiFormTemplate = (props) => (
+  <FormTemplate FormWrapper={Form} Button={Button} ButtonGroup={ButtonGroup} Title={Title} Description={Description} {...props} />
+);
 
 export default MuiFormTemplate;

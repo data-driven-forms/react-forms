@@ -55,7 +55,7 @@ const Forms = ({ mappers }) => {
         <Paper>
           <div className={activeMapper.value} style={{ padding: 16 }}>
             <FormRenderer
-              formTemplate={mappers[activeMapper.value].layoutMapper({ showFormControls: activeSchema !== 'wizard' })}
+              FormTemplate={mappers[activeMapper.value].layoutMapper({ showFormControls: activeSchema !== 'wizard' })}
               componentMapper={mappers[activeMapper.value].componentMapper}
               {...schemas[activeSchema]}
               onSubmit={console.log /* eslint-disable-line no-console */}

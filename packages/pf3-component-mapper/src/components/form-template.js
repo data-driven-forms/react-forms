@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button as PF3Button, Form } from 'patternfly-react';
 import './form-template.scss';
-import formTemplate from '@data-driven-forms/common/src/form-template';
+import FormTemplate from '@data-driven-forms/common/src/form-template';
 
 export const FormWrapper = ({ children, ...props }) => <Form {...props}>{children}</Form>;
 
@@ -49,6 +49,8 @@ Description.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired
 };
 
-const PF3FormTemplate = (options) => formTemplate({ FormWrapper, Button, ButtonGroup, Title, Description, ...options });
+const PF3FormTemplate = (props) => (
+  <FormTemplate FormWrapper={FormWrapper} Button={Button} ButtonGroup={ButtonGroup} Title={Title} Description={Description} {...props} />
+);
 
 export default PF3FormTemplate;
