@@ -23,7 +23,7 @@ const renderItems = (items, level = 0, previousLinks = ['']) => {
 
   if (fields) {
     return (
-      <Mapper.wrapper
+      <Mapper.Wrapper
         key={`${link}-${title}-${open}`}
         open={open}
         fields={fields}
@@ -38,7 +38,7 @@ const renderItems = (items, level = 0, previousLinks = ['']) => {
   }
 
   return (
-    <Mapper.item
+    <Mapper.Item
       href={createLink(...previousLinks, link || component)}
       level={level}
       key={`${link || component}-${linkText}`}

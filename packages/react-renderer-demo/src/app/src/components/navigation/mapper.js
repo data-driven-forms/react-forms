@@ -27,8 +27,8 @@ const Item = ({ href, linkText, component }) => {
       selected={href.replace('/?', '?') === router.asPath}
       key={href || linkText}
       className={classes.nested}
-      component={forwardRef((props) => (
-        <RouterNavLink key={component} href={href.replace('/?', '?')}>
+      component={forwardRef((props, ref) => (
+        <RouterNavLink ref={ref} key={component} href={href.replace('/?', '?')}>
           <Link style={{ color: 'rgba(0, 0, 0, 0.87)' }} {...props} href={href.replace('/?', '?')} />
         </RouterNavLink>
       ))}
@@ -70,8 +70,8 @@ const FinalList = ({ title, level, link, fields, previousLinks = [], renderItems
 };
 
 const Mapper = {
-  wrapper: FinalList,
-  item: Item
+  Wrapper: FinalList,
+  Item
 };
 
 export default Mapper;

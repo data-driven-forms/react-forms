@@ -1,17 +1,12 @@
 /* eslint no-console: "off" */
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Typography from '@material-ui/core/Typography';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { componentTypes as components, validatorTypes as validators, defaultSchemaValidator } from '@data-driven-forms/react-form-renderer';
+import { FormTemplate, componentMapper } from '@data-driven-forms/pf4-component-mapper';
 
 import dynamic from 'next/dynamic';
-
-import MapperContext from '@docs/components/mappers-context';
 const CodeEditor = dynamic(import('@docs/components/code-editor'), {
   ssr: false
 });
@@ -79,7 +74,7 @@ const baseStructure = {
                   name: 'text_box_6',
                   label: 'Text Box unvisible',
                   title: 'Text Box unvisible',
-                  isVisible: false,
+                  hideField: true,
                   component: components.TEXT_FIELD
                 },
                 {
@@ -491,8 +486,6 @@ const LiveEditor = () => {
     parsedSchema: baseStructure
   });
 
-  const mappers = useContext(MapperContext);
-
   const onChange = (value) => {
     let schema;
     try {
@@ -503,7 +496,7 @@ const LiveEditor = () => {
     }
 
     try {
-      defaultSchemaValidator(schema, mappers.mappers.pf4.componentMapper);
+      defaultSchemaValidator(schema, componentMapper);
       setState((state) => ({ ...state, parsedSchema: schema }));
     } catch (error) {
       console.warn('not correct json schema', error);
@@ -517,40 +510,21 @@ const LiveEditor = () => {
         <div style={{ width: '100%', paddingTop: 10, background: '#1d1f21' }}>
           <CodeEditor readOnly={false} mode="json" onChange={onChange} value={value} maxLines={50} />
         </div>
-        <div>
-          <Grid container spacing={6}>
-            <Grid item xs={12} md={6}>
-              <Typography variant="h6">Avaiable components:</Typography>
-              <div>
-                <List>
-                  {[...new Set(Object.values(components))].map((item) =>
-                    item === 'wizard' ? null : (
-                      <ListItem key={item}>
-                        <ListItemText primary={item} />
-                      </ListItem>
-                    )
-                  )}
-                </List>
-              </div>
-            </Grid>
-          </Grid>
-        </div>
       </Grid>
       <Grid item md={6} xs={12}>
         <Paper square style={{ padding: 16, paddingLeft: 24 }}>
           <Grid container spacing={6}>
             <Grid item xs={12}>
-              {mappers.loaded && (
-                <div className="pf4">
-                  <FormRenderer
-                    componentMapper={mappers.mappers.pf4.componentMapper}
-                    schema={parsedSchema}
-                    onSubmit={console.log}
-                    onCancel={() => console.log('Cancel clicked')}
-                    canReset
-                  />
-                </div>
-              )}
+              <div className="pf4">
+                <FormRenderer
+                  componentMapper={componentMapper}
+                  FormTemplate={FormTemplate}
+                  schema={parsedSchema}
+                  onSubmit={console.log}
+                  onCancel={() => console.log('Cancel clicked')}
+                  canReset
+                />
+              </div>
             </Grid>
           </Grid>
         </Paper>

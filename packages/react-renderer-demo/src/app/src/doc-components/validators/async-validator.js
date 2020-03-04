@@ -1,6 +1,6 @@
 import React from 'react';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
-import { formTemplate, componentMapper } from '@data-driven-forms/pf4-component-mapper';
+import { FormTemplate, componentMapper } from '@data-driven-forms/pf4-component-mapper';
 const mockEndpoint = value => new Promise((resolve, reject) => {
   setTimeout(() => {
     if (value === 'John') {
@@ -31,7 +31,7 @@ const schema = {
 const AsyncValidator = () => (
   <div className="pf4">
     <FormRenderer
-      FormTemplate={ formTemplate }
+      FormTemplate={ FormTemplate }
       componentMapper={ componentMapper }
       schema={ schema }
       onSubmit={ console.log }

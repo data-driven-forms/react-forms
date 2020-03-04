@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
-import { componentMapper } from '@data-driven-forms/pf4-component-mapper';
+import { componentMapper, FormTemplate } from '@data-driven-forms/pf4-component-mapper';
 import { Title } from '@patternfly/react-core/dist/js/components/Title/Title';
 
 const schema = {
@@ -15,7 +15,7 @@ const schema = {
   }],
 };
 
-const DataTypesExample = () => {
+const ClearedValueExample = () => {
   const [ values, setValues ] = useState({});
   return (
     <div className="pf4">
@@ -24,7 +24,7 @@ const DataTypesExample = () => {
           'field-with-initial-value': 'Delete me!',
         }}
         clearedValue={ null }
-        FormTemplate={ formTemplate }
+        FormTemplate={ FormTemplate }
         componentMapper={ componentMapper }
         schema={ schema }
         onSubmit={ console.log }
@@ -39,4 +39,4 @@ const DataTypesExample = () => {
     </div>
   );};
 
-export default DataTypesExample;
+export default ClearedValueExample;

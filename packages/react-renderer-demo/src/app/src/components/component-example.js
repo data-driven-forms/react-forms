@@ -147,21 +147,21 @@ class ComponentExample extends Component {
           [componentTypes.WIZARD]: MuiWizard,
           summary: Summary
         },
-        formTemplate: props.mappers.mui.formTemplate
+        FormTemplate: props.mappers.mui.FormTemplate
       },
       pf3: {
         componentMapper: {
           ...props.mappers.pf3.componentMapper,
           summary: Summary
         },
-        formTemplate: props.mappers.pf3.formTemplate
+        FormTemplate: props.mappers.pf3.FormTemplate
       },
       pf4: {
         componentMapper: {
           ...props.mappers.pf4.componentMapper,
           summary: Summary
         },
-        formTemplate: props.mappers.pf4.formTemplate
+        FormTemplate: props.mappers.pf4.FormTemplate
       }
     };
   }
