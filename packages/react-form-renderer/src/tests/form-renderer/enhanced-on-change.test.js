@@ -29,6 +29,25 @@ describe('#enhancedOnChange', () => {
     expect(enhancedOnChange({ onChange: value => value, clearedValue }, value)).toEqual('Me');
   });
 
+  it('should return booelan values correctly with initialValue set', () => {
+    const initial = false;
+    const valueFalse = {
+      target: {
+        checked: false,
+        type: 'checkbox',
+      },
+    };
+    expect(enhancedOnChange({ onChange: value => value, clearedValue, initial }, valueFalse)).toEqual(false);
+
+    const valueTrue = {
+      target: {
+        checked: true,
+        type: 'checkbox',
+      },
+    };
+    expect(enhancedOnChange({ onChange: value => value, clearedValue, initial }, valueTrue)).toEqual(true);
+  });
+
   it('should correctly convert array datatype from strings to integers', () => {
     const value = [ '1', '2', 3 ];
     expect(enhancedOnChange({ dataType: 'integer', onChange: value => value, clearedValue }, value)).toEqual([ 1, 2, 3 ]);
