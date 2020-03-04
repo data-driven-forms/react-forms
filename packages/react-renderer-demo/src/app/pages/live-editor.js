@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { componentTypes as components, validatorTypes as validators, defaultSchemaValidator } from '@data-driven-forms/react-form-renderer';
-import { formTemplate, componentMapper } from '@data-driven-forms/pf4-component-mapper';
+import { FormTemplate, componentMapper } from '@data-driven-forms/pf4-component-mapper';
 
 import dynamic from 'next/dynamic';
 const CodeEditor = dynamic(import('@docs/components/code-editor'), {
@@ -518,7 +518,7 @@ const LiveEditor = () => {
               <div className="pf4">
                 <FormRenderer
                   componentMapper={componentMapper}
-                  formTemplate={formTemplate()}
+                  FormTemplate={FormTemplate}
                   schema={parsedSchema}
                   onSubmit={console.log}
                   onCancel={() => console.log('Cancel clicked')}

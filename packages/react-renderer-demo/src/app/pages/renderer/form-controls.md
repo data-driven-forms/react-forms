@@ -6,6 +6,8 @@ import ListOfContents from '../../src/helpers/list-of-contents';
 <Grid container item>
 <Grid item xs={12} md={10}>
 
+# Obsolete page
+
 # Custom form buttons
 
 If you need completely customized buttons, you can pass a component to form renderer via `renderFormButtons` prop.

@@ -101,7 +101,7 @@ const ComponentMapper = () => {
     <div>
       <FormRender
         componentMapper={componentMapper}
-        formTemplate={FormTemplate}
+        FormTemplate={FormTemplate}
         schema={schema}
         onSubmit={(values) => setValues(values)}
         onCancel={() => console.log('cancel action')}

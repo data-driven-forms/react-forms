@@ -36,6 +36,7 @@ const schema = {
       },
       {
         title: 'Way 1',
+        name: 'way-1',
         stepKey: 'way-1',
         fields: [
           {
@@ -49,6 +50,7 @@ const schema = {
       },
       {
         title: 'Way 2',
+        name: 'way-2',
         stepKey: 'way-2',
         fields: [
           {
@@ -69,7 +71,7 @@ const InitializeOnMountWizardExample = () => {
   return (
     <div className="pf4">
       <FormRenderer
-        FormTemplate={ FormTemplate }
+        FormTemplate={ props => <FormTemplate {...props} showFormControls={false} /> }
         componentMapper={ componentMapper }
         schema={ schema }
         onSubmit={ console.log }

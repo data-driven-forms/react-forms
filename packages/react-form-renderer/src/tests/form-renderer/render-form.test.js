@@ -1185,7 +1185,7 @@ describe('renderForm function', () => {
     });
   });
 
-  it.only('should use actionMapper', () => {
+  it('should use actionMapper', () => {
     const id = '23asd86';
 
     const intl = jest.fn().mockImplementation((id) => `translated ${id}`);

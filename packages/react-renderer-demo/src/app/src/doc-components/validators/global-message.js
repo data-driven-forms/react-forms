@@ -1,6 +1,6 @@
 import React from 'react';
 import FormRenderer, { Validators, componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
-import { formTemplate, componentMapper } from '@data-driven-forms/pf4-component-mapper';
+import { FormTemplate, componentMapper } from '@data-driven-forms/pf4-component-mapper';
 Validators.messages = {
   ...Validators.messages,
   required: 'Required',
@@ -32,7 +32,7 @@ const schema = {
 const OverridingMessage = () => (
   <div className="pf4">
     <FormRenderer
-      FormTemplate={ formTemplate }
+      FormTemplate={ FormTemplate }
       componentMapper={ componentMapper }
       schema={ schema }
       onSubmit={ console.log }
