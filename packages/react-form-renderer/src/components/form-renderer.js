@@ -1,5 +1,5 @@
-import React from 'react';
-import { Form } from 'react-final-form';
+import React, { useEffect } from 'react';
+import { Form, useFormState } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import PropTypes from 'prop-types';
 import createFocusDecorator from 'final-form-focus';
@@ -16,6 +16,32 @@ const FormContent = ({ value, formFields, schema, onStateUpdate, Template }) => 
   return (
     <RendererContext.Provider value={value}>
       <Template formFields={formFields} schema={schema} />
+    </RendererContext.Provider>
+  );
+};
+
+FormContent.propTypes = {
+  value: PropTypes.object.isRequired,
+  formFields: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired,
+  schema: PropTypes.object.isRequired,
+  onStateUpdate: PropTypes.func,
+  Template: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]).isRequired
+};
+
+const useComponentSpy = (onStateUpdate) => {
+  const state = useFormState();
+  useEffect(() => {
+    if (onStateUpdate) {
+      onStateUpdate(state);
+    }
+  });
+};
+
+const FormContent = ({ value, formFields, schema, onStateUpdate, Template }) => {
+  useComponentSpy(onStateUpdate);
+  return (
+    <RendererContext.Provider key="FUCK" value={value}>
+      <Template key="prdel" formFields={formFields} schema={schema} />
     </RendererContext.Provider>
   );
 };
