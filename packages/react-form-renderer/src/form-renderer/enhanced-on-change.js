@@ -52,6 +52,10 @@ const checkEmpty = (value) => {
     return false;
   }
 
+  if (typeof value === 'boolean') {
+    return false;
+  }
+
   if (typeof value === 'string' && value.length > 0) {
     return false;
   }
