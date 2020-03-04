@@ -78,7 +78,7 @@ const PF4FieldArray = () => {
     <div className="pf4">
       <FormRender
         componentMapper={ componentMapper }
-        formTemplate={ formTemplate }
+        FormTemplate={ formTemplate }
         schema={ schema }
         onSubmit={ onSubmit }
         onStateUpdate={ ({ values }) => setValues(values) }

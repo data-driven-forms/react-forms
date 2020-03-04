@@ -7,7 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import FormTabs from '../components/tabs';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 import FormRenderer, { validatorTypes } from '@data-driven-forms/react-form-renderer';
-import { componentMapper, formTemplate } from '../index';
+import { componentMapper, FormTemplate } from '../index';
 
 describe('tabs', () => {
   const props = {
@@ -85,7 +85,7 @@ describe('tabs', () => {
     const wrapper = mount(
       <FormRenderer
         componentMapper={componentMapper}
-        formTemplate={formTemplate()}
+        FormTemplate={(props) => <FormTemplate {...props} />}
         onSubmit={(values) => onSubmit(values)}
         schema={{
           fields: [

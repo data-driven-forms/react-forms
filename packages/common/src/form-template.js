@@ -104,7 +104,7 @@ FormControls.defaultProps = {
   buttonOrder: ['submit', 'reset', 'cancel']
 };
 
-const formTemplate = ({
+const FormTemplate = ({
   FormWrapper,
   Title,
   Description,
@@ -113,9 +113,12 @@ const formTemplate = ({
   formWrapperProps,
   showFormControls = true,
   disableSubmit = [],
-  onStateUpdate,
-  ...options
-}) => ({ schema: { title, description, label }, formFields }) => {
+  ...rest
+}) => {
+  const {
+    schema: { title, description, label },
+    formFields
+  } = rest;
   const { onReset, onCancel, getState, handleSubmit } = useFormApi();
 
   return (
@@ -123,7 +126,6 @@ const formTemplate = ({
       {(title || label) && <Title>{title || label}</Title>}
       {description && <Description>{description}</Description>}
       {formFields}
-      {onStateUpdate && <FormSpy onChange={onStateUpdate} />}
       {showFormControls && (
         <FormSpy>
           {(formSpyProps) => (
@@ -135,7 +137,7 @@ const formTemplate = ({
               onCancel={onCancel}
               disableSubmit={isDisabled(disableSubmit, getState)}
               formSpyProps={formSpyProps}
-              {...options}
+              {...rest}
             />
           )}
         </FormSpy>
@@ -144,4 +146,20 @@ const formTemplate = ({
   );
 };
 
-export default formTemplate;
+FormTemplate.propTypes = {
+  FormWrapper: PropTypes.oneOfType([PropTypes.node, PropTypes.func, PropTypes.element]).isRequired,
+  Title: PropTypes.oneOfType([PropTypes.node, PropTypes.func, PropTypes.element]).isRequired,
+  Description: PropTypes.oneOfType([PropTypes.node, PropTypes.func, PropTypes.element]).isRequired,
+  Button: PropTypes.oneOfType([PropTypes.node, PropTypes.func, PropTypes.element]).isRequired,
+  ButtonGroup: PropTypes.oneOfType([PropTypes.node, PropTypes.func, PropTypes.element]).isRequired,
+  formWrapperProps: PropTypes.object,
+  showFormControls: PropTypes.bool,
+  disableSubmit: PropTypes.arrayOf(PropTypes.string)
+};
+
+FormTemplate.defaultProps = {
+  showFormControls: true,
+  disableSubmit: []
+};
+
+export default FormTemplate;

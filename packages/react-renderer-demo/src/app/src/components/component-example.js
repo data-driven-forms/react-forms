@@ -311,6 +311,7 @@ class ComponentExample extends Component {
   render() {
     const { value, parsedSchema, component, openTooltip, variants } = this.state;
     const { activeMapper, classes } = this.props;
+    const { FormTemplate } = this.mapperVariants[activeMapper];
 
     const editedValue = value
       .replace(/^{\n {2}"fields": \[\n/, '')
@@ -406,7 +407,7 @@ class ComponentExample extends Component {
                     {...this.mapperVariants[activeMapper]}
                     schema={parsedSchema}
                     onSubmit={console.log /* eslint-disable-line no-console */}
-                    formTemplate={this.mapperVariants[activeMapper].formTemplate({ showFormControls: component !== 'wizard' })}
+                    FormTemplate={(props) => <FormTemplate {...props} showFormControls={component !== 'wizard'} />}
                   />
                 </div>
               </div>

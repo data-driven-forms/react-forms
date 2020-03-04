@@ -2,14 +2,13 @@ import React from 'react';
 import { Form, FormSpy } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import { formTemplate } from '../index';
+import { FormTemplate } from '../index';
 import { Title, Description, Button } from '../components/form-template';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 
 describe('FormTemplate PF4 Common', () => {
   let initialProps;
   let ContextWrapper;
-  let FormTemplate;
   let formOptions;
 
   beforeEach(() => {
@@ -31,8 +30,6 @@ describe('FormTemplate PF4 Common', () => {
       schema: { title: 'I am title' }
     };
 
-    FormTemplate = formTemplate({});
-
     const wrapper = mount(
       <ContextWrapper>
         <FormTemplate {...initialProps} />
@@ -46,11 +43,9 @@ describe('FormTemplate PF4 Common', () => {
   });
 
   it('should hide buttons', () => {
-    FormTemplate = formTemplate({ showFormControls: false });
-
     const wrapper = mount(
       <ContextWrapper>
-        <FormTemplate {...initialProps} />
+        <FormTemplate {...initialProps} showFormControls={false} />
       </ContextWrapper>
     );
 
@@ -58,28 +53,11 @@ describe('FormTemplate PF4 Common', () => {
     expect(wrapper.find(FormSpy)).toHaveLength(0);
   });
 
-  it('should render formSpy with onChange', () => {
-    const onStateUpdate = jest.fn();
-
-    FormTemplate = formTemplate({ showFormControls: false, onStateUpdate });
-
-    const wrapper = mount(
-      <ContextWrapper>
-        <FormTemplate {...initialProps} />
-      </ContextWrapper>
-    );
-
-    expect(wrapper.find(FormSpy)).toHaveLength(1);
-    expect(wrapper.find(FormSpy).props().onChange).toEqual(onStateUpdate);
-  });
-
   it('should render description', () => {
     initialProps = {
       ...initialProps,
       schema: { description: 'I am description' }
     };
-
-    FormTemplate = formTemplate({});
 
     const wrapper = mount(
       <ContextWrapper>
@@ -94,11 +72,9 @@ describe('FormTemplate PF4 Common', () => {
   it('should render custom formControls', () => {
     const FormButtons = () => <div>Form Controls</div>;
 
-    FormTemplate = formTemplate({ FormButtons });
-
     const wrapper = mount(
       <ContextWrapper>
-        <FormTemplate {...initialProps} />
+        <FormTemplate {...initialProps} FormButtons={FormButtons} />
       </ContextWrapper>
     );
 
@@ -106,8 +82,6 @@ describe('FormTemplate PF4 Common', () => {
   });
 
   it('should render all controls and with default labels', () => {
-    FormTemplate = formTemplate({});
-
     const wrapper = mount(
       <ContextWrapper>
         <FormTemplate {...initialProps} />
@@ -133,8 +107,6 @@ describe('FormTemplate PF4 Common', () => {
   });
 
   it('should render only submit button', () => {
-    FormTemplate = formTemplate({});
-
     const wrapper = mount(
       <ContextWrapper>
         <FormTemplate {...initialProps} canReset={false} onCancel={undefined} />
@@ -144,8 +116,6 @@ describe('FormTemplate PF4 Common', () => {
   });
 
   it('should render buttons in correct order', () => {
-    FormTemplate = formTemplate({});
-
     const wrapper = mount(
       <ContextWrapper>
         <FormTemplate {...initialProps} canSubmit canReset buttonOrder={['cancel', 'submit', 'reset']} />
@@ -155,8 +125,6 @@ describe('FormTemplate PF4 Common', () => {
   });
 
   it('should add missing buttons if not defined in button order', () => {
-    FormTemplate = formTemplate({});
-
     const wrapper = mount(
       <ContextWrapper>
         <FormTemplate {...initialProps} canSubmit canReset buttonOrder={[]} />
@@ -166,11 +134,9 @@ describe('FormTemplate PF4 Common', () => {
   });
 
   it('should call cancel with form values', () => {
-    FormTemplate = formTemplate({ canReset: true });
-
     const wrapper = mount(
       <ContextWrapper>
-        <FormTemplate {...initialProps} />
+        <FormTemplate {...initialProps} canReset />
       </ContextWrapper>
     );
 

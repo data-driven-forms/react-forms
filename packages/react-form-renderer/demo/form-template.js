@@ -6,7 +6,6 @@ const isDisabled = (disableStates, getState) => disableStates.map((item) => getS
 
 const FormTemplate = ({ schema: { title, description }, formFields }) => {
   const { handleSubmit, getState, onReset, onCancel } = useFormApi();
-
   return (
     <form onSubmit={handleSubmit}>
       {title && <h1>{title}</h1>}

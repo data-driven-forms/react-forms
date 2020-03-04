@@ -7,12 +7,18 @@ import Checkbox from '../components/checkbox';
 
 import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
-import formTemplate from '../components/form-template';
+import FormTemplate from '../components/form-template';
 import componentMapper from '../components/component-mapper';
 import { Radio } from '@material-ui/core';
 
 const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (
-  <FormRenderer onSubmit={jest.fn()} formTemplate={formTemplate()} schema={schema} componentMapper={componentMapper} {...props} />
+  <FormRenderer
+    onSubmit={jest.fn()}
+    FormTemplate={(props) => <FormTemplate {...props} />}
+    schema={schema}
+    componentMapper={componentMapper}
+    {...props}
+  />
 );
 
 describe('formFields', () => {

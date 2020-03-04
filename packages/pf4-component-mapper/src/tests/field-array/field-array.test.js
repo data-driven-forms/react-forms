@@ -6,14 +6,20 @@ import { TextInput } from '@patternfly/react-core';
 
 import AddCircleOIcon from '@patternfly/react-icons/dist/js/icons/add-circle-o-icon';
 import CloseIcon from '@patternfly/react-icons/dist/js/icons/close-icon';
-import { componentMapper, formTemplate } from '../../index';
+import { componentMapper, FormTemplate } from '../../index';
 
 /**
  * Has to be reworked with new field array
  */
 describe.skip('FieldArray', () => {
   const ContextWrapper = ({ initialValues = {}, ...rest }) => (
-    <FormRenderer componentMapper={componentMapper} formTemplate={formTemplate()} initialValues={initialValues} onSubmit={jest.fn()} {...rest} />
+    <FormRenderer
+      componentMapper={componentMapper}
+      FormTemplate={(props) => <FormTemplate {...props} />}
+      initialValues={initialValues}
+      onSubmit={jest.fn()}
+      {...rest}
+    />
   );
 
   it('should render array field correctly', () => {

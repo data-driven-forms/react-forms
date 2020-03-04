@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React from "react";
+import React, { useState, memo } from "react";
 import ReactDOM from "react-dom";
 import FormRenderer from '../src';
 import componentMapper from './form-fields-mapper';
@@ -13,24 +13,36 @@ const actionMapper = {
     loadLabel: intl
 }
 
-const App = () => (
+
+const ChildForm = memo(({setValues}) => (
+    <FormRenderer
+        key="HELP"
+        initialValues={{
+            text_box_1: 'hue',
+            text_box_3: 'initial'
+        }}
+        clearedValue={'bla'}
+        componentMapper={componentMapper}
+        onSubmit={(values) => console.log(values)}
+        onCancel={console.log}
+        canReset
+        onReset={() => console.log('i am resseting')}
+        schema={sandboxSchema}
+        onStateUpdate={state => setValues(state.values)}
+        FormTemplate={FormTemplate}
+        actionMapper={actionMapper}
+    />
+))
+
+const App = () => {
+    const [values, setValues] = useState({})
+    return (
     <div style={{ padding: 20 }}>
-        <FormRenderer
-            initialValues={{
-                text_box_1: 'hue',
-                text_box_3: 'initial'
-            }}
-            clearedValue={'bla'}
-            componentMapper={componentMapper}
-            onSubmit={(values) => console.log(values)}
-            onCancel={console.log}
-            canReset
-            onReset={() => console.log('i am resseting')}
-            schema={sandboxSchema}
-            formTemplate={FormTemplate}
-            actionMapper={actionMapper}
-        />
+        <ChildForm setValues={setValues} />
+        <div>
+            {JSON.stringify(values, null, 2)}
+        </div>
     </div>
-)
+)}
 
 ReactDOM.render(<App />, document.getElementById('root'));

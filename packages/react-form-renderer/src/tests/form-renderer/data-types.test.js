@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import FormRenderer from '../../components/form-renderer';
-import formTemplate from '../../../../../__mocks__/mock-form-template';
+import FormTemplate from '../../../../../__mocks__/mock-form-template';
 import componentTypes from '../../components/component-types';
 import useFieldApi from '../../hooks/use-field-api';
 
@@ -19,7 +19,7 @@ describe('data types', () => {
   let initialProps;
   beforeEach(() => {
     initialProps = {
-      formTemplate,
+      FormTemplate: (props) => <FormTemplate {...props} />,
       componentMapper: {
         [componentTypes.TEXT_FIELD]: DataTypeInput
       },

@@ -9,10 +9,28 @@ import renderForm from '../form-renderer/render-form';
 import defaultSchemaValidator from '../parsers/default-schema-validator';
 import SchemaErrorComponent from '../form-renderer/schema-error-component';
 import defaultValidatorMapper from '../validators/validator-mapper';
+import useComponentSpy from '../hooks/use-component-spy';
+
+const FormContent = ({ value, formFields, schema, onStateUpdate, Template }) => {
+  useComponentSpy(onStateUpdate);
+  return (
+    <RendererContext.Provider value={value}>
+      <Template formFields={formFields} schema={schema} />
+    </RendererContext.Provider>
+  );
+};
+
+FormContent.propTypes = {
+  value: PropTypes.object.isRequired,
+  formFields: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired,
+  schema: PropTypes.object.isRequired,
+  onStateUpdate: PropTypes.func,
+  Template: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]).isRequired
+};
 
 const FormRenderer = ({
   componentMapper,
-  formTemplate,
+  FormTemplate,
   onSubmit,
   onCancel,
   onReset,
@@ -23,7 +41,8 @@ const FormRenderer = ({
   clearedValue,
   schema,
   validatorMapper,
-  actionMapper
+  actionMapper,
+  onStateUpdate
 }) => {
   let schemaError;
 
@@ -43,9 +62,9 @@ const FormRenderer = ({
     return <SchemaErrorComponent name={schemaError.name} message={schemaError.message} />;
   }
 
-  const FormTemplate = formTemplate
-    ? formTemplate
-    : () => <div>{`FormRenderer is missing 'formTemplate' prop: ({formFields, schema}) => <FormTemplate {...} />`}</div>;
+  const Template = FormTemplate
+    ? FormTemplate
+    : () => <div>{`FormRenderer is missing 'FormTemplate' prop: ({formFields, schema}) => <FormTemplate {...} />`}</div>;
 
   return (
     <Form
@@ -56,7 +75,11 @@ const FormRenderer = ({
       validate={validate}
       subscription={{ pristine: true, submitting: true, valid: true, ...subscription }}
       render={({ handleSubmit, pristine, valid, form: { reset, mutators, getState, submit, ...form }, ...state }) => (
-        <RendererContext.Provider
+        <FormContent
+          formFields={renderForm(schema.fields)}
+          schema={schema}
+          onStateUpdate={onStateUpdate}
+          Template={Template}
           value={{
             componentMapper,
             validatorMapper: validatorMapperMerged,
@@ -78,15 +101,14 @@ const FormRenderer = ({
               ...form
             }
           }}
-        >
-          <FormTemplate formFields={renderForm(schema.fields)} schema={schema} />
-        </RendererContext.Provider>
+        />
       )}
     />
   );
 };
 
 FormRenderer.propTypes = {
+  onStateUpdate: PropTypes.func,
   onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func,
   onReset: PropTypes.func,
@@ -99,7 +121,7 @@ FormRenderer.propTypes = {
   componentMapper: PropTypes.shape({
     [PropTypes.string]: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func])
   }).isRequired,
-  formTemplate: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]).isRequired,
+  FormTemplate: PropTypes.func.isRequired,
   validatorMapper: PropTypes.shape({
     [PropTypes.string]: PropTypes.func
   }),

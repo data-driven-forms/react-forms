@@ -5,7 +5,7 @@ import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 
-import formTemplate from '../components/form-template';
+import FormTemplate from '../components/form-template';
 import componentMapper from '../components/component-mapper';
 import Wizard from '../components/wizard';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
@@ -270,7 +270,7 @@ describe('<Wizard />', () => {
       <FormRenderer
         schema={conditionalSchema}
         componentMapper={componentMapper}
-        formTemplate={formTemplate({ showFormControls: false })}
+        FormTemplate={(props) => <FormTemplate showFormControls={false} {...props} />}
         onCancel={() => {}}
         onSubmit={jest.fn()}
         initialValues={{ 'source-type': 'google' }}

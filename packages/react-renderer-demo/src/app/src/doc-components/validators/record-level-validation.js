@@ -28,7 +28,7 @@ const RecordLevelValidator = () => (
   <div className="pf4">
     <FormRenderer
       validate={ validate }
-      formTemplate={ formTemplate }
+      FormTemplate={ formTemplate }
       componentMapper={ componentMapper }
       schema={ schema }
       onSubmit={ console.log }

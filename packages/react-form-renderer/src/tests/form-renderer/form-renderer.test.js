@@ -4,7 +4,7 @@ import toJson from 'enzyme-to-json';
 import FormRenderer from '../../components/form-renderer';
 import SchemaErrorComponent from '../../form-renderer/schema-error-component';
 import componentTypes from '../../components/component-types';
-import formTemplate from '../../../../../__mocks__/mock-form-template';
+import FormTemplate from '../../../../../__mocks__/mock-form-template';
 import useFieldApi from '../../hooks/use-field-api';
 
 const TextField = (props) => {
@@ -51,7 +51,7 @@ describe('<FormRenderer />', () => {
 
     initialProps = {
       componentMapper,
-      formTemplate,
+      FormTemplate: (props) => <FormTemplate {...props} />,
       onSubmit: jest.fn(),
       schema
     };

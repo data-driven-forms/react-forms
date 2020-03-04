@@ -13,7 +13,7 @@ import Switch from '../components/switch';
 
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
-import formTemplate from '../components/form-template';
+import FormTemplate from '../components/form-template';
 import componentMapper from '../components/component-mapper';
 import validatorTypes from '../../../react-form-renderer/src/components/validator-types';
 import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
@@ -229,7 +229,13 @@ describe('FormFields', () => {
 
   describe('formFields generated tests', () => {
     const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (
-      <FormRenderer onSubmit={jest.fn()} formTemplate={formTemplate()} schema={schema} componentMapper={componentMapper} {...props} />
+      <FormRenderer
+        onSubmit={jest.fn()}
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        schema={schema}
+        componentMapper={componentMapper}
+        {...props}
+      />
     );
     let field;
     let schema;

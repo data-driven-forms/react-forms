@@ -8,7 +8,7 @@ import RendererContext from '../../components/renderer-context';
 import FormRenderer from '../../components/form-renderer';
 import validatorTypes from '../../components/validator-types';
 import componentTypes from '../../components/component-types';
-import formTemplate from '../../../../../__mocks__/mock-form-template';
+import FormTemplate from '../../../../../__mocks__/mock-form-template';
 import useFieldApi from '../../hooks/use-field-api';
 import FieldProvider from '../../components/field-provider';
 
@@ -100,7 +100,7 @@ describe('renderForm function', () => {
       <FormRenderer
         onSubmit={onSubmit}
         schema={{ fields: formFields }}
-        formTemplate={formTemplate}
+        FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
           [componentTypes.TEXT_FIELD]: TextField
         }}
@@ -130,7 +130,7 @@ describe('renderForm function', () => {
       <FormRenderer
         onSubmit={onSubmit}
         schema={{ fields: formFields }}
-        formTemplate={formTemplate}
+        FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
           [componentTypes.TEXT_FIELD]: TextField
         }}
@@ -156,7 +156,7 @@ describe('renderForm function', () => {
       <FormRenderer
         onSubmit={onSubmit}
         schema={{ fields: formFields }}
-        formTemplate={formTemplate}
+        FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
           [componentTypes.TEXT_FIELD]: TextField
         }}
@@ -182,7 +182,7 @@ describe('renderForm function', () => {
       <FormRenderer
         onSubmit={onSubmit}
         schema={{ fields: formFields }}
-        formTemplate={formTemplate}
+        FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
           [componentTypes.TEXT_FIELD]: TextField
         }}
@@ -228,7 +228,7 @@ describe('renderForm function', () => {
 
     const wrapper = mount(
       <FormRenderer
-        formTemplate={formTemplate}
+        FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
           'custom-component': TextField
         }}
@@ -712,7 +712,7 @@ describe('renderForm function', () => {
       ];
       const wrapper = mount(
         <FormRenderer
-          formTemplate={formTemplate}
+          FormTemplate={(props) => <FormTemplate {...props} />}
           schema={{ fields: formFields }}
           onSubmit={jest.fn()}
           componentMapper={{
@@ -782,7 +782,7 @@ describe('renderForm function', () => {
       const onSubmit = jest.fn();
       const wrapper = mount(
         <FormRenderer
-          formTemplate={formTemplate}
+          FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
             'custom-component': TextField
           }}
@@ -816,7 +816,7 @@ describe('renderForm function', () => {
       const onSubmit = jest.fn();
       const wrapper = mount(
         <FormRenderer
-          formTemplate={formTemplate}
+          FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
             'custom-component': TextField
           }}
@@ -853,7 +853,7 @@ describe('renderForm function', () => {
       const onSubmit = jest.fn();
       const wrapper = mount(
         <FormRenderer
-          formTemplate={formTemplate}
+          FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
             'custom-component': TextField
           }}
@@ -889,7 +889,7 @@ describe('renderForm function', () => {
       const onSubmit = jest.fn();
       const wrapper = mount(
         <FormRenderer
-          formTemplate={formTemplate}
+          FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
             'custom-component': TextField
           }}
@@ -926,7 +926,7 @@ describe('renderForm function', () => {
       const onSubmit = jest.fn();
       const wrapper = mount(
         <FormRenderer
-          formTemplate={formTemplate}
+          FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
             [componentTypes.TEXT_FIELD]: TextField
           }}
@@ -961,7 +961,7 @@ describe('renderForm function', () => {
       const onSubmit = jest.fn();
       const wrapper = mount(
         <FormRenderer
-          formTemplate={formTemplate}
+          FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
             [componentTypes.TEXT_FIELD]: TextField
           }}
@@ -1043,7 +1043,7 @@ describe('renderForm function', () => {
 
       const wrapper = mount(
         <FormRenderer
-          formTemplate={formTemplate}
+          FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
             [componentTypes.TEXT_FIELD]: TextField
           }}
@@ -1083,7 +1083,7 @@ describe('renderForm function', () => {
 
       const wrapper = mount(
         <FormRenderer
-          formTemplate={formTemplate}
+          FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
             [componentTypes.TEXT_FIELD]: TextField
           }}
@@ -1123,7 +1123,7 @@ describe('renderForm function', () => {
 
       const wrapper = mount(
         <FormRenderer
-          formTemplate={formTemplate}
+          FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
             [componentTypes.TEXT_FIELD]: TextField
           }}
@@ -1158,7 +1158,7 @@ describe('renderForm function', () => {
 
       const wrapper = mount(
         <FormRenderer
-          formTemplate={formTemplate}
+          FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
             [componentTypes.TEXT_FIELD]: TextField
           }}
@@ -1218,7 +1218,7 @@ describe('renderForm function', () => {
 
     const wrapper = mount(
       <FormRenderer
-        formTemplate={formTemplate}
+        FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
           'custom-component': CustomComponent
         }}

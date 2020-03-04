@@ -80,7 +80,7 @@ const ComponentMapper = () => {
     <div>
       <FormRender
         componentMapper={ componentMapper }
-        formTemplate={ () => null }
+        FormTemplate={ () => null }
         schema={ schema }
         onSubmit={ console.log }
         onCancel={ () => console.log('cancel action') }
