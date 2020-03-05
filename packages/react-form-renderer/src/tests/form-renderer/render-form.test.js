@@ -992,6 +992,129 @@ describe('renderForm function', () => {
       wrapper.find('form').simulate('submit');
       expect(onSubmit).toHaveBeenCalledWith({ unmnounted: undefined, foo: 'barrr' });
     });
+
+    it('should clear values after unmount and set to field cleared value', () => {
+      const schema = {
+        fields: [
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'foo'
+          },
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'unmnounted',
+            label: 'Label 1',
+            clearedValue: 'bla',
+            clearOnUnmount: true,
+            condition: {
+              when: 'foo',
+              is: 'show'
+            }
+          }
+        ]
+      };
+
+      const onSubmit = jest.fn();
+
+      const wrapper = mount(
+        <FormRenderer
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          componentMapper={{
+            [componentTypes.TEXT_FIELD]: TextField
+          }}
+          schema={schema}
+          onSubmit={(values) => onSubmit(values)}
+          clearedValue="BlaBlaBla"
+        />
+      );
+
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'show' } });
+      wrapper.update();
+      wrapper
+        .find('input')
+        .last()
+        .simulate('change', { target: { value: 'foovalue' } });
+      wrapper.update();
+
+      wrapper.find('form').simulate('submit');
+
+      expect(onSubmit).toHaveBeenCalledWith({ foo: 'show', unmnounted: 'foovalue' });
+      onSubmit.mockClear();
+
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'barrr' } });
+      wrapper.update();
+
+      wrapper.find('form').simulate('submit');
+
+      expect(onSubmit).toHaveBeenCalledWith({ foo: 'barrr', unmnounted: 'bla' });
+    });
+
+    it('should clear values after unmount and set to form cleared value', () => {
+      const schema = {
+        fields: [
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'foo'
+          },
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'unmnounted',
+            label: 'Label 1',
+            clearOnUnmount: true,
+            condition: {
+              when: 'foo',
+              is: 'show'
+            }
+          }
+        ]
+      };
+
+      const onSubmit = jest.fn();
+
+      const wrapper = mount(
+        <FormRenderer
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          componentMapper={{
+            [componentTypes.TEXT_FIELD]: TextField
+          }}
+          schema={schema}
+          onSubmit={(values) => onSubmit(values)}
+          clearedValue="BlaBlaBla"
+        />
+      );
+
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'show' } });
+      wrapper.update();
+      wrapper
+        .find('input')
+        .last()
+        .simulate('change', { target: { value: 'foovalue' } });
+      wrapper.update();
+
+      wrapper.find('form').simulate('submit');
+
+      expect(onSubmit).toHaveBeenCalledWith({ foo: 'show', unmnounted: 'foovalue' });
+      onSubmit.mockClear();
+
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'barrr' } });
+      wrapper.update();
+
+      wrapper.find('form').simulate('submit');
+
+      expect(onSubmit).toHaveBeenCalledWith({ foo: 'barrr', unmnounted: 'BlaBlaBla' });
+    });
   });
 
   describe('#initializeOnMount', () => {
@@ -1016,7 +1139,7 @@ describe('renderForm function', () => {
           component: componentTypes.TEXT_FIELD,
           name: INITIALIZED_FIELD,
           initializeOnMount,
-          initialValue,
+          ...(initialValue ? { initialValue } : {}),
           condition: {
             when: SHOWER_FIELD,
             is: SHOW_VALUE
@@ -1182,6 +1305,138 @@ describe('renderForm function', () => {
       wrapper.find('form').simulate('submit');
       expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: SCHEMA_INITIAL_VALUE, [SHOWER_FIELD]: SHOW_VALUE }));
       onSubmit.mockReset();
+    });
+
+    it('should set false value in initializeOnMount', () => {
+      const schema = {
+        fields: [
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'input'
+          },
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'unmounted',
+            initialValue: false,
+            initializeOnMount: true,
+            condition: {
+              when: 'input',
+              is: 'show_false'
+            }
+          },
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'unmounted',
+            initialValue: true,
+            initializeOnMount: true,
+            condition: {
+              when: 'input',
+              is: 'show_true'
+            }
+          }
+        ]
+      };
+
+      const onSubmit = jest.fn();
+
+      const wrapper = mount(
+        <FormRenderer
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          componentMapper={{
+            [componentTypes.TEXT_FIELD]: TextField
+          }}
+          schema={schema}
+          onSubmit={onSubmit}
+        />
+      );
+
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'show_true' } });
+      wrapper.update();
+
+      wrapper.find('form').simulate('submit');
+
+      expect(onSubmit).toHaveBeenCalledWith({ input: 'show_true', unmounted: true }, expect.any(Object), expect.any(Function));
+      onSubmit.mockClear();
+
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'show_false' } });
+      wrapper.update();
+
+      wrapper.find('form').simulate('submit');
+      wrapper.update();
+
+      expect(onSubmit).toHaveBeenCalledWith({ input: 'show_false', unmounted: false }, expect.any(Object), expect.any(Function));
+    });
+
+    it('should set unefined value in initializeOnMount', () => {
+      const schema = {
+        fields: [
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'input'
+          },
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'unmounted',
+            initialValue: undefined,
+            initializeOnMount: true,
+            condition: {
+              when: 'input',
+              is: 'show_undef'
+            }
+          },
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'unmounted',
+            initialValue: true,
+            initializeOnMount: true,
+            condition: {
+              when: 'input',
+              is: 'show_true'
+            }
+          }
+        ]
+      };
+
+      const onSubmit = jest.fn();
+
+      const wrapper = mount(
+        <FormRenderer
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          componentMapper={{
+            [componentTypes.TEXT_FIELD]: TextField
+          }}
+          schema={schema}
+          onSubmit={onSubmit}
+        />
+      );
+
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'show_true' } });
+      wrapper.update();
+
+      wrapper.find('form').simulate('submit');
+
+      expect(onSubmit).toHaveBeenCalledWith({ input: 'show_true', unmounted: true }, expect.any(Object), expect.any(Function));
+      onSubmit.mockClear();
+
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'show_undef' } });
+      wrapper.update();
+
+      wrapper.find('form').simulate('submit');
+      wrapper.update();
+
+      expect(onSubmit).toHaveBeenCalledWith({ input: 'show_undef', unmounted: undefined }, expect.any(Object), expect.any(Function));
     });
   });
 

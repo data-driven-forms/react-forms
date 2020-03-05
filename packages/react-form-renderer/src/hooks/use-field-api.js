@@ -15,10 +15,15 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, dat
      * This affects conditional fields
      */
     if (initializeOnMount) {
-      const initialValue = props.initialValue || fieldProps.meta.initial;
+      const initialValue = Object.prototype.hasOwnProperty.call(props, 'initialValue') ? props.initialValue : formOptions.getFieldState(name).initial;
       fieldProps.input.onChange(initialValue);
     }
   }, [initializeOnMount, props.initialValue, fieldProps.meta.initial, fieldProps.input]);
+
+  /**
+   * Prepare deleted value of field
+   */
+  const fieldClearedValue = Object.prototype.hasOwnProperty.call(props, 'clearedValue') ? props.clearedValue : formOptions.clearedValue;
 
   useEffect(
     () => () => {
@@ -26,17 +31,12 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, dat
        * Delete the value from form state when field is inmounted
        */
       if ((formOptions.clearOnUnmount || props.clearOnUnmount) && props.clearOnUnmount !== false) {
-        fieldProps.input.onChange(undefined);
+        fieldProps.input.onChange(fieldClearedValue);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
-
-  /**
-   * Prepare deleted value of field
-   */
-  const fieldClearedValue = Object.prototype.hasOwnProperty.call(props, 'clearedValue') ? props.clearedValue : formOptions.clearedValue;
 
   /**
    * Map actions to props
