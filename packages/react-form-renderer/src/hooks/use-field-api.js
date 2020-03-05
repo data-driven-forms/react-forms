@@ -15,7 +15,9 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, dat
      * This affects conditional fields
      */
     if (initializeOnMount) {
-      const initialValue = props.initialValue || fieldProps.meta.initial;
+      const initialValue = Object.prototype.hasOwnProperty.call(props, 'initialValue')
+        ? props.initialValue
+        : props.formOptions.getFieldState(props.name).initial;
       fieldProps.input.onChange(initialValue);
     }
   }, [initializeOnMount, props.initialValue, fieldProps.meta.initial, fieldProps.input]);
