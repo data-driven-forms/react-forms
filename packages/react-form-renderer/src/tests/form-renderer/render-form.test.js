@@ -684,6 +684,113 @@ describe('renderForm function', () => {
       wrapper.update();
       expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toEqual(undefined);
     });
+
+    it('should clear values after unmount and set to field cleared value', () => {
+      layoutMapper = {
+        ...layoutMapper,
+        [layoutComponents.FORM_WRAPPER]: ({ children, ...props }) => <form { ...props }>{ children }</form>,
+      };
+
+      const schema = {
+        fields: [{
+          component: components.TEXT_FIELD,
+          name: 'foo',
+        }, {
+          component: components.TEXT_FIELD,
+          name: 'unmnounted',
+          label: 'Label 1',
+          clearedValue: 'bla',
+          clearOnUnmount: true,
+          condition: {
+            when: 'foo',
+            is: 'show',
+          },
+        }]};
+
+      const onSubmit = jest.fn();
+
+      const wrapper = mount(
+        <FormRenderer
+          layoutMapper={ layoutMapper }
+          formFieldsMapper={{
+            [components.TEXT_FIELD]: TextField,
+          }}
+          schema={ schema }
+          onSubmit={ (values) => onSubmit(values) }
+          clearedValue="BlaBlaBla"
+        />
+      );
+
+      wrapper.find('input').first().simulate('change', { target: { value: 'show' }});
+      wrapper.update();
+      wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
+      wrapper.update();
+
+      wrapper.find('form').simulate('submit');
+
+      expect(onSubmit).toHaveBeenCalledWith({ foo: 'show', unmnounted: 'foovalue' });
+      onSubmit.mockClear();
+
+      wrapper.find('input').first().simulate('change', { target: { value: 'barrr' }});
+      wrapper.update();
+
+      wrapper.find('form').simulate('submit');
+
+      expect(onSubmit).toHaveBeenCalledWith({ foo: 'barrr', unmnounted: 'bla' });
+    });
+
+    it('should clear values after unmount and set to form cleared value', () => {
+      layoutMapper = {
+        ...layoutMapper,
+        [layoutComponents.FORM_WRAPPER]: ({ children, ...props }) => <form { ...props }>{ children }</form>,
+      };
+
+      const schema = {
+        fields: [{
+          component: components.TEXT_FIELD,
+          name: 'foo',
+        }, {
+          component: components.TEXT_FIELD,
+          name: 'unmnounted',
+          label: 'Label 1',
+          clearOnUnmount: true,
+          condition: {
+            when: 'foo',
+            is: 'show',
+          },
+        }]};
+
+      const onSubmit = jest.fn();
+
+      const wrapper = mount(
+        <FormRenderer
+          layoutMapper={ layoutMapper }
+          formFieldsMapper={{
+            [components.TEXT_FIELD]: TextField,
+          }}
+          schema={ schema }
+          onSubmit={ (values) => onSubmit(values) }
+          clearedValue="BlaBlaBla"
+        />
+      );
+
+      wrapper.find('input').first().simulate('change', { target: { value: 'show' }});
+      wrapper.update();
+      wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
+      wrapper.update();
+
+      wrapper.find('form').simulate('submit');
+
+      expect(onSubmit).toHaveBeenCalledWith({ foo: 'show', unmnounted: 'foovalue' });
+      onSubmit.mockClear();
+
+      wrapper.find('input').first().simulate('change', { target: { value: 'barrr' }});
+      wrapper.update();
+
+      wrapper.find('form').simulate('submit');
+
+      expect(onSubmit).toHaveBeenCalledWith({ foo: 'barrr', unmnounted: 'BlaBlaBla' });
+    });
   });
 
   describe('#formSpy', () => {

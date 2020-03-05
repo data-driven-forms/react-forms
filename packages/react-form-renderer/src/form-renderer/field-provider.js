@@ -13,15 +13,16 @@ class FieldProvider extends Component{
     }
   }
 
+  fieldClearedValue = () => this.props.hasOwnProperty('clearedValue') ? this.props.clearedValue : this.props.formOptions.clearedValue
+
   componentWillUnmount(){
     if ((this.props.formOptions.clearOnUnmount || this.props.clearOnUnmount) && this.props.clearOnUnmount !== false) {
-      this.props.formOptions.change(this.props.name, undefined);
+      this.props.formOptions.change(this.props.name, this.fieldClearedValue());
     }
   }
 
   render(){
     const { clearOnUnmount, component, render, dataType, children, ...props } = this.props;
-    const fieldClearedValue = props.hasOwnProperty('clearedValue') ? props.clearedValue : props.formOptions.clearedValue;
     const { clearedValue, ...fieldProps } = props;
     if (component) {
       const FieldComponent = component;
@@ -35,7 +36,7 @@ class FieldProvider extends Component{
                 ...fieldsProps.meta,
                 dataType,
                 onChange,
-                clearedValue: fieldClearedValue,
+                clearedValue: this.fieldClearedValue(),
               }, ...args);
             },
           }}
@@ -53,7 +54,7 @@ class FieldProvider extends Component{
               ...fieldsProps.meta,
               dataType,
               onChange,
-              clearedValue: fieldClearedValue,
+              clearedValue: this.fieldClearedValue(),
             }, ...args),
         },
       }) } />;
@@ -71,7 +72,7 @@ class FieldProvider extends Component{
                   ...fieldsProps.meta,
                   dataType,
                   onChange,
-                  clearedValue: fieldClearedValue,
+                  clearedValue: this.fieldClearedValue(),
                 }, ...args)  }}
             />
           ) }
@@ -95,6 +96,7 @@ FieldProvider.propTypes = {
   clearOnUnmount: PropTypes.bool,
   initializeOnMount: PropTypes.bool,
   initialValue: PropTypes.any,
+  clearedValue: PropTypes.any,
 };
 
 FieldProvider.defaultProps = {
