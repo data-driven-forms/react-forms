@@ -8,7 +8,9 @@ import { dataTypes } from '../constants';
 class FieldProvider extends Component{
   componentDidMount() {
     if (this.props.initializeOnMount) {
-      const initialValue = this.props.initialValue || this.props.formOptions.getFieldState(this.props.name).initial;
+      const initialValue = this.props.hasOwnProperty('initialValue') ?
+        this.props.initialValue :
+        this.props.formOptions.getFieldState(this.props.name).initial;
       this.props.formOptions.change(this.props.name, initialValue);
     }
   }
