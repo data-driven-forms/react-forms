@@ -10,6 +10,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
     Object {
       "checkbox": [Function],
       "date-picker": [Function],
+      "dual-list-select": [Function],
       "field-array": [Function],
       "plain-text": [Function],
       "radio": [Function],
@@ -1374,6 +1375,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
     Object {
       "checkbox": [Function],
       "date-picker": [Function],
+      "dual-list-select": [Function],
       "field-array": [Function],
       "plain-text": [Function],
       "radio": [Function],
