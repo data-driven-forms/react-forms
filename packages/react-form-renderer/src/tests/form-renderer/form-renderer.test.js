@@ -127,4 +127,107 @@ describe('<FormRenderer />', () => {
     );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
+
+  it('should use initial values from schema over form props', () => {
+    const onSubmit = jest.fn();
+
+    const wrapper = mount(
+      <FormRenderer
+        {...initialProps}
+        initialValues={{
+          field: 'from-props'
+        }}
+        schema={{
+          initialValues: {
+            field: 'from-schema'
+          },
+          fields: [
+            {
+              component: componentTypes.TEXT_FIELD,
+              name: 'field',
+              label: 'Field'
+            }
+          ]
+        }}
+        onSubmit={onSubmit}
+      />
+    );
+    expect(wrapper.find('input').instance().value).toEqual('from-schema');
+  });
+
+  it('should override clear on unmount from schema to false', () => {
+    const onSubmit = jest.fn();
+
+    const wrapper = mount(
+      <FormRenderer
+        {...initialProps}
+        initialValues={{
+          field: 'from-props'
+        }}
+        clearOnUnmount
+        schema={{
+          clearOnUnmount: false,
+          initialValues: {
+            field: 'from-schema'
+          },
+          fields: [
+            {
+              component: componentTypes.TEXT_FIELD,
+              name: 'field',
+              label: 'Field'
+            },
+            {
+              component: componentTypes.TEXT_FIELD,
+              condition: {
+                when: 'field',
+                is: 'a'
+              },
+              name: 'field-condition',
+              label: 'Field'
+            }
+          ]
+        }}
+        onSubmit={onSubmit}
+      />
+    );
+    expect(wrapper.find('input#field-condition')).toHaveLength(0);
+    wrapper.find('input#field').simulate('change', { target: { value: 'a' } });
+    expect(wrapper.find('input#field-condition')).toHaveLength(1);
+    wrapper.find('input#field-condition').simulate('change', { target: { value: 'condition-value' } });
+    wrapper.find('input#field').simulate('change', { target: { value: 'abc' } });
+    expect(wrapper.find('input#field-condition')).toHaveLength(0);
+    wrapper.find('input#field').simulate('change', { target: { value: 'a' } });
+    expect(wrapper.find('input#field-condition')).toHaveLength(1);
+    expect(wrapper.find('input#field-condition').instance().value).toEqual('condition-value');
+  });
+
+  it('should use clearedValue from schema over form props', () => {
+    const onSubmit = jest.fn();
+
+    const wrapper = mount(
+      <FormRenderer
+        {...initialProps}
+        clearedValue={'cleared-from-props'}
+        initialValues={{
+          field: 'from-props'
+        }}
+        schema={{
+          clearedValue: 'cleared-from-schema',
+          initialValues: {
+            field: 'from-schema'
+          },
+          fields: [
+            {
+              component: componentTypes.TEXT_FIELD,
+              name: 'field',
+              label: 'Field'
+            }
+          ]
+        }}
+        onSubmit={onSubmit}
+      />
+    );
+    wrapper.find('input').simulate('change', { target: { value: '' } });
+    expect(wrapper.find('input').instance().value).toEqual('cleared-from-schema');
+  });
 });

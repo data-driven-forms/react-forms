@@ -45,6 +45,12 @@ const FormRenderer = ({
   onStateUpdate
 }) => {
   let schemaError;
+  const {
+    initialValues: schemaInitialValues,
+    clearOnUnmount: schemaClearOnUnmount,
+    subscription: schemaSubscription,
+    clearedValue: schemaClearedValue
+  } = schema;
 
   const validatorMapperMerged = { ...defaultValidatorMapper, ...validatorMapper };
 
@@ -71,9 +77,9 @@ const FormRenderer = ({
       onSubmit={onSubmit}
       mutators={{ ...arrayMutators }}
       decorators={[createFocusDecorator()]}
-      initialValues={initialValues}
+      initialValues={schemaInitialValues || initialValues}
       validate={validate}
-      subscription={{ pristine: true, submitting: true, valid: true, ...subscription }}
+      subscription={{ pristine: true, submitting: true, valid: true, ...subscription, ...schemaSubscription }}
       render={({ handleSubmit, pristine, valid, form: { reset, mutators, getState, submit, ...form }, ...state }) => (
         <FormContent
           formFields={renderForm(schema.fields)}
@@ -91,11 +97,11 @@ const FormRenderer = ({
               onReset,
               getState,
               valid,
-              clearedValue,
+              clearedValue: typeof schemaClearedValue !== 'undefined' ? schemaClearedValue : clearedValue,
               submit,
               handleSubmit,
               reset,
-              clearOnUnmount,
+              clearOnUnmount: typeof schemaClearOnUnmount !== 'undefined' ? schemaClearOnUnmount : clearOnUnmount,
               renderForm,
               ...mutators,
               ...form

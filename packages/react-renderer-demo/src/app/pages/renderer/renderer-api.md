@@ -1,11 +1,57 @@
 import RouterLink from 'next/link';
 import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid'
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import AnnouncementIcon from '@material-ui/icons/Announcement'
+import orange from '@material-ui/core/colors/orange'
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
 import ListOfContents from '../../src/helpers/list-of-contents';
 
 <Grid container item>
 <Grid item xs={12} md={10}>
+
+
+# Schema
+
+The root object of the schema represents the <RouterLink href="/renderer/component-mapping#formwrapper"><Link href="/renderer/component-mapping#formwrapper">Form</Link></RouterLink> component, which accepts only these three props:
+
+|Prop|Type|Description|
+|----|:--:|----------:|
+|label, title|node|<RouterLink href="/renderer/component-mapping#title"><Link href="/renderer/component-mapping#title">Title</Link></RouterLink> of the form. Optional.|
+|description|node|<RouterLink href="/renderer/component-mapping#description"><Link href="/renderer/component-mapping#description">Description</Link></RouterLink> of the form. Optional.|
+|fields|array of objects|<RouterLink href="/renderer/component-api"><Link href="/renderer/component-api">Components</Link></RouterLink> of the form. Required!|
+|initialValues|object|An object of fields names as keys and values as their values.|
+|<RouterLink href="/renderer/unmounting"><Link href="/renderer/unmounting">clearOnUnmount</Link></RouterLink>|bool|Will clear values of unmounted components. You can also set this to specific component in the form schema.|false|
+|subscription|object|You can pass your own [subscription](https://final-form.org/docs/react-final-form/types/FormProps#subscription), which will be added to default settings.|`{ pristine: true, submitting: true, valid: true }`|
+|<RouterLink href="/renderer/cleared-value"><Link>clearedValue</Link></RouterLink>|any|Value that will be set to fields with **initialValue** when user clears the field. Useful for forms while editing.|undefined|
+
+<Card>
+  <CardContent style={{ paddingBottom: 16 }}>
+    <Box display="flex">
+      <AnnouncementIcon style={{ color: orange[500], marginRight: 8 }} />
+      <Typography>
+        Attributes initialValues, clearOnUnmount, subscription, clearedValue are also assignable as FormRenderer props. Attributes in schema have higher priority and will override FormRenderer props!
+      </Typography>
+    </Box>
+  </CardContent>
+</Card>
+
+## Example
+
+```javascript
+schema = {
+  title: 'Your name',
+  description: 'Add your name',
+  fields: [{
+    name: 'userName',
+    label: 'Your name is',
+    component: componentTypes.TEXT_FIELD,
+  }]
+};
+```
 
 # Form Renderer API
 
@@ -40,30 +86,6 @@ Form Renderer provides a lot of customization via props.
 |showFormControls|bool|You can disable showing form buttons. Use it with wizard component which has its own buttons.|true|
 |subscription|object|You can pass your own [subscription](https://final-form.org/docs/react-final-form/types/FormProps#subscription), which will be added to default settings.|`{ pristine: true, submitting: true, valid: true }`|
 |<RouterLink href="/renderer/validators"><Link href="/renderer/validators">validate</Link></RouterLink>|func|A function which receives all form values and returns an object with errors.||
-
-# Schema
-
-The root object of the schema represents the <RouterLink href="/renderer/component-mapping#formwrapper"><Link href="/renderer/component-mapping#formwrapper">Form</Link></RouterLink> component, which accepts only these three props:
-
-|Prop|Type|Description|
-|----|:--:|----------:|
-|label, title|node|<RouterLink href="/renderer/component-mapping#title"><Link href="/renderer/component-mapping#title">Title</Link></RouterLink> of the form. Optional.|
-|description|node|<RouterLink href="/renderer/component-mapping#description"><Link href="/renderer/component-mapping#description">Description</Link></RouterLink> of the form. Optional.|
-|fields|array of objects|<RouterLink href="/renderer/component-api"><Link href="/renderer/component-api">Components</Link></RouterLink> of the form. Required!|
-
-## Example
-
-```javascript
-schema = {
-  title: 'Your name',
-  description: 'Add your name',
-  fields: [{
-    name: 'userName',
-    label: 'Your name is',
-    component: componentTypes.TEXT_FIELD,
-  }]
-};
-```
 
 </Grid>
 <Grid item xs={false} md={2}>
