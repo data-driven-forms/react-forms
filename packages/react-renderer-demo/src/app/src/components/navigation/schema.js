@@ -1,5 +1,4 @@
 import { baseExamples } from './examples-definitions';
-import otherExamples from './other-pages/';
 import { docs } from './documentation-pages';
 import flatMap from 'lodash/flatMap';
 
@@ -21,14 +20,6 @@ const schema =  [
     noRoute: true,
     fields: [
       ...baseExamples.sort((a, b) => a.linkText.localeCompare(b.linkText)),
-    ],
-  },
-  {
-    title: 'Others',
-    link: 'others',
-    noRoute: true,
-    fields: [
-      ...otherExamples,
     ],
   }, {
     linkText: 'Releases',

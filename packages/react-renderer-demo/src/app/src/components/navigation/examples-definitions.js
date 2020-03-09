@@ -436,8 +436,8 @@ Vestibulum vulputate inceptos himenaeos.`,
   },
   variants: [],
   next: {
-    link: '/others/miq-components',
-    label: 'ManageIQ components',
+    link: '/releases',
+    label: 'Releases',
   },
   prev: {
     link: '/component-example/time-picker',
