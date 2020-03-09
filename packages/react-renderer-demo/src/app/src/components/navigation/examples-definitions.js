@@ -5,6 +5,22 @@ import CustomComponentText from './examples-texts/custom-component';
 import WizardText from './examples-texts/wizard';
 import SelectText from './examples-texts/select';
 
+const formGroupVariants = [{
+  name: 'isDisabled',
+  title: 'Disabled',
+}, {
+  name: 'helperText',
+  title: 'Helper text',
+  component: 'input',
+}, {
+  name: 'description',
+  title: 'Description',
+  component: 'input',
+}, {
+  name: 'isReadOnly',
+  title: 'Read only',
+}];
+
 export const baseExamples = [{
   component: componentTypes.TEXT_FIELD,
   link: componentTypes.TEXT_FIELD,
@@ -16,30 +32,21 @@ export const baseExamples = [{
     name: 'first-name',
   }]},
   canBeRequired: true,
-  variants: [{
-    name: 'isDisabled',
-    title: 'Disabled',
-  }, {
-    name: 'helperText',
-    title: 'Helper text',
-    component: 'input',
-  }, {
-    name: 'label',
-    title: 'Label',
-    component: 'input',
-    value: 'First name',
-  }, {
-    title: 'Input Type',
-    name: 'type',
-    options: [ 'text', 'number', 'password' ],
-  }, {
-    name: 'placeholder',
-    title: 'Placeholder',
-    component: 'input',
-  },  {
-    name: 'isReadOnly',
-    title: 'Read only',
-  }],
+  variants: [
+    ...formGroupVariants, {
+      name: 'label',
+      title: 'Label',
+      component: 'input',
+      value: 'First name',
+    }, {
+      title: 'Input Type',
+      name: 'type',
+      options: [ 'text', 'number', 'password' ],
+    }, {
+      name: 'placeholder',
+      title: 'Placeholder',
+      component: 'input',
+    }],
 }, {
   component: componentTypes.TEXTAREA_FIELD,
   link: componentTypes.TEXTAREA_FIELD,
@@ -51,26 +58,17 @@ export const baseExamples = [{
     label: 'Long text',
     name: 'long-text',
   }]},
-  variants: [{
-    name: 'isDisabled',
-    title: 'Disabled',
-  }, {
-    name: 'helperText',
-    title: 'Helper text',
-    component: 'input',
-  }, {
-    name: 'label',
-    title: 'Label',
-    component: 'input',
-    value: 'Long text',
-  }, {
-    name: 'placeholder',
-    title: 'Placeholder',
-    component: 'input',
-  },  {
-    name: 'isReadOnly',
-    title: 'Read only',
-  }],
+  variants: [
+    ...formGroupVariants, {
+      name: 'label',
+      title: 'Label',
+      component: 'input',
+      value: 'Long text',
+    }, {
+      name: 'placeholder',
+      title: 'Placeholder',
+      component: 'input',
+    }],
 },
 {
   component: componentTypes.CHECKBOX,
@@ -86,15 +84,13 @@ export const baseExamples = [{
     label: 'Checkbox',
     name: 'checkbox',
   }]},
-  variants: [{
-    name: 'isDisabled',
-    title: 'Disabled',
-  }, {
-    name: 'label',
-    title: 'Label',
-    component: 'input',
-    value: 'Checkbox',
-  }],
+  variants: [
+    ...formGroupVariants, {
+      name: 'label',
+      title: 'Label',
+      component: 'input',
+      value: 'Checkbox',
+    }],
 },
 {
   component: componentTypes.RADIO,
@@ -112,10 +108,7 @@ export const baseExamples = [{
       { label: 'Hamsters', value: '3' },
     ],
   }]},
-  variants: [{
-    name: 'isDisabled',
-    title: 'Disabled',
-  }, {
+  variants: [ ...formGroupVariants,, {
     name: 'label',
     title: 'Label',
     component: 'input',
@@ -139,10 +132,7 @@ export const baseExamples = [{
       { label: 'Hamsters', value: '3' },
     ],
   }]},
-  variants: [{
-    name: 'isDisabled',
-    title: 'Disabled',
-  }, {
+  variants: [ ...formGroupVariants, {
     name: 'label',
     title: 'Label',
     component: 'input',
@@ -182,13 +172,7 @@ export const baseExamples = [{
     label: 'Switch',
     name: 'switch',
   }]},
-  variants: [{
-    name: 'isReadOnly',
-    title: 'Read only',
-  }, {
-    name: 'isDisabled',
-    title: 'Disabled',
-  }, {
+  variants: [ ...formGroupVariants, {
     name: 'label',
     title: 'Label',
     component: 'input',
@@ -215,7 +199,7 @@ export const baseExamples = [{
     label: 'Date Picker',
     name: 'date-picker',
   }]},
-  variants: [{
+  variants: [ ...formGroupVariants, {
     name: 'label',
     title: 'Label',
     component: 'input',
@@ -251,7 +235,7 @@ export const baseExamples = [{
     label: 'Time Picker',
     name: 'time-picker',
   }]},
-  variants: [{
+  variants: [ ...formGroupVariants, {
     name: 'label',
     title: 'Label',
     component: 'input',
@@ -351,10 +335,7 @@ export const baseExamples = [{
       { label: 'Hamsters', value: '3' },
     ],
   }]},
-  variants: [{
-    name: 'isDisabled',
-    title: 'Disabled',
-  }, {
+  variants: [ ...formGroupVariants, {
     name: 'label',
     title: 'Label',
     component: 'input',
