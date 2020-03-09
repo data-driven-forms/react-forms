@@ -37,9 +37,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                   "name": "foo-field",
                 },
               ],
-              "name": "foo",
+              "name": "1",
               "nextStep": "2",
-              "stepKey": "1",
               "title": "foo-step",
             },
             Object {
@@ -49,8 +48,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                   "name": "bar-field",
                 },
               ],
-              "name": "bar",
-              "stepKey": "2",
+              "name": "2",
               "title": "bar-step",
             },
           ],
@@ -107,9 +105,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                       "name": "foo-field",
                     },
                   ],
-                  "name": "foo",
+                  "name": "1",
                   "nextStep": "2",
-                  "stepKey": "1",
                   "title": "foo-step",
                 },
                 Object {
@@ -119,8 +116,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                       "name": "bar-field",
                     },
                   ],
-                  "name": "bar",
-                  "stepKey": "2",
+                  "name": "2",
                   "title": "bar-step",
                 },
               ]
@@ -142,9 +138,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                       "name": "foo-field",
                     },
                   ],
-                  "name": "foo",
+                  "name": "1",
                   "nextStep": "2",
-                  "stepKey": "1",
                   "title": "foo-step",
                 },
                 Object {
@@ -154,8 +149,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                       "name": "bar-field",
                     },
                   ],
-                  "name": "bar",
-                  "stepKey": "2",
+                  "name": "2",
                   "title": "bar-step",
                 },
               ],
@@ -250,9 +244,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                         "name": "foo-field",
                       },
                     ],
-                    "name": "foo",
+                    "name": "1",
                     "nextStep": "2",
-                    "stepKey": "1",
                     "title": "foo-step",
                   },
                   Object {
@@ -262,8 +255,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                         "name": "bar-field",
                       },
                     ],
-                    "name": "bar",
-                    "stepKey": "2",
+                    "name": "2",
                     "title": "bar-step",
                   },
                 ]
@@ -285,9 +277,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                         "name": "foo-field",
                       },
                     ],
-                    "name": "foo",
+                    "name": "1",
                     "nextStep": "2",
-                    "stepKey": "1",
                     "title": "foo-step",
                   },
                   Object {
@@ -297,8 +288,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                         "name": "bar-field",
                       },
                     ],
-                    "name": "bar",
-                    "stepKey": "2",
+                    "name": "2",
                     "title": "bar-step",
                   },
                 ],
@@ -322,9 +312,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                           "name": "foo-field",
                         },
                       ],
-                      "name": "foo",
+                      "name": "1",
                       "nextStep": "2",
-                      "stepKey": "1",
                       "title": "foo-step",
                     },
                     Object {
@@ -334,8 +323,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                           "name": "bar-field",
                         },
                       ],
-                      "name": "bar",
-                      "stepKey": "2",
+                      "name": "2",
                       "title": "bar-step",
                     },
                   ]
@@ -357,9 +345,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                           "name": "foo-field",
                         },
                       ],
-                      "name": "foo",
+                      "name": "1",
                       "nextStep": "2",
-                      "stepKey": "1",
                       "title": "foo-step",
                     },
                     Object {
@@ -369,8 +356,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                           "name": "bar-field",
                         },
                       ],
-                      "name": "bar",
-                      "stepKey": "2",
+                      "name": "2",
                       "title": "bar-step",
                     },
                   ],
@@ -401,9 +387,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                             "name": "foo-field",
                           },
                         ],
-                        "name": "foo",
+                        "name": "1",
                         "nextStep": "2",
-                        "stepKey": "1",
                         "title": "foo-step",
                       },
                       Object {
@@ -413,8 +398,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                             "name": "bar-field",
                           },
                         ],
-                        "name": "bar",
-                        "stepKey": "2",
+                        "name": "2",
                         "title": "bar-step",
                       },
                     ]
@@ -436,9 +420,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                             "name": "foo-field",
                           },
                         ],
-                        "name": "foo",
+                        "name": "1",
                         "nextStep": "2",
-                        "stepKey": "1",
                         "title": "foo-step",
                       },
                       Object {
@@ -448,8 +431,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                             "name": "bar-field",
                           },
                         ],
-                        "name": "bar",
-                        "stepKey": "2",
+                        "name": "2",
                         "title": "bar-step",
                       },
                     ],
@@ -479,9 +461,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                             "name": "foo-field",
                           },
                         ],
-                        "name": "foo",
+                        "name": "1",
                         "nextStep": "2",
-                        "stepKey": "1",
                         "title": "foo-step",
                       },
                       Object {
@@ -491,8 +472,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                             "name": "bar-field",
                           },
                         ],
-                        "name": "bar",
-                        "stepKey": "2",
+                        "name": "2",
                         "title": "bar-step",
                       },
                     ]
@@ -516,9 +496,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                   "name": "foo-field",
                                 },
                               ],
-                              "name": "foo",
+                              "name": "1",
                               "nextStep": "2",
-                              "stepKey": "1",
                               "title": "foo-step",
                             },
                             Object {
@@ -528,8 +507,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                   "name": "bar-field",
                                 },
                               ],
-                              "name": "bar",
-                              "stepKey": "2",
+                              "name": "2",
                               "title": "bar-step",
                             },
                           ]
@@ -547,9 +525,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                     "name": "foo-field",
                                   },
                                 ],
-                                "name": "foo",
+                                "name": "1",
                                 "nextStep": "2",
-                                "stepKey": "1",
                                 "title": "foo-step",
                               },
                               Object {
@@ -559,8 +536,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                     "name": "bar-field",
                                   },
                                 ],
-                                "name": "bar",
-                                "stepKey": "2",
+                                "name": "2",
                                 "title": "bar-step",
                               },
                             ]
@@ -586,9 +562,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                       "name": "foo-field",
                                     },
                                   ],
-                                  "name": "foo",
+                                  "name": "1",
                                   "nextStep": "2",
-                                  "stepKey": "1",
                                   "title": "foo-step",
                                 },
                                 Object {
@@ -598,8 +573,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                       "name": "bar-field",
                                     },
                                   ],
-                                  "name": "bar",
-                                  "stepKey": "2",
+                                  "name": "2",
                                   "title": "bar-step",
                                 },
                               ]
@@ -864,9 +838,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                     }
                                     handleNext={[Function]}
                                     handlePrev={[Function]}
-                                    name="foo"
+                                    name="1"
                                     nextStep="2"
-                                    stepKey="1"
                                     title="foo-step"
                                   >
                                     <WizardBody
@@ -1041,9 +1014,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                       }
                                       handleNext={[Function]}
                                       handlePrev={[Function]}
-                                      name="foo"
+                                      name="1"
                                       nextStep="2"
-                                      stepKey="1"
                                     >
                                       <footer
                                         className="pf-c-wizard__footer "
@@ -1325,9 +1297,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                   "name": "foo-field",
                 },
               ],
-              "name": "foo",
+              "name": "1",
               "nextStep": "2",
-              "stepKey": "1",
               "title": "foo-step",
             },
             Object {
@@ -1337,8 +1308,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                   "name": "bar-field",
                 },
               ],
-              "name": "bar",
-              "stepKey": "2",
+              "name": "2",
               "title": "bar-step",
             },
           ],
@@ -1396,9 +1366,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                       "name": "foo-field",
                     },
                   ],
-                  "name": "foo",
+                  "name": "1",
                   "nextStep": "2",
-                  "stepKey": "1",
                   "title": "foo-step",
                 },
                 Object {
@@ -1408,8 +1377,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                       "name": "bar-field",
                     },
                   ],
-                  "name": "bar",
-                  "stepKey": "2",
+                  "name": "2",
                   "title": "bar-step",
                 },
               ]
@@ -1432,9 +1400,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                       "name": "foo-field",
                     },
                   ],
-                  "name": "foo",
+                  "name": "1",
                   "nextStep": "2",
-                  "stepKey": "1",
                   "title": "foo-step",
                 },
                 Object {
@@ -1444,8 +1411,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                       "name": "bar-field",
                     },
                   ],
-                  "name": "bar",
-                  "stepKey": "2",
+                  "name": "2",
                   "title": "bar-step",
                 },
               ],
@@ -1541,9 +1507,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                         "name": "foo-field",
                       },
                     ],
-                    "name": "foo",
+                    "name": "1",
                     "nextStep": "2",
-                    "stepKey": "1",
                     "title": "foo-step",
                   },
                   Object {
@@ -1553,8 +1518,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                         "name": "bar-field",
                       },
                     ],
-                    "name": "bar",
-                    "stepKey": "2",
+                    "name": "2",
                     "title": "bar-step",
                   },
                 ]
@@ -1577,9 +1541,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                         "name": "foo-field",
                       },
                     ],
-                    "name": "foo",
+                    "name": "1",
                     "nextStep": "2",
-                    "stepKey": "1",
                     "title": "foo-step",
                   },
                   Object {
@@ -1589,8 +1552,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                         "name": "bar-field",
                       },
                     ],
-                    "name": "bar",
-                    "stepKey": "2",
+                    "name": "2",
                     "title": "bar-step",
                   },
                 ],
@@ -1615,9 +1577,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                           "name": "foo-field",
                         },
                       ],
-                      "name": "foo",
+                      "name": "1",
                       "nextStep": "2",
-                      "stepKey": "1",
                       "title": "foo-step",
                     },
                     Object {
@@ -1627,8 +1588,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                           "name": "bar-field",
                         },
                       ],
-                      "name": "bar",
-                      "stepKey": "2",
+                      "name": "2",
                       "title": "bar-step",
                     },
                   ]
@@ -1651,9 +1611,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                           "name": "foo-field",
                         },
                       ],
-                      "name": "foo",
+                      "name": "1",
                       "nextStep": "2",
-                      "stepKey": "1",
                       "title": "foo-step",
                     },
                     Object {
@@ -1663,8 +1622,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                           "name": "bar-field",
                         },
                       ],
-                      "name": "bar",
-                      "stepKey": "2",
+                      "name": "2",
                       "title": "bar-step",
                     },
                   ],
@@ -1696,9 +1654,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                             "name": "foo-field",
                           },
                         ],
-                        "name": "foo",
+                        "name": "1",
                         "nextStep": "2",
-                        "stepKey": "1",
                         "title": "foo-step",
                       },
                       Object {
@@ -1708,8 +1665,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                             "name": "bar-field",
                           },
                         ],
-                        "name": "bar",
-                        "stepKey": "2",
+                        "name": "2",
                         "title": "bar-step",
                       },
                     ]
@@ -1732,9 +1688,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                             "name": "foo-field",
                           },
                         ],
-                        "name": "foo",
+                        "name": "1",
                         "nextStep": "2",
-                        "stepKey": "1",
                         "title": "foo-step",
                       },
                       Object {
@@ -1744,8 +1699,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                             "name": "bar-field",
                           },
                         ],
-                        "name": "bar",
-                        "stepKey": "2",
+                        "name": "2",
                         "title": "bar-step",
                       },
                     ],
@@ -1776,9 +1730,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                             "name": "foo-field",
                           },
                         ],
-                        "name": "foo",
+                        "name": "1",
                         "nextStep": "2",
-                        "stepKey": "1",
                         "title": "foo-step",
                       },
                       Object {
@@ -1788,8 +1741,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                             "name": "bar-field",
                           },
                         ],
-                        "name": "bar",
-                        "stepKey": "2",
+                        "name": "2",
                         "title": "bar-step",
                       },
                     ]
@@ -1814,9 +1766,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                   "name": "foo-field",
                                 },
                               ],
-                              "name": "foo",
+                              "name": "1",
                               "nextStep": "2",
-                              "stepKey": "1",
                               "title": "foo-step",
                             },
                             Object {
@@ -1826,8 +1777,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                   "name": "bar-field",
                                 },
                               ],
-                              "name": "bar",
-                              "stepKey": "2",
+                              "name": "2",
                               "title": "bar-step",
                             },
                           ]
@@ -1846,9 +1796,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                     "name": "foo-field",
                                   },
                                 ],
-                                "name": "foo",
+                                "name": "1",
                                 "nextStep": "2",
-                                "stepKey": "1",
                                 "title": "foo-step",
                               },
                               Object {
@@ -1858,8 +1807,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                     "name": "bar-field",
                                   },
                                 ],
-                                "name": "bar",
-                                "stepKey": "2",
+                                "name": "2",
                                 "title": "bar-step",
                               },
                             ]
@@ -1886,9 +1834,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                       "name": "foo-field",
                                     },
                                   ],
-                                  "name": "foo",
+                                  "name": "1",
                                   "nextStep": "2",
-                                  "stepKey": "1",
                                   "title": "foo-step",
                                 },
                                 Object {
@@ -1898,8 +1845,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                       "name": "bar-field",
                                     },
                                   ],
-                                  "name": "bar",
-                                  "stepKey": "2",
+                                  "name": "2",
                                   "title": "bar-step",
                                 },
                               ]
@@ -2380,9 +2326,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                               }
                                               handleNext={[Function]}
                                               handlePrev={[Function]}
-                                              name="foo"
+                                              name="1"
                                               nextStep="2"
-                                              stepKey="1"
                                               title="foo-step"
                                             >
                                               <WizardBody
@@ -2557,9 +2502,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                 }
                                                 handleNext={[Function]}
                                                 handlePrev={[Function]}
-                                                name="foo"
+                                                name="1"
                                                 nextStep="2"
-                                                stepKey="1"
                                               >
                                                 <footer
                                                   className="pf-c-wizard__footer "

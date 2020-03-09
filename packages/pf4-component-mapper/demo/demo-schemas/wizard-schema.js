@@ -58,8 +58,7 @@ export const wizardSchema = {
       fields: [
         {
           title: 'Get started with adding source',
-          name: 'step-1',
-          stepKey: 1,
+          name: 1,
           nextStep: {
             when: 'source.source-type',
             stepMapper: {
@@ -102,8 +101,7 @@ export const wizardSchema = {
         },
         {
           title: 'Configure AWS',
-          name: 'step-2',
-          stepKey: 'aws',
+          name: 'aws',
           substepOf: 'Summary',
           nextStep: 'summary',
           buttons: ValidateButtons,
@@ -122,9 +120,8 @@ export const wizardSchema = {
           ]
         },
         {
-          stepKey: 'google',
+          name: 'google',
           title: 'Configure google',
-          name: 'step-3',
           nextStep: 'summary',
           showTitle: false,
           fields: [
@@ -147,7 +144,6 @@ export const wizardSchema = {
               component: 'summary'
             }
           ],
-          stepKey: 'summary',
           name: 'summary',
           substepOf: 'Summary',
           title: 'Summary'
@@ -171,8 +167,7 @@ export const wizardSchemaWithFunction = {
       fields: [
         {
           title: 'Get started with adding source',
-          name: 'step-1',
-          stepKey: 1,
+          name: 1,
           nextStep: ({ values }) => values.source && values.source['source-type'],
           fields: [
             {
@@ -209,8 +204,7 @@ export const wizardSchemaWithFunction = {
         },
         {
           title: 'Configure AWS',
-          name: 'step-2',
-          stepKey: 'aws',
+          name: 'aws',
           substepOf: 'Summary',
           nextStep: 'summary',
           buttons: ValidateButtons,
@@ -229,9 +223,8 @@ export const wizardSchemaWithFunction = {
           ]
         },
         {
-          stepKey: 'google',
+          name: 'google',
           title: 'Configure google',
-          name: 'step-3',
           nextStep: 'summary',
           showTitle: false,
           fields: [
@@ -254,7 +247,6 @@ export const wizardSchemaWithFunction = {
               component: 'summary'
             }
           ],
-          stepKey: 'summary',
           name: 'summary',
           substepOf: 'Summary',
           title: 'Summary'
@@ -276,7 +268,6 @@ export const wizardSchemaSimple = {
         {
           title: 'Get started with adding source',
           name: 'step-1',
-          stepKey: 1,
           nextStep: 'aws',
           fields: [
             {
@@ -289,8 +280,7 @@ export const wizardSchemaSimple = {
         },
         {
           title: 'Configure AWS',
-          name: 'step-2',
-          stepKey: 'aws',
+          name: 'aws',
           nextStep: 'summary',
           fields: [
             {
@@ -313,7 +303,6 @@ export const wizardSchemaSimple = {
               component: 'summary'
             }
           ],
-          stepKey: 'summary',
           name: 'summary',
           title: 'Summary'
         }
@@ -334,8 +323,7 @@ export const wizardSchemaSubsteps = {
         {
           title: 'Get started with adding source',
           showTitle: true,
-          name: 'step-1',
-          stepKey: 1,
+          name: 1,
           nextStep: 'aws',
           fields: [
             {
@@ -348,8 +336,7 @@ export const wizardSchemaSubsteps = {
         },
         {
           title: 'Configure AWS',
-          name: 'step-2',
-          stepKey: 'aws',
+          name: 'aws',
           nextStep: 'summary',
           substepOf: 'Summary',
           fields: [
@@ -367,7 +354,6 @@ export const wizardSchemaSubsteps = {
               component: 'summary'
             }
           ],
-          stepKey: 'summary',
           name: 'summary',
           title: 'Summary',
           substepOf: 'Summary'
@@ -390,8 +376,7 @@ export const wizardSchemaMoreSubsteps = {
       fields: [
         {
           title: 'Get started with adding source',
-          name: 'step-1',
-          stepKey: 1,
+          name: 1,
           nextStep: 'aws',
           fields: [
             {
@@ -404,8 +389,7 @@ export const wizardSchemaMoreSubsteps = {
         },
         {
           title: 'Configure AWS',
-          name: 'step-2',
-          stepKey: 'aws',
+          name: 'aws',
           nextStep: 'aws2',
           substepOf: 'Summary',
           fields: [
@@ -418,9 +402,8 @@ export const wizardSchemaMoreSubsteps = {
         },
         {
           title: 'Configure AWS part 2 - disabled jumping',
-          name: 'step-88',
           disableForwardJumping: true,
-          stepKey: 'aws2',
+          name: 'aws2',
           nextStep: 'summary',
           substepOf: 'Summary',
           fields: [
@@ -438,7 +421,6 @@ export const wizardSchemaMoreSubsteps = {
               component: 'summary'
             }
           ],
-          stepKey: 'summary',
           name: 'summary',
           title: 'Summary',
           substepOf: 'Finish',
@@ -451,7 +433,6 @@ export const wizardSchemaMoreSubsteps = {
               component: 'summary'
             }
           ],
-          stepKey: 'summary2',
           name: 'summary2',
           title: 'Summary2',
           substepOf: 'Finish'

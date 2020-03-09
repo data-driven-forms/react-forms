@@ -4,87 +4,81 @@ import { FormTemplate, componentMapper } from '@data-driven-forms/pf4-component-
 import { Title } from '@patternfly/react-core/dist/js/components/Title/Title';
 
 const schema = {
-  fields: [{
-    component: componentTypes.WIZARD,
-    name: 'wizard',
-    fields: [
-      {
-        title: 'Choose your way',
-        name: 'step-1',
-        stepKey: 1,
-        nextStep: {
-          when: 'selection',
-          stepMapper: {
-            'way-1': 'way-1',
-            'way-2': 'way-2',
+  fields: [
+    {
+      component: componentTypes.WIZARD,
+      name: 'wizard',
+      fields: [
+        {
+          title: 'Choose your way',
+          name: 'step-1',
+          nextStep: {
+            when: 'selection',
+            stepMapper: {
+              'way-1': 'way-1',
+              'way-2': 'way-2'
+            }
           },
+          fields: [
+            {
+              component: componentTypes.SELECT,
+              name: 'selection',
+              label: 'Select your way',
+              isRequired: true,
+              options: [{ label: 'Please choose your way' }, { value: 'way-1', label: 'way-1' }, { value: 'way-2', label: 'way-2' }],
+              validate: [{ type: 'required-validator' }]
+            }
+          ]
         },
-        fields: [
-          {
-            component: componentTypes.SELECT,
-            name: 'selection',
-            label: 'Select your way',
-            isRequired: true,
-            options: [
-              { label: 'Please choose your way' },
-              { value: 'way-1', label: 'way-1' },
-              { value: 'way-2', label: 'way-2' },
-            ],
-            validate: [{ type: 'required-validator' }],
-          },
-        ],
-      },
-      {
-        title: 'Way 1',
-        name: 'way-1',
-        stepKey: 'way-1',
-        fields: [
-          {
-            component: componentTypes.TEXT_FIELD,
-            initializeOnMount: true,
-            hideField: true,
-            name: 'chosen-way',
-            initialValue: 'User chose the first way',
-          },
-        ],
-      },
-      {
-        title: 'Way 2',
-        name: 'way-2',
-        stepKey: 'way-2',
-        fields: [
-          {
-            component: componentTypes.TEXT_FIELD,
-            initializeOnMount: true,
-            hideField: true,
-            name: 'chosen-way',
-            initialValue: 'User chose the second way',
-          },
-        ],
-      },
-    ]},
-  ],
+        {
+          title: 'Way 1',
+          name: 'way-1',
+          fields: [
+            {
+              component: componentTypes.TEXT_FIELD,
+              initializeOnMount: true,
+              hideField: true,
+              name: 'chosen-way',
+              initialValue: 'User chose the first way'
+            }
+          ]
+        },
+        {
+          title: 'Way 2',
+          name: 'way-2',
+          fields: [
+            {
+              component: componentTypes.TEXT_FIELD,
+              initializeOnMount: true,
+              hideField: true,
+              name: 'chosen-way',
+              initialValue: 'User chose the second way'
+            }
+          ]
+        }
+      ]
+    }
+  ]
 };
 
 const InitializeOnMountWizardExample = () => {
-  const [ values, setValues ] = useState({});
+  const [values, setValues] = useState({});
   return (
     <div className="pf4">
       <FormRenderer
-        FormTemplate={ props => <FormTemplate {...props} showFormControls={false} /> }
-        componentMapper={ componentMapper }
-        schema={ schema }
-        onSubmit={ console.log }
-        onStateUpdate={ ({ values }) => setValues(values) }
-        showFormControls={ false }
+        FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
+        componentMapper={componentMapper}
+        schema={schema}
+        onSubmit={console.log}
+        onStateUpdate={({ values }) => setValues(values)}
+        showFormControls={false}
       />
       <div style={{ marginTop: 16 }}>
         <Title size="md">Form values</Title>
-        <pre>
-          { JSON.stringify(values, null, 2) }
-        </pre>
+        <pre>{JSON.stringify(values, null, 2)}</pre>
       </div>
     </div>
-  );};
+  );
+};
 
 export default InitializeOnMountWizardExample;

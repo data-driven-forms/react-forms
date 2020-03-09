@@ -48,8 +48,8 @@ Ex.: `crossroads: ['name', 'nested.password']`
 
 | Props  | Type  |  Description |
 | ------------- | ------------- | ------------- |
-| stepKey  | string, number | For first step: 1, otherwise anything |
-| nextStep  | object/stepKey of next step | See below |
+| name  | string, number | For first step: 1, otherwise anything |
+| nextStep  | object/name of next step | See below |
 | fields  | array | As usual |
 | substepOf | string | Substep title (steps are grouped by this title) |
 | title | string | Step title |
@@ -59,21 +59,21 @@ Ex.: `crossroads: ['name', 'nested.password']`
 |disableForwardJumping|bool|When use return to this step, jumping forward in the navigation is disabled.|
 
 
-- nextStep can be stepKey of the next step
+- nextStep can be name of the next step
 - or you can branch the way by using of object:
 
 ```jsx
 nextStep: {
         when: 'source-type', // name of field, where deciding value is stored
         stepMapper: {
-          aws: 'aws', // value: 'stepKey' of next step
+          aws: 'aws', // value: 'name' of next step
           google: 'google',
           ...
         },
 },
 ```
 
-- another option is to use custom function. The custom function receives as the first argument an object with values and the function has to return a `stepKey` in string.
+- another option is to use custom function. The custom function receives as the first argument an object with values and the function has to return a `name` in string.
 
 ```jsx
 nextStep: ({ values }) => (values.aws === '123' &&& values.password === 'secret') ? 'secretStep' : 'genericStep'
@@ -88,7 +88,7 @@ const Buttons = () => <div>Hello</div>;
 
 [{
   title: 'foo-step',
-  stepKey: '1',
+  name: '1',
   name: 'foo',
   buttons: Buttons,
   fields: [{
@@ -135,22 +135,22 @@ Summary              // step       4
 ```jsx
 Schema: [
   {
-    stepKey: '1',
+    name: '1',
     title: 'Select Type',
     nextStep: 'security'
   },
   {
-    stepKey: 'security',
+    name: 'security',
     title: 'Security',
     nextStep: 'credentials',
     substepOf: 'Configuration'
   },{
-    stepKey: 'credentials',
+    name: 'credentials',
     title: 'Credentials',
     nextStep: 'summary',
     substepOf: 'Configuration'
   },{
-    stepKey: 'summary',
+    name: 'summary',
     title: 'Summary'
   },
 ]
@@ -161,7 +161,7 @@ If the value is different, a new primary step is created with the step as a subs
 
 **First step**
 
-First step should have `stepKey: 1` or as a string: `'1'`
+First step should have on the first position of the `fields` array. 
 
 **Variants of Wizard**
 
