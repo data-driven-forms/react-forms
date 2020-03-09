@@ -37,6 +37,7 @@ const schema = {
       {
         title: 'Way 1',
         stepKey: 'way-1',
+        name: 'way-1',
         fields: [
           {
             component: componentTypes.TEXT_FIELD,
@@ -50,6 +51,7 @@ const schema = {
       {
         title: 'Way 2',
         stepKey: 'way-2',
+        name: 'way-2',
         fields: [
           {
             component: componentTypes.TEXT_FIELD,
