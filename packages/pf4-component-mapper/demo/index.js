@@ -52,7 +52,7 @@ class App extends React.Component {
                     ...componentMapper,
                     summary: Summary
                 }}
-                FormTemplate={() => <FormTemplate showFormControls={this.state.additionalOptions.showFormControls} />}
+                FormTemplate={(props) => <FormTemplate {...props} showFormControls={this.state.additionalOptions.showFormControls} />}
                 onCancel={console.log}
                 schema={this.state.schema}
                 uiSchema={this.state.ui}
@@ -67,7 +67,7 @@ class App extends React.Component {
                         summary: Summary
                     }}
                     onCancel={() => console.log('Cancel action')}
-                    FormTemplate={() => <FormTemplate showFormControls={this.state.additionalOptions.showFormControls} />}
+                    FormTemplate={(props) => <FormTemplate {...props} showFormControls={this.state.additionalOptions.showFormControls} />}
                     schema={wizardSchemaWithFunction}
                     {...this.state.additionalOptions}
                     />
@@ -80,7 +80,7 @@ class App extends React.Component {
                     }}
                     onCancel={() => console.log('Cancel action')}
                     schema={wizardSchemaSubsteps}
-                    FormTemplate={() => <FormTemplate showFormControls={this.state.additionalOptions.showFormControls} />}
+                    FormTemplate={(props) => <FormTemplate {...props} showFormControls={this.state.additionalOptions.showFormControls} />}
                     {...this.state.additionalOptions}
                     />
                 <div>More substep</div>
@@ -92,7 +92,7 @@ class App extends React.Component {
                     }}
                     onCancel={() => console.log('Cancel action')}
                     schema={wizardSchemaMoreSubsteps}
-                    FormTemplate={() => <FormTemplate showFormControls={this.state.additionalOptions.showFormControls} />}
+                    FormTemplate={(props) => <FormTemplate {...props} showFormControls={this.state.additionalOptions.showFormControls} />}
                     {...this.state.additionalOptions}
                     />
                 <div>Simple wizard</div>
@@ -104,7 +104,7 @@ class App extends React.Component {
                     }}
                     onCancel={() => console.log('Cancel action')}
                     schema={wizardSchemaSimple}
-                    FormTemplate={() => <FormTemplate showFormControls={this.state.additionalOptions.showFormControls} />}
+                    FormTemplate={(props) => <FormTemplate {...props} showFormControls={this.state.additionalOptions.showFormControls} />}
                     {...this.state.additionalOptions}
                     />
             </>}

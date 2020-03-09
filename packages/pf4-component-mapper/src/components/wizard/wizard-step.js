@@ -27,7 +27,7 @@ class WizardStep extends React.Component {
     // to fill all the data for the next step. If the next step contains instructions
     // at the top, the user will miss them because the scrollbar offset will stay at
     // the same place it was.
-    if (prevProps.stepKey !== this.props.stepKey) {
+    if (prevProps.name !== this.props.name) {
       // HACK: I can not pass ref to WizardBody because it is not
       // wrapped by forwardRef. However, the step body (the one that overflows)
       // is the grand parent of the form element.
@@ -63,7 +63,7 @@ WizardStep.propTypes = {
   showTitles: PropTypes.bool,
   showTitle: PropTypes.bool,
   customTitle: PropTypes.node,
-  stepKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  name: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 export default WizardStep;

@@ -5,7 +5,7 @@ export const DYNAMIC_WIZARD_TYPES = ['function', 'object'];
 const createSchema = ({ currentIndex, isDynamic, formOptions, predictSteps, fields }) => {
   const { values } = formOptions.getState();
   let schema = [];
-  let field = fields.find(({ stepKey }) => stepKey === 1 || stepKey === '1'); // find first wizard step
+  let field = fields[0]; // find first wizard step
   let index = -1;
 
   while (field) {
@@ -35,7 +35,7 @@ const createSchema = ({ currentIndex, isDynamic, formOptions, predictSteps, fiel
     }
 
     if (nextStep) {
-      field = fields.find(({ stepKey }) => stepKey === nextStep);
+      field = fields.find(({ name }) => name === nextStep);
     } else {
       field = undefined;
     }
@@ -67,7 +67,7 @@ const handleNext = (state, nextStep, formOptions, fields, predictSteps) => {
   };
 };
 
-export const findCurrentStep = (activeStep, fields) => fields.find(({ stepKey }) => stepKey === activeStep);
+export const findCurrentStep = (activeStep, fields) => fields.find(({ name }) => name === activeStep);
 
 const jumpToStep = (state, index, valid, fields, predictSteps, crossroads, formOptions) => {
   const clickOnPreviousStep = state.prevSteps[index];

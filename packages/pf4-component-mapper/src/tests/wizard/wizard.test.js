@@ -71,8 +71,7 @@ describe('<Wizard />', () => {
           fields: [
             {
               title: 'foo-step',
-              stepKey: '1',
-              name: 'foo',
+              name: '1',
               fields: [
                 {
                   name: 'foo-field',
@@ -82,9 +81,8 @@ describe('<Wizard />', () => {
               nextStep: '2'
             },
             {
-              stepKey: '2',
+              name: '2',
               title: 'bar-step',
-              name: 'bar',
               fields: [
                 {
                   name: 'bar-field',
@@ -113,8 +111,7 @@ describe('<Wizard />', () => {
           fields: [
             {
               title: 'foo-step',
-              stepKey: '1',
-              name: 'foo',
+              name: '1',
               fields: [
                 {
                   name: 'nested.foo-field',
@@ -124,9 +121,8 @@ describe('<Wizard />', () => {
               nextStep: '2'
             },
             {
-              stepKey: '2',
+              name: '2',
               title: 'bar-step',
-              name: 'bar',
               fields: [
                 {
                   name: 'nested.second.bar-field',
@@ -163,8 +159,7 @@ describe('<Wizard />', () => {
           fields: [
             {
               title: 'foo-step',
-              stepKey: '1',
-              name: 'foo',
+              name: '1',
               fields: [
                 {
                   name: 'foo-field',
@@ -217,8 +212,7 @@ describe('<Wizard />', () => {
           fields: [
             {
               title: 'foo-step',
-              stepKey: '1',
-              name: 'foo',
+              name: '1',
               fields: [
                 {
                   name: 'foo-field',
@@ -228,9 +222,8 @@ describe('<Wizard />', () => {
               nextStep: '2'
             },
             {
-              stepKey: '2',
+              name: '2',
               title: 'bar-step',
-              name: 'bar',
               fields: [
                 {
                   name: 'bar-field',
@@ -268,8 +261,7 @@ describe('<Wizard />', () => {
           fields: [
             {
               title: 'foo-step',
-              stepKey: '1',
-              name: 'foo',
+              name: '1',
               buttons: Buttons,
               fields: [
                 {
@@ -396,8 +388,7 @@ describe('<Wizard />', () => {
           fields: [
             {
               title: 'foo-step',
-              stepKey: '1',
-              name: 'foo',
+              name: '1',
               fields: [
                 {
                   name: 'foo-field',
@@ -407,9 +398,8 @@ describe('<Wizard />', () => {
               nextStep: '2'
             },
             {
-              stepKey: '2',
+              name: '2',
               title: 'bar-step',
-              name: 'bar',
               fields: [
                 {
                   name: 'bar-field',
@@ -484,8 +474,7 @@ describe('<Wizard />', () => {
           fields: [
             {
               title: 'foo-step',
-              stepKey: '1',
-              name: 'foo',
+              name: '1',
               fields: [
                 {
                   name: 'foo-field',
@@ -495,9 +484,8 @@ describe('<Wizard />', () => {
               nextStep: '2'
             },
             {
-              stepKey: '2',
+              name: '2',
               title: 'bar-step',
-              name: 'bar',
               substepOf: 'barbar',
               fields: [
                 {
@@ -541,8 +529,7 @@ describe('<Wizard />', () => {
           fields: [
             {
               title: 'foo-step',
-              stepKey: '1',
-              name: 'foo',
+              name: '1',
               fields: [
                 {
                   name: 'foo-field',
@@ -552,9 +539,8 @@ describe('<Wizard />', () => {
               nextStep: '2'
             },
             {
-              stepKey: '2',
+              name: '2',
               title: 'bar-step',
-              name: 'bar',
               substepOf: 'barbar',
               fields: [
                 {
@@ -621,8 +607,7 @@ describe('<Wizard />', () => {
           fields: [
             {
               title: 'foo-step',
-              stepKey: '1',
-              name: 'foo',
+              name: '1',
               fields: [
                 {
                   name: 'foo-field',
@@ -632,9 +617,8 @@ describe('<Wizard />', () => {
               nextStep: '2'
             },
             {
-              stepKey: '2',
+              name: '2',
               title: 'bar-step',
-              name: 'bar',
               substepOf: 'barbar',
               fields: [
                 {
@@ -685,8 +669,7 @@ describe('<Wizard />', () => {
           fields: [
             {
               title: 'foo-step',
-              stepKey: '1',
-              name: 'foo',
+              name: '1',
               fields: [
                 {
                   name: 'foo-field',
@@ -697,9 +680,8 @@ describe('<Wizard />', () => {
               nextStep: '2'
             },
             {
-              stepKey: '2',
+              name: '2',
               title: 'bar-step',
-              name: 'bar',
               substepOf: 'barbar',
               nextStep: '3',
               fields: [
@@ -716,9 +698,8 @@ describe('<Wizard />', () => {
               ]
             },
             {
-              stepKey: '3',
+              name: '3',
               title: 'conan-step',
-              name: 'conan',
               substepOf: 'barbar',
               fields: [
                 {
@@ -883,8 +864,7 @@ describe('<Wizard />', () => {
           fields: [
             {
               title: FIRST_TITLE,
-              stepKey: 1,
-              name: 'first-step',
+              name: 1,
               nextStep: {
                 when: 'source.source-type',
                 stepMapper: {
@@ -902,9 +882,8 @@ describe('<Wizard />', () => {
             },
             {
               title: SECOND_TITLE_AWS,
-              stepKey: 'aws',
+              name: 'aws',
               nextStep: 'summary',
-              name: 'second-step-aws',
               fields: [
                 {
                   component: componentTypes.TEXT_FIELD,
@@ -915,9 +894,8 @@ describe('<Wizard />', () => {
             },
             {
               title: SECOND_TITLE_GOOLE,
-              stepKey: 'google',
+              name: 'google',
               nextStep: 'summary',
-              name: 'second-step-google',
               fields: [
                 {
                   component: componentTypes.TEXT_FIELD,
@@ -929,8 +907,7 @@ describe('<Wizard />', () => {
             {
               title: THIRD_TITLE,
               fields: [],
-              name: 'summary',
-              stepKey: 'summary'
+              name: 'summary'
             }
           ]
         }
@@ -1066,8 +1043,7 @@ describe('<Wizard />', () => {
             fields: [
               {
                 title: FIRST_TITLE,
-                stepKey: 1,
-                name: 'first-step',
+                name: 1,
                 nextStep: {
                   when: 'source.source-type',
                   stepMapper: {
@@ -1084,9 +1060,8 @@ describe('<Wizard />', () => {
               },
               {
                 title: SECOND_TITLE_AWS,
-                stepKey: 'aws',
-                nextStep: 'summary',
                 name: 'aws',
+                nextStep: 'summary',
                 fields: [
                   {
                     component: componentTypes.TEXT_FIELD,
@@ -1156,8 +1131,7 @@ describe('<Wizard />', () => {
             fields: [
               {
                 title: FIRST_TITLE,
-                stepKey: 1,
-                name: 'first-step',
+                name: 1,
                 nextStep: NEXTSTEP_FUNCTION,
                 fields: [
                   {
@@ -1169,9 +1143,8 @@ describe('<Wizard />', () => {
               },
               {
                 title: SECOND_TITLE_AWS,
-                stepKey: 'aws',
-                nextStep: 'summary',
                 name: 'aws',
+                nextStep: 'summary',
                 fields: [
                   {
                     component: componentTypes.TEXT_FIELD,
@@ -1235,9 +1208,8 @@ describe('<Wizard />', () => {
             fields: [
               {
                 title: FIRST_TITLE,
-                stepKey: 1,
+                name: 1,
                 nextStep: 'aws',
-                name: 'first-step',
                 disableForwardJumping: true,
                 fields: [
                   {
@@ -1249,9 +1221,8 @@ describe('<Wizard />', () => {
               },
               {
                 title: SECOND_TITLE_AWS,
-                stepKey: 'aws',
-                nextStep: 'summary',
                 name: 'aws',
+                nextStep: 'summary',
                 fields: [
                   {
                     component: componentTypes.TEXT_FIELD,
@@ -1320,8 +1291,7 @@ describe('<Wizard />', () => {
             fields: [
               {
                 title: 'first-step',
-                stepKey: 1,
-                name: 'first-step',
+                name: 1,
                 nextStep: {
                   when: 'source.source-type',
                   stepMapper: {
@@ -1339,14 +1309,12 @@ describe('<Wizard />', () => {
               },
               {
                 title: 'second-step',
-                stepKey: 'aws',
                 name: 'aws',
                 nextStep: 'summary',
                 fields: []
               },
               {
                 title: 'summary',
-                stepKey: 'summary',
                 name: 'summary',
                 fields: []
               }
@@ -1488,8 +1456,7 @@ describe('<Wizard />', () => {
             fields: [
               {
                 title: 'first-step',
-                stepKey: 1,
-                name: 'first-step',
+                name: 1,
                 nextStep: {
                   when: 'source.source-type',
                   stepMapper: {
@@ -1508,14 +1475,12 @@ describe('<Wizard />', () => {
               },
               {
                 title: 'second-step',
-                stepKey: 'aws',
-                nextStep: 'summary',
                 name: 'aws',
+                nextStep: 'summary',
                 fields: []
               },
               {
                 title: 'summary',
-                stepKey: 'summary',
                 name: 'summary',
                 fields: []
               }

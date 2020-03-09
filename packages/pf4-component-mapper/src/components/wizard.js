@@ -45,7 +45,7 @@ const Wizard = ({
   const formOptions = useFormApi();
 
   const [state, dispatch] = useReducer(reducer, {
-    activeStep: fields[0].stepKey,
+    activeStep: fields[0].name,
     prevSteps: [],
     activeStepIndex: 0,
     maxStepIndex: 0,
@@ -176,7 +176,7 @@ Wizard.propTypes = {
   description: PropTypes.any,
   fields: PropTypes.arrayOf(
     PropTypes.shape({
-      stepKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+      name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
     })
   ).isRequired,
   isCompactNav: PropTypes.bool,
