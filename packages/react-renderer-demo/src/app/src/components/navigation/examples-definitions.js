@@ -4,6 +4,7 @@ import TabsText from './examples-texts/tabs';
 import CustomComponentText from './examples-texts/custom-component';
 import WizardText from './examples-texts/wizard';
 import SelectText from './examples-texts/select';
+import DualListSelect from './examples-texts/dual-list-select';
 
 const formGroupVariants = [{
   name: 'isDisabled',
@@ -108,7 +109,7 @@ export const baseExamples = [{
       { label: 'Hamsters', value: '3' },
     ],
   }]},
-  variants: [ ...formGroupVariants,, {
+  variants: [ ...formGroupVariants, {
     name: 'label',
     title: 'Label',
     component: 'input',
@@ -359,6 +360,31 @@ Vestibulum vulputate inceptos himenaeos.`,
       name: 'plain-text-component',
       label: `Lorem ipsum sem velit. Mauris scelerisque tortor sed lorem dapibus, bibendum scelerisque ligula consequat. Quisque fringilla luctus.
 Vestibulum vulputate inceptos himenaeos.`,
+    }],
+  },
+}, {
+  component: 'dual-list-select',
+  link: 'dual-list-select',
+  linkText: 'Dual list select',
+  ContentText: DualListSelect,
+  variants: [
+    ...formGroupVariants,
+  ],
+  value: {
+    fields: [{
+      component: 'dual-list-select',
+      name: 'dual-list-select',
+      options: [{
+        value: 'cats', label: 'cats',
+      }, {
+        value: 'cats_1', label: 'cats_1',
+      }, {
+        value: 'cats_2', label: 'cats_2',
+      }, {
+        value: 'zebras', label: 'zebras',
+      }, {
+        value: 'pigeons', label: 'pigeons',
+      }],
     }],
   },
 }, {

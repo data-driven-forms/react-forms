@@ -138,13 +138,18 @@ const Layout = ({ children }) => {
       formFieldsMapper: {
         ...pf3.formFieldsMapper,
         summary: () => <div>Pf3 summary</div>,
+        'dual-list-select': () => <div>Not implemented yet</div>,
       },
     }, pf4: {
       ...pf4,
       formFieldsMapper: { ...pf4.formFieldsMapper, summary: () => <div>Pf4 summary</div> },
     }, mui: {
       ...mui,
-      formFieldsMapper: { ...mui.formFieldsMapper, [componentTypes.WIZARD]: MuiWizzard, summary: () => <div>Mui summary</div>  },
+      formFieldsMapper: { ...mui.formFieldsMapper,
+        [componentTypes.WIZARD]: MuiWizzard,
+        summary: () => <div>Mui summary</div>,
+        'dual-list-select': () => <div>Not implemented yet</div>,
+      },
     }}}));
   }, []);
 
