@@ -4,6 +4,28 @@ import TabsText from './examples-texts/tabs';
 import CustomComponentText from './examples-texts/custom-component';
 import WizardText from './examples-texts/wizard';
 import SelectText from './examples-texts/select';
+import DualListSelect from './examples-texts/dual-list-select';
+
+const formGroupVariants = [
+  {
+    name: 'isDisabled',
+    title: 'Disabled'
+  },
+  {
+    name: 'helperText',
+    title: 'Helper text',
+    component: 'input'
+  },
+  {
+    name: 'description',
+    title: 'Description',
+    component: 'input'
+  },
+  {
+    name: 'isReadOnly',
+    title: 'Read only'
+  }
+];
 
 export const baseExamples = [
   {
@@ -22,15 +44,7 @@ export const baseExamples = [
     },
     canBeRequired: true,
     variants: [
-      {
-        name: 'isDisabled',
-        title: 'Disabled'
-      },
-      {
-        name: 'helperText',
-        title: 'Helper text',
-        component: 'input'
-      },
+      ...formGroupVariants,
       {
         name: 'label',
         title: 'Label',
@@ -46,38 +60,26 @@ export const baseExamples = [
         name: 'placeholder',
         title: 'Placeholder',
         component: 'input'
-      },
-      {
-        name: 'isReadOnly',
-        title: 'Read only'
       }
     ]
   },
   {
-    component: componentTypes.TEXTAREA,
-    link: componentTypes.TEXTAREA,
+    component: componentTypes.TEXTAREA_FIELD,
+    link: componentTypes.TEXTAREA_FIELD,
     linkText: 'Text area',
     ContentText: GenericComponentText,
     canBeRequired: true,
     value: {
       fields: [
         {
-          component: componentTypes.TEXTAREA,
+          component: componentTypes.TEXTAREA_FIELD,
           label: 'Long text',
           name: 'long-text'
         }
       ]
     },
     variants: [
-      {
-        name: 'isDisabled',
-        title: 'Disabled'
-      },
-      {
-        name: 'helperText',
-        title: 'Helper text',
-        component: 'input'
-      },
+      ...formGroupVariants,
       {
         name: 'label',
         title: 'Label',
@@ -88,10 +90,6 @@ export const baseExamples = [
         name: 'placeholder',
         title: 'Placeholder',
         component: 'input'
-      },
-      {
-        name: 'isReadOnly',
-        title: 'Read only'
       }
     ]
   },
@@ -114,10 +112,7 @@ export const baseExamples = [
       ]
     },
     variants: [
-      {
-        name: 'isDisabled',
-        title: 'Disabled'
-      },
+      ...formGroupVariants,
       {
         name: 'label',
         title: 'Label',
@@ -147,10 +142,7 @@ export const baseExamples = [
       ]
     },
     variants: [
-      {
-        name: 'isDisabled',
-        title: 'Disabled'
-      },
+      ...formGroupVariants,
       {
         name: 'label',
         title: 'Label',
@@ -160,15 +152,15 @@ export const baseExamples = [
     ]
   },
   {
-    component: componentTypes.SELECT,
-    link: componentTypes.SELECT,
+    component: componentTypes.SELECT_COMPONENT,
+    link: componentTypes.SELECT_COMPONENT,
     linkText: 'Select',
     ContentText: SelectText,
     canBeRequired: true,
     value: {
       fields: [
         {
-          component: componentTypes.SELECT,
+          component: componentTypes.SELECT_COMPONENT,
           label: 'Select',
           name: 'select',
           simpleValue: true,
@@ -181,10 +173,7 @@ export const baseExamples = [
       ]
     },
     variants: [
-      {
-        name: 'isDisabled',
-        title: 'Disabled'
-      },
+      ...formGroupVariants,
       {
         name: 'label',
         title: 'Label',
@@ -234,14 +223,7 @@ export const baseExamples = [
       ]
     },
     variants: [
-      {
-        name: 'isReadOnly',
-        title: 'Read only'
-      },
-      {
-        name: 'isDisabled',
-        title: 'Disabled'
-      },
+      ...formGroupVariants,
       {
         name: 'label',
         title: 'Label',
@@ -276,6 +258,7 @@ export const baseExamples = [
       ]
     },
     variants: [
+      ...formGroupVariants,
       {
         name: 'label',
         title: 'Label',
@@ -323,6 +306,7 @@ export const baseExamples = [
       ]
     },
     variants: [
+      ...formGroupVariants,
       {
         name: 'label',
         title: 'Label',
@@ -440,10 +424,7 @@ export const baseExamples = [
       ]
     },
     variants: [
-      {
-        name: 'isDisabled',
-        title: 'Disabled'
-      },
+      ...formGroupVariants,
       {
         name: 'label',
         title: 'Label',
@@ -478,6 +459,43 @@ Vestibulum vulputate inceptos himenaeos.`
     }
   },
   {
+    component: 'dual-list-select',
+    link: 'dual-list-select',
+    linkText: 'Dual list select',
+    ContentText: DualListSelect,
+    variants: [...formGroupVariants],
+    value: {
+      fields: [
+        {
+          component: 'dual-list-select',
+          name: 'dual-list-select',
+          options: [
+            {
+              value: 'cats',
+              label: 'cats'
+            },
+            {
+              value: 'cats_1',
+              label: 'cats_1'
+            },
+            {
+              value: 'cats_2',
+              label: 'cats_2'
+            },
+            {
+              value: 'zebras',
+              label: 'zebras'
+            },
+            {
+              value: 'pigeons',
+              label: 'pigeons'
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     component: componentTypes.WIZARD,
     link: componentTypes.WIZARD,
     linkText: 'Wizard',
@@ -490,7 +508,8 @@ Vestibulum vulputate inceptos himenaeos.`
           fields: [
             {
               title: 'Get started with adding source',
-              name: 1,
+              name: 'step-1',
+              stepKey: 1,
               nextStep: {
                 when: 'source-type',
                 stepMapper: {
@@ -500,13 +519,13 @@ Vestibulum vulputate inceptos himenaeos.`
               },
               fields: [
                 {
-                  component: componentTypes.TEXTAREA,
+                  component: componentTypes.TEXTAREA_FIELD,
                   name: 'source-name',
                   type: 'text',
                   label: 'Source name'
                 },
                 {
-                  component: componentTypes.SELECT,
+                  component: componentTypes.SELECT_COMPONENT,
                   name: 'source-type',
                   label: 'Source type',
                   isRequired: true,
@@ -533,7 +552,8 @@ Vestibulum vulputate inceptos himenaeos.`
             },
             {
               title: 'Configure AWS',
-              name: 'aws',
+              name: 'step-2',
+              stepKey: 'aws',
               nextStep: 'summary',
               fields: [
                 {
@@ -544,8 +564,9 @@ Vestibulum vulputate inceptos himenaeos.`
               ]
             },
             {
-              name: 'google',
+              stepKey: 'google',
               title: 'Configure google',
+              name: 'step-3',
               nextStep: 'summary',
               fields: [
                 {
@@ -562,6 +583,7 @@ Vestibulum vulputate inceptos himenaeos.`
                   component: 'summary'
                 }
               ],
+              stepKey: 'summary',
               name: 'summary'
             }
           ]
@@ -570,8 +592,8 @@ Vestibulum vulputate inceptos himenaeos.`
     },
     variants: [],
     next: {
-      link: '/others/miq-components',
-      label: 'ManageIQ components'
+      link: '/releases',
+      label: 'Releases'
     },
     prev: {
       link: '/component-example/time-picker',
