@@ -2,30 +2,37 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../button';
 import { Icon, Wizard } from 'patternfly-react';
-import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+import { useFieldApi, useFormApi } from '@data-driven-forms/react-form-renderer';
 
 import './button.scss';
 
-const SimpleNext = ({ next, valid, handleNext, submit, buttonLabels }) => (
-  <Button className="margin-left-3" bsStyle="primary" type="button" onClick={() => (valid ? handleNext(next) : submit())}>
-    {buttonLabels.next}
-    <Icon type="fa" name="angle-right" />
-  </Button>
-);
+const SimpleNext = ({ next, handleNext, submit, buttonLabels, disabled }) => {
+  const { valid } = useFormApi();
+
+  return (
+    <Button className="margin-left-3" bsStyle="primary" type="button" onClick={() => (valid ? handleNext(next) : submit())} disabled={disabled}>
+      {buttonLabels.next}
+      <Icon type="fa" name="angle-right" />
+    </Button>
+  );
+};
 
 SimpleNext.propTypes = {
   next: PropTypes.string,
-  valid: PropTypes.bool,
   handleNext: PropTypes.func.isRequired,
   submit: PropTypes.func.isRequired,
-  buttonLabels: PropTypes.object.isRequired
+  buttonLabels: PropTypes.object.isRequired,
+  disabled: PropTypes.bool
 };
 
 const ConditionalNext = ({ nextStep, ...rest }) => {
   const {
     input: { value }
   } = useFieldApi({ name: nextStep.when, subscription: { value: true } });
-  return <SimpleNext next={nextStep.stepMapper[value]} {...rest} />;
+
+  const next = nextStep.stepMapper[value];
+
+  return <SimpleNext next={next} {...rest} disabled={!next} />;
 };
 
 ConditionalNext.propTypes = {
