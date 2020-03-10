@@ -12,7 +12,6 @@ const wizardSchema = {
         {
           title: 'Get started with adding source',
           name: 'step-1',
-          stepKey: 1,
           nextStep: {
             when: 'source-type',
             stepMapper: {
@@ -55,8 +54,7 @@ const wizardSchema = {
         },
         {
           title: 'Configure AWS',
-          name: 'step-2',
-          stepKey: 'aws',
+          name: 'aws',
           nextStep: 'summary',
           fields: [
             {
@@ -67,9 +65,8 @@ const wizardSchema = {
           ]
         },
         {
-          stepKey: 'google',
+          name: 'google',
           title: 'Configure google',
-          name: 'step-3',
           nextStep: 'summary',
           fields: [
             {
@@ -88,7 +85,6 @@ const wizardSchema = {
               label: 'Summary'
             }
           ],
-          stepKey: 'summary',
           name: 'summary'
         }
       ]

@@ -29,15 +29,13 @@ describe('<Wizard />', () => {
     fields: [
       {
         title: 'Step 1',
-        name: 'step-1',
-        stepKey: 1,
+        name: 1,
         nextStep: 'step-2',
         fields: []
       },
       {
         title: 'Step 2',
         name: 'step-2',
-        stepKey: 'step-2',
         fields: []
       }
     ]
@@ -48,8 +46,7 @@ describe('<Wizard />', () => {
     fields: [
       {
         title: 'Step 1',
-        name: 'step-1',
-        stepKey: 1,
+        name: 1,
         nextStep: {
           when: 'step',
           stepMapper: {
@@ -61,7 +58,6 @@ describe('<Wizard />', () => {
       {
         title: 'Step 2',
         name: 'step-2',
-        stepKey: 'step-2',
         fields: []
       }
     ]
@@ -74,8 +70,7 @@ describe('<Wizard />', () => {
         name: 'wizzard',
         fields: [
           {
-            name: 'step-1',
-            stepKey: 1,
+            name: 1,
             nextStep: {
               when: 'source-type',
               stepMapper: {
@@ -116,8 +111,7 @@ describe('<Wizard />', () => {
             ]
           },
           {
-            name: 'step-2',
-            stepKey: 'aws-step',
+            name: 'asw-step',
             fields: [
               {
                 component: componentTypes.TEXT_FIELD,
@@ -127,8 +121,7 @@ describe('<Wizard />', () => {
             ]
           },
           {
-            stepKey: 'google-step',
-            name: 'step-3',
+            name: 'google-step',
             fields: [
               {
                 component: componentTypes.TEXT_FIELD,
@@ -203,13 +196,13 @@ describe('<Wizard />', () => {
         <Wizard {...props} />
       </RenderWithProvider>
     );
-    expect(wrapper.find(WizardStep).props().stepKey).toEqual(1);
+    expect(wrapper.find(WizardStep).props().name).toEqual(1);
 
     const nextButton = wrapper.find('button').last();
     nextButton.simulate('click');
     wrapper.update();
 
-    expect(wrapper.find(WizardStep).props().stepKey).toEqual('step-2');
+    expect(wrapper.find(WizardStep).props().name).toEqual('step-2');
   });
 
   it('should not step when clicked on button with false valid', () => {
@@ -218,13 +211,13 @@ describe('<Wizard />', () => {
         <Wizard {...props} />
       </RenderWithProvider>
     );
-    expect(wrapper.find(WizardStep).props().stepKey).toEqual(1);
+    expect(wrapper.find(WizardStep).props().name).toEqual(1);
 
     const nextButton = wrapper.find('button').last();
     nextButton.simulate('click');
     wrapper.update();
 
-    expect(wrapper.find(WizardStep).props().stepKey).toEqual(1);
+    expect(wrapper.find(WizardStep).props().name).toEqual(1);
   });
 
   it('should submit when clicked on next button 2x', () => {
@@ -250,19 +243,19 @@ describe('<Wizard />', () => {
         <Wizard {...props} />
       </RenderWithProvider>
     );
-    expect(wrapper.find(WizardStep).props().stepKey).toEqual(1);
+    expect(wrapper.find(WizardStep).props().name).toEqual(1);
 
     const nextButton = wrapper.find('button').last();
     nextButton.simulate('click');
     wrapper.update();
 
-    expect(wrapper.find(WizardStep).props().stepKey).toEqual('step-2');
+    expect(wrapper.find(WizardStep).props().name).toEqual('step-2');
 
     const backButton = wrapper.find('button').at(1);
     backButton.simulate('click');
     wrapper.update();
 
-    expect(wrapper.find(WizardStep).props().stepKey).toEqual(1);
+    expect(wrapper.find(WizardStep).props().name).toEqual(1);
   });
 
   it('should step to google-step when clicked on next button in conditional schema', () => {
@@ -277,10 +270,10 @@ describe('<Wizard />', () => {
       />
     );
 
-    expect(wrapper.find(WizardStep).props().stepKey).toEqual(1);
+    expect(wrapper.find(WizardStep).props().name).toEqual(1);
     const nextButton = wrapper.find('button').last();
     nextButton.simulate('click');
     wrapper.update();
-    expect(wrapper.find(WizardStep).props().stepKey).toEqual('google-step');
+    expect(wrapper.find(WizardStep).props().name).toEqual('google-step');
   });
 });

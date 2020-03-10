@@ -19,27 +19,17 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
   >
     <Wizard
       FieldProvider={[Function]}
-      buttonLabels={
-        Object {
-          "back": "Back",
-          "cancel": "Cancel",
-          "next": "Next",
-          "submit": "Submit",
-        }
-      }
       fields={
         Array [
           Object {
             "fields": Array [],
-            "name": "step-1",
+            "name": 1,
             "nextStep": "step-2",
-            "stepKey": 1,
             "title": "Step 1",
           },
           Object {
             "fields": Array [],
             "name": "step-2",
-            "stepKey": "step-2",
             "title": "Step 2",
           },
         ]
@@ -73,9 +63,8 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
           }
           handleNext={[Function]}
           handlePrev={[Function]}
-          name="step-1"
+          name={1}
           nextStep="step-2"
-          stepKey={1}
           title="Step 1"
         >
           <WizardBody
@@ -133,9 +122,8 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
             }
             handleNext={[Function]}
             handlePrev={[Function]}
-            name="step-1"
+            name={1}
             nextStep="step-2"
-            stepKey={1}
             title="Step 1"
           >
             <WizardFooter
@@ -188,7 +176,9 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                           }
                         }
                         type="button"
-                      />
+                      >
+                        Cancel
+                      </button>
                     </Button>
                   </Button>
                   <Button
@@ -213,7 +203,22 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                         disabled={true}
                         onClick={[Function]}
                         type="button"
-                      />
+                      >
+                        <Icon
+                          name="angle-left"
+                          type="fa"
+                        >
+                          <FontAwesome
+                            name="angle-left"
+                          >
+                            <span
+                              aria-hidden={true}
+                              className="fa fa-angle-left"
+                            />
+                          </FontAwesome>
+                        </Icon>
+                        Back
+                      </button>
                     </Button>
                   </Button>
                   <SimpleNext
@@ -254,7 +259,22 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                           disabled={false}
                           onClick={[Function]}
                           type="button"
-                        />
+                        >
+                          Next
+                          <Icon
+                            name="angle-right"
+                            type="fa"
+                          >
+                            <FontAwesome
+                              name="angle-right"
+                            >
+                              <span
+                                aria-hidden={true}
+                                className="fa fa-angle-right"
+                              />
+                            </FontAwesome>
+                          </Icon>
+                        </button>
                       </Button>
                     </Button>
                   </SimpleNext>
@@ -288,32 +308,22 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
   >
     <Wizard
       FieldProvider={[Function]}
-      buttonLabels={
-        Object {
-          "back": "Back",
-          "cancel": "Cancel",
-          "next": "Next",
-          "submit": "Submit",
-        }
-      }
       fields={
         Array [
           Object {
             "fields": Array [],
-            "name": "step-1",
+            "name": 1,
             "nextStep": Object {
               "stepMapper": Object {
                 "step": "step-2",
               },
               "when": "step",
             },
-            "stepKey": 1,
             "title": "Step 1",
           },
           Object {
             "fields": Array [],
             "name": "step-2",
-            "stepKey": "step-2",
             "title": "Step 2",
           },
         ]
@@ -347,7 +357,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
           }
           handleNext={[Function]}
           handlePrev={[Function]}
-          name="step-1"
+          name={1}
           nextStep={
             Object {
               "stepMapper": Object {
@@ -356,7 +366,6 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
               "when": "step",
             }
           }
-          stepKey={1}
           title="Step 1"
         >
           <WizardBody
@@ -414,7 +423,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
             }
             handleNext={[Function]}
             handlePrev={[Function]}
-            name="step-1"
+            name={1}
             nextStep={
               Object {
                 "stepMapper": Object {
@@ -423,7 +432,6 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                 "when": "step",
               }
             }
-            stepKey={1}
             title="Step 1"
           >
             <WizardFooter
@@ -476,7 +484,9 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                           }
                         }
                         type="button"
-                      />
+                      >
+                        Cancel
+                      </button>
                     </Button>
                   </Button>
                   <Button
@@ -501,7 +511,22 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                         disabled={true}
                         onClick={[Function]}
                         type="button"
-                      />
+                      >
+                        <Icon
+                          name="angle-left"
+                          type="fa"
+                        >
+                          <FontAwesome
+                            name="angle-left"
+                          >
+                            <span
+                              aria-hidden={true}
+                              className="fa fa-angle-left"
+                            />
+                          </FontAwesome>
+                        </Icon>
+                        Back
+                      </button>
                     </Button>
                   </Button>
                   <ConditionalNext
@@ -537,6 +562,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                           "submit": "Submit",
                         }
                       }
+                      disabled={true}
                       getState={[Function]}
                       handleNext={[Function]}
                       onCancel={[MockFunction]}
@@ -547,6 +573,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                       <Button
                         bsStyle="primary"
                         className="margin-left-3"
+                        disabled={true}
                         onClick={[Function]}
                         type="button"
                       >
@@ -556,16 +583,31 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                           bsClass="btn"
                           bsStyle="primary"
                           className="margin-left-3"
-                          disabled={false}
+                          disabled={true}
                           onClick={[Function]}
                           type="button"
                         >
                           <button
                             className="margin-left-3 btn btn-primary"
-                            disabled={false}
+                            disabled={true}
                             onClick={[Function]}
                             type="button"
-                          />
+                          >
+                            Next
+                            <Icon
+                              name="angle-right"
+                              type="fa"
+                            >
+                              <FontAwesome
+                                name="angle-right"
+                              >
+                                <span
+                                  aria-hidden={true}
+                                  className="fa fa-angle-right"
+                                />
+                              </FontAwesome>
+                            </Icon>
+                          </button>
                         </Button>
                       </Button>
                     </SimpleNext>
@@ -600,27 +642,17 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
   >
     <Wizard
       FieldProvider={[Function]}
-      buttonLabels={
-        Object {
-          "back": "Back",
-          "cancel": "Cancel",
-          "next": "Next",
-          "submit": "Submit",
-        }
-      }
       fields={
         Array [
           Object {
             "fields": Array [],
-            "name": "step-1",
+            "name": 1,
             "nextStep": "step-2",
-            "stepKey": 1,
             "title": "Step 1",
           },
           Object {
             "fields": Array [],
             "name": "step-2",
-            "stepKey": "step-2",
             "title": "Step 2",
           },
         ]
@@ -758,9 +790,8 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
           }
           handleNext={[Function]}
           handlePrev={[Function]}
-          name="step-1"
+          name={1}
           nextStep="step-2"
-          stepKey={1}
           title="Step 1"
         >
           <WizardBody
@@ -818,9 +849,8 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
             }
             handleNext={[Function]}
             handlePrev={[Function]}
-            name="step-1"
+            name={1}
             nextStep="step-2"
-            stepKey={1}
             title="Step 1"
           >
             <WizardFooter
@@ -873,7 +903,9 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                           }
                         }
                         type="button"
-                      />
+                      >
+                        Cancel
+                      </button>
                     </Button>
                   </Button>
                   <Button
@@ -898,7 +930,22 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                         disabled={true}
                         onClick={[Function]}
                         type="button"
-                      />
+                      >
+                        <Icon
+                          name="angle-left"
+                          type="fa"
+                        >
+                          <FontAwesome
+                            name="angle-left"
+                          >
+                            <span
+                              aria-hidden={true}
+                              className="fa fa-angle-left"
+                            />
+                          </FontAwesome>
+                        </Icon>
+                        Back
+                      </button>
                     </Button>
                   </Button>
                   <SimpleNext
@@ -939,7 +986,22 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                           disabled={false}
                           onClick={[Function]}
                           type="button"
-                        />
+                        >
+                          Next
+                          <Icon
+                            name="angle-right"
+                            type="fa"
+                          >
+                            <FontAwesome
+                              name="angle-right"
+                            >
+                              <span
+                                aria-hidden={true}
+                                className="fa fa-angle-right"
+                              />
+                            </FontAwesome>
+                          </Icon>
+                        </button>
                       </Button>
                     </Button>
                   </SimpleNext>
@@ -973,27 +1035,17 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
   >
     <Wizard
       FieldProvider={[Function]}
-      buttonLabels={
-        Object {
-          "back": "Back",
-          "cancel": "Cancel",
-          "next": "Next",
-          "submit": "Submit",
-        }
-      }
       fields={
         Array [
           Object {
             "fields": Array [],
-            "name": "step-1",
+            "name": 1,
             "nextStep": "step-2",
-            "stepKey": 1,
             "title": "Step 1",
           },
           Object {
             "fields": Array [],
             "name": "step-2",
-            "stepKey": "step-2",
             "title": "Step 2",
           },
         ]
@@ -1048,9 +1100,8 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
           }
           handleNext={[Function]}
           handlePrev={[Function]}
-          name="step-1"
+          name={1}
           nextStep="step-2"
-          stepKey={1}
           title="Step 1"
         >
           <WizardBody
@@ -1108,9 +1159,8 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
             }
             handleNext={[Function]}
             handlePrev={[Function]}
-            name="step-1"
+            name={1}
             nextStep="step-2"
-            stepKey={1}
             title="Step 1"
           >
             <WizardFooter
@@ -1163,7 +1213,9 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                           }
                         }
                         type="button"
-                      />
+                      >
+                        Cancel
+                      </button>
                     </Button>
                   </Button>
                   <Button
@@ -1188,7 +1240,22 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                         disabled={true}
                         onClick={[Function]}
                         type="button"
-                      />
+                      >
+                        <Icon
+                          name="angle-left"
+                          type="fa"
+                        >
+                          <FontAwesome
+                            name="angle-left"
+                          >
+                            <span
+                              aria-hidden={true}
+                              className="fa fa-angle-left"
+                            />
+                          </FontAwesome>
+                        </Icon>
+                        Back
+                      </button>
                     </Button>
                   </Button>
                   <SimpleNext
@@ -1229,7 +1296,22 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                           disabled={false}
                           onClick={[Function]}
                           type="button"
-                        />
+                        >
+                          Next
+                          <Icon
+                            name="angle-right"
+                            type="fa"
+                          >
+                            <FontAwesome
+                              name="angle-right"
+                            >
+                              <span
+                                aria-hidden={true}
+                                className="fa fa-angle-right"
+                              />
+                            </FontAwesome>
+                          </Icon>
+                        </button>
                       </Button>
                     </Button>
                   </SimpleNext>

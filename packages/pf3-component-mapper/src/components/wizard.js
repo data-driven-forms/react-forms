@@ -15,7 +15,7 @@ const defaultButtonLabels = {
 const Wizard = ({ title, buttonLabels, stepsInfo, fields, inModal }) => {
   const formOptions = useFormApi();
 
-  const [activeStep, setActiveStep] = useState(fields[0].stepKey);
+  const [activeStep, setActiveStep] = useState(fields[0].name);
   const [prevSteps, setPrevSteps] = useState([]);
 
   const handleNext = (nextStep) => {
@@ -24,13 +24,14 @@ const Wizard = ({ title, buttonLabels, stepsInfo, fields, inModal }) => {
   };
 
   const handlePrev = () => {
-    const newSteps = prevSteps.slice(0, Math.max(prevSteps.length - 1, 1));
+    setActiveStep(prevSteps[prevSteps.length - 1]);
 
-    setActiveStep(newSteps[newSteps.length - 1]);
+    const newSteps = prevSteps;
+    newSteps.pop();
     setPrevSteps(newSteps);
   };
 
-  const findCurrentStep = (activeStep) => fields.find(({ stepKey }) => stepKey === activeStep);
+  const findCurrentStep = (activeStep) => fields.find(({ name }) => name === activeStep);
 
   const findActiveFields = (visitedSteps) =>
     visitedSteps.map((key) => findCurrentStep(key).fields.map(({ name }) => name)).reduce((acc, curr) => curr.concat(acc.map((item) => item)), []);
@@ -94,14 +95,13 @@ Wizard.propTypes = {
   inModal: PropTypes.bool,
   fields: PropTypes.arrayOf(
     PropTypes.shape({
-      stepKey: PropTypes.string
+      name: PropTypes.string
     })
   ).isRequired
 };
 
 Wizard.defaultProps = {
   title: undefined,
-  buttonLabels: defaultButtonLabels,
   stepsInfo: undefined,
   inModal: false
 };
