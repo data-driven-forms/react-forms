@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { useRouter } from 'next/router';
 import Grid from '@material-ui/core/Grid';
-import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
+import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { makeStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -23,7 +23,6 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import MuiWizard from '@docs/components/missing-demo-fields/mui-wizard/mui-wizard';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import RouterLink from 'next/link';
@@ -144,7 +143,6 @@ class ComponentExample extends Component {
       mui: {
         componentMapper: {
           ...props.mappers.mui.componentMapper,
-          [componentTypes.WIZARD]: MuiWizard,
           summary: Summary
         },
         FormTemplate: props.mappers.mui.FormTemplate

@@ -9,13 +9,11 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import { useRouter } from 'next/router';
-import { componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import { flatSchema } from './navigation/schema';
 import GhIcon from './common/gh-svg-icon';
 import Navigation from './navigation/app-navigation';
 import MapperContext from './mappers-context';
-import MuiWizzard from '../components/missing-demo-fields/mui-wizard/mui-wizard';
 import MenuContext from './navigation/menu-context';
 import findConnectedLinks from './navigation/find-connected-links';
 import ConnectedLinks from './common/connected-links';
@@ -150,7 +148,7 @@ const Layout = ({ children }) => {
           },
           mui: {
             ...mui,
-            componentMapper: { ...mui.componentMapper, [componentTypes.WIZARD]: MuiWizzard, summary: () => <div>Mui summary</div> }
+            componentMapper: { ...mui.componentMapper, summary: () => <div>Mui summary</div> }
           }
         }
       })
