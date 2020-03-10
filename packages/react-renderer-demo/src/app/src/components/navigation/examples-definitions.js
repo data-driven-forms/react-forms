@@ -509,7 +509,6 @@ Vestibulum vulputate inceptos himenaeos.`
             {
               title: 'Get started with adding source',
               name: 'step-1',
-              stepKey: 1,
               nextStep: {
                 when: 'source-type',
                 stepMapper: {
@@ -552,8 +551,7 @@ Vestibulum vulputate inceptos himenaeos.`
             },
             {
               title: 'Configure AWS',
-              name: 'step-2',
-              stepKey: 'aws',
+              name: 'aws',
               nextStep: 'summary',
               fields: [
                 {
@@ -564,9 +562,8 @@ Vestibulum vulputate inceptos himenaeos.`
               ]
             },
             {
-              stepKey: 'google',
+              name: 'google',
               title: 'Configure google',
-              name: 'step-3',
               nextStep: 'summary',
               fields: [
                 {
@@ -583,7 +580,6 @@ Vestibulum vulputate inceptos himenaeos.`
                   component: 'summary'
                 }
               ],
-              stepKey: 'summary',
               name: 'summary'
             }
           ]
