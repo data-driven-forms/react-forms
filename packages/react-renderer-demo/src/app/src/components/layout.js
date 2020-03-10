@@ -139,7 +139,8 @@ const Layout = ({ children }) => {
             ...pf3,
             componentMapper: {
               ...pf3.componentMapper,
-              summary: () => <div>Pf3 summary</div>
+              summary: () => <div>Pf3 summary</div>,
+              'dual-list-select': () => <div>Not implemented yet</div>
             }
           },
           pf4: {
@@ -148,7 +149,11 @@ const Layout = ({ children }) => {
           },
           mui: {
             ...mui,
-            componentMapper: { ...mui.componentMapper, summary: () => <div>Mui summary</div> }
+            componentMapper: {
+              ...mui.componentMapper,
+              summary: () => <div>Mui summary</div>,
+              'dual-list-select': () => <div>Not implemented yet</div>
+            }
           }
         }
       })

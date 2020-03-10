@@ -26,6 +26,7 @@ exports[`FieldArray should render array field correctly 1`] = `
       Object {
         "checkbox": [Function],
         "date-picker": [Function],
+        "dual-list-select": [Function],
         "field-array": [Function],
         "plain-text": [Function],
         "radio": [Function],

@@ -13,6 +13,7 @@ import DatePicker from './date-picker';
 import TimePicker from './time-picker';
 import Switch from './switch';
 import PlainText from './plain-text';
+import DualListSelect from './dual-list-select';
 
 const mapper = {
   [componentTypes.TEXT_FIELD]: TextField,
@@ -27,7 +28,8 @@ const mapper = {
   [componentTypes.WIZARD]: Wizard,
   [componentTypes.SWITCH]: Switch,
   [componentTypes.PLAIN_TEXT]: PlainText,
-  [componentTypes.FIELD_ARRAY]: FieldArray
+  [componentTypes.FIELD_ARRAY]: FieldArray,
+  'dual-list-select': DualListSelect
 };
 
 export default mapper;
@@ -41,7 +43,8 @@ export const components = {
   DatePicker,
   TimePicker,
   Switch,
-  PlainText
+  PlainText,
+  DualListSelect
 };
 
 export const rawComponents = {
