@@ -13,6 +13,7 @@ import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import MuiSelect from './select-field';
 import FormLabel from '@material-ui/core/FormLabel';
+import { makeStyles } from '@material-ui/core/styles';
 
 import { MuiPickersUtilsProvider, TimePicker, DatePicker } from 'material-ui-pickers';
 import MomentUtils from '@date-io/moment';
@@ -195,6 +196,12 @@ const selectComponent = ({
   ),
 })[componentType];
 
+const useFinalFormFieldStyles = makeStyles({
+  grid: {
+    position: 'relative'
+  }
+})
+
 const FinalFormField = ({
   meta,
   validateOnMount,
@@ -204,9 +211,10 @@ const FinalFormField = ({
   helperText,
   ...rest
 }) => {
+  const classes = useFinalFormFieldStyles()
   const invalid = validationError(meta, validateOnMount);
   return (
-    <Grid item sm={ 12 }>
+    <Grid item sm={ 12 } className={classes.grid}>
       { selectComponent({
         ...rest,
         invalid,
