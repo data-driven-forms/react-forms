@@ -64,15 +64,15 @@ export const baseExamples = [
     ]
   },
   {
-    component: componentTypes.TEXTAREA_FIELD,
-    link: componentTypes.TEXTAREA_FIELD,
+    component: componentTypes.TEXTAREA,
+    link: componentTypes.TEXTAREA,
     linkText: 'Text area',
     ContentText: GenericComponentText,
     canBeRequired: true,
     value: {
       fields: [
         {
-          component: componentTypes.TEXTAREA_FIELD,
+          component: componentTypes.TEXTAREA,
           label: 'Long text',
           name: 'long-text'
         }
@@ -152,15 +152,15 @@ export const baseExamples = [
     ]
   },
   {
-    component: componentTypes.SELECT_COMPONENT,
-    link: componentTypes.SELECT_COMPONENT,
+    component: componentTypes.SELECT,
+    link: componentTypes.SELECT,
     linkText: 'Select',
     ContentText: SelectText,
     canBeRequired: true,
     value: {
       fields: [
         {
-          component: componentTypes.SELECT_COMPONENT,
+          component: componentTypes.SELECT,
           label: 'Select',
           name: 'select',
           simpleValue: true,
@@ -519,13 +519,13 @@ Vestibulum vulputate inceptos himenaeos.`
               },
               fields: [
                 {
-                  component: componentTypes.TEXTAREA_FIELD,
+                  component: componentTypes.TEXTAREA,
                   name: 'source-name',
                   type: 'text',
                   label: 'Source name'
                 },
                 {
-                  component: componentTypes.SELECT_COMPONENT,
+                  component: componentTypes.SELECT,
                   name: 'source-type',
                   label: 'Source type',
                   isRequired: true,
