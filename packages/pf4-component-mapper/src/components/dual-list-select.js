@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
+import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
-
-import { meta } from '@data-driven-forms/common/src/prop-types-templates';
 
 import { Grid, GridItem } from '@patternfly/react-core/dist/js/layouts/Grid/index';
 
@@ -108,213 +106,250 @@ Toolbar.propTypes = {
   id: PropTypes.string
 };
 
-class DualList extends Component {
-  state = {
-    lastLeftClicked: undefined,
-    selectedLeftValues: [],
-    lastRightClicked: undefined,
-    selectedRightValues: [],
-    sortLeftDesc: true,
-    sortRightDesc: true,
-    filterOptions: '',
-    filterValue: ''
-  };
+const reducer = (state, { type, value, values, isRight }) => {
+  switch (type) {
+    case 'setSelectedValue':
+      return {
+        ...state,
+        ...(isRight ? { selectedLeftValues: values } : { selectedRightValues: values }),
+        ...(isRight ? { lastLeftClicked: value } : { lastRightClicked: value })
+      };
+    case 'setFilterValue':
+      return {
+        ...state,
+        filterValue: value
+      };
+    case 'setFilterOptions':
+      return {
+        ...state,
+        filterOptions: value
+      };
+    case 'sortValue':
+      return {
+        ...state,
+        sortRightDesc: !state.sortRightDesc
+      };
+    case 'sortOptions':
+      return {
+        ...state,
+        sortLeftDesc: !state.sortLeftDesc
+      };
+    case 'clearRightValues':
+      return {
+        ...state,
+        selectedRightValues: []
+      };
+    case 'clearLeftOptions':
+      return {
+        ...state,
+        selectedLeftValues: []
+      };
+    default:
+      return state;
+  }
+};
 
-  handleOptionClicked = (event, options, isRight) => {
+const initialState = {
+  lastLeftClicked: undefined,
+  selectedLeftValues: [],
+  lastRightClicked: undefined,
+  selectedRightValues: [],
+  sortLeftDesc: true,
+  sortRightDesc: true,
+  filterOptions: '',
+  filterValue: ''
+};
+
+const DualList = (props) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const {
+    meta: { error, touched },
+    clearRightValue,
+    clearLeftValues,
+    input: { onChange, value, name },
+    leftTitle,
+    moveAllLeftTitle,
+    moveAllRightTitle,
+    moveRightTitle,
+    moveLeftTitle,
+    options,
+    rightTitle,
+    size,
+    label,
+    isRequired,
+    helperText,
+    noValueTitle,
+    noOptionsTitle,
+    filterOptionsTitle,
+    filterValueTitle,
+    filterValueText,
+    filterOptionsText,
+    ...rest
+  } = useFieldApi({
+    ...props,
+    isEqual: (current, initial) => isEqual([...(current || [])].sort(), [...(initial || [])].sort())
+  });
+
+  const showError = touched && error;
+
+  const handleOptionClicked = (event, options, isRight) => {
     const {
       target: { value }
     } = event;
     const selectedKey = isRight ? 'selectedLeftValues' : 'selectedRightValues';
     const lastKey = isRight ? 'lastLeftClicked' : 'lastRightClicked';
-    if (event.shiftKey && this.state[lastKey]) {
-      this.setState((prevState) => ({ [selectedKey]: getOptionsGroup(value, prevState[lastKey], options) }));
-    } else if (event.ctrlKey && this.state[lastKey]) {
-      this.setState((prevState) => {
-        const selectedValues = prevState[selectedKey].includes(value)
-          ? prevState[selectedKey].filter((item) => item !== value)
-          : [...prevState[selectedKey], value];
-        return { [selectedKey]: selectedValues };
-      });
+    if (event.shiftKey && state[lastKey]) {
+      dispatch({ type: 'setSelectedValue', value, values: getOptionsGroup(value, state[lastKey], options), isRight });
+    } else if (event.ctrlKey && state[lastKey]) {
+      const selectedValues = state[selectedKey].includes(value)
+        ? state[selectedKey].filter((item) => item !== value)
+        : [...state[selectedKey], value];
+
+      dispatch({ type: 'setSelectedValue', value, values: selectedValues, isRight });
     } else {
-      this.setState({ [selectedKey]: [value] });
+      dispatch({ type: 'setSelectedValue', value, values: [value], isRight });
     }
-
-    this.setState({ [lastKey]: value });
   };
 
-  handleMoveRight = () => {
-    this.props.input.onChange([...this.props.input.value, ...this.state.selectedLeftValues]);
-    this.setState({ selectedLeftValues: [] });
+  const handleMoveRight = () => {
+    onChange([...value, ...state.selectedLeftValues]);
+    dispatch({ type: 'clearLeftOptions' });
   };
 
-  handleMoveLeft = () => {
-    this.props.input.onChange(this.props.input.value.filter((value) => !this.state.selectedRightValues.includes(value)));
-    this.setState({ selectedRightValues: [] });
+  const handleMoveLeft = () => {
+    onChange(value.filter((value) => !state.selectedRightValues.includes(value)));
+    dispatch({ type: 'clearRightValues' });
   };
 
-  getOptions = () =>
-    this.props.options
-      .filter((option) => !this.props.input.value.includes(option.value) && option.label.includes(this.state.filterOptions))
-      .sort((a, b) => (this.state.sortLeftDesc ? a.label.localeCompare(b.label) : b.label.localeCompare(a.label)));
+  const leftValues = options
+    .filter((option) => !value.includes(option.value) && option.label.includes(state.filterOptions))
+    .sort((a, b) => (state.sortLeftDesc ? a.label.localeCompare(b.label) : b.label.localeCompare(a.label)));
+  const rightValues = options
+    .filter((option) => value.includes(option.value) && option.label.includes(state.filterValue))
+    .sort((a, b) => (state.sortRightDesc ? a.label.localeCompare(b.label) : b.label.localeCompare(a.label)));
 
-  getValue = () =>
-    this.props.options
-      .filter((option) => this.props.input.value.includes(option.value) && option.label.includes(this.state.filterValue))
-      .sort((a, b) => (this.state.sortRightDesc ? a.label.localeCompare(b.label) : b.label.localeCompare(a.label)));
-
-  render() {
-    const {
-      allToLeft,
-      allToRight,
-      input: { onChange, value, name },
-      leftTitle,
-      moveAllLeftTitle,
-      moveAllRightTitle,
-      moveRightTitle,
-      moveLeftTitle,
-      options,
-      rightTitle,
-      size,
-      label,
-      isRequired,
-      meta,
-      helperText,
-      noValueTitle,
-      noOptionsTitle,
-      filterOptionsTitle,
-      filterValueTitle,
-      filterValueText,
-      filterOptionsText,
-      formOptions: _formOptions,
-      FormSpyProvider: _FormSpyProvider,
-      ...rest
-    } = this.props;
-    const { error, touched } = meta;
-    const showError = touched && error;
-
-    const leftValues = this.getOptions();
-    const rightValues = this.getValue();
-
-    return (
-      <FormGroup
-        isRequired={isRequired}
-        label={label}
-        fieldId={rest.id || name}
-        isValid={!showError}
-        helperText={helperText}
-        helperTextInvalid={error}
-        {...rest}
-      >
+  return (
+    <FormGroup
+      isRequired={isRequired}
+      label={label}
+      fieldId={rest.id || name}
+      isValid={!showError}
+      helperText={helperText}
+      helperTextInvalid={error}
+      {...rest}
+    >
+      <Grid>
         <Grid>
-          <Grid>
-            <GridItem md={5}>
+          <GridItem md={5}>
+            <Grid>
+              <GridItem md={12}>
+                <TextContent>
+                  <Text component={TextVariants.h6}>{leftTitle}</Text>
+                </TextContent>
+              </GridItem>
+              <GridItem md={12}>
+                <Toolbar
+                  sortDirection={state.sortLeftDesc}
+                  onSort={() => dispatch({ type: 'sortOptions' })}
+                  onFilter={(value) => dispatch({ type: 'setFilterOptions', value })}
+                  value={state.filterOptions}
+                  placeholder={filterOptionsTitle}
+                  id={`${name}-options-toolbar`}
+                />
+              </GridItem>
+              <GridItem md={12}>
+                <List
+                  size={size}
+                  optionClick={(event) => handleOptionClicked(event, leftValues, true)}
+                  value={leftValues}
+                  noOptionsTitle={noOptionsTitle}
+                  filterValue={state.filterOptions}
+                  filterValueText={filterOptionsText}
+                />
+              </GridItem>
+            </Grid>
+          </GridItem>
+          <GridItem md={2}>
+            <Bullseye>
               <Grid>
-                <GridItem md={12}>
-                  <TextContent>
-                    <Text component={TextVariants.h6}>{leftTitle}</Text>
-                  </TextContent>
+                <GridItem md={12} sm={3}>
+                  <Button disabled={leftValues.length === 0} onClick={handleMoveRight} title={moveRightTitle} variant="plain">
+                    <AngleRightIcon size="md" />
+                  </Button>
                 </GridItem>
-                <GridItem md={12}>
-                  <Toolbar
-                    sortDirection={this.state.sortLeftDesc}
-                    onSort={() => this.setState((prevState) => ({ sortLeftDesc: !prevState.sortLeftDesc }))}
-                    onFilter={(value) => this.setState({ filterOptions: value })}
-                    value={this.state.filterOptions}
-                    placeholder={filterOptionsTitle}
-                    id={`${name}-options-toolbar`}
-                  />
-                </GridItem>
-                <GridItem md={12}>
-                  <List
-                    size={size}
-                    optionClick={(event) => this.handleOptionClicked(event, leftValues, true)}
-                    value={leftValues}
-                    noOptionsTitle={noOptionsTitle}
-                    filterValue={this.state.filterOptions}
-                    filterValueText={filterOptionsText}
-                  />
-                </GridItem>
-              </Grid>
-            </GridItem>
-            <GridItem md={2}>
-              <Bullseye>
-                <Grid>
+                {clearLeftValues && (
                   <GridItem md={12} sm={3}>
-                    <Button disabled={leftValues.length === 0} onClick={this.handleMoveRight} title={moveRightTitle} variant="plain">
-                      <AngleRightIcon size="md" />
+                    <Button
+                      disabled={leftValues.length === 0}
+                      onClick={() => {
+                        dispatch({ type: 'clearLeftValues' });
+                        onChange([...value, ...leftValues.map(({ value }) => value)]);
+                      }}
+                      title={moveAllRightTitle}
+                      variant="plain"
+                    >
+                      <AngleDoubleRightIcon size="md" />
                     </Button>
                   </GridItem>
-                  {allToRight && (
-                    <GridItem md={12} sm={3}>
-                      <Button
-                        disabled={leftValues.length === 0}
-                        onClick={() => this.setState({ selectedLeftValues: [] }, () => onChange([...value, ...leftValues.map(({ value }) => value)]))}
-                        title={moveAllRightTitle}
-                        variant="plain"
-                      >
-                        <AngleDoubleRightIcon size="md" />
-                      </Button>
-                    </GridItem>
-                  )}
-                  {allToLeft && (
-                    <GridItem md={12} sm={3}>
-                      <Button
-                        disabled={rightValues.length === 0}
-                        onClick={() =>
-                          this.setState({ selectedRightValues: [] }, () =>
-                            onChange([...value.filter((val) => !rightValues.find(({ value }) => val === value))])
-                          )
-                        }
-                        title={moveAllLeftTitle}
-                        variant="plain"
-                      >
-                        <AngleDoubleLeftIcon size="md" />
-                      </Button>
-                    </GridItem>
-                  )}
+                )}
+                {clearRightValue && (
                   <GridItem md={12} sm={3}>
-                    <Button disabled={rightValues.length === 0} onClick={this.handleMoveLeft} title={moveLeftTitle} variant="plain">
-                      <AngleLeftIcon size="md" />
+                    <Button
+                      disabled={rightValues.length === 0}
+                      onClick={() => {
+                        dispatch({ type: 'clearRightValue' });
+                        onChange([...value.filter((val) => !rightValues.find(({ value }) => val === value))]);
+                      }}
+                      title={moveAllLeftTitle}
+                      variant="plain"
+                    >
+                      <AngleDoubleLeftIcon size="md" />
                     </Button>
                   </GridItem>
-                </Grid>
-              </Bullseye>
-            </GridItem>
-            <GridItem md={5}>
-              <Grid>
-                <GridItem md={12}>
-                  <TextContent>
-                    <Text component={TextVariants.h6}>{rightTitle}</Text>
-                  </TextContent>
-                </GridItem>
-                <GridItem md={12}>
-                  <Toolbar
-                    sortDirection={this.state.sortRightDesc}
-                    onSort={() => this.setState((prevState) => ({ sortRightDesc: !prevState.sortRightDesc }))}
-                    onFilter={(value) => this.setState({ filterValue: value })}
-                    value={this.state.filterValue}
-                    placeholder={filterValueTitle}
-                    id={`${name}-value-toolbar`}
-                  />
-                </GridItem>
-                <GridItem md={12}>
-                  <List
-                    size={size}
-                    optionClick={(event) => this.handleOptionClicked(event, rightValues, false)}
-                    value={rightValues}
-                    noOptionsTitle={noValueTitle}
-                    filterValue={this.state.filterValue}
-                    filterValueText={filterValueText}
-                  />
+                )}
+                <GridItem md={12} sm={3}>
+                  <Button disabled={rightValues.length === 0} onClick={handleMoveLeft} title={moveLeftTitle} variant="plain">
+                    <AngleLeftIcon size="md" />
+                  </Button>
                 </GridItem>
               </Grid>
-            </GridItem>
-          </Grid>
+            </Bullseye>
+          </GridItem>
+          <GridItem md={5}>
+            <Grid>
+              <GridItem md={12}>
+                <TextContent>
+                  <Text component={TextVariants.h6}>{rightTitle}</Text>
+                </TextContent>
+              </GridItem>
+              <GridItem md={12}>
+                <Toolbar
+                  sortDirection={state.sortRightDesc}
+                  onSort={() => dispatch({ type: 'sortValue' })}
+                  onFilter={(value) => dispatch({ type: 'setFilterValue', value })}
+                  value={state.filterValue}
+                  placeholder={filterValueTitle}
+                  id={`${name}-value-toolbar`}
+                />
+              </GridItem>
+              <GridItem md={12}>
+                <List
+                  size={size}
+                  optionClick={(event) => handleOptionClicked(event, rightValues, false)}
+                  value={rightValues}
+                  noOptionsTitle={noValueTitle}
+                  filterValue={state.filterValue}
+                  filterValueText={filterValueText}
+                />
+              </GridItem>
+            </Grid>
+          </GridItem>
         </Grid>
-      </FormGroup>
-    );
-  }
-}
+      </Grid>
+    </FormGroup>
+  );
+};
 
 DualList.propTypes = {
   options: PropTypes.arrayOf(
@@ -328,27 +363,19 @@ DualList.propTypes = {
   size: PropTypes.number,
   moveLeftTitle: PropTypes.string,
   moveRightTitle: PropTypes.string,
-  input: PropTypes.shape({
-    value: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.string), PropTypes.string]),
-    onChange: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired
-  }).isRequired,
-  allToLeft: PropTypes.bool,
-  allToRight: PropTypes.bool,
+  clearRightValue: PropTypes.bool,
+  clearLeftValues: PropTypes.bool,
   moveAllLeftTitle: PropTypes.string,
   moveAllRightTitle: PropTypes.string,
   label: PropTypes.node,
   isRequired: PropTypes.bool,
-  meta,
   helperText: PropTypes.node,
   noValueTitle: PropTypes.string,
   noOptionsTitle: PropTypes.string,
   filterOptionsTitle: PropTypes.string,
   filterValueTitle: PropTypes.string,
   filterValueText: PropTypes.string,
-  filterOptionsText: PropTypes.string,
-  formOptions: PropTypes.any,
-  FormSpyProvider: PropTypes.any
+  filterOptionsText: PropTypes.string
 };
 
 DualList.defaultProps = {
@@ -366,21 +393,8 @@ DualList.defaultProps = {
   filterOptionsText: 'Remove your filter to see all options',
   filterValueText: 'Remove your filter to see all selected',
   options: [],
-  allToLeft: true,
-  allToRight: true
+  clearRightValue: true,
+  clearLeftValues: true
 };
 
-const WrappedDualList = (props) => {
-  const { input, meta, ...rest } = useFieldApi({
-    ...props,
-    isEqual: (current, initial) => isEqual([...(current || [])].sort(), [...(initial || [])].sort())
-  });
-
-  return <DualList {...rest} input={input} meta={meta} />;
-};
-
-WrappedDualList.propTypes = {
-  FieldProvider: PropTypes.func.isRequired
-};
-
-export default WrappedDualList;
+export default DualList;
