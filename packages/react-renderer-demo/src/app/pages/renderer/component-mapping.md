@@ -7,26 +7,16 @@ import ListOfContents from '../../src/helpers/list-of-contents';
 <Grid container item>
 <Grid item xs={12} md={10}>
 
-# Introduction
+# ComponentMapper
 
 In order to successfully render a form via FormRenderer you need to assign component mappers. Component mapper is an object of React components,
 where key is a component identifier and value is the Component. The identifiers must be equivalent to `componentTypes` in your schema.
 
-## FormTemplate
+## Creating componentMapper
 
-TODO
-
-## ComponentMapper
-Component mapper defines form inputs which can mutate the form state.
-
-# Creating FormTemplate
-
-
-# Creating componentMapper
-
-Form fields mapper defines components that are rendered from input schema. Each component in mapper must have an unique key,
-which corresponds to `componentType` in input schema. Keys names can be chosen but there are some predefined constants
-which cover most common component types. Predefined components are also automatically enhanced and connected to the form state.
+Component mapper defines components that are rendered from input schema. Each component in mapper must have an unique key,
+which corresponds to `componentType` in the schema. Keys names can be chosen but there are some predefined constants
+which cover most common component types.
 
 ```jsx
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
@@ -47,6 +37,43 @@ const componentTypes = {
   [componentTypes.PLAIN_TEXT]: 'plain-text',
 }
 ```
+
+You have two options how to connect your component to the form state.
+
+### useFieldApi
+
+First, you can use `useFieldApi` hook.
+
+This hook needs `name`, in case of special input types which are using checked as the input value (checbkoxes, switches) you have to assign `type: checkbox`. The hook will return all field props, including input and meta. [TODO: LINK TO WHAT IS INPUT AND META]
+
+```jsx
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+
+...
+
+const { input, isDisabled, label, helperText, description, meta } = useFieldApi(props);
+```
+
+### FieldProvider
+
+Or you can import `FieldProvider` component from Data Driven Forms. This component needs to obtain `render` or `component` prop.
+
+
+```jsx
+import { FieldProvider } from '@data-driven-forms/react-form-renderer'
+
+<FielProvider component={TextField}>
+
+// or
+
+<FielProvider render={({input, meta, ...props}) => <TextField {...props} input={input} meta={meta}>}>
+```
+
+## Example
+
+Below, you can see an basic implementation of custom component mapper:
+<br />
+
 
 <RawComponent source="component-mapper/form-fields-mapper" />
 </Grid>
