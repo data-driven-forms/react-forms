@@ -87,7 +87,11 @@ const MdxComponents = {
       />
     </div>
   ),
-  link: ({ href, children }) => <Link href={href}>{children}</Link>,
+  a: ({ href, children }) => (
+    <Link href={href} rel="noopener noreferrer" target="_blank">
+      {children}
+    </Link>
+  ),
   h1: (props) => <Heading {...props} level={4} component="h1" />,
   h2: (props) => <Heading {...props} level={5} component="h2" />,
   h3: (props) => <Heading {...props} level={6} component="h3" />,

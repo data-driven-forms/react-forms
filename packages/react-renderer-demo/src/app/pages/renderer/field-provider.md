@@ -9,38 +9,17 @@ import ListOfContents from '../../src/helpers/list-of-contents';
 <Grid container item>
 <Grid item xs={12} md={10}>
 
-# Field Provider
-
-## Custom components
+# Custom components
 
 React form renderer is using [react-final-form](https://github.com/final-form/react-final-form) for form state management.
 Most of its features are not directly available for consistency and performance reasons. If you want to create any custom
-components, you can access these features via `FieldProvider` prop.
+components, you can access these features via `FieldProvider` component or `useFieldApi` hook.
 
-FieldProvider is a wrapper component around standard
-[react-final-form Field component](https://final-form.org/docs/react-final-form/api/Field)
-which adds additional methods that will help you to control your form state.
+`FieldProvider` is a wrapper using `useFieldApi` to get the access to the form state.
 
-# Accessing FieldProvider
+`useFieldApi` is a wrapper around [React Final Form useField hook](https://final-form.org/docs/react-final-form/api/useField).
 
-To use Fieldprovider, you first need to register a component to your component mapper.
 You can read more about that in <RouterNav href="/renderer/component-mapping"><Link href="/renderer/component-mapping">Component mapping</Link></RouterNav>.
-
-Each component will receive FieldProvider as a prop. Be aware that pre-defined component types are
-automatically wrapped in FieldProvider. This is done to make it easier to create component mappers for
-standard form components. List of standard components is available <RouterNav href="/renderer/component-api"><Link href="/renderer/component-api">here</Link></RouterNav>.
-
-# Using FieldProvider
-
-## Register component
-
-```jsx
-import NewComponent from './new-component'
-
-const componentMapper = {
-  'new-component': NewComponent
-}
-```
 
 ## Implementation of component
 
@@ -48,8 +27,9 @@ Next example shows simple input field with label and error message.
 
 ```jsx
 import React from 'react';
+import { FieldProvider } from '@data-driven-forms/react-form-renderer'
 
-const NewComponent = ({ FieldProvider, formOptions, name, ...rest }) => (
+const NewComponent = ({ name, ...rest }) => (
   <div>
     <FieldProvider {...rest} name={name}>
       {({ input, meta, ...props }) => {
@@ -66,6 +46,18 @@ const NewComponent = ({ FieldProvider, formOptions, name, ...rest }) => (
 )
 
 export default NewComponent
+```
+
+## Register component
+
+To be able to use your component in the schema, you first need to register the component in your component mapper.
+
+```jsx
+import NewComponent from './new-component'
+
+const componentMapper = {
+  'new-component': NewComponent
+}
 ```
 
 # What are input and meta?
@@ -100,11 +92,23 @@ Meta is a object which contains meta information about field with given name. Th
 }
 ```
 
-# FormOptions
+# useFormApi - formOptions
 
-In addition to FieldProvider, every component will also receive prop `formOptions`.
 This property contains a number of useful methods and attributes that will give you additional level of control
-and informations about the formState.
+and information about the formState.
+
+You can access it from every component by using `useFormApi` hook.
+
+```jsx
+import { useFormApi } from '@data-driven-forms/react-form-renderer';
+
+const Component = (props) => {
+     const formOptions = useFormApi();
+     ...
+}
+```
+
+This hook returns object containing following information:
 
 ```jsx
 {
@@ -120,9 +124,29 @@ and informations about the formState.
 }
 ```
 
-# FormSpy provider
+# FormSpy
 
-Every component also receives component `FormSpyProvider` as a prop. You can find more info <a href="https://final-form.org/docs/react-final-form/api/FormSpy" rel="noopener noreferrer" target="_blank">here!</a>
+[FormSpy](https://final-form.org/docs/react-final-form/api/FormSpy) is exported via Data Driven Forms.
+
+```jsx
+import { FormSpy } from '@data-driven-forms/react-form-renderer';
+```
+
+# FieldArray
+
+[React Final Form Array](https://github.com/final-form/react-final-form-arrays) is exported via Data Driven Forms.
+
+```jsx
+import { FieldArray } from '@data-driven-forms/react-form-renderer';
+```
+
+# Form
+
+For testing purposes, you can also import React Final Form's `Form` component.
+
+```jsx
+import { Form } from '@data-driven-forms/react-form-renderer';
+```
 
 </Grid>
 <Grid item xs={false} md={2}>
