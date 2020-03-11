@@ -1,5 +1,7 @@
 import Grid from '@material-ui/core/Grid'
 import RawComponent from '@docs/raw-component';
+import RouterLink from 'next/link';
+import Link from '@material-ui/core/Link';
 
 import ListOfContents from '../../src/helpers/list-of-contents';
 
@@ -55,6 +57,57 @@ Validator inputs and results are being cached so you will get immediate feedback
 
 If you do not want to trigger the async validator after every stroke, you can use a debounce promise [library](https://github.com/slorber/awesome-debounce-promise)
 (or any other implementation of debouncing.)
+
+# validatorMapper
+
+If you need to expand default Data Driven Forms validator types, you can use <RouterLink href="/renderer/renderer-api#optionalprops"><Link href="/renderer/renderer-api#optionalprops">validatorMapper</Link></RouterLink>.
+
+```jsx
+const customValidatorMapper = {
+  custom: () => (value) => value > 6 ? 'Value is bigger than 6' : undefined
+}
+
+const schema = {
+  fields: [{
+   name: 'name',
+   component: 'text-field',
+   validate: [{type: 'custom'}]
+  }]
+}
+
+<FormRenderer
+  ...
+  schema={schema}
+  validatorMapper={customValidatorMapper}
+/>
+
+```
+
+It is designed to return functions returning functions, so you can easily cached or debounce results.
+
+The higher order function receives the whole validator object.
+
+```jsx
+const customValidatorMapper = {
+  custom: ({ threshold }) => (value) => value > threshold ? `Value is bigger than ${threshold}` : undefined
+}
+
+const schema = {
+  fields: [{
+   name: 'name',
+   component: 'text-field',
+   validate: [{type: 'custom', threshold: 6}]
+  }]
+}
+```
+
+Also, each validator function receives value of the current field as the first argument and all form values as the second.
+
+```jsx
+const validatorMapper = {
+  [type]: (validatorSchema) => (value, allValues) => isValid ? undefined : 'error message'
+}
+```
 
 # ValidateOnMount pf3 only
 

@@ -33,6 +33,7 @@ Form Renderer provides a lot of customization via props.
 |initialValues|object|An object of fields names as keys and values as their values.||
 |subscription|object|You can pass your own [subscription](https://final-form.org/docs/react-final-form/types/FormProps#subscription), which will be added to default settings.|`{ pristine: true, submitting: true, valid: true }`|
 |<RouterLink href="/renderer/validators"><Link href="/renderer/validators">validate</Link></RouterLink>|func|A function which receives all form values and returns an object with errors.||
+|<RouterLink href="/renderer/validators#validatormapper"><Link href="/renderer/validators#validatormapper">validatorMapper</Link></RouterLink>|object|A mapper containing custom validators, it's automatically merged with the default one.||
 
 # Schema
 
