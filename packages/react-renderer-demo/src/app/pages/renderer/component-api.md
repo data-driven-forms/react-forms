@@ -184,8 +184,8 @@ Wizard step <br/>
 |Prop|Type|Description|
 |----|:--:|----------:|
 |title|node/string|Step title|
-|stepKey|string, number|For first step: 1, otherwise anything|
-|nextStep|object/stepKey of next step|See below|
+|name|string, number|Uniq name of the step|
+|nextStep|object/name of next step|See <RouterLink href="/component-example/wizard"><Link href="/component-example/wizard">wizard documentation</Link></RouterLink>|
 |fields|array|An array of form fields|
 
 <ExampleLink to='wizard' />
