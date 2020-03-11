@@ -28,7 +28,7 @@ const ClearedValueExample = () => {
         componentMapper={ componentMapper }
         schema={ schema }
         onSubmit={ console.log }
-        onStateUpdate={ ({ values }) => setValues(values) }
+        debug={ ({ values }) => setValues(values) }
       />
       <div style={{ marginTop: 16 }}>
         <Title size="md">Form values</Title>
