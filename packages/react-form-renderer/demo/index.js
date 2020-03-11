@@ -16,7 +16,8 @@ const submitTest = (...args) => new Promise(resolve => {
 const FormButtons = props => {
     return (
         <div>
-            <button disabled={props.submitting} type="submit">Submit</button>
+            <button disabled={props.submitting || props.pristine} type="submit">Submit</button>
+            <button onClick={props.reset}>reset</button>
         </div>
     )
 }
@@ -28,6 +29,7 @@ const App = () => (
                 text_box_1: 'hue',
                 text_box_3: 'initial'
             }}
+            keepDirtyOnReinitialize
             clearedValue={'bla'}
             layoutMapper={layoutMapper}
             formFieldsMapper={formFieldsMapper}

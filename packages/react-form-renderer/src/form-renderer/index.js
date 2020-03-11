@@ -33,6 +33,7 @@ const FormRenderer = ({
   subscription,
   clearedValue,
   schema,
+  ...props
 }) => {
   let schemaError;
   try {
@@ -51,6 +52,7 @@ const FormRenderer = ({
 
   return (
     <Form
+      { ...props }
       onSubmit={ onSubmit }
       mutators={{ ...arrayMutators }}
       decorators={ [ createFocusDecorator() ] }
