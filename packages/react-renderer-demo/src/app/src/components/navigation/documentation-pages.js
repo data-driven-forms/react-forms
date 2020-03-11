@@ -62,5 +62,9 @@ export const docs = [
   {
     component: 'field-array',
     linkText: 'FieldArray Provider'
+  },
+  {
+    component: 'migration-guide',
+    linkText: 'Migration guide 1.x to 2.x'
   }
 ];
