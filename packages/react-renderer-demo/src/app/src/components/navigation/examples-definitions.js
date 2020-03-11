@@ -97,7 +97,7 @@ export const baseExamples = [
     component: componentTypes.CHECKBOX,
     link: componentTypes.CHECKBOX,
     prev: {
-      link: '/renderer/form-controls',
+      link: '/renderer/form-template',
       label: 'Form Controls'
     },
     linkText: 'Checkbox',

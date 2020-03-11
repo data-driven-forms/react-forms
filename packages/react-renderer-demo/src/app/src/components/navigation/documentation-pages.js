@@ -56,7 +56,7 @@ export const docs = [
     linkText: 'FieldArray Provider'
   },
   {
-    component: 'form-controls',
-    linkText: 'Form buttons'
+    component: 'form-template',
+    linkText: 'Form Template'
   }
 ];
