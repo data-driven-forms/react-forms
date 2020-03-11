@@ -91,8 +91,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
       }
     }
   >
-    <FormContent
-      Template={[Function]}
+    <FormTemplate
       formFields={
         Array [
           <SingleField
@@ -159,80 +158,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
           ],
         }
       }
-      value={
-        Object {
-          "actionMapper": undefined,
-          "componentMapper": Object {
-            "checkbox": [Function],
-            "date-picker": [Function],
-            "dual-list-select": [Function],
-            "field-array": [Function],
-            "plain-text": [Function],
-            "radio": [Function],
-            "select": [Function],
-            "sub-form": [Function],
-            "switch": [Function],
-            "tabs": [Function],
-            "text-field": [Function],
-            "textarea": [Function],
-            "time-picker": [Function],
-            "wizard": [Function],
-          },
-          "formOptions": Object {
-            "batch": [Function],
-            "blur": [Function],
-            "change": [Function],
-            "clearOnUnmount": false,
-            "clearedValue": undefined,
-            "concat": [Function],
-            "destroyOnUnregister": false,
-            "focus": [Function],
-            "getFieldState": [Function],
-            "getRegisteredFields": [Function],
-            "getState": [Function],
-            "handleSubmit": [Function],
-            "initialize": [Function],
-            "insert": [Function],
-            "isValidationPaused": [Function],
-            "move": [Function],
-            "onCancel": [MockFunction],
-            "onReset": undefined,
-            "onSubmit": [MockFunction],
-            "pauseValidation": [Function],
-            "pop": [Function],
-            "pristine": true,
-            "push": [Function],
-            "registerField": [Function],
-            "remove": [Function],
-            "removeBatch": [Function],
-            "renderForm": [Function],
-            "reset": [Function],
-            "resetFieldState": [Function],
-            "resumeValidation": [Function],
-            "setConfig": [Function],
-            "shift": [Function],
-            "submit": [Function],
-            "subscribe": [Function],
-            "swap": [Function],
-            "unshift": [Function],
-            "update": [Function],
-            "valid": true,
-          },
-          "validatorMapper": Object {
-            "exact-length-validator": [Function],
-            "max-length-validator": [Function],
-            "max-number-value": [Function],
-            "min-items-validator": [Function],
-            "min-length-validator": [Function],
-            "min-number-value": [Function],
-            "pattern-validator": [Function],
-            "required-validator": [Function],
-            "url-validator": [Function],
-          },
-        }
-      }
     >
-      <FormTemplate
+      <PF4FormTemplate
         formFields={
           Array [
             <SingleField
@@ -299,8 +226,15 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
             ],
           }
         }
+        showFormControls={false}
       >
-        <PF4FormTemplate
+        <FormTemplate
+          Button={[Function]}
+          ButtonGroup={[Function]}
+          Description={[Function]}
+          FormWrapper={[Function]}
+          Title={[Function]}
+          disableSubmit={Array []}
           formFields={
             Array [
               <SingleField
@@ -369,126 +303,80 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
           }
           showFormControls={false}
         >
-          <FormTemplate
-            Button={[Function]}
-            ButtonGroup={[Function]}
-            Description={[Function]}
-            FormWrapper={[Function]}
-            Title={[Function]}
-            disableSubmit={Array []}
-            formFields={
-              Array [
-                <SingleField
-                  component="wizard"
-                  fields={
-                    Array [
-                      Object {
-                        "fields": Array [
-                          Object {
-                            "component": "text-field",
-                            "name": "foo-field",
-                          },
-                        ],
-                        "name": "1",
-                        "nextStep": "2",
-                        "title": "foo-step",
-                      },
-                      Object {
-                        "fields": Array [
-                          Object {
-                            "component": "text-field",
-                            "name": "bar-field",
-                          },
-                        ],
-                        "name": "2",
-                        "title": "bar-step",
-                      },
-                    ]
-                  }
-                  name="wizard"
-                />,
-              ]
-            }
-            schema={
-              Object {
-                "fields": Array [
-                  Object {
-                    "component": "wizard",
-                    "fields": Array [
-                      Object {
-                        "fields": Array [
-                          Object {
-                            "component": "text-field",
-                            "name": "foo-field",
-                          },
-                        ],
-                        "name": "1",
-                        "nextStep": "2",
-                        "title": "foo-step",
-                      },
-                      Object {
-                        "fields": Array [
-                          Object {
-                            "component": "text-field",
-                            "name": "bar-field",
-                          },
-                        ],
-                        "name": "2",
-                        "title": "bar-step",
-                      },
-                    ],
-                    "name": "wizard",
-                  },
-                ],
-              }
-            }
-            showFormControls={false}
+          <Form
+            onSubmit={[Function]}
           >
-            <Form
+            <form
+              className="pf-c-form"
+              noValidate={true}
               onSubmit={[Function]}
             >
-              <form
-                className="pf-c-form"
-                noValidate={true}
-                onSubmit={[Function]}
+              <SingleField
+                component="wizard"
+                fields={
+                  Array [
+                    Object {
+                      "fields": Array [
+                        Object {
+                          "component": "text-field",
+                          "name": "foo-field",
+                        },
+                      ],
+                      "name": "1",
+                      "nextStep": "2",
+                      "title": "foo-step",
+                    },
+                    Object {
+                      "fields": Array [
+                        Object {
+                          "component": "text-field",
+                          "name": "bar-field",
+                        },
+                      ],
+                      "name": "2",
+                      "title": "bar-step",
+                    },
+                  ]
+                }
+                key="wizard"
+                name="wizard"
               >
-                <SingleField
-                  component="wizard"
-                  fields={
-                    Array [
-                      Object {
-                        "fields": Array [
+                <FormConditionWrapper>
+                  <FormFieldHideWrapper
+                    hideField={false}
+                  >
+                    <FieldWrapper
+                      component={[Function]}
+                      componentType="wizard"
+                      fields={
+                        Array [
                           Object {
-                            "component": "text-field",
-                            "name": "foo-field",
+                            "fields": Array [
+                              Object {
+                                "component": "text-field",
+                                "name": "foo-field",
+                              },
+                            ],
+                            "name": "1",
+                            "nextStep": "2",
+                            "title": "foo-step",
                           },
-                        ],
-                        "name": "1",
-                        "nextStep": "2",
-                        "title": "foo-step",
-                      },
-                      Object {
-                        "fields": Array [
                           Object {
-                            "component": "text-field",
-                            "name": "bar-field",
+                            "fields": Array [
+                              Object {
+                                "component": "text-field",
+                                "name": "bar-field",
+                              },
+                            ],
+                            "name": "2",
+                            "title": "bar-step",
                           },
-                        ],
-                        "name": "2",
-                        "title": "bar-step",
-                      },
-                    ]
-                  }
-                  key="wizard"
-                  name="wizard"
-                >
-                  <FormConditionWrapper>
-                    <FormFieldHideWrapper
-                      hideField={false}
+                        ]
+                      }
+                      name="wizard"
                     >
-                      <FieldWrapper
-                        component={[Function]}
-                        componentType="wizard"
+                      <WizardFunction
+                        buttonLabels={Object {}}
                         fields={
                           Array [
                             Object {
@@ -515,9 +403,17 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                           ]
                         }
                         name="wizard"
+                        validate={[Function]}
                       >
-                        <WizardFunction
-                          buttonLabels={Object {}}
+                        <Wizard
+                          buttonLabels={
+                            Object {
+                              "back": "Back",
+                              "cancel": "Cancel",
+                              "next": "Next",
+                              "submit": "Submit",
+                            }
+                          }
                           fields={
                             Array [
                               Object {
@@ -546,61 +442,90 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                           name="wizard"
                           validate={[Function]}
                         >
-                          <Wizard
-                            buttonLabels={
-                              Object {
-                                "back": "Back",
-                                "cancel": "Cancel",
-                                "next": "Next",
-                                "submit": "Submit",
-                              }
-                            }
-                            fields={
-                              Array [
-                                Object {
-                                  "fields": Array [
-                                    Object {
-                                      "component": "text-field",
-                                      "name": "foo-field",
-                                    },
-                                  ],
-                                  "name": "1",
-                                  "nextStep": "2",
-                                  "title": "foo-step",
-                                },
-                                Object {
-                                  "fields": Array [
-                                    Object {
-                                      "component": "text-field",
-                                      "name": "bar-field",
-                                    },
-                                  ],
-                                  "name": "2",
-                                  "title": "bar-step",
-                                },
-                              ]
-                            }
-                            name="wizard"
-                            validate={[Function]}
-                          >
-                            <Modal>
+                          <Modal>
+                            <div
+                              className="pf-c-wizard no-shadow   "
+                              onKeyDown={[Function]}
+                              role="dialog"
+                            >
                               <div
-                                className="pf-c-wizard no-shadow   "
-                                onKeyDown={[Function]}
-                                role="dialog"
+                                className="pf-c-wizard__outer-wrap"
                               >
-                                <div
-                                  className="pf-c-wizard__outer-wrap"
-                                >
-                                  <WizardNav>
-                                    <nav
-                                      className="pf-c-wizard__nav"
+                                <WizardNav>
+                                  <nav
+                                    className="pf-c-wizard__nav"
+                                  >
+                                    <ol
+                                      className="pf-c-wizard__nav-list"
                                     >
-                                      <ol
-                                        className="pf-c-wizard__nav-list"
-                                      >
-                                        <FormSpy>
-                                          <WizardNavigation
+                                      <FormSpy>
+                                        <WizardNavigation
+                                          activeStepIndex={0}
+                                          formOptions={
+                                            Object {
+                                              "batch": [Function],
+                                              "blur": [Function],
+                                              "change": [Function],
+                                              "clearOnUnmount": false,
+                                              "clearedValue": undefined,
+                                              "concat": [Function],
+                                              "destroyOnUnregister": false,
+                                              "focus": [Function],
+                                              "getFieldState": [Function],
+                                              "getRegisteredFields": [Function],
+                                              "getState": [Function],
+                                              "handleSubmit": [Function],
+                                              "initialize": [Function],
+                                              "insert": [Function],
+                                              "isValidationPaused": [Function],
+                                              "move": [Function],
+                                              "onCancel": [MockFunction],
+                                              "onReset": undefined,
+                                              "onSubmit": [MockFunction],
+                                              "pauseValidation": [Function],
+                                              "pop": [Function],
+                                              "pristine": true,
+                                              "push": [Function],
+                                              "registerField": [Function],
+                                              "remove": [Function],
+                                              "removeBatch": [Function],
+                                              "renderForm": [Function],
+                                              "reset": [Function],
+                                              "resetFieldState": [Function],
+                                              "resumeValidation": [Function],
+                                              "setConfig": [Function],
+                                              "shift": [Function],
+                                              "submit": [Function],
+                                              "subscribe": [Function],
+                                              "swap": [Function],
+                                              "unshift": [Function],
+                                              "update": [Function],
+                                              "valid": true,
+                                            }
+                                          }
+                                          isDynamic={false}
+                                          jumpToStep={[Function]}
+                                          maxStepIndex={0}
+                                          navSchema={
+                                            Array [
+                                              Object {
+                                                "index": 0,
+                                                "primary": true,
+                                                "substepOf": undefined,
+                                                "title": "foo-step",
+                                              },
+                                              Object {
+                                                "index": 1,
+                                                "primary": true,
+                                                "substepOf": undefined,
+                                                "title": "bar-step",
+                                              },
+                                            ]
+                                          }
+                                          setPrevSteps={[Function]}
+                                          values={Object {}}
+                                        >
+                                          <Component
                                             activeStepIndex={0}
                                             formOptions={
                                               Object {
@@ -644,7 +569,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                 "valid": true,
                                               }
                                             }
-                                            isDynamic={false}
                                             jumpToStep={[Function]}
                                             maxStepIndex={0}
                                             navSchema={
@@ -663,122 +587,241 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                 },
                                               ]
                                             }
-                                            setPrevSteps={[Function]}
-                                            values={Object {}}
                                           >
-                                            <Component
-                                              activeStepIndex={0}
-                                              formOptions={
-                                                Object {
-                                                  "batch": [Function],
-                                                  "blur": [Function],
-                                                  "change": [Function],
-                                                  "clearOnUnmount": false,
-                                                  "clearedValue": undefined,
-                                                  "concat": [Function],
-                                                  "destroyOnUnregister": false,
-                                                  "focus": [Function],
-                                                  "getFieldState": [Function],
-                                                  "getRegisteredFields": [Function],
-                                                  "getState": [Function],
-                                                  "handleSubmit": [Function],
-                                                  "initialize": [Function],
-                                                  "insert": [Function],
-                                                  "isValidationPaused": [Function],
-                                                  "move": [Function],
-                                                  "onCancel": [MockFunction],
-                                                  "onReset": undefined,
-                                                  "onSubmit": [MockFunction],
-                                                  "pauseValidation": [Function],
-                                                  "pop": [Function],
-                                                  "pristine": true,
-                                                  "push": [Function],
-                                                  "registerField": [Function],
-                                                  "remove": [Function],
-                                                  "removeBatch": [Function],
-                                                  "renderForm": [Function],
-                                                  "reset": [Function],
-                                                  "resetFieldState": [Function],
-                                                  "resumeValidation": [Function],
-                                                  "setConfig": [Function],
-                                                  "shift": [Function],
-                                                  "submit": [Function],
-                                                  "subscribe": [Function],
-                                                  "swap": [Function],
-                                                  "unshift": [Function],
-                                                  "update": [Function],
-                                                  "valid": true,
-                                                }
-                                              }
-                                              jumpToStep={[Function]}
-                                              maxStepIndex={0}
-                                              navSchema={
-                                                Array [
-                                                  Object {
-                                                    "index": 0,
-                                                    "primary": true,
-                                                    "substepOf": undefined,
-                                                    "title": "foo-step",
-                                                  },
-                                                  Object {
-                                                    "index": 1,
-                                                    "primary": true,
-                                                    "substepOf": undefined,
-                                                    "title": "bar-step",
-                                                  },
-                                                ]
-                                              }
+                                            <WizardNavItem
+                                              isCurrent={true}
+                                              isDisabled={false}
+                                              key="foo-step"
+                                              onNavItemClick={[Function]}
+                                              step={0}
+                                              text="foo-step"
                                             >
-                                              <WizardNavItem
-                                                isCurrent={true}
-                                                isDisabled={false}
-                                                key="foo-step"
-                                                onNavItemClick={[Function]}
-                                                step={0}
-                                                text="foo-step"
+                                              <li
+                                                className="pf-c-wizard__nav-item"
                                               >
-                                                <li
-                                                  className="pf-c-wizard__nav-item"
+                                                <a
+                                                  aria-current="page"
+                                                  aria-disabled={false}
+                                                  className="pf-c-wizard__nav-link pf-m-current"
+                                                  onClick={[Function]}
                                                 >
-                                                  <a
-                                                    aria-current="page"
-                                                    aria-disabled={false}
-                                                    className="pf-c-wizard__nav-link pf-m-current"
-                                                    onClick={[Function]}
-                                                  >
-                                                    foo-step
-                                                  </a>
-                                                </li>
-                                              </WizardNavItem>
-                                              <WizardNavItem
-                                                isCurrent={false}
-                                                isDisabled={true}
-                                                key="bar-step"
-                                                onNavItemClick={[Function]}
-                                                step={1}
-                                                text="bar-step"
+                                                  foo-step
+                                                </a>
+                                              </li>
+                                            </WizardNavItem>
+                                            <WizardNavItem
+                                              isCurrent={false}
+                                              isDisabled={true}
+                                              key="bar-step"
+                                              onNavItemClick={[Function]}
+                                              step={1}
+                                              text="bar-step"
+                                            >
+                                              <li
+                                                className="pf-c-wizard__nav-item"
                                               >
-                                                <li
-                                                  className="pf-c-wizard__nav-item"
+                                                <a
+                                                  aria-current={false}
+                                                  aria-disabled={true}
+                                                  className="pf-c-wizard__nav-link pf-m-disabled"
+                                                  onClick={[Function]}
+                                                  tabIndex={-1}
                                                 >
-                                                  <a
-                                                    aria-current={false}
-                                                    aria-disabled={true}
-                                                    className="pf-c-wizard__nav-link pf-m-disabled"
-                                                    onClick={[Function]}
-                                                    tabIndex={-1}
+                                                  bar-step
+                                                </a>
+                                              </li>
+                                            </WizardNavItem>
+                                          </Component>
+                                        </WizardNavigation>
+                                      </FormSpy>
+                                    </ol>
+                                  </nav>
+                                </WizardNav>
+                                <WizardStep
+                                  buttonLabels={
+                                    Object {
+                                      "back": "Back",
+                                      "cancel": "Cancel",
+                                      "next": "Next",
+                                      "submit": "Submit",
+                                    }
+                                  }
+                                  disableBack={true}
+                                  fields={
+                                    Array [
+                                      Object {
+                                        "component": "text-field",
+                                        "name": "foo-field",
+                                      },
+                                    ]
+                                  }
+                                  formOptions={
+                                    Object {
+                                      "batch": [Function],
+                                      "blur": [Function],
+                                      "change": [Function],
+                                      "clearOnUnmount": false,
+                                      "clearedValue": undefined,
+                                      "concat": [Function],
+                                      "destroyOnUnregister": false,
+                                      "focus": [Function],
+                                      "getFieldState": [Function],
+                                      "getRegisteredFields": [Function],
+                                      "getState": [Function],
+                                      "handleSubmit": [Function],
+                                      "initialize": [Function],
+                                      "insert": [Function],
+                                      "isValidationPaused": [Function],
+                                      "move": [Function],
+                                      "onCancel": [MockFunction],
+                                      "onReset": undefined,
+                                      "onSubmit": [MockFunction],
+                                      "pauseValidation": [Function],
+                                      "pop": [Function],
+                                      "pristine": true,
+                                      "push": [Function],
+                                      "registerField": [Function],
+                                      "remove": [Function],
+                                      "removeBatch": [Function],
+                                      "renderForm": [Function],
+                                      "reset": [Function],
+                                      "resetFieldState": [Function],
+                                      "resumeValidation": [Function],
+                                      "setConfig": [Function],
+                                      "shift": [Function],
+                                      "submit": [Function],
+                                      "subscribe": [Function],
+                                      "swap": [Function],
+                                      "unshift": [Function],
+                                      "update": [Function],
+                                      "valid": true,
+                                    }
+                                  }
+                                  handleNext={[Function]}
+                                  handlePrev={[Function]}
+                                  name="1"
+                                  nextStep="2"
+                                  title="foo-step"
+                                >
+                                  <WizardBody
+                                    hasBodyPadding={true}
+                                  >
+                                    <main
+                                      className="pf-c-wizard__main"
+                                    >
+                                      <div
+                                        className="pf-c-wizard__main-body"
+                                      >
+                                        <div
+                                          className="pf-c-form"
+                                        >
+                                          <SingleField
+                                            component="text-field"
+                                            key="foo-field"
+                                            name="foo-field"
+                                          >
+                                            <FormConditionWrapper>
+                                              <FormFieldHideWrapper
+                                                hideField={false}
+                                              >
+                                                <FieldWrapper
+                                                  component={[Function]}
+                                                  componentType="text-field"
+                                                  name="foo-field"
+                                                >
+                                                  <TextField
+                                                    name="foo-field"
+                                                    validate={[Function]}
                                                   >
-                                                    bar-step
-                                                  </a>
-                                                </li>
-                                              </WizardNavItem>
-                                            </Component>
-                                          </WizardNavigation>
-                                        </FormSpy>
-                                      </ol>
-                                    </nav>
-                                  </WizardNav>
-                                  <WizardStep
+                                                    <FormGroup
+                                                      id="foo-field"
+                                                      isRequired={false}
+                                                      meta={
+                                                        Object {
+                                                          "active": false,
+                                                          "data": Object {},
+                                                          "dirty": false,
+                                                          "dirtySinceLastSubmit": false,
+                                                          "error": undefined,
+                                                          "initial": undefined,
+                                                          "invalid": false,
+                                                          "length": undefined,
+                                                          "modified": false,
+                                                          "pristine": true,
+                                                          "submitError": undefined,
+                                                          "submitFailed": false,
+                                                          "submitSucceeded": false,
+                                                          "submitting": false,
+                                                          "touched": false,
+                                                          "valid": true,
+                                                          "validating": false,
+                                                          "visited": false,
+                                                        }
+                                                      }
+                                                    >
+                                                      <FormGroup
+                                                        fieldId="foo-field"
+                                                        isRequired={false}
+                                                        isValid={true}
+                                                      >
+                                                        <div
+                                                          className="pf-c-form__group"
+                                                        >
+                                                          <ForwardRef
+                                                            id="foo-field"
+                                                            name="foo-field"
+                                                            onBlur={[Function]}
+                                                            onChange={[Function]}
+                                                            onFocus={[Function]}
+                                                            value=""
+                                                          >
+                                                            <TextInputBase
+                                                              aria-label={null}
+                                                              className=""
+                                                              id="foo-field"
+                                                              innerRef={null}
+                                                              isDisabled={false}
+                                                              isReadOnly={false}
+                                                              isRequired={false}
+                                                              isValid={true}
+                                                              name="foo-field"
+                                                              onBlur={[Function]}
+                                                              onChange={[Function]}
+                                                              onFocus={[Function]}
+                                                              type="text"
+                                                              validated="default"
+                                                              value=""
+                                                            >
+                                                              <input
+                                                                aria-invalid={false}
+                                                                aria-label={null}
+                                                                className="pf-c-form-control"
+                                                                disabled={false}
+                                                                id="foo-field"
+                                                                name="foo-field"
+                                                                onBlur={[Function]}
+                                                                onChange={[Function]}
+                                                                onFocus={[Function]}
+                                                                readOnly={false}
+                                                                required={false}
+                                                                type="text"
+                                                                value=""
+                                                              />
+                                                            </TextInputBase>
+                                                          </ForwardRef>
+                                                        </div>
+                                                      </FormGroup>
+                                                    </FormGroup>
+                                                  </TextField>
+                                                </FieldWrapper>
+                                              </FormFieldHideWrapper>
+                                            </FormConditionWrapper>
+                                          </SingleField>
+                                        </div>
+                                      </div>
+                                    </main>
+                                  </WizardBody>
+                                  <WizardStepButtons
                                     buttonLabels={
                                       Object {
                                         "back": "Back",
@@ -788,14 +831,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                       }
                                     }
                                     disableBack={true}
-                                    fields={
-                                      Array [
-                                        Object {
-                                          "component": "text-field",
-                                          "name": "foo-field",
-                                        },
-                                      ]
-                                    }
                                     formOptions={
                                       Object {
                                         "batch": [Function],
@@ -842,187 +877,53 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                     handlePrev={[Function]}
                                     name="1"
                                     nextStep="2"
-                                    title="foo-step"
                                   >
-                                    <WizardBody
-                                      hasBodyPadding={true}
+                                    <footer
+                                      className="pf-c-wizard__footer "
                                     >
-                                      <main
-                                        className="pf-c-wizard__main"
+                                      <NextButton
+                                        batch={[Function]}
+                                        blur={[Function]}
+                                        change={[Function]}
+                                        clearOnUnmount={false}
+                                        concat={[Function]}
+                                        destroyOnUnregister={false}
+                                        focus={[Function]}
+                                        getFieldState={[Function]}
+                                        getRegisteredFields={[Function]}
+                                        getState={[Function]}
+                                        handleNext={[Function]}
+                                        handleSubmit={[Function]}
+                                        initialize={[Function]}
+                                        insert={[Function]}
+                                        isValidationPaused={[Function]}
+                                        move={[Function]}
+                                        nextLabel="Next"
+                                        nextStep="2"
+                                        onCancel={[MockFunction]}
+                                        onSubmit={[MockFunction]}
+                                        pauseValidation={[Function]}
+                                        pop={[Function]}
+                                        pristine={true}
+                                        push={[Function]}
+                                        registerField={[Function]}
+                                        remove={[Function]}
+                                        removeBatch={[Function]}
+                                        renderForm={[Function]}
+                                        reset={[Function]}
+                                        resetFieldState={[Function]}
+                                        resumeValidation={[Function]}
+                                        setConfig={[Function]}
+                                        shift={[Function]}
+                                        submit={[Function]}
+                                        submitLabel="Submit"
+                                        subscribe={[Function]}
+                                        swap={[Function]}
+                                        unshift={[Function]}
+                                        update={[Function]}
+                                        valid={true}
                                       >
-                                        <div
-                                          className="pf-c-wizard__main-body"
-                                        >
-                                          <div
-                                            className="pf-c-form"
-                                          >
-                                            <SingleField
-                                              component="text-field"
-                                              key="foo-field"
-                                              name="foo-field"
-                                            >
-                                              <FormConditionWrapper>
-                                                <FormFieldHideWrapper
-                                                  hideField={false}
-                                                >
-                                                  <FieldWrapper
-                                                    component={[Function]}
-                                                    componentType="text-field"
-                                                    name="foo-field"
-                                                  >
-                                                    <TextField
-                                                      name="foo-field"
-                                                      validate={[Function]}
-                                                    >
-                                                      <FormGroup
-                                                        id="foo-field"
-                                                        isRequired={false}
-                                                        meta={
-                                                          Object {
-                                                            "active": false,
-                                                            "data": Object {},
-                                                            "dirty": false,
-                                                            "dirtySinceLastSubmit": false,
-                                                            "error": undefined,
-                                                            "initial": undefined,
-                                                            "invalid": false,
-                                                            "length": undefined,
-                                                            "modified": false,
-                                                            "pristine": true,
-                                                            "submitError": undefined,
-                                                            "submitFailed": false,
-                                                            "submitSucceeded": false,
-                                                            "submitting": false,
-                                                            "touched": false,
-                                                            "valid": true,
-                                                            "validating": false,
-                                                            "visited": false,
-                                                          }
-                                                        }
-                                                      >
-                                                        <FormGroup
-                                                          fieldId="foo-field"
-                                                          isRequired={false}
-                                                          isValid={true}
-                                                        >
-                                                          <div
-                                                            className="pf-c-form__group"
-                                                          >
-                                                            <ForwardRef
-                                                              id="foo-field"
-                                                              name="foo-field"
-                                                              onBlur={[Function]}
-                                                              onChange={[Function]}
-                                                              onFocus={[Function]}
-                                                              value=""
-                                                            >
-                                                              <TextInputBase
-                                                                aria-label={null}
-                                                                className=""
-                                                                id="foo-field"
-                                                                innerRef={null}
-                                                                isDisabled={false}
-                                                                isReadOnly={false}
-                                                                isRequired={false}
-                                                                isValid={true}
-                                                                name="foo-field"
-                                                                onBlur={[Function]}
-                                                                onChange={[Function]}
-                                                                onFocus={[Function]}
-                                                                type="text"
-                                                                validated="default"
-                                                                value=""
-                                                              >
-                                                                <input
-                                                                  aria-invalid={false}
-                                                                  aria-label={null}
-                                                                  className="pf-c-form-control"
-                                                                  disabled={false}
-                                                                  id="foo-field"
-                                                                  name="foo-field"
-                                                                  onBlur={[Function]}
-                                                                  onChange={[Function]}
-                                                                  onFocus={[Function]}
-                                                                  readOnly={false}
-                                                                  required={false}
-                                                                  type="text"
-                                                                  value=""
-                                                                />
-                                                              </TextInputBase>
-                                                            </ForwardRef>
-                                                          </div>
-                                                        </FormGroup>
-                                                      </FormGroup>
-                                                    </TextField>
-                                                  </FieldWrapper>
-                                                </FormFieldHideWrapper>
-                                              </FormConditionWrapper>
-                                            </SingleField>
-                                          </div>
-                                        </div>
-                                      </main>
-                                    </WizardBody>
-                                    <WizardStepButtons
-                                      buttonLabels={
-                                        Object {
-                                          "back": "Back",
-                                          "cancel": "Cancel",
-                                          "next": "Next",
-                                          "submit": "Submit",
-                                        }
-                                      }
-                                      disableBack={true}
-                                      formOptions={
-                                        Object {
-                                          "batch": [Function],
-                                          "blur": [Function],
-                                          "change": [Function],
-                                          "clearOnUnmount": false,
-                                          "clearedValue": undefined,
-                                          "concat": [Function],
-                                          "destroyOnUnregister": false,
-                                          "focus": [Function],
-                                          "getFieldState": [Function],
-                                          "getRegisteredFields": [Function],
-                                          "getState": [Function],
-                                          "handleSubmit": [Function],
-                                          "initialize": [Function],
-                                          "insert": [Function],
-                                          "isValidationPaused": [Function],
-                                          "move": [Function],
-                                          "onCancel": [MockFunction],
-                                          "onReset": undefined,
-                                          "onSubmit": [MockFunction],
-                                          "pauseValidation": [Function],
-                                          "pop": [Function],
-                                          "pristine": true,
-                                          "push": [Function],
-                                          "registerField": [Function],
-                                          "remove": [Function],
-                                          "removeBatch": [Function],
-                                          "renderForm": [Function],
-                                          "reset": [Function],
-                                          "resetFieldState": [Function],
-                                          "resumeValidation": [Function],
-                                          "setConfig": [Function],
-                                          "shift": [Function],
-                                          "submit": [Function],
-                                          "subscribe": [Function],
-                                          "swap": [Function],
-                                          "unshift": [Function],
-                                          "update": [Function],
-                                          "valid": true,
-                                        }
-                                      }
-                                      handleNext={[Function]}
-                                      handlePrev={[Function]}
-                                      name="1"
-                                      nextStep="2"
-                                    >
-                                      <footer
-                                        className="pf-c-wizard__footer "
-                                      >
-                                        <NextButton
+                                        <SimpleNext
                                           batch={[Function]}
                                           blur={[Function]}
                                           change={[Function]}
@@ -1034,7 +935,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                           getRegisteredFields={[Function]}
                                           getState={[Function]}
                                           handleNext={[Function]}
-                                          handleSubmit={[Function]}
                                           initialize={[Function]}
                                           insert={[Function]}
                                           isValidationPaused={[Function]}
@@ -1057,205 +957,163 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                           setConfig={[Function]}
                                           shift={[Function]}
                                           submit={[Function]}
-                                          submitLabel="Submit"
                                           subscribe={[Function]}
                                           swap={[Function]}
                                           unshift={[Function]}
                                           update={[Function]}
                                           valid={true}
                                         >
-                                          <SimpleNext
-                                            batch={[Function]}
-                                            blur={[Function]}
-                                            change={[Function]}
-                                            clearOnUnmount={false}
-                                            concat={[Function]}
-                                            destroyOnUnregister={false}
-                                            focus={[Function]}
-                                            getFieldState={[Function]}
-                                            getRegisteredFields={[Function]}
-                                            getState={[Function]}
-                                            handleNext={[Function]}
-                                            initialize={[Function]}
-                                            insert={[Function]}
-                                            isValidationPaused={[Function]}
-                                            move={[Function]}
-                                            nextLabel="Next"
-                                            nextStep="2"
-                                            onCancel={[MockFunction]}
-                                            onSubmit={[MockFunction]}
-                                            pauseValidation={[Function]}
-                                            pop={[Function]}
-                                            pristine={true}
-                                            push={[Function]}
-                                            registerField={[Function]}
-                                            remove={[Function]}
-                                            removeBatch={[Function]}
-                                            renderForm={[Function]}
-                                            reset={[Function]}
-                                            resetFieldState={[Function]}
-                                            resumeValidation={[Function]}
-                                            setConfig={[Function]}
-                                            shift={[Function]}
-                                            submit={[Function]}
-                                            subscribe={[Function]}
-                                            swap={[Function]}
-                                            unshift={[Function]}
-                                            update={[Function]}
-                                            valid={true}
+                                          <Component
+                                            isDisabled={false}
+                                            onClick={[Function]}
+                                            type="button"
+                                            variant="primary"
                                           >
-                                            <Component
-                                              isDisabled={false}
-                                              onClick={[Function]}
-                                              type="button"
-                                              variant="primary"
+                                            <ComponentWithOuia
+                                              component={[Function]}
+                                              componentProps={
+                                                Object {
+                                                  "children": "Next",
+                                                  "isDisabled": false,
+                                                  "onClick": [Function],
+                                                  "type": "button",
+                                                  "variant": "primary",
+                                                }
+                                              }
+                                              consumerContext={null}
                                             >
-                                              <ComponentWithOuia
-                                                component={[Function]}
-                                                componentProps={
+                                              <Button
+                                                isDisabled={false}
+                                                onClick={[Function]}
+                                                ouiaContext={
                                                   Object {
-                                                    "children": "Next",
-                                                    "isDisabled": false,
-                                                    "onClick": [Function],
-                                                    "type": "button",
-                                                    "variant": "primary",
+                                                    "isOuia": false,
+                                                    "ouiaId": null,
                                                   }
                                                 }
-                                                consumerContext={null}
+                                                type="button"
+                                                variant="primary"
                                               >
-                                                <Button
-                                                  isDisabled={false}
+                                                <button
+                                                  aria-disabled={null}
+                                                  aria-label={null}
+                                                  className="pf-c-button pf-m-primary"
+                                                  disabled={false}
                                                   onClick={[Function]}
-                                                  ouiaContext={
-                                                    Object {
-                                                      "isOuia": false,
-                                                      "ouiaId": null,
-                                                    }
-                                                  }
+                                                  tabIndex={null}
                                                   type="button"
-                                                  variant="primary"
                                                 >
-                                                  <button
-                                                    aria-disabled={null}
-                                                    aria-label={null}
-                                                    className="pf-c-button pf-m-primary"
-                                                    disabled={false}
-                                                    onClick={[Function]}
-                                                    tabIndex={null}
-                                                    type="button"
-                                                  >
-                                                    Next
-                                                  </button>
-                                                </Button>
-                                              </ComponentWithOuia>
-                                            </Component>
-                                          </SimpleNext>
-                                        </NextButton>
-                                        <Component
-                                          isDisabled={true}
-                                          onClick={[Function]}
-                                          type="button"
-                                          variant="secondary"
+                                                  Next
+                                                </button>
+                                              </Button>
+                                            </ComponentWithOuia>
+                                          </Component>
+                                        </SimpleNext>
+                                      </NextButton>
+                                      <Component
+                                        isDisabled={true}
+                                        onClick={[Function]}
+                                        type="button"
+                                        variant="secondary"
+                                      >
+                                        <ComponentWithOuia
+                                          component={[Function]}
+                                          componentProps={
+                                            Object {
+                                              "children": "Back",
+                                              "isDisabled": true,
+                                              "onClick": [Function],
+                                              "type": "button",
+                                              "variant": "secondary",
+                                            }
+                                          }
+                                          consumerContext={null}
                                         >
-                                          <ComponentWithOuia
-                                            component={[Function]}
-                                            componentProps={
+                                          <Button
+                                            isDisabled={true}
+                                            onClick={[Function]}
+                                            ouiaContext={
                                               Object {
-                                                "children": "Back",
-                                                "isDisabled": true,
-                                                "onClick": [Function],
-                                                "type": "button",
-                                                "variant": "secondary",
+                                                "isOuia": false,
+                                                "ouiaId": null,
                                               }
                                             }
-                                            consumerContext={null}
+                                            type="button"
+                                            variant="secondary"
                                           >
-                                            <Button
-                                              isDisabled={true}
+                                            <button
+                                              aria-disabled={null}
+                                              aria-label={null}
+                                              className="pf-c-button pf-m-secondary"
+                                              disabled={true}
                                               onClick={[Function]}
-                                              ouiaContext={
-                                                Object {
-                                                  "isOuia": false,
-                                                  "ouiaId": null,
-                                                }
-                                              }
+                                              tabIndex={null}
                                               type="button"
-                                              variant="secondary"
                                             >
-                                              <button
-                                                aria-disabled={null}
-                                                aria-label={null}
-                                                className="pf-c-button pf-m-secondary"
-                                                disabled={true}
-                                                onClick={[Function]}
-                                                tabIndex={null}
-                                                type="button"
-                                              >
-                                                Back
-                                              </button>
-                                            </Button>
-                                          </ComponentWithOuia>
-                                        </Component>
-                                        <Component
-                                          onClick={[Function]}
-                                          type="button"
-                                          variant="link"
+                                              Back
+                                            </button>
+                                          </Button>
+                                        </ComponentWithOuia>
+                                      </Component>
+                                      <Component
+                                        onClick={[Function]}
+                                        type="button"
+                                        variant="link"
+                                      >
+                                        <ComponentWithOuia
+                                          component={[Function]}
+                                          componentProps={
+                                            Object {
+                                              "children": "Cancel",
+                                              "onClick": [Function],
+                                              "type": "button",
+                                              "variant": "link",
+                                            }
+                                          }
+                                          consumerContext={null}
                                         >
-                                          <ComponentWithOuia
-                                            component={[Function]}
-                                            componentProps={
+                                          <Button
+                                            onClick={[Function]}
+                                            ouiaContext={
                                               Object {
-                                                "children": "Cancel",
-                                                "onClick": [Function],
-                                                "type": "button",
-                                                "variant": "link",
+                                                "isOuia": false,
+                                                "ouiaId": null,
                                               }
                                             }
-                                            consumerContext={null}
+                                            type="button"
+                                            variant="link"
                                           >
-                                            <Button
+                                            <button
+                                              aria-disabled={null}
+                                              aria-label={null}
+                                              className="pf-c-button pf-m-link"
+                                              disabled={false}
                                               onClick={[Function]}
-                                              ouiaContext={
-                                                Object {
-                                                  "isOuia": false,
-                                                  "ouiaId": null,
-                                                }
-                                              }
+                                              tabIndex={null}
                                               type="button"
-                                              variant="link"
                                             >
-                                              <button
-                                                aria-disabled={null}
-                                                aria-label={null}
-                                                className="pf-c-button pf-m-link"
-                                                disabled={false}
-                                                onClick={[Function]}
-                                                tabIndex={null}
-                                                type="button"
-                                              >
-                                                Cancel
-                                              </button>
-                                            </Button>
-                                          </ComponentWithOuia>
-                                        </Component>
-                                      </footer>
-                                    </WizardStepButtons>
-                                  </WizardStep>
-                                </div>
+                                              Cancel
+                                            </button>
+                                          </Button>
+                                        </ComponentWithOuia>
+                                      </Component>
+                                    </footer>
+                                  </WizardStepButtons>
+                                </WizardStep>
                               </div>
-                            </Modal>
-                          </Wizard>
-                        </WizardFunction>
-                      </FieldWrapper>
-                    </FormFieldHideWrapper>
-                  </FormConditionWrapper>
-                </SingleField>
-              </form>
-            </Form>
-          </FormTemplate>
-        </PF4FormTemplate>
-      </FormTemplate>
-    </FormContent>
+                            </div>
+                          </Modal>
+                        </Wizard>
+                      </WizardFunction>
+                    </FieldWrapper>
+                  </FormFieldHideWrapper>
+                </FormConditionWrapper>
+              </SingleField>
+            </form>
+          </Form>
+        </FormTemplate>
+      </PF4FormTemplate>
+    </FormTemplate>
   </ReactFinalForm>
 </FormRenderer>
 `;
@@ -1354,8 +1212,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
       }
     }
   >
-    <FormContent
-      Template={[Function]}
+    <FormTemplate
       formFields={
         Array [
           <SingleField
@@ -1424,80 +1281,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
           ],
         }
       }
-      value={
-        Object {
-          "actionMapper": undefined,
-          "componentMapper": Object {
-            "checkbox": [Function],
-            "date-picker": [Function],
-            "dual-list-select": [Function],
-            "field-array": [Function],
-            "plain-text": [Function],
-            "radio": [Function],
-            "select": [Function],
-            "sub-form": [Function],
-            "switch": [Function],
-            "tabs": [Function],
-            "text-field": [Function],
-            "textarea": [Function],
-            "time-picker": [Function],
-            "wizard": [Function],
-          },
-          "formOptions": Object {
-            "batch": [Function],
-            "blur": [Function],
-            "change": [Function],
-            "clearOnUnmount": false,
-            "clearedValue": undefined,
-            "concat": [Function],
-            "destroyOnUnregister": false,
-            "focus": [Function],
-            "getFieldState": [Function],
-            "getRegisteredFields": [Function],
-            "getState": [Function],
-            "handleSubmit": [Function],
-            "initialize": [Function],
-            "insert": [Function],
-            "isValidationPaused": [Function],
-            "move": [Function],
-            "onCancel": [MockFunction],
-            "onReset": undefined,
-            "onSubmit": [MockFunction],
-            "pauseValidation": [Function],
-            "pop": [Function],
-            "pristine": true,
-            "push": [Function],
-            "registerField": [Function],
-            "remove": [Function],
-            "removeBatch": [Function],
-            "renderForm": [Function],
-            "reset": [Function],
-            "resetFieldState": [Function],
-            "resumeValidation": [Function],
-            "setConfig": [Function],
-            "shift": [Function],
-            "submit": [Function],
-            "subscribe": [Function],
-            "swap": [Function],
-            "unshift": [Function],
-            "update": [Function],
-            "valid": true,
-          },
-          "validatorMapper": Object {
-            "exact-length-validator": [Function],
-            "max-length-validator": [Function],
-            "max-number-value": [Function],
-            "min-items-validator": [Function],
-            "min-length-validator": [Function],
-            "min-number-value": [Function],
-            "pattern-validator": [Function],
-            "required-validator": [Function],
-            "url-validator": [Function],
-          },
-        }
-      }
     >
-      <FormTemplate
+      <PF4FormTemplate
         formFields={
           Array [
             <SingleField
@@ -1566,8 +1351,15 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
             ],
           }
         }
+        showFormControls={false}
       >
-        <PF4FormTemplate
+        <FormTemplate
+          Button={[Function]}
+          ButtonGroup={[Function]}
+          Description={[Function]}
+          FormWrapper={[Function]}
+          Title={[Function]}
+          disableSubmit={Array []}
           formFields={
             Array [
               <SingleField
@@ -1638,129 +1430,82 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
           }
           showFormControls={false}
         >
-          <FormTemplate
-            Button={[Function]}
-            ButtonGroup={[Function]}
-            Description={[Function]}
-            FormWrapper={[Function]}
-            Title={[Function]}
-            disableSubmit={Array []}
-            formFields={
-              Array [
-                <SingleField
-                  component="wizard"
-                  fields={
-                    Array [
-                      Object {
-                        "fields": Array [
-                          Object {
-                            "component": "text-field",
-                            "name": "foo-field",
-                          },
-                        ],
-                        "name": "1",
-                        "nextStep": "2",
-                        "title": "foo-step",
-                      },
-                      Object {
-                        "fields": Array [
-                          Object {
-                            "component": "text-field",
-                            "name": "bar-field",
-                          },
-                        ],
-                        "name": "2",
-                        "title": "bar-step",
-                      },
-                    ]
-                  }
-                  inModal={true}
-                  name="wizard"
-                />,
-              ]
-            }
-            schema={
-              Object {
-                "fields": Array [
-                  Object {
-                    "component": "wizard",
-                    "fields": Array [
-                      Object {
-                        "fields": Array [
-                          Object {
-                            "component": "text-field",
-                            "name": "foo-field",
-                          },
-                        ],
-                        "name": "1",
-                        "nextStep": "2",
-                        "title": "foo-step",
-                      },
-                      Object {
-                        "fields": Array [
-                          Object {
-                            "component": "text-field",
-                            "name": "bar-field",
-                          },
-                        ],
-                        "name": "2",
-                        "title": "bar-step",
-                      },
-                    ],
-                    "inModal": true,
-                    "name": "wizard",
-                  },
-                ],
-              }
-            }
-            showFormControls={false}
+          <Form
+            onSubmit={[Function]}
           >
-            <Form
+            <form
+              className="pf-c-form"
+              noValidate={true}
               onSubmit={[Function]}
             >
-              <form
-                className="pf-c-form"
-                noValidate={true}
-                onSubmit={[Function]}
+              <SingleField
+                component="wizard"
+                fields={
+                  Array [
+                    Object {
+                      "fields": Array [
+                        Object {
+                          "component": "text-field",
+                          "name": "foo-field",
+                        },
+                      ],
+                      "name": "1",
+                      "nextStep": "2",
+                      "title": "foo-step",
+                    },
+                    Object {
+                      "fields": Array [
+                        Object {
+                          "component": "text-field",
+                          "name": "bar-field",
+                        },
+                      ],
+                      "name": "2",
+                      "title": "bar-step",
+                    },
+                  ]
+                }
+                inModal={true}
+                key="wizard"
+                name="wizard"
               >
-                <SingleField
-                  component="wizard"
-                  fields={
-                    Array [
-                      Object {
-                        "fields": Array [
+                <FormConditionWrapper>
+                  <FormFieldHideWrapper
+                    hideField={false}
+                  >
+                    <FieldWrapper
+                      component={[Function]}
+                      componentType="wizard"
+                      fields={
+                        Array [
                           Object {
-                            "component": "text-field",
-                            "name": "foo-field",
+                            "fields": Array [
+                              Object {
+                                "component": "text-field",
+                                "name": "foo-field",
+                              },
+                            ],
+                            "name": "1",
+                            "nextStep": "2",
+                            "title": "foo-step",
                           },
-                        ],
-                        "name": "1",
-                        "nextStep": "2",
-                        "title": "foo-step",
-                      },
-                      Object {
-                        "fields": Array [
                           Object {
-                            "component": "text-field",
-                            "name": "bar-field",
+                            "fields": Array [
+                              Object {
+                                "component": "text-field",
+                                "name": "bar-field",
+                              },
+                            ],
+                            "name": "2",
+                            "title": "bar-step",
                           },
-                        ],
-                        "name": "2",
-                        "title": "bar-step",
-                      },
-                    ]
-                  }
-                  inModal={true}
-                  key="wizard"
-                  name="wizard"
-                >
-                  <FormConditionWrapper>
-                    <FormFieldHideWrapper
-                      hideField={false}
+                        ]
+                      }
+                      inModal={true}
+                      name="wizard"
                     >
-                      <FieldWrapper
-                        component={[Function]}
-                        componentType="wizard"
+                      <WizardFunction
+                        buttonLabels={Object {}}
                         fields={
                           Array [
                             Object {
@@ -1788,9 +1533,17 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                         }
                         inModal={true}
                         name="wizard"
+                        validate={[Function]}
                       >
-                        <WizardFunction
-                          buttonLabels={Object {}}
+                        <Wizard
+                          buttonLabels={
+                            Object {
+                              "back": "Back",
+                              "cancel": "Cancel",
+                              "next": "Next",
+                              "submit": "Submit",
+                            }
+                          }
                           fields={
                             Array [
                               Object {
@@ -1820,46 +1573,112 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                           name="wizard"
                           validate={[Function]}
                         >
-                          <Wizard
-                            buttonLabels={
-                              Object {
-                                "back": "Back",
-                                "cancel": "Cancel",
-                                "next": "Next",
-                                "submit": "Submit",
-                              }
-                            }
-                            fields={
-                              Array [
-                                Object {
-                                  "fields": Array [
-                                    Object {
-                                      "component": "text-field",
-                                      "name": "foo-field",
-                                    },
-                                  ],
-                                  "name": "1",
-                                  "nextStep": "2",
-                                  "title": "foo-step",
-                                },
-                                Object {
-                                  "fields": Array [
-                                    Object {
-                                      "component": "text-field",
-                                      "name": "bar-field",
-                                    },
-                                  ],
-                                  "name": "2",
-                                  "title": "bar-step",
-                                },
-                              ]
+                          <Modal
+                            container={
+                              <div>
+                                <div
+                                  class="pf-c-backdrop"
+                                >
+                                  <div
+                                    class="pf-l-bullseye"
+                                  >
+                                    <div
+                                      aria-modal="true"
+                                      class="pf-c-wizard    "
+                                      role="dialog"
+                                    >
+                                      <div
+                                        class="pf-c-wizard__outer-wrap"
+                                      >
+                                        <nav
+                                          class="pf-c-wizard__nav"
+                                        >
+                                          <ol
+                                            class="pf-c-wizard__nav-list"
+                                          >
+                                            <li
+                                              class="pf-c-wizard__nav-item"
+                                            >
+                                              <a
+                                                aria-current="page"
+                                                aria-disabled="false"
+                                                class="pf-c-wizard__nav-link pf-m-current"
+                                              >
+                                                foo-step
+                                              </a>
+                                            </li>
+                                            <li
+                                              class="pf-c-wizard__nav-item"
+                                            >
+                                              <a
+                                                aria-current="false"
+                                                aria-disabled="true"
+                                                class="pf-c-wizard__nav-link pf-m-disabled"
+                                                tabindex="-1"
+                                              >
+                                                bar-step
+                                              </a>
+                                            </li>
+                                          </ol>
+                                        </nav>
+                                        <main
+                                          class="pf-c-wizard__main"
+                                        >
+                                          <div
+                                            class="pf-c-wizard__main-body"
+                                          >
+                                            <div
+                                              class="pf-c-form"
+                                            >
+                                              <div
+                                                class="pf-c-form__group"
+                                              >
+                                                <input
+                                                  aria-invalid="false"
+                                                  class="pf-c-form-control"
+                                                  id="foo-field"
+                                                  name="foo-field"
+                                                  type="text"
+                                                  value=""
+                                                />
+                                                
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </main>
+                                        <footer
+                                          class="pf-c-wizard__footer "
+                                        >
+                                          <button
+                                            class="pf-c-button pf-m-primary"
+                                            type="button"
+                                          >
+                                            Next
+                                          </button>
+                                          <button
+                                            class="pf-c-button pf-m-secondary"
+                                            disabled=""
+                                            type="button"
+                                          >
+                                            Back
+                                          </button>
+                                          <button
+                                            class="pf-c-button pf-m-link"
+                                            type="button"
+                                          >
+                                            Cancel
+                                          </button>
+                                        </footer>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             }
                             inModal={true}
-                            name="wizard"
-                            validate={[Function]}
                           >
-                            <Modal
-                              container={
+                            <Portal
+                              containerInfo={
                                 <div>
                                   <div
                                     class="pf-c-backdrop"
@@ -1960,137 +1779,99 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                   </div>
                                 </div>
                               }
-                              inModal={true}
                             >
-                              <Portal
-                                containerInfo={
-                                  <div>
+                              <Backdrop>
+                                <div
+                                  className="pf-c-backdrop"
+                                >
+                                  <Bullseye>
                                     <div
-                                      class="pf-c-backdrop"
+                                      className="pf-l-bullseye"
                                     >
                                       <div
-                                        class="pf-l-bullseye"
+                                        aria-modal="true"
+                                        className="pf-c-wizard    "
+                                        onKeyDown={[Function]}
+                                        role="dialog"
                                       >
                                         <div
-                                          aria-modal="true"
-                                          class="pf-c-wizard    "
-                                          role="dialog"
+                                          className="pf-c-wizard__outer-wrap"
                                         >
-                                          <div
-                                            class="pf-c-wizard__outer-wrap"
-                                          >
+                                          <WizardNav>
                                             <nav
-                                              class="pf-c-wizard__nav"
+                                              className="pf-c-wizard__nav"
                                             >
                                               <ol
-                                                class="pf-c-wizard__nav-list"
+                                                className="pf-c-wizard__nav-list"
                                               >
-                                                <li
-                                                  class="pf-c-wizard__nav-item"
-                                                >
-                                                  <a
-                                                    aria-current="page"
-                                                    aria-disabled="false"
-                                                    class="pf-c-wizard__nav-link pf-m-current"
+                                                <FormSpy>
+                                                  <WizardNavigation
+                                                    activeStepIndex={0}
+                                                    formOptions={
+                                                      Object {
+                                                        "batch": [Function],
+                                                        "blur": [Function],
+                                                        "change": [Function],
+                                                        "clearOnUnmount": false,
+                                                        "clearedValue": undefined,
+                                                        "concat": [Function],
+                                                        "destroyOnUnregister": false,
+                                                        "focus": [Function],
+                                                        "getFieldState": [Function],
+                                                        "getRegisteredFields": [Function],
+                                                        "getState": [Function],
+                                                        "handleSubmit": [Function],
+                                                        "initialize": [Function],
+                                                        "insert": [Function],
+                                                        "isValidationPaused": [Function],
+                                                        "move": [Function],
+                                                        "onCancel": [MockFunction],
+                                                        "onReset": undefined,
+                                                        "onSubmit": [MockFunction],
+                                                        "pauseValidation": [Function],
+                                                        "pop": [Function],
+                                                        "pristine": true,
+                                                        "push": [Function],
+                                                        "registerField": [Function],
+                                                        "remove": [Function],
+                                                        "removeBatch": [Function],
+                                                        "renderForm": [Function],
+                                                        "reset": [Function],
+                                                        "resetFieldState": [Function],
+                                                        "resumeValidation": [Function],
+                                                        "setConfig": [Function],
+                                                        "shift": [Function],
+                                                        "submit": [Function],
+                                                        "subscribe": [Function],
+                                                        "swap": [Function],
+                                                        "unshift": [Function],
+                                                        "update": [Function],
+                                                        "valid": true,
+                                                      }
+                                                    }
+                                                    isDynamic={false}
+                                                    jumpToStep={[Function]}
+                                                    maxStepIndex={0}
+                                                    navSchema={
+                                                      Array [
+                                                        Object {
+                                                          "index": 0,
+                                                          "primary": true,
+                                                          "substepOf": undefined,
+                                                          "title": "foo-step",
+                                                        },
+                                                        Object {
+                                                          "index": 1,
+                                                          "primary": true,
+                                                          "substepOf": undefined,
+                                                          "title": "bar-step",
+                                                        },
+                                                      ]
+                                                    }
+                                                    setPrevSteps={[Function]}
+                                                    values={Object {}}
                                                   >
-                                                    foo-step
-                                                  </a>
-                                                </li>
-                                                <li
-                                                  class="pf-c-wizard__nav-item"
-                                                >
-                                                  <a
-                                                    aria-current="false"
-                                                    aria-disabled="true"
-                                                    class="pf-c-wizard__nav-link pf-m-disabled"
-                                                    tabindex="-1"
-                                                  >
-                                                    bar-step
-                                                  </a>
-                                                </li>
-                                              </ol>
-                                            </nav>
-                                            <main
-                                              class="pf-c-wizard__main"
-                                            >
-                                              <div
-                                                class="pf-c-wizard__main-body"
-                                              >
-                                                <div
-                                                  class="pf-c-form"
-                                                >
-                                                  <div
-                                                    class="pf-c-form__group"
-                                                  >
-                                                    <input
-                                                      aria-invalid="false"
-                                                      class="pf-c-form-control"
-                                                      id="foo-field"
-                                                      name="foo-field"
-                                                      type="text"
-                                                      value=""
-                                                    />
-                                                    
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </main>
-                                            <footer
-                                              class="pf-c-wizard__footer "
-                                            >
-                                              <button
-                                                class="pf-c-button pf-m-primary"
-                                                type="button"
-                                              >
-                                                Next
-                                              </button>
-                                              <button
-                                                class="pf-c-button pf-m-secondary"
-                                                disabled=""
-                                                type="button"
-                                              >
-                                                Back
-                                              </button>
-                                              <button
-                                                class="pf-c-button pf-m-link"
-                                                type="button"
-                                              >
-                                                Cancel
-                                              </button>
-                                            </footer>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                }
-                              >
-                                <Backdrop>
-                                  <div
-                                    className="pf-c-backdrop"
-                                  >
-                                    <Bullseye>
-                                      <div
-                                        className="pf-l-bullseye"
-                                      >
-                                        <div
-                                          aria-modal="true"
-                                          className="pf-c-wizard    "
-                                          onKeyDown={[Function]}
-                                          role="dialog"
-                                        >
-                                          <div
-                                            className="pf-c-wizard__outer-wrap"
-                                          >
-                                            <WizardNav>
-                                              <nav
-                                                className="pf-c-wizard__nav"
-                                              >
-                                                <ol
-                                                  className="pf-c-wizard__nav-list"
-                                                >
-                                                  <FormSpy>
-                                                    <WizardNavigation
+                                                    <Component
                                                       activeStepIndex={0}
                                                       formOptions={
                                                         Object {
@@ -2134,7 +1915,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                           "valid": true,
                                                         }
                                                       }
-                                                      isDynamic={false}
                                                       jumpToStep={[Function]}
                                                       maxStepIndex={0}
                                                       navSchema={
@@ -2153,122 +1933,241 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                           },
                                                         ]
                                                       }
-                                                      setPrevSteps={[Function]}
-                                                      values={Object {}}
                                                     >
-                                                      <Component
-                                                        activeStepIndex={0}
-                                                        formOptions={
-                                                          Object {
-                                                            "batch": [Function],
-                                                            "blur": [Function],
-                                                            "change": [Function],
-                                                            "clearOnUnmount": false,
-                                                            "clearedValue": undefined,
-                                                            "concat": [Function],
-                                                            "destroyOnUnregister": false,
-                                                            "focus": [Function],
-                                                            "getFieldState": [Function],
-                                                            "getRegisteredFields": [Function],
-                                                            "getState": [Function],
-                                                            "handleSubmit": [Function],
-                                                            "initialize": [Function],
-                                                            "insert": [Function],
-                                                            "isValidationPaused": [Function],
-                                                            "move": [Function],
-                                                            "onCancel": [MockFunction],
-                                                            "onReset": undefined,
-                                                            "onSubmit": [MockFunction],
-                                                            "pauseValidation": [Function],
-                                                            "pop": [Function],
-                                                            "pristine": true,
-                                                            "push": [Function],
-                                                            "registerField": [Function],
-                                                            "remove": [Function],
-                                                            "removeBatch": [Function],
-                                                            "renderForm": [Function],
-                                                            "reset": [Function],
-                                                            "resetFieldState": [Function],
-                                                            "resumeValidation": [Function],
-                                                            "setConfig": [Function],
-                                                            "shift": [Function],
-                                                            "submit": [Function],
-                                                            "subscribe": [Function],
-                                                            "swap": [Function],
-                                                            "unshift": [Function],
-                                                            "update": [Function],
-                                                            "valid": true,
-                                                          }
-                                                        }
-                                                        jumpToStep={[Function]}
-                                                        maxStepIndex={0}
-                                                        navSchema={
-                                                          Array [
-                                                            Object {
-                                                              "index": 0,
-                                                              "primary": true,
-                                                              "substepOf": undefined,
-                                                              "title": "foo-step",
-                                                            },
-                                                            Object {
-                                                              "index": 1,
-                                                              "primary": true,
-                                                              "substepOf": undefined,
-                                                              "title": "bar-step",
-                                                            },
-                                                          ]
-                                                        }
+                                                      <WizardNavItem
+                                                        isCurrent={true}
+                                                        isDisabled={false}
+                                                        key="foo-step"
+                                                        onNavItemClick={[Function]}
+                                                        step={0}
+                                                        text="foo-step"
                                                       >
-                                                        <WizardNavItem
-                                                          isCurrent={true}
-                                                          isDisabled={false}
-                                                          key="foo-step"
-                                                          onNavItemClick={[Function]}
-                                                          step={0}
-                                                          text="foo-step"
+                                                        <li
+                                                          className="pf-c-wizard__nav-item"
                                                         >
-                                                          <li
-                                                            className="pf-c-wizard__nav-item"
+                                                          <a
+                                                            aria-current="page"
+                                                            aria-disabled={false}
+                                                            className="pf-c-wizard__nav-link pf-m-current"
+                                                            onClick={[Function]}
                                                           >
-                                                            <a
-                                                              aria-current="page"
-                                                              aria-disabled={false}
-                                                              className="pf-c-wizard__nav-link pf-m-current"
-                                                              onClick={[Function]}
-                                                            >
-                                                              foo-step
-                                                            </a>
-                                                          </li>
-                                                        </WizardNavItem>
-                                                        <WizardNavItem
-                                                          isCurrent={false}
-                                                          isDisabled={true}
-                                                          key="bar-step"
-                                                          onNavItemClick={[Function]}
-                                                          step={1}
-                                                          text="bar-step"
+                                                            foo-step
+                                                          </a>
+                                                        </li>
+                                                      </WizardNavItem>
+                                                      <WizardNavItem
+                                                        isCurrent={false}
+                                                        isDisabled={true}
+                                                        key="bar-step"
+                                                        onNavItemClick={[Function]}
+                                                        step={1}
+                                                        text="bar-step"
+                                                      >
+                                                        <li
+                                                          className="pf-c-wizard__nav-item"
                                                         >
-                                                          <li
-                                                            className="pf-c-wizard__nav-item"
+                                                          <a
+                                                            aria-current={false}
+                                                            aria-disabled={true}
+                                                            className="pf-c-wizard__nav-link pf-m-disabled"
+                                                            onClick={[Function]}
+                                                            tabIndex={-1}
                                                           >
-                                                            <a
-                                                              aria-current={false}
-                                                              aria-disabled={true}
-                                                              className="pf-c-wizard__nav-link pf-m-disabled"
-                                                              onClick={[Function]}
-                                                              tabIndex={-1}
+                                                            bar-step
+                                                          </a>
+                                                        </li>
+                                                      </WizardNavItem>
+                                                    </Component>
+                                                  </WizardNavigation>
+                                                </FormSpy>
+                                              </ol>
+                                            </nav>
+                                          </WizardNav>
+                                          <WizardStep
+                                            buttonLabels={
+                                              Object {
+                                                "back": "Back",
+                                                "cancel": "Cancel",
+                                                "next": "Next",
+                                                "submit": "Submit",
+                                              }
+                                            }
+                                            disableBack={true}
+                                            fields={
+                                              Array [
+                                                Object {
+                                                  "component": "text-field",
+                                                  "name": "foo-field",
+                                                },
+                                              ]
+                                            }
+                                            formOptions={
+                                              Object {
+                                                "batch": [Function],
+                                                "blur": [Function],
+                                                "change": [Function],
+                                                "clearOnUnmount": false,
+                                                "clearedValue": undefined,
+                                                "concat": [Function],
+                                                "destroyOnUnregister": false,
+                                                "focus": [Function],
+                                                "getFieldState": [Function],
+                                                "getRegisteredFields": [Function],
+                                                "getState": [Function],
+                                                "handleSubmit": [Function],
+                                                "initialize": [Function],
+                                                "insert": [Function],
+                                                "isValidationPaused": [Function],
+                                                "move": [Function],
+                                                "onCancel": [MockFunction],
+                                                "onReset": undefined,
+                                                "onSubmit": [MockFunction],
+                                                "pauseValidation": [Function],
+                                                "pop": [Function],
+                                                "pristine": true,
+                                                "push": [Function],
+                                                "registerField": [Function],
+                                                "remove": [Function],
+                                                "removeBatch": [Function],
+                                                "renderForm": [Function],
+                                                "reset": [Function],
+                                                "resetFieldState": [Function],
+                                                "resumeValidation": [Function],
+                                                "setConfig": [Function],
+                                                "shift": [Function],
+                                                "submit": [Function],
+                                                "subscribe": [Function],
+                                                "swap": [Function],
+                                                "unshift": [Function],
+                                                "update": [Function],
+                                                "valid": true,
+                                              }
+                                            }
+                                            handleNext={[Function]}
+                                            handlePrev={[Function]}
+                                            name="1"
+                                            nextStep="2"
+                                            title="foo-step"
+                                          >
+                                            <WizardBody
+                                              hasBodyPadding={true}
+                                            >
+                                              <main
+                                                className="pf-c-wizard__main"
+                                              >
+                                                <div
+                                                  className="pf-c-wizard__main-body"
+                                                >
+                                                  <div
+                                                    className="pf-c-form"
+                                                  >
+                                                    <SingleField
+                                                      component="text-field"
+                                                      key="foo-field"
+                                                      name="foo-field"
+                                                    >
+                                                      <FormConditionWrapper>
+                                                        <FormFieldHideWrapper
+                                                          hideField={false}
+                                                        >
+                                                          <FieldWrapper
+                                                            component={[Function]}
+                                                            componentType="text-field"
+                                                            name="foo-field"
+                                                          >
+                                                            <TextField
+                                                              name="foo-field"
+                                                              validate={[Function]}
                                                             >
-                                                              bar-step
-                                                            </a>
-                                                          </li>
-                                                        </WizardNavItem>
-                                                      </Component>
-                                                    </WizardNavigation>
-                                                  </FormSpy>
-                                                </ol>
-                                              </nav>
-                                            </WizardNav>
-                                            <WizardStep
+                                                              <FormGroup
+                                                                id="foo-field"
+                                                                isRequired={false}
+                                                                meta={
+                                                                  Object {
+                                                                    "active": false,
+                                                                    "data": Object {},
+                                                                    "dirty": false,
+                                                                    "dirtySinceLastSubmit": false,
+                                                                    "error": undefined,
+                                                                    "initial": undefined,
+                                                                    "invalid": false,
+                                                                    "length": undefined,
+                                                                    "modified": false,
+                                                                    "pristine": true,
+                                                                    "submitError": undefined,
+                                                                    "submitFailed": false,
+                                                                    "submitSucceeded": false,
+                                                                    "submitting": false,
+                                                                    "touched": false,
+                                                                    "valid": true,
+                                                                    "validating": false,
+                                                                    "visited": false,
+                                                                  }
+                                                                }
+                                                              >
+                                                                <FormGroup
+                                                                  fieldId="foo-field"
+                                                                  isRequired={false}
+                                                                  isValid={true}
+                                                                >
+                                                                  <div
+                                                                    className="pf-c-form__group"
+                                                                  >
+                                                                    <ForwardRef
+                                                                      id="foo-field"
+                                                                      name="foo-field"
+                                                                      onBlur={[Function]}
+                                                                      onChange={[Function]}
+                                                                      onFocus={[Function]}
+                                                                      value=""
+                                                                    >
+                                                                      <TextInputBase
+                                                                        aria-label={null}
+                                                                        className=""
+                                                                        id="foo-field"
+                                                                        innerRef={null}
+                                                                        isDisabled={false}
+                                                                        isReadOnly={false}
+                                                                        isRequired={false}
+                                                                        isValid={true}
+                                                                        name="foo-field"
+                                                                        onBlur={[Function]}
+                                                                        onChange={[Function]}
+                                                                        onFocus={[Function]}
+                                                                        type="text"
+                                                                        validated="default"
+                                                                        value=""
+                                                                      >
+                                                                        <input
+                                                                          aria-invalid={false}
+                                                                          aria-label={null}
+                                                                          className="pf-c-form-control"
+                                                                          disabled={false}
+                                                                          id="foo-field"
+                                                                          name="foo-field"
+                                                                          onBlur={[Function]}
+                                                                          onChange={[Function]}
+                                                                          onFocus={[Function]}
+                                                                          readOnly={false}
+                                                                          required={false}
+                                                                          type="text"
+                                                                          value=""
+                                                                        />
+                                                                      </TextInputBase>
+                                                                    </ForwardRef>
+                                                                  </div>
+                                                                </FormGroup>
+                                                              </FormGroup>
+                                                            </TextField>
+                                                          </FieldWrapper>
+                                                        </FormFieldHideWrapper>
+                                                      </FormConditionWrapper>
+                                                    </SingleField>
+                                                  </div>
+                                                </div>
+                                              </main>
+                                            </WizardBody>
+                                            <WizardStepButtons
                                               buttonLabels={
                                                 Object {
                                                   "back": "Back",
@@ -2278,14 +2177,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                 }
                                               }
                                               disableBack={true}
-                                              fields={
-                                                Array [
-                                                  Object {
-                                                    "component": "text-field",
-                                                    "name": "foo-field",
-                                                  },
-                                                ]
-                                              }
                                               formOptions={
                                                 Object {
                                                   "batch": [Function],
@@ -2332,187 +2223,53 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                               handlePrev={[Function]}
                                               name="1"
                                               nextStep="2"
-                                              title="foo-step"
                                             >
-                                              <WizardBody
-                                                hasBodyPadding={true}
+                                              <footer
+                                                className="pf-c-wizard__footer "
                                               >
-                                                <main
-                                                  className="pf-c-wizard__main"
+                                                <NextButton
+                                                  batch={[Function]}
+                                                  blur={[Function]}
+                                                  change={[Function]}
+                                                  clearOnUnmount={false}
+                                                  concat={[Function]}
+                                                  destroyOnUnregister={false}
+                                                  focus={[Function]}
+                                                  getFieldState={[Function]}
+                                                  getRegisteredFields={[Function]}
+                                                  getState={[Function]}
+                                                  handleNext={[Function]}
+                                                  handleSubmit={[Function]}
+                                                  initialize={[Function]}
+                                                  insert={[Function]}
+                                                  isValidationPaused={[Function]}
+                                                  move={[Function]}
+                                                  nextLabel="Next"
+                                                  nextStep="2"
+                                                  onCancel={[MockFunction]}
+                                                  onSubmit={[MockFunction]}
+                                                  pauseValidation={[Function]}
+                                                  pop={[Function]}
+                                                  pristine={true}
+                                                  push={[Function]}
+                                                  registerField={[Function]}
+                                                  remove={[Function]}
+                                                  removeBatch={[Function]}
+                                                  renderForm={[Function]}
+                                                  reset={[Function]}
+                                                  resetFieldState={[Function]}
+                                                  resumeValidation={[Function]}
+                                                  setConfig={[Function]}
+                                                  shift={[Function]}
+                                                  submit={[Function]}
+                                                  submitLabel="Submit"
+                                                  subscribe={[Function]}
+                                                  swap={[Function]}
+                                                  unshift={[Function]}
+                                                  update={[Function]}
+                                                  valid={true}
                                                 >
-                                                  <div
-                                                    className="pf-c-wizard__main-body"
-                                                  >
-                                                    <div
-                                                      className="pf-c-form"
-                                                    >
-                                                      <SingleField
-                                                        component="text-field"
-                                                        key="foo-field"
-                                                        name="foo-field"
-                                                      >
-                                                        <FormConditionWrapper>
-                                                          <FormFieldHideWrapper
-                                                            hideField={false}
-                                                          >
-                                                            <FieldWrapper
-                                                              component={[Function]}
-                                                              componentType="text-field"
-                                                              name="foo-field"
-                                                            >
-                                                              <TextField
-                                                                name="foo-field"
-                                                                validate={[Function]}
-                                                              >
-                                                                <FormGroup
-                                                                  id="foo-field"
-                                                                  isRequired={false}
-                                                                  meta={
-                                                                    Object {
-                                                                      "active": false,
-                                                                      "data": Object {},
-                                                                      "dirty": false,
-                                                                      "dirtySinceLastSubmit": false,
-                                                                      "error": undefined,
-                                                                      "initial": undefined,
-                                                                      "invalid": false,
-                                                                      "length": undefined,
-                                                                      "modified": false,
-                                                                      "pristine": true,
-                                                                      "submitError": undefined,
-                                                                      "submitFailed": false,
-                                                                      "submitSucceeded": false,
-                                                                      "submitting": false,
-                                                                      "touched": false,
-                                                                      "valid": true,
-                                                                      "validating": false,
-                                                                      "visited": false,
-                                                                    }
-                                                                  }
-                                                                >
-                                                                  <FormGroup
-                                                                    fieldId="foo-field"
-                                                                    isRequired={false}
-                                                                    isValid={true}
-                                                                  >
-                                                                    <div
-                                                                      className="pf-c-form__group"
-                                                                    >
-                                                                      <ForwardRef
-                                                                        id="foo-field"
-                                                                        name="foo-field"
-                                                                        onBlur={[Function]}
-                                                                        onChange={[Function]}
-                                                                        onFocus={[Function]}
-                                                                        value=""
-                                                                      >
-                                                                        <TextInputBase
-                                                                          aria-label={null}
-                                                                          className=""
-                                                                          id="foo-field"
-                                                                          innerRef={null}
-                                                                          isDisabled={false}
-                                                                          isReadOnly={false}
-                                                                          isRequired={false}
-                                                                          isValid={true}
-                                                                          name="foo-field"
-                                                                          onBlur={[Function]}
-                                                                          onChange={[Function]}
-                                                                          onFocus={[Function]}
-                                                                          type="text"
-                                                                          validated="default"
-                                                                          value=""
-                                                                        >
-                                                                          <input
-                                                                            aria-invalid={false}
-                                                                            aria-label={null}
-                                                                            className="pf-c-form-control"
-                                                                            disabled={false}
-                                                                            id="foo-field"
-                                                                            name="foo-field"
-                                                                            onBlur={[Function]}
-                                                                            onChange={[Function]}
-                                                                            onFocus={[Function]}
-                                                                            readOnly={false}
-                                                                            required={false}
-                                                                            type="text"
-                                                                            value=""
-                                                                          />
-                                                                        </TextInputBase>
-                                                                      </ForwardRef>
-                                                                    </div>
-                                                                  </FormGroup>
-                                                                </FormGroup>
-                                                              </TextField>
-                                                            </FieldWrapper>
-                                                          </FormFieldHideWrapper>
-                                                        </FormConditionWrapper>
-                                                      </SingleField>
-                                                    </div>
-                                                  </div>
-                                                </main>
-                                              </WizardBody>
-                                              <WizardStepButtons
-                                                buttonLabels={
-                                                  Object {
-                                                    "back": "Back",
-                                                    "cancel": "Cancel",
-                                                    "next": "Next",
-                                                    "submit": "Submit",
-                                                  }
-                                                }
-                                                disableBack={true}
-                                                formOptions={
-                                                  Object {
-                                                    "batch": [Function],
-                                                    "blur": [Function],
-                                                    "change": [Function],
-                                                    "clearOnUnmount": false,
-                                                    "clearedValue": undefined,
-                                                    "concat": [Function],
-                                                    "destroyOnUnregister": false,
-                                                    "focus": [Function],
-                                                    "getFieldState": [Function],
-                                                    "getRegisteredFields": [Function],
-                                                    "getState": [Function],
-                                                    "handleSubmit": [Function],
-                                                    "initialize": [Function],
-                                                    "insert": [Function],
-                                                    "isValidationPaused": [Function],
-                                                    "move": [Function],
-                                                    "onCancel": [MockFunction],
-                                                    "onReset": undefined,
-                                                    "onSubmit": [MockFunction],
-                                                    "pauseValidation": [Function],
-                                                    "pop": [Function],
-                                                    "pristine": true,
-                                                    "push": [Function],
-                                                    "registerField": [Function],
-                                                    "remove": [Function],
-                                                    "removeBatch": [Function],
-                                                    "renderForm": [Function],
-                                                    "reset": [Function],
-                                                    "resetFieldState": [Function],
-                                                    "resumeValidation": [Function],
-                                                    "setConfig": [Function],
-                                                    "shift": [Function],
-                                                    "submit": [Function],
-                                                    "subscribe": [Function],
-                                                    "swap": [Function],
-                                                    "unshift": [Function],
-                                                    "update": [Function],
-                                                    "valid": true,
-                                                  }
-                                                }
-                                                handleNext={[Function]}
-                                                handlePrev={[Function]}
-                                                name="1"
-                                                nextStep="2"
-                                              >
-                                                <footer
-                                                  className="pf-c-wizard__footer "
-                                                >
-                                                  <NextButton
+                                                  <SimpleNext
                                                     batch={[Function]}
                                                     blur={[Function]}
                                                     change={[Function]}
@@ -2524,7 +2281,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                     getRegisteredFields={[Function]}
                                                     getState={[Function]}
                                                     handleNext={[Function]}
-                                                    handleSubmit={[Function]}
                                                     initialize={[Function]}
                                                     insert={[Function]}
                                                     isValidationPaused={[Function]}
@@ -2547,210 +2303,168 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                     setConfig={[Function]}
                                                     shift={[Function]}
                                                     submit={[Function]}
-                                                    submitLabel="Submit"
                                                     subscribe={[Function]}
                                                     swap={[Function]}
                                                     unshift={[Function]}
                                                     update={[Function]}
                                                     valid={true}
                                                   >
-                                                    <SimpleNext
-                                                      batch={[Function]}
-                                                      blur={[Function]}
-                                                      change={[Function]}
-                                                      clearOnUnmount={false}
-                                                      concat={[Function]}
-                                                      destroyOnUnregister={false}
-                                                      focus={[Function]}
-                                                      getFieldState={[Function]}
-                                                      getRegisteredFields={[Function]}
-                                                      getState={[Function]}
-                                                      handleNext={[Function]}
-                                                      initialize={[Function]}
-                                                      insert={[Function]}
-                                                      isValidationPaused={[Function]}
-                                                      move={[Function]}
-                                                      nextLabel="Next"
-                                                      nextStep="2"
-                                                      onCancel={[MockFunction]}
-                                                      onSubmit={[MockFunction]}
-                                                      pauseValidation={[Function]}
-                                                      pop={[Function]}
-                                                      pristine={true}
-                                                      push={[Function]}
-                                                      registerField={[Function]}
-                                                      remove={[Function]}
-                                                      removeBatch={[Function]}
-                                                      renderForm={[Function]}
-                                                      reset={[Function]}
-                                                      resetFieldState={[Function]}
-                                                      resumeValidation={[Function]}
-                                                      setConfig={[Function]}
-                                                      shift={[Function]}
-                                                      submit={[Function]}
-                                                      subscribe={[Function]}
-                                                      swap={[Function]}
-                                                      unshift={[Function]}
-                                                      update={[Function]}
-                                                      valid={true}
+                                                    <Component
+                                                      isDisabled={false}
+                                                      onClick={[Function]}
+                                                      type="button"
+                                                      variant="primary"
                                                     >
-                                                      <Component
-                                                        isDisabled={false}
-                                                        onClick={[Function]}
-                                                        type="button"
-                                                        variant="primary"
+                                                      <ComponentWithOuia
+                                                        component={[Function]}
+                                                        componentProps={
+                                                          Object {
+                                                            "children": "Next",
+                                                            "isDisabled": false,
+                                                            "onClick": [Function],
+                                                            "type": "button",
+                                                            "variant": "primary",
+                                                          }
+                                                        }
+                                                        consumerContext={null}
                                                       >
-                                                        <ComponentWithOuia
-                                                          component={[Function]}
-                                                          componentProps={
+                                                        <Button
+                                                          isDisabled={false}
+                                                          onClick={[Function]}
+                                                          ouiaContext={
                                                             Object {
-                                                              "children": "Next",
-                                                              "isDisabled": false,
-                                                              "onClick": [Function],
-                                                              "type": "button",
-                                                              "variant": "primary",
+                                                              "isOuia": false,
+                                                              "ouiaId": null,
                                                             }
                                                           }
-                                                          consumerContext={null}
+                                                          type="button"
+                                                          variant="primary"
                                                         >
-                                                          <Button
-                                                            isDisabled={false}
+                                                          <button
+                                                            aria-disabled={null}
+                                                            aria-label={null}
+                                                            className="pf-c-button pf-m-primary"
+                                                            disabled={false}
                                                             onClick={[Function]}
-                                                            ouiaContext={
-                                                              Object {
-                                                                "isOuia": false,
-                                                                "ouiaId": null,
-                                                              }
-                                                            }
+                                                            tabIndex={null}
                                                             type="button"
-                                                            variant="primary"
                                                           >
-                                                            <button
-                                                              aria-disabled={null}
-                                                              aria-label={null}
-                                                              className="pf-c-button pf-m-primary"
-                                                              disabled={false}
-                                                              onClick={[Function]}
-                                                              tabIndex={null}
-                                                              type="button"
-                                                            >
-                                                              Next
-                                                            </button>
-                                                          </Button>
-                                                        </ComponentWithOuia>
-                                                      </Component>
-                                                    </SimpleNext>
-                                                  </NextButton>
-                                                  <Component
-                                                    isDisabled={true}
-                                                    onClick={[Function]}
-                                                    type="button"
-                                                    variant="secondary"
+                                                            Next
+                                                          </button>
+                                                        </Button>
+                                                      </ComponentWithOuia>
+                                                    </Component>
+                                                  </SimpleNext>
+                                                </NextButton>
+                                                <Component
+                                                  isDisabled={true}
+                                                  onClick={[Function]}
+                                                  type="button"
+                                                  variant="secondary"
+                                                >
+                                                  <ComponentWithOuia
+                                                    component={[Function]}
+                                                    componentProps={
+                                                      Object {
+                                                        "children": "Back",
+                                                        "isDisabled": true,
+                                                        "onClick": [Function],
+                                                        "type": "button",
+                                                        "variant": "secondary",
+                                                      }
+                                                    }
+                                                    consumerContext={null}
                                                   >
-                                                    <ComponentWithOuia
-                                                      component={[Function]}
-                                                      componentProps={
+                                                    <Button
+                                                      isDisabled={true}
+                                                      onClick={[Function]}
+                                                      ouiaContext={
                                                         Object {
-                                                          "children": "Back",
-                                                          "isDisabled": true,
-                                                          "onClick": [Function],
-                                                          "type": "button",
-                                                          "variant": "secondary",
+                                                          "isOuia": false,
+                                                          "ouiaId": null,
                                                         }
                                                       }
-                                                      consumerContext={null}
+                                                      type="button"
+                                                      variant="secondary"
                                                     >
-                                                      <Button
-                                                        isDisabled={true}
+                                                      <button
+                                                        aria-disabled={null}
+                                                        aria-label={null}
+                                                        className="pf-c-button pf-m-secondary"
+                                                        disabled={true}
                                                         onClick={[Function]}
-                                                        ouiaContext={
-                                                          Object {
-                                                            "isOuia": false,
-                                                            "ouiaId": null,
-                                                          }
-                                                        }
+                                                        tabIndex={null}
                                                         type="button"
-                                                        variant="secondary"
                                                       >
-                                                        <button
-                                                          aria-disabled={null}
-                                                          aria-label={null}
-                                                          className="pf-c-button pf-m-secondary"
-                                                          disabled={true}
-                                                          onClick={[Function]}
-                                                          tabIndex={null}
-                                                          type="button"
-                                                        >
-                                                          Back
-                                                        </button>
-                                                      </Button>
-                                                    </ComponentWithOuia>
-                                                  </Component>
-                                                  <Component
-                                                    onClick={[Function]}
-                                                    type="button"
-                                                    variant="link"
+                                                        Back
+                                                      </button>
+                                                    </Button>
+                                                  </ComponentWithOuia>
+                                                </Component>
+                                                <Component
+                                                  onClick={[Function]}
+                                                  type="button"
+                                                  variant="link"
+                                                >
+                                                  <ComponentWithOuia
+                                                    component={[Function]}
+                                                    componentProps={
+                                                      Object {
+                                                        "children": "Cancel",
+                                                        "onClick": [Function],
+                                                        "type": "button",
+                                                        "variant": "link",
+                                                      }
+                                                    }
+                                                    consumerContext={null}
                                                   >
-                                                    <ComponentWithOuia
-                                                      component={[Function]}
-                                                      componentProps={
+                                                    <Button
+                                                      onClick={[Function]}
+                                                      ouiaContext={
                                                         Object {
-                                                          "children": "Cancel",
-                                                          "onClick": [Function],
-                                                          "type": "button",
-                                                          "variant": "link",
+                                                          "isOuia": false,
+                                                          "ouiaId": null,
                                                         }
                                                       }
-                                                      consumerContext={null}
+                                                      type="button"
+                                                      variant="link"
                                                     >
-                                                      <Button
+                                                      <button
+                                                        aria-disabled={null}
+                                                        aria-label={null}
+                                                        className="pf-c-button pf-m-link"
+                                                        disabled={false}
                                                         onClick={[Function]}
-                                                        ouiaContext={
-                                                          Object {
-                                                            "isOuia": false,
-                                                            "ouiaId": null,
-                                                          }
-                                                        }
+                                                        tabIndex={null}
                                                         type="button"
-                                                        variant="link"
                                                       >
-                                                        <button
-                                                          aria-disabled={null}
-                                                          aria-label={null}
-                                                          className="pf-c-button pf-m-link"
-                                                          disabled={false}
-                                                          onClick={[Function]}
-                                                          tabIndex={null}
-                                                          type="button"
-                                                        >
-                                                          Cancel
-                                                        </button>
-                                                      </Button>
-                                                    </ComponentWithOuia>
-                                                  </Component>
-                                                </footer>
-                                              </WizardStepButtons>
-                                            </WizardStep>
-                                          </div>
+                                                        Cancel
+                                                      </button>
+                                                    </Button>
+                                                  </ComponentWithOuia>
+                                                </Component>
+                                              </footer>
+                                            </WizardStepButtons>
+                                          </WizardStep>
                                         </div>
                                       </div>
-                                    </Bullseye>
-                                  </div>
-                                </Backdrop>
-                              </Portal>
-                            </Modal>
-                          </Wizard>
-                        </WizardFunction>
-                      </FieldWrapper>
-                    </FormFieldHideWrapper>
-                  </FormConditionWrapper>
-                </SingleField>
-              </form>
-            </Form>
-          </FormTemplate>
-        </PF4FormTemplate>
-      </FormTemplate>
-    </FormContent>
+                                    </div>
+                                  </Bullseye>
+                                </div>
+                              </Backdrop>
+                            </Portal>
+                          </Modal>
+                        </Wizard>
+                      </WizardFunction>
+                    </FieldWrapper>
+                  </FormFieldHideWrapper>
+                </FormConditionWrapper>
+              </SingleField>
+            </form>
+          </Form>
+        </FormTemplate>
+      </PF4FormTemplate>
+    </FormTemplate>
   </ReactFinalForm>
 </FormRenderer>
 `;
