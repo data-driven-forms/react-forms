@@ -12,7 +12,7 @@ import RawComponent from '@docs/raw-component';
 Data Driven Forms converts JSON form definitions into fully functional React forms.
 It uses [React Final Form](https://github.com/final-form/react-final-form) for the form state management.
 It is highly recommended to check their documentations first to fully understand how
-the [Data Driven Dorms](https://github.com/data-driven-forms/react-forms) libraries work.
+the [Data Driven Forms](https://github.com/data-driven-forms/react-forms) libraries work.
 
 <RawComponent source="get-started/get-started" />
 

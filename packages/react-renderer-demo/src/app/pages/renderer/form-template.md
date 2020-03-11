@@ -10,7 +10,7 @@ import ListOfContents from '../../src/helpers/list-of-contents';
 
 # FormTemplate
 
-FormTemplate component allows you to fully customize the form. FormTemplate receives only two props:
+FormTemplate component allows you to fully customize the form layout. FormTemplate receives only two props:
 
 |Prop|Description|
 |----|-----------|

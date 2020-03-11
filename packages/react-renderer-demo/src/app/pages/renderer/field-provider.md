@@ -27,23 +27,19 @@ Next example shows simple input field with label and error message.
 
 ```jsx
 import React from 'react';
-import { FieldProvider } from '@data-driven-forms/react-form-renderer'
+import { useFieldApi } from '@data-driven-forms/react-form-renderer'
 
-const NewComponent = ({ name, ...rest }) => (
-  <div>
-    <FieldProvider {...rest} name={name}>
-      {({ input, meta, ...props }) => {
-        return (
-          <div>
-            <label>{props.label}</label>
-            <input {...input} />
-            {meta.error && <label>{meta.error}</label>}
-          </div>
-        )
-      }}
-    </FieldProvider>
-  </div>
-)
+const NewComponent = (props) => {
+  const { input, meta } = useFieldApi(props);
+
+  return (
+    <div>
+      <label>{props.label}</label>
+      <input {...input} />
+      {meta.error && <label>{meta.error}</label>}
+    </div>
+  )
+}
 
 export default NewComponent
 ```

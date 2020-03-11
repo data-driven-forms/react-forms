@@ -34,7 +34,7 @@ Thank you for your understanding.
 ### Form Template
 
 -   layoutMapper removed - instead of it use FormTemplate
--   All props related to form buttons are now removed, use them in you FormTemplate
+-   All props related to form buttons are now removed, use them in your FormTemplate
     -   showFormControls
     -   buttonOrder
     -   disableSubmit
@@ -111,7 +111,7 @@ import { FieldArray } from  '@data-driven-forms/react-form-renderer';
 
 ### FieldProvider changed
 
--   FieldProvider is no longer wrapping basic components and you cannot access him through props, instead of it use hook:
+-   FieldProvider is no longer wrapping basic components and you cannot access it through props, instead of it use hook:
 
 ```jsx
 import { useFieldApi } from  '@data-driven-forms/react-form-renderer';

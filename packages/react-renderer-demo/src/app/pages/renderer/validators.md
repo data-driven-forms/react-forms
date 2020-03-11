@@ -58,7 +58,7 @@ Validator inputs and results are being cached so you will get immediate feedback
 If you do not want to trigger the async validator after every stroke, you can use a debounce promise [library](https://github.com/slorber/awesome-debounce-promise)
 (or any other implementation of debouncing.)
 
-# validatorMapper
+# Custom validator mapper
 
 If you need to expand default Data Driven Forms validator types, you can use <RouterLink href="/renderer/renderer-api#optionalprops"><Link href="/renderer/renderer-api#optionalprops">validatorMapper</Link></RouterLink>.
 
