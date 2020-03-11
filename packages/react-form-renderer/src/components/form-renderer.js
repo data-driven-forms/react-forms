@@ -9,24 +9,6 @@ import renderForm from '../form-renderer/render-form';
 import defaultSchemaValidator from '../parsers/default-schema-validator';
 import SchemaErrorComponent from '../form-renderer/schema-error-component';
 import defaultValidatorMapper from '../validators/validator-mapper';
-import useComponentSpy from '../hooks/use-component-spy';
-
-const FormContent = ({ value, formFields, schema, onStateUpdate, Template }) => {
-  useComponentSpy(onStateUpdate);
-  return (
-    <RendererContext.Provider value={value}>
-      <Template formFields={formFields} schema={schema} />
-    </RendererContext.Provider>
-  );
-};
-
-FormContent.propTypes = {
-  value: PropTypes.object.isRequired,
-  formFields: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired,
-  schema: PropTypes.object.isRequired,
-  onStateUpdate: PropTypes.func,
-  Template: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]).isRequired
-};
 
 const FormRenderer = ({
   componentMapper,
@@ -42,7 +24,7 @@ const FormRenderer = ({
   schema,
   validatorMapper,
   actionMapper,
-  onStateUpdate
+  debug
 }) => {
   let schemaError;
 
@@ -74,12 +56,9 @@ const FormRenderer = ({
       initialValues={initialValues}
       validate={validate}
       subscription={{ pristine: true, submitting: true, valid: true, ...subscription }}
+      debug={debug}
       render={({ handleSubmit, pristine, valid, form: { reset, mutators, getState, submit, ...form }, ...state }) => (
-        <FormContent
-          formFields={renderForm(schema.fields)}
-          schema={schema}
-          onStateUpdate={onStateUpdate}
-          Template={Template}
+        <RendererContext.Provider
           value={{
             componentMapper,
             validatorMapper: validatorMapperMerged,
@@ -101,14 +80,15 @@ const FormRenderer = ({
               ...form
             }
           }}
-        />
+        >
+          <Template formFields={renderForm(schema.fields)} schema={schema} />
+        </RendererContext.Provider>
       )}
     />
   );
 };
 
 FormRenderer.propTypes = {
-  onStateUpdate: PropTypes.func,
   onSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func,
   onReset: PropTypes.func,
@@ -127,7 +107,8 @@ FormRenderer.propTypes = {
   }),
   actionMapper: PropTypes.shape({
     [PropTypes.string]: PropTypes.func
-  })
+  }),
+  debug: PropTypes.func
 };
 
 FormRenderer.defaultProps = {
