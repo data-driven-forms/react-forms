@@ -10,13 +10,15 @@ import ListOfContents from '../../src/helpers/list-of-contents';
 
 # Field Array Provider
 
-Simillarly to <RouterLink href='/renderer/field-provider'><Link href='/renderer/field-provider'>FieldProvider</Link></RouterLink> Data driven forms provide an option how to inlude <a href='https://github.com/final-form/react-final-form-arrays'>React Final Form Arrays</a> in your form.
+Simillarly to <RouterLink href='/renderer/field-provider'><Link href='/renderer/field-provider'>FieldProvider</Link></RouterLink> Data driven forms provide an option how to inlude <a href='https://github.com/final-form/react-final-form-arrays'>React Final Form Arrays</a> in your form. Please visit their documentation to learn about functionality.
 
-<b>Please visit their documentation to learn about functionality.</b>
+## Using FieldArray
 
-## Using FieldArrayProvider
+You have to just import `FieldArray` from Data Driven Forms.
 
-Component mapped to `componentTypes.FIELD_ARRAY` (`field_array`) receives as a prop `FieldArrayProvider`. You can wrap your component into it and they you have an access to all functionallity.
+```jsx
+import { FieldArray } from '@data-driven-forms/react-form-renderer';
+```
 
 <RawComponent source="field-array/form-fields-mapper" />
 
