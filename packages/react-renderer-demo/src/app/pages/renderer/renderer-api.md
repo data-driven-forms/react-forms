@@ -17,7 +17,7 @@ Form Renderer provides a lot of customization via props.
 |Prop|Type|Description|
 |----|:--:|----------:|
 |<RouterLink href="/renderer/component-mapping"><Link href="/renderer/component-mapping">componentMapper</Link></RouterLink>|object|Defines types of form field components. Field components can change the state of the form.|
-|<RouterLink href="/renderer/component-mapping"><Link href="/renderer/component-mapping">FormTemplate</Link></RouterLink>|Component|Components which defines a template of the form. This component receives two props from the renderer: `formFields` and `schema`. `formFields` is the content of the form. You should wrap this content into your `<form>` component and add form buttons.|
+|<RouterLink href="/renderer/form-template"><Link href="/renderer/component-mapping">FormTemplate</Link></RouterLink>|Component|Components which defines a template of the form. This component receives two props from the renderer: `formFields` and `schema`. `formFields` is the content of the form. You should wrap this content into your `<form>` component and add form buttons.|
 |onSubmit|func|A submit callback which receives two arguments: `values` and `formApi`.|
 |schema|object|A schema which defines structure of the form.|
 
@@ -25,6 +25,7 @@ Form Renderer provides a lot of customization via props.
 
 |Prop|Type|Description|Default|
 |----|:--:|----------:|------:|
+|<RouterLink href="/renderer/action-mapper"><Link href="/renderer/action-mapper">actionMapper</Link></RouterLink>|object|Action mapper allows to map props to functions.||
 |<RouterLink href="/renderer/unmounting"><Link href="/renderer/unmounting">clearOnUnmount</Link></RouterLink>|bool|Will clear values of unmounted components. You can also set this to specific component in the form schema.|false|
 |<RouterLink href="/renderer/cleared-value"><Link>clearedValue</Link></RouterLink>|any|Value that will be set to field with **initialValue** after deleting it. Useful for forms while editing.|undefined|
 |onReset|func|A reset callback. You don't need to manually clear the form values!||
