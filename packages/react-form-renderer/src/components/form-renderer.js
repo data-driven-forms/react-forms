@@ -24,7 +24,8 @@ const FormRenderer = ({
   schema,
   validatorMapper,
   actionMapper,
-  debug
+  debug,
+  ...props
 }) => {
   let schemaError;
 
@@ -50,6 +51,7 @@ const FormRenderer = ({
 
   return (
     <Form
+      {...props}
       onSubmit={onSubmit}
       mutators={{ ...arrayMutators }}
       decorators={[createFocusDecorator()]}
