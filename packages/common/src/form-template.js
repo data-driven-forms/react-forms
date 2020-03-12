@@ -40,31 +40,12 @@ export const FormControls = ({
     return <FormButtons {...formSpyProps} />;
   }
 
-  const {
-    submitting,
-    pristine,
-    validating,
-    form: { reset },
-    values
-  } = formSpyProps;
+  const { submitting, pristine, validating } = formSpyProps;
 
   const buttons = {
     submit: <Button key="form-submit" type="submit" variant="primary" disabled={submitting || validating || disableSubmit} label={submitLabel} />,
-    reset: canReset ? (
-      <Button
-        key="form-reset"
-        type="button"
-        disabled={pristine}
-        onClick={() => {
-          if (canReset) {
-            onReset && onReset();
-            reset();
-          }
-        }}
-        label={resetLabel}
-      />
-    ) : null,
-    cancel: onCancel ? <Button key="form-cancel" type="button" onClick={() => onCancel(values)} label={cancelLabel} /> : null
+    reset: canReset ? <Button key="form-reset" type="button" disabled={pristine} onClick={onReset} label={resetLabel} /> : null,
+    cancel: onCancel ? <Button key="form-cancel" type="button" onClick={onCancel} label={cancelLabel} /> : null
   };
 
   return <ButtonGroup className={buttonClassName}>{completeButtons(buttonOrder).map((button) => buttons[button])}</ButtonGroup>;

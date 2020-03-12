@@ -71,7 +71,7 @@ const WizardStepButtons = ({
         <Button type="button" variant="secondary" isDisabled={disableBack} onClick={handlePrev}>
           {back}
         </Button>
-        <Button type="button" variant="link" onClick={() => formOptions.onCancel(formOptions.getState().values)}>
+        <Button type="button" variant="link" onClick={formOptions.onCancel}>
           {cancel}
         </Button>
       </React.Fragment>

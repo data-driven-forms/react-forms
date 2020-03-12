@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, FormSpy } from '@data-driven-forms/react-form-renderer';
+import FormRenderer, { Form, FormSpy } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { FormTemplate } from '../index';
@@ -134,24 +134,29 @@ describe('FormTemplate PF4 Common', () => {
   });
 
   it('should call cancel with form values', () => {
+    const expectedValues = { name: 'some name', b: { type: 'good' } };
+
+    const onCancel = jest.fn();
+
     const wrapper = mount(
-      <ContextWrapper>
-        <FormTemplate {...initialProps} canReset />
-      </ContextWrapper>
+      <FormRenderer
+        onCancel={(values) => onCancel(values)}
+        schema={{ fields: [] }}
+        onSubmit={jest.fn}
+        FormTemplate={FormTemplate}
+        initialValues={expectedValues}
+      />
     );
 
-    expect(wrapper.find(Button)).toHaveLength(3);
+    expect(wrapper.find(Button)).toHaveLength(2);
 
-    const CANCEL_INDEX = 2;
-
-    const expectedValues = {};
-    wrapper.update();
+    const CANCEL_INDEX = 1;
 
     wrapper
       .find('button')
       .at(CANCEL_INDEX)
       .simulate('click');
 
-    expect(formOptions.onCancel).toHaveBeenCalledWith(expectedValues);
+    expect(onCancel).toHaveBeenCalledWith(expectedValues);
   });
 });

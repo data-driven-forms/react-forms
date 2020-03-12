@@ -84,7 +84,7 @@ describe('<WizardSTepButtons', () => {
     expect(handleSubmit).toHaveBeenCalled();
   });
 
-  it('should call cancel function with values', () => {
+  it('should call cancel function', () => {
     const VALUES = { aws: 'yes', password: '123456643' };
     const onCancel = jest.fn();
     const wrapper = mount(
@@ -94,7 +94,7 @@ describe('<WizardSTepButtons', () => {
       .find('button')
       .last()
       .simulate('click');
-    expect(onCancel).toHaveBeenCalledWith(VALUES);
+    expect(onCancel).toHaveBeenCalled();
   });
 
   it('should call prev function', () => {

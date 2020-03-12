@@ -479,8 +479,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                               "insert": [Function],
                                               "isValidationPaused": [Function],
                                               "move": [Function],
-                                              "onCancel": [MockFunction],
-                                              "onReset": undefined,
+                                              "onCancel": [Function],
+                                              "onReset": [Function],
                                               "onSubmit": [MockFunction],
                                               "pauseValidation": [Function],
                                               "pop": [Function],
@@ -545,8 +545,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                 "insert": [Function],
                                                 "isValidationPaused": [Function],
                                                 "move": [Function],
-                                                "onCancel": [MockFunction],
-                                                "onReset": undefined,
+                                                "onCancel": [Function],
+                                                "onReset": [Function],
                                                 "onSubmit": [MockFunction],
                                                 "pauseValidation": [Function],
                                                 "pop": [Function],
@@ -673,8 +673,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                       "insert": [Function],
                                       "isValidationPaused": [Function],
                                       "move": [Function],
-                                      "onCancel": [MockFunction],
-                                      "onReset": undefined,
+                                      "onCancel": [Function],
+                                      "onReset": [Function],
                                       "onSubmit": [MockFunction],
                                       "pauseValidation": [Function],
                                       "pop": [Function],
@@ -849,8 +849,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                         "insert": [Function],
                                         "isValidationPaused": [Function],
                                         "move": [Function],
-                                        "onCancel": [MockFunction],
-                                        "onReset": undefined,
+                                        "onCancel": [Function],
+                                        "onReset": [Function],
                                         "onSubmit": [MockFunction],
                                         "pauseValidation": [Function],
                                         "pop": [Function],
@@ -900,7 +900,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                         move={[Function]}
                                         nextLabel="Next"
                                         nextStep="2"
-                                        onCancel={[MockFunction]}
+                                        onCancel={[Function]}
+                                        onReset={[Function]}
                                         onSubmit={[MockFunction]}
                                         pauseValidation={[Function]}
                                         pop={[Function]}
@@ -941,7 +942,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                           move={[Function]}
                                           nextLabel="Next"
                                           nextStep="2"
-                                          onCancel={[MockFunction]}
+                                          onCancel={[Function]}
+                                          onReset={[Function]}
                                           onSubmit={[MockFunction]}
                                           pauseValidation={[Function]}
                                           pop={[Function]}
@@ -1825,8 +1827,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                         "insert": [Function],
                                                         "isValidationPaused": [Function],
                                                         "move": [Function],
-                                                        "onCancel": [MockFunction],
-                                                        "onReset": undefined,
+                                                        "onCancel": [Function],
+                                                        "onReset": [Function],
                                                         "onSubmit": [MockFunction],
                                                         "pauseValidation": [Function],
                                                         "pop": [Function],
@@ -1891,8 +1893,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                           "insert": [Function],
                                                           "isValidationPaused": [Function],
                                                           "move": [Function],
-                                                          "onCancel": [MockFunction],
-                                                          "onReset": undefined,
+                                                          "onCancel": [Function],
+                                                          "onReset": [Function],
                                                           "onSubmit": [MockFunction],
                                                           "pauseValidation": [Function],
                                                           "pop": [Function],
@@ -2019,8 +2021,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                 "insert": [Function],
                                                 "isValidationPaused": [Function],
                                                 "move": [Function],
-                                                "onCancel": [MockFunction],
-                                                "onReset": undefined,
+                                                "onCancel": [Function],
+                                                "onReset": [Function],
                                                 "onSubmit": [MockFunction],
                                                 "pauseValidation": [Function],
                                                 "pop": [Function],
@@ -2195,8 +2197,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                   "insert": [Function],
                                                   "isValidationPaused": [Function],
                                                   "move": [Function],
-                                                  "onCancel": [MockFunction],
-                                                  "onReset": undefined,
+                                                  "onCancel": [Function],
+                                                  "onReset": [Function],
                                                   "onSubmit": [MockFunction],
                                                   "pauseValidation": [Function],
                                                   "pop": [Function],
@@ -2246,7 +2248,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                   move={[Function]}
                                                   nextLabel="Next"
                                                   nextStep="2"
-                                                  onCancel={[MockFunction]}
+                                                  onCancel={[Function]}
+                                                  onReset={[Function]}
                                                   onSubmit={[MockFunction]}
                                                   pauseValidation={[Function]}
                                                   pop={[Function]}
@@ -2287,7 +2290,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                     move={[Function]}
                                                     nextLabel="Next"
                                                     nextStep="2"
-                                                    onCancel={[MockFunction]}
+                                                    onCancel={[Function]}
+                                                    onReset={[Function]}
                                                     onSubmit={[MockFunction]}
                                                     pauseValidation={[Function]}
                                                     pop={[Function]}
