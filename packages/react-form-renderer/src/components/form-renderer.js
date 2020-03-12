@@ -66,8 +66,11 @@ const FormRenderer = ({
             formOptions: {
               pristine,
               onSubmit,
-              onCancel,
-              onReset,
+              onCancel: onCancel ? (...args) => onCancel(getState().values, ...args) : undefined,
+              onReset: (...args) => {
+                onReset && onReset(...args);
+                reset();
+              },
               getState,
               valid,
               clearedValue,

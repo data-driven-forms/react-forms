@@ -318,7 +318,7 @@ describe('<Wizard />', () => {
   it('should pass values to cancel button', () => {
     const onCancel = jest.fn();
 
-    const wrapper = mount(<FormRenderer {...initialProps} onCancel={onCancel} initialValues={initialValues} />);
+    const wrapper = mount(<FormRenderer {...initialProps} onCancel={(values) => onCancel(values)} initialValues={initialValues} />);
 
     cancelButtonClick(wrapper);
 
@@ -328,7 +328,9 @@ describe('<Wizard />', () => {
   it('should pass values to cancel - close icon', () => {
     const onCancel = jest.fn();
 
-    const wrapper = mount(<FormRenderer {...initialProps} onCancel={onCancel} initialValues={initialValues} schema={schemaWithHeader} />);
+    const wrapper = mount(
+      <FormRenderer {...initialProps} onCancel={(values) => onCancel(values)} initialValues={initialValues} schema={schemaWithHeader} />
+    );
 
     closeIconClickWithHeader(wrapper);
 

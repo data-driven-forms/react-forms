@@ -134,7 +134,7 @@ const Wizard = ({
         aria-modal={inModal ? 'true' : undefined}
         onKeyDown={(e) => handleEnter(e, formOptions, state.activeStep, findCurrentStepWrapped, handleNext, handleSubmit)}
       >
-        {title && <WizardHeader title={title} description={description} onClose={() => formOptions.onCancel(formOptions.getState().values)} />}
+        {title && <WizardHeader title={title} description={description} onClose={formOptions.onCancel} />}
         <div className="pf-c-wizard__outer-wrap">
           <WizardNav>
             <FormSpy>
