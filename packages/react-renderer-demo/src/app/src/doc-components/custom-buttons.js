@@ -23,7 +23,7 @@ const schema = {
 };
 
 const FormTemplate = ({ formFields, schema }) => {
-  const { handleSubmit, reset, getState } = useFormApi();
+  const { handleSubmit, onReset, onCancel, getState, reset } = useFormApi();
   const { submitting, valid, pristine } = getState();
 
   return (
@@ -36,10 +36,10 @@ const FormTemplate = ({ formFields, schema }) => {
             <Button disabled={submitting || !valid} style={{ marginRight: 8 }} type="submit" color="primary" variant="contained">
               Submit
             </Button>
-            <Button disabled={pristine} style={{ marginRight: 8 }} onClick={reset} variant="contained">
+            <Button disabled={pristine} style={{ marginRight: 8 }} onClick={() => { onReset(); reset(); }} variant="contained">
               Reset
             </Button>
-            <Button variant="contained">Cancel</Button>
+            <Button variant="contained" onClick={onCancel}>Cancel</Button>
           </div>
         )}
       </FormSpy>
@@ -47,11 +47,21 @@ const FormTemplate = ({ formFields, schema }) => {
   );
 };
 
-const asyncSubmit = (values, api) => new Promise((resolve) => setTimeout(() => resolve('Yay'), 1500));
+const asyncSubmit = (values, api) => new Promise((resolve) => setTimeout(() => {
+  console.log('FormValues', values);
+  resolve('Yay');
+}, 1500));
 
 const FormControls = () => (
   <div className="pf4">
-    <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={asyncSubmit} />
+    <FormRenderer
+      FormTemplate={FormTemplate}
+      componentMapper={componentMapper}
+      schema={schema}
+      onSubmit={asyncSubmit}
+      onCancel={() => console.log('Cancelling')}
+      onReset={() => console.log('Resetting')}
+    />
   </div>
 );
 
