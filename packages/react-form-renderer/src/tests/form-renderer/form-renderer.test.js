@@ -127,4 +127,58 @@ describe('<FormRenderer />', () => {
     );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
+
+  describe('Initial value data types', () => {
+    it('should convert string to integer', () => {
+      const onSubmit = jest.fn();
+      const schema = {
+        fields: [
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'initial-convert',
+            initialValue: '5',
+            dataType: 'integer'
+          }
+        ]
+      };
+      const wrapper = mount(<FormRenderer {...initialProps} schema={schema} onSubmit={(values) => onSubmit(values)} />);
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith({ 'initial-convert': 5 });
+    });
+
+    it('should convert individual values in array of literals as initial value', () => {
+      const onSubmit = jest.fn();
+      const schema = {
+        fields: [
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'initial-convert',
+            initialValue: ['5', 3, '11', '999'],
+            dataType: 'integer'
+          }
+        ]
+      };
+      const wrapper = mount(<FormRenderer {...initialProps} schema={schema} onSubmit={(values) => onSubmit(values)} />);
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith({ 'initial-convert': [5, 3, 11, 999] });
+    });
+
+    it('should convert individual values in array of objects as initial value', () => {
+      const onSubmit = jest.fn();
+      const schema = {
+        fields: [
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'initial-convert',
+            initialValue: [{ value: '5' }, { value: 3 }, { value: '11' }, { value: '999' }],
+            dataType: 'integer'
+          }
+        ]
+      };
+      const wrapper = mount(<FormRenderer {...initialProps} schema={schema} onSubmit={(values) => onSubmit(values)} />);
+
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith({ 'initial-convert': [{ value: 5 }, { value: 3 }, { value: 11 }, { value: 999 }] });
+    });
+  });
 });

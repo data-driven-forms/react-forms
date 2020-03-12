@@ -3,15 +3,23 @@ import PropTypes from 'prop-types';
 
 import componentTypes from '../components/component-types';
 import composeValidators from '../components/compose-validators';
+import convertInitialValue from './convert-initial-value';
 
 const shouldAssignFormOptions = (componentType) => componentTypes.FIELD_ARRAY === componentType;
 const assignSpecialType = (componentType) => ([componentTypes.CHECKBOX, componentTypes.RADIO].includes(componentType) ? componentType : undefined);
 
 const FieldWrapper = ({ componentType, validate, component, ...rest }) => {
+  const props = rest;
+
+  if (Object.prototype.hasOwnProperty.call(rest, 'initialValue') && Object.prototype.hasOwnProperty.call(rest, 'dataType')) {
+    props.initialValue = convertInitialValue(rest.initialValue, rest.dataType);
+  }
+
   const componentProps = {
     type: assignSpecialType(componentType),
-    ...rest
+    ...props
   };
+
   if (shouldAssignFormOptions(componentType)) {
     componentProps.arrayValidator = (value = []) => {
       if (!Array.isArray(value)) {
@@ -38,7 +46,8 @@ FieldWrapper.propTypes = {
   componentType: PropTypes.string,
   validate: PropTypes.arrayOf(PropTypes.func),
   component: PropTypes.oneOfType([PropTypes.node, PropTypes.func, PropTypes.element]).isRequired,
-  dataType: PropTypes.string
+  dataType: PropTypes.string,
+  initialValue: PropTypes.any
 };
 
 export default FieldWrapper;

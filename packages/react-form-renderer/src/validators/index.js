@@ -44,7 +44,12 @@ export const pattern = memoize(({ pattern, message, flags } = {}) => {
 
     if (Array.isArray(value)) {
       const error = value.find((item) => {
-        const parsedValue = typeof item === 'string' ? item : item.toString();
+        const parsedValue =
+          typeof item === 'object' && Object.prototype.hasOwnProperty.call(item, 'value')
+            ? item.value.toString()
+            : typeof item === 'string'
+            ? item
+            : item.toString();
         return pattern && !parsedValue.match(verifiedPattern);
       });
       const msg = prepareMsg(message, 'pattern').defaultMessage;
