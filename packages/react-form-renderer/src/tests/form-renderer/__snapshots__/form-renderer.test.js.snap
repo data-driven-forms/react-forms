@@ -81,7 +81,9 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
     <Component
       onSubmit={[Function]}
     >
-      <form>
+      <form
+        onSubmit={[Function]}
+      >
         <FormConditionWrapper>
           <FormFieldHideWrapper
             hideField={false}
@@ -897,7 +899,9 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
     <Component
       onSubmit={[Function]}
     >
-      <form>
+      <form
+        onSubmit={[Function]}
+      >
         <FormConditionWrapper>
           <FormFieldHideWrapper
             hideField={false}

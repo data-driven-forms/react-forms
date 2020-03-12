@@ -31,7 +31,7 @@ describe('<FormRenderer />', () => {
     layoutMapper = {
       [layoutComponents.BUTTON_GROUP]: ({ children }) => <div>{ children }</div>,
       [layoutComponents.BUTTON]: ({ label, bsStyle, ...rest }) => <button { ...rest }>{ label }</button>,
-      [layoutComponents.FORM_WRAPPER]: ({ children }) => <form>{ children }</form>,
+      [layoutComponents.FORM_WRAPPER]: ({ children, ...props }) => <form { ...props }>{ children }</form>,
       [layoutComponents.TITLE]: ({ children }) => <div>{ children }</div>,
       [layoutComponents.DESCRIPTION]: ({ children }) => <div>{ children }</div>,
     };
@@ -149,6 +149,68 @@ describe('<FormRenderer />', () => {
       renderFormButtons={ FormControls }
     />);
     expect(toJson(wrapper)).toMatchSnapshot();
+  });
+
+  describe('Initial value data types', () => {
+    it('should convert string to integer', () => {
+      const onSubmit = jest.fn();
+      const schema = {
+        fields: [{
+          component: components.TEXT_FIELD,
+          name: 'initial-convert',
+          initialValue: '5',
+          dataType: 'integer',
+        }],
+      };
+      const wrapper = mount(<FormRenderer
+        { ...initialProps }
+        schema={ schema }
+        onSubmit={ values => onSubmit(values) }
+        renderFormButtons={ FormControls }
+      />);
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith({ 'initial-convert': 5 });
+    });
+
+    it('should convert individual values in array of literals as initial value', () => {
+      const onSubmit = jest.fn();
+      const schema = {
+        fields: [{
+          component: components.TEXT_FIELD,
+          name: 'initial-convert',
+          initialValue: [ '5', 3, '11', '999' ],
+          dataType: 'integer',
+        }],
+      };
+      const wrapper = mount(<FormRenderer
+        { ...initialProps }
+        schema={ schema }
+        onSubmit={ values => onSubmit(values) }
+        renderFormButtons={ FormControls }
+      />);
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith({ 'initial-convert': [ 5, 3, 11, 999 ]});
+    });
+
+    it('should convert individual values in array of objects as initial value', () => {
+      const onSubmit = jest.fn();
+      const schema = {
+        fields: [{
+          component: components.SELECT,
+          name: 'initial-convert',
+          initialValue: [{ value: '5' }, { value: 3 }, { value: '11' }, { value: '999' }],
+          dataType: 'integer',
+        }],
+      };
+      const wrapper = mount(<FormRenderer
+        { ...initialProps }
+        schema={ schema }
+        onSubmit={ values => onSubmit(values) }
+        renderFormButtons={ FormControls }
+      />);
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith({ 'initial-convert': [{ value: 5 }, { value: 3 }, { value: 11 }, { value: 999 }]});
+    });
   });
 });
 
