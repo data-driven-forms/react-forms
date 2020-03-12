@@ -23,7 +23,7 @@ const schema = {
 };
 
 const FormTemplate = ({ formFields, schema }) => {
-  const { handleSubmit, onReset, onCancel, getState, reset } = useFormApi();
+  const { handleSubmit, onReset, onCancel, getState } = useFormApi();
   const { submitting, valid, pristine } = getState();
 
   return (
@@ -36,7 +36,7 @@ const FormTemplate = ({ formFields, schema }) => {
             <Button disabled={submitting || !valid} style={{ marginRight: 8 }} type="submit" color="primary" variant="contained">
               Submit
             </Button>
-            <Button disabled={pristine} style={{ marginRight: 8 }} onClick={() => { onReset(); reset(); }} variant="contained">
+            <Button disabled={pristine} style={{ marginRight: 8 }} onClick={onReset} variant="contained">
               Reset
             </Button>
             <Button variant="contained" onClick={onCancel}>Cancel</Button>
