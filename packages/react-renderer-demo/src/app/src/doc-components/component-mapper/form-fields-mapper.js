@@ -93,9 +93,7 @@ const ComponentMapper = () => {
         label: 'Your password',
         type: 'password'
       }
-    ],
-    title: 'Custom form fields mapper and layout mapper',
-    description: 'If you want to see the source code, please expand the code example.'
+    ]
   };
   return (
     <div>

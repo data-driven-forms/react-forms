@@ -1,41 +1,66 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
-import { componentMapper, FormTemplate } from '@data-driven-forms/pf4-component-mapper';
+import FormRenderer, { componentTypes, validatorTypes, useFormApi, FormSpy } from '@data-driven-forms/react-form-renderer';
+import { componentMapper } from '@data-driven-forms/pf4-component-mapper';
 import { Button } from '@material-ui/core';
+import { Form } from '@patternfly/react-core';
 
 const schema = {
   title: 'Combination of PF4 form and MUI buttons',
-  fields: [{
-    component: componentTypes.TEXT_FIELD,
-    name: 'name',
-    label: 'Name',
-    isRequired: true,
-    validate: [{
-      type: validatorTypes.REQUIRED,
-    }],
-  }],
+  fields: [
+    {
+      component: componentTypes.TEXT_FIELD,
+      name: 'name',
+      label: 'Name',
+      isRequired: true,
+      validate: [
+        {
+          type: validatorTypes.REQUIRED
+        }
+      ]
+    }
+  ]
 };
 
-const FormButtons = ({ submitting, pristine, valid,  form: { submit, reset }}) => {
+const FormTemplate = ({ formFields, schema }) => {
+  const { handleSubmit, onReset, onCancel, getState } = useFormApi();
+  const { submitting, valid, pristine } = getState();
+
   return (
-    <div>
-      <Button disabled={ submitting || !valid } style={{ marginRight: 8 }} onClick={ submit } color="primary" variant="contained">Submit</Button>
-      <Button disabled={ pristine } style={{ marginRight: 8 }} onClick={ reset } variant="contained">Reset</Button>
-      <Button variant="contained">Cancel</Button>
-    </div>
+    <Form onSubmit={handleSubmit}>
+      {schema.title}
+      {formFields}
+      <FormSpy>
+        {() => (
+          <div>
+            <Button disabled={submitting || !valid} style={{ marginRight: 8 }} type="submit" color="primary" variant="contained">
+              Submit
+            </Button>
+            <Button disabled={pristine} style={{ marginRight: 8 }} onClick={onReset} variant="contained">
+              Reset
+            </Button>
+            <Button variant="contained" onClick={onCancel}>Cancel</Button>
+          </div>
+        )}
+      </FormSpy>
+    </Form>
   );
 };
 
-const asyncSubmit = (values, api) => new Promise(resolve => setTimeout(() => resolve('Yay'), 1500));
+const asyncSubmit = (values, api) => new Promise((resolve) => setTimeout(() => {
+  console.log('FormValues', values);
+  resolve('Yay');
+}, 1500));
 
 const FormControls = () => (
   <div className="pf4">
     <FormRenderer
-      FormTemplate={ FormTemplate }
-      componentMapper={ componentMapper }
-      schema={ schema }
-      onSubmit={ asyncSubmit }
-      renderFormButtons={ FormButtons }
+      FormTemplate={FormTemplate}
+      componentMapper={componentMapper}
+      schema={schema}
+      onSubmit={asyncSubmit}
+      onCancel={() => console.log('Cancelling')}
+      onReset={() => console.log('Resetting')}
     />
   </div>
 );

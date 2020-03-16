@@ -70,7 +70,7 @@ const InitializeOnMountWizardExample = () => {
         componentMapper={componentMapper}
         schema={schema}
         onSubmit={console.log}
-        onStateUpdate={({ values }) => setValues(values)}
+        debug={({ values }) => setValues(values)}
         showFormControls={false}
       />
       <div style={{ marginTop: 16 }}>

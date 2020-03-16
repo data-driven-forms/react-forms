@@ -81,7 +81,7 @@ const PF4FieldArray = () => {
         FormTemplate={ FormTemplate }
         schema={ schema }
         onSubmit={ onSubmit }
-        onStateUpdate={ ({ values }) => setValues(values) }
+        debug={ ({ values }) => setValues(values) }
         initialValues={ initialValues }
       />
       <div style={{ marginTop: 16 }}>

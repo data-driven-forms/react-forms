@@ -24,6 +24,10 @@ export const docs = [
     linkText: 'Components API'
   },
   {
+    component: 'form-template',
+    linkText: 'Form Template'
+  },
+  {
     component: 'condition',
     linkText: 'Conditional fields'
   },
@@ -52,11 +56,15 @@ export const docs = [
     linkText: 'Custom components'
   },
   {
+    component: 'action-mapper',
+    linkText: 'Action mapper'
+  },
+  {
     component: 'field-array',
     linkText: 'FieldArray Provider'
   },
   {
-    component: 'form-controls',
-    linkText: 'Form buttons'
+    component: 'migration-guide',
+    linkText: 'Migration guide 1.x to 2.x'
   }
 ];

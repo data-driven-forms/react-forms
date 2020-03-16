@@ -20,7 +20,9 @@ There is very short list of that can be applied to every form field
 |component|string|Component identifier from componentMapper. Rendered component is chosen by this value|
 |hideField|boolean|Equivalent to html attribute `hidden`. Hides the field but it remains in DOM. Note that the field is still impacted by the form state. Validation will still apply on hidden field but the error message will not be displayed.|
 
-Each mapper provided in `react-forms` provides a default API for standard components. Standard components are:
+Each mapper provided in `react-forms` provides a default API for standard components. If you want to keep compatibility between our mappers and custom ones, please follow these APIs. Otherwise, it is up to you, which props you choose.
+
+Standard components are:
 <br />
 
 Wrapped in formGroup: <br/>
@@ -184,8 +186,8 @@ Wizard step <br/>
 |Prop|Type|Description|
 |----|:--:|----------:|
 |title|node/string|Step title|
-|stepKey|string, number|For first step: 1, otherwise anything|
-|nextStep|object/stepKey of next step|See below|
+|name|string, number|Uniq name of the step|
+|nextStep|object/name of next step|See <RouterLink href="/component-example/wizard"><Link href="/component-example/wizard">wizard documentation</Link></RouterLink>|
 |fields|array|An array of form fields|
 
 <ExampleLink to='wizard' />

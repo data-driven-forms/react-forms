@@ -45,8 +45,7 @@ const LandingPage = () => {
       <div className={classes.landingPageContainer}>
         <LandingPageTitle />
         <Typography className={classes.landingPageText}>
-          Data Driven Forms is a component designed for ManageIQ and Red&nbsp;Hat&nbsp;Cloud&nbsp;Services projects that takes JSON form definitions
-          and renders them into react components.
+          Data Driven Forms converts JSON form definitions into fully functional React forms.
         </Typography>
         <div className={classes.getStartedLink}>
           <Link href="/renderer/installation">
