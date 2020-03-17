@@ -141,6 +141,10 @@ import { componentMapper } from '@data-driven-forms/pf4-component-mapper'
 -   "select-field" -> "select"
 -   removed duplicate constants SELECT_COMPONENT etc.
 
+### Async validators changed
+-   Failed async validator must now throw an error. Error must be a string! Thrown string will be shown as a validation message in form.
+-   Succesfully resolved promise with message is ignored.
+
 ### PF4/PF3/MUI Wizard doesn't use 'stepKey' anymore
 
 -   stepKey prop is replaced by name

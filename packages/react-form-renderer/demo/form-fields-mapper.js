@@ -7,17 +7,19 @@ import useFieldApi from '../src/hooks/use-field-api';
 const TextField = (props) => (
   <FieldProvider
     {...props}
-    render={({ input, meta, isVisible, label, helperText, isRequired, dataType, isDisabled, isReadOnly, ...rest }) => (
-      <div>
-        <label>{label} &nbsp;</label>
-        <input {...input} {...rest} />
-        {meta.error && (
-          <div>
-            <span>{meta.error}</span>
-          </div>
-        )}
-      </div>
-    )}
+    render={({ input, meta, isVisible, label, helperText, isRequired, dataType, isDisabled, isReadOnly, ...rest }) => {
+      return (
+        <div>
+          <label>{label} &nbsp;</label>
+          <input {...input} {...rest} />
+          {meta.error && (
+            <div>
+              <span>{meta.error}</span>
+            </div>
+          )}
+        </div>
+      );
+    }}
   />
 );
 

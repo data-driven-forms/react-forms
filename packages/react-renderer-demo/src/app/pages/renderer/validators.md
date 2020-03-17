@@ -46,9 +46,9 @@ The function takes `value` as an argument and should return undefined when pases
 
 ## Async validator
 
-You can use a Async function as a validator. However, the returned promise will overwrite all other validators
-(because it is returned last),
-so you need combine all validators into one function.
+You can use a Async function as a validator. But it **must be first in the validate array**. Other async validators will be ignored. This rule was created to prevent long asynchronous validation sequences.
+
+You can either use custom function, or custom validator from validator mapper.
 
 <RawComponent source="validators/async-validator" />
 
@@ -83,7 +83,7 @@ const schema = {
 
 ```
 
-It is designed to return functions returning functions, so you can easily cached or debounce results.
+Validator in a mapper must be a function which returns a function. This makes validator easily configurable (different messages for same validator).
 
 The higher order function receives the whole validator object.
 
