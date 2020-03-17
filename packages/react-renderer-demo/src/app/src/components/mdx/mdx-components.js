@@ -16,6 +16,7 @@ import ShareButton from './share-button';
 import { makeStyles } from '@material-ui/core/styles';
 import { useRouter } from 'next/router';
 
+import RouterLink from 'next/link';
 import dynamic from 'next/dynamic';
 const CodeEditor = dynamic(import('../code-editor'), {
   ssr: false
@@ -87,11 +88,16 @@ const MdxComponents = {
       />
     </div>
   ),
-  a: ({ href, children }) => (
-    <Link href={href} rel="noopener noreferrer" target="_blank">
-      {children}
-    </Link>
-  ),
+  a: ({ href, children }) =>
+    href.startsWith('/') ? (
+      <RouterLink href={href}>
+        <Link href={href}>{children}</Link>
+      </RouterLink>
+    ) : (
+      <Link href={href} rel="noopener noreferrer" target="_blank">
+        {children}
+      </Link>
+    ),
   h1: (props) => <Heading {...props} level={4} component="h1" />,
   h2: (props) => <Heading {...props} level={5} component="h2" />,
   h3: (props) => <Heading {...props} level={6} component="h3" />,

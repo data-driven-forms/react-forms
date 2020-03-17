@@ -1,7 +1,5 @@
 import Grid from '@material-ui/core/Grid'
 import RawComponent from '@docs/raw-component';
-import RouterLink from 'next/link';
-import Link from '@material-ui/core/Link';
 
 import ListOfContents from '../../src/helpers/list-of-contents';
 
@@ -37,7 +35,7 @@ With using `useFormApi` hook you can get access to all form information and func
 
 ## Customize form buttons
 
-You can customize form buttons in your <RouterLink href='/renderer/renderer-api#requiredprops'><Link href='/renderer/renderer-api#requiredprops'>FormTemplate</Link></RouterLink> component
+You can customize form buttons in your [FormTemplate](/renderer/renderer-api#requiredprops) component
 
 <RawComponent source="custom-buttons" />
 

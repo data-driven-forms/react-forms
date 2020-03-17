@@ -1,5 +1,3 @@
-import RouterLink from 'next/link';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid'
 import RawComponent from '@docs/raw-component';
 
@@ -10,7 +8,7 @@ import ListOfContents from '../../src/helpers/list-of-contents';
 
 # Field Array Provider
 
-Simillarly to <RouterLink href='/renderer/field-provider'><Link href='/renderer/field-provider'>FieldProvider</Link></RouterLink> Data driven forms provide an option how to inlude <a href='https://github.com/final-form/react-final-form-arrays'>React Final Form Arrays</a> in your form. Please visit their documentation to learn about functionality.
+Simillarly to [FieldProvider](/renderer/field-provider) Data driven forms provide an option how to inlude [React Final Form Arrays](https://github.com/final-form/react-final-form-arrays) in your form. Please visit their documentation to learn about functionality.
 
 ## Using FieldArray
 
@@ -58,7 +56,7 @@ You don't need to name the nested components, then the values are saved as an ar
 
 # Validators
 
-You can use user a few provided validators (you can also use your <RouterLink href='/renderer/validators'><Link href='/renderer/validators'>own</Link></RouterLink>.)
+You can use user a few provided validators (you can also use your [own](/renderer/validators).)
 
 ```jsx
 MIN_ITEMS_VALIDATOR: ({threshold})

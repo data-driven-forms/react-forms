@@ -1,7 +1,5 @@
 import Grid from '@material-ui/core/Grid'
 import RawComponent from '@docs/raw-component';
-import RouterLink from 'next/link';
-import Link from '@material-ui/core/Link';
 
 import ListOfContents from '../../src/helpers/list-of-contents';
 
@@ -60,7 +58,7 @@ If you do not want to trigger the async validator after every stroke, you can us
 
 # Custom validator mapper
 
-If you need to expand default Data Driven Forms validator types, you can use <RouterLink href="/renderer/renderer-api#optionalprops"><Link href="/renderer/renderer-api#optionalprops">validatorMapper</Link></RouterLink>.
+If you need to expand default Data Driven Forms validator types, you can use [validatorMapper](/renderer/renderer-api#optionalprops).
 
 ```jsx
 const customValidatorMapper = {
