@@ -149,6 +149,10 @@ import { componentMapper } from '@data-driven-forms/pf4-component-mapper'
 
 -   stepKey prop is replaced by name
 
+### PF4 Wizard predictSteps removed
+
+-   predictSteps prop is now removed, wizard always predicts steps
+
 </Grid>
 <Grid item xs={false} md={2}>
   <ListOfContents file="renderer/migration-guide" />

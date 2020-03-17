@@ -49,7 +49,6 @@ export const wizardSchema = {
       component: componentTypes.WIZARD,
       name: 'wizzard',
       crossroads: ['source.source-type'],
-      predictSteps: true,
       //inModal: true,
       title: 'Title',
       showTitles: true,
@@ -158,7 +157,6 @@ export const wizardSchemaWithFunction = {
     {
       component: componentTypes.WIZARD,
       name: 'wizzard',
-      predictSteps: true,
       //inModal: true,
       title: 'Title',
       showTitles: true,
@@ -372,7 +370,6 @@ export const wizardSchemaMoreSubsteps = {
       title: 'Dynamic with steps predicting',
       description: 'Description',
       buttonsPosition: 'left',
-      predictSteps: true,
       fields: [
         {
           title: 'Get started with adding source',
