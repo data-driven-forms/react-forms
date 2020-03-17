@@ -3,7 +3,7 @@ import toJson from 'enzyme-to-json';
 import { mount } from 'enzyme';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { componentTypes as components } from '@data-driven-forms/react-form-renderer';
-import { componentMapper, layoutMapper } from '../';
+import { componentMapper, FormTemplate } from '../';
 
 const schema = {
   fields: [
@@ -34,9 +34,8 @@ describe('<Input Addon>', () => {
       <FormRenderer
         schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }] }}
         componentMapper={componentMapper}
-        layoutMapper={layoutMapper}
+        FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
         onCancel={() => {}}
-        showFormControls={false}
         onSubmit={jest.fn()}
       />
     );
@@ -65,9 +64,8 @@ describe('<Input Addon>', () => {
       <FormRenderer
         schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }] }}
         componentMapper={componentMapper}
-        layoutMapper={layoutMapper}
+        FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
         onCancel={() => {}}
-        showFormControls={false}
         onSubmit={jest.fn()}
       />
     );
@@ -91,9 +89,8 @@ describe('<Input Addon>', () => {
       <FormRenderer
         schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }] }}
         componentMapper={componentMapper}
-        layoutMapper={layoutMapper}
+        FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
         onCancel={() => {}}
-        showFormControls={false}
         onSubmit={jest.fn()}
       />
     );
@@ -116,9 +113,8 @@ describe('<Input Addon>', () => {
       <FormRenderer
         schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }] }}
         componentMapper={componentMapper}
-        layoutMapper={layoutMapper}
+        FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
         onCancel={() => {}}
-        showFormControls={false}
         onSubmit={jest.fn()}
       />
     );
@@ -153,9 +149,8 @@ describe('<Input Addon>', () => {
       <FormRenderer
         schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }] }}
         componentMapper={componentMapper}
-        layoutMapper={layoutMapper}
+        FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
         onCancel={() => {}}
-        showFormControls={false}
         onSubmit={jest.fn()}
       />
     );
@@ -196,9 +191,8 @@ describe('<Input Addon>', () => {
       <FormRenderer
         schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }] }}
         componentMapper={componentMapper}
-        layoutMapper={layoutMapper}
+        FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
         onCancel={() => {}}
-        showFormControls={false}
         onSubmit={jest.fn()}
       />
     );
@@ -260,9 +254,8 @@ describe('<Input Addon>', () => {
       <FormRenderer
         schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }] }}
         componentMapper={componentMapper}
-        layoutMapper={layoutMapper}
+        FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
         onCancel={() => {}}
-        showFormControls={false}
         onSubmit={jest.fn()}
       />
     );

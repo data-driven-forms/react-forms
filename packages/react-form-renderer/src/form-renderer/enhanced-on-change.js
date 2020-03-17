@@ -34,7 +34,7 @@ const castToBoolean = (value) => {
  * @param {FieldDataTypes} dataType type for value conversion
  * @param {Any} value value to be converted
  */
-const convertType = (dataType, value) =>
+export const convertType = (dataType, value) =>
   ({
     [dataTypes.INTEGER]: !isNaN(Number(value)) && parseInt(value),
     [dataTypes.FLOAT]: !isNaN(Number(value)) && parseFloat(value),
