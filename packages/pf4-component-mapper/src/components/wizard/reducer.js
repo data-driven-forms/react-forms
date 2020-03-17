@@ -2,7 +2,7 @@ import get from 'lodash/get';
 
 export const DYNAMIC_WIZARD_TYPES = ['function', 'object'];
 
-const createSchema = ({ currentIndex, isDynamic, formOptions, predictSteps, fields }) => {
+const createSchema = ({ currentIndex, isDynamic, formOptions, fields }) => {
   const { values } = formOptions.getState();
   let schema = [];
   let field = fields[0]; // find first wizard step
@@ -19,10 +19,6 @@ const createSchema = ({ currentIndex, isDynamic, formOptions, predictSteps, fiel
         primary: !schema[schema.length - 1] || !field.substepOf || field.substepOf !== schema[schema.length - 1].substepOf
       }
     ];
-
-    if (isDynamic && !predictSteps && currentIndex === index) {
-      break;
-    }
 
     let nextStep = field.nextStep;
 
@@ -44,7 +40,7 @@ const createSchema = ({ currentIndex, isDynamic, formOptions, predictSteps, fiel
   return schema;
 };
 
-const handleNext = (state, nextStep, formOptions, fields, predictSteps) => {
+const handleNext = (state, nextStep, formOptions, fields) => {
   const newActiveIndex = state.activeStepIndex + 1;
   const shouldInsertStepIntoHistory = state.prevSteps.includes(state.activeStep);
 
@@ -58,7 +54,6 @@ const handleNext = (state, nextStep, formOptions, fields, predictSteps) => {
     navSchema: state.isDynamic
       ? createSchema({
           ...state,
-          predictSteps,
           fields,
           formOptions,
           currentIndex: newActiveIndex
@@ -69,7 +64,7 @@ const handleNext = (state, nextStep, formOptions, fields, predictSteps) => {
 
 export const findCurrentStep = (activeStep, fields) => fields.find(({ name }) => name === activeStep);
 
-const jumpToStep = (state, index, valid, fields, predictSteps, crossroads, formOptions) => {
+const jumpToStep = (state, index, valid, fields, crossroads, formOptions) => {
   const clickOnPreviousStep = state.prevSteps[index];
 
   if (clickOnPreviousStep) {
@@ -92,7 +87,7 @@ const jumpToStep = (state, index, valid, fields, predictSteps, crossroads, formO
     const currentStepHasStepMapper = DYNAMIC_WIZARD_TYPES.includes(typeof currentStep.nextStep);
 
     const hardcodedCrossroads = crossroads;
-    const dynamicStepShouldDisableNav = newState.isDynamic && (currentStepHasStepMapper || !predictSteps);
+    const dynamicStepShouldDisableNav = newState.isDynamic && currentStepHasStepMapper;
 
     const invalidStepShouldDisableNav = valid === false;
 
@@ -103,15 +98,12 @@ const jumpToStep = (state, index, valid, fields, predictSteps, crossroads, formO
     if (dynamicStepShouldDisableNav && !hardcodedCrossroads) {
       updatedState = {
         ...updatedState,
-        navSchema: predictSteps
-          ? createSchema({
-              ...updatedState,
-              predictSteps,
-              formOptions,
-              fields,
-              currentIndex: index
-            })
-          : newState.navSchema.slice(0, index + INDEXING_BY_ZERO),
+        navSchema: createSchema({
+          ...updatedState,
+          formOptions,
+          fields,
+          currentIndex: index
+        }),
         prevSteps: newState.prevSteps.slice(0, index),
         maxStepIndex: index
       };
@@ -143,7 +135,6 @@ const reducer = (state, { type, payload }) => {
         loading: false,
         navSchema: createSchema({
           ...state,
-          predictSteps: payload.predictSteps,
           fields: payload.fields,
           formOptions: payload.formOptions,
           currentIndex: 0
@@ -152,7 +143,7 @@ const reducer = (state, { type, payload }) => {
     case 'setContainer':
       return { ...state, container: document.createElement('div') };
     case 'handleNext':
-      return handleNext(state, payload.nextStep, payload.formOptions, payload.fields, payload.predictSteps);
+      return handleNext(state, payload.nextStep, payload.formOptions, payload.fields);
     case 'setPrevSteps':
       return {
         ...state,
@@ -160,14 +151,13 @@ const reducer = (state, { type, payload }) => {
         maxStepIndex: state.activeStepIndex,
         navSchema: createSchema({
           ...state,
-          predictSteps: payload.predictSteps,
           fields: payload.fields,
           formOptions: payload.formOptions,
           currentIndex: state.activeStepIndex
         })
       };
     case 'jumpToStep':
-      return jumpToStep(state, payload.index, payload.valid, payload.fields, payload.predictSteps, payload.crossroads, payload.formOptions);
+      return jumpToStep(state, payload.index, payload.valid, payload.fields, payload.crossroads, payload.formOptions);
     default:
       return state;
   }

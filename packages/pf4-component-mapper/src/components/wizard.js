@@ -32,7 +32,6 @@ const Wizard = ({
   isDynamic,
   inModal,
   crossroads,
-  predictSteps,
   title,
   description,
   buttonLabels,
@@ -57,14 +56,14 @@ const Wizard = ({
     if (inModal) {
       dispatch({ type: 'setContainer' });
     } else {
-      dispatch({ type: 'finishLoading', payload: { formOptions, fields, predictSteps } });
+      dispatch({ type: 'finishLoading', payload: { formOptions, fields } });
     }
-  }, [inModal, formOptions, fields, predictSteps]);
+  }, [inModal, formOptions, fields]);
 
   useEffect(() => {
     if (state.container) {
       document.body.appendChild(state.container);
-      dispatch({ type: 'finishLoading', payload: { formOptions, fields, predictSteps } });
+      dispatch({ type: 'finishLoading', payload: { formOptions, fields } });
     }
 
     return () => {
@@ -72,7 +71,7 @@ const Wizard = ({
         document.body.removeChild(state.container);
       }
     };
-  }, [state.container, formOptions, fields, predictSteps, inModal]);
+  }, [state.container, formOptions, fields, inModal]);
 
   if (state.loading) {
     return null;
@@ -114,13 +113,13 @@ const Wizard = ({
     />
   );
 
-  const jumpToStep = (index, valid) => dispatch({ type: 'jumpToStep', payload: { index, valid, fields, predictSteps, crossroads, formOptions } });
+  const jumpToStep = (index, valid) => dispatch({ type: 'jumpToStep', payload: { index, valid, fields, crossroads, formOptions } });
 
   const handlePrev = () => jumpToStep(state.activeStepIndex - 1);
 
-  const handleNext = (nextStep) => dispatch({ type: 'handleNext', payload: { nextStep, formOptions, fields, predictSteps } });
+  const handleNext = (nextStep) => dispatch({ type: 'handleNext', payload: { nextStep, formOptions, fields } });
 
-  const setPrevSteps = () => dispatch({ type: 'setPrevSteps', payload: { formOptions, fields, predictSteps } });
+  const setPrevSteps = () => dispatch({ type: 'setPrevSteps', payload: { formOptions, fields } });
 
   const findCurrentStepWrapped = (step) => findCurrentStep(step, fields);
 
@@ -185,7 +184,6 @@ Wizard.propTypes = {
   setFullHeight: PropTypes.bool,
   isDynamic: PropTypes.bool,
   showTitles: PropTypes.bool,
-  predictSteps: PropTypes.bool,
   crossroads: PropTypes.arrayOf(PropTypes.string)
 };
 

@@ -380,63 +380,6 @@ describe('<Wizard />', () => {
     ).toEqual('bar-step');
   });
 
-  it('should build progressive navigation', () => {
-    schema = {
-      fields: [
-        {
-          name: 'wizard',
-          component: 'wizard',
-          isDynamic: true,
-          fields: [
-            {
-              title: 'foo-step',
-              name: '1',
-              fields: [
-                {
-                  name: 'foo-field',
-                  component: 'text-field'
-                }
-              ],
-              nextStep: '2'
-            },
-            {
-              name: '2',
-              title: 'bar-step',
-              fields: [
-                {
-                  name: 'bar-field',
-                  component: 'text-field'
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    };
-
-    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
-
-    expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(1);
-    expect(
-      wrapper
-        .find('.pf-c-wizard__nav-item')
-        .first()
-        .childAt(0)
-        .text()
-    ).toEqual('foo-step');
-
-    nextButtonClick(wrapper);
-
-    expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(2);
-    expect(
-      wrapper
-        .find('.pf-c-wizard__nav-item')
-        .last()
-        .childAt(0)
-        .text()
-    ).toEqual('bar-step');
-  });
-
   it('should jump when click simple navigation', () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
 
@@ -637,12 +580,13 @@ describe('<Wizard />', () => {
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
 
     expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
-    expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(1);
+    expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(3);
+    expect(wrapper.find('.pf-c-wizard__nav-link.pf-m-disabled')).toHaveLength(2); // steps + substep
 
     nextButtonClick(wrapper);
 
     expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
-    expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(3);
+    expect(wrapper.find('.pf-c-wizard__nav-link.pf-m-disabled')).toHaveLength(0);
 
     // click on first nav link
     wrapper
@@ -653,8 +597,7 @@ describe('<Wizard />', () => {
     wrapper.update();
 
     expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
-    // visited step perished from navigation
-    expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(1);
+    expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(3);
 
     nextButtonClick(wrapper);
 
@@ -862,7 +805,6 @@ describe('<Wizard />', () => {
         {
           component: componentTypes.WIZARD,
           name: 'wizard',
-          predictSteps: true,
           fields: [
             {
               title: FIRST_TITLE,
@@ -1041,7 +983,6 @@ describe('<Wizard />', () => {
           {
             component: componentTypes.WIZARD,
             name: 'wizard',
-            predictSteps: true,
             fields: [
               {
                 title: FIRST_TITLE,
@@ -1129,7 +1070,6 @@ describe('<Wizard />', () => {
           {
             component: componentTypes.WIZARD,
             name: 'wizard',
-            predictSteps: true,
             fields: [
               {
                 title: FIRST_TITLE,
@@ -1206,7 +1146,6 @@ describe('<Wizard />', () => {
           {
             component: componentTypes.WIZARD,
             name: 'wizard',
-            predictSteps: true,
             fields: [
               {
                 title: FIRST_TITLE,
@@ -1288,7 +1227,6 @@ describe('<Wizard />', () => {
           {
             component: componentTypes.WIZARD,
             name: 'wizard',
-            predictSteps: true,
             crossroads: ['source.source-type'],
             fields: [
               {
@@ -1453,7 +1391,6 @@ describe('<Wizard />', () => {
           {
             component: componentTypes.WIZARD,
             name: 'wizard',
-            predictSteps: true,
             crossroads: ['source.source-type'],
             fields: [
               {

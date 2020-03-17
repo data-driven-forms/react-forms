@@ -15,7 +15,6 @@ Don't forget hide form controls by setting \`showFormControls\` to \`false\` as 
 | setFullHeight  | bool  | undefined  | see Patternfly  |
 | isDynamic  | bool  | undefined  | will dynamically generate steps navigation (=progressive wizard), please use if you use any condition fields which changes any field in other steps (wizards with conditional steps are dynamic by default) |
 |showTitles|bool|undefined|If true, step titles will be shown in the wizard body|
-|predictSteps|bool|undefined|If true, dynamic wizard will predict steps in the navigation.|
 |crossroads|array|undefined|Array of field names, which change next steps|
 
 **Default buttonLabels**
@@ -40,7 +39,7 @@ You can rewrite only selection of them, e.g.
 
 **Crossroads**
 
-With the help of `crossroads` you can manually defined which fields change next steps and together with `predictSteps`, it will cause that the wizard navigation is always refreshed, when one of the crossroads name is changed.
+With the help of `crossroads` you can manually defined which fields change next steps, it will cause that the wizard navigation is always refreshed, when one of the crossroads name is changed.
 
 Ex.: `crossroads: ['name', 'nested.password']`
 
@@ -179,9 +178,8 @@ Progressive wizard
 - steps are visible as user visits them
 - user can jump only back
 - use `isDynamic` prop to enforce it
-- use `predictSteps` to allow navigation to show future steps
-    - if you have any conditional fields in the step, you should use `disableForwardJumping` in the step definition, to disable jumping forward in the navigation, otherwise user could miss the changed fields in next steps.
-- you can use `crossroads` to define, which fields the wizzard will listen to and change the navigation according to changes of the defined values 
+- if you have any conditional fields in the step, you should use `disableForwardJumping` in the step definition, to disable jumping forward in the navigation, otherwise user could miss the changed fields in next steps.
+- you can use `crossroads` to define, which fields the wizzard will listen to and change the navigation according to changes of the defined values
 
 ![progressivewizard](https://user-images.githubusercontent.com/32869456/58427241-5b370a80-809f-11e9-8e79-a4a829b8d181.gif)
 
