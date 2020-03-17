@@ -1,6 +1,4 @@
 import Grid from '@material-ui/core/Grid'
-import RouterLink from 'next/link';
-import Link from '@material-ui/core/Link';
 import ListOfContents from '../../src/helpers/list-of-contents';
 
 <Grid container item>
@@ -8,7 +6,7 @@ import ListOfContents from '../../src/helpers/list-of-contents';
 
 # Action Mapper
 
-The <RouterLink href="/renderer/renderer-api#optionalprops"><Link href="/renderer/renderer-api#optionalprops">ActionMapper</Link></RouterLink> allows you to map schema props to functions. This is useful when your schema is not written in JavaScript and you cannot use function inside of it, especially for schemas stored in databases.
+The [ActionMapper](/renderer/renderer-api#optionalprops) allows you to map schema props to functions. This is useful when your schema is not written in JavaScript and you cannot use function inside of it, especially for schemas stored in databases.
 
 ## Mapper
 
