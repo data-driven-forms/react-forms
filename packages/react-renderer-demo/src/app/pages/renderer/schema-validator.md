@@ -1,5 +1,5 @@
 import Grid from '@material-ui/core/Grid'
-
+import RawComponent from '@docs/raw-component';
 import ListOfContents from '../../src/helpers/list-of-contents';
 
 <Grid container item>
@@ -13,7 +13,7 @@ It's a simple object containing three keys: `components`, `actions`, `validators
 
 For returning an error please use `DefaultSchemaError` imported from the renderer's package. If the schema is correct, do nothing.
 
-## Example
+## Schema
 
 ```jsx
 import FormRenderer, { DefaultSchemaError } from '@data-driven-forms/react-form-renderer';
@@ -52,6 +52,10 @@ const schemaValidatorMapper = {
     schemaValidatorMapper={schemaValidatorMapper}
 />
 ```
+
+## Example
+
+<RawComponent source="schema-validator" />
 
 </Grid>
 <Grid item xs={false} md={2}>
