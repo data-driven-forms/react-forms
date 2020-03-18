@@ -64,6 +64,10 @@ export const docs = [
     linkText: 'FieldArray Provider'
   },
   {
+    component: 'schema-validator',
+    linkText: 'Schema validation'
+  },
+  {
     component: 'migration-guide',
     linkText: 'Migration guide 1.x to 2.x'
   }

@@ -30,6 +30,7 @@ Form Renderer provides a lot of customization via props.
 |onCancel|func|A cancel callback, which receives `values` as the first argument.||
 |debug|func|A function which will be called with every form update, i.e. `({ values }) => setValues(values)`, please take a look [here](https://final-form.org/docs/react-final-form/types/FormProps#debug)||
 |initialValues|object|An object of fields names as keys and values as their values.||
+|[schemaValidatorMapper](/renderer/schema-validator)|object|Schema validators mapper. You can control schemas of your components, validators and actions.||
 |subscription|object|You can pass your own [subscription](https://final-form.org/docs/react-final-form/types/FormProps#subscription), which will be added to default settings.|`{ pristine: true, submitting: true, valid: true }`|
 |[validate](/renderer/validators)|func|A function which receives all form values and returns an object with errors.||
 |[validatorMapper](/renderer/validators#validatormapper)|object|A mapper containing custom validators, it's automatically merged with the default one.||
