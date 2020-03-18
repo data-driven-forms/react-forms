@@ -34,12 +34,12 @@ const Select = (props) => {
         {...input}
         options={options.filter((option) => Object.prototype.hasOwnProperty.call(option, 'value') && option.value !== null)}
         placeholder={placeholder || 'Please choose'}
-        value={options.filter(({ value }) => (rest.multi ? input.value.includes(value) : value === input.value))}
-        isMulti={rest.multi}
+        value={options.filter(({ value }) => (rest.isMulti ? input.value.includes(value) : value === input.value))}
+        isMulti={rest.isMulti}
         isSearchable={!!isSearchable}
         isClearable={false}
         hideSelectedOptions={false}
-        closeMenuOnSelect={!rest.multi}
+        closeMenuOnSelect={!rest.isMulti}
         noOptionsMessage={() => 'No option found'}
         invalid={invalid}
         isDisabled={isDisabled}
@@ -50,7 +50,7 @@ const Select = (props) => {
             shrink: true
           }
         }}
-        onChange={(option) => input.onChange(rest.multi ? selectValue(option) : option ? option.value : undefined)}
+        onChange={(option) => input.onChange(rest.isMulti ? selectValue(option) : option ? option.value : undefined)}
         input={input}
         label={label}
         isRequired={isRequired}

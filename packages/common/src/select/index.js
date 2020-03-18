@@ -57,8 +57,7 @@ Select.defaultProps = {
   pluckSingleValue: true
 };
 
-const DataDrivenSelect = ({ multi, ...props }) => {
-  const isMulti = props.isMulti || multi;
+const DataDrivenSelect = ({ isMulti, ...props }) => {
   const closeMenuOnSelect = !isMulti;
   return <Select hideSelectedOptions={false} isMulti={isMulti} {...props} closeMenuOnSelect={closeMenuOnSelect} />;
 };
@@ -66,9 +65,8 @@ const DataDrivenSelect = ({ multi, ...props }) => {
 DataDrivenSelect.propTypes = {
   value: PropTypes.any,
   onChange: PropTypes.func,
-  multi: PropTypes.bool,
-  placeholder: PropTypes.string,
   isMulti: PropTypes.bool,
+  placeholder: PropTypes.string,
   classNamePrefix: PropTypes.string.isRequired
 };
 

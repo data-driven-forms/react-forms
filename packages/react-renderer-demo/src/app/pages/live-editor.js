@@ -285,7 +285,7 @@ const baseStructure = {
                   title: 'Dropdown multiselect',
                   dataType: 'string',
                   component: components.SELECT,
-                  multi: true,
+                  isMulti: true,
                   options: [
                     {
                       label: '<None>',

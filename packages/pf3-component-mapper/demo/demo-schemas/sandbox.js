@@ -50,7 +50,7 @@ const output = {
                   label: 'bar'
                 }
               ],
-              multi: true
+              isMulti: true
             },
             {
               title: 'Text boxes',
@@ -409,7 +409,7 @@ const output = {
                   title: 'Dropdown multiselect',
                   dataType: 'string',
                   component: components.SELECT,
-                  multi: true,
+                  isMulti: true,
                   options: [
                     {
                       label: '<None>',
@@ -459,7 +459,7 @@ const output = {
                   label: 'Clearable dropdown',
                   title: 'Clearable dropdown',
                   component: components.SELECT,
-                  multi: true,
+                  isMulti: true,
                   isClearable: true,
                   options: [
                     {

@@ -133,7 +133,7 @@ describe('<Select />', () => {
 
   it('should map props correctly from DataDrivenSelect to Select', () => {
     const props = {
-      multi: true,
+      isMulti: true,
       options: [
         { label: 'a', value: 1 },
         { label: 'b', value: 2 }

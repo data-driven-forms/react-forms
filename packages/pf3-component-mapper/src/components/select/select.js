@@ -171,13 +171,12 @@ class Select extends Component {
       const [title, isPlaceholder] = getDropdownText(input.value, props.placeholder, options);
       const searchableInput = {
         ...input,
-        onChange:
-          props.isMulti || props.multi
-            ? input.onChange
-            : (...args) => {
-                this.handleToggleOpen();
-                return input.onChange(...args);
-              }
+        onChange: props.isMulti
+          ? input.onChange
+          : (...args) => {
+              this.handleToggleOpen();
+              return input.onChange(...args);
+            }
       };
       return (
         <div className={`${props.classNamePrefix}-button`}>
@@ -217,7 +216,7 @@ class Select extends Component {
                 tabSelectsValue={false}
                 menuIsOpen
                 backspaceRemovesValue={false}
-                isMulti={props.isMulti || props.multi}
+                isMulti={props.isMulti}
                 placeholder="Search..."
                 components={{
                   ClearIndicator,

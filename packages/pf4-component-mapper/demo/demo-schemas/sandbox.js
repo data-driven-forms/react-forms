@@ -259,7 +259,7 @@ const output = {
                   dataType: 'string',
                   isSearchable: true,
                   isClearable: true,
-                  multi: true,
+                  isMulti: true,
                   component: components.SELECT,
                   loadOptions: asyncLoadOptions
                 },
@@ -270,7 +270,7 @@ const output = {
                   dataType: 'string',
                   isSearchable: true,
                   isClearable: false,
-                  multi: true,
+                  isMulti: true,
                   component: components.SELECT,
                   options: [
                     {
@@ -326,7 +326,7 @@ const output = {
                   dataType: 'string',
                   component: components.SELECT,
                   isSearchable: true,
-                  multi: true,
+                  isMulti: true,
                   simpleValue: false,
                   options: [
                     {
@@ -397,7 +397,7 @@ const output = {
                   name: 'dropdown_list_5',
                   label: 'Creatable multi select',
                   component: components.SELECT,
-                  multi: true,
+                  isMulti: true,
                   isClearable: true,
                   selectVariant: 'createable',
                   options: [
