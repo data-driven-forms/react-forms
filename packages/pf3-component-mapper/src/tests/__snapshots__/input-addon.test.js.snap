@@ -368,9 +368,7 @@ exports[`<Input Addon> should render group button before input addon correctly 1
                     <FormFieldHideWrapper
                       hideField={false}
                     >
-                      <FieldWrapper
-                        component={[Function]}
-                        componentType="text-field"
+                      <TextField
                         inputAddon={
                           Object {
                             "before": Object {
@@ -399,8 +397,9 @@ exports[`<Input Addon> should render group button before input addon correctly 1
                         label="Text Box With Input Addon"
                         name="text_box_21"
                         title="Text Box With Input Addon"
+                        validate={[Function]}
                       >
-                        <TextField
+                        <FormGroup
                           inputAddon={
                             Object {
                               "before": Object {
@@ -427,114 +426,54 @@ exports[`<Input Addon> should render group button before input addon correctly 1
                             }
                           }
                           label="Text Box With Input Addon"
-                          name="text_box_21"
-                          title="Text Box With Input Addon"
-                          validate={[Function]}
+                          meta={
+                            Object {
+                              "active": false,
+                              "data": Object {},
+                              "dirty": false,
+                              "dirtySinceLastSubmit": false,
+                              "error": undefined,
+                              "initial": undefined,
+                              "invalid": false,
+                              "length": undefined,
+                              "modified": false,
+                              "pristine": true,
+                              "submitError": undefined,
+                              "submitFailed": false,
+                              "submitSucceeded": false,
+                              "submitting": false,
+                              "touched": false,
+                              "valid": true,
+                              "validating": false,
+                              "visited": false,
+                            }
+                          }
                         >
                           <FormGroup
-                            inputAddon={
-                              Object {
-                                "before": Object {
-                                  "fields": Array [
-                                    Object {
-                                      "component": "input-addon-button-group",
+                            bsClass="form-group"
+                            validationState={null}
+                          >
+                            <div
+                              className="form-group"
+                            >
+                              <ControlLabel
+                                bsClass="control-label"
+                                srOnly={false}
+                              >
+                                <label
+                                  className="control-label"
+                                >
+                                  Text Box With Input Addon
+                                </label>
+                              </ControlLabel>
+                              <InputGroupWrapper
+                                inputAddon={
+                                  Object {
+                                    "before": Object {
                                       "fields": Array [
                                         Object {
-                                          "component": "button",
-                                          "label": "Set 1",
-                                          "name": "set1",
-                                          "onClick": [Function],
-                                        },
-                                        Object {
-                                          "component": "button",
-                                          "label": "Set 2",
-                                          "name": "set2",
-                                        },
-                                      ],
-                                      "name": "i-a-g-2",
-                                    },
-                                  ],
-                                },
-                              }
-                            }
-                            label="Text Box With Input Addon"
-                            meta={
-                              Object {
-                                "active": false,
-                                "data": Object {},
-                                "dirty": false,
-                                "dirtySinceLastSubmit": false,
-                                "error": undefined,
-                                "initial": undefined,
-                                "invalid": false,
-                                "length": undefined,
-                                "modified": false,
-                                "pristine": true,
-                                "submitError": undefined,
-                                "submitFailed": false,
-                                "submitSucceeded": false,
-                                "submitting": false,
-                                "touched": false,
-                                "valid": true,
-                                "validating": false,
-                                "visited": false,
-                              }
-                            }
-                          >
-                            <FormGroup
-                              bsClass="form-group"
-                              validationState={null}
-                            >
-                              <div
-                                className="form-group"
-                              >
-                                <ControlLabel
-                                  bsClass="control-label"
-                                  srOnly={false}
-                                >
-                                  <label
-                                    className="control-label"
-                                  >
-                                    Text Box With Input Addon
-                                  </label>
-                                </ControlLabel>
-                                <InputGroupWrapper
-                                  inputAddon={
-                                    Object {
-                                      "before": Object {
-                                        "fields": Array [
-                                          Object {
-                                            "component": "input-addon-button-group",
-                                            "fields": Array [
-                                              Object {
-                                                "component": "button",
-                                                "label": "Set 1",
-                                                "name": "set1",
-                                                "onClick": [Function],
-                                              },
-                                              Object {
-                                                "component": "button",
-                                                "label": "Set 2",
-                                                "name": "set2",
-                                              },
-                                            ],
-                                            "name": "i-a-g-2",
-                                          },
-                                        ],
-                                      },
-                                    }
-                                  }
-                                >
-                                  <InputGroup
-                                    bsClass="input-group"
-                                  >
-                                    <span
-                                      className="input-group"
-                                    >
-                                      <SingleField
-                                        component="input-addon-button-group"
-                                        fields={
-                                          Array [
+                                          "component": "input-addon-button-group",
+                                          "fields": Array [
                                             Object {
                                               "component": "button",
                                               "label": "Set 1",
@@ -546,186 +485,178 @@ exports[`<Input Addon> should render group button before input addon correctly 1
                                               "label": "Set 2",
                                               "name": "set2",
                                             },
-                                          ]
-                                        }
-                                        key="i-a-g-2"
-                                        name="i-a-g-2"
-                                      >
-                                        <FormConditionWrapper>
-                                          <FormFieldHideWrapper
-                                            hideField={false}
+                                          ],
+                                          "name": "i-a-g-2",
+                                        },
+                                      ],
+                                    },
+                                  }
+                                }
+                              >
+                                <InputGroup
+                                  bsClass="input-group"
+                                >
+                                  <span
+                                    className="input-group"
+                                  >
+                                    <SingleField
+                                      component="input-addon-button-group"
+                                      fields={
+                                        Array [
+                                          Object {
+                                            "component": "button",
+                                            "label": "Set 1",
+                                            "name": "set1",
+                                            "onClick": [Function],
+                                          },
+                                          Object {
+                                            "component": "button",
+                                            "label": "Set 2",
+                                            "name": "set2",
+                                          },
+                                        ]
+                                      }
+                                      key="i-a-g-2"
+                                      name="i-a-g-2"
+                                    >
+                                      <FormConditionWrapper>
+                                        <FormFieldHideWrapper
+                                          hideField={false}
+                                        >
+                                          <InputAddonButtonGroup
+                                            fields={
+                                              Array [
+                                                Object {
+                                                  "component": "button",
+                                                  "label": "Set 1",
+                                                  "name": "set1",
+                                                  "onClick": [Function],
+                                                },
+                                                Object {
+                                                  "component": "button",
+                                                  "label": "Set 2",
+                                                  "name": "set2",
+                                                },
+                                              ]
+                                            }
+                                            name="i-a-g-2"
+                                            validate={[Function]}
                                           >
-                                            <FieldWrapper
-                                              component={[Function]}
-                                              componentType="input-addon-button-group"
-                                              fields={
-                                                Array [
-                                                  Object {
-                                                    "component": "button",
-                                                    "label": "Set 1",
-                                                    "name": "set1",
-                                                    "onClick": [Function],
-                                                  },
-                                                  Object {
-                                                    "component": "button",
-                                                    "label": "Set 2",
-                                                    "name": "set2",
-                                                  },
-                                                ]
-                                              }
-                                              name="i-a-g-2"
+                                            <InputGroupButton
+                                              bsClass="input-group-btn"
                                             >
-                                              <InputAddonButtonGroup
-                                                fields={
-                                                  Array [
-                                                    Object {
-                                                      "component": "button",
-                                                      "label": "Set 1",
-                                                      "name": "set1",
-                                                      "onClick": [Function],
-                                                    },
-                                                    Object {
-                                                      "component": "button",
-                                                      "label": "Set 2",
-                                                      "name": "set2",
-                                                    },
-                                                  ]
-                                                }
-                                                name="i-a-g-2"
-                                                validate={[Function]}
+                                              <span
+                                                className="input-group-btn"
                                               >
-                                                <InputGroupButton
-                                                  bsClass="input-group-btn"
+                                                <SingleField
+                                                  component="button"
+                                                  key="set1"
+                                                  label="Set 1"
+                                                  name="set1"
+                                                  onClick={[Function]}
                                                 >
-                                                  <span
-                                                    className="input-group-btn"
-                                                  >
-                                                    <SingleField
-                                                      component="button"
-                                                      key="set1"
-                                                      label="Set 1"
-                                                      name="set1"
-                                                      onClick={[Function]}
+                                                  <FormConditionWrapper>
+                                                    <FormFieldHideWrapper
+                                                      hideField={false}
                                                     >
-                                                      <FormConditionWrapper>
-                                                        <FormFieldHideWrapper
-                                                          hideField={false}
+                                                      <Button
+                                                        label="Set 1"
+                                                        name="set1"
+                                                        onClick={[Function]}
+                                                        validate={[Function]}
+                                                      >
+                                                        <Button
+                                                          active={false}
+                                                          block={false}
+                                                          bsClass="btn"
+                                                          bsStyle="default"
+                                                          disabled={false}
+                                                          name="set1"
+                                                          onClick={[Function]}
                                                         >
-                                                          <FieldWrapper
-                                                            component={[Function]}
-                                                            componentType="button"
-                                                            label="Set 1"
+                                                          <button
+                                                            className="btn btn-default"
+                                                            disabled={false}
                                                             name="set1"
                                                             onClick={[Function]}
+                                                            type="button"
                                                           >
-                                                            <Button
-                                                              label="Set 1"
-                                                              name="set1"
-                                                              onClick={[Function]}
-                                                              validate={[Function]}
-                                                            >
-                                                              <Button
-                                                                active={false}
-                                                                block={false}
-                                                                bsClass="btn"
-                                                                bsStyle="default"
-                                                                disabled={false}
-                                                                name="set1"
-                                                                onClick={[Function]}
-                                                              >
-                                                                <button
-                                                                  className="btn btn-default"
-                                                                  disabled={false}
-                                                                  name="set1"
-                                                                  onClick={[Function]}
-                                                                  type="button"
-                                                                >
-                                                                  Set 1
-                                                                </button>
-                                                              </Button>
-                                                            </Button>
-                                                          </FieldWrapper>
-                                                        </FormFieldHideWrapper>
-                                                      </FormConditionWrapper>
-                                                    </SingleField>
-                                                    <SingleField
-                                                      component="button"
-                                                      key="set2"
-                                                      label="Set 2"
-                                                      name="set2"
+                                                            Set 1
+                                                          </button>
+                                                        </Button>
+                                                      </Button>
+                                                    </FormFieldHideWrapper>
+                                                  </FormConditionWrapper>
+                                                </SingleField>
+                                                <SingleField
+                                                  component="button"
+                                                  key="set2"
+                                                  label="Set 2"
+                                                  name="set2"
+                                                >
+                                                  <FormConditionWrapper>
+                                                    <FormFieldHideWrapper
+                                                      hideField={false}
                                                     >
-                                                      <FormConditionWrapper>
-                                                        <FormFieldHideWrapper
-                                                          hideField={false}
+                                                      <Button
+                                                        label="Set 2"
+                                                        name="set2"
+                                                        validate={[Function]}
+                                                      >
+                                                        <Button
+                                                          active={false}
+                                                          block={false}
+                                                          bsClass="btn"
+                                                          bsStyle="default"
+                                                          disabled={false}
+                                                          name="set2"
                                                         >
-                                                          <FieldWrapper
-                                                            component={[Function]}
-                                                            componentType="button"
-                                                            label="Set 2"
+                                                          <button
+                                                            className="btn btn-default"
+                                                            disabled={false}
                                                             name="set2"
+                                                            type="button"
                                                           >
-                                                            <Button
-                                                              label="Set 2"
-                                                              name="set2"
-                                                              validate={[Function]}
-                                                            >
-                                                              <Button
-                                                                active={false}
-                                                                block={false}
-                                                                bsClass="btn"
-                                                                bsStyle="default"
-                                                                disabled={false}
-                                                                name="set2"
-                                                              >
-                                                                <button
-                                                                  className="btn btn-default"
-                                                                  disabled={false}
-                                                                  name="set2"
-                                                                  type="button"
-                                                                >
-                                                                  Set 2
-                                                                </button>
-                                                              </Button>
-                                                            </Button>
-                                                          </FieldWrapper>
-                                                        </FormFieldHideWrapper>
-                                                      </FormConditionWrapper>
-                                                    </SingleField>
-                                                  </span>
-                                                </InputGroupButton>
-                                              </InputAddonButtonGroup>
-                                            </FieldWrapper>
-                                          </FormFieldHideWrapper>
-                                        </FormConditionWrapper>
-                                      </SingleField>
-                                      <FormControl
-                                        bsClass="form-control"
-                                        componentClass="input"
+                                                            Set 2
+                                                          </button>
+                                                        </Button>
+                                                      </Button>
+                                                    </FormFieldHideWrapper>
+                                                  </FormConditionWrapper>
+                                                </SingleField>
+                                              </span>
+                                            </InputGroupButton>
+                                          </InputAddonButtonGroup>
+                                        </FormFieldHideWrapper>
+                                      </FormConditionWrapper>
+                                    </SingleField>
+                                    <FormControl
+                                      bsClass="form-control"
+                                      componentClass="input"
+                                      name="text_box_21"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      title="Text Box With Input Addon"
+                                      value=""
+                                    >
+                                      <input
+                                        className="form-control"
                                         name="text_box_21"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
                                         title="Text Box With Input Addon"
                                         value=""
-                                      >
-                                        <input
-                                          className="form-control"
-                                          name="text_box_21"
-                                          onBlur={[Function]}
-                                          onChange={[Function]}
-                                          onFocus={[Function]}
-                                          title="Text Box With Input Addon"
-                                          value=""
-                                        />
-                                      </FormControl>
-                                    </span>
-                                  </InputGroup>
-                                </InputGroupWrapper>
-                              </div>
-                            </FormGroup>
+                                      />
+                                    </FormControl>
+                                  </span>
+                                </InputGroup>
+                              </InputGroupWrapper>
+                            </div>
                           </FormGroup>
-                        </TextField>
-                      </FieldWrapper>
+                        </FormGroup>
+                      </TextField>
                     </FormFieldHideWrapper>
                   </FormConditionWrapper>
                 </SingleField>
@@ -1155,9 +1086,7 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
                     <FormFieldHideWrapper
                       hideField={false}
                     >
-                      <FieldWrapper
-                        component={[Function]}
-                        componentType="text-field"
+                      <TextField
                         inputAddon={
                           Object {
                             "before": Object {
@@ -1192,8 +1121,9 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
                         label="Text Box With Input Addon"
                         name="text_box_21"
                         title="Text Box With Input Addon"
+                        validate={[Function]}
                       >
-                        <TextField
+                        <FormGroup
                           inputAddon={
                             Object {
                               "before": Object {
@@ -1226,346 +1156,262 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
                             }
                           }
                           label="Text Box With Input Addon"
-                          name="text_box_21"
-                          title="Text Box With Input Addon"
-                          validate={[Function]}
+                          meta={
+                            Object {
+                              "active": false,
+                              "data": Object {},
+                              "dirty": false,
+                              "dirtySinceLastSubmit": false,
+                              "error": undefined,
+                              "initial": undefined,
+                              "invalid": false,
+                              "length": undefined,
+                              "modified": false,
+                              "pristine": true,
+                              "submitError": undefined,
+                              "submitFailed": false,
+                              "submitSucceeded": false,
+                              "submitting": false,
+                              "touched": false,
+                              "valid": true,
+                              "validating": false,
+                              "visited": false,
+                            }
+                          }
                         >
                           <FormGroup
-                            inputAddon={
-                              Object {
-                                "before": Object {
-                                  "fields": Array [
-                                    Object {
-                                      "component": "input-addon-group",
-                                      "fields": Array [
-                                        Object {
-                                          "component": "plain-text",
-                                          "label": "-",
-                                          "name": "name1",
-                                          "variant": "span",
-                                        },
-                                      ],
-                                      "name": "i-a-g-2",
-                                    },
-                                    Object {
-                                      "component": "input-addon-button-group",
-                                      "fields": Array [
-                                        Object {
-                                          "component": "button",
-                                          "label": "Set 3",
-                                          "name": "set3",
-                                        },
-                                      ],
-                                      "name": "i-a-g-3",
-                                    },
-                                  ],
-                                },
-                              }
-                            }
-                            label="Text Box With Input Addon"
-                            meta={
-                              Object {
-                                "active": false,
-                                "data": Object {},
-                                "dirty": false,
-                                "dirtySinceLastSubmit": false,
-                                "error": undefined,
-                                "initial": undefined,
-                                "invalid": false,
-                                "length": undefined,
-                                "modified": false,
-                                "pristine": true,
-                                "submitError": undefined,
-                                "submitFailed": false,
-                                "submitSucceeded": false,
-                                "submitting": false,
-                                "touched": false,
-                                "valid": true,
-                                "validating": false,
-                                "visited": false,
-                              }
-                            }
+                            bsClass="form-group"
+                            validationState={null}
                           >
-                            <FormGroup
-                              bsClass="form-group"
-                              validationState={null}
+                            <div
+                              className="form-group"
                             >
-                              <div
-                                className="form-group"
+                              <ControlLabel
+                                bsClass="control-label"
+                                srOnly={false}
                               >
-                                <ControlLabel
-                                  bsClass="control-label"
-                                  srOnly={false}
+                                <label
+                                  className="control-label"
                                 >
-                                  <label
-                                    className="control-label"
-                                  >
-                                    Text Box With Input Addon
-                                  </label>
-                                </ControlLabel>
-                                <InputGroupWrapper
-                                  inputAddon={
-                                    Object {
-                                      "before": Object {
-                                        "fields": Array [
-                                          Object {
-                                            "component": "input-addon-group",
-                                            "fields": Array [
-                                              Object {
-                                                "component": "plain-text",
-                                                "label": "-",
-                                                "name": "name1",
-                                                "variant": "span",
-                                              },
-                                            ],
-                                            "name": "i-a-g-2",
-                                          },
-                                          Object {
-                                            "component": "input-addon-button-group",
-                                            "fields": Array [
-                                              Object {
-                                                "component": "button",
-                                                "label": "Set 3",
-                                                "name": "set3",
-                                              },
-                                            ],
-                                            "name": "i-a-g-3",
-                                          },
-                                        ],
-                                      },
-                                    }
-                                  }
-                                >
-                                  <InputGroup
-                                    bsClass="input-group"
-                                  >
-                                    <span
-                                      className="input-group"
-                                    >
-                                      <SingleField
-                                        component="input-addon-group"
-                                        fields={
-                                          Array [
+                                  Text Box With Input Addon
+                                </label>
+                              </ControlLabel>
+                              <InputGroupWrapper
+                                inputAddon={
+                                  Object {
+                                    "before": Object {
+                                      "fields": Array [
+                                        Object {
+                                          "component": "input-addon-group",
+                                          "fields": Array [
                                             Object {
                                               "component": "plain-text",
                                               "label": "-",
                                               "name": "name1",
                                               "variant": "span",
                                             },
-                                          ]
-                                        }
-                                        key="i-a-g-2"
-                                        name="i-a-g-2"
-                                      >
-                                        <FormConditionWrapper>
-                                          <FormFieldHideWrapper
-                                            hideField={false}
-                                          >
-                                            <FieldWrapper
-                                              component={[Function]}
-                                              componentType="input-addon-group"
-                                              fields={
-                                                Array [
-                                                  Object {
-                                                    "component": "plain-text",
-                                                    "label": "-",
-                                                    "name": "name1",
-                                                    "variant": "span",
-                                                  },
-                                                ]
-                                              }
-                                              name="i-a-g-2"
-                                            >
-                                              <InputAddonGroup
-                                                fields={
-                                                  Array [
-                                                    Object {
-                                                      "component": "plain-text",
-                                                      "label": "-",
-                                                      "name": "name1",
-                                                      "variant": "span",
-                                                    },
-                                                  ]
-                                                }
-                                                name="i-a-g-2"
-                                                validate={[Function]}
-                                              >
-                                                <InputGroupAddon
-                                                  bsClass="input-group-addon"
-                                                >
-                                                  <span
-                                                    className="input-group-addon"
-                                                  >
-                                                    <SingleField
-                                                      component="plain-text"
-                                                      key="name1"
-                                                      label="-"
-                                                      name="name1"
-                                                      variant="span"
-                                                    >
-                                                      <FormConditionWrapper>
-                                                        <FormFieldHideWrapper
-                                                          hideField={false}
-                                                        >
-                                                          <FieldWrapper
-                                                            component={[Function]}
-                                                            componentType="plain-text"
-                                                            label="-"
-                                                            name="name1"
-                                                            variant="span"
-                                                          >
-                                                            <PlainText
-                                                              label="-"
-                                                              name="name1"
-                                                              validate={[Function]}
-                                                              variant="span"
-                                                            >
-                                                              <span
-                                                                key="name1-0"
-                                                              >
-                                                                -
-                                                              </span>
-                                                            </PlainText>
-                                                          </FieldWrapper>
-                                                        </FormFieldHideWrapper>
-                                                      </FormConditionWrapper>
-                                                    </SingleField>
-                                                  </span>
-                                                </InputGroupAddon>
-                                              </InputAddonGroup>
-                                            </FieldWrapper>
-                                          </FormFieldHideWrapper>
-                                        </FormConditionWrapper>
-                                      </SingleField>
-                                      <SingleField
-                                        component="input-addon-button-group"
-                                        fields={
-                                          Array [
+                                          ],
+                                          "name": "i-a-g-2",
+                                        },
+                                        Object {
+                                          "component": "input-addon-button-group",
+                                          "fields": Array [
                                             Object {
                                               "component": "button",
                                               "label": "Set 3",
                                               "name": "set3",
                                             },
-                                          ]
-                                        }
-                                        key="i-a-g-3"
-                                        name="i-a-g-3"
-                                      >
-                                        <FormConditionWrapper>
-                                          <FormFieldHideWrapper
-                                            hideField={false}
+                                          ],
+                                          "name": "i-a-g-3",
+                                        },
+                                      ],
+                                    },
+                                  }
+                                }
+                              >
+                                <InputGroup
+                                  bsClass="input-group"
+                                >
+                                  <span
+                                    className="input-group"
+                                  >
+                                    <SingleField
+                                      component="input-addon-group"
+                                      fields={
+                                        Array [
+                                          Object {
+                                            "component": "plain-text",
+                                            "label": "-",
+                                            "name": "name1",
+                                            "variant": "span",
+                                          },
+                                        ]
+                                      }
+                                      key="i-a-g-2"
+                                      name="i-a-g-2"
+                                    >
+                                      <FormConditionWrapper>
+                                        <FormFieldHideWrapper
+                                          hideField={false}
+                                        >
+                                          <InputAddonGroup
+                                            fields={
+                                              Array [
+                                                Object {
+                                                  "component": "plain-text",
+                                                  "label": "-",
+                                                  "name": "name1",
+                                                  "variant": "span",
+                                                },
+                                              ]
+                                            }
+                                            name="i-a-g-2"
+                                            validate={[Function]}
                                           >
-                                            <FieldWrapper
-                                              component={[Function]}
-                                              componentType="input-addon-button-group"
-                                              fields={
-                                                Array [
-                                                  Object {
-                                                    "component": "button",
-                                                    "label": "Set 3",
-                                                    "name": "set3",
-                                                  },
-                                                ]
-                                              }
-                                              name="i-a-g-3"
+                                            <InputGroupAddon
+                                              bsClass="input-group-addon"
                                             >
-                                              <InputAddonButtonGroup
-                                                fields={
-                                                  Array [
-                                                    Object {
-                                                      "component": "button",
-                                                      "label": "Set 3",
-                                                      "name": "set3",
-                                                    },
-                                                  ]
-                                                }
-                                                name="i-a-g-3"
-                                                validate={[Function]}
+                                              <span
+                                                className="input-group-addon"
                                               >
-                                                <InputGroupButton
-                                                  bsClass="input-group-btn"
+                                                <SingleField
+                                                  component="plain-text"
+                                                  key="name1"
+                                                  label="-"
+                                                  name="name1"
+                                                  variant="span"
                                                 >
-                                                  <span
-                                                    className="input-group-btn"
-                                                  >
-                                                    <SingleField
-                                                      component="button"
-                                                      key="set3"
-                                                      label="Set 3"
-                                                      name="set3"
+                                                  <FormConditionWrapper>
+                                                    <FormFieldHideWrapper
+                                                      hideField={false}
                                                     >
-                                                      <FormConditionWrapper>
-                                                        <FormFieldHideWrapper
-                                                          hideField={false}
+                                                      <PlainText
+                                                        label="-"
+                                                        name="name1"
+                                                        validate={[Function]}
+                                                        variant="span"
+                                                      >
+                                                        <span
+                                                          key="name1-0"
                                                         >
-                                                          <FieldWrapper
-                                                            component={[Function]}
-                                                            componentType="button"
-                                                            label="Set 3"
+                                                          -
+                                                        </span>
+                                                      </PlainText>
+                                                    </FormFieldHideWrapper>
+                                                  </FormConditionWrapper>
+                                                </SingleField>
+                                              </span>
+                                            </InputGroupAddon>
+                                          </InputAddonGroup>
+                                        </FormFieldHideWrapper>
+                                      </FormConditionWrapper>
+                                    </SingleField>
+                                    <SingleField
+                                      component="input-addon-button-group"
+                                      fields={
+                                        Array [
+                                          Object {
+                                            "component": "button",
+                                            "label": "Set 3",
+                                            "name": "set3",
+                                          },
+                                        ]
+                                      }
+                                      key="i-a-g-3"
+                                      name="i-a-g-3"
+                                    >
+                                      <FormConditionWrapper>
+                                        <FormFieldHideWrapper
+                                          hideField={false}
+                                        >
+                                          <InputAddonButtonGroup
+                                            fields={
+                                              Array [
+                                                Object {
+                                                  "component": "button",
+                                                  "label": "Set 3",
+                                                  "name": "set3",
+                                                },
+                                              ]
+                                            }
+                                            name="i-a-g-3"
+                                            validate={[Function]}
+                                          >
+                                            <InputGroupButton
+                                              bsClass="input-group-btn"
+                                            >
+                                              <span
+                                                className="input-group-btn"
+                                              >
+                                                <SingleField
+                                                  component="button"
+                                                  key="set3"
+                                                  label="Set 3"
+                                                  name="set3"
+                                                >
+                                                  <FormConditionWrapper>
+                                                    <FormFieldHideWrapper
+                                                      hideField={false}
+                                                    >
+                                                      <Button
+                                                        label="Set 3"
+                                                        name="set3"
+                                                        validate={[Function]}
+                                                      >
+                                                        <Button
+                                                          active={false}
+                                                          block={false}
+                                                          bsClass="btn"
+                                                          bsStyle="default"
+                                                          disabled={false}
+                                                          name="set3"
+                                                        >
+                                                          <button
+                                                            className="btn btn-default"
+                                                            disabled={false}
                                                             name="set3"
+                                                            type="button"
                                                           >
-                                                            <Button
-                                                              label="Set 3"
-                                                              name="set3"
-                                                              validate={[Function]}
-                                                            >
-                                                              <Button
-                                                                active={false}
-                                                                block={false}
-                                                                bsClass="btn"
-                                                                bsStyle="default"
-                                                                disabled={false}
-                                                                name="set3"
-                                                              >
-                                                                <button
-                                                                  className="btn btn-default"
-                                                                  disabled={false}
-                                                                  name="set3"
-                                                                  type="button"
-                                                                >
-                                                                  Set 3
-                                                                </button>
-                                                              </Button>
-                                                            </Button>
-                                                          </FieldWrapper>
-                                                        </FormFieldHideWrapper>
-                                                      </FormConditionWrapper>
-                                                    </SingleField>
-                                                  </span>
-                                                </InputGroupButton>
-                                              </InputAddonButtonGroup>
-                                            </FieldWrapper>
-                                          </FormFieldHideWrapper>
-                                        </FormConditionWrapper>
-                                      </SingleField>
-                                      <FormControl
-                                        bsClass="form-control"
-                                        componentClass="input"
+                                                            Set 3
+                                                          </button>
+                                                        </Button>
+                                                      </Button>
+                                                    </FormFieldHideWrapper>
+                                                  </FormConditionWrapper>
+                                                </SingleField>
+                                              </span>
+                                            </InputGroupButton>
+                                          </InputAddonButtonGroup>
+                                        </FormFieldHideWrapper>
+                                      </FormConditionWrapper>
+                                    </SingleField>
+                                    <FormControl
+                                      bsClass="form-control"
+                                      componentClass="input"
+                                      name="text_box_21"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      title="Text Box With Input Addon"
+                                      value=""
+                                    >
+                                      <input
+                                        className="form-control"
                                         name="text_box_21"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
                                         title="Text Box With Input Addon"
                                         value=""
-                                      >
-                                        <input
-                                          className="form-control"
-                                          name="text_box_21"
-                                          onBlur={[Function]}
-                                          onChange={[Function]}
-                                          onFocus={[Function]}
-                                          title="Text Box With Input Addon"
-                                          value=""
-                                        />
-                                      </FormControl>
-                                    </span>
-                                  </InputGroup>
-                                </InputGroupWrapper>
-                              </div>
-                            </FormGroup>
+                                      />
+                                    </FormControl>
+                                  </span>
+                                </InputGroup>
+                              </InputGroupWrapper>
+                            </div>
                           </FormGroup>
-                        </TextField>
-                      </FieldWrapper>
+                        </FormGroup>
+                      </TextField>
                     </FormFieldHideWrapper>
                   </FormConditionWrapper>
                 </SingleField>
@@ -1859,9 +1705,7 @@ exports[`<Input Addon> should render single after input addon correctly 1`] = `
                     <FormFieldHideWrapper
                       hideField={false}
                     >
-                      <FieldWrapper
-                        component={[Function]}
-                        componentType="text-field"
+                      <TextField
                         inputAddon={
                           Object {
                             "after": Object {
@@ -1879,8 +1723,9 @@ exports[`<Input Addon> should render single after input addon correctly 1`] = `
                         label="Text Box With Input Addon"
                         name="text_box_21"
                         title="Text Box With Input Addon"
+                        validate={[Function]}
                       >
-                        <TextField
+                        <FormGroup
                           inputAddon={
                             Object {
                               "after": Object {
@@ -1896,150 +1741,121 @@ exports[`<Input Addon> should render single after input addon correctly 1`] = `
                             }
                           }
                           label="Text Box With Input Addon"
-                          name="text_box_21"
-                          title="Text Box With Input Addon"
-                          validate={[Function]}
+                          meta={
+                            Object {
+                              "active": false,
+                              "data": Object {},
+                              "dirty": false,
+                              "dirtySinceLastSubmit": false,
+                              "error": undefined,
+                              "initial": undefined,
+                              "invalid": false,
+                              "length": undefined,
+                              "modified": false,
+                              "pristine": true,
+                              "submitError": undefined,
+                              "submitFailed": false,
+                              "submitSucceeded": false,
+                              "submitting": false,
+                              "touched": false,
+                              "valid": true,
+                              "validating": false,
+                              "visited": false,
+                            }
+                          }
                         >
                           <FormGroup
-                            inputAddon={
-                              Object {
-                                "after": Object {
-                                  "fields": Array [
-                                    Object {
-                                      "component": "plain-text",
-                                      "label": "-",
-                                      "name": "name1",
-                                      "variant": "span",
-                                    },
-                                  ],
-                                },
-                              }
-                            }
-                            label="Text Box With Input Addon"
-                            meta={
-                              Object {
-                                "active": false,
-                                "data": Object {},
-                                "dirty": false,
-                                "dirtySinceLastSubmit": false,
-                                "error": undefined,
-                                "initial": undefined,
-                                "invalid": false,
-                                "length": undefined,
-                                "modified": false,
-                                "pristine": true,
-                                "submitError": undefined,
-                                "submitFailed": false,
-                                "submitSucceeded": false,
-                                "submitting": false,
-                                "touched": false,
-                                "valid": true,
-                                "validating": false,
-                                "visited": false,
-                              }
-                            }
+                            bsClass="form-group"
+                            validationState={null}
                           >
-                            <FormGroup
-                              bsClass="form-group"
-                              validationState={null}
+                            <div
+                              className="form-group"
                             >
-                              <div
-                                className="form-group"
+                              <ControlLabel
+                                bsClass="control-label"
+                                srOnly={false}
                               >
-                                <ControlLabel
-                                  bsClass="control-label"
-                                  srOnly={false}
+                                <label
+                                  className="control-label"
                                 >
-                                  <label
-                                    className="control-label"
-                                  >
-                                    Text Box With Input Addon
-                                  </label>
-                                </ControlLabel>
-                                <InputGroupWrapper
-                                  inputAddon={
-                                    Object {
-                                      "after": Object {
-                                        "fields": Array [
-                                          Object {
-                                            "component": "plain-text",
-                                            "label": "-",
-                                            "name": "name1",
-                                            "variant": "span",
-                                          },
-                                        ],
-                                      },
-                                    }
+                                  Text Box With Input Addon
+                                </label>
+                              </ControlLabel>
+                              <InputGroupWrapper
+                                inputAddon={
+                                  Object {
+                                    "after": Object {
+                                      "fields": Array [
+                                        Object {
+                                          "component": "plain-text",
+                                          "label": "-",
+                                          "name": "name1",
+                                          "variant": "span",
+                                        },
+                                      ],
+                                    },
                                   }
+                                }
+                              >
+                                <InputGroup
+                                  bsClass="input-group"
                                 >
-                                  <InputGroup
-                                    bsClass="input-group"
+                                  <span
+                                    className="input-group"
                                   >
-                                    <span
-                                      className="input-group"
+                                    <FormControl
+                                      bsClass="form-control"
+                                      componentClass="input"
+                                      name="text_box_21"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      title="Text Box With Input Addon"
+                                      value=""
                                     >
-                                      <FormControl
-                                        bsClass="form-control"
-                                        componentClass="input"
+                                      <input
+                                        className="form-control"
                                         name="text_box_21"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
                                         title="Text Box With Input Addon"
                                         value=""
-                                      >
-                                        <input
-                                          className="form-control"
-                                          name="text_box_21"
-                                          onBlur={[Function]}
-                                          onChange={[Function]}
-                                          onFocus={[Function]}
-                                          title="Text Box With Input Addon"
-                                          value=""
-                                        />
-                                      </FormControl>
-                                      <SingleField
-                                        component="plain-text"
-                                        key="name1"
-                                        label="-"
-                                        name="name1"
-                                        variant="span"
-                                      >
-                                        <FormConditionWrapper>
-                                          <FormFieldHideWrapper
-                                            hideField={false}
+                                      />
+                                    </FormControl>
+                                    <SingleField
+                                      component="plain-text"
+                                      key="name1"
+                                      label="-"
+                                      name="name1"
+                                      variant="span"
+                                    >
+                                      <FormConditionWrapper>
+                                        <FormFieldHideWrapper
+                                          hideField={false}
+                                        >
+                                          <PlainText
+                                            label="-"
+                                            name="name1"
+                                            validate={[Function]}
+                                            variant="span"
                                           >
-                                            <FieldWrapper
-                                              component={[Function]}
-                                              componentType="plain-text"
-                                              label="-"
-                                              name="name1"
-                                              variant="span"
+                                            <span
+                                              key="name1-0"
                                             >
-                                              <PlainText
-                                                label="-"
-                                                name="name1"
-                                                validate={[Function]}
-                                                variant="span"
-                                              >
-                                                <span
-                                                  key="name1-0"
-                                                >
-                                                  -
-                                                </span>
-                                              </PlainText>
-                                            </FieldWrapper>
-                                          </FormFieldHideWrapper>
-                                        </FormConditionWrapper>
-                                      </SingleField>
-                                    </span>
-                                  </InputGroup>
-                                </InputGroupWrapper>
-                              </div>
-                            </FormGroup>
+                                              -
+                                            </span>
+                                          </PlainText>
+                                        </FormFieldHideWrapper>
+                                      </FormConditionWrapper>
+                                    </SingleField>
+                                  </span>
+                                </InputGroup>
+                              </InputGroupWrapper>
+                            </div>
                           </FormGroup>
-                        </TextField>
-                      </FieldWrapper>
+                        </FormGroup>
+                      </TextField>
                     </FormFieldHideWrapper>
                   </FormConditionWrapper>
                 </SingleField>
@@ -2333,9 +2149,7 @@ exports[`<Input Addon> should render single before input addon correctly 1`] = `
                     <FormFieldHideWrapper
                       hideField={false}
                     >
-                      <FieldWrapper
-                        component={[Function]}
-                        componentType="text-field"
+                      <TextField
                         inputAddon={
                           Object {
                             "before": Object {
@@ -2353,8 +2167,9 @@ exports[`<Input Addon> should render single before input addon correctly 1`] = `
                         label="Text Box With Input Addon"
                         name="text_box_21"
                         title="Text Box With Input Addon"
+                        validate={[Function]}
                       >
-                        <TextField
+                        <FormGroup
                           inputAddon={
                             Object {
                               "before": Object {
@@ -2370,150 +2185,121 @@ exports[`<Input Addon> should render single before input addon correctly 1`] = `
                             }
                           }
                           label="Text Box With Input Addon"
-                          name="text_box_21"
-                          title="Text Box With Input Addon"
-                          validate={[Function]}
+                          meta={
+                            Object {
+                              "active": false,
+                              "data": Object {},
+                              "dirty": false,
+                              "dirtySinceLastSubmit": false,
+                              "error": undefined,
+                              "initial": undefined,
+                              "invalid": false,
+                              "length": undefined,
+                              "modified": false,
+                              "pristine": true,
+                              "submitError": undefined,
+                              "submitFailed": false,
+                              "submitSucceeded": false,
+                              "submitting": false,
+                              "touched": false,
+                              "valid": true,
+                              "validating": false,
+                              "visited": false,
+                            }
+                          }
                         >
                           <FormGroup
-                            inputAddon={
-                              Object {
-                                "before": Object {
-                                  "fields": Array [
-                                    Object {
-                                      "component": "plain-text",
-                                      "label": "-",
-                                      "name": "name1",
-                                      "variant": "span",
-                                    },
-                                  ],
-                                },
-                              }
-                            }
-                            label="Text Box With Input Addon"
-                            meta={
-                              Object {
-                                "active": false,
-                                "data": Object {},
-                                "dirty": false,
-                                "dirtySinceLastSubmit": false,
-                                "error": undefined,
-                                "initial": undefined,
-                                "invalid": false,
-                                "length": undefined,
-                                "modified": false,
-                                "pristine": true,
-                                "submitError": undefined,
-                                "submitFailed": false,
-                                "submitSucceeded": false,
-                                "submitting": false,
-                                "touched": false,
-                                "valid": true,
-                                "validating": false,
-                                "visited": false,
-                              }
-                            }
+                            bsClass="form-group"
+                            validationState={null}
                           >
-                            <FormGroup
-                              bsClass="form-group"
-                              validationState={null}
+                            <div
+                              className="form-group"
                             >
-                              <div
-                                className="form-group"
+                              <ControlLabel
+                                bsClass="control-label"
+                                srOnly={false}
                               >
-                                <ControlLabel
-                                  bsClass="control-label"
-                                  srOnly={false}
+                                <label
+                                  className="control-label"
                                 >
-                                  <label
-                                    className="control-label"
-                                  >
-                                    Text Box With Input Addon
-                                  </label>
-                                </ControlLabel>
-                                <InputGroupWrapper
-                                  inputAddon={
-                                    Object {
-                                      "before": Object {
-                                        "fields": Array [
-                                          Object {
-                                            "component": "plain-text",
-                                            "label": "-",
-                                            "name": "name1",
-                                            "variant": "span",
-                                          },
-                                        ],
-                                      },
-                                    }
+                                  Text Box With Input Addon
+                                </label>
+                              </ControlLabel>
+                              <InputGroupWrapper
+                                inputAddon={
+                                  Object {
+                                    "before": Object {
+                                      "fields": Array [
+                                        Object {
+                                          "component": "plain-text",
+                                          "label": "-",
+                                          "name": "name1",
+                                          "variant": "span",
+                                        },
+                                      ],
+                                    },
                                   }
+                                }
+                              >
+                                <InputGroup
+                                  bsClass="input-group"
                                 >
-                                  <InputGroup
-                                    bsClass="input-group"
+                                  <span
+                                    className="input-group"
                                   >
-                                    <span
-                                      className="input-group"
+                                    <SingleField
+                                      component="plain-text"
+                                      key="name1"
+                                      label="-"
+                                      name="name1"
+                                      variant="span"
                                     >
-                                      <SingleField
-                                        component="plain-text"
-                                        key="name1"
-                                        label="-"
-                                        name="name1"
-                                        variant="span"
-                                      >
-                                        <FormConditionWrapper>
-                                          <FormFieldHideWrapper
-                                            hideField={false}
+                                      <FormConditionWrapper>
+                                        <FormFieldHideWrapper
+                                          hideField={false}
+                                        >
+                                          <PlainText
+                                            label="-"
+                                            name="name1"
+                                            validate={[Function]}
+                                            variant="span"
                                           >
-                                            <FieldWrapper
-                                              component={[Function]}
-                                              componentType="plain-text"
-                                              label="-"
-                                              name="name1"
-                                              variant="span"
+                                            <span
+                                              key="name1-0"
                                             >
-                                              <PlainText
-                                                label="-"
-                                                name="name1"
-                                                validate={[Function]}
-                                                variant="span"
-                                              >
-                                                <span
-                                                  key="name1-0"
-                                                >
-                                                  -
-                                                </span>
-                                              </PlainText>
-                                            </FieldWrapper>
-                                          </FormFieldHideWrapper>
-                                        </FormConditionWrapper>
-                                      </SingleField>
-                                      <FormControl
-                                        bsClass="form-control"
-                                        componentClass="input"
+                                              -
+                                            </span>
+                                          </PlainText>
+                                        </FormFieldHideWrapper>
+                                      </FormConditionWrapper>
+                                    </SingleField>
+                                    <FormControl
+                                      bsClass="form-control"
+                                      componentClass="input"
+                                      name="text_box_21"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      title="Text Box With Input Addon"
+                                      value=""
+                                    >
+                                      <input
+                                        className="form-control"
                                         name="text_box_21"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
                                         title="Text Box With Input Addon"
                                         value=""
-                                      >
-                                        <input
-                                          className="form-control"
-                                          name="text_box_21"
-                                          onBlur={[Function]}
-                                          onChange={[Function]}
-                                          onFocus={[Function]}
-                                          title="Text Box With Input Addon"
-                                          value=""
-                                        />
-                                      </FormControl>
-                                    </span>
-                                  </InputGroup>
-                                </InputGroupWrapper>
-                              </div>
-                            </FormGroup>
+                                      />
+                                    </FormControl>
+                                  </span>
+                                </InputGroup>
+                              </InputGroupWrapper>
+                            </div>
                           </FormGroup>
-                        </TextField>
-                      </FieldWrapper>
+                        </FormGroup>
+                      </TextField>
                     </FormFieldHideWrapper>
                   </FormConditionWrapper>
                 </SingleField>
@@ -2799,9 +2585,7 @@ exports[`<Input Addon> should render single button after input addon correctly 1
                     <FormFieldHideWrapper
                       hideField={false}
                     >
-                      <FieldWrapper
-                        component={[Function]}
-                        componentType="text-field"
+                      <TextField
                         inputAddon={
                           Object {
                             "after": Object {
@@ -2818,8 +2602,9 @@ exports[`<Input Addon> should render single button after input addon correctly 1
                         label="Text Box With Input Addon"
                         name="text_box_21"
                         title="Text Box With Input Addon"
+                        validate={[Function]}
                       >
-                        <TextField
+                        <FormGroup
                           inputAddon={
                             Object {
                               "after": Object {
@@ -2834,157 +2619,130 @@ exports[`<Input Addon> should render single button after input addon correctly 1
                             }
                           }
                           label="Text Box With Input Addon"
-                          name="text_box_21"
-                          title="Text Box With Input Addon"
-                          validate={[Function]}
+                          meta={
+                            Object {
+                              "active": false,
+                              "data": Object {},
+                              "dirty": false,
+                              "dirtySinceLastSubmit": false,
+                              "error": undefined,
+                              "initial": undefined,
+                              "invalid": false,
+                              "length": undefined,
+                              "modified": false,
+                              "pristine": true,
+                              "submitError": undefined,
+                              "submitFailed": false,
+                              "submitSucceeded": false,
+                              "submitting": false,
+                              "touched": false,
+                              "valid": true,
+                              "validating": false,
+                              "visited": false,
+                            }
+                          }
                         >
                           <FormGroup
-                            inputAddon={
-                              Object {
-                                "after": Object {
-                                  "fields": Array [
-                                    Object {
-                                      "component": "button",
-                                      "label": "Set 3",
-                                      "name": "set3",
-                                    },
-                                  ],
-                                },
-                              }
-                            }
-                            label="Text Box With Input Addon"
-                            meta={
-                              Object {
-                                "active": false,
-                                "data": Object {},
-                                "dirty": false,
-                                "dirtySinceLastSubmit": false,
-                                "error": undefined,
-                                "initial": undefined,
-                                "invalid": false,
-                                "length": undefined,
-                                "modified": false,
-                                "pristine": true,
-                                "submitError": undefined,
-                                "submitFailed": false,
-                                "submitSucceeded": false,
-                                "submitting": false,
-                                "touched": false,
-                                "valid": true,
-                                "validating": false,
-                                "visited": false,
-                              }
-                            }
+                            bsClass="form-group"
+                            validationState={null}
                           >
-                            <FormGroup
-                              bsClass="form-group"
-                              validationState={null}
+                            <div
+                              className="form-group"
                             >
-                              <div
-                                className="form-group"
+                              <ControlLabel
+                                bsClass="control-label"
+                                srOnly={false}
                               >
-                                <ControlLabel
-                                  bsClass="control-label"
-                                  srOnly={false}
+                                <label
+                                  className="control-label"
                                 >
-                                  <label
-                                    className="control-label"
-                                  >
-                                    Text Box With Input Addon
-                                  </label>
-                                </ControlLabel>
-                                <InputGroupWrapper
-                                  inputAddon={
-                                    Object {
-                                      "after": Object {
-                                        "fields": Array [
-                                          Object {
-                                            "component": "button",
-                                            "label": "Set 3",
-                                            "name": "set3",
-                                          },
-                                        ],
-                                      },
-                                    }
+                                  Text Box With Input Addon
+                                </label>
+                              </ControlLabel>
+                              <InputGroupWrapper
+                                inputAddon={
+                                  Object {
+                                    "after": Object {
+                                      "fields": Array [
+                                        Object {
+                                          "component": "button",
+                                          "label": "Set 3",
+                                          "name": "set3",
+                                        },
+                                      ],
+                                    },
                                   }
+                                }
+                              >
+                                <InputGroup
+                                  bsClass="input-group"
                                 >
-                                  <InputGroup
-                                    bsClass="input-group"
+                                  <span
+                                    className="input-group"
                                   >
-                                    <span
-                                      className="input-group"
+                                    <FormControl
+                                      bsClass="form-control"
+                                      componentClass="input"
+                                      name="text_box_21"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      title="Text Box With Input Addon"
+                                      value=""
                                     >
-                                      <FormControl
-                                        bsClass="form-control"
-                                        componentClass="input"
+                                      <input
+                                        className="form-control"
                                         name="text_box_21"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
                                         title="Text Box With Input Addon"
                                         value=""
-                                      >
-                                        <input
-                                          className="form-control"
-                                          name="text_box_21"
-                                          onBlur={[Function]}
-                                          onChange={[Function]}
-                                          onFocus={[Function]}
-                                          title="Text Box With Input Addon"
-                                          value=""
-                                        />
-                                      </FormControl>
-                                      <SingleField
-                                        component="button"
-                                        key="set3"
-                                        label="Set 3"
-                                        name="set3"
-                                      >
-                                        <FormConditionWrapper>
-                                          <FormFieldHideWrapper
-                                            hideField={false}
+                                      />
+                                    </FormControl>
+                                    <SingleField
+                                      component="button"
+                                      key="set3"
+                                      label="Set 3"
+                                      name="set3"
+                                    >
+                                      <FormConditionWrapper>
+                                        <FormFieldHideWrapper
+                                          hideField={false}
+                                        >
+                                          <Button
+                                            label="Set 3"
+                                            name="set3"
+                                            validate={[Function]}
                                           >
-                                            <FieldWrapper
-                                              component={[Function]}
-                                              componentType="button"
-                                              label="Set 3"
+                                            <Button
+                                              active={false}
+                                              block={false}
+                                              bsClass="btn"
+                                              bsStyle="default"
+                                              disabled={false}
                                               name="set3"
                                             >
-                                              <Button
-                                                label="Set 3"
+                                              <button
+                                                className="btn btn-default"
+                                                disabled={false}
                                                 name="set3"
-                                                validate={[Function]}
+                                                type="button"
                                               >
-                                                <Button
-                                                  active={false}
-                                                  block={false}
-                                                  bsClass="btn"
-                                                  bsStyle="default"
-                                                  disabled={false}
-                                                  name="set3"
-                                                >
-                                                  <button
-                                                    className="btn btn-default"
-                                                    disabled={false}
-                                                    name="set3"
-                                                    type="button"
-                                                  >
-                                                    Set 3
-                                                  </button>
-                                                </Button>
-                                              </Button>
-                                            </FieldWrapper>
-                                          </FormFieldHideWrapper>
-                                        </FormConditionWrapper>
-                                      </SingleField>
-                                    </span>
-                                  </InputGroup>
-                                </InputGroupWrapper>
-                              </div>
-                            </FormGroup>
+                                                Set 3
+                                              </button>
+                                            </Button>
+                                          </Button>
+                                        </FormFieldHideWrapper>
+                                      </FormConditionWrapper>
+                                    </SingleField>
+                                  </span>
+                                </InputGroup>
+                              </InputGroupWrapper>
+                            </div>
                           </FormGroup>
-                        </TextField>
-                      </FieldWrapper>
+                        </FormGroup>
+                      </TextField>
                     </FormFieldHideWrapper>
                   </FormConditionWrapper>
                 </SingleField>
@@ -3318,9 +3076,7 @@ exports[`<Input Addon> should render single button before input addon correctly 
                     <FormFieldHideWrapper
                       hideField={false}
                     >
-                      <FieldWrapper
-                        component={[Function]}
-                        componentType="text-field"
+                      <TextField
                         inputAddon={
                           Object {
                             "before": Object {
@@ -3343,8 +3099,9 @@ exports[`<Input Addon> should render single button before input addon correctly 
                         label="Text Box With Input Addon"
                         name="text_box_21"
                         title="Text Box With Input Addon"
+                        validate={[Function]}
                       >
-                        <TextField
+                        <FormGroup
                           inputAddon={
                             Object {
                               "before": Object {
@@ -3365,227 +3122,179 @@ exports[`<Input Addon> should render single button before input addon correctly 
                             }
                           }
                           label="Text Box With Input Addon"
-                          name="text_box_21"
-                          title="Text Box With Input Addon"
-                          validate={[Function]}
+                          meta={
+                            Object {
+                              "active": false,
+                              "data": Object {},
+                              "dirty": false,
+                              "dirtySinceLastSubmit": false,
+                              "error": undefined,
+                              "initial": undefined,
+                              "invalid": false,
+                              "length": undefined,
+                              "modified": false,
+                              "pristine": true,
+                              "submitError": undefined,
+                              "submitFailed": false,
+                              "submitSucceeded": false,
+                              "submitting": false,
+                              "touched": false,
+                              "valid": true,
+                              "validating": false,
+                              "visited": false,
+                            }
+                          }
                         >
                           <FormGroup
-                            inputAddon={
-                              Object {
-                                "before": Object {
-                                  "fields": Array [
-                                    Object {
-                                      "component": "input-addon-button-group",
+                            bsClass="form-group"
+                            validationState={null}
+                          >
+                            <div
+                              className="form-group"
+                            >
+                              <ControlLabel
+                                bsClass="control-label"
+                                srOnly={false}
+                              >
+                                <label
+                                  className="control-label"
+                                >
+                                  Text Box With Input Addon
+                                </label>
+                              </ControlLabel>
+                              <InputGroupWrapper
+                                inputAddon={
+                                  Object {
+                                    "before": Object {
                                       "fields": Array [
                                         Object {
-                                          "component": "button",
-                                          "label": "Set 2",
-                                          "name": "set2",
-                                        },
-                                      ],
-                                      "name": "i-a-g-2",
-                                    },
-                                  ],
-                                },
-                              }
-                            }
-                            label="Text Box With Input Addon"
-                            meta={
-                              Object {
-                                "active": false,
-                                "data": Object {},
-                                "dirty": false,
-                                "dirtySinceLastSubmit": false,
-                                "error": undefined,
-                                "initial": undefined,
-                                "invalid": false,
-                                "length": undefined,
-                                "modified": false,
-                                "pristine": true,
-                                "submitError": undefined,
-                                "submitFailed": false,
-                                "submitSucceeded": false,
-                                "submitting": false,
-                                "touched": false,
-                                "valid": true,
-                                "validating": false,
-                                "visited": false,
-                              }
-                            }
-                          >
-                            <FormGroup
-                              bsClass="form-group"
-                              validationState={null}
-                            >
-                              <div
-                                className="form-group"
-                              >
-                                <ControlLabel
-                                  bsClass="control-label"
-                                  srOnly={false}
-                                >
-                                  <label
-                                    className="control-label"
-                                  >
-                                    Text Box With Input Addon
-                                  </label>
-                                </ControlLabel>
-                                <InputGroupWrapper
-                                  inputAddon={
-                                    Object {
-                                      "before": Object {
-                                        "fields": Array [
-                                          Object {
-                                            "component": "input-addon-button-group",
-                                            "fields": Array [
-                                              Object {
-                                                "component": "button",
-                                                "label": "Set 2",
-                                                "name": "set2",
-                                              },
-                                            ],
-                                            "name": "i-a-g-2",
-                                          },
-                                        ],
-                                      },
-                                    }
-                                  }
-                                >
-                                  <InputGroup
-                                    bsClass="input-group"
-                                  >
-                                    <span
-                                      className="input-group"
-                                    >
-                                      <SingleField
-                                        component="input-addon-button-group"
-                                        fields={
-                                          Array [
+                                          "component": "input-addon-button-group",
+                                          "fields": Array [
                                             Object {
                                               "component": "button",
                                               "label": "Set 2",
                                               "name": "set2",
                                             },
-                                          ]
-                                        }
-                                        key="i-a-g-2"
-                                        name="i-a-g-2"
-                                      >
-                                        <FormConditionWrapper>
-                                          <FormFieldHideWrapper
-                                            hideField={false}
+                                          ],
+                                          "name": "i-a-g-2",
+                                        },
+                                      ],
+                                    },
+                                  }
+                                }
+                              >
+                                <InputGroup
+                                  bsClass="input-group"
+                                >
+                                  <span
+                                    className="input-group"
+                                  >
+                                    <SingleField
+                                      component="input-addon-button-group"
+                                      fields={
+                                        Array [
+                                          Object {
+                                            "component": "button",
+                                            "label": "Set 2",
+                                            "name": "set2",
+                                          },
+                                        ]
+                                      }
+                                      key="i-a-g-2"
+                                      name="i-a-g-2"
+                                    >
+                                      <FormConditionWrapper>
+                                        <FormFieldHideWrapper
+                                          hideField={false}
+                                        >
+                                          <InputAddonButtonGroup
+                                            fields={
+                                              Array [
+                                                Object {
+                                                  "component": "button",
+                                                  "label": "Set 2",
+                                                  "name": "set2",
+                                                },
+                                              ]
+                                            }
+                                            name="i-a-g-2"
+                                            validate={[Function]}
                                           >
-                                            <FieldWrapper
-                                              component={[Function]}
-                                              componentType="input-addon-button-group"
-                                              fields={
-                                                Array [
-                                                  Object {
-                                                    "component": "button",
-                                                    "label": "Set 2",
-                                                    "name": "set2",
-                                                  },
-                                                ]
-                                              }
-                                              name="i-a-g-2"
+                                            <InputGroupButton
+                                              bsClass="input-group-btn"
                                             >
-                                              <InputAddonButtonGroup
-                                                fields={
-                                                  Array [
-                                                    Object {
-                                                      "component": "button",
-                                                      "label": "Set 2",
-                                                      "name": "set2",
-                                                    },
-                                                  ]
-                                                }
-                                                name="i-a-g-2"
-                                                validate={[Function]}
+                                              <span
+                                                className="input-group-btn"
                                               >
-                                                <InputGroupButton
-                                                  bsClass="input-group-btn"
+                                                <SingleField
+                                                  component="button"
+                                                  key="set2"
+                                                  label="Set 2"
+                                                  name="set2"
                                                 >
-                                                  <span
-                                                    className="input-group-btn"
-                                                  >
-                                                    <SingleField
-                                                      component="button"
-                                                      key="set2"
-                                                      label="Set 2"
-                                                      name="set2"
+                                                  <FormConditionWrapper>
+                                                    <FormFieldHideWrapper
+                                                      hideField={false}
                                                     >
-                                                      <FormConditionWrapper>
-                                                        <FormFieldHideWrapper
-                                                          hideField={false}
+                                                      <Button
+                                                        label="Set 2"
+                                                        name="set2"
+                                                        validate={[Function]}
+                                                      >
+                                                        <Button
+                                                          active={false}
+                                                          block={false}
+                                                          bsClass="btn"
+                                                          bsStyle="default"
+                                                          disabled={false}
+                                                          name="set2"
                                                         >
-                                                          <FieldWrapper
-                                                            component={[Function]}
-                                                            componentType="button"
-                                                            label="Set 2"
+                                                          <button
+                                                            className="btn btn-default"
+                                                            disabled={false}
                                                             name="set2"
+                                                            type="button"
                                                           >
-                                                            <Button
-                                                              label="Set 2"
-                                                              name="set2"
-                                                              validate={[Function]}
-                                                            >
-                                                              <Button
-                                                                active={false}
-                                                                block={false}
-                                                                bsClass="btn"
-                                                                bsStyle="default"
-                                                                disabled={false}
-                                                                name="set2"
-                                                              >
-                                                                <button
-                                                                  className="btn btn-default"
-                                                                  disabled={false}
-                                                                  name="set2"
-                                                                  type="button"
-                                                                >
-                                                                  Set 2
-                                                                </button>
-                                                              </Button>
-                                                            </Button>
-                                                          </FieldWrapper>
-                                                        </FormFieldHideWrapper>
-                                                      </FormConditionWrapper>
-                                                    </SingleField>
-                                                  </span>
-                                                </InputGroupButton>
-                                              </InputAddonButtonGroup>
-                                            </FieldWrapper>
-                                          </FormFieldHideWrapper>
-                                        </FormConditionWrapper>
-                                      </SingleField>
-                                      <FormControl
-                                        bsClass="form-control"
-                                        componentClass="input"
+                                                            Set 2
+                                                          </button>
+                                                        </Button>
+                                                      </Button>
+                                                    </FormFieldHideWrapper>
+                                                  </FormConditionWrapper>
+                                                </SingleField>
+                                              </span>
+                                            </InputGroupButton>
+                                          </InputAddonButtonGroup>
+                                        </FormFieldHideWrapper>
+                                      </FormConditionWrapper>
+                                    </SingleField>
+                                    <FormControl
+                                      bsClass="form-control"
+                                      componentClass="input"
+                                      name="text_box_21"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      title="Text Box With Input Addon"
+                                      value=""
+                                    >
+                                      <input
+                                        className="form-control"
                                         name="text_box_21"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
                                         title="Text Box With Input Addon"
                                         value=""
-                                      >
-                                        <input
-                                          className="form-control"
-                                          name="text_box_21"
-                                          onBlur={[Function]}
-                                          onChange={[Function]}
-                                          onFocus={[Function]}
-                                          title="Text Box With Input Addon"
-                                          value=""
-                                        />
-                                      </FormControl>
-                                    </span>
-                                  </InputGroup>
-                                </InputGroupWrapper>
-                              </div>
-                            </FormGroup>
+                                      />
+                                    </FormControl>
+                                  </span>
+                                </InputGroup>
+                              </InputGroupWrapper>
+                            </div>
                           </FormGroup>
-                        </TextField>
-                      </FieldWrapper>
+                        </FormGroup>
+                      </TextField>
                     </FormFieldHideWrapper>
                   </FormConditionWrapper>
                 </SingleField>
@@ -4183,9 +3892,7 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                     <FormFieldHideWrapper
                       hideField={false}
                     >
-                      <FieldWrapper
-                        component={[Function]}
-                        componentType="text-field"
+                      <TextField
                         inputAddon={
                           Object {
                             "after": Object {
@@ -4241,8 +3948,9 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                         label="Text Box With Input Addon"
                         name="text_box_21"
                         title="Text Box With Input Addon"
+                        validate={[Function]}
                       >
-                        <TextField
+                        <FormGroup
                           inputAddon={
                             Object {
                               "after": Object {
@@ -4296,168 +4004,81 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                             }
                           }
                           label="Text Box With Input Addon"
-                          name="text_box_21"
-                          title="Text Box With Input Addon"
-                          validate={[Function]}
+                          meta={
+                            Object {
+                              "active": false,
+                              "data": Object {},
+                              "dirty": false,
+                              "dirtySinceLastSubmit": false,
+                              "error": undefined,
+                              "initial": undefined,
+                              "invalid": false,
+                              "length": undefined,
+                              "modified": false,
+                              "pristine": true,
+                              "submitError": undefined,
+                              "submitFailed": false,
+                              "submitSucceeded": false,
+                              "submitting": false,
+                              "touched": false,
+                              "valid": true,
+                              "validating": false,
+                              "visited": false,
+                            }
+                          }
                         >
                           <FormGroup
-                            inputAddon={
-                              Object {
-                                "after": Object {
-                                  "fields": Array [
-                                    Object {
-                                      "component": "input-addon-group",
-                                      "fields": Array [
-                                        Object {
-                                          "component": "plain-text",
-                                          "label": "-",
-                                          "name": "name1",
-                                          "variant": "span",
-                                        },
-                                      ],
-                                      "name": "i-a-g-2",
-                                    },
-                                    Object {
-                                      "component": "input-addon-button-group",
-                                      "fields": Array [
-                                        Object {
-                                          "component": "button",
-                                          "label": "Set 3",
-                                          "name": "set3",
-                                        },
-                                      ],
-                                      "name": "i-a-g-3",
-                                    },
-                                  ],
-                                },
-                                "before": Object {
-                                  "fields": Array [
-                                    Object {
-                                      "component": "input-addon-button-group",
-                                      "fields": Array [
-                                        Object {
-                                          "component": "button",
-                                          "label": "Set 1",
-                                          "name": "set1",
-                                          "onClick": [Function],
-                                        },
-                                        Object {
-                                          "component": "button",
-                                          "label": "Set 2",
-                                          "name": "set2",
-                                        },
-                                      ],
-                                      "name": "i-a-g-2",
-                                    },
-                                  ],
-                                },
-                              }
-                            }
-                            label="Text Box With Input Addon"
-                            meta={
-                              Object {
-                                "active": false,
-                                "data": Object {},
-                                "dirty": false,
-                                "dirtySinceLastSubmit": false,
-                                "error": undefined,
-                                "initial": undefined,
-                                "invalid": false,
-                                "length": undefined,
-                                "modified": false,
-                                "pristine": true,
-                                "submitError": undefined,
-                                "submitFailed": false,
-                                "submitSucceeded": false,
-                                "submitting": false,
-                                "touched": false,
-                                "valid": true,
-                                "validating": false,
-                                "visited": false,
-                              }
-                            }
+                            bsClass="form-group"
+                            validationState={null}
                           >
-                            <FormGroup
-                              bsClass="form-group"
-                              validationState={null}
+                            <div
+                              className="form-group"
                             >
-                              <div
-                                className="form-group"
+                              <ControlLabel
+                                bsClass="control-label"
+                                srOnly={false}
                               >
-                                <ControlLabel
-                                  bsClass="control-label"
-                                  srOnly={false}
+                                <label
+                                  className="control-label"
                                 >
-                                  <label
-                                    className="control-label"
-                                  >
-                                    Text Box With Input Addon
-                                  </label>
-                                </ControlLabel>
-                                <InputGroupWrapper
-                                  inputAddon={
-                                    Object {
-                                      "after": Object {
-                                        "fields": Array [
-                                          Object {
-                                            "component": "input-addon-group",
-                                            "fields": Array [
-                                              Object {
-                                                "component": "plain-text",
-                                                "label": "-",
-                                                "name": "name1",
-                                                "variant": "span",
-                                              },
-                                            ],
-                                            "name": "i-a-g-2",
-                                          },
-                                          Object {
-                                            "component": "input-addon-button-group",
-                                            "fields": Array [
-                                              Object {
-                                                "component": "button",
-                                                "label": "Set 3",
-                                                "name": "set3",
-                                              },
-                                            ],
-                                            "name": "i-a-g-3",
-                                          },
-                                        ],
-                                      },
-                                      "before": Object {
-                                        "fields": Array [
-                                          Object {
-                                            "component": "input-addon-button-group",
-                                            "fields": Array [
-                                              Object {
-                                                "component": "button",
-                                                "label": "Set 1",
-                                                "name": "set1",
-                                                "onClick": [Function],
-                                              },
-                                              Object {
-                                                "component": "button",
-                                                "label": "Set 2",
-                                                "name": "set2",
-                                              },
-                                            ],
-                                            "name": "i-a-g-2",
-                                          },
-                                        ],
-                                      },
-                                    }
-                                  }
-                                >
-                                  <InputGroup
-                                    bsClass="input-group"
-                                  >
-                                    <span
-                                      className="input-group"
-                                    >
-                                      <SingleField
-                                        component="input-addon-button-group"
-                                        fields={
-                                          Array [
+                                  Text Box With Input Addon
+                                </label>
+                              </ControlLabel>
+                              <InputGroupWrapper
+                                inputAddon={
+                                  Object {
+                                    "after": Object {
+                                      "fields": Array [
+                                        Object {
+                                          "component": "input-addon-group",
+                                          "fields": Array [
+                                            Object {
+                                              "component": "plain-text",
+                                              "label": "-",
+                                              "name": "name1",
+                                              "variant": "span",
+                                            },
+                                          ],
+                                          "name": "i-a-g-2",
+                                        },
+                                        Object {
+                                          "component": "input-addon-button-group",
+                                          "fields": Array [
+                                            Object {
+                                              "component": "button",
+                                              "label": "Set 3",
+                                              "name": "set3",
+                                            },
+                                          ],
+                                          "name": "i-a-g-3",
+                                        },
+                                      ],
+                                    },
+                                    "before": Object {
+                                      "fields": Array [
+                                        Object {
+                                          "component": "input-addon-button-group",
+                                          "fields": Array [
                                             Object {
                                               "component": "button",
                                               "label": "Set 1",
@@ -4469,382 +4090,328 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                                               "label": "Set 2",
                                               "name": "set2",
                                             },
-                                          ]
-                                        }
-                                        key="i-a-g-2"
-                                        name="i-a-g-2"
-                                      >
-                                        <FormConditionWrapper>
-                                          <FormFieldHideWrapper
-                                            hideField={false}
+                                          ],
+                                          "name": "i-a-g-2",
+                                        },
+                                      ],
+                                    },
+                                  }
+                                }
+                              >
+                                <InputGroup
+                                  bsClass="input-group"
+                                >
+                                  <span
+                                    className="input-group"
+                                  >
+                                    <SingleField
+                                      component="input-addon-button-group"
+                                      fields={
+                                        Array [
+                                          Object {
+                                            "component": "button",
+                                            "label": "Set 1",
+                                            "name": "set1",
+                                            "onClick": [Function],
+                                          },
+                                          Object {
+                                            "component": "button",
+                                            "label": "Set 2",
+                                            "name": "set2",
+                                          },
+                                        ]
+                                      }
+                                      key="i-a-g-2"
+                                      name="i-a-g-2"
+                                    >
+                                      <FormConditionWrapper>
+                                        <FormFieldHideWrapper
+                                          hideField={false}
+                                        >
+                                          <InputAddonButtonGroup
+                                            fields={
+                                              Array [
+                                                Object {
+                                                  "component": "button",
+                                                  "label": "Set 1",
+                                                  "name": "set1",
+                                                  "onClick": [Function],
+                                                },
+                                                Object {
+                                                  "component": "button",
+                                                  "label": "Set 2",
+                                                  "name": "set2",
+                                                },
+                                              ]
+                                            }
+                                            name="i-a-g-2"
+                                            validate={[Function]}
                                           >
-                                            <FieldWrapper
-                                              component={[Function]}
-                                              componentType="input-addon-button-group"
-                                              fields={
-                                                Array [
-                                                  Object {
-                                                    "component": "button",
-                                                    "label": "Set 1",
-                                                    "name": "set1",
-                                                    "onClick": [Function],
-                                                  },
-                                                  Object {
-                                                    "component": "button",
-                                                    "label": "Set 2",
-                                                    "name": "set2",
-                                                  },
-                                                ]
-                                              }
-                                              name="i-a-g-2"
+                                            <InputGroupButton
+                                              bsClass="input-group-btn"
                                             >
-                                              <InputAddonButtonGroup
-                                                fields={
-                                                  Array [
-                                                    Object {
-                                                      "component": "button",
-                                                      "label": "Set 1",
-                                                      "name": "set1",
-                                                      "onClick": [Function],
-                                                    },
-                                                    Object {
-                                                      "component": "button",
-                                                      "label": "Set 2",
-                                                      "name": "set2",
-                                                    },
-                                                  ]
-                                                }
-                                                name="i-a-g-2"
-                                                validate={[Function]}
+                                              <span
+                                                className="input-group-btn"
                                               >
-                                                <InputGroupButton
-                                                  bsClass="input-group-btn"
+                                                <SingleField
+                                                  component="button"
+                                                  key="set1"
+                                                  label="Set 1"
+                                                  name="set1"
+                                                  onClick={[Function]}
                                                 >
-                                                  <span
-                                                    className="input-group-btn"
-                                                  >
-                                                    <SingleField
-                                                      component="button"
-                                                      key="set1"
-                                                      label="Set 1"
-                                                      name="set1"
-                                                      onClick={[Function]}
+                                                  <FormConditionWrapper>
+                                                    <FormFieldHideWrapper
+                                                      hideField={false}
                                                     >
-                                                      <FormConditionWrapper>
-                                                        <FormFieldHideWrapper
-                                                          hideField={false}
+                                                      <Button
+                                                        label="Set 1"
+                                                        name="set1"
+                                                        onClick={[Function]}
+                                                        validate={[Function]}
+                                                      >
+                                                        <Button
+                                                          active={false}
+                                                          block={false}
+                                                          bsClass="btn"
+                                                          bsStyle="default"
+                                                          disabled={false}
+                                                          name="set1"
+                                                          onClick={[Function]}
                                                         >
-                                                          <FieldWrapper
-                                                            component={[Function]}
-                                                            componentType="button"
-                                                            label="Set 1"
+                                                          <button
+                                                            className="btn btn-default"
+                                                            disabled={false}
                                                             name="set1"
                                                             onClick={[Function]}
+                                                            type="button"
                                                           >
-                                                            <Button
-                                                              label="Set 1"
-                                                              name="set1"
-                                                              onClick={[Function]}
-                                                              validate={[Function]}
-                                                            >
-                                                              <Button
-                                                                active={false}
-                                                                block={false}
-                                                                bsClass="btn"
-                                                                bsStyle="default"
-                                                                disabled={false}
-                                                                name="set1"
-                                                                onClick={[Function]}
-                                                              >
-                                                                <button
-                                                                  className="btn btn-default"
-                                                                  disabled={false}
-                                                                  name="set1"
-                                                                  onClick={[Function]}
-                                                                  type="button"
-                                                                >
-                                                                  Set 1
-                                                                </button>
-                                                              </Button>
-                                                            </Button>
-                                                          </FieldWrapper>
-                                                        </FormFieldHideWrapper>
-                                                      </FormConditionWrapper>
-                                                    </SingleField>
-                                                    <SingleField
-                                                      component="button"
-                                                      key="set2"
-                                                      label="Set 2"
-                                                      name="set2"
+                                                            Set 1
+                                                          </button>
+                                                        </Button>
+                                                      </Button>
+                                                    </FormFieldHideWrapper>
+                                                  </FormConditionWrapper>
+                                                </SingleField>
+                                                <SingleField
+                                                  component="button"
+                                                  key="set2"
+                                                  label="Set 2"
+                                                  name="set2"
+                                                >
+                                                  <FormConditionWrapper>
+                                                    <FormFieldHideWrapper
+                                                      hideField={false}
                                                     >
-                                                      <FormConditionWrapper>
-                                                        <FormFieldHideWrapper
-                                                          hideField={false}
+                                                      <Button
+                                                        label="Set 2"
+                                                        name="set2"
+                                                        validate={[Function]}
+                                                      >
+                                                        <Button
+                                                          active={false}
+                                                          block={false}
+                                                          bsClass="btn"
+                                                          bsStyle="default"
+                                                          disabled={false}
+                                                          name="set2"
                                                         >
-                                                          <FieldWrapper
-                                                            component={[Function]}
-                                                            componentType="button"
-                                                            label="Set 2"
+                                                          <button
+                                                            className="btn btn-default"
+                                                            disabled={false}
                                                             name="set2"
+                                                            type="button"
                                                           >
-                                                            <Button
-                                                              label="Set 2"
-                                                              name="set2"
-                                                              validate={[Function]}
-                                                            >
-                                                              <Button
-                                                                active={false}
-                                                                block={false}
-                                                                bsClass="btn"
-                                                                bsStyle="default"
-                                                                disabled={false}
-                                                                name="set2"
-                                                              >
-                                                                <button
-                                                                  className="btn btn-default"
-                                                                  disabled={false}
-                                                                  name="set2"
-                                                                  type="button"
-                                                                >
-                                                                  Set 2
-                                                                </button>
-                                                              </Button>
-                                                            </Button>
-                                                          </FieldWrapper>
-                                                        </FormFieldHideWrapper>
-                                                      </FormConditionWrapper>
-                                                    </SingleField>
-                                                  </span>
-                                                </InputGroupButton>
-                                              </InputAddonButtonGroup>
-                                            </FieldWrapper>
-                                          </FormFieldHideWrapper>
-                                        </FormConditionWrapper>
-                                      </SingleField>
-                                      <FormControl
-                                        bsClass="form-control"
-                                        componentClass="input"
+                                                            Set 2
+                                                          </button>
+                                                        </Button>
+                                                      </Button>
+                                                    </FormFieldHideWrapper>
+                                                  </FormConditionWrapper>
+                                                </SingleField>
+                                              </span>
+                                            </InputGroupButton>
+                                          </InputAddonButtonGroup>
+                                        </FormFieldHideWrapper>
+                                      </FormConditionWrapper>
+                                    </SingleField>
+                                    <FormControl
+                                      bsClass="form-control"
+                                      componentClass="input"
+                                      name="text_box_21"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      title="Text Box With Input Addon"
+                                      value=""
+                                    >
+                                      <input
+                                        className="form-control"
                                         name="text_box_21"
                                         onBlur={[Function]}
                                         onChange={[Function]}
                                         onFocus={[Function]}
                                         title="Text Box With Input Addon"
                                         value=""
-                                      >
-                                        <input
-                                          className="form-control"
-                                          name="text_box_21"
-                                          onBlur={[Function]}
-                                          onChange={[Function]}
-                                          onFocus={[Function]}
-                                          title="Text Box With Input Addon"
-                                          value=""
-                                        />
-                                      </FormControl>
-                                      <SingleField
-                                        component="input-addon-group"
-                                        fields={
-                                          Array [
-                                            Object {
-                                              "component": "plain-text",
-                                              "label": "-",
-                                              "name": "name1",
-                                              "variant": "span",
-                                            },
-                                          ]
-                                        }
-                                        key="i-a-g-2"
-                                        name="i-a-g-2"
-                                      >
-                                        <FormConditionWrapper>
-                                          <FormFieldHideWrapper
-                                            hideField={false}
+                                      />
+                                    </FormControl>
+                                    <SingleField
+                                      component="input-addon-group"
+                                      fields={
+                                        Array [
+                                          Object {
+                                            "component": "plain-text",
+                                            "label": "-",
+                                            "name": "name1",
+                                            "variant": "span",
+                                          },
+                                        ]
+                                      }
+                                      key="i-a-g-2"
+                                      name="i-a-g-2"
+                                    >
+                                      <FormConditionWrapper>
+                                        <FormFieldHideWrapper
+                                          hideField={false}
+                                        >
+                                          <InputAddonGroup
+                                            fields={
+                                              Array [
+                                                Object {
+                                                  "component": "plain-text",
+                                                  "label": "-",
+                                                  "name": "name1",
+                                                  "variant": "span",
+                                                },
+                                              ]
+                                            }
+                                            name="i-a-g-2"
+                                            validate={[Function]}
                                           >
-                                            <FieldWrapper
-                                              component={[Function]}
-                                              componentType="input-addon-group"
-                                              fields={
-                                                Array [
-                                                  Object {
-                                                    "component": "plain-text",
-                                                    "label": "-",
-                                                    "name": "name1",
-                                                    "variant": "span",
-                                                  },
-                                                ]
-                                              }
-                                              name="i-a-g-2"
+                                            <InputGroupAddon
+                                              bsClass="input-group-addon"
                                             >
-                                              <InputAddonGroup
-                                                fields={
-                                                  Array [
-                                                    Object {
-                                                      "component": "plain-text",
-                                                      "label": "-",
-                                                      "name": "name1",
-                                                      "variant": "span",
-                                                    },
-                                                  ]
-                                                }
-                                                name="i-a-g-2"
-                                                validate={[Function]}
+                                              <span
+                                                className="input-group-addon"
                                               >
-                                                <InputGroupAddon
-                                                  bsClass="input-group-addon"
+                                                <SingleField
+                                                  component="plain-text"
+                                                  key="name1"
+                                                  label="-"
+                                                  name="name1"
+                                                  variant="span"
                                                 >
-                                                  <span
-                                                    className="input-group-addon"
-                                                  >
-                                                    <SingleField
-                                                      component="plain-text"
-                                                      key="name1"
-                                                      label="-"
-                                                      name="name1"
-                                                      variant="span"
+                                                  <FormConditionWrapper>
+                                                    <FormFieldHideWrapper
+                                                      hideField={false}
                                                     >
-                                                      <FormConditionWrapper>
-                                                        <FormFieldHideWrapper
-                                                          hideField={false}
+                                                      <PlainText
+                                                        label="-"
+                                                        name="name1"
+                                                        validate={[Function]}
+                                                        variant="span"
+                                                      >
+                                                        <span
+                                                          key="name1-0"
                                                         >
-                                                          <FieldWrapper
-                                                            component={[Function]}
-                                                            componentType="plain-text"
-                                                            label="-"
-                                                            name="name1"
-                                                            variant="span"
-                                                          >
-                                                            <PlainText
-                                                              label="-"
-                                                              name="name1"
-                                                              validate={[Function]}
-                                                              variant="span"
-                                                            >
-                                                              <span
-                                                                key="name1-0"
-                                                              >
-                                                                -
-                                                              </span>
-                                                            </PlainText>
-                                                          </FieldWrapper>
-                                                        </FormFieldHideWrapper>
-                                                      </FormConditionWrapper>
-                                                    </SingleField>
-                                                  </span>
-                                                </InputGroupAddon>
-                                              </InputAddonGroup>
-                                            </FieldWrapper>
-                                          </FormFieldHideWrapper>
-                                        </FormConditionWrapper>
-                                      </SingleField>
-                                      <SingleField
-                                        component="input-addon-button-group"
-                                        fields={
-                                          Array [
-                                            Object {
-                                              "component": "button",
-                                              "label": "Set 3",
-                                              "name": "set3",
-                                            },
-                                          ]
-                                        }
-                                        key="i-a-g-3"
-                                        name="i-a-g-3"
-                                      >
-                                        <FormConditionWrapper>
-                                          <FormFieldHideWrapper
-                                            hideField={false}
+                                                          -
+                                                        </span>
+                                                      </PlainText>
+                                                    </FormFieldHideWrapper>
+                                                  </FormConditionWrapper>
+                                                </SingleField>
+                                              </span>
+                                            </InputGroupAddon>
+                                          </InputAddonGroup>
+                                        </FormFieldHideWrapper>
+                                      </FormConditionWrapper>
+                                    </SingleField>
+                                    <SingleField
+                                      component="input-addon-button-group"
+                                      fields={
+                                        Array [
+                                          Object {
+                                            "component": "button",
+                                            "label": "Set 3",
+                                            "name": "set3",
+                                          },
+                                        ]
+                                      }
+                                      key="i-a-g-3"
+                                      name="i-a-g-3"
+                                    >
+                                      <FormConditionWrapper>
+                                        <FormFieldHideWrapper
+                                          hideField={false}
+                                        >
+                                          <InputAddonButtonGroup
+                                            fields={
+                                              Array [
+                                                Object {
+                                                  "component": "button",
+                                                  "label": "Set 3",
+                                                  "name": "set3",
+                                                },
+                                              ]
+                                            }
+                                            name="i-a-g-3"
+                                            validate={[Function]}
                                           >
-                                            <FieldWrapper
-                                              component={[Function]}
-                                              componentType="input-addon-button-group"
-                                              fields={
-                                                Array [
-                                                  Object {
-                                                    "component": "button",
-                                                    "label": "Set 3",
-                                                    "name": "set3",
-                                                  },
-                                                ]
-                                              }
-                                              name="i-a-g-3"
+                                            <InputGroupButton
+                                              bsClass="input-group-btn"
                                             >
-                                              <InputAddonButtonGroup
-                                                fields={
-                                                  Array [
-                                                    Object {
-                                                      "component": "button",
-                                                      "label": "Set 3",
-                                                      "name": "set3",
-                                                    },
-                                                  ]
-                                                }
-                                                name="i-a-g-3"
-                                                validate={[Function]}
+                                              <span
+                                                className="input-group-btn"
                                               >
-                                                <InputGroupButton
-                                                  bsClass="input-group-btn"
+                                                <SingleField
+                                                  component="button"
+                                                  key="set3"
+                                                  label="Set 3"
+                                                  name="set3"
                                                 >
-                                                  <span
-                                                    className="input-group-btn"
-                                                  >
-                                                    <SingleField
-                                                      component="button"
-                                                      key="set3"
-                                                      label="Set 3"
-                                                      name="set3"
+                                                  <FormConditionWrapper>
+                                                    <FormFieldHideWrapper
+                                                      hideField={false}
                                                     >
-                                                      <FormConditionWrapper>
-                                                        <FormFieldHideWrapper
-                                                          hideField={false}
+                                                      <Button
+                                                        label="Set 3"
+                                                        name="set3"
+                                                        validate={[Function]}
+                                                      >
+                                                        <Button
+                                                          active={false}
+                                                          block={false}
+                                                          bsClass="btn"
+                                                          bsStyle="default"
+                                                          disabled={false}
+                                                          name="set3"
                                                         >
-                                                          <FieldWrapper
-                                                            component={[Function]}
-                                                            componentType="button"
-                                                            label="Set 3"
+                                                          <button
+                                                            className="btn btn-default"
+                                                            disabled={false}
                                                             name="set3"
+                                                            type="button"
                                                           >
-                                                            <Button
-                                                              label="Set 3"
-                                                              name="set3"
-                                                              validate={[Function]}
-                                                            >
-                                                              <Button
-                                                                active={false}
-                                                                block={false}
-                                                                bsClass="btn"
-                                                                bsStyle="default"
-                                                                disabled={false}
-                                                                name="set3"
-                                                              >
-                                                                <button
-                                                                  className="btn btn-default"
-                                                                  disabled={false}
-                                                                  name="set3"
-                                                                  type="button"
-                                                                >
-                                                                  Set 3
-                                                                </button>
-                                                              </Button>
-                                                            </Button>
-                                                          </FieldWrapper>
-                                                        </FormFieldHideWrapper>
-                                                      </FormConditionWrapper>
-                                                    </SingleField>
-                                                  </span>
-                                                </InputGroupButton>
-                                              </InputAddonButtonGroup>
-                                            </FieldWrapper>
-                                          </FormFieldHideWrapper>
-                                        </FormConditionWrapper>
-                                      </SingleField>
-                                    </span>
-                                  </InputGroup>
-                                </InputGroupWrapper>
-                              </div>
-                            </FormGroup>
+                                                            Set 3
+                                                          </button>
+                                                        </Button>
+                                                      </Button>
+                                                    </FormFieldHideWrapper>
+                                                  </FormConditionWrapper>
+                                                </SingleField>
+                                              </span>
+                                            </InputGroupButton>
+                                          </InputAddonButtonGroup>
+                                        </FormFieldHideWrapper>
+                                      </FormConditionWrapper>
+                                    </SingleField>
+                                  </span>
+                                </InputGroup>
+                              </InputGroupWrapper>
+                            </div>
                           </FormGroup>
-                        </TextField>
-                      </FieldWrapper>
+                        </FormGroup>
+                      </TextField>
                     </FormFieldHideWrapper>
                   </FormConditionWrapper>
                 </SingleField>
