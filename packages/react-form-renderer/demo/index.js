@@ -5,6 +5,7 @@ import FormRenderer, { validatorTypes } from '../src';
 import componentMapper from './form-fields-mapper';
 import FormTemplate from './form-template';
 // import sandboxSchema from './sandbox';
+import DefaultSchemaError from '../src/parsers/schema-errors';
 
 const intl = (name) => `translated ${name}`;
 
@@ -59,6 +60,17 @@ const App = () => {
         schema={asyncValidatorSchema}
         FormTemplate={FormTemplate}
         actionMapper={actionMapper}
+        schemaValidatorMapper={{
+          actions: {
+            loadLabel: (action, fieldName) => {
+              if (typeof action[1] !== 'string') {
+                throw new DefaultSchemaError(
+                  `Second argument of loadLabel action has to be a string: ID of the text from the translated database. Error found in ${fieldName}`
+                );
+              }
+            }
+          }
+        }}
       />
     </div>
   );

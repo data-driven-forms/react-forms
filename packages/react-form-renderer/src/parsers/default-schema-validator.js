@@ -72,7 +72,7 @@ const checkCondition = (condition, fieldName) => {
   }
 };
 
-const checkValidators = (validate, fieldName, validatorTypes) => {
+const checkValidators = (validate, fieldName, validatorTypes, validatorMapper = {}) => {
   if (validate === undefined) {
     return;
   }
@@ -107,6 +107,10 @@ const checkValidators = (validate, fieldName, validatorTypes) => {
         Received "${validator.type}", expected one of: [${validatorTypes}].
       `);
       }
+
+      if (validatorMapper.hasOwnProperty(validator.type)) {
+        validatorMapper[validator.type](validator, fieldName);
+      }
     }
   });
 };
@@ -127,7 +131,7 @@ const checkDataType = (type, fieldName) => {
   }
 };
 
-const checkActions = (actions, name, actionTypes) => {
+const checkActions = (actions, name, actionTypes, actionsValidator = {}) => {
   Object.keys(actions).forEach((prop) => {
     if (!Array.isArray(actions[prop])) {
       throw new DefaultSchemaError(`
@@ -152,13 +156,17 @@ const checkActions = (actions, name, actionTypes) => {
       Use one of them or define new action in the mapper.
     `);
     }
+
+    if (actionsValidator.hasOwnProperty(actions[prop][0])) {
+      actionsValidator[actions[prop][0]](actions[prop], name);
+    }
   });
 };
 
-const iterateOverFields = (fields, componentMapper, validatorTypes, actionTypes, parent = {}) => {
+const iterateOverFields = (fields, componentMapper, validatorTypes, actionTypes, schemaValidatorMapper, parent = {}) => {
   fields.forEach((field) => {
     if (Array.isArray(field)) {
-      return iterateOverFields(field, componentMapper, validatorTypes);
+      return iterateOverFields(field, componentMapper, validatorTypes, actionTypes, schemaValidatorMapper);
     }
 
     if (parent.component !== componentTypes.WIZARD) {
@@ -191,7 +199,7 @@ const iterateOverFields = (fields, componentMapper, validatorTypes, actionTypes,
     }
 
     if (field.hasOwnProperty('validate')) {
-      checkValidators(field.validate, field.name, validatorTypes);
+      checkValidators(field.validate, field.name, validatorTypes, schemaValidatorMapper.validators);
     }
 
     if (field.hasOwnProperty('dataType')) {
@@ -199,22 +207,26 @@ const iterateOverFields = (fields, componentMapper, validatorTypes, actionTypes,
     }
 
     if (field.hasOwnProperty('fields')) {
-      iterateOverFields(field.fields, componentMapper, validatorTypes, actionTypes, field);
+      iterateOverFields(field.fields, componentMapper, validatorTypes, actionTypes, schemaValidatorMapper, field);
     }
 
     if (field.hasOwnProperty('actions')) {
-      checkActions(field.actions, field.name, actionTypes);
+      checkActions(field.actions, field.name, actionTypes, schemaValidatorMapper.actions);
+    }
+
+    if (schemaValidatorMapper.components && schemaValidatorMapper.components.hasOwnProperty(field.component)) {
+      schemaValidatorMapper.components[field.component](field);
     }
   });
 };
 
-const defaultSchemaValidator = (schema, componentMapper, validatorTypes = [], actionTypes = []) => {
+const defaultSchemaValidator = (schema, componentMapper, validatorTypes = [], actionTypes = [], schemaValidatorMapper = {}) => {
   if (Array.isArray(schema) || typeof schema !== 'object') {
     throw new DefaultSchemaError(`Form Schema must be an object, received ${Array.isArray(schema) ? 'array' : typeof schema}!`);
   }
 
   checkFieldsArray(schema, 'schema');
-  iterateOverFields(schema.fields, componentMapper, validatorTypes, actionTypes);
+  iterateOverFields(schema.fields, componentMapper, validatorTypes, actionTypes, schemaValidatorMapper);
 };
 
 export default defaultSchemaValidator;
