@@ -3,10 +3,7 @@ import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { useFormApi, FormSpy } from '@data-driven-forms/react-form-renderer';
 
-import { WizardHeader } from '@patternfly/react-core/dist/js/components/Wizard/WizardHeader';
-import { WizardNav } from '@patternfly/react-core/dist/js/components/Wizard/WizardNav';
-import { Backdrop } from '@patternfly/react-core/dist/js/components/Backdrop/Backdrop';
-import { Bullseye } from '@patternfly/react-core/dist/js/layouts/Bullseye/index';
+import { Bullseye, Backdrop, WizardNav, WizardHeader } from '@patternfly/react-core';
 
 import WizardStep from './wizard/wizard-step';
 import './wizard/wizard-styles.scss';

@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Text, TextVariants } from '@patternfly/react-core/dist/js/components/Text/Text';
-import { TextContent } from '@patternfly/react-core/dist/js/components/Text/TextContent';
+import { TextContent, Text, TextVariants } from '@patternfly/react-core';
 
 const PlainText = ({ label, name }) => (
   <TextContent>

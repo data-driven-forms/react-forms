@@ -2,12 +2,9 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { useFormApi, FieldArray } from '@data-driven-forms/react-form-renderer';
 
-import { Grid, GridItem } from '@patternfly/react-core/dist/js/layouts/Grid';
-import { Bullseye } from '@patternfly/react-core/dist/js/layouts/Bullseye';
-import { FormHelperText } from '@patternfly/react-core/dist/js/components/Form/FormHelperText';
+import { Bullseye, FormHelperText, Grid, GridItem } from '@patternfly/react-core';
 
-import CloseIcon from '@patternfly/react-icons/dist/js/icons/close-icon';
-import AddCircleOIcon from '@patternfly/react-icons/dist/js/icons/add-circle-o-icon';
+import { AddCircleOIcon, CloseIcon } from '@patternfly/react-icons';
 
 import './final-form-array.scss';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';

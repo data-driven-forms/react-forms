@@ -2,26 +2,31 @@ import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 
-import { Grid, GridItem } from '@patternfly/react-core/dist/js/layouts/Grid/index';
-
-import { Text, TextVariants } from '@patternfly/react-core/dist/js/components/Text/Text';
-import { TextContent } from '@patternfly/react-core/dist/js/components/Text/TextContent';
-import { FormGroup } from '@patternfly/react-core/dist/js/components/Form/FormGroup';
-import { Button, ButtonVariant } from '@patternfly/react-core/dist/js/components/Button/Button';
-import { Bullseye } from '@patternfly/react-core/dist/js/layouts/Bullseye/Bullseye';
-import { InputGroup } from '@patternfly/react-core/dist/js/components/InputGroup/InputGroup';
-import { TextInput } from '@patternfly/react-core/dist/js/components/TextInput/TextInput';
+import {
+  TextInput,
+  InputGroup,
+  Bullseye,
+  Button,
+  ButtonVariant,
+  FormGroup,
+  Grid,
+  GridItem,
+  Text,
+  TextVariants,
+  TextContent
+} from '@patternfly/react-core';
 
 import { DataToolbar, DataToolbarItem, DataToolbarContent } from '@patternfly/react-core/dist/js/experimental';
 
-import AngleRightIcon from '@patternfly/react-icons/dist/js/icons/angle-right-icon';
-import AngleLeftIcon from '@patternfly/react-icons/dist/js/icons/angle-left-icon';
-import AngleDoubleRightIcon from '@patternfly/react-icons/dist/js/icons/angle-double-right-icon';
-import AngleDoubleLeftIcon from '@patternfly/react-icons/dist/js/icons/angle-double-left-icon';
-import SearchIcon from '@patternfly/react-icons/dist/js/icons/search-icon';
-
-import SortAlphaUp from '@patternfly/react-icons/dist/js/icons/sort-alpha-up-icon';
-import SortAlphaDown from '@patternfly/react-icons/dist/js/icons/sort-alpha-down-icon';
+import {
+  SortAlphaDownIcon,
+  SortAlphaUpIcon,
+  SearchIcon,
+  AngleDoubleLeftIcon,
+  AngleDoubleRightIcon,
+  AngleRightIcon,
+  AngleLeftIcon
+} from '@patternfly/react-icons';
 
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
@@ -89,7 +94,7 @@ const Toolbar = ({ sortTitle, onFilter, onSort, sortDirection, value, placeholde
       </DataToolbarItem>
       <DataToolbarItem>
         <Button onClick={onSort} title={sortTitle} variant="plain">
-          {!sortDirection ? <SortAlphaDown size="md" /> : <SortAlphaUp size="md" />}
+          {!sortDirection ? <SortAlphaDownIcon size="md" /> : <SortAlphaUpIcon size="md" />}
         </Button>
       </DataToolbarItem>
     </DataToolbarContent>

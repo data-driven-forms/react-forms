@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextArea as Pf4TextArea } from '@patternfly/react-core/dist/js/components/TextArea/TextArea';
+import { TextArea as Pf4TextArea } from '@patternfly/react-core';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import PropTypes from 'prop-types';
 import FormGroup from '../common/form-group';

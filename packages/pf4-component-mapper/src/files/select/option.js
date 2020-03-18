@@ -1,9 +1,9 @@
 import React from 'react';
 import { components } from 'react-select';
 import PropTypes from 'prop-types';
-import { Checkbox } from '@patternfly/react-core/dist/js/components/Checkbox/Checkbox';
+import { Checkbox } from '@patternfly/react-core';
 
-import CheckIcon from '@patternfly/react-icons/dist/js/icons/check-icon';
+import { CheckIcon } from '@patternfly/react-icons';
 
 const Option = (props) => (
   <div className={`ddorg__pf4-component-mapper__select__menu--option ${props.isFocused ? 'focused' : ''}`}>

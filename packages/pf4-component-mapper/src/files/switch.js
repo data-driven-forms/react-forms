@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Switch as Pf4Switch } from '@patternfly/react-core/dist/js/components/Switch/Switch';
+import { Switch as Pf4Switch } from '@patternfly/react-core';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormGroup from '../common/form-group';
 import IsRequired from '../common/is-required';

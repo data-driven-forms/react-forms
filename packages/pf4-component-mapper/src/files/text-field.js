@@ -1,6 +1,6 @@
 import React from 'react';
 import FormGroup from '../common/form-group';
-import { TextInput } from '@patternfly/react-core/dist/js/components/TextInput/TextInput';
+import { TextInput } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 

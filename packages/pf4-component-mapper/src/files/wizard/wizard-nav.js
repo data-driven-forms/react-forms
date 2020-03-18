@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { WizardNavItem } from '@patternfly/react-core/dist/js/components/Wizard/WizardNavItem';
-import { WizardNav } from '@patternfly/react-core/dist/js/components/Wizard/WizardNav';
+import { WizardNavItem, WizardNav } from '@patternfly/react-core';
 
 import isEqual from 'lodash/isEqual';
 import get from 'lodash/get';

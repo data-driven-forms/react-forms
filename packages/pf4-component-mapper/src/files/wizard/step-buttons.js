@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '@patternfly/react-core/dist/js/components/Button/Button';
+import { Button } from '@patternfly/react-core';
 import selectNext from '@data-driven-forms/common/src/wizard/select-next';
 
 const SimpleNext = ({ nextStep, valid, handleNext, submit, nextLabel, getState }) => (

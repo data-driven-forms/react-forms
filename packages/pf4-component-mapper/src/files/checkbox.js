@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import MultipleChoiceList from '../common/multiple-choice-list';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormGroup from '../common/form-group';
-import { Checkbox as Pf4Checkbox } from '@patternfly/react-core/dist/js/components/Checkbox/Checkbox';
+import { Checkbox as Pf4Checkbox } from '@patternfly/react-core';
 import IsRequired from '../common/is-required';
 
 const SingleCheckbox = (props) => {

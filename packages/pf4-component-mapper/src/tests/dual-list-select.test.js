@@ -2,16 +2,17 @@ import React from 'react';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
 
-import { FormGroup } from '@patternfly/react-core/dist/js/components/Form/FormGroup';
-import { TextInput } from '@patternfly/react-core/dist/js/components/TextInput/TextInput';
+import { FormGroup, TextInput } from '@patternfly/react-core';
 import { DataToolbar } from '@patternfly/react-core/dist/js/experimental';
-import AngleRightIcon from '@patternfly/react-icons/dist/js/icons/angle-right-icon';
-import AngleLeftIcon from '@patternfly/react-icons/dist/js/icons/angle-left-icon';
-import AngleDoubleRightIcon from '@patternfly/react-icons/dist/js/icons/angle-double-right-icon';
-import AngleDoubleLeftIcon from '@patternfly/react-icons/dist/js/icons/angle-double-left-icon';
-import SearchIcon from '@patternfly/react-icons/dist/js/icons/search-icon';
-import SortAlphaUp from '@patternfly/react-icons/dist/js/icons/sort-alpha-up-icon';
-import SortAlphaDown from '@patternfly/react-icons/dist/js/icons/sort-alpha-down-icon';
+import {
+  SearchIcon,
+  SortAlphaUpIcon,
+  SortAlphaDownIcon,
+  AngleDoubleLeftIcon,
+  AngleDoubleRightIcon,
+  AngleLeftIcon,
+  AngleRightIcon
+} from '@patternfly/react-icons';
 
 import { componentMapper, FormTemplate } from '../index';
 
@@ -69,8 +70,8 @@ describe('DualListSelect', () => {
     expect(wrapper.find(DataToolbar)).toHaveLength(2);
     expect(wrapper.find(TextInput)).toHaveLength(2);
     expect(wrapper.find(SearchIcon)).toHaveLength(2);
-    expect(wrapper.find(SortAlphaUp)).toHaveLength(2);
-    expect(wrapper.find(SortAlphaDown)).toHaveLength(0);
+    expect(wrapper.find(SortAlphaUpIcon)).toHaveLength(2);
+    expect(wrapper.find(SortAlphaDownIcon)).toHaveLength(0);
     expect(wrapper.find(AngleRightIcon)).toHaveLength(1);
     expect(wrapper.find(AngleLeftIcon)).toHaveLength(1);
     expect(wrapper.find(AngleDoubleRightIcon)).toHaveLength(1);

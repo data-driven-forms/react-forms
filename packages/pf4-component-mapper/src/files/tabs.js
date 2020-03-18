@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
-import { Tab } from '@patternfly/react-core/dist/js/components/Tabs/Tab';
-import { Tabs } from '@patternfly/react-core/dist/js/components/Tabs/Tabs';
+import { Tab, Tabs } from '@patternfly/react-core';
 
 const FormTabs = ({ fields, dataType, validate, ...rest }) => {
   const formOptions = useFormApi();

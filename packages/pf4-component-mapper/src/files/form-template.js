@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 
 import FormTemplate from '@data-driven-forms/common/src/form-template';
 
-import { Text, TextVariants } from '@patternfly/react-core/dist/js/components/Text/Text';
-import { TextContent } from '@patternfly/react-core/dist/js/components/Text/TextContent';
-import { Form } from '@patternfly/react-core/dist/js/components/Form/Form';
-import { ActionGroup } from '@patternfly/react-core/dist/js/components/Form/ActionGroup';
-import { Button as PF4Button } from '@patternfly/react-core/dist/js/components/Button/Button';
+import { Button as PF4Button, ActionGroup, Form, TextContent, Text, TextVariants } from '@patternfly/react-core';
 
 import './form-template.scss';
 

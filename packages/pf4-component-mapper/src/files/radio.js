@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
-import { Radio as Pf4Radio } from '@patternfly/react-core/dist/js/components/Radio';
+import { Radio as Pf4Radio } from '@patternfly/react-core';
 import FormGroup from '../common/form-group';
 
 const RadioOption = ({ name, option, isDisabled, isReadOnly }) => {

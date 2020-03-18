@@ -2,10 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
-import { Text, TextVariants } from '@patternfly/react-core/dist/js/components/Text/Text';
-import { TextContent } from '@patternfly/react-core/dist/js/components/Text/TextContent';
-import { Grid, GridItem } from '@patternfly/react-core/dist/js/layouts/Grid/index';
-import { Title } from '@patternfly/react-core/dist/js/components/Title/Title';
+import { Title, Grid, GridItem, TextContent, Text, TextVariants } from '@patternfly/react-core';
 
 const SubForm = ({ fields, title, description, validate: _validate, ...rest }) => {
   const formOptions = useFormApi();
