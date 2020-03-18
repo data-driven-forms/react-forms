@@ -1,4 +1,4 @@
-import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
+import { componentTypes } from '@data-driven-forms/react-form-renderer';
 import Tabs from './tabs';
 import SubForm from './sub-form';
 import Wizard from './wizard';

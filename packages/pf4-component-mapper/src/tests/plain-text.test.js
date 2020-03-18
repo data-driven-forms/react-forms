@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { TextContent, Text } from '@patternfly/react-core';
 
-import PlainText from '../components/plain-text';
+import PlainText from '../files/plain-text';
 
 describe('PlainText component', () => {
   it('renders correctly with three paragraphs', () => {

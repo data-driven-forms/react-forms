@@ -17,8 +17,6 @@ const sanitizeValue = (event) => {
   return event;
 };
 
-
-
 /**
  * Checks the value and returns undefined if its empty. Converst epmtry strings, arrays and objects.
  * If value is empty its overriden to undefined for further processing.

@@ -3,7 +3,7 @@ import FormRenderer, { Form, FormSpy } from '@data-driven-forms/react-form-rende
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { FormTemplate } from '../index';
-import { Title, Description, Button } from '../components/form-template';
+import { Title, Description, Button } from '../files/form-template';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 
 describe('FormTemplate PF4 Common', () => {
