@@ -12,3 +12,4 @@ export { default as Form } from './components/form';
 export { default as FieldArray } from './components/field-array';
 export { default as FieldProvider } from './components/field-provider';
 export { default as useFieldApi } from './hooks/use-field-api';
+export { default as DefaultSchemaError } from './parsers/schema-errors';

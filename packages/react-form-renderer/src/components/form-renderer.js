@@ -24,6 +24,7 @@ const FormRenderer = ({
   schema,
   validatorMapper,
   actionMapper,
+  schemaValidatorMapper,
   debug,
   ...props
 }) => {
@@ -34,7 +35,7 @@ const FormRenderer = ({
   try {
     const validatorTypes = Object.keys(validatorMapperMerged);
     const actionTypes = actionMapper ? Object.keys(actionMapper) : [];
-    defaultSchemaValidator(schema, componentMapper, validatorTypes, actionTypes);
+    defaultSchemaValidator(schema, componentMapper, validatorTypes, actionTypes, schemaValidatorMapper);
   } catch (error) {
     schemaError = error;
     console.error(error);
@@ -113,7 +114,18 @@ FormRenderer.propTypes = {
   actionMapper: PropTypes.shape({
     [PropTypes.string]: PropTypes.func
   }),
-  debug: PropTypes.func
+  debug: PropTypes.func,
+  schemaValidatorMapper: PropTypes.shape({
+    components: PropTypes.shape({
+      [PropTypes.string]: PropTypes.func
+    }),
+    validators: PropTypes.shape({
+      [PropTypes.string]: PropTypes.func
+    }),
+    actions: PropTypes.shape({
+      [PropTypes.string]: PropTypes.func
+    })
+  })
 };
 
 FormRenderer.defaultProps = {
