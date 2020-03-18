@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import RendererContext from '../components/renderer-context';
+import RendererContext from './renderer-context';
 
 const useFormApi = () => {
   const { formOptions } = useContext(RendererContext);

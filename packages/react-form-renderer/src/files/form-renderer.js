@@ -1,12 +1,12 @@
 import React from 'react';
-import { Form } from 'react-final-form';
+import Form from './form';
 import arrayMutators from 'final-form-arrays';
 import PropTypes from 'prop-types';
 import createFocusDecorator from 'final-form-focus';
 
 import RendererContext from './renderer-context';
 import renderForm from '../form-renderer/render-form';
-import defaultSchemaValidator from '../parsers/default-schema-validator';
+import defaultSchemaValidator from './default-schema-validator';
 import SchemaErrorComponent from '../form-renderer/schema-error-component';
 import defaultValidatorMapper from '../validators/validator-mapper';
 

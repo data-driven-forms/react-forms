@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { childrenPropTypes } from '@data-driven-forms/common/src/prop-types-templates';
 import { dataTypeValidator } from '../validators';
-import RendererContext from '../components/renderer-context';
+import RendererContext from '../files/renderer-context';
 import Condition from './condition';
 import { memoize } from '../validators/helpers';
-import componentTypes from '../components/component-types';
-import composeValidators from '../components/compose-validators';
+import componentTypes from '../files/component-types';
+import composeValidators from '../files/compose-validators';
 import convertInitialValue from './convert-initial-value';
 
 const assignSpecialType = (componentType) => ([componentTypes.CHECKBOX, componentTypes.RADIO].includes(componentType) ? componentType : undefined);

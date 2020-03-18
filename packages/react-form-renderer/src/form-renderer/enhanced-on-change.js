@@ -1,5 +1,5 @@
 import isEmpty from 'lodash/isEmpty';
-import dataTypes from '../components/data-types';
+import convertType from '../common/convert-type';
 
 /**
  * Pick a value from event object and returns it
@@ -17,30 +17,7 @@ const sanitizeValue = (event) => {
   return event;
 };
 
-/**
- * Casts string true/false to boolean
- * @param {String} value value
- */
-const castToBoolean = (value) => {
-  if (typeof value === 'boolean') {
-    return value;
-  }
 
-  return value === 'true';
-};
-
-/**
- * Changes the value type
- * @param {FieldDataTypes} dataType type for value conversion
- * @param {Any} value value to be converted
- */
-export const convertType = (dataType, value) =>
-  ({
-    [dataTypes.INTEGER]: !isNaN(Number(value)) && parseInt(value),
-    [dataTypes.FLOAT]: !isNaN(Number(value)) && parseFloat(value),
-    [dataTypes.NUMBER]: Number(value),
-    [dataTypes.BOOLEAN]: castToBoolean(value)
-  }[dataType] || value);
 
 /**
  * Checks the value and returns undefined if its empty. Converst epmtry strings, arrays and objects.

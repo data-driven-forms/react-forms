@@ -15,7 +15,7 @@ import RenderWithProvider from '../../../../__mocks__/with-provider';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
 import FormTemplate from '../components/form-template';
 import componentMapper from '../components/component-mapper';
-import validatorTypes from '../../../react-form-renderer/src/components/validator-types';
+import validatorTypes from '@data-driven-forms/react-form-renderer/dist/cjs/validator-types';
 import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 import MultipleChoiceListCommon from '@data-driven-forms/common/src/multiple-choice-list';
 

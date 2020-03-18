@@ -5,7 +5,7 @@ import FormRenderer, { validatorTypes } from '../src';
 import componentMapper from './form-fields-mapper';
 import FormTemplate from './form-template';
 // import sandboxSchema from './sandbox';
-import DefaultSchemaError from '../src/parsers/schema-errors';
+import DefaultSchemaError from '../src/files/schema-errors';
 
 const intl = (name) => `translated ${name}`;
 

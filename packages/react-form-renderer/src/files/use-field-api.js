@@ -2,7 +2,7 @@ import { useEffect, useContext } from 'react';
 import { useField } from 'react-final-form';
 import useFormApi from './use-form-api';
 import enhancedOnChange from '../form-renderer/enhanced-on-change';
-import RendererContext from '../components/renderer-context';
+import RendererContext from './renderer-context';
 
 const useFieldApi = ({ name, initializeOnMount, component, render, validate, dataType, ...props }) => {
   const { actionMapper } = useContext(RendererContext);

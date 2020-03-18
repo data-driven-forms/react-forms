@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import useFieldApi from '../hooks/use-field-api';
+import useFieldApi from '../files/use-field-api';
 
 const FieldProvider = ({ component, render, ...props }) => {
   const fieldProviderProps = useFieldApi(props);

@@ -1,8 +1,8 @@
 /* eslint-disable no-prototype-builtins */
 import DefaultSchemaError from './schema-errors';
 //import isValidComponent from './isValidComponent';
-import componentTypes from '../components/component-types';
-import dataTypes from '../components/data-types';
+import componentTypes from './component-types';
+import dataTypes from './data-types';
 
 const componentBlackList = [componentTypes.FIELD_ARRAY, 'tab-item'];
 

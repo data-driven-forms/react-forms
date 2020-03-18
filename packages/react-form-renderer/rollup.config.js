@@ -8,7 +8,7 @@ import glob from 'glob';
 import path from 'path';
 import sourcemaps from 'rollup-plugin-sourcemaps';
 
-const outputPaths = glob.sync(path.resolve(__dirname, './src/components/*.js'));
+const outputPaths = glob.sync(path.resolve(__dirname, './src/files/*.js'));
 
 const globals = {
   react: 'React',
