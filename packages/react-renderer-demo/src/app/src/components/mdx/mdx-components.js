@@ -72,18 +72,20 @@ const MdxComponents = {
         theme="tomorrow_night"
         name="UNIQUE_ID_OF_DIV"
         editorProps={{ $blockScrolling: true }}
-        value={children}
+        value={children.replace(/\n+$/, '')}
         fontSize={14}
         maxLines={Infinity}
         showPrintMargin={false}
-        showGutter={true}
+        showGutter={false}
         highlightActiveLine={false}
         style={{ width: '80%', margin: 10 }}
         setOptions={{
-          showLineNumbers: true
+          showLineNumbers: false,
+          readOnly: true
         }}
         onLoad={(editor) => {
           editor.getSession().setUseWorker(false);
+          editor.renderer.$cursorLayer.element.style.display = 'none';
         }}
       />
     </div>
