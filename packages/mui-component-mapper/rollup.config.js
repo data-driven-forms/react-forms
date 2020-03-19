@@ -12,7 +12,7 @@ import sourcemaps from 'rollup-plugin-sourcemaps';
 import glob from 'glob';
 import path from 'path';
 
-const outputPaths = glob.sync(path.resolve(__dirname, './src/components/*.js'));
+const outputPaths = glob.sync(path.resolve(__dirname, './src/files/*.js'));
 
 const muiExternals = createFilter(
   [
@@ -39,7 +39,7 @@ const globals = {
 const babelOptions = {
   exclude: /node_modules/,
   runtimeHelpers: true,
-  configFile: '../../babel.config.js'
+  configFile: './babel.config.js'
 };
 
 const commonjsOptions = {

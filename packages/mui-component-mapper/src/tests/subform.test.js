@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-import Subform from '../components/sub-form';
+import Subform from '../files/sub-form';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 
 describe('subform', () => {

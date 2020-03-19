@@ -4,7 +4,7 @@ import { mount } from 'enzyme';
 import Button from '@material-ui/core/Button';
 
 import { componentMapper, FormTemplate } from '../index';
-import WizardStep from '../components/wizard/wizard-step';
+import WizardStep from '../files/wizard/wizard-step';
 
 describe('wizard', () => {
   let initialProps;

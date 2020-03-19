@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-import FormTabs from '../components/tabs';
+import FormTabs from '../files/tabs';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 import FormRenderer, { validatorTypes } from '@data-driven-forms/react-form-renderer';
 import { componentMapper, FormTemplate } from '../index';
