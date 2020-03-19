@@ -481,4 +481,66 @@ describe('Default schema validator', () => {
       ).toThrowErrorMatchingSnapshot();
     });
   });
+
+  it('should fail validation when using "and" and "or" conditions', () => {
+    expect(() =>
+      defaultSchemaValidator(
+        {
+          fields: [
+            {
+              component: 'foo',
+              name: 'foo',
+              condition: {
+                and: { when: 'x', is: 'y' }
+              }
+            }
+          ]
+        },
+        componentMapper,
+        [],
+        []
+      )
+    ).toThrowErrorMatchingSnapshot();
+
+    expect(() =>
+      defaultSchemaValidator(
+        {
+          fields: [
+            {
+              component: 'foo',
+              name: 'foo',
+              condition: {
+                or: { when: 'x', is: 'y' }
+              }
+            }
+          ]
+        },
+        componentMapper,
+        [],
+        []
+      )
+    ).toThrowErrorMatchingSnapshot();
+
+    expect(() =>
+      defaultSchemaValidator(
+        {
+          fields: [
+            {
+              component: 'foo',
+              name: 'foo',
+              condition: [
+                {
+                  and: { when: 'x', is: 'y' }
+                },
+                { when: 'foo', is: 'bar' }
+              ]
+            }
+          ]
+        },
+        componentMapper,
+        [],
+        []
+      )
+    ).toThrowErrorMatchingSnapshot();
+  });
 });
