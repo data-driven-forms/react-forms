@@ -188,4 +188,30 @@ describe('Default schema validator', () => {
       'time-picker': () => <div />,
     })).not.toThrow();
   });
+
+  it('should fail validation when using "and" and "or" conditions', () => {
+    expect(() => defaultSchemaValidator({ fields: [{
+      component: 'foo',
+      name: 'foo',
+      condition: {
+        and: { when: 'x', is: 'y' },
+      },
+    }]}, formFieldsMapper)).toThrowErrorMatchingSnapshot();
+
+    expect(() => defaultSchemaValidator({ fields: [{
+      component: 'foo',
+      name: 'foo',
+      condition: {
+        or: { when: 'x', is: 'y' },
+      },
+    }]}, formFieldsMapper)).toThrowErrorMatchingSnapshot();
+
+    expect(() => defaultSchemaValidator({ fields: [{
+      component: 'foo',
+      name: 'foo',
+      condition: [{
+        and: { when: 'x', is: 'y' },
+      }, { when: 'foo', is: 'bar' }],
+    }]}, formFieldsMapper)).toThrowErrorMatchingSnapshot();
+  });
 });
