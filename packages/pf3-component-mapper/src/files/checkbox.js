@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Pf3Checkbox from 'patternfly-react/dist/js/components/Form/Checkbox';
-import { FieldLevelHelp } from 'patternfly-react/dist/js/components/FieldLevelHelp';
+import { FieldLevelHelp, Checkbox as Pf3Checkbox } from 'patternfly-react';
 import MultipleChoiceList from '../form-fields/multiple-choice-list';
 import FormGroup from '../common/form-wrapper';
 import RequiredLabel from '../form-fields/required-label';

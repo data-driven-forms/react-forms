@@ -5,7 +5,7 @@ import { mount } from 'enzyme';
 import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 import MultipleChoiceList from '../form-fields/multiple-choice-list';
 import { FieldLevelHelp } from 'patternfly-react';
-import Pf3Checkbox from 'patternfly-react/dist/js/components/Form/Checkbox';
+import { Checkbox as Pf3Checkbox } from 'patternfly-react';
 import Switch from '../files/switch';
 import Checkbox from '../files/checkbox';
 import Radio from '../files/radio';

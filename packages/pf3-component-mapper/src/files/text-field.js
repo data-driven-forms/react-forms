@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import FormControl from 'patternfly-react/dist/js/components/Form/FormControl';
+import { FormControl } from 'patternfly-react';
 import FormGroup from '../common/form-wrapper';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 

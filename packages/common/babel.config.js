@@ -10,29 +10,11 @@ const mapper = {
   TextListItemVariants: 'TextListItem'
 };
 
-const camelToSnake = (string) => {
-  return string
-    .replace(/[\w]([A-Z])/g, function(m) {
-      return m[0] + '-' + m[1];
-    })
-    .toLowerCase();
-};
-
 module.exports = {
   extends: '../../babel.config.js',
   env: {
     cjs: {
       plugins: [
-        [
-          'transform-imports',
-          {
-            '@data-driven-forms/react-form-renderer': {
-              transform: (importName) => `@data-driven-forms/react-form-renderer/dist/cjs/${camelToSnake(importName)}`,
-              preventFullImport: true
-            }
-          },
-          '@data-driven-forms/react-form-renderer-CJS'
-        ],
         [
           'transform-imports',
           {
@@ -58,7 +40,6 @@ module.exports = {
           },
           'react-core-CJS'
         ],
-
         [
           'transform-imports',
           {
@@ -72,21 +53,36 @@ module.exports = {
             }
           },
           'react-icons-CJS'
+        ],
+        [
+          'transform-imports',
+          {
+            'patternfly-react': {
+              transform: (importName) => {
+                let res;
+                const files = glob.sync(
+                  path.resolve(__dirname, `../../node_modules/patternfly-react/dist/js/**/${mapper[importName] || importName}.js`)
+                );
+                if (files.length > 0) {
+                  res = files[0];
+                } else {
+                  throw new Error(`File with importName ${importName} does not exist`);
+                }
+
+                res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
+                res = res.replace(/^\//, '');
+                return res;
+              },
+              preventFullImport: false,
+              skipDefaultConversion: false
+            }
+          },
+          'pf3-react-CJS'
         ]
       ]
     },
     esm: {
       plugins: [
-        [
-          'transform-imports',
-          {
-            '@data-driven-forms/react-form-renderer': {
-              transform: (importName) => `@data-driven-forms/react-form-renderer/dist/esm/${camelToSnake(importName)}`,
-              preventFullImport: true
-            }
-          },
-          '@data-driven-forms/react-form-renderer-ESM'
-        ],
         [
           'transform-imports',
           {
@@ -126,6 +122,31 @@ module.exports = {
             }
           },
           'react-icons-ESM'
+        ],
+        [
+          'transform-imports',
+          {
+            'patternfly-react': {
+              transform: (importName) => {
+                let res;
+                const files = glob.sync(
+                  path.resolve(__dirname, `../../node_modules/patternfly-react/dist/esm/**/${mapper[importName] || importName}.js`)
+                );
+                if (files.length > 0) {
+                  res = files[0];
+                } else {
+                  throw new Error(`File with importName ${importName} does not exist`);
+                }
+
+                res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
+                res = res.replace(/^\//, '');
+                return res;
+              },
+              preventFullImport: false,
+              skipDefaultConversion: false
+            }
+          },
+          'pf3-react-ESM'
         ]
       ]
     }

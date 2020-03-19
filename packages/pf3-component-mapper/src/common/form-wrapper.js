@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormGroup as Pf3FormGroup, ControlLabel } from 'patternfly-react/dist/js/components/Form';
-import { FieldLevelHelp } from 'patternfly-react/dist/js/components/FieldLevelHelp';
+import { FormGroup as Pf3FormGroup, ControlLabel, FieldLevelHelp } from 'patternfly-react';
 import { validationError } from '../form-fields/helpers';
 import RequiredLabel from '../form-fields/required-label';
 import renderHelperText from './render-helper-text';
