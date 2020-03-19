@@ -265,7 +265,7 @@ const output = {
                   title: 'Dropdown multiselect',
                   dataType: 'string',
                   component: componentTypes.SELECT,
-                  multi: true,
+                  isMulti: true,
                   options: [
                     {
                       label: '<None>',

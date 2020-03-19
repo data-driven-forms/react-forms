@@ -187,12 +187,12 @@ Select.defaultProps = {
   menuIsPortal: false
 };
 
-const DataDrivenSelect = ({ multi, ...props }) => <Select hideSelectedOptions={false} isMulti={multi} {...props} closeMenuOnSelect={!multi} />;
+const DataDrivenSelect = ({ isMulti, ...props }) => <Select hideSelectedOptions={false} isMulti={isMulti} {...props} closeMenuOnSelect={!isMulti} />;
 
 DataDrivenSelect.propTypes = {
   value: PropTypes.any,
   onChange: PropTypes.func,
-  multi: PropTypes.bool,
+  isMulti: PropTypes.bool,
   placeholder: PropTypes.string
 };
 

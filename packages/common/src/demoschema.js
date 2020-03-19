@@ -53,8 +53,7 @@ const superSchema = {
                 ? [
                     ...genereateField(curr, 'isClearable', { isClearable: true }),
                     ...genereateField(curr, 'isSearchable', { isSearchable: true }),
-                    ...genereateField(curr, 'isMulti', { isMulti: true }),
-                    ...genereateField(curr, 'multi', { multi: true })
+                    ...genereateField(curr, 'isMulti', { isMulti: true })
                   ]
                 : []),
               ...(curr === 'checkbox'

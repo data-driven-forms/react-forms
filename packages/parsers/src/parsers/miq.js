@@ -74,7 +74,7 @@ const miqParser = (
         }
 
         if (field.options.force_multi_value) {
-          newField.multi = true;
+          newField.isMulti = true;
         }
 
         if (options.length !== 0) {

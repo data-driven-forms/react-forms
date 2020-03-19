@@ -79,7 +79,7 @@ All those components provides a shared group of props:
 |options|array|Options in format of { label: 'Label', value: value }|
 |loadOptions|function|A function for loading a options asynchronously|
 |loadingMessage|node/string|A message which will shown as a placeholder during the loading|
-|simpleValue|boolean|Simple value (no multi)|
+|simpleValue|boolean|Simple value (no isMulti)|
 |isMulti|boolean|Allows to choose more options|
 |isClearable|boolean|Allows to clear the selected option|
 |isSearchable|boolean|Allows to search in the options|

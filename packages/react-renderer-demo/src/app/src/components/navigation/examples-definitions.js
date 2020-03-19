@@ -181,7 +181,7 @@ export const baseExamples = [
         value: 'Select'
       },
       {
-        name: 'multi',
+        name: 'isMulti',
         title: 'Multi'
       },
       {

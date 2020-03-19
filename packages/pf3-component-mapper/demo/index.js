@@ -26,7 +26,7 @@ const selectSchema = {
     component: 'select',
     name: 'async-single',
     label: 'Async single',
-    multi: true,
+    isMulti: true,
     loadOptions
   },{
     component: 'select',
@@ -39,7 +39,7 @@ const selectSchema = {
     name: 'async-multi-search',
     label: 'Async multi search',
     isSearchable: true,
-    multi: true,
+    isMulti: true,
     loadOptions
   }, {
     component: 'select',
@@ -61,7 +61,7 @@ const selectSchema = {
     validateOnMount: true,
     isDisabled: true,
     isClearable: true,
-    multi: true,
+    isMulti: true,
     isSearchable: true,
     placeholder: 'Placeholder',
     validate: [{
@@ -84,7 +84,7 @@ const selectSchema = {
     isRequired: true,
     validateOnMount: true,
     isClearable: true,
-    multi: false,
+    isMulti: false,
     isSearchable: true,
     placeholder: 'Placeholder',
     validate: [{

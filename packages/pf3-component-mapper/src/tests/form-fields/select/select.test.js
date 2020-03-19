@@ -86,7 +86,7 @@ describe('<SelectField />', () => {
     const wrapper = mount(
       <SelectField
         {...initialProps}
-        multi
+        isMulti
         input={{
           name: 'select-input',
           onChange: changeSpy,

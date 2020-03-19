@@ -153,6 +153,10 @@ import { componentMapper } from '@data-driven-forms/pf4-component-mapper'
 
 -   predictSteps prop is now removed, wizard always predicts steps
 
+### multi removed for selects
+
+-   use isMulti instead
+
 </Grid>
 <Grid item xs={false} md={2}>
   <ListOfContents file="renderer/migration-guide" />
