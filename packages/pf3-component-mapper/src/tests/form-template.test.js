@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Button, Form } from 'patternfly-react';
-import { Button as FormButton, FormWrapper, Title, Description } from '../components/form-template';
+import { Button as FormButton, FormWrapper, Title, Description } from '../files/form-template';
 
 describe('Layout mapper', () => {
   it('should return PF3 Button', () => {

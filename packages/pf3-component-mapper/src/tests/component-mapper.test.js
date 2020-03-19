@@ -1,15 +1,15 @@
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
-import componentMapper from '../components/component-mapper';
-import SubForm from '../components/sub-form';
-import FormTabs from '../components/tabs';
-import Wizard from '../components/wizard';
-import TextField from '../components/text-field';
-import Textarea from '../components/textarea';
-import Select from '../components/select';
-import Checkbox from '../components/checkbox';
-import Radio from '../components/radio';
-import Switch from '../components/switch';
-import { InputAddonGroup, InputAddonButtonGroup } from '../components/input-group-fields';
+import componentMapper from '../files/component-mapper';
+import SubForm from '../files/sub-form';
+import FormTabs from '../files/tabs';
+import Wizard from '../files/wizard';
+import TextField from '../files/text-field';
+import Textarea from '../files/textarea';
+import Select from '../files/select';
+import Checkbox from '../files/checkbox';
+import Radio from '../files/radio';
+import Switch from '../files/switch';
+import { InputAddonGroup, InputAddonButtonGroup } from '../files/input-group-fields';
 
 describe('Component mapper', () => {
   it('should return TextField component', () => {

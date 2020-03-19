@@ -344,7 +344,7 @@ describe('DualListSelect', () => {
     ).toEqual('zebras');
 
     wrapper
-      .find(SortAlphaUp)
+      .find(SortAlphaUpIcon)
       .first()
       .parent()
       .props()
@@ -369,7 +369,7 @@ describe('DualListSelect', () => {
     ).toEqual('cats');
 
     wrapper
-      .find(SortAlphaDown)
+      .find(SortAlphaDownIcon)
       .first()
       .parent()
       .props()
@@ -415,7 +415,7 @@ describe('DualListSelect', () => {
     ).toEqual('zebras');
 
     wrapper
-      .find(SortAlphaUp)
+      .find(SortAlphaUpIcon)
       .last()
       .parent()
       .props()
@@ -440,7 +440,7 @@ describe('DualListSelect', () => {
     ).toEqual('cats');
 
     wrapper
-      .find(SortAlphaDown)
+      .find(SortAlphaDownIcon)
       .last()
       .parent()
       .props()

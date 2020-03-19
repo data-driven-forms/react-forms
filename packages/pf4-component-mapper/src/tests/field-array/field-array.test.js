@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import FormRenderer, { componentTypes as components } from '@data-driven-forms/react-form-renderer';
 import { TextInput } from '@patternfly/react-core';
+import { AddCircleOIcon, CloseIcon } from '@patternfly/react-icons';
 
 import { componentMapper, FormTemplate } from '../../index';
 

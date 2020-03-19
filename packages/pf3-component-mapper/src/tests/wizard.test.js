@@ -5,11 +5,11 @@ import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 
-import FormTemplate from '../components/form-template';
-import componentMapper from '../components/component-mapper';
-import Wizard from '../components/wizard';
+import FormTemplate from '../files/form-template';
+import componentMapper from '../files/component-mapper';
+import Wizard from '../files/wizard';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
-import WizardStep from '../components/wizard/wizard-step';
+import WizardStep from '../files/wizard/wizard-step';
 
 describe('<Wizard />', () => {
   const cancelSpy = jest.fn();
