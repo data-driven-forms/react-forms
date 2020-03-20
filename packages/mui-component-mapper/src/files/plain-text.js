@@ -1,5 +1,5 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
+import { Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 const PlainText = ({ label, name }) =>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import { Grid, Typography } from '@material-ui/core';
 
 import Subform from '../files/sub-form';
 import RenderWithProvider from '../../../../__mocks__/with-provider';

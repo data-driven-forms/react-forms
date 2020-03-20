@@ -1,7 +1,7 @@
 import React from 'react';
 import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
-import Button from '@material-ui/core/Button';
+import { Button } from '@material-ui/core';
 
 import { componentMapper, FormTemplate } from '../index';
 import WizardStep from '../files/wizard/wizard-step';

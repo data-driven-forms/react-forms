@@ -1,10 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MUIRadio from '@material-ui/core/Radio';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
+import { Radio as MUIRadio, FormControlLabel, FormControl, FormLabel, FormHelperText } from '@material-ui/core';
 import { wrapperProps } from '@data-driven-forms/common/src/multiple-choice-list';
 
 import FormFieldGrid from '../common/form-field-grid';

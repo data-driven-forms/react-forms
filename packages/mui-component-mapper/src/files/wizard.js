@@ -1,8 +1,7 @@
 import React, { useState, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import WizardStep from './wizard/wizard-step';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import { Grid, Typography } from '@material-ui/core';
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
 const Wizard = ({ fields, title, description }) => {

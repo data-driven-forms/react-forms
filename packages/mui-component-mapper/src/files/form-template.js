@@ -1,8 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import MUIButton from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import { Grid, Button as MUIButton, Typography } from '@material-ui/core';
 
 import FormTemplate from '@data-driven-forms/common/src/form-template';
 

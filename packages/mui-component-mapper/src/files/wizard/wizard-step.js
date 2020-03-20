@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import WizardStepButtons from './step-buttons';
-import Typography from '@material-ui/core/Typography';
+import { Typography } from '@material-ui/core';
 
 const WizardStep = ({ title, description, fields, formOptions, ...rest }) => (
   <Fragment>

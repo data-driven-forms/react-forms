@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MuiTextField from '@material-ui/core/TextField';
+import { TextField as MuiTextField } from '@material-ui/core';
 
 import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';

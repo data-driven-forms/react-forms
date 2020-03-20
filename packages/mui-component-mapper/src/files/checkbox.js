@@ -1,11 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MUICheckbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormLabel from '@material-ui/core/FormLabel';
+import { Checkbox as MUICheckbox, FormControl, FormControlLabel, FormHelperText, FormGroup, FormLabel } from '@material-ui/core';
 import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
 
 import FormFieldGrid from '../common/form-field-grid';

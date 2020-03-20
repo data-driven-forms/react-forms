@@ -60,9 +60,7 @@ module.exports = {
             'patternfly-react': {
               transform: (importName) => {
                 let res;
-                const files = glob.sync(
-                  path.resolve(__dirname, `../../node_modules/patternfly-react/dist/js/**/${mapper[importName] || importName}.js`)
-                );
+                const files = glob.sync(path.resolve(__dirname, `../../node_modules/patternfly-react/dist/js/**/${importName}.js`));
                 if (files.length > 0) {
                   res = files[0];
                 } else {
@@ -78,6 +76,17 @@ module.exports = {
             }
           },
           'pf3-react-CJS'
+        ],
+        [
+          'transform-imports',
+          {
+            '@material-ui/core': {
+              transform: (importName) => `@material-ui/core/${importName}`,
+              preventFullImport: false,
+              skipDefaultConversion: false
+            }
+          },
+          'MUI-CJS'
         ]
       ]
     },
@@ -129,9 +138,7 @@ module.exports = {
             'patternfly-react': {
               transform: (importName) => {
                 let res;
-                const files = glob.sync(
-                  path.resolve(__dirname, `../../node_modules/patternfly-react/dist/esm/**/${mapper[importName] || importName}.js`)
-                );
+                const files = glob.sync(path.resolve(__dirname, `../../node_modules/patternfly-react/dist/esm/**/${importName}.js`));
                 if (files.length > 0) {
                   res = files[0];
                 } else {
@@ -147,6 +154,17 @@ module.exports = {
             }
           },
           'pf3-react-ESM'
+        ],
+        [
+          'transform-imports',
+          {
+            '@material-ui/core': {
+              transform: (importName) => `@material-ui/core/esm/${importName}`,
+              preventFullImport: false,
+              skipDefaultConversion: false
+            }
+          },
+          'MUI-ESM'
         ]
       ]
     }

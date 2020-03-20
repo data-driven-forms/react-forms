@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import FormLabel from '@material-ui/core/FormLabel';
+import { FormLabel } from '@material-ui/core';
 import MultipleChoiceListCommon from '@data-driven-forms/common/src/multiple-choice-list';
 import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import Checkbox from '../files/checkbox';
