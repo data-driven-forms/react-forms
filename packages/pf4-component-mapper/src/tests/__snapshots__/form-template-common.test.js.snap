@@ -251,7 +251,7 @@ exports[`FormTemplate PF4 Common should add missing buttons if not defined in bu
                               <Component
                                 onClick={[MockFunction]}
                                 type="button"
-                                variant="secondary"
+                                variant="link"
                               >
                                 <ComponentWithOuia
                                   component={[Function]}
@@ -264,7 +264,7 @@ exports[`FormTemplate PF4 Common should add missing buttons if not defined in bu
                                       "isDisabled": undefined,
                                       "onClick": [MockFunction],
                                       "type": "button",
-                                      "variant": "secondary",
+                                      "variant": "link",
                                     }
                                   }
                                   consumerContext={null}
@@ -278,12 +278,12 @@ exports[`FormTemplate PF4 Common should add missing buttons if not defined in bu
                                       }
                                     }
                                     type="button"
-                                    variant="secondary"
+                                    variant="link"
                                   >
                                     <button
                                       aria-disabled={null}
                                       aria-label={null}
-                                      className="pf-c-button pf-m-secondary"
+                                      className="pf-c-button pf-m-link"
                                       disabled={false}
                                       onClick={[MockFunction]}
                                       tabIndex={null}
@@ -505,7 +505,7 @@ exports[`FormTemplate PF4 Common should render all controls and with default lab
                               <Component
                                 onClick={[MockFunction]}
                                 type="button"
-                                variant="secondary"
+                                variant="link"
                               >
                                 <ComponentWithOuia
                                   component={[Function]}
@@ -518,7 +518,7 @@ exports[`FormTemplate PF4 Common should render all controls and with default lab
                                       "isDisabled": undefined,
                                       "onClick": [MockFunction],
                                       "type": "button",
-                                      "variant": "secondary",
+                                      "variant": "link",
                                     }
                                   }
                                   consumerContext={null}
@@ -532,12 +532,12 @@ exports[`FormTemplate PF4 Common should render all controls and with default lab
                                       }
                                     }
                                     type="button"
-                                    variant="secondary"
+                                    variant="link"
                                   >
                                     <button
                                       aria-disabled={null}
                                       aria-label={null}
-                                      className="pf-c-button pf-m-secondary"
+                                      className="pf-c-button pf-m-link"
                                       disabled={false}
                                       onClick={[MockFunction]}
                                       tabIndex={null}
@@ -727,7 +727,7 @@ exports[`FormTemplate PF4 Common should render buttons in correct order 1`] = `
                               <Component
                                 onClick={[MockFunction]}
                                 type="button"
-                                variant="secondary"
+                                variant="link"
                               >
                                 <ComponentWithOuia
                                   component={[Function]}
@@ -740,7 +740,7 @@ exports[`FormTemplate PF4 Common should render buttons in correct order 1`] = `
                                       "isDisabled": undefined,
                                       "onClick": [MockFunction],
                                       "type": "button",
-                                      "variant": "secondary",
+                                      "variant": "link",
                                     }
                                   }
                                   consumerContext={null}
@@ -754,12 +754,12 @@ exports[`FormTemplate PF4 Common should render buttons in correct order 1`] = `
                                       }
                                     }
                                     type="button"
-                                    variant="secondary"
+                                    variant="link"
                                   >
                                     <button
                                       aria-disabled={null}
                                       aria-label={null}
-                                      className="pf-c-button pf-m-secondary"
+                                      className="pf-c-button pf-m-link"
                                       disabled={false}
                                       onClick={[MockFunction]}
                                       tabIndex={null}
