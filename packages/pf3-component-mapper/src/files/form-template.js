@@ -10,7 +10,7 @@ FormWrapper.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired
 };
 
-export const Button = ({ label, variant, children, ...props }) => (
+export const Button = ({ label, variant, children, buttonType, ...props }) => (
   <PF3Button bsStyle={variant} {...props}>
     {label || children}
   </PF3Button>
@@ -19,7 +19,8 @@ export const Button = ({ label, variant, children, ...props }) => (
 Button.propTypes = {
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
   variant: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)])
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
+  buttonType: PropTypes.string
 };
 
 export const ButtonGroup = ({ children, className, ...props }) => (
