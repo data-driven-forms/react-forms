@@ -30,7 +30,7 @@ describe('<FormRenderer />', () => {
 
     layoutMapper = {
       [layoutComponents.BUTTON_GROUP]: ({ children }) => <div>{ children }</div>,
-      [layoutComponents.BUTTON]: ({ label, bsStyle, ...rest }) => <button { ...rest }>{ label }</button>,
+      [layoutComponents.BUTTON]: ({ label, bsStyle, buttonType, ...rest }) => <button { ...rest }>{ label }</button>,
       [layoutComponents.FORM_WRAPPER]: ({ children, ...props }) => <form { ...props }>{ children }</form>,
       [layoutComponents.TITLE]: ({ children }) => <div>{ children }</div>,
       [layoutComponents.DESCRIPTION]: ({ children }) => <div>{ children }</div>,

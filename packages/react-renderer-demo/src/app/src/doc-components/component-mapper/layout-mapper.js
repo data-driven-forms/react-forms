@@ -29,7 +29,7 @@ const getButtonStyle = variant => ({
   marginRight: 4,
 });
 
-const Button = ({ children, label, variant, ...props }) => <button style={ getButtonStyle(variant) } { ...props }>{ label }</button>;
+const Button = ({ children, label, variant, buttonType, ...props }) => <button style={ getButtonStyle(variant) } { ...props }>{ label }</button>;
 
 const buttonGroupStyle = {
   display: 'flex',

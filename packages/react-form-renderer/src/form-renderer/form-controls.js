@@ -47,6 +47,7 @@ const FormControls = ({
                   variant="primary"
                   disabled={ submitting || validating || disableSubmit }
                   label={ submitLabel }
+                  buttonType="submit"
                 />
               ),
               reset: canReset ? (
@@ -61,9 +62,12 @@ const FormControls = ({
                     }
                   } }
                   label={ resetLabel }
+                  buttonType="reset"
                 />
               ) : null,
-              cancel: onCancel ? <Button key="form-cancel" type="button" onClick={ () => onCancel(values) } label={ cancelLabel } /> : null,
+              cancel: onCancel ?
+                <Button key="form-cancel" type="button" onClick={ () => onCancel(values) } label={ cancelLabel } buttonType="cancel"/>
+                : null,
             };
             return (
               <ButtonGroup className={ buttonClassName }>

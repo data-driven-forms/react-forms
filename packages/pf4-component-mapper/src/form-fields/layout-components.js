@@ -10,8 +10,8 @@ import { Button } from '@patternfly/react-core/dist/js/components/Button/Button'
 
 import './layout-components-styles.scss';
 
-const ButtonLayout = ({ label, bsStyle, children, disabled, ...props }) =>
-  <Button variant={ bsStyle || 'secondary' } isDisabled={ disabled } { ...props }>
+const ButtonLayout = ({ label, bsStyle, children, disabled, buttonType, ...props }) =>
+  <Button variant={ buttonType === 'cancel' ? 'link' : bsStyle || 'secondary' } isDisabled={ disabled } { ...props }>
     { label }{ children }
   </Button>;
 
@@ -23,6 +23,7 @@ ButtonLayout.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
+  buttonType: PropTypes.string,
 };
 
 const ButtonGroupLayout = ({ children, ...props }) =>

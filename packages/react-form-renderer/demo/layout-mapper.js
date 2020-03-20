@@ -1,7 +1,7 @@
 import React from 'react';
 import { layoutComponents } from '../src/constants';
 
-const Button = ({ variant, label, ...rest }) => (
+const Button = ({ variant, label, buttonType, ...rest }) => (
   <button
     style={{
       backgroundColor: variant === 'primary' ? 'red' : 'initial',

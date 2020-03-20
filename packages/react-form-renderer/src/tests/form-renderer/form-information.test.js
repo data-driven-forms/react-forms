@@ -19,7 +19,7 @@ describe('<FormControls />', () => {
     formFieldsMapper = {};
 
     layoutMapper = {
-      [layoutComponents.BUTTON]: ({ label, ...props }) => <button { ...props }>{ label }</button>,
+      [layoutComponents.BUTTON]: ({ label, buttonType, ...props }) => <button { ...props }>{ label }</button>,
       [layoutComponents.BUTTON_GROUP]: ({ children, ...props }) => <div { ...props }>{ children }</div>,
       [layoutComponents.TITLE]: ({ children }) => <h1>{ children }</h1>,
       [layoutComponents.DESCRIPTION]: ({ children }) => <div>{ children }</div>,
