@@ -1,6 +1,13 @@
 import React from 'react';
-import FormRender, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
-import { componentMapper, FormTemplate } from '@data-driven-forms/pf4-component-mapper';
+import FormRender from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
+import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
+import validatorTypes from '@data-driven-forms/react-form-renderer/dist/cjs/validator-types';
+import FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
+import TextField from '@data-driven-forms/pf4-component-mapper/dist/cjs/text-field';
+
+const componentMapper = {
+  [componentTypes.TEXT_FIELD]: TextField
+};
 
 const schema = {
   fields: [

@@ -2,7 +2,6 @@ import RouterNav from 'next/link';
 import Link from '@material-ui/core/Link';
 
 import Grid from '@material-ui/core/Grid'
-import RawComponent from '@docs/raw-component';
 
 import ListOfContents from '../../src/helpers/list-of-contents';
 

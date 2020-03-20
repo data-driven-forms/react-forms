@@ -13,7 +13,6 @@ import { useRouter } from 'next/router';
 import { flatSchema } from './navigation/schema';
 import GhIcon from './common/gh-svg-icon';
 import Navigation from './navigation/app-navigation';
-import MapperContext from './mappers-context';
 import MenuContext from './navigation/menu-context';
 import findConnectedLinks from './navigation/find-connected-links';
 import ConnectedLinks from './common/connected-links';
@@ -120,45 +119,8 @@ const Layout = ({ children }) => {
   const router = useRouter();
   const classes = useStyles();
   const [open, setOpen] = useState(router.pathname !== '/');
-  const [mappers, setMappers] = useState({ loaded: false, mappers: {} });
   const [links, setLinks] = useState({});
   const searchRef = useRef(null);
-
-  useEffect(() => {
-    const promises = [
-      import('@data-driven-forms/pf3-component-mapper'),
-      import('@data-driven-forms/pf4-component-mapper'),
-      import('@data-driven-forms/mui-component-mapper')
-    ];
-
-    Promise.all(promises).then(([pf3, pf4, mui]) =>
-      setMappers({
-        loaded: true,
-        mappers: {
-          pf3: {
-            ...pf3,
-            componentMapper: {
-              ...pf3.componentMapper,
-              summary: () => <div>Pf3 summary</div>,
-              'dual-list-select': () => <div>Not implemented yet</div>
-            }
-          },
-          pf4: {
-            ...pf4,
-            componentMapper: { ...pf4.componentMapper, summary: () => <div>Pf4 summary</div> }
-          },
-          mui: {
-            ...mui,
-            componentMapper: {
-              ...mui.componentMapper,
-              summary: () => <div>Mui summary</div>,
-              'dual-list-select': () => <div>Not implemented yet</div>
-            }
-          }
-        }
-      })
-    );
-  }, []);
 
   useEffect(() => {
     setLinks(findConnectedLinks(router.asPath, flatSchema) || {});
@@ -174,76 +136,74 @@ const Layout = ({ children }) => {
   }
 
   return (
-    <MapperContext.Provider value={mappers}>
-      <MenuContext.Provider value={links}>
-        <div className={classes.root}>
-          <Toolbar
-            className={clsx(classes.appBar, {
-              [classes.toolbarOverride]: !open,
-              [classes.appBarShift]: open
-            })}
+    <MenuContext.Provider value={links}>
+      <div className={classes.root}>
+        <Toolbar
+          className={clsx(classes.appBar, {
+            [classes.toolbarOverride]: !open,
+            [classes.appBarShift]: open
+          })}
+        >
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            className={clsx(classes.menuButton, open && classes.hide)}
           >
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              className={clsx(classes.menuButton, open && classes.hide)}
-            >
-              <MenuIcon className={classes.menuIcons} />
+            <MenuIcon className={classes.menuIcons} />
+          </IconButton>
+        </Toolbar>
+        <Drawer
+          className={classes.drawer}
+          variant="persistent"
+          anchor="left"
+          open={open}
+          classes={{
+            paper: classes.drawerPaper
+          }}
+        >
+          <Navigation searchRef={searchRef} closeNav={handleDrawerClose} />
+          <Divider />
+        </Drawer>
+        <div
+          className={clsx(classes.drawerHeader, classes.appBar, classes.rightAppBar, {
+            [classes.appBarShift]: open
+          })}
+        >
+          <DocSearch />
+          <a href="https://github.com/data-driven-forms/react-forms" rel="noopener noreferrer" target="_blank">
+            <IconButton color="inherit" aria-label="gh repository" edge="start" className={clsx(classes.menuButton)}>
+              <SvgIcon>
+                <GhIcon className={classes.menuIcons} />
+              </SvgIcon>
             </IconButton>
-          </Toolbar>
-          <Drawer
-            className={classes.drawer}
-            variant="persistent"
-            anchor="left"
-            open={open}
-            classes={{
-              paper: classes.drawerPaper
-            }}
-          >
-            <Navigation searchRef={searchRef} closeNav={handleDrawerClose} />
-            <Divider />
-          </Drawer>
-          <div
-            className={clsx(classes.drawerHeader, classes.appBar, classes.rightAppBar, {
-              [classes.appBarShift]: open
-            })}
-          >
-            <DocSearch />
-            <a href="https://github.com/data-driven-forms/react-forms" rel="noopener noreferrer" target="_blank">
-              <IconButton color="inherit" aria-label="gh repository" edge="start" className={clsx(classes.menuButton)}>
-                <SvgIcon>
-                  <GhIcon className={classes.menuIcons} />
-                </SvgIcon>
-              </IconButton>
-            </a>
-          </div>
-
-          <main
-            className={clsx(classes.content, {
-              [classes.contentShift]: open,
-              [classes.mainGradient]: router.pathname === '/',
-              [classes.mainGradientShift]: router.pathname === '/' && open
-            })}
-          >
-            <div className={classes.contentWrapper}>
-              <div
-                className="DocSearch-content"
-                style={{
-                  paddingRight: 32,
-                  paddingLeft: 32
-                }}
-              >
-                {children}
-              </div>
-              <ConnectedLinks />
-              <Footer />
-            </div>
-          </main>
+          </a>
         </div>
-      </MenuContext.Provider>
-    </MapperContext.Provider>
+
+        <main
+          className={clsx(classes.content, {
+            [classes.contentShift]: open,
+            [classes.mainGradient]: router.pathname === '/',
+            [classes.mainGradientShift]: router.pathname === '/' && open
+          })}
+        >
+          <div className={classes.contentWrapper}>
+            <div
+              className="DocSearch-content"
+              style={{
+                paddingRight: 32,
+                paddingLeft: 32
+              }}
+            >
+              {children}
+            </div>
+            <ConnectedLinks />
+            <Footer />
+          </div>
+        </main>
+      </div>
+    </MenuContext.Provider>
   );
 };
 
