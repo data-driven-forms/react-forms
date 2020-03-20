@@ -3,7 +3,7 @@ import Tabs from './tabs';
 import SubForm from './sub-form';
 import Wizard from './wizard';
 import Select from './select';
-import { Select as RawSelect } from './select/select';
+import { Select as RawSelect } from '../common/select/select';
 import FieldArray from './field-array';
 import TextField from './text-field';
 import TextArea from './text-area';

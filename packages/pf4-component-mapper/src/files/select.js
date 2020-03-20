@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormGroup from '../common/form-group';
-import DataDrivenSelect from './select/select';
+import DataDrivenSelect from '../common/select/select';
 
 const Select = (props) => {
   const { label, isRequired, helperText, meta, description, hideLabel, input, isReadOnly, isDisabled, id, ...rest } = useFieldApi(props);

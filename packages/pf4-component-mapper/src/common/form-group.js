@@ -1,12 +1,12 @@
 import React from 'react';
-import { FormGroup, TextContent, Text } from '@patternfly/react-core';
+import { FormGroup as Pf4FormGroup, TextContent, Text } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 
-const Pf4FormGroup = ({ label, isRequired, helperText, meta, description, hideLabel, children, id }) => {
+const FormGroup = ({ label, isRequired, helperText, meta, description, hideLabel, children, id }) => {
   const { error, touched } = meta;
   const showError = touched && error;
   return (
-    <FormGroup
+    <Pf4FormGroup
       isRequired={isRequired}
       label={!hideLabel && label}
       fieldId={id}
@@ -20,11 +20,11 @@ const Pf4FormGroup = ({ label, isRequired, helperText, meta, description, hideLa
         </TextContent>
       )}
       {children}
-    </FormGroup>
+    </Pf4FormGroup>
   );
 };
 
-Pf4FormGroup.propTypes = {
+FormGroup.propTypes = {
   label: PropTypes.string,
   isRequired: PropTypes.bool,
   helperText: PropTypes.string,
@@ -35,9 +35,9 @@ Pf4FormGroup.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)]).isRequired
 };
 
-Pf4FormGroup.defaultProps = {
+FormGroup.defaultProps = {
   isRequired: false,
   description: undefined
 };
 
-export default Pf4FormGroup;
+export default FormGroup;

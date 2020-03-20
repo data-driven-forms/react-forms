@@ -13,7 +13,7 @@ exports[`FormFields <Checkbox /> should render single checkbox variant 1`] = `
         meta={Object {}}
         name="single-check-box"
       >
-        <FormGroup
+        <Pf3FormGroup
           hideLabel={true}
           meta={
             Object {
@@ -76,7 +76,7 @@ exports[`FormFields <Checkbox /> should render single checkbox variant 1`] = `
               </Checkbox>
             </div>
           </FormGroup>
-        </FormGroup>
+        </Pf3FormGroup>
       </SingleCheckbox>
     </Checkbox>
   </ReactFinalForm>
@@ -98,7 +98,7 @@ exports[`FormFields <Checkbox /> should render single checkbox variant with a he
         meta={Object {}}
         name="single-check-box"
       >
-        <FormGroup
+        <Pf3FormGroup
           hideLabel={true}
           meta={
             Object {
@@ -219,7 +219,7 @@ exports[`FormFields <Checkbox /> should render single checkbox variant with a he
               </Checkbox>
             </div>
           </FormGroup>
-        </FormGroup>
+        </Pf3FormGroup>
       </SingleCheckbox>
     </Checkbox>
   </ReactFinalForm>
@@ -246,7 +246,7 @@ exports[`FormFields <Radio /> should render correctly 1`] = `
         ]
       }
     >
-      <FormGroup
+      <Pf3FormGroup
         meta={
           Object {
             "active": false,
@@ -369,7 +369,7 @@ exports[`FormFields <Radio /> should render correctly 1`] = `
             </RadioOption>
           </div>
         </FormGroup>
-      </FormGroup>
+      </Pf3FormGroup>
     </Radio>
   </ReactFinalForm>
 </RenderWithProvider>
@@ -405,7 +405,7 @@ exports[`FormFields <Switch /> should render Switch correctly 1`] = `
         }
       }
     >
-      <FormGroup
+      <Pf3FormGroup
         meta={
           Object {
             "active": false,
@@ -514,7 +514,7 @@ exports[`FormFields <Switch /> should render Switch correctly 1`] = `
             </Switch>
           </div>
         </FormGroup>
-      </FormGroup>
+      </Pf3FormGroup>
     </Switch>
   </ReactFinalForm>
 </RenderWithProvider>
@@ -551,7 +551,7 @@ exports[`FormFields <Switch /> should render Switch with label correctly 1`] = `
         }
       }
     >
-      <FormGroup
+      <Pf3FormGroup
         label="Label"
         meta={
           Object {
@@ -671,7 +671,7 @@ exports[`FormFields <Switch /> should render Switch with label correctly 1`] = `
             </Switch>
           </div>
         </FormGroup>
-      </FormGroup>
+      </Pf3FormGroup>
     </Switch>
   </ReactFinalForm>
 </RenderWithProvider>
@@ -708,7 +708,7 @@ exports[`FormFields <Switch /> should render Switch with onText (custom prop) co
       }
       onText="OnText"
     >
-      <FormGroup
+      <Pf3FormGroup
         meta={
           Object {
             "active": false,
@@ -817,7 +817,7 @@ exports[`FormFields <Switch /> should render Switch with onText (custom prop) co
             </Switch>
           </div>
         </FormGroup>
-      </FormGroup>
+      </Pf3FormGroup>
     </Switch>
   </ReactFinalForm>
 </RenderWithProvider>
@@ -854,7 +854,7 @@ exports[`FormFields <Switch /> should render Switch with placeholder correctly 1
       }
       placeholder="Placeholder"
     >
-      <FormGroup
+      <Pf3FormGroup
         meta={
           Object {
             "active": false,
@@ -963,7 +963,7 @@ exports[`FormFields <Switch /> should render Switch with placeholder correctly 1
             </Switch>
           </div>
         </FormGroup>
-      </FormGroup>
+      </Pf3FormGroup>
     </Switch>
   </ReactFinalForm>
 </RenderWithProvider>
@@ -1000,7 +1000,7 @@ exports[`FormFields <Switch /> should render disabled Switch correctly 1`] = `
         }
       }
     >
-      <FormGroup
+      <Pf3FormGroup
         meta={
           Object {
             "active": false,
@@ -1111,7 +1111,7 @@ exports[`FormFields <Switch /> should render disabled Switch correctly 1`] = `
             </Switch>
           </div>
         </FormGroup>
-      </FormGroup>
+      </Pf3FormGroup>
     </Switch>
   </ReactFinalForm>
 </RenderWithProvider>
@@ -1148,7 +1148,7 @@ exports[`FormFields <Switch /> should render mini Switch correctly 1`] = `
         }
       }
     >
-      <FormGroup
+      <Pf3FormGroup
         meta={
           Object {
             "active": false,
@@ -1258,7 +1258,7 @@ exports[`FormFields <Switch /> should render mini Switch correctly 1`] = `
             </Switch>
           </div>
         </FormGroup>
-      </FormGroup>
+      </Pf3FormGroup>
     </Switch>
   </ReactFinalForm>
 </RenderWithProvider>
@@ -1295,7 +1295,7 @@ exports[`FormFields <Switch /> should render readOnly Switch correctly 1`] = `
         }
       }
     >
-      <FormGroup
+      <Pf3FormGroup
         meta={
           Object {
             "active": false,
@@ -1406,7 +1406,7 @@ exports[`FormFields <Switch /> should render readOnly Switch correctly 1`] = `
             </Switch>
           </div>
         </FormGroup>
-      </FormGroup>
+      </Pf3FormGroup>
     </Switch>
   </ReactFinalForm>
 </RenderWithProvider>
@@ -1443,7 +1443,7 @@ exports[`FormFields <Switch /> should render sm Switch correctly 1`] = `
         }
       }
     >
-      <FormGroup
+      <Pf3FormGroup
         meta={
           Object {
             "active": false,
@@ -1553,7 +1553,7 @@ exports[`FormFields <Switch /> should render sm Switch correctly 1`] = `
             </Switch>
           </div>
         </FormGroup>
-      </FormGroup>
+      </Pf3FormGroup>
     </Switch>
   </ReactFinalForm>
 </RenderWithProvider>
@@ -1567,7 +1567,7 @@ exports[`FormFields <TextField /> should render correctly 1`] = `
     <TextField
       name="text-field"
     >
-      <FormGroup
+      <Pf3FormGroup
         meta={
           Object {
             "active": false,
@@ -1618,7 +1618,7 @@ exports[`FormFields <TextField /> should render correctly 1`] = `
             </FormControl>
           </div>
         </FormGroup>
-      </FormGroup>
+      </Pf3FormGroup>
     </TextField>
   </ReactFinalForm>
 </RenderWithProvider>
@@ -1633,7 +1633,7 @@ exports[`FormFields <TextField /> should render correctly with placeholder 1`] =
       name="text-field"
       placeholder="placeholder"
     >
-      <FormGroup
+      <Pf3FormGroup
         meta={
           Object {
             "active": false,
@@ -1686,7 +1686,7 @@ exports[`FormFields <TextField /> should render correctly with placeholder 1`] =
             </FormControl>
           </div>
         </FormGroup>
-      </FormGroup>
+      </Pf3FormGroup>
     </TextField>
   </ReactFinalForm>
 </RenderWithProvider>
@@ -1705,7 +1705,7 @@ exports[`FormFields <Textarea /> should render correctly 1`] = `
       }
       meta={Object {}}
     >
-      <FormGroup
+      <Pf3FormGroup
         meta={
           Object {
             "active": false,
@@ -1754,7 +1754,7 @@ exports[`FormFields <Textarea /> should render correctly 1`] = `
             </FormControl>
           </div>
         </FormGroup>
-      </FormGroup>
+      </Pf3FormGroup>
     </Textarea>
   </ReactFinalForm>
 </RenderWithProvider>
@@ -1774,7 +1774,7 @@ exports[`FormFields <Textarea /> should render correctly with placeholder 1`] = 
       meta={Object {}}
       placeholder="placeholder"
     >
-      <FormGroup
+      <Pf3FormGroup
         meta={
           Object {
             "active": false,
@@ -1825,7 +1825,7 @@ exports[`FormFields <Textarea /> should render correctly with placeholder 1`] = 
             </FormControl>
           </div>
         </FormGroup>
-      </FormGroup>
+      </Pf3FormGroup>
     </Textarea>
   </ReactFinalForm>
 </RenderWithProvider>

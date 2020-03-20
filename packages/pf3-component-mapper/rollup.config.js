@@ -31,6 +31,7 @@ const pf3Externals = createFilter(
 const globals = {
   react: 'React',
   'react-dom': 'ReactDOM',
+  'prop-types': 'PropTypes',
   'patternfly-react': 'PatternflyReact',
   '@data-driven-forms/react-form-renderer': '@data-driven-forms/react-form-renderer'
 };
@@ -43,9 +44,8 @@ const babelOptions = {
 
 const commonjsOptions = {
   ignoreGlobal: true,
-  include: [/node_modules/, '../../node_modules/**'],
+  include: /node_modules/,
   namedExports: {
-    '../react-form-renderer/dist/index.js': ['composeValidators'],
     '../../node_modules/react-day-picker/DayPicker.js': ['DayPicker']
   }
 };

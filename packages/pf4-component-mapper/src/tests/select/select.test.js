@@ -4,8 +4,8 @@ import { components } from 'react-select';
 import ReactSelect from 'react-select';
 import isEqual from 'lodash/isEqual';
 
-import DataDrivenSelect from '../../files/select/select';
-import { Select } from '../../files/select/select';
+import DataDrivenSelect from '../../common/select/select';
+import { Select } from '../../common/select/select';
 
 describe('<Select />', () => {
   let initialProps;
