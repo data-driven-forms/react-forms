@@ -14,7 +14,7 @@ const AntButton = ({ children, ...props }) => {
   //type is submit in props however type is an attribuite of antButton
   //console.log(props);
   return (
-    <Button {...props} type="primary">
+    <Button {...props} type="primary" htmlType="submit">
       {children}
     </Button>
   );
