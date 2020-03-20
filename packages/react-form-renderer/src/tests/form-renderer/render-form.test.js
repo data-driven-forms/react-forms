@@ -4,13 +4,13 @@ import toJson from 'enzyme-to-json';
 import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import renderForm from '../../form-renderer/render-form';
-import RendererContext from '../../components/renderer-context';
-import FormRenderer from '../../components/form-renderer';
-import validatorTypes from '../../components/validator-types';
-import componentTypes from '../../components/component-types';
+import RendererContext from '../../files/renderer-context';
+import FormRenderer from '../../files/form-renderer';
+import validatorTypes from '../../files/validator-types';
+import componentTypes from '../../files/component-types';
 import FormTemplate from '../../../../../__mocks__/mock-form-template';
-import useFieldApi from '../../hooks/use-field-api';
-import FieldProvider from '../../components/field-provider';
+import useFieldApi from '../../files/use-field-api';
+import FieldProvider from '../../files/field-provider';
 
 const TextField = (props) => {
   const { input, meta } = useFieldApi(props);

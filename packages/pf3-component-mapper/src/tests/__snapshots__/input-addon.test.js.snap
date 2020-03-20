@@ -399,7 +399,7 @@ exports[`<Input Addon> should render group button before input addon correctly 1
                         title="Text Box With Input Addon"
                         validate={[Function]}
                       >
-                        <FormGroup
+                        <Pf3FormGroup
                           inputAddon={
                             Object {
                               "before": Object {
@@ -655,7 +655,7 @@ exports[`<Input Addon> should render group button before input addon correctly 1
                               </InputGroupWrapper>
                             </div>
                           </FormGroup>
-                        </FormGroup>
+                        </Pf3FormGroup>
                       </TextField>
                     </FormFieldHideWrapper>
                   </FormConditionWrapper>
@@ -1123,7 +1123,7 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
                         title="Text Box With Input Addon"
                         validate={[Function]}
                       >
-                        <FormGroup
+                        <Pf3FormGroup
                           inputAddon={
                             Object {
                               "before": Object {
@@ -1410,7 +1410,7 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
                               </InputGroupWrapper>
                             </div>
                           </FormGroup>
-                        </FormGroup>
+                        </Pf3FormGroup>
                       </TextField>
                     </FormFieldHideWrapper>
                   </FormConditionWrapper>
@@ -1725,7 +1725,7 @@ exports[`<Input Addon> should render single after input addon correctly 1`] = `
                         title="Text Box With Input Addon"
                         validate={[Function]}
                       >
-                        <FormGroup
+                        <Pf3FormGroup
                           inputAddon={
                             Object {
                               "after": Object {
@@ -1854,7 +1854,7 @@ exports[`<Input Addon> should render single after input addon correctly 1`] = `
                               </InputGroupWrapper>
                             </div>
                           </FormGroup>
-                        </FormGroup>
+                        </Pf3FormGroup>
                       </TextField>
                     </FormFieldHideWrapper>
                   </FormConditionWrapper>
@@ -2169,7 +2169,7 @@ exports[`<Input Addon> should render single before input addon correctly 1`] = `
                         title="Text Box With Input Addon"
                         validate={[Function]}
                       >
-                        <FormGroup
+                        <Pf3FormGroup
                           inputAddon={
                             Object {
                               "before": Object {
@@ -2298,7 +2298,7 @@ exports[`<Input Addon> should render single before input addon correctly 1`] = `
                               </InputGroupWrapper>
                             </div>
                           </FormGroup>
-                        </FormGroup>
+                        </Pf3FormGroup>
                       </TextField>
                     </FormFieldHideWrapper>
                   </FormConditionWrapper>
@@ -2604,7 +2604,7 @@ exports[`<Input Addon> should render single button after input addon correctly 1
                         title="Text Box With Input Addon"
                         validate={[Function]}
                       >
-                        <FormGroup
+                        <Pf3FormGroup
                           inputAddon={
                             Object {
                               "after": Object {
@@ -2741,7 +2741,7 @@ exports[`<Input Addon> should render single button after input addon correctly 1
                               </InputGroupWrapper>
                             </div>
                           </FormGroup>
-                        </FormGroup>
+                        </Pf3FormGroup>
                       </TextField>
                     </FormFieldHideWrapper>
                   </FormConditionWrapper>
@@ -3101,7 +3101,7 @@ exports[`<Input Addon> should render single button before input addon correctly 
                         title="Text Box With Input Addon"
                         validate={[Function]}
                       >
-                        <FormGroup
+                        <Pf3FormGroup
                           inputAddon={
                             Object {
                               "before": Object {
@@ -3293,7 +3293,7 @@ exports[`<Input Addon> should render single button before input addon correctly 
                               </InputGroupWrapper>
                             </div>
                           </FormGroup>
-                        </FormGroup>
+                        </Pf3FormGroup>
                       </TextField>
                     </FormFieldHideWrapper>
                   </FormConditionWrapper>
@@ -3950,7 +3950,7 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                         title="Text Box With Input Addon"
                         validate={[Function]}
                       >
-                        <FormGroup
+                        <Pf3FormGroup
                           inputAddon={
                             Object {
                               "after": Object {
@@ -4410,7 +4410,7 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                               </InputGroupWrapper>
                             </div>
                           </FormGroup>
-                        </FormGroup>
+                        </Pf3FormGroup>
                       </TextField>
                     </FormFieldHideWrapper>
                   </FormConditionWrapper>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import WizardNavigation from '../../components/wizard/wizard-nav';
+import WizardNavigation from '../../files/wizard/wizard-nav';
 
 describe('WizardNav', () => {
   class ClassWrapper extends React.Component {

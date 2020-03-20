@@ -1,9 +1,9 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import Tabs from '../components/tabs';
+import Tabs from '../files/tabs';
 import { mount, shallow } from 'enzyme';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
-import { Tabs as PF4Tabs } from '@patternfly/react-core/dist/js/components/Tabs/Tabs';
+import { Tabs as PF4Tabs } from '@patternfly/react-core';
 
 describe('Tabs component', () => {
   const props = {

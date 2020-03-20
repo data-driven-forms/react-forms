@@ -1,8 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Typography from '@material-ui/core/Typography';
+import { Typography } from '@material-ui/core';
 
-import PlainText from '../components/plain-text';
+import PlainText from '../files/plain-text';
 
 describe('PlainText component', () => {
   it('renders correctly with three paragraphs', () => {

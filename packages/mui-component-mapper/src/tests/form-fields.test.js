@@ -1,14 +1,14 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import FormLabel from '@material-ui/core/FormLabel';
+import { FormLabel } from '@material-ui/core';
 import MultipleChoiceListCommon from '@data-driven-forms/common/src/multiple-choice-list';
 import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
-import Checkbox from '../components/checkbox';
+import Checkbox from '../files/checkbox';
 
 import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
-import FormTemplate from '../components/form-template';
-import componentMapper from '../components/component-mapper';
+import FormTemplate from '../files/form-template';
+import componentMapper from '../files/component-mapper';
 import { Radio } from '@material-ui/core';
 
 const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (

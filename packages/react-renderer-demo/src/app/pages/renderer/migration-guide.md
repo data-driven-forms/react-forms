@@ -1,5 +1,4 @@
 import Grid from '@material-ui/core/Grid'
-import RawComponent from '@docs/raw-component';
 import RouterLink from 'next/link';
 import Link from '@material-ui/core/Link';
 

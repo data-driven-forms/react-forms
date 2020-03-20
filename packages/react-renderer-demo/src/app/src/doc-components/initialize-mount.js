@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
-import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
-import { FormTemplate, componentMapper } from '@data-driven-forms/pf4-component-mapper';
+import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
+import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
+import FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
+import TextField from '@data-driven-forms/pf4-component-mapper/dist/cjs/text-field';
+import Select from '@data-driven-forms/pf4-component-mapper/dist/cjs/select';
+import Wizard from '@data-driven-forms/pf4-component-mapper/dist/cjs/wizard';
 import { Title } from '@patternfly/react-core/dist/js/components/Title/Title';
+
+const componentMapper = {
+  [componentTypes.TEXT_FIELD]: TextField,
+  [componentTypes.WIZARD]: Wizard,
+  [componentTypes.SELECT]: Select
+};
 
 const schema = {
   fields: [

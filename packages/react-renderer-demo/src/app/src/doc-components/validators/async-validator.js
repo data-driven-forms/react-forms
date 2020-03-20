@@ -1,6 +1,12 @@
 import React from 'react';
-import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
-import { FormTemplate, componentMapper } from '@data-driven-forms/pf4-component-mapper';
+import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
+import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
+import FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
+import TextField from '@data-driven-forms/pf4-component-mapper/dist/cjs/text-field';
+
+const componentMapper = {
+  [componentTypes.TEXT_FIELD]: TextField
+};
 const mockEndpoint = (value) =>
   new Promise((resolve, reject) => {
     setTimeout(() => {

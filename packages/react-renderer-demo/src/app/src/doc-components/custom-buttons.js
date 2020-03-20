@@ -1,9 +1,17 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import FormRenderer, { componentTypes, validatorTypes, useFormApi, FormSpy } from '@data-driven-forms/react-form-renderer';
-import { componentMapper } from '@data-driven-forms/pf4-component-mapper';
-import { Button } from '@material-ui/core';
-import { Form } from '@patternfly/react-core';
+import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
+import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
+import validatorTypes from '@data-driven-forms/react-form-renderer/dist/cjs/validator-types';
+import useFormApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-form-api';
+import FormSpy from '@data-driven-forms/react-form-renderer/dist/cjs/form-spy';
+import TextField from '@data-driven-forms/pf4-component-mapper/dist/cjs/text-field';
+import Button from '@material-ui/core/Button';
+import { Form } from '@patternfly/react-core/dist/js/components/Form/Form';
+
+const componentMapper = {
+  [componentTypes.TEXT_FIELD]: TextField
+};
 
 const schema = {
   title: 'Combination of PF4 form and MUI buttons',

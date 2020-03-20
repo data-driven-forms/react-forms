@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import SubForm from '../components/sub-form';
+import SubForm from '../files/sub-form';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 
 describe('<SubForm />', () => {

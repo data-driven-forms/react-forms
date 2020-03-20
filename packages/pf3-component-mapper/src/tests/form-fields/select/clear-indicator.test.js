@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import ClearIndicator from '../../../components/select/clear-indicator';
+import ClearIndicator from '../../../files/select/clear-indicator';
 
 describe('<ClearIndicator />', () => {
   const initialProps = {

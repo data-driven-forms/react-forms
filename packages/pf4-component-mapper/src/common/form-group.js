@@ -1,7 +1,5 @@
 import React from 'react';
-import { FormGroup as Pf4FormGroup } from '@patternfly/react-core/dist/js/components/Form/FormGroup';
-import { TextContent } from '@patternfly/react-core/dist/js/components/Text/TextContent';
-import { Text, TextVariants } from '@patternfly/react-core/dist/js/components/Text/Text';
+import { FormGroup as Pf4FormGroup, TextContent, Text } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 
 const FormGroup = ({ label, isRequired, helperText, meta, description, hideLabel, children, id }) => {
@@ -18,7 +16,7 @@ const FormGroup = ({ label, isRequired, helperText, meta, description, hideLabel
     >
       {description && (
         <TextContent>
-          <Text component={TextVariants.small}>{description}</Text>
+          <Text component="small">{description}</Text>
         </TextContent>
       )}
       {children}

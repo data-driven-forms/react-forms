@@ -4,7 +4,7 @@ import { shallowToJson } from 'enzyme-to-json';
 import selectNext from '@data-driven-forms/common/src/wizard/select-next';
 import handleEnter from '@data-driven-forms/common/src/wizard/enter-handler';
 
-import WizardStepButtons from '../../components/wizard/step-buttons';
+import WizardStepButtons from '../../files/wizard/step-buttons';
 
 describe('<WizardSTepButtons', () => {
   let initialProps;

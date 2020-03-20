@@ -4,7 +4,7 @@ import toJson from 'enzyme-to-json';
 import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 import RequiredLabel from '../form-fields/required-label';
 import { FieldLevelHelp, HelpBlock } from 'patternfly-react';
-import Checkbox from '../components/checkbox';
+import Checkbox from '../files/checkbox';
 
 describe.skip('<MultipleChoiceList />', () => {
   let initialProps;

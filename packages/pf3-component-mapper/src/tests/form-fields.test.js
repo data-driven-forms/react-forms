@@ -1,15 +1,15 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import TextField from '../components/text-field';
+import TextField from '../files/text-field';
 import { mount } from 'enzyme';
 import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 import MultipleChoiceList from '../form-fields/multiple-choice-list';
 import { FieldLevelHelp } from 'patternfly-react';
-import Pf3Checkbox from 'patternfly-react/dist/js/components/Form/Checkbox';
-import Switch from '../components/switch';
-import Checkbox from '../components/checkbox';
-import Radio from '../components/radio';
-import Textarea from '../components/textarea';
+import { Checkbox as Pf3Checkbox } from 'patternfly-react';
+import Switch from '../files/switch';
+import Checkbox from '../files/checkbox';
+import Radio from '../files/radio';
+import Textarea from '../files/textarea';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 
 describe('FormFields', () => {

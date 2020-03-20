@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Checkbox } from '@patternfly/react-core/dist/js/components/Checkbox/Checkbox';
+import { Checkbox } from '@patternfly/react-core';
 
 import MultipleChoiceListCommon, { wrapperProps } from '@data-driven-forms/common/src/multiple-choice-list';
 import FormGroup from './form-group';

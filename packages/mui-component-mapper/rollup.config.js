@@ -12,7 +12,7 @@ import sourcemaps from 'rollup-plugin-sourcemaps';
 import glob from 'glob';
 import path from 'path';
 
-const outputPaths = glob.sync(path.resolve(__dirname, './src/components/*.js'));
+const outputPaths = glob.sync(path.resolve(__dirname, './src/files/*.js'));
 
 const muiExternals = createFilter(
   [
@@ -20,6 +20,8 @@ const muiExternals = createFilter(
     'react-dom',
     'prop-types',
     '@data-driven-forms/react-form-renderer',
+    '@data-driven-forms/react-form-renderer/**',
+    '@material-ui/core',
     '@material-ui/core/**',
     '@material-ui/styles/**',
     '@material-ui/icons/**'
@@ -39,7 +41,7 @@ const globals = {
 const babelOptions = {
   exclude: /node_modules/,
   runtimeHelpers: true,
-  configFile: '../../babel.config.js'
+  configFile: './babel.config.js'
 };
 
 const commonjsOptions = {
@@ -84,31 +86,19 @@ const plugins = [
   sourcemaps()
 ];
 
-export default [
-  ...['cjs', 'esm'].map((env) => ({
-    input: ['./src/index.js', ...outputPaths],
-    output: {
-      dir: `./dist/${env}`,
-      format: env,
-      name: '@data-driven-forms/mui-component-mapper',
-      exports: 'named',
-      globals,
-      sourcemap: true
-    },
-    external: muiExternals,
-    plugins
-  })),
-  {
-    input: './src/index.js',
-    output: {
-      file: `./dist/umd/index.js`,
-      format: 'umd',
-      name: '@data-driven-forms/mui-component-mapper',
-      exports: 'named',
-      globals,
-      sourcemap: true
-    },
-    external: muiExternals,
-    plugins
-  }
-];
+export default {
+  input: process.env.FORMAT === 'umd' ? './src/index.js' : ['./src/index.js', ...outputPaths],
+  output: {
+    ...(process.env.FORMAT === 'umd'
+      ? {
+          file: `./dist/umd/index.js`
+        }
+      : { dir: `./dist/${process.env.FORMAT}` }),
+    name: '@data-driven-forms/mui-component-mapper',
+    exports: 'named',
+    globals,
+    sourcemap: true
+  },
+  external: muiExternals,
+  plugins
+};

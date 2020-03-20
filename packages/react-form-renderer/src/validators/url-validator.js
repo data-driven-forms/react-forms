@@ -1,4 +1,4 @@
-import Validators from './validators';
+import Validators from '../files/validators';
 import { assign } from './helpers';
 
 // user:pass BasicAuth (optional)

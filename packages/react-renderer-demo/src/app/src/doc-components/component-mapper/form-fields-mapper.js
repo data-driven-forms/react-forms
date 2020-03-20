@@ -1,6 +1,9 @@
 /* eslint react/prop-types: "off" */
 import React, { useState } from 'react';
-import FormRender, { componentTypes, useFieldApi, useFormApi } from '@data-driven-forms/react-form-renderer';
+import FormRender from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
+import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
+import useFieldApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-field-api';
+import useFormApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-form-api';
 
 import './form-fields-mapper-docs.css';
 

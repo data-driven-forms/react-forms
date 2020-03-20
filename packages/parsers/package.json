@@ -3,7 +3,7 @@
   "version": "0.4.2",
   "description": "Parsers for Data Driven Forms.",
   "main": "dist/cjs/index.js",
-  "module": "dist/umd/index.js",
+  "module": "dist/esm/index.js",
   "license": "Apache-2.0",
   "scripts": {
     "build": "rollup -c ./rollup.config.js"
