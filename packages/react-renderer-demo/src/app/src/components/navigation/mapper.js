@@ -14,6 +14,7 @@ import RouterNavLink from 'next/link';
 import { useRouter } from 'next/router';
 
 import { navStyles } from './nav-styles';
+import { query } from './find-connected-links';
 
 const useStyles = makeStyles(navStyles);
 
@@ -24,7 +25,7 @@ const Item = ({ href, linkText, component }) => {
   return (
     <ListItem
       button
-      selected={href.replace('/?', '?') === router.asPath}
+      selected={href.replace('/?', '?') === router.asPath.replace(query, '')}
       key={href || linkText}
       className={classes.nested}
       component={forwardRef((props, ref) => (
