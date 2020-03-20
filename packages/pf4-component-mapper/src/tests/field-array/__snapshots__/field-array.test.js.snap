@@ -665,6 +665,7 @@ exports[`FieldArray should render array field correctly 1`] = `
                         className="pf-c-form__actions"
                       >
                         <ButtonLayout
+                          buttonType="submit"
                           key="form-submit"
                           label="Submit"
                           type="submit"

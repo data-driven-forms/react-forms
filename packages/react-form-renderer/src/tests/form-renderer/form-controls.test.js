@@ -13,7 +13,7 @@ describe('<FormControls />', () => {
 
   beforeEach(() => {
     initialLayout = {
-      [layoutComponents.BUTTON]: ({ label, ...props }) => <button { ...props }>{ label }</button>,
+      [layoutComponents.BUTTON]: ({ label, buttonType, ...props }) => <button { ...props }>{ label }</button>,
       [layoutComponents.COL]: ({ children, ...props }) => <div { ...props }>{ children }</div>,
       [layoutComponents.BUTTON_GROUP]: ({ children, ...props }) => <div { ...props }>{ children }</div>,
     };

@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 
 const layoutMapper = {
   [layoutComponents.FORM_WRAPPER]: ({ children, ...props }) => <form { ...props }>{ children }</form>,
-  [layoutComponents.BUTTON]: ({ label, variant, children, ...props }) => <Button color={ variant } variant="contained" { ...props }>{ label || children }</Button>,
+  [layoutComponents.BUTTON]: ({ label, variant, children, buttonType, ...props }) => <Button color={ variant } variant="contained" { ...props }>{ label || children }</Button>,
   [layoutComponents.BUTTON_GROUP]: ({ children }) => (
     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
       { children }

@@ -10,12 +10,13 @@ FormWapper.propTypes = {
   children: PropTypes.oneOfType([ PropTypes.node, PropTypes.arrayOf(PropTypes.node) ]).isRequired,
 };
 
-const FormButton = ({ label, variant, children, ...props }) => <Button bsStyle={ variant } { ...props }>{ label || children }</Button>;
+const FormButton = ({ label, variant, children, buttonType, ...props }) => <Button bsStyle={ variant } { ...props }>{ label || children }</Button>;
 
 FormButton.propTypes = {
   label: PropTypes.oneOfType([ PropTypes.string, PropTypes.node, PropTypes.arrayOf(PropTypes.node) ]),
   variant: PropTypes.string,
   children: PropTypes.oneOfType([ PropTypes.node, PropTypes.arrayOf(PropTypes.node) ]),
+  buttonType: PropTypes.string,
 };
 
 const ButtonGroupWrapper = ({ children, className, ...props }) => (

@@ -59,6 +59,7 @@ Check the example below to see a simple implementation of layout components.
 |label|string|Button label|"Submit", "Cancel", "Reset"|Yes, \`buttonsLabels\` FormRenderer prop|
 |variant|string|Variant of button. Submit button will receive "primary" value |"primary", undefined|No|
 |onClick|function|Button click event handler|function|Yes, \`onSubmit\`, \`onCancel\`, \`onReset\` FormRenderer props|
+|buttonType|string|Depends on the type button|One of 'submit', 'cancel', 'reset'|No|
 
 ### ButtonGroup
 |Prop|Type|Description|Value|Customizable|

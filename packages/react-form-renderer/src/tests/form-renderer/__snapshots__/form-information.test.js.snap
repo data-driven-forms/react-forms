@@ -129,6 +129,7 @@ exports[`<FormControls /> should render with description 1`] = `
                     className=""
                   >
                     <Component
+                      buttonType="submit"
                       key="form-submit"
                       label="Submit"
                       type="submit"
@@ -288,6 +289,7 @@ exports[`<FormControls /> should render with title and description 1`] = `
                     className=""
                   >
                     <Component
+                      buttonType="submit"
                       key="form-submit"
                       label="Submit"
                       type="submit"
@@ -435,6 +437,7 @@ exports[`<FormControls /> should render without title and description 1`] = `
                     className=""
                   >
                     <Component
+                      buttonType="submit"
                       key="form-submit"
                       label="Submit"
                       type="submit"

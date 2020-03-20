@@ -46,6 +46,7 @@ exports[`<FormControls /> should add missing buttons if not defined in button or
           <Component>
             <div>
               <Component
+                buttonType="submit"
                 key="form-submit"
                 label="Submit"
                 type="submit"
@@ -59,6 +60,7 @@ exports[`<FormControls /> should add missing buttons if not defined in button or
                 </button>
               </Component>
               <Component
+                buttonType="reset"
                 disabled={true}
                 key="form-reset"
                 label="Reset"
@@ -74,6 +76,7 @@ exports[`<FormControls /> should add missing buttons if not defined in button or
                 </button>
               </Component>
               <Component
+                buttonType="cancel"
                 key="form-cancel"
                 label="Cancel"
                 onClick={[Function]}
@@ -148,6 +151,7 @@ exports[`<FormControls /> should render all controls and with default labels 1`]
           <Component>
             <div>
               <Component
+                buttonType="submit"
                 disabled={true}
                 key="form-submit"
                 label="Submit"
@@ -163,6 +167,7 @@ exports[`<FormControls /> should render all controls and with default labels 1`]
                 </button>
               </Component>
               <Component
+                buttonType="reset"
                 disabled={true}
                 key="form-reset"
                 label="Reset"
@@ -178,6 +183,7 @@ exports[`<FormControls /> should render all controls and with default labels 1`]
                 </button>
               </Component>
               <Component
+                buttonType="cancel"
                 key="form-cancel"
                 label="Cancel"
                 onClick={[Function]}
@@ -251,6 +257,7 @@ exports[`<FormControls /> should render buttons in correct order 1`] = `
           <Component>
             <div>
               <Component
+                buttonType="cancel"
                 key="form-cancel"
                 label="Cancel"
                 onClick={[Function]}
@@ -264,6 +271,7 @@ exports[`<FormControls /> should render buttons in correct order 1`] = `
                 </button>
               </Component>
               <Component
+                buttonType="submit"
                 key="form-submit"
                 label="Submit"
                 type="submit"
@@ -277,6 +285,7 @@ exports[`<FormControls /> should render buttons in correct order 1`] = `
                 </button>
               </Component>
               <Component
+                buttonType="reset"
                 disabled={true}
                 key="form-reset"
                 label="Reset"
@@ -351,6 +360,7 @@ exports[`<FormControls /> should render only submit button 1`] = `
           <Component>
             <div>
               <Component
+                buttonType="submit"
                 key="form-submit"
                 label="Submit"
                 type="submit"
