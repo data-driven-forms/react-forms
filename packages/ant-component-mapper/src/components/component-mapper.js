@@ -1,6 +1,7 @@
 import React from 'react';
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 import Tabs from './tabs';
+import PlainText from './plain-text';
 
 export const components = {};
 
@@ -16,7 +17,7 @@ const componentMapper = {
   [componentTypes.TIME_PICKER]: () => <div>Time picker</div>,
   [componentTypes.TEXTAREA]: () => <div>Textarea field</div>,
   [componentTypes.SELECT]: () => <div>Select field</div>,
-  [componentTypes.PLAIN_TEXT]: () => <div>Plain text</div>,
+  [componentTypes.PLAIN_TEXT]: PlainText,
   [componentTypes.SWITCH]: <div>Switch</div>
 };
 
