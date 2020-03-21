@@ -23,6 +23,7 @@ const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperTex
     <Form required={isRequired} layout="vertical" component="fieldset">
       <Form.Item
         label={label}
+        name={label}
         help={helperText || description || invalid}
         validateStatus={!invalid ? '' : 'error'}
         rules={[
@@ -30,7 +31,7 @@ const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperTex
             required: isRequired,
             message: 'Required'
           }
-        ]} //this is useless
+        ]}
       >
         {children}
       </Form.Item>
