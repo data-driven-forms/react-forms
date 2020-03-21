@@ -5,7 +5,8 @@ import PlainText from './plain-text';
 import TextField from './text-field';
 import TextArea from './text-area';
 import Checkbox from './checkbox';
-import DatePicker from './date-picker'
+import DatePicker from './date-picker';
+import TimePicker from './time-picker';
 
 export const components = {};
 
@@ -18,7 +19,7 @@ const componentMapper = {
   [componentTypes.RADIO]: () => <div>Radio field</div>,
   [componentTypes.TABS]: Tabs,
   [componentTypes.DATE_PICKER]: DatePicker,
-  [componentTypes.TIME_PICKER]: () => <div>Time picker</div>,
+  [componentTypes.TIME_PICKER]: TimePicker,
   [componentTypes.SELECT]: () => <div>Select field</div>,
   [componentTypes.PLAIN_TEXT]: PlainText,
   [componentTypes.SWITCH]: <div>Switch</div>

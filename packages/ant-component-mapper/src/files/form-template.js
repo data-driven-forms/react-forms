@@ -3,16 +3,10 @@ import React from 'react';
 import { Button, Typography } from 'antd';
 import 'antd/dist/antd.css';
 import FormTemplate from '@data-driven-forms/common/src/form-template';
-// import { Row, Col } from 'antd';
-// import Grid from '@material-ui/core/Grid';
-// import MUIButton from '@material-ui/core/Button';
-// import Typography from '@material-ui/core/Typography';
 
-const { Title, Paragraph /* , Text  */ } = Typography;
+const { Title, Paragraph } = Typography;
 
 const AntButton = ({ children, ...props }) => {
-  //type is submit in props however type is an attribuite of antButton
-  //console.log(props);
   return (
     <Button {...props} type="primary" htmlType="submit">
       {children}
