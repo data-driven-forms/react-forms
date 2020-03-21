@@ -6,7 +6,7 @@ import { validationError } from '../common/helpers';
 import { meta, input } from '@data-driven-forms/common/src/prop-types-templates'; //only for propTypes check
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
-const TextField = (props) => {
+const TextArea = (props) => {
   const { input, isReadOnly, isDisabled, placeholder, isRequired, label, helperText, description, validateOnMount, meta, ...rest } = useFieldApi(
     props
   );
@@ -26,13 +26,13 @@ const TextField = (props) => {
           }
         ]}
       >
-        <Input {...input} disabled={isDisabled} readOnly={isReadOnly} placeholder={placeholder} {...rest} />
+        <Input.TextArea {...input} disabled={isDisabled} readOnly={isReadOnly} placeholder={placeholder} {...rest} />
       </Form.Item>
     </Form>
   );
 };
 
-TextField.propTypes = {
+TextArea.propTypes = {
   input,
   meta,
   isReadOnly: PropTypes.bool,
@@ -45,4 +45,4 @@ TextField.propTypes = {
   description: PropTypes.node
 };
 
-export default TextField;
+export default TextArea;
