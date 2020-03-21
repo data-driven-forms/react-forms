@@ -4,7 +4,7 @@ import Tabs from './tabs';
 import PlainText from './plain-text';
 import TextField from './text-field';
 import TextArea from './text-area';
-//import Checkbox from './checkbox';
+import Checkbox from './checkbox';
 
 export const components = {};
 
@@ -12,7 +12,7 @@ const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField,
   [componentTypes.TEXTAREA]: TextArea,
   [componentTypes.SELECT]: () => <div>Select field</div>,
-  [componentTypes.CHECKBOX]: () => <div>Checkbox</div>,
+  [componentTypes.CHECKBOX]: Checkbox,
   [componentTypes.SUB_FORM]: () => <div>sub form</div>,
   [componentTypes.RADIO]: () => <div>Radio field</div>,
   [componentTypes.TABS]: Tabs,
