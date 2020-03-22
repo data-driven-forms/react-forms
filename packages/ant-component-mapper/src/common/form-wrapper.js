@@ -31,7 +31,7 @@ AntForm.propTypes = {
   help: PropTypes.string,
   isRequired: PropTypes.bool,
   component: PropTypes.string,
-  invalid: PropTypes.string
+  invalid: PropTypes.oneOfType(PropTypes.string, PropTypes.bool)
 };
 
 export default AntForm;
