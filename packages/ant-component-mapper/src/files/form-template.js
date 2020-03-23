@@ -6,14 +6,6 @@ import FormTemplate from '@data-driven-forms/common/src/form-template';
 
 const { Title, Paragraph } = Typography;
 
-const AntButton = ({ children, ...props }) => {
-  return (
-    <Button {...props} type="primary" htmlType="submit">
-      {children}
-    </Button>
-  );
-};
-
 const Form = ({ children, ...props }) => <form {...props}>{children}</form>;
 const Description = ({ children }) => (
   <Typography>
@@ -27,7 +19,11 @@ const TitleComponent = ({ children }) => (
 );
 
 const ButtonGroup = ({ children }) => <div style={{ display: 'flex', justifyContent: 'flex-end' }}>{children}</div>;
-const ButtonComponent = ({ label, variant, children, ...props }) => <AntButton {...props}>{label || children}</AntButton>;
+const ButtonComponent = ({ label, variant, children, buttonType, ...props }) => (
+  <Button {...props} type="primary" htmlType={props.type}>
+    {label || children}
+  </Button>
+);
 
 const AntFormTemplate = (props) => (
   <FormTemplate FormWrapper={Form} Button={ButtonComponent} ButtonGroup={ButtonGroup} Title={TitleComponent} Description={Description} {...props} />

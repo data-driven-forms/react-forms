@@ -8,6 +8,7 @@ import Checkbox from './checkbox';
 import DatePicker from './date-picker';
 import TimePicker from './time-picker';
 import Radio from './radio';
+import Switch from './switch';
 import Select from './select';
 export const components = {};
 
@@ -22,7 +23,7 @@ const componentMapper = {
   [componentTypes.DATE_PICKER]: DatePicker,
   [componentTypes.TIME_PICKER]: TimePicker,
   [componentTypes.PLAIN_TEXT]: PlainText,
-  [componentTypes.SWITCH]: () => <div>switch</div>
+  [componentTypes.SWITCH]: Switch
 };
 
 export default componentMapper;
