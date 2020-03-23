@@ -40,6 +40,7 @@ const Select = ({
   noOptionsMessage,
   value,
   onChange,
+  loadOptionsChangeCounter,
   ...props
 }) => {
   const [state, dispatch] = useReducer(reducer, {
@@ -53,12 +54,12 @@ const Select = ({
     dispatch({ type: 'startLoading' });
 
     return loadOptions().then((data) => {
-      if (Array.isArray(value)) {
+      if (value && Array.isArray(value)) {
         const selectValue = value.filter((value) =>
           typeof value === 'object' ? data.find((option) => value.value === option.value) : data.find((option) => value === option.value)
         );
         onChange(selectValue.length === 0 ? undefined : selectValue);
-      } else if (!data.find(({ value: internalValue }) => internalValue === value)) {
+      } else if (value && !data.find(({ value: internalValue }) => internalValue === value)) {
         onChange(undefined);
       }
 
@@ -84,11 +85,11 @@ const Select = ({
     if (loadOptionsStr && state.isMounted) {
       updateOptions();
     }
-  }, [loadOptionsStr]);
+  }, [loadOptionsStr, loadOptionsChangeCounter]);
 
   useEffect(() => {
     if (state.isMounted) {
-      if (!propsOptions.map(({ value }) => value).includes(value)) {
+      if (value && !propsOptions.map(({ value }) => value).includes(value)) {
         onChange(undefined);
       }
 
@@ -97,11 +98,20 @@ const Select = ({
   }, [propsOptions]);
 
   if (state.isLoading) {
-    return <ReactSelect isDisabled={true} placeholder={loadingMessage} options={state.options} {...loadingProps} />;
+    return (
+      <ReactSelect
+        {...props}
+        classNamePrefix={classNamePrefix}
+        isDisabled={true}
+        placeholder={loadingMessage}
+        options={state.options}
+        {...loadingProps}
+      />
+    );
   }
 
   const onInputChange = (inputValue) => {
-    if (loadOptions && state.promises[inputValue] === undefined) {
+    if (inputValue && loadOptions && state.promises[inputValue] === undefined && props.isSearchable) {
       dispatch({ type: 'setPromises', payload: { [inputValue]: true } });
 
       loadOptions(inputValue)
@@ -133,6 +143,7 @@ const Select = ({
         'has-error': invalid
       })}
       {...props}
+      isDisabled={props.isDisabled || props.isReadOnly}
       options={state.options}
       classNamePrefix={classNamePrefix}
       isMulti={isMulti}
@@ -157,6 +168,7 @@ Select.propTypes = {
   pluckSingleValue: PropTypes.bool,
   value: PropTypes.any,
   placeholder: PropTypes.string,
+  loadOptionsChangeCounter: PropTypes.number,
   ...input
 };
 

@@ -1,6 +1,27 @@
 /* eslint-disable camelcase */
 import { componentTypes as components, validatorTypes as validators } from '@data-driven-forms/react-form-renderer';
 
+const asyncOptions = [
+  { label: 'async-option-1', value: 'async-option-1' },
+  { label: 'async-option-2', value: 'async-option-2' },
+  { label: 'async-option-3', value: 'async-option-3' },
+  { label: 'async option pepa 1', value: 'async-option-4' },
+  { label: 'async option pepa 2', value: 'async-option-5' }
+];
+
+const baseOptions = asyncOptions.slice(0, 3);
+
+const asyncLoadOptions = (searchValue) =>
+  new Promise((resolve) =>
+    setTimeout(() => {
+      if (searchValue && searchValue.trim() !== '') {
+        return resolve(asyncOptions.filter(({ label }) => label.toLocaleLowerCase().includes(searchValue.trim().toLocaleLowerCase())));
+      }
+
+      return resolve(baseOptions);
+    }, 2000)
+  );
+
 const output = {
   title: 'Testing dialog',
   description: 'Description of testing Dialog',
@@ -39,18 +60,8 @@ const output = {
               name: 'select-1',
               label: 'Dropdown 1',
               visible: true,
-              dataType: 'number',
-              options: [
-                {
-                  value: 1,
-                  label: 'foo'
-                },
-                {
-                  value: 2,
-                  label: 'bar'
-                }
-              ],
-              isMulti: true
+              loadOptions: asyncLoadOptions,
+              isSearchable: true
             },
             {
               title: 'Text boxes',

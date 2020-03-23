@@ -63,9 +63,9 @@ describe('<SelectField />', () => {
       wrapper.update();
       expect(
         wrapper
-          .find(SelectField)
+          .find(ReactSelect)
           .first()
-          .instance().state.options
+          .props().options
       ).toEqual([{ label: 'asyncLabel' }]);
       done();
     });
@@ -109,13 +109,19 @@ describe('<SelectField />', () => {
     let asyncLoading;
     let asyncLoadingNew;
 
+    class Wrapper extends React.Component {
+      render() {
+        return <SelectField {...this.props} />;
+      }
+    }
+
     beforeEach(() => {
       asyncLoading = () => Promise.resolve(initialProps.options);
       asyncLoadingNew = () => Promise.resolve(NEW_OPTIONS);
     });
 
     it('should change the options when options prop is changed', () => {
-      const wrapper = mount(<SelectField {...initialProps} />);
+      const wrapper = mount(<Wrapper {...initialProps} />);
 
       let innerSelectProps = wrapper.find(ReactSelect).props().options;
 
@@ -129,7 +135,7 @@ describe('<SelectField />', () => {
     });
 
     it('should change the options when loadOptions prop is changed', (done) => {
-      const wrapper = mount(<SelectField {...initialProps} loadOptions={asyncLoading} />);
+      const wrapper = mount(<Wrapper {...initialProps} loadOptions={asyncLoading} />);
 
       setImmediate(() => {
         wrapper.update();
@@ -150,7 +156,7 @@ describe('<SelectField />', () => {
     });
 
     it('should change the value when new options do not include it', () => {
-      const wrapper = mount(<SelectField {...initialProps} input={{ ...initialProps.input, value: 1 }} />);
+      const wrapper = mount(<Wrapper {...initialProps} input={{ ...initialProps.input, value: 1 }} />);
 
       wrapper.setProps({ options: NEW_OPTIONS });
       wrapper.update();
@@ -159,7 +165,7 @@ describe('<SelectField />', () => {
     });
 
     it('not should change the value when new options include it', () => {
-      const wrapper = mount(<SelectField {...initialProps} input={{ ...initialProps.input, value: 2 }} />);
+      const wrapper = mount(<Wrapper {...initialProps} input={{ ...initialProps.input, value: 2 }} />);
 
       wrapper.setProps({ options: NEW_OPTIONS });
       wrapper.update();
@@ -168,7 +174,7 @@ describe('<SelectField />', () => {
     });
 
     it('should reset the value when loadOptions prop is changed and new options do not include the value', (done) => {
-      const wrapper = mount(<SelectField {...initialProps} loadOptions={asyncLoading} input={{ ...initialProps.input, value: 1 }} />);
+      const wrapper = mount(<Wrapper {...initialProps} loadOptions={asyncLoading} input={{ ...initialProps.input, value: 1 }} />);
 
       setImmediate(() => {
         wrapper.update();
@@ -184,7 +190,7 @@ describe('<SelectField />', () => {
     });
 
     it('should reset the value when loadOptions prop is changed and new options do not include the value', (done) => {
-      const wrapper = mount(<SelectField {...initialProps} loadOptions={asyncLoading} input={{ ...initialProps.input, value: 2 }} />);
+      const wrapper = mount(<Wrapper {...initialProps} loadOptions={asyncLoading} input={{ ...initialProps.input, value: 2 }} />);
 
       setImmediate(() => {
         wrapper.update();
@@ -200,16 +206,16 @@ describe('<SelectField />', () => {
     });
 
     it('should pick correct value for single select when passed array', () => {
-      const wrapper = mount(<SelectField {...initialProps} input={{ ...initialProps.input, value: [2] }} />);
+      const wrapper = mount(<Wrapper {...initialProps} input={{ ...initialProps.input, value: [2] }} />);
       expect(wrapper.find(ReactSelect).instance().state.value).toEqual([{ value: 2, label: 'option 2' }]);
     });
 
     it('should pick correct array value for single select when passed array', () => {
-      let wrapper = mount(<SelectField {...initialProps} input={{ ...initialProps.input, value: [2] }} pluckSingleValue={false} />);
+      let wrapper = mount(<Wrapper {...initialProps} input={{ ...initialProps.input, value: [2] }} pluckSingleValue={false} />);
       expect(wrapper.find(ReactSelect).instance().state.value).toEqual([]);
 
       wrapper = mount(
-        <SelectField
+        <Wrapper
           {...initialProps}
           options={[...initialProps.options, { label: 'array options', value: [2] }]}
           input={{ ...initialProps.input, value: [2] }}
