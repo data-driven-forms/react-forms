@@ -24,6 +24,20 @@ const checkCondition = (condition, fieldName) => {
     return condition.forEach((item) => checkCondition(item, fieldName));
   }
 
+  if (condition.hasOwnProperty('and') && !Array.isArray(condition.and)) {
+    throw new DefaultSchemaError(`
+      Error occured in field definition with "name" property: "${fieldName}".
+      'and' property in a field condition must be an array! Received: ${typeof condition.and}.
+    `);
+  }
+
+  if (condition.hasOwnProperty('or') && !Array.isArray(condition.and)) {
+    throw new DefaultSchemaError(`
+      Error occured in field definition with "name" property: "${fieldName}".
+      'or' propery in a field condition must be an array! Received: ${typeof condition.and}.
+    `);
+  }
+
   if (typeof condition !== 'object') {
     throw new DefaultSchemaError(`
       Error occured in field definition with name: "${fieldName}".
@@ -31,44 +45,46 @@ const checkCondition = (condition, fieldName) => {
     `);
   }
 
-  if (!condition.hasOwnProperty('when')) {
-    throw new DefaultSchemaError(`
+  if (!condition.hasOwnProperty('and') && !condition.hasOwnProperty('or') && !condition.hasOwnProperty('not')) {
+    if (!condition.hasOwnProperty('when')) {
+      throw new DefaultSchemaError(`
       Error occured in field definition with "name" property: "${fieldName}".
       Field condition must have "when" property! Properties received: [${Object.keys(condition)}].
     `);
-  }
+    }
 
-  if (!(typeof condition.when === 'string' || Array.isArray(condition.when))) {
-    throw new DefaultSchemaError(`
+    if (!(typeof condition.when === 'string' || Array.isArray(condition.when))) {
+      throw new DefaultSchemaError(`
       Error occured in field definition with name: "${fieldName}".
       Field condition property "when" must be oof type "string", ${typeof condition.when} received!].
     `);
-  }
+    }
 
-  if (
-    !condition.hasOwnProperty('is') &&
-    !condition.hasOwnProperty('isEmpty') &&
-    !condition.hasOwnProperty('isNotEmpty') &&
-    !condition.hasOwnProperty('pattern')
-  ) {
-    throw new DefaultSchemaError(`
+    if (
+      !condition.hasOwnProperty('is') &&
+      !condition.hasOwnProperty('isEmpty') &&
+      !condition.hasOwnProperty('isNotEmpty') &&
+      !condition.hasOwnProperty('pattern')
+    ) {
+      throw new DefaultSchemaError(`
       Error occured in field definition with name: "${fieldName}".
       Field condition must have one of "is", "isEmpty", "isNotEmpty", "pattern" property! Properties received: [${Object.keys(condition)}].
     `);
-  }
+    }
 
-  if (condition.hasOwnProperty('notMatch') && !condition.hasOwnProperty('pattern') && !condition.hasOwnProperty('is')) {
-    throw new DefaultSchemaError(`
+    if (condition.hasOwnProperty('notMatch') && !condition.hasOwnProperty('pattern') && !condition.hasOwnProperty('is')) {
+      throw new DefaultSchemaError(`
       Error occured in field definition with name: "${fieldName}".
       Field condition must have "pattern" or "is" property when "notMatch" is set! Properties received: [${Object.keys(condition)}].
     `);
-  }
+    }
 
-  if (condition.hasOwnProperty('pattern') && !(condition.pattern instanceof RegExp) && typeof condition.pattern !== 'string') {
-    throw new DefaultSchemaError(`
+    if (condition.hasOwnProperty('pattern') && !(condition.pattern instanceof RegExp) && typeof condition.pattern !== 'string') {
+      throw new DefaultSchemaError(`
       Error occured in field definition with name: "${fieldName}".
       Field condition must have "pattern" of instance "RegExp" or "string"! Instance received: [${condition.pattern.constructor.name}].
     `);
+    }
   }
 };
 

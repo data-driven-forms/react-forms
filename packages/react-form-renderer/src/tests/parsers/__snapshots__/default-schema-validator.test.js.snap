@@ -117,6 +117,27 @@ exports[`Default schema validator should fail if input object does fields names 
 
 exports[`Default schema validator should fail if input object does not have fields names 1`] = `"Component of type schema must contain \\"fields\\" property of type array, received undefined!"`;
 
+exports[`Default schema validator should fail validation when using "and" and "or" conditions 1`] = `
+"
+      Error occured in field definition with \\"name\\" property: \\"foo\\".
+      'and' property in a field condition must be an array! Received: object.
+    "
+`;
+
+exports[`Default schema validator should fail validation when using "and" and "or" conditions 2`] = `
+"
+      Error occured in field definition with \\"name\\" property: \\"foo\\".
+      'or' propery in a field condition must be an array! Received: undefined.
+    "
+`;
+
+exports[`Default schema validator should fail validation when using "and" and "or" conditions 3`] = `
+"
+      Error occured in field definition with \\"name\\" property: \\"foo\\".
+      'and' property in a field condition must be an array! Received: object.
+    "
+`;
+
 exports[`Default schema validator should fail validation when using wrong data type 1`] = `
 "
     Error occured in field definition with name: \\"foo\\".

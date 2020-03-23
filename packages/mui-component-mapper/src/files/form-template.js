@@ -20,7 +20,7 @@ const Title = ({ children }) => (
   </Grid>
 );
 const ButtonGroup = ({ children }) => <div style={{ display: 'flex', justifyContent: 'flex-end' }}>{children}</div>;
-const Button = ({ label, variant, children, ...props }) => (
+const Button = ({ label, variant, children, buttonType, ...props }) => (
   <MUIButton color={variant} variant="contained" {...props}>
     {label || children}
   </MUIButton>

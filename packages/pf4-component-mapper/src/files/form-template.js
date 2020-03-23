@@ -7,8 +7,8 @@ import { Button as PF4Button, ActionGroup, Form, TextContent, Text, TextVariants
 
 import './form-template.scss';
 
-export const Button = ({ label, bsStyle, children, disabled, ...props }) => (
-  <PF4Button variant={bsStyle || 'secondary'} isDisabled={disabled} {...props}>
+export const Button = ({ label, bsStyle, children, disabled, buttonType, ...props }) => (
+  <PF4Button variant={buttonType === 'cancel' ? 'link' : bsStyle || 'secondary'} isDisabled={disabled} {...props}>
     {label}
     {children}
   </PF4Button>
@@ -18,7 +18,8 @@ Button.propTypes = {
   label: PropTypes.string.isRequired,
   bsStyle: PropTypes.string,
   disabled: PropTypes.bool,
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+  buttonType: PropTypes.string
 };
 
 export const ButtonGroup = ({ children, ...props }) => <ActionGroup {...props}>{children}</ActionGroup>;
