@@ -1,4 +1,3 @@
-import React from 'react';
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 import Tabs from './tabs';
 import PlainText from './plain-text';
@@ -10,14 +9,26 @@ import TimePicker from './time-picker';
 import Radio from './radio';
 import Switch from './switch';
 import Select from './select';
-export const components = {};
+import SubForm from './sub-form.js';
+export const components = {
+  TextField,
+  TextArea,
+  Select,
+  Checkbox,
+  Radio,
+  Switch,
+  DatePicker,
+  TimePicker,
+  PlainText,
+  SubForm
+};
 
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField,
   [componentTypes.TEXTAREA]: TextArea,
   [componentTypes.SELECT]: Select,
   [componentTypes.CHECKBOX]: Checkbox,
-  [componentTypes.SUB_FORM]: () => <div>sub form</div>,
+  [componentTypes.SUB_FORM]: SubForm,
   [componentTypes.RADIO]: Radio,
   [componentTypes.TABS]: Tabs,
   [componentTypes.DATE_PICKER]: DatePicker,
