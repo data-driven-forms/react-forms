@@ -20,10 +20,9 @@ const handleSelectChange = (option, simpleValue, isMulti, onChange) => {
     : onChange(sanitizedOption);
 };
 
-const selectProvider = (type) =>
-  ({
-    createable: CreatableSelect
-  }[type] || ReactSelect);
+const selectProvider = {
+  createable: CreatableSelect
+};
 
 const Select = ({
   invalid,
@@ -135,7 +134,7 @@ const Select = ({
 
   const selectValue = pluckSingleValue ? (isMulti ? value : Array.isArray(value) && value[0] ? value[0] : value) : value;
 
-  const SelectFinal = selectProvider(selectVariant);
+  const SelectFinal = selectProvider[selectVariant] || ReactSelect;
 
   return (
     <SelectFinal
