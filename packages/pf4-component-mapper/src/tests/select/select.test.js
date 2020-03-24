@@ -4,8 +4,7 @@ import { components } from 'react-select';
 import ReactSelect from 'react-select';
 import isEqual from 'lodash/isEqual';
 
-import DataDrivenSelect from '../../common/select/select';
-import { Select } from '../../common/select/select';
+import Select from '../../common/select/select';
 
 describe('<Select />', () => {
   let initialProps;
@@ -131,7 +130,7 @@ describe('<Select />', () => {
     expect(onChange).toHaveBeenCalledWith([2]);
   });
 
-  it('should map props correctly from DataDrivenSelect to Select', () => {
+  it('should map props correctly', () => {
     const props = {
       isMulti: true,
       options: [
@@ -142,11 +141,9 @@ describe('<Select />', () => {
       onChange: Function,
       value: [1, 2]
     };
-    const wrapper = mount(<DataDrivenSelect {...props} />);
+    const wrapper = mount(<Select {...props} />);
     const mappedProps = wrapper.find(Select).props();
     expect(mappedProps).toEqual({
-      hideSelectedOptions: false,
-      closeMenuOnSelect: false,
       isClearable: false,
       isMulti: true,
       onChange: Function,
@@ -177,9 +174,9 @@ describe('<Select />', () => {
       wrapper.update();
       expect(
         wrapper
-          .find(Select)
+          .find(ReactSelect)
           .first()
-          .instance().state.allOptions
+          .instance().props.options
       ).toEqual([{ label: 'label' }]);
       done();
     });
@@ -204,9 +201,9 @@ describe('<Select />', () => {
       wrapper.update();
       expect(
         wrapper
-          .find(Select)
+          .find(ReactSelect)
           .first()
-          .instance().state.allOptions
+          .instance().props.options
       ).toEqual([{ label: 'label', value: '123' }]);
       expect(onChange).toHaveBeenCalledWith(undefined);
       done();
@@ -232,9 +229,9 @@ describe('<Select />', () => {
       wrapper.update();
       expect(
         wrapper
-          .find(Select)
+          .find(ReactSelect)
           .first()
-          .instance().state.allOptions
+          .instance().props.options
       ).toEqual([{ label: 'label', value: '123' }]);
       expect(onChange).toHaveBeenCalledWith(['123']);
       done();
@@ -260,9 +257,9 @@ describe('<Select />', () => {
       wrapper.update();
       expect(
         wrapper
-          .find(Select)
+          .find(ReactSelect)
           .first()
-          .instance().state.allOptions
+          .instance().props.options
       ).toEqual([{ label: 'label', value: '123' }]);
       expect(onChange).toHaveBeenCalledWith([{ label: 'label', value: '123' }]);
       done();
@@ -272,12 +269,15 @@ describe('<Select />', () => {
   it('should load Async options after filtering', (done) => {
     const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'label' }]));
 
-    const wrapper = mount(<Select {...initialProps} options={undefined} loadOptions={asyncLoading} />);
+    const wrapper = mount(<Select {...initialProps} isSearchable={true} options={undefined} loadOptions={asyncLoading} />);
 
     setImmediate(() => {
       wrapper.update();
-      const search = wrapper.find('input');
-      search.getDOMNode().value = 'foo';
+      expect(asyncLoading.mock.calls).toHaveLength(1);
+
+      const search = wrapper.find(ReactSelect).find('input');
+
+      search.instance().value = 'foo';
       search.simulate('change');
       setImmediate(() => {
         wrapper.update();
@@ -293,13 +293,19 @@ describe('<Select />', () => {
     let asyncLoading;
     let asyncLoadingNew;
 
+    class Wrapper extends React.Component {
+      render() {
+        return <Select {...this.props} />;
+      }
+    }
+
     beforeEach(() => {
       asyncLoading = () => Promise.resolve(initialProps.options);
       asyncLoadingNew = () => Promise.resolve(NEW_OPTIONS);
     });
 
     it('should change the options when options prop is changed', () => {
-      const wrapper = mount(<Select {...initialProps} />);
+      const wrapper = mount(<Wrapper {...initialProps} />);
 
       let innerSelectProps = wrapper.find(ReactSelect).props().options;
 
@@ -313,7 +319,7 @@ describe('<Select />', () => {
     });
 
     it('should change the options when loadOptions prop is changed', (done) => {
-      const wrapper = mount(<Select {...initialProps} loadOptions={asyncLoading} />);
+      const wrapper = mount(<Wrapper {...initialProps} loadOptions={asyncLoading} />);
 
       setImmediate(() => {
         wrapper.update();
@@ -334,7 +340,7 @@ describe('<Select />', () => {
     });
 
     it('should change the value when new options do not include it', () => {
-      const wrapper = mount(<Select {...initialProps} value={1} />);
+      const wrapper = mount(<Wrapper {...initialProps} value={1} />);
 
       wrapper.setProps({ options: NEW_OPTIONS });
       wrapper.update();
@@ -343,7 +349,7 @@ describe('<Select />', () => {
     });
 
     it('not should change the value when new options include it', () => {
-      const wrapper = mount(<Select {...initialProps} value={2} />);
+      const wrapper = mount(<Wrapper {...initialProps} value={2} />);
 
       wrapper.setProps({ options: NEW_OPTIONS });
       wrapper.update();
@@ -352,7 +358,7 @@ describe('<Select />', () => {
     });
 
     it('should reset the value when loadOptions prop is changed and new options do not include the value', (done) => {
-      const wrapper = mount(<Select {...initialProps} loadOptions={asyncLoading} value={1} />);
+      const wrapper = mount(<Wrapper {...initialProps} loadOptions={asyncLoading} value={1} />);
 
       setImmediate(() => {
         wrapper.update();
@@ -368,7 +374,7 @@ describe('<Select />', () => {
     });
 
     it('should not reset the value when loadOptions prop is changed and new options includes the value', (done) => {
-      const wrapper = mount(<Select {...initialProps} loadOptions={asyncLoading} value={2} />);
+      const wrapper = mount(<Wrapper {...initialProps} loadOptions={asyncLoading} value={2} />);
 
       setImmediate(() => {
         wrapper.update();

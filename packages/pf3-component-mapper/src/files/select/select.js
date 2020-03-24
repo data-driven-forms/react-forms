@@ -1,17 +1,16 @@
-import React, { Component, createRef, Fragment } from 'react';
-import isEqual from 'lodash/isEqual';
+import React, { Component, createRef, Fragment, useState, useEffect } from 'react';
 import './react-select.scss';
 import PropTypes from 'prop-types';
 
 import DataDrivenSelect from '@data-driven-forms/common/src/select';
 import { DropdownButton } from 'patternfly-react';
-import fnToString from '@data-driven-forms/common/src/utils/fn-to-string';
 import clsx from 'clsx';
 import Option from './option';
 import DropdownIndicator from './dropdown-indicator';
 import ClearIndicator from './clear-indicator';
 import './react-select.scss';
 import { optionsPropType } from '@data-driven-forms/common/src/prop-types-templates';
+import fnToString from '@data-driven-forms/common/src/utils/fn-to-string';
 
 const getDropdownText = (value, placeholder, options) => {
   if (Array.isArray(value)) {
@@ -91,170 +90,122 @@ SelectTitle.propTypes = {
   isDisabled: PropTypes.bool
 };
 
-class Select extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isFetching: false,
-      isOpen: false,
-      options: props.options || []
+const Select = ({ input, loadOptions, ...props }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isFetching, setFetching] = useState(loadOptions ? true : false);
+  const [options, setOptions] = useState(props.options || []);
+
+  // common select controls the string of loadOptions and if the string changed, then it reloads options
+  // however we are enhancing the loadOptions here so the string is always the same
+  // by increasing this counter, we can enforce the update
+  const [loadOptionsChangeCounter, setCounter] = useState(0);
+
+  const handleToggleOpen = () => setIsOpen(!isOpen);
+
+  const loadOptionsStr = fnToString(loadOptions);
+
+  useEffect(() => {
+    setCounter(loadOptionsChangeCounter + 1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loadOptionsStr]);
+
+  const loadOptionsEnhanced = loadOptions
+    ? (value) => {
+        setFetching(true);
+        return loadOptions(value).then((data) => {
+          setOptions([...options, ...data.filter(({ value }) => !options.find((option) => option.value === value))]);
+          setFetching(false);
+          return data;
+        });
+      }
+    : undefined;
+
+  if (props.isSearchable) {
+    const [title, isPlaceholder] = getDropdownText(input.value, isFetching ? props.loadingMessage : props.placeholder, options);
+    const searchableInput = {
+      ...input,
+      onChange: props.isMulti
+        ? input.onChange
+        : (...args) => {
+            handleToggleOpen();
+            return input.onChange(...args);
+          }
     };
-  }
-  handleToggleOpen = () => this.setState(({ isOpen }) => ({ isOpen: !isOpen }));
-
-  componentDidMount() {
-    const { loadOptions } = this.props;
-    if (loadOptions) {
-      return this.updateOptions();
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (!isEqual(this.props.options, prevProps.options)) {
-      if (!this.props.options.map(({ value }) => value).includes(this.props.input.value)) {
-        this.props.input.onChange(undefined);
-      }
-
-      this.setState({ options: this.props.options });
-    }
-
-    if (this.props.loadOptions && fnToString(this.props.loadOptions) !== fnToString(prevProps.loadOptions)) {
-      return this.updateOptions();
-    }
-  }
-
-  updateOptions = () => {
-    const { loadOptions } = this.props;
-
-    this.setState({ isFetching: true });
-
-    return loadOptions().then((data) => {
-      if (!data.map(({ value }) => value).includes(this.props.input.value)) {
-        this.props.input.onChange(undefined);
-      }
-
-      return this.setState({
-        options: data,
-        isFetching: false
-      });
-    });
-  };
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.isOpen !== this.state.isOpen) {
-      return true;
-    }
-
-    if (nextState.isFetching !== this.state.isFetching) {
-      return true;
-    }
-
-    if (!isEqual(this.state.options, nextState.options)) {
-      return true;
-    }
-
-    if (this.props.loadOptions && fnToString(this.props.loadOptions) !== fnToString(nextProps.loadOptions)) {
-      return true;
-    }
-
-    if (JSON.stringify(nextProps) !== JSON.stringify(this.props)) {
-      return true;
-    }
-
-    return false;
-  }
-
-  render() {
-    const { input, loadOptions, options: _options, ...props } = this.props;
-    const { isOpen, options, isFetching } = this.state;
-    if (props.isSearchable) {
-      const [title, isPlaceholder] = getDropdownText(input.value, props.placeholder, options);
-      const searchableInput = {
-        ...input,
-        onChange: props.isMulti
-          ? input.onChange
-          : (...args) => {
-              this.handleToggleOpen();
-              return input.onChange(...args);
-            }
-      };
-      return (
-        <div className={`${props.classNamePrefix}-button`}>
-          <DropdownButton
-            onToggle={() => this.handleToggleOpen()}
-            disabled={props.isDisabled}
-            noCaret
-            open={isOpen}
-            id={props.id || input.name}
-            title={
-              <SelectTitle
-                isDisabled={props.isDisabled}
-                isFetching={isFetching}
-                classNamePrefix={this.props.classNamePrefix}
-                value={input.value}
-                isClearable={props.isClearable}
-                title={title}
-                onClear={input.onChange}
-              />
-            }
-            className={clsx(`${props.classNamePrefix}-dropdown`, {
-              'is-empty': isPlaceholder
-            })}
-          >
-            {isOpen && (
-              <DataDrivenSelect
-                isFetching={isFetching}
-                input={searchableInput}
-                {...props}
-                options={options}
-                className={clsx(props.classNamePrefix, {
-                  sercheable: props.isSearchable
-                })}
-                controlShouldRenderValue={false}
-                hideSelectedOptions={false}
-                isClearable={false}
-                tabSelectsValue={false}
-                menuIsOpen
-                backspaceRemovesValue={false}
-                isMulti={props.isMulti}
-                placeholder="Search..."
-                components={{
-                  ClearIndicator,
-                  Option,
-                  DropdownIndicator: null,
-                  IndicatorSeparator: null,
-                  Placeholder: () => null,
-                  Input: ({ selectProps, cx, isHidden, isDisabled, innerRef, getStyles, ...props }) => (
-                    <SearchInput id={this.props.input.name} {...props} />
-                  )
-                }}
-              />
-            )}
-          </DropdownButton>
-        </div>
-      );
-    }
-
     return (
-      <DataDrivenSelect
-        {...this.props}
-        isFetching={isFetching}
-        options={options}
-        input={input}
-        className={props.classNamePrefix}
-        components={{
-          ClearIndicator,
-          Option,
-          DropdownIndicator: props.isDisabled ? null : DropdownIndicator
-        }}
-      />
+      <div className={`${props.classNamePrefix}-button`}>
+        <DropdownButton
+          onToggle={() => handleToggleOpen()}
+          disabled={props.isDisabled}
+          noCaret
+          open={isOpen}
+          id={props.id || input.name}
+          title={
+            <SelectTitle
+              isDisabled={props.isDisabled}
+              isFetching={isFetching}
+              classNamePrefix={props.classNamePrefix}
+              value={input.value}
+              isClearable={props.isClearable}
+              title={title}
+              onClear={input.onChange}
+            />
+          }
+          className={clsx(`${props.classNamePrefix}-dropdown`, {
+            'is-empty': isPlaceholder
+          })}
+        >
+          <DataDrivenSelect
+            {...searchableInput}
+            {...props}
+            loadOptions={loadOptionsEnhanced}
+            className={clsx(props.classNamePrefix, {
+              sercheable: props.isSearchable
+            })}
+            controlShouldRenderValue={false}
+            hideSelectedOptions={false}
+            isClearable={false}
+            tabSelectsValue={false}
+            menuIsOpen
+            backspaceRemovesValue={false}
+            isMulti={props.isMulti}
+            loadOptionsChangeCounter={loadOptionsChangeCounter}
+            placeholder="Search..."
+            components={{
+              ClearIndicator,
+              Option,
+              DropdownIndicator: null,
+              IndicatorSeparator: null,
+              Placeholder: () => null,
+              // eslint-disable-next-line react/prop-types
+              Input: ({ selectProps, cx, isHidden, isDisabled, innerRef, getStyles, ...props }) => <SearchInput id={input.name} {...props} />
+            }}
+          />
+        </DropdownButton>
+      </div>
     );
   }
-}
+
+  return (
+    <DataDrivenSelect
+      {...props}
+      {...input}
+      loadOptionsChangeCounter={loadOptionsChangeCounter}
+      loadOptions={loadOptionsEnhanced}
+      className={props.classNamePrefix}
+      components={{
+        ClearIndicator,
+        Option,
+        DropdownIndicator: props.isDisabled ? null : DropdownIndicator
+      }}
+    />
+  );
+};
 
 Select.defaultProps = {
   placeholder: 'Search...',
-  classNamePrefix: 'ddorg__pf3-component-mapper__select'
+  classNamePrefix: 'ddorg__pf3-component-mapper__select',
+  loadingMessage: 'Loading...',
+  updatingMessage: 'Loading data'
 };
 
 Select.propTypes = {
@@ -265,7 +216,14 @@ Select.propTypes = {
   }).isRequired,
   classNamePrefix: PropTypes.string,
   loadOptions: PropTypes.func,
-  options: optionsPropType
+  options: optionsPropType,
+  isDisabled: PropTypes.bool,
+  isSearchable: PropTypes.bool,
+  isMulti: PropTypes.bool,
+  isClearable: PropTypes.bool,
+  id: PropTypes.string,
+  placeholder: PropTypes.node,
+  loadingMessage: PropTypes.node
 };
 
 export default Select;
