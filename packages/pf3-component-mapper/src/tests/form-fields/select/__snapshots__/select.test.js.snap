@@ -46,6 +46,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
     ]
   }
   placeholder="Search..."
+  updatingMessage="Loading data"
 >
   <Select
     className="pf3-select"
@@ -81,6 +82,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
     placeholder="Search..."
     pluckSingleValue={true}
     simpleValue={true}
+    updatingMessage="Loading data"
   >
     <StateManager
       className="pf3-select"

@@ -204,7 +204,8 @@ const Select = ({ input, loadOptions, ...props }) => {
 Select.defaultProps = {
   placeholder: 'Search...',
   classNamePrefix: 'ddorg__pf3-component-mapper__select',
-  loadingMessage: 'Loading...'
+  loadingMessage: 'Loading...',
+  updatingMessage: 'Loading data'
 };
 
 Select.propTypes = {
