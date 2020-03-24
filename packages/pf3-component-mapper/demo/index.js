@@ -104,7 +104,7 @@ const selectSchema = {
 }
 
 const App = () => {
-  const [schema, setSchema] = useState(sandbox)
+  const [schema, setSchema] = useState(wizardSchema)
 
   return (
     <div>
