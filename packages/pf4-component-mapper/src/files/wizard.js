@@ -1,18 +1,16 @@
 import React, { cloneElement, useReducer, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-import { useFormApi, FormSpy } from '@data-driven-forms/react-form-renderer';
+import { FormSpy } from '@data-driven-forms/react-form-renderer';
+import Wizard from '@data-driven-forms/common/src/wizard/wizard';
 
 import { Bullseye, Backdrop, WizardNav, WizardHeader } from '@patternfly/react-core';
 
 import WizardStep from './wizard/wizard-step';
 import './wizard/wizard-styles.scss';
-import get from 'lodash/get';
-import set from 'lodash/set';
-import flattenDeep from 'lodash/flattenDeep';
-import handleEnter from '@data-driven-forms/common/src/wizard/enter-handler';
+
 import WizardNavigation from './wizard/wizard-nav';
-import reducer, { DYNAMIC_WIZARD_TYPES, findCurrentStep } from './wizard/reducer';
+import reducer from './wizard/reducer';
 
 const Modal = ({ children, container, inModal }) =>
   inModal
@@ -24,9 +22,7 @@ const Modal = ({ children, container, inModal }) =>
       )
     : children;
 
-const Wizard = ({
-  fields,
-  isDynamic,
+const WizardInternal = ({
   inModal,
   crossroads,
   title,
@@ -36,31 +32,33 @@ const Wizard = ({
   setFullWidth,
   setFullHeight,
   isCompactNav,
-  showTitles
+  showTitles,
+  formOptions,
+  currentStep,
+  handlePrev,
+  onKeyDown,
+  jumpToStep,
+  setPrevSteps,
+  handleNext,
+  navSchema,
+  activeStepIndex,
+  maxStepIndex,
+  isDynamic
 }) => {
-  const formOptions = useFormApi();
-
-  const [state, dispatch] = useReducer(reducer, {
-    activeStep: fields[0].name,
-    prevSteps: [],
-    activeStepIndex: 0,
-    maxStepIndex: 0,
-    isDynamic: isDynamic || fields.some(({ nextStep }) => DYNAMIC_WIZARD_TYPES.includes(typeof nextStep)),
-    loading: true
-  });
+  const [state, dispatch] = useReducer(reducer, { loading: true });
 
   useEffect(() => {
     if (inModal) {
       dispatch({ type: 'setContainer' });
     } else {
-      dispatch({ type: 'finishLoading', payload: { formOptions, fields } });
+      dispatch({ type: 'finishLoading' });
     }
-  }, [inModal, formOptions, fields]);
+  }, [inModal]);
 
   useEffect(() => {
     if (state.container) {
       document.body.appendChild(state.container);
-      dispatch({ type: 'finishLoading', payload: { formOptions, fields } });
+      dispatch({ type: 'finishLoading' });
     }
 
     return () => {
@@ -68,57 +66,15 @@ const Wizard = ({
         document.body.removeChild(state.container);
       }
     };
-  }, [state.container, formOptions, fields, inModal]);
+  }, [state.container, inModal]);
 
   if (state.loading) {
     return null;
   }
 
-  const prepareValues = (values, visitedSteps, getRegisteredFields) => {
-    // Add the final step fields to history
-    const finalRegisteredFieldsHistory = {
-      ...state.registeredFieldsHistory,
-      [state.activeStep]: getRegisteredFields()
-    };
-
-    const finalObject = {};
-
-    // Find only visited fields
-    flattenDeep(
-      Object.values([...visitedSteps, state.activeStep].reduce((obj, key) => ({ ...obj, [key]: finalRegisteredFieldsHistory[key] }), {}))
-    ).forEach((key) => set(finalObject, key, get(values, key)));
-
-    return finalObject;
-  };
-
-  const handleSubmit = () =>
-    formOptions.onSubmit(
-      prepareValues(formOptions.getState().values, [...state.prevSteps, state.activeStep], formOptions.getRegisteredFields),
-      formOptions
-    );
-
-  const currentStep = (
-    <WizardStep
-      {...findCurrentStep(state.activeStep, fields)}
-      formOptions={{
-        ...formOptions,
-        handleSubmit
-      }}
-      buttonLabels={buttonLabels}
-      buttonsClassName={buttonsClassName}
-      showTitles={showTitles}
-    />
+  const step = (
+    <WizardStep {...currentStep} formOptions={formOptions} buttonLabels={buttonLabels} buttonsClassName={buttonsClassName} showTitles={showTitles} />
   );
-
-  const jumpToStep = (index, valid) => dispatch({ type: 'jumpToStep', payload: { index, valid, fields, crossroads, formOptions } });
-
-  const handlePrev = () => jumpToStep(state.activeStepIndex - 1);
-
-  const handleNext = (nextStep) => dispatch({ type: 'handleNext', payload: { nextStep, formOptions, fields } });
-
-  const setPrevSteps = () => dispatch({ type: 'setPrevSteps', payload: { formOptions, fields } });
-
-  const findCurrentStepWrapped = (step) => findCurrentStep(step, fields);
 
   return (
     <Modal inModal={inModal} container={state.container}>
@@ -128,7 +84,7 @@ const Wizard = ({
         }`}
         role="dialog"
         aria-modal={inModal ? 'true' : undefined}
-        onKeyDown={(e) => handleEnter(e, formOptions, state.activeStep, findCurrentStepWrapped, handleNext, handleSubmit)}
+        onKeyDown={onKeyDown}
       >
         {title && <WizardHeader title={title} description={description} onClose={formOptions.onCancel} />}
         <div className="pf-c-wizard__outer-wrap">
@@ -136,23 +92,23 @@ const Wizard = ({
             <FormSpy>
               {({ values }) => (
                 <WizardNavigation
-                  navSchema={state.navSchema}
-                  activeStepIndex={state.activeStepIndex}
+                  navSchema={navSchema}
+                  activeStepIndex={activeStepIndex}
                   formOptions={formOptions}
-                  maxStepIndex={state.maxStepIndex}
+                  maxStepIndex={maxStepIndex}
                   jumpToStep={jumpToStep}
                   crossroads={crossroads}
-                  isDynamic={state.isDynamic}
+                  isDynamic={isDynamic}
                   values={values}
                   setPrevSteps={setPrevSteps}
                 />
               )}
             </FormSpy>
           </WizardNav>
-          {cloneElement(currentStep, {
+          {cloneElement(step, {
             handleNext: (nextStep) => handleNext(nextStep),
             handlePrev,
-            disableBack: state.activeStepIndex === 0
+            disableBack: activeStepIndex === 0
           })}
         </div>
       </div>
@@ -160,7 +116,7 @@ const Wizard = ({
   );
 };
 
-Wizard.propTypes = {
+WizardInternal.propTypes = {
   buttonLabels: PropTypes.shape({
     submit: PropTypes.string.isRequired,
     cancel: PropTypes.string.isRequired,
@@ -181,7 +137,19 @@ Wizard.propTypes = {
   setFullHeight: PropTypes.bool,
   isDynamic: PropTypes.bool,
   showTitles: PropTypes.bool,
-  crossroads: PropTypes.arrayOf(PropTypes.string)
+  crossroads: PropTypes.arrayOf(PropTypes.string),
+  formOptions: PropTypes.shape({
+    onCancel: PropTypes.func
+  }),
+  currentStep: PropTypes.object,
+  handlePrev: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  jumpToStep: PropTypes.func,
+  setPrevSteps: PropTypes.func,
+  handleNext: PropTypes.func,
+  navSchema: PropTypes.array,
+  activeStepIndex: PropTypes.number,
+  maxStepIndex: PropTypes.number
 };
 
 const defaultLabels = {
@@ -191,7 +159,9 @@ const defaultLabels = {
   next: 'Next'
 };
 
-const WizardFunction = ({ buttonLabels, ...props }) => <Wizard {...props} buttonLabels={{ ...defaultLabels, ...buttonLabels }} />;
+const WizardFunction = ({ buttonLabels, ...props }) => (
+  <Wizard Wizard={WizardInternal} {...props} buttonLabels={{ ...defaultLabels, ...buttonLabels }} />
+);
 
 WizardFunction.propTypes = {
   buttonLabels: PropTypes.shape({
