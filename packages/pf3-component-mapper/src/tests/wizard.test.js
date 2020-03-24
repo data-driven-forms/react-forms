@@ -1,31 +1,20 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
 import { mount } from 'enzyme';
-import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 
 import FormTemplate from '../files/form-template';
 import componentMapper from '../files/component-mapper';
-import Wizard from '../files/wizard';
-import RenderWithProvider from '../../../../__mocks__/with-provider';
 import WizardStep from '../files/wizard/wizard-step';
 
 describe('<Wizard />', () => {
   const cancelSpy = jest.fn();
   const submitSpy = jest.fn();
 
-  const formOptions = {
-    onSubmit: submitSpy,
-    onCancel: cancelSpy,
-    valid: true,
-    getState: () => ({ values: { a: 10 } }),
-    submit: () => {}
-  };
-
   const props = {
     name: 'Wizard',
-    FieldProvider: MockFieldProvider,
+    component: componentTypes.WIZARD,
     fields: [
       {
         title: 'Step 1',
@@ -142,45 +131,65 @@ describe('<Wizard />', () => {
 
   it('should render Wizard correctly', () => {
     const wrapper = mount(
-      <RenderWithProvider value={{ formOptions }}>
-        <Wizard {...props} />
-      </RenderWithProvider>
+      <FormRenderer
+        schema={{ fields: [props] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate showFormControls={false} {...props} />}
+        onCancel={() => {}}
+        onSubmit={jest.fn()}
+      />
     );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render Wizard with conditional steps correctly', () => {
     const wrapper = mount(
-      <RenderWithProvider value={{ formOptions }}>
-        <Wizard {...conditionalProps} />
-      </RenderWithProvider>
+      <FormRenderer
+        schema={{ fields: [conditionalProps] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate showFormControls={false} {...props} />}
+        onCancel={() => {}}
+        onSubmit={jest.fn()}
+      />
     );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render Wizard with title correctly', () => {
     const wrapper = mount(
-      <RenderWithProvider value={{ formOptions }}>
-        <Wizard {...props} title={'Wizard title'} />
-      </RenderWithProvider>
+      <FormRenderer
+        schema={{ fields: [{ ...props, title: 'Wizard title' }] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate showFormControls={false} {...props} />}
+        onCancel={() => {}}
+        onSubmit={jest.fn()}
+      />
     );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render Wizard with stepsInfo correctly', () => {
     const wrapper = mount(
-      <RenderWithProvider value={{ formOptions }}>
-        <Wizard {...props} stepsInfo={[{ title: 'step1' }, { title: 'step2' }]} />
-      </RenderWithProvider>
+      <FormRenderer
+        schema={{ fields: [{ ...props, stepsInfo: [{ title: 'step1' }, { title: 'step2' }] }] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate showFormControls={false} {...props} />}
+        onCancel={() => {}}
+        onSubmit={jest.fn()}
+      />
     );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should call cancel', () => {
     const wrapper = mount(
-      <RenderWithProvider value={{ formOptions }}>
-        <Wizard {...props} />
-      </RenderWithProvider>
+      <FormRenderer
+        schema={{ fields: [props] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate showFormControls={false} {...props} />}
+        onCancel={cancelSpy}
+        onSubmit={jest.fn()}
+      />
     );
     wrapper
       .find('button')
@@ -192,9 +201,13 @@ describe('<Wizard />', () => {
 
   it('should step when clicked on next button', () => {
     const wrapper = mount(
-      <RenderWithProvider value={{ formOptions }}>
-        <Wizard {...props} />
-      </RenderWithProvider>
+      <FormRenderer
+        schema={{ fields: [props] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate showFormControls={false} {...props} />}
+        onCancel={() => {}}
+        onSubmit={jest.fn()}
+      />
     );
     expect(wrapper.find(WizardStep).props().name).toEqual(1);
 
@@ -207,9 +220,39 @@ describe('<Wizard />', () => {
 
   it('should not step when clicked on button with false valid', () => {
     const wrapper = mount(
-      <RenderWithProvider value={{ formOptions: { ...formOptions, valid: false } }}>
-        <Wizard {...props} />
-      </RenderWithProvider>
+      <FormRenderer
+        schema={{
+          fields: [
+            {
+              name: 'Wizard',
+              component: componentTypes.WIZARD,
+              fields: [
+                {
+                  title: 'Step 1',
+                  name: 1,
+                  nextStep: 'step-2',
+                  fields: [
+                    {
+                      component: 'text-field',
+                      name: 'required',
+                      validate: [{ type: validatorTypes.REQUIRED }]
+                    }
+                  ]
+                },
+                {
+                  title: 'Step 2',
+                  name: 'step-2',
+                  fields: []
+                }
+              ]
+            }
+          ]
+        }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate showFormControls={false} {...props} />}
+        onCancel={() => {}}
+        onSubmit={jest.fn()}
+      />
     );
     expect(wrapper.find(WizardStep).props().name).toEqual(1);
 
@@ -222,9 +265,13 @@ describe('<Wizard />', () => {
 
   it('should submit when clicked on next button 2x', () => {
     const wrapper = mount(
-      <RenderWithProvider value={{ formOptions }}>
-        <Wizard {...props} />
-      </RenderWithProvider>
+      <FormRenderer
+        schema={{ fields: [props] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate showFormControls={false} {...props} />}
+        onCancel={() => {}}
+        onSubmit={submitSpy}
+      />
     );
     expect(submitSpy).not.toHaveBeenCalled();
 
@@ -239,9 +286,13 @@ describe('<Wizard />', () => {
 
   it('should stepBack when clicked on back button', () => {
     const wrapper = mount(
-      <RenderWithProvider value={{ formOptions }}>
-        <Wizard {...props} />
-      </RenderWithProvider>
+      <FormRenderer
+        schema={{ fields: [props] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate showFormControls={false} {...props} />}
+        onCancel={() => {}}
+        onSubmit={submitSpy}
+      />
     );
     expect(wrapper.find(WizardStep).props().name).toEqual(1);
 

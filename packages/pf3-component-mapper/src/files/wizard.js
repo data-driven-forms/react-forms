@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import WizardStep from './wizard/wizard-step';
 import PropTypes from 'prop-types';
 import { Wizard as PfWizard, Modal, Icon } from 'patternfly-react';
-import handleEnter from '@data-driven-forms/common/src/wizard/enter-handler';
-import { useFormApi } from '@data-driven-forms/react-form-renderer';
+import Wizard, { wizardProps } from '@data-driven-forms/common/src/wizard/wizard';
 
 const defaultButtonLabels = {
   cancel: 'Cancel',
@@ -12,37 +11,7 @@ const defaultButtonLabels = {
   submit: 'Submit'
 };
 
-const Wizard = ({ title, buttonLabels, stepsInfo, fields, inModal }) => {
-  const formOptions = useFormApi();
-
-  const [activeStep, setActiveStep] = useState(fields[0].name);
-  const [prevSteps, setPrevSteps] = useState([]);
-
-  const handleNext = (nextStep) => {
-    setPrevSteps([...prevSteps, activeStep]);
-    setActiveStep(nextStep);
-  };
-
-  const handlePrev = () => {
-    setActiveStep(prevSteps[prevSteps.length - 1]);
-
-    const newSteps = prevSteps;
-    newSteps.pop();
-    setPrevSteps(newSteps);
-  };
-
-  const findCurrentStep = (activeStep) => fields.find(({ name }) => name === activeStep);
-
-  const findActiveFields = (visitedSteps) =>
-    visitedSteps.map((key) => findCurrentStep(key).fields.map(({ name }) => name)).reduce((acc, curr) => curr.concat(acc.map((item) => item)), []);
-
-  const getValues = (values, visitedSteps) =>
-    Object.keys(values)
-      .filter((key) => findActiveFields(visitedSteps).includes(key))
-      .reduce((acc, curr) => ({ ...acc, [curr]: values[curr] }), {});
-
-  const handleSubmit = () => formOptions.onSubmit(getValues(formOptions.getState().values, [...prevSteps, activeStep]));
-
+const WizardInternal = ({ title, buttonLabels, stepsInfo, inModal, onKeyDown, formOptions, handleNext, handlePrev, prevSteps, currentStep }) => {
   const renderSteps = () =>
     stepsInfo.map((step, stepIndex) => (
       <PfWizard.Step
@@ -61,7 +30,7 @@ const Wizard = ({ title, buttonLabels, stepsInfo, fields, inModal }) => {
   };
 
   return (
-    <div onKeyDown={(e) => handleEnter(e, formOptions, activeStep, findCurrentStep, handleNext, handleSubmit)}>
+    <div onKeyDown={onKeyDown}>
       {title && (
         <Modal.Header>
           {inModal && (
@@ -78,32 +47,27 @@ const Wizard = ({ title, buttonLabels, stepsInfo, fields, inModal }) => {
         handlePrev={handlePrev}
         disableBack={prevSteps.length === 0}
         buttonLabels={fullButtonLabels}
-        {...findCurrentStep(activeStep)}
-        formOptions={{
-          ...formOptions,
-          handleSubmit
-        }}
+        {...currentStep}
+        formOptions={formOptions}
       />
     </div>
   );
 };
 
-Wizard.propTypes = {
+WizardInternal.propTypes = {
   title: PropTypes.string,
   buttonLabels: PropTypes.object,
   stepsInfo: PropTypes.array,
   inModal: PropTypes.bool,
-  fields: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string
-    })
-  ).isRequired
+  ...wizardProps
 };
 
-Wizard.defaultProps = {
+WizardInternal.defaultProps = {
   title: undefined,
   stepsInfo: undefined,
   inModal: false
 };
 
-export default Wizard;
+const WizardFinal = (props) => <Wizard Wizard={WizardInternal} {...props} />;
+
+export default WizardFinal;

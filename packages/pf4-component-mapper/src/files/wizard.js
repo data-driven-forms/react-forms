@@ -2,7 +2,7 @@ import React, { cloneElement, useReducer, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { FormSpy } from '@data-driven-forms/react-form-renderer';
-import Wizard from '@data-driven-forms/common/src/wizard/wizard';
+import Wizard, { wizardProps } from '@data-driven-forms/common/src/wizard/wizard';
 
 import { Bullseye, Backdrop, WizardNav, WizardHeader } from '@patternfly/react-core';
 
@@ -138,18 +138,7 @@ WizardInternal.propTypes = {
   isDynamic: PropTypes.bool,
   showTitles: PropTypes.bool,
   crossroads: PropTypes.arrayOf(PropTypes.string),
-  formOptions: PropTypes.shape({
-    onCancel: PropTypes.func
-  }),
-  currentStep: PropTypes.object,
-  handlePrev: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  jumpToStep: PropTypes.func,
-  setPrevSteps: PropTypes.func,
-  handleNext: PropTypes.func,
-  navSchema: PropTypes.array,
-  activeStepIndex: PropTypes.number,
-  maxStepIndex: PropTypes.number
+  ...wizardProps
 };
 
 const defaultLabels = {

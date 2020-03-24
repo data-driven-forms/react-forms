@@ -81,6 +81,7 @@ const Wizard = ({ fields, isDynamic, crossroads, Wizard, ...props }) => {
       maxStepIndex={state.maxStepIndex}
       isDynamic={state.isDynamic}
       crossroads={crossroads}
+      prevSteps={state.prevSteps}
     />
   );
 };
@@ -97,3 +98,19 @@ Wizard.propTypes = {
 };
 
 export default Wizard;
+
+export const wizardProps = {
+  currentStep: PropTypes.object,
+  handlePrev: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  jumpToStep: PropTypes.func,
+  setPrevSteps: PropTypes.func,
+  handleNext: PropTypes.func,
+  navSchema: PropTypes.array,
+  activeStepIndex: PropTypes.number,
+  maxStepIndex: PropTypes.number,
+  formOptions: PropTypes.shape({
+    onCancel: PropTypes.func
+  }),
+  prevSteps: PropTypes.array
+};
