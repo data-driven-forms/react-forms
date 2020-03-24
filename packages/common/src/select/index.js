@@ -9,6 +9,7 @@ import isEqual from 'lodash/isEqual';
 import { input } from '../prop-types-templates';
 import fnToString from '../utils/fn-to-string';
 import reducer from './reducer';
+import useIsMounted from '../hooks/use-is-mounted';
 
 const getSelectValue = (stateValue, simpleValue, isMulti, allOptions) =>
   simpleValue ? allOptions.filter(({ value }) => (isMulti ? stateValue.includes(value) : isEqual(value, stateValue))) : stateValue;
@@ -46,23 +47,27 @@ const Select = ({
     isLoading: false,
     options: propsOptions,
     promises: {},
-    isMounted: false
+    isInitialLoaded: false
   });
+
+  const isMounted = useIsMounted();
 
   const updateOptions = () => {
     dispatch({ type: 'startLoading' });
 
     return loadOptions().then((data) => {
-      if (value && Array.isArray(value)) {
-        const selectValue = value.filter((value) =>
-          typeof value === 'object' ? data.find((option) => value.value === option.value) : data.find((option) => value === option.value)
-        );
-        onChange(selectValue.length === 0 ? undefined : selectValue);
-      } else if (value && !data.find(({ value: internalValue }) => internalValue === value)) {
-        onChange(undefined);
-      }
+      if (isMounted) {
+        if (value && Array.isArray(value)) {
+          const selectValue = value.filter((value) =>
+            typeof value === 'object' ? data.find((option) => value.value === option.value) : data.find((option) => value === option.value)
+          );
+          onChange(selectValue.length === 0 ? undefined : selectValue);
+        } else if (value && !data.find(({ value: internalValue }) => internalValue === value)) {
+          onChange(undefined);
+        }
 
-      dispatch({ type: 'updateOptions', payload: data });
+        dispatch({ type: 'updateOptions', payload: data });
+      }
     });
   };
 
@@ -71,23 +76,19 @@ const Select = ({
       updateOptions();
     }
 
-    dispatch({ type: 'mounted' });
-
-    return () => {
-      dispatch({ type: 'unmounted' });
-    };
+    dispatch({ type: 'initialLoaded' });
   }, []);
 
   const loadOptionsStr = loadOptions ? fnToString(loadOptions) : '';
 
   useEffect(() => {
-    if (loadOptionsStr && state.isMounted) {
+    if (loadOptionsStr && state.isInitialLoaded) {
       updateOptions();
     }
   }, [loadOptionsStr, loadOptionsChangeCounter]);
 
   useEffect(() => {
-    if (state.isMounted) {
+    if (state.isInitialLoaded) {
       if (value && !propsOptions.map(({ value }) => value).includes(value)) {
         onChange(undefined);
       }
@@ -115,7 +116,7 @@ const Select = ({
 
       loadOptions(inputValue)
         .then((options) => {
-          if (state.isMounted) {
+          if (isMounted) {
             dispatch({
               type: 'setPromises',
               payload: { [inputValue]: false },

@@ -22,15 +22,10 @@ const reducer = (state, { type, payload, options = [] }) => {
         ...state,
         options: payload
       };
-    case 'mounted':
+    case 'initialLoaded':
       return {
         ...state,
-        isMounted: true
-      };
-    case 'unmounted':
-      return {
-        ...state,
-        isMounted: false
+        isInitialLoaded: true
       };
     case 'setPromises':
       return {
