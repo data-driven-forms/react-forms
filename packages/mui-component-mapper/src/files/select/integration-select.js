@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import Select from 'react-select';
+import Select from '@data-driven-forms/common/src/select';
 import { emphasize, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Typography, NoSsr, TextField, Paper, Chip, MenuItem, FormControl, FormHelperText, FormLabel } from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';

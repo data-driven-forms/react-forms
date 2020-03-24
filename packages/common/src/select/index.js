@@ -161,7 +161,7 @@ const Select = ({
 Select.propTypes = {
   options: PropTypes.array,
   onChange: PropTypes.func,
-  classNamePrefix: PropTypes.string.isRequired,
+  classNamePrefix: PropTypes.string,
   invalid: PropTypes.bool,
   simpleValue: PropTypes.bool,
   isMulti: PropTypes.bool,
