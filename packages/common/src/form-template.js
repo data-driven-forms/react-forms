@@ -18,7 +18,7 @@ export const completeButtons = (buttonOrder) => {
     expectedOrder.push('cancel');
   }
 
-  return Array.from(new Set(expectedOrder));
+  return expectedOrder;
 };
 
 export const FormControls = ({
