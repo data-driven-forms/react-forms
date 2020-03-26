@@ -6,9 +6,9 @@ import NavigateBackIcon from '@material-ui/icons/NavigateBefore';
 import Send from '@material-ui/icons/Send';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
-const SimpleNext = ({ next, valid, handleNext, submit }) => (
+const SimpleNext = ({ next, valid, handleNext, submit, buttonLabels }) => (
   <Button variant="contained" type="button" color="primary" onClick={() => (valid ? handleNext(next) : submit())}>
-    Continue
+    {buttonLabels.next}
     <NavigateNextIcon />
   </Button>
 );
@@ -17,7 +17,10 @@ SimpleNext.propTypes = {
   next: PropTypes.string,
   valid: PropTypes.bool,
   handleNext: PropTypes.func.isRequired,
-  submit: PropTypes.func.isRequired
+  submit: PropTypes.func.isRequired,
+  buttonLabels: PropTypes.shape({
+    next: PropTypes.node
+  })
 };
 
 const ConditionalNext = ({ nextStep, ...rest }) => {
@@ -34,37 +37,38 @@ ConditionalNext.propTypes = {
   }).isRequired
 };
 
-const submitButton = (handleSubmit) => (
+const submitButton = (handleSubmit, label) => (
   <Button type="button" variant="contained" color="primary" onClick={handleSubmit}>
-    Submit <Send />
+    {label} <Send />
   </Button>
 );
 
 const renderNextButton = ({ nextStep, handleSubmit, ...rest }) =>
   !nextStep ? (
-    submitButton(handleSubmit)
+    submitButton(handleSubmit, rest.buttonLabels.submit)
   ) : typeof nextStep === 'object' ? (
     <ConditionalNext nextStep={nextStep} {...rest} />
   ) : (
     <SimpleNext next={nextStep} {...rest} />
   );
 
-const WizardStepButtons = ({ formOptions, disableBack, handlePrev, nextStep, handleNext }) => (
+const WizardStepButtons = ({ formOptions, disableBack, handlePrev, nextStep, handleNext, buttonLabels }) => (
   <div>
     {formOptions.onCancel && (
       <Button type="button" variant="contained" color="secondary" onClick={formOptions.onCancel}>
-        Cancel
+        {buttonLabels.cancel}
       </Button>
     )}
 
     <Button type="button" variant="contained" disabled={disableBack} onClick={handlePrev}>
       <NavigateBackIcon />
-      Back
+      {buttonLabels.back}
     </Button>
     {renderNextButton({
       ...formOptions,
       handleNext,
-      nextStep
+      nextStep,
+      buttonLabels
     })}
   </div>
 );
@@ -83,7 +87,13 @@ WizardStepButtons.propTypes = {
       when: PropTypes.string.isRequired,
       stepMapper: PropTypes.object.isRequired
     })
-  ])
+  ]),
+  buttonLabels: PropTypes.shape({
+    submit: PropTypes.node,
+    cancel: PropTypes.node,
+    back: PropTypes.node,
+    next: PropTypes.node
+  })
 };
 
 export default WizardStepButtons;
