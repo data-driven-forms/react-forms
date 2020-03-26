@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Typography, Row, Col } from 'antd';
 
@@ -6,13 +6,14 @@ import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
 const { Title, Paragraph } = Typography;
 const SubForm = ({ fields, title, description, FormSpyProvider: _FormSpyProvider, validate: _validate, ...rest }) => {
+  //rest not used. rest ={type, label, name, options, isRequired}
   const { renderForm } = useFormApi();
   return (
-    <div>
+    <Fragment>
       {title && (
         <Row>
           <Col span={24}>
-            <Title>{title}</Title>
+            <Title level={3}>{title}</Title>
           </Col>
         </Row>
       )}
@@ -26,7 +27,7 @@ const SubForm = ({ fields, title, description, FormSpyProvider: _FormSpyProvider
       <Row>
         <Col span={24}>{renderForm(fields)}</Col>
       </Row>
-    </div>
+    </Fragment>
   );
 };
 
