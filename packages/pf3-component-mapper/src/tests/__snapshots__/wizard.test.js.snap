@@ -289,7 +289,6 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                           ]
                         }
                         name="Wizard"
-                        validate={[Function]}
                       >
                         <Wizard
                           Wizard={[Function]}
@@ -309,7 +308,6 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                             ]
                           }
                           name="Wizard"
-                          validate={[Function]}
                         >
                           <WizardInternal
                             activeStepIndex={0}
@@ -389,7 +387,6 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                             onKeyDown={[Function]}
                             prevSteps={Array []}
                             setPrevSteps={[Function]}
-                            validate={[Function]}
                           >
                             <div
                               onKeyDown={[Function]}
@@ -1083,7 +1080,6 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                           ]
                         }
                         name="Wizard"
-                        validate={[Function]}
                       >
                         <Wizard
                           Wizard={[Function]}
@@ -1108,7 +1104,6 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                             ]
                           }
                           name="Wizard"
-                          validate={[Function]}
                         >
                           <WizardInternal
                             activeStepIndex={0}
@@ -1187,7 +1182,6 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                             onKeyDown={[Function]}
                             prevSteps={Array []}
                             setPrevSteps={[Function]}
-                            validate={[Function]}
                           >
                             <div
                               onKeyDown={[Function]}
@@ -1989,7 +1983,6 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                             },
                           ]
                         }
-                        validate={[Function]}
                       >
                         <Wizard
                           Wizard={[Function]}
@@ -2019,7 +2012,6 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                               },
                             ]
                           }
-                          validate={[Function]}
                         >
                           <WizardInternal
                             activeStepIndex={0}
@@ -2109,7 +2101,6 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                 },
                               ]
                             }
-                            validate={[Function]}
                           >
                             <div
                               onKeyDown={[Function]}
@@ -2861,7 +2852,6 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                         }
                         name="Wizard"
                         title="Wizard title"
-                        validate={[Function]}
                       >
                         <Wizard
                           Wizard={[Function]}
@@ -2882,7 +2872,6 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                           }
                           name="Wizard"
                           title="Wizard title"
-                          validate={[Function]}
                         >
                           <WizardInternal
                             activeStepIndex={0}
@@ -2963,7 +2952,6 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                             prevSteps={Array []}
                             setPrevSteps={[Function]}
                             title="Wizard title"
-                            validate={[Function]}
                           >
                             <div
                               onKeyDown={[Function]}

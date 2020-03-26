@@ -37,12 +37,10 @@ exports[`renderForm function #condition should render condition field only if co
         >
           <CustomComponent
             name="a"
-            validate={[Function]}
           >
             <FieldProvider
               component={[Function]}
               name="a"
-              validate={[Function]}
             >
               <TextField
                 input={
@@ -103,12 +101,10 @@ exports[`renderForm function #condition should render condition field only if co
         >
           <CustomComponent
             name="c"
-            validate={[Function]}
           >
             <FieldProvider
               component={[Function]}
               name="c"
-              validate={[Function]}
             >
               <TextField
                 input={
@@ -257,12 +253,10 @@ exports[`renderForm function #condition should render condition field only if on
         >
           <CustomComponent
             name="a"
-            validate={[Function]}
           >
             <FieldProvider
               component={[Function]}
               name="a"
-              validate={[Function]}
             >
               <TextField
                 input={
@@ -323,12 +317,10 @@ exports[`renderForm function #condition should render condition field only if on
         >
           <CustomComponent
             name="b"
-            validate={[Function]}
           >
             <FieldProvider
               component={[Function]}
               name="b"
-              validate={[Function]}
             >
               <TextField
                 input={
@@ -459,11 +451,9 @@ exports[`renderForm function should render single field from defined componentTy
         >
           <Component
             name="foo"
-            validate={[Function]}
           >
             <div
               name="foo"
-              validate={[Function]}
             >
               TextField
             </div>
@@ -512,12 +502,10 @@ exports[`renderForm function should render single field from with custom compone
         >
           <CustomComponent
             name="foo"
-            validate={[Function]}
           >
             <FieldProvider
               component={[Function]}
               name="foo"
-              validate={[Function]}
             >
               <TextField
                 input={

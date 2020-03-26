@@ -136,7 +136,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               >
                 <TextField
                   name="component1"
-                  validate={[Function]}
                 >
                   <div
                     className="nested-item"
@@ -165,7 +164,6 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               >
                 <Component
                   name="secret"
-                  validate={[Function]}
                 >
                   <div
                     className="nested-item"
@@ -358,7 +356,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                 <TextField
                   label="Visible"
                   name="visible"
-                  validate={[Function]}
                 >
                   <div
                     className="nested-item"
@@ -393,7 +390,6 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                   <TextField
                     label="Hidden"
                     name="hidden"
-                    validate={[Function]}
                   >
                     <div
                       className="nested-item"

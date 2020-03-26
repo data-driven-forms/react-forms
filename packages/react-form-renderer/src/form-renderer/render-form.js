@@ -31,10 +31,10 @@ FormConditionWrapper.propTypes = {
 
 const prepareValidator = (validator, mapper) => (typeof validator === 'function' ? memoize(validator) : mapper[validator.type]({ ...validator }));
 
-const getValidate = (validate, dataType, mapper) =>
-  validate
-    ? [...validate.map((validator) => prepareValidator(validator, mapper)), dataType && dataTypeValidator(dataType)()]
-    : [dataType && dataTypeValidator(dataType)()];
+const getValidate = (validate, dataType, mapper) => [
+  ...(validate ? validate.map((validator) => prepareValidator(validator, mapper)) : []),
+  ...(dataType ? [dataTypeValidator(dataType)()] : [])
+];
 
 const prepareArrayValidator = (validation) => (value = []) => {
   if (!Array.isArray(value)) {
@@ -53,7 +53,7 @@ const prepareArrayValidator = (validation) => (value = []) => {
 const SingleField = ({ component, condition, hideField, validate, ...rest }) => {
   const { componentMapper, validatorMapper } = useContext(RendererContext);
 
-  const validation = getValidate(validate, rest.dataType, validatorMapper);
+  const validation = validate || rest.dataType ? getValidate(validate, rest.dataType, validatorMapper) : undefined;
 
   const componentProps = {
     type: assignSpecialType(component),
@@ -61,9 +61,11 @@ const SingleField = ({ component, condition, hideField, validate, ...rest }) => 
     ...(Object.prototype.hasOwnProperty.call(rest, 'initialValue') && Object.prototype.hasOwnProperty.call(rest, 'dataType')
       ? { initialValue: convertInitialValue(rest.initialValue, rest.dataType) }
       : {}),
-    ...(componentTypes.FIELD_ARRAY === component
-      ? { arrayValidator: prepareArrayValidator(validation) }
-      : { validate: composeValidators(validation) })
+    ...(validation
+      ? componentTypes.FIELD_ARRAY === component
+        ? { arrayValidator: prepareArrayValidator(validation) }
+        : { validate: composeValidators(validation) }
+      : {})
   };
 
   const Component = componentMapper[component];
