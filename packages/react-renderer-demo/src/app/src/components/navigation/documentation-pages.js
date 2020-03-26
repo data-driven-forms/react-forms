@@ -60,8 +60,8 @@ export const docs = [
     linkText: 'Action mapper'
   },
   {
-    component: 'field-array',
-    linkText: 'FieldArray Provider'
+    component: 'dynamic-fields',
+    linkText: 'Dynamic fields'
   },
   {
     component: 'schema-validator',

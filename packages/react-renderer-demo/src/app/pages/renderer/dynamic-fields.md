@@ -6,9 +6,9 @@ import ListOfContents from '../../src/helpers/list-of-contents';
 <Grid container item>
 <Grid item xs={12} md={10}>
 
-# Field Array Provider
+# Dynamic fields
 
-Simillarly to [FieldProvider](/renderer/field-provider) Data driven forms provide an option how to inlude [React Final Form Arrays](https://github.com/final-form/react-final-form-arrays) in your form. Please visit their documentation to learn about functionality.
+Dynamic fields allow you to add or remove field inputs in your forms. In Data Driven Forms, Field Array is used to provide this functionality. Simillarly to [FieldProvider](/renderer/field-provider) Data driven forms include [React Final Form Arrays](https://github.com/final-form/react-final-form-arrays). Please visit their documentation to learn more about the functionality and implementation.
 
 ## Using FieldArray
 
@@ -83,6 +83,6 @@ PF4 component mapper provides an experimental implementation of PF4 field arrays
 
 </Grid>
 <Grid item xs={false} md={2}>
-  <ListOfContents file="renderer/field-array" />
+  <ListOfContents file="renderer/dynamic-fields" />
 </Grid>
 </Grid>
