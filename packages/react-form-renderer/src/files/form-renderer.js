@@ -46,10 +46,6 @@ const FormRenderer = ({
     return <SchemaErrorComponent name={schemaError.name} message={schemaError.message} />;
   }
 
-  const Template = FormTemplate
-    ? FormTemplate
-    : () => <div>{`FormRenderer is missing 'FormTemplate' prop: ({formFields, schema}) => <FormTemplate {...} />`}</div>;
-
   return (
     <Form
       {...props}
@@ -87,7 +83,7 @@ const FormRenderer = ({
             }
           }}
         >
-          <Template formFields={renderForm(schema.fields)} schema={schema} />
+          <FormTemplate formFields={renderForm(schema.fields)} schema={schema} />
         </RendererContext.Provider>
       )}
     />
