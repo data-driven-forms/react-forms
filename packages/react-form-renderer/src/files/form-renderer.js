@@ -16,16 +16,13 @@ const FormRenderer = ({
   onSubmit,
   onCancel,
   onReset,
-  initialValues,
   clearOnUnmount,
-  validate,
   subscription,
   clearedValue,
   schema,
   validatorMapper,
   actionMapper,
   schemaValidatorMapper,
-  debug,
   ...props
 }) => {
   let schemaError;
@@ -52,10 +49,7 @@ const FormRenderer = ({
       onSubmit={onSubmit}
       mutators={{ ...arrayMutators }}
       decorators={[createFocusDecorator()]}
-      initialValues={initialValues}
-      validate={validate}
       subscription={{ pristine: true, submitting: true, valid: true, ...subscription }}
-      debug={debug}
       render={({ handleSubmit, pristine, valid, form: { reset, mutators, getState, submit, ...form }, ...state }) => (
         <RendererContext.Provider
           value={{
@@ -95,9 +89,7 @@ FormRenderer.propTypes = {
   onCancel: PropTypes.func,
   onReset: PropTypes.func,
   schema: PropTypes.object.isRequired,
-  initialValues: PropTypes.object,
   clearOnUnmount: PropTypes.bool,
-  validate: PropTypes.func,
   subscription: PropTypes.shape({ [PropTypes.string]: PropTypes.bool }),
   clearedValue: PropTypes.any,
   componentMapper: PropTypes.shape({
@@ -110,7 +102,6 @@ FormRenderer.propTypes = {
   actionMapper: PropTypes.shape({
     [PropTypes.string]: PropTypes.func
   }),
-  debug: PropTypes.func,
   schemaValidatorMapper: PropTypes.shape({
     components: PropTypes.shape({
       [PropTypes.string]: PropTypes.func
