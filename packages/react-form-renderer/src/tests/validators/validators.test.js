@@ -73,41 +73,41 @@ describe('New validators', () => {
     });
 
     it('should pass min items of 3 validation', () => {
-      expect(validatorMapper[validatorTypes.MIN_ITEMS_VALIDATOR]({ threshold: 3 })(['1', '2', '3'])).toBeUndefined();
+      expect(validatorMapper[validatorTypes.MIN_ITEMS]({ threshold: 3 })(['1', '2', '3'])).toBeUndefined();
     });
 
     it('should pass min items of 3 validation', () => {
-      expect(validatorMapper[validatorTypes.MIN_ITEMS_VALIDATOR]({ threshold: 3, message: 'Too few' })(['1', '2'])).toBe('Too few');
+      expect(validatorMapper[validatorTypes.MIN_ITEMS]({ threshold: 3, message: 'Too few' })(['1', '2'])).toBe('Too few');
     });
 
     it('should pass min items of 3 validation with more items', () => {
-      expect(validatorMapper[validatorTypes.MIN_ITEMS_VALIDATOR]({ threshold: 3 })(['1', '2', '3', '4'])).toBeUndefined();
+      expect(validatorMapper[validatorTypes.MIN_ITEMS]({ threshold: 3 })(['1', '2', '3', '4'])).toBeUndefined();
     });
   });
 
   describe('pattern validator', () => {
     it('should pass pattern validation with configured regexp pattern', () => {
-      expect(validatorMapper[validatorTypes.PATTERN_VALIDATOR]({ pattern: /^Foo$/ })('Foo')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.PATTERN]({ pattern: /^Foo$/ })('Foo')).toBeUndefined();
     });
 
     it('should fail pattern validation and return default message', () => {
-      expect(validatorMapper[validatorTypes.PATTERN_VALIDATOR]({ pattern: /^Foo$/ })('Bar')).toEqual('Value does not match pattern: /^Foo$/.');
+      expect(validatorMapper[validatorTypes.PATTERN]({ pattern: /^Foo$/ })('Bar')).toEqual('Value does not match pattern: /^Foo$/.');
     });
 
     it('should fail pattern validation and return custom message', () => {
-      expect(validatorMapper[validatorTypes.PATTERN_VALIDATOR]({ pattern: /^Foo$/, message: 'Custom message' })('Bar')).toEqual('Custom message');
+      expect(validatorMapper[validatorTypes.PATTERN]({ pattern: /^Foo$/, message: 'Custom message' })('Bar')).toEqual('Custom message');
     });
 
     it('should pass pattern validation with configured regexp pattern as string', () => {
-      expect(validatorMapper[validatorTypes.PATTERN_VALIDATOR]({ pattern: '^Foo$' })('Foo')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.PATTERN]({ pattern: '^Foo$' })('Foo')).toBeUndefined();
     });
 
     it('should pass pattern validation with configured regexp pattern as string and with flags', () => {
-      expect(validatorMapper[validatorTypes.PATTERN_VALIDATOR]({ pattern: '^Foo$', flags: 'i' })('foo')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.PATTERN]({ pattern: '^Foo$', flags: 'i' })('foo')).toBeUndefined();
     });
 
     it('should fail pattern validation with configured regexp pattern as string', () => {
-      expect(validatorMapper[validatorTypes.PATTERN_VALIDATOR]({ pattern: '^Foo$' })('Bar')).toBe('Value does not match pattern: ^Foo$.');
+      expect(validatorMapper[validatorTypes.PATTERN]({ pattern: '^Foo$' })('Bar')).toBe('Value does not match pattern: ^Foo$.');
     });
   });
 

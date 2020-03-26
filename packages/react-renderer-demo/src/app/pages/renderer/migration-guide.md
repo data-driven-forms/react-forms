@@ -156,6 +156,11 @@ import { componentMapper } from '@data-driven-forms/pf4-component-mapper'
 
 -   use isMulti instead
 
+### "validator" removed
+
+-   word "validator" is removed from all validator strings, constants
+-   i.e.: pattern-validator > pattern
+
 </Grid>
 <Grid item xs={false} md={2}>
   <ListOfContents file="renderer/migration-guide" />

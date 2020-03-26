@@ -85,7 +85,7 @@ const output = {
       title: 'Text Box with validator',
       validate: [
         {
-          type: validatorTypes.PATTERN_VALIDATOR,
+          type: validatorTypes.PATTERN,
           pattern: '[0-9]'
         }
       ],

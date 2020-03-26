@@ -38,9 +38,9 @@ const asyncValidatorSchema = {
       label: 'Async validation field',
       validate: [
         { type: 'asyncValidator' },
-        { type: 'required-validator' },
+        { type: 'required' },
         {
-          type: validatorTypes.PATTERN_VALIDATOR,
+          type: validatorTypes.PATTERN,
           pattern: '^Foo$',
           flags: 'i'
         }

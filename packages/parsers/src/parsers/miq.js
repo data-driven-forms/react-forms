@@ -38,7 +38,7 @@ const miqParser = (
         if (field.validator_rule) {
           newField.validate = [
             {
-              type: validatorTypes.PATTERN_VALIDATOR,
+              type: validatorTypes.PATTERN,
               pattern: field.validator_rule
             }
           ];

@@ -13,7 +13,7 @@ export const simpleSchemaResult = {
       isRequired: true,
       validate: [
         {
-          type: 'required-validator'
+          type: 'required'
         }
       ]
     },
@@ -26,7 +26,7 @@ export const simpleSchemaResult = {
       isRequired: true,
       validate: [
         {
-          type: 'required-validator'
+          type: 'required'
         }
       ],
       type: 'text',
@@ -64,7 +64,7 @@ export const simpleSchemaResult = {
       helperText: 'Hint: Make it strong!',
       validate: [
         {
-          type: 'min-length-validator',
+          type: 'min-length',
           threshold: 3
         }
       ]
@@ -79,7 +79,7 @@ export const simpleSchemaResult = {
       type: 'tel',
       validate: [
         {
-          type: 'min-length-validator',
+          type: 'min-length',
           threshold: 10
         }
       ]
@@ -97,7 +97,7 @@ export const nestedSchemaResult = {
       isRequired: true,
       validate: [
         {
-          type: 'required-validator'
+          type: 'required'
         }
       ],
       label: 'Task list title',
@@ -126,7 +126,7 @@ export const nestedSchemaResult = {
           isRequired: true,
           validate: [
             {
-              type: 'required-validator'
+              type: 'required'
             }
           ],
           autoFocus: false
@@ -269,7 +269,7 @@ export const arraySchemaResult = {
       title: 'A list with a minimal number of items',
       validate: [
         {
-          type: 'min-items-validator',
+          type: 'min-items',
           threshold: 3
         }
       ],
@@ -297,7 +297,7 @@ export const arraySchemaResult = {
       itemDefault: 'unidentified',
       validate: [
         {
-          type: 'min-items-validator',
+          type: 'min-items',
           threshold: 5
         }
       ],
