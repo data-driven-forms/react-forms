@@ -2,12 +2,12 @@ import Grid from '@material-ui/core/Grid'
 import RouterLink from 'next/link';
 import Link from '@material-ui/core/Link';
 
-import ListOfContents from '../../src/helpers/list-of-contents';
+import ListOfContents from '../src/helpers/list-of-contents';
 
 <Grid container item>
 <Grid item xs={12} md={10}>
 
-# Migration guide from 1.x to 2.x
+# Migration guide to version 2
 
 The release of version 2 brings many new features, that as we hope you will find useful and you will like them.
 Also, we took this release as an opportunity to fix mistakes we did during the initial development and to remove some obsolete stuff, that is no longer useful.
@@ -163,6 +163,6 @@ import { componentMapper } from '@data-driven-forms/pf4-component-mapper'
 
 </Grid>
 <Grid item xs={false} md={2}>
-  <ListOfContents file="renderer/migration-guide" />
+  <ListOfContents file="migration-guide" />
 </Grid>
 </Grid>
