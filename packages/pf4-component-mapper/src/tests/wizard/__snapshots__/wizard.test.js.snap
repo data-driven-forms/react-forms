@@ -928,7 +928,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                     }
                                     handleNext={[Function]}
                                     handlePrev={[Function]}
-                                    name="1"
                                     nextStep="2"
                                   >
                                     <footer
@@ -2329,7 +2328,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                               }
                                               handleNext={[Function]}
                                               handlePrev={[Function]}
-                                              name="1"
                                               nextStep="2"
                                             >
                                               <footer
