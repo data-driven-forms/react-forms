@@ -356,33 +356,18 @@ exports[`<FormTabs /> should render form tabs with error state 1`] = `
                           role="tab"
                         >
                           <Icon
+                            classnName="ddorg__pf3-layout-components__tabs__error"
                             name="exclamation-circle"
-                            style={
-                              Object {
-                                "color": "#CC0000",
-                                "marginRight": 8,
-                              }
-                            }
                             type="fa"
                           >
                             <FontAwesome
+                              classnName="ddorg__pf3-layout-components__tabs__error"
                               name="exclamation-circle"
-                              style={
-                                Object {
-                                  "color": "#CC0000",
-                                  "marginRight": 8,
-                                }
-                              }
                             >
                               <span
                                 aria-hidden={true}
                                 className="fa fa-exclamation-circle"
-                                style={
-                                  Object {
-                                    "color": "#CC0000",
-                                    "marginRight": 8,
-                                  }
-                                }
+                                classnName="ddorg__pf3-layout-components__tabs__error"
                               />
                             </FontAwesome>
                           </Icon>
