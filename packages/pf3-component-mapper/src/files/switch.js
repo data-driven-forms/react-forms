@@ -34,13 +34,7 @@ const Switch = (props) => {
       description={description}
       inputAddon={inputAddon}
     >
-      <SwitchField
-        {...rest}
-        {...input}
-        disabled={isDisabled}
-        checked={input.checked}
-        onChange={({ target: { checked } }) => input.onChange(checked)}
-      />
+      <SwitchField {...rest} {...input} disabled={isDisabled} checked={input.checked} />
     </FormGroup>
   );
 };
