@@ -2,11 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Radio as MUIRadio, FormControlLabel, FormControl, FormLabel, FormHelperText } from '@material-ui/core';
 import { wrapperProps } from '@data-driven-forms/common/src/multiple-choice-list';
+import { makeStyles } from '@material-ui/core/styles';
 
 import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
-import './radio.scss';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+
+const useStyles = makeStyles(() => ({
+  grid: {
+    '&:first-child': {
+      marginTop: 8
+    }
+  }
+}));
 
 const RadioOption = ({ name, option, isDisabled, isReadOnly }) => {
   const { input } = useFieldApi({ name, type: 'radio', value: option.value });
@@ -42,10 +50,11 @@ const Radio = ({ name, ...props }) => {
     name,
     type: 'radio'
   });
+  const classes = useStyles();
   const invalid = validationError(meta, validateOnMount);
   const text = invalid || helperText || description;
   return (
-    <FormFieldGrid className="mui-ddform-radio-group">
+    <FormFieldGrid className={classes.grid}>
       <FormControl required={isRequired} error={!!invalid} component="fieldset">
         <FormLabel component="legend">{label}</FormLabel>
         {options.map((option) => (
