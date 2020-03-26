@@ -50,7 +50,7 @@ const FormRenderer = ({
       mutators={{ ...arrayMutators }}
       decorators={[createFocusDecorator()]}
       subscription={{ pristine: true, submitting: true, valid: true, ...subscription }}
-      render={({ handleSubmit, pristine, valid, form: { reset, mutators, getState, submit, ...form }, ...state }) => (
+      render={({ handleSubmit, pristine, valid, form: { reset, mutators, getState, submit, ...form } }) => (
         <RendererContext.Provider
           value={{
             componentMapper,
