@@ -74,18 +74,6 @@
     "@data-driven-forms/react-form-renderer": "^1.9.6",
     "patternfly-react": "^2.25.4"
   },
-  "release": {
-    "prepare": [
-      "@semantic-release/npm",
-      {
-        "path": "@semantic-release/git",
-        "assets": [
-          "package.json"
-        ],
-        "message": "Release of new version: ${nextRelease.version} <no> [skip ci]"
-      }
-    ]
-  },
   "dependencies": {
     "clsx": "^1.0.4",
     "react-day-picker": "^7.3.2",
