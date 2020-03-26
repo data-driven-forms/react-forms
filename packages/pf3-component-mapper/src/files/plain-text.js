@@ -29,12 +29,16 @@ const validTextFields = [
 ];
 
 const PlainText = ({ variant, label, name }) =>
-  label.split('\n').map((paragraph, index) => React.createElement(`${variant}`, { key: `${name}-${index}` }, paragraph));
+  label.split('\n').map((paragraph, index) => React.createElement(variant, { key: `${name}-${index}` }, paragraph));
 
 PlainText.propTypes = {
   variant: PropTypes.oneOf(validTextFields),
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired
+};
+
+PlainText.defaultProps = {
+  variant: 'p'
 };
 
 export default PlainText;
