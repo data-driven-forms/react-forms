@@ -553,14 +553,9 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                         className="wizard-pf-footer modal-footer"
                                       >
                                         <Button
-                                          className="margin-left-3"
+                                          className="ddorg__pf3-component-mapper__wizard__buttons"
                                           color="secondary"
                                           onClick={[Function]}
-                                          style={
-                                            Object {
-                                              "marginRight": 20,
-                                            }
-                                          }
                                           type="button"
                                           variant="contained"
                                         >
@@ -569,27 +564,17 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                             block={false}
                                             bsClass="btn"
                                             bsStyle="contained"
-                                            className="margin-left-3"
+                                            className="ddorg__pf3-component-mapper__wizard__buttons"
                                             color="secondary"
                                             disabled={false}
                                             onClick={[Function]}
-                                            style={
-                                              Object {
-                                                "marginRight": 20,
-                                              }
-                                            }
                                             type="button"
                                           >
                                             <button
-                                              className="margin-left-3 btn btn-contained"
+                                              className="ddorg__pf3-component-mapper__wizard__buttons btn btn-contained"
                                               color="secondary"
                                               disabled={false}
                                               onClick={[Function]}
-                                              style={
-                                                Object {
-                                                  "marginRight": 20,
-                                                }
-                                              }
                                               type="button"
                                             >
                                               Cancel
@@ -1362,14 +1347,9 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                         className="wizard-pf-footer modal-footer"
                                       >
                                         <Button
-                                          className="margin-left-3"
+                                          className="ddorg__pf3-component-mapper__wizard__buttons"
                                           color="secondary"
                                           onClick={[Function]}
-                                          style={
-                                            Object {
-                                              "marginRight": 20,
-                                            }
-                                          }
                                           type="button"
                                           variant="contained"
                                         >
@@ -1378,27 +1358,17 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                             block={false}
                                             bsClass="btn"
                                             bsStyle="contained"
-                                            className="margin-left-3"
+                                            className="ddorg__pf3-component-mapper__wizard__buttons"
                                             color="secondary"
                                             disabled={false}
                                             onClick={[Function]}
-                                            style={
-                                              Object {
-                                                "marginRight": 20,
-                                              }
-                                            }
                                             type="button"
                                           >
                                             <button
-                                              className="margin-left-3 btn btn-contained"
+                                              className="ddorg__pf3-component-mapper__wizard__buttons btn btn-contained"
                                               color="secondary"
                                               disabled={false}
                                               onClick={[Function]}
-                                              style={
-                                                Object {
-                                                  "marginRight": 20,
-                                                }
-                                              }
                                               type="button"
                                             >
                                               Cancel
@@ -2361,14 +2331,9 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                         className="wizard-pf-footer modal-footer"
                                       >
                                         <Button
-                                          className="margin-left-3"
+                                          className="ddorg__pf3-component-mapper__wizard__buttons"
                                           color="secondary"
                                           onClick={[Function]}
-                                          style={
-                                            Object {
-                                              "marginRight": 20,
-                                            }
-                                          }
                                           type="button"
                                           variant="contained"
                                         >
@@ -2377,27 +2342,17 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                             block={false}
                                             bsClass="btn"
                                             bsStyle="contained"
-                                            className="margin-left-3"
+                                            className="ddorg__pf3-component-mapper__wizard__buttons"
                                             color="secondary"
                                             disabled={false}
                                             onClick={[Function]}
-                                            style={
-                                              Object {
-                                                "marginRight": 20,
-                                              }
-                                            }
                                             type="button"
                                           >
                                             <button
-                                              className="margin-left-3 btn btn-contained"
+                                              className="ddorg__pf3-component-mapper__wizard__buttons btn btn-contained"
                                               color="secondary"
                                               disabled={false}
                                               onClick={[Function]}
-                                              style={
-                                                Object {
-                                                  "marginRight": 20,
-                                                }
-                                              }
                                               type="button"
                                             >
                                               Cancel
@@ -3138,14 +3093,9 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                         className="wizard-pf-footer modal-footer"
                                       >
                                         <Button
-                                          className="margin-left-3"
+                                          className="ddorg__pf3-component-mapper__wizard__buttons"
                                           color="secondary"
                                           onClick={[Function]}
-                                          style={
-                                            Object {
-                                              "marginRight": 20,
-                                            }
-                                          }
                                           type="button"
                                           variant="contained"
                                         >
@@ -3154,27 +3104,17 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                             block={false}
                                             bsClass="btn"
                                             bsStyle="contained"
-                                            className="margin-left-3"
+                                            className="ddorg__pf3-component-mapper__wizard__buttons"
                                             color="secondary"
                                             disabled={false}
                                             onClick={[Function]}
-                                            style={
-                                              Object {
-                                                "marginRight": 20,
-                                              }
-                                            }
                                             type="button"
                                           >
                                             <button
-                                              className="margin-left-3 btn btn-contained"
+                                              className="ddorg__pf3-component-mapper__wizard__buttons btn btn-contained"
                                               color="secondary"
                                               disabled={false}
                                               onClick={[Function]}
-                                              style={
-                                                Object {
-                                                  "marginRight": 20,
-                                                }
-                                              }
                                               type="button"
                                             >
                                               Cancel
