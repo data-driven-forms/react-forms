@@ -4,7 +4,7 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import PropTypes from 'prop-types';
 import FormGroup from '../common/form-group';
 
-const TextArea = (props) => {
+const Textarea = (props) => {
   const { label, isRequired, helperText, meta, description, hideLabel, input, isReadOnly, isDisabled, id, ...rest } = useFieldApi(props);
   return (
     <FormGroup
@@ -21,7 +21,7 @@ const TextArea = (props) => {
   );
 };
 
-TextArea.propTypes = {
+Textarea.propTypes = {
   label: PropTypes.string,
   isReadOnly: PropTypes.bool,
   isRequired: PropTypes.bool,
@@ -32,4 +32,4 @@ TextArea.propTypes = {
   id: PropTypes.string
 };
 
-export default TextArea;
+export default Textarea;

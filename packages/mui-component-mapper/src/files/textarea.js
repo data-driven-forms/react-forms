@@ -7,7 +7,7 @@ import { validationError } from '../common/helpers';
 import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
-const TextArea = (props) => {
+const Textarea = (props) => {
   const { input, isReadOnly, isDisabled, placeholder, isRequired, label, helperText, description, validateOnMount, meta, ...rest } = useFieldApi(
     props
   );
@@ -33,7 +33,7 @@ const TextArea = (props) => {
   );
 };
 
-TextArea.propTypes = {
+Textarea.propTypes = {
   input,
   meta,
   isReadOnly: PropTypes.bool,
@@ -46,4 +46,4 @@ TextArea.propTypes = {
   description: PropTypes.node
 };
 
-export default TextArea;
+export default Textarea;

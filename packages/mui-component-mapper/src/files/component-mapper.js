@@ -2,7 +2,7 @@ import { componentTypes } from '@data-driven-forms/react-form-renderer';
 import SubForm from './sub-form';
 import Tabs from './tabs';
 import TextField from './text-field';
-import TextArea from './text-area';
+import Textarea from './textarea';
 import Checkbox from './checkbox';
 import Switch from './switch';
 import TimePicker from './time-picker';
@@ -14,7 +14,7 @@ import Wizard from './wizard';
 
 export const components = {
   TextField,
-  TextArea,
+  Textarea,
   Select,
   Checkbox,
   Radio,
@@ -28,7 +28,7 @@ export const components = {
 
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField,
-  [componentTypes.TEXTAREA]: TextArea,
+  [componentTypes.TEXTAREA]: Textarea,
   [componentTypes.SELECT]: Select,
   [componentTypes.CHECKBOX]: Checkbox,
   [componentTypes.SUB_FORM]: SubForm,
