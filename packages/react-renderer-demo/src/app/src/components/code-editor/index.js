@@ -27,6 +27,7 @@ const CodeEditor = (props) => (
     onLoad={(editor) => {
       editor.getSession().setUseWorker(false);
     }}
+    mode="jsx"
     {...props}
   />
 );
