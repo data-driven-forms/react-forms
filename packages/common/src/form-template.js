@@ -18,7 +18,7 @@ export const completeButtons = (buttonOrder) => {
     expectedOrder.push('cancel');
   }
 
-  return Array.from(new Set(expectedOrder));
+  return expectedOrder;
 };
 
 export const FormControls = ({
@@ -37,7 +37,7 @@ export const FormControls = ({
   formSpyProps
 }) => {
   if (FormButtons) {
-    return <FormButtons {...formSpyProps} />;
+    return <FormButtons />;
   }
 
   const { submitting, pristine, validating } = formSpyProps;
@@ -71,7 +71,6 @@ FormControls.propTypes = {
   buttonOrder: PropTypes.arrayOf(PropTypes.string),
   buttonClassName: PropTypes.string,
   FormButtons: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]),
-  FormSpy: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]),
   Button: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]),
   ButtonGroup: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]),
   formSpyProps: PropTypes.shape({

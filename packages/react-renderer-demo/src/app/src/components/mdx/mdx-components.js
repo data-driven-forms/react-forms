@@ -64,32 +64,36 @@ const MdxComponents = {
       {children}
     </Typography>
   ),
-  code: ({ children, lang }) => (
-    <div style={{ background: '#1d1f21', paddingTop: 5, paddingBottom: 5, marginTop: 10, marginBottom: 10 }} className="DocCode">
-      <CodeEditor
-        readOnly
-        mode={typeof lang === 'string' ? lang.toLowerCase() : 'jsx'}
-        theme="tomorrow_night"
-        name="UNIQUE_ID_OF_DIV"
-        editorProps={{ $blockScrolling: true }}
-        value={children.replace(/\n+$/, '')}
-        fontSize={14}
-        maxLines={Infinity}
-        showPrintMargin={false}
-        showGutter={false}
-        highlightActiveLine={false}
-        style={{ width: '80%', margin: 10 }}
-        setOptions={{
-          showLineNumbers: false,
-          readOnly: true
-        }}
-        onLoad={(editor) => {
-          editor.getSession().setUseWorker(false);
-          editor.renderer.$cursorLayer.element.style.display = 'none';
-        }}
-      />
-    </div>
-  ),
+  code: ({ children, className }) => {
+    const lang = className ? className.toLowerCase().replace('language-', '') : '';
+
+    return (
+      <div style={{ background: '#1d1f21', paddingTop: 5, paddingBottom: 5, marginTop: 10, marginBottom: 10 }} className="DocCode">
+        <CodeEditor
+          readOnly
+          mode={lang ? lang : 'jsx'}
+          theme="tomorrow_night"
+          name="UNIQUE_ID_OF_DIV"
+          editorProps={{ $blockScrolling: true }}
+          value={children.replace(/\n+$/, '')}
+          fontSize={14}
+          maxLines={Infinity}
+          showPrintMargin={false}
+          showGutter={false}
+          highlightActiveLine={false}
+          style={{ width: '80%', margin: 10 }}
+          setOptions={{
+            showLineNumbers: false,
+            readOnly: true
+          }}
+          onLoad={(editor) => {
+            editor.getSession().setUseWorker(false);
+            editor.renderer.$cursorLayer.element.style.display = 'none';
+          }}
+        />
+      </div>
+    );
+  },
   a: ({ href, children }) =>
     href.startsWith('/') ? (
       <RouterLink href={href}>

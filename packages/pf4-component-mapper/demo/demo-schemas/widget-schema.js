@@ -397,7 +397,7 @@ export const arraySchemaDDF = {
           isRequired: true,
           validate: [
             {
-              type: 'required-validator'
+              type: 'required'
             }
           ]
         },
@@ -413,7 +413,7 @@ export const arraySchemaDDF = {
       component: 'field-array',
       name: 'minItems',
       label: 'A list with a minimal number of items',
-      validate: [{ type: 'min-items-validator', threshold: 3 }],
+      validate: [{ type: 'min-items', threshold: 3 }],
       fields: [
         {
           component: 'text-field',
@@ -446,7 +446,7 @@ export const arraySchemaDDF = {
           isRequired: true,
           validate: [
             {
-              type: 'required-validator'
+              type: 'required'
             }
           ]
         }

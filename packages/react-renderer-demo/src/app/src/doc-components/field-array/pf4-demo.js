@@ -45,7 +45,7 @@ const schema = {
       component: componentTypes.FIELD_ARRAY,
       name: 'minItems',
       label: 'A list with a minimal number of items',
-      validate: [{ type: validatorTypes.MIN_ITEMS_VALIDATOR, threshold: 3 }],
+      validate: [{ type: validatorTypes.MIN_ITEMS, threshold: 3 }],
       fields: [
         {
           component: componentTypes.TEXT_FIELD,

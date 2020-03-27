@@ -1231,85 +1231,6 @@ exports[`FormFields should render Switch correctly 1`] = `
 </RenderWithProvider>
 `;
 
-exports[`FormFields should render TextArea correctly 1`] = `
-<RenderWithProvider>
-  <ReactFinalForm
-    onSubmit={[Function]}
-  >
-    <TextArea
-      dataType="someDataType"
-      id="someIdKey"
-      name="Name of the field"
-    >
-      <FormGroup
-        id="someIdKey"
-        isRequired={false}
-        meta={
-          Object {
-            "active": false,
-            "data": Object {},
-            "dirty": false,
-            "dirtySinceLastSubmit": false,
-            "error": undefined,
-            "initial": undefined,
-            "invalid": false,
-            "length": undefined,
-            "modified": false,
-            "pristine": true,
-            "submitError": undefined,
-            "submitFailed": false,
-            "submitSucceeded": false,
-            "submitting": false,
-            "touched": false,
-            "valid": true,
-            "validating": false,
-            "visited": false,
-          }
-        }
-      >
-        <FormGroup
-          fieldId="someIdKey"
-          isRequired={false}
-          isValid={true}
-        >
-          <div
-            className="pf-c-form__group"
-          >
-            <TextArea
-              aria-label={null}
-              className=""
-              id="someIdKey"
-              isRequired={false}
-              isValid={true}
-              name="Name of the field"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
-              resizeOrientation="both"
-              validated="default"
-              value=""
-            >
-              <textarea
-                aria-invalid={false}
-                aria-label={null}
-                className="pf-c-form-control"
-                id="someIdKey"
-                name="Name of the field"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                required={false}
-                value=""
-              />
-            </TextArea>
-          </div>
-        </FormGroup>
-      </FormGroup>
-    </TextArea>
-  </ReactFinalForm>
-</RenderWithProvider>
-`;
-
 exports[`FormFields should render TextField correctly 1`] = `
 <RenderWithProvider>
   <ReactFinalForm
@@ -1605,6 +1526,85 @@ exports[`FormFields should render TextField without id correctly 1`] = `
         </FormGroup>
       </FormGroup>
     </TextField>
+  </ReactFinalForm>
+</RenderWithProvider>
+`;
+
+exports[`FormFields should render Textarea correctly 1`] = `
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
+  >
+    <Textarea
+      dataType="someDataType"
+      id="someIdKey"
+      name="Name of the field"
+    >
+      <FormGroup
+        id="someIdKey"
+        isRequired={false}
+        meta={
+          Object {
+            "active": false,
+            "data": Object {},
+            "dirty": false,
+            "dirtySinceLastSubmit": false,
+            "error": undefined,
+            "initial": undefined,
+            "invalid": false,
+            "length": undefined,
+            "modified": false,
+            "pristine": true,
+            "submitError": undefined,
+            "submitFailed": false,
+            "submitSucceeded": false,
+            "submitting": false,
+            "touched": false,
+            "valid": true,
+            "validating": false,
+            "visited": false,
+          }
+        }
+      >
+        <FormGroup
+          fieldId="someIdKey"
+          isRequired={false}
+          isValid={true}
+        >
+          <div
+            className="pf-c-form__group"
+          >
+            <TextArea
+              aria-label={null}
+              className=""
+              id="someIdKey"
+              isRequired={false}
+              isValid={true}
+              name="Name of the field"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              resizeOrientation="both"
+              validated="default"
+              value=""
+            >
+              <textarea
+                aria-invalid={false}
+                aria-label={null}
+                className="pf-c-form-control"
+                id="someIdKey"
+                name="Name of the field"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                required={false}
+                value=""
+              />
+            </TextArea>
+          </div>
+        </FormGroup>
+      </FormGroup>
+    </Textarea>
   </ReactFinalForm>
 </RenderWithProvider>
 `;
@@ -2925,12 +2925,12 @@ exports[`FormFields should render disabled Switch correctly 2`] = `
 </RenderWithProvider>
 `;
 
-exports[`FormFields should render disabled TextArea correctly 1`] = `
+exports[`FormFields should render disabled Textarea correctly 1`] = `
 <RenderWithProvider>
   <ReactFinalForm
     onSubmit={[Function]}
   >
-    <TextArea
+    <Textarea
       dataType="someDataType"
       id="someIdKey"
       isDisabled={true}
@@ -3002,7 +3002,7 @@ exports[`FormFields should render disabled TextArea correctly 1`] = `
           </div>
         </FormGroup>
       </FormGroup>
-    </TextArea>
+    </Textarea>
   </ReactFinalForm>
 </RenderWithProvider>
 `;

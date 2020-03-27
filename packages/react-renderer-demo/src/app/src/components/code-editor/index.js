@@ -12,7 +12,6 @@ import 'brace/theme/tomorrow_night';
 const CodeEditor = (props) => (
   <AceEditor
     readOnly
-    mode={typeof language === 'string' ? props.language && props.language.toLowerCase() : 'jsx'}
     theme="tomorrow_night"
     name="UNIQUE_ID_OF_DIV"
     editorProps={{ $blockScrolling: true }}

@@ -65,18 +65,6 @@
     "react": "^16.13.0",
     "react-dom": "^16.13.0"
   },
-  "release": {
-    "prepare": [
-      "@semantic-release/npm",
-      {
-        "path": "@semantic-release/git",
-        "assets": [
-          "package.json"
-        ],
-        "message": "Release of new version: ${nextRelease.version} <no> [skip ci]"
-      }
-    ]
-  },
   "dependencies": {
     "@date-io/date-fns": "^1.0.1",
     "@date-io/moment": "^1.0.1",

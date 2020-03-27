@@ -3,7 +3,7 @@ import toJson from 'enzyme-to-json';
 import { FormGroup, Radio as PF4Radio } from '@patternfly/react-core';
 import { mount, shallow } from 'enzyme';
 import TextField from '../files/text-field';
-import TextArea from '../files/text-area';
+import Textarea from '../files/textarea';
 import Radio from '../files/radio';
 import Checkbox from '../files/checkbox';
 import Select from '../files/select';
@@ -106,19 +106,19 @@ describe('FormFields', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should render TextArea correctly', () => {
+  it('should render Textarea correctly', () => {
     const wrapper = mount(
       <RenderWithProvider>
-        <TextArea {...props} />
+        <Textarea {...props} />
       </RenderWithProvider>
     );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should render disabled TextArea correctly', () => {
+  it('should render disabled Textarea correctly', () => {
     const wrapper = mount(
       <RenderWithProvider>
-        <TextArea {...props} isDisabled={true} />
+        <Textarea {...props} isDisabled={true} />
       </RenderWithProvider>
     );
     expect(toJson(wrapper)).toMatchSnapshot();

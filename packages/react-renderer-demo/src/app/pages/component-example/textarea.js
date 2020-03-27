@@ -2,9 +2,9 @@ import React from 'react';
 import ComponentText from '@docs/components/component-example-text';
 import useComponentExample from '../../src/hooks/use-component-example';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
-import Pf4Textarea from '@data-driven-forms/pf4-component-mapper/dist/cjs/text-area';
+import Pf4Textarea from '@data-driven-forms/pf4-component-mapper/dist/cjs/textarea';
 import Pf3Textarea from '@data-driven-forms/pf3-component-mapper/dist/cjs/textarea';
-import MuiTextarea from '@data-driven-forms/mui-component-mapper/dist/cjs/text-area';
+import MuiTextarea from '@data-driven-forms/mui-component-mapper/dist/cjs/textarea';
 
 const mappers = {
   pf4: {

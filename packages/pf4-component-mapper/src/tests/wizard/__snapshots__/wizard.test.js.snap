@@ -373,7 +373,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                         ]
                       }
                       name="wizard"
-                      validate={[Function]}
                     >
                       <Wizard
                         Wizard={[Function]}
@@ -411,7 +410,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                           ]
                         }
                         name="wizard"
-                        validate={[Function]}
                       >
                         <WizardInternal
                           activeStepIndex={0}
@@ -503,7 +501,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                           onKeyDown={[Function]}
                           prevSteps={Array []}
                           setPrevSteps={[Function]}
-                          validate={[Function]}
                         >
                           <Modal>
                             <div
@@ -789,7 +786,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                               >
                                                 <TextField
                                                   name="foo-field"
-                                                  validate={[Function]}
                                                 >
                                                   <FormGroup
                                                     id="foo-field"
@@ -932,7 +928,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                     }
                                     handleNext={[Function]}
                                     handlePrev={[Function]}
-                                    name="1"
                                     nextStep="2"
                                   >
                                     <footer
@@ -1561,7 +1556,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                       }
                       inModal={true}
                       name="wizard"
-                      validate={[Function]}
                     >
                       <Wizard
                         Wizard={[Function]}
@@ -1600,7 +1594,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                         }
                         inModal={true}
                         name="wizard"
-                        validate={[Function]}
                       >
                         <WizardInternal
                           activeStepIndex={0}
@@ -1693,7 +1686,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                           onKeyDown={[Function]}
                           prevSteps={Array []}
                           setPrevSteps={[Function]}
-                          validate={[Function]}
                         >
                           <Modal
                             container={
@@ -2194,7 +2186,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                         >
                                                           <TextField
                                                             name="foo-field"
-                                                            validate={[Function]}
                                                           >
                                                             <FormGroup
                                                               id="foo-field"
@@ -2337,7 +2328,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                               }
                                               handleNext={[Function]}
                                               handlePrev={[Function]}
-                                              name="1"
                                               nextStep="2"
                                             >
                                               <footer

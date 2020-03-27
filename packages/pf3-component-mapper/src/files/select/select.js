@@ -1,16 +1,15 @@
 import React, { Component, createRef, Fragment, useState, useEffect } from 'react';
 import './react-select.scss';
 import PropTypes from 'prop-types';
-
+import { optionsPropType } from '@data-driven-forms/common/src/prop-types-templates';
+import fnToString from '@data-driven-forms/common/src/utils/fn-to-string';
 import DataDrivenSelect from '@data-driven-forms/common/src/select';
 import { DropdownButton } from 'patternfly-react';
 import clsx from 'clsx';
+
 import Option from './option';
 import DropdownIndicator from './dropdown-indicator';
 import ClearIndicator from './clear-indicator';
-import './react-select.scss';
-import { optionsPropType } from '@data-driven-forms/common/src/prop-types-templates';
-import fnToString from '@data-driven-forms/common/src/utils/fn-to-string';
 
 const getDropdownText = (value, placeholder, options) => {
   if (Array.isArray(value)) {

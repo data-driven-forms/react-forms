@@ -147,10 +147,10 @@ describe('Mozilla json schema parser', () => {
           name: 'url',
           validate: [
             {
-              type: 'required-validator'
+              type: 'required'
             },
             {
-              type: 'pattern-validator',
+              type: 'pattern',
               pattern: '^(http|https)://*'
             }
           ]

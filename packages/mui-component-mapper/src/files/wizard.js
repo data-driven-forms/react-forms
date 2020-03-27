@@ -4,8 +4,16 @@ import WizardStep from './wizard/wizard-step';
 import { Grid, Typography } from '@material-ui/core';
 import Wizard, { wizardProps } from '@data-driven-forms/common/src/wizard/wizard';
 
-const WizardInternal = ({ title, description, currentStep, formOptions, prevSteps, handleNext, handlePrev }) => {
-  const step = <WizardStep {...currentStep} formOptions={formOptions} />;
+const WizardInternal = ({ title, description, currentStep, formOptions, prevSteps, handleNext, handlePrev, buttonLabels }) => {
+  const buttonLabelsFinal = {
+    next: 'Continue',
+    submit: 'Submit',
+    cancel: 'Cancel',
+    back: 'Back',
+    ...buttonLabels
+  };
+
+  const step = <WizardStep {...currentStep} formOptions={formOptions} buttonLabels={buttonLabelsFinal} />;
 
   return (
     <Grid container spacing={6}>

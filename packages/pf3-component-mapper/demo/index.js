@@ -65,7 +65,7 @@ const selectSchema = {
     isSearchable: true,
     placeholder: 'Placeholder',
     validate: [{
-      type: 'required-validator'
+      type: 'required'
     }],
     options: [{
       label: 'foo',
@@ -88,7 +88,7 @@ const selectSchema = {
     isSearchable: true,
     placeholder: 'Placeholder',
     validate: [{
-      type: 'required-validator'
+      type: 'required'
     }],
     options: [{
       label: 'foo',

@@ -61,8 +61,7 @@ const WizardStepButtons = ({ disableBack, handlePrev, nextStep, formOptions, han
   <Wizard.Footer>
     {formOptions.onCancel && (
       <Button
-        style={{ marginRight: 20 }}
-        className="margin-left-3"
+        className="ddorg__pf3-component-mapper__wizard__buttons"
         type="button"
         variant="contained"
         color="secondary"
@@ -100,10 +99,6 @@ WizardStepButtons.propTypes = {
   formOptions: PropTypes.shape({
     onCancel: PropTypes.func.isRequired
   }).isRequired
-};
-
-WizardStepButtons.defaultProps = {
-  formOptions: undefined
 };
 
 export default WizardStepButtons;

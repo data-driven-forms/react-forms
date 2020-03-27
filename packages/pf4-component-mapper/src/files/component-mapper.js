@@ -6,7 +6,7 @@ import Select from './select';
 import RawSelect from '../common/select/select';
 import FieldArray from './field-array';
 import TextField from './text-field';
-import TextArea from './text-area';
+import Textarea from './textarea';
 import Checkbox from './checkbox';
 import Radio from './radio';
 import DatePicker from './date-picker';
@@ -17,7 +17,7 @@ import DualListSelect from './dual-list-select';
 
 const mapper = {
   [componentTypes.TEXT_FIELD]: TextField,
-  [componentTypes.TEXTAREA]: TextArea,
+  [componentTypes.TEXTAREA]: Textarea,
   [componentTypes.SELECT]: Select,
   [componentTypes.CHECKBOX]: Checkbox,
   [componentTypes.SUB_FORM]: SubForm,
@@ -36,7 +36,7 @@ export default mapper;
 
 export const components = {
   TextField,
-  TextArea,
+  Textarea,
   Checkbox,
   Radio,
   Select,

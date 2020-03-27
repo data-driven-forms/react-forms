@@ -60,15 +60,11 @@ export const docs = [
     linkText: 'Action mapper'
   },
   {
-    component: 'field-array',
-    linkText: 'FieldArray Provider'
+    component: 'dynamic-fields',
+    linkText: 'Dynamic fields'
   },
   {
     component: 'schema-validator',
     linkText: 'Schema validation'
-  },
-  {
-    component: 'migration-guide',
-    linkText: 'Migration guide 1.x to 2.x'
   }
 ];

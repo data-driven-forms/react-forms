@@ -2,9 +2,9 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-const PlainText = ({ label, name }) =>
+const PlainText = ({ label, name, ...props }) =>
   label.split('\n').map((paragraph, index) => (
-    <Typography key={`${index}-${name}`} gutterBottom variant="body1">
+    <Typography key={`${index}-${name}`} {...props}>
       {paragraph}
     </Typography>
   ));
@@ -12,6 +12,11 @@ const PlainText = ({ label, name }) =>
 PlainText.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired
+};
+
+PlainText.defaultProps = {
+  variant: 'body1',
+  gutterBottom: true
 };
 
 export default PlainText;

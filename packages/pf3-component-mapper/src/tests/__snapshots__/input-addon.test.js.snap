@@ -397,7 +397,6 @@ exports[`<Input Addon> should render group button before input addon correctly 1
                         label="Text Box With Input Addon"
                         name="text_box_21"
                         title="Text Box With Input Addon"
-                        validate={[Function]}
                       >
                         <Pf3FormGroup
                           inputAddon={
@@ -540,7 +539,6 @@ exports[`<Input Addon> should render group button before input addon correctly 1
                                               ]
                                             }
                                             name="i-a-g-2"
-                                            validate={[Function]}
                                           >
                                             <InputGroupButton
                                               bsClass="input-group-btn"
@@ -563,7 +561,6 @@ exports[`<Input Addon> should render group button before input addon correctly 1
                                                         label="Set 1"
                                                         name="set1"
                                                         onClick={[Function]}
-                                                        validate={[Function]}
                                                       >
                                                         <Button
                                                           active={false}
@@ -601,7 +598,6 @@ exports[`<Input Addon> should render group button before input addon correctly 1
                                                       <Button
                                                         label="Set 2"
                                                         name="set2"
-                                                        validate={[Function]}
                                                       >
                                                         <Button
                                                           active={false}
@@ -1121,7 +1117,6 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
                         label="Text Box With Input Addon"
                         name="text_box_21"
                         title="Text Box With Input Addon"
-                        validate={[Function]}
                       >
                         <Pf3FormGroup
                           inputAddon={
@@ -1266,7 +1261,6 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
                                               ]
                                             }
                                             name="i-a-g-2"
-                                            validate={[Function]}
                                           >
                                             <InputGroupAddon
                                               bsClass="input-group-addon"
@@ -1288,7 +1282,6 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
                                                       <PlainText
                                                         label="-"
                                                         name="name1"
-                                                        validate={[Function]}
                                                         variant="span"
                                                       >
                                                         <span
@@ -1335,7 +1328,6 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
                                               ]
                                             }
                                             name="i-a-g-3"
-                                            validate={[Function]}
                                           >
                                             <InputGroupButton
                                               bsClass="input-group-btn"
@@ -1356,7 +1348,6 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
                                                       <Button
                                                         label="Set 3"
                                                         name="set3"
-                                                        validate={[Function]}
                                                       >
                                                         <Button
                                                           active={false}
@@ -1723,7 +1714,6 @@ exports[`<Input Addon> should render single after input addon correctly 1`] = `
                         label="Text Box With Input Addon"
                         name="text_box_21"
                         title="Text Box With Input Addon"
-                        validate={[Function]}
                       >
                         <Pf3FormGroup
                           inputAddon={
@@ -1837,7 +1827,6 @@ exports[`<Input Addon> should render single after input addon correctly 1`] = `
                                           <PlainText
                                             label="-"
                                             name="name1"
-                                            validate={[Function]}
                                             variant="span"
                                           >
                                             <span
@@ -2167,7 +2156,6 @@ exports[`<Input Addon> should render single before input addon correctly 1`] = `
                         label="Text Box With Input Addon"
                         name="text_box_21"
                         title="Text Box With Input Addon"
-                        validate={[Function]}
                       >
                         <Pf3FormGroup
                           inputAddon={
@@ -2261,7 +2249,6 @@ exports[`<Input Addon> should render single before input addon correctly 1`] = `
                                           <PlainText
                                             label="-"
                                             name="name1"
-                                            validate={[Function]}
                                             variant="span"
                                           >
                                             <span
@@ -2602,7 +2589,6 @@ exports[`<Input Addon> should render single button after input addon correctly 1
                         label="Text Box With Input Addon"
                         name="text_box_21"
                         title="Text Box With Input Addon"
-                        validate={[Function]}
                       >
                         <Pf3FormGroup
                           inputAddon={
@@ -2713,7 +2699,6 @@ exports[`<Input Addon> should render single button after input addon correctly 1
                                           <Button
                                             label="Set 3"
                                             name="set3"
-                                            validate={[Function]}
                                           >
                                             <Button
                                               active={false}
@@ -3099,7 +3084,6 @@ exports[`<Input Addon> should render single button before input addon correctly 
                         label="Text Box With Input Addon"
                         name="text_box_21"
                         title="Text Box With Input Addon"
-                        validate={[Function]}
                       >
                         <Pf3FormGroup
                           inputAddon={
@@ -3218,7 +3202,6 @@ exports[`<Input Addon> should render single button before input addon correctly 
                                               ]
                                             }
                                             name="i-a-g-2"
-                                            validate={[Function]}
                                           >
                                             <InputGroupButton
                                               bsClass="input-group-btn"
@@ -3239,7 +3222,6 @@ exports[`<Input Addon> should render single button before input addon correctly 
                                                       <Button
                                                         label="Set 2"
                                                         name="set2"
-                                                        validate={[Function]}
                                                       >
                                                         <Button
                                                           active={false}
@@ -3948,7 +3930,6 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                         label="Text Box With Input Addon"
                         name="text_box_21"
                         title="Text Box With Input Addon"
-                        validate={[Function]}
                       >
                         <Pf3FormGroup
                           inputAddon={
@@ -4145,7 +4126,6 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                                               ]
                                             }
                                             name="i-a-g-2"
-                                            validate={[Function]}
                                           >
                                             <InputGroupButton
                                               bsClass="input-group-btn"
@@ -4168,7 +4148,6 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                                                         label="Set 1"
                                                         name="set1"
                                                         onClick={[Function]}
-                                                        validate={[Function]}
                                                       >
                                                         <Button
                                                           active={false}
@@ -4206,7 +4185,6 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                                                       <Button
                                                         label="Set 2"
                                                         name="set2"
-                                                        validate={[Function]}
                                                       >
                                                         <Button
                                                           active={false}
@@ -4286,7 +4264,6 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                                               ]
                                             }
                                             name="i-a-g-2"
-                                            validate={[Function]}
                                           >
                                             <InputGroupAddon
                                               bsClass="input-group-addon"
@@ -4308,7 +4285,6 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                                                       <PlainText
                                                         label="-"
                                                         name="name1"
-                                                        validate={[Function]}
                                                         variant="span"
                                                       >
                                                         <span
@@ -4355,7 +4331,6 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                                               ]
                                             }
                                             name="i-a-g-3"
-                                            validate={[Function]}
                                           >
                                             <InputGroupButton
                                               bsClass="input-group-btn"
@@ -4376,7 +4351,6 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                                                       <Button
                                                         label="Set 3"
                                                         name="set3"
-                                                        validate={[Function]}
                                                       >
                                                         <Button
                                                           active={false}

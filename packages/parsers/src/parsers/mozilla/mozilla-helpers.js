@@ -21,11 +21,11 @@ export const validatorBuilder = ({ schema, fields = {}, key }) => {
   }
 
   if (fields[key] && fields[key].pattern) {
-    result.push({ type: validatorTypes.PATTERN_VALIDATOR, pattern: fields[key].pattern });
+    result.push({ type: validatorTypes.PATTERN, pattern: fields[key].pattern });
   }
 
   if (schema.minItems) {
-    result.push({ type: validatorTypes.MIN_ITEMS_VALIDATOR, threshold: schema.minItems });
+    result.push({ type: validatorTypes.MIN_ITEMS, threshold: schema.minItems });
   }
 
   return result;

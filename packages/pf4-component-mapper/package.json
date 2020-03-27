@@ -69,19 +69,6 @@
     "webpack-dev-server": "^3.1.10",
     "webpack-merge": "^4.1.4"
   },
-  "release": {
-    "prepare": [
-      "@semantic-release/npm",
-      {
-        "path": "@semantic-release/git",
-        "assets": [
-          "package.json"
-        ],
-        "message": "Release of new version: ${nextRelease.version} <no> [skip ci]",
-        "successComment": ":tada: This ${issue.pull_request ? 'PR is included' : 'issue has been resolved'} in version ${nextRelease.version} :tada:\n\nThe release is available on \n\n- [GitHub release](<github_release_url>)\n\n- [npm package (@latest dist-tag)](<npm_release_url>)\n\nDemo can be found [here](http://data-driven-forms.surge.sh/)!"
-      }
-    ]
-  },
   "peerDependencies": {
     "@data-driven-forms/react-form-renderer": "^1.11.0",
     "@patternfly/react-core": "^3.140.0"

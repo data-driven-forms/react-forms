@@ -18,7 +18,7 @@ const schema = {
       helperText: 'Value must be equal to Foo',
       validate: [
         {
-          type: validatorTypes.PATTERN_VALIDATOR,
+          type: validatorTypes.PATTERN,
           pattern: /^Foo$/i
         }
       ]
@@ -30,7 +30,7 @@ const schema = {
       helperText: 'Value must be equal to Foo',
       validate: [
         {
-          type: validatorTypes.PATTERN_VALIDATOR,
+          type: validatorTypes.PATTERN,
           pattern: '^Foo$',
           flags: 'i'
         }

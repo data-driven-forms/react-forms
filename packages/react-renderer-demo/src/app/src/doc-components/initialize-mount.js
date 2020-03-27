@@ -36,7 +36,7 @@ const schema = {
               label: 'Select your way',
               isRequired: true,
               options: [{ label: 'Please choose your way' }, { value: 'way-1', label: 'way-1' }, { value: 'way-2', label: 'way-2' }],
-              validate: [{ type: 'required-validator' }]
+              validate: [{ type: 'required' }]
             }
           ]
         },

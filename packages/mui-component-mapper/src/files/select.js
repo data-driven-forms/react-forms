@@ -21,7 +21,6 @@ const Select = (props) => {
         invalid={invalid}
         textFieldProps={{
           label,
-          color: invalid ? 'red' : 'blue',
           InputLabelProps: {
             shrink: true
           }
