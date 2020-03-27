@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "main": "index.js",
   "scripts": {},
+  "private": true,
   "repository": "git@github.com:data-driven-forms/react-forms.git",
   "devDependencies": {
     "@babel/core": "^7.2.2",

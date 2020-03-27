@@ -1525,6 +1525,11 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
+"@khala/commit-analyzer-wildcard@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@khala/commit-analyzer-wildcard/-/commit-analyzer-wildcard-2.3.1.tgz#4bba870f52ed2d055d085da01637153807a1db8a"
+  integrity sha512-CbU2kLZN467aZmDFkPHEjrJOHSdYgAVarxs4TzsVVXi6v9yof/xkVhRcesP107sJjgoU1xJe9wXgw6mJRiydXQ==
+
 "@khala/npm-release-monorepo@^2.3.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@khala/npm-release-monorepo/-/npm-release-monorepo-2.3.0.tgz#3608dede657e42d0e6f712b903c190f1c46fa0e5"

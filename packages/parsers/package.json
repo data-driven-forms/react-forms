@@ -4,6 +4,7 @@
   "description": "Parsers for Data Driven Forms.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "private": true,
   "license": "Apache-2.0",
   "scripts": {
     "build": "rollup -c ./rollup.config.js"
