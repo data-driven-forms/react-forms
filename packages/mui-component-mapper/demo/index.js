@@ -4,11 +4,11 @@ import ReactDOM from "react-dom";
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 
 import Grid from '@material-ui/core/Grid';
-import { formFieldsMapper, layoutMapper } from '../src'
+import { componentMapper, FormTemplate } from '../src'
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Typography from '@material-ui/core/Typography';
-import sandbox from './demo-schemas/sandbox';
+import demoSchema from '@data-driven-forms/common/src/demoschema';
 
 const theme = createMuiTheme({
     typography: {
@@ -31,9 +31,9 @@ const App = () => (
             <Grid item xs={12}>
                 <FormRenderer
                     onSubmit={console.log}
-                    formFieldsMapper={formFieldsMapper}
-                    layoutMapper={layoutMapper}
-                    schema={sandbox}
+                    componentMapper={componentMapper}
+                    FormTemplate={props => <FormTemplate {...props} />}
+                    schema={demoSchema}
                     onCancel={() => console.log('canceling')}
                 />
             </Grid>

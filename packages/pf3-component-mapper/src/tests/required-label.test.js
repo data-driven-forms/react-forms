@@ -7,12 +7,12 @@ describe('<RequiredLabel />', () => {
   let initialProps;
   beforeEach(() => {
     initialProps = {
-      label: 'Foo',
+      label: 'Foo'
     };
   });
 
   it('should render correctly', () => {
-    const wrapper = mount(<RequiredLabel { ...initialProps } />);
+    const wrapper = mount(<RequiredLabel {...initialProps} />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });

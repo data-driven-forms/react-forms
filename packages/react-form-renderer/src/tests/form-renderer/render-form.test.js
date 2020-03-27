@@ -1,68 +1,86 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import { Form, FormSpy } from 'react-final-form';
+import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import renderForm from '../../form-renderer/render-form';
-import RendererContext from '../../form-renderer/renderer-context';
-import { components, validators, layoutComponents } from '../../constants';
-import FormRenderer from '../../form-renderer';
-import { componentTypes } from '../..';
+import RendererContext from '../../files/renderer-context';
+import FormRenderer from '../../files/form-renderer';
+import validatorTypes from '../../files/validator-types';
+import componentTypes from '../../files/component-types';
+import FormTemplate from '../../../../../__mocks__/mock-form-template';
+import useFieldApi from '../../files/use-field-api';
+import FieldProvider from '../../files/field-provider';
+
+const TextField = (props) => {
+  const { input, meta } = useFieldApi(props);
+  return (
+    <div>
+      <input {...input} />
+      {meta.error && <div id="error">{meta.error}</div>}
+    </div>
+  );
+};
 
 describe('renderForm function', () => {
-  let layoutMapper;
   let CustomComponent;
 
   const ContextWrapper = ({ children, ...props }) => (
-    <RendererContext.Provider value={{
-      ...props,
-      formOptions: {
-        renderForm,
-        ...props.formOptions,
-      },
-    }}>
-      <Form onSubmit={ jest.fn() } mutators={{ ...arrayMutators }}>
-        { () =>  children }
+    <RendererContext.Provider
+      value={{
+        ...props,
+        formOptions: {
+          renderForm,
+          ...props.formOptions
+        }
+      }}
+    >
+      <Form onSubmit={jest.fn()} mutators={{ ...arrayMutators }}>
+        {() => children}
       </Form>
     </RendererContext.Provider>
   );
 
   beforeEach(() => {
-    layoutMapper = {
-      [layoutComponents.FORM_WRAPPER]: ({ children }) => <div>{ children }</div>,
-      [layoutComponents.BUTTON]: ({ label, buttonType, ...rest }) =>  <button { ...rest }>{ label }</button>,
-      [layoutComponents.BUTTON_GROUP]: ({ children }) => <div>{ children }</div>,
-      [layoutComponents.TITLE]: ({ children }) => <div>{ children }</div>,
-      [layoutComponents.DESCRIPTION]: ({ children }) => <div>{ children }</div>,
-    };
-    CustomComponent = ({ FieldProvider, dataType, formOptions, ...props }) => <div { ...props }>Custom component</div>;
+    const TextField = ({ input }) => <input {...input} id={input.name} />;
+    CustomComponent = ({ dataType, formOptions, ...props }) => <FieldProvider {...props} component={TextField} />;
   });
 
   it('should render single field from defined componentTypes', () => {
-    const formFields = [{
-      component: components.TEXT_FIELD,
-      name: 'foo',
-    }];
+    const formFields = [
+      {
+        component: componentTypes.TEXT_FIELD,
+        name: 'foo'
+      }
+    ];
     const wrapper = mount(
-      <ContextWrapper formFieldsMapper={{
-        [components.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div { ...props }>TextField</div>,
-      }}>
-        { renderForm(formFields) }
+      <ContextWrapper
+        componentMapper={{
+          [componentTypes.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div {...props}>TextField</div>
+        }}
+      >
+        {renderForm(formFields)}
       </ContextWrapper>
     );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render single field (array in array) from defined componentTypes', () => {
-    const formFields = [ [{
-      component: components.TEXT_FIELD,
-      name: 'foo',
-    }] ];
+    const formFields = [
+      [
+        {
+          component: componentTypes.TEXT_FIELD,
+          name: 'foo'
+        }
+      ]
+    ];
     const wrapper = mount(
-      <ContextWrapper formFieldsMapper={{
-        [components.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <h1 { ...props }>TextField</h1>,
-      }}>
-        { renderForm(formFields) }
+      <ContextWrapper
+        componentMapper={{
+          [componentTypes.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <h1 {...props}>TextField</h1>
+        }}
+      >
+        {renderForm(formFields)}
       </ContextWrapper>
     );
 
@@ -70,96 +88,191 @@ describe('renderForm function', () => {
   });
 
   it('should correctly assign dataType validator if no additional validators given', () => {
-    const formFields = [{
-      component: components.TEXT_FIELD,
-      name: 'foo',
-      dataType: 'string',
-    }];
+    const onSubmit = jest.fn();
+    const formFields = [
+      {
+        component: componentTypes.TEXT_FIELD,
+        name: 'foo',
+        dataType: 'string'
+      }
+    ];
     const wrapper = mount(
-      <ContextWrapper formFieldsMapper={{
-        [components.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div { ...props }>TextField</div>,
-      }}>
-        { renderForm(formFields) }
-      </ContextWrapper>
+      <FormRenderer
+        onSubmit={onSubmit}
+        schema={{ fields: formFields }}
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        componentMapper={{
+          [componentTypes.TEXT_FIELD]: TextField
+        }}
+      />
     );
-    const form = wrapper.find(Form);
-    form.instance().form.change('foo', 1);
-    expect(form.instance().state.state.errors.foo).toBe(('Field value has to be string'));
+    expect(wrapper.find('div#error')).toHaveLength(0);
+    wrapper.find('input[name="foo"]').simulate('change', { target: { value: 1 } });
+    expect(wrapper.find('div#error')).toHaveLength(1);
   });
 
   it('should correctly assign required validator with custom message', () => {
-    const formFields = [{
-      component: components.TEXT_FIELD,
-      name: 'foo',
-      dataType: 'string',
-      validate: [{
-        type: validators.REQUIRED,
-        message: 'Bar',
-      }],
-    }];
+    const onSubmit = jest.fn();
+    const formFields = [
+      {
+        component: componentTypes.TEXT_FIELD,
+        name: 'foo',
+        dataType: 'string',
+        validate: [
+          {
+            type: validatorTypes.REQUIRED,
+            message: 'Bar'
+          }
+        ]
+      }
+    ];
     const wrapper = mount(
-      <ContextWrapper formFieldsMapper={{
-        [components.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div { ...props }>TextField</div>,
-      }}>
-        { renderForm(formFields) }
-      </ContextWrapper>
+      <FormRenderer
+        onSubmit={onSubmit}
+        schema={{ fields: formFields }}
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        componentMapper={{
+          [componentTypes.TEXT_FIELD]: TextField
+        }}
+      />
     );
-    const form = wrapper.find(Form);
-    expect(form.instance().state.state.errors.foo).toBe(('Bar'));
+    wrapper.find('form').simulate('submit');
+    expect(onSubmit).not.toHaveBeenCalled();
+    expect(wrapper.find('div#error')).toHaveLength(1);
   });
 
   it('should correctly assign function validator with custom message and fail', () => {
-    const cannotBeOdd = value => value % 2 === 0 ? undefined : 'Odd';
-    const formFields = [{
-      component: components.TEXT_FIELD,
-      name: 'foo',
-      dataType: 'string',
-      validate: [
-        cannotBeOdd,
-      ],
-    }];
+    const cannotBeOdd = (value) => (value % 2 === 0 ? undefined : 'Odd');
+    const onSubmit = jest.fn();
+    const formFields = [
+      {
+        component: componentTypes.TEXT_FIELD,
+        name: 'foo',
+        dataType: 'string',
+        validate: [cannotBeOdd]
+      }
+    ];
     const wrapper = mount(
-      <ContextWrapper formFieldsMapper={{
-        [components.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div { ...props }>TextField</div>,
-      }}>
-        { renderForm(formFields) }
-      </ContextWrapper>
+      <FormRenderer
+        onSubmit={onSubmit}
+        schema={{ fields: formFields }}
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        componentMapper={{
+          [componentTypes.TEXT_FIELD]: TextField
+        }}
+      />
     );
-    const form = wrapper.find(Form);
-    expect(form.instance().state.state.errors.foo).toBe(('Odd'));
+
+    wrapper.find('form').simulate('submit');
+    expect(onSubmit).not.toHaveBeenCalled();
   });
 
   it('should correctly assign function validator with custom message and pass', () => {
-    const cannotBeEven = value => value % 2 === 0 ? 'Even' : undefined;
-    const formFields = [{
-      component: components.TEXT_FIELD,
-      name: 'foo',
-      dataType: 'string',
-      validate: [
-        cannotBeEven,
-      ],
-    }];
+    const cannotBeEven = (value) => (value % 2 === 0 ? 'Even' : undefined);
+    const onSubmit = jest.fn();
+    const formFields = [
+      {
+        component: componentTypes.TEXT_FIELD,
+        name: 'foo',
+        dataType: 'string',
+        validate: [cannotBeEven]
+      }
+    ];
     const wrapper = mount(
-      <ContextWrapper formFieldsMapper={{
-        [components.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div { ...props }>TextField</div>,
-      }}>
-        { renderForm(formFields) }
-      </ContextWrapper>
+      <FormRenderer
+        onSubmit={onSubmit}
+        schema={{ fields: formFields }}
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        componentMapper={{
+          [componentTypes.TEXT_FIELD]: TextField
+        }}
+      />
     );
-    const form = wrapper.find(Form);
-    expect(form.instance().state.state.errors.foo).toBe((undefined));
+
+    wrapper.find('form').simulate('submit');
+    expect(onSubmit).toHaveBeenCalled();
+  });
+
+  it('should use custom validatoMapper and default validatorMapper', () => {
+    const customType = 'custom';
+    const customValidatorMapper = {
+      [customType]: () => (value) => (value > 5 ? undefined : 'Error')
+    };
+
+    const formFields = [
+      {
+        component: 'custom-component',
+        name: 'foo',
+        validate: [
+          {
+            type: validatorTypes.REQUIRED
+          },
+          {
+            type: customType
+          }
+        ]
+      }
+    ];
+
+    const onSubmit = jest.fn();
+
+    const TextField = (props) => {
+      const { input, meta } = useFieldApi(props);
+      return (
+        <div>
+          <input {...input} />
+          {meta.error && <div id="error">{meta.error}</div>}
+        </div>
+      );
+    };
+
+    const wrapper = mount(
+      <FormRenderer
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        componentMapper={{
+          'custom-component': TextField
+        }}
+        validatorMapper={customValidatorMapper}
+        schema={{ fields: formFields }}
+        onSubmit={(values) => onSubmit(values)}
+      />
+    );
+
+    expect(wrapper.find('#error').text()).toEqual('Required');
+
+    wrapper.find('input').instance().value = '3';
+    wrapper.find('input').simulate('change');
+    wrapper.update();
+
+    expect(wrapper.find('#error').text()).toEqual('Error');
+
+    wrapper.find('form').simulate('submit');
+    expect(onSubmit).not.toHaveBeenCalled();
+
+    wrapper.find('input').instance().value = '6';
+    wrapper.find('input').simulate('change');
+    wrapper.update();
+
+    expect(wrapper.find('#error')).toHaveLength(0);
+
+    wrapper.find('form').simulate('submit');
+    expect(onSubmit).toHaveBeenCalledWith({ foo: '6' });
   });
 
   it('should render single field from with custom componentType', () => {
-    const formFields = [{
-      component: 'custom-component',
-      name: 'foo',
-    }];
+    const formFields = [
+      {
+        component: 'custom-component',
+        name: 'foo'
+      }
+    ];
     const wrapper = mount(
-      <ContextWrapper formFieldsMapper={{
-        'custom-component': CustomComponent,
-      }}>
-        { renderForm(formFields) }
+      <ContextWrapper
+        componentMapper={{
+          'custom-component': CustomComponent
+        }}
+      >
+        {renderForm(formFields)}
       </ContextWrapper>
     );
     expect(toJson(wrapper)).toMatchSnapshot();
@@ -167,563 +280,763 @@ describe('renderForm function', () => {
   });
 
   it('should render single field form with custom componentType and assign FieldProvider', () => {
-    const formFields = [{
-      component: 'custom-component',
-      name: 'foo',
-    }];
+    const formFields = [
+      {
+        component: 'custom-component',
+        name: 'foo'
+      }
+    ];
 
     const wrapper = mount(
-      <ContextWrapper formFieldsMapper={{
-        'custom-component': CustomComponent,
-      }}>
-        { renderForm(formFields) }
+      <ContextWrapper
+        componentMapper={{
+          'custom-component': CustomComponent
+        }}
+      >
+        {renderForm(formFields)}
       </ContextWrapper>
     );
     expect(wrapper.find(CustomComponent)).toHaveLength(1);
-    expect(wrapper.find(CustomComponent).props().FieldProvider).toEqual(expect.any(Function));
+    expect(wrapper.find(FieldProvider)).toHaveLength(1);
   });
 
-  describe('#condition', ()=> {
+  describe('#condition', () => {
     it('should render condition field only if the condition is met', () => {
-      const formFields = [{
-        component: 'custom-component',
-        name: 'foo',
-        condition: {
-          when: 'bar',
-          is: 'fuzz',
+      const formFields = [
+        {
+          component: 'custom-component',
+          name: 'bar'
         },
-      }];
+        {
+          component: 'custom-component',
+          name: 'foo',
+          condition: {
+            when: 'bar',
+            is: 'fuzz'
+          }
+        }
+      ];
       const wrapper = mount(
-        <ContextWrapper formFieldsMapper={{
-          'custom-component': CustomComponent,
-        }}>
-          { renderForm(formFields) }
+        <ContextWrapper
+          componentMapper={{
+            'custom-component': CustomComponent
+          }}
+        >
+          {renderForm(formFields)}
         </ContextWrapper>
       );
-      expect(wrapper.find(CustomComponent)).toHaveLength(0);
-
-      wrapper.find(Form).instance().form.change('bar', 'fuzz');
-      wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(1);
+
+      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'fuzz' } });
+      wrapper.update();
+      expect(wrapper.find(CustomComponent)).toHaveLength(2);
     });
 
     it('should render condition field only if the condition is not met', () => {
-      const formFields = [{
-        component: 'custom-component',
-        name: 'foo',
-        condition: {
-          when: 'bar',
-          is: 'fuzz',
-          notMatch: true,
+      const formFields = [
+        {
+          component: 'custom-component',
+          name: 'bar'
         },
-      }];
+        {
+          component: 'custom-component',
+          name: 'foo',
+          condition: {
+            when: 'bar',
+            is: 'fuzz',
+            notMatch: true
+          }
+        }
+      ];
 
       const wrapper = mount(
-        <ContextWrapper formFieldsMapper={{
-          'custom-component': CustomComponent,
-        }}>
-          { renderForm(formFields) }
+        <ContextWrapper
+          componentMapper={{
+            'custom-component': CustomComponent
+          }}
+        >
+          {renderForm(formFields)}
         </ContextWrapper>
       );
-      expect(wrapper.find(CustomComponent)).toHaveLength(1);
+      expect(wrapper.find(CustomComponent)).toHaveLength(2);
 
-      wrapper.find(Form).instance().form.change('bar', 'kar');
+      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'kar' } });
+      wrapper.update();
+      expect(wrapper.find(CustomComponent)).toHaveLength(2);
+
+      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'fuzz' } });
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(1);
-
-      wrapper.find(Form).instance().form.change('bar', 'fuzz');
-      wrapper.update();
-      expect(wrapper.find(CustomComponent)).toHaveLength(0);
     });
 
     it('should render condition field only if the isNotEmpty condition is met', () => {
-      const formFields = [{
-        component: 'custom-component',
-        name: 'foo',
-        condition: {
-          when: 'bar',
-          isNotEmpty: true,
+      const formFields = [
+        {
+          component: 'custom-component',
+          name: 'bar'
         },
-      }];
+        {
+          component: 'custom-component',
+          name: 'foo',
+          condition: {
+            when: 'bar',
+            isNotEmpty: true
+          }
+        }
+      ];
 
       const wrapper = mount(
-        <ContextWrapper formFieldsMapper={{
-          'custom-component': CustomComponent,
-        }}>
-          { renderForm(formFields) }
+        <ContextWrapper
+          componentMapper={{
+            'custom-component': CustomComponent
+          }}
+        >
+          {renderForm(formFields)}
         </ContextWrapper>
       );
-      expect(wrapper.find(CustomComponent)).toHaveLength(0);
-
-      wrapper.find(Form).instance().form.change('bar', 'fuzz');
-      wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(1);
+
+      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'fuzz' } });
+      wrapper.update();
+      expect(wrapper.find(CustomComponent)).toHaveLength(2);
     });
 
     it('should render condition field only if the isEmpty condition is met', () => {
-      const formFields = [{
-        component: 'custom-component',
-        name: 'foo',
-        condition: {
-          when: 'bar',
-          isEmpty: true,
+      const formFields = [
+        {
+          component: 'custom-component',
+          name: 'bar'
         },
-      }];
+        {
+          component: 'custom-component',
+          name: 'foo',
+          condition: {
+            when: 'bar',
+            isEmpty: true
+          }
+        }
+      ];
 
       const wrapper = mount(
-        <ContextWrapper formFieldsMapper={{
-          'custom-component': CustomComponent,
-        }}>
-          { renderForm(formFields) }
+        <ContextWrapper
+          componentMapper={{
+            'custom-component': CustomComponent
+          }}
+        >
+          {renderForm(formFields)}
         </ContextWrapper>
       );
-      expect(wrapper.find(CustomComponent)).toHaveLength(1);
+      expect(wrapper.find(CustomComponent)).toHaveLength(2);
 
-      wrapper.find(Form).instance().form.change('bar', 'sdsad');
-      wrapper.update();
-      expect(wrapper.find(CustomComponent)).toHaveLength(0);
-
-      wrapper.find(Form).instance().form.change('bar', '');
+      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'sdsad' } });
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(1);
+
+      wrapper.find('input[name="bar"]').simulate('change', { target: { value: '' } });
+      wrapper.update();
+      expect(wrapper.find(CustomComponent)).toHaveLength(2);
     });
 
     it('should render condition field only if the pattern condition is met', () => {
-      const formFields = [{
-        component: 'custom-component',
-        name: 'foo',
-        condition: {
-          when: 'bar',
-          pattern: /fuzz/,
+      const formFields = [
+        {
+          component: 'custom-component',
+          name: 'bar'
         },
-      }];
+        {
+          component: 'custom-component',
+          name: 'foo',
+          condition: {
+            when: 'bar',
+            pattern: /fuzz/
+          }
+        }
+      ];
       const wrapper = mount(
-        <ContextWrapper formFieldsMapper={{
-          'custom-component': CustomComponent,
-        }}>
-          { renderForm(formFields) }
+        <ContextWrapper
+          componentMapper={{
+            'custom-component': CustomComponent
+          }}
+        >
+          {renderForm(formFields)}
         </ContextWrapper>
       );
-      expect(wrapper.find(CustomComponent)).toHaveLength(0);
-
-      wrapper.find(Form).instance().form.change('bar', 'fuzz');
-      wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(1);
+
+      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'fuzz' } });
+      wrapper.update();
+      expect(wrapper.find(CustomComponent)).toHaveLength(2);
     });
 
     it('should render condition field only if the pattern condition is met (string)', () => {
-      const formFields = [{
-        component: 'custom-component',
-        name: 'foo',
-        condition: {
-          when: 'bar',
-          pattern: 'fuzz',
+      const formFields = [
+        {
+          component: 'custom-component',
+          name: 'bar'
         },
-      }];
+        {
+          component: 'custom-component',
+          name: 'foo',
+          condition: {
+            when: 'bar',
+            pattern: 'fuzz'
+          }
+        }
+      ];
       const wrapper = mount(
-        <ContextWrapper formFieldsMapper={{
-          'custom-component': CustomComponent,
-        }}>
-          { renderForm(formFields) }
+        <ContextWrapper
+          componentMapper={{
+            'custom-component': CustomComponent
+          }}
+        >
+          {renderForm(formFields)}
         </ContextWrapper>
       );
-      expect(wrapper.find(CustomComponent)).toHaveLength(0);
-
-      wrapper.find(Form).instance().form.change('bar', 'fuzz');
-      wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(1);
+
+      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'fuzz' } });
+      wrapper.update();
+      expect(wrapper.find(CustomComponent)).toHaveLength(2);
     });
 
     it('should render condition field only if the pattern condition is met (string with flags)', () => {
-      const formFields = [{
-        component: 'custom-component',
-        name: 'foo',
-        condition: {
-          when: 'bar',
-          pattern: 'fuzz',
-          flags: 'i',
+      const formFields = [
+        {
+          component: 'custom-component',
+          name: 'bar'
         },
-      }];
+        {
+          component: 'custom-component',
+          name: 'foo',
+          condition: {
+            when: 'bar',
+            pattern: 'fuzz',
+            flags: 'i'
+          }
+        }
+      ];
       const wrapper = mount(
-        <ContextWrapper formFieldsMapper={{
-          'custom-component': CustomComponent,
-        }}>
-          { renderForm(formFields) }
+        <ContextWrapper
+          componentMapper={{
+            'custom-component': CustomComponent
+          }}
+        >
+          {renderForm(formFields)}
         </ContextWrapper>
       );
-      expect(wrapper.find(CustomComponent)).toHaveLength(0);
-
-      wrapper.find(Form).instance().form.change('bar', 'fUzz');
-      wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(1);
+
+      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'fUzz' } });
+      wrapper.update();
+      expect(wrapper.find(CustomComponent)).toHaveLength(2);
     });
     it('should render condition field only if the pattern condition is not met', () => {
-      const formFields = [{
-        component: 'custom-component',
-        name: 'foo',
-        condition: {
-          when: 'bar',
-          pattern: /fuzz/,
-          notMatch: true,
+      const formFields = [
+        {
+          component: 'custom-component',
+          name: 'bar'
         },
-      }];
+        {
+          component: 'custom-component',
+          name: 'foo',
+          condition: {
+            when: 'bar',
+            pattern: /fuzz/,
+            notMatch: true
+          }
+        }
+      ];
       const wrapper = mount(
-        <ContextWrapper formFieldsMapper={{
-          'custom-component': CustomComponent,
-        }}>
-          { renderForm(formFields) }
+        <ContextWrapper
+          componentMapper={{
+            'custom-component': CustomComponent
+          }}
+        >
+          {renderForm(formFields)}
         </ContextWrapper>
       );
-      expect(wrapper.find(CustomComponent)).toHaveLength(1);
+      expect(wrapper.find(CustomComponent)).toHaveLength(2);
 
-      wrapper.find(Form).instance().form.change('bar', 'foo fuuzz foo');
+      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'foo fuuzz foo' } });
+      wrapper.update();
+      expect(wrapper.find(CustomComponent)).toHaveLength(2);
+
+      wrapper.find('input[name="bar"]').simulate('change', { target: { value: 'fuzz' } });
       wrapper.update();
       expect(wrapper.find(CustomComponent)).toHaveLength(1);
-
-      wrapper.find(Form).instance().form.change('bar', 'fuzz');
-      wrapper.update();
-      expect(wrapper.find(CustomComponent)).toHaveLength(0);
     });
 
     it('should render condition field only if one of depency fields has correct value', () => {
-      const formFields = [{
-        component: 'custom-component',
-        name: 'foo',
-        condition: {
-          when: [ 'a', 'b' ],
-          is: 'x',
+      const formFields = [
+        {
+          component: 'custom-component',
+          name: 'a'
         },
-      }];
+        {
+          component: 'custom-component',
+          name: 'b'
+        },
+        {
+          component: 'custom-component',
+          name: 'foo',
+          condition: {
+            when: ['a', 'b'],
+            is: 'x'
+          }
+        }
+      ];
       const wrapper = mount(
-        <ContextWrapper formFieldsMapper={{
-          'custom-component': CustomComponent,
-        }}>
-          { renderForm(formFields) }
+        <ContextWrapper
+          componentMapper={{
+            'custom-component': CustomComponent
+          }}
+        >
+          {renderForm(formFields)}
         </ContextWrapper>
       );
       expect(toJson(wrapper)).toMatchSnapshot();
 
-      wrapper.find(Form).instance().form.change('a', 'x');
+      wrapper.find('input[name="a"]').simulate('change', { target: { value: 'x' } });
       wrapper.update();
-      expect(wrapper.find(CustomComponent)).toHaveLength(1);
-      wrapper.find(Form).instance().form.change('a', undefined);
+      expect(wrapper.find(CustomComponent)).toHaveLength(3);
+      wrapper.find('input[name="a"]').simulate('change', { target: { value: undefined } });
       wrapper.update();
-      expect(wrapper.find(CustomComponent)).toHaveLength(0);
-      wrapper.find(Form).instance().form.change('b', 'x');
+      expect(wrapper.find(CustomComponent)).toHaveLength(2);
+      wrapper.find('input[name="b"]').simulate('change', { target: { value: 'x' } });
       wrapper.update();
-      expect(wrapper.find(CustomComponent)).toHaveLength(1);
+      expect(wrapper.find(CustomComponent)).toHaveLength(3);
     });
 
     it('should render condition field only if contition is array and passes all validations', () => {
-      const formFields = [{
-        component: 'custom-component',
-        name: 'foo',
-        condition: [{
-          when: [ 'a', 'b' ],
-          is: 'x',
-        }, {
-          when: 'c',
-          pattern: /fuzz/,
-        }],
-      }];
+      const formFields = [
+        {
+          component: 'custom-component',
+          name: 'a'
+        },
+        {
+          component: 'custom-component',
+          name: 'c'
+        },
+        {
+          component: 'custom-component',
+          name: 'foo',
+          condition: [
+            {
+              when: ['a', 'b'],
+              is: 'x'
+            },
+            {
+              when: 'c',
+              pattern: /fuzz/
+            }
+          ]
+        }
+      ];
       const wrapper = mount(
-        <ContextWrapper formFieldsMapper={{
-          'custom-component': CustomComponent,
-        }}>
-          { renderForm(formFields) }
+        <ContextWrapper
+          componentMapper={{
+            'custom-component': CustomComponent
+          }}
+        >
+          {renderForm(formFields)}
         </ContextWrapper>
       );
       expect(toJson(wrapper)).toMatchSnapshot();
 
-      wrapper.find(Form).instance().form.change('a', 'x');
+      wrapper.find('input[name="a"]').simulate('change', { target: { value: 'x' } });
       wrapper.update();
-      expect(wrapper.find(CustomComponent)).toHaveLength(0);
-      wrapper.find(Form).instance().form.change('a', undefined);
+      expect(wrapper.find(CustomComponent)).toHaveLength(2);
+      wrapper.find('input[name="a"]').simulate('change', { target: { value: undefined } });
       wrapper.update();
-      expect(wrapper.find(CustomComponent)).toHaveLength(0);
-      wrapper.find(Form).instance().form.change('c', 'something fuzz is great');
+      expect(wrapper.find(CustomComponent)).toHaveLength(2);
+      wrapper.find('input[name="c"]').simulate('change', { target: { value: 'something fuzz is great' } });
       wrapper.update();
-      expect(wrapper.find(CustomComponent)).toHaveLength(0);
-      wrapper.find(Form).instance().form.change('a', 'x');
+      expect(wrapper.find(CustomComponent)).toHaveLength(2);
+      wrapper.find('input[name="a"]').simulate('change', { target: { value: 'x' } });
       wrapper.update();
-      expect(wrapper.find(CustomComponent)).toHaveLength(1);
+      expect(wrapper.find(CustomComponent)).toHaveLength(3);
     });
 
     it('should render condition field only if the condition with nested name is met', () => {
-      const formFields = [{
-        component: 'custom-component',
-        name: 'foo.bar',
-        condition: {
-          when: 'foo.bar',
-          is: 'fuzz',
+      const formFields = [
+        {
+          component: 'custom-component',
+          name: 'foo'
         },
-      }];
+        {
+          component: 'custom-component',
+          name: 'foo.bar',
+          condition: {
+            when: 'foo',
+            is: 'fuzz'
+          }
+        }
+      ];
 
       const wrapper = mount(
-        <ContextWrapper formFieldsMapper={{
-          'custom-component': CustomComponent,
-        }}>
-          { renderForm(formFields) }
+        <ContextWrapper
+          componentMapper={{
+            'custom-component': CustomComponent
+          }}
+        >
+          {renderForm(formFields)}
         </ContextWrapper>
       );
 
-      expect(wrapper.find(CustomComponent)).toHaveLength(0);
+      expect(wrapper.find(CustomComponent)).toHaveLength(1);
 
-      wrapper.find(Form).instance().form.change('foo.bar', 'fuzz');
+      wrapper.find('input[name="foo"]').simulate('change', { target: { value: 'fuzz' } });
       wrapper.update();
 
-      expect(wrapper.find(CustomComponent)).toHaveLength(1);
+      expect(wrapper.find(CustomComponent)).toHaveLength(2);
     });
 
     it('should render condition field only if one of depency fields has correct value - nested name', () => {
-      const formFields = [{
-        component: 'custom-component',
-        name: 'foo',
-        condition: {
-          when: [ 'nested.a', 'b' ],
-          is: 'x',
+      const formFields = [
+        {
+          component: 'custom-component',
+          name: 'nested.a'
         },
-      }];
+        {
+          component: 'custom-component',
+          name: 'b'
+        },
+        {
+          component: 'custom-component',
+          name: 'foo',
+          condition: {
+            when: ['nested.a', 'b'],
+            is: 'x'
+          }
+        }
+      ];
       const wrapper = mount(
-        <ContextWrapper formFieldsMapper={{
-          'custom-component': CustomComponent,
-        }}>
-          { renderForm(formFields) }
-        </ContextWrapper>
+        <FormRenderer
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          schema={{ fields: formFields }}
+          onSubmit={jest.fn()}
+          componentMapper={{
+            'custom-component': CustomComponent
+          }}
+        />
       );
 
-      wrapper.find(Form).instance().form.change('nested.a', 'x');
+      expect(wrapper.find(CustomComponent)).toHaveLength(2);
+      wrapper.find('input[name="nested.a"]').simulate('change', { target: { value: 'x' } });
       wrapper.update();
-      expect(wrapper.find(CustomComponent)).toHaveLength(1);
-      wrapper.find(Form).instance().form.change('nested.a', undefined);
+      wrapper.find('input[name="nested.a"]').simulate('change', { target: { value: undefined } });
       wrapper.update();
-      expect(wrapper.find(CustomComponent)).toHaveLength(0);
-      wrapper.find(Form).instance().form.change('b', 'x');
+      expect(wrapper.find(CustomComponent)).toHaveLength(2);
+      wrapper.find('input#b').simulate('change', { target: { value: 'x' } });
       wrapper.update();
-      expect(wrapper.find(CustomComponent)).toHaveLength(1);
+      expect(wrapper.find(CustomComponent)).toHaveLength(3);
     });
   });
 
   describe('#clearOnUmount', () => {
     const formFields = (clearOnUnmount = undefined, component = 'custom-component') => ({
-      fields: [{
-        component,
-        name: 'foo',
-      }, {
-        component,
-        name: 'unmnounted',
-        label: 'Label 1',
-        clearOnUnmount,
-        condition: {
-          when: 'foo',
-          is: 'bar',
+      fields: [
+        {
+          component,
+          name: 'foo'
         },
-      }, {
-        component,
-        name: 'unmnounted',
-        label: 'Label 2',
-        clearOnUnmount,
-        condition: {
-          when: 'foo',
-          is: 'barrr',
+        {
+          component,
+          name: 'unmnounted',
+          label: 'Label 1',
+          clearOnUnmount,
+          condition: {
+            when: 'foo',
+            is: 'bar'
+          }
         },
-      }],
+        {
+          component,
+          name: 'unmnounted',
+          label: 'Label 2',
+          clearOnUnmount,
+          condition: {
+            when: 'foo',
+            is: 'barrr'
+          }
+        }
+      ]
     });
 
-    const TextField = ({ input, meta, label, formOptions, helperText, isRequired, dataType, isDisabled, isReadOnly, ...rest }) => (
-      <div>
-        <label>{ label }</label>
-        <input { ...input } { ...rest } />
-        { meta.error && <div><span>{ meta.error }</span></div> }
-      </div>
-    );
+    const TextField = (props) => {
+      const { input, meta, label, formOptions, helperText, isRequired, dataType, isDisabled, isReadOnly, ...rest } = useFieldApi(props);
+      return (
+        <div>
+          <label>{label}</label>
+          <input {...input} {...rest} />
+          {meta.error && (
+            <div>
+              <span>{meta.error}</span>
+            </div>
+          )}
+        </div>
+      );
+    };
 
     it('should clear values after unmount when set on fields', () => {
+      const onSubmit = jest.fn();
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
-          formFieldsMapper={{
-            'custom-component': ({ FieldProvider, ...props }) => <FieldProvider
-              { ...props }
-              component={ TextField }
-            />,
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          componentMapper={{
+            'custom-component': TextField
           }}
-          schema={ formFields(true) }
-          onSubmit={ jest.fn() }
+          schema={formFields(true)}
+          onSubmit={(values) => onSubmit(values)}
         />
       );
 
-      wrapper.find('input').first().simulate('change', { target: { value: 'bar' }});
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'bar' } });
       wrapper.update();
-      wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
+      wrapper.find('input[name="unmnounted"]').simulate('change', { target: { value: 'foovalue' } });
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toEqual('foovalue');
-      wrapper.find('input').first().simulate('change', { target: { value: 'barrr' }});
+
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith({ unmnounted: 'foovalue', foo: 'bar' });
+      onSubmit.mockReset();
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'barrr' } });
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toBe(undefined);
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith({ unmnounted: undefined, foo: 'barrr' });
+      onSubmit.mockReset();
     });
 
     it('should clear values after unmount when set on form', () => {
+      const onSubmit = jest.fn();
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
-          formFieldsMapper={{
-            'custom-component': ({ FieldProvider, ...props }) => <FieldProvider
-              { ...props }
-              component={ TextField }
-            />,
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          componentMapper={{
+            'custom-component': TextField
           }}
-          schema={ formFields() }
-          onSubmit={ jest.fn() }
+          schema={formFields()}
+          onSubmit={(values) => onSubmit(values)}
           clearOnUnmount
         />
       );
 
-      wrapper.find('input').first().simulate('change', { target: { value: 'bar' }});
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'bar' } });
       wrapper.update();
-      wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
+      wrapper
+        .find('input')
+        .last()
+        .simulate('change', { target: { value: 'foovalue' } });
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toEqual('foovalue');
-      wrapper.find('input').first().simulate('change', { target: { value: 'barrr' }});
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith({ unmnounted: 'foovalue', foo: 'bar' });
+      onSubmit.mockReset();
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'barrr' } });
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toBe(undefined);
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith({ unmnounted: undefined, foo: 'barrr' });
+      onSubmit.mockReset();
     });
 
     it('should not clear values after unmount when not set', () => {
+      const onSubmit = jest.fn();
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
-          formFieldsMapper={{
-            'custom-component': ({ FieldProvider, ...props }) => <FieldProvider
-              { ...props }
-              component={ TextField }
-            />,
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          componentMapper={{
+            'custom-component': TextField
           }}
-          schema={ formFields() }
-          onSubmit={ jest.fn() }
+          schema={formFields()}
+          onSubmit={(values) => onSubmit(values)}
         />
       );
 
-      wrapper.find('input').first().simulate('change', { target: { value: 'bar' }});
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'bar' } });
       wrapper.update();
-      wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
+      wrapper
+        .find('input')
+        .last()
+        .simulate('change', { target: { value: 'foovalue' } });
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toEqual('foovalue');
-      wrapper.find('input').first().simulate('change', { target: { value: 'barrr' }});
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith({ unmnounted: 'foovalue', foo: 'bar' });
+      onSubmit.mockReset();
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'barrr' } });
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toEqual('foovalue');
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith({ unmnounted: 'foovalue', foo: 'barrr' });
+      onSubmit.mockReset();
     });
 
     it('should not clear values after unmount when set in form and not in fields', () => {
+      const onSubmit = jest.fn();
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
-          formFieldsMapper={{
-            'custom-component': ({ FieldProvider, ...props }) => <FieldProvider
-              { ...props }
-              component={ TextField }
-            />,
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          componentMapper={{
+            'custom-component': TextField
           }}
-          schema={ formFields(false) }
-          onSubmit={ jest.fn() }
+          schema={formFields(false)}
+          onSubmit={(values) => onSubmit(values)}
           clearOnUnmount
         />
       );
 
-      wrapper.find('input').first().simulate('change', { target: { value: 'bar' }});
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'bar' } });
       wrapper.update();
-      wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
+      wrapper
+        .find('input')
+        .last()
+        .simulate('change', { target: { value: 'foovalue' } });
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toEqual('foovalue');
-      wrapper.find('input').first().simulate('change', { target: { value: 'barrr' }});
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith({ unmnounted: 'foovalue', foo: 'bar' });
+      onSubmit.mockReset();
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'barrr' } });
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toEqual('foovalue');
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith({ unmnounted: 'foovalue', foo: 'barrr' });
+      onSubmit.mockReset();
     });
 
     it('should not clear values after unmount (default component)', () => {
+      const onSubmit = jest.fn();
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
-          formFieldsMapper={{
-            [components.TEXT_FIELD]: TextField,
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          componentMapper={{
+            [componentTypes.TEXT_FIELD]: TextField
           }}
-          schema={ formFields(undefined, components.TEXT_FIELD) }
-          onSubmit={ jest.fn() }
+          schema={formFields(undefined, componentTypes.TEXT_FIELD)}
+          onSubmit={(values) => onSubmit(values)}
         />
       );
 
-      wrapper.find('input').first().simulate('change', { target: { value: 'bar' }});
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'bar' } });
       wrapper.update();
-      wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
+      wrapper
+        .find('input')
+        .last()
+        .simulate('change', { target: { value: 'foovalue' } });
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toEqual('foovalue');
-      wrapper.find('input').first().simulate('change', { target: { value: 'barrr' }});
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith({ unmnounted: 'foovalue', foo: 'bar' });
+      onSubmit.mockReset();
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'barrr' } });
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toEqual('foovalue');
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith({ unmnounted: 'foovalue', foo: 'barrr' });
     });
 
     it('should clear values after unmount (default component)', () => {
+      const onSubmit = jest.fn();
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
-          formFieldsMapper={{
-            [components.TEXT_FIELD]: TextField,
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          componentMapper={{
+            [componentTypes.TEXT_FIELD]: TextField
           }}
-          schema={ formFields(undefined, components.TEXT_FIELD) }
-          onSubmit={ jest.fn() }
+          schema={formFields(undefined, componentTypes.TEXT_FIELD)}
+          onSubmit={(values) => onSubmit(values)}
           clearOnUnmount
         />
       );
 
-      wrapper.find('input').first().simulate('change', { target: { value: 'bar' }});
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'bar' } });
       wrapper.update();
-      wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
+      wrapper
+        .find('input')
+        .last()
+        .simulate('change', { target: { value: 'foovalue' } });
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toEqual('foovalue');
-      wrapper.find('input').first().simulate('change', { target: { value: 'barrr' }});
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith({ unmnounted: 'foovalue', foo: 'bar' });
+      onSubmit.mockReset();
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'barrr' } });
       wrapper.update();
-      expect(wrapper.find(Form).instance().form.getState().values.unmnounted).toEqual(undefined);
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith({ unmnounted: undefined, foo: 'barrr' });
     });
 
     it('should clear values after unmount and set to field cleared value', () => {
-      layoutMapper = {
-        ...layoutMapper,
-        [layoutComponents.FORM_WRAPPER]: ({ children, ...props }) => <form { ...props }>{ children }</form>,
-      };
-
       const schema = {
-        fields: [{
-          component: components.TEXT_FIELD,
-          name: 'foo',
-        }, {
-          component: components.TEXT_FIELD,
-          name: 'unmnounted',
-          label: 'Label 1',
-          clearedValue: 'bla',
-          clearOnUnmount: true,
-          condition: {
-            when: 'foo',
-            is: 'show',
+        fields: [
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'foo'
           },
-        }]};
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'unmnounted',
+            label: 'Label 1',
+            clearedValue: 'bla',
+            clearOnUnmount: true,
+            condition: {
+              when: 'foo',
+              is: 'show'
+            }
+          }
+        ]
+      };
 
       const onSubmit = jest.fn();
 
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
-          formFieldsMapper={{
-            [components.TEXT_FIELD]: TextField,
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          componentMapper={{
+            [componentTypes.TEXT_FIELD]: TextField
           }}
-          schema={ schema }
-          onSubmit={ (values) => onSubmit(values) }
+          schema={schema}
+          onSubmit={(values) => onSubmit(values)}
           clearedValue="BlaBlaBla"
         />
       );
 
-      wrapper.find('input').first().simulate('change', { target: { value: 'show' }});
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'show' } });
       wrapper.update();
-      wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
+      wrapper
+        .find('input')
+        .last()
+        .simulate('change', { target: { value: 'foovalue' } });
       wrapper.update();
 
       wrapper.find('form').simulate('submit');
@@ -731,7 +1044,10 @@ describe('renderForm function', () => {
       expect(onSubmit).toHaveBeenCalledWith({ foo: 'show', unmnounted: 'foovalue' });
       onSubmit.mockClear();
 
-      wrapper.find('input').first().simulate('change', { target: { value: 'barrr' }});
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'barrr' } });
       wrapper.update();
 
       wrapper.find('form').simulate('submit');
@@ -740,43 +1056,48 @@ describe('renderForm function', () => {
     });
 
     it('should clear values after unmount and set to form cleared value', () => {
-      layoutMapper = {
-        ...layoutMapper,
-        [layoutComponents.FORM_WRAPPER]: ({ children, ...props }) => <form { ...props }>{ children }</form>,
-      };
-
       const schema = {
-        fields: [{
-          component: components.TEXT_FIELD,
-          name: 'foo',
-        }, {
-          component: components.TEXT_FIELD,
-          name: 'unmnounted',
-          label: 'Label 1',
-          clearOnUnmount: true,
-          condition: {
-            when: 'foo',
-            is: 'show',
+        fields: [
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'foo'
           },
-        }]};
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'unmnounted',
+            label: 'Label 1',
+            clearOnUnmount: true,
+            condition: {
+              when: 'foo',
+              is: 'show'
+            }
+          }
+        ]
+      };
 
       const onSubmit = jest.fn();
 
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
-          formFieldsMapper={{
-            [components.TEXT_FIELD]: TextField,
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          componentMapper={{
+            [componentTypes.TEXT_FIELD]: TextField
           }}
-          schema={ schema }
-          onSubmit={ (values) => onSubmit(values) }
+          schema={schema}
+          onSubmit={(values) => onSubmit(values)}
           clearedValue="BlaBlaBla"
         />
       );
 
-      wrapper.find('input').first().simulate('change', { target: { value: 'show' }});
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'show' } });
       wrapper.update();
-      wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
+      wrapper
+        .find('input')
+        .last()
+        .simulate('change', { target: { value: 'foovalue' } });
       wrapper.update();
 
       wrapper.find('form').simulate('submit');
@@ -784,45 +1105,15 @@ describe('renderForm function', () => {
       expect(onSubmit).toHaveBeenCalledWith({ foo: 'show', unmnounted: 'foovalue' });
       onSubmit.mockClear();
 
-      wrapper.find('input').first().simulate('change', { target: { value: 'barrr' }});
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'barrr' } });
       wrapper.update();
 
       wrapper.find('form').simulate('submit');
 
       expect(onSubmit).toHaveBeenCalledWith({ foo: 'barrr', unmnounted: 'BlaBlaBla' });
-    });
-  });
-
-  describe('#formSpy', () => {
-    const TextField = ({ input, meta, label, formOptions, helperText, isRequired, dataType, isDisabled, isReadOnly, ...rest }) => (
-      <div>
-        <label>{ label }</label>
-        <input { ...input } { ...rest } />
-        { meta.error && <div><span>{ meta.error }</span></div> }
-      </div>
-    );
-
-    it('should add formSpy and call update function on each state change', () => {
-      const onStateUpdate = jest.fn();
-      const wrapper = mount(
-        <FormRenderer
-          onStateUpdate={ onStateUpdate }
-          layoutMapper={ layoutMapper }
-          formFieldsMapper={{
-            [components.TEXT_FIELD]: TextField,
-          }}
-          schema={{ fields: [{ component: components.TEXT_FIELD, name: 'foo', label: 'bar' }]}}
-          onSubmit={ jest.fn() }
-          clearOnUnmount
-        />
-      );
-      /**
-       * there is one FormSpy for form controls
-       */
-      expect(wrapper.find(FormSpy)).toHaveLength(2);
-      wrapper.find('input').first().simulate('change', { target: { value: 'bar' }});
-      wrapper.find('input').last().simulate('change', { target: { value: 'foovalue' }});
-      expect(onStateUpdate).toHaveBeenCalledTimes(4);
     });
   });
 
@@ -839,207 +1130,230 @@ describe('renderForm function', () => {
     const SCHEMA_INITIAL_VALUE = 'schema initial value';
 
     const formFields = (initializeOnMount = false, initialValue) => ({
-      fields: [{
-        component: componentTypes.TEXT_FIELD,
-        name: SHOWER_FIELD,
-      }, {
-        component: componentTypes.TEXT_FIELD,
-        name: INITIALIZED_FIELD,
-        initializeOnMount,
-        ...(initialValue ? { initialValue } : {}),
-        condition: {
-          when: SHOWER_FIELD,
-          is: SHOW_VALUE,
+      fields: [
+        {
+          component: componentTypes.TEXT_FIELD,
+          name: SHOWER_FIELD
         },
-      }],
+        {
+          component: componentTypes.TEXT_FIELD,
+          name: INITIALIZED_FIELD,
+          initializeOnMount,
+          ...(initialValue ? { initialValue } : {}),
+          condition: {
+            when: SHOWER_FIELD,
+            is: SHOW_VALUE
+          }
+        }
+      ]
     });
 
-    const TextField = ({ input, meta, formOptions, ...rest }) => (
-      <div>
-        <input { ...input } { ...rest } />
-      </div>
-    );
-
     const updateInput = (wrapper, position, value) => {
-      wrapper.find('input').at(position).simulate('change', { target: { value }});
+      wrapper
+        .find('input')
+        .at(position)
+        .simulate('change', { target: { value } });
       wrapper.update();
     };
-
-    const getFormValue = (wrapper, name) =>
-      wrapper.find(Form).instance().form.getState().values[name];
 
     const mountInitializedField = (wrapper) => updateInput(wrapper, SHOWER_FIELD_INDEX, SHOW_VALUE);
     const unmountInitializedField = (wrapper) => updateInput(wrapper, SHOWER_FIELD_INDEX, NOT_SHOW_VALUE);
     const setInitializedToNewValue = (wrapper) => updateInput(wrapper, INITIALIZED_FIELD_INDEX, NEW_VALUE);
-    const expectNewValue = (wrapper) => expect(getFormValue(wrapper, INITIALIZED_FIELD)).toEqual(NEW_VALUE);
-    const expectInitialValue = (wrapper) => expect(getFormValue(wrapper, INITIALIZED_FIELD)).toEqual(INITIAL_VALUE);
-    const expectSchemaInitialValue = (wrapper) => expect(getFormValue(wrapper, INITIALIZED_FIELD)).toEqual(SCHEMA_INITIAL_VALUE);
 
     it('should reset value after mount when set on fields', () => {
       const SET_INITIALIZE_ON_MOUNT = true;
+      const onSubmit = jest.fn();
 
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
-          formFieldsMapper={{
-            [components.TEXT_FIELD]: TextField,
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          componentMapper={{
+            [componentTypes.TEXT_FIELD]: TextField
           }}
-          schema={ formFields(SET_INITIALIZE_ON_MOUNT) }
-          onSubmit={ jest.fn() }
+          schema={formFields(SET_INITIALIZE_ON_MOUNT)}
+          onSubmit={(values) => onSubmit(values)}
           initialValues={{
-            [INITIALIZED_FIELD]: INITIAL_VALUE,
+            [INITIALIZED_FIELD]: INITIAL_VALUE
           }}
         />
       );
 
-      expectInitialValue(wrapper);
+      const form = wrapper.find('form');
+      form.simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: INITIAL_VALUE }));
 
       mountInitializedField(wrapper);
       setInitializedToNewValue(wrapper);
+      onSubmit.mockReset();
 
-      expectNewValue(wrapper);
+      form.simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: INITIAL_VALUE, [SHOWER_FIELD]: SHOW_VALUE }));
+      onSubmit.mockReset();
 
+      form.simulate('submit');
       unmountInitializedField(wrapper);
-      expectNewValue(wrapper);
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: INITIAL_VALUE, [SHOWER_FIELD]: SHOW_VALUE }));
+      onSubmit.mockReset();
 
+      form.simulate('submit');
       mountInitializedField(wrapper);
-      expectInitialValue(wrapper);
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: INITIAL_VALUE, [SHOWER_FIELD]: NOT_SHOW_VALUE }));
     });
 
     it('should not reset value after mount when set on fields', () => {
       const UNSET_INITIALIZE_ON_MOUNT = false;
+      const onSubmit = jest.fn();
 
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
-          formFieldsMapper={{
-            [components.TEXT_FIELD]: TextField,
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          componentMapper={{
+            [componentTypes.TEXT_FIELD]: TextField
           }}
-          schema={ formFields(UNSET_INITIALIZE_ON_MOUNT) }
-          onSubmit={ jest.fn() }
+          schema={formFields(UNSET_INITIALIZE_ON_MOUNT)}
+          onSubmit={(values) => onSubmit(values)}
           initialValues={{
-            [INITIALIZED_FIELD]: INITIAL_VALUE,
+            [INITIALIZED_FIELD]: INITIAL_VALUE
           }}
         />
       );
 
-      expectInitialValue(wrapper);
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: INITIAL_VALUE }));
+      onSubmit.mockReset();
 
       mountInitializedField(wrapper);
       setInitializedToNewValue(wrapper);
 
-      expectNewValue(wrapper);
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: SHOW_VALUE, [INITIALIZED_FIELD]: NEW_VALUE }));
+      onSubmit.mockReset();
 
       unmountInitializedField(wrapper);
-      expectNewValue(wrapper);
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: NOT_SHOW_VALUE, [INITIALIZED_FIELD]: NEW_VALUE }));
+      onSubmit.mockReset();
 
       mountInitializedField(wrapper);
-      expectNewValue(wrapper);
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: SHOW_VALUE, [INITIALIZED_FIELD]: NEW_VALUE }));
+      onSubmit.mockReset();
     });
 
     it('should reset value after mount when set on fields and use initialValue from schema instead of renderer initialValues', () => {
       const SET_INITIALIZE_ON_MOUNT = true;
+      const onSubmit = jest.fn();
 
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
-          formFieldsMapper={{
-            [components.TEXT_FIELD]: TextField,
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          componentMapper={{
+            [componentTypes.TEXT_FIELD]: TextField
           }}
-          schema={ formFields(SET_INITIALIZE_ON_MOUNT, SCHEMA_INITIAL_VALUE) }
-          onSubmit={ jest.fn() }
+          schema={formFields(SET_INITIALIZE_ON_MOUNT, SCHEMA_INITIAL_VALUE)}
+          onSubmit={(values) => onSubmit(values)}
           initialValues={{
-            [INITIALIZED_FIELD]: INITIAL_VALUE,
+            [INITIALIZED_FIELD]: INITIAL_VALUE
           }}
         />
       );
 
       mountInitializedField(wrapper);
       setInitializedToNewValue(wrapper);
-
-      expectNewValue(wrapper);
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: SHOW_VALUE, [INITIALIZED_FIELD]: SCHEMA_INITIAL_VALUE }));
+      onSubmit.mockReset();
 
       unmountInitializedField(wrapper);
-      expectNewValue(wrapper);
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: NOT_SHOW_VALUE, [INITIALIZED_FIELD]: SCHEMA_INITIAL_VALUE }));
+      onSubmit.mockReset();
 
       mountInitializedField(wrapper);
-      expectSchemaInitialValue(wrapper);
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: SHOW_VALUE, [INITIALIZED_FIELD]: SCHEMA_INITIAL_VALUE }));
+      onSubmit.mockReset();
     });
 
     it('should reset value after mount when set on fields and use initialValue from schema', () => {
       const SET_INITIALIZE_ON_MOUNT = true;
+      const onSubmit = jest.fn();
 
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
-          formFieldsMapper={{
-            [components.TEXT_FIELD]: TextField,
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          componentMapper={{
+            [componentTypes.TEXT_FIELD]: TextField
           }}
-          schema={ formFields(SET_INITIALIZE_ON_MOUNT, SCHEMA_INITIAL_VALUE) }
-          onSubmit={ jest.fn() }
+          schema={formFields(SET_INITIALIZE_ON_MOUNT, SCHEMA_INITIAL_VALUE)}
+          onSubmit={(values) => onSubmit(values)}
         />
       );
 
       mountInitializedField(wrapper);
       setInitializedToNewValue(wrapper);
-
-      expectNewValue(wrapper);
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: SHOW_VALUE, [INITIALIZED_FIELD]: SCHEMA_INITIAL_VALUE }));
+      onSubmit.mockReset();
 
       unmountInitializedField(wrapper);
-      expectNewValue(wrapper);
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: SCHEMA_INITIAL_VALUE, [SHOWER_FIELD]: NOT_SHOW_VALUE }));
+      onSubmit.mockReset();
 
       mountInitializedField(wrapper);
-      expectSchemaInitialValue(wrapper);
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: SCHEMA_INITIAL_VALUE, [SHOWER_FIELD]: SHOW_VALUE }));
+      onSubmit.mockReset();
     });
 
     it('should set false value in initializeOnMount', () => {
-      layoutMapper = {
-        [layoutComponents.FORM_WRAPPER]: ({ children, ...props }) => <form { ...props }>{ children }</form>,
-        [layoutComponents.BUTTON]: ({ label, buttonType, ...rest }) =>  <button { ...rest }>{ label }</button>,
-        [layoutComponents.BUTTON_GROUP]: ({ children }) => <div>{ children }</div>,
-        [layoutComponents.TITLE]: ({ children }) => <div>{ children }</div>,
-        [layoutComponents.DESCRIPTION]: ({ children }) => <div>{ children }</div>,
-      };
-
       const schema = {
-        fields: [{
-          component: components.TEXT_FIELD,
-          name: 'input',
-        }, {
-          component: components.TEXT_FIELD,
-          name: 'unmounted',
-          initialValue: false,
-          initializeOnMount: true,
-          condition: {
-            when: 'input',
-            is: 'show_false',
+        fields: [
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'input'
           },
-        }, {
-          component: components.TEXT_FIELD,
-          name: 'unmounted',
-          initialValue: true,
-          initializeOnMount: true,
-          condition: {
-            when: 'input',
-            is: 'show_true',
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'unmounted',
+            initialValue: false,
+            initializeOnMount: true,
+            condition: {
+              when: 'input',
+              is: 'show_false'
+            }
           },
-        }],
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'unmounted',
+            initialValue: true,
+            initializeOnMount: true,
+            condition: {
+              when: 'input',
+              is: 'show_true'
+            }
+          }
+        ]
       };
 
       const onSubmit = jest.fn();
 
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
-          formFieldsMapper={{
-            [components.TEXT_FIELD]: TextField,
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          componentMapper={{
+            [componentTypes.TEXT_FIELD]: TextField
           }}
-          schema={ schema }
-          onSubmit={ onSubmit }
+          schema={schema}
+          onSubmit={onSubmit}
         />
       );
 
-      wrapper.find('input').first().simulate('change', { target: { value: 'show_true' }});
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'show_true' } });
       wrapper.update();
 
       wrapper.find('form').simulate('submit');
@@ -1047,7 +1361,10 @@ describe('renderForm function', () => {
       expect(onSubmit).toHaveBeenCalledWith({ input: 'show_true', unmounted: true }, expect.any(Object), expect.any(Function));
       onSubmit.mockClear();
 
-      wrapper.find('input').first().simulate('change', { target: { value: 'show_false' }});
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'show_false' } });
       wrapper.update();
 
       wrapper.find('form').simulate('submit');
@@ -1057,53 +1374,52 @@ describe('renderForm function', () => {
     });
 
     it('should set unefined value in initializeOnMount', () => {
-      layoutMapper = {
-        [layoutComponents.FORM_WRAPPER]: ({ children, ...props }) => <form { ...props }>{ children }</form>,
-        [layoutComponents.BUTTON]: ({ label, buttonType, ...rest }) =>  <button { ...rest }>{ label }</button>,
-        [layoutComponents.BUTTON_GROUP]: ({ children }) => <div>{ children }</div>,
-        [layoutComponents.TITLE]: ({ children }) => <div>{ children }</div>,
-        [layoutComponents.DESCRIPTION]: ({ children }) => <div>{ children }</div>,
-      };
-
       const schema = {
-        fields: [{
-          component: components.TEXT_FIELD,
-          name: 'input',
-        }, {
-          component: components.TEXT_FIELD,
-          name: 'unmounted',
-          initialValue: undefined,
-          initializeOnMount: true,
-          condition: {
-            when: 'input',
-            is: 'show_undef',
+        fields: [
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'input'
           },
-        }, {
-          component: components.TEXT_FIELD,
-          name: 'unmounted',
-          initialValue: true,
-          initializeOnMount: true,
-          condition: {
-            when: 'input',
-            is: 'show_true',
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'unmounted',
+            initialValue: undefined,
+            initializeOnMount: true,
+            condition: {
+              when: 'input',
+              is: 'show_undef'
+            }
           },
-        }],
+          {
+            component: componentTypes.TEXT_FIELD,
+            name: 'unmounted',
+            initialValue: true,
+            initializeOnMount: true,
+            condition: {
+              when: 'input',
+              is: 'show_true'
+            }
+          }
+        ]
       };
 
       const onSubmit = jest.fn();
 
       const wrapper = mount(
         <FormRenderer
-          layoutMapper={ layoutMapper }
-          formFieldsMapper={{
-            [components.TEXT_FIELD]: TextField,
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          componentMapper={{
+            [componentTypes.TEXT_FIELD]: TextField
           }}
-          schema={ schema }
-          onSubmit={ onSubmit }
+          schema={schema}
+          onSubmit={onSubmit}
         />
       );
 
-      wrapper.find('input').first().simulate('change', { target: { value: 'show_true' }});
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'show_true' } });
       wrapper.update();
 
       wrapper.find('form').simulate('submit');
@@ -1111,7 +1427,10 @@ describe('renderForm function', () => {
       expect(onSubmit).toHaveBeenCalledWith({ input: 'show_true', unmounted: true }, expect.any(Object), expect.any(Function));
       onSubmit.mockClear();
 
-      wrapper.find('input').first().simulate('change', { target: { value: 'show_undef' }});
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'show_undef' } });
       wrapper.update();
 
       wrapper.find('form').simulate('submit');
@@ -1119,5 +1438,64 @@ describe('renderForm function', () => {
 
       expect(onSubmit).toHaveBeenCalledWith({ input: 'show_undef', unmounted: undefined }, expect.any(Object), expect.any(Function));
     });
+  });
+
+  it('should use actionMapper', () => {
+    const id = '23asd86';
+
+    const intl = jest.fn().mockImplementation((id) => `translated ${id}`);
+
+    const action = 'loadLabel';
+    const customActionMapper = {
+      [action]: intl
+    };
+
+    const formFields = [
+      {
+        component: 'custom-component',
+        name: 'foo',
+        label: 'standard label',
+        actions: {
+          label: [action, id]
+        }
+      },
+      {
+        component: 'custom-component',
+        name: 'bar',
+        label: 'standard label'
+      }
+    ];
+
+    const CustomComponent = (props) => {
+      const { label } = useFieldApi(props);
+      return <label>{label}</label>;
+    };
+
+    const wrapper = mount(
+      <FormRenderer
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        componentMapper={{
+          'custom-component': CustomComponent
+        }}
+        schema={{ fields: formFields }}
+        onSubmit={jest.fn()}
+        actionMapper={customActionMapper}
+      />
+    );
+
+    expect(intl).toHaveBeenCalledWith(id);
+    expect(intl.mock.calls).toHaveLength(1);
+    expect(
+      wrapper
+        .find('label')
+        .first()
+        .text()
+    ).toEqual(`translated ${id}`);
+    expect(
+      wrapper
+        .find('label')
+        .last()
+        .text()
+    ).toEqual('standard label');
   });
 });

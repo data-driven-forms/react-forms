@@ -1,14 +1,16 @@
 /* eslint-disable */
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import FormRenderer from '@data-driven-forms/react-form-renderer';
-import { Grid, Row } from 'patternfly-react';
-import { formFieldsMapper, layoutMapper } from '../src'
+import { Grid, Row, Button } from 'patternfly-react';
+import { componentMapper, FormTemplate } from '../src'
 import { schema, uiSchema, conditionalSchema, arraySchema, uiArraySchema } from './demo-schemas/widget-schema';
 import miqSchema from './demo-schemas/miq-schema';
 import wizardSchema from './demo-schemas/wizard-schema';
 import sandbox from './demo-schemas/sandbox';
 import Switch from "../src/form-fields/switch-field";
+
+import demoSchema from '@data-driven-forms/common/src/demoschema';
 
 const loadOptions = () => new Promise((res) => {
   setTimeout(() => {
@@ -21,26 +23,26 @@ const loadOptions = () => new Promise((res) => {
 
 const selectSchema = {
   fields: [{
-    component: 'select-field',
+    component: 'select',
     name: 'async-single',
     label: 'Async single',
-    multi: true,
+    isMulti: true,
     loadOptions
   },{
-    component: 'select-field',
+    component: 'select',
     name: 'async-single-search',
     label: 'Async single search',
     isSearchable: true,
     loadOptions
   }, {
-    component: 'select-field',
+    component: 'select',
     name: 'async-multi-search',
     label: 'Async multi search',
     isSearchable: true,
-    multi: true,
+    isMulti: true,
     loadOptions
   }, {
-    component: 'select-field',
+    component: 'select',
     name: 'select-single',
     label: 'Select single',
     isDisabled: true,
@@ -52,18 +54,18 @@ const selectSchema = {
       value: 231
     }]
   }, {
-    component: 'select-field',
+    component: 'select',
     name: 'select-search',
     label: 'Select search',
     isRequired: true,
     validateOnMount: true,
     isDisabled: true,
     isClearable: true,
-    multi: true,
+    isMulti: true,
     isSearchable: true,
     placeholder: 'Placeholder',
     validate: [{
-      type: 'required-validator'
+      type: 'required'
     }],
     options: [{
       label: 'foo',
@@ -76,17 +78,17 @@ const selectSchema = {
       value: 'x'
     }]
   }, {
-    component: 'select-field',
+    component: 'select',
     name: 'select',
     label: 'Select',
     isRequired: true,
     validateOnMount: true,
     isClearable: true,
-    multi: false,
+    isMulti: false,
     isSearchable: true,
     placeholder: 'Placeholder',
     validate: [{
-      type: 'required-validator'
+      type: 'required'
     }],
     options: [{
       label: 'foo',
@@ -101,25 +103,31 @@ const selectSchema = {
   }]
 }
 
-class App extends React.Component {
-  render() {
-    return (
+const App = () => {
+  const [schema, setSchema] = useState(wizardSchema)
+
+  return (
     <div>
-      <h1>Pf3 component mapper</h1>
-      <Grid>
-        <Row>
-          <FormRenderer
-            initialValues={{}}
-            onSubmit={console.log}
-            formFieldsMapper={formFieldsMapper}
-            layoutMapper={layoutMapper}
-            schema={sandbox}
-            onCancel={() => console.log('cancel')}
-          />
-        </Row>
-      </Grid>
-    </div>
-  )}
+    <h1>Pf3 component mapper</h1>
+    <Grid>
+      <Row>
+        <Button onClick={() => setSchema(sandbox)}>Default schema</Button>
+        <Button onClick={() => setSchema(demoSchema)}>Super schema</Button>
+        <Button onClick={() => setSchema(wizardSchema)}>Wizard schema</Button>
+      </Row>
+      <Row>
+        <FormRenderer
+          initialValues={{}}
+          onSubmit={console.log}
+          componentMapper={componentMapper}
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          schema={schema}
+          onCancel={() => console.log('cancel')}
+        />
+      </Row>
+    </Grid>
+  </div>
+  )
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));

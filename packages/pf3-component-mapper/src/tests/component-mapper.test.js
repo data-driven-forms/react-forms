@@ -1,10 +1,15 @@
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
-import { TextField, TextareaField, SelectField, CheckboxGroup, Radio, SwitchField } from '../form-fields/form-fields';
-import componentMapper from '../form-fields/component-mapper';
-import SubForm from '../form-fields/sub-form';
-import FormTabs from '../form-fields/tabs';
-import Wizard from '../form-fields/wizzard/wizzard';
-import { InputAddonGroup, InputAddonButtonGroup } from '../form-fields/input-group-fields';
+import componentMapper from '../files/component-mapper';
+import SubForm from '../files/sub-form';
+import FormTabs from '../files/tabs';
+import Wizard from '../files/wizard';
+import TextField from '../files/text-field';
+import Textarea from '../files/textarea';
+import Select from '../files/select';
+import Checkbox from '../files/checkbox';
+import Radio from '../files/radio';
+import Switch from '../files/switch';
+import { InputAddonGroup, InputAddonButtonGroup } from '../files/input-group-fields';
 
 describe('Component mapper', () => {
   it('should return TextField component', () => {
@@ -12,15 +17,15 @@ describe('Component mapper', () => {
   });
 
   it('should return TextareaField component', () => {
-    expect(componentMapper[componentTypes.TEXTAREA_FIELD]).toEqual(TextareaField);
+    expect(componentMapper[componentTypes.TEXTAREA]).toEqual(Textarea);
   });
 
   it('should return SelectField component', () => {
-    expect(componentMapper[componentTypes.SELECT_COMPONENT]).toEqual(SelectField);
+    expect(componentMapper[componentTypes.SELECT]).toEqual(Select);
   });
 
   it('should return CheckboxGroup component', () => {
-    expect(componentMapper[componentTypes.CHECKBOX]).toEqual(CheckboxGroup);
+    expect(componentMapper[componentTypes.CHECKBOX]).toEqual(Checkbox);
   });
 
   it('should return SubForm component', () => {
@@ -36,7 +41,7 @@ describe('Component mapper', () => {
   });
 
   it('should return SwitchField component', () => {
-    expect(componentMapper[componentTypes.SWITCH]).toEqual(SwitchField);
+    expect(componentMapper[componentTypes.SWITCH]).toEqual(Switch);
   });
 
   it('should return Wizard component', () => {

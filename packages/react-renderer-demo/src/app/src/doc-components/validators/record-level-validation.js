@@ -1,17 +1,24 @@
 import React from 'react';
-import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
-import { layoutMapper, formFieldsMapper } from '@data-driven-forms/pf4-component-mapper';
+import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
+import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
+import FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
+import TextField from '@data-driven-forms/pf4-component-mapper/dist/cjs/text-field';
 
+const componentMapper = {
+  [componentTypes.TEXT_FIELD]: TextField
+};
 const schema = {
   title: 'Start typing',
-  fields: [{
-    component: componentTypes.TEXT_FIELD,
-    name: 'name',
-    label: 'name',
-  }],
+  fields: [
+    {
+      component: componentTypes.TEXT_FIELD,
+      name: 'name',
+      label: 'name'
+    }
+  ]
 };
 
-const validate = values => {
+const validate = (values) => {
   const errors = {};
 
   if (!values.name) {
@@ -27,13 +34,7 @@ const validate = values => {
 
 const RecordLevelValidator = () => (
   <div className="pf4">
-    <FormRenderer
-      validate={ validate }
-      layoutMapper={ layoutMapper }
-      formFieldsMapper={ formFieldsMapper }
-      schema={ schema }
-      onSubmit={ console.log }
-    />
+    <FormRenderer validate={validate} FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
   </div>
 );
 

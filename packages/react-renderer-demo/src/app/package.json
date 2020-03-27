@@ -32,14 +32,6 @@
   "devDependencies": {
     "@mdx-js/loader": "^1.4.5",
     "@zeit/next-css": "^1.0.1",
-    "eslint": "5.x",
-    "eslint-config-prettier": "^3.3.0",
-    "eslint-config-react-app": "^3.0.5",
-    "eslint-loader": "^2.1.1",
-    "eslint-plugin-flowtype": "2.x",
-    "eslint-plugin-import": "2.x",
-    "eslint-plugin-jsx-a11y": "6.x",
-    "eslint-plugin-react": "^7.11.1",
     "file-loader": "^4.2.0",
     "firebase-admin": "~7.1.1",
     "firebase-functions": "^2.2.1",
@@ -68,10 +60,10 @@
     "patternfly-react": "^2.25.1",
     "prop-types": "^15.6.2",
     "raw-loader": "^3.1.0",
-    "react": "^16.10.2",
+    "react": "^16.13.0",
     "react-ace": "^6.3.2",
     "react-copy-to-clipboard": "^5.0.1",
-    "react-dom": "^16.10.2",
+    "react-dom": "^16.13.0",
     "react-router-dom": "^5.0.1"
   },
   "engines": {

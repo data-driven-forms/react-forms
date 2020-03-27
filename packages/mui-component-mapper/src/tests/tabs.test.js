@@ -1,12 +1,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import { AppBar, Tabs, Tab } from '@material-ui/core';
 
+import FormTabs from '../files/tabs';
+import RenderWithProvider from '../../../../__mocks__/with-provider';
 import FormRenderer, { validatorTypes } from '@data-driven-forms/react-form-renderer';
-import { formFieldsMapper, layoutMapper } from '../index';
-import FormTabs from '../form-fields/tabs';
+import { componentMapper, FormTemplate } from '../index';
 
 describe('tabs', () => {
   const props = {
@@ -14,21 +13,26 @@ describe('tabs', () => {
       {
         title: 'cosiTitle',
         name: 'cosiName',
-        fields: [],
+        fields: []
       },
       {
         title: 'cosiTitle2',
         name: 'cosiName2',
-        fields: [],
-      },
-    ],
-    formOptions: {
-      renderForm: jest.fn().mockImplementation(() => <h1>Content</h1>),
-    },
+        fields: []
+      }
+    ]
+  };
+
+  const formOptions = {
+    renderForm: jest.fn().mockImplementation(() => <h1>Content</h1>)
   };
 
   it('should render tabs correctly', () => {
-    const wrapper = mount(<FormTabs { ...props } />);
+    const wrapper = mount(
+      <RenderWithProvider value={{ formOptions }}>
+        <FormTabs {...props} />
+      </RenderWithProvider>
+    );
 
     expect(wrapper.find(AppBar)).toHaveLength(1);
     expect(wrapper.find(Tabs)).toHaveLength(1);
@@ -37,46 +41,90 @@ describe('tabs', () => {
   });
 
   it('should switch tabs correctly', () => {
-    const wrapper = mount(<FormTabs { ...props } />);
-    expect(wrapper.instance().state.activeTab).toEqual(0);
+    const wrapper = mount(
+      <RenderWithProvider value={{ formOptions }}>
+        <FormTabs {...props} />
+      </RenderWithProvider>
+    );
+
+    expect(
+      wrapper
+        .find(Tab)
+        .first()
+        .props().selected
+    ).toEqual(true);
+    expect(
+      wrapper
+        .find(Tab)
+        .last()
+        .props().selected
+    ).toEqual(false);
 
     const secondTabButton = wrapper.find('button').last();
     secondTabButton.simulate('click');
+    wrapper.update();
 
-    expect(wrapper.instance().state.activeTab).toEqual(1);
+    expect(
+      wrapper
+        .find(Tab)
+        .first()
+        .props().selected
+    ).toEqual(false);
+    expect(
+      wrapper
+        .find(Tab)
+        .last()
+        .props().selected
+    ).toEqual(true);
   });
 
   it('validate all tabs', () => {
     const onSubmit = jest.fn();
-    const wrapper = mount(<FormRenderer
-      formFieldsMapper={ formFieldsMapper }
-      layoutMapper={ layoutMapper }
-      onSubmit={ (values) => onSubmit(values) }
-      schema={{ fields: [{
-        component: 'tabs',
-        name: 'tabs1',
-        title: 'tabs1',
-        fields: [{
-          name: 'tabitem1',
-          component: 'tab-item',
-          fields: [{
-            component: 'text-field',
-            name: 'name',
-            validate: [{ type: validatorTypes.REQUIRED }],
-          }],
-        }, {
-          name: 'tabitem2',
-          component: 'tab-item',
-          fields: [{
-            component: 'text-field',
-            name: 'password',
-            validate: [{ type: validatorTypes.REQUIRED }],
-          }],
-        }],
-      }]}}
-    />);
+    const wrapper = mount(
+      <FormRenderer
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        onSubmit={(values) => onSubmit(values)}
+        schema={{
+          fields: [
+            {
+              component: 'tabs',
+              name: 'tabs1',
+              title: 'tabs1',
+              fields: [
+                {
+                  name: 'tabitem1',
+                  component: 'tab-item',
+                  fields: [
+                    {
+                      component: 'text-field',
+                      name: 'name',
+                      validate: [{ type: validatorTypes.REQUIRED }]
+                    }
+                  ]
+                },
+                {
+                  name: 'tabitem2',
+                  component: 'tab-item',
+                  fields: [
+                    {
+                      component: 'text-field',
+                      name: 'password',
+                      validate: [{ type: validatorTypes.REQUIRED }]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }}
+      />
+    );
 
-    wrapper.find('input').first().simulate('change', { target: { value: 'NAME' }});
+    wrapper
+      .find('input')
+      .first()
+      .simulate('change', { target: { value: 'NAME' } });
     wrapper.update();
 
     wrapper.find('form').simulate('submit');
@@ -84,7 +132,10 @@ describe('tabs', () => {
 
     expect(onSubmit).not.toHaveBeenCalled();
 
-    wrapper.find('input').last().simulate('change', { target: { value: 'PASSWORD' }});
+    wrapper
+      .find('input')
+      .last()
+      .simulate('change', { target: { value: 'PASSWORD' } });
     wrapper.update();
 
     wrapper.find('form').simulate('submit');

@@ -1,6 +1,6 @@
 import React from 'react';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
-import { layoutMapper, formFieldsMapper } from '@data-driven-forms/pf4-component-mapper';
+import { FormTemplate, componentMapper } from '@data-driven-forms/pf4-component-mapper';
 
 const schema = {
   title: 'Example of conditions',
@@ -67,11 +67,10 @@ const schema = {
 const Condition = () => (
   <div className="pf4">
     <FormRenderer
-      layoutMapper={ layoutMapper }
-      formFieldsMapper={ formFieldsMapper }
+      FormTemplate={ (props) => <FormTemplate {...props} showFormControls={false} /> }
+      componentMapper={ componentMapper }
       schema={ schema }
       onSubmit={ console.log }
-      showFormControls={ false }
     />
   </div>
 );

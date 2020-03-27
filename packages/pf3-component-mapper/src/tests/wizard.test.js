@@ -1,11 +1,12 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
 import { mount } from 'enzyme';
-import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
-import Wizard from '../form-fields/wizzard/wizzard';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
-import { formFieldsMapper, layoutMapper } from '../';
+
+import FormTemplate from '../files/form-template';
+import componentMapper from '../files/component-mapper';
+import WizardStep from '../files/wizard/wizard-step';
 
 describe('<Wizard />', () => {
   const cancelSpy = jest.fn();
@@ -13,29 +14,20 @@ describe('<Wizard />', () => {
 
   const props = {
     name: 'Wizard',
-    FieldProvider: MockFieldProvider,
+    component: componentTypes.WIZARD,
     fields: [
       {
         title: 'Step 1',
-        name: 'step-1',
-        stepKey: 1,
+        name: 1,
         nextStep: 'step-2',
-        fields: [],
+        fields: []
       },
       {
         title: 'Step 2',
         name: 'step-2',
-        stepKey: 'step-2',
-        fields: [],
-      },
-    ],
-    formOptions: {
-      onSubmit: submitSpy,
-      onCancel: cancelSpy,
-      valid: true,
-      getState: () => ({ values: { a: 10 }}),
-      submit: () => {},
-    },
+        fields: []
+      }
+    ]
   };
 
   const conditionalProps = {
@@ -43,79 +35,93 @@ describe('<Wizard />', () => {
     fields: [
       {
         title: 'Step 1',
-        name: 'step-1',
-        stepKey: 1,
+        name: 1,
         nextStep: {
           when: 'step',
           stepMapper: {
-            step: 'step-2',
-          },
+            step: 'step-2'
+          }
         },
-        fields: [],
+        fields: []
       },
       {
         title: 'Step 2',
         name: 'step-2',
-        stepKey: 'step-2',
-        fields: [],
-      },
-    ],
+        fields: []
+      }
+    ]
   };
 
   const conditionalSchema = {
-    fields: [{
-      component: componentTypes.WIZARD,
-      name: 'wizzard',
-      fields: [{
-        name: 'step-1',
-        stepKey: 1,
-        nextStep: {
-          when: 'source-type',
-          stepMapper: {
-            aws: 'aws-step',
-            google: 'google-step',
+    fields: [
+      {
+        component: componentTypes.WIZARD,
+        name: 'wizzard',
+        fields: [
+          {
+            name: 1,
+            nextStep: {
+              when: 'source-type',
+              stepMapper: {
+                aws: 'aws-step',
+                google: 'google-step'
+              }
+            },
+            fields: [
+              {
+                component: componentTypes.TEXTAREA,
+                name: 'source-name',
+                type: 'text',
+                label: 'Source name'
+              },
+              {
+                component: componentTypes.SELECT,
+                name: 'source-type',
+                label: 'Source type',
+                options: [
+                  {
+                    label: 'Please Choose'
+                  },
+                  {
+                    value: 'aws',
+                    label: 'Aws'
+                  },
+                  {
+                    value: 'google',
+                    label: 'Google'
+                  }
+                ],
+                validate: [
+                  {
+                    type: validatorTypes.REQUIRED
+                  }
+                ]
+              }
+            ]
           },
-        },
-        fields: [{
-          component: componentTypes.TEXTAREA_FIELD,
-          name: 'source-name',
-          type: 'text',
-          label: 'Source name',
-        }, {
-          component: componentTypes.SELECT_COMPONENT,
-          name: 'source-type',
-          label: 'Source type',
-          options: [{
-            label: 'Please Choose',
-          }, {
-            value: 'aws',
-            label: 'Aws',
-          }, {
-            value: 'google',
-            label: 'Google',
-          }],
-          validate: [{
-            type: validatorTypes.REQUIRED,
-          }],
-        }],
-      }, {
-        name: 'step-2',
-        stepKey: 'aws-step',
-        fields: [{
-          component: componentTypes.TEXT_FIELD,
-          name: 'aws-field',
-          label: 'Aws field part',
-        }],
-      }, {
-        stepKey: 'google-step',
-        name: 'step-3',
-        fields: [{
-          component: componentTypes.TEXT_FIELD,
-          name: 'google-field',
-          label: 'Google field part',
-        }],
-      }],
-    }],
+          {
+            name: 'asw-step',
+            fields: [
+              {
+                component: componentTypes.TEXT_FIELD,
+                name: 'aws-field',
+                label: 'Aws field part'
+              }
+            ]
+          },
+          {
+            name: 'google-step',
+            fields: [
+              {
+                component: componentTypes.TEXT_FIELD,
+                name: 'google-field',
+                label: 'Google field part'
+              }
+            ]
+          }
+        ]
+      }
+    ]
   };
 
   afterEach(() => {
@@ -125,73 +131,153 @@ describe('<Wizard />', () => {
 
   it('should render Wizard correctly', () => {
     const wrapper = mount(
-      <Wizard { ...props } />
+      <FormRenderer
+        schema={{ fields: [props] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate showFormControls={false} {...props} />}
+        onCancel={() => {}}
+        onSubmit={jest.fn()}
+      />
     );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render Wizard with conditional steps correctly', () => {
     const wrapper = mount(
-      <Wizard { ...conditionalProps } />
+      <FormRenderer
+        schema={{ fields: [conditionalProps] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate showFormControls={false} {...props} />}
+        onCancel={() => {}}
+        onSubmit={jest.fn()}
+      />
     );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render Wizard with title correctly', () => {
     const wrapper = mount(
-      <Wizard { ...props } title={ 'Wizard title' }/>
+      <FormRenderer
+        schema={{ fields: [{ ...props, title: 'Wizard title' }] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate showFormControls={false} {...props} />}
+        onCancel={() => {}}
+        onSubmit={jest.fn()}
+      />
     );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render Wizard with stepsInfo correctly', () => {
     const wrapper = mount(
-      <Wizard { ...props } stepsInfo={ [{ title: 'step1' }, { title: 'step2' }] }/>
+      <FormRenderer
+        schema={{ fields: [{ ...props, stepsInfo: [{ title: 'step1' }, { title: 'step2' }] }] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate showFormControls={false} {...props} />}
+        onCancel={() => {}}
+        onSubmit={jest.fn()}
+      />
     );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should call cancel', () => {
     const wrapper = mount(
-      <Wizard { ...props } />
+      <FormRenderer
+        schema={{ fields: [props] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate showFormControls={false} {...props} />}
+        onCancel={cancelSpy}
+        onSubmit={jest.fn()}
+      />
     );
-    wrapper.find('button').first().simulate('click');
+    wrapper
+      .find('button')
+      .first()
+      .simulate('click');
     wrapper.update();
     expect(cancelSpy).toHaveBeenCalled();
   });
 
   it('should step when clicked on next button', () => {
     const wrapper = mount(
-      <Wizard { ...props } />
+      <FormRenderer
+        schema={{ fields: [props] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate showFormControls={false} {...props} />}
+        onCancel={() => {}}
+        onSubmit={jest.fn()}
+      />
     );
-    expect(wrapper.instance().state.activeStep).toEqual(1);
+    expect(wrapper.find(WizardStep).props().name).toEqual(1);
 
     const nextButton = wrapper.find('button').last();
     nextButton.simulate('click');
+    wrapper.update();
 
-    expect(wrapper.instance().state.activeStep).toEqual('step-2');
+    expect(wrapper.find(WizardStep).props().name).toEqual('step-2');
   });
 
   it('should not step when clicked on button with false valid', () => {
     const wrapper = mount(
-      <Wizard { ...props } formOptions={{ ...props.formOptions, valid: false }}  />
+      <FormRenderer
+        schema={{
+          fields: [
+            {
+              name: 'Wizard',
+              component: componentTypes.WIZARD,
+              fields: [
+                {
+                  title: 'Step 1',
+                  name: 1,
+                  nextStep: 'step-2',
+                  fields: [
+                    {
+                      component: 'text-field',
+                      name: 'required',
+                      validate: [{ type: validatorTypes.REQUIRED }]
+                    }
+                  ]
+                },
+                {
+                  title: 'Step 2',
+                  name: 'step-2',
+                  fields: []
+                }
+              ]
+            }
+          ]
+        }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate showFormControls={false} {...props} />}
+        onCancel={() => {}}
+        onSubmit={jest.fn()}
+      />
     );
-    expect(wrapper.instance().state.activeStep).toEqual(1);
+    expect(wrapper.find(WizardStep).props().name).toEqual(1);
 
     const nextButton = wrapper.find('button').last();
     nextButton.simulate('click');
+    wrapper.update();
 
-    expect(wrapper.instance().state.activeStep).toEqual(1);
+    expect(wrapper.find(WizardStep).props().name).toEqual(1);
   });
 
   it('should submit when clicked on next button 2x', () => {
     const wrapper = mount(
-      <Wizard { ...props } />
+      <FormRenderer
+        schema={{ fields: [props] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate showFormControls={false} {...props} />}
+        onCancel={() => {}}
+        onSubmit={submitSpy}
+      />
     );
     expect(submitSpy).not.toHaveBeenCalled();
 
     let nextButton = wrapper.find('button').last();
     nextButton.simulate('click');
+    wrapper.update();
     nextButton = wrapper.find('button').last();
     nextButton.simulate('click');
 
@@ -200,38 +286,45 @@ describe('<Wizard />', () => {
 
   it('should stepBack when clicked on back button', () => {
     const wrapper = mount(
-      <Wizard { ...props } />
+      <FormRenderer
+        schema={{ fields: [props] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate showFormControls={false} {...props} />}
+        onCancel={() => {}}
+        onSubmit={submitSpy}
+      />
     );
-    expect(wrapper.instance().state.activeStep).toEqual(1);
+    expect(wrapper.find(WizardStep).props().name).toEqual(1);
 
     const nextButton = wrapper.find('button').last();
     nextButton.simulate('click');
+    wrapper.update();
 
-    expect(wrapper.instance().state.activeStep).toEqual('step-2');
+    expect(wrapper.find(WizardStep).props().name).toEqual('step-2');
 
     const backButton = wrapper.find('button').at(1);
     backButton.simulate('click');
+    wrapper.update();
 
-    expect(wrapper.instance().state.activeStep).toEqual(1);
+    expect(wrapper.find(WizardStep).props().name).toEqual(1);
   });
 
   it('should step to google-step when clicked on next button in conditional schema', () => {
     const wrapper = mount(
       <FormRenderer
-        schema={ conditionalSchema }
-        formFieldsMapper={ formFieldsMapper }
-        layoutMapper={ layoutMapper }
-        onCancel={ () => {} }
-        showFormControls={ false }
-        onSubmit={ jest.fn() }
+        schema={conditionalSchema}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate showFormControls={false} {...props} />}
+        onCancel={() => {}}
+        onSubmit={jest.fn()}
         initialValues={{ 'source-type': 'google' }}
       />
     );
 
-    const wizzardField = wrapper.find(Wizard).instance();
-    expect(wizzardField.state.activeStep).toEqual(1);
+    expect(wrapper.find(WizardStep).props().name).toEqual(1);
     const nextButton = wrapper.find('button').last();
     nextButton.simulate('click');
-    expect(wizzardField.state.activeStep).toEqual('google-step');
+    wrapper.update();
+    expect(wrapper.find(WizardStep).props().name).toEqual('google-step');
   });
 });

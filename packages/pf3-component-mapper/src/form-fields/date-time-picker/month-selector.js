@@ -16,7 +16,6 @@ const checkDisabledMonth = (after, before, selectable, selectedDay) => {
     if (afterMonth > after && after.getMonth() !== afterMonth.getMonth()) {
       return true;
     }
-
   }
 
   if (before) {
@@ -43,26 +42,30 @@ const disablePrevClick = (before, isYear, selectedDay = new Date()) => {
 const renderMonthBody = (monthChange, selectedMonth, locale, disabledDays, selectedDay = new Date()) => {
   const rows = [];
   const months = MomentLocaleUtils.getMonths(locale);
-  const maxLength = computeTextWidth(months.reduce((prev, curr) => curr.length > prev.length ? curr : prev, ''));
+  const maxLength = computeTextWidth(months.reduce((prev, curr) => (curr.length > prev.length ? curr : prev), ''));
   for (let i = 0; i < 4; i++) {
-    rows.push([ ...months.slice(i * 3, i * 3 + 3) ]);
+    rows.push([...months.slice(i * 3, i * 3 + 3)]);
   }
 
-  const { after, before } = disabledDays.find(item => typeof item === 'object' && !(item instanceof Date)) || {};
+  const { after, before } = disabledDays.find((item) => typeof item === 'object' && !(item instanceof Date)) || {};
   return rows.map((row, index) => (
-    <tr key={ `month-row-${index}` }>
-      { row.map((cell, monthIndex) => (
-        <td key={ `months-cell-${cell}` } style={{ width: maxLength + LABEL_PADDING }}>
+    <tr key={`month-row-${index}`}>
+      {row.map((cell, monthIndex) => (
+        <td key={`months-cell-${cell}`} style={{ width: maxLength + LABEL_PADDING }}>
           <button
-            className={ `${selectedMonth === index * 3 + monthIndex ? 'selected' : ''} ${checkDisabledMonth(after, before, index * 3 + monthIndex, selectedDay) ? 'disabled' : ''}` }
-            disabled={ checkDisabledMonth(after, before, index * 3 + monthIndex, selectedDay) }
-            onClick={ () => {
+            // eslint-disable-next-line max-len
+            className={`${selectedMonth === index * 3 + monthIndex ? 'selected' : ''} ${
+              checkDisabledMonth(after, before, index * 3 + monthIndex, selectedDay) ? 'disabled' : ''
+            }`}
+            disabled={checkDisabledMonth(after, before, index * 3 + monthIndex, selectedDay)}
+            onClick={() => {
               monthChange(index * 3 + monthIndex);
-            } }>
-            { cell }
+            }}
+          >
+            {cell}
           </button>
         </td>
-      )) }
+      ))}
     </tr>
   ));
 };
@@ -76,37 +79,40 @@ const MonthSelector = ({
   locale,
   onNextClick,
   onPreviousClick,
-  disabledDays,
+  disabledDays
 }) => {
-  const { after, before } = disabledDays.find(item => typeof item === 'object' && !(item instanceof Date)) || {};
+  const { after, before } = disabledDays.find((item) => typeof item === 'object' && !(item instanceof Date)) || {};
   return (
     <div className="DayPicker">
       <div className="DayPicker-wrapper" tabIndex="0">
         <Navbar
-          disableNext={ disableNextClick(after, selectingMonth, selectedDay) }
-          disablePrev={ disablePrevClick(before, selectingMonth, selectedDay) }
-          onNextClick={ onNextClick }
-          onPreviousClick={ onPreviousClick }
-          month={ selectedDay || new Date() }
-          isYear={ selectingMonth }
-          toggleSelectingYear={ toggleSelectingYear }
-          disabledDays={ disabledDays }
+          disableNext={disableNextClick(after, selectingMonth, selectedDay)}
+          disablePrev={disablePrevClick(before, selectingMonth, selectedDay)}
+          onNextClick={onNextClick}
+          onPreviousClick={onPreviousClick}
+          month={selectedDay || new Date()}
+          isYear={selectingMonth}
+          toggleSelectingYear={toggleSelectingYear}
+          disabledDays={disabledDays}
         />
         <table className="pf3-datetime-months-table">
           <tbody>
-            { renderMonthBody(month => {
-              monthChange(month);
-              toggleSelectingMonth(false);
-            },  selectedDay && selectedDay.getMonth(),
-            locale,
-            disabledDays,
-            selectedDay
-            ) }
+            {renderMonthBody(
+              (month) => {
+                monthChange(month);
+                toggleSelectingMonth(false);
+              },
+              selectedDay && selectedDay.getMonth(),
+              locale,
+              disabledDays,
+              selectedDay
+            )}
           </tbody>
         </table>
       </div>
     </div>
-  );};
+  );
+};
 
 MonthSelector.propTypes = {
   monthChange: PropTypes.func.isRequired,
@@ -117,17 +123,19 @@ MonthSelector.propTypes = {
   locale: PropTypes.string,
   onNextClick: PropTypes.func.isRequired,
   onPreviousClick: PropTypes.func.isRequired,
-  disabledDays: PropTypes.arrayOf(PropTypes.oneOfType([
-    PropTypes.instanceOf(Date),
-    PropTypes.shape({
-      after: PropTypes.instanceOf(Date),
-      before: PropTypes.instanceOf(Date),
-    }),
-  ])),
+  disabledDays: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.instanceOf(Date),
+      PropTypes.shape({
+        after: PropTypes.instanceOf(Date),
+        before: PropTypes.instanceOf(Date)
+      })
+    ])
+  )
 };
 
 MonthSelector.defaultProps = {
-  disabledDays: [],
+  disabledDays: []
 };
 
 export default MonthSelector;

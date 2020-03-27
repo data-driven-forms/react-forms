@@ -1,17 +1,16 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import ClearIndicator from '../../../form-fields/select/clear-indicator';
+import ClearIndicator from '../../../files/select/clear-indicator';
 
 describe('<ClearIndicator />', () => {
   const initialProps = {
-    innerProps: {},
+    innerProps: {}
   };
 
   it('should call clearValue on click', () => {
     const clearValue = jest.fn();
-    const wrapper = mount(<ClearIndicator { ...initialProps } clearValue={ clearValue } />);
+    const wrapper = mount(<ClearIndicator {...initialProps} clearValue={clearValue} />);
     wrapper.find('button').simulate('click');
     expect(clearValue).toHaveBeenCalledTimes(1);
   });
 });
-

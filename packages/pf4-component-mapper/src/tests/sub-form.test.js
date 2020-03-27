@@ -1,30 +1,36 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import SubForm from '../form-fields/sub-form';
+import SubForm from '../files/sub-form';
 import { shallow } from 'enzyme';
+import RenderWithProvider from '../../../../__mocks__/with-provider';
 
 describe('SubForm component', () => {
   const props = {
     title: 'cosiTitle',
     name: 'cosiName',
-    fields: [],
-    formOptions: {
-      renderForm: () => <div>Here would be form</div>,
-    },
+    fields: []
+  };
+
+  const formOptions = {
+    renderForm: () => <div>Here would be form</div>
   };
 
   it('should render SubForm correctly', () => {
     const wrapper = shallow(
-      <SubForm { ...props } />
-    );
+      <RenderWithProvider value={{ formOptions }}>
+        <SubForm {...props} />
+      </RenderWithProvider>
+    ).dive();
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render SubForm with description correctly', () => {
     const propsDescription = { ...props, description: 'description here!' };
     const wrapper = shallow(
-      <SubForm { ...propsDescription } />
-    );
+      <RenderWithProvider value={{ formOptions }}>
+        <SubForm {...propsDescription} />
+      </RenderWithProvider>
+    ).dive();
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
@@ -32,8 +38,10 @@ describe('SubForm component', () => {
     const { name, fields, formOptions } = props;
     const propsWithoutTitle = { name, fields, formOptions };
     const wrapper = shallow(
-      <SubForm { ...propsWithoutTitle } />
-    );
+      <RenderWithProvider value={{ formOptions }}>
+        <SubForm {...propsWithoutTitle} />
+      </RenderWithProvider>
+    ).dive();
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });

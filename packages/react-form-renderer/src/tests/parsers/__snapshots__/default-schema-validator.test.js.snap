@@ -1,12 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Default schema validator actionMapper validation should fail if action doesnt exist in the mapper 1`] = `
+"
+      Action on prop \\"loadOptions\\" in component \\"somecomponent\\" does not exist in ActionMapper.
+      ActionMapper has these values: [customAction].
+      Use one of them or define new action in the mapper.
+    "
+`;
+
+exports[`Default schema validator actionMapper validation should fail if action is missing action key 1`] = `
+"
+      Action on prop \\"loadOptions\\" in component \\"somecomponent\\" has not defined action type as the first element.
+      Please, make sure you defined your action in the schema.
+      ActionMapper has these values: [customAction]
+    "
+`;
+
+exports[`Default schema validator actionMapper validation should fail if action is undefined 1`] = `
+"
+      Action on prop \\"loadOptions\\" in component \\"somecomponent\\" is not an array.
+      Please, make sure you defined your action in the schema.
+      ActionMapper has these values: [customAction]
+    "
+`;
+
 exports[`Default schema validator should fail if field component from form fields mapper is not a valid React component. 1`] = `"FormComponent \\"invalidComponent\\" from formFieldsMapper is not a valid React component!"`;
 
 exports[`Default schema validator should fail if field component property is not in form fields mapper. 1`] = `
 "
-          Component of type \\"blarghs\\" is not present in formFieldsMapper.
-          Please make sure \\"blarghs is included in your formFieldsMapper.\\"
-          FormFieldsMapper has these values: [foo,invalidComponent,tabs]
+          Component of type \\"blarghs\\" is not present in componentMapper.
+          Please make sure \\"blarghs is included in your componentMapper.\\"
+          componentMapper has these values: [foo,invalidComponent,tabs]
         "
 `;
 
@@ -76,7 +100,7 @@ exports[`Default schema validator should fail if field validate item is an objec
 "
         Error occured in field definition with name: \\"foo\\".
         Field validator at index: 0 does not have correct \\"type\\" property!
-        Received \\"magic\\", expected one of: [required-validator,min-length-validator,max-length-validator,exact-length-validator,min-items-validator,min-number-value,max-number-value,pattern-validator,url-validator].
+        Received \\"magic\\", expected one of: [].
       "
 `;
 

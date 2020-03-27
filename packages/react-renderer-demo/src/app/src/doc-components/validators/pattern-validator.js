@@ -1,41 +1,48 @@
 import React from 'react';
-import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
-import { layoutMapper, formFieldsMapper } from '@data-driven-forms/pf4-component-mapper';
+import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
+import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
+import validatorTypes from '@data-driven-forms/react-form-renderer/dist/cjs/validator-types';
+import FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
+import TextField from '@data-driven-forms/pf4-component-mapper/dist/cjs/text-field';
 
+const componentMapper = {
+  [componentTypes.TEXT_FIELD]: TextField
+};
 const schema = {
   title: 'Start typing',
-  fields: [{
-    component: componentTypes.TEXT_FIELD,
-    name: 'regexp-pattern',
-    label: 'Regepx',
-    helperText: 'Value must be equal to Foo',
-    validate: [{
-      type: validatorTypes.PATTERN_VALIDATOR,
-      pattern: /^Foo$/i,
-    }],
-  }, {
-    component: componentTypes.TEXT_FIELD,
-    name: 'string-pattern',
-    label: 'String pattern',
-    helperText: 'Value must be equal to Foo',
-    validate: [{
-      type: validatorTypes.PATTERN_VALIDATOR,
-      pattern: '^Foo$',
-      flags: 'i',
-    }],
-  }],
+  fields: [
+    {
+      component: componentTypes.TEXT_FIELD,
+      name: 'regexp-pattern',
+      label: 'Regepx',
+      helperText: 'Value must be equal to Foo',
+      validate: [
+        {
+          type: validatorTypes.PATTERN,
+          pattern: /^Foo$/i
+        }
+      ]
+    },
+    {
+      component: componentTypes.TEXT_FIELD,
+      name: 'string-pattern',
+      label: 'String pattern',
+      helperText: 'Value must be equal to Foo',
+      validate: [
+        {
+          type: validatorTypes.PATTERN,
+          pattern: '^Foo$',
+          flags: 'i'
+        }
+      ]
+    }
+  ]
 };
 
 const PatternValidators = () => (
   <div className="pf4">
-    <FormRenderer
-      layoutMapper={ layoutMapper }
-      formFieldsMapper={ formFieldsMapper }
-      schema={ schema }
-      onSubmit={ console.log }
-    />
+    <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
   </div>
 );
 
 export default PatternValidators;
-

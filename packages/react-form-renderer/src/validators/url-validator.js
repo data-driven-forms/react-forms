@@ -1,12 +1,11 @@
-import Validators from './validators';
+import Validators from '../files/validators';
 import { assign } from './helpers';
 
 // user:pass BasicAuth (optional)
 const BASIC_AUTH = '(?:\\S+(?::\\S*)?@)?';
 
 // IP address dotted notation octets
-const IPV4 =
-  '(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]?|0)\\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]?|0)';
+const IPV4 = '(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]?|0)\\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]?|0)';
 
 // the IPv6 matching part is from here: https://gist.github.com/syzdek/6086792
 const IPV6 =
@@ -41,44 +40,36 @@ const DEFAULT_OPTIONS = {
   port: true,
   path: true,
   search: true,
-  hash: true,
+  hash: true
 };
 
-let url = options => buildReg(defaultOptions(options), false);
+let url = (options) => buildReg(defaultOptions(options), false);
 
 export default url;
 
-function defaultOptions (options) {
+function defaultOptions(options) {
   options = assign({}, DEFAULT_OPTIONS, options);
-  options.protocols = []
-  .concat(options.protocol || options.protocols || Validators.urlProtocols)
-  .join('|');
+  options.protocols = [].concat(options.protocol || options.protocols || Validators.urlProtocols).join('|');
   return options;
 }
 
-function group (option, regPart, capture) {
+function group(option, regPart, capture) {
   return option ? (capture ? `(${regPart})` : regPart) : '';
 }
 
-function buildReg (options, capture) {
+function buildReg(options, capture) {
   return new RegExp(
     '^' +
-      group(
-        true,
-        `(?:(?:(?:${options.protocols}):)${options.emptyProtocol ? '?' : ''}\\/\\/)${
-          options.protocolIdentifier ? '' : '?'
-        }`,
-        capture
-      ) +
+      group(true, `(?:(?:(?:${options.protocols}):)${options.emptyProtocol ? '?' : ''}\\/\\/)${options.protocolIdentifier ? '' : '?'}`, capture) +
       group(options.basicAuth, BASIC_AUTH, capture) +
       `(?:${[
         group(options.ipv4, IPV4, capture),
         group(options.ipv6, IPV6, capture),
         group(options.host, HOST, capture),
-        group(options.local, 'localhost', capture),
+        group(options.local, 'localhost', capture)
       ]
-      .filter(g => g)
-      .join('|')})` +
+        .filter((g) => g)
+        .join('|')})` +
       group(options.port, PORT, capture) +
       group(options.path, PATH, capture) +
       group(options.search, SEARCH, capture) +

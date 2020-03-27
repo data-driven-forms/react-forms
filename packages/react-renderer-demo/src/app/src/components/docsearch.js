@@ -10,37 +10,37 @@ const useStyles = makeStyles(() => ({
   docSearchWrapper: {
     marginRight: 16,
     '& .algolia-docsearch-suggestion.algolia-docsearch-suggestion__main.algolia-docsearch-suggestion__secondary': {
-      textDecoration: 'none',
+      textDecoration: 'none'
     },
     '& .algolia-autocomplete .algolia-docsearch-suggestion--title': {
-      marginBottom: 0,
+      marginBottom: 0
     },
     '& .ds-dropdown-menu': {
       '& [class^=ds-dataset-]': {
-        borderRadius: 0,
+        borderRadius: 0
       },
       '&:before': {
-        display: 'none',
-      },
-    },
+        display: 'none'
+      }
+    }
   },
   docSearchInput: {
     '& input': {
-      color: 'white',
+      color: 'white'
     },
     '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-      borderBottomColor: 'white',
+      borderBottomColor: 'white'
     },
     '& .MuiInput-underline:after': {
-      borderBottomColor: 'white',
+      borderBottomColor: 'white'
     },
     '& .MuiInput-underline:before': {
-      borderBottomColor: 'transparent',
-    },
+      borderBottomColor: 'transparent'
+    }
   },
   docSearchIcon: {
-    fill: 'white',
-  },
+    fill: 'white'
+  }
 }));
 
 const DocSearch = () => {
@@ -57,29 +57,35 @@ const DocSearch = () => {
 
         let query = '';
         if (resultUrl.pathname.startsWith('/component-example/')) {
-          [ 'mui', 'pf4', 'pf3' ].find(mapper => {
-            if (resultUrl.hash.includes(mapper)){
+          ['mui', 'pf4', 'pf3'].find((mapper) => {
+            if (resultUrl.hash.includes(mapper)) {
               query = `?mapper=${mapper}`;
               return true;
             }
+
+            return undefined;
           });
         }
 
         push(`${resultUrl.pathname}${query}${resultUrl.hash ? resultUrl.hash : ''}`);
         input.close();
-      },
+      }
       // debug: true, // Set debug to true if you want to inspect the dropdown.
     });
-  }, []);
+  }, [push]);
   return (
-    <form className={ classes.docSearchWrapper }>
+    <form className={classes.docSearchWrapper}>
       <TextField
         id="data-driven-forms-search"
         type="search"
         placeholder="Search..."
-        className={ classes.docSearchInput }
+        className={classes.docSearchInput}
         InputProps={{
-          startAdornment: <InputAdornment position="start"><Search className={ classes.docSearchIcon } /></InputAdornment>,
+          startAdornment: (
+            <InputAdornment position="start">
+              <Search className={classes.docSearchIcon} />
+            </InputAdornment>
+          )
         }}
       />
     </form>

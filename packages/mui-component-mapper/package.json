@@ -2,11 +2,15 @@
   "name": "@data-driven-forms/mui-component-mapper",
   "version": "0.0.5",
   "description": "Component mapper for Material ui component mapper form data-driven-forms.",
-  "main": "dist/index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "license": "Apache-2.0",
   "scripts": {
     "start": "webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
-    "build": "rollup -c ./rollup.config.js",
+    "build": "yarn build:cjs && yarn build:esm && yarn build:umd",
+    "build:cjs": "BABEL_ENV=cjs rollup -c ./rollup.config.js --format=cjs --environment FORMAT:cjs",
+    "build:esm": "BABEL_ENV=esm rollup -c ./rollup.config.js --format=esm --environment FORMAT:esm",
+    "build:umd": "rollup -c ./rollup.config.js --format=umd --environment FORMAT:umd",
     "vendor": "webpack --env vendor --config ./config/webpack.config.js",
     "release": "semantic-release"
   },
@@ -32,22 +36,16 @@
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "enzyme-to-json": "^3.3.4",
-    "eslint": "5.x",
-    "eslint-config-prettier": "^3.3.0",
-    "eslint-config-react-app": "^3.0.5",
-    "eslint-loader": "^2.1.1",
-    "eslint-plugin-flowtype": "2.x",
-    "eslint-plugin-import": "2.x",
-    "eslint-plugin-jsx-a11y": "6.x",
-    "eslint-plugin-react": "^7.11.1",
+    "glob": "^7.1.6",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.10.0",
     "prop-types": "^15.6.2",
-    "react": "^16.8.3",
-    "react-dom": "^16.8.3",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
     "regenerator-runtime": "^0.12.1",
     "resolve-url-loader": "^3.0.0",
+    "rollup-plugin-sourcemaps": "^0.5.0",
     "rollup-pluginutils": "^2.8.2",
     "sass-loader": "^7.1.0",
     "semantic-release": "15.12.0",
@@ -64,20 +62,8 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/styles": "^4.9.0",
     "material-ui-pickers": "^2.2.4",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
-  },
-  "release": {
-    "prepare": [
-      "@semantic-release/npm",
-      {
-        "path": "@semantic-release/git",
-        "assets": [
-          "package.json"
-        ],
-        "message": "Release of new version: ${nextRelease.version} <no> [skip ci]"
-      }
-    ]
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
   },
   "dependencies": {
     "@date-io/date-fns": "^1.0.1",

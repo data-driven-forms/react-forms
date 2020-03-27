@@ -30,6 +30,7 @@ const LogoSvgIcon = () => (
         </g>
       </g>
     </g>
-  </svg>);
+  </svg>
+);
 
 export default LogoSvgIcon;

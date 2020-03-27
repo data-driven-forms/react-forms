@@ -1,12 +1,13 @@
+/* eslint-disable no-unused-vars */
 import { isValidElement } from 'react';
-import Validators from './validators';
+import Validators from '../files/validators';
 
 const HAS_PROP = {}.hasOwnProperty;
 export const TO_STRING = {}.toString;
 
-const isObject = obj => typeof obj === 'object' && TO_STRING.call(obj) === '[object Object]' && obj !== null;
+const isObject = (obj) => typeof obj === 'object' && TO_STRING.call(obj) === '[object Object]' && obj !== null;
 
-const stringify = args => {
+const stringify = (args) => {
   let arr = [];
   let value;
   let options = args;
@@ -17,19 +18,19 @@ const stringify = args => {
   for (let k in options) {
     if (HAS_PROP.call(options, k)) {
       value = options[k];
-      arr.push(k,  isValidElement(value) ? stringify(value.props) : isObject(value) ? stringify(value) : value.toString());
+      arr.push(k, isValidElement(value) ? stringify(value.props) : isObject(value) ? stringify(value) : value.toString());
     }
   }
 
   return JSON.stringify(arr);
 };
 
-export const memoize = func => {
+export const memoize = (func) => {
   if (!func.cache) {
     func.cache = {};
   }
 
-  return options => {
+  return (options) => {
     const key = stringify(options);
     return HAS_PROP.call(func.cache, key) ? func.cache[key] : (func.cache[key] = func(options));
   };
@@ -67,23 +68,25 @@ export const prepareMsg = (msg, type, values) => {
 export const assign =
   Object.assign ||
   /* istanbul ignore next */
-  function (obj) {
+  function(obj) {
     for (let i = 1, len = arguments.length; i < len; ++i) {
       let source = arguments[i];
-      if (source != null) {for (let key in source) {
-        if (HAS_PROP.call(source, key)) {
-          obj[key] = source[key];
+      if (source != null) {
+        for (let key in source) {
+          if (HAS_PROP.call(source, key)) {
+            obj[key] = source[key];
+          }
         }
-      }}
+      }
     }
 
     return obj;
   };
 
-export const prepare = func => (value, allValues, ...args) => func(value, allValues, ...args);
+export const prepare = (func) => (value, allValues, ...args) => func(value, allValues, ...args);
 
-export const isNumber = num => !isNaN(num) && (num !== 0 || ('' + num).trim() !== '');
+export const isNumber = (num) => !isNaN(num) && (num !== 0 || ('' + num).trim() !== '');
 
-export const selectNum = (var1, var2) => isNumber(var1) ? +var1 : arguments.length > 1 && isNumber(var2) ? +var2 : null;
+export const selectNum = (var1, var2) => (isNumber(var1) ? +var1 : arguments.length > 1 && isNumber(var2) ? +var2 : null);
 
-export const trunc = num => Math.trunc ? Math.trunc(num) : num < 0 ? Math.ceil(num) : Math.floor(num);
+export const trunc = (num) => (Math.trunc ? Math.trunc(num) : num < 0 ? Math.ceil(num) : Math.floor(num));

@@ -4,10 +4,11 @@ import ReactDOM from "react-dom";
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import miqSchema from './demo-schemas/miq-schema';
 import { uiArraySchema, arraySchema, array1Schema, schema, uiSchema, conditionalSchema, arraySchemaDDF } from './demo-schemas/widget-schema';
-import { formFieldsMapper, layoutMapper } from '../src';
+import { componentMapper, FormTemplate } from '../src';
 import { Title, Button, Toolbar, ToolbarGroup } from '@patternfly/react-core';
 import { wizardSchema, wizardSchemaWithFunction, wizardSchemaSimple, wizardSchemaSubsteps, wizardSchemaMoreSubsteps } from './demo-schemas/wizard-schema';
 import sandboxSchema from './demo-schemas/sandbox';
+import demoSchema from '@data-driven-forms/common/src/demoschema';
 
 const Summary = props => <div>Custom summary component.</div>;
 
@@ -38,18 +39,21 @@ class App extends React.Component {
                 <ToolbarGroup>
                     <Button onClick={() => this.setState(state => ({ schema: sandboxSchema, additionalOptions: {}}))}>Sandbox</Button>
                 </ToolbarGroup>
+                <ToolbarGroup>
+                    <Button onClick={() => this.setState(state => ({ schema: demoSchema, additionalOptions: {}}))}>Super schema</Button>
+                </ToolbarGroup>
             </Toolbar>
             <FormRenderer
                 onSubmit={console.log}
                 initialValues={{
                     'async-drop-down': 'async-option-2'
                 }}
-                formFieldsMapper={{
-                    ...formFieldsMapper,
+                componentMapper={{
+                    ...componentMapper,
                     summary: Summary
                 }}
+                FormTemplate={(props) => <FormTemplate {...props} showFormControls={this.state.additionalOptions.showFormControls} />}
                 onCancel={console.log}
-                layoutMapper={layoutMapper}
                 schema={this.state.schema}
                 uiSchema={this.state.ui}
                 {...this.state.additionalOptions}
@@ -58,49 +62,49 @@ class App extends React.Component {
                 <div>Nextstep function</div>
                 <FormRenderer
                     onSubmit={console.log}
-                    formFieldsMapper={{
-                        ...formFieldsMapper,
+                    componentMapper={{
+                        ...componentMapper,
                         summary: Summary
                     }}
                     onCancel={() => console.log('Cancel action')}
-                    layoutMapper={layoutMapper}
+                    FormTemplate={(props) => <FormTemplate {...props} showFormControls={this.state.additionalOptions.showFormControls} />}
                     schema={wizardSchemaWithFunction}
                     {...this.state.additionalOptions}
                     />
                 <div>Substeps</div>
                 <FormRenderer
                     onSubmit={console.log}
-                    formFieldsMapper={{
-                        ...formFieldsMapper,
+                    componentMapper={{
+                        ...componentMapper,
                         summary: Summary
                     }}
                     onCancel={() => console.log('Cancel action')}
-                    layoutMapper={layoutMapper}
                     schema={wizardSchemaSubsteps}
+                    FormTemplate={(props) => <FormTemplate {...props} showFormControls={this.state.additionalOptions.showFormControls} />}
                     {...this.state.additionalOptions}
                     />
                 <div>More substep</div>
                 <FormRenderer
                     onSubmit={console.log}
-                    formFieldsMapper={{
-                        ...formFieldsMapper,
+                    componentMapper={{
+                        ...componentMapper,
                         summary: Summary
                     }}
                     onCancel={() => console.log('Cancel action')}
-                    layoutMapper={layoutMapper}
                     schema={wizardSchemaMoreSubsteps}
+                    FormTemplate={(props) => <FormTemplate {...props} showFormControls={this.state.additionalOptions.showFormControls} />}
                     {...this.state.additionalOptions}
                     />
                 <div>Simple wizard</div>
                 <FormRenderer
                     onSubmit={console.log}
-                    formFieldsMapper={{
-                        ...formFieldsMapper,
+                    componentMapper={{
+                        ...componentMapper,
                         summary: Summary
                     }}
                     onCancel={() => console.log('Cancel action')}
-                    layoutMapper={layoutMapper}
                     schema={wizardSchemaSimple}
+                    FormTemplate={(props) => <FormTemplate {...props} showFormControls={this.state.additionalOptions.showFormControls} />}
                     {...this.state.additionalOptions}
                     />
             </>}

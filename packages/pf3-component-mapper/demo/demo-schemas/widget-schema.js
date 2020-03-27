@@ -1,4 +1,5 @@
-export const schema =  {
+/*eslint camelcase: "off" */
+export const schema = {
   title: 'Widgets',
   type: 'object',
   properties: {
@@ -8,13 +9,13 @@ export const schema =  {
       properties: {
         email: {
           type: 'string',
-          format: 'email',
+          format: 'email'
         },
         uri: {
           type: 'string',
-          format: 'uri',
-        },
-      },
+          format: 'uri'
+        }
+      }
     },
     boolean: {
       type: 'object',
@@ -23,19 +24,19 @@ export const schema =  {
         defaultCheckbox: {
           type: 'boolean',
           title: 'checkbox (default)',
-          description: 'This is the checkbox-description',
+          description: 'This is the checkbox-description'
         },
         radio: {
           type: 'boolean',
           title: 'radio buttons',
-          description: 'This is the radio-description',
+          description: 'This is the radio-description'
         },
         select: {
           type: 'boolean',
           title: 'select box',
-          description: 'This is the select-description',
-        },
-      },
+          description: 'This is the select-description'
+        }
+      }
     },
     string: {
       type: 'object',
@@ -43,101 +44,93 @@ export const schema =  {
       properties: {
         defaultInput: {
           type: 'string',
-          title: 'text input (default)',
+          title: 'text input (default)'
         },
         textarea: {
           type: 'string',
-          title: 'textarea',
+          title: 'textarea'
         },
         color: {
           type: 'string',
           title: 'color picker',
-          default: '#151ce6',
-        },
-      },
+          default: '#151ce6'
+        }
+      }
     },
     secret: {
       type: 'string',
-      default: 'I\'m a hidden string.',
+      default: 'I m a hidden string.'
     },
     disabled: {
       type: 'string',
       title: 'A disabled field',
-      default: 'I am disabled.',
+      default: 'I am disabled.'
     },
     readonly: {
       type: 'string',
       title: 'A readonly field',
-      default: 'I am read-only.',
+      default: 'I am read-only.'
     },
     widgetOptions: {
       title: 'Custom widget with options',
       type: 'string',
-      default: 'I am yellow',
+      default: 'I am yellow'
     },
     selectWidgetOptions: {
       title: 'Custom select widget with options',
       type: 'string',
-      enum: [
-        'foo',
-        'bar',
-      ],
-      enumNames: [
-        'Foo',
-        'Bar',
-      ],
-    },
-  },
+      enum: ['foo', 'bar'],
+      enumNames: ['Foo', 'Bar']
+    }
+  }
 };
 
 export const uiSchema = {
   boolean: {
     radio: {
-      'ui:widget': 'radio',
+      'ui:widget': 'radio'
     },
     select: {
-      'ui:widget': 'select',
-    },
+      'ui:widget': 'select'
+    }
   },
   string: {
     textarea: {
       'ui:widget': 'textarea',
       'ui:options': {
-        rows: 5,
-      },
+        rows: 5
+      }
     },
     color: {
-      'ui:widget': 'color',
-    },
+      'ui:widget': 'color'
+    }
   },
   secret: {
-    'ui:widget': 'hidden',
+    'ui:widget': 'hidden'
   },
   disabled: {
-    'ui:disabled': true,
+    'ui:disabled': true
   },
   readonly: {
-    'ui:readonly': true,
+    'ui:readonly': true
   },
   widgetOptions: {
     'ui:options': {
-      backgroundColor: 'yellow',
-    },
+      backgroundColor: 'yellow'
+    }
   },
   selectWidgetOptions: {
     'ui:options': {
-      backgroundColor: 'pink',
-    },
-  },
+      backgroundColor: 'pink'
+    }
+  }
 };
 
 export const conditionalSchema = {
   title: 'Web hook',
   description: 'This web hook allows us to send a JSON object from the service portal',
   type: 'object',
-  required: [
-    'url', 'secret',
-  ],
+  required: ['url', 'secret'],
   definitions: {
     Authentications: {
       title: 'Authentications',
@@ -145,39 +138,34 @@ export const conditionalSchema = {
       anyOf: [
         {
           type: 'string',
-          enum: [
-            'oauth',
-          ],
-          title: 'OAuth 2.0',
+          enum: ['oauth'],
+          title: 'OAuth 2.0'
         },
         {
           type: 'string',
-          enum: [
-            'basic',
-          ],
-          title: 'Basic Authentication',
+          enum: ['basic'],
+          title: 'Basic Authentication'
         },
         {
           type: 'string',
-          enum: [
-            'none',
-          ],
-          title: 'No Authentication needed',
-        },
-      ],
-    },
+          enum: ['none'],
+          title: 'No Authentication needed'
+        }
+      ]
+    }
   },
   properties: {
     url: {
       type: 'string',
       title: 'URL',
       description: 'The URL which will be receving this request',
-      pattern: '^(http|https)://*',
+      pattern: '^(http|https)://*'
     },
-    verify_ssl: { // eslint-disable-line camelcase
+    verify_ssl: {
+      // eslint-disable-line camelcase
       type: 'boolean',
       default: true,
-      title: 'Verify Server Certificate',
+      title: 'Verify Server Certificate'
     },
     secret: {
       type: 'string',
@@ -187,8 +175,8 @@ export const conditionalSchema = {
     authentication: {
       $ref: '#/definitions/Authentications',
       title: 'Authentication',
-      default: 'none',
-    },
+      default: 'none'
+    }
   },
   dependencies: {
     authentication: {
@@ -196,51 +184,43 @@ export const conditionalSchema = {
         {
           properties: {
             authentication: {
-              enum: [
-                'none',
-              ],
-            },
-          },
+              enum: ['none']
+            }
+          }
         },
         {
           properties: {
             authentication: {
-              enum: [
-                'oauth',
-              ],
+              enum: ['oauth']
             },
             token: {
               type: 'string',
               title: 'Bearer Token',
-              description: 'For OAuth 2.0 authentication please provide a token',
-            },
-
-          },
+              description: 'For OAuth 2.0 authentication please provide a token'
+            }
+          }
         },
         {
           properties: {
             authentication: {
-              enum: [
-                'basic',
-              ],
+              enum: ['basic']
             },
             userid: {
               type: 'string',
               title: 'Username',
-              description: 'For basic authentication please provide a userid',
+              description: 'For basic authentication please provide a userid'
             },
             password: {
               type: 'string',
               title: 'Password',
               format: 'password',
-              description: 'For basic authentication please provide a password',
-            },
-
-          },
-        },
-      ],
-    },
-  },
+              description: 'For basic authentication please provide a password'
+            }
+          }
+        }
+      ]
+    }
+  }
 };
 
 export const arraySchema = {
@@ -250,10 +230,10 @@ export const arraySchema = {
       properties: {
         name: {
           type: 'string',
-          default: 'Default name',
-        },
-      },
-    },
+          default: 'Default name'
+        }
+      }
+    }
   },
   type: 'object',
   properties: {
@@ -262,22 +242,17 @@ export const arraySchema = {
       title: 'A list of strings',
       items: {
         type: 'string',
-        default: 'bazinga',
-      },
+        default: 'bazinga'
+      }
     },
     multipleChoicesList: {
       type: 'array',
       title: 'A multiple choices list',
       items: {
         type: 'string',
-        enum: [
-          'foo',
-          'bar',
-          'fuzz',
-          'qux',
-        ],
+        enum: ['foo', 'bar', 'fuzz', 'qux']
       },
-      uniqueItems: true,
+      uniqueItems: true
     },
     fixedItemsList: {
       type: 'array',
@@ -286,39 +261,35 @@ export const arraySchema = {
         {
           title: 'A string value',
           type: 'string',
-          default: 'lorem ipsum',
+          default: 'lorem ipsum'
         },
         {
           title: 'a boolean value',
-          type: 'boolean',
-        },
+          type: 'boolean'
+        }
       ],
       additionalItems: {
         title: 'Additional item',
-        type: 'number',
-      },
+        type: 'number'
+      }
     },
     minItemsList: {
       type: 'array',
       title: 'A list with a minimal number of items',
       minItems: 3,
       items: {
-        $ref: '#/definitions/Thing',
-      },
+        $ref: '#/definitions/Thing'
+      }
     },
     defaultsAndMinItems: {
       type: 'array',
       title: 'List and item level defaults',
       minItems: 5,
-      default: [
-        'carp',
-        'trout',
-        'bream',
-      ],
+      default: ['carp', 'trout', 'bream'],
       items: {
         type: 'string',
-        default: 'unidentified',
-      },
+        default: 'unidentified'
+      }
     },
     nestedList: {
       type: 'array',
@@ -328,33 +299,33 @@ export const arraySchema = {
         title: 'Inner list',
         items: {
           type: 'string',
-          default: 'lorem ipsum',
-        },
-      },
+          default: 'lorem ipsum'
+        }
+      }
     },
     unorderable: {
       title: 'Unorderable items',
       type: 'array',
       items: {
         type: 'string',
-        default: 'lorem ipsum',
-      },
+        default: 'lorem ipsum'
+      }
     },
     unremovable: {
       title: 'Unremovable items',
       type: 'array',
       items: {
         type: 'string',
-        default: 'lorem ipsum',
-      },
+        default: 'lorem ipsum'
+      }
     },
     noToolbar: {
       title: 'No add, remove and order buttons',
       type: 'array',
       items: {
         type: 'string',
-        default: 'lorem ipsum',
-      },
+        default: 'lorem ipsum'
+      }
     },
     fixedNoToolbar: {
       title: 'Fixed array without buttons',
@@ -363,67 +334,67 @@ export const arraySchema = {
         {
           title: 'A number',
           type: 'number',
-          default: 42,
+          default: 42
         },
         {
           title: 'A boolean',
           type: 'boolean',
-          default: false,
-        },
+          default: false
+        }
       ],
       additionalItems: {
         title: 'A string',
         type: 'string',
-        default: 'lorem ipsum',
-      },
-    },
-  },
+        default: 'lorem ipsum'
+      }
+    }
+  }
 };
 
 export const uiArraySchema = {
   listOfStrings: {
     items: {
-      'ui:emptyValue': '',
-    },
+      'ui:emptyValue': ''
+    }
   },
   multipleChoicesList: {
-    'ui:widget': 'checkboxes',
+    'ui:widget': 'checkboxes'
   },
   fixedItemsList: {
     items: [
       {
-        'ui:widget': 'textarea',
+        'ui:widget': 'textarea'
       },
       {
-        'ui:widget': 'select',
-      },
+        'ui:widget': 'select'
+      }
     ],
     additionalItems: {
-      'ui:widget': 'updown',
-    },
+      'ui:widget': 'updown'
+    }
   },
   unorderable: {
     'ui:options': {
-      orderable: false,
-    },
+      orderable: false
+    }
   },
   unremovable: {
     'ui:options': {
-      removable: false,
-    },
+      removable: false
+    }
   },
   noToolbar: {
     'ui:options': {
       addable: false,
       orderable: false,
-      removable: false,
-    },
+      removable: false
+    }
   },
   fixedNoToolbar: {
     'ui:options': {
       addable: false,
       orderable: false,
-      removable: false,
-    },
-  },
+      removable: false
+    }
+  }
 };

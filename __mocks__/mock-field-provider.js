@@ -3,22 +3,21 @@ import { createElement } from 'react';
 const MockFieldProvider = ({ input, render, meta, component, children, ...rest }) => {
   const fieldInput = {
     onChange: jest.fn(),
-    ...input,
+    ...input
   };
   const fieldMeta = {
-    ...meta,
+    ...meta
   };
 
   if (typeof children === 'function') {
     return children({ ...rest, input: fieldInput, meta: fieldMeta });
   }
 
-  if (typeof component === 'object') {
+  if (typeof component === 'object' || typeof component === 'function') {
     return createElement(component, { ...rest, input: fieldInput, meta: fieldMeta, children });
   }
 
   return render({ ...rest, input: fieldInput, meta: fieldMeta, children });
-
 };
 
 export default MockFieldProvider;

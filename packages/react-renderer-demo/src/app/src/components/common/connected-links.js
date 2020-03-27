@@ -15,14 +15,14 @@ const useStyles = makeStyles(() => ({
     paddingLeft: 32,
     paddingRight: 64,
     marginTop: 16,
-    marginBottom: 16,
+    marginBottom: 16
   },
   withSideNav: {
-    width: 'calc(100% - 240px)',
+    width: 'calc(100% - 240px)'
   },
   link: {
-    textDecoration: 'none',
-  },
+    textDecoration: 'none'
+  }
 }));
 
 const ConnectedLinks = () => {
@@ -30,32 +30,36 @@ const ConnectedLinks = () => {
   const { pathname } = useRouter();
   const classNames = useStyles();
   return (
-    <Grid container justify="space-between" className={ clsx(classNames.linksContainer, {
-      [classNames.withSideNav]: pathname.includes('/renderer/') && !(pathname === '/renderer/installation' || pathname === '/renderer/get-started'),
-    }) }>
+    <Grid
+      container
+      justify="space-between"
+      className={clsx(classNames.linksContainer, {
+        [classNames.withSideNav]: pathname.includes('/renderer/') && !(pathname === '/renderer/installation' || pathname === '/renderer/get-started')
+      })}
+    >
       <Grid item>
-        { prev && prev.link && (
-          <Link href={ `/${prev.link}` }>
-            <a className={ classNames.link }>
+        {prev && prev.link && (
+          <Link href={`/${prev.link}`}>
+            <a className={classNames.link} href={`/${prev.link}`}>
               <Button>
                 <ChevronLeft />
-                { prev.label }
+                {prev.label}
               </Button>
             </a>
           </Link>
-        ) }
+        )}
       </Grid>
       <Grid item>
-        { next && next.link && (
-          <Link href={ `/${next.link}` }>
-            <a className={ classNames.link }>
-              <Button >
-                { next.label }
+        {next && next.link && (
+          <Link href={`/${next.link}`}>
+            <a className={classNames.link} href={`/${next.link}`}>
+              <Button>
+                {next.label}
                 <ChevronRight />
               </Button>
             </a>
           </Link>
-        ) }
+        )}
       </Grid>
     </Grid>
   );

@@ -7,7 +7,7 @@ describe('Validators helpers', () => {
     let fakeValidator;
 
     beforeEach(() => {
-      fn = jest.fn(value => value);
+      fn = jest.fn((value) => value);
       fakeValidator = memoize(fn);
     });
 
@@ -15,7 +15,7 @@ describe('Validators helpers', () => {
       fn.mockReset();
     });
 
-    it('remember numbers inputs', ()=> {
+    it('remember numbers inputs', () => {
       fakeValidator(1);
       expect(fn.mock.calls.length).toBe(1);
       fakeValidator(2);
@@ -24,7 +24,7 @@ describe('Validators helpers', () => {
       expect(fn.mock.calls.length).toBe(2);
     });
 
-    it('remember strings inputs', ()=> {
+    it('remember strings inputs', () => {
       fakeValidator('1');
       expect(fn.mock.calls.length).toBe(1);
       fakeValidator('2');
@@ -33,7 +33,7 @@ describe('Validators helpers', () => {
       expect(fn.mock.calls.length).toBe(2);
     });
 
-    it('remember undefined inputs', ()=> {
+    it('remember undefined inputs', () => {
       fakeValidator();
       expect(fn.mock.calls.length).toBe(1);
       fakeValidator('2');
@@ -42,12 +42,12 @@ describe('Validators helpers', () => {
       expect(fn.mock.calls.length).toBe(2);
     });
 
-    it('remember array inputs', ()=> {
-      fakeValidator([ 'a', 'b' ]);
+    it('remember array inputs', () => {
+      fakeValidator(['a', 'b']);
       expect(fn.mock.calls.length).toBe(1);
-      fakeValidator([ 'a', 'c' ]);
+      fakeValidator(['a', 'c']);
       expect(fn.mock.calls.length).toBe(2);
-      fakeValidator([ 'a', 'b' ]);
+      fakeValidator(['a', 'b']);
       expect(fn.mock.calls.length).toBe(2);
     });
   });
@@ -56,15 +56,11 @@ describe('Validators helpers', () => {
     const values = { x: '786727' };
 
     it('returns element messages', () => {
-      expect(prepareMsg(<div type='prop type' />, 'type', values)).toEqual(
-        { defaultMessage: 'prop type', id: 'prop type', values }
-      );
+      expect(prepareMsg(<div type="prop type" />, 'type', values)).toEqual({ defaultMessage: 'prop type', id: 'prop type', values });
     });
 
     it('returns object messages', () => {
-      expect(prepareMsg({ id: 'i3662', defaultMessage: 'message' }, 'type', values)).toEqual(
-        { defaultMessage: 'message', id: 'i3662', values }
-      );
+      expect(prepareMsg({ id: 'i3662', defaultMessage: 'message' }, 'type', values)).toEqual({ defaultMessage: 'message', id: 'i3662', values });
     });
   });
 });

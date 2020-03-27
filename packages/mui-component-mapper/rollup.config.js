@@ -4,40 +4,51 @@ import babel from 'rollup-plugin-babel';
 import replace from 'rollup-plugin-replace';
 import nodeGlobals from 'rollup-plugin-node-globals';
 import { terser } from 'rollup-plugin-terser';
-import { sizeSnapshot } from 'rollup-plugin-size-snapshot';
 import { createFilter } from 'rollup-pluginutils';
 import sass from 'rollup-plugin-sass';
 import async from 'rollup-plugin-async';
+import sourcemaps from 'rollup-plugin-sourcemaps';
 
-const muiExternals = createFilter([
-  'react',
-  'react-dom',
-  'prop-types',
-  '@data-driven-forms/react-form-renderer',
-  '@material-ui/core/**',
-  '@material-ui/styles/**',
-  '@material-ui/icons/**',
-], null, { resolve: false });
+import glob from 'glob';
+import path from 'path';
+
+const outputPaths = glob.sync(path.resolve(__dirname, './src/files/*.js'));
+
+const muiExternals = createFilter(
+  [
+    'react',
+    'react-dom',
+    'prop-types',
+    '@data-driven-forms/react-form-renderer',
+    '@data-driven-forms/react-form-renderer/**',
+    '@material-ui/core',
+    '@material-ui/core/**',
+    '@material-ui/styles/**',
+    '@material-ui/icons/**'
+  ],
+  null,
+  { resolve: false }
+);
 
 const globals = {
   react: 'React',
   'react-dom': 'ReactDOM',
   '@data-driven-forms/react-form-renderer': '@data-driven-forms/react-form-renderer',
   '@material-ui/core': '@material-ui/core',
-  '@material-ui/utils': '@material-ui/utils',
+  '@material-ui/utils': '@material-ui/utils'
 };
 
 const babelOptions = {
   exclude: /node_modules/,
   runtimeHelpers: true,
-  configFile: '../../babel.config.js',
+  configFile: './babel.config.js'
 };
 
 const commonjsOptions = {
   ignoreGlobal: true,
   include: /node_modules/,
   namedExports: {
-    '../react-form-renderer/dist/index.js': [ 'composeValidators' ],
+    '../react-form-renderer/dist/index.js': ['composeValidators'],
     '../../node_modules/prop-types/index.js': [
       'elementType',
       'bool',
@@ -52,41 +63,42 @@ const commonjsOptions = {
       'arrayOf',
       'any',
       'shape',
-      'node',
+      'node'
     ],
-    '../../node_modules/react-is/index.js': [
-      'ForwardRef',
-      'isLazy',
-      'isMemo',
-      'isValidElementType',
-    ],
-  },
+    '../../node_modules/react-is/index.js': ['ForwardRef', 'isLazy', 'isMemo', 'isValidElementType']
+  }
 };
 
-export default [{
-  input: './src/index.js',
+const plugins = [
+  async(),
+  nodeResolve(),
+  commonjs(commonjsOptions),
+  babel(babelOptions),
+  nodeGlobals(),
+  replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
+  terser({
+    keep_classnames: true,
+    keep_fnames: true
+  }),
+  sass({
+    insert: true
+  }),
+  sourcemaps()
+];
+
+export default {
+  input: process.env.FORMAT === 'umd' ? './src/index.js' : ['./src/index.js', ...outputPaths],
   output: {
-    file: './dist/index.js',
-    format: 'umd',
+    ...(process.env.FORMAT === 'umd'
+      ? {
+          file: `./dist/umd/index.js`
+        }
+      : { dir: `./dist/${process.env.FORMAT}` }),
     name: '@data-driven-forms/mui-component-mapper',
     exports: 'named',
     globals,
+    sourcemap: true
   },
   external: muiExternals,
-  plugins: [
-    async(),
-    nodeResolve(),
-    babel(babelOptions),
-    commonjs(commonjsOptions),
-    nodeGlobals(), // Wait for https://github.com/cssinjs/jss/pull/893
-    replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
-    sizeSnapshot({ snapshotPath: 'size-snapshot.json' }),
-    terser({
-      keep_classnames: true,
-      keep_fnames: true,
-    }),
-    sass({
-      insert: true,
-    }),
-  ],
-}];
+  plugins
+};

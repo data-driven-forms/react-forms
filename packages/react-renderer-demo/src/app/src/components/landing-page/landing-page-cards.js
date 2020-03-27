@@ -7,12 +7,12 @@ import Divider from '@material-ui/core/Divider';
 
 import dynamic from 'next/dynamic';
 const CodeEditor = dynamic(import('@docs/components/code-editor'), {
-  ssr: false,
+  ssr: false
 });
 
 const value = `import React from 'react';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
-import { formFieldsMapper, layoutMapper } from '@data-driven-forms/pf4-component-mapper';
+import { componentMapper, FormTemplate } from '@data-driven-forms/pf4-component-mapper';
 
 const schema = {
   fields: [{
@@ -25,17 +25,17 @@ const schema = {
 const Form = () => (
   <FormRenderer
     schema={schema}
-    formFieldsMapper={formFieldsMapper}
-    layoutMapper={layoutMapper}
+    componentMapper={componentMapper}
+    FormTemplate={(props) => <FormTemplate {...props} />}
     onSubmit={console.log}
   />
 )
 `;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   cardsContainer: {
     backgroundColor: theme.palette.common.white,
-    minHeight: '100vh',
+    minHeight: '100vh'
   },
   codeSnippet: {
     margin: '8px 0px',
@@ -47,62 +47,71 @@ const useStyles = makeStyles(theme => ({
     fontSize: 14,
     borderRadius: 3,
     border: '1px solid #979797',
-    maxWidth: 'calc(100vw - 64px)',
+    maxWidth: 'calc(100vw - 64px)'
   },
   languageSh: {
-    padding: '2px 6px',
+    padding: '2px 6px'
   },
   card: {
     backgroundColor: theme.palette.grey[100],
     margin: 16,
     padding: 24,
-    borderRadius: 2,
+    borderRadius: 2
   },
   divider: {
-    marginBottom: 16,
+    marginBottom: 16
   },
   cardQuestion: {
-    color: '#F28D63',
-  },
+    color: '#F28D63'
+  }
 }));
 
 const LandingPageCards = () => {
   const classes = useStyles();
   return (
-    <Grid
-      container
-      direction="row"
-      justify="space-evenly"
-      className={ classes.cardsContainer }
-    >
-      <Grid item xs={ 11 } md={ 5 }>
-        <Paper elevation={ 0 } className={ classes.card }>
-          <Typography className={ classes.cardQuestion } variant="h6" gutterBottom>How to install it?</Typography>
-          <Typography variant="h5" gutterBottom>Installation</Typography>
-          <Typography color="textSecondary" gutterBottom>Add react form renderer</Typography>
-          <pre className={ classes.codeSnippet }>
-            <code className={ classes.languageSh }>$ npm install @data-driven-forms/react-form-renderer -S</code>
+    <Grid container direction="row" justify="space-evenly" className={classes.cardsContainer}>
+      <Grid item xs={11} md={5}>
+        <Paper elevation={0} className={classes.card}>
+          <Typography className={classes.cardQuestion} variant="h6" gutterBottom>
+            How to install it?
+          </Typography>
+          <Typography variant="h5" gutterBottom>
+            Installation
+          </Typography>
+          <Typography color="textSecondary" gutterBottom>
+            Add react form renderer
+          </Typography>
+          <pre className={classes.codeSnippet}>
+            <code className={classes.languageSh}>$ npm install @data-driven-forms/react-form-renderer -S</code>
           </pre>
-          <pre className={ classes.codeSnippet }>
-            <code className={ classes.languageSh }>$ yarn add @data-driven-forms/react-form-renderer</code>
+          <pre className={classes.codeSnippet}>
+            <code className={classes.languageSh}>$ yarn add @data-driven-forms/react-form-renderer</code>
           </pre>
-          <Divider className={ classes.divider } />
-          <Typography color="textSecondary" gutterBottom>Choose your component mapper</Typography>
-          <pre className={ classes.codeSnippet }>
-            <code className={ classes.languageSh }>$ npm install @data-driven-forms/pf4-component-mapper -S</code>
+          <Divider className={classes.divider} />
+          <Typography color="textSecondary" gutterBottom>
+            Choose your component mapper
+          </Typography>
+          <pre className={classes.codeSnippet}>
+            <code className={classes.languageSh}>$ npm install @data-driven-forms/pf4-component-mapper -S</code>
           </pre>
-          <pre className={ classes.codeSnippet }>
-            <code className={ classes.languageSh }>$ yarn add @data-driven-forms/pf4-component-mapper</code>
+          <pre className={classes.codeSnippet}>
+            <code className={classes.languageSh}>$ yarn add @data-driven-forms/pf4-component-mapper</code>
           </pre>
         </Paper>
       </Grid>
-      <Grid item xs={ 11 } md={ 5 }>
-        <Paper elevation={ 0 } className={ classes.card }>
-          <Typography className={ classes.cardQuestion } variant="h6" gutterBottom>How can i use it?</Typography>
-          <Typography variant="h5" gutterBottom>Usage</Typography>
-          <Typography color="textSecondary" gutterBottom>Create your form schema and render it</Typography>
+      <Grid item xs={11} md={5}>
+        <Paper elevation={0} className={classes.card}>
+          <Typography className={classes.cardQuestion} variant="h6" gutterBottom>
+            How can i use it?
+          </Typography>
+          <Typography variant="h5" gutterBottom>
+            Usage
+          </Typography>
+          <Typography color="textSecondary" gutterBottom>
+            Create your form schema and render it
+          </Typography>
           <div style={{ background: '#1d1f21', paddingTop: 16 }}>
-            <CodeEditor value={ value } />
+            <CodeEditor value={value} />
           </div>
         </Paper>
       </Grid>

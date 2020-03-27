@@ -4,7 +4,7 @@ import { shallowToJson } from 'enzyme-to-json';
 import selectNext from '@data-driven-forms/common/src/wizard/select-next';
 import handleEnter from '@data-driven-forms/common/src/wizard/enter-handler';
 
-import WizardStepButtons from '../../form-fields/wizard/step-buttons';
+import WizardStepButtons from '../../files/wizard/step-buttons';
 
 describe('<WizardSTepButtons', () => {
   let initialProps;
@@ -14,34 +14,37 @@ describe('<WizardSTepButtons', () => {
         cancel: 'Cancel',
         next: 'Next',
         submit: 'Submit',
-        back: 'Back',
+        back: 'Back'
       },
       formOptions: {
         onCancel: jest.fn(),
         handleSubmit: jest.fn(),
         submit: jest.fn(),
         valid: true,
-        getState: jest.fn(),
+        getState: jest.fn()
       },
       handlePrev: jest.fn(),
-      handleNext: jest.fn(),
+      handleNext: jest.fn()
     };
   });
 
   it('should render correctly', () => {
-    const wrapper = shallow(<WizardStepButtons { ...initialProps } />);
+    const wrapper = shallow(<WizardStepButtons {...initialProps} />);
     expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
 
   it('should add custom className to toolbar', () => {
-    const wrapper = shallow(<WizardStepButtons { ...initialProps } buttonsClassName="foo-class" />);
+    const wrapper = shallow(<WizardStepButtons {...initialProps} buttonsClassName="foo-class" />);
     expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
 
   it('should call next with correct arguments when next step is string', () => {
     const handleNext = jest.fn();
-    const wrapper = mount(<WizardStepButtons { ...initialProps } handleNext={ handleNext }  nextStep="next-step" />);
-    wrapper.find('button').at(0).simulate('click');
+    const wrapper = mount(<WizardStepButtons {...initialProps} handleNext={handleNext} nextStep="next-step" />);
+    wrapper
+      .find('button')
+      .at(0)
+      .simulate('click');
     expect(handleNext).toHaveBeenCalledWith('next-step');
   });
 
@@ -49,49 +52,58 @@ describe('<WizardSTepButtons', () => {
     const handleNext = jest.fn();
     const wrapper = mount(
       <WizardStepButtons
-        { ...initialProps }
-        handleNext={ handleNext }
+        {...initialProps}
+        handleNext={handleNext}
         formOptions={{
           ...initialProps.formOptions,
-          getState: () => ({ values: { foo: 'foo' }}),
+          getState: () => ({ values: { foo: 'foo' } })
         }}
         nextStep={{
           when: 'foo',
           stepMapper: {
             foo: 'bar',
-            qux: 'quaxx',
-          },
-        }} />);
-    wrapper.find('button').at(0).simulate('click');
+            qux: 'quaxx'
+          }
+        }}
+      />
+    );
+    wrapper
+      .find('button')
+      .at(0)
+      .simulate('click');
     expect(handleNext).toHaveBeenCalledWith('bar');
   });
 
   it('should call submit functions if no next step is defined', () => {
     const handleSubmit = jest.fn();
-    const wrapper = mount(<WizardStepButtons
-      { ...initialProps }
-      formOptions={{ ...initialProps.formOptions, handleSubmit }}
-      nextStep={ undefined }
-    />);
-    wrapper.find('button').at(0).simulate('click');
+    const wrapper = mount(<WizardStepButtons {...initialProps} formOptions={{ ...initialProps.formOptions, handleSubmit }} nextStep={undefined} />);
+    wrapper
+      .find('button')
+      .at(0)
+      .simulate('click');
     expect(handleSubmit).toHaveBeenCalled();
   });
 
-  it('should call cancel function with values', () => {
+  it('should call cancel function', () => {
     const VALUES = { aws: 'yes', password: '123456643' };
     const onCancel = jest.fn();
-    const wrapper = mount(<WizardStepButtons
-      { ...initialProps }
-      formOptions={{ ...initialProps.formOptions, onCancel, getState: () => ({ values: VALUES }) }}
-    />);
-    wrapper.find('button').last().simulate('click');
-    expect(onCancel).toHaveBeenCalledWith(VALUES);
+    const wrapper = mount(
+      <WizardStepButtons {...initialProps} formOptions={{ ...initialProps.formOptions, onCancel, getState: () => ({ values: VALUES }) }} />
+    );
+    wrapper
+      .find('button')
+      .last()
+      .simulate('click');
+    expect(onCancel).toHaveBeenCalled();
   });
 
   it('should call prev function', () => {
     const handlePrev = jest.fn();
-    const wrapper = mount(<WizardStepButtons { ...initialProps } handlePrev={ handlePrev } disableBack={ false }/>);
-    wrapper.find('button').at(1).simulate('click');
+    const wrapper = mount(<WizardStepButtons {...initialProps} handlePrev={handlePrev} disableBack={false} />);
+    wrapper
+      .find('button')
+      .at(1)
+      .simulate('click');
     expect(handlePrev).toHaveBeenCalled();
   });
 
@@ -101,22 +113,22 @@ describe('<WizardSTepButtons', () => {
 
     const GET_STATE = () => ({
       values: {
-        foo: VALUE,
-      },
+        foo: VALUE
+      }
     });
 
     it('should return string nextstep', () => {
       const NEXTSTEP = EXPECTED_NEXT_STEP;
 
       expect(selectNext(NEXTSTEP, GET_STATE)).toEqual(EXPECTED_NEXT_STEP);
-    }),
+    });
 
     it('should return stepmapper nextstep', () => {
       const NEXTSTEP = {
         when: 'foo',
         stepMapper: {
-          [VALUE]: EXPECTED_NEXT_STEP,
-        },
+          [VALUE]: EXPECTED_NEXT_STEP
+        }
       };
 
       expect(selectNext(NEXTSTEP, GET_STATE)).toEqual(EXPECTED_NEXT_STEP);
@@ -150,15 +162,15 @@ describe('<WizardSTepButtons', () => {
 
       event = {
         target: {
-          type: 'notbutton',
+          type: 'notbutton'
         },
         key: 'Enter',
-        preventDefault: jest.fn(),
+        preventDefault: jest.fn()
       };
       formOptions = {
         getState: jest.fn(),
         valid: true,
-        getRegisteredFields,
+        getRegisteredFields
       };
       activeStep = 'active-step';
       findCurrentStep = jest.fn().mockImplementation(() => ({ nextStep }));
@@ -175,7 +187,7 @@ describe('<WizardSTepButtons', () => {
     });
 
     it('should call submit', () => {
-      findCurrentStep = jest.fn().mockImplementation(() => ({ }));
+      findCurrentStep = jest.fn().mockImplementation(() => ({}));
 
       handleEnter(event, formOptions, activeStep, findCurrentStep, handleNext, handleSubmit);
 
@@ -197,7 +209,7 @@ describe('<WizardSTepButtons', () => {
     it('nothing happen when key is not enter', () => {
       event = {
         ...event,
-        key: 'Spacebar',
+        key: 'Spacebar'
       };
 
       handleEnter(event, formOptions, activeStep, findCurrentStep, handleNext, handleSubmit);
@@ -212,8 +224,8 @@ describe('<WizardSTepButtons', () => {
         ...event,
         target: {
           ...event.target,
-          type: 'button',
-        },
+          type: 'button'
+        }
       };
 
       handleEnter(event, formOptions, activeStep, findCurrentStep, handleNext, handleSubmit);

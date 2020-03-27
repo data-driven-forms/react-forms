@@ -7,80 +7,16 @@ import ListOfContents from '../../src/helpers/list-of-contents';
 <Grid container item>
 <Grid item xs={12} md={10}>
 
-# Introduction
+# ComponentMapper
 
 In order to successfully render a form via FormRenderer you need to assign component mappers. Component mapper is an object of React components,
 where key is a component identifier and value is the Component. The identifiers must be equivalent to `componentTypes` in your schema.
 
-There are two types of component mappers required by FormRenderer: `layoutMapper` and `formFieldsMapper`.
+## Creating componentMapper
 
-
-## LayoutMapper
-In layout mapper you have to define your form layout components like form wrapper, form groups etc.
-
-
-## FormFieldsMapper
-Form fields mapper defines form inputs which can mutate the form state.
-
-# Creating layoutMapper
-
-Layout mapper components define the form layout. There are several different components which you have to implement. If you don't need
-any special wrapper for the component, you can define it as `React.Fragment`.
-
-```jsx
-import { layoutComponents } from '@data-driven-forms/react-form-renderer';
-
-const layoutComponents = {
-  [layoutComponents.FORM_WRAPPER]: 'FormWrapper',
-  [layoutComponents.BUTTON]: 'Button',
-  [layoutComponents.BUTTON_GROUP]: 'ButtonGroup',
-  [layoutComponents.TITLE]: 'Title',
-  [layoutComponents.DESCRIPTION]: 'Description',
-}
-```
-
-Required components are: `FORM_WRAPPER`, `BUTTON` and `BUTTON_GROUP`. The rest is used only if you use certain
-components in your schema.
-
-Check the example below to see a simple implementation of layout components.
-
-<RawComponent source="component-mapper/layout-mapper" />
-
-## Layout components props
-
-### FormWrapper
-|Prop|Type|Description|Value|Customizable|
-|----|----|-----------|-----|------------|
-|children|node|Content of the form||Based on form schema|
-
-### Button
-|Prop|Type|Description|Value|Customizable|
-|----|----|-----------|-----|------------|
-|label|string|Button label|"Submit", "Cancel", "Reset"|Yes, \`buttonsLabels\` FormRenderer prop|
-|variant|string|Variant of button. Submit button will receive "primary" value |"primary", undefined|No|
-|onClick|function|Button click event handler|function|Yes, \`onSubmit\`, \`onCancel\`, \`onReset\` FormRenderer props|
-|buttonType|string|Depends on the type button|One of 'submit', 'cancel', 'reset'|No|
-
-### ButtonGroup
-|Prop|Type|Description|Value|Customizable|
-|----|----|-----------|-----|------------|
-|children|node|Wrapper around form buttons||No|
-
-### Title
-|Prop|Type|Description|Customizable|
-|----|----|-----------|------------|
-|children|node|Form title|no|
-
-### Description
-|Prop|Type|Description|Customizable|
-|----|----|-----------|------------|
-|children|node|Form description|no|
-
-# Creating formFieldsMapper
-
-Form fields mapper defines components that are rendered from input schema. Each component in mapper must have an unique key,
-which corresponds to `componentType` in input schema. Keys names can be chosen but there are some predefined constants
-which cover most common component types. Predefined components are also automatically enhanced and connected to the form state.
+Component mapper defines components that are rendered from input schema. Each component in mapper must have an unique key,
+which corresponds to `componentType` in the schema. Keys names can be chosen but there are some predefined constants
+which cover most common component types.
 
 ```jsx
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
@@ -95,12 +31,49 @@ const componentTypes = {
   [componentTypes.DATE_PICKER]: 'date-picker',
   [componentTypes.TIME_PICKER]: 'time-picker',
   [componentTypes.WIZARD]: 'wizard',
-  [componentTypes.SWITCH]: 'switch-field',
-  [componentTypes.TEXTAREA]: 'textarea-field',
-  [componentTypes.SELECT]: 'select-field',
+  [componentTypes.SWITCH]: 'switch',
+  [componentTypes.TEXTAREA]: 'textarea',
+  [componentTypes.SELECT]: 'select',
   [componentTypes.PLAIN_TEXT]: 'plain-text',
 }
 ```
+
+You have two options how to connect your component to the form state.
+
+### useFieldApi
+
+First, you can use `useFieldApi` hook.
+
+This hook needs `name`, in case of special input types which are using checked as the input value (checbkoxes, switches) you have to assign `type: checkbox`. The hook will return all field props, including input and meta. [TODO: LINK TO WHAT IS INPUT AND META]
+
+```jsx
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+
+...
+
+const { input, isDisabled, label, helperText, description, meta } = useFieldApi(props);
+```
+
+### FieldProvider
+
+Or you can import `FieldProvider` component from Data Driven Forms. This component needs to obtain `render` or `component` prop.
+
+
+```jsx
+import { FieldProvider } from '@data-driven-forms/react-form-renderer'
+
+<FielProvider component={TextField}>
+
+// or
+
+<FielProvider render={({input, meta, ...props}) => <TextField {...props} input={input} meta={meta}>}>
+```
+
+## Example
+
+Below, you can see an basic implementation of custom component mapper:
+<br />
+
 
 <RawComponent source="component-mapper/form-fields-mapper" />
 </Grid>

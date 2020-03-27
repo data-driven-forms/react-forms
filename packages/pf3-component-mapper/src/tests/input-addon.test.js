@@ -3,15 +3,17 @@ import toJson from 'enzyme-to-json';
 import { mount } from 'enzyme';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { componentTypes as components } from '@data-driven-forms/react-form-renderer';
-import { formFieldsMapper, layoutMapper } from '../';
+import { componentMapper, FormTemplate } from '../';
 
 const schema = {
-  fields: [{
-    name: 'text_box_21',
-    label: 'Text Box With Input Addon',
-    title: 'Text Box With Input Addon',
-    component: components.TEXT_FIELD,
-  }],
+  fields: [
+    {
+      name: 'text_box_21',
+      label: 'Text Box With Input Addon',
+      title: 'Text Box With Input Addon',
+      component: components.TEXT_FIELD
+    }
+  ]
 };
 
 describe('<Input Addon>', () => {
@@ -23,19 +25,18 @@ describe('<Input Addon>', () => {
             component: components.PLAIN_TEXT,
             label: '-',
             name: 'name1',
-            variant: 'span',
-          },
-        ],
-      },
+            variant: 'span'
+          }
+        ]
+      }
     };
     const wrapper = mount(
       <FormRenderer
-        schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }]}}
-        formFieldsMapper={ formFieldsMapper }
-        layoutMapper={ layoutMapper }
-        onCancel={ () => {} }
-        showFormControls={ false }
-        onSubmit={ jest.fn() }
+        schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
+        onCancel={() => {}}
+        onSubmit={jest.fn()}
       />
     );
     expect(toJson(wrapper)).toMatchSnapshot();
@@ -52,21 +53,20 @@ describe('<Input Addon>', () => {
               {
                 component: components.BUTTON,
                 label: 'Set 2',
-                name: 'set2',
-              },
-            ],
-          },
-        ],
-      },
+                name: 'set2'
+              }
+            ]
+          }
+        ]
+      }
     };
     const wrapper = mount(
       <FormRenderer
-        schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }]}}
-        formFieldsMapper={ formFieldsMapper }
-        layoutMapper={ layoutMapper }
-        onCancel={ () => {} }
-        showFormControls={ false }
-        onSubmit={ jest.fn() }
+        schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
+        onCancel={() => {}}
+        onSubmit={jest.fn()}
       />
     );
     expect(toJson(wrapper)).toMatchSnapshot();
@@ -80,19 +80,18 @@ describe('<Input Addon>', () => {
             component: components.PLAIN_TEXT,
             label: '-',
             name: 'name1',
-            variant: 'span',
-          },
-        ],
-      },
+            variant: 'span'
+          }
+        ]
+      }
     };
     const wrapper = mount(
       <FormRenderer
-        schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }]}}
-        formFieldsMapper={ formFieldsMapper }
-        layoutMapper={ layoutMapper }
-        onCancel={ () => {} }
-        showFormControls={ false }
-        onSubmit={ jest.fn() }
+        schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
+        onCancel={() => {}}
+        onSubmit={jest.fn()}
       />
     );
     expect(toJson(wrapper)).toMatchSnapshot();
@@ -105,19 +104,18 @@ describe('<Input Addon>', () => {
           {
             component: components.BUTTON,
             label: 'Set 3',
-            name: 'set3',
-          },
-        ],
-      },
+            name: 'set3'
+          }
+        ]
+      }
     };
     const wrapper = mount(
       <FormRenderer
-        schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }]}}
-        formFieldsMapper={ formFieldsMapper }
-        layoutMapper={ layoutMapper }
-        onCancel={ () => {} }
-        showFormControls={ false }
-        onSubmit={ jest.fn() }
+        schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
+        onCancel={() => {}}
+        onSubmit={jest.fn()}
       />
     );
     expect(toJson(wrapper)).toMatchSnapshot();
@@ -135,26 +133,25 @@ describe('<Input Addon>', () => {
                 component: components.BUTTON,
                 label: 'Set 1',
                 name: 'set1',
-                onClick: () => {},
+                onClick: () => {}
               },
               {
                 component: components.BUTTON,
                 label: 'Set 2',
-                name: 'set2',
-              },
-            ],
-          },
-        ],
-      },
+                name: 'set2'
+              }
+            ]
+          }
+        ]
+      }
     };
     const wrapper = mount(
       <FormRenderer
-        schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }]}}
-        formFieldsMapper={ formFieldsMapper }
-        layoutMapper={ layoutMapper }
-        onCancel={ () => {} }
-        showFormControls={ false }
-        onSubmit={ jest.fn() }
+        schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
+        onCancel={() => {}}
+        onSubmit={jest.fn()}
       />
     );
     expect(toJson(wrapper)).toMatchSnapshot();
@@ -172,9 +169,9 @@ describe('<Input Addon>', () => {
                 component: components.PLAIN_TEXT,
                 label: '-',
                 name: 'name1',
-                variant: 'span',
-              },
-            ],
+                variant: 'span'
+              }
+            ]
           },
           {
             component: components.INPUT_ADDON_BUTTON_GROUP,
@@ -183,21 +180,20 @@ describe('<Input Addon>', () => {
               {
                 component: components.BUTTON,
                 label: 'Set 3',
-                name: 'set3',
-              },
-            ],
-          },
-        ],
-      },
+                name: 'set3'
+              }
+            ]
+          }
+        ]
+      }
     };
     const wrapper = mount(
       <FormRenderer
-        schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }]}}
-        formFieldsMapper={ formFieldsMapper }
-        layoutMapper={ layoutMapper }
-        onCancel={ () => {} }
-        showFormControls={ false }
-        onSubmit={ jest.fn() }
+        schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
+        onCancel={() => {}}
+        onSubmit={jest.fn()}
       />
     );
     expect(toJson(wrapper)).toMatchSnapshot();
@@ -215,16 +211,16 @@ describe('<Input Addon>', () => {
                 component: components.BUTTON,
                 label: 'Set 1',
                 name: 'set1',
-                onClick: () => {},
+                onClick: () => {}
               },
               {
                 component: components.BUTTON,
                 label: 'Set 2',
-                name: 'set2',
-              },
-            ],
-          },
-        ],
+                name: 'set2'
+              }
+            ]
+          }
+        ]
       },
       after: {
         fields: [
@@ -236,9 +232,9 @@ describe('<Input Addon>', () => {
                 component: components.PLAIN_TEXT,
                 label: '-',
                 name: 'name1',
-                variant: 'span',
-              },
-            ],
+                variant: 'span'
+              }
+            ]
           },
           {
             component: components.INPUT_ADDON_BUTTON_GROUP,
@@ -247,24 +243,22 @@ describe('<Input Addon>', () => {
               {
                 component: components.BUTTON,
                 label: 'Set 3',
-                name: 'set3',
-              },
-            ],
-          },
-        ],
-      },
+                name: 'set3'
+              }
+            ]
+          }
+        ]
+      }
     };
     const wrapper = mount(
       <FormRenderer
-        schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }]}}
-        formFieldsMapper={ formFieldsMapper }
-        layoutMapper={ layoutMapper }
-        onCancel={ () => {} }
-        showFormControls={ false }
-        onSubmit={ jest.fn() }
+        schema={{ ...schema, fields: [{ ...schema.fields[0], inputAddon }] }}
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
+        onCancel={() => {}}
+        onSubmit={jest.fn()}
       />
     );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
-
 });

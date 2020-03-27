@@ -1,0 +1,1096 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormTemplate PF4 Common should add missing buttons if not defined in button order 1`] = `
+<ContextWrapper>
+  <RenderWithProvider
+    value={
+      Object {
+        "formOptions": Object {
+          "canReset": true,
+          "onCancel": [MockFunction],
+          "onReset": [MockFunction],
+          "onSubmit": [MockFunction],
+          "pristine": true,
+        },
+      }
+    }
+  >
+    <ReactFinalForm
+      onSubmit={[Function]}
+    >
+      <ReactFinalForm
+        onSubmit={[MockFunction]}
+      >
+        <PF4FormTemplate
+          buttonOrder={Array []}
+          canReset={true}
+          canSubmit={true}
+          formFields={
+            <div>
+              Formfields
+            </div>
+          }
+          schema={Object {}}
+        >
+          <FormTemplate
+            Button={[Function]}
+            ButtonGroup={[Function]}
+            Description={[Function]}
+            FormWrapper={[Function]}
+            Title={[Function]}
+            buttonOrder={Array []}
+            canReset={true}
+            canSubmit={true}
+            disableSubmit={Array []}
+            formFields={
+              <div>
+                Formfields
+              </div>
+            }
+            schema={Object {}}
+            showFormControls={true}
+          >
+            <Form>
+              <form
+                className="pf-c-form"
+                noValidate={true}
+              >
+                <div>
+                  Formfields
+                </div>
+                <FormSpy>
+                  <FormControls
+                    Button={[Function]}
+                    ButtonGroup={[Function]}
+                    FormSpy={[Function]}
+                    buttonOrder={Array []}
+                    canReset={true}
+                    canSubmit={true}
+                    cancelLabel="Cancel"
+                    formFields={
+                      <div>
+                        Formfields
+                      </div>
+                    }
+                    formSpyProps={
+                      Object {
+                        "active": undefined,
+                        "dirty": false,
+                        "dirtyFields": Object {},
+                        "dirtyFieldsSinceLastSubmit": Object {},
+                        "dirtySinceLastSubmit": false,
+                        "error": undefined,
+                        "errors": Object {},
+                        "form": Object {
+                          "batch": [Function],
+                          "blur": [Function],
+                          "change": [Function],
+                          "destroyOnUnregister": false,
+                          "focus": [Function],
+                          "getFieldState": [Function],
+                          "getRegisteredFields": [Function],
+                          "getState": [Function],
+                          "initialize": [Function],
+                          "isValidationPaused": [Function],
+                          "mutators": Object {},
+                          "pauseValidation": [Function],
+                          "registerField": [Function],
+                          "reset": [Function],
+                          "resetFieldState": [Function],
+                          "resumeValidation": [Function],
+                          "setConfig": [Function],
+                          "submit": [Function],
+                          "subscribe": [Function],
+                        },
+                        "hasSubmitErrors": false,
+                        "hasValidationErrors": false,
+                        "initialValues": undefined,
+                        "invalid": false,
+                        "modified": Object {},
+                        "pristine": true,
+                        "submitError": undefined,
+                        "submitErrors": undefined,
+                        "submitFailed": false,
+                        "submitSucceeded": false,
+                        "submitting": false,
+                        "touched": Object {},
+                        "valid": true,
+                        "validating": false,
+                        "values": Object {},
+                        "visited": Object {},
+                      }
+                    }
+                    onCancel={[MockFunction]}
+                    onReset={[MockFunction]}
+                    resetLabel="Reset"
+                    schema={Object {}}
+                    submitLabel="Submit"
+                  >
+                    <ButtonGroup>
+                      <ActionGroup>
+                        <div
+                          className="pf-c-form__group pf-m-action"
+                        >
+                          <div
+                            className="pf-c-form__actions"
+                          >
+                            <Button
+                              buttonType="submit"
+                              key="form-submit"
+                              label="Submit"
+                              type="submit"
+                              variant="primary"
+                            >
+                              <Component
+                                type="submit"
+                                variant="primary"
+                              >
+                                <ComponentWithOuia
+                                  component={[Function]}
+                                  componentProps={
+                                    Object {
+                                      "children": Array [
+                                        "Submit",
+                                        undefined,
+                                      ],
+                                      "isDisabled": undefined,
+                                      "type": "submit",
+                                      "variant": "primary",
+                                    }
+                                  }
+                                  consumerContext={null}
+                                >
+                                  <Button
+                                    ouiaContext={
+                                      Object {
+                                        "isOuia": false,
+                                        "ouiaId": null,
+                                      }
+                                    }
+                                    type="submit"
+                                    variant="primary"
+                                  >
+                                    <button
+                                      aria-disabled={null}
+                                      aria-label={null}
+                                      className="pf-c-button pf-m-primary"
+                                      disabled={false}
+                                      tabIndex={null}
+                                      type="submit"
+                                    >
+                                      Submit
+                                    </button>
+                                  </Button>
+                                </ComponentWithOuia>
+                              </Component>
+                            </Button>
+                            <Button
+                              buttonType="reset"
+                              disabled={true}
+                              key="form-reset"
+                              label="Reset"
+                              onClick={[MockFunction]}
+                              type="button"
+                            >
+                              <Component
+                                isDisabled={true}
+                                onClick={[MockFunction]}
+                                type="button"
+                                variant="secondary"
+                              >
+                                <ComponentWithOuia
+                                  component={[Function]}
+                                  componentProps={
+                                    Object {
+                                      "children": Array [
+                                        "Reset",
+                                        undefined,
+                                      ],
+                                      "isDisabled": true,
+                                      "onClick": [MockFunction],
+                                      "type": "button",
+                                      "variant": "secondary",
+                                    }
+                                  }
+                                  consumerContext={null}
+                                >
+                                  <Button
+                                    isDisabled={true}
+                                    onClick={[MockFunction]}
+                                    ouiaContext={
+                                      Object {
+                                        "isOuia": false,
+                                        "ouiaId": null,
+                                      }
+                                    }
+                                    type="button"
+                                    variant="secondary"
+                                  >
+                                    <button
+                                      aria-disabled={null}
+                                      aria-label={null}
+                                      className="pf-c-button pf-m-secondary"
+                                      disabled={true}
+                                      onClick={[MockFunction]}
+                                      tabIndex={null}
+                                      type="button"
+                                    >
+                                      Reset
+                                    </button>
+                                  </Button>
+                                </ComponentWithOuia>
+                              </Component>
+                            </Button>
+                            <Button
+                              buttonType="cancel"
+                              key="form-cancel"
+                              label="Cancel"
+                              onClick={[MockFunction]}
+                              type="button"
+                            >
+                              <Component
+                                onClick={[MockFunction]}
+                                type="button"
+                                variant="link"
+                              >
+                                <ComponentWithOuia
+                                  component={[Function]}
+                                  componentProps={
+                                    Object {
+                                      "children": Array [
+                                        "Cancel",
+                                        undefined,
+                                      ],
+                                      "isDisabled": undefined,
+                                      "onClick": [MockFunction],
+                                      "type": "button",
+                                      "variant": "link",
+                                    }
+                                  }
+                                  consumerContext={null}
+                                >
+                                  <Button
+                                    onClick={[MockFunction]}
+                                    ouiaContext={
+                                      Object {
+                                        "isOuia": false,
+                                        "ouiaId": null,
+                                      }
+                                    }
+                                    type="button"
+                                    variant="link"
+                                  >
+                                    <button
+                                      aria-disabled={null}
+                                      aria-label={null}
+                                      className="pf-c-button pf-m-link"
+                                      disabled={false}
+                                      onClick={[MockFunction]}
+                                      tabIndex={null}
+                                      type="button"
+                                    >
+                                      Cancel
+                                    </button>
+                                  </Button>
+                                </ComponentWithOuia>
+                              </Component>
+                            </Button>
+                          </div>
+                        </div>
+                      </ActionGroup>
+                    </ButtonGroup>
+                  </FormControls>
+                </FormSpy>
+              </form>
+            </Form>
+          </FormTemplate>
+        </PF4FormTemplate>
+      </ReactFinalForm>
+    </ReactFinalForm>
+  </RenderWithProvider>
+</ContextWrapper>
+`;
+
+exports[`FormTemplate PF4 Common should render all controls and with default labels 1`] = `
+<ContextWrapper>
+  <RenderWithProvider
+    value={
+      Object {
+        "formOptions": Object {
+          "canReset": true,
+          "onCancel": [MockFunction],
+          "onReset": [MockFunction],
+          "onSubmit": [MockFunction],
+          "pristine": true,
+        },
+      }
+    }
+  >
+    <ReactFinalForm
+      onSubmit={[Function]}
+    >
+      <ReactFinalForm
+        onSubmit={[MockFunction]}
+      >
+        <PF4FormTemplate
+          formFields={
+            <div>
+              Formfields
+            </div>
+          }
+          schema={Object {}}
+        >
+          <FormTemplate
+            Button={[Function]}
+            ButtonGroup={[Function]}
+            Description={[Function]}
+            FormWrapper={[Function]}
+            Title={[Function]}
+            disableSubmit={Array []}
+            formFields={
+              <div>
+                Formfields
+              </div>
+            }
+            schema={Object {}}
+            showFormControls={true}
+          >
+            <Form>
+              <form
+                className="pf-c-form"
+                noValidate={true}
+              >
+                <div>
+                  Formfields
+                </div>
+                <FormSpy>
+                  <FormControls
+                    Button={[Function]}
+                    ButtonGroup={[Function]}
+                    FormSpy={[Function]}
+                    buttonOrder={
+                      Array [
+                        "submit",
+                        "reset",
+                        "cancel",
+                      ]
+                    }
+                    canReset={false}
+                    canSubmit={false}
+                    cancelLabel="Cancel"
+                    formFields={
+                      <div>
+                        Formfields
+                      </div>
+                    }
+                    formSpyProps={
+                      Object {
+                        "active": undefined,
+                        "dirty": false,
+                        "dirtyFields": Object {},
+                        "dirtyFieldsSinceLastSubmit": Object {},
+                        "dirtySinceLastSubmit": false,
+                        "error": undefined,
+                        "errors": Object {},
+                        "form": Object {
+                          "batch": [Function],
+                          "blur": [Function],
+                          "change": [Function],
+                          "destroyOnUnregister": false,
+                          "focus": [Function],
+                          "getFieldState": [Function],
+                          "getRegisteredFields": [Function],
+                          "getState": [Function],
+                          "initialize": [Function],
+                          "isValidationPaused": [Function],
+                          "mutators": Object {},
+                          "pauseValidation": [Function],
+                          "registerField": [Function],
+                          "reset": [Function],
+                          "resetFieldState": [Function],
+                          "resumeValidation": [Function],
+                          "setConfig": [Function],
+                          "submit": [Function],
+                          "subscribe": [Function],
+                        },
+                        "hasSubmitErrors": false,
+                        "hasValidationErrors": false,
+                        "initialValues": undefined,
+                        "invalid": false,
+                        "modified": Object {},
+                        "pristine": true,
+                        "submitError": undefined,
+                        "submitErrors": undefined,
+                        "submitFailed": false,
+                        "submitSucceeded": false,
+                        "submitting": false,
+                        "touched": Object {},
+                        "valid": true,
+                        "validating": false,
+                        "values": Object {},
+                        "visited": Object {},
+                      }
+                    }
+                    onCancel={[MockFunction]}
+                    onReset={[MockFunction]}
+                    resetLabel="Reset"
+                    schema={Object {}}
+                    submitLabel="Submit"
+                  >
+                    <ButtonGroup>
+                      <ActionGroup>
+                        <div
+                          className="pf-c-form__group pf-m-action"
+                        >
+                          <div
+                            className="pf-c-form__actions"
+                          >
+                            <Button
+                              buttonType="submit"
+                              key="form-submit"
+                              label="Submit"
+                              type="submit"
+                              variant="primary"
+                            >
+                              <Component
+                                type="submit"
+                                variant="primary"
+                              >
+                                <ComponentWithOuia
+                                  component={[Function]}
+                                  componentProps={
+                                    Object {
+                                      "children": Array [
+                                        "Submit",
+                                        undefined,
+                                      ],
+                                      "isDisabled": undefined,
+                                      "type": "submit",
+                                      "variant": "primary",
+                                    }
+                                  }
+                                  consumerContext={null}
+                                >
+                                  <Button
+                                    ouiaContext={
+                                      Object {
+                                        "isOuia": false,
+                                        "ouiaId": null,
+                                      }
+                                    }
+                                    type="submit"
+                                    variant="primary"
+                                  >
+                                    <button
+                                      aria-disabled={null}
+                                      aria-label={null}
+                                      className="pf-c-button pf-m-primary"
+                                      disabled={false}
+                                      tabIndex={null}
+                                      type="submit"
+                                    >
+                                      Submit
+                                    </button>
+                                  </Button>
+                                </ComponentWithOuia>
+                              </Component>
+                            </Button>
+                            <Button
+                              buttonType="cancel"
+                              key="form-cancel"
+                              label="Cancel"
+                              onClick={[MockFunction]}
+                              type="button"
+                            >
+                              <Component
+                                onClick={[MockFunction]}
+                                type="button"
+                                variant="link"
+                              >
+                                <ComponentWithOuia
+                                  component={[Function]}
+                                  componentProps={
+                                    Object {
+                                      "children": Array [
+                                        "Cancel",
+                                        undefined,
+                                      ],
+                                      "isDisabled": undefined,
+                                      "onClick": [MockFunction],
+                                      "type": "button",
+                                      "variant": "link",
+                                    }
+                                  }
+                                  consumerContext={null}
+                                >
+                                  <Button
+                                    onClick={[MockFunction]}
+                                    ouiaContext={
+                                      Object {
+                                        "isOuia": false,
+                                        "ouiaId": null,
+                                      }
+                                    }
+                                    type="button"
+                                    variant="link"
+                                  >
+                                    <button
+                                      aria-disabled={null}
+                                      aria-label={null}
+                                      className="pf-c-button pf-m-link"
+                                      disabled={false}
+                                      onClick={[MockFunction]}
+                                      tabIndex={null}
+                                      type="button"
+                                    >
+                                      Cancel
+                                    </button>
+                                  </Button>
+                                </ComponentWithOuia>
+                              </Component>
+                            </Button>
+                          </div>
+                        </div>
+                      </ActionGroup>
+                    </ButtonGroup>
+                  </FormControls>
+                </FormSpy>
+              </form>
+            </Form>
+          </FormTemplate>
+        </PF4FormTemplate>
+      </ReactFinalForm>
+    </ReactFinalForm>
+  </RenderWithProvider>
+</ContextWrapper>
+`;
+
+exports[`FormTemplate PF4 Common should render buttons in correct order 1`] = `
+<ContextWrapper>
+  <RenderWithProvider
+    value={
+      Object {
+        "formOptions": Object {
+          "canReset": true,
+          "onCancel": [MockFunction],
+          "onReset": [MockFunction],
+          "onSubmit": [MockFunction],
+          "pristine": true,
+        },
+      }
+    }
+  >
+    <ReactFinalForm
+      onSubmit={[Function]}
+    >
+      <ReactFinalForm
+        onSubmit={[MockFunction]}
+      >
+        <PF4FormTemplate
+          buttonOrder={
+            Array [
+              "cancel",
+              "submit",
+              "reset",
+            ]
+          }
+          canReset={true}
+          canSubmit={true}
+          formFields={
+            <div>
+              Formfields
+            </div>
+          }
+          schema={Object {}}
+        >
+          <FormTemplate
+            Button={[Function]}
+            ButtonGroup={[Function]}
+            Description={[Function]}
+            FormWrapper={[Function]}
+            Title={[Function]}
+            buttonOrder={
+              Array [
+                "cancel",
+                "submit",
+                "reset",
+              ]
+            }
+            canReset={true}
+            canSubmit={true}
+            disableSubmit={Array []}
+            formFields={
+              <div>
+                Formfields
+              </div>
+            }
+            schema={Object {}}
+            showFormControls={true}
+          >
+            <Form>
+              <form
+                className="pf-c-form"
+                noValidate={true}
+              >
+                <div>
+                  Formfields
+                </div>
+                <FormSpy>
+                  <FormControls
+                    Button={[Function]}
+                    ButtonGroup={[Function]}
+                    FormSpy={[Function]}
+                    buttonOrder={
+                      Array [
+                        "cancel",
+                        "submit",
+                        "reset",
+                      ]
+                    }
+                    canReset={true}
+                    canSubmit={true}
+                    cancelLabel="Cancel"
+                    formFields={
+                      <div>
+                        Formfields
+                      </div>
+                    }
+                    formSpyProps={
+                      Object {
+                        "active": undefined,
+                        "dirty": false,
+                        "dirtyFields": Object {},
+                        "dirtyFieldsSinceLastSubmit": Object {},
+                        "dirtySinceLastSubmit": false,
+                        "error": undefined,
+                        "errors": Object {},
+                        "form": Object {
+                          "batch": [Function],
+                          "blur": [Function],
+                          "change": [Function],
+                          "destroyOnUnregister": false,
+                          "focus": [Function],
+                          "getFieldState": [Function],
+                          "getRegisteredFields": [Function],
+                          "getState": [Function],
+                          "initialize": [Function],
+                          "isValidationPaused": [Function],
+                          "mutators": Object {},
+                          "pauseValidation": [Function],
+                          "registerField": [Function],
+                          "reset": [Function],
+                          "resetFieldState": [Function],
+                          "resumeValidation": [Function],
+                          "setConfig": [Function],
+                          "submit": [Function],
+                          "subscribe": [Function],
+                        },
+                        "hasSubmitErrors": false,
+                        "hasValidationErrors": false,
+                        "initialValues": undefined,
+                        "invalid": false,
+                        "modified": Object {},
+                        "pristine": true,
+                        "submitError": undefined,
+                        "submitErrors": undefined,
+                        "submitFailed": false,
+                        "submitSucceeded": false,
+                        "submitting": false,
+                        "touched": Object {},
+                        "valid": true,
+                        "validating": false,
+                        "values": Object {},
+                        "visited": Object {},
+                      }
+                    }
+                    onCancel={[MockFunction]}
+                    onReset={[MockFunction]}
+                    resetLabel="Reset"
+                    schema={Object {}}
+                    submitLabel="Submit"
+                  >
+                    <ButtonGroup>
+                      <ActionGroup>
+                        <div
+                          className="pf-c-form__group pf-m-action"
+                        >
+                          <div
+                            className="pf-c-form__actions"
+                          >
+                            <Button
+                              buttonType="cancel"
+                              key="form-cancel"
+                              label="Cancel"
+                              onClick={[MockFunction]}
+                              type="button"
+                            >
+                              <Component
+                                onClick={[MockFunction]}
+                                type="button"
+                                variant="link"
+                              >
+                                <ComponentWithOuia
+                                  component={[Function]}
+                                  componentProps={
+                                    Object {
+                                      "children": Array [
+                                        "Cancel",
+                                        undefined,
+                                      ],
+                                      "isDisabled": undefined,
+                                      "onClick": [MockFunction],
+                                      "type": "button",
+                                      "variant": "link",
+                                    }
+                                  }
+                                  consumerContext={null}
+                                >
+                                  <Button
+                                    onClick={[MockFunction]}
+                                    ouiaContext={
+                                      Object {
+                                        "isOuia": false,
+                                        "ouiaId": null,
+                                      }
+                                    }
+                                    type="button"
+                                    variant="link"
+                                  >
+                                    <button
+                                      aria-disabled={null}
+                                      aria-label={null}
+                                      className="pf-c-button pf-m-link"
+                                      disabled={false}
+                                      onClick={[MockFunction]}
+                                      tabIndex={null}
+                                      type="button"
+                                    >
+                                      Cancel
+                                    </button>
+                                  </Button>
+                                </ComponentWithOuia>
+                              </Component>
+                            </Button>
+                            <Button
+                              buttonType="submit"
+                              key="form-submit"
+                              label="Submit"
+                              type="submit"
+                              variant="primary"
+                            >
+                              <Component
+                                type="submit"
+                                variant="primary"
+                              >
+                                <ComponentWithOuia
+                                  component={[Function]}
+                                  componentProps={
+                                    Object {
+                                      "children": Array [
+                                        "Submit",
+                                        undefined,
+                                      ],
+                                      "isDisabled": undefined,
+                                      "type": "submit",
+                                      "variant": "primary",
+                                    }
+                                  }
+                                  consumerContext={null}
+                                >
+                                  <Button
+                                    ouiaContext={
+                                      Object {
+                                        "isOuia": false,
+                                        "ouiaId": null,
+                                      }
+                                    }
+                                    type="submit"
+                                    variant="primary"
+                                  >
+                                    <button
+                                      aria-disabled={null}
+                                      aria-label={null}
+                                      className="pf-c-button pf-m-primary"
+                                      disabled={false}
+                                      tabIndex={null}
+                                      type="submit"
+                                    >
+                                      Submit
+                                    </button>
+                                  </Button>
+                                </ComponentWithOuia>
+                              </Component>
+                            </Button>
+                            <Button
+                              buttonType="reset"
+                              disabled={true}
+                              key="form-reset"
+                              label="Reset"
+                              onClick={[MockFunction]}
+                              type="button"
+                            >
+                              <Component
+                                isDisabled={true}
+                                onClick={[MockFunction]}
+                                type="button"
+                                variant="secondary"
+                              >
+                                <ComponentWithOuia
+                                  component={[Function]}
+                                  componentProps={
+                                    Object {
+                                      "children": Array [
+                                        "Reset",
+                                        undefined,
+                                      ],
+                                      "isDisabled": true,
+                                      "onClick": [MockFunction],
+                                      "type": "button",
+                                      "variant": "secondary",
+                                    }
+                                  }
+                                  consumerContext={null}
+                                >
+                                  <Button
+                                    isDisabled={true}
+                                    onClick={[MockFunction]}
+                                    ouiaContext={
+                                      Object {
+                                        "isOuia": false,
+                                        "ouiaId": null,
+                                      }
+                                    }
+                                    type="button"
+                                    variant="secondary"
+                                  >
+                                    <button
+                                      aria-disabled={null}
+                                      aria-label={null}
+                                      className="pf-c-button pf-m-secondary"
+                                      disabled={true}
+                                      onClick={[MockFunction]}
+                                      tabIndex={null}
+                                      type="button"
+                                    >
+                                      Reset
+                                    </button>
+                                  </Button>
+                                </ComponentWithOuia>
+                              </Component>
+                            </Button>
+                          </div>
+                        </div>
+                      </ActionGroup>
+                    </ButtonGroup>
+                  </FormControls>
+                </FormSpy>
+              </form>
+            </Form>
+          </FormTemplate>
+        </PF4FormTemplate>
+      </ReactFinalForm>
+    </ReactFinalForm>
+  </RenderWithProvider>
+</ContextWrapper>
+`;
+
+exports[`FormTemplate PF4 Common should render only submit button 1`] = `
+<ContextWrapper>
+  <RenderWithProvider
+    value={
+      Object {
+        "formOptions": Object {
+          "canReset": true,
+          "onCancel": [MockFunction],
+          "onReset": [MockFunction],
+          "onSubmit": [MockFunction],
+          "pristine": true,
+        },
+      }
+    }
+  >
+    <ReactFinalForm
+      onSubmit={[Function]}
+    >
+      <ReactFinalForm
+        onSubmit={[MockFunction]}
+      >
+        <PF4FormTemplate
+          canReset={false}
+          formFields={
+            <div>
+              Formfields
+            </div>
+          }
+          schema={Object {}}
+        >
+          <FormTemplate
+            Button={[Function]}
+            ButtonGroup={[Function]}
+            Description={[Function]}
+            FormWrapper={[Function]}
+            Title={[Function]}
+            canReset={false}
+            disableSubmit={Array []}
+            formFields={
+              <div>
+                Formfields
+              </div>
+            }
+            schema={Object {}}
+            showFormControls={true}
+          >
+            <Form>
+              <form
+                className="pf-c-form"
+                noValidate={true}
+              >
+                <div>
+                  Formfields
+                </div>
+                <FormSpy>
+                  <FormControls
+                    Button={[Function]}
+                    ButtonGroup={[Function]}
+                    FormSpy={[Function]}
+                    buttonOrder={
+                      Array [
+                        "submit",
+                        "reset",
+                        "cancel",
+                      ]
+                    }
+                    canReset={false}
+                    canSubmit={false}
+                    cancelLabel="Cancel"
+                    formFields={
+                      <div>
+                        Formfields
+                      </div>
+                    }
+                    formSpyProps={
+                      Object {
+                        "active": undefined,
+                        "dirty": false,
+                        "dirtyFields": Object {},
+                        "dirtyFieldsSinceLastSubmit": Object {},
+                        "dirtySinceLastSubmit": false,
+                        "error": undefined,
+                        "errors": Object {},
+                        "form": Object {
+                          "batch": [Function],
+                          "blur": [Function],
+                          "change": [Function],
+                          "destroyOnUnregister": false,
+                          "focus": [Function],
+                          "getFieldState": [Function],
+                          "getRegisteredFields": [Function],
+                          "getState": [Function],
+                          "initialize": [Function],
+                          "isValidationPaused": [Function],
+                          "mutators": Object {},
+                          "pauseValidation": [Function],
+                          "registerField": [Function],
+                          "reset": [Function],
+                          "resetFieldState": [Function],
+                          "resumeValidation": [Function],
+                          "setConfig": [Function],
+                          "submit": [Function],
+                          "subscribe": [Function],
+                        },
+                        "hasSubmitErrors": false,
+                        "hasValidationErrors": false,
+                        "initialValues": undefined,
+                        "invalid": false,
+                        "modified": Object {},
+                        "pristine": true,
+                        "submitError": undefined,
+                        "submitErrors": undefined,
+                        "submitFailed": false,
+                        "submitSucceeded": false,
+                        "submitting": false,
+                        "touched": Object {},
+                        "valid": true,
+                        "validating": false,
+                        "values": Object {},
+                        "visited": Object {},
+                      }
+                    }
+                    onReset={[MockFunction]}
+                    resetLabel="Reset"
+                    schema={Object {}}
+                    submitLabel="Submit"
+                  >
+                    <ButtonGroup>
+                      <ActionGroup>
+                        <div
+                          className="pf-c-form__group pf-m-action"
+                        >
+                          <div
+                            className="pf-c-form__actions"
+                          >
+                            <Button
+                              buttonType="submit"
+                              key="form-submit"
+                              label="Submit"
+                              type="submit"
+                              variant="primary"
+                            >
+                              <Component
+                                type="submit"
+                                variant="primary"
+                              >
+                                <ComponentWithOuia
+                                  component={[Function]}
+                                  componentProps={
+                                    Object {
+                                      "children": Array [
+                                        "Submit",
+                                        undefined,
+                                      ],
+                                      "isDisabled": undefined,
+                                      "type": "submit",
+                                      "variant": "primary",
+                                    }
+                                  }
+                                  consumerContext={null}
+                                >
+                                  <Button
+                                    ouiaContext={
+                                      Object {
+                                        "isOuia": false,
+                                        "ouiaId": null,
+                                      }
+                                    }
+                                    type="submit"
+                                    variant="primary"
+                                  >
+                                    <button
+                                      aria-disabled={null}
+                                      aria-label={null}
+                                      className="pf-c-button pf-m-primary"
+                                      disabled={false}
+                                      tabIndex={null}
+                                      type="submit"
+                                    >
+                                      Submit
+                                    </button>
+                                  </Button>
+                                </ComponentWithOuia>
+                              </Component>
+                            </Button>
+                          </div>
+                        </div>
+                      </ActionGroup>
+                    </ButtonGroup>
+                  </FormControls>
+                </FormSpy>
+              </form>
+            </Form>
+          </FormTemplate>
+        </PF4FormTemplate>
+      </ReactFinalForm>
+    </ReactFinalForm>
+  </RenderWithProvider>
+</ContextWrapper>
+`;

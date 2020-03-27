@@ -1,4 +1,4 @@
-const createDateObject = value => {
+const createDateObject = (value) => {
   if (value === 'today') {
     return new Date();
   }
@@ -10,14 +10,17 @@ const createDateObject = value => {
   return value;
 };
 
-export const createDisabledDays = disabledDays => disabledDays.map(item => {
-  if (typeof item === 'object' && !(item instanceof Date) && !Array.isArray(item)) {
+export const createDisabledDays = (disabledDays) =>
+  disabledDays.map((item) => {
+    if (typeof item === 'object' && !(item instanceof Date) && !Array.isArray(item)) {
+      return Object.keys(item).reduce(
+        (acc, curr) => ({
+          ...acc,
+          [curr]: createDateObject(item[curr])
+        }),
+        {}
+      );
+    }
 
-    return Object.keys(item).reduce((acc, curr) => ({
-      ...acc,
-      [curr]: createDateObject(item[curr]),
-    }), {});
-  }
-
-  return createDateObject(item);
-});
+    return createDateObject(item);
+  });

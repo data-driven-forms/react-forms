@@ -7,11 +7,11 @@ import ListOfContents from '../../src/helpers/list-of-contents';
 
 # Installation
 
-```console
+```sh
 npm install --save @data-driven-forms/react-form-renderer
 ```
 or
-```console
+```sh
 yarn add @data-driven-forms/react-form-renderer
 ```
 

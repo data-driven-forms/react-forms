@@ -1,11 +1,8 @@
-import RouterLink from 'next/link';
-import Link from '@material-ui/core/Link';
-
 This a custom component with a custom design. Things can be changed, after official PF4 release.
 
 **Props**
 
-Dual list select is wrapped in a form group, so it accepts all <RouterLink href="/renderer/component-api#formgroupwrappedcomponents"><Link href="/renderer/component-api#formgroupwrappedcomponents">form group props</Link></RouterLink>.
+Dual list select is wrapped in a form group, so it accepts all [form group props](/renderer/component-api#formgroupwrappedcomponents).
 
 |Props|Type|Default|Description|
 |-----|----|-------|-----------|

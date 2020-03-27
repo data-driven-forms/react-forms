@@ -1,35 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Tabs component should render tabs correctly 1`] = `
-<Component
-  activeKey={0}
-  onSelect={[Function]}
+<ContextProvider
+  value={
+    Object {
+      "batch": [Function],
+      "blur": [Function],
+      "change": [Function],
+      "destroyOnUnregister": false,
+      "focus": [Function],
+      "getFieldState": [Function],
+      "getRegisteredFields": [Function],
+      "getState": [Function],
+      "initialize": [Function],
+      "isValidationPaused": [Function],
+      "mutators": Object {},
+      "pauseValidation": [Function],
+      "registerField": [Function],
+      "reset": [Function],
+      "resetFieldState": [Function],
+      "resumeValidation": [Function],
+      "setConfig": [Function],
+      "submit": [Function],
+      "subscribe": [Function],
+    }
+  }
 >
-  <Tab
-    eventKey={0}
-    key="cosiName"
-    title="cosiTitle"
+  <ContextProvider
+    value={
+      Object {
+        "formOptions": Object {
+          "renderForm": [Function],
+        },
+      }
+    }
   >
-    <div
-      className="pf-c-form"
-    >
-      <div>
-        Here would be form
-      </div>
-    </div>
-  </Tab>
-  <Tab
-    eventKey={1}
-    key="cosiName2"
-    title="cosiTitle2"
-  >
-    <div
-      className="pf-c-form"
-    >
-      <div>
-        Here would be form
-      </div>
-    </div>
-  </Tab>
-</Component>
+    <FormTabs
+      fields={
+        Array [
+          Object {
+            "fields": Array [],
+            "name": "cosiName",
+            "title": "cosiTitle",
+          },
+          Object {
+            "fields": Array [],
+            "name": "cosiName2",
+            "title": "cosiTitle2",
+          },
+        ]
+      }
+    />
+  </ContextProvider>
+</ContextProvider>
 `;

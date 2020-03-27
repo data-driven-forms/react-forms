@@ -1,48 +1,79 @@
-/* eslint-disable */
-import React from "react";
-import ReactDOM from "react-dom";
-import FormRenderer from '../src';
-import layoutMapper from './layout-mapper';
-import formFieldsMapper from './form-fields-mapper';
-import sandboxSchema from './sandbox'
+/* eslint-disable camelcase */
+import React from 'react';
+import ReactDOM from 'react-dom';
+import FormRenderer, { validatorTypes } from '../src';
+import componentMapper from './form-fields-mapper';
+import FormTemplate from './form-template';
+// import sandboxSchema from './sandbox';
+import DefaultSchemaError from '../src/files/schema-errors';
 
-const submitTest = (...args) => new Promise(resolve => {
-    setTimeout(() => {
-        console.log('args: ', args)
-        resolve('true')
-    }, 1500)
-})
+const intl = (name) => `translated ${name}`;
 
-const FormButtons = props => {
-    return (
-        <div>
-            <button disabled={props.submitting || props.pristine} type="submit">Submit</button>
-            <button onClick={props.reset}>reset</button>
-        </div>
+const actionMapper = {
+  loadData: (data) => (...args) =>
+    new Promise((resolve) => {
+      setTimeout(() => resolve({ custom: 'ererewr', ...data }), 1700);
+    }),
+  loadLabel: intl
+};
+
+const validatorMapper = {
+  asyncValidator: (url, attributes) => (value, allValues) =>
+    new Promise((resolve, reject) =>
+      setTimeout(() => {
+        if (value === 'error') {
+          reject('Async validation failed');
+        }
+
+        resolve('hola');
+      }, 1700)
     )
-}
+};
 
-const App = () => (
+const asyncValidatorSchema = {
+  fields: [
+    {
+      component: 'text-field',
+      name: 'async-validation-field',
+      label: 'Async validation field',
+      validate: [
+        { type: 'asyncValidator' },
+        { type: 'required' },
+        {
+          type: validatorTypes.PATTERN,
+          pattern: '^Foo$',
+          flags: 'i'
+        }
+      ]
+    }
+  ]
+};
+
+const App = () => {
+  // const [values, setValues] = useState({});
+  return (
     <div style={{ padding: 20 }}>
-        <FormRenderer
-            initialValues={{
-                text_box_1: 'hue',
-                text_box_3: 'initial'
-            }}
-            keepDirtyOnReinitialize
-            clearedValue={'bla'}
-            layoutMapper={layoutMapper}
-            formFieldsMapper={formFieldsMapper}
-            onSubmit={() => console.log(554)}
-            onCancel={console.log}
-            canReset
-            onReset={() => console.log('i am resseting')}
-            schema={sandboxSchema}
-            buttonOrder={['cancel', 'reset', 'submit']}
-            buttonClassName="Foo"
-            renderFormButtons={FormButtons}
-        />
+      <FormRenderer
+        validatorMapper={validatorMapper}
+        componentMapper={componentMapper}
+        onSubmit={(values) => console.log(values)}
+        schema={asyncValidatorSchema}
+        FormTemplate={FormTemplate}
+        actionMapper={actionMapper}
+        schemaValidatorMapper={{
+          actions: {
+            loadLabel: (action, fieldName) => {
+              if (typeof action[1] !== 'string') {
+                throw new DefaultSchemaError(
+                  `Second argument of loadLabel action has to be a string: ID of the text from the translated database. Error found in ${fieldName}`
+                );
+              }
+            }
+          }
+        }}
+      />
     </div>
-)
+  );
+};
 
 ReactDOM.render(<App />, document.getElementById('root'));

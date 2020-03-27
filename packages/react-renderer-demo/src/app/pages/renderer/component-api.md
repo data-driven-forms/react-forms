@@ -1,6 +1,4 @@
 import Grid from '@material-ui/core/Grid'
-import RouterLink from 'next/link';
-import Link from '@material-ui/core/Link';
 
 import ListOfContents from '../../src/helpers/list-of-contents';
 import ExampleLink from '@docs/components/common/example-link';
@@ -17,10 +15,12 @@ There is very short list of that can be applied to every form field
 |Prop|Type|Description|
 |----|:--:|----------:|
 |name|string|Unique field identifier. Value of this field will be under same key|
-|component|string|Component identifier from formFieldsMapper. Rendered component is chosen by this value|
+|component|string|Component identifier from componentMapper. Rendered component is chosen by this value|
 |hideField|boolean|Equivalent to html attribute `hidden`. Hides the field but it remains in DOM. Note that the field is still impacted by the form state. Validation will still apply on hidden field but the error message will not be displayed.|
 
-Each mapper provided in `react-forms` provides a default API for standard components. Standard components are:
+Each mapper provided in `react-forms` provides a default API for standard components. If you want to keep compatibility between our mappers and custom ones, please follow these APIs. Otherwise, it is up to you, which props you choose.
+
+Standard components are:
 <br />
 
 Wrapped in formGroup: <br/>
@@ -53,7 +53,7 @@ All those components provides a shared group of props:
 |isRequired|boolean|Is the field required?|
 |isDisabled|boolean|Is the field disabled?|
 |isReadOnly|boolean|Is the field readOnly?|
-|initialValue|custom|There are two ways how to set initial values in the form: you can use either the <RouterLink href="/renderer/renderer-api"><Link href="/renderer/renderer-api">initialValues</Link></RouterLink> prop for the whole form or you can set the value in the schema for each field separately. For more information, please see [here](https://final-form.org/docs/react-final-form/types/FieldProps#initialvalue).|
+|initialValue|custom|There are two ways how to set initial values in the form: you can use either the [initialValues](/renderer/renderer-api) prop for the whole form or you can set the value in the schema for each field separately. For more information, please see [here](https://final-form.org/docs/react-final-form/types/FieldProps#initialvalue).|
 
 ## Text field
 
@@ -69,7 +69,7 @@ All those components provides a shared group of props:
 |----|:--:|----------:|
 |placeholder|node/string|A placeholder|
 
-<ExampleLink to='textarea-field' />
+<ExampleLink to='textarea' />
 
 ## Select
 
@@ -79,12 +79,12 @@ All those components provides a shared group of props:
 |options|array|Options in format of { label: 'Label', value: value }|
 |loadOptions|function|A function for loading a options asynchronously|
 |loadingMessage|node/string|A message which will shown as a placeholder during the loading|
-|simpleValue|boolean|Simple value (no multi)|
+|simpleValue|boolean|Simple value (no isMulti)|
 |isMulti|boolean|Allows to choose more options|
 |isClearable|boolean|Allows to clear the selected option|
 |isSearchable|boolean|Allows to search in the options|
 
-<ExampleLink to='select-field' />
+<ExampleLink to='select' />
 
 ## Checkbox
 
@@ -111,7 +111,7 @@ All those components provides a shared group of props:
 |onText|string|A text which is shown when the switch is on (checked)|
 |offText|string|A text which is shown when the switch is off|
 
-<ExampleLink to='switch-field' />
+<ExampleLink to='switch' />
 
 ## Datepicker
 
@@ -184,8 +184,8 @@ Wizard step <br/>
 |Prop|Type|Description|
 |----|:--:|----------:|
 |title|node/string|Step title|
-|stepKey|string, number|For first step: 1, otherwise anything|
-|nextStep|object/stepKey of next step|See below|
+|name|string, number|Uniq name of the step|
+|nextStep|object/name of next step|See [wizard documentation](/component-example/wizard)|
 |fields|array|An array of form fields|
 
 <ExampleLink to='wizard' />

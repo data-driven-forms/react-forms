@@ -4,14 +4,14 @@ import lodashIsEmpty from 'lodash/isEmpty';
 import { FormSpy } from 'react-final-form';
 import get from 'lodash/get';
 
-const isEmptyValue = (value) => typeof value === 'number' || value === true ? false : lodashIsEmpty(value);
+const isEmptyValue = (value) => (typeof value === 'number' || value === true ? false : lodashIsEmpty(value));
 
 const fieldCondition = (value, { is, isNotEmpty, isEmpty, pattern, notMatch, flags }) => {
-  if (isNotEmpty){
+  if (isNotEmpty) {
     return !isEmptyValue(value);
   }
 
-  if (isEmpty){
+  if (isEmpty) {
     return isEmptyValue(value);
   }
 
@@ -28,15 +28,15 @@ const fieldCondition = (value, { is, isNotEmpty, isEmpty, pattern, notMatch, fla
 
 export const parseCondition = (condition, values) => {
   if (Array.isArray(condition)) {
-    return !condition.map((condition) => parseCondition(condition, values)).some(result => result === false);
+    return !condition.map((condition) => parseCondition(condition, values)).some((result) => result === false);
   }
 
   if (condition.and) {
-    return condition.and.map((condition) => parseCondition(condition, values)).every(result => result === true);
+    return condition.and.map((condition) => parseCondition(condition, values)).every((result) => result === true);
   }
 
   if (condition.or) {
-    return condition.or.map((condition) => parseCondition(condition, values)).some(result => result === true);
+    return condition.or.map((condition) => parseCondition(condition, values)).some((result) => result === true);
   }
 
   if (condition.not) {
@@ -48,49 +48,27 @@ export const parseCondition = (condition, values) => {
   }
 
   if (Array.isArray(condition.when)) {
-    return !!condition.when.map(fieldName => fieldCondition(get(values, fieldName), condition)).find(condition => !!condition);
+    return !!condition.when.map((fieldName) => fieldCondition(get(values, fieldName), condition)).find((condition) => !!condition);
   }
 
   return false;
 };
 
-const Condition = ({ condition, children }) => (
-  <FormSpy>
-    { ({ values }) => parseCondition(condition, values) ? children : null }
-  </FormSpy>
-);
+const Condition = ({ condition, children }) => <FormSpy>{({ values }) => (parseCondition(condition, values) ? children : null)}</FormSpy>;
 
 const conditionProps = {
   when: PropTypes.string.isRequired,
-  is: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.number,
-    PropTypes.bool,
-  ]).isRequired,
+  is: PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.object, PropTypes.number, PropTypes.bool]).isRequired,
   isNotEmpty: PropTypes.bool,
   isEmpty: PropTypes.bool,
-  children: PropTypes.oneOf([
-    PropTypes.node,
-    PropTypes.arrayOf(PropTypes.node),
-  ]).isRequired,
-  pattern: PropTypes.oneOf([
-    PropTypes.string,
-    PropTypes.instanceOf(RegExp),
-  ]),
-  notMatch: PropTypes.any,
+  children: PropTypes.oneOf([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired,
+  pattern: PropTypes.oneOf([PropTypes.string, PropTypes.instanceOf(RegExp)]),
+  notMatch: PropTypes.any
 };
 
 Condition.propTypes = {
-  condition: PropTypes.oneOfType([
-    PropTypes.shape(conditionProps),
-    PropTypes.arrayOf(PropTypes.shape(conditionProps)),
-  ]),
-  children: PropTypes.oneOf([
-    PropTypes.node,
-    PropTypes.arrayOf(PropTypes.node),
-  ]).isRequired,
+  condition: PropTypes.oneOfType([PropTypes.shape(conditionProps), PropTypes.arrayOf(PropTypes.shape(conditionProps))]),
+  children: PropTypes.oneOf([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired
 };
 
 export default Condition;

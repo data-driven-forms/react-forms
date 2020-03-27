@@ -1,2679 +1,3154 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FormFields should render Checkbox correctly 1`] = `
-<CheckboxField
-  dataType="someDataType"
-  id="someIdKey"
-  input={
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
+  >
+    <Checkbox
+      dataType="someDataType"
+      id="someIdKey"
+      name="Name of the field"
+    >
+      <SingleCheckbox
+        dataType="someDataType"
+        id="someIdKey"
+        name="Name of the field"
+      >
+        <FormGroup
+          hideLabel={true}
+          id="someIdKey"
+          isRequired={false}
+          meta={
+            Object {
+              "active": false,
+              "data": Object {},
+              "dirty": false,
+              "dirtySinceLastSubmit": false,
+              "error": undefined,
+              "initial": undefined,
+              "invalid": false,
+              "length": undefined,
+              "modified": false,
+              "pristine": true,
+              "submitError": undefined,
+              "submitFailed": false,
+              "submitSucceeded": false,
+              "submitting": false,
+              "touched": false,
+              "valid": true,
+              "validating": false,
+              "visited": false,
+            }
+          }
+        >
+          <FormGroup
+            fieldId="someIdKey"
+            isRequired={false}
+            isValid={true}
+            label={false}
+          >
+            <div
+              className="pf-c-form__group"
+            >
+              <Checkbox
+                className=""
+                id="someIdKey"
+                isChecked={false}
+                isDisabled={false}
+                isValid={true}
+                name="Name of the field"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                value=""
+              >
+                <div
+                  className="pf-c-check"
+                >
+                  <input
+                    aria-invalid={false}
+                    checked={false}
+                    className="pf-c-check__input"
+                    disabled={false}
+                    id="someIdKey"
+                    name="Name of the field"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="checkbox"
+                    value=""
+                  />
+                </div>
+              </Checkbox>
+            </div>
+          </FormGroup>
+        </FormGroup>
+      </SingleCheckbox>
+    </Checkbox>
+  </ReactFinalForm>
+</RenderWithProvider>
+`;
+
+exports[`FormFields should render Checkbox with options correctly 1`] = `
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
+  >
+    <Checkbox
+      dataType="someDataType"
+      id="someIdKey"
+      name="Name of the field"
+      options={
+        Array [
+          Object {
+            "label": "One",
+            "value": "1",
+          },
+          Object {
+            "label": "Two",
+            "value": "2",
+          },
+          Object {
+            "label": "Three",
+            "value": "3",
+          },
+        ]
+      }
+    >
+      <MultipleChoiceList
+        dataType="someDataType"
+        id="someIdKey"
+        name="Name of the field"
+        options={
+          Array [
+            Object {
+              "label": "One",
+              "value": "1",
+            },
+            Object {
+              "label": "Two",
+              "value": "2",
+            },
+            Object {
+              "label": "Three",
+              "value": "3",
+            },
+          ]
+        }
+      >
+        <MultipleChoiceList
+          Checkbox={[Function]}
+          Wrapper={[Function]}
+          dataType="someDataType"
+          id="someIdKey"
+          name="Name of the field"
+          options={
+            Array [
+              Object {
+                "label": "One",
+                "value": "1",
+              },
+              Object {
+                "label": "Two",
+                "value": "2",
+              },
+              Object {
+                "label": "Three",
+                "value": "3",
+              },
+            ]
+          }
+        >
+          <Wrapper
+            meta={
+              Object {
+                "active": false,
+                "data": Object {},
+                "dirty": false,
+                "dirtySinceLastSubmit": false,
+                "error": undefined,
+                "initial": undefined,
+                "invalid": false,
+                "length": undefined,
+                "modified": false,
+                "pristine": true,
+                "submitError": undefined,
+                "submitFailed": false,
+                "submitSucceeded": false,
+                "submitting": false,
+                "touched": false,
+                "valid": true,
+                "validating": false,
+                "visited": false,
+              }
+            }
+            name="Name of the field"
+            rest={
+              Object {
+                "id": "someIdKey",
+              }
+            }
+            showError={false}
+          >
+            <FormGroup
+              id="Name of the field"
+              isRequired={false}
+              meta={
+                Object {
+                  "active": false,
+                  "data": Object {},
+                  "dirty": false,
+                  "dirtySinceLastSubmit": false,
+                  "error": undefined,
+                  "initial": undefined,
+                  "invalid": false,
+                  "length": undefined,
+                  "modified": false,
+                  "pristine": true,
+                  "submitError": undefined,
+                  "submitFailed": false,
+                  "submitSucceeded": false,
+                  "submitting": false,
+                  "touched": false,
+                  "valid": true,
+                  "validating": false,
+                  "visited": false,
+                }
+              }
+              name="Name of the field"
+              rest={
+                Object {
+                  "id": "someIdKey",
+                }
+              }
+              showError={false}
+            >
+              <FormGroup
+                fieldId="Name of the field"
+                isRequired={false}
+                isValid={true}
+              >
+                <div
+                  className="pf-c-form__group"
+                >
+                  <SingleCheckbox
+                    Checkbox={[Function]}
+                    aria-label="One"
+                    id="someIdKey-1"
+                    key="someIdKey-1"
+                    label="One"
+                    name="Name of the field"
+                    option={
+                      Object {
+                        "label": "One",
+                        "value": "1",
+                      }
+                    }
+                    value="1"
+                  >
+                    <FinalCheckbox
+                      aria-label="One"
+                      checked={false}
+                      id="someIdKey-1"
+                      label="One"
+                      meta={
+                        Object {
+                          "active": false,
+                          "data": Object {},
+                          "dirty": false,
+                          "dirtySinceLastSubmit": false,
+                          "error": undefined,
+                          "initial": undefined,
+                          "invalid": false,
+                          "length": undefined,
+                          "modified": false,
+                          "pristine": true,
+                          "submitError": undefined,
+                          "submitFailed": false,
+                          "submitSucceeded": false,
+                          "submitting": false,
+                          "touched": false,
+                          "valid": true,
+                          "validating": false,
+                          "visited": false,
+                        }
+                      }
+                      name="Name of the field"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      option={
+                        Object {
+                          "label": "One",
+                          "value": "1",
+                        }
+                      }
+                      type="checkbox"
+                      value="1"
+                    >
+                      <Checkbox
+                        aria-label="One"
+                        checked={false}
+                        className=""
+                        id="someIdKey-1"
+                        isChecked={false}
+                        isDisabled={false}
+                        isValid={true}
+                        label="One"
+                        meta={
+                          Object {
+                            "active": false,
+                            "data": Object {},
+                            "dirty": false,
+                            "dirtySinceLastSubmit": false,
+                            "error": undefined,
+                            "initial": undefined,
+                            "invalid": false,
+                            "length": undefined,
+                            "modified": false,
+                            "pristine": true,
+                            "submitError": undefined,
+                            "submitFailed": false,
+                            "submitSucceeded": false,
+                            "submitting": false,
+                            "touched": false,
+                            "valid": true,
+                            "validating": false,
+                            "visited": false,
+                          }
+                        }
+                        name="Name of the field"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        option={
+                          Object {
+                            "label": "One",
+                            "value": "1",
+                          }
+                        }
+                        type="checkbox"
+                        value="1"
+                      >
+                        <div
+                          className="pf-c-check"
+                        >
+                          <input
+                            aria-invalid={false}
+                            aria-label="One"
+                            checked={false}
+                            className="pf-c-check__input"
+                            disabled={false}
+                            id="someIdKey-1"
+                            meta={
+                              Object {
+                                "active": false,
+                                "data": Object {},
+                                "dirty": false,
+                                "dirtySinceLastSubmit": false,
+                                "error": undefined,
+                                "initial": undefined,
+                                "invalid": false,
+                                "length": undefined,
+                                "modified": false,
+                                "pristine": true,
+                                "submitError": undefined,
+                                "submitFailed": false,
+                                "submitSucceeded": false,
+                                "submitting": false,
+                                "touched": false,
+                                "valid": true,
+                                "validating": false,
+                                "visited": false,
+                              }
+                            }
+                            name="Name of the field"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            option={
+                              Object {
+                                "label": "One",
+                                "value": "1",
+                              }
+                            }
+                            type="checkbox"
+                            value="1"
+                          />
+                          <label
+                            className="pf-c-check__label"
+                            htmlFor="someIdKey-1"
+                          >
+                            One
+                          </label>
+                        </div>
+                      </Checkbox>
+                    </FinalCheckbox>
+                  </SingleCheckbox>
+                  <SingleCheckbox
+                    Checkbox={[Function]}
+                    aria-label="Two"
+                    id="someIdKey-2"
+                    key="someIdKey-2"
+                    label="Two"
+                    name="Name of the field"
+                    option={
+                      Object {
+                        "label": "Two",
+                        "value": "2",
+                      }
+                    }
+                    value="2"
+                  >
+                    <FinalCheckbox
+                      aria-label="Two"
+                      checked={false}
+                      id="someIdKey-2"
+                      label="Two"
+                      meta={
+                        Object {
+                          "active": false,
+                          "data": Object {},
+                          "dirty": false,
+                          "dirtySinceLastSubmit": false,
+                          "error": undefined,
+                          "initial": undefined,
+                          "invalid": false,
+                          "length": undefined,
+                          "modified": false,
+                          "pristine": true,
+                          "submitError": undefined,
+                          "submitFailed": false,
+                          "submitSucceeded": false,
+                          "submitting": false,
+                          "touched": false,
+                          "valid": true,
+                          "validating": false,
+                          "visited": false,
+                        }
+                      }
+                      name="Name of the field"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      option={
+                        Object {
+                          "label": "Two",
+                          "value": "2",
+                        }
+                      }
+                      type="checkbox"
+                      value="2"
+                    >
+                      <Checkbox
+                        aria-label="Two"
+                        checked={false}
+                        className=""
+                        id="someIdKey-2"
+                        isChecked={false}
+                        isDisabled={false}
+                        isValid={true}
+                        label="Two"
+                        meta={
+                          Object {
+                            "active": false,
+                            "data": Object {},
+                            "dirty": false,
+                            "dirtySinceLastSubmit": false,
+                            "error": undefined,
+                            "initial": undefined,
+                            "invalid": false,
+                            "length": undefined,
+                            "modified": false,
+                            "pristine": true,
+                            "submitError": undefined,
+                            "submitFailed": false,
+                            "submitSucceeded": false,
+                            "submitting": false,
+                            "touched": false,
+                            "valid": true,
+                            "validating": false,
+                            "visited": false,
+                          }
+                        }
+                        name="Name of the field"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        option={
+                          Object {
+                            "label": "Two",
+                            "value": "2",
+                          }
+                        }
+                        type="checkbox"
+                        value="2"
+                      >
+                        <div
+                          className="pf-c-check"
+                        >
+                          <input
+                            aria-invalid={false}
+                            aria-label="Two"
+                            checked={false}
+                            className="pf-c-check__input"
+                            disabled={false}
+                            id="someIdKey-2"
+                            meta={
+                              Object {
+                                "active": false,
+                                "data": Object {},
+                                "dirty": false,
+                                "dirtySinceLastSubmit": false,
+                                "error": undefined,
+                                "initial": undefined,
+                                "invalid": false,
+                                "length": undefined,
+                                "modified": false,
+                                "pristine": true,
+                                "submitError": undefined,
+                                "submitFailed": false,
+                                "submitSucceeded": false,
+                                "submitting": false,
+                                "touched": false,
+                                "valid": true,
+                                "validating": false,
+                                "visited": false,
+                              }
+                            }
+                            name="Name of the field"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            option={
+                              Object {
+                                "label": "Two",
+                                "value": "2",
+                              }
+                            }
+                            type="checkbox"
+                            value="2"
+                          />
+                          <label
+                            className="pf-c-check__label"
+                            htmlFor="someIdKey-2"
+                          >
+                            Two
+                          </label>
+                        </div>
+                      </Checkbox>
+                    </FinalCheckbox>
+                  </SingleCheckbox>
+                  <SingleCheckbox
+                    Checkbox={[Function]}
+                    aria-label="Three"
+                    id="someIdKey-3"
+                    key="someIdKey-3"
+                    label="Three"
+                    name="Name of the field"
+                    option={
+                      Object {
+                        "label": "Three",
+                        "value": "3",
+                      }
+                    }
+                    value="3"
+                  >
+                    <FinalCheckbox
+                      aria-label="Three"
+                      checked={false}
+                      id="someIdKey-3"
+                      label="Three"
+                      meta={
+                        Object {
+                          "active": false,
+                          "data": Object {},
+                          "dirty": false,
+                          "dirtySinceLastSubmit": false,
+                          "error": undefined,
+                          "initial": undefined,
+                          "invalid": false,
+                          "length": undefined,
+                          "modified": false,
+                          "pristine": true,
+                          "submitError": undefined,
+                          "submitFailed": false,
+                          "submitSucceeded": false,
+                          "submitting": false,
+                          "touched": false,
+                          "valid": true,
+                          "validating": false,
+                          "visited": false,
+                        }
+                      }
+                      name="Name of the field"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      option={
+                        Object {
+                          "label": "Three",
+                          "value": "3",
+                        }
+                      }
+                      type="checkbox"
+                      value="3"
+                    >
+                      <Checkbox
+                        aria-label="Three"
+                        checked={false}
+                        className=""
+                        id="someIdKey-3"
+                        isChecked={false}
+                        isDisabled={false}
+                        isValid={true}
+                        label="Three"
+                        meta={
+                          Object {
+                            "active": false,
+                            "data": Object {},
+                            "dirty": false,
+                            "dirtySinceLastSubmit": false,
+                            "error": undefined,
+                            "initial": undefined,
+                            "invalid": false,
+                            "length": undefined,
+                            "modified": false,
+                            "pristine": true,
+                            "submitError": undefined,
+                            "submitFailed": false,
+                            "submitSucceeded": false,
+                            "submitting": false,
+                            "touched": false,
+                            "valid": true,
+                            "validating": false,
+                            "visited": false,
+                          }
+                        }
+                        name="Name of the field"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        option={
+                          Object {
+                            "label": "Three",
+                            "value": "3",
+                          }
+                        }
+                        type="checkbox"
+                        value="3"
+                      >
+                        <div
+                          className="pf-c-check"
+                        >
+                          <input
+                            aria-invalid={false}
+                            aria-label="Three"
+                            checked={false}
+                            className="pf-c-check__input"
+                            disabled={false}
+                            id="someIdKey-3"
+                            meta={
+                              Object {
+                                "active": false,
+                                "data": Object {},
+                                "dirty": false,
+                                "dirtySinceLastSubmit": false,
+                                "error": undefined,
+                                "initial": undefined,
+                                "invalid": false,
+                                "length": undefined,
+                                "modified": false,
+                                "pristine": true,
+                                "submitError": undefined,
+                                "submitFailed": false,
+                                "submitSucceeded": false,
+                                "submitting": false,
+                                "touched": false,
+                                "valid": true,
+                                "validating": false,
+                                "visited": false,
+                              }
+                            }
+                            name="Name of the field"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            option={
+                              Object {
+                                "label": "Three",
+                                "value": "3",
+                              }
+                            }
+                            type="checkbox"
+                            value="3"
+                          />
+                          <label
+                            className="pf-c-check__label"
+                            htmlFor="someIdKey-3"
+                          >
+                            Three
+                          </label>
+                        </div>
+                      </Checkbox>
+                    </FinalCheckbox>
+                  </SingleCheckbox>
+                </div>
+              </FormGroup>
+            </FormGroup>
+          </Wrapper>
+        </MultipleChoiceList>
+      </MultipleChoiceList>
+    </Checkbox>
+  </ReactFinalForm>
+</RenderWithProvider>
+`;
+
+exports[`FormFields should render DatePicker correctly 1`] = `
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
+  >
+    <DatePicker
+      dataType="someDataType"
+      id="someIdKey"
+      name="Name of the field"
+    >
+      <FormGroup
+        id="someIdKey"
+        isRequired={false}
+        meta={
+          Object {
+            "active": false,
+            "data": Object {},
+            "dirty": false,
+            "dirtySinceLastSubmit": false,
+            "error": undefined,
+            "initial": undefined,
+            "invalid": false,
+            "length": undefined,
+            "modified": false,
+            "pristine": true,
+            "submitError": undefined,
+            "submitFailed": false,
+            "submitSucceeded": false,
+            "submitting": false,
+            "touched": false,
+            "valid": true,
+            "validating": false,
+            "visited": false,
+          }
+        }
+      >
+        <FormGroup
+          fieldId="someIdKey"
+          isRequired={false}
+          isValid={true}
+        >
+          <div
+            className="pf-c-form__group"
+          >
+            <ForwardRef
+              id="someIdKey"
+              name="Name of the field"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              type="date"
+              value=""
+            >
+              <TextInputBase
+                aria-label={null}
+                className=""
+                id="someIdKey"
+                innerRef={null}
+                isDisabled={false}
+                isReadOnly={false}
+                isRequired={false}
+                isValid={true}
+                name="Name of the field"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                type="date"
+                validated="default"
+                value=""
+              >
+                <input
+                  aria-invalid={false}
+                  aria-label={null}
+                  className="pf-c-form-control"
+                  disabled={false}
+                  id="someIdKey"
+                  name="Name of the field"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  readOnly={false}
+                  required={false}
+                  type="date"
+                  value=""
+                />
+              </TextInputBase>
+            </ForwardRef>
+          </div>
+        </FormGroup>
+      </FormGroup>
+    </DatePicker>
+  </ReactFinalForm>
+</RenderWithProvider>
+`;
+
+exports[`FormFields should render Radio correctly 1`] = `
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
+  >
+    <Radio
+      dataType="someDataType"
+      id="someIdKey"
+      name="Name of the field"
+      options={
+        Array [
+          Object {
+            "label": "One",
+            "value": "1",
+          },
+          Object {
+            "label": "Two",
+            "value": "2",
+          },
+          Object {
+            "label": "Three",
+            "value": "3",
+          },
+        ]
+      }
+    >
+      <FormGroup
+        id="someIdKey"
+        isRequired={false}
+        meta={
+          Object {
+            "active": false,
+            "data": Object {},
+            "dirty": false,
+            "dirtySinceLastSubmit": false,
+            "error": undefined,
+            "initial": undefined,
+            "invalid": false,
+            "length": undefined,
+            "modified": false,
+            "pristine": true,
+            "submitError": undefined,
+            "submitFailed": false,
+            "submitSucceeded": false,
+            "submitting": false,
+            "touched": false,
+            "valid": true,
+            "validating": false,
+            "visited": false,
+          }
+        }
+      >
+        <FormGroup
+          fieldId="someIdKey"
+          isRequired={false}
+          isValid={true}
+        >
+          <div
+            className="pf-c-form__group"
+          >
+            <RadioOption
+              key="1"
+              name="Name of the field"
+              option={
+                Object {
+                  "label": "One",
+                  "value": "1",
+                }
+              }
+            >
+              <Radio
+                aria-label="One"
+                checked={false}
+                className=""
+                id="Name of the field-1"
+                isDisabled={false}
+                isValid={true}
+                key="Name of the field-1"
+                label="One"
+                name="Name of the field"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                type="radio"
+                value="1"
+              >
+                <div
+                  className="pf-c-radio"
+                >
+                  <input
+                    aria-invalid={false}
+                    className="pf-c-radio__input"
+                    disabled={false}
+                    id="Name of the field-1"
+                    name="Name of the field"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="radio"
+                    value="1"
+                  />
+                  <label
+                    className="pf-c-radio__label"
+                    htmlFor="Name of the field-1"
+                  >
+                    One
+                  </label>
+                </div>
+              </Radio>
+            </RadioOption>
+            <RadioOption
+              key="2"
+              name="Name of the field"
+              option={
+                Object {
+                  "label": "Two",
+                  "value": "2",
+                }
+              }
+            >
+              <Radio
+                aria-label="Two"
+                checked={false}
+                className=""
+                id="Name of the field-2"
+                isDisabled={false}
+                isValid={true}
+                key="Name of the field-2"
+                label="Two"
+                name="Name of the field"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                type="radio"
+                value="2"
+              >
+                <div
+                  className="pf-c-radio"
+                >
+                  <input
+                    aria-invalid={false}
+                    className="pf-c-radio__input"
+                    disabled={false}
+                    id="Name of the field-2"
+                    name="Name of the field"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="radio"
+                    value="2"
+                  />
+                  <label
+                    className="pf-c-radio__label"
+                    htmlFor="Name of the field-2"
+                  >
+                    Two
+                  </label>
+                </div>
+              </Radio>
+            </RadioOption>
+            <RadioOption
+              key="3"
+              name="Name of the field"
+              option={
+                Object {
+                  "label": "Three",
+                  "value": "3",
+                }
+              }
+            >
+              <Radio
+                aria-label="Three"
+                checked={false}
+                className=""
+                id="Name of the field-3"
+                isDisabled={false}
+                isValid={true}
+                key="Name of the field-3"
+                label="Three"
+                name="Name of the field"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                type="radio"
+                value="3"
+              >
+                <div
+                  className="pf-c-radio"
+                >
+                  <input
+                    aria-invalid={false}
+                    className="pf-c-radio__input"
+                    disabled={false}
+                    id="Name of the field-3"
+                    name="Name of the field"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="radio"
+                    value="3"
+                  />
+                  <label
+                    className="pf-c-radio__label"
+                    htmlFor="Name of the field-3"
+                  >
+                    Three
+                  </label>
+                </div>
+              </Radio>
+            </RadioOption>
+          </div>
+        </FormGroup>
+      </FormGroup>
+    </Radio>
+  </ReactFinalForm>
+</RenderWithProvider>
+`;
+
+exports[`FormFields should render Select correctly 1`] = `
+<ContextProvider
+  value={
     Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
+      "batch": [Function],
+      "blur": [Function],
+      "change": [Function],
+      "destroyOnUnregister": false,
+      "focus": [Function],
+      "getFieldState": [Function],
+      "getRegisteredFields": [Function],
+      "getState": [Function],
+      "initialize": [Function],
+      "isValidationPaused": [Function],
+      "mutators": Object {},
+      "pauseValidation": [Function],
+      "registerField": [Function],
+      "reset": [Function],
+      "resetFieldState": [Function],
+      "resumeValidation": [Function],
+      "setConfig": [Function],
+      "submit": [Function],
+      "subscribe": [Function],
     }
   }
 >
-  <FieldInterface
-    componentType="checkbox"
-    dataType="someDataType"
-    id="someIdKey"
-    input={
+  <ContextProvider
+    value={
       Object {
-        "name": "Name of the field",
-        "value": "",
+        "formOptions": Object {},
       }
     }
-    meta={
-      Object {
-        "error": false,
-        "touched": false,
-      }
-    }
-    name="Name of the field"
   >
-    <FinalFormField
-      componentType="checkbox"
-      hideLabel={false}
+    <Select
+      dataType="someDataType"
       id="someIdKey"
-      input={
-        Object {
-          "name": "Name of the field",
-          "value": "",
-        }
+      name="Name of the field"
+      options={
+        Array [
+          Object {
+            "label": "One",
+            "value": "1",
+          },
+          Object {
+            "label": "Two",
+            "value": "2",
+          },
+          Object {
+            "label": "Three",
+            "value": "3",
+          },
+        ]
       }
-      isRequired={false}
+    />
+  </ContextProvider>
+</ContextProvider>
+`;
+
+exports[`FormFields should render Switch correctly 1`] = `
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
+  >
+    <Switch
+      dataType="someDataType"
+      id="someIdKey"
+      name="Name of the field"
+    >
+      <FormGroup
+        hideLabel={true}
+        id="someIdKey"
+        isRequired={false}
+        meta={
+          Object {
+            "active": false,
+            "data": Object {},
+            "dirty": false,
+            "dirtySinceLastSubmit": false,
+            "error": undefined,
+            "initial": undefined,
+            "invalid": false,
+            "length": undefined,
+            "modified": false,
+            "pristine": true,
+            "submitError": undefined,
+            "submitFailed": false,
+            "submitSucceeded": false,
+            "submitting": false,
+            "touched": false,
+            "valid": true,
+            "validating": false,
+            "visited": false,
+          }
+        }
+      >
+        <FormGroup
+          fieldId="someIdKey"
+          isRequired={false}
+          isValid={true}
+          label={false}
+        >
+          <div
+            className="pf-c-form__group"
+          >
+            <Component
+              checked={false}
+              id="someIdKey"
+              name="Name of the field"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              type="checkbox"
+            >
+              <ComponentWithOuia
+                component={[Function]}
+                componentProps={
+                  Object {
+                    "checked": false,
+                    "id": "someIdKey",
+                    "isDisabled": undefined,
+                    "label": undefined,
+                    "labelOff": undefined,
+                    "name": "Name of the field",
+                    "onBlur": [Function],
+                    "onChange": [Function],
+                    "onFocus": [Function],
+                    "type": "checkbox",
+                    "value": undefined,
+                  }
+                }
+                consumerContext={null}
+              >
+                <Switch
+                  aria-label=""
+                  checked={false}
+                  className=""
+                  id="someIdKey"
+                  isChecked={true}
+                  isDisabled={false}
+                  label=""
+                  labelOff=""
+                  name="Name of the field"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  ouiaContext={
+                    Object {
+                      "isOuia": false,
+                      "ouiaId": null,
+                    }
+                  }
+                  type="checkbox"
+                >
+                  <label
+                    className="pf-c-switch"
+                    htmlFor="someIdKey"
+                  >
+                    <input
+                      aria-label=""
+                      aria-labelledby="someIdKey-on"
+                      checked={false}
+                      className="pf-c-switch__input"
+                      disabled={false}
+                      id="someIdKey"
+                      name="Name of the field"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      type="checkbox"
+                    />
+                    <span
+                      className="pf-c-switch__toggle"
+                    >
+                      <div
+                        aria-hidden="true"
+                        className="pf-c-switch__toggle-icon"
+                      >
+                        <CheckIcon
+                          color="currentColor"
+                          noVerticalAlign={true}
+                          size="sm"
+                          title={null}
+                        >
+                          <svg
+                            aria-hidden={true}
+                            aria-labelledby={null}
+                            fill="currentColor"
+                            height="1em"
+                            role="img"
+                            style={null}
+                            viewBox="0 0 512 512"
+                            width="1em"
+                          >
+                            <path
+                              d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                              transform=""
+                            />
+                          </svg>
+                        </CheckIcon>
+                      </div>
+                    </span>
+                  </label>
+                </Switch>
+              </ComponentWithOuia>
+            </Component>
+          </div>
+        </FormGroup>
+      </FormGroup>
+    </Switch>
+  </ReactFinalForm>
+</RenderWithProvider>
+`;
+
+exports[`FormFields should render TextField correctly 1`] = `
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
+  >
+    <TextField
+      dataType="someDataType"
+      id="someIdKey"
+      name="Name of the field"
+    >
+      <FormGroup
+        id="someIdKey"
+        isRequired={false}
+        meta={
+          Object {
+            "active": false,
+            "data": Object {},
+            "dirty": false,
+            "dirtySinceLastSubmit": false,
+            "error": undefined,
+            "initial": undefined,
+            "invalid": false,
+            "length": undefined,
+            "modified": false,
+            "pristine": true,
+            "submitError": undefined,
+            "submitFailed": false,
+            "submitSucceeded": false,
+            "submitting": false,
+            "touched": false,
+            "valid": true,
+            "validating": false,
+            "visited": false,
+          }
+        }
+      >
+        <FormGroup
+          fieldId="someIdKey"
+          isRequired={false}
+          isValid={true}
+        >
+          <div
+            className="pf-c-form__group"
+          >
+            <ForwardRef
+              id="someIdKey"
+              name="Name of the field"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              value=""
+            >
+              <TextInputBase
+                aria-label={null}
+                className=""
+                id="someIdKey"
+                innerRef={null}
+                isDisabled={false}
+                isReadOnly={false}
+                isRequired={false}
+                isValid={true}
+                name="Name of the field"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                type="text"
+                validated="default"
+                value=""
+              >
+                <input
+                  aria-invalid={false}
+                  aria-label={null}
+                  className="pf-c-form-control"
+                  disabled={false}
+                  id="someIdKey"
+                  name="Name of the field"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  readOnly={false}
+                  required={false}
+                  type="text"
+                  value=""
+                />
+              </TextInputBase>
+            </ForwardRef>
+          </div>
+        </FormGroup>
+      </FormGroup>
+    </TextField>
+  </ReactFinalForm>
+</RenderWithProvider>
+`;
+
+exports[`FormFields should render TextField with description correctly 1`] = `
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
+  >
+    <TextField
+      dataType="someDataType"
+      description="This is description"
+      id="someIdKey"
+      name="Name of the field"
+    >
+      <FormGroup
+        description="This is description"
+        id="someIdKey"
+        isRequired={false}
+        meta={
+          Object {
+            "active": false,
+            "data": Object {},
+            "dirty": false,
+            "dirtySinceLastSubmit": false,
+            "error": undefined,
+            "initial": undefined,
+            "invalid": false,
+            "length": undefined,
+            "modified": false,
+            "pristine": true,
+            "submitError": undefined,
+            "submitFailed": false,
+            "submitSucceeded": false,
+            "submitting": false,
+            "touched": false,
+            "valid": true,
+            "validating": false,
+            "visited": false,
+          }
+        }
+      >
+        <FormGroup
+          fieldId="someIdKey"
+          isRequired={false}
+          isValid={true}
+        >
+          <div
+            className="pf-c-form__group"
+          >
+            <TextContent>
+              <div
+                className="pf-c-content"
+              >
+                <Text
+                  component="small"
+                >
+                  <small
+                    className=""
+                    data-pf-content={true}
+                  >
+                    This is description
+                  </small>
+                </Text>
+              </div>
+            </TextContent>
+            <ForwardRef
+              id="someIdKey"
+              name="Name of the field"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              value=""
+            >
+              <TextInputBase
+                aria-label={null}
+                className=""
+                id="someIdKey"
+                innerRef={null}
+                isDisabled={false}
+                isReadOnly={false}
+                isRequired={false}
+                isValid={true}
+                name="Name of the field"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                type="text"
+                validated="default"
+                value=""
+              >
+                <input
+                  aria-invalid={false}
+                  aria-label={null}
+                  className="pf-c-form-control"
+                  disabled={false}
+                  id="someIdKey"
+                  name="Name of the field"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  readOnly={false}
+                  required={false}
+                  type="text"
+                  value=""
+                />
+              </TextInputBase>
+            </ForwardRef>
+          </div>
+        </FormGroup>
+      </FormGroup>
+    </TextField>
+  </ReactFinalForm>
+</RenderWithProvider>
+`;
+
+exports[`FormFields should render TextField without id correctly 1`] = `
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
+  >
+    <TextField
+      dataType="someDataType"
+      name="Name of the field"
+    >
+      <FormGroup
+        id="Name of the field"
+        isRequired={false}
+        meta={
+          Object {
+            "active": false,
+            "data": Object {},
+            "dirty": false,
+            "dirtySinceLastSubmit": false,
+            "error": undefined,
+            "initial": undefined,
+            "invalid": false,
+            "length": undefined,
+            "modified": false,
+            "pristine": true,
+            "submitError": undefined,
+            "submitFailed": false,
+            "submitSucceeded": false,
+            "submitting": false,
+            "touched": false,
+            "valid": true,
+            "validating": false,
+            "visited": false,
+          }
+        }
+      >
+        <FormGroup
+          fieldId="Name of the field"
+          isRequired={false}
+          isValid={true}
+        >
+          <div
+            className="pf-c-form__group"
+          >
+            <ForwardRef
+              id="Name of the field"
+              name="Name of the field"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              value=""
+            >
+              <TextInputBase
+                aria-label={null}
+                className=""
+                id="Name of the field"
+                innerRef={null}
+                isDisabled={false}
+                isReadOnly={false}
+                isRequired={false}
+                isValid={true}
+                name="Name of the field"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                type="text"
+                validated="default"
+                value=""
+              >
+                <input
+                  aria-invalid={false}
+                  aria-label={null}
+                  className="pf-c-form-control"
+                  disabled={false}
+                  id="Name of the field"
+                  name="Name of the field"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  readOnly={false}
+                  required={false}
+                  type="text"
+                  value=""
+                />
+              </TextInputBase>
+            </ForwardRef>
+          </div>
+        </FormGroup>
+      </FormGroup>
+    </TextField>
+  </ReactFinalForm>
+</RenderWithProvider>
+`;
+
+exports[`FormFields should render Textarea correctly 1`] = `
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
+  >
+    <Textarea
+      dataType="someDataType"
+      id="someIdKey"
+      name="Name of the field"
+    >
+      <FormGroup
+        id="someIdKey"
+        isRequired={false}
+        meta={
+          Object {
+            "active": false,
+            "data": Object {},
+            "dirty": false,
+            "dirtySinceLastSubmit": false,
+            "error": undefined,
+            "initial": undefined,
+            "invalid": false,
+            "length": undefined,
+            "modified": false,
+            "pristine": true,
+            "submitError": undefined,
+            "submitFailed": false,
+            "submitSucceeded": false,
+            "submitting": false,
+            "touched": false,
+            "valid": true,
+            "validating": false,
+            "visited": false,
+          }
+        }
+      >
+        <FormGroup
+          fieldId="someIdKey"
+          isRequired={false}
+          isValid={true}
+        >
+          <div
+            className="pf-c-form__group"
+          >
+            <TextArea
+              aria-label={null}
+              className=""
+              id="someIdKey"
+              isRequired={false}
+              isValid={true}
+              name="Name of the field"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              resizeOrientation="both"
+              validated="default"
+              value=""
+            >
+              <textarea
+                aria-invalid={false}
+                aria-label={null}
+                className="pf-c-form-control"
+                id="someIdKey"
+                name="Name of the field"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                required={false}
+                value=""
+              />
+            </TextArea>
+          </div>
+        </FormGroup>
+      </FormGroup>
+    </Textarea>
+  </ReactFinalForm>
+</RenderWithProvider>
+`;
+
+exports[`FormFields should render TimePicker correctly 1`] = `
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
+  >
+    <TimePicker
+      dataType="someDataType"
+      id="someIdKey"
+      name="Name of the field"
+    >
+      <FormGroup
+        id="someIdKey"
+        isRequired={false}
+        meta={
+          Object {
+            "active": false,
+            "data": Object {},
+            "dirty": false,
+            "dirtySinceLastSubmit": false,
+            "error": undefined,
+            "initial": undefined,
+            "invalid": false,
+            "length": undefined,
+            "modified": false,
+            "pristine": true,
+            "submitError": undefined,
+            "submitFailed": false,
+            "submitSucceeded": false,
+            "submitting": false,
+            "touched": false,
+            "valid": true,
+            "validating": false,
+            "visited": false,
+          }
+        }
+      >
+        <FormGroup
+          fieldId="someIdKey"
+          isRequired={false}
+          isValid={true}
+        >
+          <div
+            className="pf-c-form__group"
+          >
+            <ForwardRef
+              id="someIdKey"
+              name="Name of the field"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              type="time"
+              value=""
+            >
+              <TextInputBase
+                aria-label={null}
+                className=""
+                id="someIdKey"
+                innerRef={null}
+                isDisabled={false}
+                isReadOnly={false}
+                isRequired={false}
+                isValid={true}
+                name="Name of the field"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                type="time"
+                validated="default"
+                value=""
+              >
+                <input
+                  aria-invalid={false}
+                  aria-label={null}
+                  className="pf-c-form-control"
+                  disabled={false}
+                  id="someIdKey"
+                  name="Name of the field"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  readOnly={false}
+                  required={false}
+                  type="time"
+                  value=""
+                />
+              </TextInputBase>
+            </ForwardRef>
+          </div>
+        </FormGroup>
+      </FormGroup>
+    </TimePicker>
+  </ReactFinalForm>
+</RenderWithProvider>
+`;
+
+exports[`FormFields should render disabled Checkbox with options correctly 1`] = `
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
+  >
+    <Checkbox
+      dataType="someDataType"
+      disabled={true}
+      id="someIdKey"
+      name="Name of the field"
+      options={
+        Array [
+          Object {
+            "label": "One",
+            "value": "1",
+          },
+          Object {
+            "label": "Two",
+            "value": "2",
+          },
+          Object {
+            "label": "Three",
+            "value": "3",
+          },
+        ]
+      }
+    >
+      <MultipleChoiceList
+        dataType="someDataType"
+        disabled={true}
+        id="someIdKey"
+        name="Name of the field"
+        options={
+          Array [
+            Object {
+              "label": "One",
+              "value": "1",
+            },
+            Object {
+              "label": "Two",
+              "value": "2",
+            },
+            Object {
+              "label": "Three",
+              "value": "3",
+            },
+          ]
+        }
+      >
+        <MultipleChoiceList
+          Checkbox={[Function]}
+          Wrapper={[Function]}
+          dataType="someDataType"
+          disabled={true}
+          id="someIdKey"
+          name="Name of the field"
+          options={
+            Array [
+              Object {
+                "label": "One",
+                "value": "1",
+              },
+              Object {
+                "label": "Two",
+                "value": "2",
+              },
+              Object {
+                "label": "Three",
+                "value": "3",
+              },
+            ]
+          }
+        >
+          <Wrapper
+            meta={
+              Object {
+                "active": false,
+                "data": Object {},
+                "dirty": false,
+                "dirtySinceLastSubmit": false,
+                "error": undefined,
+                "initial": undefined,
+                "invalid": false,
+                "length": undefined,
+                "modified": false,
+                "pristine": true,
+                "submitError": undefined,
+                "submitFailed": false,
+                "submitSucceeded": false,
+                "submitting": false,
+                "touched": false,
+                "valid": true,
+                "validating": false,
+                "visited": false,
+              }
+            }
+            name="Name of the field"
+            rest={
+              Object {
+                "disabled": true,
+                "id": "someIdKey",
+              }
+            }
+            showError={false}
+          >
+            <FormGroup
+              id="Name of the field"
+              isRequired={false}
+              meta={
+                Object {
+                  "active": false,
+                  "data": Object {},
+                  "dirty": false,
+                  "dirtySinceLastSubmit": false,
+                  "error": undefined,
+                  "initial": undefined,
+                  "invalid": false,
+                  "length": undefined,
+                  "modified": false,
+                  "pristine": true,
+                  "submitError": undefined,
+                  "submitFailed": false,
+                  "submitSucceeded": false,
+                  "submitting": false,
+                  "touched": false,
+                  "valid": true,
+                  "validating": false,
+                  "visited": false,
+                }
+              }
+              name="Name of the field"
+              rest={
+                Object {
+                  "disabled": true,
+                  "id": "someIdKey",
+                }
+              }
+              showError={false}
+            >
+              <FormGroup
+                fieldId="Name of the field"
+                isRequired={false}
+                isValid={true}
+              >
+                <div
+                  className="pf-c-form__group"
+                >
+                  <SingleCheckbox
+                    Checkbox={[Function]}
+                    aria-label="One"
+                    disabled={true}
+                    id="someIdKey-1"
+                    key="someIdKey-1"
+                    label="One"
+                    name="Name of the field"
+                    option={
+                      Object {
+                        "label": "One",
+                        "value": "1",
+                      }
+                    }
+                    value="1"
+                  >
+                    <FinalCheckbox
+                      aria-label="One"
+                      checked={false}
+                      disabled={true}
+                      id="someIdKey-1"
+                      label="One"
+                      meta={
+                        Object {
+                          "active": false,
+                          "data": Object {},
+                          "dirty": false,
+                          "dirtySinceLastSubmit": false,
+                          "error": undefined,
+                          "initial": undefined,
+                          "invalid": false,
+                          "length": undefined,
+                          "modified": false,
+                          "pristine": true,
+                          "submitError": undefined,
+                          "submitFailed": false,
+                          "submitSucceeded": false,
+                          "submitting": false,
+                          "touched": false,
+                          "valid": true,
+                          "validating": false,
+                          "visited": false,
+                        }
+                      }
+                      name="Name of the field"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      option={
+                        Object {
+                          "label": "One",
+                          "value": "1",
+                        }
+                      }
+                      type="checkbox"
+                      value="1"
+                    >
+                      <Checkbox
+                        aria-label="One"
+                        checked={false}
+                        className=""
+                        disabled={true}
+                        id="someIdKey-1"
+                        isChecked={false}
+                        isDisabled={false}
+                        isValid={true}
+                        label="One"
+                        meta={
+                          Object {
+                            "active": false,
+                            "data": Object {},
+                            "dirty": false,
+                            "dirtySinceLastSubmit": false,
+                            "error": undefined,
+                            "initial": undefined,
+                            "invalid": false,
+                            "length": undefined,
+                            "modified": false,
+                            "pristine": true,
+                            "submitError": undefined,
+                            "submitFailed": false,
+                            "submitSucceeded": false,
+                            "submitting": false,
+                            "touched": false,
+                            "valid": true,
+                            "validating": false,
+                            "visited": false,
+                          }
+                        }
+                        name="Name of the field"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        option={
+                          Object {
+                            "label": "One",
+                            "value": "1",
+                          }
+                        }
+                        type="checkbox"
+                        value="1"
+                      >
+                        <div
+                          className="pf-c-check"
+                        >
+                          <input
+                            aria-invalid={false}
+                            aria-label="One"
+                            checked={false}
+                            className="pf-c-check__input"
+                            disabled={false}
+                            id="someIdKey-1"
+                            meta={
+                              Object {
+                                "active": false,
+                                "data": Object {},
+                                "dirty": false,
+                                "dirtySinceLastSubmit": false,
+                                "error": undefined,
+                                "initial": undefined,
+                                "invalid": false,
+                                "length": undefined,
+                                "modified": false,
+                                "pristine": true,
+                                "submitError": undefined,
+                                "submitFailed": false,
+                                "submitSucceeded": false,
+                                "submitting": false,
+                                "touched": false,
+                                "valid": true,
+                                "validating": false,
+                                "visited": false,
+                              }
+                            }
+                            name="Name of the field"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            option={
+                              Object {
+                                "label": "One",
+                                "value": "1",
+                              }
+                            }
+                            type="checkbox"
+                            value="1"
+                          />
+                          <label
+                            className="pf-c-check__label"
+                            htmlFor="someIdKey-1"
+                          >
+                            One
+                          </label>
+                        </div>
+                      </Checkbox>
+                    </FinalCheckbox>
+                  </SingleCheckbox>
+                  <SingleCheckbox
+                    Checkbox={[Function]}
+                    aria-label="Two"
+                    disabled={true}
+                    id="someIdKey-2"
+                    key="someIdKey-2"
+                    label="Two"
+                    name="Name of the field"
+                    option={
+                      Object {
+                        "label": "Two",
+                        "value": "2",
+                      }
+                    }
+                    value="2"
+                  >
+                    <FinalCheckbox
+                      aria-label="Two"
+                      checked={false}
+                      disabled={true}
+                      id="someIdKey-2"
+                      label="Two"
+                      meta={
+                        Object {
+                          "active": false,
+                          "data": Object {},
+                          "dirty": false,
+                          "dirtySinceLastSubmit": false,
+                          "error": undefined,
+                          "initial": undefined,
+                          "invalid": false,
+                          "length": undefined,
+                          "modified": false,
+                          "pristine": true,
+                          "submitError": undefined,
+                          "submitFailed": false,
+                          "submitSucceeded": false,
+                          "submitting": false,
+                          "touched": false,
+                          "valid": true,
+                          "validating": false,
+                          "visited": false,
+                        }
+                      }
+                      name="Name of the field"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      option={
+                        Object {
+                          "label": "Two",
+                          "value": "2",
+                        }
+                      }
+                      type="checkbox"
+                      value="2"
+                    >
+                      <Checkbox
+                        aria-label="Two"
+                        checked={false}
+                        className=""
+                        disabled={true}
+                        id="someIdKey-2"
+                        isChecked={false}
+                        isDisabled={false}
+                        isValid={true}
+                        label="Two"
+                        meta={
+                          Object {
+                            "active": false,
+                            "data": Object {},
+                            "dirty": false,
+                            "dirtySinceLastSubmit": false,
+                            "error": undefined,
+                            "initial": undefined,
+                            "invalid": false,
+                            "length": undefined,
+                            "modified": false,
+                            "pristine": true,
+                            "submitError": undefined,
+                            "submitFailed": false,
+                            "submitSucceeded": false,
+                            "submitting": false,
+                            "touched": false,
+                            "valid": true,
+                            "validating": false,
+                            "visited": false,
+                          }
+                        }
+                        name="Name of the field"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        option={
+                          Object {
+                            "label": "Two",
+                            "value": "2",
+                          }
+                        }
+                        type="checkbox"
+                        value="2"
+                      >
+                        <div
+                          className="pf-c-check"
+                        >
+                          <input
+                            aria-invalid={false}
+                            aria-label="Two"
+                            checked={false}
+                            className="pf-c-check__input"
+                            disabled={false}
+                            id="someIdKey-2"
+                            meta={
+                              Object {
+                                "active": false,
+                                "data": Object {},
+                                "dirty": false,
+                                "dirtySinceLastSubmit": false,
+                                "error": undefined,
+                                "initial": undefined,
+                                "invalid": false,
+                                "length": undefined,
+                                "modified": false,
+                                "pristine": true,
+                                "submitError": undefined,
+                                "submitFailed": false,
+                                "submitSucceeded": false,
+                                "submitting": false,
+                                "touched": false,
+                                "valid": true,
+                                "validating": false,
+                                "visited": false,
+                              }
+                            }
+                            name="Name of the field"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            option={
+                              Object {
+                                "label": "Two",
+                                "value": "2",
+                              }
+                            }
+                            type="checkbox"
+                            value="2"
+                          />
+                          <label
+                            className="pf-c-check__label"
+                            htmlFor="someIdKey-2"
+                          >
+                            Two
+                          </label>
+                        </div>
+                      </Checkbox>
+                    </FinalCheckbox>
+                  </SingleCheckbox>
+                  <SingleCheckbox
+                    Checkbox={[Function]}
+                    aria-label="Three"
+                    disabled={true}
+                    id="someIdKey-3"
+                    key="someIdKey-3"
+                    label="Three"
+                    name="Name of the field"
+                    option={
+                      Object {
+                        "label": "Three",
+                        "value": "3",
+                      }
+                    }
+                    value="3"
+                  >
+                    <FinalCheckbox
+                      aria-label="Three"
+                      checked={false}
+                      disabled={true}
+                      id="someIdKey-3"
+                      label="Three"
+                      meta={
+                        Object {
+                          "active": false,
+                          "data": Object {},
+                          "dirty": false,
+                          "dirtySinceLastSubmit": false,
+                          "error": undefined,
+                          "initial": undefined,
+                          "invalid": false,
+                          "length": undefined,
+                          "modified": false,
+                          "pristine": true,
+                          "submitError": undefined,
+                          "submitFailed": false,
+                          "submitSucceeded": false,
+                          "submitting": false,
+                          "touched": false,
+                          "valid": true,
+                          "validating": false,
+                          "visited": false,
+                        }
+                      }
+                      name="Name of the field"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      option={
+                        Object {
+                          "label": "Three",
+                          "value": "3",
+                        }
+                      }
+                      type="checkbox"
+                      value="3"
+                    >
+                      <Checkbox
+                        aria-label="Three"
+                        checked={false}
+                        className=""
+                        disabled={true}
+                        id="someIdKey-3"
+                        isChecked={false}
+                        isDisabled={false}
+                        isValid={true}
+                        label="Three"
+                        meta={
+                          Object {
+                            "active": false,
+                            "data": Object {},
+                            "dirty": false,
+                            "dirtySinceLastSubmit": false,
+                            "error": undefined,
+                            "initial": undefined,
+                            "invalid": false,
+                            "length": undefined,
+                            "modified": false,
+                            "pristine": true,
+                            "submitError": undefined,
+                            "submitFailed": false,
+                            "submitSucceeded": false,
+                            "submitting": false,
+                            "touched": false,
+                            "valid": true,
+                            "validating": false,
+                            "visited": false,
+                          }
+                        }
+                        name="Name of the field"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        option={
+                          Object {
+                            "label": "Three",
+                            "value": "3",
+                          }
+                        }
+                        type="checkbox"
+                        value="3"
+                      >
+                        <div
+                          className="pf-c-check"
+                        >
+                          <input
+                            aria-invalid={false}
+                            aria-label="Three"
+                            checked={false}
+                            className="pf-c-check__input"
+                            disabled={false}
+                            id="someIdKey-3"
+                            meta={
+                              Object {
+                                "active": false,
+                                "data": Object {},
+                                "dirty": false,
+                                "dirtySinceLastSubmit": false,
+                                "error": undefined,
+                                "initial": undefined,
+                                "invalid": false,
+                                "length": undefined,
+                                "modified": false,
+                                "pristine": true,
+                                "submitError": undefined,
+                                "submitFailed": false,
+                                "submitSucceeded": false,
+                                "submitting": false,
+                                "touched": false,
+                                "valid": true,
+                                "validating": false,
+                                "visited": false,
+                              }
+                            }
+                            name="Name of the field"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            option={
+                              Object {
+                                "label": "Three",
+                                "value": "3",
+                              }
+                            }
+                            type="checkbox"
+                            value="3"
+                          />
+                          <label
+                            className="pf-c-check__label"
+                            htmlFor="someIdKey-3"
+                          >
+                            Three
+                          </label>
+                        </div>
+                      </Checkbox>
+                    </FinalCheckbox>
+                  </SingleCheckbox>
+                </div>
+              </FormGroup>
+            </FormGroup>
+          </Wrapper>
+        </MultipleChoiceList>
+      </MultipleChoiceList>
+    </Checkbox>
+  </ReactFinalForm>
+</RenderWithProvider>
+`;
+
+exports[`FormFields should render disabled Radio correctly 1`] = `
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
+  >
+    <Radio
+      dataType="someDataType"
+      disabled={true}
+      id="someIdKey"
+      name="Name of the field"
+      options={
+        Array [
+          Object {
+            "label": "One",
+            "value": "1",
+          },
+          Object {
+            "label": "Two",
+            "value": "2",
+          },
+          Object {
+            "label": "Three",
+            "value": "3",
+          },
+        ]
+      }
+    >
+      <FormGroup
+        id="someIdKey"
+        isRequired={false}
+        meta={
+          Object {
+            "active": false,
+            "data": Object {},
+            "dirty": false,
+            "dirtySinceLastSubmit": false,
+            "error": undefined,
+            "initial": undefined,
+            "invalid": false,
+            "length": undefined,
+            "modified": false,
+            "pristine": true,
+            "submitError": undefined,
+            "submitFailed": false,
+            "submitSucceeded": false,
+            "submitting": false,
+            "touched": false,
+            "valid": true,
+            "validating": false,
+            "visited": false,
+          }
+        }
+      >
+        <FormGroup
+          fieldId="someIdKey"
+          isRequired={false}
+          isValid={true}
+        >
+          <div
+            className="pf-c-form__group"
+          >
+            <RadioOption
+              key="1"
+              name="Name of the field"
+              option={
+                Object {
+                  "label": "One",
+                  "value": "1",
+                }
+              }
+            >
+              <Radio
+                aria-label="One"
+                checked={false}
+                className=""
+                id="Name of the field-1"
+                isDisabled={false}
+                isValid={true}
+                key="Name of the field-1"
+                label="One"
+                name="Name of the field"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                type="radio"
+                value="1"
+              >
+                <div
+                  className="pf-c-radio"
+                >
+                  <input
+                    aria-invalid={false}
+                    className="pf-c-radio__input"
+                    disabled={false}
+                    id="Name of the field-1"
+                    name="Name of the field"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="radio"
+                    value="1"
+                  />
+                  <label
+                    className="pf-c-radio__label"
+                    htmlFor="Name of the field-1"
+                  >
+                    One
+                  </label>
+                </div>
+              </Radio>
+            </RadioOption>
+            <RadioOption
+              key="2"
+              name="Name of the field"
+              option={
+                Object {
+                  "label": "Two",
+                  "value": "2",
+                }
+              }
+            >
+              <Radio
+                aria-label="Two"
+                checked={false}
+                className=""
+                id="Name of the field-2"
+                isDisabled={false}
+                isValid={true}
+                key="Name of the field-2"
+                label="Two"
+                name="Name of the field"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                type="radio"
+                value="2"
+              >
+                <div
+                  className="pf-c-radio"
+                >
+                  <input
+                    aria-invalid={false}
+                    className="pf-c-radio__input"
+                    disabled={false}
+                    id="Name of the field-2"
+                    name="Name of the field"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="radio"
+                    value="2"
+                  />
+                  <label
+                    className="pf-c-radio__label"
+                    htmlFor="Name of the field-2"
+                  >
+                    Two
+                  </label>
+                </div>
+              </Radio>
+            </RadioOption>
+            <RadioOption
+              key="3"
+              name="Name of the field"
+              option={
+                Object {
+                  "label": "Three",
+                  "value": "3",
+                }
+              }
+            >
+              <Radio
+                aria-label="Three"
+                checked={false}
+                className=""
+                id="Name of the field-3"
+                isDisabled={false}
+                isValid={true}
+                key="Name of the field-3"
+                label="Three"
+                name="Name of the field"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                type="radio"
+                value="3"
+              >
+                <div
+                  className="pf-c-radio"
+                >
+                  <input
+                    aria-invalid={false}
+                    className="pf-c-radio__input"
+                    disabled={false}
+                    id="Name of the field-3"
+                    name="Name of the field"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    type="radio"
+                    value="3"
+                  />
+                  <label
+                    className="pf-c-radio__label"
+                    htmlFor="Name of the field-3"
+                  >
+                    Three
+                  </label>
+                </div>
+              </Radio>
+            </RadioOption>
+          </div>
+        </FormGroup>
+      </FormGroup>
+    </Radio>
+  </ReactFinalForm>
+</RenderWithProvider>
+`;
+
+exports[`FormFields should render disabled Select correctly 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "batch": [Function],
+      "blur": [Function],
+      "change": [Function],
+      "destroyOnUnregister": false,
+      "focus": [Function],
+      "getFieldState": [Function],
+      "getRegisteredFields": [Function],
+      "getState": [Function],
+      "initialize": [Function],
+      "isValidationPaused": [Function],
+      "mutators": Object {},
+      "pauseValidation": [Function],
+      "registerField": [Function],
+      "reset": [Function],
+      "resetFieldState": [Function],
+      "resumeValidation": [Function],
+      "setConfig": [Function],
+      "submit": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <ContextProvider
+    value={
+      Object {
+        "formOptions": Object {},
+      }
+    }
+  >
+    <Select
+      dataType="someDataType"
+      id="someIdKey"
+      isDisabled={true}
+      name="Name of the field"
+      options={
+        Array [
+          Object {
+            "label": "One",
+            "value": "1",
+          },
+          Object {
+            "label": "Two",
+            "value": "2",
+          },
+          Object {
+            "label": "Three",
+            "value": "3",
+          },
+        ]
+      }
+    />
+  </ContextProvider>
+</ContextProvider>
+`;
+
+exports[`FormFields should render disabled Switch correctly 1`] = `
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
+  >
+    <Switch
+      dataType="someDataType"
+      id="someIdKey"
+      isDisabled={true}
+      name="Name of the field"
+    >
+      <FormGroup
+        hideLabel={true}
+        id="someIdKey"
+        isRequired={false}
+        meta={
+          Object {
+            "active": false,
+            "data": Object {},
+            "dirty": false,
+            "dirtySinceLastSubmit": false,
+            "error": undefined,
+            "initial": undefined,
+            "invalid": false,
+            "length": undefined,
+            "modified": false,
+            "pristine": true,
+            "submitError": undefined,
+            "submitFailed": false,
+            "submitSucceeded": false,
+            "submitting": false,
+            "touched": false,
+            "valid": true,
+            "validating": false,
+            "visited": false,
+          }
+        }
+      >
+        <FormGroup
+          fieldId="someIdKey"
+          isRequired={false}
+          isValid={true}
+          label={false}
+        >
+          <div
+            className="pf-c-form__group"
+          >
+            <Component
+              checked={false}
+              id="someIdKey"
+              isDisabled={true}
+              name="Name of the field"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              type="checkbox"
+            >
+              <ComponentWithOuia
+                component={[Function]}
+                componentProps={
+                  Object {
+                    "checked": false,
+                    "id": "someIdKey",
+                    "isDisabled": true,
+                    "label": undefined,
+                    "labelOff": undefined,
+                    "name": "Name of the field",
+                    "onBlur": [Function],
+                    "onChange": [Function],
+                    "onFocus": [Function],
+                    "type": "checkbox",
+                    "value": undefined,
+                  }
+                }
+                consumerContext={null}
+              >
+                <Switch
+                  aria-label=""
+                  checked={false}
+                  className=""
+                  id="someIdKey"
+                  isChecked={true}
+                  isDisabled={true}
+                  label=""
+                  labelOff=""
+                  name="Name of the field"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  ouiaContext={
+                    Object {
+                      "isOuia": false,
+                      "ouiaId": null,
+                    }
+                  }
+                  type="checkbox"
+                >
+                  <label
+                    className="pf-c-switch"
+                    htmlFor="someIdKey"
+                  >
+                    <input
+                      aria-label=""
+                      aria-labelledby="someIdKey-on"
+                      checked={false}
+                      className="pf-c-switch__input"
+                      disabled={true}
+                      id="someIdKey"
+                      name="Name of the field"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      type="checkbox"
+                    />
+                    <span
+                      className="pf-c-switch__toggle"
+                    >
+                      <div
+                        aria-hidden="true"
+                        className="pf-c-switch__toggle-icon"
+                      >
+                        <CheckIcon
+                          color="currentColor"
+                          noVerticalAlign={true}
+                          size="sm"
+                          title={null}
+                        >
+                          <svg
+                            aria-hidden={true}
+                            aria-labelledby={null}
+                            fill="currentColor"
+                            height="1em"
+                            role="img"
+                            style={null}
+                            viewBox="0 0 512 512"
+                            width="1em"
+                          >
+                            <path
+                              d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                              transform=""
+                            />
+                          </svg>
+                        </CheckIcon>
+                      </div>
+                    </span>
+                  </label>
+                </Switch>
+              </ComponentWithOuia>
+            </Component>
+          </div>
+        </FormGroup>
+      </FormGroup>
+    </Switch>
+  </ReactFinalForm>
+</RenderWithProvider>
+`;
+
+exports[`FormFields should render disabled Switch correctly 2`] = `
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
+  >
+    <Switch
+      dataType="someDataType"
+      id="someIdKey"
+      isDisabled={true}
+      name="Name of the field"
+    >
+      <FormGroup
+        hideLabel={true}
+        id="someIdKey"
+        isRequired={false}
+        meta={
+          Object {
+            "active": false,
+            "data": Object {},
+            "dirty": false,
+            "dirtySinceLastSubmit": false,
+            "error": undefined,
+            "initial": undefined,
+            "invalid": false,
+            "length": undefined,
+            "modified": false,
+            "pristine": true,
+            "submitError": undefined,
+            "submitFailed": false,
+            "submitSucceeded": false,
+            "submitting": false,
+            "touched": false,
+            "valid": true,
+            "validating": false,
+            "visited": false,
+          }
+        }
+      >
+        <FormGroup
+          fieldId="someIdKey"
+          isRequired={false}
+          isValid={true}
+          label={false}
+        >
+          <div
+            className="pf-c-form__group"
+          >
+            <Component
+              checked={false}
+              id="someIdKey"
+              isDisabled={true}
+              name="Name of the field"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              type="checkbox"
+            >
+              <ComponentWithOuia
+                component={[Function]}
+                componentProps={
+                  Object {
+                    "checked": false,
+                    "id": "someIdKey",
+                    "isDisabled": true,
+                    "label": undefined,
+                    "labelOff": undefined,
+                    "name": "Name of the field",
+                    "onBlur": [Function],
+                    "onChange": [Function],
+                    "onFocus": [Function],
+                    "type": "checkbox",
+                    "value": undefined,
+                  }
+                }
+                consumerContext={null}
+              >
+                <Switch
+                  aria-label=""
+                  checked={false}
+                  className=""
+                  id="someIdKey"
+                  isChecked={true}
+                  isDisabled={true}
+                  label=""
+                  labelOff=""
+                  name="Name of the field"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  ouiaContext={
+                    Object {
+                      "isOuia": false,
+                      "ouiaId": null,
+                    }
+                  }
+                  type="checkbox"
+                >
+                  <label
+                    className="pf-c-switch"
+                    htmlFor="someIdKey"
+                  >
+                    <input
+                      aria-label=""
+                      aria-labelledby="someIdKey-on"
+                      checked={false}
+                      className="pf-c-switch__input"
+                      disabled={true}
+                      id="someIdKey"
+                      name="Name of the field"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      type="checkbox"
+                    />
+                    <span
+                      className="pf-c-switch__toggle"
+                    >
+                      <div
+                        aria-hidden="true"
+                        className="pf-c-switch__toggle-icon"
+                      >
+                        <CheckIcon
+                          color="currentColor"
+                          noVerticalAlign={true}
+                          size="sm"
+                          title={null}
+                        >
+                          <svg
+                            aria-hidden={true}
+                            aria-labelledby={null}
+                            fill="currentColor"
+                            height="1em"
+                            role="img"
+                            style={null}
+                            viewBox="0 0 512 512"
+                            width="1em"
+                          >
+                            <path
+                              d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                              transform=""
+                            />
+                          </svg>
+                        </CheckIcon>
+                      </div>
+                    </span>
+                  </label>
+                </Switch>
+              </ComponentWithOuia>
+            </Component>
+          </div>
+        </FormGroup>
+      </FormGroup>
+    </Switch>
+  </ReactFinalForm>
+</RenderWithProvider>
+`;
+
+exports[`FormFields should render disabled Textarea correctly 1`] = `
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
+  >
+    <Textarea
+      dataType="someDataType"
+      id="someIdKey"
+      isDisabled={true}
+      name="Name of the field"
+    >
+      <FormGroup
+        id="someIdKey"
+        isRequired={false}
+        meta={
+          Object {
+            "active": false,
+            "data": Object {},
+            "dirty": false,
+            "dirtySinceLastSubmit": false,
+            "error": undefined,
+            "initial": undefined,
+            "invalid": false,
+            "length": undefined,
+            "modified": false,
+            "pristine": true,
+            "submitError": undefined,
+            "submitFailed": false,
+            "submitSucceeded": false,
+            "submitting": false,
+            "touched": false,
+            "valid": true,
+            "validating": false,
+            "visited": false,
+          }
+        }
+      >
+        <FormGroup
+          fieldId="someIdKey"
+          isRequired={false}
+          isValid={true}
+        >
+          <div
+            className="pf-c-form__group"
+          >
+            <TextArea
+              aria-label={null}
+              className=""
+              disabled={true}
+              id="someIdKey"
+              isRequired={false}
+              isValid={true}
+              name="Name of the field"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              resizeOrientation="both"
+              validated="default"
+              value=""
+            >
+              <textarea
+                aria-invalid={false}
+                aria-label={null}
+                className="pf-c-form-control"
+                disabled={true}
+                id="someIdKey"
+                name="Name of the field"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                required={false}
+                value=""
+              />
+            </TextArea>
+          </div>
+        </FormGroup>
+      </FormGroup>
+    </Textarea>
+  </ReactFinalForm>
+</RenderWithProvider>
+`;
+
+exports[`FormFields should render touched TextField id correctly 1`] = `
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
+  >
+    <TextField
+      dataType="someDataType"
+      id="someIdKey"
       meta={
         Object {
           "error": false,
-          "touched": false,
+          "touched": true,
         }
       }
       name="Name of the field"
     >
       <FormGroup
-        fieldId="someIdKey"
-        helperTextInvalid={false}
+        id="someIdKey"
         isRequired={false}
-        isValid={true}
+        meta={
+          Object {
+            "active": false,
+            "data": Object {},
+            "dirty": false,
+            "dirtySinceLastSubmit": false,
+            "error": undefined,
+            "initial": undefined,
+            "invalid": false,
+            "length": undefined,
+            "modified": false,
+            "pristine": true,
+            "submitError": undefined,
+            "submitFailed": false,
+            "submitSucceeded": false,
+            "submitting": false,
+            "touched": false,
+            "valid": true,
+            "validating": false,
+            "visited": false,
+          }
+        }
       >
-        <div
-          className="pf-c-form__group"
+        <FormGroup
+          fieldId="someIdKey"
+          isRequired={false}
+          isValid={true}
         >
-          <Checkbox
-            aria-label="Name of the field"
-            className=""
-            id="someIdKey"
-            isChecked={false}
-            isDisabled={false}
-            isValid={true}
-            name="Name of the field"
-            onChange={[Function]}
-            value=""
+          <div
+            className="pf-c-form__group"
           >
-            <div
-              className="pf-c-check"
+            <ForwardRef
+              id="someIdKey"
+              name="Name of the field"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              value=""
             >
-              <input
-                aria-invalid={false}
-                aria-label="Name of the field"
-                className="pf-c-check__input"
-                disabled={false}
+              <TextInputBase
+                aria-label={null}
+                className=""
                 id="someIdKey"
+                innerRef={null}
+                isDisabled={false}
+                isReadOnly={false}
+                isRequired={false}
+                isValid={true}
                 name="Name of the field"
+                onBlur={[Function]}
                 onChange={[Function]}
-                type="checkbox"
+                onFocus={[Function]}
+                type="text"
+                validated="default"
                 value=""
-              />
-            </div>
-          </Checkbox>
-        </div>
+              >
+                <input
+                  aria-invalid={false}
+                  aria-label={null}
+                  className="pf-c-form-control"
+                  disabled={false}
+                  id="someIdKey"
+                  name="Name of the field"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  readOnly={false}
+                  required={false}
+                  type="text"
+                  value=""
+                />
+              </TextInputBase>
+            </ForwardRef>
+          </div>
+        </FormGroup>
       </FormGroup>
-    </FinalFormField>
-  </FieldInterface>
-</CheckboxField>
-`;
-
-exports[`FormFields should render Checkbox with options correctly 1`] = `
-<CheckboxField
-  FieldProvider={[Function]}
-  dataType="someDataType"
-  id="someIdKey"
-  input={
-    Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
-    }
-  }
-  options={
-    Array [
-      Object {
-        "label": "One",
-        "value": "1",
-      },
-      Object {
-        "label": "Two",
-        "value": "2",
-      },
-      Object {
-        "label": "Three",
-        "value": "3",
-      },
-    ]
-  }
->
-  <FieldInterface
-    FieldProvider={[Function]}
-    componentType="checkbox"
-    dataType="someDataType"
-    id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    meta={
-      Object {
-        "error": false,
-        "touched": false,
-      }
-    }
-    name="Name of the field"
-    options={
-      Array [
-        Object {
-          "label": "One",
-          "value": "1",
-        },
-        Object {
-          "label": "Two",
-          "value": "2",
-        },
-        Object {
-          "label": "Three",
-          "value": "3",
-        },
-      ]
-    }
-  >
-    <MultipleChoiceList
-      FieldProvider={[Function]}
-      componentType="checkbox"
-      id="someIdKey"
-      input={
-        Object {
-          "name": "Name of the field",
-          "value": "",
-        }
-      }
-      meta={
-        Object {
-          "error": false,
-          "touched": false,
-        }
-      }
-      name="Name of the field"
-      options={
-        Array [
-          Object {
-            "label": "One",
-            "value": "1",
-          },
-          Object {
-            "label": "Two",
-            "value": "2",
-          },
-          Object {
-            "label": "Three",
-            "value": "3",
-          },
-        ]
-      }
-    >
-      <MultipleChoiceList
-        Checkbox={[Function]}
-        FieldProvider={[Function]}
-        Wrapper={[Function]}
-        componentType="checkbox"
-        id="someIdKey"
-        input={
-          Object {
-            "name": "Name of the field",
-            "value": "",
-          }
-        }
-        meta={
-          Object {
-            "error": false,
-            "touched": false,
-          }
-        }
-        name="Name of the field"
-        options={
-          Array [
-            Object {
-              "label": "One",
-              "value": "1",
-            },
-            Object {
-              "label": "Two",
-              "value": "2",
-            },
-            Object {
-              "label": "Three",
-              "value": "3",
-            },
-          ]
-        }
-      >
-        <FieldProvider
-          componentType="checkbox"
-          id="someIdKey"
-          input={
-            Object {
-              "name": "Name of the field",
-              "value": "",
-            }
-          }
-          meta={
-            Object {
-              "error": false,
-              "touched": false,
-            }
-          }
-          name="Name of the field"
-          options={
-            Array [
-              Object {
-                "label": "One",
-                "value": "1",
-              },
-              Object {
-                "label": "Two",
-                "value": "2",
-              },
-              Object {
-                "label": "Three",
-                "value": "3",
-              },
-            ]
-          }
-          render={[Function]}
-          validate={[Function]}
-        >
-          <div>
-            <Wrapper
-              error={false}
-              meta={
-                Object {
-                  "error": false,
-                  "touched": false,
-                }
-              }
-              rest={
-                Object {
-                  "componentType": "checkbox",
-                  "id": "someIdKey",
-                  "input": Object {
-                    "name": "Name of the field",
-                    "value": "",
-                  },
-                  "name": "Name of the field",
-                  "validate": [Function],
-                }
-              }
-              showError={false}
-            >
-              <FormGroup
-                fieldId="Name of the field"
-                helperTextInvalid={false}
-                isValid={true}
-              >
-                <div
-                  className="pf-c-form__group"
-                >
-                  <FieldProvider
-                    id="someIdKey-1"
-                    key="1"
-                    label="One"
-                    name="Name of the field"
-                    render={[Function]}
-                    type="checkbox"
-                    value="1"
-                  >
-                    <div>
-                      <FinalCheckbox
-                        aria-label="One"
-                        id="someIdKey-1"
-                        label="One"
-                        name="Name of the field"
-                        onChange={[Function]}
-                        type="checkbox"
-                        value="1"
-                      >
-                        <Checkbox
-                          aria-label="One"
-                          className=""
-                          id="someIdKey-1"
-                          isChecked={false}
-                          isDisabled={false}
-                          isValid={true}
-                          label="One"
-                          name="Name of the field"
-                          onChange={[Function]}
-                          type="checkbox"
-                          value="1"
-                        >
-                          <div
-                            className="pf-c-check"
-                          >
-                            <input
-                              aria-invalid={false}
-                              aria-label="One"
-                              checked={false}
-                              className="pf-c-check__input"
-                              disabled={false}
-                              id="someIdKey-1"
-                              name="Name of the field"
-                              onChange={[Function]}
-                              type="checkbox"
-                              value="1"
-                            />
-                            <label
-                              className="pf-c-check__label"
-                              htmlFor="someIdKey-1"
-                            >
-                              One
-                            </label>
-                          </div>
-                        </Checkbox>
-                      </FinalCheckbox>
-                    </div>
-                  </FieldProvider>
-                  <FieldProvider
-                    id="someIdKey-2"
-                    key="2"
-                    label="Two"
-                    name="Name of the field"
-                    render={[Function]}
-                    type="checkbox"
-                    value="2"
-                  >
-                    <div>
-                      <FinalCheckbox
-                        aria-label="Two"
-                        id="someIdKey-2"
-                        label="Two"
-                        name="Name of the field"
-                        onChange={[Function]}
-                        type="checkbox"
-                        value="2"
-                      >
-                        <Checkbox
-                          aria-label="Two"
-                          className=""
-                          id="someIdKey-2"
-                          isChecked={false}
-                          isDisabled={false}
-                          isValid={true}
-                          label="Two"
-                          name="Name of the field"
-                          onChange={[Function]}
-                          type="checkbox"
-                          value="2"
-                        >
-                          <div
-                            className="pf-c-check"
-                          >
-                            <input
-                              aria-invalid={false}
-                              aria-label="Two"
-                              checked={false}
-                              className="pf-c-check__input"
-                              disabled={false}
-                              id="someIdKey-2"
-                              name="Name of the field"
-                              onChange={[Function]}
-                              type="checkbox"
-                              value="2"
-                            />
-                            <label
-                              className="pf-c-check__label"
-                              htmlFor="someIdKey-2"
-                            >
-                              Two
-                            </label>
-                          </div>
-                        </Checkbox>
-                      </FinalCheckbox>
-                    </div>
-                  </FieldProvider>
-                  <FieldProvider
-                    id="someIdKey-3"
-                    key="3"
-                    label="Three"
-                    name="Name of the field"
-                    render={[Function]}
-                    type="checkbox"
-                    value="3"
-                  >
-                    <div>
-                      <FinalCheckbox
-                        aria-label="Three"
-                        id="someIdKey-3"
-                        label="Three"
-                        name="Name of the field"
-                        onChange={[Function]}
-                        type="checkbox"
-                        value="3"
-                      >
-                        <Checkbox
-                          aria-label="Three"
-                          className=""
-                          id="someIdKey-3"
-                          isChecked={false}
-                          isDisabled={false}
-                          isValid={true}
-                          label="Three"
-                          name="Name of the field"
-                          onChange={[Function]}
-                          type="checkbox"
-                          value="3"
-                        >
-                          <div
-                            className="pf-c-check"
-                          >
-                            <input
-                              aria-invalid={false}
-                              aria-label="Three"
-                              checked={false}
-                              className="pf-c-check__input"
-                              disabled={false}
-                              id="someIdKey-3"
-                              name="Name of the field"
-                              onChange={[Function]}
-                              type="checkbox"
-                              value="3"
-                            />
-                            <label
-                              className="pf-c-check__label"
-                              htmlFor="someIdKey-3"
-                            >
-                              Three
-                            </label>
-                          </div>
-                        </Checkbox>
-                      </FinalCheckbox>
-                    </div>
-                  </FieldProvider>
-                </div>
-              </FormGroup>
-            </Wrapper>
-          </div>
-        </FieldProvider>
-      </MultipleChoiceList>
-    </MultipleChoiceList>
-  </FieldInterface>
-</CheckboxField>
-`;
-
-exports[`FormFields should render DatePicker correctly 1`] = `
-<DatePickerField
-  dataType="someDataType"
-  id="someIdKey"
-  input={
-    Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
-    }
-  }
->
-  <FieldInterface
-    componentType="text-field"
-    dataType="someDataType"
-    id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    meta={
-      Object {
-        "error": false,
-        "touched": false,
-      }
-    }
-    name="Name of the field"
-    type="date"
-  >
-    <FormGroup
-      fieldId="someIdKey"
-      helperTextInvalid={false}
-      isValid={true}
-    >
-      <div
-        className="pf-c-form__group"
-      >
-        <ForwardRef
-          id="someIdKey"
-          isValid={true}
-          name="Name of the field"
-          type="date"
-          value=""
-        >
-          <TextInputBase
-            aria-label={null}
-            className=""
-            id="someIdKey"
-            innerRef={null}
-            isDisabled={false}
-            isReadOnly={false}
-            isRequired={false}
-            isValid={true}
-            name="Name of the field"
-            onChange={[Function]}
-            type="date"
-            validated="default"
-            value=""
-          >
-            <input
-              aria-invalid={false}
-              aria-label={null}
-              className="pf-c-form-control"
-              disabled={false}
-              id="someIdKey"
-              name="Name of the field"
-              onChange={[Function]}
-              readOnly={false}
-              required={false}
-              type="date"
-              value=""
-            />
-          </TextInputBase>
-        </ForwardRef>
-      </div>
-    </FormGroup>
-  </FieldInterface>
-</DatePickerField>
-`;
-
-exports[`FormFields should render Radio correctly 1`] = `
-<RadioField
-  FieldProvider={[Function]}
-  dataType="someDataType"
-  id="someIdKey"
-  input={
-    Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
-    }
-  }
-  options={
-    Array [
-      Object {
-        "label": "One",
-        "value": "1",
-      },
-      Object {
-        "label": "Two",
-        "value": "2",
-      },
-      Object {
-        "label": "Three",
-        "value": "3",
-      },
-    ]
-  }
->
-  <FieldInterface
-    FieldProvider={[Function]}
-    componentType="radio"
-    dataType="someDataType"
-    id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    meta={
-      Object {
-        "error": false,
-        "touched": false,
-      }
-    }
-    name="Name of the field"
-    options={
-      Array [
-        Object {
-          "label": "One",
-          "value": "1",
-        },
-        Object {
-          "label": "Two",
-          "value": "2",
-        },
-        Object {
-          "label": "Three",
-          "value": "3",
-        },
-      ]
-    }
-  >
-    <FormGroup
-      fieldId="someIdKey"
-      helperTextInvalid={false}
-      isValid={true}
-    >
-      <div
-        className="pf-c-form__group"
-      >
-        <RadioGroup
-          FieldProvider={[Function]}
-          id="someIdKey"
-          input={
-            Object {
-              "name": "Name of the field",
-              "value": "",
-            }
-          }
-          isValid={true}
-          name="Name of the field"
-          options={
-            Array [
-              Object {
-                "label": "One",
-                "value": "1",
-              },
-              Object {
-                "label": "Two",
-                "value": "2",
-              },
-              Object {
-                "label": "Three",
-                "value": "3",
-              },
-            ]
-          }
-        >
-          <FieldProvider
-            id="someIdKey"
-            isValid={true}
-            key="Name of the field-1"
-            name="Name of the field"
-            render={[Function]}
-            type="radio"
-            value="1"
-          >
-            <div>
-              <Radio
-                aria-label="One"
-                className=""
-                id="Foo-1"
-                isDisabled={false}
-                isValid={true}
-                label="One"
-                name="Foo"
-                onChange={[Function]}
-              >
-                <div
-                  className="pf-c-radio"
-                >
-                  <input
-                    aria-invalid={false}
-                    className="pf-c-radio__input"
-                    disabled={false}
-                    id="Foo-1"
-                    name="Foo"
-                    onChange={[Function]}
-                    type="radio"
-                  />
-                  <label
-                    className="pf-c-radio__label"
-                    htmlFor="Foo-1"
-                  >
-                    One
-                  </label>
-                </div>
-              </Radio>
-            </div>
-          </FieldProvider>
-          <FieldProvider
-            id="someIdKey"
-            isValid={true}
-            key="Name of the field-2"
-            name="Name of the field"
-            render={[Function]}
-            type="radio"
-            value="2"
-          >
-            <div>
-              <Radio
-                aria-label="Two"
-                className=""
-                id="Foo-2"
-                isDisabled={false}
-                isValid={true}
-                label="Two"
-                name="Foo"
-                onChange={[Function]}
-              >
-                <div
-                  className="pf-c-radio"
-                >
-                  <input
-                    aria-invalid={false}
-                    className="pf-c-radio__input"
-                    disabled={false}
-                    id="Foo-2"
-                    name="Foo"
-                    onChange={[Function]}
-                    type="radio"
-                  />
-                  <label
-                    className="pf-c-radio__label"
-                    htmlFor="Foo-2"
-                  >
-                    Two
-                  </label>
-                </div>
-              </Radio>
-            </div>
-          </FieldProvider>
-          <FieldProvider
-            id="someIdKey"
-            isValid={true}
-            key="Name of the field-3"
-            name="Name of the field"
-            render={[Function]}
-            type="radio"
-            value="3"
-          >
-            <div>
-              <Radio
-                aria-label="Three"
-                className=""
-                id="Foo-3"
-                isDisabled={false}
-                isValid={true}
-                label="Three"
-                name="Foo"
-                onChange={[Function]}
-              >
-                <div
-                  className="pf-c-radio"
-                >
-                  <input
-                    aria-invalid={false}
-                    className="pf-c-radio__input"
-                    disabled={false}
-                    id="Foo-3"
-                    name="Foo"
-                    onChange={[Function]}
-                    type="radio"
-                  />
-                  <label
-                    className="pf-c-radio__label"
-                    htmlFor="Foo-3"
-                  >
-                    Three
-                  </label>
-                </div>
-              </Radio>
-            </div>
-          </FieldProvider>
-        </RadioGroup>
-      </div>
-    </FormGroup>
-  </FieldInterface>
-</RadioField>
-`;
-
-exports[`FormFields should render Select correctly 1`] = `
-<FormGroup
-  fieldId="someIdKey"
-  helperTextInvalid={false}
-  isValid={true}
->
-  <DataDrivenSelect
-    id="someIdKey"
-    isClearable={false}
-    isSearchable={false}
-    isValid={true}
-    name="Name of the field"
-    options={
-      Array [
-        Object {
-          "label": "One",
-          "value": "1",
-        },
-        Object {
-          "label": "Two",
-          "value": "2",
-        },
-        Object {
-          "label": "Three",
-          "value": "3",
-        },
-      ]
-    }
-    placeholder="Choose..."
-    value=""
-  />
-</FormGroup>
-`;
-
-exports[`FormFields should render Switch correctly 1`] = `
-<SwitchField
-  FieldProvider={[Function]}
-  dataType="someDataType"
-  id="someIdKey"
-  input={
-    Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
-    }
-  }
->
-  <FieldProvider
-    dataType="someDataType"
-    id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    meta={
-      Object {
-        "error": false,
-        "touched": false,
-      }
-    }
-    render={[Function]}
-  >
-    <div>
-      <FieldInterface
-        componentType="switch-field"
-        dataType="someDataType"
-        hideLabel={true}
-        id="someIdKey"
-        input={
-          Object {
-            "name": "Name of the field",
-            "value": "",
-          }
-        }
-        meta={
-          Object {
-            "error": false,
-            "touched": false,
-          }
-        }
-        name="Name of the field"
-      >
-        <FormGroup
-          fieldId="someIdKey"
-          helperTextInvalid={false}
-          isValid={true}
-          label={false}
-        >
-          <div
-            className="pf-c-form__group"
-          >
-            <Component
-              id="someIdKey"
-              isChecked={false}
-              name="Name of the field"
-              onChange={[Function]}
-              value=""
-            >
-              <ComponentWithOuia
-                component={[Function]}
-                componentProps={
-                  Object {
-                    "id": "someIdKey",
-                    "isChecked": false,
-                    "isDisabled": undefined,
-                    "label": undefined,
-                    "labelOff": undefined,
-                    "name": "Name of the field",
-                    "onChange": [Function],
-                    "value": "",
-                  }
-                }
-                consumerContext={null}
-              >
-                <Switch
-                  aria-label=""
-                  className=""
-                  id="someIdKey"
-                  isChecked={false}
-                  isDisabled={false}
-                  label=""
-                  labelOff=""
-                  name="Name of the field"
-                  onChange={[Function]}
-                  ouiaContext={
-                    Object {
-                      "isOuia": false,
-                      "ouiaId": null,
-                    }
-                  }
-                  value=""
-                >
-                  <label
-                    className="pf-c-switch"
-                    htmlFor="someIdKey"
-                  >
-                    <input
-                      aria-label=""
-                      aria-labelledby="someIdKey-on"
-                      checked={false}
-                      className="pf-c-switch__input"
-                      disabled={false}
-                      id="someIdKey"
-                      name="Name of the field"
-                      onChange={[Function]}
-                      type="checkbox"
-                      value=""
-                    />
-                    <span
-                      className="pf-c-switch__toggle"
-                    >
-                      <div
-                        aria-hidden="true"
-                        className="pf-c-switch__toggle-icon"
-                      >
-                        <CheckIcon
-                          color="currentColor"
-                          noVerticalAlign={true}
-                          size="sm"
-                          title={null}
-                        >
-                          <svg
-                            aria-hidden={true}
-                            aria-labelledby={null}
-                            fill="currentColor"
-                            height="1em"
-                            role="img"
-                            style={null}
-                            viewBox="0 0 512 512"
-                            width="1em"
-                          >
-                            <path
-                              d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
-                              transform=""
-                            />
-                          </svg>
-                        </CheckIcon>
-                      </div>
-                    </span>
-                  </label>
-                </Switch>
-              </ComponentWithOuia>
-            </Component>
-          </div>
-        </FormGroup>
-      </FieldInterface>
-    </div>
-  </FieldProvider>
-</SwitchField>
-`;
-
-exports[`FormFields should render TextArea correctly 1`] = `
-<TextAreaField
-  dataType="someDataType"
-  id="someIdKey"
-  input={
-    Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
-    }
-  }
->
-  <FieldInterface
-    componentType="textarea-field"
-    dataType="someDataType"
-    id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    meta={
-      Object {
-        "error": false,
-        "touched": false,
-      }
-    }
-    name="Name of the field"
-  >
-    <FormGroup
-      fieldId="someIdKey"
-      helperTextInvalid={false}
-      isValid={true}
-    >
-      <div
-        className="pf-c-form__group"
-      >
-        <TextArea
-          aria-label={null}
-          className=""
-          id="someIdKey"
-          isRequired={false}
-          isValid={true}
-          name="Name of the field"
-          resizeOrientation="both"
-          validated="default"
-          value=""
-        >
-          <textarea
-            aria-invalid={false}
-            aria-label={null}
-            className="pf-c-form-control"
-            id="someIdKey"
-            name="Name of the field"
-            onChange={[Function]}
-            required={false}
-            value=""
-          />
-        </TextArea>
-      </div>
-    </FormGroup>
-  </FieldInterface>
-</TextAreaField>
-`;
-
-exports[`FormFields should render TextField correctly 1`] = `
-<TextField
-  dataType="someDataType"
-  id="someIdKey"
-  input={
-    Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
-    }
-  }
->
-  <FieldInterface
-    componentType="text-field"
-    dataType="someDataType"
-    id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    meta={
-      Object {
-        "error": false,
-        "touched": false,
-      }
-    }
-    name="Name of the field"
-  >
-    <FormGroup
-      fieldId="someIdKey"
-      helperTextInvalid={false}
-      isValid={true}
-    >
-      <div
-        className="pf-c-form__group"
-      >
-        <ForwardRef
-          id="someIdKey"
-          isValid={true}
-          name="Name of the field"
-          value=""
-        >
-          <TextInputBase
-            aria-label={null}
-            className=""
-            id="someIdKey"
-            innerRef={null}
-            isDisabled={false}
-            isReadOnly={false}
-            isRequired={false}
-            isValid={true}
-            name="Name of the field"
-            onChange={[Function]}
-            type="text"
-            validated="default"
-            value=""
-          >
-            <input
-              aria-invalid={false}
-              aria-label={null}
-              className="pf-c-form-control"
-              disabled={false}
-              id="someIdKey"
-              name="Name of the field"
-              onChange={[Function]}
-              readOnly={false}
-              required={false}
-              type="text"
-              value=""
-            />
-          </TextInputBase>
-        </ForwardRef>
-      </div>
-    </FormGroup>
-  </FieldInterface>
-</TextField>
-`;
-
-exports[`FormFields should render TextField with description correctly 1`] = `
-<TextField
-  dataType="someDataType"
-  description="This is description"
-  id="someIdKey"
-  input={
-    Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
-    }
-  }
->
-  <FieldInterface
-    componentType="text-field"
-    dataType="someDataType"
-    description="This is description"
-    id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    meta={
-      Object {
-        "error": false,
-        "touched": false,
-      }
-    }
-    name="Name of the field"
-  >
-    <FormGroup
-      fieldId="someIdKey"
-      helperTextInvalid={false}
-      isValid={true}
-    >
-      <div
-        className="pf-c-form__group"
-      >
-        <TextContent>
-          <div
-            className="pf-c-content"
-          >
-            <Text
-              component="small"
-            >
-              <small
-                className=""
-                data-pf-content={true}
-              >
-                This is description
-              </small>
-            </Text>
-          </div>
-        </TextContent>
-        <ForwardRef
-          id="someIdKey"
-          isValid={true}
-          name="Name of the field"
-          value=""
-        >
-          <TextInputBase
-            aria-label={null}
-            className=""
-            id="someIdKey"
-            innerRef={null}
-            isDisabled={false}
-            isReadOnly={false}
-            isRequired={false}
-            isValid={true}
-            name="Name of the field"
-            onChange={[Function]}
-            type="text"
-            validated="default"
-            value=""
-          >
-            <input
-              aria-invalid={false}
-              aria-label={null}
-              className="pf-c-form-control"
-              disabled={false}
-              id="someIdKey"
-              name="Name of the field"
-              onChange={[Function]}
-              readOnly={false}
-              required={false}
-              type="text"
-              value=""
-            />
-          </TextInputBase>
-        </ForwardRef>
-      </div>
-    </FormGroup>
-  </FieldInterface>
-</TextField>
-`;
-
-exports[`FormFields should render TextField without id correctly 1`] = `
-<TextField
-  dataType="someDataType"
-  input={
-    Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
-    }
-  }
->
-  <FieldInterface
-    componentType="text-field"
-    dataType="someDataType"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    meta={
-      Object {
-        "error": false,
-        "touched": false,
-      }
-    }
-    name="Name of the field"
-  >
-    <FormGroup
-      fieldId="Name of the field"
-      helperTextInvalid={false}
-      isValid={true}
-    >
-      <div
-        className="pf-c-form__group"
-      >
-        <ForwardRef
-          id="Name of the field"
-          isValid={true}
-          name="Name of the field"
-          value=""
-        >
-          <TextInputBase
-            aria-label={null}
-            className=""
-            id="Name of the field"
-            innerRef={null}
-            isDisabled={false}
-            isReadOnly={false}
-            isRequired={false}
-            isValid={true}
-            name="Name of the field"
-            onChange={[Function]}
-            type="text"
-            validated="default"
-            value=""
-          >
-            <input
-              aria-invalid={false}
-              aria-label={null}
-              className="pf-c-form-control"
-              disabled={false}
-              id="Name of the field"
-              name="Name of the field"
-              onChange={[Function]}
-              readOnly={false}
-              required={false}
-              type="text"
-              value=""
-            />
-          </TextInputBase>
-        </ForwardRef>
-      </div>
-    </FormGroup>
-  </FieldInterface>
-</TextField>
-`;
-
-exports[`FormFields should render TimePicker correctly 1`] = `
-<TimePickerField
-  dataType="someDataType"
-  id="someIdKey"
-  input={
-    Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
-    }
-  }
->
-  <FieldInterface
-    componentType="text-field"
-    dataType="someDataType"
-    id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    meta={
-      Object {
-        "error": false,
-        "touched": false,
-      }
-    }
-    name="Name of the field"
-    type="time"
-  >
-    <FormGroup
-      fieldId="someIdKey"
-      helperTextInvalid={false}
-      isValid={true}
-    >
-      <div
-        className="pf-c-form__group"
-      >
-        <ForwardRef
-          id="someIdKey"
-          isValid={true}
-          name="Name of the field"
-          type="time"
-          value=""
-        >
-          <TextInputBase
-            aria-label={null}
-            className=""
-            id="someIdKey"
-            innerRef={null}
-            isDisabled={false}
-            isReadOnly={false}
-            isRequired={false}
-            isValid={true}
-            name="Name of the field"
-            onChange={[Function]}
-            type="time"
-            validated="default"
-            value=""
-          >
-            <input
-              aria-invalid={false}
-              aria-label={null}
-              className="pf-c-form-control"
-              disabled={false}
-              id="someIdKey"
-              name="Name of the field"
-              onChange={[Function]}
-              readOnly={false}
-              required={false}
-              type="time"
-              value=""
-            />
-          </TextInputBase>
-        </ForwardRef>
-      </div>
-    </FormGroup>
-  </FieldInterface>
-</TimePickerField>
-`;
-
-exports[`FormFields should render disabled Checkbox with options correctly 1`] = `
-<CheckboxField
-  FieldProvider={[Function]}
-  dataType="someDataType"
-  disabled={true}
-  id="someIdKey"
-  input={
-    Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
-    }
-  }
-  options={
-    Array [
-      Object {
-        "label": "One",
-        "value": "1",
-      },
-      Object {
-        "label": "Two",
-        "value": "2",
-      },
-      Object {
-        "label": "Three",
-        "value": "3",
-      },
-    ]
-  }
->
-  <FieldInterface
-    FieldProvider={[Function]}
-    componentType="checkbox"
-    dataType="someDataType"
-    disabled={true}
-    id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    meta={
-      Object {
-        "error": false,
-        "touched": false,
-      }
-    }
-    name="Name of the field"
-    options={
-      Array [
-        Object {
-          "label": "One",
-          "value": "1",
-        },
-        Object {
-          "label": "Two",
-          "value": "2",
-        },
-        Object {
-          "label": "Three",
-          "value": "3",
-        },
-      ]
-    }
-  >
-    <MultipleChoiceList
-      FieldProvider={[Function]}
-      componentType="checkbox"
-      disabled={true}
-      id="someIdKey"
-      input={
-        Object {
-          "name": "Name of the field",
-          "value": "",
-        }
-      }
-      meta={
-        Object {
-          "error": false,
-          "touched": false,
-        }
-      }
-      name="Name of the field"
-      options={
-        Array [
-          Object {
-            "label": "One",
-            "value": "1",
-          },
-          Object {
-            "label": "Two",
-            "value": "2",
-          },
-          Object {
-            "label": "Three",
-            "value": "3",
-          },
-        ]
-      }
-    >
-      <MultipleChoiceList
-        Checkbox={[Function]}
-        FieldProvider={[Function]}
-        Wrapper={[Function]}
-        componentType="checkbox"
-        disabled={true}
-        id="someIdKey"
-        input={
-          Object {
-            "name": "Name of the field",
-            "value": "",
-          }
-        }
-        meta={
-          Object {
-            "error": false,
-            "touched": false,
-          }
-        }
-        name="Name of the field"
-        options={
-          Array [
-            Object {
-              "label": "One",
-              "value": "1",
-            },
-            Object {
-              "label": "Two",
-              "value": "2",
-            },
-            Object {
-              "label": "Three",
-              "value": "3",
-            },
-          ]
-        }
-      >
-        <FieldProvider
-          componentType="checkbox"
-          disabled={true}
-          id="someIdKey"
-          input={
-            Object {
-              "name": "Name of the field",
-              "value": "",
-            }
-          }
-          meta={
-            Object {
-              "error": false,
-              "touched": false,
-            }
-          }
-          name="Name of the field"
-          options={
-            Array [
-              Object {
-                "label": "One",
-                "value": "1",
-              },
-              Object {
-                "label": "Two",
-                "value": "2",
-              },
-              Object {
-                "label": "Three",
-                "value": "3",
-              },
-            ]
-          }
-          render={[Function]}
-          validate={[Function]}
-        >
-          <div>
-            <Wrapper
-              error={false}
-              meta={
-                Object {
-                  "error": false,
-                  "touched": false,
-                }
-              }
-              rest={
-                Object {
-                  "componentType": "checkbox",
-                  "disabled": true,
-                  "id": "someIdKey",
-                  "input": Object {
-                    "name": "Name of the field",
-                    "value": "",
-                  },
-                  "name": "Name of the field",
-                  "validate": [Function],
-                }
-              }
-              showError={false}
-            >
-              <FormGroup
-                fieldId="Name of the field"
-                helperTextInvalid={false}
-                isValid={true}
-              >
-                <div
-                  className="pf-c-form__group"
-                >
-                  <FieldProvider
-                    id="someIdKey-1"
-                    key="1"
-                    label="One"
-                    name="Name of the field"
-                    render={[Function]}
-                    type="checkbox"
-                    value="1"
-                  >
-                    <div>
-                      <FinalCheckbox
-                        aria-label="One"
-                        id="someIdKey-1"
-                        label="One"
-                        name="Name of the field"
-                        onChange={[Function]}
-                        type="checkbox"
-                        value="1"
-                      >
-                        <Checkbox
-                          aria-label="One"
-                          className=""
-                          id="someIdKey-1"
-                          isChecked={false}
-                          isDisabled={false}
-                          isValid={true}
-                          label="One"
-                          name="Name of the field"
-                          onChange={[Function]}
-                          type="checkbox"
-                          value="1"
-                        >
-                          <div
-                            className="pf-c-check"
-                          >
-                            <input
-                              aria-invalid={false}
-                              aria-label="One"
-                              checked={false}
-                              className="pf-c-check__input"
-                              disabled={false}
-                              id="someIdKey-1"
-                              name="Name of the field"
-                              onChange={[Function]}
-                              type="checkbox"
-                              value="1"
-                            />
-                            <label
-                              className="pf-c-check__label"
-                              htmlFor="someIdKey-1"
-                            >
-                              One
-                            </label>
-                          </div>
-                        </Checkbox>
-                      </FinalCheckbox>
-                    </div>
-                  </FieldProvider>
-                  <FieldProvider
-                    id="someIdKey-2"
-                    key="2"
-                    label="Two"
-                    name="Name of the field"
-                    render={[Function]}
-                    type="checkbox"
-                    value="2"
-                  >
-                    <div>
-                      <FinalCheckbox
-                        aria-label="Two"
-                        id="someIdKey-2"
-                        label="Two"
-                        name="Name of the field"
-                        onChange={[Function]}
-                        type="checkbox"
-                        value="2"
-                      >
-                        <Checkbox
-                          aria-label="Two"
-                          className=""
-                          id="someIdKey-2"
-                          isChecked={false}
-                          isDisabled={false}
-                          isValid={true}
-                          label="Two"
-                          name="Name of the field"
-                          onChange={[Function]}
-                          type="checkbox"
-                          value="2"
-                        >
-                          <div
-                            className="pf-c-check"
-                          >
-                            <input
-                              aria-invalid={false}
-                              aria-label="Two"
-                              checked={false}
-                              className="pf-c-check__input"
-                              disabled={false}
-                              id="someIdKey-2"
-                              name="Name of the field"
-                              onChange={[Function]}
-                              type="checkbox"
-                              value="2"
-                            />
-                            <label
-                              className="pf-c-check__label"
-                              htmlFor="someIdKey-2"
-                            >
-                              Two
-                            </label>
-                          </div>
-                        </Checkbox>
-                      </FinalCheckbox>
-                    </div>
-                  </FieldProvider>
-                  <FieldProvider
-                    id="someIdKey-3"
-                    key="3"
-                    label="Three"
-                    name="Name of the field"
-                    render={[Function]}
-                    type="checkbox"
-                    value="3"
-                  >
-                    <div>
-                      <FinalCheckbox
-                        aria-label="Three"
-                        id="someIdKey-3"
-                        label="Three"
-                        name="Name of the field"
-                        onChange={[Function]}
-                        type="checkbox"
-                        value="3"
-                      >
-                        <Checkbox
-                          aria-label="Three"
-                          className=""
-                          id="someIdKey-3"
-                          isChecked={false}
-                          isDisabled={false}
-                          isValid={true}
-                          label="Three"
-                          name="Name of the field"
-                          onChange={[Function]}
-                          type="checkbox"
-                          value="3"
-                        >
-                          <div
-                            className="pf-c-check"
-                          >
-                            <input
-                              aria-invalid={false}
-                              aria-label="Three"
-                              checked={false}
-                              className="pf-c-check__input"
-                              disabled={false}
-                              id="someIdKey-3"
-                              name="Name of the field"
-                              onChange={[Function]}
-                              type="checkbox"
-                              value="3"
-                            />
-                            <label
-                              className="pf-c-check__label"
-                              htmlFor="someIdKey-3"
-                            >
-                              Three
-                            </label>
-                          </div>
-                        </Checkbox>
-                      </FinalCheckbox>
-                    </div>
-                  </FieldProvider>
-                </div>
-              </FormGroup>
-            </Wrapper>
-          </div>
-        </FieldProvider>
-      </MultipleChoiceList>
-    </MultipleChoiceList>
-  </FieldInterface>
-</CheckboxField>
-`;
-
-exports[`FormFields should render disabled Radio correctly 1`] = `
-<RadioField
-  FieldProvider={[Function]}
-  dataType="someDataType"
-  disabled={true}
-  id="someIdKey"
-  input={
-    Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
-    }
-  }
-  options={
-    Array [
-      Object {
-        "label": "One",
-        "value": "1",
-      },
-      Object {
-        "label": "Two",
-        "value": "2",
-      },
-      Object {
-        "label": "Three",
-        "value": "3",
-      },
-    ]
-  }
->
-  <FieldInterface
-    FieldProvider={[Function]}
-    componentType="radio"
-    dataType="someDataType"
-    disabled={true}
-    id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    meta={
-      Object {
-        "error": false,
-        "touched": false,
-      }
-    }
-    name="Name of the field"
-    options={
-      Array [
-        Object {
-          "label": "One",
-          "value": "1",
-        },
-        Object {
-          "label": "Two",
-          "value": "2",
-        },
-        Object {
-          "label": "Three",
-          "value": "3",
-        },
-      ]
-    }
-  >
-    <FormGroup
-      fieldId="someIdKey"
-      helperTextInvalid={false}
-      isValid={true}
-    >
-      <div
-        className="pf-c-form__group"
-      >
-        <RadioGroup
-          FieldProvider={[Function]}
-          disabled={true}
-          id="someIdKey"
-          input={
-            Object {
-              "name": "Name of the field",
-              "value": "",
-            }
-          }
-          isValid={true}
-          name="Name of the field"
-          options={
-            Array [
-              Object {
-                "label": "One",
-                "value": "1",
-              },
-              Object {
-                "label": "Two",
-                "value": "2",
-              },
-              Object {
-                "label": "Three",
-                "value": "3",
-              },
-            ]
-          }
-        >
-          <FieldProvider
-            disabled={true}
-            id="someIdKey"
-            isValid={true}
-            key="Name of the field-1"
-            name="Name of the field"
-            render={[Function]}
-            type="radio"
-            value="1"
-          >
-            <div>
-              <Radio
-                aria-label="One"
-                className=""
-                id="Foo-1"
-                isDisabled={false}
-                isValid={true}
-                label="One"
-                name="Foo"
-                onChange={[Function]}
-              >
-                <div
-                  className="pf-c-radio"
-                >
-                  <input
-                    aria-invalid={false}
-                    className="pf-c-radio__input"
-                    disabled={false}
-                    id="Foo-1"
-                    name="Foo"
-                    onChange={[Function]}
-                    type="radio"
-                  />
-                  <label
-                    className="pf-c-radio__label"
-                    htmlFor="Foo-1"
-                  >
-                    One
-                  </label>
-                </div>
-              </Radio>
-            </div>
-          </FieldProvider>
-          <FieldProvider
-            disabled={true}
-            id="someIdKey"
-            isValid={true}
-            key="Name of the field-2"
-            name="Name of the field"
-            render={[Function]}
-            type="radio"
-            value="2"
-          >
-            <div>
-              <Radio
-                aria-label="Two"
-                className=""
-                id="Foo-2"
-                isDisabled={false}
-                isValid={true}
-                label="Two"
-                name="Foo"
-                onChange={[Function]}
-              >
-                <div
-                  className="pf-c-radio"
-                >
-                  <input
-                    aria-invalid={false}
-                    className="pf-c-radio__input"
-                    disabled={false}
-                    id="Foo-2"
-                    name="Foo"
-                    onChange={[Function]}
-                    type="radio"
-                  />
-                  <label
-                    className="pf-c-radio__label"
-                    htmlFor="Foo-2"
-                  >
-                    Two
-                  </label>
-                </div>
-              </Radio>
-            </div>
-          </FieldProvider>
-          <FieldProvider
-            disabled={true}
-            id="someIdKey"
-            isValid={true}
-            key="Name of the field-3"
-            name="Name of the field"
-            render={[Function]}
-            type="radio"
-            value="3"
-          >
-            <div>
-              <Radio
-                aria-label="Three"
-                className=""
-                id="Foo-3"
-                isDisabled={false}
-                isValid={true}
-                label="Three"
-                name="Foo"
-                onChange={[Function]}
-              >
-                <div
-                  className="pf-c-radio"
-                >
-                  <input
-                    aria-invalid={false}
-                    className="pf-c-radio__input"
-                    disabled={false}
-                    id="Foo-3"
-                    name="Foo"
-                    onChange={[Function]}
-                    type="radio"
-                  />
-                  <label
-                    className="pf-c-radio__label"
-                    htmlFor="Foo-3"
-                  >
-                    Three
-                  </label>
-                </div>
-              </Radio>
-            </div>
-          </FieldProvider>
-        </RadioGroup>
-      </div>
-    </FormGroup>
-  </FieldInterface>
-</RadioField>
-`;
-
-exports[`FormFields should render disabled Select correctly 1`] = `
-<FormGroup
-  fieldId="someIdKey"
-  helperTextInvalid={false}
-  isValid={true}
->
-  <DataDrivenSelect
-    id="someIdKey"
-    isClearable={false}
-    isDisabled={true}
-    isSearchable={false}
-    isValid={true}
-    name="Name of the field"
-    options={
-      Array [
-        Object {
-          "label": "One",
-          "value": "1",
-        },
-        Object {
-          "label": "Two",
-          "value": "2",
-        },
-        Object {
-          "label": "Three",
-          "value": "3",
-        },
-      ]
-    }
-    placeholder="Choose..."
-    value=""
-  />
-</FormGroup>
-`;
-
-exports[`FormFields should render disabled Switch correctly 1`] = `
-<SwitchField
-  FieldProvider={[Function]}
-  dataType="someDataType"
-  id="someIdKey"
-  input={
-    Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  isDisabled={true}
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
-    }
-  }
->
-  <FieldProvider
-    dataType="someDataType"
-    id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    isDisabled={true}
-    meta={
-      Object {
-        "error": false,
-        "touched": false,
-      }
-    }
-    render={[Function]}
-  >
-    <div>
-      <FieldInterface
-        componentType="switch-field"
-        dataType="someDataType"
-        hideLabel={true}
-        id="someIdKey"
-        input={
-          Object {
-            "name": "Name of the field",
-            "value": "",
-          }
-        }
-        isDisabled={true}
-        meta={
-          Object {
-            "error": false,
-            "touched": false,
-          }
-        }
-        name="Name of the field"
-      >
-        <FormGroup
-          fieldId="someIdKey"
-          helperTextInvalid={false}
-          isValid={true}
-          label={false}
-        >
-          <div
-            className="pf-c-form__group"
-          >
-            <Component
-              id="someIdKey"
-              isChecked={false}
-              isDisabled={true}
-              name="Name of the field"
-              onChange={[Function]}
-              value=""
-            >
-              <ComponentWithOuia
-                component={[Function]}
-                componentProps={
-                  Object {
-                    "id": "someIdKey",
-                    "isChecked": false,
-                    "isDisabled": true,
-                    "label": undefined,
-                    "labelOff": undefined,
-                    "name": "Name of the field",
-                    "onChange": [Function],
-                    "value": "",
-                  }
-                }
-                consumerContext={null}
-              >
-                <Switch
-                  aria-label=""
-                  className=""
-                  id="someIdKey"
-                  isChecked={false}
-                  isDisabled={true}
-                  label=""
-                  labelOff=""
-                  name="Name of the field"
-                  onChange={[Function]}
-                  ouiaContext={
-                    Object {
-                      "isOuia": false,
-                      "ouiaId": null,
-                    }
-                  }
-                  value=""
-                >
-                  <label
-                    className="pf-c-switch"
-                    htmlFor="someIdKey"
-                  >
-                    <input
-                      aria-label=""
-                      aria-labelledby="someIdKey-on"
-                      checked={false}
-                      className="pf-c-switch__input"
-                      disabled={true}
-                      id="someIdKey"
-                      name="Name of the field"
-                      onChange={[Function]}
-                      type="checkbox"
-                      value=""
-                    />
-                    <span
-                      className="pf-c-switch__toggle"
-                    >
-                      <div
-                        aria-hidden="true"
-                        className="pf-c-switch__toggle-icon"
-                      >
-                        <CheckIcon
-                          color="currentColor"
-                          noVerticalAlign={true}
-                          size="sm"
-                          title={null}
-                        >
-                          <svg
-                            aria-hidden={true}
-                            aria-labelledby={null}
-                            fill="currentColor"
-                            height="1em"
-                            role="img"
-                            style={null}
-                            viewBox="0 0 512 512"
-                            width="1em"
-                          >
-                            <path
-                              d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
-                              transform=""
-                            />
-                          </svg>
-                        </CheckIcon>
-                      </div>
-                    </span>
-                  </label>
-                </Switch>
-              </ComponentWithOuia>
-            </Component>
-          </div>
-        </FormGroup>
-      </FieldInterface>
-    </div>
-  </FieldProvider>
-</SwitchField>
-`;
-
-exports[`FormFields should render disabled Switch correctly 2`] = `
-<SwitchField
-  FieldProvider={[Function]}
-  dataType="someDataType"
-  id="someIdKey"
-  input={
-    Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  isDisabled={true}
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
-    }
-  }
->
-  <FieldProvider
-    dataType="someDataType"
-    id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    isDisabled={true}
-    meta={
-      Object {
-        "error": false,
-        "touched": false,
-      }
-    }
-    render={[Function]}
-  >
-    <div>
-      <FieldInterface
-        componentType="switch-field"
-        dataType="someDataType"
-        hideLabel={true}
-        id="someIdKey"
-        input={
-          Object {
-            "name": "Name of the field",
-            "value": "",
-          }
-        }
-        isDisabled={true}
-        meta={
-          Object {
-            "error": false,
-            "touched": false,
-          }
-        }
-        name="Name of the field"
-      >
-        <FormGroup
-          fieldId="someIdKey"
-          helperTextInvalid={false}
-          isValid={true}
-          label={false}
-        >
-          <div
-            className="pf-c-form__group"
-          >
-            <Component
-              id="someIdKey"
-              isChecked={false}
-              isDisabled={true}
-              name="Name of the field"
-              onChange={[Function]}
-              value=""
-            >
-              <ComponentWithOuia
-                component={[Function]}
-                componentProps={
-                  Object {
-                    "id": "someIdKey",
-                    "isChecked": false,
-                    "isDisabled": true,
-                    "label": undefined,
-                    "labelOff": undefined,
-                    "name": "Name of the field",
-                    "onChange": [Function],
-                    "value": "",
-                  }
-                }
-                consumerContext={null}
-              >
-                <Switch
-                  aria-label=""
-                  className=""
-                  id="someIdKey"
-                  isChecked={false}
-                  isDisabled={true}
-                  label=""
-                  labelOff=""
-                  name="Name of the field"
-                  onChange={[Function]}
-                  ouiaContext={
-                    Object {
-                      "isOuia": false,
-                      "ouiaId": null,
-                    }
-                  }
-                  value=""
-                >
-                  <label
-                    className="pf-c-switch"
-                    htmlFor="someIdKey"
-                  >
-                    <input
-                      aria-label=""
-                      aria-labelledby="someIdKey-on"
-                      checked={false}
-                      className="pf-c-switch__input"
-                      disabled={true}
-                      id="someIdKey"
-                      name="Name of the field"
-                      onChange={[Function]}
-                      type="checkbox"
-                      value=""
-                    />
-                    <span
-                      className="pf-c-switch__toggle"
-                    >
-                      <div
-                        aria-hidden="true"
-                        className="pf-c-switch__toggle-icon"
-                      >
-                        <CheckIcon
-                          color="currentColor"
-                          noVerticalAlign={true}
-                          size="sm"
-                          title={null}
-                        >
-                          <svg
-                            aria-hidden={true}
-                            aria-labelledby={null}
-                            fill="currentColor"
-                            height="1em"
-                            role="img"
-                            style={null}
-                            viewBox="0 0 512 512"
-                            width="1em"
-                          >
-                            <path
-                              d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
-                              transform=""
-                            />
-                          </svg>
-                        </CheckIcon>
-                      </div>
-                    </span>
-                  </label>
-                </Switch>
-              </ComponentWithOuia>
-            </Component>
-          </div>
-        </FormGroup>
-      </FieldInterface>
-    </div>
-  </FieldProvider>
-</SwitchField>
-`;
-
-exports[`FormFields should render disabled TextArea correctly 1`] = `
-<TextAreaField
-  dataType="someDataType"
-  id="someIdKey"
-  input={
-    Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  isDisabled={true}
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
-    }
-  }
->
-  <FieldInterface
-    componentType="textarea-field"
-    dataType="someDataType"
-    id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    isDisabled={true}
-    meta={
-      Object {
-        "error": false,
-        "touched": false,
-      }
-    }
-    name="Name of the field"
-  >
-    <FormGroup
-      fieldId="someIdKey"
-      helperTextInvalid={false}
-      isValid={true}
-    >
-      <div
-        className="pf-c-form__group"
-      >
-        <TextArea
-          aria-label={null}
-          className=""
-          disabled={true}
-          id="someIdKey"
-          isRequired={false}
-          isValid={true}
-          name="Name of the field"
-          resizeOrientation="both"
-          validated="default"
-          value=""
-        >
-          <textarea
-            aria-invalid={false}
-            aria-label={null}
-            className="pf-c-form-control"
-            disabled={true}
-            id="someIdKey"
-            name="Name of the field"
-            onChange={[Function]}
-            required={false}
-            value=""
-          />
-        </TextArea>
-      </div>
-    </FormGroup>
-  </FieldInterface>
-</TextAreaField>
-`;
-
-exports[`FormFields should render touched TextField id correctly 1`] = `
-<TextField
-  dataType="someDataType"
-  id="someIdKey"
-  input={
-    Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  meta={
-    Object {
-      "error": false,
-      "touched": true,
-    }
-  }
->
-  <FieldInterface
-    componentType="text-field"
-    dataType="someDataType"
-    id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    meta={
-      Object {
-        "error": false,
-        "touched": true,
-      }
-    }
-    name="Name of the field"
-  >
-    <FormGroup
-      fieldId="someIdKey"
-      helperTextInvalid={false}
-      isValid={true}
-    >
-      <div
-        className="pf-c-form__group"
-      >
-        <ForwardRef
-          id="someIdKey"
-          isValid={true}
-          name="Name of the field"
-          value=""
-        >
-          <TextInputBase
-            aria-label={null}
-            className=""
-            id="someIdKey"
-            innerRef={null}
-            isDisabled={false}
-            isReadOnly={false}
-            isRequired={false}
-            isValid={true}
-            name="Name of the field"
-            onChange={[Function]}
-            type="text"
-            validated="default"
-            value=""
-          >
-            <input
-              aria-invalid={false}
-              aria-label={null}
-              className="pf-c-form-control"
-              disabled={false}
-              id="someIdKey"
-              name="Name of the field"
-              onChange={[Function]}
-              readOnly={false}
-              required={false}
-              type="text"
-              value=""
-            />
-          </TextInputBase>
-        </ForwardRef>
-      </div>
-    </FormGroup>
-  </FieldInterface>
-</TextField>
+    </TextField>
+  </ReactFinalForm>
+</RenderWithProvider>
 `;
 
 exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
-<SwitchField
-  FieldProvider={[Function]}
-  dataType="someDataType"
-  id="someIdKey"
-  input={
-    Object {
-      "name": "Name of the field",
-      "value": "",
-    }
-  }
-  meta={
-    Object {
-      "error": false,
-      "touched": false,
-    }
-  }
-  offText="Turned off"
-  onText="I am on"
->
-  <FieldProvider
-    dataType="someDataType"
-    id="someIdKey"
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    meta={
-      Object {
-        "error": false,
-        "touched": false,
-      }
-    }
-    offText="Turned off"
-    onText="I am on"
-    render={[Function]}
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
   >
-    <div>
-      <FieldInterface
-        componentType="switch-field"
-        dataType="someDataType"
+    <Switch
+      dataType="someDataType"
+      id="someIdKey"
+      name="Name of the field"
+      offText="Turned off"
+      onText="I am on"
+    >
+      <FormGroup
         hideLabel={true}
         id="someIdKey"
-        input={
-          Object {
-            "name": "Name of the field",
-            "value": "",
-          }
-        }
+        isRequired={false}
         meta={
           Object {
-            "error": false,
+            "active": false,
+            "data": Object {},
+            "dirty": false,
+            "dirtySinceLastSubmit": false,
+            "error": undefined,
+            "initial": undefined,
+            "invalid": false,
+            "length": undefined,
+            "modified": false,
+            "pristine": true,
+            "submitError": undefined,
+            "submitFailed": false,
+            "submitSucceeded": false,
+            "submitting": false,
             "touched": false,
+            "valid": true,
+            "validating": false,
+            "visited": false,
           }
         }
-        name="Name of the field"
-        offText="Turned off"
-        onText="I am on"
       >
         <FormGroup
           fieldId="someIdKey"
-          helperTextInvalid={false}
+          isRequired={false}
           isValid={true}
           label={false}
         >
@@ -2681,47 +3156,55 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
             className="pf-c-form__group"
           >
             <Component
+              checked={false}
               id="someIdKey"
-              isChecked={false}
               label="I am on"
               labelOff="Turned off"
               name="Name of the field"
+              onBlur={[Function]}
               onChange={[Function]}
-              value=""
+              onFocus={[Function]}
+              type="checkbox"
             >
               <ComponentWithOuia
                 component={[Function]}
                 componentProps={
                   Object {
+                    "checked": false,
                     "id": "someIdKey",
-                    "isChecked": false,
                     "isDisabled": undefined,
                     "label": "I am on",
                     "labelOff": "Turned off",
                     "name": "Name of the field",
+                    "onBlur": [Function],
                     "onChange": [Function],
-                    "value": "",
+                    "onFocus": [Function],
+                    "type": "checkbox",
+                    "value": undefined,
                   }
                 }
                 consumerContext={null}
               >
                 <Switch
                   aria-label=""
+                  checked={false}
                   className=""
                   id="someIdKey"
-                  isChecked={false}
+                  isChecked={true}
                   isDisabled={false}
                   label="I am on"
                   labelOff="Turned off"
                   name="Name of the field"
+                  onBlur={[Function]}
                   onChange={[Function]}
+                  onFocus={[Function]}
                   ouiaContext={
                     Object {
                       "isOuia": false,
                       "ouiaId": null,
                     }
                   }
-                  value=""
+                  type="checkbox"
                 >
                   <label
                     className="pf-c-switch"
@@ -2735,9 +3218,10 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
                       disabled={false}
                       id="someIdKey"
                       name="Name of the field"
+                      onBlur={[Function]}
                       onChange={[Function]}
+                      onFocus={[Function]}
                       type="checkbox"
-                      value=""
                     />
                     <span
                       className="pf-c-switch__toggle"
@@ -2762,8 +3246,8 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
             </Component>
           </div>
         </FormGroup>
-      </FieldInterface>
-    </div>
-  </FieldProvider>
-</SwitchField>
+      </FormGroup>
+    </Switch>
+  </ReactFinalForm>
+</RenderWithProvider>
 `;

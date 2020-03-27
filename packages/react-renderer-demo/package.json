@@ -5,6 +5,7 @@
     "engines": {
         "node": "10"
     },
+    "private": true,
     "scripts": {
         "dev": "next \"src/app/\"",
         "preserve": "npm run build-public && npm run build-funcs && npm run build-app && npm run copy-deps && npm run install-deps",
@@ -43,10 +44,10 @@
         "patternfly-react": "^2.25.1",
         "prop-types": "^15.6.2",
         "raw-loader": "^3.1.0",
-        "react": "^16.10.2",
+        "react": "^16.13.0",
         "react-ace": "^6.3.2",
         "react-copy-to-clipboard": "^5.0.1",
-        "react-dom": "^16.10.2",
+        "react-dom": "^16.13.0",
         "react-router-dom": "^5.0.1",
         "react-sticky-box": "^0.8.0"
     },

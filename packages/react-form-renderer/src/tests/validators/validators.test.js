@@ -1,171 +1,157 @@
-import { validators } from '../../constants';
 import { dataTypeValidator, numericality } from '../../validators/';
 import validatorMapper from '../../validators/validator-mapper';
-import Validator from '../../validators/validators';
+import Validator from '../../files/validators';
 import messages from '../../validators/messages';
+import validatorTypes from '../../files/validator-types';
 
 describe('New validators', () => {
   describe('Required validator', () => {
     it('should pass required validator', () => {
-      expect(validatorMapper(validators.REQUIRED)()('Foo')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.REQUIRED]()('Foo')).toBeUndefined();
     });
 
     it('should fail required validator', () => {
-      expect(validatorMapper(validators.REQUIRED)()()).toBe('Required');
+      expect(validatorMapper[validatorTypes.REQUIRED]()()).toBe('Required');
     });
 
     it('should fail required validator if string of white spaces', () => {
-      expect(validatorMapper(validators.REQUIRED)()('  ')).toBe('Required');
+      expect(validatorMapper[validatorTypes.REQUIRED]()('  ')).toBe('Required');
     });
 
     it('should fail required validator if empty string', () => {
-      expect(validatorMapper(validators.REQUIRED)()('')).toBe('Required');
+      expect(validatorMapper[validatorTypes.REQUIRED]()('')).toBe('Required');
     });
 
     it('should fail required validator if empty array', () => {
-      expect(validatorMapper(validators.REQUIRED)()([])).toBe('Required');
+      expect(validatorMapper[validatorTypes.REQUIRED]()([])).toBe('Required');
     });
   });
 
   describe('Length validator', () => {
     it('should pass empty value', () => {
-      expect(validatorMapper(validators.EXACT_LENGTH)({ threshold: 5 })('')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.EXACT_LENGTH]({ threshold: 5 })('')).toBeUndefined();
     });
 
     it('should pass undefined value', () => {
-      expect(validatorMapper(validators.EXACT_LENGTH)({ threshold: 5 })(undefined)).toBeUndefined();
+      expect(validatorMapper[validatorTypes.EXACT_LENGTH]({ threshold: 5 })(undefined)).toBeUndefined();
     });
 
     it('should pass exact length of 5 characters validation', () => {
-      expect(validatorMapper(validators.EXACT_LENGTH)({ threshold: 5 })('12345')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.EXACT_LENGTH]({ threshold: 5 })('12345')).toBeUndefined();
     });
 
     it('should fail exact length of 5 characters validation', () => {
-      expect(validatorMapper(validators.EXACT_LENGTH)({ threshold: 5 })('1234')).toBe('Should be 5 characters long.');
+      expect(validatorMapper[validatorTypes.EXACT_LENGTH]({ threshold: 5 })('1234')).toBe('Should be 5 characters long.');
     });
 
     it('should fail exact length of 5 characters validation with custom message', () => {
-      expect(validatorMapper(validators.EXACT_LENGTH)({ threshold: 5, message: 'Not 5 long' })('123456')).toBe('Not 5 long');
+      expect(validatorMapper[validatorTypes.EXACT_LENGTH]({ threshold: 5, message: 'Not 5 long' })('123456')).toBe('Not 5 long');
     });
 
     it('should pass min length of 3 characters validation', () => {
-      expect(validatorMapper(validators.MIN_LENGTH)({ threshold: 3 })('12345')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.MIN_LENGTH]({ threshold: 3 })('12345')).toBeUndefined();
     });
 
     it('should not pass min length of 3 characters validation', () => {
-      expect(validatorMapper(validators.MIN_LENGTH)({ threshold: 3 })('12')).toBe('Must have at least 3 characters.');
+      expect(validatorMapper[validatorTypes.MIN_LENGTH]({ threshold: 3 })('12')).toBe('Must have at least 3 characters.');
     });
 
     it('should not pass min length of 3 characters validation with custom message', () => {
-      expect(validatorMapper(validators.MIN_LENGTH)({ threshold: 3, message: 'Too short!' })('12')).toBe('Too short!');
+      expect(validatorMapper[validatorTypes.MIN_LENGTH]({ threshold: 3, message: 'Too short!' })('12')).toBe('Too short!');
     });
 
     it('should pass max length of 3 characters long validation', () => {
-      expect(validatorMapper(validators.MAX_LENGTH)({ threshold: 3 })('12')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.MAX_LENGTH]({ threshold: 3 })('12')).toBeUndefined();
     });
 
     it('should not pass max length of 3 characters validation', () => {
-      expect(validatorMapper(validators.MAX_LENGTH)({ threshold: 3 })('1234')).toBe('Can have maximum of 3 characters.');
+      expect(validatorMapper[validatorTypes.MAX_LENGTH]({ threshold: 3 })('1234')).toBe('Can have maximum of 3 characters.');
     });
 
     it('should not pass max length of 3 characters validation with custom message', () => {
-      expect(validatorMapper(validators.MAX_LENGTH)({ threshold: 3, message: 'Too long!' })('1234')).toBe('Too long!');
-    });
-
-    it('should pass max length of 3 characters long validation with typo (backwards compatibility)', () => {
-      expect(validatorMapper(validators.MAX_LENGTH)({ treshold: 3 })('12')).toBeUndefined();
-    });
-
-    it('should correctly pick threshold when using deprecated value', () => {
-      expect(validatorMapper(validators.MIN_LENGTH)({ treshold: 3, message: 'Too short!' })('1')).toBe('Too short!');
-      expect(validatorMapper(validators.MIN_LENGTH)({ threshold: 3, message: 'Too short!' })('1')).toBe('Too short!');
-      expect(validatorMapper(validators.MIN_LENGTH)({ threshold: 5, treshold: 3, message: 'Too short!' })('12345')).toBeUndefined();
-    });
-
-    it('should pass min items of 3 validation with typo', () => {
-      expect(validatorMapper(validators.MIN_ITEMS_VALIDATOR)({ treshold: 3 })([ '1', '2', '3' ])).toBeUndefined();
+      expect(validatorMapper[validatorTypes.MAX_LENGTH]({ threshold: 3, message: 'Too long!' })('1234')).toBe('Too long!');
     });
 
     it('should pass min items of 3 validation', () => {
-      expect(validatorMapper(validators.MIN_ITEMS_VALIDATOR)({ threshold: 3 })([ '1', '2', '3' ])).toBeUndefined();
+      expect(validatorMapper[validatorTypes.MIN_ITEMS]({ threshold: 3 })(['1', '2', '3'])).toBeUndefined();
     });
 
     it('should pass min items of 3 validation', () => {
-      expect(validatorMapper(validators.MIN_ITEMS_VALIDATOR)({ threshold: 3, message: 'Too few' })([ '1', '2' ])).toBe('Too few');
+      expect(validatorMapper[validatorTypes.MIN_ITEMS]({ threshold: 3, message: 'Too few' })(['1', '2'])).toBe('Too few');
     });
 
     it('should pass min items of 3 validation with more items', () => {
-      expect(validatorMapper(validators.MIN_ITEMS_VALIDATOR)({ threshold: 3 })([ '1', '2', '3', '4' ])).toBeUndefined();
+      expect(validatorMapper[validatorTypes.MIN_ITEMS]({ threshold: 3 })(['1', '2', '3', '4'])).toBeUndefined();
     });
   });
 
   describe('pattern validator', () => {
     it('should pass pattern validation with configured regexp pattern', () => {
-      expect(validatorMapper(validators.PATTERN_VALIDATOR)({ pattern: /^Foo$/ })('Foo')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.PATTERN]({ pattern: /^Foo$/ })('Foo')).toBeUndefined();
     });
 
     it('should fail pattern validation and return default message', () => {
-      expect(validatorMapper(validators.PATTERN_VALIDATOR)({ pattern: /^Foo$/ })('Bar')).toEqual('Value does not match pattern: /^Foo$/.');
+      expect(validatorMapper[validatorTypes.PATTERN]({ pattern: /^Foo$/ })('Bar')).toEqual('Value does not match pattern: /^Foo$/.');
     });
 
     it('should fail pattern validation and return custom message', () => {
-      expect(validatorMapper(validators.PATTERN_VALIDATOR)({ pattern: /^Foo$/, message: 'Custom message' })('Bar')).toEqual('Custom message');
+      expect(validatorMapper[validatorTypes.PATTERN]({ pattern: /^Foo$/, message: 'Custom message' })('Bar')).toEqual('Custom message');
     });
 
     it('should pass pattern validation with configured regexp pattern as string', () => {
-      expect(validatorMapper(validators.PATTERN_VALIDATOR)({ pattern: '^Foo$' })('Foo')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.PATTERN]({ pattern: '^Foo$' })('Foo')).toBeUndefined();
     });
 
     it('should pass pattern validation with configured regexp pattern as string and with flags', () => {
-      expect(validatorMapper(validators.PATTERN_VALIDATOR)({ pattern: '^Foo$', flags: 'i' })('foo')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.PATTERN]({ pattern: '^Foo$', flags: 'i' })('foo')).toBeUndefined();
     });
 
     it('should fail pattern validation with configured regexp pattern as string', () => {
-      expect(validatorMapper(validators.PATTERN_VALIDATOR)({ pattern: '^Foo$' })('Bar')).toBe('Value does not match pattern: ^Foo$.');
+      expect(validatorMapper[validatorTypes.PATTERN]({ pattern: '^Foo$' })('Bar')).toBe('Value does not match pattern: ^Foo$.');
     });
   });
 
   describe('min value validator', () => {
     it('should pass the validation', () => {
-      expect(validatorMapper(validators.MIN_NUMBER_VALUE)({ value: 99 })(123)).toBeUndefined();
+      expect(validatorMapper[validatorTypes.MIN_NUMBER_VALUE]({ value: 99 })(123)).toBeUndefined();
     });
 
     it('should pass the validation if minimum value', () => {
-      expect(validatorMapper(validators.MIN_NUMBER_VALUE)({ value: 99 })(99)).toBeUndefined();
+      expect(validatorMapper[validatorTypes.MIN_NUMBER_VALUE]({ value: 99 })(99)).toBeUndefined();
     });
 
     it('should pass the validation if no input given', () => {
-      expect(validatorMapper(validators.MIN_NUMBER_VALUE)({ value: 99 })()).toBeUndefined();
+      expect(validatorMapper[validatorTypes.MIN_NUMBER_VALUE]({ value: 99 })()).toBeUndefined();
     });
 
     it('should not pass the validation (includethreshold is false)', () => {
-      expect(validatorMapper(validators.MIN_NUMBER_VALUE)({ value: 99, includeThreshold: false })(99)).toEqual('Value must be greater than 99.');
+      expect(validatorMapper[validatorTypes.MIN_NUMBER_VALUE]({ value: 99, includeThreshold: false })(99)).toEqual('Value must be greater than 99.');
     });
 
     it('should not pass the validation and return custom message', () => {
-      expect(validatorMapper(validators.MIN_NUMBER_VALUE)({ value: 99, message: 'Foo' })(1)).toEqual('Foo');
+      expect(validatorMapper[validatorTypes.MIN_NUMBER_VALUE]({ value: 99, message: 'Foo' })(1)).toEqual('Foo');
     });
   });
 
   describe('max value validator', () => {
     it('should pass the validation', () => {
-      expect(validatorMapper(validators.MAX_NUMBER_VALUE)({ value: 99 })(1)).toBeUndefined();
+      expect(validatorMapper[validatorTypes.MAX_NUMBER_VALUE]({ value: 99 })(1)).toBeUndefined();
     });
 
     it('should pass the validation if maximum value', () => {
-      expect(validatorMapper(validators.MAX_NUMBER_VALUE)({ value: 99 })(99)).toBeUndefined();
+      expect(validatorMapper[validatorTypes.MAX_NUMBER_VALUE]({ value: 99 })(99)).toBeUndefined();
     });
 
     it('should pass the validation if no input given', () => {
-      expect(validatorMapper(validators.MAX_NUMBER_VALUE)({ value: 99 })()).toBeUndefined();
+      expect(validatorMapper[validatorTypes.MAX_NUMBER_VALUE]({ value: 99 })()).toBeUndefined();
     });
 
     it('should not pass the validation (includethreshold is false)', () => {
-      expect(validatorMapper(validators.MAX_NUMBER_VALUE)({ value: 99, includeThreshold: false })(99)).toEqual('Value must be less than 99');
+      expect(validatorMapper[validatorTypes.MAX_NUMBER_VALUE]({ value: 99, includeThreshold: false })(99)).toEqual('Value must be less than 99');
     });
 
     it('should not pass the validation and return custom validation', () => {
-      expect(validatorMapper(validators.MAX_NUMBER_VALUE)({ value: 99, message: 'Foo' })(123)).toEqual('Foo');
+      expect(validatorMapper[validatorTypes.MAX_NUMBER_VALUE]({ value: 99, message: 'Foo' })(123)).toEqual('Foo');
     });
   });
 
@@ -274,36 +260,36 @@ describe('New validators', () => {
 
     describe('data-type arrays', () => {
       it('should pass validation of an array of strings', () => {
-        expect(dataTypeValidator('string')()([ 'Foo', 'Bar', 'Baz' ])).toBeUndefined();
+        expect(dataTypeValidator('string')()(['Foo', 'Bar', 'Baz'])).toBeUndefined();
       });
 
       it('should fail validation of an array of strings', () => {
-        expect(dataTypeValidator('string')()([ 'Foo', 'Bar', 2 ])).toBe('Field value has to be string');
+        expect(dataTypeValidator('string')()(['Foo', 'Bar', 2])).toBe('Field value has to be string');
       });
 
       it('should pass validation of an array of integers', () => {
-        expect(dataTypeValidator('integer')()([ 1, 2, 3 ])).toBeUndefined();
+        expect(dataTypeValidator('integer')()([1, 2, 3])).toBeUndefined();
       });
 
       it('should fail validation of an array of strings', () => {
-        expect(dataTypeValidator('integer')()([ 1, 2, 2.1 ])).toBe('Value must be integer');
-        expect(dataTypeValidator('integer')()([ 1, 2, 'foo' ])).toBe('Value must be integer');
+        expect(dataTypeValidator('integer')()([1, 2, 2.1])).toBe('Value must be integer');
+        expect(dataTypeValidator('integer')()([1, 2, 'foo'])).toBe('Value must be integer');
       });
 
       it('should pass validation of an array of numbers', () => {
-        expect(dataTypeValidator('number')()([ 1, 2, 3.1 ])).toBeUndefined();
+        expect(dataTypeValidator('number')()([1, 2, 3.1])).toBeUndefined();
       });
 
       it('should fail validation of an array of numbers', () => {
-        expect(dataTypeValidator('number')()([ 1, 2, 'foo' ])).toBe('Values must be number');
+        expect(dataTypeValidator('number')()([1, 2, 'foo'])).toBe('Values must be number');
       });
 
       it('should pass validation of an array of booleans', () => {
-        expect(dataTypeValidator('boolean')()([ true, true, false, false ])).toBeUndefined();
+        expect(dataTypeValidator('boolean')()([true, true, false, false])).toBeUndefined();
       });
 
       it('should fail validation of an array of booleans', () => {
-        expect(dataTypeValidator('boolean')()([ 'foo', 2, true ])).toBe('Field value has to be boolean');
+        expect(dataTypeValidator('boolean')()(['foo', 2, true])).toBe('Field value has to be boolean');
       });
     });
   });
@@ -313,72 +299,72 @@ describe('New validators', () => {
       Validator.messages = {
         ...Validator.messages,
         required: 'Foo required',
-        tooShort: 'Bar',
+        tooShort: 'Bar'
       };
     });
     afterAll(() => {
       // reset custom messages ovverides for validators
       Validator.messages = {
-        ...messages,
+        ...messages
       };
     });
 
     it('should fail validations and return globally overriden messages', () => {
-      expect(validatorMapper(validators.REQUIRED)()()).toEqual('Foo required');
-      expect(validatorMapper(validators.MIN_LENGTH)({ threshold: 5 })('12')).toEqual('Bar');
+      expect(validatorMapper[validatorTypes.REQUIRED]()()).toEqual('Foo required');
+      expect(validatorMapper[validatorTypes.MIN_LENGTH]({ threshold: 5 })('12')).toEqual('Bar');
     });
   });
 
   describe('URL validator', () => {
     const failMessage = 'String is not URL.';
     it('should pass validation without any configuration', () => {
-      expect(validatorMapper(validators.URL)({})('https://www.google.com/')).toBeUndefined();
-      expect(validatorMapper(validators.URL)({})('http://www.google.com/')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.URL]({})('https://www.google.com/')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.URL]({})('http://www.google.com/')).toBeUndefined();
     });
 
     it('should fail validation withouth any configuration', () => {
-      expect(validatorMapper(validators.URL)({})('https://www.')).toBe(failMessage);
+      expect(validatorMapper[validatorTypes.URL]({})('https://www.')).toBe(failMessage);
     });
 
     it('should return custom message', () => {
       const customMessage = 'customMessage';
 
-      expect(validatorMapper(validators.URL)({ message: customMessage })('https://www.')).toBe(customMessage);
+      expect(validatorMapper[validatorTypes.URL]({ message: customMessage })('https://www.')).toBe(customMessage);
     });
 
     it('should validate only URL with ftp protocol', () => {
-      expect(validatorMapper(validators.URL)({ protocol: 'ftp' })('https://www.google.com/')).toBe(failMessage);
-      expect(validatorMapper(validators.URL)({ protocol: 'ftp' })('ftp://www.google.com/')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.URL]({ protocol: 'ftp' })('https://www.google.com/')).toBe(failMessage);
+      expect(validatorMapper[validatorTypes.URL]({ protocol: 'ftp' })('ftp://www.google.com/')).toBeUndefined();
     });
 
     it('should validate only URL with ftp and shh protocols', () => {
-      expect(validatorMapper(validators.URL)({ protocols: [ 'ftp', 'ssh' ]})('https://www.google.com/')).toBe(failMessage);
-      expect(validatorMapper(validators.URL)({ protocols: [ 'ftp', 'ssh' ]})('ftp://www.google.com/')).toBeUndefined();
-      expect(validatorMapper(validators.URL)({ protocols: [ 'ftp', 'ssh' ]})('ssh://www.google.com/')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.URL]({ protocols: ['ftp', 'ssh'] })('https://www.google.com/')).toBe(failMessage);
+      expect(validatorMapper[validatorTypes.URL]({ protocols: ['ftp', 'ssh'] })('ftp://www.google.com/')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.URL]({ protocols: ['ftp', 'ssh'] })('ssh://www.google.com/')).toBeUndefined();
     });
 
     it('should validate only IPv4 adress as valid URL', () => {
-      expect(validatorMapper(validators.URL)({ ipv4: false })('http://123.123.123.222/')).toBe(failMessage);
-      expect(validatorMapper(validators.URL)({})('http://123.123.123.222')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.URL]({ ipv4: false })('http://123.123.123.222/')).toBe(failMessage);
+      expect(validatorMapper[validatorTypes.URL]({})('http://123.123.123.222')).toBeUndefined();
     });
 
     it('should validate only IPv4 adress as valid URL without protocol', () => {
-      expect(validatorMapper(validators.URL)({ protocolIdentifier: false })('123.123.123.222')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.URL]({ protocolIdentifier: false })('123.123.123.222')).toBeUndefined();
     });
 
     it('should validate only as invalid URL without initial //', () => {
-      expect(validatorMapper(validators.URL)({})('//www.google.com')).toBeUndefined();
-      expect(validatorMapper(validators.URL)({ emptyProtocol: false })('//www.google.com')).toBe(failMessage);
+      expect(validatorMapper[validatorTypes.URL]({})('//www.google.com')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.URL]({ emptyProtocol: false })('//www.google.com')).toBe(failMessage);
     });
 
     it('should validate only IPv6 adress as valid URL', () => {
-      expect(validatorMapper(validators.URL)({ ipv6: false })('http://2001:db8:85a3::8a2e:370:7334:3838/')).toBe(failMessage);
-      expect(validatorMapper(validators.URL)({})('http://2001:db8:85a3::8a2e:370:7334:3838')).toBeUndefined();
-      expect(validatorMapper(validators.URL)({ protocolIdentifier: false })('2001:db8:85a3::8a2e:370:7334:3838')).toBeUndefined();
-      expect(validatorMapper(validators.URL)({ protocolIdentifier: false })('::1')).toBeUndefined();
-      expect(validatorMapper(validators.URL)({ protocolIdentifier: false })('1::')).toBeUndefined();
-      expect(validatorMapper(validators.URL)({ protocolIdentifier: false })('1::xxx')).toBe(failMessage);
-      expect(validatorMapper(validators.URL)({ protocolIdentifier: false, ipv4: false })('192.168.1.1')).toBe(failMessage);
+      expect(validatorMapper[validatorTypes.URL]({ ipv6: false })('http://2001:db8:85a3::8a2e:370:7334:3838/')).toBe(failMessage);
+      expect(validatorMapper[validatorTypes.URL]({})('http://2001:db8:85a3::8a2e:370:7334:3838')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.URL]({ protocolIdentifier: false })('2001:db8:85a3::8a2e:370:7334:3838')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.URL]({ protocolIdentifier: false })('::1')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.URL]({ protocolIdentifier: false })('1::')).toBeUndefined();
+      expect(validatorMapper[validatorTypes.URL]({ protocolIdentifier: false })('1::xxx')).toBe(failMessage);
+      expect(validatorMapper[validatorTypes.URL]({ protocolIdentifier: false, ipv4: false })('192.168.1.1')).toBe(failMessage);
     });
   });
 });

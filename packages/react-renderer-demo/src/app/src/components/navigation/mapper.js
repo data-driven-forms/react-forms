@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
@@ -24,21 +25,17 @@ const Item = ({ href, linkText, component }) => {
   return (
     <ListItem
       button
-      selected={ href.replace('/?', '?') === router.asPath.replace(query, '') }
-      key={ href || linkText }
-      className={ classes.nested }
-      component={ forwardRef((props, ref) => (
-        <RouterNavLink key={ component } href={ href.replace('/?', '?') }>
-          <Link style={{ color: 'rgba(0, 0, 0, 0.87)' }} { ...props } href={ href.replace('/?', '?') } />
+      selected={href.replace('/?', '?') === router.asPath.replace(query, '')}
+      key={href || linkText}
+      className={classes.nested}
+      component={forwardRef((props, ref) => (
+        <RouterNavLink ref={ref} key={component} href={href.replace('/?', '?')}>
+          <Link style={{ color: 'rgba(0, 0, 0, 0.87)' }} {...props} href={href.replace('/?', '?')} />
         </RouterNavLink>
-      )) }
+      ))}
     >
-      <Typography
-        variant="button"
-        gutterBottom
-        style={{ textTransform: 'capitalize', fontWeight: 'initial' }}
-      >
-        { linkText }
+      <Typography variant="button" gutterBottom style={{ textTransform: 'capitalize', fontWeight: 'initial' }}>
+        {linkText}
       </Typography>
     </ListItem>
   );
@@ -47,35 +44,26 @@ const Item = ({ href, linkText, component }) => {
 Item.propTypes = {
   href: PropTypes.string.isRequired,
   linkText: PropTypes.string,
-  component: PropTypes.node,
+  component: PropTypes.node
 };
 
-const FinalList = ({
-  title,
-  level,
-  link,
-  fields,
-  previousLinks = [],
-  renderItems,
-  openable = true,
-  open = false,
-}) => {
-  const [ isOpen, setIsOpen ] = useState(openable ? open : true);
+const FinalList = ({ title, level, link, fields, previousLinks = [], renderItems, openable = true, open = false }) => {
+  const [isOpen, setIsOpen] = useState(openable ? open : true);
 
-  const closeNav = () => setIsOpen(state => !state);
+  const closeNav = () => setIsOpen((state) => !state);
   const classes = useStyles();
 
   return (
-    <List key={ title } component="nav">
-      { title && (
-        <ListItem button onClick={ openable ? closeNav : null } className={ classes.listItem } >
-          <ListItemText primary={ title } />
-          { openable ? isOpen ? <ExpandLess /> : <ExpandMore /> : null }
+    <List key={title} component="nav">
+      {title && (
+        <ListItem button onClick={openable ? closeNav : null} className={classes.listItem}>
+          <ListItemText primary={title} />
+          {openable ? isOpen ? <ExpandLess /> : <ExpandMore /> : null}
         </ListItem>
-      ) }
-      <Collapse in={ isOpen } timeout="auto" unmountOnExit>
+      )}
+      <Collapse in={isOpen} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          { renderItems(fields, level + 1, [ ...previousLinks, link ]) }
+          {renderItems(fields, level + 1, [...previousLinks, link])}
         </List>
       </Collapse>
     </List>
@@ -83,8 +71,8 @@ const FinalList = ({
 };
 
 const Mapper = {
-  wrapper: FinalList,
-  item: Item,
+  Wrapper: FinalList,
+  Item
 };
 
 export default Mapper;

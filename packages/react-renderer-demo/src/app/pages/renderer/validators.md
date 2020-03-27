@@ -44,9 +44,9 @@ The function takes `value` as an argument and should return undefined when pases
 
 ## Async validator
 
-You can use a Async function as a validator. However, the returned promise will overwrite all other validators
-(because it is returned last),
-so you need combine all validators into one function.
+You can use a Async function as a validator. But it **must be first in the validate array**. Other async validators will be ignored. This rule was created to prevent long asynchronous validation sequences.
+
+You can either use custom function, or custom validator from validator mapper.
 
 <RawComponent source="validators/async-validator" />
 
@@ -55,6 +55,57 @@ Validator inputs and results are being cached so you will get immediate feedback
 
 If you do not want to trigger the async validator after every stroke, you can use a debounce promise [library](https://github.com/slorber/awesome-debounce-promise)
 (or any other implementation of debouncing.)
+
+# Custom validator mapper
+
+If you need to expand default Data Driven Forms validator types, you can use [validatorMapper](/renderer/renderer-api#optionalprops).
+
+```jsx
+const customValidatorMapper = {
+  custom: () => (value) => value > 6 ? 'Value is bigger than 6' : undefined
+}
+
+const schema = {
+  fields: [{
+   name: 'name',
+   component: 'text-field',
+   validate: [{type: 'custom'}]
+  }]
+}
+
+<FormRenderer
+  ...
+  schema={schema}
+  validatorMapper={customValidatorMapper}
+/>
+
+```
+
+Validator in a mapper must be a function which returns a function. This makes validator easily configurable (different messages for same validator).
+
+The higher order function receives the whole validator object.
+
+```jsx
+const customValidatorMapper = {
+  custom: ({ threshold }) => (value) => value > threshold ? `Value is bigger than ${threshold}` : undefined
+}
+
+const schema = {
+  fields: [{
+   name: 'name',
+   component: 'text-field',
+   validate: [{type: 'custom', threshold: 6}]
+  }]
+}
+```
+
+Also, each validator function receives value of the current field as the first argument and all form values as the second.
+
+```jsx
+const validatorMapper = {
+  [type]: (validatorSchema) => (value, allValues) => isValid ? undefined : 'error message'
+}
+```
 
 # ValidateOnMount pf3 only
 

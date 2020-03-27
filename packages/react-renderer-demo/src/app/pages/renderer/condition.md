@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import Grid from '@material-ui/core/Grid'
 
 import ListOfContents from '../../src/helpers/list-of-contents';
@@ -317,7 +315,7 @@ condition: {
 
 ## Clearing values
 
-If you need to clear values after switching fields, please see <Link href="/renderer/unmounting"><a href="/renderer/unmounting">here</a></Link>.
+If you need to clear values after switching fields, please see [here](/renderer/unmounting).
 
 </Grid>
 <Grid item xs={false} md={2}>
