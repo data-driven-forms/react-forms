@@ -57,7 +57,7 @@ For using Data Driven Forms in your component you need the renderer and a compon
 ```jsx
 import React from 'react';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
-import { componentMapper, layoutMapper } from '@data-driven-forms/pf3-component-mapper';
+import { componentMapper, FormTemplate } from '@data-driven-forms/pf3-component-mapper';
 
 const schema = {
   fields: [{
@@ -71,7 +71,7 @@ const Form = () => (
   <FormRenderer
     schema={schema}
     componentMapper={componentMapper}
-    layoutMapper={layoutMapper}
+    FormTemplate={FormTemplate}
     onSubmit={console.log}
   />
 )
