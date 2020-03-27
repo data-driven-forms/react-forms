@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
+import useFormApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-form-api';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 import FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
 import TextField from '@data-driven-forms/pf4-component-mapper/dist/cjs/text-field';
@@ -10,7 +11,12 @@ import { Title } from '@patternfly/react-core/dist/js/components/Title/Title';
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField,
   [componentTypes.WIZARD]: Wizard,
-  [componentTypes.SELECT]: Select
+  [componentTypes.SELECT]: Select,
+  Summary: () => {
+    const { getState } = useFormApi();
+
+    return <Title size="md">{getState().values['chosen-way']}</Title>;
+  }
 };
 
 const schema = {
@@ -18,6 +24,7 @@ const schema = {
     {
       component: componentTypes.WIZARD,
       name: 'wizard',
+      crossroads: ['selection'],
       fields: [
         {
           title: 'Choose your way',
@@ -50,6 +57,10 @@ const schema = {
               hideField: true,
               name: 'chosen-way',
               initialValue: 'User chose the first way'
+            },
+            {
+              component: 'Summary',
+              name: 'summary'
             }
           ]
         },
@@ -63,6 +74,10 @@ const schema = {
               hideField: true,
               name: 'chosen-way',
               initialValue: 'User chose the second way'
+            },
+            {
+              component: 'Summary',
+              name: 'summary'
             }
           ]
         }
@@ -71,22 +86,23 @@ const schema = {
   ]
 };
 
+const FormTemplateWrapper = (props) => <FormTemplate {...props} showFormControls={false} />;
+
 const InitializeOnMountWizardExample = () => {
   const [values, setValues] = useState({});
   return (
     <div className="pf4">
+      <div style={{ marginTop: 16, marginBottom: 16 }}>
+        <Title size="md">Form values</Title>
+        <pre>{JSON.stringify(values, null, 2)}</pre>
+      </div>
       <FormRenderer
-        FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
+        FormTemplate={FormTemplateWrapper}
         componentMapper={componentMapper}
         schema={schema}
         onSubmit={console.log}
         debug={({ values }) => setValues(values)}
-        showFormControls={false}
       />
-      <div style={{ marginTop: 16 }}>
-        <Title size="md">Form values</Title>
-        <pre>{JSON.stringify(values, null, 2)}</pre>
-      </div>
     </div>
   );
 };
