@@ -6,7 +6,6 @@ import CreatableSelect from 'react-select/creatable';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import isEqual from 'lodash/isEqual';
-import { input } from '../prop-types-templates';
 import fnToString from '../utils/fn-to-string';
 import reducer from './reducer';
 import useIsMounted from '../hooks/use-is-mounted';
@@ -169,7 +168,15 @@ Select.propTypes = {
   value: PropTypes.any,
   placeholder: PropTypes.string,
   loadOptionsChangeCounter: PropTypes.number,
-  ...input
+  isDisabled: PropTypes.bool,
+  isReadOnly: PropTypes.bool,
+  loadOptions: PropTypes.func,
+  loadingMessage: PropTypes.node,
+  loadingProps: PropTypes.object,
+  selectVariant: PropTypes.string,
+  updatingMessage: PropTypes.node,
+  noOptionsMessage: PropTypes.node,
+  isSearchable: PropTypes.bool
 };
 
 Select.defaultProps = {

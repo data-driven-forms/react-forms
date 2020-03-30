@@ -158,7 +158,7 @@ Option.propTypes = {
    */
   innerProps: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    key: PropTypes.string.isRequired,
+    key: PropTypes.string,
     onClick: PropTypes.func.isRequired,
     onMouseMove: PropTypes.func.isRequired,
     onMouseOver: PropTypes.func.isRequired,
@@ -173,7 +173,7 @@ Option.propTypes = {
     PropTypes.shape({
       current: PropTypes.any.isRequired
     })
-  ]).isRequired,
+  ]),
   /**
    * Whether the option is focused.
    */
@@ -221,7 +221,7 @@ SingleValue.propTypes = {
   /**
    * Props passed to the wrapping element for the group.
    */
-  innerProps: PropTypes.any.isRequired,
+  innerProps: PropTypes.any,
   selectProps: PropTypes.object.isRequired
 };
 
