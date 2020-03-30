@@ -34,7 +34,7 @@ const ConnectedLinks = () => {
       container
       justify="space-between"
       className={clsx(classNames.linksContainer, {
-        [classNames.withSideNav]: pathname.includes('/renderer/') && !(pathname === '/renderer/installation' || pathname === '/renderer/get-started')
+        [classNames.withSideNav]: pathname.includes('/renderer/')
       })}
     >
       <Grid item>

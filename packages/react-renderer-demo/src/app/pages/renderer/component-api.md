@@ -23,26 +23,19 @@ Each mapper provided in `react-forms` provides a default API for standard compon
 Standard components are:
 <br />
 
-Wrapped in formGroup: <br/>
-&nbsp;&nbsp;text field <br/>
-&nbsp;&nbsp;text area <br/>
-&nbsp;&nbsp;select <br/>
-&nbsp;&nbsp;checkbox <br/>
-&nbsp;&nbsp;radio <br/>
-&nbsp;&nbsp;switch <br/>
-&nbsp;&nbsp;timepicker/datepicker <br/>
-<br />
+|Change form state (input fields)|Others|
+|---------------------------------------|------|
+|text field|subform|
+|textarea|tabs/tab item|
+|select|wizard|
+|checkbox|plain text|
+|radio|
+|switch|
+|timepicker/datepicker|
 
-Others: <br/>
-&nbsp;&nbsp;subform <br/>
-&nbsp;&nbsp;tab/tab item <br/>
-&nbsp;&nbsp;wizard <br/>
+# Form fields components
 
-# FormGroup wrapped components
-
-Basic components are wrapped in formGroup. FormGroup provides a standard API to show labels, helper texts, errors, etc.
-
-All those components provides a shared group of props:
+Basic components that can change the form state (inputs) share common props. These components are using [useFieldApi](/renderer/component-mapping#usefieldapi) or [FieldProvider](/renderer/component-mapping#fieldprovider) to access the form state.
 
 |Prop|Type|Description|
 |----|:--:|----------:|
@@ -189,6 +182,15 @@ Wizard step <br/>
 |fields|array|An array of form fields|
 
 <ExampleLink to='wizard' />
+
+## Plain text
+
+|Prop|Type|Description|
+|----|:--:|----------:|
+|label|node/string|A text|
+|variant|string|A variant (depends on mappers: html tags)|
+
+<ExampleLink to='plain-text' />
 
 </Grid>
 <Grid item xs={false} md={2}>

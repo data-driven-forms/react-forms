@@ -34,7 +34,9 @@ You can show a field only if it meets a condition:
 
 `when` - is name of field where the value is stored, **always required!**. It can be either string `'field-name'` or array of strings `['field-1', 'field-2']`.
 
-### OR condition. At least one condition must be met
+### OR
+
+At least one condition must be met.
 
 You can use `or` object to connect two conditions. If either of of fields with name `a` and `b` will have value `x` condition is met.
 
@@ -81,7 +83,11 @@ Also, you can use a shorthand:
 }
 ```
 
-### AND condition. All conditions must be met
+<RawComponent source="conditions/or" />
+
+### AND
+
+All conditions must be met.
 
 Field `controlled-field-1` must have value `Bar` and field `controlled-field-2` must include `FooBar` somewhere in its value to display field `BarFoo`.
 
@@ -154,6 +160,8 @@ Or you can use a shorthand:
 }
 ```
 
+<RawComponent source="conditions/and" />
+
 ### Not
 
 You can simple negate a condition by using a `not`. Following condition is a true, when both of values are not a `x`.
@@ -189,9 +197,11 @@ You can simple negate a condition by using a `not`. Following condition is a tru
 
 As the value you can use an array (AND) or another condition.
 
+<RawComponent source="conditions/not" />
+
 ### Nesting
 
-Of course it is possible to neste conditions:
+Of course it is possible to nest conditions:
 
 ```jsx
 condition = {
@@ -201,6 +211,8 @@ condition = {
   ],
 };
 ```
+
+<RawComponent source="condition" />
 
 ## Conditions
 
@@ -217,6 +229,9 @@ condition: {
 // Foo == 'Bar' => true
 // Foo == 'Not a Bar' => false
 ```
+
+<RawComponent source="conditions/is" />
+
 ### Is empty
 
 `isEmpty` - tests if the value is empty (using [lodash function](https://lodash.com/docs/4.17.11#isEmpty))
@@ -237,6 +252,9 @@ condition: {
 // Foo = false => true
 // Foo = true => false
 ```
+
+<RawComponent source="conditions/is-empty" />
+
 ### Is not empty
 
 `isNotEmpty` - tests if the value is not empty (using [lodash function](https://lodash.com/docs/4.17.11#isEmpty))
@@ -257,6 +275,9 @@ condition: {
 // Foo = true => false
 // Foo = true => true
 ```
+
+<RawComponent source="conditions/is-not-empty" />
+
 ### Pattern
 
 `pattern` - tests if the value matches the pattern
@@ -284,6 +305,8 @@ condition: {
 // Foo = 'bAr!' => true
 ```
 
+<RawComponent source="conditions/pattern" />
+
 ### Not match
 
 `notMatch` - reverse `is`/`pattern` condition
@@ -309,9 +332,7 @@ condition: {
 // Foo = 'bar' => false
 ```
 
-## Example
-
-<RawComponent source="condition" />
+<RawComponent source="conditions/not-match" />
 
 ## Clearing values
 

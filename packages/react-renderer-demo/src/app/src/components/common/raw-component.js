@@ -20,13 +20,18 @@ const req = require.context('@docs/doc-components', true, /\.js/);
 const useStyles = makeStyles((theme) => ({
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular
+    fontWeight: theme.typography.fontWeightRegular,
+    flexGrow: 1
   },
   formWrapper: {
     padding: 16
   },
   formContainer: {
     marginTop: 16
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary
   }
 }));
 
@@ -47,6 +52,7 @@ const RawComponent = (props) => {
           <ExpansionPanel>
             <ExpansionPanelSummary expandIcon={<CodeIcon />}>
               {content.Component && <Typography className={classes.heading}>{content.Component.name}</Typography>}
+              <Typography className={classes.secondaryHeading}>Click to expand example code</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails style={{ padding: 0 }}>
               <CodeEditor value={content.text} />
