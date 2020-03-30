@@ -29,10 +29,10 @@ const checkCondition = (condition, fieldName) => {
     `);
   }
 
-  if (condition.hasOwnProperty('or') && !Array.isArray(condition.and)) {
+  if (condition.hasOwnProperty('or') && !Array.isArray(condition.or)) {
     throw new DefaultSchemaError(`
       Error occured in field definition with "name" property: "${fieldName}".
-      'or' propery in a field condition must be an array! Received: ${typeof condition.and}.
+      'or' property in a field condition must be an array! Received: ${typeof condition.or}.
     `);
   }
 
