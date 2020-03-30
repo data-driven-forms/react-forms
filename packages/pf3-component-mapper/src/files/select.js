@@ -42,3 +42,5 @@ Select.propTypes = {
 };
 
 export default Select;
+
+export const InternalSelect = DataDrivenSelect;

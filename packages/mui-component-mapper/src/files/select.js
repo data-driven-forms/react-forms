@@ -52,3 +52,5 @@ Select.defaultProps = {
 };
 
 export default Select;
+
+export const InternalSelect = MUISelect;
