@@ -32,7 +32,6 @@
   "devDependencies": {
     "@mdx-js/loader": "^1.4.5",
     "@zeit/next-css": "^1.0.1",
-    "file-loader": "^4.2.0",
     "firebase-admin": "~7.1.1",
     "firebase-functions": "^2.2.1",
     "url-loader": "^2.1.0"
@@ -48,7 +47,7 @@
     "@material-ui/styles": "^4.5.2",
     "@mdx-js/loader": "^1.4.5",
     "@mdx-js/react": "^1.4.5",
-    "@next/mdx": "^9.0.5",
+    "@next/mdx": "^9.3.3",
     "@patternfly/patternfly-next": "^1.0.175",
     "@patternfly/react-core": "~3.134.2",
     "@patternfly/react-tokens": "^2.5.1",
@@ -56,15 +55,14 @@
     "brace": "^0.11.1",
     "clsx": "^1.0.4",
     "docsearch.js": "^2.6.3",
-    "next": "^9.0.5",
+    "next": "^9.3.3",
     "patternfly-react": "^2.25.1",
     "prop-types": "^15.6.2",
     "raw-loader": "^3.1.0",
     "react": "^16.13.0",
     "react-ace": "^6.3.2",
     "react-copy-to-clipboard": "^5.0.1",
-    "react-dom": "^16.13.0",
-    "react-router-dom": "^5.0.1"
+    "react-dom": "^16.13.0"
   },
   "engines": {
     "node": "10"
