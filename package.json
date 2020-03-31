@@ -37,9 +37,9 @@
     }
   },
   "devDependencies": {
-    "@khala/commit-analyzer-wildcard": "^2.4.0",
-    "@khala/npm-release-monorepo": "^2.4.0",
-    "@khala/wildcard-release-notes": "^2.4.0",
+    "@khala/commit-analyzer-wildcard": "^2.4.1",
+    "@khala/npm-release-monorepo": "^2.4.1",
+    "@khala/wildcard-release-notes": "^2.4.1",
     "@semantic-release/github": "^5.5.5",
     "@semantic-release/npm": "^5.1.4",
     "atob-lite": "^2.0.0",
