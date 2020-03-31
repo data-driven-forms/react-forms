@@ -1,535 +1,186 @@
 /* eslint no-console: "off" */
 import React, { useState } from 'react';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import FormRenderer from '@data-driven-forms/react-form-renderer';
-import { componentTypes as components, validatorTypes as validators, defaultSchemaValidator } from '@data-driven-forms/react-form-renderer';
-import { FormTemplate, componentMapper } from '@data-driven-forms/pf4-component-mapper';
+import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
+import FormBuilder from '@data-driven-forms/form-builder/dist/cjs';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import {
+  pickerMapper,
+  propertiesMapper,
+  builderMapper,
+  BuilderTemplate,
+  fieldProperties
+} from '@data-driven-forms/form-builder/dist/cjs/mui-builder-mappers';
+import { makeStyles } from '@material-ui/styles';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import Typography from '@material-ui/core/Typography';
+import CloseIcon from '@material-ui/icons/Close';
+import PanToolIcon from '@material-ui/icons/PanTool';
 
 import dynamic from 'next/dynamic';
-const CodeEditor = dynamic(import('@docs/components/code-editor'), {
+
+import PropTypes from 'prop-types';
+const CodeEditor = dynamic(import('../src/components/code-editor'), {
   ssr: false
 });
 
-const baseStructure = {
-  fields: [
-    {
-      fields: [
-        {
-          title: 'Tab 1',
-          description: 'Text boxes and text areas',
-          name: '553',
-          fields: [
-            {
-              title: 'Text boxes',
-              name: '637',
-              fields: [
-                {
-                  name: 'switch_1',
-                  label: 'Switch',
-                  title: 'Switch',
-                  component: components.SWITCH
-                },
-                {
-                  name: 'switch_2',
-                  label: 'Switch disabled',
-                  component: components.SWITCH,
-                  isDisabled: true
-                },
-                {
-                  name: 'switch_3',
-                  label: 'Switch readOnly',
-                  component: components.SWITCH,
-                  isReadOnly: true
-                },
-                {
-                  name: 'text_box_2',
-                  label: 'Text Box with help',
-                  title: 'Text Box with help',
-                  helperText: 'Helper text',
-                  component: components.TEXT_FIELD
-                },
-                {
-                  name: 'text_box_3',
-                  label: 'Text Box required',
-                  title: 'Text Box required',
-                  isRequired: true,
-                  component: components.TEXT_FIELD,
-                  validate: [{ type: validators.REQUIRED }]
-                },
-                {
-                  name: 'text_box_4',
-                  label: 'Text Box readonly',
-                  title: 'Text Box readonly',
-                  isReadOnly: true,
-                  component: components.TEXT_FIELD
-                },
-                {
-                  name: 'text_box_5',
-                  label: 'Text Box default',
-                  title: 'Text Box default',
-                  component: components.TEXT_FIELD
-                },
-                {
-                  name: 'text_box_6',
-                  label: 'Text Box unvisible',
-                  title: 'Text Box unvisible',
-                  hideField: true,
-                  component: components.TEXT_FIELD
-                },
-                {
-                  name: 'text_box_7',
-                  label: 'Text Box with validator',
-                  title: 'Text Box with validator',
-                  validate: [
-                    {
-                      type: validators.PATTERN,
-                      pattern: '[0-9]'
-                    }
-                  ],
-                  component: components.TEXT_FIELD
-                },
-                {
-                  name: 'text_box_8',
-                  label: 'Text Box integer value',
-                  title: 'Text Box integer value',
-                  dataType: 'integer',
-                  component: components.TEXT_FIELD,
-                  type: 'number'
-                },
-                {
-                  name: 'text_box_9',
-                  label: 'Text Box string value',
-                  title: 'Text Box string value',
-                  dataType: 'string',
-                  component: components.TEXT_FIELD
-                }
-              ],
-              component: components.SUB_FORM
-            },
-            {
-              title: 'Text areas',
-              name: '638',
-              fields: [
-                {
-                  name: 'textarea_box_1',
-                  label: 'Text Area',
-                  title: 'Text Area',
-                  component: components.TEXTAREA
-                }
-              ],
-              component: components.SUB_FORM
-            }
-          ],
-          component: components.TAB_ITEM
-        },
-        {
-          title: 'Tab 2',
-          description: 'Checks',
-          name: '554',
-          fields: [
-            {
-              title: 'Check boxes',
-              name: '639',
-              fields: [
-                {
-                  name: 'check_box_1',
-                  label: 'Check Box',
-                  title: 'Check Box',
-                  component: components.CHECKBOX
-                },
-                {
-                  name: 'check_box_2',
-                  label: 'Check Box checked',
-                  title: 'Check Box checked',
-                  component: components.CHECKBOX
-                }
-              ],
-              component: components.SUB_FORM
-            },
-            {
-              title: 'Radios',
-              name: '640',
-              fields: [
-                {
-                  name: 'radio_button_1',
-                  label: 'Radio Button',
-                  title: 'Radio Button',
-                  dataType: 'string',
-                  component: components.RADIO,
-                  options: [
-                    {
-                      label: 'One',
-                      value: '1'
-                    },
-                    {
-                      label: 'Two',
-                      value: '2'
-                    },
-                    {
-                      label: 'Three',
-                      value: '3'
-                    }
-                  ]
-                },
-                {
-                  name: 'radio_button_2',
-                  label: 'Radio Button sorted by',
-                  title: 'Radio Button sorted by',
-                  dataType: 'string',
-                  component: components.RADIO,
-                  options: [
-                    {
-                      label: 'One',
-                      value: '1'
-                    },
-                    {
-                      label: 'Two',
-                      value: '2'
-                    },
-                    {
-                      label: 'Three',
-                      value: '3'
-                    }
-                  ]
-                },
-                {
-                  name: 'radio_button_4',
-                  label: 'Radio Button default',
-                  title: 'Radio Button default',
-                  dataType: 'string',
-                  component: components.RADIO,
-                  options: [
-                    {
-                      label: 'One',
-                      value: '1'
-                    },
-                    {
-                      label: 'Two',
-                      value: '2'
-                    },
-                    {
-                      label: 'Three',
-                      value: '3'
-                    }
-                  ]
-                }
-              ],
-              component: components.SUB_FORM
-            }
-          ],
-          component: components.TAB_ITEM
-        },
-        {
-          title: 'Tab 3',
-          description: '',
-          name: '555',
-          fields: [
-            {
-              title: 'Dropdowns',
-              name: '641',
-              fields: [
-                {
-                  name: 'dropdown_list_1',
-                  label: 'Dropdown',
-                  title: 'Dropdown',
-                  dataType: 'string',
-                  component: components.SELECT,
-                  options: [
-                    {
-                      label: '<None>',
-                      value: null
-                    },
-                    {
-                      label: 'One',
-                      value: '1'
-                    },
-                    {
-                      label: 'Three',
-                      value: '3'
-                    },
-                    {
-                      label: 'Two',
-                      value: '2'
-                    }
-                  ]
-                },
-                {
-                  name: 'dropdown_list_2',
-                  label: 'Dropdown default value',
-                  title: 'Dropdown default value',
-                  dataType: 'string',
-                  component: components.SELECT,
-                  options: [
-                    {
-                      label: '<None>',
-                      value: null
-                    },
-                    {
-                      label: 'One',
-                      value: '1'
-                    },
-                    {
-                      label: 'Three',
-                      value: '3'
-                    },
-                    {
-                      label: 'Two',
-                      value: '2'
-                    }
-                  ]
-                },
-                {
-                  name: 'dropdown_list_3',
-                  label: 'Dropdown multiselect',
-                  title: 'Dropdown multiselect',
-                  dataType: 'string',
-                  component: components.SELECT,
-                  isMulti: true,
-                  options: [
-                    {
-                      label: '<None>',
-                      value: null
-                    },
-                    {
-                      label: 'One',
-                      value: '1'
-                    },
-                    {
-                      label: 'Three',
-                      value: '3'
-                    },
-                    {
-                      label: 'Two',
-                      value: '2'
-                    }
-                  ]
-                },
-                {
-                  name: 'dropdown_list_4',
-                  label: 'Dropdown sort by value',
-                  title: 'Dropdown sort by value',
-                  dataType: 'string',
-                  component: components.SELECT,
-                  options: [
-                    {
-                      label: '<None>',
-                      value: null
-                    },
-                    {
-                      label: 'One',
-                      value: '1'
-                    },
-                    {
-                      label: 'Two',
-                      value: '2'
-                    },
-                    {
-                      label: 'Three',
-                      value: '3'
-                    }
-                  ]
-                }
-              ],
-              component: components.SUB_FORM
-            }
-          ],
-          component: components.TAB_ITEM
-        },
-        {
-          title: 'Tab 4',
-          description: '',
-          name: '556',
-          fields: [
-            {
-              title: 'Datepickers',
-              name: '642',
-              fields: [
-                {
-                  name: 'date_control_1',
-                  label: 'Datepicker',
-                  title: 'Datepicker',
-                  component: components.DATE_PICKER
-                },
-                {
-                  name: 'date_control_2',
-                  label: 'Datepicker with past days',
-                  title: 'Datepicker with past days',
-                  component: components.DATE_PICKER
-                }
-              ],
-              component: components.SUB_FORM
-            },
-            {
-              title: 'Timepickers',
-              name: '643',
-              fields: [
-                {
-                  name: 'date_time_control_1',
-                  label: 'Timepicker',
-                  title: 'Timepicker',
-                  component: components.TIME_PICKER
-                },
-                {
-                  name: 'date_time_control_2',
-                  label: 'Timepicker with past days',
-                  title: 'Timepicker with past days',
-                  component: components.TIME_PICKER
-                }
-              ],
-              component: components.SUB_FORM
-            }
-          ],
-          component: components.TAB_ITEM
-        },
-        {
-          title: 'Mixed',
-          description: '',
-          name: '558',
-          fields: [
-            {
-              title: 'New Section',
-              name: '645',
-              fields: [
-                {
-                  name: 'text_box_10',
-                  label: 'Text Box',
-                  title: 'Text Box',
-                  component: components.TEXT_FIELD
-                },
-                {
-                  name: 'textarea_box_2',
-                  label: 'Text Area',
-                  title: 'Text Area',
-                  component: components.TEXTAREA
-                },
-                {
-                  name: 'check_box_3',
-                  label: 'Check Box',
-                  title: 'Check Box',
-                  component: components.CHECKBOX
-                },
-                {
-                  name: 'check_box_4',
-                  label: 'Check Box',
-                  title: 'Check Box',
-                  component: components.CHECKBOX
-                },
-                {
-                  name: 'dropdown_list_5',
-                  label: 'Dropdown',
-                  title: 'Dropdown',
-                  dataType: 'string',
-                  component: components.SELECT,
-                  options: [
-                    {
-                      label: '<None>',
-                      value: null
-                    },
-                    {
-                      label: 'One',
-                      value: '1'
-                    },
-                    {
-                      label: 'Three',
-                      value: '3'
-                    },
-                    {
-                      label: 'Two',
-                      value: '2'
-                    }
-                  ]
-                },
-                {
-                  name: 'radio_button_3',
-                  label: 'Radio Button',
-                  title: 'Radio Button',
-                  dataType: 'string',
-                  component: components.RADIO,
-                  options: [
-                    {
-                      label: 'One',
-                      value: '1'
-                    },
-                    {
-                      label: 'Two',
-                      value: '2'
-                    },
-                    {
-                      label: 'Three',
-                      value: '3'
-                    }
-                  ]
-                },
-                {
-                  name: 'date_time_control_3',
-                  label: 'Timepicker',
-                  title: 'Timepicker',
-                  component: components.TIME_PICKER
-                }
-              ],
-              component: components.SUB_FORM
-            }
-          ],
-          component: components.TAB_ITEM
-        }
-      ],
-      component: components.TABS,
-      name: '57'
+const useStyles = makeStyles((theme) => ({
+  builderWrapper: {
+    width: '100%'
+  },
+  close: {
+    padding: theme.spacing(0.5)
+  },
+  builderControlsWrapper: {
+    width: '100%'
+  },
+  builderButton: {
+    '&:not(:last-child)': {
+      marginRight: 8
     }
-  ]
+  },
+  expansionPanel: {
+    marginBottom: 8
+  },
+  emptyTarget: {
+    height: '100%'
+  }
+}));
+
+const EmptyTarget = () => {
+  const classes = useStyles();
+  return (
+    <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" className={classes.emptyTarget}>
+      <Typography variant="h3" gutterBottom>
+        There are no fields yet.
+      </Typography>
+      <Typography variant="h4">
+        <PanToolIcon />
+        &nbsp; You can add fields by dragging from the menu on the left.
+      </Typography>
+    </Box>
+  );
+};
+
+const reducedMapper = {
+  ...builderMapper,
+  [componentTypes.DATE_PICKER]: undefined,
+  'sub-form': undefined,
+  EmptyTarget
+};
+
+const componentProperties = {
+  [componentTypes.TEXT_FIELD]: {
+    attributes: [
+      fieldProperties.LABEL,
+      fieldProperties.HELPER_TEXT,
+      fieldProperties.PLACEHOLDER,
+      fieldProperties.INPUT_TYPE,
+      fieldProperties.IS_DISABLED,
+      fieldProperties.IS_READ_ONLY,
+      fieldProperties.HIDE_FIELD
+    ]
+  },
+  [componentTypes.CHECKBOX]: {
+    attributes: [fieldProperties.LABEL, fieldProperties.IS_DISABLED, fieldProperties.OPTIONS, fieldProperties.HIDE_FIELD]
+  },
+  [componentTypes.SELECT]: {
+    attributes: [
+      fieldProperties.LABEL,
+      fieldProperties.OPTIONS,
+      fieldProperties.IS_DISABLED,
+      fieldProperties.PLACEHOLDER,
+      fieldProperties.HELPER_TEXT,
+      fieldProperties.HIDE_FIELD
+    ]
+  },
+  [componentTypes.PLAIN_TEXT]: { attributes: [fieldProperties.MULTI_LINE_LABEL] },
+  [componentTypes.RADIO]: { attributes: [fieldProperties.LABEL, fieldProperties.IS_DISABLED, fieldProperties.OPTIONS, fieldProperties.HIDE_FIELD] },
+  [componentTypes.SWITCH]: {
+    attributes: [fieldProperties.LABEL, fieldProperties.IS_READ_ONLY, fieldProperties.IS_DISABLED, fieldProperties.HIDE_FIELD]
+  },
+  [componentTypes.TEXTAREA]: {
+    attributes: [
+      fieldProperties.LABEL,
+      fieldProperties.HELPER_TEXT,
+      fieldProperties.IS_READ_ONLY,
+      fieldProperties.IS_DISABLED,
+      fieldProperties.HIDE_FIELD
+    ]
+  }
+};
+
+const CopySnackbar = ({ open, handleClose }) => {
+  const classes = useStyles();
+  return (
+    <Snackbar
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'right'
+      }}
+      open={open}
+      autoHideDuration={6000}
+      onClose={handleClose}
+      message={<span>Form schema was copied to clipboard</span>}
+      action={[
+        <IconButton key="close" aria-label="close" color="inherit" className={classes.close} onClick={handleClose}>
+          <CloseIcon />
+        </IconButton>
+      ]}
+    />
+  );
+};
+
+CopySnackbar.propTypes = {
+  open: PropTypes.bool,
+  handleClose: PropTypes.func
 };
 
 const LiveEditor = () => {
-  const [state, setState] = useState({
-    value: JSON.stringify(baseStructure, null, 2),
-    parsedSchema: baseStructure
-  });
-
-  const onChange = (value) => {
-    let schema;
-    try {
-      schema = JSON.parse(value);
-      setState((state) => ({ ...state, value }));
-    } catch (error) {
-      console.warn('not a json', error);
-    }
-
-    try {
-      defaultSchemaValidator(schema, componentMapper);
-      setState((state) => ({ ...state, parsedSchema: schema }));
-    } catch (error) {
-      console.warn('not correct json schema', error);
-    }
-  };
-
-  const { value, parsedSchema } = state;
+  const classes = useStyles();
+  const [openTooltip, setOpenTooltip] = useState(false);
   return (
-    <Grid container spacing={6}>
-      <Grid item md={6} xs={12}>
-        <div style={{ width: '100%', paddingTop: 10, background: '#1d1f21' }}>
-          <CodeEditor readOnly={false} mode="json" onChange={onChange} value={value} maxLines={50} />
-        </div>
-      </Grid>
-      <Grid item md={6} xs={12}>
-        <Paper square style={{ padding: 16, paddingLeft: 24 }}>
-          <Grid container spacing={6}>
-            <Grid item xs={12}>
-              <div className="pf4">
-                <FormRenderer
-                  componentMapper={componentMapper}
-                  FormTemplate={FormTemplate}
-                  schema={parsedSchema}
-                  onSubmit={console.log}
-                  onCancel={() => console.log('Cancel clicked')}
-                  canReset
-                />
-              </div>
-            </Grid>
-          </Grid>
-        </Paper>
-      </Grid>
-    </Grid>
+    <div>
+      <Typography variant="h4" component="h1" gutterBottom>
+        Form builder
+      </Typography>
+      <FormBuilder
+        pickerMapper={pickerMapper}
+        componentProperties={componentProperties}
+        componentMapper={reducedMapper}
+        propertiesMapper={propertiesMapper}
+        cloneWhileDragging
+        disableDrag={false}
+        disableAdd={false}
+        mode="subset"
+        debug={false}
+        render={({ isValid, getSchema, ...props }) => (
+          <BuilderTemplate {...props} className={classes.builderWrapper}>
+            <ExpansionPanel className={classes.expansionPanel}>
+              <ExpansionPanelSummary>
+                <Box display="flex" justifyContent="space-between" alignItems="center" className={classes.builderControlsWrapper}>
+                  <Typography>Click to preview schema</Typography>
+                  <CopyToClipboard text={JSON.stringify(getSchema())} onCopy={() => setOpenTooltip(true)}>
+                    <Button variant="contained" color="primary" className={classes.builderButton} onClick={(event) => event.stopPropagation()}>
+                      Copy schema
+                    </Button>
+                  </CopyToClipboard>
+                </Box>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <CodeEditor value={JSON.stringify(getSchema(), null, 2)} />
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+            <CopySnackbar open={openTooltip} handleClose={() => setOpenTooltip(false)} />
+          </BuilderTemplate>
+        )}
+      />
+    </div>
   );
 };
 

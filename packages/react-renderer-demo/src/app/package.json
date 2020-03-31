@@ -42,6 +42,7 @@
     "@data-driven-forms/pf3-component-mapper": "*",
     "@data-driven-forms/pf4-component-mapper": "*",
     "@data-driven-forms/react-form-renderer": "*",
+    "@data-driven-forms/form-builder": "0.0.10-rc4",
     "@material-ui/core": "^4.5.2",
     "@material-ui/icons": "^4.5.1",
     "@material-ui/styles": "^4.5.2",
