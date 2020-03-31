@@ -1,16 +1,18 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
+import PropTypes from 'prop-types';
+
 export const docsLinks = {
   mui: 'https://material-ui.com/api/',
   pf4: 'http://patternfly-react.surge.sh/patternfly-4/components/',
-  pf3: 'http://patternfly-react.surge.sh/patternfly-3/index.html',
+  pf3: 'http://patternfly-react.surge.sh/patternfly-3/index.html'
 };
 
-export default ({ activeMapper, component }) => {
+const GenericMuiComponent = ({ activeMapper, component }) => {
   const originalComponent = component;
-  if (activeMapper === 'pf4'){
-    switch (component){
+  if (activeMapper === 'pf4') {
+    switch (component) {
       case 'date-picker':
         component = 'textinput';
         break;
@@ -32,9 +34,11 @@ export default ({ activeMapper, component }) => {
       case 'checkbox-multiple':
         component = 'checkbox';
         break;
+      default:
+        break;
     }
-  } else if (activeMapper === 'mui'){
-    switch (component){
+  } else if (activeMapper === 'mui') {
+    switch (component) {
       case 'date-picker':
         component = 'text-field';
         break;
@@ -53,22 +57,33 @@ export default ({ activeMapper, component }) => {
       case 'checkbox-multiple':
         component = 'checkbox';
         break;
+      default:
+        break;
     }
   }
 
-  return <React.Fragment>
-    <Typography variant='body1' gutterBottom>
-    This component also accepts all other original props, please see <a
-        href={ `${docsLinks[activeMapper]}${ activeMapper === 'pf4' || activeMapper === 'mui' ? component : '' }` }>
-    here</a>!
-    </Typography>
-
-    { activeMapper === 'mui' ?
-      (originalComponent === 'date-picker' || originalComponent === 'time-picker') &&
-      <Typography variant='body1'>
-      This component also use API from material-ui-pickers, please see <a
-          href={ `https://material-ui-pickers.firebaseapp.com/api/${originalComponent.replace('-', '')}` }>
-      here</a>!
+  return (
+    <React.Fragment>
+      <Typography variant="body1" gutterBottom>
+        This component also accepts all other original props, please see{' '}
+        <a href={`${docsLinks[activeMapper]}${activeMapper === 'pf4' || activeMapper === 'mui' ? component : ''}`}>here</a>!
       </Typography>
-      : '' }
-  </React.Fragment>;};
+
+      {activeMapper === 'mui'
+        ? (originalComponent === 'date-picker' || originalComponent === 'time-picker') && (
+            <Typography variant="body1">
+              This component also use API from material-ui-pickers, please see{' '}
+              <a href={`https://material-ui-pickers.firebaseapp.com/api/${originalComponent.replace('-', '')}`}>here</a>!
+            </Typography>
+          )
+        : ''}
+    </React.Fragment>
+  );
+};
+
+GenericMuiComponent.propTypes = {
+  activeMapper: PropTypes.string,
+  component: PropTypes.string
+};
+
+export default GenericMuiComponent;

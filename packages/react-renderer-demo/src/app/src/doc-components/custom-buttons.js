@@ -47,7 +47,9 @@ const FormTemplate = ({ formFields, schema }) => {
             <Button disabled={pristine} style={{ marginRight: 8 }} onClick={onReset} variant="contained">
               Reset
             </Button>
-            <Button variant="contained" onClick={onCancel}>Cancel</Button>
+            <Button variant="contained" onClick={onCancel}>
+              Cancel
+            </Button>
           </div>
         )}
       </FormSpy>
@@ -55,10 +57,13 @@ const FormTemplate = ({ formFields, schema }) => {
   );
 };
 
-const asyncSubmit = (values, api) => new Promise((resolve) => setTimeout(() => {
-  console.log('FormValues', values);
-  resolve('Yay');
-}, 1500));
+const asyncSubmit = (values, api) =>
+  new Promise((resolve) =>
+    setTimeout(() => {
+      console.log('FormValues', values);
+      resolve('Yay');
+    }, 1500)
+  );
 
 const FormControls = () => (
   <div className="pf4">
