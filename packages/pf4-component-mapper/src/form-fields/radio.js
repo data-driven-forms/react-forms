@@ -6,7 +6,7 @@ import { Radio } from '@patternfly/react-core/dist/js/components/Radio/Radio';
 const RadioGroup = ({ FieldProvider, options, isDisabled, isReadOnly, input, ...props }) => options.map(option => (
   <FieldProvider
     { ...props }
-    key={ `${input.name}-${option.value}` }
+    key={ `${input.name}-${option.key || option.value}` }
     name={ input.name }
     value={ option.value }
     type="radio"
@@ -15,7 +15,7 @@ const RadioGroup = ({ FieldProvider, options, isDisabled, isReadOnly, input, ...
         { ...input }
         isChecked={ input.checked }
         label={ option.label }
-        id={ `${input.name}-${option.value}` }
+        id={ `${input.name}-${option.key || option.value}` }
         aria-label={ option.label }
         isDisabled={ isDisabled || isReadOnly }
         onChange={ () => input.onChange(option.value) } />) }

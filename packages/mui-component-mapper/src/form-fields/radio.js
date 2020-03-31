@@ -23,7 +23,7 @@ const RadioGroup = ({
       <FormLabel component="legend">{ label }</FormLabel>
       { options.map(option => (
         <FieldProvider
-          key={ `${input.name}-${option.value}` }
+          key={ `${input.name}-${option.key || option.value}` }
           name={ input.name }
           value={ option.value }
           type="radio"
