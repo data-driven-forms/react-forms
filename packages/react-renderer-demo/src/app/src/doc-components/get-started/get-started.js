@@ -45,11 +45,11 @@ const schema = {
 const GetStartedForm = () => (
   <div className="pf4">
     <FormRender
-      componentMapper={ componentMapper }
-      FormTemplate={ FormTemplate }
-      schema={ schema }
-      onSubmit={ console.log }
-      onCancel={ () => console.log('Cancel action') }
+      componentMapper={componentMapper}
+      FormTemplate={FormTemplate}
+      schema={schema}
+      onSubmit={console.log}
+      onCancel={() => console.log('Cancel action')}
       canReset
     />
   </div>
