@@ -12,22 +12,22 @@ import {
 } from '@data-driven-forms/form-builder/dist/cjs/mui-builder-mappers';
 import { makeStyles } from '@material-ui/styles';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button'
-import Snackbar from '@material-ui/core/Snackbar'
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
-import CloseIcon from '@material-ui/icons/Close'
+import CloseIcon from '@material-ui/icons/Close';
 import PanToolIcon from '@material-ui/icons/PanTool';
 
 import dynamic from 'next/dynamic';
+
+import PropTypes from 'prop-types';
 const CodeEditor = dynamic(import('../src/components/code-editor'), {
   ssr: false
 });
-
-
 
 const useStyles = makeStyles((theme) => ({
   builderWrapper: {
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0.5)
   },
   builderControlsWrapper: {
-    width: '100%',
+    width: '100%'
   },
   builderButton: {
     '&:not(:last-child)': {
@@ -50,21 +50,22 @@ const useStyles = makeStyles((theme) => ({
   emptyTarget: {
     height: '100%'
   }
-}))
+}));
 
 const EmptyTarget = () => {
   const classes = useStyles();
   return (
-  <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" className={classes.emptyTarget}>
-    <Typography variant="h3" gutterBottom>
-      There are no fields yet.
-    </Typography>
-    <Typography variant="h4">
-      <PanToolIcon />&nbsp;
-      You can add fields by dragging from the menu on the left.
-    </Typography>
-  </Box>
-)}
+    <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" className={classes.emptyTarget}>
+      <Typography variant="h3" gutterBottom>
+        There are no fields yet.
+      </Typography>
+      <Typography variant="h4">
+        <PanToolIcon />
+        &nbsp; You can add fields by dragging from the menu on the left.
+      </Typography>
+    </Box>
+  );
+};
 
 const reducedMapper = {
   ...builderMapper,
@@ -135,6 +136,11 @@ const CopySnackbar = ({ open, handleClose }) => {
   );
 };
 
+CopySnackbar.propTypes = {
+  open: PropTypes.bool,
+  handleClose: PropTypes.func
+};
+
 const LiveEditor = () => {
   const classes = useStyles();
   const [openTooltip, setOpenTooltip] = useState(false);
@@ -155,21 +161,21 @@ const LiveEditor = () => {
         debug={false}
         render={({ isValid, getSchema, ...props }) => (
           <BuilderTemplate {...props} className={classes.builderWrapper}>
-          <ExpansionPanel className={classes.expansionPanel}>
-            <ExpansionPanelSummary>
-            <Box display="flex"  justifyContent="space-between" alignItems="center" className={classes.builderControlsWrapper}>
-              <Typography>Click to preview schema</Typography>
-              <CopyToClipboard text={JSON.stringify(getSchema())} onCopy={() => setOpenTooltip(true)}>
-                <Button variant="contained" color="primary" className={classes.builderButton} onClick={event => event.stopPropagation()}>
-                  Copy schema
-                </Button>
-              </CopyToClipboard>
-            </Box>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <CodeEditor value={JSON.stringify(getSchema(), null, 2)} />
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
+            <ExpansionPanel className={classes.expansionPanel}>
+              <ExpansionPanelSummary>
+                <Box display="flex" justifyContent="space-between" alignItems="center" className={classes.builderControlsWrapper}>
+                  <Typography>Click to preview schema</Typography>
+                  <CopyToClipboard text={JSON.stringify(getSchema())} onCopy={() => setOpenTooltip(true)}>
+                    <Button variant="contained" color="primary" className={classes.builderButton} onClick={(event) => event.stopPropagation()}>
+                      Copy schema
+                    </Button>
+                  </CopyToClipboard>
+                </Box>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <CodeEditor value={JSON.stringify(getSchema(), null, 2)} />
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
             <CopySnackbar open={openTooltip} handleClose={() => setOpenTooltip(false)} />
           </BuilderTemplate>
         )}
