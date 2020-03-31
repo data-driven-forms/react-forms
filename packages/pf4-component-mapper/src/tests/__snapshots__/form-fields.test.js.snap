@@ -869,12 +869,13 @@ exports[`FormFields should render Radio correctly 1`] = `
                   "value": "1",
                 }
               }
+              radioGroupValue=""
             >
               <Radio
                 aria-label="One"
-                checked={false}
                 className=""
                 id="Name of the field-1"
+                isChecked={false}
                 isDisabled={false}
                 isValid={true}
                 key="Name of the field-1"
@@ -883,7 +884,6 @@ exports[`FormFields should render Radio correctly 1`] = `
                 onBlur={[Function]}
                 onChange={[Function]}
                 onFocus={[Function]}
-                type="radio"
                 value="1"
               >
                 <div
@@ -891,6 +891,7 @@ exports[`FormFields should render Radio correctly 1`] = `
                 >
                   <input
                     aria-invalid={false}
+                    checked={false}
                     className="pf-c-radio__input"
                     disabled={false}
                     id="Name of the field-1"
@@ -919,12 +920,13 @@ exports[`FormFields should render Radio correctly 1`] = `
                   "value": "2",
                 }
               }
+              radioGroupValue=""
             >
               <Radio
                 aria-label="Two"
-                checked={false}
                 className=""
                 id="Name of the field-2"
+                isChecked={false}
                 isDisabled={false}
                 isValid={true}
                 key="Name of the field-2"
@@ -933,7 +935,6 @@ exports[`FormFields should render Radio correctly 1`] = `
                 onBlur={[Function]}
                 onChange={[Function]}
                 onFocus={[Function]}
-                type="radio"
                 value="2"
               >
                 <div
@@ -941,6 +942,7 @@ exports[`FormFields should render Radio correctly 1`] = `
                 >
                   <input
                     aria-invalid={false}
+                    checked={false}
                     className="pf-c-radio__input"
                     disabled={false}
                     id="Name of the field-2"
@@ -969,12 +971,13 @@ exports[`FormFields should render Radio correctly 1`] = `
                   "value": "3",
                 }
               }
+              radioGroupValue=""
             >
               <Radio
                 aria-label="Three"
-                checked={false}
                 className=""
                 id="Name of the field-3"
+                isChecked={false}
                 isDisabled={false}
                 isValid={true}
                 key="Name of the field-3"
@@ -983,7 +986,6 @@ exports[`FormFields should render Radio correctly 1`] = `
                 onBlur={[Function]}
                 onChange={[Function]}
                 onFocus={[Function]}
-                type="radio"
                 value="3"
               >
                 <div
@@ -991,6 +993,7 @@ exports[`FormFields should render Radio correctly 1`] = `
                 >
                   <input
                     aria-invalid={false}
+                    checked={false}
                     className="pf-c-radio__input"
                     disabled={false}
                     id="Name of the field-3"
@@ -2403,12 +2406,13 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
                   "value": "1",
                 }
               }
+              radioGroupValue=""
             >
               <Radio
                 aria-label="One"
-                checked={false}
                 className=""
                 id="Name of the field-1"
+                isChecked={false}
                 isDisabled={false}
                 isValid={true}
                 key="Name of the field-1"
@@ -2417,7 +2421,6 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
                 onBlur={[Function]}
                 onChange={[Function]}
                 onFocus={[Function]}
-                type="radio"
                 value="1"
               >
                 <div
@@ -2425,6 +2428,7 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
                 >
                   <input
                     aria-invalid={false}
+                    checked={false}
                     className="pf-c-radio__input"
                     disabled={false}
                     id="Name of the field-1"
@@ -2453,12 +2457,13 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
                   "value": "2",
                 }
               }
+              radioGroupValue=""
             >
               <Radio
                 aria-label="Two"
-                checked={false}
                 className=""
                 id="Name of the field-2"
+                isChecked={false}
                 isDisabled={false}
                 isValid={true}
                 key="Name of the field-2"
@@ -2467,7 +2472,6 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
                 onBlur={[Function]}
                 onChange={[Function]}
                 onFocus={[Function]}
-                type="radio"
                 value="2"
               >
                 <div
@@ -2475,6 +2479,7 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
                 >
                   <input
                     aria-invalid={false}
+                    checked={false}
                     className="pf-c-radio__input"
                     disabled={false}
                     id="Name of the field-2"
@@ -2503,12 +2508,13 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
                   "value": "3",
                 }
               }
+              radioGroupValue=""
             >
               <Radio
                 aria-label="Three"
-                checked={false}
                 className=""
                 id="Name of the field-3"
+                isChecked={false}
                 isDisabled={false}
                 isValid={true}
                 key="Name of the field-3"
@@ -2517,7 +2523,6 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
                 onBlur={[Function]}
                 onChange={[Function]}
                 onFocus={[Function]}
-                type="radio"
                 value="3"
               >
                 <div
@@ -2525,6 +2530,7 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
                 >
                   <input
                     aria-invalid={false}
+                    checked={false}
                     className="pf-c-radio__input"
                     disabled={false}
                     id="Name of the field-3"
