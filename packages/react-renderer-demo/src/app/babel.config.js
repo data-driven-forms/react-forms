@@ -60,7 +60,7 @@ const muiTransformPlugin = [
     }
   },
   'MUI-CJS'
-]
+];
 
 module.exports = {
   presets: [
