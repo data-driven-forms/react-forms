@@ -103,7 +103,7 @@ exports[`Default schema validator should fail validation when using "and" and "o
 exports[`Default schema validator should fail validation when using "and" and "or" conditions 2`] = `
 "
       Error occured in field definition with \\"name\\" property: \\"foo\\".
-      'or' propery in a field condition must be an array! Received: undefined.
+      'or' property in a field condition must be an array! Received: object.
     "
 `;
 
