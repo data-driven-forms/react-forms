@@ -15,6 +15,7 @@ const DatePicker = (props) => {
     <AntForm layout="vertical" isRequired={isRequired} label={label} invalid={invalid} help={help}>
       <AntDatePicker
         disabled={isDisabled || isReadOnly}
+        defaultValue={input.value ? input.value : undefined}
         placeholder={placeholderDisplay}
         required={isRequired}
         error={!!invalid}

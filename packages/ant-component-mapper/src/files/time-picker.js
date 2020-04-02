@@ -21,6 +21,7 @@ const DatePicker = (props) => {
         required={isRequired}
         error={!!invalid}
         readOnly={isReadOnly}
+        defaultValue={input.value ? input.value : undefined}
         {...input}
         value={input.value || null}
       />

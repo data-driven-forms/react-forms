@@ -17,7 +17,13 @@ export const SingleCheckbox = (props) => {
   const text = invalid || helperText || description;
   return (
     <AntForm component="fieldset" invalid={invalid} help={text}>
-      <AntCheckbox checked={input.checked} {...input} disabled={isDisabled || isReadOnly} value={input.name}>
+      <AntCheckbox
+        checked={input.checked}
+        {...input}
+        defaultValue={input.value ? input.value : undefined}
+        disabled={isDisabled || isReadOnly}
+        value={input.name}
+      >
         {isRequired ? <IsRequired>{label}</IsRequired> : label}
       </AntCheckbox>
     </AntForm>

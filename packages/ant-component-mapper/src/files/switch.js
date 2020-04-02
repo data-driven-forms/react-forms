@@ -16,7 +16,15 @@ export const Switch = (props) => {
   const { name, value, onChange, onBlur } = input;
   return (
     <AntForm help={text} invalid={invalid} isRequired={isRequired} error={!!invalid} label={input.checked ? onText || label : offText || label}>
-      <AntSwitch {...rest} onChange={onChange} value={value} name={name} onClick={onBlur} disabled={isDisabled || isReadOnly} />
+      <AntSwitch
+        {...rest}
+        defaultValue={input.value ? input.value : undefined}
+        onChange={onChange}
+        value={value}
+        name={name}
+        onClick={onBlur}
+        disabled={isDisabled || isReadOnly}
+      />
     </AntForm>
   );
 };
