@@ -22,7 +22,7 @@
     "@data-driven-forms/react-form-renderer": "*",
     "@semantic-release/git": "^7.0.5",
     "@semantic-release/npm": "^5.1.1",
-    "antd": "^4.0.1",
+    "antd": "^4.2.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "9.x",
     "babel-jest": "^23.6.0",

@@ -9,6 +9,7 @@ import TimePicker from './time-picker';
 import Radio from './radio';
 import Switch from './switch';
 import Select from './select';
+import Wizard from './wizard';
 import SubForm from './sub-form.js';
 export const components = {
   TextField,
@@ -20,7 +21,8 @@ export const components = {
   DatePicker,
   TimePicker,
   PlainText,
-  SubForm
+  SubForm,
+  Wizard
 };
 
 const componentMapper = {
@@ -34,7 +36,8 @@ const componentMapper = {
   [componentTypes.DATE_PICKER]: DatePicker,
   [componentTypes.TIME_PICKER]: TimePicker,
   [componentTypes.PLAIN_TEXT]: PlainText,
-  [componentTypes.SWITCH]: Switch
+  [componentTypes.SWITCH]: Switch,
+  [componentTypes.WIZARD]: Wizard
 };
 
 export default componentMapper;

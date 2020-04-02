@@ -7,6 +7,8 @@ import { meta, input } from '@data-driven-forms/common/src/prop-types-templates'
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import AntForm from '../common/form-wrapper';
 
+const { TextArea } = Input;
+
 const TextField = (props) => {
   const { input, isReadOnly, isDisabled, placeholder, isRequired, label, helperText, description, validateOnMount, meta, ...rest } = useFieldApi(
     props
@@ -23,7 +25,14 @@ const TextField = (props) => {
       label={label}
       name={label}
     >
-      <Input.TextArea {...input} disabled={isDisabled} readOnly={isReadOnly} placeholder={placeholder} {...rest} />
+      <TextArea
+        {...input}
+        defaultValue={input.value ? input.value : undefined}
+        disabled={isDisabled}
+        readOnly={isReadOnly}
+        placeholder={placeholder}
+        {...rest}
+      />
     </AntForm>
   );
 };

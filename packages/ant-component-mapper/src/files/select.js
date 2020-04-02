@@ -32,9 +32,9 @@ const Select = (props) => {
   return (
     <AntForm layout="vertical" label={label} isRequired={isRequired} invalid={invalid} help={invalid || helperText || description}>
       <AntSelect
-        placeholder={placeholder || 'Please choose'}
-        // value={options.filter(({ value }) => (rest.isMulti ? input.value.includes(value) : value === input.value))}
         {...input}
+        defaultValue={input.value ? input.value : undefined}
+        placeholder={placeholder || 'Please choose'}
         mode={rest.isMulti ? 'tags' : ''}
         showSearch={!!isSearchable}
         filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}

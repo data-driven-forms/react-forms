@@ -18,7 +18,7 @@ const AntForm = ({ label, children, layout, component, invalid, isRequired, help
         label={label}
         name={label}
       >
-        {children}
+        <div>{children}</div>
       </Form.Item>
     </Form>
   );

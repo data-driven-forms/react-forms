@@ -23,7 +23,14 @@ const TextField = (props) => {
       label={label}
       name={label}
     >
-      <Input {...input} disabled={isDisabled} readOnly={isReadOnly} placeholder={placeholder} {...rest} />
+      <Input
+        {...input}
+        defaultValue={input.value ? input.value : undefined}
+        disabled={isDisabled}
+        readOnly={isReadOnly}
+        placeholder={placeholder}
+        {...rest}
+      />
     </AntForm>
   );
 };
