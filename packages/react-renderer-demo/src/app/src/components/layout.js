@@ -5,6 +5,8 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import Drawer from '@material-ui/core/Drawer';
 import Toolbar from '@material-ui/core/Toolbar';
 import Divider from '@material-ui/core/Divider';
+import Badge from '@material-ui/core/Badge';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SvgIcon from '@material-ui/core/SvgIcon';
@@ -19,6 +21,7 @@ import ConnectedLinks from './common/connected-links';
 import Footer from './footer';
 
 import dynamic from 'next/dynamic';
+import NotificationPanel, { lastMessageId } from './notification-panel';
 const DocSearch = dynamic(import('./docsearch'), {
   ssr: false
 });
@@ -121,10 +124,17 @@ const Layout = ({ children }) => {
   const [open, setOpen] = useState(router.pathname !== '/');
   const [links, setLinks] = useState({});
   const searchRef = useRef(null);
+  const anchorRef = useRef(null);
+  const [openNotification, setOpenNotifiation] = useState(false);
+  const [lastCheck, setLastCheck] = useState('');
 
   useEffect(() => {
     setLinks(findConnectedLinks(router.asPath, flatSchema) || {});
   }, [router.asPath]);
+
+  useEffect(() => {
+    setLastCheck(localStorage.getItem('data-driven-forms-last-checked') || '');
+  }, []);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -134,6 +144,12 @@ const Layout = ({ children }) => {
   function handleDrawerClose() {
     setOpen(false);
   }
+
+  const handleToggle = () => {
+    localStorage.setItem('data-driven-forms-last-checked', lastMessageId);
+    setLastCheck(lastMessageId);
+    setOpenNotifiation(!openNotification);
+  };
 
   return (
     <MenuContext.Provider value={links}>
@@ -172,6 +188,12 @@ const Layout = ({ children }) => {
           })}
         >
           <DocSearch />
+          <IconButton aria-label="show new notifications" onClick={handleToggle} color="inherit" ref={anchorRef} className={clsx(classes.menuButton)}>
+            <Badge badgeContent={lastMessageId - lastCheck} color="secondary">
+              <NotificationsIcon className={classes.menuIcons} />
+            </Badge>
+          </IconButton>
+          <NotificationPanel isOpen={openNotification} anchorRef={anchorRef} onClose={() => setOpenNotifiation(false)} />
           <a href="https://github.com/data-driven-forms/react-forms" rel="noopener noreferrer" target="_blank">
             <IconButton color="inherit" aria-label="gh repository" edge="start" className={clsx(classes.menuButton)}>
               <SvgIcon>
@@ -180,7 +202,6 @@ const Layout = ({ children }) => {
             </IconButton>
           </a>
         </div>
-
         <main
           className={clsx(classes.content, {
             [classes.contentShift]: open,
