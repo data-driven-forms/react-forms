@@ -25,6 +25,11 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     marginTop: 48
   },
+  npmLink: {
+    display: 'block',
+    textAlign: 'center',
+    marginTop: 24
+  },
   getStartedAnchor: {
     textDecoration: 'none'
   },
@@ -55,6 +60,20 @@ const LandingPage = () => {
               </Button>
             </a>
           </Link>
+        </div>
+        <div className={classes.npmLink}>
+          <a
+            className="github-button"
+            href="https://github.com/data-driven-forms/react-forms"
+            data-show-count="true"
+            aria-label="Star data-driven-forms/react-forms on GitHub"
+          >
+            Star
+          </a>
+          &nbsp;
+          <a href="https://badge.fury.io/js/%40data-driven-forms%2Freact-form-renderer" rel="noopener noreferrer" target="_blank">
+            <img src="https://badge.fury.io/js/%40data-driven-forms%2Freact-form-renderer.svg" alt="current version" />
+          </a>
         </div>
       </div>
       <LandingPageCards />
