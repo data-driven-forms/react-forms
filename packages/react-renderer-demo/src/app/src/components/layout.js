@@ -21,7 +21,7 @@ import ConnectedLinks from './common/connected-links';
 import Footer from './footer';
 
 import dynamic from 'next/dynamic';
-import NotificationPanel, { lastMessageId } from './notification-panel';
+import NotificationPanel, { lastMessageId, oldestMessageId } from './notification-panel';
 const DocSearch = dynamic(import('./docsearch'), {
   ssr: false
 });
@@ -126,7 +126,7 @@ const Layout = ({ children }) => {
   const searchRef = useRef(null);
   const anchorRef = useRef(null);
   const [openNotification, setOpenNotifiation] = useState(false);
-  const [lastCheck, setLastCheck] = useState('');
+  const [lastCheck, setLastCheck] = useState(lastMessageId);
 
   useEffect(() => {
     setLinks(findConnectedLinks(router.asPath, flatSchema) || {});
@@ -189,7 +189,7 @@ const Layout = ({ children }) => {
         >
           <DocSearch />
           <IconButton aria-label="show new notifications" onClick={handleToggle} color="inherit" ref={anchorRef} className={clsx(classes.menuButton)}>
-            <Badge badgeContent={lastMessageId - lastCheck} color="secondary">
+            <Badge badgeContent={lastMessageId - Math.max(lastCheck, oldestMessageId)} color="secondary">
               <NotificationsIcon className={classes.menuIcons} />
             </Badge>
           </IconButton>
