@@ -9,7 +9,6 @@ describe('<WizardStep />', () => {
   let initialProps;
   beforeEach(() => {
     initialProps = {
-      FormSpyProvider: ({ children }) => children,
       fields: [ 'foo' ],
       formOptions: {
         renderForm: item => <div key={ item }>{ item }</div>,

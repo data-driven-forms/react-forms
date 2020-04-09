@@ -28,13 +28,11 @@ const ValidateButtons = ({ disableBack, handlePrev, buttonLabels: { back, cancel
   );
 };
 
-const asyncValidator = (value) => new Promise((res) => setTimeout(() => res(value === 'ok' ? undefined : 'chyba'), 1500));
-
 export const wizardSchema = {
   fields: [{
     component: componentTypes.WIZARD,
     name: 'wizzard',
-    crossroads: [ 'source.source-type' ],
+    crossroads: ['source.source-type'],
     predictSteps: true,
     //inModal: true,
     title: 'Title',
@@ -57,13 +55,11 @@ export const wizardSchema = {
         name: 'source.source-name',
         type: 'text',
         label: 'Source name',
-        validate: [asyncValidator],
       }, {
         component: componentTypes.SELECT_COMPONENT,
         name: 'source.source-type',
         label: 'Source type',
         isRequired: true,
-        initialValue: 'aws',
         options: [{
           label: 'Please Choose',
         }, {

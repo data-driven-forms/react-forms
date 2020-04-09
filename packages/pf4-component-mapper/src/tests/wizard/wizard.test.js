@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import toJSon from 'enzyme-to-json';
-import { TextInput, Button } from '@patternfly/react-core';
+import { TextInput } from '@patternfly/react-core';
 
 import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import * as enterHandle from '@data-driven-forms/common/src/wizard/enter-handler';
@@ -217,47 +217,6 @@ describe('<Wizard />', () => {
     wrapper.unmount();
     wrapper.update();
     expect(toJSon(wrapper)).toMatchSnapshot();
-  });
-
-  it('should disabled button when validating', (done) => {
-    const asyncValidator = () => new Promise((res) => setTimeout(() => res(), 2));
-
-    schema = {
-      fields: [
-        {
-          name: 'wizard',
-          component: 'wizard',
-          fields: [{
-            title: 'foo-step',
-            stepKey: '1',
-            name: 'foo',
-            fields: [{
-              name: 'foo-field',
-              component: 'text-field',
-              validate: [ asyncValidator ],
-            }],
-            nextStep: '2',
-          }, {
-            stepKey: '2',
-            title: 'bar-step',
-            name: 'bar',
-            fields: [{
-              name: 'bar-field',
-              component: 'text-field',
-            }],
-          }]},
-      ],
-    };
-
-    const wrapper = mount(<FormRenderer { ...initialProps } schema={ schema }/>);
-
-    expect(wrapper.find(Button).first().props().isDisabled).toEqual(true);
-
-    setTimeout(() => {
-      wrapper.update();
-      expect(wrapper.find(Button).first().props().isDisabled).toEqual(false);
-      done();
-    }, 2);
   });
 
   it('should render correctly with custom title and description', () => {
