@@ -14,7 +14,7 @@ const SimpleNext = ({
   <Button
     variant="primary"
     type="button"
-    isDisabled={ !valid }
+    isDisabled={ !valid || getState().validating }
     onClick={ () => valid ? handleNext(selectNext(nextStep, getState)) : submit() }
   >
     { nextLabel }
@@ -24,6 +24,7 @@ const SimpleNext = ({
 SimpleNext.propTypes = {
   next: PropTypes.string,
   valid: PropTypes.bool,
+  validating: PropTypes.bool,
   handleNext: PropTypes.func.isRequired,
   submit: PropTypes.func.isRequired,
   nextLabel: PropTypes.string.isRequired,
