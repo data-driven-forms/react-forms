@@ -35,6 +35,7 @@ const messageList = [
 ];
 
 export const lastMessageId = messageList[0].id;
+export const oldestMessageId = messageList[messageList.length - 1].id - 1;
 
 const useStyles = makeStyles((theme) => ({
   paper: {
