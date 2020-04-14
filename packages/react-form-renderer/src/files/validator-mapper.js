@@ -1,7 +1,7 @@
-import { required, length, pattern, numericality } from './';
+import { required, length, pattern, numericality } from '../validators';
 
-import url from './url-validator';
-import validatorTypes from '../files/validator-types';
+import url from '../validators/url-validator';
+import validatorTypes from './validator-types';
 
 export default {
   [validatorTypes.REQUIRED]: required,

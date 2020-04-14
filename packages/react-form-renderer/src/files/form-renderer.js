@@ -8,7 +8,7 @@ import RendererContext from './renderer-context';
 import renderForm from '../form-renderer/render-form';
 import defaultSchemaValidator from './default-schema-validator';
 import SchemaErrorComponent from '../form-renderer/schema-error-component';
-import defaultValidatorMapper from '../validators/validator-mapper';
+import defaultValidatorMapper from './validator-mapper';
 
 const FormRenderer = ({
   componentMapper,
