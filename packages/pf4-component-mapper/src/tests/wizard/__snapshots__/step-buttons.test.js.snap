@@ -1,63 +1,362 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<WizardSTepButtons should add custom className to toolbar 1`] = `
-<footer
-  className="pf-c-wizard__footer foo-class"
->
-  <NextButton
-    getState={[MockFunction]}
-    handleNext={[MockFunction]}
-    handleSubmit={[MockFunction]}
-    nextLabel="Next"
-    onCancel={[MockFunction]}
-    submit={[MockFunction]}
-    submitLabel="Submit"
-    valid={true}
-  />
-  <Component
-    onClick={[MockFunction]}
-    type="button"
-    variant="secondary"
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
   >
-    Back
-  </Component>
-  <Component
-    onClick={[MockFunction]}
-    type="button"
-    variant="link"
-  >
-    Cancel
-  </Component>
-</footer>
+    <WizardStepButtons
+      buttonLabels={
+        Object {
+          "back": "Back",
+          "cancel": "Cancel",
+          "next": "Next",
+          "submit": "Submit",
+        }
+      }
+      buttonsClassName="foo-class"
+      formOptions={
+        Object {
+          "getState": [Function],
+          "handleSubmit": [MockFunction],
+          "onCancel": [MockFunction],
+          "submit": [MockFunction],
+          "valid": true,
+        }
+      }
+      handleNext={[MockFunction]}
+      handlePrev={[MockFunction]}
+    >
+      <footer
+        className="pf-c-wizard__footer foo-class"
+      >
+        <FormSpy>
+          <NextButton
+            getState={[Function]}
+            handleNext={[MockFunction]}
+            handleSubmit={[MockFunction]}
+            nextLabel="Next"
+            onCancel={[MockFunction]}
+            submit={[MockFunction]}
+            submitLabel="Submit"
+            valid={true}
+          >
+            <SubmitButton
+              handleSubmit={[MockFunction]}
+              submitLabel="Submit"
+            >
+              <Component
+                onClick={[MockFunction]}
+                type="button"
+                variant="primary"
+              >
+                <ComponentWithOuia
+                  component={[Function]}
+                  componentProps={
+                    Object {
+                      "children": "Submit",
+                      "onClick": [MockFunction],
+                      "type": "button",
+                      "variant": "primary",
+                    }
+                  }
+                  consumerContext={null}
+                >
+                  <Button
+                    onClick={[MockFunction]}
+                    ouiaContext={
+                      Object {
+                        "isOuia": false,
+                        "ouiaId": null,
+                      }
+                    }
+                    type="button"
+                    variant="primary"
+                  >
+                    <button
+                      aria-disabled={null}
+                      aria-label={null}
+                      className="pf-c-button pf-m-primary"
+                      disabled={false}
+                      onClick={[MockFunction]}
+                      tabIndex={null}
+                      type="button"
+                    >
+                      Submit
+                    </button>
+                  </Button>
+                </ComponentWithOuia>
+              </Component>
+            </SubmitButton>
+          </NextButton>
+          <Component
+            onClick={[MockFunction]}
+            type="button"
+            variant="secondary"
+          >
+            <ComponentWithOuia
+              component={[Function]}
+              componentProps={
+                Object {
+                  "children": "Back",
+                  "isDisabled": undefined,
+                  "onClick": [MockFunction],
+                  "type": "button",
+                  "variant": "secondary",
+                }
+              }
+              consumerContext={null}
+            >
+              <Button
+                onClick={[MockFunction]}
+                ouiaContext={
+                  Object {
+                    "isOuia": false,
+                    "ouiaId": null,
+                  }
+                }
+                type="button"
+                variant="secondary"
+              >
+                <button
+                  aria-disabled={null}
+                  aria-label={null}
+                  className="pf-c-button pf-m-secondary"
+                  disabled={false}
+                  onClick={[MockFunction]}
+                  tabIndex={null}
+                  type="button"
+                >
+                  Back
+                </button>
+              </Button>
+            </ComponentWithOuia>
+          </Component>
+          <Component
+            onClick={[MockFunction]}
+            type="button"
+            variant="link"
+          >
+            <ComponentWithOuia
+              component={[Function]}
+              componentProps={
+                Object {
+                  "children": "Cancel",
+                  "onClick": [MockFunction],
+                  "type": "button",
+                  "variant": "link",
+                }
+              }
+              consumerContext={null}
+            >
+              <Button
+                onClick={[MockFunction]}
+                ouiaContext={
+                  Object {
+                    "isOuia": false,
+                    "ouiaId": null,
+                  }
+                }
+                type="button"
+                variant="link"
+              >
+                <button
+                  aria-disabled={null}
+                  aria-label={null}
+                  className="pf-c-button pf-m-link"
+                  disabled={false}
+                  onClick={[MockFunction]}
+                  tabIndex={null}
+                  type="button"
+                >
+                  Cancel
+                </button>
+              </Button>
+            </ComponentWithOuia>
+          </Component>
+        </FormSpy>
+      </footer>
+    </WizardStepButtons>
+  </ReactFinalForm>
+</RenderWithProvider>
 `;
 
 exports[`<WizardSTepButtons should render correctly 1`] = `
-<footer
-  className="pf-c-wizard__footer "
->
-  <NextButton
-    getState={[MockFunction]}
-    handleNext={[MockFunction]}
-    handleSubmit={[MockFunction]}
-    nextLabel="Next"
-    onCancel={[MockFunction]}
-    submit={[MockFunction]}
-    submitLabel="Submit"
-    valid={true}
-  />
-  <Component
-    onClick={[MockFunction]}
-    type="button"
-    variant="secondary"
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
   >
-    Back
-  </Component>
-  <Component
-    onClick={[MockFunction]}
-    type="button"
-    variant="link"
-  >
-    Cancel
-  </Component>
-</footer>
+    <WizardStepButtons
+      buttonLabels={
+        Object {
+          "back": "Back",
+          "cancel": "Cancel",
+          "next": "Next",
+          "submit": "Submit",
+        }
+      }
+      formOptions={
+        Object {
+          "getState": [Function],
+          "handleSubmit": [MockFunction],
+          "onCancel": [MockFunction],
+          "submit": [MockFunction],
+          "valid": true,
+        }
+      }
+      handleNext={[MockFunction]}
+      handlePrev={[MockFunction]}
+    >
+      <footer
+        className="pf-c-wizard__footer "
+      >
+        <FormSpy>
+          <NextButton
+            getState={[Function]}
+            handleNext={[MockFunction]}
+            handleSubmit={[MockFunction]}
+            nextLabel="Next"
+            onCancel={[MockFunction]}
+            submit={[MockFunction]}
+            submitLabel="Submit"
+            valid={true}
+          >
+            <SubmitButton
+              handleSubmit={[MockFunction]}
+              submitLabel="Submit"
+            >
+              <Component
+                onClick={[MockFunction]}
+                type="button"
+                variant="primary"
+              >
+                <ComponentWithOuia
+                  component={[Function]}
+                  componentProps={
+                    Object {
+                      "children": "Submit",
+                      "onClick": [MockFunction],
+                      "type": "button",
+                      "variant": "primary",
+                    }
+                  }
+                  consumerContext={null}
+                >
+                  <Button
+                    onClick={[MockFunction]}
+                    ouiaContext={
+                      Object {
+                        "isOuia": false,
+                        "ouiaId": null,
+                      }
+                    }
+                    type="button"
+                    variant="primary"
+                  >
+                    <button
+                      aria-disabled={null}
+                      aria-label={null}
+                      className="pf-c-button pf-m-primary"
+                      disabled={false}
+                      onClick={[MockFunction]}
+                      tabIndex={null}
+                      type="button"
+                    >
+                      Submit
+                    </button>
+                  </Button>
+                </ComponentWithOuia>
+              </Component>
+            </SubmitButton>
+          </NextButton>
+          <Component
+            onClick={[MockFunction]}
+            type="button"
+            variant="secondary"
+          >
+            <ComponentWithOuia
+              component={[Function]}
+              componentProps={
+                Object {
+                  "children": "Back",
+                  "isDisabled": undefined,
+                  "onClick": [MockFunction],
+                  "type": "button",
+                  "variant": "secondary",
+                }
+              }
+              consumerContext={null}
+            >
+              <Button
+                onClick={[MockFunction]}
+                ouiaContext={
+                  Object {
+                    "isOuia": false,
+                    "ouiaId": null,
+                  }
+                }
+                type="button"
+                variant="secondary"
+              >
+                <button
+                  aria-disabled={null}
+                  aria-label={null}
+                  className="pf-c-button pf-m-secondary"
+                  disabled={false}
+                  onClick={[MockFunction]}
+                  tabIndex={null}
+                  type="button"
+                >
+                  Back
+                </button>
+              </Button>
+            </ComponentWithOuia>
+          </Component>
+          <Component
+            onClick={[MockFunction]}
+            type="button"
+            variant="link"
+          >
+            <ComponentWithOuia
+              component={[Function]}
+              componentProps={
+                Object {
+                  "children": "Cancel",
+                  "onClick": [MockFunction],
+                  "type": "button",
+                  "variant": "link",
+                }
+              }
+              consumerContext={null}
+            >
+              <Button
+                onClick={[MockFunction]}
+                ouiaContext={
+                  Object {
+                    "isOuia": false,
+                    "ouiaId": null,
+                  }
+                }
+                type="button"
+                variant="link"
+              >
+                <button
+                  aria-disabled={null}
+                  aria-label={null}
+                  className="pf-c-button pf-m-link"
+                  disabled={false}
+                  onClick={[MockFunction]}
+                  tabIndex={null}
+                  type="button"
+                >
+                  Cancel
+                </button>
+              </Button>
+            </ComponentWithOuia>
+          </Component>
+        </FormSpy>
+      </footer>
+    </WizardStepButtons>
+  </ReactFinalForm>
+</RenderWithProvider>
 `;

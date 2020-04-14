@@ -933,50 +933,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                     <footer
                                       className="pf-c-wizard__footer "
                                     >
-                                      <NextButton
-                                        batch={[Function]}
-                                        blur={[Function]}
-                                        change={[Function]}
-                                        clearOnUnmount={false}
-                                        concat={[Function]}
-                                        destroyOnUnregister={false}
-                                        focus={[Function]}
-                                        getFieldState={[Function]}
-                                        getRegisteredFields={[Function]}
-                                        getState={[Function]}
-                                        handleNext={[Function]}
-                                        handleSubmit={[Function]}
-                                        initialize={[Function]}
-                                        insert={[Function]}
-                                        isValidationPaused={[Function]}
-                                        move={[Function]}
-                                        nextLabel="Next"
-                                        nextStep="2"
-                                        onCancel={[Function]}
-                                        onReset={[Function]}
-                                        onSubmit={[MockFunction]}
-                                        pauseValidation={[Function]}
-                                        pop={[Function]}
-                                        pristine={true}
-                                        push={[Function]}
-                                        registerField={[Function]}
-                                        remove={[Function]}
-                                        removeBatch={[Function]}
-                                        renderForm={[Function]}
-                                        reset={[Function]}
-                                        resetFieldState={[Function]}
-                                        resumeValidation={[Function]}
-                                        setConfig={[Function]}
-                                        shift={[Function]}
-                                        submit={[Function]}
-                                        submitLabel="Submit"
-                                        subscribe={[Function]}
-                                        swap={[Function]}
-                                        unshift={[Function]}
-                                        update={[Function]}
-                                        valid={true}
-                                      >
-                                        <SimpleNext
+                                      <FormSpy>
+                                        <NextButton
                                           batch={[Function]}
                                           blur={[Function]}
                                           change={[Function]}
@@ -988,6 +946,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                           getRegisteredFields={[Function]}
                                           getState={[Function]}
                                           handleNext={[Function]}
+                                          handleSubmit={[Function]}
                                           initialize={[Function]}
                                           insert={[Function]}
                                           isValidationPaused={[Function]}
@@ -1011,146 +970,189 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                           setConfig={[Function]}
                                           shift={[Function]}
                                           submit={[Function]}
+                                          submitLabel="Submit"
                                           subscribe={[Function]}
                                           swap={[Function]}
                                           unshift={[Function]}
                                           update={[Function]}
                                           valid={true}
                                         >
-                                          <Component
-                                            isDisabled={false}
-                                            onClick={[Function]}
-                                            type="button"
-                                            variant="primary"
+                                          <SimpleNext
+                                            batch={[Function]}
+                                            blur={[Function]}
+                                            change={[Function]}
+                                            clearOnUnmount={false}
+                                            concat={[Function]}
+                                            destroyOnUnregister={false}
+                                            focus={[Function]}
+                                            getFieldState={[Function]}
+                                            getRegisteredFields={[Function]}
+                                            getState={[Function]}
+                                            handleNext={[Function]}
+                                            initialize={[Function]}
+                                            insert={[Function]}
+                                            isValidationPaused={[Function]}
+                                            move={[Function]}
+                                            nextLabel="Next"
+                                            nextStep="2"
+                                            onCancel={[Function]}
+                                            onReset={[Function]}
+                                            onSubmit={[MockFunction]}
+                                            pauseValidation={[Function]}
+                                            pop={[Function]}
+                                            pristine={true}
+                                            push={[Function]}
+                                            registerField={[Function]}
+                                            remove={[Function]}
+                                            removeBatch={[Function]}
+                                            renderForm={[Function]}
+                                            reset={[Function]}
+                                            resetFieldState={[Function]}
+                                            resumeValidation={[Function]}
+                                            setConfig={[Function]}
+                                            shift={[Function]}
+                                            submit={[Function]}
+                                            subscribe={[Function]}
+                                            swap={[Function]}
+                                            unshift={[Function]}
+                                            update={[Function]}
+                                            valid={true}
                                           >
-                                            <ComponentWithOuia
-                                              component={[Function]}
-                                              componentProps={
-                                                Object {
-                                                  "children": "Next",
-                                                  "isDisabled": false,
-                                                  "onClick": [Function],
-                                                  "type": "button",
-                                                  "variant": "primary",
-                                                }
-                                              }
-                                              consumerContext={null}
+                                            <Component
+                                              isDisabled={false}
+                                              onClick={[Function]}
+                                              type="button"
+                                              variant="primary"
                                             >
-                                              <Button
-                                                isDisabled={false}
-                                                onClick={[Function]}
-                                                ouiaContext={
+                                              <ComponentWithOuia
+                                                component={[Function]}
+                                                componentProps={
                                                   Object {
-                                                    "isOuia": false,
-                                                    "ouiaId": null,
+                                                    "children": "Next",
+                                                    "isDisabled": false,
+                                                    "onClick": [Function],
+                                                    "type": "button",
+                                                    "variant": "primary",
                                                   }
                                                 }
-                                                type="button"
-                                                variant="primary"
+                                                consumerContext={null}
                                               >
-                                                <button
-                                                  aria-disabled={null}
-                                                  aria-label={null}
-                                                  className="pf-c-button pf-m-primary"
-                                                  disabled={false}
+                                                <Button
+                                                  isDisabled={false}
                                                   onClick={[Function]}
-                                                  tabIndex={null}
+                                                  ouiaContext={
+                                                    Object {
+                                                      "isOuia": false,
+                                                      "ouiaId": null,
+                                                    }
+                                                  }
                                                   type="button"
+                                                  variant="primary"
                                                 >
-                                                  Next
-                                                </button>
-                                              </Button>
-                                            </ComponentWithOuia>
-                                          </Component>
-                                        </SimpleNext>
-                                      </NextButton>
-                                      <Component
-                                        isDisabled={true}
-                                        onClick={[Function]}
-                                        type="button"
-                                        variant="secondary"
-                                      >
-                                        <ComponentWithOuia
-                                          component={[Function]}
-                                          componentProps={
-                                            Object {
-                                              "children": "Back",
-                                              "isDisabled": true,
-                                              "onClick": [Function],
-                                              "type": "button",
-                                              "variant": "secondary",
-                                            }
-                                          }
-                                          consumerContext={null}
+                                                  <button
+                                                    aria-disabled={null}
+                                                    aria-label={null}
+                                                    className="pf-c-button pf-m-primary"
+                                                    disabled={false}
+                                                    onClick={[Function]}
+                                                    tabIndex={null}
+                                                    type="button"
+                                                  >
+                                                    Next
+                                                  </button>
+                                                </Button>
+                                              </ComponentWithOuia>
+                                            </Component>
+                                          </SimpleNext>
+                                        </NextButton>
+                                        <Component
+                                          isDisabled={true}
+                                          onClick={[Function]}
+                                          type="button"
+                                          variant="secondary"
                                         >
-                                          <Button
-                                            isDisabled={true}
-                                            onClick={[Function]}
-                                            ouiaContext={
+                                          <ComponentWithOuia
+                                            component={[Function]}
+                                            componentProps={
                                               Object {
-                                                "isOuia": false,
-                                                "ouiaId": null,
+                                                "children": "Back",
+                                                "isDisabled": true,
+                                                "onClick": [Function],
+                                                "type": "button",
+                                                "variant": "secondary",
                                               }
                                             }
-                                            type="button"
-                                            variant="secondary"
+                                            consumerContext={null}
                                           >
-                                            <button
-                                              aria-disabled={null}
-                                              aria-label={null}
-                                              className="pf-c-button pf-m-secondary"
-                                              disabled={true}
+                                            <Button
+                                              isDisabled={true}
                                               onClick={[Function]}
-                                              tabIndex={null}
+                                              ouiaContext={
+                                                Object {
+                                                  "isOuia": false,
+                                                  "ouiaId": null,
+                                                }
+                                              }
                                               type="button"
+                                              variant="secondary"
                                             >
-                                              Back
-                                            </button>
-                                          </Button>
-                                        </ComponentWithOuia>
-                                      </Component>
-                                      <Component
-                                        onClick={[Function]}
-                                        type="button"
-                                        variant="link"
-                                      >
-                                        <ComponentWithOuia
-                                          component={[Function]}
-                                          componentProps={
-                                            Object {
-                                              "children": "Cancel",
-                                              "onClick": [Function],
-                                              "type": "button",
-                                              "variant": "link",
-                                            }
-                                          }
-                                          consumerContext={null}
+                                              <button
+                                                aria-disabled={null}
+                                                aria-label={null}
+                                                className="pf-c-button pf-m-secondary"
+                                                disabled={true}
+                                                onClick={[Function]}
+                                                tabIndex={null}
+                                                type="button"
+                                              >
+                                                Back
+                                              </button>
+                                            </Button>
+                                          </ComponentWithOuia>
+                                        </Component>
+                                        <Component
+                                          onClick={[Function]}
+                                          type="button"
+                                          variant="link"
                                         >
-                                          <Button
-                                            onClick={[Function]}
-                                            ouiaContext={
+                                          <ComponentWithOuia
+                                            component={[Function]}
+                                            componentProps={
                                               Object {
-                                                "isOuia": false,
-                                                "ouiaId": null,
+                                                "children": "Cancel",
+                                                "onClick": [Function],
+                                                "type": "button",
+                                                "variant": "link",
                                               }
                                             }
-                                            type="button"
-                                            variant="link"
+                                            consumerContext={null}
                                           >
-                                            <button
-                                              aria-disabled={null}
-                                              aria-label={null}
-                                              className="pf-c-button pf-m-link"
-                                              disabled={false}
+                                            <Button
                                               onClick={[Function]}
-                                              tabIndex={null}
+                                              ouiaContext={
+                                                Object {
+                                                  "isOuia": false,
+                                                  "ouiaId": null,
+                                                }
+                                              }
                                               type="button"
+                                              variant="link"
                                             >
-                                              Cancel
-                                            </button>
-                                          </Button>
-                                        </ComponentWithOuia>
-                                      </Component>
+                                              <button
+                                                aria-disabled={null}
+                                                aria-label={null}
+                                                className="pf-c-button pf-m-link"
+                                                disabled={false}
+                                                onClick={[Function]}
+                                                tabIndex={null}
+                                                type="button"
+                                              >
+                                                Cancel
+                                              </button>
+                                            </Button>
+                                          </ComponentWithOuia>
+                                        </Component>
+                                      </FormSpy>
                                     </footer>
                                   </WizardStepButtons>
                                 </WizardStep>
@@ -2333,50 +2335,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                               <footer
                                                 className="pf-c-wizard__footer "
                                               >
-                                                <NextButton
-                                                  batch={[Function]}
-                                                  blur={[Function]}
-                                                  change={[Function]}
-                                                  clearOnUnmount={false}
-                                                  concat={[Function]}
-                                                  destroyOnUnregister={false}
-                                                  focus={[Function]}
-                                                  getFieldState={[Function]}
-                                                  getRegisteredFields={[Function]}
-                                                  getState={[Function]}
-                                                  handleNext={[Function]}
-                                                  handleSubmit={[Function]}
-                                                  initialize={[Function]}
-                                                  insert={[Function]}
-                                                  isValidationPaused={[Function]}
-                                                  move={[Function]}
-                                                  nextLabel="Next"
-                                                  nextStep="2"
-                                                  onCancel={[Function]}
-                                                  onReset={[Function]}
-                                                  onSubmit={[MockFunction]}
-                                                  pauseValidation={[Function]}
-                                                  pop={[Function]}
-                                                  pristine={true}
-                                                  push={[Function]}
-                                                  registerField={[Function]}
-                                                  remove={[Function]}
-                                                  removeBatch={[Function]}
-                                                  renderForm={[Function]}
-                                                  reset={[Function]}
-                                                  resetFieldState={[Function]}
-                                                  resumeValidation={[Function]}
-                                                  setConfig={[Function]}
-                                                  shift={[Function]}
-                                                  submit={[Function]}
-                                                  submitLabel="Submit"
-                                                  subscribe={[Function]}
-                                                  swap={[Function]}
-                                                  unshift={[Function]}
-                                                  update={[Function]}
-                                                  valid={true}
-                                                >
-                                                  <SimpleNext
+                                                <FormSpy>
+                                                  <NextButton
                                                     batch={[Function]}
                                                     blur={[Function]}
                                                     change={[Function]}
@@ -2388,6 +2348,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                     getRegisteredFields={[Function]}
                                                     getState={[Function]}
                                                     handleNext={[Function]}
+                                                    handleSubmit={[Function]}
                                                     initialize={[Function]}
                                                     insert={[Function]}
                                                     isValidationPaused={[Function]}
@@ -2411,146 +2372,189 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                     setConfig={[Function]}
                                                     shift={[Function]}
                                                     submit={[Function]}
+                                                    submitLabel="Submit"
                                                     subscribe={[Function]}
                                                     swap={[Function]}
                                                     unshift={[Function]}
                                                     update={[Function]}
                                                     valid={true}
                                                   >
-                                                    <Component
-                                                      isDisabled={false}
-                                                      onClick={[Function]}
-                                                      type="button"
-                                                      variant="primary"
+                                                    <SimpleNext
+                                                      batch={[Function]}
+                                                      blur={[Function]}
+                                                      change={[Function]}
+                                                      clearOnUnmount={false}
+                                                      concat={[Function]}
+                                                      destroyOnUnregister={false}
+                                                      focus={[Function]}
+                                                      getFieldState={[Function]}
+                                                      getRegisteredFields={[Function]}
+                                                      getState={[Function]}
+                                                      handleNext={[Function]}
+                                                      initialize={[Function]}
+                                                      insert={[Function]}
+                                                      isValidationPaused={[Function]}
+                                                      move={[Function]}
+                                                      nextLabel="Next"
+                                                      nextStep="2"
+                                                      onCancel={[Function]}
+                                                      onReset={[Function]}
+                                                      onSubmit={[MockFunction]}
+                                                      pauseValidation={[Function]}
+                                                      pop={[Function]}
+                                                      pristine={true}
+                                                      push={[Function]}
+                                                      registerField={[Function]}
+                                                      remove={[Function]}
+                                                      removeBatch={[Function]}
+                                                      renderForm={[Function]}
+                                                      reset={[Function]}
+                                                      resetFieldState={[Function]}
+                                                      resumeValidation={[Function]}
+                                                      setConfig={[Function]}
+                                                      shift={[Function]}
+                                                      submit={[Function]}
+                                                      subscribe={[Function]}
+                                                      swap={[Function]}
+                                                      unshift={[Function]}
+                                                      update={[Function]}
+                                                      valid={true}
                                                     >
-                                                      <ComponentWithOuia
-                                                        component={[Function]}
-                                                        componentProps={
-                                                          Object {
-                                                            "children": "Next",
-                                                            "isDisabled": false,
-                                                            "onClick": [Function],
-                                                            "type": "button",
-                                                            "variant": "primary",
-                                                          }
-                                                        }
-                                                        consumerContext={null}
+                                                      <Component
+                                                        isDisabled={false}
+                                                        onClick={[Function]}
+                                                        type="button"
+                                                        variant="primary"
                                                       >
-                                                        <Button
-                                                          isDisabled={false}
-                                                          onClick={[Function]}
-                                                          ouiaContext={
+                                                        <ComponentWithOuia
+                                                          component={[Function]}
+                                                          componentProps={
                                                             Object {
-                                                              "isOuia": false,
-                                                              "ouiaId": null,
+                                                              "children": "Next",
+                                                              "isDisabled": false,
+                                                              "onClick": [Function],
+                                                              "type": "button",
+                                                              "variant": "primary",
                                                             }
                                                           }
-                                                          type="button"
-                                                          variant="primary"
+                                                          consumerContext={null}
                                                         >
-                                                          <button
-                                                            aria-disabled={null}
-                                                            aria-label={null}
-                                                            className="pf-c-button pf-m-primary"
-                                                            disabled={false}
+                                                          <Button
+                                                            isDisabled={false}
                                                             onClick={[Function]}
-                                                            tabIndex={null}
+                                                            ouiaContext={
+                                                              Object {
+                                                                "isOuia": false,
+                                                                "ouiaId": null,
+                                                              }
+                                                            }
                                                             type="button"
+                                                            variant="primary"
                                                           >
-                                                            Next
-                                                          </button>
-                                                        </Button>
-                                                      </ComponentWithOuia>
-                                                    </Component>
-                                                  </SimpleNext>
-                                                </NextButton>
-                                                <Component
-                                                  isDisabled={true}
-                                                  onClick={[Function]}
-                                                  type="button"
-                                                  variant="secondary"
-                                                >
-                                                  <ComponentWithOuia
-                                                    component={[Function]}
-                                                    componentProps={
-                                                      Object {
-                                                        "children": "Back",
-                                                        "isDisabled": true,
-                                                        "onClick": [Function],
-                                                        "type": "button",
-                                                        "variant": "secondary",
-                                                      }
-                                                    }
-                                                    consumerContext={null}
+                                                            <button
+                                                              aria-disabled={null}
+                                                              aria-label={null}
+                                                              className="pf-c-button pf-m-primary"
+                                                              disabled={false}
+                                                              onClick={[Function]}
+                                                              tabIndex={null}
+                                                              type="button"
+                                                            >
+                                                              Next
+                                                            </button>
+                                                          </Button>
+                                                        </ComponentWithOuia>
+                                                      </Component>
+                                                    </SimpleNext>
+                                                  </NextButton>
+                                                  <Component
+                                                    isDisabled={true}
+                                                    onClick={[Function]}
+                                                    type="button"
+                                                    variant="secondary"
                                                   >
-                                                    <Button
-                                                      isDisabled={true}
-                                                      onClick={[Function]}
-                                                      ouiaContext={
+                                                    <ComponentWithOuia
+                                                      component={[Function]}
+                                                      componentProps={
                                                         Object {
-                                                          "isOuia": false,
-                                                          "ouiaId": null,
+                                                          "children": "Back",
+                                                          "isDisabled": true,
+                                                          "onClick": [Function],
+                                                          "type": "button",
+                                                          "variant": "secondary",
                                                         }
                                                       }
-                                                      type="button"
-                                                      variant="secondary"
+                                                      consumerContext={null}
                                                     >
-                                                      <button
-                                                        aria-disabled={null}
-                                                        aria-label={null}
-                                                        className="pf-c-button pf-m-secondary"
-                                                        disabled={true}
+                                                      <Button
+                                                        isDisabled={true}
                                                         onClick={[Function]}
-                                                        tabIndex={null}
+                                                        ouiaContext={
+                                                          Object {
+                                                            "isOuia": false,
+                                                            "ouiaId": null,
+                                                          }
+                                                        }
                                                         type="button"
+                                                        variant="secondary"
                                                       >
-                                                        Back
-                                                      </button>
-                                                    </Button>
-                                                  </ComponentWithOuia>
-                                                </Component>
-                                                <Component
-                                                  onClick={[Function]}
-                                                  type="button"
-                                                  variant="link"
-                                                >
-                                                  <ComponentWithOuia
-                                                    component={[Function]}
-                                                    componentProps={
-                                                      Object {
-                                                        "children": "Cancel",
-                                                        "onClick": [Function],
-                                                        "type": "button",
-                                                        "variant": "link",
-                                                      }
-                                                    }
-                                                    consumerContext={null}
+                                                        <button
+                                                          aria-disabled={null}
+                                                          aria-label={null}
+                                                          className="pf-c-button pf-m-secondary"
+                                                          disabled={true}
+                                                          onClick={[Function]}
+                                                          tabIndex={null}
+                                                          type="button"
+                                                        >
+                                                          Back
+                                                        </button>
+                                                      </Button>
+                                                    </ComponentWithOuia>
+                                                  </Component>
+                                                  <Component
+                                                    onClick={[Function]}
+                                                    type="button"
+                                                    variant="link"
                                                   >
-                                                    <Button
-                                                      onClick={[Function]}
-                                                      ouiaContext={
+                                                    <ComponentWithOuia
+                                                      component={[Function]}
+                                                      componentProps={
                                                         Object {
-                                                          "isOuia": false,
-                                                          "ouiaId": null,
+                                                          "children": "Cancel",
+                                                          "onClick": [Function],
+                                                          "type": "button",
+                                                          "variant": "link",
                                                         }
                                                       }
-                                                      type="button"
-                                                      variant="link"
+                                                      consumerContext={null}
                                                     >
-                                                      <button
-                                                        aria-disabled={null}
-                                                        aria-label={null}
-                                                        className="pf-c-button pf-m-link"
-                                                        disabled={false}
+                                                      <Button
                                                         onClick={[Function]}
-                                                        tabIndex={null}
+                                                        ouiaContext={
+                                                          Object {
+                                                            "isOuia": false,
+                                                            "ouiaId": null,
+                                                          }
+                                                        }
                                                         type="button"
+                                                        variant="link"
                                                       >
-                                                        Cancel
-                                                      </button>
-                                                    </Button>
-                                                  </ComponentWithOuia>
-                                                </Component>
+                                                        <button
+                                                          aria-disabled={null}
+                                                          aria-label={null}
+                                                          className="pf-c-button pf-m-link"
+                                                          disabled={false}
+                                                          onClick={[Function]}
+                                                          tabIndex={null}
+                                                          type="button"
+                                                        >
+                                                          Cancel
+                                                        </button>
+                                                      </Button>
+                                                    </ComponentWithOuia>
+                                                  </Component>
+                                                </FormSpy>
                                               </footer>
                                             </WizardStepButtons>
                                           </WizardStep>

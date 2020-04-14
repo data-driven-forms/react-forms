@@ -1,8 +1,10 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-import { shallowToJson } from 'enzyme-to-json';
+import { mount } from 'enzyme';
+import { mountToJson } from 'enzyme-to-json';
 import selectNext from '@data-driven-forms/common/src/wizard/select-next';
 import handleEnter from '@data-driven-forms/common/src/wizard/enter-handler';
+
+import RenderWithProvider from '../../../../../__mocks__/with-provider';
 
 import WizardStepButtons from '../../files/wizard/step-buttons';
 
@@ -21,7 +23,9 @@ describe('<WizardSTepButtons', () => {
         handleSubmit: jest.fn(),
         submit: jest.fn(),
         valid: true,
-        getState: jest.fn()
+        getState: () => ({
+          validating: false
+        })
       },
       handlePrev: jest.fn(),
       handleNext: jest.fn()
@@ -29,18 +33,32 @@ describe('<WizardSTepButtons', () => {
   });
 
   it('should render correctly', () => {
-    const wrapper = shallow(<WizardStepButtons {...initialProps} />);
-    expect(shallowToJson(wrapper)).toMatchSnapshot();
+    const wrapper = mount(
+      <RenderWithProvider>
+        <WizardStepButtons {...initialProps} />
+      </RenderWithProvider>
+    );
+    expect(mountToJson(wrapper)).toMatchSnapshot();
   });
 
   it('should add custom className to toolbar', () => {
-    const wrapper = shallow(<WizardStepButtons {...initialProps} buttonsClassName="foo-class" />);
-    expect(shallowToJson(wrapper)).toMatchSnapshot();
+    const wrapper = mount(
+      <RenderWithProvider>
+        <WizardStepButtons {...initialProps} buttonsClassName="foo-class" />
+      </RenderWithProvider>
+    );
+    expect(mountToJson(wrapper)).toMatchSnapshot();
   });
 
   it('should call next with correct arguments when next step is string', () => {
     const handleNext = jest.fn();
-    const wrapper = mount(<WizardStepButtons {...initialProps} handleNext={handleNext} nextStep="next-step" />);
+
+    const wrapper = mount(
+      <RenderWithProvider>
+        <WizardStepButtons {...initialProps} handleNext={handleNext} nextStep="next-step" />
+      </RenderWithProvider>
+    );
+
     wrapper
       .find('button')
       .at(0)
@@ -50,23 +68,27 @@ describe('<WizardSTepButtons', () => {
 
   it('should call next with correct arguments when next step is condition', () => {
     const handleNext = jest.fn();
+
     const wrapper = mount(
-      <WizardStepButtons
-        {...initialProps}
-        handleNext={handleNext}
-        formOptions={{
-          ...initialProps.formOptions,
-          getState: () => ({ values: { foo: 'foo' } })
-        }}
-        nextStep={{
-          when: 'foo',
-          stepMapper: {
-            foo: 'bar',
-            qux: 'quaxx'
-          }
-        }}
-      />
+      <RenderWithProvider>
+        <WizardStepButtons
+          {...initialProps}
+          handleNext={handleNext}
+          formOptions={{
+            ...initialProps.formOptions,
+            getState: () => ({ values: { foo: 'foo' } })
+          }}
+          nextStep={{
+            when: 'foo',
+            stepMapper: {
+              foo: 'bar',
+              qux: 'quaxx'
+            }
+          }}
+        />
+      </RenderWithProvider>
     );
+
     wrapper
       .find('button')
       .at(0)
@@ -76,7 +98,11 @@ describe('<WizardSTepButtons', () => {
 
   it('should call submit functions if no next step is defined', () => {
     const handleSubmit = jest.fn();
-    const wrapper = mount(<WizardStepButtons {...initialProps} formOptions={{ ...initialProps.formOptions, handleSubmit }} nextStep={undefined} />);
+    const wrapper = mount(
+      <RenderWithProvider>
+        <WizardStepButtons {...initialProps} formOptions={{ ...initialProps.formOptions, handleSubmit }} nextStep={undefined} />
+      </RenderWithProvider>
+    );
     wrapper
       .find('button')
       .at(0)
@@ -88,7 +114,9 @@ describe('<WizardSTepButtons', () => {
     const VALUES = { aws: 'yes', password: '123456643' };
     const onCancel = jest.fn();
     const wrapper = mount(
-      <WizardStepButtons {...initialProps} formOptions={{ ...initialProps.formOptions, onCancel, getState: () => ({ values: VALUES }) }} />
+      <RenderWithProvider>
+        <WizardStepButtons {...initialProps} formOptions={{ ...initialProps.formOptions, onCancel, getState: () => ({ values: VALUES }) }} />
+      </RenderWithProvider>
     );
     wrapper
       .find('button')
@@ -99,7 +127,11 @@ describe('<WizardSTepButtons', () => {
 
   it('should call prev function', () => {
     const handlePrev = jest.fn();
-    const wrapper = mount(<WizardStepButtons {...initialProps} handlePrev={handlePrev} disableBack={false} />);
+    const wrapper = mount(
+      <RenderWithProvider>
+        <WizardStepButtons {...initialProps} handlePrev={handlePrev} disableBack={false} />
+      </RenderWithProvider>
+    );
     wrapper
       .find('button')
       .at(1)

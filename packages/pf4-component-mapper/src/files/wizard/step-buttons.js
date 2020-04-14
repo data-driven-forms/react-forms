@@ -2,9 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@patternfly/react-core';
 import selectNext from '@data-driven-forms/common/src/wizard/select-next';
+import { FormSpy } from '@data-driven-forms/react-form-renderer';
 
 const SimpleNext = ({ nextStep, valid, handleNext, submit, nextLabel, getState }) => (
-  <Button variant="primary" type="button" isDisabled={!valid} onClick={() => (valid ? handleNext(selectNext(nextStep, getState)) : submit())}>
+  <Button
+    variant="primary"
+    type="button"
+    isDisabled={!valid || getState().validating}
+    onClick={() => (valid ? handleNext(selectNext(nextStep, getState)) : submit())}
+  >
     {nextLabel}
   </Button>
 );
@@ -66,15 +72,19 @@ const WizardStepButtons = ({
         selectNext={selectNext}
       />
     ) : (
-      <React.Fragment>
-        <NextButton {...formOptions} handleNext={handleNext} nextStep={nextStep} nextLabel={next} submitLabel={submit} />
-        <Button type="button" variant="secondary" isDisabled={disableBack} onClick={handlePrev}>
-          {back}
-        </Button>
-        <Button type="button" variant="link" onClick={formOptions.onCancel}>
-          {cancel}
-        </Button>
-      </React.Fragment>
+      <FormSpy>
+        {() => (
+          <React.Fragment>
+            <NextButton {...formOptions} handleNext={handleNext} nextStep={nextStep} nextLabel={next} submitLabel={submit} />
+            <Button type="button" variant="secondary" isDisabled={disableBack} onClick={handlePrev}>
+              {back}
+            </Button>
+            <Button type="button" variant="link" onClick={formOptions.onCancel}>
+              {cancel}
+            </Button>
+          </React.Fragment>
+        )}
+      </FormSpy>
     )}
   </footer>
 );
