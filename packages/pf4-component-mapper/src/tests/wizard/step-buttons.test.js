@@ -21,7 +21,7 @@ describe('<WizardSTepButtons', () => {
         handleSubmit: jest.fn(),
         submit: jest.fn(),
         valid: true,
-        getState: jest.fn(),
+        getState: jest.fn().mockImplementation(() => ({ validating: false })),
       },
       handlePrev: jest.fn(),
       handleNext: jest.fn(),

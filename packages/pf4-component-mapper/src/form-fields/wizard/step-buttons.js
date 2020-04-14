@@ -14,7 +14,7 @@ const SimpleNext = ({
   <Button
     variant="primary"
     type="button"
-    isDisabled={ !valid }
+    isDisabled={ !valid || getState().validating }
     onClick={ () => valid ? handleNext(selectNext(nextStep, getState)) : submit() }
   >
     { nextLabel }

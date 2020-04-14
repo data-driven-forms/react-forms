@@ -236,6 +236,7 @@ class Wizard extends React.Component {
         FieldProvider={ FieldProvider }
         buttonsClassName={ buttonsClassName }
         showTitles={ showTitles }
+        FormSpyProvider={ FormSpyProvider }
       />);
 
     return (

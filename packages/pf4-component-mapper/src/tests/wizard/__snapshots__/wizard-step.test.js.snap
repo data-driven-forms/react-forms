@@ -15,27 +15,9 @@ exports[`<WizardStep /> should render correctly 1`] = `
       </div>
     </div>
   </WizardBody>
-  <WizardStepButtons
-    FieldProvider={[Function]}
-    buttonLabels={
-      Object {
-        "back": "Back",
-        "cancel": "Cancel",
-        "next": "Next",
-        "submit": "Submit",
-      }
-    }
-    formOptions={
-      Object {
-        "getState": [MockFunction],
-        "handleSubmit": [MockFunction],
-        "onCancel": [MockFunction],
-        "renderForm": [Function],
-      }
-    }
-    handleNext={[MockFunction]}
-    handlePrev={[MockFunction]}
-  />
+  <FormSpyProvider>
+    <Component />
+  </FormSpyProvider>
 </Fragment>
 `;
 
@@ -54,27 +36,9 @@ exports[`<WizardStep /> should render custom description 1`] = `
       </div>
     </div>
   </WizardBody>
-  <WizardStepButtons
-    FieldProvider={[Function]}
-    buttonLabels={
-      Object {
-        "back": "Back",
-        "cancel": "Cancel",
-        "next": "Next",
-        "submit": "Submit",
-      }
-    }
-    formOptions={
-      Object {
-        "getState": [MockFunction],
-        "handleSubmit": [MockFunction],
-        "onCancel": [MockFunction],
-        "renderForm": [Function],
-      }
-    }
-    handleNext={[MockFunction]}
-    handlePrev={[MockFunction]}
-  />
+  <FormSpyProvider>
+    <Component />
+  </FormSpyProvider>
 </Fragment>
 `;
 
@@ -100,26 +64,8 @@ exports[`<WizardStep /> should render title with showTitle 1`] = `
       </div>
     </div>
   </WizardBody>
-  <WizardStepButtons
-    FieldProvider={[Function]}
-    buttonLabels={
-      Object {
-        "back": "Back",
-        "cancel": "Cancel",
-        "next": "Next",
-        "submit": "Submit",
-      }
-    }
-    formOptions={
-      Object {
-        "getState": [MockFunction],
-        "handleSubmit": [MockFunction],
-        "onCancel": [MockFunction],
-        "renderForm": [Function],
-      }
-    }
-    handleNext={[MockFunction]}
-    handlePrev={[MockFunction]}
-  />
+  <FormSpyProvider>
+    <Component />
+  </FormSpyProvider>
 </Fragment>
 `;
