@@ -25,7 +25,9 @@ export const SingleCheckbox = (props) => {
     FormControlLabelProps,
     CheckboxProps,
     FormLabelProps,
-    FormHelperTextProps
+    FormHelperTextProps,
+    inputProps,
+    ...rest
   } = useFieldApi({
     ...props,
     type: 'checkbox'
@@ -46,8 +48,10 @@ export const SingleCheckbox = (props) => {
                 disabled={isDisabled || isReadOnly}
                 value={input.name}
                 inputProps={{
-                  readOnly: isReadOnly
+                  readOnly: isReadOnly,
+                  ...inputProps
                 }}
+                {...rest}
               />
             }
             disabled={isDisabled || isReadOnly}

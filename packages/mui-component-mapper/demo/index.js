@@ -21,7 +21,7 @@ const compositeMapper = {
     [componentTypes.SWITCH]: {
         component: componentMapper[componentTypes.SWITCH],
         FormControlLabelProps: {
-            labelPlacement: 'left'
+            labelPlacement: 'end'
         }
     }
 }

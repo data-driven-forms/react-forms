@@ -8,13 +8,17 @@ import { validationError } from './helpers';
 
 const CheckboxContext = createContext({});
 
-const FinalCheckbox = ({ isDisabled, label, ...props }) => {
-  const { FormControlLabelProps, CheckboxProps } = useContext(CheckboxContext);
+const FinalCheckbox = ({ label, isDisabled: _isDisabled, ...rest }) => {
+  const {
+    FormControlLabelProps,
+    CheckboxProps,
+    props: { isRequired, isReadOnly, helperText, validate, isDisabled, ...props }
+  } = useContext(CheckboxContext);
   return (
     <FormControlLabel
       {...FormControlLabelProps}
       control={
-        <Checkbox {...props} {...CheckboxProps} disabled={isDisabled}>
+        <Checkbox {...rest} {...props} {...CheckboxProps} disabled={isDisabled}>
           {label}
         </Checkbox>
       }
@@ -57,7 +61,7 @@ const MultipleChoiceList = ({
   ...props
 }) => (
   <CheckboxContext.Provider
-    value={{ FormControlProps, FormLabelProps, FormGroupProps, FormHelperTextProps, FormFieldGridProps, FormControlLabelProps, CheckboxProps }}
+    value={{ FormControlProps, FormLabelProps, FormGroupProps, FormHelperTextProps, FormFieldGridProps, FormControlLabelProps, CheckboxProps, props }}
   >
     <MultipleChoiceListCommon {...props} Wrapper={Wrapper} Checkbox={FinalCheckbox} />
   </CheckboxContext.Provider>
