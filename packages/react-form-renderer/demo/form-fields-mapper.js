@@ -82,7 +82,11 @@ const mapper = {
   [componentTypes.TAB_ITEM]: (props) => <div>tab item</div>,
   [componentTypes.DATE_PICKER]: (props) => <div>date picker</div>,
   [componentTypes.TIME_PICKER]: (props) => <div>time picker</div>,
-  dataShower: AsyncComponent
+  dataShower: AsyncComponent,
+  'composite-mapper-field': {
+    component: TextField,
+    className: 'composite-component-class'
+  }
 };
 
 export default mapper;

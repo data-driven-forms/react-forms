@@ -55,7 +55,7 @@ const SingleField = ({ component, condition, hideField, validate, ...rest }) => 
 
   const validation = validate || rest.dataType ? getValidate(validate, rest.dataType, validatorMapper) : undefined;
 
-  const componentProps = {
+  let componentProps = {
     type: assignSpecialType(component),
     ...rest,
     ...(Object.prototype.hasOwnProperty.call(rest, 'initialValue') && Object.prototype.hasOwnProperty.call(rest, 'dataType')
@@ -67,8 +67,15 @@ const SingleField = ({ component, condition, hideField, validate, ...rest }) => 
         : { validate: composeValidators(validation) }
       : {})
   };
-
-  const Component = componentMapper[component];
+  const componentBinding = componentMapper[component];
+  let Component;
+  if (typeof componentBinding === 'object' && Object.prototype.hasOwnProperty.call(componentBinding, 'component')) {
+    const { component, ...mapperProps } = componentBinding;
+    Component = component;
+    componentProps = { ...mapperProps, ...componentProps };
+  } else {
+    Component = componentBinding;
+  }
 
   return (
     <FormConditionWrapper condition={condition}>
@@ -84,7 +91,7 @@ SingleField.propTypes = {
   condition: PropTypes.object,
   hideField: PropTypes.bool,
   dataType: PropTypes.string,
-  validate: PropTypes.arrayOf(PropTypes.func),
+  validate: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object])),
   initialValue: PropTypes.any
 };
 

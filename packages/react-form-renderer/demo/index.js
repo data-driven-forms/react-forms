@@ -33,6 +33,11 @@ const validatorMapper = {
 const asyncValidatorSchema = {
   fields: [
     {
+      component: 'composite-mapper-field',
+      name: 'composite-field',
+      label: 'Componsite field'
+    },
+    {
       component: 'text-field',
       name: 'async-validation-field',
       label: 'Async validation field',
