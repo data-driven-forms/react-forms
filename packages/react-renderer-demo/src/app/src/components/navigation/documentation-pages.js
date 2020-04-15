@@ -16,6 +16,10 @@ export const docs = [
     linkText: 'Create component mapper'
   },
   {
+    component: 'global-component-props',
+    linkText: 'Global component props'
+  },
+  {
     component: 'renderer-api',
     linkText: 'FormRenderer API'
   },

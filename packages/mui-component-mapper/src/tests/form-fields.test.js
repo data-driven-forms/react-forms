@@ -5,7 +5,6 @@ import MultipleChoiceListCommon from '@data-driven-forms/common/src/multiple-cho
 import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import Checkbox from '../files/checkbox';
 
-import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 import FormTemplate from '../files/form-template';
 import componentMapper from '../files/component-mapper';
@@ -227,7 +226,6 @@ describe('formFields', () => {
     beforeEach(() => {
       initialProps = {
         ...initialProps,
-        FieldProvider: MockFieldProvider,
         options: [
           { label: 'Cat', value: 'cats' },
           { label: 'Dog', value: 'dogs' },

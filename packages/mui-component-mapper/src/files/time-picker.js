@@ -20,13 +20,16 @@ const TimePicker = (props) => {
     description,
     validateOnMount,
     meta,
-    locale = 'en'
+    locale = 'en',
+    MuiPickersUtilsProviderProps,
+    FormFieldGridProps,
+    ...rest
   } = useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
 
   return (
-    <FormFieldGrid>
-      <MuiPickersUtilsProvider locale={locale} utils={MomentUtils}>
+    <FormFieldGrid {...FormFieldGridProps}>
+      <MuiPickersUtilsProvider locale={locale} utils={MomentUtils} {...MuiPickersUtilsProviderProps}>
         <MUITimePicker
           fullWidth
           margin="normal"
@@ -39,6 +42,7 @@ const TimePicker = (props) => {
           readOnly={isReadOnly}
           {...input}
           value={input.value || null}
+          {...rest}
         />
       </MuiPickersUtilsProvider>
     </FormFieldGrid>
@@ -56,7 +60,14 @@ TimePicker.propTypes = {
   helperText: PropTypes.node,
   validateOnMount: PropTypes.bool,
   locale: PropTypes.string,
-  description: PropTypes.node
+  description: PropTypes.node,
+  FormFieldGridProps: PropTypes.object,
+  MuiPickersUtilsProviderProps: PropTypes.object
+};
+
+TimePicker.defaultProps = {
+  FormFieldGridProps: {},
+  MuiPickersUtilsProviderProps: {}
 };
 
 export default TimePicker;
