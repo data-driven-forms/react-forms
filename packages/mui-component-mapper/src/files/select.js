@@ -8,11 +8,11 @@ import MUISelect from './select/integration-select';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const Select = (props) => {
-  const { input, placeholder, label, helperText, validateOnMount, meta, isSearchable, description, ...rest } = useFieldApi(props);
+  const { input, placeholder, label, helperText, validateOnMount, meta, isSearchable, description, FormFieldGridProps, ...rest } = useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
 
   return (
-    <FormFieldGrid>
+    <FormFieldGrid {...FormFieldGridProps}>
       <MUISelect
         fullWidth
         {...input}
@@ -43,12 +43,14 @@ Select.propTypes = {
   validateOnMount: PropTypes.bool,
   isSearchable: PropTypes.bool,
   options: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.any.isRequired, label: PropTypes.node.isRequired })).isRequired,
-  description: PropTypes.node
+  description: PropTypes.node,
+  FormFieldGridProps: PropTypes.object
 };
 
 Select.defaultProps = {
   placeholder: 'Please choose',
-  noOptionsMessage: 'No option found'
+  noOptionsMessage: 'No option found',
+  FormFieldGridProps: {}
 };
 
 export default Select;

@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const RadioOption = ({ name, option, isDisabled, isReadOnly }) => {
+const RadioOption = ({ name, option, isDisabled, isReadOnly, FormControlLabelProps, RadioProps: { inputProps, ...RadioProps }, ...props }) => {
   const { input } = useFieldApi({ name, type: 'radio', value: option.value });
   return (
     <FormControlLabel
@@ -28,11 +28,15 @@ const RadioOption = ({ name, option, isDisabled, isReadOnly }) => {
           disabled={isDisabled || isReadOnly}
           onChange={() => input.onChange(option.value)}
           inputProps={{
-            readOnly: isReadOnly
+            readOnly: isReadOnly,
+            ...inputProps
           }}
+          {...RadioProps}
         />
       }
       label={option.label}
+      {...FormControlLabelProps}
+      {...props}
     />
   );
 };
@@ -41,11 +45,28 @@ RadioOption.propTypes = {
   name: PropTypes.string.isRequired,
   option: PropTypes.shape({ label: PropTypes.string.isRequired, value: PropTypes.any.isRequired }).isRequired,
   isReadOnly: PropTypes.bool,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
+  FormControlLabelProps: PropTypes.object,
+  RadioProps: PropTypes.object
 };
 
 const Radio = ({ name, ...props }) => {
-  const { options, isDisabled, label, isRequired, helperText, description, isReadOnly, meta, validateOnMount } = useFieldApi({
+  const {
+    options,
+    isDisabled,
+    label,
+    isRequired,
+    helperText,
+    description,
+    isReadOnly,
+    meta,
+    validateOnMount,
+    FormFieldGridProps,
+    FormControlProps,
+    FormLabelProps,
+    FormHelperTextProps,
+    ...rest
+  } = useFieldApi({
     ...props,
     name,
     type: 'radio'
@@ -54,13 +75,15 @@ const Radio = ({ name, ...props }) => {
   const invalid = validationError(meta, validateOnMount);
   const text = invalid || helperText || description;
   return (
-    <FormFieldGrid className={classes.grid}>
-      <FormControl required={isRequired} error={!!invalid} component="fieldset">
-        <FormLabel component="legend">{label}</FormLabel>
+    <FormFieldGrid className={classes.grid} {...FormFieldGridProps}>
+      <FormControl required={isRequired} error={!!invalid} component="fieldset" {...FormControlProps}>
+        <FormLabel component="legend" {...FormLabelProps}>
+          {label}
+        </FormLabel>
         {options.map((option) => (
-          <RadioOption key={option.value} name={name} option={option} isDisabled={isDisabled} isReadOnly={isReadOnly} />
+          <RadioOption key={option.value} name={name} option={option} isDisabled={isDisabled} isReadOnly={isReadOnly} {...rest} />
         ))}
-        {(invalid || text) && <FormHelperText>{invalid || text}</FormHelperText>}
+        {(invalid || text) && <FormHelperText {...FormHelperTextProps}>{invalid || text}</FormHelperText>}
       </FormControl>
     </FormFieldGrid>
   );
@@ -77,11 +100,23 @@ Radio.propTypes = {
   label: PropTypes.node.isRequired,
   isDisabled: PropTypes.bool,
   children: PropTypes.any,
-  description: PropTypes.node
+  description: PropTypes.node,
+  FormFieldGridProps: PropTypes.object,
+  FormControlProps: PropTypes.object,
+  FormControlLabelProps: PropTypes.object,
+  RadioProps: PropTypes.object,
+  FormLabelProps: PropTypes.object,
+  FormHelperTextProps: PropTypes.object
 };
 
 Radio.defaultProps = {
-  options: []
+  options: [],
+  FormFieldGridProps: {},
+  FormControlProps: {},
+  FormControlLabelProps: {},
+  RadioProps: {},
+  FormLabelProps: {},
+  FormHelperTextProps: {}
 };
 
 export default Radio;

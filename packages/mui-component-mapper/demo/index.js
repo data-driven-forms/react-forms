@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from "react";
 import ReactDOM from "react-dom";
-import FormRenderer from '@data-driven-forms/react-form-renderer';
+import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import Grid from '@material-ui/core/Grid';
 import { componentMapper, FormTemplate } from '../src'
@@ -15,6 +15,16 @@ const theme = createMuiTheme({
       useNextVariants: true,
     },
   });
+
+const compositeMapper = {
+    ...componentMapper,
+    [componentTypes.SWITCH]: {
+        component: componentMapper[componentTypes.SWITCH],
+        FormControlLabelProps: {
+            labelPlacement: 'left'
+        }
+    }
+}
   
 
 const App = () => (
@@ -31,7 +41,7 @@ const App = () => (
             <Grid item xs={12}>
                 <FormRenderer
                     onSubmit={console.log}
-                    componentMapper={componentMapper}
+                    componentMapper={compositeMapper}
                     FormTemplate={props => <FormTemplate {...props} />}
                     schema={demoSchema}
                     onCancel={() => console.log('canceling')}

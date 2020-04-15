@@ -20,13 +20,16 @@ const DatePicker = (props) => {
     description,
     validateOnMount,
     meta,
-    locale = 'en'
+    locale = 'en',
+    FormFieldGridProps,
+    MuiPickersUtilsProviderProps,
+    DatePickerProps
   } = useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
 
   return (
-    <FormFieldGrid>
-      <MuiPickersUtilsProvider locale={locale} utils={MomentUtils}>
+    <FormFieldGrid {...FormFieldGridProps}>
+      <MuiPickersUtilsProvider locale={locale} utils={MomentUtils} {...MuiPickersUtilsProviderProps}>
         <MUIDatePicker
           fullWidth
           margin="normal"
@@ -39,6 +42,7 @@ const DatePicker = (props) => {
           readOnly={isReadOnly}
           {...input}
           value={input.value || null}
+          {...DatePickerProps}
         />
       </MuiPickersUtilsProvider>
     </FormFieldGrid>
@@ -56,7 +60,16 @@ DatePicker.propTypes = {
   helperText: PropTypes.node,
   validateOnMount: PropTypes.bool,
   locale: PropTypes.string,
-  description: PropTypes.node
+  description: PropTypes.node,
+  FormFieldGridProps: PropTypes.object,
+  MuiPickersUtilsProviderProps: PropTypes.object,
+  DatePickerProps: PropTypes.object
+};
+
+DatePicker.defaultProps = {
+  FormFieldGridProps: {},
+  MuiPickersUtilsProviderProps: {},
+  DatePickerProps: {}
 };
 
 export default DatePicker;

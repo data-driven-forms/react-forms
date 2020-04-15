@@ -9,7 +9,24 @@ import MultipleChoiceList from '../common/multiple-choice-list';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 export const SingleCheckbox = (props) => {
-  const { input, isReadOnly, isDisabled, isRequired, label, helperText, description, validateOnMount, meta } = useFieldApi({
+  const {
+    input,
+    isReadOnly,
+    isDisabled,
+    isRequired,
+    label,
+    helperText,
+    description,
+    validateOnMount,
+    meta,
+    FormFieldGridProps,
+    FormControlProps,
+    FormGroupProps,
+    FormControlLabelProps,
+    CheckboxProps,
+    FormLabelProps,
+    FormHelperTextProps
+  } = useFieldApi({
     ...props,
     type: 'checkbox'
   });
@@ -17,13 +34,15 @@ export const SingleCheckbox = (props) => {
   const text = invalid || helperText || description;
 
   return (
-    <FormFieldGrid>
-      <FormControl required={isRequired} error={!!invalid} component="fieldset">
-        <FormGroup>
+    <FormFieldGrid {...FormFieldGridProps}>
+      <FormControl required={isRequired} error={!!invalid} component="fieldset" {...FormControlProps}>
+        <FormGroup {...FormGroupProps}>
           <FormControlLabel
+            {...FormControlLabelProps}
             control={
               <MUICheckbox
                 {...input}
+                {...CheckboxProps}
                 disabled={isDisabled || isReadOnly}
                 value={input.name}
                 inputProps={{
@@ -32,9 +51,9 @@ export const SingleCheckbox = (props) => {
               />
             }
             disabled={isDisabled || isReadOnly}
-            label={<FormLabel>{label}</FormLabel>}
+            label={<FormLabel {...FormLabelProps}>{label}</FormLabel>}
           />
-          {(invalid || text) && <FormHelperText>{invalid || text}</FormHelperText>}
+          {(invalid || text) && <FormHelperText {...FormHelperTextProps}>{invalid || text}</FormHelperText>}
         </FormGroup>
       </FormControl>
     </FormFieldGrid>
@@ -50,7 +69,24 @@ SingleCheckbox.propTypes = {
   label: PropTypes.node,
   helperText: PropTypes.node,
   description: PropTypes.node,
-  validateOnMount: PropTypes.bool
+  validateOnMount: PropTypes.bool,
+  FormFieldGridProps: PropTypes.object,
+  FormControlProps: PropTypes.object,
+  FormGroupProps: PropTypes.object,
+  FormControlLabelProps: PropTypes.object,
+  CheckboxProps: PropTypes.object,
+  FormLabelProps: PropTypes.object,
+  FormHelperTextProps: PropTypes.object
+};
+
+SingleCheckbox.defaultProps = {
+  FormFieldGridProps: {},
+  FormControlProps: {},
+  FormGroupProps: {},
+  FormControlLabelProps: {},
+  CheckboxProps: {},
+  FormLabelProps: {},
+  FormHelperTextProps: {}
 };
 
 const Checkbox = ({ options, ...props }) => (options ? <MultipleChoiceList options={options} {...props} /> : <SingleCheckbox {...props} />);
