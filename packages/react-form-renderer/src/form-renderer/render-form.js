@@ -37,7 +37,7 @@ const FormConditionWrapper = ({ condition, children }) =>
   );
 
 FormConditionWrapper.propTypes = {
-  condition: PropTypes.object,
+  condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   children: childrenPropTypes.isRequired
 };
 
@@ -93,7 +93,7 @@ const SingleField = ({ component, condition, hideField, validate, ...rest }) => 
 
 SingleField.propTypes = {
   component: PropTypes.string.isRequired,
-  condition: PropTypes.object,
+  condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   hideField: PropTypes.bool,
   dataType: PropTypes.string,
   validate: PropTypes.arrayOf(PropTypes.func),

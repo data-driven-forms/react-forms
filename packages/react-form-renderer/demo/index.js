@@ -30,6 +30,7 @@ const validatorMapper = {
     )
 };
 
+// eslint-disable-next-line no-unused-vars
 const asyncValidatorSchema = {
   fields: [
     {

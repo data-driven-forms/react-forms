@@ -31,20 +31,24 @@ const fieldCondition = (value, { is, isNotEmpty, isEmpty, pattern, notMatch, fla
 export const parseCondition = (condition, values) => {
   let positiveResult = {
     visible: true,
-    ...condition.then
+    ...condition.then,
+    result: true
   };
 
   let negativeResult = {
     visible: false,
-    ...condition.else
+    ...condition.else,
+    result: false
   };
 
   if (Array.isArray(condition)) {
-    return !condition.map((condition) => parseCondition(condition, values)).some((result) => result === false) ? positiveResult : negativeResult;
+    return !condition.map((condition) => parseCondition(condition, values)).some(({ result }) => result === false) ? positiveResult : negativeResult;
   }
 
   if (condition.and) {
-    return !condition.and.map((condition) => parseCondition(condition, values)).some((result) => result === false) ? positiveResult : negativeResult;
+    return !condition.and.map((condition) => parseCondition(condition, values)).some(({ result }) => result === false)
+      ? positiveResult
+      : negativeResult;
   }
 
   if (condition.sequence) {
@@ -53,8 +57,9 @@ export const parseCondition = (condition, values) => {
         const result = parseCondition(curr, values);
 
         return {
-          sets: [...acc.sets, ...[result.set ? result.set : []]],
-          visible: acc.visible || result.visible
+          sets: [...acc.sets, ...(result.set ? [result.set] : [])],
+          visible: acc.visible || result.visible,
+          result: acc.result || result.result
         };
       },
       { ...negativeResult, sets: [] }
@@ -62,11 +67,11 @@ export const parseCondition = (condition, values) => {
   }
 
   if (condition.or) {
-    return condition.or.map((condition) => parseCondition(condition, values)).some((result) => result === true) ? positiveResult : negativeResult;
+    return condition.or.map((condition) => parseCondition(condition, values)).some(({ result }) => result === true) ? positiveResult : negativeResult;
   }
 
   if (condition.not) {
-    return !parseCondition(condition.not, values) ? positiveResult : negativeResult;
+    return !parseCondition(condition.not, values).result ? positiveResult : negativeResult;
   }
 
   if (typeof condition.when === 'string') {
