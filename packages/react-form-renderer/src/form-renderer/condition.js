@@ -87,38 +87,45 @@ export const parseCondition = (condition, values) => {
   return negativeResult;
 };
 
-const Condition = React.memo(({ condition, children, values }) => {
-  const formOptions = useFormApi();
-  const dirty = formOptions.getState().dirty;
+const Condition = React.memo(
+  ({ condition, children, values }) => {
+    const formOptions = useFormApi();
+    const dirty = formOptions.getState().dirty;
 
-  const [lastSets, setSets] = React.useState([]);
+    const [lastSets, setSets] = React.useState([]);
+    const [initial, setInitial] = React.useState(true);
 
-  const conditionResult = parseCondition(condition, values, formOptions);
-  const setters = conditionResult.set ? [conditionResult.set] : conditionResult.sets;
+    const conditionResult = parseCondition(condition, values, formOptions);
+    const setters = conditionResult.set ? [conditionResult.set] : conditionResult.sets;
 
-  useEffect(() => {
-    if (!dirty) {
-      setSets([]);
-    }
-  }, [dirty]);
+    useEffect(() => {
+      if (!dirty) {
+        setInitial(true);
+      }
+    }, [dirty]);
 
-  useEffect(() => {
-    if (setters && setters.length > 0 && (!dirty || !isEqual(setters, lastSets))) {
-      setters.forEach((setter, index) => {
-        if (setter && (!dirty || !isEqual(setter, lastSets[index]))) {
-          formOptions.batch(() => {
-            Object.entries(setter).forEach(([name, value]) => {
-              formOptions.change(name, value);
+    useEffect(() => {
+      if (setters && setters.length > 0 && (initial || !isEqual(setters, lastSets))) {
+        setters.forEach((setter, index) => {
+          if (setter && (initial || !isEqual(setter, lastSets[index]))) {
+            setTimeout(() => {
+              formOptions.batch(() => {
+                Object.entries(setter).forEach(([name, value]) => {
+                  formOptions.change(name, value);
+                });
+              });
             });
-          });
-        }
-      });
-      setSets(setters);
-    }
-  }, [setters, dirty]);
+          }
+        });
+        setSets(setters);
+        setInitial(false);
+      }
+    }, [setters, initial]);
 
-  return conditionResult.visible ? children : null;
-}, isEqual);
+    return conditionResult.visible ? children : null;
+  },
+  (a, b) => isEqual(a.values, b.values) && isEqual(a.condition, b.condition)
+);
 
 const conditionProps = {
   when: PropTypes.string,

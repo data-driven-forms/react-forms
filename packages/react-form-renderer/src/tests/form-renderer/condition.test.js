@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { act } from 'react-dom/test-utils';
 
 import FormTemplate from '../../../../../__mocks__/mock-form-template';
 import componentTypes from '../../../dist/cjs/component-types';
@@ -18,6 +19,8 @@ describe('condition test', () => {
   let wrapper;
 
   beforeEach(() => {
+    jest.useFakeTimers();
+
     onSubmit = jest.fn();
 
     initialProps = {
@@ -67,7 +70,7 @@ describe('condition test', () => {
     expect(wrapper.find('input')).toHaveLength(1);
   });
 
-  it('sets value when condition is fulfill', () => {
+  it('sets value when condition is fulfill', async () => {
     schema = {
       fields: [
         {
@@ -90,16 +93,26 @@ describe('condition test', () => {
       ]
     };
 
-    wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    await act(async () => {
+      wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    });
+    wrapper.update();
 
     expect(wrapper.find('input')).toHaveLength(1);
 
-    wrapper.find('input').simulate('change', { target: { value: 'show' } });
+    await act(async () => {
+      wrapper.find('input').simulate('change', { target: { value: 'show' } });
+      jest.advanceTimersByTime(1);
+    });
     wrapper.update();
 
     expect(wrapper.find('input')).toHaveLength(2);
 
-    wrapper.find('form').simulate('submit');
+    await act(async () => {
+      wrapper.find('form').simulate('submit');
+      jest.advanceTimersByTime(1);
+    });
+    wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
       'field-1': 'show',
@@ -107,7 +120,7 @@ describe('condition test', () => {
     });
   });
 
-  it('sets value when condition is fulfill - initialValues', () => {
+  it('sets value when condition is fulfill - initialValues', async () => {
     schema = {
       fields: [
         {
@@ -130,11 +143,18 @@ describe('condition test', () => {
       ]
     };
 
-    wrapper = mount(<FormRenderer {...initialProps} schema={schema} initialValues={{ 'field-1': 'show' }} />);
+    await act(async () => {
+      wrapper = mount(<FormRenderer {...initialProps} schema={schema} initialValues={{ 'field-1': 'show' }} />);
+      jest.advanceTimersByTime(1);
+    });
+    wrapper.update();
 
     expect(wrapper.find('input')).toHaveLength(2);
 
-    wrapper.find('form').simulate('submit');
+    await act(async () => {
+      wrapper.find('form').simulate('submit');
+    });
+    wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
       'field-1': 'show',
@@ -142,7 +162,7 @@ describe('condition test', () => {
     });
   });
 
-  it('sets value when condition is fulfill on reset', () => {
+  it('sets value when condition is fulfill on reset', async () => {
     schema = {
       fields: [
         {
@@ -165,33 +185,50 @@ describe('condition test', () => {
       ]
     };
 
-    wrapper = mount(<FormRenderer {...initialProps} schema={schema} initialValues={{ 'field-1': 'show' }} />);
+    await act(async () => {
+      wrapper = mount(<FormRenderer {...initialProps} schema={schema} initialValues={{ 'field-1': 'show' }} />);
+      jest.advanceTimersByTime(1);
+    });
+    wrapper.update();
 
     expect(wrapper.find('input')).toHaveLength(2);
 
-    wrapper
-      .find('input')
-      .first()
-      .simulate('change', { target: { value: 'dontshow' } });
+    await act(async () => {
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'dontshow' } });
+      jest.advanceTimersByTime(1);
+    });
     wrapper.update();
 
     expect(wrapper.find('input')).toHaveLength(1);
 
-    wrapper.find('form').simulate('submit');
+    await act(async () => {
+      wrapper.find('form').simulate('submit');
+    });
+    wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
       'field-1': 'dontshow',
       'field-2': 'someValue'
     });
+    onSubmit.mockClear();
 
-    //Reset
-    wrapper
-      .find('button')
-      .at(1)
-      .simulate('click');
+    await act(async () => {
+      //Reset
+      wrapper
+        .find('button')
+        .at(1)
+        .simulate('click');
+      jest.advanceTimersByTime(1);
+    });
     wrapper.update();
 
-    wrapper.find('form').simulate('submit');
+    await act(async () => {
+      wrapper.find('form').simulate('submit');
+    });
+    wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
       'field-1': 'show',
@@ -199,7 +236,7 @@ describe('condition test', () => {
     });
   });
 
-  it('sets value when condition is fulfill - sequence', () => {
+  it('sets value when condition is fulfill - sequence', async () => {
     schema = {
       fields: [
         {
@@ -245,14 +282,22 @@ describe('condition test', () => {
       ]
     };
 
-    wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    await act(async () => {
+      wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    });
 
     expect(wrapper.find('input')).toHaveLength(1);
 
-    wrapper.find('input').simulate('change', { target: { value: 'show' } });
+    await act(async () => {
+      wrapper.find('input').simulate('change', { target: { value: 'show' } });
+      jest.advanceTimersByTime(1);
+    });
     wrapper.update();
 
-    wrapper.find('form').simulate('submit');
+    await act(async () => {
+      wrapper.find('form').simulate('submit');
+    });
+    wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
       'field-1': 'show',
