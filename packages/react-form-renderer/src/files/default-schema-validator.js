@@ -16,7 +16,23 @@ const checkFieldsArray = (obj, objectKey) => {
   }
 };
 
-const checkCondition = (condition, fieldName) => {
+const checkConditionalAction = (type, action, fieldName) => {
+  if (action.hasOwnProperty('visible') && typeof action.visible !== 'boolean') {
+    throw new DefaultSchemaError(`
+      Error occured in field definition with "name" property: "${fieldName}".
+      'visible' property in action "${type}" has to be a boolean value! Received: ${typeof action.visible}.
+    `);
+  }
+
+  if (action.hasOwnProperty('set') && (typeof action.set !== 'object' || Array.isArray(action.set))) {
+    throw new DefaultSchemaError(`
+      Error occured in field definition with "name" property: "${fieldName}".
+      'set' property in action "${type}" has to be a object! Received: ${typeof action.visible}, isArray: ${Array.isArray(action.set)}.
+    `);
+  }
+};
+
+const checkCondition = (condition, fieldName, isRoot) => {
   /**
    * validate array condition
    */
@@ -38,6 +54,35 @@ const checkCondition = (condition, fieldName) => {
     `);
   }
 
+  if (condition.hasOwnProperty('sequence') && !Array.isArray(condition.sequence)) {
+    throw new DefaultSchemaError(`
+      Error occured in field definition with "name" property: "${fieldName}".
+      'sequence' property in a field condition must be an array! Received: ${typeof condition.sequence}.
+    `);
+  }
+
+  if (condition.hasOwnProperty('sequence') && !isRoot) {
+    throw new DefaultSchemaError(`
+      Error occured in field definition with "name" property: "${fieldName}".
+      'sequence' condition has to be the root condition: " condition: { sequence: [ ... ]} "
+    `);
+  }
+
+  if ((condition.hasOwnProperty('then') || condition.hasOwnProperty('else')) && !isRoot) {
+    throw new DefaultSchemaError(`
+      Error occured in field definition with "name" property: "${fieldName}".
+      'then', 'else' condition keys can be included only in root conditions or in a 'sequence'.
+    `);
+  }
+
+  if (condition.hasOwnProperty('then')) {
+    checkConditionalAction('then', condition.then, fieldName);
+  }
+
+  if (condition.hasOwnProperty('else')) {
+    checkConditionalAction('else', condition.else, fieldName);
+  }
+
   if (typeof condition !== 'object') {
     throw new DefaultSchemaError(`
       Error occured in field definition with name: "${fieldName}".
@@ -45,7 +90,12 @@ const checkCondition = (condition, fieldName) => {
     `);
   }
 
-  if (!condition.hasOwnProperty('and') && !condition.hasOwnProperty('or') && !condition.hasOwnProperty('not')) {
+  if (
+    !condition.hasOwnProperty('and') &&
+    !condition.hasOwnProperty('or') &&
+    !condition.hasOwnProperty('not') &&
+    !condition.hasOwnProperty('sequence')
+  ) {
     if (!condition.hasOwnProperty('when')) {
       throw new DefaultSchemaError(`
       Error occured in field definition with "name" property: "${fieldName}".
@@ -84,6 +134,16 @@ const checkCondition = (condition, fieldName) => {
       Error occured in field definition with name: "${fieldName}".
       Field condition must have "pattern" of instance "RegExp" or "string"! Instance received: [${condition.pattern.constructor.name}].
     `);
+    }
+  } else {
+    ['and', 'or', 'not'].forEach((key) => {
+      if (condition.hasOwnProperty(key)) {
+        checkCondition(condition[key], fieldName);
+      }
+    });
+
+    if (condition.hasOwnProperty('sequence')) {
+      condition.sequence.forEach((item) => checkCondition(item, fieldName, 'root'));
     }
   }
 };
@@ -211,7 +271,7 @@ const iterateOverFields = (fields, componentMapper, validatorTypes, actionTypes,
     }
 
     if (field.hasOwnProperty('condition')) {
-      checkCondition(field.condition, field.name);
+      checkCondition(field.condition, field.name, 'root');
     }
 
     if (field.hasOwnProperty('validate')) {
