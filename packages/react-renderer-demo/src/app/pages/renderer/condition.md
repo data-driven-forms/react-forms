@@ -34,7 +34,7 @@ You can show a field only if it meets a condition:
 
 `when` - is name of field where the value is stored, **always required!**. It can be either string `'field-name'` or array of strings `['field-1', 'field-2']`.
 
-### OR
+### Or
 
 At least one condition must be met.
 
@@ -85,7 +85,7 @@ Also, you can use a shorthand:
 
 <RawComponent source="conditions/or" />
 
-### AND
+### And
 
 All conditions must be met.
 
@@ -198,6 +198,27 @@ You can simple negate a condition by using a `not`. Following condition is a tru
 As the value you can use an array (AND) or another condition.
 
 <RawComponent source="conditions/not" />
+
+### Sequence
+
+This special type of condition allows to trigger a sequence of multiple independent conditions. This is useful in combination with [conditional actions](/renderer/condition#conditionalactions). Setters are executed independently. Visibility is set to true, if any of the conditions sets it to true. Sequence has to be currently the root condition, that means the sequence cannot be nested within other types of conditions such as `and`, `or` and `not`.
+
+```jsx
+{
+  fields: [{
+    name: 'Sequence condition',
+    component: 'text-field',
+    condition: {
+      sequence: [
+        { when: ['a'], is: 'x', then: { set: { field: 'value' } } },
+        { when: ['b'], is: 'x', then: { set: { field: 'different value' } } }
+      ]
+    }
+  }]
+}
+```
+
+<RawComponent source="conditions/sequence" />
 
 ### Nesting
 
@@ -333,6 +354,44 @@ condition: {
 ```
 
 <RawComponent source="conditions/not-match" />
+
+## Conditional actions
+
+There are currently two types of conditionals actions: `visible` and `set`. These actions can be called from `then` or `else` statements in root conditions. (Conditions has to be the root of the condition tree, or they have to be included in a [sequence](/renderer/condition#sequence) array.)
+
+```jsx
+condition: { when: 'x', is: 'y', then: { ... }, else: { ... } }
+```
+
+### Set
+
+Setter allows to change form values according to selected values in different fields.
+
+```jsx
+// Single value
+condition: { when: 'x', is: 'y', then: { set: { [field]: value } } }
+
+// Multiple values
+condition: {
+  when: 'x',
+  is: 'y',
+  then: { set: { [field1]: value1, [field2]: value2 } }
+}
+```
+
+Set is a object consists of field names as keys and values as values. You can change any form field value from any conditional action.
+
+### Visible
+
+Visible controls visibility of the field that includes the condition. By default, it is set to `true`.
+
+```jsx
+condition: { when: 'x', is: 'y', then: { visible: true } }
+```
+
+### Example
+
+<RawComponent source="conditions/set" />
 
 ## Clearing values
 
