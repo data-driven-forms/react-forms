@@ -37,6 +37,7 @@
     }
   },
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.9.0",
     "@khala/commit-analyzer-wildcard": "^2.4.1",
     "@khala/npm-release-monorepo": "^2.4.1",
     "@khala/wildcard-release-notes": "^2.4.1",
