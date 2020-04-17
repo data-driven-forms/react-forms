@@ -49,7 +49,7 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, dat
     });
   }
 
-  const { initialValue, ...cleanProps } = props;
+  const { initialValue, clearOnUnmount, ...cleanProps } = props;
 
   /**
    * construct component props necessary that would live in field provider

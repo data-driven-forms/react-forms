@@ -8,12 +8,24 @@ import { meta, input } from '@data-driven-forms/common/src/prop-types-templates'
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const Textarea = (props) => {
-  const { input, isReadOnly, isDisabled, placeholder, isRequired, label, helperText, description, validateOnMount, meta, ...rest } = useFieldApi(
-    props
-  );
+  const {
+    input,
+    isReadOnly,
+    isDisabled,
+    placeholder,
+    isRequired,
+    label,
+    helperText,
+    description,
+    validateOnMount,
+    meta,
+    FormFieldGridProps,
+    inputProps,
+    ...rest
+  } = useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
   return (
-    <FormFieldGrid>
+    <FormFieldGrid {...FormFieldGridProps}>
       <MuiTextField
         {...input}
         fullWidth
@@ -24,7 +36,8 @@ const Textarea = (props) => {
         placeholder={placeholder}
         required={isRequired}
         inputProps={{
-          readOnly: isReadOnly
+          readOnly: isReadOnly,
+          ...inputProps
         }}
         multiline
         {...rest}
@@ -43,7 +56,14 @@ Textarea.propTypes = {
   label: PropTypes.node,
   helperText: PropTypes.node,
   validateOnMount: PropTypes.bool,
-  description: PropTypes.node
+  description: PropTypes.node,
+  FormFieldGridProps: PropTypes.object,
+  inputProps: PropTypes.object
+};
+
+Textarea.defaultProps = {
+  FormFieldGridProps: {},
+  inputProps: {}
 };
 
 export default Textarea;

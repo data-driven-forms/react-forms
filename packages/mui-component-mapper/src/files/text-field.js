@@ -8,9 +8,20 @@ import { meta, input } from '@data-driven-forms/common/src/prop-types-templates'
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const TextField = (props) => {
-  const { input, isReadOnly, isDisabled, placeholder, isRequired, label, helperText, description, validateOnMount, meta, ...rest } = useFieldApi(
-    props
-  );
+  const {
+    input,
+    isReadOnly,
+    isDisabled,
+    placeholder,
+    isRequired,
+    label,
+    helperText,
+    description,
+    validateOnMount,
+    meta,
+    inputProps,
+    ...rest
+  } = useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
 
   return (
@@ -25,7 +36,8 @@ const TextField = (props) => {
         placeholder={placeholder}
         required={isRequired}
         inputProps={{
-          readOnly: isReadOnly
+          readOnly: isReadOnly,
+          ...inputProps
         }}
         {...rest}
       />
@@ -43,7 +55,8 @@ TextField.propTypes = {
   label: PropTypes.node,
   helperText: PropTypes.node,
   validateOnMount: PropTypes.bool,
-  description: PropTypes.node
+  description: PropTypes.node,
+  inputProps: PropTypes.object
 };
 
 export default TextField;

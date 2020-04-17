@@ -8,7 +8,27 @@ import { validationError } from '../common/helpers';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 export const Switch = (props) => {
-  const { input, isReadOnly, isDisabled, isRequired, label, helperText, description, validateOnMount, meta, onText, offText, ...rest } = useFieldApi({
+  const {
+    input,
+    isReadOnly,
+    isDisabled,
+    isRequired,
+    label,
+    helperText,
+    description,
+    validateOnMount,
+    meta,
+    onText,
+    offText,
+    FormFieldGridProps,
+    FormControlProps,
+    FormGroupProps,
+    FormControlLabelProps,
+    SwitchProps,
+    FormLabelProps,
+    FormHelperTextProps,
+    ...rest
+  } = useFieldApi({
     ...props,
     type: 'checkbox'
   });
@@ -16,9 +36,9 @@ export const Switch = (props) => {
   const text = invalid || helperText || description;
 
   return (
-    <FormFieldGrid>
-      <FormControl required={isRequired} error={!!invalid} component="fieldset">
-        <FormGroup>
+    <FormFieldGrid {...FormFieldGridProps}>
+      <FormControl required={isRequired} error={!!invalid} component="fieldset" {...FormControlProps}>
+        <FormGroup {...FormGroupProps}>
           <FormControlLabel
             control={
               <MUISwitch
@@ -29,9 +49,10 @@ export const Switch = (props) => {
                 onChange={({ target: { checked } }) => input.onChange(checked)}
               />
             }
-            label={<FormLabel>{input.checked ? onText || label : offText || label}</FormLabel>}
+            label={<FormLabel {...FormLabelProps}>{input.checked ? onText || label : offText || label}</FormLabel>}
+            {...FormControlLabelProps}
           />
-          {(invalid || text) && <FormHelperText>{invalid || text}</FormHelperText>}
+          {(invalid || text) && <FormHelperText {...FormHelperTextProps}>{invalid || text}</FormHelperText>}
         </FormGroup>
       </FormControl>
     </FormFieldGrid>
@@ -49,7 +70,24 @@ Switch.propTypes = {
   validateOnMount: PropTypes.bool,
   onText: PropTypes.node,
   offText: PropTypes.node,
-  description: PropTypes.node
+  description: PropTypes.node,
+  FormFieldGridProps: PropTypes.object,
+  FormControlProps: PropTypes.object,
+  FormGroupProps: PropTypes.object,
+  FormControlLabelProps: PropTypes.object,
+  SwitchProps: PropTypes.object,
+  FormLabelProps: PropTypes.object,
+  FormHelperTextProps: PropTypes.object
+};
+
+Switch.defaultProps = {
+  FormFieldGridProps: {},
+  FormControlProps: {},
+  FormGroupProps: {},
+  FormControlLabelProps: {},
+  SwitchProps: {},
+  FormLabelProps: {},
+  FormHelperTextProps: {}
 };
 
 export default Switch;

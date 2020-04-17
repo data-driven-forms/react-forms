@@ -583,4 +583,232 @@ describe('Default schema validator', () => {
       )
     ).toThrowErrorMatchingSnapshot();
   });
+
+  it('should fail validation when sequence is not array', () => {
+    expect(() =>
+      defaultSchemaValidator(
+        {
+          fields: [
+            {
+              component: 'foo',
+              name: 'foo',
+              condition: {
+                sequence: { when: 'x', is: 'y' }
+              }
+            }
+          ]
+        },
+        componentMapper,
+        [],
+        []
+      )
+    ).toThrowErrorMatchingSnapshot();
+  });
+
+  it('should fail validation when sequence is not root condition', () => {
+    expect(() =>
+      defaultSchemaValidator(
+        {
+          fields: [
+            {
+              component: 'foo',
+              name: 'foo',
+              condition: [
+                {
+                  sequence: [{ when: 'x', is: 'y' }]
+                }
+              ]
+            }
+          ]
+        },
+        componentMapper,
+        [],
+        []
+      )
+    ).toThrowErrorMatchingSnapshot();
+  });
+
+  it('should fail validation when then/else is not in root condition', () => {
+    expect(() =>
+      defaultSchemaValidator(
+        {
+          fields: [
+            {
+              component: 'foo',
+              name: 'foo',
+              condition: [
+                {
+                  and: [{ when: 'x', is: 'y', then: { set: { x: 'x' } } }]
+                }
+              ]
+            }
+          ]
+        },
+        componentMapper,
+        [],
+        []
+      )
+    ).toThrowErrorMatchingSnapshot();
+
+    expect(() =>
+      defaultSchemaValidator(
+        {
+          fields: [
+            {
+              component: 'foo',
+              name: 'foo',
+              condition: [
+                {
+                  and: [{ when: 'x', is: 'y', else: { set: { x: 'x' } } }]
+                }
+              ]
+            }
+          ]
+        },
+        componentMapper,
+        [],
+        []
+      )
+    ).toThrowErrorMatchingSnapshot();
+  });
+
+  it('should fail validation when visible is not boolean', () => {
+    expect(() =>
+      defaultSchemaValidator(
+        {
+          fields: [
+            {
+              component: 'foo',
+              name: 'foo',
+              condition: {
+                when: 'x',
+                is: 'x',
+                then: { visible: 'pepa' }
+              }
+            }
+          ]
+        },
+        componentMapper,
+        [],
+        []
+      )
+    ).toThrowErrorMatchingSnapshot();
+
+    expect(() =>
+      defaultSchemaValidator(
+        {
+          fields: [
+            {
+              component: 'foo',
+              name: 'foo',
+              condition: {
+                when: 'x',
+                is: 'x',
+                else: { visible: 'pepa' }
+              }
+            }
+          ]
+        },
+        componentMapper,
+        [],
+        []
+      )
+    ).toThrowErrorMatchingSnapshot();
+  });
+
+  it('should fail validation when set is not object', () => {
+    expect(() =>
+      defaultSchemaValidator(
+        {
+          fields: [
+            {
+              component: 'foo',
+              name: 'foo',
+              condition: {
+                when: 'x',
+                is: 'x',
+                then: { set: 'pepa' }
+              }
+            }
+          ]
+        },
+        componentMapper,
+        [],
+        []
+      )
+    ).toThrowErrorMatchingSnapshot();
+
+    expect(() =>
+      defaultSchemaValidator(
+        {
+          fields: [
+            {
+              component: 'foo',
+              name: 'foo',
+              condition: {
+                when: 'x',
+                is: 'x',
+                then: { set: ['pepa'] }
+              }
+            }
+          ]
+        },
+        componentMapper,
+        [],
+        []
+      )
+    ).toThrowErrorMatchingSnapshot();
+  });
+
+  it('conditional actions - correct variant', () => {
+    expect(() =>
+      defaultSchemaValidator(
+        {
+          fields: [
+            {
+              component: 'foo',
+              name: 'foo',
+              condition: { when: 'Foo', pattern: '^pattern', then: { set: { password: '1234' }, visible: true } }
+            }
+          ]
+        },
+        componentMapper
+      )
+    ).not.toThrow();
+
+    expect(() =>
+      defaultSchemaValidator(
+        {
+          fields: [
+            {
+              component: 'foo',
+              name: 'foo',
+              condition: {
+                sequence: [
+                  { when: 'Foo', pattern: '^pattern', then: { set: { password: '1234' }, visible: true } },
+                  { and: [{ when: 'Foo', pattern: '^pattern' }], else: { visible: true } }
+                ]
+              }
+            }
+          ]
+        },
+        componentMapper
+      )
+    ).not.toThrow();
+
+    expect(() =>
+      defaultSchemaValidator(
+        {
+          fields: [
+            {
+              component: 'foo',
+              name: 'foo',
+              condition: { and: [{ when: 'Foo', pattern: '^pattern' }], else: { visible: true } }
+            }
+          ]
+        },
+        componentMapper
+      )
+    ).not.toThrow();
+  });
 });

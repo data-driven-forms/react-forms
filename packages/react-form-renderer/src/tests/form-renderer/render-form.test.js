@@ -13,10 +13,10 @@ import useFieldApi from '../../files/use-field-api';
 import FieldProvider from '../../files/field-provider';
 
 const TextField = (props) => {
-  const { input, meta } = useFieldApi(props);
+  const { input, meta, ...rest } = useFieldApi(props);
   return (
     <div>
-      <input {...input} />
+      <input {...input} {...rest} />
       {meta.error && <div id="error">{meta.error}</div>}
     </div>
   );
@@ -31,6 +31,7 @@ describe('renderForm function', () => {
         ...props,
         formOptions: {
           renderForm,
+          getState: () => ({ dirty: true }),
           ...props.formOptions
         }
       }}
@@ -1497,5 +1498,35 @@ describe('renderForm function', () => {
         .last()
         .text()
     ).toEqual('standard label');
+  });
+
+  describe('composite mapper component', () => {
+    const schema = {
+      fields: [
+        {
+          component: 'text-field',
+          name: 'props-from-mapper',
+          label: 'Number field',
+          type: 'number'
+        }
+      ]
+    };
+    const wrapper = mount(
+      <FormRenderer
+        FormTemplate={FormTemplate}
+        schema={schema}
+        onSubmit={() => {}}
+        componentMapper={{
+          'text-field': {
+            component: TextField,
+            className: 'composite-class',
+            type: 'text'
+          }
+        }}
+      />
+    );
+    const { className, type } = wrapper.find('input').props();
+    expect(className).toEqual('composite-class');
+    expect(type).toEqual('number');
   });
 });

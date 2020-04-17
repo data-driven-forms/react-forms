@@ -191,25 +191,26 @@ exports[`renderForm function #condition should render condition field only if co
           ]
         }
       >
-        <Condition
-          condition={
-            Array [
-              Object {
-                "is": "x",
-                "when": Array [
-                  "a",
-                  "b",
-                ],
-              },
-              Object {
-                "pattern": /fuzz/,
-                "when": "c",
-              },
-            ]
-          }
-        >
-          <FormSpy />
-        </Condition>
+        <FormSpy>
+          <Component
+            condition={
+              Array [
+                Object {
+                  "is": "x",
+                  "when": Array [
+                    "a",
+                    "b",
+                  ],
+                },
+                Object {
+                  "pattern": /fuzz/,
+                  "when": "c",
+                },
+              ]
+            }
+            values={Object {}}
+          />
+        </FormSpy>
       </FormConditionWrapper>
     </SingleField>
   </ReactFinalForm>
@@ -395,19 +396,20 @@ exports[`renderForm function #condition should render condition field only if on
           }
         }
       >
-        <Condition
-          condition={
-            Object {
-              "is": "x",
-              "when": Array [
-                "a",
-                "b",
-              ],
+        <FormSpy>
+          <Component
+            condition={
+              Object {
+                "is": "x",
+                "when": Array [
+                  "a",
+                  "b",
+                ],
+              }
             }
-          }
-        >
-          <FormSpy />
-        </Condition>
+            values={Object {}}
+          />
+        </FormSpy>
       </FormConditionWrapper>
     </SingleField>
   </ReactFinalForm>

@@ -30,8 +30,14 @@ const validatorMapper = {
     )
 };
 
+// eslint-disable-next-line no-unused-vars
 const asyncValidatorSchema = {
   fields: [
+    {
+      component: 'composite-mapper-field',
+      name: 'composite-field',
+      label: 'Componsite field'
+    },
     {
       component: 'text-field',
       name: 'async-validation-field',
@@ -49,6 +55,44 @@ const asyncValidatorSchema = {
   ]
 };
 
+const conditionLogicDemo = {
+  title: 'Testing Conditions',
+  description: 'Write X in both',
+  fields: [
+    {
+      name: 'text_box_1',
+      label: 'Text Box 1',
+      title: 'Text Box',
+      component: 'text-field',
+      clearOnUnmount: true,
+      condition: {
+        sequence: [
+          { when: 'a', is: 'x', then: { visible: true, set: { password: 'defaultPassword' } }, else: { set: { password: 'no password' } } },
+          { when: 'b', is: 'x', then: { visible: true, set: { text_box_1: 'defaultText' } } }
+        ]
+      }
+    },
+    {
+      name: 'a',
+      label: 'a',
+      title: 'a',
+      component: 'text-field'
+    },
+    {
+      name: 'b',
+      label: 'b',
+      title: 'b',
+      component: 'text-field'
+    },
+    {
+      name: 'password',
+      label: 'password',
+      title: 'password',
+      component: 'text-field'
+    }
+  ]
+};
+
 const App = () => {
   // const [values, setValues] = useState({});
   return (
@@ -57,7 +101,7 @@ const App = () => {
         validatorMapper={validatorMapper}
         componentMapper={componentMapper}
         onSubmit={(values) => console.log(values)}
-        schema={asyncValidatorSchema}
+        schema={conditionLogicDemo}
         FormTemplate={FormTemplate}
         actionMapper={actionMapper}
         schemaValidatorMapper={{
