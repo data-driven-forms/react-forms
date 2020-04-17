@@ -8,6 +8,7 @@ import { memoize } from '../validators/helpers';
 import componentTypes from '../files/component-types';
 import composeValidators from '../files/compose-validators';
 import convertInitialValue from './convert-initial-value';
+import FormSpy from '../files/form-spy';
 
 const assignSpecialType = (componentType) => ([componentTypes.CHECKBOX, componentTypes.RADIO].includes(componentType) ? componentType : undefined);
 
@@ -22,10 +23,21 @@ FormFieldHideWrapper.defaultProps = {
   hideField: false
 };
 
-const FormConditionWrapper = ({ condition, children }) => (condition ? <Condition condition={condition}>{children}</Condition> : children);
+const FormConditionWrapper = ({ condition, children }) =>
+  condition ? (
+    <FormSpy>
+      {({ values }) => (
+        <Condition condition={condition} values={values}>
+          {children}
+        </Condition>
+      )}
+    </FormSpy>
+  ) : (
+    children
+  );
 
 FormConditionWrapper.propTypes = {
-  condition: PropTypes.object,
+  condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   children: childrenPropTypes.isRequired
 };
 
@@ -88,7 +100,7 @@ const SingleField = ({ component, condition, hideField, validate, ...rest }) => 
 
 SingleField.propTypes = {
   component: PropTypes.string.isRequired,
-  condition: PropTypes.object,
+  condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   hideField: PropTypes.bool,
   dataType: PropTypes.string,
   validate: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object])),

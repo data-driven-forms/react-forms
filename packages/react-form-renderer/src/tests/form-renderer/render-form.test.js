@@ -31,6 +31,7 @@ describe('renderForm function', () => {
         ...props,
         formOptions: {
           renderForm,
+          getState: () => ({ dirty: true }),
           ...props.formOptions
         }
       }}

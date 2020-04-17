@@ -117,6 +117,48 @@ exports[`Default schema validator should fail if input object does fields names 
 
 exports[`Default schema validator should fail if input object does not have fields names 1`] = `"Component of type schema must contain \\"fields\\" property of type array, received undefined!"`;
 
+exports[`Default schema validator should fail validation when sequence is not array 1`] = `
+"
+      Error occured in field definition with \\"name\\" property: \\"foo\\".
+      'sequence' property in a field condition must be an array! Received: object.
+    "
+`;
+
+exports[`Default schema validator should fail validation when sequence is not root condition 1`] = `
+"
+      Error occured in field definition with \\"name\\" property: \\"foo\\".
+      'sequence' condition has to be the root condition: \\" condition: { sequence: [ ... ]} \\"
+    "
+`;
+
+exports[`Default schema validator should fail validation when set is not object 1`] = `
+"
+      Error occured in field definition with \\"name\\" property: \\"foo\\".
+      'set' property in action \\"then\\" has to be a object! Received: undefined, isArray: false.
+    "
+`;
+
+exports[`Default schema validator should fail validation when set is not object 2`] = `
+"
+      Error occured in field definition with \\"name\\" property: \\"foo\\".
+      'set' property in action \\"then\\" has to be a object! Received: undefined, isArray: true.
+    "
+`;
+
+exports[`Default schema validator should fail validation when then/else is not in root condition 1`] = `
+"
+      Error occured in field definition with \\"name\\" property: \\"foo\\".
+      'then', 'else' condition keys can be included only in root conditions or in a 'sequence'.
+    "
+`;
+
+exports[`Default schema validator should fail validation when then/else is not in root condition 2`] = `
+"
+      Error occured in field definition with \\"name\\" property: \\"foo\\".
+      'then', 'else' condition keys can be included only in root conditions or in a 'sequence'.
+    "
+`;
+
 exports[`Default schema validator should fail validation when using "and" and "or" conditions 1`] = `
 "
       Error occured in field definition with \\"name\\" property: \\"foo\\".
@@ -149,5 +191,19 @@ exports[`Default schema validator should fail validation when using wrong data t
 "
     Error occured in field definition with name: \\"foo\\".
     Unknow dataType. Data type must be string
+    "
+`;
+
+exports[`Default schema validator should fail validation when visible is not boolean 1`] = `
+"
+      Error occured in field definition with \\"name\\" property: \\"foo\\".
+      'visible' property in action \\"then\\" has to be a boolean value! Received: string.
+    "
+`;
+
+exports[`Default schema validator should fail validation when visible is not boolean 2`] = `
+"
+      Error occured in field definition with \\"name\\" property: \\"foo\\".
+      'visible' property in action \\"else\\" has to be a boolean value! Received: string.
     "
 `;
