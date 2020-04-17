@@ -4,44 +4,25 @@ import { Button } from '@patternfly/react-core';
 import selectNext from '@data-driven-forms/common/src/wizard/select-next';
 import { FormSpy } from '@data-driven-forms/react-form-renderer';
 
-const SimpleNext = ({ nextStep, valid, handleNext, submit, nextLabel, getState }) => (
+const NextButton = ({ nextStep, valid, handleNext, nextLabel, getState, handleSubmit, submitLabel }) => (
   <Button
     variant="primary"
     type="button"
     isDisabled={!valid || getState().validating}
-    onClick={() => (valid ? handleNext(selectNext(nextStep, getState)) : submit())}
+    onClick={() => (nextStep ? handleNext(selectNext(nextStep, getState)) : handleSubmit())}
   >
-    {nextLabel}
+    {nextStep ? nextLabel : submitLabel}
   </Button>
 );
-
-SimpleNext.propTypes = {
-  valid: PropTypes.bool,
-  handleNext: PropTypes.func.isRequired,
-  submit: PropTypes.func.isRequired,
-  nextLabel: PropTypes.string.isRequired,
-  getState: PropTypes.func.isRequired,
-  nextStep: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.func]).isRequired
-};
-
-const SubmitButton = ({ handleSubmit, submitLabel }) => (
-  <Button type="button" variant="primary" onClick={handleSubmit}>
-    {submitLabel}
-  </Button>
-);
-
-SubmitButton.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  submitLabel: PropTypes.node.isRequired
-};
-
-const NextButton = ({ nextStep, handleSubmit, submitLabel, ...rest }) =>
-  nextStep ? <SimpleNext nextStep={nextStep} {...rest} /> : <SubmitButton handleSubmit={handleSubmit} submitLabel={submitLabel} />;
 
 NextButton.propTypes = {
   nextStep: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
   handleSubmit: PropTypes.func.isRequired,
-  submitLabel: PropTypes.string.isRequired
+  submitLabel: PropTypes.string.isRequired,
+  valid: PropTypes.bool,
+  handleNext: PropTypes.func.isRequired,
+  nextLabel: PropTypes.string.isRequired,
+  getState: PropTypes.func.isRequired
 };
 
 const WizardStepButtons = ({
@@ -57,9 +38,6 @@ const WizardStepButtons = ({
   <footer className={`pf-c-wizard__footer ${buttonsClassName ? buttonsClassName : ''}`}>
     {Buttons ? (
       <Buttons
-        ConditionalNext={SimpleNext}
-        SubmitButton={SubmitButton}
-        SimpleNext={SimpleNext}
         disableBack={disableBack}
         handlePrev={handlePrev}
         nextStep={nextStep}

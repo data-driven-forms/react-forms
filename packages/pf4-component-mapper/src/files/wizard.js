@@ -1,4 +1,4 @@
-import React, { cloneElement, useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { FormSpy } from '@data-driven-forms/react-form-renderer';
@@ -72,10 +72,6 @@ const WizardInternal = ({
     return null;
   }
 
-  const step = (
-    <WizardStep {...currentStep} formOptions={formOptions} buttonLabels={buttonLabels} buttonsClassName={buttonsClassName} showTitles={showTitles} />
-  );
-
   return (
     <Modal inModal={inModal} container={state.container}>
       <div
@@ -89,27 +85,33 @@ const WizardInternal = ({
         {title && <WizardHeader title={title} description={description} onClose={formOptions.onCancel} />}
         <div className="pf-c-wizard__outer-wrap">
           <WizardNav>
-            <FormSpy>
-              {({ values }) => (
+            <FormSpy subscription={{ values: true, valid: true, validating: true }}>
+              {({ values, valid, validating }) => (
                 <WizardNavigation
                   navSchema={navSchema}
                   activeStepIndex={activeStepIndex}
-                  formOptions={formOptions}
+                  valid={valid}
                   maxStepIndex={maxStepIndex}
                   jumpToStep={jumpToStep}
                   crossroads={crossroads}
                   isDynamic={isDynamic}
                   values={values}
                   setPrevSteps={setPrevSteps}
+                  validating={validating}
                 />
               )}
             </FormSpy>
           </WizardNav>
-          {cloneElement(step, {
-            handleNext: (nextStep) => handleNext(nextStep),
-            handlePrev,
-            disableBack: activeStepIndex === 0
-          })}
+          <WizardStep
+            {...currentStep}
+            formOptions={formOptions}
+            buttonLabels={buttonLabels}
+            buttonsClassName={buttonsClassName}
+            showTitles={showTitles}
+            handleNext={(nextStep) => handleNext(nextStep)}
+            handlePrev={handlePrev}
+            disableBack={activeStepIndex === 0}
+          />
         </div>
       </div>
     </Modal>
@@ -126,11 +128,6 @@ WizardInternal.propTypes = {
   buttonsClassName: PropTypes.string,
   title: PropTypes.any,
   description: PropTypes.any,
-  fields: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
-    })
-  ).isRequired,
   isCompactNav: PropTypes.bool,
   inModal: PropTypes.bool,
   setFullWidth: PropTypes.bool,
