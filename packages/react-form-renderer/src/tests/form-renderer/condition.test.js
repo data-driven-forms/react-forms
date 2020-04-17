@@ -7,6 +7,8 @@ import componentTypes from '../../../dist/cjs/component-types';
 import useFieldApi from '../../files/use-field-api';
 import FormRenderer from '../../files/form-renderer';
 
+import { reducer } from '../../form-renderer/condition';
+
 const TextField = (props) => {
   const { input } = useFieldApi(props);
   return <input id={input.name} {...input} />;
@@ -304,6 +306,16 @@ describe('condition test', () => {
       'field-2': 'someValue',
       'field-3': 'someValue3',
       'field-5': 'someValuu5'
+    });
+  });
+
+  describe('reducer', () => {
+    it('returns default', () => {
+      const initialState = {
+        a: 'bb'
+      };
+
+      expect(reducer(initialState, { type: 'nonsesne' })).toEqual(initialState);
     });
   });
 });

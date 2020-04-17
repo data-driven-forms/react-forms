@@ -162,7 +162,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               <FormFieldHideWrapper
                 hideField={false}
               >
-                <Component
+                <select
                   name="secret"
                 >
                   <div
@@ -170,7 +170,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                   >
                     Select field
                   </div>
-                </Component>
+                </select>
               </FormFieldHideWrapper>
             </FormConditionWrapper>
           </SingleField>

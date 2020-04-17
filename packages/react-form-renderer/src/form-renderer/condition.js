@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import lodashIsEmpty from 'lodash/isEmpty';
 import get from 'lodash/get';
@@ -87,27 +87,47 @@ export const parseCondition = (condition, values) => {
   return negativeResult;
 };
 
+export const reducer = (state, { type, sets }) => {
+  switch (type) {
+    case 'formResetted':
+      return {
+        ...state,
+        initial: true
+      };
+    case 'rememberSets':
+      return {
+        ...state,
+        initial: false,
+        sets
+      };
+    default:
+      return state;
+  }
+};
+
 const Condition = React.memo(
   ({ condition, children, values }) => {
     const formOptions = useFormApi();
     const dirty = formOptions.getState().dirty;
 
-    const [lastSets, setSets] = React.useState([]);
-    const [initial, setInitial] = React.useState(true);
+    const [state, dispatch] = useReducer(reducer, {
+      sets: [],
+      initial: true
+    });
 
     const conditionResult = parseCondition(condition, values, formOptions);
     const setters = conditionResult.set ? [conditionResult.set] : conditionResult.sets;
 
     useEffect(() => {
       if (!dirty) {
-        setInitial(true);
+        dispatch({ type: 'formResetted' });
       }
     }, [dirty]);
 
     useEffect(() => {
-      if (setters && setters.length > 0 && (initial || !isEqual(setters, lastSets))) {
+      if (setters && setters.length > 0 && (state.initial || !isEqual(setters, state.sets))) {
         setters.forEach((setter, index) => {
-          if (setter && (initial || !isEqual(setter, lastSets[index]))) {
+          if (setter && (state.initial || !isEqual(setter, state.sets[index]))) {
             setTimeout(() => {
               formOptions.batch(() => {
                 Object.entries(setter).forEach(([name, value]) => {
@@ -117,10 +137,9 @@ const Condition = React.memo(
             });
           }
         });
-        setSets(setters);
-        setInitial(false);
+        dispatch({ type: 'rememberSets', sets: setters });
       }
-    }, [setters, initial]);
+    }, [setters, state.initial]);
 
     return conditionResult.visible ? children : null;
   },

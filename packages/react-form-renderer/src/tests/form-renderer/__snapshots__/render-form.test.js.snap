@@ -451,7 +451,7 @@ exports[`renderForm function should render single field from defined componentTy
         <FormFieldHideWrapper
           hideField={false}
         >
-          <Component
+          <text-field
             name="foo"
           >
             <div
@@ -459,7 +459,7 @@ exports[`renderForm function should render single field from defined componentTy
             >
               TextField
             </div>
-          </Component>
+          </text-field>
         </FormFieldHideWrapper>
       </FormConditionWrapper>
     </SingleField>
