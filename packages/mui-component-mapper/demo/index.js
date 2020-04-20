@@ -27,6 +27,22 @@ const compositeMapper = {
 }
   
 
+const schema = {
+    fields: [{
+        component: 'switch',
+        name: 'foo',
+        label: 'Foo'
+    }, {
+        component: 'text-field',
+        name: 'bar',
+        label: 'bar',
+        condition: {
+            when: 'foo',
+            is: true
+        }
+    }]
+}
+
 const App = () => (
     <ThemeProvider theme={ theme }>
         <Grid 
@@ -43,7 +59,7 @@ const App = () => (
                     onSubmit={console.log}
                     componentMapper={compositeMapper}
                     FormTemplate={props => <FormTemplate {...props} />}
-                    schema={demoSchema}
+                    schema={schema}
                     onCancel={() => console.log('canceling')}
                 />
             </Grid>
