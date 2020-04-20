@@ -29,6 +29,12 @@ Set up your renderer to make it easier to test the component specific features. 
 
 <CodeExample source="tests/custom-component-with-renderer.test" />
 
+### Outside renderer
+
+Rendering components outside of the renderer will require some additional set up which is not traditionally used when using form renderer and require some additional knowledge of the library. Most notably, you need to wrap the component inside the `Form` component and `RendererContext`. No functinality provided by the renderer like validations or conditions will be provided so it must be configured.
+
+<CodeExample source="tests/custom-component-outside-renderer.test" />
+
 </Grid>
 <Grid item xs={false} md={2}>
   <ListOfContents file="testing" />
