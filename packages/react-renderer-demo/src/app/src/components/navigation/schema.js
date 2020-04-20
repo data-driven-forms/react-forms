@@ -20,6 +20,10 @@ const schema = [
     fields: [...baseExamples.sort((a, b) => a.linkText.localeCompare(b.linkText))]
   },
   {
+    linkText: 'Testing',
+    link: 'testing'
+  },
+  {
     linkText: 'Releases',
     link: 'releases'
   },
