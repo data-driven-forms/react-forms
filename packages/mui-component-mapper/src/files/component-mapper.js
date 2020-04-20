@@ -11,6 +11,7 @@ import PlainText from './plain-text';
 import Select from './select';
 import Radio from './radio';
 import Wizard from './wizard';
+import FieldArray from './field-array';
 
 export const components = {
   TextField,
@@ -38,7 +39,8 @@ const componentMapper = {
   [componentTypes.TIME_PICKER]: TimePicker,
   [componentTypes.SWITCH]: Switch,
   [componentTypes.PLAIN_TEXT]: PlainText,
-  [componentTypes.WIZARD]: Wizard
+  [componentTypes.WIZARD]: Wizard,
+  [componentTypes.FIELD_ARRAY]: FieldArray
 };
 
 export default componentMapper;
