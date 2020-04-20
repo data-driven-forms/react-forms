@@ -19,6 +19,16 @@ Bellow is an example of a form with a async validation and a conditional field. 
 
 <CodeExample source="tests/form-renderer.test" />
 
+## Testing custom components
+
+Components that are using `useFieldApi` or `useFormApi` must be children of contexts. Therefore they must be wrapped inside these contexts when testing. The simplest way to test them, is just rendering them with the FormRenderer, but there may be cases when that is not possible. We will show you both options.
+
+### With renderer
+
+Set up your renderer to make it easier to test the component specific features. Use initial values to trigger falsey validation results to avoid unnecessary changes simlation.
+
+<CodeExample source="tests/custom-component-with-renderer.test" />
+
 </Grid>
 <Grid item xs={false} md={2}>
   <ListOfContents file="testing" />

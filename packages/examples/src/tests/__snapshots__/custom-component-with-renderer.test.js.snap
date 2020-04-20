@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CustomComponent /> with renderer should render component in error state to snapshot 1`] = `
+<CustomComponent
+  label="Custom label"
+  name="custom-component"
+  sideEffect={[Function]}
+  validate={[Function]}
+>
+  <div
+    className="input-wrapper"
+  >
+    <label
+      className="input-label"
+    >
+      Custom label
+    </label>
+    <input
+      name="custom-component"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      value=""
+    />
+    <div
+      className="custom-error-block"
+    >
+      <span>
+        Required
+      </span>
+    </div>
+  </div>
+</CustomComponent>
+`;
+
+exports[`<CustomComponent /> with renderer should render component to snapshot 1`] = `
+<CustomComponent
+  label="Custom label"
+  name="custom-component"
+  sideEffect={[Function]}
+  validate={[Function]}
+>
+  <div
+    className="input-wrapper"
+  >
+    <label
+      className="input-label"
+    >
+      Custom label
+    </label>
+    <input
+      name="custom-component"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      value=""
+    />
+  </div>
+</CustomComponent>
+`;
