@@ -65,19 +65,13 @@ EXACT_LENGTH: ({threshold})
 ```
 
 
-# PF4 implementation
+# Implementation
 
-PF4 component mapper provides an experimental implementation of PF4 field arrays.
+PF4 and MUI component mapper provides an experimental implementation of field arrays.
 
-|Prop|Type|Description|
-|:---|:--:|----------:|
-|label|`node`|Label of the array.|
-|description|`node`|Description of the array.|
-|fields|`array`|A group of fields, which are being added to the array.|
-|defaultItem|`any`|Default item which is inserted into a newly created fields group. If you have nested names, don't forget you need to insert an object!|
-|minItems|`number`|Remove button is disabled, if the length of the array is equal or smaller.|
-|maxItems|`number`|Add button is disabled, if the length of the array is equal or bigger.|
-|noItemsMessage|`node`|A message which is shown, when there are no items in the array.|
+[PF4 Field Array](/component-example/field-array?mapper=pf4)
+
+[MUI Field Array](/component-example/field-array?mapper=mui)
 
 <RawComponent source="field-array/pf4-demo" />
 
