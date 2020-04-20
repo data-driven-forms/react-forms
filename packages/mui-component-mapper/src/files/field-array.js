@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { useFormApi, FieldArray } from '@data-driven-forms/react-form-renderer';
 
@@ -8,6 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import { makeStyles } from '@material-ui/core/styles';
+import RedoIcon from '@material-ui/icons/Redo';
+import UndoIcon from '@material-ui/icons/Undo';
+import IconButton from '@material-ui/core/IconButton';
 
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
@@ -77,6 +80,38 @@ const defaultButtonLabels = {
   remove: 'REMOVE'
 };
 
+const initialState = {
+  index: 0,
+  history: []
+};
+
+export const reducer = (state, { type, action }) => {
+  switch (type) {
+    case 'redo':
+      return {
+        ...state,
+        index: state.index + 1
+      };
+    case 'action':
+      return {
+        index: state.index + 1,
+        history: [...state.history.slice(0, state.index), action]
+      };
+    case 'undo':
+      return {
+        ...state,
+        index: state.index - 1
+      };
+    case 'resetHistory':
+      return {
+        ...state,
+        history: state.history.slice(0, state.index)
+      };
+    default:
+      return state;
+  }
+};
+
 const DynamicArray = ({ ...props }) => {
   const {
     arrayValidator,
@@ -93,6 +128,7 @@ const DynamicArray = ({ ...props }) => {
     buttonLabels,
     ...rest
   } = useFieldApi(props);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const combinedButtonLabels = {
     ...defaultButtonLabels,
@@ -108,51 +144,80 @@ const DynamicArray = ({ ...props }) => {
     <FormFieldGrid {...FormFieldGridProps} className={clsx(classes.fieldArrayGroup, FormFieldGridProps.classname)}>
       <FormControl component="fieldset" error={isError} {...FormControlProps} className={clsx(classes.formControl, FormControlProps.className)}>
         <FieldArray key={rest.input.name} name={rest.input.name} validate={arrayValidator}>
-          {({ fields: { map, value = [], push, remove } }) => (
-            <Grid container spacing={3}>
-              {label && (
+          {({ fields: { map, value = [], push, remove } }) => {
+            const pushWrapper = () => {
+              dispatch({ type: 'resetHistory' });
+              push(defaultItem);
+            };
+
+            const removeWrapper = (index) => {
+              dispatch({ type: 'action', action: { action: 'remove', value: value[index] } });
+              remove(index);
+            };
+
+            const undo = () => {
+              push(state.history[state.index - 1].value);
+
+              dispatch({ type: 'undo' });
+            };
+
+            const redo = () => {
+              remove(value.length - 1);
+
+              dispatch({ type: 'redo' });
+            };
+
+            return (
+              <Grid container spacing={3}>
                 <Grid item xs={12} className={classes.header}>
-                  <Typography variant="h6" className={classes.label}>
-                    {label}
-                  </Typography>
-                  <Button color="primary" onClick={() => push(defaultItem)} disabled={value.length >= maxItems}>
+                  {label && (
+                    <Typography variant="h6" className={classes.label}>
+                      {label}
+                    </Typography>
+                  )}
+                  <IconButton color="primary" aria-label="undo" component="span" disabled={state.index === 0} onClick={undo}>
+                    <UndoIcon />
+                  </IconButton>
+                  <IconButton color="primary" aria-label="redo" component="span" disabled={state.index === state.history.length} onClick={redo}>
+                    <RedoIcon />
+                  </IconButton>
+                  <Button color="primary" onClick={pushWrapper} disabled={value.length >= maxItems}>
                     {combinedButtonLabels.add}
                   </Button>
                 </Grid>
-              )}
-              {description && (
+                {description && (
+                  <Grid item xs={12}>
+                    <Typography variant="subtitle1">{description}</Typography>
+                  </Grid>
+                )}
                 <Grid item xs={12}>
-                  <Typography variant="subtitle1">{description}</Typography>
+                  {value.length <= 0 ? (
+                    <Typography variant="body1" gutterBottom className={classes.centerText}>
+                      {noItemsMessage}
+                    </Typography>
+                  ) : (
+                    map((name, index) => (
+                      <ArrayItem
+                        key={`${name}-${index}`}
+                        fields={formFields}
+                        name={name}
+                        fieldIndex={index}
+                        remove={removeWrapper}
+                        length={value.length}
+                        minItems={minItems}
+                        removeLabel={combinedButtonLabels.remove}
+                      />
+                    ))
+                  )}
                 </Grid>
-              )}
-              {value.length <= 0 && (
-                <Grid item xs={12}>
-                  <Typography variant="body1" gutterBottom className={classes.centerText}>
-                    {noItemsMessage}
-                  </Typography>
-                </Grid>
-              )}
-              <Grid item xs={12}>
-                {map((name, index) => (
-                  <ArrayItem
-                    key={`${name}-${index}`}
-                    fields={formFields}
-                    name={name}
-                    fieldIndex={index}
-                    remove={remove}
-                    length={value.length}
-                    minItems={minItems}
-                    removeLabel={combinedButtonLabels.remove}
-                  />
-                ))}
                 {isError && (
                   <Grid item xs={12}>
                     <FormHelperText>{error}</FormHelperText>
                   </Grid>
                 )}
               </Grid>
-            </Grid>
-          )}
+            );
+          }}
         </FieldArray>
       </FormControl>
     </FormFieldGrid>

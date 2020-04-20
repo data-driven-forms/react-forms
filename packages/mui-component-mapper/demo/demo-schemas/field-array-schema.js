@@ -7,7 +7,7 @@ const arraySchemaDDF = {
       fieldKey: 'field_array',
       label: 'Nice people',
       description: 'This allow you to add nice people to the list dynamically',
-      itemDefault: { name: 'enter a name', lastName: 'enter a last name' },
+      defaultItem: { name: 'enter a name', lastName: 'enter a last name' },
       fields: [
         {
           component: 'text-field',
