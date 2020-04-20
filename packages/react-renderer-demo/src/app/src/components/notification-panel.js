@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Popper from '@material-ui/core/Popper';
 import Grow from '@material-ui/core/Grow';
@@ -21,22 +21,6 @@ const options = {
   }
 };
 
-const messageList = [
-  {
-    id: '1',
-    date: 'April 8 2020',
-    title: 'Version 2 released',
-    text: `Version 2 of Data Driven Forms has been released.<br /><br />
-    Check what is new in [migration guide](/migration-guide)!<br /><br />
-    If you need documenation for version 1, please use v1 [branch on GitHub](https://github.com/data-driven-forms/react-forms/tree/v1/packages/react-renderer-demo/src/app/pages)
-    or visit our [backup link](https://pokus-next.firebaseapp.com/)!
-    `
-  }
-];
-
-export const lastMessageId = messageList[0].id;
-export const oldestMessageId = messageList[messageList.length - 1].id - 1;
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     transformOrigin: 'top right'
@@ -52,8 +36,26 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const NotificationPanel = ({ isOpen, onClose, anchorRef }) => {
+const getNotifications = () => {
+  const query = `?orderBy="expired-at"&startAt="${new Date().toISOString()}"&limitToFirst=10`;
+  return fetch(`https://data-driven-forms.firebaseio.com/notifications.json${query}`)
+    .then((data) => data.json())
+    .then((data) => data || []);
+};
+
+const createNotificationId = (notification) => `${notification['created-at']}-${notification['expired-at']}`;
+
+const NotificationPanel = ({ isOpen, onClose, anchorRef, setNewMessages }) => {
   const classes = useStyles();
+  const [notifications, setNotifications] = useState([]);
+  useEffect(() => {
+    getNotifications().then((data = []) => {
+      const lastSeen = JSON.parse(localStorage.getItem('data-driven-forms-last-seen') || '[]');
+      setNewMessages(data.filter((notification) => !lastSeen.includes(createNotificationId(notification))).length);
+      localStorage.setItem('data-driven-forms-last-seen', JSON.stringify(data.map(createNotificationId)));
+      setNotifications(data);
+    });
+  }, [setNewMessages]);
 
   return (
     <Popper id="notifications-popup" open={isOpen} anchorEl={anchorRef.current} placement="bottom-end" transition disablePortal role={undefined}>
@@ -62,17 +64,17 @@ const NotificationPanel = ({ isOpen, onClose, anchorRef }) => {
           <Grow in={isOpen} {...TransitionProps}>
             <Paper className={classes.paper}>
               <List className={classes.list}>
-                {messageList.map((message, index) => (
-                  <React.Fragment key={message.id}>
+                {notifications.map((message, index) => (
+                  <React.Fragment key={index}>
                     <ListItem alignItems="flex-start" className={classes.listItem}>
-                      {message.date && <ListItemText secondary={message.date} />}
+                      {message['created-at'] && <ListItemText secondary={new Date(message['created-at']).toDateString()} />}
                       <ListItemText
                         primary={message.title}
-                        secondary={<Markdown options={options}>{message.text}</Markdown>}
+                        secondary={<Markdown options={options}>{message.content}</Markdown>}
                         secondaryTypographyProps={{ color: 'textPrimary', component: 'div' }}
                       />
                     </ListItem>
-                    {index < messageList.length - 1 ? <Divider variant="middle" /> : null}
+                    {index < notifications.length - 1 ? <Divider variant="middle" /> : null}
                   </React.Fragment>
                 ))}
               </List>
@@ -87,6 +89,7 @@ const NotificationPanel = ({ isOpen, onClose, anchorRef }) => {
 NotificationPanel.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  setNewMessages: PropTypes.func.isRequired,
   anchorRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.any })]).isRequired
 };
 
