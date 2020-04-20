@@ -413,6 +413,27 @@ describe('<Wizard />', () => {
     expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
   });
 
+  it('should not fail when click on the first step', async () => {
+    await act(async () => {
+      wrapper = mount(<FormRenderer {...initialProps} />);
+    });
+    wrapper.update();
+
+    expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
+
+    // click on first nav link
+    await act(async () => {
+      wrapper
+        .find('.pf-c-wizard__nav-item')
+        .first()
+        .childAt(0)
+        .simulate('click');
+    });
+    wrapper.update();
+
+    expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
+  });
+
   it('should build simple navigation with substeps', () => {
     schema = {
       fields: [
