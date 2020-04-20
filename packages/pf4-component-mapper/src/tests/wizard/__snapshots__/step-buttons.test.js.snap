@@ -41,53 +41,51 @@ exports[`<WizardSTepButtons should add custom className to toolbar 1`] = `
             submitLabel="Submit"
             valid={true}
           >
-            <SubmitButton
-              handleSubmit={[MockFunction]}
-              submitLabel="Submit"
+            <Component
+              isDisabled={false}
+              onClick={[Function]}
+              type="button"
+              variant="primary"
             >
-              <Component
-                onClick={[MockFunction]}
-                type="button"
-                variant="primary"
+              <ComponentWithOuia
+                component={[Function]}
+                componentProps={
+                  Object {
+                    "children": "Submit",
+                    "isDisabled": false,
+                    "onClick": [Function],
+                    "type": "button",
+                    "variant": "primary",
+                  }
+                }
+                consumerContext={null}
               >
-                <ComponentWithOuia
-                  component={[Function]}
-                  componentProps={
+                <Button
+                  isDisabled={false}
+                  onClick={[Function]}
+                  ouiaContext={
                     Object {
-                      "children": "Submit",
-                      "onClick": [MockFunction],
-                      "type": "button",
-                      "variant": "primary",
+                      "isOuia": false,
+                      "ouiaId": null,
                     }
                   }
-                  consumerContext={null}
+                  type="button"
+                  variant="primary"
                 >
-                  <Button
-                    onClick={[MockFunction]}
-                    ouiaContext={
-                      Object {
-                        "isOuia": false,
-                        "ouiaId": null,
-                      }
-                    }
+                  <button
+                    aria-disabled={null}
+                    aria-label={null}
+                    className="pf-c-button pf-m-primary"
+                    disabled={false}
+                    onClick={[Function]}
+                    tabIndex={null}
                     type="button"
-                    variant="primary"
                   >
-                    <button
-                      aria-disabled={null}
-                      aria-label={null}
-                      className="pf-c-button pf-m-primary"
-                      disabled={false}
-                      onClick={[MockFunction]}
-                      tabIndex={null}
-                      type="button"
-                    >
-                      Submit
-                    </button>
-                  </Button>
-                </ComponentWithOuia>
-              </Component>
-            </SubmitButton>
+                    Submit
+                  </button>
+                </Button>
+              </ComponentWithOuia>
+            </Component>
           </NextButton>
           <Component
             onClick={[MockFunction]}
@@ -221,53 +219,51 @@ exports[`<WizardSTepButtons should render correctly 1`] = `
             submitLabel="Submit"
             valid={true}
           >
-            <SubmitButton
-              handleSubmit={[MockFunction]}
-              submitLabel="Submit"
+            <Component
+              isDisabled={false}
+              onClick={[Function]}
+              type="button"
+              variant="primary"
             >
-              <Component
-                onClick={[MockFunction]}
-                type="button"
-                variant="primary"
+              <ComponentWithOuia
+                component={[Function]}
+                componentProps={
+                  Object {
+                    "children": "Submit",
+                    "isDisabled": false,
+                    "onClick": [Function],
+                    "type": "button",
+                    "variant": "primary",
+                  }
+                }
+                consumerContext={null}
               >
-                <ComponentWithOuia
-                  component={[Function]}
-                  componentProps={
+                <Button
+                  isDisabled={false}
+                  onClick={[Function]}
+                  ouiaContext={
                     Object {
-                      "children": "Submit",
-                      "onClick": [MockFunction],
-                      "type": "button",
-                      "variant": "primary",
+                      "isOuia": false,
+                      "ouiaId": null,
                     }
                   }
-                  consumerContext={null}
+                  type="button"
+                  variant="primary"
                 >
-                  <Button
-                    onClick={[MockFunction]}
-                    ouiaContext={
-                      Object {
-                        "isOuia": false,
-                        "ouiaId": null,
-                      }
-                    }
+                  <button
+                    aria-disabled={null}
+                    aria-label={null}
+                    className="pf-c-button pf-m-primary"
+                    disabled={false}
+                    onClick={[Function]}
+                    tabIndex={null}
                     type="button"
-                    variant="primary"
                   >
-                    <button
-                      aria-disabled={null}
-                      aria-label={null}
-                      className="pf-c-button pf-m-primary"
-                      disabled={false}
-                      onClick={[MockFunction]}
-                      tabIndex={null}
-                      type="button"
-                    >
-                      Submit
-                    </button>
-                  </Button>
-                </ComponentWithOuia>
-              </Component>
-            </SubmitButton>
+                    Submit
+                  </button>
+                </Button>
+              </ComponentWithOuia>
+            </Component>
           </NextButton>
           <Component
             onClick={[MockFunction]}

@@ -43,6 +43,8 @@ ValidateButtons.propTypes = {
   renderNextButton: PropTypes.func.isRequired
 };
 
+const asyncValidator = () => new Promise((res) => setTimeout(() => res(), 1000));
+
 export const wizardSchema = {
   fields: [
     {
@@ -70,7 +72,8 @@ export const wizardSchema = {
               component: componentTypes.TEXTAREA,
               name: 'source.source-name',
               type: 'text',
-              label: 'Source name'
+              label: 'Source name',
+              validate: [asyncValidator]
             },
             {
               component: componentTypes.SELECT,

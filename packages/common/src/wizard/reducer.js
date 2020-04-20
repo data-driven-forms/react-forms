@@ -65,6 +65,10 @@ const handleNext = (state, nextStep, formOptions, fields) => {
 export const findCurrentStep = (activeStep, fields) => fields.find(({ name }) => name === activeStep);
 
 const jumpToStep = (state, index, valid, fields, crossroads, formOptions) => {
+  if (index === state.activeStepIndex) {
+    return state;
+  }
+
   const clickOnPreviousStep = state.prevSteps[index];
 
   if (clickOnPreviousStep) {

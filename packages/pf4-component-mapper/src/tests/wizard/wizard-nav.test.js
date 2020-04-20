@@ -13,7 +13,8 @@ describe('WizardNav', () => {
   it('WizardNavigationClass rerender nav schema only when values are changed', () => {
     const initialProps = {
       activeStepIndex: 0,
-      formOptions: { valid: true },
+      valid: true,
+      validating: true,
       maxStepIndex: 0,
       jumpToStep: jest.fn(),
       navSchema: [{ title: 'step' }],

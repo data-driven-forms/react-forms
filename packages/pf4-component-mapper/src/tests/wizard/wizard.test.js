@@ -2,11 +2,13 @@ import React from 'react';
 import { mount } from 'enzyme';
 import toJSon from 'enzyme-to-json';
 import { TextInput, Button } from '@patternfly/react-core';
+import { act } from 'react-dom/test-utils';
 
 import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import * as enterHandle from '@data-driven-forms/common/src/wizard/enter-handler';
 
 import { componentMapper, FormTemplate } from '../../index';
+import reducer from '../../files/wizard/reducer';
 
 describe('<Wizard />', () => {
   let initialProps;
@@ -17,6 +19,7 @@ describe('<Wizard />', () => {
   let Title;
   let Description;
   let initialValuesNestedSchema;
+  let wrapper;
 
   const nextButtonClick = (wrapper) => {
     wrapper
@@ -410,6 +413,27 @@ describe('<Wizard />', () => {
     expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
   });
 
+  it('should not fail when click on the first step', async () => {
+    await act(async () => {
+      wrapper = mount(<FormRenderer {...initialProps} />);
+    });
+    wrapper.update();
+
+    expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
+
+    // click on first nav link
+    await act(async () => {
+      wrapper
+        .find('.pf-c-wizard__nav-item')
+        .first()
+        .childAt(0)
+        .simulate('click');
+    });
+    wrapper.update();
+
+    expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
+  });
+
   it('should build simple navigation with substeps', () => {
     schema = {
       fields: [
@@ -616,7 +640,6 @@ describe('<Wizard />', () => {
           fields: [
             {
               title: 'foo-step',
-              stepKey: '1',
               name: 'foo',
               fields: [
                 {
@@ -625,10 +648,9 @@ describe('<Wizard />', () => {
                   validate: [asyncValidator]
                 }
               ],
-              nextStep: '2'
+              nextStep: 'ba'
             },
             {
-              stepKey: '2',
               title: 'bar-step',
               name: 'bar',
               fields: [
@@ -662,6 +684,103 @@ describe('<Wizard />', () => {
       ).toEqual(false);
       done();
     }, 100);
+  });
+
+  it('should disabled navigation when validating', async () => {
+    jest.useFakeTimers();
+
+    const asyncValidator = () => new Promise((res) => setTimeout(() => res(), 100));
+
+    schema = {
+      fields: [
+        {
+          name: 'wizard',
+          component: 'wizard',
+          fields: [
+            {
+              title: 'foo-step',
+              name: 'foo',
+              fields: [
+                {
+                  name: 'foo-field',
+                  component: 'text-field',
+                  validate: [asyncValidator]
+                }
+              ],
+              nextStep: 'bar'
+            },
+            {
+              title: 'bar-step',
+              name: 'bar',
+              fields: [
+                {
+                  name: 'bar-field',
+                  component: 'text-field'
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+
+    await act(async () => {
+      wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+      jest.advanceTimersByTime(100);
+    });
+    wrapper.update();
+
+    await act(async () => {
+      wrapper
+        .find(Button)
+        .first()
+        .simulate('click');
+      jest.advanceTimersByTime(100);
+    });
+    wrapper.update();
+
+    expect(
+      wrapper
+        .find('.pf-c-wizard__nav-item')
+        .last()
+        .childAt(0)
+        .prop('aria-disabled')
+    ).toEqual(false);
+
+    await act(async () => {
+      wrapper
+        .find(Button)
+        .at(1)
+        .simulate('click');
+    });
+    wrapper.update();
+
+    await act(async () => {
+      wrapper.find('input').instance().value = 'asdsa';
+      wrapper.find('input').simulate('change');
+    });
+    wrapper.update();
+
+    expect(
+      wrapper
+        .find('.pf-c-wizard__nav-item')
+        .last()
+        .childAt(0)
+        .prop('aria-disabled')
+    ).toEqual(true);
+
+    await act(async () => {
+      jest.advanceTimersByTime(100);
+    });
+    wrapper.update();
+
+    expect(
+      wrapper
+        .find('.pf-c-wizard__nav-item')
+        .last()
+        .childAt(0)
+        .prop('aria-disabled')
+    ).toEqual(false);
   });
 
   it('should disable steps when invalid', () => {
@@ -1532,6 +1651,13 @@ describe('<Wizard />', () => {
           .at(1)
           .props().isDisabled
       ).toEqual(true);
+    });
+  });
+
+  describe('reducer', () => {
+    it('returns default', () => {
+      const initialState = { aa: 'aa' };
+      expect(reducer(initialState, { type: 'nonsense' })).toEqual(initialState);
     });
   });
 });
