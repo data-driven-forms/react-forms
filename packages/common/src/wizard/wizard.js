@@ -8,7 +8,7 @@ import flattenDeep from 'lodash/flattenDeep';
 import handleEnter from './enter-handler';
 import reducer, { DYNAMIC_WIZARD_TYPES, findCurrentStep } from './reducer';
 
-const Wizard = ({ fields, isDynamic, crossroads, Wizard, ...props }) => {
+const Wizard = ({ fields, isDynamic, crossroads, Wizard, component, ...props }) => {
   const formOptions = useFormApi();
 
   const [state, dispatch] = useReducer(reducer, {
@@ -94,7 +94,8 @@ Wizard.propTypes = {
   ).isRequired,
   isDynamic: PropTypes.bool,
   crossroads: PropTypes.arrayOf(PropTypes.string),
-  Wizard: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+  Wizard: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  component: PropTypes.any
 };
 
 export default Wizard;

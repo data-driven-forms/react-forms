@@ -347,6 +347,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                   >
                     <WizardFunction
                       buttonLabels={Object {}}
+                      component="wizard"
                       fields={
                         Array [
                           Object {
@@ -384,6 +385,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                             "submit": "Submit",
                           }
                         }
+                        component="wizard"
                         fields={
                           Array [
                             Object {
@@ -714,6 +716,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                 hideField={false}
                                               >
                                                 <TextField
+                                                  component="text-field"
                                                   name="foo-field"
                                                 >
                                                   <FormGroup
@@ -1418,6 +1421,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                   >
                     <WizardFunction
                       buttonLabels={Object {}}
+                      component="wizard"
                       fields={
                         Array [
                           Object {
@@ -1456,6 +1460,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                             "submit": "Submit",
                           }
                         }
+                        component="wizard"
                         fields={
                           Array [
                             Object {
@@ -2003,6 +2008,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                           hideField={false}
                                                         >
                                                           <TextField
+                                                            component="text-field"
                                                             name="foo-field"
                                                           >
                                                             <FormGroup

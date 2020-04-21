@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
-const SubForm = ({ fields, title, description, ...rest }) => {
+const SubForm = ({ fields, title, description, component, ...rest }) => {
   const formOptions = useFormApi();
   return (
     <div {...rest}>
@@ -16,7 +16,8 @@ const SubForm = ({ fields, title, description, ...rest }) => {
 SubForm.propTypes = {
   fields: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
   title: PropTypes.string,
-  description: PropTypes.string
+  description: PropTypes.string,
+  component: PropTypes.any
 };
 
 export default SubForm;

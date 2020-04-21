@@ -4,7 +4,7 @@ import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
 import { Title, Grid, GridItem, TextContent, Text, TextVariants } from '@patternfly/react-core';
 
-const SubForm = ({ fields, title, description, validate: _validate, ...rest }) => {
+const SubForm = ({ fields, title, description, validate: _validate, component, ...rest }) => {
   const formOptions = useFormApi();
 
   return (
@@ -33,7 +33,8 @@ SubForm.propTypes = {
   name: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
-  validate: PropTypes.any
+  validate: PropTypes.any,
+  component: PropTypes.any
 };
 
 export default SubForm;

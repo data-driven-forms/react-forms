@@ -273,6 +273,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                       hideField={false}
                     >
                       <WizardFinal
+                        component="wizard"
                         fields={
                           Array [
                             Object {
@@ -292,6 +293,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                       >
                         <Wizard
                           Wizard={[Function]}
+                          component="wizard"
                           fields={
                             Array [
                               Object {
@@ -1044,6 +1046,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                       hideField={false}
                     >
                       <WizardFinal
+                        component="wizard"
                         fields={
                           Array [
                             Object {
@@ -1068,6 +1071,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                       >
                         <Wizard
                           Wizard={[Function]}
+                          component="wizard"
                           fields={
                             Array [
                               Object {
@@ -1927,6 +1931,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                       hideField={false}
                     >
                       <WizardFinal
+                        component="wizard"
                         fields={
                           Array [
                             Object {
@@ -1956,6 +1961,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                       >
                         <Wizard
                           Wizard={[Function]}
+                          component="wizard"
                           fields={
                             Array [
                               Object {
@@ -2790,6 +2796,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                       hideField={false}
                     >
                       <WizardFinal
+                        component="wizard"
                         fields={
                           Array [
                             Object {
@@ -2810,6 +2817,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                       >
                         <Wizard
                           Wizard={[Function]}
+                          component="wizard"
                           fields={
                             Array [
                               Object {

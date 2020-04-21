@@ -135,6 +135,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 hideField={false}
               >
                 <TextField
+                  component="text-field"
                   name="component1"
                 >
                   <div
@@ -163,6 +164,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 hideField={false}
               >
                 <Component
+                  component="select"
                   name="secret"
                 >
                   <div
@@ -354,6 +356,7 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                 hideField={false}
               >
                 <TextField
+                  component="text-field"
                   label="Visible"
                   name="visible"
                 >
@@ -388,6 +391,7 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                   hidden={true}
                 >
                   <TextField
+                    component="text-field"
                     label="Hidden"
                     name="hidden"
                   >

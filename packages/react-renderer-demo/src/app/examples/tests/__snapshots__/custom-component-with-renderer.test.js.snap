@@ -2,10 +2,17 @@
 
 exports[`<CustomComponent /> with renderer should render component in error state to snapshot 1`] = `
 <CustomComponent
+  component="custom-component"
   label="Custom label"
   name="custom-component"
   sideEffect={[Function]}
-  validate={[Function]}
+  validate={
+    Array [
+      Object {
+        "type": "required",
+      },
+    ]
+  }
 >
   <div
     className="input-wrapper"
@@ -35,10 +42,11 @@ exports[`<CustomComponent /> with renderer should render component in error stat
 
 exports[`<CustomComponent /> with renderer should render component to snapshot 1`] = `
 <CustomComponent
+  component="custom-component"
   label="Custom label"
   name="custom-component"
   sideEffect={[Function]}
-  validate={[Function]}
+  validate={Array []}
 >
   <div
     className="input-wrapper"

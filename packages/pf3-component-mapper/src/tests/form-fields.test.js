@@ -37,7 +37,6 @@ describe('FormFields', () => {
           value: ''
         },
         id: 'someIdKey',
-        dataType: 'someDataType',
         meta: {
           error: false,
           touched: false
