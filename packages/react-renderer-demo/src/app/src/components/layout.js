@@ -21,7 +21,7 @@ import ConnectedLinks from './common/connected-links';
 import Footer from './footer';
 
 import dynamic from 'next/dynamic';
-import NotificationPanel, { lastMessageId, oldestMessageId } from './notification-panel';
+import NotificationPanel from './notification-panel';
 const DocSearch = dynamic(import('./docsearch'), {
   ssr: false
 });
@@ -126,15 +126,11 @@ const Layout = ({ children }) => {
   const searchRef = useRef(null);
   const anchorRef = useRef(null);
   const [openNotification, setOpenNotifiation] = useState(false);
-  const [lastCheck, setLastCheck] = useState(lastMessageId);
+  const [newMessages, setNewMessages] = useState(0);
 
   useEffect(() => {
     setLinks(findConnectedLinks(router.asPath, flatSchema) || {});
   }, [router.asPath]);
-
-  useEffect(() => {
-    setLastCheck(localStorage.getItem('data-driven-forms-last-checked') || '');
-  }, []);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -145,9 +141,8 @@ const Layout = ({ children }) => {
     setOpen(false);
   }
 
-  const handleToggle = () => {
-    localStorage.setItem('data-driven-forms-last-checked', lastMessageId);
-    setLastCheck(lastMessageId);
+  const handleToggle = (notificationDates) => {
+    setNewMessages(0);
     setOpenNotifiation(!openNotification);
   };
 
@@ -189,11 +184,16 @@ const Layout = ({ children }) => {
         >
           <DocSearch />
           <IconButton aria-label="show new notifications" onClick={handleToggle} color="inherit" ref={anchorRef} className={clsx(classes.menuButton)}>
-            <Badge badgeContent={lastMessageId - Math.max(lastCheck, oldestMessageId)} color="secondary">
+            <Badge badgeContent={newMessages} color="secondary">
               <NotificationsIcon className={classes.menuIcons} />
             </Badge>
           </IconButton>
-          <NotificationPanel isOpen={openNotification} anchorRef={anchorRef} onClose={() => setOpenNotifiation(false)} />
+          <NotificationPanel
+            setNewMessages={setNewMessages}
+            isOpen={openNotification}
+            anchorRef={anchorRef}
+            onClose={() => setOpenNotifiation(false)}
+          />
           <a href="https://github.com/data-driven-forms/react-forms" rel="noopener noreferrer" target="_blank">
             <IconButton color="inherit" aria-label="gh repository" edge="start" className={clsx(classes.menuButton)}>
               <SvgIcon>
