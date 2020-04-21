@@ -390,7 +390,6 @@ exports[`FormFields <Switch /> should render Switch correctly 1`] = `
   >
     <Switch
       FieldProvider={[Function]}
-      dataType="someDataType"
       id="someIdKey"
       input={
         Object {
@@ -535,7 +534,6 @@ exports[`FormFields <Switch /> should render Switch with label correctly 1`] = `
   >
     <Switch
       FieldProvider={[Function]}
-      dataType="someDataType"
       id="someIdKey"
       input={
         Object {
@@ -692,7 +690,6 @@ exports[`FormFields <Switch /> should render Switch with onText (custom prop) co
   >
     <Switch
       FieldProvider={[Function]}
-      dataType="someDataType"
       id="someIdKey"
       input={
         Object {
@@ -838,7 +835,6 @@ exports[`FormFields <Switch /> should render Switch with placeholder correctly 1
   >
     <Switch
       FieldProvider={[Function]}
-      dataType="someDataType"
       id="someIdKey"
       input={
         Object {
@@ -984,7 +980,6 @@ exports[`FormFields <Switch /> should render disabled Switch correctly 1`] = `
   >
     <Switch
       FieldProvider={[Function]}
-      dataType="someDataType"
       id="someIdKey"
       input={
         Object {
@@ -1133,7 +1128,6 @@ exports[`FormFields <Switch /> should render mini Switch correctly 1`] = `
     <Switch
       FieldProvider={[Function]}
       bsSize="mini"
-      dataType="someDataType"
       id="someIdKey"
       input={
         Object {
@@ -1279,7 +1273,6 @@ exports[`FormFields <Switch /> should render readOnly Switch correctly 1`] = `
   >
     <Switch
       FieldProvider={[Function]}
-      dataType="someDataType"
       id="someIdKey"
       input={
         Object {
@@ -1428,7 +1421,6 @@ exports[`FormFields <Switch /> should render sm Switch correctly 1`] = `
     <Switch
       FieldProvider={[Function]}
       bsSize="mn"
-      dataType="someDataType"
       id="someIdKey"
       input={
         Object {

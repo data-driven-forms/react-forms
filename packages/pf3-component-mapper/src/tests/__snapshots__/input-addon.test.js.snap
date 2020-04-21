@@ -369,6 +369,7 @@ exports[`<Input Addon> should render group button before input addon correctly 1
                       hideField={false}
                     >
                       <TextField
+                        component="text-field"
                         inputAddon={
                           Object {
                             "before": Object {
@@ -523,6 +524,7 @@ exports[`<Input Addon> should render group button before input addon correctly 1
                                           hideField={false}
                                         >
                                           <InputAddonButtonGroup
+                                            component="input-addon-button-group"
                                             fields={
                                               Array [
                                                 Object {
@@ -558,6 +560,7 @@ exports[`<Input Addon> should render group button before input addon correctly 1
                                                       hideField={false}
                                                     >
                                                       <Button
+                                                        component="button"
                                                         label="Set 1"
                                                         name="set1"
                                                         onClick={[Function]}
@@ -567,12 +570,14 @@ exports[`<Input Addon> should render group button before input addon correctly 1
                                                           block={false}
                                                           bsClass="btn"
                                                           bsStyle="default"
+                                                          component="button"
                                                           disabled={false}
                                                           name="set1"
                                                           onClick={[Function]}
                                                         >
                                                           <button
                                                             className="btn btn-default"
+                                                            component="button"
                                                             disabled={false}
                                                             name="set1"
                                                             onClick={[Function]}
@@ -596,6 +601,7 @@ exports[`<Input Addon> should render group button before input addon correctly 1
                                                       hideField={false}
                                                     >
                                                       <Button
+                                                        component="button"
                                                         label="Set 2"
                                                         name="set2"
                                                       >
@@ -604,11 +610,13 @@ exports[`<Input Addon> should render group button before input addon correctly 1
                                                           block={false}
                                                           bsClass="btn"
                                                           bsStyle="default"
+                                                          component="button"
                                                           disabled={false}
                                                           name="set2"
                                                         >
                                                           <button
                                                             className="btn btn-default"
+                                                            component="button"
                                                             disabled={false}
                                                             name="set2"
                                                             type="button"
@@ -1083,6 +1091,7 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
                       hideField={false}
                     >
                       <TextField
+                        component="text-field"
                         inputAddon={
                           Object {
                             "before": Object {
@@ -1250,6 +1259,7 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
                                           hideField={false}
                                         >
                                           <InputAddonGroup
+                                            component="input-addon-group"
                                             fields={
                                               Array [
                                                 Object {
@@ -1280,6 +1290,7 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
                                                       hideField={false}
                                                     >
                                                       <PlainText
+                                                        component="plain-text"
                                                         label="-"
                                                         name="name1"
                                                         variant="span"
@@ -1318,6 +1329,7 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
                                           hideField={false}
                                         >
                                           <InputAddonButtonGroup
+                                            component="input-addon-button-group"
                                             fields={
                                               Array [
                                                 Object {
@@ -1346,6 +1358,7 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
                                                       hideField={false}
                                                     >
                                                       <Button
+                                                        component="button"
                                                         label="Set 3"
                                                         name="set3"
                                                       >
@@ -1354,11 +1367,13 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
                                                           block={false}
                                                           bsClass="btn"
                                                           bsStyle="default"
+                                                          component="button"
                                                           disabled={false}
                                                           name="set3"
                                                         >
                                                           <button
                                                             className="btn btn-default"
+                                                            component="button"
                                                             disabled={false}
                                                             name="set3"
                                                             type="button"
@@ -1697,6 +1712,7 @@ exports[`<Input Addon> should render single after input addon correctly 1`] = `
                       hideField={false}
                     >
                       <TextField
+                        component="text-field"
                         inputAddon={
                           Object {
                             "after": Object {
@@ -1825,6 +1841,7 @@ exports[`<Input Addon> should render single after input addon correctly 1`] = `
                                           hideField={false}
                                         >
                                           <PlainText
+                                            component="plain-text"
                                             label="-"
                                             name="name1"
                                             variant="span"
@@ -2139,6 +2156,7 @@ exports[`<Input Addon> should render single before input addon correctly 1`] = `
                       hideField={false}
                     >
                       <TextField
+                        component="text-field"
                         inputAddon={
                           Object {
                             "before": Object {
@@ -2247,6 +2265,7 @@ exports[`<Input Addon> should render single before input addon correctly 1`] = `
                                           hideField={false}
                                         >
                                           <PlainText
+                                            component="plain-text"
                                             label="-"
                                             name="name1"
                                             variant="span"
@@ -2573,6 +2592,7 @@ exports[`<Input Addon> should render single button after input addon correctly 1
                       hideField={false}
                     >
                       <TextField
+                        component="text-field"
                         inputAddon={
                           Object {
                             "after": Object {
@@ -2697,6 +2717,7 @@ exports[`<Input Addon> should render single button after input addon correctly 1
                                           hideField={false}
                                         >
                                           <Button
+                                            component="button"
                                             label="Set 3"
                                             name="set3"
                                           >
@@ -2705,11 +2726,13 @@ exports[`<Input Addon> should render single button after input addon correctly 1
                                               block={false}
                                               bsClass="btn"
                                               bsStyle="default"
+                                              component="button"
                                               disabled={false}
                                               name="set3"
                                             >
                                               <button
                                                 className="btn btn-default"
+                                                component="button"
                                                 disabled={false}
                                                 name="set3"
                                                 type="button"
@@ -3062,6 +3085,7 @@ exports[`<Input Addon> should render single button before input addon correctly 
                       hideField={false}
                     >
                       <TextField
+                        component="text-field"
                         inputAddon={
                           Object {
                             "before": Object {
@@ -3192,6 +3216,7 @@ exports[`<Input Addon> should render single button before input addon correctly 
                                           hideField={false}
                                         >
                                           <InputAddonButtonGroup
+                                            component="input-addon-button-group"
                                             fields={
                                               Array [
                                                 Object {
@@ -3220,6 +3245,7 @@ exports[`<Input Addon> should render single button before input addon correctly 
                                                       hideField={false}
                                                     >
                                                       <Button
+                                                        component="button"
                                                         label="Set 2"
                                                         name="set2"
                                                       >
@@ -3228,11 +3254,13 @@ exports[`<Input Addon> should render single button before input addon correctly 
                                                           block={false}
                                                           bsClass="btn"
                                                           bsStyle="default"
+                                                          component="button"
                                                           disabled={false}
                                                           name="set2"
                                                         >
                                                           <button
                                                             className="btn btn-default"
+                                                            component="button"
                                                             disabled={false}
                                                             name="set2"
                                                             type="button"
@@ -3875,6 +3903,7 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                       hideField={false}
                     >
                       <TextField
+                        component="text-field"
                         inputAddon={
                           Object {
                             "after": Object {
@@ -4110,6 +4139,7 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                                           hideField={false}
                                         >
                                           <InputAddonButtonGroup
+                                            component="input-addon-button-group"
                                             fields={
                                               Array [
                                                 Object {
@@ -4145,6 +4175,7 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                                                       hideField={false}
                                                     >
                                                       <Button
+                                                        component="button"
                                                         label="Set 1"
                                                         name="set1"
                                                         onClick={[Function]}
@@ -4154,12 +4185,14 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                                                           block={false}
                                                           bsClass="btn"
                                                           bsStyle="default"
+                                                          component="button"
                                                           disabled={false}
                                                           name="set1"
                                                           onClick={[Function]}
                                                         >
                                                           <button
                                                             className="btn btn-default"
+                                                            component="button"
                                                             disabled={false}
                                                             name="set1"
                                                             onClick={[Function]}
@@ -4183,6 +4216,7 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                                                       hideField={false}
                                                     >
                                                       <Button
+                                                        component="button"
                                                         label="Set 2"
                                                         name="set2"
                                                       >
@@ -4191,11 +4225,13 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                                                           block={false}
                                                           bsClass="btn"
                                                           bsStyle="default"
+                                                          component="button"
                                                           disabled={false}
                                                           name="set2"
                                                         >
                                                           <button
                                                             className="btn btn-default"
+                                                            component="button"
                                                             disabled={false}
                                                             name="set2"
                                                             type="button"
@@ -4253,6 +4289,7 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                                           hideField={false}
                                         >
                                           <InputAddonGroup
+                                            component="input-addon-group"
                                             fields={
                                               Array [
                                                 Object {
@@ -4283,6 +4320,7 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                                                       hideField={false}
                                                     >
                                                       <PlainText
+                                                        component="plain-text"
                                                         label="-"
                                                         name="name1"
                                                         variant="span"
@@ -4321,6 +4359,7 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                                           hideField={false}
                                         >
                                           <InputAddonButtonGroup
+                                            component="input-addon-button-group"
                                             fields={
                                               Array [
                                                 Object {
@@ -4349,6 +4388,7 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                                                       hideField={false}
                                                     >
                                                       <Button
+                                                        component="button"
                                                         label="Set 3"
                                                         name="set3"
                                                       >
@@ -4357,11 +4397,13 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                                                           block={false}
                                                           bsClass="btn"
                                                           bsStyle="default"
+                                                          component="button"
                                                           disabled={false}
                                                           name="set3"
                                                         >
                                                           <button
                                                             className="btn btn-default"
+                                                            component="button"
                                                             disabled={false}
                                                             name="set3"
                                                             type="button"

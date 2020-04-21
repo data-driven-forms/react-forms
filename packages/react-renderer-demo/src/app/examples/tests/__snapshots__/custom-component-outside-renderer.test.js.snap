@@ -5,7 +5,13 @@ exports[`<CustomComponent /> outside renderer should render component in error s
   label="custom-component"
   name="custom-component"
   sideEffect={[Function]}
-  validate={[Function]}
+  validate={
+    Array [
+      Object {
+        "type": "required",
+      },
+    ]
+  }
 >
   <div
     className="input-wrapper"
@@ -26,7 +32,7 @@ exports[`<CustomComponent /> outside renderer should render component in error s
       className="custom-error-block"
     >
       <span>
-        Required
+        required
       </span>
     </div>
   </div>

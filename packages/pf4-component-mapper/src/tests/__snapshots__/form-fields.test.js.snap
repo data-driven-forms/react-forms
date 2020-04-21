@@ -6,12 +6,10 @@ exports[`FormFields should render Checkbox correctly 1`] = `
     onSubmit={[Function]}
   >
     <Checkbox
-      dataType="someDataType"
       id="someIdKey"
       name="Name of the field"
     >
       <SingleCheckbox
-        dataType="someDataType"
         id="someIdKey"
         name="Name of the field"
       >
@@ -96,7 +94,6 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
     onSubmit={[Function]}
   >
     <Checkbox
-      dataType="someDataType"
       id="someIdKey"
       name="Name of the field"
       options={
@@ -117,7 +114,6 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
       }
     >
       <MultipleChoiceList
-        dataType="someDataType"
         id="someIdKey"
         name="Name of the field"
         options={
@@ -140,7 +136,6 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
         <MultipleChoiceList
           Checkbox={[Function]}
           Wrapper={[Function]}
-          dataType="someDataType"
           id="someIdKey"
           name="Name of the field"
           options={
@@ -711,7 +706,6 @@ exports[`FormFields should render DatePicker correctly 1`] = `
     onSubmit={[Function]}
   >
     <DatePicker
-      dataType="someDataType"
       id="someIdKey"
       name="Name of the field"
     >
@@ -806,7 +800,6 @@ exports[`FormFields should render Radio correctly 1`] = `
     onSubmit={[Function]}
   >
     <Radio
-      dataType="someDataType"
       id="someIdKey"
       name="Name of the field"
       options={
@@ -1055,7 +1048,6 @@ exports[`FormFields should render Select correctly 1`] = `
     }
   >
     <Select
-      dataType="someDataType"
       id="someIdKey"
       name="Name of the field"
       options={
@@ -1085,7 +1077,6 @@ exports[`FormFields should render Switch correctly 1`] = `
     onSubmit={[Function]}
   >
     <Switch
-      dataType="someDataType"
       id="someIdKey"
       name="Name of the field"
     >
@@ -1240,7 +1231,6 @@ exports[`FormFields should render TextField correctly 1`] = `
     onSubmit={[Function]}
   >
     <TextField
-      dataType="someDataType"
       id="someIdKey"
       name="Name of the field"
     >
@@ -1334,7 +1324,6 @@ exports[`FormFields should render TextField with description correctly 1`] = `
     onSubmit={[Function]}
   >
     <TextField
-      dataType="someDataType"
       description="This is description"
       id="someIdKey"
       name="Name of the field"
@@ -1446,7 +1435,6 @@ exports[`FormFields should render TextField without id correctly 1`] = `
     onSubmit={[Function]}
   >
     <TextField
-      dataType="someDataType"
       name="Name of the field"
     >
       <FormGroup
@@ -1539,7 +1527,6 @@ exports[`FormFields should render Textarea correctly 1`] = `
     onSubmit={[Function]}
   >
     <Textarea
-      dataType="someDataType"
       id="someIdKey"
       name="Name of the field"
     >
@@ -1618,7 +1605,6 @@ exports[`FormFields should render TimePicker correctly 1`] = `
     onSubmit={[Function]}
   >
     <TimePicker
-      dataType="someDataType"
       id="someIdKey"
       name="Name of the field"
     >
@@ -1713,7 +1699,6 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
     onSubmit={[Function]}
   >
     <Checkbox
-      dataType="someDataType"
       disabled={true}
       id="someIdKey"
       name="Name of the field"
@@ -1735,7 +1720,6 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
       }
     >
       <MultipleChoiceList
-        dataType="someDataType"
         disabled={true}
         id="someIdKey"
         name="Name of the field"
@@ -1759,7 +1743,6 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
         <MultipleChoiceList
           Checkbox={[Function]}
           Wrapper={[Function]}
-          dataType="someDataType"
           disabled={true}
           id="someIdKey"
           name="Name of the field"
@@ -2342,7 +2325,6 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
     onSubmit={[Function]}
   >
     <Radio
-      dataType="someDataType"
       disabled={true}
       id="someIdKey"
       name="Name of the field"
@@ -2592,7 +2574,6 @@ exports[`FormFields should render disabled Select correctly 1`] = `
     }
   >
     <Select
-      dataType="someDataType"
       id="someIdKey"
       isDisabled={true}
       name="Name of the field"
@@ -2623,7 +2604,6 @@ exports[`FormFields should render disabled Switch correctly 1`] = `
     onSubmit={[Function]}
   >
     <Switch
-      dataType="someDataType"
       id="someIdKey"
       isDisabled={true}
       name="Name of the field"
@@ -2780,7 +2760,6 @@ exports[`FormFields should render disabled Switch correctly 2`] = `
     onSubmit={[Function]}
   >
     <Switch
-      dataType="someDataType"
       id="someIdKey"
       isDisabled={true}
       name="Name of the field"
@@ -2937,7 +2916,6 @@ exports[`FormFields should render disabled Textarea correctly 1`] = `
     onSubmit={[Function]}
   >
     <Textarea
-      dataType="someDataType"
       id="someIdKey"
       isDisabled={true}
       name="Name of the field"
@@ -3019,7 +2997,6 @@ exports[`FormFields should render touched TextField id correctly 1`] = `
     onSubmit={[Function]}
   >
     <TextField
-      dataType="someDataType"
       id="someIdKey"
       meta={
         Object {
@@ -3119,7 +3096,6 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
     onSubmit={[Function]}
   >
     <Switch
-      dataType="someDataType"
       id="someIdKey"
       name="Name of the field"
       offText="Turned off"

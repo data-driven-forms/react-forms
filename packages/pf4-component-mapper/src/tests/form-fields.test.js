@@ -22,8 +22,7 @@ import MultipleChoiceListCommon from '@data-driven-forms/common/src/multiple-cho
 describe('FormFields', () => {
   const props = {
     name: 'Name of the field',
-    id: 'someIdKey',
-    dataType: 'someDataType'
+    id: 'someIdKey'
   };
   const propsWithOptions = {
     ...props,

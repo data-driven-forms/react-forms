@@ -36,6 +36,7 @@ exports[`renderForm function #condition should render condition field only if co
           hideField={false}
         >
           <CustomComponent
+            component="custom-component"
             name="a"
           >
             <FieldProvider
@@ -100,6 +101,7 @@ exports[`renderForm function #condition should render condition field only if co
           hideField={false}
         >
           <CustomComponent
+            component="custom-component"
             name="c"
           >
             <FieldProvider
@@ -253,6 +255,7 @@ exports[`renderForm function #condition should render condition field only if on
           hideField={false}
         >
           <CustomComponent
+            component="custom-component"
             name="a"
           >
             <FieldProvider
@@ -317,6 +320,7 @@ exports[`renderForm function #condition should render condition field only if on
           hideField={false}
         >
           <CustomComponent
+            component="custom-component"
             name="b"
           >
             <FieldProvider
@@ -452,9 +456,11 @@ exports[`renderForm function should render single field from defined componentTy
           hideField={false}
         >
           <Component
+            component="text-field"
             name="foo"
           >
             <div
+              component="text-field"
               name="foo"
             >
               TextField
@@ -503,6 +509,7 @@ exports[`renderForm function should render single field from with custom compone
           hideField={false}
         >
           <CustomComponent
+            component="custom-component"
             name="foo"
           >
             <FieldProvider

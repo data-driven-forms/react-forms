@@ -35,7 +35,14 @@ const FormWrapper = ({ props, children }) => (
   <Form onSubmit={() => {}} {...props}>
     {() => (
       <form>
-        <RendererContext.Provider value={{ formOptions: {} }}>{children}</RendererContext.Provider>
+        <RendererContext.Provider
+          value={{
+            formOptions: {},
+            validatorMapper: { required: () => (value) => (value ? undefined : 'required') }
+          }}
+        >
+          {children}
+        </RendererContext.Provider>
       </form>
     )}
   </Form>
@@ -53,7 +60,7 @@ describe('<CustomComponent /> outside renderer', () => {
   it('should render component in error state to snapshot', () => {
     const wrapper = mount(
       <FormWrapper>
-        <CustomComponent name="custom-component" label="custom-component" validate={(value) => (!value ? 'Required' : undefined)} />
+        <CustomComponent name="custom-component" label="custom-component" validate={[{ type: 'required' }]} />
       </FormWrapper>
     );
     expect(toJson(wrapper.find(CustomComponent))).toMatchSnapshot();
