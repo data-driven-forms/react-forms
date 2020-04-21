@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState, useRef } from 'react';
+import { useEffect, useContext, useRef, useReducer } from 'react';
 import { useField } from 'react-final-form';
 import enhancedOnChange from '../form-renderer/enhanced-on-change';
 import RendererContext from './renderer-context';
@@ -27,12 +27,45 @@ const calculateValidate = (props, validate, component, validatorMapper) => {
   }
 };
 
+const init = ({ props, validate, component, validatorMapper }) => ({
+  initialValue: calculateInitialValue(props),
+  arrayValidator: calculateArrayValidator(props, validate, component, validatorMapper),
+  validate: calculateValidate(props, validate, component, validatorMapper),
+  type: assignSpecialType(component)
+});
+
+const reducer = (state, { type, specialType, validate, arrayValidator, initialValue }) => {
+  switch (type) {
+    case 'setType':
+      return {
+        ...state,
+        type: specialType
+      };
+    case 'setValidators':
+      return {
+        ...state,
+        validate,
+        arrayValidator
+      };
+    case 'setInitialValue':
+      return {
+        ...state,
+        initialValue
+      };
+    default:
+      return state;
+  }
+};
+
 const useFieldApi = ({ name, initializeOnMount, component, render, validate, ...props }) => {
   const { actionMapper, validatorMapper, formOptions } = useContext(RendererContext);
-  const [initialValue, setInitialValue] = useState(() => calculateInitialValue(props));
-  const [arrayValidator, setArrayValidator] = useState(() => calculateArrayValidator(props, validate, component, validatorMapper));
-  const [stateValidate, setValidate] = useState(() => calculateValidate(props, validate, component, validatorMapper));
-  const [type, setType] = useState(() => assignSpecialType(component));
+
+  const [{ type, initialValue, validate: stateValidate, arrayValidator }, dispatch] = useReducer(
+    reducer,
+    { props, validate, component, validatorMapper },
+    init
+  );
+
   const mounted = useRef(false);
 
   const enhancedProps = {
@@ -49,7 +82,7 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, ...
     if (mounted.current) {
       const specialType = assignSpecialType(component);
       if (specialType !== type) {
-        setType(specialType);
+        dispatch({ type: 'setType', specialType });
       }
     }
   }, [component]);
@@ -57,8 +90,11 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, ...
   /** Reinitilize array validator/validate */
   useEffect(() => {
     if (mounted.current) {
-      setArrayValidator(calculateArrayValidator(props, validate, component, validatorMapper));
-      setValidate(calculateValidate(props, validate, component, validatorMapper));
+      dispatch({
+        type: 'setValidators',
+        validate: calculateValidate(props, validate, component, validatorMapper),
+        arrayValidator: calculateArrayValidator(props, validate, component, validatorMapper)
+      });
     }
   }, [validate, component, props.dataType]);
 
@@ -67,7 +103,10 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, ...
     if (mounted.current) {
       const newInitialValue = calculateInitialValue(props);
       if (!isEqual(initialValue, newInitialValue)) {
-        setInitialValue(newInitialValue);
+        dispatch({
+          type: 'setInitialValue',
+          initialValue: newInitialValue
+        });
       }
     }
   }, [props.initialValue, props.dataType]);
@@ -95,6 +134,7 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, ...
       mounted.current = true;
 
       return () => {
+        mounted.current = false;
         /**
          * Delete the value from form state when field is inmounted
          */

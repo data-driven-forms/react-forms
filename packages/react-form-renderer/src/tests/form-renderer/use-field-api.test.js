@@ -1,0 +1,161 @@
+import React, { Component } from 'react';
+import { mount } from 'enzyme';
+import { act } from 'react-dom/test-utils';
+
+import useFieldApi from '../../files/use-field-api';
+import componentTypes from '../../files/component-types';
+import Form from '../../files/form';
+import RendererContext from '../../files/renderer-context';
+
+describe('useFieldApi', () => {
+  const Catcher = ({ children }) => children;
+
+  const TestField = (props) => {
+    const rest = useFieldApi(props);
+
+    return (
+      <Catcher {...rest}>
+        <input {...rest.input} />
+      </Catcher>
+    );
+  };
+
+  class WrapperComponent extends Component {
+    render() {
+      const { onSubmit, ...props } = this.props;
+      return (
+        <Form onSubmit={onSubmit}>
+          {({ handleSubmit, form: { reset } }) => (
+            <form onSubmit={handleSubmit}>
+              <RendererContext.Provider
+                value={{
+                  formOptions: {},
+                  validatorMapper: { required: () => (value) => (!value ? 'required' : undefined) }
+                }}
+              >
+                <TestField reset={reset} {...props} />
+              </RendererContext.Provider>
+            </form>
+          )}
+        </Form>
+      );
+    }
+  }
+
+  let initialProps;
+  let onSubmit;
+
+  beforeEach(() => {
+    onSubmit = jest.fn();
+    initialProps = {
+      name: 'some-name',
+      component: 'text-field',
+      onSubmit: (values) => onSubmit(values)
+    };
+  });
+
+  it('reloads type when component changes', () => {
+    const wrapper = mount(<WrapperComponent {...initialProps} />);
+
+    expect(wrapper.find(Catcher).props().input.type).toEqual(undefined);
+
+    wrapper.setProps({ component: componentTypes.RADIO });
+    wrapper.update();
+
+    expect(wrapper.find(Catcher).props().input.type).toEqual('radio');
+  });
+
+  it('reloads validator when dataType changes', () => {
+    const wrapper = mount(<WrapperComponent {...initialProps} />);
+
+    wrapper.find('form').simulate('submit');
+    wrapper.update();
+    expect(onSubmit).toHaveBeenCalledWith({});
+    onSubmit.mockClear();
+
+    // validate is not checked in useField, so you have to change key too
+    wrapper.setProps({ dataType: 'number', key: 'somekey' });
+    wrapper.update();
+
+    wrapper.find('input').simulate('change', { target: { value: 'ABC' } });
+    wrapper.update();
+
+    wrapper.find('form').simulate('submit');
+    wrapper.update();
+    expect(onSubmit).not.toHaveBeenCalled();
+    onSubmit.mockClear();
+
+    expect(wrapper.find(Catcher).props().meta.error).toEqual('Values must be number');
+  });
+
+  it('reloads validator when validate changes', async () => {
+    const wrapper = mount(<WrapperComponent {...initialProps} />);
+
+    wrapper.find('form').simulate('submit');
+    wrapper.update();
+    expect(onSubmit).toHaveBeenCalledWith({});
+    onSubmit.mockClear();
+
+    // validate is not checked in useField, so you have to change key too
+    wrapper.setProps({ validate: [{ type: 'required' }], key: 'somekey' });
+    wrapper.update();
+
+    await act(async () => {
+      wrapper
+        .find(Catcher)
+        .props()
+        .reset();
+    });
+    wrapper.update();
+
+    wrapper.find('form').simulate('submit');
+    wrapper.update();
+    expect(onSubmit).not.toHaveBeenCalled();
+    onSubmit.mockClear();
+
+    expect(wrapper.find(Catcher).props().meta.error).toEqual('required');
+  });
+
+  it('reloads array validator when dataType changes', () => {
+    initialProps = {
+      ...initialProps,
+      component: componentTypes.FIELD_ARRAY
+    };
+
+    const wrapper = mount(<WrapperComponent {...initialProps} />);
+
+    expect(wrapper.find(Catcher).props().arrayValidator).toEqual(undefined);
+
+    wrapper.setProps({ dataType: 'number' });
+    wrapper.update();
+
+    expect(wrapper.find(Catcher).props().arrayValidator).toEqual(expect.any(Function));
+  });
+
+  it('reloads array validator when validate changes', () => {
+    initialProps = {
+      ...initialProps,
+      component: componentTypes.FIELD_ARRAY
+    };
+
+    const wrapper = mount(<WrapperComponent {...initialProps} />);
+
+    expect(wrapper.find(Catcher).props().arrayValidator).toEqual(undefined);
+
+    wrapper.setProps({ validate: [{ type: 'required' }] });
+    wrapper.update();
+
+    expect(wrapper.find(Catcher).props().arrayValidator).toEqual(expect.any(Function));
+  });
+
+  it('reloads initial value', () => {
+    const wrapper = mount(<WrapperComponent {...initialProps} />);
+
+    expect(wrapper.find(Catcher).props().meta.initial).toEqual(undefined);
+
+    wrapper.setProps({ initialValue: 'pepa' });
+    wrapper.update();
+
+    expect(wrapper.find(Catcher).props().meta.initial).toEqual('pepa');
+  });
+});
