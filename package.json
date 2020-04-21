@@ -72,7 +72,7 @@
         "@khala/wildcard-release-notes",
         {
           "patterns": {
-            "major": "^(major|breaking)\\(",
+            "major": "^(majormajor|breakingbreaking)\\(",
             "minor": "^feat\\(",
             "patch": "^(fix|patch)\\("
           },
@@ -83,7 +83,7 @@
         "@khala/commit-analyzer-wildcard",
         {
           "patterns": {
-            "major": "^(major|breaking)\\(",
+            "major": "^(majormajor|breakingbreaking)\\(",
             "minor": "^feat\\(",
             "patch": "^(fix|patch)\\("
           },
