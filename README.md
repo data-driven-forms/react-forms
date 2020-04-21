@@ -140,13 +140,7 @@ Data Driven Forms supports all kinds of component, basic set is consisted of:
 
 ### Documentation
 
-Please use our [documentation site](https://data-driven-forms.org/). In case of any problem, you can access documentation files directly in GitHub:
-
-- [Documentation pages](packages/react-renderer-demo/src/docs-components/)
-  - [Form renderer API](packages/react-renderer-demo/src/docs-components/renderer-api.md)
-  - [Components API](packages/react-renderer-demo/src/docs-components/component-api.md)
-  - [Components mapping](packages/react-renderer-demo/src/docs-components/component-mapping.md)
-  - [Field provider](packages/react-renderer-demo/src/docs-components/field-provider.md)
+Please use our [documentation site](https://data-driven-forms.org/). In case of any problem, you can access documentation files directly in GitHub.
 
 ### Useful links
 
