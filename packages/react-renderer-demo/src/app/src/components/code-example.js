@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -12,7 +12,8 @@ const CodeEditor = dynamic(import('./code-editor'), {
   ssr: false
 });
 
-const reqSource = require.context('!raw-loader!@data-driven-forms/examples', true, /\.js/);
+const reqSource = require.context('!raw-loader!@docs/examples', true, /\.js/);
+const req = require.context('@docs/examples', true, /\.js/);
 
 const useStyles = makeStyles(() => ({
   codeWrapper: {
@@ -22,15 +23,20 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const CodeExample = ({ source }) => {
-  const codeSource = reqSource(`./src/${source}.js`).default;
+const CodeExample = ({ source, mode }) => {
   const classes = useStyles();
+  const codeSource = reqSource(`./${source}.js`).default;
+  let Component;
+  if (mode === 'preview') {
+    Component = req(`./${source}.js`).default;
+  }
+
   return (
     <Grid container spacing={0} className="DocRawComponent">
       <Grid item xs={12}>
         <Box display="flex" justifyContent="flex-end">
           <Link
-            href={`https://github.com/data-driven-forms/react-forms/tree/master/packages/examples/src/${source}.js`}
+            href={`https://github.com/data-driven-forms/react-forms/tree/master/packages/react-renderer-demo/src/app/examples/${source}.js`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -43,12 +49,22 @@ const CodeExample = ({ source }) => {
       <Grid item xs={12} className={classes.codeWrapper}>
         <CodeEditor value={codeSource} />
       </Grid>
+      {mode === 'preview' && Component && (
+        <Suspense fallback={<div>loading</div>}>
+          <Component />
+        </Suspense>
+      )}
     </Grid>
   );
 };
 
 CodeExample.propTypes = {
-  source: PropTypes.string.isRequired
+  source: PropTypes.string.isRequired,
+  mode: PropTypes.oneOf(['code', 'preview'])
+};
+
+CodeExample.defaultProps = {
+  mode: 'code'
 };
 
 export default CodeExample;
