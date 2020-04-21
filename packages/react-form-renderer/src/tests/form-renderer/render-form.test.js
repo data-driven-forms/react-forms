@@ -744,6 +744,7 @@ describe('renderForm function', () => {
         {
           component,
           name: 'unmnounted',
+          key: 'unmnounted-1',
           label: 'Label 1',
           clearOnUnmount,
           condition: {
@@ -754,6 +755,7 @@ describe('renderForm function', () => {
         {
           component,
           name: 'unmnounted',
+          key: 'unmnounted-2',
           label: 'Label 2',
           clearOnUnmount,
           condition: {
@@ -1182,23 +1184,22 @@ describe('renderForm function', () => {
       const form = wrapper.find('form');
       form.simulate('submit');
       expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: INITIAL_VALUE }));
+      onSubmit.mockReset();
 
       mountInitializedField(wrapper);
       setInitializedToNewValue(wrapper);
+      form.simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: NEW_VALUE, [SHOWER_FIELD]: SHOW_VALUE }));
       onSubmit.mockReset();
 
-      form.simulate('submit');
-      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: INITIAL_VALUE, [SHOWER_FIELD]: SHOW_VALUE }));
-      onSubmit.mockReset();
-
-      form.simulate('submit');
       unmountInitializedField(wrapper);
-      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: INITIAL_VALUE, [SHOWER_FIELD]: SHOW_VALUE }));
+      form.simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: NEW_VALUE, [SHOWER_FIELD]: NOT_SHOW_VALUE }));
       onSubmit.mockReset();
 
-      form.simulate('submit');
       mountInitializedField(wrapper);
-      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: INITIAL_VALUE, [SHOWER_FIELD]: NOT_SHOW_VALUE }));
+      form.simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: INITIAL_VALUE, [SHOWER_FIELD]: SHOW_VALUE }));
     });
 
     it('should not reset value after mount when set on fields', () => {
@@ -1262,12 +1263,12 @@ describe('renderForm function', () => {
       mountInitializedField(wrapper);
       setInitializedToNewValue(wrapper);
       wrapper.find('form').simulate('submit');
-      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: SHOW_VALUE, [INITIALIZED_FIELD]: SCHEMA_INITIAL_VALUE }));
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: SHOW_VALUE, [INITIALIZED_FIELD]: NEW_VALUE }));
       onSubmit.mockReset();
 
       unmountInitializedField(wrapper);
       wrapper.find('form').simulate('submit');
-      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: NOT_SHOW_VALUE, [INITIALIZED_FIELD]: SCHEMA_INITIAL_VALUE }));
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: NOT_SHOW_VALUE, [INITIALIZED_FIELD]: NEW_VALUE }));
       onSubmit.mockReset();
 
       mountInitializedField(wrapper);
@@ -1294,12 +1295,12 @@ describe('renderForm function', () => {
       mountInitializedField(wrapper);
       setInitializedToNewValue(wrapper);
       wrapper.find('form').simulate('submit');
-      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: SHOW_VALUE, [INITIALIZED_FIELD]: SCHEMA_INITIAL_VALUE }));
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [SHOWER_FIELD]: SHOW_VALUE, [INITIALIZED_FIELD]: NEW_VALUE }));
       onSubmit.mockReset();
 
       unmountInitializedField(wrapper);
       wrapper.find('form').simulate('submit');
-      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: SCHEMA_INITIAL_VALUE, [SHOWER_FIELD]: NOT_SHOW_VALUE }));
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({ [INITIALIZED_FIELD]: NEW_VALUE, [SHOWER_FIELD]: NOT_SHOW_VALUE }));
       onSubmit.mockReset();
 
       mountInitializedField(wrapper);
@@ -1328,6 +1329,7 @@ describe('renderForm function', () => {
           {
             component: componentTypes.TEXT_FIELD,
             name: 'unmounted',
+            key: 'unmounted-2',
             initialValue: true,
             initializeOnMount: true,
             condition: {
@@ -1500,7 +1502,7 @@ describe('renderForm function', () => {
     ).toEqual('standard label');
   });
 
-  describe('composite mapper component', () => {
+  it('composite mapper component', () => {
     const schema = {
       fields: [
         {

@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { useField } from 'react-final-form';
 import useFormApi from './use-form-api';
 import enhancedOnChange from '../form-renderer/enhanced-on-change';
@@ -8,24 +8,24 @@ import assignSpecialType from '../form-renderer/assign-special-type';
 import componentTypes from './component-types';
 import { prepareArrayValidator, getValidate } from '../form-renderer/validator-helpers';
 import composeValidators from './compose-validators';
+import isEqual from 'lodash/isEqual';
 
-const useFieldApi = ({ name, initializeOnMount, component, render, validate, type, ...props }) => {
+const calculateInitialValue = (props) => {
+  if (Object.prototype.hasOwnProperty.call(props, 'initialValue') && Object.prototype.hasOwnProperty.call(props, 'dataType')) {
+    return convertInitialValue(props.initialValue, props.dataType);
+  }
+};
+
+const useFieldApi = ({ name, initializeOnMount, component, render, validate, ...props }) => {
   const { actionMapper, validatorMapper } = useContext(RendererContext);
+  const [initialValue, setInitialValue] = useState(() => calculateInitialValue(props));
 
   const formOptions = useFormApi();
 
   /** Assign type (checkbox, radio ) */
   let enhancedProps = {
-    type: type || assignSpecialType(component)
+    type: assignSpecialType(component)
   };
-
-  /** Convert initialValue to correct dataType */
-  if (Object.prototype.hasOwnProperty.call(props, 'initialValue') && Object.prototype.hasOwnProperty.call(props, 'dataType')) {
-    enhancedProps = {
-      ...enhancedProps,
-      initialValue: convertInitialValue(props.initialValue, props.dataType)
-    };
-  }
 
   /** Add validate/array validator when needed */
   let arrayValidator;
@@ -41,11 +41,20 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, typ
   }
 
   enhancedProps = {
+    ...enhancedProps,
     ...props,
-    ...enhancedProps
+    ...(initialValue ? { initialValue } : {})
   };
 
   const fieldProps = useField(name, enhancedProps);
+
+  /** Re-convert initialValue when changed */
+  useEffect(() => {
+    const newInitialValue = calculateInitialValue(props);
+    if (!isEqual(initialValue, newInitialValue)) {
+      setInitialValue(newInitialValue);
+    }
+  }, [props.initialValue, props.dataType]);
 
   useEffect(() => {
     /**
@@ -53,12 +62,12 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, typ
      * This affects conditional fields
      */
     if (initializeOnMount) {
-      const initialValue = Object.prototype.hasOwnProperty.call(enhancedProps, 'initialValue')
+      const value = Object.prototype.hasOwnProperty.call(enhancedProps, 'initialValue')
         ? enhancedProps.initialValue
         : formOptions.getFieldState(name).initial;
-      fieldProps.input.onChange(initialValue);
+      fieldProps.input.onChange(value);
     }
-  }, [initializeOnMount, enhancedProps.initialValue, fieldProps.meta.initial]);
+  }, [initializeOnMount, enhancedProps.initialValue, fieldProps.meta.initial, props.dataType]);
 
   /**
    * Prepare deleted value of field
@@ -89,7 +98,7 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, typ
     });
   }
 
-  const { initialValue, clearOnUnmount, dataType, ...cleanProps } = props;
+  const { initialValue: _initialValue, clearOnUnmount, dataType, clearedValue, ...cleanProps } = props;
 
   /**
    * construct component props necessary that would live in field provider
