@@ -1,5 +1,5 @@
 import Grid from '@material-ui/core/Grid'
-import RawComponent from '@docs/raw-component';
+import CodeExample from '../../src/components/code-example'
 
 import ListOfContents from '../../src/helpers/list-of-contents';
 
@@ -16,7 +16,7 @@ When using dynamic forms where more fields share the same name, the value is pre
 
 ## Form example
 
-<RawComponent source="clear-on-unmount" />
+<CodeExample source="components/clear-on-unmount" mode="preview" />
 
 
 ## Form level configuration

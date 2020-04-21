@@ -1,5 +1,5 @@
 import Grid from '@material-ui/core/Grid'
-import RawComponent from '@docs/raw-component';
+import CodeExample from '../../src/components/code-example';
 
 import ListOfContents from '../../src/helpers/list-of-contents';
 
@@ -32,7 +32,7 @@ The field will use the `initialValue` set in the schema ([initialValue](/rendere
 
 This feature comes handy if you need change a value when an user traverses a form, which shows and hides fields, and the value is not set by the user. Very useful case is used it wizard forms, where you can set different value for the same input according the way the user went in the wizard form by using this option combined with [hideField](/renderer/component-api#commonpropsforallformfields) prop.
 
-<RawComponent source="initialize-mount" />
+<CodeExample source="components/initialize-mount" mode="preview" />
 
 ## Clear the value
 

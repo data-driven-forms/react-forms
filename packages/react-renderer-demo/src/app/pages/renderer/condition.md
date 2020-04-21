@@ -1,7 +1,7 @@
 import Grid from '@material-ui/core/Grid'
 
 import ListOfContents from '../../src/helpers/list-of-contents';
-import RawComponent from '@docs/raw-component';
+import CodeExample from '../../src/components/code-example';
 
 
 <Grid container item>
@@ -83,7 +83,7 @@ Also, you can use a shorthand:
 }
 ```
 
-<RawComponent source="conditions/or" />
+<CodeExample source="components/conditions/or" mode="preview" />
 
 ### And
 
@@ -160,7 +160,7 @@ Or you can use a shorthand:
 }
 ```
 
-<RawComponent source="conditions/and" />
+<CodeExample source="components/conditions/and" mode="preview" />
 
 ### Not
 
@@ -197,7 +197,7 @@ You can simple negate a condition by using a `not`. Following condition is a tru
 
 As the value you can use an array (AND) or another condition.
 
-<RawComponent source="conditions/not" />
+<CodeExample source="components/conditions/not" mode="preview" />
 
 ### Sequence
 
@@ -218,7 +218,7 @@ This special type of condition allows to trigger a sequence of multiple independ
 }
 ```
 
-<RawComponent source="conditions/sequence" />
+<CodeExample source="components/conditions/sequence" mode="preview" />
 
 ### Nesting
 
@@ -233,7 +233,7 @@ condition = {
 };
 ```
 
-<RawComponent source="condition" />
+<CodeExample source="components/condition" mode="preview" />
 
 ## Conditions
 
@@ -251,7 +251,7 @@ condition: {
 // Foo == 'Not a Bar' => false
 ```
 
-<RawComponent source="conditions/is" />
+<CodeExample source="components/conditions/is" mode="preview" />
 
 ### Is empty
 
@@ -274,7 +274,7 @@ condition: {
 // Foo = true => false
 ```
 
-<RawComponent source="conditions/is-empty" />
+<CodeExample source="components/conditions/is-empty" mode="preview" />
 
 ### Is not empty
 
@@ -297,7 +297,7 @@ condition: {
 // Foo = true => true
 ```
 
-<RawComponent source="conditions/is-not-empty" />
+<CodeExample source="components/conditions/is-not-empty" mode="preview" />
 
 ### Pattern
 
@@ -326,7 +326,7 @@ condition: {
 // Foo = 'bAr!' => true
 ```
 
-<RawComponent source="conditions/pattern" />
+<CodeExample source="components/conditions/pattern" mode="preview" />
 
 ### Not match
 
@@ -353,7 +353,7 @@ condition: {
 // Foo = 'bar' => false
 ```
 
-<RawComponent source="conditions/not-match" />
+<CodeExample source="components/conditions/not-match" mode="preview" />
 
 ## Conditional actions
 
@@ -391,7 +391,7 @@ condition: { when: 'x', is: 'y', then: { visible: true } }
 
 ### Example
 
-<RawComponent source="conditions/set" />
+<CodeExample source="components/conditions/set" mode="preview" />
 
 ## Clearing values
 

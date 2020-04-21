@@ -1,5 +1,5 @@
 import Grid from '@material-ui/core/Grid'
-import RawComponent from '@docs/raw-component';
+import CodeExample from '../../src/components/code-example';
 
 import ListOfContents from '../../src/helpers/list-of-contents';
 
@@ -37,7 +37,7 @@ With using `useFormApi` hook you can get access to all form information and func
 
 You can customize form buttons in your [FormTemplate](/renderer/renderer-api#requiredprops) component
 
-<RawComponent source="custom-buttons" />
+<CodeExample source="components/custom-buttons" mode="preview" />
 
 ## Default FormTemplates
 

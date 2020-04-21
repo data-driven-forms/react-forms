@@ -1,5 +1,5 @@
 import Grid from '@material-ui/core/Grid'
-import RawComponent from '@docs/raw-component';
+import CodeExample from '../../src/components/code-example';
 import ListOfContents from '../../src/helpers/list-of-contents';
 
 <Grid container item>
@@ -55,7 +55,9 @@ const schemaValidatorMapper = {
 
 ## Example
 
-<RawComponent source="schema-validator" />
+This is example is supposed to fail
+
+<CodeExample source="components/schema-validator" mode="preview" />
 
 </Grid>
 <Grid item xs={false} md={2}>

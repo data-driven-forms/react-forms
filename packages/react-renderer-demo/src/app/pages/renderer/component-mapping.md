@@ -1,7 +1,7 @@
-import RawComponent from '@docs/raw-component';
+import CodeExample from '../../src/components/code-example'
 import Grid from '@material-ui/core/Grid'
 
-import '@docs/doc-components/component-mapper/form-fields-mapper-docs.css';
+import '@docs/examples/components/component-mapper/form-fields-mapper-docs.css';
 import ListOfContents from '../../src/helpers/list-of-contents';
 
 <Grid container item>
@@ -75,7 +75,12 @@ Below, you can see an basic implementation of custom component mapper:
 <br />
 
 
-<RawComponent source="component-mapper/form-fields-mapper" />
+<CodeExample 
+  source="components/component-mapper/form-fields-mapper"
+  mode="preview"
+  additionalSources="components/component-mapper/form-fields-mapper-docs.css"
+/>
+
 </Grid>
 <Grid item xs={false} md={2}>
   <ListOfContents file="renderer/component-mapping" />
