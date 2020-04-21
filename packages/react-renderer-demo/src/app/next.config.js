@@ -54,7 +54,8 @@ module.exports = withBundleAnalyzer(
           '@docs/raw-component': path.resolve(__dirname, './src/components/common/raw-component'),
           '@docs/doc-components': path.resolve(__dirname, './src/doc-components'),
           '@docs/components': path.resolve(__dirname, './src/components'),
-          '@docs/pages': path.resolve(__dirname, './pages')
+          '@docs/pages': path.resolve(__dirname, './pages'),
+          '@docs/examples': path.resolve(__dirname, './examples')
         };
 
         config.module.rules.push({
