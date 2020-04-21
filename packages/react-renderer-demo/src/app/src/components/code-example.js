@@ -54,43 +54,86 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const payload = getParameters({
-  files: {
-    'public/index.html': {
-      content:
-        '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="utf-8" />\n    <meta\n      name="viewport"\n      content="width=device-width, initial-scale=1, shrink-to-fit=no"\n    />\n    <meta name="theme-color" content="#000000" />\n    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />\n    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />\n    <title>Data driven forms example</title>\n\n    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">-->\n\n    <!--<link rel="stylesheet" type="text/css" href="https://unpkg.com/@patternfly/patternfly@4.0.5/patternfly-base.css"/>-->\n    <!--<link rel="stylesheet" type="text/css" href="https://unpkg.com/@patternfly/patternfly@4.0.5/patternfly-addons.css"/>-->\n  </head>\n\n  <body>\n    <noscript>\n      You need to enable JavaScript to run this app.\n    </noscript>\n    <div id="root"></div>\n  </body>\n</html>\n'
-    },
-    'package.json': {
-      content: {
-        name: 'data-driven-forms-example',
-        version: '1.0.0',
-        description: '',
-        keywords: [],
-        main: 'src/index.js',
-        dependencies: {
-          '@data-driven-forms/mui-component-mapper': '2.1.2',
-          '@data-driven-forms/pf4-component-mapper': '2.1.2',
-          '@data-driven-forms/react-form-renderer': '2.1.2',
-          react: '16.12.0',
-          'react-dom': '16.12.0',
-          'react-scripts': '3.0.1'
-        },
-        devDependencies: { typescript: '3.8.3' },
-        scripts: { start: 'react-scripts start', build: 'react-scripts build', test: 'react-scripts test --env=jsdom', eject: 'react-scripts eject' },
-        browserslist: ['>0.2%', 'not dead', 'not ie <= 11', 'not op_mini all']
-      }
-    },
-    'src/index.js': {
-      content:
-        'import React from "react";\nimport ReactDOM from "react-dom";\n\nimport App from "./App";\n\nconst rootElement = document.getElementById("root");\nReactDOM.render(\n  <React.StrictMode>\n    <App />\n  </React.StrictMode>,\n  rootElement\n);\n'
-    },
-    'src/App.js': {
-      content: 'import React from "react";\n\nexport default function App() {\n  return <div>there will be dragons</div>;\n}\n'
-    }
-  }
-});
+/**
+ * Generates html markup for the sandbox
+ * @param {String} type either MUI or PF4
+ */
+const generateIndex = (type) => `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <title>Data driven forms example</title>
+    ${type === 'mui' ? '<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">' : ''}
+    ${
+      type === 'pf4'
+        ? `
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@patternfly/patternfly@4.0.5/patternfly-base.css"/>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@patternfly/patternfly@4.0.5/patternfly-addons.css"/>
+    `
+        : ''
+    }    
+  </head>
 
-console.log(payload);
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root" style="padding: 16px;"></div>
+  </body>
+</html>
+`;
+
+const getPayload = (type, code) =>
+  getParameters({
+    files: {
+      'public/index.html': {
+        content: generateIndex(type)
+      },
+      'package.json': {
+        content: {
+          name: 'data-driven-forms-example',
+          version: '1.0.0',
+          description: '',
+          keywords: [],
+          main: 'src/index.js',
+          dependencies: {
+            '@data-driven-forms/mui-component-mapper': '2.1.2',
+            '@data-driven-forms/pf4-component-mapper': '2.1.2',
+            '@data-driven-forms/react-form-renderer': '2.1.2',
+            '@patternfly/react-core': 'latest',
+            '@patternfly/react-icons': 'latest',
+            '@material-ui/core': 'latest',
+            '@material-ui/icons': 'latest',
+            react: '16.12.0',
+            'react-dom': '16.12.0',
+            'react-scripts': '3.0.1'
+          },
+          devDependencies: { typescript: '3.8.3' },
+          scripts: {
+            start: 'react-scripts start',
+            build: 'react-scripts build',
+            test: 'react-scripts test --env=jsdom',
+            eject: 'react-scripts eject'
+          },
+          browserslist: ['>0.2%', 'not dead', 'not ie <= 11', 'not op_mini all']
+        }
+      },
+      'src/index.js': {
+        content:
+          'import React from "react";\nimport ReactDOM from "react-dom";\n\nimport App from "./App";\n\nconst rootElement = document.getElementById("root");\nReactDOM.render(\n  <React.StrictMode>\n    <App />\n  </React.StrictMode>,\n  rootElement\n);\n'
+      },
+      'src/App.js': {
+        content: code
+      }
+    }
+  });
 
 const CodeExample = ({ source, mode }) => {
   const classes = useStyles();
@@ -107,7 +150,7 @@ const CodeExample = ({ source, mode }) => {
               {Component && <Typography className={classes.heading}>{Component.name}</Typography>}
               <Box display="flex">
                 <form action="https://codesandbox.io/api/v1/sandboxes/define" method="POST" target="_blank">
-                  <input type="hidden" name="parameters" value={payload} />
+                  <input type="hidden" name="parameters" value={getPayload('pf4', codeSource)} />
                   <input type="submit" value="Open in sandbox" />
                 </form>
                 <Link
