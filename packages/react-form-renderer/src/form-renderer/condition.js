@@ -151,7 +151,18 @@ const conditionProps = {
   is: PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.object, PropTypes.number, PropTypes.bool]),
   isNotEmpty: PropTypes.bool,
   isEmpty: PropTypes.bool,
-  pattern: PropTypes.oneOf([PropTypes.string, PropTypes.instanceOf(RegExp)]),
+  pattern: (props, name, componentName) => {
+    if (typeof props[name] === 'string') {
+      return;
+    }
+
+    if (props[name] instanceof RegExp) {
+      return;
+    }
+
+    return new Error(`Invalid prop pattern supplied to condition in \`${componentName}\`. Validation failed.
+    pattern has to be RegExp or string. Received \`${typeof props[name]}\`.`);
+  },
   notMatch: PropTypes.any,
   then: PropTypes.shape({
     visible: PropTypes.bool,
