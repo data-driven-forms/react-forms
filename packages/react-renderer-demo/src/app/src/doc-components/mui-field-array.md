@@ -1,4 +1,4 @@
-MUI component mapper provides an experimental implementation of PF4 field arrays.
+MUI component mapper provides an experimental implementation of field array.
 
 **Props**
 

@@ -1,4 +1,4 @@
-PF4 component mapper provides an experimental implementation of PF4 field arrays.
+PF4 component mapper provides an experimental implementation of field array.
 
 **Props**
 

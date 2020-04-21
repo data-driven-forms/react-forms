@@ -2,15 +2,11 @@ import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { useFormApi, FieldArray } from '@data-driven-forms/react-form-renderer';
 
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
+import { Grid, Button, Typography, FormControl, FormHelperText, IconButton } from '@material-ui/core';
+
 import { makeStyles } from '@material-ui/core/styles';
 import RedoIcon from '@material-ui/icons/Redo';
 import UndoIcon from '@material-ui/icons/Undo';
-import IconButton from '@material-ui/core/IconButton';
 
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
@@ -157,13 +153,11 @@ const DynamicArray = ({ ...props }) => {
 
             const undo = () => {
               push(state.history[state.index - 1].value);
-
               dispatch({ type: 'undo' });
             };
 
             const redo = () => {
               remove(value.length - 1);
-
               dispatch({ type: 'redo' });
             };
 
@@ -198,7 +192,7 @@ const DynamicArray = ({ ...props }) => {
                   ) : (
                     map((name, index) => (
                       <ArrayItem
-                        key={`${name}-${index}`}
+                        key={name}
                         fields={formFields}
                         name={name}
                         fieldIndex={index}
