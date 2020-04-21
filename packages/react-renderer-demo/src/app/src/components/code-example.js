@@ -148,15 +148,17 @@ const CodeExample = ({ source, mode, mapper, additionalSources }) => {
   let Component;
   if (mode === 'preview') {
     Component = req(`./${source}.js`).default;
-    const sourceFiles = additionalSources.split(',').reduce(
-      (acc, curr) => ({
-        ...acc,
-        [`src/${curr.split('/').pop()}`]: {
-          content: curr.match(/\.css$/) ? reqCss(`./${curr}`).default : reqSource(`./${curr}`).default
-        }
-      }),
-      {}
-    );
+    const sourceFiles = additionalSources
+      ? additionalSources.split(',').reduce(
+          (acc, curr) => ({
+            ...acc,
+            [`src/${curr.split('/').pop()}`]: {
+              content: curr.match(/\.css$/) ? reqCss(`./${curr}`).default : reqSource(`./${curr}`).default
+            }
+          }),
+          {}
+        )
+      : {};
 
     return (
       <Grid container spacing={0} className="DocRawComponent">
@@ -181,13 +183,12 @@ const CodeExample = ({ source, mode, mapper, additionalSources }) => {
                 <form action="https://codesandbox.io/api/v1/sandboxes/define" method="POST" target="_blank">
                   <input type="hidden" name="parameters" value={getPayload(mapper, codeSource, sourceFiles)} />
                   <Tooltip title="Edit in codesandbox">
-                    <IconButton disableFocusRipple type="submit">
+                    <IconButton disableFocusRipple type="submit" onClick={(event) => event.stopPropagation()}>
                       <CodesandboxIcon />
                     </IconButton>
                   </Tooltip>
                 </form>
                 <Link
-                  component="button"
                   href={`https://github.com/data-driven-forms/react-forms/tree/master/packages/react-renderer-demo/src/app/examples/${source}.js`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -248,8 +249,7 @@ CodeExample.propTypes = {
 
 CodeExample.defaultProps = {
   mode: 'code',
-  mapper: 'pf4',
-  additionalSources: ''
+  mapper: 'pf4'
 };
 
 export default CodeExample;
