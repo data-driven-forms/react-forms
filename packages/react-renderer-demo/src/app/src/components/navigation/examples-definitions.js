@@ -4,7 +4,9 @@ import TabsText from './examples-texts/tabs';
 import CustomComponentText from './examples-texts/custom-component';
 import WizardText from './examples-texts/wizard';
 import SelectText from './examples-texts/select';
+import FieldArray from './examples-texts/field-array';
 import DualListSelect from './examples-texts/dual-list-select';
+import arraySchemaDDF from './field-array-schema';
 
 const formGroupVariants = [
   {
@@ -494,6 +496,14 @@ Vestibulum vulputate inceptos himenaeos.`
         }
       ]
     }
+  },
+  {
+    component: componentTypes.FIELD_ARRAY,
+    link: componentTypes.FIELD_ARRAY,
+    linkText: 'Field Array',
+    ContentText: FieldArray,
+    value: arraySchemaDDF,
+    variants: []
   },
   {
     component: componentTypes.WIZARD,
