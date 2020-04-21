@@ -15,6 +15,7 @@ import clsx from 'clsx';
 import grey from '@material-ui/core/colors/grey';
 import IconButton from '@material-ui/core/IconButton';
 import { getParameters } from 'codesandbox/lib/api/define';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import GhIcon from './common/gh-svg-icon';
 import CodesandboxIcon from './common/code-sandbox-svg-icon';
@@ -150,7 +151,16 @@ const CodeExample = ({ source, mode }) => {
       <Grid container spacing={0} className="DocRawComponent">
         <Grid item xs={12}>
           <ExpansionPanel className={classes.expansionPanel}>
-            <ExpansionPanelSummary className={classes.expansionPanelSummary} expandIcon={<CodeIcon />}>
+            <ExpansionPanelSummary
+              className={classes.expansionPanelSummary}
+              expandIcon={
+                <Tooltip title="Expand code example">
+                  <IconButton>
+                    <CodeIcon />
+                  </IconButton>
+                </Tooltip>
+              }
+            >
               {Component && (
                 <Typography className={classes.heading} component="h4" variant="h3">
                   {Component.name}
@@ -159,9 +169,11 @@ const CodeExample = ({ source, mode }) => {
               <Box display="flex">
                 <form action="https://codesandbox.io/api/v1/sandboxes/define" method="POST" target="_blank">
                   <input type="hidden" name="parameters" value={getPayload('pf4', codeSource)} />
-                  <IconButton disableFocusRipple type="submit">
-                    <CodesandboxIcon />
-                  </IconButton>
+                  <Tooltip title="Edit in codesandbox">
+                    <IconButton disableFocusRipple type="submit">
+                      <CodesandboxIcon />
+                    </IconButton>
+                  </Tooltip>
                 </form>
                 <Link
                   component="button"
@@ -170,7 +182,11 @@ const CodeExample = ({ source, mode }) => {
                   rel="noopener noreferrer"
                   onClick={(event) => event.stopPropagation()}
                 >
-                  <GhIcon style={{ color: grey[700] }} />
+                  <Tooltip title="View source on github">
+                    <IconButton>
+                      <GhIcon style={{ color: grey[700] }} />
+                    </IconButton>
+                  </Tooltip>
                 </Link>
               </Box>
             </ExpansionPanelSummary>
