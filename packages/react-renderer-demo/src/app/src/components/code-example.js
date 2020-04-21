@@ -13,9 +13,11 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Paper from '@material-ui/core/Paper';
 import clsx from 'clsx';
 import grey from '@material-ui/core/colors/grey';
+import IconButton from '@material-ui/core/IconButton';
 import { getParameters } from 'codesandbox/lib/api/define';
 
 import GhIcon from './common/gh-svg-icon';
+import CodesandboxIcon from './common/code-sandbox-svg-icon';
 
 const CodeEditor = dynamic(import('./code-editor'), {
   ssr: false
@@ -35,9 +37,11 @@ const useStyles = makeStyles((theme) => ({
     padding: 16
   },
   heading: {
-    fontSize: theme.typography.pxToRem(15),
+    fontSize: theme.typography.pxToRem(20),
     fontWeight: theme.typography.fontWeightRegular,
-    flexGrow: 1
+    flexGrow: 1,
+    display: 'flex',
+    alignItems: 'center'
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
@@ -147,13 +151,20 @@ const CodeExample = ({ source, mode }) => {
         <Grid item xs={12}>
           <ExpansionPanel className={classes.expansionPanel}>
             <ExpansionPanelSummary className={classes.expansionPanelSummary} expandIcon={<CodeIcon />}>
-              {Component && <Typography className={classes.heading}>{Component.name}</Typography>}
+              {Component && (
+                <Typography className={classes.heading} component="h4" variant="h3">
+                  {Component.name}
+                </Typography>
+              )}
               <Box display="flex">
                 <form action="https://codesandbox.io/api/v1/sandboxes/define" method="POST" target="_blank">
                   <input type="hidden" name="parameters" value={getPayload('pf4', codeSource)} />
-                  <input type="submit" value="Open in sandbox" />
+                  <IconButton disableFocusRipple type="submit">
+                    <CodesandboxIcon />
+                  </IconButton>
                 </form>
                 <Link
+                  component="button"
                   href={`https://github.com/data-driven-forms/react-forms/tree/master/packages/react-renderer-demo/src/app/examples/${source}.js`}
                   target="_blank"
                   rel="noopener noreferrer"
