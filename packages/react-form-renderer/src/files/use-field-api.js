@@ -1,6 +1,5 @@
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext, useState, useRef } from 'react';
 import { useField } from 'react-final-form';
-import useFormApi from './use-form-api';
 import enhancedOnChange from '../form-renderer/enhanced-on-change';
 import RendererContext from './renderer-context';
 import convertInitialValue from '../form-renderer/convert-initial-value';
@@ -16,43 +15,60 @@ const calculateInitialValue = (props) => {
   }
 };
 
-const useFieldApi = ({ name, initializeOnMount, component, render, validate, ...props }) => {
-  const { actionMapper, validatorMapper } = useContext(RendererContext);
-  const [initialValue, setInitialValue] = useState(() => calculateInitialValue(props));
-
-  const formOptions = useFormApi();
-
-  /** Assign type (checkbox, radio ) */
-  let enhancedProps = {
-    type: assignSpecialType(component)
-  };
-
-  /** Add validate/array validator when needed */
-  let arrayValidator;
-  if (validate || props.dataType) {
-    if (componentTypes.FIELD_ARRAY === component) {
-      arrayValidator = prepareArrayValidator(getValidate(validate, props.dataType, validatorMapper));
-    } else {
-      enhancedProps = {
-        ...enhancedProps,
-        validate: composeValidators(getValidate(validate, props.dataType, validatorMapper))
-      };
-    }
+const calculateArrayValidator = (props, validate, component, validatorMapper) => {
+  if ((validate || props.dataType) && componentTypes.FIELD_ARRAY === component) {
+    return prepareArrayValidator(getValidate(validate, props.dataType, validatorMapper));
   }
+};
 
-  enhancedProps = {
-    ...enhancedProps,
+const calculateValidate = (props, validate, component, validatorMapper) => {
+  if ((validate || props.dataType) && componentTypes.FIELD_ARRAY !== component) {
+    return composeValidators(getValidate(validate, props.dataType, validatorMapper));
+  }
+};
+
+const useFieldApi = ({ name, initializeOnMount, component, render, validate, ...props }) => {
+  const { actionMapper, validatorMapper, formOptions } = useContext(RendererContext);
+  const [initialValue, setInitialValue] = useState(() => calculateInitialValue(props));
+  const [arrayValidator, setArrayValidator] = useState(() => calculateArrayValidator(props, validate, component, validatorMapper));
+  const [stateValidate, setValidate] = useState(() => calculateValidate(props, validate, component, validatorMapper));
+  const [type, setType] = useState(() => assignSpecialType(component));
+  const mounted = useRef(false);
+
+  const enhancedProps = {
+    type,
     ...props,
-    ...(initialValue ? { initialValue } : {})
+    ...(initialValue ? { initialValue } : {}),
+    ...(stateValidate ? { validate: stateValidate } : {})
   };
 
   const fieldProps = useField(name, enhancedProps);
 
+  /** Reinitilize type */
+  useEffect(() => {
+    if (mounted.current) {
+      const specialType = assignSpecialType(component);
+      if (specialType !== type) {
+        setType(specialType);
+      }
+    }
+  }, [component]);
+
+  /** Reinitilize array validator/validate */
+  useEffect(() => {
+    if (mounted.current) {
+      setArrayValidator(calculateArrayValidator(props, validate, component, validatorMapper));
+      setValidate(calculateValidate(props, validate, component, validatorMapper));
+    }
+  }, [validate, component, props.dataType]);
+
   /** Re-convert initialValue when changed */
   useEffect(() => {
-    const newInitialValue = calculateInitialValue(props);
-    if (!isEqual(initialValue, newInitialValue)) {
-      setInitialValue(newInitialValue);
+    if (mounted.current) {
+      const newInitialValue = calculateInitialValue(props);
+      if (!isEqual(initialValue, newInitialValue)) {
+        setInitialValue(newInitialValue);
+      }
     }
   }, [props.initialValue, props.dataType]);
 
@@ -75,13 +91,17 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, ...
   const fieldClearedValue = Object.prototype.hasOwnProperty.call(props, 'clearedValue') ? props.clearedValue : formOptions.clearedValue;
 
   useEffect(
-    () => () => {
-      /**
-       * Delete the value from form state when field is inmounted
-       */
-      if ((formOptions.clearOnUnmount || props.clearOnUnmount) && props.clearOnUnmount !== false) {
-        fieldProps.input.onChange(fieldClearedValue);
-      }
+    () => {
+      mounted.current = true;
+
+      return () => {
+        /**
+         * Delete the value from form state when field is inmounted
+         */
+        if ((formOptions.clearOnUnmount || props.clearOnUnmount) && props.clearOnUnmount !== false) {
+          fieldProps.input.onChange(fieldClearedValue);
+        }
+      };
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
