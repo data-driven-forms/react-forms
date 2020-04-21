@@ -60,12 +60,34 @@ const conditionLogicDemo = {
   description: 'Write X in both',
   fields: [
     {
+      name: 'text_box_1',
+      label: 'Text Box 1',
+      title: 'Text Box',
+      component: 'text-field',
+      clearOnUnmount: true,
+      condition: {
+        sequence: [
+          { when: 'a', is: 'x', then: { visible: true, set: { password: 'defaultPassword' } }, else: { set: { password: 'no password' } } },
+          { when: 'b', is: 'x', then: { visible: true, set: { text_box_1: 'defaultText' } } }
+        ]
+      }
+    },
+    {
       name: 'a',
       label: 'a',
       title: 'a',
-      initialValue: '1',
-      dataType: 'number',
-      type: 'number',
+      component: 'text-field'
+    },
+    {
+      name: 'b',
+      label: 'b',
+      title: 'b',
+      component: 'text-field'
+    },
+    {
+      name: 'password',
+      label: 'password',
+      title: 'password',
       component: 'text-field'
     }
   ]
