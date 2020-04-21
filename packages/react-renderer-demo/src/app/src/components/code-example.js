@@ -25,6 +25,7 @@ const CodeEditor = dynamic(import('./code-editor'), {
 });
 
 const reqSource = require.context('!raw-loader!@docs/examples', true, /\.js/);
+const reqCss = require.context('!raw-loader!@docs/examples', true, /\.css/);
 const req = require.context('@docs/examples', true, /\.js/);
 
 const useStyles = makeStyles((theme) => ({
@@ -95,9 +96,10 @@ const generateIndex = (type) => `<!DOCTYPE html>
 </html>
 `;
 
-const getPayload = (type, code) =>
+const getPayload = (type, code, sourceFiles = {}) =>
   getParameters({
     files: {
+      ...sourceFiles,
       'public/index.html': {
         content: generateIndex(type)
       },
@@ -140,12 +142,21 @@ const getPayload = (type, code) =>
     }
   });
 
-const CodeExample = ({ source, mode, mapper }) => {
+const CodeExample = ({ source, mode, mapper, additionalSources }) => {
   const classes = useStyles();
   const codeSource = reqSource(`./${source}.js`).default;
   let Component;
   if (mode === 'preview') {
     Component = req(`./${source}.js`).default;
+    const sourceFiles = additionalSources.split(',').reduce(
+      (acc, curr) => ({
+        ...acc,
+        [`src/${curr.split('/').pop()}`]: {
+          content: curr.match(/\.css$/) ? reqCss(`./${curr}`).default : reqSource(`./${curr}`).default
+        }
+      }),
+      {}
+    );
 
     return (
       <Grid container spacing={0} className="DocRawComponent">
@@ -168,7 +179,7 @@ const CodeExample = ({ source, mode, mapper }) => {
               )}
               <Box display="flex">
                 <form action="https://codesandbox.io/api/v1/sandboxes/define" method="POST" target="_blank">
-                  <input type="hidden" name="parameters" value={getPayload(mapper, codeSource)} />
+                  <input type="hidden" name="parameters" value={getPayload(mapper, codeSource, sourceFiles)} />
                   <Tooltip title="Edit in codesandbox">
                     <IconButton disableFocusRipple type="submit">
                       <CodesandboxIcon />
@@ -231,12 +242,14 @@ const CodeExample = ({ source, mode, mapper }) => {
 CodeExample.propTypes = {
   source: PropTypes.string.isRequired,
   mode: PropTypes.oneOf(['code', 'preview']),
-  mapper: PropTypes.oneOf(['pf4', 'mui'])
+  mapper: PropTypes.oneOf(['pf4', 'mui']),
+  additionalSources: PropTypes.string // this has to be a string, MDX does not pass objects/arrays
 };
 
 CodeExample.defaultProps = {
   mode: 'code',
-  mapper: 'pf4'
+  mapper: 'pf4',
+  additionalSources: ''
 };
 
 export default CodeExample;
