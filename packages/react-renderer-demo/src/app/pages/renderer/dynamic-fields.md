@@ -1,5 +1,5 @@
 import Grid from '@material-ui/core/Grid'
-import RawComponent from '@docs/raw-component';
+import CodeExamples from '../../src/components/code-example';
 
 import ListOfContents from '../../src/helpers/list-of-contents';
 
@@ -18,7 +18,7 @@ You have to just import `FieldArray` from Data Driven Forms.
 import { FieldArray } from '@data-driven-forms/react-form-renderer';
 ```
 
-<RawComponent source="field-array/form-fields-mapper" />
+<CodeExamples source="components/field-array/form-fields-mapper" mode="preview" />
 
 # Naming
 
@@ -73,7 +73,7 @@ PF4 and MUI component mapper provides an experimental implementation of field ar
 
 [MUI Field Array](/component-example/field-array?mapper=mui)
 
-<RawComponent source="field-array/pf4-demo" />
+<CodeExamples source="components/field-array/pf4-demo" mode="preview" />
 
 </Grid>
 <Grid item xs={false} md={2}>
