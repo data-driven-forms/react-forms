@@ -40,7 +40,8 @@ exports[`renderForm function #condition should render condition field only if co
             name="a"
           >
             <FieldProvider
-              component={[Function]}
+              Component={[Function]}
+              component="custom-component"
               name="a"
             >
               <TextField
@@ -105,7 +106,8 @@ exports[`renderForm function #condition should render condition field only if co
             name="c"
           >
             <FieldProvider
-              component={[Function]}
+              Component={[Function]}
+              component="custom-component"
               name="c"
             >
               <TextField
@@ -259,7 +261,8 @@ exports[`renderForm function #condition should render condition field only if on
             name="a"
           >
             <FieldProvider
-              component={[Function]}
+              Component={[Function]}
+              component="custom-component"
               name="a"
             >
               <TextField
@@ -324,7 +327,8 @@ exports[`renderForm function #condition should render condition field only if on
             name="b"
           >
             <FieldProvider
-              component={[Function]}
+              Component={[Function]}
+              component="custom-component"
               name="b"
             >
               <TextField
@@ -513,7 +517,8 @@ exports[`renderForm function should render single field from with custom compone
             name="foo"
           >
             <FieldProvider
-              component={[Function]}
+              Component={[Function]}
+              component="custom-component"
               name="foo"
             >
               <TextField

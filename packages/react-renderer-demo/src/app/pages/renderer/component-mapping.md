@@ -56,13 +56,13 @@ const { input, isDisabled, label, helperText, description, meta } = useFieldApi(
 
 ### FieldProvider
 
-Or you can import `FieldProvider` component from Data Driven Forms. This component needs to obtain `render` or `component` prop.
+Or you can import `FieldProvider` component from Data Driven Forms. This component needs to obtain `render` or `Component` prop.
 
 
 ```jsx
 import { FieldProvider } from '@data-driven-forms/react-form-renderer'
 
-<FielProvider component={TextField}>
+<FielProvider Component={TextField}>
 
 // or
 

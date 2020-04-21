@@ -44,7 +44,7 @@ describe('renderForm function', () => {
 
   beforeEach(() => {
     const TextField = ({ input }) => <input {...input} id={input.name} />;
-    CustomComponent = ({ dataType, formOptions, ...props }) => <FieldProvider {...props} component={TextField} />;
+    CustomComponent = ({ dataType, formOptions, ...props }) => <FieldProvider {...props} Component={TextField} />;
   });
 
   it('should render single field from defined componentTypes', () => {
