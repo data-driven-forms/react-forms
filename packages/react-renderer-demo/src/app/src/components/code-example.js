@@ -140,7 +140,7 @@ const getPayload = (type, code) =>
     }
   });
 
-const CodeExample = ({ source, mode }) => {
+const CodeExample = ({ source, mode, mapper }) => {
   const classes = useStyles();
   const codeSource = reqSource(`./${source}.js`).default;
   let Component;
@@ -168,7 +168,7 @@ const CodeExample = ({ source, mode }) => {
               )}
               <Box display="flex">
                 <form action="https://codesandbox.io/api/v1/sandboxes/define" method="POST" target="_blank">
-                  <input type="hidden" name="parameters" value={getPayload('pf4', codeSource)} />
+                  <input type="hidden" name="parameters" value={getPayload(mapper, codeSource)} />
                   <Tooltip title="Edit in codesandbox">
                     <IconButton disableFocusRipple type="submit">
                       <CodesandboxIcon />
@@ -230,11 +230,13 @@ const CodeExample = ({ source, mode }) => {
 
 CodeExample.propTypes = {
   source: PropTypes.string.isRequired,
-  mode: PropTypes.oneOf(['code', 'preview'])
+  mode: PropTypes.oneOf(['code', 'preview']),
+  mapper: PropTypes.oneOf(['pf4', 'mui'])
 };
 
 CodeExample.defaultProps = {
-  mode: 'code'
+  mode: 'code',
+  mapper: 'pf4'
 };
 
 export default CodeExample;
