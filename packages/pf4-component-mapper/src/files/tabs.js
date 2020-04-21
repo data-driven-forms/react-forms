@@ -4,7 +4,7 @@ import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
 import { Tab, Tabs } from '@patternfly/react-core';
 
-const FormTabs = ({ fields, dataType, validate, ...rest }) => {
+const FormTabs = ({ fields, dataType, validate, component, ...rest }) => {
   const formOptions = useFormApi();
   const [activeTabKey, setActiveTabKey] = useState(0);
 
@@ -30,7 +30,8 @@ const FormTabs = ({ fields, dataType, validate, ...rest }) => {
 FormTabs.propTypes = {
   fields: PropTypes.array.isRequired,
   dataType: PropTypes.any,
-  validate: PropTypes.any
+  validate: PropTypes.any,
+  component: PropTypes.any
 };
 
 export default FormTabs;

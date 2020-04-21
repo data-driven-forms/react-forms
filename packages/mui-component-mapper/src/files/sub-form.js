@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const SubForm = ({ fields, title, description, ...rest }) => {
+const SubForm = ({ fields, title, description, component, ...rest }) => {
   const { renderForm } = useFormApi();
   const classes = useStyles();
 
@@ -38,7 +38,8 @@ const SubForm = ({ fields, title, description, ...rest }) => {
 SubForm.propTypes = {
   fields: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
   title: PropTypes.string,
-  description: PropTypes.string
+  description: PropTypes.string,
+  component: PropTypes.any
 };
 
 export default SubForm;

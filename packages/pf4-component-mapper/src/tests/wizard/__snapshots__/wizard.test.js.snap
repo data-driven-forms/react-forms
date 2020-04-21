@@ -423,7 +423,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                               "submit": "Submit",
                             }
                           }
-                          component="wizard"
                           currentStep={
                             Object {
                               "fields": Array [
@@ -1500,7 +1499,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                               "submit": "Submit",
                             }
                           }
-                          component="wizard"
                           currentStep={
                             Object {
                               "fields": Array [

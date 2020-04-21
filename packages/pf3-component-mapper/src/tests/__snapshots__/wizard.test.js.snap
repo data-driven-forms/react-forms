@@ -313,7 +313,6 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                         >
                           <WizardInternal
                             activeStepIndex={0}
-                            component="wizard"
                             currentStep={
                               Object {
                                 "fields": Array [],
@@ -1097,7 +1096,6 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                         >
                           <WizardInternal
                             activeStepIndex={0}
-                            component="wizard"
                             currentStep={
                               Object {
                                 "fields": Array [],
@@ -1993,7 +1991,6 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                         >
                           <WizardInternal
                             activeStepIndex={0}
-                            component="wizard"
                             currentStep={
                               Object {
                                 "fields": Array [],
@@ -2841,7 +2838,6 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                         >
                           <WizardInternal
                             activeStepIndex={0}
-                            component="wizard"
                             currentStep={
                               Object {
                                 "fields": Array [],
