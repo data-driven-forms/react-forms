@@ -147,7 +147,7 @@ const Condition = React.memo(
 );
 
 const conditionProps = {
-  when: PropTypes.string,
+  when: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   is: PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.object, PropTypes.number, PropTypes.bool]),
   isNotEmpty: PropTypes.bool,
   isEmpty: PropTypes.bool,
