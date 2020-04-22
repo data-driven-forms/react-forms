@@ -862,7 +862,6 @@ exports[`FormFields should render Radio correctly 1`] = `
                   "value": "1",
                 }
               }
-              radioGroupValue=""
             >
               <Radio
                 aria-label="One"
@@ -913,7 +912,6 @@ exports[`FormFields should render Radio correctly 1`] = `
                   "value": "2",
                 }
               }
-              radioGroupValue=""
             >
               <Radio
                 aria-label="Two"
@@ -964,7 +962,6 @@ exports[`FormFields should render Radio correctly 1`] = `
                   "value": "3",
                 }
               }
-              radioGroupValue=""
             >
               <Radio
                 aria-label="Three"
@@ -2388,7 +2385,6 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
                   "value": "1",
                 }
               }
-              radioGroupValue=""
             >
               <Radio
                 aria-label="One"
@@ -2439,7 +2435,6 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
                   "value": "2",
                 }
               }
-              radioGroupValue=""
             >
               <Radio
                 aria-label="Two"
@@ -2490,7 +2485,6 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
                   "value": "3",
                 }
               }
-              radioGroupValue=""
             >
               <Radio
                 aria-label="Three"
