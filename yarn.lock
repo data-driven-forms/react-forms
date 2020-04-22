@@ -16427,6 +16427,11 @@ react-fontawesome@^1.6.1:
   dependencies:
     prop-types "^15.5.6"
 
+react-github-buttons@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/react-github-buttons/-/react-github-buttons-0.4.0.tgz#ab7870772dea946526c7a7c53fdd8f39a63b6cb5"
+  integrity sha512-MG5EnS/V8sIP+ExUnITlz47aSA5QvvwL1lLdQNazXSs0ewoZWTMoAv5FZwkMa7bMAwVOuQg38JtOqCrptKELkw==
+
 react-input-autosize@^2.2.1, react-input-autosize@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-2.2.2.tgz#fcaa7020568ec206bc04be36f4eb68e647c4d8c2"
