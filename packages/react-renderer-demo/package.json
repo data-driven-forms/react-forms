@@ -49,6 +49,7 @@
         "react-ace": "^6.3.2",
         "react-copy-to-clipboard": "^5.0.1",
         "react-dom": "^16.13.0",
+        "react-github-buttons": "^0.4.0",
         "react-sticky-box": "^0.8.0"
     },
     "devDependencies": {

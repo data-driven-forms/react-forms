@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Link from 'next/link';
+import { Star } from 'react-github-buttons';
 
 import LandingPageTitle from '@docs/components/landing-page/landing-page-title';
 import LandingPageCards from '@docs/components/landing-page/landing-page-cards';
@@ -26,8 +27,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 48
   },
   npmLink: {
-    display: 'block',
-    textAlign: 'center',
+    display: 'flex',
+    justifyContent: 'center',
     marginTop: 24
   },
   getStartedAnchor: {
@@ -40,6 +41,20 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 16,
     paddingRight: 16,
     textTransform: 'none'
+  },
+  gitHubStar: {
+    textDecoration: 'none',
+    '& button': {
+      lineHeight: 1.43,
+      padding: '1px 6px',
+      maxHeight: 20
+    },
+    '& a': {
+      padding: '2px 5px',
+      lineHeight: 1.43,
+      fontFamily: 'sans-serif',
+      maxHeight: 20
+    }
   }
 }));
 
@@ -62,15 +77,9 @@ const LandingPage = () => {
           </Link>
         </div>
         <div className={classes.npmLink}>
-          <a
-            className="github-button"
-            href="https://github.com/data-driven-forms/react-forms"
-            data-show-count="true"
-            aria-label="Star data-driven-forms/react-forms on GitHub"
-          >
-            Star
+          <a className={classes.gitHubStar} href="https://github.com/data-driven-forms/react-forms" rel="noopener noreferrer" target="_blank">
+            <Star owner="data-driven-forms" repo="react-forms" />
           </a>
-          &nbsp;
           <a href="https://badge.fury.io/js/%40data-driven-forms%2Freact-form-renderer" rel="noopener noreferrer" target="_blank">
             <img src="https://badge.fury.io/js/%40data-driven-forms%2Freact-form-renderer.svg" alt="current version" />
           </a>
