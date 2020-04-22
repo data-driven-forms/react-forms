@@ -37,7 +37,13 @@ With using `useFormApi` hook you can get access to all form information and func
 
 You can customize form buttons in your [FormTemplate](/renderer/renderer-api#requiredprops) component
 
-<CodeExample source="components/custom-buttons" mode="preview" />
+<CodeExample source="components/form-template/custom-buttons" mode="preview" />
+
+## Form level validation
+
+To display all form errors, you will need to add a component to your FormTemplate. Following example shows how to list all errors at the top of a form.
+
+<CodeExample source="components/form-template/form-level-validation" mode="preview" mapper="mui" />
 
 ## Default FormTemplates
 
