@@ -77,9 +77,9 @@ const LandingPage = () => {
           </Link>
         </div>
         <div className={classes.npmLink}>
-          <a className={classes.gitHubStar} href="https://github.com/data-driven-forms/react-forms" rel="noopener noreferrer" target="_blank">
+          <span className={classes.gitHubStar}>
             <Star owner="data-driven-forms" repo="react-forms" />
-          </a>
+          </span>
           <a href="https://badge.fury.io/js/%40data-driven-forms%2Freact-form-renderer" rel="noopener noreferrer" target="_blank">
             <img src="https://badge.fury.io/js/%40data-driven-forms%2Freact-form-renderer.svg" alt="current version" />
           </a>
