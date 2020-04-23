@@ -38,21 +38,21 @@ class Wizard extends React.Component {
       isDynamic,
       navSchema: this.createSchema({ currentIndex: 0, isDynamic }),
       loading: true,
+      container: this.props.inModal && (this.props.container || document.createElement('div'))
     };
   }
 
   componentDidMount() {
     if (this.props.inModal) {
-      this.container = document.createElement('div');
-      document.body.appendChild(this.container);
+      document.body.appendChild(this.state.container);
     }
 
     this.setState({ loading: false });
   }
 
   componentWillUnmount() {
-    if (this.props.inModal && this.container) {
-      document.body.removeChild(this.container);
+    if (this.props.inModal && this.state.container) {
+      document.body.removeChild(this.state.container);
     }
   }
 
@@ -240,7 +240,7 @@ class Wizard extends React.Component {
       />);
 
     return (
-      <Modal inModal={ inModal } container={ this.container }>
+      <Modal inModal={ inModal } container={ this.state.container }>
         <div className={ `pf-c-wizard ${inModal ? '' : 'no-shadow'} ${isCompactNav ? 'pf-m-compact-nav' : ''} ${setFullWidth ? 'pf-m-full-width' : ''} ${setFullHeight ? 'pf-m-full-height' : ''}` }
           role="dialog"
           aria-modal={ inModal ? 'true' : undefined }
@@ -311,6 +311,7 @@ Wizard.propTypes = {
   showTitles: PropTypes.bool,
   predictSteps: PropTypes.bool,
   crossroads: PropTypes.arrayOf(PropTypes.string),
+  container: PropTypes.instanceOf(Element)
 };
 
 const defaultLabels = {
