@@ -41,8 +41,8 @@
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.10.0",
     "prop-types": "^15.6.2",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "regenerator-runtime": "^0.12.1",
     "resolve-url-loader": "^3.0.0",
     "rollup": "^1.23.1",
@@ -71,7 +71,7 @@
     "react-final-form-arrays": "^3.1.1"
   },
   "peerDependencies": {
-    "react": "^16.13.0",
+    "react": "^16.13.1",
     "react-dom": "^16.13.0"
   },
   "postpublish": "export RELEASE_DEMO=true"

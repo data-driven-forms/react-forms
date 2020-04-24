@@ -37,7 +37,8 @@ module.exports = withBundleAnalyzer(
                 !res.match(/node_modules[/\\]webpack/) &&
                 !res.match(/node_modules[/\\]@patternfly\/react-core/) &&
                 !res.match(/node_modules[/\\]@patternfly\/react-styles/) &&
-                !res.match(/node_modules[/\\]@data-driven-forms/)
+                !res.match(/node_modules[/\\]@data-driven-forms\/pf4-component-mapper/) &&
+                !res.match(/node_modules[/\\]@data-driven-forms\/pf3-component-mapper/)
               ) {
                 return callback(null, `commonjs ${request}`);
               }

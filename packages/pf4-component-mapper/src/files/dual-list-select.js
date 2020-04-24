@@ -13,10 +13,11 @@ import {
   GridItem,
   Text,
   TextVariants,
-  TextContent
+  TextContent,
+  DataToolbar,
+  DataToolbarItem,
+  DataToolbarContent
 } from '@patternfly/react-core';
-
-import { DataToolbar, DataToolbarItem, DataToolbarContent } from '@patternfly/react-core/dist/js/experimental';
 
 import {
   SortAlphaDownIcon,
