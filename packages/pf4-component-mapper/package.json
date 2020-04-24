@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/pf4-component-mapper",
-  "version": "1.31.2",
+  "version": "1.31.3",
   "description": "Starter pf4-component-mapper for data-driven-forms.",
   "main": "dist/index.js",
   "license": "Apache-2.0",
