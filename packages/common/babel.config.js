@@ -5,7 +5,6 @@ const glob = require('glob');
 const mapper = {
   TextVariants: 'Text',
   ButtonVariant: 'Button',
-  DropdownPosition: 'dropdownConstants',
   TextListVariants: 'TextList',
   TextListItemVariants: 'TextListItem'
 };
