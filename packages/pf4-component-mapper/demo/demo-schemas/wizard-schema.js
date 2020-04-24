@@ -68,6 +68,10 @@ export const wizardSchema = {
         }, {
           value: 'google',
           label: 'Google',
+        }, {
+          value: 'disabled',
+          label: 'I am disabled',
+          isDisabled: true,
         }],
         validate: [{
           type: validatorTypes.REQUIRED,

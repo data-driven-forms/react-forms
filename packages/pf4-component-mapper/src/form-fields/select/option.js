@@ -7,7 +7,7 @@ import CheckIcon from '@patternfly/react-icons/dist/js/icons/check-icon';
 
 const Option = (props) => (
   <div
-    className={ `ddorg__pf4-component-mapper__select__menu--option ${props.isFocused ? 'focused' : ''}` }
+    className={ `ddorg__pf4-component-mapper__select__menu--option ${props.isFocused ? 'focused' : ''} ${props.isDisabled ? 'disabled' : ''}` }
   >
     { props.selectProps && props.selectProps && props.selectProps.isCheckbox &&
             <Checkbox
@@ -23,6 +23,7 @@ const Option = (props) => (
 Option.propTypes = {
   isFocused: PropTypes.bool,
   isSelected: PropTypes.bool,
+  isDisabled: PropTypes.bool,
   getStyles: PropTypes.func.isRequired,
   selectOption: PropTypes.func,
   cx: PropTypes.func.isRequired,
@@ -39,6 +40,7 @@ Option.propTypes = {
 
 Option.defaultProps = {
   isFocused: false,
+  isDisabled: false,
   isSelected: false,
   selectOption: () => undefined,
   selectProps: {
