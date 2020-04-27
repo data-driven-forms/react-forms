@@ -27,11 +27,11 @@ Pf3FormGroup.propTypes = {
   meta: PropTypes.shape({ error: PropTypes.string }).isRequired,
   validateOnMount: PropTypes.bool,
   hideLabel: PropTypes.bool,
-  label: PropTypes.string,
+  label: PropTypes.node,
   noCheckboxLabel: PropTypes.bool,
   isRequired: PropTypes.bool,
-  helperText: PropTypes.string,
-  description: PropTypes.string,
+  helperText: PropTypes.node,
+  description: PropTypes.node,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired,
   inputAddon: PropTypes.shape({ fields: PropTypes.array })
 };

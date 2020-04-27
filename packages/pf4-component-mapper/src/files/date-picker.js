@@ -22,12 +22,12 @@ const DatePicker = (props) => {
 };
 
 DatePicker.propTypes = {
-  label: PropTypes.string,
+  label: PropTypes.node,
   isReadOnly: PropTypes.bool,
   isRequired: PropTypes.bool,
-  helperText: PropTypes.string,
-  description: PropTypes.string,
-  hideLabel: PropTypes.string,
+  helperText: PropTypes.node,
+  description: PropTypes.node,
+  hideLabel: PropTypes.bool,
   isDisabled: PropTypes.bool,
   id: PropTypes.string
 };

@@ -96,7 +96,7 @@ PopoverRoot.propTypes = {
   variant: PropTypes.string,
   onHourChange: PropTypes.func.isRequired,
   onMinuteChange: PropTypes.func.isRequired,
-  todayButtonLabel: PropTypes.string,
+  todayButtonLabel: PropTypes.node,
   showTodayButton: PropTypes.bool,
   disabledDays: PropTypes.array
 };

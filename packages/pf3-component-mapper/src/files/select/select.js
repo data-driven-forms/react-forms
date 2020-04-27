@@ -80,7 +80,7 @@ const SelectTitle = ({ title, classNamePrefix, isClearable, value, onClear, isFe
 );
 
 SelectTitle.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.node.isRequired,
   classNamePrefix: PropTypes.string,
   isClearable: PropTypes.bool,
   value: PropTypes.any,

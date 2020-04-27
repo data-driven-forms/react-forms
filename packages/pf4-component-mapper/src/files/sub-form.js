@@ -31,8 +31,8 @@ const SubForm = ({ fields, title, description, validate: _validate, component, .
 SubForm.propTypes = {
   fields: PropTypes.array.isRequired,
   name: PropTypes.string,
-  title: PropTypes.string,
-  description: PropTypes.string,
+  title: PropTypes.node,
+  description: PropTypes.node,
   validate: PropTypes.any,
   component: PropTypes.any
 };

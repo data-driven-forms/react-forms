@@ -35,7 +35,7 @@ const CodeEditor = dynamic(import('@docs/components/code-editor'), {
 
 const Summary = ({ title }) => <div>{title}</div>;
 Summary.propTypes = {
-  title: PropTypes.string.isRequired
+  title: PropTypes.node.isRequired
 };
 
 // Text inputs are first, then all other actions are sorted by title

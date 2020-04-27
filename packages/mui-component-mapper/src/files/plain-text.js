@@ -10,7 +10,7 @@ const PlainText = ({ label, name, component, ...props }) =>
   ));
 
 PlainText.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.node.isRequired,
   name: PropTypes.string.isRequired,
   component: PropTypes.any
 };

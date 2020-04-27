@@ -10,7 +10,7 @@ const MultiValueContainer = (props) => (
 
 MultiValueContainer.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired,
-  data: PropTypes.shape({ label: PropTypes.string.isRequired }).isRequired,
+  data: PropTypes.shape({ label: PropTypes.node.isRequired }).isRequired,
   className: PropTypes.string
 };
 

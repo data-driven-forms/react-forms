@@ -33,7 +33,7 @@ const PlainText = ({ variant, label, name }) =>
 
 PlainText.propTypes = {
   variant: PropTypes.oneOf(validTextFields),
-  label: PropTypes.string.isRequired,
+  label: PropTypes.node.isRequired,
   name: PropTypes.string.isRequired
 };
 

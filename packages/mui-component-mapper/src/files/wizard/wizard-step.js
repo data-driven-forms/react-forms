@@ -13,8 +13,8 @@ const WizardStep = ({ title, description, fields, formOptions, ...rest }) => (
 );
 
 WizardStep.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
+  title: PropTypes.node,
+  description: PropTypes.node,
   fields: PropTypes.array.isRequired,
   formOptions: PropTypes.shape({
     renderForm: PropTypes.func.isRequired

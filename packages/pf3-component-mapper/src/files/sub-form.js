@@ -15,8 +15,8 @@ const SubForm = ({ fields, title, description, component, ...rest }) => {
 
 SubForm.propTypes = {
   fields: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
-  title: PropTypes.string,
-  description: PropTypes.string,
+  title: PropTypes.node,
+  description: PropTypes.node,
   component: PropTypes.any
 };
 

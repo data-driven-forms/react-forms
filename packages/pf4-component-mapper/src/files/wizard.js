@@ -121,10 +121,10 @@ const WizardInternal = ({
 
 WizardInternal.propTypes = {
   buttonLabels: PropTypes.shape({
-    submit: PropTypes.string.isRequired,
-    cancel: PropTypes.string.isRequired,
-    back: PropTypes.string.isRequired,
-    next: PropTypes.string.isRequired
+    submit: PropTypes.node.isRequired,
+    cancel: PropTypes.node.isRequired,
+    back: PropTypes.node.isRequired,
+    next: PropTypes.node.isRequired
   }).isRequired,
   buttonsClassName: PropTypes.string,
   title: PropTypes.any,
@@ -152,9 +152,9 @@ const WizardFunction = ({ buttonLabels, ...props }) => (
 
 WizardFunction.propTypes = {
   buttonLabels: PropTypes.shape({
-    submit: PropTypes.string,
-    cancel: PropTypes.string,
-    back: PropTypes.string
+    submit: PropTypes.node,
+    cancel: PropTypes.node,
+    back: PropTypes.node
   })
 };
 

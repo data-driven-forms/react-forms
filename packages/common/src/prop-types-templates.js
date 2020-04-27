@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export const optionsPropType = PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string.isRequired, value: PropTypes.any }));
+export const optionsPropType = PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.node.isRequired, value: PropTypes.any }));
 
 export const meta = PropTypes.shape({
   active: PropTypes.bool,
