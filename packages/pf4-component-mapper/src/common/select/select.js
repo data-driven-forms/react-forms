@@ -53,8 +53,8 @@ const Select = ({ selectVariant, menuIsPortal, ...props }) => {
 Select.propTypes = {
   selectVariant: PropTypes.oneOf(['default', 'createable']),
   isSearchable: PropTypes.bool,
-  showMoreLabel: PropTypes.string,
-  showLessLabel: PropTypes.string,
+  showMoreLabel: PropTypes.node,
+  showLessLabel: PropTypes.node,
   simpleValue: PropTypes.bool,
   value: PropTypes.any,
   options: PropTypes.arrayOf(

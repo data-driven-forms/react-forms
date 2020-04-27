@@ -43,7 +43,7 @@ const RadioOption = ({ name, option, isDisabled, isReadOnly, FormControlLabelPro
 
 RadioOption.propTypes = {
   name: PropTypes.string.isRequired,
-  option: PropTypes.shape({ label: PropTypes.string.isRequired, value: PropTypes.any.isRequired }).isRequired,
+  option: PropTypes.shape({ label: PropTypes.node.isRequired, value: PropTypes.any.isRequired }).isRequired,
   isReadOnly: PropTypes.bool,
   isDisabled: PropTypes.bool,
   FormControlLabelProps: PropTypes.object,

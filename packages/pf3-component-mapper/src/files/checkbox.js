@@ -19,18 +19,18 @@ const SingleCheckbox = (props) => {
 };
 
 SingleCheckbox.propTypes = {
-  label: PropTypes.string,
+  label: PropTypes.node,
   isReadOnly: PropTypes.bool,
   isRequired: PropTypes.bool,
-  helperText: PropTypes.string,
+  helperText: PropTypes.node,
   isDisabled: PropTypes.bool,
-  description: PropTypes.string
+  description: PropTypes.node
 };
 
 const Checkbox = ({ options, ...props }) => (options ? <MultipleChoiceList options={options} {...props} /> : <SingleCheckbox {...props} />);
 
 Checkbox.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, value: PropTypes.any }))
+  options: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.node, value: PropTypes.any }))
 };
 
 export default Checkbox;

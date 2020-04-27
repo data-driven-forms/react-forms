@@ -37,8 +37,8 @@ ValueContainer.propTypes = {
   getStyles: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired,
   selectProps: PropTypes.shape({
-    showLessLabel: PropTypes.string,
-    showMoreLabel: PropTypes.string
+    showLessLabel: PropTypes.node,
+    showMoreLabel: PropTypes.node
   })
 };
 

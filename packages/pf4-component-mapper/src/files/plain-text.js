@@ -14,7 +14,7 @@ const PlainText = ({ label, name }) => (
 );
 
 PlainText.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.node.isRequired,
   name: PropTypes.string.isRequired
 };
 

@@ -8,7 +8,7 @@ const RequiredLabel = ({ label }) => (
 );
 
 RequiredLabel.propTypes = {
-  label: PropTypes.string.isRequired
+  label: PropTypes.node.isRequired
 };
 
 export default RequiredLabel;

@@ -65,9 +65,9 @@ List.propTypes = {
     })
   ),
   optionClick: PropTypes.func.isRequired,
-  noOptionsTitle: PropTypes.string,
+  noOptionsTitle: PropTypes.node,
   filterValue: PropTypes.string,
-  filterValueText: PropTypes.string
+  filterValueText: PropTypes.node
 };
 
 List.defaultProps = {
@@ -361,27 +361,27 @@ DualList.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired
+      label: PropTypes.node.isRequired
     })
   ),
-  leftTitle: PropTypes.string,
-  rightTitle: PropTypes.string,
+  leftTitle: PropTypes.node,
+  rightTitle: PropTypes.node,
   size: PropTypes.number,
-  moveLeftTitle: PropTypes.string,
-  moveRightTitle: PropTypes.string,
+  moveLeftTitle: PropTypes.node,
+  moveRightTitle: PropTypes.node,
   clearRightValue: PropTypes.bool,
   clearLeftValues: PropTypes.bool,
-  moveAllLeftTitle: PropTypes.string,
-  moveAllRightTitle: PropTypes.string,
+  moveAllLeftTitle: PropTypes.node,
+  moveAllRightTitle: PropTypes.node,
   label: PropTypes.node,
   isRequired: PropTypes.bool,
   helperText: PropTypes.node,
-  noValueTitle: PropTypes.string,
-  noOptionsTitle: PropTypes.string,
-  filterOptionsTitle: PropTypes.string,
-  filterValueTitle: PropTypes.string,
-  filterValueText: PropTypes.string,
-  filterOptionsText: PropTypes.string
+  noValueTitle: PropTypes.node,
+  noOptionsTitle: PropTypes.node,
+  filterOptionsTitle: PropTypes.node,
+  filterValueTitle: PropTypes.node,
+  filterValueText: PropTypes.node,
+  filterOptionsText: PropTypes.node
 };
 
 DualList.defaultProps = {

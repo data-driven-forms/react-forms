@@ -55,7 +55,7 @@ const WizardInternal = ({ title, buttonLabels, stepsInfo, inModal, onKeyDown, fo
 };
 
 WizardInternal.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.node,
   buttonLabels: PropTypes.object,
   stepsInfo: PropTypes.array,
   inModal: PropTypes.bool,

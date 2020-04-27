@@ -151,7 +151,7 @@ DateTimePicker.propTypes = {
   placeholder: PropTypes.string,
   variant: PropTypes.string,
   locale: PropTypes.string,
-  todayButtonLabel: PropTypes.string,
+  todayButtonLabel: PropTypes.node,
   showTodayButton: PropTypes.bool,
   isDisabled: PropTypes.bool,
   disabledDays: PropTypes.array,

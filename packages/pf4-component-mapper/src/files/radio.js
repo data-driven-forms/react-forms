@@ -56,16 +56,16 @@ const Radio = ({ name, options, type, ...props }) => {
 };
 
 Radio.propTypes = {
-  label: PropTypes.string,
+  label: PropTypes.node,
   isReadOnly: PropTypes.bool,
   isRequired: PropTypes.bool,
-  helperText: PropTypes.string,
-  description: PropTypes.string,
-  hideLabel: PropTypes.string,
+  helperText: PropTypes.node,
+  description: PropTypes.node,
+  hideLabel: PropTypes.bool,
   isDisabled: PropTypes.bool,
   id: PropTypes.string,
   name: PropTypes.string.isRequired,
-  options: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, value: PropTypes.any })).isRequired,
+  options: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.node, value: PropTypes.any })).isRequired,
   type: PropTypes.any
 };
 

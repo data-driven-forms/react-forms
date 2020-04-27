@@ -23,7 +23,7 @@ const Pf3Wizard = dynamic(import('@data-driven-forms/pf3-component-mapper/dist/c
 
 const Summary = ({ title }) => <div>{title}</div>;
 Summary.propTypes = {
-  title: PropTypes.string.isRequired
+  title: PropTypes.node.isRequired
 };
 
 const mappers = {

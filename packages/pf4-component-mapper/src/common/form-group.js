@@ -25,11 +25,11 @@ const FormGroup = ({ label, isRequired, helperText, meta, description, hideLabel
 };
 
 FormGroup.propTypes = {
-  label: PropTypes.string,
+  label: PropTypes.node,
   isRequired: PropTypes.bool,
-  helperText: PropTypes.string,
+  helperText: PropTypes.node,
   meta: PropTypes.object.isRequired,
-  description: PropTypes.string,
+  description: PropTypes.node,
   hideLabel: PropTypes.bool,
   id: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)]).isRequired

@@ -44,14 +44,14 @@ const Radio = ({ name, isRequired, isDisabled, isReadOnly, validateOnMount, help
 Radio.propTypes = {
   name: PropTypes.string.isRequired,
   validateOnMount: PropTypes.bool,
-  label: PropTypes.string,
+  label: PropTypes.node,
   hideLabel: PropTypes.bool,
   isReadOnly: PropTypes.bool,
   isRequired: PropTypes.bool,
-  helperText: PropTypes.string,
-  description: PropTypes.string,
+  helperText: PropTypes.node,
+  description: PropTypes.node,
   isDisabled: PropTypes.bool,
-  options: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.string, value: PropTypes.any })),
+  options: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.node, value: PropTypes.any })),
   inputAddon: PropTypes.shape({ fields: PropTypes.array })
 };
 

@@ -63,9 +63,9 @@ export const FormControls = ({
 FormControls.propTypes = {
   onCancel: PropTypes.func,
   onReset: PropTypes.func,
-  submitLabel: PropTypes.string,
-  cancelLabel: PropTypes.string,
-  resetLabel: PropTypes.string,
+  submitLabel: PropTypes.node,
+  cancelLabel: PropTypes.node,
+  resetLabel: PropTypes.node,
   canReset: PropTypes.bool,
   disableSubmit: PropTypes.bool,
   buttonOrder: PropTypes.arrayOf(PropTypes.string),

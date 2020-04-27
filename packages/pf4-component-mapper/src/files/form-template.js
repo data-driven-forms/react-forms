@@ -15,7 +15,7 @@ export const Button = ({ label, bsStyle, children, disabled, buttonType, ...prop
 );
 
 Button.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.node.isRequired,
   bsStyle: PropTypes.string,
   disabled: PropTypes.bool,
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),

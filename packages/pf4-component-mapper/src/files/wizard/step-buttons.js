@@ -18,10 +18,10 @@ const NextButton = ({ nextStep, valid, handleNext, nextLabel, getState, handleSu
 NextButton.propTypes = {
   nextStep: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
   handleSubmit: PropTypes.func.isRequired,
-  submitLabel: PropTypes.string.isRequired,
+  submitLabel: PropTypes.node.isRequired,
   valid: PropTypes.bool,
   handleNext: PropTypes.func.isRequired,
-  nextLabel: PropTypes.string.isRequired,
+  nextLabel: PropTypes.node.isRequired,
   getState: PropTypes.func.isRequired
 };
 
@@ -80,10 +80,10 @@ WizardStepButtons.propTypes = {
     PropTypes.func
   ]),
   buttonLabels: PropTypes.shape({
-    submit: PropTypes.string.isRequired,
-    cancel: PropTypes.string.isRequired,
-    back: PropTypes.string.isRequired,
-    next: PropTypes.string.isRequired
+    submit: PropTypes.node.isRequired,
+    cancel: PropTypes.node.isRequired,
+    back: PropTypes.node.isRequired,
+    next: PropTypes.node.isRequired
   }).isRequired,
   buttonsClassName: PropTypes.string,
   buttons: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
