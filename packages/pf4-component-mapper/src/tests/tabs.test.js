@@ -51,7 +51,7 @@ describe('Tabs component', () => {
 
     expect(wrapper.find(PF4Tabs).props().activeKey).toEqual(0);
 
-    const secondTabButton = wrapper.find('.pf-c-tabs__button').at(6);
+    const secondTabButton = wrapper.find('.pf-c-tabs__button').last();
     secondTabButton.simulate('click');
 
     expect(wrapper.find(PF4Tabs).props().activeKey).toEqual(1);

@@ -167,7 +167,11 @@ exports[`<WizardSTepButtons should add custom className to toolbar 1`] = `
                   tabIndex={null}
                   type="button"
                 >
-                  Cancel
+                  <span
+                    className="pf-c-button__text"
+                  >
+                    Cancel
+                  </span>
                 </button>
               </Button>
             </ComponentWithOuia>
@@ -345,7 +349,11 @@ exports[`<WizardSTepButtons should render correctly 1`] = `
                   tabIndex={null}
                   type="button"
                 >
-                  Cancel
+                  <span
+                    className="pf-c-button__text"
+                  >
+                    Cancel
+                  </span>
                 </button>
               </Button>
             </ComponentWithOuia>
