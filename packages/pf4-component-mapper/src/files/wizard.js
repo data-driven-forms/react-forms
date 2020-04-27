@@ -43,9 +43,10 @@ const WizardInternal = ({
   navSchema,
   activeStepIndex,
   maxStepIndex,
-  isDynamic
+  isDynamic,
+  container
 }) => {
-  const [state, dispatch] = useReducer(reducer, { loading: true });
+  const [state, dispatch] = useReducer(reducer, { loading: true, container });
 
   useEffect(() => {
     if (inModal) {

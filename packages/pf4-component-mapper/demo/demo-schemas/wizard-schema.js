@@ -91,6 +91,11 @@ export const wizardSchema = {
                 {
                   value: 'google',
                   label: 'Google'
+                },
+                {
+                  value: 'disabled',
+                  label: 'i am disabled',
+                  isDisabled: true
                 }
               ],
               validate: [

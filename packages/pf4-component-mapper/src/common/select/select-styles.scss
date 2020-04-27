@@ -76,6 +76,7 @@
 .ddorg__pf4-component-mapper__select__menu--option {
   display: flex;
   align-items: center;
+  color: var(--pf-global--Color--dark-100);
 
    &.focused {
       background-color: var(--pf-global--Color--light-200);
@@ -92,6 +93,16 @@
       & + .ddorg__pf4-component-mapper__select__option {
           padding-left: 0;
       }
+  }
+
+  &.disabled {
+    cursor: default;
+  }
+
+  &.disabled div {
+    color: var(--pf-global--disabled-color--100);
+    pointer-events: none;
+    cursor: none;
   }
 }
 
