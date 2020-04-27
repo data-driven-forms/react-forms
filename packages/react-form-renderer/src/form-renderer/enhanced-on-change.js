@@ -11,6 +11,13 @@ const sanitizeValue = (event) => {
       return event;
     }
 
+    if (event.target.type === 'file') {
+      return {
+        inputValue: event.target.value,
+        inputFiles: event.target.files
+      };
+    }
+
     return event.target.value;
   }
 

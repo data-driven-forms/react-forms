@@ -76,6 +76,9 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, ...
   };
 
   const fieldProps = useField(name, enhancedProps);
+  if (fieldProps.input.type === 'file' && typeof fieldProps.input.value === 'object') {
+    fieldProps.input = { ...fieldProps.input, value: fieldProps.input.value.inputValue };
+  }
 
   /** Reinitilize type */
   useEffect(() => {
@@ -132,6 +135,9 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, ...
   useEffect(
     () => {
       mounted.current = true;
+      if (fieldProps.input.type === 'file') {
+        formOptions.registerInputFile(fieldProps.input.name);
+      }
 
       return () => {
         mounted.current = false;
@@ -140,6 +146,10 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, ...
          */
         if ((formOptions.clearOnUnmount || props.clearOnUnmount) && props.clearOnUnmount !== false) {
           fieldProps.input.onChange(fieldClearedValue);
+        }
+
+        if (fieldProps.input.type === 'file') {
+          formOptions.unRegisterInputFile(fieldProps.input.name);
         }
       };
     },
