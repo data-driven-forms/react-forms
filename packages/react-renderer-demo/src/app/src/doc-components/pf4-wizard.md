@@ -10,6 +10,7 @@ Don't forget hide form controls by setting \`showFormControls\` to \`false\` as 
 | description  | string  | undefined  | Description in header |
 | buttonLabels  | object  | see below  | Labels for buttons |
 | inModal  | bool  | undefined  | show form in modal  |
+| container  | HTMLElement | 'div'  | element containing the modal |
 | isCompactNav  | bool  | undefined  | see Patternfly |
 | setFullWidth  | bool  | undefined  | see Patternfly  |
 | setFullHeight  | bool  | undefined  | see Patternfly  |

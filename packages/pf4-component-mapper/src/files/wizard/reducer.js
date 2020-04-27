@@ -6,7 +6,7 @@ const reducer = (state, { type }) => {
         loading: false
       };
     case 'setContainer':
-      return { ...state, container: document.createElement('div') };
+      return { ...state, container: state.container || document.createElement('div') };
     default:
       return state;
   }
