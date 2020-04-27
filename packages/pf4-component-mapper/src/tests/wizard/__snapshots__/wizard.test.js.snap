@@ -1037,7 +1037,11 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                 tabIndex={null}
                                                 type="button"
                                               >
-                                                Cancel
+                                                <span
+                                                  className="pf-c-button__text"
+                                                >
+                                                  Cancel
+                                                </span>
                                               </button>
                                             </Button>
                                           </ComponentWithOuia>
@@ -1674,7 +1678,11 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                             class="pf-c-button pf-m-link"
                                             type="button"
                                           >
-                                            Cancel
+                                            <span
+                                              class="pf-c-button__text"
+                                            >
+                                              Cancel
+                                            </span>
                                           </button>
                                         </footer>
                                       </div>
@@ -1778,7 +1786,11 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                               class="pf-c-button pf-m-link"
                                               type="button"
                                             >
-                                              Cancel
+                                              <span
+                                                class="pf-c-button__text"
+                                              >
+                                                Cancel
+                                              </span>
                                             </button>
                                           </footer>
                                         </div>
@@ -2329,7 +2341,11 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                           tabIndex={null}
                                                           type="button"
                                                         >
-                                                          Cancel
+                                                          <span
+                                                            className="pf-c-button__text"
+                                                          >
+                                                            Cancel
+                                                          </span>
                                                         </button>
                                                       </Button>
                                                     </ComponentWithOuia>

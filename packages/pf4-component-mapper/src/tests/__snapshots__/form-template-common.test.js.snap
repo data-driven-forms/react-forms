@@ -289,7 +289,11 @@ exports[`FormTemplate PF4 Common should add missing buttons if not defined in bu
                                       tabIndex={null}
                                       type="button"
                                     >
-                                      Cancel
+                                      <span
+                                        className="pf-c-button__text"
+                                      >
+                                        Cancel
+                                      </span>
                                     </button>
                                   </Button>
                                 </ComponentWithOuia>
@@ -543,7 +547,11 @@ exports[`FormTemplate PF4 Common should render all controls and with default lab
                                       tabIndex={null}
                                       type="button"
                                     >
-                                      Cancel
+                                      <span
+                                        className="pf-c-button__text"
+                                      >
+                                        Cancel
+                                      </span>
                                     </button>
                                   </Button>
                                 </ComponentWithOuia>
@@ -765,7 +773,11 @@ exports[`FormTemplate PF4 Common should render buttons in correct order 1`] = `
                                       tabIndex={null}
                                       type="button"
                                     >
-                                      Cancel
+                                      <span
+                                        className="pf-c-button__text"
+                                      >
+                                        Cancel
+                                      </span>
                                     </button>
                                   </Button>
                                 </ComponentWithOuia>
