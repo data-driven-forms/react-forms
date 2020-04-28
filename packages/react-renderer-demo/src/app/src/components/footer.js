@@ -13,6 +13,8 @@ import Paper from '@material-ui/core/Paper';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import Typography from '@material-ui/core/Typography';
 
+import grey from '@material-ui/core/colors/grey';
+
 import GhIcon from './common/gh-svg-icon';
 import NpmSvgIcon from './common/npm-svg-icon';
 import TwitterIcon from './common/twitter-svg-icon';
@@ -42,7 +44,8 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    marginTop: 64,
+    //marginTop: 64,
+    backgroundColor: grey[200],
     display: 'flex',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
@@ -65,6 +68,9 @@ const useStyles = makeStyles((theme) => ({
     padding: 24,
     borderRadius: 2,
     display: 'flex'
+  },
+  foooterRight: {
+    float: 'right'
   },
   listHeader: {
     display: 'flex',
@@ -94,8 +100,8 @@ const Footer = ({ open }) => {
               </div>
             </Paper>
           </Grid>
-          <Grid xs={12} md={4} item>
-            <Paper elevation={0} className={classes.foooterCard}>
+          <Grid xs={12} md={8} item>
+            <Paper elevation={0} className={clsx(classes.foooterCard, classes.foooterRight)}>
               <List
                 subheader={
                   <ListSubheader className={classes.listHeader}>
