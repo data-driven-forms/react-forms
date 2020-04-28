@@ -76,9 +76,6 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, ...
   };
 
   const fieldProps = useField(name, enhancedProps);
-  if (fieldProps.input.type === 'file' && typeof fieldProps.input.value === 'object') {
-    fieldProps.input = { ...fieldProps.input, value: fieldProps.input.value.inputValue };
-  }
 
   /** Reinitilize type */
   useEffect(() => {
@@ -180,6 +177,8 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, ...
     ...(arrayValidator ? { arrayValidator } : {}),
     input: {
       ...fieldProps.input,
+      value:
+        fieldProps.input.type === 'file' && typeof fieldProps.input.value === 'object' ? fieldProps.input.value.inputValue : fieldProps.input.value,
       onChange: (...args) => {
         enhancedOnChange(
           {

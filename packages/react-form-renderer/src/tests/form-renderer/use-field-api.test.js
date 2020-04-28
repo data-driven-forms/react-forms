@@ -9,6 +9,7 @@ import RendererContext from '../../files/renderer-context';
 
 describe('useFieldApi', () => {
   const Catcher = ({ children }) => children;
+  const registerInputFileSpy = jest.fn();
 
   const TestField = (props) => {
     const rest = useFieldApi(props);
@@ -29,7 +30,9 @@ describe('useFieldApi', () => {
             <form onSubmit={handleSubmit}>
               <RendererContext.Provider
                 value={{
-                  formOptions: {},
+                  formOptions: {
+                    registerInputFile: registerInputFileSpy
+                  },
                   validatorMapper: { required: () => (value) => (!value ? 'required' : undefined) }
                 }}
               >
@@ -52,6 +55,7 @@ describe('useFieldApi', () => {
       component: 'text-field',
       onSubmit: (values) => onSubmit(values)
     };
+    registerInputFileSpy.mockClear();
   });
 
   it('reloads type when component changes', () => {
@@ -157,5 +161,22 @@ describe('useFieldApi', () => {
     wrapper.update();
 
     expect(wrapper.find(Catcher).props().meta.initial).toEqual('pepa');
+  });
+
+  it('should assing correct value to type file input', () => {
+    const wrapper = mount(
+      <WrapperComponent
+        {...initialProps}
+        name="file-input"
+        type="file"
+        initialValue={{
+          inputValue: '',
+          inputFiles: []
+        }}
+      />
+    );
+
+    expect(wrapper.find('input').prop('value')).toEqual('');
+    expect(registerInputFileSpy).toHaveBeenCalledWith('file-input');
   });
 });
