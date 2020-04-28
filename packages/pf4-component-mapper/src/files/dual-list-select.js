@@ -191,6 +191,7 @@ const DualList = (props) => {
     filterValueTitle,
     filterValueText,
     filterOptionsText,
+    isEqual: _isEqual,
     ...rest
   } = useFieldApi({
     ...props,
@@ -198,7 +199,6 @@ const DualList = (props) => {
   });
 
   const showError = touched && error;
-
   const handleOptionClicked = (event, options, isRight) => {
     const {
       target: { value }

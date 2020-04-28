@@ -1,4 +1,5 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
 
@@ -215,11 +216,13 @@ describe('DualListSelect', () => {
       .simulate('click');
     wrapper.update();
 
-    wrapper
-      .find(AngleLeftIcon)
-      .parent()
-      .props()
-      .onClick();
+    act(() => {
+      wrapper
+        .find(AngleLeftIcon)
+        .parent()
+        .props()
+        .onClick();
+    });
     wrapper.update();
 
     wrapper.find('form').simulate('submit');
