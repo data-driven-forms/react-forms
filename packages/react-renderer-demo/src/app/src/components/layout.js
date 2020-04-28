@@ -31,7 +31,7 @@ export const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   mainGradient: {
     backgroundImage: 'linear-gradient(135deg, #41108E 0%, rgba(165, 37, 193, 1) 44.76%, #FC9957 100%)',
-    backgroundSize: '100vw 100vh',
+    backgroundSize: '100% 100vh',
     backgroundRepeat: 'no-repeat',
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
@@ -39,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
     })
   },
   mainGradientShift: {
-    width: `calc(100vw - ${drawerWidth}px)`,
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
@@ -101,7 +100,7 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     width: '100%',
     backgroundImage: 'linear-gradient(135deg, #41108E 0%, rgba(165, 37, 193, 1) 44.76%, #FC9957 100%)',
-    backgroundSize: '100vw 100vh',
+    backgroundSize: '100% 100vh',
     backgroundRepeat: 'no-repeat',
     zIndex: 900
   },
