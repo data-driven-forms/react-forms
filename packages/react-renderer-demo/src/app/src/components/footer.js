@@ -66,6 +66,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 2,
     display: 'flex'
   },
+  foooterRight: {
+    float: 'right'
+  },
   listHeader: {
     display: 'flex',
     alignItems: 'center',
@@ -94,8 +97,8 @@ const Footer = ({ open }) => {
               </div>
             </Paper>
           </Grid>
-          <Grid xs={12} md={4} item>
-            <Paper elevation={0} className={classes.foooterCard}>
+          <Grid xs={12} md={8} item>
+            <Paper elevation={0} className={clsx(classes.foooterCard, classes.foooterRight)}>
               <List
                 subheader={
                   <ListSubheader className={classes.listHeader}>
