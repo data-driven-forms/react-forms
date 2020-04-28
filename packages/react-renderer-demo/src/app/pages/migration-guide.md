@@ -40,6 +40,7 @@ Thank you for your understanding.
     -   buttonClassName
     -   renderFormButtons
     -   buttonsLabels
+    -   canReset
 -   => All these props are now managed by mapper's form templates!
 
 -   FormTemplate receives these props:
