@@ -44,7 +44,7 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    marginTop: 64,
+    //marginTop: 64,
     backgroundColor: grey[200],
     display: 'flex',
     justifyContent: 'space-between',
