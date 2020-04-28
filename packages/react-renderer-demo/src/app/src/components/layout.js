@@ -55,8 +55,7 @@ const useStyles = makeStyles((theme) => ({
     })
   },
   contentWrapper: {
-    paddingTop: 86,
-    paddingBottom: 32
+    paddingTop: 86
   },
   menuButton: {
     marginRight: theme.spacing(2)

@@ -13,6 +13,8 @@ import Paper from '@material-ui/core/Paper';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import Typography from '@material-ui/core/Typography';
 
+import grey from '@material-ui/core/colors/grey';
+
 import GhIcon from './common/gh-svg-icon';
 import NpmSvgIcon from './common/npm-svg-icon';
 import TwitterIcon from './common/twitter-svg-icon';
@@ -43,6 +45,7 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   footer: {
     marginTop: 64,
+    backgroundColor: grey[200],
     display: 'flex',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
