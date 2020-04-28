@@ -45,7 +45,8 @@ const useStyles = makeStyles((theme) => ({
     })
   },
   root: {
-    display: 'flex'
+    display: 'flex',
+    minHeight: 'calc(100vh - 16px)'
   },
   appBar: {
     position: 'fixed',
@@ -55,6 +56,10 @@ const useStyles = makeStyles((theme) => ({
     })
   },
   contentWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    minHeight: '100%',
     paddingTop: 86
   },
   menuButton: {
@@ -217,8 +222,10 @@ const Layout = ({ children }) => {
             >
               {children}
             </div>
-            <ConnectedLinks />
-            <Footer />
+            <div>
+              <ConnectedLinks />
+              <Footer />
+            </div>
           </div>
         </main>
       </div>
