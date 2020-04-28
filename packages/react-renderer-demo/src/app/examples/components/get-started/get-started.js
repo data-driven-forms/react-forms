@@ -42,15 +42,16 @@ const schema = {
   ]
 };
 
+const FormTemplateCanReset = (props) => <FormTemplate {...props} canReset />;
+
 const GetStartedForm = () => (
   <div className="pf4">
     <FormRender
       componentMapper={componentMapper}
-      FormTemplate={FormTemplate}
+      FormTemplate={FormTemplateCanReset}
       schema={schema}
       onSubmit={console.log}
       onCancel={() => console.log('Cancel action')}
-      canReset
     />
   </div>
 );
