@@ -52,7 +52,7 @@ const FormRenderer = ({
   return (
     <Form
       {...props}
-      onSubmit={(values, formApi, callback) => onSubmit(values, { ...formApi, fileInputs }, callback)}
+      onSubmit={(values, formApi, ...args) => onSubmit(values, { ...formApi, fileInputs }, ...args)}
       mutators={{ ...arrayMutators }}
       decorators={[focusDecorator.current]}
       subscription={{ pristine: true, submitting: true, valid: true, ...subscription }}
