@@ -5,7 +5,7 @@ import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/comp
 import validatorTypes from '@data-driven-forms/react-form-renderer/dist/cjs/validator-types';
 import useFormApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-form-api';
 import FormSpy from '@data-driven-forms/react-form-renderer/dist/cjs/form-spy';
-import TextField from '@data-driven-forms/pf4-component-mapper/dist/cjs/text-field';
+import TextField from '@data-driven-forms/mui-component-mapper/dist/cjs/text-field';
 import Button from '@material-ui/core/Button';
 import { Form } from '@patternfly/react-core/dist/js/components/Form/Form';
 

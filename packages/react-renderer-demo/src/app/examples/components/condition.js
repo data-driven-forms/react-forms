@@ -2,10 +2,10 @@ import React from 'react';
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 
-import TextField from '@data-driven-forms/pf4-component-mapper/dist/cjs/text-field';
-import FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
-import Checkbox from '@data-driven-forms/pf4-component-mapper/dist/cjs/checkbox';
-import PlainText from '@data-driven-forms/pf4-component-mapper/dist/cjs/plain-text';
+import TextField from '@data-driven-forms/mui-component-mapper/dist/cjs/text-field';
+import FormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
+import Checkbox from '@data-driven-forms/mui-component-mapper/dist/cjs/checkbox';
+import PlainText from '@data-driven-forms/mui-component-mapper/dist/cjs/plain-text';
 
 const schema = {
   title: 'Example of conditions',

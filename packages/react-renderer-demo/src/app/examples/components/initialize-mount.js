@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import useFormApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-form-api';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
-import FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
-import TextField from '@data-driven-forms/pf4-component-mapper/dist/cjs/text-field';
-import Select from '@data-driven-forms/pf4-component-mapper/dist/cjs/select';
-import Wizard from '@data-driven-forms/pf4-component-mapper/dist/cjs/wizard';
+import FormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
+import TextField from '@data-driven-forms/mui-component-mapper/dist/cjs/text-field';
+import Select from '@data-driven-forms/mui-component-mapper/dist/cjs/select';
+import Wizard from '@data-driven-forms/mui-component-mapper/dist/cjs/wizard';
 import { Title } from '@patternfly/react-core/dist/js/components/Title/Title';
 
 const componentMapper = {
