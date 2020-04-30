@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import RouterLink from 'next/link';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Link from '@material-ui/core/Link';
 
 import ArchiveIcon from '@material-ui/icons/Archive';
 import CreateIcon from '@material-ui/icons/Create';
@@ -92,36 +93,60 @@ const Form = () => (
 const buildFeatures = [
   {
     text: 'State management provided by Final Form!',
-    Icon: ArchiveIcon
+    Icon: ArchiveIcon,
+    href: 'https://final-form.org/react'
   },
   {
     text: 'Multiple provided libraries - MaterialUI included!',
-    Icon: LocalLibraryIcon
+    Icon: LocalLibraryIcon,
+    link: '/renderer/component-api'
   },
   {
     text: 'Validation - basic types are provided, supports async validators!',
-    Icon: VerifiedUserIcon
+    Icon: VerifiedUserIcon,
+    link: '/renderer/validators'
   },
   {
     text: 'Conditions - hide and modify fields according to values of other fields!',
-    Icon: PlaylistAddCheckIcon
+    Icon: PlaylistAddCheckIcon,
+    link: '/renderer/condition'
   },
   {
     text: 'Fully customizable - you can use any components you are using right now!',
-    Icon: EditAttributesIcon
+    Icon: EditAttributesIcon,
+    link: '/renderer/component-mapping'
   },
   {
     text: 'Online editor - you can build your form using comfy DnD!',
-    Icon: CreateIcon
+    Icon: CreateIcon,
+    link: '/live-editor'
   }
-].map(({ text, Icon, href, link }, idx) => (
-  <ListItem button key={idx}>
-    <ListItemIcon>
-      <Icon />
-    </ListItemIcon>
-    <ListItemText primary={text} />
-  </ListItem>
-));
+].map(({ text, Icon, href, link }, idx) => {
+  const children = (
+    <ListItem button>
+      <ListItemIcon>
+        <Icon />
+      </ListItemIcon>
+      <ListItemText primary={text} />
+    </ListItem>
+  );
+
+  if (link) {
+    return (
+      <RouterLink href={link} key={idx}>
+        <Link href={link} style={{ textDecoration: 'none', color: 'inherit' }}>
+          {children}
+        </Link>
+      </RouterLink>
+    );
+  }
+
+  return (
+    <Link href={href} rel="noopener noreferrer" target="_blank" key={idx} style={{ textDecoration: 'none', color: 'inherit' }}>
+      {children}
+    </Link>
+  );
+});
 
 const useStyles = makeStyles((theme) => ({
   cardsContainer: {
@@ -198,7 +223,11 @@ const LandingPageCards = () => {
               </Typography>
               <Paper elevation={3} className={classes.formState} square>
                 <FormExample setFormState={setFormState} />
-                {!formState ? <Typography variant="p">Click on submit to show values</Typography> : <pre>{JSON.stringify(formState, null, 2)}</pre>}
+                {!formState ? (
+                  <Typography variant="body2">Click on the button to show values</Typography>
+                ) : (
+                  <pre>{JSON.stringify(formState, null, 2)}</pre>
+                )}
               </Paper>
               <Typography className={classes.cardQuestion} variant="h6" gutterBottom>
                 Available features
@@ -206,7 +235,7 @@ const LandingPageCards = () => {
               <List component="nav" aria-label="features">
                 {buildFeatures}
               </List>
-              <Typography variant="p" gutterBottom>
+              <Typography variant="body2" gutterBottom>
                 ... and many more!
               </Typography>
             </Grid>
@@ -258,38 +287,3 @@ const LandingPageCards = () => {
 };
 
 export default LandingPageCards;
-
-/*
-        <Paper elevation={0} className={classes.card}>
-          <Typography className={classes.cardQuestion} variant="h6" gutterBottom>
-            How to install it?
-          </Typography>
-          <Typography variant="h5" gutterBottom>
-            Installation
-          </Typography>
-          <Typography color="textSecondary" gutterBottom>
-            Add react form renderer
-          </Typography>
-          <pre className={classes.codeSnippet}>
-            <code className={classes.languageSh}>$ npm install @data-driven-forms/react-form-renderer -S</code>
-          </pre>
-          <pre className={classes.codeSnippet}>
-            <code className={classes.languageSh}>$ yarn add @data-driven-forms/react-form-renderer</code>
-          </pre>
-          <Divider className={classes.divider} />
-          <Typography color="textSecondary" gutterBottom>
-            Choose your component mapper
-          </Typography>
-          <pre className={classes.codeSnippet}>
-            <code className={classes.languageSh}>$ npm install @data-driven-forms/pf4-component-mapper -S</code>
-          </pre>
-          <pre className={classes.codeSnippet}>
-            <code className={classes.languageSh}>$ yarn add @data-driven-forms/pf4-component-mapper</code>
-          </pre>
-        </Paper>
-
-                  <div style={{ background: '#1d1f21', paddingTop: 16 }}>
-            <CodeEditor value={value} />
-          </div>
-
-*/

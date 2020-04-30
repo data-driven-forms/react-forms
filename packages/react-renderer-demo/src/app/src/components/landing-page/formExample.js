@@ -33,7 +33,7 @@ const FormTemplate = ({ formFields }) => {
           {({ valid }) => (
             <div className={classes.formButtons}>
               <Button disabled={!valid} type="submit" color="primary" variant="contained">
-                Submit
+                Show
               </Button>
             </div>
           )}
