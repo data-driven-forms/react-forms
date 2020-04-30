@@ -11,7 +11,8 @@
     "vendor": "webpack --env vendor --config ./config/webpack.config.js --progress",
     "deploy": "firebase deploy --only functions",
     "analyze": "ANALYZE=true next build",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "copy-pf4": "MAPPER=pf4 node scripts/generate-mappers.js"
   },
   "repository": {
     "type": "git",
