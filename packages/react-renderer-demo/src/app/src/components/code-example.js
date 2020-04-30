@@ -19,6 +19,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 import GhIcon from './common/gh-svg-icon';
 import CodesandboxIcon from './common/code-sandbox-svg-icon';
+import { getPrefix } from '../helpers/scoped-links';
+import { useRouter } from 'next/router';
 
 const CodeEditor = dynamic(import('./code-editor'), {
   ssr: false
@@ -57,6 +59,12 @@ const useStyles = makeStyles((theme) => ({
   },
   expansionPanelSummary: {
     padding: 0
+  },
+  pf4: {
+    padding: 32,
+    '& form': {
+      width: '100%'
+    }
   }
 }));
 
@@ -144,6 +152,8 @@ const getPayload = (type, code, sourceFiles = {}) =>
 
 const CodeExample = ({ source, mode, mapper, additionalSources }) => {
   const classes = useStyles();
+  const router = useRouter();
+  const activeScope = getPrefix(router.pathname);
   const codeSource = reqSource(`./${source}.js`).default;
   let Component;
   if (mode === 'preview') {
@@ -209,7 +219,7 @@ const CodeExample = ({ source, mode, mapper, additionalSources }) => {
         </Grid>
         {Component && (
           <Grid className={classes.formContainer} item xs={12}>
-            <Paper className={classes.componentPanel}>
+            <Paper className={clsx(classes.componentPanel, classes[activeScope])}>
               <Component />
             </Paper>
           </Grid>
