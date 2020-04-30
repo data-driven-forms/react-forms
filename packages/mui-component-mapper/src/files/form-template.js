@@ -8,11 +8,22 @@ import FormTemplate from '@data-driven-forms/common/src/form-template';
 const useStyles = makeStyles(() => ({
   buttonGroup: {
     display: 'flex',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    '&>button:not(last-child)': {
+      marginLeft: 8
+    }
   }
 }));
 
-const Form = ({ children, ...props }) => <form {...props}>{children}</form>;
+const Form = ({ children, ...props }) => (
+  <Grid item xs={12}>
+    <form {...props}>
+      <Grid container item spacing={2} xs={12}>
+        {children}
+      </Grid>
+    </form>
+  </Grid>
+);
 
 Form.propTypes = {
   children: PropTypes.node
@@ -44,7 +55,11 @@ Title.propTypes = {
 
 const ButtonGroup = ({ children }) => {
   const classes = useStyles();
-  return <div className={classes.buttonGroup}>{children}</div>;
+  return (
+    <Grid item xs={12}>
+      <div className={classes.buttonGroup}>{children}</div>
+    </Grid>
+  );
 };
 
 ButtonGroup.propTypes = {
