@@ -22,7 +22,7 @@ function copyPageFile(fileName, targetFile) {
     }
 
     let result = data.replace(/from '@data-driven-forms\/mui-component-mapper/g, `from '@data-driven-forms/${mapper}-component-mapper`);
-    result = result.replace('<CodeExample source="', `<CodeExample source="${mapper}/`);
+    result = result.replace(/source="/g, `source="${mapper}/`);
 
     fs.writeFile(targetFile, result, 'utf8', function(err) {
       if (err) {

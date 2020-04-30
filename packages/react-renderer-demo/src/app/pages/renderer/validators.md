@@ -20,25 +20,25 @@ A item of the validate array can be:
 
 ## Length validators
 
-<CodeExample mode="preview" source= "components/validators/length-validators" />
+<CodeExample mode="preview" source="components/validators/length-validators" />
 
 ## Number value validators
 
-<CodeExample mode="preview" source= "components/validators/number-validator" />
+<CodeExample mode="preview" source="components/validators/number-validator" />
 
 ## Pattern validators
 
-<CodeExample mode="preview" source= "components/validators/pattern-validator" />
+<CodeExample mode="preview" source="components/validators/pattern-validator" />
 
 ## URL validators
 
-<CodeExample mode="preview" source= "components/validators/url-validator" />
+<CodeExample mode="preview" source="components/validators/url-validator" />
 
 ## Custom function
 
 As validator you can provide your custom function:
 
-<CodeExample mode="preview" source= "components/validators/custom-function" />
+<CodeExample mode="preview" source="components/validators/custom-function" />
 
 The function takes `value` as an argument and should return undefined when pasess or string as an error message when fails.
 
@@ -48,7 +48,7 @@ You can use a Async function as a validator. But it **must be first in the valid
 
 You can either use custom function, or custom validator from validator mapper.
 
-<CodeExample mode="preview" source= "components/validators/async-validator" />
+<CodeExample mode="preview" source="components/validators/async-validator" />
 
 
 Validator inputs and results are being cached so you will get immediate feedback for recurring values before the validation is actually finished.
@@ -130,13 +130,13 @@ By providing `validateOnMount` the validation will be triggered immediately afte
 This form of validation enables you to create validation function for whole form. It is useful for some cross validation between multiple fields etc.
 Detailed information can be found [here](https://final-form.org/docs/react-final-form/examples/record-level-validation).
 
-<CodeExample mode="preview" source= "components/validators/record-level-validation" />
+<CodeExample mode="preview" source="components/validators/record-level-validation" />
 
 # Overwriting default messages
 
 You can either specify message attribute while adding validator or override validation message of specific validator globally via Validators config.
 
-<CodeExample mode="preview" source= "components/validators/global-message" />
+<CodeExample mode="preview" source="components/validators/global-message" />
 
 </Grid>
 <Grid item xs={false} md={2}>

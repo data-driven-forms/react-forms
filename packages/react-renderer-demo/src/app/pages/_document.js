@@ -23,7 +23,9 @@ class MyDocument extends Document {
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
           <link rel="stylesheet" type="text/css" href="//wpcc.io/lib/1.0.2/cookieconsent.min.css" />
           <script src="//wpcc.io/lib/1.0.2/cookieconsent.min.js"></script>
-          <style dangerouslySetInnerHTML={{__html: `
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `
           html {
             box-sizing: border-box;
             -webkit-font-smoothing: antialiased;
@@ -44,7 +46,9 @@ class MyDocument extends Document {
             line-height: 1.43 !important;
             letter-spacing: 0.01071em !important;
             background-color: #fafafa !important;
-          }`}} />
+          }`
+            }}
+          />
         </Head>
         <body>
           <Main />

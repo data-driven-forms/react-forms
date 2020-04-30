@@ -24,7 +24,7 @@ import Footer from './footer';
 import dynamic from 'next/dynamic';
 import NotificationPanel from './notification-panel';
 import MapperMenu from './mapper-menu';
-import { getPrefix, getScopedLink } from '../helpers/scoped-links';
+import { getScopedLink } from '../helpers/scoped-links';
 const DocSearch = dynamic(import('./docsearch'), {
   ssr: false
 });

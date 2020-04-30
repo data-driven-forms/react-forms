@@ -62,6 +62,19 @@ export const Heading = ({ level, children, component }) => {
   );
 };
 
+const MdLink = ({ href, children }) => {
+  const classes = useHeadingStyles();
+  return href.startsWith('/') ? (
+    <RouterLink href={href}>
+      <Link href={href}>{children}</Link>
+    </RouterLink>
+  ) : (
+    <Link className={classes.link} href={href} rel="noopener noreferrer" target="_blank">
+      {children}
+    </Link>
+  );
+};
+
 const MdxComponents = {
   p: ({ children }) => (
     <Typography variant="body1" gutterBottom>
@@ -98,18 +111,7 @@ const MdxComponents = {
       </div>
     );
   },
-  a: ({ href, children }) => {
-    const classes = useHeadingStyles();
-    return href.startsWith('/') ? (
-      <RouterLink href={href}>
-        <Link href={href}>{children}</Link>
-      </RouterLink>
-    ) : (
-      <Link className={classes.link} href={href} rel="noopener noreferrer" target="_blank">
-        {children}
-      </Link>
-    );
-  },
+  a: MdLink,
   h1: (props) => <Heading {...props} level={4} component="h1" />,
   h2: (props) => <Heading {...props} level={5} component="h2" />,
   h3: (props) => <Heading {...props} level={6} component="h3" />,
