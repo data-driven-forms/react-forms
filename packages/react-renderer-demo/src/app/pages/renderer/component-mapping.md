@@ -2,7 +2,7 @@ import CodeExample from '../../src/components/code-example'
 import Grid from '@material-ui/core/Grid'
 
 import '@docs/examples/components/component-mapper/form-fields-mapper-docs.css';
-import ListOfContents from '../../src/helpers/list-of-contents';
+import ListOfContents from '@docs/list-of-contents';
 
 <Grid container item>
 <Grid item xs={12} md={10}>
