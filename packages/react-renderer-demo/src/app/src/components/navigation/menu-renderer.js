@@ -96,7 +96,6 @@ const memoizeSearch = () => {
 
 const findSelected = (schema, currentLocation, level = 1, activeScope) => {
   if (schema.fields) {
-    console.log({ link: schema.link, activeScope, currentLocation: currentLocation[level] });
     return {
       ...schema,
       open: schema.link === currentLocation[level],

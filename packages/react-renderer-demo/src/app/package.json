@@ -12,7 +12,9 @@
     "deploy": "firebase deploy --only functions",
     "analyze": "ANALYZE=true next build",
     "lint": "eslint ./src",
-    "copy-pf4": "MAPPER=pf4 node scripts/generate-mappers.js"
+    "generate:clean": "rm -rf pages/pf4 examples/pf4",
+    "generate:scoped-docs": "yarn generate:clean; yarn copy:pf4",
+    "copy:pf4": "MAPPER=pf4 node scripts/generate-mappers.js"
   },
   "repository": {
     "type": "git",
@@ -35,6 +37,7 @@
     "@zeit/next-css": "^1.0.1",
     "firebase-admin": "~7.1.1",
     "firebase-functions": "^2.2.1",
+    "shelljs": "^0.8.4",
     "url-loader": "^2.1.0"
   },
   "dependencies": {
