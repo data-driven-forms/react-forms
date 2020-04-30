@@ -1,22 +1,23 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { useRouter } from 'next/router';
 import Mapper from './mapper';
 import { makeStyles } from '@material-ui/core/styles';
 import { navStyles } from './nav-styles';
+import { getPrefix, getScopedLink } from '../../helpers/scoped-links';
 
 const useStyles = makeStyles(navStyles);
 
 const createLink = (...args) => args.join('/');
 
-const renderItems = (items, level = 0, previousLinks = ['']) => {
+const renderItems = (items, level = 0, previousLinks = [''], activeScope) => {
   if (!items) {
     return null;
   }
 
   if (Array.isArray(items)) {
-    return items.map((item) => renderItems(item, level, previousLinks));
+    return items.map((item) => renderItems(item, level, previousLinks, activeScope));
   }
 
   const { fields, title, link, linkText, component, open, ...props } = items;
@@ -31,26 +32,21 @@ const renderItems = (items, level = 0, previousLinks = ['']) => {
         link={link}
         level={level}
         previousLinks={previousLinks}
-        renderItems={renderItems}
+        renderItems={(...args) => renderItems(...args, activeScope)}
         {...props}
       />
     );
   }
 
-  return (
-    <Mapper.Item
-      href={createLink(...previousLinks, link || component)}
-      level={level}
-      key={`${link || component}-${linkText}`}
-      linkText={linkText}
-      component={component}
-      {...props}
-    />
-  );
+  const href = getScopedLink(createLink(...previousLinks, link || component), activeScope);
+
+  return <Mapper.Item href={href} level={level} key={`${link || component}-${linkText}`} linkText={linkText} component={component} {...props} />;
 };
 
 const MenuRenderer = ({ schema }) => {
-  return <React.Fragment>{renderItems(schema)}</React.Fragment>;
+  const { pathname } = useRouter();
+  const activeScope = getPrefix(pathname);
+  return <React.Fragment>{renderItems(schema, undefined, undefined, activeScope)}</React.Fragment>;
 };
 
 const searchFunction = (linkText, value) =>
@@ -98,24 +94,25 @@ const memoizeSearch = () => {
   };
 };
 
-const findSelected = (schema, currentLocation, level = 1) => {
+const findSelected = (schema, currentLocation, level = 1, activeScope) => {
   if (schema.fields) {
+    console.log({ link: schema.link, activeScope, currentLocation: currentLocation[level] });
     return {
       ...schema,
       open: schema.link === currentLocation[level],
       level,
-      fields: findSelected(schema.fields, currentLocation, level + 1)
+      fields: findSelected(schema.fields, currentLocation, level + 1, activeScope)
     };
   }
 
   if (Array.isArray(schema)) {
-    return schema.map((field) => findSelected(field, currentLocation, level));
+    return schema.map((field) => findSelected(field, currentLocation, level, activeScope));
   }
 
   return schema;
 };
 
-const memoizeCurrent = () => {
+const memoizeCurrent = (activeScope) => {
   const cache = {};
 
   return (schema, currentLocation) => {
@@ -125,19 +122,20 @@ const memoizeCurrent = () => {
       return cache[value];
     }
 
-    cache[value] = findSelected(schema, currentLocation);
+    cache[value] = findSelected(schema, currentLocation, undefined, activeScope);
     return cache[value];
   };
 };
 
 const search = memoizeSearch();
-const current = memoizeCurrent();
 
 const Menu = ({ schema, searchRef }) => {
   const router = useRouter();
   const [value, setValue] = useState('');
   const classes = useStyles();
-  const currentLocation = router.pathname.split('/');
+  const currentLocation = getScopedLink(router.pathname, 'mui').split('/');
+  const activeScope = getPrefix(router.pathname);
+  const { current } = useRef(memoizeCurrent(activeScope));
 
   const schemaFiltered = value !== '' ? search(schema, value) : current(schema, currentLocation);
 
