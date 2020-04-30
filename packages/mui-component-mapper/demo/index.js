@@ -47,7 +47,7 @@ const App = () => {
           <FormRenderer
             onSubmit={console.log}
             componentMapper={compositeMapper}
-            FormTemplate={(props) => <FormTemplate {...props} showFormControls={false}/>}
+            FormTemplate={(props) => <FormTemplate {...props} />}
             schema={schema}
             onCancel={() => console.log('canceling')}
           />
