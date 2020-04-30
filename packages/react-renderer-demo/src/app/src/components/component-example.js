@@ -27,6 +27,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import RouterLink from 'next/link';
 import Link from '@material-ui/core/Link';
 
+import FormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
+
 import dynamic from 'next/dynamic';
 
 const CodeEditor = dynamic(import('@docs/components/code-editor'), {
@@ -237,7 +239,7 @@ const componentExampleReducer = (state, action) => {
   }
 };
 
-const ComponentExample = ({ baseStructure, activeMapper, componentMapper, component, FormTemplate, ...props }) => {
+const ComponentExample = ({ baseStructure, activeMapper, componentMapper, component, ...props }) => {
   const [{ value, variants, parsedSchema }, dispatch] = useReducer(componentExampleReducer, {
     value: JSON.stringify(baseStructure.value, null, 2),
     parsedSchema: baseStructure.value,
@@ -348,12 +350,14 @@ const ComponentExample = ({ baseStructure, activeMapper, componentMapper, compon
             <CardContent>
               <div className={activeMapper}>
                 <div style={{ paddingLeft: 8 }}>
-                  <FormRenderer
-                    componentMapper={componentMapper}
-                    schema={parsedSchema}
-                    onSubmit={console.log /* eslint-disable-line no-console */}
-                    FormTemplate={(props) => <FormTemplate {...props} showFormControls={component !== 'wizard'} />}
-                  />
+                  <Grid container xs={12} spacing={4}>
+                    <FormRenderer
+                      componentMapper={componentMapper}
+                      schema={parsedSchema}
+                      onSubmit={console.log /* eslint-disable-line no-console */}
+                      FormTemplate={(props) => <FormTemplate {...props} showFormControls={component !== 'wizard'} />}
+                    />
+                  </Grid>
                 </div>
               </div>
             </CardContent>
@@ -368,7 +372,6 @@ ComponentExample.propTypes = {
   component: PropTypes.string.isRequired,
   activeMapper: PropTypes.string.isRequired,
   componentMapper: PropTypes.object.isRequired,
-  FormTemplate: PropTypes.func.isRequired,
   baseStructure: PropTypes.shape({
     variants: PropTypes.array.isRequired,
     value: PropTypes.object.isRequired
