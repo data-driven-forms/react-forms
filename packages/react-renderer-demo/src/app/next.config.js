@@ -56,7 +56,8 @@ module.exports = withBundleAnalyzer(
           '@docs/components': path.resolve(__dirname, './src/components'),
           '@docs/pages': path.resolve(__dirname, './pages'),
           '@docs/examples': path.resolve(__dirname, './examples'),
-          '@docs/list-of-contents': path.resolve(__dirname, './src/helpers/list-of-contents')
+          '@docs/list-of-contents': path.resolve(__dirname, './src/helpers/list-of-contents'),
+          '@docs/code-example': path.resolve(__dirname, './src/components/code-example')
         };
 
         config.module.rules.push({

@@ -1,5 +1,5 @@
 import Grid from '@material-ui/core/Grid'
-import CodeExamples from '../../src/components/code-example';
+import CodeExamples from '@docs/code-example';
 
 import ListOfContents from '@docs/list-of-contents';
 
