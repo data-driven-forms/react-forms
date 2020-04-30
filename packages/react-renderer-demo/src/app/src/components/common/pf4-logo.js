@@ -3,7 +3,7 @@ import React from 'react';
 import SvgIcon from '@material-ui/core/SvgIcon';
 
 const PF4Logo = (props) => (
-  <SvgIcon height="402" width="582" viewBox="0 0 706.3 132.5" enable-background="new 0 0 706.3 132.5" role="presentation" {...props}>
+  <SvgIcon height="402" width="582" viewBox="0 0 706.3 132.5" enableBackground="new 0 0 706.3 132.5" role="presentation" {...props}>
  <g>
   <title>background</title>
   <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>

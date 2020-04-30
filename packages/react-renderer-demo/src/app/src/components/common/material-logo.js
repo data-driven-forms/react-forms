@@ -3,7 +3,7 @@ import React from 'react';
 import SvgIcon from '@material-ui/core/SvgIcon';
 
 const MaterialUILogo = (props) => (
-  <SvgIcon fontSize="150" viewBox="0 0 256 204" role="presentation" {...props}>
+  <SvgIcon viewBox="0 0 256 204" role="presentation" {...props}>
     <g>
       <polygon fill="#00B0FF" points="0 110.848 0 0 96 55.424 96 92.3733333 32 55.424 32 129.322667"></polygon>
       <polygon fill="#0081CB" points="96 55.424 192 0 192 110.848 128 147.797333 96 129.322667 160 92.3733333 160 55.424 96 92.3733333"></polygon>

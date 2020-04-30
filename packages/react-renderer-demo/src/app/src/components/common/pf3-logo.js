@@ -3,7 +3,7 @@ import React from 'react';
 import SvgIcon from '@material-ui/core/SvgIcon';
 
 const PF3Logo = (props) => (
-  <SvgIcon width="320px" height="320px" viewBox="0 0 320 320" enable-background="new 0 0 320 320" role="presentation" {...props}>
+  <SvgIcon width="320px" height="320px" viewBox="0 0 320 320" enableBackground="new 0 0 320 320" role="presentation" {...props}>
     <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="160" y1="320" x2="160" y2="0">
       <stop offset="0" style={{stopColor:"#E6E6E6"}} />
       <stop offset="0.75" style={{stopColor:"#FFFFFF" }}/>
