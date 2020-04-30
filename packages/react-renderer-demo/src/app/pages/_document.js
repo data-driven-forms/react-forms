@@ -23,6 +23,28 @@ class MyDocument extends Document {
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
           <link rel="stylesheet" type="text/css" href="//wpcc.io/lib/1.0.2/cookieconsent.min.css" />
           <script src="//wpcc.io/lib/1.0.2/cookieconsent.min.js"></script>
+          <style dangerouslySetInnerHTML={{__html: `
+          html {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+          }
+          *, *::before, *::after {
+            box-sizing: inherit;
+          }
+          strong, b {
+            font-weight: bolder !important;
+          }
+          body {
+            color: rgba(0, 0, 0, 0.87) !important;
+            margin: 0 !important;
+            font-size: 0.875rem !important;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
+            font-weight: 400 !important;
+            line-height: 1.43 !important;
+            letter-spacing: 0.01071em !important;
+            background-color: #fafafa !important;
+          }`}} />
         </Head>
         <body>
           <Main />

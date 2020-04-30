@@ -20,13 +20,16 @@ import NpmSvgIcon from './common/npm-svg-icon';
 import TwitterIcon from './common/twitter-svg-icon';
 import DiscordIcon from './common/discord-svg-icon';
 
+const useRepoLinkStyles = makeStyles(() => ({
+  listLink: {
+    paddingLeft: 0,
+    paddingRight: 0,
+    fontWeight: 'inherit'
+  }
+}));
+
 const RepoLink = ({ href, label }) => {
-  const classes = makeStyles(() => ({
-    listLink: {
-      paddingLeft: 0,
-      paddingRight: 0
-    }
-  }));
+  const classes = useRepoLinkStyles();
   return (
     <ListItem>
       <ListItemText
