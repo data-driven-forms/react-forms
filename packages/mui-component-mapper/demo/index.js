@@ -11,6 +11,7 @@ import demoSchema from '@data-driven-forms/common/src/demoschema';
 import fieldArraySchema from './demo-schemas/field-array-schema';
 
 import Button from '@material-ui/core/Button';
+import wizardSchema from './demo-schemas/wizard-schema';
 
 const theme = createMuiTheme({
   typography: {
@@ -29,7 +30,7 @@ const compositeMapper = {
 };
 
 const App = () => {
-  const [schema, setSchema] = useState(fieldArraySchema);
+  const [schema, setSchema] = useState(wizardSchema);
 
   return (
     <ThemeProvider theme={theme}>
@@ -40,12 +41,13 @@ const App = () => {
         <Grid item xs={12}>
           <Button onClick={() => setSchema(demoSchema)}>Demo schema</Button>
           <Button onClick={() => setSchema(fieldArraySchema)}>Field array</Button>
+          <Button onClick={() => setSchema(wizardSchema)}>Wizard</Button>
         </Grid>
         <Grid item xs={12}>
           <FormRenderer
             onSubmit={console.log}
             componentMapper={compositeMapper}
-            FormTemplate={(props) => <FormTemplate {...props} />}
+            FormTemplate={(props) => <FormTemplate {...props} showFormControls={false}/>}
             schema={schema}
             onCancel={() => console.log('canceling')}
           />
