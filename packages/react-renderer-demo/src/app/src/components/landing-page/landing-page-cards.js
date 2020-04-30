@@ -99,19 +99,19 @@ const buildFeatures = [
     Icon: LocalLibraryIcon
   },
   {
-    text: 'Validation - basic types provides, supports async validation!',
+    text: 'Validation - basic types are provided, supports async validators!',
     Icon: VerifiedUserIcon
   },
   {
-    text: 'Conditions - hide and modify fields according to other values!',
+    text: 'Conditions - hide and modify fields according to values of other fields!',
     Icon: PlaylistAddCheckIcon
   },
   {
-    text: 'Fully customizable - you can use any components!',
+    text: 'Fully customizable - you can use any components you are using right now!',
     Icon: EditAttributesIcon
   },
   {
-    text: 'Online editor - you can build your form with DnD!',
+    text: 'Online editor - you can build your form using comfy DnD!',
     Icon: CreateIcon
   }
 ].map(({ text, Icon, href, link }, idx) => (
@@ -242,6 +242,13 @@ const LandingPageCards = () => {
               <a href="https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper" rel="noopener noreferrer" target="_blank">
                 <PF3Logo style={{ fontSize: 100 }} />
               </a>
+            </Grid>
+            <Grid item xs={12} md={8}>
+              <Typography variant="body2" gutterBottom>
+                This list represents a set of provided mappers. Each mapper brings all basic form components from its design system. You can
+                immediately use form inputs such as text fields, selects, radios, checkboxes or wizards. However, this selection does not limit you as
+                integrating custom coponents is simple as it can be - all it takes is just one hook.
+              </Typography>
             </Grid>
           </Grid>
         </Paper>
