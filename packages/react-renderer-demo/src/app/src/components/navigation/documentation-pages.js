@@ -1,15 +1,15 @@
 export const docs = [
   {
+    component: 'get-started',
+    linkText: 'Getting started'
+  },
+  {
     component: 'installation',
     linkText: 'Installation'
   },
   {
     component: 'development-setup',
     linkText: 'Development Setup'
-  },
-  {
-    component: 'get-started',
-    linkText: 'Getting started'
   },
   {
     component: 'component-mapping',
