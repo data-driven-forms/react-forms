@@ -68,8 +68,8 @@ const LandingPage = () => {
           Data Driven Forms converts JSON form definitions into fully functional React forms.
         </Typography>
         <div className={classes.getStartedLink}>
-          <Link href="/renderer/installation">
-            <a className={classes.getStartedAnchor} href="/renderer/installation">
+          <Link href="/renderer/get-started">
+            <a className={classes.getStartedAnchor} href="/renderer/get-started">
               <Button variant="outlined" className={classes.getStartedButton}>
                 Get started
               </Button>
