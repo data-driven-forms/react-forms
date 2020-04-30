@@ -28,7 +28,8 @@ const WizardInternal = ({
   ButtonContainerProps,
   StepperProps,
   WizardBodyProps,
-  WizardProps
+  WizardProps,
+  onKeyDown
 }) => {
   const classes = useStyles();
 
@@ -41,7 +42,7 @@ const WizardInternal = ({
   };
 
   return (
-    <Grid container spacing={3} {...WizardProps}>
+    <Grid container spacing={3} {...WizardProps} onKeyDown={onKeyDown}>
       {stepsInfo && <WizardNav StepperProps={StepperProps} stepsInfo={stepsInfo} activeStepIndex={activeStepIndex} />}
       <Grid container spacing={2} {...WizardBodyProps} className={clsx(classes.wizardBody, WizardBodyProps.className)}>
         {currentStep.fields.map((item) => formOptions.renderForm([item], formOptions))}
@@ -60,29 +61,25 @@ const WizardInternal = ({
 };
 
 WizardInternal.propTypes = {
-  title: PropTypes.node,
-  description: PropTypes.node,
   currentStep: PropTypes.object,
   handlePrev: PropTypes.func,
   onKeyDown: PropTypes.func,
   jumpToStep: PropTypes.func,
   setPrevSteps: PropTypes.func,
   handleNext: PropTypes.func,
-  navSchema: PropTypes.array,
   activeStepIndex: PropTypes.number,
-  maxStepIndex: PropTypes.number,
   formOptions: PropTypes.shape({
     onCancel: PropTypes.func,
     renderForm: PropTypes.func
   }),
   prevSteps: PropTypes.array,
+  // ^^ common props
   buttonLabels: PropTypes.object,
   stepsInfo: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.node,
       label: PropTypes.node,
-      key: PropTypes.string,
-      LabelProps: PropTypes.object,
+      StepLabelProps: PropTypes.object,
       StepProps: PropTypes.object
     })
   ),

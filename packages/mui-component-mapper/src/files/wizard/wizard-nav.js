@@ -16,9 +16,9 @@ const WizardNav = ({ StepperProps, stepsInfo, activeStepIndex }) => {
 
   return (
     <Stepper {...StepperProps} className={clsx(classes.stepper, StepperProps.className)} activeStep={activeStepIndex}>
-      {stepsInfo.map(({ title, label, LabelProps, StepProps }, idx) => (
+      {stepsInfo.map(({ title, label, StepLabelProps, StepProps }, idx) => (
         <Step {...StepProps} key={idx}>
-          <StepLabel {...LabelProps}>{title || label}</StepLabel>
+          <StepLabel {...StepLabelProps}>{title || label}</StepLabel>
         </Step>
       ))}
     </Stepper>
@@ -31,8 +31,7 @@ WizardNav.propTypes = {
     PropTypes.shape({
       title: PropTypes.node,
       label: PropTypes.node,
-      key: PropTypes.string,
-      LabelProps: PropTypes.object,
+      StepLabelProps: PropTypes.object,
       StepProps: PropTypes.object
     })
   ),
