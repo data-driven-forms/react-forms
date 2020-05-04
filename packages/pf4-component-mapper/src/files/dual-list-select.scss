@@ -5,8 +5,23 @@
 .ddorg__pf4-component-mapper__dual-list-select {
     height: 300px !important;
     background: none !important;
+    overflow: auto !important;
+}
+
+.ddorg__pf4-component-mapper__dual-list-select-option-text {
+    height: 100% !important;
 }
 
 .ddorg__pf4-component-mapper__dual-list-select-option {
-    height: 100% !important;
+    cursor: pointer;
+    user-select: none;
+}
+
+.ddorg__pf4-component-mapper__dual-list-select-option-disabled {
+    color: var(--pf-global--disabled-color--100)
+}
+
+.ddorg__pf4-component-mapper__dual-list-select-option-selected {
+    background-color: var(--pf-global--active-color--400);
+    color: white
 }
