@@ -2,16 +2,33 @@ import React, { useState } from 'react';
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 import FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
-import TextField from '@data-driven-forms/pf4-component-mapper/dist/cjs/text-field';
+import validatorTypes from '@data-driven-forms/react-form-renderer/dist/cjs/validator-types';
 import useFieldApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-field-api';
+import TextField from '@data-driven-forms/pf4-component-mapper/dist/cjs/text-field';
 import submitFunction from './upload-handler';
 
+const fileSizeValidator = ({ maxSize }) => {
+  return (value) => {
+    if (value && value.inputFiles[0] && value.inputFiles[0].size > maxSize) {
+      /**
+       * Human readable message should be generated!
+       */
+      return `File is too large, maximum allowed size is ${maxSize} bytes. Current file has ${value.inputFiles[0].size} bytes`;
+    }
+  };
+};
+
 const FileUploadComponent = (props) => {
-  const { input, label } = useFieldApi(props);
+  const { input, meta, label } = useFieldApi(props);
   return (
     <div>
       <label htmlFor={input.name}>{label}</label>
       <input id={input.name} {...input} />
+      {meta.error && (
+        <div>
+          <span style={{ color: 'red' }}>{meta.error}</span>
+        </div>
+      )}
     </div>
   );
 };
@@ -32,9 +49,14 @@ const schema = {
       component: 'file-upload',
       label: 'File upload',
       name: 'file-upload-field-name',
-      type: 'file'
+      type: 'file',
+      validate: [{ type: validatorTypes.REQUIRED }, { type: 'file-size', maxSize: 40000 }]
     }
   ]
+};
+
+const validatorMapper = {
+  'file-size': fileSizeValidator
 };
 
 const FormWithFileUpload = () => {
@@ -52,6 +74,7 @@ const FormWithFileUpload = () => {
         schema={schema}
         componentMapper={componentMapper}
         FormTemplate={FormTemplate}
+        validatorMapper={validatorMapper}
         onSubmit={async (values, formApi) => {
           setValues(values);
           console.log('form values', values);
