@@ -41,20 +41,27 @@ const getOptionsGroup = (value, lastClicked, options) => {
   return [...options.slice(startIndex, endIndex).map(({ value }) => value.toString())];
 };
 
-const List = ({ value, optionClick, noOptionsTitle, filterValue, filterValueText, ...rest }) => (
-  <select className="pf-c-form-control pf-u-pr-sm ddorg__pf4-component-mapper__dual-list-select" multiple {...rest}>
+const List = ({ value, optionClick, noOptionsTitle, filterValue, filterValueText, selectedValues, ...rest }) => (
+  <div className="pf-c-form-control pf-u-pr-sm ddorg__pf4-component-mapper__dual-list-select" {...rest}>
     {value.length < 1 && (
-      <option className="ddorg__pf4-component-mapper__dual-list-select-option" disabled>
+      <div className="ddorg__pf4-component-mapper__dual-list-select-option-text ddorg__pf4-component-mapper__dual-list-select-option-disabled">
         {filterValue ? filterValueText : noOptionsTitle}
-      </option>
+      </div>
     )}
     {value.length > 0 &&
       value.map(({ value, label }) => (
-        <option onClick={optionClick} key={value} value={value}>
+        <div
+          onClick={(e) => optionClick(e, value)}
+          key={value}
+          value={value}
+          className={`ddorg__pf4-component-mapper__dual-list-select-option ${
+            selectedValues.includes(value) ? 'ddorg__pf4-component-mapper__dual-list-select-option-selected' : ''
+          }`}
+        >
           {label}
-        </option>
+        </div>
       ))}
-  </select>
+  </div>
 );
 
 List.propTypes = {
@@ -67,7 +74,8 @@ List.propTypes = {
   optionClick: PropTypes.func.isRequired,
   noOptionsTitle: PropTypes.node,
   filterValue: PropTypes.string,
-  filterValueText: PropTypes.node
+  filterValueText: PropTypes.node,
+  selectedValues: PropTypes.array
 };
 
 List.defaultProps = {
@@ -181,7 +189,6 @@ const DualList = (props) => {
     moveLeftTitle,
     options,
     rightTitle,
-    size,
     label,
     isRequired,
     helperText,
@@ -199,10 +206,7 @@ const DualList = (props) => {
 
   const showError = touched && error;
 
-  const handleOptionClicked = (event, options, isRight) => {
-    const {
-      target: { value }
-    } = event;
+  const handleOptionClicked = (event, value, options, isRight) => {
     const selectedKey = isRight ? 'selectedLeftValues' : 'selectedRightValues';
     const lastKey = isRight ? 'lastLeftClicked' : 'lastRightClicked';
     if (event.shiftKey && state[lastKey]) {
@@ -266,12 +270,12 @@ const DualList = (props) => {
               </GridItem>
               <GridItem md={12}>
                 <List
-                  size={size}
-                  optionClick={(event) => handleOptionClicked(event, leftValues, true)}
+                  optionClick={(event, value) => handleOptionClicked(event, value, leftValues, true)}
                   value={leftValues}
                   noOptionsTitle={noOptionsTitle}
                   filterValue={state.filterOptions}
                   filterValueText={filterOptionsText}
+                  selectedValues={state.selectedLeftValues}
                 />
               </GridItem>
             </Grid>
@@ -341,12 +345,12 @@ const DualList = (props) => {
               </GridItem>
               <GridItem md={12}>
                 <List
-                  size={size}
-                  optionClick={(event) => handleOptionClicked(event, rightValues, false)}
+                  optionClick={(event, value) => handleOptionClicked(event, value, rightValues, false)}
                   value={rightValues}
                   noOptionsTitle={noValueTitle}
                   filterValue={state.filterValue}
                   filterValueText={filterValueText}
+                  selectedValues={state.selectedRightValues}
                 />
               </GridItem>
             </Grid>
@@ -366,7 +370,6 @@ DualList.propTypes = {
   ),
   leftTitle: PropTypes.node,
   rightTitle: PropTypes.node,
-  size: PropTypes.number,
   moveLeftTitle: PropTypes.node,
   moveRightTitle: PropTypes.node,
   clearRightValue: PropTypes.bool,
@@ -387,7 +390,6 @@ DualList.propTypes = {
 DualList.defaultProps = {
   leftTitle: 'Options',
   rightTitle: 'Selected',
-  size: 15,
   moveLeftTitle: 'Move selected to left',
   moveRightTitle: 'Move selected to right',
   moveAllRightTitle: 'Move all to right',
