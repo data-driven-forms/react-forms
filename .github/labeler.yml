@@ -18,6 +18,3 @@ PF4:
 
 renderer:
   - packages/react-form-renderer/**/*
-
-dependencies:
-  - '**/package.json'

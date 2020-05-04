@@ -1,83 +1,96 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '@material-ui/core';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import NavigateBackIcon from '@material-ui/icons/NavigateBefore';
-import Send from '@material-ui/icons/Send';
-import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+import clsx from 'clsx';
 
-const SimpleNext = ({ next, valid, handleNext, submit, buttonLabels }) => (
-  <Button variant="contained" type="button" color="primary" onClick={() => (valid ? handleNext(next) : submit())}>
-    {buttonLabels.next}
-    <NavigateNextIcon />
+import selectNext from '@data-driven-forms/common/src/wizard/select-next';
+import { FormSpy } from '@data-driven-forms/react-form-renderer';
+import { Button, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const NextButton = ({ nextStep, valid, handleNext, nextLabel, getState, handleSubmit, submitLabel }) => (
+  <Button
+    variant="contained"
+    color="primary"
+    disabled={!valid || getState().validating || getState().submitting}
+    onClick={() => (nextStep ? handleNext(selectNext(nextStep, getState)) : handleSubmit())}
+  >
+    {nextStep ? nextLabel : submitLabel}
   </Button>
 );
 
-SimpleNext.propTypes = {
-  next: PropTypes.string,
+NextButton.propTypes = {
+  nextStep: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
+  handleSubmit: PropTypes.func.isRequired,
+  submitLabel: PropTypes.node.isRequired,
   valid: PropTypes.bool,
   handleNext: PropTypes.func.isRequired,
-  submit: PropTypes.func.isRequired,
-  buttonLabels: PropTypes.shape({
-    next: PropTypes.node
-  })
+  nextLabel: PropTypes.node.isRequired,
+  getState: PropTypes.func.isRequired
 };
 
-const ConditionalNext = ({ nextStep, ...rest }) => {
+const useStyles = makeStyles(() => ({
+  wizardBody: {
+    padding: 24,
+    margin: 0
+  },
+  buttons: {
+    display: 'flex',
+    justifyContent: 'flex-end'
+  },
+  button: {
+    marginRight: 16
+  },
+  buttonsContainer: {
+    marginTop: 36
+  }
+}));
+
+const WizardStepButtons = ({ buttons: Buttons, ...props }) => {
+  const classes = useStyles();
+
+  if (Buttons) {
+    return <Buttons classes={classes} {...props} />;
+  }
+
   const {
-    input: { value }
-  } = useFieldApi({ name: nextStep.when, subscription: { value: true } });
-  return <SimpleNext next={nextStep.stepMapper[value]} {...rest} />;
-};
+    disableBack,
+    handlePrev,
+    nextStep,
+    handleNext,
+    buttonLabels: { cancel, submit, back, next },
+    formOptions,
+    ButtonContainerProps
+  } = props;
 
-ConditionalNext.propTypes = {
-  nextStep: PropTypes.shape({
-    when: PropTypes.string.isRequired,
-    stepMapper: PropTypes.object.isRequired
-  }).isRequired
-};
-
-const submitButton = (handleSubmit, label) => (
-  <Button type="button" variant="contained" color="primary" onClick={handleSubmit}>
-    {label} <Send />
-  </Button>
-);
-
-const renderNextButton = ({ nextStep, handleSubmit, ...rest }) =>
-  !nextStep ? (
-    submitButton(handleSubmit, rest.buttonLabels.submit)
-  ) : typeof nextStep === 'object' ? (
-    <ConditionalNext nextStep={nextStep} {...rest} />
-  ) : (
-    <SimpleNext next={nextStep} {...rest} />
+  return (
+    <Grid
+      container
+      direction="row"
+      justify="space-evenly"
+      {...ButtonContainerProps}
+      className={clsx(classes.buttonsContainer, ButtonContainerProps.className)}
+    >
+      <FormSpy subscription={{ valid: true, validating: true, submitting: true }}>
+        {() => (
+          <React.Fragment>
+            <Grid item md={2} xs={2}>
+              <Button onClick={formOptions.onCancel}>{cancel}</Button>
+            </Grid>
+            <Grid item md={10} xs={10} className={classes.buttons}>
+              <Button disabled={disableBack} onClick={handlePrev} className={classes.button}>
+                {back}
+              </Button>
+              <NextButton {...formOptions} handleNext={handleNext} nextStep={nextStep} nextLabel={next} submitLabel={submit} />
+            </Grid>
+          </React.Fragment>
+        )}
+      </FormSpy>
+    </Grid>
   );
-
-const WizardStepButtons = ({ formOptions, disableBack, handlePrev, nextStep, handleNext, buttonLabels }) => (
-  <div>
-    {formOptions.onCancel && (
-      <Button type="button" variant="contained" color="secondary" onClick={formOptions.onCancel}>
-        {buttonLabels.cancel}
-      </Button>
-    )}
-
-    <Button type="button" variant="contained" disabled={disableBack} onClick={handlePrev}>
-      <NavigateBackIcon />
-      {buttonLabels.back}
-    </Button>
-    {renderNextButton({
-      ...formOptions,
-      handleNext,
-      nextStep,
-      buttonLabels
-    })}
-  </div>
-);
+};
 
 WizardStepButtons.propTypes = {
-  formOptions: PropTypes.shape({
-    onCancel: PropTypes.func,
-    handleSubmit: PropTypes.func.isRequired
-  }).isRequired,
+  ButtonContainerProps: PropTypes.object,
   disableBack: PropTypes.bool,
   handlePrev: PropTypes.func.isRequired,
   handleNext: PropTypes.func.isRequired,
@@ -86,14 +99,24 @@ WizardStepButtons.propTypes = {
     PropTypes.shape({
       when: PropTypes.string.isRequired,
       stepMapper: PropTypes.object.isRequired
-    })
+    }),
+    PropTypes.func
   ]),
   buttonLabels: PropTypes.shape({
-    submit: PropTypes.node,
-    cancel: PropTypes.node,
-    back: PropTypes.node,
-    next: PropTypes.node
+    submit: PropTypes.node.isRequired,
+    cancel: PropTypes.node.isRequired,
+    back: PropTypes.node.isRequired,
+    next: PropTypes.node.isRequired
+  }).isRequired,
+  buttons: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  formOptions: PropTypes.shape({
+    getState: PropTypes.func.isRequired,
+    onCancel: PropTypes.func.isRequired
   })
+};
+
+WizardStepButtons.defaultProps = {
+  ButtonContainerProps: {}
 };
 
 export default WizardStepButtons;
