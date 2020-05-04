@@ -81,7 +81,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
         "update": [Function],
       }
     }
-    onSubmit={[MockFunction]}
+    onSubmit={[Function]}
     render={[Function]}
     subscription={
       Object {
@@ -462,6 +462,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                               "pristine": true,
                               "push": [Function],
                               "registerField": [Function],
+                              "registerInputFile": [Function],
                               "remove": [Function],
                               "removeBatch": [Function],
                               "renderForm": [Function],
@@ -473,6 +474,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                               "submit": [Function],
                               "subscribe": [Function],
                               "swap": [Function],
+                              "unRegisterInputFile": [Function],
                               "unshift": [Function],
                               "update": [Function],
                               "valid": true,
@@ -672,6 +674,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                       "pristine": true,
                                       "push": [Function],
                                       "registerField": [Function],
+                                      "registerInputFile": [Function],
                                       "remove": [Function],
                                       "removeBatch": [Function],
                                       "renderForm": [Function],
@@ -683,6 +686,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                       "submit": [Function],
                                       "subscribe": [Function],
                                       "swap": [Function],
+                                      "unRegisterInputFile": [Function],
                                       "unshift": [Function],
                                       "update": [Function],
                                       "valid": true,
@@ -842,6 +846,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                         "pristine": true,
                                         "push": [Function],
                                         "registerField": [Function],
+                                        "registerInputFile": [Function],
                                         "remove": [Function],
                                         "removeBatch": [Function],
                                         "renderForm": [Function],
@@ -853,6 +858,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                         "submit": [Function],
                                         "subscribe": [Function],
                                         "swap": [Function],
+                                        "unRegisterInputFile": [Function],
                                         "unshift": [Function],
                                         "update": [Function],
                                         "valid": true,
@@ -893,6 +899,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                           pristine={true}
                                           push={[Function]}
                                           registerField={[Function]}
+                                          registerInputFile={[Function]}
                                           remove={[Function]}
                                           removeBatch={[Function]}
                                           renderForm={[Function]}
@@ -905,6 +912,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                           submitLabel="Submit"
                                           subscribe={[Function]}
                                           swap={[Function]}
+                                          unRegisterInputFile={[Function]}
                                           unshift={[Function]}
                                           update={[Function]}
                                           valid={true}
@@ -1152,7 +1160,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
         "update": [Function],
       }
     }
-    onSubmit={[MockFunction]}
+    onSubmit={[Function]}
     render={[Function]}
     subscription={
       Object {
@@ -1542,6 +1550,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                               "pristine": true,
                               "push": [Function],
                               "registerField": [Function],
+                              "registerInputFile": [Function],
                               "remove": [Function],
                               "removeBatch": [Function],
                               "renderForm": [Function],
@@ -1553,6 +1562,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                               "submit": [Function],
                               "subscribe": [Function],
                               "swap": [Function],
+                              "unRegisterInputFile": [Function],
                               "unshift": [Function],
                               "update": [Function],
                               "valid": true,
@@ -1976,6 +1986,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                 "pristine": true,
                                                 "push": [Function],
                                                 "registerField": [Function],
+                                                "registerInputFile": [Function],
                                                 "remove": [Function],
                                                 "removeBatch": [Function],
                                                 "renderForm": [Function],
@@ -1987,6 +1998,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                 "submit": [Function],
                                                 "subscribe": [Function],
                                                 "swap": [Function],
+                                                "unRegisterInputFile": [Function],
                                                 "unshift": [Function],
                                                 "update": [Function],
                                                 "valid": true,
@@ -2146,6 +2158,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                   "pristine": true,
                                                   "push": [Function],
                                                   "registerField": [Function],
+                                                  "registerInputFile": [Function],
                                                   "remove": [Function],
                                                   "removeBatch": [Function],
                                                   "renderForm": [Function],
@@ -2157,6 +2170,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                   "submit": [Function],
                                                   "subscribe": [Function],
                                                   "swap": [Function],
+                                                  "unRegisterInputFile": [Function],
                                                   "unshift": [Function],
                                                   "update": [Function],
                                                   "valid": true,
@@ -2197,6 +2211,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                     pristine={true}
                                                     push={[Function]}
                                                     registerField={[Function]}
+                                                    registerInputFile={[Function]}
                                                     remove={[Function]}
                                                     removeBatch={[Function]}
                                                     renderForm={[Function]}
@@ -2209,6 +2224,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                     submitLabel="Submit"
                                                     subscribe={[Function]}
                                                     swap={[Function]}
+                                                    unRegisterInputFile={[Function]}
                                                     unshift={[Function]}
                                                     update={[Function]}
                                                     valid={true}

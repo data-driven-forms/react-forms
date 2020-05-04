@@ -52,6 +52,10 @@ export const docs = [
     linkText: 'Data types'
   },
   {
+    component: 'file-input',
+    linkText: 'File input'
+  },
+  {
     component: 'cleared-value',
     linkText: 'Cleared field value'
   },

@@ -198,6 +198,7 @@ const DualList = (props) => {
     filterValueTitle,
     filterValueText,
     filterOptionsText,
+    isEqual: _isEqual,
     ...rest
   } = useFieldApi({
     ...props,
@@ -205,7 +206,6 @@ const DualList = (props) => {
   });
 
   const showError = touched && error;
-
   const handleOptionClicked = (event, value, options, isRight) => {
     const selectedKey = isRight ? 'selectedLeftValues' : 'selectedRightValues';
     const lastKey = isRight ? 'lastLeftClicked' : 'lastRightClicked';

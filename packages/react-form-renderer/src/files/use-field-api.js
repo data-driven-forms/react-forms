@@ -132,6 +132,9 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, ...
   useEffect(
     () => {
       mounted.current = true;
+      if (fieldProps.input.type === 'file') {
+        formOptions.registerInputFile(fieldProps.input.name);
+      }
 
       return () => {
         mounted.current = false;
@@ -140,6 +143,10 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, ...
          */
         if ((formOptions.clearOnUnmount || props.clearOnUnmount) && props.clearOnUnmount !== false) {
           fieldProps.input.onChange(fieldClearedValue);
+        }
+
+        if (fieldProps.input.type === 'file') {
+          formOptions.unRegisterInputFile(fieldProps.input.name);
         }
       };
     },
@@ -170,6 +177,8 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, ...
     ...(arrayValidator ? { arrayValidator } : {}),
     input: {
       ...fieldProps.input,
+      value:
+        fieldProps.input.type === 'file' && typeof fieldProps.input.value === 'object' ? fieldProps.input.value.inputValue : fieldProps.input.value,
       onChange: (...args) => {
         enhancedOnChange(
           {

@@ -56,7 +56,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
         "update": [Function],
       }
     }
-    onSubmit={[MockFunction]}
+    onSubmit={[Function]}
     render={[Function]}
     subscription={
       Object {
@@ -264,7 +264,7 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
         "update": [Function],
       }
     }
-    onSubmit={[MockFunction]}
+    onSubmit={[Function]}
     render={[Function]}
     subscription={
       Object {

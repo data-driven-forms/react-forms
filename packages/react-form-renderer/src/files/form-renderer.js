@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import Form from './form';
 import arrayMutators from 'final-form-arrays';
 import PropTypes from 'prop-types';
@@ -25,6 +25,8 @@ const FormRenderer = ({
   schemaValidatorMapper,
   ...props
 }) => {
+  const [fileInputs, setFileInputs] = useState([]);
+  const focusDecorator = useRef(createFocusDecorator());
   let schemaError;
 
   const validatorMapperMerged = { ...defaultValidatorMapper, ...validatorMapper };
@@ -43,12 +45,16 @@ const FormRenderer = ({
     return <SchemaErrorComponent name={schemaError.name} message={schemaError.message} />;
   }
 
+  const registerInputFile = (name) => setFileInputs((prevFiles) => [...prevFiles, name]);
+
+  const unRegisterInputFile = (name) => setFileInputs((prevFiles) => [...prevFiles.splice(prevFiles.indexOf(name))]);
+
   return (
     <Form
       {...props}
-      onSubmit={onSubmit}
+      onSubmit={(values, formApi, ...args) => onSubmit(values, { ...formApi, fileInputs }, ...args)}
       mutators={{ ...arrayMutators }}
-      decorators={[createFocusDecorator()]}
+      decorators={[focusDecorator.current]}
       subscription={{ pristine: true, submitting: true, valid: true, ...subscription }}
       render={({ handleSubmit, pristine, valid, form: { reset, mutators, getState, submit, ...form } }) => (
         <RendererContext.Provider
@@ -57,6 +63,8 @@ const FormRenderer = ({
             validatorMapper: validatorMapperMerged,
             actionMapper,
             formOptions: {
+              registerInputFile,
+              unRegisterInputFile,
               pristine,
               onSubmit,
               onCancel: onCancel ? (...args) => onCancel(getState().values, ...args) : undefined,

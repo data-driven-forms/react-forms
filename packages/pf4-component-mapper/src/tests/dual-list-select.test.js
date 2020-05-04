@@ -1,7 +1,7 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
-import { act } from 'react-dom/test-utils';
 
 import { FormGroup, TextInput } from '@patternfly/react-core';
 import { DataToolbar } from '@patternfly/react-core/dist/js/experimental';
@@ -252,6 +252,7 @@ describe('DualListSelect', () => {
         .simulate('click');
     });
     wrapper.update();
+
     await act(async () => {
       wrapper
         .find(AngleLeftIcon)

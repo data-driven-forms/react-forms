@@ -90,4 +90,15 @@ describe('#enhancedOnChange', () => {
       expect(enhancedOnChange({ onChange: (value) => value, initial, clearedValue }, value)).toEqual(value);
     });
   });
+
+  describe('#input type file', () => {
+    it('should return an object with inputValue and inputFiles keys', () => {
+      const value = { target: { value: 'fakepath/file.foo', files: [], type: 'file' } };
+      const expectedValue = {
+        inputValue: 'fakepath/file.foo',
+        inputFiles: []
+      };
+      expect(enhancedOnChange({ onChange: (value) => value }, value)).toEqual(expectedValue);
+    });
+  });
 });

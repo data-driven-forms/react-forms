@@ -84,7 +84,7 @@ exports[`<Input Addon> should render group button before input addon correctly 1
         "update": [Function],
       }
     }
-    onSubmit={[MockFunction]}
+    onSubmit={[Function]}
     render={[Function]}
     subscription={
       Object {
@@ -760,7 +760,7 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
         "update": [Function],
       }
     }
-    onSubmit={[MockFunction]}
+    onSubmit={[Function]}
     render={[Function]}
     subscription={
       Object {
@@ -1498,7 +1498,7 @@ exports[`<Input Addon> should render single after input addon correctly 1`] = `
         "update": [Function],
       }
     }
-    onSubmit={[MockFunction]}
+    onSubmit={[Function]}
     render={[Function]}
     subscription={
       Object {
@@ -1942,7 +1942,7 @@ exports[`<Input Addon> should render single before input addon correctly 1`] = `
         "update": [Function],
       }
     }
-    onSubmit={[MockFunction]}
+    onSubmit={[Function]}
     render={[Function]}
     subscription={
       Object {
@@ -2385,7 +2385,7 @@ exports[`<Input Addon> should render single button after input addon correctly 1
         "update": [Function],
       }
     }
-    onSubmit={[MockFunction]}
+    onSubmit={[Function]}
     render={[Function]}
     subscription={
       Object {
@@ -2834,7 +2834,7 @@ exports[`<Input Addon> should render single button before input addon correctly 
         "update": [Function],
       }
     }
-    onSubmit={[MockFunction]}
+    onSubmit={[Function]}
     render={[Function]}
     subscription={
       Object {
@@ -3419,7 +3419,7 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
         "update": [Function],
       }
     }
-    onSubmit={[MockFunction]}
+    onSubmit={[Function]}
     render={[Function]}
     subscription={
       Object {

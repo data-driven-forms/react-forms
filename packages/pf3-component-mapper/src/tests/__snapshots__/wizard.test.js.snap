@@ -72,7 +72,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
         "update": [Function],
       }
     }
-    onSubmit={[MockFunction]}
+    onSubmit={[Function]}
     render={[Function]}
     subscription={
       Object {
@@ -347,6 +347,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                 "pristine": true,
                                 "push": [Function],
                                 "registerField": [Function],
+                                "registerInputFile": [Function],
                                 "remove": [Function],
                                 "removeBatch": [Function],
                                 "renderForm": [Function],
@@ -358,6 +359,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                 "submit": [Function],
                                 "subscribe": [Function],
                                 "swap": [Function],
+                                "unRegisterInputFile": [Function],
                                 "unshift": [Function],
                                 "update": [Function],
                                 "valid": true,
@@ -430,6 +432,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                     "pristine": true,
                                     "push": [Function],
                                     "registerField": [Function],
+                                    "registerInputFile": [Function],
                                     "remove": [Function],
                                     "removeBatch": [Function],
                                     "renderForm": [Function],
@@ -441,6 +444,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                     "submit": [Function],
                                     "subscribe": [Function],
                                     "swap": [Function],
+                                    "unRegisterInputFile": [Function],
                                     "unshift": [Function],
                                     "update": [Function],
                                     "valid": true,
@@ -521,6 +525,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                       "pristine": true,
                                       "push": [Function],
                                       "registerField": [Function],
+                                      "registerInputFile": [Function],
                                       "remove": [Function],
                                       "removeBatch": [Function],
                                       "renderForm": [Function],
@@ -532,6 +537,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                       "submit": [Function],
                                       "subscribe": [Function],
                                       "swap": [Function],
+                                      "unRegisterInputFile": [Function],
                                       "unshift": [Function],
                                       "update": [Function],
                                       "valid": true,
@@ -656,6 +662,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                           pristine={true}
                                           push={[Function]}
                                           registerField={[Function]}
+                                          registerInputFile={[Function]}
                                           remove={[Function]}
                                           removeBatch={[Function]}
                                           renderForm={[Function]}
@@ -667,6 +674,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                           submit={[Function]}
                                           subscribe={[Function]}
                                           swap={[Function]}
+                                          unRegisterInputFile={[Function]}
                                           unshift={[Function]}
                                           update={[Function]}
                                           valid={true}
@@ -810,7 +818,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
         "update": [Function],
       }
     }
-    onSubmit={[MockFunction]}
+    onSubmit={[Function]}
     render={[Function]}
     subscription={
       Object {
@@ -1135,6 +1143,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                 "pristine": true,
                                 "push": [Function],
                                 "registerField": [Function],
+                                "registerInputFile": [Function],
                                 "remove": [Function],
                                 "removeBatch": [Function],
                                 "renderForm": [Function],
@@ -1146,6 +1155,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                 "submit": [Function],
                                 "subscribe": [Function],
                                 "swap": [Function],
+                                "unRegisterInputFile": [Function],
                                 "unshift": [Function],
                                 "update": [Function],
                                 "valid": true,
@@ -1212,6 +1222,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                     "pristine": true,
                                     "push": [Function],
                                     "registerField": [Function],
+                                    "registerInputFile": [Function],
                                     "remove": [Function],
                                     "removeBatch": [Function],
                                     "renderForm": [Function],
@@ -1223,6 +1234,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                     "submit": [Function],
                                     "subscribe": [Function],
                                     "swap": [Function],
+                                    "unRegisterInputFile": [Function],
                                     "unshift": [Function],
                                     "update": [Function],
                                     "valid": true,
@@ -1310,6 +1322,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                       "pristine": true,
                                       "push": [Function],
                                       "registerField": [Function],
+                                      "registerInputFile": [Function],
                                       "remove": [Function],
                                       "removeBatch": [Function],
                                       "renderForm": [Function],
@@ -1321,6 +1334,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                       "submit": [Function],
                                       "subscribe": [Function],
                                       "swap": [Function],
+                                      "unRegisterInputFile": [Function],
                                       "unshift": [Function],
                                       "update": [Function],
                                       "valid": true,
@@ -1459,6 +1473,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                           pristine={true}
                                           push={[Function]}
                                           registerField={[Function]}
+                                          registerInputFile={[Function]}
                                           remove={[Function]}
                                           removeBatch={[Function]}
                                           renderForm={[Function]}
@@ -1470,6 +1485,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                           submit={[Function]}
                                           subscribe={[Function]}
                                           swap={[Function]}
+                                          unRegisterInputFile={[Function]}
                                           unshift={[Function]}
                                           update={[Function]}
                                           valid={true}
@@ -1507,6 +1523,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                             pristine={true}
                                             push={[Function]}
                                             registerField={[Function]}
+                                            registerInputFile={[Function]}
                                             remove={[Function]}
                                             removeBatch={[Function]}
                                             renderForm={[Function]}
@@ -1518,6 +1535,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                             submit={[Function]}
                                             subscribe={[Function]}
                                             swap={[Function]}
+                                            unRegisterInputFile={[Function]}
                                             unshift={[Function]}
                                             update={[Function]}
                                             valid={true}
@@ -1666,7 +1684,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
         "update": [Function],
       }
     }
-    onSubmit={[MockFunction]}
+    onSubmit={[Function]}
     render={[Function]}
     subscription={
       Object {
@@ -2025,6 +2043,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                 "pristine": true,
                                 "push": [Function],
                                 "registerField": [Function],
+                                "registerInputFile": [Function],
                                 "remove": [Function],
                                 "removeBatch": [Function],
                                 "renderForm": [Function],
@@ -2036,6 +2055,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                 "submit": [Function],
                                 "subscribe": [Function],
                                 "swap": [Function],
+                                "unRegisterInputFile": [Function],
                                 "unshift": [Function],
                                 "update": [Function],
                                 "valid": true,
@@ -2212,6 +2232,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                     "pristine": true,
                                     "push": [Function],
                                     "registerField": [Function],
+                                    "registerInputFile": [Function],
                                     "remove": [Function],
                                     "removeBatch": [Function],
                                     "renderForm": [Function],
@@ -2223,6 +2244,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                     "submit": [Function],
                                     "subscribe": [Function],
                                     "swap": [Function],
+                                    "unRegisterInputFile": [Function],
                                     "unshift": [Function],
                                     "update": [Function],
                                     "valid": true,
@@ -2303,6 +2325,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                       "pristine": true,
                                       "push": [Function],
                                       "registerField": [Function],
+                                      "registerInputFile": [Function],
                                       "remove": [Function],
                                       "removeBatch": [Function],
                                       "renderForm": [Function],
@@ -2314,6 +2337,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                       "submit": [Function],
                                       "subscribe": [Function],
                                       "swap": [Function],
+                                      "unRegisterInputFile": [Function],
                                       "unshift": [Function],
                                       "update": [Function],
                                       "valid": true,
@@ -2438,6 +2462,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                           pristine={true}
                                           push={[Function]}
                                           registerField={[Function]}
+                                          registerInputFile={[Function]}
                                           remove={[Function]}
                                           removeBatch={[Function]}
                                           renderForm={[Function]}
@@ -2449,6 +2474,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                           submit={[Function]}
                                           subscribe={[Function]}
                                           swap={[Function]}
+                                          unRegisterInputFile={[Function]}
                                           unshift={[Function]}
                                           update={[Function]}
                                           valid={true}
@@ -2588,7 +2614,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
         "update": [Function],
       }
     }
-    onSubmit={[MockFunction]}
+    onSubmit={[Function]}
     render={[Function]}
     subscription={
       Object {
@@ -2872,6 +2898,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                 "pristine": true,
                                 "push": [Function],
                                 "registerField": [Function],
+                                "registerInputFile": [Function],
                                 "remove": [Function],
                                 "removeBatch": [Function],
                                 "renderForm": [Function],
@@ -2883,6 +2910,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                 "submit": [Function],
                                 "subscribe": [Function],
                                 "swap": [Function],
+                                "unRegisterInputFile": [Function],
                                 "unshift": [Function],
                                 "update": [Function],
                                 "valid": true,
@@ -2976,6 +3004,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                     "pristine": true,
                                     "push": [Function],
                                     "registerField": [Function],
+                                    "registerInputFile": [Function],
                                     "remove": [Function],
                                     "removeBatch": [Function],
                                     "renderForm": [Function],
@@ -2987,6 +3016,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                     "submit": [Function],
                                     "subscribe": [Function],
                                     "swap": [Function],
+                                    "unRegisterInputFile": [Function],
                                     "unshift": [Function],
                                     "update": [Function],
                                     "valid": true,
@@ -3067,6 +3097,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                       "pristine": true,
                                       "push": [Function],
                                       "registerField": [Function],
+                                      "registerInputFile": [Function],
                                       "remove": [Function],
                                       "removeBatch": [Function],
                                       "renderForm": [Function],
@@ -3078,6 +3109,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                       "submit": [Function],
                                       "subscribe": [Function],
                                       "swap": [Function],
+                                      "unRegisterInputFile": [Function],
                                       "unshift": [Function],
                                       "update": [Function],
                                       "valid": true,
@@ -3202,6 +3234,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                           pristine={true}
                                           push={[Function]}
                                           registerField={[Function]}
+                                          registerInputFile={[Function]}
                                           remove={[Function]}
                                           removeBatch={[Function]}
                                           renderForm={[Function]}
@@ -3213,6 +3246,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                           submit={[Function]}
                                           subscribe={[Function]}
                                           swap={[Function]}
+                                          unRegisterInputFile={[Function]}
                                           unshift={[Function]}
                                           update={[Function]}
                                           valid={true}
