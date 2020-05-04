@@ -1,0 +1,54 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Button as SuirButton, Form as SuirForm, Header } from 'semantic-ui-react';
+
+import FormTemplate from '@data-driven-forms/common/src/form-template';
+
+const Form = ({ children, ...props }) => <SuirForm {...props}>{children}</SuirForm>;
+
+Form.propTypes = {
+  children: PropTypes.node
+};
+
+const Description = ({ children }) => <span>{children}</span>;
+
+Description.propTypes = {
+  children: PropTypes.node
+};
+
+const Title = ({ children }) => (
+  <Header as="h3" gutterBottom>
+    {children}
+  </Header>
+);
+
+Title.propTypes = {
+  children: PropTypes.node
+};
+
+const ButtonGroup = ({ children }) => {
+  return <div className="">{children}</div>;
+};
+
+ButtonGroup.propTypes = {
+  children: PropTypes.node
+};
+
+const Button = ({ label, variant, children, buttonType, ...props }) => (
+  <SuirButton color={variant} {...props}>
+    {label || children}
+  </SuirButton>
+);
+
+Button.propTypes = {
+  children: PropTypes.node,
+  label: PropTypes.node,
+  variant: PropTypes.string,
+  buttonType: PropTypes.string
+};
+
+const MuiFormTemplate = (props) => (
+  <FormTemplate FormWrapper={Form} Button={Button} ButtonGroup={ButtonGroup} Title={Title} Description={Description} {...props} />
+);
+
+export default MuiFormTemplate;
