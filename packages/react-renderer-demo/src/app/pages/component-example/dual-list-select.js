@@ -1,8 +1,8 @@
 import React from 'react';
 import ComponentText from '@docs/components/component-example-text';
-import useComponentExample from '../../src/hooks/use-component-example';
 import MuiDualListSelect from '@data-driven-forms/mui-component-mapper/dist/cjs/dual-list-select';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
+import useComponentExample from '@docs/hooks/use-component-example';
 
 const mappers = {
   mui: {

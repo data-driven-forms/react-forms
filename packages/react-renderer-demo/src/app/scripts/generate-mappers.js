@@ -7,6 +7,7 @@ const mapper = process.env.MAPPER;
 
 const pagesFileNames = glob.sync(resolve(__dirname, `../pages/renderer/*.md`));
 const examplesFileNames = [...glob.sync(resolve(__dirname, `../examples/**/*.js`)), ...glob.sync(resolve(__dirname, `../examples/**/*.css`))];
+const componentExamples = glob.sync(resolve(__dirname, '../pages/component-example/*.js'));
 
 const pagesTargetDir = resolve(__dirname, `../pages/${mapper}`);
 
@@ -54,6 +55,36 @@ examplesFileNames.forEach((fileName) => {
     }
 
     let result = data.replace(/from '@data-driven-forms\/mui-component-mapper/g, `from '@data-driven-forms/${mapper}-component-mapper`);
+
+    fs.writeFile(target, result, 'utf8', function(err) {
+      if (err) {
+        return console.log('error when writing file: ', err);
+      }
+    });
+  });
+});
+
+/**
+ * Make the se function common
+ */
+componentExamples.forEach((fileName) => {
+  const source = fileName;
+  const target = fileName.replace('/pages/component-example/', `/pages/${mapper}/component-example/`);
+  const targetDirectory = target
+    .split('/')
+    .slice(0, target.split('/').length - 1)
+    .join('/');
+  if (!fs.existsSync(targetDirectory)) {
+    shell.mkdir('-p', targetDirectory);
+  }
+
+  fs.readFile(source, 'utf8', function(err, data) {
+    if (err) {
+      return console.log(err);
+    }
+
+    let result = data.replace(/from '@data-driven-forms\/mui-component-mapper/g, `from '@data-driven-forms/${mapper}-component-mapper`);
+    result = result.replace(/activeMapper="mui"/, `activeMapper="${mapper}"`);
 
     fs.writeFile(target, result, 'utf8', function(err) {
       if (err) {

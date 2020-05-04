@@ -1,7 +1,7 @@
 import React from 'react';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 import ComponentText from '@docs/components/component-example-text';
-import useComponentExample from '../../src/hooks/use-component-example';
+import useComponentExample from '@docs/hooks/use-component-example';
 import MuiFieldArray from '@data-driven-forms/mui-component-mapper/dist/cjs/field-array';
 import MuiTextField from '@data-driven-forms/mui-component-mapper/dist/cjs/text-field';
 

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import ComponentText from '@docs/components/component-example-text';
-import useComponentExample from '../../src/hooks/use-component-example';
+import useComponentExample from '@docs/hooks/use-component-example';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 import MuiDatepicker from '@data-driven-forms/mui-component-mapper/dist/cjs/date-picker';
 import DatePickerText from '@docs/components/mui-definitions/date-picker-text.md';
