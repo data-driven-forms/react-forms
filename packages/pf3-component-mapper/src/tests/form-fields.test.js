@@ -10,6 +10,7 @@ import Switch from '../files/switch';
 import Checkbox from '../files/checkbox';
 import Radio from '../files/radio';
 import Textarea from '../files/textarea';
+import Slider from '../files/slider';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 
 describe('FormFields', () => {
@@ -271,6 +272,28 @@ describe('FormFields', () => {
       const wrapper = mount(
         <RenderWithProvider>
           <Textarea {...initialProps} placeholder={'placeholder'} />
+        </RenderWithProvider>
+      );
+      expect(toJson(wrapper)).toMatchSnapshot();
+    });
+  });
+
+  describe('<Slider />', () => {
+    let initialProps;
+    beforeEach(() => {
+      initialProps = {
+        name: 'slider',
+        max: 100,
+        min: 10,
+        label: 'Distance',
+        helperText: '(kms)'
+      };
+    });
+
+    it('should render correctly', () => {
+      const wrapper = mount(
+        <RenderWithProvider>
+          <Slider {...initialProps} />
         </RenderWithProvider>
       );
       expect(toJson(wrapper)).toMatchSnapshot();
