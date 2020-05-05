@@ -43,7 +43,7 @@ const componentMapper = {
   [componentTypes.PLAIN_TEXT]: PlainText,
   [componentTypes.WIZARD]: Wizard,
   [componentTypes.FIELD_ARRAY]: FieldArray,
-  'dual-list-select': DualListSelect
+  [componentTypes.DUAL_LIST_SELECT]: DualListSelect
 };
 
 export default componentMapper;

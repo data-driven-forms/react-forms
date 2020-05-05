@@ -1,24 +1,9 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import FormRenderer from '@data-driven-forms/react-form-renderer';
+import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
 
-import {
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
-  Checkbox,
-  ListItemSecondaryAction,
-  IconButton,
-  FormControl,
-  FormLabel,
-  FormHelperText,
-  Toolbar,
-  TextField,
-  Typography
-} from '@material-ui/core';
+import { List, ListItem, IconButton, Toolbar, TextField } from '@material-ui/core';
 
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -39,7 +24,7 @@ describe('DualListSelect', () => {
     schema = {
       fields: [
         {
-          component: 'dual-list-select',
+          component: componentTypes.DUAL_LIST_SELECT,
           name: 'dual-list',
           options: [
             {

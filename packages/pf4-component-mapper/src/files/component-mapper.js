@@ -29,7 +29,7 @@ const mapper = {
   [componentTypes.SWITCH]: Switch,
   [componentTypes.PLAIN_TEXT]: PlainText,
   [componentTypes.FIELD_ARRAY]: FieldArray,
-  'dual-list-select': DualListSelect
+  [componentTypes.DUAL_LIST_SELECT]: DualListSelect
 };
 
 export default mapper;
