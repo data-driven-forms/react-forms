@@ -49,7 +49,8 @@ describe('formFields', () => {
       componentTypes.DATE_PICKER,
       componentTypes.TIME_PICKER,
       componentTypes.SWITCH,
-      componentTypes.SELECT
+      componentTypes.SELECT,
+      componentTypes.SLIDER
     ].forEach((component) => {
       describe(`Component type: ${component}`, () => {
         beforeEach(() => {
@@ -184,6 +185,8 @@ describe('formFields', () => {
                 .first()
                 .props().disabled
             ).toEqual(true);
+          } else if (component === componentTypes.SLIDER) {
+            expect(wrapper.find('.Mui-disabled')).toHaveLength(2);
           } else {
             expect(
               wrapper
@@ -208,6 +211,8 @@ describe('formFields', () => {
                 .first()
                 .props().readOnly
             ).toEqual(true);
+          } else if (component === componentTypes.SLIDER) {
+            expect(wrapper.find('.Mui-disabled')).toHaveLength(2);
           } else {
             expect(
               wrapper

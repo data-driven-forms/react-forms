@@ -13,6 +13,7 @@ import Radio from './radio';
 import Wizard from './wizard';
 import FieldArray from './field-array';
 import DualListSelect from './dual-list-select';
+import Slider from './slider';
 
 export const components = {
   TextField,
@@ -26,7 +27,8 @@ export const components = {
   PlainText,
   SubForm,
   Wizard,
-  DualListSelect
+  DualListSelect,
+  Slider
 };
 
 const componentMapper = {
@@ -43,7 +45,8 @@ const componentMapper = {
   [componentTypes.PLAIN_TEXT]: PlainText,
   [componentTypes.WIZARD]: Wizard,
   [componentTypes.FIELD_ARRAY]: FieldArray,
-  [componentTypes.DUAL_LIST_SELECT]: DualListSelect
+  [componentTypes.DUAL_LIST_SELECT]: DualListSelect,
+  [componentTypes.SLIDER]: Slider
 };
 
 export default componentMapper;
