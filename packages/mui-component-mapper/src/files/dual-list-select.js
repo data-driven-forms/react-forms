@@ -22,7 +22,7 @@ import {
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
-import SortIcon from '@material-ui/icons/Sort';
+import SortIcon from '@material-ui/icons/ArrowUpward';
 
 import { makeStyles } from '@material-ui/core/styles';
 
