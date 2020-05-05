@@ -461,15 +461,15 @@ Vestibulum vulputate inceptos himenaeos.`
     }
   },
   {
-    component: 'dual-list-select',
-    link: 'dual-list-select',
+    component: componentTypes.DUAL_LIST_SELECT,
+    link: componentTypes.DUAL_LIST_SELECT,
     linkText: 'Dual list select',
     ContentText: DualListSelect,
     variants: [...formGroupVariants],
     value: {
       fields: [
         {
-          component: 'dual-list-select',
+          component: componentTypes.DUAL_LIST_SELECT,
           name: 'dual-list-select',
           options: [
             {

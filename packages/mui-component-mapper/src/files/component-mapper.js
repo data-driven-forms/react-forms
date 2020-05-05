@@ -12,6 +12,7 @@ import Select from './select';
 import Radio from './radio';
 import Wizard from './wizard';
 import FieldArray from './field-array';
+import DualListSelect from './dual-list-select';
 
 export const components = {
   TextField,
@@ -24,7 +25,8 @@ export const components = {
   TimePicker,
   PlainText,
   SubForm,
-  Wizard
+  Wizard,
+  DualListSelect
 };
 
 const componentMapper = {
@@ -40,7 +42,8 @@ const componentMapper = {
   [componentTypes.SWITCH]: Switch,
   [componentTypes.PLAIN_TEXT]: PlainText,
   [componentTypes.WIZARD]: Wizard,
-  [componentTypes.FIELD_ARRAY]: FieldArray
+  [componentTypes.FIELD_ARRAY]: FieldArray,
+  [componentTypes.DUAL_LIST_SELECT]: DualListSelect
 };
 
 export default componentMapper;

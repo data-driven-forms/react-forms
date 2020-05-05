@@ -2,16 +2,18 @@ import React from 'react';
 import ComponentText from '@docs/components/component-example-text';
 import useComponentExample from '../../src/hooks/use-component-example';
 import Pf4DualListSelect from '@data-driven-forms/pf4-component-mapper/dist/cjs/dual-list-select';
+import MuiDualListSelect from '@data-driven-forms/mui-component-mapper/dist/cjs/dual-list-select';
+import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 
 const mappers = {
   pf4: {
-    'dual-list-select': Pf4DualListSelect
+    [componentTypes.DUAL_LIST_SELECT]: Pf4DualListSelect
   },
   pf3: {
-    'dual-list-select': () => <h2>Not implemented</h2>
+    [componentTypes.DUAL_LIST_SELECT]: () => <h2>Not implemented</h2>
   },
   mui: {
-    'dual-list-select': () => <h2>Not implemented</h2>
+    [componentTypes.DUAL_LIST_SELECT]: MuiDualListSelect
   }
 };
 

@@ -3,19 +3,15 @@ import { act } from 'react-dom/test-utils';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
 
-import { FormGroup, TextInput } from '@patternfly/react-core';
-import { DataToolbar } from '@patternfly/react-core/dist/js/experimental';
-import {
-  SearchIcon,
-  SortAlphaUpIcon,
-  SortAlphaDownIcon,
-  AngleDoubleLeftIcon,
-  AngleDoubleRightIcon,
-  AngleLeftIcon,
-  AngleRightIcon
-} from '@patternfly/react-icons';
+import { List, ListItem, IconButton, Toolbar, TextField } from '@material-ui/core';
+
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
+import SortIcon from '@material-ui/icons/ArrowUpward';
 
 import { componentMapper, FormTemplate } from '../index';
+import FormFieldGrid from '../common/form-field-grid';
 
 describe('DualListSelect', () => {
   let onSubmit;
@@ -67,19 +63,15 @@ describe('DualListSelect', () => {
   it('renders correctly', () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find(FormGroup)).toHaveLength(1);
-    expect(wrapper.find(DataToolbar)).toHaveLength(2);
-    expect(wrapper.find(TextInput)).toHaveLength(2);
-    expect(wrapper.find(SearchIcon)).toHaveLength(2);
-    expect(wrapper.find(SortAlphaUpIcon)).toHaveLength(2);
-    expect(wrapper.find(SortAlphaDownIcon)).toHaveLength(0);
-    expect(wrapper.find(AngleRightIcon)).toHaveLength(1);
-    expect(wrapper.find(AngleLeftIcon)).toHaveLength(1);
-    expect(wrapper.find(AngleDoubleRightIcon)).toHaveLength(1);
-    expect(wrapper.find(AngleDoubleLeftIcon)).toHaveLength(1);
-    expect(wrapper.find('.ddorg__pf4-component-mapper__dual-list-select')).toHaveLength(2);
-    expect(wrapper.find('.ddorg__pf4-component-mapper__dual-list-select-option')).toHaveLength(schema.fields[0].options.length);
-    expect(wrapper.find('.ddorg__pf4-component-mapper__dual-list-select-option-text')).toHaveLength(1);
+    expect(wrapper.find(FormFieldGrid)).toHaveLength(1);
+    expect(wrapper.find(Toolbar)).toHaveLength(2);
+    expect(wrapper.find(TextField)).toHaveLength(2);
+    expect(wrapper.find(SortIcon)).toHaveLength(2);
+    expect(wrapper.find(ChevronRightIcon)).toHaveLength(1);
+    expect(wrapper.find(DoubleArrowIcon)).toHaveLength(2);
+    expect(wrapper.find(ChevronLeftIcon)).toHaveLength(1);
+    expect(wrapper.find(List)).toHaveLength(2);
+    expect(wrapper.find(ListItem)).toHaveLength(schema.fields[0].options.length + 1); // + empty placeholder
   });
 
   it('switch left option', async () => {
@@ -91,7 +83,7 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
         .first()
         .simulate('click');
     });
@@ -99,8 +91,8 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find(AngleRightIcon)
-        .parent()
+        .find(IconButton)
+        .at(1)
         .props()
         .onClick();
     });
@@ -118,9 +110,9 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .first()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
         .first()
         .simulate('click');
     });
@@ -128,9 +120,9 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .first()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
         .last()
         .simulate('click', { ctrlKey: true });
     });
@@ -138,8 +130,8 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find(AngleRightIcon)
-        .parent()
+        .find(IconButton)
+        .at(1)
         .props()
         .onClick();
     });
@@ -155,9 +147,9 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .first()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
         .first()
         .simulate('click');
     });
@@ -165,9 +157,9 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .first()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
         .last()
         .simulate('click', { shiftKey: true });
     });
@@ -175,8 +167,8 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find(AngleRightIcon)
-        .parent()
+        .find(IconButton)
+        .at(1)
         .props()
         .onClick();
     });
@@ -194,9 +186,9 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .first()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
         .first()
         .simulate('click');
     });
@@ -204,9 +196,9 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .first()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
         .last()
         .simulate('click', { shiftKey: true });
     });
@@ -214,9 +206,9 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .first()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
         .first()
         .simulate('click', { ctrlKey: true });
     });
@@ -224,8 +216,8 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find(AngleRightIcon)
-        .parent()
+        .find(IconButton)
+        .at(1)
         .props()
         .onClick();
     });
@@ -247,7 +239,7 @@ describe('DualListSelect', () => {
     onSubmit.mockClear();
     await act(async () => {
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
         .last()
         .simulate('click');
     });
@@ -255,8 +247,8 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find(AngleLeftIcon)
-        .parent()
+        .find(IconButton)
+        .at(4)
         .props()
         .onClick();
     });
@@ -272,8 +264,8 @@ describe('DualListSelect', () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
     await act(async () => {
       wrapper
-        .find(AngleDoubleRightIcon)
-        .parent()
+        .find(IconButton)
+        .at(2)
         .props()
         .onClick();
     });
@@ -289,8 +281,8 @@ describe('DualListSelect', () => {
     const wrapper = mount(<FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />);
     await act(async () => {
       wrapper
-        .find(AngleDoubleLeftIcon)
-        .parent()
+        .find(IconButton)
+        .at(3)
         .props()
         .onClick();
     });
@@ -307,9 +299,9 @@ describe('DualListSelect', () => {
 
     expect(
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .first()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
     ).toHaveLength(schema.fields[0].options.length);
     await act(async () => {
       wrapper
@@ -327,14 +319,14 @@ describe('DualListSelect', () => {
 
     expect(
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .first()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
     ).toHaveLength(3);
     wrapper
-      .find('.ddorg__pf4-component-mapper__dual-list-select')
+      .find(List)
       .first()
-      .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+      .find(ListItem)
       .forEach((option) => expect(option.text()).toEqual(expect.stringContaining('cats')));
   });
 
@@ -343,9 +335,9 @@ describe('DualListSelect', () => {
 
     expect(
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .last()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
     ).toHaveLength(schema.fields[0].options.length);
     await act(async () => {
       wrapper
@@ -364,14 +356,14 @@ describe('DualListSelect', () => {
 
     expect(
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .last()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
     ).toHaveLength(3);
     wrapper
-      .find('.ddorg__pf4-component-mapper__dual-list-select')
+      .find(List)
       .last()
-      .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+      .find(ListItem)
       .forEach((option) => expect(option.text()).toEqual(expect.stringContaining('cats')));
   });
 
@@ -380,25 +372,24 @@ describe('DualListSelect', () => {
 
     expect(
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .first()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
         .first()
         .text()
     ).toEqual('cats');
     expect(
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .first()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
         .last()
         .text()
     ).toEqual('zebras');
     await act(async () => {
       wrapper
-        .find(SortAlphaUpIcon)
-        .first()
-        .parent()
+        .find(IconButton)
+        .at(0)
         .props()
         .onClick();
     });
@@ -406,25 +397,24 @@ describe('DualListSelect', () => {
 
     expect(
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .first()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
         .first()
         .text()
     ).toEqual('zebras');
     expect(
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .first()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
         .last()
         .text()
     ).toEqual('cats');
     await act(async () => {
       wrapper
-        .find(SortAlphaDownIcon)
-        .first()
-        .parent()
+        .find(IconButton)
+        .at(0)
         .props()
         .onClick();
     });
@@ -432,17 +422,17 @@ describe('DualListSelect', () => {
 
     expect(
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .first()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
         .first()
         .text()
     ).toEqual('cats');
     expect(
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .first()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
         .last()
         .text()
     ).toEqual('zebras');
@@ -453,25 +443,24 @@ describe('DualListSelect', () => {
 
     expect(
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .last()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
         .first()
         .text()
     ).toEqual('cats');
     expect(
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .last()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
         .last()
         .text()
     ).toEqual('zebras');
     await act(async () => {
       wrapper
-        .find(SortAlphaUpIcon)
+        .find(IconButton)
         .last()
-        .parent()
         .props()
         .onClick();
     });
@@ -479,25 +468,24 @@ describe('DualListSelect', () => {
 
     expect(
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .last()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
         .first()
         .text()
     ).toEqual('zebras');
     expect(
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .last()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
         .last()
         .text()
     ).toEqual('cats');
     await act(async () => {
       wrapper
-        .find(SortAlphaDownIcon)
+        .find(IconButton)
         .last()
-        .parent()
         .props()
         .onClick();
     });
@@ -505,17 +493,17 @@ describe('DualListSelect', () => {
 
     expect(
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .last()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
         .first()
         .text()
     ).toEqual('cats');
     expect(
       wrapper
-        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .find(List)
         .last()
-        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .find(ListItem)
         .last()
         .text()
     ).toEqual('zebras');
@@ -540,8 +528,8 @@ describe('DualListSelect', () => {
       wrapper.update();
       await act(async () => {
         wrapper
-          .find(AngleDoubleRightIcon)
-          .parent()
+          .find(IconButton)
+          .at(2)
           .props()
           .onClick();
       });
@@ -574,8 +562,8 @@ describe('DualListSelect', () => {
 
       await act(async () => {
         wrapper
-          .find(AngleDoubleLeftIcon)
-          .parent()
+          .find(IconButton)
+          .at(3)
           .props()
           .onClick();
       });
