@@ -7,6 +7,7 @@ export { default as InputGroupFields } from './files/input-group-fields';
 export { default as PlainText } from './files/plain-text';
 export { default as Radio } from './files/radio';
 export { default as Select } from './files/select';
+export { default as Slider } from './files/slider';
 export { default as SubForm } from './files/sub-form';
 export { default as Switch } from './files/switch';
 export { default as Tabs } from './files/tabs';

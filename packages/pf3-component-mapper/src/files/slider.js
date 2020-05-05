@@ -46,7 +46,6 @@ Slider.propTypes = {
   isRequired: PropTypes.bool,
   helperText: PropTypes.node,
   description: PropTypes.node,
-  placeholder: PropTypes.string,
   inputAddon: PropTypes.shape({ fields: PropTypes.array }),
   sliderLabel: PropTypes.node,
   sliderInput: PropTypes.bool
