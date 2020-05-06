@@ -111,7 +111,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: 'linear-gradient(135deg, #41108E 0%, rgba(165, 37, 193, 1) 44.76%, #FC9957 100%)',
     backgroundSize: '100% 100vh',
     backgroundRepeat: 'no-repeat',
-    zIndex: 900
+    zIndex: 900,
+    paddingLeft: 48
   },
   toolbarOverride: {
     zIndex: 1000
