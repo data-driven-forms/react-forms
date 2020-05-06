@@ -6,6 +6,7 @@ import Drawer from '@material-ui/core/Drawer';
 import Toolbar from '@material-ui/core/Toolbar';
 import Divider from '@material-ui/core/Divider';
 import Badge from '@material-ui/core/Badge';
+import Hidden from '@material-ui/core/Hidden';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -88,14 +89,18 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    marginLeft: -drawerWidth
+    [theme.breakpoints.up('md')]: {
+      marginLeft: -drawerWidth
+    }
   },
   contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    }),
-    marginLeft: 0
+    [theme.breakpoints.up('md')]: {
+      transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen
+      }),
+      marginLeft: 0
+    }
   },
   menuIcons: {
     fill: theme.palette.common.white
@@ -106,25 +111,28 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: 'linear-gradient(135deg, #41108E 0%, rgba(165, 37, 193, 1) 44.76%, #FC9957 100%)',
     backgroundSize: '100% 100vh',
     backgroundRepeat: 'no-repeat',
-    zIndex: 900
+    zIndex: 900,
+    paddingLeft: 48
   },
   toolbarOverride: {
     zIndex: 1000
   },
   appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    })
+    [theme.breakpoints.up('md')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+      transition: theme.transitions.create(['margin', 'width'], {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen
+      })
+    }
   }
 }));
 
 const Layout = ({ children }) => {
   const router = useRouter();
   const classes = useStyles();
-  const [open, setOpen] = useState(router.pathname !== '/');
+  const [open, setOpen] = useState(false);
   const [links, setLinks] = useState({});
   const searchRef = useRef(null);
   const anchorRef = useRef(null);
@@ -133,18 +141,23 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     setLinks(findConnectedLinks(router.asPath, flatSchema) || {});
+    if (window && window.innerWidth > 960 && router.pathname !== '/') {
+      setOpen(true);
+    }
   }, [router.asPath]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
-    setTimeout(() => searchRef.current.focus(), 500);
+    if (searchRef && searchRef.current) {
+      setTimeout(() => searchRef.current.focus(), 500);
+    }
   };
 
   function handleDrawerClose() {
     setOpen(false);
   }
 
-  const handleToggle = (notificationDates) => {
+  const handleToggle = () => {
     setNewMessages(0);
     setOpenNotifiation(!openNotification);
   };
@@ -168,18 +181,34 @@ const Layout = ({ children }) => {
             <MenuIcon className={classes.menuIcons} />
           </IconButton>
         </Toolbar>
-        <Drawer
-          className={classes.drawer}
-          variant="persistent"
-          anchor="left"
-          open={open}
-          classes={{
-            paper: classes.drawerPaper
-          }}
-        >
-          <Navigation searchRef={searchRef} closeNav={handleDrawerClose} />
-          <Divider />
-        </Drawer>
+        <Hidden smDown>
+          <Drawer
+            className={classes.drawer}
+            variant="persistent"
+            anchor="left"
+            open={open}
+            classes={{
+              paper: classes.drawerPaper
+            }}
+          >
+            <Navigation searchRef={searchRef} closeNav={handleDrawerClose} />
+            <Divider />
+          </Drawer>
+        </Hidden>
+        <Hidden mdUp>
+          <Drawer
+            className={classes.drawer}
+            variant="temporary"
+            anchor="left"
+            open={open}
+            classes={{
+              paper: classes.drawerPaper
+            }}
+          >
+            <Navigation closeNav={handleDrawerClose} />
+            <Divider />
+          </Drawer>
+        </Hidden>
         <div
           className={clsx(classes.drawerHeader, classes.appBar, classes.rightAppBar, {
             [classes.appBarShift]: open
