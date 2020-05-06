@@ -16,7 +16,8 @@ const componentTypes = {
   BUTTON: 'button',
   INPUT_ADDON_GROUP: 'input-addon-group',
   INPUT_ADDON_BUTTON_GROUP: 'input-addon-button-group',
-  DUAL_LIST_SELECT: 'dual-list-select'
+  DUAL_LIST_SELECT: 'dual-list-select',
+  SLIDER: 'slider'
 };
 
 export default componentTypes;

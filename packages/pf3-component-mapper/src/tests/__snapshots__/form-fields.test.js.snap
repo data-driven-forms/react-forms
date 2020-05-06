@@ -375,6 +375,236 @@ exports[`FormFields <Radio /> should render correctly 1`] = `
 </RenderWithProvider>
 `;
 
+exports[`FormFields <Slider /> should render correctly 1`] = `
+<RenderWithProvider>
+  <ReactFinalForm
+    onSubmit={[Function]}
+  >
+    <Slider
+      helperText="(kms)"
+      label="Distance"
+      max={100}
+      min={10}
+      name="slider"
+    >
+      <Pf3FormGroup
+        helperText="(kms)"
+        label="Distance"
+        meta={
+          Object {
+            "active": false,
+            "data": Object {},
+            "dirty": false,
+            "dirtySinceLastSubmit": false,
+            "error": undefined,
+            "initial": undefined,
+            "invalid": false,
+            "length": undefined,
+            "modified": false,
+            "pristine": true,
+            "submitError": undefined,
+            "submitFailed": false,
+            "submitSucceeded": false,
+            "submitting": false,
+            "touched": false,
+            "valid": true,
+            "validating": false,
+            "visited": false,
+          }
+        }
+      >
+        <FormGroup
+          bsClass="form-group"
+          validationState={null}
+        >
+          <div
+            className="form-group"
+          >
+            <ControlLabel
+              bsClass="control-label"
+              srOnly={false}
+            >
+              <label
+                className="control-label"
+              >
+                Distance
+                <FieldLevelHelp
+                  buttonClass=""
+                  content="(kms)"
+                  placement="top"
+                  rootClose={true}
+                >
+                  <OverlayTrigger
+                    defaultOverlayShown={false}
+                    overlay={
+                      <Popover
+                        bsClass="popover"
+                        id="popover"
+                        placement="right"
+                      >
+                        (kms)
+                      </Popover>
+                    }
+                    placement="top"
+                    rootClose={true}
+                    trigger={
+                      Array [
+                        "click",
+                      ]
+                    }
+                  >
+                    <Button
+                      active={false}
+                      block={false}
+                      bsClass="btn"
+                      bsStyle="link"
+                      className="popover-pf-info"
+                      disabled={false}
+                      onClick={[Function]}
+                    >
+                      <button
+                        className="popover-pf-info btn btn-link"
+                        disabled={false}
+                        onClick={[Function]}
+                        type="button"
+                      >
+                        <Icon
+                          name="info"
+                          type="pf"
+                        >
+                          <PatternflyIcon
+                            className=""
+                            name="info"
+                          >
+                            <span
+                              aria-hidden="true"
+                              className="pficon pficon-info"
+                            />
+                          </PatternflyIcon>
+                        </Icon>
+                      </button>
+                    </Button>
+                  </OverlayTrigger>
+                </FieldLevelHelp>
+              </label>
+            </ControlLabel>
+            <Slider
+              dropdownList={null}
+              icon={null}
+              id={null}
+              input={false}
+              inputFormat=""
+              label={null}
+              labelClass={null}
+              max={100}
+              min={10}
+              name="slider"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onSlide={[Function]}
+              orientation="horizontal"
+              sliderClass={null}
+              step={1}
+              toolTip={false}
+              value={10}
+            >
+              <div>
+                <div
+                  className="col-xs-12 col-sm-12 col-md-12"
+                >
+                  <Boundaries
+                    dropdownList={null}
+                    icon={null}
+                    id={null}
+                    input={false}
+                    inputFormat=""
+                    label={null}
+                    labelClass={null}
+                    max={100}
+                    min={10}
+                    name="slider"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    onSlide={[Function]}
+                    orientation="horizontal"
+                    reversed={false}
+                    showBoundaries={false}
+                    slider={
+                      <BootstrapSlider
+                        dropdownList={null}
+                        formatter={[Function]}
+                        icon={null}
+                        id={null}
+                        input={false}
+                        inputFormat=""
+                        label={null}
+                        labelClass={null}
+                        max={100}
+                        min={10}
+                        name="slider"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        onSlide={[Function]}
+                        orientation="horizontal"
+                        sliderClass={null}
+                        step={1}
+                        ticks_labels={Array []}
+                        toolTip={false}
+                        value={10}
+                      />
+                    }
+                    sliderClass={null}
+                    step={1}
+                    toolTip={false}
+                    value={10}
+                  >
+                    <div
+                      className="slider-pf"
+                    >
+                      <BootstrapSlider
+                        dropdownList={null}
+                        formatter={[Function]}
+                        icon={null}
+                        id={null}
+                        input={false}
+                        inputFormat=""
+                        label={null}
+                        labelClass={null}
+                        max={100}
+                        min={10}
+                        name="slider"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        onSlide={[Function]}
+                        orientation="horizontal"
+                        sliderClass={null}
+                        step={1}
+                        ticks_labels={Array []}
+                        toolTip={false}
+                        value={10}
+                      >
+                        <input
+                          className="slider-pf"
+                          type="range"
+                        />
+                      </BootstrapSlider>
+                    </div>
+                  </Boundaries>
+                </div>
+              </div>
+            </Slider>
+          </div>
+        </FormGroup>
+      </Pf3FormGroup>
+    </Slider>
+  </ReactFinalForm>
+</RenderWithProvider>
+`;
+
 exports[`FormFields <Switch /> should render Switch correctly 1`] = `
 <RenderWithProvider
   value={

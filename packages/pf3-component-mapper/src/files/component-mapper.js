@@ -13,6 +13,7 @@ import PlainText from './plain-text';
 import Radio from './radio';
 import Button from './button';
 import { InputAddonButtonGroup, InputAddonGroup } from './input-group-fields';
+import Slider from './slider';
 
 const componentMapper = {
   [componentTypes.BUTTON]: Button,
@@ -29,7 +30,8 @@ const componentMapper = {
   [componentTypes.WIZARD]: Wizard,
   [componentTypes.PLAIN_TEXT]: PlainText,
   [componentTypes.INPUT_ADDON_BUTTON_GROUP]: InputAddonButtonGroup,
-  [componentTypes.INPUT_ADDON_GROUP]: InputAddonGroup
+  [componentTypes.INPUT_ADDON_GROUP]: InputAddonGroup,
+  [componentTypes.SLIDER]: Slider
 };
 
 export default componentMapper;
@@ -45,7 +47,8 @@ export const components = {
   DatePicker,
   Switch,
   Wizard,
-  PlainText
+  PlainText,
+  Slider
 };
 
 export const rawComponents = {

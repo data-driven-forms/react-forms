@@ -14,6 +14,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
       "plain-text": [Function],
       "radio": [Function],
       "select": [Function],
+      "slider": [Function],
       "sub-form": [Function],
       "switch": [Function],
       "tabs": [Function],
@@ -239,13 +240,14 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
           >
             <Form
               bsClass="form"
+              className="ddorg__pf3-layout-components__form-wrapper"
               componentClass="form"
               horizontal={false}
               inline={false}
               onSubmit={[Function]}
             >
               <form
-                className=""
+                className="ddorg__pf3-layout-components__form-wrapper"
                 onSubmit={[Function]}
               >
                 <SingleField
@@ -755,6 +757,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
       "plain-text": [Function],
       "radio": [Function],
       "select": [Function],
+      "slider": [Function],
       "sub-form": [Function],
       "switch": [Function],
       "tabs": [Function],
@@ -1015,13 +1018,14 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
           >
             <Form
               bsClass="form"
+              className="ddorg__pf3-layout-components__form-wrapper"
               componentClass="form"
               horizontal={false}
               inline={false}
               onSubmit={[Function]}
             >
               <form
-                className=""
+                className="ddorg__pf3-layout-components__form-wrapper"
                 onSubmit={[Function]}
               >
                 <SingleField
@@ -1618,6 +1622,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
       "plain-text": [Function],
       "radio": [Function],
       "select": [Function],
+      "slider": [Function],
       "sub-form": [Function],
       "switch": [Function],
       "tabs": [Function],
@@ -1905,13 +1910,14 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
           >
             <Form
               bsClass="form"
+              className="ddorg__pf3-layout-components__form-wrapper"
               componentClass="form"
               horizontal={false}
               inline={false}
               onSubmit={[Function]}
             >
               <form
-                className=""
+                className="ddorg__pf3-layout-components__form-wrapper"
                 onSubmit={[Function]}
               >
                 <SingleField
@@ -2555,6 +2561,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
       "plain-text": [Function],
       "radio": [Function],
       "select": [Function],
+      "slider": [Function],
       "sub-form": [Function],
       "switch": [Function],
       "tabs": [Function],
@@ -2787,13 +2794,14 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
           >
             <Form
               bsClass="form"
+              className="ddorg__pf3-layout-components__form-wrapper"
               componentClass="form"
               horizontal={false}
               inline={false}
               onSubmit={[Function]}
             >
               <form
-                className=""
+                className="ddorg__pf3-layout-components__form-wrapper"
                 onSubmit={[Function]}
               >
                 <SingleField

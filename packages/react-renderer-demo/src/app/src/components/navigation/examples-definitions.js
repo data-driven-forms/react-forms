@@ -5,6 +5,7 @@ import CustomComponentText from './examples-texts/custom-component';
 import WizardText from './examples-texts/wizard';
 import SelectText from './examples-texts/select';
 import FieldArray from './examples-texts/field-array';
+import Slider from './examples-texts/slider';
 import DualListSelect from './examples-texts/dual-list-select';
 import arraySchemaDDF from './field-array-schema';
 
@@ -504,6 +505,60 @@ Vestibulum vulputate inceptos himenaeos.`
     ContentText: FieldArray,
     value: arraySchemaDDF,
     variants: []
+  },
+  {
+    component: componentTypes.SLIDER,
+    link: componentTypes.SLIDER,
+    linkText: 'Slider',
+    ContentText: Slider,
+    value: {
+      fields: [
+        {
+          component: componentTypes.SLIDER,
+          name: 'slider',
+          label: 'Distance',
+          min: 1,
+          max: 100,
+          step: 1
+        }
+      ]
+    },
+    variants: [
+      {
+        name: 'label',
+        title: 'Label',
+        component: 'input',
+        value: 'Distance'
+      },
+      {
+        name: 'helperText',
+        title: 'Helper text',
+        component: 'input'
+      },
+      {
+        name: 'description',
+        title: 'Description',
+        component: 'input'
+      },
+      {
+        name: 'min',
+        title: 'Min',
+        value: 1,
+        component: 'input'
+      },
+      {
+        name: 'max',
+        title: 'Max',
+        value: 100,
+        component: 'input'
+      },
+      {
+        name: 'step',
+        title: 'Step',
+        value: 1,
+        component: 'input'
+      }
+    ]
   },
   {
     component: componentTypes.WIZARD,

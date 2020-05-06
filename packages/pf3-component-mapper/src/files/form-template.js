@@ -4,7 +4,11 @@ import { Button as PF3Button, Form } from 'patternfly-react';
 import './form-template.scss';
 import FormTemplate from '@data-driven-forms/common/src/form-template';
 
-export const FormWrapper = ({ children, ...props }) => <Form {...props}>{children}</Form>;
+export const FormWrapper = ({ children, ...props }) => (
+  <Form className="ddorg__pf3-layout-components__form-wrapper" {...props}>
+    {children}
+  </Form>
+);
 
 FormWrapper.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired

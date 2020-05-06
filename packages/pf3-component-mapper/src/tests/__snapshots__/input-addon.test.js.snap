@@ -14,6 +14,7 @@ exports[`<Input Addon> should render group button before input addon correctly 1
       "plain-text": [Function],
       "radio": [Function],
       "select": [Function],
+      "slider": [Function],
       "sub-form": [Function],
       "switch": [Function],
       "tabs": [Function],
@@ -323,13 +324,14 @@ exports[`<Input Addon> should render group button before input addon correctly 1
           >
             <Form
               bsClass="form"
+              className="ddorg__pf3-layout-components__form-wrapper"
               componentClass="form"
               horizontal={false}
               inline={false}
               onSubmit={[Function]}
             >
               <form
-                className=""
+                className="ddorg__pf3-layout-components__form-wrapper"
                 onSubmit={[Function]}
               >
                 <SingleField
@@ -684,6 +686,7 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
       "plain-text": [Function],
       "radio": [Function],
       "select": [Function],
+      "slider": [Function],
       "sub-form": [Function],
       "switch": [Function],
       "tabs": [Function],
@@ -1035,13 +1038,14 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
           >
             <Form
               bsClass="form"
+              className="ddorg__pf3-layout-components__form-wrapper"
               componentClass="form"
               horizontal={false}
               inline={false}
               onSubmit={[Function]}
             >
               <form
-                className=""
+                className="ddorg__pf3-layout-components__form-wrapper"
                 onSubmit={[Function]}
               >
                 <SingleField
@@ -1439,6 +1443,7 @@ exports[`<Input Addon> should render single after input addon correctly 1`] = `
       "plain-text": [Function],
       "radio": [Function],
       "select": [Function],
+      "slider": [Function],
       "sub-form": [Function],
       "switch": [Function],
       "tabs": [Function],
@@ -1671,13 +1676,14 @@ exports[`<Input Addon> should render single after input addon correctly 1`] = `
           >
             <Form
               bsClass="form"
+              className="ddorg__pf3-layout-components__form-wrapper"
               componentClass="form"
               horizontal={false}
               inline={false}
               onSubmit={[Function]}
             >
               <form
-                className=""
+                className="ddorg__pf3-layout-components__form-wrapper"
                 onSubmit={[Function]}
               >
                 <SingleField
@@ -1883,6 +1889,7 @@ exports[`<Input Addon> should render single before input addon correctly 1`] = `
       "plain-text": [Function],
       "radio": [Function],
       "select": [Function],
+      "slider": [Function],
       "sub-form": [Function],
       "switch": [Function],
       "tabs": [Function],
@@ -2115,13 +2122,14 @@ exports[`<Input Addon> should render single before input addon correctly 1`] = `
           >
             <Form
               bsClass="form"
+              className="ddorg__pf3-layout-components__form-wrapper"
               componentClass="form"
               horizontal={false}
               inline={false}
               onSubmit={[Function]}
             >
               <form
-                className=""
+                className="ddorg__pf3-layout-components__form-wrapper"
                 onSubmit={[Function]}
               >
                 <SingleField
@@ -2327,6 +2335,7 @@ exports[`<Input Addon> should render single button after input addon correctly 1
       "plain-text": [Function],
       "radio": [Function],
       "select": [Function],
+      "slider": [Function],
       "sub-form": [Function],
       "switch": [Function],
       "tabs": [Function],
@@ -2552,13 +2561,14 @@ exports[`<Input Addon> should render single button after input addon correctly 1
           >
             <Form
               bsClass="form"
+              className="ddorg__pf3-layout-components__form-wrapper"
               componentClass="form"
               horizontal={false}
               inline={false}
               onSubmit={[Function]}
             >
               <form
-                className=""
+                className="ddorg__pf3-layout-components__form-wrapper"
                 onSubmit={[Function]}
               >
                 <SingleField
@@ -2770,6 +2780,7 @@ exports[`<Input Addon> should render single button before input addon correctly 
       "plain-text": [Function],
       "radio": [Function],
       "select": [Function],
+      "slider": [Function],
       "sub-form": [Function],
       "switch": [Function],
       "tabs": [Function],
@@ -3037,13 +3048,14 @@ exports[`<Input Addon> should render single button before input addon correctly 
           >
             <Form
               bsClass="form"
+              className="ddorg__pf3-layout-components__form-wrapper"
               componentClass="form"
               horizontal={false}
               inline={false}
               onSubmit={[Function]}
             >
               <form
-                className=""
+                className="ddorg__pf3-layout-components__form-wrapper"
                 onSubmit={[Function]}
               >
                 <SingleField
@@ -3322,6 +3334,7 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
       "plain-text": [Function],
       "radio": [Function],
       "select": [Function],
+      "slider": [Function],
       "sub-form": [Function],
       "switch": [Function],
       "tabs": [Function],
@@ -3820,13 +3833,14 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
           >
             <Form
               bsClass="form"
+              className="ddorg__pf3-layout-components__form-wrapper"
               componentClass="form"
               horizontal={false}
               inline={false}
               onSubmit={[Function]}
             >
               <form
-                className=""
+                className="ddorg__pf3-layout-components__form-wrapper"
                 onSubmit={[Function]}
               >
                 <SingleField

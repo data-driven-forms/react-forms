@@ -264,7 +264,8 @@ describe('FormFields', () => {
         componentTypes.DATE_PICKER,
         componentTypes.TIME_PICKER,
         componentTypes.SWITCH,
-        componentTypes.SELECT
+        componentTypes.SELECT,
+        componentTypes.SLIDER
       ].forEach((component) => {
         describe(`Component type: ${component}`, () => {
           beforeEach(() => {
@@ -441,7 +442,7 @@ describe('FormFields', () => {
                   .first()
                   .props().disabled
               ).toEqual(true);
-            } else if ([componentTypes.CHECKBOX, componentTypes.RADIO, componentTypes.SWITCH].includes(component)) {
+            } else if ([componentTypes.CHECKBOX, componentTypes.RADIO, componentTypes.SWITCH, componentTypes.SLIDER].includes(component)) {
               expect(
                 wrapper
                   .find('input')
