@@ -4,6 +4,7 @@ import ComponentText from '@docs/components/component-example-text';
 import useComponentExample from '../../src/hooks/use-component-example';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 import MUISlider from '@data-driven-forms/mui-component-mapper/dist/cjs/slider';
+import PF4Slider from '@data-driven-forms/pf4-component-mapper/dist/cjs/slider';
 
 const PF3Slider = dynamic(() => import('@data-driven-forms/pf3-component-mapper/dist/cjs/slider'), {
   ssr: false
@@ -11,7 +12,7 @@ const PF3Slider = dynamic(() => import('@data-driven-forms/pf3-component-mapper/
 
 const mappers = {
   pf4: {
-    [componentTypes.SLIDER]: () => 'Not released by Patternfly'
+    [componentTypes.SLIDER]: PF4Slider
   },
   pf3: {
     [componentTypes.SLIDER]: PF3Slider

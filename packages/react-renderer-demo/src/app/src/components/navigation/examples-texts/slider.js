@@ -1,6 +1,7 @@
 import React from 'react';
 import PF3 from '@docs/doc-components/pf3-slider.md';
 import MUI from '@docs/doc-components/mui-slider.md';
+import PF4 from '@docs/doc-components/pf4-slider.md';
 
 import PropTypes from 'prop-types';
 
@@ -13,7 +14,7 @@ const DocSlider = ({ activeMapper }) => {
     return <MUI />;
   }
 
-  return 'Not implemented yet';
+  return <PF4 />;
 };
 
 DocSlider.propTypes = {
