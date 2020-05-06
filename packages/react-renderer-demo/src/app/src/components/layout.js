@@ -23,7 +23,6 @@ import Footer from './footer';
 
 import dynamic from 'next/dynamic';
 import NotificationPanel from './notification-panel';
-import MapperMenu from './mapper-menu';
 import { getScopedLink } from '../helpers/scoped-links';
 const DocSearch = dynamic(import('./docsearch'), {
   ssr: false
@@ -218,7 +217,6 @@ const Layout = ({ children }) => {
           })}
         >
           <DocSearch />
-          <MapperMenu />
           <IconButton aria-label="show new notifications" onClick={handleToggle} color="inherit" ref={anchorRef} className={clsx(classes.menuButton)}>
             <Badge badgeContent={newMessages} color="secondary">
               <NotificationsIcon className={classes.menuIcons} />

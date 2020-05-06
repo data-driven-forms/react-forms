@@ -2722,10 +2722,6 @@
     emotion "^9.2.9"
     emotion-server "^9.2.9"
 
-"@patternfly/react-tokens@^2.5.1":
-  version "2.7.6"
-  resolved "https://registry.yarnpkg.com/@patternfly/react-tokens/-/react-tokens-2.7.6.tgz#8a8f4422aca1ead3cf4f024f323d33a793953aaa"
-
 "@patternfly/react-tokens@^2.8.13":
   version "2.8.13"
   resolved "https://registry.yarnpkg.com/@patternfly/react-tokens/-/react-tokens-2.8.13.tgz#dbaa1b347253c9d5f72b65ea87f4656b12b265b8"

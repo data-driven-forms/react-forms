@@ -40,7 +40,7 @@ const FormTemplate = ({ formFields, schema }) => {
       {formFields}
       <FormSpy>
         {() => (
-          <div>
+          <div style={{ marginTop: 8 }}>
             <Button disabled={submitting || !valid} style={{ marginRight: 8 }} type="submit" color="primary" variant="contained">
               Submit
             </Button>
