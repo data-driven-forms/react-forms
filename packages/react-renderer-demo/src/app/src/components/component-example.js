@@ -13,58 +13,9 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import CheckIcon from '@material-ui/icons/Check';
-
-const indexHtml = `
-<html>
-  <head>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
-</html>
-`;
-
-const jsCode = `import React, { Component } from 'react';
-import { render } from 'react-dom';
-import FormRenderer from '@data-driven-forms/react-form-renderer';
-import FormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
-import componentMapper from '@data-driven-forms/mui-component-mapper/dist/cjs/component-mapper';
-
-import schema from './schema'
-
-class App extends Component {
-  render() {
-    return (
-      <div style={{margin: 24}}>
-        <FormRenderer
-          schema={schema}
-          FormTemplate={FormTemplate}
-          componentMapper={componentMapper}
-          onSubmit={console.log}
-        />
-      </div>
-    );
-  }
-}
-
-render(<App />, document.getElementById('root'));`;
-
-const dependencies = {
-  react: '^16.12.0',
-  'react-dom': '^16.12.0',
-  '@data-driven-forms/react-form-renderer': 'latest',
-  '@data-driven-forms/mui-component-mapper': 'latest',
-  '@material-ui/core': 'latest',
-  '@material-ui/icons': 'latest',
-  'prop-types': 'latest'
-};
+import { muiCode, muiHtml, muiDependencies } from '../stackblitz-templates/mui-templates';
 
 const project = {
-  files: {
-    'index.html': indexHtml,
-    'index.js': jsCode
-  },
   settings: {
     compile: {
       trigger: 'auto',
@@ -72,7 +23,6 @@ const project = {
       clearConsole: false
     }
   },
-  dependencies,
   template: 'javascript'
 };
 
@@ -88,25 +38,37 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ComponentExample = ({ baseStructure, activeMapper, componentMapper, component, ...props }) => {
+const blitzFiles = {
+  mui: {
+    'index.html': muiHtml,
+    'index.js': muiCode
+  }
+};
+
+const blitzDependencies = {
+  mui: muiDependencies
+};
+
+const ComponentExample = ({ baseStructure, activeMapper, componentMapper, component }) => {
   useEffect(() => {
     sdk.embedProject(
       'code-target',
       {
         ...project,
+        dependencies: blitzDependencies[activeMapper],
         files: {
-          ...project.files,
+          ...blitzFiles[activeMapper],
           'schema.js': `export default ${JSON.stringify(baseStructure.value, null, 2)};`
         }
       },
-      { height: 500, hideNavigation: true, forceEmbedLayout: true, openFile: 'schema.js' }
+      { height: '100%', hideNavigation: true, forceEmbedLayout: true, openFile: 'schema.js' }
     );
-  }, []);
+  }, [activeMapper, baseStructure.value]);
 
   return (
     <Grid container direction="row" spacing={4}>
       <Grid item xs={false} md={3}>
-        <Card style={{ minHeight: '100%' }} square>
+        <Card style={{ minHeight: 500 }} square>
           <CardContent>
             <Typography component="h3">Options</Typography>
             <Table>
