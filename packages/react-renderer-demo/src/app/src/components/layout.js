@@ -131,7 +131,7 @@ const useStyles = makeStyles((theme) => ({
 const Layout = ({ children }) => {
   const router = useRouter();
   const classes = useStyles();
-  const [open, setOpen] = useState(router.pathname !== '/');
+  const [open, setOpen] = useState(false);
   const [links, setLinks] = useState({});
   const searchRef = useRef(null);
   const anchorRef = useRef(null);
@@ -140,6 +140,9 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     setLinks(findConnectedLinks(router.asPath, flatSchema) || {});
+    if (window && window.innerWidth > 960 && router.pathname !== '/') {
+      setOpen(true);
+    }
   }, [router.asPath]);
 
   const handleDrawerOpen = () => {
