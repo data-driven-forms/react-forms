@@ -11,22 +11,34 @@ import arraySchemaDDF from './field-array-schema';
 
 const formGroupVariants = [
   {
-    name: 'isDisabled',
-    title: 'Disabled'
+    name: 'name',
+    type: 'string',
+    required: true
+  },
+  {
+    name: 'label',
+    type: 'string',
+    required: false
   },
   {
     name: 'helperText',
-    title: 'Helper text',
-    component: 'input'
+    type: 'string',
+    required: false
   },
   {
     name: 'description',
-    title: 'Description',
-    component: 'input'
+    type: 'string',
+    required: false
+  },
+  {
+    name: 'isDisabled',
+    type: 'boolean',
+    required: false
   },
   {
     name: 'isReadOnly',
-    title: 'Read only'
+    type: 'boolean',
+    required: false
   }
 ];
 
@@ -117,10 +129,9 @@ export const baseExamples = [
     variants: [
       ...formGroupVariants,
       {
-        name: 'label',
-        title: 'Label',
-        component: 'input',
-        value: 'Checkbox'
+        name: 'options',
+        type: 'array',
+        required: false
       }
     ]
   },
