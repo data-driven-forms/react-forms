@@ -8,8 +8,6 @@ import Layout from '@docs/components/layout';
 import { MDXProvider } from '@mdx-js/react';
 import MdxComponents from '@docs/components/mdx/mdx-components';
 
-import '@docs/examples/components/component-mapper/form-fields-mapper-docs.css';
-
 export default class MyApp extends App {
   componentDidMount() {
     // Remove the server-side injected CSS.

@@ -77,7 +77,6 @@ Below, you can see an basic implementation of custom component mapper:
 <CodeExample 
   source="components/component-mapper/form-fields-mapper"
   mode="preview"
-  additionalSources="components/component-mapper/form-fields-mapper-docs.css"
 />
 
 </Grid>
