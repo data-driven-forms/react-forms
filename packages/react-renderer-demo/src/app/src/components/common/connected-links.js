@@ -7,8 +7,6 @@ import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import Link from 'next/link';
 
 import MenuContext from '../navigation/menu-context';
-import { useRouter } from 'next/router';
-import { getScopedLink, getPrefix } from '../../helpers/scoped-links';
 
 const useStyles = makeStyles(() => ({
   linksContainer: {
@@ -24,15 +22,13 @@ const useStyles = makeStyles(() => ({
 
 const ConnectedLinks = () => {
   const { prev, next } = useContext(MenuContext);
-  const { pathname } = useRouter();
-  const activeScope = getPrefix(pathname);
   const classNames = useStyles();
   return (
     <Grid container justify="space-between" className={classNames.linksContainer}>
       <Grid item>
         {prev && prev.link && (
-          <Link href={getScopedLink(`/${prev.link}`, activeScope)}>
-            <a className={classNames.link} href={getScopedLink(`/${prev.link}`, activeScope)}>
+          <Link href={`/${prev.link}`}>
+            <a className={classNames.link} href={`/${prev.link}`}>
               <Button>
                 <ChevronLeft />
                 {prev.label}
@@ -43,8 +39,8 @@ const ConnectedLinks = () => {
       </Grid>
       <Grid item>
         {next && next.link && (
-          <Link href={getScopedLink(`/${next.link}`, activeScope)}>
-            <a className={classNames.link} href={getScopedLink(`/${next.link}`, activeScope)}>
+          <Link href={`/${next.link}`}>
+            <a className={classNames.link} href={`/${next.link}`}>
               <Button>
                 {next.label}
                 <ChevronRight />

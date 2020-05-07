@@ -22,8 +22,6 @@
     "dependencies": {
         "@babel/plugin-proposal-class-properties": "^7.2.3",
         "@data-driven-forms/mui-component-mapper": "*",
-        "@data-driven-forms/pf3-component-mapper": "*",
-        "@data-driven-forms/pf4-component-mapper": "*",
         "@data-driven-forms/react-form-renderer": "*",
         "@material-ui/core": "^4.5.2",
         "@material-ui/icons": "^4.5.1",

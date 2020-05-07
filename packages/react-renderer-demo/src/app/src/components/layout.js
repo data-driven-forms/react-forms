@@ -23,7 +23,6 @@ import Footer from './footer';
 
 import dynamic from 'next/dynamic';
 import NotificationPanel from './notification-panel';
-import { getScopedLink } from '../helpers/scoped-links';
 const DocSearch = dynamic(import('./docsearch'), {
   ssr: false
 });
@@ -145,7 +144,7 @@ const Layout = ({ children }) => {
       setOpen(true);
     }
 
-    setLinks(findConnectedLinks(getScopedLink(router.asPath, 'mui'), flatSchema) || {});
+    setLinks(findConnectedLinks(router.asPath, flatSchema) || {});
   }, [router.asPath]);
 
   const handleDrawerOpen = () => {

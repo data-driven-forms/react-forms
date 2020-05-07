@@ -5,7 +5,7 @@ import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/comp
 import useFieldApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-field-api';
 import useFormApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-form-api';
 
-import './form-fields-mapper-docs.css';
+//import './form-fields-mapper-docs.css';
 
 const getButtonStyle = (variant) => ({
   color: 'White',

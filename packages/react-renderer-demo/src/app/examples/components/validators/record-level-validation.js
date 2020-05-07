@@ -33,7 +33,7 @@ const validate = (values) => {
 };
 
 const RecordLevelValidator = () => (
-  <div className="pf4">
+  <div>
     <FormRenderer validate={validate} FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
   </div>
 );

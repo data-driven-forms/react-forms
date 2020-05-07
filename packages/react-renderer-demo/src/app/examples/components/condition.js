@@ -88,7 +88,7 @@ const componentMapper = {
 const FormTemplateWrapper = (props) => <FormTemplate {...props} showFormControls={false} />;
 
 const Condition = () => (
-  <div className="pf4">
+  <div>
     <FormRenderer FormTemplate={FormTemplateWrapper} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
   </div>
 );

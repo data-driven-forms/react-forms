@@ -1,7 +1,6 @@
 import CodeExample from '@docs/code-example'
 import Grid from '@material-ui/core/Grid'
 
-import '@docs/examples/components/component-mapper/form-fields-mapper-docs.css';
 import ListOfContents from '@docs/list-of-contents';
 
 <Grid container item>

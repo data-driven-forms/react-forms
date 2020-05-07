@@ -3,7 +3,7 @@ import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-r
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 import FormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
 import TextField from '@data-driven-forms/mui-component-mapper/dist/cjs/text-field';
-import { Title } from '@patternfly/react-core/dist/js/components/Title/Title';
+import Typography from '@material-ui/core/Typography';
 
 const schema = {
   fields: [
@@ -27,7 +27,7 @@ const componentMapper = {
 const ClearedValueExample = () => {
   const [values, setValues] = useState({});
   return (
-    <div className="pf4">
+    <div>
       <FormRenderer
         initialValues={{
           'field-with-initial-value': 'Delete me!'
@@ -40,7 +40,7 @@ const ClearedValueExample = () => {
         debug={({ values }) => setValues(values)}
       />
       <div style={{ marginTop: 16 }}>
-        <Title size="md">Form values</Title>
+        <Typography component="h3" variant="h5">Form values</Typography>
         <pre>{JSON.stringify(values, null, 2)}</pre>
       </div>
     </div>

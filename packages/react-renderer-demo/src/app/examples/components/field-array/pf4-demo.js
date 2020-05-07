@@ -98,7 +98,7 @@ const PF4FieldArray = () => {
   const [values, setValues] = useState(undefined);
 
   return (
-    <div className="pf4">
+    <div>
       <FormRender
         componentMapper={componentMapper}
         FormTemplate={FormTemplate}

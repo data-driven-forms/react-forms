@@ -19,8 +19,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 import GhIcon from './common/gh-svg-icon';
 import CodesandboxIcon from './common/code-sandbox-svg-icon';
-import { getPrefix } from '../helpers/scoped-links';
-import { useRouter } from 'next/router';
 
 const CodeEditor = dynamic(import('./code-editor'), {
   ssr: false
@@ -84,15 +82,7 @@ const generateIndex = (type) => `<!DOCTYPE html>
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <title>Data driven forms example</title>
-    ${type === 'mui' ? '<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">' : ''}
-    ${
-      type === 'pf4'
-        ? `
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@patternfly/patternfly@4.0.5/patternfly-base.css"/>
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@patternfly/patternfly@4.0.5/patternfly-addons.css"/>
-    `
-        : ''
-    }    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
   </head>
 
   <body>
@@ -119,11 +109,8 @@ const getPayload = (type, code, sourceFiles = {}) =>
           keywords: [],
           main: 'src/index.js',
           dependencies: {
-            '@data-driven-forms/mui-component-mapper': '2.1.2',
-            '@data-driven-forms/pf4-component-mapper': '2.1.2',
-            '@data-driven-forms/react-form-renderer': '2.1.2',
-            '@patternfly/react-core': 'latest',
-            '@patternfly/react-icons': 'latest',
+            '@data-driven-forms/mui-component-mapper': 'latest',
+            '@data-driven-forms/react-form-renderer': 'latest',
             '@material-ui/core': 'latest',
             '@material-ui/icons': 'latest',
             react: '16.12.0',
@@ -152,8 +139,6 @@ const getPayload = (type, code, sourceFiles = {}) =>
 
 const CodeExample = ({ source, mode, mapper, additionalSources }) => {
   const classes = useStyles();
-  const router = useRouter();
-  const activeScope = getPrefix(router.pathname);
   const codeSource = reqSource(`./${source}.js`).default;
   let Component;
   if (mode === 'preview') {
@@ -219,7 +204,7 @@ const CodeExample = ({ source, mode, mapper, additionalSources }) => {
         </Grid>
         {Component && (
           <Grid className={classes.formContainer} item xs={12}>
-            <Paper className={clsx(classes.componentPanel, classes[activeScope])}>
+            <Paper className={classes.componentPanel}>
               <Component />
             </Paper>
           </Grid>

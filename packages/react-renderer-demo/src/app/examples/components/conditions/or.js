@@ -41,7 +41,7 @@ const componentMapper = {
 };
 
 const OrCondition = () => (
-  <div className="pf4">
+  <div>
     <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
   </div>
 );

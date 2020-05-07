@@ -6,7 +6,7 @@ import FormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-
 import TextField from '@data-driven-forms/mui-component-mapper/dist/cjs/text-field';
 import Select from '@data-driven-forms/mui-component-mapper/dist/cjs/select';
 import Wizard from '@data-driven-forms/mui-component-mapper/dist/cjs/wizard';
-import { Title } from '@patternfly/react-core/dist/js/components/Title/Title';
+import Typography from '@material-ui/core/Typography';
 
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField,
@@ -91,9 +91,9 @@ const FormTemplateWrapper = (props) => <FormTemplate {...props} showFormControls
 const InitializeOnMountWizardExample = () => {
   const [values, setValues] = useState({});
   return (
-    <div className="pf4">
+    <div>
       <div style={{ marginTop: 16, marginBottom: 16 }}>
-        <Title size="md">Form values</Title>
+        <Typography component="h3" variant="h5">Form values</Typography>
         <pre>{JSON.stringify(values, null, 2)}</pre>
       </div>
       <FormRenderer

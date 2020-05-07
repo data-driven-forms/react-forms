@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
-import FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
+import FormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
 import validatorTypes from '@data-driven-forms/react-form-renderer/dist/cjs/validator-types';
 import useFieldApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-field-api';
-import TextField from '@data-driven-forms/pf4-component-mapper/dist/cjs/text-field';
+import TextField from '@data-driven-forms/mui-component-mapper/dist/cjs/text-field';
 import submitFunction from './upload-handler';
 
 const fileSizeValidator = ({ maxSize }) => {
@@ -62,7 +62,7 @@ const validatorMapper = {
 const FormWithFileUpload = () => {
   const [values, setValues] = useState();
   return (
-    <div className="pf4">
+    <div>
       {values && (
         <div>
           <h1>See that the files gets destroyed in JSON</h1>

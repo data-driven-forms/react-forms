@@ -7,14 +7,14 @@ import useFormApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-form
 import FormSpy from '@data-driven-forms/react-form-renderer/dist/cjs/form-spy';
 import TextField from '@data-driven-forms/mui-component-mapper/dist/cjs/text-field';
 import Button from '@material-ui/core/Button';
-import { Form } from '@patternfly/react-core/dist/js/components/Form/Form';
+import Typography from '@material-ui/core/Typography';
 
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField
 };
 
 const schema = {
-  title: 'Combination of PF4 form and MUI buttons',
+  title: 'Custom MUI buttons',
   fields: [
     {
       component: componentTypes.TEXT_FIELD,
@@ -35,7 +35,7 @@ const FormTemplate = ({ formFields, schema }) => {
   const { submitting, valid, pristine } = getState();
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       {schema.title}
       {formFields}
       <FormSpy>
@@ -53,7 +53,7 @@ const FormTemplate = ({ formFields, schema }) => {
           </div>
         )}
       </FormSpy>
-    </Form>
+    </form>
   );
 };
 
@@ -66,7 +66,7 @@ const asyncSubmit = (values, api) =>
   );
 
 const FormControls = () => (
-  <div className="pf4">
+  <div>
     <FormRenderer
       FormTemplate={FormTemplate}
       componentMapper={componentMapper}

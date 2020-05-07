@@ -35,7 +35,7 @@ const schemaValidatorMapper = {
 };
 
 const SchemaValidationExample = () => (
-  <div className="pf4">
+  <div>
     <FormRenderer
       FormTemplate={FormTemplate}
       componentMapper={componentMapper}

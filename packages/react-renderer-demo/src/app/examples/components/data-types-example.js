@@ -4,7 +4,7 @@ import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/comp
 import dataTypes from '@data-driven-forms/react-form-renderer/dist/cjs/data-types';
 import FormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
 import TextField from '@data-driven-forms/mui-component-mapper/dist/cjs/text-field';
-import { Title } from '@patternfly/react-core/dist/js/components/Title/Title';
+import Typography from '@material-ui/core/Typography';
 
 const schema = {
   fields: [
@@ -38,7 +38,7 @@ const componentMapper = {
 const DataTypesExample = () => {
   const [values, setValues] = useState({});
   return (
-    <div className="pf4">
+    <div>
       <FormRenderer
         FormTemplate={FormTemplate}
         componentMapper={componentMapper}
@@ -47,7 +47,7 @@ const DataTypesExample = () => {
         debug={({ values }) => setValues(values)}
       />
       <div style={{ marginTop: 16 }}>
-        <Title size="md">Form values</Title>
+        <Typography component="h3" variant="h5">Form values</Typography>
         <pre>{JSON.stringify(values, null, 2)}</pre>
       </div>
     </div>

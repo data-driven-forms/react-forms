@@ -5,19 +5,18 @@ import { useRouter } from 'next/router';
 import Mapper from './mapper';
 import { makeStyles } from '@material-ui/core/styles';
 import { navStyles } from './nav-styles';
-import { getPrefix, getScopedLink } from '../../helpers/scoped-links';
 
 const useStyles = makeStyles(navStyles);
 
 const createLink = (...args) => args.join('/');
 
-const renderItems = (items, level = 0, previousLinks = [''], activeScope) => {
+const renderItems = (items, level = 0, previousLinks = ['']) => {
   if (!items) {
     return null;
   }
 
   if (Array.isArray(items)) {
-    return items.map((item) => renderItems(item, level, previousLinks, activeScope));
+    return items.map((item) => renderItems(item, level, previousLinks));
   }
 
   const { fields, title, link, linkText, component, open, ...props } = items;
@@ -32,7 +31,7 @@ const renderItems = (items, level = 0, previousLinks = [''], activeScope) => {
         link={link}
         level={level}
         previousLinks={previousLinks}
-        renderItems={(...args) => renderItems(...args, activeScope)}
+        renderItems={renderItems}
         {...props}
       />
     );
@@ -44,9 +43,7 @@ const renderItems = (items, level = 0, previousLinks = [''], activeScope) => {
 };
 
 const MenuRenderer = ({ schema }) => {
-  const { pathname } = useRouter();
-  const activeScope = getPrefix(pathname);
-  return <React.Fragment>{renderItems(schema, undefined, undefined, activeScope)}</React.Fragment>;
+  return <React.Fragment>{renderItems(schema)}</React.Fragment>;
 };
 
 const searchFunction = (linkText, value) =>
@@ -94,24 +91,24 @@ const memoizeSearch = () => {
   };
 };
 
-const findSelected = (schema, currentLocation, level = 1, activeScope) => {
+const findSelected = (schema, currentLocation, level = 1) => {
   if (schema.fields) {
     return {
       ...schema,
       open: schema.link === currentLocation[level],
       level,
-      fields: findSelected(schema.fields, currentLocation, level + 1, activeScope)
+      fields: findSelected(schema.fields, currentLocation, level + 1)
     };
   }
 
   if (Array.isArray(schema)) {
-    return schema.map((field) => findSelected(field, currentLocation, level, activeScope));
+    return schema.map((field) => findSelected(field, currentLocation, level));
   }
 
   return schema;
 };
 
-const memoizeCurrent = (activeScope) => {
+const memoizeCurrent = () => {
   const cache = {};
 
   return (schema, currentLocation) => {
@@ -121,7 +118,7 @@ const memoizeCurrent = (activeScope) => {
       return cache[value];
     }
 
-    cache[value] = findSelected(schema, currentLocation, undefined, activeScope);
+    cache[value] = findSelected(schema, currentLocation);
     return cache[value];
   };
 };
@@ -132,9 +129,8 @@ const Menu = ({ schema, searchRef }) => {
   const router = useRouter();
   const [value, setValue] = useState('');
   const classes = useStyles();
-  const currentLocation = getScopedLink(router.pathname, 'mui').split('/');
-  const activeScope = getPrefix(router.pathname);
-  const { current } = useRef(memoizeCurrent(activeScope));
+  const currentLocation = router.pathname.split('/');
+  const { current } = useRef(memoizeCurrent());
 
   const schemaFiltered = value !== '' ? search(schema, value) : current(schema, currentLocation);
 
