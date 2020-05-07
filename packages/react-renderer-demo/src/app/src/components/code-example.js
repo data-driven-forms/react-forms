@@ -133,9 +133,19 @@ const getPayload = (type, code, sourceFiles = {}) =>
     }
   });
 
-const CodeExample = ({ source, mode, mapper, additionalSources }) => {
-  const { current: Component } = useRef(mode === 'preview' ? dynamic(import(`@docs/examples/${source}`)) : Fragment);
+const CodeExample = ({ source, mode, mapper }) => {
+  const [name, setName] = useState('');
   const [codeSource, setCodeSource] = useState('');
+  const { current: Component } = useRef(
+    mode === 'preview'
+      ? dynamic(
+          import(`@docs/examples/${source}`).then((mod) => {
+            setName(mod.default.name);
+            return mod;
+          })
+        )
+      : Fragment
+  );
   const sourceFiles = [];
   useEffect(() => {
     import(`!raw-loader!@docs/examples/${source}`).then((file) => {
@@ -160,7 +170,7 @@ const CodeExample = ({ source, mode, mapper, additionalSources }) => {
             >
               {Component && (
                 <Typography className={classes.heading} component="h4" variant="h3">
-                  {Component.name}
+                  {name}
                 </Typography>
               )}
               <Box display="flex">
