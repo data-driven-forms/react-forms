@@ -237,8 +237,7 @@ const CodeExample = ({ source, mode, mapper }) => {
 CodeExample.propTypes = {
   source: PropTypes.string.isRequired,
   mode: PropTypes.oneOf(['code', 'preview']),
-  mapper: PropTypes.oneOf(['pf4', 'mui']),
-  additionalSources: PropTypes.string // this has to be a string, MDX does not pass objects/arrays
+  mapper: PropTypes.oneOf(['pf4', 'mui'])
 };
 
 CodeExample.defaultProps = {

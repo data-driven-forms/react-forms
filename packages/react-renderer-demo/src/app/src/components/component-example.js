@@ -36,19 +36,19 @@ const project = {
 
 const useStyles = makeStyles((theme) => ({
   tab: {
-    minWidth: 'initial'
+    minWidth: 'initial',
+    '&.active': {
+      color: '#000',
+      background: theme.palette.common.white,
+      boxShadow: theme.shadows[1]
+    }
   },
   indicator: {
     width: 4
   },
   tabLink: {
     textDecoration: 'none',
-    color: 'inherit',
-    '&.active': {
-      color: '#000',
-      background: theme.palette.common.white,
-      boxShadow: theme.shadows[1]
-    }
+    color: 'inherit'
   },
   editorContainer: {
     height: '100%',
@@ -148,21 +148,39 @@ const ComponentExample = ({ baseStructure, activeMapper, component }) => {
               indicator: classes.indicator
             }}
           >
-            <Link href={`${router.pathname}?mapper=mui`}>
-              <a href={`${router.pathname}?mapper=mui`} className={clsx(classes.tabLink, { active: activeTab === 0 })}>
-                <Tab className={classes.tab} label="Mui" />
-              </a>
-            </Link>
-            <Link href={`${router.pathname}?mapper=pf4`}>
-              <a href={`${router.pathname}?mapper=pf4`} className={clsx(classes.tabLink, { active: activeTab === 1 })}>
-                <Tab className={classes.tab} label="PF4" />
-              </a>
-            </Link>
-            <Link href={`${router.pathname}?mapper=pf3`}>
-              <a href={`${router.pathname}?mapper=pf3`} className={clsx(classes.tabLink, { active: activeTab === 2 })}>
-                <Tab className={classes.tab} label="PF3" />
-              </a>
-            </Link>
+            <Tab
+              onClick={() => router.push(`${router.pathname}?mapper=mui`)}
+              className={clsx(classes.tab, { active: activeTab === 0 })}
+              label={
+                <Link href={`${router.pathname}?mapper=mui`}>
+                  <a href={`${router.pathname}?mapper=mui`} className={classes.tabLink}>
+                    Mui
+                  </a>
+                </Link>
+              }
+            />
+            <Tab
+              onClick={() => router.push(`${router.pathname}?mapper=pf4`)}
+              className={clsx(classes.tab, { active: activeTab === 1 })}
+              label={
+                <Link href={`${router.pathname}?mapper=pf4`}>
+                  <a href={`${router.pathname}?mapper=pf4`} className={classes.tabLink}>
+                    Pf4
+                  </a>
+                </Link>
+              }
+            />
+            <Tab
+              onClick={() => router.push(`${router.pathname}?mapper=pf3`)}
+              className={clsx(classes.tab, { active: activeTab === 2 })}
+              label={
+                <Link href={`${router.pathname}?mapper=pf3`}>
+                  <a href={`${router.pathname}?mapper=pf3`} className={classes.tabLink}>
+                    Pf3
+                  </a>
+                </Link>
+              }
+            />
           </Tabs>
           <div id="code-target"></div>
         </Box>
