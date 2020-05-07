@@ -47,7 +47,9 @@ const DataTypesExample = () => {
         debug={({ values }) => setValues(values)}
       />
       <div style={{ marginTop: 16 }}>
-        <Typography component="h3" variant="h5">Form values</Typography>
+        <Typography component="h3" variant="h5">
+          Form values
+        </Typography>
         <pre>{JSON.stringify(values, null, 2)}</pre>
       </div>
     </div>

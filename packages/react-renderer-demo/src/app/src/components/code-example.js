@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState, lazy, useRef } from 'react';
+import React, { Fragment, useEffect, useState, useRef } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -134,14 +134,14 @@ const getPayload = (type, code, sourceFiles = {}) =>
   });
 
 const CodeExample = ({ source, mode, mapper, additionalSources }) => {
-  const {current: Component} = useRef(mode === 'preview' ? dynamic(import(`@docs/examples/${source}`)) : Fragment)
+  const { current: Component } = useRef(mode === 'preview' ? dynamic(import(`@docs/examples/${source}`)) : Fragment);
   const [codeSource, setCodeSource] = useState('');
   const sourceFiles = [];
   useEffect(() => {
-    import(`!raw-loader!@docs/examples/${source}`).then(file => {
-      setCodeSource(file.default)
-    })
-  }, [source])
+    import(`!raw-loader!@docs/examples/${source}`).then((file) => {
+      setCodeSource(file.default);
+    });
+  }, [source]);
   const classes = useStyles();
   if (mode === 'preview') {
     return (

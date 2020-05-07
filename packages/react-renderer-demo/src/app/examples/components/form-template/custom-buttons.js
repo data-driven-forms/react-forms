@@ -7,7 +7,6 @@ import useFormApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-form
 import FormSpy from '@data-driven-forms/react-form-renderer/dist/cjs/form-spy';
 import TextField from '@data-driven-forms/mui-component-mapper/dist/cjs/text-field';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField

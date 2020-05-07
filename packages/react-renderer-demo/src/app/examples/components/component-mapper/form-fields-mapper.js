@@ -8,8 +8,8 @@ import useFormApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-form
 const formGroupStyle = {
   display: 'flex',
   flexDirection: 'column',
-  marginBottom: 16,
-}
+  marginBottom: 16
+};
 
 const inputStyles = {
   width: '100%',
@@ -18,22 +18,22 @@ const inputStyles = {
   display: 'inline-block',
   border: '1px solid #ccc',
   borderRadius: 4,
-  boxSizing: 'border-box',
-}
+  boxSizing: 'border-box'
+};
 
 const paragraphStyle = {
   marginTop: 0,
-  marginBottom: 4,
-}
+  marginBottom: 4
+};
 
 const requiredStyle = {
   color: 'red',
-  marginLeft: 2,
-}
+  marginLeft: 2
+};
 
 const errorStyle = {
   color: 'orangered'
-}
+};
 
 const getButtonStyle = (variant) => ({
   color: 'White',
@@ -79,15 +79,20 @@ const TextField = (props) => {
     ...rest
   } = useFieldApi(props);
   return (
-    <div style={{
-      ...formGroupStyle,
-      ...(isRequired && requiredStyle),
-      ...(error && touched && errorStyle)
-    }}>
-      <label style={{color: 'initial'}} htmlFor={input.name}>{isRequired && <span style={errorStyle}>*&nbsp;</span>}{label}</label>
+    <div
+      style={{
+        ...formGroupStyle,
+        ...(isRequired && requiredStyle),
+        ...(error && touched && errorStyle)
+      }}
+    >
+      <label style={{ color: 'initial' }} htmlFor={input.name}>
+        {isRequired && <span style={errorStyle}>*&nbsp;</span>}
+        {label}
+      </label>
       <input style={inputStyles} id={input.name} {...input} {...rest} />
       {touched && error && <p style={paragraphStyle}>{error}</p>}
-      {customProp && <p style={{color: 'initial'}}>This is a custom prop and has nothing to do with form schema</p>}
+      {customProp && <p style={{ color: 'initial' }}>This is a custom prop and has nothing to do with form schema</p>}
     </div>
   );
 };

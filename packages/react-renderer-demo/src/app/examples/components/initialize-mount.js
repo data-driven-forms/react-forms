@@ -15,7 +15,11 @@ const componentMapper = {
   Summary: () => {
     const { getState } = useFormApi();
 
-    return <Title size="md">{getState().values['chosen-way']}</Title>;
+    return (
+      <Typography component="h5" variant="h5">
+        {getState().values['chosen-way']}
+      </Typography>
+    );
   }
 };
 
@@ -93,7 +97,9 @@ const InitializeOnMountWizardExample = () => {
   return (
     <div>
       <div style={{ marginTop: 16, marginBottom: 16 }}>
-        <Typography component="h3" variant="h5">Form values</Typography>
+        <Typography component="h3" variant="h5">
+          Form values
+        </Typography>
         <pre>{JSON.stringify(values, null, 2)}</pre>
       </div>
       <FormRenderer
