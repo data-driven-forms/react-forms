@@ -16,9 +16,12 @@ import CheckIcon from '@material-ui/icons/Check';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
-import { muiCode, muiHtml, muiDependencies } from '../stackblitz-templates/mui-templates';
 import Link from 'next/link';
 import clsx from 'clsx';
+
+import { muiCode, muiWizardCode, muiHtml, muiDependencies } from '../stackblitz-templates/mui-templates';
+import { pf4Code, pf4WizardCode, pf4Html, pf4Dependencies } from '../stackblitz-templates/pf4-templates';
+import { pf3Code, pf3WizardCode, pf3Html, pf3Dependencies } from '../stackblitz-templates/pf3-templates';
 
 const project = {
   settings: {
@@ -42,7 +45,9 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none',
     color: 'inherit',
     '&.active': {
-      color: theme.palette.background.default.contrastText
+      color: '#000',
+      background: theme.palette.common.white,
+      boxShadow: theme.shadows[1]
     }
   },
   editorContainer: {
@@ -59,19 +64,25 @@ const blitzFiles = {
     'index.js': muiCode
   },
   pf4: {
-    'index.html': muiHtml,
-    'index.js': muiCode
+    'index.html': pf4Html,
+    'index.js': pf4Code
   },
   pf3: {
-    'index.html': muiHtml,
-    'index.js': muiCode
+    'index.html': pf3Html,
+    'index.js': pf3Code
   }
+};
+
+const blitzWizards = {
+  mui: muiWizardCode,
+  pf4: pf4WizardCode,
+  pf3: pf3WizardCode
 };
 
 const blitzDependencies = {
   mui: muiDependencies,
-  pf4: muiDependencies,
-  pf3: muiDependencies
+  pf4: pf4Dependencies,
+  pf3: pf3Dependencies
 };
 
 const mapperTab = {
@@ -80,7 +91,7 @@ const mapperTab = {
   pf3: 2
 };
 
-const ComponentExample = ({ baseStructure, activeMapper, componentMapper, component }) => {
+const ComponentExample = ({ baseStructure, activeMapper, component }) => {
   const activeTab = mapperTab[activeMapper];
   const router = useRouter();
   const classes = useStyles();
@@ -92,6 +103,7 @@ const ComponentExample = ({ baseStructure, activeMapper, componentMapper, compon
         dependencies: blitzDependencies[activeMapper],
         files: {
           ...blitzFiles[activeMapper],
+          ...(component === 'wizard' && { 'index.js': blitzWizards[activeMapper] }),
           'schema.js': `export default ${JSON.stringify(baseStructure.value, null, 2)};`
         }
       },
@@ -142,12 +154,12 @@ const ComponentExample = ({ baseStructure, activeMapper, componentMapper, compon
               </a>
             </Link>
             <Link href={`${router.pathname}?mapper=pf4`}>
-              <a href={`${router.pathname}?mapper=pf4`} className={classes.tabLink}>
+              <a href={`${router.pathname}?mapper=pf4`} className={clsx(classes.tabLink, { active: activeTab === 1 })}>
                 <Tab className={classes.tab} label="PF4" />
               </a>
             </Link>
             <Link href={`${router.pathname}?mapper=pf3`}>
-              <a href={`${router.pathname}?mapper=pf3`} className={classes.tabLink}>
+              <a href={`${router.pathname}?mapper=pf3`} className={clsx(classes.tabLink, { active: activeTab === 2 })}>
                 <Tab className={classes.tab} label="PF3" />
               </a>
             </Link>
@@ -162,7 +174,6 @@ const ComponentExample = ({ baseStructure, activeMapper, componentMapper, compon
 ComponentExample.propTypes = {
   component: PropTypes.string.isRequired,
   activeMapper: PropTypes.string.isRequired,
-  componentMapper: PropTypes.object.isRequired,
   baseStructure: PropTypes.shape({
     variants: PropTypes.array.isRequired,
     value: PropTypes.object.isRequired

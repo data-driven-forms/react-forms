@@ -592,7 +592,6 @@ Vestibulum vulputate inceptos himenaeos.`
             {
               title: 'Configure AWS',
               name: 'aws',
-              nextStep: 'summary',
               fields: [
                 {
                   component: componentTypes.TEXT_FIELD,
@@ -604,7 +603,6 @@ Vestibulum vulputate inceptos himenaeos.`
             {
               name: 'google',
               title: 'Configure google',
-              nextStep: 'summary',
               fields: [
                 {
                   component: componentTypes.TEXT_FIELD,
@@ -612,21 +610,23 @@ Vestibulum vulputate inceptos himenaeos.`
                   label: 'Google field part'
                 }
               ]
-            },
-            {
-              fields: [
-                {
-                  name: 'summary',
-                  component: 'summary'
-                }
-              ],
-              name: 'summary'
             }
           ]
         }
       ]
     },
-    variants: [],
+    variants: [
+      {
+        name: 'name',
+        type: 'string',
+        required: true
+      },
+      {
+        name: 'fields',
+        type: 'array',
+        required: true
+      }
+    ],
     next: {
       link: '/releases',
       label: 'Releases'

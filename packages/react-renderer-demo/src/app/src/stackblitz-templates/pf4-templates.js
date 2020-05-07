@@ -1,7 +1,8 @@
-export const muiHtml = `
+export const pf4Html = `
 <html>
   <head>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@patternfly/patternfly@4.0.5/patternfly-base.css"/>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@patternfly/patternfly@4.0.5/patternfly-addons.css"/>
   </head>
   <body>
     <div id="root"></div>
@@ -9,11 +10,11 @@ export const muiHtml = `
 </html>
 `;
 
-export const muiCode = `import React, { Component } from 'react';
+export const pf4Code = `import React, { Component } from 'react';
 import { render } from 'react-dom';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
-import FormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
-import componentMapper from '@data-driven-forms/mui-component-mapper/dist/cjs/component-mapper';
+import FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
+import componentMapper from '@data-driven-forms/pf4-component-mapper/dist/cjs/component-mapper';
 
 import schema from './schema'
 
@@ -34,15 +35,15 @@ class App extends Component {
 
 render(<App />, document.getElementById('root'));`;
 
-export const muiWizardCode = `import React, { Component } from 'react';
+export const pf4WizardCode = `import React, { Component } from 'react';
 import { render } from 'react-dom';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
-import MuiFormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
-import componentMapper from '@data-driven-forms/mui-component-mapper/dist/cjs/component-mapper';
+import Pf4FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
+import componentMapper from '@data-driven-forms/pf4-component-mapper/dist/cjs/component-mapper';
 
 import schema from './schema'
 
-const FormTemplate = (props) => <MuiFormTemplate {...props} showFormControls={false} />
+const FormTemplate = (props) => <Pf4FormTemplate {...props} showFormControls={false} />
 
 class App extends Component {
   render() {
@@ -61,12 +62,12 @@ class App extends Component {
 
 render(<App />, document.getElementById('root'));`;
 
-export const muiDependencies = {
+export const pf4Dependencies = {
   react: '^16.12.0',
   'react-dom': '^16.12.0',
   '@data-driven-forms/react-form-renderer': 'latest',
-  '@data-driven-forms/mui-component-mapper': 'latest',
-  '@material-ui/core': 'latest',
-  '@material-ui/icons': 'latest',
+  '@data-driven-forms/pf4-component-mapper': 'latest',
+  '@patternfly/react-core': 'latest',
+  '@patternfly/react-icons': 'latest',
   'prop-types': 'latest'
 };
