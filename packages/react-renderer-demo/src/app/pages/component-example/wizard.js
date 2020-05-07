@@ -24,6 +24,6 @@ const mappers = {
 };
 
 export default () => {
-  const [component, baseStructure] = useComponentExample();
-  return <ComponentText component={component} baseStructure={baseStructure} activeMapper="mui" componentMapper={mappers.mui} />;
+  const [component, baseStructure, activeMapper] = useComponentExample();
+  return <ComponentText component={component} baseStructure={baseStructure} activeMapper={activeMapper} componentMapper={mappers.mui} />;
 };

@@ -38,7 +38,7 @@ const renderItems = (items, level = 0, previousLinks = [''], activeScope) => {
     );
   }
 
-  const href = getScopedLink(createLink(...previousLinks, link || component), activeScope);
+  const href = createLink(...previousLinks, link || component);
 
   return <Mapper.Item href={href} level={level} key={`${link || component}-${linkText}`} linkText={linkText} component={component} {...props} />;
 };

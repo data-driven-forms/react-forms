@@ -13,7 +13,12 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import CheckIcon from '@material-ui/icons/Check';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Box from '@material-ui/core/Box';
 import { muiCode, muiHtml, muiDependencies } from '../stackblitz-templates/mui-templates';
+import Link from 'next/link';
+import clsx from 'clsx';
 
 const project = {
   settings: {
@@ -27,13 +32,23 @@ const project = {
 };
 
 const useStyles = makeStyles((theme) => ({
-  close: {
-    padding: theme.spacing(0.5)
+  tab: {
+    minWidth: 'initial'
   },
-  radioLink: {
-    color: 'rgba(0, 0, 0, 0.87)',
-    '&:hover': {
-      textDecoration: 'none'
+  indicator: {
+    width: 4
+  },
+  tabLink: {
+    textDecoration: 'none',
+    color: 'inherit',
+    '&.active': {
+      color: theme.palette.background.default.contrastText
+    }
+  },
+  editorContainer: {
+    height: '100%',
+    '& iframe': {
+      border: 'none'
     }
   }
 }));
@@ -42,14 +57,33 @@ const blitzFiles = {
   mui: {
     'index.html': muiHtml,
     'index.js': muiCode
+  },
+  pf4: {
+    'index.html': muiHtml,
+    'index.js': muiCode
+  },
+  pf3: {
+    'index.html': muiHtml,
+    'index.js': muiCode
   }
 };
 
 const blitzDependencies = {
-  mui: muiDependencies
+  mui: muiDependencies,
+  pf4: muiDependencies,
+  pf3: muiDependencies
+};
+
+const mapperTab = {
+  mui: 0,
+  pf4: 1,
+  pf3: 2
 };
 
 const ComponentExample = ({ baseStructure, activeMapper, componentMapper, component }) => {
+  const activeTab = mapperTab[activeMapper];
+  const router = useRouter();
+  const classes = useStyles();
   useEffect(() => {
     sdk.embedProject(
       'code-target',
@@ -93,7 +127,33 @@ const ComponentExample = ({ baseStructure, activeMapper, componentMapper, compon
         </Card>
       </Grid>
       <Grid item xs={12} md={9}>
-        <div id="code-target"></div>
+        <Box display="flex" className={classes.editorContainer}>
+          <Tabs
+            value={activeTab}
+            orientation="vertical"
+            variant="scrollable"
+            classes={{
+              indicator: classes.indicator
+            }}
+          >
+            <Link href={`${router.pathname}?mapper=mui`}>
+              <a href={`${router.pathname}?mapper=mui`} className={clsx(classes.tabLink, { active: activeTab === 0 })}>
+                <Tab className={classes.tab} label="Mui" />
+              </a>
+            </Link>
+            <Link href={`${router.pathname}?mapper=pf4`}>
+              <a href={`${router.pathname}?mapper=pf4`} className={classes.tabLink}>
+                <Tab className={classes.tab} label="PF4" />
+              </a>
+            </Link>
+            <Link href={`${router.pathname}?mapper=pf3`}>
+              <a href={`${router.pathname}?mapper=pf3`} className={classes.tabLink}>
+                <Tab className={classes.tab} label="PF3" />
+              </a>
+            </Link>
+          </Tabs>
+          <div id="code-target"></div>
+        </Box>
       </Grid>
     </Grid>
   );

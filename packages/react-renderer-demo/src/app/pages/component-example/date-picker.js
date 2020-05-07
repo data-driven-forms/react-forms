@@ -15,7 +15,7 @@ export default () => {
   const [component, baseStructure, activeMapper] = useComponentExample();
   return (
     <Fragment>
-      <ComponentText component={component} baseStructure={baseStructure} activeMapper="mui" componentMapper={mappers.mui} />
+      <ComponentText component={component} baseStructure={baseStructure} activeMapper={activeMapper} componentMapper={mappers.mui} />
       {activeMapper === 'mui' && <DatePickerText />}
     </Fragment>
   );
