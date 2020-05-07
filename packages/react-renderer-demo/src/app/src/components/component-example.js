@@ -72,7 +72,8 @@ const useStyles = makeStyles((theme) => ({
   },
   spinnerCheat: {
     flex: 1,
-    position: 'relative'
+    position: 'relative',
+    boxShadow: theme.shadows[1]
   },
   spinner: {
     position: 'absolute',
@@ -89,7 +90,6 @@ const useStyles = makeStyles((theme) => ({
     },
     '& iframe': {
       border: 'none',
-      boxShadow: theme.shadows[1],
       [theme.breakpoints.down('sm')]: {
         height: 500
       }

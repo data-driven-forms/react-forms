@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { useRouter } from 'next/router';
 import Mapper from './mapper';
@@ -124,13 +124,13 @@ const memoizeCurrent = () => {
 };
 
 const search = memoizeSearch();
+const current = memoizeCurrent();
 
 const Menu = ({ schema, searchRef }) => {
   const router = useRouter();
   const [value, setValue] = useState('');
   const classes = useStyles();
   const currentLocation = router.pathname.split('/');
-  const { current } = useRef(memoizeCurrent());
 
   const schemaFiltered = value !== '' ? search(schema, value) : current(schema, currentLocation);
 
