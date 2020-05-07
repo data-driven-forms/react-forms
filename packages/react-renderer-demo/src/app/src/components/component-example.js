@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
@@ -35,12 +35,32 @@ const project = {
 };
 
 const useStyles = makeStyles((theme) => ({
+  box: {
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column-reverse'
+    }
+  },
+  smTabDown: {
+    display: 'none',
+    [theme.breakpoints.down('sm')]: {
+      display: 'block'
+    }
+  },
+  smTabUp: {
+    display: 'block',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    }
+  },
   tab: {
     minWidth: 'initial',
     '&.active': {
       color: '#000',
       background: theme.palette.common.white,
-      boxShadow: theme.shadows[1]
+      boxShadow: theme.shadows[1],
+      '&:last-child': {
+        marginBottom: 2
+      }
     }
   },
   indicator: {
@@ -50,10 +70,29 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none',
     color: 'inherit'
   },
+  spinnerCheat: {
+    flex: 1,
+    position: 'relative'
+  },
+  spinner: {
+    position: 'absolute',
+    top: 'calc(50% - 40px)',
+    left: 'calc(50% - 40px)',
+    zIndex: -1
+  },
   editorContainer: {
-    height: '100%',
+    minHeight: 500,
+    flex: 1,
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: 16,
+      flexDirection: 'column'
+    },
     '& iframe': {
-      border: 'none'
+      border: 'none',
+      boxShadow: theme.shadows[1],
+      [theme.breakpoints.down('sm')]: {
+        height: 500
+      }
     }
   }
 }));
@@ -111,35 +150,83 @@ const ComponentExample = ({ baseStructure, activeMapper, component }) => {
     );
   }, [activeMapper, baseStructure.value]);
 
+  const renderTabsChildren = () => [
+    <Tab
+      key="mui"
+      onClick={() => router.push(`${router.pathname}?mapper=mui`)}
+      className={clsx(classes.tab, { active: activeTab === 0 })}
+      label={
+        <Link href={`${router.pathname}?mapper=mui`}>
+          <a href={`${router.pathname}?mapper=mui`} className={classes.tabLink}>
+            Mui
+          </a>
+        </Link>
+      }
+    />,
+    <Tab
+      key="pf4"
+      onClick={() => router.push(`${router.pathname}?mapper=pf4`)}
+      className={clsx(classes.tab, { active: activeTab === 1 })}
+      label={
+        <Link href={`${router.pathname}?mapper=pf4`}>
+          <a href={`${router.pathname}?mapper=pf4`} className={classes.tabLink}>
+            Pf4
+          </a>
+        </Link>
+      }
+    />,
+    <Tab
+      key="pf3"
+      onClick={() => router.push(`${router.pathname}?mapper=pf3`)}
+      className={clsx(classes.tab, { active: activeTab === 2 })}
+      label={
+        <Link href={`${router.pathname}?mapper=pf3`}>
+          <a href={`${router.pathname}?mapper=pf3`} className={classes.tabLink}>
+            Pf3
+          </a>
+        </Link>
+      }
+    />
+  ];
   return (
-    <Grid container direction="row" spacing={4}>
-      <Grid item xs={false} md={3}>
-        <Card style={{ minHeight: 500 }} square>
-          <CardContent>
-            <Typography component="h3">Options</Typography>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Type</TableCell>
-                  <TableCell>Required</TableCell>
+    <Box display="flex" className={classes.box}>
+      <Card style={{ minHeight: 500 }} square>
+        <CardContent>
+          <Typography component="h3">Options</Typography>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell>Type</TableCell>
+                <TableCell>Required</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {baseStructure.variants.map(({ name, type, required }) => (
+                <TableRow key={name}>
+                  <TableCell>{name}</TableCell>
+                  <TableCell>{`${type}`}</TableCell>
+                  <TableCell>{required && <CheckIcon fontSize="small" />}</TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {baseStructure.variants.map(({ name, type, required }) => (
-                  <TableRow key={name}>
-                    <TableCell>{name}</TableCell>
-                    <TableCell>{`${type}`}</TableCell>
-                    <TableCell>{required && <CheckIcon fontSize="small" />}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
-      </Grid>
-      <Grid item xs={12} md={9}>
-        <Box display="flex" className={classes.editorContainer}>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+      <Box display="flex" className={classes.editorContainer}>
+        <div className={classes.smTabDown}>
+          <Tabs
+            value={activeTab}
+            orientation="horizontal"
+            variant="fullWidth"
+            classes={{
+              indicator: classes.indicator
+            }}
+          >
+            {renderTabsChildren()}
+          </Tabs>
+        </div>
+        <div className={classes.smTabUp}>
           <Tabs
             value={activeTab}
             orientation="vertical"
@@ -148,44 +235,17 @@ const ComponentExample = ({ baseStructure, activeMapper, component }) => {
               indicator: classes.indicator
             }}
           >
-            <Tab
-              onClick={() => router.push(`${router.pathname}?mapper=mui`)}
-              className={clsx(classes.tab, { active: activeTab === 0 })}
-              label={
-                <Link href={`${router.pathname}?mapper=mui`}>
-                  <a href={`${router.pathname}?mapper=mui`} className={classes.tabLink}>
-                    Mui
-                  </a>
-                </Link>
-              }
-            />
-            <Tab
-              onClick={() => router.push(`${router.pathname}?mapper=pf4`)}
-              className={clsx(classes.tab, { active: activeTab === 1 })}
-              label={
-                <Link href={`${router.pathname}?mapper=pf4`}>
-                  <a href={`${router.pathname}?mapper=pf4`} className={classes.tabLink}>
-                    Pf4
-                  </a>
-                </Link>
-              }
-            />
-            <Tab
-              onClick={() => router.push(`${router.pathname}?mapper=pf3`)}
-              className={clsx(classes.tab, { active: activeTab === 2 })}
-              label={
-                <Link href={`${router.pathname}?mapper=pf3`}>
-                  <a href={`${router.pathname}?mapper=pf3`} className={classes.tabLink}>
-                    Pf3
-                  </a>
-                </Link>
-              }
-            />
+            {renderTabsChildren()}
           </Tabs>
+        </div>
+        <div className={classes.spinnerCheat}>
           <div id="code-target"></div>
-        </Box>
-      </Grid>
-    </Grid>
+          <div className={classes.spinner}>
+            <CircularProgress color="secondary" size={80} />
+          </div>
+        </div>
+      </Box>
+    </Box>
   );
 };
 
