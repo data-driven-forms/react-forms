@@ -2,7 +2,7 @@ import Grid from '@material-ui/core/Grid'
 import RouterLink from 'next/link';
 import Link from '@material-ui/core/Link';
 
-import ListOfContents from '../src/helpers/list-of-contents';
+import ListOfContents from '@docs/list-of-contents';
 
 <Grid container item>
 <Grid item xs={12} md={10}>

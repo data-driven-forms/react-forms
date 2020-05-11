@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment, useEffect, useState, useRef } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -23,10 +23,6 @@ import CodesandboxIcon from './common/code-sandbox-svg-icon';
 const CodeEditor = dynamic(import('./code-editor'), {
   ssr: false
 });
-
-const reqSource = require.context('!raw-loader!@docs/examples', true, /\.js/);
-const reqCss = require.context('!raw-loader!@docs/examples', true, /\.css/);
-const req = require.context('@docs/examples', true, /\.js/);
 
 const useStyles = makeStyles((theme) => ({
   codeWrapper: {
@@ -57,6 +53,12 @@ const useStyles = makeStyles((theme) => ({
   },
   expansionPanelSummary: {
     padding: 0
+  },
+  pf4: {
+    padding: 32,
+    '& form': {
+      width: '100%'
+    }
   }
 }));
 
@@ -76,15 +78,7 @@ const generateIndex = (type) => `<!DOCTYPE html>
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <title>Data driven forms example</title>
-    ${type === 'mui' ? '<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">' : ''}
-    ${
-      type === 'pf4'
-        ? `
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@patternfly/patternfly@4.0.5/patternfly-base.css"/>
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@patternfly/patternfly@4.0.5/patternfly-addons.css"/>
-    `
-        : ''
-    }    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
   </head>
 
   <body>
@@ -111,11 +105,8 @@ const getPayload = (type, code, sourceFiles = {}) =>
           keywords: [],
           main: 'src/index.js',
           dependencies: {
-            '@data-driven-forms/mui-component-mapper': '2.1.2',
-            '@data-driven-forms/pf4-component-mapper': '2.1.2',
-            '@data-driven-forms/react-form-renderer': '2.1.2',
-            '@patternfly/react-core': 'latest',
-            '@patternfly/react-icons': 'latest',
+            '@data-driven-forms/mui-component-mapper': 'latest',
+            '@data-driven-forms/react-form-renderer': 'latest',
             '@material-ui/core': 'latest',
             '@material-ui/icons': 'latest',
             react: '16.12.0',
@@ -142,24 +133,27 @@ const getPayload = (type, code, sourceFiles = {}) =>
     }
   });
 
-const CodeExample = ({ source, mode, mapper, additionalSources }) => {
-  const classes = useStyles();
-  const codeSource = reqSource(`./${source}.js`).default;
-  let Component;
-  if (mode === 'preview') {
-    Component = req(`./${source}.js`).default;
-    const sourceFiles = additionalSources
-      ? additionalSources.split(',').reduce(
-          (acc, curr) => ({
-            ...acc,
-            [`src/${curr.split('/').pop()}`]: {
-              content: curr.match(/\.css$/) ? reqCss(`./${curr}`).default : reqSource(`./${curr}`).default
-            }
-          }),
-          {}
+const CodeExample = ({ source, mode, mapper }) => {
+  const [name, setName] = useState('');
+  const [codeSource, setCodeSource] = useState('');
+  const { current: Component } = useRef(
+    mode === 'preview'
+      ? dynamic(
+          import(`@docs/examples/${source}`).then((mod) => {
+            setName(mod.default.name);
+            return mod;
+          })
         )
-      : {};
-
+      : Fragment
+  );
+  const sourceFiles = [];
+  useEffect(() => {
+    import(`!raw-loader!@docs/examples/${source}`).then((file) => {
+      setCodeSource(file.default);
+    });
+  }, [source]);
+  const classes = useStyles();
+  if (mode === 'preview') {
     return (
       <Grid container spacing={0} className="DocRawComponent">
         <Grid item xs={12}>
@@ -176,7 +170,7 @@ const CodeExample = ({ source, mode, mapper, additionalSources }) => {
             >
               {Component && (
                 <Typography className={classes.heading} component="h4" variant="h3">
-                  {Component.name}
+                  {name}
                 </Typography>
               )}
               <Box display="flex">
@@ -243,8 +237,7 @@ const CodeExample = ({ source, mode, mapper, additionalSources }) => {
 CodeExample.propTypes = {
   source: PropTypes.string.isRequired,
   mode: PropTypes.oneOf(['code', 'preview']),
-  mapper: PropTypes.oneOf(['pf4', 'mui']),
-  additionalSources: PropTypes.string // this has to be a string, MDX does not pass objects/arrays
+  mapper: PropTypes.oneOf(['pf4', 'mui'])
 };
 
 CodeExample.defaultProps = {

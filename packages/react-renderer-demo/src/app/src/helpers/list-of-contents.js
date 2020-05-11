@@ -29,7 +29,8 @@ const useLinkStyles = makeStyles((theme) => ({
     paddingLeft: 16,
     paddingRight: 16,
     paddingTop: 8,
-    paddingBottom: 8
+    paddingBottom: 8,
+    fontWeight: 'inherit'
   }
 }));
 

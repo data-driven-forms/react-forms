@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
-import FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
-import TextField from '@data-driven-forms/pf4-component-mapper/dist/cjs/text-field';
-import { Title } from '@patternfly/react-core/dist/js/components/Title/Title';
+import FormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
+import TextField from '@data-driven-forms/mui-component-mapper/dist/cjs/text-field';
+import Typography from '@material-ui/core/Typography';
 
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField
@@ -44,7 +44,7 @@ const schema = {
 const ClearOnUnmount = () => {
   const [values, setValues] = useState({});
   return (
-    <div className="pf4">
+    <div>
       <FormRenderer
         FormTemplate={FormTemplate}
         componentMapper={componentMapper}
@@ -53,7 +53,9 @@ const ClearOnUnmount = () => {
         debug={({ values }) => setValues(values)}
       />
       <div style={{ marginTop: 16 }}>
-        <Title size="md">Form values</Title>
+        <Typography component="h3" variant="h5">
+          Form values
+        </Typography>
         <pre>{JSON.stringify(values, null, 2)}</pre>
       </div>
     </div>

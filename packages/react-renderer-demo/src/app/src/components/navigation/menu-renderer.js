@@ -37,16 +37,9 @@ const renderItems = (items, level = 0, previousLinks = ['']) => {
     );
   }
 
-  return (
-    <Mapper.Item
-      href={createLink(...previousLinks, link || component)}
-      level={level}
-      key={`${link || component}-${linkText}`}
-      linkText={linkText}
-      component={component}
-      {...props}
-    />
-  );
+  const href = createLink(...previousLinks, link || component);
+
+  return <Mapper.Item href={href} level={level} key={`${link || component}-${linkText}`} linkText={linkText} component={component} {...props} />;
 };
 
 const MenuRenderer = ({ schema }) => {

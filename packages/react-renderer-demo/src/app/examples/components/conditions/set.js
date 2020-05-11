@@ -2,9 +2,9 @@ import React from 'react';
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 
-import Checkbox from '@data-driven-forms/pf4-component-mapper/dist/cjs/checkbox';
-import TextField from '@data-driven-forms/pf4-component-mapper/dist/cjs/text-field';
-import FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
+import Checkbox from '@data-driven-forms/mui-component-mapper/dist/cjs/checkbox';
+import TextField from '@data-driven-forms/mui-component-mapper/dist/cjs/text-field';
+import FormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
 
 const schema = {
   title: 'Set action',
@@ -46,7 +46,7 @@ const componentMapper = {
 };
 
 const SetAction = () => (
-  <div className="pf4">
+  <div>
     <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
   </div>
 );

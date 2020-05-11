@@ -30,11 +30,15 @@ export const navStyles = (theme) => ({
   listRoot: {
     width: '100%',
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontSize: '0.875rem'
   },
   nested: {
     padding: '8px 16px !important',
-    justifyContent: 'flex-start !important'
+    justifyContent: 'flex-start !important',
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontSize: '0.875rem'
   },
   listItem: {
     padding: '8px 16px !important',

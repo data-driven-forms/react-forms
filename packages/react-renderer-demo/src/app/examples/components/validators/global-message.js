@@ -4,8 +4,8 @@ import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-r
 import Validators from '@data-driven-forms/react-form-renderer/dist/cjs/validators';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 import validatorTypes from '@data-driven-forms/react-form-renderer/dist/cjs/validator-types';
-import FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
-import TextField from '@data-driven-forms/pf4-component-mapper/dist/cjs/text-field';
+import FormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
+import TextField from '@data-driven-forms/mui-component-mapper/dist/cjs/text-field';
 
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField
@@ -47,7 +47,7 @@ const schema = {
 };
 
 const OverridingMessage = () => (
-  <div className="pf4">
+  <div>
     <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
   </div>
 );

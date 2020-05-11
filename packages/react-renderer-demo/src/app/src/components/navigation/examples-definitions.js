@@ -11,22 +11,34 @@ import arraySchemaDDF from './field-array-schema';
 
 const formGroupVariants = [
   {
-    name: 'isDisabled',
-    title: 'Disabled'
+    name: 'name',
+    type: 'string',
+    required: true
+  },
+  {
+    name: 'label',
+    type: 'string',
+    required: false
   },
   {
     name: 'helperText',
-    title: 'Helper text',
-    component: 'input'
+    type: 'string',
+    required: false
   },
   {
     name: 'description',
-    title: 'Description',
-    component: 'input'
+    type: 'string',
+    required: false
+  },
+  {
+    name: 'isDisabled',
+    type: 'boolean',
+    required: false
   },
   {
     name: 'isReadOnly',
-    title: 'Read only'
+    type: 'boolean',
+    required: false
   }
 ];
 
@@ -48,21 +60,14 @@ export const baseExamples = [
     canBeRequired: true,
     variants: [
       ...formGroupVariants,
-      {
-        name: 'label',
-        title: 'Label',
-        component: 'input',
-        value: 'First name'
-      },
-      {
-        title: 'Input Type',
-        name: 'type',
-        options: ['text', 'number', 'password']
-      },
+
       {
         name: 'placeholder',
-        title: 'Placeholder',
-        component: 'input'
+        type: 'string'
+      },
+      {
+        name: 'type',
+        type: 'string'
       }
     ]
   },
@@ -84,15 +89,8 @@ export const baseExamples = [
     variants: [
       ...formGroupVariants,
       {
-        name: 'label',
-        title: 'Label',
-        component: 'input',
-        value: 'Long text'
-      },
-      {
         name: 'placeholder',
-        title: 'Placeholder',
-        component: 'input'
+        type: 'string'
       }
     ]
   },
@@ -117,10 +115,9 @@ export const baseExamples = [
     variants: [
       ...formGroupVariants,
       {
-        name: 'label',
-        title: 'Label',
-        component: 'input',
-        value: 'Checkbox'
+        name: 'options',
+        type: 'array',
+        required: false
       }
     ]
   },
@@ -147,10 +144,9 @@ export const baseExamples = [
     variants: [
       ...formGroupVariants,
       {
-        name: 'label',
-        title: 'Label',
-        component: 'input',
-        value: 'Radio'
+        name: 'options',
+        type: 'array',
+        required: false
       }
     ]
   },
@@ -178,36 +174,32 @@ export const baseExamples = [
     variants: [
       ...formGroupVariants,
       {
-        name: 'label',
-        title: 'Label',
-        component: 'input',
-        value: 'Select'
-      },
-      {
-        name: 'isMulti',
-        title: 'Multi'
+        name: 'options',
+        type: 'array'
       },
       {
         name: 'noOptionsMessage',
-        title: 'No options message',
-        component: 'input'
+        type: 'string'
       },
       {
         name: 'placeholder',
-        title: 'Placeholder',
-        component: 'input'
+        type: 'string'
       },
       {
         name: 'isSearchable',
-        title: 'Searchable'
+        type: 'boolean'
       },
       {
         name: 'isClearable',
-        title: 'Clearable'
+        type: 'boolean'
       },
       {
         name: 'simpleValue',
-        title: 'Simple value'
+        type: 'boolean'
+      },
+      {
+        name: 'loadOptions',
+        type: 'func'
       }
     ]
   },
@@ -228,20 +220,12 @@ export const baseExamples = [
     variants: [
       ...formGroupVariants,
       {
-        name: 'label',
-        title: 'Label',
-        component: 'input',
-        value: 'Switch'
-      },
-      {
         name: 'onText',
-        title: 'onText',
-        component: 'input'
+        type: 'string'
       },
       {
         name: 'offText',
-        title: 'offText',
-        component: 'input'
+        type: 'string'
       }
     ]
   },
@@ -263,33 +247,24 @@ export const baseExamples = [
     variants: [
       ...formGroupVariants,
       {
-        name: 'label',
-        title: 'Label',
-        component: 'input',
-        value: 'Date Picker'
-      },
-      {
-        title: 'Variant',
-        name: 'variant',
-        options: ['date-time', 'date']
-      },
-      {
         name: 'showTodayButton',
-        title: 'Show today button'
+        type: 'boolean',
+        required: false
       },
       {
         name: 'todayButtonLabel',
-        component: 'input',
-        value: 'Today',
-        title: 'Today button label'
+        type: 'string',
+        required: false
       },
       {
         name: 'closeOnDaySelect',
-        title: 'Close on day select'
+        type: 'boolean',
+        required: false
       },
       {
         name: 'isClearable',
-        title: 'Clearable'
+        type: 'boolean',
+        required: false
       }
     ]
   },
@@ -308,15 +283,7 @@ export const baseExamples = [
         }
       ]
     },
-    variants: [
-      ...formGroupVariants,
-      {
-        name: 'label',
-        title: 'Label',
-        component: 'input',
-        value: 'Time Picker'
-      }
-    ]
+    variants: [...formGroupVariants]
   },
   {
     component: componentTypes.TABS,
@@ -385,7 +352,6 @@ export const baseExamples = [
             {
               name: 'carrot',
               label: 'Carrot',
-              title: 'Carrot',
               component: componentTypes.TEXT_FIELD
             }
           ]
@@ -394,16 +360,12 @@ export const baseExamples = [
     },
     variants: [
       {
-        name: 'description',
-        title: 'Description',
-        component: 'input',
-        value: 'This is a subform'
+        name: 'title',
+        type: 'string'
       },
       {
-        name: 'title',
-        title: 'Title',
-        component: 'input',
-        value: 'Subform'
+        name: 'description',
+        type: 'string'
       }
     ]
   },
@@ -429,10 +391,9 @@ export const baseExamples = [
     variants: [
       ...formGroupVariants,
       {
-        name: 'label',
-        title: 'Label',
-        component: 'input',
-        value: 'Checkbox'
+        name: 'options',
+        type: 'array',
+        required: false
       }
     ]
   },
@@ -443,11 +404,14 @@ export const baseExamples = [
     ContentText: GenericComponentText,
     variants: [
       {
+        name: 'name',
+        type: 'string',
+        required: true
+      },
+      {
         name: 'label',
-        title: 'Label',
-        component: 'textarea',
-        value: `Lorem ipsum sem velit. Mauris scelerisque tortor sed lorem dapibus, bibendum scelerisque ligula consequat. Quisque fringilla luctus.
-Vestibulum vulputate inceptos himenaeos.`
+        type: 'string',
+        required: true
       }
     ],
     value: {
@@ -504,7 +468,23 @@ Vestibulum vulputate inceptos himenaeos.`
     linkText: 'Field Array',
     ContentText: FieldArray,
     value: arraySchemaDDF,
-    variants: []
+    variants: [
+      {
+        name: 'name',
+        type: 'string',
+        required: true
+      },
+      {
+        name: 'label',
+        type: 'string',
+        required: false
+      },
+      {
+        name: 'description',
+        type: 'string',
+        required: false
+      }
+    ]
   },
   {
     component: componentTypes.SLIDER,
@@ -525,38 +505,33 @@ Vestibulum vulputate inceptos himenaeos.`
     },
     variants: [
       {
+        name: 'name',
+        type: 'string',
+        required: true
+      },
+      {
         name: 'label',
-        title: 'Label',
-        component: 'input',
-        value: 'Distance'
+        type: 'string'
       },
       {
         name: 'helperText',
-        title: 'Helper text',
-        component: 'input'
+        type: 'string'
       },
       {
         name: 'description',
-        title: 'Description',
-        component: 'input'
+        type: 'string'
       },
       {
         name: 'min',
-        title: 'Min',
-        value: 1,
-        component: 'input'
+        type: 'number'
       },
       {
         name: 'max',
-        title: 'Max',
-        value: 100,
-        component: 'input'
+        type: 'number'
       },
       {
         name: 'step',
-        title: 'Step',
-        value: 1,
-        component: 'input'
+        type: 'number'
       }
     ]
   },
@@ -617,7 +592,6 @@ Vestibulum vulputate inceptos himenaeos.`
             {
               title: 'Configure AWS',
               name: 'aws',
-              nextStep: 'summary',
               fields: [
                 {
                   component: componentTypes.TEXT_FIELD,
@@ -629,7 +603,6 @@ Vestibulum vulputate inceptos himenaeos.`
             {
               name: 'google',
               title: 'Configure google',
-              nextStep: 'summary',
               fields: [
                 {
                   component: componentTypes.TEXT_FIELD,
@@ -637,21 +610,23 @@ Vestibulum vulputate inceptos himenaeos.`
                   label: 'Google field part'
                 }
               ]
-            },
-            {
-              fields: [
-                {
-                  name: 'summary',
-                  component: 'summary'
-                }
-              ],
-              name: 'summary'
             }
           ]
         }
       ]
     },
-    variants: [],
+    variants: [
+      {
+        name: 'name',
+        type: 'string',
+        required: true
+      },
+      {
+        name: 'fields',
+        type: 'array',
+        required: true
+      }
+    ],
     next: {
       link: '/releases',
       label: 'Releases'

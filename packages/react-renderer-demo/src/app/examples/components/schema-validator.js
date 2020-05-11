@@ -3,8 +3,8 @@ import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-r
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 import DefaultSchemaError from '@data-driven-forms/react-form-renderer/dist/cjs/schema-errors';
 
-import FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
-import TextField from '@data-driven-forms/pf4-component-mapper/dist/cjs/text-field';
+import FormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
+import TextField from '@data-driven-forms/mui-component-mapper/dist/cjs/text-field';
 
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField
@@ -35,7 +35,7 @@ const schemaValidatorMapper = {
 };
 
 const SchemaValidationExample = () => (
-  <div className="pf4">
+  <div>
     <FormRenderer
       FormTemplate={FormTemplate}
       componentMapper={componentMapper}

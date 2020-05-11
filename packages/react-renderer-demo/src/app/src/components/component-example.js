@@ -1,374 +1,257 @@
-import React, { useState, useReducer } from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Grid from '@material-ui/core/Grid';
-import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
-import Snackbar from '@material-ui/core/Snackbar';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
 import PropTypes from 'prop-types';
-import { validatorTypes } from '@data-driven-forms/react-form-renderer';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormLabel from '@material-ui/core/FormLabel';
-import Button from '@material-ui/core/Button';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import RouterLink from 'next/link';
-import Link from '@material-ui/core/Link';
+import sdk from '@stackblitz/sdk';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import CheckIcon from '@material-ui/icons/Check';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Box from '@material-ui/core/Box';
+import Link from 'next/link';
+import clsx from 'clsx';
 
-import dynamic from 'next/dynamic';
+import { muiCode, muiWizardCode, muiHtml, muiDependencies } from '../stackblitz-templates/mui-templates';
+import { pf4Code, pf4WizardCode, pf4Html, pf4Dependencies } from '../stackblitz-templates/pf4-templates';
+import { pf3Code, pf3WizardCode, pf3Html, pf3Dependencies } from '../stackblitz-templates/pf3-templates';
 
-const CodeEditor = dynamic(import('@docs/components/code-editor'), {
-  ssr: false
-});
-
-const Summary = ({ title }) => <div>{title}</div>;
-Summary.propTypes = {
-  title: PropTypes.node.isRequired
-};
-
-// Text inputs are first, then all other actions are sorted by title
-const comparator = (a, b) => {
-  if (a.component === 'input') {
-    if (a.component !== b.component) {
-      return -1;
+const project = {
+  settings: {
+    compile: {
+      trigger: 'auto',
+      action: 'hmr',
+      clearConsole: false
     }
-  } else if (b.component === 'input') {
-    return 1;
-  }
-
-  if (a.title < b.title) {
-    return -1;
-  }
-
-  if (a.title > b.title) {
-    return 1;
-  }
-
-  return 0;
+  },
+  template: 'javascript'
 };
 
 const useStyles = makeStyles((theme) => ({
-  close: {
-    padding: theme.spacing(0.5)
+  box: {
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column-reverse'
+    }
   },
-  radioLink: {
-    color: 'rgba(0, 0, 0, 0.87)',
-    '&:hover': {
-      textDecoration: 'none'
+  smTabDown: {
+    display: 'none',
+    [theme.breakpoints.down('sm')]: {
+      display: 'block'
+    }
+  },
+  smTabUp: {
+    display: 'block',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    }
+  },
+  tab: {
+    minWidth: 'initial',
+    '&.active': {
+      color: '#000',
+      background: theme.palette.common.white,
+      boxShadow: theme.shadows[1],
+      '&:last-child': {
+        marginBottom: 2
+      }
+    }
+  },
+  indicator: {
+    width: 4
+  },
+  tabLink: {
+    textDecoration: 'none',
+    color: 'inherit'
+  },
+  spinnerCheat: {
+    flex: 1,
+    position: 'relative',
+    boxShadow: theme.shadows[1]
+  },
+  spinner: {
+    position: 'absolute',
+    top: 'calc(50% - 40px)',
+    left: 'calc(50% - 40px)',
+    zIndex: -1
+  },
+  editorContainer: {
+    minHeight: 500,
+    flex: 1,
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: 16,
+      flexDirection: 'column'
+    },
+    '& iframe': {
+      border: 'none',
+      [theme.breakpoints.down('sm')]: {
+        height: 500
+      }
     }
   }
 }));
 
-const CopySnackbar = ({ open, handleClose }) => {
-  const classes = useStyles();
-  return (
-    <Snackbar
-      anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'right'
-      }}
-      open={open}
-      autoHideDuration={6000}
-      onClose={handleClose}
-      message={<span>Field was copied to clipboard</span>}
-      action={[
-        <IconButton key="close" aria-label="close" color="inherit" className={classes.close} onClick={handleClose}>
-          <CloseIcon />
-        </IconButton>
-      ]}
-    />
-  );
-};
-
-CopySnackbar.propTypes = {
-  open: PropTypes.bool,
-  handleClose: PropTypes.func.isRequired
-};
-
-const PropsActions = ({ variants, handleExampleVariantChange }) =>
-  variants.length === 0 ? (
-    <Typography variant="h6">No props</Typography>
-  ) : (
-    variants.sort(comparator).map(({ name, options, title, component }, index) => {
-      if (options) {
-        return (
-          <Grid item xs={12} key={name}>
-            <FormGroup>
-              <FormControl>
-                <InputLabel htmlFor={name}>{title}</InputLabel>
-                <Select
-                  value={variants[index].value || ''}
-                  onChange={({ target: { value } }) => handleExampleVariantChange(value, index)}
-                  inputProps={{
-                    name,
-                    id: name
-                  }}
-                >
-                  {options.map((option) => (
-                    <MenuItem key={option} value={option}>
-                      {option}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </FormGroup>
-          </Grid>
-        );
-      }
-
-      if (component === 'input') {
-        return (
-          <Grid item xs={12} key={name}>
-            <TextField
-              id={name}
-              label={title}
-              value={variants[index].value || ''}
-              onChange={({ target: { value } }) => handleExampleVariantChange(value, index)}
-              margin="normal"
-            />
-          </Grid>
-        );
-      }
-
-      if (component === 'textarea') {
-        return (
-          <Grid item xs={12} key={name}>
-            <TextField
-              id={name}
-              label={title}
-              value={variants[index].value || ''}
-              onChange={({ target: { value } }) => handleExampleVariantChange(value, index)}
-              margin="normal"
-              fullWidth
-              multiline
-            />
-          </Grid>
-        );
-      }
-
-      return (
-        <Grid item xs={12} key={name}>
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={variants[index].value || false}
-                  onChange={(_e, value) => handleExampleVariantChange(value, index)}
-                  value="checkedB"
-                  color="primary"
-                />
-              }
-              label={title}
-            />
-          </FormGroup>
-        </Grid>
-      );
-    })
-  );
-
-PropsActions.propTypes = {
-  variants: PropTypes.array.isRequired,
-  handleExampleVariantChange: PropTypes.func.isRequired
-};
-
-const variantChange = (prevState, value, index) => {
-  const variants = prevState.variants.map((item, i) => {
-    if (i !== index) {
-      return item;
-    }
-
-    return { ...item, value };
-  });
-
-  const previousValue = JSON.parse(prevState.value);
-  const newVariants = variants.reduce(
-    (acc, curr) => {
-      return {
-        ...acc,
-        [curr.name]: curr.value,
-        validate:
-          curr.name === 'isRequired' && !curr.value
-            ? acc.validate.filter(({ type }) => type === validatorTypes.REQUIRED)
-            : curr.validate
-            ? [...acc.validate, ...curr.validate]
-            : [...acc.validate]
-      };
-    },
-    { validate: [] }
-  );
-  const newValue = {
-    ...previousValue,
-    fields: previousValue.fields.map((item) => ({
-      ...item,
-      ...newVariants
-    }))
-  };
-  const newState = {
-    variants,
-    value: JSON.stringify(newValue, null, 2),
-    parsedSchema: newValue
-  };
-
-  return newState;
-};
-
-const componentExampleReducer = (state, action) => {
-  switch (action.type) {
-    case 'setValue':
-      return { ...state, value: action.payload };
-    case 'setParsedSchema':
-      return { ...state, parsedSchema: action.payload };
-    case 'exampleVariantChange':
-      return { ...state, ...variantChange(state, action.payload.value, action.payload.index) };
-    default:
-      break;
+const blitzFiles = {
+  mui: {
+    'index.html': muiHtml,
+    'index.js': muiCode
+  },
+  pf4: {
+    'index.html': pf4Html,
+    'index.js': pf4Code
+  },
+  pf3: {
+    'index.html': pf3Html,
+    'index.js': pf3Code
   }
 };
 
-const ComponentExample = ({ baseStructure, activeMapper, componentMapper, component, FormTemplate, ...props }) => {
-  const [{ value, variants, parsedSchema }, dispatch] = useReducer(componentExampleReducer, {
-    value: JSON.stringify(baseStructure.value, null, 2),
-    parsedSchema: baseStructure.value,
-    variants: baseStructure.variants
-  });
-  const [openTooltip, setOpenTooltip] = useState(false);
+const blitzWizards = {
+  mui: muiWizardCode,
+  pf4: pf4WizardCode,
+  pf3: pf3WizardCode
+};
+
+const blitzDependencies = {
+  mui: muiDependencies,
+  pf4: pf4Dependencies,
+  pf3: pf3Dependencies
+};
+
+const mapperTab = {
+  mui: 0,
+  pf4: 1,
+  pf3: 2
+};
+
+const ComponentExample = ({ baseStructure, activeMapper, component }) => {
+  const activeTab = mapperTab[activeMapper];
   const router = useRouter();
   const classes = useStyles();
+  useEffect(() => {
+    sdk.embedProject(
+      'code-target',
+      {
+        ...project,
+        dependencies: blitzDependencies[activeMapper],
+        files: {
+          ...blitzFiles[activeMapper],
+          ...(component === 'wizard' && { 'index.js': blitzWizards[activeMapper] }),
+          'schema.js': `export default ${JSON.stringify(baseStructure.value, null, 2)};`
+        }
+      },
+      { height: '100%', hideNavigation: true, forceEmbedLayout: true, openFile: 'schema.js' }
+    );
+  }, [activeMapper, baseStructure.value]);
 
-  const editedValue = value
-    .replace(/^{\n {2}"fields": \[\n/, '')
-    .replace(/ {2}\]\n}$/, '')
-    .replace(/\n {4}/g, '\n')
-    .replace(/ {2}"validate": \[\],\n/g, '')
-    .replace(/ {4}/, '');
-
-  const onChange = (value) => {
-    try {
-      dispatch({ type: 'setParsedSchema', payload: JSON.parse(value) });
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.warn('not a json', error);
-    } finally {
-      dispatch({ type: 'setValue', payload: value });
-    }
-  };
-
-  const handleExampleVariantChange = (value, index) => dispatch({ type: 'exampleVariantChange', payload: { value, index } });
-
+  const renderTabsChildren = () => [
+    <Tab
+      key="mui"
+      onClick={() => router.push(`${router.pathname}?mapper=mui`)}
+      className={clsx(classes.tab, { active: activeTab === 0 })}
+      label={
+        <Link href={`${router.pathname}?mapper=mui`}>
+          <a href={`${router.pathname}?mapper=mui`} className={classes.tabLink}>
+            Mui
+          </a>
+        </Link>
+      }
+    />,
+    <Tab
+      key="pf4"
+      onClick={() => router.push(`${router.pathname}?mapper=pf4`)}
+      className={clsx(classes.tab, { active: activeTab === 1 })}
+      label={
+        <Link href={`${router.pathname}?mapper=pf4`}>
+          <a href={`${router.pathname}?mapper=pf4`} className={classes.tabLink}>
+            Pf4
+          </a>
+        </Link>
+      }
+    />,
+    <Tab
+      key="pf3"
+      onClick={() => router.push(`${router.pathname}?mapper=pf3`)}
+      className={clsx(classes.tab, { active: activeTab === 2 })}
+      label={
+        <Link href={`${router.pathname}?mapper=pf3`}>
+          <a href={`${router.pathname}?mapper=pf3`} className={classes.tabLink}>
+            Pf3
+          </a>
+        </Link>
+      }
+    />
+  ];
   return (
-    <Grid container direction="row" spacing={4}>
-      <Grid item xs={12} md={4}>
-        <Grid item xs={12}>
-          <Typography variant="h5" gutterBottom>
-            Schema
-          </Typography>
-        </Grid>
-
-        <div style={{ background: '#1d1f21', position: 'relative' }}>
-          <Grid item xs={12} container={true} justify="flex-end" style={{ position: 'absolute', zIndex: 100 }}>
-            <CopyToClipboard text={editedValue} onCopy={() => setOpenTooltip(true)}>
-              <Button variant="outlined" color="secondary" style={{ margin: 10 }}>
-                Copy
-              </Button>
-            </CopyToClipboard>
-            <CopySnackbar open={openTooltip} handleClose={() => setOpenTooltip(false)} />
-          </Grid>
-          <CodeEditor
-            readOnly
-            mode="json"
-            onChange={onChange}
-            editorProps={{ $blockScrolling: true }}
-            value={editedValue}
-            fontSize={14}
-            showPrintMargin={false}
-            showGutter={true}
-            highlightActiveLine={true}
-            style={{ width: '100%' }}
-            setOptions={{
-              showLineNumbers: true,
-              tabSize: 2
+    <Box display="flex" className={classes.box}>
+      <Card style={{ minHeight: 500 }} square>
+        <CardContent>
+          <Typography component="h3">Options</Typography>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell>Type</TableCell>
+                <TableCell>Required</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {baseStructure.variants.map(({ name, type, required }) => (
+                <TableRow key={name}>
+                  <TableCell>{name}</TableCell>
+                  <TableCell>{`${type}`}</TableCell>
+                  <TableCell>{required && <CheckIcon fontSize="small" />}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+      <Box display="flex" className={classes.editorContainer}>
+        <div className={classes.smTabDown}>
+          <Tabs
+            value={activeTab}
+            orientation="horizontal"
+            variant="fullWidth"
+            classes={{
+              indicator: classes.indicator
             }}
-          />
+          >
+            {renderTabsChildren()}
+          </Tabs>
         </div>
-      </Grid>
-      <Grid item xs={12} md={3}>
-        <Grid item xs={12}>
-          <Typography variant="h5" gutterBottom>
-            Props
-          </Typography>
-        </Grid>
-        <Card square>
-          <CardContent>
-            <PropsActions variants={variants} handleExampleVariantChange={handleExampleVariantChange} />
-          </CardContent>
-        </Card>
-      </Grid>
-
-      <Grid item xs={12} md={5}>
-        <Grid item xs={12}>
-          <Typography variant="h5" gutterBottom>
-            Preview
-          </Typography>
-        </Grid>
-        <Card square style={{ overflow: 'initial' }}>
-          <div style={{ padding: 8 }}>
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Component mapper</FormLabel>
-              <RadioGroup aria-label="component-mapper" name="component-mapper" value={activeMapper} style={{ flexDirection: 'row' }}>
-                <RouterLink href={`${router.pathname}?mapper=mui`}>
-                  <Link href={`${router.pathname}?mapper=mui`} className={classes.radioLink}>
-                    <FormControlLabel value="mui" control={<Radio />} label="MUI" />
-                  </Link>
-                </RouterLink>
-                <RouterLink href={`${router.pathname}?mapper=pf3`}>
-                  <Link href={`${router.pathname}?mapper=pf3`} className={classes.radioLink}>
-                    <FormControlLabel value="pf3" control={<Radio />} label="PF3" />
-                  </Link>
-                </RouterLink>
-                <RouterLink href={`${router.pathname}?mapper=pf4`}>
-                  <Link href={`${router.pathname}?mapper=pf4`} className={classes.radioLink}>
-                    <FormControlLabel value="pf4" control={<Radio />} label="PF4" />
-                  </Link>
-                </RouterLink>
-              </RadioGroup>
-            </FormControl>
-
-            <CardContent>
-              <div className={activeMapper}>
-                <div style={{ paddingLeft: 8 }}>
-                  <FormRenderer
-                    componentMapper={componentMapper}
-                    schema={parsedSchema}
-                    onSubmit={console.log /* eslint-disable-line no-console */}
-                    FormTemplate={(props) => <FormTemplate {...props} showFormControls={component !== 'wizard'} />}
-                  />
-                </div>
-              </div>
-            </CardContent>
+        <div className={classes.smTabUp}>
+          <Tabs
+            value={activeTab}
+            orientation="vertical"
+            variant="scrollable"
+            classes={{
+              indicator: classes.indicator
+            }}
+          >
+            {renderTabsChildren()}
+          </Tabs>
+        </div>
+        <div className={classes.spinnerCheat}>
+          <div id="code-target"></div>
+          <div className={classes.spinner}>
+            <CircularProgress color="secondary" size={80} />
           </div>
-        </Card>
-      </Grid>
-    </Grid>
+        </div>
+      </Box>
+    </Box>
   );
 };
 
 ComponentExample.propTypes = {
   component: PropTypes.string.isRequired,
   activeMapper: PropTypes.string.isRequired,
-  componentMapper: PropTypes.object.isRequired,
-  FormTemplate: PropTypes.func.isRequired,
   baseStructure: PropTypes.shape({
     variants: PropTypes.array.isRequired,
     value: PropTypes.object.isRequired

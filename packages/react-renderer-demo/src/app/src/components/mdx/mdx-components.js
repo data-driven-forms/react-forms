@@ -25,7 +25,8 @@ const CodeEditor = dynamic(import('../code-editor'), {
 const useHeadingStyles = makeStyles(() => ({
   anchor: {
     textDecoration: 'none',
-    color: 'inherit'
+    color: 'inherit',
+    fontWeight: 'inherit'
   },
   heading: {
     '& button': {
@@ -38,6 +39,9 @@ const useHeadingStyles = makeStyles(() => ({
   offset: {
     paddingTop: 92, // compensate for fixed header size and spacing
     marginTop: -92 // compensate for fixed header size and spacing
+  },
+  link: {
+    fontWeight: 'initial'
   }
 }));
 
@@ -55,6 +59,19 @@ export const Heading = ({ level, children, component }) => {
         </a>
       </Typography>
     </div>
+  );
+};
+
+const MdLink = ({ href, children }) => {
+  const classes = useHeadingStyles();
+  return href.startsWith('/') ? (
+    <RouterLink href={href}>
+      <Link href={href}>{children}</Link>
+    </RouterLink>
+  ) : (
+    <Link className={classes.link} href={href} rel="noopener noreferrer" target="_blank">
+      {children}
+    </Link>
   );
 };
 
@@ -94,16 +111,7 @@ const MdxComponents = {
       </div>
     );
   },
-  a: ({ href, children }) =>
-    href.startsWith('/') ? (
-      <RouterLink href={href}>
-        <Link href={href}>{children}</Link>
-      </RouterLink>
-    ) : (
-      <Link href={href} rel="noopener noreferrer" target="_blank">
-        {children}
-      </Link>
-    ),
+  a: MdLink,
   h1: (props) => <Heading {...props} level={4} component="h1" />,
   h2: (props) => <Heading {...props} level={5} component="h2" />,
   h3: (props) => <Heading {...props} level={6} component="h3" />,

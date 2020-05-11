@@ -22,8 +22,6 @@
     "dependencies": {
         "@babel/plugin-proposal-class-properties": "^7.2.3",
         "@data-driven-forms/mui-component-mapper": "*",
-        "@data-driven-forms/pf3-component-mapper": "*",
-        "@data-driven-forms/pf4-component-mapper": "*",
         "@data-driven-forms/react-form-renderer": "*",
         "@material-ui/core": "^4.5.2",
         "@material-ui/icons": "^4.5.1",
@@ -31,9 +29,6 @@
         "@mdx-js/loader": "^1.4.5",
         "@mdx-js/react": "^1.4.5",
         "@next/mdx": "^9.3.3",
-        "@patternfly/patternfly-next": "^1.0.175",
-        "@patternfly/react-core": "^3.153.13",
-        "@patternfly/react-tokens": "^2.5.1",
         "brace": "^0.11.1",
         "clsx": "^1.0.4",
         "codesandbox": "2.1.14",

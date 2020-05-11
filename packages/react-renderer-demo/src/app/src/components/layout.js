@@ -141,10 +141,13 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     setLinks(findConnectedLinks(router.asPath, flatSchema) || {});
+  }, [router.asPath]);
+
+  useEffect(() => {
     if (window && window.innerWidth > 960 && router.pathname !== '/') {
       setOpen(true);
     }
-  }, [router.asPath]);
+  }, []);
 
   const handleDrawerOpen = () => {
     setOpen(true);

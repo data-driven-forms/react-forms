@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import useFormApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-form-api';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
-import FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
-import TextField from '@data-driven-forms/pf4-component-mapper/dist/cjs/text-field';
-import Select from '@data-driven-forms/pf4-component-mapper/dist/cjs/select';
-import Wizard from '@data-driven-forms/pf4-component-mapper/dist/cjs/wizard';
-import { Title } from '@patternfly/react-core/dist/js/components/Title/Title';
+import FormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
+import TextField from '@data-driven-forms/mui-component-mapper/dist/cjs/text-field';
+import Select from '@data-driven-forms/mui-component-mapper/dist/cjs/select';
+import Wizard from '@data-driven-forms/mui-component-mapper/dist/cjs/wizard';
+import Typography from '@material-ui/core/Typography';
 
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField,
@@ -15,7 +15,11 @@ const componentMapper = {
   Summary: () => {
     const { getState } = useFormApi();
 
-    return <Title size="md">{getState().values['chosen-way']}</Title>;
+    return (
+      <Typography component="h5" variant="h5">
+        {getState().values['chosen-way']}
+      </Typography>
+    );
   }
 };
 
@@ -91,9 +95,11 @@ const FormTemplateWrapper = (props) => <FormTemplate {...props} showFormControls
 const InitializeOnMountWizardExample = () => {
   const [values, setValues] = useState({});
   return (
-    <div className="pf4">
+    <div>
       <div style={{ marginTop: 16, marginBottom: 16 }}>
-        <Title size="md">Form values</Title>
+        <Typography component="h3" variant="h5">
+          Form values
+        </Typography>
         <pre>{JSON.stringify(values, null, 2)}</pre>
       </div>
       <FormRenderer

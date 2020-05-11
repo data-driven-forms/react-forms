@@ -1,7 +1,7 @@
 import Grid from '@material-ui/core/Grid'
-import CodeExample from '../../src/components/code-example'
+import CodeExample from '@docs/code-example'
 
-import ListOfContents from '../../src/helpers/list-of-contents';
+import ListOfContents from '@docs/list-of-contents';
 
 <Grid container item>
 <Grid item xs={12} md={10}>
