@@ -4,13 +4,10 @@ import clsx from 'clsx';
 
 import selectNext from '@data-driven-forms/common/src/wizard/select-next';
 import { FormSpy } from '@data-driven-forms/react-form-renderer';
-import { Button, Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Button } from 'semantic-ui-react';
 
 const NextButton = ({ nextStep, valid, handleNext, nextLabel, getState, handleSubmit, submitLabel }) => (
   <Button
-    variant="contained"
-    color="primary"
     disabled={!valid || getState().validating || getState().submitting}
     onClick={() => (nextStep ? handleNext(selectNext(nextStep, getState)) : handleSubmit())}
   >
@@ -28,28 +25,9 @@ NextButton.propTypes = {
   getState: PropTypes.func.isRequired
 };
 
-const useStyles = makeStyles(() => ({
-  wizardBody: {
-    padding: 24,
-    margin: 0
-  },
-  buttons: {
-    display: 'flex',
-    justifyContent: 'flex-end'
-  },
-  button: {
-    marginRight: 16
-  },
-  buttonsContainer: {
-    marginTop: 36
-  }
-}));
-
 const WizardStepButtons = ({ buttons: Buttons, ...props }) => {
-  const classes = useStyles();
-
   if (Buttons) {
-    return <Buttons classes={classes} {...props} />;
+    return <Buttons {...props} />;
   }
 
   const {
@@ -63,29 +41,23 @@ const WizardStepButtons = ({ buttons: Buttons, ...props }) => {
   } = props;
 
   return (
-    <Grid
-      container
-      direction="row"
-      justify="space-evenly"
-      {...ButtonContainerProps}
-      className={clsx(classes.buttonsContainer, ButtonContainerProps.className)}
-    >
+    <div container direction="row" justify="space-evenly" {...ButtonContainerProps}>
       <FormSpy subscription={{ valid: true, validating: true, submitting: true }}>
         {() => (
           <React.Fragment>
-            <Grid item md={2} xs={2}>
+            <div>
               <Button onClick={formOptions.onCancel}>{cancel}</Button>
-            </Grid>
-            <Grid item md={10} xs={10} className={classes.buttons}>
-              <Button disabled={disableBack} onClick={handlePrev} className={classes.button}>
+            </div>
+            <div>
+              <Button disabled={disableBack} onClick={handlePrev}>
                 {back}
               </Button>
               <NextButton {...formOptions} handleNext={handleNext} nextStep={nextStep} nextLabel={next} submitLabel={submit} />
-            </Grid>
+            </div>
           </React.Fragment>
         )}
       </FormSpy>
-    </Grid>
+    </div>
   );
 };
 
