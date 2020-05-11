@@ -14,6 +14,14 @@ const ComponentExampleText = ({ component, activeMapper, baseStructure }) => {
         <Heading level="5" component="h2">{`MUI ${baseStructure.linkText}`}</Heading>
         <baseStructure.ContentText activeMapper={activeMapper} component={component} />
       </div>
+      <div hidden={activeMapper !== 'pf3'}>
+        <Heading level="5" component="h2">{`PF3 ${baseStructure.linkText}`}</Heading>
+        <baseStructure.ContentText activeMapper={'pf3'} component={component} />
+      </div>
+      <div hidden={activeMapper !== 'pf4'}>
+        <Heading level="5" component="h2">{`PF4 ${baseStructure.linkText}`}</Heading>
+        <baseStructure.ContentText activeMapper={'pf4'} component={component} />
+      </div>
     </React.Fragment>
   );
 };
