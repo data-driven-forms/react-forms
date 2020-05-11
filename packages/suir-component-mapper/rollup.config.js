@@ -14,17 +14,15 @@ import path from 'path';
 
 const outputPaths = glob.sync(path.resolve(__dirname, './src/files/*.js'));
 
-const muiExternals = createFilter(
+const suirExternals = createFilter(
   [
     'react',
     'react-dom',
     'prop-types',
     '@data-driven-forms/react-form-renderer',
     '@data-driven-forms/react-form-renderer/**',
-    '@material-ui/core',
-    '@material-ui/core/**',
-    '@material-ui/styles/**',
-    '@material-ui/icons/**'
+    'semantic-ui-react',
+    'semantic-ui-react/**'
   ],
   null,
   { resolve: false }
@@ -34,8 +32,7 @@ const globals = {
   react: 'React',
   'react-dom': 'ReactDOM',
   '@data-driven-forms/react-form-renderer': '@data-driven-forms/react-form-renderer',
-  '@material-ui/core': '@material-ui/core',
-  '@material-ui/utils': '@material-ui/utils'
+  'semantic-ui-react': 'semantic-ui-react'
 };
 
 const babelOptions = {
@@ -48,24 +45,7 @@ const commonjsOptions = {
   ignoreGlobal: true,
   include: /node_modules/,
   namedExports: {
-    '../react-form-renderer/dist/index.js': ['composeValidators'],
-    '../../node_modules/prop-types/index.js': [
-      'elementType',
-      'bool',
-      'func',
-      'object',
-      'oneOfType',
-      'element',
-      'string',
-      'number',
-      'instanceOf',
-      'oneOf',
-      'arrayOf',
-      'any',
-      'shape',
-      'node'
-    ],
-    '../../node_modules/react-is/index.js': ['ForwardRef', 'isLazy', 'isMemo', 'isValidElementType']
+    '../react-form-renderer/dist/index.js': ['composeValidators']
   }
 };
 
@@ -94,11 +74,11 @@ export default {
           file: `./dist/umd/index.js`
         }
       : { dir: `./dist/${process.env.FORMAT}` }),
-    name: '@data-driven-forms/mui-component-mapper',
+    name: '@data-driven-forms/suir-component-mapper',
     exports: 'named',
     globals,
     sourcemap: true
   },
-  external: muiExternals,
+  external: suirExternals,
   plugins
 };
