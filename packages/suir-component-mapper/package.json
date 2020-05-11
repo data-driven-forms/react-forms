@@ -14,7 +14,6 @@
     "build:cjs": "BABEL_ENV=cjs rollup -c ./rollup.config.js --format=cjs --environment FORMAT:cjs",
     "build:esm": "BABEL_ENV=esm rollup -c ./rollup.config.js --format=esm --environment FORMAT:esm",
     "build:umd": "rollup -c ./rollup.config.js --format=umd --environment FORMAT:umd",
-    "vendor": "webpack --env vendor --config ./config/webpack.config.js",
     "release": "semantic-release"
   },
   "repository": "git@github.com:data-driven-forms/react-forms.git",
