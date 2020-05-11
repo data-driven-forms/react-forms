@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
+import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 
 import { componentMapper, FormTemplate } from '../src';
 import demoSchema from '@data-driven-forms/common/src/demoschema';
@@ -19,8 +19,38 @@ const compositeMapper = {
   }
 };
 
+const schema = {
+  fields: [
+    {
+      component: componentTypes.TEXT_FIELD,
+      label: 'Text fied component',
+      name: 'text-field',
+      placeholder: 'Placeholder',
+      isRequired: true,
+      validate: [
+        {
+          type: validatorTypes.REQUIRED
+        }
+      ]
+    },
+    {
+      component: componentTypes.TEXT_FIELD,
+      label: 'Text fied component',
+      name: 'text-field-2',
+      placeholder: 'Placeholder',
+      helperText: 'Helper text',
+      isRequired: true,
+      validate: [
+        {
+          type: validatorTypes.REQUIRED
+        }
+      ]
+    }
+  ]
+};
+
 const App = () => {
-  const [schema, setSchema] = useState(wizardSchema);
+  const [, setSchema] = useState(wizardSchema);
 
   return (
     <div>
@@ -38,7 +68,7 @@ const App = () => {
             onSubmit={console.log}
             componentMapper={compositeMapper}
             FormTemplate={(props) => <FormTemplate {...props} />}
-            schema={demoSchema}
+            schema={schema}
             onCancel={() => console.log('canceling')}
           />
         </div>

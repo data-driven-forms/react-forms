@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button as SuirButton, Form as SuirForm, Header } from 'semantic-ui-react';
+import { Button as SuirButton, Header } from 'semantic-ui-react';
 
 import FormTemplate from '@data-driven-forms/common/src/form-template';
 
-const Form = ({ children, ...props }) => <SuirForm {...props}>{children}</SuirForm>;
+const Form = ({ children, ...props }) => (
+  <form className="ui form" noValidate {...props}>
+    {children}
+  </form>
+);
 
 Form.propTypes = {
   children: PropTypes.node
