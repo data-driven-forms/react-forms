@@ -43,6 +43,8 @@ const itemPredicate = (query, item) => {
 const Select = ({ input, options, placeholder, isSearchable, noOptionsMessage, isMulti, ...props }) => {
   const Component = isMulti ? MultiSelect : BSelect;
 
+  const selectedOption = options.find(({ value }) => value === input.value);
+
   return (
     <Component
       itemPredicate={itemPredicate}
@@ -63,7 +65,7 @@ const Select = ({ input, options, placeholder, isSearchable, noOptionsMessage, i
       })}
       {...input}
     >
-      {!isMulti && <Button text={input.value || placeholder} rightIcon="caret-down" disabled={props.disabled} />}
+      {!isMulti && <Button text={selectedOption ? selectedOption.label : placeholder} rightIcon="caret-down" disabled={props.disabled} />}
     </Component>
   );
 };
