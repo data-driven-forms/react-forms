@@ -6,7 +6,8 @@ import HelperText from './helper-text';
 
 const useStyles = createUseStyles({
   root: {
-    marginBottom: 8
+    marginTop: '1em',
+    marginBottom: '1em'
   }
 });
 

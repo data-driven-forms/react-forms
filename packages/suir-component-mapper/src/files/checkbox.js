@@ -9,17 +9,17 @@ import MultipleChoiceList from '../common/multiple-choice-list';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 export const SingleCheckbox = (props) => {
-  const { input, isReadOnly, isDisabled, isRequired, label, helperText, description, validateOnMount, meta, inputProps, ...rest } = useFieldApi({
+  const { input, isReadOnly, isDisabled, isRequired, label, helperText, description, validateOnMount, meta, ...rest } = useFieldApi({
     ...props,
     type: 'checkbox'
   });
   const invalid = validationError(meta, validateOnMount);
-  const text = invalid || helperText || description;
 
   return (
-    <FormFieldGrid>
+    <FormFieldGrid helperText={helperText}>
       <Form.Checkbox
         {...input}
+        required={isRequired}
         onChange={(_event, data) => {
           input.onChange({ target: data, type: 'checkbox' });
         }}
@@ -28,7 +28,8 @@ export const SingleCheckbox = (props) => {
         label={label}
         error={
           invalid && {
-            content: meta.error
+            content: meta.error,
+            pointing: 'left'
           }
         }
       />
