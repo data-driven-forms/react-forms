@@ -7,7 +7,7 @@ import { Select as BSelect, MultiSelect } from '@blueprintjs/select';
 import propsCatcher from '../common/props-catcher';
 import { MenuItem, Button } from '@blueprintjs/core';
 
-const itemRenderer = (item, { handleClick }, value) => (
+export const itemRenderer = (item, { handleClick }, value) => (
   <MenuItem
     key={item.value}
     {...item}
@@ -17,12 +17,12 @@ const itemRenderer = (item, { handleClick }, value) => (
   />
 );
 
-const multiOnChange = (item, input) =>
+export const multiOnChange = (item, input) =>
   input.value && !input.value.includes(item.value)
     ? input.onChange([...input.value, item.value])
     : input.onChange(input.value ? input.value.filter((v) => v !== item.value) : [item.value]);
 
-const tagRenderer = (item, options) => {
+export const tagRenderer = (item, options) => {
   const option = options.find(({ value }) => value === item);
 
   if (option) {
@@ -30,7 +30,7 @@ const tagRenderer = (item, options) => {
   }
 };
 
-const itemPredicate = (query, item) => {
+export const itemPredicate = (query, item) => {
   if (!query) {
     return item;
   }
