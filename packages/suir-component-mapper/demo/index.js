@@ -48,7 +48,7 @@ const App = () => {
             onSubmit={console.log}
             componentMapper={compositeMapper}
             FormTemplate={(props) => <FormTemplate {...props} />}
-            schema={demoSchema}
+            schema={fieldArraySchema}
             onCancel={() => console.log('canceling')}
           />
         </Grid>
