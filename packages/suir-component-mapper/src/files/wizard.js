@@ -1,22 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
-
-import { Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
 import Wizard from '@data-driven-forms/common/src/wizard/wizard';
 import WizardNav from './wizard/wizard-nav';
 import WizardStepButtons from './wizard/step-buttons';
 
-const useStyles = makeStyles(() => ({
-  wizardBody: {
-    padding: 24,
-    margin: 0
-  }
-}));
-
 const WizardInternal = ({
+  ButtonContainerProps,
   currentStep,
   formOptions,
   activeStepIndex,
@@ -25,14 +14,8 @@ const WizardInternal = ({
   handlePrev,
   buttonLabels,
   stepsInfo,
-  ButtonContainerProps,
-  StepperProps,
-  WizardBodyProps,
-  WizardProps,
   onKeyDown
 }) => {
-  const classes = useStyles();
-
   const buttonLabelsFinal = {
     next: 'Continue',
     submit: 'Submit',
@@ -42,9 +25,9 @@ const WizardInternal = ({
   };
 
   return (
-    <Grid container spacing={3} {...WizardProps} onKeyDown={onKeyDown}>
-      {stepsInfo && <WizardNav StepperProps={StepperProps} stepsInfo={stepsInfo} activeStepIndex={activeStepIndex} />}
-      <Grid container spacing={2} {...WizardBodyProps} className={clsx(classes.wizardBody, WizardBodyProps.className)}>
+    <div onKeyDown={onKeyDown}>
+      {stepsInfo && <WizardNav stepsInfo={stepsInfo} activeStepIndex={activeStepIndex} />}
+      <div>
         {currentStep.fields.map((item) => formOptions.renderForm([item], formOptions))}
         <WizardStepButtons
           {...currentStep}
@@ -55,8 +38,8 @@ const WizardInternal = ({
           disableBack={prevSteps.length === 0}
           ButtonContainerProps={ButtonContainerProps}
         />
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 };
 

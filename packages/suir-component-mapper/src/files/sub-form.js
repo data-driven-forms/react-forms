@@ -1,37 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Typography, Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
-
-const useStyles = makeStyles(() => ({
-  grid: {
-    paddingRight: 0,
-    paddingLeft: 0
-  }
-}));
-
 const SubForm = ({ fields, title, description, component, ...rest }) => {
   const { renderForm } = useFormApi();
-  const classes = useStyles();
 
   return (
-    <Grid item xs={12} container className={classes.grid} {...rest}>
+    <div>
       {title && (
-        <Grid item xs={12}>
-          <Typography variant="h5">{title}</Typography>
-        </Grid>
+        <div item xs={12}>
+          <h5 variant="h5">{title}</h5>
+        </div>
       )}
       {description && (
-        <Grid item xs={12}>
-          <Typography paragraph>{description}</Typography>
-        </Grid>
+        <div item xs={12}>
+          <p>{description}</p>
+        </div>
       )}
-      <Grid item xs={12} container>
+      <div item xs={12} container>
         {renderForm(fields)}
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 };
 
