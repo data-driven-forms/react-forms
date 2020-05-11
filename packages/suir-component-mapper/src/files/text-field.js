@@ -1,42 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Input } from 'semantic-ui-react';
+import { Input } from 'semantic-ui-react';
 
 import { validationError } from '../common/helpers';
 import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+import FormFieldGrid from '../common/form-field-grid';
+import FormField from '../common/form-field';
 
 const TextField = (props) => {
-  const {
-    input,
-    isReadOnly,
-    isDisabled,
-    placeholder,
-    isRequired,
-    label,
-    helperText,
-    description,
-    validateOnMount,
-    meta,
-    inputProps,
-    ...rest
-  } = useFieldApi(props);
+  const { input, isReadOnly, isDisabled, placeholder, isRequired, label, helperText, validateOnMount, meta, ...rest } = useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
 
   return (
-    <Form.Field
-      {...rest}
-      control={Input}
-      label={label}
-      disabled={isDisabled}
-      readOnly={isReadOnly}
-      {...input}
-      error={
-        invalid && {
-          content: meta.error
+    <FormFieldGrid helperText={helperText}>
+      <FormField
+        {...rest}
+        control={Input}
+        label={label}
+        required={isRequired}
+        disabled={isDisabled}
+        readOnly={isReadOnly}
+        placeholder={placeholder}
+        {...input}
+        error={
+          invalid && {
+            content: meta.error
+          }
         }
-      }
-    />
+      />
+    </FormFieldGrid>
   );
 };
 

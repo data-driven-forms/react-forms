@@ -65,6 +65,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "clsx": "^1.0.4",
+    "react-jss": "^10.1.1",
     "react-select": "^2.2.0"
   }
 }
