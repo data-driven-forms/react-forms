@@ -5,15 +5,26 @@ import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
 import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+import { Form } from 'semantic-ui-react';
 
 const DatePicker = (props) => {
-  const { input, isReadOnly, isDisabled, placeholder, isRequired, label, helperText, description, validateOnMount, meta } = useFieldApi(props);
+  const { input, isReadOnly, isDisabled, placeholder, isRequired, label, helperText, validateOnMount, meta } = useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
 
   return (
-    <FormFieldGrid>
-      <label htmlFor={input.name}>{label}</label>
-      <input type="date" {...input} readOnly={isReadOnly} disabled={isDisabled} placeholder={placeholder} />
+    <FormFieldGrid helperText={helperText}>
+      <Form.Field
+        label={label}
+        {...input}
+        type="date"
+        required={isRequired}
+        error={
+          invalid && {
+            content: meta.error
+          }
+        }
+        control={(props) => <input {...props} readOnly={isReadOnly} disabled={isDisabled} placeholder={placeholder} />}
+      />
     </FormFieldGrid>
   );
 };

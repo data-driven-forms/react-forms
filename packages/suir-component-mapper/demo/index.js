@@ -22,8 +22,8 @@ const compositeMapper = {
 const schema = {
   fields: [
     {
-      component: componentTypes.TEXT_FIELD,
-      label: 'Checkbox component',
+      component: componentTypes.DATE_PICKER,
+      label: 'Date picker component',
       name: 'text-field-sss',
       isRequired: true,
       helperText: 'Helper text',
@@ -34,28 +34,11 @@ const schema = {
       ]
     },
     {
-      component: componentTypes.CHECKBOX,
-      label: 'Checkbox component',
+      component: componentTypes.DATE_PICKER,
+      label: 'Date picker component',
       name: 'text-field',
       isRequired: true,
       helperText: 'Helper text',
-      validate: [
-        {
-          type: validatorTypes.REQUIRED
-        }
-      ]
-    },
-    {
-      component: componentTypes.CHECKBOX,
-      label: 'Checkbox component',
-      name: 'text-field-2',
-      placeholder: 'Placeholder',
-      helperText: 'Helper text',
-      isRequired: true,
-      options: [
-        { value: 1, label: 'One' },
-        { value: 2, label: 'Two' }
-      ],
       validate: [
         {
           type: validatorTypes.REQUIRED
