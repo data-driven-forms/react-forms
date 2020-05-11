@@ -21,6 +21,12 @@ const blueprintExternals = createFilter(
     'prop-types',
     '@data-driven-forms/react-form-renderer',
     '@data-driven-forms/react-form-renderer/**',
+    "@blueprintjs/core",
+    "@blueprintjs/datetime",
+    "@blueprintjs/select",
+    "@blueprintjs/core/**",
+    "@blueprintjs/datetime/**",
+    "@blueprintjs/select/**",
   ],
   null,
   { resolve: false }
@@ -29,7 +35,10 @@ const blueprintExternals = createFilter(
 const globals = {
   react: 'React',
   'react-dom': 'ReactDOM',
-  '@data-driven-forms/react-form-renderer': '@data-driven-forms/react-form-renderer'
+  '@data-driven-forms/react-form-renderer': '@data-driven-forms/react-form-renderer',
+  '@blueprintjs/core': '@blueprintjs/core',
+  '@blueprintjs/datetime': '@blueprintjs/datetime',
+  '@blueprintjs/select': '@blueprintjs/select',
 };
 
 const babelOptions = {
