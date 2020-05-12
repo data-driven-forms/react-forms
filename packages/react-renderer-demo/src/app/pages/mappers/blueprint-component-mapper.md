@@ -52,6 +52,12 @@ const FormTemplateWrapper = (props) => (
 ) // Czech translation
 ```
 
+This content is accessible via 
+
+```jsx
+import BlueprintContext from '@data-driven-forms/blueprint-component-mapper/dist/cjs/blueprint-context';
+```
+
 ## Contribution
 
 You can contribute to this mapper [here](https://github.com/data-driven-forms/react-forms/tree/master/packages/blueprint-component-mapper).
