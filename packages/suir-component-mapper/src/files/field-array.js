@@ -2,14 +2,44 @@ import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { useFormApi, FieldArray } from '@data-driven-forms/react-form-renderer';
 
-import { Button } from 'semantic-ui-react';
+import { Button, Icon, Header, Form } from 'semantic-ui-react';
 
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
-import FormFieldGrid from '../common/form-field-grid';
+import { createUseStyles } from 'react-jss';
+import clsx from 'clsx';
+
+const useStyles = createUseStyles({
+  buttonGroup: {
+    display: 'flex',
+    justifyContent: 'flex-end'
+  },
+  arrayItem: {
+    marginBottom: '1em'
+  },
+  arrayItems: {
+    marginTop: '1em'
+  },
+
+  error: {
+    color: '#9f3a38 !important'
+  },
+  noItems: {
+    paddingBottom: '1em'
+  },
+  noMargin: {
+    margin: '0 !important'
+  },
+  arrayHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  }
+});
 
 const ArrayItem = ({ fields, fieldIndex, name, remove, length, minItems, removeLabel }) => {
   const { renderForm } = useFormApi();
+  const classes = useStyles();
 
   const editedFields = fields.map((field, index) => {
     const computedName = field.name ? `${name}.${field.name}` : name;
@@ -17,16 +47,22 @@ const ArrayItem = ({ fields, fieldIndex, name, remove, length, minItems, removeL
   });
 
   return (
-    <div>
+    <div className={classes.arrayItem}>
       <div>
         <div container spacing={3}>
           {renderForm([editedFields])}
         </div>
       </div>
       <div>
-        <Button color="secondary" onClick={() => remove(fieldIndex)} disabled={length <= minItems}>
-          {removeLabel}
-        </Button>
+        <Button
+          type="button"
+          icon="remove"
+          content={removeLabel}
+          basic
+          color="red"
+          onClick={() => remove(fieldIndex)}
+          disabled={length <= minItems}
+        />
       </div>
     </div>
   );
@@ -94,6 +130,7 @@ const DynamicArray = ({ ...props }) => {
     ...rest
   } = useFieldApi(props);
   const [state, dispatch] = useReducer(reducer, initialState);
+  const classes = useStyles();
 
   const combinedButtonLabels = {
     ...defaultButtonLabels,
@@ -130,26 +167,61 @@ const DynamicArray = ({ ...props }) => {
 
             return (
               <div>
-                <div>
-                  {label && <h1>{label}</h1>}
-                  <Button disabled={state.index === 0} onClick={undo}>
-                    Undo
-                  </Button>
-                  <Button disabled={state.index === state.history.length} onClick={redo}>
-                    Redu
-                  </Button>
-                  <Button color="primary" onClick={pushWrapper} disabled={value.length >= maxItems}>
-                    {combinedButtonLabels.add}
-                  </Button>
+                <div className={classes.arrayHeader}>
+                  {label && (
+                    <Form.Field
+                      className={classes.noMargin}
+                      error={
+                        isError && {
+                          content: error,
+                          color: 'red',
+                          pointing: 'left'
+                        }
+                      }
+                      control={() => (
+                        <Header
+                          floated="left"
+                          className={clsx(classes.noMargin, {
+                            [classes.error]: isError
+                          })}
+                          size="large"
+                        >
+                          {label}
+                        </Header>
+                      )}
+                    />
+                  )}
+                  <div className={classes.buttonGroup}>
+                    <Button.Group>
+                      <Button type="button" disabled={state.index === 0} onClick={undo}>
+                        <Button.Content>
+                          <Icon name="undo" />
+                        </Button.Content>
+                      </Button>
+                      <Button type="button" disabled={state.index === state.history.length} onClick={redo}>
+                        <Button.Content>
+                          <Icon name="redo" />
+                        </Button.Content>
+                      </Button>
+                      <Button
+                        type="button"
+                        content={combinedButtonLabels.add}
+                        icon="add"
+                        color="primary"
+                        onClick={pushWrapper}
+                        disabled={value.length >= maxItems}
+                      />
+                    </Button.Group>
+                  </div>
                 </div>
                 {description && (
-                  <div item xs={12}>
-                    <h2>{description}</h2>
-                  </div>
+                  <Header className={classes.noMargin} sub>
+                    {description}
+                  </Header>
                 )}
-                <div item xs={12}>
+                <div className={classes.arrayItems}>
                   {value.length <= 0 ? (
-                    <p>{noItemsMessage}</p>
+                    <p className={classes.noItems}>{noItemsMessage}</p>
                   ) : (
                     map((name, index) => (
                       <ArrayItem
@@ -166,7 +238,7 @@ const DynamicArray = ({ ...props }) => {
                   )}
                 </div>
                 {isError && (
-                  <div item xs={12}>
+                  <div>
                     <p>{error}</p>
                   </div>
                 )}
