@@ -5,7 +5,21 @@ import Pf4Wizard from '@docs/doc-components/pf4-wizard.md';
 
 import PropTypes from 'prop-types';
 
-const DocWizard = ({ activeMapper }) => (activeMapper === 'pf3' ? <Pf3Wizard /> : activeMapper === 'pf4' ? <Pf4Wizard /> : <Wizard />);
+const DocWizard = ({ activeMapper }) => {
+  if (activeMapper === 'pf4') {
+    return <Pf4Wizard />;
+  }
+
+  if (activeMapper === 'pf3') {
+    return <Pf3Wizard />;
+  }
+
+  if (activeMapper === 'mui') {
+    return <Wizard />;
+  }
+
+  return 'Not implemented yet';
+};
 
 DocWizard.propTypes = {
   activeMapper: PropTypes.string
