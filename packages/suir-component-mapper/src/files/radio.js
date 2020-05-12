@@ -29,35 +29,18 @@ RadioOption.propTypes = {
 };
 
 const Radio = ({ name, ...props }) => {
-  const {
-    options,
-    isDisabled,
-    label,
-    isRequired,
-    helperText,
-    description,
-    isReadOnly,
-    meta,
-    validateOnMount,
-    FormFieldGridProps,
-    FormControlProps,
-    FormLabelProps,
-    FormHelperTextProps,
-    ...rest
-  } = useFieldApi({
+  const { options, isDisabled, label, isRequired, helperText, description, isReadOnly, meta, validateOnMount, ...rest } = useFieldApi({
     ...props,
     name,
     type: 'radio'
   });
   const invalid = validationError(meta, validateOnMount);
-  const text = invalid || helperText || description;
   return (
-    <FormFieldGrid>
-      <Form.Field>{label}</Form.Field>
+    <FormFieldGrid helperText={helperText}>
+      <Form.Field required={isRequired} error={invalid && { content: meta.error }} label={label} />
       {options.map((option) => (
         <RadioOption key={option.value} name={name} option={option} isDisabled={isDisabled} isReadOnly={isReadOnly} {...rest} />
       ))}
-      {(invalid || text) && <div {...FormHelperTextProps}>{invalid || text}</div>}
     </FormFieldGrid>
   );
 };

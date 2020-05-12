@@ -22,11 +22,15 @@ const compositeMapper = {
 const schema = {
   fields: [
     {
-      component: componentTypes.DATE_PICKER,
-      label: 'Date picker component',
+      component: componentTypes.RADIO,
+      label: 'Radio component',
       name: 'text-field-sss',
       isRequired: true,
       helperText: 'Helper text',
+      options: [
+        { value: '1', label: 'One' },
+        { value: '2', label: 'Two' }
+      ],
       validate: [
         {
           type: validatorTypes.REQUIRED
@@ -34,11 +38,15 @@ const schema = {
       ]
     },
     {
-      component: componentTypes.DATE_PICKER,
+      component: componentTypes.RADIO,
       label: 'Date picker component',
       name: 'text-field',
       isRequired: true,
       helperText: 'Helper text',
+      options: [
+        { value: '1', label: 'One' },
+        { value: '2', label: 'Two' }
+      ],
       validate: [
         {
           type: validatorTypes.REQUIRED
@@ -62,12 +70,12 @@ const App = () => {
           <Button onClick={() => setSchema(fieldArraySchema)}>Field array</Button>
           <Button onClick={() => setSchema(wizardSchema)}>Wizard</Button>
         </div>
-        <div style={{padding: 32}}>
+        <div style={{ padding: 32 }}>
           <FormRenderer
             onSubmit={console.log}
             componentMapper={compositeMapper}
             FormTemplate={(props) => <FormTemplate {...props} />}
-            schema={fieldArraySchema}
+            schema={schema}
             onCancel={() => console.log('canceling')}
           />
         </div>
