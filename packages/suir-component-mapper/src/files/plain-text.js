@@ -1,16 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import validTextFields from '@data-driven-forms/common/src/utils/valid-text-fields';
 
-const PlainText = ({ label, name, ...props }) =>
-  label.split('\n').map((paragraph, index) => (
-    <p key={`${index}-${name}`} {...props}>
-      {paragraph}
-    </p>
-  ));
+const PlainText = ({ variant, label, name }) =>
+  label.split('\n').map((paragraph, index) => React.createElement(variant, { key: `${name}-${index}` }, paragraph));
 
 PlainText.propTypes = {
+  variant: PropTypes.oneOf(validTextFields),
   label: PropTypes.node.isRequired,
   name: PropTypes.string.isRequired
+};
+
+PlainText.defaultProps = {
+  variant: 'p'
 };
 
 export default PlainText;
