@@ -62,12 +62,12 @@ const App = () => {
           <Button onClick={() => setSchema(fieldArraySchema)}>Field array</Button>
           <Button onClick={() => setSchema(wizardSchema)}>Wizard</Button>
         </div>
-        <div item xs={12}>
+        <div style={{padding: 32}}>
           <FormRenderer
             onSubmit={console.log}
             componentMapper={compositeMapper}
             FormTemplate={(props) => <FormTemplate {...props} />}
-            schema={schema}
+            schema={fieldArraySchema}
             onCancel={() => console.log('canceling')}
           />
         </div>
