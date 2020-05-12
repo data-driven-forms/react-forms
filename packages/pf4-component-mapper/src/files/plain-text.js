@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { TextContent, Text, TextVariants } from '@patternfly/react-core';
+import { TextContent, Text } from '@patternfly/react-core';
+import validTextFields from '@data-driven-forms/common/src/utils/valid-text-fields';
 
-const PlainText = ({ label, name }) => (
+const PlainText = ({ label, name, variant }) => (
   <TextContent>
     {label.split('\n').map((paragraph, index) => (
-      <Text component={TextVariants.p} key={`${name}-${index}`}>
+      <Text component={variant} key={`${name}-${index}`}>
         {paragraph}
       </Text>
     ))}
@@ -14,8 +15,13 @@ const PlainText = ({ label, name }) => (
 );
 
 PlainText.propTypes = {
+  variant: PropTypes.oneOf(validTextFields),
   label: PropTypes.node.isRequired,
   name: PropTypes.string.isRequired
+};
+
+PlainText.defaultProps = {
+  variant: 'p'
 };
 
 export default PlainText;
