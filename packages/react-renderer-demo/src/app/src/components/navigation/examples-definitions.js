@@ -5,6 +5,7 @@ import CustomComponentText from './examples-texts/custom-component';
 import WizardText from './examples-texts/wizard';
 import SelectText from './examples-texts/select';
 import FieldArray from './examples-texts/field-array';
+import DatePickerText from './examples-texts/date-picker';
 import Slider from './examples-texts/slider';
 import DualListSelect from './examples-texts/dual-list-select';
 import arraySchemaDDF from './field-array-schema';
@@ -233,7 +234,7 @@ export const baseExamples = [
     component: componentTypes.DATE_PICKER,
     link: componentTypes.DATE_PICKER,
     linkText: 'Date picker',
-    ContentText: GenericComponentText,
+    ContentText: DatePickerText,
     canBeRequired: true,
     value: {
       fields: [
