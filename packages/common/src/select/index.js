@@ -40,6 +40,7 @@ const Select = ({
   value,
   onChange,
   loadOptionsChangeCounter,
+  Component,
   ...props
 }) => {
   const [state, dispatch] = useReducer(reducer, {
@@ -96,15 +97,21 @@ const Select = ({
     }
   }, [propsOptions]);
 
+  const SelectFinal = Component || selectProvider[selectVariant] || ReactSelect;
+
+  const renderNoOptionsMessage = () => (Object.values(state.promises).some((value) => value) ? () => updatingMessage : () => noOptionsMessage);
+
   if (state.isLoading) {
     return (
-      <ReactSelect
+      <SelectFinal
         {...props}
         classNamePrefix={classNamePrefix}
         isDisabled={true}
         placeholder={loadingMessage}
         options={state.options}
+        onChange={() => {}}
         {...loadingProps}
+        noOptionsMessage={renderNoOptionsMessage()}
       />
     );
   }
@@ -130,11 +137,7 @@ const Select = ({
     }
   };
 
-  const renderNoOptionsMessage = () => (Object.values(state.promises).some((value) => value) ? () => updatingMessage : () => noOptionsMessage);
-
   const selectValue = pluckSingleValue ? (isMulti ? value : Array.isArray(value) && value[0] ? value[0] : value) : value;
-
-  const SelectFinal = selectProvider[selectVariant] || ReactSelect;
 
   return (
     <SelectFinal
@@ -176,7 +179,8 @@ Select.propTypes = {
   selectVariant: PropTypes.string,
   updatingMessage: PropTypes.node,
   noOptionsMessage: PropTypes.node,
-  isSearchable: PropTypes.bool
+  isSearchable: PropTypes.bool,
+  Component: PropTypes.any
 };
 
 Select.defaultProps = {

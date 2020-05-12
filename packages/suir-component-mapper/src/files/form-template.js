@@ -38,8 +38,8 @@ ButtonGroup.propTypes = {
   children: PropTypes.node
 };
 
-const Button = ({ label, variant, children, buttonType, ...props }) => (
-  <SuirButton color={variant} {...props}>
+const Button = ({ label, children, buttonType, variant, ...props }) => (
+  <SuirButton color={variant === 'primary' ? 'blue' : undefined} {...props}>
     {label || children}
   </SuirButton>
 );

@@ -19,18 +19,45 @@ const compositeMapper = {
   }
 };
 
+const options = [
+  { value: '1', label: 'One' },
+  { value: '2', label: 'Two' },
+  { value: '3', label: 'three' },
+  { value: '4', label: 'Four' },
+  { value: '5', label: 'Five' },
+  { value: '6', label: 'Six' },
+  { value: '7', label: 'Seven' },
+  { value: '8', label: 'Eight' },
+  { value: '9', label: 'Nine' },
+  { value: '10', label: 'Ten' }
+];
+
+const loadOptions = (filter) =>
+  new Promise((res) =>
+    setTimeout(() => {
+      if (!filter) {
+        return res(options.slice(0, 2));
+      }
+
+      const result = options.filter(({ label }) => {
+        return label.toLowerCase().includes(filter.toLowerCase());
+      });
+      return res(result);
+    }, 1500)
+  );
+
 const schema = {
   fields: [
     {
-      component: componentTypes.RADIO,
-      label: 'Radio component',
+      component: componentTypes.SELECT,
+      label: 'Select component',
       name: 'text-field-sss',
       isRequired: true,
       helperText: 'Helper text',
-      options: [
-        { value: '1', label: 'One' },
-        { value: '2', label: 'Two' }
-      ],
+      loadOptions,
+      isClearable: true,
+      isSearchable: true,
+      isMulti: true,
       validate: [
         {
           type: validatorTypes.REQUIRED
@@ -38,8 +65,9 @@ const schema = {
       ]
     },
     {
-      component: componentTypes.RADIO,
-      label: 'Date picker component',
+      component: componentTypes.SELECT,
+      isMulti: true,
+      label: 'Select component',
       name: 'text-field',
       isRequired: true,
       helperText: 'Helper text',
@@ -61,11 +89,11 @@ const App = () => {
 
   return (
     <div>
-      <div container spacing={4} justify="center" alignItems="center">
-        <div item xs={12}>
-          <h3 variant="h3">Material UI component mapper</h3>
+      <div>
+        <div>
+          <h3>SUIR component mapper</h3>
         </div>
-        <div item xs={12}>
+        <div>
           <Button onClick={() => setSchema(demoSchema)}>Demo schema</Button>
           <Button onClick={() => setSchema(fieldArraySchema)}>Field array</Button>
           <Button onClick={() => setSchema(wizardSchema)}>Wizard</Button>

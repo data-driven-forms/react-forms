@@ -1,40 +1,73 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import CommonSelect from '@data-driven-forms/common/src/select';
 import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
 import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
-import MUISelect from './select/integration-select';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+import { Dropdown, Form } from 'semantic-ui-react';
 
-const Select = (props) => {
-  const { input, placeholder, label, helperText, validateOnMount, meta, isSearchable, description, FormFieldGridProps, ...rest } = useFieldApi(props);
+const SuirSelect = ({
+  onChange,
+  value,
+  meta,
+  helperText,
+  validateOnMount,
+  isReadonly,
+  isDisabled,
+  isClearable,
+  isSearchable,
+  options,
+  label,
+  isMulti,
+  isRequired,
+  classNamePrefix,
+  onInputChange,
+  isFetching,
+  noOptionsMessage,
+  hideSelectedOptions,
+  closeMenuOnSelect,
+  ...rest
+}) => {
   const invalid = validationError(meta, validateOnMount);
-
   return (
-    <FormFieldGrid {...FormFieldGridProps}>
-      <MUISelect
-        fullWidth
-        {...input}
-        isSearchable={!!isSearchable}
-        isClearable={false}
-        invalid={invalid}
-        textFieldProps={{
-          label,
-          InputLabelProps: {
-            shrink: true
+    <FormFieldGrid helperText={helperText}>
+      <Form.Field
+        disabled={isDisabled}
+        readOnly={isReadonly}
+        required={isRequired}
+        clearable={isClearable}
+        search={isSearchable}
+        loading={isFetching}
+        noResultsMessage={isFetching ? 'Loading' : noOptionsMessage()}
+        onSearchChange={({ target: { value } }) => onInputChange(value)}
+        options={options.map(({ label, value, ...rest }) => ({
+          key: value,
+          text: label,
+          value,
+          ...rest
+        }))}
+        onChange={(_event, { value }) => {
+          if (isMulti) {
+            return onChange(Array.isArray(value) && value.map((value) => ({ value })));
           }
+
+          return onChange(value && { value });
         }}
-        input={input}
+        selection
+        fluid
+        multiple={isMulti}
         label={label}
-        helperText={invalid || helperText || description}
+        error={invalid && { content: meta.error }}
+        control={Dropdown}
         {...rest}
       />
     </FormFieldGrid>
   );
 };
 
-Select.propTypes = {
+SuirSelect.propTypes = {
   input,
   meta,
   placeholder: PropTypes.node,
@@ -42,17 +75,28 @@ Select.propTypes = {
   helperText: PropTypes.node,
   validateOnMount: PropTypes.bool,
   isSearchable: PropTypes.bool,
-  options: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.any.isRequired, label: PropTypes.node.isRequired })).isRequired,
+  options: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.any.isRequired, label: PropTypes.node.isRequired })),
   description: PropTypes.node,
-  FormFieldGridProps: PropTypes.object
+  isReadonly: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.any,
+  isMulti: PropTypes.bool,
+  isClearable: PropTypes.bool,
+  noOptionsMessage: PropTypes.func
 };
 
-Select.defaultProps = {
+SuirSelect.defaultProps = {
   placeholder: 'Please choose',
   noOptionsMessage: 'No option found',
-  FormFieldGridProps: {}
+  options: []
+};
+
+const Select = (props) => {
+  const { input, ...formProps } = useFieldApi(props);
+  return <CommonSelect simpleValue {...input} {...formProps} Component={SuirSelect} />;
 };
 
 export default Select;
 
-export const InternalSelect = MUISelect;
+export const InternalSelect = SuirSelect;
