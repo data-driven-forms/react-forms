@@ -1,4 +1,5 @@
 export { default as componentMapper, components } from './files/component-mapper';
+export { default as BlueprintContext } from './files/blueprint-context';
 export { default as FormTemplate } from './files/form-template';
 export { default as Checkbox } from './files/checkbox';
 export { default as DatePicker } from './files/date-picker';
