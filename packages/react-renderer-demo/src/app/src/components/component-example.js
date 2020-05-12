@@ -22,6 +22,7 @@ import clsx from 'clsx';
 import { muiCode, muiWizardCode, muiHtml, muiDependencies } from '../stackblitz-templates/mui-templates';
 import { pf4Code, pf4WizardCode, pf4Html, pf4Dependencies } from '../stackblitz-templates/pf4-templates';
 import { pf3Code, pf3WizardCode, pf3Html, pf3Dependencies } from '../stackblitz-templates/pf3-templates';
+import { blueprintCode, blueprintWizardCode, blueprintHtml, blueprintDependencies } from '../stackblitz-templates/blueprint-templates';
 
 const project = {
   settings: {
@@ -109,25 +110,32 @@ const blitzFiles = {
   pf3: {
     'index.html': pf3Html,
     'index.js': pf3Code
+  },
+  blueprint: {
+    'index.html': blueprintHtml,
+    'index.js': blueprintCode
   }
 };
 
 const blitzWizards = {
   mui: muiWizardCode,
   pf4: pf4WizardCode,
-  pf3: pf3WizardCode
+  pf3: pf3WizardCode,
+  blueprint: blueprintWizardCode
 };
 
 const blitzDependencies = {
   mui: muiDependencies,
   pf4: pf4Dependencies,
-  pf3: pf3Dependencies
+  pf3: pf3Dependencies,
+  blueprint: blueprintDependencies
 };
 
 const mapperTab = {
   mui: 0,
   pf4: 1,
-  pf3: 2
+  pf3: 2,
+  blueprint: 3
 };
 
 const ComponentExample = ({ baseStructure, activeMapper, component }) => {
@@ -183,6 +191,18 @@ const ComponentExample = ({ baseStructure, activeMapper, component }) => {
         <Link href={`${router.pathname}?mapper=pf3`}>
           <a href={`${router.pathname}?mapper=pf3`} className={classes.tabLink}>
             Pf3
+          </a>
+        </Link>
+      }
+    />,
+    <Tab
+      key="blueprint"
+      onClick={() => router.push(`${router.pathname}?mapper=blueprint`)}
+      className={clsx(classes.tab, { active: activeTab === 3 })}
+      label={
+        <Link href={`${router.pathname}?mapper=blueprint`}>
+          <a href={`${router.pathname}?mapper=blueprint`} className={classes.tabLink}>
+            Bjs
           </a>
         </Link>
       }
