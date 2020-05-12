@@ -98,7 +98,7 @@ const MdxComponents = {
           showPrintMargin={false}
           showGutter={false}
           highlightActiveLine={false}
-          style={{ width: '80%', margin: 10 }}
+          style={{ width: 'initial', margin: 10 }}
           setOptions={{
             showLineNumbers: false,
             readOnly: true
