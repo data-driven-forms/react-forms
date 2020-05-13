@@ -1,25 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
+import { Header } from 'semantic-ui-react';
+
 const SubForm = ({ fields, title, description, component, ...rest }) => {
   const { renderForm } = useFormApi();
 
   return (
-    <div>
-      {title && (
-        <div item xs={12}>
-          <h5 variant="h5">{title}</h5>
-        </div>
-      )}
-      {description && (
-        <div item xs={12}>
-          <p>{description}</p>
-        </div>
-      )}
-      <div item xs={12} container>
-        {renderForm(fields)}
-      </div>
+    <div {...rest}>
+      {title && <Header>{title}</Header>}
+      {description && <p>{description}</p>}
+      <div>{renderForm(fields)}</div>
     </div>
   );
 };
