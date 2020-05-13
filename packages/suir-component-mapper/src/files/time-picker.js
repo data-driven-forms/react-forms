@@ -6,7 +6,6 @@ import { validationError } from '../common/helpers';
 import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormField from '../common/form-field';
-import { Form } from 'semantic-ui-react';
 
 const TimePicker = (props) => {
   const { input, isReadOnly, isDisabled, isRequired, helperText, validateOnMount, meta, ...rest } = useFieldApi(props);
@@ -23,7 +22,7 @@ const TimePicker = (props) => {
             content: meta.error
           }
         }
-        control={Form.Input}
+        control={(props) => <input {...props} readOnly={isReadOnly} disabled={isDisabled} />}
         {...input}
         {...rest}
         type="time"

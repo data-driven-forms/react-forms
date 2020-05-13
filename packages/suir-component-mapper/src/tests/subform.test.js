@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 
 import Subform from '../files/sub-form';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
+import { Header } from 'semantic-ui-react';
 
 describe('subform', () => {
   const props = {
@@ -36,8 +37,6 @@ describe('subform', () => {
       </RenderWithProvider>
     );
 
-    expect(wrapper.find(Grid)).toHaveLength(2);
-    expect(wrapper.find(Typography)).toHaveLength(0);
     expect(wrapper.find('h1')).toHaveLength(1);
   });
 
@@ -54,11 +53,10 @@ describe('subform', () => {
       </RenderWithProvider>
     );
 
-    expect(wrapper.find(Grid)).toHaveLength(3);
-    expect(wrapper.find(Typography)).toHaveLength(1);
+    expect(wrapper.find(Header)).toHaveLength(1);
     expect(
       wrapper
-        .find(Typography)
+        .find(Header)
         .text()
         .includes(TITLE)
     ).toEqual(true);
@@ -78,11 +76,10 @@ describe('subform', () => {
       </RenderWithProvider>
     );
 
-    expect(wrapper.find(Grid)).toHaveLength(3);
-    expect(wrapper.find(Typography)).toHaveLength(1);
+    expect(wrapper.find('p')).toHaveLength(1);
     expect(
       wrapper
-        .find(Typography)
+        .find('p')
         .text()
         .includes(DESCRIPTION)
     ).toEqual(true);
@@ -102,19 +99,17 @@ describe('subform', () => {
       </RenderWithProvider>
     );
 
-    expect(wrapper.find(Grid)).toHaveLength(4);
-    expect(wrapper.find(Typography)).toHaveLength(2);
+    expect(wrapper.find(Header)).toHaveLength(1);
+    expect(wrapper.find('p')).toHaveLength(1);
     expect(
       wrapper
-        .find(Typography)
-        .first()
+        .find(Header)
         .text()
         .includes(TITLE)
     ).toEqual(true);
     expect(
       wrapper
-        .find(Typography)
-        .last()
+        .find('p')
         .text()
         .includes(DESCRIPTION)
     ).toEqual(true);

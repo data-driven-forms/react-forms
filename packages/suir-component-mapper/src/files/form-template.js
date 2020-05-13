@@ -20,11 +20,7 @@ Description.propTypes = {
   children: PropTypes.node
 };
 
-const Title = ({ children }) => (
-  <Header as="h3" gutterBottom>
-    {children}
-  </Header>
-);
+const Title = ({ children }) => <Header as="h3">{children}</Header>;
 
 Title.propTypes = {
   children: PropTypes.node

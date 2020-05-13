@@ -8,6 +8,10 @@ const arraySchemaDDF = {
       label: 'Nice people',
       description: 'This allow you to add nice people to the list dynamically',
       defaultItem: { name: 'enter a name', lastName: 'enter a last name' },
+      buttonLabels: {
+        add: 'CUSTOM ADD',
+        remove: 'CUSTOM REMOVE'
+      },
       fields: [
         {
           component: 'text-field',
