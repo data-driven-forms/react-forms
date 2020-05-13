@@ -12,7 +12,7 @@ import { Button } from 'semantic-ui-react';
 const compositeMapper = {
   ...componentMapper,
   [componentTypes.SWITCH]: {
-    component: componentMapper[componentTypes.SWITCH],
+    component: componentMapper[componentTypes.SWITCH]
   }
 };
 
@@ -46,34 +46,48 @@ const loadOptions = (filter) =>
 const schema = {
   fields: [
     {
-      component: componentTypes.SUB_FORM,
+      component: componentTypes.TABS,
       title: 'Sub form title',
       name: 'sub-form',
       description: 'Sub form description',
       fields: [
         {
-          component: componentTypes.SWITCH,
-          label: 'Select component',
-          name: 'text-field-sss',
-          isRequired: true,
-          onText: 'On text',
-          offText: 'Off text',
-          helperText: 'Helper text',
-          validate: [
+          component: componentTypes.TAB_ITEM,
+          name: 'tab-1',
+          title: 'Tab 1',
+          fields: [
             {
-              type: validatorTypes.REQUIRED
+              component: componentTypes.TEXTAREA,
+              label: 'Select component',
+              name: 'text-field-sss',
+              isRequired: true,
+              helperText: 'Helper text',
+              validate: [
+                {
+                  type: validatorTypes.REQUIRED
+                }
+              ]
             }
           ]
         },
         {
-          component: componentTypes.SWITCH,
-          label: 'Select component',
-          name: 'text-field',
-          isRequired: true,
-          helperText: 'Helper text',
-          validate: [
+          component: componentTypes.TAB_ITEM,
+          name: 'tab-2',
+          title: 'Tab 2',
+          fields: [
             {
-              type: validatorTypes.REQUIRED
+              component: componentTypes.SWITCH,
+              label: 'Select component',
+              name: 'text-field',
+              isRequired: true,
+              onText: 'On text',
+              offText: 'Off text',
+              helperText: 'Helper text',
+              validate: [
+                {
+                  type: validatorTypes.REQUIRED
+                }
+              ]
             }
           ]
         }
