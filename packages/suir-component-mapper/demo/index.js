@@ -13,9 +13,6 @@ const compositeMapper = {
   ...componentMapper,
   [componentTypes.SWITCH]: {
     component: componentMapper[componentTypes.SWITCH],
-    FormControlLabelProps: {
-      labelPlacement: 'end'
-    }
   }
 };
 
@@ -49,35 +46,36 @@ const loadOptions = (filter) =>
 const schema = {
   fields: [
     {
-      component: componentTypes.SELECT,
-      label: 'Select component',
-      name: 'text-field-sss',
-      isRequired: true,
-      helperText: 'Helper text',
-      loadOptions,
-      isClearable: true,
-      isSearchable: true,
-      isMulti: true,
-      validate: [
+      component: componentTypes.SUB_FORM,
+      title: 'Sub form title',
+      name: 'sub-form',
+      description: 'Sub form description',
+      fields: [
         {
-          type: validatorTypes.REQUIRED
-        }
-      ]
-    },
-    {
-      component: componentTypes.SELECT,
-      isMulti: true,
-      label: 'Select component',
-      name: 'text-field',
-      isRequired: true,
-      helperText: 'Helper text',
-      options: [
-        { value: '1', label: 'One' },
-        { value: '2', label: 'Two' }
-      ],
-      validate: [
+          component: componentTypes.SWITCH,
+          label: 'Select component',
+          name: 'text-field-sss',
+          isRequired: true,
+          onText: 'On text',
+          offText: 'Off text',
+          helperText: 'Helper text',
+          validate: [
+            {
+              type: validatorTypes.REQUIRED
+            }
+          ]
+        },
         {
-          type: validatorTypes.REQUIRED
+          component: componentTypes.SWITCH,
+          label: 'Select component',
+          name: 'text-field',
+          isRequired: true,
+          helperText: 'Helper text',
+          validate: [
+            {
+              type: validatorTypes.REQUIRED
+            }
+          ]
         }
       ]
     }
