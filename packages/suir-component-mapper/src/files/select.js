@@ -49,7 +49,7 @@ const SuirSelect = ({
     <FormFieldGrid helperText={helperText}>
       <FormField
         disabled={isDisabled}
-        readonly={isReadOnly}
+        readOnly={isReadOnly}
         required={isRequired}
         clearable={isClearable}
         search={isSearchable}
