@@ -57,7 +57,7 @@ const schema = {
           title: 'Tab 1',
           fields: [
             {
-              component: componentTypes.TEXTAREA,
+              component: componentTypes.TIME_PICKER,
               label: 'Select component',
               name: 'text-field-sss',
               isRequired: true,
