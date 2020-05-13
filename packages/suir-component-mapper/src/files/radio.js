@@ -12,6 +12,7 @@ const RadioOption = ({ name, option, isDisabled, isReadOnly, ...props }) => {
   return (
     <Form.Radio
       {...input}
+      disabled={isDisabled}
       onChange={(_event, data) => {
         input.onChange({ target: data, type: 'radio' });
       }}
@@ -37,7 +38,7 @@ const Radio = ({ name, ...props }) => {
   const invalid = validationError(meta, validateOnMount);
   return (
     <FormFieldGrid helperText={helperText}>
-      <Form.Field required={isRequired} error={invalid && { content: meta.error }} label={label} />
+      <Form.Field disabled={isDisabled} required={isRequired} error={invalid && { content: meta.error }} label={label} />
       {options.map((option) => (
         <RadioOption key={option.value} name={name} option={option} isDisabled={isDisabled} isReadOnly={isReadOnly} {...rest} />
       ))}

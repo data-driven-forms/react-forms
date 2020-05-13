@@ -24,7 +24,7 @@ const FormFieldGrid = ({ className, children, helperText }) => {
 FormFieldGrid.propTypes = {
   className: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
-  helperText: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
+  helperText: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)])
 };
 
 export default FormFieldGrid;

@@ -10,7 +10,7 @@ describe('PlainText component', () => {
 
     const wrapper = mount(<PlainText name={name} label={label} />);
 
-    expect(wrapper.find(Typography)).toHaveLength(3);
+    expect(wrapper.find('p')).toHaveLength(3);
   });
 
   it('renders correctly with one paragraphs', () => {
@@ -19,6 +19,6 @@ describe('PlainText component', () => {
 
     const wrapper = mount(<PlainText name={name} label={label} />);
 
-    expect(wrapper.find(Typography)).toHaveLength(1);
+    expect(wrapper.find('p')).toHaveLength(1);
   });
 });

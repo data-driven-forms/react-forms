@@ -7,6 +7,8 @@ import Checkbox from '../files/checkbox';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 import FormTemplate from '../files/form-template';
 import componentMapper from '../files/component-mapper';
+import { Radio, Dropdown } from 'semantic-ui-react';
+import HelperText from '../common/helper-text';
 
 const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (
   <FormRenderer
@@ -24,7 +26,6 @@ describe('formFields', () => {
 
   const errorText = 'Required';
   const helperText = 'I am helper text';
-  const description = 'This is description';
   const options = [
     { label: 'Cat', value: 'cats' },
     { label: 'Dog', value: 'dogs' },
@@ -74,10 +75,15 @@ describe('formFields', () => {
             expect(wrapper.find(componentMapper[component])).toHaveLength(1);
           }
 
-          expect(wrapper.find(FormLabel).text()).toEqual(field.label);
-          expect(wrapper.find('.Mui-error')).toHaveLength(0);
-          expect(wrapper.find('.MuiFormHelperText-root')).toHaveLength(0);
-          expect(wrapper.find('.MuiFormLabel-asterisk')).toHaveLength(0);
+          expect(
+            wrapper
+              .find('label')
+              .first()
+              .text()
+          ).toEqual(field.label);
+          expect(wrapper.find('.ui.pointing.prompt.label')).toHaveLength(0);
+          expect(wrapper.find(HelperText)).toHaveLength(0);
+          expect(wrapper.find('.required.field')).toHaveLength(0);
         });
 
         it('renders with error', () => {
@@ -89,7 +95,7 @@ describe('formFields', () => {
           wrapper.find('form').simulate('submit');
           expect(
             wrapper
-              .find('.Mui-error')
+              .find('.ui.pointing.prompt.label')
               .last()
               .text()
           ).toEqual(errorText);
@@ -104,38 +110,7 @@ describe('formFields', () => {
 
           expect(
             wrapper
-              .find('.MuiFormHelperText-root')
-              .last()
-              .text()
-          ).toEqual(helperText);
-        });
-
-        it('renders with description', () => {
-          const descriptionField = {
-            ...field,
-            description
-          };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [descriptionField] }} />);
-
-          expect(
-            wrapper
-              .find('.MuiFormHelperText-root')
-              .last()
-              .text()
-          ).toEqual(description);
-        });
-
-        it('renders with description and helperText', () => {
-          const descriptionField = {
-            ...field,
-            description,
-            helperText
-          };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [descriptionField] }} />);
-
-          expect(
-            wrapper
-              .find('.MuiFormHelperText-root')
+              .find(HelperText)
               .last()
               .text()
           ).toEqual(helperText);
@@ -152,10 +127,16 @@ describe('formFields', () => {
 
           expect(
             wrapper
-              .find('.Mui-error')
+              .find('.ui.pointing.prompt.label')
               .last()
               .text()
           ).toEqual(errorText);
+          expect(
+            wrapper
+              .find(HelperText)
+              .last()
+              .text()
+          ).toEqual(helperText);
         });
 
         it('renders isRequired', () => {
@@ -164,8 +145,11 @@ describe('formFields', () => {
             isRequired: true
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [requiredField] }} />);
-
-          expect(wrapper.find('.MuiFormLabel-asterisk')).toHaveLength(1);
+          if (component === componentTypes.TEXTAREA) {
+            expect(wrapper.find('.required.field')).toHaveLength(2);
+          } else {
+            expect(wrapper.find('.required.field')).toHaveLength(1);
+          }
         });
 
         it('renders isDisabled', () => {
@@ -181,6 +165,13 @@ describe('formFields', () => {
                 .find('textarea')
                 .first()
                 .props().disabled
+            ).toEqual(true);
+          } else if (component === componentTypes.SELECT) {
+            expect(
+              wrapper
+                .find(Dropdown)
+                .first()
+                .prop('disabled')
             ).toEqual(true);
           } else {
             expect(
@@ -206,6 +197,9 @@ describe('formFields', () => {
                 .first()
                 .props().readOnly
             ).toEqual(true);
+          } else if (component === componentTypes.SELECT) {
+            /**SUIR select does not have read only prop */
+            expect(true);
           } else {
             expect(
               wrapper
@@ -240,9 +234,9 @@ describe('formFields', () => {
       );
 
       expect(wrapper.find(MultipleChoiceListCommon)).toHaveLength(1);
-      expect(wrapper.find('.Mui-error')).toHaveLength(0);
-      expect(wrapper.find('.MuiFormHelperText-root')).toHaveLength(0);
-      expect(wrapper.find('.MuiFormLabel-asterisk')).toHaveLength(0);
+      expect(wrapper.find('.ui.pointing.prompt.label')).toHaveLength(0);
+      expect(wrapper.find(HelperText)).toHaveLength(0);
+      expect(wrapper.find('.required.field')).toHaveLength(0);
     });
 
     it('renders with error', () => {
@@ -260,7 +254,7 @@ describe('formFields', () => {
 
       expect(
         wrapper
-          .find('.Mui-error')
+          .find('.ui.pointing.prompt.label')
           .last()
           .text()
       ).toEqual(errorText);
@@ -280,48 +274,7 @@ describe('formFields', () => {
 
       expect(
         wrapper
-          .find('.MuiFormHelperText-root')
-          .last()
-          .text()
-      ).toEqual(helperText);
-    });
-
-    it('renders with description', () => {
-      const schema = {
-        fields: [
-          {
-            component: componentTypes.CHECKBOX,
-            name: 'foo',
-            description
-          }
-        ]
-      };
-      const wrapper = mount(<RendererWrapper schema={schema} />);
-
-      expect(
-        wrapper
-          .find('.MuiFormHelperText-root')
-          .last()
-          .text()
-      ).toEqual(description);
-    });
-
-    it('renders with description and helperText', () => {
-      const schema = {
-        fields: [
-          {
-            component: componentTypes.CHECKBOX,
-            name: 'foo',
-            helperText,
-            description
-          }
-        ]
-      };
-      const wrapper = mount(<RendererWrapper schema={schema} />);
-
-      expect(
-        wrapper
-          .find('.MuiFormHelperText-root')
+          .find(HelperText)
           .last()
           .text()
       ).toEqual(helperText);
@@ -343,10 +296,17 @@ describe('formFields', () => {
 
       expect(
         wrapper
-          .find('.Mui-error')
+          .find('.ui.pointing.prompt.label')
           .last()
           .text()
       ).toEqual(errorText);
+
+      expect(
+        wrapper
+          .find(HelperText)
+          .last()
+          .text()
+      ).toEqual(helperText);
     });
   });
 });

@@ -65,20 +65,20 @@ describe('wizard', () => {
 
     expect(
       wrapper
-        .find('.MuiStepLabel-active')
+        .find('.active.step')
         .first()
         .text()
     ).toEqual('AWS step');
 
     wrapper
-      .find(Button)
+      .find('button')
       .last()
       .simulate('click'); // disabled next
     wrapper.update();
 
     expect(
       wrapper
-        .find('.MuiStepLabel-active')
+        .find('.active.step')
         .first()
         .text()
     ).toEqual('AWS step');
@@ -88,27 +88,27 @@ describe('wizard', () => {
     wrapper.update();
 
     wrapper
-      .find(Button)
+      .find('button')
       .last()
       .simulate('click'); // next
     wrapper.update();
 
     expect(
       wrapper
-        .find('.MuiStepLabel-active')
+        .find('.active.step')
         .first()
         .text()
     ).toEqual('Summary');
 
     wrapper
-      .find(Button)
+      .find('button')
       .at(1)
       .simulate('click'); // back
     wrapper.update();
 
     expect(
       wrapper
-        .find('.MuiStepLabel-active')
+        .find('.active.step')
         .first()
         .text()
     ).toEqual('AWS step');
@@ -175,7 +175,7 @@ describe('wizard', () => {
 
     expect(
       wrapper
-        .find('.MuiStepLabel-active')
+        .find('.active.step')
         .first()
         .text()
     ).toEqual('First step');
@@ -185,28 +185,28 @@ describe('wizard', () => {
     wrapper.update();
 
     wrapper
-      .find(Button)
+      .find('button')
       .last()
       .simulate('click'); // next
     wrapper.update();
 
     expect(
       wrapper
-        .find('.MuiStepLabel-active')
+        .find('.active.step')
         .first()
         .text()
     ).toEqual('Last step');
     expect(wrapper.find('input').instance().name).toEqual('summary');
 
     wrapper
-      .find(Button)
+      .find('button')
       .at(1) // back
       .simulate('click');
     wrapper.update();
 
     expect(
       wrapper
-        .find('.MuiStepLabel-active')
+        .find('.active.step')
         .first()
         .text()
     ).toEqual('First step');
@@ -216,14 +216,14 @@ describe('wizard', () => {
     wrapper.update();
 
     wrapper
-      .find(Button)
+      .find('button')
       .last() // next
       .simulate('click');
     wrapper.update();
 
     expect(
       wrapper
-        .find('.MuiStepLabel-active')
+        .find('.active.step')
         .first()
         .text()
     ).toEqual('Last step');
@@ -286,7 +286,7 @@ describe('wizard', () => {
     wrapper.update();
 
     wrapper
-      .find(Button)
+      .find('button')
       .last()
       .simulate('click');
     wrapper.update();
@@ -302,7 +302,7 @@ describe('wizard', () => {
     wrapper.update();
 
     wrapper
-      .find(Button)
+      .find('button')
       .last()
       .simulate('click');
     wrapper.update();
@@ -314,7 +314,7 @@ describe('wizard', () => {
     onSubmit.mockClear();
 
     wrapper
-      .find(Button)
+      .find('button')
       .at(1)
       .simulate('click');
     wrapper.update();
@@ -324,7 +324,7 @@ describe('wizard', () => {
     wrapper.update();
 
     wrapper
-      .find(Button)
+      .find('button')
       .last()
       .simulate('click');
     wrapper.update();
@@ -340,7 +340,7 @@ describe('wizard', () => {
     wrapper.update();
 
     wrapper
-      .find(Button)
+      .find('button')
       .last()
       .simulate('click');
     wrapper.update();
@@ -360,7 +360,7 @@ describe('wizard', () => {
     wrapper.update();
 
     wrapper
-      .find(Button)
+      .find('button')
       .first()
       .simulate('click'); // disabled next
     wrapper.update();

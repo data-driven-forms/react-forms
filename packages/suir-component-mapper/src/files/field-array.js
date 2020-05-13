@@ -48,11 +48,7 @@ const ArrayItem = ({ fields, fieldIndex, name, remove, length, minItems, removeL
 
   return (
     <div className={classes.arrayItem}>
-      <div>
-        <div container spacing={3}>
-          {renderForm([editedFields])}
-        </div>
-      </div>
+      <div>{renderForm([editedFields])}</div>
       <div>
         <Button
           type="button"
@@ -193,12 +189,17 @@ const DynamicArray = ({ ...props }) => {
                   )}
                   <div className={classes.buttonGroup}>
                     <Button.Group>
-                      <Button type="button" disabled={state.index === 0} onClick={undo}>
+                      <Button className="ddorg__suir__mapper__field-array-undo" type="button" disabled={state.index === 0} onClick={undo}>
                         <Button.Content>
                           <Icon name="undo" />
                         </Button.Content>
                       </Button>
-                      <Button type="button" disabled={state.index === state.history.length} onClick={redo}>
+                      <Button
+                        className="ddorg__suir__mapper__field-array-redo"
+                        type="button"
+                        disabled={state.index === state.history.length}
+                        onClick={redo}
+                      >
                         <Button.Content>
                           <Icon name="redo" />
                         </Button.Content>
@@ -207,7 +208,7 @@ const DynamicArray = ({ ...props }) => {
                         type="button"
                         content={combinedButtonLabels.add}
                         icon="add"
-                        color="primary"
+                        color="blue"
                         onClick={pushWrapper}
                         disabled={value.length >= maxItems}
                       />
@@ -238,7 +239,7 @@ const DynamicArray = ({ ...props }) => {
                   )}
                 </div>
                 {isError && (
-                  <div>
+                  <div className="ddorg__suir__mapper__field-array-error">
                     <p>{error}</p>
                   </div>
                 )}

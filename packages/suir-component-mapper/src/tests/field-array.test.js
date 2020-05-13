@@ -5,6 +5,7 @@ import { mount } from 'enzyme';
 
 import { componentMapper, FormTemplate } from '../index';
 import { reducer } from '../files/field-array';
+import { Header, Button } from 'semantic-ui-react';
 
 describe('<FieldArray/>', () => {
   let initialProps;
@@ -50,48 +51,51 @@ describe('<FieldArray/>', () => {
       wrapper = mount(<FormRenderer {...initialProps} />);
     });
 
-    expect(wrapper.find(Typography)).toHaveLength(3);
+    expect(wrapper.find(Header)).toHaveLength(2);
+    expect(wrapper.find('p')).toHaveLength(1);
     expect(
       wrapper
-        .find(Typography)
+        .find(Header)
         .first()
         .text()
     ).toEqual('I am label');
     expect(
       wrapper
-        .find(Typography)
+        .find(Header)
         .at(1)
         .text()
     ).toEqual('I am description');
     expect(
       wrapper
-        .find(Typography)
+        .find('p')
         .last()
         .text()
     ).toEqual('I have no items');
 
     expect(
       wrapper
-        .find(Button)
+        .find('button.ui.blue.button')
         .first()
         .text()
     ).toEqual('CUSTOM ADD');
 
+    /**
+     * Add new item to field array
+     */
     await act(async () => {
       wrapper
-        .find(Button)
-        .first() // add buton
+        .find('button.ui.blue.button')
+        .first()
         .simulate('click');
     });
     wrapper.update();
-
     expect(
       wrapper
         .find(Button)
-        .at(1)
+        .at(3)
         .text()
     ).toEqual('CUSTOM REMOVE');
-    expect(wrapper.find(Typography)).toHaveLength(2);
+    expect(wrapper.find('p')).toHaveLength(0);
   });
 
   it('allow to add/remove named fields', async () => {
@@ -130,10 +134,13 @@ describe('<FieldArray/>', () => {
     expect(onSubmit).toHaveBeenCalledWith({});
     onSubmit.mockClear();
 
+    /**
+     * Add new item to the array
+     */
     await act(async () => {
       wrapper
-        .find(Button)
-        .first() // add buton
+        .find('button.ui.blue.button')
+        .first()
         .simulate('click');
     });
     wrapper.update();
@@ -149,11 +156,11 @@ describe('<FieldArray/>', () => {
 
     onSubmit.mockClear();
 
+    /**
+     * Click remove button
+     */
     await act(async () => {
-      wrapper
-        .find(Button)
-        .at(1) // remove button
-        .simulate('click');
+      wrapper.find('button.ui.red.basic.button').simulate('click');
     });
     wrapper.update();
 
@@ -198,10 +205,13 @@ describe('<FieldArray/>', () => {
     expect(onSubmit).toHaveBeenCalledWith({});
     onSubmit.mockClear();
 
+    /**
+     * Add new item to the array
+     */
     await act(async () => {
       wrapper
-        .find(Button)
-        .first() // add buton
+        .find('button.ui.blue.button')
+        .first()
         .simulate('click');
     });
     wrapper.update();
@@ -217,11 +227,11 @@ describe('<FieldArray/>', () => {
 
     onSubmit.mockClear();
 
+    /**
+     * Click remove button
+     */
     await act(async () => {
-      wrapper
-        .find(Button)
-        .at(1) // remove button
-        .simulate('click');
+      wrapper.find('button.ui.red.basic.button').simulate('click');
     });
     wrapper.update();
 
@@ -260,10 +270,13 @@ describe('<FieldArray/>', () => {
       wrapper = mount(<FormRenderer {...initialProps} />);
     });
 
+    /**
+     * Add new item to the array
+     */
     await act(async () => {
       wrapper
-        .find(Button)
-        .first() // add buton
+        .find('button.ui.blue.button')
+        .first()
         .simulate('click');
     });
     wrapper.update();
@@ -278,10 +291,13 @@ describe('<FieldArray/>', () => {
     });
     onSubmit.mockClear();
 
+    /**
+     * Add new item to the array
+     */
     await act(async () => {
       wrapper
-        .find(Button)
-        .first() // add buton
+        .find('button.ui.blue.button')
+        .first()
         .simulate('click');
     });
     wrapper.update();
@@ -296,10 +312,13 @@ describe('<FieldArray/>', () => {
     });
     onSubmit.mockClear();
 
+    /**
+     * Add new item to the array
+     */
     await act(async () => {
       wrapper
-        .find(Button)
-        .first() // add buton
+        .find('button.ui.blue.button')
+        .first()
         .simulate('click');
     });
     wrapper.update();
@@ -314,10 +333,13 @@ describe('<FieldArray/>', () => {
     });
     onSubmit.mockClear();
 
+    /**
+     * Click remove button
+     */
     await act(async () => {
       wrapper
-        .find(Button)
-        .at(1) // remove button
+        .find('button.ui.red.basic.button')
+        .first()
         .simulate('click');
     });
     wrapper.update();
@@ -332,10 +354,13 @@ describe('<FieldArray/>', () => {
     });
     onSubmit.mockClear();
 
+    /**
+     * Click remove button
+     */
     await act(async () => {
       wrapper
-        .find(Button)
-        .at(1) // remove button
+        .find('button.ui.red.basic.button')
+        .first()
         .simulate('click');
     });
     wrapper.update();
@@ -373,12 +398,15 @@ describe('<FieldArray/>', () => {
       wrapper = mount(<FormRenderer {...initialProps} />);
     });
 
-    expect(wrapper.find(FormHelperText)).toHaveLength(0);
+    expect(wrapper.find('.ddorg__suir__mapper__field-array-error')).toHaveLength(0);
 
+    /**
+     * Add new item to the array
+     */
     await act(async () => {
       wrapper
-        .find(Button)
-        .first() // add buton
+        .find('button.ui.blue.button')
+        .first()
         .simulate('click');
     });
     wrapper.update();
@@ -391,8 +419,8 @@ describe('<FieldArray/>', () => {
     expect(onSubmit).not.toHaveBeenCalled();
     onSubmit.mockClear();
 
-    expect(wrapper.find(FormHelperText)).toHaveLength(1);
-    expect(wrapper.find(FormHelperText).text()).toEqual('Must have at least 3 items.');
+    expect(wrapper.find('.ddorg__suir__mapper__field-array-error')).toHaveLength(1);
+    expect(wrapper.find('.ddorg__suir__mapper__field-array-error').text()).toEqual('Must have at least 3 items.');
   });
 
   it('allow to revert removal', async () => {
@@ -418,10 +446,13 @@ describe('<FieldArray/>', () => {
       wrapper = mount(<FormRenderer {...initialProps} />);
     });
 
+    /**
+     * Add new item to the array
+     */
     await act(async () => {
       wrapper
-        .find(Button)
-        .first() // add buton
+        .find('button.ui.blue.button')
+        .first()
         .simulate('click');
     });
     wrapper.update();
@@ -437,10 +468,13 @@ describe('<FieldArray/>', () => {
 
     onSubmit.mockClear();
 
+    /**
+     * Click remove button
+     */
     await act(async () => {
       wrapper
-        .find(Button)
-        .at(1) // remove button
+        .find('button.ui.red.basic.button')
+        .first()
         .simulate('click');
     });
     wrapper.update();
@@ -456,10 +490,13 @@ describe('<FieldArray/>', () => {
 
     onSubmit.mockClear();
 
+    /**
+     * Undo last action
+     */
     await act(async () => {
       wrapper
-        .find(IconButton)
-        .at(0) // undo button
+        .find('button.ddorg__suir__mapper__field-array-undo')
+        .at(0)
         .simulate('click');
     });
     wrapper.update();
@@ -475,10 +512,13 @@ describe('<FieldArray/>', () => {
 
     onSubmit.mockClear();
 
+    /**
+     * Redo last action
+     */
     await act(async () => {
       wrapper
-        .find(IconButton)
-        .at(1) // redo button
+        .find('button.ddorg__suir__mapper__field-array-redo')
+        .at(0)
         .simulate('click');
     });
     wrapper.update();
@@ -492,10 +532,13 @@ describe('<FieldArray/>', () => {
       nicePeople: []
     });
 
+    /**
+     * Undo last action
+     */
     await act(async () => {
       wrapper
-        .find(IconButton)
-        .at(0) // undo button
+        .find('button.ddorg__suir__mapper__field-array-undo')
+        .at(0)
         .simulate('click');
     });
     wrapper.update();
@@ -509,19 +552,22 @@ describe('<FieldArray/>', () => {
       nicePeople: [{ name: 'enter a name', lastName: 'enter a last name' }]
     });
 
+    /**
+     * Add new item to the array
+     */
     await act(async () => {
       wrapper
-        .find(Button)
-        .first() // add buton
+        .find('button.ui.blue.button')
+        .first()
         .simulate('click');
     });
     wrapper.update();
 
     expect(
       wrapper
-        .find(IconButton)
-        .at(1) // redo button
-        .props().disabled // 'add' action resets history
+        .find('button.ddorg__suir__mapper__field-array-redo')
+        .at(0) // redo button
+        .prop('disabled') // 'add' action resets history
     ).toEqual(true);
   });
 

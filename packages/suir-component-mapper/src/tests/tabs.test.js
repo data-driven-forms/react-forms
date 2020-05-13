@@ -5,6 +5,7 @@ import FormTabs from '../files/tabs';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 import FormRenderer, { validatorTypes } from '@data-driven-forms/react-form-renderer';
 import { componentMapper, FormTemplate } from '../index';
+import { Tab } from 'semantic-ui-react';
 
 describe('tabs', () => {
   const props = {
@@ -33,10 +34,8 @@ describe('tabs', () => {
       </RenderWithProvider>
     );
 
-    expect(wrapper.find(AppBar)).toHaveLength(1);
-    expect(wrapper.find(Tabs)).toHaveLength(1);
-    expect(wrapper.find(Tab)).toHaveLength(2);
-    expect(wrapper.find('h1')).toHaveLength(2);
+    expect(wrapper.find(Tab)).toHaveLength(1);
+    expect(wrapper.find(Tab.Pane)).toHaveLength(2);
   });
 
   it('should switch tabs correctly', () => {
@@ -48,32 +47,32 @@ describe('tabs', () => {
 
     expect(
       wrapper
-        .find(Tab)
+        .find(Tab.Pane)
         .first()
-        .props().selected
+        .prop('active')
     ).toEqual(true);
     expect(
       wrapper
-        .find(Tab)
+        .find(Tab.Pane)
         .last()
-        .props().selected
+        .prop('active')
     ).toEqual(false);
 
-    const secondTabButton = wrapper.find('button').last();
+    const secondTabButton = wrapper.find('a.item').last();
     secondTabButton.simulate('click');
     wrapper.update();
 
     expect(
       wrapper
-        .find(Tab)
+        .find(Tab.Pane)
         .first()
-        .props().selected
+        .prop('active')
     ).toEqual(false);
     expect(
       wrapper
-        .find(Tab)
+        .find(Tab.Pane)
         .last()
-        .props().selected
+        .prop('active')
     ).toEqual(true);
   });
 

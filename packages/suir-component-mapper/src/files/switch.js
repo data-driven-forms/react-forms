@@ -60,6 +60,7 @@ export const Switch = (props) => {
             toggle
             label={controlLabel || label}
             {...input}
+            disabled={isDisabled}
             onChange={(event, data) => input.onChange({ target: data })}
             {...rest}
           />

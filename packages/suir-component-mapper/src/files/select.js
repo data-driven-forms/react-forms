@@ -14,7 +14,7 @@ const SuirSelect = ({
   meta,
   helperText,
   validateOnMount,
-  isReadonly,
+  isReadOnly,
   isDisabled,
   isClearable,
   isSearchable,
@@ -48,7 +48,7 @@ const SuirSelect = ({
     <FormFieldGrid helperText={helperText}>
       <Form.Field
         disabled={isDisabled}
-        readOnly={isReadonly}
+        readonly={isReadOnly}
         required={isRequired}
         clearable={isClearable}
         search={isSearchable}
@@ -91,13 +91,19 @@ SuirSelect.propTypes = {
   isSearchable: PropTypes.bool,
   options: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.any.isRequired, label: PropTypes.node.isRequired })),
   description: PropTypes.node,
-  isReadonly: PropTypes.bool,
+  isReadOnly: PropTypes.bool,
   isDisabled: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.any,
   isMulti: PropTypes.bool,
   isClearable: PropTypes.bool,
-  noOptionsMessage: PropTypes.func
+  noOptionsMessage: PropTypes.func,
+  isRequired: PropTypes.bool,
+  classNamePrefix: PropTypes.string,
+  onInputChange: PropTypes.func,
+  isFetching: PropTypes.bool,
+  hideSelectedOptions: PropTypes.bool,
+  closeMenuOnSelect: PropTypes.bool
 };
 
 SuirSelect.defaultProps = {
