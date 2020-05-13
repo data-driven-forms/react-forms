@@ -94,7 +94,7 @@ SuirSelect.defaultProps = {
 
 const Select = (props) => {
   const { input, ...formProps } = useFieldApi(props);
-  return <CommonSelect simpleValue {...input} {...formProps} Component={SuirSelect} />;
+  return <CommonSelect simpleValue {...input} {...formProps} SelectComponent={SuirSelect} />;
 };
 
 export default Select;
