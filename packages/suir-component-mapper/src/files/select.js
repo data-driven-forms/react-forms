@@ -61,6 +61,7 @@ const SuirSelect = ({
         label={label}
         error={invalid && { content: meta.error }}
         control={Dropdown}
+        value={typeof value === 'object' ? value.value : value}
         {...rest}
       />
     </FormFieldGrid>

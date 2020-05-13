@@ -4,18 +4,7 @@ import Wizard from '@data-driven-forms/common/src/wizard/wizard';
 import WizardNav from './wizard/wizard-nav';
 import WizardStepButtons from './wizard/step-buttons';
 
-const WizardInternal = ({
-  ButtonContainerProps,
-  currentStep,
-  formOptions,
-  activeStepIndex,
-  prevSteps,
-  handleNext,
-  handlePrev,
-  buttonLabels,
-  stepsInfo,
-  onKeyDown
-}) => {
+const WizardInternal = ({ currentStep, formOptions, activeStepIndex, prevSteps, handleNext, handlePrev, buttonLabels, stepsInfo, onKeyDown }) => {
   const buttonLabelsFinal = {
     next: 'Continue',
     submit: 'Submit',
@@ -36,7 +25,6 @@ const WizardInternal = ({
           handleNext={handleNext}
           handlePrev={handlePrev}
           disableBack={prevSteps.length === 0}
-          ButtonContainerProps={ButtonContainerProps}
         />
       </div>
     </div>
@@ -65,15 +53,7 @@ WizardInternal.propTypes = {
       StepLabelProps: PropTypes.object,
       StepProps: PropTypes.object
     })
-  ),
-  ButtonContainerProps: PropTypes.object,
-  StepperProps: PropTypes.object,
-  WizardBodyProps: PropTypes.object,
-  WizardProps: PropTypes.object
-};
-
-WizardInternal.defaultProps = {
-  WizardBodyProps: {}
+  )
 };
 
 const MuiWizard = (props) => <Wizard Wizard={WizardInternal} {...props} />;

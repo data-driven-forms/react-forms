@@ -1,20 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Step, Icon } from 'semantic-ui-react';
 
-const WizardNav = ({ StepperProps, stepsInfo, activeStepIndex }) => {
+const WizardNav = ({ stepsInfo, activeStepIndex }) => {
   return (
-    <div {...StepperProps}>
-      {stepsInfo.map(({ title, label, StepLabelProps, StepProps }, idx) => (
-        <div {...StepProps} key={idx}>
-          <span {...StepLabelProps}>{title || label}</span>
-        </div>
+    <Step.Group>
+      {stepsInfo.map(({ title, description, icon }, idx) => (
+        <Step key={idx} active={activeStepIndex === idx}>
+          {icon && <Icon name={icon} />}
+          <Step.Content>
+            <Step.Title>{title}</Step.Title>
+            {description && <Step.Description>{description}</Step.Description>}
+          </Step.Content>
+        </Step>
       ))}
-    </div>
+    </Step.Group>
   );
 };
 
 WizardNav.propTypes = {
-  StepperProps: PropTypes.object,
   stepsInfo: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.node,
@@ -24,10 +28,6 @@ WizardNav.propTypes = {
     })
   ),
   activeStepIndex: PropTypes.number
-};
-
-WizardNav.defaultProps = {
-  StepperProps: {}
 };
 
 export default WizardNav;
