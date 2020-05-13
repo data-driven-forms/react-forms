@@ -31,6 +31,19 @@ const SuirSelect = ({
   ...rest
 }) => {
   const invalid = validationError(meta, validateOnMount);
+  let internalValue = value;
+  if (isMulti && Array.isArray(internalValue)) {
+    internalValue = value.map((item) => (typeof item === 'object' ? item.value : item));
+  }
+
+  if (!isMulti && Array.isArray(internalValue) && internalValue[0]) {
+    internalValue = typeof internalValue[0] === 'object' ? internalValue[0].value : internalValue[0];
+  }
+
+  if (!isMulti && Array.isArray(internalValue) && !internalValue[0]) {
+    internalValue = undefined;
+  }
+
   return (
     <FormFieldGrid helperText={helperText}>
       <Form.Field
@@ -61,7 +74,7 @@ const SuirSelect = ({
         label={label}
         error={invalid && { content: meta.error }}
         control={Dropdown}
-        value={typeof value === 'object' ? value.value : value}
+        value={internalValue}
         {...rest}
       />
     </FormFieldGrid>
