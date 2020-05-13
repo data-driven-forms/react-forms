@@ -23,6 +23,7 @@ import { muiCode, muiWizardCode, muiHtml, muiDependencies } from '../stackblitz-
 import { pf4Code, pf4WizardCode, pf4Html, pf4Dependencies } from '../stackblitz-templates/pf4-templates';
 import { pf3Code, pf3WizardCode, pf3Html, pf3Dependencies } from '../stackblitz-templates/pf3-templates';
 import { blueprintCode, blueprintWizardCode, blueprintHtml, blueprintDependencies } from '../stackblitz-templates/blueprint-templates';
+import { suirCode, suirWizardCode, suirHtml, suirDependencies } from '../stackblitz-templates/suir-template';
 
 const project = {
   settings: {
@@ -114,6 +115,10 @@ const blitzFiles = {
   blueprint: {
     'index.html': blueprintHtml,
     'index.js': blueprintCode
+  },
+  suir: {
+    'index.html': suirHtml,
+    'index.js': suirCode
   }
 };
 
@@ -121,26 +126,37 @@ const blitzWizards = {
   mui: muiWizardCode,
   pf4: pf4WizardCode,
   pf3: pf3WizardCode,
-  blueprint: blueprintWizardCode
+  blueprint: blueprintWizardCode,
+  suir: suirWizardCode
 };
 
 const blitzDependencies = {
   mui: muiDependencies,
   pf4: pf4Dependencies,
   pf3: pf3Dependencies,
-  blueprint: blueprintDependencies
+  blueprint: blueprintDependencies,
+  suir: suirDependencies
 };
 
 const mapperTab = {
   mui: 0,
   pf4: 1,
   pf3: 2,
-  blueprint: 3
+  blueprint: 3,
+  suir: 4
 };
+
+const tabs = [
+  { title: 'MUI', mapper: 'mui' },
+  { title: 'PF4', mapper: 'pf4' },
+  { title: 'PF3', mapper: 'pf3' },
+  { title: 'BJS', mapper: 'blueprint' },
+  { title: 'SUIR', mapper: 'suir' }
+];
 
 const ComponentExample = ({ baseStructure, activeMapper, component }) => {
   const activeTab = mapperTab[activeMapper];
-  const router = useRouter();
+  const { pathname, push } = useRouter();
   const classes = useStyles();
   useEffect(() => {
     sdk.embedProject(
@@ -158,56 +174,23 @@ const ComponentExample = ({ baseStructure, activeMapper, component }) => {
     );
   }, [activeMapper, baseStructure.value]);
 
-  const renderTabsChildren = () => [
-    <Tab
-      key="mui"
-      onClick={() => router.push(`${router.pathname}?mapper=mui`)}
-      className={clsx(classes.tab, { active: activeTab === 0 })}
-      label={
-        <Link href={`${router.pathname}?mapper=mui`}>
-          <a href={`${router.pathname}?mapper=mui`} className={classes.tabLink}>
-            Mui
-          </a>
-        </Link>
-      }
-    />,
-    <Tab
-      key="pf4"
-      onClick={() => router.push(`${router.pathname}?mapper=pf4`)}
-      className={clsx(classes.tab, { active: activeTab === 1 })}
-      label={
-        <Link href={`${router.pathname}?mapper=pf4`}>
-          <a href={`${router.pathname}?mapper=pf4`} className={classes.tabLink}>
-            Pf4
-          </a>
-        </Link>
-      }
-    />,
-    <Tab
-      key="pf3"
-      onClick={() => router.push(`${router.pathname}?mapper=pf3`)}
-      className={clsx(classes.tab, { active: activeTab === 2 })}
-      label={
-        <Link href={`${router.pathname}?mapper=pf3`}>
-          <a href={`${router.pathname}?mapper=pf3`} className={classes.tabLink}>
-            Pf3
-          </a>
-        </Link>
-      }
-    />,
-    <Tab
-      key="blueprint"
-      onClick={() => router.push(`${router.pathname}?mapper=blueprint`)}
-      className={clsx(classes.tab, { active: activeTab === 3 })}
-      label={
-        <Link href={`${router.pathname}?mapper=blueprint`}>
-          <a href={`${router.pathname}?mapper=blueprint`} className={classes.tabLink}>
-            Bjs
-          </a>
-        </Link>
-      }
-    />
-  ];
+  const renderMapperTabs = () =>
+    tabs.map(({ title, mapper }, index) => (
+      <Tab
+        key={mapper}
+        value={index}
+        onClick={() => push(`${pathname}?mapper=${mapper}`)}
+        className={clsx(classes.tab, { active: activeMapper === mapper })}
+        label={
+          <Link href={`${pathname}?mapper=${mapper}`}>
+            <a href={`${pathname}?mapper=${mapper}`} className={classes.tabLink}>
+              {title}
+            </a>
+          </Link>
+        }
+      />
+    ));
+
   return (
     <Box display="flex" className={classes.box}>
       <Card style={{ minHeight: 500 }} square>
@@ -243,7 +226,7 @@ const ComponentExample = ({ baseStructure, activeMapper, component }) => {
               indicator: classes.indicator
             }}
           >
-            {renderTabsChildren()}
+            {renderMapperTabs()}
           </Tabs>
         </div>
         <div className={classes.smTabUp}>
@@ -255,7 +238,7 @@ const ComponentExample = ({ baseStructure, activeMapper, component }) => {
               indicator: classes.indicator
             }}
           >
-            {renderTabsChildren()}
+            {renderMapperTabs()}
           </Tabs>
         </div>
         <div className={classes.spinnerCheat}>
