@@ -1,7 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useReducer } from 'react';
-import ReactSelect from 'react-select';
-import CreatableSelect from 'react-select/creatable';
 
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -20,10 +18,6 @@ const handleSelectChange = (option, simpleValue, isMulti, onChange) => {
     : onChange(sanitizedOption);
 };
 
-const selectProvider = {
-  createable: CreatableSelect
-};
-
 const Select = ({
   invalid,
   classNamePrefix,
@@ -40,7 +34,7 @@ const Select = ({
   value,
   onChange,
   loadOptionsChangeCounter,
-  Component,
+  SelectComponent,
   ...props
 }) => {
   const [state, dispatch] = useReducer(reducer, {
@@ -97,13 +91,11 @@ const Select = ({
     }
   }, [propsOptions]);
 
-  const SelectFinal = Component || selectProvider[selectVariant] || ReactSelect;
-
   const renderNoOptionsMessage = () => (Object.values(state.promises).some((value) => value) ? () => updatingMessage : () => noOptionsMessage);
 
   if (state.isLoading) {
     return (
-      <SelectFinal
+      <SelectComponent
         {...props}
         classNamePrefix={classNamePrefix}
         isDisabled={true}
@@ -140,7 +132,7 @@ const Select = ({
   const selectValue = pluckSingleValue ? (isMulti ? value : Array.isArray(value) && value[0] ? value[0] : value) : value;
 
   return (
-    <SelectFinal
+    <SelectComponent
       className={clsx(classNamePrefix, {
         'has-error': invalid
       })}
@@ -180,7 +172,7 @@ Select.propTypes = {
   updatingMessage: PropTypes.node,
   noOptionsMessage: PropTypes.node,
   isSearchable: PropTypes.bool,
-  Component: PropTypes.any
+  SelectComponent: PropTypes.elementType.isRequired
 };
 
 Select.defaultProps = {

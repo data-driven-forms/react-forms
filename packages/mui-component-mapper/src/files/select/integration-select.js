@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import Select from '@data-driven-forms/common/src/select';
+import ReactSelect from 'react-select';
 import { emphasize, makeStyles, useTheme } from '@material-ui/core/styles';
 import { Typography, NoSsr, TextField, Paper, Chip, MenuItem, FormControl, FormHelperText, FormLabel } from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -312,7 +313,15 @@ function IntegrationReactSelect(props) {
     <FormControl required={rest.isRequired} error={!!invalid} component="fieldset" className={classes.root}>
       <FormLabel>{rest.label}</FormLabel>
       <NoSsr>
-        <Select classes={classes} styles={selectStyles} components={components} error={!!invalid} {...rest} isDisabled={!!rest.isDisabled} />
+        <Select
+          SelectComponent={ReactSelect}
+          classes={classes}
+          styles={selectStyles}
+          components={components}
+          error={!!invalid}
+          {...rest}
+          isDisabled={!!rest.isDisabled}
+        />
       </NoSsr>
       {(invalid || rest.helperText || rest.description) && <FormHelperText>{invalid || rest.helperText || rest.description}</FormHelperText>}
     </FormControl>

@@ -49,6 +49,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
   updatingMessage="Loading data"
 >
   <Select
+    SelectComponent={[Function]}
     className="pf3-select"
     classNamePrefix="pf3-select"
     components={
