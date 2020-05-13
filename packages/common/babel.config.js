@@ -34,11 +34,36 @@ const pascalToKebabCase = (name) =>
     .replace(/([A-Z])/, '-$1')
     .toLowerCase();
 
+const createSuirCJSTransform = (env = 'commonjs') => [
+  'transform-imports',
+  {
+    'semantic-ui-react': {
+      transform: (importName) => {
+        let res;
+        const files = glob.sync(path.resolve(__dirname, `../../node_modules/semantic-ui-react/dist/${env}/**/${importName}.js`));
+        if (files.length > 0) {
+          res = files[0];
+        } else {
+          throw new Error(`File with importName ${importName} does not exist`);
+        }
+
+        res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
+        res = res.replace(/^\//, '');
+        return res;
+      },
+      preventFullImport: false,
+      skipDefaultConversion: false
+    }
+  },
+  `semantic-ui-react-${env}`
+];
+
 module.exports = {
   extends: '../../babel.config.js',
   env: {
     cjs: {
       plugins: [
+        createSuirCJSTransform('commonjs'),
         [
           'transform-imports',
           {
@@ -129,6 +154,7 @@ module.exports = {
     },
     esm: {
       plugins: [
+        createSuirCJSTransform('es'),
         [
           'transform-imports',
           {

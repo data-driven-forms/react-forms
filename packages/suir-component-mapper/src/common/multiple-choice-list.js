@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from 'react';
 import PropTypes from 'prop-types';
 import MultipleChoiceListCommon, { wrapperProps } from '@data-driven-forms/common/src/multiple-choice-list';
-import { Form, Header, FormField } from 'semantic-ui-react';
+import { FormCheckbox, Header, FormField } from 'semantic-ui-react';
 import { createUseStyles } from 'react-jss';
 import clsx from 'clsx';
 
@@ -35,7 +35,7 @@ const FinalCheckbox = ({ label, isDisabled: _isDisabled, ...rest }) => {
   const {
     props: { isRequired, isReadOnly, helperText, validate, isDisabled, meta, ...props }
   } = useContext(CheckboxContext);
-  return <Form.Checkbox {...rest} {...props} disabled={isDisabled} label={label} />;
+  return <FormCheckbox {...rest} {...props} disabled={isDisabled} label={label} />;
 };
 
 FinalCheckbox.propTypes = {

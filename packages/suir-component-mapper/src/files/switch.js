@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
-import { Form } from 'semantic-ui-react';
+import { FormCheckbox } from 'semantic-ui-react';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormFieldGrid from '../common/form-field-grid';
 import { createUseStyles } from 'react-jss';
@@ -53,7 +53,7 @@ export const Switch = (props) => {
         className={clsx(classes.root, className)}
         error={invalid && { content: meta.error, pointing: 'left' }}
         label={
-          <Form.Checkbox
+          <FormCheckbox
             className={clsx({
               [classes.errorLabel]: isRequired
             })}

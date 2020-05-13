@@ -5,7 +5,7 @@ import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
 import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
-import { Form } from 'semantic-ui-react';
+import FormField from '../common/form-field';
 
 const DatePicker = (props) => {
   const { input, isReadOnly, isDisabled, placeholder, isRequired, label, helperText, validateOnMount, meta } = useFieldApi(props);
@@ -13,7 +13,7 @@ const DatePicker = (props) => {
 
   return (
     <FormFieldGrid helperText={helperText}>
-      <Form.Field
+      <FormField
         label={label}
         {...input}
         type="date"

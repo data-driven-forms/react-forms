@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Tab } from 'semantic-ui-react';
+import { Tab, TabPane } from 'semantic-ui-react';
 
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
@@ -18,9 +18,9 @@ const FormTabs = ({ fields }) => {
   const panes = fields.map((field, index) => ({
     menuItem: field.title,
     pane: (
-      <Tab.Pane key={index}>
+      <TabPane key={index}>
         <TabContent {...field} formOptions={formOptions} />
-      </Tab.Pane>
+      </TabPane>
     )
   }));
   return <Tab renderActiveOnly={false} panes={panes} />;
