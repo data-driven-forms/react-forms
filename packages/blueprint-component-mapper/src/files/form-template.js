@@ -5,6 +5,8 @@ import FormTemplate from '@data-driven-forms/common/src/form-template';
 import { Button, H1, H2 } from '@blueprintjs/core';
 import BlueprintContext from './blueprint-context';
 
+import './form-template.scss';
+
 const Form = ({ children, ...props }) => (
   <form {...props} style={{ display: 'grid' }}>
     {children}
@@ -15,7 +17,11 @@ Form.propTypes = {
   children: PropTypes.node
 };
 
-const ButtonGroup = ({ children, ...props }) => <div {...props}>{children}</div>;
+const ButtonGroup = ({ children, ...props }) => (
+  <div className="ddorg__blueprint_mapper--button-group" {...props}>
+    {children}
+  </div>
+);
 
 ButtonGroup.propTypes = {
   children: PropTypes.node
