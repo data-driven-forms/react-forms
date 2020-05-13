@@ -8,7 +8,7 @@ import BlueprintContext from './blueprint-context';
 import './form-template.scss';
 
 const Form = ({ children, ...props }) => (
-  <form {...props} style={{ display: 'grid' }}>
+  <form noValidate {...props} style={{ display: 'grid' }}>
     {children}
   </form>
 );

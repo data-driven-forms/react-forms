@@ -8,7 +8,7 @@ import propsCatcher from '../common/props-catcher';
 
 const Switch = ({ input, isRequired, label, onText, offText, providerRequired, ...props }) => (
   <BSwitch
-    label={input.checked ? onText || label : offText || label}
+    label={(input.checked ? onText : offText) || label}
     {...propsCatcher(props)}
     {...(isRequired && {
       label: (
