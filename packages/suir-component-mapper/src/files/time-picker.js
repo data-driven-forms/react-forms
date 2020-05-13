@@ -5,17 +5,29 @@ import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
 import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+import FormField from '../common/form-field';
+import { Form } from 'semantic-ui-react';
 
 const TimePicker = (props) => {
-  const { input, isReadOnly, isDisabled, placeholder, isRequired, label, helperText, description, validateOnMount, meta, ...rest } = useFieldApi(
-    props
-  );
+  const { input, isReadOnly, isDisabled, isRequired, helperText, validateOnMount, meta, ...rest } = useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
 
   return (
-    <FormFieldGrid>
-      <label htmlFor={input.name}>{label}</label>
-      <input type="time" {...input} />
+    <FormFieldGrid helperText={helperText}>
+      <FormField
+        required={isRequired}
+        readOnly={isReadOnly}
+        disabled={isDisabled}
+        error={
+          invalid && {
+            content: meta.error
+          }
+        }
+        control={Form.Input}
+        {...input}
+        {...rest}
+        type="time"
+      />
     </FormFieldGrid>
   );
 };

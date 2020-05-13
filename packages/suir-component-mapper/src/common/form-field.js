@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Form } from 'semantic-ui-react';
 import clsx from 'clsx';
 import { createUseStyles } from 'react-jss';
@@ -15,8 +14,6 @@ const FormField = ({ className, ...props }) => {
   return <Form.Field className={clsx(classes.root, className)} {...props} />;
 };
 
-FormField.propTypes = {
-  className: PropTypes.string
-};
+FormField.propTypes = Form.Field.propTypes;
 
 export default FormField;
