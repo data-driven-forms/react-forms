@@ -1,18 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
+import { createUseStyles } from 'react-jss';
 
 import selectNext from '@data-driven-forms/common/src/wizard/select-next';
 import { FormSpy } from '@data-driven-forms/react-form-renderer';
 import { Button } from 'semantic-ui-react';
 
+const useStyles = createUseStyles({
+  root: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  }
+});
+
 const NextButton = ({ nextStep, valid, handleNext, nextLabel, getState, handleSubmit, submitLabel }) => (
   <Button
+    icon={nextStep ? 'right arrow' : undefined}
+    color="blue"
+    labelPosition={nextStep ? 'right' : undefined}
+    content={nextStep ? nextLabel : submitLabel}
     disabled={!valid || getState().validating || getState().submitting}
     onClick={() => (nextStep ? handleNext(selectNext(nextStep, getState)) : handleSubmit())}
-  >
-    {nextStep ? nextLabel : submitLabel}
-  </Button>
+    type="button"
+  />
 );
 
 NextButton.propTypes = {
@@ -26,6 +36,7 @@ NextButton.propTypes = {
 };
 
 const WizardStepButtons = ({ buttons: Buttons, ...props }) => {
+  const classes = useStyles();
   if (Buttons) {
     return <Buttons {...props} />;
   }
@@ -36,33 +47,27 @@ const WizardStepButtons = ({ buttons: Buttons, ...props }) => {
     nextStep,
     handleNext,
     buttonLabels: { cancel, submit, back, next },
-    formOptions,
-    ButtonContainerProps
+    formOptions
   } = props;
 
   return (
-    <div container direction="row" justify="space-evenly" {...ButtonContainerProps}>
-      <FormSpy subscription={{ valid: true, validating: true, submitting: true }}>
-        {() => (
-          <React.Fragment>
-            <div>
-              <Button onClick={formOptions.onCancel}>{cancel}</Button>
-            </div>
-            <div>
-              <Button disabled={disableBack} onClick={handlePrev}>
-                {back}
-              </Button>
-              <NextButton {...formOptions} handleNext={handleNext} nextStep={nextStep} nextLabel={next} submitLabel={submit} />
-            </div>
-          </React.Fragment>
-        )}
-      </FormSpy>
-    </div>
+    <FormSpy subscription={{ valid: true, validating: true, submitting: true }}>
+      {() => (
+        <div className={classes.root}>
+          <Button type="button" onClick={formOptions.onCancel}>
+            {cancel}
+          </Button>
+          <div>
+            <Button icon="left arrow" labelPosition="left" content={back} type="button" disabled={disableBack} onClick={handlePrev} />
+            <NextButton {...formOptions} handleNext={handleNext} nextStep={nextStep} nextLabel={next} submitLabel={submit} />
+          </div>
+        </div>
+      )}
+    </FormSpy>
   );
 };
 
 WizardStepButtons.propTypes = {
-  ButtonContainerProps: PropTypes.object,
   disableBack: PropTypes.bool,
   handlePrev: PropTypes.func.isRequired,
   handleNext: PropTypes.func.isRequired,
@@ -85,10 +90,6 @@ WizardStepButtons.propTypes = {
     getState: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired
   })
-};
-
-WizardStepButtons.defaultProps = {
-  ButtonContainerProps: {}
 };
 
 export default WizardStepButtons;
