@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form } from 'semantic-ui-react';
+import { FormTextArea } from 'semantic-ui-react';
 
 import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
@@ -19,7 +19,7 @@ const Textarea = (props) => {
         readOnly={isReadOnly}
         {...input}
         error={invalid && { content: meta.error }}
-        control={Form.TextArea}
+        control={FormTextArea}
         {...rest}
       />
     </FormFieldGrid>

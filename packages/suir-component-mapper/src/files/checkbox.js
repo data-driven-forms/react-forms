@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form } from 'semantic-ui-react';
+import { FormCheckbox } from 'semantic-ui-react';
 import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
 
 import FormFieldGrid from '../common/form-field-grid';
@@ -17,7 +17,7 @@ export const SingleCheckbox = (props) => {
 
   return (
     <FormFieldGrid helperText={helperText}>
-      <Form.Checkbox
+      <FormCheckbox
         {...input}
         required={isRequired}
         onChange={(_event, data) => {

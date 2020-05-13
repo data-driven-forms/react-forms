@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from 'semantic-ui-react';
+import { FormField as SuirFormField } from 'semantic-ui-react';
 import clsx from 'clsx';
 import { createUseStyles } from 'react-jss';
 
@@ -11,9 +11,9 @@ const useStyles = createUseStyles({
 
 const FormField = ({ className, ...props }) => {
   const classes = useStyles();
-  return <Form.Field className={clsx(classes.root, className)} {...props} />;
+  return <SuirFormField className={clsx(classes.root, className)} {...props} />;
 };
 
-FormField.propTypes = Form.Field.propTypes;
+FormField.propTypes = SuirFormField.propTypes;
 
 export default FormField;

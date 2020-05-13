@@ -2,12 +2,13 @@ import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { useFormApi, FieldArray } from '@data-driven-forms/react-form-renderer';
 
-import { Button, Icon, Header, Form } from 'semantic-ui-react';
+import { Button, Icon, Header, ButtonGroup, ButtonContent } from 'semantic-ui-react';
 
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 import { createUseStyles } from 'react-jss';
 import clsx from 'clsx';
+import FormField from '../common/form-field';
 
 const useStyles = createUseStyles({
   buttonGroup: {
@@ -137,118 +138,114 @@ const DynamicArray = ({ ...props }) => {
   const isError = (dirty || submitFailed) && error && typeof error === 'string';
 
   return (
-    <div>
-      <div>
-        <FieldArray key={rest.input.name} name={rest.input.name} validate={arrayValidator}>
-          {({ fields: { map, value = [], push, remove } }) => {
-            const pushWrapper = () => {
-              dispatch({ type: 'resetHistory' });
-              push(defaultItem);
-            };
+    <FieldArray key={rest.input.name} name={rest.input.name} validate={arrayValidator}>
+      {({ fields: { map, value = [], push, remove } }) => {
+        const pushWrapper = () => {
+          dispatch({ type: 'resetHistory' });
+          push(defaultItem);
+        };
 
-            const removeWrapper = (index) => {
-              dispatch({ type: 'action', action: { action: 'remove', value: value[index] } });
-              remove(index);
-            };
+        const removeWrapper = (index) => {
+          dispatch({ type: 'action', action: { action: 'remove', value: value[index] } });
+          remove(index);
+        };
 
-            const undo = () => {
-              push(state.history[state.index - 1].value);
-              dispatch({ type: 'undo' });
-            };
+        const undo = () => {
+          push(state.history[state.index - 1].value);
+          dispatch({ type: 'undo' });
+        };
 
-            const redo = () => {
-              remove(value.length - 1);
-              dispatch({ type: 'redo' });
-            };
+        const redo = () => {
+          remove(value.length - 1);
+          dispatch({ type: 'redo' });
+        };
 
-            return (
-              <div>
-                <div className={classes.arrayHeader}>
-                  {label && (
-                    <Form.Field
-                      className={classes.noMargin}
-                      error={
-                        isError && {
-                          content: error,
-                          color: 'red',
-                          pointing: 'left'
-                        }
-                      }
-                      control={() => (
-                        <Header
-                          floated="left"
-                          className={clsx(classes.noMargin, {
-                            [classes.error]: isError
-                          })}
-                          size="large"
-                        >
-                          {label}
-                        </Header>
-                      )}
-                    />
+        return (
+          <div>
+            <div className={classes.arrayHeader}>
+              {label && (
+                <FormField
+                  className={classes.noMargin}
+                  error={
+                    isError && {
+                      content: error,
+                      color: 'red',
+                      pointing: 'left'
+                    }
+                  }
+                  control={() => (
+                    <Header
+                      floated="left"
+                      className={clsx(classes.noMargin, {
+                        [classes.error]: isError
+                      })}
+                      size="large"
+                    >
+                      {label}
+                    </Header>
                   )}
-                  <div className={classes.buttonGroup}>
-                    <Button.Group>
-                      <Button className="ddorg__suir__mapper__field-array-undo" type="button" disabled={state.index === 0} onClick={undo}>
-                        <Button.Content>
-                          <Icon name="undo" />
-                        </Button.Content>
-                      </Button>
-                      <Button
-                        className="ddorg__suir__mapper__field-array-redo"
-                        type="button"
-                        disabled={state.index === state.history.length}
-                        onClick={redo}
-                      >
-                        <Button.Content>
-                          <Icon name="redo" />
-                        </Button.Content>
-                      </Button>
-                      <Button
-                        type="button"
-                        content={combinedButtonLabels.add}
-                        icon="add"
-                        color="blue"
-                        onClick={pushWrapper}
-                        disabled={value.length >= maxItems}
-                      />
-                    </Button.Group>
-                  </div>
-                </div>
-                {description && (
-                  <Header className={classes.noMargin} sub>
-                    {description}
-                  </Header>
-                )}
-                <div className={classes.arrayItems}>
-                  {value.length <= 0 ? (
-                    <p className={classes.noItems}>{noItemsMessage}</p>
-                  ) : (
-                    map((name, index) => (
-                      <ArrayItem
-                        key={name}
-                        fields={formFields}
-                        name={name}
-                        fieldIndex={index}
-                        remove={removeWrapper}
-                        length={value.length}
-                        minItems={minItems}
-                        removeLabel={combinedButtonLabels.remove}
-                      />
-                    ))
-                  )}
-                </div>
-                {isError && (
-                  <div className="ddorg__suir__mapper__field-array-error">
-                    <p>{error}</p>
-                  </div>
-                )}
+                />
+              )}
+              <div className={classes.buttonGroup}>
+                <ButtonGroup>
+                  <Button className="ddorg__suir__mapper__field-array-undo" type="button" disabled={state.index === 0} onClick={undo}>
+                    <ButtonContent>
+                      <Icon name="undo" />
+                    </ButtonContent>
+                  </Button>
+                  <Button
+                    className="ddorg__suir__mapper__field-array-redo"
+                    type="button"
+                    disabled={state.index === state.history.length}
+                    onClick={redo}
+                  >
+                    <ButtonContent>
+                      <Icon name="redo" />
+                    </ButtonContent>
+                  </Button>
+                  <Button
+                    type="button"
+                    content={combinedButtonLabels.add}
+                    icon="add"
+                    color="blue"
+                    onClick={pushWrapper}
+                    disabled={value.length >= maxItems}
+                  />
+                </ButtonGroup>
               </div>
-            );
-          }}
-        </FieldArray>
-      </div>
-    </div>
+            </div>
+            {description && (
+              <Header className={classes.noMargin} sub>
+                {description}
+              </Header>
+            )}
+            <div className={classes.arrayItems}>
+              {value.length <= 0 ? (
+                <p className={classes.noItems}>{noItemsMessage}</p>
+              ) : (
+                map((name, index) => (
+                  <ArrayItem
+                    key={name}
+                    fields={formFields}
+                    name={name}
+                    fieldIndex={index}
+                    remove={removeWrapper}
+                    length={value.length}
+                    minItems={minItems}
+                    removeLabel={combinedButtonLabels.remove}
+                  />
+                ))
+              )}
+            </div>
+            {isError && (
+              <div className="ddorg__suir__mapper__field-array-error">
+                <p>{error}</p>
+              </div>
+            )}
+          </div>
+        );
+      }}
+    </FieldArray>
   );
 };
 

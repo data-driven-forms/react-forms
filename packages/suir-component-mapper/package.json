@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/suir-component-mapper",
-  "version": "0.0.5",
+  "version": "0.0.1-beta-1",
   "description": "Component mapper for Semantic ui react for data-driven-forms.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -65,7 +65,6 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "clsx": "^1.0.4",
-    "react-jss": "^10.1.1",
-    "react-select": "^2.2.0"
+    "react-jss": "^10.1.1"
   }
 }

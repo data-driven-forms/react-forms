@@ -6,7 +6,8 @@ import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
 import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
-import { Dropdown, Form } from 'semantic-ui-react';
+import { Dropdown } from 'semantic-ui-react';
+import FormField from '../common/form-field';
 
 const SuirSelect = ({
   onChange,
@@ -46,7 +47,7 @@ const SuirSelect = ({
 
   return (
     <FormFieldGrid helperText={helperText}>
-      <Form.Field
+      <FormField
         disabled={isDisabled}
         readonly={isReadOnly}
         required={isRequired}
