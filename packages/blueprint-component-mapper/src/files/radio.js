@@ -30,18 +30,6 @@ Radio.propTypes = {
   providerRequired: PropTypes.node
 };
 
-const WrapperRadio = (props) => (
-  <FormGroupWrapper
-    {...props}
-    options={props.options.map((option) => ({ ...option, value: String(option.value) }))}
-    hideLabel
-    Component={Radio}
-    component="not-radio"
-  />
-);
-
-WrapperRadio.propTypes = {
-  options: PropTypes.array
-};
+const WrapperRadio = (props) => <FormGroupWrapper {...props} hideLabel Component={Radio} component="not-radio" />;
 
 export default WrapperRadio;

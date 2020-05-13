@@ -52,10 +52,33 @@ const FormTemplateWrapper = (props) => (
 ) // Czech translation
 ```
 
-This content is accessible via 
+This content is accessible via
 
 ```jsx
 import BlueprintContext from '@data-driven-forms/blueprint-component-mapper/dist/cjs/blueprint-context';
+```
+
+## Custom FormTemplates
+
+If you are using a custom FormTemplate, wrap it in the `BlueprintContext` to provide the required label.
+
+```jsx
+import BlueprintContext from '@data-driven-forms/blueprint-component-mapper/dist/cjs/blueprint-context';
+
+const FormTemplate = ({ formFields }) => {
+    const { handleSubmit } = useFormApi();
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <BlueprintContext.Provider
+                value={{ required: { <span className="bp3-text-muted">(required)</span> }}}
+            >
+                {formFields}
+            </BlueprintContext.Provider>
+            <Buttons />
+        <form>
+    )
+}
 ```
 
 ## Contribution

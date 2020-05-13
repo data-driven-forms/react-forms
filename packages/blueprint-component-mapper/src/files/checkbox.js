@@ -8,7 +8,7 @@ import FormGroupWrapper from './form-group';
 import propsCatcher from '../common/props-catcher';
 import BlueprintContext from './blueprint-context';
 
-const SingleCheckbox = ({ input, isDisabled, label, providerRequired, ...props }) => (
+const SingleCheckbox = ({ input, isDisabled, disabled, label, providerRequired, ...props }) => (
   <Checkbox
     label={label}
     {...propsCatcher(props)}
@@ -19,7 +19,7 @@ const SingleCheckbox = ({ input, isDisabled, label, providerRequired, ...props }
         </span>
       )
     })}
-    {...(isDisabled && { disabled: true })}
+    disabled={disabled || isDisabled}
     {...input}
   />
 );
@@ -29,7 +29,8 @@ SingleCheckbox.propTypes = {
   isDisabled: PropTypes.bool,
   label: PropTypes.node,
   isRequired: PropTypes.bool,
-  providerRequired: PropTypes.node
+  providerRequired: PropTypes.node,
+  disabled: PropTypes.bool
 };
 
 const Wrapper = ({ children, isRequired, showError, error, validateOnMount, ...props }) => {
