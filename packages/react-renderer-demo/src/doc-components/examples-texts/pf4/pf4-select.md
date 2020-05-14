@@ -15,6 +15,7 @@ PF4 Select allows to load the options asynchronously.
 |loadOptions|`func`|A function returning `Promise`: `(searchValue) => new Promise`|
 |loadingMessage|`node`|A message shown during the initial loading.|
 |updatingMessage|`node`|A message shown during the loading|
+|noValueUpdates|`bool`|When set on true, the select won't deselect values not found in options.|
 
 **loadOptions example**
 
