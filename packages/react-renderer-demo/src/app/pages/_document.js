@@ -7,14 +7,14 @@ class MyDocument extends Document {
   render() {
     return (
       <html lang="en">
-        <Head crossOrigin="anonymous">
+        <Head>
           <meta charSet="utf-8" />
           <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
           <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
           <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" />
-          <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
           <link rel="stylesheet" type="text/css" href="//wpcc.io/lib/1.0.2/cookieconsent.min.css" />
           <script src="//wpcc.io/lib/1.0.2/cookieconsent.min.js"></script>
           <style
@@ -46,7 +46,7 @@ class MyDocument extends Document {
         </Head>
         <body>
           <Main />
-          <NextScript crossOrigin="anonymous" />
+          <NextScript />
           <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164334905-1"></script>
           <script
             dangerouslySetInnerHTML={{
