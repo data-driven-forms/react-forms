@@ -22,6 +22,10 @@ const ComponentExampleText = ({ component, activeMapper, baseStructure }) => {
         <Heading level="5" component="h2">{`PF4 ${baseStructure.linkText}`}</Heading>
         <baseStructure.ContentText activeMapper={'pf4'} component={component} />
       </div>
+      <div hidden={activeMapper !== 'blueprint'}>
+        <Heading level="5" component="h2">{`Blueprint ${baseStructure.linkText}`}</Heading>
+        <baseStructure.ContentText activeMapper={'blueprint'} component={component} />
+      </div>
     </React.Fragment>
   );
 };

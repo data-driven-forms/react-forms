@@ -1,5 +1,6 @@
 import { baseExamples } from './examples-definitions';
 import { docs } from './documentation-pages';
+import { mappers } from './mappers';
 import flatMap from 'lodash/flatMap';
 
 const schema = [
@@ -11,13 +12,19 @@ const schema = [
     title: 'React form renderer',
     link: 'renderer',
     noRoute: true,
-    fields: [...docs]
+    fields: docs
   },
   {
     title: 'Component definitions',
     link: 'component-example',
     noRoute: true,
-    fields: [...baseExamples.sort((a, b) => a.linkText.localeCompare(b.linkText))]
+    fields: baseExamples.sort((a, b) => a.linkText.localeCompare(b.linkText))
+  },
+  {
+    title: 'Mappers',
+    link: 'mappers',
+    noRoute: true,
+    fields: mappers
   },
   {
     linkText: 'Testing',

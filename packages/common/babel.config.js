@@ -9,6 +9,31 @@ const mapper = {
   TextListItemVariants: 'TextListItem'
 };
 
+const blueprintMapper = {
+  Checkbox: 'components/forms/controls',
+  FormGroup: 'components/forms/formGroup',
+  Intent: 'common/intent',
+  Button: 'components/button/buttons',
+  H1: 'components/html/html',
+  H2: 'components/html/html',
+  H3: 'components/html/html',
+  H4: 'components/html/html',
+  RadioGroup: 'components/forms/radioGroup',
+  MenuItem: 'components/menu/menuItem',
+  Switch: 'components/forms/controls',
+  Tab: 'components/tabs/tab',
+  InputGroup: 'components/forms/inputGroup',
+  TextArea: 'components/forms/textArea'
+};
+
+const pascaltoCamelCase = (name) => name.charAt(0).toLowerCase() + name.slice(1);
+const pascalToKebabCase = (name) =>
+  name.charAt(0).toLowerCase() +
+  name
+    .slice(1)
+    .replace(/([A-Z])/, '-$1')
+    .toLowerCase();
+
 module.exports = {
   extends: '../../babel.config.js',
   env: {
@@ -86,6 +111,19 @@ module.exports = {
             }
           },
           'MUI-CJS'
+        ],
+        [
+          'transform-imports',
+          {
+            '@blueprintjs/core': {
+              transform: (importName) =>
+                `@blueprintjs/core/lib/cjs/${blueprintMapper[importName] ||
+                  `components/${pascalToKebabCase(importName)}/${pascaltoCamelCase(importName)}`}.js`,
+              preventFullImport: false,
+              skipDefaultConversion: true
+            }
+          },
+          'BLUEPRINT-CJS'
         ]
       ]
     },
@@ -164,6 +202,19 @@ module.exports = {
             }
           },
           'MUI-ESM'
+        ],
+        [
+          'transform-imports',
+          {
+            '@blueprintjs/core': {
+              transform: (importName) =>
+                `@blueprintjs/core/lib/esm/${blueprintMapper[importName] ||
+                  `components/${pascalToKebabCase(importName)}/${pascaltoCamelCase(importName)}`}.js`,
+              preventFullImport: false,
+              skipDefaultConversion: true
+            }
+          },
+          'BLUEPRINT-CJS'
         ]
       ]
     }

@@ -145,6 +145,7 @@ const Footer = ({ open }) => {
                 <RepoLink href="https://www.npmjs.com/package/@data-driven-forms/pf4-component-mapper" label="PF4 component mapper" />
                 <RepoLink href="https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper" label="PF3 component mapper" />
                 <RepoLink href="https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper" label="MUI component mapper" />
+                <RepoLink href="https://www.npmjs.com/package/@data-driven-forms/blueprint-component-mapper" label="Blueprint component mapper" />
               </List>
             </Paper>
           </Grid>
