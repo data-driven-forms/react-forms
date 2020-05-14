@@ -12,11 +12,11 @@ PatternFly 3 mapper provides components from [PatternFly 3 design system](https:
 
 Link to [NPM](https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper).
 
-```sh
+```bash
 npm install --save @data-driven-forms/pf3-component-mapper
 ```
 or
-```sh
+```bash
 yarn add @data-driven-forms/pf3-component-mapper
 ```
 

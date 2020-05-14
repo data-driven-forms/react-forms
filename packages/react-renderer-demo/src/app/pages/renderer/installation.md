@@ -9,11 +9,11 @@ import ListOfContents from '@docs/list-of-contents';
 
 React Form Renderer is the basic component, that provides all features.
 
-```sh
+```bash
 npm install --save @data-driven-forms/react-form-renderer
 ```
 or
-```sh
+```bash
 yarn add @data-driven-forms/react-form-renderer
 ```
 
@@ -23,31 +23,31 @@ Data Driven Forms team provides and mantains basic set of components for followi
 
 **mui-component-mapper**
 
-```sh
+```bash
 npm install --save @data-driven-forms/mui-component-mapper
 ```
 or
-```sh
+```bash
 yarn add @data-driven-forms/mui-component-mapper
 ```
 
 **pf4-component-mapper**
 
-```sh
+```bash
 npm install --save @data-driven-forms/pf4-component-mapper
 ```
 or
-```sh
+```bash
 yarn add @data-driven-forms/pf4-component-mapper
 ```
 
 **pf3-component-mapper**
 
-```sh
+```bash
 npm install --save @data-driven-forms/pf3-component-mapper
 ```
 or
-```sh
+```bash
 yarn add @data-driven-forms/pf3-component-mapper
 ```
 

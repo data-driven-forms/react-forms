@@ -12,11 +12,11 @@ BlueprintJS mapper provides components from [Blueprint UI toolkit](https://bluep
 
 Link to [NPM](https://www.npmjs.com/package/@data-driven-forms/blueprint-component-mapper).
 
-```sh
+```bash
 npm install --save @data-driven-forms/blueprint-component-mapper
 ```
 or
-```sh
+```bash
 yarn add @data-driven-forms/blueprint-component-mapper
 ```
 

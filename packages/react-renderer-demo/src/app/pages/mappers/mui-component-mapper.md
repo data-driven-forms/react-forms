@@ -12,11 +12,11 @@ MaterialUI mapper provides components from [MaterialUI React library](https://ma
 
 Link to [NPM](https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper).
 
-```sh
+```bash
 npm install --save @data-driven-forms/mui-component-mapper
 ```
 or
-```sh
+```bash
 yarn add @data-driven-forms/mui-component-mapper
 ```
 
