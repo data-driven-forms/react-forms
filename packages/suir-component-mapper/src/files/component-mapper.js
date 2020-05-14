@@ -12,6 +12,7 @@ import Select from './select';
 import Radio from './radio';
 import Wizard from './wizard';
 import FieldArray from './field-array';
+import Slider from './slider';
 
 export const components = {
   TextField,
@@ -40,7 +41,8 @@ const componentMapper = {
   [componentTypes.SWITCH]: Switch,
   [componentTypes.PLAIN_TEXT]: PlainText,
   [componentTypes.WIZARD]: Wizard,
-  [componentTypes.FIELD_ARRAY]: FieldArray
+  [componentTypes.FIELD_ARRAY]: FieldArray,
+  [componentTypes.SLIDER]: Slider
 };
 
 export default componentMapper;
