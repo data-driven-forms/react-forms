@@ -35,6 +35,7 @@ const Select = ({
   onChange,
   loadOptionsChangeCounter,
   SelectComponent,
+  noValueUpdates,
   ...props
 }) => {
   const [state, dispatch] = useReducer(reducer, {
@@ -175,7 +176,8 @@ Select.propTypes = {
   updatingMessage: PropTypes.node,
   noOptionsMessage: PropTypes.node,
   isSearchable: PropTypes.bool,
-  SelectComponent: PropTypes.elementType.isRequired
+  SelectComponent: PropTypes.elementType.isRequired,
+  noValueUpdates: PropTypes.bool
 };
 
 Select.defaultProps = {
