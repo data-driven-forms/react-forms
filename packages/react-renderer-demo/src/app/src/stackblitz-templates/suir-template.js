@@ -1,8 +1,7 @@
-export const pf4Html = `
+export const suirHtml = `
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@patternfly/patternfly@4.0.5/patternfly-base.css"/>
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@patternfly/patternfly@4.0.5/patternfly-addons.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
   </head>
   <body>
     <div id="root"></div>
@@ -10,11 +9,11 @@ export const pf4Html = `
 </html>
 `;
 
-export const pf4Code = `import React, { Component } from 'react';
+export const suirCode = `import React, { Component } from 'react';
 import { render } from 'react-dom';
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
-import FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
-import componentMapper from '@data-driven-forms/pf4-component-mapper/dist/cjs/component-mapper';
+import FormTemplate from '@data-driven-forms/suir-component-mapper/dist/cjs/form-template';
+import componentMapper from '@data-driven-forms/suir-component-mapper/dist/cjs/component-mapper';
 
 import schema from './schema'
 
@@ -35,15 +34,15 @@ class App extends Component {
 
 render(<App />, document.getElementById('root'));`;
 
-export const pf4WizardCode = `import React, { Component } from 'react';
+export const suirWizardCode = `import React, { Component } from 'react';
 import { render } from 'react-dom';
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
-import Pf4FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
-import componentMapper from '@data-driven-forms/pf4-component-mapper/dist/cjs/component-mapper';
+import SuirFormTemplate from '@data-driven-forms/suir-component-mapper/dist/cjs/form-template';
+import componentMapper from '@data-driven-forms/suir-component-mapper/dist/cjs/component-mapper';
 
 import schema from './schema'
 
-const FormTemplate = (props) => <Pf4FormTemplate {...props} showFormControls={false} />
+const FormTemplate = (props) => <SuirFormTemplate {...props} showFormControls={false} />
 
 class App extends Component {
   render() {
@@ -62,12 +61,11 @@ class App extends Component {
 
 render(<App />, document.getElementById('root'));`;
 
-export const pf4Dependencies = {
+export const suirDependencies = {
   react: '^16.12.0',
   'react-dom': '^16.12.0',
   '@data-driven-forms/react-form-renderer': 'latest',
-  '@data-driven-forms/pf4-component-mapper': 'latest',
-  '@patternfly/react-core': 'latest',
-  '@patternfly/react-icons': 'latest',
+  '@data-driven-forms/suir-component-mapper': 'latest',
+  'semantic-ui-react': 'latest',
   'prop-types': 'latest'
 };

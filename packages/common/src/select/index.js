@@ -1,7 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useReducer } from 'react';
-import ReactSelect from 'react-select';
-import CreatableSelect from 'react-select/creatable';
 
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -20,10 +18,6 @@ const handleSelectChange = (option, simpleValue, isMulti, onChange) => {
     : onChange(sanitizedOption);
 };
 
-const selectProvider = {
-  createable: CreatableSelect
-};
-
 const Select = ({
   invalid,
   classNamePrefix,
@@ -40,6 +34,7 @@ const Select = ({
   value,
   onChange,
   loadOptionsChangeCounter,
+  SelectComponent,
   ...props
 }) => {
   const [state, dispatch] = useReducer(reducer, {
@@ -96,15 +91,19 @@ const Select = ({
     }
   }, [propsOptions]);
 
+  const renderNoOptionsMessage = () => (Object.values(state.promises).some((value) => value) ? () => updatingMessage : () => noOptionsMessage);
+
   if (state.isLoading) {
     return (
-      <ReactSelect
+      <SelectComponent
         {...props}
         classNamePrefix={classNamePrefix}
         isDisabled={true}
         placeholder={loadingMessage}
         options={state.options}
+        onChange={() => {}}
         {...loadingProps}
+        noOptionsMessage={renderNoOptionsMessage()}
       />
     );
   }
@@ -130,14 +129,10 @@ const Select = ({
     }
   };
 
-  const renderNoOptionsMessage = () => (Object.values(state.promises).some((value) => value) ? () => updatingMessage : () => noOptionsMessage);
-
   const selectValue = pluckSingleValue ? (isMulti ? value : Array.isArray(value) && value[0] ? value[0] : value) : value;
 
-  const SelectFinal = selectProvider[selectVariant] || ReactSelect;
-
   return (
-    <SelectFinal
+    <SelectComponent
       className={clsx(classNamePrefix, {
         'has-error': invalid
       })}
@@ -176,7 +171,8 @@ Select.propTypes = {
   selectVariant: PropTypes.string,
   updatingMessage: PropTypes.node,
   noOptionsMessage: PropTypes.node,
-  isSearchable: PropTypes.bool
+  isSearchable: PropTypes.bool,
+  SelectComponent: PropTypes.elementType.isRequired
 };
 
 Select.defaultProps = {
