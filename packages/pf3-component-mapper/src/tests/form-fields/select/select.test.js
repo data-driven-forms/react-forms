@@ -164,6 +164,15 @@ describe('<SelectField />', () => {
       expect(changeSpy).toHaveBeenCalledWith(undefined);
     });
 
+    it('should not change the value when new options do not include it and noValueUpdates is set', () => {
+      const wrapper = mount(<Wrapper {...initialProps} noValueUpdates input={{ ...initialProps.input, value: 1 }} />);
+
+      wrapper.setProps({ options: NEW_OPTIONS });
+      wrapper.update();
+
+      expect(changeSpy).not.toHaveBeenCalled();
+    });
+
     it('not should change the value when new options include it', () => {
       const wrapper = mount(<Wrapper {...initialProps} input={{ ...initialProps.input, value: 2 }} />);
 
@@ -189,7 +198,23 @@ describe('<SelectField />', () => {
       });
     });
 
-    it('should reset the value when loadOptions prop is changed and new options do not include the value', (done) => {
+    it('should not reset the value when loadOptions prop is changed and new options do not include the value - noValueUpdates is set', (done) => {
+      const wrapper = mount(<Wrapper {...initialProps} noValueUpdates loadOptions={asyncLoading} input={{ ...initialProps.input, value: 1 }} />);
+
+      setImmediate(() => {
+        wrapper.update();
+        wrapper.setProps({ loadOptions: asyncLoadingNew });
+
+        setImmediate(() => {
+          wrapper.update();
+
+          expect(changeSpy).not.toHaveBeenCalledWith();
+          done();
+        });
+      });
+    });
+
+    it('should not reset the value when loadOptions prop is changed and new options include the value', (done) => {
       const wrapper = mount(<Wrapper {...initialProps} loadOptions={asyncLoading} input={{ ...initialProps.input, value: 2 }} />);
 
       setImmediate(() => {

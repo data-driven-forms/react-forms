@@ -40,6 +40,7 @@ const Select = ({
   value,
   onChange,
   loadOptionsChangeCounter,
+  noValueUpdates,
   ...props
 }) => {
   const [state, dispatch] = useReducer(reducer, {
@@ -56,13 +57,15 @@ const Select = ({
 
     return loadOptions().then((data) => {
       if (isMounted) {
-        if (value && Array.isArray(value)) {
-          const selectValue = value.filter((value) =>
-            typeof value === 'object' ? data.find((option) => value.value === option.value) : data.find((option) => value === option.value)
-          );
-          onChange(selectValue.length === 0 ? undefined : selectValue);
-        } else if (value && !data.find(({ value: internalValue }) => internalValue === value)) {
-          onChange(undefined);
+        if (!noValueUpdates) {
+          if (value && Array.isArray(value)) {
+            const selectValue = value.filter((value) =>
+              typeof value === 'object' ? data.find((option) => value.value === option.value) : data.find((option) => value === option.value)
+            );
+            onChange(selectValue.length === 0 ? undefined : selectValue);
+          } else if (value && !data.find(({ value: internalValue }) => internalValue === value)) {
+            onChange(undefined);
+          }
         }
 
         dispatch({ type: 'updateOptions', payload: data });
@@ -88,7 +91,7 @@ const Select = ({
 
   useEffect(() => {
     if (state.isInitialLoaded) {
-      if (value && !propsOptions.map(({ value }) => value).includes(value)) {
+      if (!noValueUpdates && value && !propsOptions.map(({ value }) => value).includes(value)) {
         onChange(undefined);
       }
 
@@ -176,7 +179,8 @@ Select.propTypes = {
   selectVariant: PropTypes.string,
   updatingMessage: PropTypes.node,
   noOptionsMessage: PropTypes.node,
-  isSearchable: PropTypes.bool
+  isSearchable: PropTypes.bool,
+  noValueUpdates: PropTypes.bool
 };
 
 Select.defaultProps = {
