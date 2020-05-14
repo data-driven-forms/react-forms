@@ -10,6 +10,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 module.exports = withBundleAnalyzer(
   withMDX({
+    crossOrigin: 'anonymous',
     pageExtensions: ['js', 'jsx', 'md', 'mdx'],
     distDir: '../../dist/functions/next',
     webpack: (config, options) => {
