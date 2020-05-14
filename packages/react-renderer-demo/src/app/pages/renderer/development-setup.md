@@ -11,13 +11,13 @@ Data Driven Forms is a monorepo which uses [Lerna](https://github.com/lerna/lern
 
 ## Install
 
-```sh
+```bash
 yarn install
 ```
 
 ## Build
 
-```sh
+```bash
 yarn build
 ```
 
@@ -29,7 +29,7 @@ Don't forget to build all packages, which are linked together!
 
 Each package has a small playground `package/demo`, where you can test your changes.
 
-```sh
+```bash
 cd packages/pf3-component-mapper
 yarn start
 ```
@@ -38,14 +38,14 @@ yarn start
 
 The documentation is a server-side rendered React application based on [NextJS framework](https://nextjs.org/).
 
-```sh
+```bash
 cd packages/react-renderer-demo
 yarn dev
 ```
 
 ## How to clean?
 
-```sh
+```bash
 rm yarn.lock
 yarn lerna clean # will delete all node_modules
 ```
@@ -54,7 +54,7 @@ yarn lerna clean # will delete all node_modules
 
 Tests needed to be run from the core folder.
 
-```sh
+```bash
 yarn test
 
 yarn test packages/pf3-component-mapper

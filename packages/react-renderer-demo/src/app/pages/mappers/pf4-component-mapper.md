@@ -12,11 +12,11 @@ PatternFly 4 mapper provides components from [PatternFly 4 design system](https:
 
 Link to [NPM](https://www.npmjs.com/package/@data-driven-forms/pf4-component-mapper).
 
-```sh
+```bash
 npm install --save @data-driven-forms/pf4-component-mapper
 ```
 or
-```sh
+```bash
 yarn add @data-driven-forms/pf4-component-mapper
 ```
 
