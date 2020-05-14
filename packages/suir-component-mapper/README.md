@@ -2,11 +2,9 @@
 
 [![Data Driven Form logo](images/logo.png)](https://data-driven-forms.org/)
 
-Material-UI component mapper for [Data Driven Forms](https://github.com/data-driven-forms/react-forms).
+Semantic ui react component mapper for [Data Driven Forms](https://github.com/data-driven-forms/react-forms).
 
 :book: For more information please visit the [documentation](https://data-driven-forms.org/). :book:
-
-Used by [ManageIQ](http://manageiq.org/), Red Hat Cloud Services.
 
 **Table of Contents**
 
