@@ -21,7 +21,6 @@ const useStyles = createUseStyles({
   arrayItems: {
     marginTop: '1em'
   },
-
   error: {
     color: '#9f3a38 !important'
   },

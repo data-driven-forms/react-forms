@@ -26,9 +26,7 @@ Title.propTypes = {
   children: PropTypes.node
 };
 
-const ButtonGroup = ({ children }) => {
-  return <div className="">{children}</div>;
-};
+const ButtonGroup = ({ children }) => <div>{children}</div>;
 
 ButtonGroup.propTypes = {
   children: PropTypes.node
