@@ -11,7 +11,7 @@ export const muiHtml = `
 
 export const muiCode = `import React, { Component } from 'react';
 import { render } from 'react-dom';
-import FormRenderer from '@data-driven-forms/react-form-renderer';
+import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import FormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
 import componentMapper from '@data-driven-forms/mui-component-mapper/dist/cjs/component-mapper';
 
@@ -36,7 +36,7 @@ render(<App />, document.getElementById('root'));`;
 
 export const muiWizardCode = `import React, { Component } from 'react';
 import { render } from 'react-dom';
-import FormRenderer from '@data-driven-forms/react-form-renderer';
+import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import MuiFormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
 import componentMapper from '@data-driven-forms/mui-component-mapper/dist/cjs/component-mapper';
 

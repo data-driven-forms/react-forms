@@ -12,7 +12,7 @@ export const pf4Html = `
 
 export const pf4Code = `import React, { Component } from 'react';
 import { render } from 'react-dom';
-import FormRenderer from '@data-driven-forms/react-form-renderer';
+import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
 import componentMapper from '@data-driven-forms/pf4-component-mapper/dist/cjs/component-mapper';
 
@@ -37,7 +37,7 @@ render(<App />, document.getElementById('root'));`;
 
 export const pf4WizardCode = `import React, { Component } from 'react';
 import { render } from 'react-dom';
-import FormRenderer from '@data-driven-forms/react-form-renderer';
+import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import Pf4FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
 import componentMapper from '@data-driven-forms/pf4-component-mapper/dist/cjs/component-mapper';
 
