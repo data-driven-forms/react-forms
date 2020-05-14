@@ -17,10 +17,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useRouter } from 'next/router';
 
 import RouterLink from 'next/link';
-import dynamic from 'next/dynamic';
-const CodeEditor = dynamic(import('../code-editor'), {
-  ssr: false
-});
+import CodeEditor from '../code-editor';
 
 const useHeadingStyles = makeStyles(() => ({
   anchor: {
@@ -81,36 +78,7 @@ const MdxComponents = {
       {children}
     </Typography>
   ),
-  code: ({ children, className }) => {
-    const lang = className ? className.toLowerCase().replace('language-', '') : '';
-
-    return (
-      <div style={{ background: '#1d1f21', paddingTop: 5, paddingBottom: 5, marginTop: 10, marginBottom: 10 }} className="DocCode">
-        <CodeEditor
-          readOnly
-          mode={lang ? lang : 'jsx'}
-          theme="tomorrow_night"
-          name="UNIQUE_ID_OF_DIV"
-          editorProps={{ $blockScrolling: true }}
-          value={children.replace(/\n+$/, '')}
-          fontSize={14}
-          maxLines={Infinity}
-          showPrintMargin={false}
-          showGutter={false}
-          highlightActiveLine={false}
-          style={{ width: 'initial', margin: 10 }}
-          setOptions={{
-            showLineNumbers: false,
-            readOnly: true
-          }}
-          onLoad={(editor) => {
-            editor.getSession().setUseWorker(false);
-            editor.renderer.$cursorLayer.element.style.display = 'none';
-          }}
-        />
-      </div>
-    );
-  },
+  code: CodeEditor,
   a: MdLink,
   h1: (props) => <Heading {...props} level={4} component="h1" />,
   h2: (props) => <Heading {...props} level={5} component="h2" />,
