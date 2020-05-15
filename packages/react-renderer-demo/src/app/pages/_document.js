@@ -9,14 +9,16 @@ class MyDocument extends Document {
       <html lang="en">
         <Head>
           <meta charSet="utf-8" />
+          <link rel="manifest" href="/manifest.json" />
+          <link rel="apple-touch-icon" href="/192x192.png"></link>
           <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
           <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
           <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" />
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
-          <link rel="stylesheet" type="text/css" href="//wpcc.io/lib/1.0.2/cookieconsent.min.css" />
-          <script src="//wpcc.io/lib/1.0.2/cookieconsent.min.js"></script>
+          <link rel="stylesheet" type="text/css" href="https://wpcc.io/lib/1.0.2/cookieconsent.min.css" />
+          <script src="https://wpcc.io/lib/1.0.2/cookieconsent.min.js"></script>
           <style
             dangerouslySetInnerHTML={{
               __html: `

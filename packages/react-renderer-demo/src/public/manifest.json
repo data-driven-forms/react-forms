@@ -1,0 +1,17 @@
+{
+  "name": "Data driven forms",
+  "short_name": "DDF",
+  "display": "minimal-ui",
+  "start_url": "/",
+  "theme_color": "#a525c1",
+  "background_color": "#fafafa",
+  "icons": [
+    {
+      "src": "/icons/192x192.png",
+      "sizes": "192x192"
+    }, {
+      "src": "/icons/512x512.png",
+      "sizes": "512x512"
+    }
+  ]
+}

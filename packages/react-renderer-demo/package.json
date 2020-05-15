@@ -35,6 +35,7 @@
         "firebase-functions": "^3.6.1",
         "markdown-to-jsx": "^6.10.3",
         "next": "9.3.3",
+        "next-offline": "^5.0.2",
         "prism-react-renderer": "^1.1.0",
         "prop-types": "^15.6.2",
         "raw-loader": "^3.1.0",
