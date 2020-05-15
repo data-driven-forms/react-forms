@@ -29,6 +29,8 @@ const SuirSelect = ({
   noOptionsMessage,
   hideSelectedOptions,
   closeMenuOnSelect,
+  FormFieldGridProps,
+  HelpertextProps,
   ...rest
 }) => {
   const invalid = validationError(meta, validateOnMount);
@@ -46,7 +48,7 @@ const SuirSelect = ({
   }
 
   return (
-    <FormFieldGrid helperText={helperText}>
+    <FormFieldGrid helperText={helperText} HelpertextProps={HelpertextProps} {...FormFieldGridProps}>
       <FormField
         disabled={isDisabled}
         readOnly={isReadOnly}
@@ -104,13 +106,18 @@ SuirSelect.propTypes = {
   onInputChange: PropTypes.func,
   isFetching: PropTypes.bool,
   hideSelectedOptions: PropTypes.bool,
-  closeMenuOnSelect: PropTypes.bool
+  closeMenuOnSelect: PropTypes.bool,
+  /** Sub components customization API */
+  FormFieldGridProps: PropTypes.object,
+  HelpertextProps: PropTypes.object
 };
 
 SuirSelect.defaultProps = {
   placeholder: 'Please choose',
   noOptionsMessage: 'No option found',
-  options: []
+  options: [],
+  FormFieldGridProps: {},
+  HelpertextProps: {}
 };
 
 const Select = (props) => {

@@ -19,7 +19,16 @@ const useListStyles = createUseStyles({
   }
 });
 
-const List = ({ value, optionClick, noOptionsTitle, filterValue, filterValueText, selectedValues, ...rest }) => {
+const List = ({
+  value,
+  optionClick,
+  noOptionsTitle,
+  filterValue,
+  filterValueText,
+  selectedValues,
+  OptionProps: { className, selectedClassName, ...OptionProps },
+  ...rest
+}) => {
   const classes = useListStyles();
   return (
     <Segment {...rest}>
@@ -27,9 +36,11 @@ const List = ({ value, optionClick, noOptionsTitle, filterValue, filterValueText
       {value.length > 0 &&
         value.map(({ value, label }) => (
           <div
-            className={clsx(classes.root, {
-              [classes.selected]: selectedValues.includes(value)
+            className={clsx(classes.root, className, {
+              [classes.selected]: selectedValues.includes(value),
+              [selectedClassName]: selectedValues.includes(value)
             })}
+            {...OptionProps}
             onClick={(e) => optionClick(e, value)}
             key={value}
             value={value}
@@ -52,14 +63,16 @@ List.propTypes = {
   noOptionsTitle: PropTypes.node,
   filterValue: PropTypes.string,
   filterValueText: PropTypes.node,
-  selectedValues: PropTypes.array
+  selectedValues: PropTypes.array,
+  OptionProps: PropTypes.shape({ className: PropTypes.string, selectedClassName: PropTypes.string })
 };
 
 List.defaultProps = {
-  value: []
+  value: [],
+  OptionProps: {}
 };
 
-const Toolbar = ({ sortTitle, onFilter, onSort, sortDirection, value, placeholder, id }) => (
+const Toolbar = ({ sortTitle, onFilter, onSort, sortDirection, value, placeholder, id, sortUpIcon, sortDownIcon, ...rest }) => (
   <div id={id}>
     <Input
       name="filterOptions"
@@ -70,8 +83,8 @@ const Toolbar = ({ sortTitle, onFilter, onSort, sortDirection, value, placeholde
       aria-label={placeholder}
       onChange={({ target: { value } }) => onFilter(value)}
       placeholder={placeholder}
-      value={value}
-      action={<Button type="button" onClick={onSort} title={sortTitle} icon={sortDirection ? 'sort up' : 'sort down'} />}
+      action={<Button type="button" onClick={onSort} title={sortTitle} icon={sortDirection ? sortUpIcon : sortDownIcon} />}
+      {...rest}
     />
   </div>
 );
@@ -83,7 +96,14 @@ Toolbar.propTypes = {
   sortDirection: PropTypes.bool,
   value: PropTypes.string,
   placeholder: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.string,
+  sortUpIcon: PropTypes.string,
+  sortDownIcon: PropTypes.string
+};
+
+Toolbar.defaultProps = {
+  sortUpIcon: 'sort up',
+  sortDownIcon: 'sort down'
 };
 
 const useDualListStyles = createUseStyles({
@@ -137,30 +157,47 @@ const DualList = ({
   filterValues,
   rightValues,
   handleValuesClick,
-  validateOnMount
+  validateOnMount,
+  OptionsListProps,
+  OptionProps,
+  LabelProps: { className: labelClassName, error: labelError, ...LabelProps },
+  ToolbarProps,
+  ButtonGridProps: { className: buttonGridClassName },
+  RightButtonProps,
+  DoubleRightButtonProps,
+  LeftButtonProps,
+  DoubleLeftButtonProps,
+  OptionsHeaderProps,
+  ValuesHeaderProps,
+  HelperTextProps,
+  FormFieldGridProps
 }) => {
   const invalid = validationError(meta, validateOnMount);
   const classes = useDualListStyles();
   return (
-    <FormFieldGrid helperText={helperText}>
+    <FormFieldGrid helperText={helperText} HelperTextProps={HelperTextProps} {...FormFieldGridProps}>
       <FormField
         label={label}
         required={isRequired}
         error={
           invalid && {
             content: meta.error,
-            pointing: 'left'
+            pointing: 'left',
+            ...labelError
           }
         }
         id={id || input.name}
         control={(props) => null}
-        className={classes.formField}
+        {...LabelProps}
+        className={clsx(classes.formField, labelClassName)}
       />
       <Grid key="0">
         <GridColumn mobile={16} tablet={16} computer={7}>
           <Grid>
             <GridColumn mobile={16} tablet={16}>
-              <Header sub>{leftTitle}</Header>
+              <Header sub {...OptionsHeaderProps}>
+                {leftTitle}
+              </Header>
             </GridColumn>
             <GridColumn mobile={16} tablet={16}>
               <Toolbar
@@ -170,10 +207,13 @@ const DualList = ({
                 value={state.filterOptions}
                 placeholder={filterOptionsTitle}
                 id={`${input.name}-options-toolbar`}
+                {...ToolbarProps}
               />
             </GridColumn>
             <GridColumn mobile={16} tablet={16}>
               <List
+                {...OptionsListProps}
+                OptionProps={OptionProps}
                 optionClick={handleOptionsClick}
                 value={leftValues}
                 noOptionsTitle={noOptionsTitle}
@@ -184,12 +224,13 @@ const DualList = ({
             </GridColumn>
           </Grid>
         </GridColumn>
-        <GridColumn className={classes.dualListButtons} mobile={16} tablet={16} computer={2}>
+        <GridColumn className={clsx(classes.dualListButtons, buttonGridClassName)} mobile={16} tablet={16} computer={2}>
           <Grid>
             <GridColumn tablet={16} mobile={4}>
               <Button
                 className={classes.transferButton}
                 icon="angle right"
+                {...RightButtonProps}
                 type="button"
                 disabled={leftValues.length === 0}
                 onClick={handleMoveRight}
@@ -201,6 +242,7 @@ const DualList = ({
                 <Button
                   className={classes.transferButton}
                   icon="angle double right"
+                  {...DoubleRightButtonProps}
                   type="button"
                   disabled={leftValues.length === 0}
                   onClick={handleClearLeftValues}
@@ -213,6 +255,7 @@ const DualList = ({
                 <Button
                   className={classes.transferButton}
                   icon="angle double left"
+                  {...LeftButtonProps}
                   type="button"
                   disabled={rightValues.length === 0}
                   onClick={handleClearRightValues}
@@ -224,6 +267,7 @@ const DualList = ({
               <Button
                 className={classes.transferButton}
                 icon="angle left"
+                {...DoubleLeftButtonProps}
                 type="button"
                 disabled={rightValues.length === 0}
                 onClick={handleMoveLeft}
@@ -235,7 +279,9 @@ const DualList = ({
         <GridColumn mobile={16} tablet={16} computer={7}>
           <Grid>
             <GridColumn tablet={16}>
-              <Header sub>{rightTitle}</Header>
+              <Header sub {...ValuesHeaderProps}>
+                {rightTitle}
+              </Header>
             </GridColumn>
             <GridColumn tablet={16}>
               <Toolbar
@@ -245,10 +291,13 @@ const DualList = ({
                 value={state.filterValue}
                 placeholder={filterValueTitle}
                 id={`${input.name}-value-toolbar`}
+                {...ToolbarProps}
               />
             </GridColumn>
             <GridColumn tablet={16}>
               <List
+                {...OptionsListProps}
+                OptionProps={OptionProps}
                 optionClick={handleValuesClick}
                 value={rightValues}
                 noOptionsTitle={noValueTitle}
@@ -300,7 +349,21 @@ DualList.propTypes = {
   filterValues: PropTypes.func,
   rightValues: PropTypes.array,
   handleValuesClick: PropTypes.func,
-  validateOnMount: PropTypes.bool
+  validateOnMount: PropTypes.bool,
+  /** Sub components customization API */
+  OptionsListProps: PropTypes.object,
+  OptionProps: PropTypes.object,
+  LabelProps: PropTypes.shape({ error: PropTypes.object, className: PropTypes.string }),
+  ToolbarProps: PropTypes.object,
+  ButtonGridProps: PropTypes.shape({ className: PropTypes.string }),
+  RightButtonProps: PropTypes.object,
+  DoubleRightButtonProps: PropTypes.object,
+  LeftButtonProps: PropTypes.object,
+  DoubleLeftButtonProps: PropTypes.object,
+  OptionsHeaderProps: PropTypes.object,
+  ValuesHeaderProps: PropTypes.object,
+  HelperTextProps: PropTypes.object,
+  FormFieldGridProps: PropTypes.object
 };
 
 DualList.defaultProps = {
@@ -318,7 +381,20 @@ DualList.defaultProps = {
   filterValueText: 'Remove your filter to see all selected',
   options: [],
   allToLeft: true,
-  allToRight: true
+  allToRight: true,
+  OptionsListProps: {},
+  OptionProps: {},
+  LabelProps: {},
+  ToolbarProps: {},
+  ButtonGridProps: {},
+  RightButtonProps: {},
+  DoubleRightButtonProps: {},
+  LeftButtonProps: {},
+  DoubleLeftButtonProps: {},
+  OptionsHeaderProps: {},
+  ValuesHeaderProps: {},
+  HelperTextProps: {},
+  FormFieldGridProps: {}
 };
 
 const DualListSelectWrapper = (props) => <DualListSelectCommon {...props} DualListSelect={DualList} />;

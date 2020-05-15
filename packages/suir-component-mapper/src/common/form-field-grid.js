@@ -11,12 +11,12 @@ const useStyles = createUseStyles({
   }
 });
 
-const FormFieldGrid = ({ className, children, helperText }) => {
+const FormFieldGrid = ({ className, children, helperText, HelperTextProps }) => {
   const classes = useStyles();
   return (
     <div className={clsx(classes.root, className)}>
       {children}
-      {helperText && <HelperText>{helperText}</HelperText>}
+      {helperText && <HelperText {...HelperTextProps}>{helperText}</HelperText>}
     </div>
   );
 };
@@ -24,7 +24,8 @@ const FormFieldGrid = ({ className, children, helperText }) => {
 FormFieldGrid.propTypes = {
   className: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
-  helperText: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)])
+  helperText: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
+  HelperTextProps: PropTypes.object
 };
 
 export default FormFieldGrid;

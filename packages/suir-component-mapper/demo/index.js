@@ -8,47 +8,12 @@ import fieldArraySchema from './demo-schemas/field-array-schema';
 
 import wizardSchema from './demo-schemas/wizard-schema';
 import { Button } from 'semantic-ui-react';
-import validatorTypes from '@data-driven-forms/react-form-renderer/dist/cjs/validator-types';
 
 const compositeMapper = {
   ...componentMapper,
   [componentTypes.SWITCH]: {
     component: componentMapper[componentTypes.SWITCH]
   }
-};
-
-const dualSchema = {
-  fields: [
-    {
-      component: componentTypes.DUAL_LIST_SELECT,
-      name: 'dual-list',
-      label: 'Dual list',
-      isRquired: true,
-      validate: [{ type: validatorTypes.REQUIRED }],
-      options: [
-        {
-          value: 'cats',
-          label: 'cats'
-        },
-        {
-          value: 'cats_1',
-          label: 'cats_1'
-        },
-        {
-          value: 'cats_2',
-          label: 'cats_2'
-        },
-        {
-          value: 'zebras',
-          label: 'zebras'
-        },
-        {
-          value: 'pigeons',
-          label: 'pigeons'
-        }
-      ]
-    }
-  ]
 };
 
 const App = () => {
@@ -70,7 +35,7 @@ const App = () => {
             onSubmit={console.log}
             componentMapper={compositeMapper}
             FormTemplate={(props) => <FormTemplate {...props} showFormControls={true} />}
-            schema={dualSchema}
+            schema={fieldArraySchema}
             onCancel={() => console.log('canceling')}
           />
         </div>
