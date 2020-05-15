@@ -15,8 +15,8 @@ class MyDocument extends Document {
           <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
           <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" />
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
-          <link rel="stylesheet" type="text/css" href="//wpcc.io/lib/1.0.2/cookieconsent.min.css" />
-          <script src="//wpcc.io/lib/1.0.2/cookieconsent.min.js"></script>
+          <link rel="stylesheet" type="text/css" href="https://wpcc.io/lib/1.0.2/cookieconsent.min.css" />
+          <script src="https://wpcc.io/lib/1.0.2/cookieconsent.min.js"></script>
           <style
             dangerouslySetInnerHTML={{
               __html: `
