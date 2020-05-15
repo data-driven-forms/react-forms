@@ -9,11 +9,24 @@ import FormFieldGrid from '../common/form-field-grid';
 import FormField from '../common/form-field';
 
 const TextField = (props) => {
-  const { input, isReadOnly, isDisabled, placeholder, isRequired, label, helperText, validateOnMount, meta, ...rest } = useFieldApi(props);
+  const {
+    input,
+    isReadOnly,
+    isDisabled,
+    placeholder,
+    isRequired,
+    label,
+    helperText,
+    validateOnMount,
+    meta,
+    FormFieldGridProps,
+    HelpertextProps,
+    ...rest
+  } = useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
 
   return (
-    <FormFieldGrid helperText={helperText}>
+    <FormFieldGrid helperText={helperText} HelpertextProps={HelpertextProps} {...FormFieldGridProps}>
       <FormField
         {...rest}
         control={Input}
@@ -43,8 +56,14 @@ TextField.propTypes = {
   label: PropTypes.node,
   helperText: PropTypes.node,
   validateOnMount: PropTypes.bool,
-  description: PropTypes.node,
-  inputProps: PropTypes.object
+  /** Sub component customization */
+  FormFieldGridProps: PropTypes.object,
+  HelpertextProps: PropTypes.object
+};
+
+TextField.defaultProps = {
+  FormFieldGridProps: {},
+  HelpertextProps: {}
 };
 
 export default TextField;

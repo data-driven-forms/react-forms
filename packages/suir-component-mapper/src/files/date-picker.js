@@ -8,11 +8,24 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormField from '../common/form-field';
 
 const DatePicker = (props) => {
-  const { input, isReadOnly, isDisabled, placeholder, isRequired, label, helperText, validateOnMount, meta } = useFieldApi(props);
+  const {
+    input,
+    isReadOnly,
+    isDisabled,
+    placeholder,
+    isRequired,
+    label,
+    helperText,
+    validateOnMount,
+    meta,
+    FormFieldGridProps,
+    HelperTextProps,
+    ...rest
+  } = useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
 
   return (
-    <FormFieldGrid helperText={helperText}>
+    <FormFieldGrid helperText={helperText} HelperTextProps={HelperTextProps} {...FormFieldGridProps}>
       <FormField
         label={label}
         {...input}
@@ -23,6 +36,7 @@ const DatePicker = (props) => {
             content: meta.error
           }
         }
+        {...rest}
         control={(props) => <input {...props} readOnly={isReadOnly} disabled={isDisabled} placeholder={placeholder} />}
       />
     </FormFieldGrid>
@@ -40,7 +54,15 @@ DatePicker.propTypes = {
   helperText: PropTypes.node,
   validateOnMount: PropTypes.bool,
   locale: PropTypes.string,
-  description: PropTypes.node
+  description: PropTypes.node,
+  /** Sub components customization API */
+  FormFieldGridProps: PropTypes.object,
+  HelperTextProps: PropTypes.object
+};
+
+DatePicker.defaultProps = {
+  FormFieldGridProps: {},
+  HelperTextProps: {}
 };
 
 export default DatePicker;

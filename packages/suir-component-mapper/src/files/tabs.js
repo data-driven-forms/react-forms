@@ -12,31 +12,31 @@ TabContent.propTypes = {
   formOptions: PropTypes.shape({ renderForm: PropTypes.func.isRequired }).isRequired
 };
 
-const FormTabs = ({ fields }) => {
+const FormTabs = ({ fields, TabProps, TabPaneProps, TabContentProps }) => {
   const formOptions = useFormApi();
 
   const panes = fields.map((field, index) => ({
     menuItem: field.title,
     pane: (
-      <TabPane key={index}>
-        <TabContent {...field} formOptions={formOptions} />
+      <TabPane {...TabPaneProps} key={index}>
+        <TabContent {...TabContentProps} {...field} formOptions={formOptions} />
       </TabPane>
     )
   }));
-  return <Tab renderActiveOnly={false} panes={panes} />;
+  return <Tab renderActiveOnly={false} {...TabProps} panes={panes} />;
 };
 
 FormTabs.propTypes = {
   fields: PropTypes.array.isRequired,
-  AppBarProps: PropTypes.object,
-  TabsProps: PropTypes.object,
-  TabProps: PropTypes.object
+  TabProps: PropTypes.object,
+  TabPaneProps: PropTypes.object,
+  TabContentProps: PropTypes.object
 };
 
 FormTabs.defaultProps = {
-  AppBarProps: {},
-  TabsProps: {},
-  TabProps: {}
+  TabProps: {},
+  TabPaneProps: {},
+  TabContentProps: {}
 };
 
 export default FormTabs;
