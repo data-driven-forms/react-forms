@@ -87,6 +87,16 @@ All packages are releasing together and they share the version number.
 
 If your changes influence API or add new features, you should describe these new options in the `demo` repository. Thanks!
 
+# Generating a mapper template
+
+To generate a mapper template, run:
+
+```bash
+yarn generate-template
+```
+
+This command starts a CLI, that provides an interface for generating mappers. A mapper folder will be created and it will be populated with all neccesary files.
+
 </Grid>
 <Grid item xs={false} md={2}>
   <ListOfContents file="renderer/development-setup" />
