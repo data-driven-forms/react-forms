@@ -46,18 +46,35 @@ FinalCheckbox.propTypes = {
 const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperText }) => {
   const invalid = validationError(meta, validateOnMount);
   const classes = useStyles();
+  const {
+    FormFieldGridProps,
+    FormFieldProps,
+    HelperTextProps,
+    OptionsListProps: { className: optionsClassName, ...OptionsListProps },
+    HeaderProps: { className: headerClassname, ...HeaderProps }
+  } = useContext(CheckboxContext);
   return (
-    <FormFieldGrid helperText={helperText}>
+    <FormFieldGrid helperText={helperText} HelperTextProps={HelperTextProps} {...FormFieldGridProps}>
       <FormField
+        {...FormFieldProps}
         {...(invalid && {
           error: {
             content: meta.error,
             pointing: 'left'
           }
         })}
-        label={<Header className={clsx({ [classes.header]: true, [classes.error]: invalid, [classes.required]: isRequired })}>{label}</Header>}
+        label={
+          <Header
+            {...HeaderProps}
+            className={clsx(headerClassname, { [classes.header]: true, [classes.error]: invalid, [classes.required]: isRequired })}
+          >
+            {label}
+          </Header>
+        }
       />
-      <div className={classes.items}>{children}</div>
+      <div {...OptionsListProps} className={clsx(classes.items, optionsClassName)}>
+        {children}
+      </div>
     </FormFieldGrid>
   );
 };
@@ -66,10 +83,26 @@ Wrapper.propTypes = {
   ...wrapperProps
 };
 
-const MultipleChoiceList = (props) => (
-  <CheckboxContext.Provider value={{ props }}>
+const MultipleChoiceList = ({ FormFieldGridProps, FormFieldProps, HeaderProps, OptionsListProps, HelperTextProps, ...props }) => (
+  <CheckboxContext.Provider value={{ props, FormFieldGridProps, FormFieldProps, HeaderProps, OptionsListProps, HelperTextProps }}>
     <MultipleChoiceListCommon {...props} Wrapper={Wrapper} Checkbox={FinalCheckbox} />
   </CheckboxContext.Provider>
 );
+
+MultipleChoiceList.propTypes = {
+  FormFieldGridProps: PropTypes.object,
+  FormFieldProps: PropTypes.object,
+  HeaderProps: PropTypes.object,
+  OptionsListProps: PropTypes.object,
+  HelperTextProps: PropTypes.object
+};
+
+MultipleChoiceList.defaultProps = {
+  FormFieldGridProps: {},
+  FormFieldProps: {},
+  HeaderProps: {},
+  OptionsListProps: {},
+  HelperTextProps: {}
+};
 
 export default MultipleChoiceList;

@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { useFormApi, FieldArray } from '@data-driven-forms/react-form-renderer';
 
-import { Button, Icon, Header, ButtonGroup, ButtonContent } from 'semantic-ui-react';
+import { Button, Header, ButtonGroup } from 'semantic-ui-react';
 
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
@@ -37,7 +37,18 @@ const useStyles = createUseStyles({
   }
 });
 
-const ArrayItem = ({ fields, fieldIndex, name, remove, length, minItems, removeLabel }) => {
+const ArrayItem = ({
+  fields,
+  fieldIndex,
+  name,
+  remove,
+  length,
+  minItems,
+  removeLabel,
+  RemoveButtonProps,
+  ArrayItemGridProps: { className: arrayItemClassName, ...ArrayItemGridProps },
+  ArrayItemFieldsGrid
+}) => {
   const { renderForm } = useFormApi();
   const classes = useStyles();
 
@@ -47,15 +58,16 @@ const ArrayItem = ({ fields, fieldIndex, name, remove, length, minItems, removeL
   });
 
   return (
-    <div className={classes.arrayItem}>
-      <div>{renderForm([editedFields])}</div>
+    <div className={clsx(classes.arrayItem, arrayItemClassName)} {...ArrayItemGridProps}>
+      <div {...ArrayItemFieldsGrid}>{renderForm([editedFields])}</div>
       <div>
         <Button
-          type="button"
           icon="remove"
           content={removeLabel}
           basic
           color="red"
+          {...RemoveButtonProps}
+          type="button"
           onClick={() => remove(fieldIndex)}
           disabled={length <= minItems}
         />
@@ -71,7 +83,16 @@ ArrayItem.propTypes = {
   remove: PropTypes.func.isRequired,
   length: PropTypes.number,
   minItems: PropTypes.number,
-  removeLabel: PropTypes.node.isRequired
+  removeLabel: PropTypes.node.isRequired,
+  RemoveButtonProps: PropTypes.object,
+  ArrayItemGridProps: PropTypes.object,
+  ArrayItemFieldsGrid: PropTypes.object
+};
+
+ArrayItem.defaultProps = {
+  RemoveButtonProps: {},
+  ArrayItemGridProps: {},
+  ArrayItemFieldsGrid: {}
 };
 
 const defaultButtonLabels = {
@@ -123,6 +144,19 @@ const DynamicArray = ({ ...props }) => {
     maxItems,
     noItemsMessage,
     buttonLabels,
+    FieldArrayGridProps,
+    FieldArrayHeaderProps: { className: arrayHeaderClassName, ...FieldArrayHeaderProps },
+    FieldArrayButtonGridProps: { className: arrayButtonGridClassName, ...FieldArrayButtonGridProps },
+    ButtonGroupProps,
+    UndoButtonProps,
+    RedoButtonProps,
+    AddButtonProps,
+    DescriptionProps: { className: descriptionClassName, ...DescriptionProps },
+    ArrayItemsGridProps: { className: arrayItemsClassName, ...ArrayItemsGridProps },
+    NoItemsProps: { className: noItemsClassname, ...NoItemsProps },
+    RemoveButtonProps,
+    ArrayItemGridProps,
+    ArrayItemFieldsGrid,
     ...rest
   } = useFieldApi(props);
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -160,8 +194,8 @@ const DynamicArray = ({ ...props }) => {
         };
 
         return (
-          <div>
-            <div className={classes.arrayHeader}>
+          <div {...FieldArrayGridProps}>
+            <div className={clsx(classes.arrayHeader, arrayHeaderClassName)} {...FieldArrayHeaderProps}>
               {label && (
                 <FormField
                   className={classes.noMargin}
@@ -185,28 +219,30 @@ const DynamicArray = ({ ...props }) => {
                   )}
                 />
               )}
-              <div className={classes.buttonGroup}>
-                <ButtonGroup>
-                  <Button className="ddorg__suir__mapper__field-array-undo" type="button" disabled={state.index === 0} onClick={undo}>
-                    <ButtonContent>
-                      <Icon name="undo" />
-                    </ButtonContent>
-                  </Button>
+              <div className={clsx(classes.buttonGroup, arrayButtonGridClassName)} {...FieldArrayButtonGridProps}>
+                <ButtonGroup {...ButtonGroupProps}>
                   <Button
+                    icon="undo"
+                    className="ddorg__suir__mapper__field-array-undo"
+                    {...UndoButtonProps}
+                    type="button"
+                    disabled={state.index === 0}
+                    onClick={undo}
+                  />
+                  <Button
+                    icon="redo"
                     className="ddorg__suir__mapper__field-array-redo"
+                    {...RedoButtonProps}
                     type="button"
                     disabled={state.index === state.history.length}
                     onClick={redo}
-                  >
-                    <ButtonContent>
-                      <Icon name="redo" />
-                    </ButtonContent>
-                  </Button>
+                  />
                   <Button
-                    type="button"
                     content={combinedButtonLabels.add}
                     icon="add"
                     color="blue"
+                    {...AddButtonProps}
+                    type="button"
                     onClick={pushWrapper}
                     disabled={value.length >= maxItems}
                   />
@@ -214,24 +250,29 @@ const DynamicArray = ({ ...props }) => {
               </div>
             </div>
             {description && (
-              <Header className={classes.noMargin} sub>
+              <Header className={clsx(classes.noMargin, descriptionClassName)} sub {...DescriptionProps}>
                 {description}
               </Header>
             )}
-            <div className={classes.arrayItems}>
+            <div className={clsx(classes.arrayItems, arrayItemsClassName)} {...ArrayItemsGridProps}>
               {value.length <= 0 ? (
-                <p className={classes.noItems}>{noItemsMessage}</p>
+                <p className={clsx(classes.noItems, noItemsClassname)} {...NoItemsProps}>
+                  {noItemsMessage}
+                </p>
               ) : (
                 map((name, index) => (
                   <ArrayItem
-                    key={name}
-                    fields={formFields}
-                    name={name}
+                    removeLabel={combinedButtonLabels.remove}
                     fieldIndex={index}
-                    remove={removeWrapper}
+                    fields={formFields}
+                    key={name}
+                    name={name}
                     length={value.length}
                     minItems={minItems}
-                    removeLabel={combinedButtonLabels.remove}
+                    remove={removeWrapper}
+                    RemoveButtonProps={RemoveButtonProps}
+                    ArrayItemGridProps={ArrayItemGridProps}
+                    ArrayItemFieldsGrid={ArrayItemFieldsGrid}
                   />
                 ))
               )}
@@ -256,13 +297,40 @@ DynamicArray.propTypes = {
   minItems: PropTypes.number,
   maxItems: PropTypes.number,
   noItemsMessage: PropTypes.node,
-  buttonLabels: PropTypes.object
+  buttonLabels: PropTypes.object,
+  /** Sub components customization API */
+  FieldArrayGridProps: PropTypes.object,
+  FieldArrayHeaderProps: PropTypes.object,
+  FieldArrayButtonGridProps: PropTypes.object,
+  ButtonGroupProps: PropTypes.object,
+  UndoButtonProps: PropTypes.object,
+  RedoButtonProps: PropTypes.object,
+  AddButtonProps: PropTypes.object,
+  DescriptionProps: PropTypes.object,
+  ArrayItemsGridProps: PropTypes.object,
+  NoItemsProps: PropTypes.object,
+  RemoveButtonProps: PropTypes.object,
+  ArrayItemGridProps: PropTypes.object,
+  ArrayItemFieldsGrid: PropTypes.object
 };
 
 DynamicArray.defaultProps = {
   maxItems: Infinity,
   minItems: 0,
-  noItemsMessage: 'No items added'
+  noItemsMessage: 'No items added',
+  FieldArrayGridProps: {},
+  FieldArrayHeaderProps: {},
+  FieldArrayButtonGridProps: {},
+  ButtonGroupProps: {},
+  UndoButtonProps: {},
+  RedoButtonProps: {},
+  AddButtonProps: {},
+  DescriptionProps: {},
+  ArrayItemsGridProps: {},
+  NoItemsProps: {},
+  RemoveButtonProps: {},
+  ArrayItemGridProps: {},
+  ArrayItemFieldsGrid: {}
 };
 
 export default DynamicArray;

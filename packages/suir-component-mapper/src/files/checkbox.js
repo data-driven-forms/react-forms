@@ -9,14 +9,27 @@ import MultipleChoiceList from '../common/multiple-choice-list';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 export const SingleCheckbox = (props) => {
-  const { input, isReadOnly, isDisabled, isRequired, label, helperText, description, validateOnMount, meta, ...rest } = useFieldApi({
+  const {
+    input,
+    isReadOnly,
+    isDisabled,
+    isRequired,
+    label,
+    helperText,
+    description,
+    validateOnMount,
+    meta,
+    FormFieldGridProps,
+    HelperTextProps,
+    ...rest
+  } = useFieldApi({
     ...props,
     type: 'checkbox'
   });
   const invalid = validationError(meta, validateOnMount);
 
   return (
-    <FormFieldGrid helperText={helperText}>
+    <FormFieldGrid helperText={helperText} HelperTextProps={HelperTextProps} {...FormFieldGridProps}>
       <FormCheckbox
         {...input}
         required={isRequired}
@@ -46,13 +59,30 @@ SingleCheckbox.propTypes = {
   label: PropTypes.node,
   helperText: PropTypes.node,
   description: PropTypes.node,
-  validateOnMount: PropTypes.bool
+  validateOnMount: PropTypes.bool,
+  /** Sub components customization API */
+  FormFieldGridProps: PropTypes.object,
+  HelperTextProps: PropTypes.object
 };
 
 const Checkbox = ({ options, ...props }) => (options ? <MultipleChoiceList options={options} {...props} /> : <SingleCheckbox {...props} />);
 
 Checkbox.propTypes = {
-  options: PropTypes.array
+  options: PropTypes.array,
+  /** Sub components customization API */
+  FormFieldGridProps: PropTypes.object,
+  FormFieldProps: PropTypes.object,
+  HeaderProps: PropTypes.object,
+  OptionsListProps: PropTypes.object,
+  HelperTextProps: PropTypes.object
+};
+
+Checkbox.defaultProps = {
+  FormFieldGridProps: {},
+  FormFieldProps: {},
+  HeaderProps: {},
+  OptionsListProps: {},
+  HelperTextProps: {}
 };
 
 export default Checkbox;
