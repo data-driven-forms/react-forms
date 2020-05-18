@@ -56,6 +56,6 @@ WizardInternal.propTypes = {
   )
 };
 
-const MuiWizard = (props) => <Wizard Wizard={WizardInternal} {...props} />;
+const SuirWizard = (props) => <Wizard Wizard={WizardInternal} {...props} />;
 
-export default MuiWizard;
+export default SuirWizard;

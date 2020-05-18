@@ -42,7 +42,7 @@ const Radio = ({ name, ...props }) => {
     validateOnMount,
     FormFieldGridProps,
     FormFieldProps,
-    HelpertextProps,
+    HelperTextProps,
     ...rest
   } = useFieldApi({
     ...props,
@@ -51,7 +51,7 @@ const Radio = ({ name, ...props }) => {
   });
   const invalid = validationError(meta, validateOnMount);
   return (
-    <FormFieldGrid helperText={helperText} HelpertextProps={HelpertextProps} {...FormFieldGridProps}>
+    <FormFieldGrid helperText={helperText} HelperTextProps={HelperTextProps} {...FormFieldGridProps}>
       <FormField {...FormFieldProps} disabled={isDisabled} required={isRequired} error={invalid && { content: meta.error }} label={label} />
       {options.map((option) => (
         <RadioOption key={option.value} name={name} option={option} isDisabled={isDisabled} isReadOnly={isReadOnly} {...rest} />
@@ -75,14 +75,14 @@ Radio.propTypes = {
   /** Sub components customization API */
   FormFieldGridProps: PropTypes.object,
   FormFieldProps: PropTypes.object,
-  HelpertextProps: PropTypes.object
+  HelperTextProps: PropTypes.object
 };
 
 Radio.defaultProps = {
   options: [],
   FormFieldGridProps: {},
   FormFieldProps: {},
-  HelpertextProps: {}
+  HelperTextProps: {}
 };
 
 export default Radio;

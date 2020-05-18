@@ -162,7 +162,7 @@ const DualList = ({
   OptionProps,
   LabelProps: { className: labelClassName, error: labelError, ...LabelProps },
   ToolbarProps,
-  ButtonGridProps: { className: buttonGridClassName },
+  ButtonGridProps: { className: buttonGridClassName, ...ButtonGridProps },
   RightButtonProps,
   DoubleRightButtonProps,
   LeftButtonProps,
@@ -224,7 +224,7 @@ const DualList = ({
             </GridColumn>
           </Grid>
         </GridColumn>
-        <GridColumn className={clsx(classes.dualListButtons, buttonGridClassName)} mobile={16} tablet={16} computer={2}>
+        <GridColumn className={clsx(classes.dualListButtons, buttonGridClassName)} {...ButtonGridProps} mobile={16} tablet={16} computer={2}>
           <Grid>
             <GridColumn tablet={16} mobile={4}>
               <Button
