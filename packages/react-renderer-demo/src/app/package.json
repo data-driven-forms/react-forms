@@ -6,12 +6,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "yarn generate:examples; next build",
     "start": "next start",
     "vendor": "webpack --env vendor --config ./config/webpack.config.js --progress",
     "deploy": "firebase deploy --only functions",
     "analyze": "ANALYZE=true next build",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "generate:examples": "node ./scripts/generate-component-examples; yarn lint --fix"
   },
   "repository": {
     "type": "git",
