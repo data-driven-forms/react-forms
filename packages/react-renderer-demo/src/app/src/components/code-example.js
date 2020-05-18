@@ -7,7 +7,6 @@ import Box from '@material-ui/core/Box';
 import CodeIcon from '@material-ui/icons/Code';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import dynamic from 'next/dynamic';
 import PropTypes from 'prop-types';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Paper from '@material-ui/core/Paper';
@@ -16,13 +15,11 @@ import grey from '@material-ui/core/colors/grey';
 import IconButton from '@material-ui/core/IconButton';
 import { getParameters } from 'codesandbox/lib/api/define';
 import Tooltip from '@material-ui/core/Tooltip';
+import dynamic from 'next/dynamic';
 
 import GhIcon from './common/gh-svg-icon';
 import CodesandboxIcon from './common/code-sandbox-svg-icon';
-
-const CodeEditor = dynamic(import('./code-editor'), {
-  ssr: false
-});
+import CodeEditor from './code-editor';
 
 const useStyles = makeStyles((theme) => ({
   codeWrapper: {
