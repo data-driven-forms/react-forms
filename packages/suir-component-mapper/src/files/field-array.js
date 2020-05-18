@@ -47,7 +47,7 @@ const ArrayItem = ({
   removeLabel,
   RemoveButtonProps,
   ArrayItemGridProps: { className: arrayItemClassName, ...ArrayItemGridProps },
-  ArrayItemFieldsGrid
+  ArrayItemFieldsGridProps
 }) => {
   const { renderForm } = useFormApi();
   const classes = useStyles();
@@ -59,7 +59,7 @@ const ArrayItem = ({
 
   return (
     <div className={clsx(classes.arrayItem, arrayItemClassName)} {...ArrayItemGridProps}>
-      <div {...ArrayItemFieldsGrid}>{renderForm([editedFields])}</div>
+      <div {...ArrayItemFieldsGridProps}>{renderForm([editedFields])}</div>
       <div>
         <Button
           icon="remove"
@@ -86,13 +86,13 @@ ArrayItem.propTypes = {
   removeLabel: PropTypes.node.isRequired,
   RemoveButtonProps: PropTypes.object,
   ArrayItemGridProps: PropTypes.object,
-  ArrayItemFieldsGrid: PropTypes.object
+  ArrayItemFieldsGridProps: PropTypes.object
 };
 
 ArrayItem.defaultProps = {
   RemoveButtonProps: {},
   ArrayItemGridProps: {},
-  ArrayItemFieldsGrid: {}
+  ArrayItemFieldsGridProps: {}
 };
 
 const defaultButtonLabels = {
@@ -156,7 +156,7 @@ const DynamicArray = ({ ...props }) => {
     NoItemsProps: { className: noItemsClassname, ...NoItemsProps },
     RemoveButtonProps,
     ArrayItemGridProps,
-    ArrayItemFieldsGrid,
+    ArrayItemFieldsGridProps,
     ...rest
   } = useFieldApi(props);
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -272,7 +272,7 @@ const DynamicArray = ({ ...props }) => {
                     remove={removeWrapper}
                     RemoveButtonProps={RemoveButtonProps}
                     ArrayItemGridProps={ArrayItemGridProps}
-                    ArrayItemFieldsGrid={ArrayItemFieldsGrid}
+                    ArrayItemFieldsGridProps={ArrayItemFieldsGridProps}
                   />
                 ))
               )}
@@ -311,7 +311,7 @@ DynamicArray.propTypes = {
   NoItemsProps: PropTypes.object,
   RemoveButtonProps: PropTypes.object,
   ArrayItemGridProps: PropTypes.object,
-  ArrayItemFieldsGrid: PropTypes.object
+  ArrayItemFieldsGridProps: PropTypes.object
 };
 
 DynamicArray.defaultProps = {
@@ -330,7 +330,7 @@ DynamicArray.defaultProps = {
   NoItemsProps: {},
   RemoveButtonProps: {},
   ArrayItemGridProps: {},
-  ArrayItemFieldsGrid: {}
+  ArrayItemFieldsGridProps: {}
 };
 
 export default DynamicArray;

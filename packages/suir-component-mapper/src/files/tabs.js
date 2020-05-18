@@ -12,14 +12,14 @@ TabContent.propTypes = {
   formOptions: PropTypes.shape({ renderForm: PropTypes.func.isRequired }).isRequired
 };
 
-const FormTabs = ({ fields, TabProps, TabPaneProps, TabContentProps }) => {
+const FormTabs = ({ fields, TabProps, TabPaneProps }) => {
   const formOptions = useFormApi();
 
   const panes = fields.map((field, index) => ({
     menuItem: field.title,
     pane: (
       <TabPane {...TabPaneProps} key={index}>
-        <TabContent {...TabContentProps} {...field} formOptions={formOptions} />
+        <TabContent {...field} formOptions={formOptions} />
       </TabPane>
     )
   }));
@@ -29,14 +29,12 @@ const FormTabs = ({ fields, TabProps, TabPaneProps, TabContentProps }) => {
 FormTabs.propTypes = {
   fields: PropTypes.array.isRequired,
   TabProps: PropTypes.object,
-  TabPaneProps: PropTypes.object,
-  TabContentProps: PropTypes.object
+  TabPaneProps: PropTypes.object
 };
 
 FormTabs.defaultProps = {
   TabProps: {},
-  TabPaneProps: {},
-  TabContentProps: {}
+  TabPaneProps: {}
 };
 
 export default FormTabs;
