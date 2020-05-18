@@ -18,15 +18,12 @@ import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 
-import dynamic from 'next/dynamic';
 import FormExample from './formExample';
 import MaterialUILogo from '../common/material-logo';
 import PF3Logo from '../common/pf3-logo';
 import PF4Logo from '../common/pf4-logo';
 
-const CodeEditor = dynamic(import('@docs/components/code-editor'), {
-  ssr: false
-});
+import CodeEditor from '@docs/components/code-editor';
 
 const value = `import React from 'react';
 import

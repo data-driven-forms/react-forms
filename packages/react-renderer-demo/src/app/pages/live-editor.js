@@ -21,13 +21,9 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import PanToolIcon from '@material-ui/icons/PanTool';
-
-import dynamic from 'next/dynamic';
-
 import PropTypes from 'prop-types';
-const CodeEditor = dynamic(import('../src/components/code-editor'), {
-  ssr: false
-});
+
+import CodeEditor from '../src/components/code-editor';
 
 const useStyles = makeStyles((theme) => ({
   builderWrapper: {
