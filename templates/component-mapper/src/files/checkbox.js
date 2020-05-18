@@ -21,15 +21,15 @@ const SingleCheckbox = (props) => {
   return (
     <React.Fragment>
       <label htmlFor={name}>{label}</label>
-      <input {...input} type="checkbox" disabled={isDisabled}/>
+      <input {...input} id={name} type="checkbox" disabled={isDisabled}/>
     </React.Fragment>
   );
 };
 
-const SingleCheckboxInCommon = ({ label, isDisabled, ...props }) => (
+const SingleCheckboxInCommon = ({ label, isDisabled, id, ...props }) => (
   <React.Fragment>
-    <label htmlFor={props.name}>{label}</label>
-    <input {...props} type="checkbox" disabled={isDisabled} />
+    <label htmlFor={id}>{label}</label>
+    <input {...props} id={id} type="checkbox" disabled={isDisabled} />
   </React.Fragment>
 );
 
@@ -37,7 +37,8 @@ SingleCheckboxInCommon.propTypes = {
   label: PropTypes.node,
   input: PropTypes.object,
   isDisabled: PropTypes.bool,
-  name: PropTypes.string
+  name: PropTypes.string,
+  id: PropTypes.string
 };
 
 const Checkbox = ({ options, ...props }) =>
