@@ -4,3 +4,4 @@
 /**/coverage
 /**/vendor.js
 /**/*.config.js
+/templates/**/*.*
