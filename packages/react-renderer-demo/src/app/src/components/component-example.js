@@ -24,6 +24,7 @@ import { pf4Code, pf4WizardCode, pf4Html, pf4Dependencies } from '../stackblitz-
 import { pf3Code, pf3WizardCode, pf3Html, pf3Dependencies } from '../stackblitz-templates/pf3-templates';
 import { blueprintCode, blueprintWizardCode, blueprintHtml, blueprintDependencies } from '../stackblitz-templates/blueprint-templates';
 import { suirCode, suirWizardCode, suirHtml, suirDependencies } from '../stackblitz-templates/suir-template';
+import avalableMappers from '../helpers/available-mappers';
 
 const project = {
   settings: {
@@ -146,15 +147,7 @@ const mapperTab = {
   suir: 4
 };
 
-const tabs = [
-  { title: 'MUI', mapper: 'mui' },
-  { title: 'PF4', mapper: 'pf4' },
-  { title: 'PF3', mapper: 'pf3' },
-  { title: 'BJS', mapper: 'blueprint' },
-  { title: 'SUIR', mapper: 'suir' }
-];
-
-const ComponentExample = ({ baseStructure, activeMapper, component }) => {
+const ComponentExample = ({ variants, schema, activeMapper, component }) => {
   const activeTab = mapperTab[activeMapper];
   const { pathname, push } = useRouter();
   const classes = useStyles();
@@ -167,15 +160,15 @@ const ComponentExample = ({ baseStructure, activeMapper, component }) => {
         files: {
           ...blitzFiles[activeMapper],
           ...(component === 'wizard' && { 'index.js': blitzWizards[activeMapper] }),
-          'schema.js': `export default ${JSON.stringify(baseStructure.value, null, 2)};`
+          'schema.js': `export default ${JSON.stringify(schema, null, 2)};`
         }
       },
       { height: '100%', hideNavigation: true, forceEmbedLayout: true, openFile: 'schema.js' }
     );
-  }, [activeMapper, baseStructure.value]);
+  }, [activeMapper, schema]);
 
   const renderMapperTabs = () =>
-    tabs.map(({ title, mapper }, index) => (
+    avalableMappers.map(({ title, mapper }, index) => (
       <Tab
         key={mapper}
         value={index}
@@ -205,7 +198,7 @@ const ComponentExample = ({ baseStructure, activeMapper, component }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {baseStructure.variants.map(({ name, type, required }) => (
+              {variants.map(({ name, type, required }) => (
                 <TableRow key={name}>
                   <TableCell>{name}</TableCell>
                   <TableCell>{`${type}`}</TableCell>
@@ -255,10 +248,14 @@ const ComponentExample = ({ baseStructure, activeMapper, component }) => {
 ComponentExample.propTypes = {
   component: PropTypes.string.isRequired,
   activeMapper: PropTypes.string.isRequired,
-  baseStructure: PropTypes.shape({
-    variants: PropTypes.array.isRequired,
-    value: PropTypes.object.isRequired
-  }).isRequired
+  schema: PropTypes.object.isRequired,
+  variants: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      required: PropTypes.bool
+    })
+  ).isRequired
 };
 
 export default ComponentExample;
