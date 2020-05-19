@@ -248,22 +248,10 @@ describe('formFields generated tests', () => {
   });
 
   describe('Not implemented components', () => {
-    it('Wizard', () => {
-      const wrapper = mount(<Wizard />);
-
-      expect(wrapper.text()).toEqual('wizard');
-    });
-
     it('DualListSelect', () => {
       const wrapper = mount(<DualListSelect />);
 
       expect(wrapper.text()).toEqual('DualListSelect');
-    });
-
-    it('FieldArray', () => {
-      const wrapper = mount(<FieldArray />);
-
-      expect(wrapper.text()).toEqual('FieldArray');
     });
   });
 });
