@@ -6,9 +6,7 @@ import FormTemplate from '../files/form-template';
 import componentMapper from '../files/component-mapper';
 import { validatorTypes } from '@data-driven-forms/react-form-renderer';
 import FormGroupWrapper from '../files/form-group';
-import Wizard from '../files/wizard';
 import DualListSelect from '../files/dual-list-select';
-import FieldArray from '../files/field-array';
 
 describe('formFields generated tests', () => {
   const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (

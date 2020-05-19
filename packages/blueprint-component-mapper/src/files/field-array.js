@@ -131,12 +131,12 @@ FieldArray.propTypes = {
   AddButtonProps: PropTypes.object,
   RemoveButtonProps: PropTypes.object,
   ArrayItemProps: PropTypes.object,
+  FormGroupProps: PropTypes.object,
   FieldArrayProps: PropTypes.object,
   noItemsMessage: PropTypes.node,
   validateOnMount: PropTypes.bool,
   helperText: PropTypes.node,
   isRequired: PropTypes.bool,
-  FormGroupProps: PropTypes.object,
   maxItems: PropTypes.number,
   minItems: PropTypes.number
 };

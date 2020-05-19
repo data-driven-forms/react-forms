@@ -4,6 +4,7 @@ import MuiFieldArray from './examples-texts/mui/mui-field-array.md';
 import Pf4FieldArray from './examples-texts/pf4/pf4-field-array.md';
 import Pf3FieldArray from './examples-texts/pf3/pf3-field-array.md';
 import SuirFieldArray from './examples-texts/suir/suir-field-array.md';
+import BlueprintFieldArray from './examples-texts/blueprint/blueprint-field-array.md';
 import GenericMuiComponent from '../helpers/generic-mui-component';
 
 const FieldArray = ({ activeMapper }) => {
@@ -21,6 +22,10 @@ const FieldArray = ({ activeMapper }) => {
 
   if (activeMapper === 'suir') {
     return <SuirFieldArray />;
+  }
+
+  if (activeMapper === 'blueprint') {
+    return <BlueprintFieldArray />;
   }
 
   return <GenericMuiComponent activeMapper={activeMapper} component="field-array" />;
