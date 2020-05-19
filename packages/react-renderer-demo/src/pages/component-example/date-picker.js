@@ -3,7 +3,7 @@ import ComponentText from '@docs/components/component-example-text';
 import DatePickerText from '@docs/doc-components/date-picker';
 import useActiveMapper from '@docs/hooks/use-active-mapper';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
-import baseFieldProps from '../../src/helpers/base-field-props';
+import baseFieldProps from '../../helpers/base-field-props';
 
 const schema = {
   fields: [

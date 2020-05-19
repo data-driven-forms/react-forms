@@ -3,7 +3,7 @@ import App from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import theme from '../src/theme';
+import theme from '../theme';
 import Layout from '@docs/components/layout';
 import { MDXProvider } from '@mdx-js/react';
 import MdxComponents from '@docs/components/mdx/mdx-components';

@@ -1,20 +1,30 @@
 import React, { Fragment } from 'react';
 import ComponentText from '@docs/components/component-example-text';
-import TimePickerText from '@docs/doc-components/time-picker';
+import SwitchText from '@docs/doc-components/switch';
 import useActiveMapper from '@docs/hooks/use-active-mapper';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
-import baseFieldProps from '../../src/helpers/base-field-props';
+import baseFieldProps from '../../helpers/base-field-props';
 
 const schema = {
   fields: [
     {
-      component: componentTypes.TIME_PICKER,
-      label: 'Time Picker',
-      name: 'time-picker'
+      component: componentTypes.SWITCH,
+      label: 'Switch',
+      name: 'switch'
     }
   ]
 };
-const variants = [...baseFieldProps];
+const variants = [
+  ...baseFieldProps,
+  {
+    name: 'onText',
+    type: 'string'
+  },
+  {
+    name: 'offText',
+    type: 'string'
+  }
+];
 
 export default () => {
   const activeMapper = useActiveMapper();
@@ -22,13 +32,12 @@ export default () => {
     <Fragment>
       <ComponentText
         activeMapper={activeMapper}
-        component={componentTypes.TIME_PICKER}
+        component={componentTypes.SWITCH}
         schema={schema}
-        ContentText={TimePickerText}
+        ContentText={SwitchText}
         variants={variants}
-        linkText="Time picker"
+        linkText="Switch"
       />
-      {activeMapper === 'mui' && <TimePickerText />}
     </Fragment>
   );
 };
