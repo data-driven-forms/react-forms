@@ -23,7 +23,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import PanToolIcon from '@material-ui/icons/PanTool';
 import PropTypes from 'prop-types';
 
-import CodeEditor from '../src/components/code-editor';
+import CodeEditor from '../components/code-editor';
 
 const useStyles = makeStyles((theme) => ({
   builderWrapper: {

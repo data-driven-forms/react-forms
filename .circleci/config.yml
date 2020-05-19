@@ -52,7 +52,7 @@ jobs:
       - run:
           name: Predeploy demo
           command: |
-              yarn --cwd packages/react-renderer-demo/ create-deploy-files
+              yarn --cwd packages/react-renderer-demo/ build
       - persist_to_workspace:
           root: ~/react-forms
           paths:

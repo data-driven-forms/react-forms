@@ -11,10 +11,6 @@ const muiTransformPlugin = [
 ];
 
 module.exports = {
-  presets: [
-    [
-      'next/babel',
-    ]
-  ],
+  presets: [['next/babel']],
   plugins: [muiTransformPlugin]
 };

@@ -3,7 +3,7 @@ import ComponentText from '@docs/components/component-example-text';
 import FieldArray from '@docs/doc-components/field-array';
 import useActiveMapper from '@docs/hooks/use-active-mapper';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
-import arraySchemaDDF from '../../src/components/navigation/field-array-schema';
+import arraySchemaDDF from '../../components/navigation/field-array-schema';
 
 const variants = [
   {
