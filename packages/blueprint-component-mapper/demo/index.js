@@ -19,8 +19,10 @@ import demoSchema from '@data-driven-forms/common/src/demoschema';
 const Summary = (props) => <div>Custom summary component.</div>;
 
 const fieldArrayState = {
-  schema: demoSchema,
+  schema: wizardSchema,
   additionalOptions: {
+    wizard: true,
+    showFormControls: false,
     initialValues: {
       number: [1, 2, 3, 4],
       minMax: [null, null, null, null]

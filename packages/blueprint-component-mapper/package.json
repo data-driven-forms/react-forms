@@ -72,5 +72,7 @@
     "@blueprintjs/datetime": "^3.17.0",
     "@blueprintjs/select": "^3.12.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "clsx": "^1.1.0"
+  }
 }
