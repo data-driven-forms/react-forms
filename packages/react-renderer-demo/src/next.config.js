@@ -13,7 +13,35 @@ module.exports = withBundleAnalyzer(
   withOffline(
     withMDX({
       workboxOpts: {
-        swDest: '../public/service-worker.js'
+        swDest: '../public/service-worker.js',
+        runtimeCaching: [
+          {
+            urlPattern: /^https?.*/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'offlineCache',
+              expiration: {
+                maxEntries: 200
+              }
+            }
+          },
+          {
+            urlPattern: /.png$/,
+            handler: 'CacheFirst'
+          },
+          {
+            urlPattern: /data-driven-forms.firebaseio.com/,
+            handler: 'NetworkFirst',
+            options: {
+              cacheableResponse: {
+                statuses: [0, 200],
+                headers: {
+                  'x-test': 'true'
+                }
+              }
+            }
+          }
+        ]
       },
       crossOrigin: 'anonymous',
       pageExtensions: ['js', 'jsx', 'md', 'mdx'],
