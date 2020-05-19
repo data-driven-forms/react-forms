@@ -12,21 +12,24 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 module.exports = withBundleAnalyzer(
   withOffline(
     withMDX({
+      workboxOpts: {
+        swDest: '../public/service-worker.js'
+      },
       crossOrigin: 'anonymous',
       pageExtensions: ['js', 'jsx', 'md', 'mdx'],
-      distDir: '../../dist/functions/next',
+      distDir: '../dist',
       webpack: (config, options) => {
         config.resolve.alias = {
           ...config.resolve.alias,
-          react: path.resolve(__dirname, '../../../../node_modules/react'),
-          'react-dom': path.resolve(__dirname, '../../../../node_modules/react-dom'),
-          '@docs/doc-components': path.resolve(__dirname, './src/doc-components'),
-          '@docs/components': path.resolve(__dirname, './src/components'),
+          react: path.resolve(__dirname, '../../../node_modules/react'),
+          'react-dom': path.resolve(__dirname, '../../../node_modules/react-dom'),
+          '@docs/doc-components': path.resolve(__dirname, './doc-components'),
+          '@docs/components': path.resolve(__dirname, './components'),
           '@docs/pages': path.resolve(__dirname, './pages'),
           '@docs/examples': path.resolve(__dirname, './examples'),
-          '@docs/list-of-contents': path.resolve(__dirname, './src/helpers/list-of-contents'),
-          '@docs/code-example': path.resolve(__dirname, './src/components/code-example'),
-          '@docs/hooks': path.resolve(__dirname, './src/hooks')
+          '@docs/list-of-contents': path.resolve(__dirname, './helpers/list-of-contents'),
+          '@docs/code-example': path.resolve(__dirname, './components/code-example'),
+          '@docs/hooks': path.resolve(__dirname, './hooks')
         };
 
         config.optimization.minimizer = [

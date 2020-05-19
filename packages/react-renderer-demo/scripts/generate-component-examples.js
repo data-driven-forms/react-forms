@@ -12,12 +12,12 @@ const availableMappers = [
   { title: 'SUIR', mapper: 'suir' }
 ];
 
-const targetDirectory = path.resolve(__dirname, '../src/doc-components');
+const targetDirectory = path.resolve(__dirname, '../doc-components');
 
 const mdSources = availableMappers.reduce(
   (acc, curr) => ({
     ...acc,
-    [curr.mapper]: glob.sync(path.resolve(__dirname, `../src/doc-components/examples-texts/${curr.mapper}/*.md`)).map((path) => path.split('/').pop())
+    [curr.mapper]: glob.sync(path.resolve(__dirname, `../doc-components/examples-texts/${curr.mapper}/*.md`)).map((path) => path.split('/').pop())
   }),
   {}
 );

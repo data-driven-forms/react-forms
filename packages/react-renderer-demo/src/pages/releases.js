@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Markdown from 'markdown-to-jsx';
-import { Heading } from '../src/components/mdx/mdx-components';
+import { Heading } from '../components/mdx/mdx-components';
 import mdxComponents from '@docs/components/mdx/mdx-components';
 
 const options = {

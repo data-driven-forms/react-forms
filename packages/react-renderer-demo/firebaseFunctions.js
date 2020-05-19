@@ -1,19 +1,21 @@
-const path = require('path');
 const functions = require('firebase-functions');
 const next = require('next');
 const { join } = require('path');
 const { parse } = require('url');
 
-let dev = process.env.NODE_ENV !== 'production';
-let app = next({
-  dev,
-  conf: { distDir: `${path.relative(process.cwd(), __dirname)}/next` }
+const isDev = process.env.NODE_ENV !== 'production';
+const nextjsDistDir = join('src', require('./src/next.config.js').distDir);
+const nextjsServer = next({
+  dev: isDev,
+  conf: {
+    distDir: nextjsDistDir
+  }
 });
-let handle = app.getRequestHandler();
+const nextjsHandle = nextjsServer.getRequestHandler();
 
-exports.next = functions.https.onRequest((req, res) => {
+exports.nextjsFunc = functions.https.onRequest((req, res) => {
   console.log('File: ' + req.originalUrl); // eslint-disable-line no-console
-  return app.prepare().then(() => {
+  return nextjsServer.prepare().then(() => {
     const parsedUrl = parse(req.url, true);
     const { pathname } = parsedUrl;
 
@@ -21,9 +23,9 @@ exports.next = functions.https.onRequest((req, res) => {
     if (pathname === '/service-worker.js') {
       const filePath = join(__dirname, '.next', pathname);
 
-      app.serveStatic(req, res, filePath);
+      nextjsServer.serveStatic(req, res, filePath);
     } else {
-      handle(req, res, parsedUrl);
+      nextjsHandle(req, res, parsedUrl);
     }
   });
 });

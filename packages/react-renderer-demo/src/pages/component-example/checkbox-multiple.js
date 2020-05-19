@@ -1,16 +1,21 @@
 import React, { Fragment } from 'react';
 import ComponentText from '@docs/components/component-example-text';
-import GenericMuiComponent from '@docs/doc-components/checkbox';
+import CheckboxText from '@docs/doc-components/checkbox';
 import useActiveMapper from '@docs/hooks/use-active-mapper';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
-import baseFieldProps from '../../src/helpers/base-field-props';
+import baseFieldProps from '../../helpers/base-field-props';
 
 const schema = {
   fields: [
     {
       component: componentTypes.CHECKBOX,
       label: 'Checkbox',
-      name: 'checkbox'
+      name: 'checkbox',
+      options: [
+        { label: 'Dog', value: '1' },
+        { label: 'Cats', value: '2' },
+        { label: 'Hamsters', value: '3' }
+      ]
     }
   ]
 };
@@ -31,9 +36,9 @@ export default () => {
         activeMapper={activeMapper}
         component={componentTypes.CHECKBOX}
         schema={schema}
-        ContentText={GenericMuiComponent}
+        ContentText={CheckboxText}
         variants={variants}
-        linkText="Checkbox"
+        linkText="Checkbox multiple"
       />
     </Fragment>
   );
