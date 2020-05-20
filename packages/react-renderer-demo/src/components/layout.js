@@ -184,7 +184,7 @@ const Layout = ({ children }) => {
             <MenuIcon className={classes.menuIcons} />
           </IconButton>
         </Toolbar>
-        <Hidden smDown>
+        <Hidden smDown implementation="css">
           <Drawer
             className={classes.drawer}
             variant="persistent"
@@ -198,7 +198,7 @@ const Layout = ({ children }) => {
             <Divider />
           </Drawer>
         </Hidden>
-        <Hidden mdUp>
+        <Hidden mdUp implementation="css">
           <Drawer
             className={classes.drawer}
             variant="temporary"
