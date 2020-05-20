@@ -19,7 +19,7 @@ import demoSchema from '@data-driven-forms/common/src/demoschema';
 const Summary = (props) => <div>Custom summary component.</div>;
 
 const fieldArrayState = {
-  schema: demoSchema,
+  schema: arraySchemaDDF,
   additionalOptions: {
     initialValues: {
       number: [1, 2, 3, 4],
