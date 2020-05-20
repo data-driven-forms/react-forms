@@ -4,30 +4,23 @@
 ￼
 This package exists to share code used by more than one data-driven-forms package, such as:
 
-* shared interfaces - propTypes
-* common mapper code - `condition` implementation
+- shared interfaces - propTypes
+- common mappers code 
+  - wizard
+  - select
+  - multiplechoice list
+  - form template
+  - dual list select
+- demo schema
+
+...and some boring config files etc.
+
 ￼
+This packages is not released but can be referenced in mapper packages. Demo packages does not have access to common package!
 
 ## Usage
 ￼
 ```
-const common = require('@data-driven-forms/common');
+import demoSchema from '@data-driven-forms/common/src/demoschema';
 
-// shared props
-function MyComponent() {...}
-
-MyComponent.propTypes = {
-  ...common.children.propTypes,
-  isMulti: PropTypes.bool.isRequired,
-};
-
-MyComponent.defaultProps = {
-  ...common.children.defaultProps,
-};
-
-// condition code
-common.condition.evaluate({
-  when: "field",
-  in: ["foo", "bar"],
-}, { field: "baz" }); // false
 ```

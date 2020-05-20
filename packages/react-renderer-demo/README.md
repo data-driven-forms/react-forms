@@ -4,60 +4,41 @@ A documentation page for [Data Driven Forms](https://github.com/data-driven-form
 
 :book: For more information please visit the [documentation](https://data-driven-forms.org/). :book:
 
-Used by [ManageIQ](http://manageiq.org/), Red Hat Cloud Services.
+Always make sure to update the doces after any package change!
 
-**Table of Contents**
+## Commands
 
-- [Development setup](#development-setup)
-  - [Tests](#tests)
-  - [Commits](#commits)
-- [Contribution](#contribution)
-- [LICENSE](#license)
+### Installation
 
-### Development setup
-
-1. Install
-
-```console
-cd ../..
-yarn install
+```bash
+yarn
 ```
 
-2. Build
+### Start local server
+```bash
+cd packages/react-renderer-demo
+yarn dev # runs on localhost:3000
+```
 
-```console
-cd ../..
+### Build production version
+```bash
+cd packages/react-renderer-demo
 yarn build
 ```
 
-3. Run a package
-
-```console
-yarn dev
+### Generate component examples from mappers
+```bash
+cd packages/react-renderer-demo
+yarn generate:examples 
+```
+### Run bundle analyzer
+```bash
+cd packages/react-renderer-demo
+yarn analyze 
 ```
 
-1. How to clean?
-
-```console
-cd ../..
-rm yarn.lock
-yarn lerna clean # will delete all node_modules
+### Emulate firebase server locally
+```bash
+cd packages/react-renderer-demo
+yarn build && yarn serve 
 ```
-
-All packages are linked together by default, so if you run a `yarn build` in a package, all other packages are updated to the latest version of that package.
-
-#### Tests
-
-Documentation does not contain any test files currently.
-
-#### Commits
-
-Please, do not use Semantic Release, if you update only the demo.
-
-### Contribution
-
-We welcome any community contribution. Don't be afraid to report bug or to create issues and pull-requests! :trophy:
-
-### LICENSE
-
-Apache License 2.0
