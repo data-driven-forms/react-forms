@@ -189,7 +189,7 @@ const Layout = ({ children }) => {
             className={classes.drawer}
             variant="persistent"
             anchor="left"
-            open={open}
+            open={open && window && window.innerWidth > 960}
             classes={{
               paper: classes.drawerPaper
             }}
@@ -203,9 +203,12 @@ const Layout = ({ children }) => {
             className={classes.drawer}
             variant="temporary"
             anchor="left"
-            open={open}
+            open={open && window && window.innerWidth < 960}
             classes={{
               paper: classes.drawerPaper
+            }}
+            ModalProps={{
+              keepMounted: true
             }}
           >
             <Navigation closeNav={handleDrawerClose} />
