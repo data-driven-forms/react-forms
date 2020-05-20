@@ -7,6 +7,7 @@ import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import Link from 'next/link';
 
 import MenuContext from '../navigation/menu-context';
+import useMapperLink from '../../hooks/use-mapper-link';
 
 const useStyles = makeStyles(() => ({
   linksContainer: {
@@ -23,12 +24,14 @@ const useStyles = makeStyles(() => ({
 const ConnectedLinks = () => {
   const { prev, next } = useContext(MenuContext);
   const classNames = useStyles();
+  const prevLink = `/${useMapperLink(prev && prev.link)}`;
+  const nextLink = `/${useMapperLink(next && next.link)}`;
   return (
     <Grid container justify="space-between" className={classNames.linksContainer}>
       <Grid item>
         {prev && prev.link && (
-          <Link href={`/${prev.link}`}>
-            <a className={classNames.link} href={`/${prev.link}`}>
+          <Link href={prevLink}>
+            <a className={classNames.link} href={prevLink}>
               <Button>
                 <ChevronLeft />
                 {prev.label}
@@ -39,8 +42,8 @@ const ConnectedLinks = () => {
       </Grid>
       <Grid item>
         {next && next.link && (
-          <Link href={`/${next.link}`}>
-            <a className={classNames.link} href={`/${next.link}`}>
+          <Link href={nextLink}>
+            <a className={classNames.link} href={nextLink}>
               <Button>
                 {next.label}
                 <ChevronRight />
