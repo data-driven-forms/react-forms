@@ -6,8 +6,6 @@ Patternfly 3 component mapper for [Data Driven Forms](https://github.com/data-dr
 
 :book: For more information please visit the [documentation](https://data-driven-forms.org/). :book:
 
-Used by [ManageIQ](http://manageiq.org/), Red Hat Cloud Services.
-
 **Table of Contents**
 
 - [Installation](#installation)

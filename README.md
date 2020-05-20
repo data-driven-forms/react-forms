@@ -29,8 +29,6 @@ Data Driven Forms is a React library used for rendering and managing forms with 
 
 :book: For more information please visit the [documentation](https://data-driven-forms.org/). :book:
 
-Used by [ManageIQ](http://manageiq.org/), Red Hat Cloud Services.
-
 **Table of Contents**
 
 - [Installation](#installation)
@@ -51,7 +49,7 @@ Used by [ManageIQ](http://manageiq.org/), Red Hat Cloud Services.
 
 ### Installation
 
-You neet to add React Form Renderer
+Add React Form Renderer
 
 #### [React Form Renderer](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)
 
@@ -64,6 +62,17 @@ $ yarn add @data-driven-forms/react-form-renderer
 ```
 
 Optionally you can install one of provided mappers:
+
+
+#### [Material-UI Mapper](https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper)
+
+```console
+$ npm install @data-driven-forms/mui-component-mapper -S
+```
+
+```console
+$ yarn add @data-driven-forms/mui-component-mapper
+```
 
 #### [PatternFly 3 Mapper](https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper)
 
@@ -85,19 +94,11 @@ $ npm install @data-driven-forms/pf4-component-mapper -S
 $ yarn add @data-driven-forms/pf4-component-mapper
 ```
 
-#### [Material-UI Mapper](https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper)
-
-```console
-$ npm install @data-driven-forms/mui-component-mapper -S
-```
-
-```console
-$ yarn add @data-driven-forms/mui-component-mapper
-```
+Component libraries in mappers are external dependencies. Make sure to install them in your bundles.
 
 ### Usage
 
-For using Data Driven Forms in your component you need the renderer and a component mapper, which provides formFields components and layoutFields components.
+In order to Data Driven Forms in your component you need the renderer and a component mapper, which provides component mapper and form template
 
 ```jsx
 import React from 'react';
@@ -137,6 +138,8 @@ Data Driven Forms supports all kinds of component, basic set is consisted of:
 - Tabs
 - Sub-form
 - Wizard
+
+Any other components can be added to mapper and renderer with the form renderer. Existing components can be also overriden.
 
 ### Documentation
 
