@@ -54,9 +54,11 @@ const mozillaSchema = [
   }
 ]
 
+const parsedSchema = mozilla(mozillaSchema)
+
 const Form = () => (
   <FormRenderer
-    schema={mozilla(mozillaSchema)}
+    schema={parsedSchema}
     componentMapper={componentMapper}
     FormTemplate={FormTemplate}
     onSubmit={console.log}

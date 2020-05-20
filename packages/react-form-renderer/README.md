@@ -1,8 +1,11 @@
+[![codecov](https://codecov.io/gh/data-driven-forms/react-forms/branch/master/graph/badge.svg)](https://codecov.io/gh/data-driven-forms/react-forms)
+[![CircleCI](https://circleci.com/gh/data-driven-forms/react-forms/tree/master.svg?style=svg)](https://circleci.com/gh/data-driven-forms/react-forms/tree/master)
 [![npm version](https://badge.fury.io/js/%40data-driven-forms%2Freact-form-renderer.svg)](https://badge.fury.io/js/%40data-driven-forms%2Freact-form-renderer)
 
 [![Data Driven Form logo](images/logo.png)](https://data-driven-forms.org/)
 
 Data Driven Forms is a React library used for rendering and managing forms with a lot of provided features based on [React Final Form](https://github.com/final-form/react-final-form).
+
 
 :question: Why to use Data Driven Forms? :question:
 - All forms shared the same functionality!
@@ -26,8 +29,6 @@ Data Driven Forms is a React library used for rendering and managing forms with 
 
 :book: For more information please visit the [documentation](https://data-driven-forms.org/). :book:
 
-Used by [ManageIQ](http://manageiq.org/), Red Hat Cloud Services.
-
 **Table of Contents**
 
 - [Installation](#installation)
@@ -48,7 +49,7 @@ Used by [ManageIQ](http://manageiq.org/), Red Hat Cloud Services.
 
 ### Installation
 
-You neet to add React Form Renderer
+Add React Form Renderer
 
 #### [React Form Renderer](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)
 
@@ -61,6 +62,17 @@ $ yarn add @data-driven-forms/react-form-renderer
 ```
 
 Optionally you can install one of provided mappers:
+
+
+#### [Material-UI Mapper](https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper)
+
+```console
+$ npm install @data-driven-forms/mui-component-mapper -S
+```
+
+```console
+$ yarn add @data-driven-forms/mui-component-mapper
+```
 
 #### [PatternFly 3 Mapper](https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper)
 
@@ -82,19 +94,11 @@ $ npm install @data-driven-forms/pf4-component-mapper -S
 $ yarn add @data-driven-forms/pf4-component-mapper
 ```
 
-#### [Material-UI Mapper](https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper)
-
-```console
-$ npm install @data-driven-forms/mui-component-mapper -S
-```
-
-```console
-$ yarn add @data-driven-forms/mui-component-mapper
-```
+Component libraries in mappers are external dependencies. Make sure to install them in your bundles.
 
 ### Usage
 
-For using Data Driven Forms in your component you need the renderer and a component mapper, which provides formFields components and layoutFields components.
+In order to Data Driven Forms in your component you need the renderer and a component mapper, which provides component mapper and form template
 
 ```jsx
 import React from 'react';
@@ -119,6 +123,39 @@ const Form = () => (
 )
 ```
 
+#### Custom mapper
+
+You can also custom mapper for your applications
+
+```jsx
+import React from 'react';
+import FormRenderer, { componentTypes, useFieldApi } from '@data-driven-forms/react-form-renderer';
+
+const TextField = props => {
+  const {label, input, meta, ...rest} = useFieldApi(props)
+  return (
+    <div>
+      <label htmlForm={input.name}>{label}</label>
+      <input {...input} {...rest} id={input.name}/>
+      {meta.error && <p>{meta.error}</p>}
+    </div>
+  )
+}
+
+const componentMapper = {
+  [componentTypes.TEXT_FIELD]: TextField,
+  'custom-type': TextField
+}
+
+const schema = {
+  fields: [{
+    component: componentTypes.TEXT_FIELD,
+    name: 'name',
+    label: 'Your name'
+    type: 'search',
+  }]
+}
+
 ### Basic provided components
 
 Data Driven Forms supports all kinds of component, basic set is consisted of:
@@ -135,15 +172,11 @@ Data Driven Forms supports all kinds of component, basic set is consisted of:
 - Sub-form
 - Wizard
 
+Any other components can be added to mapper and renderer with the form renderer. Existing components can be also overriden.
+
 ### Documentation
 
-Please use our [documentation site](https://data-driven-forms.org/). In case of any problem, you can access documentation files directly in GitHub:
-
-- [Documentation pages](packages/react-renderer-demo/src/docs-components/)
-  - [Form renderer API](packages/react-renderer-demo/src/docs-components/renderer-api.md)
-  - [Components API](packages/react-renderer-demo/src/docs-components/component-api.md)
-  - [Components mapping](packages/react-renderer-demo/src/docs-components/component-mapping.md)
-  - [Field provider](packages/react-renderer-demo/src/docs-components/field-provider.md)
+Please use our [documentation site](https://data-driven-forms.org/). In case of any problem, you can access documentation files directly in GitHub.
 
 ### Useful links
 
@@ -212,7 +245,7 @@ Format:
 ```
 [type]([package]): message
 
-fix(renderer): title accepts node
+fix(pf3): title accepts node
 ```
 
 Types:
