@@ -22,6 +22,8 @@ import FormExample from './formExample';
 import MaterialUILogo from '../common/material-logo';
 import PF3Logo from '../common/pf3-logo';
 import PF4Logo from '../common/pf4-logo';
+import BlueprintLogo from '../common/blueprint-logo';
+import SuirLogo from '../common/suir-logo';
 
 import CodeEditor from '@docs/components/code-editor';
 
@@ -195,6 +197,9 @@ const useStyles = makeStyles((theme) => ({
   },
   textBottom: {
     marginBottom: 16
+  },
+  mappersText: {
+    marginTop: 16
   }
 }));
 
@@ -245,32 +250,58 @@ const LandingPageCards = () => {
             Available mappers
           </Typography>
           <Grid container direction="row" justify="space-evenly">
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={4} xl={2}>
               <Typography variant="h6" className={classes.textBottom}>
                 MaterialUI
               </Typography>
-              <a href="https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper" rel="noopener noreferrer" target="_blank">
-                <MaterialUILogo style={{ fontSize: 100 }} />
-              </a>
+              <RouterLink href="/mappers/mui-component-mapper">
+                <a href="/mappers/mui-component-mapper">
+                  <MaterialUILogo style={{ fontSize: 100 }} />
+                </a>
+              </RouterLink>
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={4} xl={2}>
               <Typography variant="h6" className={classes.textBottom}>
                 PatternFly 4
               </Typography>
-              <a href="https://www.npmjs.com/package/@data-driven-forms/pf4-component-mapper" rel="noopener noreferrer" target="_blank">
-                <PF4Logo style={{ fontSize: 200, height: '50%' }} />
-              </a>
+              <RouterLink href="/mappers/pf4-component-mapper">
+                <a href="/mappers/pf4-component-mapper">
+                  <PF4Logo style={{ fontSize: 200, height: '50%' }} />
+                </a>
+              </RouterLink>
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={4} xl={2}>
               <Typography variant="h6" className={classes.textBottom}>
                 PatternFly 3
               </Typography>
-              <a href="https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper" rel="noopener noreferrer" target="_blank">
-                <PF3Logo style={{ fontSize: 100 }} />
-              </a>
+              <RouterLink href="/mappers/pf3-component-mapper">
+                <a href="/mappers/pf3-component-mapper">
+                  <PF3Logo style={{ fontSize: 100 }} />
+                </a>
+              </RouterLink>
+            </Grid>
+            <Grid item xs={12} md={6} xl={2}>
+              <Typography variant="h6" className={classes.textBottom}>
+                BlueprintJS
+              </Typography>
+              <RouterLink href="/mappers/blueprint-component-mapper">
+                <a href="/mappers/blueprint-component-mapper">
+                  <BlueprintLogo style={{ fontSize: 100, fill: '#394b59' }} />
+                </a>
+              </RouterLink>
+            </Grid>
+            <Grid item xs={12} md={6} xl={2}>
+              <Typography variant="h6" className={classes.textBottom}>
+                Semantic UI
+              </Typography>
+              <RouterLink href="/mappers/suir-component-mapper">
+                <a href="/mappers/suir-component-mapper">
+                  <SuirLogo style={{ fontSize: 100 }} />
+                </a>
+              </RouterLink>
             </Grid>
             <Grid item xs={12} md={8}>
-              <Typography variant="body2" gutterBottom>
+              <Typography variant="body2" gutterBottom className={classes.mappersText}>
                 This list represents a set of provided mappers. Each mapper brings all basic form components from its design system. You can
                 immediately use form inputs such as text fields, selects, radios, checkboxes or wizards. However, this selection does not limit you as
                 integrating custom coponents is simple as it can be - all it takes is just one hook.
