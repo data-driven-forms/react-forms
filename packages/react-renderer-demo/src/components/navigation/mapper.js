@@ -15,12 +15,14 @@ import { useRouter } from 'next/router';
 
 import { navStyles } from './nav-styles';
 import { query } from './find-connected-links';
+import useMapperLink from '../../hooks/use-mapper-link';
 
 const useStyles = makeStyles(navStyles);
 
 const Item = ({ href, linkText, component }) => {
   const classes = useStyles();
   const router = useRouter();
+  const link = useMapperLink(href.replace('/?', '?'));
 
   return (
     <ListItem
@@ -29,8 +31,8 @@ const Item = ({ href, linkText, component }) => {
       key={href || linkText}
       className={classes.nested}
       component={forwardRef((props, ref) => (
-        <RouterNavLink ref={ref} key={component} href={href.replace('/?', '?')}>
-          <Link style={{ color: 'rgba(0, 0, 0, 0.87)' }} {...props} href={href.replace('/?', '?')} />
+        <RouterNavLink ref={ref} key={component} href={link}>
+          <Link style={{ color: 'rgba(0, 0, 0, 0.87)' }} {...props} href={link} />
         </RouterNavLink>
       ))}
     >
