@@ -184,12 +184,12 @@ const Layout = ({ children }) => {
             <MenuIcon className={classes.menuIcons} />
           </IconButton>
         </Toolbar>
-        <Hidden smDown>
+        <Hidden smDown implementation="css">
           <Drawer
             className={classes.drawer}
             variant="persistent"
             anchor="left"
-            open={open}
+            open={open && window && window.innerWidth > 960}
             classes={{
               paper: classes.drawerPaper
             }}
@@ -198,14 +198,17 @@ const Layout = ({ children }) => {
             <Divider />
           </Drawer>
         </Hidden>
-        <Hidden mdUp>
+        <Hidden mdUp implementation="css">
           <Drawer
             className={classes.drawer}
             variant="temporary"
             anchor="left"
-            open={open}
+            open={open && window && window.innerWidth < 960}
             classes={{
               paper: classes.drawerPaper
+            }}
+            ModalProps={{
+              keepMounted: true
             }}
           >
             <Navigation closeNav={handleDrawerClose} />
