@@ -9,7 +9,7 @@
     "private": true,
     "scripts": {
         "dev": "next src/",
-        "build": "next build src/",
+        "build": "yarn generate:examples && yarn next build src/",
         "start": "next start src/",
         "serve": "cross-env NODE_ENV=production firebase serve",
         "shell": "npm run build && firebase functions:shell",

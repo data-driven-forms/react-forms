@@ -17,7 +17,7 @@ module.exports = withBundleAnalyzer(
         runtimeCaching: [
           {
             urlPattern: /^https?.*/,
-            handler: 'CacheFirst',
+            handler: 'StaleWhileRevalidate',
             options: {
               cacheName: 'offlineCache',
               expiration: {
@@ -26,8 +26,14 @@ module.exports = withBundleAnalyzer(
             }
           },
           {
-            urlPattern: /.png$/,
-            handler: 'CacheFirst'
+            urlPattern: /\.(png|svg)$/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'imageCache',
+              expiration: {
+                maxEntries: 200
+              }
+            }
           },
           {
             urlPattern: /data-driven-forms.firebaseio.com/,
