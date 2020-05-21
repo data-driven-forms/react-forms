@@ -5,22 +5,21 @@ import { FormGroup, Intent } from '@blueprintjs/core';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import BlueprintContext from './blueprint-context';
 
-const FormGroupWrapper = (props) => {
-  const {
-    meta,
-    isDisabled,
-    isReadOnly,
-    isRequired,
-    Component,
-    helperText,
-    label,
-    input,
-    validateOnMount,
-    description,
-    FormGroupProps,
-    hideLabel,
-    ...rest
-  } = useFieldApi(props);
+export const FormGroupInternal = ({
+  meta,
+  validateOnMount,
+  helperText,
+  description,
+  hideLabel,
+  isReadOnly,
+  label,
+  input,
+  isDisabled,
+  isRequired,
+  FormGroupProps,
+  Component,
+  ...rest
+}) => {
   const { required } = useContext(BlueprintContext);
 
   const { error, touched } = meta;
@@ -46,7 +45,7 @@ const FormGroupWrapper = (props) => {
   );
 };
 
-FormGroupWrapper.propTypes = {
+FormGroupInternal.propTypes = {
   isDisabled: PropTypes.bool,
   isReadOnly: PropTypes.bool,
   isRequired: PropTypes.bool,
@@ -56,7 +55,15 @@ FormGroupWrapper.propTypes = {
   validateOnMount: PropTypes.bool,
   description: PropTypes.node,
   FormGroupProps: PropTypes.object,
-  hideLabel: PropTypes.bool
+  hideLabel: PropTypes.bool,
+  meta: PropTypes.object,
+  input: PropTypes.object
+};
+
+const FormGroupWrapper = (props) => {
+  const rest = useFieldApi(props);
+
+  return <FormGroupInternal {...rest} />;
 };
 
 export default FormGroupWrapper;
