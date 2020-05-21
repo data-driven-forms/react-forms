@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import CommonSelect from '@data-driven-forms/common/src/select';
+import parseInternalValue from '@data-driven-forms/common/src/select/parse-internal-value';
 import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
 import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
@@ -34,18 +35,7 @@ const SuirSelect = ({
   ...rest
 }) => {
   const invalid = validationError(meta, validateOnMount);
-  let internalValue = value;
-  if (isMulti && Array.isArray(internalValue)) {
-    internalValue = value.map((item) => (typeof item === 'object' ? item.value : item));
-  }
-
-  if (!isMulti && Array.isArray(internalValue) && internalValue[0]) {
-    internalValue = typeof internalValue[0] === 'object' ? internalValue[0].value : internalValue[0];
-  }
-
-  if (!isMulti && Array.isArray(internalValue) && !internalValue[0]) {
-    internalValue = undefined;
-  }
+  const internalValue = parseInternalValue(value, isMulti);
 
   return (
     <FormFieldGrid helperText={helperText} HelpertextProps={HelpertextProps} {...FormFieldGridProps}>

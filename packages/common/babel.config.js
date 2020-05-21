@@ -58,12 +58,25 @@ const createSuirCJSTransform = (env = 'commonjs') => [
   `semantic-ui-react-${env}`
 ];
 
+const createMuiLabTransform = (env) => [
+  'transform-imports',
+  {
+    '@material-ui/lab': {
+      transform: (importName) => (env ? `@material-ui/lab/${env}/${importName}` : `@material-ui/lab/${importName}`),
+      preventFullImport: false,
+      skipDefaultConversion: false
+    }
+  },
+  `MUI-LAB-${env || 'CJS'}`
+];
+
 module.exports = {
   extends: '../../babel.config.js',
   env: {
     cjs: {
       plugins: [
         createSuirCJSTransform('commonjs'),
+        createMuiLabTransform(),
         [
           'transform-imports',
           {
@@ -155,6 +168,7 @@ module.exports = {
     esm: {
       plugins: [
         createSuirCJSTransform('es'),
+        createMuiLabTransform('esm'),
         [
           'transform-imports',
           {
