@@ -99,6 +99,7 @@ const Select = ({
         {...props}
         classNamePrefix={classNamePrefix}
         isDisabled={true}
+        isFetching={true}
         placeholder={loadingMessage}
         options={state.options}
         onChange={() => {}}
