@@ -8,7 +8,7 @@
     },
     "private": true,
     "scripts": {
-        "dev": "next src/",
+        "dev": "ln -s ../public src/public && yarn next src/",
         "build": "yarn generate:examples && yarn next build src/",
         "start": "next start src/",
         "serve": "cross-env NODE_ENV=production firebase serve",
