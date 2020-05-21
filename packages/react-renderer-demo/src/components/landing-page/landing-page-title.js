@@ -1,7 +1,6 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import LogoSvgIcon from '@docs/components/common/landing-page-logo';
 
 const useStyles = makeStyles((theme) => ({
   landingHeading: {
@@ -25,7 +24,7 @@ const LandingPageTitle = () => {
     <Typography className={classes.landingHeading} variant="h1" component="h2" gutterBottom>
       Data driven{' '}
       <span className={classes.logoWord}>
-        f<LogoSvgIcon />
+        f<img alt="O" src="/logo.svg" />
         rms
       </span>
     </Typography>

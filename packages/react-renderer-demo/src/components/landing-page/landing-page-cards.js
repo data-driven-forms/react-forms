@@ -19,11 +19,6 @@ import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 
 import FormExample from './formExample';
-import MaterialUILogo from '../common/material-logo';
-import PF3Logo from '../common/pf3-logo';
-import PF4Logo from '../common/pf4-logo';
-import BlueprintLogo from '../common/blueprint-logo';
-import SuirLogo from '../common/suir-logo';
 
 import CodeEditor from '@docs/components/code-editor';
 
@@ -200,6 +195,10 @@ const useStyles = makeStyles((theme) => ({
   },
   mappersText: {
     marginTop: 16
+  },
+  logo: {
+    height: 100,
+    width: 'auto'
   }
 }));
 
@@ -256,7 +255,7 @@ const LandingPageCards = () => {
               </Typography>
               <RouterLink href="/mappers/mui-component-mapper">
                 <a href="/mappers/mui-component-mapper">
-                  <MaterialUILogo style={{ fontSize: 100 }} />
+                  <img className={classes.logo} alt="material ui logo" src="/mui-logo.svg" />
                 </a>
               </RouterLink>
             </Grid>
@@ -266,7 +265,7 @@ const LandingPageCards = () => {
               </Typography>
               <RouterLink href="/mappers/pf4-component-mapper">
                 <a href="/mappers/pf4-component-mapper">
-                  <PF4Logo style={{ fontSize: 200, height: '50%' }} />
+                  <img className={classes.logo} alt="pf4 logo" src="/pf4-logo.svg" />
                 </a>
               </RouterLink>
             </Grid>
@@ -276,7 +275,7 @@ const LandingPageCards = () => {
               </Typography>
               <RouterLink href="/mappers/pf3-component-mapper">
                 <a href="/mappers/pf3-component-mapper">
-                  <PF3Logo style={{ fontSize: 100 }} />
+                  <img className={classes.logo} alt="pf4 logo" src="/pf3-logo.svg" />
                 </a>
               </RouterLink>
             </Grid>
@@ -286,7 +285,7 @@ const LandingPageCards = () => {
               </Typography>
               <RouterLink href="/mappers/blueprint-component-mapper">
                 <a href="/mappers/blueprint-component-mapper">
-                  <BlueprintLogo style={{ fontSize: 100, fill: '#394b59' }} />
+                  <img className={classes.logo} alt="blueprintjs logo" src="/blueprintjs-logo.svg" />
                 </a>
               </RouterLink>
             </Grid>
@@ -296,7 +295,7 @@ const LandingPageCards = () => {
               </Typography>
               <RouterLink href="/mappers/suir-component-mapper">
                 <a href="/mappers/suir-component-mapper">
-                  <SuirLogo style={{ fontSize: 100 }} />
+                  <img className={classes.logo} alt="semantic ui logo" src="/semantic-ui-logo.svg" />
                 </a>
               </RouterLink>
             </Grid>
