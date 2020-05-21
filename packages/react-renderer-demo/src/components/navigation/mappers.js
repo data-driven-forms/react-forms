@@ -14,5 +14,9 @@ export const mappers = [
   {
     component: 'blueprint-component-mapper',
     linkText: 'BlueprintJS'
+  },
+  {
+    component: 'suir-component-mapper',
+    linkText: 'Semantic UI'
   }
 ];
