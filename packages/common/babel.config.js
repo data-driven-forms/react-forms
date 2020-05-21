@@ -23,7 +23,12 @@ const blueprintMapper = {
   Switch: 'components/forms/controls',
   Tab: 'components/tabs/tab',
   InputGroup: 'components/forms/inputGroup',
-  TextArea: 'components/forms/textArea'
+  TextArea: 'components/forms/textArea',
+  Menu: 'components/menu/menu',
+  MenuItem: 'components/menu/menuItem',
+  Classes: 'common/classes',
+  ButtonGroup: 'components/button/buttonGroup',
+  ControlGroup: 'components/forms/controlGroup',
 };
 
 const pascaltoCamelCase = (name) => name.charAt(0).toLowerCase() + name.slice(1);
