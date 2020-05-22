@@ -6,7 +6,6 @@ import FormTemplate from '../files/form-template';
 import componentMapper from '../files/component-mapper';
 import { validatorTypes } from '@data-driven-forms/react-form-renderer';
 import FormGroupWrapper from '../files/form-group';
-import DualListSelect from '../files/dual-list-select';
 
 describe('formFields generated tests', () => {
   const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (
@@ -242,14 +241,6 @@ describe('formFields generated tests', () => {
           }
         });
       });
-    });
-  });
-
-  describe('Not implemented components', () => {
-    it('DualListSelect', () => {
-      const wrapper = mount(<DualListSelect />);
-
-      expect(wrapper.text()).toEqual('DualListSelect');
     });
   });
 });

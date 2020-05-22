@@ -15,11 +15,12 @@ import {
 } from './demo-schemas/wizard-schema';
 import sandboxSchema from './demo-schemas/sandbox';
 import demoSchema from '@data-driven-forms/common/src/demoschema';
+import dualListSchema from './demo-schemas/dual-list-schema';
 
 const Summary = (props) => <div>Custom summary component.</div>;
 
 const fieldArrayState = {
-  schema: arraySchemaDDF,
+  schema: dualListSchema,
   additionalOptions: {
     initialValues: {
       number: [1, 2, 3, 4],
@@ -46,6 +47,7 @@ class App extends React.Component {
           <Button onClick={() => this.setState((state) => fieldArrayState)}>arraySchema</Button>
           <Button onClick={() => this.setState((state) => ({ schema: sandboxSchema, additionalOptions: {} }))}>Sandbox</Button>
           <Button onClick={() => this.setState((state) => ({ schema: demoSchema, additionalOptions: {} }))}>Super schema</Button>
+          <Button onClick={() => this.setState((state) => ({ schema: dualListSchema, additionalOptions: {} }))}>Dual list</Button>
           <FormRenderer
             onSubmit={console.log}
             componentMapper={{
