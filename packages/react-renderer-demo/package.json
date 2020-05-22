@@ -8,7 +8,7 @@
     },
     "private": true,
     "scripts": {
-        "dev": "ln -s ../public src/public && yarn next src/",
+        "dev": "next src/",
         "build": "yarn generate:examples && yarn next build src/",
         "start": "next start src/",
         "serve": "cross-env NODE_ENV=production firebase serve",
@@ -21,7 +21,7 @@
     },
     "dependencies": {
         "@babel/plugin-proposal-class-properties": "^7.2.3",
-        "@data-driven-forms/form-builder": "0.0.10-rc4",
+        "@data-driven-forms/form-builder": "0.0.10-rc6",
         "@data-driven-forms/mui-component-mapper": "*",
         "@data-driven-forms/react-form-renderer": "*",
         "@material-ui/core": "^4.9.14",
