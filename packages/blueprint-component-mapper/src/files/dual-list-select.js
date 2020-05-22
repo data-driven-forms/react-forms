@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import DualListSelectCommon from '@data-driven-forms/common/src/dual-list-select';
-import { Menu, MenuItem, Classes, ButtonGroup, Button, ControlGroup, InputGroup } from '@blueprintjs/core';
+import { Menu, MenuItem, ButtonGroup, Button, ControlGroup, InputGroup } from '@blueprintjs/core';
 import clsx from 'clsx';
 
 import { FormGroupInternal } from './form-group';
@@ -10,7 +10,7 @@ import { FormGroupInternal } from './form-group';
 import './dual-list-select.scss';
 
 const List = ({ value, optionClick, noOptionsTitle, filterValue, filterValueText, selectedValues, MenuProps, MenuItemProps }) => (
-  <Menu {...MenuProps} className={clsx(Classes.ELEVATION_1, 'ddorg__blueprint_mapper--dls-menu', MenuProps.className)}>
+  <Menu {...MenuProps} className={clsx('bp3-elevation-1', 'ddorg__blueprint_mapper--dls-menu', MenuProps.className)}>
     {value.length < 1 && <MenuItem text={filterValue ? filterValueText : noOptionsTitle} disabled {...MenuItemProps} />}
     {value.length > 0 &&
       value.map(({ value, label, MenuItemProps: ItemMenuItemProps }) => (
