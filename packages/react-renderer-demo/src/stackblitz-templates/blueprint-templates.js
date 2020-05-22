@@ -42,12 +42,12 @@ render(<App />, document.getElementById('root'));`;
 export const blueprintWizardCode = `import React, { Component } from 'react';
 import { render } from 'react-dom';
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
-import blueprintFormTemplate from '@data-driven-forms/blueprint-component-mapper/dist/cjs/form-template';
+import BlueprintFormTemplate from '@data-driven-forms/blueprint-component-mapper/dist/cjs/form-template';
 import componentMapper from '@data-driven-forms/blueprint-component-mapper/dist/cjs/component-mapper';
 
 import schema from './schema'
 
-const FormTemplate = (props) => <blueprintFormTemplate {...props} showFormControls={false} />
+const FormTemplate = (props) => <BlueprintFormTemplate {...props} showFormControls={false} />
 
 class App extends Component {
   render() {
