@@ -72,7 +72,7 @@
   },
   "peerDependencies": {
     "react": "^16.13.1",
-    "react-dom": "^16.13.0"
+    "react-dom": "^16.13.1"
   },
   "postpublish": "export RELEASE_DEMO=true"
 }

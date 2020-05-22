@@ -1,4 +1,5 @@
 import React, { Component, createRef, Fragment, useState, useEffect } from 'react';
+import ReactSelect from 'react-select';
 import './react-select.scss';
 import PropTypes from 'prop-types';
 import { optionsPropType } from '@data-driven-forms/common/src/prop-types-templates';
@@ -154,6 +155,7 @@ const Select = ({ input, loadOptions, ...props }) => {
           })}
         >
           <DataDrivenSelect
+            SelectComponent={ReactSelect}
             {...searchableInput}
             {...props}
             loadOptions={loadOptionsEnhanced}
@@ -186,6 +188,7 @@ const Select = ({ input, loadOptions, ...props }) => {
 
   return (
     <DataDrivenSelect
+      SelectComponent={ReactSelect}
       {...props}
       {...input}
       loadOptionsChangeCounter={loadOptionsChangeCounter}

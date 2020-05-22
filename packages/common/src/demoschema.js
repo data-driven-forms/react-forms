@@ -26,7 +26,7 @@ const genereateField = (component, name = 'standard', optionsOptional = {}) => [
   }
 ];
 
-const componentList = ['text-field', 'checkbox', 'date-picker', 'radio', 'select', 'switch', 'textarea', 'time-picker'];
+const componentList = ['text-field', 'checkbox', 'date-picker', 'radio', 'select', 'switch', 'textarea', 'time-picker', 'slider'];
 
 const superSchema = {
   fields: [
@@ -41,6 +41,7 @@ const superSchema = {
             name: curr,
             title: curr,
             fields: [
+              ...(curr === 'slider' ? [genereateField(curr, 'maxmin', { step: 1, max: 100, min: 0 })] : []),
               ...genereateField(curr),
               ...genereateField(curr, 'helper text', { helperText: 'This is helper text' }),
               ...genereateField(curr, 'placeholder', { placeholder: 'This is placeholder' }),

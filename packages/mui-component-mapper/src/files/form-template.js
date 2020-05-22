@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
 
 const Form = ({ children, ...props }) => (
   <Grid item xs={12}>
-    <form {...props}>
+    <form noValidate {...props}>
       <Grid container item spacing={2} xs={12}>
         {children}
       </Grid>

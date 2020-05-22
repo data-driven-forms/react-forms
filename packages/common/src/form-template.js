@@ -57,7 +57,11 @@ export const FormControls = ({
     cancel: onCancel ? <Button key="form-cancel" type="button" buttonType="cancel" onClick={onCancel} label={cancelLabel} /> : null
   };
 
-  return <ButtonGroup className={buttonClassName}>{completeButtons(buttonOrder).map((button) => buttons[button])}</ButtonGroup>;
+  return (
+    <ButtonGroup {...(buttonClassName && { className: buttonClassName })}>
+      {completeButtons(buttonOrder).map((button) => buttons[button])}
+    </ButtonGroup>
+  );
 };
 
 FormControls.propTypes = {

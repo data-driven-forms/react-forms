@@ -1,14 +1,15 @@
 {
-    "hosting": {
-      "public": "dist/public",
-      "rewrites": [
-        {
-          "source": "**/**",
-          "function": "next"
-        }
-      ]
-    },
-    "functions": {
-      "source": "dist/functions"
-    }
+  "hosting": {
+    "public": "public",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "nextjsFunc"
+      }
+    ]
+  },
+  "functions": {
+    "source": "."
   }
+}

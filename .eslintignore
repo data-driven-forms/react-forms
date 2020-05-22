@@ -5,3 +5,4 @@
 /**/vendor.js
 /**/*.config.js
 /templates/**/*.*
+packages/**/service-worker.js

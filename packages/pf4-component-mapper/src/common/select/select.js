@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import DataDrivenSelect from '@data-driven-forms/common/src/select';
+import ReactSelect from 'react-select';
+import CreatableSelect from 'react-select/creatable';
 
 import MultiValueContainer from './multi-value-container';
 import ValueContainer from './value-container';
@@ -20,6 +22,7 @@ const Select = ({ selectVariant, menuIsPortal, ...props }) => {
 
   return (
     <DataDrivenSelect
+      SelectComponent={selectVariant === 'createable' ? CreatableSelect : ReactSelect}
       loadingProps={{
         className: 'ddorg__pf4-component-mapper__select',
         classNamePrefix: 'ddorg__pf4-component-mapper__select'

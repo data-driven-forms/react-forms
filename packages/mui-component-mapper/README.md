@@ -6,7 +6,8 @@ Material-UI component mapper for [Data Driven Forms](https://github.com/data-dri
 
 :book: For more information please visit the [documentation](https://data-driven-forms.org/). :book:
 
-Used by [ManageIQ](http://manageiq.org/), Red Hat Cloud Services.
+[Material-IU docs](https://material-ui.com/)
+
 
 **Table of Contents**
 

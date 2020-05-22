@@ -9,11 +9,79 @@ const mapper = {
   TextListItemVariants: 'TextListItem'
 };
 
+const blueprintMapper = {
+  Checkbox: 'components/forms/controls',
+  FormGroup: 'components/forms/formGroup',
+  Intent: 'common/intent',
+  Button: 'components/button/buttons',
+  H1: 'components/html/html',
+  H2: 'components/html/html',
+  H3: 'components/html/html',
+  H4: 'components/html/html',
+  RadioGroup: 'components/forms/radioGroup',
+  MenuItem: 'components/menu/menuItem',
+  Switch: 'components/forms/controls',
+  Tab: 'components/tabs/tab',
+  InputGroup: 'components/forms/inputGroup',
+  TextArea: 'components/forms/textArea',
+  Menu: 'components/menu/menu',
+  MenuItem: 'components/menu/menuItem',
+  Classes: 'common/classes',
+  ButtonGroup: 'components/button/buttonGroup',
+  ControlGroup: 'components/forms/controlGroup',
+};
+
+const pascaltoCamelCase = (name) => name.charAt(0).toLowerCase() + name.slice(1);
+const pascalToKebabCase = (name) =>
+  name.charAt(0).toLowerCase() +
+  name
+    .slice(1)
+    .replace(/([A-Z])/, '-$1')
+    .toLowerCase();
+
+const createSuirCJSTransform = (env = 'commonjs') => [
+  'transform-imports',
+  {
+    'semantic-ui-react': {
+      transform: (importName) => {
+        let res;
+        const files = glob.sync(path.resolve(__dirname, `../../node_modules/semantic-ui-react/dist/${env}/**/${importName}.js`));
+        if (files.length > 0) {
+          res = files[0];
+        } else {
+          throw new Error(`File with importName ${importName} does not exist`);
+        }
+
+        res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
+        res = res.replace(/^\//, '');
+        return res;
+      },
+      preventFullImport: false,
+      skipDefaultConversion: false
+    }
+  },
+  `semantic-ui-react-${env}`
+];
+
+const createMuiLabTransform = (env) => [
+  'transform-imports',
+  {
+    '@material-ui/lab': {
+      transform: (importName) => (env ? `@material-ui/lab/${env}/${importName}` : `@material-ui/lab/${importName}`),
+      preventFullImport: false,
+      skipDefaultConversion: false
+    }
+  },
+  `MUI-LAB-${env || 'CJS'}`
+];
+
 module.exports = {
   extends: '../../babel.config.js',
   env: {
     cjs: {
       plugins: [
+        createSuirCJSTransform('commonjs'),
+        createMuiLabTransform(),
         [
           'transform-imports',
           {
@@ -86,11 +154,26 @@ module.exports = {
             }
           },
           'MUI-CJS'
+        ],
+        [
+          'transform-imports',
+          {
+            '@blueprintjs/core': {
+              transform: (importName) =>
+                `@blueprintjs/core/lib/cjs/${blueprintMapper[importName] ||
+                  `components/${pascalToKebabCase(importName)}/${pascaltoCamelCase(importName)}`}.js`,
+              preventFullImport: false,
+              skipDefaultConversion: true
+            }
+          },
+          'BLUEPRINT-CJS'
         ]
       ]
     },
     esm: {
       plugins: [
+        createSuirCJSTransform('es'),
+        createMuiLabTransform('esm'),
         [
           'transform-imports',
           {
@@ -164,6 +247,19 @@ module.exports = {
             }
           },
           'MUI-ESM'
+        ],
+        [
+          'transform-imports',
+          {
+            '@blueprintjs/core': {
+              transform: (importName) =>
+                `@blueprintjs/core/lib/esm/${blueprintMapper[importName] ||
+                  `components/${pascalToKebabCase(importName)}/${pascaltoCamelCase(importName)}`}.js`,
+              preventFullImport: false,
+              skipDefaultConversion: true
+            }
+          },
+          'BLUEPRINT-CJS'
         ]
       ]
     }
