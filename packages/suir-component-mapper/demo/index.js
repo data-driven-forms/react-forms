@@ -17,7 +17,7 @@ const compositeMapper = {
 };
 
 const App = () => {
-  const [, setSchema] = useState(wizardSchema);
+  const [schema, setSchema] = useState(wizardSchema);
 
   return (
     <div>
@@ -35,7 +35,7 @@ const App = () => {
             onSubmit={console.log}
             componentMapper={compositeMapper}
             FormTemplate={(props) => <FormTemplate {...props} showFormControls={true} />}
-            schema={fieldArraySchema}
+            schema={schema}
             onCancel={() => console.log('canceling')}
           />
         </div>
