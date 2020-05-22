@@ -12,3 +12,9 @@
     height: 80%;
     overflow: auto;
 }
+
+@media (max-width: 768px) {
+    .ddorg__blueprint_mapper--dls-wrapper {
+        flex-direction: column;
+    }
+}
