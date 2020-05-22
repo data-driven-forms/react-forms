@@ -13,7 +13,7 @@ module.exports = withBundleAnalyzer(
   withOffline(
     withMDX({
       workboxOpts: {
-        swDest: '../public/service-worker.js',
+        swDest: path.resolve(__dirname, '../public/service-worker.js'),
         runtimeCaching: [
           {
             urlPattern: /^https?.*/,

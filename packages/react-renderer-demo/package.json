@@ -13,7 +13,7 @@
         "start": "next start src/",
         "serve": "cross-env NODE_ENV=production firebase serve",
         "shell": "npm run build && firebase functions:shell",
-        "deploy": "NODE_ENV=production firebase deploy --only functions,hosting",
+        "deploy": "NODE_ENV=production yarn buld && yarn firebase deploy --only functions,hosting",
         "logs": "firebase functions:log",
         "analyze": "ANALYZE=true next build src/",
         "lint": "eslint ./src",
