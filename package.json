@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build": "lerna run build --ignore @data-driven-forms/react-renderer-demo",
+    "build": "lerna run build --concurrency 1 --ignore @data-driven-forms/react-renderer-demo",
     "vendor": "lerna run vendor",
     "test": "jest --coverage",
     "test:ci": "jest --coverage --runInBand",
