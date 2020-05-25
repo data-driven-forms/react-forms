@@ -1,3 +1,4 @@
+const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -5,12 +6,19 @@ const resolve = require('path').resolve;
 const merge = require('webpack-merge');
 
 const commonConfig = {
+  devtool: "source-map",
   module: {
     rules: [{
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
       use: {
         loader: 'babel-loader',
+      },
+    }, {
+      test: /\.(ts|tsx)$/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'ts-loader',
       },
     }, {
       test: /\.(sa|sc|c)ss$/,
