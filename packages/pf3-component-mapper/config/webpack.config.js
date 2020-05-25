@@ -5,12 +5,19 @@ const resolve = require('path').resolve;
 const merge = require('webpack-merge');
 
 const commonConfig = {
+  devtool: "source-map",
   module: {
     rules: [{
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
       use: {
         loader: 'babel-loader',
+      },
+    }, {
+      test: /\.(ts|tsx)$/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'ts-loader',
       },
     }, {
       test: /\.(sa|sc|c)ss$/,
