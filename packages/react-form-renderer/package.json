@@ -40,7 +40,6 @@
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.10.0",
-    "prop-types": "^15.6.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "regenerator-runtime": "^0.12.1",
@@ -67,6 +66,7 @@
     "final-form-arrays": "^3.0.2",
     "final-form-focus": "^1.1.2",
     "lodash": "^4.17.15",
+    "prop-types": "^15.7.2",
     "react-final-form": "^6.4.0",
     "react-final-form-arrays": "^3.1.1"
   },
