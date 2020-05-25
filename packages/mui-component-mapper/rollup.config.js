@@ -5,6 +5,7 @@ import replace from 'rollup-plugin-replace';
 import nodeGlobals from 'rollup-plugin-node-globals';
 import { terser } from 'rollup-plugin-terser';
 import { createFilter } from 'rollup-pluginutils';
+import typescript from '@rollup/plugin-typescript';
 import sass from 'rollup-plugin-sass';
 import async from 'rollup-plugin-async';
 import sourcemaps from 'rollup-plugin-sourcemaps';
@@ -12,7 +13,7 @@ import sourcemaps from 'rollup-plugin-sourcemaps';
 import glob from 'glob';
 import path from 'path';
 
-const outputPaths = glob.sync(path.resolve(__dirname, './src/files/*.js'));
+const outputPaths = [...glob.sync(path.resolve(__dirname, './src/files/*.tsx')), ...glob.sync(path.resolve(__dirname, './src/files/*.js'))];
 
 const muiExternals = createFilter(
   [
@@ -83,11 +84,12 @@ const plugins = [
   sass({
     insert: true
   }),
+  typescript(),
   sourcemaps()
 ];
 
 export default {
-  input: process.env.FORMAT === 'umd' ? './src/index.js' : ['./src/index.js', ...outputPaths],
+  input: process.env.FORMAT === 'umd' ? './src/index.ts' : ['./src/index.ts', ...outputPaths],
   output: {
     ...(process.env.FORMAT === 'umd'
       ? {
