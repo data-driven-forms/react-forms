@@ -20,7 +20,7 @@ const pf3Externals = createFilter(
     'react-dom',
     'prop-types',
     '@data-driven-forms/react-form-renderer',
-    '@data-driven-forms/react-form-renderer/dist/cjs/**',
+    '@data-driven-forms/react-form-renderer/**',
     'patternfly-react',
     'patternfly-react/**'
   ],
