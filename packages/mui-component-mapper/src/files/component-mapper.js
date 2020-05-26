@@ -6,7 +6,7 @@ import Textarea from './textarea';
 import Checkbox from './checkbox';
 import Switch from './switch';
 import TimePicker from './time-picker';
-import DatePicker from './time-picker';
+import DatePicker from './date-picker';
 import PlainText from './plain-text';
 import Select from './select';
 import Radio from './radio';

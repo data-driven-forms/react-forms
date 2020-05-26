@@ -17,7 +17,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
  * @param {Array<Object>} options all options avaiable
  * @returns {String}
  */
-const getOptionLabel = (option, options) => {
+export const getOptionLabel = (option, options) => {
   if (typeof option === 'undefined') {
     return '';
   }
@@ -44,7 +44,7 @@ const getOptionLabel = (option, options) => {
  * @param {Boolean} isMulti multiple select flag
  * @returns {Object|Array<Object>}
  */
-const createValue = (option, isMulti) => {
+export const createValue = (option, isMulti) => {
   if (isMulti) {
     return Array.isArray(option) ? option.map((item) => (typeof item === 'object' ? item : { value: item })) : option;
   }
