@@ -9,7 +9,10 @@ import glob from 'glob';
 import path from 'path';
 import sourcemaps from 'rollup-plugin-sourcemaps';
 
-const outputPaths = [...glob.sync(path.resolve(__dirname, './src/files/!(*.d.ts)')), ...glob.sync(path.resolve(__dirname, './src/files/*.js'))];
+const outputPaths = [
+  ...glob.sync(path.resolve(__dirname, './src/files/!(*.d.ts)')),
+  ...glob.sync(path.resolve(__dirname, './src/files/*.(js|ts|tsx)'))
+];
 
 const globals = {
   react: 'React',
