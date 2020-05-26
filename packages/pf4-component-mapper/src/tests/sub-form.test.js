@@ -1,47 +1,88 @@
 import React from 'react';
-import toJson from 'enzyme-to-json';
-import SubForm from '../files/sub-form';
-import { shallow } from 'enzyme';
-import RenderWithProvider from '../../../../__mocks__/with-provider';
+import { mount } from 'enzyme';
+
+import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
+import FormTemplate from '../files/form-template';
+import componentMapper from '../files/component-mapper';
 
 describe('SubForm component', () => {
-  const props = {
-    title: 'cosiTitle',
-    name: 'cosiName',
-    fields: []
-  };
+  let initialProps;
 
-  const formOptions = {
-    renderForm: () => <div>Here would be form</div>
-  };
+  beforeEach(() => {
+    initialProps = {
+      componentMapper,
+      FormTemplate,
+      onSubmit: jest.fn()
+    };
+  });
 
   it('should render SubForm correctly', () => {
-    const wrapper = shallow(
-      <RenderWithProvider value={{ formOptions }}>
-        <SubForm {...props} />
-      </RenderWithProvider>
-    ).dive();
-    expect(toJson(wrapper)).toMatchSnapshot();
+    const schema = {
+      fields: [
+        {
+          component: componentTypes.SUB_FORM,
+          name: 'subform',
+          title: 'some title',
+          description: 'some description',
+          fields: [
+            {
+              component: componentTypes.TEXT_FIELD,
+              name: 'some input'
+            }
+          ]
+        }
+      ]
+    };
+    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+
+    expect(wrapper.find('Title').text()).toEqual('some title');
+    expect(wrapper.find('Text').text()).toEqual('some description');
+    expect(wrapper.find('input')).toHaveLength(1);
   });
 
   it('should render SubForm with description correctly', () => {
-    const propsDescription = { ...props, description: 'description here!' };
-    const wrapper = shallow(
-      <RenderWithProvider value={{ formOptions }}>
-        <SubForm {...propsDescription} />
-      </RenderWithProvider>
-    ).dive();
-    expect(toJson(wrapper)).toMatchSnapshot();
+    const schema = {
+      fields: [
+        {
+          component: componentTypes.SUB_FORM,
+          name: 'subform',
+          title: 'some title',
+          fields: [
+            {
+              component: componentTypes.TEXT_FIELD,
+              name: 'some input'
+            }
+          ]
+        }
+      ]
+    };
+    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+
+    expect(wrapper.find('Title').text()).toEqual('some title');
+    expect(wrapper.find('Text')).toHaveLength(0);
+    expect(wrapper.find('input')).toHaveLength(1);
   });
 
   it('should render SubForm without title correctly', () => {
-    const { name, fields, formOptions } = props;
-    const propsWithoutTitle = { name, fields, formOptions };
-    const wrapper = shallow(
-      <RenderWithProvider value={{ formOptions }}>
-        <SubForm {...propsWithoutTitle} />
-      </RenderWithProvider>
-    ).dive();
-    expect(toJson(wrapper)).toMatchSnapshot();
+    const schema = {
+      fields: [
+        {
+          component: componentTypes.SUB_FORM,
+          name: 'subform',
+          description: 'some description',
+          fields: [
+            {
+              component: componentTypes.TEXT_FIELD,
+              name: 'some input'
+            }
+          ]
+        }
+      ]
+    };
+    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+
+    expect(wrapper.find('Title')).toHaveLength(0);
+    expect(wrapper.find('Text').text()).toEqual('some description');
+    expect(wrapper.find('input')).toHaveLength(1);
   });
 });

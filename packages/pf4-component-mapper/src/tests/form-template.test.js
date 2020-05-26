@@ -6,7 +6,7 @@ import { Button, Title, ButtonGroup, Description } from '../files/form-template'
 
 describe('Layout mapper', () => {
   it('should return PF4 Button', () => {
-    expect(mount(<Button />).find(PF4Button)).toHaveLength(1);
+    expect(mount(<Button label="some label" />).find(PF4Button)).toHaveLength(1);
   });
 
   it('should return PF4 ButtonGroup', () => {
@@ -28,7 +28,7 @@ describe('Layout mapper', () => {
   });
 
   it('should return PF4 Button disabled', () => {
-    const wrapper = mount(<Button disabled={true} />);
+    const wrapper = mount(<Button disabled={true} label="some label" />);
 
     expect(wrapper.find(PF4Button)).toHaveLength(1);
     expect(wrapper.find(PF4Button).props().isDisabled).toEqual(true);
