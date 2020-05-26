@@ -43,6 +43,7 @@
     "@khala/commit-analyzer-wildcard": "^2.4.1",
     "@khala/npm-release-monorepo": "^2.4.1",
     "@khala/wildcard-release-notes": "^2.4.1",
+    "@semantic-release/git": "^8.0.0",
     "@semantic-release/github": "^5.5.5",
     "@semantic-release/npm": "^5.1.4",
     "atob-lite": "^2.0.0",
@@ -100,9 +101,18 @@
         "assets": [
           "package.json"
         ],
-        "message": "Release of new version: ${nextRelease.version} <no> [skip ci]",
         "successComment": ":tada: This ${issue.pull_request ? 'PR is included' : 'issue has been resolved'} in version ${nextRelease.version} :tada:\n\nThe release is available on \n\n- [react-form-renderer (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)\n\n- [pf3-component-mapper (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper)\n\n- [pf4-component-mapper (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/pf4-component-mapper)\n\n- [mui-component-mapper (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper)\n\nDemo can be found [here](http://data-driven-forms.org/)!"
-      }
+      },
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "package.json",
+            "packages/*/package.json"
+          ],
+          "message": "Release of new version: ${nextRelease.version} <no> [skip ci]"
+        }
+      ]
     ]
   },
   "dependencies": {}
