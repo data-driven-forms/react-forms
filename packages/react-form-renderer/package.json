@@ -11,6 +11,7 @@
   "scripts": {
     "start": "webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
     "build": "rollup -c ./rollup.config.js",
+    "build:typings": "node ../../scripts/copy-files.js", 
     "release": "semantic-release"
   },
   "repository": "git@github.com:data-driven-forms/react-forms.git",
