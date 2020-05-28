@@ -1,5 +1,5 @@
-import { Validator } from "../validators";
-import { ConditionDefinition } from '../form-renderer/condition';
+import { Validator } from "./validators";
+import { ConditionDefinition } from './condition';
 import { DataType } from "./data-types";
 
 export type FieldAction = [string, ...any[]];
