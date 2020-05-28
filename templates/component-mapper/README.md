@@ -1,6 +1,6 @@
 [![npm version](https://badge.fury.io/js/%40data-driven-forms%2F{{componentmapper}}-component-mapper.svg)](https://badge.fury.io/js/%40data-driven-forms%2F{{componentmapper}}-component-mapper)
 
-[![Data Driven Form logo](images/logo.png)](https://data-driven-forms.org/)
+[![Data Driven Form logo](https://raw.githubusercontent.com/data-driven-forms/react-forms/master/images/logo.png)](https://data-driven-forms.org/)
 
 {{componentmapper}} component mapper for [Data Driven Forms](https://github.com/data-driven-forms/react-forms).
 
@@ -35,9 +35,7 @@ $ npm install @data-driven-forms/react-form-renderer -S
 $ yarn add @data-driven-forms/react-form-renderer
 ```
 
-Optionally you can install one of provided mappers:
-
-#### [{{componentmapper}} Mapper](https://www.npmjs.com/package/@data-driven-forms/{{componentmapper}}-component-mapper)
+#### [{{componentmapper}} Mapper](https://data-driven-forms.org/mappers/{{componentmapper}}-component-mapper)
 
 ```console
 $ npm install @data-driven-forms/{{componentmapper}}-component-mapper -S
@@ -83,20 +81,22 @@ Data Driven Forms supports all kinds of component, basic set is consisted of:
 - Text area
 - Checkbox (Multiple checkboxes)
 - Select (dropdown)
+- Dual list select
+- Field array
 - Switch
 - Radio buttons
 - Date picker
 - Time picker
 - Tabs
+- Slider
 - Sub-form
 - Wizard
-- Plain-text
 
 ### Useful links
 
 - [Data Driven Forms documentation](https://data-driven-forms.org/)
 - [React Form Renderer](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)
-- [{{componentmapper}} Mapper](https://www.npmjs.com/package/@data-driven-forms/{{componentmapper}}-component-mapper)
+- [{{componentmapper}} Mapper NPM](https://www.npmjs.com/package/@data-driven-forms/{{componentmapper}}-component-mapper)
 
 
 ### Development setup

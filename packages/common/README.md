@@ -1,4 +1,4 @@
-[![Data Driven Form logo](images/logo.png)](https://data-driven-forms.org/)
+[![Data Driven Form logo](https://raw.githubusercontent.com/data-driven-forms/react-forms/master/images/logo.png)](https://data-driven-forms.org/)
 
 # `@data-driven-forms/common` - common code shared by multiple `@data-driven-forms/*` packages
 ￼
