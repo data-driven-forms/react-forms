@@ -1,4 +1,4 @@
-import { ValidatorFunction } from ".";
+import { ValidatorFunction } from "../files/validators";
 import { ReactNode } from "react";
 import { ValidatorType } from "../files/use-field-api";
 import { MessageTypes } from "./messages";
