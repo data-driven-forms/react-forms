@@ -116,7 +116,7 @@ const InternalSelect = ({
         options={options}
         multiple={isMulti}
         getOptionLabel={(option) => getOptionLabel(option, options)}
-        value={typeof internalValue === 'undefined' ? '' : internalValue}
+        value={typeof internalValue === 'undefined' ? null : internalValue}
         onChange={(_event, option) => onChange(createValue(option, isMulti))}
         loading={isFetching}
       />
