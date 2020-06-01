@@ -1,15 +1,18 @@
 import { ReactNode } from 'react';
+import { AnyObject } from './common';
 
 export type DataTypeValidators = "string" | "integer" | "boolean" | "number" | "float";
 
 export type ValidatorFunction = (value: any, allValues?: object) => Promise<any> | ReactNode | undefined;
 
-export interface Validator extends Object {
+export interface ValidatorConfiguration extends AnyObject {
+  type: string;
   message?: string;
   msg?: string;
 }
 
-export interface LenghtOptions extends Validator {
+export type Validator = ValidatorConfiguration | ValidatorFunction;
+export interface LenghtOptions extends ValidatorConfiguration {
   '='?: string;
   is?: number;
   max?: number;
@@ -18,12 +21,12 @@ export interface LenghtOptions extends Validator {
   minimum?: number;
 }
 
-export interface PatternOptions extends Validator {
+export interface PatternOptions extends ValidatorConfiguration {
   pattern?: string | RegExp;
   flags?: string;
 }
 
-export interface NumericalityOptions extends Validator {
+export interface NumericalityOptions extends ValidatorConfiguration {
   even?: boolean;
   odd?: boolean;
   equalTo?: number;

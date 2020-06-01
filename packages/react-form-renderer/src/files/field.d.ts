@@ -1,10 +1,11 @@
 import { Validator } from "./validators";
 import { ConditionDefinition } from './condition';
 import { DataType } from "./data-types";
+import { AnyObject } from "./common";
 
 export type FieldAction = [string, ...any[]];
 
-interface Field extends Object {
+interface Field extends AnyObject {
   name: string;
   component: string;
   validate?: Validator[];
