@@ -1,3 +1,3 @@
-import { RendererContextValue } from './renderer-context';
+import { FormOptions } from './renderer-context';
 
-export default function(): RendererContextValue;
+export default function(): FormOptions;
