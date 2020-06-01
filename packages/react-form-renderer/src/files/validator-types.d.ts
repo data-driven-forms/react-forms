@@ -1,13 +1,13 @@
 interface validatorTypes {
-  REQUIRED: 'required';
-  MIN_LENGTH: 'min-length';
-  MAX_LENGTH: 'max-length';
-  EXACT_LENGTH: 'exact-length';
-  MIN_ITEMS: 'min-items';
-  MIN_NUMBER_VALUE: 'min-number-value';
-  MAX_NUMBER_VALUE: 'max-number-value';
-  PATTERN: 'pattern';
-  URL: 'url';
+  REQUIRED: string;
+  MIN_LENGTH: string;
+  MAX_LENGTH: string;
+  EXACT_LENGTH: string;
+  MIN_ITEMS: string;
+  MIN_NUMBER_VALUE: string;
+  MAX_NUMBER_VALUE: string;
+  PATTERN: string;
+  URL: string;
 }
 
 export default validatorTypes;
