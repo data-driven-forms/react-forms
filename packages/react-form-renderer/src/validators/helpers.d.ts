@@ -7,7 +7,7 @@ import { MessageTypes } from "./messages";
 export function memoize(func: Function): ValidatorFunction;
 
 export interface MessageObject {
-  msg: ReactNode;
+  msg?: ReactNode;
   defaultMessage: ReactNode;
   values: object;
 }

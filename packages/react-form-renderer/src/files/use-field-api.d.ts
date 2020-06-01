@@ -3,13 +3,13 @@ import { FieldInputProps, FieldMetaState } from 'react-final-form';
 
 export interface ValidatorType extends Object {
   type: string;
-  message: ReactNode;
+  message?: ReactNode;
 }
 
 export interface UseFieldApiConfig extends Object {
   name: string;
   component: string;
-  validate: ValidatorType[];
+  validate?: ValidatorType[];
 }
 
 export interface UseFieldApiProps extends Object {
