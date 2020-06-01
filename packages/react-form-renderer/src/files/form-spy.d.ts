@@ -1,3 +1,6 @@
+import { ComponentType } from 'react';
 import { FormSpyProps } from 'react-final-form';
 
-export default FormSpyProps;
+declare const FormSpy: ComponentType<FormSpyProps>;
+
+export default FormSpy;
