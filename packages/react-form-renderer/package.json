@@ -4,6 +4,7 @@
   "description": "React form renderer for data-driven-forms.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "typings": "dist/cjs/index.d.ts",
   "files": [
     "dist/"
   ],
