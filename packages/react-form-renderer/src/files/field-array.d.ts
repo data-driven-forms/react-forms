@@ -1,3 +1,5 @@
 import { FieldArrayProps } from 'react-final-form-arrays';
 
-export default FieldArrayProps;
+declare const FieldArray: React.ComponentType<FieldArrayProps<any, HTMLElement>>;
+
+export default FieldArray;

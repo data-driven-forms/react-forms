@@ -12,7 +12,7 @@ Data Driven Forms provides a way how you can easily initialized a field when the
 
 Just pass a `initializeOnMount` prop and set it to `true`.
 
-The field will use the `initialValue` set in the schema ([initialValue](/renderer/component-api#formgroupwrappedcomponents)) or in the renderer ([initialValues](/renderer/renderer-api#optionalprops)).
+The field will use the `initialValue` set in the schema ([initialValue](/renderer/component-api#formgroupwrappedcomponents)).
 
 `initialValue` has higher priority than a value from `initialValues`.
 
