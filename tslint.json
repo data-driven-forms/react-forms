@@ -13,8 +13,9 @@
     "no-unnecessary-generics": false,
     "no-redundant-jsdoc": false,
     "semicolon": [true, "always", "ignore-bound-class-methods"],
-    "max-line-length": [true, {"limit": 120}],
-    "no-null-undefined-union": false
+    "max-line-length": [true, {"limit": 180}],
+    "no-null-undefined-union": false,
+    "invalid-void": false
   },
   "linterOptions": {
     "exclude": [

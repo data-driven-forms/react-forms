@@ -1,3 +1,5 @@
 import { FormProps } from 'react-final-form';
 
-export default FormProps;
+declare const Form: React.ComponentType<FormProps<{}>>;
+
+export default Form;
