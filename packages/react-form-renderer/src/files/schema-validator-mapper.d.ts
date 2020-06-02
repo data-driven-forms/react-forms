@@ -1,5 +1,5 @@
 export interface PartialValidator {
-  [key: string]: () => void;
+  [key: string]: (...args: any[]) => void;
 }
 
 interface SchemaValidatorMapper {

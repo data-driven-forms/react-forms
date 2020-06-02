@@ -20,4 +20,4 @@ T extends HTMLElement = HTMLElement> extends AnyObject {
   meta: FieldMetaState<FieldValue>;
 }
 
-export default function(options: UseFieldApiConfig): UseFieldApiProps<string>;
+export default function(options: UseFieldApiConfig): UseFieldApiProps<any>;
