@@ -12,6 +12,9 @@ export interface ConditionProp {
   notMatch?: any;
   then?: ActionResolution;
   else?: ActionResolution;
+  or?: ConditionProp | ConditionProp[];
+  and?: ConditionProp | ConditionProp[];
+  not?: ConditionProp | ConditionProp[];
 }
 
 export interface ConditionDefinition extends ConditionProp {
