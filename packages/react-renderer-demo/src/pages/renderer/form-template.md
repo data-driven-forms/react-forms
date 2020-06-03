@@ -61,11 +61,13 @@ import { FormTemplate } from ‘@data-driven-forms/pf4-component-mapper’
 |Prop|Type|Description|Default|
 |----|:--:|----------:|------:|
 |buttonClassName|string|Class which will be given to the buttons wrapper.|{ }|
-|buttonsLabels|object|You can specify custom labels for all three form buttons.|`{submit: 'Submit', cancel: 'Cancel', reset: 'Reset'}`|
 |buttonOrder|array of strings|You can specify the order of the form buttons.|`[ 'submit', 'reset', 'cancel' ]`|
+|cancelLabel|node|Label for cancel button.|'Cancel'|
 |canReset|bool|Show/hide reset button.|false|
 |disableSubmit|array of strings|You can specify a form attributes (see [here](https://final-form.org/docs/final-form/types/FormState)) which will make the submit button disabled. |[ ]|
+|resetLabel|node|Label for reset button.|'Reset'|
 |showFormControls|bool|You can disable showing form buttons. Use it with wizard component which has its own buttons.|true|
+|submitLabel|node|Label for submit button.|'Submit'|
 
 </Grid>
 <Grid item xs={false} md={2}>
