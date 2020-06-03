@@ -99,7 +99,6 @@ Radio.propTypes = {
   ),
   label: PropTypes.node.isRequired,
   isDisabled: PropTypes.bool,
-  children: PropTypes.any,
   description: PropTypes.node,
   FormFieldGridProps: PropTypes.object,
   FormControlProps: PropTypes.object,
