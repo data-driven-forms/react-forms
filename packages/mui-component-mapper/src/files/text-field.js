@@ -20,12 +20,13 @@ const TextField = (props) => {
     validateOnMount,
     meta,
     inputProps,
+    FormFieldGridProps,
     ...rest
   } = useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
 
   return (
-    <FormFieldGrid>
+    <FormFieldGrid {...FormFieldGridProps}>
       <MuiTextField
         {...input}
         fullWidth
@@ -56,7 +57,8 @@ TextField.propTypes = {
   helperText: PropTypes.node,
   validateOnMount: PropTypes.bool,
   description: PropTypes.node,
-  inputProps: PropTypes.object
+  inputProps: PropTypes.object,
+  FormFieldGridProps: PropTypes.object
 };
 
 export default TextField;
