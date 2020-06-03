@@ -1,2 +1,28 @@
-declare function Slider(props: object): void;
+import { UseFieldApiConfig } from "@data-driven-forms/react-form-renderer";
+import { SliderProps as MuiSliderProps, GridProps, FormControlProps, FormGroupProps, FormLabelProps, FormHelperTextProps } from '@material-ui/core';
+import { ReactNode } from "react";
+
+export interface SliderProps extends MuiSliderProps {
+  isReadOnly?: boolean;
+  isDisabled?: boolean;
+  isRequired?: boolean;
+  label?: ReactNode;
+  helperText?: ReactNode;
+  description?: ReactNode;
+  validateOnMount?: boolean;
+  FormFieldGridProps?: GridProps;
+  FormControlProps?: FormControlProps;
+  FormGroupProps?: FormGroupProps;
+  FormLabelProps?: FormLabelProps;
+  FormHelperTextProps?: FormHelperTextProps;
+  before?: ReactNode;
+  after?: ReactNode;
+  InputGridProps?: GridProps;
+  BeforeGridProps?: GridProps;
+  SliderGridProps?: GridProps;
+  AfterGridProps?: GridProps;
+}
+
+declare const Slider: React.ComponentType<SliderProps & UseFieldApiConfig>;
+
 export default Slider;

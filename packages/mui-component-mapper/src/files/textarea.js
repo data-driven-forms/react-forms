@@ -39,8 +39,8 @@ const Textarea = (props) => {
           readOnly: isReadOnly,
           ...inputProps
         }}
-        multiline
         {...rest}
+        multiline
       />
     </FormFieldGrid>
   );
