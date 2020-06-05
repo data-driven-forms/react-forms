@@ -13,7 +13,7 @@ import sourcemaps from 'rollup-plugin-sourcemaps';
 import glob from 'glob';
 import path from 'path';
 
-const outputPaths = [...glob.sync(path.resolve(__dirname, './src/files/*.tsx')), ...glob.sync(path.resolve(__dirname, './src/files/*.js'))];
+const outputPaths = glob.sync(path.resolve(__dirname, './src/files/*.js'));
 
 const muiExternals = createFilter(
   [
@@ -89,7 +89,7 @@ const plugins = [
 ];
 
 export default {
-  input: process.env.FORMAT === 'umd' ? './src/index.ts' : ['./src/index.ts', ...outputPaths],
+  input: process.env.FORMAT === 'umd' ? './src/index.js' : ['./src/index.js', ...outputPaths],
   output: {
     ...(process.env.FORMAT === 'umd'
       ? {

@@ -544,7 +544,6 @@ DualListSelect.propTypes = {
   ToLeftIconProps: PropTypes.object,
   ToLeftIconButtonProps: PropTypes.object,
   RightListGridProps: PropTypes.object,
-  RightListProp: PropTypes.object,
   RightListProps: PropTypes.object,
   ListItemProps: PropTypes.object,
   ListItemIconProps: PropTypes.object,
