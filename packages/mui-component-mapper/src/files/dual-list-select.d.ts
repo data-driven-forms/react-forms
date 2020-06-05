@@ -1,4 +1,4 @@
-import { UseFieldApiConfig, AnyObject } from "@data-driven-forms/react-form-renderer";
+import { UseFieldApiComponentConfig, AnyObject } from "@data-driven-forms/react-form-renderer";
 import { ReactNode } from "react";
 import {
   GridProps,
@@ -102,6 +102,6 @@ export interface DualListSelectProps {
   RightTitleProps?: TypographyProps;
 }
 
-declare const DualListSelect: React.ComponentType<DualListSelectProps & UseFieldApiConfig>;
+declare const DualListSelect: React.ComponentType<DualListSelectProps & UseFieldApiComponentConfig>;
 
 export default DualListSelect;

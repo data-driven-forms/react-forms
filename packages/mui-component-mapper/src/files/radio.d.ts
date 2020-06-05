@@ -1,4 +1,4 @@
-import { UseFieldApiConfig, AnyObject } from "@data-driven-forms/react-form-renderer";
+import { UseFieldApiComponentConfig, AnyObject } from "@data-driven-forms/react-form-renderer";
 import { RadioProps as MuiRadioProps, GridProps, FormControlProps, FormControlLabelProps, FormLabelProps, FormHelperTextProps } from '@material-ui/core';
 import { ReactNode } from "react";
 
@@ -20,6 +20,6 @@ export interface RadioProps extends MuiRadioProps {
   validateOnMount?: boolean;
 }
 
-declare const Radio: React.ComponentType<RadioProps & UseFieldApiConfig>;
+declare const Radio: React.ComponentType<RadioProps & UseFieldApiComponentConfig>;
 
 export default Radio;

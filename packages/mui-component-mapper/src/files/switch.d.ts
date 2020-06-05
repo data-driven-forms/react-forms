@@ -1,4 +1,4 @@
-import { UseFieldApiConfig } from "@data-driven-forms/react-form-renderer";
+import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-renderer";
 import { SwitchProps as MuiSwitchProps, GridProps, FormControlProps, FormGroupProps, FormControlLabelProps, FormLabelProps, FormHelperTextProps } from '@material-ui/core';
 import { ReactNode } from "react";
 
@@ -21,6 +21,6 @@ export interface SwitchProps extends MuiSwitchProps {
   FormHelperTextProps?: FormHelperTextProps;
 }
 
-declare const Switch: React.ComponentType<SwitchProps & UseFieldApiConfig>;
+declare const Switch: React.ComponentType<SwitchProps & UseFieldApiComponentConfig>;
 
 export default Switch;
