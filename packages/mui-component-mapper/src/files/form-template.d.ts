@@ -1,4 +1,6 @@
-export interface FormTemplateProps {
+import { FormTemplateRenderProps } from "@data-driven-forms/react-form-renderer";
+
+export interface FormTemplateProps extends FormTemplateRenderProps {
   FormWrapper?: React.ComponentType;
   Button?: React.ComponentType;
   ButtonGroup?: React.ComponentType;

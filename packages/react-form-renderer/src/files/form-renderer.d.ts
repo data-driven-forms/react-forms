@@ -6,7 +6,7 @@ import ComponentMapper from './component-mapper';
 import ValidatorMapper from './validator-mapper';
 import ActionMapper from './action-mapper';
 import SchemaValidatorMapper from './schema-validator-mapper';
-import { FormTemplateRenderProps } from '../../dist/cjs';
+import { FormTemplateRenderProps } from './form-template-render-props';
 import { AnyObject } from './common';
 
 export interface FormRendererProps extends FormProps {
