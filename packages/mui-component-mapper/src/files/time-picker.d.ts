@@ -1,4 +1,4 @@
-import { UseFieldApiConfig } from "@data-driven-forms/react-form-renderer";
+import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-renderer";
 import { TimePickerProps as MuiTimePickerProps } from 'material-ui-pickers';
 import { ReactNode } from "react";
 import { MuiPickersUtilsProviderProps } from "material-ui-pickers/MuiPickersUtilsProvider";
@@ -14,6 +14,6 @@ export interface TimePickerProps extends MuiTimePickerProps {
   FormFieldGridProps?: GridProps;
 }
 
-declare const TimePicker: React.ComponentType<TimePickerProps & UseFieldApiConfig>;
+declare const TimePicker: React.ComponentType<TimePickerProps & UseFieldApiComponentConfig>;
 
 export default TimePicker;

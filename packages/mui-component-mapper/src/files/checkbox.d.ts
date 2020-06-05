@@ -1,4 +1,4 @@
-import { UseFieldApiConfig } from '@data-driven-forms/react-form-renderer';
+import { UseFieldApiComponentConfig } from '@data-driven-forms/react-form-renderer';
 import { CheckboxProps as MuiCheckboxProps, GridProps, FormControlProps, FormGroupProps, FormControlLabelProps, FormLabelProps, FormHelperTextProps } from '@material-ui/core';
 
 export interface CheckboxProps extends MuiCheckboxProps {
@@ -11,6 +11,6 @@ export interface CheckboxProps extends MuiCheckboxProps {
   FormHelperTextProps: FormHelperTextProps;
 }
 
-declare const Checkbox: React.ComponentType<CheckboxProps & UseFieldApiConfig>;
+declare const Checkbox: React.ComponentType<CheckboxProps & UseFieldApiComponentConfig>;
 
 export default Checkbox;
