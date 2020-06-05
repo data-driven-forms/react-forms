@@ -1,4 +1,4 @@
-import { UseFieldApiConfig } from "@data-driven-forms/react-form-renderer";
+import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-renderer";
 import { AutocompleteProps } from "@material-ui/lab/Autocomplete";
 import { ReactNode } from "react";
 import { GridProps, TextFieldProps, InputProps } from "@material-ui/core";
@@ -22,6 +22,6 @@ export interface SelectProps<T> extends AutocompleteProps<T> {
   inputProps?: InputProps;
 }
 
-declare const Select: React.ComponentType<SelectProps<any> & UseFieldApiConfig>;
+declare const Select: React.ComponentType<SelectProps<any> & UseFieldApiComponentConfig>;
 
 export default Select;

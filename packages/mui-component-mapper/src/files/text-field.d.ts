@@ -1,4 +1,4 @@
-import { UseFieldApiConfig } from "@data-driven-forms/react-form-renderer";
+import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-renderer";
 import { TextFieldProps as MuiTextFieldProps, GridProps } from '@material-ui/core';
 import { ReactNode } from "react";
 
@@ -11,6 +11,6 @@ export interface TextFieldProps {
   FormFieldGridProps?: GridProps;
 }
 
-declare const TextField: React.ComponentType<TextFieldProps & MuiTextFieldProps & UseFieldApiConfig>;
+declare const TextField: React.ComponentType<TextFieldProps & MuiTextFieldProps & UseFieldApiComponentConfig>;
 
 export default TextField;
