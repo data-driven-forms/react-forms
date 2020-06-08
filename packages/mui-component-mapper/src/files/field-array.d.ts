@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Field } from "@data-driven-forms/react-form-renderer";
+import { FieldArrayField } from "@data-driven-forms/react-form-renderer";
 import { FormControlProps, GridProps } from "@material-ui/core";
 
 export interface FieldArrayButtonLabels {
@@ -10,7 +10,7 @@ export interface FieldArrayButtonLabels {
 export interface FieldArrayProps {
   label?: ReactNode;
   description?: ReactNode;
-  fields: Field[];
+  fields: FieldArrayField[];
   defaultItem?: any;
   minItems?: number;
   maxItems?: number;
