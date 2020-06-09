@@ -2,27 +2,25 @@ import React from 'react';
 import { FormGroup as Pf4FormGroup, TextContent, Text } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 
-const FormGroup = ({ label, isRequired, helperText, meta, description, hideLabel, children, id }) => {
-  const { error, touched } = meta;
-  const showError = touched && error;
-  return (
-    <Pf4FormGroup
-      isRequired={isRequired}
-      label={!hideLabel && label}
-      fieldId={id}
-      isValid={!showError}
-      helperText={helperText}
-      helperTextInvalid={meta.error}
-    >
-      {description && (
-        <TextContent>
-          <Text component="small">{description}</Text>
-        </TextContent>
-      )}
-      {children}
-    </Pf4FormGroup>
-  );
-};
+import showError from './show-error';
+
+const FormGroup = ({ label, isRequired, helperText, meta, description, hideLabel, children, id }) => (
+  <Pf4FormGroup
+    isRequired={isRequired}
+    label={!hideLabel && label}
+    fieldId={id}
+    helperText={helperText}
+    helperTextInvalid={meta.error}
+    {...showError(meta)}
+  >
+    {description && (
+      <TextContent>
+        <Text component="small">{description}</Text>
+      </TextContent>
+    )}
+    {children}
+  </Pf4FormGroup>
+);
 
 FormGroup.propTypes = {
   label: PropTypes.node,
