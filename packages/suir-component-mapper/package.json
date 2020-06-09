@@ -4,16 +4,18 @@
   "description": "Component mapper for Semantic ui react for data-driven-forms.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "typings": "dist/cjs/index.d.ts",
   "files": [
     "dist/"
   ],
   "license": "Apache-2.0",
   "scripts": {
     "start": "webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
-    "build": "yarn build:cjs && yarn build:esm && yarn build:umd",
+    "build": "yarn build:cjs && yarn build:esm && yarn build:umd && yarn build:typings",
     "build:cjs": "BABEL_ENV=cjs rollup -c ./rollup.config.js --format=cjs --environment FORMAT:cjs",
     "build:esm": "BABEL_ENV=esm rollup -c ./rollup.config.js --format=esm --environment FORMAT:esm",
     "build:umd": "rollup -c ./rollup.config.js --format=umd --environment FORMAT:umd",
+    "build:typings": "node ../../scripts/copy-files.js",
     "release": "semantic-release"
   },
   "repository": "git@github.com:data-driven-forms/react-forms.git",
