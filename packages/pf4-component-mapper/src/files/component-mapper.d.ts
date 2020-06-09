@@ -42,6 +42,6 @@ export const rawComponents: RawComponents;
 
 declare const componentMapper: componentMapper;
 
-export const Components: Components;
+export const components: Components;
 
 export default componentMapper;
