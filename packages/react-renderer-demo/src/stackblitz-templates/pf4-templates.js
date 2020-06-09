@@ -67,7 +67,7 @@ export const pf4Dependencies = {
   'react-dom': '^16.12.0',
   '@data-driven-forms/react-form-renderer': 'latest',
   '@data-driven-forms/pf4-component-mapper': 'latest',
-  '@patternfly/react-core': 'latest',
-  '@patternfly/react-icons': 'latest',
+  '@patternfly/react-core': '3.158,1',
+  '@patternfly/react-icons': '3.15.16',
   'prop-types': 'latest'
 };
