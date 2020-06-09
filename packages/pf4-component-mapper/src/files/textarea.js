@@ -3,6 +3,7 @@ import { TextArea as Pf4TextArea } from '@patternfly/react-core';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import PropTypes from 'prop-types';
 import FormGroup from '../common/form-group';
+import showError from '../common/show-error';
 
 const Textarea = (props) => {
   const { label, isRequired, helperText, meta, description, hideLabel, input, isReadOnly, isDisabled, id, ...rest } = useFieldApi(props);
@@ -16,7 +17,7 @@ const Textarea = (props) => {
       hideLabel={hideLabel}
       id={id || input.name}
     >
-      <Pf4TextArea disabled={isDisabled || isReadOnly} {...input} id={id || input.name} {...rest} />
+      <Pf4TextArea disabled={isDisabled || isReadOnly} {...input} id={id || input.name} {...rest} {...showError(meta)} />
     </FormGroup>
   );
 };
