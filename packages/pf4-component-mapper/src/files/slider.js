@@ -11,7 +11,7 @@ const Slider = (props) => {
 
   return (
     <FormGroup label={label} isRequired={isRequired} helperText={helperText} meta={meta} description={description} id={id || input.name}>
-      <Grid gutter="md">
+      <Grid hasGutter>
         <GridItem span={10}>
           <input
             className={'ddorg__pf4-component-mapper__dual-list-slider-input '}
