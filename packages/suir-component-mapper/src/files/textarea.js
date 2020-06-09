@@ -4,7 +4,6 @@ import { FormTextArea } from 'semantic-ui-react';
 
 import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
-import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormField from '../common/form-field';
 
@@ -39,8 +38,6 @@ const Textarea = (props) => {
 };
 
 Textarea.propTypes = {
-  input,
-  meta,
   isReadOnly: PropTypes.bool,
   isDisabled: PropTypes.bool,
   placeholder: PropTypes.node,
