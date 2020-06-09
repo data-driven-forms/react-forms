@@ -11,7 +11,9 @@ const SubForm = ({ fields, title, description, validate: _validate, component, .
     <Grid gutter="md" {...rest}>
       {title && (
         <GridItem sm={12}>
-          <Title size="xl">{title}</Title>
+          <Title headingLevel="h2" size="xl">
+            {title}
+          </Title>
         </GridItem>
       )}
       {description && (
