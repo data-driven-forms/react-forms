@@ -34,12 +34,6 @@ interface componentMapper  {
   [ComponentTypes.SLIDER]: React.ComponentType;
 }
 
-interface RawComponents {
-  RawSelect: React.ComponentType;
-}
-
-export const rawComponents: RawComponents;
-
 declare const componentMapper: componentMapper;
 
 export const components: Components;

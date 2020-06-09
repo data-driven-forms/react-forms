@@ -241,7 +241,6 @@ DualListInternal.propTypes = {
   filterValues: PropTypes.func,
   rightValues: PropTypes.array,
   handleValuesClick: PropTypes.func,
-  FormFieldGridProps: PropTypes.object,
   WrapperProps: PropTypes.object,
   LeftWrapperProps: PropTypes.object,
   RightWrapperProps: PropTypes.object,
