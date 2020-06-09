@@ -145,7 +145,8 @@ const DualList = ({
   sortValues,
   filterValues,
   rightValues,
-  handleValuesClick
+  handleValuesClick,
+  renderStatus
 }) => (
   <FormGroup
     label={label}
@@ -175,6 +176,18 @@ const DualList = ({
                 id={`${input.name}-options-toolbar`}
               />
             </GridItem>
+            {renderStatus && (
+              <GridItem md={12}>
+                <TextContent>
+                  <Text data-test-id="left-status-text" component={TextVariants.h6}>
+                    {renderStatus({
+                      selected: state.selectedLeftValues.length,
+                      options: leftValues.length
+                    })}
+                  </Text>
+                </TextContent>
+              </GridItem>
+            )}
             <GridItem md={12}>
               <List
                 optionClick={handleOptionsClick}
@@ -234,6 +247,18 @@ const DualList = ({
                 id={`${input.name}-value-toolbar`}
               />
             </GridItem>
+            {renderStatus && (
+              <GridItem md={12}>
+                <TextContent>
+                  <Text data-test-id="right-status-text" component={TextVariants.h6}>
+                    {renderStatus({
+                      selected: state.selectedRightValues.length,
+                      options: rightValues.length
+                    })}
+                  </Text>
+                </TextContent>
+              </GridItem>
+            )}
             <GridItem md={12}>
               <List
                 optionClick={handleValuesClick}
@@ -288,7 +313,8 @@ DualList.propTypes = {
   sortValues: PropTypes.func,
   filterValues: PropTypes.func,
   rightValues: PropTypes.array,
-  handleValuesClick: PropTypes.func
+  handleValuesClick: PropTypes.func,
+  renderStatus: PropTypes.func
 };
 
 DualList.defaultProps = {

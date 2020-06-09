@@ -21,3 +21,4 @@ Dual list select is wrapped in a form group, so it accepts all [form group props
 |filterValueTitle|String|'Filter selected value'|Placeholder for value filter input|
 |filterValueText|String|'Remove your filter to see all selected'|Placeholder for value when there is no filtered value|
 |filterOptionsText|String|'Remove your filter to see all options'|Placeholder for options when there is no filtered option|
+|renderStatus|function|'null'|A function that renders status text below the toolbar filter. For example, display how many items were selected: `({selected, options}) => "selected " + selected + " out of " + options`|

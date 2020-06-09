@@ -8,6 +8,7 @@ import { componentMapper, FormTemplate } from '../src';
 import { Title, Button, Toolbar, ToolbarGroup } from '@patternfly/react-core';
 import { wizardSchema, wizardSchemaWithFunction, wizardSchemaSimple, wizardSchemaSubsteps, wizardSchemaMoreSubsteps } from './demo-schemas/wizard-schema';
 import sandboxSchema from './demo-schemas/sandbox';
+import dualSchema from './demo-schemas/dual-list-schema';
 import demoSchema from '@data-driven-forms/common/src/demoschema';
 
 const Summary = props => <div>Custom summary component.</div>;
@@ -42,6 +43,9 @@ class App extends React.Component {
                 <ToolbarGroup>
                     <Button onClick={() => this.setState(state => ({ schema: demoSchema, additionalOptions: {}}))}>Super schema</Button>
                 </ToolbarGroup>
+                <ToolbarGroup>
+                    <Button onClick={() => this.setState(state => ({ schema: dualSchema, additionalOptions: {} }))}>Dual List</Button>
+                </ToolbarGroup>
             </Toolbar>
             <FormRenderer
                 onSubmit={console.log}
@@ -50,6 +54,10 @@ class App extends React.Component {
                 }}
                 componentMapper={{
                     ...componentMapper,
+                    'dual-list-select': {
+                        component: componentMapper['dual-list-select'],
+                        renderStatus: ({selected, options}) => `selected ${selected} from ${options}`
+                    },
                     summary: Summary
                 }}
                 FormTemplate={(props) => <FormTemplate {...props} showFormControls={this.state.additionalOptions.showFormControls} />}

@@ -521,6 +521,43 @@ describe('DualListSelect', () => {
     ).toEqual('zebras');
   });
 
+  it('display status message', async () => {
+    const props = {
+      ...initialProps,
+      componentMapper: {
+        'dual-list-select': {
+          component: componentMapper['dual-list-select'],
+          renderStatus: ({ selected, options }) => `you selected ${selected} out of ${options} options`
+        }
+      }
+    };
+    const wrapper = mount(<FormRenderer {...props} />);
+
+    expect(wrapper.find('h6[data-test-id="left-status-text"]').text()).toBe('you selected 0 out of 5 options');
+
+    await act(async () => {
+      wrapper
+        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .first()
+        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .first()
+        .simulate('click');
+    });
+    wrapper.update();
+    expect(wrapper.find('h6[data-test-id="left-status-text"]').text()).toBe('you selected 1 out of 5 options');
+
+    await act(async () => {
+      wrapper
+        .find('.ddorg__pf4-component-mapper__dual-list-select')
+        .first()
+        .find('.ddorg__pf4-component-mapper__dual-list-select-option')
+        .last()
+        .simulate('click', { shiftKey: true });
+    });
+    wrapper.update();
+    expect(wrapper.find('h6[data-test-id="left-status-text"]').text()).toBe('you selected 5 out of 5 options');
+  });
+
   describe('filtered options', () => {
     it('switch all visible to right', async () => {
       const wrapper = mount(<FormRenderer {...initialProps} />);
