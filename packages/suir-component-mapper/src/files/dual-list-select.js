@@ -102,8 +102,8 @@ Toolbar.propTypes = {
 };
 
 Toolbar.defaultProps = {
-  sortUpIcon: 'sort up',
-  sortDownIcon: 'sort down'
+  sortUpIcon: 'sort amount up',
+  sortDownIcon: 'sort amount down'
 };
 
 const useDualListStyles = createUseStyles({
@@ -119,6 +119,11 @@ const useDualListStyles = createUseStyles({
   formField: {
     '&>label': {
       display: 'inline-block !important'
+    }
+  },
+  '@media screen and (max-width: 767px)': {
+    transferButton: {
+      transform: 'rotate(90deg)'
     }
   }
 });
@@ -192,7 +197,7 @@ const DualList = ({
         className={clsx(classes.formField, labelClassName)}
       />
       <Grid key="0">
-        <GridColumn mobile={16} tablet={16} computer={7}>
+        <GridColumn mobile={16} tablet={7} computer={7}>
           <Grid>
             <GridColumn mobile={16} tablet={16}>
               <Header sub {...OptionsHeaderProps}>
@@ -224,7 +229,7 @@ const DualList = ({
             </GridColumn>
           </Grid>
         </GridColumn>
-        <GridColumn className={clsx(classes.dualListButtons, buttonGridClassName)} {...ButtonGridProps} mobile={16} tablet={16} computer={2}>
+        <GridColumn className={clsx(classes.dualListButtons, buttonGridClassName)} {...ButtonGridProps} mobile={16} tablet={2} computer={2}>
           <Grid>
             <GridColumn tablet={16} mobile={4}>
               <Button
@@ -276,7 +281,7 @@ const DualList = ({
             </GridColumn>
           </Grid>
         </GridColumn>
-        <GridColumn mobile={16} tablet={16} computer={7}>
+        <GridColumn mobile={16} tablet={7} computer={7}>
           <Grid>
             <GridColumn tablet={16}>
               <Header sub {...ValuesHeaderProps}>

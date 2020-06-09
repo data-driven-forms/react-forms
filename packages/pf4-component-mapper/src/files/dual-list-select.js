@@ -18,8 +18,8 @@ import {
 } from '@patternfly/react-core';
 
 import {
-  SortAlphaDownIcon,
-  SortAlphaUpIcon,
+  PficonSortCommonAscIcon,
+  PficonSortCommonDescIcon,
   SearchIcon,
   AngleDoubleLeftIcon,
   AngleDoubleRightIcon,
@@ -93,7 +93,7 @@ const Toolbar = ({ sortTitle, onFilter, onSort, sortDirection, value, placeholde
       </DataToolbarItem>
       <DataToolbarItem>
         <Button onClick={onSort} title={sortTitle} variant="plain">
-          {!sortDirection ? <SortAlphaDownIcon size="md" /> : <SortAlphaUpIcon size="md" />}
+          {!sortDirection ? <PficonSortCommonAscIcon size="md" /> : <PficonSortCommonDescIcon size="md" />}
         </Button>
       </DataToolbarItem>
     </DataToolbarContent>
