@@ -4,6 +4,7 @@
   "description": "Blueprint component mapper for data-driven-forms.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "typings": "dist/cjs/index.d.ts",
   "files": [
     "dist/"
   ],
@@ -14,6 +15,7 @@
     "build:cjs": "BABEL_ENV=cjs rollup -c ./rollup.config.js --format=cjs --environment FORMAT:cjs",
     "build:esm": "BABEL_ENV=esm rollup -c ./rollup.config.js --format=esm --environment FORMAT:esm",
     "build:umd": "rollup -c ./rollup.config.js --format=umd --environment FORMAT:umd",
+    "build:typings": "node ../../scripts/copy-files.js",
     "release": "semantic-release"
   },
   "repository": "git@github.com:data-driven-forms/react-forms.git",
