@@ -3,8 +3,7 @@ import { act } from 'react-dom/test-utils';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
 
-import { FormGroup, TextInput } from '@patternfly/react-core';
-import { DataToolbar } from '@patternfly/react-core/dist/js/experimental';
+import { FormGroup, TextInput, Toolbar } from '@patternfly/react-core';
 import {
   SearchIcon,
   SortAlphaUpIcon,
@@ -68,7 +67,7 @@ describe('DualListSelect', () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
 
     expect(wrapper.find(FormGroup)).toHaveLength(1);
-    expect(wrapper.find(DataToolbar)).toHaveLength(2);
+    expect(wrapper.find(Toolbar)).toHaveLength(2);
     expect(wrapper.find(TextInput)).toHaveLength(2);
     expect(wrapper.find(SearchIcon)).toHaveLength(2);
     expect(wrapper.find(SortAlphaUpIcon)).toHaveLength(2);

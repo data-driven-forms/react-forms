@@ -2,9 +2,7 @@
 
 exports[`<WizardStep /> should render correctly 1`] = `
 <Fragment>
-  <WizardBody
-    hasBodyPadding={true}
-  >
+  <Component>
     <div
       className="pf-c-form"
     >
@@ -14,7 +12,7 @@ exports[`<WizardStep /> should render correctly 1`] = `
         foo
       </div>
     </div>
-  </WizardBody>
+  </Component>
   <WizardStepButtons
     FieldProvider={[Function]}
     buttonLabels={
@@ -41,9 +39,7 @@ exports[`<WizardStep /> should render correctly 1`] = `
 
 exports[`<WizardStep /> should render custom description 1`] = `
 <Fragment>
-  <WizardBody
-    hasBodyPadding={true}
-  >
+  <Component>
     <div
       className="pf-c-form"
     >
@@ -53,7 +49,7 @@ exports[`<WizardStep /> should render custom description 1`] = `
         foo
       </div>
     </div>
-  </WizardBody>
+  </Component>
   <WizardStepButtons
     FieldProvider={[Function]}
     buttonLabels={
@@ -80,9 +76,7 @@ exports[`<WizardStep /> should render custom description 1`] = `
 
 exports[`<WizardStep /> should render title with showTitle 1`] = `
 <Fragment>
-  <WizardBody
-    hasBodyPadding={true}
-  >
+  <Component>
     <div
       className="pf-c-form"
     >
@@ -99,7 +93,7 @@ exports[`<WizardStep /> should render title with showTitle 1`] = `
         foo
       </div>
     </div>
-  </WizardBody>
+  </Component>
   <WizardStepButtons
     FieldProvider={[Function]}
     buttonLabels={
