@@ -4,6 +4,7 @@ import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms
 import { mount } from 'enzyme';
 
 import { componentMapper, FormTemplate } from '../index';
+import { FormHelperText } from '@patternfly/react-core';
 
 describe('<FieldArray/>', () => {
   let initialProps;
@@ -351,7 +352,7 @@ describe('<FieldArray/>', () => {
       wrapper = mount(<FormRenderer {...initialProps} />);
     });
 
-    expect(wrapper.find('FormHelperText')).toHaveLength(0);
+    expect(wrapper.find(FormHelperText)).toHaveLength(0);
 
     await act(async () => {
       wrapper
@@ -369,7 +370,7 @@ describe('<FieldArray/>', () => {
     expect(onSubmit).not.toHaveBeenCalled();
     onSubmit.mockClear();
 
-    expect(wrapper.find('FormHelperText').text()).toEqual('Must have at least 3 items.');
+    expect(wrapper.find(FormHelperText).text()).toEqual('Must have at least 3 items.');
   });
 
   it('should render array field correctly with props', async () => {
