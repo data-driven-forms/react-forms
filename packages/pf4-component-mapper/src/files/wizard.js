@@ -83,7 +83,7 @@ const WizardInternal = ({
   return (
     <Modal inModal={inModal} container={state.container}>
       <div
-        className={`pf-c-wizard ${inModal ? '' : 'no-shadow'}`}
+        className={`pf-c-wizard ${inModal ? '' : 'no-shadow'} ddorg__pf4-component-mapper__wizard`}
         role="dialog"
         aria-modal={inModal ? 'true' : undefined}
         onKeyDown={onKeyDown}
