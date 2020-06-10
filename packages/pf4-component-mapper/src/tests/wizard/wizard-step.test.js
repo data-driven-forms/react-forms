@@ -4,6 +4,7 @@ import { shallowToJson } from 'enzyme-to-json';
 
 import WizardStep, { RenderTitle } from '../../files/wizard/wizard-step';
 import FieldProvider from '../../../../../__mocks__/mock-field-provider';
+import { Title } from '@patternfly/react-core';
 
 describe('<WizardStep />', () => {
   let initialProps;
@@ -65,10 +66,10 @@ describe('<WizardStep />', () => {
     it('should render title', () => {
       const wrapper = shallow(<RenderTitle title={TITLE} />);
 
-      expect(wrapper.find('Title')).toHaveLength(1);
+      expect(wrapper.find(Title)).toHaveLength(1);
       expect(
         wrapper
-          .find('Title')
+          .find(Title)
           .html()
           .includes(TITLE)
       ).toEqual(true);
@@ -77,7 +78,7 @@ describe('<WizardStep />', () => {
     it('should render custom title', () => {
       const wrapper = mount(<RenderTitle title={TITLE} customTitle={CustomTitle} />);
 
-      expect(wrapper.find('Title')).toHaveLength(0);
+      expect(wrapper.find(Title)).toHaveLength(0);
       expect(wrapper.find('h3')).toHaveLength(1);
       expect(
         wrapper

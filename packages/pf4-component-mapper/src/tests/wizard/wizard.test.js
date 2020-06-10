@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import toJSon from 'enzyme-to-json';
-import { TextInput, Button } from '@patternfly/react-core';
+import { TextInput, Button, WizardNavItem } from '@patternfly/react-core';
 import { act } from 'react-dom/test-utils';
 
 import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
@@ -689,7 +689,7 @@ describe('<Wizard />', () => {
   it('should disabled navigation when validating', async () => {
     jest.useFakeTimers();
 
-    const asyncValidator = () => new Promise((res) => setTimeout(() => res(), 100));
+    const asyncValidator = jest.fn().mockImplementation(() => new Promise((res) => setTimeout(() => res(), 50)));
 
     schema = {
       fields: [
@@ -774,6 +774,11 @@ describe('<Wizard />', () => {
     });
     wrapper.update();
 
+    await act(async () => {
+      jest.runAllTimers();
+    });
+    wrapper.update();
+
     expect(
       wrapper
         .find('.pf-c-wizard__nav-item')
@@ -781,6 +786,8 @@ describe('<Wizard />', () => {
         .childAt(0)
         .prop('aria-disabled')
     ).toEqual(false);
+
+    jest.useRealTimers();
   });
 
   it('should disable steps when invalid', () => {
@@ -854,7 +861,7 @@ describe('<Wizard />', () => {
         .last()
         .childAt(0)
         .text()
-    ).toEqual('foo');
+    ).toEqual('foo ');
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(4);
 
     nextButtonClick(wrapper);
@@ -866,7 +873,7 @@ describe('<Wizard />', () => {
         .last()
         .childAt(0)
         .text()
-    ).toEqual('bar');
+    ).toEqual('bar ');
 
     nextButtonClick(wrapper);
 
@@ -878,7 +885,7 @@ describe('<Wizard />', () => {
         .last()
         .childAt(0)
         .text()
-    ).toEqual('bar');
+    ).toEqual('bar ');
 
     changeValue(wrapper, 'hello');
     nextButtonClick(wrapper);
@@ -891,7 +898,7 @@ describe('<Wizard />', () => {
         .last()
         .childAt(0)
         .text()
-    ).toEqual('conan');
+    ).toEqual('conan ');
     expect(
       wrapper
         .find('.pf-c-wizard__nav-item')
@@ -909,7 +916,7 @@ describe('<Wizard />', () => {
         .last()
         .childAt(0)
         .text()
-    ).toEqual('bar');
+    ).toEqual('bar ');
 
     changeValue(wrapper, '');
     nextButtonClick(wrapper);
@@ -922,7 +929,7 @@ describe('<Wizard />', () => {
         .last()
         .childAt(0)
         .text()
-    ).toEqual('bar');
+    ).toEqual('bar ');
 
     // let's look if last nav item is disabled (click event is working with 'disabled' <a> element)
     expect(
@@ -949,7 +956,7 @@ describe('<Wizard />', () => {
         .last()
         .childAt(0)
         .text()
-    ).toEqual('foo');
+    ).toEqual('foo ');
     expect(
       wrapper
         .find('.pf-c-wizard__nav-item')
@@ -1047,10 +1054,10 @@ describe('<Wizard />', () => {
         />
       );
 
-      expect(wrapper.find('WizardNavItem')).toHaveLength(1);
+      expect(wrapper.find(WizardNavItem)).toHaveLength(1);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(0)
           .text()
       ).toEqual(FIRST_TITLE);
@@ -1058,22 +1065,22 @@ describe('<Wizard />', () => {
       changeValue(wrapper, 'aws');
       nextButtonClick(wrapper);
 
-      expect(wrapper.find('WizardNavItem')).toHaveLength(3);
+      expect(wrapper.find(WizardNavItem)).toHaveLength(3);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(0)
           .text()
       ).toEqual(FIRST_TITLE);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(1)
           .text()
       ).toEqual(SECOND_TITLE_AWS);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(2)
           .text()
       ).toEqual(THIRD_TITLE);
@@ -1093,25 +1100,25 @@ describe('<Wizard />', () => {
       changeValue(wrapper, 'aws');
       nextButtonClick(wrapper);
 
-      expect(wrapper.find('WizardNavItem')).toHaveLength(3);
+      expect(wrapper.find(WizardNavItem)).toHaveLength(3);
 
       backButtonClick(wrapper);
 
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(0)
           .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(1)
           .props().isDisabled
       ).toEqual(true);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(2)
           .props().isDisabled
       ).toEqual(true);
@@ -1131,25 +1138,25 @@ describe('<Wizard />', () => {
       changeValue(wrapper, 'aws');
       nextButtonClick(wrapper);
 
-      expect(wrapper.find('WizardNavItem')).toHaveLength(3);
+      expect(wrapper.find(WizardNavItem)).toHaveLength(3);
 
       backButtonClick(wrapper);
 
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(0)
           .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(1)
           .props().isDisabled
       ).toEqual(true);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(2)
           .props().isDisabled
       ).toEqual(true);
@@ -1210,16 +1217,16 @@ describe('<Wizard />', () => {
       changeValue(wrapper, 'aws');
       nextButtonClick(wrapper);
 
-      expect(wrapper.find('WizardNavItem')).toHaveLength(2);
+      expect(wrapper.find(WizardNavItem)).toHaveLength(2);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(0)
           .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(1)
           .props().isDisabled
       ).toEqual(false);
@@ -1229,13 +1236,13 @@ describe('<Wizard />', () => {
 
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(0)
           .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(1)
           .props().isDisabled
       ).toEqual(true);
@@ -1297,19 +1304,19 @@ describe('<Wizard />', () => {
       changeValue(wrapper, 'aws');
       nextButtonClick(wrapper);
 
-      expect(wrapper.find('WizardNavItem')).toHaveLength(2);
+      expect(wrapper.find(WizardNavItem)).toHaveLength(2);
 
       backButtonClick(wrapper);
 
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(0)
           .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(1)
           .props().isDisabled
       ).toEqual(true);
@@ -1368,32 +1375,32 @@ describe('<Wizard />', () => {
       changeValue(wrapper, 'aws');
       nextButtonClick(wrapper);
 
-      expect(wrapper.find('WizardNavItem')).toHaveLength(2);
+      expect(wrapper.find(WizardNavItem)).toHaveLength(2);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(0)
           .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(1)
           .props().isDisabled
       ).toEqual(false);
 
       backButtonClick(wrapper);
 
-      expect(wrapper.find('WizardNavItem')).toHaveLength(2);
+      expect(wrapper.find(WizardNavItem)).toHaveLength(2);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(0)
           .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(1)
           .props().isDisabled
       ).toEqual(true);
@@ -1443,27 +1450,27 @@ describe('<Wizard />', () => {
 
       const wrapper = mount(<FormRenderer {...initialProps} schema={wizardSchema} />);
 
-      expect(wrapper.find('WizardNavItem')).toHaveLength(1);
+      expect(wrapper.find(WizardNavItem)).toHaveLength(1);
 
       changeValue(wrapper, 'aws');
 
       // predict steps for aws
-      expect(wrapper.find('WizardNavItem')).toHaveLength(3);
+      expect(wrapper.find(WizardNavItem)).toHaveLength(3);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(0)
           .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(1)
           .props().isDisabled
       ).toEqual(true);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(2)
           .props().isDisabled
       ).toEqual(true);
@@ -1471,32 +1478,32 @@ describe('<Wizard />', () => {
       changeValue(wrapper, 'google');
 
       // predict steps for google
-      expect(wrapper.find('WizardNavItem')).toHaveLength(2);
+      expect(wrapper.find(WizardNavItem)).toHaveLength(2);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(0)
           .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(1)
           .props().isDisabled
       ).toEqual(true);
 
       nextButtonClick(wrapper);
 
-      expect(wrapper.find('WizardNavItem')).toHaveLength(2);
+      expect(wrapper.find(WizardNavItem)).toHaveLength(2);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(0)
           .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(1)
           .props().isDisabled
       ).toEqual(false);
@@ -1510,54 +1517,54 @@ describe('<Wizard />', () => {
       wrapper.update();
 
       // keep the second step enabled
-      expect(wrapper.find('WizardNavItem')).toHaveLength(2);
+      expect(wrapper.find(WizardNavItem)).toHaveLength(2);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(0)
           .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(1)
           .props().isDisabled
       ).toEqual(false);
 
       changeValue(wrapper, 'aws');
 
-      expect(wrapper.find('WizardNavItem')).toHaveLength(3);
+      expect(wrapper.find(WizardNavItem)).toHaveLength(3);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(0)
           .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(1)
           .props().isDisabled
       ).toEqual(true);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(2)
           .props().isDisabled
       ).toEqual(true);
 
       changeValue(wrapper, 'google');
 
-      expect(wrapper.find('WizardNavItem')).toHaveLength(2);
+      expect(wrapper.find(WizardNavItem)).toHaveLength(2);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(0)
           .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(1)
           .props().isDisabled
       ).toEqual(true);
@@ -1608,21 +1615,21 @@ describe('<Wizard />', () => {
 
       const wrapper = mount(<FormRenderer {...initialProps} schema={wizardSchema} />);
 
-      expect(wrapper.find('WizardNavItem')).toHaveLength(1);
+      expect(wrapper.find(WizardNavItem)).toHaveLength(1);
 
       changeValue(wrapper, 'google');
 
       // predict steps for google
-      expect(wrapper.find('WizardNavItem')).toHaveLength(2);
+      expect(wrapper.find(WizardNavItem)).toHaveLength(2);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(0)
           .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(1)
           .props().isDisabled
       ).toEqual(true);
@@ -1638,16 +1645,16 @@ describe('<Wizard />', () => {
       wrapper.update();
 
       // keep the second step enabled
-      expect(wrapper.find('WizardNavItem')).toHaveLength(2);
+      expect(wrapper.find(WizardNavItem)).toHaveLength(2);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(0)
           .props().isDisabled
       ).toEqual(false);
       expect(
         wrapper
-          .find('WizardNavItem')
+          .find(WizardNavItem)
           .at(1)
           .props().isDisabled
       ).toEqual(true);

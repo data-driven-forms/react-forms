@@ -4,6 +4,7 @@ import { mount } from 'enzyme';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
 import FormTemplate from '../files/form-template';
 import componentMapper from '../files/component-mapper';
+import { Title, Text } from '@patternfly/react-core';
 
 describe('SubForm component', () => {
   let initialProps;
@@ -35,8 +36,8 @@ describe('SubForm component', () => {
     };
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
 
-    expect(wrapper.find('Title').text()).toEqual('some title');
-    expect(wrapper.find('Text').text()).toEqual('some description');
+    expect(wrapper.find(Title).text()).toEqual('some title');
+    expect(wrapper.find(Text).text()).toEqual('some description');
     expect(wrapper.find('input')).toHaveLength(1);
   });
 
@@ -58,8 +59,8 @@ describe('SubForm component', () => {
     };
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
 
-    expect(wrapper.find('Title').text()).toEqual('some title');
-    expect(wrapper.find('Text')).toHaveLength(0);
+    expect(wrapper.find(Title).text()).toEqual('some title');
+    expect(wrapper.find(Text)).toHaveLength(0);
     expect(wrapper.find('input')).toHaveLength(1);
   });
 
@@ -81,8 +82,8 @@ describe('SubForm component', () => {
     };
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
 
-    expect(wrapper.find('Title')).toHaveLength(0);
-    expect(wrapper.find('Text').text()).toEqual('some description');
+    expect(wrapper.find(Title)).toHaveLength(0);
+    expect(wrapper.find(Text).text()).toEqual('some description');
     expect(wrapper.find('input')).toHaveLength(1);
   });
 });
