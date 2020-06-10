@@ -7,8 +7,8 @@ import { FormGroup, TextInput } from '@patternfly/react-core';
 import { DataToolbar } from '@patternfly/react-core/dist/js/experimental';
 import {
   SearchIcon,
-  SortAlphaUpIcon,
-  SortAlphaDownIcon,
+  PficonSortCommonAscIcon,
+  PficonSortCommonDescIcon,
   AngleDoubleLeftIcon,
   AngleDoubleRightIcon,
   AngleLeftIcon,
@@ -71,8 +71,8 @@ describe('DualListSelect', () => {
     expect(wrapper.find(DataToolbar)).toHaveLength(2);
     expect(wrapper.find(TextInput)).toHaveLength(2);
     expect(wrapper.find(SearchIcon)).toHaveLength(2);
-    expect(wrapper.find(SortAlphaUpIcon)).toHaveLength(2);
-    expect(wrapper.find(SortAlphaDownIcon)).toHaveLength(0);
+    expect(wrapper.find(PficonSortCommonDescIcon)).toHaveLength(2);
+    expect(wrapper.find(PficonSortCommonAscIcon)).toHaveLength(0);
     expect(wrapper.find(AngleRightIcon)).toHaveLength(1);
     expect(wrapper.find(AngleLeftIcon)).toHaveLength(1);
     expect(wrapper.find(AngleDoubleRightIcon)).toHaveLength(1);
@@ -396,7 +396,7 @@ describe('DualListSelect', () => {
     ).toEqual('zebras');
     await act(async () => {
       wrapper
-        .find(SortAlphaUpIcon)
+        .find(PficonSortCommonDescIcon)
         .first()
         .parent()
         .props()
@@ -422,7 +422,7 @@ describe('DualListSelect', () => {
     ).toEqual('cats');
     await act(async () => {
       wrapper
-        .find(SortAlphaDownIcon)
+        .find(PficonSortCommonAscIcon)
         .first()
         .parent()
         .props()
@@ -469,7 +469,7 @@ describe('DualListSelect', () => {
     ).toEqual('zebras');
     await act(async () => {
       wrapper
-        .find(SortAlphaUpIcon)
+        .find(PficonSortCommonDescIcon)
         .last()
         .parent()
         .props()
@@ -495,7 +495,7 @@ describe('DualListSelect', () => {
     ).toEqual('cats');
     await act(async () => {
       wrapper
-        .find(SortAlphaDownIcon)
+        .find(PficonSortCommonAscIcon)
         .last()
         .parent()
         .props()

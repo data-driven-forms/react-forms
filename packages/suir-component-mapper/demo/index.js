@@ -5,7 +5,7 @@ import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-rend
 import { componentMapper, FormTemplate } from '../src';
 import demoSchema from '@data-driven-forms/common/src/demoschema';
 import fieldArraySchema from './demo-schemas/field-array-schema';
-
+import dualListSchema from './demo-schemas/dual-list-select-schema';
 import wizardSchema from './demo-schemas/wizard-schema';
 import { Button } from 'semantic-ui-react';
 
@@ -29,6 +29,7 @@ const App = () => {
           <Button onClick={() => setSchema(demoSchema)}>Demo schema</Button>
           <Button onClick={() => setSchema(fieldArraySchema)}>Field array</Button>
           <Button onClick={() => setSchema(wizardSchema)}>Wizard</Button>
+          <Button onClick={() => setSchema(dualListSchema)}>Dual list</Button>
         </div>
         <div style={{ padding: 32 }}>
           <FormRenderer

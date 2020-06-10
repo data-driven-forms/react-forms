@@ -367,7 +367,7 @@ describe('DualListSelect', () => {
     ).toEqual('zebras');
     await act(async () => {
       wrapper
-        .findWhere((node) => node.prop('icon') === 'sort up')
+        .findWhere((node) => node.prop('icon') === 'sort amount up')
         .first()
         .find('button')
         .simulate('click');
@@ -392,7 +392,7 @@ describe('DualListSelect', () => {
     ).toEqual('cats');
     await act(async () => {
       wrapper
-        .findWhere((node) => node.prop('icon') === 'sort down')
+        .findWhere((node) => node.prop('icon') === 'sort amount down')
         .find('button')
         .first()
         .simulate('click');
@@ -438,7 +438,7 @@ describe('DualListSelect', () => {
     ).toEqual('zebras');
     await act(async () => {
       wrapper
-        .findWhere((node) => node.prop('icon') === 'sort up')
+        .findWhere((node) => node.prop('icon') === 'sort amount up')
         .last()
         .find('button')
         .simulate('click');
@@ -463,7 +463,7 @@ describe('DualListSelect', () => {
     ).toEqual('cats');
     await act(async () => {
       wrapper
-        .findWhere((node) => node.prop('icon') === 'sort down')
+        .findWhere((node) => node.prop('icon') === 'sort amount down')
         .find('button')
         .last()
         .simulate('click');
