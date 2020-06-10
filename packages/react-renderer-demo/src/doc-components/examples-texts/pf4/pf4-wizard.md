@@ -11,12 +11,11 @@ Don't forget hide form controls by setting \`showFormControls\` to \`false\` as 
 | buttonLabels  | object  | see below  | Labels for buttons |
 | inModal  | bool  | undefined  | show form in modal  |
 | container  | HTMLElement | 'div'  | element containing the modal |
-| isCompactNav  | bool  | undefined  | see Patternfly |
-| setFullWidth  | bool  | undefined  | see Patternfly  |
-| setFullHeight  | bool  | undefined  | see Patternfly  |
 | isDynamic  | bool  | undefined  | will dynamically generate steps navigation (=progressive wizard), please use if you use any condition fields which changes any field in other steps (wizards with conditional steps are dynamic by default) |
 |showTitles|bool|undefined|If true, step titles will be shown in the wizard body|
 |crossroads|array|undefined|Array of field names, which change next steps|
+
+Also accepts these props from the original component: `titleId`, `descriptionId`, `hideClose`, `hasNoBodyPadding`, `navAriaLabel` and `closeButtonAriaLabel`.
 
 **Default buttonLabels**
 
@@ -161,7 +160,7 @@ If the value is different, a new primary step is created with the step as a subs
 
 **First step**
 
-First step should have on the first position of the `fields` array. 
+First step should have on the first position of the `fields` array.
 
 **Variants of Wizard**
 
