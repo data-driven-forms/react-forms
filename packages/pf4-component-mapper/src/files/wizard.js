@@ -16,7 +16,9 @@ const Modal = ({ children, container, inModal }) =>
   inModal
     ? createPortal(
         <Backdrop>
-          <Bullseye>{children}</Bullseye>
+          <Bullseye>
+            <div className="pf-c-modal-box pf-m-lg">{children}</div>
+          </Bullseye>
         </Backdrop>,
         container
       )
@@ -29,9 +31,6 @@ const WizardInternal = ({
   description,
   buttonLabels,
   buttonsClassName,
-  setFullWidth,
-  setFullHeight,
-  isCompactNav,
   showTitles,
   formOptions,
   currentStep,
@@ -44,7 +43,15 @@ const WizardInternal = ({
   activeStepIndex,
   maxStepIndex,
   isDynamic,
-  container
+  container,
+  hideClose,
+  titleId,
+  descriptionId,
+  closeButtonAriaLabel,
+  hasNoBodyPadding,
+  prevSteps,
+  navAriaLabel,
+  ...rest
 }) => {
   const [state, dispatch] = useReducer(reducer, { loading: true, container });
 
@@ -76,43 +83,55 @@ const WizardInternal = ({
   return (
     <Modal inModal={inModal} container={state.container}>
       <div
-        className={`pf-c-wizard ${inModal ? '' : 'no-shadow'} ${isCompactNav ? 'pf-m-compact-nav' : ''} ${setFullWidth ? 'pf-m-full-width' : ''} ${
-          setFullHeight ? 'pf-m-full-height' : ''
-        }`}
+        className={`pf-c-wizard ${inModal ? '' : 'no-shadow'}`}
         role="dialog"
         aria-modal={inModal ? 'true' : undefined}
         onKeyDown={onKeyDown}
+        {...rest}
       >
-        {title && <WizardHeader title={title} description={description} onClose={formOptions.onCancel} />}
-        <div className="pf-c-wizard__outer-wrap">
-          <WizardNav>
-            <FormSpy subscription={{ values: true, valid: true, validating: true }}>
-              {({ values, valid, validating }) => (
-                <WizardNavigation
-                  navSchema={navSchema}
-                  activeStepIndex={activeStepIndex}
-                  valid={valid}
-                  maxStepIndex={maxStepIndex}
-                  jumpToStep={jumpToStep}
-                  crossroads={crossroads}
-                  isDynamic={isDynamic}
-                  values={values}
-                  setPrevSteps={setPrevSteps}
-                  validating={validating}
-                />
-              )}
-            </FormSpy>
-          </WizardNav>
-          <WizardStep
-            {...currentStep}
-            formOptions={formOptions}
-            buttonLabels={buttonLabels}
-            buttonsClassName={buttonsClassName}
-            showTitles={showTitles}
-            handleNext={(nextStep) => handleNext(nextStep)}
-            handlePrev={handlePrev}
-            disableBack={activeStepIndex === 0}
+        {title && (
+          <WizardHeader
+            title={title}
+            description={description}
+            onClose={formOptions.onCancel}
+            hideClose={hideClose}
+            titleId={titleId}
+            descriptionId={descriptionId}
+            closeButtonAriaLabel={closeButtonAriaLabel}
           />
+        )}
+        <div className="pf-c-wizard__outer-wrap">
+          <div className="pf-c-wizard__inner-wrap">
+            <WizardNav aria-label={navAriaLabel}>
+              <FormSpy subscription={{ values: true, valid: true, validating: true }}>
+                {({ values, valid, validating }) => (
+                  <WizardNavigation
+                    navSchema={navSchema}
+                    activeStepIndex={activeStepIndex}
+                    valid={valid}
+                    maxStepIndex={maxStepIndex}
+                    jumpToStep={jumpToStep}
+                    crossroads={crossroads}
+                    isDynamic={isDynamic}
+                    values={values}
+                    setPrevSteps={setPrevSteps}
+                    validating={validating}
+                  />
+                )}
+              </FormSpy>
+            </WizardNav>
+            <WizardStep
+              {...currentStep}
+              formOptions={formOptions}
+              buttonLabels={buttonLabels}
+              buttonsClassName={buttonsClassName}
+              showTitles={showTitles}
+              handleNext={(nextStep) => handleNext(nextStep)}
+              handlePrev={handlePrev}
+              disableBack={activeStepIndex === 0}
+              hasNoBodyPadding={hasNoBodyPadding}
+            />
+          </div>
         </div>
       </div>
     </Modal>
@@ -136,6 +155,12 @@ WizardInternal.propTypes = {
   isDynamic: PropTypes.bool,
   showTitles: PropTypes.bool,
   crossroads: PropTypes.arrayOf(PropTypes.string),
+  hideClose: PropTypes.bool,
+  titleId: PropTypes.string,
+  descriptionId: PropTypes.string,
+  closeButtonAriaLabel: PropTypes.string,
+  hasNoBodyPadding: PropTypes.bool,
+  navAriaLabel: PropTypes.string,
   ...wizardProps
 };
 
