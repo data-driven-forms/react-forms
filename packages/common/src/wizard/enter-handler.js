@@ -15,9 +15,11 @@ const enterHandler = (e, formOptions, activeStep, findCurrentStep, handleNext, h
         nextStep = selectNext(schemaNextStep, formOptions.getState);
       }
 
-      if (formOptions.valid && nextStep && !hasCustomButtons) {
+      const canContinue = formOptions.valid && !formOptions.getState().validating;
+
+      if (canContinue && nextStep && !hasCustomButtons) {
         handleNext(nextStep, formOptions.getRegisteredFields);
-      } else if (formOptions.valid && !schemaNextStep && !hasCustomButtons) {
+      } else if (canContinue && !schemaNextStep && !hasCustomButtons) {
         handleSubmit();
       }
     }

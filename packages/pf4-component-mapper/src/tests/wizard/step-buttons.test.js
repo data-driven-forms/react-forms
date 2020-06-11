@@ -200,9 +200,9 @@ describe('<WizardSTepButtons', () => {
         preventDefault: jest.fn()
       };
       formOptions = {
-        getState: jest.fn(),
         valid: true,
-        getRegisteredFields
+        getRegisteredFields,
+        getState: () => ({ validating: false })
       };
       activeStep = 'active-step';
       findCurrentStep = jest.fn().mockImplementation(() => ({ nextStep }));
@@ -230,6 +230,34 @@ describe('<WizardSTepButtons', () => {
 
     it('should be prevented if step has custom buttons', () => {
       findCurrentStep = jest.fn().mockImplementation(() => ({ buttons: true }));
+
+      handleEnter(event, formOptions, activeStep, findCurrentStep, handleNext, handleSubmit);
+
+      expect(event.preventDefault).toHaveBeenCalled();
+      expect(handleNext).not.toHaveBeenCalled();
+      expect(handleSubmit).not.toHaveBeenCalled();
+    });
+
+    it('should be prevented if form is not valid', () => {
+      formOptions = {
+        valid: false,
+        getRegisteredFields,
+        getState: () => ({ validating: false })
+      };
+
+      handleEnter(event, formOptions, activeStep, findCurrentStep, handleNext, handleSubmit);
+
+      expect(event.preventDefault).toHaveBeenCalled();
+      expect(handleNext).not.toHaveBeenCalled();
+      expect(handleSubmit).not.toHaveBeenCalled();
+    });
+
+    it('should be prevented if form is validating', () => {
+      formOptions = {
+        valid: true,
+        getRegisteredFields,
+        getState: () => ({ validating: true })
+      };
 
       handleEnter(event, formOptions, activeStep, findCurrentStep, handleNext, handleSubmit);
 
