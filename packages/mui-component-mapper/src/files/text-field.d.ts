@@ -2,7 +2,7 @@ import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-render
 import { TextFieldProps as MuiTextFieldProps, GridProps } from '@material-ui/core';
 import { ReactNode } from "react";
 
-export interface TextFieldProps {
+interface InternalTextFieldProps {
   isReadOnly?: boolean;
   isDisabled?: boolean;
   isRequired?: boolean;
@@ -11,6 +11,8 @@ export interface TextFieldProps {
   FormFieldGridProps?: GridProps;
 }
 
-declare const TextField: React.ComponentType<TextFieldProps & MuiTextFieldProps & UseFieldApiComponentConfig>;
+export type TextFieldProps = InternalTextFieldProps & MuiTextFieldProps & UseFieldApiComponentConfig;
+
+declare const TextField: React.ComponentType<TextFieldProps>;
 
 export default TextField;

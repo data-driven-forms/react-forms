@@ -3,7 +3,7 @@ import { TimePickerProps as MuiTimePickerProps } from 'material-ui-pickers';
 import { ReactNode } from "react";
 import { MuiPickersUtilsProviderProps } from "material-ui-pickers/MuiPickersUtilsProvider";
 import { GridProps } from "@material-ui/core";
-export interface TimePickerProps extends MuiTimePickerProps {
+interface InternalTimePickerProps extends MuiTimePickerProps {
   isReadOnly?: boolean;
   isDisabled?: boolean;
   isRequired?: boolean;
@@ -14,6 +14,8 @@ export interface TimePickerProps extends MuiTimePickerProps {
   FormFieldGridProps?: GridProps;
 }
 
-declare const TimePicker: React.ComponentType<TimePickerProps & UseFieldApiComponentConfig>;
+export type TimePickerProps = InternalTimePickerProps & UseFieldApiComponentConfig;
+
+declare const TimePicker: React.ComponentType<TimePickerProps>;
 
 export default TimePicker;

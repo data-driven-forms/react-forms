@@ -36,6 +36,6 @@ interface componentMapper  {
 
 declare const componentMapper: componentMapper;
 
-export const Components: components;
+export const Components: Components;
 
 export default componentMapper;
