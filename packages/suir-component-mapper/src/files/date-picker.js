@@ -53,7 +53,6 @@ DatePicker.propTypes = {
   label: PropTypes.node,
   helperText: PropTypes.node,
   validateOnMount: PropTypes.bool,
-  locale: PropTypes.string,
   description: PropTypes.node,
   /** Sub components customization API */
   FormFieldGridProps: PropTypes.object,

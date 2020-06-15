@@ -6,11 +6,13 @@ import validTextFields from '@data-driven-forms/common/src/utils/valid-text-fiel
 
 const PlainText = ({ label, name, variant }) => (
   <TextContent>
-    {label.split('\n').map((paragraph, index) => (
-      <Text component={variant} key={`${name}-${index}`}>
-        {paragraph}
-      </Text>
-    ))}
+    {typeof label === 'string'
+      ? label.split('\n').map((paragraph, index) => (
+          <Text component={variant} key={`${name}-${index}`}>
+            {paragraph}
+          </Text>
+        ))
+      : label}
   </TextContent>
 );
 
