@@ -8,7 +8,7 @@ export interface SelectOption extends AnyObject {
   value?: any;
 }
 
-export interface SelectProps extends StrictDropdownProps {
+interface InternalSelectProps extends StrictDropdownProps {
   [key: string]: any;
   options?: SelectOption[];
   isSearchable?: boolean;
@@ -20,6 +20,8 @@ export interface SelectProps extends StrictDropdownProps {
   closeMenuOnSelect?: boolean;
 }
 
-declare const Select: React.ComponentType<SelectProps & CommonFieldProps & UseFieldApiComponentConfig>;
+export type SelectProps = InternalSelectProps & CommonFieldProps & UseFieldApiComponentConfig;
+
+declare const Select: React.ComponentType<SelectProps>;
 
 export default Select;
