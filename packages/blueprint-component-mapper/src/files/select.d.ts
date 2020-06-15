@@ -8,7 +8,7 @@ export interface SelectOption extends AnyObject {
   label: ReactNode;
 }
 
-export interface SelectProps extends ISelectProps<SelectOption> {
+interface InternalSelectProps extends ISelectProps<SelectOption> {
   options: SelectOption[];
   placeholder?: ReactNode;
   isSearchable?: boolean;
@@ -17,6 +17,8 @@ export interface SelectProps extends ISelectProps<SelectOption> {
   disabled?: boolean;
 }
 
-declare const Select: React.ComponentType<SelectProps & FormGroupProps & UseFieldApiComponentConfig>;
+export type SelectProps = InternalSelectProps & FormGroupProps & UseFieldApiComponentConfig;
+
+declare const Select: React.ComponentType<SelectProps>;
 
 export default Select;

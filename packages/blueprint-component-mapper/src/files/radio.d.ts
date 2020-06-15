@@ -2,8 +2,10 @@ import { FormGroupProps } from "./form-group";
 import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-renderer";
 import { IRadioGroupProps } from "@blueprintjs/core";
 
-export interface RadioProps extends IRadioGroupProps {}
+interface InternalRadioProps extends IRadioGroupProps {}
 
-declare const Radio: React.ComponentType<RadioProps & FormGroupProps & UseFieldApiComponentConfig>;
+export type RadioProps = InternalRadioProps & FormGroupProps & UseFieldApiComponentConfig;
+
+declare const Radio: React.ComponentType<RadioProps>;
 
 export default Radio;
