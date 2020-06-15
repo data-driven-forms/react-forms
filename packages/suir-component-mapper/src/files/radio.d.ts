@@ -8,11 +8,13 @@ export interface RadioOption {
   value?: any;
 }
 
-export interface RadioProps extends FormRadioProps {
+interface InternalRadioProps extends FormRadioProps {
   options?: RadioOption;
   FormFieldProps?: FormFieldProps;
 }
 
-declare const Radio: React.ComponentType<RadioProps & CommonFieldProps & UseFieldApiComponentConfig>;
+export type RadioProps = InternalRadioProps & CommonFieldProps & UseFieldApiComponentConfig;
+
+declare const Radio: React.ComponentType<RadioProps>;
 
 export default Radio;

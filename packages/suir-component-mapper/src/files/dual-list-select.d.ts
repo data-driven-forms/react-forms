@@ -12,7 +12,7 @@ export interface DualListSelectOptionProps extends React.HTMLProps<HTMLDivElemen
   selectedClassName?: string;
 }
 
-export interface DualListSelectProps {
+interface InternalDualListSelectProps {
   leftTitle?: ReactNode;
   rightTitle?: ReactNode;
   moveLeftTitle?: ReactNode;
@@ -43,6 +43,8 @@ export interface DualListSelectProps {
   ValuesHeaderProps?: HeaderProps;
 }
 
-declare const DualListSelect: React.ComponentType<DualListSelectProps & CommonFieldProps & UseFieldApiComponentConfig>;
+export type DualListSelectProps = InternalDualListSelectProps & CommonFieldProps & UseFieldApiComponentConfig;
+
+declare const DualListSelect: React.ComponentType<DualListSelectProps>;
 
 export default DualListSelect;
