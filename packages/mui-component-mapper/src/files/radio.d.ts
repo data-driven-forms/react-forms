@@ -6,7 +6,7 @@ export interface RadioOption extends AnyObject {
   label: ReactNode;
   value?: any;
 }
-export interface RadioProps extends MuiRadioProps {
+interface InternalRadioProps extends MuiRadioProps {
   options?: RadioOption[];
   FormFieldGridProps?: GridProps;
   FormControlProps?: FormControlProps;
@@ -20,6 +20,8 @@ export interface RadioProps extends MuiRadioProps {
   validateOnMount?: boolean;
 }
 
-declare const Radio: React.ComponentType<RadioProps & UseFieldApiComponentConfig>;
+export type RadioProps = InternalRadioProps & UseFieldApiComponentConfig;
+
+declare const Radio: React.ComponentType<RadioProps>;
 
 export default Radio;
