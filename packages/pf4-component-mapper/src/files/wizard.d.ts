@@ -60,14 +60,17 @@ export interface WizardProps {
   buttonsClassName?: string;
   title?: ReactNode;
   description?: ReactNode;
-  isCompactNav?: boolean;
   inModal?: boolean;
-  setFullWidth?: boolean;
-  setFullHeight?: boolean;
   isDynamic?: boolean;
   showTitles?: boolean;
   crossroads?: string[];
   fields: WizardField[];
+  hideClose?: boolean;
+  titleId?: string;
+  descriptionId?: string;
+  closeButtonAriaLabel?: string;
+  hasNoBodyPadding?: boolean;
+  navAriaLabel?: string;
 }
 
 declare const Wizard: React.ComponentType<WizardProps>;
