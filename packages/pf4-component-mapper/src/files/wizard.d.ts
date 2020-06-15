@@ -28,19 +28,23 @@ export interface WizardNextStepMapper {
 
 export type WizardNextStep = string | WizardNextStepMapper | WizardNextStepFunction;
 
+export interface SelectNextFunction {
+  (nextStep: WizardNextStep, getState: Function): string;
+}
+
+export interface HandleNextFunction {
+  (nextStep: string): void;
+}
+
 export interface WizardButtonsProps {
-  ConditionalNext: React.ComponentType;
-  SubmitButton: React.ComponentType;
-  SimpleNext: React.ComponentType;
-  formOptions: FormOptions;
   disableBack?: boolean;
-  handlePrev: any;
-  nextStep?: string | number;
-  FieldProvider?: React.ComponentType;
-  handleNext: any;
+  handlePrev: Function;
+  nextStep?: WizardNextStep;
+  handleNext: HandleNextFunction;
   buttonsClassname?: string;
-  buttonLabels: AnyObject;
-  renderNextButton: any;
+  buttonLabels: WizardButtonLabels;
+  renderNextButton: Function;
+  selectNext: SelectNextFunction;
 }
 
 export interface WizardField {
