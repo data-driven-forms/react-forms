@@ -7,13 +7,15 @@ export interface RadioOption extends AnyObject {
   value?: any;
 }
 
-export interface RadioProps {
+interface InternalRadioProps {
   name: string;
   options: RadioOption[];
   isReadOnly?: boolean;
   isDisabled?: boolean;
 }
 
-declare const Radio: React.ComponentType<RadioProps & FormGroupProps & UseFieldApiComponentConfig>;
+export type RadioProps = InternalRadioProps & FormGroupProps & UseFieldApiComponentConfig;
+
+declare const Radio: React.ComponentType<RadioProps>;
 
 export default Radio;
