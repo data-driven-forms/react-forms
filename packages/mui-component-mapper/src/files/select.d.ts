@@ -3,7 +3,7 @@ import { AutocompleteProps } from "@material-ui/lab/Autocomplete";
 import { ReactNode } from "react";
 import { GridProps, TextFieldProps, InputProps } from "@material-ui/core";
 
-export interface SelectProps<T> extends AutocompleteProps<T> {
+interface InternalSelectProps<T> extends AutocompleteProps<T> {
   isRequired?: boolean;
   isDisabled?: boolean;
   isReadOnly?: boolean;
@@ -22,6 +22,8 @@ export interface SelectProps<T> extends AutocompleteProps<T> {
   inputProps?: InputProps;
 }
 
-declare const Select: React.ComponentType<SelectProps<any> & UseFieldApiComponentConfig>;
+export type SelectProps<T> = InternalSelectProps<T> & UseFieldApiComponentConfig;
+
+declare const Select: React.ComponentType<SelectProps<any>>;
 
 export default Select;

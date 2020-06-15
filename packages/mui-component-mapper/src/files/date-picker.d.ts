@@ -3,12 +3,14 @@ import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-render
 import { GridProps } from "@material-ui/core";
 import { MuiPickersUtilsProviderProps } from "material-ui-pickers/MuiPickersUtilsProvider";
 
-export interface DatePickerProps extends MuiDatePickerProps {
+interface InternalDatePickerProps extends MuiDatePickerProps {
   FormFieldGridProps: GridProps;
   MuiPickersUtilsProviderProps: MuiPickersUtilsProviderProps;
   DatePickerProps: MuiDatePickerProps;
 }
 
-declare const DatePicker: React.ComponentType<DatePickerProps & UseFieldApiComponentConfig>;
+export type DatePickerProps = InternalDatePickerProps & UseFieldApiComponentConfig;
+
+declare const DatePicker: React.ComponentType<DatePickerProps>;
 
 export default DatePicker;

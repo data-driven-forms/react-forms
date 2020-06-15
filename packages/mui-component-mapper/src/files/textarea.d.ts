@@ -2,7 +2,7 @@ import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-render
 import { TextFieldProps, GridProps, InputProps } from "@material-ui/core";
 import { ReactNode } from "react";
 
-export interface TextareaProps {
+interface InternalTextareaProps {
   isReadOnly?: boolean;
   isDisabled?: boolean;
   isRequired?: boolean;
@@ -12,6 +12,8 @@ export interface TextareaProps {
   inputProps?: InputProps;
 }
 
-declare const Textarea: React.ComponentType<TextareaProps & TextFieldProps & UseFieldApiComponentConfig>;
+export type TextareaProps = InternalTextareaProps & TextFieldProps & UseFieldApiComponentConfig;
+
+declare const Textarea: React.ComponentType<TextareaProps>;
 
 export default Textarea;
