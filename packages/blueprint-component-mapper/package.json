@@ -33,7 +33,6 @@
     "@blueprintjs/core": "^3.26.1",
     "@blueprintjs/datetime": "^3.17.0",
     "@blueprintjs/select": "^3.12.3",
-    "@data-driven-forms/react-form-renderer": "*",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "9.x",
     "babel-jest": "^23.6.0",
