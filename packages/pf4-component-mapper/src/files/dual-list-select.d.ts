@@ -7,6 +7,15 @@ export interface DualListSelectOption extends AnyObject {
   label: ReactNode;
 }
 
+export interface RenderStatusInput {
+  selected: number;
+  options: number;
+}
+
+export interface RenderStatusFunction {
+  (input: RenderStatusInput): ReactNode;
+}
+
 interface InternalDualListSelectProps {
   leftTitle?: ReactNode;
   rightTitle?: ReactNode;
@@ -24,6 +33,7 @@ interface InternalDualListSelectProps {
   filterOptionsText?: ReactNode;
   leftValues: DualListSelectOption[];
   rightValues: DualListSelectOption[];
+  renderStatus?: RenderStatusFunction;
 }
 
 export type DualListSelectProps = InternalDualListSelectProps & FormGroupProps & UseFieldApiComponentConfig;
