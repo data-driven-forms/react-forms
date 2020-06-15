@@ -2,7 +2,7 @@ import { UseFieldApiComponentConfig, AnyObject } from "@data-driven-forms/react-
 import { IFormGroupProps } from '@blueprintjs/core';
 import { ReactNode } from "react";
 
-export interface FormGroupProps extends IFormGroupProps {
+interface InternalFormGroupProps extends IFormGroupProps {
   isDisabled?: boolean;
   FormGroupProps?: IFormGroupProps;
   isReadOnly?: boolean;
@@ -14,7 +14,7 @@ export interface FormGroupProps extends IFormGroupProps {
   hideLabel?: boolean;
 }
 
-export interface FormGroupInternalProps extends FormGroupProps {
+export interface FormGroupInternalProps extends InternalFormGroupProps {
   meta: AnyObject;
   input: AnyObject;
   Component: React.ComponentType;
@@ -22,6 +22,8 @@ export interface FormGroupInternalProps extends FormGroupProps {
 
 export const FormGroupInternal: React.ComponentType<FormGroupInternalProps>;
 
-declare const FormGroup: React.ComponentType<FormGroupProps & UseFieldApiComponentConfig>;
+export type FormGroupProps = InternalFormGroupProps & UseFieldApiComponentConfig;
+
+declare const FormGroup: React.ComponentType<FormGroupProps>;
 
 export default FormGroup;

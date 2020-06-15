@@ -7,13 +7,15 @@ export interface DatePickerValueRenderer {
   (value?: string | Date): string;
 }
 
-export interface DatePickerProps extends IDatePickerProps {
+interface InternalDatePickerProps extends IDatePickerProps {
   disabled?: boolean;
   valueRenderer?: DatePickerValueRenderer;
   PopoverProps?: IPopoverProps;
   ButtonProps: IButtonProps;
 }
 
-declare const DatePicker: React.ComponentType<DatePickerProps & FormGroupProps & UseFieldApiComponentConfig>
+export type DatePickerProps = InternalDatePickerProps & FormGroupProps & UseFieldApiComponentConfig;
+
+declare const DatePicker: React.ComponentType<DatePickerProps>;
 
 export default DatePicker;

@@ -8,10 +8,12 @@ export interface CheckboxOption extends AnyObject {
   label: ReactNode;
 }
 
-export interface CheckboxProps extends ICheckboxProps {
+interface InternalCheckboxProps extends ICheckboxProps {
   options?: CheckboxOption[];
 }
 
-declare const Checkbox: React.ComponentType<CheckboxProps & FormGroupProps &  UseFieldApiComponentConfig>;
+export type CheckboxProps = InternalCheckboxProps & FormGroupProps &  UseFieldApiComponentConfig;
+
+declare const Checkbox: React.ComponentType<CheckboxProps>;
 
 export default Checkbox;
