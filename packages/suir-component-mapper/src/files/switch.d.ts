@@ -3,11 +3,13 @@ import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-render
 import { FormFieldProps } from "semantic-ui-react";
 import { ReactNode } from "react";
 
-export interface SwitchProps extends FormFieldProps {
+interface InternalSwitchProps extends FormFieldProps {
   onText?: ReactNode;
   offText?: ReactNode;
 }
 
-declare const Switch: React.ComponentType<SwitchProps & CommonFieldProps & UseFieldApiComponentConfig>;
+export type SwitchProps = InternalSwitchProps & CommonFieldProps & UseFieldApiComponentConfig;
+
+declare const Switch: React.ComponentType<SwitchProps>;
 
 export default Switch;

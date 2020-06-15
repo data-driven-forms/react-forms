@@ -9,7 +9,7 @@ export interface CheckboxOption extends AnyObject {
   value?: any;
 }
 
-export interface CheckboxProps extends SuirCheckboxProps {
+interface InternalCheckboxProps extends SuirCheckboxProps {
   options?: CheckboxOption[];
   /** Sub components customization API */
   FormFieldProps?: FormFieldProps;
@@ -17,6 +17,8 @@ export interface CheckboxProps extends SuirCheckboxProps {
   OptionsListProps?: React.HTMLProps<HTMLDivElement>;
 }
 
-declare const Checkbox: React.ComponentType<CheckboxProps & CommonFieldProps & UseFieldApiComponentConfig>;
+export type CheckboxProps = InternalCheckboxProps & CommonFieldProps & UseFieldApiComponentConfig;
+
+declare const Checkbox: React.ComponentType<CheckboxProps>;
 
 export default Checkbox;
