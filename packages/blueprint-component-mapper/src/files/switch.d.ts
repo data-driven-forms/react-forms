@@ -3,11 +3,13 @@ import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-render
 import { ISwitchProps } from "@blueprintjs/core";
 import { ReactNode } from "react";
 
-export interface SwitchProps extends ISwitchProps {
+interface InternalSwitchProps extends ISwitchProps {
   onText?: ReactNode;
   offText?: ReactNode;
 }
 
-declare const Switch: React.ComponentType<SwitchProps & FormGroupProps & UseFieldApiComponentConfig>;
+export type SwitchProps = InternalSwitchProps & FormGroupProps & UseFieldApiComponentConfig;
+
+declare const Switch: React.ComponentType<SwitchProps>;
 
 export default Switch;
