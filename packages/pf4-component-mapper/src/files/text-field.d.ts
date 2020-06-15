@@ -2,8 +2,10 @@ import FormGroupProps from "./form-group"
 import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-renderer"
 import { TextInputProps } from "@patternfly/react-core";
 
-export interface TextFieldProps extends TextInputProps {}
+interface InternalTextFieldProps extends TextInputProps {}
 
-declare const TextField: React.ComponentType<TextFieldProps & FormGroupProps & UseFieldApiComponentConfig>;
+export type TextFieldProps = InternalTextFieldProps & FormGroupProps & UseFieldApiComponentConfig;
+
+declare const TextField: React.ComponentType<TextFieldProps>;
 
 export default TextField;

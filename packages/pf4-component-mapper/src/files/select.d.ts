@@ -7,7 +7,7 @@ export interface SelectOption {
   value?: any;
 }
 
-export interface SelectProps  {
+interface BaseSelectProps  {
   options?: SelectOption[];
   selectVariant?: 'default' | 'createable';
   isSearchable?: boolean;
@@ -23,7 +23,7 @@ export interface SelectProps  {
   placeholder?: ReactNode;
 }
 
-export interface InternalSelectProps extends SelectProps {
+export interface InternalSelectProps extends BaseSelectProps {
   value?: any;
   onChange?: (option?: any) => void;
   invalid?: boolean;
@@ -32,6 +32,8 @@ export interface InternalSelectProps extends SelectProps {
 
 export const InternalSelect: React.ComponentType<InternalSelectProps>;
 
-declare const Select: React.ComponentType<SelectProps & FormGroupProps & UseFieldApiComponentConfig>;
+export type SelectProps = BaseSelectProps & FormGroupProps & UseFieldApiComponentConfig;
+
+declare const Select: React.ComponentType<SelectProps>;
 
 export default Select;

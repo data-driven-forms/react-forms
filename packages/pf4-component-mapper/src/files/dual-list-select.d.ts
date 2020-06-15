@@ -7,7 +7,7 @@ export interface DualListSelectOption extends AnyObject {
   label: ReactNode;
 }
 
-export interface DualListSelectProps {
+interface InternalDualListSelectProps {
   leftTitle?: ReactNode;
   rightTitle?: ReactNode;
   moveLeftTitle?: ReactNode;
@@ -26,6 +26,8 @@ export interface DualListSelectProps {
   rightValues: DualListSelectOption[];
 }
 
-declare const DualListSelect: React.ComponentType<DualListSelectProps & FormGroupProps & UseFieldApiComponentConfig>;
+export type DualListSelectProps = InternalDualListSelectProps & FormGroupProps & UseFieldApiComponentConfig;
+
+declare const DualListSelect: React.ComponentType<DualListSelectProps>;
 
 export default DualListSelect;
