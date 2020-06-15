@@ -7,11 +7,13 @@ interface CheckboxOptions extends AnyObject {
   value?: any;
 }
 
-interface CheckboxProps extends PfCheckboxProps {
+interface InternalCheckboxProps extends PfCheckboxProps {
   isReadOnly?: boolean;
   options?: CheckboxOptions;
 }
 
-declare const Checkbox: React.ComponentType<CheckboxProps & FormGroupProps & UseFieldApiComponentConfig>;
+export type CheckboxProps = InternalCheckboxProps & FormGroupProps & UseFieldApiComponentConfig;
+
+declare const Checkbox: React.ComponentType<CheckboxProps>;
 
 export default Checkbox;

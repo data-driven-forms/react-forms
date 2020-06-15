@@ -2,10 +2,12 @@ import FormGroupProps from "./form-group";
 import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-renderer";
 import { SwitchProps as PFSwitchProps } from '@patternfly/react-core';
 
-export interface SwitchProps extends PFSwitchProps {
+interface InternalSwitchProps extends PFSwitchProps {
   isReadOnly?: boolean;
 }
 
-declare const Switch: React.ComponentType<SwitchProps & FormGroupProps & UseFieldApiComponentConfig>;
+export type SwitchProps = InternalSwitchProps & FormGroupProps & UseFieldApiComponentConfig;
+
+declare const Switch: React.ComponentType<SwitchProps>;
 
 export default Switch;
