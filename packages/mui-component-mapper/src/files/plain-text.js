@@ -3,11 +3,15 @@ import { Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 const PlainText = ({ label, name, component, ...props }) =>
-  label.split('\n').map((paragraph, index) => (
-    <Typography key={`${index}-${name}`} {...props}>
-      {paragraph}
-    </Typography>
-  ));
+  typeof label === 'string' ? (
+    label.split('\n').map((paragraph, index) => (
+      <Typography key={`${index}-${name}`} {...props}>
+        {paragraph}
+      </Typography>
+    ))
+  ) : (
+    <Typography {...props}>{label}</Typography>
+  );
 
 PlainText.propTypes = {
   label: PropTypes.node.isRequired,

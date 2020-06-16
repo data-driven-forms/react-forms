@@ -17,7 +17,7 @@ RenderTitle.propTypes = {
   customTitle: PropTypes.node
 };
 
-const WizardStep = ({ name, title, description, fields, formOptions, showTitles, showTitle, customTitle, ...rest }) => {
+const WizardStep = ({ name, title, description, fields, formOptions, showTitles, showTitle, customTitle, hasNoBodyPadding, ...rest }) => {
   const formRef = useRef();
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const WizardStep = ({ name, title, description, fields, formOptions, showTitles,
 
   return (
     <Fragment>
-      <WizardBody hasBodyPadding={true}>
+      <WizardBody hasNoBodyPadding={hasNoBodyPadding}>
         <div ref={formRef} className="pf-c-form">
           {((showTitles && showTitle !== false) || showTitle) && <RenderTitle title={title} customTitle={customTitle} />}
           {fields.map((item) => formOptions.renderForm([item], formOptions))}
@@ -51,7 +51,8 @@ WizardStep.propTypes = {
   showTitles: PropTypes.bool,
   showTitle: PropTypes.bool,
   customTitle: PropTypes.node,
-  name: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  hasNoBodyPadding: PropTypes.bool
 };
 
 export default WizardStep;

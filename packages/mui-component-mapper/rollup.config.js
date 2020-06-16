@@ -5,6 +5,7 @@ import replace from 'rollup-plugin-replace';
 import nodeGlobals from 'rollup-plugin-node-globals';
 import { terser } from 'rollup-plugin-terser';
 import { createFilter } from 'rollup-pluginutils';
+import typescript from '@rollup/plugin-typescript';
 import sass from 'rollup-plugin-sass';
 import async from 'rollup-plugin-async';
 import sourcemaps from 'rollup-plugin-sourcemaps';
@@ -83,6 +84,7 @@ const plugins = [
   sass({
     insert: true
   }),
+  typescript(),
   sourcemaps()
 ];
 

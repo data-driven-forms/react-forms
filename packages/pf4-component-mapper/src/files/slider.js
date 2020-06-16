@@ -22,7 +22,7 @@ const Slider = (props) => {
           />
         </GridItem>
         <GridItem span={2}>
-          <Badge isRead>{input.value || rest.max / 2}</Badge>
+          <Badge isRead>{input.value || (rest.max && rest.max / 2) || 50}</Badge>
         </GridItem>
       </Grid>
     </FormGroup>

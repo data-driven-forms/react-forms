@@ -12,9 +12,9 @@ import {
   Text,
   TextVariants,
   TextContent,
-  DataToolbar,
-  DataToolbarItem,
-  DataToolbarContent
+  Toolbar,
+  ToolbarItem,
+  ToolbarContent
 } from '@patternfly/react-core';
 
 import {
@@ -72,10 +72,10 @@ List.defaultProps = {
   value: []
 };
 
-const Toolbar = ({ sortTitle, onFilter, onSort, sortDirection, value, placeholder, id }) => (
-  <DataToolbar className="pf-u-p-0 ddorg__pf4-component-mapper__dual-list-select-toolbar" id={id}>
-    <DataToolbarContent className="pf-u-p-0 pf-u-pb-md">
-      <DataToolbarItem>
+const InternalToolbar = ({ sortTitle, onFilter, onSort, sortDirection, value, placeholder, id }) => (
+  <Toolbar className="pf-u-p-0 ddorg__pf4-component-mapper__dual-list-select-toolbar" id={id}>
+    <ToolbarContent className="pf-u-p-0 pf-u-pb-md">
+      <ToolbarItem>
         <InputGroup>
           <TextInput
             name="filterOptions"
@@ -90,17 +90,17 @@ const Toolbar = ({ sortTitle, onFilter, onSort, sortDirection, value, placeholde
             <SearchIcon />
           </Button>
         </InputGroup>
-      </DataToolbarItem>
-      <DataToolbarItem>
+      </ToolbarItem>
+      <ToolbarItem>
         <Button onClick={onSort} title={sortTitle} variant="plain">
           {!sortDirection ? <PficonSortCommonAscIcon size="md" /> : <PficonSortCommonDescIcon size="md" />}
         </Button>
-      </DataToolbarItem>
-    </DataToolbarContent>
-  </DataToolbar>
+      </ToolbarItem>
+    </ToolbarContent>
+  </Toolbar>
 );
 
-Toolbar.propTypes = {
+InternalToolbar.propTypes = {
   sortTitle: PropTypes.node,
   onFilter: PropTypes.func.isRequired,
   onSort: PropTypes.func.isRequired,
@@ -167,7 +167,7 @@ const DualList = ({
               </TextContent>
             </GridItem>
             <GridItem md={12}>
-              <Toolbar
+              <InternalToolbar
                 sortDirection={state.sortLeftDesc}
                 onSort={sortOptions}
                 onFilter={filterOptions}
@@ -238,7 +238,7 @@ const DualList = ({
               </TextContent>
             </GridItem>
             <GridItem md={12}>
-              <Toolbar
+              <InternalToolbar
                 sortDirection={state.sortRightDesc}
                 onSort={sortValues}
                 onFilter={filterValues}

@@ -5,7 +5,7 @@ import composeValidators from '../files/compose-validators';
 export const prepareValidator = (validator, mapper) =>
   typeof validator === 'function' ? memoize(validator) : mapper[validator.type]({ ...validator });
 
-export const getValidate = (validate, dataType, mapper) => [
+export const getValidate = (validate, dataType, mapper = {}) => [
   ...(validate ? validate.map((validator) => prepareValidator(validator, mapper)) : []),
   ...(dataType ? [dataTypeValidator(dataType)()] : [])
 ];

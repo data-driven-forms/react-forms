@@ -72,7 +72,7 @@ exports[`Default schema validator should fail if field condition pattern propert
 exports[`Default schema validator should fail if field condition when property is not correct type. 1`] = `
 "
       Error occured in field definition with name: \\"foo\\".
-      Field condition property \\"when\\" must be oof type \\"string\\", number received!].
+      Field condition property \\"when\\" must be of type \\"string\\", number received!].
     "
 `;
 

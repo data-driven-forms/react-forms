@@ -29,7 +29,7 @@ class App extends React.Component {
     render() {
         return (<div style={{ widht: '100%' }}>
         <div style={{ maxWidth: 800, marginLeft: 'auto', marginRight: 'auto' }}>
-            <Title size="4xl">Pf4 component mapper</Title>
+            <Title headingLevel="h2" size="4xl">Pf4 component mapper</Title>
             <Toolbar style={{ marginBottom: 20, marginTop: 20 }}>
                 <ToolbarGroup>
                     <Button onClick={() => this.setState(state => ({ schema: wizardSchema, additionalOptions: { showFormControls: false, wizard: true } }))}>Wizard</Button>

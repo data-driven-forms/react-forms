@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import validTextFields from '@data-driven-forms/common/src/utils/valid-text-fields';
 
 const PlainText = ({ variant, label, name, ...rest }) =>
-  label.split('\n').map((paragraph, index) => React.createElement(variant, { key: `${name}-${index}`, ...rest }, paragraph));
+  typeof label === 'string'
+    ? label.split('\n').map((paragraph, index) => React.createElement(variant, { key: `${name}-${index}`, ...rest }, paragraph))
+    : { label };
 
 PlainText.propTypes = {
   variant: PropTypes.oneOf(validTextFields),

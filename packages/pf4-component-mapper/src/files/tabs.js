@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
-import { Tab, Tabs } from '@patternfly/react-core';
+import { Tab, Tabs, TabTitleText } from '@patternfly/react-core';
 
 const FormTabs = ({ fields, dataType, validate, component, ...rest }) => {
   const formOptions = useFormApi();
@@ -15,7 +15,7 @@ const FormTabs = ({ fields, dataType, validate, component, ...rest }) => {
 
   const renderTabItems = (fields) =>
     fields.map(({ fields, title, name }, index) => (
-      <Tab key={name} eventKey={index} title={title}>
+      <Tab key={name} eventKey={index} title={typeof title === 'string' ? <TabTitleText>{title}</TabTitleText> : title}>
         <div className="pf-c-form">{formOptions.renderForm(fields, formOptions)}</div>
       </Tab>
     ));

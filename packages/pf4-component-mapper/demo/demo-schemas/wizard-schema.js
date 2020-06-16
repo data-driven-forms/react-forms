@@ -55,7 +55,6 @@ export const wizardSchema = {
       title: 'Title',
       showTitles: true,
       description: 'Description',
-      buttonsPosition: 'left',
       fields: [
         {
           title: 'Get started with adding source',
@@ -169,7 +168,6 @@ export const wizardSchemaWithFunction = {
       title: 'Title',
       showTitles: true,
       description: 'Description',
-      buttonsPosition: 'left',
       fields: [
         {
           title: 'Get started with adding source',
@@ -269,7 +267,6 @@ export const wizardSchemaSimple = {
       name: 'wizzard',
       title: 'Title',
       description: 'Description',
-      buttonsPosition: 'left',
       fields: [
         {
           title: 'Get started with adding source',
@@ -324,7 +321,6 @@ export const wizardSchemaSubsteps = {
       name: 'wizzard',
       title: 'Title',
       description: 'Description',
-      buttonsPosition: 'left',
       fields: [
         {
           title: 'Get started with adding source',
@@ -377,7 +373,6 @@ export const wizardSchemaMoreSubsteps = {
       name: 'wizzard',
       title: 'Dynamic with steps predicting',
       description: 'Description',
-      buttonsPosition: 'left',
       fields: [
         {
           title: 'Get started with adding source',

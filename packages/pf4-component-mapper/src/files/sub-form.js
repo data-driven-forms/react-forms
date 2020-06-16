@@ -8,10 +8,12 @@ const SubForm = ({ fields, title, description, validate: _validate, component, .
   const formOptions = useFormApi();
 
   return (
-    <Grid gutter="md" {...rest}>
+    <Grid hasGutter {...rest}>
       {title && (
         <GridItem sm={12}>
-          <Title size="xl">{title}</Title>
+          <Title headingLevel="h2" size="xl">
+            {title}
+          </Title>
         </GridItem>
       )}
       {description && (

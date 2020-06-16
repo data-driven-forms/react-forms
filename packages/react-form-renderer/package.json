@@ -4,13 +4,15 @@
   "description": "React form renderer for data-driven-forms.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "typings": "dist/cjs/index.d.ts",
   "files": [
     "dist/"
   ],
   "license": "Apache-2.0",
   "scripts": {
     "start": "webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
-    "build": "rollup -c ./rollup.config.js",
+    "build": "rollup -c ./rollup.config.js && yarn build:typings",
+    "build:typings": "node ../../scripts/copy-files.js", 
     "release": "semantic-release"
   },
   "repository": "git@github.com:data-driven-forms/react-forms.git",
