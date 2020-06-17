@@ -69,5 +69,6 @@ export const pf4Dependencies = {
   '@data-driven-forms/pf4-component-mapper': 'latest',
   '@patternfly/react-core': 'latest',
   '@patternfly/react-icons': 'latest',
-  'prop-types': 'latest'
+  'prop-types': 'latest',
+  tslib: '^2.0.0'
 };
