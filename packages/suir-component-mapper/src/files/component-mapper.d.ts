@@ -1,4 +1,4 @@
-import { ComponentTypes } from '@data-driven-forms/react-form-renderer';
+import { ComponentTypes, ComponentMapper } from '@data-driven-forms/react-form-renderer';
 
 interface Components  {
   TextField: React.ComponentType;
@@ -16,7 +16,7 @@ interface Components  {
   Slider: React.ComponentType;
 }
 
-interface componentMapper  {
+interface componentMapper extends ComponentMapper {
   [ComponentTypes.TEXT_FIELD]: React.ComponentType;
   [ComponentTypes.TEXTAREA]: React.ComponentType;
   [ComponentTypes.SELECT]: React.ComponentType;
