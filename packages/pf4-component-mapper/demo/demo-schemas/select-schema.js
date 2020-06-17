@@ -37,6 +37,13 @@ const selectSchema = {
       label: 'Disabled-select',
       options,
       isDisabled: true
+    },
+    {
+      component: componentTypes.SELECT,
+      name: 'clearable-select',
+      label: 'Clearable-select',
+      options,
+      isClearable: true
     }
   ]
 };

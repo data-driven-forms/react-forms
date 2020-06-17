@@ -1,23 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, ButtonVariant } from '@patternfly/react-core';
-
 import { TimesCircleIcon } from '@patternfly/react-icons';
+import './clear-indicator.scss';
 
-const ClearIndicator = ({ clearValue, innerProps: { ref, ...restInnerProps } }) => (
-  <Button {...restInnerProps} onClick={clearValue} variant={ButtonVariant.plain}>
+const ClearIndicator = ({ clearSelection }) => (
+  <span
+    onClick={(event) => {
+      clearSelection();
+      event.stopPropagation();
+    }}
+    className="ddorg__pf4-component-mapper__select-clear-indicator pf-u-pr-md pf-u-pl-md"
+  >
     <TimesCircleIcon />
-  </Button>
+  </span>
 );
 
 ClearIndicator.propTypes = {
-  innerProps: PropTypes.object.isRequired,
-  clearValue: PropTypes.func
-};
-
-ClearIndicator.defaultProps = {
-  clearValue: () => undefined
+  clearSelection: PropTypes.func.isRequired
 };
 
 export default ClearIndicator;

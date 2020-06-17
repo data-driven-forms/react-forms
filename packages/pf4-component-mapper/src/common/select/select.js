@@ -10,8 +10,9 @@ import '@patternfly/react-styles/css/components/Select/select.css';
 import './select-styles.scss';
 import Input from './input';
 import Menu from './menu';
+import ClearIndicator from './clear-indicator';
 
-const InternalSelect = ({ onChange, options, value, simpleValue, placeholder, isSearchable, isDisabled, ...props }) => {
+const InternalSelect = ({ onChange, options, value, simpleValue, placeholder, isSearchable, isDisabled, isClearable, ...props }) => {
   // console.log(props);
   const inputRef = useRef();
   const parsedValue = parseInternalValue(value);
@@ -23,7 +24,7 @@ const InternalSelect = ({ onChange, options, value, simpleValue, placeholder, is
       }}
       selectedItem={value}
     >
-      {({ isOpen, getLabelProps, getInputProps, getToggleButtonProps, getItemProps, highlightedIndex, selectedItem }) => {
+      {({ isOpen, clearSelection, getInputProps, getToggleButtonProps, getItemProps, highlightedIndex }) => {
         const toggleButtonProps = { ...getToggleButtonProps() };
         const enhancedToggleButtonProps = {
           ...toggleButtonProps,
@@ -51,6 +52,7 @@ const InternalSelect = ({ onChange, options, value, simpleValue, placeholder, is
                 />
               </div>
               <span className="pf-c-select__toggle-arrow">
+                {isClearable && parsedValue && <ClearIndicator clearSelection={clearSelection} />}
                 <CaretDownIcon />
               </span>
             </button>
@@ -76,7 +78,8 @@ InternalSelect.propTypes = {
   isSearchable: PropTypes.bool,
   id: PropTypes.string,
   name: PropTypes.string.isRequired,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
+  isClearable: PropTypes.bool
 };
 
 const Select = ({ selectVariant, menuIsPortal, ...props }) => {
