@@ -30,6 +30,13 @@ const selectSchema = {
       name: 'simple-select',
       label: 'Simple-select',
       options
+    },
+    {
+      component: componentTypes.SELECT,
+      name: 'disabled-select',
+      label: 'Disabled-select',
+      options,
+      isDisabled: true
     }
   ]
 };
