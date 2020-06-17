@@ -1,0 +1,17 @@
+.ddorg__pf4-component-mapper__select-clear-indicator {
+  position: relative;
+  display: inline-block;
+  > svg {
+    fill: var(--pf-global--palette--black-600)
+  }
+  &:hover > svg {
+    fill: inherit
+  }
+  &::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
