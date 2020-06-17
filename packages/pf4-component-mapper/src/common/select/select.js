@@ -11,7 +11,7 @@ import './select-styles.scss';
 import Input from './input';
 import Menu from './menu';
 
-const InternalSelect = ({ onChange, options, value, simpleValue, placeholder, isSearchable, ...props }) => {
+const InternalSelect = ({ onChange, options, value, simpleValue, placeholder, isSearchable, isDisabled, ...props }) => {
   // console.log(props);
   const inputRef = useRef();
   const parsedValue = parseInternalValue(value);
@@ -37,9 +37,18 @@ const InternalSelect = ({ onChange, options, value, simpleValue, placeholder, is
         };
         return (
           <div className="pf-c-select">
-            <button className="pf-c-select__toggle" {...enhancedToggleButtonProps}>
+            <button disabled={isDisabled} className={`pf-c-select__toggle${isDisabled ? ' pf-m-disabled' : ''}`} {...enhancedToggleButtonProps}>
               <div className="pf-c-select_toggle-wrapper ddorg__pf4-component-mapper__select-toggle-wrapper">
-                <Input inputRef={inputRef} placeholder={placeholder} className="pf-c-select_toggle-text" {...getInputProps()} value={value} />
+                <Input
+                  inputRef={inputRef}
+                  isSearchable={isSearchable}
+                  placeholder={placeholder}
+                  className="pf-c-select_toggle-text"
+                  {...getInputProps({
+                    disabled: isDisabled
+                  })}
+                  value={value}
+                />
               </div>
               <span className="pf-c-select__toggle-arrow">
                 <CaretDownIcon />
@@ -66,8 +75,9 @@ InternalSelect.propTypes = {
   placeholder: PropTypes.string,
   isSearchable: PropTypes.bool,
   id: PropTypes.string,
-  name: PropTypes.string.isRequired
-}
+  name: PropTypes.string.isRequired,
+  isDisabled: PropTypes.bool
+};
 
 const Select = ({ selectVariant, menuIsPortal, ...props }) => {
   const isSearchable = selectVariant === 'createable' || props.isSearchable;
