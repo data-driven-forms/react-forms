@@ -1,34 +1,26 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Divider } from '@patternfly/react-core';
 
 import './input.scss';
 
-const getInputLabel = (value) => {
-  if (!value) {
-    return '';
-  }
-
-  if (Array.isArray(value)) {
-    return value.map((item) => (typeof item === 'object' ? item.label : item)).join(',');
-  }
-
-  if (typeof value === 'object') {
-    return value.label;
-  }
-
-  return value;
-};
-
-const Input = ({ value, inputRef, isSearchable, ...props }) => {
+const Input = ({ inputRef, isSearchable, isDisabled, getInputProps, ...props }) => {
   return (
-    <input
-      {...props}
-      {...(!isSearchable && { tabIndex: '-1' })}
-      className="ddorg__pf4-component-mapper__select-input"
-      value={getInputLabel(value)}
-      onClick={console.log}
-      ref={inputRef}
-    />
+    <Fragment>
+      <div className="pf-c-select__menu-search">
+        <input
+          autoFocus
+          {...props}
+          {...(!isSearchable && { tabIndex: '-1' })}
+          className="pf-c-form-control pf-m-search"
+          ref={inputRef}
+          {...getInputProps({
+            disabled: isDisabled
+          })}
+        />
+      </div>
+      <Divider />
+    </Fragment>
   );
 };
 

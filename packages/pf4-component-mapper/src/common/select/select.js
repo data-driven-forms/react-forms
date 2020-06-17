@@ -8,11 +8,41 @@ import { CaretDownIcon } from '@patternfly/react-icons';
 import '@patternfly/react-styles/css/components/Select/select.css';
 
 import './select-styles.scss';
-import Input from './input';
 import Menu from './menu';
 import ClearIndicator from './clear-indicator';
+import ValueContainer from './value-container';
 
-const InternalSelect = ({ onChange, options, value, simpleValue, placeholder, isSearchable, isDisabled, isClearable, ...props }) => {
+const itemToString = (value) => {
+  if (!value) {
+    return '';
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((item) => (typeof item === 'object' ? item.label : item)).join(',');
+  }
+
+  if (typeof value === 'object') {
+    return value.label;
+  }
+
+  return value;
+};
+
+const filterOptions = (options, filterValue = '') => options.filter(({ label }) => label.toLowerCase().includes(filterValue.toLowerCase()));
+
+const InternalSelect = ({
+  noResultsMessage,
+  noOptionsMessage,
+  onChange,
+  options,
+  value,
+  simpleValue,
+  placeholder,
+  isSearchable,
+  isDisabled,
+  isClearable,
+  ...props
+}) => {
   // console.log(props);
   const inputRef = useRef();
   const parsedValue = parseInternalValue(value);
@@ -22,41 +52,39 @@ const InternalSelect = ({ onChange, options, value, simpleValue, placeholder, is
       onChange={(value) => {
         return onChange(value);
       }}
+      itemToString={itemToString}
       selectedItem={value}
     >
-      {({ isOpen, clearSelection, getInputProps, getToggleButtonProps, getItemProps, highlightedIndex }) => {
-        const toggleButtonProps = { ...getToggleButtonProps() };
-        const enhancedToggleButtonProps = {
-          ...toggleButtonProps,
-          onClick: (...args) => {
-            if (isSearchable) {
-              inputRef.current.focus();
-            }
-
-            return toggleButtonProps.onClick(...args);
-          }
-        };
+      {({ isOpen, inputValue, itemToString, selectedItem, clearSelection, getInputProps, getToggleButtonProps, getItemProps, highlightedIndex }) => {
+        const toggleButtonProps = getToggleButtonProps();
         return (
           <div className="pf-c-select">
-            <button disabled={isDisabled} className={`pf-c-select__toggle${isDisabled ? ' pf-m-disabled' : ''}`} {...enhancedToggleButtonProps}>
+            <button disabled={isDisabled} className={`pf-c-select__toggle${isDisabled ? ' pf-m-disabled' : ''}`} {...toggleButtonProps}>
               <div className="pf-c-select_toggle-wrapper ddorg__pf4-component-mapper__select-toggle-wrapper">
-                <Input
-                  inputRef={inputRef}
-                  isSearchable={isSearchable}
-                  placeholder={placeholder}
-                  className="pf-c-select_toggle-text"
-                  {...getInputProps({
-                    disabled: isDisabled
-                  })}
-                  value={value}
-                />
+                <ValueContainer placeholder={placeholder} value={itemToString(selectedItem)} />
               </div>
               <span className="pf-c-select__toggle-arrow">
                 {isClearable && parsedValue && <ClearIndicator clearSelection={clearSelection} />}
                 <CaretDownIcon />
               </span>
             </button>
-            {isOpen && <Menu options={options} getItemProps={getItemProps} highlightedIndex={highlightedIndex} selectedItem={parsedValue} />}
+            {isOpen && (
+              <Menu
+                noResultsMessage={noResultsMessage}
+                noOptionsMessage={noOptionsMessage}
+                inputRef={inputRef}
+                isDisabled={isDisabled}
+                placeholder={placeholder}
+                isSearchable={isSearchable}
+                getInputProps={getInputProps}
+                filterOptions={filterOptions}
+                filterValue={inputValue}
+                options={options}
+                getItemProps={getItemProps}
+                highlightedIndex={highlightedIndex}
+                selectedItem={parsedValue}
+              />
+            )}
           </div>
         );
       }}
@@ -79,7 +107,9 @@ InternalSelect.propTypes = {
   id: PropTypes.string,
   name: PropTypes.string.isRequired,
   isDisabled: PropTypes.bool,
-  isClearable: PropTypes.bool
+  isClearable: PropTypes.bool,
+  noResultsMessage: PropTypes.node,
+  noOptionsMessage: PropTypes.func
 };
 
 const Select = ({ selectVariant, menuIsPortal, ...props }) => {
@@ -108,9 +138,10 @@ Select.propTypes = {
   loadOptions: PropTypes.func,
   loadingMessage: PropTypes.node,
   updatingMessage: PropTypes.node,
-  noOptionsMessage: PropTypes.func,
   menuIsPortal: PropTypes.bool,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  noResultsMessage: PropTypes.node,
+  noOptionsMessage: PropTypes.node
 };
 
 Select.defaultProps = {
@@ -123,7 +154,9 @@ Select.defaultProps = {
   menuIsPortal: false,
   placeholder: 'Choose...',
   isSearchable: false,
-  isClearable: false
+  isClearable: false,
+  noResultsMessage: 'No results found',
+  noOptionsMessage: 'No options'
 };
 
 export default Select;

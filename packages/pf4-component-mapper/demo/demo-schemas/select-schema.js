@@ -44,6 +44,13 @@ const selectSchema = {
       label: 'Clearable-select',
       options,
       isClearable: true
+    },
+    {
+      component: componentTypes.SELECT,
+      name: 'searchable-select',
+      label: 'Clearable-select',
+      options,
+      isSearchable: true
     }
   ]
 };
