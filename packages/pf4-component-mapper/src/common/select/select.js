@@ -1,18 +1,73 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import DataDrivenSelect from '@data-driven-forms/common/src/select';
-import ReactSelect from 'react-select';
-import CreatableSelect from 'react-select/creatable';
-
-import MultiValueContainer from './multi-value-container';
-import ValueContainer from './value-container';
-import MultiValueRemove from './multi-value-remove';
-import DropdownIndicator from './dropdown-indicator';
-import ClearIndicator from './clear-indicator';
-import Option from './option';
+import parseInternalValue from '@data-driven-forms/common/src/select/parse-internal-value';
+import Downshift from 'downshift';
+import { CaretDownIcon } from '@patternfly/react-icons';
+import '@patternfly/react-styles/css/components/Select/select.css';
 
 import './select-styles.scss';
+import Input from './input';
+import Menu from './menu';
+
+const InternalSelect = ({ onChange, options, value, simpleValue, placeholder, isSearchable, ...props }) => {
+  // console.log(props);
+  const inputRef = useRef();
+  const parsedValue = parseInternalValue(value);
+  return (
+    <Downshift
+      id={props.id || props.name}
+      onChange={(value) => {
+        return onChange(value);
+      }}
+      selectedItem={value}
+    >
+      {({ isOpen, getLabelProps, getInputProps, getToggleButtonProps, getItemProps, highlightedIndex, selectedItem }) => {
+        const toggleButtonProps = { ...getToggleButtonProps() };
+        const enhancedToggleButtonProps = {
+          ...toggleButtonProps,
+          onClick: (...args) => {
+            if (isSearchable) {
+              inputRef.current.focus();
+            }
+
+            return toggleButtonProps.onClick(...args);
+          }
+        };
+        return (
+          <div className="pf-c-select">
+            <button className="pf-c-select__toggle" {...enhancedToggleButtonProps}>
+              <div className="pf-c-select_toggle-wrapper ddorg__pf4-component-mapper__select-toggle-wrapper">
+                <Input inputRef={inputRef} placeholder={placeholder} className="pf-c-select_toggle-text" {...getInputProps()} value={value} />
+              </div>
+              <span className="pf-c-select__toggle-arrow">
+                <CaretDownIcon />
+              </span>
+            </button>
+            {isOpen && <Menu options={options} getItemProps={getItemProps} highlightedIndex={highlightedIndex} selectedItem={parsedValue} />}
+          </div>
+        );
+      }}
+    </Downshift>
+  );
+};
+
+InternalSelect.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.any,
+      label: PropTypes.any
+    })
+  ).isRequired,
+  value: PropTypes.any,
+  simpleValue: PropTypes.bool,
+  placeholder: PropTypes.string,
+  isSearchable: PropTypes.bool,
+  id: PropTypes.string,
+  name: PropTypes.string.isRequired
+}
 
 const Select = ({ selectVariant, menuIsPortal, ...props }) => {
   const isSearchable = selectVariant === 'createable' || props.isSearchable;
@@ -20,41 +75,10 @@ const Select = ({ selectVariant, menuIsPortal, ...props }) => {
 
   const menuPortalTarget = menuIsPortal ? document.body : undefined;
 
-  return (
-    <DataDrivenSelect
-      SelectComponent={selectVariant === 'createable' ? CreatableSelect : ReactSelect}
-      loadingProps={{
-        className: 'ddorg__pf4-component-mapper__select',
-        classNamePrefix: 'ddorg__pf4-component-mapper__select'
-      }}
-      menuPlacement="auto"
-      components={{
-        MultiValueContainer,
-        ValueContainer,
-        MultiValueRemove,
-        DropdownIndicator,
-        ClearIndicator,
-        Option
-      }}
-      menuPortalTarget={menuPortalTarget}
-      {...props}
-      className={`ddorg__pf4-component-mapper__select${props.isMulti ? ' multi-select' : ' single-select'}`}
-      classNamePrefix="ddorg__pf4-component-mapper__select"
-      styles={{
-        menuPortal: (provided) => ({
-          ...provided,
-          'z-index': 'initial'
-        })
-      }}
-      isSearchable={isSearchable}
-      simpleValue={simpleValue}
-      selectVariant={selectVariant}
-    />
-  );
+  return <DataDrivenSelect SelectComponent={InternalSelect} {...props} />;
 };
 
 Select.propTypes = {
-  selectVariant: PropTypes.oneOf(['default', 'createable']),
   isSearchable: PropTypes.bool,
   showMoreLabel: PropTypes.node,
   showLessLabel: PropTypes.node,
@@ -77,7 +101,6 @@ Select.propTypes = {
 };
 
 Select.defaultProps = {
-  selectVariant: 'default',
   showMoreLabel: 'more',
   showLessLabel: 'Show less',
   simpleValue: true,

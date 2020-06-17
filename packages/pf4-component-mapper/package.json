@@ -78,9 +78,8 @@
     "@patternfly/react-icons": "^4.3.5"
   },
   "dependencies": {
-    "@patternfly/patternfly-next": "^1.0.175",
     "prop-types": "^15.7.2",
-    "react-select": "^3.0.4"
+    "downshift": "^5.4.3"
   },
   "postpublish": "export RELEASE_DEMO=true"
 }

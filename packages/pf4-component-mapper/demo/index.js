@@ -5,11 +5,12 @@ import FormRenderer from '@data-driven-forms/react-form-renderer';
 import miqSchema from './demo-schemas/miq-schema';
 import { uiArraySchema, arraySchema, array1Schema, schema, uiSchema, conditionalSchema, arraySchemaDDF } from './demo-schemas/widget-schema';
 import { componentMapper, FormTemplate } from '../src';
-import { Title, Button, Toolbar, ToolbarGroup } from '@patternfly/react-core';
+import { Title, Button, Toolbar, ToolbarGroup, ToolbarItem } from '@patternfly/react-core';
 import { wizardSchema, wizardSchemaWithFunction, wizardSchemaSimple, wizardSchemaSubsteps, wizardSchemaMoreSubsteps } from './demo-schemas/wizard-schema';
 import sandboxSchema from './demo-schemas/sandbox';
 import dualSchema from './demo-schemas/dual-list-schema';
 import demoSchema from '@data-driven-forms/common/src/demoschema';
+import selectSchema from './demo-schemas/select-schema';
 
 const Summary = props => <div>Custom summary component.</div>;
 
@@ -23,7 +24,7 @@ const fieldArrayState = { schema: arraySchemaDDF, additionalOptions: {
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = fieldArrayState 
+        this.state = {schema: selectSchema, additionalOptions: {}} 
     }
 
     render() {
@@ -32,19 +33,24 @@ class App extends React.Component {
             <Title headingLevel="h2" size="4xl">Pf4 component mapper</Title>
             <Toolbar style={{ marginBottom: 20, marginTop: 20 }}>
                 <ToolbarGroup>
-                    <Button onClick={() => this.setState(state => ({ schema: wizardSchema, additionalOptions: { showFormControls: false, wizard: true } }))}>Wizard</Button>
-                </ToolbarGroup>
-                <ToolbarGroup>
-                    <Button onClick={() => this.setState(state => fieldArrayState)}>arraySchema</Button>
-                </ToolbarGroup>
-                <ToolbarGroup>
-                    <Button onClick={() => this.setState(state => ({ schema: sandboxSchema, additionalOptions: {}}))}>Sandbox</Button>
-                </ToolbarGroup>
-                <ToolbarGroup>
-                    <Button onClick={() => this.setState(state => ({ schema: demoSchema, additionalOptions: {}}))}>Super schema</Button>
-                </ToolbarGroup>
-                <ToolbarGroup>
-                    <Button onClick={() => this.setState(state => ({ schema: dualSchema, additionalOptions: {} }))}>Dual List</Button>
+                    <ToolbarItem>
+                        <Button onClick={() => this.setState(state => ({schema: selectSchema, additionalOptions: {}}))}>select schema</Button>
+                    </ToolbarItem>
+                    <ToolbarItem>
+                        <Button onClick={() => this.setState(state => ({ schema: wizardSchema, additionalOptions: { showFormControls: false, wizard: true } }))}>Wizard</Button>
+                    </ToolbarItem>
+                    <ToolbarItem>
+                        <Button onClick={() => this.setState(state => fieldArrayState)}>arraySchema</Button>
+                    </ToolbarItem>
+                    <ToolbarItem>
+                        <Button onClick={() => this.setState(state => ({ schema: sandboxSchema, additionalOptions: {}}))}>Sandbox</Button>
+                    </ToolbarItem>
+                    <ToolbarItem>
+                        <Button onClick={() => this.setState(state => ({ schema: demoSchema, additionalOptions: {}}))}>Super schema</Button>
+                    </ToolbarItem>
+                    <ToolbarItem>
+                        <Button onClick={() => this.setState(state => ({ schema: dualSchema, additionalOptions: {} }))}>Dual List</Button>
+                    </ToolbarItem>
                 </ToolbarGroup>
             </Toolbar>
             <FormRenderer
