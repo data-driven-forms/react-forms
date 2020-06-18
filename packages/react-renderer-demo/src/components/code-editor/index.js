@@ -7,6 +7,7 @@ import vsTheme from 'prism-react-renderer/themes/vsDark';
 
 const useStyles = makeStyles({
   pre: {
+    maxWidth: '100vw',
     textAlign: 'left',
     margin: '1em 0',
     padding: '0.5em',
