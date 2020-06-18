@@ -4,5 +4,5 @@
 /**/coverage
 /**/vendor.js
 /**/*.config.js
-/templates/**/*.*
+/templates/
 packages/**/service-worker.js
