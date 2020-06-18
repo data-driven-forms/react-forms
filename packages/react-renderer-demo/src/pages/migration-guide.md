@@ -4,7 +4,11 @@ import Link from '@material-ui/core/Link';
 
 import ListOfContents from '@docs/list-of-contents';
 
+import ListOfContentsMobile from '@docs/list-of-contents-select';
+
 <Grid container item>
+
+<ListOfContentsMobile file="migration-guide" />
 <Grid item xs={12} md={10}>
 
 # Migration guide to version 2
