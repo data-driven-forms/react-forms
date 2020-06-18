@@ -14,6 +14,9 @@ import MenuList from '@material-ui/core/MenuList';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+
 import { headerToId } from './list-of-contents';
 
 const reqSource = require.context('!raw-loader!@docs/pages', true, /\.md/);
@@ -44,8 +47,13 @@ Item.propTypes = {
 
 const contentStyles = makeStyles(() => ({
   button: {
-    paddingLeft: 0,
+    paddingRight: 0,
     marginTop: '-24px'
+  },
+  wrapper: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'flex-end'
   }
 }));
 
@@ -69,30 +77,35 @@ const ListOfContents = ({ file }) => {
   return (
     <Grid item xs={12} md={false}>
       <Hidden implementation="css" mdUp>
-        <Button
-          ref={anchorRef}
-          className={styles.button}
-          aria-controls={open ? 'menu-list-grow' : undefined}
-          aria-haspopup="true"
-          onClick={() => setOpen((prevOpen) => !prevOpen)}
-        >
-          Show content
-        </Button>
-        <Popper open={open} role={undefined} transition disablePortal anchorEl={anchorRef.current}>
-          {({ TransitionProps }) => (
-            <Grow {...TransitionProps} style={{ transformOrigin: 'center top' }}>
-              <Paper>
-                <ClickAwayListener onClickAway={() => setOpen(false)}>
-                  <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    {found.map((text) => (
-                      <Item key={text} text={text} setOpen={setOpen} />
-                    ))}
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
+        <div className={styles.wrapper}>
+          <ClickAwayListener onClickAway={() => setOpen(false)}>
+            <div>
+              <Button
+                ref={anchorRef}
+                className={styles.button}
+                aria-controls={open ? 'menu-list-grow' : undefined}
+                aria-haspopup="true"
+                onClick={() => setOpen((prevOpen) => !prevOpen)}
+                endIcon={!open ? <KeyboardArrowRightIcon /> : <KeyboardArrowDownIcon />}
+              >
+                Show content
+              </Button>
+              <Popper open={open} role={undefined} transition disablePortal anchorEl={anchorRef.current}>
+                {({ TransitionProps }) => (
+                  <Grow {...TransitionProps} style={{ transformOrigin: 'center top' }}>
+                    <Paper>
+                      <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                        {found.map((text) => (
+                          <Item key={text} text={text} setOpen={setOpen} />
+                        ))}
+                      </MenuList>
+                    </Paper>
+                  </Grow>
+                )}
+              </Popper>
+            </div>
+          </ClickAwayListener>
+        </div>
       </Hidden>
     </Grid>
   );
