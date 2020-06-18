@@ -46,5 +46,9 @@ export const components = {
   Switch,
   PlainText,
   DualListSelect,
-  Slider
+  Slider,
+  FieldArray,
+  SubForm,
+  Wizard,
+  Tabs
 };
