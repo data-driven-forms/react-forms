@@ -10,8 +10,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import ListOfContents from '../helpers/list-of-contents';
 import ListOfContentsMobile from '../helpers/list-of-contents-select';
 
-const reqSource = require.context('!raw-loader!@docs/pages', true, /\.md/);
-
 const useStyles = makeStyles((theme) => ({
   hidden: {
     height: '100%'
@@ -27,7 +25,7 @@ const DocPage = ({ children }) => {
   const router = useRouter();
   const classes = useStyles();
 
-  const text = reqSource(`./${router.pathname.replace('/', '')}.md`).default;
+  const text = require(`!raw-loader!@docs/pages/${router.pathname.replace('/', '')}.md`).default;
 
   const regex = /^#+ .*/gm;
   const found = text.match(regex) || [];
