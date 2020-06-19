@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormCheckbox } from 'semantic-ui-react';
-import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
 
 import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
@@ -51,8 +50,6 @@ export const SingleCheckbox = (props) => {
 };
 
 SingleCheckbox.propTypes = {
-  input,
-  meta,
   isReadOnly: PropTypes.bool,
   isDisabled: PropTypes.bool,
   isRequired: PropTypes.bool,

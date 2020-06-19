@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Input } from 'semantic-ui-react';
 
 import { validationError } from '../common/helpers';
-import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormFieldGrid from '../common/form-field-grid';
 import FormField from '../common/form-field';
@@ -47,8 +46,6 @@ const TextField = (props) => {
 };
 
 TextField.propTypes = {
-  input,
-  meta,
   isReadOnly: PropTypes.bool,
   isDisabled: PropTypes.bool,
   placeholder: PropTypes.node,

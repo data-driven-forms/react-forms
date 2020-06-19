@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
 import { FormCheckbox } from 'semantic-ui-react';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormFieldGrid from '../common/form-field-grid';
@@ -73,8 +72,6 @@ export const Switch = (props) => {
 };
 
 Switch.propTypes = {
-  input,
-  meta,
   isReadOnly: PropTypes.bool,
   isDisabled: PropTypes.bool,
   isRequired: PropTypes.bool,
