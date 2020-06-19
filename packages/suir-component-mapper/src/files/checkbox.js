@@ -71,17 +71,11 @@ Checkbox.propTypes = {
   options: PropTypes.array,
   /** Sub components customization API */
   FormFieldGridProps: PropTypes.object,
-  FormFieldProps: PropTypes.object,
-  HeaderProps: PropTypes.object,
-  OptionsListProps: PropTypes.object,
   HelperTextProps: PropTypes.object
 };
 
 Checkbox.defaultProps = {
   FormFieldGridProps: {},
-  FormFieldProps: {},
-  HeaderProps: {},
-  OptionsListProps: {},
   HelperTextProps: {}
 };
 
