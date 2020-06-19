@@ -1,14 +1,7 @@
-import Grid from '@material-ui/core/Grid'
 import CodeExample from '@docs/code-example';
+import DocPage from '@docs/doc-page';
 
-import ListOfContents from '@docs/list-of-contents';
-
-import ListOfContentsMobile from '@docs/list-of-contents-select';
-
-<Grid container item>
-
-<ListOfContentsMobile file="renderer/data-types" />
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # Introduction
 
@@ -22,8 +15,4 @@ Because almost everything in HTML inputs is outputed as a string, adding the `da
 ```
 <CodeExample source="components/data-types-example" mode="preview" />
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="renderer/data-types" />
-</Grid>
-</Grid>
+</DocPage>

@@ -1,14 +1,7 @@
-import Grid from '@material-ui/core/Grid'
-
-import ListOfContents from '@docs/list-of-contents';
+import DocPage from '@docs/doc-page';
 import CodeExample from '@docs/code-example';
 
-import ListOfContentsMobile from '@docs/list-of-contents-select';
-
-<Grid container item>
-
-<ListOfContentsMobile file="renderer/get-started" />
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # Getting started
 
@@ -25,8 +18,4 @@ You can check the simple example below.
 
 <CodeExample source="components/get-started/get-started" mode="preview" />
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="renderer/get-started" />
-</Grid>
-</Grid>
+</DocPage>

@@ -1,13 +1,6 @@
-import Grid from '@material-ui/core/Grid'
+import DocPage from '@docs/doc-page';
 
-import ListOfContents from '@docs/list-of-contents';
-import ListOfContentsMobile from '@docs/list-of-contents-select';
-
-<Grid container item>
-
-<ListOfContentsMobile file="renderer/development-setup" />
-
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # Development setup
 
@@ -101,8 +94,4 @@ yarn generate-template
 
 This command starts a CLI, that provides an interface for generating mappers. A mapper folder will be created and it will be populated with all neccesary files.
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="renderer/development-setup" />
-</Grid>
-</Grid>
+</DocPage>

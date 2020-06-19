@@ -1,14 +1,7 @@
-import Grid from '@material-ui/core/Grid'
+import DocPage from '@docs/doc-page';
 import CodeExample from '@docs/code-example';
 
-import ListOfContents from '@docs/list-of-contents';
-
-import ListOfContentsMobile from '@docs/list-of-contents-select';
-
-<Grid container item>
-
-<ListOfContentsMobile file="renderer/form-template" />
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # FormTemplate
 
@@ -73,8 +66,4 @@ import { FormTemplate } from ‘@data-driven-forms/pf4-component-mapper’
 |showFormControls|bool|You can disable showing form buttons. Use it with wizard component which has its own buttons.|true|
 |submitLabel|node|Label for submit button.|'Submit'|
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="renderer/form-template" />
-</Grid>
-</Grid>
+</DocPage>

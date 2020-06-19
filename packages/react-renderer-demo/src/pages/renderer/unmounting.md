@@ -1,14 +1,7 @@
-import Grid from '@material-ui/core/Grid'
-import CodeExample from '@docs/code-example'
+import DocPage from '@docs/doc-page';
+import CodeExample from '@docs/code-example';
 
-import ListOfContents from '@docs/list-of-contents';
-
-import ListOfContentsMobile from '@docs/list-of-contents-select';
-
-<Grid container item>
-
-<ListOfContentsMobile file="renderer/unmounting" />
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # Description
 
@@ -68,8 +61,4 @@ When using dynamic forms where more fields share the same name, the value is pre
 },
 ```
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="renderer/unmounting" />
-</Grid>
-</Grid>
+</DocPage>

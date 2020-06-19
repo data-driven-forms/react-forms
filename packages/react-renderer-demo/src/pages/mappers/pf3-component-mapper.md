@@ -1,11 +1,6 @@
-import Grid from '@material-ui/core/Grid'
-import ListOfContents from '@docs/list-of-contents';
-import ListOfContentsMobile from '@docs/list-of-contents-select';
+import DocPage from '@docs/doc-page';
 
-<Grid container item>
-
-<ListOfContentsMobile file="mappers/pf3-component-mapper" />
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # PatternFly 3 mapper
 
@@ -44,8 +39,4 @@ This field will show the error immediately.
 
 You can contribute to this mapper [here](https://github.com/data-driven-forms/react-forms/tree/master/packages/pf3-component-mapper).
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="mappers/pf3-component-mapper" />
-</Grid>
-</Grid>
+</DocPage>

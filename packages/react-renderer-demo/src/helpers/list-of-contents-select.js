@@ -11,15 +11,10 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 
-import Grid from '@material-ui/core/Grid';
-import Hidden from '@material-ui/core/Hidden';
-
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 
 import { headerToId } from './list-of-contents';
-
-const reqSource = require.context('!raw-loader!@docs/pages', true, /\.md/);
 
 const itemStyles = makeStyles(() => ({
   a: {
@@ -57,7 +52,7 @@ const contentStyles = makeStyles(() => ({
   }
 }));
 
-const ListOfContents = ({ file }) => {
+const ListOfContents = ({ found }) => {
   const [open, setOpen] = useState(false);
   const styles = contentStyles();
   const anchorRef = useRef(null);
@@ -69,50 +64,41 @@ const ListOfContents = ({ file }) => {
     }
   };
 
-  const text = reqSource(`./${file}.md`).default;
-
-  const regex = /^#+ .*/gm;
-  const found = text.match(regex) || [];
-
   return (
-    <Grid item xs={12} md={false}>
-      <Hidden implementation="css" mdUp>
-        <div className={styles.wrapper}>
-          <ClickAwayListener onClickAway={() => setOpen(false)}>
-            <div>
-              <Button
-                ref={anchorRef}
-                className={styles.button}
-                aria-controls={open ? 'menu-list-grow' : undefined}
-                aria-haspopup="true"
-                onClick={() => setOpen((prevOpen) => !prevOpen)}
-                endIcon={!open ? <KeyboardArrowRightIcon /> : <KeyboardArrowDownIcon />}
-              >
-                Show content
-              </Button>
-              <Popper open={open} role={undefined} transition disablePortal anchorEl={anchorRef.current}>
-                {({ TransitionProps }) => (
-                  <Grow {...TransitionProps} style={{ transformOrigin: 'center top' }}>
-                    <Paper>
-                      <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                        {found.map((text) => (
-                          <Item key={text} text={text} setOpen={setOpen} />
-                        ))}
-                      </MenuList>
-                    </Paper>
-                  </Grow>
-                )}
-              </Popper>
-            </div>
-          </ClickAwayListener>
+    <div className={styles.wrapper}>
+      <ClickAwayListener onClickAway={() => setOpen(false)}>
+        <div>
+          <Button
+            ref={anchorRef}
+            className={styles.button}
+            aria-controls={open ? 'menu-list-grow' : undefined}
+            aria-haspopup="true"
+            onClick={() => setOpen((prevOpen) => !prevOpen)}
+            endIcon={!open ? <KeyboardArrowRightIcon /> : <KeyboardArrowDownIcon />}
+          >
+            Show content
+          </Button>
+          <Popper open={open} role={undefined} transition disablePortal anchorEl={anchorRef.current}>
+            {({ TransitionProps }) => (
+              <Grow {...TransitionProps} style={{ transformOrigin: 'center top' }}>
+                <Paper>
+                  <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                    {found.map((text) => (
+                      <Item key={text} text={text} setOpen={setOpen} />
+                    ))}
+                  </MenuList>
+                </Paper>
+              </Grow>
+            )}
+          </Popper>
         </div>
-      </Hidden>
-    </Grid>
+      </ClickAwayListener>
+    </div>
   );
 };
 
 ListOfContents.propTypes = {
-  file: PropTypes.string.isRequired
+  found: PropTypes.array
 };
 
 export default ListOfContents;

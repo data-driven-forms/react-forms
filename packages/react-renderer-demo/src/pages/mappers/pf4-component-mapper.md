@@ -1,11 +1,6 @@
-import Grid from '@material-ui/core/Grid'
-import ListOfContents from '@docs/list-of-contents';
-import ListOfContentsMobile from '@docs/list-of-contents-select';
+import DocPage from '@docs/doc-page';
 
-<Grid container item>
-
-<ListOfContentsMobile file="mappers/pf4-component-mapper" />
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # PatternFly 4 mapper
 
@@ -29,8 +24,4 @@ PatternFly 4 has to be installed seperately. Please follow their [guidelines](ht
 
 You can contribute to this mapper [here](https://github.com/data-driven-forms/react-forms/tree/master/packages/pf4-component-mapper).
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="mappers/pf4-component-mapper" />
-</Grid>
-</Grid>
+</DocPage>

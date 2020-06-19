@@ -1,11 +1,6 @@
-import Grid from '@material-ui/core/Grid'
-import ListOfContents from '@docs/list-of-contents';
-import ListOfContentsMobile from '@docs/list-of-contents-select';
+import DocPage from '@docs/doc-page';
 
-<Grid container item>
-
-<ListOfContentsMobile file="mappers/suir-component-mapper" />
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # Semantic UI react
 
@@ -49,8 +44,4 @@ To avoid re-refining common customization for each field in schema, check out th
 
 You can contribute to this mapper [here](https://github.com/data-driven-forms/react-forms/tree/master/packages/suir-component-mapper).
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="mappers/suir-component-mapper" />
-</Grid>
-</Grid>
+</DocPage>

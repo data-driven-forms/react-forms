@@ -1,15 +1,7 @@
-import Grid from '@material-ui/core/Grid'
-import RouterLink from 'next/link';
-import Link from '@material-ui/core/Link';
+import DocPage from '@docs/doc-page';
+import CodeExample from '@docs/code-example';
 
-import ListOfContents from '@docs/list-of-contents';
-
-import ListOfContentsMobile from '@docs/list-of-contents-select';
-
-<Grid container item>
-
-<ListOfContentsMobile file="migration-guide" />
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # Migration guide to version 2
 
@@ -166,8 +158,4 @@ import { componentMapper } from '@data-driven-forms/pf4-component-mapper'
 -   word "validator" is removed from all validator strings, constants
 -   i.e.: pattern-validator > pattern
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="migration-guide" />
-</Grid>
-</Grid>
+</DocPage>

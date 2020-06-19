@@ -1,16 +1,7 @@
-import RouterNav from 'next/link';
-import Link from '@material-ui/core/Link';
+import DocPage from '@docs/doc-page';
+import CodeExample from '@docs/code-example';
 
-import Grid from '@material-ui/core/Grid'
-
-import ListOfContents from '@docs/list-of-contents';
-
-import ListOfContentsMobile from '@docs/list-of-contents-select';
-
-<Grid container item>
-
-<ListOfContentsMobile file="renderer/field-provider" />
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # Custom components
 
@@ -22,7 +13,7 @@ components, you can access these features via `FieldProvider` component or `useF
 
 `useFieldApi` is a wrapper around [React Final Form useField hook](https://final-form.org/docs/react-final-form/api/useField).
 
-You can read more about that in <RouterNav href="/renderer/component-mapping"><Link href="/renderer/component-mapping">Component mapping</Link></RouterNav>.
+You can read more about that in [Component mapping](/renderer/component-mapping).
 
 ## Implementation of component
 
@@ -147,8 +138,4 @@ For testing purposes, you can also import React Final Form's `Form` component.
 import { Form } from '@data-driven-forms/react-form-renderer';
 ```
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="renderer/field-provider" />
-</Grid>
-</Grid>
+</DocPage>

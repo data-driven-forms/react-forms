@@ -1,14 +1,7 @@
-import Grid from '@material-ui/core/Grid'
+import DocPage from '@docs/doc-page';
 import CodeExample from '@docs/code-example';
 
-import ListOfContents from '@docs/list-of-contents';
-
-import ListOfContentsMobile from '@docs/list-of-contents-select';
-
-<Grid container item>
-
-<ListOfContentsMobile file="renderer/initialize-mount" />
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # Initialize On Mount
 
@@ -42,8 +35,4 @@ This feature comes handy if you need change a value when an user traverses a for
 
 If you need clear the value after unmounting, you can do it by using [clearOnUnmount](/renderer/unmounting).
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="renderer/initialize-mount" />
-</Grid>
-</Grid>
+</DocPage>

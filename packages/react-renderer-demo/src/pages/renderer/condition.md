@@ -1,15 +1,7 @@
-import Grid from '@material-ui/core/Grid'
-
-import ListOfContents from '@docs/list-of-contents';
 import CodeExample from '@docs/code-example';
+import DocPage from '@docs/doc-page';
 
-
-import ListOfContentsMobile from '@docs/list-of-contents-select';
-
-<Grid container item>
-
-<ListOfContentsMobile file="renderer/condition" />
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # Conditional fields
 
@@ -401,8 +393,4 @@ condition: { when: 'x', is: 'y', then: { visible: true } }
 
 If you need to clear values after switching fields, please see [here](/renderer/unmounting).
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="renderer/condition" />
-</Grid>
-</Grid>
+</DocPage>
