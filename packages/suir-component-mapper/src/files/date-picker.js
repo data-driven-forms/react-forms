@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import FormFieldGrid from '../common/form-field-grid';
 import { validationError } from '../common/helpers';
-import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormField from '../common/form-field';
 
@@ -44,8 +43,6 @@ const DatePicker = (props) => {
 };
 
 DatePicker.propTypes = {
-  input,
-  meta,
   isReadOnly: PropTypes.bool,
   isDisabled: PropTypes.bool,
   placeholder: PropTypes.node,
