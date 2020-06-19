@@ -1,13 +1,7 @@
-import Grid from '@material-ui/core/Grid'
+import DocPage from '@docs/doc-page';
 import CodeExample from '@docs/code-example';
-import ListOfContents from '@docs/list-of-contents';
 
-import ListOfContentsMobile from '@docs/list-of-contents-select';
-
-<Grid container item>
-
-<ListOfContentsMobile file="renderer/schema-validator" />
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # Schema validation
 
@@ -63,8 +57,4 @@ This is example is supposed to fail
 
 <CodeExample source="components/schema-validator" mode="preview" />
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="renderer/schema-validator" />
-</Grid>
-</Grid>
+</DocPage>

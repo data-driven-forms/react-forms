@@ -1,14 +1,7 @@
-import Grid from '@material-ui/core/Grid'
-
-import ListOfContents from '@docs/list-of-contents';
 import ExampleLink from '@docs/components/common/example-link';
+import DocPage from '@docs/doc-page';
 
-import ListOfContentsMobile from '@docs/list-of-contents-select';
-
-<Grid container item>
-
-<ListOfContentsMobile file="renderer/component-api" />
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # Components API
 
@@ -196,8 +189,4 @@ Wizard step <br/>
 
 <ExampleLink to='plain-text' />
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="renderer/component-api" />
-</Grid>
-</Grid>
+</DocPage>

@@ -1,14 +1,7 @@
-import Grid from '@material-ui/core/Grid'
 import CodeExample from '@docs/code-example'
+import DocPage from '@docs/doc-page';
 
-import ListOfContents from '@docs/list-of-contents';
-
-import ListOfContentsMobile from '@docs/list-of-contents-select';
-
-<Grid container item>
-
-<ListOfContentsMobile file="renderer/cleared-value" />
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # Cleared value
 
@@ -17,8 +10,4 @@ The value to send upon a submit if the field is empty. This wildcard value can b
 
 <CodeExample source="components/cleared-value" mode="preview" />
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="renderer/cleared-value" />
-</Grid>
-</Grid>
+</DocPage>

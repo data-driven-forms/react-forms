@@ -1,14 +1,7 @@
-import Grid from '@material-ui/core/Grid'
+import DocPage from '@docs/doc-page';
+import CodeExample from '@docs/code-example';
 
-import CodeExample from '@docs/code-example'
-import ListOfContents from '@docs/list-of-contents';
-
-import ListOfContentsMobile from '@docs/list-of-contents-select';
-
-<Grid container item>
-
-<ListOfContentsMobile file="renderer/global-component-props" />
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # Global component props
 
@@ -26,8 +19,4 @@ Props from **schema** have **higher** priority and will override the global prop
 
 <CodeExample source="components/global-component-props/props-priority" mode="preview" mapper="mui"/>
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="renderer/global-component-props" />
-</Grid>
-</Grid>
+</DocPage>

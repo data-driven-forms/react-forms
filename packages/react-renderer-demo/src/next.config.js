@@ -64,7 +64,8 @@ module.exports = withBundleAnalyzer(
           '@docs/list-of-contents': path.resolve(__dirname, './helpers/list-of-contents'),
           '@docs/code-example': path.resolve(__dirname, './components/code-example'),
           '@docs/hooks': path.resolve(__dirname, './hooks'),
-          '@docs/list-of-contents-select': path.resolve(__dirname, './helpers/list-of-contents-select')
+          '@docs/list-of-contents-select': path.resolve(__dirname, './helpers/list-of-contents-select'),
+          '@docs/doc-page': path.resolve(__dirname, './components/doc-page')
         };
 
         config.optimization.minimizer = [

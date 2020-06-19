@@ -1,13 +1,6 @@
-import Grid from '@material-ui/core/Grid'
+import DocPage from '@docs/doc-page';
 
-import ListOfContents from '@docs/list-of-contents';
-
-import ListOfContentsMobile from '@docs/list-of-contents-select';
-
-<Grid container item>
-
-<ListOfContentsMobile file="renderer/installation" />
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # Installation
 
@@ -59,8 +52,4 @@ yarn add @data-driven-forms/pf3-component-mapper
 
 All these packages all always deployed together, so their version numbers are always the same. Update them also together to achieve the best compatibility.
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="renderer/installation" />
-</Grid>
-</Grid>
+</DocPage>

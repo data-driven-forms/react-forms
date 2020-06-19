@@ -80,6 +80,9 @@ const useStyles = makeStyles((theme) => ({
   contentHeader: {
     paddingLeft: 16,
     paddingRight: 16
+  },
+  hidden: {
+    height: '100%'
   }
 }));
 
@@ -114,7 +117,7 @@ const ListOfContents = ({ file }) => {
   const regex = /^#+ .*/gm;
   const found = text.match(regex) || [];
   return (
-    <Hidden implementation="css" smDown>
+    <Hidden implementation="css" smDown className={classes.hidden}>
       <StickyBox offsetTop={96} offsetBottom={20}>
         <div className={classes.fixedContainer}>
           <Typography className={classes.contentHeader} component="h3">

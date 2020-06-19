@@ -1,14 +1,7 @@
-
-import Grid from '@material-ui/core/Grid'
-import ListOfContents from '@docs/list-of-contents';
+import DocPage from '@docs/doc-page';
 import CodeExample from '@docs/code-example';
 
-import ListOfContentsMobile from '@docs/list-of-contents-select';
-
-<Grid container item>
-
-<ListOfContentsMobile file="renderer/file-input" />
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # File input
 
@@ -37,8 +30,4 @@ The `formApi.fileInputs` is an array of field names with `type: file`. Be aware 
 
 <CodeExample source="components/file-upload/file-input" mode="preview" additionalSources="components/file-upload/upload-handler.js" />
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="renderer/file-input" />
-</Grid>
-</Grid>
+</DocPage>

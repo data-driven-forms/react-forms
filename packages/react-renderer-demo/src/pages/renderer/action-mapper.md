@@ -1,15 +1,7 @@
-import Grid from '@material-ui/core/Grid'
-import ListOfContents from '@docs/list-of-contents';
 import CodeExample from '@docs/code-example';
+import DocPage from '@docs/doc-page';
 
-
-import ListOfContentsMobile from '@docs/list-of-contents-select';
-
-<Grid container item>
-
-<ListOfContentsMobile file="renderer/action-mapper" />
-
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # Action Mapper
 
@@ -77,8 +69,4 @@ Then, in your schema you can map `translateLabel` action to a prop:
 
 <CodeExample source="components/action-mapper" mode="preview" />
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="renderer/action-mapper" />
-</Grid>
-</Grid>
+</DocPage>

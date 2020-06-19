@@ -1,14 +1,7 @@
-import CodeExample from '@docs/code-example'
-import Grid from '@material-ui/core/Grid'
+import CodeExample from '@docs/code-example';
+import DocPage from '@docs/doc-page';
 
-import ListOfContents from '@docs/list-of-contents';
-
-import ListOfContentsMobile from '@docs/list-of-contents-select';
-
-<Grid container item>
-
-<ListOfContentsMobile file="renderer/component-mapping" />
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # ComponentMapper
 
@@ -78,13 +71,9 @@ Below, you can see an basic implementation of custom component mapper:
 <br />
 
 
-<CodeExample 
+<CodeExample
   source="components/component-mapper/form-fields-mapper"
   mode="preview"
 />
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="renderer/component-mapping" />
-</Grid>
-</Grid>
+</DocPage>

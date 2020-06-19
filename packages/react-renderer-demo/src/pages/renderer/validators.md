@@ -1,14 +1,7 @@
-import Grid from '@material-ui/core/Grid'
+import DocPage from '@docs/doc-page';
 import CodeExample from '@docs/code-example';
 
-import ListOfContents from '@docs/list-of-contents';
-
-import ListOfContentsMobile from '@docs/list-of-contents-select';
-
-<Grid container item>
-
-<ListOfContentsMobile file="renderer/validators" />
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # Validate field
 
@@ -142,8 +135,4 @@ You can either specify message attribute while adding validator or override vali
 
 <CodeExample mode="preview" source="components/validators/global-message" />
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="renderer/validators" />
-</Grid>
-</Grid>
+</DocPage>

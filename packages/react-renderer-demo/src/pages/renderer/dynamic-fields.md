@@ -1,14 +1,7 @@
-import Grid from '@material-ui/core/Grid'
 import CodeExamples from '@docs/code-example';
+import DocPage from '@docs/doc-page';
 
-import ListOfContents from '@docs/list-of-contents';
-
-import ListOfContentsMobile from '@docs/list-of-contents-select';
-
-<Grid container item>
-
-<ListOfContentsMobile file="renderer/dynamic-fields" />
-<Grid item xs={12} md={10}>
+<DocPage>
 
 # Dynamic fields
 
@@ -79,8 +72,4 @@ PF4 and MUI component mapper provides an experimental implementation of field ar
 
 <CodeExamples source="components/field-array/pf4-demo" mode="preview" />
 
-</Grid>
-<Grid item xs={false} md={2}>
-  <ListOfContents file="renderer/dynamic-fields" />
-</Grid>
-</Grid>
+</DocPage>
