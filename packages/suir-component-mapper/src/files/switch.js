@@ -39,6 +39,7 @@ export const Switch = (props) => {
     className,
     FormFieldGridProps,
     HelpertextProps,
+    type,
     ...rest
   } = useFieldApi({
     ...props,
