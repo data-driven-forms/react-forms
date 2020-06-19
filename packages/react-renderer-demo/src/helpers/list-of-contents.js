@@ -8,6 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import { useRouter } from 'next/router';
 import StickyBox from 'react-sticky-box';
+import Hidden from '@material-ui/core/Hidden';
 
 const reqSource = require.context('!raw-loader!@docs/pages', true, /\.md/);
 
@@ -113,24 +114,26 @@ const ListOfContents = ({ file }) => {
   const regex = /^#+ .*/gm;
   const found = text.match(regex) || [];
   return (
-    <StickyBox offsetTop={96} offsetBottom={20}>
-      <div className={classes.fixedContainer}>
-        <Typography className={classes.contentHeader} component="h3">
-          Content
-        </Typography>
-        <List dense>
-          {found.map((text) => (
-            <ListItem
-              onClick={() => setActive(headerToId(text))}
-              className={clsx(classes.listItem, { [classes.listItemActive]: headerToId(text) === activeItem })}
-              key={text}
-            >
-              <ListItemText className={classes.listItemText} primary={<ListHeader text={text} />} />
-            </ListItem>
-          ))}
-        </List>
-      </div>
-    </StickyBox>
+    <Hidden implementation="css" smDown>
+      <StickyBox offsetTop={96} offsetBottom={20}>
+        <div className={classes.fixedContainer}>
+          <Typography className={classes.contentHeader} component="h3">
+            Content
+          </Typography>
+          <List dense>
+            {found.map((text) => (
+              <ListItem
+                onClick={() => setActive(headerToId(text))}
+                className={clsx(classes.listItem, { [classes.listItemActive]: headerToId(text) === activeItem })}
+                key={text}
+              >
+                <ListItemText className={classes.listItemText} primary={<ListHeader text={text} />} />
+              </ListItem>
+            ))}
+          </List>
+        </div>
+      </StickyBox>
+    </Hidden>
   );
 };
 

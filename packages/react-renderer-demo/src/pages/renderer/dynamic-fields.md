@@ -3,7 +3,11 @@ import CodeExamples from '@docs/code-example';
 
 import ListOfContents from '@docs/list-of-contents';
 
+import ListOfContentsMobile from '@docs/list-of-contents-select';
+
 <Grid container item>
+
+<ListOfContentsMobile file="renderer/dynamic-fields" />
 <Grid item xs={12} md={10}>
 
 # Dynamic fields
