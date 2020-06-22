@@ -3,7 +3,7 @@ import { AnyObject } from './common';
 
 export type DataTypeValidators = "string" | "integer" | "boolean" | "number" | "float";
 
-export type ValidatorFunction = (value: any, allValues?: object) => Promise<any> | ReactNode | undefined;
+export type ValidatorFunction = (value: any, allValues?: object, meta?: object) => Promise<any> | ReactNode | undefined;
 
 export interface ValidatorConfiguration extends AnyObject {
   type: string;
