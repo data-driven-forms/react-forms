@@ -30,9 +30,9 @@ export const memoize = (func) => {
     func.cache = {};
   }
 
-  return (options) => {
-    const key = stringify(options);
-    return HAS_PROP.call(func.cache, key) ? func.cache[key] : (func.cache[key] = func(options));
+  return (value, allValues, ...options) => {
+    const key = stringify(value, allValues);
+    return HAS_PROP.call(func.cache, key) ? func.cache[key] : (func.cache[key] = func(value, allValues, ...options));
   };
 };
 
