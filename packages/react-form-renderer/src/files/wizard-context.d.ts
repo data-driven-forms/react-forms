@@ -1,8 +1,5 @@
 import { ReactNode } from 'react';
 import { FormApi } from 'final-form';
-import ComponentMapper from './component-mapper';
-import ValidatorMapper from './validator-mapper';
-import ActionMapper from './action-mapper';
 import Field from './field';
 import { AnyObject } from './common';
 
@@ -16,15 +13,13 @@ export interface FormOptions extends FormApi {
   renderForm: (fields: Field[]) => ReactNode[];
 }
 
-export interface RendererContextValue {
-  componentMapper: ComponentMapper;
-  validatorMapper: ValidatorMapper;
-  actionMapper: ActionMapper;
+export interface WizardContextValue {
   formOptions: FormOptions;
+
 }
 
-interface RendererContext {
-  value: RendererContextValue;
+interface WizardContext {
+  value: WizardContextValue;
 }
 
-export default RendererContext;
+export default WizardContext;

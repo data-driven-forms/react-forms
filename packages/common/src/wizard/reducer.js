@@ -53,10 +53,8 @@ const handleNext = (state, nextStep, formOptions, fields) => {
     maxStepIndex: newActiveIndex > state.maxStepIndex ? newActiveIndex : state.maxStepIndex,
     navSchema: state.isDynamic
       ? createSchema({
-          ...state,
           fields,
-          formOptions,
-          currentIndex: newActiveIndex
+          formOptions
         })
       : state.navSchema
   };
@@ -103,10 +101,8 @@ const jumpToStep = (state, index, valid, fields, crossroads, formOptions) => {
       updatedState = {
         ...updatedState,
         navSchema: createSchema({
-          ...updatedState,
           formOptions,
-          fields,
-          currentIndex: index
+          fields
         }),
         prevSteps: newState.prevSteps.slice(0, index),
         maxStepIndex: index
@@ -138,10 +134,8 @@ const reducer = (state, { type, payload }) => {
         ...state,
         loading: false,
         navSchema: createSchema({
-          ...state,
           fields: payload.fields,
-          formOptions: payload.formOptions,
-          currentIndex: 0
+          formOptions: payload.formOptions
         })
       };
     case 'handleNext':
@@ -152,10 +146,8 @@ const reducer = (state, { type, payload }) => {
         prevSteps: state.prevSteps.slice(0, state.activeStepIndex),
         maxStepIndex: state.activeStepIndex,
         navSchema: createSchema({
-          ...state,
           fields: payload.fields,
-          formOptions: payload.formOptions,
-          currentIndex: state.activeStepIndex
+          formOptions: payload.formOptions
         })
       };
     case 'jumpToStep':

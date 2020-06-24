@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { WizardContext } from '@data-driven-forms/react-form-renderer';
 import Wizard from '@data-driven-forms/common/src/wizard/wizard';
 import WizardNav from './wizard/wizard-nav';
 import WizardStepButtons from './wizard/step-buttons';
 
-const WizardInternal = ({ currentStep, formOptions, activeStepIndex, prevSteps, handleNext, handlePrev, buttonLabels, stepsInfo, onKeyDown }) => {
+const WizardInternal = ({ buttonLabels, stepsInfo }) => {
+  const { formOptions, currentStep, handlePrev, onKeyDown, handleNext, activeStepIndex, prevSteps } = useContext(WizardContext);
+
   const buttonLabelsFinal = {
     next: 'Continue',
     submit: 'Submit',
@@ -32,19 +35,6 @@ const WizardInternal = ({ currentStep, formOptions, activeStepIndex, prevSteps, 
 };
 
 WizardInternal.propTypes = {
-  currentStep: PropTypes.object,
-  handlePrev: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  jumpToStep: PropTypes.func,
-  setPrevSteps: PropTypes.func,
-  handleNext: PropTypes.func,
-  activeStepIndex: PropTypes.number,
-  formOptions: PropTypes.shape({
-    onCancel: PropTypes.func,
-    renderForm: PropTypes.func
-  }),
-  prevSteps: PropTypes.array,
-  // ^^ common props
   buttonLabels: PropTypes.object,
   stepsInfo: PropTypes.arrayOf(
     PropTypes.shape({
