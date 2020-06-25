@@ -15,7 +15,8 @@ const Menu = ({
   getInputProps,
   highlightedIndex,
   selectedItem,
-  isMulti
+  isMulti,
+  isFetching
 }) => {
   const filteredOptions = isSearchable ? filterOptions(options, filterValue) : options;
   return (
@@ -27,6 +28,7 @@ const Menu = ({
           noOptionsMessage={noOptionsMessage}
           noResultsMessage={noResultsMessage}
           getInputProps={getInputProps}
+          isFetching={isFetching}
         />
       )}
       {filteredOptions.map((item, index) => {

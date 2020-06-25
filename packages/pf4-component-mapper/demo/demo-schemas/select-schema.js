@@ -23,8 +23,47 @@ const options = [
   }
 ];
 
+const loadOptions = (inputValue = '') => {
+  return new Promise((res) =>
+    setTimeout(() => {
+      if (inputValue.length === 0) {
+        return res(options.slice(0, 3));
+      }
+
+      return res(options.filter(({ label }) => label.toLocaleLowerCase().includes(inputValue.toLocaleLowerCase())));
+    }, 1500)
+  );
+};
+
 const selectSchema = {
   fields: [
+    {
+      component: componentTypes.SELECT,
+      name: 'simple-async-select',
+      label: 'Simple async select',
+      loadOptions
+    },
+    {
+      component: componentTypes.SELECT,
+      name: 'simple-searchable-async-select',
+      label: 'Simple searchable async select',
+      loadOptions,
+      isSearchable: true
+    },
+    {
+      component: componentTypes.SELECT,
+      name: 'multi-async-select',
+      label: 'multi async select',
+      loadOptions,
+      isMulti: true
+    },
+    {
+      component: componentTypes.SELECT,
+      name: 'searchable-multi-async-select',
+      label: 'Multi searchable async select',
+      loadOptions,
+      isSearchable: true
+    },
     {
       component: componentTypes.SELECT,
       name: 'multi-simple-select',
@@ -79,4 +118,6 @@ const selectSchema = {
   ]
 };
 
-export default selectSchema;
+export default {
+  ...selectSchema
+};

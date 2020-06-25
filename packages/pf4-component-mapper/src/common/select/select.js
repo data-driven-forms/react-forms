@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import DataDrivenSelect from '@data-driven-forms/common/src/select';
 import parseInternalValue from '@data-driven-forms/common/src/select/parse-internal-value';
 import Downshift from 'downshift';
-import { CaretDownIcon, CloseIcon } from '@patternfly/react-icons';
+import { CaretDownIcon, CloseIcon, CircleNotchIcon } from '@patternfly/react-icons';
 import '@patternfly/react-styles/css/components/Select/select.css';
 import '@patternfly/react-styles/css/components/Chip/chip.css';
 import '@patternfly/react-styles/css/components/ChipGroup/chip-group.css';
@@ -109,6 +109,9 @@ const InternalSelect = ({
   isDisabled,
   isClearable,
   isMulti,
+  isFetching,
+  onInputChange,
+  loadingMessage,
   ...props
 }) => {
   const [showMore, setShowMore] = useState(false);
@@ -121,8 +124,13 @@ const InternalSelect = ({
       id={props.id || props.name}
       onChange={handleChange}
       itemToString={(value) => itemToString(value, isMulti, showMore, handleShowMore, handleChange)}
-      selectedItem={value}
+      selectedItem={value || ''}
       stateReducer={(state, changes) => stateReducer(state, changes, isMulti)}
+      onInputValueChange={(inputValue) => {
+        if (onInputChange && typeof inputValue === 'string') {
+          onInputChange(inputValue);
+        }
+      }}
     >
       {({ isOpen, inputValue, itemToString, selectedItem, clearSelection, getInputProps, getToggleButtonProps, getItemProps, highlightedIndex }) => {
         const toggleButtonProps = getToggleButtonProps();
@@ -134,13 +142,14 @@ const InternalSelect = ({
               </div>
               {isClearable && parsedValue && <ClearIndicator clearSelection={clearSelection} />}
               <span className="pf-c-select__toggle-arrow">
-                <CaretDownIcon />
+                {isFetching ? <CircleNotchIcon className="ddorg__pf4-component-mapper__select-loading-icon" /> : <CaretDownIcon />}
               </span>
             </div>
             {isOpen && (
               <Menu
                 noResultsMessage={noResultsMessage}
                 noOptionsMessage={noOptionsMessage}
+                isFetching={isFetching}
                 inputRef={inputRef}
                 isDisabled={isDisabled}
                 placeholder={placeholder}
@@ -180,7 +189,10 @@ InternalSelect.propTypes = {
   isClearable: PropTypes.bool,
   noResultsMessage: PropTypes.node,
   noOptionsMessage: PropTypes.func,
-  isMulti: PropTypes.bool
+  isMulti: PropTypes.bool,
+  isFetching: PropTypes.bool,
+  onInputChange: PropTypes.func,
+  loadingMessage: PropTypes.node
 };
 
 const Select = ({ selectVariant, menuIsPortal, ...props }) => {
