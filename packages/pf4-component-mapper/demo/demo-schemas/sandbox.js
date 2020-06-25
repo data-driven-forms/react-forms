@@ -133,8 +133,7 @@ const output = {
               ],
               component: components.SUB_FORM
             }
-          ],
-          component: components.TAB_ITEM
+          ]
         },
         {
           title: 'Tab 2',
@@ -240,8 +239,7 @@ const output = {
               ],
               component: components.SUB_FORM
             }
-          ],
-          component: components.TAB_ITEM
+          ]
         },
         {
           title: 'Tab 3',
@@ -418,8 +416,7 @@ const output = {
               ],
               component: components.SUB_FORM
             }
-          ],
-          component: components.TAB_ITEM
+          ]
         },
         {
           title: 'Tab 4',
@@ -464,8 +461,7 @@ const output = {
               ],
               component: components.SUB_FORM
             }
-          ],
-          component: components.TAB_ITEM
+          ]
         },
         {
           title: 'Mixed',
@@ -555,8 +551,7 @@ const output = {
               ],
               component: components.SUB_FORM
             }
-          ],
-          component: components.TAB_ITEM
+          ]
         }
       ],
       component: components.TABS,

@@ -48,7 +48,7 @@ export const baseExamples = [
   {
     component: componentTypes.TABS,
     link: componentTypes.TABS,
-    linkText: 'Tabs / Tab item'
+    linkText: 'Tabs'
   },
   {
     component: componentTypes.SUB_FORM,
