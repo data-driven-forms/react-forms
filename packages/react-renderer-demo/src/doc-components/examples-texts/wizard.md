@@ -1,78 +1,91 @@
-This a custom component. OnSubmit will send only values from visited steps.
-
-**Props**
-
-| Prop  | Type | Default |  Description |
-| ------------- | ------------- | ------------- | ------------- |
-| buttonLabels  | object of nodes  | see below  | Labels for buttons |
-| stepsInfo  | object  | undefined  | Information for building the stepper  |
-| ButtonContainerProps  | object  | {}  | Props passed to Grid wrapping buttons  |
-| StepperProps  | object  | {}  | Props passed to the Stepper component  |
-| WizardBodyProps  | object  | {}  | Props passed to Grid wrapping fields and the button container  |
-| WizardProps  | object  | {}  | Props passed to the root Grid |
-
-**Default buttonLabels**
-
-```jsx
-{
-  cancel: 'Cancel',
-  back: 'Back',
-  next: 'Next',
-  submit: 'Submit',
-}
-```
-
-You can rewrite only selection of them, e.g.
-
-```jsx
-{
-  submit: 'Deploy',
-}
-```
-
-(Others will stay default)
-
-**Format of stepsInfo**
-
-|Key|Type|Default|Description|
-|---|----|-------|-----------|
-|label/title|string|undefined|Text for the title|
-|StepLabelProps|object|{}|Props passed to StepLabel component|
-|StepProps|object|{}|Props passed to Step component|
-
-```jsx
-[
-      { title: 'Add a source', StepLabelProps: { style: { color: 'red' } } }, // step 1
-      { title: 'Configure a source' }, // step 2
-      { title: 'Summary' }, // step 3
-      ...
-],
-```
-
 **Docs for steps**
 
-| Props  | Type  |  Description |
-| ------------- | ------------- | ------------- |
-| name  | string, number | Name of the step |
-| nextStep  | object/stepKey of next step/function | See below |
-| fields  | array | As usual |
+|Props|Type|Description|
+|----|-------------|----------------|
+|name|string,number|Name of the step|
+|nextStep|object/stepKey of next step/function|See below|
+|fields|array|As usual|
 
-- nextStep can be name of the next step
-- or you can branch the way by using of object:
+**nextStep**
+
+A) **string** - no branching, name of the next step
+
+```jsx
+{
+  nextStep: 'next-step-name'
+}
+```
+
+B) **object** - simple branching
 
 ```jsx
 nextStep: {
-        when: 'source-type', // name of field, where deciding value is stored
+        when: 'source-type',
         stepMapper: {
-          aws: 'aws', // value: 'name' of next step
-          google: 'google',
+          aws: 'aws-step',
+          google: 'google-step',
           ...
         },
 },
 ```
 
-- another option is to use custom function. The custom function receives as the first argument an object with values and the function has to return a `name` in string.
+i.e.: When `source-type` is `asw` go to to the `aws-step`.
+
+C) **function** - complex branching
+
+another option is to use custom function. The custom function receives as the first argument an object with values and the function has to return a `name` in string.
 
 ```jsx
 nextStep: ({ values }) => (values.aws === '123' &&& values.password === 'secret') ? 'secretStep' : 'genericStep'
 ```
+
+**initialState**
+
+It is possible to set the initial state of the wizard component. This can be useful when an application returns users to a specific step.
+
+```jsx
+{
+  component: 'wizard',
+  ..., // fields, etc.
+  initialState: {
+    activeStep: 'second-step', // name of the active step
+    activeStepIndex: 1, // active index
+    maxStepIndex: 1, // max achieved index
+    prevSteps: ['first-step'], // array with names of previously visited steps
+    registeredFieldsHistory: { 'first-step': ['field'] }
+    // array of registered fields for each visited step
+    // only values from registered fields will be submitted
+  }
+}
+```
+
+How to get the state from existing wizard? The state is passed to both `onCancel` and `onSubmit`:
+
+A) `onSubmit` - `(values, formApi, wizardState) => ...`
+B) `onCancel` - `(values, wizardState) => ...`
+
+**WizardContext**
+
+Wizard share its configuration and props via `WizardContext`.
+
+```jsx
+import { WizardContext } from '@data-driven-forms/react-form-renderer';
+
+  const {
+    crossroads, // variables changing the navigation
+    formOptions, // modified formOptions with submit and cancel handlers
+    currentStep, // curent step object
+    handlePrev, // going back in the wizard
+    onKeyDown, // overrides form onKeyDown event for the wizard
+    jumpToStep, // jump to step, jumpToStep(index, formOptions.valid)
+    setPrevSteps, // rewrites the nav schema, use to change the navigation
+    handleNext, // jumps to the nextStep: handleNext(nextStep)
+    navSchema, // internal object representing the schema of current wizard flow
+    activeStepIndex, // active index of the step
+    maxStepIndex, // maximal achieved step
+    isDynamic, // if form is dynamic (= it is branching steps)
+    prevSteps // array with names of previous steps
+  } = useContext(WizardContext);
+```
+
+*This API is subject to change. If you implement custom components using these variables and functions, make sure that it is fully tested to prevent bugs when updating.*

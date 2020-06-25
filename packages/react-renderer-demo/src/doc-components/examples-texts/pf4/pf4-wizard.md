@@ -1,3 +1,5 @@
+import CommonWizard from '../wizard.md';
+
 This a custom component. OnSubmit will send only values from visited steps.
 
 Don't forget hide form controls by setting \`showFormControls\` to \`false\` as a prop of the renderer component.
@@ -43,40 +45,7 @@ With the help of `crossroads` you can manually defined which fields change next 
 
 Ex.: `crossroads: ['name', 'nested.password']`
 
-**Docs for steps**
-
-| Props  | Type  |  Description |
-| ------------- | ------------- | ------------- |
-| name  | string, number | For first step: 1, otherwise anything |
-| nextStep  | object/name of next step | See below |
-| fields  | array | As usual |
-| substepOf | string | Substep title (steps are grouped by this title) |
-| title | string | Step title |
-| buttons | node, func | Custom buttons component|
-|showTitle|bool|If true, step titles will (not if false) be shown in the wizard body|
-|customTitle|node|Use if you want to render as the title different/custom title (for example, title with a popover|
-|disableForwardJumping|bool|When use return to this step, jumping forward in the navigation is disabled.|
-
-
-- nextStep can be name of the next step
-- or you can branch the way by using of object:
-
-```jsx
-nextStep: {
-        when: 'source-type', // name of field, where deciding value is stored
-        stepMapper: {
-          aws: 'aws', // value: 'name' of next step
-          google: 'google',
-          ...
-        },
-},
-```
-
-- another option is to use custom function. The custom function receives as the first argument an object with values and the function has to return a `name` in string.
-
-```jsx
-nextStep: ({ values }) => (values.aws === '123' &&& values.password === 'secret') ? 'secretStep' : 'genericStep'
-```
+<CommonWizard />
 
 **Buttons**
 

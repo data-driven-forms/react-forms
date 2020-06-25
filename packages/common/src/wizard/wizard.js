@@ -1,14 +1,15 @@
 import React, { useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useFormApi } from '@data-driven-forms/react-form-renderer';
+import { useFormApi, WizardContext } from '@data-driven-forms/react-form-renderer';
 
 import get from 'lodash/get';
 import set from 'lodash/set';
 import flattenDeep from 'lodash/flattenDeep';
 import handleEnter from './enter-handler';
 import reducer, { DYNAMIC_WIZARD_TYPES, findCurrentStep } from './reducer';
+import selectNext from './select-next';
 
-const Wizard = ({ fields, isDynamic, crossroads, Wizard, component, ...props }) => {
+const Wizard = ({ fields, isDynamic, crossroads, Wizard, component, initialState, ...props }) => {
   const formOptions = useFormApi();
 
   const [state, dispatch] = useReducer(reducer, {
@@ -16,6 +17,7 @@ const Wizard = ({ fields, isDynamic, crossroads, Wizard, component, ...props }) 
     prevSteps: [],
     activeStepIndex: 0,
     maxStepIndex: 0,
+    ...initialState,
     isDynamic: isDynamic || fields.some(({ nextStep }) => DYNAMIC_WIZARD_TYPES.includes(typeof nextStep)),
     loading: true
   });
@@ -45,10 +47,13 @@ const Wizard = ({ fields, isDynamic, crossroads, Wizard, component, ...props }) 
     return finalObject;
   };
 
+  const onCancel = () => formOptions.onCancel(state);
+
   const handleSubmit = () =>
     formOptions.onSubmit(
       prepareValues(formOptions.getState().values, [...state.prevSteps, state.activeStep], formOptions.getRegisteredFields),
-      formOptions
+      formOptions,
+      state
     );
 
   const jumpToStep = (index, valid) => dispatch({ type: 'jumpToStep', payload: { index, valid, fields, crossroads, formOptions } });
@@ -64,25 +69,30 @@ const Wizard = ({ fields, isDynamic, crossroads, Wizard, component, ...props }) 
   const onKeyDown = (e) => handleEnter(e, formOptions, state.activeStep, findCurrentStepWrapped, handleNext, handleSubmit);
 
   return (
-    <Wizard
-      {...props}
-      handleNext={handleNext}
-      onKeyDown={onKeyDown}
-      setPrevSteps={setPrevSteps}
-      currentStep={findCurrentStep(state.activeStep, fields)}
-      jumpToStep={jumpToStep}
-      handlePrev={handlePrev}
-      formOptions={{
-        ...formOptions,
-        handleSubmit
+    <WizardContext.Provider
+      value={{
+        handleNext,
+        onKeyDown,
+        setPrevSteps,
+        currentStep: findCurrentStep(state.activeStep, fields),
+        jumpToStep,
+        handlePrev,
+        formOptions: {
+          ...formOptions,
+          onCancel,
+          handleSubmit
+        },
+        navSchema: state.navSchema,
+        activeStepIndex: state.activeStepIndex,
+        maxStepIndex: state.maxStepIndex,
+        isDynamic: state.isDynamic,
+        crossroads,
+        prevSteps: state.prevSteps,
+        selectNext
       }}
-      navSchema={state.navSchema}
-      activeStepIndex={state.activeStepIndex}
-      maxStepIndex={state.maxStepIndex}
-      isDynamic={state.isDynamic}
-      crossroads={crossroads}
-      prevSteps={state.prevSteps}
-    />
+    >
+      <Wizard {...props} />
+    </WizardContext.Provider>
   );
 };
 
@@ -95,7 +105,8 @@ Wizard.propTypes = {
   isDynamic: PropTypes.bool,
   crossroads: PropTypes.arrayOf(PropTypes.string),
   Wizard: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  component: PropTypes.any
+  component: PropTypes.any,
+  initialState: PropTypes.object
 };
 
 export default Wizard;

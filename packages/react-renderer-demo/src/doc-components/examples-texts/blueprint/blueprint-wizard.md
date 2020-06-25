@@ -1,3 +1,5 @@
+import CommonWizard from '../wizard.md';
+
 This a custom component. OnSubmit will send only values from visited steps.
 
 **Props**
@@ -34,30 +36,4 @@ You can rewrite only selection of them, e.g.
 
 (Others will stay default)
 
-**Docs for steps**
-
-| Props  | Type  |  Description |
-| ------------- | ------------- | ------------- |
-| name  | string, number | Name of the step |
-| nextStep  | object/stepKey of next step/function | See below |
-| fields  | array | As usual |
-
-- nextStep can be name of the next step
-- or you can branch the way by using of object:
-
-```jsx
-nextStep: {
-        when: 'source-type', // name of field, where deciding value is stored
-        stepMapper: {
-          aws: 'aws', // value: 'name' of next step
-          google: 'google',
-          ...
-        },
-},
-```
-
-- another option is to use custom function. The custom function receives as the first argument an object with values and the function has to return a `name` in string.
-
-```jsx
-nextStep: ({ values }) => (values.aws === '123' &&& values.password === 'secret') ? 'secretStep' : 'genericStep'
-```
+<CommonWizard />

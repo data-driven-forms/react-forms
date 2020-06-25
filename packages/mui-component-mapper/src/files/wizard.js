@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+
+import { WizardContext } from '@data-driven-forms/react-form-renderer';
 
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,21 +18,9 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const WizardInternal = ({
-  currentStep,
-  formOptions,
-  activeStepIndex,
-  prevSteps,
-  handleNext,
-  handlePrev,
-  buttonLabels,
-  stepsInfo,
-  ButtonContainerProps,
-  StepperProps,
-  WizardBodyProps,
-  WizardProps,
-  onKeyDown
-}) => {
+const WizardInternal = ({ buttonLabels, stepsInfo, ButtonContainerProps, StepperProps, WizardBodyProps, WizardProps }) => {
+  const { formOptions, currentStep, handlePrev, onKeyDown, handleNext, activeStepIndex, prevSteps } = useContext(WizardContext);
+
   const classes = useStyles();
 
   const buttonLabelsFinal = {
@@ -61,19 +51,6 @@ const WizardInternal = ({
 };
 
 WizardInternal.propTypes = {
-  currentStep: PropTypes.object,
-  handlePrev: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  jumpToStep: PropTypes.func,
-  setPrevSteps: PropTypes.func,
-  handleNext: PropTypes.func,
-  activeStepIndex: PropTypes.number,
-  formOptions: PropTypes.shape({
-    onCancel: PropTypes.func,
-    renderForm: PropTypes.func
-  }),
-  prevSteps: PropTypes.array,
-  // ^^ common props
   buttonLabels: PropTypes.object,
   stepsInfo: PropTypes.arrayOf(
     PropTypes.shape({

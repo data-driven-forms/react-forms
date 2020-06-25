@@ -1,8 +1,8 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useContext } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-import { FormSpy } from '@data-driven-forms/react-form-renderer';
-import Wizard, { wizardProps } from '@data-driven-forms/common/src/wizard/wizard';
+import { FormSpy, WizardContext } from '@data-driven-forms/react-form-renderer';
+import Wizard from '@data-driven-forms/common/src/wizard/wizard';
 
 import { Bullseye, Backdrop, WizardNav, WizardHeader } from '@patternfly/react-core';
 
@@ -26,33 +26,34 @@ const Modal = ({ children, container, inModal }) =>
 
 const WizardInternal = ({
   inModal,
-  crossroads,
   title,
   description,
   buttonLabels,
   buttonsClassName,
   showTitles,
-  formOptions,
-  currentStep,
-  handlePrev,
-  onKeyDown,
-  jumpToStep,
-  setPrevSteps,
-  handleNext,
-  navSchema,
-  activeStepIndex,
-  maxStepIndex,
-  isDynamic,
   container,
   hideClose,
   titleId,
   descriptionId,
   closeButtonAriaLabel,
   hasNoBodyPadding,
-  prevSteps,
   navAriaLabel,
   ...rest
 }) => {
+  const {
+    crossroads,
+    formOptions,
+    currentStep,
+    handlePrev,
+    onKeyDown,
+    jumpToStep,
+    setPrevSteps,
+    handleNext,
+    navSchema,
+    activeStepIndex,
+    maxStepIndex,
+    isDynamic
+  } = useContext(WizardContext);
   const [state, dispatch] = useReducer(reducer, { loading: true, container });
 
   useEffect(() => {
@@ -149,16 +150,14 @@ WizardInternal.propTypes = {
   title: PropTypes.any,
   description: PropTypes.any,
   inModal: PropTypes.bool,
-  isDynamic: PropTypes.bool,
   showTitles: PropTypes.bool,
-  crossroads: PropTypes.arrayOf(PropTypes.string),
   hideClose: PropTypes.bool,
   titleId: PropTypes.string,
   descriptionId: PropTypes.string,
   closeButtonAriaLabel: PropTypes.string,
   hasNoBodyPadding: PropTypes.bool,
   navAriaLabel: PropTypes.string,
-  ...wizardProps
+  container: PropTypes.instanceOf(Element)
 };
 
 const defaultLabels = {

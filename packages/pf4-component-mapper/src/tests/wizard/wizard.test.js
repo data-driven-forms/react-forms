@@ -308,36 +308,70 @@ describe('<Wizard />', () => {
     nextButtonClick(wrapper);
 
     const formOptions = expect.any(Object);
+    const state = {
+      activeStep: '2',
+      activeStepIndex: 1,
+      isDynamic: false,
+      loading: false,
+      maxStepIndex: 1,
+      navSchema: [
+        { index: 0, primary: true, substepOf: undefined, title: 'foo-step' },
+        { index: 1, primary: true, substepOf: undefined, title: 'bar-step' }
+      ],
+      prevSteps: ['1'],
+      registeredFieldsHistory: { 1: ['foo-field'] }
+    };
 
     expect(onSubmit).toHaveBeenCalledWith(
       {
         'foo-field': 'foo-field-value',
         'bar-field': 'bar-field-value'
       },
-      formOptions
+      formOptions,
+      state
     );
   });
 
-  it('should pass values to cancel button', () => {
+  it('should pass values and state to cancel button', () => {
     const onCancel = jest.fn();
 
-    const wrapper = mount(<FormRenderer {...initialProps} onCancel={(values) => onCancel(values)} initialValues={initialValues} />);
+    const wrapper = mount(<FormRenderer {...initialProps} onCancel={(values, state) => onCancel(values, state)} initialValues={initialValues} />);
 
     cancelButtonClick(wrapper);
 
-    expect(onCancel).toHaveBeenCalledWith(initialValues);
+    const state = expect.objectContaining({
+      activeStep: expect.any(String),
+      activeStepIndex: expect.any(Number),
+      isDynamic: expect.any(Boolean),
+      loading: expect.any(Boolean),
+      maxStepIndex: expect.any(Number),
+      navSchema: expect.any(Object),
+      prevSteps: expect.any(Array)
+    });
+
+    expect(onCancel).toHaveBeenCalledWith(initialValues, state);
   });
 
-  it('should pass values to cancel - close icon', () => {
+  it('should pass values and state to cancel - close icon', () => {
     const onCancel = jest.fn();
 
     const wrapper = mount(
-      <FormRenderer {...initialProps} onCancel={(values) => onCancel(values)} initialValues={initialValues} schema={schemaWithHeader} />
+      <FormRenderer {...initialProps} onCancel={(values, state) => onCancel(values, state)} initialValues={initialValues} schema={schemaWithHeader} />
     );
 
     closeIconClickWithHeader(wrapper);
 
-    expect(onCancel).toHaveBeenCalledWith(initialValues);
+    const state = expect.objectContaining({
+      activeStep: expect.any(String),
+      activeStepIndex: expect.any(Number),
+      isDynamic: expect.any(Boolean),
+      loading: expect.any(Boolean),
+      maxStepIndex: expect.any(Number),
+      navSchema: expect.any(Object),
+      prevSteps: expect.any(Array)
+    });
+
+    expect(onCancel).toHaveBeenCalledWith(initialValues, state);
   });
 
   it('should submit data when nested schema', () => {
@@ -349,6 +383,7 @@ describe('<Wizard />', () => {
     nextButtonClick(wrapper);
 
     const formOptions = expect.any(Object);
+    const state = expect.any(Object);
 
     expect(onSubmit).toHaveBeenCalledWith(
       {
@@ -359,7 +394,8 @@ describe('<Wizard />', () => {
           }
         }
       },
-      formOptions
+      formOptions,
+      state
     );
   });
 

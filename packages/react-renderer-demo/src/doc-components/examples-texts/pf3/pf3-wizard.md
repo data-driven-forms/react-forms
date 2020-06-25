@@ -1,3 +1,5 @@
+import CommonWizard from '../wizard.md';
+
 This a custom component. OnSubmit will send only values from visited steps.
 
 **Props**
@@ -43,27 +45,7 @@ You can rewrite only selection of them, e.g.
 
 ![image](https://user-images.githubusercontent.com/32869456/52336077-393c4e00-2a04-11e9-9aad-d591515cdba6.png)
 
-**Docs for steps**
-
-| Props  | Type  |  Description |
-| ------------- | ------------- | ------------- |
-| stepKey  | string, number | For first step: 1, otherwise anything |
-| nextStep  | object/stepKey of next step | See below |
-| fields  | array | As usual |
-
-- nextStep can be stepKey of the next step
-- or you can branch the way by using of object:
-
-```jsx
-nextStep: {
-        when: 'source-type', // name of field, where deciding value is stored
-        stepMapper: {
-          aws: 'aws', // value: 'stepKey' of next step
-          google: 'google',
-          ...
-        },
-},
-```
+<CommonWizard />
 
 **Useful links**
 

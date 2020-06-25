@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import WizardStep from './wizard/wizard-step';
 import PropTypes from 'prop-types';
 import { Wizard as PfWizard, Modal, Icon } from 'patternfly-react';
-import Wizard, { wizardProps } from '@data-driven-forms/common/src/wizard/wizard';
+import { WizardContext } from '@data-driven-forms/react-form-renderer';
+import Wizard from '@data-driven-forms/common/src/wizard/wizard';
 
 const defaultButtonLabels = {
   cancel: 'Cancel',
@@ -11,7 +12,9 @@ const defaultButtonLabels = {
   submit: 'Submit'
 };
 
-const WizardInternal = ({ title, buttonLabels, stepsInfo, inModal, onKeyDown, formOptions, handleNext, handlePrev, prevSteps, currentStep }) => {
+const WizardInternal = ({ title, buttonLabels, stepsInfo, inModal }) => {
+  const { formOptions, currentStep, handlePrev, onKeyDown, handleNext, prevSteps } = useContext(WizardContext);
+
   const renderSteps = () =>
     stepsInfo.map((step, stepIndex) => (
       <PfWizard.Step
@@ -58,14 +61,7 @@ WizardInternal.propTypes = {
   title: PropTypes.node,
   buttonLabels: PropTypes.object,
   stepsInfo: PropTypes.array,
-  inModal: PropTypes.bool,
-  ...wizardProps
-};
-
-WizardInternal.defaultProps = {
-  title: undefined,
-  stepsInfo: undefined,
-  inModal: false
+  inModal: PropTypes.bool
 };
 
 const WizardFinal = (props) => <Wizard Wizard={WizardInternal} {...props} />;

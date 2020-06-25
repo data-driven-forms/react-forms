@@ -415,7 +415,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                         name="wizard"
                       >
                         <WizardInternal
-                          activeStepIndex={0}
                           buttonLabels={
                             Object {
                               "back": "Back",
@@ -424,88 +423,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                               "submit": "Submit",
                             }
                           }
-                          currentStep={
-                            Object {
-                              "fields": Array [
-                                Object {
-                                  "component": "text-field",
-                                  "name": "foo-field",
-                                },
-                              ],
-                              "name": "1",
-                              "nextStep": "2",
-                              "title": "foo-step",
-                            }
-                          }
-                          formOptions={
-                            Object {
-                              "batch": [Function],
-                              "blur": [Function],
-                              "change": [Function],
-                              "clearOnUnmount": false,
-                              "clearedValue": undefined,
-                              "concat": [Function],
-                              "destroyOnUnregister": false,
-                              "focus": [Function],
-                              "getFieldState": [Function],
-                              "getRegisteredFields": [Function],
-                              "getState": [Function],
-                              "handleSubmit": [Function],
-                              "initialize": [Function],
-                              "insert": [Function],
-                              "isValidationPaused": [Function],
-                              "move": [Function],
-                              "onCancel": [Function],
-                              "onReset": [Function],
-                              "onSubmit": [MockFunction],
-                              "pauseValidation": [Function],
-                              "pop": [Function],
-                              "pristine": true,
-                              "push": [Function],
-                              "registerField": [Function],
-                              "registerInputFile": [Function],
-                              "remove": [Function],
-                              "removeBatch": [Function],
-                              "renderForm": [Function],
-                              "reset": [Function],
-                              "resetFieldState": [Function],
-                              "resumeValidation": [Function],
-                              "setConfig": [Function],
-                              "shift": [Function],
-                              "submit": [Function],
-                              "subscribe": [Function],
-                              "swap": [Function],
-                              "unRegisterInputFile": [Function],
-                              "unshift": [Function],
-                              "update": [Function],
-                              "valid": true,
-                            }
-                          }
-                          handleNext={[Function]}
-                          handlePrev={[Function]}
-                          isDynamic={false}
-                          jumpToStep={[Function]}
-                          maxStepIndex={0}
                           name="wizard"
-                          navSchema={
-                            Array [
-                              Object {
-                                "index": 0,
-                                "primary": true,
-                                "substepOf": undefined,
-                                "title": "foo-step",
-                              },
-                              Object {
-                                "index": 1,
-                                "primary": true,
-                                "substepOf": undefined,
-                                "title": "bar-step",
-                              },
-                            ]
-                          }
-                          onKeyDown={[Function]}
-                          prevSteps={Array []}
-                          setPrevSteps={[Function]}
                         >
                           <Modal>
                             <div
@@ -1437,7 +1355,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                         name="wizard"
                       >
                         <WizardInternal
-                          activeStepIndex={0}
                           buttonLabels={
                             Object {
                               "back": "Back",
@@ -1446,89 +1363,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                               "submit": "Submit",
                             }
                           }
-                          currentStep={
-                            Object {
-                              "fields": Array [
-                                Object {
-                                  "component": "text-field",
-                                  "name": "foo-field",
-                                },
-                              ],
-                              "name": "1",
-                              "nextStep": "2",
-                              "title": "foo-step",
-                            }
-                          }
-                          formOptions={
-                            Object {
-                              "batch": [Function],
-                              "blur": [Function],
-                              "change": [Function],
-                              "clearOnUnmount": false,
-                              "clearedValue": undefined,
-                              "concat": [Function],
-                              "destroyOnUnregister": false,
-                              "focus": [Function],
-                              "getFieldState": [Function],
-                              "getRegisteredFields": [Function],
-                              "getState": [Function],
-                              "handleSubmit": [Function],
-                              "initialize": [Function],
-                              "insert": [Function],
-                              "isValidationPaused": [Function],
-                              "move": [Function],
-                              "onCancel": [Function],
-                              "onReset": [Function],
-                              "onSubmit": [MockFunction],
-                              "pauseValidation": [Function],
-                              "pop": [Function],
-                              "pristine": true,
-                              "push": [Function],
-                              "registerField": [Function],
-                              "registerInputFile": [Function],
-                              "remove": [Function],
-                              "removeBatch": [Function],
-                              "renderForm": [Function],
-                              "reset": [Function],
-                              "resetFieldState": [Function],
-                              "resumeValidation": [Function],
-                              "setConfig": [Function],
-                              "shift": [Function],
-                              "submit": [Function],
-                              "subscribe": [Function],
-                              "swap": [Function],
-                              "unRegisterInputFile": [Function],
-                              "unshift": [Function],
-                              "update": [Function],
-                              "valid": true,
-                            }
-                          }
-                          handleNext={[Function]}
-                          handlePrev={[Function]}
                           inModal={true}
-                          isDynamic={false}
-                          jumpToStep={[Function]}
-                          maxStepIndex={0}
                           name="wizard"
-                          navSchema={
-                            Array [
-                              Object {
-                                "index": 0,
-                                "primary": true,
-                                "substepOf": undefined,
-                                "title": "foo-step",
-                              },
-                              Object {
-                                "index": 1,
-                                "primary": true,
-                                "substepOf": undefined,
-                                "title": "bar-step",
-                              },
-                            ]
-                          }
-                          onKeyDown={[Function]}
-                          prevSteps={Array []}
-                          setPrevSteps={[Function]}
                         >
                           <Modal
                             container={
