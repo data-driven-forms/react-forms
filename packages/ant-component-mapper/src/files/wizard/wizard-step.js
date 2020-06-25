@@ -4,7 +4,7 @@ import WizardStepButtons from './step-buttons';
 
 const style = {
   minHeight: '250px'
-}
+};
 
 const WizardStep = ({ fields, formOptions, ...rest }) => (
   <Fragment>

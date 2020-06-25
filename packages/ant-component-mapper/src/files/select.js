@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import AntForm from '../common/form-wrapper';
 import { validationError } from '../common/helpers';
-import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
 import { Select as AntSelect } from 'antd';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
@@ -33,10 +32,11 @@ const Select = (props) => {
     <AntForm layout="vertical" label={label} isRequired={isRequired} invalid={invalid} help={invalid || helperText || description}>
       <AntSelect
         {...input}
+        value={input.value ? input.value : undefined}
         defaultValue={input.value ? input.value : undefined}
         placeholder={placeholder || 'Please choose'}
-        mode={rest.isMulti ? 'tags' : ''}
-        showSearch={!!isSearchable}
+        mode={rest.isMulti ? 'multiple' : ''}
+        showSearch={!!isSearchable || rest.isMulti}
         filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
         required={isRequired}
         allowClear={isClearable}
@@ -60,8 +60,6 @@ const Select = (props) => {
 };
 
 Select.propTypes = {
-  input,
-  meta,
   isReadOnly: PropTypes.bool,
   isClearable: PropTypes.bool,
   isDisabled: PropTypes.bool,

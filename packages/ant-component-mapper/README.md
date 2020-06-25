@@ -1,4 +1,4 @@
-[![npm version](https://badge.fury.io/js/%40data-driven-forms%2Fmui-component-mapper.svg)](https://badge.fury.io/js/%40data-driven-forms%2Fmui-component-mapper)
+[![npm version](https://badge.fury.io/js/%40data-driven-forms%2Fant-component-mapper.svg)](https://badge.fury.io/js/%40data-driven-forms%2Fant-component-mapper)
 
 [![Data Driven Form logo](images/logo.png)](https://data-driven-forms.org/)
 
@@ -6,13 +6,11 @@ Material-UI component mapper for [Data Driven Forms](https://github.com/data-dri
 
 :book: For more information please visit the [documentation](https://data-driven-forms.org/). :book:
 
-Used by [ManageIQ](http://manageiq.org/), Red Hat Cloud Services.
-
 **Table of Contents**
 
 - [Installation](#installation)
   - [React Form Renderer](#react-form-renderer)
-  - [MUI mapper](#mui-mapper)
+  - [ANT mapper](#ant-mapper)
 - [Usage](#usage)
 - [Basic provided components](#basic-provided-components)
 - [Useful links](#useful-links)
@@ -39,14 +37,14 @@ $ yarn add @data-driven-forms/react-form-renderer
 
 Optionally you can install one of provided mappers:
 
-#### [MUI mapper](https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper)
+#### [ANT mapper](https://www.npmjs.com/package/@data-driven-forms/ant-component-mapper)
 
 ```console
-$ npm install @data-driven-forms/mui-component-mapper -S
+$ npm install @data-driven-forms/ant-component-mapper -S
 ```
 
 ```console
-$ yarn add @data-driven-forms/mui-component-mapper
+$ yarn add @data-driven-forms/ant-component-mapper
 ```
 
 
@@ -57,7 +55,7 @@ For using Data Driven Forms in your component you need the renderer and a compon
 ```jsx
 import React from 'react';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
-import { componentMapper, layoutMapper } from '@data-driven-forms/mui-component-mapper';
+import { componentMapper, layoutMapper } from '@data-driven-forms/ant-component-mapper';
 
 const schema = {
   fields: [{
@@ -100,7 +98,7 @@ Data Driven Forms supports all kinds of component, basic set is consisted of:
 - [Material-UI documentation](https://material-ui.com/)
 - NPM
   - [React Form Renderer](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)
-  - [MaterialUI Mapper](https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper)
+  - [MaterialUI Mapper](https://www.npmjs.com/package/@data-driven-forms/ant-component-mapper)
 
 
 ### Development setup
@@ -124,7 +122,7 @@ yarn build
 Each package has a small playground `package/demo`, where you can test your changes.
 
 ```console
-cd packages/mui-component-mapper
+cd packages/ant-component-mapper
 yarn start
 ```
 
@@ -144,7 +142,7 @@ Tests needed to be run from the core folder.
 ```console
 yarn test
 
-yarn test packages/mui-component-mapper
+yarn test packages/ant-component-mapper
 ```
 
 #### Commits
@@ -156,7 +154,7 @@ Format:
 ```
 [type]([package]): message
 
-fix(mui): title accepts node
+fix(ant): title accepts node
 ```
 
 Types:

@@ -20,7 +20,9 @@ const antExternals = createFilter(
     'react-dom',
     'prop-types',
     '@data-driven-forms/react-form-renderer',
-    'antd/**'
+    'antd/**',
+    '@data-driven-forms/react-form-renderer/**',
+    'antd'
   ],
   null,
   { resolve: false }

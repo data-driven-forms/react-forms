@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { DatePicker as AntDatePicker } from 'antd';
 import { validationError } from '../common/helpers';
-import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import AntForm from '../common/form-wrapper';
 
@@ -28,8 +27,6 @@ const DatePicker = (props) => {
 };
 
 DatePicker.propTypes = {
-  input,
-  meta,
   isReadOnly: PropTypes.bool,
   isDisabled: PropTypes.bool,
   placeholder: PropTypes.node,

@@ -8,10 +8,9 @@ const { TabPane } = Tabs;
 
 const FormTabs = ({ fields }) => {
   const formOptions = useFormApi();
-  //const [activeTab, setActiveTab] = useState(0);
   return (
     <div>
-      <Tabs /* defaultActiveKey={} */>
+      <Tabs>
         {fields.map(({ fields, title, name }, index) => (
           <TabPane tab={title} key={name}>
             {formOptions.renderForm(fields, formOptions)}

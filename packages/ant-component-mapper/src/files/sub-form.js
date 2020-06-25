@@ -33,8 +33,8 @@ const SubForm = ({ fields, title, description, FormSpyProvider: _FormSpyProvider
 
 SubForm.propTypes = {
   fields: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
-  title: PropTypes.string,
-  description: PropTypes.string,
+  title: PropTypes.node,
+  description: PropTypes.node,
   FormSpyProvider: PropTypes.any,
   validate: PropTypes.any
 };

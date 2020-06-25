@@ -36,13 +36,10 @@ Data Driven Forms is a React library used for rendering and managing forms with 
   - [Material-UI Mapper](#material-ui-mapper)
   - [PatternFly 3 Mapper](#patternfly-3-mapper)
   - [PatternFly 4 Mapper](#patternfly-4-mapper)
-<<<<<<< HEAD
   - [BlueprintJS Mapper](#blueprintjs-mapper)
   - [Semantic UI Mapper](#semantic-ui-mapper)
-=======
   - [Material-UI Mapper](#material-ui-mapper)
   - [Ant Design Mapper](#ant-design-mapper)
->>>>>>> Added wizard.js
 - [Usage](#usage)
   - [Custom mapper](#custom-mapper)
 - [Basic provided components](#basic-provided-components)
@@ -112,7 +109,6 @@ $ npm install @data-driven-forms/blueprint-component-mapper -S
 $ yarn add @data-driven-forms/blueprint-component-mapper
 ```
 
-<<<<<<< HEAD
 #### [Semantic UI Mapper](https://data-driven-forms.org/mappers/suir-component-mapper)
 
 ```console
@@ -125,7 +121,6 @@ $ yarn add @data-driven-forms/suir-component-mapper
 
 Component libraries in mappers are external dependencies. Make sure to install them in your bundles.
 
-=======
 #### [Ant Design Mapper](https://www.npmjs.com/package/@data-driven-forms/ant-component-mapper)
 
 ```console
@@ -136,7 +131,6 @@ $ npm install @data-driven-forms/ant-component-mapper -S
 $ yarn add @data-driven-forms/ant-component-mapper
 ```
 
->>>>>>> Added wizard.js
 ### Usage
 
 In order to Data Driven Forms in your component you need the renderer and a component mapper, which provides component mapper and form template.

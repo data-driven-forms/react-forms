@@ -1,11 +1,8 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-// import Button from '../button';
 import { Button } from 'antd';
 
 import { useFieldApi, useFormApi } from '@data-driven-forms/react-form-renderer';
-
-// import './button.scss';
 
 const SimpleNext = ({ next, handleNext, submit, buttonLabels, disabled }) => {
   const { valid } = useFormApi();
@@ -13,7 +10,6 @@ const SimpleNext = ({ next, handleNext, submit, buttonLabels, disabled }) => {
   return (
     <Button type="primary" htmlType="button" onClick={() => (valid ? handleNext(next) : submit())} disabled={disabled}>
       {buttonLabels.next}
-      {/* <Icon type="fa" name="angle-right" /> */}
     </Button>
   );
 };
@@ -61,13 +57,7 @@ const renderNextButton = ({ nextStep, handleSubmit, buttonLabels, ...rest }) =>
 const WizardStepButtons = ({ disableBack, handlePrev, nextStep, formOptions, handleNext, buttonLabels }) => (
   <Fragment>
     {formOptions.onCancel && (
-      <Button
-        className="ddorg__pf3-component-mapper__wizard__buttons"
-        type="button"
-        variant="contained"
-        color="secondary"
-        onClick={formOptions.onCancel}
-      >
+      <Button type="button" variant="contained" color="secondary" onClick={formOptions.onCancel}>
         {buttonLabels.cancel}
       </Button>
     )}

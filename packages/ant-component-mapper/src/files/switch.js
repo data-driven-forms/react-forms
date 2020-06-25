@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch as AntSwitch } from 'antd';
-import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
 import AntForm from '../common/form-wrapper';
 import { validationError } from '../common/helpers';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
@@ -15,7 +14,7 @@ export const Switch = (props) => {
   const text = invalid || helperText || description;
   const { name, value, onChange, onBlur } = input;
   return (
-    <AntForm help={text} invalid={invalid} isRequired={isRequired} error={!!invalid} label={input.checked ? onText || label : offText || label}>
+    <AntForm help={text} invalid={invalid} isRequired={isRequired} error={!!invalid} label={label}>
       <AntSwitch
         {...rest}
         defaultValue={input.value ? input.value : undefined}
@@ -23,6 +22,8 @@ export const Switch = (props) => {
         value={value}
         name={name}
         onClick={onBlur}
+        checkedChildren={onText}
+        unCheckedChildren={offText}
         disabled={isDisabled || isReadOnly}
       />
     </AntForm>
@@ -30,8 +31,6 @@ export const Switch = (props) => {
 };
 
 Switch.propTypes = {
-  input,
-  meta,
   isReadOnly: PropTypes.bool,
   isDisabled: PropTypes.bool,
   isRequired: PropTypes.bool,
