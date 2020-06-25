@@ -34,6 +34,14 @@ const selectSchema = {
     },
     {
       component: componentTypes.SELECT,
+      name: 'multi-searchable-select',
+      label: 'Searchable multi select',
+      options,
+      isMulti: true,
+      isSearchable: true
+    },
+    {
+      component: componentTypes.SELECT,
       name: 'simple-select',
       label: 'Simple-select',
       options

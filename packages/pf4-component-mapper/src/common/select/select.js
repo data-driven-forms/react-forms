@@ -84,7 +84,13 @@ const stateReducer = (state, changes, keepMenuOpen) => {
       return {
         ...changes,
         isOpen: keepMenuOpen ? state.isOpen : !state.isOpen,
-        highlightedIndex: state.highlightedIndex
+        highlightedIndex: state.highlightedIndex,
+        inputValue: state.inputValue // prevent filter value change after option click
+      };
+    case Downshift.stateChangeTypes.controlledPropUpdatedSelectedItem:
+      return {
+        ...changes,
+        inputValue: typeof changes.inputValue === 'string' ? changes.inputValue : state.inputValue
       };
     default:
       return changes;

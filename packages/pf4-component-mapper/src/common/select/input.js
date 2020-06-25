@@ -4,19 +4,23 @@ import { Divider } from '@patternfly/react-core';
 
 import './input.scss';
 
-const Input = ({ inputRef, isSearchable, isDisabled, getInputProps, ...props }) => {
+const Input = ({ inputRef, isSearchable, isDisabled, getInputProps, value, ...props }) => {
+  const inputProps = getInputProps({ disabled: isDisabled });
   return (
     <Fragment>
       <div className="pf-c-select__menu-search">
         <input
           autoFocus
+          value=""
           {...props}
           {...(!isSearchable && { tabIndex: '-1' })}
           className="pf-c-form-control pf-m-search"
           ref={inputRef}
-          {...getInputProps({
-            disabled: isDisabled
-          })}
+          {...{
+            ...inputProps,
+            value: inputProps.value || '',
+            onChange: inputProps.onChange || Function
+          }}
         />
       </div>
       <Divider />
