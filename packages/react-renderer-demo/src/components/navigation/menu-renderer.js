@@ -134,7 +134,7 @@ const Menu = ({ schema, searchRef }) => {
   const router = useRouter();
   const [value, setValue] = useState('');
   const classes = useStyles();
-  const currentLocation = router.pathname.split('/');
+  const currentLocation = router.asPath.replace(/\?.*/, '').split('/');
 
   const schemaFiltered = value !== '' ? search(schema, value) : current(schema, currentLocation);
 
