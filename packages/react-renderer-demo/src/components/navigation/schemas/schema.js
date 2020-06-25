@@ -1,5 +1,4 @@
 import { baseExamples } from '../examples-definitions';
-import { mappers } from '../mappers';
 import flatMap from 'lodash/flatMap';
 import schemaRenderer from './renderer.schema';
 import schemaNav from './schema.schema';
