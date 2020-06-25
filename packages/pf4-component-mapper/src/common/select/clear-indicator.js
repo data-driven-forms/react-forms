@@ -5,15 +5,17 @@ import { TimesCircleIcon } from '@patternfly/react-icons';
 import './clear-indicator.scss';
 
 const ClearIndicator = ({ clearSelection }) => (
-  <span
+  <button
     onClick={(event) => {
       clearSelection();
       event.stopPropagation();
     }}
-    className="ddorg__pf4-component-mapper__select-clear-indicator pf-u-pr-md pf-u-pl-md"
+    className="pf-c-button pf-m-plain pf-c-select__toggle-clear pf-u-p-0"
+    type="button"
+    aria-label="Clear all"
   >
     <TimesCircleIcon />
-  </span>
+  </button>
 );
 
 ClearIndicator.propTypes = {
