@@ -9,24 +9,24 @@ const mappersSchema = [
     link: 'custom-mapper'
   },
   {
-    linkText: 'blueprint-mapper',
-    link: 'Blueprint mapper'
+    link: 'blueprint-component-mapper',
+    linkText: 'Blueprint mapper'
   },
   {
-    linkText: 'mui-mapper',
-    link: 'Material UI mapper'
+    link: 'mui-component-mapper',
+    linkText: 'Material UI mapper'
   },
   {
-    linkText: 'pf3-mapper',
-    link: 'PF3 mapper'
+    link: 'pf3-component-mapper',
+    linkText: 'PF3 mapper'
   },
   {
-    linkText: 'pf4-mapper',
-    link: 'PF4 mapper'
+    link: 'pf4-component-mapper',
+    linkText: 'PF4 mapper'
   },
   {
-    linkText: 'suir-mapper',
-    link: 'Semantic UI mapper'
+    link: 'suir-component-mapper',
+    linkText: 'Semantic UI mapper'
   },
   {
     subHeader: true,
@@ -42,16 +42,16 @@ const mappersSchema = [
     title: 'Schema mappers'
   },
   {
-    linkText: 'action-mapper',
-    link: 'Actio mapper'
+    link: 'action-mapper',
+    linkText: 'Action mapper'
   },
   {
-    linkText: 'schema-validator-mapper ',
-    link: 'Schema validator mapper'
+    link: 'schema-validator-mapper ',
+    linkText: 'Schema validator mapper'
   },
   {
-    linkText: 'validator-mapper',
-    link: 'Validator mapper'
+    link: 'validator-mapper',
+    linkText: 'Validator mapper'
   }
 ];
 
