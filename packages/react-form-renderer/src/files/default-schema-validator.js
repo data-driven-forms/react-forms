@@ -245,7 +245,7 @@ const iterateOverFields = (fields, componentMapper, validatorTypes, actionTypes,
       return iterateOverFields(field, componentMapper, validatorTypes, actionTypes, schemaValidatorMapper);
     }
 
-    if (parent.component !== componentTypes.WIZARD) {
+    if (![componentTypes.WIZARD, componentTypes.TABS].includes(parent.component)) {
       if (parent.component !== componentTypes.WIZARD && !field.hasOwnProperty('component')) {
         throw new DefaultSchemaError(`Each fields item must have "component" property!`);
       }

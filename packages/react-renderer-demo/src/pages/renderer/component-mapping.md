@@ -23,7 +23,6 @@ const componentTypes = {
   [componentTypes.SUB_FORM]: 'sub-form',
   [componentTypes.RADIO]: 'radio',
   [componentTypes.TABS]: 'tabs',
-  [componentTypes.TAB_ITEM]: 'tab-item',
   [componentTypes.DATE_PICKER]: 'date-picker',
   [componentTypes.TIME_PICKER]: 'time-picker',
   [componentTypes.WIZARD]: 'wizard',

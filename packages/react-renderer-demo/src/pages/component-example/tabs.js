@@ -12,7 +12,6 @@ const schema = {
       name: 'tabs',
       fields: [
         {
-          component: componentTypes.TAB_ITEM,
           validateFields: ['apple'],
           name: '1',
           title: 'Fruits',
@@ -32,7 +31,6 @@ const schema = {
           ]
         },
         {
-          component: componentTypes.TAB_ITEM,
           name: '2',
           title: 'Vegetables',
           description: 'Here you can find vegetables',
