@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
 import Typography from '@material-ui/core/Typography';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
@@ -59,7 +60,7 @@ const FinalList = ({ title, level, link, fields, previousLinks = [], renderItems
     <List key={title} component="nav">
       {title && (
         <ListItem button onClick={openable ? closeNav : null} className={classes.listItem}>
-          <ListItemText primary={title} />
+          <ListItemText primary={title} className={classes.listItemText} />
           {openable ? isOpen ? <ExpandLess /> : <ExpandMore /> : null}
         </ListItem>
       )}
@@ -72,9 +73,12 @@ const FinalList = ({ title, level, link, fields, previousLinks = [], renderItems
   );
 };
 
+const SubHeader = ({ title }) => <ListSubheader>{title}</ListSubheader>;
+
 const Mapper = {
   Wrapper: FinalList,
-  Item
+  Item,
+  SubHeader
 };
 
 export default Mapper;

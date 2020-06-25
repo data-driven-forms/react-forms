@@ -1,18 +1,43 @@
-import { baseExamples } from './examples-definitions';
-import { docs } from './documentation-pages';
-import { mappers } from './mappers';
+import { baseExamples } from '../examples-definitions';
+import { mappers } from '../mappers';
 import flatMap from 'lodash/flatMap';
+import schemaRenderer from './renderer.schema';
+import schemaNav from './schema.schema';
+import schemaHooks from './hooks.schema';
+import mappersSchema from './mappers.schema';
 
 const schema = [
   {
-    linkText: 'Form builder',
-    link: 'live-editor'
+    linkText: 'Installation',
+    link: 'installation'
   },
   {
-    title: 'React form renderer',
-    link: 'renderer',
+    title: 'Schema',
     noRoute: true,
-    fields: docs
+    link: 'schema',
+    fields: schemaNav
+  },
+  {
+    title: 'Components',
+    link: 'components',
+    noRoute: true,
+    fields: schemaRenderer
+  },
+  {
+    title: 'Hooks',
+    link: 'hooks',
+    noRoute: true,
+    fields: schemaHooks
+  },
+  {
+    title: 'Mappers',
+    link: 'mappers',
+    noRoute: true,
+    fields: mappersSchema
+  },
+  {
+    linkText: 'Form builder',
+    link: 'live-editor'
   },
   {
     title: 'Component definitions',
@@ -29,6 +54,14 @@ const schema = [
   {
     linkText: 'Testing',
     link: 'testing'
+  },
+  {
+    linkText: 'Typescript',
+    link: 'typescript'
+  },
+  {
+    linkText: 'Development setup',
+    link: 'dev-setup'
   },
   {
     linkText: 'Releases',
@@ -66,6 +99,10 @@ export const flatSchema = flatMap(schema, (item) =>
     ? [
         item,
         ...item.fields.map((child) => {
+          if (child.noRoute) {
+            return undefined;
+          }
+
           child.link = child.link || child.component;
           return {
             ...child,
@@ -74,16 +111,18 @@ export const flatSchema = flatMap(schema, (item) =>
         })
       ]
     : [item]
-).reduce(
-  (acc, curr, currentIndex, source) => [
-    ...acc,
-    {
-      ...curr,
-      prev: getPrevLink(curr, currentIndex, source),
-      next: getNextLink(curr, currentIndex, source)
-    }
-  ],
-  []
-);
+)
+  .filter((link) => typeof link !== 'undefined')
+  .reduce(
+    (acc, curr, currentIndex, source) => [
+      ...acc,
+      {
+        ...curr,
+        prev: getPrevLink(curr, currentIndex, source),
+        next: getNextLink(curr, currentIndex, source)
+      }
+    ],
+    []
+  );
 
 export default schema;

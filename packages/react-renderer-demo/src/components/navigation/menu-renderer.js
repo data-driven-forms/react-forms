@@ -39,6 +39,10 @@ const renderItems = (items, level = 0, previousLinks = ['']) => {
 
   const href = createLink(...previousLinks, link || component);
 
+  if (props.subHeader) {
+    return <Mapper.SubHeader key={title} title={title} />;
+  }
+
   return <Mapper.Item href={href} level={level} key={`${link || component}-${linkText}`} linkText={linkText} component={component} {...props} />;
 };
 
@@ -46,7 +50,7 @@ const MenuRenderer = ({ schema }) => {
   return <React.Fragment>{renderItems(schema)}</React.Fragment>;
 };
 
-const searchFunction = (linkText, value) =>
+const searchFunction = (linkText = '', value) =>
   linkText
     .toLowerCase()
     .replace(/ /g, '')

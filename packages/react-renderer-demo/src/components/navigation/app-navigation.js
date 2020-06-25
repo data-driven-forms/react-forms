@@ -10,7 +10,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import { navStyles } from './nav-styles';
 import MenuRenderer from './menu-renderer';
-import schema from './schema';
+import schema from './schemas/schema';
 
 const useStyles = makeStyles(navStyles);
 
