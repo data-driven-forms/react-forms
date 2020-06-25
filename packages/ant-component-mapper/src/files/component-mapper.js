@@ -1,5 +1,6 @@
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 import Tabs from './tabs';
+import React from 'react';
 import PlainText from './plain-text';
 import TextField from './text-field';
 import TextArea from './text-area';
@@ -37,7 +38,8 @@ const componentMapper = {
   [componentTypes.TIME_PICKER]: TimePicker,
   [componentTypes.PLAIN_TEXT]: PlainText,
   [componentTypes.SWITCH]: Switch,
-  [componentTypes.WIZARD]: Wizard
+  [componentTypes.WIZARD]: Wizard,
+  [componentTypes.SLIDER]: <div>Not Implemented</div>
 };
 
 export default componentMapper;

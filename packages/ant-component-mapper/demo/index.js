@@ -8,8 +8,6 @@ import demoSchema from '@data-driven-forms/common/src/demoschema';
 import { componentMapper, FormTemplate } from '../src';
 import wizardSchema from './demo-schemas/wizard-schema';
 
-
-
 const style = {
   position: 'relative',
   width:'70%',

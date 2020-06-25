@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Button, Typography } from 'antd';
-import 'antd/dist/antd.css';
 import FormTemplate from '@data-driven-forms/common/src/form-template';
 
 const { Title, Paragraph } = Typography;
