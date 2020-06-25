@@ -27,6 +27,13 @@ const selectSchema = {
   fields: [
     {
       component: componentTypes.SELECT,
+      name: 'multi-simple-select',
+      label: 'Simple multi select',
+      options,
+      isMulti: true
+    },
+    {
+      component: componentTypes.SELECT,
       name: 'simple-select',
       label: 'Simple-select',
       options

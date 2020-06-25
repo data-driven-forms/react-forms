@@ -14,10 +14,10 @@ const Menu = ({
   getItemProps,
   getInputProps,
   highlightedIndex,
-  selectedItem
+  selectedItem,
+  isMulti
 }) => {
   const filteredOptions = isSearchable ? filterOptions(options, filterValue) : options;
-
   return (
     <ul className="pf-c-select__menu">
       {isSearchable && <Input inputRef={inputRef} getInputProps={getInputProps} />}
@@ -34,7 +34,7 @@ const Menu = ({
           item,
           index,
           isActive: highlightedIndex === index,
-          isSelected: selectedItem === item.value
+          isSelected: isMulti ? !!selectedItem.find(({ value }) => item.value === value) : selectedItem === item.value
         });
         return <Option key={item.value} item={item} {...itemProps} />;
       })}
