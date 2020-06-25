@@ -1,5 +1,4 @@
 import { baseExamples } from '../examples-definitions';
-import { mappers } from '../mappers';
 import flatMap from 'lodash/flatMap';
 import schemaRenderer from './renderer.schema';
 import schemaNav from './schema.schema';
@@ -46,12 +45,6 @@ const schema = [
     fields: baseExamples.sort((a, b) => a.linkText.localeCompare(b.linkText))
   },
   {
-    title: 'Mappers',
-    link: 'mappers',
-    noRoute: true,
-    fields: mappers
-  },
-  {
     linkText: 'Testing',
     link: 'testing'
   },
@@ -69,7 +62,7 @@ const schema = [
   },
   {
     link: 'migration-guide',
-    linkText: 'Migration guide  to version 2'
+    linkText: 'Migration guide to version 2'
   }
 ];
 
