@@ -48,5 +48,10 @@ export const navStyles = (theme) => ({
     width: '100%',
     paddingLeft: 16,
     paddingRight: 16
+  },
+  listItemText: {
+    '&>span': {
+      fontSize: 14
+    }
   }
 });
