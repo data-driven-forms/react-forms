@@ -21,8 +21,8 @@ const schemaNav = [
     linkText: 'Initialize on mount'
   },
   {
-    component: 'validate-on-mount',
-    linkText: 'Validate on mount'
+    component: 'data-types',
+    linkText: 'Data types'
   },
   {
     subHeader: true,
@@ -35,11 +35,11 @@ const schemaNav = [
   },
   {
     component: 'length-validator',
-    linkText: 'Lenght validator'
+    linkText: 'Length validator'
   },
   {
-    component: 'Number value validator',
-    linkText: 'number-value-validator'
+    linkText: 'Number value validator',
+    component: 'number-value-validator'
   },
   {
     component: 'pattern-validator',
@@ -111,16 +111,16 @@ const schemaNav = [
     linkText: 'Pattern'
   },
   {
-    component: 'clearing-condition-field',
-    linkText: 'Clearing conditional field' // clearing-value
-  },
-  {
     component: 'condition-nesting',
-    linkText: 'Condition nesting' // nesting
+    linkText: 'Condition nesting'
   },
   {
     component: 'condition-sequence',
-    linkText: 'Condition sequence' // condition sequence
+    linkText: 'Condition sequence'
+  },
+  {
+    component: 'condition-actions',
+    linkText: 'Conditional actions'
   },
   {
     component: 'condition-set',
@@ -131,7 +131,7 @@ const schemaNav = [
     linkText: 'Conditional visibility'
   },
   {
-    component: 'Complex-condition-example',
+    component: 'complex-condition-example',
     linkText: 'Conplex condition example'
   },
   {

@@ -69,6 +69,17 @@ import { FieldProvider } from '@data-driven-forms/react-form-renderer'
 Below, you can see an basic implementation of custom component mapper:
 <br />
 
+## Register component
+
+To be able to use your component in the schema, you first need to register the component in your component mapper.
+
+```jsx
+import NewComponent from './new-component'
+
+const componentMapper = {
+  'new-component': NewComponent
+}
+```
 
 <CodeExample
   source="components/component-mapper/form-fields-mapper"

@@ -16,37 +16,13 @@ yarn add @data-driven-forms/react-form-renderer
 
 ## Mappers
 
-Data Driven Forms team provides and mantains basic set of components for following three design systems: [MaterialUI](https://material-ui.com/), [PatternFly 4](https://www.patternfly.org/v4/) anad [PatternFly 3](https://www.patternfly.org/v3/).
+Data Driven Forms team provides and mantains basic set of components for following design systems:
 
-**mui-component-mapper**
-
-```bash
-npm install --save @data-driven-forms/mui-component-mapper
-```
-or
-```bash
-yarn add @data-driven-forms/mui-component-mapper
-```
-
-**pf4-component-mapper**
-
-```bash
-npm install --save @data-driven-forms/pf4-component-mapper
-```
-or
-```bash
-yarn add @data-driven-forms/pf4-component-mapper
-```
-
-**pf3-component-mapper**
-
-```bash
-npm install --save @data-driven-forms/pf3-component-mapper
-```
-or
-```bash
-yarn add @data-driven-forms/pf3-component-mapper
-```
+- [MaterialUI](/mappers/mui-component-mapper)
+- [Semantic UI](/mappers/suir-component-mapper)
+- [BlueprintJS](/mappers/blueprint-component-mapper)
+- [PatternFly 4](/mappers/pf4-component-mapper)
+- [PatternFly 3](/mappers/pf3-component-mapper)
 
 ## Versioning
 
