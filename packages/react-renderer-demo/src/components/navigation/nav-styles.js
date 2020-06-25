@@ -7,7 +7,8 @@ export const navStyles = (theme) => ({
   navHeader: {
     display: 'flex',
     justifyContent: 'space-between',
-    borderBottom: `1px solid ${theme.palette.grey[200]}`
+    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+    zIndex: 2
   },
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
