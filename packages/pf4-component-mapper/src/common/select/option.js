@@ -5,7 +5,7 @@ import { CheckIcon } from '@patternfly/react-icons';
 
 const Option = ({ item, isActive, isSelected, ...props }) => (
   <li>
-    <button {...props} className={`pf-c-select__menu-item${isSelected ? ' pf-m-selected' : ''}${isActive ? ' pf-m-focus' : ''}`}>
+    <button {...props} type="button" className={`pf-c-select__menu-item${isSelected ? ' pf-m-selected' : ''}${isActive ? ' pf-m-focus' : ''}`}>
       {item.label}
       {isSelected && (
         <span className="pf-c-select__menu-item-icon">

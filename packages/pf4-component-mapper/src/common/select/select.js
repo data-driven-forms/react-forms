@@ -1,23 +1,61 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import DataDrivenSelect from '@data-driven-forms/common/src/select';
 import parseInternalValue from '@data-driven-forms/common/src/select/parse-internal-value';
 import Downshift from 'downshift';
-import { CaretDownIcon } from '@patternfly/react-icons';
+import { CaretDownIcon, CloseIcon } from '@patternfly/react-icons';
 import '@patternfly/react-styles/css/components/Select/select.css';
+import '@patternfly/react-styles/css/components/Chip/chip.css';
+import '@patternfly/react-styles/css/components/ChipGroup/chip-group.css';
 
 import './select-styles.scss';
 import Menu from './menu';
 import ClearIndicator from './clear-indicator';
 import ValueContainer from './value-container';
 
-const itemToString = (value) => {
+const itemToString = (value, isMulti, showMore, handleShowMore, handleChange) => {
   if (!value) {
     return '';
   }
 
   if (Array.isArray(value)) {
+    if (!value || value.length === 0) {
+      return;
+    }
+
+    if (isMulti) {
+      const visibleOptions = showMore ? value : value.slice(0, 3);
+      return (
+        <div className="pf-c-chip-group" onClick={(event) => event.stopPropagation()}>
+          <ul className="pf-c-chip-group__list" aria-label="Chip group category">
+            {visibleOptions.map((item, index) => {
+              const label = typeof item === 'object' ? item.label : item;
+              return (
+                <li className="pf-c-chip-group__list-item" onClick={(event) => event.stopPropagation()} key={label}>
+                  <div className="pf-c-chip">
+                    <span className="pf-c-chip__text" id={`pf-random-id-${index}-${label}`}>
+                      {label}
+                    </span>
+                    <button onClick={() => handleChange(item)} className="pf-c-button pf-m-plain" type="button">
+                      <CloseIcon />
+                    </button>
+                  </div>
+                </li>
+              );
+            })}
+            {value.length > 3 && (
+              <li className="pf-c-chip-group__list-item">
+                <button type="button" onClick={handleShowMore} className="pf-c-chip pf-m-overflow">
+                  <span className="pf-c-chip__text">{showMore ? 'Show less' : `${value.length - 3} more`}</span>
+                </button>
+              </li>
+            )}
+          </ul>
+        </div>
+      );
+    }
+
     return value.map((item) => (typeof item === 'object' ? item.label : item)).join(',');
   }
 
@@ -30,6 +68,29 @@ const itemToString = (value) => {
 
 const filterOptions = (options, filterValue = '') => options.filter(({ label }) => label.toLowerCase().includes(filterValue.toLowerCase()));
 
+const getValue = (isMulti, option, value) => {
+  if (!isMulti) {
+    return option;
+  }
+
+  const isSelected = value.find(({ value }) => value === option.value);
+  return isSelected ? value.filter(({ value }) => value !== option.value) : [...value, option];
+};
+
+const stateReducer = (state, changes, keepMenuOpen) => {
+  switch (changes.type) {
+    case Downshift.stateChangeTypes.keyDownEnter:
+    case Downshift.stateChangeTypes.clickItem:
+      return {
+        ...changes,
+        isOpen: keepMenuOpen ? state.isOpen : !state.isOpen,
+        highlightedIndex: state.highlightedIndex
+      };
+    default:
+      return changes;
+  }
+};
+
 const InternalSelect = ({
   noResultsMessage,
   noOptionsMessage,
@@ -41,33 +102,35 @@ const InternalSelect = ({
   isSearchable,
   isDisabled,
   isClearable,
+  isMulti,
   ...props
 }) => {
-  // console.log(props);
+  const [showMore, setShowMore] = useState(false);
   const inputRef = useRef();
   const parsedValue = parseInternalValue(value);
+  const handleShowMore = () => setShowMore((prev) => !prev);
+  const handleChange = (option) => onChange(getValue(isMulti, option, value));
   return (
     <Downshift
       id={props.id || props.name}
-      onChange={(value) => {
-        return onChange(value);
-      }}
-      itemToString={itemToString}
+      onChange={handleChange}
+      itemToString={(value) => itemToString(value, isMulti, showMore, handleShowMore, handleChange)}
       selectedItem={value}
+      stateReducer={(state, changes) => stateReducer(state, changes, isMulti)}
     >
       {({ isOpen, inputValue, itemToString, selectedItem, clearSelection, getInputProps, getToggleButtonProps, getItemProps, highlightedIndex }) => {
         const toggleButtonProps = getToggleButtonProps();
         return (
           <div className="pf-c-select">
-            <button disabled={isDisabled} className={`pf-c-select__toggle${isDisabled ? ' pf-m-disabled' : ''}`} {...toggleButtonProps}>
+            <div disabled={isDisabled} className={`pf-c-select__toggle${isDisabled ? ' pf-m-disabled' : ''}`} {...toggleButtonProps}>
               <div className="pf-c-select_toggle-wrapper ddorg__pf4-component-mapper__select-toggle-wrapper">
-                <ValueContainer placeholder={placeholder} value={itemToString(selectedItem)} />
+                <ValueContainer placeholder={placeholder} value={itemToString(selectedItem, isMulti, showMore, handleShowMore, handleChange)} />
               </div>
               <span className="pf-c-select__toggle-arrow">
                 {isClearable && parsedValue && <ClearIndicator clearSelection={clearSelection} />}
                 <CaretDownIcon />
               </span>
-            </button>
+            </div>
             {isOpen && (
               <Menu
                 noResultsMessage={noResultsMessage}
@@ -82,7 +145,8 @@ const InternalSelect = ({
                 options={options}
                 getItemProps={getItemProps}
                 highlightedIndex={highlightedIndex}
-                selectedItem={parsedValue}
+                selectedItem={isMulti ? value : parsedValue}
+                isMulti={isMulti}
               />
             )}
           </div>
@@ -109,7 +173,8 @@ InternalSelect.propTypes = {
   isDisabled: PropTypes.bool,
   isClearable: PropTypes.bool,
   noResultsMessage: PropTypes.node,
-  noOptionsMessage: PropTypes.func
+  noOptionsMessage: PropTypes.func,
+  isMulti: PropTypes.bool
 };
 
 const Select = ({ selectVariant, menuIsPortal, ...props }) => {
