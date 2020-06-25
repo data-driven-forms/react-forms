@@ -3,6 +3,10 @@
   100% { transform: rotate(360deg); }
 }
 
+.ddorg__pf4-component-mapper__select-loading-icon {
+  animation: spin 2s linear infinite;
+}
+
 .ddorg__pf4-component-mapper__select {
   &.single-select {
     .ddorg__pf4-component-mapper__select__placeholder {
