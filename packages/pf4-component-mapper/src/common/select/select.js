@@ -69,7 +69,7 @@ const itemToString = (value, isMulti, showMore, handleShowMore, handleChange) =>
 const filterOptions = (options, filterValue = '') => options.filter(({ label }) => label.toLowerCase().includes(filterValue.toLowerCase()));
 
 const getValue = (isMulti, option, value) => {
-  if (!isMulti) {
+  if (!isMulti || !option) {
     return option;
   }
 
@@ -132,8 +132,8 @@ const InternalSelect = ({
               <div className="pf-c-select_toggle-wrapper ddorg__pf4-component-mapper__select-toggle-wrapper">
                 <ValueContainer placeholder={placeholder} value={itemToString(selectedItem, isMulti, showMore, handleShowMore, handleChange)} />
               </div>
+              {isClearable && parsedValue && <ClearIndicator clearSelection={clearSelection} />}
               <span className="pf-c-select__toggle-arrow">
-                {isClearable && parsedValue && <ClearIndicator clearSelection={clearSelection} />}
                 <CaretDownIcon />
               </span>
             </div>

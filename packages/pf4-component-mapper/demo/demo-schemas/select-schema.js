@@ -42,6 +42,15 @@ const selectSchema = {
     },
     {
       component: componentTypes.SELECT,
+      name: 'multi-clearable-searchable-select',
+      label: 'Searchable clearable multi select',
+      options,
+      isMulti: true,
+      isSearchable: true,
+      isClearable: true
+    },
+    {
+      component: componentTypes.SELECT,
       name: 'simple-select',
       label: 'Simple-select',
       options
