@@ -13,7 +13,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import { useRouter } from 'next/router';
 
-import { flatSchema } from './navigation/schema';
+import { flatSchema } from './navigation/schemas/schema';
 import GhIcon from './common/gh-svg-icon';
 import Navigation from './navigation/app-navigation';
 import MenuContext from './navigation/menu-context';
