@@ -7,6 +7,10 @@ import mappersSchema from './mappers.schema';
 
 const schema = [
   {
+    link: 'introduction',
+    linkText: 'Introduction'
+  },
+  {
     linkText: 'Installation',
     link: 'installation'
   },
@@ -54,7 +58,7 @@ const schema = [
   },
   {
     linkText: 'Development setup',
-    link: 'dev-setup'
+    link: 'development-setup'
   },
   {
     linkText: 'Releases',

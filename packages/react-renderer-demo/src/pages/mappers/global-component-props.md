@@ -9,7 +9,7 @@ If you need to set the same value to prop to every component occurance in a form
 
 Always keep in mind, that the props depend on component mapper.
 
-## Adding global prop to 
+## Adding global prop to
 
 <CodeExample source="components/global-component-props/add-global-prop-to-component" mode="preview" mapper="mui"/>
 

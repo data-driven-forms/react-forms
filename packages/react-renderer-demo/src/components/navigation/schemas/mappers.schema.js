@@ -9,6 +9,23 @@ const mappersSchema = [
     link: 'custom-mapper'
   },
   {
+    linkText: 'Global component props',
+    link: 'global-component-props'
+  },
+  {
+    linkText: 'File input',
+    link: 'file-input'
+  },
+  {
+    linkText: 'Common components API',
+    link: 'component-api'
+  },
+  {
+    subHeader: true,
+    noRoute: true,
+    title: 'Provided mappers'
+  },
+  {
     link: 'blueprint-component-mapper',
     linkText: 'Blueprint mapper'
   },
