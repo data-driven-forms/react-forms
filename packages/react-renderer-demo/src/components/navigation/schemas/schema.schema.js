@@ -115,12 +115,12 @@ const schemaNav = [
     linkText: 'Pattern'
   },
   {
-    component: 'condition-nesting',
-    linkText: 'Condition nesting'
+    component: 'condition-sequence',
+    linkText: 'Sequence'
   },
   {
-    component: 'condition-sequence',
-    linkText: 'Condition sequence'
+    component: 'condition-nesting',
+    linkText: 'Condition nesting'
   },
   {
     component: 'condition-actions',
@@ -142,6 +142,10 @@ const schemaNav = [
     subHeader: true,
     title: 'Actions',
     noRoute: true
+  },
+  {
+    component: 'actions',
+    linkText: 'Action mapper'
   }
 ];
 
