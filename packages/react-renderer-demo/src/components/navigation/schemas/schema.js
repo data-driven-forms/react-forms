@@ -1,4 +1,3 @@
-import { baseExamples } from '../examples-definitions';
 import flatMap from 'lodash/flatMap';
 import schemaRenderer from './renderer.schema';
 import schemaNav from './schema.schema';
@@ -41,12 +40,6 @@ const schema = [
   {
     linkText: 'Form builder',
     link: 'live-editor'
-  },
-  {
-    title: 'Component definitions',
-    link: 'component-example',
-    noRoute: true,
-    fields: baseExamples.sort((a, b) => a.linkText.localeCompare(b.linkText))
   },
   {
     linkText: 'Testing',

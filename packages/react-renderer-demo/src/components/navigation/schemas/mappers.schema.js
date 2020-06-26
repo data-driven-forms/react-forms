@@ -1,3 +1,5 @@
+import { baseExamples } from '../examples-definitions';
+
 const mappersSchema = [
   {
     subHeader: true,
@@ -50,9 +52,7 @@ const mappersSchema = [
     noRoute: true,
     title: 'Mapper components'
   },
-  /**
-   * Here will be component definitions
-   */
+  ...baseExamples.sort((a, b) => a.linkText.localeCompare(b.linkText)),
   {
     subHeader: true,
     noRoute: true,
@@ -68,7 +68,8 @@ const mappersSchema = [
   },
   {
     link: 'validator-mapper',
-    linkText: 'Validator mapper'
+    linkText: 'Validator mapper',
+    divider: true
   }
 ];
 
