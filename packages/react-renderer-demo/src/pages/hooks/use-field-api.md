@@ -15,14 +15,19 @@ components, you can access these features via `FieldProvider` component or `useF
 
 You can read more about that in [Component mapping](/renderer/component-mapping).
 
-## Implementation of component
+## Usage
 
 Next example shows simple input field with label and error message.
 
 ```jsx
 import React from 'react';
-import { useFieldApi } from '@data-driven-forms/react-form-renderer'
 
+import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+// or
+import useFieldApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-field-api';
+// or
+import useFieldApi from '@data-driven-forms/react-form-renderer/dist/esm/use-field-api';
+d
 const NewComponent = (props) => {
   const { input, meta } = useFieldApi(props);
 
