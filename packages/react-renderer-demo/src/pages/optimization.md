@@ -27,6 +27,7 @@ In both of CJS and ESM, exported files follow the kebab case. All components are
 **Recommendation: UMD is just a fallback option. We strongly recommend to use CJS or ESM. These two modules allow to better optimization via treeshaking and more modern language syntax.**
 
 ```jsx
+--- { "switchable": false } ---
 import FormRenderer, { useField } from '@data-driven-forms/react-form-renderer';
 ```
 

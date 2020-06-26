@@ -23,11 +23,7 @@ Next example shows simple input field with label and error message.
 import React from 'react';
 
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
-// or
-import useFieldApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-field-api';
-// or
-import useFieldApi from '@data-driven-forms/react-form-renderer/dist/esm/use-field-api';
-d
+
 const NewComponent = (props) => {
   const { input, meta } = useFieldApi(props);
 

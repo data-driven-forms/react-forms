@@ -23,12 +23,8 @@ import FormExample from './formExample';
 import CodeEditor from '@docs/components/code-editor';
 
 const value = `import React from 'react';
-import
-  FormRenderer, { componentTypes }
-from '@data-driven-forms/react-form-renderer';
-import
-  { componentMapper, FormTemplate }
-from '@data-driven-forms/pf4-component-mapper';
+import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
+import { componentMapper, FormTemplate } from '@data-driven-forms/pf4-component-mapper';
 
 const validatorMapper = {
     'same-email': () => (
@@ -215,7 +211,7 @@ const LandingPageCards = () => {
                 Write a schema
               </Typography>
               <div className={classes.editorWrapper}>
-                <CodeEditor showGutter={false} value={value} fontSize={11} />
+                <CodeEditor showGutter={false} value={value} fontSize={11} switchable />
               </div>
             </Grid>
             <Grid item xs={12} md={5}>
