@@ -1,6 +1,6 @@
 **What are input and meta?**
 
-- Input
+**Input**
 
 Input is an object which contains field values and methods that change form state. See the selection of most important attributes:
 
@@ -16,7 +16,7 @@ Input is an object which contains field values and methods that change form stat
 
 Every user interaction that updates field value in form state should also call `input.onChange` with correct value.
 
-- Meta
+**Meta**
 
 Meta is a object which contains meta information about field with given name. There is a lot of information about every field.
 [Full list is here](https://final-form.org/docs/react-final-form/types/FieldRenderProps#metaactive). These are commonly used meta informations
