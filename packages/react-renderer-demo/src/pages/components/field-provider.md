@@ -9,34 +9,42 @@ React form renderer is using [react-final-form](https://github.com/final-form/re
 Most of its features are not directly available for consistency and performance reasons. If you want to create any custom
 components, you can access these features via `FieldProvider` component or `useFieldApi` hook.
 
-`FieldProvider` is a wrapper using `useFieldApi` to get the access to the form state.
+`FieldProvider` is a wrapper using [useFieldApi](/hooks/use-field-api) to get the access to the form state. **It's recommended to use the hook.** You can read more about that in [Component mapping](/renderer/component-mapping).
 
-`useFieldApi` is a wrapper around [React Final Form useField hook](https://final-form.org/docs/react-final-form/api/useField).
+## Props
 
-You can read more about that in [Component mapping](/renderer/component-mapping).
+|name|type|description|
+|----|----|-----------|
+|Component|component|A component that receives all field props + meta + input.|
+|render|function|A render function that receives all field props + meta + input.|
 
-## Implementation of component
+## Usage
 
 Next example shows simple input field with label and error message.
 
 ```jsx
 import React from 'react';
-import { useFieldApi } from '@data-driven-forms/react-form-renderer'
 
-const NewComponent = (props) => {
-  const { input, meta } = useFieldApi(props);
+import { FieldProvider } from '@data-driven-forms/react-form-renderer';
+// or
+import FieldProvider from '@data-driven-forms/react-form-renderer/dist/cjs/field-provider';
+// or
+import FieldProvider from '@data-driven-forms/react-form-renderer/dist/esm/field-provider';
 
-  return (
+const CustomComponent = ({input, meta, label}) => (
     <div>
-      <label>{props.label}</label>
+      <label>{label}</label>
       <input {...input} />
       {meta.error && <label>{meta.error}</label>}
     </div>
-  )
-}
+);
 
-export default NewComponent
+const WrappedComponent = (props) => <FieldProvider Component={CustomComponent} {...props} />;
+
+export default WrappedComponent;
 ```
+
+---
 
 <InputMeta />
 
