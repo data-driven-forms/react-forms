@@ -61,6 +61,10 @@ const schema = [
     link: 'development-setup'
   },
   {
+    linkText: 'Optimization',
+    link: 'optimization'
+  },
+  {
     linkText: 'Releases',
     link: 'releases'
   },
