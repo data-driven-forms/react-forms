@@ -206,13 +206,10 @@ InternalSelect.propTypes = {
   onInputChange: PropTypes.func,
   loadingMessage: PropTypes.node,
   menuPortalTarget: PropTypes.any,
-  menuIsPortal: PropTypes.bool,
+  menuIsPortal: PropTypes.bool
 };
 
-const Select = ({ selectVariant, menuIsPortal, ...props }) => {
-  const isSearchable = selectVariant === 'createable' || props.isSearchable;
-  const simpleValue = selectVariant === 'createable' ? false : props.simpleValue;
-
+const Select = ({ menuIsPortal, ...props }) => {
   const menuPortalTarget = menuIsPortal ? document.body : undefined;
 
   return <DataDrivenSelect SelectComponent={InternalSelect} menuPortalTarget={menuPortalTarget} menuIsPortal={menuIsPortal} {...props} />;

@@ -28,6 +28,12 @@ const Input = ({ inputRef, isSearchable, isDisabled, getInputProps, value, ...pr
   );
 };
 
-Input.propTypes = {};
+Input.propTypes = {
+  inputRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  isSearchable: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  getInputProps: PropTypes.func.isRequired,
+  value: PropTypes.string
+};
 
 export default Input;
