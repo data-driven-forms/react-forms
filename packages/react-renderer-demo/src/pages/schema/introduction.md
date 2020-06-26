@@ -42,7 +42,7 @@ Other attribues, such as title or description, can be used in [form templates](/
 
 *string*
 
-`component` is a string value representing used component. Available options depends on the component mapper. Data Driven Forms automatically checks if the component is available, if not, it shows an error message.
+`component` is a string value representing used component. Available options depends on the component mapper. Data Driven Forms automatically checks if the component is available, if not, it shows an error message. You use [componentTypes](/schema/constants#componenttypes) to prevent typos.
 
 ---
 
@@ -170,7 +170,7 @@ Sets an initial value of the field. Read more [here](https://final-form.org/docs
 }
 ```
 
-Type is one of our provided validators: [required](/schema/required-validator), [length](/schema/length-validator), [URL](/schema/url-validator), [pattern](/schema/pattern-validator), [number value](/schema/number-value-validator).
+Type is one of our provided validators: [required](/schema/required-validator), [length](/schema/length-validator), [URL](/schema/url-validator), [pattern](/schema/pattern-validator), [number value](/schema/number-value-validator). You can use [validatorTypes](/schema/constants#validatortypes) to prevent typos.
 
 Or you can implement your own via creating a [validator mapper](/mappers/validator-mapper).
 
