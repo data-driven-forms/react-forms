@@ -8,6 +8,7 @@ import { CaretDownIcon, CloseIcon, CircleNotchIcon } from '@patternfly/react-ico
 import '@patternfly/react-styles/css/components/Select/select.css';
 import '@patternfly/react-styles/css/components/Chip/chip.css';
 import '@patternfly/react-styles/css/components/ChipGroup/chip-group.css';
+import '@patternfly/react-styles/css/components/Divider/divider.css';
 
 import './select-styles.scss';
 import Menu from './menu';
@@ -90,7 +91,7 @@ const stateReducer = (state, changes, keepMenuOpen) => {
     case Downshift.stateChangeTypes.controlledPropUpdatedSelectedItem:
       return {
         ...changes,
-        inputValue: typeof changes.inputValue === 'string' ? changes.inputValue : state.inputValue
+        inputValue: state.inputValue
       };
     default:
       return changes;
@@ -112,10 +113,13 @@ const InternalSelect = ({
   isFetching,
   onInputChange,
   loadingMessage,
+  menuPortalTarget,
+  menuIsPortal,
   ...props
 }) => {
   const [showMore, setShowMore] = useState(false);
   const inputRef = useRef();
+  const selectToggleRef = useRef();
   const parsedValue = parseInternalValue(value);
   const handleShowMore = () => setShowMore((prev) => !prev);
   const handleChange = (option) => onChange(getValue(isMulti, option, value));
@@ -136,7 +140,12 @@ const InternalSelect = ({
         const toggleButtonProps = getToggleButtonProps();
         return (
           <div className="pf-c-select">
-            <div disabled={isDisabled} className={`pf-c-select__toggle${isDisabled ? ' pf-m-disabled' : ''}`} {...toggleButtonProps}>
+            <div
+              ref={selectToggleRef}
+              disabled={isDisabled}
+              className={`pf-c-select__toggle${isDisabled ? ' pf-m-disabled' : ''}`}
+              {...toggleButtonProps}
+            >
               <div className="pf-c-select_toggle-wrapper ddorg__pf4-component-mapper__select-toggle-wrapper">
                 <ValueContainer placeholder={placeholder} value={itemToString(selectedItem, isMulti, showMore, handleShowMore, handleChange)} />
               </div>
@@ -162,6 +171,9 @@ const InternalSelect = ({
                 highlightedIndex={highlightedIndex}
                 selectedItem={isMulti ? value : parsedValue}
                 isMulti={isMulti}
+                menuPortalTarget={menuPortalTarget}
+                menuIsPortal={menuIsPortal}
+                selectToggleRef={selectToggleRef}
               />
             )}
           </div>
@@ -192,7 +204,9 @@ InternalSelect.propTypes = {
   isMulti: PropTypes.bool,
   isFetching: PropTypes.bool,
   onInputChange: PropTypes.func,
-  loadingMessage: PropTypes.node
+  loadingMessage: PropTypes.node,
+  menuPortalTarget: PropTypes.any,
+  menuIsPortal: PropTypes.bool,
 };
 
 const Select = ({ selectVariant, menuIsPortal, ...props }) => {
@@ -201,7 +215,7 @@ const Select = ({ selectVariant, menuIsPortal, ...props }) => {
 
   const menuPortalTarget = menuIsPortal ? document.body : undefined;
 
-  return <DataDrivenSelect SelectComponent={InternalSelect} {...props} />;
+  return <DataDrivenSelect SelectComponent={InternalSelect} menuPortalTarget={menuPortalTarget} menuIsPortal={menuIsPortal} {...props} />;
 };
 
 Select.propTypes = {
