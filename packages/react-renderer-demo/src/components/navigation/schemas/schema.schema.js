@@ -25,6 +25,10 @@ const schemaNav = [
     linkText: 'Data types'
   },
   {
+    component: 'constants',
+    linkText: 'Constants'
+  },
+  {
     subHeader: true,
     title: 'Validation',
     noRoute: true
