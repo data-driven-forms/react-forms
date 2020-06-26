@@ -20,13 +20,14 @@ import useMapperLink from '../../hooks/use-mapper-link';
 
 const useStyles = makeStyles(navStyles);
 
-const Item = ({ href, linkText, component }) => {
+const Item = ({ href, linkText, component, divider }) => {
   const classes = useStyles();
   const router = useRouter();
   const link = useMapperLink(href.replace('/?', '?'));
 
   return (
     <ListItem
+      divider={divider}
       button
       selected={href.replace('/?', '?') === router.asPath.replace(query, '')}
       key={href || linkText}
@@ -47,7 +48,8 @@ const Item = ({ href, linkText, component }) => {
 Item.propTypes = {
   href: PropTypes.string.isRequired,
   linkText: PropTypes.string,
-  component: PropTypes.node
+  component: PropTypes.node,
+  divider: PropTypes.bool
 };
 
 const FinalList = ({ title, level, link, fields, previousLinks = [], renderItems, openable = true, open = false }) => {
