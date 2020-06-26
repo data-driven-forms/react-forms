@@ -56,7 +56,7 @@ class App extends React.Component {
             <FormRenderer
                 onSubmit={console.log}
                 initialValues={{
-                    'async-drop-down': 'async-option-2'
+                    'simple-select': 'Kay'
                 }}
                 componentMapper={{
                     ...componentMapper,
