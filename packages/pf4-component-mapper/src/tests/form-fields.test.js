@@ -417,6 +417,8 @@ describe('FormFields', () => {
                   .first()
                   .props().disabled
               ).toEqual(true);
+            } else if (component === componentTypes.SELECT) {
+              expect(wrapper.find('div.pf-c-select__toggle').prop('disabled')).toEqual(true);
             } else {
               expect(
                 wrapper
@@ -433,6 +435,11 @@ describe('FormFields', () => {
               isReadOnly: true
             };
             const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField] }} />);
+
+            if (component === componentTypes.SELECT) {
+              expect(true);
+              return;
+            }
 
             if (component === componentTypes.TEXTAREA) {
               expect(
