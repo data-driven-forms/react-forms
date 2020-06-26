@@ -39,6 +39,13 @@ const selectSchema = {
   fields: [
     {
       component: componentTypes.SELECT,
+      name: 'simple-portal-select',
+      label: 'Simple portal select',
+      options,
+      menuIsPortal: true
+    },
+    {
+      component: componentTypes.SELECT,
       name: 'simple-async-select',
       label: 'Simple async select',
       loadOptions
