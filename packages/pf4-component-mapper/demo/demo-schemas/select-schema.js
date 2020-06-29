@@ -121,6 +121,12 @@ const selectSchema = {
       label: 'Clearable-select',
       options,
       isSearchable: true
+    },
+    {
+      component: componentTypes.SELECT,
+      name: 'dosbaled-option-select',
+      label: 'Disabled-option-select',
+      options: [...options, { label: 'Disabled option', value: 'disabled', isDisabled: true }]
     }
   ]
 };
