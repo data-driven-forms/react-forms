@@ -32,7 +32,7 @@ Standard components are:
 
 # Form fields components
 
-Basic components that can change the form state (inputs) share common props. These components are using [useFieldApi](/renderer/component-mapping#usefieldapi) or [FieldProvider](/renderer/component-mapping#fieldprovider) to access the form state.
+Basic components that can change the form state (inputs) share common props. These components are using [useFieldApi](/mappers/custom-mapper#usefieldapi) or [FieldProvider](/mappers/custom-mapper#fieldprovider) to access the form state.
 
 |Prop|Type|Description|
 |----|:--:|----------:|
@@ -43,7 +43,7 @@ Basic components that can change the form state (inputs) share common props. The
 |isRequired|boolean|Is the field required?|
 |isDisabled|boolean|Is the field disabled?|
 |isReadOnly|boolean|Is the field readOnly?|
-|initialValue|custom|There are two ways how to set initial values in the form: you can use either the [initialValues](/renderer/renderer-api) prop for the whole form or you can set the value in the schema for each field separately. For more information, please see [here](https://final-form.org/docs/react-final-form/types/FieldProps#initialvalue).|
+|initialValue|custom|There are two ways how to set initial values in the form: you can use either the [initialValues](/components/renderer) prop for the whole form or you can set the value in the schema for each field separately. For more information, please see [here](https://final-form.org/docs/react-final-form/types/FieldProps#initialvalue).|
 
 ## Text field
 
@@ -175,7 +175,7 @@ Wizard step <br/>
 |----|:--:|----------:|
 |title|node/string|Step title|
 |name|string, number|Uniq name of the step|
-|nextStep|object/name of next step|See [wizard documentation](/component-example/wizard)|
+|nextStep|object/name of next step|See [wizard documentation](/mappers/wizard)|
 |fields|array|An array of form fields|
 
 <ExampleLink to='wizard' />

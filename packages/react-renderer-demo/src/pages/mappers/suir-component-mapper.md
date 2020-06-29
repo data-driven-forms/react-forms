@@ -36,9 +36,9 @@ Semantic UI react mapper provides an option to validate a field when the compone
 This field will show the error immediately.
 
 ## Components customization
-All components accept all other props described in Semantic UI react documentation. You can find prop names for each component in component definition section of this documentation when the SUIR mapper is selected. You can start by looking at [checkbox example](/component-example/checkbox?mapper=suir).
+All components accept all other props described in Semantic UI react documentation. You can find prop names for each component in component definition section of this documentation when the SUIR mapper is selected. You can start by looking at [checkbox example](/mappers/checkbox?mapper=suir).
 
-To avoid re-refining common customization for each field in schema, check out the [global component props](/renderer/global-component-props) section.
+To avoid re-refining common customization for each field in schema, check out the [global component props](/mappers/global-component-props) section.
 
 ## Contribution
 

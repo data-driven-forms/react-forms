@@ -5,7 +5,7 @@ import DocPage from '@docs/doc-page';
 
 # Action Mapper
 
-The [ActionMapper](/renderer/renderer-api#optionalprops) allows you to map schema props to functions. This is useful when your schema is not written in JavaScript and you cannot use function inside of it, especially for schemas stored in databases.
+The [ActionMapper](/components/renderer#optionalprops) allows you to map schema props to functions. This is useful when your schema is not written in JavaScript and you cannot use function inside of it, especially for schemas stored in databases.
 
 ## Mapper
 
