@@ -5,7 +5,14 @@ import { CheckIcon } from '@patternfly/react-icons';
 
 const Option = ({ item, isActive, isSelected, ...props }) => (
   <li>
-    <button {...props} type="button" className={`pf-c-select__menu-item${isSelected ? ' pf-m-selected' : ''}${isActive ? ' pf-m-focus' : ''}`}>
+    <button
+      {...props}
+      disabled={item.isDisabled || item.disabled}
+      type="button"
+      className={`pf-c-select__menu-item${isSelected ? ' pf-m-selected' : ''}${isActive ? ' pf-m-focus' : ''}${
+        item.isDisabled || item.disabled ? ' pf-m-disabled' : ''
+      }`}
+    >
       {item.label}
       {isSelected && (
         <span className="pf-c-select__menu-item-icon">
@@ -18,7 +25,9 @@ const Option = ({ item, isActive, isSelected, ...props }) => (
 
 Option.propTypes = {
   item: PropTypes.shape({
-    label: PropTypes.node
+    label: PropTypes.node,
+    isDisabled: PropTypes.bool,
+    disabled: PropTypes.bool
   }).isRequired,
   isActive: PropTypes.bool,
   isSelected: PropTypes.bool,
