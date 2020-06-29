@@ -26,10 +26,6 @@ Next example shows simple input field with label and error message.
 import React from 'react';
 
 import { FieldProvider } from '@data-driven-forms/react-form-renderer';
-// or
-import FieldProvider from '@data-driven-forms/react-form-renderer/dist/cjs/field-provider';
-// or
-import FieldProvider from '@data-driven-forms/react-form-renderer/dist/esm/field-provider';
 
 const CustomComponent = ({input, meta, label}) => (
     <div>

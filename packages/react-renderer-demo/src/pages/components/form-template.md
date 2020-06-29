@@ -47,7 +47,7 @@ To display all form errors, you will need to add a component to your FormTemplat
 FormTemplates of the provided DDF mappers offers additional customization via using props.
 
 ```jsx
-import { FormTemplate } from ‘@data-driven-forms/pf4-component-mapper’
+import { FormTemplate } from '@data-driven-forms/pf4-component-mapper'
 
 <FormRenderer
   ...
