@@ -13,7 +13,7 @@ import { FieldArray } from '@data-driven-forms/react-form-renderer';
 
 # Dynamic fields
 
-Dynamic fields allow you to add or remove field inputs in your forms. In Data Driven Forms, Field Array is used to provide this functionality. Simillarly to [FieldProvider](/renderer/field-provider) Data driven forms include [React Final Form Arrays](https://github.com/final-form/react-final-form-arrays). Please visit their documentation to learn more about the functionality and implementation.
+Dynamic fields allow you to add or remove field inputs in your forms. In Data Driven Forms, Field Array is used to provide this functionality. Simillarly to [FieldProvider](/components/field-provider) Data driven forms include [React Final Form Arrays](https://github.com/final-form/react-final-form-arrays). Please visit their documentation to learn more about the functionality and implementation.
 
 ## Using FieldArray
 
@@ -61,7 +61,7 @@ You don't need to name the nested components, then the values are saved as an ar
 
 # Validators
 
-You can use user a few provided validators (you can also use your [own](/renderer/validators).)
+You can use user a few provided validators (you can also use your [own](/mappers/validator-mapper).)
 
 ```jsx
 MIN_ITEMS_VALIDATOR: ({threshold})
@@ -74,9 +74,9 @@ EXACT_LENGTH: ({threshold})
 
 PF4 and MUI component mapper provides an experimental implementation of field arrays.
 
-[PF4 Field Array](/component-example/field-array?mapper=pf4)
+[PF4 Field Array](/mappers/field-array?mapper=pf4)
 
-[MUI Field Array](/component-example/field-array?mapper=mui)
+[MUI Field Array](/mappers/field-array?mapper=mui)
 
 <CodeExamples source="components/field-array/pf4-demo" mode="preview" />
 

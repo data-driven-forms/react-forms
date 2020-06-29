@@ -9,7 +9,7 @@ React form renderer is using [react-final-form](https://github.com/final-form/re
 Most of its features are not directly available for consistency and performance reasons. If you want to create any custom
 components, you can access these features via `FieldProvider` component or `useFieldApi` hook.
 
-`FieldProvider` is a wrapper using [useFieldApi](/hooks/use-field-api) to get the access to the form state. **It's recommended to use the hook.** You can read more about that in [Component mapping](/renderer/component-mapping).
+`FieldProvider` is a wrapper using [useFieldApi](/hooks/use-field-api) to get the access to the form state. **It's recommended to use the hook.** You can read more about that in [Component mapping](/mappers/custom-mapper).
 
 ## Props
 

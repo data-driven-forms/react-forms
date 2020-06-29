@@ -5,7 +5,7 @@ import CodeExample from '@docs/code-example';
 
 # Schema validation
 
-Data Driven Forms contains default schema validator, that controls basic schema attributes: `name`, `component`, conditions, validators, etc. If you want to control your own validators, components or actions, use [schemaValidatorMapper](/renderer/renderer-api#optionalprops) prop.
+Data Driven Forms contains default schema validator, that controls basic schema attributes: `name`, `component`, conditions, validators, etc. If you want to control your own validators, components or actions, use [schemaValidatorMapper](/components/renderer#optionalprops) prop.
 
 It's a simple object containing three keys: `components`, `actions`, `validators`. Each of these is an another object with names as keys and functions as returns. Components' validators receive the whole field object, actions'/validators' validators receive two arguments: action/validator as the first one and the name of the field as the second one.
 

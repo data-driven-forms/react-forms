@@ -56,7 +56,7 @@ const DocSearch = () => {
         const resultUrl = new URL(suggestion.url);
 
         let query = '';
-        if (resultUrl.pathname.startsWith('/component-example/')) {
+        if (resultUrl.pathname.startsWith('/mappper/')) {
           ['mui', 'pf4', 'pf3'].find((mapper) => {
             if (resultUrl.hash.includes(mapper)) {
               query = `?mapper=${mapper}`;

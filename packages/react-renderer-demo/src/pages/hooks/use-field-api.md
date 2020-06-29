@@ -13,7 +13,7 @@ components, you can access these features via `FieldProvider` component or `useF
 
 `useFieldApi` is a wrapper around [React Final Form useField hook](https://final-form.org/docs/react-final-form/api/useField).
 
-You can read more about that in [Component mapping](/renderer/component-mapping).
+You can read more about that in [Component mapping](/mappers/custom-mapper).
 
 ## Usage
 
