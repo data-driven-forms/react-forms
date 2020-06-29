@@ -32,7 +32,7 @@ With using `useFormApi` hook you can get access to all form information and func
 
 ## Customize form buttons
 
-You can customize form buttons in your [FormTemplate](/renderer/renderer-api#requiredprops) component
+You can customize form buttons in your [FormTemplate](/components/renderer#requiredprops) component
 
 <CodeExample source="components/form-template/custom-buttons" mode="preview" />
 

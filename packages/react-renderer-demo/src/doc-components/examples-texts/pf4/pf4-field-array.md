@@ -41,4 +41,4 @@ const fields = [
 
 **Custom component**
 
-To implement a custom component, please take a look [here](/renderer/dynamic-fields).
+To implement a custom component, please take a look [here](/components/field-array).

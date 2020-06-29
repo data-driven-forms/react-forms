@@ -89,22 +89,22 @@ const buildFeatures = [
   {
     text: 'Multiple provided libraries - MaterialUI included!',
     Icon: LocalLibraryIcon,
-    link: '/renderer/component-api'
+    link: '/mappers/component-api'
   },
   {
     text: 'Validation - basic types are provided, supports async validators!',
     Icon: VerifiedUserIcon,
-    link: '/renderer/validators'
+    link: '/schema/introduction#validate'
   },
   {
     text: 'Conditions - hide and modify fields according to values of other fields!',
     Icon: PlaylistAddCheckIcon,
-    link: '/renderer/condition'
+    link: '/schema/introduction#condition'
   },
   {
     text: 'Fully customizable - you can use any components you are using right now!',
     Icon: EditAttributesIcon,
-    link: '/renderer/component-mapping'
+    link: '/mappers/custom-mapper'
   },
   {
     text: 'Online editor - you can build your form using comfy DnD!',
