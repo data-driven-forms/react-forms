@@ -1,14 +1,15 @@
 import DocPage from '@docs/doc-page';
+import ComponentMapperBar from '@docs/component-mapper-bar';
 
 <DocPage>
 
 # MaterialUI mapper
 
+<ComponentMapperBar prefix="mui" href="https://material-ui.com/" />
+
 MaterialUI mapper provides components from [MaterialUI React library](https://material-ui.com/).
 
 ## Installation
-
-Link to [NPM](https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper).
 
 ```bash
 npm install --save @data-driven-forms/mui-component-mapper
@@ -34,9 +35,5 @@ MUI mapper provides an option to validate a field when the component is mounted.
 ```
 
 This field will show the error immediately.
-
-## Contribution
-
-You can contribute to this mapper [here](https://github.com/data-driven-forms/react-forms/tree/master/packages/mui-component-mapper).
 
 </DocPage>
