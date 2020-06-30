@@ -2,10 +2,20 @@ import DocPage from '@docs/doc-page';
 
 <DocPage>
 
-# Form Renderer API
+# Form Renderer
 
-Form Renderer provides a lot of customization via props.
+Form renderer is the core component of Data Driven Forms. It is used to generate and render forms.
 
+```jsx
+import FormRenderer from '@data-driven-forms/react-form-renderer';
+
+const App = () => (<FormRenderer
+  onSubmit={onSubmit}
+  schema={schema}
+  componentMapper={componentMapper}
+  FormTemplate={FormTemplate}
+/>)
+```
 
 ## Required props
 
