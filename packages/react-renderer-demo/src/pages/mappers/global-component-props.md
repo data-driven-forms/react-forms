@@ -5,7 +5,7 @@ import CodeExample from '@docs/code-example';
 
 # Global component props
 
-If you need to set the same value to prop to every component occurance in a form, you can do so via [component mapper](/renderer/component-mapping).
+If you need to set the same value to prop to every component occurance in a form, you can do so via [component mapper](/mappers/custom-mapper).
 
 Always keep in mind, that the props depend on component mapper.
 

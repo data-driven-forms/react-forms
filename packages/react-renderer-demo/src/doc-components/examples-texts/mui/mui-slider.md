@@ -2,7 +2,7 @@ Please check the [original component](https://material-ui.com/components/slider/
 
 **Props**
 
-Slider is wrapped in a form group, so it accepts all [form group props](/renderer/component-api#formgroupwrappedcomponents).
+Slider is wrapped in a form group, so it accepts all [form group props](/mappers/component-api#formgroupwrappedcomponents).
 
 |Props|Type|Description|
 |-----|----|-----------|

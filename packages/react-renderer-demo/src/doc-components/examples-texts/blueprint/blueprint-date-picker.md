@@ -2,7 +2,7 @@ Please check the [original component](https://blueprintjs.com/docs/#datetime/dat
 
 **Props**
 
-DatePicker is wrapped in a form group, so it accepts all [form group props](/renderer/component-api#formgroupwrappedcomponents).
+DatePicker is wrapped in a form group, so it accepts all [form group props](/mappers/component-api#formgroupwrappedcomponents).
 
 |Props|Type|Description|
 |-----|----|-----------|

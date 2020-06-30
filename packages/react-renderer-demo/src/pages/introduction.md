@@ -10,9 +10,9 @@ It uses [React Final Form](https://github.com/final-form/react-final-form) for t
 It is highly recommended to check their documentations first to fully understand how
 the [Data Driven Forms](https://github.com/data-driven-forms/react-forms) libraries work.
 
-All you need is to [install](/renderer/installation) the form renderer and choose the component mapper you want ([or create your own](/renderer/component-mapping)).
+All you need is to [install](/installation) the form renderer and choose the component mapper you want ([or create your own](/mappers/custom-mapper)).
 
-Import `FormRenderer` from the react-form-renderer. This component takes four required props: FormTemplate, schema, componentMapper and onSubmit. You can read about them [here](/renderer/renderer-api#requiredprops).
+Import `FormRenderer` from the react-form-renderer. This component takes four required props: FormTemplate, schema, componentMapper and onSubmit. You can read about them [here](/components/renderer#requiredprops).
 
 You can check the simple example below.
 
