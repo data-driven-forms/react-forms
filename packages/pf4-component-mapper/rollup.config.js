@@ -63,7 +63,6 @@ const plugins = [
     keep_fnames: true
   }),
   postcss({
-    inject: true,
     extensions: ['.css', '.scss']
   }),
   sourcemaps()
