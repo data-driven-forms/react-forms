@@ -23,12 +23,8 @@ import FormExample from './formExample';
 import CodeEditor from '@docs/components/code-editor';
 
 const value = `import React from 'react';
-import
-  FormRenderer, { componentTypes }
-from '@data-driven-forms/react-form-renderer';
-import
-  { componentMapper, FormTemplate }
-from '@data-driven-forms/pf4-component-mapper';
+import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
+import { componentMapper, FormTemplate } from '@data-driven-forms/pf4-component-mapper';
 
 const validatorMapper = {
     'same-email': () => (
@@ -93,22 +89,22 @@ const buildFeatures = [
   {
     text: 'Multiple provided libraries - MaterialUI included!',
     Icon: LocalLibraryIcon,
-    link: '/renderer/component-api'
+    link: '/mappers/component-api'
   },
   {
     text: 'Validation - basic types are provided, supports async validators!',
     Icon: VerifiedUserIcon,
-    link: '/renderer/validators'
+    link: '/schema/introduction#validate'
   },
   {
     text: 'Conditions - hide and modify fields according to values of other fields!',
     Icon: PlaylistAddCheckIcon,
-    link: '/renderer/condition'
+    link: '/schema/introduction#condition'
   },
   {
     text: 'Fully customizable - you can use any components you are using right now!',
     Icon: EditAttributesIcon,
-    link: '/renderer/component-mapping'
+    link: '/mappers/custom-mapper'
   },
   {
     text: 'Online editor - you can build your form using comfy DnD!',
@@ -215,7 +211,7 @@ const LandingPageCards = () => {
                 Write a schema
               </Typography>
               <div className={classes.editorWrapper}>
-                <CodeEditor showGutter={false} value={value} fontSize={11} />
+                <CodeEditor showGutter={false} value={value} fontSize={11} switchable />
               </div>
             </Grid>
             <Grid item xs={12} md={5}>

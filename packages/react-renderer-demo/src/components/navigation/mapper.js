@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
 import Typography from '@material-ui/core/Typography';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
@@ -19,13 +20,14 @@ import useMapperLink from '../../hooks/use-mapper-link';
 
 const useStyles = makeStyles(navStyles);
 
-const Item = ({ href, linkText, component }) => {
+const Item = ({ href, linkText, component, divider }) => {
   const classes = useStyles();
   const router = useRouter();
   const link = useMapperLink(href.replace('/?', '?'));
 
   return (
     <ListItem
+      divider={divider}
       button
       selected={href.replace('/?', '?') === router.asPath.replace(query, '')}
       key={href || linkText}
@@ -46,7 +48,8 @@ const Item = ({ href, linkText, component }) => {
 Item.propTypes = {
   href: PropTypes.string.isRequired,
   linkText: PropTypes.string,
-  component: PropTypes.node
+  component: PropTypes.node,
+  divider: PropTypes.bool
 };
 
 const FinalList = ({ title, level, link, fields, previousLinks = [], renderItems, openable = true, open = false }) => {
@@ -59,7 +62,7 @@ const FinalList = ({ title, level, link, fields, previousLinks = [], renderItems
     <List key={title} component="nav">
       {title && (
         <ListItem button onClick={openable ? closeNav : null} className={classes.listItem}>
-          <ListItemText primary={title} />
+          <ListItemText primary={title} className={classes.listItemText} />
           {openable ? isOpen ? <ExpandLess /> : <ExpandMore /> : null}
         </ListItem>
       )}
@@ -72,9 +75,12 @@ const FinalList = ({ title, level, link, fields, previousLinks = [], renderItems
   );
 };
 
+const SubHeader = ({ title }) => <ListSubheader>{title}</ListSubheader>;
+
 const Mapper = {
   Wrapper: FinalList,
-  Item
+  Item,
+  SubHeader
 };
 
 export default Mapper;

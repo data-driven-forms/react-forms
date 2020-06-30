@@ -16,13 +16,13 @@ If you want to test your whole form, the easiest way is just to render it as you
 
 Below is an example of a form with an async validation and a conditional field. All features in the data driven forms packages are tested by the library. It should not be required to tests them most of the time.
 
-```
+```jsx
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
-import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 
-import { componentMapper, FormTemplate } from '@data-driven-forms/mui-component-mapper/dist/cjs';
+import FormRenderer from '@data-driven-forms/react-form-renderer';
+import { componentMapper, FormTemplate } from '@data-driven-forms/mui-component-mapper';
 
 describe('<FormRendererTest />', () => {
   /**
@@ -152,10 +152,10 @@ Set up your renderer to make it easier to test the component-specific features. 
 ```jsx
 import React from 'react';
 import { mount } from 'enzyme';
-import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 
-import { FormTemplate } from '@data-driven-forms/mui-component-mapper/dist/cjs';
-import useFieldApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-field-api';
+import FormRenderer, { useFieldApi } from '@data-driven-forms/react-form-renderer';
+import { FormTemplate } from '@data-driven-forms/mui-component-mapper';
+
 import toJson from 'enzyme-to-json';
 
 const CustomComponent = (props) => {
@@ -235,10 +235,9 @@ Rendering components outside of the renderer will require some additional set up
 ```jsx
 import React from 'react';
 import { mount } from 'enzyme';
-import Form from '@data-driven-forms/react-form-renderer/dist/cjs/form';
-import RendererContext from '@data-driven-forms/react-form-renderer/dist/cjs/renderer-context';
 
-import useFieldApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-field-api';
+import { Form, RendererContext, useFieldApi } from '@data-driven-forms/react-form-renderer';
+
 import toJson from 'enzyme-to-json';
 
 const CustomComponent = (props) => {
