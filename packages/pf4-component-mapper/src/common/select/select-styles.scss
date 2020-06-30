@@ -1,3 +1,8 @@
+@import "~@patternfly/react-styles/css/components/Select/select.css";
+@import "~@patternfly/react-styles/css/components/Chip/chip.css";
+@import "~@patternfly/react-styles/css/components/ChipGroup/chip-group.css";
+@import "~@patternfly/react-styles/css/components/Divider/divider.css";
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
