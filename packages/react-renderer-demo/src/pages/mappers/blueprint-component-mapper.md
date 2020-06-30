@@ -1,14 +1,15 @@
 import DocPage from '@docs/doc-page';
+import ComponentMapperBar from '@docs/component-mapper-bar';
 
 <DocPage>
 
 # BlueprintJS
 
+<ComponentMapperBar prefix="blueprint" href="https://blueprintjs.com/" />
+
 BlueprintJS mapper provides components from [Blueprint UI toolkit](https://blueprintjs.com/).
 
 ## Installation
-
-Link to [NPM](https://www.npmjs.com/package/@data-driven-forms/blueprint-component-mapper).
 
 ```bash
 npm install --save @data-driven-forms/blueprint-component-mapper
@@ -78,9 +79,5 @@ const FormTemplate = ({ formFields }) => {
     )
 }
 ```
-
-## Contribution
-
-You can contribute to this mapper [here](https://github.com/data-driven-forms/react-forms/tree/master/packages/blueprint-component-mapper).
 
 </DocPage>
