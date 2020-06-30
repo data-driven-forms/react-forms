@@ -12,14 +12,6 @@ Strings values used in `component` field attributes.
 
 ```jsx
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
-
-// or
-
-import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
-
-// or
-
-import componentTypes from '@data-driven-forms/react-form-renderer/dist/esm/component-types';
 ```
 
 Available keys:
@@ -62,14 +54,6 @@ Strings values used in `validate` [type attribute](/schema/introduction#validate
 
 ```jsx
 import { validatorTypes } from '@data-driven-forms/react-form-renderer';
-
-// or
-
-import validatorTypes from '@data-driven-forms/react-form-renderer/dist/cjs/validator-types';
-
-// or
-
-import validatorTypes from '@data-driven-forms/react-form-renderer/dist/esm/validator-types';
 ```
 
 Available keys:
