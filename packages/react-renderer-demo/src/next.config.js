@@ -63,7 +63,8 @@ module.exports = withBundleAnalyzer(
           '@docs/examples': path.resolve(__dirname, './examples'),
           '@docs/code-example': path.resolve(__dirname, './components/code-example'),
           '@docs/hooks': path.resolve(__dirname, './hooks'),
-          '@docs/doc-page': path.resolve(__dirname, './components/doc-page')
+          '@docs/doc-page': path.resolve(__dirname, './components/doc-page'),
+          '@docs/component-mapper-bar': path.resolve(__dirname, './components/component-mapper-bar')
         };
 
         config.optimization.minimizer = [
