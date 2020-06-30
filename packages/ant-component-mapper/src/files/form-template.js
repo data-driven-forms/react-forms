@@ -1,11 +1,16 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Button, Typography } from 'antd';
+import { Button, Typography, Form as AntForm } from 'antd';
 import FormTemplate from '@data-driven-forms/common/src/form-template';
 
 const { Title, Paragraph } = Typography;
 
-const Form = ({ children, ...props }) => <form {...props}>{children}</form>;
+const Form = ({ layout, children, onSubmit, ...props }) => (
+  <AntForm onFinish={onSubmit} layout={layout ? layout : 'vertical'}>
+    {children}
+  </AntForm>
+);
+
 const Description = ({ children }) => (
   <Typography>
     <Paragraph>{children}</Paragraph>
@@ -25,7 +30,15 @@ const ButtonComponent = ({ label, variant, children, buttonType, ...props }) => 
 );
 
 const AntFormTemplate = (props) => (
-  <FormTemplate FormWrapper={Form} Button={ButtonComponent} ButtonGroup={ButtonGroup} Title={TitleComponent} Description={Description} {...props} />
+  <FormTemplate
+    FormWrapper={Form}
+    Button={ButtonComponent}
+    ButtonGroup={ButtonGroup}
+    Title={TitleComponent}
+    Description={Description}
+    formWrapperProps={{ layout: props.layout }}
+    {...props}
+  />
 );
 
 export default AntFormTemplate;
