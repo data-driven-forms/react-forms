@@ -40,7 +40,7 @@ This field will show the error immediately.
 Blueprint components do not use asterisks for indicating that fields are required, instead of it, it uses `(required)` string. This message can be customized via `requiredLabelInfo` prop passed to the default `formTemplate`. By default this message is set to `<span className="bp3-text-muted">(required)</span>`. Notice the className, that provides default Blueprint styles.
 
 ```jsx
-import FormTemplate from '@data-driven-forms/blueprint-component-mapper/dist/cjs/form-template';
+import { FormTemplate } from '@data-driven-forms/blueprint-component-mapper';
 
 const FormTemplateWrapper = (props) => (
     <FormTemplate
@@ -53,7 +53,7 @@ const FormTemplateWrapper = (props) => (
 This content is accessible via
 
 ```jsx
-import BlueprintContext from '@data-driven-forms/blueprint-component-mapper/dist/cjs/blueprint-context';
+import { BlueprintContext } from '@data-driven-forms/blueprint-component-mapper';
 ```
 
 ## Custom FormTemplates
@@ -61,7 +61,7 @@ import BlueprintContext from '@data-driven-forms/blueprint-component-mapper/dist
 If you are using a custom FormTemplate, wrap it in the `BlueprintContext` to provide the required label.
 
 ```jsx
-import BlueprintContext from '@data-driven-forms/blueprint-component-mapper/dist/cjs/blueprint-context';
+import { BlueprintContext } from '@data-driven-forms/blueprint-component-mapper';
 
 const FormTemplate = ({ formFields }) => {
     const { handleSubmit } = useFormApi();
