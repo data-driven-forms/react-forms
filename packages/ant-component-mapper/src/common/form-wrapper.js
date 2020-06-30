@@ -5,22 +5,9 @@ import { Form } from 'antd';
 
 const AntForm = ({ label, children, layout, component, invalid, isRequired, help }) => {
   return (
-    <Form layout={layout} component={component}>
-      <Form.Item
-        validateStatus={!invalid ? '' : 'error'}
-        rules={[
-          {
-            required: isRequired,
-            message: 'Required'
-          }
-        ]}
-        help={help}
-        label={label}
-        name={label}
-      >
-        <div>{children}</div>
-      </Form.Item>
-    </Form>
+    <Form.Item validateStatus={!invalid ? '' : 'error'} help={help} label={label} name={label}>
+      <div>{children}</div>
+    </Form.Item>
   );
 };
 

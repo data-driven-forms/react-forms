@@ -18,7 +18,7 @@ const App = () => (
   <div style={style}>
     <FormRenderer
       componentMapper={componentMapper}
-      FormTemplate={(props) => <FormTemplate {...props} />}
+      FormTemplate={(props) => <FormTemplate layout='vertical' {...props} />}
       onSubmit={console.log}
       schema={demoSchema}
     />
