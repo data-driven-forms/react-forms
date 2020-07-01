@@ -2,7 +2,7 @@ import DocPage from '@docs/doc-page';
 
 <DocPage>
 
-# Introduction
+# Schema Introduction
 
 ## Schema definition
 
