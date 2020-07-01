@@ -17,21 +17,23 @@ import { useRouter } from 'next/router';
 import { navStyles } from './nav-styles';
 import { query } from './find-connected-links';
 import useMapperLink from '../../hooks/use-mapper-link';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(navStyles);
 
-const Item = ({ href, linkText, component, divider }) => {
+const Item = ({ href, linkText, component, divider, level }) => {
   const classes = useStyles();
   const router = useRouter();
   const link = useMapperLink(href.replace('/?', '?'));
-
   return (
     <ListItem
       divider={divider}
       button
       selected={href.replace('/?', '?') === router.asPath.replace(query, '')}
       key={href || linkText}
-      className={classes.nested}
+      className={clsx(classes.item, {
+        [classes.nested]: level > 0
+      })}
       component={forwardRef((props, ref) => (
         <RouterNavLink ref={ref} key={component} href={link}>
           <Link style={{ color: 'rgba(0, 0, 0, 0.87)' }} {...props} href={link} />
@@ -75,7 +77,17 @@ const FinalList = ({ title, level, link, fields, previousLinks = [], renderItems
   );
 };
 
-const SubHeader = ({ title }) => <ListSubheader>{title}</ListSubheader>;
+const useSubHeaderStyles = makeStyles((theme) => ({
+  subHeader: {
+    color: theme.palette.text.primary,
+    paddingLeft: 24
+  }
+}));
+
+const SubHeader = ({ title }) => {
+  const classes = useSubHeaderStyles();
+  return <ListSubheader className={classes.subHeader}>{title}</ListSubheader>;
+};
 
 const Mapper = {
   Wrapper: FinalList,
