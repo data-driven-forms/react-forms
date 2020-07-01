@@ -7,12 +7,12 @@ import avalableMappers from '../helpers/available-mappers';
 const ComponentExampleText = ({ linkText, schema, variants, component, activeMapper, ContentText }) => (
   <React.Fragment>
     <Heading level="4" component="h1">
-      {linkText}
+      {`${avalableMappers.find(({ mapper }) => mapper === activeMapper).title} ${linkText}`}
     </Heading>
     <ComponentExample variants={variants} schema={schema} activeMapper={activeMapper} component={component} />
+    <br />
     {avalableMappers.map(({ mapper, title }) => (
       <div key={mapper} hidden={activeMapper !== mapper}>
-        <Heading level="5" component="h2">{`${title} ${linkText}`}</Heading>
         <ContentText activeMapper={activeMapper} component={component} />
       </div>
     ))}
