@@ -41,6 +41,10 @@ const getNotifications = () => {
   return fetch(`https://data-driven-forms.firebaseio.com/notifications.json${query}`)
     .then((data) => data.json())
     .then((data) => {
+      if (!data) {
+        return [];
+      }
+
       if (typeof data !== 'object') {
         return [];
       }
