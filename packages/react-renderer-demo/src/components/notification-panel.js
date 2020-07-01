@@ -36,39 +36,24 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const getNotifications = () => {
-  const query = `?orderBy="expired-at"&startAt="${new Date().toISOString()}"&limitToFirst=10`;
-  return fetch(`https://data-driven-forms.firebaseio.com/notifications.json${query}`)
-    .then((data) => data.json())
-    .then((data) => {
-      if (!data) {
-        return [];
-      }
+const getNotifications = () => fetch(`/notifications?end=${Date.now()}`).then((data) => data.json());
 
-      if (typeof data !== 'object') {
-        return [];
-      }
-
-      if (!Array.isArray(data)) {
-        data = Object.values(data);
-      }
-
-      return data.filter(Boolean).sort((a, b) => b['created-at'].localeCompare(a['created-at']));
-    });
-};
-
-const createNotificationId = (notification) => `${notification['created-at']}-${notification['expired-at']}`;
+const createNotificationId = (notification) => notification.activeTill.toString();
 
 const NotificationPanel = ({ isOpen, onClose, anchorRef, setNewMessages }) => {
   const classes = useStyles();
   const [notifications, setNotifications] = useState([]);
   useEffect(() => {
-    getNotifications().then((data = []) => {
-      const lastSeen = JSON.parse(localStorage.getItem('data-driven-forms-last-seen') || '[]');
-      setNewMessages(data.filter((notification) => !lastSeen.includes(createNotificationId(notification))).length);
-      localStorage.setItem('data-driven-forms-last-seen', JSON.stringify(data.map(createNotificationId)));
-      setNotifications(data);
-    });
+    getNotifications()
+      .then((data = []) => {
+        const lastSeen = JSON.parse(localStorage.getItem('data-driven-forms-last-seen') || '[]');
+        setNewMessages(data.filter((notification) => !lastSeen.includes(createNotificationId(notification))).length);
+        localStorage.setItem('data-driven-forms-last-seen', JSON.stringify(data.map(createNotificationId)));
+        setNotifications(data);
+      })
+      .catch(() => {
+        setNotifications([]);
+      });
   }, [setNewMessages]);
 
   return (
