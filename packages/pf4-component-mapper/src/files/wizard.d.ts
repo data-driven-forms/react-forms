@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Field, AnyObject, FormOptions } from "@data-driven-forms/react-form-renderer";
+import { Field, AnyObject } from "@data-driven-forms/react-form-renderer";
 
 export interface WizardButtonLabels {
   submit?: ReactNode;
