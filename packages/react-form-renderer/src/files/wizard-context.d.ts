@@ -1,21 +1,19 @@
-import { ReactNode } from 'react';
-import { FormApi } from 'final-form';
-import Field from './field';
-import { AnyObject } from './common';
-
-export interface FormOptions extends FormApi {
-  registerInputFile?: (name: string) => void;
-  unRegisterInputFile?: (name: string) => void;
-  onCancel?: (values: object, ...args: any[]) => void;
-  onReset?: () => void;
-  handleSubmit: () => Promise<AnyObject | undefined> | undefined;
-  clearedValue?: any;
-  renderForm: (fields: Field[]) => ReactNode[];
-}
+import { FormOptions } from './renderer-context';
 
 export interface WizardContextValue {
   formOptions: FormOptions;
-
+  crossroads: string[];
+  currentStep: string;
+  handlePrev: Function;
+  onKeyDown: Function;
+  jumpToStep: Function;
+  setPrevSteps: Function;
+  handleNext: Function;
+  navSchema: Object;
+  activeStepIndex: number;
+  maxStepIndex: number;
+  isDynamic: boolean;
+  prevSteps: string[];
 }
 
 interface WizardContext {
