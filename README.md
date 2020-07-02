@@ -15,7 +15,7 @@ Data Driven Forms is a React library used for rendering and managing forms with 
 
 :tada: Features :tada:
 - Easily readable schema, you don't need to know any HTML or JS to be able to write your own form schemas!
-- You can use your own components or use one of our provided mappers ([PatternFly 3](https://patternfly-react.surge.sh/patternfly-3/index.html), [PatternFly 4](https://patternfly-react.surge.sh/patternfly-4/) or [Material-UI](https://material-ui.com/)!)
+- You can use your own components or use one of our provided mappers ([PatternFly 3](https://patternfly-react.surge.sh/patternfly-3/index.html), [PatternFly 4](https://patternfly-react.surge.sh/patternfly-4/), [Material-UI](https://material-ui.com/) or [Ant Design](https://ant.design/)!)
 - Form state managing out-of-the-box (including error states!)
 - Fully customizable (you can use your own buttons, actions, etc.)!
 - Conditional fields!
@@ -38,6 +38,8 @@ Data Driven Forms is a React library used for rendering and managing forms with 
   - [PatternFly 4 Mapper](#patternfly-4-mapper)
   - [BlueprintJS Mapper](#blueprintjs-mapper)
   - [Semantic UI Mapper](#semantic-ui-mapper)
+  - [Material-UI Mapper](#material-ui-mapper)
+  - [Ant Design Mapper](#ant-design-mapper)
 - [Usage](#usage)
   - [Custom mapper](#custom-mapper)
 - [Basic provided components](#basic-provided-components)
@@ -118,6 +120,16 @@ $ yarn add @data-driven-forms/suir-component-mapper
 ```
 
 Component libraries in mappers are external dependencies. Make sure to install them in your bundles.
+
+#### [Ant Design Mapper](https://www.npmjs.com/package/@data-driven-forms/ant-component-mapper)
+
+```console
+$ npm install @data-driven-forms/ant-component-mapper -S
+```
+
+```console
+$ yarn add @data-driven-forms/ant-component-mapper
+```
 
 ### Usage
 
@@ -215,11 +227,13 @@ Please use our [documentation site](https://data-driven-forms.org/). In case of 
 - [PatternFly 3 Design documentation](https://www.patternfly.org/v3/)
 - [PatternFly 4 Design documentation](https://www.patternfly.org/v4/)
 - [Material-UI documentation](https://material-ui.com/)
+- [Ant Design documentation](https://ant.design/)
 - NPM
   - [React Form Renderer](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)
   - [PatternFly 3 Mapper](https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper)
   - [PatternFly 4 Mapper](https://www.npmjs.com/package/@data-driven-forms/pf4-component-mapper)
   - [MaterialUI Mapper](https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper)
+  - [Ant Design Mapper](https://www.npmjs.com/package/@data-driven-forms/ant-component-mapper)
 - Examples of schemas (PatternFly 3)
   - [ManageIQ Form Components](https://github.com/ManageIQ/manageiq-ui-classic/tree/master/app/javascript/components)
 
