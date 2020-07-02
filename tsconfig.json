@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "es5",
+    "lib": ["es6", "dom"],
+    "jsx": "preserve",
+    "allowSyntheticDefaultImports": true,
+    "noErrorTruncation": true,
+    "allowJs": true,
+    "strict": true,
+    "noEmit": true,
+    "outDir": "dev/null",
+    "types": [],
+    "baseUrl" : "./",
+    "paths": {
+        "*" : ["./node_modules/@types/*", "*"],
+    }
+  },
+  "include": ["./packages/**/dist/cjs/index.d.ts"],
+  "exclude": [
+    "node_modules",
+    "./node_modules",
+    "./node_modules/*",
+    "./node_modules/@types/node/index.d.ts",
+  ]
+}
