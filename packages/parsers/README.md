@@ -104,7 +104,6 @@ yarn test --watchAll packages/parsers
 4. How to clean?
 
 ```console
-rm yarn.lock
 yarn lerna clean # will delete all node_modules
 ```
 
@@ -136,7 +135,7 @@ All packages are releasing together and they share the version number.
 
 #### Changes to documentation
 
-If your changes influence API or add new features, you should describe these new options in the `demo` repository. Thanks!
+If your changes influence API or add new features, you should describe these new options in the `react-renderer-demo` repository. Thanks!
 
 ### Contribution
 
