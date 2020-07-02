@@ -53,21 +53,7 @@ const DocSearch = () => {
       inputSelector: '#data-driven-forms-search',
       handleSelected: (input, event, suggestion) => {
         event.button = 0;
-        const resultUrl = new URL(suggestion.url);
-
-        let query = '';
-        if (resultUrl.pathname.startsWith('/mappper/')) {
-          ['mui', 'pf4', 'pf3'].find((mapper) => {
-            if (resultUrl.hash.includes(mapper)) {
-              query = `?mapper=${mapper}`;
-              return true;
-            }
-
-            return undefined;
-          });
-        }
-
-        push(`${resultUrl.pathname}${query}${resultUrl.hash ? resultUrl.hash : ''}`);
+        push(suggestion.url.replace('https://data-driven-forms.org', ''));
         input.close();
       }
       // debug: true, // Set debug to true if you want to inspect the dropdown.
