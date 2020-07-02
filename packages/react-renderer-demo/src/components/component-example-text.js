@@ -11,11 +11,7 @@ const ComponentExampleText = ({ linkText, schema, variants, component, activeMap
     </Heading>
     <ComponentExample variants={variants} schema={schema} activeMapper={activeMapper} component={component} />
     <br />
-    {avalableMappers.map(({ mapper, title }) => (
-      <div key={mapper} hidden={activeMapper !== mapper}>
-        <ContentText activeMapper={activeMapper} component={component} />
-      </div>
-    ))}
+    <ContentText activeMapper={activeMapper} component={component} />
   </React.Fragment>
 );
 
