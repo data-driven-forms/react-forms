@@ -3,7 +3,7 @@ import { AutocompleteProps } from "@material-ui/lab/Autocomplete";
 import { ReactNode } from "react";
 import { GridProps, TextFieldProps, InputProps } from "@material-ui/core";
 
-interface InternalSelectProps<T> extends AutocompleteProps<T> {
+interface InternalSelectProps<T> extends AutocompleteProps<T, boolean | undefined, boolean | undefined, boolean | undefined> {
   isRequired?: boolean;
   isDisabled?: boolean;
   isReadOnly?: boolean;
