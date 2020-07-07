@@ -2,10 +2,11 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import WizardStepButtons from './step-buttons';
 
+import './wizard-step.scss';
+
 const WizardStep = ({ fields, formOptions, ...rest }) => (
   <Fragment>
-    <div className="style">{fields.map((item) => formOptions.renderForm([item], formOptions))}</div>
-    {/* maybe this button could be in a sperate footer such that the position remains constant  */}
+    <div className="ddorg__ant-component-mapper_wizard-step">{fields.map((item) => formOptions.renderForm([item], formOptions))}</div>
     <WizardStepButtons formOptions={formOptions} {...rest} />
   </Fragment>
 );
