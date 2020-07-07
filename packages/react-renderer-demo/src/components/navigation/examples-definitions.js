@@ -14,10 +14,6 @@ export const baseExamples = [
   {
     component: componentTypes.CHECKBOX,
     link: componentTypes.CHECKBOX,
-    prev: {
-      link: '/renderer/form-template',
-      label: 'Form Controls'
-    },
     linkText: 'Checkbox'
   },
   {
@@ -83,14 +79,6 @@ export const baseExamples = [
   {
     component: componentTypes.WIZARD,
     link: componentTypes.WIZARD,
-    linkText: 'Wizard',
-    next: {
-      link: '/releases',
-      label: 'Releases'
-    },
-    prev: {
-      link: '/component-example/time-picker',
-      label: 'Time Picker'
-    }
+    linkText: 'Wizard'
   }
 ];

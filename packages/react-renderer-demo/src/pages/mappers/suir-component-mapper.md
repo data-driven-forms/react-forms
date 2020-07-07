@@ -1,14 +1,15 @@
 import DocPage from '@docs/doc-page';
+import ComponentMapperBar from '@docs/component-mapper-bar';
 
 <DocPage>
 
 # Semantic UI react
 
+<ComponentMapperBar prefix="suir" href="https://react.semantic-ui.com/" />
+
 Semantic UI react mapper provides components from [Semantic UI react](https://react.semantic-ui.com/).
 
 ## Installation
-
-Link to [NPM](https://www.npmjs.com/package/@data-driven-forms/suir-component-mapper).
 
 ```bash
 npm install --save @data-driven-forms/suir-component-mapper
@@ -36,12 +37,8 @@ Semantic UI react mapper provides an option to validate a field when the compone
 This field will show the error immediately.
 
 ## Components customization
-All components accept all other props described in Semantic UI react documentation. You can find prop names for each component in component definition section of this documentation when the SUIR mapper is selected. You can start by looking at [checkbox example](/component-example/checkbox?mapper=suir).
+All components accept all other props described in Semantic UI react documentation. You can find prop names for each component in component definition section of this documentation when the SUIR mapper is selected. You can start by looking at [checkbox example](/mappers/checkbox?mapper=suir).
 
-To avoid re-refining common customization for each field in schema, check out the [global component props](/renderer/global-component-props) section.
-
-## Contribution
-
-You can contribute to this mapper [here](https://github.com/data-driven-forms/react-forms/tree/master/packages/suir-component-mapper).
+To avoid re-refining common customization for each field in schema, check out the [global component props](/mappers/global-component-props) section.
 
 </DocPage>

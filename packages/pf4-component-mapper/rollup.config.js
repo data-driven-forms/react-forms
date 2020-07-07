@@ -5,9 +5,9 @@ import replace from 'rollup-plugin-replace';
 import nodeGlobals from 'rollup-plugin-node-globals';
 import { terser } from 'rollup-plugin-terser';
 import { createFilter } from 'rollup-pluginutils';
-import sass from 'rollup-plugin-sass';
 import async from 'rollup-plugin-async';
 import sourcemaps from 'rollup-plugin-sourcemaps';
+import postcss from 'rollup-plugin-postcss';
 
 import glob from 'glob';
 import path from 'path';
@@ -45,7 +45,10 @@ const babelOptions = {
 
 const commonjsOptions = {
   ignoreGlobal: true,
-  include: /node_modules/
+  include: /node_modules/,
+  namedExports: {
+    '../../node_modules/react-is/index.js': ['isForwardRef']
+  }
 };
 
 const plugins = [
@@ -59,8 +62,8 @@ const plugins = [
     keep_classnames: true,
     keep_fnames: true
   }),
-  sass({
-    insert: true
+  postcss({
+    extensions: ['.css', '.scss']
   }),
   sourcemaps()
 ];

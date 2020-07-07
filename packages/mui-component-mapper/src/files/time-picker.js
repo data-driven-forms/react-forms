@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MuiPickersUtilsProvider, TimePicker as MUITimePicker } from 'material-ui-pickers';
+import { MuiPickersUtilsProvider, TimePicker as MUITimePicker } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 
 import FormFieldGrid from '../common/form-field-grid';

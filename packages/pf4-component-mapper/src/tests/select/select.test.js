@@ -1,7 +1,5 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { components } from 'react-select';
-import ReactSelect from 'react-select';
 import isEqual from 'lodash/isEqual';
 
 import Select from '../../common/select/select';
@@ -13,7 +11,7 @@ describe('<Select />', () => {
   beforeEach(() => {
     initialProps = {
       onChange,
-      menuIsOpen: true,
+      name: 'test-select',
       id: 'select',
       options: [
         {
@@ -34,11 +32,8 @@ describe('<Select />', () => {
 
   it('should return single simple value', async () => {
     const wrapper = mount(<Select {...initialProps} />);
-    const option = wrapper
-      .find('.ddorg__pf4-component-mapper__select__menu--option')
-      .first()
-      .find('div')
-      .last();
+    wrapper.find('.pf-c-select__toggle').simulate('click');
+    const option = wrapper.find('button.pf-c-select__menu-item').first();
 
     await act(async () => {
       option.simulate('click');
@@ -49,11 +44,8 @@ describe('<Select />', () => {
 
   it('should return single object value', async () => {
     const wrapper = mount(<Select {...initialProps} simpleValue={false} />);
-    const option = wrapper
-      .find('.ddorg__pf4-component-mapper__select__menu--option')
-      .first()
-      .find('div')
-      .last();
+    wrapper.find('.pf-c-select__toggle').simulate('click');
+    const option = wrapper.find('button.pf-c-select__menu-item').first();
 
     await act(async () => {
       option.simulate('click');
@@ -67,14 +59,11 @@ describe('<Select />', () => {
     // simulate first return value in state
     const value = [1];
     const wrapper = mount(<Select {...initialProps} value={value} isMulti onChange={onChange} closeMenuOnSelect={false} />);
+    wrapper.find('.pf-c-select__toggle').simulate('click');
     /**
      * select first option
      */
-    const option1 = wrapper
-      .find('.ddorg__pf4-component-mapper__select__menu--option')
-      .first()
-      .find('div')
-      .last();
+    const option1 = wrapper.find('button.pf-c-select__menu-item').first();
 
     await act(async () => {
       option1.simulate('click');
@@ -82,11 +71,7 @@ describe('<Select />', () => {
     /**
      * select second option
      */
-    const option2 = wrapper
-      .find('.ddorg__pf4-component-mapper__select__menu--option')
-      .last()
-      .find('div')
-      .last();
+    const option2 = wrapper.find('button.pf-c-select__menu-item').last();
     await act(async () => {
       option2.simulate('click');
     });
@@ -101,14 +86,11 @@ describe('<Select />', () => {
     // simulate first return value in state
     const value = [{ ...initialProps.options[0] }];
     const wrapper = mount(<Select {...initialProps} value={value} simpleValue={false} isMulti onChange={onChange} closeMenuOnSelect={false} />);
+    wrapper.find('.pf-c-select__toggle').simulate('click');
     /**
      * select first option
      */
-    const option1 = wrapper
-      .find('.ddorg__pf4-component-mapper__select__menu--option')
-      .first()
-      .find('div')
-      .last();
+    const option1 = wrapper.find('button.pf-c-select__menu-item').first();
 
     await act(async () => {
       option1.simulate('click');
@@ -116,11 +98,7 @@ describe('<Select />', () => {
     /**
      * select second option
      */
-    const option2 = wrapper
-      .find('.ddorg__pf4-component-mapper__select__menu--option')
-      .last()
-      .find('div')
-      .last();
+    const option2 = wrapper.find('button.pf-c-select__menu-item').last();
     await act(async () => {
       option2.simulate('click');
     });
@@ -130,16 +108,28 @@ describe('<Select />', () => {
   });
 
   it('should expand and close multi value chips', async () => {
-    const value = [1, 2];
-    const wrapper = mount(<Select {...initialProps} value={value} isMulti closeMenuOnSelect={false} />);
+    const value = [1, 2, 3, 4];
+    const options = [
+      ...initialProps.options,
+      {
+        label: '3',
+        value: 3
+      },
+      {
+        label: '4',
+        value: 4
+      }
+    ];
+    const wrapper = mount(<Select {...initialProps} options={options} value={value} isMulti closeMenuOnSelect={false} />);
 
-    expect(wrapper.find('.ddorg__pf4-component-mapper__select__multivalue--container')).toHaveLength(1);
-    const expandButton = wrapper.find('button.pf-c-button.pf-m-plain.ddorg__pf4-component-mapper__select__value--container-chipgroup');
+    expect(wrapper.find('.pf-c-chip-group')).toHaveLength(1);
+    expect(wrapper.find('div.pf-c-chip')).toHaveLength(3);
+    const expandButton = wrapper.find('button.pf-c-chip.pf-m-overflow').last();
     await act(async () => {
       expandButton.simulate('click');
     });
     wrapper.update();
-    expect(wrapper.find('.ddorg__pf4-component-mapper__select__multivalue--container')).toHaveLength(2);
+    expect(wrapper.find('div.pf-c-chip')).toHaveLength(4);
   });
 
   it('should call on change when removing chip', async () => {
@@ -148,7 +138,7 @@ describe('<Select />', () => {
 
     await act(async () => {
       wrapper
-        .find(components.MultiValueRemove)
+        .find('button.pf-c-button.pf-m-plain')
         .first()
         .simulate('click');
     });
@@ -180,19 +170,20 @@ describe('<Select />', () => {
         { label: 'b', value: 2 }
       ],
       placeholder: 'Choose...',
-      selectVariant: 'default',
       showLessLabel: 'Show less',
       showMoreLabel: 'more',
       simpleValue: true,
       updatingMessage: 'Loading data...',
       menuIsPortal: false,
       value: [1, 2],
-      loadingMessage: 'Loading...'
+      loadingMessage: 'Loading...',
+      noOptionsMessage: 'No options',
+      noResultsMessage: 'No results found'
     });
   });
 
   it('should load single select Async options correctly', async () => {
-    const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'label' }]));
+    const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'label', value: '3' }]));
 
     let wrapper;
 
@@ -200,13 +191,10 @@ describe('<Select />', () => {
       wrapper = mount(<Select {...initialProps} options={undefined} loadOptions={asyncLoading} />);
     });
     wrapper.update();
+    wrapper.find('.pf-c-select__toggle').simulate('click');
 
-    expect(
-      wrapper
-        .find(ReactSelect)
-        .first()
-        .instance().props.options
-    ).toEqual([{ label: 'label' }]);
+    expect(wrapper.find('button.pf-c-select__menu-item')).toHaveLength(1);
+    expect(wrapper.find('button.pf-c-select__menu-item').text()).toEqual('label');
   });
 
   it('should load multi select Async options correctly and set initial value to undefined', async () => {
@@ -229,12 +217,9 @@ describe('<Select />', () => {
     });
 
     wrapper.update();
-    expect(
-      wrapper
-        .find(ReactSelect)
-        .first()
-        .instance().props.options
-    ).toEqual([{ label: 'label', value: '123' }]);
+    wrapper.find('.pf-c-select__toggle').simulate('click');
+    expect(wrapper.find('button.pf-c-select__menu-item')).toHaveLength(1);
+    expect(wrapper.find('button.pf-c-select__menu-item').text()).toEqual('label');
     expect(onChange).toHaveBeenCalledWith(undefined);
   });
 
@@ -258,12 +243,9 @@ describe('<Select />', () => {
     });
 
     wrapper.update();
-    expect(
-      wrapper
-        .find(ReactSelect)
-        .first()
-        .instance().props.options
-    ).toEqual([{ label: 'label', value: '123' }]);
+    wrapper.find('.pf-c-select__toggle').simulate('click');
+    expect(wrapper.find('button.pf-c-select__menu-item')).toHaveLength(1);
+    expect(wrapper.find('button.pf-c-select__menu-item').text()).toEqual('label');
     expect(onChange).toHaveBeenCalledWith(['123']);
   });
 
@@ -286,17 +268,14 @@ describe('<Select />', () => {
     });
 
     wrapper.update();
-    expect(
-      wrapper
-        .find(ReactSelect)
-        .first()
-        .instance().props.options
-    ).toEqual([{ label: 'label', value: '123' }]);
+    wrapper.find('.pf-c-select__toggle').simulate('click');
+    expect(wrapper.find('button.pf-c-select__menu-item')).toHaveLength(1);
+    expect(wrapper.find('button.pf-c-select__menu-item').text()).toEqual('label');
     expect(onChange).toHaveBeenCalledWith([{ label: 'label', value: '123' }]);
   });
 
   it('should load Async options after filtering', async () => {
-    const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'label' }]));
+    const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'label', value: 1 }]));
     let wrapper;
     await act(async () => {
       wrapper = mount(<Select {...initialProps} isSearchable={true} options={undefined} loadOptions={asyncLoading} />);
@@ -304,8 +283,9 @@ describe('<Select />', () => {
 
     wrapper.update();
     expect(asyncLoading.mock.calls).toHaveLength(1);
+    wrapper.find('.pf-c-select__toggle').simulate('click');
 
-    const search = wrapper.find(ReactSelect).find('input');
+    const search = wrapper.find('input');
 
     await act(async () => {
       search.instance().value = 'foo';
@@ -339,7 +319,7 @@ describe('<Select />', () => {
         wrapper = mount(<Wrapper {...initialProps} />);
       });
 
-      let innerSelectProps = wrapper.find(ReactSelect).props().options;
+      let innerSelectProps = wrapper.find('InternalSelect').props().options;
 
       expect(isEqual(innerSelectProps, initialProps.options)).toEqual(true);
 
@@ -347,7 +327,7 @@ describe('<Select />', () => {
         wrapper.setProps({ options: NEW_OPTIONS });
       });
       wrapper.update();
-      innerSelectProps = wrapper.find(ReactSelect).props().options;
+      innerSelectProps = wrapper.find('InternalSelect').props().options;
 
       expect(innerSelectProps).toEqual(NEW_OPTIONS);
     });
@@ -359,7 +339,7 @@ describe('<Select />', () => {
       });
 
       wrapper.update();
-      let innerSelectProps = wrapper.find(ReactSelect).props().options;
+      let innerSelectProps = wrapper.find('InternalSelect').props().options;
 
       expect(isEqual(innerSelectProps, initialProps.options)).toEqual(true);
 
@@ -368,7 +348,7 @@ describe('<Select />', () => {
       });
 
       wrapper.update();
-      innerSelectProps = wrapper.find(ReactSelect).props().options;
+      innerSelectProps = wrapper.find('InternalSelect').props().options;
 
       expect(isEqual(innerSelectProps, NEW_OPTIONS)).toEqual(true);
     });

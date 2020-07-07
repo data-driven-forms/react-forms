@@ -7,7 +7,8 @@ export const navStyles = (theme) => ({
   navHeader: {
     display: 'flex',
     justifyContent: 'space-between',
-    borderBottom: `1px solid ${theme.palette.grey[200]}`
+    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+    zIndex: 2
   },
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -34,19 +35,27 @@ export const navStyles = (theme) => ({
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
     fontSize: '0.875rem'
   },
-  nested: {
+  item: {
     padding: '8px 16px !important',
     justifyContent: 'flex-start !important',
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
     fontSize: '0.875rem'
   },
+  nested: {
+    padding: '8px 16px 8px 32px !important'
+  },
   listItem: {
-    padding: '8px 16px !important',
+    padding: '8px 16px 8px 16px !important',
     justifyContent: 'flex-start !important'
   },
   searchButton: {
     width: '100%',
     paddingLeft: 16,
     paddingRight: 16
+  },
+  listItemText: {
+    '&>span': {
+      fontSize: 14
+    }
   }
 });

@@ -1,6 +1,6 @@
 {
     "name": "@data-driven-forms/react-renderer-demo",
-    "version": "2.6.1",
+    "version": "2.6.6",
     "main": "firebaseFunctions.js",
     "description": "Documentation pages for data driven forms.",
     "engines": {
@@ -24,9 +24,9 @@
         "@data-driven-forms/form-builder": "0.0.10-rc6",
         "@data-driven-forms/mui-component-mapper": "*",
         "@data-driven-forms/react-form-renderer": "*",
-        "@material-ui/core": "^4.9.14",
+        "@material-ui/core": "^4.11.0",
         "@material-ui/icons": "^4.9.1",
-        "@material-ui/styles": "^4.9.14",
+        "@material-ui/styles": "^4.10.0",
         "@mdx-js/loader": "^1.4.5",
         "@mdx-js/react": "^1.4.5",
         "@next/bundle-analyzer": "^9.1.2",
