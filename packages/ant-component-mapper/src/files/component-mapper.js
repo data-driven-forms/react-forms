@@ -1,9 +1,9 @@
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
+
 import Tabs from './tabs';
-import React from 'react';
 import PlainText from './plain-text';
 import TextField from './text-field';
-import TextArea from './text-area';
+import Textarea from './textarea';
 import Checkbox from './checkbox';
 import DatePicker from './date-picker';
 import TimePicker from './time-picker';
@@ -12,9 +12,13 @@ import Switch from './switch';
 import Select from './select';
 import Wizard from './wizard';
 import SubForm from './sub-form.js';
+import DualListSelect from './dual-list-select.js';
+import FieldArray from './field-array.js';
+import Slider from './slider.js';
+
 export const components = {
   TextField,
-  TextArea,
+  Textarea,
   Select,
   Checkbox,
   Radio,
@@ -23,12 +27,15 @@ export const components = {
   TimePicker,
   PlainText,
   SubForm,
-  Wizard
+  Wizard,
+  DualListSelect,
+  FieldArray,
+  Slider
 };
 
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField,
-  [componentTypes.TEXTAREA]: TextArea,
+  [componentTypes.TEXTAREA]: Textarea,
   [componentTypes.SELECT]: Select,
   [componentTypes.CHECKBOX]: Checkbox,
   [componentTypes.SUB_FORM]: SubForm,
@@ -39,9 +46,9 @@ const componentMapper = {
   [componentTypes.PLAIN_TEXT]: PlainText,
   [componentTypes.SWITCH]: Switch,
   [componentTypes.WIZARD]: Wizard,
-  [componentTypes.SLIDER]: () => <div>Not Implemented</div>,
-  [componentTypes.DUAL_LIST_SELECT]: () => <div>Not Implemented</div>,
-  [componentTypes.FIELD_ARRAY]: () => <div>Not Implemented</div>
+  [componentTypes.SLIDER]: Slider,
+  [componentTypes.DUAL_LIST_SELECT]: DualListSelect,
+  [componentTypes.FIELD_ARRAY]: FieldArray
 };
 
 export default componentMapper;

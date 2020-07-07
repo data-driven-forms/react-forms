@@ -14,32 +14,45 @@ const defaultButtonLabels = {
 
 const { Step } = Steps;
 
-const WizardInternal = ({ title, buttonLabels, stepsInfo }) => {
+const WizardInternal = ({
+  title,
+  buttonLabels,
+  stepsInfo,
+  WizardProps,
+  TitleProps,
+  StepProps,
+  WizardStepProps,
+  ButtonProps,
+  NextButtonProps,
+  BackButtonProps,
+  CancelButtonProps,
+  SubmitButtonProps
+}) => {
   const { onKeyDown, formOptions, handleNext, handlePrev, prevSteps, currentStep, jumpToStep, activeStepIndex } = useContext(WizardContext);
 
-  const renderSteps = () =>
-    stepsInfo.map((step, stepIndex) => <Step title={step.title} disabled={activeStepIndex < stepIndex} step={stepIndex} key={stepIndex} />);
-
-  const fullButtonLabels = {
-    ...defaultButtonLabels,
-    ...buttonLabels
-  };
-
   return (
-    <div onKeyDown={onKeyDown}>
-      {title && <Modal title={title} onCancel={formOptions.onCanel}></Modal>}
+    <div onKeyDown={onKeyDown} {...WizardProps}>
+      {title && <Modal title={title} onCancel={formOptions.onCanel} {...TitleProps} />}
       {stepsInfo && (
-        <Steps onChange={jumpToStep} current={activeStepIndex}>
-          {renderSteps()}
+        <Steps onChange={jumpToStep} current={activeStepIndex} {...StepProps}>
+          {stepsInfo.map((step, stepIndex) => (
+            <Step disabled={activeStepIndex < stepIndex} step={stepIndex} key={stepIndex} {...step} />
+          ))}
         </Steps>
       )}
       <WizardStep
         handleNext={handleNext}
         handlePrev={handlePrev}
         disableBack={prevSteps.length === 0}
-        buttonLabels={fullButtonLabels}
+        buttonLabels={buttonLabels}
         {...currentStep}
         formOptions={formOptions}
+        WizardStepProps={WizardStepProps}
+        ButtonProps={ButtonProps}
+        NextButtonProps={NextButtonProps}
+        BackButtonProps={BackButtonProps}
+        CancelButtonProps={CancelButtonProps}
+        SubmitButtonProps={SubmitButtonProps}
       />
     </div>
   );
@@ -48,9 +61,24 @@ const WizardInternal = ({ title, buttonLabels, stepsInfo }) => {
 WizardInternal.propTypes = {
   title: PropTypes.string,
   buttonLabels: PropTypes.object,
-  stepsInfo: PropTypes.array
+  stepsInfo: PropTypes.array,
+  WizardProps: PropTypes.object,
+  TitleProps: PropTypes.object,
+  StepProps: PropTypes.object,
+  WizardStepProps: PropTypes.object,
+  ButtonProps: PropTypes.object,
+  NextButtonProps: PropTypes.object,
+  BackButtonProps: PropTypes.object,
+  CancelButtonProps: PropTypes.object,
+  SubmitButtonProps: PropTypes.object
 };
 
-const WizardFinal = (props) => <Wizard Wizard={WizardInternal} {...props} />;
+const WizardFinal = ({ buttonLabels, ...props }) => (
+  <Wizard Wizard={WizardInternal} buttonLabels={{ ...defaultButtonLabels, ...buttonLabels }} {...props} />
+);
+
+WizardFinal.propTypes = {
+  buttonLabels: PropTypes.object
+};
 
 export default WizardFinal;

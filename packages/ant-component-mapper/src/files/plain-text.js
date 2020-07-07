@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 
 const { Paragraph } = Typography;
 
-const PlainText = ({ label, name }) => (
+const PlainText = ({ label, name, ...rest }) => (
   <Typography>
     {label.split('\n').map((paragraph, index) => (
-      <Paragraph key={`${index}-${name}`}>{paragraph}</Paragraph>
+      <Paragraph key={`${index}-${name}`} {...rest}>
+        {paragraph}
+      </Paragraph>
     ))}
   </Typography>
 );
