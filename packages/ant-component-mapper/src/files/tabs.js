@@ -6,18 +6,16 @@ import { Tabs } from 'antd';
 
 const { TabPane } = Tabs;
 
-const FormTabs = ({ fields }) => {
+const FormTabs = ({ fields, ...rest }) => {
   const formOptions = useFormApi();
   return (
-    <div>
-      <Tabs>
-        {fields.map(({ fields, title, name }, index) => (
-          <TabPane tab={title} key={name}>
-            {formOptions.renderForm(fields, formOptions)}
-          </TabPane>
-        ))}
-      </Tabs>
-    </div>
+    <Tabs {...rest}>
+      {fields.map(({ fields, title, name, ...rest }) => (
+        <TabPane tab={title} key={name} {...rest}>
+          {formOptions.renderForm(fields, formOptions)}
+        </TabPane>
+      ))}
+    </Tabs>
   );
 };
 

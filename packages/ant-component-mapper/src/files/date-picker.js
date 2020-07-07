@@ -6,21 +6,42 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import AntForm from '../common/form-wrapper';
 
 const DatePicker = (props) => {
-  const { input, isReadOnly, isDisabled, placeholder, isRequired, label, helperText, description, validateOnMount, meta } = useFieldApi(props);
+  const {
+    input,
+    isReadOnly,
+    isDisabled,
+    placeholder,
+    isRequired,
+    label,
+    helperText,
+    description,
+    validateOnMount,
+    meta,
+    FormItemProps,
+    ...rest
+  } = useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
-  const placeholderDisplay = placeholder ? placeholder : 'Select date';
-  const help = invalid || helperText || description;
+
   return (
-    <AntForm layout="vertical" isRequired={isRequired} label={label} invalid={invalid} help={help}>
+    <AntForm
+      label={label}
+      meta={meta}
+      validateOnMount={validateOnMount}
+      helperText={helperText}
+      description={description}
+      FormItemProps={FormItemProps}
+      isRequired={isRequired}
+    >
       <AntDatePicker
         disabled={isDisabled || isReadOnly}
         defaultValue={input.value ? input.value : undefined}
-        placeholder={placeholderDisplay}
+        placeholder={placeholder}
         required={isRequired}
         error={!!invalid}
         readOnly={isReadOnly}
         {...input}
         value={input.value || null}
+        {...rest}
       />
     </AntForm>
   );
@@ -35,7 +56,12 @@ DatePicker.propTypes = {
   helperText: PropTypes.node,
   validateOnMount: PropTypes.bool,
   locale: PropTypes.string,
-  description: PropTypes.node
+  description: PropTypes.node,
+  FormItemProps: PropTypes.object
+};
+
+DatePicker.defaultProps = {
+  placeholder: 'Select date'
 };
 
 export default DatePicker;

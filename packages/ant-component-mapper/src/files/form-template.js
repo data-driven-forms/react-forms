@@ -6,7 +6,7 @@ import FormTemplate from '@data-driven-forms/common/src/form-template';
 const { Title, Paragraph } = Typography;
 
 const Form = ({ layout, children, onSubmit, ...props }) => (
-  <AntForm onFinish={onSubmit} layout={layout ? layout : 'vertical'}>
+  <AntForm onFinish={onSubmit} layout={layout ? layout : 'vertical'} {...props}>
     {children}
   </AntForm>
 );
@@ -36,7 +36,7 @@ const AntFormTemplate = (props) => (
     ButtonGroup={ButtonGroup}
     Title={TitleComponent}
     Description={Description}
-    formWrapperProps={{ layout: props.layout }}
+    formWrapperProps={{ layout: props.layout, ...props.formWrapperProps }}
     {...props}
   />
 );

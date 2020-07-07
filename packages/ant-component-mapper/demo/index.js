@@ -20,7 +20,7 @@ const App = () => (
       componentMapper={componentMapper}
       FormTemplate={(props) => <FormTemplate layout='vertical' {...props} />}
       onSubmit={console.log}
-      schema={demoSchema}
+      schema={wizardSchema}
     />
   </div>
 );

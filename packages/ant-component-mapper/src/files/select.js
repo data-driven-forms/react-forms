@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import AntForm from '../common/form-wrapper';
-import { validationError } from '../common/helpers';
 import { Select as AntSelect } from 'antd';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
@@ -25,25 +24,34 @@ const Select = (props) => {
     options,
     isSearchable,
     description,
+    FormItemProps,
+    isMulti,
     ...rest
   } = useFieldApi(props);
-  const invalid = validationError(meta, validateOnMount);
+
   return (
-    <AntForm layout="vertical" label={label} isRequired={isRequired} invalid={invalid} help={invalid || helperText || description}>
+    <AntForm
+      label={label}
+      meta={meta}
+      validateOnMount={validateOnMount}
+      helperText={helperText}
+      description={description}
+      FormItemProps={FormItemProps}
+      isRequired={isRequired}
+    >
       <AntSelect
         {...input}
         value={input.value ? input.value : undefined}
         defaultValue={input.value ? input.value : undefined}
         placeholder={placeholder || 'Please choose'}
-        mode={rest.isMulti ? 'multiple' : ''}
-        showSearch={!!isSearchable || rest.isMulti}
+        mode={isMulti ? 'multiple' : ''}
+        showSearch={!!isSearchable || isMulti}
         filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
         required={isRequired}
         allowClear={isClearable}
         notFoundContent="No option found"
-        invalid={invalid}
         disabled={isDisabled || isReadOnly}
-        onChange={(value, option) => input.onChange(rest.isMulti ? selectValue(option) : option ? option.value : undefined)}
+        onChange={(value, option) => input.onChange(isMulti ? selectValue(option) : option ? option.value : undefined)}
         input={input}
         {...rest}
       >
@@ -70,7 +78,9 @@ Select.propTypes = {
   validateOnMount: PropTypes.bool,
   isSearchable: PropTypes.bool,
   options: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.any.isRequired, label: PropTypes.node.isRequired })).isRequired,
-  description: PropTypes.node
+  description: PropTypes.node,
+  FormItemProps: PropTypes.object,
+  isMulti: PropTypes.bool
 };
 
 export default Select;
