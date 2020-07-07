@@ -80,6 +80,7 @@ module.exports = {
 Result:
 
 ```jsx
+--- { "switchable": false } ---
 import { useField } from '@data-driven-forms/react-form-renderer';
 // ^^ this will be converted to >>
 import useField from '@data-driven-forms/react-form-renderer/dist/cjs/use-field';
