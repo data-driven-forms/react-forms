@@ -83,7 +83,6 @@ const wizardSchema = {
           label: 'Hello this is a test and this shall be a text'
         },
         {
-          nextStep: 'holaname',
           fields: [
             {
               name: 'summary',

@@ -1,58 +1,34 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'antd';
+import selectNext from '@data-driven-forms/common/src/wizard/select-next';
 
-import { useFieldApi, useFormApi } from '@data-driven-forms/react-form-renderer';
-
-const SimpleNext = ({ next, handleNext, submit, buttonLabels, disabled }) => {
-  const { valid } = useFormApi();
-
+const NextButton = ({ nextStep, handleNext, handleSubmit, buttonLabels, getState, valid }) => {
   return (
-    <Button type="primary" htmlType="button" onClick={() => (valid ? handleNext(next) : submit())} disabled={disabled}>
-      {buttonLabels.next}
+    <Button
+      type="primary"
+      htmlType="button"
+      onClick={() => (nextStep ? handleNext(selectNext(nextStep, getState)) : handleSubmit())}
+      disabled={!valid}
+    >
+      {nextStep ? buttonLabels.next : buttonLabels.submit}
     </Button>
   );
 };
 
-SimpleNext.propTypes = {
-  next: PropTypes.string,
+NextButton.propTypes = {
+  nextStep: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
+  handleSubmit: PropTypes.func.isRequired,
+  valid: PropTypes.bool,
   handleNext: PropTypes.func.isRequired,
-  submit: PropTypes.func.isRequired,
-  buttonLabels: PropTypes.object.isRequired,
-  disabled: PropTypes.bool
-};
-
-const ConditionalNext = ({ nextStep, ...rest }) => {
-  const {
-    input: { value }
-  } = useFieldApi({ name: nextStep.when, subscription: { value: true } });
-
-  const next = nextStep.stepMapper[value];
-
-  return <SimpleNext next={next} {...rest} disabled={!next} />;
-};
-
-ConditionalNext.propTypes = {
-  nextStep: PropTypes.shape({
-    when: PropTypes.string.isRequired,
-    stepMapper: PropTypes.object.isRequired
+  getState: PropTypes.func.isRequired,
+  buttonLabels: PropTypes.shape({
+    submit: PropTypes.node.isRequired,
+    cancel: PropTypes.node.isRequired,
+    back: PropTypes.node.isRequired,
+    next: PropTypes.node.isRequired
   }).isRequired
 };
-
-const submitButton = (handleSubmit, submitText) => (
-  <Button htmlType="button" type="primary" onClick={handleSubmit}>
-    {submitText}
-  </Button>
-);
-
-const renderNextButton = ({ nextStep, handleSubmit, buttonLabels, ...rest }) =>
-  !nextStep ? (
-    submitButton(handleSubmit, buttonLabels.submit)
-  ) : typeof nextStep === 'object' ? (
-    <ConditionalNext nextStep={nextStep} buttonLabels={buttonLabels} {...rest} />
-  ) : (
-    <SimpleNext next={nextStep} buttonLabels={buttonLabels} {...rest} />
-  );
 
 const WizardStepButtons = ({ disableBack, handlePrev, nextStep, formOptions, handleNext, buttonLabels }) => (
   <Fragment>
@@ -64,12 +40,7 @@ const WizardStepButtons = ({ disableBack, handlePrev, nextStep, formOptions, han
     <Button htmlType="button" disabled={disableBack} onClick={handlePrev}>
       {buttonLabels.back}
     </Button>
-    {renderNextButton({
-      ...formOptions,
-      handleNext,
-      nextStep,
-      buttonLabels
-    })}
+    <NextButton {...formOptions} handleNext={handleNext} nextStep={nextStep} buttonLabels={buttonLabels} />
   </Fragment>
 );
 

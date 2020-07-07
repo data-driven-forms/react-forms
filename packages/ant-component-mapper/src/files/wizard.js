@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import WizardStep from './wizard/wizard-step';
 import PropTypes from 'prop-types';
 import { Steps, Modal } from 'antd';
-import Wizard, { wizardProps } from '@data-driven-forms/common/src/wizard/wizard';
+import Wizard from '@data-driven-forms/common/src/wizard/wizard';
+import { WizardContext } from '@data-driven-forms/react-form-renderer';
 
 const defaultButtonLabels = {
   cancel: 'Cancel',
@@ -13,20 +14,9 @@ const defaultButtonLabels = {
 
 const { Step } = Steps;
 
-const WizardInternal = ({
-  title,
-  buttonLabels,
-  stepsInfo,
-  inModal,
-  onKeyDown,
-  formOptions,
-  handleNext,
-  handlePrev,
-  prevSteps,
-  currentStep,
-  jumpToStep,
-  activeStepIndex
-}) => {
+const WizardInternal = ({ title, buttonLabels, stepsInfo }) => {
+  const { onKeyDown, formOptions, handleNext, handlePrev, prevSteps, currentStep, jumpToStep, activeStepIndex } = useContext(WizardContext);
+
   const renderSteps = () =>
     stepsInfo.map((step, stepIndex) => <Step title={step.title} disabled={activeStepIndex < stepIndex} step={stepIndex} key={stepIndex} />);
 
@@ -34,6 +24,7 @@ const WizardInternal = ({
     ...defaultButtonLabels,
     ...buttonLabels
   };
+
   return (
     <div onKeyDown={onKeyDown}>
       {title && <Modal title={title} onCancel={formOptions.onCanel}></Modal>}
@@ -57,19 +48,9 @@ const WizardInternal = ({
 WizardInternal.propTypes = {
   title: PropTypes.string,
   buttonLabels: PropTypes.object,
-  stepsInfo: PropTypes.array,
-  inModal: PropTypes.bool,
-  ...wizardProps
+  stepsInfo: PropTypes.array
 };
 
-WizardInternal.defaultProps = {
-  title: undefined,
-  stepsInfo: undefined,
-  inModal: false
-};
-
-const WizardFinal = (props) => {
-  return <Wizard Wizard={WizardInternal} {...props} />;
-};
+const WizardFinal = (props) => <Wizard Wizard={WizardInternal} {...props} />;
 
 export default WizardFinal;
