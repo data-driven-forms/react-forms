@@ -39,7 +39,9 @@ const componentMapper = {
   [componentTypes.PLAIN_TEXT]: PlainText,
   [componentTypes.SWITCH]: Switch,
   [componentTypes.WIZARD]: Wizard,
-  [componentTypes.SLIDER]: <div>Not Implemented</div>
+  [componentTypes.SLIDER]: () => <div>Not Implemented</div>,
+  [componentTypes.DUAL_LIST_SELECT]: () => <div>Not Implemented</div>,
+  [componentTypes.FIELD_ARRAY]: () => <div>Not Implemented</div>
 };
 
 export default componentMapper;
