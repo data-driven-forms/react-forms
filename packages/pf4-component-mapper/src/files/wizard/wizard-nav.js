@@ -30,8 +30,8 @@ const WizardNavigationInternal = React.memo(
 
         return (
           <WizardNavItem
-            key={step.substepOf || step.title}
-            content={step.substepOf || step.title}
+            key={step.substepOf || step.name}
+            content={step.substepOfTitle || step.title}
             isCurrent={substeps ? activeStepIndex >= step.index && activeStepIndex < step.index + substeps.length : activeStepIndex === step.index}
             isDisabled={isValid ? maxStepIndex < step.index : step.index > activeStepIndex}
             onNavItemClick={(ind) => jumpToStep(ind, isValid)}
@@ -41,7 +41,7 @@ const WizardNavigationInternal = React.memo(
               <WizardNav returnList>
                 {substeps.map((substep) => (
                   <WizardNavItem
-                    key={substep.title}
+                    key={substep.name}
                     content={substep.title}
                     isCurrent={activeStepIndex === substep.index}
                     isDisabled={isValid ? maxStepIndex < substep.index : substep.index > activeStepIndex}
