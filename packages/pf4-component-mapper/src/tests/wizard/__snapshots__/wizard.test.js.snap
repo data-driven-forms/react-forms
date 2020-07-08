@@ -463,14 +463,18 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                               Array [
                                                 Object {
                                                   "index": 0,
+                                                  "name": "1",
                                                   "primary": true,
                                                   "substepOf": undefined,
+                                                  "substepOfTitle": undefined,
                                                   "title": "foo-step",
                                                 },
                                                 Object {
                                                   "index": 1,
+                                                  "name": "2",
                                                   "primary": true,
                                                   "substepOf": undefined,
+                                                  "substepOfTitle": undefined,
                                                   "title": "bar-step",
                                                 },
                                               ]
@@ -489,14 +493,18 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                 Array [
                                                   Object {
                                                     "index": 0,
+                                                    "name": "1",
                                                     "primary": true,
                                                     "substepOf": undefined,
+                                                    "substepOfTitle": undefined,
                                                     "title": "foo-step",
                                                   },
                                                   Object {
                                                     "index": 1,
+                                                    "name": "2",
                                                     "primary": true,
                                                     "substepOf": undefined,
+                                                    "substepOfTitle": undefined,
                                                     "title": "bar-step",
                                                   },
                                                 ]
@@ -508,7 +516,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                 content="foo-step"
                                                 isCurrent={true}
                                                 isDisabled={false}
-                                                key="foo-step"
+                                                key="1"
                                                 onNavItemClick={[Function]}
                                                 step={0}
                                               >
@@ -529,7 +537,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                 content="bar-step"
                                                 isCurrent={false}
                                                 isDisabled={true}
-                                                key="bar-step"
+                                                key="2"
                                                 onNavItemClick={[Function]}
                                                 step={1}
                                               >
@@ -1660,14 +1668,18 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                           Array [
                                                             Object {
                                                               "index": 0,
+                                                              "name": "1",
                                                               "primary": true,
                                                               "substepOf": undefined,
+                                                              "substepOfTitle": undefined,
                                                               "title": "foo-step",
                                                             },
                                                             Object {
                                                               "index": 1,
+                                                              "name": "2",
                                                               "primary": true,
                                                               "substepOf": undefined,
+                                                              "substepOfTitle": undefined,
                                                               "title": "bar-step",
                                                             },
                                                           ]
@@ -1686,14 +1698,18 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                             Array [
                                                               Object {
                                                                 "index": 0,
+                                                                "name": "1",
                                                                 "primary": true,
                                                                 "substepOf": undefined,
+                                                                "substepOfTitle": undefined,
                                                                 "title": "foo-step",
                                                               },
                                                               Object {
                                                                 "index": 1,
+                                                                "name": "2",
                                                                 "primary": true,
                                                                 "substepOf": undefined,
+                                                                "substepOfTitle": undefined,
                                                                 "title": "bar-step",
                                                               },
                                                             ]
@@ -1705,7 +1721,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                             content="foo-step"
                                                             isCurrent={true}
                                                             isDisabled={false}
-                                                            key="foo-step"
+                                                            key="1"
                                                             onNavItemClick={[Function]}
                                                             step={0}
                                                           >
@@ -1726,7 +1742,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                             content="bar-step"
                                                             isCurrent={false}
                                                             isDisabled={true}
-                                                            key="bar-step"
+                                                            key="2"
                                                             onNavItemClick={[Function]}
                                                             step={1}
                                                           >
