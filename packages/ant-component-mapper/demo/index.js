@@ -7,6 +7,7 @@ import './style.css';
 import demoSchema from '@data-driven-forms/common/src/demoschema';
 import { componentMapper, FormTemplate } from '../src';
 import wizardSchema from './demo-schemas/wizard-schema';
+import sliderSchema from './demo-schemas/slider-schema';
 
 const style = {
   position: 'relative',
@@ -20,7 +21,7 @@ const App = () => (
       componentMapper={componentMapper}
       FormTemplate={(props) => <FormTemplate layout='vertical' {...props} />}
       onSubmit={console.log}
-      schema={wizardSchema}
+      schema={sliderSchema}
     />
   </div>
 );
