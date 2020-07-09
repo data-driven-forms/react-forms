@@ -9,6 +9,7 @@ import dualListSelectSchema from './demo-schemas/dual-list-select-schema'
 import { componentMapper, FormTemplate } from '../src';
 import wizardSchema from './demo-schemas/wizard-schema';
 import sliderSchema from './demo-schemas/slider-schema';
+import fieldArraySchema from './demo-schemas/field-array-schema';
 
 const style = {
   position: 'relative',
@@ -22,7 +23,7 @@ const App = () => (
       componentMapper={componentMapper}
       FormTemplate={(props) => <FormTemplate layout='vertical' {...props} />}
       onSubmit={console.log}
-      schema={sliderSchema}
+      schema={fieldArraySchema}
     />
   </div>
 );
