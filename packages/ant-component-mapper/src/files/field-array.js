@@ -6,7 +6,19 @@ import { UndoOutlined, RedoOutlined } from '@ant-design/icons';
 
 import AntForm from '../common/form-wrapper';
 
-const ArrayItem = ({ fields, fieldIndex, name, remove, length, minItems, removeLabel }) => {
+const ArrayItem = ({
+  fields,
+  fieldIndex,
+  name,
+  remove,
+  length,
+  minItems,
+  removeLabel,
+  ArrayItemProps,
+  FieldsContainerProps,
+  RemoveContainerProps,
+  RemoveButtonProps
+}) => {
   const { renderForm } = useFormApi();
 
   const editedFields = fields.map((field, index) => {
@@ -15,10 +27,12 @@ const ArrayItem = ({ fields, fieldIndex, name, remove, length, minItems, removeL
   });
 
   return (
-    <Row>
-      <Col span={24}>{renderForm([editedFields])}</Col>
-      <Col span={24}>
-        <Button type="primary" danger onClick={() => remove(fieldIndex)} disabled={length <= minItems}>
+    <Row {...ArrayItemProps}>
+      <Col span={24} {...FieldsContainerProps}>
+        {renderForm([editedFields])}
+      </Col>
+      <Col span={24} {...RemoveContainerProps}>
+        <Button type="primary" danger {...RemoveButtonProps} onClick={() => remove(fieldIndex)} disabled={length <= minItems}>
           {removeLabel}
         </Button>
       </Col>
@@ -33,7 +47,11 @@ ArrayItem.propTypes = {
   remove: PropTypes.func.isRequired,
   length: PropTypes.number,
   minItems: PropTypes.number,
-  removeLabel: PropTypes.node.isRequired
+  removeLabel: PropTypes.node.isRequired,
+  ArrayItemProps: PropTypes.object.isRequired,
+  FieldsContainerProps: PropTypes.object.isRequired,
+  RemoveContainerProps: PropTypes.object.isRequired,
+  RemoveButtonProps: PropTypes.object.isRequired
 };
 
 const defaultButtonLabels = {
@@ -90,7 +108,23 @@ const DynamicArray = ({ ...props }) => {
     validateOnMount,
     isRequired,
     helperText,
+    // customization props
     FormItemProps,
+    ArrayItemProps,
+    FieldsContainerProps,
+    RemoveContainerProps,
+    RemoveButtonProps,
+    FieldArrayRowProps,
+    FieldArrayRowCol,
+    FieldArrayHeaderProps,
+    FieldArrayLabelProps,
+    FieldArrayButtonsProps,
+    UndoButtonProps,
+    RedoButtonProps,
+    AddButtonProps,
+    FieldArrayDescriptionProps,
+    NoItemsMessageProps,
+    ErrorMessageProps,
     ...rest
   } = useFieldApi(props);
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -133,15 +167,27 @@ const DynamicArray = ({ ...props }) => {
           };
 
           return (
-            <Row gutter={[0, 16]}>
-              <Col span={24}>
-                <Row justify="space-between">
-                  <Col>{label && <Typography.Title level={4}>{label}</Typography.Title>}</Col>
+            <Row gutter={[0, 16]} {...FieldArrayRowProps}>
+              <Col span={24} {...FieldArrayRowCol}>
+                <Row justify="space-between" {...FieldArrayHeaderProps}>
                   <Col>
-                    <Space>
-                      <Button type="default" onClick={undo} disabled={state.index === 0} icon={<UndoOutlined />} />
-                      <Button type="default" onClick={redo} disabled={state.index === state.history.length} icon={<RedoOutlined />} />
-                      <Button type="primary" onClick={pushWrapper} disabled={value.length >= maxItems}>
+                    {label && (
+                      <Typography.Title level={4} {...FieldArrayLabelProps}>
+                        {label}
+                      </Typography.Title>
+                    )}
+                  </Col>
+                  <Col>
+                    <Space {...FieldArrayButtonsProps}>
+                      <Button type="default" icon={<UndoOutlined />} {...UndoButtonProps} onClick={undo} disabled={state.index === 0} />
+                      <Button
+                        type="default"
+                        icon={<RedoOutlined />}
+                        {...RedoButtonProps}
+                        onClick={redo}
+                        disabled={state.index === state.history.length}
+                      />
+                      <Button type="primary" {...AddButtonProps} onClick={pushWrapper} disabled={value.length >= maxItems}>
                         {combinedButtonLabels.add}
                       </Button>
                     </Space>
@@ -150,13 +196,17 @@ const DynamicArray = ({ ...props }) => {
               </Col>
               {description && (
                 <Col span={24}>
-                  <Typography.Text>{description}</Typography.Text>
+                  <Typography.Text {...FieldArrayDescriptionProps}>{description}</Typography.Text>
                 </Col>
               )}
               <Col span={24}>
                 <Row gutter={[0, 16]}>
                   {value.length <= 0 ? (
-                    <Typography.Text>{noItemsMessage}</Typography.Text>
+                    typeof noItemsMessage === 'string' ? (
+                      <Typography.Text {...NoItemsMessageProps}>{noItemsMessage}</Typography.Text>
+                    ) : (
+                      React.cloneElement(noItemsMessage, NoItemsMessageProps)
+                    )
                   ) : (
                     map((name, index) => (
                       <Col span={24} key={name}>
@@ -168,6 +218,10 @@ const DynamicArray = ({ ...props }) => {
                           length={value.length}
                           minItems={minItems}
                           removeLabel={combinedButtonLabels.remove}
+                          ArrayItemProps={ArrayItemProps}
+                          FieldsContainerProps={FieldsContainerProps}
+                          RemoveContainerProps={RemoveContainerProps}
+                          RemoveButtonProps={RemoveButtonProps}
                         />
                       </Col>
                     ))
@@ -176,7 +230,9 @@ const DynamicArray = ({ ...props }) => {
               </Col>
               {isError && (
                 <Col span={12}>
-                  <Typography.Text type="danger">{typeof error === 'object' ? error.name : error}</Typography.Text>
+                  <Typography.Text type="danger" {...ErrorMessageProps}>
+                    {typeof error === 'object' ? error.name : error}
+                  </Typography.Text>
                 </Col>
               )}
             </Row>
@@ -195,15 +251,46 @@ DynamicArray.propTypes = {
   minItems: PropTypes.number,
   maxItems: PropTypes.number,
   noItemsMessage: PropTypes.node,
+  buttonLabels: PropTypes.object,
+  // customization props
   FormItemProps: PropTypes.object,
-  buttonLabels: PropTypes.object
+  ArrayItemProps: PropTypes.object,
+  FieldsContainerProps: PropTypes.object,
+  RemoveContainerProps: PropTypes.object,
+  RemoveButtonProps: PropTypes.object,
+  FieldArrayRowProps: PropTypes.object,
+  FieldArrayRowCol: PropTypes.object,
+  FieldArrayHeaderProps: PropTypes.object,
+  FieldArrayLabelProps: PropTypes.object,
+  FieldArrayButtonsProps: PropTypes.object,
+  UndoButtonProps: PropTypes.object,
+  RedoButtonProps: PropTypes.object,
+  AddButtonProps: PropTypes.object,
+  FieldArrayDescriptionProps: PropTypes.object,
+  NoItemsMessageProps: PropTypes.object,
+  ErrorMessageProps: PropTypes.object
 };
 
 DynamicArray.defaultProps = {
   maxItems: Infinity,
   minItems: 0,
   noItemsMessage: 'No items added',
-  FormItemProps: {}
+  FormItemProps: {},
+  ArrayItemProps: {},
+  FieldsContainerProps: {},
+  RemoveContainerProps: {},
+  RemoveButtonProps: {},
+  FieldArrayRowProps: {},
+  FieldArrayRowCol: {},
+  FieldArrayHeaderProps: {},
+  FieldArrayLabelProps: {},
+  FieldArrayButtonsProps: {},
+  UndoButtonProps: {},
+  RedoButtonProps: {},
+  AddButtonProps: {},
+  FieldArrayDescriptionProps: {},
+  NoItemsMessageProps: {},
+  ErrorMessageProps: {}
 };
 
 export default DynamicArray;
