@@ -29,7 +29,7 @@ const itemToString = (value, isMulti, showMore, handleShowMore, handleChange) =>
             {visibleOptions.map((item, index) => {
               const label = typeof item === 'object' ? item.label : item;
               return (
-                <li className="pf-c-chip-group__list-item" onClick={(event) => event.stopPropagation()} key={label}>
+                <li className="pf-c-chip-group__list-item" onClick={(event) => event.stopPropagation()} key={item.key || item.value || item}>
                   <div className="pf-c-chip">
                     <span className="pf-c-chip__text" id={`pf-random-id-${index}-${label}`}>
                       {label}
@@ -53,7 +53,7 @@ const itemToString = (value, isMulti, showMore, handleShowMore, handleChange) =>
       );
     }
 
-    return value.map((item) => (typeof item === 'object' ? item.label : item)).join(',');
+    return value.map((item) => (typeof item === 'object' ? item.label : item));
   }
 
   if (typeof value === 'object') {
