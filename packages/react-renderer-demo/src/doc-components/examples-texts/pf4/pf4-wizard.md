@@ -127,6 +127,36 @@ Schema: [
 Progressive Wizard works same way. It checks if previous step has the same \`substepOf\` value and if so, it grouped them together.
 If the value is different, a new primary step is created with the step as a substep.
 
+**React node as substepOf**
+
+You can put a React node as `substepOf`. In this case you have to provide an object with keys `name: string` and `title?: ReactNode`.
+
+```jsx
+<h2>Custom title</h2>      // name: Configuration
+  Security
+  Credentials
+Summary
+```
+
+```jsx
+Schema: [
+  {
+    name: 'security',
+    title: 'Security',
+    nextStep: 'credentials',
+    substepOf: { name: 'Configuration', title: <h2>Custom title</h2> }
+  },{
+    name: 'credentials',
+    title: 'Credentials',
+    nextStep: 'summary',
+    substepOf: 'Configuration' // title can be put only in the first step
+  },{
+    name: 'summary',
+    title: 'Summary'
+  },
+]
+```
+
 **First step**
 
 First step should have on the first position of the `fields` array.

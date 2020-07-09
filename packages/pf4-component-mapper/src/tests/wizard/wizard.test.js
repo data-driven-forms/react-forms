@@ -205,6 +205,63 @@ describe('<Wizard />', () => {
     expect(enterHandle.default).toHaveBeenCalledWith(event, formOptions, '1', findCurrentStep, handleNext, handleSubmit);
   });
 
+  it('should render correctly with objects as substepOf and nodes titles', () => {
+    schema = {
+      fields: [
+        {
+          name: 'wizard',
+          component: 'wizard',
+          inModal: true,
+          fields: [
+            {
+              title: <h1>Custom title</h1>,
+              name: 'first-step',
+              fields: [],
+              nextStep: 'middle-step',
+              substepOf: { name: 'summary', title: <h2>Custom title 2</h2> }
+            },
+            {
+              name: 'middle-step',
+              title: 'middle-step',
+              fields: [],
+              substepOf: 'summary',
+              nextStep: 'end'
+            },
+            {
+              name: 'end',
+              title: <h3>Custom title 3</h3>,
+              fields: []
+            }
+          ]
+        }
+      ]
+    };
+
+    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+
+    expect(
+      wrapper
+        .find(WizardNavItem)
+        .first()
+        .props().content
+    ).toEqual(<h2>Custom title 2</h2>);
+
+    expect(
+      wrapper
+        .find(WizardNavItem)
+        .first()
+        .children()
+        .find(WizardNavItem)
+    ).toHaveLength(2);
+
+    expect(
+      wrapper
+        .find(WizardNavItem)
+        .last()
+        .props().content
+    ).toEqual(<h3>Custom title 3</h3>);
+  });
+
   it('should render correctly in modal and unmount', () => {
     schema = {
       fields: [
@@ -315,8 +372,8 @@ describe('<Wizard />', () => {
       loading: false,
       maxStepIndex: 1,
       navSchema: [
-        { index: 0, primary: true, substepOf: undefined, title: 'foo-step' },
-        { index: 1, primary: true, substepOf: undefined, title: 'bar-step' }
+        { index: 0, name: '1', primary: true, substepOf: undefined, substepOfTitle: undefined, title: 'foo-step' },
+        { index: 1, name: '2', primary: true, substepOf: undefined, substepOfTitle: undefined, title: 'bar-step' }
       ],
       prevSteps: ['1'],
       registeredFieldsHistory: { 1: ['foo-field'] }

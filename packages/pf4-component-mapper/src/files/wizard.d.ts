@@ -47,11 +47,16 @@ export interface WizardButtonsProps {
   selectNext: SelectNextFunction;
 }
 
+export interface SubstepOfObject {
+  name: string;
+  title?: ReactNode;
+}
+
 export interface WizardField {
   name: string | number;
   fields: Field[];
   nextStep?: WizardNextStep;
-  substepOf?: string | number;
+  substepOf?: string | number | SubstepOfObject;
   title?: ReactNode;
   showTitle?: boolean;
   customTitle?: ReactNode;
