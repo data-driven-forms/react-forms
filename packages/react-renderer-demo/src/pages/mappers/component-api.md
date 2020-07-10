@@ -53,7 +53,7 @@ Basic components that can change the form state (inputs) share common props. The
 
 <ExampleLink to='text-field' />
 
-### Text area
+### Textarea
 
 |Prop|Type|Description|
 |----|:--:|----------:|
@@ -129,6 +129,36 @@ This component is using [react-day-picker](https://react-day-picker.js.org/docs/
 
 <ExampleLink to='time-picker' />
 
+### Slider
+
+|Prop|Type|Description|
+|----|:--:|----------:|
+|min|number|The minimum permitted value|
+|max|number|The maximum permitted value|
+|step|number|The stepping interval|
+
+<ExampleLink to='slider' />
+
+### Dual list select
+
+|Prop|Type|Description|
+|----|:--:|----------:|
+|options|array|Options in format of { label: 'Label', value: value }|
+
+<ExampleLink to='dual-list-select' />
+
+### Field array
+
+|Prop|Type|Description|
+|----|:--:|----------:|
+|fields|array|Form fields|
+|minItems|number|Minimal number of items|
+|maxItems|min|Maximum number of items|
+|fields|array|Form fields|
+|defaultItem|any|Default item|
+
+<ExampleLink to='field-array' />
+
 ## Others components
 
 ### Subform
@@ -137,7 +167,7 @@ This component is using [react-day-picker](https://react-day-picker.js.org/docs/
 |----|:--:|----------:|
 |title|node/string|A title|
 |description|node/string|A description|
-|fields|array|A form fields|
+|fields|array|Form fields|
 
 <ExampleLink to='sub-form' />
 
