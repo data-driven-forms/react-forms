@@ -17,6 +17,7 @@ const Slider = (props) => {
     min = 0,
     max = 100,
     isDisabled,
+    isReadOnly,
     ...rest
   } = useFieldApi(props);
   useEffect(() => {
@@ -35,7 +36,7 @@ const Slider = (props) => {
       isRequired={isRequired}
     >
       <AntSlider
-        disabled={isDisabled}
+        disabled={isDisabled || isReadOnly}
         onChange={onChange}
         {...input}
         value={range === true && !Array.isArray(value) ? [min, max] : value}
