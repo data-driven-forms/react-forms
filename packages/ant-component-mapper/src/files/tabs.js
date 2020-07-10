@@ -11,7 +11,7 @@ const FormTabs = ({ fields, ...rest }) => {
   return (
     <Tabs {...rest}>
       {fields.map(({ fields, title, name, ...rest }) => (
-        <TabPane tab={title} key={name} {...rest}>
+        <TabPane tab={title} key={name} {...rest} forceRender>
           {formOptions.renderForm(fields, formOptions)}
         </TabPane>
       ))}

@@ -1,11 +1,15 @@
 import React from 'react';
 import { Form as DDFForm } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
-import { Slider as AntSlider } from 'antd';
+import { Slider as AntSlider, Form as OriginalForm } from 'antd';
 import Slider from '../files/slider';
 import AntForm from '../common/form-wrapper';
 
-const Form = (props) => <DDFForm onSubmit={jest.fn()} {...props} />;
+const Form = (props) => (
+  <OriginalForm>
+    <DDFForm onSubmit={jest.fn()} {...props} />
+  </OriginalForm>
+);
 
 describe('<Slider />', () => {
   const initialProps = {
