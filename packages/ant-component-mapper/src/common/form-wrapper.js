@@ -10,8 +10,8 @@ const AntForm = ({ label, children, isRequired, FormItemProps, meta, validateOnM
   const help = invalid || helperText || description;
 
   return (
-    <Form.Item validateStatus={!invalid ? '' : 'error'} help={help} label={!hideLabel && label} name={label} required={isRequired} {...FormItemProps}>
-      <div>{children}</div>
+    <Form.Item validateStatus={!invalid ? '' : 'error'} help={help} label={!hideLabel && label} required={isRequired} {...FormItemProps}>
+      {children}
     </Form.Item>
   );
 };
