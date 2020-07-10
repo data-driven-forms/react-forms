@@ -36,10 +36,15 @@ const ListHeader = ({ text }) => {
   const classes = useLinkStyles();
   const router = useRouter();
   const level = (text.match(/#/g) || []).length;
+
+  if (level === 1) {
+    return null;
+  }
+
   const labelText = text.replace(/#/g, '');
   return (
     <a className={classes.link} href={`${router.pathname}#${headerToId(text)}`} title={labelText}>
-      {[...new Array(level)].map((_v, index) => (
+      {[...new Array(level - 1)].map((_v, index) => (
         <React.Fragment key={index}>&nbsp;&nbsp;</React.Fragment>
       ))}
       {labelText}
@@ -80,12 +85,17 @@ const useStyles = makeStyles((theme) => ({
   },
   hidden: {
     height: '100%'
+  },
+  headerLink: {
+    color: 'inherit',
+    textDecoration: 'none'
   }
 }));
 
 const ListOfContents = ({ found = [] }) => {
   const [activeItem, setActive] = useState();
   let isMounted = true;
+  const router = useRouter();
 
   const scrollListener = (setActive) => {
     const min = -10;
@@ -110,11 +120,15 @@ const ListOfContents = ({ found = [] }) => {
   }, []);
   const classes = useStyles();
 
+  const header = found[0].replace(/# /, '');
+
   return (
     <StickyBox offsetTop={96} offsetBottom={20}>
       <div className={classes.fixedContainer}>
         <Typography className={classes.contentHeader} component="h3">
-          Content
+          <a className={classes.headerLink} href={`${router.pathname}#${headerToId(header)}`} title={header}>
+            {header}
+          </a>
         </Typography>
         <List dense>
           {found.map((text) => (

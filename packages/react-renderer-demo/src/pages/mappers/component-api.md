@@ -30,7 +30,7 @@ Standard components are:
 |switch|
 |timepicker/datepicker|
 
-# Form fields components
+## Form fields components
 
 Basic components that can change the form state (inputs) share common props. These components are using [useFieldApi](/mappers/custom-mapper#usefieldapi) or [FieldProvider](/mappers/custom-mapper#fieldprovider) to access the form state.
 
@@ -45,7 +45,7 @@ Basic components that can change the form state (inputs) share common props. The
 |isReadOnly|boolean|Is the field readOnly?|
 |initialValue|custom|There are two ways how to set initial values in the form: you can use either the [initialValues](/components/renderer) prop for the whole form or you can set the value in the schema for each field separately. For more information, please see [here](https://final-form.org/docs/react-final-form/types/FieldProps#initialvalue).|
 
-## Text field
+### Text field
 
 |Prop|Type|Description|
 |----|:--:|----------:|
@@ -53,7 +53,7 @@ Basic components that can change the form state (inputs) share common props. The
 
 <ExampleLink to='text-field' />
 
-## Text area
+### Text area
 
 |Prop|Type|Description|
 |----|:--:|----------:|
@@ -61,7 +61,7 @@ Basic components that can change the form state (inputs) share common props. The
 
 <ExampleLink to='textarea' />
 
-## Select
+### Select
 
 |Prop|Type|Description|
 |----|:--:|----------:|
@@ -76,7 +76,7 @@ Basic components that can change the form state (inputs) share common props. The
 
 <ExampleLink to='select' />
 
-## Checkbox
+### Checkbox
 
 |Prop|Type|Description|
 |----|:--:|----------:|
@@ -86,7 +86,7 @@ Basic components that can change the form state (inputs) share common props. The
 <br />
 <ExampleLink to='checkbox' text='Single checkbox example'/>
 
-## Radio
+### Radio
 
 |Prop|Type|Description|
 |----|:--:|----------:|
@@ -94,7 +94,7 @@ Basic components that can change the form state (inputs) share common props. The
 
 <ExampleLink to='radio' />
 
-## Switch
+### Switch
 
 |Prop|Type|Description|
 |----|:--:|----------:|
@@ -103,7 +103,7 @@ Basic components that can change the form state (inputs) share common props. The
 
 <ExampleLink to='switch' />
 
-## Datepicker
+### Datepicker
 
 This component is using [react-day-picker](https://react-day-picker.js.org/docs/) as a base component.
 
@@ -121,7 +121,7 @@ This component is using [react-day-picker](https://react-day-picker.js.org/docs/
 
 <ExampleLink to='date-picker' />
 
-## Timepicker
+### Timepicker
 
 |Prop|Type|Description|
 |----|:--:|----------:|
@@ -129,9 +129,9 @@ This component is using [react-day-picker](https://react-day-picker.js.org/docs/
 
 <ExampleLink to='time-picker' />
 
-# Others components
+## Others components
 
-## Subform
+### Subform
 
 |Prop|Type|Description|
 |----|:--:|----------:|
@@ -141,7 +141,7 @@ This component is using [react-day-picker](https://react-day-picker.js.org/docs/
 
 <ExampleLink to='sub-form' />
 
-## Tab/tab item
+### Tab/tab item
 
 Tab <br/>
 
@@ -158,7 +158,7 @@ Tab item <br/>
 
 <ExampleLink to='tabs' />
 
-## Wizard
+### Wizard
 
 Wizard <br />
 
@@ -180,7 +180,7 @@ Wizard step <br/>
 
 <ExampleLink to='wizard' />
 
-## Plain text
+### Plain text
 
 |Prop|Type|Description|
 |----|:--:|----------:|
