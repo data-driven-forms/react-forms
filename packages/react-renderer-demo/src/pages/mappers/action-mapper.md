@@ -29,7 +29,7 @@ The [ActionMapper](/components/renderer#optionalprops) allows you to map schema 
 
 Do not forget to keep order of args or use object with keys as named arguments.
 
-# Example
+## Example
 
 So, let's say you need to translate labels of fields using your translate function `translate(id)` and the schema has no access to use JavaScript code.
 

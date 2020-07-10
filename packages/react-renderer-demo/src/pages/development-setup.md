@@ -46,7 +46,7 @@ yarn dev
 yarn lerna clean # will delete all node_modules
 ```
 
-# Tests
+## Tests
 
 Tests needed to be run from the core folder.
 
@@ -56,7 +56,7 @@ yarn test
 yarn test packages/pf3-component-mapper
 ```
 
-# Commits
+## Commits
 
 Data Driven Forms uses [Semantic Release](https://github.com/semantic-release/commit-analyzer)
 
@@ -79,11 +79,11 @@ Please, do not use Semantic Release, if you update only the demo.
 
 All packages are releasing together and they share the version number.
 
-# Changes to documentation
+## Changes to documentation
 
 If your changes influence API or add new features, you should describe these new options in the `react-renderer-demo` repository. Thanks!
 
-# Generating a mapper template
+## Generating a mapper template
 
 To generate a mapper template, run:
 
