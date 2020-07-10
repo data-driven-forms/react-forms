@@ -54,4 +54,8 @@ const validatorMapper = {
 }
 ```
 
+## Example
+
+<CodeExample source="components/validator-mapper" mode="preview" />
+
 </DocPage>
