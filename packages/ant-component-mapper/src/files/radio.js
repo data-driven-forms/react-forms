@@ -56,7 +56,6 @@ Radio.propTypes = {
   label: PropTypes.node.isRequired,
   isDisabled: PropTypes.bool,
   isReadOnly: PropTypes.bool,
-  children: PropTypes.any,
   description: PropTypes.node,
   FormItemProps: PropTypes.object
 };
