@@ -54,7 +54,7 @@ const mapperLinks = {
     [componentTypes.TABS]: 'tabs',
     [componentTypes.DATE_PICKER]: 'date-picker',
     [componentTypes.TIME_PICKER]: 'time-picker',
-    [componentTypes.WIZARD]: 'steps',
+    [componentTypes.WIZARD]: '',
     [componentTypes.SWITCH]: 'switch',
     [componentTypes.TEXTAREA]: 'input/#Input.TextArea',
     [componentTypes.SELECT]: 'select',
