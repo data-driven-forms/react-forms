@@ -160,7 +160,7 @@ WizardInternal.propTypes = {
   hasNoBodyPadding: PropTypes.bool,
   navAriaLabel: PropTypes.string,
   container: PropTypes.instanceOf(Element),
-  StepTemplate: PropTypes.func
+  StepTemplate: PropTypes.elementType
 };
 
 const defaultLabels = {
