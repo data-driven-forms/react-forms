@@ -52,6 +52,15 @@ export interface SubstepOfObject {
   title?: ReactNode;
 }
 
+export interface StepTemplateProps {
+  title?: ReactNode;
+  formFields: ReactNode;
+  showTitles?: boolean;
+  showTitle?: boolean;
+  customTitle?: ReactNode;
+  fields: Field[];
+}
+
 export interface WizardField {
   name: string | number;
   fields: Field[];
@@ -62,6 +71,8 @@ export interface WizardField {
   customTitle?: ReactNode;
   disableForwardJumping?: boolean;
   buttons?: ReactNode | React.ComponentType<WizardButtonsProps>;
+  StepTemplate?: React.ComponentType<StepTemplateProps>;
+  hasNoBodyPadding?: boolean;
 }
 
 export interface WizardProps {
@@ -80,6 +91,7 @@ export interface WizardProps {
   closeButtonAriaLabel?: string;
   hasNoBodyPadding?: boolean;
   navAriaLabel?: string;
+  StepTemplate?: React.ComponentType<StepTemplateProps>;
 }
 
 declare const Wizard: React.ComponentType<WizardProps>;
