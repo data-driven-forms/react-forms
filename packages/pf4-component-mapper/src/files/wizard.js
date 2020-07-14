@@ -38,6 +38,7 @@ const WizardInternal = ({
   closeButtonAriaLabel,
   hasNoBodyPadding,
   navAriaLabel,
+  StepTemplate,
   ...rest
 }) => {
   const {
@@ -122,15 +123,16 @@ const WizardInternal = ({
               </FormSpy>
             </WizardNav>
             <WizardStep
-              {...currentStep}
-              formOptions={formOptions}
               buttonLabels={buttonLabels}
               buttonsClassName={buttonsClassName}
               showTitles={showTitles}
+              hasNoBodyPadding={hasNoBodyPadding}
+              StepTemplate={StepTemplate}
+              {...currentStep}
+              formOptions={formOptions}
               handleNext={(nextStep) => handleNext(nextStep)}
               handlePrev={handlePrev}
               disableBack={activeStepIndex === 0}
-              hasNoBodyPadding={hasNoBodyPadding}
             />
           </div>
         </div>
@@ -157,7 +159,8 @@ WizardInternal.propTypes = {
   closeButtonAriaLabel: PropTypes.string,
   hasNoBodyPadding: PropTypes.bool,
   navAriaLabel: PropTypes.string,
-  container: PropTypes.instanceOf(Element)
+  container: PropTypes.instanceOf(Element),
+  StepTemplate: PropTypes.elementType
 };
 
 const defaultLabels = {

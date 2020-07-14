@@ -1,20 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<WizardStep /> should render correctly 1`] = `
-<Fragment>
-  <Component>
-    <div
-      className="pf-c-form"
-    >
-      <div
-        key="foo"
-      >
-        foo
-      </div>
-    </div>
-  </Component>
-  <WizardStepButtons
-    FieldProvider={[Function]}
+<ReactFinalForm
+  onSubmit={[MockFunction]}
+>
+  <WizardStep
+    StepTemplate={[Function]}
     buttonLabels={
       Object {
         "back": "Back",
@@ -22,6 +13,12 @@ exports[`<WizardStep /> should render correctly 1`] = `
         "next": "Next",
         "submit": "Submit",
       }
+    }
+    description="description"
+    fields={
+      Array [
+        "foo",
+      ]
     }
     formOptions={
       Object {
@@ -33,25 +30,181 @@ exports[`<WizardStep /> should render correctly 1`] = `
     }
     handleNext={[MockFunction]}
     handlePrev={[MockFunction]}
-  />
-</Fragment>
+    title="title"
+  >
+    <Component>
+      <main
+        className="pf-c-wizard__main"
+      >
+        <div
+          className="pf-c-wizard__main-body"
+        >
+          <DefaultStepTemplate
+            buttonLabels={
+              Object {
+                "back": "Back",
+                "cancel": "Cancel",
+                "next": "Next",
+                "submit": "Submit",
+              }
+            }
+            description="description"
+            fields={
+              Array [
+                "foo",
+              ]
+            }
+            formFields={
+              Array [
+                <div>
+                  foo
+                </div>,
+              ]
+            }
+            formOptions={
+              Object {
+                "getState": [MockFunction],
+                "handleSubmit": [MockFunction],
+                "onCancel": [MockFunction],
+                "renderForm": [Function],
+              }
+            }
+            formRef={
+              Object {
+                "current": <div
+                  class="pf-c-form"
+                >
+                  <div>
+                    foo
+                  </div>
+                </div>,
+              }
+            }
+            handleNext={[MockFunction]}
+            handlePrev={[MockFunction]}
+            title="title"
+          >
+            <div
+              className="pf-c-form"
+            >
+              <div
+                key="foo"
+              >
+                foo
+              </div>
+            </div>
+          </DefaultStepTemplate>
+        </div>
+      </main>
+    </Component>
+    <WizardStepButtons
+      buttonLabels={
+        Object {
+          "back": "Back",
+          "cancel": "Cancel",
+          "next": "Next",
+          "submit": "Submit",
+        }
+      }
+      formOptions={
+        Object {
+          "getState": [MockFunction],
+          "handleSubmit": [MockFunction],
+          "onCancel": [MockFunction],
+          "renderForm": [Function],
+        }
+      }
+      handleNext={[MockFunction]}
+      handlePrev={[MockFunction]}
+    >
+      <footer
+        className="pf-c-wizard__footer "
+      >
+        <FormSpy>
+          <NextButton
+            getState={[MockFunction]}
+            handleNext={[MockFunction]}
+            handleSubmit={[MockFunction]}
+            nextLabel="Next"
+            onCancel={[MockFunction]}
+            renderForm={[Function]}
+            submitLabel="Submit"
+          >
+            <Component
+              isDisabled={true}
+              onClick={[Function]}
+              type="button"
+              variant="primary"
+            >
+              <button
+                aria-disabled={null}
+                aria-label={null}
+                className="pf-c-button pf-m-primary"
+                data-ouia-component-id={null}
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe={true}
+                disabled={true}
+                onClick={[Function]}
+                tabIndex={null}
+                type="button"
+              >
+                Submit
+              </button>
+            </Component>
+          </NextButton>
+          <Component
+            onClick={[MockFunction]}
+            type="button"
+            variant="secondary"
+          >
+            <button
+              aria-disabled={null}
+              aria-label={null}
+              className="pf-c-button pf-m-secondary"
+              data-ouia-component-id={null}
+              data-ouia-component-type="PF4/Button"
+              data-ouia-safe={true}
+              disabled={false}
+              onClick={[MockFunction]}
+              tabIndex={null}
+              type="button"
+            >
+              Back
+            </button>
+          </Component>
+          <Component
+            onClick={[MockFunction]}
+            type="button"
+            variant="link"
+          >
+            <button
+              aria-disabled={null}
+              aria-label={null}
+              className="pf-c-button pf-m-link"
+              data-ouia-component-id={null}
+              data-ouia-component-type="PF4/Button"
+              data-ouia-safe={true}
+              disabled={false}
+              onClick={[MockFunction]}
+              tabIndex={null}
+              type="button"
+            >
+              Cancel
+            </button>
+          </Component>
+        </FormSpy>
+      </footer>
+    </WizardStepButtons>
+  </WizardStep>
+</ReactFinalForm>
 `;
 
 exports[`<WizardStep /> should render custom description 1`] = `
-<Fragment>
-  <Component>
-    <div
-      className="pf-c-form"
-    >
-      <div
-        key="foo"
-      >
-        foo
-      </div>
-    </div>
-  </Component>
-  <WizardStepButtons
-    FieldProvider={[Function]}
+<ReactFinalForm
+  onSubmit={[MockFunction]}
+>
+  <WizardStep
+    StepTemplate={[Function]}
     buttonLabels={
       Object {
         "back": "Back",
@@ -59,6 +212,16 @@ exports[`<WizardStep /> should render custom description 1`] = `
         "next": "Next",
         "submit": "Submit",
       }
+    }
+    description={
+      <div>
+        description
+      </div>
+    }
+    fields={
+      Array [
+        "foo",
+      ]
     }
     formOptions={
       Object {
@@ -70,32 +233,185 @@ exports[`<WizardStep /> should render custom description 1`] = `
     }
     handleNext={[MockFunction]}
     handlePrev={[MockFunction]}
-  />
-</Fragment>
+    title="title"
+  >
+    <Component>
+      <main
+        className="pf-c-wizard__main"
+      >
+        <div
+          className="pf-c-wizard__main-body"
+        >
+          <DefaultStepTemplate
+            buttonLabels={
+              Object {
+                "back": "Back",
+                "cancel": "Cancel",
+                "next": "Next",
+                "submit": "Submit",
+              }
+            }
+            description={
+              <div>
+                description
+              </div>
+            }
+            fields={
+              Array [
+                "foo",
+              ]
+            }
+            formFields={
+              Array [
+                <div>
+                  foo
+                </div>,
+              ]
+            }
+            formOptions={
+              Object {
+                "getState": [MockFunction],
+                "handleSubmit": [MockFunction],
+                "onCancel": [MockFunction],
+                "renderForm": [Function],
+              }
+            }
+            formRef={
+              Object {
+                "current": <div
+                  class="pf-c-form"
+                >
+                  <div>
+                    foo
+                  </div>
+                </div>,
+              }
+            }
+            handleNext={[MockFunction]}
+            handlePrev={[MockFunction]}
+            title="title"
+          >
+            <div
+              className="pf-c-form"
+            >
+              <div
+                key="foo"
+              >
+                foo
+              </div>
+            </div>
+          </DefaultStepTemplate>
+        </div>
+      </main>
+    </Component>
+    <WizardStepButtons
+      buttonLabels={
+        Object {
+          "back": "Back",
+          "cancel": "Cancel",
+          "next": "Next",
+          "submit": "Submit",
+        }
+      }
+      formOptions={
+        Object {
+          "getState": [MockFunction],
+          "handleSubmit": [MockFunction],
+          "onCancel": [MockFunction],
+          "renderForm": [Function],
+        }
+      }
+      handleNext={[MockFunction]}
+      handlePrev={[MockFunction]}
+    >
+      <footer
+        className="pf-c-wizard__footer "
+      >
+        <FormSpy>
+          <NextButton
+            getState={[MockFunction]}
+            handleNext={[MockFunction]}
+            handleSubmit={[MockFunction]}
+            nextLabel="Next"
+            onCancel={[MockFunction]}
+            renderForm={[Function]}
+            submitLabel="Submit"
+          >
+            <Component
+              isDisabled={true}
+              onClick={[Function]}
+              type="button"
+              variant="primary"
+            >
+              <button
+                aria-disabled={null}
+                aria-label={null}
+                className="pf-c-button pf-m-primary"
+                data-ouia-component-id={null}
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe={true}
+                disabled={true}
+                onClick={[Function]}
+                tabIndex={null}
+                type="button"
+              >
+                Submit
+              </button>
+            </Component>
+          </NextButton>
+          <Component
+            onClick={[MockFunction]}
+            type="button"
+            variant="secondary"
+          >
+            <button
+              aria-disabled={null}
+              aria-label={null}
+              className="pf-c-button pf-m-secondary"
+              data-ouia-component-id={null}
+              data-ouia-component-type="PF4/Button"
+              data-ouia-safe={true}
+              disabled={false}
+              onClick={[MockFunction]}
+              tabIndex={null}
+              type="button"
+            >
+              Back
+            </button>
+          </Component>
+          <Component
+            onClick={[MockFunction]}
+            type="button"
+            variant="link"
+          >
+            <button
+              aria-disabled={null}
+              aria-label={null}
+              className="pf-c-button pf-m-link"
+              data-ouia-component-id={null}
+              data-ouia-component-type="PF4/Button"
+              data-ouia-safe={true}
+              disabled={false}
+              onClick={[MockFunction]}
+              tabIndex={null}
+              type="button"
+            >
+              Cancel
+            </button>
+          </Component>
+        </FormSpy>
+      </footer>
+    </WizardStepButtons>
+  </WizardStep>
+</ReactFinalForm>
 `;
 
 exports[`<WizardStep /> should render title with showTitle 1`] = `
-<Fragment>
-  <Component>
-    <div
-      className="pf-c-form"
-    >
-      <RenderTitle
-        title={
-          <div>
-            title
-          </div>
-        }
-      />
-      <div
-        key="foo"
-      >
-        foo
-      </div>
-    </div>
-  </Component>
-  <WizardStepButtons
-    FieldProvider={[Function]}
+<ReactFinalForm
+  onSubmit={[MockFunction]}
+>
+  <WizardStep
+    StepTemplate={[Function]}
     buttonLabels={
       Object {
         "back": "Back",
@@ -103,6 +419,12 @@ exports[`<WizardStep /> should render title with showTitle 1`] = `
         "next": "Next",
         "submit": "Submit",
       }
+    }
+    description="description"
+    fields={
+      Array [
+        "foo",
+      ]
     }
     formOptions={
       Object {
@@ -114,6 +436,208 @@ exports[`<WizardStep /> should render title with showTitle 1`] = `
     }
     handleNext={[MockFunction]}
     handlePrev={[MockFunction]}
-  />
-</Fragment>
+    showTitle={true}
+    title={
+      <div>
+        title
+      </div>
+    }
+  >
+    <Component>
+      <main
+        className="pf-c-wizard__main"
+      >
+        <div
+          className="pf-c-wizard__main-body"
+        >
+          <DefaultStepTemplate
+            buttonLabels={
+              Object {
+                "back": "Back",
+                "cancel": "Cancel",
+                "next": "Next",
+                "submit": "Submit",
+              }
+            }
+            description="description"
+            fields={
+              Array [
+                "foo",
+              ]
+            }
+            formFields={
+              Array [
+                <div>
+                  foo
+                </div>,
+              ]
+            }
+            formOptions={
+              Object {
+                "getState": [MockFunction],
+                "handleSubmit": [MockFunction],
+                "onCancel": [MockFunction],
+                "renderForm": [Function],
+              }
+            }
+            formRef={
+              Object {
+                "current": <div
+                  class="pf-c-form"
+                >
+                  <h1
+                    class="pf-c-title pf-m-xl"
+                  >
+                    <div>
+                      title
+                    </div>
+                  </h1>
+                  <div>
+                    foo
+                  </div>
+                </div>,
+              }
+            }
+            handleNext={[MockFunction]}
+            handlePrev={[MockFunction]}
+            showTitle={true}
+            title={
+              <div>
+                title
+              </div>
+            }
+          >
+            <div
+              className="pf-c-form"
+            >
+              <RenderTitle
+                title={
+                  <div>
+                    title
+                  </div>
+                }
+              >
+                <Component
+                  headingLevel="h1"
+                  size="xl"
+                >
+                  <h1
+                    className="pf-c-title pf-m-xl"
+                  >
+                    <div>
+                      title
+                    </div>
+                  </h1>
+                </Component>
+              </RenderTitle>
+              <div
+                key="foo"
+              >
+                foo
+              </div>
+            </div>
+          </DefaultStepTemplate>
+        </div>
+      </main>
+    </Component>
+    <WizardStepButtons
+      buttonLabels={
+        Object {
+          "back": "Back",
+          "cancel": "Cancel",
+          "next": "Next",
+          "submit": "Submit",
+        }
+      }
+      formOptions={
+        Object {
+          "getState": [MockFunction],
+          "handleSubmit": [MockFunction],
+          "onCancel": [MockFunction],
+          "renderForm": [Function],
+        }
+      }
+      handleNext={[MockFunction]}
+      handlePrev={[MockFunction]}
+    >
+      <footer
+        className="pf-c-wizard__footer "
+      >
+        <FormSpy>
+          <NextButton
+            getState={[MockFunction]}
+            handleNext={[MockFunction]}
+            handleSubmit={[MockFunction]}
+            nextLabel="Next"
+            onCancel={[MockFunction]}
+            renderForm={[Function]}
+            submitLabel="Submit"
+          >
+            <Component
+              isDisabled={true}
+              onClick={[Function]}
+              type="button"
+              variant="primary"
+            >
+              <button
+                aria-disabled={null}
+                aria-label={null}
+                className="pf-c-button pf-m-primary"
+                data-ouia-component-id={null}
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe={true}
+                disabled={true}
+                onClick={[Function]}
+                tabIndex={null}
+                type="button"
+              >
+                Submit
+              </button>
+            </Component>
+          </NextButton>
+          <Component
+            onClick={[MockFunction]}
+            type="button"
+            variant="secondary"
+          >
+            <button
+              aria-disabled={null}
+              aria-label={null}
+              className="pf-c-button pf-m-secondary"
+              data-ouia-component-id={null}
+              data-ouia-component-type="PF4/Button"
+              data-ouia-safe={true}
+              disabled={false}
+              onClick={[MockFunction]}
+              tabIndex={null}
+              type="button"
+            >
+              Back
+            </button>
+          </Component>
+          <Component
+            onClick={[MockFunction]}
+            type="button"
+            variant="link"
+          >
+            <button
+              aria-disabled={null}
+              aria-label={null}
+              className="pf-c-button pf-m-link"
+              data-ouia-component-id={null}
+              data-ouia-component-type="PF4/Button"
+              data-ouia-safe={true}
+              disabled={false}
+              onClick={[MockFunction]}
+              tabIndex={null}
+              type="button"
+            >
+              Cancel
+            </button>
+          </Component>
+        </FormSpy>
+      </footer>
+    </WizardStepButtons>
+  </WizardStep>
+</ReactFinalForm>
 `;
