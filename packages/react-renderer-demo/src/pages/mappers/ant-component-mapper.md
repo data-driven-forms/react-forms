@@ -40,6 +40,7 @@ This field will show the error immediately.
 
 Ant Design provides horizontal and vertical layouts for form. Layout can be specified by passing a `layout` prop to `formTemplate`. By default it is set to `vertical`.
 
-<!-- ```jsx -->
-
+```
+<FormTemplate layout='horizontal' />}
+```
 </DocPage>

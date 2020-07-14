@@ -275,7 +275,7 @@ const LandingPageCards = () => {
                 </a>
               </RouterLink>
             </Grid>
-            <Grid item xs={12} md={6} xl={2}>
+            <Grid item xs={12} md={4} xl={2}>
               <Typography variant="h6" className={classes.textBottom}>
                 BlueprintJS
               </Typography>
@@ -285,7 +285,7 @@ const LandingPageCards = () => {
                 </a>
               </RouterLink>
             </Grid>
-            <Grid item xs={12} md={6} xl={2}>
+            <Grid item xs={12} md={4} xl={2}>
               <Typography variant="h6" className={classes.textBottom}>
                 Semantic UI
               </Typography>
