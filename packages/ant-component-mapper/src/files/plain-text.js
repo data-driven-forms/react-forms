@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 const { Paragraph } = Typography;
 
-const PlainText = ({ label, name, ...rest }) => (
-  <Typography>
+const PlainText = ({ label, name, TypographyProps, ...rest }) => (
+  <Typography {...TypographyProps}>
     {label.split('\n').map((paragraph, index) => (
       <Paragraph key={`${index}-${name}`} {...rest}>
         {paragraph}
@@ -16,7 +16,8 @@ const PlainText = ({ label, name, ...rest }) => (
 
 PlainText.propTypes = {
   label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  TypographyProps: PropTypes.object
 };
 
 export default PlainText;
