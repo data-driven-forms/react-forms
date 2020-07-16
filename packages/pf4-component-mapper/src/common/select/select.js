@@ -24,7 +24,7 @@ const itemToString = (value, isMulti, showMore, handleShowMore, handleChange) =>
     if (isMulti) {
       const visibleOptions = showMore ? value : value.slice(0, 3);
       return (
-        <div className="pf-c-chip-group" onClick={(event) => event.stopPropagation()}>
+        <div className="pf-c-chip-group pf-u-ml-sm" onClick={(event) => event.stopPropagation()}>
           <ul className="pf-c-chip-group__list" aria-label="Chip group category">
             {visibleOptions.map((item, index) => {
               const label = typeof item === 'object' ? item.label : item;
@@ -74,17 +74,35 @@ const getValue = (isMulti, option, value) => {
   return isSelected ? value.filter(({ value }) => value !== option.value) : [...value, option];
 };
 
-const stateReducer = (state, changes, keepMenuOpen) => {
+const stateReducer = (state, changes, isMulti) => {
   switch (changes.type) {
     case Downshift.stateChangeTypes.keyDownEnter:
     case Downshift.stateChangeTypes.clickItem:
       return {
         ...changes,
-        isOpen: keepMenuOpen ? state.isOpen : !state.isOpen,
+        isOpen: isMulti ? state.isOpen : !state.isOpen,
         highlightedIndex: state.highlightedIndex,
-        inputValue: state.inputValue // prevent filter value change after option click
+        inputValue: isMulti ? state.inputValue : changes.inputValue // prevent filter value change after option click
       };
     case Downshift.stateChangeTypes.controlledPropUpdatedSelectedItem:
+      return {
+        ...changes,
+        inputValue: state.inputValue
+      };
+    case Downshift.stateChangeTypes.mouseUp:
+      if (typeof changes.inputValue === 'string') {
+        return {
+          ...changes
+        };
+      }
+
+      if (Array.isArray(changes.inputValue) && typeof changes.inputValue[0] === 'string') {
+        return {
+          ...changes,
+          inputValue: changes.inputValue[0]
+        };
+      }
+
       return {
         ...changes,
         inputValue: state.inputValue
@@ -139,11 +157,20 @@ const InternalSelect = ({
             <div
               ref={selectToggleRef}
               disabled={isDisabled}
-              className={`pf-c-select__toggle${isDisabled ? ' pf-m-disabled' : ''}`}
+              className={`pf-c-select__toggle${isDisabled ? ' pf-m-disabled' : ''}${
+                isSearchable ? ' pf-m-typeahead' : ''
+              } ddorg__pf4-component-mapper__select-toggle`}
               {...toggleButtonProps}
             >
               <div className="pf-c-select_toggle-wrapper ddorg__pf4-component-mapper__select-toggle-wrapper">
-                <ValueContainer placeholder={placeholder} value={itemToString(selectedItem, isMulti, showMore, handleShowMore, handleChange)} />
+                <ValueContainer
+                  isMulti={isMulti}
+                  isSearchable={isSearchable}
+                  placeholder={placeholder}
+                  inputRef={inputRef}
+                  getInputProps={getInputProps}
+                  value={itemToString(selectedItem, isMulti, showMore, handleShowMore, handleChange)}
+                />
               </div>
               {isClearable && parsedValue && <ClearIndicator clearSelection={clearSelection} />}
               <span className="pf-c-select__toggle-arrow">
@@ -155,9 +182,7 @@ const InternalSelect = ({
                 noResultsMessage={noResultsMessage}
                 noOptionsMessage={noOptionsMessage}
                 isFetching={isFetching}
-                inputRef={inputRef}
                 isDisabled={isDisabled}
-                placeholder={placeholder}
                 isSearchable={isSearchable}
                 getInputProps={getInputProps}
                 filterOptions={filterOptions}

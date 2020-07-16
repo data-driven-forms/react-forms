@@ -12,18 +12,11 @@
   animation: spin 2s linear infinite;
 }
 
-.ddorg_pf4-component-mapper__select-portal-menu.ddorg_pf4-component-mapper__select-portal-menu-searchable {
-  &::before {
-    position: absolute;
-    bottom: -4px;
-    height: 4px;
-    left: 0;
-    right: 0;
-    background: white;
-    border-bottom-width: var(--pf-global--BorderWidth--sm);
-    border-bottom-color: var(--pf-global--BorderColor--dark-100);
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    content: "";
-  }
+.pf-c-select_toggle-wrapper.ddorg__pf4-component-mapper__select-toggle-wrapper {
+  flex: 1;
+  display: flex;
+}
+
+.ddorg__pf4-component-mapper__select-toggle.pf-m-typeahead {
+  padding-left: 0;
 }

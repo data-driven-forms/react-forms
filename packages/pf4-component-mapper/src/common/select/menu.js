@@ -1,7 +1,6 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Option from './option';
-import Input from './input';
 import EmptyOption from './empty-options';
 
 const getScrollParent = (element) => {
@@ -36,7 +35,7 @@ const getMenuPosition = (selectBase) => {
   return selectBase.getBoundingClientRect();
 };
 
-const MenuPortal = ({ selectToggleRef, menuPortalTarget, children, isSearchable }) => {
+const MenuPortal = ({ selectToggleRef, menuPortalTarget, children }) => {
   const [position, setPosition] = useState(getMenuPosition(selectToggleRef.current));
   useEffect(() => {
     const scrollParentElement = getScrollParent(selectToggleRef.current);
@@ -52,12 +51,10 @@ const MenuPortal = ({ selectToggleRef, menuPortalTarget, children, isSearchable 
     };
   }, [selectToggleRef]);
 
-  const top = isSearchable ? position.top + position.height + 64 : position.top + position.height;
+  const top = position.top + position.height;
   const portalDiv = (
     <div
-      className={`pf-c-select ddorg_pf4-component-mapper__select-portal-menu${
-        isSearchable ? ' ddorg_pf4-component-mapper__select-portal-menu-searchable' : ''
-      }`}
+      className="pf-c-select ddorg_pf4-component-mapper__select-portal-menu"
       style={{ borderTop: '4px solid white', zIndex: 401, position: 'absolute', top, left: position.left, width: position.width }}
     >
       {children}
@@ -71,7 +68,6 @@ const Menu = ({
   noResultsMessage,
   noOptionsMessage,
   filterOptions,
-  inputRef,
   isSearchable,
   filterValue,
   options,
@@ -88,7 +84,6 @@ const Menu = ({
   const filteredOptions = isSearchable ? filterOptions(options, filterValue) : options;
   const menuItems = (
     <ul className="pf-c-select__menu">
-      {!menuIsPortal && isSearchable && <Input inputRef={inputRef} getInputProps={getInputProps} />}
       {filteredOptions.length === 0 && (
         <EmptyOption
           isSearchable={isSearchable}
@@ -112,16 +107,9 @@ const Menu = ({
   );
   if (menuIsPortal) {
     return (
-      <Fragment>
-        {isSearchable && (
-          <ul className="pf-c-select__menu">
-            <Input inputRef={inputRef} getInputProps={getInputProps} />
-          </ul>
-        )}
-        <MenuPortal isSearchable={isSearchable} menuPortalTarget={menuPortalTarget} selectToggleRef={selectToggleRef}>
-          {menuItems}
-        </MenuPortal>
-      </Fragment>
+      <MenuPortal menuPortalTarget={menuPortalTarget} selectToggleRef={selectToggleRef}>
+        {menuItems}
+      </MenuPortal>
     );
   }
 
