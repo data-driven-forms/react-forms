@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import Option from './option';
 import EmptyOption from './empty-options';
+
+import './menu.scss';
 
 const getScrollParent = (element) => {
   let style = getComputedStyle(element);
@@ -35,29 +37,63 @@ const getMenuPosition = (selectBase) => {
   return selectBase.getBoundingClientRect();
 };
 
+const checkScrollVisibility = (scrollableParent, selectRoot, menuRoot) => {
+  const parentProportions = scrollableParent.getBoundingClientRect();
+  const rootProportions = selectRoot.getBoundingClientRect();
+  const menuProportions = menuRoot.getBoundingClientRect();
+  return {
+    rootPosition: parentProportions.y,
+    cropSize: rootProportions.y + rootProportions.height - parentProportions.y,
+    maxHeight: window.innerHeight - menuProportions.top + 1
+  };
+};
+
 const MenuPortal = ({ selectToggleRef, menuPortalTarget, children }) => {
   const [position, setPosition] = useState(getMenuPosition(selectToggleRef.current));
+  const [{ cropSize, rootPosition, maxHeight }, setCropSize] = useState({});
+  const menuRef = useRef();
   useEffect(() => {
+    setCropSize({ maxHeight: window.innerHeight - menuRef.current.getBoundingClientRect().top - 4 });
     const scrollParentElement = getScrollParent(selectToggleRef.current);
-    const scrollListener = scrollParentElement.addEventListener('scroll', () => {
+    const scrollHandler = function() {
+      setCropSize(checkScrollVisibility(scrollParentElement, selectToggleRef.current, menuRef.current));
       setPosition(getMenuPosition(selectToggleRef.current));
-    });
-    const resizeListener = window.addEventListener('resize', () => {
+    };
+
+    const resizeHandler = function() {
+      setCropSize((prevSize) => ({ ...prevSize, maxHeight: window.innerHeight - menuRef.current.getBoundingClientRect().top - 4 }));
       setPosition(getMenuPosition(selectToggleRef.current));
-    });
+    };
+
+    scrollParentElement.addEventListener('scroll', scrollHandler, true);
+    window.addEventListener('resize', resizeHandler, true);
     return () => {
-      window.removeEventListener('resize', resizeListener);
-      scrollParentElement.removeEventListener('scroll', scrollListener);
+      window.removeEventListener('resize', resizeHandler, true);
+      scrollParentElement.removeEventListener('scroll', scrollHandler, true);
     };
   }, [selectToggleRef]);
 
   const top = position.top + position.height;
+  const sizedMenu = React.cloneElement(children, {
+    style: {
+      maxHeight: cropSize < 0 ? maxHeight + cropSize : maxHeight,
+      overflow: 'auto'
+    }
+  });
   const portalDiv = (
     <div
+      ref={menuRef}
       className="pf-c-select ddorg_pf4-component-mapper__select-portal-menu"
-      style={{ borderTop: '4px solid white', zIndex: 401, position: 'absolute', top, left: position.left, width: position.width }}
+      style={{
+        zIndex: 401,
+        position: 'absolute',
+        top: cropSize < 0 ? rootPosition : top,
+        left: position.left,
+        width: position.width,
+        overflow: 'hidden'
+      }}
     >
-      {children}
+      {cropSize < 0 ? <div style={{ position: 'relative', top: cropSize, width: position.width }}>{sizedMenu}</div> : sizedMenu}
     </div>
   );
 
@@ -83,7 +119,7 @@ const Menu = ({
 }) => {
   const filteredOptions = isSearchable ? filterOptions(options, filterValue) : options;
   const menuItems = (
-    <ul className="pf-c-select__menu">
+    <ul className={`pf-c-select__menu${menuIsPortal ? ' ddorg__pf4-component-mapper__select-menu-portal' : ''}`}>
       {filteredOptions.length === 0 && (
         <EmptyOption
           isSearchable={isSearchable}
