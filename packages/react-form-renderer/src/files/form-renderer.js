@@ -29,7 +29,7 @@ const FormRenderer = ({
   ...props
 }) => {
   const [fileInputs, setFileInputs] = useState([]);
-  const [uiState, dispatchCondition] = useReducer(uiStateReducer, {
+  const [uiState, dispatchUIState] = useReducer(uiStateReducer, {
     fields: {},
     setFieldValues: {},
   });
@@ -94,7 +94,7 @@ const FormRenderer = ({
               getState,
               registerField,
               uiState,
-              dispatchCondition,
+              dispatchUIState,
               valid,
               clearedValue,
               submit,
@@ -110,7 +110,7 @@ const FormRenderer = ({
           <RegisterConditions schema={schema} />
           <SetFieldValues />
           <FormTemplate formFields={renderForm(schema.fields)} schema={schema} />
-          <div>{JSON.stringify(uiState, null, 2)}</div>
+          <pre>{JSON.stringify(uiState, null, 2)}</pre>
         </RendererContext.Provider>
       )}
     />

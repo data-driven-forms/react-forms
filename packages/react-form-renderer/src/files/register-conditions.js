@@ -6,7 +6,7 @@ import {conditionsMapper} from './conditions-mapper';
 import {parseCondition} from '../form-renderer/condition2';
 
 const RegisterConditions = ({schema}) => {
-  const {getState, registerField, dispatchCondition} = useFormApi();
+  const {getState, registerField, dispatchUIState} = useFormApi();
 
   useEffect(() => {
     const indexedConditions = conditionsMapper({conditions: schema.conditions});
@@ -32,11 +32,25 @@ const RegisterConditions = ({schema}) => {
 
             fieldState.data.conditions.map(condition => {
               const conditionResult = parseCondition(condition, getState().values);
-              dispatchCondition({
-                type: 'conditionResult',
-                source: condition.key,
-                uiState: conditionResult.uiState,
-              });
+              const {
+                uiState: {add, remove},
+              } = conditionResult;
+
+              if (add) {
+                dispatchUIState({
+                  type: 'addUIState',
+                  source: condition.key,
+                  uiState: add,
+                });
+              }
+
+              if (remove) {
+                dispatchUIState({
+                  type: 'removeUIState',
+                  source: condition.key,
+                  uiState: remove,
+                });
+              }
             });
           },
           {value: true, data: true},

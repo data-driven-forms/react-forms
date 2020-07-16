@@ -4,7 +4,7 @@ import lodashIsEmpty from 'lodash/isEmpty';
 import {useFormApi} from '../';
 
 const SetFieldValues = () => {
-  const {batch, change, uiState, dispatchCondition} = useFormApi();
+  const {batch, change, uiState, dispatchUIState} = useFormApi();
   useEffect(() => {
     if (lodashIsEmpty(uiState.setFieldValues)) return;
 
@@ -14,7 +14,7 @@ const SetFieldValues = () => {
           console.log('Setting new value for field ' + name);
           change(name, value);
         });
-        dispatchCondition({type: 'fieldValuesUpdated'});
+        dispatchUIState({type: 'fieldValuesUpdated'});
       });
     });
   }, [uiState.setFieldValues]);

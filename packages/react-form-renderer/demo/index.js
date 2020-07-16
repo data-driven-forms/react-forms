@@ -10,30 +10,22 @@ const fileSchema = {
     {
       component: 'text-field',
       name: 'field1',
-      label: 'Field1',
-      initialValue: '"abc" to trigger condition "cond1"',
-      type: 'search',
+      label: 'Field1 (try "abc")',
     },
     {
       component: 'text-field',
       name: 'field2',
-      label: 'Field2',
-      initialValue: '"xyz" to trigger condition "cond1"',
-      type: 'search',
-      condition: {when: 'field2', is: 'aaa'},
+      label: 'Field2  (try "xyz")',
     },
     {
       component: 'text-field',
       name: 'field3',
-      label: 'Field3',
-      initialValue: '"123" to trigger condition "cond2"',
-      type: 'search',
+      label: 'Field3 (try "123")',
     },
     {
       component: 'text-field',
       name: 'field4',
       label: 'Field4',
-      initialValue: 'Visible when field3="aa" (old style condition)',
     },
   ],
   conditions: {
@@ -41,12 +33,12 @@ const fileSchema = {
       when: 'field1',
       is: 'abc',
       then: {
+        field4: {
+          disabled: true,
+          set: 'New value for field4',
+        },
         field3: {
           disabled: true,
-          set: 'New value for field3',
-        },
-        field4: {
-          visible: false,
         },
       },
     },
@@ -54,8 +46,17 @@ const fileSchema = {
       when: 'field3',
       is: '123',
       then: {
-        field1: {
-          hidden: true,
+        field3: {
+          visible: false,
+        },
+      },
+    },
+    cond3: {
+      when: 'field2',
+      is: 'xyz',
+      then: {
+        field3: {
+          visible: false,
         },
       },
     },
