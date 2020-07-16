@@ -29,6 +29,10 @@ const schemaNav = [
     linkText: 'Constants'
   },
   {
+    component: 'resolve-props',
+    linkText: 'Resolve props'
+  },
+  {
     subHeader: true,
     title: 'Validation',
     noRoute: true

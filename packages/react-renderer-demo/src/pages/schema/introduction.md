@@ -31,7 +31,8 @@ Other attribues, such as title or description, can be used in [form templates](/
     dataType: 'string',
     hideField: true,
     initializeOnMount: true,
-    initialValue: 'default-login'
+    initialValue: 'default-login',
+    resolveProps: (props) => ({ label: props.label || 'default label' }),
     validate: [ ... ],
     // + component specific attributes
     ...componentSpecificAttributes
@@ -152,6 +153,16 @@ When `true`, the value will be re-initialized every time the component is mounte
 *any*
 
 Sets an initial value of the field. Read more [here](https://final-form.org/docs/react-final-form/types/FieldProps#initialvalue).
+
+---
+
+### resolveProps
+
+*function (props, {meta, input}, formOptions) => props*
+
+**Only applicable for fields connected to the form state.**
+
+A function allowing to compute field properties from the current state of the field. Read more [here](/schema/resolve-props).
 
 ---
 
