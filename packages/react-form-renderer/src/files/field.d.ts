@@ -2,12 +2,21 @@ import { Validator } from "./validators";
 import { ConditionDefinition } from './condition';
 import { DataType } from "./data-types";
 import { AnyObject } from "./common";
+import { FieldMetaState, FieldInputProps } from "react-final-form";
+import { FormOptions } from "./renderer-context";
 
 export type FieldAction = [string, ...any[]];
 
 export interface FieldActions {
   [key: string]: FieldAction;
 }
+
+export interface FieldApi<FieldValue, T extends HTMLElement = HTMLElement> {
+  meta: FieldMetaState<FieldValue>;
+  input: FieldInputProps<FieldValue, T>;
+}
+
+export type ResolvePropsFunction = (props: AnyObject, fieldApi: FieldApi<any>, formOptions: FormOptions) => AnyObject;
 
 interface Field extends AnyObject {
   name: string;
@@ -20,6 +29,7 @@ interface Field extends AnyObject {
   clearedValue?: any;
   clearOnUnmount?: boolean;
   actions?: FieldActions;
+  resolveProps?: ResolvePropsFunction;
 }
 
 export default Field;

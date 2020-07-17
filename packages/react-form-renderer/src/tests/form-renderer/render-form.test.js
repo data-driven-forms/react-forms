@@ -1396,6 +1396,7 @@ describe('renderForm function', () => {
           {
             component: componentTypes.TEXT_FIELD,
             name: 'unmounted',
+            key: 'unmounted-1',
             initialValue: true,
             initializeOnMount: true,
             condition: {
@@ -1469,10 +1470,7 @@ describe('renderForm function', () => {
       }
     ];
 
-    const CustomComponent = (props) => {
-      const { label } = useFieldApi(props);
-      return <label>{label}</label>;
-    };
+    const CustomComponent = ({ label }) => <label>{label}</label>;
 
     const wrapper = mount(
       <FormRenderer
@@ -1500,6 +1498,95 @@ describe('renderForm function', () => {
         .last()
         .text()
     ).toEqual('standard label');
+  });
+
+  it('should use actions from componentMapper', () => {
+    const mapperLabel = 'mapper label';
+
+    const actionMapper = 'loadLabelMapper';
+
+    const customActionMapper = {
+      [actionMapper]: () => mapperLabel
+    };
+
+    const formFields = [
+      {
+        component: 'custom-component',
+        name: 'foo',
+        label: 'standard label'
+      }
+    ];
+
+    const CustomComponent = ({ label }) => <label>{label}</label>;
+
+    const wrapper = mount(
+      <FormRenderer
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        componentMapper={{
+          'custom-component': {
+            component: CustomComponent,
+            actions: {
+              label: [actionMapper]
+            }
+          }
+        }}
+        schema={{ fields: formFields }}
+        onSubmit={jest.fn()}
+        actionMapper={customActionMapper}
+      />
+    );
+
+    expect(wrapper.find('label').text()).toEqual(mapperLabel);
+  });
+
+  it('field actions has a priority over mappers and they are merged', () => {
+    const fieldLabel = 'field label';
+    const mapperLabel = 'mapper label';
+    const mappedId = 'mapper id';
+
+    const actionField = 'loadLabelField';
+    const actionMapper = 'loadLabelMapper';
+    const idActionmapper = 'loadId';
+
+    const customActionMapper = {
+      [actionField]: () => fieldLabel,
+      [actionMapper]: () => mapperLabel,
+      [idActionmapper]: () => mappedId
+    };
+
+    const formFields = [
+      {
+        component: 'custom-component',
+        name: 'foo',
+        label: 'standard label',
+        actions: {
+          label: [actionField]
+        }
+      }
+    ];
+
+    const CustomComponent = ({ label, id }) => <label id={id}>{label}</label>;
+
+    const wrapper = mount(
+      <FormRenderer
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        componentMapper={{
+          'custom-component': {
+            component: CustomComponent,
+            actions: {
+              label: [actionMapper],
+              id: [idActionmapper]
+            }
+          }
+        }}
+        schema={{ fields: formFields }}
+        onSubmit={jest.fn()}
+        actionMapper={customActionMapper}
+      />
+    );
+
+    expect(wrapper.find('label').text()).toEqual(fieldLabel);
+    expect(wrapper.find('label').props().id).toEqual(mappedId);
   });
 
   it('composite mapper component', () => {
@@ -1530,5 +1617,121 @@ describe('renderForm function', () => {
     const { className, type } = wrapper.find('input').props();
     expect(className).toEqual('composite-class');
     expect(type).toEqual('number');
+  });
+
+  it('resolve props resolve props', () => {
+    const label = 'Some super label';
+    const resolveProps = jest.fn().mockImplementation(() => ({ label }));
+
+    const formFields = [
+      {
+        component: 'custom-component',
+        name: 'foo',
+        label: 'standard label',
+        resolveProps
+      }
+    ];
+
+    const CustomComponent = (props) => {
+      const { label } = useFieldApi(props);
+      return <label>{label}</label>;
+    };
+
+    const wrapper = mount(
+      <FormRenderer
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        componentMapper={{
+          'custom-component': CustomComponent
+        }}
+        schema={{ fields: formFields }}
+        onSubmit={jest.fn()}
+      />
+    );
+
+    expect(wrapper.find('label').text()).toEqual(label);
+    expect(resolveProps).toHaveBeenCalledWith(
+      { label: 'standard label' },
+      expect.objectContaining({ meta: expect.any(Object), input: expect.any(Object) }),
+      expect.any(Object)
+    );
+  });
+
+  it('resolve props are merged and field has priority ', () => {
+    const id = 'someId';
+    const mapperLabel = 'mappers label';
+    const label = 'Some super label';
+
+    const formFields = [
+      {
+        component: 'custom-component',
+        name: 'foo',
+        label: 'standard label',
+        resolveProps: () => ({ label })
+      }
+    ];
+
+    const CustomComponent = (props) => {
+      const { label, id } = useFieldApi(props);
+      return <label id={id}>{label}</label>;
+    };
+
+    const wrapper = mount(
+      <FormRenderer
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        componentMapper={{
+          'custom-component': {
+            component: CustomComponent,
+            resolveProps: () => ({
+              id,
+              label: mapperLabel
+            })
+          }
+        }}
+        schema={{ fields: formFields }}
+        onSubmit={jest.fn()}
+      />
+    );
+
+    expect(wrapper.find('label').text()).toEqual(label);
+    expect(wrapper.find('label').props().id).toEqual(id);
+  });
+
+  it('actions can return resolveProps and it has priority over fields', () => {
+    const id = 'someId';
+    const label = 'Some super label';
+
+    const actionMapper = {
+      resolveProps: () => () => ({ label })
+    };
+
+    const formFields = [
+      {
+        component: 'custom-component',
+        name: 'foo',
+        label: 'standard label',
+        resolveProps: () => ({ id, label: 'nonsense' }),
+        actions: { resolveProps: ['resolveProps'] }
+      }
+    ];
+
+    const CustomComponent = (props) => {
+      const { label, id } = useFieldApi(props);
+      return <label id={id}>{label}</label>;
+    };
+
+    const wrapper = mount(
+      <FormRenderer
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        componentMapper={{
+          'custom-component': CustomComponent
+        }}
+        schema={{ fields: formFields }}
+        onSubmit={jest.fn()}
+        actionMapper={actionMapper}
+      />
+    );
+
+    expect(wrapper.find('label').text()).toEqual(label);
+    expect(wrapper.find('label').props().id).toEqual(id);
   });
 });
