@@ -3,7 +3,7 @@ import {useFormApi} from '../';
 import {Field} from 'react-final-form';
 
 import {conditionsMapper} from './conditions-mapper';
-import {parseCondition} from '../form-renderer/condition2';
+import {parseCondition} from '../form-renderer/condition';
 
 const RegisterConditions = ({schema}) => {
   const {getState, registerField, dispatchUIState} = useFormApi();

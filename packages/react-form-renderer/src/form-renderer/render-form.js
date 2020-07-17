@@ -1,63 +1,68 @@
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
-import { childrenPropTypes } from '@data-driven-forms/common/src/prop-types-templates';
+import {childrenPropTypes} from '@data-driven-forms/common/src/prop-types-templates';
 import RendererContext from '../files/renderer-context';
-import Condition from './condition';
 import FormSpy from '../files/form-spy';
 
-const FormFieldHideWrapper = ({ hideField, children }) => (hideField ? <div hidden>{children}</div> : children);
+const FormFieldHideWrapper = ({hideField, children}) =>
+  hideField ? <div hidden>{children}</div> : children;
 
 FormFieldHideWrapper.propTypes = {
   hideField: PropTypes.bool,
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired,
 };
 
 FormFieldHideWrapper.defaultProps = {
-  hideField: false
+  hideField: false,
 };
 
-const FormConditionWrapper = ({ condition, children }) =>
-  condition ? (
-    <FormSpy>
-      {({ values }) => (
-        <Condition condition={condition} values={values}>
-          {children}
-        </Condition>
-      )}
-    </FormSpy>
-  ) : (
-    children
-  );
+//Helper function to read the top uiState from the uiState stack of the specified field
+const checkUIState = ({fieldName, uiState}) => {
+  const fieldState = uiState.fields[fieldName];
+  if (!fieldState) return {visible: true, disabled: false};
 
-FormConditionWrapper.propTypes = {
-  condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  children: childrenPropTypes.isRequired
+  //If no visibility information exists, default to visible=true
+  //Else use info from the first met condition in the uiState stack for this field
+  const visible = !fieldState.visible ? true : fieldState.visible[0].value;
+
+  //Disabled defaults to false if no explicit information exists
+  const disabled = !fieldState.disabled ? false : fieldState.disabled[0].value;
+
+  return {visible, disabled};
 };
 
-const SingleField = ({ component, condition, hideField, ...rest }) => {
-  const { componentMapper } = useContext(RendererContext);
+const SingleField = ({component, name, ...rest}) => {
+  const {
+    componentMapper,
+    formOptions: {uiState},
+  } = useContext(RendererContext);
+
+  const fieldState = checkUIState({fieldName: name, uiState});
 
   let componentProps = {
     component,
-    ...rest
+    name,
+    disabled: fieldState.disabled,
+    ...rest,
   };
 
   const componentBinding = componentMapper[component];
   let Component;
-  if (typeof componentBinding === 'object' && Object.prototype.hasOwnProperty.call(componentBinding, 'component')) {
-    const { component, ...mapperProps } = componentBinding;
+  if (
+    typeof componentBinding === 'object' &&
+    Object.prototype.hasOwnProperty.call(componentBinding, 'component')
+  ) {
+    const {component, ...mapperProps} = componentBinding;
     Component = component;
-    componentProps = { ...mapperProps, ...componentProps };
+    componentProps = {...mapperProps, ...componentProps};
   } else {
     Component = componentBinding;
   }
 
   return (
-    <FormConditionWrapper condition={condition}>
-      <FormFieldHideWrapper hideField={hideField}>
-        <Component {...componentProps} />
-      </FormFieldHideWrapper>
-    </FormConditionWrapper>
+    <FormFieldHideWrapper hideField={!fieldState.visible}>
+      <Component {...componentProps} />
+    </FormFieldHideWrapper>
   );
 };
 
@@ -67,9 +72,12 @@ SingleField.propTypes = {
   hideField: PropTypes.bool,
   dataType: PropTypes.string,
   validate: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object])),
-  initialValue: PropTypes.any
+  initialValue: PropTypes.any,
 };
 
-const renderForm = (fields) => fields.map((field) => (Array.isArray(field) ? renderForm(field) : <SingleField key={field.name} {...field} />));
+const renderForm = fields =>
+  fields.map(field =>
+    Array.isArray(field) ? renderForm(field) : <SingleField key={field.name} {...field} />
+  );
 
 export default renderForm;
