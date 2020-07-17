@@ -7,16 +7,16 @@
   several condition arrays.
 */
 
+function isObject(obj) {
+  return obj !== null && typeof obj === 'object' && !Array.isArray(obj);
+}
+
+function isArray(obj) {
+  return Array.isArray(obj);
+}
+
 export const conditionsMapper = ({conditions}) => {
   if (!conditions) return {};
-
-  function isObject(obj) {
-    return obj !== null && typeof obj === 'object' && !Array.isArray(obj);
-  }
-
-  function isArray(obj) {
-    return Array.isArray(obj);
-  }
 
   function traverse({obj, fnc, key}) {
     fnc && fnc({obj, key});
@@ -37,27 +37,23 @@ export const conditionsMapper = ({conditions}) => {
   }
 
   function traverseArray({obj, fnc, key}) {
-    for (var index = 0, len = obj.length; index < len; index++) {
-      const item = obj[index];
+    obj.forEach(([key, item]) => {
       traverse({
         obj: item,
         fnc,
-        key: index,
+        key,
       });
-    }
+    });
   }
 
   function traverseObject({obj, fnc, key}) {
-    for (var index in obj) {
-      if (obj.hasOwnProperty(index)) {
-        const item = obj[index];
-        traverse({
-          obj: item,
-          fnc,
-          key: index,
-        });
-      }
-    }
+    Object.entries(obj).forEach(([key, item]) => {
+      traverse({
+        obj: item,
+        fnc,
+        key,
+      });
+    });
   }
 
   const indexedConditions = {};
