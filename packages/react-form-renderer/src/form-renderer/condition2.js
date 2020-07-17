@@ -77,7 +77,6 @@ export const parseCondition = (condition, values) => {
   }
 
   if (typeof condition.when === 'string') {
-    // console.log({values, when: condition.when});
     return fieldCondition(get(values, condition.when), condition) ? positiveResult : negativeResult;
   }
 

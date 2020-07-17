@@ -38,7 +38,6 @@ const uiStateReducer = (state, action) => {
 
           if (!newState.fields[key][type]) {
             //If this type doesn't exists for this item, we create a new array with only this source. No need to search fot the source
-            // newState.fields[key][type] = [{source, value}];
             newState.fields[key] = {...newState.fields[key], [type]: [{source, value}]};
           } else {
             newState.fields[key] = {...newState.fields[key]};

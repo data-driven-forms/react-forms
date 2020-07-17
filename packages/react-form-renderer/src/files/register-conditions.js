@@ -10,7 +10,6 @@ const RegisterConditions = ({schema}) => {
 
   useEffect(() => {
     const indexedConditions = conditionsMapper({conditions: schema.conditions});
-    console.log(indexedConditions);
 
     //We need an array of conditions, including the fieldName
     const unsubscribeFields = Object.entries(indexedConditions)
