@@ -28,6 +28,10 @@ const mappersSchema = [
     title: 'Provided mappers'
   },
   {
+    link: 'ant-component-mapper',
+    linkText: 'Ant Design Mapper'
+  },
+  {
     link: 'blueprint-component-mapper',
     linkText: 'Blueprint mapper'
   },

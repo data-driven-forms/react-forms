@@ -24,6 +24,7 @@ import { pf4Code, pf4WizardCode, pf4Html, pf4Dependencies } from '../stackblitz-
 import { pf3Code, pf3WizardCode, pf3Html, pf3Dependencies } from '../stackblitz-templates/pf3-templates';
 import { blueprintCode, blueprintWizardCode, blueprintHtml, blueprintDependencies } from '../stackblitz-templates/blueprint-templates';
 import { suirCode, suirWizardCode, suirHtml, suirDependencies } from '../stackblitz-templates/suir-template';
+import { antCode, antWizardCode, antHtml, antDependencies } from '../stackblitz-templates/ant-templates';
 import avalableMappers from '../helpers/available-mappers';
 
 const project = {
@@ -120,6 +121,10 @@ const blitzFiles = {
   suir: {
     'index.html': suirHtml,
     'index.js': suirCode
+  },
+  ant: {
+    'index.html': antHtml,
+    'index.js': antCode
   }
 };
 
@@ -128,7 +133,8 @@ const blitzWizards = {
   pf4: pf4WizardCode,
   pf3: pf3WizardCode,
   blueprint: blueprintWizardCode,
-  suir: suirWizardCode
+  suir: suirWizardCode,
+  ant: antWizardCode
 };
 
 const blitzDependencies = {
@@ -136,7 +142,8 @@ const blitzDependencies = {
   pf4: pf4Dependencies,
   pf3: pf3Dependencies,
   blueprint: blueprintDependencies,
-  suir: suirDependencies
+  suir: suirDependencies,
+  ant: antDependencies
 };
 
 const mapperTab = {
@@ -144,7 +151,8 @@ const mapperTab = {
   pf4: 1,
   pf3: 2,
   blueprint: 3,
-  suir: 4
+  suir: 4,
+  ant: 5
 };
 
 const ComponentExample = ({ variants, schema, activeMapper, component }) => {
