@@ -57,8 +57,8 @@ const reducer = (state, { type, specialType, validate, arrayValidator, initialVa
   }
 };
 
-const useFieldApi = ({ name, initializeOnMount, component, render, validate, ...props }) => {
-  const { actionMapper, validatorMapper, formOptions } = useContext(RendererContext);
+const useFieldApi = ({ name, initializeOnMount, component, render, validate, resolveProps, ...props }) => {
+  const { validatorMapper, formOptions } = useContext(RendererContext);
 
   const [{ type, initialValue, validate: stateValidate, arrayValidator }, dispatch] = useReducer(
     reducer,
@@ -154,17 +154,6 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, ...
     []
   );
 
-  /**
-   * Map actions to props
-   */
-  let overrideProps = {};
-  if (props.actions) {
-    Object.keys(props.actions).forEach((prop) => {
-      const [action, ...args] = props.actions[prop];
-      overrideProps[prop] = actionMapper[action](...args);
-    });
-  }
-
   const { initialValue: _initialValue, clearOnUnmount, dataType, clearedValue, isEqual: _isEqual, ...cleanProps } = props;
 
   /**
@@ -172,7 +161,7 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, ...
    */
   return {
     ...cleanProps,
-    ...overrideProps,
+    ...(resolveProps ? resolveProps(cleanProps, fieldProps, formOptions) : {}),
     ...fieldProps,
     ...(arrayValidator ? { arrayValidator } : {}),
     input: {

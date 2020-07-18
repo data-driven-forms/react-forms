@@ -33,6 +33,7 @@ const checkUIState = ({fieldName, uiState}) => {
 
 const SingleField = ({component, name, ...rest}) => {
   const {
+    actionMapper,
     componentMapper,
     formOptions: {uiState},
   } = useContext(RendererContext);
@@ -54,14 +55,57 @@ const SingleField = ({component, name, ...rest}) => {
   ) {
     const {component, ...mapperProps} = componentBinding;
     Component = component;
-    componentProps = {...mapperProps, ...componentProps};
+    componentProps = {
+      ...mapperProps,
+      ...componentProps,
+      // merge mapper and field actions
+      ...(mapperProps.actions && rest.actions
+        ? {actions: {...mapperProps.actions, ...rest.actions}}
+        : {}),
+      // merge mapper and field resolveProps
+      ...(mapperProps.resolveProps && rest.resolveProps
+        ? {
+            resolveProps: (...args) => ({
+              ...mapperProps.resolveProps(...args),
+              ...rest.resolveProps(...args),
+            }),
+          }
+        : {}),
+    };
   } else {
     Component = componentBinding;
   }
 
+  /**
+   * Map actions to props
+   */
+  let overrideProps = {};
+  let mergedResolveProps; // new object has to be created because of references
+  if (componentProps.actions) {
+    Object.keys(componentProps.actions).forEach(prop => {
+      const [action, ...args] = componentProps.actions[prop];
+      overrideProps[prop] = actionMapper[action](...args);
+    });
+
+    // Merge componentProps resolve props and actions resolve props
+    if (componentProps.resolveProps && overrideProps.resolveProps) {
+      mergedResolveProps = (...args) => ({
+        ...componentProps.resolveProps(...args),
+        ...overrideProps.resolveProps(...args),
+      });
+    }
+
+    // do not pass actions object to components
+    delete componentProps.actions;
+  }
+
   return (
     <FormFieldHideWrapper hideField={!fieldState.visible}>
-      <Component {...componentProps} />
+      <Component
+        {...componentProps}
+        {...overrideProps}
+        {...(mergedResolveProps && {resolveProps: mergedResolveProps})}
+      />
     </FormFieldHideWrapper>
   );
 };
@@ -73,6 +117,10 @@ SingleField.propTypes = {
   dataType: PropTypes.string,
   validate: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object])),
   initialValue: PropTypes.any,
+  actions: PropTypes.shape({
+    [PropTypes.string]: PropTypes.func,
+  }),
+  resolveProps: PropTypes.func,
 };
 
 const renderForm = fields =>
