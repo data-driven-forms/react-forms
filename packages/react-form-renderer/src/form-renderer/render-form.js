@@ -17,21 +17,18 @@ FormFieldHideWrapper.defaultProps = {
 };
 
 //Helper function to read the top uiState from the uiState stack of the specified field
+//undefined means that no explicit uiState is set by a condition.
 const checkUIState = ({fieldName, uiState}) => {
   const fieldState = uiState.fields[fieldName];
-  if (!fieldState) return {visible: true, disabled: false};
+  if (!fieldState) return {visible: undefined, disabled: undefined};
 
-  //If no visibility information exists, default to visible=true
-  //Else use info from the first met condition in the uiState stack for this field
-  const visible = !fieldState.visible ? true : fieldState.visible[0].value;
-
-  //Disabled defaults to false if no explicit information exists
-  const disabled = !fieldState.disabled ? false : fieldState.disabled[0].value;
+  const visible = !fieldState.visible ? undefined : fieldState.visible[0].value;
+  const disabled = !fieldState.disabled ? undefined : fieldState.disabled[0].value;
 
   return {visible, disabled};
 };
 
-const SingleField = ({component, name, ...rest}) => {
+const SingleField = ({component, hideField, name, ...rest}) => {
   const {
     actionMapper,
     componentMapper,
@@ -100,7 +97,9 @@ const SingleField = ({component, name, ...rest}) => {
   }
 
   return (
-    <FormFieldHideWrapper hideField={!fieldState.visible}>
+    <FormFieldHideWrapper
+      hideField={fieldState.visible === undefined ? hideField : !fieldState.visible}
+    >
       <Component
         {...componentProps}
         {...overrideProps}
