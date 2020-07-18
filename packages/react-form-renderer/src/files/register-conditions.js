@@ -4,12 +4,15 @@ import {Field} from 'react-final-form';
 
 import {conditionsMapper} from './conditions-mapper';
 import {parseCondition} from '../form-renderer/condition';
+import {collectLegacyConditions} from './legacy-conditions';
 
 const RegisterConditions = ({schema}) => {
   const {getState, registerField, dispatchUIState} = useFormApi();
 
   useEffect(() => {
-    const indexedConditions = conditionsMapper({conditions: schema.conditions});
+    const legacyConditions = collectLegacyConditions({fields: schema.fields});
+    const mergedConditions = {...legacyConditions, ...schema.conditions};
+    const indexedConditions = conditionsMapper({conditions: mergedConditions});
 
     //We need an array of conditions, including the fieldName
     const unsubscribeFields = Object.entries(indexedConditions)
@@ -29,25 +32,26 @@ const RegisterConditions = ({schema}) => {
 
             console.log('Parsing conditions for field ' + field.fieldName);
 
+            const values = getState().values;
             fieldState.data.conditions.map(condition => {
-              const conditionResult = parseCondition(condition, getState().values);
+              const conditionResult = parseCondition(condition, values);
               const {
                 uiState: {add, remove},
               } = conditionResult;
 
-              if (add) {
-                dispatchUIState({
-                  type: 'addUIState',
-                  source: condition.key,
-                  uiState: add,
-                });
-              }
-
+              //remove needs to happen before add. Otherwise an added "then" will be overwritten by a removed "else"
               if (remove) {
                 dispatchUIState({
                   type: 'removeUIState',
                   source: condition.key,
                   uiState: remove,
+                });
+              }
+              if (add) {
+                dispatchUIState({
+                  type: 'addUIState',
+                  source: condition.key,
+                  uiState: add,
                 });
               }
             });

@@ -16,6 +16,7 @@ const fileSchema = {
       component: 'text-field',
       name: 'field2',
       label: 'Field2  (try "xyz")',
+      hideField: true,
     },
     {
       component: 'text-field',
@@ -27,10 +28,20 @@ const fileSchema = {
       name: 'field4',
       label: 'Field4',
     },
+
+    {
+      component: 'text-field',
+      name: 'field5',
+      label: 'Field5',
+      condition: {
+        when: 'field1',
+        is: 'cba',
+      },
+    },
   ],
   conditions: {
     cond1: {
-      when: 'field1',
+      when: 'fieldx',
       is: 'abc',
       then: {
         field4: {
@@ -39,6 +50,9 @@ const fileSchema = {
         },
         field3: {
           disabled: true,
+        },
+        field2: {
+          visible: true,
         },
       },
     },

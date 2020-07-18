@@ -28,8 +28,8 @@ const fieldCondition = (value, {is, isNotEmpty, isEmpty, pattern, notMatch, flag
 };
 
 export const parseCondition = (condition, values) => {
-  //Positive result is alwaus a triggering condition
-  //since a the clause always exists
+  //Positive result is always a triggering condition
+  //since a then clause always exists
   let positiveResult = {
     uiState: {
       add: condition.then,
