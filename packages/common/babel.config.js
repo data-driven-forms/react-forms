@@ -67,7 +67,7 @@ const createMuiTransform = (env) => [
       transform: (importName) => (env ? `@material-ui/lab/${env}/${importName}` : `@material-ui/lab/${importName}`),
       preventFullImport: false,
       skipDefaultConversion: false
-    },            
+    },
     '@material-ui/core': {
       transform: (importName) => env ? `@material-ui/core/${env}/${importName}` : `@material-ui/core/${importName}`,
       preventFullImport: false,
@@ -98,7 +98,7 @@ const createPfReactTransform = (env) => [
       },
       preventFullImport: false,
       skipDefaultConversion: true
-    },            
+    },
     '@patternfly/react-icons': {
       transform: (importName) =>
         `@patternfly/react-icons/dist/${env}/icons/${importName
@@ -142,6 +142,32 @@ const createBluePrintTransform = (env) => [
   `BLUEPRINT-${env}`
 ]
 
+const createAntTransform = (env) => [
+  'transform-imports',
+  {
+    'antd': {
+      transform: (importName) => {
+        let res;
+        const files = glob.sync(
+          path.resolve(__dirname, `../../node_modules/antd/${env === 'cjs' ? 'lib' : 'es' }/${importName.split(/(?=[A-Z])/)
+            .join('-')
+            .toLowerCase()}/index.js`)
+        );
+        if (files.length > 0) {
+          res = files[0];
+        } else {
+          throw new Error(`File with importName ${importName} does not exist`);
+        }
+
+        res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
+        res = res.replace(/^\//, '');
+        return res;
+      },
+    },
+  },
+  `ant-${env}`
+]
+
 module.exports = {
   extends: '../../babel.config.js',
   env: {
@@ -150,7 +176,8 @@ module.exports = {
         createSuirCJSTransform('commonjs'),
         createMuiTransform(),
         createPfReactTransform('js'),
-        createBluePrintTransform('cjs')
+        createBluePrintTransform('cjs'),
+        createAntTransform('cjs')
       ]
     },
     esm: {
@@ -158,7 +185,8 @@ module.exports = {
         createSuirCJSTransform('es'),
         createMuiTransform('esm'),
         createPfReactTransform('esm'),
-        createBluePrintTransform('esm')
+        createBluePrintTransform('esm'),
+        createAntTransform('esm')
       ]
     }
   }
