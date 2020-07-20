@@ -106,7 +106,7 @@ const Menu = ({
           isSelected: isMulti ? !!selectedItem.find(({ value }) => item.value === value) : selectedItem === item.value,
           onMouseUp: (e) => e.stopPropagation() // we need this to prevent issues with portal menu not selecting a option
         });
-        return <Option key={item.value} item={item} {...itemProps} />;
+        return <Option key={item.key || item.value || (typeof item.label === 'string' && item.label) || item} item={item} {...itemProps} />;
       })}
     </ul>
   );

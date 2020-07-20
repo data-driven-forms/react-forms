@@ -42,11 +42,11 @@ const App = () => (<FormRenderer
 |[validate](/schema/introduction#validate)|func|A function which receives all form values and returns an object with errors.||
 |[validatorMapper](/mappers/validator-mapper)|object|A mapper containing custom validators, it's automatically merged with the default one.||
 
-# Schema
+## Schema
 
 The root object of the schema represents the Form component. Please read more [here](/schema/introduction).
 
-## Example
+### Example
 
 ```javascript
 schema = {

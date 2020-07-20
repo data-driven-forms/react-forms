@@ -1,3 +1,4 @@
+import React from 'react';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 
 const options = [
@@ -127,6 +128,37 @@ const selectSchema = {
       name: 'dosbaled-option-select',
       label: 'Disabled-option-select',
       options: [...options, { label: 'Disabled option', value: 'disabled', isDisabled: true }]
+    },
+    {
+      component: componentTypes.SELECT,
+      name: 'translated-select',
+      label: 'Translated-select',
+      options: [
+        {
+          label: <span>None</span>,
+          key: 'none'
+        },
+        {
+          label: <span>Jack</span>,
+          value: 'jack'
+        }
+      ]
+    },
+    {
+      component: componentTypes.SELECT,
+      name: 'translated-select-multi',
+      label: 'Translated-select-multi',
+      isMulti: true,
+      options: [
+        {
+          label: <span>Jack</span>,
+          value: 'jack'
+        },
+        {
+          label: <span>Mary</span>,
+          value: 'Mary'
+        }
+      ]
     }
   ]
 };

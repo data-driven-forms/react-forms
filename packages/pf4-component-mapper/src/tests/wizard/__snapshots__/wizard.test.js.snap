@@ -463,14 +463,18 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                               Array [
                                                 Object {
                                                   "index": 0,
+                                                  "name": "1",
                                                   "primary": true,
                                                   "substepOf": undefined,
+                                                  "substepOfTitle": undefined,
                                                   "title": "foo-step",
                                                 },
                                                 Object {
                                                   "index": 1,
+                                                  "name": "2",
                                                   "primary": true,
                                                   "substepOf": undefined,
+                                                  "substepOfTitle": undefined,
                                                   "title": "bar-step",
                                                 },
                                               ]
@@ -489,14 +493,18 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                 Array [
                                                   Object {
                                                     "index": 0,
+                                                    "name": "1",
                                                     "primary": true,
                                                     "substepOf": undefined,
+                                                    "substepOfTitle": undefined,
                                                     "title": "foo-step",
                                                   },
                                                   Object {
                                                     "index": 1,
+                                                    "name": "2",
                                                     "primary": true,
                                                     "substepOf": undefined,
+                                                    "substepOfTitle": undefined,
                                                     "title": "bar-step",
                                                   },
                                                 ]
@@ -508,7 +516,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                 content="foo-step"
                                                 isCurrent={true}
                                                 isDisabled={false}
-                                                key="foo-step"
+                                                key="1"
                                                 onNavItemClick={[Function]}
                                                 step={0}
                                               >
@@ -529,7 +537,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                 content="bar-step"
                                                 isCurrent={false}
                                                 isDisabled={true}
-                                                key="bar-step"
+                                                key="2"
                                                 onNavItemClick={[Function]}
                                                 step={1}
                                               >
@@ -554,6 +562,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                     </nav>
                                   </Component>
                                   <WizardStep
+                                    StepTemplate={[Function]}
                                     buttonLabels={
                                       Object {
                                         "back": "Back",
@@ -628,110 +637,214 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                         <div
                                           className="pf-c-wizard__main-body"
                                         >
-                                          <div
-                                            className="pf-c-form"
-                                          >
-                                            <SingleField
-                                              component="text-field"
-                                              key="foo-field"
-                                              name="foo-field"
-                                            >
-                                              <FormConditionWrapper>
-                                                <FormFieldHideWrapper
-                                                  hideField={false}
-                                                >
-                                                  <TextField
+                                          <DefaultStepTemplate
+                                            buttonLabels={
+                                              Object {
+                                                "back": "Back",
+                                                "cancel": "Cancel",
+                                                "next": "Next",
+                                                "submit": "Submit",
+                                              }
+                                            }
+                                            disableBack={true}
+                                            fields={
+                                              Array [
+                                                Object {
+                                                  "component": "text-field",
+                                                  "name": "foo-field",
+                                                },
+                                              ]
+                                            }
+                                            formFields={
+                                              Array [
+                                                Array [
+                                                  <SingleField
                                                     component="text-field"
                                                     name="foo-field"
+                                                  />,
+                                                ],
+                                              ]
+                                            }
+                                            formOptions={
+                                              Object {
+                                                "batch": [Function],
+                                                "blur": [Function],
+                                                "change": [Function],
+                                                "clearOnUnmount": false,
+                                                "clearedValue": undefined,
+                                                "concat": [Function],
+                                                "destroyOnUnregister": false,
+                                                "focus": [Function],
+                                                "getFieldState": [Function],
+                                                "getRegisteredFields": [Function],
+                                                "getState": [Function],
+                                                "handleSubmit": [Function],
+                                                "initialize": [Function],
+                                                "insert": [Function],
+                                                "isValidationPaused": [Function],
+                                                "move": [Function],
+                                                "onCancel": [Function],
+                                                "onReset": [Function],
+                                                "onSubmit": [MockFunction],
+                                                "pauseValidation": [Function],
+                                                "pop": [Function],
+                                                "pristine": true,
+                                                "push": [Function],
+                                                "registerField": [Function],
+                                                "registerInputFile": [Function],
+                                                "remove": [Function],
+                                                "removeBatch": [Function],
+                                                "renderForm": [Function],
+                                                "reset": [Function],
+                                                "resetFieldState": [Function],
+                                                "resumeValidation": [Function],
+                                                "setConfig": [Function],
+                                                "shift": [Function],
+                                                "submit": [Function],
+                                                "subscribe": [Function],
+                                                "swap": [Function],
+                                                "unRegisterInputFile": [Function],
+                                                "unshift": [Function],
+                                                "update": [Function],
+                                                "valid": true,
+                                              }
+                                            }
+                                            formRef={
+                                              Object {
+                                                "current": <div
+                                                  class="pf-c-form"
+                                                >
+                                                  <div
+                                                    class="pf-c-form__group"
                                                   >
-                                                    <FormGroup
-                                                      id="foo-field"
-                                                      isRequired={false}
-                                                      meta={
-                                                        Object {
-                                                          "active": false,
-                                                          "data": Object {},
-                                                          "dirty": false,
-                                                          "dirtySinceLastSubmit": false,
-                                                          "error": undefined,
-                                                          "initial": undefined,
-                                                          "invalid": false,
-                                                          "length": undefined,
-                                                          "modified": false,
-                                                          "pristine": true,
-                                                          "submitError": undefined,
-                                                          "submitFailed": false,
-                                                          "submitSucceeded": false,
-                                                          "submitting": false,
-                                                          "touched": false,
-                                                          "valid": true,
-                                                          "validating": false,
-                                                          "visited": false,
-                                                        }
-                                                      }
+                                                    <div
+                                                      class="pf-c-form__group-control"
                                                     >
-                                                      <Component
-                                                        fieldId="foo-field"
+                                                      <input
+                                                        aria-invalid="false"
+                                                        class="pf-c-form-control"
+                                                        id="foo-field"
+                                                        name="foo-field"
+                                                        type="text"
+                                                        value=""
+                                                      />
+                                                      
+                                                    </div>
+                                                  </div>
+                                                </div>,
+                                              }
+                                            }
+                                            handleNext={[Function]}
+                                            handlePrev={[Function]}
+                                            name="1"
+                                            nextStep="2"
+                                            title="foo-step"
+                                          >
+                                            <div
+                                              className="pf-c-form"
+                                            >
+                                              <SingleField
+                                                component="text-field"
+                                                key="foo-field"
+                                                name="foo-field"
+                                              >
+                                                <FormConditionWrapper>
+                                                  <FormFieldHideWrapper
+                                                    hideField={false}
+                                                  >
+                                                    <TextField
+                                                      component="text-field"
+                                                      name="foo-field"
+                                                    >
+                                                      <FormGroup
+                                                        id="foo-field"
                                                         isRequired={false}
-                                                        validated="default"
+                                                        meta={
+                                                          Object {
+                                                            "active": false,
+                                                            "data": Object {},
+                                                            "dirty": false,
+                                                            "dirtySinceLastSubmit": false,
+                                                            "error": undefined,
+                                                            "initial": undefined,
+                                                            "invalid": false,
+                                                            "length": undefined,
+                                                            "modified": false,
+                                                            "pristine": true,
+                                                            "submitError": undefined,
+                                                            "submitFailed": false,
+                                                            "submitSucceeded": false,
+                                                            "submitting": false,
+                                                            "touched": false,
+                                                            "valid": true,
+                                                            "validating": false,
+                                                            "visited": false,
+                                                          }
+                                                        }
                                                       >
-                                                        <div
-                                                          className="pf-c-form__group"
+                                                        <Component
+                                                          fieldId="foo-field"
+                                                          isRequired={false}
+                                                          validated="default"
                                                         >
                                                           <div
-                                                            className="pf-c-form__group-control"
+                                                            className="pf-c-form__group"
                                                           >
-                                                            <ForwardRef
-                                                              id="foo-field"
-                                                              name="foo-field"
-                                                              onBlur={[Function]}
-                                                              onChange={[Function]}
-                                                              onFocus={[Function]}
-                                                              validated="default"
-                                                              value=""
+                                                            <div
+                                                              className="pf-c-form__group-control"
                                                             >
-                                                              <TextInputBase
-                                                                aria-label={null}
-                                                                className=""
+                                                              <ForwardRef
                                                                 id="foo-field"
-                                                                innerRef={null}
-                                                                isDisabled={false}
-                                                                isReadOnly={false}
-                                                                isRequired={false}
                                                                 name="foo-field"
                                                                 onBlur={[Function]}
                                                                 onChange={[Function]}
                                                                 onFocus={[Function]}
-                                                                type="text"
                                                                 validated="default"
                                                                 value=""
                                                               >
-                                                                <input
-                                                                  aria-invalid={false}
+                                                                <TextInputBase
                                                                   aria-label={null}
-                                                                  className="pf-c-form-control"
-                                                                  disabled={false}
+                                                                  className=""
                                                                   id="foo-field"
+                                                                  innerRef={null}
+                                                                  isDisabled={false}
+                                                                  isReadOnly={false}
+                                                                  isRequired={false}
                                                                   name="foo-field"
                                                                   onBlur={[Function]}
                                                                   onChange={[Function]}
                                                                   onFocus={[Function]}
-                                                                  readOnly={false}
-                                                                  required={false}
                                                                   type="text"
+                                                                  validated="default"
                                                                   value=""
-                                                                />
-                                                              </TextInputBase>
-                                                            </ForwardRef>
+                                                                >
+                                                                  <input
+                                                                    aria-invalid={false}
+                                                                    aria-label={null}
+                                                                    className="pf-c-form-control"
+                                                                    disabled={false}
+                                                                    id="foo-field"
+                                                                    name="foo-field"
+                                                                    onBlur={[Function]}
+                                                                    onChange={[Function]}
+                                                                    onFocus={[Function]}
+                                                                    readOnly={false}
+                                                                    required={false}
+                                                                    type="text"
+                                                                    value=""
+                                                                  />
+                                                                </TextInputBase>
+                                                              </ForwardRef>
+                                                            </div>
                                                           </div>
-                                                        </div>
-                                                      </Component>
-                                                    </FormGroup>
-                                                  </TextField>
-                                                </FormFieldHideWrapper>
-                                              </FormConditionWrapper>
-                                            </SingleField>
-                                          </div>
+                                                        </Component>
+                                                      </FormGroup>
+                                                    </TextField>
+                                                  </FormFieldHideWrapper>
+                                                </FormConditionWrapper>
+                                              </SingleField>
+                                            </div>
+                                          </DefaultStepTemplate>
                                         </div>
                                       </main>
                                     </Component>
@@ -1660,14 +1773,18 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                           Array [
                                                             Object {
                                                               "index": 0,
+                                                              "name": "1",
                                                               "primary": true,
                                                               "substepOf": undefined,
+                                                              "substepOfTitle": undefined,
                                                               "title": "foo-step",
                                                             },
                                                             Object {
                                                               "index": 1,
+                                                              "name": "2",
                                                               "primary": true,
                                                               "substepOf": undefined,
+                                                              "substepOfTitle": undefined,
                                                               "title": "bar-step",
                                                             },
                                                           ]
@@ -1686,14 +1803,18 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                             Array [
                                                               Object {
                                                                 "index": 0,
+                                                                "name": "1",
                                                                 "primary": true,
                                                                 "substepOf": undefined,
+                                                                "substepOfTitle": undefined,
                                                                 "title": "foo-step",
                                                               },
                                                               Object {
                                                                 "index": 1,
+                                                                "name": "2",
                                                                 "primary": true,
                                                                 "substepOf": undefined,
+                                                                "substepOfTitle": undefined,
                                                                 "title": "bar-step",
                                                               },
                                                             ]
@@ -1705,7 +1826,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                             content="foo-step"
                                                             isCurrent={true}
                                                             isDisabled={false}
-                                                            key="foo-step"
+                                                            key="1"
                                                             onNavItemClick={[Function]}
                                                             step={0}
                                                           >
@@ -1726,7 +1847,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                             content="bar-step"
                                                             isCurrent={false}
                                                             isDisabled={true}
-                                                            key="bar-step"
+                                                            key="2"
                                                             onNavItemClick={[Function]}
                                                             step={1}
                                                           >
@@ -1751,6 +1872,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                 </nav>
                                               </Component>
                                               <WizardStep
+                                                StepTemplate={[Function]}
                                                 buttonLabels={
                                                   Object {
                                                     "back": "Back",
@@ -1825,110 +1947,214 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                     <div
                                                       className="pf-c-wizard__main-body"
                                                     >
-                                                      <div
-                                                        className="pf-c-form"
-                                                      >
-                                                        <SingleField
-                                                          component="text-field"
-                                                          key="foo-field"
-                                                          name="foo-field"
-                                                        >
-                                                          <FormConditionWrapper>
-                                                            <FormFieldHideWrapper
-                                                              hideField={false}
-                                                            >
-                                                              <TextField
+                                                      <DefaultStepTemplate
+                                                        buttonLabels={
+                                                          Object {
+                                                            "back": "Back",
+                                                            "cancel": "Cancel",
+                                                            "next": "Next",
+                                                            "submit": "Submit",
+                                                          }
+                                                        }
+                                                        disableBack={true}
+                                                        fields={
+                                                          Array [
+                                                            Object {
+                                                              "component": "text-field",
+                                                              "name": "foo-field",
+                                                            },
+                                                          ]
+                                                        }
+                                                        formFields={
+                                                          Array [
+                                                            Array [
+                                                              <SingleField
                                                                 component="text-field"
                                                                 name="foo-field"
+                                                              />,
+                                                            ],
+                                                          ]
+                                                        }
+                                                        formOptions={
+                                                          Object {
+                                                            "batch": [Function],
+                                                            "blur": [Function],
+                                                            "change": [Function],
+                                                            "clearOnUnmount": false,
+                                                            "clearedValue": undefined,
+                                                            "concat": [Function],
+                                                            "destroyOnUnregister": false,
+                                                            "focus": [Function],
+                                                            "getFieldState": [Function],
+                                                            "getRegisteredFields": [Function],
+                                                            "getState": [Function],
+                                                            "handleSubmit": [Function],
+                                                            "initialize": [Function],
+                                                            "insert": [Function],
+                                                            "isValidationPaused": [Function],
+                                                            "move": [Function],
+                                                            "onCancel": [Function],
+                                                            "onReset": [Function],
+                                                            "onSubmit": [MockFunction],
+                                                            "pauseValidation": [Function],
+                                                            "pop": [Function],
+                                                            "pristine": true,
+                                                            "push": [Function],
+                                                            "registerField": [Function],
+                                                            "registerInputFile": [Function],
+                                                            "remove": [Function],
+                                                            "removeBatch": [Function],
+                                                            "renderForm": [Function],
+                                                            "reset": [Function],
+                                                            "resetFieldState": [Function],
+                                                            "resumeValidation": [Function],
+                                                            "setConfig": [Function],
+                                                            "shift": [Function],
+                                                            "submit": [Function],
+                                                            "subscribe": [Function],
+                                                            "swap": [Function],
+                                                            "unRegisterInputFile": [Function],
+                                                            "unshift": [Function],
+                                                            "update": [Function],
+                                                            "valid": true,
+                                                          }
+                                                        }
+                                                        formRef={
+                                                          Object {
+                                                            "current": <div
+                                                              class="pf-c-form"
+                                                            >
+                                                              <div
+                                                                class="pf-c-form__group"
                                                               >
-                                                                <FormGroup
-                                                                  id="foo-field"
-                                                                  isRequired={false}
-                                                                  meta={
-                                                                    Object {
-                                                                      "active": false,
-                                                                      "data": Object {},
-                                                                      "dirty": false,
-                                                                      "dirtySinceLastSubmit": false,
-                                                                      "error": undefined,
-                                                                      "initial": undefined,
-                                                                      "invalid": false,
-                                                                      "length": undefined,
-                                                                      "modified": false,
-                                                                      "pristine": true,
-                                                                      "submitError": undefined,
-                                                                      "submitFailed": false,
-                                                                      "submitSucceeded": false,
-                                                                      "submitting": false,
-                                                                      "touched": false,
-                                                                      "valid": true,
-                                                                      "validating": false,
-                                                                      "visited": false,
-                                                                    }
-                                                                  }
+                                                                <div
+                                                                  class="pf-c-form__group-control"
                                                                 >
-                                                                  <Component
-                                                                    fieldId="foo-field"
+                                                                  <input
+                                                                    aria-invalid="false"
+                                                                    class="pf-c-form-control"
+                                                                    id="foo-field"
+                                                                    name="foo-field"
+                                                                    type="text"
+                                                                    value=""
+                                                                  />
+                                                                  
+                                                                </div>
+                                                              </div>
+                                                            </div>,
+                                                          }
+                                                        }
+                                                        handleNext={[Function]}
+                                                        handlePrev={[Function]}
+                                                        name="1"
+                                                        nextStep="2"
+                                                        title="foo-step"
+                                                      >
+                                                        <div
+                                                          className="pf-c-form"
+                                                        >
+                                                          <SingleField
+                                                            component="text-field"
+                                                            key="foo-field"
+                                                            name="foo-field"
+                                                          >
+                                                            <FormConditionWrapper>
+                                                              <FormFieldHideWrapper
+                                                                hideField={false}
+                                                              >
+                                                                <TextField
+                                                                  component="text-field"
+                                                                  name="foo-field"
+                                                                >
+                                                                  <FormGroup
+                                                                    id="foo-field"
                                                                     isRequired={false}
-                                                                    validated="default"
+                                                                    meta={
+                                                                      Object {
+                                                                        "active": false,
+                                                                        "data": Object {},
+                                                                        "dirty": false,
+                                                                        "dirtySinceLastSubmit": false,
+                                                                        "error": undefined,
+                                                                        "initial": undefined,
+                                                                        "invalid": false,
+                                                                        "length": undefined,
+                                                                        "modified": false,
+                                                                        "pristine": true,
+                                                                        "submitError": undefined,
+                                                                        "submitFailed": false,
+                                                                        "submitSucceeded": false,
+                                                                        "submitting": false,
+                                                                        "touched": false,
+                                                                        "valid": true,
+                                                                        "validating": false,
+                                                                        "visited": false,
+                                                                      }
+                                                                    }
                                                                   >
-                                                                    <div
-                                                                      className="pf-c-form__group"
+                                                                    <Component
+                                                                      fieldId="foo-field"
+                                                                      isRequired={false}
+                                                                      validated="default"
                                                                     >
                                                                       <div
-                                                                        className="pf-c-form__group-control"
+                                                                        className="pf-c-form__group"
                                                                       >
-                                                                        <ForwardRef
-                                                                          id="foo-field"
-                                                                          name="foo-field"
-                                                                          onBlur={[Function]}
-                                                                          onChange={[Function]}
-                                                                          onFocus={[Function]}
-                                                                          validated="default"
-                                                                          value=""
+                                                                        <div
+                                                                          className="pf-c-form__group-control"
                                                                         >
-                                                                          <TextInputBase
-                                                                            aria-label={null}
-                                                                            className=""
+                                                                          <ForwardRef
                                                                             id="foo-field"
-                                                                            innerRef={null}
-                                                                            isDisabled={false}
-                                                                            isReadOnly={false}
-                                                                            isRequired={false}
                                                                             name="foo-field"
                                                                             onBlur={[Function]}
                                                                             onChange={[Function]}
                                                                             onFocus={[Function]}
-                                                                            type="text"
                                                                             validated="default"
                                                                             value=""
                                                                           >
-                                                                            <input
-                                                                              aria-invalid={false}
+                                                                            <TextInputBase
                                                                               aria-label={null}
-                                                                              className="pf-c-form-control"
-                                                                              disabled={false}
+                                                                              className=""
                                                                               id="foo-field"
+                                                                              innerRef={null}
+                                                                              isDisabled={false}
+                                                                              isReadOnly={false}
+                                                                              isRequired={false}
                                                                               name="foo-field"
                                                                               onBlur={[Function]}
                                                                               onChange={[Function]}
                                                                               onFocus={[Function]}
-                                                                              readOnly={false}
-                                                                              required={false}
                                                                               type="text"
+                                                                              validated="default"
                                                                               value=""
-                                                                            />
-                                                                          </TextInputBase>
-                                                                        </ForwardRef>
+                                                                            >
+                                                                              <input
+                                                                                aria-invalid={false}
+                                                                                aria-label={null}
+                                                                                className="pf-c-form-control"
+                                                                                disabled={false}
+                                                                                id="foo-field"
+                                                                                name="foo-field"
+                                                                                onBlur={[Function]}
+                                                                                onChange={[Function]}
+                                                                                onFocus={[Function]}
+                                                                                readOnly={false}
+                                                                                required={false}
+                                                                                type="text"
+                                                                                value=""
+                                                                              />
+                                                                            </TextInputBase>
+                                                                          </ForwardRef>
+                                                                        </div>
                                                                       </div>
-                                                                    </div>
-                                                                  </Component>
-                                                                </FormGroup>
-                                                              </TextField>
-                                                            </FormFieldHideWrapper>
-                                                          </FormConditionWrapper>
-                                                        </SingleField>
-                                                      </div>
+                                                                    </Component>
+                                                                  </FormGroup>
+                                                                </TextField>
+                                                              </FormFieldHideWrapper>
+                                                            </FormConditionWrapper>
+                                                          </SingleField>
+                                                        </div>
+                                                      </DefaultStepTemplate>
                                                     </div>
                                                   </main>
                                                 </Component>

@@ -1,9 +1,13 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import isEqual from 'lodash/isEqual';
+import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import Select from '../../common/select/select';
 import { act } from 'react-dom/test-utils';
+import ValueContainer from '../../common/select/value-container';
+import FormTemplate from '../../files/form-template';
+import componentMapper from '../../files/component-mapper';
 
 describe('<Select />', () => {
   let initialProps;
@@ -28,6 +32,47 @@ describe('<Select />', () => {
 
   afterEach(() => {
     onChange.mockReset();
+  });
+
+  it('should render translated option in value container', async () => {
+    const wrapper = mount(
+      <FormRenderer
+        onSubmit={jest.fn}
+        FormTemplate={FormTemplate}
+        componentMapper={componentMapper}
+        schema={{
+          fields: [
+            {
+              component: componentTypes.SELECT,
+              name: 'select',
+              options: [
+                {
+                  label: <h1>Translated</h1>,
+                  value: 'translated'
+                }
+              ]
+            }
+          ]
+        }}
+      />
+    );
+
+    expect(wrapper.find(ValueContainer).find('h1')).toHaveLength(0);
+
+    wrapper.find('.pf-c-select__toggle').simulate('click');
+    const option = wrapper.find('button.pf-c-select__menu-item').first();
+
+    await act(async () => {
+      option.simulate('click');
+    });
+    wrapper.update();
+
+    expect(
+      wrapper
+        .find(ValueContainer)
+        .find('h1')
+        .text()
+    ).toEqual('Translated');
   });
 
   it('should return single simple value', async () => {

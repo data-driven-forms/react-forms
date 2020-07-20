@@ -16,6 +16,7 @@ Don't forget hide form controls by setting \`showFormControls\` to \`false\` as 
 | isDynamic  | bool  | undefined  | will dynamically generate steps navigation (=progressive wizard), please use if you use any condition fields which changes any field in other steps (wizards with conditional steps are dynamic by default) |
 |showTitles|bool|undefined|If true, step titles will be shown in the wizard body|
 |crossroads|array|undefined|Array of field names, which change next steps|
+|StepTemplate|componenr|DefaultStepTemplate|Custom component for rendering wizard body content.|
 
 Also accepts these props from the original component: `titleId`, `descriptionId`, `hideClose`, `hasNoBodyPadding`, `navAriaLabel` and `closeButtonAriaLabel`.
 
@@ -81,6 +82,7 @@ The components receives these props:
 |buttonsClassName|Classname of buttons.|
 |buttonLabels|Object with labels.|
 |renderNextButton|Function which completely handle the next/submit button.|
+|StepTemplate|Custom component for rendering wizard body content.|
 
 
 **How to do substeps**
@@ -126,6 +128,95 @@ Schema: [
 
 Progressive Wizard works same way. It checks if previous step has the same \`substepOf\` value and if so, it grouped them together.
 If the value is different, a new primary step is created with the step as a substep.
+
+**React node as substepOf**
+
+You can put a React node as `substepOf`. In this case you have to provide an object with keys `name: string` and `title?: ReactNode`.
+
+```jsx
+<h2>Custom title</h2>      // name: Configuration
+  Security
+  Credentials
+Summary
+```
+
+```jsx
+Schema: [
+  {
+    name: 'security',
+    title: 'Security',
+    nextStep: 'credentials',
+    substepOf: { name: 'Configuration', title: <h2>Custom title</h2> }
+  },{
+    name: 'credentials',
+    title: 'Credentials',
+    nextStep: 'summary',
+    substepOf: 'Configuration' // title can be put only in the first step
+  },{
+    name: 'summary',
+    title: 'Summary'
+  },
+]
+```
+
+**StepTemplate**
+
+To override default wizard body content, you can use `StepTemplate` prop, either in the wizard definition or in the step definition.
+
+StepTemplate
+
+```jsx
+StepTemplate = (props) => <div className="custom-div">{props.formFields}</div>
+```
+
+StepTemplate receives all the props defined in the step schema plus following props:
+
+|Prop|Description|
+|----|-----------|
+|formFields|Already rendered fields. You use this or you can use fields prop and render it yourselves.|
+|formOptions|Modified formOptions with wizard submit and cancel|
+|showTitles|showTitles prop from the wizard definition|
+|formRef|Ref used to be put on the first element|
+
+Wizard definition
+
+```jsx
+{
+  component: 'wizard',
+  name: 'wizard',
+  StepTemplate,
+  fields: [ ... ]
+}
+```
+
+Step defintion
+
+```jsx
+{
+  component: 'wizard',
+  name: 'wizard',
+  fields: [{
+    name: 'first-step',
+    StepTemplate,
+    fields: [ ... ]
+  }]
+}
+```
+
+Don't forget to use `hasNoBodyPadding` in wizard/step definition, to disable padding on the wizard body. Example:
+
+```jsx
+{
+  component: 'wizard',
+  name: 'wizard',
+  fields: [{
+    name: 'first-step',
+    hasNoBodyPadding: true,
+    StepTemplate,
+    fields: [ ... ]
+  }]
+}
+```
 
 **First step**
 

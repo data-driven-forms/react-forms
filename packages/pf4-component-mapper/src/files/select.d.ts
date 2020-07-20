@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 export interface SelectOption {
   label: ReactNode;
   value?: any;
+  key?: string;
 }
 
 interface BaseSelectProps  {
