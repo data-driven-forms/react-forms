@@ -164,5 +164,6 @@ const selectSchema = {
 };
 
 export default {
-  ...selectSchema
+  ...selectSchema,
+  fields: [selectSchema.fields[0]]
 };
