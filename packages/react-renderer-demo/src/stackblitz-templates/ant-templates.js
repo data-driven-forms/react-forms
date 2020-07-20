@@ -64,7 +64,7 @@ export const antDependencies = {
   react: '^16.12.0',
   'react-dom': '^16.12.0',
   '@data-driven-forms/react-form-renderer': 'latest',
-  '@data-driven-forms/ant-component-mapper': '^0.0.2',
+  '@data-driven-forms/ant-component-mapper': 'latest',
   antd: 'latest',
   'prop-types': 'latest'
 };
