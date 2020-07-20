@@ -275,7 +275,7 @@ const LandingPageCards = () => {
                 </a>
               </RouterLink>
             </Grid>
-            <Grid item xs={12} md={6} xl={2}>
+            <Grid item xs={12} md={4} xl={2}>
               <Typography variant="h6" className={classes.textBottom}>
                 BlueprintJS
               </Typography>
@@ -285,13 +285,23 @@ const LandingPageCards = () => {
                 </a>
               </RouterLink>
             </Grid>
-            <Grid item xs={12} md={6} xl={2}>
+            <Grid item xs={12} md={4} xl={2}>
               <Typography variant="h6" className={classes.textBottom}>
                 Semantic UI
               </Typography>
               <RouterLink href="/mappers/suir-component-mapper">
                 <a href="/mappers/suir-component-mapper">
                   <img className={classes.logo} alt="semantic ui logo" src="/semantic-ui-logo.svg" />
+                </a>
+              </RouterLink>
+            </Grid>
+            <Grid item xs={12} md={4} xl={2}>
+              <Typography variant="h6" className={classes.textBottom}>
+                Ant Design
+              </Typography>
+              <RouterLink href="/mappers/ant-component-mapper">
+                <a href="/mappers/ant-component-mapper">
+                  <img className={classes.logo} alt="ant logo" src="/ant-logo.svg" />
                 </a>
               </RouterLink>
             </Grid>

@@ -6,6 +6,7 @@ import Pf3FieldArray from './examples-texts/pf3/pf3-field-array.md';
 import SuirFieldArray from './examples-texts/suir/suir-field-array.md';
 import BlueprintFieldArray from './examples-texts/blueprint/blueprint-field-array.md';
 import GenericMuiComponent from '../helpers/generic-mui-component';
+import AntFieldArray from './examples-texts/ant/ant-field-array.md';
 
 const FieldArray = ({ activeMapper }) => {
   if (activeMapper === 'mui') {
@@ -26,6 +27,10 @@ const FieldArray = ({ activeMapper }) => {
 
   if (activeMapper === 'blueprint') {
     return <BlueprintFieldArray />;
+  }
+
+  if (activeMapper === 'ant') {
+    return <AntFieldArray />;
   }
 
   return <GenericMuiComponent activeMapper={activeMapper} component="field-array" />;
