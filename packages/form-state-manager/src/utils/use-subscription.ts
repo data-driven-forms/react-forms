@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import FormManagerContext, { ManagerContextValue } from '../files/form-manager-context';
-import AnyObject from '../files/any-object';
+import AnyObject from './any-object';
 import { object } from 'prop-types';
 
 // tslint:disable-next-line: no-any-union

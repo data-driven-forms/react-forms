@@ -3510,6 +3510,14 @@
     "@rollup/pluginutils" "^3.0.1"
     resolve "^1.14.1"
 
+"@rollup/plugin-typescript@^5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-typescript/-/plugin-typescript-5.0.2.tgz#e879b73354851868b805bbd43f15c229123b8a71"
+  integrity sha512-CkS028Itwjqm1uLbFVfpJgtVtnNvZ+og/m6UlNRR5wOOnNTWPcVQzOu5xGdEX+WWJxdvWIqUq2uR/RBt2ZipWg==
+  dependencies:
+    "@rollup/pluginutils" "^3.0.1"
+    resolve "^1.14.1"
+
 "@rollup/pluginutils@^3.0.1", "@rollup/pluginutils@^3.0.8":
   version "3.0.10"
   resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-3.0.10.tgz#a659b9025920378494cd8f8c59fbf9b3a50d5f12"

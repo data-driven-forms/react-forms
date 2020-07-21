@@ -1,4 +1,4 @@
-import AnyObject from "../files/any-object";
+import AnyObject from "./any-object";
 import { Action } from "../files/form-manager-context";
 
 export const REGISTER_FIELD = 'REGISTER_FIELD';
@@ -65,8 +65,6 @@ const stateManagerReducer = (state: AnyObject, { type, ...action }: Action) => {
   if (!mutators[type]) {
     return state;
   }
-
-  console.log({ type, action });
 
   return mutators[type](state, action);
 };

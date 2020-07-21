@@ -1,5 +1,5 @@
 import { createContext, FormEvent } from 'react';
-import AnyObject from './any-object';
+import AnyObject from '../utils/any-object';
 
 export interface Action extends AnyObject {
   type: string;
@@ -17,12 +17,18 @@ export interface ManagerContext {
   value: ManagerContextValue;
 }
 
+const noop = () => {
+  /**
+   * empty function stub
+   */
+};
+
 const FormManagerContext = createContext<ManagerContextValue>({
   values: {},
-  dispatch: () => {},
-  handleSubmit: () => {},
-  registerField: () => {},
-  unRegisterField: () => {},
+  dispatch: noop,
+  handleSubmit: noop,
+  registerField: noop,
+  unRegisterField: noop,
 });
 
 export default FormManagerContext;
