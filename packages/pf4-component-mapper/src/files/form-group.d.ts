@@ -1,4 +1,6 @@
 import { ReactNode } from "react";
+import { FormGroupProps as PfFormGroupProps } from '@patternfly/react-core';
+
 
 export default interface FormGroupProps {
   description?: ReactNode;
@@ -7,4 +9,5 @@ export default interface FormGroupProps {
   label?: ReactNode;
   isRequired?: boolean;
   helperText?: ReactNode;
+  FormGroupProps?: PfFormGroupProps;
 }

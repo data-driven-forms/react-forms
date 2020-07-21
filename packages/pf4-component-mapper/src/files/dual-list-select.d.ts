@@ -1,6 +1,6 @@
 import { UseFieldApiComponentConfig, AnyObject } from "@data-driven-forms/react-form-renderer";
 import { ReactNode } from "react";
-import { FormGroupProps } from "@patternfly/react-core";
+import FormGroupProps from "./form-group";
 
 export interface DualListSelectOption extends AnyObject {
   value?: any;
