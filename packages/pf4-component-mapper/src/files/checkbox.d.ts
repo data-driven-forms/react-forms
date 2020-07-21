@@ -1,6 +1,7 @@
 import { UseFieldApiComponentConfig, AnyObject } from "@data-driven-forms/react-form-renderer";
-import { CheckboxProps as PfCheckboxProps, FormGroupProps } from '@patternfly/react-core';
+import { CheckboxProps as PfCheckboxProps } from '@patternfly/react-core';
 import { ReactNode } from "react";
+import FormGroupProps from "./form-group";
 
 interface CheckboxOptions extends AnyObject {
   label?: ReactNode;

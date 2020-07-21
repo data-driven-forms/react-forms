@@ -7,10 +7,18 @@ import { Badge, Grid, GridItem } from '@patternfly/react-core';
 import './slider.scss';
 
 const Slider = (props) => {
-  const { label, isRequired, helperText, meta, description, input, isReadOnly, isDisabled, id, ...rest } = useFieldApi(props);
+  const { label, isRequired, helperText, meta, description, input, isReadOnly, isDisabled, id, FormGroupProps, ...rest } = useFieldApi(props);
 
   return (
-    <FormGroup label={label} isRequired={isRequired} helperText={helperText} meta={meta} description={description} id={id || input.name}>
+    <FormGroup
+      label={label}
+      isRequired={isRequired}
+      helperText={helperText}
+      meta={meta}
+      description={description}
+      id={id || input.name}
+      FormGroupProps={FormGroupProps}
+    >
       <Grid gutter="md">
         <GridItem span={10}>
           <input
@@ -36,7 +44,8 @@ Slider.propTypes = {
   helperText: PropTypes.node,
   description: PropTypes.node,
   isDisabled: PropTypes.bool,
-  id: PropTypes.string
+  id: PropTypes.string,
+  FormGroupProps: PropTypes.object
 };
 
 export default Slider;

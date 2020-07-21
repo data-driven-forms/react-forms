@@ -146,7 +146,8 @@ const DualList = ({
   filterValues,
   rightValues,
   handleValuesClick,
-  renderStatus
+  renderStatus,
+  FormGroupProps
 }) => (
   <FormGroup
     label={label}
@@ -156,6 +157,7 @@ const DualList = ({
     description={description}
     hideLabel={hideLabel}
     id={id || input.name}
+    FormGroupProps={FormGroupProps}
   >
     <Grid>
       <Grid>
@@ -314,7 +316,8 @@ DualList.propTypes = {
   filterValues: PropTypes.func,
   rightValues: PropTypes.array,
   handleValuesClick: PropTypes.func,
-  renderStatus: PropTypes.func
+  renderStatus: PropTypes.func,
+  FormGroupProps: PropTypes.object
 };
 
 DualList.defaultProps = {
