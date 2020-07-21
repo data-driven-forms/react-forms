@@ -1,7 +1,17 @@
+import AnyObject from "../files/any-object";
+import { Action } from "../files/form-manager-context";
+
 export const REGISTER_FIELD = 'REGISTER_FIELD';
 export const UNREGISTER_FIELD = 'UNREGISTER_FIELD';
 
-const registerField = (state, { name, getFieldState }) => ({
+interface FieldState {
+  name: string;
+  getFieldState: () => AnyObject;
+  value: any;
+  persistOnUnmount: boolean;
+}
+
+const registerField = (state: AnyObject, { name, getFieldState }: FieldState) => ({
   ...state,
   registeredFields: [...state.registeredFields, name],
   fieldListeners: {
@@ -17,9 +27,9 @@ const registerField = (state, { name, getFieldState }) => ({
   }
 });
 
-const checkLastSubscrition = (fieldListeners, name) => fieldListeners?.[name]?.count === 1;
+const checkLastSubscrition = (fieldListeners: AnyObject, name: string) => fieldListeners?.[name]?.count === 1;
 
-const unregisterField = (state, { name, persistOnUnmount, value }) => {
+const unregisterField = (state: AnyObject, { name, persistOnUnmount, value }: FieldState) => {
   const isLast = checkLastSubscrition(state.fieldListeners, name);
   if (!isLast) {
     return {
@@ -39,18 +49,19 @@ const unregisterField = (state, { name, persistOnUnmount, value }) => {
     newState.values = { ...newState.values, [name]: value };
   }
 
-  newState.registeredFields = newState.registeredFields.filter((fieldName) => fieldName !== name);
+  newState.registeredFields = newState.registeredFields.filter((fieldName: string) => fieldName !== name);
+  // tslint:disable-next-line: no-dynamic-delete
   delete newState.fieldListeners[name];
 
   return newState;
 };
 
-const mutators = {
+const mutators: AnyObject = {
   [REGISTER_FIELD]: registerField,
   [UNREGISTER_FIELD]: unregisterField
 };
 
-const stateManagerReducer = (state, { type, ...action }) => {
+const stateManagerReducer = (state: AnyObject, { type, ...action }: Action) => {
   if (!mutators[type]) {
     return state;
   }

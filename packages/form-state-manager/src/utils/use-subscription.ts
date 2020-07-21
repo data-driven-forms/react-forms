@@ -1,35 +1,46 @@
 import { useEffect, useState, useContext } from 'react';
-import FormManagerContext from '../files/form-manager-context';
+import FormManagerContext, { ManagerContextValue } from '../files/form-manager-context';
+import AnyObject from '../files/any-object';
+import { object } from 'prop-types';
+
+// tslint:disable-next-line: no-any-union
+type OnChangeEvent = React.ChangeEvent | any;
 
 class FieldState {
-  constructor(value) {
+  constructor(public value: any) {
     this.value = value;
   }
 
-  setValue = (value) => {
+  setValue = (value: any) => {
     this.value = value;
   };
 
   getFieldState = () => ({ value: this.value });
 }
 
-const sanitizeValue = (event) => {
+const sanitizeValue = (event: OnChangeEvent) => {
   if (Array.isArray(event)) {
     return event;
   }
 
   if (typeof event === 'object' && Object.prototype.hasOwnProperty.call(event, 'target')) {
-    if (event.target === null) {
+    if (event?.target === null) {
       return event;
     }
 
-    return event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+    return event?.target.type === 'checkbox' ? event.target.checked : event?.target.value;
   }
 
   return event;
 };
 
-const useSubscription = ({ name, initialValue, subscription = {} }) => {
+interface UseSubscriotion {
+  name: string;
+  initialValue?: any;
+  subscription?: AnyObject;
+}
+
+const useSubscription = ({ name, initialValue, subscription = {} }: UseSubscriotion) => {
   const { registerField, unRegisterField, dispatch } = useContext(FormManagerContext);
   const [state, setState] = useState({
     value: initialValue,
@@ -42,13 +53,13 @@ const useSubscription = ({ name, initialValue, subscription = {} }) => {
     fieldState: new FieldState(initialValue) // TODO update the whole field state inside the instance
   });
 
-  const handleChange = (event) => {
+  const handleChange = (event: OnChangeEvent) => {
     const sanitizedValue = sanitizeValue(event);
     setState((prevState) => ({ ...prevState, value: sanitizedValue }));
     state.fieldState.setValue(sanitizedValue);
   };
 
-  let valueToReturn = state.value;
+  const valueToReturn = state.value;
 
   useEffect(() => {
     registerField(dispatch, { ...state, getFieldState: state.fieldState.getFieldState });
@@ -58,12 +69,12 @@ const useSubscription = ({ name, initialValue, subscription = {} }) => {
     };
   }, []);
 
-  const onChange = (event) => {
+  const onChange = (event: OnChangeEvent) => {
     try {
       event.persist();
-      return handleChange(event);
+      handleChange(event);
     } catch {
-      return handleChange(event);
+      handleChange(event);
     }
   };
 
