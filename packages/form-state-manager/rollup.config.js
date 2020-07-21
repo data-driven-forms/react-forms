@@ -10,7 +10,6 @@ import path from 'path';
 import sourcemaps from 'rollup-plugin-sourcemaps';
 
 const outputPaths = glob.sync(path.resolve(__dirname, './src/files/*'));
-console.log(outputPaths);
 
 const globals = {
   react: 'React',
@@ -35,7 +34,7 @@ function onwarn(warning) {
   throw Error(warning.message);
 }
 
-const plugins = [
+const getPlugins = (env) => [
   nodeResolve(),
   babel(babelOptions),
   commonjs(commonjsOptions),
@@ -47,7 +46,13 @@ const plugins = [
   }),
   typescript({
     allowSyntheticDefaultImports: true,
-    target: 'es5'
+    target: 'es5',
+    ...(env
+      ? {
+          declaration: true,
+          declarationDir: `./dist/${env}`
+        }
+      : {})
   }),
   sourcemaps()
 ];
@@ -65,7 +70,7 @@ export default [
       sourcemap: true
     },
     external: Object.keys(globals),
-    plugins
+    plugins: getPlugins(env)
   })),
   {
     onwarn,
@@ -79,6 +84,6 @@ export default [
       sourcemap: true
     },
     external: Object.keys(globals),
-    plugins
+    plugins: getPlugins()
   }
 ];

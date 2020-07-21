@@ -3,7 +3,7 @@ import React, { useReducer, FormEvent } from 'react';
 import FormManagerContext, { Action } from './form-manager-context';
 import stateManagerReducer, { initialState, REGISTER_FIELD, UNREGISTER_FIELD } from '../utils/state-manager-reducer';
 import getFormValues from '../utils/get-form-values';
-import AnyObject from '../utils/any-object';
+import AnyObject from '../types/any-object';
 
 const registerField = (dispatch: (action: Action) => void, field: AnyObject) => dispatch({ type: REGISTER_FIELD, ...field });
 const unRegisterField = (dispatch: (action: Action) => void, field: AnyObject) => dispatch({ type: UNREGISTER_FIELD, ...field });

@@ -1,5 +1,5 @@
 import { createContext, FormEvent } from 'react';
-import AnyObject from '../utils/any-object';
+import AnyObject from '../types/any-object';
 
 export interface Action extends AnyObject {
   type: string;

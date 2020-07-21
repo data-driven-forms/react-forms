@@ -1,4 +1,4 @@
-import AnyObject from "./any-object";
+import AnyObject from "../types/any-object";
 import { Action } from "../files/form-manager-context";
 
 export const REGISTER_FIELD = 'REGISTER_FIELD';

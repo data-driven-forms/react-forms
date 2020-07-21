@@ -1,6 +1,6 @@
 import set from 'lodash/set';
 import get from 'lodash/get';
-import AnyObject from './any-object';
+import AnyObject from '../types/any-object';
 
 const getFormValues = (state: AnyObject) =>
   state.registeredFields.reduce((acc: AnyObject, name: string) => {

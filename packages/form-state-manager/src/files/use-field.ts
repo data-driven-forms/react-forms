@@ -1,5 +1,5 @@
 import useSubscription from '../utils/use-subscription';
-import AnyObject from '../utils/any-object';
+import AnyObject from '../types/any-object';
 
 export interface UseField extends AnyObject {
   name: string;

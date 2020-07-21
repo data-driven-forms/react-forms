@@ -1,7 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import FormManagerContext, { ManagerContextValue } from '../files/form-manager-context';
-import AnyObject from './any-object';
-import { object } from 'prop-types';
+import AnyObject from '../types/any-object';
 
 // tslint:disable-next-line: no-any-union
 type OnChangeEvent = React.ChangeEvent | any;
@@ -34,13 +33,13 @@ const sanitizeValue = (event: OnChangeEvent) => {
   return event;
 };
 
-interface UseSubscriotion {
+interface UseSubscription {
   name: string;
   initialValue?: any;
   subscription?: AnyObject;
 }
 
-const useSubscription = ({ name, initialValue, subscription = {} }: UseSubscriotion) => {
+const useSubscription = ({ name, initialValue, subscription = {} }: UseSubscription) => {
   const { registerField, unRegisterField, dispatch } = useContext(FormManagerContext);
   const [state, setState] = useState({
     value: initialValue,
