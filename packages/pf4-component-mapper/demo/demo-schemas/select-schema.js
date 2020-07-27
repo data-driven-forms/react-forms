@@ -43,6 +43,7 @@ const selectSchema = {
       name: 'simple-portal-select',
       label: 'Simple portal select',
       options,
+      isSearchable: true,
       menuIsPortal: true
     },
     {

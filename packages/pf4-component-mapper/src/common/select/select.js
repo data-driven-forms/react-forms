@@ -81,6 +81,12 @@ const getValue = (isMulti, option, value) => {
 
 const stateReducer = (state, changes, isMulti) => {
   switch (changes.type) {
+    case Downshift.stateChangeTypes.clickButton:
+      return {
+        ...state,
+        ...changes,
+        inputValue: undefined
+      };
     case Downshift.stateChangeTypes.keyDownEnter:
     case Downshift.stateChangeTypes.clickItem:
       return {
@@ -105,6 +111,14 @@ const stateReducer = (state, changes, isMulti) => {
         return {
           ...changes,
           inputValue: changes.inputValue[0]
+        };
+      }
+
+      if (state.isOpen === true && changes.isOpen === false && changes.inputValue) {
+        return {
+          ...state,
+          ...changes,
+          inputValue: ''
         };
       }
 
