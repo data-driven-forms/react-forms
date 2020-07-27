@@ -14,6 +14,10 @@ const Input = ({ inputRef, isSearchable, isDisabled, getInputProps, value, ...pr
       {...{
         ...inputProps,
         value: inputProps.value || '',
+        onKeyDown: (event, ...args) => {
+          event.stopPropagation();
+          inputProps.onKeyDown(event, ...args);
+        },
         onChange: inputProps.onChange || Function
       }}
     />
