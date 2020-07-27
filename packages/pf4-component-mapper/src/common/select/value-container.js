@@ -13,7 +13,7 @@ const ValueContainer = ({ value, isMulti, placeholder, getInputProps, isSearchab
   }
 
   if (!isMulti && isSearchable) {
-    return <Input placeholder={placeholder} inputRef={inputRef} getInputProps={getInputProps} />;
+    return <Input placeholder={placeholder} inputRef={inputRef} getInputProps={getInputProps} value={value} />;
   }
 
   return <span className="pf-c-select__toggle-text">{value || placeholder}</span>;

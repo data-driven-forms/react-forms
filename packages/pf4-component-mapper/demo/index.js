@@ -57,7 +57,9 @@ class App extends React.Component {
                 onSubmit={console.log}
                 initialValues={{
                     'simple-select': 'Kay',
-                    'simple-async-select': 'Jenifer'
+                    'simple-async-select': 'Jenifer',
+                    'simple-searchable-async-select': 'Jenifer',
+                    'simple-portal-select': 'Jenifer'
                 }}
                 componentMapper={{
                     ...componentMapper,
