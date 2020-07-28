@@ -85,6 +85,7 @@ const stateReducer = (state, changes, isMulti) => {
       return {
         ...state,
         ...changes,
+        highlightedIndex: undefined, // reset the item focus to prevent initial scroll and portal menu warping
         inputValue: undefined
       };
     case Downshift.stateChangeTypes.keyDownEnter:
