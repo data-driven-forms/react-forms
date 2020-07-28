@@ -36,8 +36,29 @@ const loadOptions = (inputValue = '') => {
   );
 };
 
+const loadOptionsLong = (inputValue = '') => {
+  const options = [...Array(99)].map((_v, index) => ({ label: `${index}`, value: `${index}` }));
+  return new Promise((res) =>
+    setTimeout(() => {
+      if (inputValue.length === 0) {
+        return res(options.slice(0, 80));
+      }
+
+      return res(options.filter(({ label }) => label.toLocaleLowerCase().includes(inputValue.toLocaleLowerCase())));
+    }, 1500)
+  );
+};
+
 const selectSchema = {
   fields: [
+    {
+      component: componentTypes.SELECT,
+      name: 'long-searchable-async-select',
+      label: 'Long searchable async select',
+      loadOptions: loadOptionsLong,
+      isSearchable: true,
+      menuIsPortal: true
+    },
     {
       component: componentTypes.SELECT,
       name: 'simple-portal-select',
@@ -165,5 +186,6 @@ const selectSchema = {
 };
 
 export default {
-  ...selectSchema
+  ...selectSchema,
+  fields: [selectSchema.fields[0]]
 };
