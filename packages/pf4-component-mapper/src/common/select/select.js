@@ -163,8 +163,11 @@ const InternalSelect = ({
       itemToString={(value) => itemToString(value, isMulti, showMore, handleShowMore, handleChange)}
       selectedItem={value || ''}
       stateReducer={(state, changes) => stateReducer(state, changes, isMulti)}
-      onInputValueChange={(inputValue) => {
-        if (onInputChange && typeof inputValue === 'string') {
+      onInputValueChange={(inputValue, { selectedItem }) => {
+        /**
+         * Prevent firing te load options callback when selecting value not filtering
+         */
+        if (onInputChange && typeof inputValue === 'string' && selectedItem?.label !== inputValue) {
           onInputChange(inputValue);
         }
       }}
