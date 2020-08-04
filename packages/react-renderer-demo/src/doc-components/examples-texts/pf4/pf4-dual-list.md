@@ -1,6 +1,6 @@
 This a custom component with a custom design. Things can be changed, after official PF4 release.
 
-**Props**
+## Props
 
 Dual list select is wrapped in a form group, so it accepts all [form group props](/mappers/component-api#formgroupwrappedcomponents).
 

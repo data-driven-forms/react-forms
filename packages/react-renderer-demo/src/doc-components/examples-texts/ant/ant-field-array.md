@@ -1,4 +1,4 @@
-**Props**
+## Props
 
 |Prop|Type|Description|
 |:---|:--:|----------:|
@@ -11,11 +11,11 @@
 |noItemsMessage|`node`|A message which is shown, when there are no items in the array.|
 |buttonLabels|`object`|`{add: 'ADD', remove: 'REMOVE'}` sets labels of buttons.|
 
-**Revert removal**
+## Revert removal
 
 Ant field array allow users to revert latest removal actions.
 
-**Naming**
+## Naming
 
 Fields can contain names, then the value will be handled as array of objects.
 
@@ -42,11 +42,11 @@ const fields = [
 [ value1, value2, ... ]
 ```
 
-**Custom component**
+## Custom component
 
 To implement a custom component, please take a look [here](/components/field-array).
 
-### Sub components props
+## Sub components props
 
 |name|type|default|target component|
 |----|----|-------|----------------|

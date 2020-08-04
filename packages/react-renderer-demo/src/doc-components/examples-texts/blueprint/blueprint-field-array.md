@@ -1,6 +1,6 @@
 Blueprint component mapper provides an experimental implementation of field array.
 
-**Props**
+## Props
 
 |Prop|Type|Description|
 |:---|:--:|----------:|
@@ -19,7 +19,7 @@ Blueprint component mapper provides an experimental implementation of field arra
 |FormGroupProps|`object`|Props passed to the form group component.|
 |FieldArrayProps|`object`|Props passed to the root div.|
 
-**Naming**
+## Naming
 
 Fields can contain names, then the value will be handled as array of objects.
 
@@ -46,6 +46,6 @@ const fields = [
 [ value1, value2, ... ]
 ```
 
-**Custom component**
+## Custom component
 
 To implement a custom component, please take a look [here](/components/field-array).

@@ -2,7 +2,7 @@ import CommonWizard from '../wizard.md';
 
 This a custom component. OnSubmit will send only values from visited steps.
 
-**Props**
+## Props
 
 |Prop|Type|Default|Description|
 |-------------|-------------|-------------|-------------|
@@ -15,7 +15,7 @@ This a custom component. OnSubmit will send only values from visited steps.
 |NextButtonProps| object | {} | Props passed to the next button |
 |SubmitButtonProps| object | {} | Props passed to the submit button |
 
-**Default buttonLabels**
+### Default buttonLabels
 
 ```jsx
 {

@@ -1,4 +1,4 @@
-### Sub components props
+## Sub components props
 |name|type|default|target component|
 |----|----|-------|----------------|
 |TabProps|`{}`|[Tab](https://react.semantic-ui.com/modules/tab/)|

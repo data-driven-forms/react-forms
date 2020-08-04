@@ -1,6 +1,6 @@
 Please check the [original component](https://material-ui.com/components/slider/#slider), it accepts the same props.
 
-**Props**
+## Props
 
 Slider is wrapped in a form group, so it accepts all [form group props](/mappers/component-api#formgroupwrappedcomponents).
 

@@ -1,8 +1,8 @@
-**Props**
+## Props
 
 Accepts same props as the original component.
 
-**Tab item props**
+### Tab item props
 
 |name|type|default|target component|
 |----|----|-------|----------------|

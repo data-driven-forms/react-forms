@@ -4,7 +4,7 @@ This a custom component. OnSubmit will send only values from visited steps.
 
 Don't forget hide form controls by setting \`showFormControls\` to \`false\` as a prop of the renderer component.
 
-**Props**
+## Props
 
 | Prop  | Type | Default |  Description |
 | ------------- | ------------- | ------------- | ------------- |
@@ -20,7 +20,7 @@ Don't forget hide form controls by setting \`showFormControls\` to \`false\` as 
 
 Also accepts these props from the original component: `titleId`, `descriptionId`, `hideClose`, `hasNoBodyPadding`, `navAriaLabel` and `closeButtonAriaLabel`.
 
-**Default buttonLabels**
+### Default buttonLabels
 
 ```jsx
 {
@@ -40,7 +40,7 @@ You can rewrite only selection of them, e.g.
 
 (Others will stay default)
 
-**Crossroads**
+### Crossroads
 
 With the help of `crossroads` you can manually defined which fields change next steps, it will cause that the wizard navigation is always refreshed, when one of the crossroads name is changed.
 
@@ -48,7 +48,7 @@ Ex.: `crossroads: ['name', 'nested.password']`
 
 <CommonWizard />
 
-**Buttons**
+### Buttons
 
 Each step can implement its own buttons.
 
@@ -85,7 +85,7 @@ The components receives these props:
 |StepTemplate|Custom component for rendering wizard body content.|
 
 
-**How to do substeps**
+## How to do substeps
 
 Field in Wizard fields should contain `substepOf` <`string`> which is title of the primary step. Steps with the same substepOf are grouped together by the title of primary step.
 
@@ -129,7 +129,7 @@ Schema: [
 Progressive Wizard works same way. It checks if previous step has the same \`substepOf\` value and if so, it grouped them together.
 If the value is different, a new primary step is created with the step as a substep.
 
-**React node as substepOf**
+### React node as substepOf
 
 You can put a React node as `substepOf`. In this case you have to provide an object with keys `name: string` and `title?: ReactNode`.
 
@@ -159,7 +159,7 @@ Schema: [
 ]
 ```
 
-**StepTemplate**
+## StepTemplate
 
 To override default wizard body content, you can use `StepTemplate` prop, either in the wizard definition or in the step definition.
 
@@ -218,13 +218,13 @@ Don't forget to use `hasNoBodyPadding` in wizard/step definition, to disable pad
 }
 ```
 
-**First step**
+## First step
 
 First step should have on the first position of the `fields` array.
 
-**Variants of Wizard**
+## Variants of Wizard
 
-Simple wizard
+### Simple wizard
 
 - steps navigation is visible, user can jump back and forward (after visiting the step)
 - does not contain any conditional steps
@@ -233,7 +233,7 @@ Simple wizard
 
 ![simplewizard](https://user-images.githubusercontent.com/32869456/58427234-56725680-809f-11e9-8e22-3ce7286b30d2.gif)
 
-Progressive wizard
+### Progressive wizard
 
 - steps are visible as user visits them
 - user can jump only back
@@ -243,7 +243,7 @@ Progressive wizard
 
 ![progressivewizard](https://user-images.githubusercontent.com/32869456/58427241-5b370a80-809f-11e9-8e79-a4a829b8d181.gif)
 
-**Useful links**
+## Useful links
 
 [PF4 wizard implementation](https://www.patternfly.org/v4/documentation/react/components/wizard/)
 

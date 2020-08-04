@@ -1,6 +1,6 @@
 Please check the [original component](https://blueprintjs.com/docs/#datetime/datepicker), it accepts the same props.
 
-**Props**
+## Props
 
 DatePicker is wrapped in a form group, so it accepts all [form group props](/mappers/component-api#formgroupwrappedcomponents).
 
