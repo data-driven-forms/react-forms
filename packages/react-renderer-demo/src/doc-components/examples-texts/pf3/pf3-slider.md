@@ -1,6 +1,6 @@
 Please check the [original component](https://patternfly-react-pf3.surge.sh/?path=/story/patternfly-react-forms-and-controls-slider--slider), it accepts the same props, except the `label` and `input`, see below.
 
-**Props**
+## Props
 
 Slider is wrapped in a form group, so it accepts all [form group props](/mappers/component-api#formgroupwrappedcomponents).
 

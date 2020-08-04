@@ -1,4 +1,4 @@
-### Sub components props
+## Sub components props
 |name|type|default|target component|
 |----|----|-------|----------------|
 |OptionsListProps|object|`{}`|[Segment](https://react.semantic-ui.com/elements/segment/)|

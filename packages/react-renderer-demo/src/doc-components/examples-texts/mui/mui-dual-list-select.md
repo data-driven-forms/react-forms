@@ -1,6 +1,6 @@
 This a custom component with a custom design.
 
-**Props**
+## Props
 
 Dual list select is wrapped in a form group, so it accepts all [form group props](/mappers/component-api#formgroupwrappedcomponents).
 
@@ -23,7 +23,7 @@ Dual list select is wrapped in a form group, so it accepts all [form group props
 |filterOptionsText|String|'Remove your filter to see all options'|Placeholder for options when there is no filtered option|
 |checkboxVariant|bool|false|Change list item to checkboxes|
 
-**Options**
+### Options
 
 |Props|Type|Description|
 |-----|----|-----------|
@@ -37,7 +37,7 @@ Dual list select is wrapped in a form group, so it accepts all [form group props
 |ListItemTextProps|object|Props passed to ListItemText|
 |ListItemSecondaryActionProps|object|Props passed to ListItemSecondaryAction|
 
-**Customization**
+### Customization
 
 MUI DualListSelect provides fully customization. When the props offers Right/Left variant, you can pass props to `RightXXX` or to `LeftXXX` props. Example: `ListGridProps` is Right/Left, so there are two more props: `RightListGridProps` and `LeftListGridProps`. These props overrides the standard props, except `className`, that are being combined. All these props are objects.
 

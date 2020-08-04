@@ -1,4 +1,4 @@
-**PF3 Async Select**
+## PF3 Async Select
 
 PF3 Select allows to load the options asynchronously.
 
@@ -8,7 +8,7 @@ PF3 Select allows to load the options asynchronously.
 |loadingMessage|`string`|A message shown during the loading.|
 |noValueUpdates|`bool`|When set on true, the select won't deselect values not found in options.|
 
-**loadOptions example**
+## loadOptions example
 
 Currently now, PF3 select supports only loading on mounting.
 

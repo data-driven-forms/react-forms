@@ -17,7 +17,7 @@ MUI component mapper provides an experimental implementation of field array.
 
 MUI field array allow users to revert latest removal actions.
 
-**Naming**
+## Naming
 
 Fields can contain names, then the value will be handled as array of objects.
 
@@ -44,6 +44,6 @@ const fields = [
 [ value1, value2, ... ]
 ```
 
-**Custom component**
+## Custom component
 
 To implement a custom component, please take a look [here](/components/field-array).

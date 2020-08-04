@@ -46,7 +46,7 @@ export const Heading = ({ level, children, component }) => {
   const router = useRouter();
   const classes = useHeadingStyles();
   const id = headerToId(children);
-  const path = `${router.pathname}#${id}`;
+  const path = `${router.asPath}#${id}`;
   return (
     <div id={id} className={classes.offset} data-scroll="true">
       <Typography id={`heading-${id}`} className={classes.heading} variant={`h${level}`} component={component}>

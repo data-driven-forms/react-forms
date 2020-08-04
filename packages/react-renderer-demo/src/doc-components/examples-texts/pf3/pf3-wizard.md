@@ -2,7 +2,7 @@ import CommonWizard from '../wizard.md';
 
 This a custom component. OnSubmit will send only values from visited steps.
 
-**Props**
+## Props
 
 | Prop  | Type | Default |  Description |
 | ------------- | ------------- | ------------- | ------------- |
@@ -11,7 +11,7 @@ This a custom component. OnSubmit will send only values from visited steps.
 | stepsInfo  | object  | undefined  | Information for stepper  |
 | inModal  | bool  | false  | If form is in a modal (will add a cancel icon to the header)  |
 
-**Default buttonLabels**
+### Default buttonLabels
 
 ```jsx
 {
@@ -32,7 +32,7 @@ You can rewrite only selection of them, e.g.
 
 (Others will stay default)
 
-**Format of stepsInfo**
+### Format of stepsInfo
 
 ```jsx
 [
@@ -47,7 +47,7 @@ You can rewrite only selection of them, e.g.
 
 <CommonWizard />
 
-**Useful links**
+## Useful links
 
 [PF3 wizard implementation](https://github.com/patternfly/patternfly-react/tree/master/packages/patternfly-3/patternfly-react/src/components/Wizard)
 

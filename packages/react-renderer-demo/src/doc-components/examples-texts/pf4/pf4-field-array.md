@@ -1,6 +1,6 @@
 PF4 component mapper provides an experimental implementation of field array.
 
-**Props**
+## Props
 
 |Prop|Type|Description|
 |:---|:--:|----------:|
@@ -12,7 +12,7 @@ PF4 component mapper provides an experimental implementation of field array.
 |maxItems|`number`|Add button is disabled, if the length of the array is equal or bigger.|
 |noItemsMessage|`node`|A message which is shown, when there are no items in the array.|
 
-**Naming**
+## Naming
 
 Fields can contain names, then the value will be handled as array of objects.
 
@@ -39,6 +39,6 @@ const fields = [
 [ value1, value2, ... ]
 ```
 
-**Custom component**
+## Custom component
 
 To implement a custom component, please take a look [here](/components/field-array).

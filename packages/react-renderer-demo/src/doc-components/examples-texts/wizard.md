@@ -1,4 +1,4 @@
-**Docs for steps**
+## Docs for steps
 
 |Props|Type|Description|
 |----|-------------|----------------|
@@ -6,7 +6,7 @@
 |nextStep|object/stepKey of next step/function|See below|
 |fields|array|As usual|
 
-**nextStep**
+### nextStep
 
 A) **string** - no branching, name of the next step
 
@@ -39,7 +39,7 @@ another option is to use custom function. The custom function receives as the fi
 nextStep: ({ values }) => (values.aws === '123' &&& values.password === 'secret') ? 'secretStep' : 'genericStep'
 ```
 
-**initialState**
+### initialState
 
 It is possible to set the initial state of the wizard component. This can be useful when an application returns users to a specific step.
 
@@ -64,7 +64,7 @@ How to get the state from existing wizard? The state is passed to both `onCancel
 A) `onSubmit` - `(values, formApi, wizardState) => ...`
 B) `onCancel` - `(values, wizardState) => ...`
 
-**WizardContext**
+### WizardContext
 
 Wizard share its configuration and props via `WizardContext`.
 

@@ -1,6 +1,6 @@
 This a custom component with a custom design.
 
-**Props**
+## Props
 
 Dual list select is wrapped in a form group, so it accepts all [form group props](/mappers/component-api#formgroupwrappedcomponents).
 
@@ -22,7 +22,7 @@ Dual list select is wrapped in a form group, so it accepts all [form group props
 |filterValueText|String|'Remove your filter to see all selected'|Placeholder for value when there is no filtered value|
 |filterOptionsText|String|'Remove your filter to see all options'|Placeholder for options when there is no filtered option|
 
-**Options**
+### Options
 
 |Props|Type|Description|
 |-----|----|-----------|
@@ -30,7 +30,7 @@ Dual list select is wrapped in a form group, so it accepts all [form group props
 |label|node|ListItemText primary text|
 |MenuItemProps|object|Props passed to MenuItem|
 
-**Customization**
+### Customization
 
 |Props|
 |-----|

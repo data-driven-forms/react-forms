@@ -2,7 +2,7 @@ import CommonWizard from '../wizard.md';
 
 This a custom component. OnSubmit will send only values from visited steps.
 
-**Props**
+## Props
 
 |Prop|Type|Default|Description|
 |-------------|-------------|-------------|-------------|
@@ -16,12 +16,12 @@ This a custom component. OnSubmit will send only values from visited steps.
 |NextButtonProps| object | {} | Props passed to the next button |
 |SubmitButtonProps| object | {} | Props passed to the submit button |
 
-**stepsInfo**
+### stepsInfo
 
 ```jsx
 stepsInfo: [
-  { title: 'Add a source', subTitle: 'Source' }, 
-  { title: 'Configure a source' }, 
+  { title: 'Add a source', subTitle: 'Source' },
+  { title: 'Configure a source' },
   { title: 'Summary' }
 ]
 ```
@@ -30,7 +30,7 @@ Supplying `stepsInfo` will create a steps component on top of the form displayin
 
 The object items will be passed as props to a step component. See [here](https://ant.design/components/steps/#Steps.Step).
 
-**Default buttonLabels**
+### Default buttonLabels
 
 ```jsx
 {

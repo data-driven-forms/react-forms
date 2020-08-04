@@ -1,4 +1,4 @@
-### Sub components props
+## Sub components props
 |name|type|default|target component|
 |----|----|-------|----------------|
 |HeaderProps|object|`{}`|[Header](https://react.semantic-ui.com/elements/header/)|
