@@ -16085,7 +16085,7 @@ patternfly-bootstrap-treeview@~2.1.10:
     bootstrap "^3.4.1"
     jquery "^3.4.1"
 
-patternfly-react@^2.28.2:
+patternfly-react@^2.39.16:
   version "2.39.16"
   resolved "https://registry.yarnpkg.com/patternfly-react/-/patternfly-react-2.39.16.tgz#ceae9f9ffecbdbdb27307f48ac0bf636cab063e4"
   integrity sha512-1Om7jt+1CqWgH4O167OsAfVxts35epKwVfmtnmO0Dff1KiivKscVtnwMePJJvXrEeCIHFwWY2L7i2Avvh/3Xeg==
@@ -17833,9 +17833,10 @@ react-day-picker@7.3.2:
   dependencies:
     prop-types "^15.6.2"
 
-react-day-picker@^7.3.2:
-  version "7.4.0"
-  resolved "https://registry.yarnpkg.com/react-day-picker/-/react-day-picker-7.4.0.tgz#1b3dfe76a81864518d241214ba658da25903b7df"
+react-day-picker@^7.4.8:
+  version "7.4.8"
+  resolved "https://registry.yarnpkg.com/react-day-picker/-/react-day-picker-7.4.8.tgz#675625240d3fae1b41c0a9d5177c968c8517c1d4"
+  integrity sha512-pp0hnxFVoRuBQcRdR1Hofw4CQtOCGVmzCNrscyvS0Q8NEc+UiYLEDqE5dk37bf0leSnBW4lheIt0CKKhuKzDVw==
   dependencies:
     prop-types "^15.6.2"
 
