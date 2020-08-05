@@ -30,6 +30,8 @@
     ],
     "collectCoverageFrom": [
       "<rootDir>/packages/**/src/**/*.js",
+      "<rootDir>/packages/**/src/**/*.ts",
+      "!<rootDir>/packages/**/src/**/*.d.ts",
       "!<rootDir>/packages/react-renderer-demo/**/*.js",
       "!<rootDir>/packages/**/dist",
       "!<rootDir>/templates/**/*.js"
