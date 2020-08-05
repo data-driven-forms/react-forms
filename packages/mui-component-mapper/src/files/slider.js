@@ -44,7 +44,7 @@ const Slider = (props) => {
           <Grid container spacing={2} alignItems="center" {...InputGridProps}>
             {before && (
               <Grid item {...BeforeGridProps}>
-              {before}
+                {before}
               </Grid>
             )}
             <Grid item xs {...SliderGridProps}>
