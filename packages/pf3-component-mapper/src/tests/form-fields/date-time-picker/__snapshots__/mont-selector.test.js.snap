@@ -2,10 +2,11 @@
 
 exports[`<MonthSelector /> should render correcntly 1`] = `
 <MonthSelector
+  disabledDays={Array []}
   monthChange={[MockFunction]}
   onNextClick={[MockFunction]}
   onPreviousClick={[MockFunction]}
-  selectedDay={2018-12-16T23:00:00.000Z}
+  selectedDay={2018-12-17T00:00:00.000Z}
   toggleSelectingMonth={[MockFunction]}
 >
   <div
@@ -16,7 +17,8 @@ exports[`<MonthSelector /> should render correcntly 1`] = `
       tabIndex="0"
     >
       <Navbar
-        month={2018-12-16T23:00:00.000Z}
+        disabledDays={Array []}
+        month={2018-12-17T00:00:00.000Z}
         onNextClick={[MockFunction]}
         onPreviousClick={[MockFunction]}
       >
@@ -25,49 +27,67 @@ exports[`<MonthSelector /> should render correcntly 1`] = `
         >
           <tbody>
             <tr>
-              <td
-                onClick={[Function]}
+              <PrevInterval
+                className=""
+                onMouseDown={[Function]}
               >
-                <Icon
-                  name="angle-left"
-                  type="fa"
+                <td
+                  className=""
+                  onMouseDown={[Function]}
                 >
-                  <FontAwesome
+                  <Icon
+                    aria-label="Prev interval"
                     name="angle-left"
+                    type="fa"
                   >
-                    <span
-                      aria-hidden={true}
-                      className="fa fa-angle-left"
-                    />
-                  </FontAwesome>
-                </Icon>
-              </td>
+                    <FontAwesome
+                      aria-label="Prev interval"
+                      name="angle-left"
+                    >
+                      <span
+                        aria-hidden={true}
+                        aria-label="Prev interval"
+                        className="fa fa-angle-left"
+                      />
+                    </FontAwesome>
+                  </Icon>
+                </td>
+              </PrevInterval>
               <td>
                 <button
                   className="navbar-center-button"
-                  onClick={[Function]}
+                  onMouseDown={[Function]}
                   type="button"
                 >
                   December 2018
                 </button>
               </td>
-              <td
-                onClick={[Function]}
+              <NextInterval
+                className=""
+                onMouseDown={[Function]}
               >
-                <Icon
-                  name="angle-right"
-                  type="fa"
+                <td
+                  className=""
+                  onMouseDown={[Function]}
                 >
-                  <FontAwesome
+                  <Icon
+                    aria-label="Next interval"
                     name="angle-right"
+                    type="fa"
                   >
-                    <span
-                      aria-hidden={true}
-                      className="fa fa-angle-right"
-                    />
-                  </FontAwesome>
-                </Icon>
-              </td>
+                    <FontAwesome
+                      aria-label="Next interval"
+                      name="angle-right"
+                    >
+                      <span
+                        aria-hidden={true}
+                        aria-label="Next interval"
+                        className="fa fa-angle-right"
+                      />
+                    </FontAwesome>
+                  </Icon>
+                </td>
+              </NextInterval>
             </tr>
           </tbody>
         </table>
@@ -88,7 +108,7 @@ exports[`<MonthSelector /> should render correcntly 1`] = `
               }
             >
               <button
-                className=""
+                className=" "
                 onClick={[Function]}
               >
                 January
@@ -103,7 +123,7 @@ exports[`<MonthSelector /> should render correcntly 1`] = `
               }
             >
               <button
-                className=""
+                className=" "
                 onClick={[Function]}
               >
                 February
@@ -118,7 +138,7 @@ exports[`<MonthSelector /> should render correcntly 1`] = `
               }
             >
               <button
-                className=""
+                className=" "
                 onClick={[Function]}
               >
                 March
@@ -137,7 +157,7 @@ exports[`<MonthSelector /> should render correcntly 1`] = `
               }
             >
               <button
-                className=""
+                className=" "
                 onClick={[Function]}
               >
                 April
@@ -152,7 +172,7 @@ exports[`<MonthSelector /> should render correcntly 1`] = `
               }
             >
               <button
-                className=""
+                className=" "
                 onClick={[Function]}
               >
                 May
@@ -167,7 +187,7 @@ exports[`<MonthSelector /> should render correcntly 1`] = `
               }
             >
               <button
-                className=""
+                className=" "
                 onClick={[Function]}
               >
                 June
@@ -186,7 +206,7 @@ exports[`<MonthSelector /> should render correcntly 1`] = `
               }
             >
               <button
-                className=""
+                className=" "
                 onClick={[Function]}
               >
                 July
@@ -201,7 +221,7 @@ exports[`<MonthSelector /> should render correcntly 1`] = `
               }
             >
               <button
-                className=""
+                className=" "
                 onClick={[Function]}
               >
                 August
@@ -216,7 +236,7 @@ exports[`<MonthSelector /> should render correcntly 1`] = `
               }
             >
               <button
-                className=""
+                className=" "
                 onClick={[Function]}
               >
                 September
@@ -235,7 +255,7 @@ exports[`<MonthSelector /> should render correcntly 1`] = `
               }
             >
               <button
-                className=""
+                className=" "
                 onClick={[Function]}
               >
                 October
@@ -250,7 +270,7 @@ exports[`<MonthSelector /> should render correcntly 1`] = `
               }
             >
               <button
-                className=""
+                className=" "
                 onClick={[Function]}
               >
                 November
@@ -265,7 +285,7 @@ exports[`<MonthSelector /> should render correcntly 1`] = `
               }
             >
               <button
-                className="selected"
+                className="selected "
                 onClick={[Function]}
               >
                 December
