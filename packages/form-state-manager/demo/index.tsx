@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 import FormStateManager from '../src/files/form-state-manager';
-import useField from '../src/files/use-field';
+import useField, { UseField } from '../src/files/use-field';
 
-const TextField = ({ label, id, ...props }) => {
+interface TextFieldProps {
+  label: React.ReactNode;
+  id: string;
+}
+
+const TextField: React.ComponentType<React.HTMLProps<HTMLInputElement> & TextFieldProps & UseField> = ({ label, id, ...props }) => {
   const { input, ...rest } = useField(props);
   return (
     <div style={{ display: 'flex', flexDirection: 'column', margin: 16 }}>
@@ -13,11 +18,6 @@ const TextField = ({ label, id, ...props }) => {
       <input id={id} {...input} {...rest} />
     </div>
   );
-};
-
-TextField.propTypes = {
-  label: PropTypes.node.isRequired,
-  id: PropTypes.string.isRequired
 };
 
 const App = () => {

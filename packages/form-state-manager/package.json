@@ -10,8 +10,11 @@
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
+    "@rollup/plugin-typescript": "^5.0.2",
     "@semantic-release/git": "^7.0.5",
     "@semantic-release/npm": "^5.1.1",
+    "@types/react": "^16.9.43",
+    "@types/react-dom": "^16.9.8",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "9.x",
     "babel-jest": "^23.6.0",
@@ -32,6 +35,10 @@
     "rollup-plugin-sourcemaps": "^0.5.0",
     "rollup-plugin-terser": "^5.1.2",
     "semantic-release": "^16.0.4",
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0",
+    "ts-loader": "^8.0.1",
+    "typescript": "^3.9.7",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10",
@@ -47,8 +54,9 @@
   },
   "license": "Apache-2.0",
   "scripts": {
+    "lint": "tslint -c tslint.json 'src/**/*'",
     "start": "webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
-    "build": "rollup -c ./rollup.config.js && yarn build:typings",
+    "build": "yarn lint && rollup -c ./rollup.config.js && yarn build:typings",
     "build:typings": "node ../../scripts/copy-files.js"
   }
 }

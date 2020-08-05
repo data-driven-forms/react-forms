@@ -1,9 +1,9 @@
 import set from 'lodash/set';
 import get from 'lodash/get';
+import AnyObject from '../types/any-object';
 
-const getFormValues = (state) =>
-  state.registeredFields.reduce((acc, name) => {
-    console.log(state.fieldListeners?.[name]?.getFieldState());
+const getFormValues = (state: AnyObject) =>
+  state.registeredFields.reduce((acc: AnyObject, name: string) => {
     return set(acc, name, state.fieldListeners?.[name]?.getFieldState().value || get(state.values, name));
   }, {});
 
