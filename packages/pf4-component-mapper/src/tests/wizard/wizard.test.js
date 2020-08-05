@@ -800,7 +800,8 @@ describe('<Wizard />', () => {
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(3);
   });
 
-  it('should disabled button when validating', (done) => {
+  it('should disabled button when validating', async () => {
+    jest.useFakeTimers();
     const asyncValidator = () => new Promise((res) => setTimeout(() => res(), 100));
 
     schema = {
@@ -836,7 +837,12 @@ describe('<Wizard />', () => {
       ]
     };
 
-    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    let wrapper;
+
+    await act(async () => {
+      wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    });
+    wrapper.update();
 
     expect(
       wrapper
@@ -845,16 +851,19 @@ describe('<Wizard />', () => {
         .props().isDisabled
     ).toEqual(true);
 
-    setTimeout(() => {
-      wrapper.update();
-      expect(
-        wrapper
-          .find(Button)
-          .first()
-          .props().isDisabled
-      ).toEqual(false);
-      done();
-    }, 100);
+    await act(async () => {
+      jest.runAllTimers();
+    });
+    wrapper.update();
+
+    expect(
+      wrapper
+        .find(Button)
+        .first()
+        .props().isDisabled
+    ).toEqual(false);
+
+    jest.useRealTimers();
   });
 
   it.skip('should disabled navigation when validating - this fails locally, not on CI', async () => {

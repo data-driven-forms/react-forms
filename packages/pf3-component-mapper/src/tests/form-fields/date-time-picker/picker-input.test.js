@@ -8,7 +8,8 @@ describe('<PickerInput />', () => {
   const handleOverlayToggle = jest.fn();
   beforeEach(() => {
     initialProps = {
-      handleOverlayToggle
+      handleOverlayToggle,
+      clearValue: jest.fn()
     };
   });
 

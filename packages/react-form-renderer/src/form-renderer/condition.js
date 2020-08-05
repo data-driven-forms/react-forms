@@ -152,6 +152,10 @@ const conditionProps = {
   isNotEmpty: PropTypes.bool,
   isEmpty: PropTypes.bool,
   pattern: (props, name, componentName) => {
+    if (!props[name]) {
+      return;
+    }
+
     if (typeof props[name] === 'string') {
       return;
     }

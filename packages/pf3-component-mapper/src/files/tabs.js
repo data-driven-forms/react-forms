@@ -12,7 +12,7 @@ const renderTabHeader = (items, formOptions) =>
     const hasError = validateFields.find((name) => !!get(errors, name));
     return (
       <NavItem key={name} eventKey={index}>
-        {hasError && <Icon classnName="ddorg__pf3-layout-components__tabs__error" type="fa" name="exclamation-circle" />}
+        {hasError && <Icon className="ddorg__pf3-layout-components__tabs__error" type="fa" name="exclamation-circle" />}
         {title}
       </NavItem>
     );

@@ -27,7 +27,6 @@ const Select = (props) => {
 };
 
 Select.propTypes = {
-  meta: PropTypes.object,
   validateOnMount: PropTypes.bool,
   label: PropTypes.node,
   hideLabel: PropTypes.bool,
@@ -35,7 +34,6 @@ Select.propTypes = {
   isRequired: PropTypes.bool,
   helperText: PropTypes.node,
   description: PropTypes.node,
-  input: PropTypes.object,
   placeholder: PropTypes.string,
   isDisabled: PropTypes.bool,
   inputAddon: PropTypes.shape({ fields: PropTypes.array })

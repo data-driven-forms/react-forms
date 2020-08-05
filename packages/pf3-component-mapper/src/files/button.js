@@ -9,7 +9,7 @@ export const Button = ({ label, variant, dataType, validate, children, component
 );
 
 Button.propTypes = {
-  label: PropTypes.node.isRequired,
+  label: PropTypes.node,
   variant: PropTypes.string,
   className: PropTypes.string,
   dataType: PropTypes.any, // should be inside inner props or something

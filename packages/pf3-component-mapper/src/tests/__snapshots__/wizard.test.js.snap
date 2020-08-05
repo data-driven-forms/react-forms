@@ -489,13 +489,12 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                           color="secondary"
                                           onClick={[Function]}
                                           type="button"
-                                          variant="contained"
                                         >
                                           <Button
                                             active={false}
                                             block={false}
                                             bsClass="btn"
-                                            bsStyle="contained"
+                                            bsStyle="default"
                                             className="ddorg__pf3-component-mapper__wizard__buttons"
                                             color="secondary"
                                             disabled={false}
@@ -503,7 +502,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                             type="button"
                                           >
                                             <button
-                                              className="ddorg__pf3-component-mapper__wizard__buttons btn btn-contained"
+                                              className="ddorg__pf3-component-mapper__wizard__buttons btn btn-default"
                                               color="secondary"
                                               disabled={false}
                                               onClick={[Function]}
@@ -518,20 +517,19 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                           disabled={true}
                                           onClick={[Function]}
                                           type="button"
-                                          variant="contained"
                                         >
                                           <Button
                                             active={false}
                                             block={false}
                                             bsClass="btn"
-                                            bsStyle="contained"
+                                            bsStyle="default"
                                             className="margin-left-3"
                                             disabled={true}
                                             onClick={[Function]}
                                             type="button"
                                           >
                                             <button
-                                              className="margin-left-3 btn btn-contained"
+                                              className="margin-left-3 btn btn-default"
                                               disabled={true}
                                               onClick={[Function]}
                                               type="button"
@@ -1218,13 +1216,12 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                           color="secondary"
                                           onClick={[Function]}
                                           type="button"
-                                          variant="contained"
                                         >
                                           <Button
                                             active={false}
                                             block={false}
                                             bsClass="btn"
-                                            bsStyle="contained"
+                                            bsStyle="default"
                                             className="ddorg__pf3-component-mapper__wizard__buttons"
                                             color="secondary"
                                             disabled={false}
@@ -1232,7 +1229,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                             type="button"
                                           >
                                             <button
-                                              className="ddorg__pf3-component-mapper__wizard__buttons btn btn-contained"
+                                              className="ddorg__pf3-component-mapper__wizard__buttons btn btn-default"
                                               color="secondary"
                                               disabled={false}
                                               onClick={[Function]}
@@ -1247,20 +1244,19 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                           disabled={true}
                                           onClick={[Function]}
                                           type="button"
-                                          variant="contained"
                                         >
                                           <Button
                                             active={false}
                                             block={false}
                                             bsClass="btn"
-                                            bsStyle="contained"
+                                            bsStyle="default"
                                             className="margin-left-3"
                                             disabled={true}
                                             onClick={[Function]}
                                             type="button"
                                           >
                                             <button
-                                              className="margin-left-3 btn btn-contained"
+                                              className="margin-left-3 btn btn-default"
                                               disabled={true}
                                               onClick={[Function]}
                                               type="button"
@@ -2138,13 +2134,12 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                           color="secondary"
                                           onClick={[Function]}
                                           type="button"
-                                          variant="contained"
                                         >
                                           <Button
                                             active={false}
                                             block={false}
                                             bsClass="btn"
-                                            bsStyle="contained"
+                                            bsStyle="default"
                                             className="ddorg__pf3-component-mapper__wizard__buttons"
                                             color="secondary"
                                             disabled={false}
@@ -2152,7 +2147,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                             type="button"
                                           >
                                             <button
-                                              className="ddorg__pf3-component-mapper__wizard__buttons btn btn-contained"
+                                              className="ddorg__pf3-component-mapper__wizard__buttons btn btn-default"
                                               color="secondary"
                                               disabled={false}
                                               onClick={[Function]}
@@ -2167,20 +2162,19 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                           disabled={true}
                                           onClick={[Function]}
                                           type="button"
-                                          variant="contained"
                                         >
                                           <Button
                                             active={false}
                                             block={false}
                                             bsClass="btn"
-                                            bsStyle="contained"
+                                            bsStyle="default"
                                             className="margin-left-3"
                                             disabled={true}
                                             onClick={[Function]}
                                             type="button"
                                           >
                                             <button
-                                              className="margin-left-3 btn btn-contained"
+                                              className="margin-left-3 btn btn-default"
                                               disabled={true}
                                               onClick={[Function]}
                                               type="button"
@@ -2834,13 +2828,12 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                           color="secondary"
                                           onClick={[Function]}
                                           type="button"
-                                          variant="contained"
                                         >
                                           <Button
                                             active={false}
                                             block={false}
                                             bsClass="btn"
-                                            bsStyle="contained"
+                                            bsStyle="default"
                                             className="ddorg__pf3-component-mapper__wizard__buttons"
                                             color="secondary"
                                             disabled={false}
@@ -2848,7 +2841,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                             type="button"
                                           >
                                             <button
-                                              className="ddorg__pf3-component-mapper__wizard__buttons btn btn-contained"
+                                              className="ddorg__pf3-component-mapper__wizard__buttons btn btn-default"
                                               color="secondary"
                                               disabled={false}
                                               onClick={[Function]}
@@ -2863,20 +2856,19 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                           disabled={true}
                                           onClick={[Function]}
                                           type="button"
-                                          variant="contained"
                                         >
                                           <Button
                                             active={false}
                                             block={false}
                                             bsClass="btn"
-                                            bsStyle="contained"
+                                            bsStyle="default"
                                             className="margin-left-3"
                                             disabled={true}
                                             onClick={[Function]}
                                             type="button"
                                           >
                                             <button
-                                              className="margin-left-3 btn btn-contained"
+                                              className="margin-left-3 btn btn-default"
                                               disabled={true}
                                               onClick={[Function]}
                                               type="button"

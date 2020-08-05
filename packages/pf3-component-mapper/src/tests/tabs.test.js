@@ -1,4 +1,5 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
 import { NavItem } from 'patternfly-react';
@@ -88,7 +89,7 @@ describe('<FormTabs />', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should switch form tabs on click', () => {
+  it('should switch form tabs on click', async () => {
     const wrapper = mount(
       <RenderWithProvider value={{ formOptions }}>
         <FormTabs {...initialProps} />
@@ -108,10 +109,14 @@ describe('<FormTabs />', () => {
         .instance().props.active
     ).toEqual(false);
 
-    wrapper
-      .find('a')
-      .last()
-      .simulate('click');
+    await act(async () => {
+      wrapper
+        .find('a')
+        .last()
+        .simulate('click');
+    });
+    wrapper.update();
+
     expect(
       wrapper
         .find(NavItem)
