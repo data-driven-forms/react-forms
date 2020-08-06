@@ -75,4 +75,29 @@ describe('managerApi', () => {
     expect(managerApi().fieldListeners).toEqual({});
     expect(managerApi().registeredFields).toEqual([]);
   });
+
+  it('should submit nested values', () => {
+    const expectedValues = {
+      field: 'field',
+      nested: {
+        name: 'nested.name',
+        age: 'nested.age'
+      },
+      array: [{ name: 'array[0].name', age: 'array[0].age' }]
+    };
+    const onSubmit = jest.fn();
+    const managerApi = createManagerApi(onSubmit);
+    const { registerField, change } = managerApi();
+    registerField({ name: 'field' });
+    registerField({ name: 'nested.name' });
+    registerField({ name: 'nested.age' });
+    registerField({ name: 'array[0].name' });
+    registerField({ name: 'array[0].age' });
+
+    managerApi().registeredFields.forEach((key) => {
+      change(key, key);
+    });
+    managerApi().handleSubmit({ preventDefault: jest.fn() });
+    expect(onSubmit).toHaveBeenCalledWith(expectedValues);
+  });
 });
