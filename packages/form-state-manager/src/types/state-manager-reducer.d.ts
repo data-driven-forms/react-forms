@@ -1,8 +1,8 @@
-import AnyObject from "./any-object";
+import AnyObject from './any-object';
 
 export interface FieldState {
-    name: string;
-    getFieldState: () => AnyObject;
-    value: any;
-    persistOnUnmount: boolean;
+  name: string;
+  getFieldState: () => AnyObject;
+  value: any;
+  persistOnUnmount: boolean;
 }

@@ -16,6 +16,8 @@
     "@semantic-release/npm": "^5.1.1",
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
+    "@typescript-eslint/parser": "^3.8.0",
+    "@typescript-eslint/eslint-plugin": "^3.8.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "9.x",
     "babel-jest": "^23.6.0",
@@ -36,8 +38,6 @@
     "rollup-plugin-sourcemaps": "^0.5.0",
     "rollup-plugin-terser": "^5.1.2",
     "semantic-release": "^16.0.4",
-    "tslint": "^6.1.2",
-    "tslint-config-prettier": "^1.18.0",
     "ts-loader": "^8.0.1",
     "typescript": "^3.9.7",
     "webpack": "^4.25.1",
@@ -55,7 +55,7 @@
   },
   "license": "Apache-2.0",
   "scripts": {
-    "lint": "tslint -c tslint.json 'src/**/*'",
+    "lint": "eslint . --ext .ts",
     "start": "webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
     "build": "yarn lint && rollup -c ./rollup.config.js && yarn build:typings",
     "build:typings": "node ../../scripts/copy-files.js --types"

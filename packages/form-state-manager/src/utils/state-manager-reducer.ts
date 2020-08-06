@@ -1,6 +1,6 @@
-import AnyObject from "../types/any-object";
-import { Action } from "../types/form-manager-context";
-import { FieldState } from "../types/state-manager-reducer";
+import AnyObject from '../types/any-object';
+import { Action } from '../types/form-manager-context';
+import { FieldState } from '../types/state-manager-reducer';
 
 export const REGISTER_FIELD = 'REGISTER_FIELD';
 export const UNREGISTER_FIELD = 'UNREGISTER_FIELD';
