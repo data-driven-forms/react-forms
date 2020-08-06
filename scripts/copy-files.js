@@ -5,6 +5,7 @@ const glob = require('glob');
 const packagePath = process.cwd();
 const buildPath = path.join(packagePath, './dist');
 const srcPath = path.join(packagePath, './src/files');
+const typesPath = path.join(packagePath, './src/types');
 
 const kebabToCamel = (str) =>
   str
@@ -40,8 +41,13 @@ async function copyTypesDefinitions(from, to) {
 async function copy() {
   try {
     // .d.ts files
-    await copyTypesDefinitions(srcPath, buildPath);
-    await generateIndexTypes(srcPath, buildPath);
+    const useTypesFolder = process.argv.slice(2)[0];
+
+    // should use /types/ folder or /files/
+    const pathToTypes = useTypesFolder ? typesPath : srcPath;
+
+    await copyTypesDefinitions(pathToTypes, buildPath);
+    await generateIndexTypes(pathToTypes, buildPath);
   } catch (err) {
     console.error(err);
     process.exit(1);

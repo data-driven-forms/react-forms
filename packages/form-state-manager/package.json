@@ -57,6 +57,6 @@
     "lint": "tslint -c tslint.json 'src/**/*'",
     "start": "webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
     "build": "yarn lint && rollup -c ./rollup.config.js && yarn build:typings",
-    "build:typings": "node ../../scripts/copy-files.js"
+    "build:typings": "node ../../scripts/copy-files.js --types"
   }
 }
