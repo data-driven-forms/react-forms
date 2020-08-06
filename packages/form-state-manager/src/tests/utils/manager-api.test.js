@@ -34,26 +34,22 @@ describe('managerApi', () => {
   });
 
   it('should registerField', () => {
-    const getFieldState = jest.fn();
-
     const managerApi = createManagerApi();
 
-    managerApi().registerField({ name: 'field', getFieldState });
+    managerApi().registerField({ name: 'field' });
 
     expect(managerApi().registeredFields).toEqual(['field']);
-    expect(managerApi().fieldListeners).toEqual({ field: { count: 1, getFieldState } });
+    expect(managerApi().fieldListeners).toEqual({ field: { count: 1 } });
   });
 
   it('should registerField 2x', () => {
-    const getFieldState = jest.fn();
-
     const managerApi = createManagerApi();
 
-    managerApi().registerField({ name: 'field', getFieldState });
-    managerApi().registerField({ name: 'field', getFieldState });
+    managerApi().registerField({ name: 'field' });
+    managerApi().registerField({ name: 'field' });
 
     expect(managerApi().registeredFields).toEqual(['field']);
-    expect(managerApi().fieldListeners).toEqual({ field: { count: 2, getFieldState } });
+    expect(managerApi().fieldListeners).toEqual({ field: { count: 2 } });
   });
 
   it('should unregisterField', () => {
@@ -111,5 +107,24 @@ describe('managerApi', () => {
     });
     managerApi().handleSubmit({ preventDefault: jest.fn() });
     expect(onSubmit).toHaveBeenCalledWith(expectedValues);
+  });
+
+  it('getField state should return correct field state', () => {
+    const expectedValue = {
+      value: { foo: 'bar' },
+      baz: 'quazz',
+      meta: { pristine: true }
+    };
+    const managerApi = createManagerApi();
+    const { registerField } = managerApi();
+    registerField({
+      name: 'field',
+      getFieldState: () => ({
+        value: { foo: 'bar' },
+        baz: 'quazz',
+        meta: { pristine: true }
+      })
+    });
+    expect(managerApi().getFieldState('field')).toEqual(expectedValue);
   });
 });

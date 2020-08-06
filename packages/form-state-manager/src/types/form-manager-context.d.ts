@@ -14,6 +14,8 @@ export interface ManagerContextValue {
   change: Change;
   getState: GetState;
   formOptions: ManagerApi;
+  getFieldValue: (name: string) => any;
+  getFieldState: (name: string) => AnyObject | undefined;
 }
 
 export interface ManagerContext {

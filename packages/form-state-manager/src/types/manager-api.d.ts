@@ -8,6 +8,8 @@ export type RegisterField = (field: FieldState) => void;
 export type UnregisterField = (field: FieldState) => void;
 export type GetState = () => AnyObject;
 export type OnSubmit = (values: AnyObject) => void;
+export type GetFieldValue = (name: string) => any;
+export type GetFieldState = (name: string) => AnyObject | undefined;
 
 export interface ManagerState {
   values: AnyObject;
@@ -18,6 +20,8 @@ export interface ManagerState {
   registerField: RegisterField;
   unregisterField: UnregisterField;
   getState: GetState;
+  getFieldValue: GetFieldValue;
+  getFieldState: GetFieldState;
   registeredFields: Array<string>;
   fieldListeners: AnyObject;
   active: string | null;
