@@ -1,11 +1,11 @@
 import AnyObject from './any-object';
 import { FormEvent } from 'react';
-import FieldState from './field-state';
+import FieldConfig from './field-config';
 
 export type Change = (name: string, value?: any) => void;
 export type HandleSubmit = (event: FormEvent) => void;
-export type RegisterField = (field: FieldState) => void;
-export type UnregisterField = (field: FieldState) => void;
+export type RegisterField = (field: FieldConfig) => void;
+export type UnregisterField = (field: FieldConfig) => void;
 export type GetState = () => AnyObject;
 export type OnSubmit = (values: AnyObject) => void;
 export type GetFieldValue = (name: string) => any;

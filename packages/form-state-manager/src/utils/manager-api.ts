@@ -3,7 +3,7 @@ import set from 'lodash/set';
 
 import CreateManagerApi, { ManagerState, ManagerApi } from '../types/manager-api';
 import AnyObject from '../types/any-object';
-import FieldState from '../types/field-state';
+import FieldConfig from '../types/field-config';
 
 const isLast = (fieldListeners: AnyObject, name: string) => fieldListeners?.[name]?.count === 1;
 
@@ -81,10 +81,8 @@ const createManagerApi: CreateManagerApi = (onSubmit) => {
     onSubmit(nestedStructure);
   }
 
-  function registerField(field: FieldState): void {
-    if (!state.registeredFields.includes(field.name)) {
-      state.registeredFields = [...state.registeredFields, field.name];
-    }
+  function registerField(field: FieldConfig): void {
+    addIfUnique(state.registeredFields, field.name);
 
     state.fieldListeners[field.name] = {
       ...state.fieldListeners[field.name],
@@ -93,7 +91,7 @@ const createManagerApi: CreateManagerApi = (onSubmit) => {
     };
   }
 
-  function unregisterField(field: FieldState): void {
+  function unregisterField(field: FieldConfig): void {
     if (isLast(state.fieldListeners, field.name)) {
       state.registeredFields = state.registeredFields.filter((fieldName: string) => fieldName !== field.name);
       delete state.fieldListeners[field.name];
