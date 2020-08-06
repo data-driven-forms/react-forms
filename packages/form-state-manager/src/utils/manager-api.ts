@@ -1,6 +1,7 @@
 import { FormEvent } from 'react';
-import CreateManagerApi, { ManagerState, ManagerApi } from '../types/manager-api';
+import set from 'lodash/set';
 
+import CreateManagerApi, { ManagerState, ManagerApi } from '../types/manager-api';
 import AnyObject from '../types/any-object';
 import FieldState from '../types/field-state';
 
@@ -27,7 +28,11 @@ const createManagerApi: CreateManagerApi = (onSubmit) => {
 
   function handleSubmit(event: FormEvent): void {
     event.preventDefault();
-    onSubmit(state.values);
+    const nestedStructure = {};
+    Object.entries(state.values).forEach(([key, value]) => {
+      set(nestedStructure, key, value);
+    });
+    onSubmit(nestedStructure);
   }
 
   function registerField(field: FieldState): void {

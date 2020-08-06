@@ -28,7 +28,7 @@ const App = () => {
           return (
             <form onSubmit={handleSubmit}>
               <h1>There will be children</h1>
-              <TextField label="Field 1" name="field-1" id="field-1" type="text" />
+              <TextField label="Field 1" name="nested.field-1" id="field-1" type="text" />
               <TextField label="Field 2" name="field-2" id="field-2" type="text" />
               <div style={{ margin: 16 }}>
                 <button type="submit">Submit</button>
