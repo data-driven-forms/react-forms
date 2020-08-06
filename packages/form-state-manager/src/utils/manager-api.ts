@@ -43,8 +43,7 @@ const createManagerApi: CreateManagerApi = (onSubmit) => {
     validating: false,
     visited: {}
   };
-
-  function change(name: string, value?: any): any {
+  function change(name: string, value?: any): void {
     state.values[name] = value;
     state.visited[name] = true;
     state.modified[name] = true;
@@ -76,7 +75,6 @@ const createManagerApi: CreateManagerApi = (onSubmit) => {
     state.fieldListeners[field.name] = {
       ...state.fieldListeners[field.name],
       count: (state.fieldListeners[field.name]?.count || 0) + 1,
-      getFieldState: field.getFieldState
     };
   }
 

@@ -1,20 +1,8 @@
 import { useEffect, useState, useContext } from 'react';
 import FormManagerContext from '../files/form-manager-context';
-import UseSubscription, { OnChangeEvent } from '../types/use-subscription';
+import UseSubscription, { OnChangeEvent, SubscribtionData } from '../types/use-subscription';
 
-class FieldState {
-  constructor(public value: any) {
-    this.value = value;
-  }
-
-  setValue = (value: any) => {
-    this.value = value;
-  };
-
-  getFieldState = () => ({ value: this.value });
-}
-
-const sanitizeValue = (event: OnChangeEvent) => {
+const sanitizeValue = (event: OnChangeEvent): any => {
   if (Array.isArray(event)) {
     return event;
   }
@@ -30,35 +18,28 @@ const sanitizeValue = (event: OnChangeEvent) => {
   return event;
 };
 
-const useSubscription = ({ name, initialValue, subscription = {} }: UseSubscription) => {
+const useSubscription = ({ name, initialValue }: UseSubscription): SubscribtionData => {
   const { registerField, unregisterField, change } = useContext(FormManagerContext);
   const [state, setState] = useState({
     value: initialValue,
-    name,
-    /**
-     * We need this to send field values and state if the field is not subscribed to every event
-     * We pass the getFieldState function reference to the state manager and it will retrieve field data on demmand
-     * This way we don't have to mutate the manager context on each field render and render only changed fields when necessary
-     */
-    fieldState: new FieldState(initialValue) // TODO update the whole field state inside the instance
+    name
   });
 
   const handleChange = (event: OnChangeEvent) => {
     const sanitizedValue = sanitizeValue(event);
-    setState((prevState) => ({ ...prevState, value: sanitizedValue }));
-    state.fieldState.setValue(sanitizedValue);
     change(name, sanitizedValue);
+    setState((prevState) => ({ ...prevState, value: sanitizedValue }));
   };
 
   const valueToReturn = state.value;
 
   useEffect(() => {
-    registerField({ ...state, getFieldState: state.fieldState.getFieldState });
+    registerField({ ...state });
 
     return () => {
       unregisterField(state);
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onChange = (event: OnChangeEvent) => {
     try {

@@ -34,26 +34,22 @@ describe('managerApi', () => {
   });
 
   it('should registerField', () => {
-    const getFieldState = jest.fn();
-
     const managerApi = createManagerApi();
 
-    managerApi().registerField({ name: 'field', getFieldState });
+    managerApi().registerField({ name: 'field' });
 
     expect(managerApi().registeredFields).toEqual(['field']);
-    expect(managerApi().fieldListeners).toEqual({ field: { count: 1, getFieldState } });
+    expect(managerApi().fieldListeners).toEqual({ field: { count: 1 } });
   });
 
   it('should registerField 2x', () => {
-    const getFieldState = jest.fn();
-
     const managerApi = createManagerApi();
 
-    managerApi().registerField({ name: 'field', getFieldState });
-    managerApi().registerField({ name: 'field', getFieldState });
+    managerApi().registerField({ name: 'field' });
+    managerApi().registerField({ name: 'field' });
 
     expect(managerApi().registeredFields).toEqual(['field']);
-    expect(managerApi().fieldListeners).toEqual({ field: { count: 2, getFieldState } });
+    expect(managerApi().fieldListeners).toEqual({ field: { count: 2 } });
   });
 
   it('should unregisterField', () => {

@@ -55,21 +55,10 @@ describe('useSubscription', () => {
 
   it('should call register field on mount and unregister on unmount', () => {
     const registerArguments = {
-      fieldState: {
-        getFieldState: expect.any(Function),
-        setValue: expect.any(Function),
-        value: 'foo'
-      },
-      getFieldState: expect.any(Function),
       name: 'spy',
       value: 'foo'
     };
     const unregisterArguments = {
-      fieldState: {
-        getFieldState: expect.any(Function),
-        setValue: expect.any(Function),
-        value: 'foo'
-      },
       name: 'spy',
       value: 'foo'
     };
@@ -112,26 +101,5 @@ describe('useSubscription', () => {
     input.simulate('click');
     wrapper.update();
     expect(wrapper.find(NonInputSpyComponent).prop('value')).toEqual(nonEventObject);
-  });
-
-  it('getFieldState should return subscriber value', () => {
-    let fieldRegistry;
-    let values = {};
-    const managerApiStateModified = {
-      values,
-      change: (name, value) => {
-        values[name] = value;
-      },
-      registerField: (state) => {
-        fieldRegistry = state;
-      }
-    };
-
-    managerApi = () => managerApiStateModified;
-
-    const wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy', initialValue: 'foo' }} managerApi={managerApi} />);
-    expect(fieldRegistry.fieldState.getFieldState()).toEqual({ value: 'foo' });
-    wrapper.find('input').simulate('change', { target: { value: 'bar' } });
-    expect(fieldRegistry.fieldState.getFieldState()).toEqual({ value: 'bar' });
   });
 });
