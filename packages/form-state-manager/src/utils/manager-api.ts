@@ -18,10 +18,38 @@ const createManagerApi: CreateManagerApi = (onSubmit) => {
     unregisterField,
     getState,
     registeredFields: [],
-    fieldListeners: {}
+    fieldListeners: {},
+    active: null,
+    dirty: false,
+    dirtyFields: [],
+    dirtyFieldsSinceLastSubmit: [],
+    dirtySinceLastSubmit: false,
+    error: null,
+    hasSubmitErrors: false,
+    hasValidationErrors: false,
+    initialValues: {},
+    invalid: false,
+    modified: {},
+    modifiedSinceLastSubmit: false,
+    submitError: null,
+    submitErrors: {},
+    submitFailed: false,
+    submitSucceeded: false,
+    submitting: false,
+    touched: {},
+    valid: true,
+    validating: false,
+    visited: {}
   };
+
   function change(name: string, value?: any): any {
     state.values[name] = value;
+    state.visited[name] = true;
+    state.modified[name] = true;
+    state.modifiedSinceLastSubmit = true;
+    state.dirtySinceLastSubmit = true;
+    state.dirtyFields.push(name);
+    state.pristine = false;
   }
 
   const managerApi: ManagerApi = () => state;

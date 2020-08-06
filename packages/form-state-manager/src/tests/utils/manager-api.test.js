@@ -9,7 +9,14 @@ describe('managerApi', () => {
   it('should change the managerApi state', () => {
     const managerApi = createManagerApi();
     managerApi().change('foo', 'bar');
+
     expect(managerApi().values).toEqual({ foo: 'bar' });
+    expect(managerApi().visited).toEqual({ foo: true });
+    expect(managerApi().modified).toEqual({ foo: true });
+    expect(managerApi().modifiedSinceLastSubmit).toEqual(true);
+    expect(managerApi().dirtySinceLastSubmit).toEqual(true);
+    expect(managerApi().dirtyFields).toEqual(['foo']);
+    expect(managerApi().pristine).toEqual(false);
   });
 
   it('should change different api instance separatelly', () => {

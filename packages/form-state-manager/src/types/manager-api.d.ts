@@ -20,6 +20,27 @@ export interface ManagerState {
   getState: GetState;
   registeredFields: Array<string>;
   fieldListeners: AnyObject;
+  active: string | null;
+  dirty: boolean;
+  dirtyFields: Array<string>;
+  dirtyFieldsSinceLastSubmit: Array<string>;
+  dirtySinceLastSubmit: boolean;
+  error: any;
+  hasSubmitErrors: boolean;
+  hasValidationErrors: boolean;
+  initialValues: AnyObject;
+  invalid: boolean;
+  modified: AnyObject;
+  modifiedSinceLastSubmit: boolean;
+  submitError: any;
+  submitErrors: AnyObject;
+  submitFailed: boolean;
+  submitSucceeded: boolean;
+  submitting: boolean;
+  touched: AnyObject;
+  valid: boolean;
+  validating: boolean;
+  visited: AnyObject;
 }
 
 export type ManagerApi = () => ManagerState;
