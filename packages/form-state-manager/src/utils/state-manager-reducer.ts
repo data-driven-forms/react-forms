@@ -1,15 +1,9 @@
 import AnyObject from "../types/any-object";
-import { Action } from "../files/form-manager-context";
+import { Action } from "../types/form-manager-context";
+import { FieldState } from "../types/state-manager-reducer";
 
 export const REGISTER_FIELD = 'REGISTER_FIELD';
 export const UNREGISTER_FIELD = 'UNREGISTER_FIELD';
-
-interface FieldState {
-  name: string;
-  getFieldState: () => AnyObject;
-  value: any;
-  persistOnUnmount: boolean;
-}
 
 const registerField = (state: AnyObject, { name, getFieldState }: FieldState) => ({
   ...state,

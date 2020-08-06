@@ -1,9 +1,9 @@
-import React, { ComponentProps } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 
 import FormStateManager from '../src/files/form-state-manager';
-import useField, { UseField } from '../src/files/use-field';
+import useField from '../src/files/use-field';
+import UseField from '../src/types/use-field';
 
 interface TextFieldProps {
   label: React.ReactNode;
