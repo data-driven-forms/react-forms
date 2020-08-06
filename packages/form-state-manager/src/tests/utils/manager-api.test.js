@@ -16,7 +16,12 @@ describe('managerApi', () => {
     expect(managerApi().modifiedSinceLastSubmit).toEqual(true);
     expect(managerApi().dirtySinceLastSubmit).toEqual(true);
     expect(managerApi().dirtyFields).toEqual(['foo']);
+    expect(managerApi().dirtyFieldsSinceLastSubmit).toEqual(['foo']);
     expect(managerApi().pristine).toEqual(false);
+
+    managerApi().change('foo', 'bar');
+    expect(managerApi().dirtyFields).toEqual(['foo']);
+    expect(managerApi().dirtyFieldsSinceLastSubmit).toEqual(['foo']);
   });
 
   it('should change different api instance separatelly', () => {
