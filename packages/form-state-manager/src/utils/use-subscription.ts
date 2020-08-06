@@ -31,7 +31,7 @@ const sanitizeValue = (event: OnChangeEvent) => {
 };
 
 const useSubscription = ({ name, initialValue, subscription = {} }: UseSubscription) => {
-  const { registerField, unRegisterField, dispatch, change } = useContext(FormManagerContext);
+  const { registerField, unregisterField, change } = useContext(FormManagerContext);
   const [state, setState] = useState({
     value: initialValue,
     name,
@@ -53,10 +53,10 @@ const useSubscription = ({ name, initialValue, subscription = {} }: UseSubscript
   const valueToReturn = state.value;
 
   useEffect(() => {
-    registerField(dispatch, { ...state, getFieldState: state.fieldState.getFieldState });
+    registerField({ ...state, getFieldState: state.fieldState.getFieldState });
 
     return () => {
-      unRegisterField(dispatch, state);
+      unregisterField(state);
     };
   }, []);
 

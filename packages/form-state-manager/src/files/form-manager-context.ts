@@ -1,5 +1,6 @@
 import { createContext } from 'react';
 import { ManagerContextValue } from '../types/form-manager-context';
+import createManagerApi from '../utils/manager-api';
 
 const noop = () => {
   /**
@@ -8,12 +9,12 @@ const noop = () => {
 };
 
 const FormManagerContext = createContext<ManagerContextValue>({
-  values: {},
-  dispatch: noop,
   handleSubmit: noop,
   registerField: noop,
-  unRegisterField: noop,
-  change: noop
+  unregisterField: noop,
+  change: noop,
+  getState: () => ({}),
+  formOptions: createManagerApi(noop)
 });
 
 export default FormManagerContext;
