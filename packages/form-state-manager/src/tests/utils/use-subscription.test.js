@@ -21,8 +21,10 @@ const SubscribedComponent = ({ fakeComponent, ...props }) => {
   );
 };
 
-const DummyComponent = ({ subscriberProps, contextValue, fakeComponent }) => (
-  <FormManagerContext.Provider value={{ registerField: jest.fn(), unRegisterField: jest.fn(), dispatch: jest.fn(), ...contextValue }}>
+const DummyComponent = ({ subscriberProps, contextValue }) => (
+  <FormManagerContext.Provider
+    value={{ registerField: jest.fn(), unRegisterField: jest.fn(), dispatch: jest.fn(), change: jest.fn(), ...contextValue }}
+  >
     <SubscribedComponent {...subscriberProps} />
   </FormManagerContext.Provider>
 );
