@@ -108,4 +108,23 @@ describe('managerApi', () => {
     managerApi().handleSubmit({ preventDefault: jest.fn() });
     expect(onSubmit).toHaveBeenCalledWith(expectedValues);
   });
+
+  it('getField state should return correct field state', () => {
+    const expectedValue = {
+      value: { foo: 'bar' },
+      baz: 'quazz',
+      meta: { pristine: true }
+    };
+    const managerApi = createManagerApi();
+    const { registerField } = managerApi();
+    registerField({
+      name: 'field',
+      getFieldState: () => ({
+        value: { foo: 'bar' },
+        baz: 'quazz',
+        meta: { pristine: true }
+      })
+    });
+    expect(managerApi().getFieldState('field')).toEqual(expectedValue);
+  });
 });

@@ -3,6 +3,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import FormManagerContext from '../../files/form-manager-context';
 import useSubscription from '../../utils/use-subscription';
+import createManagerApi from '../../utils/manager-api';
 
 const NonInputSpyComponent = ({ changeValue, onChange }) => <button id="fake-change" type="button" onClick={() => onChange(changeValue)}></button>;
 
@@ -22,10 +23,10 @@ const SubscribedComponent = ({ fakeComponent, ...props }) => {
 };
 
 const DummyComponent = ({ subscriberProps, managerApi }) => {
-  const { change, handleSubmit, registerField, unregisterField, getState } = managerApi();
+  const { change, handleSubmit, registerField, unregisterField, getState, getFieldValue } = managerApi();
 
   return (
-    <FormManagerContext.Provider value={{ change, getState, handleSubmit, registerField, unregisterField, formOptions: managerApi }}>
+    <FormManagerContext.Provider value={{ getFieldValue, change, getState, handleSubmit, registerField, unregisterField, formOptions: managerApi }}>
       <SubscribedComponent {...subscriberProps} />
     </FormManagerContext.Provider>
   );
@@ -33,19 +34,9 @@ const DummyComponent = ({ subscriberProps, managerApi }) => {
 
 describe('useSubscription', () => {
   let managerApi;
-  let managerApiState;
-
   beforeEach(() => {
-    managerApiState = {
-      change: jest.fn(),
-      handleSubmit: jest.fn(),
-      registerField: jest.fn(),
-      unregisterField: jest.fn(),
-      getState: jest.fn()
-    };
-    managerApi = () => managerApiState;
+    managerApi = createManagerApi(jest.fn());
   });
-
   it('should assing value and onChange handlers to SpyComponent', () => {
     const spy = mount(<DummyComponent subscriberProps={{ name: 'spy' }} managerApi={managerApi} />).find(SpyComponent);
     expect(spy.prop('value')).toEqual('');
@@ -54,18 +45,24 @@ describe('useSubscription', () => {
   });
 
   it('should call register field on mount and unregister on unmount', () => {
+    const managerApi = createManagerApi(jest.fn());
+    const api = managerApi();
+    const registerSpy = jest.spyOn(api, 'registerField');
+    const unregisterSpy = jest.spyOn(api, 'unregisterField');
     const registerArguments = {
       name: 'spy',
-      value: 'foo'
+      value: 'foo',
+      getFieldState: expect.any(Function)
     };
     const unregisterArguments = {
       name: 'spy',
-      value: 'foo'
+      value: 'foo',
+      getFieldState: expect.any(Function)
     };
     const wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy', initialValue: 'foo' }} managerApi={managerApi} />);
-    expect(managerApiState.registerField).toHaveBeenCalledWith(registerArguments);
+    expect(registerSpy).toHaveBeenCalledWith(registerArguments);
     wrapper.unmount();
-    expect(managerApiState.unregisterField).toHaveBeenCalledWith(unregisterArguments);
+    expect(unregisterSpy).toHaveBeenCalledWith(unregisterArguments);
   });
 
   it('should set correct value on input type text', () => {
