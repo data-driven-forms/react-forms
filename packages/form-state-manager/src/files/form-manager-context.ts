@@ -13,6 +13,7 @@ const FormManagerContext = createContext<ManagerContextValue>({
   handleSubmit: noop,
   registerField: noop,
   unRegisterField: noop,
+  change: noop
 });
 
 export default FormManagerContext;

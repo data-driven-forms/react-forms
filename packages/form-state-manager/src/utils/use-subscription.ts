@@ -31,7 +31,7 @@ const sanitizeValue = (event: OnChangeEvent) => {
 };
 
 const useSubscription = ({ name, initialValue, subscription = {} }: UseSubscription) => {
-  const { registerField, unRegisterField, dispatch } = useContext(FormManagerContext);
+  const { registerField, unRegisterField, dispatch, change } = useContext(FormManagerContext);
   const [state, setState] = useState({
     value: initialValue,
     name,
@@ -47,6 +47,7 @@ const useSubscription = ({ name, initialValue, subscription = {} }: UseSubscript
     const sanitizedValue = sanitizeValue(event);
     setState((prevState) => ({ ...prevState, value: sanitizedValue }));
     state.fieldState.setValue(sanitizedValue);
+    change(name, sanitizedValue);
   };
 
   const valueToReturn = state.value;
