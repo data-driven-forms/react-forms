@@ -2,7 +2,6 @@ import React from 'react';
 import toJson from 'enzyme-to-json';
 import TextField from '../files/text-field';
 import { mount } from 'enzyme';
-import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 import MultipleChoiceList from '../form-fields/multiple-choice-list';
 import { FieldLevelHelp } from 'patternfly-react';
 import { Checkbox as Pf3Checkbox } from 'patternfly-react';
@@ -15,23 +14,14 @@ import RenderWithProvider from '../../../../__mocks__/with-provider';
 
 describe('FormFields', () => {
   describe('<Switch />', () => {
-    let FieldProvider;
-    let onChangeSpy;
     let props;
     let formOptions;
 
     beforeEach(() => {
-      onChangeSpy = jest.fn();
-
       formOptions = {
         handleSubmit: jest.fn()
       };
 
-      FieldProvider = (props) => (
-        <div>
-          <MockFieldProvider {...props} input={{ onChange: onChangeSpy, name: 'Foo' }} meta={{ error: false, touched: false }} />
-        </div>
-      );
       props = {
         input: {
           name: 'Name of the field',
@@ -41,8 +31,7 @@ describe('FormFields', () => {
         meta: {
           error: false,
           touched: false
-        },
-        FieldProvider
+        }
       };
     });
 

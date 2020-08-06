@@ -2,6 +2,7 @@
 
 exports[`<PickerInput /> should render picker input correctly 1`] = `
 <PickerInput
+  clearValue={[MockFunction]}
   handleOverlayToggle={[MockFunction]}
 >
   <InputGroup
@@ -81,6 +82,7 @@ exports[`<PickerInput /> should render picker input correctly 1`] = `
 
 exports[`<PickerInput /> should render picker input disbaled variant correctly 1`] = `
 <PickerInput
+  clearValue={[MockFunction]}
   handleOverlayToggle={[MockFunction]}
   isDisabled={true}
 >
@@ -167,6 +169,7 @@ exports[`<PickerInput /> should render picker input disbaled variant correctly 1
 
 exports[`<PickerInput /> should render picker input time variant correctly 1`] = `
 <PickerInput
+  clearValue={[MockFunction]}
   handleOverlayToggle={[MockFunction]}
   variant="time"
 >

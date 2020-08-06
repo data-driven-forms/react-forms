@@ -48,7 +48,13 @@ const Slider = (props) => {
               </Grid>
             )}
             <Grid item xs {...SliderGridProps}>
-              <MUISlider {...input} {...rest} disabled={isDisabled || isReadOnly} onChange={(_e, value) => input.onChange(value)} />
+              <MUISlider
+                {...input}
+                value={input.value || (rest.max + rest.min) / 2 || 50}
+                {...rest}
+                disabled={isDisabled || isReadOnly}
+                onChange={(_e, value) => input.onChange(value)}
+              />
             </Grid>
             {after && (
               <Grid item {...AfterGridProps}>

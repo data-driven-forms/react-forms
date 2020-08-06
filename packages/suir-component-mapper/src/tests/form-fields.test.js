@@ -218,6 +218,7 @@ describe('formFields', () => {
     beforeEach(() => {
       initialProps = {
         ...initialProps,
+        name: 'multiple-checkbox',
         options: [
           { label: 'Cat', value: 'cats' },
           { label: 'Dog', value: 'dogs' },

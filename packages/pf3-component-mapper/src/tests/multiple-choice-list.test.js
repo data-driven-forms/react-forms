@@ -1,89 +1,177 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import MockFieldProvider from '../../../../__mocks__/mock-field-provider';
 import RequiredLabel from '../form-fields/required-label';
 import { FieldLevelHelp, HelpBlock } from 'patternfly-react';
 import Checkbox from '../files/checkbox';
+import FormTemplate from '../files/form-template';
+import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
+import FormRenderer from '@data-driven-forms/react-form-renderer';
 
-describe.skip('<MultipleChoiceList />', () => {
+describe('<MultipleChoiceList />', () => {
   let initialProps;
-  let changeSpy = jest.fn();
+  let changeSpy;
+  let schema;
+
   beforeEach(() => {
+    changeSpy = jest.fn();
+
     initialProps = {
-      input: {
-        name: 'Name of the field',
-        value: ''
+      componentMapper: {
+        [componentTypes.CHECKBOX]: Checkbox
       },
-      FieldProvider: (props) => <MockFieldProvider {...props} input={{ onChange: changeSpy, value: props.value || [] }} />,
-      options: [
-        {
-          label: 'Foo',
-          value: 0
-        },
-        {
-          label: 'Bar',
-          value: 1
-        }
-      ]
+      onSubmit: (values) => changeSpy(values),
+      FormTemplate,
+      schema: {
+        fields: [
+          {
+            component: componentTypes.CHECKBOX,
+            name: 'checkbox',
+            options: [
+              {
+                label: 'Foo',
+                value: 0
+              },
+              {
+                label: 'Bar',
+                value: 1
+              }
+            ]
+          }
+        ]
+      }
     };
   });
 
-  afterEach(() => {
-    changeSpy.mockReset();
-  });
-
   it('should render correctly', () => {
-    const wrapper = mount(<Checkbox {...initialProps} />);
+    const wrapper = mount(<FormRenderer {...initialProps} />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should call FieldProvider on change method', () => {
-    const wrapper = mount(<Checkbox {...initialProps} />);
+  it('should select', async () => {
+    const wrapper = mount(<FormRenderer {...initialProps} />);
 
-    wrapper
-      .find('input')
-      .last()
-      .simulate('change', { target: { checked: true } });
-    expect(changeSpy).toHaveBeenCalledWith([1]);
+    await act(async () => {
+      wrapper
+        .find('input')
+        .last()
+        .simulate('change', { target: { checked: true, type: 'checkbox' } });
+    });
+    wrapper.update();
+
+    await act(async () => {
+      wrapper.find('form').simulate('submit');
+    });
+    wrapper.update();
+
+    expect(changeSpy).toHaveBeenCalledWith({ checkbox: [1] });
   });
 
-  it('should call FieldProvider on change method and remove option value form all values', () => {
-    const wrapper = mount(<Checkbox {...initialProps} value={[1]} />);
+  it('should unselect', async () => {
+    const wrapper = mount(<FormRenderer {...initialProps} initialValues={{ checkbox: [1] }} />);
 
-    wrapper
-      .find('input')
-      .last()
-      .simulate('change', { target: { checked: true } });
-    expect(changeSpy).toHaveBeenCalledWith([]);
+    await act(async () => {
+      wrapper.find('form').simulate('submit');
+    });
+    wrapper.update();
+
+    expect(changeSpy).toHaveBeenCalledWith({ checkbox: [1] });
+    changeSpy.mockClear();
+
+    await act(async () => {
+      wrapper
+        .find('input')
+        .last()
+        .simulate('change', { target: { checked: false, type: 'checkbox' } });
+    });
+    wrapper.update();
+
+    await act(async () => {
+      wrapper.find('form').simulate('submit');
+    });
+    wrapper.update();
+
+    expect(changeSpy).toHaveBeenCalledWith({ checkbox: [] });
   });
 
-  it('should render in error state', () => {
-    const wrapper = mount(
-      <Checkbox
-        {...initialProps}
-        FieldProvider={(props) => (
-          <MockFieldProvider
-            {...props}
-            input={{ onChange: changeSpy, value: [] }}
-            meta={{
-              error: 'Error message',
-              touched: true
-            }}
-          />
-        )}
-      />
-    );
+  it('should render in error state', async () => {
+    schema = {
+      fields: [
+        {
+          component: componentTypes.CHECKBOX,
+          validate: [{ type: 'required' }],
+          name: 'checkbox',
+          options: [
+            {
+              label: 'Foo',
+              value: 0
+            },
+            {
+              label: 'Bar',
+              value: 1
+            }
+          ]
+        }
+      ]
+    };
+    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+
+    await act(async () => {
+      wrapper.find('form').simulate('submit');
+    });
+    wrapper.update();
+
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('should render required variant', () => {
-    const wrapper = mount(<Checkbox {...initialProps} isRequired label="Foo" />);
+    schema = {
+      fields: [
+        {
+          component: componentTypes.CHECKBOX,
+          isRequired: true,
+          name: 'checkbox',
+          label: 'I am required',
+          options: [
+            {
+              label: 'Foo',
+              value: 0
+            },
+            {
+              label: 'Bar',
+              value: 1
+            }
+          ]
+        }
+      ]
+    };
+    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
     expect(wrapper.find(RequiredLabel)).toHaveLength(1);
   });
 
   it('should render helper text variant', () => {
-    const wrapper = mount(<Checkbox {...initialProps} isRequired label="Foo" helperText="Helper text" />);
+    schema = {
+      fields: [
+        {
+          component: componentTypes.CHECKBOX,
+          helperText: 'Helper text',
+          name: 'checkbox',
+          options: [
+            {
+              label: 'Foo',
+              value: 0
+            },
+            {
+              label: 'Bar',
+              value: 1
+            }
+          ]
+        }
+      ]
+    };
+
+    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
     expect(wrapper.find(FieldLevelHelp)).toHaveLength(1);
 
     expect(
@@ -96,7 +184,27 @@ describe.skip('<MultipleChoiceList />', () => {
   });
 
   it('should render description variant', () => {
-    const wrapper = mount(<Checkbox {...initialProps} isRequired label="Foo" description="Description" />);
+    schema = {
+      fields: [
+        {
+          component: componentTypes.CHECKBOX,
+          description: 'Description',
+          name: 'checkbox',
+          options: [
+            {
+              label: 'Foo',
+              value: 0
+            },
+            {
+              label: 'Bar',
+              value: 1
+            }
+          ]
+        }
+      ]
+    };
+
+    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
     expect(wrapper.find(FieldLevelHelp)).toHaveLength(0);
     expect(wrapper.find(HelpBlock)).toHaveLength(1);
     expect(
