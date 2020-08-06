@@ -10,12 +10,16 @@ export type GetState = () => AnyObject;
 export type OnSubmit = (values: AnyObject) => void;
 export type GetFieldValue = (name: string) => any;
 export type GetFieldState = (name: string) => AnyObject | undefined;
+export type Focus = (name: string) => void;
+export type Blur = (name: string) => void;
 
 export interface ManagerState {
   values: AnyObject;
   errors: AnyObject;
   pristine: boolean;
   change: Change;
+  focus: Focus;
+  blur: Blur;
   handleSubmit: HandleSubmit;
   registerField: RegisterField;
   unregisterField: UnregisterField;
@@ -24,7 +28,7 @@ export interface ManagerState {
   getFieldState: GetFieldState;
   registeredFields: Array<string>;
   fieldListeners: AnyObject;
-  active: string | null;
+  active: string | undefined;
   dirty: boolean;
   dirtyFields: Array<string>;
   dirtyFieldsSinceLastSubmit: Array<string>;

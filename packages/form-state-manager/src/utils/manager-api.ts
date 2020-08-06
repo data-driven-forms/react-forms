@@ -15,6 +15,8 @@ const createManagerApi: CreateManagerApi = (onSubmit) => {
     errors: {},
     pristine: true,
     change,
+    focus,
+    blur,
     handleSubmit,
     registerField,
     unregisterField,
@@ -23,7 +25,7 @@ const createManagerApi: CreateManagerApi = (onSubmit) => {
     getFieldState,
     registeredFields: [],
     fieldListeners: {},
-    active: null,
+    active: undefined,
     dirty: false,
     dirtyFields: [],
     dirtyFieldsSinceLastSubmit: [],
@@ -56,6 +58,16 @@ const createManagerApi: CreateManagerApi = (onSubmit) => {
     addIfUnique(state.dirtyFieldsSinceLastSubmit, name);
 
     state.pristine = false;
+  }
+
+  function focus(name: string): void {
+    state.active = name;
+  }
+
+  function blur(name: string): void {
+    if (state.active === name) {
+      state.active = undefined;
+    }
   }
 
   const managerApi: ManagerApi = () => state;

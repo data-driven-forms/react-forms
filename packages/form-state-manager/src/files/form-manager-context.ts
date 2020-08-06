@@ -16,7 +16,9 @@ const FormManagerContext = createContext<ManagerContextValue>({
   getState: () => ({}),
   formOptions: createManagerApi(noop),
   getFieldValue: noop,
-  getFieldState: () => undefined
+  getFieldState: () => undefined,
+  blur: noop,
+  focus: noop
 });
 
 export default FormManagerContext;

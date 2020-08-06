@@ -127,4 +127,16 @@ describe('managerApi', () => {
     });
     expect(managerApi().getFieldState('field')).toEqual(expectedValue);
   });
+
+  it('should mark active field on focus and delete it on blur', () => {
+    const managerApi = createManagerApi();
+    const { focus, blur } = managerApi();
+    expect(managerApi().active).toBeUndefined();
+    focus('foo');
+    expect(managerApi().active).toBe('foo');
+    blur('nonsense');
+    expect(managerApi().active).toBe('foo');
+    blur('foo');
+    expect(managerApi().active).toBeUndefined();
+  });
 });
