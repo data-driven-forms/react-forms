@@ -1,4 +1,4 @@
-import AnyObject from "./any-object";
+import AnyObject from './any-object';
 
 export type Change = (name: string, value?: any) => void;
 
@@ -11,6 +11,6 @@ export interface ManagerState {
 
 export type ManagerApi = () => ManagerState;
 
-declare type CreateManagerApi = () => ManagerApi
+declare type CreateManagerApi = () => ManagerApi;
 
 export default CreateManagerApi;

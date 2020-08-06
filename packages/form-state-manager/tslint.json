@@ -1,9 +1,0 @@
-{
-  "extends": [
-    "tslint:latest",
-    "tslint-config-prettier"
-  ],
-  "rules": {
-    "no-submodule-imports": [true, "lodash"]
-  }
-}

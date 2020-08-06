@@ -5,14 +5,15 @@ const createManagerApi: CreateManagerApi = () => {
     values: {},
     errors: {},
     pristine: true,
-    change,
+    change
+  };
+  function change(name: string, value?: any): any {
+    state.values[name] = value;
   }
-  function change(name: string, value?: any): any{
-    state.values[name] = value
- }
-  const managerApi: ManagerApi = () => state
 
-  return managerApi
-}
+  const managerApi: ManagerApi = () => state;
 
-export default createManagerApi
+  return managerApi;
+};
+
+export default createManagerApi;
