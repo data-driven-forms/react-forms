@@ -1,9 +1,5 @@
 import useSubscription from '../utils/use-subscription';
-import AnyObject from '../types/any-object';
-
-export interface UseField extends AnyObject {
-  name: string;
-}
+import UseField from '../types/use-field';
 
 const useField = ({ name, ...rest }: UseField) => {
   const [value, onChange] = useSubscription({ name });
