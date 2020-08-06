@@ -21,27 +21,39 @@ const SubscribedComponent = ({ fakeComponent, ...props }) => {
   );
 };
 
-const DummyComponent = ({ subscriberProps, contextValue }) => (
-  <FormManagerContext.Provider
-    value={{ registerField: jest.fn(), unRegisterField: jest.fn(), dispatch: jest.fn(), change: jest.fn(), ...contextValue }}
-  >
-    <SubscribedComponent {...subscriberProps} />
-  </FormManagerContext.Provider>
-);
+const DummyComponent = ({ subscriberProps, managerApi }) => {
+  const { change, handleSubmit, registerField, unregisterField, getState } = managerApi();
+
+  return (
+    <FormManagerContext.Provider value={{ change, getState, handleSubmit, registerField, unregisterField, formOptions: managerApi }}>
+      <SubscribedComponent {...subscriberProps} />
+    </FormManagerContext.Provider>
+  );
+};
 
 describe('useSubscription', () => {
+  let managerApi;
+  let managerApiState;
+
+  beforeEach(() => {
+    managerApiState = {
+      change: jest.fn(),
+      handleSubmit: jest.fn(),
+      registerField: jest.fn(),
+      unregisterField: jest.fn(),
+      getState: jest.fn()
+    };
+    managerApi = () => managerApiState;
+  });
+
   it('should assing value and onChange handlers to SpyComponent', () => {
-    const spy = mount(<DummyComponent subscriberProps={{ name: 'spy' }} />).find(SpyComponent);
+    const spy = mount(<DummyComponent subscriberProps={{ name: 'spy' }} managerApi={managerApi} />).find(SpyComponent);
     expect(spy.prop('value')).toEqual('');
     expect(spy.prop('name')).toEqual('spy');
     expect(spy.prop('onChange')).toEqual(expect.any(Function));
   });
 
   it('should call register field on mount and unregister on unmount', () => {
-    const contextValue = {
-      registerField: jest.fn(),
-      unRegisterField: jest.fn()
-    };
     const registerArguments = {
       fieldState: {
         getFieldState: expect.any(Function),
@@ -61,14 +73,14 @@ describe('useSubscription', () => {
       name: 'spy',
       value: 'foo'
     };
-    const wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy', initialValue: 'foo' }} contextValue={contextValue} />);
-    expect(contextValue.registerField).toHaveBeenCalledWith(expect.any(Function), registerArguments);
+    const wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy', initialValue: 'foo' }} managerApi={managerApi} />);
+    expect(managerApiState.registerField).toHaveBeenCalledWith(registerArguments);
     wrapper.unmount();
-    expect(contextValue.unRegisterField).toHaveBeenCalledWith(expect.any(Function), unregisterArguments);
+    expect(managerApiState.unregisterField).toHaveBeenCalledWith(unregisterArguments);
   });
 
   it('should set correct value on input type text', () => {
-    const wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy' }} />);
+    const wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy' }} managerApi={managerApi} />);
     const input = wrapper.find('input');
     input.simulate('change', { target: { value: 'foo' } });
     wrapper.update();
@@ -76,7 +88,7 @@ describe('useSubscription', () => {
   });
 
   it('should set correct value on input type checkbox', () => {
-    const wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy', type: 'checkbox' }} />);
+    const wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy', type: 'checkbox' }} managerApi={managerApi} />);
     const input = wrapper.find('input');
     input.simulate('change', { target: { checked: true, type: 'checkbox' } });
     wrapper.update();
@@ -84,7 +96,7 @@ describe('useSubscription', () => {
   });
 
   it('should set correct array value', () => {
-    const wrapper = mount(<DummyComponent subscriberProps={{ fakeComponent: true, name: 'spy', changeValue: [] }} />);
+    const wrapper = mount(<DummyComponent subscriberProps={{ fakeComponent: true, name: 'spy', changeValue: [] }} managerApi={managerApi} />);
     const input = wrapper.find('button#fake-change');
     input.simulate('click');
     wrapper.update();
@@ -93,7 +105,9 @@ describe('useSubscription', () => {
 
   it('should set correct on non event object value', () => {
     const nonEventObject = { value: 1, label: 'bar' };
-    const wrapper = mount(<DummyComponent subscriberProps={{ fakeComponent: true, name: 'spy', changeValue: nonEventObject }} />);
+    const wrapper = mount(
+      <DummyComponent subscriberProps={{ fakeComponent: true, name: 'spy', changeValue: nonEventObject }} managerApi={managerApi} />
+    );
     const input = wrapper.find('button#fake-change');
     input.simulate('click');
     wrapper.update();
@@ -102,12 +116,20 @@ describe('useSubscription', () => {
 
   it('getFieldState should return subscriber value', () => {
     let fieldRegistry;
-    const contextValue = {
-      registerField: (_dispatch, state) => {
+    let values = {};
+    const managerApiStateModified = {
+      values,
+      change: (name, value) => {
+        values[name] = value;
+      },
+      registerField: (state) => {
         fieldRegistry = state;
       }
     };
-    const wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy', initialValue: 'foo' }} contextValue={contextValue} />);
+
+    managerApi = () => managerApiStateModified;
+
+    const wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy', initialValue: 'foo' }} managerApi={managerApi} />);
     expect(fieldRegistry.fieldState.getFieldState()).toEqual({ value: 'foo' });
     wrapper.find('input').simulate('change', { target: { value: 'bar' } });
     expect(fieldRegistry.fieldState.getFieldState()).toEqual({ value: 'bar' });
