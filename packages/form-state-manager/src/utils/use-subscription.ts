@@ -33,7 +33,7 @@ const createFieldState = (initialState: AnyObject) => {
 };
 
 const useSubscription = ({ name, initialValue }: UseSubscription): SubscribtionData => {
-  const { registerField, unregisterField, change, getFieldValue } = useContext(FormManagerContext);
+  const { registerField, unregisterField, change, getFieldValue, blur, focus } = useContext(FormManagerContext);
   const [state, setState] = useState({
     value: initialValue,
     name
@@ -72,7 +72,7 @@ const useSubscription = ({ name, initialValue }: UseSubscription): SubscribtionD
     }
   };
 
-  return [valueToReturn, onChange];
+  return [valueToReturn, onChange, () => focus(name), () => blur(name)];
 };
 
 export default useSubscription;

@@ -1,6 +1,6 @@
 import { FormEvent } from 'react';
 import AnyObject from './any-object';
-import { Change, ManagerApi, GetState } from './manager-api';
+import { Change, ManagerApi, GetState, Blur, Focus } from './manager-api';
 import FieldState from './field-state';
 
 export interface Action extends AnyObject {
@@ -16,6 +16,8 @@ export interface ManagerContextValue {
   formOptions: ManagerApi;
   getFieldValue: (name: string) => any;
   getFieldState: (name: string) => AnyObject | undefined;
+  blur: Blur;
+  focus: Focus;
 }
 
 export interface ManagerContext {

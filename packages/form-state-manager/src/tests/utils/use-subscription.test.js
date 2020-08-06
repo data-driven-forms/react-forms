@@ -10,23 +10,23 @@ const NonInputSpyComponent = ({ changeValue, onChange }) => <button id="fake-cha
 const SpyComponent = ({ initialValue, ...props }) => <input name="spy-input" id="spy-input" {...props} />;
 
 const SubscribedComponent = ({ fakeComponent, ...props }) => {
-  const [value, onChange] = useSubscription(props);
+  const [value, onChange, onFocus, onBlur] = useSubscription(props);
   return (
     <div>
       {fakeComponent ? (
         <NonInputSpyComponent {...props} value={value} onChange={onChange} />
       ) : (
-        <SpyComponent {...props} value={value || ''} onChange={onChange} />
+        <SpyComponent {...props} value={value || ''} onFocus={onFocus} onBlur={onBlur} onChange={onChange} />
       )}
     </div>
   );
 };
 
 const DummyComponent = ({ subscriberProps, managerApi }) => {
-  const { change, handleSubmit, registerField, unregisterField, getState, getFieldValue } = managerApi();
+  const api = managerApi();
 
   return (
-    <FormManagerContext.Provider value={{ getFieldValue, change, getState, handleSubmit, registerField, unregisterField, formOptions: managerApi }}>
+    <FormManagerContext.Provider value={{ ...api, formOptions: managerApi }}>
       <SubscribedComponent {...subscriberProps} />
     </FormManagerContext.Provider>
   );
@@ -98,5 +98,20 @@ describe('useSubscription', () => {
     input.simulate('click');
     wrapper.update();
     expect(wrapper.find(NonInputSpyComponent).prop('value')).toEqual(nonEventObject);
+  });
+
+  it('should call focus callback on focus event', () => {
+    const managerApi = createManagerApi(jest.fn());
+    const api = managerApi();
+    const focusSpy = jest.spyOn(api, 'focus');
+    const blurSpy = jest.spyOn(api, 'blur');
+    const spy = mount(<DummyComponent subscriberProps={{ name: 'spy' }} managerApi={managerApi} />).find('input');
+
+    spy.prop('onFocus')();
+    expect(focusSpy).toHaveBeenCalledWith('spy');
+    spy.prop('onBlur')();
+    expect(blurSpy).toHaveBeenCalledWith('spy');
+    expect(focusSpy).toHaveBeenCalledTimes(1);
+    expect(blurSpy).toHaveBeenCalledTimes(1);
   });
 });
