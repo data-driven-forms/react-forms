@@ -2,23 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import FormStateManager from '../src/files/form-state-manager';
-import useField from '../src/files/use-field';
-import UseField from '../src/types/use-field';
-
-interface TextFieldProps {
-  label: React.ReactNode;
-  id: string;
-}
-
-const TextField: React.ComponentType<React.HTMLProps<HTMLInputElement> & TextFieldProps & UseField> = ({ label, id, ...props }) => {
-  const { input, ...rest } = useField(props);
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', margin: 16 }}>
-      <label htmlFor={id}>{label}</label>
-      <input id={id} {...input} {...rest} />
-    </div>
-  );
-};
+import TextField from '../src/tests/helpers/text-field';
 
 const App = () => {
   return (
