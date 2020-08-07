@@ -46,7 +46,7 @@ describe('useSubscription', () => {
 
   it('should assing meta SpyComponent', () => {
     const spy = mount(<DummyComponent subscriberProps={{ name: 'spy' }} managerApi={managerApi} />).find(SpyComponent);
-    expect(spy.prop('meta')).toEqual(initialMeta);
+    expect(spy.prop('meta')).toEqual(initialMeta());
   });
 
   it('should call register field on mount and unregister on unmount', () => {

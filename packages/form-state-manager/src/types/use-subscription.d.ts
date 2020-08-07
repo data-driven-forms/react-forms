@@ -29,6 +29,7 @@ export interface UseSubscription {
   initialValue?: any;
   subscription?: AnyObject;
   clearOnUnmount?: boolean;
+  initializeOnMount?: boolean;
 }
 
 export default UseSubscription;

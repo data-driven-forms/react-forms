@@ -6,6 +6,7 @@ export interface FieldConfig extends AnyObject {
   persistOnUnmount?: boolean;
   getFieldState?: () => AnyObject;
   clearOnUnmount?: boolean;
+  initializeOnMount?: boolean;
 }
 
 export default FieldConfig;
