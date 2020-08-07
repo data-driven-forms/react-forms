@@ -53,7 +53,7 @@ export const initialMeta: Meta = {
   visited: false
 };
 
-const useSubscription = ({ name, initialValue }: UseSubscription): SubscribtionData => {
+const useSubscription = ({ name, initialValue, clearOnUnmount }: UseSubscription): SubscribtionData => {
   const { registerField, unregisterField, change, getFieldValue, blur, focus } = useContext(FormManagerContext);
   const [state, setState] = useState({
     value: initialValue,
@@ -81,7 +81,7 @@ const useSubscription = ({ name, initialValue }: UseSubscription): SubscribtionD
     registerField({ name, value: initialValue, getFieldState: getDetachedState });
 
     return () => {
-      unregisterField({ name });
+      unregisterField({ name, clearOnUnmount });
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
