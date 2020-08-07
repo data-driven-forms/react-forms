@@ -2,12 +2,12 @@ import createManagerApi from '../../utils/manager-api';
 
 describe('managerApi', () => {
   it('should create managerApi getter', () => {
-    const managerApi = createManagerApi();
+    const managerApi = createManagerApi({});
     expect(managerApi).toEqual(expect.any(Function));
   });
 
   it('should change the managerApi state', () => {
-    const managerApi = createManagerApi();
+    const managerApi = createManagerApi({});
     managerApi().change('foo', 'bar');
 
     expect(managerApi().values).toEqual({ foo: 'bar' });
@@ -25,8 +25,8 @@ describe('managerApi', () => {
   });
 
   it('should change different api instance separatelly', () => {
-    const firstManagerApi = createManagerApi();
-    const secondManagerApi = createManagerApi();
+    const firstManagerApi = createManagerApi({});
+    const secondManagerApi = createManagerApi({});
     firstManagerApi().change('foo', 'bar');
     secondManagerApi().change('baz', 'quazz');
     expect(firstManagerApi().values).toEqual({ foo: 'bar' });
@@ -34,7 +34,7 @@ describe('managerApi', () => {
   });
 
   it('should registerField', () => {
-    const managerApi = createManagerApi();
+    const managerApi = createManagerApi({});
 
     managerApi().registerField({ name: 'field' });
 
@@ -43,7 +43,7 @@ describe('managerApi', () => {
   });
 
   it('should registerField 2x', () => {
-    const managerApi = createManagerApi();
+    const managerApi = createManagerApi({});
 
     managerApi().registerField({ name: 'field' });
     managerApi().registerField({ name: 'field' });
@@ -53,7 +53,7 @@ describe('managerApi', () => {
   });
 
   it('should unregisterField', () => {
-    const managerApi = createManagerApi();
+    const managerApi = createManagerApi({});
 
     managerApi().registerField({ name: 'field' });
 
@@ -65,7 +65,7 @@ describe('managerApi', () => {
   });
 
   it('should unregisterField multiple times last', () => {
-    const managerApi = createManagerApi();
+    const managerApi = createManagerApi({});
 
     managerApi().registerField({ name: 'field' });
     managerApi().registerField({ name: 'field' });
@@ -84,6 +84,47 @@ describe('managerApi', () => {
     expect(managerApi().registeredFields).toEqual([]);
   });
 
+  describe('clearOnUnmount', () => {
+    it('should clear on form level', () => {
+      const managerApi = createManagerApi({ clearOnUnmount: true });
+
+      managerApi().registerField({ name: 'field' });
+      managerApi().change('field', 'value');
+
+      expect(managerApi().values).toEqual({ field: 'value' });
+
+      managerApi().unregisterField({ name: 'field' });
+
+      expect(managerApi().values).toEqual({ field: undefined });
+    });
+
+    it('should clear on field level', () => {
+      const managerApi = createManagerApi({});
+
+      managerApi().registerField({ name: 'field' });
+      managerApi().change('field', 'value');
+
+      expect(managerApi().values).toEqual({ field: 'value' });
+
+      managerApi().unregisterField({ name: 'field', clearOnUnmount: true });
+
+      expect(managerApi().values).toEqual({ field: undefined });
+    });
+
+    it('should override form level by field', () => {
+      const managerApi = createManagerApi({ clearOnUnmount: true });
+
+      managerApi().registerField({ name: 'field' });
+      managerApi().change('field', 'value');
+
+      expect(managerApi().values).toEqual({ field: 'value' });
+
+      managerApi().unregisterField({ name: 'field', clearOnUnmount: false });
+
+      expect(managerApi().values).toEqual({ field: 'value' });
+    });
+  });
+
   it('should submit nested values', () => {
     const expectedValues = {
       field: 'field',
@@ -94,7 +135,7 @@ describe('managerApi', () => {
       array: [{ name: 'array[0].name', age: 'array[0].age' }]
     };
     const onSubmit = jest.fn();
-    const managerApi = createManagerApi(onSubmit);
+    const managerApi = createManagerApi({ onSubmit });
     const { registerField, change } = managerApi();
     registerField({ name: 'field' });
     registerField({ name: 'nested.name' });
@@ -115,7 +156,7 @@ describe('managerApi', () => {
       baz: 'quazz',
       meta: { pristine: true }
     };
-    const managerApi = createManagerApi();
+    const managerApi = createManagerApi({});
     const { registerField } = managerApi();
     registerField({
       name: 'field',
@@ -129,7 +170,7 @@ describe('managerApi', () => {
   });
 
   it('should mark active field on focus and delete it on blur', () => {
-    const managerApi = createManagerApi();
+    const managerApi = createManagerApi({});
     const { focus, blur } = managerApi();
     expect(managerApi().active).toBeUndefined();
     focus('foo');

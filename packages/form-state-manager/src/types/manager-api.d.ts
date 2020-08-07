@@ -53,6 +53,11 @@ export interface ManagerState {
 
 export type ManagerApi = () => ManagerState;
 
-declare type CreateManagerApi = (onSubmit: OnSubmit) => ManagerApi;
+export interface CreateManagerApiConfig {
+  onSubmit: OnSubmit;
+  clearOnUnmount?: boolean;
+}
+
+declare type CreateManagerApi = (CreateManagerApiConfig: CreateManagerApiConfig) => ManagerApi;
 
 export default CreateManagerApi;

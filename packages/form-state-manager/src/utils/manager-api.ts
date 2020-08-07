@@ -9,7 +9,9 @@ const isLast = (fieldListeners: AnyObject, name: string) => fieldListeners?.[nam
 
 const addIfUnique = (array: Array<string>, item: string) => !array.includes(item) && array.push(item);
 
-const createManagerApi: CreateManagerApi = (onSubmit) => {
+const shouldExecute = (formLevel: boolean | undefined, fieldLevel: boolean | undefined) => (formLevel || fieldLevel) && fieldLevel !== false;
+
+const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount }) => {
   const state: ManagerState = {
     values: {},
     errors: {},
@@ -95,6 +97,10 @@ const createManagerApi: CreateManagerApi = (onSubmit) => {
     if (isLast(state.fieldListeners, field.name)) {
       state.registeredFields = state.registeredFields.filter((fieldName: string) => fieldName !== field.name);
       delete state.fieldListeners[field.name];
+
+      if (shouldExecute(clearOnUnmount, field.clearOnUnmount)) {
+        state.values[field.name] = undefined; // will be clearedValue
+      }
     } else {
       state.fieldListeners[field.name].count -= 1;
     }
