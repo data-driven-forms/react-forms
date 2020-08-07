@@ -1,7 +1,7 @@
 import { FormEvent } from 'react';
 import set from 'lodash/set';
 
-import CreateManagerApi, { ManagerState, ManagerApi } from '../types/manager-api';
+import CreateManagerApi, { ManagerState, ManagerApi, AsyncWatcher, AsyncWatcherRecord } from '../types/manager-api';
 import AnyObject from '../types/any-object';
 import FieldConfig from '../types/field-config';
 
@@ -10,6 +10,29 @@ const isLast = (fieldListeners: AnyObject, name: string) => fieldListeners?.[nam
 const addIfUnique = (array: Array<string>, item: string) => !array.includes(item) && array.push(item);
 
 const shouldExecute = (formLevel: boolean | undefined, fieldLevel: boolean | undefined) => (formLevel || fieldLevel) && fieldLevel !== false;
+
+const asyncWatcher: AsyncWatcher = (updateValidating, updateSubmitting) => {
+  let nextKey = 0;
+  const asyncValidators: AsyncWatcherRecord = {};
+  const asyncSubmissions: AsyncWatcherRecord = {};
+
+  const resolveValidator = (resolveKey: number): void => {
+    delete asyncValidators[resolveKey];
+    updateValidating(Object.keys(asyncValidators).length !== 0);
+  };
+
+  const registerValidator = (callback: Promise<unknown>) => {
+    const resolveKey = nextKey;
+    asyncValidators[nextKey] = callback;
+    updateValidating(Object.keys(asyncValidators).length !== 0);
+    callback.then(() => resolveValidator(resolveKey)).catch(() => resolveValidator(resolveKey));
+    nextKey = nextKey + 1;
+  };
+
+  return {
+    registerValidator
+  };
+};
 
 const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initializeOnMount }) => {
   const state: ManagerState = {
@@ -25,6 +48,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     getState,
     getFieldValue,
     getFieldState,
+    registerAsyncValidator,
     registeredFields: [],
     fieldListeners: {},
     active: undefined,
@@ -49,6 +73,9 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     validating: false,
     visited: {}
   };
+
+  const asyncWatcherApi = asyncWatcher(updateValidating, updateSubmitting);
+
   function change(name: string, value?: any): void {
     state.values[name] = value;
     state.visited[name] = true;
@@ -126,6 +153,18 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
       pristine: state.pristine,
       errors: state.errors
     };
+  }
+
+  function updateValidating(validating: boolean) {
+    state.validating = validating;
+  }
+
+  function updateSubmitting(submitting: boolean) {
+    state.submitting = submitting;
+  }
+
+  function registerAsyncValidator(validator: Promise<unknown>) {
+    asyncWatcherApi.registerValidator(validator);
   }
 
   return managerApi;

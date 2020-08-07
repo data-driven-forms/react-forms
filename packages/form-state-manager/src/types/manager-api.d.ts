@@ -13,6 +13,16 @@ export type GetFieldState = (name: string) => AnyObject | undefined;
 export type Focus = (name: string) => void;
 export type Blur = (name: string) => void;
 
+export interface AsyncWatcherRecord {
+  [key: number]: Promise<unknown>;
+}
+
+export interface AsyncWatcherApi {
+  registerValidator: (callback: Promise<unknown>) => void;
+}
+
+export type AsyncWatcher = (updateValidating: (validating: boolean) => void, updateSubmitting: (submitting: boolean) => void) => AsyncWatcherApi;
+
 export interface ManagerState {
   values: AnyObject;
   errors: AnyObject;
@@ -26,6 +36,7 @@ export interface ManagerState {
   getState: GetState;
   getFieldValue: GetFieldValue;
   getFieldState: GetFieldState;
+  registerAsyncValidator: (validator: Promise<unknown>) => void;
   registeredFields: Array<string>;
   fieldListeners: AnyObject;
   active: string | undefined;

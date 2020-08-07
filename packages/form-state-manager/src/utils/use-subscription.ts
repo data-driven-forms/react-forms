@@ -2,6 +2,7 @@ import { useEffect, useState, useContext, useRef } from 'react';
 import FormManagerContext from '../files/form-manager-context';
 import UseSubscription, { OnChangeEvent, SubscribtionData, Meta } from '../types/use-subscription';
 import AnyObject from '../types/any-object';
+import { fieldLevelValidator } from './validate';
 
 const sanitizeValue = (event: OnChangeEvent): any => {
   if (Array.isArray(event)) {
@@ -53,8 +54,8 @@ export const initialMeta = (initial: any): Meta => ({
   visited: false
 });
 
-const useSubscription = ({ name, initialValue, clearOnUnmount, initializeOnMount }: UseSubscription): SubscribtionData => {
-  const { registerField, unregisterField, change, getFieldValue, blur, focus } = useContext(FormManagerContext);
+const useSubscription = ({ name, initialValue, clearOnUnmount, initializeOnMount, validate }: UseSubscription): SubscribtionData => {
+  const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions } = useContext(FormManagerContext);
   const [state, setState] = useState({
     value: initialValue,
     name,
@@ -72,6 +73,11 @@ const useSubscription = ({ name, initialValue, clearOnUnmount, initializeOnMount
   const handleChange = (event: OnChangeEvent) => {
     const sanitizedValue = sanitizeValue(event);
     change(name, sanitizedValue);
+    // TODO Mutate field state with validation flags
+    if (validate) {
+      fieldLevelValidator(validate, sanitizedValue, formOptions().values, formOptions);
+    }
+
     setState((prevState) => ({ ...prevState, value: getFieldValue(name) }));
   };
 
