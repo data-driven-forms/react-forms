@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext, useRef } from 'react';
 import FormManagerContext from '../files/form-manager-context';
-import UseSubscription, { OnChangeEvent, SubscribtionData } from '../types/use-subscription';
+import UseSubscription, { OnChangeEvent, SubscribtionData, Meta } from '../types/use-subscription';
 import AnyObject from '../types/any-object';
 
 const sanitizeValue = (event: OnChangeEvent): any => {
@@ -32,11 +32,33 @@ const createFieldState = (initialState: AnyObject) => {
   };
 };
 
+export const initialMeta: Meta = {
+  active: false,
+  data: undefined,
+  dirty: false,
+  dirtySinceLastSubmit: false,
+  error: undefined,
+  initial: undefined,
+  invalid: false,
+  modified: false,
+  modifiedSinceLastSubmit: false,
+  pristine: true,
+  submitError: undefined,
+  submitFailed: false,
+  submitSucceeded: false,
+  submitting: false,
+  touched: false,
+  valid: true,
+  validating: false,
+  visited: false
+};
+
 const useSubscription = ({ name, initialValue }: UseSubscription): SubscribtionData => {
   const { registerField, unregisterField, change, getFieldValue, blur, focus } = useContext(FormManagerContext);
   const [state, setState] = useState({
     value: initialValue,
-    name
+    name,
+    meta: initialMeta
   });
   const {
     current: { getDetachedState, setDetachedState }
@@ -56,10 +78,10 @@ const useSubscription = ({ name, initialValue }: UseSubscription): SubscribtionD
   const valueToReturn = state.value;
 
   useEffect(() => {
-    registerField({ ...state, getFieldState: getDetachedState });
+    registerField({ name, value: initialValue, getFieldState: getDetachedState });
 
     return () => {
-      unregisterField({ ...state, getFieldState: getDetachedState });
+      unregisterField({ name });
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -72,7 +94,7 @@ const useSubscription = ({ name, initialValue }: UseSubscription): SubscribtionD
     }
   };
 
-  return [valueToReturn, onChange, () => focus(name), () => blur(name)];
+  return [valueToReturn, onChange, () => focus(name), () => blur(name), state.meta];
 };
 
 export default useSubscription;

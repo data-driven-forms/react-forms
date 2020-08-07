@@ -2,21 +2,21 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import FormManagerContext from '../../files/form-manager-context';
-import useSubscription from '../../utils/use-subscription';
+import useSubscription, { initialMeta } from '../../utils/use-subscription';
 import createManagerApi from '../../utils/manager-api';
 
 const NonInputSpyComponent = ({ changeValue, onChange }) => <button id="fake-change" type="button" onClick={() => onChange(changeValue)}></button>;
 
-const SpyComponent = ({ initialValue, ...props }) => <input name="spy-input" id="spy-input" {...props} />;
+const SpyComponent = ({ initialValue, meta, ...props }) => <input name="spy-input" id="spy-input" {...props} />;
 
 const SubscribedComponent = ({ fakeComponent, ...props }) => {
-  const [value, onChange, onFocus, onBlur] = useSubscription(props);
+  const [value, onChange, onFocus, onBlur, meta] = useSubscription(props);
   return (
     <div>
       {fakeComponent ? (
-        <NonInputSpyComponent {...props} value={value} onChange={onChange} />
+        <NonInputSpyComponent {...props} value={value} onChange={onChange} meta={meta} />
       ) : (
-        <SpyComponent {...props} value={value || ''} onFocus={onFocus} onBlur={onBlur} onChange={onChange} />
+        <SpyComponent {...props} value={value || ''} onFocus={onFocus} onBlur={onBlur} onChange={onChange} meta={meta} />
       )}
     </div>
   );
@@ -44,6 +44,11 @@ describe('useSubscription', () => {
     expect(spy.prop('onChange')).toEqual(expect.any(Function));
   });
 
+  it('should assing meta SpyComponent', () => {
+    const spy = mount(<DummyComponent subscriberProps={{ name: 'spy' }} managerApi={managerApi} />).find(SpyComponent);
+    expect(spy.prop('meta')).toEqual(initialMeta);
+  });
+
   it('should call register field on mount and unregister on unmount', () => {
     const managerApi = createManagerApi(jest.fn());
     const api = managerApi();
@@ -55,9 +60,7 @@ describe('useSubscription', () => {
       getFieldState: expect.any(Function)
     };
     const unregisterArguments = {
-      name: 'spy',
-      value: 'foo',
-      getFieldState: expect.any(Function)
+      name: 'spy'
     };
     const wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy', initialValue: 'foo' }} managerApi={managerApi} />);
     expect(registerSpy).toHaveBeenCalledWith(registerArguments);
