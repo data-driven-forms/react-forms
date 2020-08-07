@@ -56,6 +56,7 @@ export type ManagerApi = () => ManagerState;
 export interface CreateManagerApiConfig {
   onSubmit: OnSubmit;
   clearOnUnmount?: boolean;
+  initializeOnMount?: boolean;
 }
 
 declare type CreateManagerApi = (CreateManagerApiConfig: CreateManagerApiConfig) => ManagerApi;

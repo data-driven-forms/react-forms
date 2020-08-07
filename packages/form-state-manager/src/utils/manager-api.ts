@@ -11,7 +11,7 @@ const addIfUnique = (array: Array<string>, item: string) => !array.includes(item
 
 const shouldExecute = (formLevel: boolean | undefined, fieldLevel: boolean | undefined) => (formLevel || fieldLevel) && fieldLevel !== false;
 
-const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount }) => {
+const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initializeOnMount }) => {
   const state: ManagerState = {
     values: {},
     errors: {},
@@ -91,6 +91,10 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount }) => {
       getFieldState: field.getFieldState,
       count: (state.fieldListeners[field.name]?.count || 0) + 1
     };
+
+    if (shouldExecute(initializeOnMount, field.initializeOnMount)) {
+      state.values[field.name] = field.value; // TODO: should select initialValue or initialValues
+    }
   }
 
   function unregisterField(field: FieldConfig): void {

@@ -32,13 +32,13 @@ const createFieldState = (initialState: AnyObject) => {
   };
 };
 
-export const initialMeta: Meta = {
+export const initialMeta = (initial: any): Meta => ({
   active: false,
   data: undefined,
   dirty: false,
   dirtySinceLastSubmit: false,
   error: undefined,
-  initial: undefined,
+  initial,
   invalid: false,
   modified: false,
   modifiedSinceLastSubmit: false,
@@ -51,14 +51,14 @@ export const initialMeta: Meta = {
   valid: true,
   validating: false,
   visited: false
-};
+});
 
-const useSubscription = ({ name, initialValue, clearOnUnmount }: UseSubscription): SubscribtionData => {
+const useSubscription = ({ name, initialValue, clearOnUnmount, initializeOnMount }: UseSubscription): SubscribtionData => {
   const { registerField, unregisterField, change, getFieldValue, blur, focus } = useContext(FormManagerContext);
   const [state, setState] = useState({
     value: initialValue,
     name,
-    meta: initialMeta
+    meta: initialMeta(initialValue)
   });
   const {
     current: { getDetachedState, setDetachedState }
@@ -78,7 +78,7 @@ const useSubscription = ({ name, initialValue, clearOnUnmount }: UseSubscription
   const valueToReturn = state.value;
 
   useEffect(() => {
-    registerField({ name, value: initialValue, getFieldState: getDetachedState });
+    registerField({ name, value: initialValue, getFieldState: getDetachedState, initializeOnMount });
 
     return () => {
       unregisterField({ name, clearOnUnmount });

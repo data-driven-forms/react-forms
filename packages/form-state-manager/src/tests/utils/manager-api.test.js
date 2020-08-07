@@ -180,4 +180,42 @@ describe('managerApi', () => {
     blur('foo');
     expect(managerApi().active).toBeUndefined();
   });
+
+  describe('initializeOnMount', () => {
+    it.skip('should initialize on form level using initialValues', () => {
+      const managerApi = createManagerApi({ initializeOnMount: true, initialValues: { field: 'second' } });
+
+      managerApi().registerField({ name: 'field', value: 'first' });
+      managerApi().registerField({ name: 'field' });
+
+      expect(managerApi().values).toEqual({ field: 'second' });
+    });
+
+    it('should initialize on form level', () => {
+      const managerApi = createManagerApi({ initializeOnMount: true });
+
+      managerApi().registerField({ name: 'field', value: 'first' });
+      managerApi().registerField({ name: 'field', value: 'second' });
+
+      expect(managerApi().values).toEqual({ field: 'second' });
+    });
+
+    it('should initialize on field level', () => {
+      const managerApi = createManagerApi({});
+
+      managerApi().registerField({ name: 'field', value: 'first' });
+      managerApi().registerField({ name: 'field', value: 'second', initializeOnMount: true });
+
+      expect(managerApi().values).toEqual({ field: 'second' });
+    });
+
+    it('should override form level by field', () => {
+      const managerApi = createManagerApi({ initializeOnMount: true });
+
+      managerApi().registerField({ name: 'field', value: 'first' });
+      managerApi().registerField({ name: 'field', value: 'second', initializeOnMount: false });
+
+      expect(managerApi().values).toEqual({ field: 'first' });
+    });
+  });
 });
