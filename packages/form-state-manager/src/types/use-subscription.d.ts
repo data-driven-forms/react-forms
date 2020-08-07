@@ -1,4 +1,5 @@
 import AnyObject from './any-object';
+import { Validator } from './validate';
 
 export interface Meta {
   active: boolean;
@@ -30,6 +31,7 @@ export interface UseSubscription {
   subscription?: AnyObject;
   clearOnUnmount?: boolean;
   initializeOnMount?: boolean;
+  validate?: Validator;
 }
 
 export default UseSubscription;
