@@ -4,6 +4,7 @@ import set from 'lodash/set';
 import CreateManagerApi, { ManagerState, ManagerApi, AsyncWatcher, AsyncWatcherRecord } from '../types/manager-api';
 import AnyObject from '../types/any-object';
 import FieldConfig from '../types/field-config';
+import { formLevelValidator } from './validate';
 
 const isLast = (fieldListeners: AnyObject, name: string) => fieldListeners?.[name]?.count === 1;
 
@@ -34,7 +35,7 @@ const asyncWatcher: AsyncWatcher = (updateValidating, updateSubmitting) => {
   };
 };
 
-const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initializeOnMount }) => {
+const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initializeOnMount, validate }) => {
   const state: ManagerState = {
     values: {},
     errors: {},
@@ -49,6 +50,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     getFieldValue,
     getFieldState,
     registerAsyncValidator,
+    updateValid,
     registeredFields: [],
     fieldListeners: {},
     active: undefined,
@@ -76,6 +78,8 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
 
   const asyncWatcherApi = asyncWatcher(updateValidating, updateSubmitting);
 
+  const managerApi: ManagerApi = () => state;
+
   function change(name: string, value?: any): void {
     state.values[name] = value;
     state.visited[name] = true;
@@ -87,6 +91,10 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     addIfUnique(state.dirtyFieldsSinceLastSubmit, name);
 
     state.pristine = false;
+
+    if (validate) {
+      formLevelValidator(validate, state.values, managerApi);
+    }
   }
 
   function focus(name: string): void {
@@ -98,8 +106,6 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
       state.active = undefined;
     }
   }
-
-  const managerApi: ManagerApi = () => state;
 
   function handleSubmit(event: FormEvent): void {
     event.preventDefault();
@@ -165,6 +171,11 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
 
   function registerAsyncValidator(validator: Promise<unknown>) {
     asyncWatcherApi.registerValidator(validator);
+  }
+
+  function updateValid(valid: boolean) {
+    state.valid = valid;
+    state.invalid = !valid;
   }
 
   return managerApi;
