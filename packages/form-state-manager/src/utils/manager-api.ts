@@ -14,6 +14,7 @@ const shouldExecute = (formLevel: boolean | undefined, fieldLevel: boolean | und
 
 type objectMapFunction = (value: any, key: any) => any;
 
+// TODO: try to optimize
 const traverseObject = (object: AnyObject, callback: objectMapFunction) => Object.keys(object).forEach((key) => callback(object[key], key));
 
 const asyncWatcher: AsyncWatcher = (updateValidating, updateSubmitting) => {
