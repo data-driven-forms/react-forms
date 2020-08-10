@@ -1,8 +1,10 @@
-import { useEffect, useState, useContext, useRef } from 'react';
+import { useEffect, useState, useContext, useRef, useReducer } from 'react';
 import FormManagerContext from '../files/form-manager-context';
 import UseSubscription, { OnChangeEvent, SubscribtionData, Meta } from '../types/use-subscription';
 import AnyObject from '../types/any-object';
 import { fieldLevelValidator } from './validate';
+
+const generateId = () => Date.now() + Math.round(Math.random() * 100000);
 
 const sanitizeValue = (event: OnChangeEvent): any => {
   if (Array.isArray(event)) {
@@ -54,16 +56,18 @@ export const initialMeta = (initial: any): Meta => ({
   visited: false
 });
 
-const useSubscription = ({ name, initialValue, clearOnUnmount, initializeOnMount, validate }: UseSubscription): SubscribtionData => {
+const useSubscription = ({ name, initialValue, clearOnUnmount, initializeOnMount, validate, subscription }: UseSubscription): SubscribtionData => {
   const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions } = useContext(FormManagerContext);
-  const [state, setState] = useState({
+  const [state, setState] = useState(() => ({
     value: initialValue,
     name,
-    meta: initialMeta(initialValue)
-  });
+    meta: initialMeta(initialValue),
+    internalId: generateId()
+  }));
   const {
     current: { getDetachedState, setDetachedState }
   } = useRef(createFieldState(state));
+  const [_, render] = useReducer((count) => count + 1, 0);
 
   /**
    * update detached state on each render
@@ -84,10 +88,18 @@ const useSubscription = ({ name, initialValue, clearOnUnmount, initializeOnMount
   const valueToReturn = state.value;
 
   useEffect(() => {
-    registerField({ name, value: initialValue, getFieldState: getDetachedState, initializeOnMount });
+    registerField({
+      name,
+      value: initialValue,
+      getFieldState: getDetachedState,
+      initializeOnMount,
+      render,
+      subscription,
+      internalId: state.internalId
+    });
 
     return () => {
-      unregisterField({ name, clearOnUnmount });
+      unregisterField({ name, clearOnUnmount, internalId: state.internalId });
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

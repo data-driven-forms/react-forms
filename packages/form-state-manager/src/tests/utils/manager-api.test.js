@@ -36,30 +36,51 @@ describe('managerApi', () => {
   it('should registerField', () => {
     const managerApi = createManagerApi({});
 
-    managerApi().registerField({ name: 'field' });
+    const render = jest.fn();
+    const internalId = Date.now();
+
+    managerApi().registerField({ name: 'field', render, internalId });
 
     expect(managerApi().registeredFields).toEqual(['field']);
-    expect(managerApi().fieldListeners).toEqual({ field: { count: 1 } });
+    expect(managerApi().fieldListeners).toEqual({ field: { count: 1, fields: { [internalId]: { render, subscription: undefined } } } });
   });
 
   it('should registerField 2x', () => {
     const managerApi = createManagerApi({});
 
-    managerApi().registerField({ name: 'field' });
-    managerApi().registerField({ name: 'field' });
+    const render = jest.fn();
+    const internalId = Date.now();
+
+    const render1 = jest.fn();
+    const internalId1 = Date.now() + 123;
+    const subscription1 = { valid: true };
+
+    managerApi().registerField({ name: 'field', render, internalId });
+    managerApi().registerField({ name: 'field', render: render1, internalId: internalId1, subscription: subscription1 });
 
     expect(managerApi().registeredFields).toEqual(['field']);
-    expect(managerApi().fieldListeners).toEqual({ field: { count: 2 } });
+    expect(managerApi().fieldListeners).toEqual({
+      field: {
+        count: 2,
+        fields: {
+          [internalId]: { render, subscription: undefined },
+          [internalId1]: { render: render1, subscription: subscription1 }
+        }
+      }
+    });
   });
 
   it('should unregisterField', () => {
     const managerApi = createManagerApi({});
 
-    managerApi().registerField({ name: 'field' });
+    const render = jest.fn();
+    const internalId = Date.now();
+
+    managerApi().registerField({ name: 'field', render, internalId });
 
     expect(managerApi().registeredFields).toEqual(['field']);
 
-    managerApi().unregisterField({ name: 'field' });
+    managerApi().unregisterField({ name: 'field', fields: { [internalId]: { render } } });
 
     expect(managerApi().registeredFields).toEqual([]);
   });
@@ -67,18 +88,40 @@ describe('managerApi', () => {
   it('should unregisterField multiple times last', () => {
     const managerApi = createManagerApi({});
 
-    managerApi().registerField({ name: 'field' });
-    managerApi().registerField({ name: 'field' });
+    const render = jest.fn();
+    const internalId = Date.now();
 
-    expect(managerApi().fieldListeners).toEqual({ field: { count: 2 } });
+    const render1 = jest.fn();
+    const internalId1 = Date.now() + 123;
+    const subscription1 = { valid: true };
+
+    managerApi().registerField({ name: 'field', render, internalId });
+    managerApi().registerField({ name: 'field', render: render1, internalId: internalId1, subscription: subscription1 });
+
+    expect(managerApi().fieldListeners).toEqual({
+      field: {
+        count: 2,
+        fields: {
+          [internalId]: { render, subscription: undefined },
+          [internalId1]: { render: render1, subscription: subscription1 }
+        }
+      }
+    });
     expect(managerApi().registeredFields).toEqual(['field']);
 
-    managerApi().unregisterField({ name: 'field' });
+    managerApi().unregisterField({ name: 'field', internalId });
 
-    expect(managerApi().fieldListeners).toEqual({ field: { count: 1 } });
+    expect(managerApi().fieldListeners).toEqual({
+      field: {
+        count: 1,
+        fields: {
+          [internalId1]: { render: render1, subscription: subscription1 }
+        }
+      }
+    });
     expect(managerApi().registeredFields).toEqual(['field']);
 
-    managerApi().unregisterField({ name: 'field' });
+    managerApi().unregisterField({ name: 'field', internalId: internalId1 });
 
     expect(managerApi().fieldListeners).toEqual({});
     expect(managerApi().registeredFields).toEqual([]);
@@ -216,6 +259,100 @@ describe('managerApi', () => {
       managerApi().registerField({ name: 'field', value: 'second', initializeOnMount: false });
 
       expect(managerApi().values).toEqual({ field: 'first' });
+    });
+  });
+
+  describe('subscription', () => {
+    let field1;
+    let field2;
+
+    let renderField1;
+    let renderField2;
+
+    beforeEach(() => {
+      renderField1 = jest.fn();
+      renderField2 = jest.fn();
+
+      field1 = { name: 'field1', render: renderField1 };
+      field2 = { name: 'field2', render: renderField2 };
+    });
+
+    it('render by default', () => {
+      const managerApi = createManagerApi({});
+
+      managerApi().registerField({ ...field1 });
+      managerApi().registerField({ ...field2 });
+
+      expect(renderField1).not.toHaveBeenCalled();
+      expect(renderField2).not.toHaveBeenCalled();
+
+      managerApi().rerender(['values']);
+
+      expect(renderField1).toHaveBeenCalled();
+      expect(renderField2).toHaveBeenCalled();
+    });
+
+    it('global subscription', () => {
+      const managerApi = createManagerApi({ subscription: { valid: true } });
+
+      managerApi().registerField({ ...field1 });
+      managerApi().registerField({ ...field2 });
+
+      expect(renderField1).not.toHaveBeenCalled();
+      expect(renderField2).not.toHaveBeenCalled();
+
+      managerApi().rerender(['values']);
+
+      expect(renderField1).not.toHaveBeenCalled();
+      expect(renderField2).not.toHaveBeenCalled();
+
+      managerApi().rerender(['valid']);
+
+      expect(renderField1).toHaveBeenCalled();
+      expect(renderField2).toHaveBeenCalled();
+    });
+
+    it('field subscription only on valid', () => {
+      const managerApi = createManagerApi({});
+
+      managerApi().registerField({ ...field1 });
+      managerApi().registerField({ ...field2, subscription: { valid: true } });
+
+      expect(renderField1).not.toHaveBeenCalled();
+      expect(renderField2).not.toHaveBeenCalled();
+
+      managerApi().rerender(['values']);
+
+      expect(renderField1).toHaveBeenCalled();
+      expect(renderField2).not.toHaveBeenCalled();
+
+      managerApi().rerender(['valid']);
+
+      expect(renderField1).toHaveBeenCalled();
+      expect(renderField2).toHaveBeenCalled();
+    });
+
+    it('merge global and field subscription correctly', () => {
+      const managerApi = createManagerApi({ subscription: { validating: true } });
+
+      managerApi().registerField({ ...field1 });
+      managerApi().registerField({ ...field2, subscription: { valid: true } });
+
+      expect(renderField1).not.toHaveBeenCalled();
+      expect(renderField2).not.toHaveBeenCalled();
+
+      managerApi().rerender(['validating']);
+
+      expect(renderField1).toHaveBeenCalled();
+      expect(renderField2).toHaveBeenCalled();
+
+      renderField1.mockReset();
+      renderField2.mockReset();
+
+      managerApi().rerender(['valid']);
+
+      expect(renderField1).not.toHaveBeenCalled();
+      expect(renderField2).toHaveBeenCalled();
     });
   });
 });

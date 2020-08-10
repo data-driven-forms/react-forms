@@ -1,5 +1,20 @@
-import AnyObject from './any-object';
 import { Validator } from './validate';
+
+export interface Subscription {
+  active?: boolean;
+  dirty?: boolean;
+  dirtySinceLastSubmit?: boolean;
+  invalid?: boolean;
+  modified?: boolean;
+  modifiedSinceLastSubmit?: boolean;
+  pristine?: boolean;
+  submitFailed?: boolean;
+  submitting?: boolean;
+  touched?: boolean;
+  valid?: boolean;
+  validating?: boolean;
+  visited?: boolean;
+}
 
 export interface Meta {
   active: boolean;
@@ -28,7 +43,7 @@ export type SubscribtionData = [any, (value: OnChangeEvent) => void, (event: Rea
 export interface UseSubscription {
   name: string;
   initialValue?: any;
-  subscription?: AnyObject;
+  subscription?: Subscription;
   clearOnUnmount?: boolean;
   initializeOnMount?: boolean;
   validate?: Validator;

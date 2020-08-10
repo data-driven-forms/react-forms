@@ -2,6 +2,7 @@ import AnyObject from './any-object';
 import { FormEvent } from 'react';
 import FieldConfig from './field-config';
 import { FormValidator } from './validate';
+import { Subscription } from './use-subscription';
 
 export type Change = (name: string, value?: any) => void;
 export type HandleSubmit = (event: FormEvent) => void;
@@ -25,6 +26,8 @@ export interface AsyncWatcherApi {
 
 export type AsyncWatcher = (updateValidating: (validating: boolean) => void, updateSubmitting: (submitting: boolean) => void) => AsyncWatcherApi;
 
+export type Rerender = (subscribeTo?: Array<string>) => void;
+
 export interface ManagerState {
   values: AnyObject;
   errors: AnyObject;
@@ -40,6 +43,7 @@ export interface ManagerState {
   getFieldState: GetFieldState;
   registerAsyncValidator: (validator: Promise<unknown>) => void;
   updateValid: UpdateValid;
+  rerender: Rerender;
   registeredFields: Array<string>;
   fieldListeners: AnyObject;
   active: string | undefined;
@@ -72,6 +76,7 @@ export interface CreateManagerApiConfig {
   clearOnUnmount?: boolean;
   initializeOnMount?: boolean;
   validate?: FormValidator;
+  subscription?: Subscription;
 }
 
 declare type CreateManagerApi = (CreateManagerApiConfig: CreateManagerApiConfig) => ManagerApi;

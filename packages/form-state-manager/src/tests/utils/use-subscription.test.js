@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect } from 'react';
+import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import FormManagerContext from '../../files/form-manager-context';
 import useSubscription, { initialMeta } from '../../utils/use-subscription';
@@ -57,10 +58,13 @@ describe('useSubscription', () => {
     const registerArguments = {
       name: 'spy',
       value: 'foo',
-      getFieldState: expect.any(Function)
+      getFieldState: expect.any(Function),
+      render: expect.any(Function),
+      internalId: expect.any(Number)
     };
     const unregisterArguments = {
-      name: 'spy'
+      name: 'spy',
+      internalId: expect.any(Number)
     };
     const wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy', initialValue: 'foo' }} managerApi={managerApi} />);
     expect(registerSpy).toHaveBeenCalledWith(registerArguments);
@@ -116,5 +120,95 @@ describe('useSubscription', () => {
     expect(blurSpy).toHaveBeenCalledWith('spy');
     expect(focusSpy).toHaveBeenCalledTimes(1);
     expect(blurSpy).toHaveBeenCalledTimes(1);
+  });
+
+  describe('subcription', () => {
+    let renderCount;
+    let RenderWatch;
+
+    beforeEach(() => {
+      renderCount = 0;
+
+      RenderWatch = (props) => {
+        useSubscription(props);
+
+        useEffect(() => {
+          renderCount++;
+        });
+
+        return null;
+      };
+    });
+
+    it('should rerender from the manager api', async () => {
+      const managerApi = createManagerApi({});
+
+      const wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <RenderWatch name="field" />
+        </FormManagerContext.Provider>
+      );
+
+      expect(renderCount).toEqual(1);
+
+      await act(async () => {
+        managerApi().rerender(['valid']);
+      });
+      wrapper.update();
+
+      expect(renderCount).toEqual(2);
+    });
+
+    it('should rerender only on subscription', async () => {
+      const managerApi = createManagerApi({});
+
+      const wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <RenderWatch name="field" subscription={{ valid: true }} />
+        </FormManagerContext.Provider>
+      );
+
+      expect(renderCount).toEqual(1);
+
+      await act(async () => {
+        managerApi().rerender(['values']);
+      });
+      wrapper.update();
+
+      expect(renderCount).toEqual(1);
+
+      await act(async () => {
+        managerApi().rerender(['valid']);
+      });
+      wrapper.update();
+
+      expect(renderCount).toEqual(2);
+    });
+
+    it('should rerender only on global subscription', async () => {
+      const managerApi = createManagerApi({ subscription: { valid: true } });
+
+      const wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <RenderWatch name="field" subscription={{ valid: true }} />
+        </FormManagerContext.Provider>
+      );
+
+      expect(renderCount).toEqual(1);
+
+      await act(async () => {
+        managerApi().rerender(['values']);
+      });
+      wrapper.update();
+
+      expect(renderCount).toEqual(1);
+
+      await act(async () => {
+        managerApi().rerender(['valid']);
+      });
+      wrapper.update();
+
+      expect(renderCount).toEqual(2);
+    });
   });
 });

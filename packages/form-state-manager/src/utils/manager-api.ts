@@ -1,16 +1,23 @@
 import { FormEvent } from 'react';
 import set from 'lodash/set';
 
-import CreateManagerApi, { ManagerState, ManagerApi, AsyncWatcher, AsyncWatcherRecord } from '../types/manager-api';
+import CreateManagerApi, { ManagerState, ManagerApi, AsyncWatcher, AsyncWatcherRecord, Rerender } from '../types/manager-api';
 import AnyObject from '../types/any-object';
 import FieldConfig from '../types/field-config';
 import { formLevelValidator } from './validate';
+
+import merge from 'lodash/merge';
+import cloneDeep from 'lodash/cloneDeep';
 
 const isLast = (fieldListeners: AnyObject, name: string) => fieldListeners?.[name]?.count === 1;
 
 const addIfUnique = (array: Array<string>, item: string) => !array.includes(item) && array.push(item);
 
 const shouldExecute = (formLevel: boolean | undefined, fieldLevel: boolean | undefined) => (formLevel || fieldLevel) && fieldLevel !== false;
+
+type objectMapFunction = (value: any, key: any) => any;
+
+const traverseObject = (object: AnyObject, callback: objectMapFunction) => Object.keys(object).forEach((key) => callback(object[key], key));
 
 const asyncWatcher: AsyncWatcher = (updateValidating, updateSubmitting) => {
   let nextKey = 0;
@@ -35,7 +42,7 @@ const asyncWatcher: AsyncWatcher = (updateValidating, updateSubmitting) => {
   };
 };
 
-const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initializeOnMount, validate }) => {
+const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initializeOnMount, validate, subscription }) => {
   const state: ManagerState = {
     values: {},
     errors: {},
@@ -51,6 +58,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     getFieldState,
     registerAsyncValidator,
     updateValid,
+    rerender,
     registeredFields: [],
     fieldListeners: {},
     active: undefined,
@@ -122,7 +130,14 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     state.fieldListeners[field.name] = {
       ...state.fieldListeners[field.name],
       getFieldState: field.getFieldState,
-      count: (state.fieldListeners[field.name]?.count || 0) + 1
+      count: (state.fieldListeners[field.name]?.count || 0) + 1,
+      fields: {
+        ...state.fieldListeners[field.name]?.fields,
+        [field.internalId]: {
+          render: field.render,
+          subscription: field.subscription
+        }
+      }
     };
 
     if (shouldExecute(initializeOnMount, field.initializeOnMount)) {
@@ -131,6 +146,8 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
   }
 
   function unregisterField(field: FieldConfig): void {
+    delete state.fieldListeners[field.name].fields[field.internalId];
+
     if (isLast(state.fieldListeners, field.name)) {
       state.registeredFields = state.registeredFields.filter((fieldName: string) => fieldName !== field.name);
       delete state.fieldListeners[field.name];
@@ -176,6 +193,28 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
   function updateValid(valid: boolean) {
     state.valid = valid;
     state.invalid = !valid;
+  }
+
+  function rerender(subscribeTo?: Array<string>) {
+    traverseObject(state.fieldListeners, (fieldListener) => {
+      traverseObject(fieldListener.fields, (field) => {
+        let shouldRender: boolean | undefined = false;
+
+        const mergedSubscription = merge(cloneDeep(subscription || {}), field.subscription);
+
+        if (!subscription && !field.subscription) {
+          shouldRender = true;
+        } else {
+          traverseObject(mergedSubscription, (subscribed, key) => {
+            if (!shouldRender) {
+              shouldRender = subscribed && subscribeTo?.includes(key);
+            }
+          });
+        }
+
+        shouldRender && field.render();
+      });
+    });
   }
 
   return managerApi;
