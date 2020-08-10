@@ -8,7 +8,7 @@ import createManagerApi from '../../utils/manager-api';
 
 const NonInputSpyComponent = ({ changeValue, onChange }) => <button id="fake-change" type="button" onClick={() => onChange(changeValue)}></button>;
 
-const SpyComponent = ({ initialValue, meta, ...props }) => <input name="spy-input" id="spy-input" {...props} />;
+const SpyComponent = ({ initialValue, meta, validate, ...props }) => <input name="spy-input" id="spy-input" {...props} />;
 
 const SubscribedComponent = ({ fakeComponent, ...props }) => {
   const [value, onChange, onFocus, onBlur, meta] = useSubscription(props);
@@ -209,6 +209,76 @@ describe('useSubscription', () => {
       wrapper.update();
 
       expect(renderCount).toEqual(2);
+    });
+  });
+
+  describe('validation', () => {
+    const fooValidator = (value) => (value === 'foo' ? 'error' : undefined);
+    const asyncValidator = (value) => new Promise((res, rej) => setTimeout(() => (fooValidator(value) ? rej('error') : res()), 100));
+
+    it('should correct set meta data on sync validation', async () => {
+      const managerApi = createManagerApi({});
+      const subscriberProps = {
+        name: 'sync-validate',
+        validate: fooValidator
+      };
+      const wrapper = mount(<DummyComponent managerApi={managerApi} subscriberProps={subscriberProps} />);
+      const spy = wrapper.find(SpyComponent);
+      const input = wrapper.find('input');
+      expect(spy.prop('meta')).toEqual(expect.objectContaining({ error: undefined, valid: true, invalid: false }));
+      await act(async () => {
+        input.simulate('change', { target: { value: 'foo' } });
+      });
+
+      wrapper.update();
+      expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ error: 'error', valid: false, invalid: true }));
+
+      await act(async () => {
+        input.simulate('change', { target: { value: 'bar' } });
+      });
+
+      wrapper.update();
+      expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ error: undefined, valid: true, invalid: false }));
+    });
+
+    it('should correct set meta data on assync validation', async () => {
+      expect.assertions(4);
+      jest.useFakeTimers();
+      const managerApi = createManagerApi({});
+      const subscriberProps = {
+        name: 'sync-validate',
+        validate: asyncValidator
+      };
+      const wrapper = mount(<DummyComponent managerApi={managerApi} subscriberProps={subscriberProps} />);
+      const spy = wrapper.find(SpyComponent);
+      const input = wrapper.find('input');
+      expect(spy.prop('meta')).toEqual(expect.objectContaining({ error: undefined, valid: true, invalid: false }));
+
+      input.simulate('change', { target: { value: 'foo' } });
+      jest.advanceTimersByTime(10);
+
+      wrapper.update();
+      expect(wrapper.find(SpyComponent).prop('meta')).toEqual(
+        expect.objectContaining({ error: undefined, validating: true, valid: true, invalid: false })
+      );
+
+      await act(async () => {
+        jest.advanceTimersByTime(91);
+      });
+
+      wrapper.update();
+      expect(wrapper.find(SpyComponent).prop('meta')).toEqual(
+        expect.objectContaining({ error: 'error', validating: false, valid: false, invalid: true })
+      );
+
+      input.simulate('change', { target: { value: 'bar' } });
+
+      await act(async () => {
+        jest.advanceTimersByTime(101);
+      });
+
+      wrapper.update();
+      expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ error: undefined, valid: true, invalid: false }));
     });
   });
 });

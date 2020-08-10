@@ -2,7 +2,7 @@ import { useEffect, useState, useContext, useRef, useReducer } from 'react';
 import FormManagerContext from '../files/form-manager-context';
 import UseSubscription, { OnChangeEvent, SubscribtionData, Meta } from '../types/use-subscription';
 import AnyObject from '../types/any-object';
-import { fieldLevelValidator } from './validate';
+import { fieldLevelValidator, isPromise } from './validate';
 
 const generateId = () => Date.now() + Math.round(Math.random() * 100000);
 
@@ -74,12 +74,37 @@ const useSubscription = ({ name, initialValue, clearOnUnmount, initializeOnMount
    */
   setDetachedState(state);
 
+  const handleError = (isValid: boolean, error: string | undefined = undefined): void => {
+    setState((prev) => ({
+      ...prev,
+      meta: {
+        ...prev.meta,
+        error,
+        valid: isValid,
+        invalid: !isValid,
+        validating: false
+      }
+    }));
+  };
+
   const handleChange = (event: OnChangeEvent) => {
     const sanitizedValue = sanitizeValue(event);
     change(name, sanitizedValue);
-    // TODO Mutate field state with validation flags
+    // TODO Memoize validation results
     if (validate) {
-      fieldLevelValidator(validate, sanitizedValue, formOptions().values, formOptions);
+      const error = fieldLevelValidator(validate, sanitizedValue, formOptions().values, formOptions);
+      if (isPromise(error)) {
+        setState((prevState) => ({ ...prevState, meta: { ...prevState.meta, validating: true } }));
+        const asyncError = error as Promise<string | undefined>;
+        asyncError.then(() => handleError(true)).catch((error) => handleError(false, error));
+      } else {
+        const syncError = error as string | undefined;
+        if (error) {
+          handleError(false, syncError);
+        } else if (state.meta.valid === false) {
+          handleError(true);
+        }
+      }
     }
 
     setState((prevState) => ({ ...prevState, value: getFieldValue(name) }));
