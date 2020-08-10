@@ -41,11 +41,7 @@ export const checkEmpty = (value: any) => {
     return false;
   }
 
-  if (!isEmpty(value)) {
-    return false;
-  }
-
-  return true;
+  return isEmpty(value);
 };
 
 const createFieldState = (initialState: AnyObject) => {
