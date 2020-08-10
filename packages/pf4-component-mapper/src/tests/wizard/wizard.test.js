@@ -866,7 +866,7 @@ describe('<Wizard />', () => {
     jest.useRealTimers();
   });
 
-  it.skip('should disabled navigation when validating - this fails locally, not on CI', async () => {
+  it('should disabled navigation when validating - this fails locally, not on CI', async () => {
     jest.useFakeTimers();
 
     const asyncValidator = jest.fn().mockImplementation(() => new Promise((res) => setTimeout(() => res(), 50)));
