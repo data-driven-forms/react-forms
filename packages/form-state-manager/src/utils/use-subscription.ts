@@ -67,7 +67,7 @@ const useSubscription = ({ name, initialValue, clearOnUnmount, initializeOnMount
   const {
     current: { getDetachedState, setDetachedState }
   } = useRef(createFieldState(state));
-  const [_, render] = useReducer((count) => count + 1, 0);
+  const [, render] = useReducer((count) => count + 1, 0);
 
   /**
    * update detached state on each render
