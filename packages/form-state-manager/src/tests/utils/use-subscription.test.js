@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import FormManagerContext from '../../files/form-manager-context';
-import useSubscription, { initialMeta } from '../../utils/use-subscription';
+import useSubscription, { initialMeta, checkEmpty } from '../../utils/use-subscription';
 import createManagerApi from '../../utils/manager-api';
 
 const NonInputSpyComponent = ({ changeValue, onChange }) => <button id="fake-change" type="button" onClick={() => onChange(changeValue)}></button>;
@@ -280,5 +280,78 @@ describe('useSubscription', () => {
       wrapper.update();
       expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ error: undefined, valid: true, invalid: false }));
     });
+  });
+
+  describe('clearedValue', () => {
+    let CleanButton;
+
+    beforeEach(() => {
+      CleanButton = (props) => {
+        const [, onChange] = useSubscription(props);
+
+        return <button onClick={() => onChange(undefined)}>clear</button>;
+      };
+    });
+
+    it('should clearValue on field level', async () => {
+      const managerApi = createManagerApi({});
+
+      const wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <CleanButton name="field" value="some value" clearedValue={null} />
+        </FormManagerContext.Provider>
+      );
+
+      await act(async () => {
+        wrapper.find('button').simulate('click');
+      });
+      wrapper.update();
+
+      expect(managerApi().values.field).toEqual(null);
+    });
+
+    it('should clearValue on form level', async () => {
+      const managerApi = createManagerApi({});
+
+      const wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi, clearedValue: null }}>
+          <CleanButton name="field" value="some value" />
+        </FormManagerContext.Provider>
+      );
+
+      await act(async () => {
+        wrapper.find('button').simulate('click');
+      });
+      wrapper.update();
+
+      expect(managerApi().values.field).toEqual(null);
+    });
+
+    it('field cleared value has higher priority', async () => {
+      const managerApi = createManagerApi({});
+
+      const wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi, clearedValue: null }}>
+          <CleanButton name="field" value="some value" clearedValue="cleared" />
+        </FormManagerContext.Provider>
+      );
+
+      await act(async () => {
+        wrapper.find('button').simulate('click');
+      });
+      wrapper.update();
+
+      expect(managerApi().values.field).toEqual('cleared');
+    });
+  });
+
+  it('#checkEmpty - edge cases', () => {
+    expect(checkEmpty(false)).toEqual(false);
+    expect(checkEmpty('A')).toEqual(false);
+    expect(checkEmpty(0)).toEqual(false);
+
+    expect(checkEmpty([])).toEqual(true);
+    expect(checkEmpty('')).toEqual(true);
+    expect(checkEmpty(undefined)).toEqual(true);
   });
 });
