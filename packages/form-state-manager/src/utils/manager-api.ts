@@ -4,7 +4,7 @@ import set from 'lodash/set';
 import CreateManagerApi, { ManagerState, ManagerApi, AsyncWatcher, AsyncWatcherRecord, Rerender } from '../types/manager-api';
 import AnyObject from '../types/any-object';
 import FieldConfig from '../types/field-config';
-import { formLevelValidator } from './validate';
+import { formLevelValidator, isPromise } from './validate';
 
 const isLast = (fieldListeners: AnyObject, name: string) => fieldListeners?.[name]?.count === 1;
 
@@ -55,6 +55,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     getFieldValue,
     getFieldState,
     registerAsyncValidator,
+    updateError,
     updateValid,
     rerender,
     registeredFields: [],
@@ -184,6 +185,10 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
 
   function updateSubmitting(submitting: boolean) {
     state.submitting = submitting;
+  }
+
+  function updateError(name: string, error: string | undefined = undefined): void {
+    state.errors[name] = error;
   }
 
   function registerAsyncValidator(validator: Promise<unknown>) {

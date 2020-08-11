@@ -42,6 +42,7 @@ export interface ManagerState {
   getFieldValue: GetFieldValue;
   getFieldState: GetFieldState;
   registerAsyncValidator: (validator: Promise<unknown>) => void;
+  updateError: (name: string, error: string | undefined) => void;
   updateValid: UpdateValid;
   rerender: Rerender;
   registeredFields: Array<string>;

@@ -132,6 +132,7 @@ const useSubscription = ({
         validating: false
       }
     }));
+    formOptions().updateError(name, isValid ? undefined : error);
   };
 
   const finalClearedValue = Object.prototype.hasOwnProperty.call(props, 'clearedValue') ? props.clearedValue : rest.clearedValue;
