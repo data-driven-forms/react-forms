@@ -96,7 +96,7 @@ const useSubscription = ({
   );
   const [state, setState] = useState(() => {
     const values = formOptions().values;
-    const firstinitialization = !Object.prototype.hasOwnProperty.call(values, name);
+    const firstinitialization = !formOptions().initializedFields.includes(name);
     const initValue = initialValue || get(initialValues, name);
     let value = get(values, name);
 

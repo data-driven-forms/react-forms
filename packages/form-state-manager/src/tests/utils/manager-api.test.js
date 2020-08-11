@@ -7,8 +7,14 @@ describe('managerApi', () => {
   });
 
   it('should set initialValues', () => {
-    const managerApi = createManagerApi({ initialValues: { field: 'value' } });
-    expect(managerApi().initialValues).toEqual({ field: 'value' });
+    const initialValues = { field: 'value', nested: { some: { very: { nested: 'value', array: ['1', '2'] } } } };
+    const managerApi = createManagerApi({ initialValues });
+    expect(managerApi().initialValues).toEqual(initialValues);
+    expect(managerApi().values).toEqual({
+      field: 'value',
+      'nested.some.very.array': ['1', '2'],
+      'nested.some.very.nested': 'value'
+    });
   });
 
   it('should change the managerApi state', () => {
@@ -279,6 +285,16 @@ describe('managerApi', () => {
       managerApi().registerField({ name: 'field', value: 'second', initializeOnMount: false });
 
       expect(managerApi().values).toEqual({ field: 'first' });
+    });
+
+    it('should send initialvalues to submit', () => {
+      const onSubmit = jest.fn();
+      const initialValues = { field: 'value1', nested: { level: 'value2' } };
+      const managerApi = createManagerApi({ onSubmit, initialValues });
+
+      managerApi().handleSubmit({ preventDefault: jest.fn() });
+
+      expect(onSubmit).toHaveBeenCalledWith(initialValues);
     });
   });
 
