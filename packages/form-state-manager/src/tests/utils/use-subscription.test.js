@@ -416,6 +416,31 @@ describe('useSubscription', () => {
       wrapper.update();
       expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ error: undefined, valid: true, invalid: false }));
     });
+
+    it('should set form level error key on sync validation', async () => {
+      const managerApi = createManagerApi({});
+      const subscriberProps = {
+        name: 'sync-validate',
+        validate: fooValidator
+      };
+      const wrapper = mount(<DummyComponent managerApi={managerApi} subscriberProps={subscriberProps} />);
+      const input = wrapper.find('input');
+      expect(managerApi().errors).toEqual({});
+
+      await act(async () => {
+        input.simulate('change', { target: { value: 'foo' } });
+      });
+      expect(managerApi().errors).toEqual({
+        'sync-validate': 'error'
+      });
+
+      await act(async () => {
+        input.simulate('change', { target: { value: 'bar' } });
+      });
+      expect(managerApi().errors).toEqual({
+        'sync-validate': undefined
+      });
+    });
   });
 
   describe('clearedValue', () => {
