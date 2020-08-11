@@ -15,6 +15,7 @@ export type GetFieldState = (name: string) => AnyObject | undefined;
 export type Focus = (name: string) => void;
 export type Blur = (name: string) => void;
 export type UpdateValid = (valid: boolean) => void;
+export type UpdateError = (name: string, error: string | undefined) => void;
 
 export interface AsyncWatcherRecord {
   [key: number]: Promise<unknown>;
@@ -42,7 +43,7 @@ export interface ManagerState {
   getFieldValue: GetFieldValue;
   getFieldState: GetFieldState;
   registerAsyncValidator: (validator: Promise<unknown>) => void;
-  updateError: (name: string, error: string | undefined) => void;
+  updateError: UpdateError;
   updateValid: UpdateValid;
   rerender: Rerender;
   registeredFields: Array<string>;
@@ -69,6 +70,7 @@ export interface ManagerState {
   validating: boolean;
   visited: AnyObject;
   initializeOnMount: boolean | undefined;
+  initializedFields: Array<string>;
 }
 
 export type ManagerApi = () => ManagerState;

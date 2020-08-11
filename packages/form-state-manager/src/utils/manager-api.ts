@@ -1,10 +1,10 @@
 import { FormEvent } from 'react';
 import set from 'lodash/set';
 
-import CreateManagerApi, { ManagerState, ManagerApi, AsyncWatcher, AsyncWatcherRecord, Rerender } from '../types/manager-api';
+import CreateManagerApi, { ManagerState, ManagerApi, AsyncWatcher, AsyncWatcherRecord } from '../types/manager-api';
 import AnyObject from '../types/any-object';
 import FieldConfig from '../types/field-config';
-import { formLevelValidator, isPromise } from './validate';
+import { formLevelValidator } from './validate';
 
 const isLast = (fieldListeners: AnyObject, name: string) => fieldListeners?.[name]?.count === 1;
 
@@ -40,9 +40,41 @@ const asyncWatcher: AsyncWatcher = (updateValidating, updateSubmitting) => {
   };
 };
 
+export function flatObject(obj: AnyObject): AnyObject {
+  const flatObject: AnyObject = {};
+  const path: Array<string> = [];
+  const mark = '<REMOVE';
+
+  // remove only .[ combinations that was inserted from this parser, not from custom names
+  const removeMark = (str: string) => str.replace(new RegExp(`.${mark}`, 'g'), '');
+
+  function dig(obj: AnyObject) {
+    if (Array.isArray(obj)) {
+      return obj.forEach((field, index) => {
+        path.push(`${mark}[${index}]`);
+        dig(field);
+        path.pop();
+      });
+    }
+
+    if (typeof obj !== 'object') {
+      return (flatObject[removeMark(path.join('.'))] = obj);
+    }
+
+    for (const key in obj) {
+      path.push(key);
+      dig(obj[key]);
+      path.pop();
+    }
+  }
+
+  dig(obj);
+  return flatObject;
+}
+
 const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initializeOnMount, validate, subscription, initialValues }) => {
   const state: ManagerState = {
-    values: {},
+    values: initialValues ? flatObject(initialValues) : {},
     errors: {},
     pristine: true,
     change,
@@ -81,7 +113,8 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     valid: true,
     validating: false,
     visited: {},
-    initializeOnMount
+    initializeOnMount,
+    initializedFields: []
   };
 
   const asyncWatcherApi = asyncWatcher(updateValidating, updateSubmitting);
@@ -126,6 +159,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
 
   function registerField(field: FieldConfig): void {
     addIfUnique(state.registeredFields, field.name);
+    addIfUnique(state.initializedFields, field.name);
 
     state.fieldListeners[field.name] = {
       ...state.fieldListeners[field.name],
