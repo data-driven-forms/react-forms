@@ -140,7 +140,7 @@ const schemaNav = [
   },
   {
     component: 'complex-condition-example',
-    linkText: 'Conplex condition example'
+    linkText: 'Complex condition example'
   },
   {
     subHeader: true,
