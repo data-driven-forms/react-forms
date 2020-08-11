@@ -8,11 +8,16 @@ export interface TextFieldProps {
 }
 
 const TextField: React.ComponentType<React.HTMLProps<HTMLInputElement> & TextFieldProps & UseFieldConfig> = ({ label, id, ...props }) => {
-  const { input, ...rest } = useField(props);
+  const {
+    input,
+    meta: { valid, error },
+    ...rest
+  } = useField(props);
   return (
     <div style={{ display: 'flex', flexDirection: 'column', margin: 16 }}>
       <label htmlFor={id}>{label}</label>
       <input id={id} {...input} {...rest} />
+      {!valid && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
 };
