@@ -43,7 +43,7 @@
     "modulePathIgnorePatterns": [
       "<rootDir>/templates/"
     ],
-    "globalSetup": "<rootDir>/globalSetup.js"
+    "globalSetup": "<rootDir>/config/globalSetup.js"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.9.0",
