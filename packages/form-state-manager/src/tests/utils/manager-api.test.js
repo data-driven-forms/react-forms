@@ -6,6 +6,11 @@ describe('managerApi', () => {
     expect(managerApi).toEqual(expect.any(Function));
   });
 
+  it('should set initialValues', () => {
+    const managerApi = createManagerApi({ initialValues: { field: 'value' } });
+    expect(managerApi().initialValues).toEqual({ field: 'value' });
+  });
+
   it('should change the managerApi state', () => {
     const managerApi = createManagerApi({});
     managerApi().change('foo', 'bar');
@@ -238,6 +243,8 @@ describe('managerApi', () => {
   });
 
   describe('initializeOnMount', () => {
+    // not testable here, because we need to compute value in useSubscription
+    // TODO: make global storage for field states ?
     it.skip('should initialize on form level using initialValues', () => {
       const managerApi = createManagerApi({ initializeOnMount: true, initialValues: { field: 'second' } });
 

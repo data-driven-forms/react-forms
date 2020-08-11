@@ -67,6 +67,7 @@ export interface ManagerState {
   valid: boolean;
   validating: boolean;
   visited: AnyObject;
+  initializeOnMount: boolean | undefined;
 }
 
 export type ManagerApi = () => ManagerState;
@@ -77,6 +78,7 @@ export interface CreateManagerApiConfig {
   initializeOnMount?: boolean;
   validate?: FormValidator;
   subscription?: Subscription;
+  initialValues?: AnyObject;
 }
 
 declare type CreateManagerApi = (CreateManagerApiConfig: CreateManagerApiConfig) => ManagerApi;

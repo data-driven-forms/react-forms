@@ -8,7 +8,7 @@ import createManagerApi from '../../utils/manager-api';
 
 const NonInputSpyComponent = ({ changeValue, onChange }) => <button id="fake-change" type="button" onClick={() => onChange(changeValue)}></button>;
 
-const SpyComponent = ({ initialValue, meta, validate, ...props }) => <input name="spy-input" id="spy-input" {...props} />;
+const SpyComponent = ({ initialValue, meta, validate, initializeOnMount, ...props }) => <input name="spy-input" id="spy-input" {...props} />;
 
 const SubscribedComponent = ({ fakeComponent, ...props }) => {
   const [value, onChange, onFocus, onBlur, meta] = useSubscription(props);
@@ -23,15 +23,11 @@ const SubscribedComponent = ({ fakeComponent, ...props }) => {
   );
 };
 
-const DummyComponent = ({ subscriberProps, managerApi }) => {
-  const api = managerApi();
-
-  return (
-    <FormManagerContext.Provider value={{ ...api, formOptions: managerApi }}>
-      <SubscribedComponent {...subscriberProps} />
-    </FormManagerContext.Provider>
-  );
-};
+const DummyComponent = ({ subscriberProps, managerApi }) => (
+  <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+    <SubscribedComponent {...subscriberProps} />
+  </FormManagerContext.Provider>
+);
 
 describe('useSubscription', () => {
   let managerApi;
@@ -120,6 +116,146 @@ describe('useSubscription', () => {
     expect(blurSpy).toHaveBeenCalledWith('spy');
     expect(focusSpy).toHaveBeenCalledTimes(1);
     expect(blurSpy).toHaveBeenCalledTimes(1);
+  });
+
+  describe('initialValues', () => {
+    it('should set value from initialValues', () => {
+      const managerApi = createManagerApi({ initialValues: { spy: 'value1' } });
+      const api = managerApi();
+      const registerSpy = jest.spyOn(api, 'registerField');
+      const registerArguments = expect.objectContaining({
+        name: 'spy',
+        value: 'value1'
+      });
+
+      mount(<DummyComponent subscriberProps={{ name: 'spy' }} managerApi={managerApi} />);
+
+      expect(registerSpy).toHaveBeenCalledWith(registerArguments);
+    });
+
+    it('should set value from initialValue over initialValues', () => {
+      const managerApi = createManagerApi({ initialValues: { spy: 'value1' } });
+      const api = managerApi();
+      const registerSpy = jest.spyOn(api, 'registerField');
+      const registerArguments = expect.objectContaining({
+        name: 'spy',
+        value: 'value2'
+      });
+
+      mount(<DummyComponent subscriberProps={{ name: 'spy', initialValue: 'value2' }} managerApi={managerApi} />);
+
+      expect(registerSpy).toHaveBeenCalledWith(registerArguments);
+    });
+
+    it('should set nested value from initialValues', () => {
+      const managerApi = createManagerApi({ initialValues: { spy: { nested: 'value123' } } });
+      const api = managerApi();
+      const registerSpy = jest.spyOn(api, 'registerField');
+      const registerArguments = expect.objectContaining({
+        name: 'spy.nested',
+        value: 'value123'
+      });
+
+      mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
+
+      expect(registerSpy).toHaveBeenCalledWith(registerArguments);
+    });
+
+    it('should set value from initialValues only on first registration', async () => {
+      const managerApi = createManagerApi({ initialValues: { spy: { nested: 'value123' } } });
+      const api = managerApi();
+      const registerSpy = jest.spyOn(api, 'registerField');
+      const registerArguments = expect.objectContaining({
+        name: 'spy.nested',
+        value: 'value123'
+      });
+
+      let wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
+      expect(registerSpy).toHaveBeenCalledWith(registerArguments);
+
+      await act(async () => {
+        managerApi().change('spy.nested', 'different value');
+      });
+      wrapper.update();
+
+      wrapper.unmount();
+
+      wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
+
+      expect(managerApi().values).toEqual({ 'spy.nested': 'different value' });
+    });
+
+    it('should set value from initialValues when form.initializeOnTrue = true', async () => {
+      const managerApi = createManagerApi({ initialValues: { spy: { nested: 'value123' } }, initializeOnMount: true });
+      const api = managerApi();
+      const registerSpy = jest.spyOn(api, 'registerField');
+      const registerArguments = expect.objectContaining({
+        name: 'spy.nested',
+        value: 'value123'
+      });
+
+      let wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
+      expect(registerSpy).toHaveBeenCalledWith(registerArguments);
+
+      await act(async () => {
+        managerApi().change('spy.nested', 'different value');
+      });
+      wrapper.update();
+
+      wrapper.unmount();
+
+      wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
+
+      expect(managerApi().values).toEqual({ 'spy.nested': 'value123' });
+    });
+
+    it('should set value from initialValues when field.initializeOnTrue = true', async () => {
+      const managerApi = createManagerApi({ initialValues: { spy: { nested: 'value123' } }, initializeOnMount: true });
+      const api = managerApi();
+      const registerSpy = jest.spyOn(api, 'registerField');
+      const registerArguments = expect.objectContaining({
+        name: 'spy.nested',
+        value: 'value123'
+      });
+
+      let wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested', initializeOnMount: true }} managerApi={managerApi} />);
+      expect(registerSpy).toHaveBeenCalledWith(registerArguments);
+
+      await act(async () => {
+        managerApi().change('spy.nested', 'different value');
+      });
+      wrapper.update();
+
+      wrapper.unmount();
+
+      wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
+
+      expect(managerApi().values).toEqual({ 'spy.nested': 'value123' });
+    });
+
+    it('field.initializeOnMount has higher priority than form.initializeOnMount', async () => {
+      const managerApi = createManagerApi({ initialValues: { spy: { nested: 'value123' } }, initializeOnMount: true });
+      const api = managerApi();
+      const registerSpy = jest.spyOn(api, 'registerField');
+      const registerArguments = expect.objectContaining({
+        name: 'spy.nested',
+        value: 'value123'
+      });
+
+      let wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
+      expect(registerSpy).toHaveBeenCalledWith(registerArguments);
+
+      await act(async () => {
+        managerApi().change('spy.nested', 'different value');
+      });
+      wrapper.update();
+
+      wrapper.unmount();
+
+      wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested', initializeOnMount: false }} managerApi={managerApi} />);
+
+      expect(managerApi().values).toEqual({ 'spy.nested': 'different value' });
+    });
   });
 
   describe('subcription', () => {

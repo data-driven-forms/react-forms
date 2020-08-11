@@ -4,7 +4,9 @@ import UseSubscription, { OnChangeEvent, SubscribtionData, Meta } from '../types
 import AnyObject from '../types/any-object';
 import { fieldLevelValidator, isPromise } from './validate';
 import isEmpty from 'lodash/isEmpty';
+import get from 'lodash/get';
 import convertType from './convert-type';
+import { shouldExecute } from './manager-api';
 
 const generateId = () => Date.now() + Math.round(Math.random() * 100000);
 
@@ -89,13 +91,26 @@ const useSubscription = ({
   dataType,
   ...props
 }: UseSubscription): SubscribtionData => {
-  const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions, ...rest } = useContext(FormManagerContext);
-  const [state, setState] = useState(() => ({
-    value: initialValue,
-    name,
-    meta: initialMeta(initialValue),
-    internalId: generateId()
-  }));
+  const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions, initialValues = {}, ...rest } = useContext(
+    FormManagerContext
+  );
+  const [state, setState] = useState(() => {
+    const values = formOptions().values;
+    const firstinitialization = !Object.prototype.hasOwnProperty.call(values, name);
+    const initValue = initialValue || get(initialValues, name);
+    let value = get(values, name);
+
+    if (firstinitialization || shouldExecute(formOptions().initializeOnMount, initializeOnMount)) {
+      value = initValue;
+    }
+
+    return {
+      value,
+      name,
+      meta: initialMeta(initValue),
+      internalId: generateId()
+    };
+  });
   const {
     current: { getDetachedState, setDetachedState }
   } = useRef(createFieldState(state));
@@ -162,7 +177,7 @@ const useSubscription = ({
   useEffect(() => {
     registerField({
       name,
-      value: initialValue,
+      value: state.value,
       getFieldState: getDetachedState,
       initializeOnMount,
       render,

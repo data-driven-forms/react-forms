@@ -10,7 +10,7 @@ const isLast = (fieldListeners: AnyObject, name: string) => fieldListeners?.[nam
 
 const addIfUnique = (array: Array<string>, item: string) => !array.includes(item) && array.push(item);
 
-const shouldExecute = (formLevel: boolean | undefined, fieldLevel: boolean | undefined) => (formLevel || fieldLevel) && fieldLevel !== false;
+export const shouldExecute = (formLevel: boolean | undefined, fieldLevel: boolean | undefined) => (formLevel || fieldLevel) && fieldLevel !== false;
 
 type objectMapFunction = (value: any, key: any) => any;
 
@@ -40,7 +40,7 @@ const asyncWatcher: AsyncWatcher = (updateValidating, updateSubmitting) => {
   };
 };
 
-const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initializeOnMount, validate, subscription }) => {
+const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initializeOnMount, validate, subscription, initialValues }) => {
   const state: ManagerState = {
     values: {},
     errors: {},
@@ -67,7 +67,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     error: null,
     hasSubmitErrors: false,
     hasValidationErrors: false,
-    initialValues: {},
+    initialValues: initialValues || {},
     invalid: false,
     modified: {},
     modifiedSinceLastSubmit: false,
@@ -79,7 +79,8 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     touched: {},
     valid: true,
     validating: false,
-    visited: {}
+    visited: {},
+    initializeOnMount
   };
 
   const asyncWatcherApi = asyncWatcher(updateValidating, updateSubmitting);
@@ -138,8 +139,9 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
       }
     };
 
-    if (shouldExecute(initializeOnMount, field.initializeOnMount)) {
-      state.values[field.name] = field.value; // TODO: should select initialValue or initialValues
+    // TODO: initial only first time -> have field states in global?
+    if (shouldExecute(initializeOnMount, field.initializeOnMount) || !Object.prototype.hasOwnProperty.call(state.values, field.name)) {
+      state.values[field.name] = field.value;
     }
   }
 

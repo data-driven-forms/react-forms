@@ -5,8 +5,16 @@ import createManagerApi from '../utils/manager-api';
 
 import FormStateManagerProps from '../types/form-state-manager';
 
-const FormStateManager: React.ComponentType<FormStateManagerProps> = ({ children, onSubmit, clearOnUnmount, subscription, clearedValue }) => {
-  const { current: managerApi } = useRef(createManagerApi({ onSubmit, clearOnUnmount, subscription }));
+const FormStateManager: React.ComponentType<FormStateManagerProps> = ({
+  children,
+  onSubmit,
+  clearOnUnmount,
+  subscription,
+  clearedValue,
+  initialValues,
+  initializeOnMount
+}) => {
+  const { current: managerApi } = useRef(createManagerApi({ onSubmit, clearOnUnmount, subscription, initialValues, initializeOnMount }));
 
   const { change, handleSubmit, registerField, unregisterField, getState, getFieldValue, getFieldState, blur, focus } = managerApi();
 
@@ -23,7 +31,8 @@ const FormStateManager: React.ComponentType<FormStateManagerProps> = ({ children
         registerField,
         unregisterField,
         formOptions: managerApi,
-        clearedValue
+        clearedValue,
+        initialValues
       }}
     >
       <FormManagerContext.Consumer>{(managerState) => children(managerState)}</FormManagerContext.Consumer>
