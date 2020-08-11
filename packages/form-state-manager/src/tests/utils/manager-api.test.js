@@ -7,13 +7,40 @@ describe('managerApi', () => {
   });
 
   it('should set initialValues', () => {
-    const initialValues = { field: 'value', nested: { some: { very: { nested: 'value', array: ['1', '2'] } } } };
+    const initialValues = {
+      field: 'value',
+      nested: {
+        some: {
+          very: {
+            'tryingToDestroy.[2][4].name': 'cosi',
+            nested: 'value',
+            array: ['123', '245'],
+            nestedObjects: [{ name: 'john' }, { name: 'jane', lastname: 'smith' }],
+            nestier: [
+              {
+                superNested: [
+                  {
+                    lastName: 'michael'
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    };
     const managerApi = createManagerApi({ initialValues });
     expect(managerApi().initialValues).toEqual(initialValues);
     expect(managerApi().values).toEqual({
       field: 'value',
-      'nested.some.very.array': ['1', '2'],
-      'nested.some.very.nested': 'value'
+      'nested.some.very.tryingToDestroy.[2][4].name': 'cosi',
+      'nested.some.very.nested': 'value',
+      'nested.some.very.array[0]': '123',
+      'nested.some.very.array[1]': '245',
+      'nested.some.very.nestedObjects[0].name': 'john',
+      'nested.some.very.nestedObjects[1].name': 'jane',
+      'nested.some.very.nestedObjects[1].lastname': 'smith',
+      'nested.some.very.nestier[0].superNested[0].lastName': 'michael'
     });
   });
 

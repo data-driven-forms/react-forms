@@ -43,10 +43,22 @@ const asyncWatcher: AsyncWatcher = (updateValidating, updateSubmitting) => {
 export function flatObject(obj: AnyObject): AnyObject {
   const flatObject: AnyObject = {};
   const path: Array<string> = [];
+  const mark = '<REMOVE';
+
+  // remove only .[ combinations that was inserted from this parser, not from custom names
+  const removeMark = (str: string) => str.replace(new RegExp(`.${mark}`, 'g'), '');
 
   function dig(obj: AnyObject) {
-    if (typeof obj !== 'object' || Array.isArray(obj)) {
-      return (flatObject[path.join('.')] = obj);
+    if (Array.isArray(obj)) {
+      return obj.forEach((field, index) => {
+        path.push(`${mark}[${index}]`);
+        dig(field);
+        path.pop();
+      });
+    }
+
+    if (typeof obj !== 'object') {
+      return (flatObject[removeMark(path.join('.'))] = obj);
     }
 
     for (const key in obj) {
