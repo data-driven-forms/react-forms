@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/react-form-renderer",
-  "version": "2.8.8",
+  "version": "2.8.9",
   "description": "React form renderer for data-driven-forms.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
