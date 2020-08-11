@@ -4,6 +4,7 @@ import UseSubscription, { OnChangeEvent, SubscribtionData, Meta } from '../types
 import AnyObject from '../types/any-object';
 import { fieldLevelValidator, isPromise } from './validate';
 import isEmpty from 'lodash/isEmpty';
+import convertType from './convert-type';
 
 const generateId = () => Date.now() + Math.round(Math.random() * 100000);
 
@@ -85,6 +86,7 @@ const useSubscription = ({
   initializeOnMount,
   validate,
   subscription,
+  dataType,
   ...props
 }: UseSubscription): SubscribtionData => {
   const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions, ...rest } = useContext(FormManagerContext);
@@ -123,6 +125,12 @@ const useSubscription = ({
     let sanitizedValue = sanitizeValue(event);
 
     const hasClearedValue = Object.prototype.hasOwnProperty.call(props, 'clearedValue') || Object.prototype.hasOwnProperty.call(rest, 'clearedValue');
+
+    if (dataType) {
+      sanitizedValue = Array.isArray(sanitizedValue)
+        ? sanitizedValue.map((item) => convertType(dataType, sanitizeValue(item)))
+        : convertType(dataType, sanitizedValue);
+    }
 
     if (hasClearedValue && checkEmpty(sanitizedValue) && typeof state.meta.initial === 'undefined') {
       sanitizedValue = finalClearedValue;

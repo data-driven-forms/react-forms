@@ -354,4 +354,120 @@ describe('useSubscription', () => {
     expect(checkEmpty('')).toEqual(true);
     expect(checkEmpty(undefined)).toEqual(true);
   });
+
+  describe('dataType', () => {
+    let Setter;
+    let managerApi;
+    let wrapper;
+
+    beforeEach(() => {
+      managerApi = createManagerApi({});
+
+      Setter = (props) => {
+        const [, onChange] = useSubscription(props);
+
+        return <input onChange={(e) => onChange(props.value || e)} />;
+      };
+    });
+
+    it('should parse string', async () => {
+      wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <Setter name="field" dataType="string" />
+        </FormManagerContext.Provider>
+      );
+
+      await act(async () => {
+        const input = wrapper.find('input');
+        input.instance().value = 123;
+        input.simulate('change');
+      });
+      wrapper.update();
+
+      expect(managerApi().values.field).toEqual('123');
+    });
+
+    it('should parse float', async () => {
+      wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <Setter name="field" dataType="float" />
+        </FormManagerContext.Provider>
+      );
+
+      await act(async () => {
+        const input = wrapper.find('input');
+        input.instance().value = '12.34';
+        input.simulate('change');
+      });
+      wrapper.update();
+
+      expect(managerApi().values.field).toEqual(12.34);
+    });
+
+    it('should parse number', async () => {
+      wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <Setter name="field" dataType="number" />
+        </FormManagerContext.Provider>
+      );
+
+      await act(async () => {
+        const input = wrapper.find('input');
+        input.instance().value = '243242.809';
+        input.simulate('change');
+      });
+      wrapper.update();
+
+      expect(managerApi().values.field).toEqual(243242.809);
+    });
+
+    it('should parse boolean', async () => {
+      wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <Setter name="field" dataType="boolean" />
+        </FormManagerContext.Provider>
+      );
+
+      await act(async () => {
+        const input = wrapper.find('input');
+        input.instance().value = 'true';
+        input.simulate('change');
+      });
+      wrapper.update();
+
+      expect(managerApi().values.field).toEqual(true);
+    });
+
+    it('should parse integer', async () => {
+      wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <Setter name="field" dataType="integer" />
+        </FormManagerContext.Provider>
+      );
+
+      await act(async () => {
+        const input = wrapper.find('input');
+        input.instance().value = '12.34';
+        input.simulate('change');
+      });
+      wrapper.update();
+
+      expect(managerApi().values.field).toEqual(12);
+    });
+
+    it('should parse array of numbers', async () => {
+      wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <Setter name="field" dataType="number" value={['1', '2', '45']} />
+        </FormManagerContext.Provider>
+      );
+
+      await act(async () => {
+        wrapper.find('input').simulate('change');
+      });
+      wrapper.update();
+
+      expect(managerApi().values.field).toEqual([1, 2, 45]);
+    });
+  });
 });

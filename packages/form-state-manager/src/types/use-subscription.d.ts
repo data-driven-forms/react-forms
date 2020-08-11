@@ -1,4 +1,5 @@
 import { Validator } from './validate';
+import { DataType } from './data-types';
 
 export interface Subscription {
   active?: boolean;
@@ -48,6 +49,7 @@ export interface UseSubscription {
   initializeOnMount?: boolean;
   validate?: Validator;
   clearedValue?: any;
+  dataType?: DataType;
 }
 
 export default UseSubscription;
