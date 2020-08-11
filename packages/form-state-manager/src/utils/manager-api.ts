@@ -151,7 +151,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
       delete state.fieldListeners[field.name];
 
       if (shouldExecute(clearOnUnmount, field.clearOnUnmount)) {
-        state.values[field.name] = undefined; // will be clearedValue
+        state.values[field.name] = field.value;
       }
     } else {
       state.fieldListeners[field.name].count -= 1;

@@ -47,6 +47,7 @@ export interface UseSubscription {
   clearOnUnmount?: boolean;
   initializeOnMount?: boolean;
   validate?: Validator;
+  clearedValue?: any;
 }
 
 export default UseSubscription;

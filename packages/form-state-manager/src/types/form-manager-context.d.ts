@@ -18,6 +18,7 @@ export interface ManagerContextValue {
   getFieldState: (name: string) => AnyObject | undefined;
   blur: Blur;
   focus: Focus;
+  clearedValue?: any;
 }
 
 export interface ManagerContext {

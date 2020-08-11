@@ -3,6 +3,7 @@ import FormManagerContext from '../files/form-manager-context';
 import UseSubscription, { OnChangeEvent, SubscribtionData, Meta } from '../types/use-subscription';
 import AnyObject from '../types/any-object';
 import { fieldLevelValidator, isPromise } from './validate';
+import isEmpty from 'lodash/isEmpty';
 
 const generateId = () => Date.now() + Math.round(Math.random() * 100000);
 
@@ -20,6 +21,27 @@ const sanitizeValue = (event: OnChangeEvent): any => {
   }
 
   return event;
+};
+
+/**
+ * Checks the value and returns undefined if its empty. Converts epmty strings, arrays and objects.
+ * If value is empty its overriden to undefined for further processing.
+ * @param {Any} value Any JS variable to be check if is empty
+ */
+export const checkEmpty = (value: any) => {
+  if (typeof value === 'number') {
+    return false;
+  }
+
+  if (typeof value === 'boolean') {
+    return false;
+  }
+
+  if (typeof value === 'string' && value.length > 0) {
+    return false;
+  }
+
+  return isEmpty(value);
 };
 
 const createFieldState = (initialState: AnyObject) => {
@@ -56,8 +78,16 @@ export const initialMeta = (initial: any): Meta => ({
   visited: false
 });
 
-const useSubscription = ({ name, initialValue, clearOnUnmount, initializeOnMount, validate, subscription }: UseSubscription): SubscribtionData => {
-  const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions } = useContext(FormManagerContext);
+const useSubscription = ({
+  name,
+  initialValue,
+  clearOnUnmount,
+  initializeOnMount,
+  validate,
+  subscription,
+  ...props
+}: UseSubscription): SubscribtionData => {
+  const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions, ...rest } = useContext(FormManagerContext);
   const [state, setState] = useState(() => ({
     value: initialValue,
     name,
@@ -87,8 +117,17 @@ const useSubscription = ({ name, initialValue, clearOnUnmount, initializeOnMount
     }));
   };
 
+  const finalClearedValue = Object.prototype.hasOwnProperty.call(props, 'clearedValue') ? props.clearedValue : rest.clearedValue;
+
   const handleChange = (event: OnChangeEvent) => {
-    const sanitizedValue = sanitizeValue(event);
+    let sanitizedValue = sanitizeValue(event);
+
+    const hasClearedValue = Object.prototype.hasOwnProperty.call(props, 'clearedValue') || Object.prototype.hasOwnProperty.call(rest, 'clearedValue');
+
+    if (hasClearedValue && checkEmpty(sanitizedValue) && typeof state.meta.initial === 'undefined') {
+      sanitizedValue = finalClearedValue;
+    }
+
     change(name, sanitizedValue);
     // TODO Memoize validation results
     if (validate) {
@@ -124,7 +163,7 @@ const useSubscription = ({ name, initialValue, clearOnUnmount, initializeOnMount
     });
 
     return () => {
-      unregisterField({ name, clearOnUnmount, internalId: state.internalId });
+      unregisterField({ name, clearOnUnmount, internalId: state.internalId, value: finalClearedValue });
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

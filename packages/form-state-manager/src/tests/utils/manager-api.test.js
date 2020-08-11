@@ -166,6 +166,19 @@ describe('managerApi', () => {
 
       expect(managerApi().values).toEqual({ field: 'value' });
     });
+
+    it('should clear on field level with cleared value', () => {
+      const managerApi = createManagerApi({});
+
+      managerApi().registerField({ name: 'field' });
+      managerApi().change('field', 'value');
+
+      expect(managerApi().values).toEqual({ field: 'value' });
+
+      managerApi().unregisterField({ name: 'field', clearOnUnmount: true, value: null });
+
+      expect(managerApi().values).toEqual({ field: null });
+    });
   });
 
   it('should submit nested values', () => {
