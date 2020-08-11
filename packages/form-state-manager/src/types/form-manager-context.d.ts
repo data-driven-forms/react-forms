@@ -19,6 +19,7 @@ export interface ManagerContextValue {
   blur: Blur;
   focus: Focus;
   clearedValue?: any;
+  initialValues?: AnyObject;
 }
 
 export interface ManagerContext {

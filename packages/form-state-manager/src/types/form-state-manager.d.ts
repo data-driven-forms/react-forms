@@ -7,6 +7,8 @@ export interface FormStateManagerProps {
   clearOnUnmount?: boolean;
   subscription?: Subscription;
   clearedValue?: any;
+  initialValues?: AnyObject;
+  initializeOnMount?: boolean;
 }
 
 export default FormStateManagerProps;
