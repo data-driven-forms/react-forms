@@ -2,12 +2,21 @@ import AnyObject from './any-object';
 import { FormEvent } from 'react';
 import FieldConfig from './field-config';
 import { FormValidator } from './validate';
-import { Subscription } from './use-subscription';
+import { Subscription, Meta } from './use-subscription';
+
+export interface FieldState {
+  value: any;
+  meta: Meta;
+  name: string;
+  internalId: number;
+}
+
+export type UpdateFieldState = (name: string, mutateState: (prevState: FieldState) => FieldState) => void;
 
 export type Change = (name: string, value?: any) => void;
 export type HandleSubmit = (event: FormEvent) => void;
 export type RegisterField = (field: FieldConfig) => void;
-export type UnregisterField = (field: FieldConfig) => void;
+export type UnregisterField = (field: Omit<FieldConfig, 'render'>) => void;
 export type GetState = () => AnyObject;
 export type OnSubmit = (values: AnyObject) => void;
 export type GetFieldValue = (name: string) => any;
@@ -29,6 +38,27 @@ export type AsyncWatcher = (updateValidating: (validating: boolean) => void, upd
 
 export type Rerender = (subscribeTo?: Array<string>) => void;
 
+export type FieldRender = () => void;
+
+export interface ListenerField {
+  render: FieldRender;
+  subscription?: Subscription;
+}
+
+export interface FieldListenerFields {
+  [key: number]: ListenerField;
+}
+
+export interface FieldListener {
+  count: number;
+  state: FieldState;
+  fields: FieldListenerFields;
+}
+
+export interface FieldListeners {
+  [key: string]: FieldListener;
+}
+
 export interface ManagerState {
   values: AnyObject;
   errors: AnyObject;
@@ -42,12 +72,13 @@ export interface ManagerState {
   getState: GetState;
   getFieldValue: GetFieldValue;
   getFieldState: GetFieldState;
+  setFieldState: UpdateFieldState;
   registerAsyncValidator: (validator: Promise<unknown>) => void;
   updateError: UpdateError;
   updateValid: UpdateValid;
   rerender: Rerender;
   registeredFields: Array<string>;
-  fieldListeners: AnyObject;
+  fieldListeners: FieldListeners;
   active: string | undefined;
   dirty: boolean;
   dirtyFields: Array<string>;

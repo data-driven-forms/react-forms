@@ -1,12 +1,12 @@
-import { useEffect, useState, useContext, useRef, useReducer } from 'react';
+import { useEffect, useContext, useRef, useReducer } from 'react';
 import FormManagerContext from '../files/form-manager-context';
 import UseSubscription, { OnChangeEvent, SubscribtionData, Meta } from '../types/use-subscription';
-import AnyObject from '../types/any-object';
 import { fieldLevelValidator, isPromise } from './validate';
 import isEmpty from 'lodash/isEmpty';
 import get from 'lodash/get';
 import convertType from './convert-type';
 import { shouldExecute } from './manager-api';
+import { FieldState } from '../types/manager-api';
 
 const generateId = () => Date.now() + Math.round(Math.random() * 100000);
 
@@ -47,19 +47,6 @@ export const checkEmpty = (value: any) => {
   return isEmpty(value);
 };
 
-const createFieldState = (initialState: AnyObject) => {
-  let state = initialState;
-  const setDetachedState = (newState: AnyObject) => {
-    state = newState;
-  };
-
-  const getDetachedState = (): AnyObject => state;
-  return {
-    setDetachedState,
-    getDetachedState
-  };
-};
-
 export const initialMeta = (initial: any): Meta => ({
   active: false,
   data: undefined,
@@ -94,35 +81,11 @@ const useSubscription = ({
   const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions, initialValues = {}, ...rest } = useContext(
     FormManagerContext
   );
-  const [state, setState] = useState(() => {
-    const values = formOptions().values;
-    const firstinitialization = !formOptions().initializedFields.includes(name);
-    const initValue = initialValue || get(initialValues, name);
-    let value = get(values, name);
-
-    if (firstinitialization || shouldExecute(formOptions().initializeOnMount, initializeOnMount)) {
-      value = initValue;
-    }
-
-    return {
-      value,
-      name,
-      meta: initialMeta(initValue),
-      internalId: generateId()
-    };
-  });
-  const {
-    current: { getDetachedState, setDetachedState }
-  } = useRef(createFieldState(state));
   const [, render] = useReducer((count) => count + 1, 0);
-
-  /**
-   * update detached state on each render
-   */
-  setDetachedState(state);
+  const setState = (mutateState: (prevState: FieldState) => FieldState) => formOptions().setFieldState(name, mutateState);
 
   const handleError = (isValid: boolean, error: string | undefined = undefined): void => {
-    setState((prev) => ({
+    setState((prev: FieldState) => ({
       ...prev,
       meta: {
         ...prev.meta,
@@ -132,6 +95,8 @@ const useSubscription = ({
         validating: false
       }
     }));
+
+    // TODO lift error handling to manager API to avoid multiple re-renders
     formOptions().updateError(name, isValid ? undefined : error);
   };
 
@@ -148,7 +113,7 @@ const useSubscription = ({
         : convertType(dataType, sanitizedValue);
     }
 
-    if (hasClearedValue && checkEmpty(sanitizedValue) && typeof state.meta.initial === 'undefined') {
+    if (hasClearedValue && checkEmpty(sanitizedValue) && typeof formOptions().getFieldState(name)?.meta.initial === 'undefined') {
       sanitizedValue = finalClearedValue;
     }
 
@@ -157,33 +122,49 @@ const useSubscription = ({
     if (validate) {
       const error = fieldLevelValidator(validate, sanitizedValue, formOptions().values, formOptions);
       if (isPromise(error)) {
-        setState((prevState) => ({ ...prevState, meta: { ...prevState.meta, validating: true } }));
+        setState((prevState: FieldState) => ({ ...prevState, meta: { ...prevState.meta, validating: true } }));
         const asyncError = error as Promise<string | undefined>;
         asyncError.then(() => handleError(true)).catch((error) => handleError(false, error));
       } else {
         const syncError = error as string | undefined;
         if (error) {
           handleError(false, syncError);
-        } else if (state.meta.valid === false) {
+        } else if (formOptions().getFieldState(name)?.meta.valid === false) {
           handleError(true);
         }
       }
     }
 
-    setState((prevState) => ({ ...prevState, value: getFieldValue(name) }));
+    setState((prevState: FieldState) => ({ ...prevState, value: getFieldValue(name) }));
   };
 
-  const valueToReturn = state.value;
+  const valueToReturn = formOptions().getFieldValue(name);
+
+  const { current: initValue } = useRef(initialValue || get(initialValues, name));
 
   useEffect(() => {
+    const values = formOptions().values;
+    const firstinitialization = !formOptions().initializedFields.includes(name);
+    let value = get(values, name);
+
+    if (firstinitialization || shouldExecute(formOptions().initializeOnMount, initializeOnMount)) {
+      value = initValue;
+    }
+
+    const state = {
+      value,
+      name,
+      meta: initialMeta(initValue),
+      internalId: generateId()
+    };
     registerField({
       name,
       value: state.value,
-      getFieldState: getDetachedState,
       initializeOnMount,
       render,
       subscription,
-      internalId: state.internalId
+      internalId: state.internalId,
+      state
     });
 
     return () => {
@@ -200,7 +181,7 @@ const useSubscription = ({
     }
   };
 
-  return [valueToReturn, onChange, () => focus(name), () => blur(name), state.meta];
+  return [valueToReturn, onChange, () => focus(name), () => blur(name), formOptions().getFieldState(name)?.meta || initialMeta(initValue)];
 };
 
 export default useSubscription;

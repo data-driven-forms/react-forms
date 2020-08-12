@@ -1,5 +1,6 @@
 import AnyObject from './any-object';
 import { Subscription } from './use-subscription';
+import { FieldRender } from './manager-api';
 
 export interface FieldConfig extends AnyObject {
   name: string;
@@ -10,6 +11,7 @@ export interface FieldConfig extends AnyObject {
   initializeOnMount?: boolean;
   subscription?: Subscription;
   internalId: number;
+  render: FieldRender;
 }
 
 export default FieldConfig;
