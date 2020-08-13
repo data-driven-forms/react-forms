@@ -1,6 +1,6 @@
 import { FormEvent } from 'react';
 import AnyObject from './any-object';
-import { Change, ManagerApi, GetState, Blur, Focus } from './manager-api';
+import { Change, ManagerApi, GetState, Blur, Focus, Unsubscribe, Subscribe } from './manager-api';
 import FieldConfig from './field-config';
 
 export interface Action extends AnyObject {
@@ -20,6 +20,8 @@ export interface ManagerContextValue {
   focus: Focus;
   clearedValue?: any;
   initialValues?: AnyObject;
+  subscribe: Subscribe;
+  unsubscribe: Unsubscribe;
 }
 
 export interface ManagerContext {

@@ -10,7 +10,7 @@ export interface FieldConfig extends AnyObject {
   clearOnUnmount?: boolean;
   initializeOnMount?: boolean;
   subscription?: Subscription;
-  internalId: number;
+  internalId: number | string;
   render: FieldRender;
 }
 

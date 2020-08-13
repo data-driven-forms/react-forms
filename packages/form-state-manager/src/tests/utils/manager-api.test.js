@@ -557,4 +557,54 @@ describe('managerApi', () => {
       });
     });
   });
+
+  describe('subscribe', () => {
+    it('should subscribe with name (no isField flag = no state)', () => {
+      const render = jest.fn();
+      const managerApi = createManagerApi({});
+
+      managerApi().subscribe({ name: 'field', render, subscription: { valid: true } });
+
+      expect(managerApi().fieldListeners).toEqual({
+        field: {
+          count: 1,
+          fields: {
+            field: {
+              render,
+              subscription: { valid: true }
+            }
+          }
+        }
+      });
+    });
+
+    it('should subscribe with name and internal id', () => {
+      const render = jest.fn();
+      const managerApi = createManagerApi({});
+
+      managerApi().subscribe({ name: 'field', internalId: 'id', render, subscription: { valid: true } });
+
+      expect(managerApi().fieldListeners).toEqual({
+        field: {
+          count: 1,
+          fields: {
+            id: {
+              render,
+              subscription: { valid: true }
+            }
+          }
+        }
+      });
+    });
+
+    it('should unsubscribe with name', () => {
+      const render = jest.fn();
+      const managerApi = createManagerApi({});
+
+      managerApi().subscribe({ name: 'field', render, subscription: { valid: true } });
+      managerApi().unsubscribe({ name: 'field' });
+
+      expect(managerApi().fieldListeners).toEqual({});
+    });
+  });
 });

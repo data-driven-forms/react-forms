@@ -6,7 +6,7 @@ import isEmpty from 'lodash/isEmpty';
 import convertType from './convert-type';
 import { FieldState } from '../types/manager-api';
 
-const generateId = () => Date.now() + Math.round(Math.random() * 100000);
+import generateId from './generate-id';
 
 const sanitizeValue = (event: OnChangeEvent): any => {
   if (Array.isArray(event)) {

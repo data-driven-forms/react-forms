@@ -13,16 +13,19 @@ const FormManagerContext = createContext<ManagerContextValue>({
   registerField: noop,
   unregisterField: noop,
   change: noop,
-  getState: () => ({}),
+  getState: createManagerApi({
+    onSubmit: noop
+  }),
   formOptions: createManagerApi({
-    onSubmit: noop,
-    clearOnUnmount: false
+    onSubmit: noop
   }),
   getFieldValue: noop,
   getFieldState: () => undefined,
   blur: noop,
   focus: noop,
-  initialValues: {}
+  initialValues: {},
+  subscribe: noop,
+  unsubscribe: noop
 });
 
 export default FormManagerContext;

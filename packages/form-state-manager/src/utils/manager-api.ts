@@ -1,7 +1,15 @@
 import { FormEvent } from 'react';
 import set from 'lodash/set';
 
-import CreateManagerApi, { ManagerState, ManagerApi, AsyncWatcher, AsyncWatcherRecord, FieldState, Callback } from '../types/manager-api';
+import CreateManagerApi, {
+  ManagerState,
+  ManagerApi,
+  AsyncWatcher,
+  AsyncWatcherRecord,
+  FieldState,
+  Callback,
+  SubscriberConfig
+} from '../types/manager-api';
 import AnyObject from '../types/any-object';
 import FieldConfig from '../types/field-config';
 import { formLevelValidator } from './validate';
@@ -9,6 +17,8 @@ import { Meta } from '../types/use-subscription';
 import get from 'lodash/get';
 
 const isLast = (fieldListeners: AnyObject, name: string) => fieldListeners?.[name]?.count === 1;
+
+const noState = (fieldListeners: AnyObject, name: string) => !fieldListeners?.[name]?.state;
 
 const addIfUnique = (array: Array<string>, item: string) => !array.includes(item) && array.push(item);
 
@@ -131,6 +141,8 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     updateValid,
     rerender,
     batch,
+    subscribe,
+    unsubscribe,
     registeredFields: [],
     fieldListeners: {},
     active: undefined,
@@ -208,18 +220,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
       state.values[field.name] = field.value || get(state.initialValues, field.name);
     }
 
-    state.fieldListeners[field.name] = {
-      ...state.fieldListeners[field.name],
-      state: state.fieldListeners[field.name]?.state || createField(field, state.values[field.name]),
-      count: (state.fieldListeners[field.name]?.count || 0) + 1,
-      fields: {
-        ...state.fieldListeners[field.name]?.fields,
-        [field.internalId]: {
-          render: field.render,
-          subscription: field.subscription
-        }
-      }
-    };
+    subscribe(field as SubscriberConfig, true);
   }
 
   function unregisterField(field: Omit<FieldConfig, 'render'>): void {
@@ -227,13 +228,12 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
 
     if (isLast(state.fieldListeners, field.name)) {
       state.registeredFields = state.registeredFields.filter((fieldName: string) => fieldName !== field.name);
-
       if (shouldExecute(clearOnUnmount, field.clearOnUnmount)) {
         state.values[field.name] = field.value;
       }
     }
 
-    state.fieldListeners[field.name].count = state.fieldListeners[field.name].count - 1;
+    unsubscribe(field as SubscriberConfig);
   }
 
   function setFieldState(name: string, mutateState: (prevState: FieldState) => FieldState): void {
@@ -254,7 +254,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     }
   }
 
-  function getState(): AnyObject {
+  function getState(): ManagerState {
     return {
       ...state,
       values: unFlatObject(state.values)
@@ -322,6 +322,35 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     shouldRerender && rerender(batched);
     batched = [];
     shouldRerender = false;
+  }
+
+  function subscribe(subscriberConfig: SubscriberConfig, isField?: boolean): void {
+    state.fieldListeners[subscriberConfig.name] = {
+      ...state.fieldListeners[subscriberConfig.name],
+      ...(isField
+        ? {
+            state:
+              state.fieldListeners[subscriberConfig.name]?.state || createField(subscriberConfig as FieldConfig, state.values[subscriberConfig.name])
+          }
+        : {}),
+      count: (state.fieldListeners[subscriberConfig.name]?.count || 0) + 1,
+      fields: {
+        ...state.fieldListeners[subscriberConfig.name]?.fields,
+        [subscriberConfig.internalId || subscriberConfig.name]: {
+          render: subscriberConfig.render,
+          subscription: subscriberConfig.subscription
+        }
+      }
+    };
+  }
+
+  function unsubscribe(subscriberConfig: Omit<SubscriberConfig, 'render'>): void {
+    if (isLast(state.fieldListeners, String(subscriberConfig.name)) && noState(state.fieldListeners, String(subscriberConfig.name))) {
+      delete state.fieldListeners[subscriberConfig.name];
+    } else {
+      state.fieldListeners[subscriberConfig.name].count = state.fieldListeners[subscriberConfig.name].count - 1;
+      delete state.fieldListeners[subscriberConfig.name].fields[subscriberConfig.internalId || subscriberConfig.name];
+    }
   }
 
   return managerApi;
