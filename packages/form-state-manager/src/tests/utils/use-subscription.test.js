@@ -54,9 +54,14 @@ describe('useSubscription', () => {
     const registerArguments = {
       name: 'spy',
       value: 'foo',
-      getFieldState: expect.any(Function),
       render: expect.any(Function),
-      internalId: expect.any(Number)
+      internalId: expect.any(Number),
+      state: {
+        internalId: expect.any(Number),
+        meta: expect.any(Object),
+        name: 'spy',
+        value: 'foo'
+      }
     };
     const unregisterArguments = {
       name: 'spy',

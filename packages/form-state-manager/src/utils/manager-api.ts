@@ -1,7 +1,7 @@
 import { FormEvent } from 'react';
 import set from 'lodash/set';
 
-import CreateManagerApi, { ManagerState, ManagerApi, AsyncWatcher, AsyncWatcherRecord } from '../types/manager-api';
+import CreateManagerApi, { ManagerState, ManagerApi, AsyncWatcher, AsyncWatcherRecord, UpdateFieldState, FieldState } from '../types/manager-api';
 import AnyObject from '../types/any-object';
 import FieldConfig from '../types/field-config';
 import { formLevelValidator } from './validate';
@@ -10,7 +10,8 @@ const isLast = (fieldListeners: AnyObject, name: string) => fieldListeners?.[nam
 
 const addIfUnique = (array: Array<string>, item: string) => !array.includes(item) && array.push(item);
 
-export const shouldExecute = (formLevel: boolean | undefined, fieldLevel: boolean | undefined) => (formLevel || fieldLevel) && fieldLevel !== false;
+export const shouldExecute = (formLevel: boolean | undefined, fieldLevel: boolean | undefined): boolean =>
+  Boolean((formLevel || fieldLevel) && fieldLevel !== false);
 
 type objectMapFunction = (value: any, key: any) => any;
 
@@ -86,6 +87,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     getState,
     getFieldValue,
     getFieldState,
+    setFieldState,
     registerAsyncValidator,
     updateError,
     updateValid,
@@ -131,6 +133,8 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     addIfUnique(state.dirtyFields, name);
     addIfUnique(state.dirtyFieldsSinceLastSubmit, name);
 
+    // TODO modify all affected field state variables
+    setFieldState(name, (prevState) => ({ ...prevState, value }));
     state.pristine = false;
 
     if (validate) {
@@ -163,7 +167,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
 
     state.fieldListeners[field.name] = {
       ...state.fieldListeners[field.name],
-      getFieldState: field.getFieldState,
+      state: field.state,
       count: (state.fieldListeners[field.name]?.count || 0) + 1,
       fields: {
         ...state.fieldListeners[field.name]?.fields,
@@ -180,7 +184,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     }
   }
 
-  function unregisterField(field: FieldConfig): void {
+  function unregisterField(field: Omit<FieldConfig, 'render'>): void {
     delete state.fieldListeners[field.name].fields[field.internalId];
 
     if (isLast(state.fieldListeners, field.name)) {
@@ -195,13 +199,21 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     }
   }
 
+  function setFieldState(name: string, mutateState: (prevState: FieldState) => FieldState): void {
+    if (state.fieldListeners[name]) {
+      const newState = mutateState(state.fieldListeners[name].state);
+      state.fieldListeners[name].state = newState;
+      Object.values(state.fieldListeners[name].fields).forEach(({ render }) => render());
+    }
+  }
+
   function getFieldValue(name: string): any {
     return state.values[name];
   }
 
   function getFieldState(name: string): AnyObject | undefined {
     if (state.fieldListeners[name]) {
-      return state.fieldListeners[name].getFieldState();
+      return state.fieldListeners[name].state;
     }
   }
 

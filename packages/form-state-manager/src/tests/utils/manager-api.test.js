@@ -169,7 +169,7 @@ describe('managerApi', () => {
     it('should clear on form level', () => {
       const managerApi = createManagerApi({ clearOnUnmount: true });
 
-      managerApi().registerField({ name: 'field' });
+      managerApi().registerField({ name: 'field', render: jest.fn() });
       managerApi().change('field', 'value');
 
       expect(managerApi().values).toEqual({ field: 'value' });
@@ -182,7 +182,7 @@ describe('managerApi', () => {
     it('should clear on field level', () => {
       const managerApi = createManagerApi({});
 
-      managerApi().registerField({ name: 'field' });
+      managerApi().registerField({ name: 'field', render: jest.fn() });
       managerApi().change('field', 'value');
 
       expect(managerApi().values).toEqual({ field: 'value' });
@@ -195,7 +195,7 @@ describe('managerApi', () => {
     it('should override form level by field', () => {
       const managerApi = createManagerApi({ clearOnUnmount: true });
 
-      managerApi().registerField({ name: 'field' });
+      managerApi().registerField({ name: 'field', render: jest.fn() });
       managerApi().change('field', 'value');
 
       expect(managerApi().values).toEqual({ field: 'value' });
@@ -208,7 +208,7 @@ describe('managerApi', () => {
     it('should clear on field level with cleared value', () => {
       const managerApi = createManagerApi({});
 
-      managerApi().registerField({ name: 'field' });
+      managerApi().registerField({ name: 'field', render: jest.fn() });
       managerApi().change('field', 'value');
 
       expect(managerApi().values).toEqual({ field: 'value' });
@@ -231,11 +231,11 @@ describe('managerApi', () => {
     const onSubmit = jest.fn();
     const managerApi = createManagerApi({ onSubmit });
     const { registerField, change } = managerApi();
-    registerField({ name: 'field' });
-    registerField({ name: 'nested.name' });
-    registerField({ name: 'nested.age' });
-    registerField({ name: 'array[0].name' });
-    registerField({ name: 'array[0].age' });
+    registerField({ name: 'field', render: jest.fn() });
+    registerField({ name: 'nested.name', render: jest.fn() });
+    registerField({ name: 'nested.age', render: jest.fn() });
+    registerField({ name: 'array[0].name', render: jest.fn() });
+    registerField({ name: 'array[0].age', render: jest.fn() });
 
     managerApi().registeredFields.forEach((key) => {
       change(key, key);
@@ -254,11 +254,11 @@ describe('managerApi', () => {
     const { registerField } = managerApi();
     registerField({
       name: 'field',
-      getFieldState: () => ({
+      state: {
         value: { foo: 'bar' },
         baz: 'quazz',
         meta: { pristine: true }
-      })
+      }
     });
     expect(managerApi().getFieldState('field')).toEqual(expectedValue);
   });
@@ -281,8 +281,8 @@ describe('managerApi', () => {
     it.skip('should initialize on form level using initialValues', () => {
       const managerApi = createManagerApi({ initializeOnMount: true, initialValues: { field: 'second' } });
 
-      managerApi().registerField({ name: 'field', value: 'first' });
-      managerApi().registerField({ name: 'field' });
+      managerApi().registerField({ name: 'field', value: 'first', render: jest.fn() });
+      managerApi().registerField({ name: 'field', render: jest.fn() });
 
       expect(managerApi().values).toEqual({ field: 'second' });
     });
@@ -290,8 +290,8 @@ describe('managerApi', () => {
     it('should initialize on form level', () => {
       const managerApi = createManagerApi({ initializeOnMount: true });
 
-      managerApi().registerField({ name: 'field', value: 'first' });
-      managerApi().registerField({ name: 'field', value: 'second' });
+      managerApi().registerField({ name: 'field', value: 'first', render: jest.fn() });
+      managerApi().registerField({ name: 'field', value: 'second', render: jest.fn() });
 
       expect(managerApi().values).toEqual({ field: 'second' });
     });
@@ -299,8 +299,8 @@ describe('managerApi', () => {
     it('should initialize on field level', () => {
       const managerApi = createManagerApi({});
 
-      managerApi().registerField({ name: 'field', value: 'first' });
-      managerApi().registerField({ name: 'field', value: 'second', initializeOnMount: true });
+      managerApi().registerField({ name: 'field', value: 'first', render: jest.fn() });
+      managerApi().registerField({ name: 'field', value: 'second', initializeOnMount: true, render: jest.fn() });
 
       expect(managerApi().values).toEqual({ field: 'second' });
     });
@@ -308,8 +308,8 @@ describe('managerApi', () => {
     it('should override form level by field', () => {
       const managerApi = createManagerApi({ initializeOnMount: true });
 
-      managerApi().registerField({ name: 'field', value: 'first' });
-      managerApi().registerField({ name: 'field', value: 'second', initializeOnMount: false });
+      managerApi().registerField({ name: 'field', value: 'first', render: jest.fn() });
+      managerApi().registerField({ name: 'field', value: 'second', initializeOnMount: false, render: jest.fn() });
 
       expect(managerApi().values).toEqual({ field: 'first' });
     });

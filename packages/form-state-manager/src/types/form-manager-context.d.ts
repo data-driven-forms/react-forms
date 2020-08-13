@@ -10,7 +10,7 @@ export interface Action extends AnyObject {
 export interface ManagerContextValue {
   handleSubmit: (event: FormEvent) => void;
   registerField: (fieldState: FieldConfig) => void;
-  unregisterField: (fieldState: FieldConfig) => void;
+  unregisterField: (fieldState: Omit<FieldConfig, 'render'>) => void;
   change: Change;
   getState: GetState;
   formOptions: ManagerApi;
