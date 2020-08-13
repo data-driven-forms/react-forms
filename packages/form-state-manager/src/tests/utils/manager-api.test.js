@@ -533,5 +533,28 @@ describe('managerApi', () => {
 
       expect(render.mock.calls.length).toEqual(0);
     });
+
+    describe('debug', () => {
+      it('debug state on rerender', () => {
+        const debug = jest.fn();
+        const initialValues = { some: { nested: 'pepa' } };
+
+        const managerApi = createManagerApi({ debug, initialValues });
+
+        expect(debug.mock.calls.length).toEqual(0);
+
+        managerApi().rerender(['validating']);
+        managerApi().rerender(['valid']);
+        managerApi().rerender(['values']);
+
+        expect(debug.mock.calls.length).toEqual(3);
+
+        expect(debug).toHaveBeenCalledWith(
+          expect.objectContaining({
+            values: initialValues
+          })
+        );
+      });
+    });
   });
 });
