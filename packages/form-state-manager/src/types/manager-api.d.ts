@@ -8,7 +8,6 @@ export interface FieldState {
   value: any;
   meta: Meta;
   name: string;
-  internalId: number;
 }
 
 export type UpdateFieldState = (name: string, mutateState: (prevState: FieldState) => FieldState) => void;
@@ -104,7 +103,6 @@ export interface ManagerState {
   validating: boolean;
   visited: AnyBooleanObject;
   initializeOnMount: boolean | undefined;
-  initializedFields: Array<string>;
 }
 
 export type ManagerApi = () => ManagerState;

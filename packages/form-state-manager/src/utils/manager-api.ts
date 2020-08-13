@@ -5,6 +5,8 @@ import CreateManagerApi, { ManagerState, ManagerApi, AsyncWatcher, AsyncWatcherR
 import AnyObject from '../types/any-object';
 import FieldConfig from '../types/field-config';
 import { formLevelValidator } from './validate';
+import { Meta } from '../types/use-subscription';
+import get from 'lodash/get';
 
 const isLast = (fieldListeners: AnyObject, name: string) => fieldListeners?.[name]?.count === 1;
 
@@ -82,6 +84,33 @@ export function unFlatObject(obj: AnyObject): AnyObject {
   return nestedStructure;
 }
 
+export const initialMeta = (initial: any): Meta => ({
+  active: false,
+  data: undefined,
+  dirty: false,
+  dirtySinceLastSubmit: false,
+  error: undefined,
+  initial,
+  invalid: false,
+  modified: false,
+  modifiedSinceLastSubmit: false,
+  pristine: true,
+  submitError: undefined,
+  submitFailed: false,
+  submitSucceeded: false,
+  submitting: false,
+  touched: false,
+  valid: true,
+  validating: false,
+  visited: false
+});
+
+const createField = (field: FieldConfig, value: any): FieldState => ({
+  name: field.name,
+  value,
+  meta: initialMeta(value)
+});
+
 const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initializeOnMount, validate, subscription, initialValues }) => {
   const state: ManagerState = {
     values: initialValues ? flatObject(initialValues) : {},
@@ -125,8 +154,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     valid: true,
     validating: false,
     visited: {},
-    initializeOnMount,
-    initializedFields: []
+    initializeOnMount
   };
   let inBatch = false;
   let batched: Array<string> = [];
@@ -169,13 +197,20 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     onSubmit(unFlatObject(state.values));
   }
 
+  function isInitialized(name: string): boolean {
+    return Object.prototype.hasOwnProperty.call(state.fieldListeners, name);
+  }
+
   function registerField(field: FieldConfig): void {
     addIfUnique(state.registeredFields, field.name);
-    addIfUnique(state.initializedFields, field.name);
+
+    if (shouldExecute(initializeOnMount, field.initializeOnMount) || !isInitialized(field.name)) {
+      state.values[field.name] = field.value || get(state.initialValues, field.name);
+    }
 
     state.fieldListeners[field.name] = {
       ...state.fieldListeners[field.name],
-      state: field.state,
+      state: state.fieldListeners[field.name]?.state || createField(field, state.values[field.name]),
       count: (state.fieldListeners[field.name]?.count || 0) + 1,
       fields: {
         ...state.fieldListeners[field.name]?.fields,
@@ -185,11 +220,6 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
         }
       }
     };
-
-    // TODO: initial only first time -> have field states in global?
-    if (shouldExecute(initializeOnMount, field.initializeOnMount) || !Object.prototype.hasOwnProperty.call(state.values, field.name)) {
-      state.values[field.name] = field.value;
-    }
   }
 
   function unregisterField(field: Omit<FieldConfig, 'render'>): void {
@@ -197,14 +227,13 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
 
     if (isLast(state.fieldListeners, field.name)) {
       state.registeredFields = state.registeredFields.filter((fieldName: string) => fieldName !== field.name);
-      delete state.fieldListeners[field.name];
 
       if (shouldExecute(clearOnUnmount, field.clearOnUnmount)) {
         state.values[field.name] = field.value;
       }
-    } else {
-      state.fieldListeners[field.name].count -= 1;
     }
+
+    state.fieldListeners[field.name].count = state.fieldListeners[field.name].count - 1;
   }
 
   function setFieldState(name: string, mutateState: (prevState: FieldState) => FieldState): void {

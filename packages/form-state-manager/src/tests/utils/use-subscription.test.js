@@ -3,8 +3,8 @@ import React, { useEffect } from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import FormManagerContext from '../../files/form-manager-context';
-import useSubscription, { initialMeta, checkEmpty } from '../../utils/use-subscription';
-import createManagerApi from '../../utils/manager-api';
+import useSubscription, { checkEmpty } from '../../utils/use-subscription';
+import createManagerApi, { initialMeta } from '../../utils/manager-api';
 
 const NonInputSpyComponent = ({ changeValue, onChange }) => <button id="fake-change" type="button" onClick={() => onChange(changeValue)}></button>;
 
@@ -55,13 +55,7 @@ describe('useSubscription', () => {
       name: 'spy',
       value: 'foo',
       render: expect.any(Function),
-      internalId: expect.any(Number),
-      state: {
-        internalId: expect.any(Number),
-        meta: expect.any(Object),
-        name: 'spy',
-        value: 'foo'
-      }
+      internalId: expect.any(Number)
     };
     const unregisterArguments = {
       name: 'spy',
@@ -126,57 +120,34 @@ describe('useSubscription', () => {
   describe('initialValues', () => {
     it('should set value from initialValues', () => {
       const managerApi = createManagerApi({ initialValues: { spy: 'value1' } });
-      const api = managerApi();
-      const registerSpy = jest.spyOn(api, 'registerField');
-      const registerArguments = expect.objectContaining({
-        name: 'spy',
-        value: 'value1'
-      });
 
       mount(<DummyComponent subscriberProps={{ name: 'spy' }} managerApi={managerApi} />);
 
-      expect(registerSpy).toHaveBeenCalledWith(registerArguments);
+      expect(managerApi().values.spy).toEqual('value1');
     });
 
     it('should set value from initialValue over initialValues', () => {
       const managerApi = createManagerApi({ initialValues: { spy: 'value1' } });
-      const api = managerApi();
-      const registerSpy = jest.spyOn(api, 'registerField');
-      const registerArguments = expect.objectContaining({
-        name: 'spy',
-        value: 'value2'
-      });
 
       mount(<DummyComponent subscriberProps={{ name: 'spy', initialValue: 'value2' }} managerApi={managerApi} />);
 
-      expect(registerSpy).toHaveBeenCalledWith(registerArguments);
+      expect(managerApi().values.spy).toEqual('value2');
     });
 
     it('should set nested value from initialValues', () => {
       const managerApi = createManagerApi({ initialValues: { spy: { nested: 'value123' } } });
-      const api = managerApi();
-      const registerSpy = jest.spyOn(api, 'registerField');
-      const registerArguments = expect.objectContaining({
-        name: 'spy.nested',
-        value: 'value123'
-      });
 
       mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
 
-      expect(registerSpy).toHaveBeenCalledWith(registerArguments);
+      expect(managerApi().values['spy.nested']).toEqual('value123');
     });
 
     it('should set value from initialValues only on first registration', async () => {
       const managerApi = createManagerApi({ initialValues: { spy: { nested: 'value123' } } });
-      const api = managerApi();
-      const registerSpy = jest.spyOn(api, 'registerField');
-      const registerArguments = expect.objectContaining({
-        name: 'spy.nested',
-        value: 'value123'
-      });
 
       let wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
-      expect(registerSpy).toHaveBeenCalledWith(registerArguments);
+
+      expect(managerApi().values['spy.nested']).toEqual('value123');
 
       await act(async () => {
         managerApi().change('spy.nested', 'different value');
@@ -187,20 +158,14 @@ describe('useSubscription', () => {
 
       wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
 
-      expect(managerApi().values).toEqual({ 'spy.nested': 'different value' });
+      expect(managerApi().values['spy.nested']).toEqual('different value');
     });
 
     it('should set value from initialValues when form.initializeOnTrue = true', async () => {
       const managerApi = createManagerApi({ initialValues: { spy: { nested: 'value123' } }, initializeOnMount: true });
-      const api = managerApi();
-      const registerSpy = jest.spyOn(api, 'registerField');
-      const registerArguments = expect.objectContaining({
-        name: 'spy.nested',
-        value: 'value123'
-      });
 
       let wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
-      expect(registerSpy).toHaveBeenCalledWith(registerArguments);
+      expect(managerApi().values['spy.nested']).toEqual('value123');
 
       await act(async () => {
         managerApi().change('spy.nested', 'different value');
@@ -216,15 +181,9 @@ describe('useSubscription', () => {
 
     it('should set value from initialValues when field.initializeOnTrue = true', async () => {
       const managerApi = createManagerApi({ initialValues: { spy: { nested: 'value123' } }, initializeOnMount: true });
-      const api = managerApi();
-      const registerSpy = jest.spyOn(api, 'registerField');
-      const registerArguments = expect.objectContaining({
-        name: 'spy.nested',
-        value: 'value123'
-      });
 
       let wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested', initializeOnMount: true }} managerApi={managerApi} />);
-      expect(registerSpy).toHaveBeenCalledWith(registerArguments);
+      expect(managerApi().values['spy.nested']).toEqual('value123');
 
       await act(async () => {
         managerApi().change('spy.nested', 'different value');
@@ -240,15 +199,9 @@ describe('useSubscription', () => {
 
     it('field.initializeOnMount has higher priority than form.initializeOnMount', async () => {
       const managerApi = createManagerApi({ initialValues: { spy: { nested: 'value123' } }, initializeOnMount: true });
-      const api = managerApi();
-      const registerSpy = jest.spyOn(api, 'registerField');
-      const registerArguments = expect.objectContaining({
-        name: 'spy.nested',
-        value: 'value123'
-      });
 
       let wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
-      expect(registerSpy).toHaveBeenCalledWith(registerArguments);
+      expect(managerApi().values['spy.nested']).toEqual('value123');
 
       await act(async () => {
         managerApi().change('spy.nested', 'different value');
