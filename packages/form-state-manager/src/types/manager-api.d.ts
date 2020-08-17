@@ -107,6 +107,8 @@ export interface ManagerState {
 
 export type ManagerApi = () => ManagerState;
 
+export type Debug = (formState: ManagerState) => void;
+
 export interface CreateManagerApiConfig {
   onSubmit: OnSubmit;
   clearOnUnmount?: boolean;
@@ -114,6 +116,7 @@ export interface CreateManagerApiConfig {
   validate?: FormValidator;
   subscription?: Subscription;
   initialValues?: AnyObject;
+  debug?: Debug;
 }
 
 declare type CreateManagerApi = (CreateManagerApiConfig: CreateManagerApiConfig) => ManagerApi;

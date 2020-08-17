@@ -13,9 +13,12 @@ const FormStateManager: React.ComponentType<FormStateManagerProps> = ({
   clearedValue,
   initialValues,
   initializeOnMount,
-  validate
+  validate,
+  debug
 }) => {
-  const { current: managerApi } = useRef(createManagerApi({ onSubmit, clearOnUnmount, validate, subscription, initialValues, initializeOnMount }));
+  const { current: managerApi } = useRef(
+    createManagerApi({ onSubmit, clearOnUnmount, validate, subscription, initialValues, initializeOnMount, debug })
+  );
 
   const { change, handleSubmit, registerField, unregisterField, getState, getFieldValue, getFieldState, blur, focus } = managerApi();
 

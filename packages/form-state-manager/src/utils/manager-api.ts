@@ -111,7 +111,7 @@ const createField = (field: FieldConfig, value: any): FieldState => ({
   meta: initialMeta(value)
 });
 
-const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initializeOnMount, validate, subscription, initialValues }) => {
+const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initializeOnMount, validate, subscription, initialValues, debug }) => {
   const state: ManagerState = {
     values: initialValues ? flatObject(initialValues) : {},
     errors: {},
@@ -307,6 +307,12 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
         });
       });
     }
+
+    debug &&
+      debug({
+        ...state,
+        values: unFlatObject(state.values)
+      });
   }
 
   function batch(callback: Callback): void {

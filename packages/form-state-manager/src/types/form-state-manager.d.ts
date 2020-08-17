@@ -1,6 +1,7 @@
 import AnyObject from './any-object';
 import { Subscription } from './use-subscription';
 import { FormValidator } from './validate';
+import { Debug } from './manager-api';
 
 export interface FormStateManagerProps {
   onSubmit: (values: AnyObject) => void;
@@ -11,6 +12,7 @@ export interface FormStateManagerProps {
   initialValues?: AnyObject;
   initializeOnMount?: boolean;
   validate?: FormValidator;
+  debug?: Debug;
 }
 
 export default FormStateManagerProps;
