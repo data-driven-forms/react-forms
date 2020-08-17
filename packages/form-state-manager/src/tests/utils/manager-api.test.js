@@ -663,27 +663,82 @@ describe('managerApi', () => {
       expect(render.mock.calls.length).toEqual(0);
     });
 
-    describe('debug', () => {
-      it('debug state on rerender', () => {
-        const debug = jest.fn();
-        const initialValues = { some: { nested: 'pepa' } };
+    it('supports nested batching', () => {
+      const managerApi = createManagerApi({});
 
-        const managerApi = createManagerApi({ debug, initialValues });
+      const render = jest.fn();
+      const field = { name: 'field1', internalId: '123', render, subscription: { values: true } };
 
-        expect(debug.mock.calls.length).toEqual(0);
+      const render2 = jest.fn();
+      const field2 = { name: 'field2', internalId: '234', render: render2, subscription: { valid: true } };
 
-        managerApi().rerender(['validating']);
-        managerApi().rerender(['valid']);
+      const render3 = jest.fn();
+      const field3 = { name: 'field3', internalId: '567', render: render3, subscription: { invalid: true } };
+
+      managerApi().registerField(field);
+      managerApi().registerField(field2);
+      managerApi().registerField(field3);
+
+      managerApi().batch(() => {
+        managerApi().rerender(['values']);
+        managerApi().rerender(['values']);
         managerApi().rerender(['values']);
 
-        expect(debug.mock.calls.length).toEqual(3);
+        managerApi().batch(() => {
+          managerApi().rerender(['values']);
+          managerApi().rerender(['values']);
+          managerApi().rerender(['values']);
+          managerApi().rerender(['valid']);
+          managerApi().rerender(['valid']);
+          managerApi().rerender(['valid']);
+          managerApi().rerender(['valid']);
+        });
 
-        expect(debug).toHaveBeenCalledWith(
-          expect.objectContaining({
-            values: initialValues
-          })
-        );
+        expect(render.mock.calls.length).toEqual(0);
+        expect(render2.mock.calls.length).toEqual(0);
+        expect(render3.mock.calls.length).toEqual(0);
+
+        managerApi().rerender(['valid']);
+        managerApi().rerender(['valid']);
+        managerApi().rerender(['valid']);
+        managerApi().rerender(['valid']);
       });
+
+      expect(render.mock.calls.length).toEqual(1);
+      expect(render2.mock.calls.length).toEqual(1);
+      expect(render3.mock.calls.length).toEqual(0); // it's not subscribed
+
+      render.mockReset();
+      render2.mockReset();
+
+      managerApi().rerender(['values']);
+
+      expect(render.mock.calls.length).toEqual(1);
+      expect(render2.mock.calls.length).toEqual(0); // clears batched subscription
+      expect(render3.mock.calls.length).toEqual(0);
+    });
+  });
+
+  describe('debug', () => {
+    it('debug state on rerender', () => {
+      const debug = jest.fn();
+      const initialValues = { some: { nested: 'pepa' } };
+
+      const managerApi = createManagerApi({ debug, initialValues });
+
+      expect(debug.mock.calls.length).toEqual(0);
+
+      managerApi().rerender(['validating']);
+      managerApi().rerender(['valid']);
+      managerApi().rerender(['values']);
+
+      expect(debug.mock.calls.length).toEqual(3);
+
+      expect(debug).toHaveBeenCalledWith(
+        expect.objectContaining({
+          values: initialValues
+        })
+      );
     });
   });
 
