@@ -235,6 +235,108 @@ describe('managerApi', () => {
     expect(managerApi().registeredFields).toEqual([]);
   });
 
+  describe('reset & restart', () => {
+    it('should reset form', () => {
+      const managerApi = createManagerApi({ initialValues: { field: '123' } });
+
+      managerApi().registerField({ name: 'field', render: jest.fn(), internalId: Date.now() });
+      managerApi().change('field', '345');
+
+      expect(managerApi().values.field).toEqual('345');
+      expect(managerApi().dirtyFields).toEqual({ field: true });
+      expect(managerApi().dirty).toEqual(true);
+      expect(managerApi().fieldListeners.field.state).toEqual({
+        name: 'field',
+        meta: initialMeta('123'),
+        value: '345'
+      });
+      expect(managerApi().registeredFields).toEqual(['field']);
+
+      managerApi().reset();
+
+      expect(managerApi().values.field).toEqual('123');
+      expect(managerApi().dirtyFields).toEqual({ field: false });
+      expect(managerApi().dirty).toEqual(false);
+      expect(managerApi().fieldListeners.field.state).toEqual({
+        name: 'field',
+        meta: initialMeta('123'),
+        value: '123'
+      });
+      expect(managerApi().registeredFields).toEqual(['field']);
+
+      managerApi().change('field', '345');
+      managerApi().reset({ field: '457' });
+
+      expect(managerApi().values.field).toEqual('457');
+      expect(managerApi().dirtyFields).toEqual({ field: false });
+      expect(managerApi().dirty).toEqual(false);
+      expect(managerApi().fieldListeners.field.state).toEqual({
+        name: 'field',
+        meta: initialMeta('457'),
+        value: '457'
+      });
+      expect(managerApi().registeredFields).toEqual(['field']);
+    });
+
+    it('should restart form with initialValues', () => {
+      const managerApi = createManagerApi({ initialValues: { field: '123' } });
+
+      managerApi().registerField({ name: 'field', render: jest.fn(), internalId: Date.now() });
+      managerApi().change('field', '345');
+
+      expect(managerApi().values.field).toEqual('345');
+      expect(managerApi().dirtyFields).toEqual({ field: true });
+      expect(managerApi().dirty).toEqual(true);
+      expect(managerApi().fieldListeners.field.state).toEqual({
+        name: 'field',
+        meta: initialMeta('123'),
+        value: '345'
+      });
+      expect(managerApi().registeredFields).toEqual(['field']);
+
+      managerApi().restart();
+
+      expect(managerApi().values.field).toEqual('123');
+      expect(managerApi().dirtyFields).toEqual({ field: false });
+      expect(managerApi().dirty).toEqual(false);
+      expect(managerApi().fieldListeners.field.state).toEqual({
+        name: 'field',
+        meta: initialMeta('123'),
+        value: '123'
+      });
+      expect(managerApi().registeredFields).toEqual(['field']);
+    });
+
+    it('resetFieldState', () => {
+      const managerApi = createManagerApi({ initialValues: { field: '123' } });
+
+      managerApi().registerField({ name: 'field', render: jest.fn(), internalId: Date.now() });
+      managerApi().change('field', '345');
+
+      expect(managerApi().values.field).toEqual('345');
+      expect(managerApi().dirtyFields).toEqual({ field: true });
+      expect(managerApi().dirty).toEqual(true);
+      expect(managerApi().fieldListeners.field.state).toEqual({
+        name: 'field',
+        meta: initialMeta('123'),
+        value: '345'
+      });
+      expect(managerApi().registeredFields).toEqual(['field']);
+
+      managerApi().resetFieldState('field');
+
+      expect(managerApi().values.field).toEqual('123');
+      expect(managerApi().dirtyFields).toEqual({ field: false });
+      // expect(managerApi().dirty).toEqual(false); TODO: recompute whole state
+      expect(managerApi().fieldListeners.field.state).toEqual({
+        name: 'field',
+        meta: initialMeta('123'),
+        value: '123'
+      });
+      expect(managerApi().registeredFields).toEqual(['field']);
+    });
+  });
+
   describe('clearOnUnmount', () => {
     it('should clear on form level', () => {
       const managerApi = createManagerApi({ clearOnUnmount: true });

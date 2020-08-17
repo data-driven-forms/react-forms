@@ -8,7 +8,8 @@ import CreateManagerApi, {
   AsyncWatcherRecord,
   FieldState,
   Callback,
-  SubscriberConfig
+  SubscriberConfig,
+  ManagerApiFunctions
 } from '../types/manager-api';
 import AnyObject from '../types/any-object';
 import FieldConfig from '../types/field-config';
@@ -115,17 +116,43 @@ export const initialMeta = (initial: any): Meta => ({
   visited: false
 });
 
-const createField = (field: FieldConfig, value: any): FieldState => ({
-  name: field.name,
+export const createField = (name: string, value: any): FieldState => ({
+  name,
   value,
   meta: initialMeta(value)
 });
 
+export const initialFormState = (initialValues?: AnyObject): Omit<ManagerState, ManagerApiFunctions> => ({
+  values: initialValues ? flatObject(initialValues) : {},
+  errors: {},
+  pristine: true,
+  registeredFields: [],
+  fieldListeners: {},
+  active: undefined,
+  dirty: false,
+  dirtyFields: {},
+  dirtyFieldsSinceLastSubmit: {},
+  dirtySinceLastSubmit: false,
+  error: undefined,
+  hasSubmitErrors: false,
+  hasValidationErrors: false,
+  initialValues: initialValues || {},
+  invalid: false,
+  modified: {},
+  modifiedSinceLastSubmit: false,
+  submitError: undefined,
+  submitErrors: undefined,
+  submitFailed: false,
+  submitSucceeded: false,
+  submitting: false,
+  touched: {},
+  valid: true,
+  validating: false,
+  visited: {}
+});
+
 const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initializeOnMount, validate, subscription, initialValues, debug }) => {
-  const state: ManagerState = {
-    values: initialValues ? flatObject(initialValues) : {},
-    errors: {},
-    pristine: true,
+  let state: ManagerState = {
     change,
     focus,
     blur,
@@ -143,30 +170,10 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     batch,
     subscribe,
     unsubscribe,
-    registeredFields: [],
-    fieldListeners: {},
-    active: undefined,
-    dirty: false,
-    dirtyFields: {},
-    dirtyFieldsSinceLastSubmit: {},
-    dirtySinceLastSubmit: false,
-    error: undefined,
-    hasSubmitErrors: false,
-    hasValidationErrors: false,
-    initialValues: initialValues || {},
-    invalid: false,
-    modified: {},
-    modifiedSinceLastSubmit: false,
-    submitError: undefined,
-    submitErrors: undefined,
-    submitFailed: false,
-    submitSucceeded: false,
-    submitting: false,
-    touched: {},
-    valid: true,
-    validating: false,
-    visited: {},
-    initializeOnMount
+    reset,
+    restart: () => reset(),
+    resetFieldState,
+    ...initialFormState(initialValues)
   };
   let inBatch = false;
   let batched: Array<string> = [];
@@ -212,6 +219,17 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     }
   }
 
+  function reset(resetInitialValues?: AnyObject) {
+    state = {
+      ...state,
+      ...initialFormState(resetInitialValues || initialValues),
+      fieldListeners: state.fieldListeners,
+      registeredFields: state.registeredFields
+    };
+
+    state.registeredFields.forEach(resetFieldState);
+  }
+
   function change(name: string, value?: any): void {
     state.values[name] = value;
     state.visited[name] = true;
@@ -225,6 +243,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     batch(() => {
       setFieldState(name, (prevState) => ({ ...prevState, value }));
       state.pristine = false;
+      state.dirty = true;
       validateField(name, value);
     });
 
@@ -384,7 +403,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
       ...(isField
         ? {
             state:
-              state.fieldListeners[subscriberConfig.name]?.state || createField(subscriberConfig as FieldConfig, state.values[subscriberConfig.name])
+              state.fieldListeners[subscriberConfig.name]?.state || createField(String(subscriberConfig.name), state.values[subscriberConfig.name])
           }
         : {}),
       count: (state.fieldListeners[subscriberConfig.name]?.count || 0) + 1,
@@ -406,6 +425,17 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
       state.fieldListeners[subscriberConfig.name].count = state.fieldListeners[subscriberConfig.name].count - 1;
       delete state.fieldListeners[subscriberConfig.name].fields[subscriberConfig.internalId || subscriberConfig.name];
     }
+  }
+
+  function resetFieldState(name: string): void {
+    // TODO: have initialValue and initialValues in one place
+    const initialValue = state.initialValues[name] || state.fieldListeners[name].state.meta.initial;
+    state.fieldListeners[name].state = createField(name, initialValue);
+    state.values[name] = initialValue;
+    state.visited[name] = false;
+    state.modified[name] = false;
+    state.dirtyFields[name] = false;
+    state.dirtyFieldsSinceLastSubmit[name] = false;
   }
 
   return managerApi;
