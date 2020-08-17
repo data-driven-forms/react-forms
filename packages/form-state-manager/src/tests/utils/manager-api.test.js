@@ -1,4 +1,4 @@
-import createManagerApi from '../../utils/manager-api';
+import createManagerApi, { initialMeta } from '../../utils/manager-api';
 
 describe('managerApi', () => {
   it('should create managerApi getter', () => {
@@ -110,7 +110,17 @@ describe('managerApi', () => {
     managerApi().registerField({ name: 'field', render, internalId });
 
     expect(managerApi().registeredFields).toEqual(['field']);
-    expect(managerApi().fieldListeners).toEqual({ field: { count: 1, fields: { [internalId]: { render, subscription: undefined } } } });
+    expect(managerApi().fieldListeners).toEqual({
+      field: {
+        count: 1,
+        state: {
+          name: 'field',
+          value: undefined,
+          meta: initialMeta(undefined)
+        },
+        fields: { [internalId]: { render, subscription: undefined } }
+      }
+    });
   });
 
   it('should registerField 2x', () => {
@@ -130,6 +140,11 @@ describe('managerApi', () => {
     expect(managerApi().fieldListeners).toEqual({
       field: {
         count: 2,
+        state: {
+          name: 'field',
+          value: undefined,
+          meta: initialMeta(undefined)
+        },
         fields: {
           [internalId]: { render, subscription: undefined },
           [internalId1]: { render: render1, subscription: subscription1 }
@@ -169,6 +184,11 @@ describe('managerApi', () => {
     expect(managerApi().fieldListeners).toEqual({
       field: {
         count: 2,
+        state: {
+          name: 'field',
+          value: undefined,
+          meta: initialMeta(undefined)
+        },
         fields: {
           [internalId]: { render, subscription: undefined },
           [internalId1]: { render: render1, subscription: subscription1 }
@@ -182,6 +202,11 @@ describe('managerApi', () => {
     expect(managerApi().fieldListeners).toEqual({
       field: {
         count: 1,
+        state: {
+          name: 'field',
+          value: undefined,
+          meta: initialMeta(undefined)
+        },
         fields: {
           [internalId1]: { render: render1, subscription: subscription1 }
         }
@@ -191,7 +216,17 @@ describe('managerApi', () => {
 
     managerApi().unregisterField({ name: 'field', internalId: internalId1 });
 
-    expect(managerApi().fieldListeners).toEqual({});
+    expect(managerApi().fieldListeners).toEqual({
+      field: {
+        count: 0,
+        state: {
+          name: 'field',
+          value: undefined,
+          meta: initialMeta(undefined)
+        },
+        fields: {}
+      }
+    });
     expect(managerApi().registeredFields).toEqual([]);
   });
 
@@ -277,18 +312,14 @@ describe('managerApi', () => {
   it('getField state should return correct field state', () => {
     const expectedValue = {
       value: { foo: 'bar' },
-      baz: 'quazz',
-      meta: { pristine: true }
+      name: 'field',
+      meta: initialMeta({ foo: 'bar' })
     };
     const managerApi = createManagerApi({});
     const { registerField } = managerApi();
     registerField({
       name: 'field',
-      state: {
-        value: { foo: 'bar' },
-        baz: 'quazz',
-        meta: { pristine: true }
-      }
+      value: { foo: 'bar' }
     });
     expect(managerApi().getFieldState('field')).toEqual(expectedValue);
   });
