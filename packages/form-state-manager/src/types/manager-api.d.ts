@@ -1,4 +1,4 @@
-import AnyObject from './any-object';
+import AnyObject, { AnyBooleanObject } from './any-object';
 import { FormEvent } from 'react';
 import FieldConfig from './field-config';
 import { FormValidator } from './validate';
@@ -81,25 +81,25 @@ export interface ManagerState {
   fieldListeners: FieldListeners;
   active: string | undefined;
   dirty: boolean;
-  dirtyFields: Array<string>;
-  dirtyFieldsSinceLastSubmit: Array<string>;
+  dirtyFields: AnyBooleanObject;
+  dirtyFieldsSinceLastSubmit: AnyBooleanObject;
   dirtySinceLastSubmit: boolean;
   error: any;
   hasSubmitErrors: boolean;
   hasValidationErrors: boolean;
   initialValues: AnyObject;
   invalid: boolean;
-  modified: AnyObject;
+  modified: AnyBooleanObject;
   modifiedSinceLastSubmit: boolean;
   submitError: any;
-  submitErrors: AnyObject;
+  submitErrors: AnyObject | undefined;
   submitFailed: boolean;
   submitSucceeded: boolean;
   submitting: boolean;
-  touched: AnyObject;
+  touched: AnyBooleanObject;
   valid: boolean;
   validating: boolean;
-  visited: AnyObject;
+  visited: AnyBooleanObject;
   initializeOnMount: boolean | undefined;
   initializedFields: Array<string>;
 }

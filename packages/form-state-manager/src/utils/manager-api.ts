@@ -73,6 +73,15 @@ export function flatObject(obj: AnyObject): AnyObject {
   return flatObject;
 }
 
+export function unFlatObject(obj: AnyObject): AnyObject {
+  const nestedStructure = {};
+  Object.entries(obj).forEach(([key, value]) => {
+    set(nestedStructure, key, value);
+  });
+
+  return nestedStructure;
+}
+
 const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initializeOnMount, validate, subscription, initialValues }) => {
   const state: ManagerState = {
     values: initialValues ? flatObject(initialValues) : {},
@@ -96,18 +105,18 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     fieldListeners: {},
     active: undefined,
     dirty: false,
-    dirtyFields: [],
-    dirtyFieldsSinceLastSubmit: [],
+    dirtyFields: {},
+    dirtyFieldsSinceLastSubmit: {},
     dirtySinceLastSubmit: false,
-    error: null,
+    error: undefined,
     hasSubmitErrors: false,
     hasValidationErrors: false,
     initialValues: initialValues || {},
     invalid: false,
     modified: {},
     modifiedSinceLastSubmit: false,
-    submitError: null,
-    submitErrors: {},
+    submitError: undefined,
+    submitErrors: undefined,
     submitFailed: false,
     submitSucceeded: false,
     submitting: false,
@@ -129,9 +138,8 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     state.modified[name] = true;
     state.modifiedSinceLastSubmit = true;
     state.dirtySinceLastSubmit = true;
-
-    addIfUnique(state.dirtyFields, name);
-    addIfUnique(state.dirtyFieldsSinceLastSubmit, name);
+    state.dirtyFields[name] = true;
+    state.dirtyFieldsSinceLastSubmit[name] = true;
 
     // TODO modify all affected field state variables
     setFieldState(name, (prevState) => ({ ...prevState, value }));
@@ -154,11 +162,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
 
   function handleSubmit(event: FormEvent): void {
     event.preventDefault();
-    const nestedStructure = {};
-    Object.entries(state.values).forEach(([key, value]) => {
-      set(nestedStructure, key, value);
-    });
-    onSubmit(nestedStructure);
+    onSubmit(unFlatObject(state.values));
   }
 
   function registerField(field: FieldConfig): void {
@@ -219,9 +223,8 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
 
   function getState(): AnyObject {
     return {
-      values: state.values,
-      pristine: state.pristine,
-      errors: state.errors
+      ...state,
+      values: unFlatObject(state.values)
     };
   }
 

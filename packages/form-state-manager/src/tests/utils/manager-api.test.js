@@ -53,13 +53,13 @@ describe('managerApi', () => {
     expect(managerApi().modified).toEqual({ foo: true });
     expect(managerApi().modifiedSinceLastSubmit).toEqual(true);
     expect(managerApi().dirtySinceLastSubmit).toEqual(true);
-    expect(managerApi().dirtyFields).toEqual(['foo']);
-    expect(managerApi().dirtyFieldsSinceLastSubmit).toEqual(['foo']);
+    expect(managerApi().dirtyFields).toEqual({ foo: true });
+    expect(managerApi().dirtyFieldsSinceLastSubmit).toEqual({ foo: true });
     expect(managerApi().pristine).toEqual(false);
 
     managerApi().change('foo', 'bar');
-    expect(managerApi().dirtyFields).toEqual(['foo']);
-    expect(managerApi().dirtyFieldsSinceLastSubmit).toEqual(['foo']);
+    expect(managerApi().dirtyFields).toEqual({ foo: true });
+    expect(managerApi().dirtyFieldsSinceLastSubmit).toEqual({ foo: true });
   });
 
   it('should change different api instance separatelly', () => {
@@ -69,6 +69,36 @@ describe('managerApi', () => {
     secondManagerApi().change('baz', 'quazz');
     expect(firstManagerApi().values).toEqual({ foo: 'bar' });
     expect(secondManagerApi().values).toEqual({ baz: 'quazz' });
+  });
+
+  it('should getState', () => {
+    const managerApi = createManagerApi({ initialValues: { some: { nested: 'value' } } });
+
+    expect(managerApi().getState()).toMatchObject({
+      active: undefined,
+      dirty: false,
+      dirtyFields: {},
+      dirtyFieldsSinceLastSubmit: {},
+      dirtySinceLastSubmit: false,
+      error: undefined,
+      errors: {},
+      hasSubmitErrors: false,
+      hasValidationErrors: false,
+      initialValues: { some: { nested: 'value' } },
+      invalid: false,
+      modified: {},
+      pristine: true,
+      submitError: undefined,
+      submitErrors: undefined,
+      submitFailed: false,
+      submitSucceeded: false,
+      submitting: false,
+      touched: {},
+      valid: true,
+      validating: false,
+      values: { some: { nested: 'value' } },
+      visited: {}
+    });
   });
 
   it('should registerField', () => {
