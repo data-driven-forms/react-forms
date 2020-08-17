@@ -399,6 +399,47 @@ describe('useSubscription', () => {
         'sync-validate': undefined
       });
     });
+
+    it('should correctly set validaintg flag on multiple validate calls', async () => {
+      expect.assertions(4);
+      jest.useFakeTimers();
+      const asyncValidator = jest
+        .fn()
+        .mockImplementationOnce(() => new Promise((res) => setTimeout(() => res('slow'), 500)))
+        .mockImplementationOnce(() => new Promise((res) => setTimeout(() => res('fast'), 250)));
+      const managerApi = createManagerApi({});
+      const subscriberProps = {
+        name: 'async-validate',
+        validate: asyncValidator
+      };
+      const wrapper = mount(<DummyComponent managerApi={managerApi} subscriberProps={subscriberProps} />);
+      const spy = wrapper.find(SpyComponent);
+      const input = wrapper.find('input');
+      expect(spy.prop('meta')).toEqual(expect.objectContaining({ validating: false, valid: true }));
+
+      input.simulate('change', { target: { value: 'foo' } });
+      /**
+       * All validations are pending
+       */
+      await act(async () => {
+        jest.advanceTimersByTime(10);
+      });
+      expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ validating: true, valid: true }));
+      /**
+       * Second faster async validation has finished
+       */
+      await act(async () => {
+        jest.advanceTimersByTime(290);
+      });
+      expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ validating: true, valid: true }));
+      /**
+       * First slow async validation has finished
+       */
+      await act(async () => {
+        jest.advanceTimersByTime(200);
+      });
+      expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ validating: false, valid: true }));
+    });
   });
 
   describe('clearedValue', () => {
