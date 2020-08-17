@@ -29,6 +29,9 @@ export type Batch = (callback: Callback) => void;
 export type Render = () => void;
 export type Subscribe = (subscriberConfig: SubscriberConfig) => void;
 export type Unsubscribe = (subscriberConfig: Omit<SubscriberConfig, 'render'>) => void;
+export type Reset = (initialValues?: AnyObject) => void;
+export type Restart = () => void;
+export type ResetFieldState = (name: string) => void;
 
 export interface AsyncWatcherRecord {
   [key: number]: Promise<unknown>;
@@ -65,6 +68,28 @@ export interface FieldListeners {
   [key: string]: FieldListener;
 }
 
+export type ManagerApiFunctions =
+  | 'change'
+  | 'focus'
+  | 'blur'
+  | 'handleSubmit'
+  | 'registerField'
+  | 'unregisterField'
+  | 'getState'
+  | 'getFieldValue'
+  | 'getFieldState'
+  | 'setFieldState'
+  | 'registerAsyncValidator'
+  | 'updateError'
+  | 'updateValid'
+  | 'rerender'
+  | 'batch'
+  | 'subscribe'
+  | 'unsubscribe'
+  | 'reset'
+  | 'restart'
+  | 'resetFieldState';
+
 export interface ManagerState {
   values: AnyObject;
   errors: AnyObject;
@@ -86,6 +111,9 @@ export interface ManagerState {
   batch: Batch;
   subscribe: Subscribe;
   unsubscribe: Unsubscribe;
+  reset: Reset;
+  restart: Restart;
+  resetFieldState: ResetFieldState;
   registeredFields: Array<string>;
   fieldListeners: FieldListeners;
   active: string | undefined;
@@ -109,7 +137,6 @@ export interface ManagerState {
   valid: boolean;
   validating: boolean;
   visited: AnyBooleanObject;
-  initializeOnMount: boolean | undefined;
 }
 
 export type ManagerApi = () => ManagerState;
