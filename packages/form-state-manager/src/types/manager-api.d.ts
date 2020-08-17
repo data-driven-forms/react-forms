@@ -17,7 +17,7 @@ export type Change = (name: string, value?: any) => void;
 export type HandleSubmit = (event: FormEvent) => void;
 export type RegisterField = (field: FieldConfig) => void;
 export type UnregisterField = (field: Omit<FieldConfig, 'render'>) => void;
-export type GetState = () => AnyObject;
+export type GetState = () => ManagerState;
 export type OnSubmit = (values: AnyObject) => void;
 export type GetFieldValue = (name: string) => any;
 export type GetFieldState = (name: string) => AnyObject | undefined;
@@ -26,6 +26,9 @@ export type Blur = (name: string) => void;
 export type UpdateValid = (valid: boolean) => void;
 export type UpdateError = (name: string, error: string | undefined) => void;
 export type Batch = (callback: Callback) => void;
+export type Render = () => void;
+export type Subscribe = (subscriberConfig: SubscriberConfig) => void;
+export type Unsubscribe = (subscriberConfig: Omit<SubscriberConfig, 'render'>) => void;
 
 export interface AsyncWatcherRecord {
   [key: number]: Promise<unknown>;
@@ -47,7 +50,7 @@ export interface ListenerField {
 }
 
 export interface FieldListenerFields {
-  [key: number]: ListenerField;
+  [key: string]: ListenerField;
 }
 
 export interface FieldListener {
@@ -79,6 +82,8 @@ export interface ManagerState {
   updateValid: UpdateValid;
   rerender: Rerender;
   batch: Batch;
+  subscribe: Subscribe;
+  unsubscribe: Unsubscribe;
   registeredFields: Array<string>;
   fieldListeners: FieldListeners;
   active: string | undefined;
@@ -108,6 +113,13 @@ export interface ManagerState {
 export type ManagerApi = () => ManagerState;
 
 export type Debug = (formState: ManagerState) => void;
+
+export interface SubscriberConfig extends AnyObject {
+  name: string | number;
+  subscription?: Subscription;
+  render: FieldRender;
+  internalId?: number | string;
+}
 
 export interface CreateManagerApiConfig {
   onSubmit: OnSubmit;
