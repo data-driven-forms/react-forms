@@ -112,6 +112,7 @@ describe('managerApi', () => {
     expect(managerApi().registeredFields).toEqual(['field']);
     expect(managerApi().fieldListeners).toEqual({
       field: {
+        asyncWatcher: { registerValidator: expect.any(Function) },
         count: 1,
         state: {
           name: 'field',
@@ -139,6 +140,7 @@ describe('managerApi', () => {
     expect(managerApi().registeredFields).toEqual(['field']);
     expect(managerApi().fieldListeners).toEqual({
       field: {
+        asyncWatcher: { registerValidator: expect.any(Function) },
         count: 2,
         state: {
           name: 'field',
@@ -183,6 +185,7 @@ describe('managerApi', () => {
 
     expect(managerApi().fieldListeners).toEqual({
       field: {
+        asyncWatcher: { registerValidator: expect.any(Function) },
         count: 2,
         state: {
           name: 'field',
@@ -201,6 +204,7 @@ describe('managerApi', () => {
 
     expect(managerApi().fieldListeners).toEqual({
       field: {
+        asyncWatcher: { registerValidator: expect.any(Function) },
         count: 1,
         state: {
           name: 'field',
@@ -219,6 +223,7 @@ describe('managerApi', () => {
     expect(managerApi().fieldListeners).toEqual({
       field: {
         count: 0,
+        asyncWatcher: { registerValidator: expect.any(Function) },
         state: {
           name: 'field',
           value: undefined,

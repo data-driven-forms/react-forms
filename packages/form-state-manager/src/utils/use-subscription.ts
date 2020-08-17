@@ -1,10 +1,8 @@
 import { useEffect, useContext, useReducer, useState } from 'react';
 import FormManagerContext from '../files/form-manager-context';
-import UseSubscription, { OnChangeEvent, SubscribtionData, Meta } from '../types/use-subscription';
-import { fieldLevelValidator, isPromise } from './validate';
+import UseSubscription, { OnChangeEvent, SubscribtionData } from '../types/use-subscription';
 import isEmpty from 'lodash/isEmpty';
 import convertType from './convert-type';
-import { FieldState } from '../types/manager-api';
 
 import generateId from './generate-id';
 
@@ -67,6 +65,7 @@ const useSubscription = ({
       value: initialValue,
       initializeOnMount,
       render,
+      validate,
       subscription,
       internalId
     });
@@ -74,23 +73,6 @@ const useSubscription = ({
     return internalId;
   });
   const state = formOptions().getFieldState(name);
-  const setState = (mutateState: (prevState: FieldState) => FieldState) => formOptions().setFieldState(name, mutateState);
-
-  const handleError = (isValid: boolean, error: string | undefined = undefined): void => {
-    setState((prev: FieldState) => ({
-      ...prev,
-      meta: {
-        ...prev.meta,
-        error,
-        valid: isValid,
-        invalid: !isValid,
-        validating: false
-      }
-    }));
-
-    // TODO lift error handling to manager API to avoid multiple re-renders
-    formOptions().updateError(name, isValid ? undefined : error);
-  };
 
   const finalClearedValue = Object.prototype.hasOwnProperty.call(props, 'clearedValue') ? props.clearedValue : rest.clearedValue;
 
@@ -110,24 +92,6 @@ const useSubscription = ({
     }
 
     change(name, sanitizedValue);
-    // TODO Memoize validation results
-    if (validate) {
-      const error = fieldLevelValidator(validate, sanitizedValue, formOptions().values, formOptions);
-      if (isPromise(error)) {
-        setState((prevState: FieldState) => ({ ...prevState, meta: { ...prevState.meta, validating: true } }));
-        const asyncError = error as Promise<string | undefined>;
-        asyncError.then(() => handleError(true)).catch((error) => handleError(false, error));
-      } else {
-        const syncError = error as string | undefined;
-        if (error) {
-          handleError(false, syncError);
-        } else if (state?.meta.valid === false) {
-          handleError(true);
-        }
-      }
-    }
-
-    setState((prevState: FieldState) => ({ ...prevState, value: getFieldValue(name) }));
   };
 
   useEffect(

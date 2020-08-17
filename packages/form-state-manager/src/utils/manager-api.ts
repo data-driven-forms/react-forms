@@ -12,9 +12,9 @@ import CreateManagerApi, {
 } from '../types/manager-api';
 import AnyObject from '../types/any-object';
 import FieldConfig from '../types/field-config';
-import { formLevelValidator } from './validate';
 import { Meta } from '../types/use-subscription';
 import get from 'lodash/get';
+import { formLevelValidator, isPromise } from './validate';
 
 const isLast = (fieldListeners: AnyObject, name: string) => fieldListeners?.[name]?.count === 1;
 
@@ -176,6 +176,42 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
 
   const managerApi: ManagerApi = () => state;
 
+  function handleFieldError(name: string, isValid: boolean, error: string | undefined = undefined) {
+    setFieldState(name, (prev: FieldState) => ({
+      ...prev,
+      meta: {
+        ...prev.meta,
+        error,
+        valid: isValid,
+        invalid: !isValid,
+        validating: false
+      }
+    }));
+
+    updateError(name, isValid ? undefined : error);
+  }
+
+  function validateField(name: string, value: any) {
+    // TODO Memoize validation results
+    if (Object.prototype.hasOwnProperty.call(state.fieldListeners, name) && typeof state.fieldListeners[name].validate === 'function') {
+      const listener = state.fieldListeners[name].asyncWatcher;
+      const result = state.fieldListeners[name].validate!(value, state.values);
+      if (isPromise(result)) {
+        const asyncResult = result as Promise<string | undefined>;
+        listener.registerValidator(asyncResult);
+        return asyncResult.then(() => handleFieldError(name, true)).catch((error) => handleFieldError(name, false, error));
+      }
+
+      const syncError = result as string | undefined;
+      const { valid, validating } = state.fieldListeners[name].state.meta;
+      if (result) {
+        handleFieldError(name, false, syncError);
+      } else if (valid === false && validating === false) {
+        handleFieldError(name, true);
+      }
+    }
+  }
+
   function change(name: string, value?: any): void {
     state.values[name] = value;
     state.visited[name] = true;
@@ -186,8 +222,11 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     state.dirtyFieldsSinceLastSubmit[name] = true;
 
     // TODO modify all affected field state variables
-    setFieldState(name, (prevState) => ({ ...prevState, value }));
-    state.pristine = false;
+    batch(() => {
+      setFieldState(name, (prevState) => ({ ...prevState, value }));
+      state.pristine = false;
+      validateField(name, value);
+    });
 
     if (validate) {
       formLevelValidator(validate, state.values, managerApi);
@@ -221,6 +260,15 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     }
 
     subscribe(field as SubscriberConfig, true);
+
+    if (state.fieldListeners[field.name]?.count === 1) {
+      const updateFieldValidating = (validating: boolean) => {
+        state.fieldListeners[field.name].state.meta.validating = validating;
+      };
+
+      const fieldAsyncWatcher = asyncWatcher(updateFieldValidating, () => undefined);
+      state.fieldListeners[field.name].asyncWatcher = fieldAsyncWatcher;
+    }
   }
 
   function unregisterField(field: Omit<FieldConfig, 'render'>): void {
@@ -334,6 +382,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
           }
         : {}),
       count: (state.fieldListeners[subscriberConfig.name]?.count || 0) + 1,
+      validate: subscriberConfig.validate,
       fields: {
         ...state.fieldListeners[subscriberConfig.name]?.fields,
         [subscriberConfig.internalId || subscriberConfig.name]: {
