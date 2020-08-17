@@ -110,7 +110,7 @@ const useSubscription = ({
     }
   };
 
-  return [formOptions().getFieldValue(name), onChange, () => focus(name), () => blur(name), state?.meta];
+  return [formOptions().getFieldValue(name), onChange, () => focus(name), () => blur(name), state!.meta];
 };
 
 export default useSubscription;

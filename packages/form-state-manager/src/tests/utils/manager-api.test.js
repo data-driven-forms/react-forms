@@ -981,4 +981,149 @@ describe('managerApi', () => {
       });
     });
   });
+
+  describe('Combine form and field level validation', () => {
+    const formLevelValidate = (values) => (values.foo === 'foo' ? { foo: 'form-error' } : undefined);
+    const fieldLevelValidate = (value) => (value === 'bar' ? 'field-error' : undefined);
+
+    it('should fail sync form level, but pass sync field level validation', () => {
+      const managerApi = createManagerApi({ validate: formLevelValidate });
+      const { change, registerField, getFieldState } = managerApi();
+      const getErrorState = () => {
+        let { valid, invalid, validating, errors } = managerApi();
+        let {
+          meta: { error: fieldError, valid: fieldValid, validating: fieldValidating, invalid: fieldInvalid }
+        } = getFieldState('foo');
+
+        return { valid, invalid, validating, errors, fieldError, fieldValid, fieldValidating, fieldInvalid };
+      };
+
+      registerField({ name: 'foo', validate: fieldLevelValidate, render: jest.fn() });
+
+      change('foo', 'foo');
+      let expectedResult = getErrorState();
+      expect(expectedResult).toEqual({
+        valid: false,
+        invalid: true,
+        validating: false,
+        errors: { foo: 'form-error' },
+        fieldError: 'form-error',
+        fieldValid: false,
+        fieldInvalid: true,
+        fieldValidating: false
+      });
+    });
+
+    it('should initialy fail sync form level, but pass on second run validation', () => {
+      const managerApi = createManagerApi({ validate: formLevelValidate });
+      const { change, registerField, getFieldState } = managerApi();
+      const getErrorState = () => {
+        let { valid, invalid, validating, errors } = managerApi();
+        let {
+          meta: { error: fieldError, valid: fieldValid, validating: fieldValidating, invalid: fieldInvalid }
+        } = getFieldState('foo');
+
+        return { valid, invalid, validating, errors, fieldError, fieldValid, fieldValidating, fieldInvalid };
+      };
+
+      registerField({ name: 'foo', validate: fieldLevelValidate, render: jest.fn() });
+
+      change('foo', 'foo');
+
+      let expectedResult = getErrorState();
+      expect(expectedResult).toEqual({
+        valid: false,
+        invalid: true,
+        validating: false,
+        errors: { foo: 'form-error' },
+        fieldError: 'form-error',
+        fieldValid: false,
+        fieldInvalid: true,
+        fieldValidating: false
+      });
+
+      change('foo', 'ok');
+
+      expectedResult = getErrorState();
+      expect(expectedResult).toEqual({
+        valid: true,
+        invalid: false,
+        validating: false,
+        errors: {},
+        fieldError: undefined,
+        fieldValid: true,
+        fieldInvalid: false,
+        fieldValidating: false
+      });
+    });
+
+    it('should pass sync form level, but fail sync field level validation', () => {
+      const managerApi = createManagerApi({ validate: formLevelValidate });
+      const { change, registerField, getFieldState } = managerApi();
+      const getErrorState = () => {
+        let { valid, invalid, validating, errors } = managerApi();
+        let {
+          meta: { error: fieldError, valid: fieldValid, validating: fieldValidating, invalid: fieldInvalid }
+        } = getFieldState('foo');
+
+        return { valid, invalid, validating, errors, fieldError, fieldValid, fieldValidating, fieldInvalid };
+      };
+
+      registerField({ name: 'foo', validate: fieldLevelValidate, render: jest.fn() });
+
+      change('foo', 'bar');
+      let expectedResult = getErrorState();
+      expect(expectedResult).toEqual({
+        valid: false,
+        invalid: true,
+        validating: false,
+        errors: { foo: 'field-error' },
+        fieldError: 'field-error',
+        fieldValid: false,
+        fieldInvalid: true,
+        fieldValidating: false
+      });
+    });
+
+    it('should fail first sync field level validation, but pass on second round', () => {
+      const managerApi = createManagerApi({ validate: formLevelValidate });
+      const { change, registerField, getFieldState } = managerApi();
+      const getErrorState = () => {
+        let { valid, invalid, validating, errors } = managerApi();
+        let {
+          meta: { error: fieldError, valid: fieldValid, validating: fieldValidating, invalid: fieldInvalid }
+        } = getFieldState('foo');
+
+        return { valid, invalid, validating, errors, fieldError, fieldValid, fieldValidating, fieldInvalid };
+      };
+
+      registerField({ name: 'foo', validate: fieldLevelValidate, render: jest.fn() });
+
+      change('foo', 'bar');
+      let expectedResult = getErrorState();
+      expect(expectedResult).toEqual({
+        valid: false,
+        invalid: true,
+        validating: false,
+        errors: { foo: 'field-error' },
+        fieldError: 'field-error',
+        fieldValid: false,
+        fieldInvalid: true,
+        fieldValidating: false
+      });
+
+      change('foo', 'ok');
+      expectedResult = getErrorState();
+      expect(expectedResult).toEqual({
+        valid: true,
+        invalid: false,
+        validating: false,
+        errors: {},
+        fieldError: undefined,
+        fieldValid: true,
+        fieldInvalid: false,
+        fieldValidating: false
+      });
+    });
+  });
 });

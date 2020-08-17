@@ -9,7 +9,8 @@ import CreateManagerApi, {
   FieldState,
   Callback,
   SubscriberConfig,
-  ManagerApiFunctions
+  ManagerApiFunctions,
+  ExtendedFieldState
 } from '../types/manager-api';
 import AnyObject from '../types/any-object';
 import FieldConfig from '../types/field-config';
@@ -233,6 +234,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
 
   function validateForm(validate: FormValidator) {
     const result = formLevelValidator(validate, state.values, managerApi);
+    const currentInvalidFields = Object.keys(state.errors);
     if (isPromise(result)) {
       const asyncResult = result as Promise<FormLevelError>;
       return asyncResult
@@ -242,6 +244,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
             state.valid = true;
             state.invalid = false;
             state.error = undefined;
+            revalidateFields(currentInvalidFields);
           }
         })
         .catch((errors) => {
@@ -253,6 +256,9 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
 
     const syncError = result as FormLevelError | undefined;
     if (syncError) {
+      Object.keys(syncError).forEach((name) => {
+        handleFieldError(name, false, syncError[name]);
+      });
       state.errors = syncError;
       state.valid = false;
       state.invalid = true;
@@ -261,7 +267,17 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
       state.valid = true;
       state.invalid = false;
       state.error = undefined;
+      /**
+       * Fields have to be revalidated on field level to synchronize the form and field errors
+       */
+      revalidateFields(currentInvalidFields);
     }
+  }
+
+  function revalidateFields(fields: string[]) {
+    fields.forEach((name) => {
+      validateField(name, state.values[name]);
+    });
   }
 
   function change(name: string, value?: any): void {
@@ -349,7 +365,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     return state.values[name];
   }
 
-  function getFieldState(name: string): AnyObject | undefined {
+  function getFieldState(name: string): ExtendedFieldState | undefined {
     if (state.fieldListeners[name]) {
       return {
         ...state.fieldListeners[name].state,
@@ -377,7 +393,18 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
   }
 
   function updateError(name: string, error: string | undefined = undefined): void {
-    state.errors[name] = error;
+    if (error) {
+      state.errors[name] = error;
+      state.valid = false;
+      state.invalid = true;
+    } else {
+      delete state.errors[name];
+    }
+
+    if (Object.keys(state.errors).length === 0) {
+      state.valid = true;
+      state.invalid = false;
+    }
   }
 
   function registerAsyncValidator(validator: Promise<unknown>) {
