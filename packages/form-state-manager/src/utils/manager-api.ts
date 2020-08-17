@@ -96,7 +96,7 @@ export function unFlatObject(obj: AnyObject): AnyObject {
 
 export const initialMeta = (initial: any): Meta => ({
   active: false,
-  data: undefined,
+  data: {},
   dirty: false,
   dirtySinceLastSubmit: false,
   error: undefined,
@@ -298,7 +298,13 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
 
   function getFieldState(name: string): AnyObject | undefined {
     if (state.fieldListeners[name]) {
-      return state.fieldListeners[name].state;
+      return {
+        ...state.fieldListeners[name].state,
+        ...state.fieldListeners[name].state.meta,
+        change: (value: any) => change(name, value),
+        blur: () => change(name),
+        focus: () => change(name)
+      };
     }
   }
 
