@@ -168,7 +168,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     visited: {},
     initializeOnMount
   };
-  let inBatch = false;
+  let inBatch = 0;
   let batched: Array<string> = [];
   let shouldRerender = false;
 
@@ -337,7 +337,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
   }
 
   function rerender(subscribeTo?: Array<string>) {
-    if (inBatch) {
+    if (inBatch > 0) {
       subscribeTo && subscribeTo.forEach((to) => addIfUnique(batched, to));
       shouldRerender = true;
     } else {
@@ -370,12 +370,14 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
   }
 
   function batch(callback: Callback): void {
-    inBatch = true;
+    inBatch = inBatch + 1;
     callback();
-    inBatch = false;
-    shouldRerender && rerender(batched);
-    batched = [];
-    shouldRerender = false;
+    inBatch = inBatch - 1;
+    if (inBatch === 0) {
+      shouldRerender && rerender(batched);
+      batched = [];
+      shouldRerender = false;
+    }
   }
 
   function subscribe(subscriberConfig: SubscriberConfig, isField?: boolean): void {
