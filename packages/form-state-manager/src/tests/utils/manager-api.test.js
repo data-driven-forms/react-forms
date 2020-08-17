@@ -318,7 +318,29 @@ describe('managerApi', () => {
     const expectedValue = {
       value: { foo: 'bar' },
       name: 'field',
-      meta: initialMeta({ foo: 'bar' })
+      meta: initialMeta({ foo: 'bar' }),
+      active: false,
+      blur: expect.any(Function),
+      change: expect.any(Function),
+      data: {},
+      dirty: false,
+      dirtySinceLastSubmit: false,
+      error: undefined,
+      focus: expect.any(Function),
+      initial: { foo: 'bar' },
+      invalid: false,
+      // length: undefined, TODO: array
+      modified: false,
+      pristine: true,
+      submitError: undefined,
+      submitFailed: false,
+      submitSucceeded: false,
+      submitting: false,
+      touched: false,
+      valid: true,
+      validating: false,
+      visited: false,
+      modifiedSinceLastSubmit: false
     };
     const managerApi = createManagerApi({});
     const { registerField } = managerApi();
