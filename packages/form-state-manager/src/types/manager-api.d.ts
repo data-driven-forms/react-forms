@@ -13,6 +13,7 @@ export interface FieldState {
 
 export type UpdateFieldState = (name: string, mutateState: (prevState: FieldState) => FieldState) => void;
 
+export type Callback = () => void;
 export type Change = (name: string, value?: any) => void;
 export type HandleSubmit = (event: FormEvent) => void;
 export type RegisterField = (field: FieldConfig) => void;
@@ -25,6 +26,7 @@ export type Focus = (name: string) => void;
 export type Blur = (name: string) => void;
 export type UpdateValid = (valid: boolean) => void;
 export type UpdateError = (name: string, error: string | undefined) => void;
+export type Batch = (callback: Callback) => void;
 
 export interface AsyncWatcherRecord {
   [key: number]: Promise<unknown>;
@@ -77,6 +79,7 @@ export interface ManagerState {
   updateError: UpdateError;
   updateValid: UpdateValid;
   rerender: Rerender;
+  batch: Batch;
   registeredFields: Array<string>;
   fieldListeners: FieldListeners;
   active: string | undefined;

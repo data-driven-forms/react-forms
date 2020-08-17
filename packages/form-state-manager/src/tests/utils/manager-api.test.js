@@ -448,4 +448,59 @@ describe('managerApi', () => {
       expect(renderField2).toHaveBeenCalled();
     });
   });
+
+  describe('batch', () => {
+    it('should render only once', () => {
+      const managerApi = createManagerApi({});
+
+      const render = jest.fn();
+      const field = { name: 'field1', internalId: '123', render, subscription: { values: true } };
+
+      const render2 = jest.fn();
+      const field2 = { name: 'field2', internalId: '234', render: render2, subscription: { valid: true } };
+
+      const render3 = jest.fn();
+      const field3 = { name: 'field3', internalId: '567', render: render3, subscription: { invalid: true } };
+
+      managerApi().registerField(field);
+      managerApi().registerField(field2);
+      managerApi().registerField(field3);
+
+      managerApi().batch(() => {
+        managerApi().rerender(['values']);
+        managerApi().rerender(['values']);
+        managerApi().rerender(['values']);
+        managerApi().rerender(['valid']);
+        managerApi().rerender(['valid']);
+        managerApi().rerender(['valid']);
+        managerApi().rerender(['valid']);
+      });
+
+      expect(render.mock.calls.length).toEqual(1);
+      expect(render2.mock.calls.length).toEqual(1);
+      expect(render3.mock.calls.length).toEqual(0); // it's not subscribed
+
+      render.mockReset();
+      render2.mockReset();
+
+      managerApi().rerender(['values']);
+
+      expect(render.mock.calls.length).toEqual(1);
+      expect(render2.mock.calls.length).toEqual(0); // clears batched subscription
+      expect(render3.mock.calls.length).toEqual(0);
+    });
+
+    it('should not render when nothing changed', () => {
+      const managerApi = createManagerApi({});
+
+      const render = jest.fn();
+      const field = { name: 'field1', internalId: '123', render };
+
+      managerApi().registerField(field);
+
+      managerApi().batch(() => undefined);
+
+      expect(render.mock.calls.length).toEqual(0);
+    });
+  });
 });

@@ -1,7 +1,7 @@
 import { FormEvent } from 'react';
 import set from 'lodash/set';
 
-import CreateManagerApi, { ManagerState, ManagerApi, AsyncWatcher, AsyncWatcherRecord, UpdateFieldState, FieldState } from '../types/manager-api';
+import CreateManagerApi, { ManagerState, ManagerApi, AsyncWatcher, AsyncWatcherRecord, FieldState, Callback } from '../types/manager-api';
 import AnyObject from '../types/any-object';
 import FieldConfig from '../types/field-config';
 import { formLevelValidator } from './validate';
@@ -101,6 +101,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     updateError,
     updateValid,
     rerender,
+    batch,
     registeredFields: [],
     fieldListeners: {},
     active: undefined,
@@ -127,6 +128,9 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     initializeOnMount,
     initializedFields: []
   };
+  let inBatch = false;
+  let batched: Array<string> = [];
+  let shouldRerender = false;
 
   const asyncWatcherApi = asyncWatcher(updateValidating, updateSubmitting);
 
@@ -250,25 +254,39 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
   }
 
   function rerender(subscribeTo?: Array<string>) {
-    traverseObject(state.fieldListeners, (fieldListener) => {
-      traverseObject(fieldListener.fields, (field) => {
-        let shouldRender: boolean | undefined = false;
+    if (inBatch) {
+      subscribeTo && subscribeTo.forEach((to) => addIfUnique(batched, to));
+      shouldRerender = true;
+    } else {
+      traverseObject(state.fieldListeners, (fieldListener) => {
+        traverseObject(fieldListener.fields, (field) => {
+          let shouldRender: boolean | undefined = false;
 
-        const mergedSubscription = { ...subscription, ...field.subscription };
+          const mergedSubscription = { ...subscription, ...field.subscription };
 
-        if (!subscription && !field.subscription) {
-          shouldRender = true;
-        } else {
-          traverseObject(mergedSubscription, (subscribed, key) => {
-            if (!shouldRender) {
-              shouldRender = subscribed && subscribeTo?.includes(key);
-            }
-          });
-        }
+          if (!subscription && !field.subscription) {
+            shouldRender = true;
+          } else {
+            traverseObject(mergedSubscription, (subscribed, key) => {
+              if (!shouldRender) {
+                shouldRender = subscribed && subscribeTo?.includes(key);
+              }
+            });
+          }
 
-        shouldRender && field.render();
+          shouldRender && field.render();
+        });
       });
-    });
+    }
+  }
+
+  function batch(callback: Callback): void {
+    inBatch = true;
+    callback();
+    inBatch = false;
+    shouldRerender && rerender(batched);
+    batched = [];
+    shouldRerender = false;
   }
 
   return managerApi;
