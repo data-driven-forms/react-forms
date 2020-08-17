@@ -16,6 +16,7 @@ import FieldConfig from '../types/field-config';
 import { Meta } from '../types/use-subscription';
 import get from 'lodash/get';
 import { formLevelValidator, isPromise } from './validate';
+import { FormValidator, FormLevelError } from '../types/validate';
 
 const isLast = (fieldListeners: AnyObject, name: string) => fieldListeners?.[name]?.count === 1;
 
@@ -230,6 +231,39 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     state.registeredFields.forEach(resetFieldState);
   }
 
+  function validateForm(validate: FormValidator) {
+    const result = formLevelValidator(validate, state.values, managerApi);
+    if (isPromise(result)) {
+      const asyncResult = result as Promise<FormLevelError>;
+      return asyncResult
+        .then(() => {
+          if (!state.validating) {
+            state.errors = {};
+            state.valid = true;
+            state.invalid = false;
+            state.error = undefined;
+          }
+        })
+        .catch((errors) => {
+          state.errors = errors;
+          state.valid = false;
+          state.invalid = true;
+        });
+    }
+
+    const syncError = result as FormLevelError | undefined;
+    if (syncError) {
+      state.errors = syncError;
+      state.valid = false;
+      state.invalid = true;
+    } else {
+      state.errors = {};
+      state.valid = true;
+      state.invalid = false;
+      state.error = undefined;
+    }
+  }
+
   function change(name: string, value?: any): void {
     state.values[name] = value;
     state.visited[name] = true;
@@ -245,11 +279,11 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
       state.pristine = false;
       state.dirty = true;
       validateField(name, value);
-    });
 
-    if (validate) {
-      formLevelValidator(validate, state.values, managerApi);
-    }
+      if (validate) {
+        validateForm(validate);
+      }
+    });
   }
 
   function focus(name: string): void {
