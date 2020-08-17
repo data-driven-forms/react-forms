@@ -10,6 +10,12 @@ export interface FieldState {
   name: string;
 }
 
+export interface ExtendedFieldState extends FieldState {
+  change: (value: any) => any;
+  blur: () => void;
+  focus: () => void;
+}
+
 export type UpdateFieldState = (name: string, mutateState: (prevState: FieldState) => FieldState) => void;
 
 export type Callback = () => void;
@@ -20,7 +26,7 @@ export type UnregisterField = (field: Omit<FieldConfig, 'render'>) => void;
 export type GetState = () => ManagerState;
 export type OnSubmit = (values: AnyObject) => void;
 export type GetFieldValue = (name: string) => any;
-export type GetFieldState = (name: string) => AnyObject | undefined;
+export type GetFieldState = (name: string) => ExtendedFieldState | undefined;
 export type Focus = (name: string) => void;
 export type Blur = (name: string) => void;
 export type UpdateValid = (valid: boolean) => void;
