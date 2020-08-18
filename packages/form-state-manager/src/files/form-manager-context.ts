@@ -9,6 +9,7 @@ const noop = () => {
 };
 
 const FormManagerContext = createContext<ManagerContextValue>({
+  batch: noop,
   handleSubmit: noop,
   registerField: noop,
   unregisterField: noop,

@@ -1,6 +1,6 @@
 import { FormEvent } from 'react';
 import AnyObject from './any-object';
-import { Change, ManagerApi, GetState, Blur, Focus, Unsubscribe, Subscribe } from './manager-api';
+import { Batch, Change, ManagerApi, GetState, Blur, Focus, Unsubscribe, Subscribe } from './manager-api';
 import FieldConfig from './field-config';
 
 export interface Action extends AnyObject {
@@ -8,6 +8,7 @@ export interface Action extends AnyObject {
 }
 
 export interface ManagerContextValue {
+  batch: Batch;
   handleSubmit: (event: FormEvent) => void;
   registerField: (fieldState: FieldConfig) => void;
   unregisterField: (fieldState: Omit<FieldConfig, 'render'>) => void;
