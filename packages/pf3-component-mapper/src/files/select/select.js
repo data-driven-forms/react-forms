@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { optionsPropType } from '@data-driven-forms/common/src/prop-types-templates';
 import fnToString from '@data-driven-forms/common/src/utils/fn-to-string';
 import DataDrivenSelect from '@data-driven-forms/common/src/select';
+import useIsMounted from '@data-driven-forms/common/src/hooks/use-is-mounted';
 import { DropdownButton } from 'patternfly-react';
 import clsx from 'clsx';
 
@@ -94,6 +95,7 @@ const Select = ({ input, loadOptions, ...props }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isFetching, setFetching] = useState(loadOptions ? true : false);
   const [options, setOptions] = useState(props.options || []);
+  const isMounted = useIsMounted();
 
   // common select controls the string of loadOptions and if the string changed, then it reloads options
   // however we are enhancing the loadOptions here so the string is always the same
@@ -111,10 +113,16 @@ const Select = ({ input, loadOptions, ...props }) => {
 
   const loadOptionsEnhanced = loadOptions
     ? (value) => {
-        setFetching(true);
+        if (isMounted.current) {
+          setFetching(true);
+        }
+
         return loadOptions(value).then((data) => {
-          setOptions([...options, ...data.filter(({ value }) => !options.find((option) => option.value === value))]);
-          setFetching(false);
+          if (isMounted.current) {
+            setOptions([...options, ...data.filter(({ value }) => !options.find((option) => option.value === value))]);
+            setFetching(false);
+          }
+
           return data;
         });
       }
