@@ -4,6 +4,8 @@ import set from 'lodash/set';
 import get from 'lodash/get';
 import cloneDeep from 'lodash/cloneDeep';
 import merge from 'lodash/merge';
+import omit from 'lodash/omit';
+import isEmpty from 'lodash/isEmpty';
 
 import CreateManagerApi, {
   ManagerState,
@@ -101,6 +103,21 @@ export function unFlatObject(obj: AnyObject): AnyObject {
   return nestedStructure;
 }
 
+export const removeEmpty = (obj: AnyObject): AnyObject => {
+  Object.keys(obj).forEach((key) => {
+    if (obj[key] && typeof obj[key] === 'object') {
+      if (isEmpty(obj[key])) {
+        delete obj[key];
+      } else {
+        removeEmpty(obj[key]);
+      }
+    } else if (typeof obj[key] === 'undefined') {
+      delete obj[key];
+    }
+  });
+  return obj;
+};
+
 export const initialMeta = (initial: any): Meta => ({
   active: false,
   data: {},
@@ -128,8 +145,8 @@ export const createField = (name: string, value: any): FieldState => ({
   meta: initialMeta(value)
 });
 
-export const initialFormState = (initialValues?: AnyObject): Omit<ManagerState, ManagerApiFunctions | 'destroyOnUnregister'> => ({
-  values: initialValues ? flatObject(initialValues) : {},
+export const initialFormState = (initialValues: AnyObject = {}): Omit<ManagerState, ManagerApiFunctions | 'destroyOnUnregister'> => ({
+  values: cloneDeep(initialValues),
   errors: {},
   pristine: true,
   registeredFields: [],
@@ -142,7 +159,7 @@ export const initialFormState = (initialValues?: AnyObject): Omit<ManagerState, 
   error: undefined,
   hasSubmitErrors: false,
   hasValidationErrors: false,
-  initialValues: initialValues || {},
+  initialValues,
   invalid: false,
   modified: {},
   modifiedSinceLastSubmit: false,
@@ -252,19 +269,19 @@ const createManagerApi: CreateManagerApi = ({
   function initialize(initialValues: AnyObject | InitilizeInputFunction) {
     state.pristine = true;
 
-    const convertedValues = flatObject(typeof initialValues === 'function' ? initialValues(state.values) : initialValues);
-    const clonedValues = cloneDeep(convertedValues);
-    const dirtyFields = keepDirtyOnReinitialize ? cloneDeep(state.values) : {};
+    const convertedValues = typeof initialValues === 'function' ? initialValues(state.values) : initialValues;
+    let clonedValues = cloneDeep(convertedValues);
+    let dirtyFields = keepDirtyOnReinitialize ? cloneDeep(state.values) : {};
 
     if (keepDirtyOnReinitialize) {
-      traverseObject(dirtyFields, (value, name) => {
+      traverseObject(flatObject(dirtyFields), (value, name) => {
         if (!state.dirtyFields[name]) {
-          delete dirtyFields[name];
+          dirtyFields = omit(dirtyFields, name);
         }
       });
     }
 
-    traverseObject(convertedValues, (value, key) => {
+    traverseObject(flatObject(convertedValues), (value, key) => {
       const fieldState = state.fieldListeners[key]?.state;
 
       if (fieldState) {
@@ -276,7 +293,7 @@ const createManagerApi: CreateManagerApi = ({
 
             state.dirtyFields[key] = fieldState.meta.dirty;
           } else {
-            delete clonedValues[key];
+            clonedValues = omit(clonedValues, key);
           }
         } else {
           fieldState.meta.pristine = true;
@@ -289,7 +306,8 @@ const createManagerApi: CreateManagerApi = ({
     });
 
     state.initialValues = initialValues;
-    state.values = merge(clonedValues, dirtyFields);
+
+    state.values = merge(removeEmpty(clonedValues), dirtyFields);
   }
 
   function validateForm(validate: FormValidator) {
@@ -336,12 +354,12 @@ const createManagerApi: CreateManagerApi = ({
 
   function revalidateFields(fields: string[]) {
     fields.forEach((name) => {
-      validateField(name, state.values[name]);
+      validateField(name, get(state.values, name));
     });
   }
 
   function change(name: string, value?: any): void {
-    state.values[name] = value;
+    set(state.values, name, value);
     state.visited[name] = true;
     state.modified[name] = true;
     state.modifiedSinceLastSubmit = true;
@@ -382,7 +400,7 @@ const createManagerApi: CreateManagerApi = ({
 
   function handleSubmit(event: FormEvent): void {
     event.preventDefault();
-    onSubmit(unFlatObject(state.values));
+    onSubmit(state.values);
   }
 
   function isInitialized(name: string): boolean {
@@ -392,8 +410,8 @@ const createManagerApi: CreateManagerApi = ({
   function registerField(field: FieldConfig): void {
     addIfUnique(state.registeredFields, field.name);
 
-    if (shouldExecute(initializeOnMount, field.initializeOnMount) || !isInitialized(field.name)) {
-      state.values[field.name] = field.value || get(state.initialValues, field.name);
+    if (shouldExecute(initializeOnMount, field.initializeOnMount) || (!isInitialized(field.name) && typeof field.value !== 'undefined')) {
+      set(state.values, field.name, field.value || get(state.initialValues, field.name));
     }
 
     subscribe(field as SubscriberConfig, true);
@@ -414,7 +432,7 @@ const createManagerApi: CreateManagerApi = ({
     if (isLast(state.fieldListeners, field.name)) {
       state.registeredFields = state.registeredFields.filter((fieldName: string) => fieldName !== field.name);
       if (shouldExecute(clearOnUnmount || destroyOnUnregister, field.clearOnUnmount)) {
-        state.values[field.name] = field.value;
+        set(state.values, field.name, field.value);
       }
     }
 
@@ -430,7 +448,7 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function getFieldValue(name: string): any {
-    return state.values[name];
+    return get(state.values, name);
   }
 
   function getFieldState(name: string): ExtendedFieldState | undefined {
@@ -446,10 +464,7 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function getState(): ManagerState {
-    return {
-      ...state,
-      values: unFlatObject(state.values)
-    };
+    return state;
   }
 
   function updateValidating(validating: boolean) {
@@ -510,11 +525,7 @@ const createManagerApi: CreateManagerApi = ({
       });
     }
 
-    debug &&
-      debug({
-        ...state,
-        values: unFlatObject(state.values)
-      });
+    debug && debug(state);
   }
 
   function batch(callback: Callback): void {
@@ -534,7 +545,8 @@ const createManagerApi: CreateManagerApi = ({
       ...(isField
         ? {
             state:
-              state.fieldListeners[subscriberConfig.name]?.state || createField(String(subscriberConfig.name), state.values[subscriberConfig.name])
+              state.fieldListeners[subscriberConfig.name]?.state ||
+              createField(String(subscriberConfig.name), get(state.values, subscriberConfig.name))
           }
         : {}),
       count: (state.fieldListeners[subscriberConfig.name]?.count || 0) + 1,
@@ -560,9 +572,10 @@ const createManagerApi: CreateManagerApi = ({
 
   function resetFieldState(name: string): void {
     // TODO: have initialValue and initialValues in one place
-    const initialValue = state.initialValues[name] || state.fieldListeners[name].state.meta.initial;
+    const initialValue = get(state.initialValues, name) || state.fieldListeners[name].state.meta.initial;
     state.fieldListeners[name].state = createField(name, initialValue);
-    state.values[name] = initialValue;
+
+    set(state.values, name, initialValue);
     state.visited[name] = false;
     state.modified[name] = false;
     state.dirtyFields[name] = false;
