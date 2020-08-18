@@ -117,6 +117,15 @@ describe('useSubscription', () => {
     expect(blurSpy).toHaveBeenCalledTimes(1);
   });
 
+  it('should get nested value from', () => {
+    const managerApi = createManagerApi({});
+    managerApi().change('foo[0]', 'bar');
+
+    const wrapper = mount(<DummyComponent subscriberProps={{ name: 'foo[0]' }} managerApi={managerApi} />);
+
+    expect(wrapper.find('input[name="foo[0]"]').prop('value')).toEqual('bar');
+  });
+
   describe('initialValues', () => {
     it('should set value from initialValues', () => {
       const managerApi = createManagerApi({ initialValues: { spy: 'value1' } });
