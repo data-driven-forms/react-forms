@@ -1287,4 +1287,27 @@ describe('managerApi', () => {
       expect(fieldValidateNoRun).not.toHaveBeenCalled();
     });
   });
+
+  describe('setConfig', () => {
+    it('change config attribute', () => {
+      const debug = jest.fn();
+
+      const managerApi = createManagerApi({ debug });
+
+      expect(debug.mock.calls.length).toEqual(0);
+
+      managerApi().rerender();
+
+      expect(debug.mock.calls.length).toEqual(1);
+
+      const debugNew = jest.fn();
+
+      managerApi().setConfig('debug', debugNew);
+
+      managerApi().rerender();
+
+      expect(debug.mock.calls.length).toEqual(1);
+      expect(debugNew.mock.calls.length).toEqual(1);
+    });
+  });
 });
