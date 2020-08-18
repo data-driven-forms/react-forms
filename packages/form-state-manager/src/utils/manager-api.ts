@@ -17,7 +17,8 @@ import CreateManagerApi, {
   SubscriberConfig,
   ManagerApiFunctions,
   ExtendedFieldState,
-  InitilizeInputFunction
+  InitilizeInputFunction,
+  CreateManagerApiConfig
 } from '../types/manager-api';
 import AnyObject from '../types/any-object';
 import FieldConfig from '../types/field-config';
@@ -185,6 +186,17 @@ const createManagerApi: CreateManagerApi = ({
   keepDirtyOnReinitialize,
   destroyOnUnregister
 }) => {
+  const config: CreateManagerApiConfig = {
+    onSubmit,
+    clearOnUnmount,
+    initializeOnMount,
+    validate,
+    subscription,
+    debug,
+    keepDirtyOnReinitialize,
+    destroyOnUnregister
+  };
+
   let state: ManagerState = {
     change,
     focus,
@@ -211,6 +223,7 @@ const createManagerApi: CreateManagerApi = ({
     isValidationPaused,
     pauseValidation,
     resumeValidation,
+    setConfig,
     destroyOnUnregister,
     ...initialFormState(initialValues)
   };
@@ -224,6 +237,10 @@ const createManagerApi: CreateManagerApi = ({
   const asyncWatcherApi = asyncWatcher(updateValidating, updateSubmitting);
 
   const managerApi: ManagerApi = () => state;
+
+  function setConfig(attribute: keyof CreateManagerApiConfig, value: any) {
+    config[attribute] = value;
+  }
 
   function isValidationPaused() {
     return validationPaused;
@@ -241,8 +258,8 @@ const createManagerApi: CreateManagerApi = ({
       revalidatedFields = [];
     }
 
-    if (runFormValidation && validate) {
-      validateForm(validate);
+    if (runFormValidation && config.validate) {
+      validateForm(config.validate);
     }
 
     runFormValidation = false;
@@ -305,9 +322,9 @@ const createManagerApi: CreateManagerApi = ({
 
     const convertedValues = typeof initialValues === 'function' ? initialValues(state.values) : initialValues;
     let clonedValues = cloneDeep(convertedValues);
-    let dirtyFields = keepDirtyOnReinitialize ? cloneDeep(state.values) : {};
+    let dirtyFields = config.keepDirtyOnReinitialize ? cloneDeep(state.values) : {};
 
-    if (keepDirtyOnReinitialize) {
+    if (config.keepDirtyOnReinitialize) {
       traverseObject(flatObject(dirtyFields), (value, name) => {
         if (!state.dirtyFields[name]) {
           dirtyFields = omit(dirtyFields, name);
@@ -319,7 +336,7 @@ const createManagerApi: CreateManagerApi = ({
       const fieldState = state.fieldListeners[key]?.state;
 
       if (fieldState) {
-        if (keepDirtyOnReinitialize) {
+        if (config.keepDirtyOnReinitialize) {
           if (!state.dirtyFields[key]) {
             fieldState.meta.pristine = true;
             fieldState.meta.dirty = false;
@@ -421,8 +438,8 @@ const createManagerApi: CreateManagerApi = ({
       state.dirty = true;
       validateField(name, value);
 
-      if (validate) {
-        validateForm(validate);
+      if (config.validate) {
+        validateForm(config.validate);
       }
     });
   }
@@ -439,7 +456,7 @@ const createManagerApi: CreateManagerApi = ({
 
   function handleSubmit(event: FormEvent): void {
     event.preventDefault();
-    onSubmit(state.values);
+    config.onSubmit(state.values);
   }
 
   function isInitialized(name: string): boolean {
@@ -449,7 +466,7 @@ const createManagerApi: CreateManagerApi = ({
   function registerField(field: FieldConfig): void {
     addIfUnique(state.registeredFields, field.name);
 
-    if (shouldExecute(initializeOnMount, field.initializeOnMount) || (!isInitialized(field.name) && typeof field.value !== 'undefined')) {
+    if (shouldExecute(config.initializeOnMount, field.initializeOnMount) || (!isInitialized(field.name) && typeof field.value !== 'undefined')) {
       set(state.values, field.name, field.value || get(state.initialValues, field.name));
     }
 
@@ -470,7 +487,7 @@ const createManagerApi: CreateManagerApi = ({
 
     if (isLast(state.fieldListeners, field.name)) {
       state.registeredFields = state.registeredFields.filter((fieldName: string) => fieldName !== field.name);
-      if (shouldExecute(clearOnUnmount || destroyOnUnregister, field.clearOnUnmount)) {
+      if (shouldExecute(config.clearOnUnmount || config.destroyOnUnregister, field.clearOnUnmount)) {
         set(state.values, field.name, field.value);
       }
     }
@@ -547,9 +564,9 @@ const createManagerApi: CreateManagerApi = ({
         traverseObject(fieldListener.fields, (field) => {
           let shouldRender: boolean | undefined = false;
 
-          const mergedSubscription = { ...subscription, ...field.subscription };
+          const mergedSubscription = { ...config.subscription, ...field.subscription };
 
-          if (!subscription && !field.subscription) {
+          if (!config.subscription && !field.subscription) {
             shouldRender = true;
           } else {
             traverseObject(mergedSubscription, (subscribed, key) => {
@@ -564,7 +581,7 @@ const createManagerApi: CreateManagerApi = ({
       });
     }
 
-    debug && debug(state);
+    config.debug && config.debug(state);
   }
 
   function batch(callback: Callback): void {
