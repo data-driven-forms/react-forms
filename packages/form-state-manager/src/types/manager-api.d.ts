@@ -40,6 +40,9 @@ export type Restart = () => void;
 export type ResetFieldState = (name: string) => void;
 export type InitilizeInputFunction = (formValues: AnyObject) => AnyObject;
 export type Initilize = (initialValues: AnyObject | InitilizeInputFunction) => void;
+export type IsValidationPaused = () => boolean;
+export type PauseValidation = () => void;
+export type ResumeValidation = () => void;
 
 export interface AsyncWatcherRecord {
   [key: number]: Promise<unknown>;
@@ -98,7 +101,10 @@ export type ManagerApiFunctions =
   | 'restart'
   | 'resetFieldState'
   | 'initialize'
-  | 'submit';
+  | 'submit'
+  | 'isValidationPaused'
+  | 'pauseValidation'
+  | 'resumeValidation';
 
 export interface ManagerState {
   values: AnyObject;
@@ -126,6 +132,9 @@ export interface ManagerState {
   restart: Restart;
   resetFieldState: ResetFieldState;
   initialize: Initilize;
+  isValidationPaused: IsValidationPaused;
+  pauseValidation: PauseValidation;
+  resumeValidation: ResumeValidation;
   registeredFields: Array<string>;
   fieldListeners: FieldListeners;
   active: string | undefined;

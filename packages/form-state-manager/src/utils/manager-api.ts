@@ -191,16 +191,45 @@ const createManagerApi: CreateManagerApi = ({
     restart: () => reset(),
     resetFieldState,
     initialize,
+    isValidationPaused,
+    pauseValidation,
+    resumeValidation,
     destroyOnUnregister,
     ...initialFormState(initialValues)
   };
   let inBatch = 0;
   let batched: Array<string> = [];
   let shouldRerender = false;
+  let validationPaused = false;
+  let runFormValidation = false;
+  let revalidatedFields: Array<string> = [];
 
   const asyncWatcherApi = asyncWatcher(updateValidating, updateSubmitting);
 
   const managerApi: ManagerApi = () => state;
+
+  function isValidationPaused() {
+    return validationPaused;
+  }
+
+  function pauseValidation() {
+    validationPaused = true;
+  }
+
+  function resumeValidation() {
+    validationPaused = false;
+
+    if (revalidatedFields.length > 0) {
+      revalidateFields(revalidatedFields);
+      revalidatedFields = [];
+    }
+
+    if (runFormValidation && validate) {
+      validateForm(validate);
+    }
+
+    runFormValidation = false;
+  }
 
   function handleFieldError(name: string, isValid: boolean, error: string | undefined = undefined) {
     setFieldState(name, (prev: FieldState) => ({
@@ -218,6 +247,11 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function validateField(name: string, value: any) {
+    if (validationPaused) {
+      addIfUnique(revalidatedFields, name);
+      return undefined;
+    }
+
     // TODO Memoize validation results
     if (Object.prototype.hasOwnProperty.call(state.fieldListeners, name) && typeof state.fieldListeners[name].validate === 'function') {
       const listener = state.fieldListeners[name].asyncWatcher;
@@ -293,6 +327,11 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function validateForm(validate: FormValidator) {
+    if (validationPaused) {
+      runFormValidation = true;
+      return undefined;
+    }
+
     const result = formLevelValidator(validate, state.values, managerApi);
     const currentInvalidFields = Object.keys(state.errors);
     if (isPromise(result)) {
