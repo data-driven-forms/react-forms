@@ -97,7 +97,8 @@ export type ManagerApiFunctions =
   | 'reset'
   | 'restart'
   | 'resetFieldState'
-  | 'initialize';
+  | 'initialize'
+  | 'submit';
 
 export interface ManagerState {
   values: AnyObject;
@@ -107,6 +108,7 @@ export interface ManagerState {
   focus: Focus;
   blur: Blur;
   handleSubmit: HandleSubmit;
+  submit: HandleSubmit;
   registerField: RegisterField;
   unregisterField: UnregisterField;
   getState: GetState;
