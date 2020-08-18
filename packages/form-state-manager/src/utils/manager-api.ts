@@ -128,7 +128,7 @@ export const createField = (name: string, value: any): FieldState => ({
   meta: initialMeta(value)
 });
 
-export const initialFormState = (initialValues?: AnyObject): Omit<ManagerState, ManagerApiFunctions> => ({
+export const initialFormState = (initialValues?: AnyObject): Omit<ManagerState, ManagerApiFunctions | 'destroyOnUnregister'> => ({
   values: initialValues ? flatObject(initialValues) : {},
   errors: {},
   pristine: true,
@@ -165,7 +165,8 @@ const createManagerApi: CreateManagerApi = ({
   subscription,
   initialValues,
   debug,
-  keepDirtyOnReinitialize
+  keepDirtyOnReinitialize,
+  destroyOnUnregister
 }) => {
   let state: ManagerState = {
     change,
@@ -189,6 +190,7 @@ const createManagerApi: CreateManagerApi = ({
     restart: () => reset(),
     resetFieldState,
     initialize,
+    destroyOnUnregister,
     ...initialFormState(initialValues)
   };
   let inBatch = 0;
@@ -410,7 +412,7 @@ const createManagerApi: CreateManagerApi = ({
 
     if (isLast(state.fieldListeners, field.name)) {
       state.registeredFields = state.registeredFields.filter((fieldName: string) => fieldName !== field.name);
-      if (shouldExecute(clearOnUnmount, field.clearOnUnmount)) {
+      if (shouldExecute(clearOnUnmount || destroyOnUnregister, field.clearOnUnmount)) {
         state.values[field.name] = field.value;
       }
     }

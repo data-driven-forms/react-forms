@@ -147,6 +147,7 @@ export interface ManagerState {
   valid: boolean;
   validating: boolean;
   visited: AnyBooleanObject;
+  destroyOnUnregister: boolean | undefined;
 }
 
 export type ManagerApi = () => ManagerState;
@@ -170,6 +171,7 @@ export interface CreateManagerApiConfig {
   initialValues?: AnyObject;
   debug?: Debug;
   keepDirtyOnReinitialize?: boolean;
+  destroyOnUnregister?: boolean;
 }
 
 declare type CreateManagerApi = (CreateManagerApiConfig: CreateManagerApiConfig) => ManagerApi;
