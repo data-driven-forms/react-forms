@@ -8,23 +8,23 @@ Data Driven Forms is a React library used for rendering and managing forms with 
 
 
 :question: Why to use Data Driven Forms? :question:
-- All forms shared the same functionality!
-- Components are controlled in one place!
-- You can easily migrate to different sets of components!
-- All functionality is provided (see below!)
+- All forms **shared** the same **functionality**!
+- Components are **controlled** in **one place**!
+- You can **easily migrate** to different sets of components!
+- All **functionality** is **provided** (see below!)
 
 :tada: Features :tada:
-- Easily readable schema, you don't need to know any HTML or JS to be able to write your own form schemas!
-- You can use your own components or use one of our provided mappers ([PatternFly 3](https://patternfly-react.surge.sh/patternfly-3/index.html), [PatternFly 4](https://patternfly-react.surge.sh/patternfly-4/), [Material-UI](https://material-ui.com/) or [Ant Design](https://ant.design/)!)
-- Form state managing out-of-the-box (including error states!)
-- Fully customizable (you can use your own buttons, actions, etc.)!
-- Conditional fields!
-- Custom field validation with basic set included!
-- Datatype validation!
-- Cross-field validation!
-- Asynchronous validation supported!
-- Supporting Wizard forms!
-- Supporting [Final Form Field Array](https://github.com/final-form/react-final-form-arrays)!
+- **Easily readable schema**, you don't need to know any HTML or JS to be able to write your own form schemas!
+- You can use your **own components** or use one of our **provided mappers** ([PatternFly 3](https://patternfly-react.surge.sh/patternfly-3/index.html), [PatternFly 4](https://patternfly-react.surge.sh/patternfly-4/), [Material-UI](https://material-ui.com/), [Ant Design](https://ant.design/)! and more, see below!)
+- **Form state manager** out-of-the-box (including error states!)
+- Fully **customizable** (you can use your own buttons, actions, etc.)!
+- **Conditional** fields!
+- Custom field **validation** with basic set included!
+- **Datatype** validation!
+- **Cross-field** validation!
+- **Asynchronous** validation supported!
+- Supporting **Wizard** forms!
+- Supporting **[Final Form Field Array](https://github.com/final-form/react-final-form-arrays)!**
 - ... and a lot more!
 
 :book: For more information please visit the [documentation](https://data-driven-forms.org/). :book:
@@ -38,7 +38,6 @@ Data Driven Forms is a React library used for rendering and managing forms with 
   - [PatternFly 4 Mapper](#patternfly-4-mapper)
   - [BlueprintJS Mapper](#blueprintjs-mapper)
   - [Semantic UI Mapper](#semantic-ui-mapper)
-  - [Material-UI Mapper](#material-ui-mapper)
   - [Ant Design Mapper](#ant-design-mapper)
 - [Usage](#usage)
   - [Custom mapper](#custom-mapper)
@@ -119,9 +118,7 @@ $ npm install @data-driven-forms/suir-component-mapper -S
 $ yarn add @data-driven-forms/suir-component-mapper
 ```
 
-Component libraries in mappers are external dependencies. Make sure to install them in your bundles.
-
-#### [Ant Design Mapper](https://www.npmjs.com/package/@data-driven-forms/ant-component-mapper)
+#### [Ant Design Mapper](https://data-driven-forms.org/mappers/ant-component-mapper)
 
 ```console
 $ npm install @data-driven-forms/ant-component-mapper -S
@@ -130,6 +127,8 @@ $ npm install @data-driven-forms/ant-component-mapper -S
 ```console
 $ yarn add @data-driven-forms/ant-component-mapper
 ```
+
+Component libraries in mappers are external dependencies. Make sure to install them and their styles in your bundles.
 
 ### Usage
 
@@ -228,18 +227,22 @@ Please use our [documentation site](https://data-driven-forms.org/). In case of 
 - [PatternFly 4 Design documentation](https://www.patternfly.org/v4/)
 - [Material-UI documentation](https://material-ui.com/)
 - [Ant Design documentation](https://ant.design/)
+- [Semantic UI React](https://react.semantic-ui.com/)
+- [BlueprintJS](https://blueprintjs.com/)
 - NPM
   - [React Form Renderer](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)
   - [PatternFly 3 Mapper](https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper)
   - [PatternFly 4 Mapper](https://www.npmjs.com/package/@data-driven-forms/pf4-component-mapper)
   - [MaterialUI Mapper](https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper)
   - [Ant Design Mapper](https://www.npmjs.com/package/@data-driven-forms/ant-component-mapper)
+  - [Semantic UI Mapper](https://www.npmjs.com/package/@data-driven-forms/suir-component-mapper)
+  - [BlueprintJS Mapper](https://www.npmjs.com/package/@data-driven-forms/blueprint-component-mapper)
 - Examples of schemas (PatternFly 3)
   - [ManageIQ Form Components](https://github.com/ManageIQ/manageiq-ui-classic/tree/master/app/javascript/components)
 
 ### Development setup
 
-Data Driven Forms is a monorepo which uses [Lerna](https://github.com/lerna/lerna), so you can use all its commands as well.
+Data Driven Forms is a monorepo that uses [Lerna](https://github.com/lerna/lerna) and [yarn workspaces](https://classic.yarnpkg.com/blog/2017/08/02/introducing-workspaces/), so you can use all its commands as well.
 
 1. Install
 
