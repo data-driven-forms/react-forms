@@ -38,6 +38,8 @@ export type Unsubscribe = (subscriberConfig: Omit<SubscriberConfig, 'render'>) =
 export type Reset = (initialValues?: AnyObject) => void;
 export type Restart = () => void;
 export type ResetFieldState = (name: string) => void;
+export type InitilizeInputFunction = (formValues: AnyObject) => AnyObject;
+export type Initilize = (initialValues: AnyObject | InitilizeInputFunction) => void;
 
 export interface AsyncWatcherRecord {
   [key: number]: Promise<unknown>;
@@ -94,7 +96,8 @@ export type ManagerApiFunctions =
   | 'unsubscribe'
   | 'reset'
   | 'restart'
-  | 'resetFieldState';
+  | 'resetFieldState'
+  | 'initialize';
 
 export interface ManagerState {
   values: AnyObject;
@@ -120,6 +123,7 @@ export interface ManagerState {
   reset: Reset;
   restart: Restart;
   resetFieldState: ResetFieldState;
+  initialize: Initilize;
   registeredFields: Array<string>;
   fieldListeners: FieldListeners;
   active: string | undefined;
@@ -165,6 +169,7 @@ export interface CreateManagerApiConfig {
   subscription?: Subscription;
   initialValues?: AnyObject;
   debug?: Debug;
+  keepDirtyOnReinitialize?: boolean;
 }
 
 declare type CreateManagerApi = (CreateManagerApiConfig: CreateManagerApiConfig) => ManagerApi;

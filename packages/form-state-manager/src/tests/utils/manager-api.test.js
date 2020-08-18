@@ -247,7 +247,11 @@ describe('managerApi', () => {
       expect(managerApi().dirty).toEqual(true);
       expect(managerApi().fieldListeners.field.state).toEqual({
         name: 'field',
-        meta: initialMeta('123'),
+        meta: {
+          ...initialMeta('123'),
+          dirty: true,
+          pristine: false
+        },
         value: '345'
       });
       expect(managerApi().registeredFields).toEqual(['field']);
@@ -289,7 +293,11 @@ describe('managerApi', () => {
       expect(managerApi().dirty).toEqual(true);
       expect(managerApi().fieldListeners.field.state).toEqual({
         name: 'field',
-        meta: initialMeta('123'),
+        meta: {
+          ...initialMeta('123'),
+          dirty: true,
+          pristine: false
+        },
         value: '345'
       });
       expect(managerApi().registeredFields).toEqual(['field']);
@@ -318,7 +326,11 @@ describe('managerApi', () => {
       expect(managerApi().dirty).toEqual(true);
       expect(managerApi().fieldListeners.field.state).toEqual({
         name: 'field',
-        meta: initialMeta('123'),
+        meta: {
+          ...initialMeta('123'),
+          dirty: true,
+          pristine: false
+        },
         value: '345'
       });
       expect(managerApi().registeredFields).toEqual(['field']);
@@ -1123,6 +1135,80 @@ describe('managerApi', () => {
         fieldValid: true,
         fieldInvalid: false,
         fieldValidating: false
+      });
+    });
+  });
+
+  describe('initialize', () => {
+    it('reinitilize form', () => {
+      const render = jest.fn();
+
+      const managerApi = createManagerApi({});
+
+      managerApi().registerField({ name: 'foo', render });
+      managerApi().registerField({ name: 'bar', render });
+
+      managerApi().change('foo', 'foo');
+      managerApi().change('bar', 'baz');
+
+      expect(managerApi().pristine).toEqual(false);
+      expect(managerApi().values).toEqual({
+        foo: 'foo',
+        bar: 'baz'
+      });
+      expect(managerApi().initialValues).toEqual({});
+
+      expect(managerApi().fieldListeners['bar'].state.meta.pristine).toEqual(false);
+      expect(managerApi().fieldListeners['bar'].state.meta.dirty).toEqual(true);
+
+      managerApi().initialize({ foo: { bar: 'foobar' }, bar: '123' });
+
+      expect(managerApi().pristine).toEqual(true);
+      expect(managerApi().values).toEqual({
+        'foo.bar': 'foobar',
+        bar: '123'
+      });
+      expect(managerApi().initialValues).toEqual({
+        foo: { bar: 'foobar' },
+        bar: '123'
+      });
+      expect(managerApi().fieldListeners['bar'].state.meta.pristine).toEqual(true);
+      expect(managerApi().fieldListeners['bar'].state.meta.dirty).toEqual(false);
+    });
+
+    describe('keepDirtyOnReinitialize', () => {
+      it('reinitilize only pristine fields', () => {
+        const render = jest.fn();
+
+        const managerApi = createManagerApi({ keepDirtyOnReinitialize: true });
+
+        managerApi().registerField({ name: 'foo.bar', render });
+        managerApi().registerField({ name: 'bar', render });
+        managerApi().registerField({ name: 'initial', render, value: 'initial value' });
+
+        managerApi().change('foo.bar', 'foo');
+        managerApi().change('bar', 'baz');
+
+        expect(managerApi().pristine).toEqual(false);
+        expect(managerApi().values).toEqual({
+          'foo.bar': 'foo',
+          bar: 'baz',
+          initial: 'initial value'
+        });
+        expect(managerApi().initialValues).toEqual({});
+
+        managerApi().initialize({ foo: { bar: 'foobar' }, initial: 'some_value' });
+
+        expect(managerApi().pristine).toEqual(true);
+        expect(managerApi().values).toEqual({
+          'foo.bar': 'foo',
+          bar: 'baz',
+          initial: 'some_value'
+        });
+        expect(managerApi().initialValues).toEqual({
+          initial: 'some_value',
+          foo: { bar: 'foobar' }
+        });
       });
     });
   });

@@ -1,5 +1,9 @@
 import { FormEvent } from 'react';
+
 import set from 'lodash/set';
+import get from 'lodash/get';
+import cloneDeep from 'lodash/cloneDeep';
+import merge from 'lodash/merge';
 
 import CreateManagerApi, {
   ManagerState,
@@ -10,12 +14,12 @@ import CreateManagerApi, {
   Callback,
   SubscriberConfig,
   ManagerApiFunctions,
-  ExtendedFieldState
+  ExtendedFieldState,
+  InitilizeInputFunction
 } from '../types/manager-api';
 import AnyObject from '../types/any-object';
 import FieldConfig from '../types/field-config';
 import { Meta } from '../types/use-subscription';
-import get from 'lodash/get';
 import { formLevelValidator, isPromise } from './validate';
 import { FormValidator, FormLevelError } from '../types/validate';
 
@@ -153,7 +157,16 @@ export const initialFormState = (initialValues?: AnyObject): Omit<ManagerState, 
   visited: {}
 });
 
-const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initializeOnMount, validate, subscription, initialValues, debug }) => {
+const createManagerApi: CreateManagerApi = ({
+  onSubmit,
+  clearOnUnmount,
+  initializeOnMount,
+  validate,
+  subscription,
+  initialValues,
+  debug,
+  keepDirtyOnReinitialize
+}) => {
   let state: ManagerState = {
     change,
     focus,
@@ -175,6 +188,7 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     reset,
     restart: () => reset(),
     resetFieldState,
+    initialize,
     ...initialFormState(initialValues)
   };
   let inBatch = 0;
@@ -230,6 +244,49 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
     };
 
     state.registeredFields.forEach(resetFieldState);
+  }
+
+  function initialize(initialValues: AnyObject | InitilizeInputFunction) {
+    state.pristine = true;
+
+    const convertedValues = flatObject(typeof initialValues === 'function' ? initialValues(state.values) : initialValues);
+    const clonedValues = cloneDeep(convertedValues);
+    const dirtyFields = keepDirtyOnReinitialize ? cloneDeep(state.values) : {};
+
+    if (keepDirtyOnReinitialize) {
+      traverseObject(dirtyFields, (value, name) => {
+        if (!state.dirtyFields[name]) {
+          delete dirtyFields[name];
+        }
+      });
+    }
+
+    traverseObject(convertedValues, (value, key) => {
+      const fieldState = state.fieldListeners[key]?.state;
+
+      if (fieldState) {
+        if (keepDirtyOnReinitialize) {
+          if (!state.dirtyFields[key]) {
+            fieldState.meta.pristine = true;
+            fieldState.meta.dirty = false;
+            fieldState.value = value;
+
+            state.dirtyFields[key] = fieldState.meta.dirty;
+          } else {
+            delete clonedValues[key];
+          }
+        } else {
+          fieldState.meta.pristine = true;
+          fieldState.meta.dirty = false;
+          fieldState.value = value;
+
+          state.dirtyFields[key] = fieldState.meta.dirty;
+        }
+      }
+    });
+
+    state.initialValues = initialValues;
+    state.values = merge(clonedValues, dirtyFields);
   }
 
   function validateForm(validate: FormValidator) {
@@ -291,7 +348,15 @@ const createManagerApi: CreateManagerApi = ({ onSubmit, clearOnUnmount, initiali
 
     // TODO modify all affected field state variables
     batch(() => {
-      setFieldState(name, (prevState) => ({ ...prevState, value }));
+      setFieldState(name, (prevState) => ({
+        ...prevState,
+        meta: {
+          ...prevState.meta,
+          pristine: false,
+          dirty: true
+        },
+        value
+      }));
       state.pristine = false;
       state.dirty = true;
       validateField(name, value);
