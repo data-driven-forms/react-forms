@@ -12,7 +12,10 @@ export interface FieldArrayApi {
     value: any[];
     forEach: (iterator: (name: string, index: number) => void) => void;
     map: (iterator: (name: string, index: number) => string) => string[];
+    pop: () => any;
     push: (value?: any) => void;
+    remove: (index: number) => void;
+    shift: () => any;
   };
   meta: Meta;
 }

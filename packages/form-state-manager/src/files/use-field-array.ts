@@ -15,7 +15,23 @@ const useFieldArray: UseFieldArray = ({ name, initialValue }) => {
 
   const map = (iterator: (name: string, index: number) => string) => internalValue.map((_v, index) => iterator(`${name}[${index}]`, index));
 
-  const push = (newValue?: any) => onChange([...value, newValue]);
+  const push = (newValue?: any) => onChange([...internalValue, newValue]);
+
+  const remove = (index: number) => onChange(internalValue.filter((_: any, itemIndex: number) => index !== itemIndex));
+
+  const pop = () => {
+    const copy = [...internalValue];
+    const valueToReturn = copy.pop();
+    onChange(copy);
+    return valueToReturn;
+  };
+
+  const shift = () => {
+    const copy = [...internalValue];
+    const valueToReturn = copy.shift();
+    onChange(copy);
+    return valueToReturn;
+  };
 
   const fields = {
     length: internalValue.length,
@@ -23,7 +39,10 @@ const useFieldArray: UseFieldArray = ({ name, initialValue }) => {
     value,
     forEach,
     map,
+    pop,
     push,
+    remove,
+    shift,
     ...rest
   };
   return {

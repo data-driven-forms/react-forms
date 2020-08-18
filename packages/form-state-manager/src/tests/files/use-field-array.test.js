@@ -173,5 +173,88 @@ describe('useFieldArray', () => {
       expect(wrapper.find(DummyArrayHookSpy).prop('value')).toEqual(['new-value']);
       expect(wrapper.find('input').prop('value')).toEqual('new-value');
     });
+
+    it('should remove middle field from field array and set correct value', () => {
+      const wrapper = mount(
+        <FormStateManager initialValues={{ 'remove-array': ['one', 'two', 'three'] }}>{() => <DummyArray name="remove-array" />}</FormStateManager>
+      );
+      expect(wrapper.find('input')).toHaveLength(3);
+      expect(
+        wrapper
+          .find('input')
+          .at(0)
+          .prop('value')
+      ).toEqual('one');
+      expect(
+        wrapper
+          .find('input')
+          .at(1)
+          .prop('value')
+      ).toEqual('two');
+      expect(
+        wrapper
+          .find('input')
+          .at(2)
+          .prop('value')
+      ).toEqual('three');
+      /**
+       * remove second field
+       */
+      act(() => {
+        wrapper.find(DummyArrayHookSpy).prop('remove')(1);
+      });
+      wrapper.update();
+
+      expect(wrapper.find('input')).toHaveLength(2);
+      expect(
+        wrapper
+          .find('input')
+          .at(0)
+          .prop('value')
+      ).toEqual('one');
+      expect(
+        wrapper
+          .find('input')
+          .at(1)
+          .prop('value')
+      ).toEqual('three');
+      expect(wrapper.find(DummyArrayHookSpy).prop('value')).toEqual(['one', 'three']);
+    });
+
+    it('should pop the last field array field', () => {
+      const wrapper = mount(
+        <FormStateManager initialValues={{ 'pop-array': ['one', 'two'] }}>{() => <DummyArray name="pop-array" />}</FormStateManager>
+      );
+      let lastValue;
+      /**
+       * pop last field
+       */
+      act(() => {
+        lastValue = wrapper.find(DummyArrayHookSpy).prop('pop')();
+      });
+      wrapper.update();
+
+      expect(wrapper.find('input')).toHaveLength(1);
+      expect(wrapper.find('input').prop('value')).toEqual('one');
+      expect(lastValue).toEqual('two');
+    });
+
+    it('should shift the first field array field', () => {
+      const wrapper = mount(
+        <FormStateManager initialValues={{ 'shift-array': ['one', 'two'] }}>{() => <DummyArray name="shift-array" />}</FormStateManager>
+      );
+      let lastValue;
+      /**
+       * shift first field
+       */
+      act(() => {
+        lastValue = wrapper.find(DummyArrayHookSpy).prop('shift')();
+      });
+      wrapper.update();
+
+      expect(wrapper.find('input')).toHaveLength(1);
+      expect(wrapper.find('input').prop('value')).toEqual('two');
+      expect(lastValue).toEqual('one');
+    });
   });
 });
