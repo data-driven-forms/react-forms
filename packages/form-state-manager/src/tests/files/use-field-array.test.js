@@ -159,10 +159,7 @@ describe('useFieldArray', () => {
       expect(wrapper.find(DummyArrayHookSpy).prop('value')).toEqual([undefined]);
     });
 
-    /**
-     * Enable once the state values is not a flat structure
-     */
-    it.skip('should push new field to the end of the field array with initial value', async (done) => {
+    it('should push new field to the end of the field array with initial value', async () => {
       const wrapper = mount(<FormStateManager>{() => <DummyArray name="push-array" />}</FormStateManager>);
       expect(wrapper.find('input')).toHaveLength(0);
       expect(wrapper.find(DummyArrayHookSpy).prop('value')).toBeFalsy();
@@ -174,10 +171,7 @@ describe('useFieldArray', () => {
       });
       expect(wrapper.find('input')).toHaveLength(1);
       expect(wrapper.find(DummyArrayHookSpy).prop('value')).toEqual(['new-value']);
-      setImmediate(() => {
-        expect(wrapper.find('input').prop('value')).toEqual('new-value');
-        done();
-      });
+      expect(wrapper.find('input').prop('value')).toEqual('new-value');
     });
   });
 });
