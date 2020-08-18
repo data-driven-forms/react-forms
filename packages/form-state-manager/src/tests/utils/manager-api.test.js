@@ -1,4 +1,4 @@
-import createManagerApi, { initialMeta } from '../../utils/manager-api';
+import createManagerApi, { initialMeta, flatObject } from '../../utils/manager-api';
 
 describe('managerApi', () => {
   it('should create managerApi getter', () => {
@@ -8,6 +8,18 @@ describe('managerApi', () => {
 
   it('should set initialValues', () => {
     const initialValues = {
+      field: 'value',
+      nested: {
+        some: 'nested_value'
+      }
+    };
+    const managerApi = createManagerApi({ initialValues });
+    expect(managerApi().initialValues).toEqual(initialValues);
+    expect(managerApi().values).toEqual(initialValues);
+  });
+
+  it('un/flatObject should un/flatObject', () => {
+    const values = {
       field: 'value',
       nested: {
         some: {
@@ -29,9 +41,8 @@ describe('managerApi', () => {
         }
       }
     };
-    const managerApi = createManagerApi({ initialValues });
-    expect(managerApi().initialValues).toEqual(initialValues);
-    expect(managerApi().values).toEqual({
+
+    const result = {
       field: 'value',
       'nested.some.very.tryingToDestroy.[2][4].name': 'cosi',
       'nested.some.very.nested': 'value',
@@ -41,7 +52,9 @@ describe('managerApi', () => {
       'nested.some.very.nestedObjects[1].name': 'jane',
       'nested.some.very.nestedObjects[1].lastname': 'smith',
       'nested.some.very.nestier[0].superNested[0].lastName': 'michael'
-    });
+    };
+
+    expect(flatObject(values)).toEqual(result);
   });
 
   it('should change the managerApi state', () => {
@@ -1178,7 +1191,7 @@ describe('managerApi', () => {
 
       expect(managerApi().pristine).toEqual(true);
       expect(managerApi().values).toEqual({
-        'foo.bar': 'foobar',
+        foo: { bar: 'foobar' },
         bar: '123'
       });
       expect(managerApi().initialValues).toEqual({
@@ -1204,7 +1217,7 @@ describe('managerApi', () => {
 
         expect(managerApi().pristine).toEqual(false);
         expect(managerApi().values).toEqual({
-          'foo.bar': 'foo',
+          foo: { bar: 'foo' },
           bar: 'baz',
           initial: 'initial value'
         });
@@ -1214,7 +1227,7 @@ describe('managerApi', () => {
 
         expect(managerApi().pristine).toEqual(true);
         expect(managerApi().values).toEqual({
-          'foo.bar': 'foo',
+          foo: { bar: 'foo' },
           bar: 'baz',
           initial: 'some_value'
         });

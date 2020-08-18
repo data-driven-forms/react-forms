@@ -117,6 +117,15 @@ describe('useSubscription', () => {
     expect(blurSpy).toHaveBeenCalledTimes(1);
   });
 
+  it('should get nested value from', () => {
+    const managerApi = createManagerApi({});
+    managerApi().change('foo[0]', 'bar');
+
+    const wrapper = mount(<DummyComponent subscriberProps={{ name: 'foo[0]' }} managerApi={managerApi} />);
+
+    expect(wrapper.find('input[name="foo[0]"]').prop('value')).toEqual('bar');
+  });
+
   describe('initialValues', () => {
     it('should set value from initialValues', () => {
       const managerApi = createManagerApi({ initialValues: { spy: 'value1' } });
@@ -139,7 +148,7 @@ describe('useSubscription', () => {
 
       mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
 
-      expect(managerApi().values['spy.nested']).toEqual('value123');
+      expect(managerApi().values.spy.nested).toEqual('value123');
     });
 
     it('should set value from initialValues only on first registration', async () => {
@@ -147,7 +156,7 @@ describe('useSubscription', () => {
 
       let wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
 
-      expect(managerApi().values['spy.nested']).toEqual('value123');
+      expect(managerApi().values.spy.nested).toEqual('value123');
 
       await act(async () => {
         managerApi().change('spy.nested', 'different value');
@@ -158,14 +167,14 @@ describe('useSubscription', () => {
 
       wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
 
-      expect(managerApi().values['spy.nested']).toEqual('different value');
+      expect(managerApi().values.spy.nested).toEqual('different value');
     });
 
     it('should set value from initialValues when form.initializeOnTrue = true', async () => {
       const managerApi = createManagerApi({ initialValues: { spy: { nested: 'value123' } }, initializeOnMount: true });
 
       let wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
-      expect(managerApi().values['spy.nested']).toEqual('value123');
+      expect(managerApi().values.spy.nested).toEqual('value123');
 
       await act(async () => {
         managerApi().change('spy.nested', 'different value');
@@ -176,14 +185,14 @@ describe('useSubscription', () => {
 
       wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
 
-      expect(managerApi().values).toEqual({ 'spy.nested': 'value123' });
+      expect(managerApi().values.spy.nested).toEqual('value123');
     });
 
     it('should set value from initialValues when field.initializeOnTrue = true', async () => {
       const managerApi = createManagerApi({ initialValues: { spy: { nested: 'value123' } }, initializeOnMount: true });
 
       let wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested', initializeOnMount: true }} managerApi={managerApi} />);
-      expect(managerApi().values['spy.nested']).toEqual('value123');
+      expect(managerApi().values.spy.nested).toEqual('value123');
 
       await act(async () => {
         managerApi().change('spy.nested', 'different value');
@@ -194,14 +203,14 @@ describe('useSubscription', () => {
 
       wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
 
-      expect(managerApi().values).toEqual({ 'spy.nested': 'value123' });
+      expect(managerApi().values.spy.nested).toEqual('value123');
     });
 
     it('field.initializeOnMount has higher priority than form.initializeOnMount', async () => {
       const managerApi = createManagerApi({ initialValues: { spy: { nested: 'value123' } }, initializeOnMount: true });
 
       let wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested' }} managerApi={managerApi} />);
-      expect(managerApi().values['spy.nested']).toEqual('value123');
+      expect(managerApi().values.spy.nested).toEqual('value123');
 
       await act(async () => {
         managerApi().change('spy.nested', 'different value');
@@ -212,7 +221,7 @@ describe('useSubscription', () => {
 
       wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy.nested', initializeOnMount: false }} managerApi={managerApi} />);
 
-      expect(managerApi().values).toEqual({ 'spy.nested': 'different value' });
+      expect(managerApi().values.spy.nested).toEqual('different value');
     });
   });
 
