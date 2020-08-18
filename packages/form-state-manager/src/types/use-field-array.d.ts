@@ -8,10 +8,11 @@ export interface UseFieldArrayConfig {
 export interface FieldArrayApi {
   fields: {
     name: string;
-    forEach: (iterator: (name: string, index: number) => void) => void;
-    map: (iterator: (name: string, index: number) => string) => string[];
     length: number;
     value: any[];
+    forEach: (iterator: (name: string, index: number) => void) => void;
+    map: (iterator: (name: string, index: number) => string) => string[];
+    push: (value?: any) => void;
   };
   meta: Meta;
 }

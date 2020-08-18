@@ -21,6 +21,7 @@ const FormStateManager: React.ComponentType<FormStateManagerProps> = ({
   );
 
   const {
+    batch,
     change,
     handleSubmit,
     registerField,
@@ -37,6 +38,7 @@ const FormStateManager: React.ComponentType<FormStateManagerProps> = ({
   return (
     <FormManagerContext.Provider
       value={{
+        batch,
         blur,
         focus,
         getFieldState,

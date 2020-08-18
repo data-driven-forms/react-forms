@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import useField from '../../files/use-field';
 import useFieldArray from '../../files/use-field-array';
@@ -138,17 +139,45 @@ describe('useFieldArray', () => {
     });
 
     it('should use empty array if field array has no value', () => {
-      const wrapper = mount(
-        <FormStateManager>
-          {() => (
-            <Fragment>
-              <DummyArray name="empty-array" compositeField />
-            </Fragment>
-          )}
-        </FormStateManager>
-      );
+      const wrapper = mount(<FormStateManager>{() => <DummyArray name="empty-array" compositeField />}</FormStateManager>);
       expect(wrapper.find('input')).toHaveLength(0);
       expect(wrapper.find(DummyArrayHookSpy).prop('value')).toBeFalsy();
+    });
+  });
+
+  describe('fieldArray api methods', () => {
+    it('should push new field to the end of the field array with no value', () => {
+      const wrapper = mount(<FormStateManager>{() => <DummyArray name="push-array" />}</FormStateManager>);
+      expect(wrapper.find('input')).toHaveLength(0);
+      expect(wrapper.find(DummyArrayHookSpy).prop('value')).toBeFalsy();
+      act(() => {
+        wrapper.find(DummyArrayHookSpy).prop('push')();
+      });
+      wrapper.update();
+      expect(wrapper.find('input')).toHaveLength(1);
+      expect(wrapper.find('input').prop('value')).toEqual('');
+      expect(wrapper.find(DummyArrayHookSpy).prop('value')).toEqual([undefined]);
+    });
+
+    /**
+     * Enable once the state values is not a flat structure
+     */
+    it.skip('should push new field to the end of the field array with initial value', async (done) => {
+      const wrapper = mount(<FormStateManager>{() => <DummyArray name="push-array" />}</FormStateManager>);
+      expect(wrapper.find('input')).toHaveLength(0);
+      expect(wrapper.find(DummyArrayHookSpy).prop('value')).toBeFalsy();
+      await act(async () => {
+        wrapper.find(DummyArrayHookSpy).prop('push')('new-value');
+      });
+      await act(async () => {
+        wrapper.update();
+      });
+      expect(wrapper.find('input')).toHaveLength(1);
+      expect(wrapper.find(DummyArrayHookSpy).prop('value')).toEqual(['new-value']);
+      setImmediate(() => {
+        expect(wrapper.find('input').prop('value')).toEqual('new-value');
+        done();
+      });
     });
   });
 });
