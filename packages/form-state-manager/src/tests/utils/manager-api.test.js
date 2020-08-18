@@ -1238,4 +1238,53 @@ describe('managerApi', () => {
       });
     });
   });
+
+  describe('resume/pause validation', () => {
+    it('should paused validation', () => {
+      const formValidate = jest.fn();
+      const fieldValidate = jest.fn();
+
+      const managerApi = createManagerApi({ validate: formValidate });
+
+      expect(managerApi().isValidationPaused()).toEqual(false);
+
+      managerApi().pauseValidation();
+
+      expect(managerApi().isValidationPaused()).toEqual(true);
+
+      managerApi().registerField({ name: '123', validate: fieldValidate, render: jest.fn() });
+      managerApi().change('123', 'value');
+
+      expect(formValidate).not.toHaveBeenCalled();
+      expect(fieldValidate).not.toHaveBeenCalled();
+
+      managerApi().resumeValidation();
+      expect(managerApi().isValidationPaused()).toEqual(false);
+
+      expect(formValidate).toHaveBeenCalled();
+      expect(fieldValidate).toHaveBeenCalled();
+    });
+
+    it('should rerun only changed field validation after resume', () => {
+      const fieldValidateNoRun = jest.fn();
+      const fieldValidate = jest.fn();
+
+      const managerApi = createManagerApi({});
+
+      managerApi().pauseValidation();
+
+      managerApi().registerField({ name: '123', validate: fieldValidate, render: jest.fn() });
+      managerApi().registerField({ name: 'noRun', validate: fieldValidateNoRun, render: jest.fn() });
+
+      managerApi().change('123', 'value');
+
+      expect(fieldValidate).not.toHaveBeenCalled();
+      expect(fieldValidateNoRun).not.toHaveBeenCalled();
+
+      managerApi().resumeValidation();
+
+      expect(fieldValidate).toHaveBeenCalled();
+      expect(fieldValidateNoRun).not.toHaveBeenCalled();
+    });
+  });
 });
