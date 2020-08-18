@@ -173,6 +173,7 @@ const createManagerApi: CreateManagerApi = ({
     focus,
     blur,
     handleSubmit,
+    submit: handleSubmit,
     registerField,
     unregisterField,
     getState,
