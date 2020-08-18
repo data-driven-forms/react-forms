@@ -363,6 +363,19 @@ describe('managerApi', () => {
       expect(managerApi().values).toEqual({ field: undefined });
     });
 
+    it('should clear on form level using destroyOnUnregister', () => {
+      const managerApi = createManagerApi({ destroyOnUnregister: true });
+
+      managerApi().registerField({ name: 'field', render: jest.fn() });
+      managerApi().change('field', 'value');
+
+      expect(managerApi().values).toEqual({ field: 'value' });
+
+      managerApi().unregisterField({ name: 'field' });
+
+      expect(managerApi().values).toEqual({ field: undefined });
+    });
+
     it('should clear on field level', () => {
       const managerApi = createManagerApi({});
 
