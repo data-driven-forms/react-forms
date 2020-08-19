@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import FormManagerContext from '../../files/form-manager-context';
-import useSubscription, { checkEmpty } from '../../utils/use-subscription';
+import useField, { checkEmpty } from '../../files/use-field';
 import createManagerApi, { initialMeta } from '../../utils/manager-api';
 
 const NonInputSpyComponent = ({ changeValue, onChange }) => <button id="fake-change" type="button" onClick={() => onChange(changeValue)}></button>;
@@ -11,7 +11,10 @@ const NonInputSpyComponent = ({ changeValue, onChange }) => <button id="fake-cha
 const SpyComponent = ({ initialValue, meta, validate, initializeOnMount, ...props }) => <input name="spy-input" id="spy-input" {...props} />;
 
 const SubscribedComponent = ({ fakeComponent, ...props }) => {
-  const [value, onChange, onFocus, onBlur, meta] = useSubscription(props);
+  const {
+    input: { value, onChange, onFocus, onBlur },
+    meta
+  } = useField(props);
   return (
     <div>
       {fakeComponent ? (
@@ -29,7 +32,7 @@ const DummyComponent = ({ subscriberProps, managerApi }) => (
   </FormManagerContext.Provider>
 );
 
-describe('useSubscription', () => {
+describe('useField', () => {
   let managerApi;
   beforeEach(() => {
     managerApi = createManagerApi(jest.fn());
@@ -233,7 +236,7 @@ describe('useSubscription', () => {
       renderCount = 0;
 
       RenderWatch = (props) => {
-        useSubscription(props);
+        useField(props);
 
         useEffect(() => {
           renderCount++;
@@ -456,7 +459,9 @@ describe('useSubscription', () => {
 
     beforeEach(() => {
       CleanButton = (props) => {
-        const [, onChange] = useSubscription(props);
+        const {
+          input: { onChange }
+        } = useField(props);
 
         return <button onClick={() => onChange(undefined)}>clear</button>;
       };
@@ -533,7 +538,9 @@ describe('useSubscription', () => {
       managerApi = createManagerApi({});
 
       Setter = (props) => {
-        const [, onChange] = useSubscription(props);
+        const {
+          input: { onChange }
+        } = useField(props);
 
         return <input onChange={(e) => onChange(props.value || e)} />;
       };
