@@ -1,6 +1,6 @@
 import AnyObject, { AnyBooleanObject } from './any-object';
 import { FormEvent } from 'react';
-import FieldConfig from './field-config';
+import FieldConfig, { IsEqual } from './field-config';
 import { FormValidator, Validator } from './validate';
 import { Subscription, Meta } from './use-subscription';
 
@@ -72,8 +72,10 @@ export interface FieldListener {
   count: number;
   state: FieldState;
   validate?: Validator;
+  isEqual?: IsEqual;
   asyncWatcher: AsyncWatcherApi;
   fields: FieldListenerFields;
+  validateFields?: Array<string>;
 }
 
 export interface FieldListeners {
@@ -174,6 +176,8 @@ export interface SubscriberConfig extends AnyObject {
   render: FieldRender;
   validate?: Validator;
   internalId?: number | string;
+  isEqual?: IsEqual;
+  validateFields?: Array<string>;
 }
 
 export interface CreateManagerApiConfig {

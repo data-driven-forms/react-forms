@@ -57,22 +57,61 @@ describe('managerApi', () => {
     expect(flatObject(values)).toEqual(result);
   });
 
-  it('should change the managerApi state', () => {
-    const managerApi = createManagerApi({});
-    managerApi().change('foo', 'bar');
+  describe('change', () => {
+    it('should change the managerApi state', () => {
+      const managerApi = createManagerApi({});
+      managerApi().change('foo', 'bar');
 
-    expect(managerApi().values).toEqual({ foo: 'bar' });
-    expect(managerApi().visited).toEqual({ foo: true });
-    expect(managerApi().modified).toEqual({ foo: true });
-    expect(managerApi().modifiedSinceLastSubmit).toEqual(true);
-    expect(managerApi().dirtySinceLastSubmit).toEqual(true);
-    expect(managerApi().dirtyFields).toEqual({ foo: true });
-    expect(managerApi().dirtyFieldsSinceLastSubmit).toEqual({ foo: true });
-    expect(managerApi().pristine).toEqual(false);
+      expect(managerApi().values).toEqual({ foo: 'bar' });
+      expect(managerApi().visited).toEqual({ foo: true });
+      expect(managerApi().modified).toEqual({ foo: true });
+      expect(managerApi().modifiedSinceLastSubmit).toEqual(true);
+      expect(managerApi().dirtySinceLastSubmit).toEqual(true);
+      expect(managerApi().dirtyFields).toEqual({ foo: true });
+      expect(managerApi().dirtyFieldsSinceLastSubmit).toEqual({ foo: true });
+      expect(managerApi().pristine).toEqual(false);
 
-    managerApi().change('foo', 'bar');
-    expect(managerApi().dirtyFields).toEqual({ foo: true });
-    expect(managerApi().dirtyFieldsSinceLastSubmit).toEqual({ foo: true });
+      managerApi().change('foo', 'bar');
+      expect(managerApi().dirtyFields).toEqual({ foo: true });
+      expect(managerApi().dirtyFieldsSinceLastSubmit).toEqual({ foo: true });
+    });
+
+    it('should validateFields when change', () => {
+      const managerApi = createManagerApi({});
+
+      const render = jest.fn();
+
+      const validate1 = jest.fn();
+      const validate2 = jest.fn();
+
+      managerApi().registerField({ name: 'field1', render, validateFields: ['field2'] });
+      managerApi().registerField({ name: 'field2', render, validate: validate1 });
+      managerApi().registerField({ name: 'field3', render, validate: validate2 });
+
+      managerApi().change('field1', 'cosi');
+
+      expect(validate1).toHaveBeenCalled();
+      expect(validate2).not.toHaveBeenCalled();
+    });
+
+    it('should compute value using isEqual', () => {
+      const managerApi = createManagerApi({});
+
+      const render = jest.fn();
+      const isEqual = jest.fn().mockImplementation(() => true);
+
+      managerApi().registerField({ name: 'field1', render, isEqual });
+
+      managerApi().change('field1', 'cosi');
+
+      expect(isEqual).toHaveBeenCalledWith('cosi', undefined);
+
+      managerApi().registerField({ name: 'field2', render, isEqual, value: 'initial' });
+
+      managerApi().change('field2', 'cosi');
+
+      expect(isEqual).toHaveBeenCalledWith('cosi', 'initial');
+    });
   });
 
   it('should change different api instance separatelly', () => {
