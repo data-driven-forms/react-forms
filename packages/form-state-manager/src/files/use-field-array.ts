@@ -1,5 +1,6 @@
 import useField from './use-field';
 import UseFieldArray from '../types/use-field-array';
+import arrayMove from '../utils/array-move';
 
 const useFieldArray: UseFieldArray = ({ name, initialValue }) => {
   const {
@@ -35,16 +36,32 @@ const useFieldArray: UseFieldArray = ({ name, initialValue }) => {
 
   const update = (index: number, value: any) => onChange(internalValue.map((fieldValue, fieldIndex) => (fieldIndex === index ? value : fieldValue)));
 
+  const move = (from: number, to: number) => onChange(arrayMove(internalValue, from, to));
+
+  const swap = (a: number, b: number) => {
+    if (a >= 0 && b >= 0 && a < internalValue.length && b < internalValue.length) {
+      const copy = [...internalValue];
+      const aField = copy[a];
+      copy[a] = copy[b];
+      copy[b] = aField;
+      onChange(copy);
+    } else {
+      console.error('swap indexes are out of field array value range', { a, b, range: `0 - ${internalValue.length - 1}` });
+    }
+  };
+
   const fields = {
     length: internalValue.length,
     name,
     value,
     forEach,
     map,
+    move,
     pop,
     push,
     remove,
     shift,
+    swap,
     update,
     ...rest
   };
