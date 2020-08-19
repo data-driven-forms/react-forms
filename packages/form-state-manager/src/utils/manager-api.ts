@@ -26,6 +26,8 @@ import { Meta } from '../types/use-subscription';
 import { formLevelValidator, isPromise } from './validate';
 import { FormValidator, FormLevelError } from '../types/validate';
 
+export const defaultIsEqual = (a: any, b: any) => a === b;
+
 const isLast = (fieldListeners: AnyObject, name: string) => fieldListeners?.[name]?.count === 1;
 
 const noState = (fieldListeners: AnyObject, name: string) => !fieldListeners?.[name]?.state;
@@ -425,18 +427,24 @@ const createManagerApi: CreateManagerApi = ({
 
     // TODO modify all affected field state variables
     batch(() => {
+      const isEqualFn = state.fieldListeners[name]?.isEqual || defaultIsEqual;
+      const pristine = isEqualFn(value, state.fieldListeners[name]?.state?.meta?.initial || get(state.initialValues, name));
+
       setFieldState(name, (prevState) => ({
         ...prevState,
         meta: {
           ...prevState.meta,
-          pristine: false,
-          dirty: true
+          pristine,
+          dirty: !pristine
         },
         value
       }));
       state.pristine = false;
       state.dirty = true;
       validateField(name, value);
+
+      const validateFields = state.fieldListeners[name]?.validateFields;
+      validateFields && revalidateFields(validateFields);
 
       if (config.validate) {
         validateForm(config.validate);
@@ -607,6 +615,8 @@ const createManagerApi: CreateManagerApi = ({
         : {}),
       count: (state.fieldListeners[subscriberConfig.name]?.count || 0) + 1,
       validate: subscriberConfig.validate,
+      isEqual: subscriberConfig.isEqual,
+      validateFields: subscriberConfig.validateFields,
       fields: {
         ...state.fieldListeners[subscriberConfig.name]?.fields,
         [subscriberConfig.internalId || subscriberConfig.name]: {
