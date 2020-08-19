@@ -137,7 +137,7 @@ describe('managerApi', () => {
 
       expect(isEqual).toHaveBeenCalledWith('cosi', undefined);
 
-      managerApi().registerField({ name: 'field2', render, isEqual, value: 'initial' });
+      managerApi().registerField({ name: 'field2', render, isEqual, initialValue: 'initial' });
 
       managerApi().change('field2', 'cosi');
 
@@ -556,7 +556,7 @@ describe('managerApi', () => {
     const { registerField } = managerApi();
     registerField({
       name: 'field',
-      value: { foo: 'bar' }
+      initialValue: { foo: 'bar' }
     });
     expect(managerApi().getFieldState('field')).toEqual(expectedValue);
   });
@@ -579,7 +579,7 @@ describe('managerApi', () => {
     it.skip('should initialize on form level using initialValues', () => {
       const managerApi = createManagerApi({ initializeOnMount: true, initialValues: { field: 'second' } });
 
-      managerApi().registerField({ name: 'field', value: 'first', render: jest.fn() });
+      managerApi().registerField({ name: 'field', initialValue: 'first', render: jest.fn() });
       managerApi().registerField({ name: 'field', render: jest.fn() });
 
       expect(managerApi().values).toEqual({ field: 'second' });
@@ -588,8 +588,8 @@ describe('managerApi', () => {
     it('should initialize on form level', () => {
       const managerApi = createManagerApi({ initializeOnMount: true });
 
-      managerApi().registerField({ name: 'field', value: 'first', render: jest.fn() });
-      managerApi().registerField({ name: 'field', value: 'second', render: jest.fn() });
+      managerApi().registerField({ name: 'field', initialValue: 'first', render: jest.fn() });
+      managerApi().registerField({ name: 'field', initialValue: 'second', render: jest.fn() });
 
       expect(managerApi().values).toEqual({ field: 'second' });
     });
@@ -597,8 +597,8 @@ describe('managerApi', () => {
     it('should initialize on field level', () => {
       const managerApi = createManagerApi({});
 
-      managerApi().registerField({ name: 'field', value: 'first', render: jest.fn() });
-      managerApi().registerField({ name: 'field', value: 'second', initializeOnMount: true, render: jest.fn() });
+      managerApi().registerField({ name: 'field', initialValue: 'first', render: jest.fn() });
+      managerApi().registerField({ name: 'field', initialValue: 'second', initializeOnMount: true, render: jest.fn() });
 
       expect(managerApi().values).toEqual({ field: 'second' });
     });
@@ -606,8 +606,8 @@ describe('managerApi', () => {
     it('should override form level by field', () => {
       const managerApi = createManagerApi({ initializeOnMount: true });
 
-      managerApi().registerField({ name: 'field', value: 'first', render: jest.fn() });
-      managerApi().registerField({ name: 'field', value: 'second', initializeOnMount: false, render: jest.fn() });
+      managerApi().registerField({ name: 'field', initialValue: 'first', render: jest.fn() });
+      managerApi().registerField({ name: 'field', initialValue: 'second', initializeOnMount: false, render: jest.fn() });
 
       expect(managerApi().values).toEqual({ field: 'first' });
     });
@@ -1280,7 +1280,7 @@ describe('managerApi', () => {
 
         managerApi().registerField({ name: 'foo.bar', render });
         managerApi().registerField({ name: 'bar', render });
-        managerApi().registerField({ name: 'initial', render, value: 'initial value' });
+        managerApi().registerField({ name: 'initial', render, initialValue: 'initial value' });
 
         managerApi().change('foo.bar', 'foo');
         managerApi().change('bar', 'baz');
