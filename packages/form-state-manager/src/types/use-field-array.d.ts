@@ -18,6 +18,7 @@ export interface FieldArrayApi {
     remove: (index: number) => void;
     shift: () => any;
     swap: (a: number, b: number) => void;
+    unshift: (value: any) => void;
     update: (index: number, value: any) => void;
   };
   meta: Meta;
