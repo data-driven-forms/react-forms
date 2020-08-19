@@ -6,6 +6,8 @@ import isEmpty from 'lodash/isEmpty';
 import convertType from '../utils/convert-type';
 import generateId from '../utils/generate-id';
 
+const checkboxTypes = ['checkbox', 'radio'];
+
 const sanitizeValue = (event: OnChangeEvent): any => {
   if (Array.isArray(event)) {
     return event;
@@ -43,7 +45,19 @@ export const checkEmpty = (value: any) => {
   return isEmpty(value);
 };
 
-const useField = ({ name, initialValue, clearOnUnmount, initializeOnMount, validate, subscription, dataType, ...props }: UseField): UseFieldData => {
+const useField = ({
+  name,
+  initialValue,
+  clearOnUnmount,
+  initializeOnMount,
+  validate,
+  subscription,
+  dataType,
+  type,
+  multiple,
+  value,
+  ...props
+}: UseField): UseFieldData => {
   const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions, ...rest } = useContext(FormManagerContext);
   const [, render] = useReducer((count) => count + 1, 0);
   const [id] = useState(() => {
@@ -80,6 +94,16 @@ const useField = ({ name, initialValue, clearOnUnmount, initializeOnMount, valid
       sanitizedValue = finalClearedValue;
     }
 
+    if (type && type === 'checkbox') {
+      if (value) {
+        if (state?.value && Array.isArray(state.value)) {
+          sanitizedValue = state.value.includes(value) ? state.value.filter((v: any) => v !== value) : [...state.value, value];
+        } else {
+          sanitizedValue = [value];
+        }
+      }
+    }
+
     change(name, sanitizedValue);
   };
 
@@ -99,13 +123,33 @@ const useField = ({ name, initialValue, clearOnUnmount, initializeOnMount, valid
     }
   };
 
+  let valueToReturn = formOptions().getFieldValue(name) || '';
+  let checked;
+
+  if (type === 'checkbox') {
+    if (!value) {
+      checked = !!valueToReturn;
+    } else {
+      checked = !!(Array.isArray(valueToReturn) && valueToReturn.includes(value));
+    }
+  } else if (type === 'radio') {
+    checked = valueToReturn === value;
+  }
+
+  if (type && checkboxTypes.includes(type)) {
+    valueToReturn = value;
+  }
+
   return {
     input: {
-      value: formOptions().getFieldValue(name) || '',
+      value: valueToReturn,
       onChange,
       onFocus: () => focus(name),
       onBlur: () => blur(name),
-      name
+      name,
+      multiple,
+      type,
+      checked
     },
     meta: state!.meta,
     ...props
