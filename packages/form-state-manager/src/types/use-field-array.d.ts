@@ -1,4 +1,4 @@
-import { Meta } from './use-subscription';
+import { Meta } from './use-field';
 
 export interface UseFieldArrayConfig {
   name: string;
@@ -12,10 +12,12 @@ export interface FieldArrayApi {
     value: any[];
     forEach: (iterator: (name: string, index: number) => void) => void;
     map: (iterator: (name: string, index: number) => string) => string[];
+    move: (from: number, to: number) => void;
     pop: () => any;
     push: (value?: any) => void;
     remove: (index: number) => void;
     shift: () => any;
+    swap: (a: number, b: number) => void;
     update: (index: number, value: any) => void;
   };
   meta: Meta;

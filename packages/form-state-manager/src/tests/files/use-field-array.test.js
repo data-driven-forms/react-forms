@@ -277,5 +277,89 @@ describe('useFieldArray', () => {
           .prop('value')
       ).toEqual('new-value');
     });
+
+    it('should move the fourh field to second place', () => {
+      const wrapper = mount(
+        <FormStateManager initialValues={{ 'move-array': ['one', 'two', 'three', 'four'] }}>
+          {() => <DummyArray name="move-array" />}
+        </FormStateManager>
+      );
+      /**
+       * move last field to second place
+       */
+      act(() => {
+        wrapper.find(DummyArrayHookSpy).prop('move')(3, 1);
+      });
+      wrapper.update();
+
+      expect(wrapper.find('input')).toHaveLength(4);
+      expect(
+        wrapper
+          .find('input')
+          .at(0)
+          .prop('value')
+      ).toEqual('one');
+      expect(
+        wrapper
+          .find('input')
+          .at(1)
+          .prop('value')
+      ).toEqual('four');
+      expect(
+        wrapper
+          .find('input')
+          .at(2)
+          .prop('value')
+      ).toEqual('two');
+      expect(
+        wrapper
+          .find('input')
+          .at(3)
+          .prop('value')
+      ).toEqual('three');
+      expect(wrapper.find(DummyArrayHookSpy).prop('value')).toEqual(['one', 'four', 'two', 'three']);
+    });
+
+    it('should swap the fourh and second field', () => {
+      const wrapper = mount(
+        <FormStateManager initialValues={{ 'move-array': ['one', 'two', 'three', 'four'] }}>
+          {() => <DummyArray name="move-array" />}
+        </FormStateManager>
+      );
+      /**
+       * swap fourth and second field
+       */
+      act(() => {
+        wrapper.find(DummyArrayHookSpy).prop('swap')(1, 3);
+      });
+      wrapper.update();
+
+      expect(wrapper.find('input')).toHaveLength(4);
+      expect(
+        wrapper
+          .find('input')
+          .at(0)
+          .prop('value')
+      ).toEqual('one');
+      expect(
+        wrapper
+          .find('input')
+          .at(1)
+          .prop('value')
+      ).toEqual('four');
+      expect(
+        wrapper
+          .find('input')
+          .at(2)
+          .prop('value')
+      ).toEqual('three');
+      expect(
+        wrapper
+          .find('input')
+          .at(3)
+          .prop('value')
+      ).toEqual('two');
+      expect(wrapper.find(DummyArrayHookSpy).prop('value')).toEqual(['one', 'four', 'three', 'two']);
+    });
   });
 });
