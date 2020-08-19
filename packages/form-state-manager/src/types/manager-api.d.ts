@@ -2,7 +2,7 @@ import AnyObject, { AnyBooleanObject } from './any-object';
 import { FormEvent } from 'react';
 import FieldConfig, { IsEqual } from './field-config';
 import { FormValidator, Validator } from './validate';
-import { Subscription, Meta } from './use-subscription';
+import { Subscription, Meta } from './use-field';
 
 export interface FieldState {
   value: any;

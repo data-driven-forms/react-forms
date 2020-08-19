@@ -22,7 +22,7 @@ import CreateManagerApi, {
 } from '../types/manager-api';
 import AnyObject from '../types/any-object';
 import FieldConfig from '../types/field-config';
-import { Meta } from '../types/use-subscription';
+import { Meta } from '../types/use-field';
 import { formLevelValidator, isPromise } from './validate';
 import { FormValidator, FormLevelError } from '../types/validate';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import useField from '../../files/use-field';
-import { UseFieldConfig } from '../../types/use-field';
+import UseFieldConfig from '../../types/use-field';
 
 export interface TextFieldProps {
   label: React.ReactNode;
