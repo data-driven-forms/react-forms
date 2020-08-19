@@ -25,7 +25,6 @@ import FieldConfig from '../types/field-config';
 import { Meta } from '../types/use-subscription';
 import { formLevelValidator, isPromise } from './validate';
 import { FormValidator, FormLevelError } from '../types/validate';
-import { isEqual } from 'lodash';
 
 export const defaultIsEqual = (a: any, b: any) => a === b;
 
