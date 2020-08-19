@@ -33,6 +33,8 @@ const useFieldArray: UseFieldArray = ({ name, initialValue }) => {
     return valueToReturn;
   };
 
+  const update = (index: number, value: any) => onChange(internalValue.map((fieldValue, fieldIndex) => (fieldIndex === index ? value : fieldValue)));
+
   const fields = {
     length: internalValue.length,
     name,
@@ -43,6 +45,7 @@ const useFieldArray: UseFieldArray = ({ name, initialValue }) => {
     push,
     remove,
     shift,
+    update,
     ...rest
   };
   return {

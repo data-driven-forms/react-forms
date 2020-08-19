@@ -256,5 +256,26 @@ describe('useFieldArray', () => {
       expect(wrapper.find('input').prop('value')).toEqual('two');
       expect(lastValue).toEqual('one');
     });
+
+    it('should update the first field value in field array', () => {
+      const wrapper = mount(
+        <FormStateManager initialValues={{ 'update-array': ['one', 'two'] }}>{() => <DummyArray name="update-array" />}</FormStateManager>
+      );
+      /**
+       * update first field
+       */
+      act(() => {
+        wrapper.find(DummyArrayHookSpy).prop('update')(0, 'new-value');
+      });
+      wrapper.update();
+
+      expect(wrapper.find('input')).toHaveLength(2);
+      expect(
+        wrapper
+          .find('input')
+          .at(0)
+          .prop('value')
+      ).toEqual('new-value');
+    });
   });
 });
