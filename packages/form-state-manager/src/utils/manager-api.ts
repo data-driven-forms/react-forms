@@ -45,7 +45,7 @@ const traverseObject = (object: AnyObject, callback: objectMapFunction) => Objec
 const asyncWatcher: AsyncWatcher = (updateValidating, updateSubmitting) => {
   let nextKey = 0;
   const asyncValidators: AsyncWatcherRecord = {};
-  const asyncSubmissions: AsyncWatcherRecord = {};
+  // const asyncSubmissions: AsyncWatcherRecord = {};
 
   const resolveValidator = (resolveKey: number): void => {
     delete asyncValidators[resolveKey];
