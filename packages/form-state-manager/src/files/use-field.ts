@@ -51,7 +51,7 @@ const useField = ({ name, initialValue, clearOnUnmount, initializeOnMount, valid
 
     registerField({
       name,
-      value: initialValue,
+      initialValue,
       initializeOnMount,
       render,
       validate,

@@ -56,7 +56,7 @@ describe('useField', () => {
     const unregisterSpy = jest.spyOn(api, 'unregisterField');
     const registerArguments = {
       name: 'spy',
-      value: 'foo',
+      initialValue: 'foo',
       render: expect.any(Function),
       internalId: expect.any(Number)
     };

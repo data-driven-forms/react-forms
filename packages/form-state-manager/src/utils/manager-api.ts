@@ -472,8 +472,11 @@ const createManagerApi: CreateManagerApi = ({
   function registerField(field: FieldConfig): void {
     addIfUnique(state.registeredFields, field.name);
 
-    if (shouldExecute(config.initializeOnMount, field.initializeOnMount) || (!isInitialized(field.name) && typeof field.value !== 'undefined')) {
-      set(state.values, field.name, field.value || get(state.initialValues, field.name));
+    if (
+      shouldExecute(config.initializeOnMount, field.initializeOnMount) ||
+      (!isInitialized(field.name) && typeof field.initialValue !== 'undefined')
+    ) {
+      set(state.values, field.name, field.initialValue || get(state.initialValues, field.name));
     }
 
     subscribe(field as SubscriberConfig, true);
