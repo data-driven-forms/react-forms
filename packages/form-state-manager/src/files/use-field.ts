@@ -44,9 +44,7 @@ export const checkEmpty = (value: any) => {
 };
 
 const useField = ({ name, initialValue, clearOnUnmount, initializeOnMount, validate, subscription, dataType, ...props }: UseField): UseFieldData => {
-  const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions, initialValues = {}, ...rest } = useContext(
-    FormManagerContext
-  );
+  const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions, ...rest } = useContext(FormManagerContext);
   const [, render] = useReducer((count) => count + 1, 0);
   const [id] = useState(() => {
     const internalId = generateId();

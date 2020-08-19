@@ -92,6 +92,37 @@ describe('managerApi', () => {
 
       expect(validate1).toHaveBeenCalled();
       expect(validate2).not.toHaveBeenCalled();
+
+      validate1.mockReset();
+
+      managerApi().change('field2', 'cosi');
+
+      expect(validate1).toHaveBeenCalled();
+      expect(validate2).toHaveBeenCalled();
+    });
+
+    it('empty validateFields', () => {
+      const managerApi = createManagerApi({});
+
+      const render = jest.fn();
+
+      const validate1 = jest.fn();
+      const validate2 = jest.fn();
+
+      managerApi().registerField({ name: 'field1', render, validate: validate1, validateFields: [] });
+      managerApi().registerField({ name: 'field2', render, validate: validate2 });
+
+      managerApi().change('field1', 'cosi');
+
+      expect(validate1).toHaveBeenCalled();
+      expect(validate2).not.toHaveBeenCalled();
+
+      validate1.mockReset();
+
+      managerApi().change('field2', 'cosi');
+
+      expect(validate1).toHaveBeenCalled();
+      expect(validate2).toHaveBeenCalled();
     });
 
     it('should compute value using isEqual', () => {
@@ -1312,7 +1343,7 @@ describe('managerApi', () => {
 
       managerApi().pauseValidation();
 
-      managerApi().registerField({ name: '123', validate: fieldValidate, render: jest.fn() });
+      managerApi().registerField({ name: '123', validate: fieldValidate, validateFields: [], render: jest.fn() });
       managerApi().registerField({ name: 'noRun', validate: fieldValidateNoRun, render: jest.fn() });
 
       managerApi().change('123', 'value');

@@ -45,7 +45,7 @@ const traverseObject = (object: AnyObject, callback: objectMapFunction) => Objec
 const asyncWatcher: AsyncWatcher = (updateValidating, updateSubmitting) => {
   let nextKey = 0;
   const asyncValidators: AsyncWatcherRecord = {};
-  const asyncSubmissions: AsyncWatcherRecord = {};
+  // const asyncSubmissions: AsyncWatcherRecord = {};
 
   const resolveValidator = (resolveKey: number): void => {
     delete asyncValidators[resolveKey];
@@ -441,10 +441,8 @@ const createManagerApi: CreateManagerApi = ({
       }));
       state.pristine = false;
       state.dirty = true;
-      validateField(name, value);
 
-      const validateFields = state.fieldListeners[name]?.validateFields;
-      validateFields && revalidateFields(validateFields);
+      revalidateFields([name, ...(state.fieldListeners[name]?.validateFields || state.registeredFields.filter((n) => n !== name))]);
 
       if (config.validate) {
         validateForm(config.validate);
