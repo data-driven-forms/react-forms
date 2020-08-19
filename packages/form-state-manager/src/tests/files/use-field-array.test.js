@@ -361,5 +361,34 @@ describe('useFieldArray', () => {
       ).toEqual('two');
       expect(wrapper.find(DummyArrayHookSpy).prop('value')).toEqual(['one', 'four', 'three', 'two']);
     });
+
+    it('should add two fields to the start of the array', () => {
+      const wrapper = mount(<FormStateManager>{() => <DummyArray name="unshift-array" />}</FormStateManager>);
+
+      act(() => {
+        wrapper.find(DummyArrayHookSpy).prop('unshift')('one');
+      });
+      wrapper.update();
+
+      act(() => {
+        wrapper.find(DummyArrayHookSpy).prop('unshift')('two');
+      });
+      wrapper.update();
+
+      expect(wrapper.find(DummyArrayHookSpy).prop('value')).toEqual(['two', 'one']);
+      expect(wrapper.find('input')).toHaveLength(2);
+      expect(
+        wrapper
+          .find('input')
+          .at(0)
+          .prop('value')
+      ).toEqual('two');
+      expect(
+        wrapper
+          .find('input')
+          .at(1)
+          .prop('value')
+      ).toEqual('one');
+    });
   });
 });

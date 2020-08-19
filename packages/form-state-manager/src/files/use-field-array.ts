@@ -50,6 +50,8 @@ const useFieldArray: UseFieldArray = ({ name, initialValue }) => {
     }
   };
 
+  const unshift = (value: any) => onChange([value, ...internalValue]);
+
   const fields = {
     length: internalValue.length,
     name,
@@ -62,6 +64,7 @@ const useFieldArray: UseFieldArray = ({ name, initialValue }) => {
     remove,
     shift,
     swap,
+    unshift,
     update,
     ...rest
   };
