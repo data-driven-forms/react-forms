@@ -57,6 +57,9 @@ const useField = ({
   multiple,
   value,
   defaultValue,
+  format,
+  parse,
+  formatOnBlur,
   ...props
 }: UseField): UseFieldData => {
   const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions, ...rest } = useContext(FormManagerContext);
@@ -106,6 +109,10 @@ const useField = ({
       }
     }
 
+    if (parse) {
+      sanitizedValue = parse(sanitizedValue, name);
+    }
+
     change(name, sanitizedValue);
   };
 
@@ -140,6 +147,10 @@ const useField = ({
 
   if (type && checkboxTypes.includes(type)) {
     valueToReturn = value;
+  }
+
+  if ((format && !formatOnBlur) || (format && formatOnBlur && !state?.meta.active)) {
+    valueToReturn = format(valueToReturn, name);
   }
 
   return {
