@@ -1,6 +1,6 @@
 import { useEffect, useContext, useReducer, useState } from 'react';
 import FormManagerContext from '../files/form-manager-context';
-import UseField, { OnChangeEvent, UseFieldData } from '../types/use-field';
+import UseField, { OnChangeEvent, UseFieldData, Format } from '../types/use-field';
 import isEmpty from 'lodash/isEmpty';
 
 import convertType from '../utils/convert-type';
@@ -45,6 +45,9 @@ export const checkEmpty = (value: any) => {
   return isEmpty(value);
 };
 
+const defaultFormat = (value?: any) => (value === undefined ? '' : value);
+const defaultParse = (value?: any) => (value === '' ? undefined : value);
+
 const useField = ({
   name,
   initialValue,
@@ -58,7 +61,7 @@ const useField = ({
   value,
   defaultValue,
   format,
-  parse,
+  parse = defaultParse,
   formatOnBlur,
   ...props
 }: UseField): UseFieldData => {
@@ -109,11 +112,7 @@ const useField = ({
       }
     }
 
-    if (parse) {
-      sanitizedValue = parse(sanitizedValue, name);
-    }
-
-    change(name, sanitizedValue);
+    change(name, parse(sanitizedValue, name));
   };
 
   useEffect(
@@ -149,13 +148,14 @@ const useField = ({
     valueToReturn = value;
   }
 
+  let finalFormat = defaultFormat as Format;
   if ((format && !formatOnBlur) || (format && formatOnBlur && !state?.meta.active)) {
-    valueToReturn = format(valueToReturn, name);
+    finalFormat = format;
   }
 
   return {
     input: {
-      value: valueToReturn,
+      value: finalFormat(valueToReturn, name),
       onChange,
       onFocus: () => focus(name),
       onBlur: () => blur(name),
