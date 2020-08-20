@@ -20,6 +20,7 @@ export interface FieldConfig extends AnyObject {
   validateFields?: Array<string>;
   initialValue?: any;
   defaultValue?: any;
+  data?: AnyObject;
 }
 
 export default FieldConfig;

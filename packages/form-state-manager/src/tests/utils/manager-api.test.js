@@ -1441,4 +1441,18 @@ describe('managerApi', () => {
       expect(state.dirty).toEqual(false);
     });
   });
+
+  describe('data', () => {
+    it('registers sets data and merges them together', () => {
+      const managerApi = createManagerApi({});
+
+      managerApi().registerField({ name: 'field', render: jest.fn(), data: { a: 'b', b: { c: 'y' } } });
+      managerApi().registerField({ name: 'field', render: jest.fn(), data: { a: 'abc', b: { d: 'zz' } } });
+
+      expect(managerApi().getFieldState('field').meta.data).toEqual({
+        a: 'abc',
+        b: { c: 'y', d: 'zz' }
+      });
+    });
+  });
 });
