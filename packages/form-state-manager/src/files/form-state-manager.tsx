@@ -4,6 +4,7 @@ import FormManagerContext from './form-manager-context';
 import createManagerApi from '../utils/manager-api';
 
 import FormStateManagerProps from '../types/form-state-manager';
+import useFieldArrayApi from './use-field-array-api';
 
 const FormStateManager: React.ComponentType<FormStateManagerProps> = ({
   children,
@@ -35,6 +36,7 @@ const FormStateManager: React.ComponentType<FormStateManagerProps> = ({
     unsubscribe
   } = managerApi();
 
+  const { current: fieldArrayApi } = useRef(useFieldArrayApi(change, getFieldValue));
   return (
     <FormManagerContext.Provider
       value={{
@@ -52,7 +54,8 @@ const FormStateManager: React.ComponentType<FormStateManagerProps> = ({
         clearedValue,
         initialValues,
         subscribe,
-        unsubscribe
+        unsubscribe,
+        ...fieldArrayApi
       }}
     >
       <FormManagerContext.Consumer>{(managerState) => children(managerState)}</FormManagerContext.Consumer>
