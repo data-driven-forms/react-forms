@@ -54,10 +54,15 @@ const useFieldArray: UseFieldArray = ({ name, initialValue }) => {
 
   const insert = (index: number, value?: any) => onChange([...internalValue.slice(0, index), value, ...internalValue.slice(index)]);
 
+  const concat = (value: any[]) => onChange([...internalValue, ...value]);
+
+  const removeBatch = (indexes: number[]) => onChange(internalValue.filter((_v, index) => !indexes.includes(index)));
+
   const fields = {
     length: internalValue.length,
     name,
     value,
+    concat,
     forEach,
     insert,
     map,
@@ -65,6 +70,7 @@ const useFieldArray: UseFieldArray = ({ name, initialValue }) => {
     pop,
     push,
     remove,
+    removeBatch,
     shift,
     swap,
     unshift,

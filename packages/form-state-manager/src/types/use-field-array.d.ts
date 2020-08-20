@@ -10,6 +10,7 @@ export interface FieldArrayApi {
     name: string;
     length: number;
     value: any[];
+    concat: (value: any[]) => void;
     forEach: (iterator: (name: string, index: number) => void) => void;
     insert: (index: number, value?: any) => void;
     map: (iterator: (name: string, index: number) => string) => string[];
@@ -17,6 +18,7 @@ export interface FieldArrayApi {
     pop: () => any;
     push: (value?: any) => void;
     remove: (index: number) => void;
+    removeBatch: (indexes: number[]) => void;
     shift: () => any;
     swap: (a: number, b: number) => void;
     unshift: (value: any) => void;

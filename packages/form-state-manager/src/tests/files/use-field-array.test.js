@@ -434,5 +434,53 @@ describe('useFieldArray', () => {
           .prop('value')
       ).toEqual('two');
     });
+
+    it('should concat an array to the end of the field array', () => {
+      const wrapper = mount(<FormStateManager>{() => <DummyArray name="concat-array" initialValue={['one']} />}</FormStateManager>);
+      expect(wrapper.find('input')).toHaveLength(1);
+      act(() => {
+        wrapper.find(DummyArrayHookSpy).prop('concat')(['two', 'three']);
+      });
+      wrapper.update();
+      expect(wrapper.find('input')).toHaveLength(3);
+      expect(
+        wrapper
+          .find('input')
+          .at(0)
+          .prop('value')
+      ).toEqual('one');
+      expect(
+        wrapper
+          .find('input')
+          .at(1)
+          .prop('value')
+      ).toEqual('two');
+      expect(
+        wrapper
+          .find('input')
+          .at(2)
+          .prop('value')
+      ).toEqual('three');
+      expect(wrapper.find(DummyArrayHookSpy).prop('value')).toEqual(['one', 'two', 'three']);
+    });
+
+    it('should remove multiple fields from field array', () => {
+      const wrapper = mount(
+        <FormStateManager>{() => <DummyArray name="removeBatch-array" initialValue={['one', 'two', 'three']} />}</FormStateManager>
+      );
+      expect(wrapper.find('input')).toHaveLength(3);
+      act(() => {
+        wrapper.find(DummyArrayHookSpy).prop('removeBatch')([0, 2]);
+      });
+      wrapper.update();
+      expect(wrapper.find('input')).toHaveLength(1);
+      expect(
+        wrapper
+          .find('input')
+          .at(0)
+          .prop('value')
+      ).toEqual('two');
+      expect(wrapper.find(DummyArrayHookSpy).prop('value')).toEqual(['two']);
+    });
   });
 });
