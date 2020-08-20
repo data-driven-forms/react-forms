@@ -4,6 +4,8 @@ import { FieldRender } from './manager-api';
 import { Validator } from './validate';
 
 export type IsEqual = (a: any, b: any) => boolean;
+export type AfterSubmit = () => void;
+export type BeforeSubmit = () => void | false;
 
 export interface FieldConfig extends AnyObject {
   name: string;
@@ -21,6 +23,8 @@ export interface FieldConfig extends AnyObject {
   initialValue?: any;
   defaultValue?: any;
   data?: AnyObject;
+  afterSubmit?: AfterSubmit;
+  beforeSubmit?: BeforeSubmit;
 }
 
 export default FieldConfig;

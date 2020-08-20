@@ -463,9 +463,27 @@ const createManagerApi: CreateManagerApi = ({
     setFieldState(name, (prevState) => ({ ...prevState, meta: { ...prevState.meta, active: false } }));
   }
 
-  function handleSubmit(event: FormEvent): void {
-    event.preventDefault();
+  function handleSubmit(event?: FormEvent): void {
+    event && event.preventDefault && event.preventDefault();
+
+    let error = false;
+    state.registeredFields.forEach((name) =>
+      traverseObject(state.fieldListeners[name].fields, (field) => {
+        error = error || (field.beforeSubmit && field.beforeSubmit() === false);
+      })
+    );
+
+    if (error) {
+      return;
+    }
+
     config.onSubmit(state.values);
+
+    state.registeredFields.forEach((name) =>
+      traverseObject(state.fieldListeners[name].fields, (field) => {
+        field.afterSubmit && field.afterSubmit();
+      })
+    );
   }
 
   function isInitialized(name: string): boolean {
@@ -649,7 +667,9 @@ const createManagerApi: CreateManagerApi = ({
         ...state.fieldListeners[subscriberConfig.name]?.fields,
         [subscriberConfig.internalId || subscriberConfig.name]: {
           render: subscriberConfig.render,
-          subscription: subscriberConfig.subscription
+          subscription: subscriberConfig.subscription,
+          afterSubmit: subscriberConfig.afterSubmit,
+          beforeSubmit: subscriberConfig.beforeSubmit
         }
       }
     };

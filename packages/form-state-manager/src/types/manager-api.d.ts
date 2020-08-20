@@ -1,6 +1,6 @@
 import AnyObject, { AnyBooleanObject } from './any-object';
 import { FormEvent } from 'react';
-import FieldConfig, { IsEqual } from './field-config';
+import FieldConfig, { IsEqual, AfterSubmit, BeforeSubmit } from './field-config';
 import { FormValidator, Validator } from './validate';
 import { Subscription, Meta } from './use-field';
 
@@ -20,7 +20,7 @@ export type UpdateFieldState = (name: string, mutateState: (prevState: FieldStat
 
 export type Callback = () => void;
 export type Change = (name: string, value?: any) => void;
-export type HandleSubmit = (event: FormEvent) => void;
+export type HandleSubmit = (event?: FormEvent) => void;
 export type RegisterField = (field: FieldConfig) => void;
 export type UnregisterField = (field: Omit<FieldConfig, 'render'>) => void;
 export type GetState = () => ManagerState;
@@ -62,6 +62,8 @@ export type FieldRender = () => void;
 export interface ListenerField {
   render: FieldRender;
   subscription?: Subscription;
+  afterSubmit?: AfterSubmit;
+  beforeSubmit?: BeforeSubmit;
 }
 
 export interface FieldListenerFields {
@@ -178,6 +180,8 @@ export interface SubscriberConfig extends AnyObject {
   internalId?: number | string;
   isEqual?: IsEqual;
   validateFields?: Array<string>;
+  afterSubmit?: AfterSubmit;
+  beforeSubmit?: BeforeSubmit;
 }
 
 export interface CreateManagerApiConfig {
