@@ -61,6 +61,9 @@ export interface UseFieldData extends AnyObject {
   meta: Meta;
 }
 
+export type Format = (value: any, name: string) => any;
+export type Parse = (value: any, name: string) => any;
+
 export interface UseField extends AnyObject {
   name: string;
   initialValue?: any;
@@ -71,6 +74,9 @@ export interface UseField extends AnyObject {
   clearedValue?: any;
   dataType?: DataType;
   type?: string;
+  format?: Format;
+  parse?: Parse;
+  formatOnBlur?: boolean;
 }
 
 export default UseField;

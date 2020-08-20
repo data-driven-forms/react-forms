@@ -452,12 +452,15 @@ const createManagerApi: CreateManagerApi = ({
 
   function focus(name: string): void {
     state.active = name;
+    setFieldState(name, (prevState) => ({ ...prevState, meta: { ...prevState.meta, active: true } }));
   }
 
   function blur(name: string): void {
     if (state.active === name) {
       state.active = undefined;
     }
+
+    setFieldState(name, (prevState) => ({ ...prevState, meta: { ...prevState.meta, active: false } }));
   }
 
   function handleSubmit(event: FormEvent): void {

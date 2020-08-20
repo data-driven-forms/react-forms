@@ -105,16 +105,22 @@ describe('useField', () => {
     expect(wrapper.find(NonInputSpyComponent).prop('value')).toEqual(nonEventObject);
   });
 
-  it('should call focus callback on focus event', () => {
+  it('should call focus callback on focus event', async () => {
     const managerApi = createManagerApi(jest.fn());
     const api = managerApi();
     const focusSpy = jest.spyOn(api, 'focus');
     const blurSpy = jest.spyOn(api, 'blur');
     const spy = mount(<DummyComponent subscriberProps={{ name: 'spy' }} managerApi={managerApi} />).find('input');
 
-    spy.prop('onFocus')();
+    await act(async () => {
+      spy.prop('onFocus')();
+    });
+    spy.update();
     expect(focusSpy).toHaveBeenCalledWith('spy');
-    spy.prop('onBlur')();
+    await act(async () => {
+      spy.prop('onBlur')();
+    });
+    spy.update();
     expect(blurSpy).toHaveBeenCalledWith('spy');
     expect(focusSpy).toHaveBeenCalledTimes(1);
     expect(blurSpy).toHaveBeenCalledTimes(1);
@@ -1083,6 +1089,88 @@ describe('useField', () => {
         type: 'radio',
         value: 'hamster'
       });
+    });
+  });
+
+  describe('format & parse', () => {
+    let Dummy;
+    let wrapper;
+
+    beforeEach(() => {
+      managerApi = createManagerApi({});
+
+      Dummy = (props) => {
+        const { input } = useField(props);
+        return <input {...input} />;
+      };
+    });
+
+    it('parse value on change', async () => {
+      const parse = jest.fn().mockImplementation((value, name) => value * 2);
+      wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <Dummy name="field" parse={parse} />
+        </FormManagerContext.Provider>
+      );
+
+      await act(async () => {
+        wrapper.find('input').simulate('change', { target: { value: '2' } });
+      });
+      wrapper.update();
+
+      expect(parse).toHaveBeenCalledWith('2', 'field');
+      expect(managerApi().values).toEqual({ field: 4 });
+    });
+
+    it('format value', async () => {
+      const format = jest.fn().mockImplementation((value, name) => value * 2);
+      wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <Dummy name="field" format={format} />
+        </FormManagerContext.Provider>
+      );
+
+      await act(async () => {
+        wrapper.find('input').simulate('change', { target: { value: '2' } });
+      });
+      wrapper.update();
+
+      expect(format).toHaveBeenCalledWith('2', 'field');
+      expect(managerApi().values).toEqual({ field: '2' });
+      expect(wrapper.find('input').props().value).toEqual(4);
+    });
+
+    it('format value on blur', async () => {
+      const format = jest.fn().mockImplementation((value, name) => value * 2);
+      wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <Dummy name="field" format={format} formatOnBlur />
+        </FormManagerContext.Provider>
+      );
+
+      await act(async () => {
+        wrapper.find('input').simulate('focus');
+      });
+      wrapper.update();
+
+      format.mockClear(); // initialFormat
+
+      await act(async () => {
+        wrapper.find('input').simulate('change', { target: { value: '2' } });
+      });
+      wrapper.update();
+
+      expect(managerApi().values).toEqual({ field: '2' });
+      expect(format).not.toHaveBeenCalled();
+      expect(wrapper.find('input').props().value).toEqual('2');
+
+      await act(async () => {
+        wrapper.find('input').simulate('blur');
+      });
+      wrapper.update();
+
+      expect(format).toHaveBeenCalledWith('2', 'field');
+      expect(wrapper.find('input').props().value).toEqual(4);
     });
   });
 });
