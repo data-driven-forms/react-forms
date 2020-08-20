@@ -26,7 +26,20 @@ const FormManagerContext = createContext<ManagerContextValue>({
   focus: noop,
   initialValues: {},
   subscribe: noop,
-  unsubscribe: noop
+  unsubscribe: noop,
+  concat: noop,
+  forEach: noop,
+  insert: noop,
+  map: () => [],
+  move: noop,
+  pop: noop,
+  push: noop,
+  remove: noop,
+  removeBatch: noop,
+  shift: noop,
+  swap: noop,
+  unshift: noop,
+  update: noop
 });
 
 export default FormManagerContext;
