@@ -686,7 +686,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'checkbox',
-        value: undefined
+        value: ''
       });
       spy.mockReset();
 
@@ -706,7 +706,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'checkbox',
-        value: undefined
+        value: ''
       });
 
       // >>>>>>>>>>>>>>>> DESELECT
@@ -725,7 +725,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'checkbox',
-        value: undefined
+        value: ''
       });
     });
 
@@ -1171,6 +1171,32 @@ describe('useField', () => {
 
       expect(format).toHaveBeenCalledWith('2', 'field');
       expect(wrapper.find('input').props().value).toEqual(4);
+    });
+
+    it('default parse and format handles undefined/empty string', async () => {
+      wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <Dummy name="field" />
+        </FormManagerContext.Provider>
+      );
+
+      // set undefined
+      await act(async () => {
+        wrapper.find('input').simulate('change', { target: { value: undefined } });
+      });
+      wrapper.update();
+
+      expect(managerApi().values).toEqual({ field: undefined });
+      expect(wrapper.find('input').props().value).toEqual(''); // it's controlled
+
+      // set '' empty string
+      await act(async () => {
+        wrapper.find('input').simulate('change', { target: { value: '' } });
+      });
+      wrapper.update();
+
+      expect(managerApi().values).toEqual({ field: undefined });
+      expect(wrapper.find('input').props().value).toEqual(''); // it's controlled
     });
   });
 });
