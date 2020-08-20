@@ -88,6 +88,12 @@ describe('managerApi', () => {
       managerApi().registerField({ name: 'field2', render, validate: validate1 });
       managerApi().registerField({ name: 'field3', render, validate: validate2 });
 
+      // initial validate
+      expect(validate1).toHaveBeenCalled();
+      expect(validate2).toHaveBeenCalled();
+      validate1.mockClear();
+      validate2.mockClear();
+
       managerApi().change('field1', 'cosi');
 
       expect(validate1).toHaveBeenCalled();
@@ -111,6 +117,12 @@ describe('managerApi', () => {
 
       managerApi().registerField({ name: 'field1', render, validate: validate1, validateFields: [] });
       managerApi().registerField({ name: 'field2', render, validate: validate2 });
+
+      // initial validate
+      expect(validate1).toHaveBeenCalled();
+      expect(validate2).toHaveBeenCalled();
+      validate1.mockClear();
+      validate2.mockClear();
 
       managerApi().change('field1', 'cosi');
 
@@ -1341,10 +1353,16 @@ describe('managerApi', () => {
 
       const managerApi = createManagerApi({});
 
-      managerApi().pauseValidation();
-
       managerApi().registerField({ name: '123', validate: fieldValidate, validateFields: [], render: jest.fn() });
       managerApi().registerField({ name: 'noRun', validate: fieldValidateNoRun, render: jest.fn() });
+
+      // initial validation
+      expect(fieldValidate).toHaveBeenCalled();
+      expect(fieldValidateNoRun).toHaveBeenCalled();
+      fieldValidateNoRun.mockClear();
+      fieldValidate.mockClear();
+
+      managerApi().pauseValidation();
 
       managerApi().change('123', 'value');
 

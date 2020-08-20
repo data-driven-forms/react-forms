@@ -75,7 +75,8 @@ describe('validate', () => {
       const managerApi = createManagerApi({ validate });
 
       managerApi().registerField({ name: 'field', render: jest.fn() });
-      expect(validate).not.toHaveBeenCalled();
+      expect(validate).toHaveBeenCalled();
+      validate.mockClear();
 
       managerApi().change('field', 'different');
       expect(validate).toHaveBeenCalledWith({ field: 'different' });
@@ -89,7 +90,8 @@ describe('validate', () => {
       const managerApi = createManagerApi({ validate });
 
       managerApi().registerField({ name: 'field', render: jest.fn() });
-      expect(validate).not.toHaveBeenCalled();
+      expect(validate).toHaveBeenCalled();
+      validate.mockClear();
 
       managerApi().change('field', 'different');
       expect(validate).toHaveBeenCalledWith({ field: 'different' });
@@ -108,7 +110,8 @@ describe('validate', () => {
       const managerApi = createManagerApi({ validate });
 
       managerApi().registerField({ name: 'field', render: jest.fn() });
-      expect(validate).not.toHaveBeenCalled();
+      expect(validate).toHaveBeenCalled();
+      validate.mockClear();
 
       managerApi().change('field', 'different');
       expect(validate).toHaveBeenCalledWith({ field: 'different' });

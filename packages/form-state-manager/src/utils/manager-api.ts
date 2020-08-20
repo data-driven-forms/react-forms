@@ -506,6 +506,12 @@ const createManagerApi: CreateManagerApi = ({
       state.fieldListeners[field.name].state.meta.dirty = true;
       state.fieldListeners[field.name].state.meta.pristine = false;
     }
+
+    revalidateFields([field.name, ...(state.fieldListeners[field.name]?.validateFields || state.registeredFields.filter((n) => n !== field.name))]);
+
+    if (config.validate) {
+      validateForm(config.validate);
+    }
   }
 
   function unregisterField(field: Omit<FieldConfig, 'render'>): void {
