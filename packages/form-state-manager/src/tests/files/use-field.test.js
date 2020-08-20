@@ -12,7 +12,7 @@ const SpyComponent = ({ initialValue, meta, validate, initializeOnMount, ...prop
 
 const SubscribedComponent = ({ fakeComponent, ...props }) => {
   const {
-    input: { value, onChange, onFocus, onBlur },
+    input: { value, onChange, onFocus, onBlur, checked },
     meta
   } = useField(props);
   return (
@@ -20,7 +20,7 @@ const SubscribedComponent = ({ fakeComponent, ...props }) => {
       {fakeComponent ? (
         <NonInputSpyComponent {...props} value={value} onChange={onChange} meta={meta} />
       ) : (
-        <SpyComponent {...props} value={value || ''} onFocus={onFocus} onBlur={onBlur} onChange={onChange} meta={meta} />
+        <SpyComponent {...props} checked={checked} value={value || ''} onFocus={onFocus} onBlur={onBlur} onChange={onChange} meta={meta} />
       )}
     </div>
   );
@@ -83,7 +83,7 @@ describe('useField', () => {
     const input = wrapper.find('input');
     input.simulate('change', { target: { checked: true, type: 'checkbox' } });
     wrapper.update();
-    expect(wrapper.find(SpyComponent).prop('value')).toEqual(true);
+    expect(wrapper.find(SpyComponent).prop('checked')).toEqual(true);
   });
 
   it('should set correct array value', () => {
@@ -644,6 +644,445 @@ describe('useField', () => {
       wrapper.update();
 
       expect(managerApi().values.field).toEqual([1, 2, 45]);
+    });
+  });
+
+  describe('type', () => {
+    let Typper;
+    let wrapper;
+    let spy;
+
+    beforeEach(() => {
+      spy = jest.fn();
+      managerApi = createManagerApi({});
+
+      Typper = ({ spy, ...props }) => {
+        const { input } = useField(props);
+
+        spy(input);
+
+        return <input {...input} />;
+      };
+    });
+
+    it('checkbox with no value', async () => {
+      wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <Typper name="field" type="checkbox" spy={spy} />
+        </FormManagerContext.Provider>
+      );
+
+      expect(spy).toHaveBeenCalledWith({
+        checked: false,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'checkbox',
+        value: undefined
+      });
+      spy.mockReset();
+
+      // >>>>>>>>>>>>>>>> SELECT
+      await act(async () => {
+        wrapper.find('input').simulate('change', { target: { checked: true, type: 'checkbox' } });
+      });
+      wrapper.update();
+
+      expect(managerApi().values).toEqual({ field: true });
+
+      expect(spy).toHaveBeenCalledWith({
+        checked: true,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'checkbox',
+        value: undefined
+      });
+
+      // >>>>>>>>>>>>>>>> DESELECT
+      await act(async () => {
+        wrapper.find('input').simulate('change', { target: { checked: false, type: 'checkbox' } });
+      });
+      wrapper.update();
+
+      expect(managerApi().values).toEqual({ field: false });
+
+      expect(spy).toHaveBeenCalledWith({
+        checked: false,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'checkbox',
+        value: undefined
+      });
+    });
+
+    it('checkbox with values', async () => {
+      const spyDog = jest.fn();
+      const spyCat = jest.fn();
+      const spyHamster = jest.fn();
+
+      wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <Typper name="field" value="dog" type="checkbox" spy={spyDog} />
+          <Typper name="field" value="cat" type="checkbox" spy={spyCat} />
+          <Typper name="field" value="hamster" type="checkbox" spy={spyHamster} />
+        </FormManagerContext.Provider>
+      );
+
+      // >>>>>>>>>>>>>>>> INITIAL RENDER
+      expect(spyDog).toHaveBeenCalledWith({
+        checked: false,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'checkbox',
+        value: 'dog'
+      });
+      expect(spyCat).toHaveBeenCalledWith({
+        checked: false,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'checkbox',
+        value: 'cat'
+      });
+      expect(spyHamster).toHaveBeenCalledWith({
+        checked: false,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'checkbox',
+        value: 'hamster'
+      });
+      spyDog.mockReset();
+      spyCat.mockReset();
+      spyHamster.mockReset();
+
+      // >>>>>>>>>>>>>>>> SELECT CATS
+      await act(async () => {
+        wrapper
+          .find('input')
+          .at(1)
+          .simulate('change', { target: { checked: true, type: 'checkbox' } });
+      });
+      wrapper.update();
+
+      expect(managerApi().values).toEqual({ field: ['cat'] });
+
+      expect(spyDog).toHaveBeenCalledWith({
+        checked: false,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'checkbox',
+        value: 'dog'
+      });
+      expect(spyCat).toHaveBeenCalledWith({
+        checked: true,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'checkbox',
+        value: 'cat'
+      });
+      expect(spyHamster).toHaveBeenCalledWith({
+        checked: false,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'checkbox',
+        value: 'hamster'
+      });
+      spyDog.mockReset();
+      spyCat.mockReset();
+      spyHamster.mockReset();
+
+      // >>>>>>>>>>>>>>>> SELECT HAMSTERS
+      await act(async () => {
+        wrapper
+          .find('input')
+          .at(2)
+          .simulate('change', { target: { checked: true, type: 'checkbox' } });
+      });
+      wrapper.update();
+
+      expect(managerApi().values).toEqual({ field: ['cat', 'hamster'] });
+
+      expect(spyDog).toHaveBeenCalledWith({
+        checked: false,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'checkbox',
+        value: 'dog'
+      });
+      expect(spyCat).toHaveBeenCalledWith({
+        checked: true,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'checkbox',
+        value: 'cat'
+      });
+      expect(spyHamster).toHaveBeenCalledWith({
+        checked: true,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'checkbox',
+        value: 'hamster'
+      });
+      spyDog.mockReset();
+      spyCat.mockReset();
+      spyHamster.mockReset();
+
+      // >>>>>>>>>>>>>>>> DESELECT HAMSTERS
+      await act(async () => {
+        wrapper
+          .find('input')
+          .at(2)
+          .simulate('change', { target: { checked: false, type: 'checkbox' } });
+      });
+      wrapper.update();
+
+      expect(managerApi().values).toEqual({ field: ['cat'] });
+
+      expect(spyDog).toHaveBeenCalledWith({
+        checked: false,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'checkbox',
+        value: 'dog'
+      });
+      expect(spyCat).toHaveBeenCalledWith({
+        checked: true,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'checkbox',
+        value: 'cat'
+      });
+      expect(spyHamster).toHaveBeenCalledWith({
+        checked: false,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'checkbox',
+        value: 'hamster'
+      });
+    });
+
+    it('radio', async () => {
+      const spyDog = jest.fn();
+      const spyCat = jest.fn();
+      const spyHamster = jest.fn();
+
+      wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <Typper name="field" value="dog" type="radio" spy={spyDog} />
+          <Typper name="field" value="cat" type="radio" spy={spyCat} />
+          <Typper name="field" value="hamster" type="radio" spy={spyHamster} />
+        </FormManagerContext.Provider>
+      );
+
+      // >>>>>>>>>>>>>>>> INITIAL RENDER
+      expect(spyDog).toHaveBeenCalledWith({
+        checked: false,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'radio',
+        value: 'dog'
+      });
+      expect(spyCat).toHaveBeenCalledWith({
+        checked: false,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'radio',
+        value: 'cat'
+      });
+      expect(spyHamster).toHaveBeenCalledWith({
+        checked: false,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'radio',
+        value: 'hamster'
+      });
+      spyDog.mockReset();
+      spyCat.mockReset();
+      spyHamster.mockReset();
+
+      // >>>>>>>>>>>>>>>> SELECT CATS
+      await act(async () => {
+        wrapper
+          .find('input')
+          .at(1)
+          .simulate('change', { target: { value: 'cat' } });
+      });
+      wrapper.update();
+
+      expect(managerApi().values).toEqual({ field: 'cat' });
+
+      expect(spyDog).toHaveBeenCalledWith({
+        checked: false,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'radio',
+        value: 'dog'
+      });
+      expect(spyCat).toHaveBeenCalledWith({
+        checked: true,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'radio',
+        value: 'cat'
+      });
+      expect(spyHamster).toHaveBeenCalledWith({
+        checked: false,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'radio',
+        value: 'hamster'
+      });
+      spyDog.mockReset();
+      spyCat.mockReset();
+      spyHamster.mockReset();
+
+      // >>>>>>>>>>>>>>>> SELECT HAMSTER
+      await act(async () => {
+        wrapper
+          .find('input')
+          .at(2)
+          .simulate('change', { target: { value: 'hamster' } });
+      });
+      wrapper.update();
+
+      expect(managerApi().values).toEqual({ field: 'hamster' });
+
+      expect(spyDog).toHaveBeenCalledWith({
+        checked: false,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'radio',
+        value: 'dog'
+      });
+      expect(spyCat).toHaveBeenCalledWith({
+        checked: false,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'radio',
+        value: 'cat'
+      });
+      expect(spyHamster).toHaveBeenCalledWith({
+        checked: true,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'radio',
+        value: 'hamster'
+      });
+      spyDog.mockReset();
+      spyCat.mockReset();
+      spyHamster.mockReset();
+
+      // >>>>>>>>>>>>>>>> SELECT HAMSTER - AGAIN
+      await act(async () => {
+        wrapper
+          .find('input')
+          .at(2)
+          .simulate('change', { target: { value: 'hamster' } });
+      });
+      wrapper.update();
+
+      expect(managerApi().values).toEqual({ field: 'hamster' });
+
+      expect(spyDog).toHaveBeenCalledWith({
+        checked: false,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'radio',
+        value: 'dog'
+      });
+      expect(spyCat).toHaveBeenCalledWith({
+        checked: false,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'radio',
+        value: 'cat'
+      });
+      expect(spyHamster).toHaveBeenCalledWith({
+        checked: true,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'radio',
+        value: 'hamster'
+      });
     });
   });
 });

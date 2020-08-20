@@ -44,13 +44,14 @@ export type OnBlur = (value: any) => void;
 export type OnFocus = (value: any) => void;
 
 export interface Input {
+  name: string;
   value: any;
   checked?: boolean;
   onChange: OnChange;
   onBlur: OnBlur;
   onFocus: OnFocus;
   multiple?: boolean;
-  name: string;
+  type?: string;
 }
 
 export type OnChangeEvent = React.ChangeEvent | any;
@@ -69,6 +70,7 @@ export interface UseField extends AnyObject {
   validate?: Validator;
   clearedValue?: any;
   dataType?: DataType;
+  type?: string;
 }
 
 export default UseField;
