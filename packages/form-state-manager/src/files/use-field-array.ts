@@ -52,11 +52,14 @@ const useFieldArray: UseFieldArray = ({ name, initialValue }) => {
 
   const unshift = (value: any) => onChange([value, ...internalValue]);
 
+  const insert = (index: number, value?: any) => onChange([...internalValue.slice(0, index), value, ...internalValue.slice(index)]);
+
   const fields = {
     length: internalValue.length,
     name,
     value,
     forEach,
+    insert,
     map,
     move,
     pop,

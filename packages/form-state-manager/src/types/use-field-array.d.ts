@@ -11,6 +11,7 @@ export interface FieldArrayApi {
     length: number;
     value: any[];
     forEach: (iterator: (name: string, index: number) => void) => void;
+    insert: (index: number, value?: any) => void;
     map: (iterator: (name: string, index: number) => string) => string[];
     move: (from: number, to: number) => void;
     pop: () => any;
