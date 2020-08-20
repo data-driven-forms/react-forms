@@ -19,6 +19,7 @@ export interface FieldConfig extends AnyObject {
   isEqual?: IsEqual;
   validateFields?: Array<string>;
   initialValue?: any;
+  defaultValue?: any;
 }
 
 export default FieldConfig;

@@ -479,6 +479,12 @@ const createManagerApi: CreateManagerApi = ({
       set(state.values, field.name, field.initialValue || get(state.initialValues, field.name));
     }
 
+    let setDirty = false;
+    if (!isInitialized(field.name) && typeof field.defaultValue !== 'undefined' && typeof get(state.values, field.name) === 'undefined') {
+      set(state.values, field.name, field.defaultValue);
+      setDirty = true;
+    }
+
     subscribe(field as SubscriberConfig, true);
 
     if (state.fieldListeners[field.name]?.count === 1) {
@@ -488,6 +494,14 @@ const createManagerApi: CreateManagerApi = ({
 
       const fieldAsyncWatcher = asyncWatcher(updateFieldValidating, () => undefined);
       state.fieldListeners[field.name].asyncWatcher = fieldAsyncWatcher;
+    }
+
+    if (setDirty) {
+      state.pristine = false;
+      state.dirty = true;
+      state.dirtyFields[field.name] = true;
+      state.fieldListeners[field.name].state.meta.dirty = true;
+      state.fieldListeners[field.name].state.meta.pristine = false;
     }
   }
 
