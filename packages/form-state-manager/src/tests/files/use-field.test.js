@@ -684,13 +684,35 @@ describe('useField', () => {
       });
       spy.mockReset();
 
+      // >>>>>>>>>>>>>>>> SELECT
       await act(async () => {
         wrapper.find('input').simulate('change', { target: { checked: true, type: 'checkbox' } });
       });
       wrapper.update();
 
+      expect(managerApi().values).toEqual({ field: true });
+
       expect(spy).toHaveBeenCalledWith({
         checked: true,
+        multiple: undefined,
+        name: 'field',
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onFocus: expect.any(Function),
+        type: 'checkbox',
+        value: undefined
+      });
+
+      // >>>>>>>>>>>>>>>> DESELECT
+      await act(async () => {
+        wrapper.find('input').simulate('change', { target: { checked: false, type: 'checkbox' } });
+      });
+      wrapper.update();
+
+      expect(managerApi().values).toEqual({ field: false });
+
+      expect(spy).toHaveBeenCalledWith({
+        checked: false,
         multiple: undefined,
         name: 'field',
         onBlur: expect.any(Function),
@@ -758,6 +780,8 @@ describe('useField', () => {
       });
       wrapper.update();
 
+      expect(managerApi().values).toEqual({ field: ['cat'] });
+
       expect(spyDog).toHaveBeenCalledWith({
         checked: false,
         multiple: undefined,
@@ -801,6 +825,8 @@ describe('useField', () => {
       });
       wrapper.update();
 
+      expect(managerApi().values).toEqual({ field: ['cat', 'hamster'] });
+
       expect(spyDog).toHaveBeenCalledWith({
         checked: false,
         multiple: undefined,
@@ -843,6 +869,8 @@ describe('useField', () => {
           .simulate('change', { target: { checked: false, type: 'checkbox' } });
       });
       wrapper.update();
+
+      expect(managerApi().values).toEqual({ field: ['cat'] });
 
       expect(spyDog).toHaveBeenCalledWith({
         checked: false,
@@ -933,6 +961,8 @@ describe('useField', () => {
       });
       wrapper.update();
 
+      expect(managerApi().values).toEqual({ field: 'cat' });
+
       expect(spyDog).toHaveBeenCalledWith({
         checked: false,
         multiple: undefined,
@@ -976,6 +1006,8 @@ describe('useField', () => {
       });
       wrapper.update();
 
+      expect(managerApi().values).toEqual({ field: 'hamster' });
+
       expect(spyDog).toHaveBeenCalledWith({
         checked: false,
         multiple: undefined,
@@ -1018,6 +1050,8 @@ describe('useField', () => {
           .simulate('change', { target: { value: 'hamster' } });
       });
       wrapper.update();
+
+      expect(managerApi().values).toEqual({ field: 'hamster' });
 
       expect(spyDog).toHaveBeenCalledWith({
         checked: false,
