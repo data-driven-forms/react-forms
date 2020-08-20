@@ -1380,4 +1380,65 @@ describe('managerApi', () => {
       expect(debugNew.mock.calls.length).toEqual(1);
     });
   });
+
+  describe('defaultValue', () => {
+    it('should set default value when there is no initialValue', () => {
+      const managerApi = createManagerApi({});
+
+      managerApi().registerField({ name: 'field', render: jest.fn(), defaultValue: 'john' });
+
+      expect(managerApi().values).toEqual({
+        field: 'john'
+      });
+      expect(managerApi().initialValues).toEqual({});
+      expect(managerApi().dirtyFields).toEqual({
+        field: true
+      });
+      expect(managerApi().pristine).toEqual(false);
+      expect(managerApi().dirty).toEqual(true);
+
+      const state = managerApi().getFieldState('field');
+
+      expect(state.pristine).toEqual(false);
+      expect(state.dirty).toEqual(true);
+    });
+
+    it('should not set default value when there is form.initialValue', () => {
+      const managerApi = createManagerApi({ initialValues: { field: 'initial' } });
+
+      managerApi().registerField({ name: 'field', render: jest.fn(), defaultValue: 'john' });
+
+      expect(managerApi().values).toEqual({
+        field: 'initial'
+      });
+      expect(managerApi().initialValues).toEqual({ field: 'initial' });
+      expect(managerApi().dirtyFields).toEqual({});
+      expect(managerApi().pristine).toEqual(true);
+      expect(managerApi().dirty).toEqual(false);
+
+      const state = managerApi().getFieldState('field');
+
+      expect(state.pristine).toEqual(true);
+      expect(state.dirty).toEqual(false);
+    });
+
+    it('should not set default value when there is field.initialValue', () => {
+      const managerApi = createManagerApi({});
+
+      managerApi().registerField({ name: 'field', render: jest.fn(), defaultValue: 'john', initialValue: 'initial' });
+
+      expect(managerApi().values).toEqual({
+        field: 'initial'
+      });
+      expect(managerApi().initialValues).toEqual({});
+      expect(managerApi().dirtyFields).toEqual({});
+      expect(managerApi().pristine).toEqual(true);
+      expect(managerApi().dirty).toEqual(false);
+
+      const state = managerApi().getFieldState('field');
+
+      expect(state.pristine).toEqual(true);
+      expect(state.dirty).toEqual(false);
+    });
+  });
 });

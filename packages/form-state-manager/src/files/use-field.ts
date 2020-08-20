@@ -56,6 +56,7 @@ const useField = ({
   type,
   multiple,
   value,
+  defaultValue,
   ...props
 }: UseField): UseFieldData => {
   const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions, ...rest } = useContext(FormManagerContext);
@@ -70,7 +71,8 @@ const useField = ({
       render,
       validate,
       subscription,
-      internalId
+      internalId,
+      defaultValue
     });
 
     return internalId;
