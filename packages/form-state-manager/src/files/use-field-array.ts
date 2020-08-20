@@ -16,14 +16,16 @@ const createFieldArrayMethods = (fieldArrayApi: FieldArrayApi, name: string): Us
   return obj as UseFieldArrayMethods;
 };
 
-const useFieldArray: UseFieldArray = ({ name, initialValue }) => {
+const useFieldArray: UseFieldArray = (props) => {
   const { change, getFieldValue } = useContext(FormManagerContext);
+  const fieldArrayApi = useFieldArrayApi(change, getFieldValue);
   const {
     input: { value },
     meta,
     ...rest
-  } = useField({ name, initialValue });
-  const fieldArrayApi = useFieldArrayApi(change, getFieldValue);
+  } = useField(props);
+
+  const { name, initialValue, ...passProps } = props;
   const { current: fieldArrayMethods } = useRef<UseFieldArrayMethods>(createFieldArrayMethods(fieldArrayApi, name));
   const internalValue = Array.isArray(value) ? value : [];
 
@@ -36,7 +38,8 @@ const useFieldArray: UseFieldArray = ({ name, initialValue }) => {
   };
   return {
     fields,
-    meta: { ...meta, length: internalValue.length }
+    meta: { ...meta, length: internalValue.length },
+    ...passProps
   };
 };
 

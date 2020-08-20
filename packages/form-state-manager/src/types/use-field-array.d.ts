@@ -1,6 +1,7 @@
 import { Meta } from './use-field';
+import AnyObject from './any-object';
 
-export interface UseFieldArrayConfig {
+export interface UseFieldArrayConfig extends AnyObject {
   name: string;
   initialValue: any[];
 }
@@ -24,11 +25,12 @@ export interface UseFieldArrayMethods {
   update: (index: number, value: any) => void;
 }
 
-export interface UseFieldArrayFields extends UseFieldArrayMethods {
-  name: string;
-  length: number;
-  value: any[];
-}
+export type UseFieldArrayFields = UseFieldArrayMethods &
+  AnyObject & {
+    name: string;
+    length: number;
+    value: any[];
+  };
 
 export interface UseFieldArrayApi {
   fields: UseFieldArrayFields;
