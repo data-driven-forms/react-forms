@@ -79,7 +79,7 @@ const useFieldArray: UseFieldArray = ({ name, initialValue }) => {
   };
   return {
     fields,
-    meta
+    meta: { ...meta, length: internalValue.length }
   };
 };
 

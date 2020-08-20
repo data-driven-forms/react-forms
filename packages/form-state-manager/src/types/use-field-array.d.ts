@@ -5,6 +5,10 @@ export interface UseFieldArrayConfig {
   initialValue: any[];
 }
 
+export interface FieldArrayMeta extends Meta {
+  length: number;
+}
+
 export interface FieldArrayApi {
   fields: {
     name: string;
