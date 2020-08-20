@@ -499,6 +499,10 @@ const createManagerApi: CreateManagerApi = ({
       state.fieldListeners[field.name].asyncWatcher = fieldAsyncWatcher;
     }
 
+    if (field.data) {
+      merge(state.fieldListeners[field.name].state.meta.data, field.data);
+    }
+
     if (setDirty) {
       state.pristine = false;
       state.dirty = true;
