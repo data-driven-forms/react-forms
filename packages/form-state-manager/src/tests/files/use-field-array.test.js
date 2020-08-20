@@ -390,5 +390,49 @@ describe('useFieldArray', () => {
           .prop('value')
       ).toEqual('one');
     });
+
+    it('should insert field into the middle of an field array', () => {
+      const wrapper = mount(
+        <FormStateManager initialValues={{ 'insert-array': ['one', 'two'] }}>{() => <DummyArray name="insert-array" />}</FormStateManager>
+      );
+      /**
+       * insert value
+       */
+      act(() => {
+        wrapper.find(DummyArrayHookSpy).prop('insert')(1);
+      });
+      wrapper.update();
+
+      act(() => {
+        wrapper.find(DummyArrayHookSpy).prop('insert')(2, 'new-value');
+      });
+      wrapper.update();
+
+      expect(wrapper.find('input')).toHaveLength(4);
+      expect(
+        wrapper
+          .find('input')
+          .at(0)
+          .prop('value')
+      ).toEqual('one');
+      expect(
+        wrapper
+          .find('input')
+          .at(1)
+          .prop('value')
+      ).toEqual('');
+      expect(
+        wrapper
+          .find('input')
+          .at(2)
+          .prop('value')
+      ).toEqual('new-value');
+      expect(
+        wrapper
+          .find('input')
+          .at(3)
+          .prop('value')
+      ).toEqual('two');
+    });
   });
 });
