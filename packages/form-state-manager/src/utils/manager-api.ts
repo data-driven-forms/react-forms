@@ -289,22 +289,29 @@ const createManagerApi: CreateManagerApi = ({
     }
 
     // TODO Memoize validation results
-    if (Object.prototype.hasOwnProperty.call(state.fieldListeners, name) && typeof state.fieldListeners[name].validate === 'function') {
+    if (Object.prototype.hasOwnProperty.call(state.fieldListeners, name)) {
       const listener = state.fieldListeners[name].asyncWatcher;
-      const result = state.fieldListeners[name].validate!(value, state.values);
-      if (isPromise(result)) {
-        const asyncResult = result as Promise<string | undefined>;
-        listener.registerValidator(asyncResult);
-        return asyncResult.then(() => handleFieldError(name, true)).catch((error) => handleFieldError(name, false, error));
-      }
+      const validators = Object.values(state.fieldListeners[name].fields).map(({ validate }) => validate);
+      validators.forEach(async (validate) => {
+        if (!validate) {
+          return;
+        }
 
-      const syncError = result as string | undefined;
-      const { valid, validating } = state.fieldListeners[name].state.meta;
-      if (result) {
-        handleFieldError(name, false, syncError);
-      } else if (valid === false && validating === false) {
-        handleFieldError(name, true);
-      }
+        const result = validate(value, state.values);
+        if (isPromise(result)) {
+          listener.registerValidator(result as Promise<string | undefined>);
+          return (result as Promise<string | undefined>)
+            .then(() => handleFieldError(name, true))
+            .catch((error) => handleFieldError(name, false, error));
+        }
+
+        const { valid, validating } = state.fieldListeners[name].state.meta;
+        if (result) {
+          handleFieldError(name, false, result as string | undefined);
+        } else if (valid === false && validating === false) {
+          handleFieldError(name, true);
+        }
+      });
     }
   }
 
@@ -660,12 +667,12 @@ const createManagerApi: CreateManagerApi = ({
           }
         : {}),
       count: (state.fieldListeners[subscriberConfig.name]?.count || 0) + 1,
-      validate: subscriberConfig.validate,
-      isEqual: subscriberConfig.isEqual,
       validateFields: subscriberConfig.validateFields,
+      isEqual: subscriberConfig.isEqual,
       fields: {
         ...state.fieldListeners[subscriberConfig.name]?.fields,
         [subscriberConfig.internalId || subscriberConfig.name]: {
+          validate: subscriberConfig.validate,
           render: subscriberConfig.render,
           subscription: subscriberConfig.subscription,
           afterSubmit: subscriberConfig.afterSubmit,
