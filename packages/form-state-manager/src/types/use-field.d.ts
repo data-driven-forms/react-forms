@@ -1,6 +1,7 @@
 import { Validator } from './validate';
 import { DataType } from './data-types';
 import AnyObject from './any-object';
+import { AfterSubmit, BeforeSubmit } from './field-config';
 
 export interface Subscription {
   active?: boolean;
@@ -77,6 +78,8 @@ export interface UseField extends AnyObject {
   format?: Format;
   parse?: Parse;
   formatOnBlur?: boolean;
+  afterSubmit?: AfterSubmit;
+  beforeSubmit?: BeforeSubmit;
 }
 
 export default UseField;

@@ -1473,4 +1473,82 @@ describe('managerApi', () => {
       });
     });
   });
+
+  describe('after & before submit', () => {
+    it('calls after submit', () => {
+      const onSubmit = jest.fn();
+
+      const managerApi = createManagerApi({ onSubmit });
+
+      const afterSubmit1 = jest.fn();
+      const afterSubmit2 = jest.fn();
+      const afterSubmit3 = jest.fn();
+
+      managerApi().registerField({ name: 'field', internalId: '1', render: jest.fn(), afterSubmit: afterSubmit1 });
+      managerApi().registerField({ name: 'field', internalId: '2', render: jest.fn(), afterSubmit: afterSubmit2 });
+      managerApi().registerField({ name: 'field2', render: jest.fn(), afterSubmit: afterSubmit3 });
+
+      expect(afterSubmit1).not.toHaveBeenCalled();
+      expect(afterSubmit2).not.toHaveBeenCalled();
+      expect(afterSubmit3).not.toHaveBeenCalled();
+
+      managerApi().submit();
+
+      expect(afterSubmit1).toHaveBeenCalled();
+      expect(afterSubmit2).toHaveBeenCalled();
+      expect(afterSubmit3).toHaveBeenCalled();
+    });
+
+    it('calls before submit', () => {
+      const onSubmit = jest.fn();
+
+      const managerApi = createManagerApi({ onSubmit });
+
+      const beforeSubmit1 = jest.fn();
+      const beforeSubmit2 = jest.fn();
+      const beforeSubmit3 = jest.fn();
+
+      managerApi().registerField({ name: 'field', internalId: '1', render: jest.fn(), beforeSubmit: beforeSubmit1 });
+      managerApi().registerField({ name: 'field', internalId: '2', render: jest.fn(), beforeSubmit: beforeSubmit2 });
+      managerApi().registerField({ name: 'field2', render: jest.fn(), beforeSubmit: beforeSubmit3 });
+
+      expect(beforeSubmit1).not.toHaveBeenCalled();
+      expect(beforeSubmit2).not.toHaveBeenCalled();
+      expect(beforeSubmit3).not.toHaveBeenCalled();
+
+      managerApi().submit();
+
+      expect(beforeSubmit1).toHaveBeenCalled();
+      expect(beforeSubmit2).toHaveBeenCalled();
+      expect(beforeSubmit3).toHaveBeenCalled();
+
+      expect(onSubmit).toHaveBeenCalled();
+    });
+
+    it('bails out on before submit returning false', () => {
+      const onSubmit = jest.fn();
+
+      const managerApi = createManagerApi({ onSubmit });
+
+      const beforeSubmit1 = jest.fn();
+      const beforeSubmit2 = jest.fn().mockImplementation(() => false);
+      const beforeSubmit3 = jest.fn();
+
+      managerApi().registerField({ name: 'field', internalId: '1', render: jest.fn(), beforeSubmit: beforeSubmit1 });
+      managerApi().registerField({ name: 'field', internalId: '2', render: jest.fn(), beforeSubmit: beforeSubmit2 });
+      managerApi().registerField({ name: 'field2', render: jest.fn(), beforeSubmit: beforeSubmit3 });
+
+      expect(beforeSubmit1).not.toHaveBeenCalled();
+      expect(beforeSubmit2).not.toHaveBeenCalled();
+      expect(beforeSubmit3).not.toHaveBeenCalled();
+
+      managerApi().submit();
+
+      expect(beforeSubmit1).toHaveBeenCalled();
+      expect(beforeSubmit2).toHaveBeenCalled();
+      expect(beforeSubmit3).not.toHaveBeenCalled();
+
+      expect(onSubmit).not.toHaveBeenCalled();
+    });
+  });
 });

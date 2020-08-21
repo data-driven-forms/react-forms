@@ -63,6 +63,8 @@ const useField = ({
   format,
   parse = defaultParse,
   formatOnBlur,
+  beforeSubmit,
+  afterSubmit,
   ...props
 }: UseField): UseFieldData => {
   const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions, ...rest } = useContext(FormManagerContext);
@@ -78,7 +80,9 @@ const useField = ({
       validate,
       subscription,
       internalId,
-      defaultValue
+      defaultValue,
+      beforeSubmit,
+      afterSubmit
     });
 
     return internalId;
