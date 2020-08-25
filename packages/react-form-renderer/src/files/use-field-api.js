@@ -96,7 +96,13 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
         arrayValidator: calculateArrayValidator(props, validate, component, validatorMapper)
       });
     }
-  }, [validate, component, props.dataType]);
+    /**
+     * We have to stringify the validate array in order to preven infinite looping when validate was passed directly to useFieldApi
+     * const x = useFieldApu({name: 'foo', validate: [{type: 'bar'}]}) will trigger infinite looping witouth the serialize.
+     * Using stringify is acceptable here since the array is usually very small.
+     * If we notice performance hit, we can implement custom hook with a deep equal functionality.
+     */
+  }, [validate ? JSON.stringify(validate) : false, component, props.dataType]);
 
   /** Re-convert initialValue when changed */
   useEffect(() => {
