@@ -309,7 +309,7 @@ const LandingPageCards = () => {
               <Typography variant="body2" gutterBottom className={classes.mappersText}>
                 This list represents a set of provided mappers. Each mapper brings all basic form components from its design system. You can
                 immediately use form inputs such as text fields, selects, radios, checkboxes or wizards. However, this selection does not limit you as
-                integrating custom coponents is simple as it can be - all it takes is just one hook.
+                integrating custom components is simple as it can be - all it takes is just one hook.
               </Typography>
             </Grid>
           </Grid>
