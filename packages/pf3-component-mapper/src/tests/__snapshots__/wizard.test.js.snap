@@ -362,6 +362,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                     "renderForm": [Function],
                                     "reset": [Function],
                                     "resetFieldState": [Function],
+                                    "restart": [Function],
                                     "resumeValidation": [Function],
                                     "setConfig": [Function],
                                     "shift": [Function],
@@ -455,6 +456,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                       "renderForm": [Function],
                                       "reset": [Function],
                                       "resetFieldState": [Function],
+                                      "restart": [Function],
                                       "resumeValidation": [Function],
                                       "setConfig": [Function],
                                       "shift": [Function],
@@ -590,6 +592,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                           renderForm={[Function]}
                                           reset={[Function]}
                                           resetFieldState={[Function]}
+                                          restart={[Function]}
                                           resumeValidation={[Function]}
                                           setConfig={[Function]}
                                           shift={[Function]}
@@ -1075,6 +1078,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                     "renderForm": [Function],
                                     "reset": [Function],
                                     "resetFieldState": [Function],
+                                    "restart": [Function],
                                     "resumeValidation": [Function],
                                     "setConfig": [Function],
                                     "shift": [Function],
@@ -1175,6 +1179,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                       "renderForm": [Function],
                                       "reset": [Function],
                                       "resetFieldState": [Function],
+                                      "restart": [Function],
                                       "resumeValidation": [Function],
                                       "setConfig": [Function],
                                       "shift": [Function],
@@ -1324,6 +1329,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                           renderForm={[Function]}
                                           reset={[Function]}
                                           resetFieldState={[Function]}
+                                          restart={[Function]}
                                           resumeValidation={[Function]}
                                           setConfig={[Function]}
                                           shift={[Function]}
@@ -1374,6 +1380,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                             renderForm={[Function]}
                                             reset={[Function]}
                                             resetFieldState={[Function]}
+                                            restart={[Function]}
                                             resumeValidation={[Function]}
                                             setConfig={[Function]}
                                             shift={[Function]}
@@ -2007,6 +2014,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                     "renderForm": [Function],
                                     "reset": [Function],
                                     "resetFieldState": [Function],
+                                    "restart": [Function],
                                     "resumeValidation": [Function],
                                     "setConfig": [Function],
                                     "shift": [Function],
@@ -2100,6 +2108,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                       "renderForm": [Function],
                                       "reset": [Function],
                                       "resetFieldState": [Function],
+                                      "restart": [Function],
                                       "resumeValidation": [Function],
                                       "setConfig": [Function],
                                       "shift": [Function],
@@ -2235,6 +2244,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                           renderForm={[Function]}
                                           reset={[Function]}
                                           resetFieldState={[Function]}
+                                          restart={[Function]}
                                           resumeValidation={[Function]}
                                           setConfig={[Function]}
                                           shift={[Function]}
@@ -2701,6 +2711,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                     "renderForm": [Function],
                                     "reset": [Function],
                                     "resetFieldState": [Function],
+                                    "restart": [Function],
                                     "resumeValidation": [Function],
                                     "setConfig": [Function],
                                     "shift": [Function],
@@ -2794,6 +2805,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                       "renderForm": [Function],
                                       "reset": [Function],
                                       "resetFieldState": [Function],
+                                      "restart": [Function],
                                       "resumeValidation": [Function],
                                       "setConfig": [Function],
                                       "shift": [Function],
@@ -2929,6 +2941,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                           renderForm={[Function]}
                                           reset={[Function]}
                                           resetFieldState={[Function]}
+                                          restart={[Function]}
                                           resumeValidation={[Function]}
                                           setConfig={[Function]}
                                           shift={[Function]}
