@@ -20,7 +20,7 @@ const Select = (props) => {
       inputAddon={inputAddon}
     >
       <div>
-        <DataDrivenSelect classNamePrefix="ddorg__pf3-component-mapper__select" invalid={validationError(meta, validateOnMount)} {...rest} />
+        <DataDrivenSelect classNamePrefix="ddorg__pf3-component-mapper__select" invalid={!!validationError(meta, validateOnMount)} {...rest} />
       </div>
     </FormGroup>
   );
