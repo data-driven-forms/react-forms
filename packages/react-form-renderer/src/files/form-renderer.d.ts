@@ -3,7 +3,7 @@ import { FormApi, SubmissionErrors } from 'final-form';
 import { FormProps } from 'react-final-form';
 import Schema from './schema';
 import ComponentMapper from './component-mapper';
-import ValidatorMapper from './validator-mapper';
+import { ValidatorMapper} from './validator-mapper';
 import ActionMapper from './action-mapper';
 import SchemaValidatorMapper from './schema-validator-mapper';
 import { FormTemplateRenderProps } from './form-template-render-props';
