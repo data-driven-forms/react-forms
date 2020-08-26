@@ -1,5 +1,6 @@
-interface ValidatorMapper {
-  [key: string]: (options: object) => (value: any, allValues: object) => string;
+export interface ValidatorMapper {
+  [key: string]: (options?: object) => (value: any, allValues: object) => string | undefined;
 }
 
-export default ValidatorMapper;
+declare const validatorMapper: ValidatorMapper;
+export default validatorMapper;

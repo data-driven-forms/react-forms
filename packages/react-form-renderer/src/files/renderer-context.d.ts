@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { FormApi } from 'final-form';
 import ComponentMapper from './component-mapper';
-import ValidatorMapper from './validator-mapper';
+import { ValidatorMapper } from './validator-mapper';
 import ActionMapper from './action-mapper';
 import Field from './field';
 import { AnyObject } from './common';
