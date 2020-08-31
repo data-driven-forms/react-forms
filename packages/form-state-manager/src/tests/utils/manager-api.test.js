@@ -1134,11 +1134,11 @@ describe('managerApi', () => {
       });
     });
 
-    it('should initialy fail sync form level, but pass on second run validation', () => {
+    it('should initialy fail sync form level, but pass on second run validation', (done) => {
       const managerApi = createManagerApi({ validate: formLevelValidate });
-      const { change, registerField, getFieldState } = managerApi();
-      const getErrorState = () => {
-        let { valid, invalid, validating, errors } = managerApi();
+      const { change, registerField } = managerApi();
+      const getErrorState = (api) => {
+        let { valid, invalid, validating, errors, getFieldState } = api();
         let {
           meta: { error: fieldError, valid: fieldValid, validating: fieldValidating, invalid: fieldInvalid }
         } = getFieldState('foo');
@@ -1150,7 +1150,7 @@ describe('managerApi', () => {
 
       change('foo', 'foo');
 
-      let expectedResult = getErrorState();
+      let expectedResult = getErrorState(managerApi);
       expect(expectedResult).toEqual({
         valid: false,
         invalid: true,
@@ -1164,20 +1164,23 @@ describe('managerApi', () => {
 
       change('foo', 'ok');
 
-      expectedResult = getErrorState();
-      expect(expectedResult).toEqual({
-        valid: true,
-        invalid: false,
-        validating: false,
-        errors: {},
-        fieldError: undefined,
-        fieldValid: true,
-        fieldInvalid: false,
-        fieldValidating: false
+      setImmediate(() => {
+        expectedResult = getErrorState(managerApi);
+        expect(expectedResult).toEqual({
+          valid: true,
+          invalid: false,
+          validating: false,
+          errors: {},
+          fieldError: undefined,
+          fieldValid: true,
+          fieldInvalid: false,
+          fieldValidating: false
+        });
+        done();
       });
     });
 
-    it('should pass sync form level, but fail sync field level validation', () => {
+    it('should pass sync form level, but fail sync field level validation', (done) => {
       const managerApi = createManagerApi({ validate: formLevelValidate });
       const { change, registerField, getFieldState } = managerApi();
       const getErrorState = () => {
@@ -1192,20 +1195,23 @@ describe('managerApi', () => {
       registerField({ name: 'foo', validate: fieldLevelValidate, render: jest.fn() });
 
       change('foo', 'bar');
-      let expectedResult = getErrorState();
-      expect(expectedResult).toEqual({
-        valid: false,
-        invalid: true,
-        validating: false,
-        errors: { foo: 'field-error' },
-        fieldError: 'field-error',
-        fieldValid: false,
-        fieldInvalid: true,
-        fieldValidating: false
+      setImmediate(() => {
+        let expectedResult = getErrorState();
+        expect(expectedResult).toEqual({
+          valid: false,
+          invalid: true,
+          validating: false,
+          errors: { foo: 'field-error' },
+          fieldError: 'field-error',
+          fieldValid: false,
+          fieldInvalid: true,
+          fieldValidating: false
+        });
+        done();
       });
     });
 
-    it('should fail first sync field level validation, but pass on second round', () => {
+    it('should fail first sync field level validation, but pass on second round', (done) => {
       const managerApi = createManagerApi({ validate: formLevelValidate });
       const { change, registerField, getFieldState } = managerApi();
       const getErrorState = () => {
@@ -1220,29 +1226,158 @@ describe('managerApi', () => {
       registerField({ name: 'foo', validate: fieldLevelValidate, render: jest.fn() });
 
       change('foo', 'bar');
-      let expectedResult = getErrorState();
-      expect(expectedResult).toEqual({
-        valid: false,
-        invalid: true,
-        validating: false,
-        errors: { foo: 'field-error' },
-        fieldError: 'field-error',
-        fieldValid: false,
-        fieldInvalid: true,
-        fieldValidating: false
-      });
+      setImmediate(() => {
+        let expectedResult = getErrorState();
+        expect(expectedResult).toEqual({
+          valid: false,
+          invalid: true,
+          validating: false,
+          errors: { foo: 'field-error' },
+          fieldError: 'field-error',
+          fieldValid: false,
+          fieldInvalid: true,
+          fieldValidating: false
+        });
 
-      change('foo', 'ok');
-      expectedResult = getErrorState();
-      expect(expectedResult).toEqual({
-        valid: true,
-        invalid: false,
-        validating: false,
-        errors: {},
-        fieldError: undefined,
-        fieldValid: true,
-        fieldInvalid: false,
-        fieldValidating: false
+        change('foo', 'ok');
+        setImmediate(() => {
+          expectedResult = getErrorState();
+          expect(expectedResult).toEqual({
+            valid: true,
+            invalid: false,
+            validating: false,
+            errors: {},
+            fieldError: undefined,
+            fieldValid: true,
+            fieldInvalid: false,
+            fieldValidating: false
+          });
+          done();
+        });
+      });
+    });
+  });
+
+  describe('validation of a field with multiple listeners', () => {
+    const syncValidate1 = jest.fn().mockImplementation((value) => (value === 'one' ? 'error-one' : undefined));
+    const syncValidate2 = jest.fn().mockImplementation((value) => (value === 'two' ? 'error-two' : undefined));
+    const asyncValidate1 = jest
+      .fn()
+      .mockImplementation((value) => new Promise((res, rej) => setTimeout(() => (value === 'one' ? rej('error-one') : res()), 200)));
+    const asyncValidate2 = jest
+      .fn()
+      .mockImplementation((value) => new Promise((res, rej) => setTimeout(() => (value === 'two' ? rej('error-two') : res()), 200)));
+
+    it('should pass first sync validation but fail second sync validation', (done) => {
+      const render = jest.fn();
+
+      const managerApi = createManagerApi({});
+      managerApi().registerField({ name: 'field', validate: syncValidate1, render, internalId: 1 });
+      managerApi().registerField({ name: 'field', validate: syncValidate2, render, internalId: 2 });
+
+      managerApi().change('field', 'two');
+      setImmediate(() => {
+        expect(managerApi().errors).toEqual({ field: 'error-two' });
+        done();
+      });
+    });
+
+    it('should fail first sync validation but pass second sync validation', (done) => {
+      const render = jest.fn();
+
+      const managerApi = createManagerApi({});
+      managerApi().registerField({ name: 'field', validate: syncValidate1, render, internalId: 1 });
+      managerApi().registerField({ name: 'field', validate: syncValidate2, render, internalId: 2 });
+
+      managerApi().change('field', 'one');
+
+      setImmediate(() => {
+        expect(managerApi().errors).toEqual({ field: 'error-one' });
+        done();
+      });
+    });
+
+    it('should pass both sync validation', () => {
+      const render = jest.fn();
+
+      const managerApi = createManagerApi({});
+      managerApi().registerField({ name: 'field', validate: syncValidate1, render, internalId: 1 });
+      managerApi().registerField({ name: 'field', validate: syncValidate2, render, internalId: 2 });
+
+      managerApi().change('field', 'ok');
+
+      expect(managerApi().errors).toEqual({});
+    });
+
+    it('should pass first async validation but fail second async validation', (done) => {
+      jest.useFakeTimers();
+      const render = jest.fn();
+
+      const managerApi = createManagerApi({});
+      managerApi().registerField({ name: 'field', validate: asyncValidate1, render, internalId: 1 });
+      managerApi().registerField({ name: 'field', validate: asyncValidate2, render, internalId: 2 });
+      jest.advanceTimersByTime(200);
+
+      managerApi().change('field', 'two');
+      jest.advanceTimersByTime(200);
+
+      setImmediate(() => {
+        expect(managerApi().errors).toEqual({ field: 'error-two' });
+        done();
+      });
+    });
+
+    it('should pass both async validation', (done) => {
+      const render = jest.fn();
+
+      const managerApi = createManagerApi({});
+      managerApi().registerField({ name: 'field', validate: asyncValidate1, render, internalId: 1 });
+      managerApi().registerField({ name: 'field', validate: asyncValidate2, render, internalId: 2 });
+      jest.advanceTimersByTime(200);
+
+      managerApi().change('field', 'ok');
+      jest.advanceTimersByTime(200);
+
+      setImmediate(() => {
+        expect(managerApi().errors).toEqual({});
+        done();
+      });
+    });
+
+    it('should pass first sync validation but fail second async validation', (done) => {
+      jest.useFakeTimers();
+      const render = jest.fn();
+
+      const managerApi = createManagerApi({});
+      managerApi().registerField({ name: 'field', validate: syncValidate1, render, internalId: 1 });
+      managerApi().registerField({ name: 'field', validate: asyncValidate2, render, internalId: 2 });
+      jest.advanceTimersByTime(200);
+
+      managerApi().change('field', 'two');
+      jest.advanceTimersByTime(200);
+
+      setImmediate(() => {
+        expect(managerApi().errors).toEqual({ field: 'error-two' });
+        done();
+      });
+    });
+
+    it('should fail sync validation but pass second async validation', (done) => {
+      jest.useFakeTimers();
+      const render = jest.fn();
+
+      const managerApi = createManagerApi({});
+      managerApi().registerField({ name: 'field', validate: syncValidate1, render, internalId: 1 });
+      managerApi().registerField({ name: 'field', validate: asyncValidate2, render, internalId: 2 });
+      jest.advanceTimersByTime(200);
+      setImmediate(() => {
+        managerApi().change('field', 'one');
+        jest.advanceTimersByTime(200);
+
+        setImmediate(() => {
+          expect(managerApi().errors).toEqual({ field: 'error-one' });
+          done();
+        });
       });
     });
   });

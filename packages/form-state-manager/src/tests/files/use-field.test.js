@@ -70,37 +70,45 @@ describe('useField', () => {
     expect(unregisterSpy).toHaveBeenCalledWith(unregisterArguments);
   });
 
-  it('should set correct value on input type text', () => {
+  it('should set correct value on input type text', async () => {
     const wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy' }} managerApi={managerApi} />);
     const input = wrapper.find('input');
-    input.simulate('change', { target: { value: 'foo' } });
+    await act(async () => {
+      input.simulate('change', { target: { value: 'foo' } });
+    });
     wrapper.update();
     expect(wrapper.find(SpyComponent).prop('value')).toEqual('foo');
   });
 
-  it('should set correct value on input type checkbox', () => {
+  it('should set correct value on input type checkbox', async () => {
     const wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy', type: 'checkbox' }} managerApi={managerApi} />);
     const input = wrapper.find('input');
-    input.simulate('change', { target: { checked: true, type: 'checkbox' } });
+    await act(async () => {
+      input.simulate('change', { target: { checked: true, type: 'checkbox' } });
+    });
     wrapper.update();
     expect(wrapper.find(SpyComponent).prop('checked')).toEqual(true);
   });
 
-  it('should set correct array value', () => {
+  it('should set correct array value', async () => {
     const wrapper = mount(<DummyComponent subscriberProps={{ fakeComponent: true, name: 'spy', changeValue: [] }} managerApi={managerApi} />);
     const input = wrapper.find('button#fake-change');
-    input.simulate('click');
+    await act(async () => {
+      input.simulate('click');
+    });
     wrapper.update();
     expect(wrapper.find(NonInputSpyComponent).prop('value')).toEqual([]);
   });
 
-  it('should set correct on non event object value', () => {
+  it('should set correct on non event object value', async () => {
     const nonEventObject = { value: 1, label: 'bar' };
     const wrapper = mount(
       <DummyComponent subscriberProps={{ fakeComponent: true, name: 'spy', changeValue: nonEventObject }} managerApi={managerApi} />
     );
     const input = wrapper.find('button#fake-change');
-    input.simulate('click');
+    await act(async () => {
+      input.simulate('click');
+    });
     wrapper.update();
     expect(wrapper.find(NonInputSpyComponent).prop('value')).toEqual(nonEventObject);
   });
@@ -431,24 +439,28 @@ describe('useField', () => {
         name: 'async-validate',
         validate: asyncValidator
       };
+
       const wrapper = mount(<DummyComponent managerApi={managerApi} subscriberProps={subscriberProps} />);
-      const spy = wrapper.find(SpyComponent);
       const input = wrapper.find('input');
-      expect(spy.prop('meta')).toEqual(expect.objectContaining({ validating: true, valid: true }));
+      expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ validating: true, valid: true }));
 
       await act(async () => {
         jest.runAllTimers(); // skip initial validation
       });
+      wrapper.update();
 
-      expect(spy.prop('meta')).toEqual(expect.objectContaining({ validating: false, valid: true }));
+      expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ validating: false, valid: true }));
 
-      input.simulate('change', { target: { value: 'foo' } });
+      await act(() => {
+        input.simulate('change', { target: { value: 'foo' } });
+      });
       /**
        * All validations are pending
        */
       await act(async () => {
         jest.advanceTimersByTime(10);
       });
+      wrapper.update();
       expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ validating: true, valid: true }));
       /**
        * Second faster async validation has finished
@@ -456,6 +468,7 @@ describe('useField', () => {
       await act(async () => {
         jest.advanceTimersByTime(290);
       });
+      wrapper.update();
       expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ validating: true, valid: true }));
       /**
        * First slow async validation has finished
@@ -463,6 +476,7 @@ describe('useField', () => {
       await act(async () => {
         jest.advanceTimersByTime(200);
       });
+      wrapper.update();
       expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ validating: false, valid: true }));
     });
   });

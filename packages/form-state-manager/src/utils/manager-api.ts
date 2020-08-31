@@ -7,6 +7,7 @@ import merge from 'lodash/merge';
 import omit from 'lodash/omit';
 import isEmpty from 'lodash/isEmpty';
 
+import composeValidators from '../files/compose-validators';
 import CreateManagerApi, {
   ManagerState,
   ManagerApi,
@@ -24,7 +25,7 @@ import AnyObject from '../types/any-object';
 import FieldConfig from '../types/field-config';
 import { Meta } from '../types/use-field';
 import { formLevelValidator, isPromise } from './validate';
-import { FormValidator, FormLevelError } from '../types/validate';
+import { FormValidator, FormLevelError, Validator } from '../types/validate';
 
 export const defaultIsEqual = (a: any, b: any) => a === b;
 
@@ -282,28 +283,29 @@ const createManagerApi: CreateManagerApi = ({
     updateError(name, isValid ? undefined : error);
   }
 
-  function validateField(name: string, value: any) {
+  async function validateField(name: string, value: any) {
     if (validationPaused) {
       addIfUnique(revalidatedFields, name);
       return undefined;
     }
 
     // TODO Memoize validation results
-    if (Object.prototype.hasOwnProperty.call(state.fieldListeners, name) && typeof state.fieldListeners[name].validate === 'function') {
+    if (Object.prototype.hasOwnProperty.call(state.fieldListeners, name)) {
       const listener = state.fieldListeners[name].asyncWatcher;
-      const result = state.fieldListeners[name].validate!(value, state.values);
-      if (isPromise(result)) {
-        const asyncResult = result as Promise<string | undefined>;
-        listener.registerValidator(asyncResult);
-        return asyncResult.then(() => handleFieldError(name, true)).catch((error) => handleFieldError(name, false, error));
-      }
+      const validators = Object.values(state.fieldListeners[name].fields)
+        .map(({ validate }) => validate)
+        .filter((validator) => validator !== undefined);
 
-      const syncError = result as string | undefined;
-      const { valid, validating } = state.fieldListeners[name].state.meta;
-      if (result) {
-        handleFieldError(name, false, syncError);
-      } else if (valid === false && validating === false) {
-        handleFieldError(name, true);
+      if (validators.length > 0) {
+        const result = composeValidators(validators as Validator[])(value, state.values);
+        if (isPromise(result)) {
+          (result as Promise<string | undefined>)
+            .then(() => handleFieldError(name, true))
+            .catch((response) => handleFieldError(name, false, response as string | undefined));
+          listener.registerValidator(result as Promise<string | undefined>);
+        } else {
+          handleFieldError(name, !result, result as string | undefined);
+        }
       }
     }
   }
@@ -660,12 +662,12 @@ const createManagerApi: CreateManagerApi = ({
           }
         : {}),
       count: (state.fieldListeners[subscriberConfig.name]?.count || 0) + 1,
-      validate: subscriberConfig.validate,
-      isEqual: subscriberConfig.isEqual,
       validateFields: subscriberConfig.validateFields,
+      isEqual: subscriberConfig.isEqual,
       fields: {
         ...state.fieldListeners[subscriberConfig.name]?.fields,
         [subscriberConfig.internalId || subscriberConfig.name]: {
+          validate: subscriberConfig.validate,
           render: subscriberConfig.render,
           subscription: subscriberConfig.subscription,
           afterSubmit: subscriberConfig.afterSubmit,
