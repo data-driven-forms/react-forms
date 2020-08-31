@@ -57,12 +57,27 @@ const reducer = (state, { type, specialType, validate, arrayValidator, initialVa
   }
 };
 
+const createFieldProps = (name, formOptions) => {
+  const { value, blur, change, focus, ...meta } = formOptions.getFieldState(name) || {};
+
+  return {
+    meta,
+    input: { name, value }
+  };
+};
+
 const useFieldApi = ({ name, initializeOnMount, component, render, validate, resolveProps, ...props }) => {
   const { validatorMapper, formOptions } = useContext(RendererContext);
 
+  const { validate: resolvePropsValidate, ...resolvedProps } = resolveProps
+    ? resolveProps(props, createFieldProps(name, formOptions), formOptions) || {}
+    : {};
+
+  const finalValidate = resolvePropsValidate || validate;
+
   const [{ type, initialValue, validate: stateValidate, arrayValidator }, dispatch] = useReducer(
     reducer,
-    { props, validate, component, validatorMapper },
+    { props: { ...props, ...resolvedProps }, validate: finalValidate, component, validatorMapper },
     init
   );
 
@@ -71,6 +86,7 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
   const enhancedProps = {
     type,
     ...props,
+    ...resolvedProps,
     ...(initialValue ? { initialValue } : {}),
     ...(stateValidate ? { validate: stateValidate } : {})
   };
@@ -92,8 +108,8 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
     if (mounted.current) {
       dispatch({
         type: 'setValidators',
-        validate: calculateValidate(props, validate, component, validatorMapper),
-        arrayValidator: calculateArrayValidator(props, validate, component, validatorMapper)
+        validate: calculateValidate(enhancedProps, finalValidate, component, validatorMapper),
+        arrayValidator: calculateArrayValidator(enhancedProps, finalValidate, component, validatorMapper)
       });
     }
     /**
@@ -102,12 +118,12 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
      * Using stringify is acceptable here since the array is usually very small.
      * If we notice performance hit, we can implement custom hook with a deep equal functionality.
      */
-  }, [validate ? JSON.stringify(validate) : false, component, props.dataType]);
+  }, [finalValidate ? JSON.stringify(finalValidate) : false, component, enhancedProps.dataType]);
 
   /** Re-convert initialValue when changed */
   useEffect(() => {
     if (mounted.current) {
-      const newInitialValue = calculateInitialValue(props);
+      const newInitialValue = calculateInitialValue(enhancedProps);
       if (!isEqual(initialValue, newInitialValue)) {
         dispatch({
           type: 'setInitialValue',
@@ -115,7 +131,7 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
         });
       }
     }
-  }, [props.initialValue, props.dataType]);
+  }, [enhancedProps.initialValue, enhancedProps.dataType]);
 
   useEffect(() => {
     /**
@@ -160,14 +176,22 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
     []
   );
 
-  const { initialValue: _initialValue, clearOnUnmount, dataType, clearedValue, isEqual: _isEqual, ...cleanProps } = props;
+  const {
+    initialValue: _initialValue,
+    clearOnUnmount,
+    dataType,
+    clearedValue,
+    isEqual: _isEqual,
+    validate: _validate,
+    type: _type,
+    ...cleanProps
+  } = enhancedProps;
 
   /**
    * construct component props necessary that would live in field provider
    */
   return {
     ...cleanProps,
-    ...(resolveProps ? resolveProps(cleanProps, fieldProps, formOptions) : {}),
     ...fieldProps,
     ...(arrayValidator ? { arrayValidator } : {}),
     input: {
