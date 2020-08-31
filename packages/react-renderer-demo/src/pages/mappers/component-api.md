@@ -205,7 +205,7 @@ Wizard step <br/>
 |----|:--:|----------:|
 |title|node/string|Step title|
 |name|string, number|Uniq name of the step|
-|nextStep|object/name of next step|See [wizard documentation](/mappers/wizard)|
+|nextStep|object/name of next step|See [wizard documentation](/mappers/wizard?mapper=mui)|
 |fields|array|An array of form fields|
 
 <ExampleLink to='wizard' />
