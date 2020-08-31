@@ -297,11 +297,15 @@ const createManagerApi: CreateManagerApi = ({
         .filter((validator) => validator !== undefined);
 
       if (validators.length > 0) {
-        const result = composeValidators(validators as Validator[])(value, state.values)
-          .then(() => handleFieldError(name, true))
-          .catch((response) => handleFieldError(name, false, response as string | undefined));
-
-        listener.registerValidator(result);
+        const result = composeValidators(validators as Validator[])(value, state.values);
+        if (isPromise(result)) {
+          (result as Promise<string | undefined>)
+            .then(() => handleFieldError(name, true))
+            .catch((response) => handleFieldError(name, false, response as string | undefined));
+          listener.registerValidator(result as Promise<string | undefined>);
+        } else {
+          handleFieldError(name, !result, result as string | undefined);
+        }
       }
     }
   }

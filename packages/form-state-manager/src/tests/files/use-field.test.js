@@ -32,7 +32,7 @@ const DummyComponent = ({ subscriberProps, managerApi }) => (
   </FormManagerContext.Provider>
 );
 
-describe.only('useField', () => {
+describe('useField', () => {
   let managerApi;
   beforeEach(() => {
     managerApi = createManagerApi(jest.fn());

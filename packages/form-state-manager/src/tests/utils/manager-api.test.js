@@ -1370,13 +1370,14 @@ describe('managerApi', () => {
       managerApi().registerField({ name: 'field', validate: syncValidate1, render, internalId: 1 });
       managerApi().registerField({ name: 'field', validate: asyncValidate2, render, internalId: 2 });
       jest.advanceTimersByTime(200);
-
-      managerApi().change('field', 'one');
-      jest.advanceTimersByTime(200);
-
       setImmediate(() => {
-        expect(managerApi().errors).toEqual({ field: 'error-one' });
-        done();
+        managerApi().change('field', 'one');
+        jest.advanceTimersByTime(200);
+
+        setImmediate(() => {
+          expect(managerApi().errors).toEqual({ field: 'error-one' });
+          done();
+        });
       });
     });
   });
