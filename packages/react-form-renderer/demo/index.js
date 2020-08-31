@@ -1,27 +1,54 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import FormRenderer, { useFieldApi, validatorTypes, componentTypes } from '../src';
+import FormRenderer, { useFieldApi, componentTypes, validatorTypes } from '../src';
 import componentMapper from './form-fields-mapper';
 import FormTemplate from './form-template';
 
 // eslint-disable-next-line react/prop-types
-const TextField = ({ name, label }) => {
-  const { input } = useFieldApi({ name, validate: [{ type: validatorTypes.REQUIRED }] });
+const TextField = (props) => {
+  const { input, label, isRequired } = useFieldApi(props);
   return (
     <div>
-      <label>{label}</label>
+      <label>
+        {label}
+        {isRequired && '*'}
+      </label>
       <input {...input} />
     </div>
   );
 };
 
+let key;
+
 const fileSchema = {
   fields: [
     {
       component: 'text-field',
-      name: 'foo',
-      label: 'Foo'
+      name: 'required',
+      label: 'required'
+    },
+    {
+      component: 'text-field',
+      name: 'field',
+      label: 'field',
+      resolveProps: (y, x, formOptions) => {
+        const value = formOptions.getFieldState('required')?.value;
+
+        //console.log({ value });
+
+        if (value) {
+          key = key || Date.now();
+
+          return {
+            isRequired: true,
+            validate: [{ type: validatorTypes.REQUIRED }],
+            key
+          };
+        } else {
+          key = undefined;
+        }
+      }
     }
   ]
 };
@@ -38,6 +65,7 @@ const App = () => {
         onSubmit={(values, ...args) => console.log(values, args)}
         FormTemplate={FormTemplate}
         schema={fileSchema}
+        subscription={{ values: true }}
       />
     </div>
   );
