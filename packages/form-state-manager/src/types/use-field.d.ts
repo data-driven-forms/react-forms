@@ -80,6 +80,7 @@ export interface UseField extends AnyObject {
   formatOnBlur?: boolean;
   afterSubmit?: AfterSubmit;
   beforeSubmit?: BeforeSubmit;
+  allowNull?: boolean;
 }
 
 export default UseField;
