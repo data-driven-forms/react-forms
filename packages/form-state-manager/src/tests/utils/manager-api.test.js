@@ -155,6 +155,42 @@ describe('managerApi', () => {
 
       expect(isEqual).toHaveBeenCalledWith('cosi', 'initial');
     });
+
+    it('should compute value using isEqual - multiple functions - false result', () => {
+      const managerApi = createManagerApi({ initialValues: { field1: 'initial' } });
+
+      const render = jest.fn();
+      const isEqual = jest.fn().mockImplementation(() => true);
+      const isEqual2 = jest.fn().mockImplementation(() => false);
+
+      managerApi().registerField({ name: 'field1', internalId: 1, render, isEqual });
+      managerApi().registerField({ name: 'field1', internalId: 2, render, isEqual: isEqual2 });
+
+      managerApi().change('field1', 'cosi');
+
+      expect(isEqual).toHaveBeenCalledWith('cosi', 'initial');
+      expect(isEqual2).toHaveBeenCalledWith('cosi', 'initial');
+
+      expect(managerApi().getFieldState('field1').pristine).toEqual(false);
+    });
+
+    it('should compute value using isEqual - multiple functions - true result', () => {
+      const managerApi = createManagerApi({ initialValues: { field1: 'initial' } });
+
+      const render = jest.fn();
+      const isEqual = jest.fn().mockImplementation(() => true);
+      const isEqual2 = jest.fn().mockImplementation(() => true);
+
+      managerApi().registerField({ name: 'field1', internalId: 1, render, isEqual });
+      managerApi().registerField({ name: 'field1', internalId: 2, render, isEqual: isEqual2 });
+
+      managerApi().change('field1', 'cosi');
+
+      expect(isEqual).toHaveBeenCalledWith('cosi', 'initial');
+      expect(isEqual2).toHaveBeenCalledWith('cosi', 'initial');
+
+      expect(managerApi().getFieldState('field1').pristine).toEqual(true);
+    });
   });
 
   it('should change different api instance separatelly', () => {

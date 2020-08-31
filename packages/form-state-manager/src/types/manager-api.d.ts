@@ -65,6 +65,7 @@ export interface ListenerField {
   afterSubmit?: AfterSubmit;
   beforeSubmit?: BeforeSubmit;
   validate?: Validator;
+  isEqual?: IsEqual;
 }
 
 export interface FieldListenerFields {
@@ -74,7 +75,6 @@ export interface FieldListenerFields {
 export interface FieldListener {
   count: number;
   state: FieldState;
-  isEqual?: IsEqual;
   asyncWatcher: AsyncWatcherApi;
   fields: FieldListenerFields;
   validateFields?: Array<string>;
