@@ -107,13 +107,13 @@ const useField = ({
       sanitizedValue = finalClearedValue;
     }
 
-    if (type && type === 'checkbox') {
-      if (value) {
-        if (state?.value && Array.isArray(state.value)) {
-          sanitizedValue = state.value.includes(value) ? state.value.filter((v: any) => v !== value) : [...state.value, value];
-        } else {
-          sanitizedValue = [value];
-        }
+    if ((type && type === 'checkbox' && value) || multiple) {
+      const finalValue = value || sanitizedValue;
+
+      if (state?.value && Array.isArray(state.value)) {
+        sanitizedValue = state.value.includes(finalValue) ? state.value.filter((v: any) => v !== finalValue) : [...state.value, finalValue];
+      } else {
+        sanitizedValue = [finalValue];
       }
     }
 
@@ -162,6 +162,10 @@ const useField = ({
 
   if ((valueToReturn === null && !allowNull) || (valueToReturn !== null && !valueToReturn)) {
     valueToReturn = '';
+  }
+
+  if (!valueToReturn && multiple) {
+    valueToReturn = [];
   }
 
   return {

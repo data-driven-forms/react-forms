@@ -1277,4 +1277,62 @@ describe('useField', () => {
       console.error = _consoleError;
     });
   });
+
+  describe('multiple', () => {
+    let Select;
+    let wrapper;
+
+    beforeEach(() => {
+      Select = (props) => {
+        const { input } = useField(props);
+        return (
+          <select {...input}>
+            <option value="dogs">Dogs</option>
+            <option value="cats">Cats</option>
+            <option value="hamsters">Hamsters</option>
+          </select>
+        );
+      };
+    });
+
+    it('select and deselect multiple', async () => {
+      wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <Select name="field" multiple />
+        </FormManagerContext.Provider>
+      );
+
+      expect(wrapper.find('select').props().value).toEqual([]);
+
+      await act(async () => {
+        wrapper
+          .find('option')
+          .first()
+          .simulate('change');
+      });
+      wrapper.update();
+
+      expect(wrapper.find('select').props().value).toEqual(['dogs']);
+
+      await act(async () => {
+        wrapper
+          .find('option')
+          .last()
+          .simulate('change');
+      });
+      wrapper.update();
+
+      expect(wrapper.find('select').props().value).toEqual(['dogs', 'hamsters']);
+
+      await act(async () => {
+        wrapper
+          .find('option')
+          .first()
+          .simulate('change');
+      });
+      wrapper.update();
+
+      expect(wrapper.find('select').props().value).toEqual(['hamsters']);
+    });
+  });
 });
