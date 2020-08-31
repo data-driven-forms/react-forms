@@ -81,4 +81,7 @@ export const baseExamples = [
     link: componentTypes.WIZARD,
     linkText: 'Wizard'
   }
-];
+].map((component) => ({
+  ...component,
+  link: `${component.link}?mapper=mui`
+}));
