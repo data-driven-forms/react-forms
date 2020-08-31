@@ -65,6 +65,7 @@ const useField = ({
   formatOnBlur,
   beforeSubmit,
   afterSubmit,
+  allowNull,
   ...props
 }: UseField): UseFieldData => {
   const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions, ...rest } = useContext(FormManagerContext);
@@ -135,7 +136,7 @@ const useField = ({
     }
   };
 
-  let valueToReturn = formOptions().getFieldValue(name) || '';
+  let valueToReturn = formOptions().getFieldValue(name);
   let checked;
 
   if (type === 'checkbox') {
@@ -157,9 +158,15 @@ const useField = ({
     finalFormat = format;
   }
 
+  valueToReturn = finalFormat(valueToReturn, name);
+
+  if ((valueToReturn === null && !allowNull) || (valueToReturn !== null && !valueToReturn)) {
+    valueToReturn = '';
+  }
+
   return {
     input: {
-      value: finalFormat(valueToReturn, name),
+      value: valueToReturn,
       onChange,
       onFocus: () => focus(name),
       onBlur: () => blur(name),

@@ -1206,4 +1206,61 @@ describe('useField', () => {
       expect(wrapper.find('input').props().value).toEqual(''); // it's controlled
     });
   });
+
+  describe('allowNull', () => {
+    let Dummy;
+    let wrapper;
+
+    beforeEach(() => {
+      managerApi = createManagerApi({});
+
+      Dummy = (props) => {
+        const { input } = useField(props);
+        return <input {...input} />;
+      };
+    });
+
+    it('by default converts null to empty string', async () => {
+      wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <Dummy name="field" />
+        </FormManagerContext.Provider>
+      );
+
+      await act(async () => {
+        wrapper.find('input').simulate('change', { target: { value: null } });
+      });
+      wrapper.update();
+
+      expect(wrapper.find('input').props().value).toEqual('');
+    });
+
+    it('allows null', async () => {
+      // disable console errors:
+      // expected:
+      //      1. input cannot be null
+      //      2. controlled to uncontrolled
+
+      // eslint-disable-next-line no-console
+      const _consoleError = console.error;
+      // eslint-disable-next-line no-console
+      console.error = jest.fn();
+
+      wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <Dummy name="field" allowNull />
+        </FormManagerContext.Provider>
+      );
+
+      await act(async () => {
+        wrapper.find('input').simulate('change', { target: { value: null } });
+      });
+      wrapper.update();
+
+      expect(wrapper.find('input').props().value).toEqual(null);
+
+      // eslint-disable-next-line no-console
+      console.error = _consoleError;
+    });
+  });
 });
