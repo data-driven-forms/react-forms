@@ -3,9 +3,15 @@ import PropTypes from 'prop-types';
 import MuiDualListSelect from './examples-texts/mui/mui-dual-list-select.md';
 import SuirDualListSelect from './examples-texts/suir/suir-dual-list-select.md';
 import BlueprintDualListSelect from './examples-texts/blueprint/blueprint-dual-list-select.md';
+import PF4DualListSelect from './examples-texts/pf4/pf4-dual-list.md';
+
 import GenericMuiComponent from '../helpers/generic-mui-component';
 
 const DualListSelect = ({ activeMapper }) => {
+  if (activeMapper === 'pf4') {
+    return <PF4DualListSelect />;
+  }
+
   if (activeMapper === 'mui') {
     return <MuiDualListSelect />;
   }
