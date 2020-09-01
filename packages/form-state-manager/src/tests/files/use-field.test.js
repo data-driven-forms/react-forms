@@ -672,6 +672,36 @@ describe('useField', () => {
 
       expect(managerApi().values.field).toEqual([1, 2, 45]);
     });
+
+    it('should parse initialValue - float', async () => {
+      wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <Setter name="field" dataType="float" initialValue="12.34" />
+        </FormManagerContext.Provider>
+      );
+
+      expect(managerApi().values.field).toEqual(12.34);
+    });
+
+    it('should parse defaultValue - float', async () => {
+      wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <Setter name="field" dataType="float" defaultValue="12.34" />
+        </FormManagerContext.Provider>
+      );
+
+      expect(managerApi().values.field).toEqual(12.34);
+    });
+
+    it('should parse defaultValue - objects', async () => {
+      wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <Setter name="field" dataType="float" defaultValue={[{ value: '23.67' }, { value: '123.34' }]} />
+        </FormManagerContext.Provider>
+      );
+
+      expect(managerApi().values.field).toEqual([{ value: 23.67 }, { value: 123.34 }]);
+    });
   });
 
   describe('type', () => {
