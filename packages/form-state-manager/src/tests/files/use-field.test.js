@@ -451,7 +451,7 @@ describe('useField', () => {
 
       expect(wrapper.find(SpyComponent).prop('meta')).toEqual(expect.objectContaining({ validating: false, valid: true }));
 
-      await act(() => {
+      await act(async () => {
         input.simulate('change', { target: { value: 'foo' } });
       });
       /**

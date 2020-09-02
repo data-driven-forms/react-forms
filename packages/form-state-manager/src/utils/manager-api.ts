@@ -22,7 +22,7 @@ import CreateManagerApi, {
   CreateManagerApiConfig
 } from '../types/manager-api';
 import AnyObject from '../types/any-object';
-import FieldConfig from '../types/field-config';
+import FieldConfig, { IsEqual } from '../types/field-config';
 import { Meta } from '../types/use-field';
 import { formLevelValidator, isPromise } from './validate';
 import { FormValidator, FormLevelError, Validator } from '../types/validate';
@@ -429,7 +429,15 @@ const createManagerApi: CreateManagerApi = ({
 
     // TODO modify all affected field state variables
     batch(() => {
-      const isEqualFn = state.fieldListeners[name]?.isEqual || defaultIsEqual;
+      const allIsEqual: Array<IsEqual> = state.fieldListeners[name]
+        ? Object.values(state.fieldListeners[name].fields)
+            .map(({ isEqual }) => isEqual as IsEqual, [])
+            .filter(Boolean)
+        : [];
+
+      const isEqualFn =
+        allIsEqual.length > 0 ? (a: any, b: any) => allIsEqual.reduce((acc: boolean, curr: IsEqual) => acc && curr(a, b), true) : defaultIsEqual;
+
       const pristine = isEqualFn(value, state.fieldListeners[name]?.state?.meta?.initial || get(state.initialValues, name));
 
       setFieldState(name, (prevState) => ({
@@ -663,7 +671,6 @@ const createManagerApi: CreateManagerApi = ({
         : {}),
       count: (state.fieldListeners[subscriberConfig.name]?.count || 0) + 1,
       validateFields: subscriberConfig.validateFields,
-      isEqual: subscriberConfig.isEqual,
       fields: {
         ...state.fieldListeners[subscriberConfig.name]?.fields,
         [subscriberConfig.internalId || subscriberConfig.name]: {
@@ -671,7 +678,8 @@ const createManagerApi: CreateManagerApi = ({
           render: subscriberConfig.render,
           subscription: subscriberConfig.subscription,
           afterSubmit: subscriberConfig.afterSubmit,
-          beforeSubmit: subscriberConfig.beforeSubmit
+          beforeSubmit: subscriberConfig.beforeSubmit,
+          isEqual: subscriberConfig.isEqual
         }
       }
     };
