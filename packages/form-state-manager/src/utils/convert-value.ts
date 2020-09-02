@@ -1,7 +1,7 @@
 import convertType from './convert-type';
-import { DataType } from '../types/data-types';
+import { DataType, DataTypeTypes } from '../types/data-types';
 
-const convertValue = (value: any, dataType: DataType): any => {
+const convertValue = (value: any, dataType: DataType): DataTypeTypes => {
   if (value === undefined || !dataType) {
     return value;
   }
