@@ -13,8 +13,8 @@ const Field = ({ fieldSpy, ...props }) => {
   return <input id={id} {...input} {...rest} />;
 };
 
-const TestSubject = ({ fieldSpy }) => (
-  <FormStateManager onSubmit={jest.fn()}>
+const TestSubject = ({ fieldSpy, subscription }) => (
+  <FormStateManager onSubmit={jest.fn()} subscription={subscription}>
     {() => {
       return (
         <form onSubmit={jest.fn()}>
@@ -30,7 +30,7 @@ const TestSubject = ({ fieldSpy }) => (
 describe('useField rendering cycle', () => {
   it('should render first field twice and second once', () => {
     const fieldSpy = jest.fn();
-    const wrapper = mount(<TestSubject fieldSpy={fieldSpy} />);
+    const wrapper = mount(<TestSubject fieldSpy={fieldSpy} subscription={{}} />);
     /**
      * Initial mount render of both fields
      */
@@ -51,5 +51,23 @@ describe('useField rendering cycle', () => {
     expect(fieldSpy).toHaveBeenCalledTimes(2);
     expect(fieldSpy.mock.calls[0][0]).toEqual('one');
     expect(fieldSpy.mock.calls[1][0]).toEqual('one');
+  });
+
+  it('should render both fields when subscription {values: true} on change', () => {
+    const fieldSpy = jest.fn();
+    const wrapper = mount(<TestSubject fieldSpy={fieldSpy} subscription={{ values: true }} />);
+
+    expect(fieldSpy).toHaveBeenCalledTimes(2);
+    expect(fieldSpy.mock.calls[0][0]).toEqual('one');
+    expect(fieldSpy.mock.calls[1][0]).toEqual('two');
+    fieldSpy.mockReset();
+
+    act(() => {
+      wrapper.find('input#one').prop('onChange')({ target: { value: 'foo', type: 'text' } });
+    });
+
+    expect(fieldSpy).toHaveBeenCalledTimes(2);
+    expect(fieldSpy.mock.calls[0][0]).toEqual('one');
+    expect(fieldSpy.mock.calls[1][0]).toEqual('two');
   });
 });
