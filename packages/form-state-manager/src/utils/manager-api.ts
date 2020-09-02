@@ -26,6 +26,7 @@ import FieldConfig, { IsEqual } from '../types/field-config';
 import { Meta } from '../types/use-field';
 import { formLevelValidator, isPromise } from './validate';
 import { FormValidator, FormLevelError, Validator } from '../types/validate';
+import findDifference from './find-difference';
 
 export const defaultIsEqual = (a: any, b: any) => a === b;
 
@@ -418,17 +419,24 @@ const createManagerApi: CreateManagerApi = ({
     });
   }
 
-  function change(name: string, value?: any): void {
-    set(state.values, name, value);
-    state.visited[name] = true;
-    state.modified[name] = true;
-    state.modifiedSinceLastSubmit = true;
-    state.dirtySinceLastSubmit = true;
-    state.dirtyFields[name] = true;
-    state.dirtyFieldsSinceLastSubmit[name] = true;
+  function prepareRerender() {
+    const snapshot = cloneDeep(state);
 
+    return (subscribeTo: Array<string> = []) => rerender([...findDifference(snapshot, state), ...subscribeTo]);
+  }
+
+  function change(name: string, value?: any): void {
     // TODO modify all affected field state variables
     batch(() => {
+      const render = prepareRerender();
+      set(state.values, name, value);
+      state.visited[name] = true;
+      state.modified[name] = true;
+      state.modifiedSinceLastSubmit = true;
+      state.dirtySinceLastSubmit = true;
+      state.dirtyFields[name] = true;
+      state.dirtyFieldsSinceLastSubmit[name] = true;
+
       const allIsEqual: Array<IsEqual> = state.fieldListeners[name]
         ? Object.values(state.fieldListeners[name].fields)
             .map(({ isEqual }) => isEqual as IsEqual, [])
@@ -457,11 +465,14 @@ const createManagerApi: CreateManagerApi = ({
       if (config.validate) {
         validateForm(config.validate);
       }
+
+      render();
     });
   }
 
   function focus(name: string): void {
     state.active = name;
+    state.visited[name] = true;
     setFieldState(name, (prevState) => ({ ...prevState, meta: { ...prevState.meta, active: true } }));
   }
 
