@@ -3,8 +3,8 @@ import FormManagerContext from '../files/form-manager-context';
 import UseField, { OnChangeEvent, UseFieldData, Format } from '../types/use-field';
 import isEmpty from 'lodash/isEmpty';
 
-import convertType from '../utils/convert-type';
 import generateId from '../utils/generate-id';
+import convertValue from '../utils/convert-value';
 
 const checkboxTypes = ['checkbox', 'radio'];
 
@@ -75,13 +75,13 @@ const useField = ({
 
     registerField({
       name,
-      initialValue,
+      initialValue: dataType ? convertValue(initialValue, dataType) : initialValue,
       initializeOnMount,
       render,
       validate,
       subscription,
       internalId,
-      defaultValue,
+      defaultValue: dataType ? convertValue(defaultValue, dataType) : defaultValue,
       beforeSubmit,
       afterSubmit
     });
@@ -98,9 +98,7 @@ const useField = ({
     const hasClearedValue = Object.prototype.hasOwnProperty.call(props, 'clearedValue') || Object.prototype.hasOwnProperty.call(rest, 'clearedValue');
 
     if (dataType) {
-      sanitizedValue = Array.isArray(sanitizedValue)
-        ? sanitizedValue.map((item) => convertType(dataType, sanitizeValue(item)))
-        : convertType(dataType, sanitizedValue);
+      sanitizedValue = convertValue(sanitizedValue, dataType);
     }
 
     if (hasClearedValue && checkEmpty(sanitizedValue) && typeof state?.meta.initial === 'undefined') {
