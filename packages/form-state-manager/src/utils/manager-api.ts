@@ -237,6 +237,7 @@ const createManagerApi: CreateManagerApi = ({
   let validationPaused = false;
   let runFormValidation = false;
   let revalidatedFields: Array<string> = [];
+  let registeringField: string | number | undefined;
 
   const asyncWatcherApi = asyncWatcher(updateValidating, updateSubmitting);
 
@@ -312,58 +313,81 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function reset(resetInitialValues?: AnyObject) {
-    state = {
-      ...state,
-      ...initialFormState(resetInitialValues || initialValues),
-      fieldListeners: state.fieldListeners,
-      registeredFields: state.registeredFields
-    };
+    batch(() => {
+      const render = prepareRerender();
 
-    state.registeredFields.forEach(resetFieldState);
+      state = {
+        ...state,
+        ...initialFormState(resetInitialValues || initialValues),
+        fieldListeners: state.fieldListeners,
+        registeredFields: state.registeredFields
+      };
+
+      state.registeredFields.forEach(resetFieldState);
+
+      render();
+    });
   }
 
-  function initialize(initialValues: AnyObject | InitilizeInputFunction) {
-    state.pristine = true;
+  function initialize(initialValues: AnyObject | InitilizeInputFunction = {}) {
+    batch(() => {
+      const render = prepareRerender();
+      state.pristine = true;
 
-    const convertedValues = typeof initialValues === 'function' ? initialValues(state.values) : initialValues;
-    let clonedValues = cloneDeep(convertedValues);
-    let dirtyFields = config.keepDirtyOnReinitialize ? cloneDeep(state.values) : {};
+      const convertedValues = typeof initialValues === 'function' ? initialValues(state.values) : initialValues;
+      let clonedValues = cloneDeep(convertedValues);
+      let dirtyFields = config.keepDirtyOnReinitialize ? cloneDeep(state.values) : {};
 
-    if (config.keepDirtyOnReinitialize) {
-      traverseObject(flatObject(dirtyFields), (value, name) => {
-        if (!state.dirtyFields[name]) {
-          dirtyFields = omit(dirtyFields, name);
-        }
-      });
-    }
+      if (config.keepDirtyOnReinitialize) {
+        traverseObject(flatObject(dirtyFields), (value, name) => {
+          if (!state.dirtyFields[name]) {
+            dirtyFields = omit(dirtyFields, name);
+          }
+        });
+      }
 
-    traverseObject(flatObject(convertedValues), (value, key) => {
-      const fieldState = state.fieldListeners[key]?.state;
+      traverseObject(flatObject(convertedValues), (value, key) => {
+        const fieldState = state.fieldListeners[key]?.state;
 
-      if (fieldState) {
-        if (config.keepDirtyOnReinitialize) {
-          if (!state.dirtyFields[key]) {
-            fieldState.meta.pristine = true;
-            fieldState.meta.dirty = false;
-            fieldState.value = value;
+        if (fieldState) {
+          if (config.keepDirtyOnReinitialize) {
+            if (!state.dirtyFields[key]) {
+              setFieldState(key, (prevState) => ({
+                ...prevState,
+                value,
+                meta: {
+                  ...prevState.meta,
+                  pristine: true,
+                  dirty: false
+                }
+              }));
+
+              state.dirtyFields[key] = fieldState.meta.dirty;
+            } else {
+              clonedValues = omit(clonedValues, key);
+            }
+          } else {
+            setFieldState(key, (prevState) => ({
+              ...prevState,
+              value,
+              meta: {
+                ...prevState.meta,
+                pristine: true,
+                dirty: false
+              }
+            }));
 
             state.dirtyFields[key] = fieldState.meta.dirty;
-          } else {
-            clonedValues = omit(clonedValues, key);
           }
-        } else {
-          fieldState.meta.pristine = true;
-          fieldState.meta.dirty = false;
-          fieldState.value = value;
-
-          state.dirtyFields[key] = fieldState.meta.dirty;
         }
-      }
+      });
+
+      state.initialValues = initialValues;
+
+      state.values = merge(removeEmpty(clonedValues), dirtyFields);
+
+      render();
     });
-
-    state.initialValues = initialValues;
-
-    state.values = merge(removeEmpty(clonedValues), dirtyFields);
   }
 
   function validateForm(validate: FormValidator) {
@@ -422,7 +446,13 @@ const createManagerApi: CreateManagerApi = ({
   function prepareRerender() {
     const snapshot = cloneDeep(state);
 
-    return (subscribeTo: Array<string> = []) => rerender([...findDifference(snapshot, state), ...subscribeTo]);
+    return (subscribeTo: Array<string> = []) => {
+      const changedAttributes = [...findDifference(snapshot, state), ...subscribeTo];
+
+      if (changedAttributes.length > 0) {
+        rerender(changedAttributes);
+      }
+    };
   }
 
   function change(name: string, value?: any): void {
@@ -471,17 +501,24 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function focus(name: string): void {
-    state.active = name;
-    state.visited[name] = true;
-    setFieldState(name, (prevState) => ({ ...prevState, meta: { ...prevState.meta, active: true } }));
+    if (state.active !== name) {
+      const render = prepareRerender();
+
+      state.active = name;
+      state.visited[name] = true;
+      setFieldState(name, (prevState) => ({ ...prevState, meta: { ...prevState.meta, active: true } }));
+
+      render();
+    }
   }
 
   function blur(name: string): void {
     if (state.active === name) {
       state.active = undefined;
-    }
 
-    setFieldState(name, (prevState) => ({ ...prevState, meta: { ...prevState.meta, active: false } }));
+      setFieldState(name, (prevState) => ({ ...prevState, meta: { ...prevState.meta, active: false } }));
+      rerender(['active']);
+    }
   }
 
   function handleSubmit(event?: FormEvent): void {
@@ -512,62 +549,74 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function registerField(field: FieldConfig): void {
-    addIfUnique(state.registeredFields, field.name);
+    registeringField = field.internalId || field.name;
+    batch(() => {
+      const render = !field.silent && prepareRerender();
+      addIfUnique(state.registeredFields, field.name);
 
-    if (
-      shouldExecute(config.initializeOnMount, field.initializeOnMount) ||
-      (!isInitialized(field.name) && typeof field.initialValue !== 'undefined')
-    ) {
-      set(state.values, field.name, field.initialValue || get(state.initialValues, field.name));
-    }
+      if (
+        shouldExecute(config.initializeOnMount, field.initializeOnMount) ||
+        (!isInitialized(field.name) && typeof field.initialValue !== 'undefined')
+      ) {
+        set(state.values, field.name, field.initialValue || get(state.initialValues, field.name));
+      }
 
-    let setDirty = false;
-    if (!isInitialized(field.name) && typeof field.defaultValue !== 'undefined' && typeof get(state.values, field.name) === 'undefined') {
-      set(state.values, field.name, field.defaultValue);
-      setDirty = true;
-    }
+      let setDirty = false;
+      if (!isInitialized(field.name) && typeof field.defaultValue !== 'undefined' && typeof get(state.values, field.name) === 'undefined') {
+        set(state.values, field.name, field.defaultValue);
+        setDirty = true;
+      }
 
-    subscribe(field as SubscriberConfig, true);
+      subscribe(field as SubscriberConfig, true);
 
-    if (state.fieldListeners[field.name]?.count === 1) {
-      const updateFieldValidating = (validating: boolean) => {
-        state.fieldListeners[field.name].state.meta.validating = validating;
-      };
+      if (state.fieldListeners[field.name]?.count === 1) {
+        const updateFieldValidating = (validating: boolean) => {
+          state.fieldListeners[field.name].state.meta.validating = validating;
+        };
 
-      const fieldAsyncWatcher = asyncWatcher(updateFieldValidating, () => undefined);
-      state.fieldListeners[field.name].asyncWatcher = fieldAsyncWatcher;
-    }
+        const fieldAsyncWatcher = asyncWatcher(updateFieldValidating, () => undefined);
+        state.fieldListeners[field.name].asyncWatcher = fieldAsyncWatcher;
+      }
 
-    if (field.data) {
-      merge(state.fieldListeners[field.name].state.meta.data, field.data);
-    }
+      if (field.data) {
+        merge(state.fieldListeners[field.name].state.meta.data, field.data);
+      }
 
-    if (setDirty) {
-      state.pristine = false;
-      state.dirty = true;
-      state.dirtyFields[field.name] = true;
-      state.fieldListeners[field.name].state.meta.dirty = true;
-      state.fieldListeners[field.name].state.meta.pristine = false;
-    }
+      if (setDirty) {
+        state.pristine = false;
+        state.dirty = true;
+        state.dirtyFields[field.name] = true;
+        state.fieldListeners[field.name].state.meta.dirty = true;
+        state.fieldListeners[field.name].state.meta.pristine = false;
+      }
 
-    revalidateFields([field.name, ...(state.fieldListeners[field.name]?.validateFields || state.registeredFields.filter((n) => n !== field.name))]);
+      revalidateFields([field.name, ...(state.fieldListeners[field.name]?.validateFields || state.registeredFields.filter((n) => n !== field.name))]);
 
-    if (config.validate) {
-      validateForm(config.validate);
-    }
+      if (config.validate) {
+        validateForm(config.validate);
+      }
+
+      !field.silent && render && render();
+    });
+    registeringField = undefined;
   }
 
   function unregisterField(field: Omit<FieldConfig, 'render'>): void {
-    delete state.fieldListeners[field.name].fields[field.internalId];
+    batch(() => {
+      const render = prepareRerender();
+      delete state.fieldListeners[field.name].fields[field.internalId];
 
-    if (isLast(state.fieldListeners, field.name)) {
-      state.registeredFields = state.registeredFields.filter((fieldName: string) => fieldName !== field.name);
-      if (shouldExecute(config.clearOnUnmount || config.destroyOnUnregister, field.clearOnUnmount)) {
-        set(state.values, field.name, field.value);
+      if (isLast(state.fieldListeners, field.name)) {
+        state.registeredFields = state.registeredFields.filter((fieldName: string) => fieldName !== field.name);
+        if (shouldExecute(config.clearOnUnmount || config.destroyOnUnregister, field.clearOnUnmount)) {
+          set(state.values, field.name, field.value);
+        }
       }
-    }
 
-    unsubscribe(field as SubscriberConfig);
+      unsubscribe(field as SubscriberConfig);
+
+      render();
+    });
   }
 
   function setFieldState(name: string, mutateState: (prevState: FieldState) => FieldState): void {
@@ -599,14 +648,22 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function updateValidating(validating: boolean) {
-    state.validating = validating;
+    if (state.validating !== validating) {
+      state.validating = validating;
+      rerender(['validating']);
+    }
   }
 
   function updateSubmitting(submitting: boolean) {
-    state.submitting = submitting;
+    if (state.submitting !== submitting) {
+      state.submitting = submitting;
+      rerender(['submitting']);
+    }
   }
 
   function updateError(name: string, error: string | undefined = undefined): void {
+    const render = prepareRerender();
+
     if (error) {
       state.errors[name] = error;
       state.valid = false;
@@ -619,6 +676,8 @@ const createManagerApi: CreateManagerApi = ({
       state.valid = true;
       state.invalid = false;
     }
+
+    render();
   }
 
   function registerAsyncValidator(validator: Promise<unknown>) {
@@ -626,8 +685,11 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function updateValid(valid: boolean) {
-    state.valid = valid;
-    state.invalid = !valid;
+    if (state.valid !== valid) {
+      state.valid = valid;
+      state.invalid = !valid;
+      rerender(['valid', 'invalid']);
+    }
   }
 
   function rerender(subscribeTo?: Array<string>) {
@@ -636,22 +698,24 @@ const createManagerApi: CreateManagerApi = ({
       shouldRerender = true;
     } else {
       traverseObject(state.fieldListeners, (fieldListener) => {
-        traverseObject(fieldListener.fields, (field) => {
-          let shouldRender: boolean | undefined = false;
+        traverseObject(fieldListener.fields, (field, key) => {
+          if (String(registeringField) !== String(key)) {
+            let shouldRender: boolean | undefined = false;
 
-          const mergedSubscription = { ...config.subscription, ...field.subscription };
+            const mergedSubscription = { ...config.subscription, ...field.subscription };
 
-          if (!config.subscription && !field.subscription) {
-            shouldRender = true;
-          } else {
-            traverseObject(mergedSubscription, (subscribed, key) => {
-              if (!shouldRender) {
-                shouldRender = subscribed && subscribeTo?.includes(key);
-              }
-            });
+            if (!config.subscription && !field.subscription) {
+              shouldRender = true;
+            } else {
+              traverseObject(mergedSubscription, (subscribed, key) => {
+                if (!shouldRender) {
+                  shouldRender = subscribed && subscribeTo?.includes(key);
+                }
+              });
+            }
+
+            shouldRender && field.render();
           }
-
-          shouldRender && field.render();
         });
       });
     }
@@ -706,15 +770,20 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function resetFieldState(name: string): void {
-    // TODO: have initialValue and initialValues in one place
-    const initialValue = get(state.initialValues, name) || state.fieldListeners[name].state.meta.initial;
-    state.fieldListeners[name].state = createField(name, initialValue);
+    batch(() => {
+      const render = prepareRerender();
+      // TODO: have initialValue and initialValues in one place
+      const initialValue = get(state.initialValues, name) || state.fieldListeners[name].state.meta.initial;
+      state.fieldListeners[name].state = createField(name, initialValue);
 
-    set(state.values, name, initialValue);
-    state.visited[name] = false;
-    state.modified[name] = false;
-    state.dirtyFields[name] = false;
-    state.dirtyFieldsSinceLastSubmit[name] = false;
+      set(state.values, name, initialValue);
+      state.visited[name] = false;
+      state.modified[name] = false;
+      state.dirtyFields[name] = false;
+      state.dirtyFieldsSinceLastSubmit[name] = false;
+
+      render();
+    });
   }
 
   return managerApi;

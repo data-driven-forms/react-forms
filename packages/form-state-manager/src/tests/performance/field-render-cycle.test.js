@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext, Fragment } from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 
 import useField from '../../files/use-field';
 import FormStateManager from '../../files/form-state-manager';
+import FormManagerContext from '../../files/form-manager-context';
 
 const Field = ({ fieldSpy, ...props }) => {
   const { input, id, ...rest } = useField(props);
@@ -69,5 +70,129 @@ describe('useField rendering cycle', () => {
     expect(fieldSpy).toHaveBeenCalledTimes(2);
     expect(fieldSpy.mock.calls[0][0]).toEqual('one');
     expect(fieldSpy.mock.calls[1][0]).toEqual('two');
+  });
+
+  describe('callable function rerender forms', () => {
+    let Tester;
+    let renderSpy;
+
+    const Buttons = () => {
+      const { formOptions } = useContext(FormManagerContext);
+
+      return (
+        <Fragment>
+          <button id="initialize" onClick={() => formOptions().initialize({ one: 'changed' })} />
+          <button id="reset" onClick={() => formOptions().reset()} />
+          <button id="resetfieldstate" onClick={() => formOptions().resetFieldState('one')} />
+          <button id="submit" type="submit" />
+        </Fragment>
+      );
+    };
+
+    beforeEach(() => {
+      renderSpy = jest.fn();
+
+      Tester = ({ subscription }) => (
+        <FormStateManager onSubmit={jest.fn()} subscription={subscription}>
+          {() => {
+            return (
+              <form onSubmit={jest.fn()}>
+                <Field fieldSpy={renderSpy} name="one" id="one" type="text" />
+                <Buttons />
+              </form>
+            );
+          }}
+        </FormStateManager>
+      );
+    });
+
+    it('should rerender on initilize', async () => {
+      const wrapper = mount(<Tester />);
+      renderSpy.mockReset();
+
+      await act(async () => {
+        wrapper.find('#initialize').simulate('click');
+      });
+      wrapper.update();
+
+      expect(renderSpy).toHaveBeenCalledTimes(1);
+      expect(renderSpy.mock.calls[0][0]).toEqual('one');
+    });
+
+    it('should rerender on resetFieldState', async () => {
+      const wrapper = mount(<Tester />);
+      renderSpy.mockReset();
+
+      await act(async () => {
+        wrapper.find('input#one').prop('onChange')({ target: { value: 'foo', type: 'text' } });
+      });
+      wrapper.update();
+
+      renderSpy.mockReset();
+
+      await act(async () => {
+        wrapper.find('#resetfieldstate').simulate('click');
+      });
+      wrapper.update();
+
+      expect(renderSpy).toHaveBeenCalledTimes(1);
+      expect(renderSpy.mock.calls[0][0]).toEqual('one');
+    });
+
+    it('should rerender on reset', async () => {
+      const wrapper = mount(<Tester />);
+
+      await act(async () => {
+        wrapper.find('input#one').prop('onChange')({ target: { value: 'foo', type: 'text' } });
+      });
+      wrapper.update();
+
+      renderSpy.mockReset();
+
+      await act(async () => {
+        wrapper.find('#reset').simulate('click');
+      });
+      wrapper.update();
+
+      expect(renderSpy).toHaveBeenCalledTimes(1);
+      expect(renderSpy.mock.calls[0][0]).toEqual('one');
+    });
+
+    it('should rerender on focus & blur', async () => {
+      const wrapper = mount(<Tester />);
+      renderSpy.mockReset();
+
+      await act(async () => {
+        wrapper.find('input#one').simulate('focus');
+      });
+      wrapper.update();
+
+      expect(renderSpy).toHaveBeenCalledTimes(1);
+      expect(renderSpy.mock.calls[0][0]).toEqual('one');
+      renderSpy.mockReset();
+
+      await act(async () => {
+        wrapper.find('input#one').simulate('focus');
+      });
+      wrapper.update();
+
+      expect(renderSpy).toHaveBeenCalledTimes(0);
+
+      await act(async () => {
+        wrapper.find('input#one').simulate('blur');
+      });
+      wrapper.update();
+
+      expect(renderSpy).toHaveBeenCalledTimes(1);
+      expect(renderSpy.mock.calls[0][0]).toEqual('one');
+      renderSpy.mockReset();
+
+      await act(async () => {
+        wrapper.find('input#one').simulate('blur');
+      });
+      wrapper.update();
+
+      expect(renderSpy).toHaveBeenCalledTimes(0);
+    });
   });
 });

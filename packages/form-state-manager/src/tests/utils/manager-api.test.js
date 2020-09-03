@@ -692,8 +692,10 @@ describe('managerApi', () => {
       managerApi().registerField({ ...field1 });
       managerApi().registerField({ ...field2 });
 
-      expect(renderField1).not.toHaveBeenCalled();
+      expect(renderField1).toHaveBeenCalled(); // registeredFields was changed
       expect(renderField2).not.toHaveBeenCalled();
+
+      renderField1.mockReset();
 
       managerApi().rerender(['values']);
 
@@ -727,8 +729,10 @@ describe('managerApi', () => {
       managerApi().registerField({ ...field1 });
       managerApi().registerField({ ...field2, subscription: { valid: true } });
 
-      expect(renderField1).not.toHaveBeenCalled();
+      expect(renderField1).toHaveBeenCalled(); // registeredFields was changed
       expect(renderField2).not.toHaveBeenCalled();
+
+      renderField1.mockReset();
 
       managerApi().rerender(['values']);
 

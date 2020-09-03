@@ -81,6 +81,7 @@ export interface UseField extends AnyObject {
   afterSubmit?: AfterSubmit;
   beforeSubmit?: BeforeSubmit;
   allowNull?: boolean;
+  silent?: boolean;
 }
 
 export default UseField;
