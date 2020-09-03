@@ -66,6 +66,7 @@ const useField = ({
   beforeSubmit,
   afterSubmit,
   allowNull,
+  silent,
   ...props
 }: UseField): UseFieldData => {
   const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions, ...rest } = useContext(FormManagerContext);
@@ -83,7 +84,8 @@ const useField = ({
       internalId,
       defaultValue: dataType ? convertValue(defaultValue, dataType) : defaultValue,
       beforeSubmit,
-      afterSubmit
+      afterSubmit,
+      silent
     });
 
     return internalId;

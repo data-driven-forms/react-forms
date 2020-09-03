@@ -1,5 +1,5 @@
 import AnyObject from './any-object';
-import { Subscription } from './use-subscription';
+import { Subscription } from './use-field';
 import { FieldRender } from './manager-api';
 import { Validator } from './validate';
 
@@ -25,6 +25,7 @@ export interface FieldConfig extends AnyObject {
   data?: AnyObject;
   afterSubmit?: AfterSubmit;
   beforeSubmit?: BeforeSubmit;
+  silent?: boolean;
 }
 
 export default FieldConfig;
