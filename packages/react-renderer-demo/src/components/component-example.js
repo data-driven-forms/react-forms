@@ -157,9 +157,14 @@ const mapperTab = {
 
 const ComponentExample = ({ variants, schema, activeMapper, component }) => {
   const activeTab = mapperTab[activeMapper];
-  const { pathname, push } = useRouter();
+  const { pathname, push, query, asPath } = useRouter();
   const classes = useStyles();
   useEffect(() => {
+    if (!query?.mapper) {
+      const [path, hash] = asPath.split('#');
+      push(`${path}?mapper=mui${hash ? `#${hash}` : ''}`);
+    }
+
     sdk.embedProject(
       'code-target',
       {
