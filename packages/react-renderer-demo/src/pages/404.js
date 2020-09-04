@@ -64,7 +64,16 @@ const Custom404 = () => {
 
     if (asPath.includes('/component-example/')) {
       setLoading(true);
-      push(asPath.replace('/component-example/', '/mappers/'));
+
+      let newPath = asPath.replace('/component-example/', '/mappers/');
+
+      if (!newPath.match(/\?mapper=/) && !newPath.match(/#/)) {
+        newPath = `${newPath}?mapper=mui`;
+      } else if (!newPath.match(/\?mapper=/)) {
+        newPath = newPath.replace(/#/, '?mapper=mui#');
+      }
+
+      push(newPath);
     } else if (asPath.startsWith('/renderer/condition#') && conditionHashMapper[hash]) {
       setLoading(true);
       push(`/schema/${conditionHashMapper[hash]}`);
