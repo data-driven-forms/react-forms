@@ -44,6 +44,7 @@ export type IsValidationPaused = () => boolean;
 export type PauseValidation = () => void;
 export type ResumeValidation = () => void;
 export type SetConfig = (attribute: keyof CreateManagerApiConfig, value: any) => void;
+export type AfterSilentRegistration = (field: Omit<FieldConfig, 'render'>) => void;
 
 export interface AsyncWatcherRecord {
   [key: number]: Promise<unknown>;
@@ -110,7 +111,8 @@ export type ManagerApiFunctions =
   | 'isValidationPaused'
   | 'pauseValidation'
   | 'resumeValidation'
-  | 'setConfig';
+  | 'setConfig'
+  | 'afterSilentRegistration';
 
 export interface ManagerState {
   values: AnyObject;
@@ -142,6 +144,7 @@ export interface ManagerState {
   pauseValidation: PauseValidation;
   resumeValidation: ResumeValidation;
   setConfig: SetConfig;
+  afterSilentRegistration: AfterSilentRegistration;
   registeredFields: Array<string>;
   fieldListeners: FieldListeners;
   active: string | undefined;

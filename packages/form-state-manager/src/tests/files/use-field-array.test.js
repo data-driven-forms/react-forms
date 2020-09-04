@@ -6,13 +6,13 @@ import useFieldArray from '../../files/use-field-array';
 import FormStateManager from '../../files/form-state-manager';
 
 const DummyInput = (props) => {
-  const { input, meta } = useField({ ...props, silent: true });
+  const { input, meta } = useField({ ...props });
   return <input {...input} />;
 };
 
 const CompositeDummyInput = ({ name, ...props }) => {
-  const firstField = useField({ ...props, name: `${name}.first-field`, silent: true });
-  const secondField = useField({ ...props, name: `${name}.second-field`, silent: true });
+  const firstField = useField({ ...props, name: `${name}.first-field` });
+  const secondField = useField({ ...props, name: `${name}.second-field` });
   return (
     <Fragment>
       <input {...firstField.input} />

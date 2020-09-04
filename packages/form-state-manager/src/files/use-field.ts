@@ -66,7 +66,6 @@ const useField = ({
   beforeSubmit,
   afterSubmit,
   allowNull,
-  silent,
   ...props
 }: UseField): UseFieldData => {
   const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions, ...rest } = useContext(FormManagerContext);
@@ -85,7 +84,7 @@ const useField = ({
       defaultValue: dataType ? convertValue(defaultValue, dataType) : defaultValue,
       beforeSubmit,
       afterSubmit,
-      silent
+      silent: true
     });
 
     return internalId;
@@ -121,8 +120,12 @@ const useField = ({
   };
 
   useEffect(
-    () => () => {
-      unregisterField({ name, clearOnUnmount, internalId: id, value: finalClearedValue });
+    () => {
+      formOptions().afterSilentRegistration({ name, internalId: id });
+
+      return () => {
+        unregisterField({ name, clearOnUnmount, internalId: id, value: finalClearedValue });
+      };
     },
     [] // eslint-disable-line react-hooks/exhaustive-deps
   );

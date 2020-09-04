@@ -58,7 +58,8 @@ describe('useField', () => {
       name: 'spy',
       initialValue: 'foo',
       render: expect.any(Function),
-      internalId: expect.any(Number)
+      internalId: expect.any(Number),
+      silent: true
     };
     const unregisterArguments = {
       name: 'spy',

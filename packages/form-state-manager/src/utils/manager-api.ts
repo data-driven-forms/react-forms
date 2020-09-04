@@ -228,6 +228,7 @@ const createManagerApi: CreateManagerApi = ({
     pauseValidation,
     resumeValidation,
     setConfig,
+    afterSilentRegistration,
     destroyOnUnregister,
     ...initialFormState(initialValues)
   };
@@ -238,6 +239,8 @@ const createManagerApi: CreateManagerApi = ({
   let runFormValidation = false;
   let revalidatedFields: Array<string> = [];
   let registeringField: string | number | undefined;
+  let isSilent = false;
+  let silentRender: string[] = [];
 
   const asyncWatcherApi = asyncWatcher(updateValidating, updateSubmitting);
 
@@ -449,7 +452,9 @@ const createManagerApi: CreateManagerApi = ({
     return (subscribeTo: Array<string> = []) => {
       const changedAttributes = [...findDifference(snapshot, state), ...subscribeTo];
 
-      if (changedAttributes.length > 0) {
+      if (isSilent) {
+        changedAttributes.forEach((attr) => addIfUnique(silentRender, attr));
+      } else if (changedAttributes.length > 0) {
         rerender(changedAttributes);
       }
     };
@@ -549,9 +554,10 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function registerField(field: FieldConfig): void {
+    isSilent = !!field.silent;
     registeringField = field.internalId || field.name;
     batch(() => {
-      const render = !field.silent && prepareRerender();
+      const render = prepareRerender();
       addIfUnique(state.registeredFields, field.name);
 
       if (
@@ -590,15 +596,35 @@ const createManagerApi: CreateManagerApi = ({
         state.fieldListeners[field.name].state.meta.pristine = false;
       }
 
-      revalidateFields([field.name, ...(state.fieldListeners[field.name]?.validateFields || state.registeredFields.filter((n) => n !== field.name))]);
-
-      if (config.validate) {
-        validateForm(config.validate);
+      if (!field.silent) {
+        revalidateFields([
+          field.name,
+          ...(state.fieldListeners[field.name]?.validateFields || state.registeredFields.filter((n) => n !== field.name))
+        ]);
+        if (config.validate) {
+          validateForm(config.validate);
+        }
       }
 
-      !field.silent && render && render();
+      render();
     });
+    isSilent = false;
     registeringField = undefined;
+  }
+
+  function afterSilentRegistration(field: Omit<FieldConfig, 'render'>) {
+    revalidateFields([field.name, ...(state.fieldListeners[field.name]?.validateFields || state.registeredFields.filter((n) => n !== field.name))]);
+
+    if (config.validate) {
+      validateForm(config.validate);
+    }
+
+    if (silentRender.length > 0) {
+      registeringField = field.internalId || field.name;
+      rerender(silentRender);
+      silentRender = [];
+      registeringField = undefined;
+    }
   }
 
   function unregisterField(field: Omit<FieldConfig, 'render'>): void {
