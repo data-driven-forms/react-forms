@@ -1,3 +1,4 @@
+import React from 'react';
 import { FormOptions } from './renderer-context';
 
 export interface WizardContextValue {
@@ -16,8 +17,6 @@ export interface WizardContextValue {
   prevSteps: string[];
 }
 
-interface WizardContext {
-  value: WizardContextValue;
-}
+declare const WizardContext: React.Context<WizardContextValue>;
 
 export default WizardContext;
