@@ -1,4 +1,6 @@
 [![npm version](https://badge.fury.io/js/%40data-driven-forms%2F{{componentmapper}}-component-mapper.svg)](https://badge.fury.io/js/%40data-driven-forms%2F{{componentmapper}}-component-mapper)
+[![Tweet](https://img.shields.io/twitter/url/https/github.com/tterb/hyde.svg?style=social)](https://twitter.com/intent/tweet?text=Check%20DataDrivenForms%20React%20library%21%20https%3A%2F%2Fdata-driven-forms.org%2F&hashtags=react,opensource,datadrivenforms)
+[![Twitter Follow](https://img.shields.io/twitter/follow/DataDrivenForms.svg?style=social)](https://twitter.com/DataDrivenForms)
 
 [![Data Driven Form logo](https://raw.githubusercontent.com/data-driven-forms/react-forms/master/images/logo.png)](https://data-driven-forms.org/)
 
