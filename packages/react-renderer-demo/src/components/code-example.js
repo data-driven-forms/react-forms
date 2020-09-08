@@ -22,6 +22,11 @@ import CodesandboxIcon from './common/code-sandbox-svg-icon';
 import CodeEditor from './code-editor';
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    [theme.breakpoints.down('sm')]: {
+      maxWidth: 'calc(100vw - 64px)'
+    }
+  },
   codeWrapper: {
     background: '#1D1F21',
     paddingTop: 16,
@@ -152,7 +157,7 @@ const CodeExample = ({ source, mode, mapper }) => {
   const classes = useStyles();
   if (mode === 'preview') {
     return (
-      <Grid container spacing={0} className="DocRawComponent">
+      <Grid container spacing={0} className={clsx('DocRawComponent', classes.container)}>
         <Grid item xs={12}>
           <ExpansionPanel className={classes.expansionPanel}>
             <ExpansionPanelSummary
@@ -194,7 +199,7 @@ const CodeExample = ({ source, mode, mapper }) => {
               </Box>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails className={clsx(classes.expansionPanelDetail, classes.codeWrapper)}>
-              <CodeEditor value={codeSource} />
+              <CodeEditor value={codeSource} inExample />
             </ExpansionPanelDetails>
           </ExpansionPanel>
         </Grid>
