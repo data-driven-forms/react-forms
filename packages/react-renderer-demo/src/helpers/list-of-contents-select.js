@@ -78,9 +78,9 @@ const ListOfContents = ({ found }) => {
           >
             Show content
           </Button>
-          <Popper open={open} role={undefined} transition disablePortal anchorEl={anchorRef.current}>
+          <Popper open={open} role={undefined} transition disablePortal anchorEl={anchorRef.current} placement="bottom-end">
             {({ TransitionProps }) => (
-              <Grow {...TransitionProps} style={{ transformOrigin: 'center top' }}>
+              <Grow {...TransitionProps} style={{ transformOrigin: 'right top' }}>
                 <Paper>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                     {found.map((text) => (
