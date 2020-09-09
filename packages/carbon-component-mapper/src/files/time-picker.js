@@ -36,7 +36,6 @@ TimePicker.propTypes = {
   isRequired: PropTypes.bool,
   label: PropTypes.node,
   labelText: PropTypes.node,
-  optionalText: PropTypes.node,
   description: PropTypes.node,
   twelveHoursFormat: PropTypes.bool,
   timezones: PropTypes.arrayOf(

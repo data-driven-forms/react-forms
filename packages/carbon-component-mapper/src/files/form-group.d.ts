@@ -7,7 +7,6 @@ export interface FormGroupInternalProps {
     isRequired?: boolean;
     label?: ReactNode;
     labelText?: ReactNode;
-    optionalText?: ReactNode;
     description?: ReactNode;
 }
 
