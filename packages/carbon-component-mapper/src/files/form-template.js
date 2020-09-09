@@ -1,18 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Form as CarbonForm } from 'carbon-components-react';
+import { Form as CarbonForm, Button as CarbonButton, ButtonSet } from 'carbon-components-react';
 
 import FormTemplate from '@data-driven-forms/common/src/form-template';
 
-export const Button = ({ label, buttonType, ...props }) => <button {...props}>{label}</button>;
+export const Button = ({ label, buttonType, ...props }) => (
+  <CarbonButton kind={buttonType === 'submit' ? 'primary' : 'secondary'} {...props}>
+    {label}
+  </CarbonButton>
+);
 
 Button.propTypes = {
   label: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
   buttonType: PropTypes.string
 };
 
-export const ButtonGroup = ({ children, ...props }) => <div {...props}>{children}</div>;
+export const ButtonGroup = ({ children, ...props }) => <ButtonSet {...props}>{children}</ButtonSet>;
 
 ButtonGroup.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
@@ -41,7 +45,15 @@ Form.propTypes = {
 };
 
 const WrappedFormTemplate = (props) => (
-  <FormTemplate FormWrapper={Form} Button={Button} ButtonGroup={ButtonGroup} Title={Title} Description={Description} {...props} />
+  <FormTemplate
+    FormWrapper={Form}
+    Button={Button}
+    ButtonGroup={ButtonGroup}
+    Title={Title}
+    Description={Description}
+    buttonOrder={['cancel', 'reset', 'submit']}
+    {...props}
+  />
 );
 
 export default WrappedFormTemplate;
