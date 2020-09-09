@@ -4,12 +4,10 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 import { Slider as CarbonSlider } from 'carbon-components-react';
 
-import WithDescription from '../common/with-description';
+import prepareProps from '../common/prepare-props';
 
 const Slider = (props) => {
-  const { input, meta, isDisabled, label, labelText, isRequired, optionalText, description, ...rest } = useFieldApi(props);
-
-  const modifiedLabel = description ? <WithDescription description={description} labelText={labelText || label} /> : labelText || label;
+  const { input, meta, isRequired, ...rest } = useFieldApi(prepareProps(props));
 
   const invalid = meta.touched && meta.error;
 
@@ -19,8 +17,6 @@ const Slider = (props) => {
       value={Number(input.value) || 0}
       key={input.name}
       id={input.name}
-      labelText={modifiedLabel}
-      disabled={isDisabled}
       invalid={Boolean(invalid)}
       min={0}
       max={100}

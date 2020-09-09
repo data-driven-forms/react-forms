@@ -27,7 +27,7 @@ export const wizardSchema = {
               component: componentTypes.TEXTAREA,
               name: 'source.source-name',
               type: 'text',
-              label: 'Source name',
+              label: 'Source name'
             },
             {
               component: componentTypes.SELECT,
@@ -42,7 +42,7 @@ export const wizardSchema = {
                 {
                   value: 'google',
                   label: 'Google'
-                },
+                }
               ],
               validate: [
                 {

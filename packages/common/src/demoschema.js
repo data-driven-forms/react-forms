@@ -27,7 +27,6 @@ const genereateField = (component, name = 'standard', optionsOptional = {}) => [
 ];
 
 const componentList = ['text-field', 'checkbox', 'date-picker', 'radio', 'select', 'switch', 'textarea', 'time-picker', 'slider'];
-const componentList2 = ['date-picker'];
 
 const superSchema = {
   fields: [

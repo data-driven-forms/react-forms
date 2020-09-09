@@ -4,7 +4,6 @@ export { default as Checkbox } from './files/checkbox';
 export { default as DatePicker } from './files/date-picker';
 export { default as DualListSelect } from './files/dual-list-select';
 export { default as FieldArray } from './files/field-array';
-export { default as FormGroup } from './files/form-group';
 export { default as PlainText } from './files/plain-text';
 export { default as Radio } from './files/radio';
 export { default as Select } from './files/select';

@@ -3,15 +3,7 @@ import WizardCommon from '@data-driven-forms/common/src/wizard/wizard';
 import { FormSpy, WizardContext } from '@data-driven-forms/react-form-renderer';
 
 const WizardInternal = () => {
-  const {
-    formOptions,
-    currentStep,
-    handlePrev,
-    onKeyDown,
-    handleNext,
-    activeStepIndex,
-    selectNext
-  } = useContext(WizardContext);
+  const { formOptions, currentStep, handlePrev, onKeyDown, handleNext, activeStepIndex, selectNext } = useContext(WizardContext);
 
   return (
     <div onKeyDown={onKeyDown}>

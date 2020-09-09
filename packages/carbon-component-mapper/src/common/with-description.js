@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Tooltip } from 'carbon-components-react';
 
-const WithDescription = ({ labelText, description }) => (
-  <React.Fragment>
-    {labelText} <Tooltip>{description}</Tooltip>
-  </React.Fragment>
-);
+const WithDescription = ({ labelText, description }) => <Tooltip triggerText={labelText}>{description}</Tooltip>;
 
 WithDescription.propTypes = {
   labelText: PropTypes.node,

@@ -4,43 +4,15 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 import { TimePicker as CarbonTimePicker, TimePickerSelect, SelectItem } from 'carbon-components-react';
 
-import IsOptional from '../common/is-optional';
-import WithDescription from '../common/with-description';
+import prepareProps from '../common/prepare-props';
 
 const TimePicker = (props) => {
-  const {
-    input,
-    meta,
-    isDisabled,
-    isReadOnly,
-    label,
-    labelText,
-    isRequired,
-    optionalText,
-    description,
-    twelveHoursFormat,
-    timezones,
-    ...rest
-  } = useFieldApi(props);
-
-  const modifiedLabel = description ? <WithDescription description={description} labelText={labelText || label} /> : labelText || label;
-
-  const finalLabel = isRequired ? modifiedLabel : <IsOptional labelText={modifiedLabel} optionalText={optionalText} />;
+  const { input, meta, twelveHoursFormat, timezones, ...rest } = useFieldApi(prepareProps(props));
 
   const invalid = meta.touched && meta.error;
 
   return (
-    <CarbonTimePicker
-      {...input}
-      key={input.name}
-      id={input.name}
-      labelText={finalLabel}
-      disabled={isDisabled}
-      readOnly={isReadOnly}
-      invalid={Boolean(invalid)}
-      invalidText={invalid || ''}
-      {...rest}
-    >
+    <CarbonTimePicker {...input} key={input.name} id={input.name} invalid={Boolean(invalid)} invalidText={invalid || ''} {...rest}>
       {twelveHoursFormat && (
         <TimePickerSelect id={`${rest.id || input.name}-12h`}>
           <SelectItem value="AM" text="AM" />

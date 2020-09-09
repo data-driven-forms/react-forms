@@ -4,19 +4,16 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 import { FormGroup, RadioButtonGroup, RadioButton } from 'carbon-components-react';
 
-import WithDescription from '../common/with-description';
+import prepareProps from '../common/prepare-props';
 
 const Radio = (props) => {
-  const { label, labelText, input, isDisabled, options, FormGroupProps, helperText, description, ...rest } = useFieldApi({ type: 'radio', ...props });
+  const { labelText, disabled, input, options, FormGroupProps, ...rest } = useFieldApi(prepareProps({ type: 'radio', ...props }));
 
   return (
-    <FormGroup
-      legendText={description ? <WithDescription labelText={labelText || label} description={description} /> : labelText || label}
-      {...FormGroupProps}
-    >
-      <RadioButtonGroup {...input} valueSelected={input.value} disabled={isDisabled} {...rest}>
+    <FormGroup legendText={labelText} {...FormGroupProps}>
+      <RadioButtonGroup {...input} valueSelected={input.value} disabled={disabled} {...rest}>
         {options.map((option) => (
-          <RadioButton key={option.value} {...props} disabled={isDisabled} labelText={option.label} value={option.value} {...option} />
+          <RadioButton key={option.value} {...props} disabled={disabled} labelText={option.label} value={option.value} {...option} />
         ))}
       </RadioButtonGroup>
     </FormGroup>

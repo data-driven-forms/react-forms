@@ -4,31 +4,14 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 import { TextInput } from 'carbon-components-react';
 
-import IsOptional from '../common/is-optional';
-import WithDescription from '../common/with-description';
+import prepareProps from '../common/prepare-props';
 
 const TextField = (props) => {
-  const { input, meta, isDisabled, isReadOnly, label, labelText, isRequired, optionalText, description, ...rest } = useFieldApi(props);
-
-  const modifiedLabel = description ? <WithDescription description={description} labelText={labelText || label} /> : labelText || label;
-
-  const finalLabel = isRequired ? modifiedLabel : <IsOptional labelText={modifiedLabel} optionalText={optionalText} />;
+  const { input, meta, ...rest } = useFieldApi(prepareProps(props));
 
   const invalid = meta.touched && meta.error;
 
-  return (
-    <TextInput
-      {...input}
-      key={input.name}
-      id={input.name}
-      labelText={finalLabel}
-      disabled={isDisabled}
-      readOnly={isReadOnly}
-      invalid={Boolean(invalid)}
-      invalidText={invalid || ''}
-      {...rest}
-    />
-  );
+  return <TextInput {...input} key={input.name} id={input.name} invalid={Boolean(invalid)} invalidText={invalid || ''} {...rest} />;
 };
 
 TextField.propTypes = {
@@ -37,7 +20,6 @@ TextField.propTypes = {
   isRequired: PropTypes.bool,
   label: PropTypes.node,
   labelText: PropTypes.node,
-  optionalText: PropTypes.node,
   description: PropTypes.node
 };
 

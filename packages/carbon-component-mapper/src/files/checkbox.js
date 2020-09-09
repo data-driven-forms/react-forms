@@ -6,6 +6,7 @@ import MultipleChoiceListCommon from '@data-driven-forms/common/src/multiple-cho
 import { Checkbox as CarbonCheckbox, FormGroup } from 'carbon-components-react';
 
 import WithDescription from '../common/with-description';
+import prepareProps from '../common/prepare-props';
 
 const Wrapper = ({ label, description, children }) => (
   <FormGroup legendText={description ? <WithDescription labelText={label} description={description} /> : label}>{children}</FormGroup>
@@ -18,11 +19,9 @@ Wrapper.propTypes = {
 };
 
 const SingleCheckbox = (props) => {
-  const { input, isDisabled, label, labelText, description, isReadOnly, helperText, ...rest } = useFieldApi({ ...props, type: 'checkbox' });
+  const { input, ...rest } = useFieldApi(prepareProps({ ...props, type: 'checkbox' }));
 
-  const finalLabel = description ? <WithDescription labelText={labelText || label} description={description} /> : labelText || label;
-
-  return <CarbonCheckbox {...input} id={input.name} labelText={finalLabel} disabled={isDisabled} {...rest} />;
+  return <CarbonCheckbox {...input} id={input.name} {...rest} />;
 };
 
 const SingleCheckboxInCommon = ({ label, isDisabled, id, ...props }) => <CarbonCheckbox id={id} labelText={label} disabled={isDisabled} />;

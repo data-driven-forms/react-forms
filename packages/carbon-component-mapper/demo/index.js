@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
-import { arraySchemaDDF } from './demo-schemas/widget-schema';
+// import { arraySchemaDDF } from './demo-schemas/widget-schema';
 import { componentMapper, FormTemplate } from '../src';
 import { wizardSchema } from './demo-schemas/wizard-schema';
 import sandboxSchema from './demo-schemas/sandbox';
