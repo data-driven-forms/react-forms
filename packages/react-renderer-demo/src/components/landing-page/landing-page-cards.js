@@ -245,7 +245,7 @@ const LandingPageCards = () => {
             Available mappers
           </Typography>
           <Grid container direction="row" justify="space-evenly">
-            <Grid item xs={12} md={4} xl={2}>
+            <Grid item xs={6} md={4} xl={2}>
               <Typography variant="h6" className={classes.textBottom}>
                 MaterialUI
               </Typography>
@@ -255,7 +255,7 @@ const LandingPageCards = () => {
                 </a>
               </RouterLink>
             </Grid>
-            <Grid item xs={12} md={4} xl={2}>
+            <Grid item xs={6} md={4} xl={2}>
               <Typography variant="h6" className={classes.textBottom}>
                 PatternFly 4
               </Typography>
@@ -265,7 +265,7 @@ const LandingPageCards = () => {
                 </a>
               </RouterLink>
             </Grid>
-            <Grid item xs={12} md={4} xl={2}>
+            <Grid item xs={6} md={4} xl={2}>
               <Typography variant="h6" className={classes.textBottom}>
                 PatternFly 3
               </Typography>
@@ -275,7 +275,7 @@ const LandingPageCards = () => {
                 </a>
               </RouterLink>
             </Grid>
-            <Grid item xs={12} md={4} xl={2}>
+            <Grid item xs={6} md={3} xl={2}>
               <Typography variant="h6" className={classes.textBottom}>
                 BlueprintJS
               </Typography>
@@ -285,7 +285,7 @@ const LandingPageCards = () => {
                 </a>
               </RouterLink>
             </Grid>
-            <Grid item xs={12} md={4} xl={2}>
+            <Grid item xs={6} md={3} xl={2}>
               <Typography variant="h6" className={classes.textBottom}>
                 Semantic UI
               </Typography>
@@ -295,13 +295,23 @@ const LandingPageCards = () => {
                 </a>
               </RouterLink>
             </Grid>
-            <Grid item xs={12} md={4} xl={2}>
+            <Grid item xs={6} md={3} xl={2}>
               <Typography variant="h6" className={classes.textBottom}>
                 Ant Design
               </Typography>
               <RouterLink href="/mappers/ant-component-mapper">
                 <a href="/mappers/ant-component-mapper">
                   <img className={classes.logo} alt="ant logo" src="/ant-logo.svg" />
+                </a>
+              </RouterLink>
+            </Grid>
+            <Grid item xs={12} md={3} xl={12}>
+              <Typography variant="h6" className={classes.textBottom}>
+                Carbon Design System
+              </Typography>
+              <RouterLink href="/mappers/carbon-component-mapper">
+                <a href="/mappers/carbon-component-mapper">
+                  <img className={classes.logo} alt="ant logo" src="/carbon-logo.svg" />
                 </a>
               </RouterLink>
             </Grid>
