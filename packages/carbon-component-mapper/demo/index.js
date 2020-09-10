@@ -46,16 +46,6 @@ class App extends React.Component {
             FormTemplate={(props) => <FormTemplate {...props} showFormControls={this.state.additionalOptions.showFormControls} />}
             onCancel={console.log}
             schema={this.state.schema}
-            /*schema={{
-              fields: [
-                {
-                  component: 'time-picker',
-                  name: 'tp',
-                  twelveHoursFormat: true,
-                  timezones: [{ value: 'utc', label: 'UTC' }]
-                }
-              ]
-            }}*/
             {...this.state.additionalOptions}
           />
         </div>
