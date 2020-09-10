@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import WizardCommon from '@data-driven-forms/common/src/wizard/wizard';
 import { FormSpy, WizardContext } from '@data-driven-forms/react-form-renderer';
 

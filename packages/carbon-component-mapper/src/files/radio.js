@@ -13,7 +13,7 @@ const Radio = (props) => {
     <FormGroup legendText={labelText} {...FormGroupProps}>
       <RadioButtonGroup {...input} valueSelected={input.value} disabled={disabled} {...rest}>
         {options.map((option) => (
-          <RadioButton key={option.value} {...props} disabled={disabled} labelText={option.label} value={option.value} {...option} />
+          <RadioButton key={option.value} disabled={disabled} labelText={option.label} value={option.value} {...option} />
         ))}
       </RadioButtonGroup>
     </FormGroup>

@@ -8,6 +8,14 @@ import fnToString from '@data-driven-forms/common/src/utils/fn-to-string';
 import { Select as CarbonSelect, MultiSelect, SelectItem } from 'carbon-components-react';
 import prepareProps from '../common/prepare-props';
 
+export const multiOnChange = (input, simpleValue) => ({ selectedItems }) => {
+  if (simpleValue) {
+    return input.onChange(selectedItems.map(({ value }) => value));
+  } else {
+    return input.onChange(selectedItems);
+  }
+};
+
 const ClearedMultiSelectFilterable = ({
   invalidText,
   hideSelectedOptions,
@@ -170,14 +178,6 @@ const Select = (props) => {
 
   const invalidText = (meta.touched && meta.error) || '';
 
-  const specialOnChange = ({ selectedItems }) => {
-    if (rest.simpleValue) {
-      return input.onChange(selectedItems.map(({ value }) => value));
-    } else {
-      return input.onChange(selectedItems);
-    }
-  };
-
   return (
     <DataDrivenSelect
       SelectComponent={Component}
@@ -187,7 +187,7 @@ const Select = (props) => {
       loadOptions={loadOptions}
       invalidText={invalidText}
       loadOptionsChangeCounter={loadOptionsChangeCounter}
-      originalOnChange={specialOnChange}
+      originalOnChange={multiOnChange(input, rest.simpleValue)}
     />
   );
 };
