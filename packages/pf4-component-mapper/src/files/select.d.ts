@@ -26,6 +26,7 @@ interface BaseSelectProps  {
   menuIsPortal?: boolean;
   placeholder?: ReactNode;
   validated?: 'success' | 'error' | 'default';
+  id?: string;
 }
 
 export interface InternalSelectProps extends BaseSelectProps {
