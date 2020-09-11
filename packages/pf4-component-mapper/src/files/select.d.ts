@@ -12,6 +12,7 @@ interface BaseSelectProps  {
   options?: SelectOption[];
   selectVariant?: 'default' | 'createable';
   isSearchable?: boolean;
+  isDisabled?: boolean;
   isClearable?: boolean;
   name?: string;
   showMoreLabel?: ReactNode;
