@@ -217,10 +217,9 @@ const CodeExample = ({ source, mode, mapper }) => {
             href={`https://github.com/data-driven-forms/react-forms/tree/master/packages/react-renderer-demo/src/app/examples/${source}.js`}
             target="_blank"
             rel="noopener noreferrer"
+            variant="subtitle1"
           >
-            <Typography variant="subtitle1" component="h1">
-              View source on github
-            </Typography>
+            View source on github
           </Link>
         </Box>
       </Grid>
