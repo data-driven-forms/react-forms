@@ -147,7 +147,7 @@ const DualListSelectInner = ({
   RightListProps,
   RightBodyProps
 }) => (
-  <FormGroup legendText={label} {...FormGroupProps}>
+  <FormGroup legendText={label || ''} {...FormGroupProps}>
     <Grid {...GridProps}>
       <Row condensed {...RowProps}>
         <Column sm={4} md={8} lg={5} {...OptionsColumnProps}>
