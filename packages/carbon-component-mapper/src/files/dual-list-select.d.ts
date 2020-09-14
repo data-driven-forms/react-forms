@@ -50,7 +50,6 @@ interface InternalDualListSelectProps {
   OptionsColumnProps?: ColumnDefaultProps;
   ButtonColumnProps?: ColumnDefaultProps;
   ValuesColumnProps?: ColumnDefaultProps;
-  ButtonSetProps?: React.HTMLProps<HTMLDivElement>;
   AddButtonProps?: ButtonProps;
   AddAllButtonProps?: ButtonProps;
   RemoveButtonProps?: ButtonProps;

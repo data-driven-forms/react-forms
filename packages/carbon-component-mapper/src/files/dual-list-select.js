@@ -12,7 +12,6 @@ import {
   StructuredListRow,
   StructuredListCell,
   Button,
-  ButtonSet,
   FormGroup,
   Search,
   TooltipIcon
@@ -73,7 +72,12 @@ List.propTypes = {
 const Toolbar = ({ sortTitle, onFilter, onSort, sortDirection, placeholder, ToolbarProps, SearchProps, SortProps }) => (
   <div {...ToolbarProps} className={clsx('ddorg__carbon-dual-list-toolbar', ToolbarProps.className)}>
     <Search onChange={(e) => onFilter(e.target.value)} labelText="" placeHolderText={placeholder} {...SearchProps} />
-    <TooltipIcon onClick={onSort} tooltipText={sortTitle} {...SortProps}>
+    <TooltipIcon
+      onClick={onSort}
+      tooltipText={sortTitle}
+      {...SortProps}
+      className={clsx('ddorg__carbon-dual-list-tooltipbutton', SortProps.className)}
+    >
       {sortDirection ? <CaretSortDown32 /> : <CaretSortUp32 />}
     </TooltipIcon>
   </div>
@@ -131,7 +135,6 @@ const DualListSelectInner = ({
   OptionsColumnProps,
   ButtonColumnProps,
   ValuesColumnProps,
-  ButtonSetProps,
   AddButtonProps,
   AddAllButtonProps,
   RemoveButtonProps,
@@ -172,20 +175,30 @@ const DualListSelectInner = ({
           />
         </Column>
         <Column sm={4} md={8} lg={2} {...ButtonColumnProps} className={clsx('ddorg__carbon-dual-list-button-wrapper', ButtonColumnProps.className)}>
-          <ButtonSet {...ButtonSetProps} className={clsx('ddorg__carbon-dual-list-button-set', ButtonSetProps.className)}>
-            <Button renderIcon={ChevronRight32} onClick={handleMoveRight} disabled={isEmpty(state.selectedLeftValues)} {...AddButtonProps}>
-              {moveRightTitle}
-            </Button>
-            <Button onClick={handleClearLeftValues} disabled={isEmpty(leftValues)} {...AddAllButtonProps}>
-              {moveAllRightTitle}
-            </Button>
-            <Button renderIcon={ChevronLeft32} onClick={handleMoveLeft} disabled={isEmpty(state.selectedRightValues)} {...RemoveButtonProps}>
-              {moveLeftTitle}
-            </Button>
-            <Button onClick={handleClearRightValues} disabled={isEmpty(rightValues)} {...RemoveAllButtonProps}>
-              {moveAllLeftTitle}
-            </Button>
-          </ButtonSet>
+          <Button
+            id="move-right"
+            renderIcon={ChevronRight32}
+            onClick={handleMoveRight}
+            disabled={isEmpty(state.selectedLeftValues)}
+            {...AddButtonProps}
+          >
+            {moveRightTitle}
+          </Button>
+          <Button id="move-all-right" onClick={handleClearLeftValues} disabled={isEmpty(leftValues)} {...AddAllButtonProps}>
+            {moveAllRightTitle}
+          </Button>
+          <Button id="move-all-left" onClick={handleClearRightValues} disabled={isEmpty(rightValues)} {...RemoveAllButtonProps}>
+            {moveAllLeftTitle}
+          </Button>
+          <Button
+            id="move-left"
+            renderIcon={ChevronLeft32}
+            onClick={handleMoveLeft}
+            disabled={isEmpty(state.selectedRightValues)}
+            {...RemoveButtonProps}
+          >
+            {moveLeftTitle}
+          </Button>
         </Column>
         <Column sm={4} md={8} lg={5} {...ValuesColumnProps}>
           {React.createElement(RightTitleElement, RightTitleProps, rightTitle)}
@@ -252,7 +265,6 @@ DualListSelectInner.propTypes = {
   OptionsColumnProps: PropTypes.object,
   ButtonColumnProps: PropTypes.object,
   ValuesColumnProps: PropTypes.object,
-  ButtonSetProps: PropTypes.object,
   AddButtonProps: PropTypes.object,
   AddAllButtonProps: PropTypes.object,
   RemoveButtonProps: PropTypes.object,
@@ -292,7 +304,6 @@ DualListSelectInner.defaultProps = {
   OptionsColumnProps: {},
   ButtonColumnProps: {},
   ValuesColumnProps: {},
-  ButtonSetProps: {},
   AddButtonProps: {},
   AddAllButtonProps: {},
   RemoveButtonProps: {},

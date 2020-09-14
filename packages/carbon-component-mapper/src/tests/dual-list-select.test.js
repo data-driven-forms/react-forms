@@ -4,7 +4,7 @@ import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-rend
 import { mount } from 'enzyme';
 
 import { componentMapper, FormTemplate } from '../index';
-import { StructuredListWrapper, Search, StructuredListRow, ButtonSet, Button, TooltipIcon } from 'carbon-components-react';
+import { StructuredListWrapper, Search, StructuredListRow, Button, TooltipIcon } from 'carbon-components-react';
 
 describe('DualListSelect', () => {
   let onSubmit;
@@ -58,7 +58,7 @@ describe('DualListSelect', () => {
 
     expect(wrapper.find(StructuredListWrapper)).toHaveLength(2);
     expect(wrapper.find(Search)).toHaveLength(2);
-    expect(wrapper.find(ButtonSet)).toHaveLength(1);
+    expect(wrapper.find(Button)).toHaveLength(4);
     expect(wrapper.find(StructuredListRow)).toHaveLength(schema.fields[0].options.length + 1); // + empty placeholder
   });
 
@@ -80,8 +80,7 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find(Button)
-        .at(0)
+        .find('button#move-right')
         .props()
         .onClick();
     });
@@ -121,8 +120,7 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find(Button)
-        .at(0)
+        .find('button#move-right')
         .props()
         .onClick();
     });
@@ -160,8 +158,7 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find(Button)
-        .at(0)
+        .find('button#move-right')
         .props()
         .onClick();
     });
@@ -212,8 +209,7 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find(Button)
-        .at(0)
+        .find('button#move-right')
         .props()
         .onClick();
     });
@@ -244,8 +240,7 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find(Button)
-        .at(3)
+        .find('button#move-all-left')
         .props()
         .onClick();
     });
@@ -261,8 +256,7 @@ describe('DualListSelect', () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
     await act(async () => {
       wrapper
-        .find(Button)
-        .at(1)
+        .find('button#move-all-right')
         .props()
         .onClick();
     });
@@ -280,8 +274,7 @@ describe('DualListSelect', () => {
     );
     await act(async () => {
       wrapper
-        .find(Button)
-        .at(3)
+        .find('button#move-all-left')
         .props()
         .onClick();
     });
@@ -531,8 +524,7 @@ describe('DualListSelect', () => {
       wrapper.update();
       await act(async () => {
         wrapper
-          .find(Button)
-          .at(1)
+          .find('button#move-all-right')
           .props()
           .onClick();
       });
@@ -567,8 +559,7 @@ describe('DualListSelect', () => {
 
       await act(async () => {
         wrapper
-          .find(Button)
-          .at(3)
+          .find('button#move-all-left')
           .props()
           .onClick();
       });
