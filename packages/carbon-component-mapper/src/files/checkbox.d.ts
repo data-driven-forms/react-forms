@@ -1,13 +1,15 @@
-import { UseFieldApiComponentConfig, AnyObject } from "@data-driven-forms/react-form-renderer";
+import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-renderer";
 import { ReactNode } from "react";
 import { FormGroupProps } from "./form-group";
 
-export interface CheckboxOption extends AnyObject {
+import { CheckboxProps as CarbonCheckboxProps } from 'carbon-components-react';
+
+export interface CheckboxOption extends CarbonCheckboxProps {
   value?: any;
   label: ReactNode;
 }
 
-interface InternalCheckboxProps extends AnyObject, React.HTMLProps<HTMLInputElement> {
+interface InternalCheckboxProps extends CarbonCheckboxProps {
   options?: CheckboxOption[];
 }
 

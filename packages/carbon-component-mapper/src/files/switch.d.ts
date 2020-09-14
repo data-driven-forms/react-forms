@@ -1,7 +1,9 @@
 import { FormGroupProps } from "./form-group";
-import { UseFieldApiComponentConfig, AnyObject } from "@data-driven-forms/react-form-renderer";
+import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-renderer";
 
-interface InternalSwitchProps extends AnyObject, React.HTMLProps<HTMLInputElement> { }
+import { ToggleProps } from 'carbon-components-react';
+
+interface InternalSwitchProps extends ToggleProps { }
 
 export type SwitchProps = InternalSwitchProps & FormGroupProps & UseFieldApiComponentConfig;
 

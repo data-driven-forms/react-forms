@@ -3780,6 +3780,14 @@
   dependencies:
     "@types/d3" "^4"
 
+"@types/carbon-components-react@^7.10.9":
+  version "7.10.9"
+  resolved "https://registry.yarnpkg.com/@types/carbon-components-react/-/carbon-components-react-7.10.9.tgz#e7baf175ea48bed4dd6d0e7bccaa2d53975954c9"
+  integrity sha512-fa6XUoWuHmsLlAquR7NxL/4dwOwObYGsFtQNxdrcSmoT1C3tjdjQcSaZ91bKC+37U/9C+6+dxT5RwCc2B3O94w==
+  dependencies:
+    "@types/react" "*"
+    flatpickr "4.6.1"
+
 "@types/color-name@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"

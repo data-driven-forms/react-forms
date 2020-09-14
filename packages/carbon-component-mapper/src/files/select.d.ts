@@ -1,13 +1,14 @@
 import { FormGroupProps } from "./form-group";
-import { UseFieldApiComponentConfig, AnyObject } from "@data-driven-forms/react-form-renderer";
-import { ReactNode } from "react";
+import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-renderer";
 
-export interface SelectOption extends AnyObject {
-  value?: any;
-  label: ReactNode;
+import { SelectItemProps, SelectProps as CarbonSelectProps } from 'carbon-components-react';
+
+export interface SelectOption extends SelectItemProps {
+  value: any;
+  label: string | undefined;
 }
 
-interface InternalSelectProps extends React.HTMLProps<HTMLSelectElement> {
+interface InternalSelectProps extends CarbonSelectProps {
   options: SelectOption[];
   isDisabled?: boolean;
 }

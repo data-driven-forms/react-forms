@@ -3,12 +3,14 @@ import { UseFieldApiComponentConfig, AnyObject } from "@data-driven-forms/react-
 
 import { FormGroupProps } from "./form-group";
 
-export interface Timezone extends AnyObject {
+import { TimePickerProps as CarbonTimePickerProps, SelectItemProps } from 'carbon-components-react';
+
+export interface Timezone extends SelectItemProps {
     value: string;
-    label?: ReactNode;
+    label?: string;
 }
 
-interface InternalTimePickerProps extends AnyObject, React.HTMLProps<HTMLInputElement> {
+interface InternalTimePickerProps extends CarbonTimePickerProps {
     twelveHoursFormat?: boolean;
     timezones?: Timezone[];
 }

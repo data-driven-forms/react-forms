@@ -1,7 +1,9 @@
 import { FormGroupProps } from "./form-group";
-import { UseFieldApiComponentConfig, AnyObject } from "@data-driven-forms/react-form-renderer";
+import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-renderer";
 
-interface InternalSliderProps extends AnyObject, React.HTMLProps<HTMLInputElement> {
+import { SliderProps as CarbonSliderProps } from 'carbon-components-react';
+
+interface InternalSliderProps extends CarbonSliderProps {
 }
 
 export type SliderProps = InternalSliderProps & FormGroupProps & UseFieldApiComponentConfig;

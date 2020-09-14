@@ -1,20 +1,22 @@
-import { FormGroupProps } from "./form-group";
+import { FormGroupProps as CommonFormGroupProps } from "./form-group";
 import { UseFieldApiComponentConfig, AnyObject } from "@data-driven-forms/react-form-renderer";
 import { ReactNode } from "react";
 
-export interface RadioOption extends AnyObject {
+import { FormGroupProps, RadioButtonGroupProps, RadioButtonProps} from 'carbon-components-react';
+
+export interface RadioOption extends RadioButtonProps {
     value: any;
     label?: ReactNode;
 }
 
-interface InternalRadioProps extends AnyObject {
+interface InternalRadioProps extends RadioButtonGroupProps {
     isDisabled?: boolean;
     label?: ReactNode;
     options: RadioOption[];
-    FormGroupProps?: AnyObject;
+    FormGroupProps?: FormGroupProps;
 }
 
-export type RadioProps = InternalRadioProps & FormGroupProps & UseFieldApiComponentConfig;
+export type RadioProps = InternalRadioProps & CommonFormGroupProps & UseFieldApiComponentConfig;
 
 declare const Radio: React.ComponentType<RadioProps>;
 

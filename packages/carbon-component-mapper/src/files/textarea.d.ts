@@ -1,7 +1,9 @@
 import { FormGroupProps } from "./form-group";
-import { UseFieldApiComponentConfig, AnyObject } from "@data-driven-forms/react-form-renderer";
+import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-renderer";
 
-interface InternalTextareaProps extends AnyObject, React.HTMLProps<HTMLInputElement> {
+import { TextAreaProps } from 'carbon-components-react';
+
+interface InternalTextareaProps extends TextAreaProps {
 }
 
 export type TextareaProps = InternalTextareaProps & FormGroupProps & UseFieldApiComponentConfig;

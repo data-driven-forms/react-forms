@@ -1,14 +1,16 @@
 import { ReactNode } from "react";
-import { Field, AnyObject } from "@data-driven-forms/react-form-renderer";
+import { Field } from "@data-driven-forms/react-form-renderer";
 
-export interface TabField extends AnyObject {
+import { TabsProps as CarbonTabsProps, TabProps } from 'carbon-components-react';
+
+export interface TabField extends TabProps {
   name: string;
-  title?: ReactNode;
+  title?: string | undefined;
   label?: ReactNode;
   fields: Field[];
 }
 
-export interface TabsProps extends AnyObject {
+export interface TabsProps extends CarbonTabsProps {
   fields: TabField[];
 }
 

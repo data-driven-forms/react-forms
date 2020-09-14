@@ -1,9 +1,12 @@
 import { FormGroupProps } from "./form-group";
 import { UseFieldApiComponentConfig, AnyObject } from "@data-driven-forms/react-form-renderer";
 
-interface InternalDatePickerProps extends AnyObject, React.HTMLProps<HTMLInputElement> {
+import { DatePickerProps as CarbonDatePickerProps, DatePickerInputProps } from 'carbon-components-react';
+
+
+interface InternalDatePickerProps extends DatePickerInputProps {
   datePickerType?: string;
-  DatePickerProps?: AnyObject;
+  DatePickerProps?: DatePickerProps;
 }
 
 export type DatePickerProps = InternalDatePickerProps & FormGroupProps & UseFieldApiComponentConfig;
