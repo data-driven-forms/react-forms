@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 export interface FormTemplateProps {
   showFormControls?: boolean;
   disableSubmit: string[];

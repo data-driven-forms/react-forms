@@ -3,10 +3,7 @@ import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-render
 
 import { SliderProps as CarbonSliderProps } from 'carbon-components-react';
 
-interface InternalSliderProps extends CarbonSliderProps {
-}
-
-export type SliderProps = InternalSliderProps & FormGroupProps & UseFieldApiComponentConfig;
+export type SliderProps = CarbonSliderProps & FormGroupProps & UseFieldApiComponentConfig;
 
 declare const Slider: React.ComponentType<SliderProps>;
 

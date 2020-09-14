@@ -3,10 +3,7 @@ import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-render
 
 import { TextAreaProps } from 'carbon-components-react';
 
-interface InternalTextareaProps extends TextAreaProps {
-}
-
-export type TextareaProps = InternalTextareaProps & FormGroupProps & UseFieldApiComponentConfig;
+export type TextareaProps = TextAreaProps & FormGroupProps & UseFieldApiComponentConfig;
 
 declare const Textarea: React.ComponentType<TextareaProps>;
 
