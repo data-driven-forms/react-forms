@@ -45,7 +45,38 @@ class App extends React.Component {
             componentMapper={componentMapper}
             FormTemplate={(props) => <FormTemplate {...props} showFormControls={this.state.additionalOptions.showFormControls} />}
             onCancel={console.log}
-            schema={this.state.schema}
+            //schema={this.state.schema}
+            schema={{
+              fields: [
+                {
+                  component: 'dual-list-select',
+                  name: 'dual-list',
+                  label: 'select animal',
+                  options: [
+                    {
+                      value: 'cats',
+                      label: 'cats'
+                    },
+                    {
+                      value: 'cats_1',
+                      label: 'cats_1'
+                    },
+                    {
+                      value: 'cats_2',
+                      label: 'cats_2'
+                    },
+                    {
+                      value: 'zebras',
+                      label: 'zebras'
+                    },
+                    {
+                      value: 'pigeons',
+                      label: 'pigeons'
+                    }
+                  ]
+                }
+              ]
+            }}
             {...this.state.additionalOptions}
           />
         </div>
