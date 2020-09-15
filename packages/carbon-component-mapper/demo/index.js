@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
-// import { arraySchemaDDF } from './demo-schemas/widget-schema';
+import { arraySchemaDDF } from './demo-schemas/widget-schema';
 import { componentMapper, FormTemplate } from '../src';
 import { wizardSchema } from './demo-schemas/wizard-schema';
 import sandboxSchema from './demo-schemas/sandbox';
@@ -10,7 +10,7 @@ import demoSchema from '@data-driven-forms/common/src/demoschema';
 import { Button } from 'carbon-components-react';
 
 const fieldArrayState = {
-  schema: demoSchema,
+  schema: arraySchemaDDF,
   additionalOptions: {
     initialValues: {
       number: [1, 2, 3, 4],
@@ -45,38 +45,7 @@ class App extends React.Component {
             componentMapper={componentMapper}
             FormTemplate={(props) => <FormTemplate {...props} showFormControls={this.state.additionalOptions.showFormControls} />}
             onCancel={console.log}
-            //schema={this.state.schema}
-            schema={{
-              fields: [
-                {
-                  component: 'dual-list-select',
-                  name: 'dual-list',
-                  label: 'select animal',
-                  options: [
-                    {
-                      value: 'cats',
-                      label: 'cats'
-                    },
-                    {
-                      value: 'cats_1',
-                      label: 'cats_1'
-                    },
-                    {
-                      value: 'cats_2',
-                      label: 'cats_2'
-                    },
-                    {
-                      value: 'zebras',
-                      label: 'zebras'
-                    },
-                    {
-                      value: 'pigeons',
-                      label: 'pigeons'
-                    }
-                  ]
-                }
-              ]
-            }}
+            schema={this.state.schema}
             {...this.state.additionalOptions}
           />
         </div>
