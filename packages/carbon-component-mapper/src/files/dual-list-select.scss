@@ -19,6 +19,12 @@
     button {
         width: 100%;
         max-width: 100%;
+
+        @media (max-width: 1055px) {
+            svg {
+                transform: rotate(90deg);
+            }
+        }
     }
 
     button:not(:last-child) {
