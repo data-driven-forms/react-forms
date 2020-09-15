@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
+
 import { useFieldApi, useFormApi, FieldArray as FieldArrayFF } from '@data-driven-forms/react-form-renderer';
 
 import { Button, FormGroup } from 'carbon-components-react';
@@ -26,8 +28,8 @@ const ArrayItem = ({ remove, fields, name, removeText, buttonDisabled, RemoveBut
         id={`remove-${name}`}
         kind="danger"
         onClick={remove}
-        className={'ddorg__carbon-field-array-remove'}
         {...RemoveButtonProps}
+        className={clsx('ddorg__carbon-field-array-remove', RemoveButtonProps.className)}
       >
         {removeText}
       </Button>
@@ -84,8 +86,8 @@ const FieldArray = (props) => {
       invalid={Boolean(invalid)}
       message={Boolean(invalid)}
       messageText={invalid || ''}
-      className={'ddorg__carbon-field-array-form-group'}
       {...FormGroupProps}
+      className={clsx('ddorg__carbon-field-array-form-group', FormGroupProps.className)}
     >
       <FieldArrayFF name={input.name} validate={arrayValidator}>
         {(fieldArrayProps) => (
@@ -103,14 +105,14 @@ const FieldArray = (props) => {
                 RemoveButtonProps={RemoveButtonProps}
               />
             ))}
-            <div className={'ddorg__carbon-field-array-add-container'} {...AddContainerProps}>
+            <div {...AddContainerProps} className={clsx('ddorg__carbon-field-array-add-container', AddContainerProps.className)}>
               <Button
                 disabled={fieldArrayProps.fields.length >= maxItems}
                 renderIcon={AddAlt32}
                 id={`add-${input.name}`}
                 onClick={() => fieldArrayProps.fields.push(defaultItem)}
-                className={'ddorg__carbon-field-array-add'}
                 {...AddButtonProps}
+                className={clsx('ddorg__carbon-field-array-add', AddButtonProps.className)}
               >
                 {buttonLabelsFinal.add}
               </Button>
