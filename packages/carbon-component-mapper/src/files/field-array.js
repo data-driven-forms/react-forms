@@ -9,7 +9,7 @@ import './field-array.scss';
 
 import prepareProps from '../common/prepare-props';
 
-const ArrayItem = ({ remove, fields, name, removeText, buttonDisabled }) => {
+const ArrayItem = ({ remove, fields, name, removeText, buttonDisabled, RemoveButtonProps, ArrayItemProps }) => {
   const formOptions = useFormApi();
 
   const editedFields = fields.map((field) => ({
@@ -18,7 +18,7 @@ const ArrayItem = ({ remove, fields, name, removeText, buttonDisabled }) => {
   }));
 
   return (
-    <div>
+    <div {...ArrayItemProps}>
       {formOptions.renderForm(editedFields, formOptions)}
       <Button
         disabled={buttonDisabled}
@@ -27,6 +27,7 @@ const ArrayItem = ({ remove, fields, name, removeText, buttonDisabled }) => {
         kind="danger"
         onClick={remove}
         className={'ddorg__carbon-field-array-remove'}
+        {...RemoveButtonProps}
       >
         {removeText}
       </Button>
@@ -39,13 +40,35 @@ ArrayItem.propTypes = {
   fields: PropTypes.array,
   name: PropTypes.string,
   removeText: PropTypes.node,
-  buttonDisabled: PropTypes.bool
+  buttonDisabled: PropTypes.bool,
+  RemoveButtonProps: PropTypes.object,
+  ArrayItemProps: PropTypes.object
+};
+
+ArrayItem.defaultProps = {
+  RemoveButtonProps: {},
+  ArrayItemProps: {}
 };
 
 const FieldArray = (props) => {
-  const { itemDefault, maxItems, minItems, fields, input, arrayValidator, labelText, buttonLabels, noItemsMessage, meta } = useFieldApi(
-    prepareProps(props)
-  );
+  const {
+    AddContainerProps,
+    AddButtonProps,
+    FormGroupProps,
+    WrapperProps,
+    ArrayItemProps,
+    RemoveButtonProps,
+    defaultItem,
+    maxItems,
+    minItems,
+    fields,
+    input,
+    arrayValidator,
+    labelText,
+    buttonLabels,
+    noItemsMessage,
+    meta
+  } = useFieldApi(prepareProps(props));
 
   const buttonLabelsFinal = {
     add: 'Add',
@@ -53,19 +76,20 @@ const FieldArray = (props) => {
     ...buttonLabels
   };
 
-  const invalid = meta.touched && meta.error && !Array.isArray(meta.error);
+  const invalid = meta.touched && !Array.isArray(meta.error) && meta.error;
 
   return (
     <FormGroup
-      legendText={labelText}
+      legendText={labelText || ''}
       invalid={Boolean(invalid)}
       message={Boolean(invalid)}
       messageText={invalid || ''}
       className={'ddorg__carbon-field-array-form-group'}
+      {...FormGroupProps}
     >
       <FieldArrayFF name={input.name} validate={arrayValidator}>
         {(fieldArrayProps) => (
-          <div>
+          <div {...WrapperProps}>
             {fieldArrayProps.fields.length === 0 && noItemsMessage}
             {fieldArrayProps.fields.map((name, index) => (
               <ArrayItem
@@ -75,15 +99,18 @@ const FieldArray = (props) => {
                 name={name}
                 fields={fields}
                 buttonDisabled={minItems >= fieldArrayProps.fields.length}
+                ArrayItemProps={ArrayItemProps}
+                RemoveButtonProps={RemoveButtonProps}
               />
             ))}
-            <div className={'ddorg__carbon-field-array-add-container'}>
+            <div className={'ddorg__carbon-field-array-add-container'} {...AddContainerProps}>
               <Button
                 disabled={fieldArrayProps.fields.length >= maxItems}
                 renderIcon={AddAlt32}
                 id={`add-${input.name}`}
-                onClick={() => fieldArrayProps.fields.push(itemDefault)}
+                onClick={() => fieldArrayProps.fields.push(defaultItem)}
                 className={'ddorg__carbon-field-array-add'}
+                {...AddButtonProps}
               >
                 {buttonLabelsFinal.add}
               </Button>
@@ -98,13 +125,31 @@ const FieldArray = (props) => {
 FieldArray.propTypes = {
   noItemsMessage: PropTypes.node,
   maxItems: PropTypes.number,
-  minItems: PropTypes.number
+  minItems: PropTypes.number,
+  buttonLabels: PropTypes.shape({
+    add: PropTypes.node,
+    remove: PropTypes.node
+  }),
+  AddContainerProps: PropTypes.object,
+  AddButtonProps: PropTypes.object,
+  FormGroupProps: PropTypes.object,
+  WrapperProps: PropTypes.object,
+  ArrayItemProps: PropTypes.object,
+  RemoveButtonProps: PropTypes.object,
+  defaultItem: PropTypes.any,
+  fields: PropTypes.array
 };
 
 FieldArray.defaultProps = {
   noItemsMessage: 'No items',
   maxItems: Infinity,
-  minItems: 0
+  minItems: 0,
+  AddContainerProps: {},
+  AddButtonProps: {},
+  FormGroupProps: {},
+  WrapperProps: {},
+  ArrayItemProps: {},
+  RemoveButtonProps: {}
 };
 
 export default FieldArray;
