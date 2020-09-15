@@ -14,7 +14,6 @@ export const arraySchemaDDF = {
           name: 'name',
           label: 'Name',
           placeholder: 'Borek',
-          isRequired: true,
           validate: [
             {
               type: 'required'
@@ -63,7 +62,6 @@ export const arraySchemaDDF = {
       fields: [
         {
           component: 'text-field',
-          isRequired: true,
           validate: [
             {
               type: 'required'
