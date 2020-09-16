@@ -180,6 +180,7 @@ const carbonMapper = (importName) => ({
   StructuredListBody: 'StructuredList',
   StructuredListRow: 'StructuredList',
   StructuredListCell: 'StructuredList',
+  ProgressStep: 'ProgressIndicator'
 }[importName] || importName)
 
 const createCarbonCJSTransform = (env) => [
