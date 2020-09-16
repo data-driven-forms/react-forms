@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import ComponentText from '@docs/components/component-example-text';
-import GenericMuiComponent from '@docs/doc-components/sub-form';
+import SubForm from '@docs/doc-components/sub-form';
 import useActiveMapper from '@docs/hooks/use-active-mapper';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 
@@ -41,7 +41,7 @@ export default () => {
         component={componentTypes.SUB_FORM}
         schema={schema}
         variants={variants}
-        ComponentText={GenericMuiComponent}
+        ContentText={SubForm}
         linkText="Subform"
       />
     </Fragment>
