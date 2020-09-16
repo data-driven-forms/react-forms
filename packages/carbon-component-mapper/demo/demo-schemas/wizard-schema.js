@@ -6,11 +6,10 @@ export const wizardSchema = {
       component: componentTypes.WIZARD,
       name: 'wizzard',
       crossroads: ['source.source-type'],
-      //inModal: true,
+      stepsInfo: [{ title: 'Configure source' }, { title: 'Enter details' }, { title: 'Review' }],
       title: 'Title',
-      showTitles: true,
       description: 'Description',
-      buttonsPosition: 'left',
+      vertical: true,
       fields: [
         {
           title: 'Get started with adding source',
