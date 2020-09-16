@@ -99,13 +99,17 @@ const WizardInternal = ({
             {currentStep.nextStep ? (
               <Button
                 onClick={() => handleNext(selectNext(currentStep.nextStep, formOptions.getState))}
-                disabled={invalid || validating || submitting}
+                disabled={!formOptions.valid || invalid || validating || submitting}
                 {...NextButtonProps}
               >
                 {finalButtoLabels.next}
               </Button>
             ) : (
-              <Button onClick={() => formOptions.handleSubmit()} disabled={invalid || validating || submitting} {...SubmitButtonProps}>
+              <Button
+                onClick={() => formOptions.handleSubmit()}
+                disabled={!formOptions.valid || invalid || validating || submitting}
+                {...SubmitButtonProps}
+              >
                 {finalButtoLabels.submit}
               </Button>
             )}

@@ -1,4 +1,12 @@
 import { Field, AnyObject } from "@data-driven-forms/react-form-renderer";
+import { ReactNode } from "react";
+import { ButtonProps, ProgressIndicatorProps, ProgressStepProps } from "carbon-components-react";
+
+export interface WizardButtonLabels {
+  submit?: ReactNode;
+  back?: ReactNode;
+  next?: ReactNode;
+}
 
 export interface WizardNextStepFunctionArgument {
   values?: AnyObject;
@@ -27,9 +35,21 @@ export interface WizardField {
   disableForwardJumping?: boolean;
 }
 
+export interface WizardNavItem extends ProgressStepProps {
+  title: ReactNode;
+}
+
 export interface WizardProps {
   crossroads?: string[];
   fields: WizardField[];
+  buttonLabels?: WizardButtonLabels;
+  BackButtonProps?: ButtonProps;
+  NextButtonProps?: ButtonProps;
+  SubmitButtonProps?: ButtonProps;
+  ButtonSetProps?: React.HTMLProps<HTMLDivElement>;
+  ProgressIndicatorProps?: ProgressIndicatorProps;
+  vertical?: boolean;
+  stepsInfo?: WizardNavItem[];
 }
 
 declare const Wizard: React.ComponentType<WizardProps>;
