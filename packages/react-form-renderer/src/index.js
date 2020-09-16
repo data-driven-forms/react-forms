@@ -14,3 +14,4 @@ export { default as FieldProvider } from './files/field-provider';
 export { default as useFieldApi } from './files/use-field-api';
 export { default as DefaultSchemaError } from './files/schema-errors';
 export { default as WizardContext } from './files/wizard-context';
+export { default as parseCondition } from './files/parse-condition';

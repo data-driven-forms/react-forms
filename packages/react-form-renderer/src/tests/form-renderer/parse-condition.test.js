@@ -1,4 +1,4 @@
-import { parseCondition } from '../../form-renderer/condition';
+import parseCondition from '../../files/parse-condition';
 
 describe('parseCondition', () => {
   let condition;
