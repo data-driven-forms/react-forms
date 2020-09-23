@@ -37,6 +37,7 @@ exports[`FormTemplate PF4 Common should add missing buttons if not defined in bu
             ButtonGroup={[Function]}
             Description={[Function]}
             FormWrapper={[Function]}
+            Header={Symbol(react.fragment)}
             Title={[Function]}
             buttonOrder={Array []}
             canReset={true}
@@ -270,6 +271,7 @@ exports[`FormTemplate PF4 Common should render all controls and with default lab
             ButtonGroup={[Function]}
             Description={[Function]}
             FormWrapper={[Function]}
+            Header={Symbol(react.fragment)}
             Title={[Function]}
             disableSubmit={Array []}
             formFields={
@@ -485,6 +487,7 @@ exports[`FormTemplate PF4 Common should render buttons in correct order 1`] = `
             ButtonGroup={[Function]}
             Description={[Function]}
             FormWrapper={[Function]}
+            Header={Symbol(react.fragment)}
             Title={[Function]}
             buttonOrder={
               Array [
@@ -731,6 +734,7 @@ exports[`FormTemplate PF4 Common should render only submit button 1`] = `
             ButtonGroup={[Function]}
             Description={[Function]}
             FormWrapper={[Function]}
+            Header={Symbol(react.fragment)}
             Title={[Function]}
             canReset={false}
             disableSubmit={Array []}

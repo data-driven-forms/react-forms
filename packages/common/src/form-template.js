@@ -153,7 +153,7 @@ FormTemplate.propTypes = {
   formWrapperProps: PropTypes.object,
   showFormControls: PropTypes.bool,
   disableSubmit: PropTypes.arrayOf(PropTypes.string),
-  Header: PropTypes.oneOfType([PropTypes.node, PropTypes.func, PropTypes.element])
+  Header: PropTypes.oneOfType([PropTypes.node, PropTypes.func, PropTypes.element, PropTypes.oneOf([React.Fragment])])
 };
 
 FormTemplate.defaultProps = {
