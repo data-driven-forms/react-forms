@@ -8,6 +8,7 @@ export interface FormGroupInternalProps {
     label?: ReactNode;
     labelText?: ReactNode;
     description?: ReactNode;
+    validateOnMount?: boolean;
 }
 
 export type FormGroupProps = FormGroupInternalProps & UseFieldApiComponentConfig;

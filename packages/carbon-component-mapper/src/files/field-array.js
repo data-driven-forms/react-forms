@@ -69,7 +69,8 @@ const FieldArray = (props) => {
     labelText,
     buttonLabels,
     noItemsMessage,
-    meta
+    meta,
+    validateOnMount
   } = useFieldApi(prepareProps(props));
 
   const buttonLabelsFinal = {
@@ -78,7 +79,7 @@ const FieldArray = (props) => {
     ...buttonLabels
   };
 
-  const invalid = meta.touched && !Array.isArray(meta.error) && meta.error;
+  const invalid = (meta.touched || validateOnMount) && !Array.isArray(meta.error) && meta.error;
 
   return (
     <FormGroup

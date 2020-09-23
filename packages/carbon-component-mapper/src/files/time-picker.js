@@ -7,9 +7,9 @@ import { TimePicker as CarbonTimePicker, TimePickerSelect, SelectItem } from 'ca
 import prepareProps from '../common/prepare-props';
 
 const TimePicker = (props) => {
-  const { input, meta, twelveHoursFormat, timezones, ...rest } = useFieldApi(prepareProps(props));
+  const { input, meta, twelveHoursFormat, timezones, validateOnMount, ...rest } = useFieldApi(prepareProps(props));
 
-  const invalid = meta.touched && meta.error;
+  const invalid = (meta.touched || validateOnMount) && meta.error;
 
   return (
     <CarbonTimePicker {...input} key={input.name} id={input.name} invalid={Boolean(invalid)} invalidText={invalid || ''} {...rest}>

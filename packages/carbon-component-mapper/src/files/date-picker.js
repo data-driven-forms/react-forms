@@ -7,9 +7,9 @@ import { DatePicker as CarbonDatePicker, DatePickerInput } from 'carbon-componen
 import prepareProps from '../common/prepare-props';
 
 const DatePicker = (props) => {
-  const { input, datePickerType, meta, DatePickerProps, ...rest } = useFieldApi(prepareProps(props));
+  const { input, datePickerType, meta, DatePickerProps, validateOnMount, ...rest } = useFieldApi(prepareProps(props));
 
-  const invalid = meta.touched && meta.error;
+  const invalid = (meta.touched || validateOnMount) && meta.error;
 
   return (
     <CarbonDatePicker {...input} datePickerType={datePickerType} {...DatePickerProps}>
