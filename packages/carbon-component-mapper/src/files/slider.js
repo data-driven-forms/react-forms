@@ -7,9 +7,9 @@ import { Slider as CarbonSlider } from 'carbon-components-react';
 import prepareProps from '../common/prepare-props';
 
 const Slider = (props) => {
-  const { input, meta, isRequired, ...rest } = useFieldApi(prepareProps(props));
+  const { input, meta, isRequired, validateOnMount, ...rest } = useFieldApi(prepareProps(props));
 
-  const invalid = meta.touched && meta.error;
+  const invalid = (meta.touched || validateOnMount) && meta.error;
 
   return (
     <CarbonSlider

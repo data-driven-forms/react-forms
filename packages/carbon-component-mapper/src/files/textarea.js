@@ -7,9 +7,9 @@ import { TextArea } from 'carbon-components-react';
 import prepareProps from '../common/prepare-props';
 
 const Textarea = (props) => {
-  const { input, meta, ...rest } = useFieldApi(prepareProps(props));
+  const { input, meta, validateOnMount, ...rest } = useFieldApi(prepareProps(props));
 
-  const invalid = meta.touched && meta.error;
+  const invalid = (meta.touched || validateOnMount) && meta.error;
 
   return <TextArea {...input} key={input.name} id={input.name} invalid={Boolean(invalid)} invalidText={invalid || ''} {...rest} />;
 };
