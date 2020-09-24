@@ -20,7 +20,7 @@ const TimePicker = (props) => {
     let [hours = '00', minutes = '00'] = input.value
       .toLocaleTimeString('en-us', {
         hour12: !!twelveHoursFormat,
-        timeZone: timezones.find(({ value }) => value === timezone)?.showAs
+        timeZone: timezones?.find(({ value }) => value === timezone)?.showAs
       })
       .split(':');
 
