@@ -7,21 +7,35 @@ import { Checkbox as CarbonCheckbox, FormGroup } from 'carbon-components-react';
 
 import WithDescription from '../common/with-description';
 import prepareProps from '../common/prepare-props';
+import HelperTextBlock from '../common/helper-text-block';
 
-const Wrapper = ({ label, description, children }) => (
-  <FormGroup legendText={description ? <WithDescription labelText={label} description={description} /> : label}>{children}</FormGroup>
+const Wrapper = ({ label, description, children, helperText, error, showError }) => (
+  <FormGroup legendText={description ? <WithDescription labelText={label} description={description} /> : label}>
+    {children}
+    <HelperTextBlock helperText={helperText} errorText={showError && error} />
+  </FormGroup>
 );
 
 Wrapper.propTypes = {
   label: PropTypes.node,
   children: PropTypes.node,
-  description: PropTypes.node
+  description: PropTypes.node,
+  helperText: PropTypes.node,
+  error: PropTypes.node,
+  showError: PropTypes.bool
 };
 
 const SingleCheckbox = (props) => {
-  const { input, ...rest } = useFieldApi(prepareProps({ ...props, type: 'checkbox' }));
+  const { input, meta, validateOnMount, helperText, ...rest } = useFieldApi(prepareProps({ ...props, type: 'checkbox' }));
 
-  return <CarbonCheckbox {...input} id={input.name} {...rest} />;
+  const invalid = (meta.touched || validateOnMount) && meta.error;
+
+  return (
+    <div>
+      <CarbonCheckbox {...input} id={input.name} {...rest} />
+      <HelperTextBlock helperText={helperText} errorText={invalid} />
+    </div>
+  );
 };
 
 const SingleCheckboxInCommon = ({ label, isDisabled, id, ...props }) => <CarbonCheckbox id={id} labelText={label} disabled={isDisabled} />;

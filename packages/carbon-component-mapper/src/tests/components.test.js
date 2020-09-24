@@ -81,11 +81,6 @@ describe('component tests', () => {
         });
 
         it('renders with error', () => {
-          if ([componentTypes.RADIO, componentTypes.SWITCH, componentTypes.CHECKBOX].includes(component)) {
-            // 'skipped because this component does not support this';
-            return;
-          }
-
           const errorField = {
             ...field,
             validate: [{ type: validatorTypes.REQUIRED }]
@@ -95,26 +90,15 @@ describe('component tests', () => {
 
           if (wrapper.find('#field-name-error-msg').length) {
             expect(wrapper.find('#field-name-error-msg').text()).toEqual(errorText);
+            expect(wrapper.find('[invalid=true]').length).toBeGreaterThanOrEqual(1);
           }
 
-          expect(wrapper.find('[invalid=true]').length).toBeGreaterThanOrEqual(1);
+          if (wrapper.find('.ddorg__carbon-error-helper-text').length) {
+            expect(wrapper.find('.ddorg__carbon-error-helper-text').text()).toEqual(errorText);
+          }
         });
 
         it('renders with helperText', () => {
-          if (
-            [
-              componentTypes.RADIO,
-              componentTypes.SWITCH,
-              componentTypes.CHECKBOX,
-              componentTypes.DATE_PICKER,
-              componentTypes.TIME_PICKER,
-              componentTypes.SLIDER
-            ].includes(component)
-          ) {
-            // 'skipped because this component does not support this';
-            return;
-          }
-
           const helpertextField = {
             ...field,
             helperText
@@ -143,53 +127,24 @@ describe('component tests', () => {
           const descriptionField = {
             ...field,
             description,
-            ...(![
-              componentTypes.RADIO,
-              componentTypes.SWITCH,
-              componentTypes.CHECKBOX,
-              componentTypes.DATE_PICKER,
-              componentTypes.TIME_PICKER,
-              componentTypes.SLIDER
-            ].includes(component)
-              ? { helperText }
-              : {})
+            helperText
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [descriptionField] }} />);
 
           expect(wrapper.find(WithDescription)).toHaveLength(1);
 
-          if (
-            ![
-              componentTypes.RADIO,
-              componentTypes.SWITCH,
-              componentTypes.CHECKBOX,
-              componentTypes.DATE_PICKER,
-              componentTypes.TIME_PICKER,
-              componentTypes.SLIDER
-            ].includes(component)
-          ) {
-            expect(
-              wrapper
-                .find('.bx--form__helper-text')
-                .last()
-                .text()
-            ).toEqual(helperText);
-          }
+          expect(
+            wrapper
+              .find('.bx--form__helper-text')
+              .last()
+              .text()
+          ).toEqual(helperText);
         });
 
         it('renders with error and helperText', () => {
           const errorFields = {
             ...field,
-            ...(![
-              componentTypes.RADIO,
-              componentTypes.SWITCH,
-              componentTypes.CHECKBOX,
-              componentTypes.DATE_PICKER,
-              componentTypes.TIME_PICKER,
-              componentTypes.SLIDER
-            ].includes(component)
-              ? { helperText }
-              : {}),
+            helperText,
             validate: [{ type: validatorTypes.REQUIRED }]
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [errorFields] }} />);
@@ -197,6 +152,11 @@ describe('component tests', () => {
 
           if (wrapper.find('#field-name-error-msg').length) {
             expect(wrapper.find('#field-name-error-msg').text()).toEqual(errorText);
+            expect(wrapper.find('[invalid=true]').length).toBeGreaterThanOrEqual(1);
+          }
+
+          if (wrapper.find('.ddorg__carbon-error-helper-text').length) {
+            expect(wrapper.find('.ddorg__carbon-error-helper-text').text()).toEqual(errorText);
           }
 
           expect(wrapper.find('.bx--form__helper-text')).toHaveLength(0);
