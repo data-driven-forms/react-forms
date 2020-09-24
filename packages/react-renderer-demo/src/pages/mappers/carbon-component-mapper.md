@@ -127,19 +127,4 @@ No known workaround.
 
 _Possible workaround: reimplement Carbon select as we did for PF4/PF3_
 
-## Missing helper texts, errors
-
-Following components does not support `helperText` and won't show error messages
-
-```
-componentTypes.RADIO,
-componentTypes.SWITCH,
-componentTypes.CHECKBOX,
-componentTypes.DATE_PICKER,  // has error message
-componentTypes.TIME_PICKER, // has error message
-componentTypes.SLIDER
-```
-
-Possible workaround with implementing a custom `helperText` component.
-
 </DocPage>
