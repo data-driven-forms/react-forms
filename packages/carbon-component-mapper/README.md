@@ -1,4 +1,6 @@
 [![npm version](https://badge.fury.io/js/%40data-driven-forms%2Fcarbon-component-mapper.svg)](https://badge.fury.io/js/%40data-driven-forms%2Fcarbon-component-mapper)
+[![Tweet](https://img.shields.io/twitter/url/https/github.com/tterb/hyde.svg?style=social)](https://twitter.com/intent/tweet?text=Check%20DataDrivenForms%20React%20library%21%20https%3A%2F%2Fdata-driven-forms.org%2F&hashtags=react,opensource,datadrivenforms)
+[![Twitter Follow](https://img.shields.io/twitter/follow/DataDrivenForms.svg?style=social)](https://twitter.com/DataDrivenForms)
 
 [![Data Driven Form logo](https://raw.githubusercontent.com/data-driven-forms/react-forms/master/images/logo.png)](https://data-driven-forms.org/)
 
@@ -10,7 +12,7 @@ carbon component mapper for [Data Driven Forms](https://github.com/data-driven-f
 
 - [Installation](#installation)
   - [React Form Renderer](#react-form-renderer)
-  - [carbon Mapper](#componentmapper-mapper)
+  - [Carbon Mapper](#carbon-mapper)
 - [Usage](#usage)
 - [Basic provided components](#basic-provided-components)
 - [Useful links](#useful-links)
@@ -35,7 +37,7 @@ $ npm install @data-driven-forms/react-form-renderer -S
 $ yarn add @data-driven-forms/react-form-renderer
 ```
 
-#### [carbon Mapper](https://data-driven-forms.org/mappers/carbon-component-mapper)
+#### [Carbon Mapper](https://data-driven-forms.org/mappers/carbon-component-mapper)
 
 ```console
 $ npm install @data-driven-forms/carbon-component-mapper -S
@@ -96,8 +98,9 @@ Data Driven Forms supports all kinds of component, basic set is consisted of:
 
 - [Data Driven Forms documentation](https://data-driven-forms.org/)
 - [React Form Renderer](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)
-- [carbon Mapper NPM](https://www.npmjs.com/package/@data-driven-forms/carbon-component-mapper)
-
+- [Carbon Mapper NPM](https://www.npmjs.com/package/@data-driven-forms/carbon-component-mapper)
+- [Carbon Design System documentation](https://www.carbondesignsystem.com/)
+- [Carbon React Compononents storybook](https://react.carbondesignsystem.com/)
 
 ### Development setup
 
@@ -139,7 +142,7 @@ Tests needed to be run from the core folder.
 ```console
 yarn test
 
-yarn test packages/pf3-component-mapper
+yarn test packages/carbon-component-mapper
 ```
 
 #### Commits
@@ -159,7 +162,7 @@ Types:
 - `fix`: a fix, will trigger new `_._.X` release
 
 Packages:
-- Please describe which package is being changed `pf3`, `renderer`, ...
+- Please describe which package is being changed `carbon`, `renderer`, ...
 
 Please, do not use Semantic Release, if you update only the demo.
 

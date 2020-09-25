@@ -5,9 +5,10 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import { TimePicker as CarbonTimePicker, TimePickerSelect, SelectItem } from 'carbon-components-react';
 
 import prepareProps from '../common/prepare-props';
+import HelperTextBlock from '../common/helper-text-block';
 
 const TimePicker = (props) => {
-  const { input, meta, twelveHoursFormat, timezones, validateOnMount, ...rest } = useFieldApi(prepareProps(props));
+  const { input, meta, twelveHoursFormat, timezones, validateOnMount, helperText, ...rest } = useFieldApi(prepareProps(props));
 
   const [timezone, selectTimezone] = useState(timezones ? timezones[0]?.value : '');
   const [format, selectFormat] = useState('AM');
@@ -63,30 +64,37 @@ const TimePicker = (props) => {
   }, [timezone, format]);
 
   return (
-    <CarbonTimePicker
-      {...input}
-      value={finalValue}
-      onBlur={enhnancedOnBlur}
-      key={input.name}
-      id={input.name}
-      invalid={Boolean(invalid)}
-      invalidText={invalid || ''}
-      {...rest}
-    >
-      {twelveHoursFormat && (
-        <TimePickerSelect labelText="Period" id={`${rest.id || input.name}-12h`} onChange={({ target: { value } }) => selectFormat(value)}>
-          <SelectItem value="AM" text="AM" />
-          <SelectItem value="PM" text="PM" />
-        </TimePickerSelect>
-      )}
-      {timezones && (
-        <TimePickerSelect labelText="Timezone" id={`${rest.id || input.name}-timezones`} onChange={({ target: { value } }) => selectTimezone(value)}>
-          {timezones.map(({ showAs, ...tz }) => (
-            <SelectItem key={tz.value} text={tz.label} {...tz} />
-          ))}
-        </TimePickerSelect>
-      )}
-    </CarbonTimePicker>
+    <div>
+      <CarbonTimePicker
+        {...input}
+        value={finalValue}
+        onBlur={enhnancedOnBlur}
+        key={input.name}
+        id={input.name}
+        invalid={Boolean(invalid)}
+        invalidText={invalid || ''}
+        {...rest}
+      >
+        {twelveHoursFormat && (
+          <TimePickerSelect labelText="Period" id={`${rest.id || input.name}-12h`} onChange={({ target: { value } }) => selectFormat(value)}>
+            <SelectItem value="AM" text="AM" />
+            <SelectItem value="PM" text="PM" />
+          </TimePickerSelect>
+        )}
+        {timezones && (
+          <TimePickerSelect
+            labelText="Timezone"
+            id={`${rest.id || input.name}-timezones`}
+            onChange={({ target: { value } }) => selectTimezone(value)}
+          >
+            {timezones.map(({ showAs, ...tz }) => (
+              <SelectItem key={tz.value} text={tz.label} {...tz} />
+            ))}
+          </TimePickerSelect>
+        )}
+      </CarbonTimePicker>
+      <HelperTextBlock helperText={!invalid && helperText} />
+    </div>
   );
 };
 

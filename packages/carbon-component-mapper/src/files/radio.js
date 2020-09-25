@@ -5,9 +5,14 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import { FormGroup, RadioButtonGroup, RadioButton } from 'carbon-components-react';
 
 import prepareProps from '../common/prepare-props';
+import HelperTextBlock from '../common/helper-text-block';
 
 const Radio = (props) => {
-  const { labelText, disabled, input, options, FormGroupProps, ...rest } = useFieldApi(prepareProps({ type: 'radio', ...props }));
+  const { labelText, disabled, input, options, FormGroupProps, helperText, meta, validateOnMount, ...rest } = useFieldApi(
+    prepareProps({ type: 'radio', ...props })
+  );
+
+  const invalid = (meta.touched || validateOnMount) && meta.error;
 
   return (
     <FormGroup legendText={labelText} {...FormGroupProps}>
@@ -16,6 +21,7 @@ const Radio = (props) => {
           <RadioButton key={option.value} disabled={disabled} labelText={option.label} value={option.value} {...option} />
         ))}
       </RadioButtonGroup>
+      <HelperTextBlock helperText={helperText} errorText={invalid} />
     </FormGroup>
   );
 };
