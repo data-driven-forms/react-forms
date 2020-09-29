@@ -9,6 +9,7 @@ export interface FormGroupInternalProps {
     labelText?: ReactNode;
     description?: ReactNode;
     validateOnMount?: boolean;
+    WrapperProps?: React.HTMLProps<HTMLDivElement>;
 }
 
 export type FormGroupProps = FormGroupInternalProps & UseFieldApiComponentConfig;

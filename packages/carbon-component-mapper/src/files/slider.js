@@ -8,12 +8,12 @@ import prepareProps from '../common/prepare-props';
 import HelperTextBlock from '../common/helper-text-block';
 
 const Slider = (props) => {
-  const { input, meta, isRequired, validateOnMount, helperText, ...rest } = useFieldApi(prepareProps(props));
+  const { input, meta, isRequired, validateOnMount, helperText, WrapperProps, ...rest } = useFieldApi(prepareProps(props));
 
   const invalid = (meta.touched || validateOnMount) && meta.error;
 
   return (
-    <div>
+    <div {...WrapperProps}>
       <CarbonSlider
         {...input}
         value={Number(input.value) || 0}
@@ -35,7 +35,8 @@ Slider.propTypes = {
   isRequired: PropTypes.bool,
   label: PropTypes.node,
   labelText: PropTypes.node,
-  description: PropTypes.node
+  description: PropTypes.node,
+  WrapperProps: PropTypes.object
 };
 
 export default Slider;

@@ -26,12 +26,12 @@ Wrapper.propTypes = {
 };
 
 const SingleCheckbox = (props) => {
-  const { input, meta, validateOnMount, helperText, ...rest } = useFieldApi(prepareProps({ ...props, type: 'checkbox' }));
+  const { input, meta, validateOnMount, helperText, WrapperProps, ...rest } = useFieldApi(prepareProps({ ...props, type: 'checkbox' }));
 
   const invalid = (meta.touched || validateOnMount) && meta.error;
 
   return (
-    <div>
+    <div {...WrapperProps}>
       <CarbonCheckbox {...input} id={input.name} {...rest} />
       <HelperTextBlock helperText={helperText} errorText={invalid} />
     </div>
@@ -45,7 +45,8 @@ SingleCheckboxInCommon.propTypes = {
   input: PropTypes.object,
   isDisabled: PropTypes.bool,
   name: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.string,
+  WrapperProps: PropTypes.object
 };
 
 const Checkbox = ({ options, ...props }) =>

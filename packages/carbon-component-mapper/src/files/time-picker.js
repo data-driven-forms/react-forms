@@ -8,7 +8,7 @@ import prepareProps from '../common/prepare-props';
 import HelperTextBlock from '../common/helper-text-block';
 
 const TimePicker = (props) => {
-  const { input, meta, twelveHoursFormat, timezones, validateOnMount, helperText, ...rest } = useFieldApi(prepareProps(props));
+  const { input, meta, twelveHoursFormat, timezones, validateOnMount, helperText, WrapperProps, ...rest } = useFieldApi(prepareProps(props));
 
   const [timezone, selectTimezone] = useState(timezones ? timezones[0]?.value : '');
   const [format, selectFormat] = useState('AM');
@@ -64,7 +64,7 @@ const TimePicker = (props) => {
   }, [timezone, format]);
 
   return (
-    <div>
+    <div {...WrapperProps}>
       <CarbonTimePicker
         {...input}
         value={finalValue}
@@ -112,7 +112,8 @@ TimePicker.propTypes = {
       label: PropTypes.node.isRequired,
       showAs: PropTypes.string.isRequired
     })
-  )
+  ),
+  WrapperProps: PropTypes.object
 };
 
 export default TimePicker;
