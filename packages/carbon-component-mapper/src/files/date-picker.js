@@ -8,12 +8,12 @@ import prepareProps from '../common/prepare-props';
 import HelperTextBlock from '../common/helper-text-block';
 
 const DatePicker = (props) => {
-  const { input, datePickerType, meta, DatePickerProps, validateOnMount, helperText, ...rest } = useFieldApi(prepareProps(props));
+  const { input, datePickerType, meta, DatePickerProps, validateOnMount, helperText, WrapperProps, ...rest } = useFieldApi(prepareProps(props));
 
   const invalid = (meta.touched || validateOnMount) && meta.error;
 
   return (
-    <div>
+    <div {...WrapperProps}>
       <CarbonDatePicker {...input} datePickerType={datePickerType} {...DatePickerProps}>
         <DatePickerInput id={input.name} invalid={Boolean(invalid)} invalidText={invalid ? invalid : ''} {...rest} />
       </CarbonDatePicker>
@@ -25,7 +25,8 @@ const DatePicker = (props) => {
 DatePicker.propTypes = {
   isDisabled: PropTypes.bool,
   datePickerType: PropTypes.string,
-  DatePickerProps: PropTypes.object
+  DatePickerProps: PropTypes.object,
+  WrapperProps: PropTypes.object
 };
 
 DatePicker.defaultProps = {

@@ -127,4 +127,16 @@ No known workaround.
 
 _Possible workaround: reimplement Carbon select as we did for PF4/PF3_
 
+## WrapperProps
+
+Components that do not support `helperText` natively are wrapped in a `div` element. To pass props to this div, please use `WrapperProps` prop.
+
+Wrapped components:
+
+- Single checkbox
+- DatePicker
+- Slider
+- Switch
+- TimePicker
+
 </DocPage>
