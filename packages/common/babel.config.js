@@ -37,6 +37,13 @@ const pascalToKebabCase = (name) =>
     .replace(/([A-Z])/, '-$1')
     .toLowerCase();
 
+const pascalToKebabCaseCarbonIcons = (name) =>
+  name.charAt(0).toLowerCase() +
+  name
+    .slice(1)
+    .replace(/([A-Z])/g, '--$1')
+    .toLowerCase();
+
 const createSuirCJSTransform = (env = 'commonjs') => [
   'transform-imports',
   {
@@ -168,6 +175,63 @@ const createAntTransform = (env) => [
   `ant-${env}`
 ]
 
+const carbonMapper = (importName) => ({
+  StructuredListWrapper: 'StructuredList',
+  StructuredListBody: 'StructuredList',
+  StructuredListRow: 'StructuredList',
+  StructuredListCell: 'StructuredList',
+  ProgressStep: 'ProgressIndicator'
+}[importName] || importName)
+
+const createCarbonCJSTransform = (env) => [
+  'transform-imports',
+  {
+    'carbon-components-react': {
+      transform: (importName) => {
+        let res;
+        const files = glob.sync(path.resolve(__dirname, `../../node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es' }/**/${carbonMapper(importName)}.js`));
+        if (files.length > 0) {
+          res = files[0];
+        } else {
+          throw new Error(`File with importName ${importName} does not exist`);
+        }
+        res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
+        res = res.replace(/^\//, '');
+        return res;
+      },
+      preventFullImport: false,
+      skipDefaultConversion: false
+    }
+  },
+  `carbon-components-react-${env}`
+];
+
+const createCarbonIconsCJSTransform = (env) => [
+  'transform-imports',
+  {
+    '@carbon/icons-react': {
+      transform: (importName) => {
+        let size = importName.match(/\d+/)[0];
+        let iconName = pascalToKebabCaseCarbonIcons(importName.replace(/\d+/, ''));
+
+        let res;
+        const files = glob.sync(path.resolve(__dirname, `../../node_modules/@carbon/icons-react/${env === 'cjs' ? 'lib' : 'es' }/${iconName}/${size}.js`));
+        if (files.length > 0) {
+          res = files[0];
+        } else {
+          throw new Error(`File with importName ${importName} does not exist`);
+        }
+        res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
+        res = res.replace(/^\//, '');
+        return res;
+      },
+      preventFullImport: false,
+      skipDefaultConversion: false
+    }
+  },
+  `@carbon/icons-react-${env}`
+];
+
 module.exports = {
   extends: '../../babel.config.js',
   env: {
@@ -177,7 +241,9 @@ module.exports = {
         createMuiTransform(),
         createPfReactTransform('js'),
         createBluePrintTransform('cjs'),
-        createAntTransform('cjs')
+        createAntTransform('cjs'),
+        createCarbonCJSTransform('cjs'),
+        createCarbonIconsCJSTransform('cjs')
       ]
     },
     esm: {
@@ -186,7 +252,9 @@ module.exports = {
         createMuiTransform('esm'),
         createPfReactTransform('esm'),
         createBluePrintTransform('esm'),
-        createAntTransform('esm')
+        createAntTransform('esm'),
+        createCarbonCJSTransform('esm'),
+        createCarbonIconsCJSTransform('esm')
       ]
     }
   }

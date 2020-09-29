@@ -104,8 +104,9 @@ const FormTemplate = ({
   Button,
   ButtonGroup,
   formWrapperProps,
-  showFormControls = true,
-  disableSubmit = [],
+  showFormControls,
+  disableSubmit,
+  Header,
   ...rest
 }) => {
   const {
@@ -116,8 +117,12 @@ const FormTemplate = ({
 
   return (
     <FormWrapper onSubmit={handleSubmit} {...formWrapperProps}>
-      {(title || label) && <Title>{title || label}</Title>}
-      {description && <Description>{description}</Description>}
+      {(title || label || description) && (
+        <Header>
+          {(title || label) && <Title>{title || label}</Title>}
+          {description && <Description>{description}</Description>}
+        </Header>
+      )}
       {formFields}
       {showFormControls && (
         <FormSpy>
@@ -147,12 +152,14 @@ FormTemplate.propTypes = {
   ButtonGroup: PropTypes.oneOfType([PropTypes.node, PropTypes.func, PropTypes.element]).isRequired,
   formWrapperProps: PropTypes.object,
   showFormControls: PropTypes.bool,
-  disableSubmit: PropTypes.arrayOf(PropTypes.string)
+  disableSubmit: PropTypes.arrayOf(PropTypes.string),
+  Header: PropTypes.oneOfType([PropTypes.node, PropTypes.func, PropTypes.element, PropTypes.oneOf([React.Fragment])])
 };
 
 FormTemplate.defaultProps = {
   showFormControls: true,
-  disableSubmit: []
+  disableSubmit: [],
+  Header: React.Fragment
 };
 
 export default FormTemplate;

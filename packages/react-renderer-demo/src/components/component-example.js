@@ -25,6 +25,7 @@ import { pf3Code, pf3WizardCode, pf3Html, pf3Dependencies } from '../stackblitz-
 import { blueprintCode, blueprintWizardCode, blueprintHtml, blueprintDependencies } from '../stackblitz-templates/blueprint-templates';
 import { suirCode, suirWizardCode, suirHtml, suirDependencies } from '../stackblitz-templates/suir-template';
 import { antCode, antWizardCode, antHtml, antDependencies } from '../stackblitz-templates/ant-templates';
+import { carbonCode, carbonWizardCode, carbonHtml, carbonDependencies } from '../stackblitz-templates/carbon-templates';
 import avalableMappers from '../helpers/available-mappers';
 
 const project = {
@@ -125,6 +126,10 @@ const blitzFiles = {
   ant: {
     'index.html': antHtml,
     'index.js': antCode
+  },
+  carbon: {
+    'index.html': carbonHtml,
+    'index.js': carbonCode
   }
 };
 
@@ -134,7 +139,8 @@ const blitzWizards = {
   pf3: pf3WizardCode,
   blueprint: blueprintWizardCode,
   suir: suirWizardCode,
-  ant: antWizardCode
+  ant: antWizardCode,
+  carbon: carbonWizardCode
 };
 
 const blitzDependencies = {
@@ -143,7 +149,8 @@ const blitzDependencies = {
   pf3: pf3Dependencies,
   blueprint: blueprintDependencies,
   suir: suirDependencies,
-  ant: antDependencies
+  ant: antDependencies,
+  carbon: carbonDependencies
 };
 
 const mapperTab = {
@@ -152,7 +159,8 @@ const mapperTab = {
   pf3: 2,
   blueprint: 3,
   suir: 4,
-  ant: 5
+  ant: 5,
+  carbon: 6
 };
 
 const ComponentExample = ({ variants, schema, activeMapper, component }) => {

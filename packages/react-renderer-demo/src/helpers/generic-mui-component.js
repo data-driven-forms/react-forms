@@ -11,7 +11,8 @@ export const docsLinks = {
   pf3: 'https://patternfly-react-pf3.surge.sh/?path=/story/*',
   blueprint: 'https://blueprintjs.com/docs/',
   suir: 'https://react.semantic-ui.com/',
-  ant: 'https://ant.design/components/'
+  ant: 'https://ant.design/components/',
+  carbon: 'https://react.carbondesignsystem.com/?path=/story/'
 };
 
 const mapperLinks = {
@@ -59,6 +60,23 @@ const mapperLinks = {
     [componentTypes.TEXTAREA]: 'input/#Input.TextArea',
     [componentTypes.SELECT]: 'select',
     [componentTypes.PLAIN_TEXT]: 'typography/#Typography.Paragraph',
+    [componentTypes.BUTTON]: 'button',
+    [componentTypes.DUAL_LIST_SELECT]: 'transfer',
+    [componentTypes.SLIDER]: 'slider'
+  },
+  carbon: {
+    [componentTypes.TEXT_FIELD]: 'textinput',
+    [componentTypes.CHECKBOX]: 'checkbox',
+    [componentTypes.SUB_FORM]: '',
+    [componentTypes.RADIO]: 'radiobutton',
+    [componentTypes.TABS]: 'tabs',
+    [componentTypes.DATE_PICKER]: 'datepicker',
+    [componentTypes.TIME_PICKER]: 'timepicker',
+    [componentTypes.WIZARD]: 'progressindicator',
+    [componentTypes.SWITCH]: 'toggle',
+    [componentTypes.TEXTAREA]: 'textarea',
+    [componentTypes.SELECT]: 'select',
+    [componentTypes.PLAIN_TEXT]: '',
     [componentTypes.BUTTON]: 'button',
     [componentTypes.DUAL_LIST_SELECT]: 'transfer',
     [componentTypes.SLIDER]: 'slider'

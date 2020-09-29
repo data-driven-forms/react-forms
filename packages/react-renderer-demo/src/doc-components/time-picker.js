@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MuiTimePicker from './examples-texts/mui/mui-time-picker.md';
 import SuirTimePicker from './examples-texts/suir/suir-time-picker.md';
+import CarbonTimePicker from './examples-texts/carbon/carbon-time-picker.md';
+
 import GenericMuiComponent from '../helpers/generic-mui-component';
 
 const TimePicker = ({ activeMapper }) => {
@@ -11,6 +13,10 @@ const TimePicker = ({ activeMapper }) => {
 
   if (activeMapper === 'suir') {
     return <SuirTimePicker />;
+  }
+
+  if (activeMapper === 'carbon') {
+    return <CarbonTimePicker />;
   }
 
   return <GenericMuiComponent activeMapper={activeMapper} component="time-picker" />;

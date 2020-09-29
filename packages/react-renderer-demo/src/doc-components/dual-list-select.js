@@ -4,6 +4,7 @@ import MuiDualListSelect from './examples-texts/mui/mui-dual-list-select.md';
 import SuirDualListSelect from './examples-texts/suir/suir-dual-list-select.md';
 import BlueprintDualListSelect from './examples-texts/blueprint/blueprint-dual-list-select.md';
 import PF4DualListSelect from './examples-texts/pf4/pf4-dual-list.md';
+import CarbonDualListSelect from './examples-texts/carbon/carbon-dual-list-select.md';
 
 import GenericMuiComponent from '../helpers/generic-mui-component';
 
@@ -22,6 +23,10 @@ const DualListSelect = ({ activeMapper }) => {
 
   if (activeMapper === 'blueprint') {
     return <BlueprintDualListSelect />;
+  }
+
+  if (activeMapper === 'carbon') {
+    return <CarbonDualListSelect />;
   }
 
   return <GenericMuiComponent activeMapper={activeMapper} component="dual-list-select" />;
