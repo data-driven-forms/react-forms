@@ -3,20 +3,15 @@ import PropTypes from 'prop-types';
 import DualListSelectCommon from '@data-driven-forms/common/src/dual-list-select';
 import clsx from 'clsx';
 
+import { Grid, Row, Column, Button, FormGroup, Search, TooltipIcon } from 'carbon-components-react';
+import { CheckmarkFilled16, ChevronRight32, ChevronLeft32, CaretSortDown32, CaretSortUp32 } from '@carbon/icons-react';
+
 import {
   StructuredListWrapper,
-  Grid,
-  Row,
-  Column,
-  StructuredListBody,
   StructuredListRow,
-  StructuredListCell,
-  Button,
-  FormGroup,
-  Search,
-  TooltipIcon
-} from 'carbon-components-react';
-import { CheckmarkFilled16, ChevronRight32, ChevronLeft32, CaretSortDown32, CaretSortUp32 } from '@carbon/icons-react';
+  StructuredListBody,
+  StructuredListCell
+} from 'carbon-components-react/lib/components/StructuredList/StructuredList';
 
 import './dual-list-select.scss';
 

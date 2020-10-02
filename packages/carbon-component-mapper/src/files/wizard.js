@@ -4,7 +4,9 @@ import clsx from 'clsx';
 
 import WizardCommon from '@data-driven-forms/common/src/wizard/wizard';
 import { FormSpy, WizardContext } from '@data-driven-forms/react-form-renderer';
-import { ProgressIndicator, ProgressStep, Button, Column, Grid, Row } from 'carbon-components-react';
+import { Button, Column, Grid, Row } from 'carbon-components-react';
+
+import { ProgressStep, ProgressIndicator } from 'carbon-components-react/lib/components/ProgressIndicator/ProgressIndicator';
 
 import './wizard.scss';
 

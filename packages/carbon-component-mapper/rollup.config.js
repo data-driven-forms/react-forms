@@ -36,7 +36,10 @@ const globals = {
   'prop-types': 'PropTypes',
   '@data-driven-forms/react-form-renderer': '@data-driven-forms/react-form-renderer',
   'carbon-components-react': 'carbon-components-react',
-  '@carbon/icons-react': '@carbon/icons-react'
+  '@carbon/icons-react': '@carbon/icons-react',
+  'carbon-components-react/lib/components/StructuredList/StructuredList': 'carbon-components-react/lib/components/StructuredList/StructuredList',
+  'carbon-components-react/lib/components/ProgressIndicator/ProgressIndicator':
+    'carbon-components-react/lib/components/ProgressIndicator/ProgressIndicator'
 };
 
 const babelOptions = {

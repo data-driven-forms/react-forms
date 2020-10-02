@@ -201,14 +201,39 @@ const createCarbonCJSTransform = (env) => [
       },
       preventFullImport: false,
       skipDefaultConversion: false
-    }
-  },
-  `carbon-components-react-${env}`
-];
-
-const createCarbonIconsCJSTransform = (env) => [
-  'transform-imports',
-  {
+    },
+    'carbon-components-react/lib/components/StructuredList/StructuredList': {
+      transform: (importName) => {
+        let res;
+        const files = glob.sync(path.resolve(__dirname, `../../node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es' }/**/${carbonMapper(importName)}.js`));
+        if (files.length > 0) {
+          res = files[0];
+        } else {
+          throw new Error(`File with importName ${importName} does not exist`);
+        }
+        res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
+        res = res.replace(/^\//, '');
+        return res;
+      },
+      preventFullImport: false,
+      skipDefaultConversion: true
+    },
+    'carbon-components-react/lib/components/ProgressIndicator/ProgressIndicator': {
+      transform: (importName) => {
+        let res;
+        const files = glob.sync(path.resolve(__dirname, `../../node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es' }/**/${carbonMapper(importName)}.js`));
+        if (files.length > 0) {
+          res = files[0];
+        } else {
+          throw new Error(`File with importName ${importName} does not exist`);
+        }
+        res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
+        res = res.replace(/^\//, '');
+        return res;
+      },
+      preventFullImport: false,
+      skipDefaultConversion: true
+    },
     '@carbon/icons-react': {
       transform: (importName) => {
         let size = importName.match(/\d+/)[0];
@@ -229,7 +254,7 @@ const createCarbonIconsCJSTransform = (env) => [
       skipDefaultConversion: false
     }
   },
-  `@carbon/icons-react-${env}`
+  `carbon-components-react-${env}`
 ];
 
 module.exports = {
@@ -243,7 +268,6 @@ module.exports = {
         createBluePrintTransform('cjs'),
         createAntTransform('cjs'),
         createCarbonCJSTransform('cjs'),
-        createCarbonIconsCJSTransform('cjs')
       ]
     },
     esm: {
@@ -254,7 +278,6 @@ module.exports = {
         createBluePrintTransform('esm'),
         createAntTransform('esm'),
         createCarbonCJSTransform('esm'),
-        createCarbonIconsCJSTransform('esm')
       ]
     }
   }
