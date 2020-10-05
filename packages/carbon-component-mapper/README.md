@@ -4,7 +4,7 @@
 
 [![Data Driven Form logo](https://raw.githubusercontent.com/data-driven-forms/react-forms/master/images/logo.png)](https://data-driven-forms.org/)
 
-carbon component mapper for [Data Driven Forms](https://github.com/data-driven-forms/react-forms).
+Carbon component mapper for [Data Driven Forms](https://github.com/data-driven-forms/react-forms).
 
 :book: For more information please visit the [documentation](https://data-driven-forms.org/). :book:
 
