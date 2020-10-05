@@ -343,7 +343,37 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                 key="wizard"
                 name="wizard"
               >
-                <FormConditionWrapper>
+                <FormConditionWrapper
+                  field={
+                    Object {
+                      "component": "wizard",
+                      "fields": Array [
+                        Object {
+                          "fields": Array [
+                            Object {
+                              "component": "text-field",
+                              "name": "foo-field",
+                            },
+                          ],
+                          "name": "1",
+                          "nextStep": "2",
+                          "title": "foo-step",
+                        },
+                        Object {
+                          "fields": Array [
+                            Object {
+                              "component": "text-field",
+                              "name": "bar-field",
+                            },
+                          ],
+                          "name": "2",
+                          "title": "bar-step",
+                        },
+                      ],
+                      "name": "wizard",
+                    }
+                  }
+                >
                   <FormFieldHideWrapper
                     hideField={false}
                   >
@@ -751,7 +781,14 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                 key="foo-field"
                                                 name="foo-field"
                                               >
-                                                <FormConditionWrapper>
+                                                <FormConditionWrapper
+                                                  field={
+                                                    Object {
+                                                      "component": "text-field",
+                                                      "name": "foo-field",
+                                                    }
+                                                  }
+                                                >
                                                   <FormFieldHideWrapper
                                                     hideField={false}
                                                   >
@@ -1398,7 +1435,38 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                 key="wizard"
                 name="wizard"
               >
-                <FormConditionWrapper>
+                <FormConditionWrapper
+                  field={
+                    Object {
+                      "component": "wizard",
+                      "fields": Array [
+                        Object {
+                          "fields": Array [
+                            Object {
+                              "component": "text-field",
+                              "name": "foo-field",
+                            },
+                          ],
+                          "name": "1",
+                          "nextStep": "2",
+                          "title": "foo-step",
+                        },
+                        Object {
+                          "fields": Array [
+                            Object {
+                              "component": "text-field",
+                              "name": "bar-field",
+                            },
+                          ],
+                          "name": "2",
+                          "title": "bar-step",
+                        },
+                      ],
+                      "inModal": true,
+                      "name": "wizard",
+                    }
+                  }
+                >
                   <FormFieldHideWrapper
                     hideField={false}
                   >
@@ -2065,7 +2133,14 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                             key="foo-field"
                                                             name="foo-field"
                                                           >
-                                                            <FormConditionWrapper>
+                                                            <FormConditionWrapper
+                                                              field={
+                                                                Object {
+                                                                  "component": "text-field",
+                                                                  "name": "foo-field",
+                                                                }
+                                                              }
+                                                            >
                                                               <FormFieldHideWrapper
                                                                 hideField={false}
                                                               >

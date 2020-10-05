@@ -31,7 +31,14 @@ exports[`renderForm function #condition should render condition field only if co
       key="a"
       name="a"
     >
-      <FormConditionWrapper>
+      <FormConditionWrapper
+        field={
+          Object {
+            "component": "custom-component",
+            "name": "a",
+          }
+        }
+      >
         <FormFieldHideWrapper
           hideField={false}
         >
@@ -98,7 +105,14 @@ exports[`renderForm function #condition should render condition field only if co
       key="c"
       name="c"
     >
-      <FormConditionWrapper>
+      <FormConditionWrapper
+        field={
+          Object {
+            "component": "custom-component",
+            "name": "c",
+          }
+        }
+      >
         <FormFieldHideWrapper
           hideField={false}
         >
@@ -196,6 +210,12 @@ exports[`renderForm function #condition should render condition field only if co
             },
           ]
         }
+        field={
+          Object {
+            "component": "custom-component",
+            "name": "foo",
+          }
+        }
       >
         <FormSpy>
           <Component
@@ -213,6 +233,12 @@ exports[`renderForm function #condition should render condition field only if co
                   "when": "c",
                 },
               ]
+            }
+            field={
+              Object {
+                "component": "custom-component",
+                "name": "foo",
+              }
             }
             values={Object {}}
           />
@@ -254,7 +280,14 @@ exports[`renderForm function #condition should render condition field only if on
       key="a"
       name="a"
     >
-      <FormConditionWrapper>
+      <FormConditionWrapper
+        field={
+          Object {
+            "component": "custom-component",
+            "name": "a",
+          }
+        }
+      >
         <FormFieldHideWrapper
           hideField={false}
         >
@@ -321,7 +354,14 @@ exports[`renderForm function #condition should render condition field only if on
       key="b"
       name="b"
     >
-      <FormConditionWrapper>
+      <FormConditionWrapper
+        field={
+          Object {
+            "component": "custom-component",
+            "name": "b",
+          }
+        }
+      >
         <FormFieldHideWrapper
           hideField={false}
         >
@@ -407,6 +447,12 @@ exports[`renderForm function #condition should render condition field only if on
             ],
           }
         }
+        field={
+          Object {
+            "component": "custom-component",
+            "name": "foo",
+          }
+        }
       >
         <FormSpy>
           <Component
@@ -417,6 +463,12 @@ exports[`renderForm function #condition should render condition field only if on
                   "a",
                   "b",
                 ],
+              }
+            }
+            field={
+              Object {
+                "component": "custom-component",
+                "name": "foo",
               }
             }
             values={Object {}}
@@ -459,7 +511,14 @@ exports[`renderForm function should render single field from defined componentTy
       key="foo"
       name="foo"
     >
-      <FormConditionWrapper>
+      <FormConditionWrapper
+        field={
+          Object {
+            "component": "text-field",
+            "name": "foo",
+          }
+        }
+      >
         <FormFieldHideWrapper
           hideField={false}
         >
@@ -512,7 +571,14 @@ exports[`renderForm function should render single field from with custom compone
       key="foo"
       name="foo"
     >
-      <FormConditionWrapper>
+      <FormConditionWrapper
+        field={
+          Object {
+            "component": "custom-component",
+            "name": "foo",
+          }
+        }
+      >
         <FormFieldHideWrapper
           hideField={false}
         >

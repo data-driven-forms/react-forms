@@ -130,7 +130,14 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
             key="component1"
             name="component1"
           >
-            <FormConditionWrapper>
+            <FormConditionWrapper
+              field={
+                Object {
+                  "component": "text-field",
+                  "name": "component1",
+                }
+              }
+            >
               <FormFieldHideWrapper
                 hideField={false}
               >
@@ -159,7 +166,14 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
             key="secret"
             name="secret"
           >
-            <FormConditionWrapper>
+            <FormConditionWrapper
+              field={
+                Object {
+                  "component": "select",
+                  "name": "secret",
+                }
+              }
+            >
               <FormFieldHideWrapper
                 hideField={false}
               >
@@ -351,7 +365,15 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
             label="Visible"
             name="visible"
           >
-            <FormConditionWrapper>
+            <FormConditionWrapper
+              field={
+                Object {
+                  "component": "text-field",
+                  "label": "Visible",
+                  "name": "visible",
+                }
+              }
+            >
               <FormFieldHideWrapper
                 hideField={false}
               >
@@ -383,7 +405,15 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
             label="Hidden"
             name="hidden"
           >
-            <FormConditionWrapper>
+            <FormConditionWrapper
+              field={
+                Object {
+                  "component": "text-field",
+                  "label": "Hidden",
+                  "name": "hidden",
+                }
+              }
+            >
               <FormFieldHideWrapper
                 hideField={true}
               >

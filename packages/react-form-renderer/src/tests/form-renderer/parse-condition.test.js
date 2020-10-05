@@ -465,4 +465,82 @@ describe('parseCondition', () => {
 
     expect(parseCondition(condition, values)).toEqual(negativeResult);
   });
+
+  describe('when function', () => {
+    const field = {
+      name: 'field-name'
+    };
+
+    it('when is function', () => {
+      const whenSpy = jest.fn().mockImplementation(() => 'x');
+
+      condition = {
+        when: whenSpy,
+        is: 'yes'
+      };
+
+      values = {
+        x: 'yes'
+      };
+
+      expect(parseCondition(condition, values, field)).toEqual(positiveResult);
+      expect(whenSpy).toHaveBeenCalledWith(field);
+    });
+
+    it('when returns array - true', () => {
+      const whenSpy = jest.fn().mockImplementation(() => ['x', 'y']);
+
+      condition = {
+        when: whenSpy,
+        is: 'true'
+      };
+
+      values = {
+        x: 'true',
+        y: 'true'
+      };
+
+      expect(parseCondition(condition, values, field)).toEqual(positiveResult);
+      expect(whenSpy).toHaveBeenCalledWith(field);
+    });
+
+    it('when returns array - false', () => {
+      const whenSpy = jest.fn().mockImplementation(() => ['x', 'y']);
+
+      condition = {
+        when: whenSpy,
+        is: 'true'
+      };
+
+      values = {
+        x: 'false',
+        y: 'false'
+      };
+
+      expect(parseCondition(condition, values, field)).toEqual(negativeResult);
+      expect(whenSpy).toHaveBeenCalledWith(field);
+    });
+
+    it('when returns array of functions - true', () => {
+      const whenSpyX = jest.fn().mockImplementation(() => 'x');
+      const whenSpyY = jest.fn().mockImplementation(() => 'x');
+
+      const whenSpy = jest.fn().mockImplementation(() => [whenSpyX, whenSpyY]);
+
+      condition = {
+        when: whenSpy,
+        is: 'true'
+      };
+
+      values = {
+        x: 'true',
+        y: 'true'
+      };
+
+      expect(parseCondition(condition, values, field)).toEqual(positiveResult);
+      expect(whenSpy).toHaveBeenCalledWith(field);
+      expect(whenSpyX).toHaveBeenCalledWith(field);
+      expect(whenSpyY).toHaveBeenCalledWith(field);
+    });
+  });
 });

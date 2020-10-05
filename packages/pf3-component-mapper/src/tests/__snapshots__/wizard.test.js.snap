@@ -271,7 +271,27 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                   key="Wizard"
                   name="Wizard"
                 >
-                  <FormConditionWrapper>
+                  <FormConditionWrapper
+                    field={
+                      Object {
+                        "component": "wizard",
+                        "fields": Array [
+                          Object {
+                            "fields": Array [],
+                            "name": 1,
+                            "nextStep": "step-2",
+                            "title": "Step 1",
+                          },
+                          Object {
+                            "fields": Array [],
+                            "name": "step-2",
+                            "title": "Step 2",
+                          },
+                        ],
+                        "name": "Wizard",
+                      }
+                    }
+                  >
                     <FormFieldHideWrapper
                       hideField={false}
                     >
@@ -978,7 +998,32 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                   key="Wizard"
                   name="Wizard"
                 >
-                  <FormConditionWrapper>
+                  <FormConditionWrapper
+                    field={
+                      Object {
+                        "component": "wizard",
+                        "fields": Array [
+                          Object {
+                            "fields": Array [],
+                            "name": 1,
+                            "nextStep": Object {
+                              "stepMapper": Object {
+                                "step": "step-2",
+                              },
+                              "when": "step",
+                            },
+                            "title": "Step 1",
+                          },
+                          Object {
+                            "fields": Array [],
+                            "name": "step-2",
+                            "title": "Step 2",
+                          },
+                        ],
+                        "name": "Wizard",
+                      }
+                    }
+                  >
                     <FormFieldHideWrapper
                       hideField={false}
                     >
@@ -1801,7 +1846,35 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                     ]
                   }
                 >
-                  <FormConditionWrapper>
+                  <FormConditionWrapper
+                    field={
+                      Object {
+                        "component": "wizard",
+                        "fields": Array [
+                          Object {
+                            "fields": Array [],
+                            "name": 1,
+                            "nextStep": "step-2",
+                            "title": "Step 1",
+                          },
+                          Object {
+                            "fields": Array [],
+                            "name": "step-2",
+                            "title": "Step 2",
+                          },
+                        ],
+                        "name": "Wizard",
+                        "stepsInfo": Array [
+                          Object {
+                            "title": "step1",
+                          },
+                          Object {
+                            "title": "step2",
+                          },
+                        ],
+                      }
+                    }
+                  >
                     <FormFieldHideWrapper
                       hideField={false}
                     >
@@ -2600,7 +2673,28 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                   name="Wizard"
                   title="Wizard title"
                 >
-                  <FormConditionWrapper>
+                  <FormConditionWrapper
+                    field={
+                      Object {
+                        "component": "wizard",
+                        "fields": Array [
+                          Object {
+                            "fields": Array [],
+                            "name": 1,
+                            "nextStep": "step-2",
+                            "title": "Step 1",
+                          },
+                          Object {
+                            "fields": Array [],
+                            "name": "step-2",
+                            "title": "Step 2",
+                          },
+                        ],
+                        "name": "Wizard",
+                        "title": "Wizard title",
+                      }
+                    }
+                  >
                     <FormFieldHideWrapper
                       hideField={false}
                     >

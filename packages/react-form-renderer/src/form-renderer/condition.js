@@ -24,7 +24,7 @@ export const reducer = (state, { type, sets }) => {
 };
 
 const Condition = React.memo(
-  ({ condition, children, values }) => {
+  ({ condition, children, values, field }) => {
     const formOptions = useFormApi();
     const dirty = formOptions.getState().dirty;
 
@@ -33,7 +33,7 @@ const Condition = React.memo(
       initial: true
     });
 
-    const conditionResult = parseCondition(condition, values, formOptions);
+    const conditionResult = parseCondition(condition, values, field);
     const setters = conditionResult.set ? [conditionResult.set] : conditionResult.sets;
 
     useEffect(() => {
@@ -65,7 +65,7 @@ const Condition = React.memo(
 );
 
 const conditionProps = {
-  when: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+  when: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string), PropTypes.func]),
   is: PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.object, PropTypes.number, PropTypes.bool]),
   isNotEmpty: PropTypes.bool,
   isEmpty: PropTypes.bool,
@@ -111,7 +111,8 @@ const conditionsProps = {
 Condition.propTypes = {
   condition: PropTypes.oneOfType([PropTypes.shape(conditionsProps), PropTypes.arrayOf(PropTypes.shape(conditionsProps))]),
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired,
-  values: PropTypes.object.isRequired
+  values: PropTypes.object.isRequired,
+  field: PropTypes.object.isRequired
 };
 
 export default Condition;

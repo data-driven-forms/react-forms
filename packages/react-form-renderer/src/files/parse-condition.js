@@ -23,7 +23,7 @@ const fieldCondition = (value, { is, isNotEmpty, isEmpty, pattern, notMatch, fla
   return notMatch ? !isMatched : isMatched;
 };
 
-export const parseCondition = (condition, values) => {
+export const parseCondition = (condition, values, field) => {
   let positiveResult = {
     visible: true,
     ...condition.then,
@@ -37,11 +37,13 @@ export const parseCondition = (condition, values) => {
   };
 
   if (Array.isArray(condition)) {
-    return !condition.map((condition) => parseCondition(condition, values)).some(({ result }) => result === false) ? positiveResult : negativeResult;
+    return !condition.map((condition) => parseCondition(condition, values, field)).some(({ result }) => result === false)
+      ? positiveResult
+      : negativeResult;
   }
 
   if (condition.and) {
-    return !condition.and.map((condition) => parseCondition(condition, values)).some(({ result }) => result === false)
+    return !condition.and.map((condition) => parseCondition(condition, values, field)).some(({ result }) => result === false)
       ? positiveResult
       : negativeResult;
   }
@@ -62,19 +64,25 @@ export const parseCondition = (condition, values) => {
   }
 
   if (condition.or) {
-    return condition.or.map((condition) => parseCondition(condition, values)).some(({ result }) => result === true) ? positiveResult : negativeResult;
+    return condition.or.map((condition) => parseCondition(condition, values, field)).some(({ result }) => result === true)
+      ? positiveResult
+      : negativeResult;
   }
 
   if (condition.not) {
     return !parseCondition(condition.not, values).result ? positiveResult : negativeResult;
   }
 
-  if (typeof condition.when === 'string') {
-    return fieldCondition(get(values, condition.when), condition) ? positiveResult : negativeResult;
+  const finalWhen = typeof condition.when === 'function' ? condition.when(field) : condition.when;
+
+  if (typeof finalWhen === 'string') {
+    return fieldCondition(get(values, finalWhen), condition) ? positiveResult : negativeResult;
   }
 
-  if (Array.isArray(condition.when)) {
-    return condition.when.map((fieldName) => fieldCondition(get(values, fieldName), condition)).find((condition) => !!condition)
+  if (Array.isArray(finalWhen)) {
+    return finalWhen
+      .map((fieldName) => fieldCondition(get(values, typeof fieldName === 'function' ? fieldName(field) : fieldName), condition))
+      .find((condition) => !!condition)
       ? positiveResult
       : negativeResult;
   }

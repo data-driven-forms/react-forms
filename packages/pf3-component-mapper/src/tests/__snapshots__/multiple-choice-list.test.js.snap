@@ -188,7 +188,24 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
                   ]
                 }
               >
-                <FormConditionWrapper>
+                <FormConditionWrapper
+                  field={
+                    Object {
+                      "component": "checkbox",
+                      "name": "checkbox",
+                      "options": Array [
+                        Object {
+                          "label": "Foo",
+                          "value": 0,
+                        },
+                        Object {
+                          "label": "Bar",
+                          "value": 1,
+                        },
+                      ],
+                    }
+                  }
+                >
                   <FormFieldHideWrapper
                     hideField={false}
                   >
@@ -990,7 +1007,29 @@ exports[`<MultipleChoiceList /> should render in error state 1`] = `
                   ]
                 }
               >
-                <FormConditionWrapper>
+                <FormConditionWrapper
+                  field={
+                    Object {
+                      "component": "checkbox",
+                      "name": "checkbox",
+                      "options": Array [
+                        Object {
+                          "label": "Foo",
+                          "value": 0,
+                        },
+                        Object {
+                          "label": "Bar",
+                          "value": 1,
+                        },
+                      ],
+                      "validate": Array [
+                        Object {
+                          "type": "required",
+                        },
+                      ],
+                    }
+                  }
+                >
                   <FormFieldHideWrapper
                     hideField={false}
                   >

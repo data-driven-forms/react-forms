@@ -27,6 +27,35 @@ You can show a field only if it meets a condition:
 }
 ```
 
-`when` - is name of field where the value is stored, **always required!**. It can be either string `'field-name'` or array of strings `['field-1', 'field-2']`.
+### When
+
+When attribute is always **required**. Can be one of following types:
+
+**String**
+
+A name of field where the value is stored.
+
+**Function**
+
+*currentField => string | string[]*
+
+A function receiving the current field as the first argument. Can be used to get dynamically created field name:
+
+```jsx
+{
+  when: (field) => `${getFieldNumber(field)}.name`
+}
+/*
+  field = {
+    name: 'person[14]',
+  }
+*/
+```
+
+A function in an array cannot return another array.
+
+**Array**
+
+An array of string or functions.
 
 </DocPage>
