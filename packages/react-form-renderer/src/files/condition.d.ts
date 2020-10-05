@@ -1,10 +1,15 @@
+import Field from "./field";
+
 export interface ActionResolution {
   visible?: boolean;
   set?: object; // TO DO specify this
 }
 
+export type InnerWhenFunction = (currentField: string) => string;
+export type WhenFunction = (currentField: string) => string | string[] | InnerWhenFunction[];
+
 export interface ConditionProp {
-  when?: string | string[];
+  when?: string | string[] | WhenFunction | InnerWhenFunction[];
   is?: any;
   isNotEmpty?: boolean;
   isEmpty?: boolean;
@@ -28,6 +33,7 @@ export interface ConditionProps {
   values: object;
   children: React.ReactChildren;
   condition?: ConditionDefinition | ConditionDefinition[];
+  field: Field;
 }
 
 declare const Condition: React.ComponentType<ConditionProps>;

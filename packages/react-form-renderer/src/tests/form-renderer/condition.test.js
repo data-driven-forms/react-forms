@@ -72,6 +72,47 @@ describe('condition test', () => {
     expect(wrapper.find('input')).toHaveLength(1);
   });
 
+  it('should render when condition is fulfill - when is a function', () => {
+    const whenSpy = jest.fn().mockImplementation(() => 'field-1');
+    schema = {
+      fields: [
+        {
+          component: componentTypes.TEXT_FIELD,
+          name: 'field-1'
+        },
+        {
+          component: componentTypes.TEXT_FIELD,
+          name: 'field-2',
+          condition: [
+            {
+              when: whenSpy,
+              is: 'show'
+            }
+          ]
+        }
+      ]
+    };
+
+    wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+
+    expect(whenSpy.mock.calls[0][0]).toEqual({ component: 'text-field', name: 'field-2' });
+
+    expect(wrapper.find('input')).toHaveLength(1);
+
+    wrapper.find('input').simulate('change', { target: { value: 'show' } });
+    wrapper.update();
+
+    expect(wrapper.find('input')).toHaveLength(2);
+
+    wrapper
+      .find('input')
+      .first()
+      .simulate('change', { target: { value: 'dontshow' } });
+    wrapper.update();
+
+    expect(wrapper.find('input')).toHaveLength(1);
+  });
+
   it('sets value when condition is fulfill', async () => {
     schema = {
       fields: [
