@@ -1,4 +1,5 @@
 import createManagerApi, { initialMeta, flatObject } from '../../utils/manager-api';
+import FORM_ERROR from '../../files/form-error';
 
 describe('managerApi', () => {
   it('should create managerApi getter', () => {
@@ -570,6 +571,55 @@ describe('managerApi', () => {
     });
     managerApi().handleSubmit({ preventDefault: jest.fn() });
     expect(onSubmit).toHaveBeenCalledWith(expectedValues);
+
+    expect(managerApi().submitting).toEqual(false);
+    expect(managerApi().submitError).toEqual(undefined);
+    expect(managerApi().submitFailed).toEqual(false);
+    expect(managerApi().submitSucceeded).toEqual(true);
+  });
+
+  it('onsubmit receives an error', () => {
+    const error = 'some-error';
+    const onSubmit = jest.fn().mockImplementation(() => error);
+    const managerApi = createManagerApi({ onSubmit });
+    const { registerField } = managerApi();
+
+    const render = jest.fn();
+    registerField({ name: 'field', render });
+
+    expect(render).not.toHaveBeenCalled();
+
+    managerApi().handleSubmit();
+
+    expect(render).toHaveBeenCalled();
+    expect(managerApi().submitting).toEqual(false);
+    expect(managerApi().submitError).toEqual(undefined);
+    expect(managerApi().submitFailed).toEqual(true);
+    expect(managerApi().submitSucceeded).toEqual(false);
+    expect(managerApi().submitErrors).toEqual(error);
+    expect(managerApi().hasSubmitErrors).toEqual(true);
+  });
+
+  it('onsubmit receives an error - form level', () => {
+    const error = { [FORM_ERROR]: 'some-error' };
+    const onSubmit = jest.fn().mockImplementation(() => error);
+    const managerApi = createManagerApi({ onSubmit });
+    const { registerField } = managerApi();
+
+    const render = jest.fn();
+    registerField({ name: 'field', render });
+
+    expect(render).not.toHaveBeenCalled();
+
+    managerApi().handleSubmit();
+
+    expect(render).toHaveBeenCalled();
+    expect(managerApi().submitting).toEqual(false);
+    expect(managerApi().submitError).toEqual('some-error');
+    expect(managerApi().submitFailed).toEqual(true);
+    expect(managerApi().submitSucceeded).toEqual(false);
+    expect(managerApi().submitErrors).toEqual(error);
+    expect(managerApi().hasSubmitErrors).toEqual(true);
   });
 
   it('getField state should return correct field state', () => {
@@ -1724,6 +1774,106 @@ describe('managerApi', () => {
       expect(beforeSubmit3).not.toHaveBeenCalled();
 
       expect(onSubmit).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('async submit', () => {
+    it('calls async submit', async () => {
+      jest.useFakeTimers();
+
+      const onSubmit = jest.fn().mockImplementation(() => new Promise((res) => setTimeout(() => res('ok'), 1000)));
+      const render = jest.fn();
+
+      const managerApi = createManagerApi({ onSubmit });
+
+      managerApi().registerField({ name: 'field', internalId: '1', render });
+
+      expect(managerApi().submitting).toEqual(false);
+      expect(render).not.toHaveBeenCalled();
+
+      managerApi().submit();
+
+      expect(render).toHaveBeenCalled();
+      render.mockClear();
+      expect(managerApi().submitting).toEqual(true);
+
+      await jest.runAllTimers();
+
+      expect(render).toHaveBeenCalled();
+      expect(managerApi().submitting).toEqual(false);
+      expect(managerApi().submitError).toEqual(undefined);
+      expect(managerApi().submitFailed).toEqual(false);
+      expect(managerApi().submitSucceeded).toEqual(true);
+      expect(managerApi().submitErrors).toEqual(undefined);
+      expect(managerApi().hasSubmitErrors).toEqual(false);
+    });
+
+    it('calls async submit - failed', async () => {
+      jest.useFakeTimers();
+
+      const error = 'some evil error';
+
+      const onSubmit = jest.fn().mockImplementation(() => new Promise((res, rej) => setTimeout(() => rej(error), 100)));
+      const render = jest.fn();
+
+      const managerApi = createManagerApi({ onSubmit });
+
+      managerApi().registerField({ name: 'field', internalId: '1', render });
+
+      expect(managerApi().submitting).toEqual(false);
+      expect(render).not.toHaveBeenCalled();
+
+      managerApi().submit();
+
+      expect(render).toHaveBeenCalled();
+      render.mockClear();
+
+      expect(managerApi().submitting).toEqual(true);
+
+      await jest.runAllTimers();
+      await jest.runAllTimers(); // for some reason, catch branch is not triggerd on first run
+
+      expect(render).toHaveBeenCalled();
+      expect(managerApi().submitError).toEqual(undefined);
+      expect(managerApi().submitting).toEqual(false);
+      expect(managerApi().submitFailed).toEqual(true);
+      expect(managerApi().submitSucceeded).toEqual(false);
+      expect(managerApi().submitErrors).toEqual(error);
+      expect(managerApi().hasSubmitErrors).toEqual(true);
+    });
+
+    it('calls async submit - failed with form level', async () => {
+      jest.useFakeTimers();
+
+      const error = { [FORM_ERROR]: 'some evil error' };
+
+      const onSubmit = jest.fn().mockImplementation(() => new Promise((res, rej) => setTimeout(() => rej(error), 100)));
+      const render = jest.fn();
+
+      const managerApi = createManagerApi({ onSubmit });
+
+      managerApi().registerField({ name: 'field', internalId: '1', render });
+
+      expect(managerApi().submitting).toEqual(false);
+      expect(render).not.toHaveBeenCalled();
+
+      managerApi().submit();
+
+      expect(render).toHaveBeenCalled();
+      render.mockClear();
+
+      expect(managerApi().submitting).toEqual(true);
+
+      await jest.runAllTimers();
+      await jest.runAllTimers(); // for some reason, catch branch is not triggerd on first run
+
+      expect(render).toHaveBeenCalled();
+      expect(managerApi().submitError).toEqual('some evil error');
+      expect(managerApi().submitting).toEqual(false);
+      expect(managerApi().submitFailed).toEqual(true);
+      expect(managerApi().submitSucceeded).toEqual(false);
+      expect(managerApi().submitErrors).toEqual(error);
+      expect(managerApi().hasSubmitErrors).toEqual(true);
     });
   });
 });

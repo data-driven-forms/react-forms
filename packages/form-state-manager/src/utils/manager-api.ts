@@ -27,6 +27,7 @@ import { Meta } from '../types/use-field';
 import { formLevelValidator, isPromise } from './validate';
 import { FormValidator, FormLevelError, Validator } from '../types/validate';
 import findDifference from './find-difference';
+import FORM_ERROR from '../files/form-error';
 
 export const defaultIsEqual = (a: any, b: any) => a === b;
 
@@ -540,8 +541,59 @@ const createManagerApi: CreateManagerApi = ({
       return;
     }
 
-    config.onSubmit(state.values);
+    const result = config.onSubmit(state.values);
 
+    if (isPromise(result)) {
+      updateSubmitting(true);
+      const render = prepareRerender();
+
+      result
+        .then(() => {
+          state.submitErrors = undefined;
+          state.hasSubmitErrors = false;
+          state.submitFailed = false;
+          state.submitSucceeded = true;
+          state.submitting = false;
+          state.submitError = undefined;
+
+          render();
+
+          runAfterSubmit();
+        })
+        .catch((error: unknown) => {
+          state.submitErrors = error as AnyObject;
+          state.hasSubmitErrors = true;
+          state.submitFailed = true;
+          state.submitSucceeded = false;
+          state.submitting = false;
+          state.submitError = state.submitErrors?.[FORM_ERROR];
+
+          render();
+        });
+    } else {
+      const render = prepareRerender();
+
+      if (result) {
+        state.submitErrors = result;
+        state.hasSubmitErrors = true;
+        state.submitFailed = true;
+        state.submitSucceeded = false;
+        state.submitError = state.submitErrors?.[FORM_ERROR];
+      } else {
+        state.submitErrors = undefined;
+        state.hasSubmitErrors = false;
+        state.submitFailed = false;
+        state.submitSucceeded = true;
+        state.submitError = undefined;
+      }
+
+      render();
+
+      runAfterSubmit();
+    }
+  }
+
+  function runAfterSubmit() {
     state.registeredFields.forEach((name) =>
       traverseObject(state.fieldListeners[name].fields, (field) => {
         field.afterSubmit && field.afterSubmit();
