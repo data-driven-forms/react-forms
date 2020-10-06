@@ -5,6 +5,8 @@ import CodeExample from '@docs/code-example';
 
 # Clear on unmount
 
+*boolean*
+
 When using dynamic forms where more fields share the same name, the value is preserved when a user switches the field. You can disable this behavior by setting 
 `clearOnUnmount` option in the renderer component or in the schema of the field. The option in the schema has always higher priority. (When 
 `clearOnUnmount` is set in the renderer and the field has it this attribute set to `false`, the field value will not be cleared.)

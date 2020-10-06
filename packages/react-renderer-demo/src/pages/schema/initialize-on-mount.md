@@ -5,6 +5,8 @@ import CodeExample from '@docs/code-example';
 
 # Initialize On Mount
 
+*boolean*
+
 Data Driven Forms provides a way how you can easily initialized a field when the field is mounted (re-mounted).
 
 Just pass a `initializeOnMount` prop and set it to `true`.

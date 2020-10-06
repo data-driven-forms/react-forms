@@ -35,7 +35,9 @@ Thank you for your understanding.
     -   disableSubmit
     -   buttonClassName
     -   renderFormButtons
-    -   buttonsLabels
+    -   submitLabel
+    -   cancelLabel
+    -   resetLabel
     -   canReset
 -   => All these props are now managed by mapper's form templates!
 

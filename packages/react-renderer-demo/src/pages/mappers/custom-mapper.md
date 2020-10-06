@@ -60,6 +60,30 @@ Data Driven Forms will render any component you pass to it, so you don't have to
 const Title = ({component, name, label, ...props }) => <h1 id={name} {...props}>{label}</h1>
 ```
 
+### Form methods
+
+Using [useFormApi](/hooks/use-form-api) you can get access to mutliple form methods without connecting a form field. Some most used methods are following:
+
+**renderForm**
+
+*(fields) => React.Element*
+
+If you want to render fields from a component (`tabs`, `subform`, etc.) you can use `renderForm(fields)` function.
+
+**getState**
+
+*() => FormState*
+
+Using `getState` components you get an access to the form state. Be aware of subscription - if your component is not subscribed to the form state, it won't be updated when the state is changed. See [FormSpy](/components/form-spy).
+
+**change**
+
+*(name, value) => void*
+
+You can change value of any field using this function.
+
+---
+
 ## Register component in component mapper
 
 To be able to use your component in the schema, you need to register the component in your component mapper.

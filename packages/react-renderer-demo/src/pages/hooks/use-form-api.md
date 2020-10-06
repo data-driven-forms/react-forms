@@ -20,18 +20,58 @@ const Component = (props) => {
 
 This hook returns object containing following information:
 
-```jsx
-{
-  blur: (name) => void, // calls onBlur event on field with given name
-  change: (name, value) => void, // calls onChange event on field with given name
-  focus: (name) => void, // calls onFocus event on field with given name
-  getFieldState: (name) => object, // returns a state of given field, state contains input and meta information of field
-  getRegisteredFields: () => string[], // returns an array of field names that are rendered in DOM
-  getState: () => object, // returns an object with whole form state. More info https://final-form.org/docs/final-form/types/FormState
-  pristine: bool, // true if the all field values is === to the initial values, false if the values are !==.
-  renderForm: (defaultSchema) => void, // function that is used by form renderer to render form fields defined by defaultSchema; can be used for schema nesting
-  valid: bool //true if all fields have no validation or submission errors. false otherwise.
-}
-```
+## renderForm
+
+*(fields: schema) => React.Element*
+
+If you want to render fields from a component (`tabs`, `subform`, etc.) you can use `renderForm(fields)` function.
+
+## getState
+
+*() => FormState*
+
+Using `getState` components you get an access to [the form state](https://final-form.org/docs/final-form/types/FormState). Be aware of subscription - if your component is not subscribed to the form state, it won't be updated when the state is changed. See [FormSpy](/components/form-spy).
+
+## change
+
+*(name: string, value: any) => void*
+
+You can change value of any field using this function.
+
+## focus
+
+*(name: string) => void*
+
+Calls onFocus event on field with given name.
+
+## blur
+
+*(name: string) => void*
+
+Calls onBlur event on field with given name.
+
+## getFieldState
+
+*(name: string) => FormFieldState*
+
+Returns a state of given field. State contains input and meta information of the field.
+
+## getRegisteredFields
+
+*() => string[]*
+
+Returns an array of field names that are currently rendered in DOM. Useful to know when you collect variables in wizard forms.
+
+## pristine
+
+*boolean*
+
+True if the all field values is === to the initial values, false if the values are !==. Same as in the FormState.
+
+## valid
+
+*boolean*
+
+True if all fields have no validation or submission errors. false otherwise. Same as in the FormState.
 
 </DocPage>
