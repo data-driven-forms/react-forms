@@ -24,7 +24,7 @@ export type HandleSubmit = (event?: FormEvent) => void;
 export type RegisterField = (field: FieldConfig) => void;
 export type UnregisterField = (field: Omit<FieldConfig, 'render'>) => void;
 export type GetState = () => ManagerState;
-export type OnSubmit = (values: AnyObject) => void;
+export type OnSubmit = (values: AnyObject) => any;
 export type GetFieldValue = (name: string) => any;
 export type GetFieldState = (name: string) => ExtendedFieldState | undefined;
 export type Focus = (name: string) => void;
