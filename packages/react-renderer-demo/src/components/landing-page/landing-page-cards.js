@@ -320,8 +320,8 @@ const LandingPageCards = () => {
                 This list represents a set of provided mappers. Each mapper brings all basic form components from its design system. You can
                 immediately use form inputs such as text fields, selects, radios, checkboxes or wizards. However, this selection does not limit you as
                 integrating custom components is simple as it can be - all it takes is just{' '}
-                <RouterLink href="/mappers/carbon-component-mapper">
-                  <a href="/mappers/carbon-component-mapper">one hook</a>
+                <RouterLink href="/hooks/use-field-api">
+                  <a href="/hooks/use-field-api">one hook</a>
                 </RouterLink>
                 .
               </Typography>
