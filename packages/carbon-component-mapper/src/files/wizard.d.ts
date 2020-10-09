@@ -50,6 +50,7 @@ export interface WizardProps {
   ProgressIndicatorProps?: ProgressIndicatorProps;
   vertical?: boolean;
   stepsInfo?: WizardNavItem[];
+  WizardBodyProps?: React.HTMLProps<HTMLDivElement>;
 }
 
 declare const Wizard: React.ComponentType<WizardProps>;

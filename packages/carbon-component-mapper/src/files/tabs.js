@@ -1,18 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 
 import { Tabs as CarbonTabs, Tab } from 'carbon-components-react';
 
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
-const Tabs = ({ fields, component, name, ...props }) => {
+import './tabs.scss';
+
+const Tabs = ({ fields, component, name, TabWrapperProps, ...props }) => {
   const formOptions = useFormApi();
 
   return (
     <CarbonTabs {...props}>
       {fields.map(({ fields, name, label, title, ...rest }) => (
-        <Tab {...rest} id={name} key={name} label={label || title}>
-          {formOptions.renderForm(fields, formOptions)}
+        <Tab {...rest} className="pepa" id={name} key={name} label={label || title}>
+          <div {...TabWrapperProps} className={clsx('ddorg__carbon-form-template-tab', TabWrapperProps.className)}>
+            {formOptions.renderForm(fields, formOptions)}
+          </div>
         </Tab>
       ))}
     </CarbonTabs>
@@ -20,6 +25,7 @@ const Tabs = ({ fields, component, name, ...props }) => {
 };
 
 Tabs.propTypes = {
+  TabWrapperProps: PropTypes.object,
   component: PropTypes.string,
   name: PropTypes.string,
   fields: PropTypes.arrayOf(
@@ -30,6 +36,10 @@ Tabs.propTypes = {
       label: PropTypes.node
     })
   )
+};
+
+Tabs.defaultProps = {
+  TabWrapperProps: {}
 };
 
 export default Tabs;

@@ -12,6 +12,7 @@ export interface TabField extends TabProps {
 
 export interface TabsProps extends CarbonTabsProps {
   fields: TabField[];
+  TabWrapperProps?: React.HTMLProps<HTMLDivElement>;
 }
 
 declare const Tabs: React.ComponentType<TabsProps>;

@@ -7,3 +7,9 @@
     flex-direction: row-reverse;
     display: flex;
 }
+
+.ddorg__carbon-wizard-body {
+    >:not(:last-child) {
+        margin-bottom: 32px;
+    }
+}
