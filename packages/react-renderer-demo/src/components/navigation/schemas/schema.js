@@ -62,6 +62,10 @@ const schema = [
     link: 'releases'
   },
   {
+    linkText: 'FAQ',
+    link: 'faq'
+  },
+  {
     link: 'migration-guide',
     linkText: 'Migration guide to version 2'
   }
