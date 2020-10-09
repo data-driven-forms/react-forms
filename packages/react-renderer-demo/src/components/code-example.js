@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { Fragment, useEffect, useState, useRef } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,10 +17,55 @@ import IconButton from '@material-ui/core/IconButton';
 import { getParameters } from 'codesandbox/lib/api/define';
 import Tooltip from '@material-ui/core/Tooltip';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
 import GhIcon from './common/gh-svg-icon';
 import CodesandboxIcon from './common/code-sandbox-svg-icon';
 import CodeEditor from './code-editor';
+import { headerToId } from '../helpers/list-of-contents';
+import ShareButton from './mdx/share-button';
+
+const useHeadingStyles = makeStyles((theme) => ({
+  anchor: {
+    textDecoration: 'none',
+    color: 'inherit',
+    fontWeight: 'inherit'
+  },
+  wrapper: {
+    flexGrow: 1,
+    display: 'flex'
+  },
+  heading: {
+    paddingTop: 4,
+    fontSize: theme.typography.pxToRem(20),
+    fontWeight: theme.typography.fontWeightRegular,
+    display: 'flex',
+    alignItems: 'center',
+    '& button': {
+      visibility: 'hidden'
+    },
+    '&:hover button': {
+      visibility: 'initial'
+    }
+  }
+}));
+
+export const Heading = ({ level, children, component }) => {
+  const router = useRouter();
+  const classes = useHeadingStyles();
+  const id = headerToId(children);
+  const path = `${router.asPath}#${id}`;
+  return (
+    <div id={id} className={classes.wrapper} data-scroll="true">
+      <Typography id={`heading-${id}`} className={classes.heading} variant={`h${level}`} component={component}>
+        <a href={path} className={classes.anchor} data-mdlink="md-heading">
+          {children}
+          <ShareButton path={path} />
+        </a>
+      </Typography>
+    </div>
+  );
+};
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -36,17 +82,6 @@ const useStyles = makeStyles((theme) => ({
   componentPanel: {
     padding: 16
   },
-  heading: {
-    fontSize: theme.typography.pxToRem(20),
-    fontWeight: theme.typography.fontWeightRegular,
-    flexGrow: 1,
-    display: 'flex',
-    alignItems: 'center'
-  },
-  secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary
-  },
   expansionPanel: {
     border: 'none',
     boxShadow: 'none',
@@ -55,20 +90,10 @@ const useStyles = makeStyles((theme) => ({
   },
   expansionPanelSummary: {
     padding: 0
-  },
-  pf4: {
-    padding: 32,
-    '& form': {
-      width: '100%'
-    }
   }
 }));
 
-/**
- * Generates html markup for the sandbox
- * @param {String} type either MUI or PF4
- */
-const generateIndex = (type) => `<!DOCTYPE html>
+const index = `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -92,12 +117,12 @@ const generateIndex = (type) => `<!DOCTYPE html>
 </html>
 `;
 
-const getPayload = (type, code, sourceFiles = {}) =>
+const getPayload = (code, sourceFiles = {}) =>
   getParameters({
     files: {
       ...sourceFiles,
       'public/index.html': {
-        content: generateIndex(type)
+        content: index
       },
       'package.json': {
         content: {
@@ -135,7 +160,7 @@ const getPayload = (type, code, sourceFiles = {}) =>
     }
   });
 
-const CodeExample = ({ source, mode, mapper }) => {
+const CodeExample = ({ source, mode }) => {
   const [name, setName] = useState('');
   const [codeSource, setCodeSource] = useState('');
   const { current: Component } = useRef(
@@ -171,13 +196,13 @@ const CodeExample = ({ source, mode, mapper }) => {
               }
             >
               {Component && (
-                <Typography className={classes.heading} component="h4" variant="h3">
+                <Heading component="h3" level="5">
                   {name}
-                </Typography>
+                </Heading>
               )}
               <Box display="flex">
                 <form action="https://codesandbox.io/api/v1/sandboxes/define" method="POST" target="_blank">
-                  <input type="hidden" name="parameters" value={getPayload(mapper, codeSource, sourceFiles)} />
+                  <input type="hidden" name="parameters" value={getPayload(codeSource, sourceFiles)} />
                   <Tooltip title="Edit in codesandbox">
                     <IconButton disableFocusRipple type="submit" onClick={(event) => event.stopPropagation()}>
                       <CodesandboxIcon />
@@ -185,7 +210,7 @@ const CodeExample = ({ source, mode, mapper }) => {
                   </Tooltip>
                 </form>
                 <Link
-                  href={`https://github.com/data-driven-forms/react-forms/tree/master/packages/react-renderer-demo/src/app/examples/${source}.js`}
+                  href={`https://github.com/data-driven-forms/react-forms/tree/master/packages/react-renderer-demo/src/examples/${source}.js`}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(event) => event.stopPropagation()}
@@ -237,13 +262,11 @@ const CodeExample = ({ source, mode, mapper }) => {
 
 CodeExample.propTypes = {
   source: PropTypes.string.isRequired,
-  mode: PropTypes.oneOf(['code', 'preview']),
-  mapper: PropTypes.oneOf(['pf4', 'mui'])
+  mode: PropTypes.oneOf(['code', 'preview'])
 };
 
 CodeExample.defaultProps = {
-  mode: 'code',
-  mapper: 'pf4'
+  mode: 'code'
 };
 
 export default CodeExample;
