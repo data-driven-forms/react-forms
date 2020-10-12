@@ -14,6 +14,7 @@ This a custom component. OnSubmit will send only values from visited steps.
 |ButtonSetProps|object|{}|Props passed to a div wrapping buttons|
 |ProgressIndicatorProps|object|{}|Props passed to [ProgressIndicator component](https://react.carbondesignsystem.com/?path=/story/progressindicator--default)|
 |vertical|boolean|false|Will make wizard vertical|
+|WizardBodyProps|object|{}|Passed to an element wrapping fields in wizard. In a vertical wizard the element is a div, when horizontal, it's [Column component](https://react.carbondesignsystem.com/?path=/docs/grid--auto-columns)|
 
 ### Default buttonLabels
 

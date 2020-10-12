@@ -39,32 +39,38 @@ const defaultLabels = {
   next: 'Next'
 };
 
-const Layout = ({ nav, fields }) => (
+const Layout = ({ nav, fields, WizardBodyProps }) => (
   <React.Fragment>
     {nav}
-    {fields}
+    <div {...WizardBodyProps} className={clsx('ddorg__carbon-wizard-body', WizardBodyProps?.className)}>
+      {fields}
+    </div>
   </React.Fragment>
 );
 
 Layout.propTypes = {
   nav: PropTypes.node,
-  fields: PropTypes.node
+  fields: PropTypes.node,
+  WizardBodyProps: PropTypes.object
 };
 
-const VerticalLayout = ({ nav, fields }) => (
+const VerticalLayout = ({ nav, fields, WizardBodyProps }) => (
   <Grid narrow>
     <Row>
       <Column sm={1} md={2} lg={3}>
         {nav}
       </Column>
-      <Column>{fields}</Column>
+      <Column {...WizardBodyProps} className={clsx('ddorg__carbon-wizard-body', WizardBodyProps?.className)}>
+        {fields}
+      </Column>
     </Row>
   </Grid>
 );
 
 VerticalLayout.propTypes = {
   nav: PropTypes.node,
-  fields: PropTypes.node
+  fields: PropTypes.node,
+  WizardBodyProps: PropTypes.object
 };
 
 const WizardInternal = ({
@@ -76,6 +82,7 @@ const WizardInternal = ({
   SubmitButtonProps,
   ProgressIndicatorProps,
   vertical,
+  WizardBodyProps,
   ...props
 }) => {
   const { formOptions, currentStep, handlePrev, onKeyDown, handleNext, activeStepIndex, selectNext, jumpToStep } = useContext(WizardContext);
@@ -94,7 +101,7 @@ const WizardInternal = ({
 
   return (
     <div onKeyDown={onKeyDown} {...props}>
-      <WizardLayout nav={nav ? nav : null} fields={fields} />
+      <WizardLayout nav={nav ? nav : null} fields={fields} WizardBodyProps={WizardBodyProps} />
       <FormSpy>
         {({ invalid, validating, submitting }) => (
           <div {...ButtonSetProps} className={clsx('ddorg__carbon-wizard-button-set', ButtonSetProps.className)}>
@@ -141,7 +148,8 @@ WizardInternal.propTypes = {
   SubmitButtonProps: PropTypes.object,
   ButtonSetProps: PropTypes.object,
   ProgressIndicatorProps: PropTypes.object,
-  vertical: PropTypes.bool
+  vertical: PropTypes.bool,
+  WizardBodyProps: PropTypes.object
 };
 
 WizardInternal.defaultProps = {
@@ -149,7 +157,8 @@ WizardInternal.defaultProps = {
   NextButtonProps: {},
   SubmitButtonProps: {},
   ButtonSetProps: {},
-  ProgressIndicatorProps: {}
+  ProgressIndicatorProps: {},
+  WizardBodyProps: {}
 };
 
 const Wizard = (props) => <WizardCommon Wizard={WizardInternal} {...props} />;
