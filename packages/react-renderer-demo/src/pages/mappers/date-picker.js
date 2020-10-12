@@ -50,7 +50,6 @@ export default () => {
         variants={variants}
         linkText="Date picker"
       />
-      {activeMapper === 'mui' && <DatePickerText />}
     </Fragment>
   );
 };
