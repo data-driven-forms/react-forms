@@ -28,7 +28,6 @@ export default () => {
         variants={variants}
         linkText="Time picker"
       />
-      {activeMapper === 'mui' && <TimePickerText />}
     </Fragment>
   );
 };

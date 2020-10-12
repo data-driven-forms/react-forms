@@ -86,31 +86,13 @@ const mapperLinks = {
 const mapper = (activeMapper, component) => (mapperLinks[activeMapper] && mapperLinks[activeMapper][component]) || component;
 
 const GenericMuiComponent = ({ activeMapper = 'mui', component }) => (
-  <React.Fragment>
-    <Typography variant="body1" gutterBottom>
-      This component also accepts all other original props, please see{' '}
-      <a
-        target="__blank"
-        rel="noreferrer noopener"
-        href={`${docsLinks[activeMapper]}${activeMapper !== 'pf3' ? mapper(activeMapper, component) : ''}`}
-      >
-        here
-      </a>
-      !
-    </Typography>
-
-    {activeMapper === 'mui'
-      ? (component === 'date-picker' || component === 'time-picker') && (
-          <Typography variant="body1">
-            This component also use API from material-ui-pickers, please see{' '}
-            <a target="__blank" rel="noreferrer noopener" href={`https://material-ui-pickers.firebaseapp.com/api/${component.replace('-', '')}`}>
-              here
-            </a>
-            !
-          </Typography>
-        )
-      : ''}
-  </React.Fragment>
+  <Typography variant="body1" gutterBottom>
+    This component also accepts all other original props, please see{' '}
+    <a target="__blank" rel="noreferrer noopener" href={`${docsLinks[activeMapper]}${activeMapper !== 'pf3' ? mapper(activeMapper, component) : ''}`}>
+      here
+    </a>
+    !
+  </Typography>
 );
 
 GenericMuiComponent.propTypes = {
