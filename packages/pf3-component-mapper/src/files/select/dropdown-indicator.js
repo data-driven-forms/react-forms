@@ -6,13 +6,13 @@ const DropdownIndicator = ({ selectProps: { isFetching, value } }) =>
   isFetching ? (
     <i
       className={clsx('ddorg__pf3-component-mapper__select__dropdown-indicator fa fa-circle-o-notch spin', {
-        placeholder: value.length === 0
+        placeholder: value?.length === 0
       })}
     />
   ) : (
     <i
       className={clsx('ddorg__pf3-component-mapper__select__dropdown-indicator fa fa-angle-down', {
-        placeholder: value.length === 0
+        placeholder: value?.length === 0
       })}
     />
   );
