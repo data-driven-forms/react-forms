@@ -1,4 +1,4 @@
-export const carbonHtml = `
+export const html = `
 <html>
   <head>
     <!-- Carbon stylesheets -->
@@ -10,7 +10,7 @@ export const carbonHtml = `
 </html>
 `;
 
-export const carbonCode = `import React, { Component } from 'react';
+export const code = `import React, { Component } from 'react';
 import { render } from 'react-dom';
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import FormTemplate from '@data-driven-forms/carbon-component-mapper/dist/cjs/form-template';
@@ -35,7 +35,7 @@ class App extends Component {
 
 render(<App />, document.getElementById('root'));`;
 
-export const carbonWizardCode = `import React, { Component } from 'react';
+export const wizardCode = `import React, { Component } from 'react';
 import { render } from 'react-dom';
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import CarbonFormTemplate from '@data-driven-forms/carbon-component-mapper/dist/cjs/form-template';
@@ -62,7 +62,7 @@ class App extends Component {
 
 render(<App />, document.getElementById('root'));`;
 
-export const carbonDependencies = {
+export const dependencies = {
   react: '^16.12.0',
   'react-dom': '^16.12.0',
   '@data-driven-forms/react-form-renderer': 'latest',
