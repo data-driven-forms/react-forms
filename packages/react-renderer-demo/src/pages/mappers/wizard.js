@@ -1,7 +1,5 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ComponentText from '@docs/components/component-example-text';
-import WizardText from '@docs/doc-components/wizard';
-import useActiveMapper from '@docs/hooks/use-active-mapper';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 import validatorTypes from '@data-driven-forms/react-form-renderer/dist/cjs/validator-types';
 
@@ -94,18 +92,4 @@ const variants = [
   }
 ];
 
-export default () => {
-  const activeMapper = useActiveMapper();
-  return (
-    <Fragment>
-      <ComponentText
-        activeMapper={activeMapper}
-        component={componentTypes.WIZARD}
-        schema={schema}
-        ContentText={WizardText}
-        variants={variants}
-        linkText="Wizard"
-      />
-    </Fragment>
-  );
-};
+export default () => <ComponentText schema={schema} variants={variants} linkText="Wizard" />;

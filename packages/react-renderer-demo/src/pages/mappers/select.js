@@ -1,8 +1,6 @@
 import React from 'react';
-import SelectText from '@docs/doc-components/select';
 import ComponentText from '@docs/components/component-example-text';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
-import useActiveMapper from '@docs/hooks/use-active-mapper';
 import baseFieldProps from '../../helpers/base-field-props';
 
 const schema = {
@@ -53,16 +51,4 @@ const variants = [
   }
 ];
 
-export default () => {
-  const activeMapper = useActiveMapper();
-  return (
-    <ComponentText
-      schema={schema}
-      component={componentTypes.SELECT}
-      activeMapper={activeMapper}
-      ContentText={SelectText}
-      variants={variants}
-      linkText="Select"
-    />
-  );
-};
+export default () => <ComponentText schema={schema} variants={variants} linkText="Select" />;

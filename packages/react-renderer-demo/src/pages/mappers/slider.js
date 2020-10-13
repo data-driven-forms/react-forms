@@ -1,7 +1,5 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ComponentText from '@docs/components/component-example-text';
-import Slider from '@docs/doc-components/slider';
-import useActiveMapper from '@docs/hooks/use-active-mapper';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 
 const schema = {
@@ -49,18 +47,4 @@ const variants = [
   }
 ];
 
-export default () => {
-  const activeMapper = useActiveMapper();
-  return (
-    <Fragment>
-      <ComponentText
-        activeMapper={activeMapper}
-        component={componentTypes.SLIDER}
-        schema={schema}
-        ContentText={Slider}
-        variants={variants}
-        linkText="Slider"
-      />
-    </Fragment>
-  );
-};
+export default () => <ComponentText schema={schema} variants={variants} linkText="Slider" />;

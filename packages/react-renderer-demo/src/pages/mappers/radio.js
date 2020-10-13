@@ -1,7 +1,5 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ComponentText from '@docs/components/component-example-text';
-import GenericMuiComponent from '@docs/doc-components/radio';
-import useActiveMapper from '@docs/hooks/use-active-mapper';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 import baseFieldProps from '../../helpers/base-field-props';
 
@@ -28,18 +26,4 @@ const variants = [
   }
 ];
 
-export default () => {
-  const activeMapper = useActiveMapper();
-  return (
-    <Fragment>
-      <ComponentText
-        activeMapper={activeMapper}
-        component={componentTypes.RADIO}
-        schema={schema}
-        ContentText={GenericMuiComponent}
-        variants={variants}
-        linkText="Radio"
-      />
-    </Fragment>
-  );
-};
+export default () => <ComponentText schema={schema} variants={variants} linkText="Radio" />;
