@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import { baseExamples } from '@docs/components/navigation/examples-definitions';
 
 const useComponentExample = () => {
   const { query, pathname } = useRouter();
@@ -7,9 +6,7 @@ const useComponentExample = () => {
 
   const component = pathname.split('/').pop();
 
-  const baseStructure = baseExamples.find((item) => item.component === component);
-
-  return [component, baseStructure, activeMapper];
+  return [activeMapper, component];
 };
 
 export default useComponentExample;
