@@ -12,23 +12,38 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const SubForm = ({ fields, title, description, component, ...rest }) => {
+const SubForm = ({
+  fields,
+  title,
+  description,
+  component,
+  TitleGridProps,
+  TitleProps,
+  DescriptionProps,
+  DescriptionGridProps,
+  ItemsGridProps,
+  ...rest
+}) => {
   const { renderForm } = useFormApi();
   const classes = useStyles();
 
   return (
     <Grid item xs={12} container className={classes.grid} {...rest}>
       {title && (
-        <Grid item xs={12}>
-          <Typography variant="h5">{title}</Typography>
+        <Grid item xs={12} {...TitleGridProps}>
+          <Typography variant="h5" {...TitleProps}>
+            {title}
+          </Typography>
         </Grid>
       )}
       {description && (
-        <Grid item xs={12}>
-          <Typography paragraph>{description}</Typography>
+        <Grid item xs={12} {...DescriptionGridProps}>
+          <Typography paragraph {...DescriptionProps}>
+            {description}
+          </Typography>
         </Grid>
       )}
-      <Grid item xs={12} container>
+      <Grid item xs={12} container {...ItemsGridProps}>
         {renderForm(fields)}
       </Grid>
     </Grid>
@@ -39,7 +54,12 @@ SubForm.propTypes = {
   fields: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
   title: PropTypes.node,
   description: PropTypes.node,
-  component: PropTypes.any
+  component: PropTypes.any,
+  TitleGridProps: PropTypes.object,
+  TitleProps: PropTypes.object,
+  DescriptionProps: PropTypes.object,
+  DescriptionGridProps: PropTypes.object,
+  ItemsGridProps: PropTypes.object
 };
 
 export default SubForm;
