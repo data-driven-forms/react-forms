@@ -7,6 +7,8 @@ import {
   Bullseye,
   Button,
   ButtonVariant,
+  Flex,
+  FlexItem,
   Grid,
   GridItem,
   Text,
@@ -203,33 +205,33 @@ const DualList = ({
           </Grid>
         </GridItem>
         <GridItem md={2}>
-          <Bullseye>
-            <Grid>
-              <GridItem md={12} sm={3}>
+          <Bullseye className="ddorg__pf4-component-mapper__dual-list-select-buttons">
+            <Flex direction={{ md: 'column', sm: 'row' }}>
+              <FlexItem>
                 <Button disabled={leftValues.length === 0} onClick={handleMoveRight} title={moveRightTitle} variant="plain">
                   <AngleRightIcon size="md" />
                 </Button>
-              </GridItem>
+              </FlexItem>
               {allToRight && (
-                <GridItem md={12} sm={3}>
+                <FlexItem>
                   <Button disabled={leftValues.length === 0} onClick={handleClearLeftValues} title={moveAllRightTitle} variant="plain">
                     <AngleDoubleRightIcon size="md" />
                   </Button>
-                </GridItem>
+                </FlexItem>
               )}
               {allToLeft && (
-                <GridItem md={12} sm={3}>
+                <FlexItem>
                   <Button disabled={rightValues.length === 0} onClick={handleClearRightValues} title={moveAllLeftTitle} variant="plain">
                     <AngleDoubleLeftIcon size="md" />
                   </Button>
-                </GridItem>
+                </FlexItem>
               )}
-              <GridItem md={12} sm={3}>
+              <FlexItem>
                 <Button disabled={rightValues.length === 0} onClick={handleMoveLeft} title={moveLeftTitle} variant="plain">
                   <AngleLeftIcon size="md" />
                 </Button>
-              </GridItem>
-            </Grid>
+              </FlexItem>
+            </Flex>
           </Bullseye>
         </GridItem>
         <GridItem md={5}>
