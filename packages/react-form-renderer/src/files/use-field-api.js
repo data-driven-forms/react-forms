@@ -1,4 +1,4 @@
-import { useEffect, useContext, useRef, useReducer } from 'react';
+import { useEffect, useContext, useRef, useReducer, useState } from 'react';
 import { useField } from 'react-final-form';
 import enhancedOnChange from '../form-renderer/enhanced-on-change';
 import RendererContext from './renderer-context';
@@ -66,8 +66,11 @@ const createFieldProps = (name, formOptions) => {
   };
 };
 
-const useFieldApi = ({ name, initializeOnMount, component, render, validate, resolveProps, ...props }) => {
+const useFieldApi = ({ name, initializeOnMount, component, render, validate, resolveProps, useWarnings, ...props }) => {
   const { validatorMapper, formOptions } = useContext(RendererContext);
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [warning, setWarning] = useWarnings ? useState() : [undefined, () => undefined];
 
   const { validate: resolvePropsValidate, ...resolvedProps } = resolveProps
     ? resolveProps(props, createFieldProps(name, formOptions), formOptions) || {}
@@ -91,7 +94,26 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
     ...(stateValidate ? { validate: stateValidate } : {})
   };
 
-  const fieldProps = useField(name, enhancedProps);
+  const fieldProps = useField(name, {
+    ...enhancedProps,
+    ...(useWarnings && {
+      validate: async (...args) => {
+        warning && setWarning(undefined);
+
+        const result = await enhancedProps.validate(...args);
+
+        if (result?.type === 'warning') {
+          if (warning !== result.error) {
+            setWarning(result.error);
+          }
+
+          return;
+        }
+
+        return result;
+      }
+    })
+  });
 
   /** Reinitilize type */
   useEffect(() => {
@@ -193,7 +215,13 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
   return {
     ...cleanProps,
     ...fieldProps,
-    ...(arrayValidator ? { arrayValidator } : {}),
+    ...(arrayValidator && { arrayValidator }),
+    ...(useWarnings && {
+      meta: {
+        ...fieldProps.meta,
+        warning
+      }
+    }),
     input: {
       ...fieldProps.input,
       value:
