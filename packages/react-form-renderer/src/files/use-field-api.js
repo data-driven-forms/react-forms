@@ -21,16 +21,34 @@ const calculateArrayValidator = (props, validate, component, validatorMapper) =>
   }
 };
 
-const calculateValidate = (props, validate, component, validatorMapper) => {
+const calculateValidate = (props, validate, component, validatorMapper, setWarning, useWarnings) => {
   if ((validate || props.dataType) && componentTypes.FIELD_ARRAY !== component) {
-    return composeValidators(getValidate(validate, props.dataType, validatorMapper));
+    const validateFn = composeValidators(getValidate(validate, props.dataType, validatorMapper));
+
+    if (useWarnings) {
+      return async (...args) => {
+        setWarning(undefined);
+
+        const result = await validateFn(...args);
+
+        if (result?.type === 'warning') {
+          setWarning(result.error);
+
+          return;
+        }
+
+        return result;
+      };
+    }
+
+    return validateFn;
   }
 };
 
-const init = ({ props, validate, component, validatorMapper }) => ({
+const init = ({ props, validate, component, validatorMapper, setWarning, useWarnings }) => ({
   initialValue: calculateInitialValue(props),
   arrayValidator: calculateArrayValidator(props, validate, component, validatorMapper),
-  validate: calculateValidate(props, validate, component, validatorMapper),
+  validate: calculateValidate(props, validate, component, validatorMapper, setWarning, useWarnings),
   type: assignSpecialType(component)
 });
 
@@ -68,9 +86,7 @@ const createFieldProps = (name, formOptions) => {
 
 const useFieldApi = ({ name, initializeOnMount, component, render, validate, resolveProps, useWarnings, convertWarningToError, ...props }) => {
   const { validatorMapper, formOptions } = useContext(RendererContext);
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [warning, setWarning] = useWarnings ? useState() : [undefined, () => undefined];
+  const [warning, setWarning] = useState();
 
   const { validate: resolvePropsValidate, ...resolvedProps } = resolveProps
     ? resolveProps(props, createFieldProps(name, formOptions), formOptions) || {}
@@ -80,7 +96,7 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
 
   const [{ type, initialValue, validate: stateValidate, arrayValidator }, dispatch] = useReducer(
     reducer,
-    { props: { ...props, ...resolvedProps }, validate: finalValidate, component, validatorMapper },
+    { props: { ...props, ...resolvedProps }, validate: finalValidate, component, validatorMapper, setWarning, useWarnings },
     init
   );
 
@@ -94,26 +110,7 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
     ...(stateValidate ? { validate: stateValidate } : {})
   };
 
-  const fieldProps = useField(name, {
-    ...enhancedProps,
-    ...(useWarnings && {
-      validate: async (...args) => {
-        warning && setWarning(undefined);
-
-        const result = await enhancedProps.validate(...args);
-
-        if (result?.type === 'warning') {
-          if (warning !== result.error) {
-            setWarning(result.error);
-          }
-
-          return;
-        }
-
-        return result;
-      }
-    })
-  });
+  const fieldProps = useField(name, enhancedProps);
 
   /** Reinitilize type */
   useEffect(() => {
@@ -130,7 +127,7 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
     if (mounted.current) {
       dispatch({
         type: 'setValidators',
-        validate: calculateValidate(enhancedProps, finalValidate, component, validatorMapper),
+        validate: calculateValidate(enhancedProps, finalValidate, component, validatorMapper, setWarning, useWarnings),
         arrayValidator: calculateArrayValidator(enhancedProps, finalValidate, component, validatorMapper)
       });
     }
