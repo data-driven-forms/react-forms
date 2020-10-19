@@ -8,7 +8,7 @@ If you don't want to block the form from submitting when a validator fails, you 
 
 ## 1. Enable warnings
 
-In the field, set `useWarnings` to `true`. This feature can impact performace, so it was made to be opt-in. Please, do not change this value run-time as it could introduce bugs because of React hooks ordering.
+In the field, set `useWarnings` to `true`.
 
 ```jsx
 {
