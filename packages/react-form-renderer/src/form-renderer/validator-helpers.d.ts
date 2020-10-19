@@ -5,6 +5,8 @@ import { DataType } from "../files/data-types";
 
 export type ValidatorFunction = (value: any, allValues: object) => ReactNode | undefined;
 
+export type convertToWarning = (validator: ValidatorType) => ValidatorFunction;
+
 export function prepareValidator(
   validator: ValidatorFunction | ValidatorType,
   mapper: ValidatorMapper): ValidatorFunction;
