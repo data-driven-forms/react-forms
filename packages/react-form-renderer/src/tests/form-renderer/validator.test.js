@@ -110,6 +110,34 @@ describe('FormRenderer validator', () => {
       expect(wrapper.find('#warning').text()).toEqual('Required');
     });
 
+    it('should convert warning to error', async () => {
+      await act(async () => {
+        wrapper = mount(
+          <FormRenderer
+            FormTemplate={FormTemplate}
+            componentMapper={{
+              [componentTypes.TEXT_FIELD]: TextField
+            }}
+            schema={{
+              fields: [
+                {
+                  useWarnings: true,
+                  convertWarningToError: true,
+                  component: 'text-field',
+                  name: NAME,
+                  validate: [{ type: 'required', warning: true }]
+                }
+              ]
+            }}
+            onSubmit={jest.fn()}
+          />
+        );
+      });
+      wrapper.update();
+
+      expect(wrapper.find('#error').text()).toEqual('Required');
+    });
+
     it('should convert function validator to warning', async () => {
       const ERROR = 'SOME-ERROR';
 

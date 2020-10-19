@@ -66,7 +66,7 @@ const createFieldProps = (name, formOptions) => {
   };
 };
 
-const useFieldApi = ({ name, initializeOnMount, component, render, validate, resolveProps, useWarnings, ...props }) => {
+const useFieldApi = ({ name, initializeOnMount, component, render, validate, resolveProps, useWarnings, convertWarningToError, ...props }) => {
   const { validatorMapper, formOptions } = useContext(RendererContext);
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -219,7 +219,8 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
     ...(useWarnings && {
       meta: {
         ...fieldProps.meta,
-        warning
+        warning,
+        ...(convertWarningToError && { error: warning })
       }
     }),
     input: {
