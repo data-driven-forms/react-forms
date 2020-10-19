@@ -17,11 +17,15 @@ export interface UseFieldApiComponentConfig extends UseFieldConfig<any>  {
   name: string;
 }
 
+export interface Meta<FieldValue> extends FieldMetaState<FieldValue> {
+  warning?: any;
+}
+
 export interface UseFieldApiProps<
  FieldValue,
 T extends HTMLElement = HTMLElement> extends AnyObject {
   input: FieldInputProps<FieldValue, T>;
-  meta: FieldMetaState<FieldValue>;
+  meta: Meta<FieldValue>;
 }
 
 export default function<T = any>(options: UseFieldApiConfig): UseFieldApiProps<T>;
