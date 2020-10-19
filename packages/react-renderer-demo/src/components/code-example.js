@@ -6,10 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
 import CodeIcon from '@material-ui/icons/Code';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
 import PropTypes from 'prop-types';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Paper from '@material-ui/core/Paper';
 import clsx from 'clsx';
 import grey from '@material-ui/core/colors/grey';
@@ -82,13 +82,13 @@ const useStyles = makeStyles((theme) => ({
   componentPanel: {
     padding: 16
   },
-  expansionPanel: {
+  accordion: {
     border: 'none',
     boxShadow: 'none',
     background: 'none',
     padding: 0
   },
-  expansionPanelSummary: {
+  accordionSummary: {
     padding: 0
   }
 }));
@@ -184,9 +184,9 @@ const CodeExample = ({ source, mode }) => {
     return (
       <Grid container spacing={0} className={clsx('DocRawComponent', classes.container)}>
         <Grid item xs={12}>
-          <ExpansionPanel className={classes.expansionPanel}>
-            <ExpansionPanelSummary
-              className={classes.expansionPanelSummary}
+          <Accordion className={classes.accordion}>
+            <AccordionSummary
+              className={classes.accordionSummary}
               expandIcon={
                 <Tooltip title="Expand code example">
                   <IconButton>
@@ -222,11 +222,11 @@ const CodeExample = ({ source, mode }) => {
                   </Tooltip>
                 </Link>
               </Box>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails className={clsx(classes.expansionPanelDetail, classes.codeWrapper)}>
+            </AccordionSummary>
+            <AccordionDetails className={clsx(classes.accordionDetail, classes.codeWrapper)}>
               <CodeEditor value={codeSource} inExample />
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
+            </AccordionDetails>
+          </Accordion>
         </Grid>
         {Component && (
           <Grid className={classes.formContainer} item xs={12}>
