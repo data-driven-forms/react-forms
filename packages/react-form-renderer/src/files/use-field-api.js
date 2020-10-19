@@ -1,4 +1,4 @@
-import { useEffect, useContext, useRef, useReducer } from 'react';
+import { useEffect, useContext, useRef, useReducer, useState } from 'react';
 import { useField } from 'react-final-form';
 import enhancedOnChange from '../form-renderer/enhanced-on-change';
 import RendererContext from './renderer-context';
@@ -21,16 +21,34 @@ const calculateArrayValidator = (props, validate, component, validatorMapper) =>
   }
 };
 
-const calculateValidate = (props, validate, component, validatorMapper) => {
+const calculateValidate = (props, validate, component, validatorMapper, setWarning, useWarnings) => {
   if ((validate || props.dataType) && componentTypes.FIELD_ARRAY !== component) {
-    return composeValidators(getValidate(validate, props.dataType, validatorMapper));
+    const validateFn = composeValidators(getValidate(validate, props.dataType, validatorMapper));
+
+    if (useWarnings) {
+      return async (...args) => {
+        setWarning(undefined);
+
+        const result = await validateFn(...args);
+
+        if (result?.type === 'warning') {
+          setWarning(result.error);
+
+          return;
+        }
+
+        return result;
+      };
+    }
+
+    return validateFn;
   }
 };
 
-const init = ({ props, validate, component, validatorMapper }) => ({
+const init = ({ props, validate, component, validatorMapper, setWarning, useWarnings }) => ({
   initialValue: calculateInitialValue(props),
   arrayValidator: calculateArrayValidator(props, validate, component, validatorMapper),
-  validate: calculateValidate(props, validate, component, validatorMapper),
+  validate: calculateValidate(props, validate, component, validatorMapper, setWarning, useWarnings),
   type: assignSpecialType(component)
 });
 
@@ -66,8 +84,9 @@ const createFieldProps = (name, formOptions) => {
   };
 };
 
-const useFieldApi = ({ name, initializeOnMount, component, render, validate, resolveProps, ...props }) => {
+const useFieldApi = ({ name, initializeOnMount, component, render, validate, resolveProps, useWarnings, ...props }) => {
   const { validatorMapper, formOptions } = useContext(RendererContext);
+  const [warning, setWarning] = useState();
 
   const { validate: resolvePropsValidate, ...resolvedProps } = resolveProps
     ? resolveProps(props, createFieldProps(name, formOptions), formOptions) || {}
@@ -77,7 +96,7 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
 
   const [{ type, initialValue, validate: stateValidate, arrayValidator }, dispatch] = useReducer(
     reducer,
-    { props: { ...props, ...resolvedProps }, validate: finalValidate, component, validatorMapper },
+    { props: { ...props, ...resolvedProps }, validate: finalValidate, component, validatorMapper, setWarning, useWarnings },
     init
   );
 
@@ -108,7 +127,7 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
     if (mounted.current) {
       dispatch({
         type: 'setValidators',
-        validate: calculateValidate(enhancedProps, finalValidate, component, validatorMapper),
+        validate: calculateValidate(enhancedProps, finalValidate, component, validatorMapper, setWarning, useWarnings),
         arrayValidator: calculateArrayValidator(enhancedProps, finalValidate, component, validatorMapper)
       });
     }
@@ -193,7 +212,13 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
   return {
     ...cleanProps,
     ...fieldProps,
-    ...(arrayValidator ? { arrayValidator } : {}),
+    ...(arrayValidator && { arrayValidator }),
+    ...(useWarnings && {
+      meta: {
+        ...fieldProps.meta,
+        warning
+      }
+    }),
     input: {
       ...fieldProps.input,
       value:

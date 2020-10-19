@@ -2,8 +2,9 @@ import { ValidatorType } from "../files/use-field-api";
 import { ReactNode } from "react";
 import { ValidatorMapper } from "../files/validator-mapper";
 import { DataType } from "../files/data-types";
+import { ValidatorFunction } from "../files/validators";
 
-export type ValidatorFunction = (value: any, allValues: object) => ReactNode | undefined;
+export type convertToWarning = (validator: ValidatorType) => ValidatorFunction;
 
 export function prepareValidator(
   validator: ValidatorFunction | ValidatorType,
