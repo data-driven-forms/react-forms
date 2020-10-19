@@ -5,6 +5,10 @@ const composeValidators = (validators = []) => (value, allValues, meta) => {
       return error;
     }
 
+    if (typeof validator !== 'function') {
+      return undefined;
+    }
+
     return validator(value, allValues, meta);
   };
 
