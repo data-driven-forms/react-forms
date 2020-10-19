@@ -58,18 +58,4 @@ const TextFieldWarning = (props) => {
 };
 ```
 
-### Convert to error
-
-By default, Data Driven Forms mappers are not supporting showing warnings. However you can convert the warning into an error - set `convertWarningToError` to `true`. This will replace `meta.error` with `meta.warning`, but `valid` etc. will be unchanged.
-
-```jsx
-{
-    name: 'warning-as-error',
-    component: 'text-field',
-    useWarnings: true,
-    convertWarningToError: true,
-    validate: [{type: 'required', warning: true}]
-}
-```
-
 </DocPage>

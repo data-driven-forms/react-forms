@@ -84,7 +84,7 @@ const createFieldProps = (name, formOptions) => {
   };
 };
 
-const useFieldApi = ({ name, initializeOnMount, component, render, validate, resolveProps, useWarnings, convertWarningToError, ...props }) => {
+const useFieldApi = ({ name, initializeOnMount, component, render, validate, resolveProps, useWarnings, ...props }) => {
   const { validatorMapper, formOptions } = useContext(RendererContext);
   const [warning, setWarning] = useState();
 
@@ -216,8 +216,7 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
     ...(useWarnings && {
       meta: {
         ...fieldProps.meta,
-        warning,
-        ...(convertWarningToError && { error: warning })
+        warning
       }
     }),
     input: {

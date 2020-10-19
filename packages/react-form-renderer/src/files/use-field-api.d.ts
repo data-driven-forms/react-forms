@@ -11,7 +11,6 @@ export interface UseFieldApiConfig extends AnyObject {
   name: string;
   validate?: ValidatorType[];
   useWarnings?: boolean;
-  convertWarningToError?: boolean;
 }
 export interface UseFieldApiComponentConfig extends UseFieldConfig<any>  {
   name: string;
