@@ -4,7 +4,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import Highlight, { defaultProps } from 'prism-react-renderer/';
 import ghTheme from 'prism-react-renderer/themes/github';
 import vsTheme from 'prism-react-renderer/themes/vsDark';
-import { Select } from '@material-ui/core';
+import Select from '@material-ui/core/Select';
 import tranformImports from './transform-imports';
 
 const useStyles = makeStyles({
