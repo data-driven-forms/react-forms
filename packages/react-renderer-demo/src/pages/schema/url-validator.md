@@ -7,7 +7,7 @@ import CodeExample from '@docs/code-example';
 
 We are using modified redux-form-validators amazing [implementation](https://github.com/gtournie/redux-form-validators#url) of URL validator.
 
-Please follow their docs to get all possible options.
+Please follow their docs to see all possible options.
 
 ## Example
 
