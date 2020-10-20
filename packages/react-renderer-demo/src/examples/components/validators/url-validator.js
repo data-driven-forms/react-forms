@@ -49,10 +49,6 @@ const schema = {
   ]
 };
 
-const UrlValidators = () => (
-  <div>
-    <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
-  </div>
-);
+const UrlValidators = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
 
 export default UrlValidators;

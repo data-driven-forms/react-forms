@@ -34,9 +34,7 @@ const schema = {
 };
 
 const NumberValueValidators = () => (
-  <div>
-    <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
-  </div>
+  <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
 );
 
 export default NumberValueValidators;
