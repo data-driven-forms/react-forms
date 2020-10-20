@@ -45,7 +45,7 @@
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.12.0",
-    "patternfly-react": "^2.39.16",
+    "patternfly-react": "^2.39.17",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "regenerator-runtime": "^0.12.1",
@@ -78,7 +78,7 @@
   "dependencies": {
     "clsx": "^1.0.4",
     "prop-types": "^15.7.2",
-    "react-day-picker": "^7.4.8",
+    "react-day-picker": "~7.3.2",
     "react-select": "^3.0.8"
   },
   "resolutions": {
