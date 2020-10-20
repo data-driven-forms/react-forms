@@ -35,15 +35,13 @@ const schemaValidatorMapper = {
 };
 
 const SchemaValidationExample = () => (
-  <div>
-    <FormRenderer
-      FormTemplate={FormTemplate}
-      componentMapper={componentMapper}
-      schema={schema}
-      onSubmit={console.log}
-      schemaValidatorMapper={schemaValidatorMapper}
-    />
-  </div>
+  <FormRenderer
+    FormTemplate={FormTemplate}
+    componentMapper={componentMapper}
+    schema={schema}
+    onSubmit={console.log}
+    schemaValidatorMapper={schemaValidatorMapper}
+  />
 );
 
 export default SchemaValidationExample;

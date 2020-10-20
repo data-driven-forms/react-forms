@@ -33,9 +33,7 @@ const validate = (values) => {
 };
 
 const RecordLevelValidator = () => (
-  <div>
-    <FormRenderer validate={validate} FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
-  </div>
+  <FormRenderer validate={validate} FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
 );
 
 export default RecordLevelValidator;

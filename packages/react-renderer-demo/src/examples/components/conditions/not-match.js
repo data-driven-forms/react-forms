@@ -30,10 +30,6 @@ const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField
 };
 
-const NotMatch = () => (
-  <div>
-    <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
-  </div>
-);
+const NotMatch = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
 
 export default NotMatch;

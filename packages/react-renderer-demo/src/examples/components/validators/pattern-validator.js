@@ -39,10 +39,6 @@ const schema = {
   ]
 };
 
-const PatternValidators = () => (
-  <div>
-    <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
-  </div>
-);
+const PatternValidators = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
 
 export default PatternValidators;
