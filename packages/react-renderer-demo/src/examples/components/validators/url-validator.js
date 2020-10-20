@@ -10,15 +10,6 @@ const componentMapper = {
 };
 const schema = {
   title: 'Start typing',
-  description: (
-    <span>
-      We are using modified redux-form-validators amazing implementation of &nbsp;
-      <a href="https://github.com/gtournie/redux-form-validators#url" rel="noopener noreferrer" target="_blank">
-        URL validator
-      </a>
-      .
-    </span>
-  ),
   fields: [
     {
       component: componentTypes.TEXT_FIELD,
