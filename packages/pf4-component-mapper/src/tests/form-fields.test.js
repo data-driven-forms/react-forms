@@ -1,4 +1,5 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import toJson from 'enzyme-to-json';
 import { FormGroup, Radio as PF4Radio } from '@patternfly/react-core';
 import { mount, shallow } from 'enzyme';
@@ -372,22 +373,39 @@ describe('FormFields', () => {
             ).toEqual(description);
           });
 
-          it('renders with error and helperText', () => {
-            const errorFields = {
-              ...field,
-              helperText,
-              validate: [{ type: validatorTypes.REQUIRED }]
-            };
-            const wrapper = mount(<RendererWrapper schema={{ fields: [errorFields] }} />);
-            wrapper.find('form').simulate('submit');
+          if (![componentTypes.SELECT, componentTypes.SLIDER, componentTypes.RADIO].includes(component)) {
+            it('renders with warning and helperText', async () => {
+              const errorFields = {
+                ...field,
+                helperText,
+                id: 'warning-field',
+                validate: [() => ({ type: 'warning', error: errorText })],
+                useWarnings: true
+              };
 
-            expect(
-              wrapper
-                .find('.pf-m-error')
-                .last()
-                .text()
-            ).toEqual(errorText);
-          });
+              let wrapper;
+
+              await act(async () => {
+                wrapper = mount(<RendererWrapper schema={{ fields: [errorFields] }} />);
+              });
+              wrapper.update();
+
+              await act(async () => {
+                wrapper
+                  .find('#warning-field')
+                  .last()
+                  .simulate('blur');
+              });
+              wrapper.update();
+
+              expect(
+                wrapper
+                  .find('.pf-m-warning')
+                  .last()
+                  .text()
+              ).toEqual(errorText);
+            });
+          }
 
           it('renders isRequired', () => {
             const requiredField = {

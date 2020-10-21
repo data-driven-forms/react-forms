@@ -40,7 +40,7 @@ exports[`FormFields should render Checkbox correctly 1`] = `
             }
           }
         >
-          <Component
+          <FormGroup
             fieldId="someIdKey"
             label={false}
             validated="default"
@@ -83,7 +83,7 @@ exports[`FormFields should render Checkbox correctly 1`] = `
                 </Checkbox>
               </div>
             </div>
-          </Component>
+          </FormGroup>
         </FormGroup>
       </SingleCheckbox>
     </Checkbox>
@@ -223,7 +223,7 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
               }
               showError={false}
             >
-              <Component
+              <FormGroup
                 fieldId="Name of the field"
                 validated="default"
               >
@@ -706,7 +706,7 @@ exports[`FormFields should render Checkbox with options correctly 1`] = `
                     </SingleCheckbox>
                   </div>
                 </div>
-              </Component>
+              </FormGroup>
             </FormGroup>
           </Wrapper>
         </MultipleChoiceList>
@@ -751,7 +751,7 @@ exports[`FormFields should render DatePicker correctly 1`] = `
           }
         }
       >
-        <Component
+        <FormGroup
           fieldId="someIdKey"
           validated="default"
         >
@@ -777,6 +777,7 @@ exports[`FormFields should render DatePicker correctly 1`] = `
                   id="someIdKey"
                   innerRef={null}
                   isDisabled={false}
+                  isLeftTruncated={false}
                   isReadOnly={false}
                   isRequired={false}
                   name="Name of the field"
@@ -806,7 +807,7 @@ exports[`FormFields should render DatePicker correctly 1`] = `
               </ForwardRef>
             </div>
           </div>
-        </Component>
+        </FormGroup>
       </FormGroup>
     </DatePicker>
   </ReactFinalForm>
@@ -864,7 +865,7 @@ exports[`FormFields should render Radio correctly 1`] = `
           }
         }
       >
-        <Component
+        <FormGroup
           fieldId="someIdKey"
           validated="default"
         >
@@ -906,6 +907,9 @@ exports[`FormFields should render Radio correctly 1`] = `
                       aria-invalid={false}
                       checked={false}
                       className="pf-c-radio__input"
+                      data-ouia-component-id="OUIA-Generated-Radio-1"
+                      data-ouia-component-type="PF4/Radio"
+                      data-ouia-safe={true}
                       disabled={false}
                       id="Name of the field-1"
                       name="Name of the field"
@@ -956,6 +960,9 @@ exports[`FormFields should render Radio correctly 1`] = `
                       aria-invalid={false}
                       checked={false}
                       className="pf-c-radio__input"
+                      data-ouia-component-id="OUIA-Generated-Radio-2"
+                      data-ouia-component-type="PF4/Radio"
+                      data-ouia-safe={true}
                       disabled={false}
                       id="Name of the field-2"
                       name="Name of the field"
@@ -1006,6 +1013,9 @@ exports[`FormFields should render Radio correctly 1`] = `
                       aria-invalid={false}
                       checked={false}
                       className="pf-c-radio__input"
+                      data-ouia-component-id="OUIA-Generated-Radio-3"
+                      data-ouia-component-type="PF4/Radio"
+                      data-ouia-safe={true}
                       disabled={false}
                       id="Name of the field-3"
                       name="Name of the field"
@@ -1026,7 +1036,7 @@ exports[`FormFields should render Radio correctly 1`] = `
               </RadioOption>
             </div>
           </div>
-        </Component>
+        </FormGroup>
       </FormGroup>
     </Radio>
   </ReactFinalForm>
@@ -1127,7 +1137,7 @@ exports[`FormFields should render Switch correctly 1`] = `
           }
         }
       >
-        <Component
+        <FormGroup
           fieldId="someIdKey"
           label={false}
           validated="default"
@@ -1152,7 +1162,7 @@ exports[`FormFields should render Switch correctly 1`] = `
               >
                 <label
                   className="pf-c-switch"
-                  data-ouia-component-id={1}
+                  data-ouia-component-id="OUIA-Generated-Switch-1"
                   data-ouia-component-type="PF4/Switch"
                   data-ouia-safe={true}
                   htmlFor="someIdKey"
@@ -1194,7 +1204,6 @@ exports[`FormFields should render Switch correctly 1`] = `
                         >
                           <path
                             d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
-                            transform=""
                           />
                         </svg>
                       </CheckIcon>
@@ -1204,7 +1213,7 @@ exports[`FormFields should render Switch correctly 1`] = `
               </Switch>
             </div>
           </div>
-        </Component>
+        </FormGroup>
       </FormGroup>
     </Switch>
   </ReactFinalForm>
@@ -1246,7 +1255,7 @@ exports[`FormFields should render TextField correctly 1`] = `
           }
         }
       >
-        <Component
+        <FormGroup
           fieldId="someIdKey"
           validated="default"
         >
@@ -1271,6 +1280,7 @@ exports[`FormFields should render TextField correctly 1`] = `
                   id="someIdKey"
                   innerRef={null}
                   isDisabled={false}
+                  isLeftTruncated={false}
                   isReadOnly={false}
                   isRequired={false}
                   name="Name of the field"
@@ -1300,7 +1310,7 @@ exports[`FormFields should render TextField correctly 1`] = `
               </ForwardRef>
             </div>
           </div>
-        </Component>
+        </FormGroup>
       </FormGroup>
     </TextField>
   </ReactFinalForm>
@@ -1344,7 +1354,7 @@ exports[`FormFields should render TextField with description correctly 1`] = `
           }
         }
       >
-        <Component
+        <FormGroup
           fieldId="someIdKey"
           validated="default"
         >
@@ -1354,11 +1364,11 @@ exports[`FormFields should render TextField with description correctly 1`] = `
             <div
               className="pf-c-form__group-control"
             >
-              <Component>
+              <TextContent>
                 <div
                   className="pf-c-content"
                 >
-                  <Component
+                  <Text
                     component="small"
                   >
                     <small
@@ -1367,9 +1377,9 @@ exports[`FormFields should render TextField with description correctly 1`] = `
                     >
                       This is description
                     </small>
-                  </Component>
+                  </Text>
                 </div>
-              </Component>
+              </TextContent>
               <ForwardRef
                 id="someIdKey"
                 name="Name of the field"
@@ -1385,6 +1395,7 @@ exports[`FormFields should render TextField with description correctly 1`] = `
                   id="someIdKey"
                   innerRef={null}
                   isDisabled={false}
+                  isLeftTruncated={false}
                   isReadOnly={false}
                   isRequired={false}
                   name="Name of the field"
@@ -1414,7 +1425,7 @@ exports[`FormFields should render TextField with description correctly 1`] = `
               </ForwardRef>
             </div>
           </div>
-        </Component>
+        </FormGroup>
       </FormGroup>
     </TextField>
   </ReactFinalForm>
@@ -1455,7 +1466,7 @@ exports[`FormFields should render TextField without id correctly 1`] = `
           }
         }
       >
-        <Component
+        <FormGroup
           fieldId="Name of the field"
           validated="default"
         >
@@ -1480,6 +1491,7 @@ exports[`FormFields should render TextField without id correctly 1`] = `
                   id="Name of the field"
                   innerRef={null}
                   isDisabled={false}
+                  isLeftTruncated={false}
                   isReadOnly={false}
                   isRequired={false}
                   name="Name of the field"
@@ -1509,7 +1521,7 @@ exports[`FormFields should render TextField without id correctly 1`] = `
               </ForwardRef>
             </div>
           </div>
-        </Component>
+        </FormGroup>
       </FormGroup>
     </TextField>
   </ReactFinalForm>
@@ -1551,7 +1563,7 @@ exports[`FormFields should render Textarea correctly 1`] = `
           }
         }
       >
-        <Component
+        <FormGroup
           fieldId="someIdKey"
           validated="default"
         >
@@ -1589,7 +1601,7 @@ exports[`FormFields should render Textarea correctly 1`] = `
               </TextArea>
             </div>
           </div>
-        </Component>
+        </FormGroup>
       </FormGroup>
     </Textarea>
   </ReactFinalForm>
@@ -1631,7 +1643,7 @@ exports[`FormFields should render TimePicker correctly 1`] = `
           }
         }
       >
-        <Component
+        <FormGroup
           fieldId="someIdKey"
           validated="default"
         >
@@ -1657,6 +1669,7 @@ exports[`FormFields should render TimePicker correctly 1`] = `
                   id="someIdKey"
                   innerRef={null}
                   isDisabled={false}
+                  isLeftTruncated={false}
                   isReadOnly={false}
                   isRequired={false}
                   name="Name of the field"
@@ -1686,7 +1699,7 @@ exports[`FormFields should render TimePicker correctly 1`] = `
               </ForwardRef>
             </div>
           </div>
-        </Component>
+        </FormGroup>
       </FormGroup>
     </TimePicker>
   </ReactFinalForm>
@@ -1830,7 +1843,7 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
               }
               showError={false}
             >
-              <Component
+              <FormGroup
                 fieldId="Name of the field"
                 validated="default"
               >
@@ -2322,7 +2335,7 @@ exports[`FormFields should render disabled Checkbox with options correctly 1`] =
                     </SingleCheckbox>
                   </div>
                 </div>
-              </Component>
+              </FormGroup>
             </FormGroup>
           </Wrapper>
         </MultipleChoiceList>
@@ -2384,7 +2397,7 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
           }
         }
       >
-        <Component
+        <FormGroup
           fieldId="someIdKey"
           validated="default"
         >
@@ -2426,6 +2439,9 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
                       aria-invalid={false}
                       checked={false}
                       className="pf-c-radio__input"
+                      data-ouia-component-id="OUIA-Generated-Radio-4"
+                      data-ouia-component-type="PF4/Radio"
+                      data-ouia-safe={true}
                       disabled={false}
                       id="Name of the field-1"
                       name="Name of the field"
@@ -2476,6 +2492,9 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
                       aria-invalid={false}
                       checked={false}
                       className="pf-c-radio__input"
+                      data-ouia-component-id="OUIA-Generated-Radio-5"
+                      data-ouia-component-type="PF4/Radio"
+                      data-ouia-safe={true}
                       disabled={false}
                       id="Name of the field-2"
                       name="Name of the field"
@@ -2526,6 +2545,9 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
                       aria-invalid={false}
                       checked={false}
                       className="pf-c-radio__input"
+                      data-ouia-component-id="OUIA-Generated-Radio-6"
+                      data-ouia-component-type="PF4/Radio"
+                      data-ouia-safe={true}
                       disabled={false}
                       id="Name of the field-3"
                       name="Name of the field"
@@ -2546,7 +2568,7 @@ exports[`FormFields should render disabled Radio correctly 1`] = `
               </RadioOption>
             </div>
           </div>
-        </Component>
+        </FormGroup>
       </FormGroup>
     </Radio>
   </ReactFinalForm>
@@ -2649,7 +2671,7 @@ exports[`FormFields should render disabled Switch correctly 1`] = `
           }
         }
       >
-        <Component
+        <FormGroup
           fieldId="someIdKey"
           label={false}
           validated="default"
@@ -2674,7 +2696,7 @@ exports[`FormFields should render disabled Switch correctly 1`] = `
               >
                 <label
                   className="pf-c-switch"
-                  data-ouia-component-id={3}
+                  data-ouia-component-id="OUIA-Generated-Switch-2"
                   data-ouia-component-type="PF4/Switch"
                   data-ouia-safe={true}
                   htmlFor="someIdKey"
@@ -2716,7 +2738,6 @@ exports[`FormFields should render disabled Switch correctly 1`] = `
                         >
                           <path
                             d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
-                            transform=""
                           />
                         </svg>
                       </CheckIcon>
@@ -2726,7 +2747,7 @@ exports[`FormFields should render disabled Switch correctly 1`] = `
               </Switch>
             </div>
           </div>
-        </Component>
+        </FormGroup>
       </FormGroup>
     </Switch>
   </ReactFinalForm>
@@ -2770,7 +2791,7 @@ exports[`FormFields should render disabled Switch correctly 2`] = `
           }
         }
       >
-        <Component
+        <FormGroup
           fieldId="someIdKey"
           label={false}
           validated="default"
@@ -2795,7 +2816,7 @@ exports[`FormFields should render disabled Switch correctly 2`] = `
               >
                 <label
                   className="pf-c-switch"
-                  data-ouia-component-id={5}
+                  data-ouia-component-id="OUIA-Generated-Switch-3"
                   data-ouia-component-type="PF4/Switch"
                   data-ouia-safe={true}
                   htmlFor="someIdKey"
@@ -2837,7 +2858,6 @@ exports[`FormFields should render disabled Switch correctly 2`] = `
                         >
                           <path
                             d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
-                            transform=""
                           />
                         </svg>
                       </CheckIcon>
@@ -2847,7 +2867,7 @@ exports[`FormFields should render disabled Switch correctly 2`] = `
               </Switch>
             </div>
           </div>
-        </Component>
+        </FormGroup>
       </FormGroup>
     </Switch>
   </ReactFinalForm>
@@ -2890,7 +2910,7 @@ exports[`FormFields should render disabled Textarea correctly 1`] = `
           }
         }
       >
-        <Component
+        <FormGroup
           fieldId="someIdKey"
           validated="default"
         >
@@ -2930,7 +2950,7 @@ exports[`FormFields should render disabled Textarea correctly 1`] = `
               </TextArea>
             </div>
           </div>
-        </Component>
+        </FormGroup>
       </FormGroup>
     </Textarea>
   </ReactFinalForm>
@@ -2978,7 +2998,7 @@ exports[`FormFields should render touched TextField id correctly 1`] = `
           }
         }
       >
-        <Component
+        <FormGroup
           fieldId="someIdKey"
           validated="default"
         >
@@ -3003,6 +3023,7 @@ exports[`FormFields should render touched TextField id correctly 1`] = `
                   id="someIdKey"
                   innerRef={null}
                   isDisabled={false}
+                  isLeftTruncated={false}
                   isReadOnly={false}
                   isRequired={false}
                   name="Name of the field"
@@ -3032,7 +3053,7 @@ exports[`FormFields should render touched TextField id correctly 1`] = `
               </ForwardRef>
             </div>
           </div>
-        </Component>
+        </FormGroup>
       </FormGroup>
     </TextField>
   </ReactFinalForm>
@@ -3077,7 +3098,7 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
           }
         }
       >
-        <Component
+        <FormGroup
           fieldId="someIdKey"
           label={false}
           validated="default"
@@ -3104,7 +3125,7 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
               >
                 <label
                   className="pf-c-switch"
-                  data-ouia-component-id={7}
+                  data-ouia-component-id="OUIA-Generated-Switch-4"
                   data-ouia-component-type="PF4/Switch"
                   data-ouia-safe={true}
                   htmlFor="someIdKey"
@@ -3143,7 +3164,7 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
               </Switch>
             </div>
           </div>
-        </Component>
+        </FormGroup>
       </FormGroup>
     </Switch>
   </ReactFinalForm>

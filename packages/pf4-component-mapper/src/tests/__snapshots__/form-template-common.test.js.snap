@@ -51,7 +51,7 @@ exports[`FormTemplate PF4 Common should add missing buttons if not defined in bu
             schema={Object {}}
             showFormControls={true}
           >
-            <Component>
+            <Form>
               <form
                 className="pf-c-form"
                 noValidate={true}
@@ -130,105 +130,110 @@ exports[`FormTemplate PF4 Common should add missing buttons if not defined in bu
                     submitLabel="Submit"
                   >
                     <ButtonGroup>
-                      <Component>
+                      <ActionGroup>
                         <div
                           className="pf-c-form__group pf-m-action"
                         >
                           <div
-                            className="pf-c-form__actions"
+                            className="pf-c-form__group-control"
                           >
-                            <Button
-                              buttonType="submit"
-                              key="form-submit"
-                              label="Submit"
-                              type="submit"
-                              variant="primary"
+                            <div
+                              className="pf-c-form__actions"
                             >
-                              <Component
+                              <Button
+                                buttonType="submit"
+                                key="form-submit"
+                                label="Submit"
                                 type="submit"
                                 variant="primary"
                               >
-                                <button
-                                  aria-disabled={null}
-                                  aria-label={null}
-                                  className="pf-c-button pf-m-primary"
-                                  data-ouia-component-id={null}
-                                  data-ouia-component-type="PF4/Button"
-                                  data-ouia-safe={true}
-                                  disabled={false}
-                                  tabIndex={null}
+                                <Button
                                   type="submit"
+                                  variant="primary"
                                 >
-                                  Submit
-                                </button>
-                              </Component>
-                            </Button>
-                            <Button
-                              buttonType="reset"
-                              disabled={true}
-                              key="form-reset"
-                              label="Reset"
-                              onClick={[MockFunction]}
-                              type="button"
-                            >
-                              <Component
-                                isDisabled={true}
+                                  <button
+                                    aria-disabled={false}
+                                    aria-label={null}
+                                    className="pf-c-button pf-m-primary"
+                                    data-ouia-component-id="OUIA-Generated-Button-primary-6"
+                                    data-ouia-component-type="PF4/Button"
+                                    data-ouia-safe={true}
+                                    disabled={false}
+                                    role={null}
+                                    type="submit"
+                                  >
+                                    Submit
+                                  </button>
+                                </Button>
+                              </Button>
+                              <Button
+                                buttonType="reset"
+                                disabled={true}
+                                key="form-reset"
+                                label="Reset"
                                 onClick={[MockFunction]}
                                 type="button"
-                                variant="secondary"
                               >
-                                <button
-                                  aria-disabled={null}
-                                  aria-label={null}
-                                  className="pf-c-button pf-m-secondary"
-                                  data-ouia-component-id={null}
-                                  data-ouia-component-type="PF4/Button"
-                                  data-ouia-safe={true}
-                                  disabled={true}
+                                <Button
+                                  isDisabled={true}
                                   onClick={[MockFunction]}
-                                  tabIndex={null}
                                   type="button"
+                                  variant="secondary"
                                 >
-                                  Reset
-                                </button>
-                              </Component>
-                            </Button>
-                            <Button
-                              buttonType="cancel"
-                              key="form-cancel"
-                              label="Cancel"
-                              onClick={[MockFunction]}
-                              type="button"
-                            >
-                              <Component
+                                  <button
+                                    aria-disabled={true}
+                                    aria-label={null}
+                                    className="pf-c-button pf-m-secondary pf-m-disabled"
+                                    data-ouia-component-id="OUIA-Generated-Button-secondary-2"
+                                    data-ouia-component-type="PF4/Button"
+                                    data-ouia-safe={true}
+                                    disabled={true}
+                                    onClick={[MockFunction]}
+                                    role={null}
+                                    tabIndex={null}
+                                    type="button"
+                                  >
+                                    Reset
+                                  </button>
+                                </Button>
+                              </Button>
+                              <Button
+                                buttonType="cancel"
+                                key="form-cancel"
+                                label="Cancel"
                                 onClick={[MockFunction]}
                                 type="button"
-                                variant="link"
                               >
-                                <button
-                                  aria-disabled={null}
-                                  aria-label={null}
-                                  className="pf-c-button pf-m-link"
-                                  data-ouia-component-id={null}
-                                  data-ouia-component-type="PF4/Button"
-                                  data-ouia-safe={true}
-                                  disabled={false}
+                                <Button
                                   onClick={[MockFunction]}
-                                  tabIndex={null}
                                   type="button"
+                                  variant="link"
                                 >
-                                  Cancel
-                                </button>
-                              </Component>
-                            </Button>
+                                  <button
+                                    aria-disabled={false}
+                                    aria-label={null}
+                                    className="pf-c-button pf-m-link"
+                                    data-ouia-component-id="OUIA-Generated-Button-link-5"
+                                    data-ouia-component-type="PF4/Button"
+                                    data-ouia-safe={true}
+                                    disabled={false}
+                                    onClick={[MockFunction]}
+                                    role={null}
+                                    type="button"
+                                  >
+                                    Cancel
+                                  </button>
+                                </Button>
+                              </Button>
+                            </div>
                           </div>
                         </div>
-                      </Component>
+                      </ActionGroup>
                     </ButtonGroup>
                   </FormControls>
                 </FormSpy>
               </form>
-            </Component>
+            </Form>
           </FormTemplate>
         </PF4FormTemplate>
       </ReactFinalForm>
@@ -282,7 +287,7 @@ exports[`FormTemplate PF4 Common should render all controls and with default lab
             schema={Object {}}
             showFormControls={true}
           >
-            <Component>
+            <Form>
               <form
                 className="pf-c-form"
                 noValidate={true}
@@ -367,75 +372,79 @@ exports[`FormTemplate PF4 Common should render all controls and with default lab
                     submitLabel="Submit"
                   >
                     <ButtonGroup>
-                      <Component>
+                      <ActionGroup>
                         <div
                           className="pf-c-form__group pf-m-action"
                         >
                           <div
-                            className="pf-c-form__actions"
+                            className="pf-c-form__group-control"
                           >
-                            <Button
-                              buttonType="submit"
-                              key="form-submit"
-                              label="Submit"
-                              type="submit"
-                              variant="primary"
+                            <div
+                              className="pf-c-form__actions"
                             >
-                              <Component
+                              <Button
+                                buttonType="submit"
+                                key="form-submit"
+                                label="Submit"
                                 type="submit"
                                 variant="primary"
                               >
-                                <button
-                                  aria-disabled={null}
-                                  aria-label={null}
-                                  className="pf-c-button pf-m-primary"
-                                  data-ouia-component-id={null}
-                                  data-ouia-component-type="PF4/Button"
-                                  data-ouia-safe={true}
-                                  disabled={false}
-                                  tabIndex={null}
+                                <Button
                                   type="submit"
+                                  variant="primary"
                                 >
-                                  Submit
-                                </button>
-                              </Component>
-                            </Button>
-                            <Button
-                              buttonType="cancel"
-                              key="form-cancel"
-                              label="Cancel"
-                              onClick={[MockFunction]}
-                              type="button"
-                            >
-                              <Component
+                                  <button
+                                    aria-disabled={false}
+                                    aria-label={null}
+                                    className="pf-c-button pf-m-primary"
+                                    data-ouia-component-id="OUIA-Generated-Button-primary-3"
+                                    data-ouia-component-type="PF4/Button"
+                                    data-ouia-safe={true}
+                                    disabled={false}
+                                    role={null}
+                                    type="submit"
+                                  >
+                                    Submit
+                                  </button>
+                                </Button>
+                              </Button>
+                              <Button
+                                buttonType="cancel"
+                                key="form-cancel"
+                                label="Cancel"
                                 onClick={[MockFunction]}
                                 type="button"
-                                variant="link"
                               >
-                                <button
-                                  aria-disabled={null}
-                                  aria-label={null}
-                                  className="pf-c-button pf-m-link"
-                                  data-ouia-component-id={null}
-                                  data-ouia-component-type="PF4/Button"
-                                  data-ouia-safe={true}
-                                  disabled={false}
+                                <Button
                                   onClick={[MockFunction]}
-                                  tabIndex={null}
                                   type="button"
+                                  variant="link"
                                 >
-                                  Cancel
-                                </button>
-                              </Component>
-                            </Button>
+                                  <button
+                                    aria-disabled={false}
+                                    aria-label={null}
+                                    className="pf-c-button pf-m-link"
+                                    data-ouia-component-id="OUIA-Generated-Button-link-3"
+                                    data-ouia-component-type="PF4/Button"
+                                    data-ouia-safe={true}
+                                    disabled={false}
+                                    onClick={[MockFunction]}
+                                    role={null}
+                                    type="button"
+                                  >
+                                    Cancel
+                                  </button>
+                                </Button>
+                              </Button>
+                            </div>
                           </div>
                         </div>
-                      </Component>
+                      </ActionGroup>
                     </ButtonGroup>
                   </FormControls>
                 </FormSpy>
               </form>
-            </Component>
+            </Form>
           </FormTemplate>
         </PF4FormTemplate>
       </ReactFinalForm>
@@ -507,7 +516,7 @@ exports[`FormTemplate PF4 Common should render buttons in correct order 1`] = `
             schema={Object {}}
             showFormControls={true}
           >
-            <Component>
+            <Form>
               <form
                 className="pf-c-form"
                 noValidate={true}
@@ -592,105 +601,110 @@ exports[`FormTemplate PF4 Common should render buttons in correct order 1`] = `
                     submitLabel="Submit"
                   >
                     <ButtonGroup>
-                      <Component>
+                      <ActionGroup>
                         <div
                           className="pf-c-form__group pf-m-action"
                         >
                           <div
-                            className="pf-c-form__actions"
+                            className="pf-c-form__group-control"
                           >
-                            <Button
-                              buttonType="cancel"
-                              key="form-cancel"
-                              label="Cancel"
-                              onClick={[MockFunction]}
-                              type="button"
+                            <div
+                              className="pf-c-form__actions"
                             >
-                              <Component
+                              <Button
+                                buttonType="cancel"
+                                key="form-cancel"
+                                label="Cancel"
                                 onClick={[MockFunction]}
                                 type="button"
-                                variant="link"
                               >
-                                <button
-                                  aria-disabled={null}
-                                  aria-label={null}
-                                  className="pf-c-button pf-m-link"
-                                  data-ouia-component-id={null}
-                                  data-ouia-component-type="PF4/Button"
-                                  data-ouia-safe={true}
-                                  disabled={false}
+                                <Button
                                   onClick={[MockFunction]}
-                                  tabIndex={null}
                                   type="button"
+                                  variant="link"
                                 >
-                                  Cancel
-                                </button>
-                              </Component>
-                            </Button>
-                            <Button
-                              buttonType="submit"
-                              key="form-submit"
-                              label="Submit"
-                              type="submit"
-                              variant="primary"
-                            >
-                              <Component
+                                  <button
+                                    aria-disabled={false}
+                                    aria-label={null}
+                                    className="pf-c-button pf-m-link"
+                                    data-ouia-component-id="OUIA-Generated-Button-link-4"
+                                    data-ouia-component-type="PF4/Button"
+                                    data-ouia-safe={true}
+                                    disabled={false}
+                                    onClick={[MockFunction]}
+                                    role={null}
+                                    type="button"
+                                  >
+                                    Cancel
+                                  </button>
+                                </Button>
+                              </Button>
+                              <Button
+                                buttonType="submit"
+                                key="form-submit"
+                                label="Submit"
                                 type="submit"
                                 variant="primary"
                               >
-                                <button
-                                  aria-disabled={null}
-                                  aria-label={null}
-                                  className="pf-c-button pf-m-primary"
-                                  data-ouia-component-id={null}
-                                  data-ouia-component-type="PF4/Button"
-                                  data-ouia-safe={true}
-                                  disabled={false}
-                                  tabIndex={null}
+                                <Button
                                   type="submit"
+                                  variant="primary"
                                 >
-                                  Submit
-                                </button>
-                              </Component>
-                            </Button>
-                            <Button
-                              buttonType="reset"
-                              disabled={true}
-                              key="form-reset"
-                              label="Reset"
-                              onClick={[MockFunction]}
-                              type="button"
-                            >
-                              <Component
-                                isDisabled={true}
+                                  <button
+                                    aria-disabled={false}
+                                    aria-label={null}
+                                    className="pf-c-button pf-m-primary"
+                                    data-ouia-component-id="OUIA-Generated-Button-primary-5"
+                                    data-ouia-component-type="PF4/Button"
+                                    data-ouia-safe={true}
+                                    disabled={false}
+                                    role={null}
+                                    type="submit"
+                                  >
+                                    Submit
+                                  </button>
+                                </Button>
+                              </Button>
+                              <Button
+                                buttonType="reset"
+                                disabled={true}
+                                key="form-reset"
+                                label="Reset"
                                 onClick={[MockFunction]}
                                 type="button"
-                                variant="secondary"
                               >
-                                <button
-                                  aria-disabled={null}
-                                  aria-label={null}
-                                  className="pf-c-button pf-m-secondary"
-                                  data-ouia-component-id={null}
-                                  data-ouia-component-type="PF4/Button"
-                                  data-ouia-safe={true}
-                                  disabled={true}
+                                <Button
+                                  isDisabled={true}
                                   onClick={[MockFunction]}
-                                  tabIndex={null}
                                   type="button"
+                                  variant="secondary"
                                 >
-                                  Reset
-                                </button>
-                              </Component>
-                            </Button>
+                                  <button
+                                    aria-disabled={true}
+                                    aria-label={null}
+                                    className="pf-c-button pf-m-secondary pf-m-disabled"
+                                    data-ouia-component-id="OUIA-Generated-Button-secondary-1"
+                                    data-ouia-component-type="PF4/Button"
+                                    data-ouia-safe={true}
+                                    disabled={true}
+                                    onClick={[MockFunction]}
+                                    role={null}
+                                    tabIndex={null}
+                                    type="button"
+                                  >
+                                    Reset
+                                  </button>
+                                </Button>
+                              </Button>
+                            </div>
                           </div>
                         </div>
-                      </Component>
+                      </ActionGroup>
                     </ButtonGroup>
                   </FormControls>
                 </FormSpy>
               </form>
-            </Component>
+            </Form>
           </FormTemplate>
         </PF4FormTemplate>
       </ReactFinalForm>
@@ -746,7 +760,7 @@ exports[`FormTemplate PF4 Common should render only submit button 1`] = `
             schema={Object {}}
             showFormControls={true}
           >
-            <Component>
+            <Form>
               <form
                 className="pf-c-form"
                 noValidate={true}
@@ -830,47 +844,51 @@ exports[`FormTemplate PF4 Common should render only submit button 1`] = `
                     submitLabel="Submit"
                   >
                     <ButtonGroup>
-                      <Component>
+                      <ActionGroup>
                         <div
                           className="pf-c-form__group pf-m-action"
                         >
                           <div
-                            className="pf-c-form__actions"
+                            className="pf-c-form__group-control"
                           >
-                            <Button
-                              buttonType="submit"
-                              key="form-submit"
-                              label="Submit"
-                              type="submit"
-                              variant="primary"
+                            <div
+                              className="pf-c-form__actions"
                             >
-                              <Component
+                              <Button
+                                buttonType="submit"
+                                key="form-submit"
+                                label="Submit"
                                 type="submit"
                                 variant="primary"
                               >
-                                <button
-                                  aria-disabled={null}
-                                  aria-label={null}
-                                  className="pf-c-button pf-m-primary"
-                                  data-ouia-component-id={null}
-                                  data-ouia-component-type="PF4/Button"
-                                  data-ouia-safe={true}
-                                  disabled={false}
-                                  tabIndex={null}
+                                <Button
                                   type="submit"
+                                  variant="primary"
                                 >
-                                  Submit
-                                </button>
-                              </Component>
-                            </Button>
+                                  <button
+                                    aria-disabled={false}
+                                    aria-label={null}
+                                    className="pf-c-button pf-m-primary"
+                                    data-ouia-component-id="OUIA-Generated-Button-primary-4"
+                                    data-ouia-component-type="PF4/Button"
+                                    data-ouia-safe={true}
+                                    disabled={false}
+                                    role={null}
+                                    type="submit"
+                                  >
+                                    Submit
+                                  </button>
+                                </Button>
+                              </Button>
+                            </div>
                           </div>
                         </div>
-                      </Component>
+                      </ActionGroup>
                     </ButtonGroup>
                   </FormControls>
                 </FormSpy>
               </form>
-            </Component>
+            </Form>
           </FormTemplate>
         </PF4FormTemplate>
       </ReactFinalForm>
