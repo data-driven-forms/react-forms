@@ -24,6 +24,7 @@ import CreateManagerApi, {
 import AnyObject from '../types/any-object';
 import FieldConfig, { IsEqual } from '../types/field-config';
 import { Meta } from '../types/use-field';
+import { WarningObject } from '../types/compose-validators';
 import { formLevelValidator, isPromise } from './validate';
 import { FormValidator, FormLevelError, Validator } from '../types/validate';
 import findDifference from './find-difference';
@@ -142,7 +143,8 @@ export const initialMeta = (initial: any): Meta => ({
   touched: false,
   valid: true,
   validating: false,
-  visited: false
+  visited: false,
+  warning: undefined
 });
 
 export const createField = (name: string, value: any): FieldState => ({
@@ -307,10 +309,32 @@ const createManagerApi: CreateManagerApi = ({
         if (isPromise(result)) {
           (result as Promise<string | undefined>)
             .then(() => handleFieldError(name, true))
-            .catch((response) => handleFieldError(name, false, response as string | undefined));
+            .catch((response) => {
+              if (response?.type === 'warning') {
+                setFieldState(name, (prev: FieldState) => ({
+                  ...prev,
+                  meta: {
+                    ...prev.meta,
+                    warning: response.error
+                  }
+                }));
+              } else {
+                handleFieldError(name, false, response as string | undefined);
+              }
+            });
           listener.registerValidator(result as Promise<string | undefined>);
         } else {
-          handleFieldError(name, !result, result as string | undefined);
+          if ((result as WarningObject)?.type === 'warning') {
+            setFieldState(name, (prev: FieldState) => ({
+              ...prev,
+              meta: {
+                ...prev.meta,
+                warning: (result as WarningObject)?.error
+              }
+            }));
+          } else {
+            handleFieldError(name, !result, result as string | undefined);
+          }
         }
       }
     }

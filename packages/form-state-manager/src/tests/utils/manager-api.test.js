@@ -1876,4 +1876,32 @@ describe('managerApi', () => {
       expect(managerApi().hasSubmitErrors).toEqual(true);
     });
   });
+
+  describe('warning validation', () => {
+    const someError = 'some error message';
+    const render = jest.fn();
+
+    it('should save type: warning as warning - sync', () => {
+      const managerApi = createManagerApi({});
+      managerApi().registerField({ name: 'field', validate: () => ({ type: 'warning', error: someError }), render, internalId: 1 });
+
+      expect(managerApi().getFieldState('field').meta.warning).toEqual(someError);
+      expect(managerApi().getFieldState('field').meta.error).toEqual(undefined);
+    });
+
+    it('should save type: warning as warning - async', (done) => {
+      expect.assertions(2);
+
+      const asyncValidate = jest.fn().mockImplementation(() => Promise.reject({ type: 'warning', error: someError }));
+
+      const managerApi = createManagerApi({});
+      managerApi().registerField({ name: 'field', validate: asyncValidate, render, internalId: 1 });
+
+      setImmediate(() => {
+        expect(managerApi().getFieldState('field').meta.warning).toEqual(someError);
+        expect(managerApi().getFieldState('field').meta.error).toEqual(undefined);
+        done();
+      });
+    });
+  });
 });

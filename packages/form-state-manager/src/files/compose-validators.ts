@@ -10,15 +10,15 @@ import ComposeValidators from '../types/compose-validators';
  * @returns {Function} New validation function
  */
 const composeValidators: ComposeValidators = (validators = []) => (value, allValues) => {
-  const promises: Promise<string | undefined>[] = [];
+  const promises: Promise<any>[] = [];
   let index = 0;
-  let error: string | undefined;
+  let error: any;
   while (validators.length > 0 && !error && index < validators.length) {
     const result = validators[index](value, allValues);
     if (isPromise(result)) {
-      promises.push(result as Promise<string | undefined>);
+      promises.push(result as Promise<any>);
     } else {
-      error = result as string | undefined;
+      error = result as any;
     }
 
     index = index + 1;
