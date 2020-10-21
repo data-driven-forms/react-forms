@@ -24,6 +24,7 @@ import CreateManagerApi, {
 import AnyObject from '../types/any-object';
 import FieldConfig, { IsEqual } from '../types/field-config';
 import { Meta } from '../types/use-field';
+import { WarningObject } from '../types/compose-validators';
 import { formLevelValidator, isPromise } from './validate';
 import { FormValidator, FormLevelError, Validator } from '../types/validate';
 import findDifference from './find-difference';
@@ -323,12 +324,12 @@ const createManagerApi: CreateManagerApi = ({
             });
           listener.registerValidator(result as Promise<string | undefined>);
         } else {
-          if (result?.type === 'warning') {
+          if ((result as WarningObject)?.type === 'warning') {
             setFieldState(name, (prev: FieldState) => ({
               ...prev,
               meta: {
                 ...prev.meta,
-                warning: result.error
+                warning: (result as WarningObject)?.error
               }
             }));
           } else {
