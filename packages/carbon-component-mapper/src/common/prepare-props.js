@@ -1,12 +1,15 @@
 import React from 'react';
 import WithDescription from './with-description';
+import IsRequired from './is-required';
 
-const prepareProps = ({ isDisabled, isReadOnly, label, description, ...props }) => ({
+export const buildLabel = (label, isRequired) => (label && (isRequired ? <IsRequired>{label}</IsRequired> : label)) || undefined;
+
+const prepareProps = ({ isDisabled, isReadOnly, isRequired = false, label, description, ...props }) => ({
   disabled: isDisabled,
-  labelText: label,
+  labelText: buildLabel(label, isRequired),
   readOnly: isReadOnly,
   ...props,
-  ...(description ? { labelText: <WithDescription description={description} labelText={label || props.labelText} /> } : {})
+  ...(description ? { labelText: <WithDescription description={description} labelText={buildLabel(label || props.labelText, isRequired)} /> } : {})
 });
 
 export default prepareProps;

@@ -24,6 +24,7 @@ const DatePicker = (props) => {
 
 DatePicker.propTypes = {
   isDisabled: PropTypes.bool,
+  isRequired: PropTypes.bool,
   datePickerType: PropTypes.string,
   DatePickerProps: PropTypes.object,
   WrapperProps: PropTypes.object

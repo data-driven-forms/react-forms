@@ -30,6 +30,7 @@ Radio.propTypes = {
   FormGroupProps: PropTypes.object,
   isDisabled: PropTypes.bool,
   label: PropTypes.node,
+  isRequired: PropTypes.bool,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.node,

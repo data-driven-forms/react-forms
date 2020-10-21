@@ -36,53 +36,6 @@ Ant Design provides an option to validate a field when the component is mounted.
 
 This field will show the error immediately.
 
-## No isRequired
-
-Carbon recommends to mark only optional fields (see [here](https://www.carbondesignsystem.com/patterns/forms-pattern#building-a-form), so there is no `isRequired` prop.)
-
-**Required field**
-
-🛑
-
-```jsx
-{
-   component: 'text-field',
-   label: 'login',
-   isRequired: true,
-}
-```
-
-🆗
-
-```jsx
-{
-   component: 'text-field',
-   label: 'login',
-}
-```
-
-**Optional field**
-
-🛑
-
-```jsx
-{
-   component: 'text-field',
-   label: 'description',
-}
-```
-
-🆗
-
-```jsx
-{
-   component: 'text-field',
-   label: 'description (optional)',
-}
-```
-
-The Carbon documentation also suggests **to group** optional fields to avoid repeatable `(optional)` text.
-
 ## Select
 
 ### No isClearable

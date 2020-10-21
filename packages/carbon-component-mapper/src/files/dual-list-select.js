@@ -13,6 +13,7 @@ import {
   StructuredListCell
 } from 'carbon-components-react/lib/components/StructuredList/StructuredList';
 
+import { buildLabel } from '../common/prepare-props';
 import './dual-list-select.scss';
 
 const EmptyList = ({ message }) => (
@@ -118,6 +119,7 @@ const DualListSelectInner = ({
   moveAllLeftTitle,
   moveAllRightTitle,
   label,
+  isRequired,
   filterOptionsTitle,
   filterValuesTitle,
   sortOptionsTitle,
@@ -145,7 +147,7 @@ const DualListSelectInner = ({
   RightListProps,
   RightBodyProps
 }) => (
-  <FormGroup legendText={label || ''} {...FormGroupProps}>
+  <FormGroup legendText={buildLabel(label || '', isRequired)} {...FormGroupProps}>
     <Grid {...GridProps}>
       <Row condensed {...RowProps}>
         <Column sm={4} md={8} lg={5} {...OptionsColumnProps}>
@@ -248,6 +250,7 @@ DualListSelectInner.propTypes = {
   moveAllLeftTitle: PropTypes.node,
   moveAllRightTitle: PropTypes.node,
   label: PropTypes.node,
+  isRequired: PropTypes.bool,
   filterOptionsTitle: PropTypes.string,
   filterValuesTitle: PropTypes.string,
   sortOptionsTitle: PropTypes.string,

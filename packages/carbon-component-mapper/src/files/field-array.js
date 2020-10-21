@@ -140,6 +140,7 @@ FieldArray.propTypes = {
   ArrayItemProps: PropTypes.object,
   RemoveButtonProps: PropTypes.object,
   defaultItem: PropTypes.any,
+  isRequired: PropTypes.bool,
   fields: PropTypes.array
 };
 

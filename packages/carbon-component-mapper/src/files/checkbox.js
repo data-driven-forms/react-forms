@@ -6,11 +6,13 @@ import MultipleChoiceListCommon from '@data-driven-forms/common/src/multiple-cho
 import { Checkbox as CarbonCheckbox, FormGroup } from 'carbon-components-react';
 
 import WithDescription from '../common/with-description';
-import prepareProps from '../common/prepare-props';
+import prepareProps, { buildLabel } from '../common/prepare-props';
 import HelperTextBlock from '../common/helper-text-block';
 
-const Wrapper = ({ label, description, children, helperText, error, showError }) => (
-  <FormGroup legendText={description ? <WithDescription labelText={label} description={description} /> : label}>
+const Wrapper = ({ label, description, children, helperText, error, showError, isRequired }) => (
+  <FormGroup
+    legendText={description ? <WithDescription labelText={buildLabel(label, isRequired)} description={description} /> : buildLabel(label, isRequired)}
+  >
     {children}
     <HelperTextBlock helperText={helperText} errorText={showError && error} />
   </FormGroup>
@@ -22,7 +24,8 @@ Wrapper.propTypes = {
   description: PropTypes.node,
   helperText: PropTypes.node,
   error: PropTypes.node,
-  showError: PropTypes.bool
+  showError: PropTypes.bool,
+  isRequired: PropTypes.bool
 };
 
 const SingleCheckbox = (props) => {
@@ -44,6 +47,7 @@ SingleCheckboxInCommon.propTypes = {
   label: PropTypes.node,
   input: PropTypes.object,
   isDisabled: PropTypes.bool,
+  isRequired: PropTypes.bool,
   name: PropTypes.string,
   id: PropTypes.string,
   WrapperProps: PropTypes.object
