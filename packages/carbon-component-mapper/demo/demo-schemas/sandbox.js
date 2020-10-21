@@ -551,6 +551,33 @@ const output = {
                   label: 'Timepicker',
                   title: 'Timepicker',
                   component: components.TIME_PICKER
+                },
+                {
+                  component: components.DUAL_LIST_SELECT,
+                  name: 'dual_list_select',
+                  label: 'Dual List Select',
+                  options: [
+                    {
+                      label: 'Cat',
+                      value: 'cat'
+                    },
+                    {
+                      label: 'Dog',
+                      value: 'dog'
+                    },
+                    {
+                      label: 'Duck',
+                      value: 'duck'
+                    },
+                    {
+                      label: 'Lion',
+                      value: 'lion'
+                    },
+                    {
+                      label: 'Monster',
+                      value: 'monster'
+                    }
+                  ]
                 }
               ],
               component: components.SUB_FORM
