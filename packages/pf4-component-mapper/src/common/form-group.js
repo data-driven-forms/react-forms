@@ -9,7 +9,7 @@ const FormGroup = ({ label, isRequired, helperText, meta, description, hideLabel
     isRequired={isRequired}
     label={!hideLabel && label}
     fieldId={id}
-    helperText={helperText}
+    helperText={(meta.touched && meta.warning) || helperText}
     helperTextInvalid={meta.error}
     {...showError(meta)}
     {...FormGroupProps}

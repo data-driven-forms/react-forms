@@ -41,68 +41,68 @@ exports[`<WizardSTepButtons should add custom className to toolbar 1`] = `
             submitLabel="Submit"
             valid={true}
           >
-            <Component
+            <Button
               isDisabled={false}
               onClick={[Function]}
               type="button"
               variant="primary"
             >
               <button
-                aria-disabled={null}
+                aria-disabled={false}
                 aria-label={null}
                 className="pf-c-button pf-m-primary"
-                data-ouia-component-id={null}
+                data-ouia-component-id="OUIA-Generated-Button-primary-2"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe={true}
                 disabled={false}
                 onClick={[Function]}
-                tabIndex={null}
+                role={null}
                 type="button"
               >
                 Submit
               </button>
-            </Component>
+            </Button>
           </NextButton>
-          <Component
+          <Button
             onClick={[MockFunction]}
             type="button"
             variant="secondary"
           >
             <button
-              aria-disabled={null}
+              aria-disabled={false}
               aria-label={null}
               className="pf-c-button pf-m-secondary"
-              data-ouia-component-id={null}
+              data-ouia-component-id="OUIA-Generated-Button-secondary-2"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe={true}
               disabled={false}
               onClick={[MockFunction]}
-              tabIndex={null}
+              role={null}
               type="button"
             >
               Back
             </button>
-          </Component>
-          <Component
+          </Button>
+          <Button
             onClick={[MockFunction]}
             type="button"
             variant="link"
           >
             <button
-              aria-disabled={null}
+              aria-disabled={false}
               aria-label={null}
               className="pf-c-button pf-m-link"
-              data-ouia-component-id={null}
+              data-ouia-component-id="OUIA-Generated-Button-link-2"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe={true}
               disabled={false}
               onClick={[MockFunction]}
-              tabIndex={null}
+              role={null}
               type="button"
             >
               Cancel
             </button>
-          </Component>
+          </Button>
         </FormSpy>
       </footer>
     </WizardStepButtons>
@@ -150,68 +150,68 @@ exports[`<WizardSTepButtons should render correctly 1`] = `
             submitLabel="Submit"
             valid={true}
           >
-            <Component
+            <Button
               isDisabled={false}
               onClick={[Function]}
               type="button"
               variant="primary"
             >
               <button
-                aria-disabled={null}
+                aria-disabled={false}
                 aria-label={null}
                 className="pf-c-button pf-m-primary"
-                data-ouia-component-id={null}
+                data-ouia-component-id="OUIA-Generated-Button-primary-1"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe={true}
                 disabled={false}
                 onClick={[Function]}
-                tabIndex={null}
+                role={null}
                 type="button"
               >
                 Submit
               </button>
-            </Component>
+            </Button>
           </NextButton>
-          <Component
+          <Button
             onClick={[MockFunction]}
             type="button"
             variant="secondary"
           >
             <button
-              aria-disabled={null}
+              aria-disabled={false}
               aria-label={null}
               className="pf-c-button pf-m-secondary"
-              data-ouia-component-id={null}
+              data-ouia-component-id="OUIA-Generated-Button-secondary-1"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe={true}
               disabled={false}
               onClick={[MockFunction]}
-              tabIndex={null}
+              role={null}
               type="button"
             >
               Back
             </button>
-          </Component>
-          <Component
+          </Button>
+          <Button
             onClick={[MockFunction]}
             type="button"
             variant="link"
           >
             <button
-              aria-disabled={null}
+              aria-disabled={false}
               aria-label={null}
               className="pf-c-button pf-m-link"
-              data-ouia-component-id={null}
+              data-ouia-component-id="OUIA-Generated-Button-link-1"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe={true}
               disabled={false}
               onClick={[MockFunction]}
-              tabIndex={null}
+              role={null}
               type="button"
             >
               Cancel
             </button>
-          </Component>
+          </Button>
         </FormSpy>
       </footer>
     </WizardStepButtons>

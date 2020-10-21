@@ -23,14 +23,17 @@ describe('<Wizard />', () => {
 
   const nextButtonClick = (wrapper) => {
     wrapper
+      .find('.pf-c-wizard__footer')
       .find('button')
       .at(0)
       .simulate('click');
+
     wrapper.update();
   };
 
   const backButtonClick = (wrapper) => {
     wrapper
+      .find('.pf-c-wizard__footer')
       .find('button')
       .at(1)
       .simulate('click');
@@ -39,6 +42,7 @@ describe('<Wizard />', () => {
 
   const cancelButtonClick = (wrapper) => {
     wrapper
+      .find('.pf-c-wizard__footer')
       .find('button')
       .at(2)
       .simulate('click');
@@ -925,7 +929,7 @@ describe('<Wizard />', () => {
         .last()
         .childAt(0)
         .prop('aria-disabled')
-    ).toEqual(false);
+    ).toEqual(null);
 
     await act(async () => {
       wrapper
@@ -965,7 +969,7 @@ describe('<Wizard />', () => {
         .last()
         .childAt(0)
         .prop('aria-disabled')
-    ).toEqual(false);
+    ).toEqual(null);
 
     jest.useRealTimers();
   });
@@ -1085,7 +1089,7 @@ describe('<Wizard />', () => {
         .last()
         .childAt(0)
         .prop('aria-disabled')
-    ).toEqual(false);
+    ).toEqual(null);
 
     backButtonClick(wrapper);
 
@@ -1156,7 +1160,7 @@ describe('<Wizard />', () => {
         .last()
         .childAt(0)
         .prop('aria-disabled')
-    ).toEqual(false);
+    ).toEqual(null);
   });
 
   describe('predicting steps', () => {
