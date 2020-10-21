@@ -32,7 +32,7 @@ const Slider = (props) => {
   } = useFieldApi(props);
 
   const invalid = validationError(meta, validateOnMount);
-  const text = invalid || helperText || description;
+  const text = invalid || ((meta.touched || validateOnMount) && meta.warning) || helperText || description;
 
   return (
     <FormFieldGrid {...FormFieldGridProps}>
@@ -62,7 +62,7 @@ const Slider = (props) => {
               </Grid>
             )}
           </Grid>
-          {(invalid || text) && <FormHelperText {...FormHelperTextProps}>{invalid || text}</FormHelperText>}
+          {text && <FormHelperText {...FormHelperTextProps}>{text}</FormHelperText>}
         </FormGroup>
       </FormControl>
     </FormFieldGrid>
