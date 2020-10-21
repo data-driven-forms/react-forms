@@ -38,6 +38,7 @@ export interface Meta {
   valid: boolean;
   validating: boolean;
   visited: boolean;
+  warning: any;
 }
 
 export type OnChange = (value: any) => void;

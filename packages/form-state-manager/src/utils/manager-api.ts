@@ -142,7 +142,8 @@ export const initialMeta = (initial: any): Meta => ({
   touched: false,
   valid: true,
   validating: false,
-  visited: false
+  visited: false,
+  warning: undefined
 });
 
 export const createField = (name: string, value: any): FieldState => ({
@@ -307,10 +308,32 @@ const createManagerApi: CreateManagerApi = ({
         if (isPromise(result)) {
           (result as Promise<string | undefined>)
             .then(() => handleFieldError(name, true))
-            .catch((response) => handleFieldError(name, false, response as string | undefined));
+            .catch((response) => {
+              if (response?.type === 'warning') {
+                setFieldState(name, (prev: FieldState) => ({
+                  ...prev,
+                  meta: {
+                    ...prev.meta,
+                    warning: response.error
+                  }
+                }));
+              } else {
+                handleFieldError(name, false, response as string | undefined);
+              }
+            });
           listener.registerValidator(result as Promise<string | undefined>);
         } else {
-          handleFieldError(name, !result, result as string | undefined);
+          if (result?.type === 'warning') {
+            setFieldState(name, (prev: FieldState) => ({
+              ...prev,
+              meta: {
+                ...prev.meta,
+                warning: result.error
+              }
+            }));
+          } else {
+            handleFieldError(name, !result, result as string | undefined);
+          }
         }
       }
     }
