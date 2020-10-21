@@ -23,6 +23,7 @@ const Switch = (props) => {
 Switch.propTypes = {
   isDisabled: PropTypes.bool,
   isReadOnly: PropTypes.bool,
+  isRequired: PropTypes.bool,
   label: PropTypes.node,
   labelText: PropTypes.node,
   description: PropTypes.node,

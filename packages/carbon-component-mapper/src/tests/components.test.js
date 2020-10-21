@@ -171,6 +171,15 @@ describe('component tests', () => {
 
           expect(wrapper.find('[disabled=true]').length).toBeGreaterThanOrEqual(1);
         });
+
+        it('renders isRequired', () => {
+          const requiredField = {
+            ...field,
+            isRequired: true
+          };
+          const wrapper = mount(<RendererWrapper schema={{ fields: [requiredField] }} />);
+          expect(wrapper.find('.ddorg__carbon-component-mapper_is-required').text()).toEqual('*');
+        });
       });
     });
   });

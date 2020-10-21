@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes, { bool } from 'prop-types';
+import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 import DataDrivenSelect from '@data-driven-forms/common/src/select';
@@ -63,6 +63,7 @@ ClearedMultiSelectFilterable.propTypes = {
   originalOnChange: PropTypes.func,
   carbonLabel: PropTypes.node,
   placeholder: PropTypes.node,
+  isRequired: PropTypes.bool,
   isDisabled: PropTypes.bool
 };
 
@@ -113,6 +114,7 @@ ClearedMultiSelect.propTypes = {
   originalOnChange: PropTypes.func,
   carbonLabel: PropTypes.node,
   placeholder: PropTypes.node,
+  isRequired: PropTypes.bool,
   isDisabled: PropTypes.bool
 };
 
@@ -158,8 +160,9 @@ ClearedSelect.propTypes = {
   carbonLabel: PropTypes.node,
   placeholder: PropTypes.node,
   isDisabled: PropTypes.bool,
-  isSearchable: bool,
-  isClearable: bool
+  isRequired: PropTypes.bool,
+  isSearchable: PropTypes.bool,
+  isClearable: PropTypes.bool
 };
 
 const Select = (props) => {
@@ -194,6 +197,7 @@ const Select = (props) => {
 
 Select.propTypes = {
   isDisabled: PropTypes.bool,
+  isRequired: PropTypes.bool,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
