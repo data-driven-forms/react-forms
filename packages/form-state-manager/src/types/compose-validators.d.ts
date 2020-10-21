@@ -2,7 +2,7 @@ import { Validator } from './validate';
 import AnyObject from './any-object';
 
 export interface WarningObject<T = string | undefined> {
-  type: string;
+  type: 'warning';
   error: T;
 }
 
