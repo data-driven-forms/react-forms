@@ -22,12 +22,13 @@ export const FormGroupInternal = ({
 }) => {
   const { required } = useContext(BlueprintContext);
 
-  const { error, touched } = meta;
+  const { error, touched, warning } = meta;
   const showError = (validateOnMount || touched) && error;
+  const showWarning = (validateOnMount || touched) && warning;
 
-  const text = showError ? error : helperText || description;
+  const text = showError || showWarning || helperText || description;
 
-  const intent = showError && error && { intent: Intent.DANGER };
+  const intent = (showError && { intent: Intent.DANGER }) || (showWarning && { intent: Intent.WARNING });
   const labelInfo = !hideLabel && isRequired && { labelInfo: required };
 
   return (

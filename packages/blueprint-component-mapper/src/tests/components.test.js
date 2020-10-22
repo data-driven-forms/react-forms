@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { act } from 'react-dom/test-utils';
 
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
 import FormTemplate from '../files/form-template';
@@ -105,6 +106,29 @@ describe('formFields generated tests', () => {
               .text()
           ).toEqual(errorText);
           expect(wrapper.find('.bp3-intent-danger').length).toBeGreaterThanOrEqual(1);
+        });
+
+        it('renders with warning', async () => {
+          const errorField = {
+            ...field,
+            validate: [{ type: validatorTypes.REQUIRED, warning: true }],
+            useWarnings: true,
+            validateOnMount: true
+          };
+          let wrapper;
+
+          await act(async () => {
+            wrapper = mount(<RendererWrapper schema={{ fields: [errorField] }} />);
+          });
+          wrapper.update();
+
+          expect(
+            wrapper
+              .find('.bp3-form-helper-text')
+              .last()
+              .text()
+          ).toEqual(errorText);
+          expect(wrapper.find('.bp3-intent-warning').length).toBeGreaterThanOrEqual(1);
         });
 
         it('renders with helperText', () => {
