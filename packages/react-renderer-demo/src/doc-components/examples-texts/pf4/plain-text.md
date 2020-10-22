@@ -1,5 +1,3 @@
-This a custom component with a custom design. Things can be changed, after official PF4 release.
-
 **Props**
 
 Plain text accepts all props defined in [PF4 Text component decoumentation](https://www.patternfly.org/v4/documentation/react/components/text#props).
