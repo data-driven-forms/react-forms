@@ -103,6 +103,29 @@ describe('formFields generated tests', () => {
           expect(wrapper.find('.ant-form-item-has-error').length).toBeGreaterThanOrEqual(1);
         });
 
+        it('renders with warning', async () => {
+          const errorField = {
+            ...field,
+            validate: [{ type: validatorTypes.REQUIRED, warning: true }],
+            useWarnings: true,
+            validateOnMount: true
+          };
+          let wrapper;
+
+          await act(async () => {
+            wrapper = mount(<RendererWrapper schema={{ fields: [errorField] }} />);
+          });
+          wrapper.update();
+
+          expect(
+            wrapper
+              .find('.ant-form-item-explain')
+              .last()
+              .text()
+          ).toEqual(errorText);
+          expect(wrapper.find('.ant-form-item-has-warning').length).toBeGreaterThanOrEqual(1);
+        });
+
         it('renders with error and validateOnMount', async () => {
           const errorField = {
             ...field,
