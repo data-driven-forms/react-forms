@@ -30,7 +30,7 @@ const Textarea = (props) => {
         {...input}
         fullWidth
         error={!!invalid}
-        helperText={invalid || helperText || description}
+        helperText={invalid || ((meta.touched || validateOnMount) && meta.warning) || helperText || description}
         disabled={isDisabled}
         label={label}
         placeholder={placeholder}

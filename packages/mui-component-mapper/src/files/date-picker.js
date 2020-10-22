@@ -34,7 +34,7 @@ const DatePicker = (props) => {
           fullWidth
           margin="normal"
           label={label}
-          helperText={invalid || helperText || description}
+          helperText={invalid || ((meta.touched || validateOnMount) && meta.warning) || helperText || description}
           disabled={isDisabled || isReadOnly}
           placeholder={placeholder}
           required={isRequired}

@@ -33,7 +33,7 @@ export const SingleCheckbox = (props) => {
     type: 'checkbox'
   });
   const invalid = validationError(meta, validateOnMount);
-  const text = invalid || helperText || description;
+  const text = invalid || ((meta.touched || validateOnMount) && meta.warning) || helperText || description;
 
   return (
     <FormFieldGrid {...FormFieldGridProps}>
@@ -57,7 +57,7 @@ export const SingleCheckbox = (props) => {
             disabled={isDisabled || isReadOnly}
             label={<FormLabel {...FormLabelProps}>{label}</FormLabel>}
           />
-          {(invalid || text) && <FormHelperText {...FormHelperTextProps}>{invalid || text}</FormHelperText>}
+          {text && <FormHelperText {...FormHelperTextProps}>{text}</FormHelperText>}
         </FormGroup>
       </FormControl>
     </FormFieldGrid>
