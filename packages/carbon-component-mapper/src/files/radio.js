@@ -13,6 +13,7 @@ const Radio = (props) => {
   );
 
   const invalid = (meta.touched || validateOnMount) && meta.error;
+  const warnText = (meta.touched || validateOnMount) && meta.warning;
 
   return (
     <FormGroup legendText={labelText} {...FormGroupProps}>
@@ -21,7 +22,7 @@ const Radio = (props) => {
           <RadioButton key={option.value} disabled={disabled} labelText={option.label} value={option.value} {...option} />
         ))}
       </RadioButtonGroup>
-      <HelperTextBlock helperText={helperText} errorText={invalid} />
+      <HelperTextBlock helperText={helperText} errorText={invalid} warnText={warnText} />
     </FormGroup>
   );
 };

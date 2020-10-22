@@ -11,6 +11,7 @@ const Slider = (props) => {
   const { input, meta, isRequired, validateOnMount, helperText, WrapperProps, ...rest } = useFieldApi(prepareProps(props));
 
   const invalid = (meta.touched || validateOnMount) && meta.error;
+  const warnText = (meta.touched || validateOnMount) && meta.warning;
 
   return (
     <div {...WrapperProps}>
@@ -25,7 +26,7 @@ const Slider = (props) => {
         required={isRequired}
         {...rest}
       />
-      <HelperTextBlock helperText={helperText} errorText={invalid} />
+      <HelperTextBlock helperText={helperText} errorText={invalid} warnText={warnText} />
     </div>
   );
 };

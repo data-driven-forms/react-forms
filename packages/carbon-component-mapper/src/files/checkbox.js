@@ -33,10 +33,12 @@ const SingleCheckbox = (props) => {
 
   const invalid = (meta.touched || validateOnMount) && meta.error;
 
+  const warnText = (meta.touched || validateOnMount) && meta.warning;
+
   return (
     <div {...WrapperProps}>
       <CarbonCheckbox {...input} id={input.name} {...rest} />
-      <HelperTextBlock helperText={helperText} errorText={invalid} />
+      <HelperTextBlock helperText={helperText} errorText={invalid} warnText={warnText} />
     </div>
   );
 };

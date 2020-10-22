@@ -3,9 +3,13 @@ import PropTypes from 'prop-types';
 
 import './helper-text-block.scss';
 
-const HelperTextBlock = ({ helperText, errorText }) => {
+const HelperTextBlock = ({ helperText, errorText, warnText }) => {
   if (errorText) {
     return <div className="bx--form-requirement ddorg__carbon-error-helper-text">{errorText}</div>;
+  }
+
+  if (warnText) {
+    return <div className="bx--form-requirement ddorg__carbon-warning-helper-text">{warnText}</div>;
   }
 
   if (helperText) {
@@ -17,7 +21,8 @@ const HelperTextBlock = ({ helperText, errorText }) => {
 
 HelperTextBlock.propTypes = {
   helperText: PropTypes.node,
-  errorText: PropTypes.node
+  errorText: PropTypes.node,
+  warnText: PropTypes.node
 };
 
 export default HelperTextBlock;
