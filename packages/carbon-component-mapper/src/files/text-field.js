@@ -10,8 +10,20 @@ const TextField = (props) => {
   const { input, meta, validateOnMount, ...rest } = useFieldApi(prepareProps(props));
 
   const invalid = (meta.touched || validateOnMount) && meta.error;
+  const warn = (meta.touched || validateOnMount) && meta.warning;
 
-  return <TextInput {...input} key={input.name} id={input.name} invalid={Boolean(invalid)} invalidText={invalid || ''} {...rest} />;
+  return (
+    <TextInput
+      {...input}
+      key={input.name}
+      id={input.name}
+      invalid={Boolean(invalid)}
+      invalidText={invalid || ''}
+      warn={Boolean(warn)}
+      warnText={warn || ''}
+      {...rest}
+    />
+  );
 };
 
 TextField.propTypes = {

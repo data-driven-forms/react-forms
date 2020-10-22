@@ -166,7 +166,7 @@ ClearedSelect.propTypes = {
 };
 
 const Select = (props) => {
-  const { isMulti, isSearchable, loadOptions, input, meta, validateOnMount, ...rest } = useFieldApi(prepareProps(props));
+  const { isMulti, isSearchable, loadOptions, input, meta, validateOnMount, helperText, ...rest } = useFieldApi(prepareProps(props));
 
   const [loadOptionsChangeCounter, setCounter] = useState(0);
 
@@ -180,6 +180,7 @@ const Select = (props) => {
   const Component = isMulti && isSearchable ? ClearedMultiSelectFilterable : isMulti ? ClearedMultiSelect : ClearedSelect;
 
   const invalidText = ((meta.touched || validateOnMount) && meta.error) || '';
+  const text = ((meta.touched || validateOnMount) && meta.warning) || helperText;
 
   return (
     <DataDrivenSelect
@@ -191,6 +192,7 @@ const Select = (props) => {
       invalidText={invalidText}
       loadOptionsChangeCounter={loadOptionsChangeCounter}
       originalOnChange={multiOnChange(input, rest.simpleValue)}
+      helperText={text}
     />
   );
 };

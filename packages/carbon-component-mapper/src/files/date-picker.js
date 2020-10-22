@@ -11,13 +11,14 @@ const DatePicker = (props) => {
   const { input, datePickerType, meta, DatePickerProps, validateOnMount, helperText, WrapperProps, ...rest } = useFieldApi(prepareProps(props));
 
   const invalid = (meta.touched || validateOnMount) && meta.error;
+  const warnText = (meta.touched || validateOnMount) && meta.warning;
 
   return (
     <div {...WrapperProps}>
       <CarbonDatePicker {...input} datePickerType={datePickerType} {...DatePickerProps}>
         <DatePickerInput id={input.name} invalid={Boolean(invalid)} invalidText={invalid ? invalid : ''} {...rest} />
       </CarbonDatePicker>
-      <HelperTextBlock helperText={!invalid && helperText} />
+      <HelperTextBlock helperText={!invalid && helperText} warnText={warnText} />
     </div>
   );
 };
