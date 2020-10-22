@@ -73,3 +73,6 @@ packages/react-renderer-demo/public/vendor.css
 
 # Rollup build info
 packages/**/size-snapshot.json
+
+# Node version manager configuration
+.nvmrc
