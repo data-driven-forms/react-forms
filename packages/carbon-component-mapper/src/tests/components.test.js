@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { act } from 'react-dom/test-utils';
 
 import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 
@@ -95,6 +96,34 @@ describe('component tests', () => {
 
           if (wrapper.find('.ddorg__carbon-error-helper-text').length) {
             expect(wrapper.find('.ddorg__carbon-error-helper-text').text()).toEqual(errorText);
+          }
+        });
+
+        it('renders with warning', async () => {
+          const errorField = {
+            ...field,
+            validate: [{ type: validatorTypes.REQUIRED, warning: true }],
+            useWarnings: true,
+            validateOnMount: true
+          };
+          let wrapper;
+
+          await act(async () => {
+            wrapper = mount(<RendererWrapper schema={{ fields: [errorField] }} />);
+          });
+          wrapper.update();
+
+          const helperText = wrapper.find('.bx--form__helper-text');
+
+          if (helperText.length) {
+            expect(helperText.text()).toEqual(errorText);
+          } else {
+            expect(
+              wrapper
+                .find('.bx--form-requirement')
+                .last()
+                .text()
+            ).toEqual(errorText);
           }
         });
 

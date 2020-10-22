@@ -15,6 +15,7 @@ const TimePicker = (props) => {
   const isMounted = useRef(false);
 
   const invalid = (meta.touched || validateOnMount) && meta.error;
+  const warnText = (meta.touched || validateOnMount) && meta.warning;
 
   let finalValue = input.value;
   if (input.value instanceof Date) {
@@ -93,7 +94,7 @@ const TimePicker = (props) => {
           </TimePickerSelect>
         )}
       </CarbonTimePicker>
-      <HelperTextBlock helperText={!invalid && helperText} />
+      <HelperTextBlock helperText={!invalid && helperText} warnText={warnText} />
     </div>
   );
 };

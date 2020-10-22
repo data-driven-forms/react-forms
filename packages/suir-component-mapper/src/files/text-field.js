@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Input } from 'semantic-ui-react';
 
-import { validationError } from '../common/helpers';
+import { validationError, validationWarning } from '../common/helpers';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormFieldGrid from '../common/form-field-grid';
 import FormField from '../common/form-field';
@@ -25,7 +25,7 @@ const TextField = (props) => {
   const invalid = validationError(meta, validateOnMount);
 
   return (
-    <FormFieldGrid helperText={helperText} HelpertextProps={HelpertextProps} {...FormFieldGridProps}>
+    <FormFieldGrid helperText={validationWarning(meta, validateOnMount) || helperText} HelpertextProps={HelpertextProps} {...FormFieldGridProps}>
       <FormField
         {...rest}
         control={Input}

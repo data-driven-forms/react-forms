@@ -7,11 +7,12 @@ import { TextArea } from 'carbon-components-react';
 import prepareProps from '../common/prepare-props';
 
 const Textarea = (props) => {
-  const { input, meta, validateOnMount, ...rest } = useFieldApi(prepareProps(props));
+  const { input, meta, validateOnMount, helperText, ...rest } = useFieldApi(prepareProps(props));
 
   const invalid = (meta.touched || validateOnMount) && meta.error;
+  const text = ((meta.touched || validateOnMount) && meta.warning) || helperText;
 
-  return <TextArea {...input} key={input.name} id={input.name} invalid={Boolean(invalid)} invalidText={invalid || ''} {...rest} />;
+  return <TextArea {...input} key={input.name} id={input.name} invalid={Boolean(invalid)} invalidText={invalid || ''} helperText={text} {...rest} />;
 };
 
 Textarea.propTypes = {
@@ -20,7 +21,8 @@ Textarea.propTypes = {
   isRequired: PropTypes.bool,
   label: PropTypes.node,
   labelText: PropTypes.node,
-  description: PropTypes.node
+  description: PropTypes.node,
+  helperText: PropTypes.node
 };
 
 export default Textarea;

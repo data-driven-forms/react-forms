@@ -73,7 +73,7 @@ const Radio = ({ name, ...props }) => {
   });
   const classes = useStyles();
   const invalid = validationError(meta, validateOnMount);
-  const text = invalid || helperText || description;
+  const text = invalid || ((meta.touched || validateOnMount) && meta.warning) || helperText || description;
   return (
     <FormFieldGrid className={classes.grid} {...FormFieldGridProps}>
       <FormControl required={isRequired} error={!!invalid} component="fieldset" {...FormControlProps}>
@@ -83,7 +83,7 @@ const Radio = ({ name, ...props }) => {
         {options.map((option) => (
           <RadioOption key={option.value} name={name} option={option} isDisabled={isDisabled} isReadOnly={isReadOnly} {...rest} />
         ))}
-        {(invalid || text) && <FormHelperText {...FormHelperTextProps}>{invalid || text}</FormHelperText>}
+        {text && <FormHelperText {...FormHelperTextProps}>{text}</FormHelperText>}
       </FormControl>
     </FormFieldGrid>
   );

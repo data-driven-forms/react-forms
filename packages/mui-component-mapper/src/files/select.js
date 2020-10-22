@@ -98,7 +98,7 @@ const InternalSelect = ({
             {...params}
             required={required}
             error={!!invalid}
-            helperText={invalid ? meta.error : helperText || description}
+            helperText={invalid || ((meta.touched || validateOnMount) && meta.warning) || helperText || description}
             label={label}
             margin="normal"
             {...TextFieldProps}

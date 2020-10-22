@@ -7,10 +7,17 @@ import { childrenPropTypes } from '@data-driven-forms/common/src/prop-types-temp
 
 const AntForm = ({ label, children, isRequired, FormItemProps, meta, validateOnMount, helperText, description, hideLabel }) => {
   const invalid = validationError(meta, validateOnMount);
-  const help = invalid || helperText || description;
+  const warning = (meta.touched || validateOnMount) && meta.warning;
+  const help = invalid || warning || helperText || description;
 
   return (
-    <Form.Item validateStatus={!invalid ? '' : 'error'} help={help} label={!hideLabel && label} required={isRequired} {...FormItemProps}>
+    <Form.Item
+      validateStatus={!invalid ? (warning ? 'warning' : '') : 'error'}
+      help={help}
+      label={!hideLabel && label}
+      required={isRequired}
+      {...FormItemProps}
+    >
       {children}
     </Form.Item>
   );
