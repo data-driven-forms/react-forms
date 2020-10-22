@@ -7,7 +7,7 @@ import FormField from '../common/form-field';
 import { createUseStyles } from 'react-jss';
 import clsx from 'clsx';
 import FormFieldGrid from '../common/form-field-grid';
-import { validationError } from '../common/helpers';
+import { validationError, validationWarning } from '../common/helpers';
 
 const useListStyles = createUseStyles({
   root: {
@@ -180,7 +180,7 @@ const DualList = ({
   const invalid = validationError(meta, validateOnMount);
   const classes = useDualListStyles();
   return (
-    <FormFieldGrid helperText={helperText} HelperTextProps={HelperTextProps} {...FormFieldGridProps}>
+    <FormFieldGrid helperText={validationWarning(meta, validateOnMount) || helperText} HelperTextProps={HelperTextProps} {...FormFieldGridProps}>
       <FormField
         label={label}
         required={isRequired}

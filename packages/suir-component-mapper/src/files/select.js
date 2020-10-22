@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import CommonSelect from '@data-driven-forms/common/src/select';
 import parseInternalValue from '@data-driven-forms/common/src/select/parse-internal-value';
 import FormFieldGrid from '../common/form-field-grid';
-import { validationError } from '../common/helpers';
+import { validationError, validationWarning } from '../common/helpers';
 import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import { Dropdown } from 'semantic-ui-react';
@@ -38,7 +38,7 @@ const SuirSelect = ({
   const internalValue = parseInternalValue(value, isMulti);
 
   return (
-    <FormFieldGrid helperText={helperText} HelpertextProps={HelpertextProps} {...FormFieldGridProps}>
+    <FormFieldGrid helperText={validationWarning(meta, validateOnMount) || helperText} HelpertextProps={HelpertextProps} {...FormFieldGridProps}>
       <FormField
         disabled={isDisabled}
         readOnly={isReadOnly}
