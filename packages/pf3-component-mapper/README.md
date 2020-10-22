@@ -25,7 +25,7 @@ Patternfly 3 component mapper for [Data Driven Forms](https://github.com/data-dr
 
 ### Installation
 
-You neet to add React Form Renderer
+You need to add React Form Renderer
 
 #### [React Form Renderer](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)
 
@@ -79,18 +79,21 @@ const Form = () => (
 
 Data Driven Forms supports all kinds of component, basic set is consisted of:
 
-- Text input
-- Text area
-- Checkbox (Multiple checkboxes)
-- Select (dropdown)
-- Switch
-- Radio buttons
-- Date picker
-- Time picker
-- Tabs
-- Slider
-- Sub-form
-- Wizard
+- [Text input](https://data-driven-forms.org/mappers/text-field?mapper=pf3)
+- [Text area](https://data-driven-forms.org/mappers/textarea?mapper=pf3)
+- [Checkbox](https://data-driven-forms.org/mappers/checkbox?mapper=pf3) ([Multiple checkboxes](https://data-driven-forms.org/mappers/checkbox-multiple?mapper=pf3))
+- [Select (dropdown)](https://data-driven-forms.org/mappers/select?mapper=pf3)
+- [Dual list select](https://data-driven-forms.org/mappers/dual-list-select?mapper=pf3)
+- [Field array](https://data-driven-forms.org/mappers/field-array?mapper=pf3)
+- [Switch](https://data-driven-forms.org/mappers/switch?mapper=pf3)
+- [Radio buttons](https://data-driven-forms.org/mappers/radio?mapper=pf3)
+- [Date picker](https://data-driven-forms.org/mappers/date-picker?mapper=pf3)
+- [Time picker](https://data-driven-forms.org/mappers/time-picker?mapper=pf3)
+- [Tabs](https://data-driven-forms.org/mappers/tabs?mapper=pf3)
+- [Slider](https://data-driven-forms.org/mappers/slider?mapper=pf3)
+- [Sub-form](https://data-driven-forms.org/mappers/sub-form?mapper=pf3)
+- [Plain text](https://data-driven-forms.org/mappers/plain-text?mapper=pf3)
+- [Wizard](https://data-driven-forms.org/mappers/wizard?mapper=pf3)
 
 ### Useful links
 

@@ -8,8 +8,6 @@ Parsers for [Data Driven Forms](https://github.com/data-driven-forms/react-forms
 
 :book: For more information please visit the [documentation](https://data-driven-forms.org/). :book:
 
-Used by [ManageIQ](http://manageiq.org/), Red Hat Cloud Services.
-
 **Table of Contents**
 
 - [Installation](#installation)

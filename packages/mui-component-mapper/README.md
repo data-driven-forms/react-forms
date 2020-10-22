@@ -28,7 +28,7 @@ Material-UI component mapper for [Data Driven Forms](https://github.com/data-dri
 
 ### Installation
 
-You neet to add React Form Renderer
+You need to add React Form Renderer
 
 #### [React Form Renderer](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)
 
@@ -82,20 +82,21 @@ const Form = () => (
 
 Data Driven Forms supports all kinds of component, basic set is consisted of:
 
-- Text input
-- Text area
-- Checkbox (Multiple checkboxes)
-- Select (dropdown)
-- Dual list select
-- Field array
-- Switch
-- Radio buttons
-- Date picker
-- Time picker
-- Tabs
-- Slider
-- Sub-form
-- Wizard
+- [Text input](https://data-driven-forms.org/mappers/text-field?mapper=mui)
+- [Text area](https://data-driven-forms.org/mappers/textarea?mapper=mui)
+- [Checkbox](https://data-driven-forms.org/mappers/checkbox?mapper=mui) ([Multiple checkboxes](https://data-driven-forms.org/mappers/checkbox-multiple?mapper=mui))
+- [Select (dropdown)](https://data-driven-forms.org/mappers/select?mapper=mui)
+- [Dual list select](https://data-driven-forms.org/mappers/dual-list-select?mapper=mui)
+- [Field array](https://data-driven-forms.org/mappers/field-array?mapper=mui)
+- [Switch](https://data-driven-forms.org/mappers/switch?mapper=mui)
+- [Radio buttons](https://data-driven-forms.org/mappers/radio?mapper=mui)
+- [Date picker](https://data-driven-forms.org/mappers/date-picker?mapper=mui)
+- [Time picker](https://data-driven-forms.org/mappers/time-picker?mapper=mui)
+- [Tabs](https://data-driven-forms.org/mappers/tabs?mapper=mui)
+- [Slider](https://data-driven-forms.org/mappers/slider?mapper=mui)
+- [Sub-form](https://data-driven-forms.org/mappers/sub-form?mapper=mui)
+- [Plain text](https://data-driven-forms.org/mappers/plain-text?mapper=mui)
+- [Wizard](https://data-driven-forms.org/mappers/wizard?mapper=mui)
 
 ### Useful links
 
