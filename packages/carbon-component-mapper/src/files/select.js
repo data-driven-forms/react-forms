@@ -5,7 +5,7 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import DataDrivenSelect from '@data-driven-forms/common/src/select';
 import fnToString from '@data-driven-forms/common/src/utils/fn-to-string';
 
-import { Select as CarbonSelect, MultiSelect, SelectItem } from 'carbon-components-react';
+import { Select as CarbonSelect, MultiSelect, SelectItem, ComboBox } from 'carbon-components-react';
 import prepareProps from '../common/prepare-props';
 
 export const multiOnChange = (input, simpleValue) => ({ selectedItems }) => {
@@ -165,8 +165,63 @@ ClearedSelect.propTypes = {
   isClearable: PropTypes.bool
 };
 
+const ClearedSelectSearchable = ({
+  isSearchable,
+  isClearable,
+  isDisabled,
+  isMulti,
+  invalidText,
+  hideSelectedOptions,
+  noOptionsMessage,
+  onInputChange,
+  options,
+  isFetching,
+  invalid,
+  classNamePrefix,
+  closeMenuOnSelect,
+  originalOnChange,
+  placeholder,
+  labelText,
+  ...rest
+}) => (
+  <ComboBox
+    disabled={isFetching}
+    {...rest}
+    id={rest.name}
+    invalid={Boolean(invalidText)}
+    invalidText={invalidText}
+    initialSelectedItem={rest.value}
+    items={options}
+    placeholder={placeholder}
+    titleText={labelText}
+    onChange={originalOnChange}
+  />
+);
+
+ClearedSelectSearchable.propTypes = {
+  invalidText: PropTypes.node,
+  hideSelectedOptions: PropTypes.any,
+  noOptionsMessage: PropTypes.any,
+  onInputChange: PropTypes.func,
+  options: PropTypes.array,
+  isFetching: PropTypes.bool,
+  invalid: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
+  isMulti: PropTypes.bool,
+  classNamePrefix: PropTypes.any,
+  closeMenuOnSelect: PropTypes.any,
+  onChange: PropTypes.func,
+  originalOnChange: PropTypes.func,
+  carbonLabel: PropTypes.node,
+  placeholder: PropTypes.node,
+  isDisabled: PropTypes.bool,
+  isRequired: PropTypes.bool,
+  isSearchable: PropTypes.bool,
+  isClearable: PropTypes.bool,
+  labelText: PropTypes.string
+};
+
 const Select = (props) => {
-  const { isMulti, isSearchable, loadOptions, input, meta, validateOnMount, ...rest } = useFieldApi(prepareProps(props));
+  const { isMulti, isSearchable, isClearable, loadOptions, input, meta, validateOnMount, ...rest } = useFieldApi(prepareProps(props));
 
   const [loadOptionsChangeCounter, setCounter] = useState(0);
 
@@ -176,8 +231,10 @@ const Select = (props) => {
     setCounter(loadOptionsChangeCounter + 1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loadOptionsStr]);
+  const isSearchClear = isSearchable || isClearable;
 
-  const Component = isMulti && isSearchable ? ClearedMultiSelectFilterable : isMulti ? ClearedMultiSelect : ClearedSelect;
+  const Component =
+    isMulti && isSearchClear ? ClearedMultiSelectFilterable : isMulti ? ClearedMultiSelect : isSearchClear ? ClearedSelectSearchable : ClearedSelect;
 
   const invalidText = ((meta.touched || validateOnMount) && meta.error) || '';
 

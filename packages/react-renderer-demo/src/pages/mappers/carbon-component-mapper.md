@@ -38,41 +38,10 @@ This field will show the error immediately.
 
 ## Select
 
-### No isClearable
+### isClearable and isSearchable turn on each other
 
-Carbon select does not support `isClearable` option, instead of it use an option with null.
+Carbon doesn't provide a component that is searchable but not clearable and vice versa. Therefore, if one of these two options is turned on, it automatically triggers the other.
 
-🛑
-
-```jsx
-{
-   component: 'select',
-   label: 'select',
-   isClearable: true,
-   options: [
-        {value: 'option 1', label: 'first option'},
-        {value: 'option 2', label: 'second option'}
-    ]
-}
-```
-
-🆗
-
-```jsx
-{
-   component: 'select',
-   label: 'select',
-   options: [
-         {label: 'none', value: null},
-         {value: 'option 1', label: 'first option'},
-         {value: 'option 2', label: 'second option'}
-    ]
-}
-```
-
-### Single select cannot be isSearchable
-
-No known workaround.
 
 ### No async filtering options in multiselect
 
