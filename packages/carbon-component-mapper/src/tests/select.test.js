@@ -5,7 +5,7 @@ import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-rend
 
 import FormTemplate from '../files/form-template';
 import componentMapper from '../files/component-mapper';
-import { Select, MultiSelect } from 'carbon-components-react';
+import { Select, MultiSelect, ComboBox } from 'carbon-components-react';
 import { multiOnChange } from '../files/select';
 
 describe('<Select />', () => {
@@ -29,6 +29,31 @@ describe('<Select />', () => {
     );
 
     expect(wrapper.find(Select)).toHaveLength(1);
+  });
+
+  ['isSearchable', 'isClearable'].forEach((setting) => {
+    it(`renders select ${setting}`, () => {
+      const schema = {
+        fields: [
+          {
+            component: componentTypes.SELECT,
+            name: 'select',
+            label: 'select',
+            [setting]: true,
+            options: [
+              { label: 'option 1', value: 1 },
+              { label: 'option 2', value: 2 }
+            ]
+          }
+        ]
+      };
+
+      const wrapper = mount(
+        <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
+      );
+
+      expect(wrapper.find(ComboBox)).toHaveLength(1);
+    });
   });
 
   it('renders multi select', () => {
@@ -55,29 +80,31 @@ describe('<Select />', () => {
     expect(wrapper.find(MultiSelect)).toHaveLength(1);
   });
 
-  it('renders multi select - searchable', () => {
-    const schema = {
-      fields: [
-        {
-          component: componentTypes.SELECT,
-          name: 'select',
-          label: 'select',
-          initialValue: [1],
-          isMulti: true,
-          isSearchable: true,
-          options: [
-            { label: 'option 1', value: 1 },
-            { label: 'option 2', value: 2 }
-          ]
-        }
-      ]
-    };
+  ['isSearchable', 'isClearable'].forEach((setting) => {
+    it(`renders multi select - ${setting}`, () => {
+      const schema = {
+        fields: [
+          {
+            component: componentTypes.SELECT,
+            name: 'select',
+            label: 'select',
+            initialValue: [1],
+            isMulti: true,
+            [setting]: true,
+            options: [
+              { label: 'option 1', value: 1 },
+              { label: 'option 2', value: 2 }
+            ]
+          }
+        ]
+      };
 
-    const wrapper = mount(
-      <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
-    );
+      const wrapper = mount(
+        <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
+      );
 
-    expect(wrapper.find(MultiSelect.Filterable)).toHaveLength(1);
+      expect(wrapper.find(MultiSelect.Filterable)).toHaveLength(1);
+    });
   });
 
   describe('multichange', () => {
