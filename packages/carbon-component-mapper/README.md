@@ -25,7 +25,7 @@ Carbon component mapper for [Data Driven Forms](https://github.com/data-driven-f
 
 ### Installation
 
-You neet to add React Form Renderer
+You need to add React Form Renderer
 
 #### [React Form Renderer](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)
 
@@ -79,20 +79,21 @@ const Form = () => (
 
 Data Driven Forms supports all kinds of component, basic set is consisted of:
 
-- Text input
-- Text area
-- Checkbox (Multiple checkboxes)
-- Select (dropdown)
-- Dual list select
-- Field array
-- Switch
-- Radio buttons
-- Date picker
-- Time picker
-- Tabs
-- Slider
-- Sub-form
-- Wizard
+- [Text input](https://data-driven-forms.org/mappers/text-field?mapper=carbon)
+- [Text area](https://data-driven-forms.org/mappers/textarea?mapper=carbon)
+- [Checkbox](https://data-driven-forms.org/mappers/checkbox?mapper=carbon) ([Multiple checkboxes](https://data-driven-forms.org/mappers/checkbox-multiple?mapper=carbon))
+- [Select (dropdown)](https://data-driven-forms.org/mappers/select?mapper=carbon)
+- [Dual list select](https://data-driven-forms.org/mappers/dual-list-select?mapper=carbon)
+- [Field array](https://data-driven-forms.org/mappers/field-array?mapper=carbon)
+- [Switch](https://data-driven-forms.org/mappers/switch?mapper=carbon)
+- [Radio buttons](https://data-driven-forms.org/mappers/radio?mapper=carbon)
+- [Date picker](https://data-driven-forms.org/mappers/date-picker?mapper=carbon)
+- [Time picker](https://data-driven-forms.org/mappers/time-picker?mapper=carbon)
+- [Tabs](https://data-driven-forms.org/mappers/tabs?mapper=carbon)
+- [Slider](https://data-driven-forms.org/mappers/slider?mapper=carbon)
+- [Sub-form](https://data-driven-forms.org/mappers/sub-form?mapper=carbon)
+- [Plain text](https://data-driven-forms.org/mappers/plain-text?mapper=carbon)
+- [Wizard](https://data-driven-forms.org/mappers/wizard?mapper=carbon)
 
 ### Useful links
 

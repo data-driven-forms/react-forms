@@ -25,7 +25,7 @@ Blueprint component mapper for [Data Driven Forms](https://github.com/data-drive
 
 ### Installation
 
-You neet to add React Form Renderer
+You need to add React Form Renderer
 
 #### [React Form Renderer](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)
 
@@ -79,20 +79,21 @@ const Form = () => (
 
 Data Driven Forms supports all kinds of component, basic set is consisted of:
 
-- Text input
-- Text area
-- Checkbox (Multiple checkboxes)
-- Select (dropdown)
-- Dual list select
-- Field array
-- Switch
-- Radio buttons
-- Date picker
-- Time picker
-- Tabs
-- Slider
-- Sub-form
-- Wizard
+- [Text input](https://data-driven-forms.org/mappers/text-field?mapper=blueprint)
+- [Text area](https://data-driven-forms.org/mappers/textarea?mapper=blueprint)
+- [Checkbox](https://data-driven-forms.org/mappers/checkbox?mapper=blueprint) ([Multiple checkboxes](https://data-driven-forms.org/mappers/checkbox-multiple?mapper=blueprint))
+- [Select (dropdown)](https://data-driven-forms.org/mappers/select?mapper=blueprint)
+- [Dual list select](https://data-driven-forms.org/mappers/dual-list-select?mapper=blueprint)
+- [Field array](https://data-driven-forms.org/mappers/field-array?mapper=blueprint)
+- [Switch](https://data-driven-forms.org/mappers/switch?mapper=blueprint)
+- [Radio buttons](https://data-driven-forms.org/mappers/radio?mapper=blueprint)
+- [Date picker](https://data-driven-forms.org/mappers/date-picker?mapper=blueprint)
+- [Time picker](https://data-driven-forms.org/mappers/time-picker?mapper=blueprint)
+- [Tabs](https://data-driven-forms.org/mappers/tabs?mapper=blueprint)
+- [Slider](https://data-driven-forms.org/mappers/slider?mapper=blueprint)
+- [Sub-form](https://data-driven-forms.org/mappers/sub-form?mapper=blueprint)
+- [Plain text](https://data-driven-forms.org/mappers/plain-text?mapper=blueprint)
+- [Wizard](https://data-driven-forms.org/mappers/wizard?mapper=blueprint)
 
 ### Useful links
 
