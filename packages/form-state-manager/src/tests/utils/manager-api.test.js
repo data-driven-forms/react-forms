@@ -1904,4 +1904,25 @@ describe('managerApi', () => {
       });
     });
   });
+
+  describe('invalid submit', () => {
+    it('should not call submit action when invalid + all fields are touched', () => {
+      const onSubmit = jest.fn();
+
+      const managerApi = createManagerApi({ onSubmit });
+
+      managerApi().registerField({ name: 'field', validate: () => 'error', render: jest.fn(), internalId: 1 });
+      managerApi().registerField({ name: 'field2', render: jest.fn(), internalId: 1 });
+
+      expect(managerApi().getFieldState('field').touched).toEqual(false);
+      expect(managerApi().getFieldState('field').touched).toEqual(false);
+
+      managerApi().handleSubmit();
+
+      expect(managerApi().getFieldState('field').touched).toEqual(true);
+      expect(managerApi().getFieldState('field').touched).toEqual(true);
+
+      expect(onSubmit).not.toHaveBeenCalled();
+    });
+  });
 });

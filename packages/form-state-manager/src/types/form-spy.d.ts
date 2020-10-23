@@ -1,4 +1,4 @@
-import { Subscription } from './use-subscription';
+import { Subscription } from './use-field';
 import { ManagerState } from './manager-api';
 
 type Children = (props: ManagerState) => React.ReactElement;
