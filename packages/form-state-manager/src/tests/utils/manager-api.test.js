@@ -60,7 +60,11 @@ describe('managerApi', () => {
 
   describe('change', () => {
     it('should change the managerApi state', () => {
+      const render = jest.fn();
+
       const managerApi = createManagerApi({});
+      managerApi().registerField({ name: 'foo', render, internalId: '1' });
+
       managerApi().change('foo', 'bar');
 
       expect(managerApi().values).toEqual({ foo: 'bar' });
@@ -1924,5 +1928,37 @@ describe('managerApi', () => {
 
       expect(onSubmit).not.toHaveBeenCalled();
     });
+  });
+
+  it('set form dirty and pristine according to fields', () => {
+    const onSubmit = jest.fn();
+
+    const managerApi = createManagerApi({ onSubmit });
+
+    managerApi().registerField({ name: 'field', render: jest.fn(), internalId: 1 });
+    managerApi().registerField({ name: 'field2', render: jest.fn(), internalId: 1, initialValue: 'initial' });
+
+    expect(managerApi().getState().pristine).toEqual(true);
+    expect(managerApi().getState().dirty).toEqual(false);
+
+    managerApi().change('field', 'foo');
+
+    expect(managerApi().getState().pristine).toEqual(false);
+    expect(managerApi().getState().dirty).toEqual(true);
+
+    managerApi().change('field2', 'initial-123');
+
+    expect(managerApi().getState().pristine).toEqual(false);
+    expect(managerApi().getState().dirty).toEqual(true);
+
+    managerApi().change('field', undefined);
+
+    expect(managerApi().getState().pristine).toEqual(false);
+    expect(managerApi().getState().dirty).toEqual(true);
+
+    managerApi().change('field2', 'initial');
+
+    expect(managerApi().getState().pristine).toEqual(true);
+    expect(managerApi().getState().dirty).toEqual(false);
   });
 });
