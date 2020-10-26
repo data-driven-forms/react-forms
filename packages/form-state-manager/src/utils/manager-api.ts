@@ -517,8 +517,11 @@ const createManagerApi: CreateManagerApi = ({
         },
         value
       }));
-      state.pristine = false;
-      state.dirty = true;
+
+      const setDirty = isFormDirty();
+
+      state.pristine = !setDirty;
+      state.dirty = setDirty;
 
       revalidateFields([name, ...(state.fieldListeners[name]?.validateFields || state.registeredFields.filter((n) => n !== name))]);
 
@@ -528,6 +531,10 @@ const createManagerApi: CreateManagerApi = ({
 
       render();
     });
+  }
+
+  function isFormDirty(): boolean {
+    return Object.entries(state.fieldListeners).some(([, field]) => field?.state?.meta?.dirty);
   }
 
   function focus(name: string): void {
