@@ -432,6 +432,7 @@ const createManagerApi: CreateManagerApi = ({
         .then(() => {
           if (!state.validating) {
             state.errors = {};
+            state.hasValidationErrors = false;
             state.valid = true;
             state.invalid = false;
             state.error = undefined;
@@ -440,6 +441,7 @@ const createManagerApi: CreateManagerApi = ({
         })
         .catch((errors) => {
           state.errors = errors;
+          state.hasValidationErrors = true;
           state.valid = false;
           state.invalid = true;
         });
@@ -451,10 +453,12 @@ const createManagerApi: CreateManagerApi = ({
         handleFieldError(name, false, syncError[name]);
       });
       state.errors = syncError;
+      state.hasValidationErrors = true;
       state.valid = false;
       state.invalid = true;
     } else {
       state.errors = {};
+      state.hasValidationErrors = false;
       state.valid = true;
       state.invalid = false;
       state.error = undefined;
@@ -795,6 +799,7 @@ const createManagerApi: CreateManagerApi = ({
       state.errors[name] = error;
       state.valid = false;
       state.invalid = true;
+      state.hasValidationErrors = true;
     } else {
       delete state.errors[name];
     }
@@ -802,6 +807,7 @@ const createManagerApi: CreateManagerApi = ({
     if (Object.keys(state.errors).length === 0) {
       state.valid = true;
       state.invalid = false;
+      state.hasValidationErrors = false;
     }
 
     render();

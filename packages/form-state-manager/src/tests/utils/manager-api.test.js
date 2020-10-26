@@ -602,6 +602,7 @@ describe('managerApi', () => {
     expect(managerApi().submitSucceeded).toEqual(false);
     expect(managerApi().submitErrors).toEqual(error);
     expect(managerApi().hasSubmitErrors).toEqual(true);
+    expect(managerApi().hasValidationErrors).toEqual(false);
   });
 
   it('onsubmit receives an error - form level', () => {
@@ -624,6 +625,7 @@ describe('managerApi', () => {
     expect(managerApi().submitSucceeded).toEqual(false);
     expect(managerApi().submitErrors).toEqual(error);
     expect(managerApi().hasSubmitErrors).toEqual(true);
+    expect(managerApi().hasValidationErrors).toEqual(false);
   });
 
   it('getField state should return correct field state', () => {
@@ -1071,6 +1073,7 @@ describe('managerApi', () => {
       expect(managerApi().getState().valid).toEqual(false);
       expect(managerApi().getState().invalid).toEqual(true);
       expect(managerApi().getState().validating).toEqual(false);
+      expect(managerApi().hasValidationErrors).toEqual(true);
     });
 
     it('should pass async level validation', () => {
@@ -1155,6 +1158,7 @@ describe('managerApi', () => {
         expect(managerApi().getState().valid).toEqual(false);
         expect(managerApi().getState().invalid).toEqual(true);
         expect(managerApi().getState().validating).toEqual(false);
+        expect(managerApi().hasValidationErrors).toEqual(true);
       });
     });
 
@@ -1173,6 +1177,7 @@ describe('managerApi', () => {
       expect(managerApi().getState().valid).toEqual(false);
       expect(managerApi().getState().invalid).toEqual(true);
       expect(managerApi().getState().validating).toEqual(false);
+      expect(managerApi().hasValidationErrors).toEqual(true);
 
       change('foo', 'ok');
 
@@ -1180,6 +1185,7 @@ describe('managerApi', () => {
       expect(managerApi().getState().valid).toEqual(true);
       expect(managerApi().getState().invalid).toEqual(false);
       expect(managerApi().getState().validating).toEqual(false);
+      expect(managerApi().hasValidationErrors).toEqual(false);
     });
 
     it('should fail and then pass async validation', () => {
@@ -1200,6 +1206,7 @@ describe('managerApi', () => {
         expect(managerApi().getState().valid).toEqual(false);
         expect(managerApi().getState().invalid).toEqual(true);
         expect(managerApi().getState().validating).toEqual(false);
+        expect(managerApi().hasValidationErrors).toEqual(true);
 
         change('foo', 'ok');
         jest.advanceTimersByTime(10);
@@ -1208,6 +1215,7 @@ describe('managerApi', () => {
           expect(managerApi().getState().valid).toEqual(true);
           expect(managerApi().getState().invalid).toEqual(false);
           expect(managerApi().getState().validating).toEqual(false);
+          expect(managerApi().hasValidationErrors).toEqual(false);
         });
       });
     });
