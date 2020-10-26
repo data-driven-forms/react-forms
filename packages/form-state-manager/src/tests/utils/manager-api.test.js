@@ -671,6 +671,23 @@ describe('managerApi', () => {
     expect(managerApi().active).toBeUndefined();
   });
 
+  it('should set blured field as touched', () => {
+    const managerApi = createManagerApi({});
+
+    managerApi().registerField({
+      name: 'field',
+      render: jest.fn(),
+      internalId: 1
+    });
+
+    expect(managerApi().fieldListeners.field.state.meta.touched).toEqual(false);
+
+    managerApi().focus('field');
+    managerApi().blur('field');
+
+    expect(managerApi().fieldListeners.field.state.meta.touched).toEqual(true);
+  });
+
   describe('initializeOnMount', () => {
     // not testable here, because we need to compute value in useSubscription
     // TODO: make global storage for field states ?

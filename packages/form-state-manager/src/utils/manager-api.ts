@@ -546,7 +546,7 @@ const createManagerApi: CreateManagerApi = ({
     if (state.active === name) {
       state.active = undefined;
 
-      setFieldState(name, (prevState) => ({ ...prevState, meta: { ...prevState.meta, active: false } }));
+      setFieldState(name, (prevState) => ({ ...prevState, meta: { ...prevState.meta, active: false, touched: true } }));
       rerender(['active']);
     }
   }
