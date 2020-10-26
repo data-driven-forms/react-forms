@@ -554,6 +554,24 @@ const createManagerApi: CreateManagerApi = ({
   function handleSubmit(event?: FormEvent): void {
     event && event.preventDefault && event.preventDefault();
 
+    if (state.submitting) {
+      return;
+    }
+
+    if (state.invalid) {
+      state.registeredFields.forEach((name) => {
+        setFieldState(name, (state) => ({
+          ...state,
+          meta: {
+            ...state.meta,
+            touched: true
+          }
+        }));
+      });
+
+      return;
+    }
+
     let error = false;
     state.registeredFields.forEach((name) =>
       traverseObject(state.fieldListeners[name].fields, (field) => {
