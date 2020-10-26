@@ -85,7 +85,7 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
     simpleValue={true}
     updatingMessage="Loading data"
   >
-    <StateManager
+    <SelectComponent
       className="pf3-select"
       classNamePrefix="pf3-select"
       closeMenuOnSelect={true}
@@ -96,9 +96,6 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
           "Option": [Function],
         }
       }
-      defaultInputValue=""
-      defaultMenuIsOpen={false}
-      defaultValue={null}
       hideSelectedOptions={false}
       isClearable={false}
       isFetching={false}
@@ -124,13 +121,9 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
         ]
       }
     >
-      <Select
-        backspaceRemovesValue={true}
-        blurInputOnSelect={true}
-        captureMenuScroll={false}
+      <StateManager
         className="pf3-select"
         classNamePrefix="pf3-select"
-        closeMenuOnScroll={false}
         closeMenuOnSelect={true}
         components={
           Object {
@@ -139,39 +132,18 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
             "Option": [Function],
           }
         }
-        controlShouldRenderValue={true}
-        escapeClearsValue={false}
-        filterOption={[Function]}
-        formatGroupLabel={[Function]}
-        getOptionLabel={[Function]}
-        getOptionValue={[Function]}
+        defaultInputValue=""
+        defaultMenuIsOpen={false}
+        defaultValue={null}
         hideSelectedOptions={false}
-        inputValue=""
         isClearable={false}
-        isDisabled={false}
         isFetching={false}
-        isLoading={false}
-        isMulti={false}
-        isOptionDisabled={[Function]}
-        isRtl={false}
         isSearchable={false}
-        loadingMessage={[Function]}
-        maxMenuHeight={300}
-        menuIsOpen={false}
-        menuPlacement="bottom"
-        menuPosition="absolute"
-        menuShouldBlockScroll={false}
-        menuShouldScrollIntoView={true}
         meta={Object {}}
-        minMenuHeight={140}
         name="select-input"
         noOptionsMessage={[Function]}
         onChange={[Function]}
         onInputChange={[Function]}
-        onMenuClose={[Function]}
-        onMenuOpen={[Function]}
-        openMenuOnClick={true}
-        openMenuOnFocus={false}
         options={
           Array [
             Object {
@@ -179,37 +151,64 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
             },
           ]
         }
-        pageSize={5}
         placeholder="Search..."
-        screenReaderStatus={[Function]}
-        styles={Object {}}
-        tabIndex="0"
-        tabSelectsValue={true}
         value={
           Array [
             Object {
               "label": "asyncLabel",
+              "value": undefined,
             },
           ]
         }
       >
-        <SelectContainer
+        <Select
+          backspaceRemovesValue={true}
+          blurInputOnSelect={true}
+          captureMenuScroll={false}
           className="pf3-select"
-          clearValue={[Function]}
-          cx={[Function]}
-          getStyles={[Function]}
-          getValue={[Function]}
-          hasValue={true}
-          innerProps={
+          classNamePrefix="pf3-select"
+          closeMenuOnScroll={false}
+          closeMenuOnSelect={true}
+          components={
             Object {
-              "id": undefined,
-              "onKeyDown": [Function],
+              "ClearIndicator": [Function],
+              "DropdownIndicator": [Function],
+              "Option": [Function],
             }
           }
+          controlShouldRenderValue={true}
+          escapeClearsValue={false}
+          filterOption={[Function]}
+          formatGroupLabel={[Function]}
+          getOptionLabel={[Function]}
+          getOptionValue={[Function]}
+          hideSelectedOptions={false}
+          inputValue=""
+          isClearable={false}
           isDisabled={false}
-          isFocused={false}
+          isFetching={false}
+          isLoading={false}
           isMulti={false}
+          isOptionDisabled={[Function]}
           isRtl={false}
+          isSearchable={false}
+          loadingMessage={[Function]}
+          maxMenuHeight={300}
+          menuIsOpen={false}
+          menuPlacement="bottom"
+          menuPosition="absolute"
+          menuShouldBlockScroll={false}
+          menuShouldScrollIntoView={true}
+          meta={Object {}}
+          minMenuHeight={140}
+          name="select-input"
+          noOptionsMessage={[Function]}
+          onChange={[Function]}
+          onInputChange={[Function]}
+          onMenuClose={[Function]}
+          onMenuOpen={[Function]}
+          openMenuOnClick={true}
+          openMenuOnFocus={false}
           options={
             Array [
               Object {
@@ -217,583 +216,609 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
               },
             ]
           }
-          selectOption={[Function]}
-          selectProps={
-            Object {
-              "backspaceRemovesValue": true,
-              "blurInputOnSelect": true,
-              "captureMenuScroll": false,
-              "className": "pf3-select",
-              "classNamePrefix": "pf3-select",
-              "closeMenuOnScroll": false,
-              "closeMenuOnSelect": true,
-              "components": Object {
-                "ClearIndicator": [Function],
-                "DropdownIndicator": [Function],
-                "Option": [Function],
+          pageSize={5}
+          placeholder="Search..."
+          screenReaderStatus={[Function]}
+          styles={Object {}}
+          tabIndex="0"
+          tabSelectsValue={true}
+          value={
+            Array [
+              Object {
+                "label": "asyncLabel",
+                "value": undefined,
               },
-              "controlShouldRenderValue": true,
-              "escapeClearsValue": false,
-              "filterOption": [Function],
-              "formatGroupLabel": [Function],
-              "getOptionLabel": [Function],
-              "getOptionValue": [Function],
-              "hideSelectedOptions": false,
-              "inputValue": "",
-              "isClearable": false,
-              "isDisabled": false,
-              "isFetching": false,
-              "isLoading": false,
-              "isMulti": false,
-              "isOptionDisabled": [Function],
-              "isRtl": false,
-              "isSearchable": false,
-              "loadingMessage": [Function],
-              "maxMenuHeight": 300,
-              "menuIsOpen": false,
-              "menuPlacement": "bottom",
-              "menuPosition": "absolute",
-              "menuShouldBlockScroll": false,
-              "menuShouldScrollIntoView": true,
-              "meta": Object {},
-              "minMenuHeight": 140,
-              "name": "select-input",
-              "noOptionsMessage": [Function],
-              "onChange": [Function],
-              "onInputChange": [Function],
-              "onMenuClose": [Function],
-              "onMenuOpen": [Function],
-              "openMenuOnClick": true,
-              "openMenuOnFocus": false,
-              "options": Array [
-                Object {
-                  "label": "asyncLabel",
-                },
-              ],
-              "pageSize": 5,
-              "placeholder": "Search...",
-              "screenReaderStatus": [Function],
-              "styles": Object {},
-              "tabIndex": "0",
-              "tabSelectsValue": true,
-              "value": Array [
-                Object {
-                  "label": "asyncLabel",
-                },
-              ],
-            }
-          }
-          setValue={[Function]}
-          theme={
-            Object {
-              "borderRadius": 4,
-              "colors": Object {
-                "danger": "#DE350B",
-                "dangerLight": "#FFBDAD",
-                "neutral0": "hsl(0, 0%, 100%)",
-                "neutral10": "hsl(0, 0%, 90%)",
-                "neutral20": "hsl(0, 0%, 80%)",
-                "neutral30": "hsl(0, 0%, 70%)",
-                "neutral40": "hsl(0, 0%, 60%)",
-                "neutral5": "hsl(0, 0%, 95%)",
-                "neutral50": "hsl(0, 0%, 50%)",
-                "neutral60": "hsl(0, 0%, 40%)",
-                "neutral70": "hsl(0, 0%, 30%)",
-                "neutral80": "hsl(0, 0%, 20%)",
-                "neutral90": "hsl(0, 0%, 10%)",
-                "primary": "#2684FF",
-                "primary25": "#DEEBFF",
-                "primary50": "#B2D4FF",
-                "primary75": "#4C9AFF",
-              },
-              "spacing": Object {
-                "baseUnit": 4,
-                "controlHeight": 38,
-                "menuGutter": 8,
-              },
-            }
+            ]
           }
         >
-          <EmotionCssPropInternal
-            __EMOTION_LABEL_PLEASE_DO_NOT_USE__="SelectContainer"
-            __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
+          <SelectContainer
             className="pf3-select"
-            css={
+            clearValue={[Function]}
+            cx={[Function]}
+            getStyles={[Function]}
+            getValue={[Function]}
+            hasValue={true}
+            innerProps={
               Object {
-                "boxSizing": "border-box",
-                "direction": null,
-                "label": "container",
-                "pointerEvents": null,
-                "position": "relative",
+                "id": undefined,
+                "onKeyDown": [Function],
               }
             }
-            onKeyDown={[Function]}
+            isDisabled={false}
+            isFocused={false}
+            isMulti={false}
+            isRtl={false}
+            options={
+              Array [
+                Object {
+                  "label": "asyncLabel",
+                },
+              ]
+            }
+            selectOption={[Function]}
+            selectProps={
+              Object {
+                "backspaceRemovesValue": true,
+                "blurInputOnSelect": true,
+                "captureMenuScroll": false,
+                "className": "pf3-select",
+                "classNamePrefix": "pf3-select",
+                "closeMenuOnScroll": false,
+                "closeMenuOnSelect": true,
+                "components": Object {
+                  "ClearIndicator": [Function],
+                  "DropdownIndicator": [Function],
+                  "Option": [Function],
+                },
+                "controlShouldRenderValue": true,
+                "escapeClearsValue": false,
+                "filterOption": [Function],
+                "formatGroupLabel": [Function],
+                "getOptionLabel": [Function],
+                "getOptionValue": [Function],
+                "hideSelectedOptions": false,
+                "inputValue": "",
+                "isClearable": false,
+                "isDisabled": false,
+                "isFetching": false,
+                "isLoading": false,
+                "isMulti": false,
+                "isOptionDisabled": [Function],
+                "isRtl": false,
+                "isSearchable": false,
+                "loadingMessage": [Function],
+                "maxMenuHeight": 300,
+                "menuIsOpen": false,
+                "menuPlacement": "bottom",
+                "menuPosition": "absolute",
+                "menuShouldBlockScroll": false,
+                "menuShouldScrollIntoView": true,
+                "meta": Object {},
+                "minMenuHeight": 140,
+                "name": "select-input",
+                "noOptionsMessage": [Function],
+                "onChange": [Function],
+                "onInputChange": [Function],
+                "onMenuClose": [Function],
+                "onMenuOpen": [Function],
+                "openMenuOnClick": true,
+                "openMenuOnFocus": false,
+                "options": Array [
+                  Object {
+                    "label": "asyncLabel",
+                  },
+                ],
+                "pageSize": 5,
+                "placeholder": "Search...",
+                "screenReaderStatus": [Function],
+                "styles": Object {},
+                "tabIndex": "0",
+                "tabSelectsValue": true,
+                "value": Array [
+                  Object {
+                    "label": "asyncLabel",
+                    "value": undefined,
+                  },
+                ],
+              }
+            }
+            setValue={[Function]}
+            theme={
+              Object {
+                "borderRadius": 4,
+                "colors": Object {
+                  "danger": "#DE350B",
+                  "dangerLight": "#FFBDAD",
+                  "neutral0": "hsl(0, 0%, 100%)",
+                  "neutral10": "hsl(0, 0%, 90%)",
+                  "neutral20": "hsl(0, 0%, 80%)",
+                  "neutral30": "hsl(0, 0%, 70%)",
+                  "neutral40": "hsl(0, 0%, 60%)",
+                  "neutral5": "hsl(0, 0%, 95%)",
+                  "neutral50": "hsl(0, 0%, 50%)",
+                  "neutral60": "hsl(0, 0%, 40%)",
+                  "neutral70": "hsl(0, 0%, 30%)",
+                  "neutral80": "hsl(0, 0%, 20%)",
+                  "neutral90": "hsl(0, 0%, 10%)",
+                  "primary": "#2684FF",
+                  "primary25": "#DEEBFF",
+                  "primary50": "#B2D4FF",
+                  "primary75": "#4C9AFF",
+                },
+                "spacing": Object {
+                  "baseUnit": 4,
+                  "controlHeight": 38,
+                  "menuGutter": 8,
+                },
+              }
+            }
           >
-            <div
-              className="pf3-select css-2b097c-container"
+            <EmotionCssPropInternal
+              __EMOTION_LABEL_PLEASE_DO_NOT_USE__="SelectContainer"
+              __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
+              className="pf3-select"
+              css={
+                Object {
+                  "boxSizing": "border-box",
+                  "direction": null,
+                  "label": "container",
+                  "pointerEvents": null,
+                  "position": "relative",
+                }
+              }
               onKeyDown={[Function]}
             >
-              <Control
-                clearValue={[Function]}
-                cx={[Function]}
-                getStyles={[Function]}
-                getValue={[Function]}
-                hasValue={true}
-                innerProps={
-                  Object {
-                    "onMouseDown": [Function],
-                    "onTouchEnd": [Function],
-                  }
-                }
-                innerRef={[Function]}
-                isDisabled={false}
-                isFocused={false}
-                isMulti={false}
-                isRtl={false}
-                menuIsOpen={false}
-                options={
-                  Array [
-                    Object {
-                      "label": "asyncLabel",
-                    },
-                  ]
-                }
-                selectOption={[Function]}
-                selectProps={
-                  Object {
-                    "backspaceRemovesValue": true,
-                    "blurInputOnSelect": true,
-                    "captureMenuScroll": false,
-                    "className": "pf3-select",
-                    "classNamePrefix": "pf3-select",
-                    "closeMenuOnScroll": false,
-                    "closeMenuOnSelect": true,
-                    "components": Object {
-                      "ClearIndicator": [Function],
-                      "DropdownIndicator": [Function],
-                      "Option": [Function],
-                    },
-                    "controlShouldRenderValue": true,
-                    "escapeClearsValue": false,
-                    "filterOption": [Function],
-                    "formatGroupLabel": [Function],
-                    "getOptionLabel": [Function],
-                    "getOptionValue": [Function],
-                    "hideSelectedOptions": false,
-                    "inputValue": "",
-                    "isClearable": false,
-                    "isDisabled": false,
-                    "isFetching": false,
-                    "isLoading": false,
-                    "isMulti": false,
-                    "isOptionDisabled": [Function],
-                    "isRtl": false,
-                    "isSearchable": false,
-                    "loadingMessage": [Function],
-                    "maxMenuHeight": 300,
-                    "menuIsOpen": false,
-                    "menuPlacement": "bottom",
-                    "menuPosition": "absolute",
-                    "menuShouldBlockScroll": false,
-                    "menuShouldScrollIntoView": true,
-                    "meta": Object {},
-                    "minMenuHeight": 140,
-                    "name": "select-input",
-                    "noOptionsMessage": [Function],
-                    "onChange": [Function],
-                    "onInputChange": [Function],
-                    "onMenuClose": [Function],
-                    "onMenuOpen": [Function],
-                    "openMenuOnClick": true,
-                    "openMenuOnFocus": false,
-                    "options": Array [
-                      Object {
-                        "label": "asyncLabel",
-                      },
-                    ],
-                    "pageSize": 5,
-                    "placeholder": "Search...",
-                    "screenReaderStatus": [Function],
-                    "styles": Object {},
-                    "tabIndex": "0",
-                    "tabSelectsValue": true,
-                    "value": Array [
-                      Object {
-                        "label": "asyncLabel",
-                      },
-                    ],
-                  }
-                }
-                setValue={[Function]}
-                theme={
-                  Object {
-                    "borderRadius": 4,
-                    "colors": Object {
-                      "danger": "#DE350B",
-                      "dangerLight": "#FFBDAD",
-                      "neutral0": "hsl(0, 0%, 100%)",
-                      "neutral10": "hsl(0, 0%, 90%)",
-                      "neutral20": "hsl(0, 0%, 80%)",
-                      "neutral30": "hsl(0, 0%, 70%)",
-                      "neutral40": "hsl(0, 0%, 60%)",
-                      "neutral5": "hsl(0, 0%, 95%)",
-                      "neutral50": "hsl(0, 0%, 50%)",
-                      "neutral60": "hsl(0, 0%, 40%)",
-                      "neutral70": "hsl(0, 0%, 30%)",
-                      "neutral80": "hsl(0, 0%, 20%)",
-                      "neutral90": "hsl(0, 0%, 10%)",
-                      "primary": "#2684FF",
-                      "primary25": "#DEEBFF",
-                      "primary50": "#B2D4FF",
-                      "primary75": "#4C9AFF",
-                    },
-                    "spacing": Object {
-                      "baseUnit": 4,
-                      "controlHeight": 38,
-                      "menuGutter": 8,
-                    },
-                  }
-                }
+              <div
+                className="pf3-select css-2b097c-container"
+                onKeyDown={[Function]}
               >
-                <EmotionCssPropInternal
-                  __EMOTION_LABEL_PLEASE_DO_NOT_USE__="Control"
-                  __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
-                  className="pf3-select__control"
-                  css={
+                <Control
+                  clearValue={[Function]}
+                  cx={[Function]}
+                  getStyles={[Function]}
+                  getValue={[Function]}
+                  hasValue={true}
+                  innerProps={
                     Object {
-                      "&:hover": Object {
-                        "borderColor": "hsl(0, 0%, 70%)",
-                      },
-                      "alignItems": "center",
-                      "backgroundColor": "hsl(0, 0%, 100%)",
-                      "borderColor": "hsl(0, 0%, 80%)",
-                      "borderRadius": 4,
-                      "borderStyle": "solid",
-                      "borderWidth": 1,
-                      "boxShadow": null,
-                      "boxSizing": "border-box",
-                      "cursor": "default",
-                      "display": "flex",
-                      "flexWrap": "wrap",
-                      "justifyContent": "space-between",
-                      "label": "control",
-                      "minHeight": 38,
-                      "outline": "0 !important",
-                      "position": "relative",
-                      "transition": "all 100ms",
+                      "onMouseDown": [Function],
+                      "onTouchEnd": [Function],
                     }
                   }
-                  onMouseDown={[Function]}
-                  onTouchEnd={[Function]}
+                  innerRef={[Function]}
+                  isDisabled={false}
+                  isFocused={false}
+                  isMulti={false}
+                  isRtl={false}
+                  menuIsOpen={false}
+                  options={
+                    Array [
+                      Object {
+                        "label": "asyncLabel",
+                      },
+                    ]
+                  }
+                  selectOption={[Function]}
+                  selectProps={
+                    Object {
+                      "backspaceRemovesValue": true,
+                      "blurInputOnSelect": true,
+                      "captureMenuScroll": false,
+                      "className": "pf3-select",
+                      "classNamePrefix": "pf3-select",
+                      "closeMenuOnScroll": false,
+                      "closeMenuOnSelect": true,
+                      "components": Object {
+                        "ClearIndicator": [Function],
+                        "DropdownIndicator": [Function],
+                        "Option": [Function],
+                      },
+                      "controlShouldRenderValue": true,
+                      "escapeClearsValue": false,
+                      "filterOption": [Function],
+                      "formatGroupLabel": [Function],
+                      "getOptionLabel": [Function],
+                      "getOptionValue": [Function],
+                      "hideSelectedOptions": false,
+                      "inputValue": "",
+                      "isClearable": false,
+                      "isDisabled": false,
+                      "isFetching": false,
+                      "isLoading": false,
+                      "isMulti": false,
+                      "isOptionDisabled": [Function],
+                      "isRtl": false,
+                      "isSearchable": false,
+                      "loadingMessage": [Function],
+                      "maxMenuHeight": 300,
+                      "menuIsOpen": false,
+                      "menuPlacement": "bottom",
+                      "menuPosition": "absolute",
+                      "menuShouldBlockScroll": false,
+                      "menuShouldScrollIntoView": true,
+                      "meta": Object {},
+                      "minMenuHeight": 140,
+                      "name": "select-input",
+                      "noOptionsMessage": [Function],
+                      "onChange": [Function],
+                      "onInputChange": [Function],
+                      "onMenuClose": [Function],
+                      "onMenuOpen": [Function],
+                      "openMenuOnClick": true,
+                      "openMenuOnFocus": false,
+                      "options": Array [
+                        Object {
+                          "label": "asyncLabel",
+                        },
+                      ],
+                      "pageSize": 5,
+                      "placeholder": "Search...",
+                      "screenReaderStatus": [Function],
+                      "styles": Object {},
+                      "tabIndex": "0",
+                      "tabSelectsValue": true,
+                      "value": Array [
+                        Object {
+                          "label": "asyncLabel",
+                          "value": undefined,
+                        },
+                      ],
+                    }
+                  }
+                  setValue={[Function]}
+                  theme={
+                    Object {
+                      "borderRadius": 4,
+                      "colors": Object {
+                        "danger": "#DE350B",
+                        "dangerLight": "#FFBDAD",
+                        "neutral0": "hsl(0, 0%, 100%)",
+                        "neutral10": "hsl(0, 0%, 90%)",
+                        "neutral20": "hsl(0, 0%, 80%)",
+                        "neutral30": "hsl(0, 0%, 70%)",
+                        "neutral40": "hsl(0, 0%, 60%)",
+                        "neutral5": "hsl(0, 0%, 95%)",
+                        "neutral50": "hsl(0, 0%, 50%)",
+                        "neutral60": "hsl(0, 0%, 40%)",
+                        "neutral70": "hsl(0, 0%, 30%)",
+                        "neutral80": "hsl(0, 0%, 20%)",
+                        "neutral90": "hsl(0, 0%, 10%)",
+                        "primary": "#2684FF",
+                        "primary25": "#DEEBFF",
+                        "primary50": "#B2D4FF",
+                        "primary75": "#4C9AFF",
+                      },
+                      "spacing": Object {
+                        "baseUnit": 4,
+                        "controlHeight": 38,
+                        "menuGutter": 8,
+                      },
+                    }
+                  }
                 >
-                  <div
-                    className="pf3-select__control css-yk16xz-control"
+                  <EmotionCssPropInternal
+                    __EMOTION_LABEL_PLEASE_DO_NOT_USE__="Control"
+                    __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
+                    className="pf3-select__control"
+                    css={
+                      Object {
+                        "&:hover": Object {
+                          "borderColor": "hsl(0, 0%, 70%)",
+                        },
+                        "alignItems": "center",
+                        "backgroundColor": "hsl(0, 0%, 100%)",
+                        "borderColor": "hsl(0, 0%, 80%)",
+                        "borderRadius": 4,
+                        "borderStyle": "solid",
+                        "borderWidth": 1,
+                        "boxShadow": null,
+                        "boxSizing": "border-box",
+                        "cursor": "default",
+                        "display": "flex",
+                        "flexWrap": "wrap",
+                        "justifyContent": "space-between",
+                        "label": "control",
+                        "minHeight": 38,
+                        "outline": "0 !important",
+                        "position": "relative",
+                        "transition": "all 100ms",
+                      }
+                    }
                     onMouseDown={[Function]}
                     onTouchEnd={[Function]}
                   >
-                    <ValueContainer
-                      clearValue={[Function]}
-                      cx={[Function]}
-                      getStyles={[Function]}
-                      getValue={[Function]}
-                      hasValue={true}
-                      isDisabled={false}
-                      isMulti={false}
-                      isRtl={false}
-                      options={
-                        Array [
-                          Object {
-                            "label": "asyncLabel",
-                          },
-                        ]
-                      }
-                      selectOption={[Function]}
-                      selectProps={
-                        Object {
-                          "backspaceRemovesValue": true,
-                          "blurInputOnSelect": true,
-                          "captureMenuScroll": false,
-                          "className": "pf3-select",
-                          "classNamePrefix": "pf3-select",
-                          "closeMenuOnScroll": false,
-                          "closeMenuOnSelect": true,
-                          "components": Object {
-                            "ClearIndicator": [Function],
-                            "DropdownIndicator": [Function],
-                            "Option": [Function],
-                          },
-                          "controlShouldRenderValue": true,
-                          "escapeClearsValue": false,
-                          "filterOption": [Function],
-                          "formatGroupLabel": [Function],
-                          "getOptionLabel": [Function],
-                          "getOptionValue": [Function],
-                          "hideSelectedOptions": false,
-                          "inputValue": "",
-                          "isClearable": false,
-                          "isDisabled": false,
-                          "isFetching": false,
-                          "isLoading": false,
-                          "isMulti": false,
-                          "isOptionDisabled": [Function],
-                          "isRtl": false,
-                          "isSearchable": false,
-                          "loadingMessage": [Function],
-                          "maxMenuHeight": 300,
-                          "menuIsOpen": false,
-                          "menuPlacement": "bottom",
-                          "menuPosition": "absolute",
-                          "menuShouldBlockScroll": false,
-                          "menuShouldScrollIntoView": true,
-                          "meta": Object {},
-                          "minMenuHeight": 140,
-                          "name": "select-input",
-                          "noOptionsMessage": [Function],
-                          "onChange": [Function],
-                          "onInputChange": [Function],
-                          "onMenuClose": [Function],
-                          "onMenuOpen": [Function],
-                          "openMenuOnClick": true,
-                          "openMenuOnFocus": false,
-                          "options": Array [
-                            Object {
-                              "label": "asyncLabel",
-                            },
-                          ],
-                          "pageSize": 5,
-                          "placeholder": "Search...",
-                          "screenReaderStatus": [Function],
-                          "styles": Object {},
-                          "tabIndex": "0",
-                          "tabSelectsValue": true,
-                          "value": Array [
-                            Object {
-                              "label": "asyncLabel",
-                            },
-                          ],
-                        }
-                      }
-                      setValue={[Function]}
-                      theme={
-                        Object {
-                          "borderRadius": 4,
-                          "colors": Object {
-                            "danger": "#DE350B",
-                            "dangerLight": "#FFBDAD",
-                            "neutral0": "hsl(0, 0%, 100%)",
-                            "neutral10": "hsl(0, 0%, 90%)",
-                            "neutral20": "hsl(0, 0%, 80%)",
-                            "neutral30": "hsl(0, 0%, 70%)",
-                            "neutral40": "hsl(0, 0%, 60%)",
-                            "neutral5": "hsl(0, 0%, 95%)",
-                            "neutral50": "hsl(0, 0%, 50%)",
-                            "neutral60": "hsl(0, 0%, 40%)",
-                            "neutral70": "hsl(0, 0%, 30%)",
-                            "neutral80": "hsl(0, 0%, 20%)",
-                            "neutral90": "hsl(0, 0%, 10%)",
-                            "primary": "#2684FF",
-                            "primary25": "#DEEBFF",
-                            "primary50": "#B2D4FF",
-                            "primary75": "#4C9AFF",
-                          },
-                          "spacing": Object {
-                            "baseUnit": 4,
-                            "controlHeight": 38,
-                            "menuGutter": 8,
-                          },
-                        }
-                      }
+                    <div
+                      className="pf3-select__control css-yk16xz-control"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
                     >
-                      <EmotionCssPropInternal
-                        __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
-                        className="pf3-select__value-container pf3-select__value-container--has-value"
-                        css={
+                      <ValueContainer
+                        clearValue={[Function]}
+                        cx={[Function]}
+                        getStyles={[Function]}
+                        getValue={[Function]}
+                        hasValue={true}
+                        isDisabled={false}
+                        isMulti={false}
+                        isRtl={false}
+                        options={
+                          Array [
+                            Object {
+                              "label": "asyncLabel",
+                            },
+                          ]
+                        }
+                        selectOption={[Function]}
+                        selectProps={
                           Object {
-                            "WebkitOverflowScrolling": "touch",
-                            "alignItems": "center",
-                            "boxSizing": "border-box",
-                            "display": "flex",
-                            "flex": 1,
-                            "flexWrap": "wrap",
-                            "overflow": "hidden",
-                            "padding": "2px 8px",
-                            "position": "relative",
+                            "backspaceRemovesValue": true,
+                            "blurInputOnSelect": true,
+                            "captureMenuScroll": false,
+                            "className": "pf3-select",
+                            "classNamePrefix": "pf3-select",
+                            "closeMenuOnScroll": false,
+                            "closeMenuOnSelect": true,
+                            "components": Object {
+                              "ClearIndicator": [Function],
+                              "DropdownIndicator": [Function],
+                              "Option": [Function],
+                            },
+                            "controlShouldRenderValue": true,
+                            "escapeClearsValue": false,
+                            "filterOption": [Function],
+                            "formatGroupLabel": [Function],
+                            "getOptionLabel": [Function],
+                            "getOptionValue": [Function],
+                            "hideSelectedOptions": false,
+                            "inputValue": "",
+                            "isClearable": false,
+                            "isDisabled": false,
+                            "isFetching": false,
+                            "isLoading": false,
+                            "isMulti": false,
+                            "isOptionDisabled": [Function],
+                            "isRtl": false,
+                            "isSearchable": false,
+                            "loadingMessage": [Function],
+                            "maxMenuHeight": 300,
+                            "menuIsOpen": false,
+                            "menuPlacement": "bottom",
+                            "menuPosition": "absolute",
+                            "menuShouldBlockScroll": false,
+                            "menuShouldScrollIntoView": true,
+                            "meta": Object {},
+                            "minMenuHeight": 140,
+                            "name": "select-input",
+                            "noOptionsMessage": [Function],
+                            "onChange": [Function],
+                            "onInputChange": [Function],
+                            "onMenuClose": [Function],
+                            "onMenuOpen": [Function],
+                            "openMenuOnClick": true,
+                            "openMenuOnFocus": false,
+                            "options": Array [
+                              Object {
+                                "label": "asyncLabel",
+                              },
+                            ],
+                            "pageSize": 5,
+                            "placeholder": "Search...",
+                            "screenReaderStatus": [Function],
+                            "styles": Object {},
+                            "tabIndex": "0",
+                            "tabSelectsValue": true,
+                            "value": Array [
+                              Object {
+                                "label": "asyncLabel",
+                                "value": undefined,
+                              },
+                            ],
+                          }
+                        }
+                        setValue={[Function]}
+                        theme={
+                          Object {
+                            "borderRadius": 4,
+                            "colors": Object {
+                              "danger": "#DE350B",
+                              "dangerLight": "#FFBDAD",
+                              "neutral0": "hsl(0, 0%, 100%)",
+                              "neutral10": "hsl(0, 0%, 90%)",
+                              "neutral20": "hsl(0, 0%, 80%)",
+                              "neutral30": "hsl(0, 0%, 70%)",
+                              "neutral40": "hsl(0, 0%, 60%)",
+                              "neutral5": "hsl(0, 0%, 95%)",
+                              "neutral50": "hsl(0, 0%, 50%)",
+                              "neutral60": "hsl(0, 0%, 40%)",
+                              "neutral70": "hsl(0, 0%, 30%)",
+                              "neutral80": "hsl(0, 0%, 20%)",
+                              "neutral90": "hsl(0, 0%, 10%)",
+                              "primary": "#2684FF",
+                              "primary25": "#DEEBFF",
+                              "primary50": "#B2D4FF",
+                              "primary75": "#4C9AFF",
+                            },
+                            "spacing": Object {
+                              "baseUnit": 4,
+                              "controlHeight": 38,
+                              "menuGutter": 8,
+                            },
                           }
                         }
                       >
-                        <div
-                          className="pf3-select__value-container pf3-select__value-container--has-value css-1hwfws3"
-                        >
-                          <SingleValue
-                            clearValue={[Function]}
-                            cx={[Function]}
-                            data={
-                              Object {
-                                "label": "asyncLabel",
-                              }
+                        <EmotionCssPropInternal
+                          __EMOTION_LABEL_PLEASE_DO_NOT_USE__="ValueContainer"
+                          __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
+                          className="pf3-select__value-container pf3-select__value-container--has-value"
+                          css={
+                            Object {
+                              "WebkitOverflowScrolling": "touch",
+                              "alignItems": "center",
+                              "boxSizing": "border-box",
+                              "display": "flex",
+                              "flex": 1,
+                              "flexWrap": "wrap",
+                              "overflow": "hidden",
+                              "padding": "2px 8px",
+                              "position": "relative",
                             }
-                            getStyles={[Function]}
-                            getValue={[Function]}
-                            hasValue={true}
-                            isDisabled={false}
-                            isMulti={false}
-                            isRtl={false}
-                            options={
-                              Array [
+                          }
+                        >
+                          <div
+                            className="pf3-select__value-container pf3-select__value-container--has-value css-g1d714-ValueContainer"
+                          >
+                            <SingleValue
+                              clearValue={[Function]}
+                              cx={[Function]}
+                              data={
                                 Object {
                                   "label": "asyncLabel",
-                                },
-                              ]
-                            }
-                            selectOption={[Function]}
-                            selectProps={
-                              Object {
-                                "backspaceRemovesValue": true,
-                                "blurInputOnSelect": true,
-                                "captureMenuScroll": false,
-                                "className": "pf3-select",
-                                "classNamePrefix": "pf3-select",
-                                "closeMenuOnScroll": false,
-                                "closeMenuOnSelect": true,
-                                "components": Object {
-                                  "ClearIndicator": [Function],
-                                  "DropdownIndicator": [Function],
-                                  "Option": [Function],
-                                },
-                                "controlShouldRenderValue": true,
-                                "escapeClearsValue": false,
-                                "filterOption": [Function],
-                                "formatGroupLabel": [Function],
-                                "getOptionLabel": [Function],
-                                "getOptionValue": [Function],
-                                "hideSelectedOptions": false,
-                                "inputValue": "",
-                                "isClearable": false,
-                                "isDisabled": false,
-                                "isFetching": false,
-                                "isLoading": false,
-                                "isMulti": false,
-                                "isOptionDisabled": [Function],
-                                "isRtl": false,
-                                "isSearchable": false,
-                                "loadingMessage": [Function],
-                                "maxMenuHeight": 300,
-                                "menuIsOpen": false,
-                                "menuPlacement": "bottom",
-                                "menuPosition": "absolute",
-                                "menuShouldBlockScroll": false,
-                                "menuShouldScrollIntoView": true,
-                                "meta": Object {},
-                                "minMenuHeight": 140,
-                                "name": "select-input",
-                                "noOptionsMessage": [Function],
-                                "onChange": [Function],
-                                "onInputChange": [Function],
-                                "onMenuClose": [Function],
-                                "onMenuOpen": [Function],
-                                "openMenuOnClick": true,
-                                "openMenuOnFocus": false,
-                                "options": Array [
+                                  "value": undefined,
+                                }
+                              }
+                              getStyles={[Function]}
+                              getValue={[Function]}
+                              hasValue={true}
+                              isDisabled={false}
+                              isMulti={false}
+                              isRtl={false}
+                              options={
+                                Array [
                                   Object {
                                     "label": "asyncLabel",
                                   },
-                                ],
-                                "pageSize": 5,
-                                "placeholder": "Search...",
-                                "screenReaderStatus": [Function],
-                                "styles": Object {},
-                                "tabIndex": "0",
-                                "tabSelectsValue": true,
-                                "value": Array [
-                                  Object {
-                                    "label": "asyncLabel",
-                                  },
-                                ],
+                                ]
                               }
-                            }
-                            setValue={[Function]}
-                            theme={
-                              Object {
-                                "borderRadius": 4,
-                                "colors": Object {
-                                  "danger": "#DE350B",
-                                  "dangerLight": "#FFBDAD",
-                                  "neutral0": "hsl(0, 0%, 100%)",
-                                  "neutral10": "hsl(0, 0%, 90%)",
-                                  "neutral20": "hsl(0, 0%, 80%)",
-                                  "neutral30": "hsl(0, 0%, 70%)",
-                                  "neutral40": "hsl(0, 0%, 60%)",
-                                  "neutral5": "hsl(0, 0%, 95%)",
-                                  "neutral50": "hsl(0, 0%, 50%)",
-                                  "neutral60": "hsl(0, 0%, 40%)",
-                                  "neutral70": "hsl(0, 0%, 30%)",
-                                  "neutral80": "hsl(0, 0%, 20%)",
-                                  "neutral90": "hsl(0, 0%, 10%)",
-                                  "primary": "#2684FF",
-                                  "primary25": "#DEEBFF",
-                                  "primary50": "#B2D4FF",
-                                  "primary75": "#4C9AFF",
-                                },
-                                "spacing": Object {
-                                  "baseUnit": 4,
-                                  "controlHeight": 38,
-                                  "menuGutter": 8,
-                                },
-                              }
-                            }
-                          >
-                            <EmotionCssPropInternal
-                              __EMOTION_LABEL_PLEASE_DO_NOT_USE__="SingleValue"
-                              __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
-                              className="pf3-select__single-value"
-                              css={
+                              selectOption={[Function]}
+                              selectProps={
                                 Object {
-                                  "boxSizing": "border-box",
-                                  "color": "hsl(0, 0%, 20%)",
-                                  "label": "singleValue",
-                                  "marginLeft": 2,
-                                  "marginRight": 2,
-                                  "maxWidth": "calc(100% - 8px)",
-                                  "overflow": "hidden",
-                                  "position": "absolute",
-                                  "textOverflow": "ellipsis",
-                                  "top": "50%",
-                                  "transform": "translateY(-50%)",
-                                  "whiteSpace": "nowrap",
+                                  "backspaceRemovesValue": true,
+                                  "blurInputOnSelect": true,
+                                  "captureMenuScroll": false,
+                                  "className": "pf3-select",
+                                  "classNamePrefix": "pf3-select",
+                                  "closeMenuOnScroll": false,
+                                  "closeMenuOnSelect": true,
+                                  "components": Object {
+                                    "ClearIndicator": [Function],
+                                    "DropdownIndicator": [Function],
+                                    "Option": [Function],
+                                  },
+                                  "controlShouldRenderValue": true,
+                                  "escapeClearsValue": false,
+                                  "filterOption": [Function],
+                                  "formatGroupLabel": [Function],
+                                  "getOptionLabel": [Function],
+                                  "getOptionValue": [Function],
+                                  "hideSelectedOptions": false,
+                                  "inputValue": "",
+                                  "isClearable": false,
+                                  "isDisabled": false,
+                                  "isFetching": false,
+                                  "isLoading": false,
+                                  "isMulti": false,
+                                  "isOptionDisabled": [Function],
+                                  "isRtl": false,
+                                  "isSearchable": false,
+                                  "loadingMessage": [Function],
+                                  "maxMenuHeight": 300,
+                                  "menuIsOpen": false,
+                                  "menuPlacement": "bottom",
+                                  "menuPosition": "absolute",
+                                  "menuShouldBlockScroll": false,
+                                  "menuShouldScrollIntoView": true,
+                                  "meta": Object {},
+                                  "minMenuHeight": 140,
+                                  "name": "select-input",
+                                  "noOptionsMessage": [Function],
+                                  "onChange": [Function],
+                                  "onInputChange": [Function],
+                                  "onMenuClose": [Function],
+                                  "onMenuOpen": [Function],
+                                  "openMenuOnClick": true,
+                                  "openMenuOnFocus": false,
+                                  "options": Array [
+                                    Object {
+                                      "label": "asyncLabel",
+                                    },
+                                  ],
+                                  "pageSize": 5,
+                                  "placeholder": "Search...",
+                                  "screenReaderStatus": [Function],
+                                  "styles": Object {},
+                                  "tabIndex": "0",
+                                  "tabSelectsValue": true,
+                                  "value": Array [
+                                    Object {
+                                      "label": "asyncLabel",
+                                      "value": undefined,
+                                    },
+                                  ],
+                                }
+                              }
+                              setValue={[Function]}
+                              theme={
+                                Object {
+                                  "borderRadius": 4,
+                                  "colors": Object {
+                                    "danger": "#DE350B",
+                                    "dangerLight": "#FFBDAD",
+                                    "neutral0": "hsl(0, 0%, 100%)",
+                                    "neutral10": "hsl(0, 0%, 90%)",
+                                    "neutral20": "hsl(0, 0%, 80%)",
+                                    "neutral30": "hsl(0, 0%, 70%)",
+                                    "neutral40": "hsl(0, 0%, 60%)",
+                                    "neutral5": "hsl(0, 0%, 95%)",
+                                    "neutral50": "hsl(0, 0%, 50%)",
+                                    "neutral60": "hsl(0, 0%, 40%)",
+                                    "neutral70": "hsl(0, 0%, 30%)",
+                                    "neutral80": "hsl(0, 0%, 20%)",
+                                    "neutral90": "hsl(0, 0%, 10%)",
+                                    "primary": "#2684FF",
+                                    "primary25": "#DEEBFF",
+                                    "primary50": "#B2D4FF",
+                                    "primary75": "#4C9AFF",
+                                  },
+                                  "spacing": Object {
+                                    "baseUnit": 4,
+                                    "controlHeight": 38,
+                                    "menuGutter": 8,
+                                  },
                                 }
                               }
                             >
-                              <div
-                                className="pf3-select__single-value css-1uccc91-singleValue"
-                              >
-                                asyncLabel
-                              </div>
-                            </EmotionCssPropInternal>
-                          </SingleValue>
-                          <DummyInput
-                            disabled={false}
-                            id="react-select-3-input"
-                            innerRef={[Function]}
-                            onBlur={[Function]}
-                            onChange={[Function]}
-                            onFocus={[Function]}
-                            readOnly={true}
-                            tabIndex="0"
-                            value=""
-                          >
-                            <EmotionCssPropInternal
-                              __EMOTION_TYPE_PLEASE_DO_NOT_USE__="input"
-                              css={
-                                Object {
-                                  "map": "/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkR1bW15SW5wdXQuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBWVEiLCJmaWxlIjoiRHVtbXlJbnB1dC5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8vIEBmbG93XG4vKiogQGpzeCBqc3ggKi9cbmltcG9ydCB7IENvbXBvbmVudCB9IGZyb20gJ3JlYWN0JztcbmltcG9ydCB7IGpzeCB9IGZyb20gJ0BlbW90aW9uL2NvcmUnO1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBEdW1teUlucHV0IGV4dGVuZHMgQ29tcG9uZW50PGFueT4ge1xuICByZW5kZXIgKCkge1xuICAgIGNvbnN0IHsgaW46IGluUHJvcCwgb3V0LCBvbkV4aXRlZCwgYXBwZWFyLCBlbnRlciwgZXhpdCwgaW5uZXJSZWYsIGVtb3Rpb24sIC4uLnByb3BzIH0gPSB0aGlzLnByb3BzO1xuICAgIHJldHVybihcbiAgICAgIDxpbnB1dFxuICAgICAgICByZWY9e2lubmVyUmVmfVxuICAgICAgICB7Li4ucHJvcHN9XG4gICAgICAgIGNzcz17e1xuICAgICAgICAgIGxhYmVsOiAnZHVtbXlJbnB1dCcsXG4gICAgICAgICAgLy8gZ2V0IHJpZCBvZiBhbnkgZGVmYXVsdCBzdHlsZXNcbiAgICAgICAgICBiYWNrZ3JvdW5kOiAwLFxuICAgICAgICAgIGJvcmRlcjogMCxcbiAgICAgICAgICBmb250U2l6ZTogJ2luaGVyaXQnLFxuICAgICAgICAgIG91dGxpbmU6IDAsXG4gICAgICAgICAgcGFkZGluZzogMCxcbiAgICAgICAgICAvLyBpbXBvcnRhbnQhIHdpdGhvdXQgYHdpZHRoYCBicm93c2VycyB3b24ndCBhbGxvdyBmb2N1c1xuICAgICAgICAgIHdpZHRoOiAxLFxuXG4gICAgICAgICAgLy8gcmVtb3ZlIGN1cnNvciBvbiBkZXNrdG9wXG4gICAgICAgICAgY29sb3I6ICd0cmFuc3BhcmVudCcsXG5cbiAgICAgICAgICAvLyByZW1vdmUgY3Vyc29yIG9uIG1vYmlsZSB3aGlsc3QgbWFpbnRhaW5pbmcgXCJzY3JvbGwgaW50byB2aWV3XCIgYmVoYXZpb3VyXG4gICAgICAgICAgbGVmdDogLTEwMCxcbiAgICAgICAgICBvcGFjaXR5OiAwLFxuICAgICAgICAgIHBvc2l0aW9uOiAncmVsYXRpdmUnLFxuICAgICAgICAgIHRyYW5zZm9ybTogJ3NjYWxlKDApJyxcbiAgICAgICAgfX1cbiAgICAgIC8+XG4gICAgKTtcbiAgfVxufVxuIl19 */",
-                                  "name": "62g3xt-dummyInput",
-                                  "next": undefined,
-                                  "styles": "label:dummyInput;background:0;border:0;font-size:inherit;outline:0;padding:0;width:1px;color:transparent;left:-100px;opacity:0;position:relative;transform:scale(0);",
-                                  "toString": [Function],
+                              <EmotionCssPropInternal
+                                __EMOTION_LABEL_PLEASE_DO_NOT_USE__="SingleValue"
+                                __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
+                                className="pf3-select__single-value"
+                                css={
+                                  Object {
+                                    "boxSizing": "border-box",
+                                    "color": "hsl(0, 0%, 20%)",
+                                    "label": "singleValue",
+                                    "marginLeft": 2,
+                                    "marginRight": 2,
+                                    "maxWidth": "calc(100% - 8px)",
+                                    "overflow": "hidden",
+                                    "position": "absolute",
+                                    "textOverflow": "ellipsis",
+                                    "top": "50%",
+                                    "transform": "translateY(-50%)",
+                                    "whiteSpace": "nowrap",
+                                  }
                                 }
-                              }
+                              >
+                                <div
+                                  className="pf3-select__single-value css-1uccc91-singleValue"
+                                >
+                                  asyncLabel
+                                </div>
+                              </EmotionCssPropInternal>
+                            </SingleValue>
+                            <DummyInput
+                              aria-autocomplete="list"
                               disabled={false}
-                              id="react-select-3-input"
+                              id="react-select-8-input"
+                              innerRef={[Function]}
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -801,427 +826,454 @@ exports[`<SelectField /> should mount Async correctly 1`] = `
                               tabIndex="0"
                               value=""
                             >
-                              <input
-                                className="css-62g3xt-dummyInput"
+                              <EmotionCssPropInternal
+                                __EMOTION_LABEL_PLEASE_DO_NOT_USE__="DummyInput"
+                                __EMOTION_TYPE_PLEASE_DO_NOT_USE__="input"
+                                aria-autocomplete="list"
+                                css={
+                                  Object {
+                                    "map": "/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkR1bW15SW5wdXQuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBbUJNIiwiZmlsZSI6IkR1bW15SW5wdXQuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvLyBAZmxvd1xuLyoqIEBqc3gganN4ICovXG5pbXBvcnQgeyBqc3ggfSBmcm9tICdAZW1vdGlvbi9jb3JlJztcblxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gRHVtbXlJbnB1dCh7XG4gIGluOiBpblByb3AsXG4gIG91dCxcbiAgb25FeGl0ZWQsXG4gIGFwcGVhcixcbiAgZW50ZXIsXG4gIGV4aXQsXG4gIGlubmVyUmVmLFxuICBlbW90aW9uLFxuICAuLi5wcm9wc1xufTogYW55KSB7XG4gIHJldHVybiAoXG4gICAgPGlucHV0XG4gICAgICByZWY9e2lubmVyUmVmfVxuICAgICAgey4uLnByb3BzfVxuICAgICAgY3NzPXt7XG4gICAgICAgIGxhYmVsOiAnZHVtbXlJbnB1dCcsXG4gICAgICAgIC8vIGdldCByaWQgb2YgYW55IGRlZmF1bHQgc3R5bGVzXG4gICAgICAgIGJhY2tncm91bmQ6IDAsXG4gICAgICAgIGJvcmRlcjogMCxcbiAgICAgICAgZm9udFNpemU6ICdpbmhlcml0JyxcbiAgICAgICAgb3V0bGluZTogMCxcbiAgICAgICAgcGFkZGluZzogMCxcbiAgICAgICAgLy8gaW1wb3J0YW50ISB3aXRob3V0IGB3aWR0aGAgYnJvd3NlcnMgd29uJ3QgYWxsb3cgZm9jdXNcbiAgICAgICAgd2lkdGg6IDEsXG5cbiAgICAgICAgLy8gcmVtb3ZlIGN1cnNvciBvbiBkZXNrdG9wXG4gICAgICAgIGNvbG9yOiAndHJhbnNwYXJlbnQnLFxuXG4gICAgICAgIC8vIHJlbW92ZSBjdXJzb3Igb24gbW9iaWxlIHdoaWxzdCBtYWludGFpbmluZyBcInNjcm9sbCBpbnRvIHZpZXdcIiBiZWhhdmlvdXJcbiAgICAgICAgbGVmdDogLTEwMCxcbiAgICAgICAgb3BhY2l0eTogMCxcbiAgICAgICAgcG9zaXRpb246ICdyZWxhdGl2ZScsXG4gICAgICAgIHRyYW5zZm9ybTogJ3NjYWxlKDApJyxcbiAgICAgIH19XG4gICAgLz5cbiAgKTtcbn1cbiJdfQ== */",
+                                    "name": "62g3xt-dummyInput",
+                                    "next": undefined,
+                                    "styles": "label:dummyInput;background:0;border:0;font-size:inherit;outline:0;padding:0;width:1px;color:transparent;left:-100px;opacity:0;position:relative;transform:scale(0);",
+                                    "toString": [Function],
+                                  }
+                                }
                                 disabled={false}
-                                id="react-select-3-input"
+                                id="react-select-8-input"
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
                                 readOnly={true}
                                 tabIndex="0"
                                 value=""
-                              />
-                            </EmotionCssPropInternal>
-                          </DummyInput>
-                        </div>
-                      </EmotionCssPropInternal>
-                    </ValueContainer>
-                    <IndicatorsContainer
-                      clearValue={[Function]}
-                      cx={[Function]}
-                      getStyles={[Function]}
-                      getValue={[Function]}
-                      hasValue={true}
-                      isDisabled={false}
-                      isMulti={false}
-                      isRtl={false}
-                      options={
-                        Array [
-                          Object {
-                            "label": "asyncLabel",
-                          },
-                        ]
-                      }
-                      selectOption={[Function]}
-                      selectProps={
-                        Object {
-                          "backspaceRemovesValue": true,
-                          "blurInputOnSelect": true,
-                          "captureMenuScroll": false,
-                          "className": "pf3-select",
-                          "classNamePrefix": "pf3-select",
-                          "closeMenuOnScroll": false,
-                          "closeMenuOnSelect": true,
-                          "components": Object {
-                            "ClearIndicator": [Function],
-                            "DropdownIndicator": [Function],
-                            "Option": [Function],
-                          },
-                          "controlShouldRenderValue": true,
-                          "escapeClearsValue": false,
-                          "filterOption": [Function],
-                          "formatGroupLabel": [Function],
-                          "getOptionLabel": [Function],
-                          "getOptionValue": [Function],
-                          "hideSelectedOptions": false,
-                          "inputValue": "",
-                          "isClearable": false,
-                          "isDisabled": false,
-                          "isFetching": false,
-                          "isLoading": false,
-                          "isMulti": false,
-                          "isOptionDisabled": [Function],
-                          "isRtl": false,
-                          "isSearchable": false,
-                          "loadingMessage": [Function],
-                          "maxMenuHeight": 300,
-                          "menuIsOpen": false,
-                          "menuPlacement": "bottom",
-                          "menuPosition": "absolute",
-                          "menuShouldBlockScroll": false,
-                          "menuShouldScrollIntoView": true,
-                          "meta": Object {},
-                          "minMenuHeight": 140,
-                          "name": "select-input",
-                          "noOptionsMessage": [Function],
-                          "onChange": [Function],
-                          "onInputChange": [Function],
-                          "onMenuClose": [Function],
-                          "onMenuOpen": [Function],
-                          "openMenuOnClick": true,
-                          "openMenuOnFocus": false,
-                          "options": Array [
+                              >
+                                <input
+                                  aria-autocomplete="list"
+                                  className="css-62g3xt-dummyInput"
+                                  disabled={false}
+                                  id="react-select-8-input"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  readOnly={true}
+                                  tabIndex="0"
+                                  value=""
+                                />
+                              </EmotionCssPropInternal>
+                            </DummyInput>
+                          </div>
+                        </EmotionCssPropInternal>
+                      </ValueContainer>
+                      <IndicatorsContainer
+                        clearValue={[Function]}
+                        cx={[Function]}
+                        getStyles={[Function]}
+                        getValue={[Function]}
+                        hasValue={true}
+                        isDisabled={false}
+                        isMulti={false}
+                        isRtl={false}
+                        options={
+                          Array [
                             Object {
                               "label": "asyncLabel",
                             },
-                          ],
-                          "pageSize": 5,
-                          "placeholder": "Search...",
-                          "screenReaderStatus": [Function],
-                          "styles": Object {},
-                          "tabIndex": "0",
-                          "tabSelectsValue": true,
-                          "value": Array [
-                            Object {
-                              "label": "asyncLabel",
-                            },
-                          ],
+                          ]
                         }
-                      }
-                      setValue={[Function]}
-                      theme={
-                        Object {
-                          "borderRadius": 4,
-                          "colors": Object {
-                            "danger": "#DE350B",
-                            "dangerLight": "#FFBDAD",
-                            "neutral0": "hsl(0, 0%, 100%)",
-                            "neutral10": "hsl(0, 0%, 90%)",
-                            "neutral20": "hsl(0, 0%, 80%)",
-                            "neutral30": "hsl(0, 0%, 70%)",
-                            "neutral40": "hsl(0, 0%, 60%)",
-                            "neutral5": "hsl(0, 0%, 95%)",
-                            "neutral50": "hsl(0, 0%, 50%)",
-                            "neutral60": "hsl(0, 0%, 40%)",
-                            "neutral70": "hsl(0, 0%, 30%)",
-                            "neutral80": "hsl(0, 0%, 20%)",
-                            "neutral90": "hsl(0, 0%, 10%)",
-                            "primary": "#2684FF",
-                            "primary25": "#DEEBFF",
-                            "primary50": "#B2D4FF",
-                            "primary75": "#4C9AFF",
-                          },
-                          "spacing": Object {
-                            "baseUnit": 4,
-                            "controlHeight": 38,
-                            "menuGutter": 8,
-                          },
-                        }
-                      }
-                    >
-                      <EmotionCssPropInternal
-                        __EMOTION_LABEL_PLEASE_DO_NOT_USE__="IndicatorsContainer"
-                        __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
-                        className="pf3-select__indicators"
-                        css={
+                        selectOption={[Function]}
+                        selectProps={
                           Object {
-                            "alignItems": "center",
-                            "alignSelf": "stretch",
-                            "boxSizing": "border-box",
-                            "display": "flex",
-                            "flexShrink": 0,
+                            "backspaceRemovesValue": true,
+                            "blurInputOnSelect": true,
+                            "captureMenuScroll": false,
+                            "className": "pf3-select",
+                            "classNamePrefix": "pf3-select",
+                            "closeMenuOnScroll": false,
+                            "closeMenuOnSelect": true,
+                            "components": Object {
+                              "ClearIndicator": [Function],
+                              "DropdownIndicator": [Function],
+                              "Option": [Function],
+                            },
+                            "controlShouldRenderValue": true,
+                            "escapeClearsValue": false,
+                            "filterOption": [Function],
+                            "formatGroupLabel": [Function],
+                            "getOptionLabel": [Function],
+                            "getOptionValue": [Function],
+                            "hideSelectedOptions": false,
+                            "inputValue": "",
+                            "isClearable": false,
+                            "isDisabled": false,
+                            "isFetching": false,
+                            "isLoading": false,
+                            "isMulti": false,
+                            "isOptionDisabled": [Function],
+                            "isRtl": false,
+                            "isSearchable": false,
+                            "loadingMessage": [Function],
+                            "maxMenuHeight": 300,
+                            "menuIsOpen": false,
+                            "menuPlacement": "bottom",
+                            "menuPosition": "absolute",
+                            "menuShouldBlockScroll": false,
+                            "menuShouldScrollIntoView": true,
+                            "meta": Object {},
+                            "minMenuHeight": 140,
+                            "name": "select-input",
+                            "noOptionsMessage": [Function],
+                            "onChange": [Function],
+                            "onInputChange": [Function],
+                            "onMenuClose": [Function],
+                            "onMenuOpen": [Function],
+                            "openMenuOnClick": true,
+                            "openMenuOnFocus": false,
+                            "options": Array [
+                              Object {
+                                "label": "asyncLabel",
+                              },
+                            ],
+                            "pageSize": 5,
+                            "placeholder": "Search...",
+                            "screenReaderStatus": [Function],
+                            "styles": Object {},
+                            "tabIndex": "0",
+                            "tabSelectsValue": true,
+                            "value": Array [
+                              Object {
+                                "label": "asyncLabel",
+                                "value": undefined,
+                              },
+                            ],
+                          }
+                        }
+                        setValue={[Function]}
+                        theme={
+                          Object {
+                            "borderRadius": 4,
+                            "colors": Object {
+                              "danger": "#DE350B",
+                              "dangerLight": "#FFBDAD",
+                              "neutral0": "hsl(0, 0%, 100%)",
+                              "neutral10": "hsl(0, 0%, 90%)",
+                              "neutral20": "hsl(0, 0%, 80%)",
+                              "neutral30": "hsl(0, 0%, 70%)",
+                              "neutral40": "hsl(0, 0%, 60%)",
+                              "neutral5": "hsl(0, 0%, 95%)",
+                              "neutral50": "hsl(0, 0%, 50%)",
+                              "neutral60": "hsl(0, 0%, 40%)",
+                              "neutral70": "hsl(0, 0%, 30%)",
+                              "neutral80": "hsl(0, 0%, 20%)",
+                              "neutral90": "hsl(0, 0%, 10%)",
+                              "primary": "#2684FF",
+                              "primary25": "#DEEBFF",
+                              "primary50": "#B2D4FF",
+                              "primary75": "#4C9AFF",
+                            },
+                            "spacing": Object {
+                              "baseUnit": 4,
+                              "controlHeight": 38,
+                              "menuGutter": 8,
+                            },
                           }
                         }
                       >
-                        <div
-                          className="pf3-select__indicators css-1hb7zxy-IndicatorsContainer"
+                        <EmotionCssPropInternal
+                          __EMOTION_LABEL_PLEASE_DO_NOT_USE__="IndicatorsContainer"
+                          __EMOTION_TYPE_PLEASE_DO_NOT_USE__="div"
+                          className="pf3-select__indicators"
+                          css={
+                            Object {
+                              "alignItems": "center",
+                              "alignSelf": "stretch",
+                              "boxSizing": "border-box",
+                              "display": "flex",
+                              "flexShrink": 0,
+                            }
+                          }
                         >
-                          <IndicatorSeparator
-                            clearValue={[Function]}
-                            cx={[Function]}
-                            getStyles={[Function]}
-                            getValue={[Function]}
-                            hasValue={true}
-                            isDisabled={false}
-                            isFocused={false}
-                            isMulti={false}
-                            isRtl={false}
-                            options={
-                              Array [
-                                Object {
-                                  "label": "asyncLabel",
-                                },
-                              ]
-                            }
-                            selectOption={[Function]}
-                            selectProps={
-                              Object {
-                                "backspaceRemovesValue": true,
-                                "blurInputOnSelect": true,
-                                "captureMenuScroll": false,
-                                "className": "pf3-select",
-                                "classNamePrefix": "pf3-select",
-                                "closeMenuOnScroll": false,
-                                "closeMenuOnSelect": true,
-                                "components": Object {
-                                  "ClearIndicator": [Function],
-                                  "DropdownIndicator": [Function],
-                                  "Option": [Function],
-                                },
-                                "controlShouldRenderValue": true,
-                                "escapeClearsValue": false,
-                                "filterOption": [Function],
-                                "formatGroupLabel": [Function],
-                                "getOptionLabel": [Function],
-                                "getOptionValue": [Function],
-                                "hideSelectedOptions": false,
-                                "inputValue": "",
-                                "isClearable": false,
-                                "isDisabled": false,
-                                "isFetching": false,
-                                "isLoading": false,
-                                "isMulti": false,
-                                "isOptionDisabled": [Function],
-                                "isRtl": false,
-                                "isSearchable": false,
-                                "loadingMessage": [Function],
-                                "maxMenuHeight": 300,
-                                "menuIsOpen": false,
-                                "menuPlacement": "bottom",
-                                "menuPosition": "absolute",
-                                "menuShouldBlockScroll": false,
-                                "menuShouldScrollIntoView": true,
-                                "meta": Object {},
-                                "minMenuHeight": 140,
-                                "name": "select-input",
-                                "noOptionsMessage": [Function],
-                                "onChange": [Function],
-                                "onInputChange": [Function],
-                                "onMenuClose": [Function],
-                                "onMenuOpen": [Function],
-                                "openMenuOnClick": true,
-                                "openMenuOnFocus": false,
-                                "options": Array [
-                                  Object {
-                                    "label": "asyncLabel",
-                                  },
-                                ],
-                                "pageSize": 5,
-                                "placeholder": "Search...",
-                                "screenReaderStatus": [Function],
-                                "styles": Object {},
-                                "tabIndex": "0",
-                                "tabSelectsValue": true,
-                                "value": Array [
-                                  Object {
-                                    "label": "asyncLabel",
-                                  },
-                                ],
-                              }
-                            }
-                            setValue={[Function]}
-                            theme={
-                              Object {
-                                "borderRadius": 4,
-                                "colors": Object {
-                                  "danger": "#DE350B",
-                                  "dangerLight": "#FFBDAD",
-                                  "neutral0": "hsl(0, 0%, 100%)",
-                                  "neutral10": "hsl(0, 0%, 90%)",
-                                  "neutral20": "hsl(0, 0%, 80%)",
-                                  "neutral30": "hsl(0, 0%, 70%)",
-                                  "neutral40": "hsl(0, 0%, 60%)",
-                                  "neutral5": "hsl(0, 0%, 95%)",
-                                  "neutral50": "hsl(0, 0%, 50%)",
-                                  "neutral60": "hsl(0, 0%, 40%)",
-                                  "neutral70": "hsl(0, 0%, 30%)",
-                                  "neutral80": "hsl(0, 0%, 20%)",
-                                  "neutral90": "hsl(0, 0%, 10%)",
-                                  "primary": "#2684FF",
-                                  "primary25": "#DEEBFF",
-                                  "primary50": "#B2D4FF",
-                                  "primary75": "#4C9AFF",
-                                },
-                                "spacing": Object {
-                                  "baseUnit": 4,
-                                  "controlHeight": 38,
-                                  "menuGutter": 8,
-                                },
-                              }
-                            }
+                          <div
+                            className="pf3-select__indicators css-1hb7zxy-IndicatorsContainer"
                           >
-                            <EmotionCssPropInternal
-                              __EMOTION_LABEL_PLEASE_DO_NOT_USE__="IndicatorSeparator"
-                              __EMOTION_TYPE_PLEASE_DO_NOT_USE__="span"
-                              className="pf3-select__indicator-separator"
-                              css={
+                            <IndicatorSeparator
+                              clearValue={[Function]}
+                              cx={[Function]}
+                              getStyles={[Function]}
+                              getValue={[Function]}
+                              hasValue={true}
+                              isDisabled={false}
+                              isFocused={false}
+                              isMulti={false}
+                              isRtl={false}
+                              options={
+                                Array [
+                                  Object {
+                                    "label": "asyncLabel",
+                                  },
+                                ]
+                              }
+                              selectOption={[Function]}
+                              selectProps={
                                 Object {
-                                  "alignSelf": "stretch",
-                                  "backgroundColor": "hsl(0, 0%, 80%)",
-                                  "boxSizing": "border-box",
-                                  "label": "indicatorSeparator",
-                                  "marginBottom": 8,
-                                  "marginTop": 8,
-                                  "width": 1,
+                                  "backspaceRemovesValue": true,
+                                  "blurInputOnSelect": true,
+                                  "captureMenuScroll": false,
+                                  "className": "pf3-select",
+                                  "classNamePrefix": "pf3-select",
+                                  "closeMenuOnScroll": false,
+                                  "closeMenuOnSelect": true,
+                                  "components": Object {
+                                    "ClearIndicator": [Function],
+                                    "DropdownIndicator": [Function],
+                                    "Option": [Function],
+                                  },
+                                  "controlShouldRenderValue": true,
+                                  "escapeClearsValue": false,
+                                  "filterOption": [Function],
+                                  "formatGroupLabel": [Function],
+                                  "getOptionLabel": [Function],
+                                  "getOptionValue": [Function],
+                                  "hideSelectedOptions": false,
+                                  "inputValue": "",
+                                  "isClearable": false,
+                                  "isDisabled": false,
+                                  "isFetching": false,
+                                  "isLoading": false,
+                                  "isMulti": false,
+                                  "isOptionDisabled": [Function],
+                                  "isRtl": false,
+                                  "isSearchable": false,
+                                  "loadingMessage": [Function],
+                                  "maxMenuHeight": 300,
+                                  "menuIsOpen": false,
+                                  "menuPlacement": "bottom",
+                                  "menuPosition": "absolute",
+                                  "menuShouldBlockScroll": false,
+                                  "menuShouldScrollIntoView": true,
+                                  "meta": Object {},
+                                  "minMenuHeight": 140,
+                                  "name": "select-input",
+                                  "noOptionsMessage": [Function],
+                                  "onChange": [Function],
+                                  "onInputChange": [Function],
+                                  "onMenuClose": [Function],
+                                  "onMenuOpen": [Function],
+                                  "openMenuOnClick": true,
+                                  "openMenuOnFocus": false,
+                                  "options": Array [
+                                    Object {
+                                      "label": "asyncLabel",
+                                    },
+                                  ],
+                                  "pageSize": 5,
+                                  "placeholder": "Search...",
+                                  "screenReaderStatus": [Function],
+                                  "styles": Object {},
+                                  "tabIndex": "0",
+                                  "tabSelectsValue": true,
+                                  "value": Array [
+                                    Object {
+                                      "label": "asyncLabel",
+                                      "value": undefined,
+                                    },
+                                  ],
+                                }
+                              }
+                              setValue={[Function]}
+                              theme={
+                                Object {
+                                  "borderRadius": 4,
+                                  "colors": Object {
+                                    "danger": "#DE350B",
+                                    "dangerLight": "#FFBDAD",
+                                    "neutral0": "hsl(0, 0%, 100%)",
+                                    "neutral10": "hsl(0, 0%, 90%)",
+                                    "neutral20": "hsl(0, 0%, 80%)",
+                                    "neutral30": "hsl(0, 0%, 70%)",
+                                    "neutral40": "hsl(0, 0%, 60%)",
+                                    "neutral5": "hsl(0, 0%, 95%)",
+                                    "neutral50": "hsl(0, 0%, 50%)",
+                                    "neutral60": "hsl(0, 0%, 40%)",
+                                    "neutral70": "hsl(0, 0%, 30%)",
+                                    "neutral80": "hsl(0, 0%, 20%)",
+                                    "neutral90": "hsl(0, 0%, 10%)",
+                                    "primary": "#2684FF",
+                                    "primary25": "#DEEBFF",
+                                    "primary50": "#B2D4FF",
+                                    "primary75": "#4C9AFF",
+                                  },
+                                  "spacing": Object {
+                                    "baseUnit": 4,
+                                    "controlHeight": 38,
+                                    "menuGutter": 8,
+                                  },
                                 }
                               }
                             >
-                              <span
-                                className="pf3-select__indicator-separator css-1okebmr-indicatorSeparator"
-                              />
-                            </EmotionCssPropInternal>
-                          </IndicatorSeparator>
-                          <DropdownIndicator
-                            clearValue={[Function]}
-                            cx={[Function]}
-                            getStyles={[Function]}
-                            getValue={[Function]}
-                            hasValue={true}
-                            innerProps={
-                              Object {
-                                "aria-hidden": "true",
-                                "onMouseDown": [Function],
-                                "onTouchEnd": [Function],
-                              }
-                            }
-                            isDisabled={false}
-                            isFocused={false}
-                            isMulti={false}
-                            isRtl={false}
-                            options={
-                              Array [
+                              <EmotionCssPropInternal
+                                __EMOTION_LABEL_PLEASE_DO_NOT_USE__="IndicatorSeparator"
+                                __EMOTION_TYPE_PLEASE_DO_NOT_USE__="span"
+                                className="pf3-select__indicator-separator"
+                                css={
+                                  Object {
+                                    "alignSelf": "stretch",
+                                    "backgroundColor": "hsl(0, 0%, 80%)",
+                                    "boxSizing": "border-box",
+                                    "label": "indicatorSeparator",
+                                    "marginBottom": 8,
+                                    "marginTop": 8,
+                                    "width": 1,
+                                  }
+                                }
+                              >
+                                <span
+                                  className="pf3-select__indicator-separator css-1okebmr-indicatorSeparator"
+                                />
+                              </EmotionCssPropInternal>
+                            </IndicatorSeparator>
+                            <DropdownIndicator
+                              clearValue={[Function]}
+                              cx={[Function]}
+                              getStyles={[Function]}
+                              getValue={[Function]}
+                              hasValue={true}
+                              innerProps={
                                 Object {
-                                  "label": "asyncLabel",
-                                },
-                              ]
-                            }
-                            selectOption={[Function]}
-                            selectProps={
-                              Object {
-                                "backspaceRemovesValue": true,
-                                "blurInputOnSelect": true,
-                                "captureMenuScroll": false,
-                                "className": "pf3-select",
-                                "classNamePrefix": "pf3-select",
-                                "closeMenuOnScroll": false,
-                                "closeMenuOnSelect": true,
-                                "components": Object {
-                                  "ClearIndicator": [Function],
-                                  "DropdownIndicator": [Function],
-                                  "Option": [Function],
-                                },
-                                "controlShouldRenderValue": true,
-                                "escapeClearsValue": false,
-                                "filterOption": [Function],
-                                "formatGroupLabel": [Function],
-                                "getOptionLabel": [Function],
-                                "getOptionValue": [Function],
-                                "hideSelectedOptions": false,
-                                "inputValue": "",
-                                "isClearable": false,
-                                "isDisabled": false,
-                                "isFetching": false,
-                                "isLoading": false,
-                                "isMulti": false,
-                                "isOptionDisabled": [Function],
-                                "isRtl": false,
-                                "isSearchable": false,
-                                "loadingMessage": [Function],
-                                "maxMenuHeight": 300,
-                                "menuIsOpen": false,
-                                "menuPlacement": "bottom",
-                                "menuPosition": "absolute",
-                                "menuShouldBlockScroll": false,
-                                "menuShouldScrollIntoView": true,
-                                "meta": Object {},
-                                "minMenuHeight": 140,
-                                "name": "select-input",
-                                "noOptionsMessage": [Function],
-                                "onChange": [Function],
-                                "onInputChange": [Function],
-                                "onMenuClose": [Function],
-                                "onMenuOpen": [Function],
-                                "openMenuOnClick": true,
-                                "openMenuOnFocus": false,
-                                "options": Array [
+                                  "aria-hidden": "true",
+                                  "onMouseDown": [Function],
+                                  "onTouchEnd": [Function],
+                                }
+                              }
+                              isDisabled={false}
+                              isFocused={false}
+                              isMulti={false}
+                              isRtl={false}
+                              options={
+                                Array [
                                   Object {
                                     "label": "asyncLabel",
                                   },
-                                ],
-                                "pageSize": 5,
-                                "placeholder": "Search...",
-                                "screenReaderStatus": [Function],
-                                "styles": Object {},
-                                "tabIndex": "0",
-                                "tabSelectsValue": true,
-                                "value": Array [
-                                  Object {
-                                    "label": "asyncLabel",
+                                ]
+                              }
+                              selectOption={[Function]}
+                              selectProps={
+                                Object {
+                                  "backspaceRemovesValue": true,
+                                  "blurInputOnSelect": true,
+                                  "captureMenuScroll": false,
+                                  "className": "pf3-select",
+                                  "classNamePrefix": "pf3-select",
+                                  "closeMenuOnScroll": false,
+                                  "closeMenuOnSelect": true,
+                                  "components": Object {
+                                    "ClearIndicator": [Function],
+                                    "DropdownIndicator": [Function],
+                                    "Option": [Function],
                                   },
-                                ],
+                                  "controlShouldRenderValue": true,
+                                  "escapeClearsValue": false,
+                                  "filterOption": [Function],
+                                  "formatGroupLabel": [Function],
+                                  "getOptionLabel": [Function],
+                                  "getOptionValue": [Function],
+                                  "hideSelectedOptions": false,
+                                  "inputValue": "",
+                                  "isClearable": false,
+                                  "isDisabled": false,
+                                  "isFetching": false,
+                                  "isLoading": false,
+                                  "isMulti": false,
+                                  "isOptionDisabled": [Function],
+                                  "isRtl": false,
+                                  "isSearchable": false,
+                                  "loadingMessage": [Function],
+                                  "maxMenuHeight": 300,
+                                  "menuIsOpen": false,
+                                  "menuPlacement": "bottom",
+                                  "menuPosition": "absolute",
+                                  "menuShouldBlockScroll": false,
+                                  "menuShouldScrollIntoView": true,
+                                  "meta": Object {},
+                                  "minMenuHeight": 140,
+                                  "name": "select-input",
+                                  "noOptionsMessage": [Function],
+                                  "onChange": [Function],
+                                  "onInputChange": [Function],
+                                  "onMenuClose": [Function],
+                                  "onMenuOpen": [Function],
+                                  "openMenuOnClick": true,
+                                  "openMenuOnFocus": false,
+                                  "options": Array [
+                                    Object {
+                                      "label": "asyncLabel",
+                                    },
+                                  ],
+                                  "pageSize": 5,
+                                  "placeholder": "Search...",
+                                  "screenReaderStatus": [Function],
+                                  "styles": Object {},
+                                  "tabIndex": "0",
+                                  "tabSelectsValue": true,
+                                  "value": Array [
+                                    Object {
+                                      "label": "asyncLabel",
+                                      "value": undefined,
+                                    },
+                                  ],
+                                }
                               }
-                            }
-                            setValue={[Function]}
-                            theme={
-                              Object {
-                                "borderRadius": 4,
-                                "colors": Object {
-                                  "danger": "#DE350B",
-                                  "dangerLight": "#FFBDAD",
-                                  "neutral0": "hsl(0, 0%, 100%)",
-                                  "neutral10": "hsl(0, 0%, 90%)",
-                                  "neutral20": "hsl(0, 0%, 80%)",
-                                  "neutral30": "hsl(0, 0%, 70%)",
-                                  "neutral40": "hsl(0, 0%, 60%)",
-                                  "neutral5": "hsl(0, 0%, 95%)",
-                                  "neutral50": "hsl(0, 0%, 50%)",
-                                  "neutral60": "hsl(0, 0%, 40%)",
-                                  "neutral70": "hsl(0, 0%, 30%)",
-                                  "neutral80": "hsl(0, 0%, 20%)",
-                                  "neutral90": "hsl(0, 0%, 10%)",
-                                  "primary": "#2684FF",
-                                  "primary25": "#DEEBFF",
-                                  "primary50": "#B2D4FF",
-                                  "primary75": "#4C9AFF",
-                                },
-                                "spacing": Object {
-                                  "baseUnit": 4,
-                                  "controlHeight": 38,
-                                  "menuGutter": 8,
-                                },
+                              setValue={[Function]}
+                              theme={
+                                Object {
+                                  "borderRadius": 4,
+                                  "colors": Object {
+                                    "danger": "#DE350B",
+                                    "dangerLight": "#FFBDAD",
+                                    "neutral0": "hsl(0, 0%, 100%)",
+                                    "neutral10": "hsl(0, 0%, 90%)",
+                                    "neutral20": "hsl(0, 0%, 80%)",
+                                    "neutral30": "hsl(0, 0%, 70%)",
+                                    "neutral40": "hsl(0, 0%, 60%)",
+                                    "neutral5": "hsl(0, 0%, 95%)",
+                                    "neutral50": "hsl(0, 0%, 50%)",
+                                    "neutral60": "hsl(0, 0%, 40%)",
+                                    "neutral70": "hsl(0, 0%, 30%)",
+                                    "neutral80": "hsl(0, 0%, 20%)",
+                                    "neutral90": "hsl(0, 0%, 10%)",
+                                    "primary": "#2684FF",
+                                    "primary25": "#DEEBFF",
+                                    "primary50": "#B2D4FF",
+                                    "primary75": "#4C9AFF",
+                                  },
+                                  "spacing": Object {
+                                    "baseUnit": 4,
+                                    "controlHeight": 38,
+                                    "menuGutter": 8,
+                                  },
+                                }
                               }
-                            }
-                          >
-                            <i
-                              className="ddorg__pf3-component-mapper__select__dropdown-indicator fa fa-angle-down"
-                            />
-                          </DropdownIndicator>
-                        </div>
-                      </EmotionCssPropInternal>
-                    </IndicatorsContainer>
-                  </div>
-                </EmotionCssPropInternal>
-              </Control>
-              <input
-                name="select-input"
-                type="hidden"
-              />
-            </div>
-          </EmotionCssPropInternal>
-        </SelectContainer>
-      </Select>
-    </StateManager>
+                            >
+                              <i
+                                className="ddorg__pf3-component-mapper__select__dropdown-indicator fa fa-angle-down"
+                              />
+                            </DropdownIndicator>
+                          </div>
+                        </EmotionCssPropInternal>
+                      </IndicatorsContainer>
+                    </div>
+                  </EmotionCssPropInternal>
+                </Control>
+                <input
+                  name="select-input"
+                  type="hidden"
+                />
+              </div>
+            </EmotionCssPropInternal>
+          </SelectContainer>
+        </Select>
+      </StateManager>
+    </SelectComponent>
   </Select>
 </Select>
 `;

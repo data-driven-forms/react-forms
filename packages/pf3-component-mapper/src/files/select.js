@@ -36,7 +36,12 @@ Select.propTypes = {
   description: PropTypes.node,
   placeholder: PropTypes.string,
   isDisabled: PropTypes.bool,
-  inputAddon: PropTypes.shape({ fields: PropTypes.array })
+  inputAddon: PropTypes.shape({ fields: PropTypes.array }),
+  allowNull: PropTypes.bool
+};
+
+Select.defaultProps = {
+  allowNull: true
 };
 
 export default Select;
