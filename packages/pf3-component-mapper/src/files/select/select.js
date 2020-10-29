@@ -53,7 +53,12 @@ const getDropdownText = (value, placeholder, options) => {
     return [placeholder, true];
   }
 
-  return [options.find((option) => option.value === value).label, false];
+  const selectedOption = options.find((option) => option.value === value);
+  if (!selectedOption) {
+    return [placeholder, true];
+  }
+
+  return [selectedOption.label, false];
 };
 
 class SearchInput extends Component {
