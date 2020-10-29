@@ -77,7 +77,7 @@ List.defaultProps = {
 const InternalToolbar = ({ sortTitle, onFilter, onSort, sortDirection, value, placeholder, id }) => (
   <Toolbar className="pf-u-p-0 ddorg__pf4-component-mapper__dual-list-select-toolbar" id={id}>
     <ToolbarContent className="pf-u-p-0 pf-u-pb-md">
-      <ToolbarItem>
+      <ToolbarItem className="ddorg__pf4-component-mapper__dual-list-select-toolbar__item-grow">
         <InputGroup>
           <TextInput
             name="filterOptions"
