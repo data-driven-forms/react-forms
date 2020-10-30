@@ -67,6 +67,8 @@ render(<App />, document.getElementById('root'));`;
 export const dependencies = {
   react: '^16.12.0',
   'react-dom': '^16.12.0',
+  '@babel/runtime': '7.12.1',
+  '@babel/runtime-corejs2': '7.12.1',
   '@data-driven-forms/react-form-renderer': 'latest',
   '@data-driven-forms/pf3-component-mapper': 'latest',
   'patternfly-react': '2.39.7',
