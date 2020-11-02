@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import clsx from 'clsx';
 import {
   TextInput,
   InputGroup,
@@ -33,15 +33,22 @@ import './dual-list-select.scss';
 import DualListSelectCommon from '../../../common/src/dual-list-select';
 import FormGroup from '../common/form-group';
 
-const List = ({ value, optionClick, noOptionsTitle, filterValue, filterValueText, selectedValues, ...rest }) => (
-  <div className="pf-c-form-control pf-u-pr-sm ddorg__pf4-component-mapper__dual-list-select" {...rest}>
+const List = ({ value, optionClick, noOptionsTitle, filterValue, filterValueText, selectedValues, ListProps, ListItemProps, ...rest }) => (
+  <div
+    {...ListProps}
+    className={clsx('pf-c-form-control', 'pf-u-pr-sm ddorg__pf4-component-mapper__dual-list-select', ListProps.className)}
+    {...rest}
+  >
     {value.length < 1 && (
-      <div className="ddorg__pf4-component-mapper__dual-list-select-option-text ddorg__pf4-component-mapper__dual-list-select-option-disabled">
+      <div
+        {...ListItemProps}
+        className="ddorg__pf4-component-mapper__dual-list-select-option-text ddorg__pf4-component-mapper__dual-list-select-option-disabled"
+      >
         {filterValue ? filterValueText : noOptionsTitle}
       </div>
     )}
     {value.length > 0 &&
-      value.map(({ value, label }) => (
+      value.map(({ value, label, ListItemProps: ListItemPropsItem }) => (
         <div
           onClick={(e) => optionClick(e, value)}
           key={value}
@@ -49,6 +56,8 @@ const List = ({ value, optionClick, noOptionsTitle, filterValue, filterValueText
           className={`ddorg__pf4-component-mapper__dual-list-select-option ${
             selectedValues.includes(value) ? 'ddorg__pf4-component-mapper__dual-list-select-option-selected' : ''
           }`}
+          {...ListItemProps}
+          {...ListItemPropsItem}
         >
           {label}
         </div>
@@ -67,15 +76,48 @@ List.propTypes = {
   noOptionsTitle: PropTypes.node,
   filterValue: PropTypes.string,
   filterValueText: PropTypes.node,
-  selectedValues: PropTypes.array
+  selectedValues: PropTypes.array,
+  ListProps: PropTypes.object,
+  ListItemProps: PropTypes.object
 };
 
 List.defaultProps = {
-  value: []
+  value: [],
+  ListProps: {}
 };
 
-const InternalToolbar = ({ sortTitle, onFilter, onSort, sortDirection, value, placeholder, id }) => (
-  <Toolbar className="pf-u-p-0 ddorg__pf4-component-mapper__dual-list-select-toolbar" id={id}>
+const InternalToolbar = ({
+  sortTitle,
+  onFilter,
+  onSort,
+  sortDirection,
+  value,
+  placeholder,
+  id,
+  ToolbarProps,
+  SideToolbarProps,
+  FilterFieldProps,
+  SideFilterFieldProps,
+  SearchIconButtonProps,
+  SideSearchIconButtonProps,
+  SearchIconProps,
+  SideSearchIconProps,
+  SortIconButtonProps,
+  SideSortIconButtonProps,
+  SortIconProps,
+  SideSortIconProps
+}) => (
+  <Toolbar
+    {...ToolbarProps}
+    {...SideToolbarProps}
+    className={clsx(
+      'pf-u-p-0',
+      'ddorg__pf4-component-mapper__dual-list-select-toolbar',
+      ToolbarProps && ToolbarProps.className,
+      SideToolbarProps && SideToolbarProps.className
+    )}
+    id={id}
+  >
     <ToolbarContent className="pf-u-p-0 pf-u-pb-md">
       <ToolbarItem className="ddorg__pf4-component-mapper__dual-list-select-toolbar__item-grow">
         <InputGroup>
@@ -87,15 +129,21 @@ const InternalToolbar = ({ sortTitle, onFilter, onSort, sortDirection, value, pl
             onChange={onFilter}
             placeholder={placeholder}
             value={value}
+            {...FilterFieldProps}
+            {...SideFilterFieldProps}
           />
-          <Button variant={ButtonVariant.control} aria-label="search button">
-            <SearchIcon />
+          <Button variant={ButtonVariant.control} aria-label="search button" {...SearchIconButtonProps} {...SideSearchIconButtonProps}>
+            <SearchIcon {...SearchIconProps} {...SideSearchIconProps} />
           </Button>
         </InputGroup>
       </ToolbarItem>
       <ToolbarItem>
-        <Button onClick={onSort} title={sortTitle} variant="plain">
-          {!sortDirection ? <PficonSortCommonAscIcon size="md" /> : <PficonSortCommonDescIcon size="md" />}
+        <Button onClick={onSort} title={sortTitle} variant="plain" {...SortIconButtonProps} {...SideSortIconButtonProps}>
+          {!sortDirection ? (
+            <PficonSortCommonAscIcon size="md" {...SortIconProps} {...SideSortIconProps} />
+          ) : (
+            <PficonSortCommonDescIcon size="md" {...SortIconProps} {...SideSortIconProps} />
+          )}
         </Button>
       </ToolbarItem>
     </ToolbarContent>
@@ -109,7 +157,19 @@ InternalToolbar.propTypes = {
   sortDirection: PropTypes.bool,
   value: PropTypes.string,
   placeholder: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.string,
+  ToolbarProps: PropTypes.object,
+  SideToolbarProps: PropTypes.object,
+  FilterFieldProps: PropTypes.object,
+  SideFilterFieldProps: PropTypes.object,
+  SearchIconProps: PropTypes.object,
+  SideSearchIconProps: PropTypes.object,
+  SearchIconButtonProps: PropTypes.object,
+  SideSearchIconButtonProps: PropTypes.object,
+  SortIconButtonProps: PropTypes.object,
+  SideSortIconButtonProps: PropTypes.object,
+  SortIconProps: PropTypes.object,
+  SideSortIconProps: PropTypes.object
 };
 
 const DualList = ({
@@ -149,7 +209,56 @@ const DualList = ({
   rightValues,
   handleValuesClick,
   renderStatus,
-  FormGroupProps
+  // Props
+  FormGroupProps,
+  ListProps,
+  LeftListProps,
+  RightListProps,
+  ListItemProps,
+  LeftListItemProps,
+  RightListItemProps,
+  ToolbarProps,
+  LeftToolbarProps,
+  RightToolbarProps,
+  FilterFieldProps,
+  LeftFilterFieldProps,
+  RightFilterFieldProps,
+  SearchIconProps,
+  LeftSearchIconProps,
+  RightSearchIconProps,
+  SearchIconButtonProps,
+  LeftSearchIconButtonProps,
+  RightSearchIconButtonProps,
+  SortIconButtonProps,
+  LeftSortIconButtonProps,
+  RightSortIconButtonProps,
+  SortIconProps,
+  LeftSortIconProps,
+  RightSortIconProps,
+  InternalGridProps,
+  ListGridProps,
+  LeftListGridProps,
+  RightListGridProps,
+  TitleProps,
+  LeftTitleProps,
+  RightTitleProps,
+  ButtonsGridProps,
+  ButtonsInternalFlexProps,
+  ButtonFlexProps,
+  ToRightFlexProps,
+  IconButtonProps,
+  ToRightIconButtonProps,
+  IconProps,
+  AllToRightFlexProps,
+  AllToRightIconButtonProps,
+  AllToLeftFlexProps,
+  AllToLeftIconButtonProps,
+  ToLeftFlexProps,
+  ToLeftIconButtonProps,
+  ToRightIconProps,
+  AllToRightIconProps,
+  AllToLeftIconProps,
+  ToLeftIconProps
 }) => (
   <FormGroup
     label={label}
@@ -161,12 +270,12 @@ const DualList = ({
     id={id || input.name}
     FormGroupProps={FormGroupProps}
   >
-    <Grid>
+    <Grid {...InternalGridProps}>
       <Grid>
-        <GridItem md={5}>
+        <GridItem md={5} {...ListGridProps} {...LeftListGridProps}>
           <Grid>
             <GridItem md={12}>
-              <TextContent>
+              <TextContent {...TitleProps} {...LeftTitleProps}>
                 <Text component={TextVariants.h6}>{leftTitle}</Text>
               </TextContent>
             </GridItem>
@@ -178,6 +287,18 @@ const DualList = ({
                 value={state.filterOptions}
                 placeholder={filterOptionsTitle}
                 id={`${input.name}-options-toolbar`}
+                ToolbarProps={ToolbarProps}
+                SideToolbarProps={LeftToolbarProps}
+                FilterFieldProps={FilterFieldProps}
+                SideFilterFieldProps={LeftFilterFieldProps}
+                SearchIconProps={SearchIconProps}
+                SideSearchIconProps={LeftSearchIconProps}
+                SearchIconButtonProps={SearchIconButtonProps}
+                SideSearchIconButtonProps={LeftSearchIconButtonProps}
+                SortIconButtonProps={SortIconButtonProps}
+                SideSortIconButtonProps={LeftSortIconButtonProps}
+                SortIconProps={SortIconProps}
+                SideSortIconProps={LeftSortIconProps}
               />
             </GridItem>
             {renderStatus && (
@@ -200,44 +321,74 @@ const DualList = ({
                 filterValue={state.filterOptions}
                 filterValueText={filterOptionsText}
                 selectedValues={state.selectedLeftValues}
+                ListProps={{ ...ListProps, ...LeftListProps }}
+                ListItemProps={{ ...ListItemProps, ...LeftListItemProps }}
               />
             </GridItem>
           </Grid>
         </GridItem>
-        <GridItem md={2}>
+        <GridItem md={2} {...ButtonsGridProps}>
           <Bullseye className="ddorg__pf4-component-mapper__dual-list-select-buttons">
-            <Flex direction={{ md: 'column', sm: 'row' }}>
-              <FlexItem>
-                <Button disabled={leftValues.length === 0} onClick={handleMoveRight} title={moveRightTitle} variant="plain">
-                  <AngleRightIcon size="md" />
+            <Flex direction={{ md: 'column', sm: 'row' }} {...ButtonsInternalFlexProps}>
+              <FlexItem {...ButtonFlexProps} {...ToRightFlexProps}>
+                <Button
+                  disabled={leftValues.length === 0}
+                  onClick={handleMoveRight}
+                  title={moveRightTitle}
+                  variant="plain"
+                  {...IconButtonProps}
+                  {...ToRightIconButtonProps}
+                >
+                  <AngleRightIcon size="md" {...IconProps} {...ToRightIconProps} />
                 </Button>
               </FlexItem>
               {allToRight && (
-                <FlexItem>
-                  <Button disabled={leftValues.length === 0} onClick={handleClearLeftValues} title={moveAllRightTitle} variant="plain">
-                    <AngleDoubleRightIcon size="md" />
+                <FlexItem {...ButtonFlexProps} {...AllToRightFlexProps}>
+                  <Button
+                    disabled={leftValues.length === 0}
+                    onClick={handleClearLeftValues}
+                    title={moveAllRightTitle}
+                    variant="plain"
+                    {...IconButtonProps}
+                    {...AllToRightIconButtonProps}
+                  >
+                    <AngleDoubleRightIcon size="md" {...IconProps} {...AllToRightIconProps} />
                   </Button>
                 </FlexItem>
               )}
               {allToLeft && (
-                <FlexItem>
-                  <Button disabled={rightValues.length === 0} onClick={handleClearRightValues} title={moveAllLeftTitle} variant="plain">
-                    <AngleDoubleLeftIcon size="md" />
+                <FlexItem {...ButtonFlexProps} {...AllToLeftFlexProps}>
+                  <Button
+                    disabled={rightValues.length === 0}
+                    onClick={handleClearRightValues}
+                    title={moveAllLeftTitle}
+                    variant="plain"
+                    {...IconButtonProps}
+                    {...AllToLeftIconButtonProps}
+                  >
+                    <AngleDoubleLeftIcon size="md" {...IconProps} {...AllToLeftIconProps} />
                   </Button>
                 </FlexItem>
               )}
-              <FlexItem>
-                <Button disabled={rightValues.length === 0} onClick={handleMoveLeft} title={moveLeftTitle} variant="plain">
-                  <AngleLeftIcon size="md" />
+              <FlexItem {...ButtonFlexProps} {...ToLeftFlexProps}>
+                <Button
+                  disabled={rightValues.length === 0}
+                  onClick={handleMoveLeft}
+                  title={moveLeftTitle}
+                  variant="plain"
+                  {...IconButtonProps}
+                  {...ToLeftIconButtonProps}
+                >
+                  <AngleLeftIcon size="md" {...IconProps} {...ToLeftIconProps} />
                 </Button>
               </FlexItem>
             </Flex>
           </Bullseye>
         </GridItem>
-        <GridItem md={5}>
+        <GridItem md={5} {...ListGridProps} {...RightListGridProps}>
           <Grid>
             <GridItem md={12}>
-              <TextContent>
+              <TextContent {...TitleProps} {...RightTitleProps}>
                 <Text component={TextVariants.h6}>{rightTitle}</Text>
               </TextContent>
             </GridItem>
@@ -249,6 +400,18 @@ const DualList = ({
                 value={state.filterValue}
                 placeholder={filterValueTitle}
                 id={`${input.name}-value-toolbar`}
+                ToolbarProps={ToolbarProps}
+                SideToolbarProps={RightToolbarProps}
+                FilterFieldProps={FilterFieldProps}
+                SideFilterFieldProps={RightFilterFieldProps}
+                SearchIconProps={SearchIconProps}
+                SideSearchIconProps={RightSearchIconProps}
+                SearchIconButtonProps={SearchIconButtonProps}
+                SideSearchIconButtonProps={RightSearchIconButtonProps}
+                SortIconButtonProps={SortIconButtonProps}
+                SideSortIconButtonProps={RightSortIconButtonProps}
+                SortIconProps={SortIconProps}
+                SideSortIconProps={RightSortIconProps}
               />
             </GridItem>
             {renderStatus && (
@@ -271,6 +434,8 @@ const DualList = ({
                 filterValue={state.filterValue}
                 filterValueText={filterValueText}
                 selectedValues={state.selectedRightValues}
+                ListProps={{ ...ListProps, ...RightListProps }}
+                ListItemProps={{ ...ListItemProps, ...RightListItemProps }}
               />
             </GridItem>
           </Grid>
@@ -319,7 +484,55 @@ DualList.propTypes = {
   rightValues: PropTypes.array,
   handleValuesClick: PropTypes.func,
   renderStatus: PropTypes.func,
-  FormGroupProps: PropTypes.object
+  FormGroupProps: PropTypes.object,
+  ListProps: PropTypes.object,
+  LeftListProps: PropTypes.object,
+  RightListProps: PropTypes.object,
+  ListItemProps: PropTypes.object,
+  LeftListItemProps: PropTypes.object,
+  RightListItemProps: PropTypes.object,
+  ToolbarProps: PropTypes.object,
+  LeftToolbarProps: PropTypes.object,
+  RightToolbarProps: PropTypes.object,
+  FilterFieldProps: PropTypes.object,
+  LeftFilterFieldProps: PropTypes.object,
+  RightFilterFieldProps: PropTypes.object,
+  SortIconButtonProps: PropTypes.object,
+  LeftSortIconButtonProps: PropTypes.object,
+  RightSortIconButtonProps: PropTypes.object,
+  SearchIconProps: PropTypes.object,
+  LeftSearchIconProps: PropTypes.object,
+  RightSearchIconProps: PropTypes.object,
+  SearchIconButtonProps: PropTypes.object,
+  LeftSearchIconButtonProps: PropTypes.object,
+  RightSearchIconButtonProps: PropTypes.object,
+  SortIconProps: PropTypes.object,
+  LeftSortIconProps: PropTypes.object,
+  RightSortIconProps: PropTypes.object,
+  InternalGridProps: PropTypes.object,
+  ListGridProps: PropTypes.object,
+  LeftListGridProps: PropTypes.object,
+  RightListGridProps: PropTypes.object,
+  TitleProps: PropTypes.object,
+  LeftTitleProps: PropTypes.object,
+  RightTitleProps: PropTypes.object,
+  ButtonsGridProps: PropTypes.object,
+  ButtonsInternalFlexProps: PropTypes.object,
+  ButtonFlexProps: PropTypes.object,
+  ToRightFlexProps: PropTypes.object,
+  IconButtonProps: PropTypes.object,
+  ToRightIconButtonProps: PropTypes.object,
+  IconProps: PropTypes.object,
+  AllToRightFlexProps: PropTypes.object,
+  AllToRightIconButtonProps: PropTypes.object,
+  AllToLeftFlexProps: PropTypes.object,
+  AllToLeftIconButtonProps: PropTypes.object,
+  ToLeftFlexProps: PropTypes.object,
+  ToLeftIconButtonProps: PropTypes.object,
+  ToRightIconProps: PropTypes.object,
+  AllToRightIconProps: PropTypes.object,
+  AllToLeftIconProps: PropTypes.object,
+  ToLeftIconProps: PropTypes.object
 };
 
 DualList.defaultProps = {
