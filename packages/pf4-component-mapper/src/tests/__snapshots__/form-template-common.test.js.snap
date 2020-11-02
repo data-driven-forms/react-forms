@@ -65,6 +65,7 @@ exports[`FormTemplate PF4 Common should add missing buttons if not defined in bu
                     ButtonGroup={[Function]}
                     FormSpy={[Function]}
                     buttonOrder={Array []}
+                    buttonsProps={Object {}}
                     canReset={true}
                     canSubmit={true}
                     cancelLabel="Cancel"
@@ -307,6 +308,7 @@ exports[`FormTemplate PF4 Common should render all controls and with default lab
                         "cancel",
                       ]
                     }
+                    buttonsProps={Object {}}
                     canReset={false}
                     canSubmit={false}
                     cancelLabel="Cancel"
@@ -536,6 +538,7 @@ exports[`FormTemplate PF4 Common should render buttons in correct order 1`] = `
                         "reset",
                       ]
                     }
+                    buttonsProps={Object {}}
                     canReset={true}
                     canSubmit={true}
                     cancelLabel="Cancel"
@@ -780,6 +783,7 @@ exports[`FormTemplate PF4 Common should render only submit button 1`] = `
                         "cancel",
                       ]
                     }
+                    buttonsProps={Object {}}
                     canReset={false}
                     canSubmit={false}
                     cancelLabel="Cancel"

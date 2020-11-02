@@ -28,9 +28,11 @@ ButtonGroup.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
 };
 
-export const Title = ({ children }) => (
+export const Title = ({ children, ...props }) => (
   <TextContent>
-    <Text component={TextVariants.h1}>{children}</Text>
+    <Text component={TextVariants.h1} {...props}>
+      {children}
+    </Text>
   </TextContent>
 );
 
@@ -38,9 +40,11 @@ Title.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
 };
 
-export const Description = ({ children }) => (
+export const Description = ({ children, ...props }) => (
   <TextContent>
-    <Text component={TextVariants.p}>{children}</Text>
+    <Text component={TextVariants.p} {...props}>
+      {children}
+    </Text>
   </TextContent>
 );
 

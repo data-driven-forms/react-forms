@@ -631,6 +631,7 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
                       "cancel",
                     ]
                   }
+                  buttonsProps={Object {}}
                   canReset={false}
                   canSubmit={false}
                   cancelLabel="Cancel"
@@ -1486,6 +1487,7 @@ exports[`<MultipleChoiceList /> should render in error state 1`] = `
                       "cancel",
                     ]
                   }
+                  buttonsProps={Object {}}
                   canReset={false}
                   canSubmit={false}
                   cancelLabel="Cancel"
