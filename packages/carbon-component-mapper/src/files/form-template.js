@@ -30,13 +30,13 @@ ButtonGroup.propTypes = {
   className: PropTypes.string
 };
 
-export const Title = ({ children }) => <h3>{children}</h3>;
+export const Title = ({ children, ...props }) => <h3 {...props}>{children}</h3>;
 
 Title.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
 };
 
-export const Description = ({ children }) => <div>{children}</div>;
+export const Description = ({ children, ...props }) => <div {...props}>{children}</div>;
 
 Description.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])

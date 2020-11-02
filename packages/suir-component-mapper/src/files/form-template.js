@@ -14,19 +14,23 @@ Form.propTypes = {
   children: PropTypes.node
 };
 
-const Description = ({ children }) => <span>{children}</span>;
+const Description = ({ children, ...props }) => <span {...props}>{children}</span>;
 
 Description.propTypes = {
   children: PropTypes.node
 };
 
-const Title = ({ children }) => <Header as="h3">{children}</Header>;
+const Title = ({ children, ...props }) => (
+  <Header as="h3" {...props}>
+    {children}
+  </Header>
+);
 
 Title.propTypes = {
   children: PropTypes.node
 };
 
-const ButtonGroup = ({ children }) => <div>{children}</div>;
+const ButtonGroup = ({ children, ...props }) => <div {...props}>{children}</div>;
 
 ButtonGroup.propTypes = {
   children: PropTypes.node

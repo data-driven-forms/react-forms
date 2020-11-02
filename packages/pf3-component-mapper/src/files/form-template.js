@@ -42,13 +42,13 @@ ButtonGroup.defaultProps = {
   className: ''
 };
 
-export const Title = ({ children }) => <h1>{children}</h1>;
+export const Title = ({ children, ...props }) => <h1 {...props}>{children}</h1>;
 
 Title.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired
 };
 
-export const Description = ({ children }) => <p>{children}</p>;
+export const Description = ({ children, ...props }) => <p {...props}>{children}</p>;
 
 Description.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired

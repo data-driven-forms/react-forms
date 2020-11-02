@@ -22,8 +22,8 @@ Form.defaultProps = {
   layout: 'vertical'
 };
 
-const Description = ({ children }) => (
-  <Typography>
+const Description = ({ children, ...props }) => (
+  <Typography {...props}>
     <Paragraph>{children}</Paragraph>
   </Typography>
 );
@@ -32,8 +32,8 @@ Description.propTypes = {
   children: childrenPropTypes
 };
 
-const TitleComponent = ({ children }) => (
-  <Typography>
+const TitleComponent = ({ children, ...props }) => (
+  <Typography {...props}>
     <Title level={3}>{children}</Title>
   </Typography>
 );
@@ -42,7 +42,11 @@ TitleComponent.propTypes = {
   children: childrenPropTypes
 };
 
-const ButtonGroup = ({ children }) => <div style={{ display: 'flex', justifyContent: 'flex-end' }}>{children}</div>;
+const ButtonGroup = ({ children, ...props }) => (
+  <div style={{ display: 'flex', justifyContent: 'flex-end' }} {...props}>
+    {children}
+  </div>
+);
 
 ButtonGroup.propTypes = {
   children: childrenPropTypes

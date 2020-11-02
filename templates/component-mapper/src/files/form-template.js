@@ -16,13 +16,13 @@ ButtonGroup.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
 };
 
-export const Title = ({ children }) => <h1>{children}</h1>;
+export const Title = ({ children, ...props }) => <h1 {...props}>{children}</h1>;
 
 Title.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
 };
 
-export const Description = ({ children }) => <div>{children}</div>;
+export const Description = ({ children, ...props }) => <div {...props}>{children}</div>;
 
 Description.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
