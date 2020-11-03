@@ -11,6 +11,7 @@ import './wizard/wizard-styles.scss';
 
 import WizardNavigation from './wizard/wizard-nav';
 import reducer from './wizard/reducer';
+import WizardToggle from './wizard/wizard-toggle';
 
 const Modal = ({ children, container, inModal }) =>
   inModal
@@ -55,7 +56,7 @@ const WizardInternal = ({
     maxStepIndex,
     isDynamic
   } = useContext(WizardContext);
-  const [state, dispatch] = useReducer(reducer, { loading: true, container });
+  const [state, dispatch] = useReducer(reducer, { loading: true, container, openNav: false });
 
   useEffect(() => {
     if (inModal) {
@@ -102,9 +103,10 @@ const WizardInternal = ({
             closeButtonAriaLabel={closeButtonAriaLabel}
           />
         )}
+        <WizardToggle activeStepIndex={activeStepIndex} currentStep={currentStep} navSchema={navSchema} isOpen={state.openNav} dispatch={dispatch} />
         <div className="pf-c-wizard__outer-wrap">
           <div className="pf-c-wizard__inner-wrap">
-            <WizardNav aria-label={navAriaLabel}>
+            <WizardNav aria-label={navAriaLabel} isOpen={state.openNav}>
               <FormSpy subscription={{ values: true, valid: true, validating: true }}>
                 {({ values, valid, validating }) => (
                   <WizardNavigation
@@ -112,7 +114,10 @@ const WizardInternal = ({
                     activeStepIndex={activeStepIndex}
                     valid={valid}
                     maxStepIndex={maxStepIndex}
-                    jumpToStep={jumpToStep}
+                    jumpToStep={(...args) => {
+                      state.openNav && dispatch({ type: 'closeNav' });
+                      return jumpToStep(...args);
+                    }}
                     crossroads={crossroads}
                     isDynamic={isDynamic}
                     values={values}
