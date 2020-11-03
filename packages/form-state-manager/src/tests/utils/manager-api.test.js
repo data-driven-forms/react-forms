@@ -1499,6 +1499,39 @@ describe('managerApi', () => {
         });
       });
     });
+
+    it('should set form.validating when fields are validating', async (done) => {
+      expect.assertions(8);
+      jest.useFakeTimers();
+      const render = jest.fn();
+
+      const managerApi = createManagerApi({});
+      managerApi().registerField({ name: 'field', validate: asyncValidate1, render, internalId: 1 });
+      managerApi().registerField({ name: 'field', validate: asyncValidate2, render, internalId: 2 });
+
+      expect(managerApi().getFieldState('field').validating).toEqual(true);
+      expect(managerApi().getState().validating).toEqual(true);
+
+      jest.runAllTimers();
+
+      setImmediate(() => {
+        expect(managerApi().getFieldState('field').validating).toEqual(false);
+        expect(managerApi().getState().validating).toEqual(false);
+
+        managerApi().change('field', 'ok');
+
+        expect(managerApi().getFieldState('field').validating).toEqual(true);
+        expect(managerApi().getState().validating).toEqual(true);
+
+        jest.runAllTimers();
+
+        setImmediate(() => {
+          expect(managerApi().getFieldState('field').validating).toEqual(false);
+          expect(managerApi().getState().validating).toEqual(false);
+          done();
+        });
+      });
+    });
   });
 
   describe('initialize', () => {

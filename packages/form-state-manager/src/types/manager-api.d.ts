@@ -54,7 +54,11 @@ export interface AsyncWatcherApi {
   registerValidator: (callback: Promise<unknown>) => void;
 }
 
-export type AsyncWatcher = (updateValidating: (validating: boolean) => void, updateSubmitting: (submitting: boolean) => void) => AsyncWatcherApi;
+export type AsyncWatcher = (
+  updateValidating: (validating: boolean) => void,
+  updateSubmitting: (submitting: boolean) => void,
+  updateFormValidating: (increment: number) => void
+) => AsyncWatcherApi;
 
 export type Rerender = (subscribeTo?: Array<string>) => void;
 
