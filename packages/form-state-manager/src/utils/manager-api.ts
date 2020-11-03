@@ -46,17 +46,19 @@ type objectMapFunction = (value: any, key: any) => any;
 // TODO: try to optimize
 const traverseObject = (object: AnyObject, callback: objectMapFunction) => Object.keys(object).forEach((key) => callback(object[key], key));
 
-const asyncWatcher: AsyncWatcher = (updateValidating, updateSubmitting) => {
+const asyncWatcher: AsyncWatcher = (updateValidating, updateSubmitting, updateFormValidating) => {
   let nextKey = 0;
   const asyncValidators: AsyncWatcherRecord = {};
   // const asyncSubmissions: AsyncWatcherRecord = {};
 
   const resolveValidator = (resolveKey: number): void => {
     delete asyncValidators[resolveKey];
+    updateFormValidating(-1);
     updateValidating(Object.keys(asyncValidators).length !== 0);
   };
 
   const registerValidator = (callback: Promise<unknown>) => {
+    updateFormValidating(1);
     const resolveKey = nextKey;
     asyncValidators[nextKey] = callback;
     updateValidating(Object.keys(asyncValidators).length !== 0);
@@ -244,8 +246,20 @@ const createManagerApi: CreateManagerApi = ({
   let registeringField: string | number | undefined;
   let isSilent = false;
   let silentRender: string[] = [];
+  let runningValidators = 0;
 
-  const asyncWatcherApi = asyncWatcher(updateValidating, updateSubmitting);
+  function updateRunningValidators(increment: number): void {
+    runningValidators = Math.max(runningValidators + increment, 0);
+
+    const validating = runningValidators > 0;
+
+    if (state.validating !== validating) {
+      state.validating = validating;
+      rerender(['validating']);
+    }
+  }
+
+  const asyncWatcherApi = asyncWatcher(updateValidating, updateSubmitting, updateRunningValidators);
 
   const managerApi: ManagerApi = () => state;
 
@@ -685,7 +699,7 @@ const createManagerApi: CreateManagerApi = ({
           state.fieldListeners[field.name].state.meta.validating = validating;
         };
 
-        const fieldAsyncWatcher = asyncWatcher(updateFieldValidating, () => undefined);
+        const fieldAsyncWatcher = asyncWatcher(updateFieldValidating, () => undefined, updateRunningValidators);
         state.fieldListeners[field.name].asyncWatcher = fieldAsyncWatcher;
       }
 
