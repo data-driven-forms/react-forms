@@ -9,6 +9,7 @@ import * as enterHandle from '@data-driven-forms/common/src/wizard/enter-handler
 
 import { componentMapper, FormTemplate } from '../../index';
 import reducer from '../../files/wizard/reducer';
+import WizardToggle from '../../files/wizard/wizard-toggle';
 
 describe('<Wizard />', () => {
   let initialProps;
@@ -187,6 +188,19 @@ describe('<Wizard />', () => {
     wrapper.unmount();
     wrapper.update();
     expect(toJSon(wrapper)).toMatchSnapshot();
+  });
+
+  it('should open nav', async () => {
+    const wrapper = mount(<FormRenderer {...initialProps} />);
+
+    expect(wrapper.find(WizardToggle).props().isOpen).toEqual(false);
+
+    await act(async () => {
+      wrapper.find('.pf-c-wizard__toggle').simulate('click');
+    });
+    wrapper.update();
+
+    expect(wrapper.find(WizardToggle).props().isOpen).toEqual(true);
   });
 
   it('should call enter handler when pressing enter', () => {
@@ -1849,6 +1863,16 @@ describe('<Wizard />', () => {
     it('returns default', () => {
       const initialState = { aa: 'aa' };
       expect(reducer(initialState, { type: 'nonsense' })).toEqual(initialState);
+    });
+
+    it('closes nav', () => {
+      const initialState = { openNav: true };
+      expect(reducer(initialState, { type: 'closeNav' })).toEqual({ openNav: false });
+    });
+
+    it('returns default', () => {
+      const initialState = { openNav: false };
+      expect(reducer(initialState, { type: 'openNav' })).toEqual({ openNav: true });
     });
   });
 });

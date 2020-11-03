@@ -103,13 +103,7 @@ const WizardInternal = ({
             closeButtonAriaLabel={closeButtonAriaLabel}
           />
         )}
-        <WizardToggle
-          activeStepIndex={activeStepIndex + 1}
-          activeStepName={currentStep.title}
-          activeStepSubName={navSchema.find((step) => step.name === currentStep.name)?.substepOfTitle}
-          isOpen={state.openNav}
-          dispatch={dispatch}
-        />
+        <WizardToggle activeStepIndex={activeStepIndex} currentStep={currentStep} navSchema={navSchema} isOpen={state.openNav} dispatch={dispatch} />
         <div className="pf-c-wizard__outer-wrap">
           <div className="pf-c-wizard__inner-wrap">
             <WizardNav aria-label={navAriaLabel} isOpen={state.openNav}>
