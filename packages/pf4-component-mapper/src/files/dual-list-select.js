@@ -36,13 +36,17 @@ import FormGroup from '../common/form-group';
 const List = ({ value, optionClick, noOptionsTitle, filterValue, filterValueText, selectedValues, ListProps, ListItemProps, ...rest }) => (
   <div
     {...ListProps}
-    className={clsx('pf-c-form-control', 'pf-u-pr-sm ddorg__pf4-component-mapper__dual-list-select', ListProps.className)}
     {...rest}
+    className={clsx('pf-c-form-control', 'pf-u-pr-sm ddorg__pf4-component-mapper__dual-list-select', ListProps.className)}
   >
     {value.length < 1 && (
       <div
         {...ListItemProps}
-        className="ddorg__pf4-component-mapper__dual-list-select-option-text ddorg__pf4-component-mapper__dual-list-select-option-disabled"
+        className={clsx(
+          'ddorg__pf4-component-mapper__dual-list-select-option-text',
+          'ddorg__pf4-component-mapper__dual-list-select-option-disabled',
+          ListItemProps.className
+        )}
       >
         {filterValue ? filterValueText : noOptionsTitle}
       </div>
@@ -53,11 +57,11 @@ const List = ({ value, optionClick, noOptionsTitle, filterValue, filterValueText
           onClick={(e) => optionClick(e, value)}
           key={value}
           value={value}
+          {...ListItemProps}
+          {...ListItemPropsItem}
           className={`ddorg__pf4-component-mapper__dual-list-select-option ${
             selectedValues.includes(value) ? 'ddorg__pf4-component-mapper__dual-list-select-option-selected' : ''
           }`}
-          {...ListItemProps}
-          {...ListItemPropsItem}
         >
           {label}
         </div>
