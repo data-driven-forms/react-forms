@@ -47,20 +47,7 @@ interface InternalDualListSelectProps {
   description?: ReactNode;
   hideLabel?: boolean;
   id?: string;
-  state?: AnyObject,
-  sortOptions?: VoidFunction,
-  filterOptions?: VoidFunction,
-  leftValues?: DualListSelectOption[];
-  rightValues?: DualListSelectOption[];
   renderStatus?: RenderStatusFunction;
-  handleOptionsClick?: HandleOptionsFunction,
-  handleMoveRight: VoidFunction,
-  handleMoveLeft: VoidFunction,
-  handleClearLeftValues: VoidFunction,
-  handleClearRightValues: VoidFunction,
-  sortValues: VoidFunction,
-  filterValues: VoidFunction,
-  handleValuesClick: HandleOptionsFunction,
   FormGroupProps: FormGrpProps,
   ListProps: ListProps,
   LeftListProps: ListProps,

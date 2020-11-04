@@ -7,7 +7,7 @@ Dual list select is wrapped in a form group, so it accepts all [form group props
 |Props|Type|Default|Description|
 |-----|----|-------|-----------|
 |options|array|[]|`[{label, value}]`|
-|label|node|FormLabel primary text|
+|label|node||FormLabel primary text|
 |leftTitle|String|'Options'|Title for options|
 |rightTitle|String|'Selected'|Title for selected items|
 |moveLeftTitle|String|'Move selected to left'|Tooltip for move to left button|
