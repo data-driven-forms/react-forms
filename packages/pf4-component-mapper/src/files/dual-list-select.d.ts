@@ -18,14 +18,6 @@ export interface RenderStatusFunction {
   (input: RenderStatusInput): ReactNode;
 }
 
-export interface VoidFunction {
-  (): void;
-}
-
-export interface HandleOptionsFunction {
-  (e: any, value: any): void;
-}
-
 interface InternalDualListSelectProps {
   leftTitle?: ReactNode;
   rightTitle?: ReactNode;
