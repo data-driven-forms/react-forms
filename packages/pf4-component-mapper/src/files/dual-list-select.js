@@ -65,7 +65,7 @@ const List = ({ value, optionClick, noOptionsTitle, filterValue, filterValueText
               'ddorg__pf4-component-mapper__dual-list-select-option-selected': selectedValues.includes(value)
             },
             ListItemProps.className,
-            ListItemPropsItem.className
+            ListItemPropsItem?.className
           )}
         >
           {label}
