@@ -7,6 +7,7 @@ Dual list select is wrapped in a form group, so it accepts all [form group props
 |Props|Type|Default|Description|
 |-----|----|-------|-----------|
 |options|array|[]|`[{label, value}]`|
+|label|node||FormLabel primary text|
 |leftTitle|String|'Options'|Title for options|
 |rightTitle|String|'Selected'|Title for selected items|
 |moveLeftTitle|String|'Move selected to left'|Tooltip for move to left button|
@@ -22,3 +23,39 @@ Dual list select is wrapped in a form group, so it accepts all [form group props
 |filterValueText|String|'Remove your filter to see all selected'|Placeholder for value when there is no filtered value|
 |filterOptionsText|String|'Remove your filter to see all options'|Placeholder for options when there is no filtered option|
 |renderStatus|function|'null'|A function that renders status text below the toolbar filter. For example, display how many items were selected: `({selected, options}) => "selected " + selected + " out of " + options`|
+
+### Customization
+
+MUI DualListSelect provides fully customization. When the props offers Right/Left variant, you can pass props to `RightXXX` or to `LeftXXX` props. Example: `ListGridProps` is Right/Left, so there are two more props: `RightListGridProps` and `LeftListGridProps`. These props overrides the standard props, except `className`, that are being combined. All these props are objects.
+
+|Props|Right/Left variant|
+|-----|----|
+|FormGroupProps||
+|ListProps|yes|
+|ListItemProps|yes|
+|ToolbarProps|yes|
+|FilterFieldProps|yes|
+|SearchIconProps|yes|
+|SearchIconButtonProps|yes|
+|SortIconButtonProps|yes|
+|SortIconProps|yes|
+|InternalGridProps|yes|
+|ListGridProps|yes|
+|TitleProps|yes|
+|ButtonsGridProps||
+|ButtonsInternalFlexProps||
+|ButtonFlexProps||
+|ToRightFlexProps||
+|IconButtonProps||
+|ToRightIconButtonProps||
+|IconProps||
+|AllToRightFlexProps||
+|AllToRightIconButtonProps||
+|AllToLeftFlexProps||
+|AllToLeftIconButtonProps||
+|ToLeftFlexProps||
+|ToLeftIconButtonProps||
+|ToRightIconProps||
+|AllToRightIconProps||
+|AllToLeftIconProps||
+|ToLeftIconProps||
