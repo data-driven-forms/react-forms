@@ -247,6 +247,7 @@ const createManagerApi: CreateManagerApi = ({
   let isSilent = false;
   let silentRender: string[] = [];
   let runningValidators = 0;
+  let flatSubmitErrors: AnyObject = {};
 
   function updateRunningValidators(increment: number): void {
     runningValidators = Math.max(runningValidators + increment, 0);
@@ -611,53 +612,87 @@ const createManagerApi: CreateManagerApi = ({
     const result = config.onSubmit(state.values);
 
     if (isPromise(result)) {
-      updateSubmitting(true);
+      setSubmitting();
       const render = prepareRerender();
 
       result
-        .then(() => {
-          state.submitErrors = undefined;
-          state.hasSubmitErrors = false;
-          state.submitFailed = false;
-          state.submitSucceeded = true;
-          state.submitting = false;
-          state.submitError = undefined;
-
+        .then((errors: unknown) => {
+          handleSubmitError(errors);
+          updateFieldSubmitMeta();
           render();
 
           runAfterSubmit();
         })
-        .catch((error: unknown) => {
-          state.submitErrors = error as AnyObject;
-          state.hasSubmitErrors = true;
-          state.submitFailed = true;
-          state.submitSucceeded = false;
-          state.submitting = false;
-          state.submitError = state.submitErrors?.[FORM_ERROR];
-
+        .catch(() => {
+          handleSubmitError();
+          updateFieldSubmitMeta();
           render();
         });
     } else {
       const render = prepareRerender();
 
-      if (result) {
-        state.submitErrors = result;
-        state.hasSubmitErrors = true;
-        state.submitFailed = true;
-        state.submitSucceeded = false;
-        state.submitError = state.submitErrors?.[FORM_ERROR];
-      } else {
-        state.submitErrors = undefined;
-        state.hasSubmitErrors = false;
-        state.submitFailed = false;
-        state.submitSucceeded = true;
-        state.submitError = undefined;
-      }
+      handleSubmitError(result);
+      updateFieldSubmitMeta();
 
       render();
 
       runAfterSubmit();
     }
+  }
+
+  function updateFieldSubmitMeta(): void {
+    traverseObject(state.fieldListeners, (field, name) => {
+      if (field.state) {
+        setFieldState(
+          name,
+          (prevState) => ({
+            ...prevState,
+            meta: {
+              ...prevState.meta,
+              submitFailed: state.submitFailed,
+              submitSucceeded: state.submitSucceeded,
+              submitError: flatSubmitErrors[name],
+              submitting: state.submitting
+            }
+          }),
+          true
+        );
+      }
+    });
+  }
+
+  function handleSubmitError(errors?: any): void {
+    state.submitting = false;
+    if (errors) {
+      state.submitErrors = errors;
+      state.hasSubmitErrors = true;
+      state.submitFailed = true;
+      state.submitSucceeded = false;
+      state.submitError = state.submitErrors?.[FORM_ERROR];
+      flatSubmitErrors = flatObject(errors);
+    } else {
+      state.submitErrors = undefined;
+      state.hasSubmitErrors = false;
+      state.submitFailed = false;
+      state.submitSucceeded = true;
+      state.submitError = undefined;
+      flatSubmitErrors = {};
+    }
+  }
+
+  function setSubmitting() {
+    const render = prepareRerender();
+
+    state.submitErrors = undefined;
+    state.hasSubmitErrors = false;
+    state.submitFailed = false;
+    state.submitSucceeded = false;
+    state.submitting = true;
+    state.submitError = undefined;
+
+    updateFieldSubmitMeta();
+
+    render();
   }
 
   function runAfterSubmit() {
@@ -764,11 +799,11 @@ const createManagerApi: CreateManagerApi = ({
     });
   }
 
-  function setFieldState(name: string, mutateState: (prevState: FieldState) => FieldState): void {
+  function setFieldState(name: string, mutateState: (prevState: FieldState) => FieldState, dryRun = false): void {
     if (state.fieldListeners[name]) {
       const newState = mutateState(state.fieldListeners[name].state);
       state.fieldListeners[name].state = newState;
-      Object.values(state.fieldListeners[name].fields).forEach(({ render }) => render());
+      !dryRun && Object.values(state.fieldListeners[name].fields).forEach(({ render }) => render());
     }
   }
 

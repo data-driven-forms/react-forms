@@ -1843,7 +1843,7 @@ describe('managerApi', () => {
     it('calls async submit', async () => {
       jest.useFakeTimers();
 
-      const onSubmit = jest.fn().mockImplementation(() => new Promise((res) => setTimeout(() => res('ok'), 1000)));
+      const onSubmit = jest.fn().mockImplementation(() => new Promise((res) => setTimeout(() => res(), 1000)));
       const render = jest.fn();
 
       const managerApi = createManagerApi({ onSubmit });
@@ -1870,12 +1870,43 @@ describe('managerApi', () => {
       expect(managerApi().hasSubmitErrors).toEqual(false);
     });
 
+    it('calls async submit - submit fails on catch (i.e. network error), return to normal', async () => {
+      jest.useFakeTimers();
+
+      const onSubmit = jest.fn().mockImplementation(() => new Promise((res, rej) => setTimeout(() => rej(), 1000)));
+      const render = jest.fn();
+
+      const managerApi = createManagerApi({ onSubmit });
+
+      managerApi().registerField({ name: 'field', internalId: '1', render });
+
+      expect(managerApi().submitting).toEqual(false);
+      expect(render).not.toHaveBeenCalled();
+
+      managerApi().submit();
+
+      expect(render).toHaveBeenCalled();
+      render.mockClear();
+      expect(managerApi().submitting).toEqual(true);
+
+      await jest.runAllTimers();
+      await jest.runAllTimers(); // catch needs to be run 2x
+
+      expect(render).toHaveBeenCalled();
+      expect(managerApi().submitting).toEqual(false);
+      expect(managerApi().submitError).toEqual(undefined);
+      expect(managerApi().submitFailed).toEqual(false);
+      expect(managerApi().submitSucceeded).toEqual(true);
+      expect(managerApi().submitErrors).toEqual(undefined);
+      expect(managerApi().hasSubmitErrors).toEqual(false);
+    });
+
     it('calls async submit - failed', async () => {
       jest.useFakeTimers();
 
       const error = 'some evil error';
 
-      const onSubmit = jest.fn().mockImplementation(() => new Promise((res, rej) => setTimeout(() => rej(error), 100)));
+      const onSubmit = jest.fn().mockImplementation(() => new Promise((res) => setTimeout(() => res(error), 100)));
       const render = jest.fn();
 
       const managerApi = createManagerApi({ onSubmit });
@@ -1893,7 +1924,6 @@ describe('managerApi', () => {
       expect(managerApi().submitting).toEqual(true);
 
       await jest.runAllTimers();
-      await jest.runAllTimers(); // for some reason, catch branch is not triggerd on first run
 
       expect(render).toHaveBeenCalled();
       expect(managerApi().submitError).toEqual(undefined);
@@ -1909,7 +1939,7 @@ describe('managerApi', () => {
 
       const error = { [FORM_ERROR]: 'some evil error' };
 
-      const onSubmit = jest.fn().mockImplementation(() => new Promise((res, rej) => setTimeout(() => rej(error), 100)));
+      const onSubmit = jest.fn().mockImplementation(() => new Promise((res) => setTimeout(() => res(error), 100)));
       const render = jest.fn();
 
       const managerApi = createManagerApi({ onSubmit });
@@ -1927,7 +1957,6 @@ describe('managerApi', () => {
       expect(managerApi().submitting).toEqual(true);
 
       await jest.runAllTimers();
-      await jest.runAllTimers(); // for some reason, catch branch is not triggerd on first run
 
       expect(render).toHaveBeenCalled();
       expect(managerApi().submitError).toEqual('some evil error');
@@ -1936,6 +1965,45 @@ describe('managerApi', () => {
       expect(managerApi().submitSucceeded).toEqual(false);
       expect(managerApi().submitErrors).toEqual(error);
       expect(managerApi().hasSubmitErrors).toEqual(true);
+    });
+
+    it('calls async submit - failed - set async error on field', async () => {
+      jest.useFakeTimers();
+
+      const error = { nested: { field: 'some evil error' } };
+
+      const onSubmit = jest.fn().mockImplementation(() => new Promise((res) => setTimeout(() => res(error), 100)));
+      const render = jest.fn();
+
+      const managerApi = createManagerApi({ onSubmit });
+
+      managerApi().registerField({ name: 'nested.field', internalId: '1', render });
+
+      expect(managerApi().submitting).toEqual(false);
+      expect(render).not.toHaveBeenCalled();
+
+      managerApi().submit();
+
+      expect(render).toHaveBeenCalled();
+      render.mockClear();
+
+      expect(managerApi().getFieldState('nested.field').submitting).toEqual(true);
+      expect(managerApi().submitting).toEqual(true);
+
+      await jest.runAllTimers();
+
+      expect(render).toHaveBeenCalled();
+      expect(managerApi().submitError).toEqual(undefined);
+      expect(managerApi().submitting).toEqual(false);
+      expect(managerApi().submitFailed).toEqual(true);
+      expect(managerApi().submitSucceeded).toEqual(false);
+      expect(managerApi().submitErrors).toEqual(error);
+      expect(managerApi().hasSubmitErrors).toEqual(true);
+
+      expect(managerApi().getFieldState('nested.field').submitError).toEqual('some evil error');
+      expect(managerApi().getFieldState('nested.field').submitting).toEqual(false);
+      expect(managerApi().getFieldState('nested.field').submitFailed).toEqual(true);
+      expect(managerApi().getFieldState('nested.field').submitSucceeded).toEqual(false);
     });
   });
 
