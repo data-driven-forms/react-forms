@@ -291,7 +291,7 @@ const createManagerApi: CreateManagerApi = ({
     runFormValidation = false;
   }
 
-  function handleFieldError(name: string, isValid: boolean, error: string | undefined = undefined) {
+  function handleFieldError(name: string, isValid: boolean, error: string | undefined = undefined, validating = false) {
     setFieldState(name, (prev: FieldState) => ({
       ...prev,
       meta: {
@@ -299,7 +299,8 @@ const createManagerApi: CreateManagerApi = ({
         error,
         valid: isValid,
         invalid: !isValid,
-        validating: false
+        validating,
+        warning: undefined
       }
     }));
 
@@ -322,6 +323,7 @@ const createManagerApi: CreateManagerApi = ({
       if (validators.length > 0) {
         const result = composeValidators(validators as Validator[])(value, state.values);
         if (isPromise(result)) {
+          handleFieldError(name, true, undefined, true);
           (result as Promise<string | undefined>)
             .then(() => handleFieldError(name, true))
             .catch((response) => {
@@ -330,7 +332,11 @@ const createManagerApi: CreateManagerApi = ({
                   ...prev,
                   meta: {
                     ...prev.meta,
-                    warning: response.error
+                    warning: response.error,
+                    error: undefined,
+                    valid: true,
+                    invalid: false,
+                    validating: false
                   }
                 }));
               } else {
@@ -344,7 +350,11 @@ const createManagerApi: CreateManagerApi = ({
               ...prev,
               meta: {
                 ...prev.meta,
-                warning: (result as WarningObject)?.error
+                warning: (result as WarningObject)?.error,
+                error: undefined,
+                valid: true,
+                invalid: false,
+                validating: false
               }
             }));
           } else {
@@ -443,22 +453,28 @@ const createManagerApi: CreateManagerApi = ({
     const currentInvalidFields = Object.keys(state.errors);
     if (isPromise(result)) {
       const asyncResult = result as Promise<FormLevelError>;
+
+      state.errors = {};
+      state.hasValidationErrors = false;
+      state.valid = true;
+      state.invalid = false;
+      state.error = undefined;
+
       return asyncResult
         .then(() => {
           if (!state.validating) {
-            state.errors = {};
-            state.hasValidationErrors = false;
-            state.valid = true;
-            state.invalid = false;
-            state.error = undefined;
             revalidateFields(currentInvalidFields);
           }
         })
         .catch((errors) => {
+          const render = prepareRerender();
+
           state.errors = errors;
           state.hasValidationErrors = true;
           state.valid = false;
           state.invalid = true;
+
+          render();
         });
     }
 
