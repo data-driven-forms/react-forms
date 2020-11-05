@@ -2091,6 +2091,36 @@ describe('managerApi', () => {
       expect(managerApi().getFieldState('field').meta.error).toEqual(undefined);
     });
 
+    it('warning should rewrite error - sync', () => {
+      const managerApi = createManagerApi({});
+      managerApi().registerField({
+        name: 'field',
+        initialValue: 'warning',
+        validate: (value) => (value === 'warning' ? { type: 'warning', error: someError } : 'error'),
+        render,
+        internalId: 1
+      });
+
+      expect(managerApi().getFieldState('field').meta.warning).toEqual(someError);
+      expect(managerApi().getFieldState('field').meta.error).toEqual(undefined);
+      expect(managerApi().getFieldState('field').meta.valid).toEqual(true);
+      expect(managerApi().getFieldState('field').meta.invalid).toEqual(false);
+
+      managerApi().change('field', 'error');
+
+      expect(managerApi().getFieldState('field').meta.warning).toEqual(undefined);
+      expect(managerApi().getFieldState('field').meta.error).toEqual('error');
+      expect(managerApi().getFieldState('field').meta.valid).toEqual(false);
+      expect(managerApi().getFieldState('field').meta.invalid).toEqual(true);
+
+      managerApi().change('field', 'warning');
+
+      expect(managerApi().getFieldState('field').meta.warning).toEqual(someError);
+      expect(managerApi().getFieldState('field').meta.error).toEqual(undefined);
+      expect(managerApi().getFieldState('field').meta.valid).toEqual(true);
+      expect(managerApi().getFieldState('field').meta.invalid).toEqual(false);
+    });
+
     it('should save type: warning as warning - async', (done) => {
       expect.assertions(2);
 
@@ -2103,6 +2133,52 @@ describe('managerApi', () => {
         expect(managerApi().getFieldState('field').meta.warning).toEqual(someError);
         expect(managerApi().getFieldState('field').meta.error).toEqual(undefined);
         done();
+      });
+    });
+
+    it('warning should rewrite error - async', (done) => {
+      expect.assertions(18);
+
+      const asyncValidate = jest
+        .fn()
+        .mockImplementation((value) => Promise.reject(value === 'warning' ? { type: 'warning', error: someError } : 'error'));
+
+      const managerApi = createManagerApi({});
+      managerApi().registerField({ name: 'field', initialValue: 'warning', validate: asyncValidate, render, internalId: 1 });
+
+      expect(managerApi().getFieldState('field').meta.validating).toEqual(true);
+
+      setImmediate(() => {
+        expect(managerApi().getFieldState('field').meta.warning).toEqual(someError);
+        expect(managerApi().getFieldState('field').meta.error).toEqual(undefined);
+        expect(managerApi().getFieldState('field').meta.valid).toEqual(true);
+        expect(managerApi().getFieldState('field').meta.invalid).toEqual(false);
+        expect(managerApi().getFieldState('field').meta.validating).toEqual(false);
+
+        managerApi().change('field', 'error');
+
+        expect(managerApi().getFieldState('field').meta.validating).toEqual(true);
+
+        setImmediate(() => {
+          expect(managerApi().getFieldState('field').meta.warning).toEqual(undefined);
+          expect(managerApi().getFieldState('field').meta.error).toEqual('error');
+          expect(managerApi().getFieldState('field').meta.valid).toEqual(false);
+          expect(managerApi().getFieldState('field').meta.invalid).toEqual(true);
+          expect(managerApi().getFieldState('field').meta.validating).toEqual(false);
+
+          managerApi().change('field', 'warning');
+
+          expect(managerApi().getFieldState('field').meta.validating).toEqual(true);
+
+          setImmediate(() => {
+            expect(managerApi().getFieldState('field').meta.warning).toEqual(someError);
+            expect(managerApi().getFieldState('field').meta.error).toEqual(undefined);
+            expect(managerApi().getFieldState('field').meta.valid).toEqual(true);
+            expect(managerApi().getFieldState('field').meta.invalid).toEqual(false);
+            expect(managerApi().getFieldState('field').meta.validating).toEqual(false);
+            done();
+          });
+        });
       });
     });
   });
