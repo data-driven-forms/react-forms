@@ -1,7 +1,18 @@
 import createManagerApi, { initialMeta, flatObject } from '../../utils/manager-api';
 import FORM_ERROR from '../../files/form-error';
+import * as focusError from '../../utils/focus-error';
 
 describe('managerApi', () => {
+  let focusErrorSpy;
+
+  beforeEach(() => {
+    focusErrorSpy = jest.spyOn(focusError, 'default');
+  });
+
+  afterEach(() => {
+    focusErrorSpy.mockClear();
+  });
+
   it('should create managerApi getter', () => {
     const managerApi = createManagerApi({});
     expect(managerApi).toEqual(expect.any(Function));
@@ -583,6 +594,7 @@ describe('managerApi', () => {
   });
 
   it('onsubmit receives an error', () => {
+    const focusErrorSpy = jest.spyOn(focusError, 'default');
     const error = 'some-error';
     const onSubmit = jest.fn().mockImplementation(() => error);
     const managerApi = createManagerApi({ onSubmit });
@@ -603,6 +615,7 @@ describe('managerApi', () => {
     expect(managerApi().submitErrors).toEqual(error);
     expect(managerApi().hasSubmitErrors).toEqual(true);
     expect(managerApi().hasValidationErrors).toEqual(false);
+    expect(focusErrorSpy).toHaveBeenCalled();
   });
 
   it('onsubmit receives an error - form level', () => {
@@ -2071,6 +2084,7 @@ describe('managerApi', () => {
       expect(managerApi().submitSucceeded).toEqual(false);
       expect(managerApi().submitErrors).toEqual(error);
       expect(managerApi().hasSubmitErrors).toEqual(true);
+      expect(focusErrorSpy).toHaveBeenCalled();
 
       expect(managerApi().getFieldState('nested.field').submitError).toEqual('some evil error');
       expect(managerApi().getFieldState('nested.field').submitting).toEqual(false);
@@ -2194,9 +2208,11 @@ describe('managerApi', () => {
 
       expect(managerApi().getFieldState('field').touched).toEqual(false);
       expect(managerApi().getFieldState('field').touched).toEqual(false);
+      expect(focusErrorSpy).not.toHaveBeenCalled();
 
       managerApi().handleSubmit();
 
+      expect(focusErrorSpy).toHaveBeenCalled();
       expect(managerApi().getFieldState('field').touched).toEqual(true);
       expect(managerApi().getFieldState('field').touched).toEqual(true);
 

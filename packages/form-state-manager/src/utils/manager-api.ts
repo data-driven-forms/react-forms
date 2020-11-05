@@ -29,6 +29,7 @@ import { formLevelValidator, isPromise } from './validate';
 import { FormValidator, FormLevelError, Validator } from '../types/validate';
 import findDifference from './find-difference';
 import FORM_ERROR from '../files/form-error';
+import focusError from './focus-error';
 
 export const defaultIsEqual = (a: any, b: any) => a === b;
 
@@ -611,6 +612,8 @@ const createManagerApi: CreateManagerApi = ({
         }));
       });
 
+      focusError(state.errors);
+
       return;
     }
 
@@ -636,6 +639,7 @@ const createManagerApi: CreateManagerApi = ({
           handleSubmitError(errors);
           updateFieldSubmitMeta();
           render();
+          focusError(flatSubmitErrors);
 
           runAfterSubmit();
         })
@@ -651,6 +655,8 @@ const createManagerApi: CreateManagerApi = ({
       updateFieldSubmitMeta();
 
       render();
+
+      focusError(flatSubmitErrors);
 
       runAfterSubmit();
     }
