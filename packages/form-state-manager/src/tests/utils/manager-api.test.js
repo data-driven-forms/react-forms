@@ -1219,6 +1219,47 @@ describe('managerApi', () => {
         });
       });
     });
+
+    it('should reset error state when revalidated', () => {
+      jest.useFakeTimers();
+      const render = jest.fn();
+      const managerApi = createManagerApi({ validate: asyncValidate });
+      const { registerField, change } = managerApi();
+
+      registerField({ name: 'foo', render });
+
+      change('foo', 'foo');
+
+      jest.advanceTimersByTime(10);
+      setImmediate(() => {
+        expect(managerApi().getState().errors).toEqual({
+          foo: 'error'
+        });
+        expect(managerApi().getState().valid).toEqual(false);
+        expect(managerApi().getState().invalid).toEqual(true);
+        expect(managerApi().getState().validating).toEqual(false);
+        expect(managerApi().hasValidationErrors).toEqual(true);
+
+        change('foo', 'foo');
+
+        expect(managerApi().getState().errors).toEqual({});
+        expect(managerApi().getState().valid).toEqual(true);
+        expect(managerApi().getState().invalid).toEqual(false);
+        expect(managerApi().getState().validating).toEqual(true);
+        expect(managerApi().hasValidationErrors).toEqual(false);
+
+        jest.advanceTimersByTime(10);
+        setImmediate(() => {
+          expect(managerApi().getState().errors).toEqual({
+            foo: 'error'
+          });
+          expect(managerApi().getState().valid).toEqual(false);
+          expect(managerApi().getState().invalid).toEqual(true);
+          expect(managerApi().getState().validating).toEqual(false);
+          expect(managerApi().hasValidationErrors).toEqual(true);
+        });
+      });
+    });
   });
 
   describe('Combine form and field level validation', () => {
@@ -1522,6 +1563,37 @@ describe('managerApi', () => {
 
         expect(managerApi().getFieldState('field').validating).toEqual(true);
         expect(managerApi().getState().validating).toEqual(true);
+
+        jest.runAllTimers();
+
+        setImmediate(() => {
+          expect(managerApi().getFieldState('field').validating).toEqual(false);
+          expect(managerApi().getState().validating).toEqual(false);
+          done();
+        });
+      });
+    });
+
+    it('should reset field.error when validating', async (done) => {
+      expect.assertions(8);
+      jest.useFakeTimers();
+      const render = jest.fn();
+
+      const managerApi = createManagerApi({});
+      managerApi().registerField({ name: 'field', initialValue: 'one', validate: asyncValidate1, render, internalId: 1 });
+
+      jest.runAllTimers();
+
+      setImmediate(() => {
+        expect(managerApi().getFieldState('field').error).toEqual('error-one');
+        expect(managerApi().getFieldState('field').valid).toEqual(false);
+        expect(managerApi().getFieldState('field').invalid).toEqual(true);
+
+        managerApi().change('field', 'ok');
+
+        expect(managerApi().getFieldState('field').error).toEqual(undefined);
+        expect(managerApi().getFieldState('field').valid).toEqual(true);
+        expect(managerApi().getFieldState('field').invalid).toEqual(false);
 
         jest.runAllTimers();
 

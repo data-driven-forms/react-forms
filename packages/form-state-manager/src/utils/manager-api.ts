@@ -322,6 +322,7 @@ const createManagerApi: CreateManagerApi = ({
       if (validators.length > 0) {
         const result = composeValidators(validators as Validator[])(value, state.values);
         if (isPromise(result)) {
+          handleFieldError(name, true);
           (result as Promise<string | undefined>)
             .then(() => handleFieldError(name, true))
             .catch((response) => {
@@ -443,22 +444,28 @@ const createManagerApi: CreateManagerApi = ({
     const currentInvalidFields = Object.keys(state.errors);
     if (isPromise(result)) {
       const asyncResult = result as Promise<FormLevelError>;
+
+      state.errors = {};
+      state.hasValidationErrors = false;
+      state.valid = true;
+      state.invalid = false;
+      state.error = undefined;
+
       return asyncResult
         .then(() => {
           if (!state.validating) {
-            state.errors = {};
-            state.hasValidationErrors = false;
-            state.valid = true;
-            state.invalid = false;
-            state.error = undefined;
             revalidateFields(currentInvalidFields);
           }
         })
         .catch((errors) => {
+          const render = prepareRerender();
+
           state.errors = errors;
           state.hasValidationErrors = true;
           state.valid = false;
           state.invalid = true;
+
+          render();
         });
     }
 
