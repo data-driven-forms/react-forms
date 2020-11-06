@@ -18,4 +18,31 @@ describe('focusError', () => {
 
     expect(listener).toHaveBeenCalled();
   });
+
+  it('focus first error element in the right form', async () => {
+    document.body.innerHTML = `<form name="not-error">
+        <input name="field-1" />
+        <input id="not-error" name="this-has-error" />
+        <input name="field-3" />
+    </form>
+    <form name="this-has-error">
+        <input name="field-1" />
+        <input id="this-has-error" name="this-has-error" />
+        <input name="field-3" />
+    </form>`;
+
+    const listenerNotError = jest.fn();
+    const listenerError = jest.fn();
+
+    document.querySelector('#not-error').addEventListener('focus', listenerNotError);
+    document.querySelector('#this-has-error').addEventListener('focus', listenerError);
+
+    expect(listenerNotError).not.toHaveBeenCalled();
+    expect(listenerError).not.toHaveBeenCalled();
+
+    focusError({ 'field-3': 'error', 'this-has-error': 'error' }, 'this-has-error');
+
+    expect(listenerNotError).not.toHaveBeenCalled();
+    expect(listenerError).toHaveBeenCalled();
+  });
 });

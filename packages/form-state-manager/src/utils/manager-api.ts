@@ -194,7 +194,8 @@ const createManagerApi: CreateManagerApi = ({
   initialValues,
   debug,
   keepDirtyOnReinitialize,
-  destroyOnUnregister
+  destroyOnUnregister,
+  name
 }) => {
   const config: CreateManagerApiConfig = {
     onSubmit,
@@ -204,7 +205,8 @@ const createManagerApi: CreateManagerApi = ({
     subscription,
     debug,
     keepDirtyOnReinitialize,
-    destroyOnUnregister
+    destroyOnUnregister,
+    name
   };
 
   let state: ManagerState = {
@@ -265,8 +267,8 @@ const createManagerApi: CreateManagerApi = ({
 
   const managerApi: ManagerApi = () => state;
 
-  function setConfig(attribute: keyof CreateManagerApiConfig, value: any) {
-    config[attribute] = value;
+  function setConfig(attribute: keyof CreateManagerApiConfig, value: CreateManagerApiConfig[keyof CreateManagerApiConfig]) {
+    (config as AnyObject)[attribute] = value;
   }
 
   function isValidationPaused() {
@@ -612,7 +614,7 @@ const createManagerApi: CreateManagerApi = ({
         }));
       });
 
-      focusError(state.errors);
+      focusError(state.errors, config.name);
 
       return;
     }
@@ -639,7 +641,7 @@ const createManagerApi: CreateManagerApi = ({
           handleSubmitError(errors);
           updateFieldSubmitMeta();
           render();
-          focusError(flatSubmitErrors);
+          focusError(flatSubmitErrors, config.name);
 
           runAfterSubmit();
         })
@@ -656,7 +658,7 @@ const createManagerApi: CreateManagerApi = ({
 
       render();
 
-      focusError(flatSubmitErrors);
+      focusError(flatSubmitErrors, config.name);
 
       runAfterSubmit();
     }

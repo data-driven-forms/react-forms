@@ -16,7 +16,7 @@ const App = () => {
       <FormStateManager onSubmit={console.log}>
         {({ handleSubmit, ...state }) => {
           return (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} name="field-2">
               <h1>There will be children</h1>
               <TextField initialValue="foo" autocomplete="off" validate={asyncValidator} label="Field 2" name="field-2-23" id="field-2" type="text" />
               <TextField autocomplete="off" validate={asyncValidator} label="Field 2" name="field-2" id="field-2" type="text" />

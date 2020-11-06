@@ -1,10 +1,16 @@
 import AnyObject from '../types/any-object';
 
-const focusError = (errors: AnyObject) => {
+const justFocusable = (el: any) => el?.focus;
+
+const focusError = (errors: AnyObject, name?: string): void => {
   if (document) {
-    const allInputs = Array.from(document.forms)
-      .reduce((acc: any, curr: any) => [...acc, ...curr.elements], [])
-      .filter((el: HTMLElement) => el.focus);
+    const formInputs = name && document.forms[name as any]?.elements;
+
+    const allInputs = formInputs
+      ? Array.from(formInputs).filter(justFocusable)
+      : Array.from(document.forms)
+          .reduce((acc: any, curr: any) => [...acc, ...curr.elements], [])
+          .filter(justFocusable);
 
     const errorKeys = Object.keys(errors);
 

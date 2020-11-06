@@ -201,6 +201,7 @@ export interface CreateManagerApiConfig {
   debug?: Debug;
   keepDirtyOnReinitialize?: boolean;
   destroyOnUnregister?: boolean;
+  name?: string;
 }
 
 declare type CreateManagerApi = (CreateManagerApiConfig: CreateManagerApiConfig) => ManagerApi;
