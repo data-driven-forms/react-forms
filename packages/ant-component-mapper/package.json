@@ -67,10 +67,10 @@
     "react-select": "^2.2.0"
   },
   "peerDependencies": {
-    "@data-driven-forms/react-form-renderer": "^1.9.3",
+    "@data-driven-forms/react-form-renderer": ">=2.4.6",
     "antd": "^4.2.0",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0"
+    "react": ">=16.13.0",
+    "react-dom": ">=16.13.0"
   },
   "dependencies": {},
   "postpublish": "export RELEASE_DEMO=true"
