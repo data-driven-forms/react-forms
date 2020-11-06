@@ -4,7 +4,7 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 import { FormGroup, RadioButtonGroup, RadioButton } from 'carbon-components-react';
 
-import prepareProps from '../common/prepare-props';
+import prepareProps from './prepare-props';
 import HelperTextBlock from '../common/helper-text-block';
 
 const Radio = (props) => {

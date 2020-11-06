@@ -13,7 +13,7 @@ import {
   StructuredListCell
 } from 'carbon-components-react/lib/components/StructuredList/StructuredList';
 
-import { buildLabel } from '../common/prepare-props';
+import { buildLabel } from './prepare-props';
 import './dual-list-select.scss';
 
 const EmptyList = ({ message }) => (
