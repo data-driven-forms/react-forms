@@ -9,7 +9,7 @@ import { AddAlt32, Subtract32 } from '@carbon/icons-react';
 
 import './field-array.scss';
 
-import prepareProps from '../common/prepare-props';
+import prepareProps from './prepare-props';
 
 const ArrayItem = ({ remove, fields, name, removeText, buttonDisabled, RemoveButtonProps, ArrayItemProps }) => {
   const formOptions = useFormApi();

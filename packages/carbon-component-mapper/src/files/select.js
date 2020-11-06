@@ -6,7 +6,7 @@ import DataDrivenSelect from '@data-driven-forms/common/src/select';
 import fnToString from '@data-driven-forms/common/src/utils/fn-to-string';
 
 import { Select as CarbonSelect, MultiSelect, SelectItem, ComboBox } from 'carbon-components-react';
-import prepareProps from '../common/prepare-props';
+import prepareProps from './prepare-props';
 
 export const multiOnChange = (input, simpleValue) => ({ selectedItems }) => {
   if (simpleValue) {
