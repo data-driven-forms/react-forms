@@ -1,7 +1,18 @@
 import createManagerApi, { initialMeta, flatObject } from '../../utils/manager-api';
 import FORM_ERROR from '../../files/form-error';
+import * as focusError from '../../utils/focus-error';
 
 describe('managerApi', () => {
+  let focusErrorSpy;
+
+  beforeEach(() => {
+    focusErrorSpy = jest.spyOn(focusError, 'default');
+  });
+
+  afterEach(() => {
+    focusErrorSpy.mockClear();
+  });
+
   it('should create managerApi getter', () => {
     const managerApi = createManagerApi({});
     expect(managerApi).toEqual(expect.any(Function));
@@ -583,7 +594,8 @@ describe('managerApi', () => {
   });
 
   it('onsubmit receives an error', () => {
-    const error = 'some-error';
+    const focusErrorSpy = jest.spyOn(focusError, 'default');
+    const error = { field: 'some-error' };
     const onSubmit = jest.fn().mockImplementation(() => error);
     const managerApi = createManagerApi({ onSubmit });
     const { registerField } = managerApi();
@@ -603,6 +615,23 @@ describe('managerApi', () => {
     expect(managerApi().submitErrors).toEqual(error);
     expect(managerApi().hasSubmitErrors).toEqual(true);
     expect(managerApi().hasValidationErrors).toEqual(false);
+    expect(focusErrorSpy).toHaveBeenCalledWith({ field: 'some-error' }, undefined);
+  });
+
+  it('onsubmit receives an error - named form', () => {
+    const name = 'i-am-form';
+    const focusErrorSpy = jest.spyOn(focusError, 'default');
+    const error = { field: 'some-error' };
+    const onSubmit = jest.fn().mockImplementation(() => error);
+    const managerApi = createManagerApi({ onSubmit, name });
+    const { registerField } = managerApi();
+
+    const render = jest.fn();
+    registerField({ name: 'field', render });
+
+    managerApi().handleSubmit();
+
+    expect(focusErrorSpy).toHaveBeenCalledWith({ field: 'some-error' }, name);
   });
 
   it('onsubmit receives an error - form level', () => {
@@ -2071,6 +2100,7 @@ describe('managerApi', () => {
       expect(managerApi().submitSucceeded).toEqual(false);
       expect(managerApi().submitErrors).toEqual(error);
       expect(managerApi().hasSubmitErrors).toEqual(true);
+      expect(focusErrorSpy).toHaveBeenCalledWith({ 'nested.field': 'some evil error' }, undefined);
 
       expect(managerApi().getFieldState('nested.field').submitError).toEqual('some evil error');
       expect(managerApi().getFieldState('nested.field').submitting).toEqual(false);
@@ -2194,13 +2224,31 @@ describe('managerApi', () => {
 
       expect(managerApi().getFieldState('field').touched).toEqual(false);
       expect(managerApi().getFieldState('field').touched).toEqual(false);
+      expect(focusErrorSpy).not.toHaveBeenCalled();
 
       managerApi().handleSubmit();
 
+      expect(focusErrorSpy).toHaveBeenCalledWith({ field: 'error' }, undefined);
       expect(managerApi().getFieldState('field').touched).toEqual(true);
       expect(managerApi().getFieldState('field').touched).toEqual(true);
 
       expect(onSubmit).not.toHaveBeenCalled();
+    });
+
+    it('should not call submit action when invalid + all fields are touched - named field', () => {
+      const onSubmit = jest.fn();
+      const name = 'form-name';
+
+      const managerApi = createManagerApi({ onSubmit, name });
+
+      managerApi().registerField({ name: 'field', validate: () => 'error', render: jest.fn(), internalId: 1 });
+      managerApi().registerField({ name: 'field2', render: jest.fn(), internalId: 1 });
+
+      expect(focusErrorSpy).not.toHaveBeenCalled();
+
+      managerApi().handleSubmit();
+
+      expect(focusErrorSpy).toHaveBeenCalledWith({ field: 'error' }, name);
     });
   });
 
