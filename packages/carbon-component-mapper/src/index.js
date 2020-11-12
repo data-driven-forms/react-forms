@@ -14,3 +14,5 @@ export { default as Tabs } from './files/tabs';
 export { default as Textarea } from './files/textarea';
 export { default as TimePicker } from './files/time-picker';
 export { default as Wizard } from './files/wizard';
+
+export { default as prepareProps, buildLabel } from './files/prepare-props';

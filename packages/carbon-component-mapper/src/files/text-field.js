@@ -4,7 +4,7 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 import { TextInput } from 'carbon-components-react';
 
-import prepareProps from '../common/prepare-props';
+import prepareProps from './prepare-props';
 
 const TextField = (props) => {
   const { input, meta, validateOnMount, ...rest } = useFieldApi(prepareProps(props));
