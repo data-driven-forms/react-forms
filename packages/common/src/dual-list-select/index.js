@@ -33,7 +33,9 @@ const DualListSelectCommon = (props) => {
 
   const { DualListSelect, ...rest } = useFieldApi({
     ...props,
-    isEqual: (current, initial) => isEqual([...(current || [])].sort(), [...(initial || [])].sort())
+    isEqual: (current, initial) => isEqual([...(current || [])].sort(), [...(initial || [])].sort()),
+    parse: (value) => (value === undefined ? [] : value),
+    format: (value) => (value === undefined ? [] : value)
   });
 
   const leftValues = rest.options
