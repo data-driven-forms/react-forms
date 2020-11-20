@@ -9,18 +9,22 @@ export interface ValidatorType extends Object {
 
 export interface UseFieldApiConfig extends AnyObject {
   name: string;
-  component: string;
   validate?: ValidatorType[];
+  useWarnings?: boolean;
 }
 export interface UseFieldApiComponentConfig extends UseFieldConfig<any>  {
   name: string;
+}
+
+export interface Meta<FieldValue> extends FieldMetaState<FieldValue> {
+  warning?: any;
 }
 
 export interface UseFieldApiProps<
  FieldValue,
 T extends HTMLElement = HTMLElement> extends AnyObject {
   input: FieldInputProps<FieldValue, T>;
-  meta: FieldMetaState<FieldValue>;
+  meta: Meta<FieldValue>;
 }
 
-export default function(options: UseFieldApiConfig): UseFieldApiProps<any>;
+export default function<T = any>(options: UseFieldApiConfig): UseFieldApiProps<T>;

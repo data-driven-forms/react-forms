@@ -15,8 +15,14 @@ const useStyles = makeStyles((theme) => ({
     height: '100%'
   },
   wrapper: {
+    justifyContent: 'center',
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column-reverse'
+    }
+  },
+  content: {
+    [theme.breakpoints.up('md')]: {
+      maxWidth: 768
     }
   }
 }));
@@ -32,7 +38,7 @@ const DocPage = ({ children }) => {
 
   return (
     <Grid container item className={classes.wrapper}>
-      <Grid item xs={12} md={10}>
+      <Grid item xs={12} md={10} className={classes.content}>
         {children}
       </Grid>
       <Grid item xs={12} md={2}>

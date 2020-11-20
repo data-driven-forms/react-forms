@@ -24,7 +24,7 @@ const Pf3FormGroup = ({ meta, validateOnMount, label, hideLabel, noCheckboxLabel
 };
 
 Pf3FormGroup.propTypes = {
-  meta: PropTypes.shape({ error: PropTypes.string }).isRequired,
+  meta: PropTypes.shape({ error: PropTypes.any }).isRequired,
   validateOnMount: PropTypes.bool,
   hideLabel: PropTypes.bool,
   label: PropTypes.node,

@@ -51,7 +51,7 @@ const Select = ({
     dispatch({ type: 'startLoading' });
 
     return loadOptions().then((data) => {
-      if (isMounted) {
+      if (isMounted.current) {
         if (!noValueUpdates) {
           if (value && Array.isArray(value)) {
             const selectValue = value.filter((value) =>
@@ -118,7 +118,7 @@ const Select = ({
 
       loadOptions(inputValue)
         .then((options) => {
-          if (isMounted) {
+          if (isMounted.current) {
             dispatch({
               type: 'setPromises',
               payload: { [inputValue]: false },

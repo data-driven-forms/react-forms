@@ -34,13 +34,16 @@ export const FormControls = ({
   FormButtons,
   Button,
   ButtonGroup,
-  formSpyProps
+  formSpyProps,
+  buttonsProps,
+  buttonGroupProps
 }) => {
   if (FormButtons) {
     return <FormButtons />;
   }
 
   const { submitting, pristine, validating } = formSpyProps;
+  const { submit, reset, cancel } = buttonsProps;
 
   const buttons = {
     submit: (
@@ -51,14 +54,17 @@ export const FormControls = ({
         buttonType="submit"
         disabled={submitting || validating || disableSubmit}
         label={submitLabel}
+        {...submit}
       />
     ),
-    reset: canReset ? <Button key="form-reset" type="button" buttonType="reset" disabled={pristine} onClick={onReset} label={resetLabel} /> : null,
-    cancel: onCancel ? <Button key="form-cancel" type="button" buttonType="cancel" onClick={onCancel} label={cancelLabel} /> : null
+    reset: canReset ? (
+      <Button key="form-reset" type="button" buttonType="reset" disabled={pristine} onClick={onReset} label={resetLabel} {...reset} />
+    ) : null,
+    cancel: onCancel ? <Button key="form-cancel" type="button" buttonType="cancel" onClick={onCancel} label={cancelLabel} {...cancel} /> : null
   };
 
   return (
-    <ButtonGroup {...(buttonClassName && { className: buttonClassName })}>
+    <ButtonGroup {...buttonGroupProps} {...(buttonClassName && { className: buttonClassName })}>
       {completeButtons(buttonOrder).map((button) => buttons[button])}
     </ButtonGroup>
   );
@@ -85,7 +91,9 @@ FormControls.propTypes = {
       reset: PropTypes.func
     }),
     values: PropTypes.object
-  })
+  }),
+  buttonGroupProps: PropTypes.object,
+  buttonsProps: PropTypes.object
 };
 
 FormControls.defaultProps = {
@@ -94,7 +102,8 @@ FormControls.defaultProps = {
   resetLabel: 'Reset',
   canReset: false,
   canSubmit: false,
-  buttonOrder: ['submit', 'reset', 'cancel']
+  buttonOrder: ['submit', 'reset', 'cancel'],
+  buttonsProps: {}
 };
 
 const FormTemplate = ({
@@ -104,8 +113,14 @@ const FormTemplate = ({
   Button,
   ButtonGroup,
   formWrapperProps,
-  showFormControls = true,
-  disableSubmit = [],
+  showFormControls,
+  disableSubmit,
+  Header,
+  headerProps,
+  titleProps,
+  descriptionProps,
+  buttonGroupProps,
+  buttonsProps,
   ...rest
 }) => {
   const {
@@ -116,8 +131,12 @@ const FormTemplate = ({
 
   return (
     <FormWrapper onSubmit={handleSubmit} {...formWrapperProps}>
-      {(title || label) && <Title>{title || label}</Title>}
-      {description && <Description>{description}</Description>}
+      {(title || label || description) && (
+        <Header {...headerProps}>
+          {(title || label) && <Title {...titleProps}>{title || label}</Title>}
+          {description && <Description {...descriptionProps}>{description}</Description>}
+        </Header>
+      )}
       {formFields}
       {showFormControls && (
         <FormSpy>
@@ -125,6 +144,8 @@ const FormTemplate = ({
             <FormControls
               Button={Button}
               FormSpy={FormSpy}
+              buttonGroupProps={buttonGroupProps}
+              buttonsProps={buttonsProps}
               ButtonGroup={ButtonGroup}
               onReset={onReset}
               onCancel={onCancel}
@@ -147,12 +168,19 @@ FormTemplate.propTypes = {
   ButtonGroup: PropTypes.oneOfType([PropTypes.node, PropTypes.func, PropTypes.element]).isRequired,
   formWrapperProps: PropTypes.object,
   showFormControls: PropTypes.bool,
-  disableSubmit: PropTypes.arrayOf(PropTypes.string)
+  disableSubmit: PropTypes.arrayOf(PropTypes.string),
+  Header: PropTypes.oneOfType([PropTypes.node, PropTypes.func, PropTypes.element, PropTypes.oneOf([React.Fragment])]),
+  headerProps: PropTypes.object,
+  titleProps: PropTypes.object,
+  descriptionProps: PropTypes.object,
+  buttonGroupProps: PropTypes.object,
+  buttonsProps: PropTypes.object
 };
 
 FormTemplate.defaultProps = {
   showFormControls: true,
-  disableSubmit: []
+  disableSubmit: [],
+  Header: React.Fragment
 };
 
 export default FormTemplate;

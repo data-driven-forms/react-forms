@@ -20,14 +20,13 @@ const Select = (props) => {
       inputAddon={inputAddon}
     >
       <div>
-        <DataDrivenSelect classNamePrefix="ddorg__pf3-component-mapper__select" invalid={validationError(meta, validateOnMount)} {...rest} />
+        <DataDrivenSelect classNamePrefix="ddorg__pf3-component-mapper__select" invalid={!!validationError(meta, validateOnMount)} {...rest} />
       </div>
     </FormGroup>
   );
 };
 
 Select.propTypes = {
-  meta: PropTypes.object,
   validateOnMount: PropTypes.bool,
   label: PropTypes.node,
   hideLabel: PropTypes.bool,
@@ -35,10 +34,14 @@ Select.propTypes = {
   isRequired: PropTypes.bool,
   helperText: PropTypes.node,
   description: PropTypes.node,
-  input: PropTypes.object,
   placeholder: PropTypes.string,
   isDisabled: PropTypes.bool,
-  inputAddon: PropTypes.shape({ fields: PropTypes.array })
+  inputAddon: PropTypes.shape({ fields: PropTypes.array }),
+  allowNull: PropTypes.bool
+};
+
+Select.defaultProps = {
+  allowNull: true
 };
 
 export default Select;

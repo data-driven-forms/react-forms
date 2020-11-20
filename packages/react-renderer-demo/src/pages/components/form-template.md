@@ -59,11 +59,16 @@ import { FormTemplate } from '@data-driven-forms/pf4-component-mapper'
 |----|:--:|----------:|------:|
 |buttonClassName|string|Class which will be given to the buttons wrapper.|{ }|
 |buttonOrder|array of strings|You can specify the order of the form buttons.|`[ 'submit', 'reset', 'cancel' ]`|
+|buttonGroupProps|object|Props passed to an element wrapping all buttons.|undefined|
+|buttonsProps|object|Props passed to buttons. Please follow this structure: `{ submit: submitButtonProps, cancel: cancelButtonProps, reset: resetButtonProps }`|undefined|
 |cancelLabel|node|Label for cancel button.|'Cancel'|
 |canReset|bool|Show/hide reset button.|false|
 |disableSubmit|array of strings|You can specify a form attributes (see [here](https://final-form.org/docs/final-form/types/FormState)) which will make the submit button disabled. |[ ]|
+|formWrapperProps|object|Props passed to a form wrapper.|undefined|
+|headerProps|object|Props passed to a header element.|undefined|
 |resetLabel|node|Label for reset button.|'Reset'|
 |showFormControls|bool|You can disable showing form buttons. Use it with wizard component which has its own buttons.|true|
 |submitLabel|node|Label for submit button.|'Submit'|
+|titleProps|object|Props passed to a title element.|undefined|
 
 </DocPage>

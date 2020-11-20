@@ -32,8 +32,8 @@ exports[`<WizardStep /> should render correctly 1`] = `
     handlePrev={[MockFunction]}
     title="title"
   >
-    <Component>
-      <main
+    <WizardBody>
+      <div
         className="pf-c-wizard__main"
       >
         <div
@@ -95,8 +95,8 @@ exports[`<WizardStep /> should render correctly 1`] = `
             </div>
           </DefaultStepTemplate>
         </div>
-      </main>
-    </Component>
+      </div>
+    </WizardBody>
     <WizardStepButtons
       buttonLabels={
         Object {
@@ -130,68 +130,69 @@ exports[`<WizardStep /> should render correctly 1`] = `
             renderForm={[Function]}
             submitLabel="Submit"
           >
-            <Component
+            <Button
               isDisabled={true}
               onClick={[Function]}
               type="button"
               variant="primary"
             >
               <button
-                aria-disabled={null}
+                aria-disabled={true}
                 aria-label={null}
-                className="pf-c-button pf-m-primary"
-                data-ouia-component-id={null}
+                className="pf-c-button pf-m-primary pf-m-disabled"
+                data-ouia-component-id="OUIA-Generated-Button-primary-1"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe={true}
                 disabled={true}
                 onClick={[Function]}
+                role={null}
                 tabIndex={null}
                 type="button"
               >
                 Submit
               </button>
-            </Component>
+            </Button>
           </NextButton>
-          <Component
+          <Button
             onClick={[MockFunction]}
             type="button"
             variant="secondary"
           >
             <button
-              aria-disabled={null}
+              aria-disabled={false}
               aria-label={null}
               className="pf-c-button pf-m-secondary"
-              data-ouia-component-id={null}
+              data-ouia-component-id="OUIA-Generated-Button-secondary-1"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe={true}
               disabled={false}
               onClick={[MockFunction]}
-              tabIndex={null}
+              role={null}
               type="button"
             >
               Back
             </button>
-          </Component>
-          <Component
+          </Button>
+          <Button
             onClick={[MockFunction]}
             type="button"
             variant="link"
           >
             <button
-              aria-disabled={null}
+              aria-disabled={false}
               aria-label={null}
               className="pf-c-button pf-m-link"
-              data-ouia-component-id={null}
+              data-ouia-component-id="OUIA-Generated-Button-link-1"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe={true}
               disabled={false}
               onClick={[MockFunction]}
-              tabIndex={null}
+              role={null}
               type="button"
             >
               Cancel
             </button>
-          </Component>
+          </Button>
         </FormSpy>
       </footer>
     </WizardStepButtons>
@@ -235,8 +236,8 @@ exports[`<WizardStep /> should render custom description 1`] = `
     handlePrev={[MockFunction]}
     title="title"
   >
-    <Component>
-      <main
+    <WizardBody>
+      <div
         className="pf-c-wizard__main"
       >
         <div
@@ -302,8 +303,8 @@ exports[`<WizardStep /> should render custom description 1`] = `
             </div>
           </DefaultStepTemplate>
         </div>
-      </main>
-    </Component>
+      </div>
+    </WizardBody>
     <WizardStepButtons
       buttonLabels={
         Object {
@@ -337,68 +338,69 @@ exports[`<WizardStep /> should render custom description 1`] = `
             renderForm={[Function]}
             submitLabel="Submit"
           >
-            <Component
+            <Button
               isDisabled={true}
               onClick={[Function]}
               type="button"
               variant="primary"
             >
               <button
-                aria-disabled={null}
+                aria-disabled={true}
                 aria-label={null}
-                className="pf-c-button pf-m-primary"
-                data-ouia-component-id={null}
+                className="pf-c-button pf-m-primary pf-m-disabled"
+                data-ouia-component-id="OUIA-Generated-Button-primary-5"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe={true}
                 disabled={true}
                 onClick={[Function]}
+                role={null}
                 tabIndex={null}
                 type="button"
               >
                 Submit
               </button>
-            </Component>
+            </Button>
           </NextButton>
-          <Component
+          <Button
             onClick={[MockFunction]}
             type="button"
             variant="secondary"
           >
             <button
-              aria-disabled={null}
+              aria-disabled={false}
               aria-label={null}
               className="pf-c-button pf-m-secondary"
-              data-ouia-component-id={null}
+              data-ouia-component-id="OUIA-Generated-Button-secondary-5"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe={true}
               disabled={false}
               onClick={[MockFunction]}
-              tabIndex={null}
+              role={null}
               type="button"
             >
               Back
             </button>
-          </Component>
-          <Component
+          </Button>
+          <Button
             onClick={[MockFunction]}
             type="button"
             variant="link"
           >
             <button
-              aria-disabled={null}
+              aria-disabled={false}
               aria-label={null}
               className="pf-c-button pf-m-link"
-              data-ouia-component-id={null}
+              data-ouia-component-id="OUIA-Generated-Button-link-5"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe={true}
               disabled={false}
               onClick={[MockFunction]}
-              tabIndex={null}
+              role={null}
               type="button"
             >
               Cancel
             </button>
-          </Component>
+          </Button>
         </FormSpy>
       </footer>
     </WizardStepButtons>
@@ -443,8 +445,8 @@ exports[`<WizardStep /> should render title with showTitle 1`] = `
       </div>
     }
   >
-    <Component>
-      <main
+    <WizardBody>
+      <div
         className="pf-c-wizard__main"
       >
         <div
@@ -517,7 +519,7 @@ exports[`<WizardStep /> should render title with showTitle 1`] = `
                   </div>
                 }
               >
-                <Component
+                <Title
                   headingLevel="h1"
                   size="xl"
                 >
@@ -528,7 +530,7 @@ exports[`<WizardStep /> should render title with showTitle 1`] = `
                       title
                     </div>
                   </h1>
-                </Component>
+                </Title>
               </RenderTitle>
               <div
                 key="foo"
@@ -538,8 +540,8 @@ exports[`<WizardStep /> should render title with showTitle 1`] = `
             </div>
           </DefaultStepTemplate>
         </div>
-      </main>
-    </Component>
+      </div>
+    </WizardBody>
     <WizardStepButtons
       buttonLabels={
         Object {
@@ -573,68 +575,69 @@ exports[`<WizardStep /> should render title with showTitle 1`] = `
             renderForm={[Function]}
             submitLabel="Submit"
           >
-            <Component
+            <Button
               isDisabled={true}
               onClick={[Function]}
               type="button"
               variant="primary"
             >
               <button
-                aria-disabled={null}
+                aria-disabled={true}
                 aria-label={null}
-                className="pf-c-button pf-m-primary"
-                data-ouia-component-id={null}
+                className="pf-c-button pf-m-primary pf-m-disabled"
+                data-ouia-component-id="OUIA-Generated-Button-primary-2"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe={true}
                 disabled={true}
                 onClick={[Function]}
+                role={null}
                 tabIndex={null}
                 type="button"
               >
                 Submit
               </button>
-            </Component>
+            </Button>
           </NextButton>
-          <Component
+          <Button
             onClick={[MockFunction]}
             type="button"
             variant="secondary"
           >
             <button
-              aria-disabled={null}
+              aria-disabled={false}
               aria-label={null}
               className="pf-c-button pf-m-secondary"
-              data-ouia-component-id={null}
+              data-ouia-component-id="OUIA-Generated-Button-secondary-2"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe={true}
               disabled={false}
               onClick={[MockFunction]}
-              tabIndex={null}
+              role={null}
               type="button"
             >
               Back
             </button>
-          </Component>
-          <Component
+          </Button>
+          <Button
             onClick={[MockFunction]}
             type="button"
             variant="link"
           >
             <button
-              aria-disabled={null}
+              aria-disabled={false}
               aria-label={null}
               className="pf-c-button pf-m-link"
-              data-ouia-component-id={null}
+              data-ouia-component-id="OUIA-Generated-Button-link-2"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe={true}
               disabled={false}
               onClick={[MockFunction]}
-              tabIndex={null}
+              role={null}
               type="button"
             >
               Cancel
             </button>
-          </Component>
+          </Button>
         </FormSpy>
       </footer>
     </WizardStepButtons>

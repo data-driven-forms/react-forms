@@ -46,9 +46,7 @@ const actionMapper = {
 };
 
 const ActionMapper = () => (
-  <div>
-    <FormRenderer FormTemplate={FormTemplate} actionMapper={actionMapper} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
-  </div>
+  <FormRenderer FormTemplate={FormTemplate} actionMapper={actionMapper} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
 );
 
 export default ActionMapper;

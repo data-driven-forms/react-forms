@@ -45,10 +45,6 @@ const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField
 };
 
-const SetAction = () => (
-  <div>
-    <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
-  </div>
-);
+const SetAction = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
 
 export default SetAction;

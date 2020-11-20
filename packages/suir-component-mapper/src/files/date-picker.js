@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import FormFieldGrid from '../common/form-field-grid';
-import { validationError } from '../common/helpers';
+import { validationError, validationWarning } from '../common/helpers';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormField from '../common/form-field';
 
@@ -24,7 +24,7 @@ const DatePicker = (props) => {
   const invalid = validationError(meta, validateOnMount);
 
   return (
-    <FormFieldGrid helperText={helperText} HelperTextProps={HelperTextProps} {...FormFieldGridProps}>
+    <FormFieldGrid helperText={validationWarning(meta, validateOnMount) || helperText} HelperTextProps={HelperTextProps} {...FormFieldGridProps}>
       <FormField
         label={label}
         {...input}

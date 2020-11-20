@@ -6,6 +6,7 @@ import useFieldApi from '../../files/use-field-api';
 import componentTypes from '../../files/component-types';
 import Form from '../../files/form';
 import RendererContext from '../../files/renderer-context';
+import validatorTypes from '../../files/validator-types';
 
 describe('useFieldApi', () => {
   const Catcher = ({ children }) => children;
@@ -178,5 +179,40 @@ describe('useFieldApi', () => {
 
     expect(wrapper.find('input').prop('value')).toEqual('');
     expect(registerInputFileSpy).toHaveBeenCalledWith('file-input');
+  });
+
+  it('should not crash when passing validate directly', () => {
+    const TestDummy = ({ validate }) => {
+      const { input } = useFieldApi({
+        name: 'foo',
+        validate: validate ? [{ type: validatorTypes.REQUIRED }] : [{ type: validatorTypes.URL }]
+      });
+      return <input {...input} id="foo" />;
+    };
+
+    const FormWrapper = ({ validate = true }) => (
+      <Form onSubmit={jest.fn()}>
+        {({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <RendererContext.Provider
+              value={{
+                validatorMapper: { required: () => (value) => (!value ? 'required' : undefined), url: () => jest.fn() },
+                formOptions: {}
+              }}
+            >
+              <TestDummy validate={validate} />
+            </RendererContext.Provider>
+          </form>
+        )}
+      </Form>
+    );
+
+    const wrapper = mount(<FormWrapper />);
+    expect(wrapper.find('input')).toHaveLength(1);
+    wrapper.find('#foo').simulate('change', { target: { value: 'bar' } });
+    wrapper.update();
+    wrapper.setProps({ validate: false });
+    wrapper.update();
+    expect(wrapper.find('input')).toHaveLength(1);
   });
 });

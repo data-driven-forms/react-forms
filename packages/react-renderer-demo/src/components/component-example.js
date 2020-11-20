@@ -19,13 +19,25 @@ import Box from '@material-ui/core/Box';
 import Link from 'next/link';
 import clsx from 'clsx';
 
-import { muiCode, muiWizardCode, muiHtml, muiDependencies } from '../stackblitz-templates/mui-templates';
-import { pf4Code, pf4WizardCode, pf4Html, pf4Dependencies } from '../stackblitz-templates/pf4-templates';
-import { pf3Code, pf3WizardCode, pf3Html, pf3Dependencies } from '../stackblitz-templates/pf3-templates';
-import { blueprintCode, blueprintWizardCode, blueprintHtml, blueprintDependencies } from '../stackblitz-templates/blueprint-templates';
-import { suirCode, suirWizardCode, suirHtml, suirDependencies } from '../stackblitz-templates/suir-template';
-import { antCode, antWizardCode, antHtml, antDependencies } from '../stackblitz-templates/ant-templates';
+import * as mui from '../stackblitz-templates/mui-templates';
+import * as pf4 from '../stackblitz-templates/pf4-templates';
+import * as pf3 from '../stackblitz-templates/pf3-templates';
+import * as blueprint from '../stackblitz-templates/blueprint-templates';
+import * as suir from '../stackblitz-templates/suir-template';
+import * as ant from '../stackblitz-templates/ant-templates';
+import * as carbon from '../stackblitz-templates/carbon-templates';
+
 import avalableMappers from '../helpers/available-mappers';
+
+const metadata = {
+  mui,
+  pf4,
+  pf3,
+  blueprint,
+  suir,
+  ant,
+  carbon
+};
 
 const project = {
   settings: {
@@ -101,62 +113,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const blitzFiles = {
-  mui: {
-    'index.html': muiHtml,
-    'index.js': muiCode
-  },
-  pf4: {
-    'index.html': pf4Html,
-    'index.js': pf4Code
-  },
-  pf3: {
-    'index.html': pf3Html,
-    'index.js': pf3Code
-  },
-  blueprint: {
-    'index.html': blueprintHtml,
-    'index.js': blueprintCode
-  },
-  suir: {
-    'index.html': suirHtml,
-    'index.js': suirCode
-  },
-  ant: {
-    'index.html': antHtml,
-    'index.js': antCode
-  }
-};
-
-const blitzWizards = {
-  mui: muiWizardCode,
-  pf4: pf4WizardCode,
-  pf3: pf3WizardCode,
-  blueprint: blueprintWizardCode,
-  suir: suirWizardCode,
-  ant: antWizardCode
-};
-
-const blitzDependencies = {
-  mui: muiDependencies,
-  pf4: pf4Dependencies,
-  pf3: pf3Dependencies,
-  blueprint: blueprintDependencies,
-  suir: suirDependencies,
-  ant: antDependencies
-};
-
-const mapperTab = {
-  mui: 0,
-  pf4: 1,
-  pf3: 2,
-  blueprint: 3,
-  suir: 4,
-  ant: 5
-};
-
 const ComponentExample = ({ variants, schema, activeMapper, component }) => {
-  const activeTab = mapperTab[activeMapper];
   const { pathname, push } = useRouter();
   const classes = useStyles();
   useEffect(() => {
@@ -164,10 +121,11 @@ const ComponentExample = ({ variants, schema, activeMapper, component }) => {
       'code-target',
       {
         ...project,
-        dependencies: blitzDependencies[activeMapper],
+        dependencies: metadata[activeMapper].dependencies,
         files: {
-          ...blitzFiles[activeMapper],
-          ...(component === 'wizard' && { 'index.js': blitzWizards[activeMapper] }),
+          'index.html': metadata[activeMapper].html,
+          'index.js': metadata[activeMapper].code,
+          ...(component === 'wizard' && { 'index.js': metadata[activeMapper].wizardCode }),
           'schema.js': `export default ${JSON.stringify(schema, null, 2)};`
         }
       },
@@ -176,10 +134,10 @@ const ComponentExample = ({ variants, schema, activeMapper, component }) => {
   }, [activeMapper, schema]);
 
   const renderMapperTabs = () =>
-    avalableMappers.map(({ title, mapper }, index) => (
+    avalableMappers.map(({ title, mapper }) => (
       <Tab
         key={mapper}
-        value={index}
+        value={mapper}
         onClick={() => push(`${pathname}?mapper=${mapper}`)}
         className={clsx(classes.tab, { active: activeMapper === mapper })}
         label={
@@ -220,7 +178,7 @@ const ComponentExample = ({ variants, schema, activeMapper, component }) => {
       <Box display="flex" className={classes.editorContainer}>
         <div className={classes.smTabDown}>
           <Tabs
-            value={activeTab}
+            value={activeMapper}
             orientation="horizontal"
             variant="fullWidth"
             classes={{
@@ -232,7 +190,7 @@ const ComponentExample = ({ variants, schema, activeMapper, component }) => {
         </div>
         <div className={classes.smTabUp}>
           <Tabs
-            value={activeTab}
+            value={activeMapper}
             orientation="vertical"
             variant="scrollable"
             classes={{

@@ -4,7 +4,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import Highlight, { defaultProps } from 'prism-react-renderer/';
 import ghTheme from 'prism-react-renderer/themes/github';
 import vsTheme from 'prism-react-renderer/themes/vsDark';
-import { Select } from '@material-ui/core';
+import Select from '@material-ui/core/Select';
 import tranformImports from './transform-imports';
 
 const useStyles = makeStyles({
@@ -39,7 +39,7 @@ const useStylesCode = makeStyles((theme) => ({
     position: 'relative',
     maxWidth: '100%',
     [theme.breakpoints.down('sm')]: {
-      maxWidth: '100vw'
+      maxWidth: (props) => (props.inExample ? '100%' : 'calc(100vw - 64px)')
     }
   },
   switchwrapper: {
@@ -69,9 +69,9 @@ const useStylesCode = makeStyles((theme) => ({
   }
 }));
 
-const CodeEditor = ({ value, children, className, switchable, ...props }) => {
+const CodeEditor = ({ value, children, className, switchable, inExample, ...props }) => {
   const [env, setEnv] = useState('cjs');
-  const classes = useStylesCode();
+  const classes = useStylesCode({ inExample });
 
   const lang = className ? className.toLowerCase().replace('language-', '') : undefined;
   let content = value || children || '';
@@ -136,7 +136,8 @@ CodeEditor.propTypes = {
   value: PropTypes.string,
   children: PropTypes.string,
   className: PropTypes.string,
-  switchable: PropTypes.bool
+  switchable: PropTypes.bool,
+  inExample: PropTypes.bool
 };
 
 export default CodeEditor;

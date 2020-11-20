@@ -3,8 +3,25 @@ import PropTypes from 'prop-types';
 
 import './input.scss';
 
+const getInputString = (filter, value) => {
+  if (typeof filter === 'string') {
+    return filter;
+  }
+
+  if (typeof value === 'string') {
+    return value;
+  }
+
+  if (Array.isArray(value) && typeof value[0] === 'string') {
+    return value[0];
+  }
+
+  return '';
+};
+
 const Input = ({ inputRef, isSearchable, isDisabled, getInputProps, value, ...props }) => {
   const inputProps = getInputProps({ disabled: isDisabled });
+  const initialInputValue = getInputString(inputProps.value, value);
   return (
     <input
       value=""
@@ -13,7 +30,11 @@ const Input = ({ inputRef, isSearchable, isDisabled, getInputProps, value, ...pr
       ref={inputRef}
       {...{
         ...inputProps,
-        value: inputProps.value || '',
+        value: initialInputValue,
+        onKeyDown: (event, ...args) => {
+          event.stopPropagation();
+          inputProps.onKeyDown(event, ...args);
+        },
         onChange: inputProps.onChange || Function
       }}
     />
@@ -25,7 +46,7 @@ Input.propTypes = {
   isSearchable: PropTypes.bool,
   isDisabled: PropTypes.bool,
   getInputProps: PropTypes.func.isRequired,
-  value: PropTypes.string
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)])
 };
 
 export default Input;

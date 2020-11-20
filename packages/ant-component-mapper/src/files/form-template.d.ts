@@ -1,7 +1,6 @@
-import { FormTemplateRenderProps, AnyObject } from "@data-driven-forms/react-form-renderer";
+import FormTemplateCommonProps from "@data-driven-forms/common/src/form-template";
 
-export interface FormTemplateProps extends FormTemplateRenderProps {
-  formWrapperProps?: AnyObject;
+export interface FormTemplateProps extends FormTemplateCommonProps {
   layout?: string;
 }
 

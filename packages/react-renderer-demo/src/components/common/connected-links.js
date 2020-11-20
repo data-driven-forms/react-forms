@@ -9,12 +9,16 @@ import Link from 'next/link';
 import MenuContext from '../navigation/menu-context';
 import useMapperLink from '../../hooks/use-mapper-link';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   linksContainer: {
     paddingLeft: 32,
     paddingRight: 32,
     marginTop: 64,
-    marginBottom: 16
+    marginBottom: 16,
+    [theme.breakpoints.up('md')]: {
+      paddingLeft: 'calc((100% - (768px + 17%)) / 2)',
+      paddingRight: 'calc((100% - (768px + 17%)) / 2)'
+    }
   },
   link: {
     textDecoration: 'none'

@@ -1,82 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<MultipleChoiceList /> should render correctly 1`] = `
-<Checkbox
-  FieldProvider={[Function]}
-  input={
+<FormRenderer
+  FormTemplate={[Function]}
+  clearOnUnmount={false}
+  componentMapper={
     Object {
-      "name": "Name of the field",
-      "value": "",
+      "checkbox": [Function],
     }
   }
-  options={
-    Array [
-      Object {
-        "label": "Foo",
-        "value": 0,
-      },
-      Object {
-        "label": "Bar",
-        "value": 1,
-      },
-    ]
-  }
->
-  <MultipleChoiceList
-    FieldProvider={[Function]}
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    options={
-      Array [
+  initialValues={Object {}}
+  onSubmit={[Function]}
+  schema={
+    Object {
+      "fields": Array [
         Object {
-          "label": "Foo",
-          "value": 0,
-        },
-        Object {
-          "label": "Bar",
-          "value": 1,
-        },
-      ]
-    }
-  >
-    <MultipleChoiceList
-      Checkbox={[Function]}
-      FieldProvider={[Function]}
-      Wrapper={[Function]}
-      input={
-        Object {
-          "name": "Name of the field",
-          "value": "",
-        }
-      }
-      name="Name of the field"
-      options={
-        Array [
-          Object {
-            "label": "Foo",
-            "value": 0,
-          },
-          Object {
-            "label": "Bar",
-            "value": 1,
-          },
-        ]
-      }
-    >
-      <FieldProvider
-        input={
-          Object {
-            "name": "Name of the field",
-            "value": "",
-          }
-        }
-        name="Name of the field"
-        options={
-          Array [
+          "component": "checkbox",
+          "name": "checkbox",
+          "options": Array [
             Object {
               "label": "Foo",
               "value": 0,
@@ -85,284 +26,782 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
               "label": "Bar",
               "value": 1,
             },
+          ],
+        },
+      ],
+    }
+  }
+>
+  <ReactFinalForm
+    decorators={
+      Array [
+        [Function],
+      ]
+    }
+    initialValues={Object {}}
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
+    onSubmit={[Function]}
+    render={[Function]}
+    subscription={
+      Object {
+        "pristine": true,
+        "submitting": true,
+        "valid": true,
+      }
+    }
+  >
+    <PF3FormTemplate
+      formFields={
+        Array [
+          <SingleField
+            component="checkbox"
+            name="checkbox"
+            options={
+              Array [
+                Object {
+                  "label": "Foo",
+                  "value": 0,
+                },
+                Object {
+                  "label": "Bar",
+                  "value": 1,
+                },
+              ]
+            }
+          />,
+        ]
+      }
+      schema={
+        Object {
+          "fields": Array [
+            Object {
+              "component": "checkbox",
+              "name": "checkbox",
+              "options": Array [
+                Object {
+                  "label": "Foo",
+                  "value": 0,
+                },
+                Object {
+                  "label": "Bar",
+                  "value": 1,
+                },
+              ],
+            },
+          ],
+        }
+      }
+    >
+      <FormTemplate
+        Button={[Function]}
+        ButtonGroup={[Function]}
+        Description={[Function]}
+        FormWrapper={[Function]}
+        Header={Symbol(react.fragment)}
+        Title={[Function]}
+        disableSubmit={Array []}
+        formFields={
+          Array [
+            <SingleField
+              component="checkbox"
+              name="checkbox"
+              options={
+                Array [
+                  Object {
+                    "label": "Foo",
+                    "value": 0,
+                  },
+                  Object {
+                    "label": "Bar",
+                    "value": 1,
+                  },
+                ]
+              }
+            />,
           ]
         }
-        render={[Function]}
-        validate={[Function]}
+        schema={
+          Object {
+            "fields": Array [
+              Object {
+                "component": "checkbox",
+                "name": "checkbox",
+                "options": Array [
+                  Object {
+                    "label": "Foo",
+                    "value": 0,
+                  },
+                  Object {
+                    "label": "Bar",
+                    "value": 1,
+                  },
+                ],
+              },
+            ],
+          }
+        }
+        showFormControls={true}
       >
-        <MockFieldProvider
-          input={
-            Object {
-              "onChange": [MockFunction],
-              "value": Array [],
-            }
-          }
-          name="Name of the field"
-          options={
-            Array [
-              Object {
-                "label": "Foo",
-                "value": 0,
-              },
-              Object {
-                "label": "Bar",
-                "value": 1,
-              },
-            ]
-          }
-          render={[Function]}
-          validate={[Function]}
+        <FormWrapper
+          onSubmit={[Function]}
         >
-          <Wrapper
-            meta={Object {}}
-            rest={
-              Object {
-                "children": undefined,
-                "input": Object {
-                  "onChange": [MockFunction],
-                  "value": Array [],
-                },
-                "name": "Name of the field",
-                "validate": [Function],
-              }
-            }
+          <Form
+            bsClass="form"
+            className="ddorg__pf3-layout-components__form-wrapper"
+            componentClass="form"
+            horizontal={false}
+            inline={false}
+            onSubmit={[Function]}
           >
-            <FormGroup
-              bsClass="form-group"
-              validationState={null}
+            <form
+              className="ddorg__pf3-layout-components__form-wrapper"
+              onSubmit={[Function]}
             >
-              <div
-                className="form-group"
+              <SingleField
+                component="checkbox"
+                key="checkbox"
+                name="checkbox"
+                options={
+                  Array [
+                    Object {
+                      "label": "Foo",
+                      "value": 0,
+                    },
+                    Object {
+                      "label": "Bar",
+                      "value": 1,
+                    },
+                  ]
+                }
               >
-                <ControlLabel
-                  bsClass="control-label"
-                  srOnly={false}
-                >
-                  <label
-                    className="control-label"
-                  />
-                </ControlLabel>
-                <div>
-                  <FieldProvider
-                    id="undefined-0"
-                    key="0"
-                    label="Foo"
-                    name="Name of the field"
-                    render={[Function]}
-                    type="checkbox"
-                    value={0}
-                  >
-                    <MockFieldProvider
-                      id="undefined-0"
-                      input={
+                <FormConditionWrapper
+                  field={
+                    Object {
+                      "component": "checkbox",
+                      "name": "checkbox",
+                      "options": Array [
                         Object {
-                          "onChange": [MockFunction],
-                          "value": Array [],
-                        }
-                      }
-                      label="Foo"
-                      name="Name of the field"
-                      render={[Function]}
-                      type="checkbox"
-                      value={0}
-                    >
-                      <FinalCheckbox
-                        aria-label="Foo"
-                        id="undefined-0"
-                        label="Foo"
-                        name="Name of the field"
-                        onChange={[Function]}
-                        type="checkbox"
-                        value={0}
-                      >
-                        <Checkbox
-                          aria-label="Foo"
-                          bsClass="checkbox"
-                          disabled={false}
-                          id="undefined-0"
-                          inline={false}
-                          name="Name of the field"
-                          onChange={[Function]}
-                          title=""
-                          type="checkbox"
-                          value={0}
-                        >
-                          <div
-                            className="checkbox"
-                          >
-                            <label
-                              title=""
-                            >
-                              <input
-                                aria-label="Foo"
-                                disabled={false}
-                                id="undefined-0"
-                                name="Name of the field"
-                                onChange={[Function]}
-                                type="checkbox"
-                                value={0}
-                              />
-                              Foo
-                            </label>
-                          </div>
-                        </Checkbox>
-                      </FinalCheckbox>
-                    </MockFieldProvider>
-                  </FieldProvider>
-                  <FieldProvider
-                    id="undefined-1"
-                    key="1"
-                    label="Bar"
-                    name="Name of the field"
-                    render={[Function]}
-                    type="checkbox"
-                    value={1}
-                  >
-                    <MockFieldProvider
-                      id="undefined-1"
-                      input={
+                          "label": "Foo",
+                          "value": 0,
+                        },
                         Object {
-                          "onChange": [MockFunction],
+                          "label": "Bar",
                           "value": 1,
-                        }
+                        },
+                      ],
+                    }
+                  }
+                >
+                  <FormFieldHideWrapper
+                    hideField={false}
+                  >
+                    <Checkbox
+                      component="checkbox"
+                      name="checkbox"
+                      options={
+                        Array [
+                          Object {
+                            "label": "Foo",
+                            "value": 0,
+                          },
+                          Object {
+                            "label": "Bar",
+                            "value": 1,
+                          },
+                        ]
                       }
-                      label="Bar"
-                      name="Name of the field"
-                      render={[Function]}
-                      type="checkbox"
-                      value={1}
                     >
-                      <FinalCheckbox
-                        aria-label="Bar"
-                        id="undefined-1"
-                        label="Bar"
-                        name="Name of the field"
-                        onChange={[Function]}
-                        type="checkbox"
-                        value={1}
+                      <MultipleChoiceList
+                        component="checkbox"
+                        name="checkbox"
+                        options={
+                          Array [
+                            Object {
+                              "label": "Foo",
+                              "value": 0,
+                            },
+                            Object {
+                              "label": "Bar",
+                              "value": 1,
+                            },
+                          ]
+                        }
                       >
-                        <Checkbox
-                          aria-label="Bar"
-                          bsClass="checkbox"
-                          disabled={false}
-                          id="undefined-1"
-                          inline={false}
-                          name="Name of the field"
-                          onChange={[Function]}
-                          title=""
-                          type="checkbox"
-                          value={1}
+                        <MultipleChoiceList
+                          Checkbox={[Function]}
+                          Wrapper={[Function]}
+                          component="checkbox"
+                          name="checkbox"
+                          options={
+                            Array [
+                              Object {
+                                "label": "Foo",
+                                "value": 0,
+                              },
+                              Object {
+                                "label": "Bar",
+                                "value": 1,
+                              },
+                            ]
+                          }
                         >
-                          <div
-                            className="checkbox"
+                          <Wrapper
+                            meta={
+                              Object {
+                                "active": false,
+                                "data": Object {},
+                                "dirty": false,
+                                "dirtySinceLastSubmit": false,
+                                "error": undefined,
+                                "initial": undefined,
+                                "invalid": false,
+                                "length": undefined,
+                                "modified": false,
+                                "modifiedSinceLastSubmit": false,
+                                "pristine": true,
+                                "submitError": undefined,
+                                "submitFailed": false,
+                                "submitSucceeded": false,
+                                "submitting": false,
+                                "touched": false,
+                                "valid": true,
+                                "validating": false,
+                                "visited": false,
+                              }
+                            }
+                            name="checkbox"
+                            rest={Object {}}
+                            showError={false}
                           >
-                            <label
-                              title=""
+                            <FormGroup
+                              bsClass="form-group"
+                              validationState={null}
                             >
-                              <input
-                                aria-label="Bar"
-                                disabled={false}
-                                id="undefined-1"
-                                name="Name of the field"
-                                onChange={[Function]}
-                                type="checkbox"
-                                value={1}
-                              />
-                              Bar
-                            </label>
-                          </div>
-                        </Checkbox>
-                      </FinalCheckbox>
-                    </MockFieldProvider>
-                  </FieldProvider>
-                </div>
-              </div>
-            </FormGroup>
-          </Wrapper>
-        </MockFieldProvider>
-      </FieldProvider>
-    </MultipleChoiceList>
-  </MultipleChoiceList>
-</Checkbox>
+                              <div
+                                className="form-group"
+                              >
+                                <ControlLabel
+                                  bsClass="control-label"
+                                  srOnly={false}
+                                >
+                                  <label
+                                    className="control-label"
+                                  />
+                                </ControlLabel>
+                                <div>
+                                  <SingleCheckbox
+                                    Checkbox={[Function]}
+                                    aria-label="Foo"
+                                    id="checkbox-0"
+                                    key="checkbox-0"
+                                    label="Foo"
+                                    name="checkbox"
+                                    option={
+                                      Object {
+                                        "label": "Foo",
+                                        "value": 0,
+                                      }
+                                    }
+                                    value={0}
+                                  >
+                                    <FinalCheckbox
+                                      aria-label="Foo"
+                                      checked={false}
+                                      id="checkbox-0"
+                                      label="Foo"
+                                      meta={
+                                        Object {
+                                          "active": false,
+                                          "data": Object {},
+                                          "dirty": false,
+                                          "dirtySinceLastSubmit": false,
+                                          "error": undefined,
+                                          "initial": undefined,
+                                          "invalid": false,
+                                          "length": undefined,
+                                          "modified": false,
+                                          "modifiedSinceLastSubmit": false,
+                                          "pristine": true,
+                                          "submitError": undefined,
+                                          "submitFailed": false,
+                                          "submitSucceeded": false,
+                                          "submitting": false,
+                                          "touched": false,
+                                          "valid": true,
+                                          "validating": false,
+                                          "visited": false,
+                                        }
+                                      }
+                                      name="checkbox"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      option={
+                                        Object {
+                                          "label": "Foo",
+                                          "value": 0,
+                                        }
+                                      }
+                                      type="checkbox"
+                                      value={0}
+                                    >
+                                      <Checkbox
+                                        aria-label="Foo"
+                                        bsClass="checkbox"
+                                        checked={false}
+                                        disabled={false}
+                                        id="checkbox-0"
+                                        inline={false}
+                                        meta={
+                                          Object {
+                                            "active": false,
+                                            "data": Object {},
+                                            "dirty": false,
+                                            "dirtySinceLastSubmit": false,
+                                            "error": undefined,
+                                            "initial": undefined,
+                                            "invalid": false,
+                                            "length": undefined,
+                                            "modified": false,
+                                            "modifiedSinceLastSubmit": false,
+                                            "pristine": true,
+                                            "submitError": undefined,
+                                            "submitFailed": false,
+                                            "submitSucceeded": false,
+                                            "submitting": false,
+                                            "touched": false,
+                                            "valid": true,
+                                            "validating": false,
+                                            "visited": false,
+                                          }
+                                        }
+                                        name="checkbox"
+                                        onBlur={[Function]}
+                                        onChange={[Function]}
+                                        onFocus={[Function]}
+                                        option={
+                                          Object {
+                                            "label": "Foo",
+                                            "value": 0,
+                                          }
+                                        }
+                                        title=""
+                                        type="checkbox"
+                                        value={0}
+                                      >
+                                        <div
+                                          className="checkbox"
+                                        >
+                                          <label
+                                            title=""
+                                          >
+                                            <input
+                                              aria-label="Foo"
+                                              checked={false}
+                                              disabled={false}
+                                              id="checkbox-0"
+                                              meta={
+                                                Object {
+                                                  "active": false,
+                                                  "data": Object {},
+                                                  "dirty": false,
+                                                  "dirtySinceLastSubmit": false,
+                                                  "error": undefined,
+                                                  "initial": undefined,
+                                                  "invalid": false,
+                                                  "length": undefined,
+                                                  "modified": false,
+                                                  "modifiedSinceLastSubmit": false,
+                                                  "pristine": true,
+                                                  "submitError": undefined,
+                                                  "submitFailed": false,
+                                                  "submitSucceeded": false,
+                                                  "submitting": false,
+                                                  "touched": false,
+                                                  "valid": true,
+                                                  "validating": false,
+                                                  "visited": false,
+                                                }
+                                              }
+                                              name="checkbox"
+                                              onBlur={[Function]}
+                                              onChange={[Function]}
+                                              onFocus={[Function]}
+                                              option={
+                                                Object {
+                                                  "label": "Foo",
+                                                  "value": 0,
+                                                }
+                                              }
+                                              type="checkbox"
+                                              value={0}
+                                            />
+                                            Foo
+                                          </label>
+                                        </div>
+                                      </Checkbox>
+                                    </FinalCheckbox>
+                                  </SingleCheckbox>
+                                  <SingleCheckbox
+                                    Checkbox={[Function]}
+                                    aria-label="Bar"
+                                    id="checkbox-1"
+                                    key="checkbox-1"
+                                    label="Bar"
+                                    name="checkbox"
+                                    option={
+                                      Object {
+                                        "label": "Bar",
+                                        "value": 1,
+                                      }
+                                    }
+                                    value={1}
+                                  >
+                                    <FinalCheckbox
+                                      aria-label="Bar"
+                                      checked={false}
+                                      id="checkbox-1"
+                                      label="Bar"
+                                      meta={
+                                        Object {
+                                          "active": false,
+                                          "data": Object {},
+                                          "dirty": false,
+                                          "dirtySinceLastSubmit": false,
+                                          "error": undefined,
+                                          "initial": undefined,
+                                          "invalid": false,
+                                          "length": undefined,
+                                          "modified": false,
+                                          "modifiedSinceLastSubmit": false,
+                                          "pristine": true,
+                                          "submitError": undefined,
+                                          "submitFailed": false,
+                                          "submitSucceeded": false,
+                                          "submitting": false,
+                                          "touched": false,
+                                          "valid": true,
+                                          "validating": false,
+                                          "visited": false,
+                                        }
+                                      }
+                                      name="checkbox"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      option={
+                                        Object {
+                                          "label": "Bar",
+                                          "value": 1,
+                                        }
+                                      }
+                                      type="checkbox"
+                                      value={1}
+                                    >
+                                      <Checkbox
+                                        aria-label="Bar"
+                                        bsClass="checkbox"
+                                        checked={false}
+                                        disabled={false}
+                                        id="checkbox-1"
+                                        inline={false}
+                                        meta={
+                                          Object {
+                                            "active": false,
+                                            "data": Object {},
+                                            "dirty": false,
+                                            "dirtySinceLastSubmit": false,
+                                            "error": undefined,
+                                            "initial": undefined,
+                                            "invalid": false,
+                                            "length": undefined,
+                                            "modified": false,
+                                            "modifiedSinceLastSubmit": false,
+                                            "pristine": true,
+                                            "submitError": undefined,
+                                            "submitFailed": false,
+                                            "submitSucceeded": false,
+                                            "submitting": false,
+                                            "touched": false,
+                                            "valid": true,
+                                            "validating": false,
+                                            "visited": false,
+                                          }
+                                        }
+                                        name="checkbox"
+                                        onBlur={[Function]}
+                                        onChange={[Function]}
+                                        onFocus={[Function]}
+                                        option={
+                                          Object {
+                                            "label": "Bar",
+                                            "value": 1,
+                                          }
+                                        }
+                                        title=""
+                                        type="checkbox"
+                                        value={1}
+                                      >
+                                        <div
+                                          className="checkbox"
+                                        >
+                                          <label
+                                            title=""
+                                          >
+                                            <input
+                                              aria-label="Bar"
+                                              checked={false}
+                                              disabled={false}
+                                              id="checkbox-1"
+                                              meta={
+                                                Object {
+                                                  "active": false,
+                                                  "data": Object {},
+                                                  "dirty": false,
+                                                  "dirtySinceLastSubmit": false,
+                                                  "error": undefined,
+                                                  "initial": undefined,
+                                                  "invalid": false,
+                                                  "length": undefined,
+                                                  "modified": false,
+                                                  "modifiedSinceLastSubmit": false,
+                                                  "pristine": true,
+                                                  "submitError": undefined,
+                                                  "submitFailed": false,
+                                                  "submitSucceeded": false,
+                                                  "submitting": false,
+                                                  "touched": false,
+                                                  "valid": true,
+                                                  "validating": false,
+                                                  "visited": false,
+                                                }
+                                              }
+                                              name="checkbox"
+                                              onBlur={[Function]}
+                                              onChange={[Function]}
+                                              onFocus={[Function]}
+                                              option={
+                                                Object {
+                                                  "label": "Bar",
+                                                  "value": 1,
+                                                }
+                                              }
+                                              type="checkbox"
+                                              value={1}
+                                            />
+                                            Bar
+                                          </label>
+                                        </div>
+                                      </Checkbox>
+                                    </FinalCheckbox>
+                                  </SingleCheckbox>
+                                </div>
+                              </div>
+                            </FormGroup>
+                          </Wrapper>
+                        </MultipleChoiceList>
+                      </MultipleChoiceList>
+                    </Checkbox>
+                  </FormFieldHideWrapper>
+                </FormConditionWrapper>
+              </SingleField>
+              <FormSpy>
+                <FormControls
+                  Button={[Function]}
+                  ButtonGroup={[Function]}
+                  FormSpy={[Function]}
+                  buttonOrder={
+                    Array [
+                      "submit",
+                      "reset",
+                      "cancel",
+                    ]
+                  }
+                  buttonsProps={Object {}}
+                  canReset={false}
+                  canSubmit={false}
+                  cancelLabel="Cancel"
+                  formFields={
+                    Array [
+                      <SingleField
+                        component="checkbox"
+                        name="checkbox"
+                        options={
+                          Array [
+                            Object {
+                              "label": "Foo",
+                              "value": 0,
+                            },
+                            Object {
+                              "label": "Bar",
+                              "value": 1,
+                            },
+                          ]
+                        }
+                      />,
+                    ]
+                  }
+                  formSpyProps={
+                    Object {
+                      "active": undefined,
+                      "dirty": false,
+                      "dirtyFields": Object {},
+                      "dirtyFieldsSinceLastSubmit": Object {},
+                      "dirtySinceLastSubmit": false,
+                      "error": undefined,
+                      "errors": Object {},
+                      "form": Object {
+                        "batch": [Function],
+                        "blur": [Function],
+                        "change": [Function],
+                        "destroyOnUnregister": false,
+                        "focus": [Function],
+                        "getFieldState": [Function],
+                        "getRegisteredFields": [Function],
+                        "getState": [Function],
+                        "initialize": [Function],
+                        "isValidationPaused": [Function],
+                        "mutators": Object {
+                          "concat": [Function],
+                          "insert": [Function],
+                          "move": [Function],
+                          "pop": [Function],
+                          "push": [Function],
+                          "remove": [Function],
+                          "removeBatch": [Function],
+                          "shift": [Function],
+                          "swap": [Function],
+                          "unshift": [Function],
+                          "update": [Function],
+                        },
+                        "pauseValidation": [Function],
+                        "registerField": [Function],
+                        "reset": [Function],
+                        "resetFieldState": [Function],
+                        "restart": [Function],
+                        "resumeValidation": [Function],
+                        "setConfig": [Function],
+                        "submit": [Function],
+                        "subscribe": [Function],
+                      },
+                      "hasSubmitErrors": false,
+                      "hasValidationErrors": false,
+                      "initialValues": Object {},
+                      "invalid": false,
+                      "modified": Object {},
+                      "modifiedSinceLastSubmit": false,
+                      "pristine": true,
+                      "submitError": undefined,
+                      "submitErrors": undefined,
+                      "submitFailed": false,
+                      "submitSucceeded": false,
+                      "submitting": false,
+                      "touched": Object {},
+                      "valid": true,
+                      "validating": false,
+                      "values": Object {},
+                      "visited": Object {},
+                    }
+                  }
+                  onReset={[Function]}
+                  resetLabel="Reset"
+                  schema={
+                    Object {
+                      "fields": Array [
+                        Object {
+                          "component": "checkbox",
+                          "name": "checkbox",
+                          "options": Array [
+                            Object {
+                              "label": "Foo",
+                              "value": 0,
+                            },
+                            Object {
+                              "label": "Bar",
+                              "value": 1,
+                            },
+                          ],
+                        },
+                      ],
+                    }
+                  }
+                  submitLabel="Submit"
+                >
+                  <ButtonGroup
+                    className=""
+                  >
+                    <div
+                      className="ddorg__pf3-layout-components__button-group "
+                    >
+                      <Button
+                        buttonType="submit"
+                        key="form-submit"
+                        label="Submit"
+                        type="submit"
+                        variant="primary"
+                      >
+                        <Button
+                          active={false}
+                          block={false}
+                          bsClass="btn"
+                          bsStyle="primary"
+                          disabled={false}
+                          type="submit"
+                        >
+                          <button
+                            className="btn btn-primary"
+                            disabled={false}
+                            type="submit"
+                          >
+                            Submit
+                          </button>
+                        </Button>
+                      </Button>
+                    </div>
+                  </ButtonGroup>
+                </FormControls>
+              </FormSpy>
+            </form>
+          </Form>
+        </FormWrapper>
+      </FormTemplate>
+    </PF3FormTemplate>
+  </ReactFinalForm>
+</FormRenderer>
 `;
 
 exports[`<MultipleChoiceList /> should render in error state 1`] = `
-<Checkbox
-  FieldProvider={[Function]}
-  input={
+<FormRenderer
+  FormTemplate={[Function]}
+  clearOnUnmount={false}
+  componentMapper={
     Object {
-      "name": "Name of the field",
-      "value": "",
+      "checkbox": [Function],
     }
   }
-  options={
-    Array [
-      Object {
-        "label": "Foo",
-        "value": 0,
-      },
-      Object {
-        "label": "Bar",
-        "value": 1,
-      },
-    ]
-  }
->
-  <MultipleChoiceList
-    FieldProvider={[Function]}
-    input={
-      Object {
-        "name": "Name of the field",
-        "value": "",
-      }
-    }
-    options={
-      Array [
+  initialValues={Object {}}
+  onSubmit={[Function]}
+  schema={
+    Object {
+      "fields": Array [
         Object {
-          "label": "Foo",
-          "value": 0,
-        },
-        Object {
-          "label": "Bar",
-          "value": 1,
-        },
-      ]
-    }
-  >
-    <MultipleChoiceList
-      Checkbox={[Function]}
-      FieldProvider={[Function]}
-      Wrapper={[Function]}
-      input={
-        Object {
-          "name": "Name of the field",
-          "value": "",
-        }
-      }
-      name="Name of the field"
-      options={
-        Array [
-          Object {
-            "label": "Foo",
-            "value": 0,
-          },
-          Object {
-            "label": "Bar",
-            "value": 1,
-          },
-        ]
-      }
-    >
-      <FieldProvider
-        input={
-          Object {
-            "name": "Name of the field",
-            "value": "",
-          }
-        }
-        name="Name of the field"
-        options={
-          Array [
+          "component": "checkbox",
+          "name": "checkbox",
+          "options": Array [
             Object {
               "label": "Foo",
               "value": 0,
@@ -371,237 +810,852 @@ exports[`<MultipleChoiceList /> should render in error state 1`] = `
               "label": "Bar",
               "value": 1,
             },
+          ],
+          "validate": Array [
+            Object {
+              "type": "required",
+            },
+          ],
+        },
+      ],
+    }
+  }
+>
+  <ReactFinalForm
+    decorators={
+      Array [
+        [Function],
+      ]
+    }
+    initialValues={Object {}}
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
+    onSubmit={[Function]}
+    render={[Function]}
+    subscription={
+      Object {
+        "pristine": true,
+        "submitting": true,
+        "valid": true,
+      }
+    }
+  >
+    <PF3FormTemplate
+      formFields={
+        Array [
+          <SingleField
+            component="checkbox"
+            name="checkbox"
+            options={
+              Array [
+                Object {
+                  "label": "Foo",
+                  "value": 0,
+                },
+                Object {
+                  "label": "Bar",
+                  "value": 1,
+                },
+              ]
+            }
+            validate={
+              Array [
+                Object {
+                  "type": "required",
+                },
+              ]
+            }
+          />,
+        ]
+      }
+      schema={
+        Object {
+          "fields": Array [
+            Object {
+              "component": "checkbox",
+              "name": "checkbox",
+              "options": Array [
+                Object {
+                  "label": "Foo",
+                  "value": 0,
+                },
+                Object {
+                  "label": "Bar",
+                  "value": 1,
+                },
+              ],
+              "validate": Array [
+                Object {
+                  "type": "required",
+                },
+              ],
+            },
+          ],
+        }
+      }
+    >
+      <FormTemplate
+        Button={[Function]}
+        ButtonGroup={[Function]}
+        Description={[Function]}
+        FormWrapper={[Function]}
+        Header={Symbol(react.fragment)}
+        Title={[Function]}
+        disableSubmit={Array []}
+        formFields={
+          Array [
+            <SingleField
+              component="checkbox"
+              name="checkbox"
+              options={
+                Array [
+                  Object {
+                    "label": "Foo",
+                    "value": 0,
+                  },
+                  Object {
+                    "label": "Bar",
+                    "value": 1,
+                  },
+                ]
+              }
+              validate={
+                Array [
+                  Object {
+                    "type": "required",
+                  },
+                ]
+              }
+            />,
           ]
         }
-        render={[Function]}
-        validate={[Function]}
+        schema={
+          Object {
+            "fields": Array [
+              Object {
+                "component": "checkbox",
+                "name": "checkbox",
+                "options": Array [
+                  Object {
+                    "label": "Foo",
+                    "value": 0,
+                  },
+                  Object {
+                    "label": "Bar",
+                    "value": 1,
+                  },
+                ],
+                "validate": Array [
+                  Object {
+                    "type": "required",
+                  },
+                ],
+              },
+            ],
+          }
+        }
+        showFormControls={true}
       >
-        <MockFieldProvider
-          input={
-            Object {
-              "onChange": [MockFunction],
-              "value": Array [],
-            }
-          }
-          meta={
-            Object {
-              "error": "Error message",
-              "touched": true,
-            }
-          }
-          name="Name of the field"
-          options={
-            Array [
-              Object {
-                "label": "Foo",
-                "value": 0,
-              },
-              Object {
-                "label": "Bar",
-                "value": 1,
-              },
-            ]
-          }
-          render={[Function]}
-          validate={[Function]}
+        <FormWrapper
+          onSubmit={[Function]}
         >
-          <Wrapper
-            error="Error message"
-            meta={
-              Object {
-                "error": "Error message",
-                "touched": true,
-              }
-            }
-            rest={
-              Object {
-                "children": undefined,
-                "input": Object {
-                  "onChange": [MockFunction],
-                  "value": Array [],
-                },
-                "name": "Name of the field",
-                "validate": [Function],
-              }
-            }
-            showError="Error message"
+          <Form
+            bsClass="form"
+            className="ddorg__pf3-layout-components__form-wrapper"
+            componentClass="form"
+            horizontal={false}
+            inline={false}
+            onSubmit={[Function]}
           >
-            <FormGroup
-              bsClass="form-group"
-              validationState="error"
+            <form
+              className="ddorg__pf3-layout-components__form-wrapper"
+              onSubmit={[Function]}
             >
-              <div
-                className="form-group has-error"
+              <SingleField
+                component="checkbox"
+                key="checkbox"
+                name="checkbox"
+                options={
+                  Array [
+                    Object {
+                      "label": "Foo",
+                      "value": 0,
+                    },
+                    Object {
+                      "label": "Bar",
+                      "value": 1,
+                    },
+                  ]
+                }
+                validate={
+                  Array [
+                    Object {
+                      "type": "required",
+                    },
+                  ]
+                }
               >
-                <ControlLabel
-                  bsClass="control-label"
-                  srOnly={false}
+                <FormConditionWrapper
+                  field={
+                    Object {
+                      "component": "checkbox",
+                      "name": "checkbox",
+                      "options": Array [
+                        Object {
+                          "label": "Foo",
+                          "value": 0,
+                        },
+                        Object {
+                          "label": "Bar",
+                          "value": 1,
+                        },
+                      ],
+                      "validate": Array [
+                        Object {
+                          "type": "required",
+                        },
+                      ],
+                    }
+                  }
                 >
-                  <label
-                    className="control-label"
-                  />
-                </ControlLabel>
-                <div>
-                  <FieldProvider
-                    id="undefined-0"
-                    key="0"
-                    label="Foo"
-                    name="Name of the field"
-                    render={[Function]}
-                    type="checkbox"
-                    value={0}
+                  <FormFieldHideWrapper
+                    hideField={false}
                   >
-                    <MockFieldProvider
-                      id="undefined-0"
-                      input={
-                        Object {
-                          "onChange": [MockFunction],
-                          "value": Array [],
-                        }
+                    <Checkbox
+                      component="checkbox"
+                      name="checkbox"
+                      options={
+                        Array [
+                          Object {
+                            "label": "Foo",
+                            "value": 0,
+                          },
+                          Object {
+                            "label": "Bar",
+                            "value": 1,
+                          },
+                        ]
                       }
-                      label="Foo"
-                      meta={
-                        Object {
-                          "error": "Error message",
-                          "touched": true,
-                        }
+                      validate={
+                        Array [
+                          Object {
+                            "type": "required",
+                          },
+                        ]
                       }
-                      name="Name of the field"
-                      render={[Function]}
-                      type="checkbox"
-                      value={0}
                     >
-                      <FinalCheckbox
-                        aria-label="Foo"
-                        id="undefined-0"
-                        label="Foo"
-                        name="Name of the field"
-                        onChange={[Function]}
-                        type="checkbox"
-                        value={0}
-                      >
-                        <Checkbox
-                          aria-label="Foo"
-                          bsClass="checkbox"
-                          disabled={false}
-                          id="undefined-0"
-                          inline={false}
-                          name="Name of the field"
-                          onChange={[Function]}
-                          title=""
-                          type="checkbox"
-                          value={0}
-                        >
-                          <div
-                            className="checkbox"
-                          >
-                            <label
-                              title=""
-                            >
-                              <input
-                                aria-label="Foo"
-                                disabled={false}
-                                id="undefined-0"
-                                name="Name of the field"
-                                onChange={[Function]}
-                                type="checkbox"
-                                value={0}
-                              />
-                              Foo
-                            </label>
-                          </div>
-                        </Checkbox>
-                      </FinalCheckbox>
-                    </MockFieldProvider>
-                  </FieldProvider>
-                  <FieldProvider
-                    id="undefined-1"
-                    key="1"
-                    label="Bar"
-                    name="Name of the field"
-                    render={[Function]}
-                    type="checkbox"
-                    value={1}
-                  >
-                    <MockFieldProvider
-                      id="undefined-1"
-                      input={
-                        Object {
-                          "onChange": [MockFunction],
-                          "value": Array [],
+                      <MultipleChoiceList
+                        component="checkbox"
+                        name="checkbox"
+                        options={
+                          Array [
+                            Object {
+                              "label": "Foo",
+                              "value": 0,
+                            },
+                            Object {
+                              "label": "Bar",
+                              "value": 1,
+                            },
+                          ]
                         }
-                      }
-                      label="Bar"
-                      meta={
-                        Object {
-                          "error": "Error message",
-                          "touched": true,
+                        validate={
+                          Array [
+                            Object {
+                              "type": "required",
+                            },
+                          ]
                         }
-                      }
-                      name="Name of the field"
-                      render={[Function]}
-                      type="checkbox"
-                      value={1}
-                    >
-                      <FinalCheckbox
-                        aria-label="Bar"
-                        id="undefined-1"
-                        label="Bar"
-                        name="Name of the field"
-                        onChange={[Function]}
-                        type="checkbox"
-                        value={1}
                       >
-                        <Checkbox
-                          aria-label="Bar"
-                          bsClass="checkbox"
-                          disabled={false}
-                          id="undefined-1"
-                          inline={false}
-                          name="Name of the field"
-                          onChange={[Function]}
-                          title=""
-                          type="checkbox"
-                          value={1}
+                        <MultipleChoiceList
+                          Checkbox={[Function]}
+                          Wrapper={[Function]}
+                          component="checkbox"
+                          name="checkbox"
+                          options={
+                            Array [
+                              Object {
+                                "label": "Foo",
+                                "value": 0,
+                              },
+                              Object {
+                                "label": "Bar",
+                                "value": 1,
+                              },
+                            ]
+                          }
+                          validate={
+                            Array [
+                              Object {
+                                "type": "required",
+                              },
+                            ]
+                          }
                         >
-                          <div
-                            className="checkbox"
+                          <Wrapper
+                            error="Required"
+                            meta={
+                              Object {
+                                "active": false,
+                                "data": Object {},
+                                "dirty": false,
+                                "dirtySinceLastSubmit": false,
+                                "error": "Required",
+                                "initial": undefined,
+                                "invalid": true,
+                                "length": undefined,
+                                "modified": false,
+                                "modifiedSinceLastSubmit": false,
+                                "pristine": true,
+                                "submitError": undefined,
+                                "submitFailed": true,
+                                "submitSucceeded": false,
+                                "submitting": false,
+                                "touched": true,
+                                "valid": false,
+                                "validating": false,
+                                "visited": false,
+                              }
+                            }
+                            name="checkbox"
+                            rest={Object {}}
+                            showError="Required"
                           >
-                            <label
-                              title=""
+                            <FormGroup
+                              bsClass="form-group"
+                              validationState="error"
                             >
-                              <input
-                                aria-label="Bar"
-                                disabled={false}
-                                id="undefined-1"
-                                name="Name of the field"
-                                onChange={[Function]}
-                                type="checkbox"
-                                value={1}
-                              />
-                              Bar
-                            </label>
-                          </div>
-                        </Checkbox>
-                      </FinalCheckbox>
-                    </MockFieldProvider>
-                  </FieldProvider>
-                </div>
-                <HelpBlock
-                  bsClass="help-block"
+                              <div
+                                className="form-group has-error"
+                              >
+                                <ControlLabel
+                                  bsClass="control-label"
+                                  srOnly={false}
+                                >
+                                  <label
+                                    className="control-label"
+                                  />
+                                </ControlLabel>
+                                <div>
+                                  <SingleCheckbox
+                                    Checkbox={[Function]}
+                                    aria-label="Foo"
+                                    id="checkbox-0"
+                                    key="checkbox-0"
+                                    label="Foo"
+                                    name="checkbox"
+                                    option={
+                                      Object {
+                                        "label": "Foo",
+                                        "value": 0,
+                                      }
+                                    }
+                                    value={0}
+                                  >
+                                    <FinalCheckbox
+                                      aria-label="Foo"
+                                      checked={false}
+                                      id="checkbox-0"
+                                      label="Foo"
+                                      meta={
+                                        Object {
+                                          "active": false,
+                                          "data": Object {},
+                                          "dirty": false,
+                                          "dirtySinceLastSubmit": false,
+                                          "error": "Required",
+                                          "initial": undefined,
+                                          "invalid": true,
+                                          "length": undefined,
+                                          "modified": false,
+                                          "modifiedSinceLastSubmit": false,
+                                          "pristine": true,
+                                          "submitError": undefined,
+                                          "submitFailed": true,
+                                          "submitSucceeded": false,
+                                          "submitting": false,
+                                          "touched": true,
+                                          "valid": false,
+                                          "validating": false,
+                                          "visited": false,
+                                        }
+                                      }
+                                      name="checkbox"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      option={
+                                        Object {
+                                          "label": "Foo",
+                                          "value": 0,
+                                        }
+                                      }
+                                      type="checkbox"
+                                      value={0}
+                                    >
+                                      <Checkbox
+                                        aria-label="Foo"
+                                        bsClass="checkbox"
+                                        checked={false}
+                                        disabled={false}
+                                        id="checkbox-0"
+                                        inline={false}
+                                        meta={
+                                          Object {
+                                            "active": false,
+                                            "data": Object {},
+                                            "dirty": false,
+                                            "dirtySinceLastSubmit": false,
+                                            "error": "Required",
+                                            "initial": undefined,
+                                            "invalid": true,
+                                            "length": undefined,
+                                            "modified": false,
+                                            "modifiedSinceLastSubmit": false,
+                                            "pristine": true,
+                                            "submitError": undefined,
+                                            "submitFailed": true,
+                                            "submitSucceeded": false,
+                                            "submitting": false,
+                                            "touched": true,
+                                            "valid": false,
+                                            "validating": false,
+                                            "visited": false,
+                                          }
+                                        }
+                                        name="checkbox"
+                                        onBlur={[Function]}
+                                        onChange={[Function]}
+                                        onFocus={[Function]}
+                                        option={
+                                          Object {
+                                            "label": "Foo",
+                                            "value": 0,
+                                          }
+                                        }
+                                        title=""
+                                        type="checkbox"
+                                        value={0}
+                                      >
+                                        <div
+                                          className="checkbox"
+                                        >
+                                          <label
+                                            title=""
+                                          >
+                                            <input
+                                              aria-label="Foo"
+                                              checked={false}
+                                              disabled={false}
+                                              id="checkbox-0"
+                                              meta={
+                                                Object {
+                                                  "active": false,
+                                                  "data": Object {},
+                                                  "dirty": false,
+                                                  "dirtySinceLastSubmit": false,
+                                                  "error": "Required",
+                                                  "initial": undefined,
+                                                  "invalid": true,
+                                                  "length": undefined,
+                                                  "modified": false,
+                                                  "modifiedSinceLastSubmit": false,
+                                                  "pristine": true,
+                                                  "submitError": undefined,
+                                                  "submitFailed": true,
+                                                  "submitSucceeded": false,
+                                                  "submitting": false,
+                                                  "touched": true,
+                                                  "valid": false,
+                                                  "validating": false,
+                                                  "visited": false,
+                                                }
+                                              }
+                                              name="checkbox"
+                                              onBlur={[Function]}
+                                              onChange={[Function]}
+                                              onFocus={[Function]}
+                                              option={
+                                                Object {
+                                                  "label": "Foo",
+                                                  "value": 0,
+                                                }
+                                              }
+                                              type="checkbox"
+                                              value={0}
+                                            />
+                                            Foo
+                                          </label>
+                                        </div>
+                                      </Checkbox>
+                                    </FinalCheckbox>
+                                  </SingleCheckbox>
+                                  <SingleCheckbox
+                                    Checkbox={[Function]}
+                                    aria-label="Bar"
+                                    id="checkbox-1"
+                                    key="checkbox-1"
+                                    label="Bar"
+                                    name="checkbox"
+                                    option={
+                                      Object {
+                                        "label": "Bar",
+                                        "value": 1,
+                                      }
+                                    }
+                                    value={1}
+                                  >
+                                    <FinalCheckbox
+                                      aria-label="Bar"
+                                      checked={false}
+                                      id="checkbox-1"
+                                      label="Bar"
+                                      meta={
+                                        Object {
+                                          "active": false,
+                                          "data": Object {},
+                                          "dirty": false,
+                                          "dirtySinceLastSubmit": false,
+                                          "error": "Required",
+                                          "initial": undefined,
+                                          "invalid": true,
+                                          "length": undefined,
+                                          "modified": false,
+                                          "modifiedSinceLastSubmit": false,
+                                          "pristine": true,
+                                          "submitError": undefined,
+                                          "submitFailed": true,
+                                          "submitSucceeded": false,
+                                          "submitting": false,
+                                          "touched": true,
+                                          "valid": false,
+                                          "validating": false,
+                                          "visited": false,
+                                        }
+                                      }
+                                      name="checkbox"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      option={
+                                        Object {
+                                          "label": "Bar",
+                                          "value": 1,
+                                        }
+                                      }
+                                      type="checkbox"
+                                      value={1}
+                                    >
+                                      <Checkbox
+                                        aria-label="Bar"
+                                        bsClass="checkbox"
+                                        checked={false}
+                                        disabled={false}
+                                        id="checkbox-1"
+                                        inline={false}
+                                        meta={
+                                          Object {
+                                            "active": false,
+                                            "data": Object {},
+                                            "dirty": false,
+                                            "dirtySinceLastSubmit": false,
+                                            "error": "Required",
+                                            "initial": undefined,
+                                            "invalid": true,
+                                            "length": undefined,
+                                            "modified": false,
+                                            "modifiedSinceLastSubmit": false,
+                                            "pristine": true,
+                                            "submitError": undefined,
+                                            "submitFailed": true,
+                                            "submitSucceeded": false,
+                                            "submitting": false,
+                                            "touched": true,
+                                            "valid": false,
+                                            "validating": false,
+                                            "visited": false,
+                                          }
+                                        }
+                                        name="checkbox"
+                                        onBlur={[Function]}
+                                        onChange={[Function]}
+                                        onFocus={[Function]}
+                                        option={
+                                          Object {
+                                            "label": "Bar",
+                                            "value": 1,
+                                          }
+                                        }
+                                        title=""
+                                        type="checkbox"
+                                        value={1}
+                                      >
+                                        <div
+                                          className="checkbox"
+                                        >
+                                          <label
+                                            title=""
+                                          >
+                                            <input
+                                              aria-label="Bar"
+                                              checked={false}
+                                              disabled={false}
+                                              id="checkbox-1"
+                                              meta={
+                                                Object {
+                                                  "active": false,
+                                                  "data": Object {},
+                                                  "dirty": false,
+                                                  "dirtySinceLastSubmit": false,
+                                                  "error": "Required",
+                                                  "initial": undefined,
+                                                  "invalid": true,
+                                                  "length": undefined,
+                                                  "modified": false,
+                                                  "modifiedSinceLastSubmit": false,
+                                                  "pristine": true,
+                                                  "submitError": undefined,
+                                                  "submitFailed": true,
+                                                  "submitSucceeded": false,
+                                                  "submitting": false,
+                                                  "touched": true,
+                                                  "valid": false,
+                                                  "validating": false,
+                                                  "visited": false,
+                                                }
+                                              }
+                                              name="checkbox"
+                                              onBlur={[Function]}
+                                              onChange={[Function]}
+                                              onFocus={[Function]}
+                                              option={
+                                                Object {
+                                                  "label": "Bar",
+                                                  "value": 1,
+                                                }
+                                              }
+                                              type="checkbox"
+                                              value={1}
+                                            />
+                                            Bar
+                                          </label>
+                                        </div>
+                                      </Checkbox>
+                                    </FinalCheckbox>
+                                  </SingleCheckbox>
+                                </div>
+                                <HelpBlock
+                                  bsClass="help-block"
+                                >
+                                  <span
+                                    className="help-block"
+                                  >
+                                    Required
+                                  </span>
+                                </HelpBlock>
+                              </div>
+                            </FormGroup>
+                          </Wrapper>
+                        </MultipleChoiceList>
+                      </MultipleChoiceList>
+                    </Checkbox>
+                  </FormFieldHideWrapper>
+                </FormConditionWrapper>
+              </SingleField>
+              <FormSpy>
+                <FormControls
+                  Button={[Function]}
+                  ButtonGroup={[Function]}
+                  FormSpy={[Function]}
+                  buttonOrder={
+                    Array [
+                      "submit",
+                      "reset",
+                      "cancel",
+                    ]
+                  }
+                  buttonsProps={Object {}}
+                  canReset={false}
+                  canSubmit={false}
+                  cancelLabel="Cancel"
+                  formFields={
+                    Array [
+                      <SingleField
+                        component="checkbox"
+                        name="checkbox"
+                        options={
+                          Array [
+                            Object {
+                              "label": "Foo",
+                              "value": 0,
+                            },
+                            Object {
+                              "label": "Bar",
+                              "value": 1,
+                            },
+                          ]
+                        }
+                        validate={
+                          Array [
+                            Object {
+                              "type": "required",
+                            },
+                          ]
+                        }
+                      />,
+                    ]
+                  }
+                  formSpyProps={
+                    Object {
+                      "active": undefined,
+                      "dirty": false,
+                      "dirtyFields": Object {},
+                      "dirtyFieldsSinceLastSubmit": Object {},
+                      "dirtySinceLastSubmit": false,
+                      "error": undefined,
+                      "errors": Object {
+                        "checkbox": "Required",
+                      },
+                      "form": Object {
+                        "batch": [Function],
+                        "blur": [Function],
+                        "change": [Function],
+                        "destroyOnUnregister": false,
+                        "focus": [Function],
+                        "getFieldState": [Function],
+                        "getRegisteredFields": [Function],
+                        "getState": [Function],
+                        "initialize": [Function],
+                        "isValidationPaused": [Function],
+                        "mutators": Object {
+                          "concat": [Function],
+                          "insert": [Function],
+                          "move": [Function],
+                          "pop": [Function],
+                          "push": [Function],
+                          "remove": [Function],
+                          "removeBatch": [Function],
+                          "shift": [Function],
+                          "swap": [Function],
+                          "unshift": [Function],
+                          "update": [Function],
+                        },
+                        "pauseValidation": [Function],
+                        "registerField": [Function],
+                        "reset": [Function],
+                        "resetFieldState": [Function],
+                        "restart": [Function],
+                        "resumeValidation": [Function],
+                        "setConfig": [Function],
+                        "submit": [Function],
+                        "subscribe": [Function],
+                      },
+                      "hasSubmitErrors": false,
+                      "hasValidationErrors": true,
+                      "initialValues": Object {},
+                      "invalid": true,
+                      "modified": Object {
+                        "checkbox": false,
+                      },
+                      "modifiedSinceLastSubmit": false,
+                      "pristine": true,
+                      "submitError": undefined,
+                      "submitErrors": undefined,
+                      "submitFailed": true,
+                      "submitSucceeded": false,
+                      "submitting": false,
+                      "touched": Object {
+                        "checkbox": true,
+                      },
+                      "valid": false,
+                      "validating": false,
+                      "values": Object {},
+                      "visited": Object {
+                        "checkbox": false,
+                      },
+                    }
+                  }
+                  onReset={[Function]}
+                  resetLabel="Reset"
+                  schema={
+                    Object {
+                      "fields": Array [
+                        Object {
+                          "component": "checkbox",
+                          "name": "checkbox",
+                          "options": Array [
+                            Object {
+                              "label": "Foo",
+                              "value": 0,
+                            },
+                            Object {
+                              "label": "Bar",
+                              "value": 1,
+                            },
+                          ],
+                          "validate": Array [
+                            Object {
+                              "type": "required",
+                            },
+                          ],
+                        },
+                      ],
+                    }
+                  }
+                  submitLabel="Submit"
                 >
-                  <span
-                    className="help-block"
+                  <ButtonGroup
+                    className=""
                   >
-                    Error message
-                  </span>
-                </HelpBlock>
-              </div>
-            </FormGroup>
-          </Wrapper>
-        </MockFieldProvider>
-      </FieldProvider>
-    </MultipleChoiceList>
-  </MultipleChoiceList>
-</Checkbox>
+                    <div
+                      className="ddorg__pf3-layout-components__button-group "
+                    >
+                      <Button
+                        buttonType="submit"
+                        key="form-submit"
+                        label="Submit"
+                        type="submit"
+                        variant="primary"
+                      >
+                        <Button
+                          active={false}
+                          block={false}
+                          bsClass="btn"
+                          bsStyle="primary"
+                          disabled={false}
+                          type="submit"
+                        >
+                          <button
+                            className="btn btn-primary"
+                            disabled={false}
+                            type="submit"
+                          >
+                            Submit
+                          </button>
+                        </Button>
+                      </Button>
+                    </div>
+                  </ButtonGroup>
+                </FormControls>
+              </FormSpy>
+            </form>
+          </Form>
+        </FormWrapper>
+      </FormTemplate>
+    </PF3FormTemplate>
+  </ReactFinalForm>
+</FormRenderer>
 `;

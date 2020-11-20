@@ -65,16 +65,14 @@ const asyncSubmit = (values, api) =>
   );
 
 const FormControls = () => (
-  <div>
-    <FormRenderer
-      FormTemplate={FormTemplate}
-      componentMapper={componentMapper}
-      schema={schema}
-      onSubmit={asyncSubmit}
-      onCancel={() => console.log('Cancelling')}
-      onReset={() => console.log('Resetting')}
-    />
-  </div>
+  <FormRenderer
+    FormTemplate={FormTemplate}
+    componentMapper={componentMapper}
+    schema={schema}
+    onSubmit={asyncSubmit}
+    onCancel={() => console.log('Cancelling')}
+    onReset={() => console.log('Resetting')}
+  />
 );
 
 export default FormControls;

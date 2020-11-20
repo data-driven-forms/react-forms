@@ -12,6 +12,9 @@ interface BaseSelectProps  {
   options?: SelectOption[];
   selectVariant?: 'default' | 'createable';
   isSearchable?: boolean;
+  isDisabled?: boolean;
+  isClearable?: boolean;
+  name?: string;
   showMoreLabel?: ReactNode;
   showLessLabel?: ReactNode;
   simpleValue?: boolean;
@@ -22,6 +25,8 @@ interface BaseSelectProps  {
   noOptionsMessage?: ReactNode;
   menuIsPortal?: boolean;
   placeholder?: ReactNode;
+  validated?: 'success' | 'error' | 'default';
+  id?: string;
 }
 
 export interface InternalSelectProps extends BaseSelectProps {

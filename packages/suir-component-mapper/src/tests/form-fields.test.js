@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { act } from 'react-dom/test-utils';
 import MultipleChoiceListCommon from '@data-driven-forms/common/src/multiple-choice-list';
 import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import Checkbox from '../files/checkbox';
@@ -96,6 +97,28 @@ describe('formFields', () => {
           expect(
             wrapper
               .find('.ui.pointing.prompt.label')
+              .last()
+              .text()
+          ).toEqual(errorText);
+        });
+
+        it('renders with warning', async () => {
+          const errorField = {
+            ...field,
+            validate: [{ type: validatorTypes.REQUIRED, warning: true }],
+            useWarnings: true,
+            validateOnMount: true
+          };
+          let wrapper;
+
+          await act(async () => {
+            wrapper = mount(<RendererWrapper schema={{ fields: [errorField] }} />);
+          });
+          wrapper.update();
+
+          expect(
+            wrapper
+              .find(HelperText)
               .last()
               .text()
           ).toEqual(errorText);
@@ -218,6 +241,7 @@ describe('formFields', () => {
     beforeEach(() => {
       initialProps = {
         ...initialProps,
+        name: 'multiple-checkbox',
         options: [
           { label: 'Cat', value: 'cats' },
           { label: 'Dog', value: 'dogs' },

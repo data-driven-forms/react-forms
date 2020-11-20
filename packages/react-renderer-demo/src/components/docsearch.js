@@ -6,7 +6,7 @@ import Search from '@material-ui/icons/Search';
 import docsearch from 'docsearch.js';
 import { useRouter } from 'next/router';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   docSearchWrapper: {
     marginRight: 16,
     '& .algolia-docsearch-suggestion.algolia-docsearch-suggestion__main.algolia-docsearch-suggestion__secondary': {
@@ -16,6 +16,12 @@ const useStyles = makeStyles(() => ({
       marginBottom: 0
     },
     '& .ds-dropdown-menu': {
+      [theme.breakpoints.down('sm')]: {
+        position: 'fixed !important',
+        top: '50px !important',
+        maxWidth: '100% !important',
+        minWidth: '100%'
+      },
       '& [class^=ds-dataset-]': {
         borderRadius: 0
       },

@@ -16,7 +16,7 @@ describe('<MonthSelector />', () => {
     };
   });
 
-  it.skip('should render correcntly', () => {
+  it('should render correcntly', () => {
     const wrapper = mount(<MonthSelector {...initialProps} />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });

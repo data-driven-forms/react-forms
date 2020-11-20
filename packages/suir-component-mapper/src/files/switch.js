@@ -6,7 +6,7 @@ import FormFieldGrid from '../common/form-field-grid';
 import { createUseStyles } from 'react-jss';
 import clsx from 'clsx';
 
-import { validationError } from '../common/helpers';
+import { validationError, validationWarning } from '../common/helpers';
 import FormField from '../common/form-field';
 
 const useStyles = createUseStyles({
@@ -49,7 +49,7 @@ export const Switch = (props) => {
   const classes = useStyles();
   const controlLabel = input.checked ? onText : offText;
   return (
-    <FormFieldGrid helperText={helperText} HelpertextProps={HelpertextProps} {...FormFieldGridProps}>
+    <FormFieldGrid helperText={validationWarning(meta, validateOnMount) || helperText} HelpertextProps={HelpertextProps} {...FormFieldGridProps}>
       <FormField
         required={isRequired}
         className={clsx(classes.root, className)}

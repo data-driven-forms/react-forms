@@ -21,7 +21,6 @@ const useLinkStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    width: 'calc(240px - 32px)',
     whiteSpace: 'nowrap',
     display: 'block',
     paddingLeft: 16,

@@ -12,12 +12,12 @@ describe('<Navbar />', () => {
     };
   });
 
-  it.skip('should render correctly', () => {
+  it('should render correctly', () => {
     const wrapper = mount(<Navbar {...initialProps} />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it.skip('should render year navbar variant correctly', () => {
+  it('should render year navbar variant correctly', () => {
     const wrapper = mount(<Navbar {...initialProps} isYear />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });

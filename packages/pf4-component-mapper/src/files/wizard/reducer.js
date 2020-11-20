@@ -1,5 +1,15 @@
 const reducer = (state, { type }) => {
   switch (type) {
+    case 'openNav':
+      return {
+        ...state,
+        openNav: true
+      };
+    case 'closeNav':
+      return {
+        ...state,
+        openNav: false
+      };
     case 'finishLoading':
       return {
         ...state,

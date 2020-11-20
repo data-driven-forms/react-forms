@@ -1,4 +1,5 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import toJson from 'enzyme-to-json';
 import { mount } from 'enzyme';
 import isEqual from 'lodash/isEqual';
@@ -10,6 +11,7 @@ import SelectField from '../../../files/select/select';
 
 describe('<SelectField />', () => {
   let initialProps;
+  let wrapper;
   const changeSpy = jest.fn();
 
   beforeEach(() => {
@@ -37,70 +39,85 @@ describe('<SelectField />', () => {
     changeSpy.mockReset();
   });
 
-  it('should mount correctly', () => {
-    const wrapper = mount(<SelectField {...initialProps} />);
+  it('should mount correctly', async () => {
+    await act(async () => {
+      wrapper = mount(<SelectField {...initialProps} />);
+    });
+    wrapper.update();
+
     expect(wrapper).toBeTruthy();
   });
 
-  it('should mount Async correctly', (done) => {
+  it('should mount Async correctly', async () => {
     const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'asyncLabel' }]));
 
-    const wrapper = mount(<SelectField {...initialProps} loadOptions={asyncLoading} />);
-
-    setImmediate(() => {
-      wrapper.update();
-      expect(toJson(wrapper)).toMatchSnapshot();
-      done();
+    await act(async () => {
+      wrapper = mount(<SelectField {...initialProps} loadOptions={asyncLoading} />);
     });
+    wrapper.update();
+
+    expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should load Async options correctly', (done) => {
+  it('should load Async options correctly', async () => {
     const asyncLoading = jest.fn().mockReturnValue(Promise.resolve([{ label: 'asyncLabel' }]));
 
-    const wrapper = mount(<SelectField {...initialProps} loadOptions={asyncLoading} />);
-
-    setImmediate(() => {
-      wrapper.update();
-      expect(
-        wrapper
-          .find(ReactSelect)
-          .first()
-          .props().options
-      ).toEqual([{ label: 'asyncLabel' }]);
-      done();
+    await act(async () => {
+      wrapper = mount(<SelectField {...initialProps} loadOptions={asyncLoading} />);
     });
+    wrapper.update();
+
+    expect(
+      wrapper
+        .find(ReactSelect)
+        .first()
+        .props().options
+    ).toEqual([{ label: 'asyncLabel' }]);
   });
 
-  it('should call on change with correct value on single select', () => {
-    const wrapper = mount(<SelectField {...initialProps} />);
-    wrapper
-      .find(ReactSelect)
-      .instance()
-      .props.onChange({
-        value: 2
-      });
+  it('should call on change with correct value on single select', async () => {
+    await act(async () => {
+      wrapper = mount(<SelectField {...initialProps} />);
+    });
+    wrapper.update();
+    await act(async () => {
+      wrapper
+        .find(ReactSelect)
+        .instance()
+        .props.onChange({
+          value: 2
+        });
+    });
+    wrapper.update();
     expect(changeSpy).toHaveBeenCalledWith(2);
   });
 
-  it('should call on change with correct value on multi select', () => {
-    const wrapper = mount(
-      <SelectField
-        {...initialProps}
-        isMulti
-        input={{
-          name: 'select-input',
-          onChange: changeSpy,
-          value: []
-        }}
-      />
-    );
-    wrapper
-      .find(ReactSelect)
-      .instance()
-      .props.onChange([
-        { value: 2, label: 'x' },
-        { value: 1, label: 'a' }
-      ]);
+  it('should call on change with correct value on multi select', async () => {
+    await act(async () => {
+      wrapper = mount(
+        <SelectField
+          {...initialProps}
+          isMulti
+          input={{
+            name: 'select-input',
+            onChange: changeSpy,
+            value: []
+          }}
+        />
+      );
+    });
+    wrapper.update();
+    await act(async () => {
+      wrapper
+        .find(ReactSelect)
+        .instance()
+        .props.onChange([
+          { value: 2, label: 'x' },
+          { value: 1, label: 'a' }
+        ]);
+    });
+    wrapper.update();
+
     expect(changeSpy).toHaveBeenCalledWith([2, 1]);
   });
 
@@ -120,133 +137,154 @@ describe('<SelectField />', () => {
       asyncLoadingNew = () => Promise.resolve(NEW_OPTIONS);
     });
 
-    it('should change the options when options prop is changed', () => {
-      const wrapper = mount(<Wrapper {...initialProps} />);
+    it('should change the options when options prop is changed', async () => {
+      await act(async () => {
+        wrapper = mount(<Wrapper {...initialProps} />);
+      });
+      wrapper.update();
 
       let innerSelectProps = wrapper.find(ReactSelect).props().options;
 
       expect(isEqual(innerSelectProps, initialProps.options)).toEqual(true);
 
-      wrapper.setProps({ options: NEW_OPTIONS });
+      await act(async () => {
+        wrapper.setProps({ options: NEW_OPTIONS });
+      });
+      wrapper.update();
       wrapper.update();
       innerSelectProps = wrapper.find(ReactSelect).props().options;
 
       expect(innerSelectProps).toEqual(NEW_OPTIONS);
     });
 
-    it('should change the options when loadOptions prop is changed', (done) => {
-      const wrapper = mount(<Wrapper {...initialProps} loadOptions={asyncLoading} />);
-
-      setImmediate(() => {
-        wrapper.update();
-        let innerSelectProps = wrapper.find(ReactSelect).props().options;
-
-        expect(isEqual(innerSelectProps, initialProps.options)).toEqual(true);
-
-        wrapper.setProps({ loadOptions: asyncLoadingNew });
-
-        setImmediate(() => {
-          wrapper.update();
-          innerSelectProps = wrapper.find(ReactSelect).props().options;
-
-          expect(isEqual(innerSelectProps, NEW_OPTIONS)).toEqual(true);
-          done();
-        });
+    it('should change the options when loadOptions prop is changed', async () => {
+      await act(async () => {
+        wrapper = mount(<Wrapper {...initialProps} loadOptions={asyncLoading} />);
       });
+      wrapper.update();
+
+      let innerSelectProps = wrapper.find(ReactSelect).props().options;
+
+      expect(isEqual(innerSelectProps, initialProps.options)).toEqual(true);
+
+      await act(async () => {
+        wrapper.setProps({ loadOptions: asyncLoadingNew });
+      });
+      wrapper.update();
+
+      innerSelectProps = wrapper.find(ReactSelect).props().options;
+
+      expect(isEqual(innerSelectProps, NEW_OPTIONS)).toEqual(true);
     });
 
-    it('should change the value when new options do not include it', () => {
-      const wrapper = mount(<Wrapper {...initialProps} input={{ ...initialProps.input, value: 1 }} />);
+    it('should change the value when new options do not include it', async () => {
+      await act(async () => {
+        wrapper = mount(<Wrapper {...initialProps} input={{ ...initialProps.input, value: 1 }} />);
+      });
+      wrapper.update();
 
-      wrapper.setProps({ options: NEW_OPTIONS });
+      await act(async () => {
+        wrapper.setProps({ options: NEW_OPTIONS });
+      });
       wrapper.update();
 
       expect(changeSpy).toHaveBeenCalledWith(undefined);
     });
 
-    it('should not change the value when new options do not include it and noValueUpdates is set', () => {
-      const wrapper = mount(<Wrapper {...initialProps} noValueUpdates input={{ ...initialProps.input, value: 1 }} />);
-
-      wrapper.setProps({ options: NEW_OPTIONS });
+    it('should not change the value when new options do not include it and noValueUpdates is set', async () => {
+      await act(async () => {
+        wrapper = mount(<Wrapper {...initialProps} noValueUpdates input={{ ...initialProps.input, value: 1 }} />);
+      });
+      wrapper.update();
+      await act(async () => {
+        wrapper.setProps({ options: NEW_OPTIONS });
+      });
       wrapper.update();
 
       expect(changeSpy).not.toHaveBeenCalled();
     });
 
-    it('not should change the value when new options include it', () => {
-      const wrapper = mount(<Wrapper {...initialProps} input={{ ...initialProps.input, value: 2 }} />);
-
-      wrapper.setProps({ options: NEW_OPTIONS });
+    it('not should change the value when new options include it', async () => {
+      await act(async () => {
+        wrapper = mount(<Wrapper {...initialProps} input={{ ...initialProps.input, value: 2 }} />);
+      });
+      wrapper.update();
+      await act(async () => {
+        wrapper.setProps({ options: NEW_OPTIONS });
+      });
       wrapper.update();
 
       expect(changeSpy).not.toHaveBeenCalled();
     });
 
-    it('should reset the value when loadOptions prop is changed and new options do not include the value', (done) => {
-      const wrapper = mount(<Wrapper {...initialProps} loadOptions={asyncLoading} input={{ ...initialProps.input, value: 1 }} />);
-
-      setImmediate(() => {
-        wrapper.update();
-        wrapper.setProps({ loadOptions: asyncLoadingNew });
-
-        setImmediate(() => {
-          wrapper.update();
-
-          expect(changeSpy).toHaveBeenCalledWith(undefined);
-          done();
-        });
+    it('should reset the value when loadOptions prop is changed and new options do not include the value', async () => {
+      await act(async () => {
+        wrapper = mount(<Wrapper {...initialProps} loadOptions={asyncLoading} input={{ ...initialProps.input, value: 1 }} />);
       });
+      wrapper.update();
+
+      await act(async () => {
+        wrapper.setProps({ loadOptions: asyncLoadingNew });
+      });
+      wrapper.update();
+
+      expect(changeSpy).toHaveBeenCalledWith(undefined);
     });
 
-    it('should not reset the value when loadOptions prop is changed and new options do not include the value - noValueUpdates is set', (done) => {
-      const wrapper = mount(<Wrapper {...initialProps} noValueUpdates loadOptions={asyncLoading} input={{ ...initialProps.input, value: 1 }} />);
-
-      setImmediate(() => {
-        wrapper.update();
-        wrapper.setProps({ loadOptions: asyncLoadingNew });
-
-        setImmediate(() => {
-          wrapper.update();
-
-          expect(changeSpy).not.toHaveBeenCalledWith();
-          done();
-        });
+    it('should not reset the value when loadOptions prop is changed and new options do not include the value - noValueUpdates is set', async () => {
+      await act(async () => {
+        wrapper = mount(<Wrapper {...initialProps} noValueUpdates loadOptions={asyncLoading} input={{ ...initialProps.input, value: 1 }} />);
       });
+      wrapper.update();
+
+      await act(async () => {
+        wrapper.setProps({ loadOptions: asyncLoadingNew });
+      });
+      wrapper.update();
+
+      expect(changeSpy).not.toHaveBeenCalledWith();
     });
 
-    it('should not reset the value when loadOptions prop is changed and new options include the value', (done) => {
-      const wrapper = mount(<Wrapper {...initialProps} loadOptions={asyncLoading} input={{ ...initialProps.input, value: 2 }} />);
-
-      setImmediate(() => {
-        wrapper.update();
-        wrapper.setProps({ loadOptions: asyncLoadingNew });
-
-        setImmediate(() => {
-          wrapper.update();
-
-          expect(changeSpy).not.toHaveBeenCalled();
-          done();
-        });
+    it('should not reset the value when loadOptions prop is changed and new options include the value', async () => {
+      await act(async () => {
+        wrapper = mount(<Wrapper {...initialProps} loadOptions={asyncLoading} input={{ ...initialProps.input, value: 2 }} />);
       });
+      wrapper.update();
+      wrapper.update();
+      await act(async () => {
+        wrapper.setProps({ loadOptions: asyncLoadingNew });
+      });
+      wrapper.update();
+
+      expect(changeSpy).not.toHaveBeenCalled();
     });
 
-    it('should pick correct value for single select when passed array', () => {
-      const wrapper = mount(<Wrapper {...initialProps} input={{ ...initialProps.input, value: [2] }} />);
+    it('should pick correct value for single select when passed array', async () => {
+      await act(async () => {
+        wrapper = mount(<Wrapper {...initialProps} input={{ ...initialProps.input, value: [2] }} />);
+      });
+      wrapper.update();
       expect(wrapper.find(ReactSelect).instance().state.value).toEqual([{ value: 2, label: 'option 2' }]);
     });
 
-    it('should pick correct array value for single select when passed array', () => {
-      let wrapper = mount(<Wrapper {...initialProps} input={{ ...initialProps.input, value: [2] }} pluckSingleValue={false} />);
+    it('should pick correct array value for single select when passed array', async () => {
+      await act(async () => {
+        wrapper = mount(<Wrapper {...initialProps} input={{ ...initialProps.input, value: [2] }} pluckSingleValue={false} />);
+      });
+      wrapper.update();
       expect(wrapper.find(ReactSelect).instance().state.value).toEqual([]);
 
-      wrapper = mount(
-        <Wrapper
-          {...initialProps}
-          options={[...initialProps.options, { label: 'array options', value: [2] }]}
-          input={{ ...initialProps.input, value: [2] }}
-          pluckSingleValue={false}
-        />
-      );
+      await act(async () => {
+        wrapper = mount(
+          <Wrapper
+            {...initialProps}
+            options={[...initialProps.options, { label: 'array options', value: [2] }]}
+            input={{ ...initialProps.input, value: [2] }}
+            pluckSingleValue={false}
+          />
+        );
+      });
+      wrapper.update();
       expect(wrapper.find(ReactSelect).instance().state.value).toEqual([{ label: 'array options', value: [2] }]);
     });
 
@@ -264,48 +302,78 @@ describe('<SelectField />', () => {
           placeholder: 'searchable'
         };
       });
-      it('should componse isSearchable variant correctly', () => {
-        const wrapper = mount(<SelectField {...isSearchableProps} />);
+      it('should componse isSearchable variant correctly', async () => {
+        await act(async () => {
+          wrapper = mount(<SelectField {...isSearchableProps} />);
+        });
+        wrapper.update();
         expect(wrapper.find(DropdownButton)).toHaveLength(1);
       });
 
-      it('should correctly assign dropdown text', () => {
-        const wrapper = mount(<SelectField {...isSearchableProps} input={{ ...isSearchableProps.input, value: 1 }} />);
+      it('should correctly assign dropdown text', async () => {
+        await act(async () => {
+          wrapper = mount(<SelectField {...isSearchableProps} input={{ ...isSearchableProps.input, value: 1 }} />);
+        });
+        wrapper.update();
         expect(wrapper.find(`span.${initialProps.classNamePrefix}-value`).text()).toEqual('option 1');
 
-        wrapper.setProps({ input: { ...isSearchableProps, value: { label: 'Foo', value: 'Foo' } } });
+        await act(async () => {
+          wrapper.setProps({ input: { ...isSearchableProps.input, value: { label: 'Foo', value: 'Foo' } } });
+        });
+        wrapper.update();
         expect(wrapper.find(`span.${initialProps.classNamePrefix}-value`).text()).toEqual('Foo');
-
-        wrapper.setProps({ input: { ...isSearchableProps, value: [1, 2] } });
+        await act(async () => {
+          wrapper.setProps({ input: { ...isSearchableProps.input, value: [1, 2] } });
+        });
+        wrapper.update();
         expect(wrapper.find(`span.${initialProps.classNamePrefix}-value`).text()).toEqual('option 1, option 2');
-
-        wrapper.setProps({ input: { ...isSearchableProps, value: isSearchableProps.options } });
+        await act(async () => {
+          wrapper.setProps({ input: { ...isSearchableProps.input, value: isSearchableProps.options } });
+        });
+        wrapper.update();
         expect(wrapper.find(`span.${initialProps.classNamePrefix}-value`).text()).toEqual('option 1, option 2');
-
-        wrapper.setProps({ input: { ...isSearchableProps, value: undefined } });
+        await act(async () => {
+          wrapper.setProps({ input: { ...isSearchableProps.input, value: undefined } });
+        });
+        wrapper.update();
         expect(wrapper.find(`span.${initialProps.classNamePrefix}-value`).text()).toEqual('searchable');
-
-        wrapper.setProps({ input: { ...isSearchableProps, value: [] } });
+        await act(async () => {
+          wrapper.setProps({ input: { ...isSearchableProps.input, value: [] } });
+        });
+        wrapper.update();
         expect(wrapper.find(`span.${initialProps.classNamePrefix}-value`).text()).toEqual('searchable');
       });
 
-      it('should open dropdown search in options', () => {
-        const wrapper = mount(<SelectField {...isSearchableProps} />);
-        wrapper.find('button#searchable').simulate('click');
+      it('should open dropdown search in options', async () => {
+        await act(async () => {
+          wrapper = mount(<SelectField {...isSearchableProps} />);
+        });
+        wrapper.update();
+        await act(async () => {
+          wrapper.find('button#searchable').simulate('click');
+        });
         wrapper.update();
         expect(wrapper.find(DataDrivenSelect)).toHaveLength(1);
         expect(wrapper.find('.ddorg__pf3-component-mapper__select__option')).toHaveLength(2);
         const input = wrapper.find('input.form-control');
         input.getDOMNode().value = '1';
-        input.simulate('change');
+        await act(async () => {
+          input.simulate('change');
+        });
         wrapper.update();
         expect(wrapper.find('.ddorg__pf3-component-mapper__select__option')).toHaveLength(1);
       });
 
-      it('should clear the select value', () => {
+      it('should clear the select value', async () => {
         const onChange = jest.fn();
-        const wrapper = mount(<SelectField {...isSearchableProps} isClearable input={{ ...isSearchableProps, value: 1, onChange }} />);
-        wrapper.find(`div.${initialProps.classNamePrefix}-searchebale-clear`).simulate('click');
+        await act(async () => {
+          wrapper = mount(<SelectField {...isSearchableProps} isClearable input={{ ...isSearchableProps.input, value: 1, onChange }} />);
+        });
+        wrapper.update();
+        await act(async () => {
+          wrapper.find(`div.${initialProps.classNamePrefix}-searchebale-clear`).simulate('click');
+        });
+        wrapper.update();
         expect(onChange).toHaveBeenCalledWith(undefined);
       });
     });

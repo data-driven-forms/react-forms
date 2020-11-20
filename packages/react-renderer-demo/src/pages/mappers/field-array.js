@@ -1,8 +1,5 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ComponentText from '@docs/components/component-example-text';
-import FieldArray from '@docs/doc-components/field-array';
-import useActiveMapper from '@docs/hooks/use-active-mapper';
-import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 import arraySchemaDDF from '../../components/navigation/field-array-schema';
 
 const variants = [
@@ -23,18 +20,4 @@ const variants = [
   }
 ];
 
-export default () => {
-  const activeMapper = useActiveMapper();
-  return (
-    <Fragment>
-      <ComponentText
-        activeMapper={activeMapper}
-        component={componentTypes.FIELD_ARRAY}
-        schema={arraySchemaDDF}
-        ContentText={FieldArray}
-        variants={variants}
-        linkText="Field Array"
-      />
-    </Fragment>
-  );
-};
+export default () => <ComponentText schema={arraySchemaDDF} variants={variants} linkText="Field Array" />;

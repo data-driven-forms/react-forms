@@ -15,8 +15,8 @@ const ExampleLink = ({ to, text = 'To example' }) => {
   return (
     <React.Fragment>
       <div style={{ float: 'right' }}>
-        <RouterLink href={`/mappers/${to}`}>
-          <a className={classes.toExampleLink} href={`/mappers/${to}`}>
+        <RouterLink href={`/mappers/${to}?mapper=mui`}>
+          <a className={classes.toExampleLink} href={`/mappers/${to}?mapper=mui`}>
             <Button color="primary">{text}</Button>
           </a>
         </RouterLink>

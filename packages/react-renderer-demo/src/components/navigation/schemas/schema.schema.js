@@ -78,6 +78,10 @@ const schemaNav = [
     linkText: 'Validator mapper'
   },
   {
+    component: 'validator-warnings',
+    linkText: 'Warnings'
+  },
+  {
     subHeader: true,
     title: 'Condition',
     noRoute: true
@@ -140,7 +144,7 @@ const schemaNav = [
   },
   {
     component: 'complex-condition-example',
-    linkText: 'Conplex condition example'
+    linkText: 'Complex condition example'
   },
   {
     subHeader: true,

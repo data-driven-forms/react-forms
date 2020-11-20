@@ -58,7 +58,7 @@ exports[`<TimePicker /> should render correcntly 1`] = `
               min={0}
               onChange={[Function]}
               type="number"
-              value="04"
+              value="03"
             />
           </span>
         </td>

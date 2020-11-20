@@ -16,11 +16,11 @@ FormFieldHideWrapper.defaultProps = {
   hideField: false
 };
 
-const FormConditionWrapper = ({ condition, children }) =>
+const FormConditionWrapper = ({ condition, children, field }) =>
   condition ? (
     <FormSpy>
       {({ values }) => (
-        <Condition condition={condition} values={values}>
+        <Condition condition={condition} values={values} field={field}>
           {children}
         </Condition>
       )}
@@ -31,7 +31,8 @@ const FormConditionWrapper = ({ condition, children }) =>
 
 FormConditionWrapper.propTypes = {
   condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  children: childrenPropTypes.isRequired
+  children: childrenPropTypes.isRequired,
+  field: PropTypes.object
 };
 
 const SingleField = ({ component, condition, hideField, ...rest }) => {
@@ -90,7 +91,7 @@ const SingleField = ({ component, condition, hideField, ...rest }) => {
   }
 
   return (
-    <FormConditionWrapper condition={condition}>
+    <FormConditionWrapper condition={condition} field={componentProps}>
       <FormFieldHideWrapper hideField={hideField}>
         <Component {...componentProps} {...overrideProps} {...(mergedResolveProps && { resolveProps: mergedResolveProps })} />
       </FormFieldHideWrapper>

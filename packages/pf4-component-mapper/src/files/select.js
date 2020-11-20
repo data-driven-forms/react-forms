@@ -5,7 +5,9 @@ import FormGroup from '../common/form-group';
 import DataDrivenSelect from '../common/select/select';
 
 const Select = (props) => {
-  const { label, isRequired, helperText, meta, description, hideLabel, input, isReadOnly, isDisabled, id, ...rest } = useFieldApi(props);
+  const { label, isRequired, helperText, meta, description, hideLabel, input, isReadOnly, isDisabled, id, FormGroupProps, ...rest } = useFieldApi(
+    props
+  );
   return (
     <FormGroup
       label={label}
@@ -15,6 +17,7 @@ const Select = (props) => {
       description={description}
       hideLabel={hideLabel}
       id={id || input.name}
+      FormGroupProps={FormGroupProps}
     >
       <DataDrivenSelect {...input} {...rest} isDisabled={isDisabled || isReadOnly} />
     </FormGroup>
@@ -29,7 +32,8 @@ Select.propTypes = {
   description: PropTypes.node,
   hideLabel: PropTypes.bool,
   isDisabled: PropTypes.bool,
-  id: PropTypes.string
+  id: PropTypes.string,
+  FormGroupProps: PropTypes.object
 };
 
 export default Select;

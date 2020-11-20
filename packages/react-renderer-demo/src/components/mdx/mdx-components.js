@@ -46,7 +46,7 @@ export const Heading = ({ level, children, component }) => {
   const router = useRouter();
   const classes = useHeadingStyles();
   const id = headerToId(children);
-  const path = `${router.pathname}#${id}`;
+  const path = `${router.asPath}#${id}`;
   return (
     <div id={id} className={classes.offset} data-scroll="true">
       <Typography id={`heading-${id}`} className={classes.heading} variant={`h${level}`} component={component}>
@@ -57,6 +57,31 @@ export const Heading = ({ level, children, component }) => {
       </Typography>
     </div>
   );
+};
+
+const tableStyles = makeStyles((theme) => ({
+  table: {
+    [theme.breakpoints.down('sm')]: {
+      tableLayout: 'fixed'
+    }
+  },
+  cell: {
+    [theme.breakpoints.down('sm')]: {
+      overflow: 'overlay'
+    }
+  }
+}));
+
+const StyledCell = (props) => {
+  const { cell } = tableStyles();
+
+  return <TableCell {...props} className={cell} />;
+};
+
+const StyledTable = (props) => {
+  const { table } = tableStyles();
+
+  return <Table {...props} className={table} />;
 };
 
 const MdLink = ({ href, children }) => {
@@ -94,15 +119,15 @@ const MdxComponents = {
   ),
   table: ({ children }) => (
     <Paper style={{ marginBottom: 10, marginTop: 10 }} className="DocTable">
-      <Table>
+      <StyledTable>
         <TableHead>{children[0].props.children}</TableHead>
         <TableBody>{children[1].props.children}</TableBody>
-      </Table>
+      </StyledTable>
     </Paper>
   ),
   tr: ({ children }) => <TableRow>{children}</TableRow>,
-  td: ({ children }) => <TableCell>{children}</TableCell>,
-  th: ({ children }) => <TableCell>{children}</TableCell>,
+  td: ({ children }) => <StyledCell>{children}</StyledCell>,
+  th: ({ children }) => <StyledCell>{children}</StyledCell>,
   inlineCode: ({ children }) => (
     <code style={{ background: 'white', borderRadius: 3, fontFamily: 'courier, monospace', padding: '3px' }}>{children}</code>
   )

@@ -185,6 +185,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
           ButtonGroup={[Function]}
           Description={[Function]}
           FormWrapper={[Function]}
+          Header={Symbol(react.fragment)}
           Title={[Function]}
           disableSubmit={Array []}
           formFields={
@@ -270,7 +271,27 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                   key="Wizard"
                   name="Wizard"
                 >
-                  <FormConditionWrapper>
+                  <FormConditionWrapper
+                    field={
+                      Object {
+                        "component": "wizard",
+                        "fields": Array [
+                          Object {
+                            "fields": Array [],
+                            "name": 1,
+                            "nextStep": "step-2",
+                            "title": "Step 1",
+                          },
+                          Object {
+                            "fields": Array [],
+                            "name": "step-2",
+                            "title": "Step 2",
+                          },
+                        ],
+                        "name": "Wizard",
+                      }
+                    }
+                  >
                     <FormFieldHideWrapper
                       hideField={false}
                     >
@@ -362,6 +383,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                     "renderForm": [Function],
                                     "reset": [Function],
                                     "resetFieldState": [Function],
+                                    "restart": [Function],
                                     "resumeValidation": [Function],
                                     "setConfig": [Function],
                                     "shift": [Function],
@@ -455,6 +477,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                       "renderForm": [Function],
                                       "reset": [Function],
                                       "resetFieldState": [Function],
+                                      "restart": [Function],
                                       "resumeValidation": [Function],
                                       "setConfig": [Function],
                                       "shift": [Function],
@@ -489,13 +512,12 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                           color="secondary"
                                           onClick={[Function]}
                                           type="button"
-                                          variant="contained"
                                         >
                                           <Button
                                             active={false}
                                             block={false}
                                             bsClass="btn"
-                                            bsStyle="contained"
+                                            bsStyle="default"
                                             className="ddorg__pf3-component-mapper__wizard__buttons"
                                             color="secondary"
                                             disabled={false}
@@ -503,7 +525,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                             type="button"
                                           >
                                             <button
-                                              className="ddorg__pf3-component-mapper__wizard__buttons btn btn-contained"
+                                              className="ddorg__pf3-component-mapper__wizard__buttons btn btn-default"
                                               color="secondary"
                                               disabled={false}
                                               onClick={[Function]}
@@ -518,20 +540,19 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                           disabled={true}
                                           onClick={[Function]}
                                           type="button"
-                                          variant="contained"
                                         >
                                           <Button
                                             active={false}
                                             block={false}
                                             bsClass="btn"
-                                            bsStyle="contained"
+                                            bsStyle="default"
                                             className="margin-left-3"
                                             disabled={true}
                                             onClick={[Function]}
                                             type="button"
                                           >
                                             <button
-                                              className="margin-left-3 btn btn-contained"
+                                              className="margin-left-3 btn btn-default"
                                               disabled={true}
                                               onClick={[Function]}
                                               type="button"
@@ -592,6 +613,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                           renderForm={[Function]}
                                           reset={[Function]}
                                           resetFieldState={[Function]}
+                                          restart={[Function]}
                                           resumeValidation={[Function]}
                                           setConfig={[Function]}
                                           shift={[Function]}
@@ -875,6 +897,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
           ButtonGroup={[Function]}
           Description={[Function]}
           FormWrapper={[Function]}
+          Header={Symbol(react.fragment)}
           Title={[Function]}
           disableSubmit={Array []}
           formFields={
@@ -975,7 +998,32 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                   key="Wizard"
                   name="Wizard"
                 >
-                  <FormConditionWrapper>
+                  <FormConditionWrapper
+                    field={
+                      Object {
+                        "component": "wizard",
+                        "fields": Array [
+                          Object {
+                            "fields": Array [],
+                            "name": 1,
+                            "nextStep": Object {
+                              "stepMapper": Object {
+                                "step": "step-2",
+                              },
+                              "when": "step",
+                            },
+                            "title": "Step 1",
+                          },
+                          Object {
+                            "fields": Array [],
+                            "name": "step-2",
+                            "title": "Step 2",
+                          },
+                        ],
+                        "name": "Wizard",
+                      }
+                    }
+                  >
                     <FormFieldHideWrapper
                       hideField={false}
                     >
@@ -1077,6 +1125,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                     "renderForm": [Function],
                                     "reset": [Function],
                                     "resetFieldState": [Function],
+                                    "restart": [Function],
                                     "resumeValidation": [Function],
                                     "setConfig": [Function],
                                     "shift": [Function],
@@ -1177,6 +1226,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                       "renderForm": [Function],
                                       "reset": [Function],
                                       "resetFieldState": [Function],
+                                      "restart": [Function],
                                       "resumeValidation": [Function],
                                       "setConfig": [Function],
                                       "shift": [Function],
@@ -1218,13 +1268,12 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                           color="secondary"
                                           onClick={[Function]}
                                           type="button"
-                                          variant="contained"
                                         >
                                           <Button
                                             active={false}
                                             block={false}
                                             bsClass="btn"
-                                            bsStyle="contained"
+                                            bsStyle="default"
                                             className="ddorg__pf3-component-mapper__wizard__buttons"
                                             color="secondary"
                                             disabled={false}
@@ -1232,7 +1281,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                             type="button"
                                           >
                                             <button
-                                              className="ddorg__pf3-component-mapper__wizard__buttons btn btn-contained"
+                                              className="ddorg__pf3-component-mapper__wizard__buttons btn btn-default"
                                               color="secondary"
                                               disabled={false}
                                               onClick={[Function]}
@@ -1247,20 +1296,19 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                           disabled={true}
                                           onClick={[Function]}
                                           type="button"
-                                          variant="contained"
                                         >
                                           <Button
                                             active={false}
                                             block={false}
                                             bsClass="btn"
-                                            bsStyle="contained"
+                                            bsStyle="default"
                                             className="margin-left-3"
                                             disabled={true}
                                             onClick={[Function]}
                                             type="button"
                                           >
                                             <button
-                                              className="margin-left-3 btn btn-contained"
+                                              className="margin-left-3 btn btn-default"
                                               disabled={true}
                                               onClick={[Function]}
                                               type="button"
@@ -1328,6 +1376,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                           renderForm={[Function]}
                                           reset={[Function]}
                                           resetFieldState={[Function]}
+                                          restart={[Function]}
                                           resumeValidation={[Function]}
                                           setConfig={[Function]}
                                           shift={[Function]}
@@ -1378,6 +1427,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                             renderForm={[Function]}
                                             reset={[Function]}
                                             resetFieldState={[Function]}
+                                            restart={[Function]}
                                             resumeValidation={[Function]}
                                             setConfig={[Function]}
                                             shift={[Function]}
@@ -1682,6 +1732,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
           ButtonGroup={[Function]}
           Description={[Function]}
           FormWrapper={[Function]}
+          Header={Symbol(react.fragment)}
           Title={[Function]}
           disableSubmit={Array []}
           formFields={
@@ -1795,7 +1846,35 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                     ]
                   }
                 >
-                  <FormConditionWrapper>
+                  <FormConditionWrapper
+                    field={
+                      Object {
+                        "component": "wizard",
+                        "fields": Array [
+                          Object {
+                            "fields": Array [],
+                            "name": 1,
+                            "nextStep": "step-2",
+                            "title": "Step 1",
+                          },
+                          Object {
+                            "fields": Array [],
+                            "name": "step-2",
+                            "title": "Step 2",
+                          },
+                        ],
+                        "name": "Wizard",
+                        "stepsInfo": Array [
+                          Object {
+                            "title": "step1",
+                          },
+                          Object {
+                            "title": "step2",
+                          },
+                        ],
+                      }
+                    }
+                  >
                     <FormFieldHideWrapper
                       hideField={false}
                     >
@@ -2011,6 +2090,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                     "renderForm": [Function],
                                     "reset": [Function],
                                     "resetFieldState": [Function],
+                                    "restart": [Function],
                                     "resumeValidation": [Function],
                                     "setConfig": [Function],
                                     "shift": [Function],
@@ -2104,6 +2184,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                       "renderForm": [Function],
                                       "reset": [Function],
                                       "resetFieldState": [Function],
+                                      "restart": [Function],
                                       "resumeValidation": [Function],
                                       "setConfig": [Function],
                                       "shift": [Function],
@@ -2138,13 +2219,12 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                           color="secondary"
                                           onClick={[Function]}
                                           type="button"
-                                          variant="contained"
                                         >
                                           <Button
                                             active={false}
                                             block={false}
                                             bsClass="btn"
-                                            bsStyle="contained"
+                                            bsStyle="default"
                                             className="ddorg__pf3-component-mapper__wizard__buttons"
                                             color="secondary"
                                             disabled={false}
@@ -2152,7 +2232,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                             type="button"
                                           >
                                             <button
-                                              className="ddorg__pf3-component-mapper__wizard__buttons btn btn-contained"
+                                              className="ddorg__pf3-component-mapper__wizard__buttons btn btn-default"
                                               color="secondary"
                                               disabled={false}
                                               onClick={[Function]}
@@ -2167,20 +2247,19 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                           disabled={true}
                                           onClick={[Function]}
                                           type="button"
-                                          variant="contained"
                                         >
                                           <Button
                                             active={false}
                                             block={false}
                                             bsClass="btn"
-                                            bsStyle="contained"
+                                            bsStyle="default"
                                             className="margin-left-3"
                                             disabled={true}
                                             onClick={[Function]}
                                             type="button"
                                           >
                                             <button
-                                              className="margin-left-3 btn btn-contained"
+                                              className="margin-left-3 btn btn-default"
                                               disabled={true}
                                               onClick={[Function]}
                                               type="button"
@@ -2241,6 +2320,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                           renderForm={[Function]}
                                           reset={[Function]}
                                           resetFieldState={[Function]}
+                                          restart={[Function]}
                                           resumeValidation={[Function]}
                                           setConfig={[Function]}
                                           shift={[Function]}
@@ -2504,6 +2584,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
           ButtonGroup={[Function]}
           Description={[Function]}
           FormWrapper={[Function]}
+          Header={Symbol(react.fragment)}
           Title={[Function]}
           disableSubmit={Array []}
           formFields={
@@ -2592,7 +2673,28 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                   name="Wizard"
                   title="Wizard title"
                 >
-                  <FormConditionWrapper>
+                  <FormConditionWrapper
+                    field={
+                      Object {
+                        "component": "wizard",
+                        "fields": Array [
+                          Object {
+                            "fields": Array [],
+                            "name": 1,
+                            "nextStep": "step-2",
+                            "title": "Step 1",
+                          },
+                          Object {
+                            "fields": Array [],
+                            "name": "step-2",
+                            "title": "Step 2",
+                          },
+                        ],
+                        "name": "Wizard",
+                        "title": "Wizard title",
+                      }
+                    }
+                  >
                     <FormFieldHideWrapper
                       hideField={false}
                     >
@@ -2707,6 +2809,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                     "renderForm": [Function],
                                     "reset": [Function],
                                     "resetFieldState": [Function],
+                                    "restart": [Function],
                                     "resumeValidation": [Function],
                                     "setConfig": [Function],
                                     "shift": [Function],
@@ -2800,6 +2903,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                       "renderForm": [Function],
                                       "reset": [Function],
                                       "resetFieldState": [Function],
+                                      "restart": [Function],
                                       "resumeValidation": [Function],
                                       "setConfig": [Function],
                                       "shift": [Function],
@@ -2834,13 +2938,12 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                           color="secondary"
                                           onClick={[Function]}
                                           type="button"
-                                          variant="contained"
                                         >
                                           <Button
                                             active={false}
                                             block={false}
                                             bsClass="btn"
-                                            bsStyle="contained"
+                                            bsStyle="default"
                                             className="ddorg__pf3-component-mapper__wizard__buttons"
                                             color="secondary"
                                             disabled={false}
@@ -2848,7 +2951,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                             type="button"
                                           >
                                             <button
-                                              className="ddorg__pf3-component-mapper__wizard__buttons btn btn-contained"
+                                              className="ddorg__pf3-component-mapper__wizard__buttons btn btn-default"
                                               color="secondary"
                                               disabled={false}
                                               onClick={[Function]}
@@ -2863,20 +2966,19 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                           disabled={true}
                                           onClick={[Function]}
                                           type="button"
-                                          variant="contained"
                                         >
                                           <Button
                                             active={false}
                                             block={false}
                                             bsClass="btn"
-                                            bsStyle="contained"
+                                            bsStyle="default"
                                             className="margin-left-3"
                                             disabled={true}
                                             onClick={[Function]}
                                             type="button"
                                           >
                                             <button
-                                              className="margin-left-3 btn btn-contained"
+                                              className="margin-left-3 btn btn-default"
                                               disabled={true}
                                               onClick={[Function]}
                                               type="button"
@@ -2937,6 +3039,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                           renderForm={[Function]}
                                           reset={[Function]}
                                           resetFieldState={[Function]}
+                                          restart={[Function]}
                                           resumeValidation={[Function]}
                                           setConfig={[Function]}
                                           shift={[Function]}

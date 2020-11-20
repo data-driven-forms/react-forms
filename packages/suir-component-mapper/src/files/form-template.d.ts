@@ -1,14 +1,5 @@
-import { FormTemplateRenderProps } from "@data-driven-forms/react-form-renderer";
+import FormTemplateCommonProps from "@data-driven-forms/common/src/form-template";
 
-export interface FormTemplateProps extends FormTemplateRenderProps {
-  FormWrapper?: React.ComponentType;
-  Button?: React.ComponentType;
-  ButtonGroup?: React.ComponentType;
-  Title?: React.ComponentType;
-  Description?: React.ComponentType;
-  FormWrapperProps?: React.HTMLAttributes<HTMLFormElement>;
-}
-
-declare const FormTemplate: React.ComponentType<FormTemplateProps>;
+declare const FormTemplate: React.ComponentType<FormTemplateCommonProps>;
 
 export default FormTemplate;
