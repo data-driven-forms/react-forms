@@ -2283,4 +2283,26 @@ describe('managerApi', () => {
     expect(managerApi().getState().pristine).toEqual(true);
     expect(managerApi().getState().dirty).toEqual(false);
   });
+
+  describe('fileInput', () => {
+    const managerApi = createManagerApi({ onSubmit: jest.fn() });
+
+    expect(managerApi().fileInputs).toEqual([]);
+
+    managerApi().registerInputFile('name');
+
+    expect(managerApi().fileInputs).toEqual(['name']);
+
+    managerApi().registerInputFile('name');
+
+    expect(managerApi().fileInputs).toEqual(['name', 'name']);
+
+    managerApi().unregisterInputFile('name');
+
+    expect(managerApi().fileInputs).toEqual(['name']);
+
+    managerApi().unregisterInputFile('name');
+
+    expect(managerApi().fileInputs).toEqual([]);
+  });
 });

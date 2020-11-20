@@ -18,6 +18,13 @@ const sanitizeValue = (event: OnChangeEvent): any => {
       return event;
     }
 
+    if (event.target.type === 'file') {
+      return {
+        inputValue: event.target.value,
+        inputFiles: event.target.files
+      };
+    }
+
     return event?.target.type === 'checkbox' ? event.target.checked : event?.target.value;
   }
 
@@ -123,7 +130,15 @@ const useField = ({
     () => {
       formOptions().afterSilentRegistration({ name, internalId: id });
 
+      if (type === 'file') {
+        formOptions().registerInputFile(name);
+      }
+
       return () => {
+        if (type === 'file') {
+          formOptions().unregisterInputFile(name);
+        }
+
         unregisterField({ name, clearOnUnmount, internalId: id, value: finalClearedValue });
       };
     },
@@ -169,6 +184,10 @@ const useField = ({
 
   if (!valueToReturn && multiple) {
     valueToReturn = [];
+  }
+
+  if (type === 'file' && typeof valueToReturn === 'object') {
+    valueToReturn = valueToReturn.inputValue;
   }
 
   return {

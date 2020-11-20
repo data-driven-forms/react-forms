@@ -45,7 +45,8 @@ export type PauseValidation = () => void;
 export type ResumeValidation = () => void;
 export type SetConfig = (attribute: keyof CreateManagerApiConfig, value: any) => void;
 export type AfterSilentRegistration = (field: Omit<FieldConfig, 'render'>) => void;
-
+export type RegisterInputFile = (name: string) => void;
+export type UnregisterInputFile = (name: string) => void;
 export interface AsyncWatcherRecord {
   [key: number]: Promise<unknown>;
 }
@@ -116,7 +117,9 @@ export type ManagerApiFunctions =
   | 'pauseValidation'
   | 'resumeValidation'
   | 'setConfig'
-  | 'afterSilentRegistration';
+  | 'afterSilentRegistration'
+  | 'registerInputFile'
+  | 'unregisterInputFile';
 
 export interface ManagerState {
   values: AnyObject;
@@ -173,6 +176,9 @@ export interface ManagerState {
   validating: boolean;
   visited: AnyBooleanObject;
   destroyOnUnregister: boolean | undefined;
+  fileInputs: Array<any>;
+  registerInputFile: RegisterInputFile;
+  unregisterInputFile: UnregisterInputFile;
 }
 
 export type ManagerApi = () => ManagerState;
