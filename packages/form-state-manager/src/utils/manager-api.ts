@@ -254,6 +254,7 @@ const createManagerApi: CreateManagerApi = ({
   let silentRender: string[] = [];
   let runningValidators = 0;
   let flatSubmitErrors: AnyObject = {};
+  let flatErrors: AnyObject = {};
 
   function updateRunningValidators(increment: number): void {
     runningValidators = Math.max(runningValidators + increment, 0);
@@ -460,6 +461,7 @@ const createManagerApi: CreateManagerApi = ({
     if (isPromise(result)) {
       const asyncResult = result as Promise<FormLevelError>;
 
+      flatErrors = {};
       state.errors = {};
       state.hasValidationErrors = false;
       state.valid = true;
@@ -480,14 +482,20 @@ const createManagerApi: CreateManagerApi = ({
           state.valid = false;
           state.invalid = true;
 
+          flatErrors = flatObject(errors);
+          Object.keys(flatErrors).forEach((name) => {
+            handleFieldError(name, false, flatErrors[name]);
+          });
+
           render();
         });
     }
 
     const syncError = result as FormLevelError | undefined;
     if (syncError) {
-      Object.keys(syncError).forEach((name) => {
-        handleFieldError(name, false, syncError[name]);
+      flatErrors = flatObject(syncError);
+      Object.keys(flatErrors).forEach((name) => {
+        handleFieldError(name, false, flatErrors[name]);
       });
       state.errors = syncError;
       state.hasValidationErrors = true;
@@ -499,6 +507,7 @@ const createManagerApi: CreateManagerApi = ({
       state.valid = true;
       state.invalid = false;
       state.error = undefined;
+      flatErrors = {};
       /**
        * Fields have to be revalidated on field level to synchronize the form and field errors
        */
@@ -872,15 +881,17 @@ const createManagerApi: CreateManagerApi = ({
     const render = prepareRerender();
 
     if (error) {
-      state.errors[name] = error;
+      set(state.errors, name, error);
+      flatErrors[name] = error;
       state.valid = false;
       state.invalid = true;
       state.hasValidationErrors = true;
     } else {
-      delete state.errors[name];
+      set(state.errors, name, undefined);
+      delete flatErrors[name];
     }
 
-    if (Object.keys(state.errors).length === 0) {
+    if (Object.keys(flatErrors).length === 0) {
       state.valid = true;
       state.invalid = false;
       state.hasValidationErrors = false;

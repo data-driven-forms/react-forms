@@ -1105,6 +1105,42 @@ describe('managerApi', () => {
       expect(managerApi().hasValidationErrors).toEqual(true);
     });
 
+    it('should fail sync level validation and set field error', () => {
+      const render = jest.fn();
+      const managerApi = createManagerApi({ validate: () => ({ nested: { foo: 'some-very-evil-error' } }) });
+      const { registerField } = managerApi();
+
+      registerField({ name: 'nested.foo', render });
+
+      expect(managerApi().getState().errors).toEqual({ nested: { foo: 'some-very-evil-error' } });
+      expect(managerApi().getState().valid).toEqual(false);
+      expect(managerApi().getState().invalid).toEqual(true);
+      expect(managerApi().getState().validating).toEqual(false);
+      expect(managerApi().hasValidationErrors).toEqual(true);
+      expect(managerApi().getFieldState('nested.foo').meta.error).toEqual('some-very-evil-error');
+    });
+
+    it('should fail async level validation and set field error', (done) => {
+      const asyncValidateWithError = () => Promise.reject({ nested: { foo: 'some-very-evil-error' } });
+
+      const render = jest.fn();
+      const managerApi = createManagerApi({ validate: asyncValidateWithError });
+      const { registerField } = managerApi();
+
+      registerField({ name: 'nested.foo', render });
+
+      setImmediate(() => {
+        expect(managerApi().getState().valid).toEqual(false);
+        expect(managerApi().getState().invalid).toEqual(true);
+        expect(managerApi().getState().validating).toEqual(false);
+        expect(managerApi().hasValidationErrors).toEqual(true);
+        expect(managerApi().getState().errors).toEqual({ nested: { foo: 'some-very-evil-error' } });
+        expect(managerApi().getFieldState('nested.foo').meta.error).toEqual('some-very-evil-error');
+
+        done();
+      });
+    });
+
     it('should pass async level validation', () => {
       jest.useFakeTimers();
       const render = jest.fn();
