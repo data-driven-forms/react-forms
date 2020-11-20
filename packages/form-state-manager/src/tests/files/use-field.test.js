@@ -1366,4 +1366,72 @@ describe('useField', () => {
       expect(wrapper.find('select').props().value).toEqual(['hamsters']);
     });
   });
+
+  describe('fileInput', () => {
+    let Dummy;
+    let wrapper;
+
+    beforeEach(() => {
+      managerApi = createManagerApi({});
+
+      Dummy = (props) => {
+        const {
+          input: { value, ...rest }
+        } = useField(props);
+        return (
+          <React.Fragment>
+            <input {...rest} />
+            <span>{value}</span>
+          </React.Fragment>
+        );
+      };
+    });
+
+    it('register inputFile name and uregister', async () => {
+      expect(managerApi().fileInputs).toEqual([]);
+      wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <Dummy name="field" type="file" />
+        </FormManagerContext.Provider>
+      );
+      expect(managerApi().fileInputs).toEqual(['field']);
+
+      await act(async () => {
+        wrapper.unmount();
+      });
+      wrapper.update();
+
+      expect(managerApi().fileInputs).toEqual([]);
+    });
+
+    it('sanitize value', async () => {
+      wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+          <Dummy name="field" type="file" />
+        </FormManagerContext.Provider>
+      );
+
+      await act(async () => {
+        wrapper
+          .find('input')
+          .first()
+          .simulate('change', {
+            target: {
+              value: '/path/',
+              files: ['blabla'],
+              type: 'file'
+            }
+          });
+      });
+      wrapper.update();
+
+      expect(managerApi().getState().values).toEqual({
+        field: {
+          inputFiles: ['blabla'],
+          inputValue: '/path/'
+        }
+      });
+      expect(wrapper.find('span').text()).toEqual('/path/');
+    });
+  });
 });

@@ -182,7 +182,8 @@ export const initialFormState = (initialValues: AnyObject = {}): Omit<ManagerSta
   touched: {},
   valid: true,
   validating: false,
-  visited: {}
+  visited: {},
+  fileInputs: []
 });
 
 const createManagerApi: CreateManagerApi = ({
@@ -238,6 +239,8 @@ const createManagerApi: CreateManagerApi = ({
     setConfig,
     afterSilentRegistration,
     destroyOnUnregister,
+    registerInputFile,
+    unregisterInputFile,
     ...initialFormState(initialValues)
   };
   let inBatch = 0;
@@ -990,6 +993,14 @@ const createManagerApi: CreateManagerApi = ({
 
       render();
     });
+  }
+
+  function registerInputFile(name: string): void {
+    state.fileInputs.push(name);
+  }
+
+  function unregisterInputFile(name: string): void {
+    state.fileInputs.splice(state.fileInputs.indexOf(name), 1);
   }
 
   return managerApi;
