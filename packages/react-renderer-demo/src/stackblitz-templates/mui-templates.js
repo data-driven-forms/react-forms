@@ -1,4 +1,4 @@
-export const muiHtml = `
+export const html = `
 <html>
   <head>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
@@ -9,7 +9,7 @@ export const muiHtml = `
 </html>
 `;
 
-export const muiCode = `import React, { Component } from 'react';
+export const code = `import React, { Component } from 'react';
 import { render } from 'react-dom';
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import FormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
@@ -34,7 +34,7 @@ class App extends Component {
 
 render(<App />, document.getElementById('root'));`;
 
-export const muiWizardCode = `import React, { Component } from 'react';
+export const wizardCode = `import React, { Component } from 'react';
 import { render } from 'react-dom';
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import MuiFormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
@@ -61,9 +61,10 @@ class App extends Component {
 
 render(<App />, document.getElementById('root'));`;
 
-export const muiDependencies = {
+export const dependencies = {
   react: '^16.12.0',
   'react-dom': '^16.12.0',
+  '@babel/runtime': '^7.12.1',
   '@data-driven-forms/react-form-renderer': 'latest',
   '@data-driven-forms/mui-component-mapper': 'latest',
   '@material-ui/core': 'latest',

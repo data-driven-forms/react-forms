@@ -17,7 +17,7 @@ describe('<TimePicker />', () => {
   /**
    * timezones are pain and i don't want to deal with it
    */
-  it.skip('should render correcntly', () => {
+  it('should render correcntly', () => {
     const wrapper = mount(<TimePicker {...initialProps} />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });

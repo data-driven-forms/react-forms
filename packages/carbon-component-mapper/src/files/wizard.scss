@@ -1,0 +1,15 @@
+.ddorg__carbon-wizard-navigation-horizontal {
+    margin-bottom: 48px;
+}
+
+.ddorg__carbon-wizard-button-set {
+    margin-top: 48px;
+    flex-direction: row-reverse;
+    display: flex;
+}
+
+.ddorg__carbon-wizard-body {
+    >:not(:last-child) {
+        margin-bottom: 32px;
+    }
+}

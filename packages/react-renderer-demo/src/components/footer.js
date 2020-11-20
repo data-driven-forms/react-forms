@@ -7,7 +7,6 @@ import Link from '@material-ui/core/Link';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Paper from '@material-ui/core/Paper';
 import SvgIcon from '@material-ui/core/SvgIcon';
@@ -22,19 +21,20 @@ import DiscordIcon from './common/discord-svg-icon';
 
 const useRepoLinkStyles = makeStyles(() => ({
   listLink: {
-    paddingLeft: 0,
-    paddingRight: 0,
-    fontWeight: 'inherit'
+    display: 'flex',
+    alignContent: 'center'
   }
 }));
 
-const RepoLink = ({ href, label }) => {
+const RepoLink = ({ href, icon, label }) => {
   const classes = useRepoLinkStyles();
   return (
     <ListItem>
       <ListItemText
         primary={
           <Link href={href} target="_blank" rel="noopener noreferrer" className={classes.listLink} color="inherit">
+            <SvgIcon>{icon}</SvgIcon>
+            &nbsp;
             {label}
           </Link>
         }
@@ -105,47 +105,37 @@ const Footer = ({ open }) => {
           </Grid>
           <Grid xs={12} md={8} item>
             <Paper elevation={0} className={clsx(classes.foooterCard, classes.foooterRight)}>
-              <List
-                subheader={
-                  <ListSubheader className={classes.listHeader}>
-                    Link to &nbsp;{' '}
-                    <SvgIcon>
-                      <GhIcon />
-                    </SvgIcon>
-                  </ListSubheader>
-                }
-              >
-                <RepoLink href="https://github.com/data-driven-forms/react-forms" label="React forms" />
-                <ListSubheader className={classes.listHeader}>
-                  Link to &nbsp;{' '}
-                  <SvgIcon>
-                    <DiscordIcon />
-                  </SvgIcon>
-                </ListSubheader>
-                <RepoLink href="https://discord.gg/6sBw6WM" label="Discord server" />
-                <ListSubheader className={classes.listHeader}>
-                  Link to &nbsp;{' '}
-                  <SvgIcon>
-                    <TwitterIcon />
-                  </SvgIcon>
-                </ListSubheader>
-                <RepoLink href="https://twitter.com/DataDrivenForms" label="@DataDrivenForms" />
+              <List>
+                <RepoLink href="https://github.com/data-driven-forms/react-forms" icon=<GhIcon /> label="React forms" />
+                <RepoLink href="https://discord.gg/6sBw6WM" icon=<DiscordIcon /> label="Discord server" />
+                <RepoLink href="https://twitter.com/DataDrivenForms" icon=<TwitterIcon /> label="@DataDrivenForms" />
               </List>
-              <List
-                subheader={
-                  <ListSubheader className={classes.listHeader}>
-                    Links to &nbsp;{' '}
-                    <SvgIcon>
-                      <NpmSvgIcon />
-                    </SvgIcon>
-                  </ListSubheader>
-                }
-              >
-                <RepoLink href="https://www.npmjs.com/package/@data-driven-forms/react-form-renderer" label="React form renderer" />
-                <RepoLink href="https://www.npmjs.com/package/@data-driven-forms/pf4-component-mapper" label="PF4 component mapper" />
-                <RepoLink href="https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper" label="PF3 component mapper" />
-                <RepoLink href="https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper" label="MUI component mapper" />
-                <RepoLink href="https://www.npmjs.com/package/@data-driven-forms/blueprint-component-mapper" label="Blueprint component mapper" />
+              <List>
+                <RepoLink
+                  href="https://www.npmjs.com/package/@data-driven-forms/react-form-renderer"
+                  icon=<NpmSvgIcon />
+                  label="React form renderer"
+                />
+                <RepoLink
+                  href="https://www.npmjs.com/package/@data-driven-forms/pf4-component-mapper"
+                  icon=<NpmSvgIcon />
+                  label="PF4 component mapper"
+                />
+                <RepoLink
+                  href="https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper"
+                  icon=<NpmSvgIcon />
+                  label="PF3 component mapper"
+                />
+                <RepoLink
+                  href="https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper"
+                  icon=<NpmSvgIcon />
+                  label="MUI component mapper"
+                />
+                <RepoLink
+                  href="https://www.npmjs.com/package/@data-driven-forms/blueprint-component-mapper"
+                  icon=<NpmSvgIcon />
+                  label="Blueprint component mapper"
+                />
               </List>
             </Paper>
           </Grid>

@@ -4,6 +4,7 @@ import { DataType } from "./data-types";
 import { AnyObject } from "./common";
 import { FieldMetaState, FieldInputProps } from "react-final-form";
 import { FormOptions } from "./renderer-context";
+import { Meta } from "./use-field-api";
 
 export type FieldAction = [string, ...any[]];
 
@@ -12,7 +13,7 @@ export interface FieldActions {
 }
 
 export interface FieldApi<FieldValue, T extends HTMLElement = HTMLElement> {
-  meta: FieldMetaState<FieldValue>;
+  meta: Meta<FieldValue>;
   input: FieldInputProps<FieldValue, T>;
 }
 

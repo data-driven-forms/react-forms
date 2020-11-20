@@ -9,6 +9,7 @@ Data Driven Forms is built in three module formats: CJS, ESM and UMD.
 ## CJS
 
 ```jsx
+--- { "switchable": false } ---
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import useField from '@data-driven-forms/react-form-renderer/dist/cjs/use-field';
 ```
@@ -16,6 +17,7 @@ import useField from '@data-driven-forms/react-form-renderer/dist/cjs/use-field'
 ## ESM
 
 ```jsx
+--- { "switchable": false } ---
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/esm/form-renderer';
 import useField from '@data-driven-forms/react-form-renderer/dist/esm/use-field';
 ```
@@ -39,9 +41,7 @@ Only the `FormRenderer` component is exported as a default. In all other package
 
 **Do not mix** different module formats (for example `Renderer` imported from UMD and `componentMapper` from CJS), otherwise you will encounter this error:
 
-```jsx
-useField must be used inside of a <Form> component
-```
+`useField must be used inside of a <Form> component`
 
 ## Transforming imports in Babel
 

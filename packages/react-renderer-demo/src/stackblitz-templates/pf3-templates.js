@@ -1,4 +1,4 @@
-export const pf3Html = `
+export const html = `
 <html>
   <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.59.5/css/patternfly.min.css" integrity="sha256-rLJV3jlFRU38RbS+z4Ee+xgtP71nt4Tg+d1OTGmnJkw=" crossorigin="anonymous" />
@@ -10,7 +10,7 @@ export const pf3Html = `
 </html>
 `;
 
-export const pf3Code = `import React, { Component } from 'react';
+export const code = `import React, { Component } from 'react';
 import { render } from 'react-dom';
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import FormTemplate from '@data-driven-forms/pf3-component-mapper/dist/cjs/form-template';
@@ -37,7 +37,7 @@ class App extends Component {
 
 render(<App />, document.getElementById('root'));`;
 
-export const pf3WizardCode = `import React, { Component } from 'react';
+export const wizardCode = `import React, { Component } from 'react';
 import { render } from 'react-dom';
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import Pf3FormTemplate from '@data-driven-forms/pf3-component-mapper/dist/cjs/form-template';
@@ -64,9 +64,11 @@ class App extends Component {
 
 render(<App />, document.getElementById('root'));`;
 
-export const pf3Dependencies = {
+export const dependencies = {
   react: '^16.12.0',
   'react-dom': '^16.12.0',
+  '@babel/runtime': '7.12.1',
+  '@babel/runtime-corejs2': '7.12.1',
   '@data-driven-forms/react-form-renderer': 'latest',
   '@data-driven-forms/pf3-component-mapper': 'latest',
   'patternfly-react': '2.39.7',

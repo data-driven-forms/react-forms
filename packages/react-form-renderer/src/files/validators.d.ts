@@ -9,6 +9,7 @@ export interface ValidatorConfiguration extends AnyObject {
   type: string;
   message?: string;
   msg?: string;
+  warning?: boolean;
 }
 
 export type Validator = ValidatorConfiguration | ValidatorFunction;

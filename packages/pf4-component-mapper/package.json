@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/pf4-component-mapper",
-  "version": "2.8.2",
+  "version": "2.17.0",
   "description": "Starter pf4-component-mapper for data-driven-forms.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -30,8 +30,8 @@
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
-    "@patternfly/react-core": "^4.18.5",
-    "@patternfly/react-icons": "^4.3.5",
+    "@patternfly/react-core": "^4.75.2",
+    "@patternfly/react-icons": "^4.7.16",
     "@semantic-release/git": "^7.0.5",
     "@semantic-release/npm": "^5.1.1",
     "babel-core": "^7.0.0-bridge.0",
@@ -64,7 +64,7 @@
     "rollup-plugin-terser": "^5.1.2",
     "rollup-pluginutils": "^2.8.2",
     "sass-loader": "^7.1.0",
-    "semantic-release": "^16.0.4",
+    "semantic-release": "^17.2.3",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
     "webpack": "^4.25.1",
@@ -73,9 +73,9 @@
     "webpack-merge": "^4.1.4"
   },
   "peerDependencies": {
-    "@data-driven-forms/react-form-renderer": "^2.4.6",
-    "@patternfly/react-core": "^4.18.5",
-    "@patternfly/react-icons": "^4.3.5"
+    "@data-driven-forms/react-form-renderer": ">=2.4.6",
+    "@patternfly/react-core": "^4.75.2",
+    "@patternfly/react-icons": "^4.7.16"
   },
   "dependencies": {
     "prop-types": "^15.7.2",

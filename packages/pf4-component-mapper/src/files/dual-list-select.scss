@@ -25,3 +25,21 @@
     background-color: var(--pf-global--active-color--400);
     color: white
 }
+
+@media only screen and (max-width: 768px) {
+    .ddorg__pf4-component-mapper__dual-list-select-buttons {
+        padding-top: var(--pf-global--gutter--md);
+        svg {
+          -webkit-transform: rotate(90deg);
+          -moz-transform: rotate(90deg);
+          -ms-transform: rotate(90deg);
+          -o-transform: rotate(90deg);
+          transform: rotate(90deg);
+          display: inline-block;
+        }
+    }
+}
+
+.ddorg__pf4-component-mapper__dual-list-select-toolbar__item-grow {
+    flex-grow: 1;
+}

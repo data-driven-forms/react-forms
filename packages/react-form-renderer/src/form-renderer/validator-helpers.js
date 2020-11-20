@@ -2,8 +2,22 @@ import { memoize } from '../validators/helpers';
 import { dataTypeValidator } from '../validators';
 import composeValidators from '../files/compose-validators';
 
-export const prepareValidator = (validator, mapper) =>
-  typeof validator === 'function' ? memoize(validator) : mapper[validator.type]({ ...validator });
+export const convertToWarning = (validator) => (...args) => ({
+  type: 'warning',
+  error: validator(...args)
+});
+
+export const prepareValidator = (validator, mapper) => {
+  if (typeof validator === 'function') {
+    return memoize(validator);
+  }
+
+  if (validator.warning) {
+    return convertToWarning(mapper[validator.type]({ ...validator }));
+  }
+
+  return mapper[validator.type]({ ...validator });
+};
 
 export const getValidate = (validate, dataType, mapper = {}) => [
   ...(validate ? validate.map((validator) => prepareValidator(validator, mapper)) : []),

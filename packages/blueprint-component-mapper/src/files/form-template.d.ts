@@ -1,10 +1,8 @@
+import FormTemplateCommonProps from "@data-driven-forms/common/src/form-template";
 import { ReactNode } from "react";
 
-export interface FormTemplateProps {
+export interface FormTemplateProps extends FormTemplateCommonProps {
   requiredLabelInfo?: ReactNode;
-  formWrapperProps?: React.HTMLProps<HTMLFormElement>;
-  showFormControls?: boolean;
-  disableSubmit: string[];
 }
 
 declare const FormTemplate: React.ComponentType<FormTemplateProps>;

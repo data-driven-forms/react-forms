@@ -43,10 +43,6 @@ const schema = {
   ]
 };
 
-const LenghtValidators = () => (
-  <div>
-    <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
-  </div>
-);
+const LengthValidators = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
 
-export default LenghtValidators;
+export default LengthValidators;

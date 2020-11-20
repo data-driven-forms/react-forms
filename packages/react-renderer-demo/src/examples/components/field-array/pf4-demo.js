@@ -12,7 +12,7 @@ const componentMapper = {
 };
 
 const schema = {
-  title: 'PF4 FieldArray',
+  title: 'MUI FieldArray',
   fields: [
     {
       component: componentTypes.FIELD_ARRAY,
@@ -94,7 +94,7 @@ const initialValues = {
 
 const onSubmit = (values) => console.log(values);
 
-const PF4FieldArray = () => {
+const MUIFieldArray = () => {
   const [values, setValues] = useState(undefined);
 
   return (
@@ -115,4 +115,4 @@ const PF4FieldArray = () => {
   );
 };
 
-export default PF4FieldArray;
+export default MUIFieldArray;

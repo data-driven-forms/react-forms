@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormCheckbox } from 'semantic-ui-react';
 
 import FormFieldGrid from '../common/form-field-grid';
-import { validationError } from '../common/helpers';
+import { validationError, validationWarning } from '../common/helpers';
 import MultipleChoiceList from '../common/multiple-choice-list';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
@@ -28,7 +28,7 @@ export const SingleCheckbox = (props) => {
   const invalid = validationError(meta, validateOnMount);
 
   return (
-    <FormFieldGrid helperText={helperText} HelperTextProps={HelperTextProps} {...FormFieldGridProps}>
+    <FormFieldGrid helperText={validationWarning(meta, validateOnMount) || helperText} HelperTextProps={HelperTextProps} {...FormFieldGridProps}>
       <FormCheckbox
         {...input}
         required={isRequired}

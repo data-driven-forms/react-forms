@@ -24,6 +24,23 @@ const loadOptions = () => new Promise((res) => {
 const selectSchema = {
   fields: [{
     component: 'select',
+    name: 'falsey-values',
+    label: 'Falsey values',
+    options: [{
+      label: 'Zero',
+      value: 0
+    }, {
+      label: 'Minus one',
+      value: -1
+    }, {
+      label: 'Empty',
+      value: 'empty'
+    }, {
+      label: 'Null',
+      value: null
+    }]
+  }, {
+    component: 'select',
     name: 'async-single',
     label: 'Async single',
     isMulti: true,

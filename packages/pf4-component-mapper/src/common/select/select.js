@@ -63,7 +63,12 @@ const itemToString = (value, isMulti, showMore, handleShowMore, handleChange) =>
   return value;
 };
 
-const filterOptions = (options, filterValue = '') => options.filter(({ label }) => label.toLowerCase().includes(filterValue.toLowerCase()));
+// TODO fix the value of internal select not to be an array all the time. It forces the filter value to be an array and it crashes sometimes.
+const filterOptions = (options, filterValue = '') =>
+  options.filter(({ label }) => {
+    const filter = Array.isArray(filterValue) && filterValue.length > 0 ? filterValue[0] : filterValue;
+    return label.toLowerCase().includes(filter.toLowerCase());
+  });
 
 const getValue = (isMulti, option, value) => {
   if (!isMulti || !option) {
@@ -76,6 +81,13 @@ const getValue = (isMulti, option, value) => {
 
 const stateReducer = (state, changes, isMulti) => {
   switch (changes.type) {
+    case Downshift.stateChangeTypes.clickButton:
+      return {
+        ...state,
+        ...changes,
+        highlightedIndex: undefined, // reset the item focus to prevent initial scroll and portal menu warping
+        inputValue: undefined
+      };
     case Downshift.stateChangeTypes.keyDownEnter:
     case Downshift.stateChangeTypes.clickItem:
       return {
@@ -100,6 +112,14 @@ const stateReducer = (state, changes, isMulti) => {
         return {
           ...changes,
           inputValue: changes.inputValue[0]
+        };
+      }
+
+      if (state.isOpen === true && changes.isOpen === false && changes.inputValue) {
+        return {
+          ...state,
+          ...changes,
+          inputValue: ''
         };
       }
 
@@ -144,8 +164,11 @@ const InternalSelect = ({
       itemToString={(value) => itemToString(value, isMulti, showMore, handleShowMore, handleChange)}
       selectedItem={value || ''}
       stateReducer={(state, changes) => stateReducer(state, changes, isMulti)}
-      onInputValueChange={(inputValue) => {
-        if (onInputChange && typeof inputValue === 'string') {
+      onInputValueChange={(inputValue, { selectedItem }) => {
+        /**
+         * Prevent firing te load options callback when selecting value not filtering
+         */
+        if (onInputChange && typeof inputValue === 'string' && selectedItem?.label !== inputValue) {
           onInputChange(inputValue);
         }
       }}

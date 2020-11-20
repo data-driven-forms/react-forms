@@ -11,7 +11,8 @@ export const docsLinks = {
   pf3: 'https://patternfly-react-pf3.surge.sh/?path=/story/*',
   blueprint: 'https://blueprintjs.com/docs/',
   suir: 'https://react.semantic-ui.com/',
-  ant: 'https://ant.design/components/'
+  ant: 'https://ant.design/components/',
+  carbon: 'https://react.carbondesignsystem.com/?path=/story/'
 };
 
 const mapperLinks = {
@@ -62,37 +63,36 @@ const mapperLinks = {
     [componentTypes.BUTTON]: 'button',
     [componentTypes.DUAL_LIST_SELECT]: 'transfer',
     [componentTypes.SLIDER]: 'slider'
+  },
+  carbon: {
+    [componentTypes.TEXT_FIELD]: 'textinput',
+    [componentTypes.CHECKBOX]: 'checkbox',
+    [componentTypes.SUB_FORM]: '',
+    [componentTypes.RADIO]: 'radiobutton',
+    [componentTypes.TABS]: 'tabs',
+    [componentTypes.DATE_PICKER]: 'datepicker',
+    [componentTypes.TIME_PICKER]: 'timepicker',
+    [componentTypes.WIZARD]: 'progressindicator',
+    [componentTypes.SWITCH]: 'toggle',
+    [componentTypes.TEXTAREA]: 'textarea',
+    [componentTypes.SELECT]: 'select',
+    [componentTypes.PLAIN_TEXT]: '',
+    [componentTypes.BUTTON]: 'button',
+    [componentTypes.DUAL_LIST_SELECT]: 'transfer',
+    [componentTypes.SLIDER]: 'slider'
   }
 };
 
 const mapper = (activeMapper, component) => (mapperLinks[activeMapper] && mapperLinks[activeMapper][component]) || component;
 
 const GenericMuiComponent = ({ activeMapper = 'mui', component }) => (
-  <React.Fragment>
-    <Typography variant="body1" gutterBottom>
-      This component also accepts all other original props, please see{' '}
-      <a
-        target="__blank"
-        rel="noreferrer noopener"
-        href={`${docsLinks[activeMapper]}${activeMapper !== 'pf3' ? mapper(activeMapper, component) : ''}`}
-      >
-        here
-      </a>
-      !
-    </Typography>
-
-    {activeMapper === 'mui'
-      ? (component === 'date-picker' || component === 'time-picker') && (
-          <Typography variant="body1">
-            This component also use API from material-ui-pickers, please see{' '}
-            <a target="__blank" rel="noreferrer noopener" href={`https://material-ui-pickers.firebaseapp.com/api/${component.replace('-', '')}`}>
-              here
-            </a>
-            !
-          </Typography>
-        )
-      : ''}
-  </React.Fragment>
+  <Typography variant="body1" gutterBottom>
+    This component also accepts all other original props, please see{' '}
+    <a target="__blank" rel="noreferrer noopener" href={`${docsLinks[activeMapper]}${activeMapper !== 'pf3' ? mapper(activeMapper, component) : ''}`}>
+      here
+    </a>
+    !
+  </Typography>
 );
 
 GenericMuiComponent.propTypes = {

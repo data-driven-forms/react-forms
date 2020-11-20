@@ -9,6 +9,7 @@ import * as enterHandle from '@data-driven-forms/common/src/wizard/enter-handler
 
 import { componentMapper, FormTemplate } from '../../index';
 import reducer from '../../files/wizard/reducer';
+import WizardToggle from '../../files/wizard/wizard-toggle';
 
 describe('<Wizard />', () => {
   let initialProps;
@@ -23,14 +24,17 @@ describe('<Wizard />', () => {
 
   const nextButtonClick = (wrapper) => {
     wrapper
+      .find('.pf-c-wizard__footer')
       .find('button')
       .at(0)
       .simulate('click');
+
     wrapper.update();
   };
 
   const backButtonClick = (wrapper) => {
     wrapper
+      .find('.pf-c-wizard__footer')
       .find('button')
       .at(1)
       .simulate('click');
@@ -39,6 +43,7 @@ describe('<Wizard />', () => {
 
   const cancelButtonClick = (wrapper) => {
     wrapper
+      .find('.pf-c-wizard__footer')
       .find('button')
       .at(2)
       .simulate('click');
@@ -183,6 +188,19 @@ describe('<Wizard />', () => {
     wrapper.unmount();
     wrapper.update();
     expect(toJSon(wrapper)).toMatchSnapshot();
+  });
+
+  it('should open nav', async () => {
+    const wrapper = mount(<FormRenderer {...initialProps} />);
+
+    expect(wrapper.find(WizardToggle).props().isOpen).toEqual(false);
+
+    await act(async () => {
+      wrapper.find('.pf-c-wizard__toggle').simulate('click');
+    });
+    wrapper.update();
+
+    expect(wrapper.find(WizardToggle).props().isOpen).toEqual(true);
   });
 
   it('should call enter handler when pressing enter', () => {
@@ -800,7 +818,8 @@ describe('<Wizard />', () => {
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(3);
   });
 
-  it('should disabled button when validating', (done) => {
+  it('should disabled button when validating', async () => {
+    jest.useFakeTimers();
     const asyncValidator = () => new Promise((res) => setTimeout(() => res(), 100));
 
     schema = {
@@ -836,7 +855,12 @@ describe('<Wizard />', () => {
       ]
     };
 
-    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    let wrapper;
+
+    await act(async () => {
+      wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    });
+    wrapper.update();
 
     expect(
       wrapper
@@ -845,19 +869,22 @@ describe('<Wizard />', () => {
         .props().isDisabled
     ).toEqual(true);
 
-    setTimeout(() => {
-      wrapper.update();
-      expect(
-        wrapper
-          .find(Button)
-          .first()
-          .props().isDisabled
-      ).toEqual(false);
-      done();
-    }, 100);
+    await act(async () => {
+      jest.runAllTimers();
+    });
+    wrapper.update();
+
+    expect(
+      wrapper
+        .find(Button)
+        .first()
+        .props().isDisabled
+    ).toEqual(false);
+
+    jest.useRealTimers();
   });
 
-  it.skip('should disabled navigation when validating - this fails locally, not on CI', async () => {
+  it('should disabled navigation when validating - this fails locally, not on CI', async () => {
     jest.useFakeTimers();
 
     const asyncValidator = jest.fn().mockImplementation(() => new Promise((res) => setTimeout(() => res(), 50)));
@@ -916,7 +943,7 @@ describe('<Wizard />', () => {
         .last()
         .childAt(0)
         .prop('aria-disabled')
-    ).toEqual(false);
+    ).toEqual(null);
 
     await act(async () => {
       wrapper
@@ -956,7 +983,7 @@ describe('<Wizard />', () => {
         .last()
         .childAt(0)
         .prop('aria-disabled')
-    ).toEqual(false);
+    ).toEqual(null);
 
     jest.useRealTimers();
   });
@@ -1076,7 +1103,7 @@ describe('<Wizard />', () => {
         .last()
         .childAt(0)
         .prop('aria-disabled')
-    ).toEqual(false);
+    ).toEqual(null);
 
     backButtonClick(wrapper);
 
@@ -1147,7 +1174,7 @@ describe('<Wizard />', () => {
         .last()
         .childAt(0)
         .prop('aria-disabled')
-    ).toEqual(false);
+    ).toEqual(null);
   });
 
   describe('predicting steps', () => {
@@ -1836,6 +1863,16 @@ describe('<Wizard />', () => {
     it('returns default', () => {
       const initialState = { aa: 'aa' };
       expect(reducer(initialState, { type: 'nonsense' })).toEqual(initialState);
+    });
+
+    it('closes nav', () => {
+      const initialState = { openNav: true };
+      expect(reducer(initialState, { type: 'closeNav' })).toEqual({ openNav: false });
+    });
+
+    it('returns default', () => {
+      const initialState = { openNav: false };
+      expect(reducer(initialState, { type: 'openNav' })).toEqual({ openNav: true });
     });
   });
 });

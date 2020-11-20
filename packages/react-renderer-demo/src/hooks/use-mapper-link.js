@@ -1,4 +1,5 @@
 import useQueryParam from './use-query-param';
+import { query } from '../components/navigation/find-connected-links';
 
 /**
  * Appends current query mapper value to URL
@@ -6,7 +7,7 @@ import useQueryParam from './use-query-param';
  */
 const useMapperLink = (link = '') => {
   const mapperQuery = useQueryParam('mapper');
-  return link.includes('component-example/') ? `${link}${mapperQuery}` : link;
+  return link.match(query) && mapperQuery ? `${link.replace(query, '')}${mapperQuery}` : link;
 };
 
 export default useMapperLink;

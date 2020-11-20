@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/common",
-  "version": "2.8.2",
+  "version": "2.17.0",
   "description": "Common components, helpers and other pieces of code",
   "license": "Apache-2.0",
   "main": "index.js",
@@ -29,7 +29,7 @@
     "regenerator-runtime": "^0.12.1",
     "resolve-url-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
-    "semantic-release": "^16.0.4",
+    "semantic-release": "^17.2.3",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
     "webpack": "^4.25.1",

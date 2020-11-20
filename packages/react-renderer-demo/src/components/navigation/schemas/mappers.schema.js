@@ -36,6 +36,10 @@ const mappersSchema = [
     linkText: 'Blueprint mapper'
   },
   {
+    link: 'carbon-component-mapper',
+    linkText: 'Carbon mapper'
+  },
+  {
     link: 'mui-component-mapper',
     linkText: 'Material UI mapper'
   },

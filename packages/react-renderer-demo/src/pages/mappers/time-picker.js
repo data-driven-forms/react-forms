@@ -1,7 +1,5 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ComponentText from '@docs/components/component-example-text';
-import TimePickerText from '@docs/doc-components/time-picker';
-import useActiveMapper from '@docs/hooks/use-active-mapper';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 import baseFieldProps from '../../helpers/base-field-props';
 
@@ -16,19 +14,4 @@ const schema = {
 };
 const variants = [...baseFieldProps];
 
-export default () => {
-  const activeMapper = useActiveMapper();
-  return (
-    <Fragment>
-      <ComponentText
-        activeMapper={activeMapper}
-        component={componentTypes.TIME_PICKER}
-        schema={schema}
-        ContentText={TimePickerText}
-        variants={variants}
-        linkText="Time picker"
-      />
-      {activeMapper === 'mui' && <TimePickerText />}
-    </Fragment>
-  );
-};
+export default () => <ComponentText schema={schema} variants={variants} linkText="Time picker" />;

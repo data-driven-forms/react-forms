@@ -1,4 +1,4 @@
-export const suirHtml = `
+export const html = `
 <html>
   <head>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
@@ -9,7 +9,7 @@ export const suirHtml = `
 </html>
 `;
 
-export const suirCode = `import React, { Component } from 'react';
+export const code = `import React, { Component } from 'react';
 import { render } from 'react-dom';
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import FormTemplate from '@data-driven-forms/suir-component-mapper/dist/cjs/form-template';
@@ -34,7 +34,7 @@ class App extends Component {
 
 render(<App />, document.getElementById('root'));`;
 
-export const suirWizardCode = `import React, { Component } from 'react';
+export const wizardCode = `import React, { Component } from 'react';
 import { render } from 'react-dom';
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import SuirFormTemplate from '@data-driven-forms/suir-component-mapper/dist/cjs/form-template';
@@ -61,9 +61,10 @@ class App extends Component {
 
 render(<App />, document.getElementById('root'));`;
 
-export const suirDependencies = {
+export const dependencies = {
   react: '^16.12.0',
   'react-dom': '^16.12.0',
+  '@babel/runtime': '7.12.1',
   '@data-driven-forms/react-form-renderer': 'latest',
   '@data-driven-forms/suir-component-mapper': 'latest',
   'semantic-ui-react': 'latest',

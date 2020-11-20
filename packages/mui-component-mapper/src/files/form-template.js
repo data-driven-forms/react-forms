@@ -15,10 +15,10 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Form = ({ children, ...props }) => (
-  <Grid item xs={12}>
+const Form = ({ children, GridContainerProps, GridProps, ...props }) => (
+  <Grid item xs={12} {...GridProps}>
     <form noValidate {...props}>
-      <Grid container item spacing={2} xs={12}>
+      <Grid container item spacing={2} xs={12} {...GridContainerProps}>
         {children}
       </Grid>
     </form>
@@ -26,44 +26,51 @@ const Form = ({ children, ...props }) => (
 );
 
 Form.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  GridProps: PropTypes.object,
+  GridContainerProps: PropTypes.object
 };
 
-const Description = ({ children }) => (
-  <Grid item xs={12}>
-    <Typography variant="body1" gutterBottom>
+const Description = ({ children, GridProps, ...props }) => (
+  <Grid item xs={12} {...GridProps}>
+    <Typography variant="body1" gutterBottom {...props}>
       {children}
     </Typography>
   </Grid>
 );
 
 Description.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  GridProps: PropTypes.object
 };
 
-const Title = ({ children }) => (
-  <Grid item xs={12}>
-    <Typography variant="h3" gutterBottom>
+const Title = ({ children, GridProps, ...props }) => (
+  <Grid item xs={12} {...GridProps}>
+    <Typography variant="h3" gutterBottom {...props}>
       {children}
     </Typography>
   </Grid>
 );
 
 Title.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  GridProps: PropTypes.object
 };
 
-const ButtonGroup = ({ children }) => {
+const ButtonGroup = ({ children, GridProps, ...props }) => {
   const classes = useStyles();
   return (
-    <Grid item xs={12}>
-      <div className={classes.buttonGroup}>{children}</div>
+    <Grid item xs={12} {...GridProps}>
+      <div className={classes.buttonGroup} {...props}>
+        {children}
+      </div>
     </Grid>
   );
 };
 
 ButtonGroup.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  GridProps: PropTypes.object
 };
 
 const Button = ({ label, variant, children, buttonType, ...props }) => (

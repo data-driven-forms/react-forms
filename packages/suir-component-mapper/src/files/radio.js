@@ -4,7 +4,7 @@ import { FormRadio, FormField } from 'semantic-ui-react';
 import { wrapperProps } from '@data-driven-forms/common/src/multiple-choice-list';
 
 import FormFieldGrid from '../common/form-field-grid';
-import { validationError } from '../common/helpers';
+import { validationError, validationWarning } from '../common/helpers';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const RadioOption = ({ name, option, isDisabled, isReadOnly, ...props }) => {
@@ -51,7 +51,7 @@ const Radio = ({ name, ...props }) => {
   });
   const invalid = validationError(meta, validateOnMount);
   return (
-    <FormFieldGrid helperText={helperText} HelperTextProps={HelperTextProps} {...FormFieldGridProps}>
+    <FormFieldGrid helperText={validationWarning(meta, validateOnMount) || helperText} HelperTextProps={HelperTextProps} {...FormFieldGridProps}>
       <FormField {...FormFieldProps} disabled={isDisabled} required={isRequired} error={invalid && { content: meta.error }} label={label} />
       {options.map((option) => (
         <RadioOption key={option.value} name={name} option={option} isDisabled={isDisabled} isReadOnly={isReadOnly} {...rest} />

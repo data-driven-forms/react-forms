@@ -1,4 +1,6 @@
 [![npm version](https://badge.fury.io/js/%40data-driven-forms%2Fant-component-mapper.svg)](https://badge.fury.io/js/%40data-driven-forms%2Fant-component-mapper)
+[![Tweet](https://img.shields.io/twitter/url/https/github.com/tterb/hyde.svg?style=social)](https://twitter.com/intent/tweet?text=Check%20DataDrivenForms%20React%20library%21%20https%3A%2F%2Fdata-driven-forms.org%2F&hashtags=react,opensource,datadrivenforms)
+[![Twitter Follow](https://img.shields.io/twitter/follow/DataDrivenForms.svg?style=social)](https://twitter.com/DataDrivenForms)
 
 [![Data Driven Form logo](images/logo.png)](https://data-driven-forms.org/)
 
@@ -23,7 +25,7 @@ Material-UI component mapper for [Data Driven Forms](https://github.com/data-dri
 
 ### Installation
 
-You neet to add React Form Renderer
+You need to add React Form Renderer
 
 #### [React Form Renderer](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)
 
@@ -79,18 +81,21 @@ const Form = () => (
 
 Data Driven Forms supports all kinds of component, basic set is consisted of:
 
-- Text input
-- Text area
-- Checkbox (Multiple checkboxes)
-- Select (dropdown)
-- Switch
-- Radio buttons
-- Date picker
-- Time picker
-- Tabs
-- Sub-form
-- Wizard
-- Plain-text
+- [Text input](https://data-driven-forms.org/mappers/text-field?mapper=ant)
+- [Text area](https://data-driven-forms.org/mappers/textarea?mapper=ant)
+- [Checkbox](https://data-driven-forms.org/mappers/checkbox?mapper=ant) ([Multiple checkboxes](https://data-driven-forms.org/mappers/checkbox-multiple?mapper=ant))
+- [Select (dropdown)](https://data-driven-forms.org/mappers/select?mapper=ant)
+- [Dual list select](https://data-driven-forms.org/mappers/dual-list-select?mapper=ant)
+- [Field array](https://data-driven-forms.org/mappers/field-array?mapper=ant)
+- [Switch](https://data-driven-forms.org/mappers/switch?mapper=ant)
+- [Radio buttons](https://data-driven-forms.org/mappers/radio?mapper=ant)
+- [Date picker](https://data-driven-forms.org/mappers/date-picker?mapper=ant)
+- [Time picker](https://data-driven-forms.org/mappers/time-picker?mapper=ant)
+- [Tabs](https://data-driven-forms.org/mappers/tabs?mapper=ant)
+- [Slider](https://data-driven-forms.org/mappers/slider?mapper=ant)
+- [Sub-form](https://data-driven-forms.org/mappers/sub-form?mapper=ant)
+- [Plain text](https://data-driven-forms.org/mappers/plain-text?mapper=ant)
+- [Wizard](https://data-driven-forms.org/mappers/wizard?mapper=ant)
 
 ### Useful links
 
@@ -103,7 +108,7 @@ Data Driven Forms supports all kinds of component, basic set is consisted of:
 
 ### Development setup
 
-Data Driven Forms is a monorepo which uses [Lerna](https://github.com/lerna/lerna), so you can use all its commands as well.
+Data Driven Forms is a monorepo that uses [Lerna](https://github.com/lerna/lerna) and [yarn workspaces](https://classic.yarnpkg.com/blog/2017/08/02/introducing-workspaces/), so you can use all its commands as well.
 
 1. Install
 

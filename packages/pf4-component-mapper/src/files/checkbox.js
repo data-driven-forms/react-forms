@@ -7,9 +7,17 @@ import { Checkbox as Pf4Checkbox } from '@patternfly/react-core';
 import IsRequired from '../common/is-required';
 
 const SingleCheckbox = (props) => {
-  const { label, isRequired, helperText, meta, description, input, isReadOnly, isDisabled, id, ...rest } = useFieldApi(props);
+  const { label, isRequired, helperText, meta, description, input, isReadOnly, isDisabled, id, FormGroupProps, ...rest } = useFieldApi(props);
   return (
-    <FormGroup isRequired={isRequired} helperText={helperText} meta={meta} description={description} hideLabel id={id || input.name}>
+    <FormGroup
+      isRequired={isRequired}
+      helperText={helperText}
+      meta={meta}
+      description={description}
+      hideLabel
+      id={id || input.name}
+      FormGroupProps={FormGroupProps}
+    >
       <Pf4Checkbox
         isChecked={input.checked}
         {...input}
@@ -30,7 +38,8 @@ SingleCheckbox.propTypes = {
   helperText: PropTypes.node,
   description: PropTypes.node,
   isDisabled: PropTypes.bool,
-  id: PropTypes.string
+  id: PropTypes.string,
+  FormGroupProps: PropTypes.object
 };
 
 const Checkbox = ({ options, ...props }) => (options ? <MultipleChoiceList options={options} {...props} /> : <SingleCheckbox {...props} />);

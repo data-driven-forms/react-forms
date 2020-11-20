@@ -60,18 +60,12 @@ const renderNextButton = ({ nextStep, handleSubmit, buttonLabels, ...rest }) =>
 const WizardStepButtons = ({ disableBack, handlePrev, nextStep, formOptions, handleNext, buttonLabels }) => (
   <Wizard.Footer>
     {formOptions.onCancel && (
-      <Button
-        className="ddorg__pf3-component-mapper__wizard__buttons"
-        type="button"
-        variant="contained"
-        color="secondary"
-        onClick={formOptions.onCancel}
-      >
+      <Button className="ddorg__pf3-component-mapper__wizard__buttons" type="button" color="secondary" onClick={formOptions.onCancel}>
         {buttonLabels.cancel}
       </Button>
     )}
 
-    <Button type="button" variant="contained" disabled={disableBack} onClick={handlePrev} className="margin-left-3">
+    <Button type="button" disabled={disableBack} onClick={handlePrev} className="margin-left-3">
       <Icon type="fa" name="angle-left" />
       {buttonLabels.back}
     </Button>

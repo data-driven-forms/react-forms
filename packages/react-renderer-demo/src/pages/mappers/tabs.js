@@ -1,7 +1,5 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ComponentText from '@docs/components/component-example-text';
-import TabsText from '@docs/doc-components/tabs';
-import useActiveMapper from '@docs/hooks/use-active-mapper';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 import validatorTypes from '@data-driven-forms/react-form-renderer/dist/cjs/validator-types';
 
@@ -49,18 +47,4 @@ const schema = {
 };
 const variants = [];
 
-export default () => {
-  const activeMapper = useActiveMapper();
-  return (
-    <Fragment>
-      <ComponentText
-        activeMapper={activeMapper}
-        component={componentTypes.TABS}
-        schema={schema}
-        ContentText={TabsText}
-        variants={variants}
-        linkText="Tabs / Tab item"
-      />
-    </Fragment>
-  );
-};
+export default () => <ComponentText schema={schema} variants={variants} linkText="Tabs / Tab item" />;

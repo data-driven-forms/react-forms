@@ -12,8 +12,9 @@ const FormTemplate = ({ schema: { title, description }, formFields }) => {
       {description && <h2>{description}</h2>}
       {formFields}
       <FormSpy>
-        {({ submitting, pristine, validating, form: { reset }, values }) => (
+        {({ submitting, pristine, validating, valid, form: { reset }, values }) => (
           <React.Fragment>
+            {JSON.stringify({ pristine, valid })}
             <button key="form-submit" type="submit" disabled={submitting || validating || isDisabled(['invalid'], getState)}>
               Submit
             </button>

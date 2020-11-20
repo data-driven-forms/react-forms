@@ -33,7 +33,7 @@ export const Switch = (props) => {
     type: 'checkbox'
   });
   const invalid = validationError(meta, validateOnMount);
-  const text = invalid || helperText || description;
+  const text = invalid || ((meta.touched || validateOnMount) && meta.warning) || helperText || description;
 
   return (
     <FormFieldGrid {...FormFieldGridProps}>
@@ -52,7 +52,7 @@ export const Switch = (props) => {
             label={<FormLabel {...FormLabelProps}>{input.checked ? onText || label : offText || label}</FormLabel>}
             {...FormControlLabelProps}
           />
-          {(invalid || text) && <FormHelperText {...FormHelperTextProps}>{invalid || text}</FormHelperText>}
+          {text && <FormHelperText {...FormHelperTextProps}>{text}</FormHelperText>}
         </FormGroup>
       </FormControl>
     </FormFieldGrid>

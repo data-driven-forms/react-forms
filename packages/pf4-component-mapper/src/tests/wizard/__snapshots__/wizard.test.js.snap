@@ -234,6 +234,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
           ButtonGroup={[Function]}
           Description={[Function]}
           FormWrapper={[Function]}
+          Header={Symbol(react.fragment)}
           Title={[Function]}
           disableSubmit={Array []}
           formFields={
@@ -304,7 +305,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
           }
           showFormControls={false}
         >
-          <Component
+          <Form
             onSubmit={[Function]}
           >
             <form
@@ -342,7 +343,37 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                 key="wizard"
                 name="wizard"
               >
-                <FormConditionWrapper>
+                <FormConditionWrapper
+                  field={
+                    Object {
+                      "component": "wizard",
+                      "fields": Array [
+                        Object {
+                          "fields": Array [
+                            Object {
+                              "component": "text-field",
+                              "name": "foo-field",
+                            },
+                          ],
+                          "name": "1",
+                          "nextStep": "2",
+                          "title": "foo-step",
+                        },
+                        Object {
+                          "fields": Array [
+                            Object {
+                              "component": "text-field",
+                              "name": "bar-field",
+                            },
+                          ],
+                          "name": "2",
+                          "title": "bar-step",
+                        },
+                      ],
+                      "name": "wizard",
+                    }
+                  }
+                >
                   <FormFieldHideWrapper
                     hideField={false}
                   >
@@ -432,13 +463,106 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                               onKeyDown={[Function]}
                               role="dialog"
                             >
+                              <WizardToggle
+                                activeStepIndex={0}
+                                currentStep={
+                                  Object {
+                                    "fields": Array [
+                                      Object {
+                                        "component": "text-field",
+                                        "name": "foo-field",
+                                      },
+                                    ],
+                                    "name": "1",
+                                    "nextStep": "2",
+                                    "title": "foo-step",
+                                  }
+                                }
+                                dispatch={[Function]}
+                                isOpen={false}
+                                navSchema={
+                                  Array [
+                                    Object {
+                                      "index": 0,
+                                      "name": "1",
+                                      "primary": true,
+                                      "substepOf": undefined,
+                                      "substepOfTitle": undefined,
+                                      "title": "foo-step",
+                                    },
+                                    Object {
+                                      "index": 1,
+                                      "name": "2",
+                                      "primary": true,
+                                      "substepOf": undefined,
+                                      "substepOfTitle": undefined,
+                                      "title": "bar-step",
+                                    },
+                                  ]
+                                }
+                              >
+                                <button
+                                  aria-expanded={false}
+                                  aria-label="Wizard Toggle"
+                                  className="pf-c-wizard__toggle "
+                                  onClick={[Function]}
+                                  type="button"
+                                >
+                                  <ol
+                                    className="pf-c-wizard__toggle-list"
+                                  >
+                                    <li
+                                      className="pf-c-wizard__toggle-list-item"
+                                    >
+                                      <span
+                                        className="pf-c-wizard__toggle-num"
+                                      >
+                                        1
+                                      </span>
+                                       
+                                      foo-step
+                                    </li>
+                                  </ol>
+                                  <span
+                                    className="pf-c-wizard__toggle-icon"
+                                  >
+                                    <CaretDownIcon
+                                      aria-hidden="true"
+                                      color="currentColor"
+                                      noVerticalAlign={false}
+                                      size="sm"
+                                    >
+                                      <svg
+                                        aria-hidden="true"
+                                        aria-labelledby={null}
+                                        fill="currentColor"
+                                        height="1em"
+                                        role="img"
+                                        style={
+                                          Object {
+                                            "verticalAlign": "-0.125em",
+                                          }
+                                        }
+                                        viewBox="0 0 320 512"
+                                        width="1em"
+                                      >
+                                        <path
+                                          d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                                        />
+                                      </svg>
+                                    </CaretDownIcon>
+                                  </span>
+                                </button>
+                              </WizardToggle>
                               <div
                                 className="pf-c-wizard__outer-wrap"
                               >
                                 <div
                                   className="pf-c-wizard__inner-wrap"
                                 >
-                                  <Component>
+                                  <WizardNav
+                                    isOpen={false}
+                                  >
                                     <nav
                                       className="pf-c-wizard__nav"
                                     >
@@ -512,7 +636,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                               valid={true}
                                               validating={false}
                                             >
-                                              <Component
+                                              <WizardNavItem
                                                 content="foo-step"
                                                 isCurrent={true}
                                                 isDisabled={false}
@@ -523,17 +647,18 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                 <li
                                                   className="pf-c-wizard__nav-item"
                                                 >
-                                                  <a
+                                                  <button
                                                     aria-current="page"
-                                                    aria-disabled={false}
+                                                    aria-disabled={null}
                                                     className="pf-c-wizard__nav-link pf-m-current"
+                                                    disabled={false}
                                                     onClick={[Function]}
                                                   >
                                                     foo-step
-                                                  </a>
+                                                  </button>
                                                 </li>
-                                              </Component>
-                                              <Component
+                                              </WizardNavItem>
+                                              <WizardNavItem
                                                 content="bar-step"
                                                 isCurrent={false}
                                                 isDisabled={true}
@@ -544,23 +669,23 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                 <li
                                                   className="pf-c-wizard__nav-item"
                                                 >
-                                                  <a
+                                                  <button
                                                     aria-current={false}
                                                     aria-disabled={true}
                                                     className="pf-c-wizard__nav-link pf-m-disabled"
+                                                    disabled={true}
                                                     onClick={[Function]}
-                                                    tabIndex={-1}
                                                   >
                                                     bar-step
-                                                  </a>
+                                                  </button>
                                                 </li>
-                                              </Component>
+                                              </WizardNavItem>
                                             </Component>
                                           </WizardNavigation>
                                         </FormSpy>
                                       </ol>
                                     </nav>
-                                  </Component>
+                                  </WizardNav>
                                   <WizardStep
                                     StepTemplate={[Function]}
                                     buttonLabels={
@@ -612,6 +737,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                         "renderForm": [Function],
                                         "reset": [Function],
                                         "resetFieldState": [Function],
+                                        "restart": [Function],
                                         "resumeValidation": [Function],
                                         "setConfig": [Function],
                                         "shift": [Function],
@@ -630,8 +756,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                     nextStep="2"
                                     title="foo-step"
                                   >
-                                    <Component>
-                                      <main
+                                    <WizardBody>
+                                      <div
                                         className="pf-c-wizard__main"
                                       >
                                         <div
@@ -697,6 +823,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                 "renderForm": [Function],
                                                 "reset": [Function],
                                                 "resetFieldState": [Function],
+                                                "restart": [Function],
                                                 "resumeValidation": [Function],
                                                 "setConfig": [Function],
                                                 "shift": [Function],
@@ -748,7 +875,14 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                 key="foo-field"
                                                 name="foo-field"
                                               >
-                                                <FormConditionWrapper>
+                                                <FormConditionWrapper
+                                                  field={
+                                                    Object {
+                                                      "component": "text-field",
+                                                      "name": "foo-field",
+                                                    }
+                                                  }
+                                                >
                                                   <FormFieldHideWrapper
                                                     hideField={false}
                                                   >
@@ -758,7 +892,6 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                     >
                                                       <FormGroup
                                                         id="foo-field"
-                                                        isRequired={false}
                                                         meta={
                                                           Object {
                                                             "active": false,
@@ -770,6 +903,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                             "invalid": false,
                                                             "length": undefined,
                                                             "modified": false,
+                                                            "modifiedSinceLastSubmit": false,
                                                             "pristine": true,
                                                             "submitError": undefined,
                                                             "submitFailed": false,
@@ -782,9 +916,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                           }
                                                         }
                                                       >
-                                                        <Component
+                                                        <FormGroup
                                                           fieldId="foo-field"
-                                                          isRequired={false}
                                                           validated="default"
                                                         >
                                                           <div
@@ -793,7 +926,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                             <div
                                                               className="pf-c-form__group-control"
                                                             >
-                                                              <ForwardRef
+                                                              <TextInput
                                                                 id="foo-field"
                                                                 name="foo-field"
                                                                 onBlur={[Function]}
@@ -808,6 +941,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                                   id="foo-field"
                                                                   innerRef={null}
                                                                   isDisabled={false}
+                                                                  isLeftTruncated={false}
                                                                   isReadOnly={false}
                                                                   isRequired={false}
                                                                   name="foo-field"
@@ -834,10 +968,10 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                                     value=""
                                                                   />
                                                                 </TextInputBase>
-                                                              </ForwardRef>
+                                                              </TextInput>
                                                             </div>
                                                           </div>
-                                                        </Component>
+                                                        </FormGroup>
                                                       </FormGroup>
                                                     </TextField>
                                                   </FormFieldHideWrapper>
@@ -846,8 +980,8 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                             </div>
                                           </DefaultStepTemplate>
                                         </div>
-                                      </main>
-                                    </Component>
+                                      </div>
+                                    </WizardBody>
                                     <WizardStepButtons
                                       buttonLabels={
                                         Object {
@@ -890,6 +1024,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                           "renderForm": [Function],
                                           "reset": [Function],
                                           "resetFieldState": [Function],
+                                          "restart": [Function],
                                           "resumeValidation": [Function],
                                           "setConfig": [Function],
                                           "shift": [Function],
@@ -943,6 +1078,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                             renderForm={[Function]}
                                             reset={[Function]}
                                             resetFieldState={[Function]}
+                                            restart={[Function]}
                                             resumeValidation={[Function]}
                                             setConfig={[Function]}
                                             shift={[Function]}
@@ -955,69 +1091,70 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                             update={[Function]}
                                             valid={true}
                                           >
-                                            <Component
+                                            <Button
                                               isDisabled={false}
                                               onClick={[Function]}
                                               type="button"
                                               variant="primary"
                                             >
                                               <button
-                                                aria-disabled={null}
+                                                aria-disabled={false}
                                                 aria-label={null}
                                                 className="pf-c-button pf-m-primary"
-                                                data-ouia-component-id={null}
+                                                data-ouia-component-id="OUIA-Generated-Button-primary-1"
                                                 data-ouia-component-type="PF4/Button"
                                                 data-ouia-safe={true}
                                                 disabled={false}
                                                 onClick={[Function]}
-                                                tabIndex={null}
+                                                role={null}
                                                 type="button"
                                               >
                                                 Next
                                               </button>
-                                            </Component>
+                                            </Button>
                                           </NextButton>
-                                          <Component
+                                          <Button
                                             isDisabled={true}
                                             onClick={[Function]}
                                             type="button"
                                             variant="secondary"
                                           >
                                             <button
-                                              aria-disabled={null}
+                                              aria-disabled={true}
                                               aria-label={null}
-                                              className="pf-c-button pf-m-secondary"
-                                              data-ouia-component-id={null}
+                                              className="pf-c-button pf-m-secondary pf-m-disabled"
+                                              data-ouia-component-id="OUIA-Generated-Button-secondary-1"
                                               data-ouia-component-type="PF4/Button"
                                               data-ouia-safe={true}
                                               disabled={true}
                                               onClick={[Function]}
+                                              role={null}
                                               tabIndex={null}
                                               type="button"
                                             >
                                               Back
                                             </button>
-                                          </Component>
-                                          <Component
+                                          </Button>
+                                          <Button
                                             onClick={[Function]}
                                             type="button"
                                             variant="link"
                                           >
                                             <button
-                                              aria-disabled={null}
+                                              aria-disabled={false}
                                               aria-label={null}
                                               className="pf-c-button pf-m-link"
-                                              data-ouia-component-id={null}
+                                              data-ouia-component-id="OUIA-Generated-Button-link-1"
                                               data-ouia-component-type="PF4/Button"
                                               data-ouia-safe={true}
                                               disabled={false}
                                               onClick={[Function]}
-                                              tabIndex={null}
+                                              role={null}
                                               type="button"
                                             >
                                               Cancel
                                             </button>
-                                          </Component>
+                                          </Button>
                                         </FormSpy>
                                       </footer>
                                     </WizardStepButtons>
@@ -1033,7 +1170,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                 </FormConditionWrapper>
               </SingleField>
             </form>
-          </Component>
+          </Form>
         </FormTemplate>
       </PF4FormTemplate>
     </FormTemplate>
@@ -1282,6 +1419,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
           ButtonGroup={[Function]}
           Description={[Function]}
           FormWrapper={[Function]}
+          Header={Symbol(react.fragment)}
           Title={[Function]}
           disableSubmit={Array []}
           formFields={
@@ -1354,7 +1492,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
           }
           showFormControls={false}
         >
-          <Component
+          <Form
             onSubmit={[Function]}
           >
             <form
@@ -1393,7 +1531,38 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                 key="wizard"
                 name="wizard"
               >
-                <FormConditionWrapper>
+                <FormConditionWrapper
+                  field={
+                    Object {
+                      "component": "wizard",
+                      "fields": Array [
+                        Object {
+                          "fields": Array [
+                            Object {
+                              "component": "text-field",
+                              "name": "foo-field",
+                            },
+                          ],
+                          "name": "1",
+                          "nextStep": "2",
+                          "title": "foo-step",
+                        },
+                        Object {
+                          "fields": Array [
+                            Object {
+                              "component": "text-field",
+                              "name": "bar-field",
+                            },
+                          ],
+                          "name": "2",
+                          "title": "bar-step",
+                        },
+                      ],
+                      "inModal": true,
+                      "name": "wizard",
+                    }
+                  }
+                >
                   <FormFieldHideWrapper
                     hideField={false}
                   >
@@ -1497,6 +1666,45 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                         name="wizard"
                                         role="dialog"
                                       >
+                                        <button
+                                          aria-expanded="false"
+                                          aria-label="Wizard Toggle"
+                                          class="pf-c-wizard__toggle "
+                                          type="button"
+                                        >
+                                          <ol
+                                            class="pf-c-wizard__toggle-list"
+                                          >
+                                            <li
+                                              class="pf-c-wizard__toggle-list-item"
+                                            >
+                                              <span
+                                                class="pf-c-wizard__toggle-num"
+                                              >
+                                                1
+                                              </span>
+                                               
+                                              foo-step
+                                            </li>
+                                          </ol>
+                                          <span
+                                            class="pf-c-wizard__toggle-icon"
+                                          >
+                                            <svg
+                                              aria-hidden="true"
+                                              fill="currentColor"
+                                              height="1em"
+                                              role="img"
+                                              style="vertical-align: -0.125em;"
+                                              viewBox="0 0 320 512"
+                                              width="1em"
+                                            >
+                                              <path
+                                                d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                                              />
+                                            </svg>
+                                          </span>
+                                        </button>
                                         <div
                                           class="pf-c-wizard__outer-wrap"
                                         >
@@ -1512,29 +1720,28 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                 <li
                                                   class="pf-c-wizard__nav-item"
                                                 >
-                                                  <a
+                                                  <button
                                                     aria-current="page"
-                                                    aria-disabled="false"
                                                     class="pf-c-wizard__nav-link pf-m-current"
                                                   >
                                                     foo-step
-                                                  </a>
+                                                  </button>
                                                 </li>
                                                 <li
                                                   class="pf-c-wizard__nav-item"
                                                 >
-                                                  <a
+                                                  <button
                                                     aria-current="false"
                                                     aria-disabled="true"
                                                     class="pf-c-wizard__nav-link pf-m-disabled"
-                                                    tabindex="-1"
+                                                    disabled=""
                                                   >
                                                     bar-step
-                                                  </a>
+                                                  </button>
                                                 </li>
                                               </ol>
                                             </nav>
-                                            <main
+                                            <div
                                               class="pf-c-wizard__main"
                                             >
                                               <div
@@ -1562,12 +1769,14 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                   </div>
                                                 </div>
                                               </div>
-                                            </main>
+                                            </div>
                                             <footer
                                               class="pf-c-wizard__footer "
                                             >
                                               <button
+                                                aria-disabled="false"
                                                 class="pf-c-button pf-m-primary"
+                                                data-ouia-component-id="OUIA-Generated-Button-primary-8"
                                                 data-ouia-component-type="PF4/Button"
                                                 data-ouia-safe="true"
                                                 type="button"
@@ -1575,7 +1784,9 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                 Next
                                               </button>
                                               <button
-                                                class="pf-c-button pf-m-secondary"
+                                                aria-disabled="true"
+                                                class="pf-c-button pf-m-secondary pf-m-disabled"
+                                                data-ouia-component-id="OUIA-Generated-Button-secondary-8"
                                                 data-ouia-component-type="PF4/Button"
                                                 data-ouia-safe="true"
                                                 disabled=""
@@ -1584,7 +1795,9 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                 Back
                                               </button>
                                               <button
+                                                aria-disabled="false"
                                                 class="pf-c-button pf-m-link"
+                                                data-ouia-component-id="OUIA-Generated-Button-link-8"
                                                 data-ouia-component-type="PF4/Button"
                                                 data-ouia-safe="true"
                                                 type="button"
@@ -1620,6 +1833,45 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                           name="wizard"
                                           role="dialog"
                                         >
+                                          <button
+                                            aria-expanded="false"
+                                            aria-label="Wizard Toggle"
+                                            class="pf-c-wizard__toggle "
+                                            type="button"
+                                          >
+                                            <ol
+                                              class="pf-c-wizard__toggle-list"
+                                            >
+                                              <li
+                                                class="pf-c-wizard__toggle-list-item"
+                                              >
+                                                <span
+                                                  class="pf-c-wizard__toggle-num"
+                                                >
+                                                  1
+                                                </span>
+                                                 
+                                                foo-step
+                                              </li>
+                                            </ol>
+                                            <span
+                                              class="pf-c-wizard__toggle-icon"
+                                            >
+                                              <svg
+                                                aria-hidden="true"
+                                                fill="currentColor"
+                                                height="1em"
+                                                role="img"
+                                                style="vertical-align: -0.125em;"
+                                                viewBox="0 0 320 512"
+                                                width="1em"
+                                              >
+                                                <path
+                                                  d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                                                />
+                                              </svg>
+                                            </span>
+                                          </button>
                                           <div
                                             class="pf-c-wizard__outer-wrap"
                                           >
@@ -1635,29 +1887,28 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                   <li
                                                     class="pf-c-wizard__nav-item"
                                                   >
-                                                    <a
+                                                    <button
                                                       aria-current="page"
-                                                      aria-disabled="false"
                                                       class="pf-c-wizard__nav-link pf-m-current"
                                                     >
                                                       foo-step
-                                                    </a>
+                                                    </button>
                                                   </li>
                                                   <li
                                                     class="pf-c-wizard__nav-item"
                                                   >
-                                                    <a
+                                                    <button
                                                       aria-current="false"
                                                       aria-disabled="true"
                                                       class="pf-c-wizard__nav-link pf-m-disabled"
-                                                      tabindex="-1"
+                                                      disabled=""
                                                     >
                                                       bar-step
-                                                    </a>
+                                                    </button>
                                                   </li>
                                                 </ol>
                                               </nav>
-                                              <main
+                                              <div
                                                 class="pf-c-wizard__main"
                                               >
                                                 <div
@@ -1685,12 +1936,14 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                     </div>
                                                   </div>
                                                 </div>
-                                              </main>
+                                              </div>
                                               <footer
                                                 class="pf-c-wizard__footer "
                                               >
                                                 <button
+                                                  aria-disabled="false"
                                                   class="pf-c-button pf-m-primary"
+                                                  data-ouia-component-id="OUIA-Generated-Button-primary-8"
                                                   data-ouia-component-type="PF4/Button"
                                                   data-ouia-safe="true"
                                                   type="button"
@@ -1698,7 +1951,9 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                   Next
                                                 </button>
                                                 <button
-                                                  class="pf-c-button pf-m-secondary"
+                                                  aria-disabled="true"
+                                                  class="pf-c-button pf-m-secondary pf-m-disabled"
+                                                  data-ouia-component-id="OUIA-Generated-Button-secondary-8"
                                                   data-ouia-component-type="PF4/Button"
                                                   data-ouia-safe="true"
                                                   disabled=""
@@ -1707,7 +1962,9 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                   Back
                                                 </button>
                                                 <button
+                                                  aria-disabled="false"
                                                   class="pf-c-button pf-m-link"
+                                                  data-ouia-component-id="OUIA-Generated-Button-link-8"
                                                   data-ouia-component-type="PF4/Button"
                                                   data-ouia-safe="true"
                                                   type="button"
@@ -1724,11 +1981,11 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                 </div>
                               }
                             >
-                              <Component>
+                              <Backdrop>
                                 <div
                                   className="pf-c-backdrop"
                                 >
-                                  <Component>
+                                  <Bullseye>
                                     <div
                                       className="pf-l-bullseye"
                                     >
@@ -1742,13 +1999,106 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                           onKeyDown={[Function]}
                                           role="dialog"
                                         >
+                                          <WizardToggle
+                                            activeStepIndex={0}
+                                            currentStep={
+                                              Object {
+                                                "fields": Array [
+                                                  Object {
+                                                    "component": "text-field",
+                                                    "name": "foo-field",
+                                                  },
+                                                ],
+                                                "name": "1",
+                                                "nextStep": "2",
+                                                "title": "foo-step",
+                                              }
+                                            }
+                                            dispatch={[Function]}
+                                            isOpen={false}
+                                            navSchema={
+                                              Array [
+                                                Object {
+                                                  "index": 0,
+                                                  "name": "1",
+                                                  "primary": true,
+                                                  "substepOf": undefined,
+                                                  "substepOfTitle": undefined,
+                                                  "title": "foo-step",
+                                                },
+                                                Object {
+                                                  "index": 1,
+                                                  "name": "2",
+                                                  "primary": true,
+                                                  "substepOf": undefined,
+                                                  "substepOfTitle": undefined,
+                                                  "title": "bar-step",
+                                                },
+                                              ]
+                                            }
+                                          >
+                                            <button
+                                              aria-expanded={false}
+                                              aria-label="Wizard Toggle"
+                                              className="pf-c-wizard__toggle "
+                                              onClick={[Function]}
+                                              type="button"
+                                            >
+                                              <ol
+                                                className="pf-c-wizard__toggle-list"
+                                              >
+                                                <li
+                                                  className="pf-c-wizard__toggle-list-item"
+                                                >
+                                                  <span
+                                                    className="pf-c-wizard__toggle-num"
+                                                  >
+                                                    1
+                                                  </span>
+                                                   
+                                                  foo-step
+                                                </li>
+                                              </ol>
+                                              <span
+                                                className="pf-c-wizard__toggle-icon"
+                                              >
+                                                <CaretDownIcon
+                                                  aria-hidden="true"
+                                                  color="currentColor"
+                                                  noVerticalAlign={false}
+                                                  size="sm"
+                                                >
+                                                  <svg
+                                                    aria-hidden="true"
+                                                    aria-labelledby={null}
+                                                    fill="currentColor"
+                                                    height="1em"
+                                                    role="img"
+                                                    style={
+                                                      Object {
+                                                        "verticalAlign": "-0.125em",
+                                                      }
+                                                    }
+                                                    viewBox="0 0 320 512"
+                                                    width="1em"
+                                                  >
+                                                    <path
+                                                      d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                                                    />
+                                                  </svg>
+                                                </CaretDownIcon>
+                                              </span>
+                                            </button>
+                                          </WizardToggle>
                                           <div
                                             className="pf-c-wizard__outer-wrap"
                                           >
                                             <div
                                               className="pf-c-wizard__inner-wrap"
                                             >
-                                              <Component>
+                                              <WizardNav
+                                                isOpen={false}
+                                              >
                                                 <nav
                                                   className="pf-c-wizard__nav"
                                                 >
@@ -1822,7 +2172,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                           valid={true}
                                                           validating={false}
                                                         >
-                                                          <Component
+                                                          <WizardNavItem
                                                             content="foo-step"
                                                             isCurrent={true}
                                                             isDisabled={false}
@@ -1833,17 +2183,18 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                             <li
                                                               className="pf-c-wizard__nav-item"
                                                             >
-                                                              <a
+                                                              <button
                                                                 aria-current="page"
-                                                                aria-disabled={false}
+                                                                aria-disabled={null}
                                                                 className="pf-c-wizard__nav-link pf-m-current"
+                                                                disabled={false}
                                                                 onClick={[Function]}
                                                               >
                                                                 foo-step
-                                                              </a>
+                                                              </button>
                                                             </li>
-                                                          </Component>
-                                                          <Component
+                                                          </WizardNavItem>
+                                                          <WizardNavItem
                                                             content="bar-step"
                                                             isCurrent={false}
                                                             isDisabled={true}
@@ -1854,23 +2205,23 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                             <li
                                                               className="pf-c-wizard__nav-item"
                                                             >
-                                                              <a
+                                                              <button
                                                                 aria-current={false}
                                                                 aria-disabled={true}
                                                                 className="pf-c-wizard__nav-link pf-m-disabled"
+                                                                disabled={true}
                                                                 onClick={[Function]}
-                                                                tabIndex={-1}
                                                               >
                                                                 bar-step
-                                                              </a>
+                                                              </button>
                                                             </li>
-                                                          </Component>
+                                                          </WizardNavItem>
                                                         </Component>
                                                       </WizardNavigation>
                                                     </FormSpy>
                                                   </ol>
                                                 </nav>
-                                              </Component>
+                                              </WizardNav>
                                               <WizardStep
                                                 StepTemplate={[Function]}
                                                 buttonLabels={
@@ -1922,6 +2273,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                     "renderForm": [Function],
                                                     "reset": [Function],
                                                     "resetFieldState": [Function],
+                                                    "restart": [Function],
                                                     "resumeValidation": [Function],
                                                     "setConfig": [Function],
                                                     "shift": [Function],
@@ -1940,8 +2292,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                 nextStep="2"
                                                 title="foo-step"
                                               >
-                                                <Component>
-                                                  <main
+                                                <WizardBody>
+                                                  <div
                                                     className="pf-c-wizard__main"
                                                   >
                                                     <div
@@ -2007,6 +2359,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                             "renderForm": [Function],
                                                             "reset": [Function],
                                                             "resetFieldState": [Function],
+                                                            "restart": [Function],
                                                             "resumeValidation": [Function],
                                                             "setConfig": [Function],
                                                             "shift": [Function],
@@ -2058,7 +2411,14 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                             key="foo-field"
                                                             name="foo-field"
                                                           >
-                                                            <FormConditionWrapper>
+                                                            <FormConditionWrapper
+                                                              field={
+                                                                Object {
+                                                                  "component": "text-field",
+                                                                  "name": "foo-field",
+                                                                }
+                                                              }
+                                                            >
                                                               <FormFieldHideWrapper
                                                                 hideField={false}
                                                               >
@@ -2068,7 +2428,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                                 >
                                                                   <FormGroup
                                                                     id="foo-field"
-                                                                    isRequired={false}
                                                                     meta={
                                                                       Object {
                                                                         "active": false,
@@ -2080,6 +2439,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                                         "invalid": false,
                                                                         "length": undefined,
                                                                         "modified": false,
+                                                                        "modifiedSinceLastSubmit": false,
                                                                         "pristine": true,
                                                                         "submitError": undefined,
                                                                         "submitFailed": false,
@@ -2092,9 +2452,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                                       }
                                                                     }
                                                                   >
-                                                                    <Component
+                                                                    <FormGroup
                                                                       fieldId="foo-field"
-                                                                      isRequired={false}
                                                                       validated="default"
                                                                     >
                                                                       <div
@@ -2103,7 +2462,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                                         <div
                                                                           className="pf-c-form__group-control"
                                                                         >
-                                                                          <ForwardRef
+                                                                          <TextInput
                                                                             id="foo-field"
                                                                             name="foo-field"
                                                                             onBlur={[Function]}
@@ -2118,6 +2477,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                                               id="foo-field"
                                                                               innerRef={null}
                                                                               isDisabled={false}
+                                                                              isLeftTruncated={false}
                                                                               isReadOnly={false}
                                                                               isRequired={false}
                                                                               name="foo-field"
@@ -2144,10 +2504,10 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                                                 value=""
                                                                               />
                                                                             </TextInputBase>
-                                                                          </ForwardRef>
+                                                                          </TextInput>
                                                                         </div>
                                                                       </div>
-                                                                    </Component>
+                                                                    </FormGroup>
                                                                   </FormGroup>
                                                                 </TextField>
                                                               </FormFieldHideWrapper>
@@ -2156,8 +2516,8 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                         </div>
                                                       </DefaultStepTemplate>
                                                     </div>
-                                                  </main>
-                                                </Component>
+                                                  </div>
+                                                </WizardBody>
                                                 <WizardStepButtons
                                                   buttonLabels={
                                                     Object {
@@ -2200,6 +2560,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                       "renderForm": [Function],
                                                       "reset": [Function],
                                                       "resetFieldState": [Function],
+                                                      "restart": [Function],
                                                       "resumeValidation": [Function],
                                                       "setConfig": [Function],
                                                       "shift": [Function],
@@ -2253,6 +2614,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                         renderForm={[Function]}
                                                         reset={[Function]}
                                                         resetFieldState={[Function]}
+                                                        restart={[Function]}
                                                         resumeValidation={[Function]}
                                                         setConfig={[Function]}
                                                         shift={[Function]}
@@ -2265,69 +2627,70 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                         update={[Function]}
                                                         valid={true}
                                                       >
-                                                        <Component
+                                                        <Button
                                                           isDisabled={false}
                                                           onClick={[Function]}
                                                           type="button"
                                                           variant="primary"
                                                         >
                                                           <button
-                                                            aria-disabled={null}
+                                                            aria-disabled={false}
                                                             aria-label={null}
                                                             className="pf-c-button pf-m-primary"
-                                                            data-ouia-component-id={null}
+                                                            data-ouia-component-id="OUIA-Generated-Button-primary-8"
                                                             data-ouia-component-type="PF4/Button"
                                                             data-ouia-safe={true}
                                                             disabled={false}
                                                             onClick={[Function]}
-                                                            tabIndex={null}
+                                                            role={null}
                                                             type="button"
                                                           >
                                                             Next
                                                           </button>
-                                                        </Component>
+                                                        </Button>
                                                       </NextButton>
-                                                      <Component
+                                                      <Button
                                                         isDisabled={true}
                                                         onClick={[Function]}
                                                         type="button"
                                                         variant="secondary"
                                                       >
                                                         <button
-                                                          aria-disabled={null}
+                                                          aria-disabled={true}
                                                           aria-label={null}
-                                                          className="pf-c-button pf-m-secondary"
-                                                          data-ouia-component-id={null}
+                                                          className="pf-c-button pf-m-secondary pf-m-disabled"
+                                                          data-ouia-component-id="OUIA-Generated-Button-secondary-8"
                                                           data-ouia-component-type="PF4/Button"
                                                           data-ouia-safe={true}
                                                           disabled={true}
                                                           onClick={[Function]}
+                                                          role={null}
                                                           tabIndex={null}
                                                           type="button"
                                                         >
                                                           Back
                                                         </button>
-                                                      </Component>
-                                                      <Component
+                                                      </Button>
+                                                      <Button
                                                         onClick={[Function]}
                                                         type="button"
                                                         variant="link"
                                                       >
                                                         <button
-                                                          aria-disabled={null}
+                                                          aria-disabled={false}
                                                           aria-label={null}
                                                           className="pf-c-button pf-m-link"
-                                                          data-ouia-component-id={null}
+                                                          data-ouia-component-id="OUIA-Generated-Button-link-8"
                                                           data-ouia-component-type="PF4/Button"
                                                           data-ouia-safe={true}
                                                           disabled={false}
                                                           onClick={[Function]}
-                                                          tabIndex={null}
+                                                          role={null}
                                                           type="button"
                                                         >
                                                           Cancel
                                                         </button>
-                                                      </Component>
+                                                      </Button>
                                                     </FormSpy>
                                                   </footer>
                                                 </WizardStepButtons>
@@ -2337,9 +2700,9 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                         </div>
                                       </div>
                                     </div>
-                                  </Component>
+                                  </Bullseye>
                                 </div>
-                              </Component>
+                              </Backdrop>
                             </Portal>
                           </Modal>
                         </WizardInternal>
@@ -2349,7 +2712,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                 </FormConditionWrapper>
               </SingleField>
             </form>
-          </Component>
+          </Form>
         </FormTemplate>
       </PF4FormTemplate>
     </FormTemplate>

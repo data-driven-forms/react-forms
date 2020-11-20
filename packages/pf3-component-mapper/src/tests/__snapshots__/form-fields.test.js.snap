@@ -26,6 +26,7 @@ exports[`FormFields <Checkbox /> should render single checkbox variant 1`] = `
               "invalid": false,
               "length": undefined,
               "modified": false,
+              "modifiedSinceLastSubmit": false,
               "pristine": true,
               "submitError": undefined,
               "submitFailed": false,
@@ -111,6 +112,7 @@ exports[`FormFields <Checkbox /> should render single checkbox variant with a he
               "invalid": false,
               "length": undefined,
               "modified": false,
+              "modifiedSinceLastSubmit": false,
               "pristine": true,
               "submitError": undefined,
               "submitFailed": false,
@@ -258,6 +260,7 @@ exports[`FormFields <Radio /> should render correctly 1`] = `
             "invalid": false,
             "length": undefined,
             "modified": false,
+            "modifiedSinceLastSubmit": false,
             "pristine": true,
             "submitError": undefined,
             "submitFailed": false,
@@ -401,6 +404,7 @@ exports[`FormFields <Slider /> should render correctly 1`] = `
             "invalid": false,
             "length": undefined,
             "modified": false,
+            "modifiedSinceLastSubmit": false,
             "pristine": true,
             "submitError": undefined,
             "submitFailed": false,
@@ -623,7 +627,6 @@ exports[`FormFields <Switch /> should render Switch correctly 1`] = `
     onSubmit={[Function]}
   >
     <Switch
-      FieldProvider={[Function]}
       id="someIdKey"
       input={
         Object {
@@ -650,6 +653,7 @@ exports[`FormFields <Switch /> should render Switch correctly 1`] = `
             "invalid": true,
             "length": undefined,
             "modified": false,
+            "modifiedSinceLastSubmit": false,
             "pristine": false,
             "submitError": undefined,
             "submitFailed": false,
@@ -670,7 +674,6 @@ exports[`FormFields <Switch /> should render Switch correctly 1`] = `
             className="form-group"
           >
             <Switch
-              FieldProvider={[Function]}
               checked={true}
               id="someIdKey"
               offText="OFF"
@@ -692,7 +695,6 @@ exports[`FormFields <Switch /> should render Switch correctly 1`] = `
                   tabIndex={0}
                 >
                   <input
-                    FieldProvider={[Function]}
                     checked={true}
                     id="someIdKey"
                     onBlur={[Function]}
@@ -767,7 +769,6 @@ exports[`FormFields <Switch /> should render Switch with label correctly 1`] = `
     onSubmit={[Function]}
   >
     <Switch
-      FieldProvider={[Function]}
       id="someIdKey"
       input={
         Object {
@@ -796,6 +797,7 @@ exports[`FormFields <Switch /> should render Switch with label correctly 1`] = `
             "invalid": true,
             "length": undefined,
             "modified": false,
+            "modifiedSinceLastSubmit": false,
             "pristine": false,
             "submitError": undefined,
             "submitFailed": false,
@@ -826,7 +828,6 @@ exports[`FormFields <Switch /> should render Switch with label correctly 1`] = `
               </label>
             </ControlLabel>
             <Switch
-              FieldProvider={[Function]}
               checked={true}
               id="someIdKey"
               offText="OFF"
@@ -848,7 +849,6 @@ exports[`FormFields <Switch /> should render Switch with label correctly 1`] = `
                   tabIndex={0}
                 >
                   <input
-                    FieldProvider={[Function]}
                     checked={true}
                     id="someIdKey"
                     onBlur={[Function]}
@@ -923,7 +923,6 @@ exports[`FormFields <Switch /> should render Switch with onText (custom prop) co
     onSubmit={[Function]}
   >
     <Switch
-      FieldProvider={[Function]}
       id="someIdKey"
       input={
         Object {
@@ -951,6 +950,7 @@ exports[`FormFields <Switch /> should render Switch with onText (custom prop) co
             "invalid": true,
             "length": undefined,
             "modified": false,
+            "modifiedSinceLastSubmit": false,
             "pristine": false,
             "submitError": undefined,
             "submitFailed": false,
@@ -971,7 +971,6 @@ exports[`FormFields <Switch /> should render Switch with onText (custom prop) co
             className="form-group"
           >
             <Switch
-              FieldProvider={[Function]}
               checked={true}
               id="someIdKey"
               offText="OFF"
@@ -993,7 +992,6 @@ exports[`FormFields <Switch /> should render Switch with onText (custom prop) co
                   tabIndex={0}
                 >
                   <input
-                    FieldProvider={[Function]}
                     checked={true}
                     id="someIdKey"
                     onBlur={[Function]}
@@ -1068,7 +1066,6 @@ exports[`FormFields <Switch /> should render Switch with placeholder correctly 1
     onSubmit={[Function]}
   >
     <Switch
-      FieldProvider={[Function]}
       id="someIdKey"
       input={
         Object {
@@ -1096,6 +1093,7 @@ exports[`FormFields <Switch /> should render Switch with placeholder correctly 1
             "invalid": true,
             "length": undefined,
             "modified": false,
+            "modifiedSinceLastSubmit": false,
             "pristine": false,
             "submitError": undefined,
             "submitFailed": false,
@@ -1116,7 +1114,6 @@ exports[`FormFields <Switch /> should render Switch with placeholder correctly 1
             className="form-group"
           >
             <Switch
-              FieldProvider={[Function]}
               checked={true}
               id="someIdKey"
               offText="OFF"
@@ -1138,7 +1135,6 @@ exports[`FormFields <Switch /> should render Switch with placeholder correctly 1
                   tabIndex={0}
                 >
                   <input
-                    FieldProvider={[Function]}
                     checked={true}
                     id="someIdKey"
                     onBlur={[Function]}
@@ -1213,7 +1209,6 @@ exports[`FormFields <Switch /> should render disabled Switch correctly 1`] = `
     onSubmit={[Function]}
   >
     <Switch
-      FieldProvider={[Function]}
       id="someIdKey"
       input={
         Object {
@@ -1241,6 +1236,7 @@ exports[`FormFields <Switch /> should render disabled Switch correctly 1`] = `
             "invalid": true,
             "length": undefined,
             "modified": false,
+            "modifiedSinceLastSubmit": false,
             "pristine": false,
             "submitError": undefined,
             "submitFailed": false,
@@ -1261,7 +1257,6 @@ exports[`FormFields <Switch /> should render disabled Switch correctly 1`] = `
             className="form-group"
           >
             <Switch
-              FieldProvider={[Function]}
               checked={true}
               disabled={true}
               id="someIdKey"
@@ -1284,7 +1279,6 @@ exports[`FormFields <Switch /> should render disabled Switch correctly 1`] = `
                   tabIndex={-1}
                 >
                   <input
-                    FieldProvider={[Function]}
                     checked={true}
                     disabled={true}
                     id="someIdKey"
@@ -1360,7 +1354,6 @@ exports[`FormFields <Switch /> should render mini Switch correctly 1`] = `
     onSubmit={[Function]}
   >
     <Switch
-      FieldProvider={[Function]}
       bsSize="mini"
       id="someIdKey"
       input={
@@ -1388,6 +1381,7 @@ exports[`FormFields <Switch /> should render mini Switch correctly 1`] = `
             "invalid": true,
             "length": undefined,
             "modified": false,
+            "modifiedSinceLastSubmit": false,
             "pristine": false,
             "submitError": undefined,
             "submitFailed": false,
@@ -1408,7 +1402,6 @@ exports[`FormFields <Switch /> should render mini Switch correctly 1`] = `
             className="form-group"
           >
             <Switch
-              FieldProvider={[Function]}
               bsSize="mini"
               checked={true}
               id="someIdKey"
@@ -1431,7 +1424,6 @@ exports[`FormFields <Switch /> should render mini Switch correctly 1`] = `
                   tabIndex={0}
                 >
                   <input
-                    FieldProvider={[Function]}
                     checked={true}
                     id="someIdKey"
                     onBlur={[Function]}
@@ -1506,7 +1498,6 @@ exports[`FormFields <Switch /> should render readOnly Switch correctly 1`] = `
     onSubmit={[Function]}
   >
     <Switch
-      FieldProvider={[Function]}
       id="someIdKey"
       input={
         Object {
@@ -1534,6 +1525,7 @@ exports[`FormFields <Switch /> should render readOnly Switch correctly 1`] = `
             "invalid": true,
             "length": undefined,
             "modified": false,
+            "modifiedSinceLastSubmit": false,
             "pristine": false,
             "submitError": undefined,
             "submitFailed": false,
@@ -1554,7 +1546,6 @@ exports[`FormFields <Switch /> should render readOnly Switch correctly 1`] = `
             className="form-group"
           >
             <Switch
-              FieldProvider={[Function]}
               checked={true}
               id="someIdKey"
               isReadOnly={true}
@@ -1577,7 +1568,6 @@ exports[`FormFields <Switch /> should render readOnly Switch correctly 1`] = `
                   tabIndex={-1}
                 >
                   <input
-                    FieldProvider={[Function]}
                     checked={true}
                     disabled={true}
                     id="someIdKey"
@@ -1653,7 +1643,6 @@ exports[`FormFields <Switch /> should render sm Switch correctly 1`] = `
     onSubmit={[Function]}
   >
     <Switch
-      FieldProvider={[Function]}
       bsSize="mn"
       id="someIdKey"
       input={
@@ -1681,6 +1670,7 @@ exports[`FormFields <Switch /> should render sm Switch correctly 1`] = `
             "invalid": true,
             "length": undefined,
             "modified": false,
+            "modifiedSinceLastSubmit": false,
             "pristine": false,
             "submitError": undefined,
             "submitFailed": false,
@@ -1701,7 +1691,6 @@ exports[`FormFields <Switch /> should render sm Switch correctly 1`] = `
             className="form-group"
           >
             <Switch
-              FieldProvider={[Function]}
               bsSize="mn"
               checked={true}
               id="someIdKey"
@@ -1724,7 +1713,6 @@ exports[`FormFields <Switch /> should render sm Switch correctly 1`] = `
                   tabIndex={0}
                 >
                   <input
-                    FieldProvider={[Function]}
                     checked={true}
                     id="someIdKey"
                     onBlur={[Function]}
@@ -1805,6 +1793,7 @@ exports[`FormFields <TextField /> should render correctly 1`] = `
             "invalid": false,
             "length": undefined,
             "modified": false,
+            "modifiedSinceLastSubmit": false,
             "pristine": true,
             "submitError": undefined,
             "submitFailed": false,
@@ -1871,6 +1860,7 @@ exports[`FormFields <TextField /> should render correctly with placeholder 1`] =
             "invalid": false,
             "length": undefined,
             "modified": false,
+            "modifiedSinceLastSubmit": false,
             "pristine": true,
             "submitError": undefined,
             "submitFailed": false,
@@ -1943,6 +1933,7 @@ exports[`FormFields <Textarea /> should render correctly 1`] = `
             "invalid": true,
             "length": undefined,
             "modified": false,
+            "modifiedSinceLastSubmit": false,
             "pristine": false,
             "submitError": undefined,
             "submitFailed": false,
@@ -2012,6 +2003,7 @@ exports[`FormFields <Textarea /> should render correctly with placeholder 1`] = 
             "invalid": true,
             "length": undefined,
             "modified": false,
+            "modifiedSinceLastSubmit": false,
             "pristine": false,
             "submitError": undefined,
             "submitFailed": false,

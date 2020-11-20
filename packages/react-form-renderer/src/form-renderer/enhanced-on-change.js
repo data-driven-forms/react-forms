@@ -56,7 +56,7 @@ const enhancedOnChange = ({ dataType, onChange, initial, clearedValue, dirty, ..
   const sanitizedValue = sanitizeValue(value);
 
   let result;
-  if (typeof sanitizedValue == 'object' && sanitizedValue.target && sanitizedValue.target.type === 'checkbox') {
+  if (typeof sanitizedValue == 'object' && sanitizedValue !== null && sanitizedValue.target && sanitizedValue.target.type === 'checkbox') {
     result = sanitizedValue;
   } else {
     result = Array.isArray(sanitizedValue)

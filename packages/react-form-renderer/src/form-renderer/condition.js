@@ -1,91 +1,9 @@
 import React, { useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
-import lodashIsEmpty from 'lodash/isEmpty';
-import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';
 
 import useFormApi from '../files/use-form-api';
-
-const isEmptyValue = (value) => (typeof value === 'number' || value === true ? false : lodashIsEmpty(value));
-
-const fieldCondition = (value, { is, isNotEmpty, isEmpty, pattern, notMatch, flags }) => {
-  if (isNotEmpty) {
-    return !isEmptyValue(value);
-  }
-
-  if (isEmpty) {
-    return isEmptyValue(value);
-  }
-
-  if (pattern) {
-    const regExpPattern = RegExp(pattern, flags);
-
-    return notMatch ? !regExpPattern.test(value) : regExpPattern.test(value);
-  }
-
-  const isMatched = Array.isArray(is) ? !!is.includes(value) : value === is;
-
-  return notMatch ? !isMatched : isMatched;
-};
-
-export const parseCondition = (condition, values) => {
-  let positiveResult = {
-    visible: true,
-    ...condition.then,
-    result: true
-  };
-
-  let negativeResult = {
-    visible: false,
-    ...condition.else,
-    result: false
-  };
-
-  if (Array.isArray(condition)) {
-    return !condition.map((condition) => parseCondition(condition, values)).some(({ result }) => result === false) ? positiveResult : negativeResult;
-  }
-
-  if (condition.and) {
-    return !condition.and.map((condition) => parseCondition(condition, values)).some(({ result }) => result === false)
-      ? positiveResult
-      : negativeResult;
-  }
-
-  if (condition.sequence) {
-    return condition.sequence.reduce(
-      (acc, curr) => {
-        const result = parseCondition(curr, values);
-
-        return {
-          sets: [...acc.sets, ...(result.set ? [result.set] : [])],
-          visible: acc.visible || result.visible,
-          result: acc.result || result.result
-        };
-      },
-      { ...negativeResult, sets: [] }
-    );
-  }
-
-  if (condition.or) {
-    return condition.or.map((condition) => parseCondition(condition, values)).some(({ result }) => result === true) ? positiveResult : negativeResult;
-  }
-
-  if (condition.not) {
-    return !parseCondition(condition.not, values).result ? positiveResult : negativeResult;
-  }
-
-  if (typeof condition.when === 'string') {
-    return fieldCondition(get(values, condition.when), condition) ? positiveResult : negativeResult;
-  }
-
-  if (Array.isArray(condition.when)) {
-    return condition.when.map((fieldName) => fieldCondition(get(values, fieldName), condition)).find((condition) => !!condition)
-      ? positiveResult
-      : negativeResult;
-  }
-
-  return negativeResult;
-};
+import parseCondition from '../files/parse-condition';
 
 export const reducer = (state, { type, sets }) => {
   switch (type) {
@@ -106,7 +24,7 @@ export const reducer = (state, { type, sets }) => {
 };
 
 const Condition = React.memo(
-  ({ condition, children, values }) => {
+  ({ condition, children, values, field }) => {
     const formOptions = useFormApi();
     const dirty = formOptions.getState().dirty;
 
@@ -115,7 +33,7 @@ const Condition = React.memo(
       initial: true
     });
 
-    const conditionResult = parseCondition(condition, values, formOptions);
+    const conditionResult = parseCondition(condition, values, field);
     const setters = conditionResult.set ? [conditionResult.set] : conditionResult.sets;
 
     useEffect(() => {
@@ -147,11 +65,15 @@ const Condition = React.memo(
 );
 
 const conditionProps = {
-  when: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+  when: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string), PropTypes.func]),
   is: PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.object, PropTypes.number, PropTypes.bool]),
   isNotEmpty: PropTypes.bool,
   isEmpty: PropTypes.bool,
   pattern: (props, name, componentName) => {
+    if (!props[name]) {
+      return;
+    }
+
     if (typeof props[name] === 'string') {
       return;
     }
@@ -189,7 +111,8 @@ const conditionsProps = {
 Condition.propTypes = {
   condition: PropTypes.oneOfType([PropTypes.shape(conditionsProps), PropTypes.arrayOf(PropTypes.shape(conditionsProps))]),
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired,
-  values: PropTypes.object.isRequired
+  values: PropTypes.object.isRequired,
+  field: PropTypes.object.isRequired
 };
 
 export default Condition;

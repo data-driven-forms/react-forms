@@ -1,4 +1,4 @@
-import { useEffect, useContext, useRef, useReducer } from 'react';
+import { useEffect, useContext, useRef, useReducer, useState } from 'react';
 import { useField } from 'react-final-form';
 import enhancedOnChange from '../form-renderer/enhanced-on-change';
 import RendererContext from './renderer-context';
@@ -21,16 +21,34 @@ const calculateArrayValidator = (props, validate, component, validatorMapper) =>
   }
 };
 
-const calculateValidate = (props, validate, component, validatorMapper) => {
+const calculateValidate = (props, validate, component, validatorMapper, setWarning, useWarnings) => {
   if ((validate || props.dataType) && componentTypes.FIELD_ARRAY !== component) {
-    return composeValidators(getValidate(validate, props.dataType, validatorMapper));
+    const validateFn = composeValidators(getValidate(validate, props.dataType, validatorMapper));
+
+    if (useWarnings) {
+      return async (...args) => {
+        setWarning(undefined);
+
+        const result = await validateFn(...args);
+
+        if (result?.type === 'warning') {
+          setWarning(result.error);
+
+          return;
+        }
+
+        return result;
+      };
+    }
+
+    return validateFn;
   }
 };
 
-const init = ({ props, validate, component, validatorMapper }) => ({
+const init = ({ props, validate, component, validatorMapper, setWarning, useWarnings }) => ({
   initialValue: calculateInitialValue(props),
   arrayValidator: calculateArrayValidator(props, validate, component, validatorMapper),
-  validate: calculateValidate(props, validate, component, validatorMapper),
+  validate: calculateValidate(props, validate, component, validatorMapper, setWarning, useWarnings),
   type: assignSpecialType(component)
 });
 
@@ -57,12 +75,28 @@ const reducer = (state, { type, specialType, validate, arrayValidator, initialVa
   }
 };
 
-const useFieldApi = ({ name, initializeOnMount, component, render, validate, resolveProps, ...props }) => {
+const createFieldProps = (name, formOptions) => {
+  const { value, blur, change, focus, ...meta } = formOptions.getFieldState(name) || {};
+
+  return {
+    meta,
+    input: { name, value }
+  };
+};
+
+const useFieldApi = ({ name, initializeOnMount, component, render, validate, resolveProps, useWarnings, ...props }) => {
   const { validatorMapper, formOptions } = useContext(RendererContext);
+  const [warning, setWarning] = useState();
+
+  const { validate: resolvePropsValidate, ...resolvedProps } = resolveProps
+    ? resolveProps(props, createFieldProps(name, formOptions), formOptions) || {}
+    : {};
+
+  const finalValidate = resolvePropsValidate || validate;
 
   const [{ type, initialValue, validate: stateValidate, arrayValidator }, dispatch] = useReducer(
     reducer,
-    { props, validate, component, validatorMapper },
+    { props: { ...props, ...resolvedProps }, validate: finalValidate, component, validatorMapper, setWarning, useWarnings },
     init
   );
 
@@ -71,6 +105,7 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
   const enhancedProps = {
     type,
     ...props,
+    ...resolvedProps,
     ...(initialValue ? { initialValue } : {}),
     ...(stateValidate ? { validate: stateValidate } : {})
   };
@@ -92,16 +127,22 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
     if (mounted.current) {
       dispatch({
         type: 'setValidators',
-        validate: calculateValidate(props, validate, component, validatorMapper),
-        arrayValidator: calculateArrayValidator(props, validate, component, validatorMapper)
+        validate: calculateValidate(enhancedProps, finalValidate, component, validatorMapper, setWarning, useWarnings),
+        arrayValidator: calculateArrayValidator(enhancedProps, finalValidate, component, validatorMapper)
       });
     }
-  }, [validate, component, props.dataType]);
+    /**
+     * We have to stringify the validate array in order to preven infinite looping when validate was passed directly to useFieldApi
+     * const x = useFieldApu({name: 'foo', validate: [{type: 'bar'}]}) will trigger infinite looping witouth the serialize.
+     * Using stringify is acceptable here since the array is usually very small.
+     * If we notice performance hit, we can implement custom hook with a deep equal functionality.
+     */
+  }, [finalValidate ? JSON.stringify(finalValidate) : false, component, enhancedProps.dataType]);
 
   /** Re-convert initialValue when changed */
   useEffect(() => {
     if (mounted.current) {
-      const newInitialValue = calculateInitialValue(props);
+      const newInitialValue = calculateInitialValue(enhancedProps);
       if (!isEqual(initialValue, newInitialValue)) {
         dispatch({
           type: 'setInitialValue',
@@ -109,7 +150,7 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
         });
       }
     }
-  }, [props.initialValue, props.dataType]);
+  }, [enhancedProps.initialValue, enhancedProps.dataType]);
 
   useEffect(() => {
     /**
@@ -154,16 +195,30 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
     []
   );
 
-  const { initialValue: _initialValue, clearOnUnmount, dataType, clearedValue, isEqual: _isEqual, ...cleanProps } = props;
+  const {
+    initialValue: _initialValue,
+    clearOnUnmount,
+    dataType,
+    clearedValue,
+    isEqual: _isEqual,
+    validate: _validate,
+    type: _type,
+    ...cleanProps
+  } = enhancedProps;
 
   /**
    * construct component props necessary that would live in field provider
    */
   return {
     ...cleanProps,
-    ...(resolveProps ? resolveProps(cleanProps, fieldProps, formOptions) : {}),
     ...fieldProps,
-    ...(arrayValidator ? { arrayValidator } : {}),
+    ...(arrayValidator && { arrayValidator }),
+    ...(useWarnings && {
+      meta: {
+        ...fieldProps.meta,
+        warning
+      }
+    }),
     input: {
       ...fieldProps.input,
       value:

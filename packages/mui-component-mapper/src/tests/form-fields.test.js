@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import { act } from 'react-dom/test-utils';
 import { FormLabel } from '@material-ui/core';
 import MultipleChoiceListCommon from '@data-driven-forms/common/src/multiple-choice-list';
 import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
@@ -98,7 +99,39 @@ describe('formFields', () => {
           ).toEqual(errorText);
         });
 
-        it('renders with helperText', () => {
+        it('renders with warning', async () => {
+          const errorField = {
+            ...field,
+            validate: [{ type: validatorTypes.REQUIRED, warning: true }],
+            useWarnings: true
+          };
+          let wrapper;
+
+          await act(async () => {
+            wrapper = mount(
+              <RendererWrapper
+                schema={{
+                  fields: [errorField, { name: 'error-reset-touched', component: componentTypes.TEXT_FIELD, validate: [{ type: 'required' }] }]
+                }}
+              />
+            );
+          });
+          wrapper.update();
+
+          await act(async () => {
+            wrapper.find('form').simulate('submit');
+          });
+          wrapper.update();
+
+          expect(
+            wrapper
+              .find('.MuiFormHelperText-root')
+              .first()
+              .text()
+          ).toEqual(errorText);
+        });
+
+        it('renders with helperText', async () => {
           const helpertextField = {
             ...field,
             helperText

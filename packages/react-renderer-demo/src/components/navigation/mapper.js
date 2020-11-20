@@ -25,18 +25,22 @@ const Item = ({ href, linkText, component, divider, level }) => {
   const classes = useStyles();
   const router = useRouter();
   const link = useMapperLink(href.replace('/?', '?'));
+
+  const queryMapper = router.query.mapper ? `?mapper=${router.query.mapper}` : '';
+  const finalHref = queryMapper && link.match(query) ? `${link.replace(query, '')}${queryMapper}` : link;
+
   return (
     <ListItem
       divider={divider}
       button
-      selected={href.replace('/?', '?') === router.asPath.replace(query, '')}
+      selected={href.replace(query, '') === router.asPath.replace(query, '')}
       key={href || linkText}
       className={clsx(classes.item, {
         [classes.nested]: level > 0
       })}
       component={forwardRef((props, ref) => (
-        <RouterNavLink ref={ref} key={component} href={link}>
-          <Link style={{ color: 'rgba(0, 0, 0, 0.87)' }} {...props} href={link} />
+        <RouterNavLink ref={ref} key={component} href={finalHref}>
+          <Link style={{ color: 'rgba(0, 0, 0, 0.87)' }} {...props} href={finalHref} />
         </RouterNavLink>
       ))}
     >

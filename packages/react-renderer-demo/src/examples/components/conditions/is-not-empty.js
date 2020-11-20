@@ -29,10 +29,6 @@ const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField
 };
 
-const IsNotEmpty = () => (
-  <div>
-    <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
-  </div>
-);
+const IsNotEmpty = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
 
 export default IsNotEmpty;

@@ -14,6 +14,6 @@ React form renderer and component mappers include Typescript typings. Each expor
 
 You can learn more about Renderer and its prop types [here](/components/renderer).
 
-Mapper component prop types are listed in the mappers section of the documentation. You can start with [checkbox](/mappers/checkbox).
+Mapper component prop types are listed in the mappers section of the documentation. You can start with [checkbox](/mappers/checkbox?mapper=mui).
 
 </DocPage>

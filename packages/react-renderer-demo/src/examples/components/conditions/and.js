@@ -40,10 +40,6 @@ const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField
 };
 
-const AndCondition = () => (
-  <div>
-    <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
-  </div>
-);
+const AndCondition = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;
 
 export default AndCondition;

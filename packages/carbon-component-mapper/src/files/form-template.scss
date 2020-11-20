@@ -1,0 +1,17 @@
+.ddorg__carbon-form-template-buttons {
+    margin-top: 48px;
+}
+
+.ddorg__carbon-form-template-form {
+    >:not(:last-child) {
+        margin-bottom: 32px;
+    }
+
+    .ddorg__carbon-form-template-header {
+        margin-bottom: 40px;
+
+        div {
+            margin-top: 8px;
+        }
+    }
+}

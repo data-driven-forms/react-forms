@@ -103,10 +103,10 @@ const checkCondition = (condition, fieldName, isRoot) => {
     `);
     }
 
-    if (!(typeof condition.when === 'string' || Array.isArray(condition.when))) {
+    if (!(typeof condition.when === 'string' || typeof condition.when === 'function' || Array.isArray(condition.when))) {
       throw new DefaultSchemaError(`
       Error occured in field definition with name: "${fieldName}".
-      Field condition property "when" must be of type "string", ${typeof condition.when} received!].
+      Field condition property "when" must be of type "string", "function" or "array", ${typeof condition.when} received!].
     `);
     }
 

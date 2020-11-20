@@ -1,7 +1,5 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ComponentText from '@docs/components/component-example-text';
-import DatePickerText from '@docs/doc-components/date-picker';
-import useActiveMapper from '@docs/hooks/use-active-mapper';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 import baseFieldProps from '../../helpers/base-field-props';
 
@@ -38,19 +36,4 @@ const variants = [
   }
 ];
 
-export default () => {
-  const activeMapper = useActiveMapper();
-  return (
-    <Fragment>
-      <ComponentText
-        activeMapper={activeMapper}
-        component={componentTypes.DATE_PICKER}
-        schema={schema}
-        ContentText={DatePickerText}
-        variants={variants}
-        linkText="Date picker"
-      />
-      {activeMapper === 'mui' && <DatePickerText />}
-    </Fragment>
-  );
-};
+export default () => <ComponentText schema={schema} variants={variants} linkText="Date picker" />;

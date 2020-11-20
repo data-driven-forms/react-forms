@@ -1,0 +1,41 @@
+.ddorg__carbon-dual-list {
+    max-height: 500px;
+    overflow: auto;
+    display: block;
+    margin-bottom: 0px;
+}
+
+.ddorg__carbon-dual-list-body {
+    width: 100%;
+    display: inline-table;
+}
+
+
+.ddorg__carbon-dual-list-button-wrapper {
+    flex-direction: column;
+    padding: 8px !important;
+    padding-top: 8px !important;
+
+    button {
+        width: 100%;
+        max-width: 100%;
+
+        @media (max-width: 1055px) {
+            svg {
+                transform: rotate(90deg);
+            }
+        }
+    }
+
+    button:not(:last-child) {
+        margin-bottom: 8px;
+    }
+}
+
+.ddorg__carbon-dual-list-toolbar {
+    display: flex;
+}
+
+.ddorg__carbon-dual-list-tooltipbutton {
+    background: #c2c1c1 !important;
+}

@@ -1,12 +1,12 @@
 [![npm version](https://badge.fury.io/js/%40data-driven-forms%2Fpf4-component-mapper.svg)](https://badge.fury.io/js/%40data-driven-forms%2Fpf4-component-mapper)
+[![Tweet](https://img.shields.io/twitter/url/https/github.com/tterb/hyde.svg?style=social)](https://twitter.com/intent/tweet?text=Check%20DataDrivenForms%20React%20library%21%20https%3A%2F%2Fdata-driven-forms.org%2F&hashtags=react,opensource,datadrivenforms)
+[![Twitter Follow](https://img.shields.io/twitter/follow/DataDrivenForms.svg?style=social)](https://twitter.com/DataDrivenForms)
 
 [![Data Driven Form logo](../../images/logo.png)](https://data-driven-forms.org/)
 
 Parsers for [Data Driven Forms](https://github.com/data-driven-forms/react-forms).
 
 :book: For more information please visit the [documentation](https://data-driven-forms.org/). :book:
-
-Used by [ManageIQ](http://manageiq.org/), Red Hat Cloud Services.
 
 **Table of Contents**
 
@@ -78,7 +78,7 @@ const Form = () => (
 
 ### Development setup
 
-Data Driven Forms is a monorepo which uses [Lerna](https://github.com/lerna/lerna), so you can use all its commands as well.
+Data Driven Forms is a monorepo that uses [Lerna](https://github.com/lerna/lerna) and [yarn workspaces](https://classic.yarnpkg.com/blog/2017/08/02/introducing-workspaces/), so you can use all its commands as well.
 
 1. Install
 

@@ -1,8 +1,8 @@
-export const pf4Html = `
+export const html = `
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@patternfly/patternfly@4.0.5/patternfly-base.css"/>
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@patternfly/patternfly@4.0.5/patternfly-addons.css"/>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@patternfly/patternfly@latest/patternfly-base.css"/>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@patternfly/patternfly@latest/patternfly-addons.css"/>
   </head>
   <body>
     <div id="root"></div>
@@ -10,7 +10,7 @@ export const pf4Html = `
 </html>
 `;
 
-export const pf4Code = `import React, { Component } from 'react';
+export const code = `import React, { Component } from 'react';
 import { render } from 'react-dom';
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
@@ -35,7 +35,7 @@ class App extends Component {
 
 render(<App />, document.getElementById('root'));`;
 
-export const pf4WizardCode = `import React, { Component } from 'react';
+export const wizardCode = `import React, { Component } from 'react';
 import { render } from 'react-dom';
 import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
 import Pf4FormTemplate from '@data-driven-forms/pf4-component-mapper/dist/cjs/form-template';
@@ -62,7 +62,7 @@ class App extends Component {
 
 render(<App />, document.getElementById('root'));`;
 
-export const pf4Dependencies = {
+export const dependencies = {
   react: '^16.12.0',
   'react-dom': '^16.12.0',
   '@data-driven-forms/react-form-renderer': 'latest',

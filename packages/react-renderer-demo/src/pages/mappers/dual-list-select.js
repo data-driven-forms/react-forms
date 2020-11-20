@@ -1,7 +1,5 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ComponentText from '@docs/components/component-example-text';
-import DualListSelect from '@docs/doc-components/dual-list-select';
-import useActiveMapper from '@docs/hooks/use-active-mapper';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 import baseFieldProps from '../../helpers/base-field-props';
 
@@ -38,18 +36,4 @@ const schema = {
 
 const variants = [...baseFieldProps];
 
-export default () => {
-  const activeMapper = useActiveMapper();
-  return (
-    <Fragment>
-      <ComponentText
-        activeMapper={activeMapper}
-        component={componentTypes.DUAL_LIST_SELECT}
-        schema={schema}
-        ContentText={DualListSelect}
-        variants={variants}
-        linkText="Dual list select"
-      />
-    </Fragment>
-  );
-};
+export default () => <ComponentText schema={schema} variants={variants} linkText="Dual list select" />;
