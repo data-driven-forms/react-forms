@@ -241,6 +241,7 @@ const createManagerApi: CreateManagerApi = ({
     destroyOnUnregister,
     registerInputFile,
     unregisterInputFile,
+    getRegisteredFields,
     ...initialFormState(initialValues)
   };
   let inBatch = 0;
@@ -860,7 +861,7 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function getState(): ManagerState {
-    return state;
+    return { ...state };
   }
 
   function updateValidating(validating: boolean) {
@@ -929,7 +930,7 @@ const createManagerApi: CreateManagerApi = ({
             } else {
               traverseObject(mergedSubscription, (subscribed, key) => {
                 if (!shouldRender) {
-                  shouldRender = subscribed && subscribeTo?.includes(key);
+                  shouldRender = subscribed && (key === 'all' || subscribeTo?.includes(key));
                 }
               });
             }
@@ -1012,6 +1013,10 @@ const createManagerApi: CreateManagerApi = ({
 
   function unregisterInputFile(name: string): void {
     state.fileInputs.splice(state.fileInputs.indexOf(name), 1);
+  }
+
+  function getRegisteredFields(): Array<string> {
+    return state.registeredFields;
   }
 
   return managerApi;

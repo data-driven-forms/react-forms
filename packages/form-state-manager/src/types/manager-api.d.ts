@@ -47,6 +47,7 @@ export type SetConfig = (attribute: keyof CreateManagerApiConfig, value: any) =>
 export type AfterSilentRegistration = (field: Omit<FieldConfig, 'render'>) => void;
 export type RegisterInputFile = (name: string) => void;
 export type UnregisterInputFile = (name: string) => void;
+export type GetRegisteredFields = () => Array<string>;
 export interface AsyncWatcherRecord {
   [key: number]: Promise<unknown>;
 }
@@ -119,7 +120,8 @@ export type ManagerApiFunctions =
   | 'setConfig'
   | 'afterSilentRegistration'
   | 'registerInputFile'
-  | 'unregisterInputFile';
+  | 'unregisterInputFile'
+  | 'getRegisteredFields';
 
 export interface ManagerState {
   values: AnyObject;
@@ -152,6 +154,7 @@ export interface ManagerState {
   resumeValidation: ResumeValidation;
   setConfig: SetConfig;
   afterSilentRegistration: AfterSilentRegistration;
+  getRegisteredFields: GetRegisteredFields;
   registeredFields: Array<string>;
   fieldListeners: FieldListeners;
   active: string | undefined;

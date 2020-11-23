@@ -17,6 +17,7 @@ export interface Subscription {
   valid?: boolean;
   validating?: boolean;
   visited?: boolean;
+  all?: boolean;
 }
 
 export interface Meta {

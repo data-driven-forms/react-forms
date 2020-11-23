@@ -96,7 +96,7 @@ const useField = ({
 
     return internalId;
   });
-  const state = formOptions().getFieldState(name);
+  const state = formOptions.getFieldState(name);
 
   const finalClearedValue = Object.prototype.hasOwnProperty.call(props, 'clearedValue') ? props.clearedValue : rest.clearedValue;
 
@@ -128,15 +128,15 @@ const useField = ({
 
   useEffect(
     () => {
-      formOptions().afterSilentRegistration({ name, internalId: id });
+      formOptions.afterSilentRegistration({ name, internalId: id });
 
       if (type === 'file') {
-        formOptions().registerInputFile(name);
+        formOptions.registerInputFile(name);
       }
 
       return () => {
         if (type === 'file') {
-          formOptions().unregisterInputFile(name);
+          formOptions.unregisterInputFile(name);
         }
 
         unregisterField({ name, clearOnUnmount, internalId: id, value: finalClearedValue });
@@ -154,7 +154,7 @@ const useField = ({
     }
   };
 
-  let valueToReturn = formOptions().getFieldValue(name);
+  let valueToReturn = formOptions.getFieldValue(name);
   let checked;
 
   if (type === 'checkbox') {

@@ -1,7 +1,11 @@
 import { Subscription } from './use-field';
 import { ManagerState } from './manager-api';
 
-type Children = (props: ManagerState) => React.ReactElement;
+interface ChildrenFormSpyProps extends ManagerState {
+  form: ManagerState;
+}
+
+type Children = (props: ChildrenFormSpyProps) => React.ReactElement;
 
 export interface FormSpyProps {
   children: Children;

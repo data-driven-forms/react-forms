@@ -16,7 +16,8 @@ const outputPaths = [
 
 const globals = {
   react: 'React',
-  'react-dom': 'ReactDOM'
+  'react-dom': 'ReactDOM',
+  '@data-driven-forms/form-state-manager': '@data-driven-forms/form-state-manager'
 };
 
 const babelOptions = {

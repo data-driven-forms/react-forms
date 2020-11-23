@@ -19,7 +19,7 @@ const FormManagerContext = createContext<ManagerContextValue>({
   }),
   formOptions: createManagerApi({
     onSubmit: noop
-  }),
+  })(),
   getFieldValue: noop,
   getFieldState: () => undefined,
   blur: noop,

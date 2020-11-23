@@ -1,10 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useReducer, useRef, useState } from 'react';
 
 import FormManagerContext from './form-manager-context';
 import createManagerApi from '../utils/manager-api';
 
 import FormStateManagerProps from '../types/form-state-manager';
 import useFieldArrayApi from './use-field-array-api';
+import generateId from '../utils/generate-id';
 
 const FormStateManager: React.ComponentType<FormStateManagerProps> = ({
   children,
@@ -15,50 +16,50 @@ const FormStateManager: React.ComponentType<FormStateManagerProps> = ({
   initialValues,
   initializeOnMount,
   validate,
-  debug
+  debug,
+  render
 }) => {
   const { current: managerApi } = useRef(
     createManagerApi({ onSubmit, clearOnUnmount, validate, subscription, initialValues, initializeOnMount, debug })
   );
 
-  const {
-    batch,
-    change,
-    handleSubmit,
-    registerField,
-    unregisterField,
-    getState,
-    getFieldValue,
-    getFieldState,
-    blur,
-    focus,
-    subscribe,
-    unsubscribe
-  } = managerApi();
+  const { change, getFieldValue, subscribe, unsubscribe, pauseValidation, resumeValidation } = managerApi();
+
+  const [, rerender] = useReducer((prev) => prev + 1, 0);
+
+  const [id] = useState(() => {
+    const internalId = generateId();
+
+    pauseValidation();
+
+    subscribe({ name: internalId, render: rerender, subscription });
+
+    return internalId;
+  });
+
+  useEffect(
+    () => {
+      resumeValidation();
+      return () => {
+        unsubscribe({ name: id });
+      };
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   const { current: fieldArrayApi } = useRef(useFieldArrayApi(change, getFieldValue));
+
+  const managerState = {
+    formOptions: managerApi(),
+    clearedValue,
+    ...managerApi().getState(),
+    ...fieldArrayApi
+  };
+
   return (
-    <FormManagerContext.Provider
-      value={{
-        batch,
-        blur,
-        focus,
-        getFieldState,
-        getFieldValue,
-        change,
-        getState,
-        handleSubmit,
-        registerField,
-        unregisterField,
-        formOptions: managerApi,
-        clearedValue,
-        initialValues,
-        subscribe,
-        unsubscribe,
-        ...fieldArrayApi
-      }}
-    >
-      <FormManagerContext.Consumer>{(managerState) => children(managerState)}</FormManagerContext.Consumer>
+    <FormManagerContext.Provider value={managerState}>
+      <FormManagerContext.Consumer>{() => (render ? render(managerState) : children(managerState))}</FormManagerContext.Consumer>
     </FormManagerContext.Provider>
   );
 };
