@@ -194,6 +194,91 @@ describe('Default schema validator', () => {
     ).not.toThrow();
   });
 
+  it('should not fail if field condition pattern property is a function', () => {
+    expect(() =>
+      defaultSchemaValidator(
+        {
+          fields: [
+            {
+              component: 'foo',
+              name: 'foo',
+              condition: { when: 'Foo', is: () => true }
+            }
+          ]
+        },
+        componentMapper
+      )
+    ).not.toThrow();
+  });
+
+  it('should not fail if field condition pattern property is a greaterThan', () => {
+    expect(() =>
+      defaultSchemaValidator(
+        {
+          fields: [
+            {
+              component: 'foo',
+              name: 'foo',
+              condition: { when: 'Foo', greaterThan: 1 }
+            }
+          ]
+        },
+        componentMapper
+      )
+    ).not.toThrow();
+  });
+
+  it('should not fail if field condition pattern property is a greaterThanOrEqualTo', () => {
+    expect(() =>
+      defaultSchemaValidator(
+        {
+          fields: [
+            {
+              component: 'foo',
+              name: 'foo',
+              condition: { when: 'Foo', greaterThanOrEqualTo: 1 }
+            }
+          ]
+        },
+        componentMapper
+      )
+    ).not.toThrow();
+  });
+
+  it('should not fail if field condition pattern property is a lessThan', () => {
+    expect(() =>
+      defaultSchemaValidator(
+        {
+          fields: [
+            {
+              component: 'foo',
+              name: 'foo',
+              condition: { when: 'Foo', lessThan: 1 }
+            }
+          ]
+        },
+        componentMapper
+      )
+    ).not.toThrow();
+  });
+
+  it('should not fail if field condition pattern property is a lessThanOrEqualTo', () => {
+    expect(() =>
+      defaultSchemaValidator(
+        {
+          fields: [
+            {
+              component: 'foo',
+              name: 'foo',
+              condition: { when: 'Foo', lessThanOrEqualTo: 1 }
+            }
+          ]
+        },
+        componentMapper
+      )
+    ).not.toThrow();
+  });
+
   it('should fail if field condition have notMatch property and have not is/pattern.', () => {
     expect(() =>
       defaultSchemaValidator(
