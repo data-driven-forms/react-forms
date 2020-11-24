@@ -94,5 +94,13 @@ const Section = ({fields}) => {
 ## Q. I see 'useField must be used inside of a Form' component error when using DDF
 
 **A.** You have probably mixed different DDF modules. Please see [optimization](/optimization) page.
+<br />
+
+---
+<br />
+
+## Q. Using conditions in FieldArray
+
+**A.** To use conditions in FieldArray correctly, you have to use the right field index in `when` field. This can be achieved via using a [function](/schema/condition-schema#when) instead of a direct name. Functions in `when` field receive the current field, so you know the full name with the correct index.
 
 </DocPage>
