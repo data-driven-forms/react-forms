@@ -3,24 +3,44 @@ import get from 'lodash/get';
 
 const isEmptyValue = (value) => (typeof value === 'number' || value === true ? false : lodashIsEmpty(value));
 
-const fieldCondition = (value, { is, isNotEmpty, isEmpty, pattern, notMatch, flags }) => {
-  if (isNotEmpty) {
+const fieldCondition = (value, config) => {
+  if (config.isNotEmpty) {
     return !isEmptyValue(value);
   }
 
-  if (isEmpty) {
+  if (config.isEmpty) {
     return isEmptyValue(value);
   }
 
-  if (pattern) {
-    const regExpPattern = RegExp(pattern, flags);
+  if (config.pattern) {
+    const regExpPattern = RegExp(config.pattern, config.flags);
 
-    return notMatch ? !regExpPattern.test(value) : regExpPattern.test(value);
+    return config.notMatch ? !regExpPattern.test(value) : regExpPattern.test(value);
   }
 
-  const isMatched = Array.isArray(is) ? !!is.includes(value) : value === is;
+  if (typeof config.is === 'function') {
+    return config.is(value, config);
+  }
 
-  return notMatch ? !isMatched : isMatched;
+  if (Object.prototype.hasOwnProperty.call(config, 'greaterThan')) {
+    return value > config.greaterThan;
+  }
+
+  if (Object.prototype.hasOwnProperty.call(config, 'greaterThanOrEqualTo')) {
+    return value >= config.greaterThanOrEqualTo;
+  }
+
+  if (Object.prototype.hasOwnProperty.call(config, 'lessThan')) {
+    return value < config.lessThan;
+  }
+
+  if (Object.prototype.hasOwnProperty.call(config, 'lessThanOrEqualTo')) {
+    return value <= config.lessThanOrEqualTo;
+  }
+
+  const isMatched = Array.isArray(config.is) ? !!config.is.includes(value) : value === config.is;
+
+  return config.notMatch ? !isMatched : isMatched;
 };
 
 export const parseCondition = (condition, values, field) => {

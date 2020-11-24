@@ -44,7 +44,7 @@ exports[`Default schema validator should fail if field condition have notMatch p
 exports[`Default schema validator should fail if field condition is missing is key. 1`] = `
 "
       Error occured in field definition with name: \\"foo\\".
-      Field condition must have one of \\"is\\", \\"isEmpty\\", \\"isNotEmpty\\", \\"pattern\\" property! Properties received: [when].
+      Field condition must have one of \\"is\\", \\"isEmpty\\", \\"isNotEmpty\\", \\"pattern\\", \\"greaterThan\\", \\"greaterThanOrEqualTo\\", \\"lessThan\\", \\"lessThanOrEqualTo\\" property! Properties received: [when].
     "
 `;
 
