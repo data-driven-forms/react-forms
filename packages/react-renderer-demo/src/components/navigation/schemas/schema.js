@@ -3,6 +3,7 @@ import schemaRenderer from './renderer.schema';
 import schemaNav from './schema.schema';
 import schemaHooks from './hooks.schema';
 import mappersSchema from './mappers.schema';
+import customExamplesSchema from './custom-examples.schema';
 
 const schema = [
   {
@@ -56,6 +57,12 @@ const schema = [
   {
     linkText: 'Optimization',
     link: 'optimization'
+  },
+  {
+    title: 'Examples',
+    link: 'examples',
+    noRoute: true,
+    fields: customExamplesSchema
   },
   {
     linkText: 'Releases',
