@@ -92,5 +92,37 @@ yarn generate-template
 ```
 
 This command starts a CLI, that provides an interface for generating mappers. A mapper folder will be created and it will be populated with all neccesary files.
+## Adding form component example
+
+To add additional examples of [custom form components](/examples/sample-example), please follow these steps.
+
+1. Create a new markdown file in this directory: https://github.com/data-driven-forms/react-forms/tree/master/packages/react-renderer-demo/src/pages/examples.
+2. Wrap the whole content into `DocPage` component:
+```md
+import DocPage from '@docs/doc-page';
+
+<DocPage>
+  Your content
+</DocPage>
+
+```
+3. Add this information to the file:
+    1.  Description of the component
+    2. A problem it may help to solve
+    3. Example of the component implementation and usage in a form
+4. To create an example follow these steps:
+    1. Create a new JS file in this directory: https://github.com/data-driven-forms/react-forms/tree/master/packages/react-renderer-demo/src/examples/components/examples
+    2. Import the code example using this path `components/examples/<file name without extenstion>`
+
+```md
+
+import CodeExample from '@docs/code-example';
+
+<CodeExample source="components/examples/sample-example" mode="preview" />
+
+```
+5. Add the component to the navigation. Add a new object to this file: https://github.com/data-driven-forms/react-forms/blob/master/packages/react-renderer-demo/src/components/navigation/schemas/custom-examples.schema.js
+    1. Title: text of the link
+    2. Component: exact filename of the **markdown file**
 
 </DocPage>
