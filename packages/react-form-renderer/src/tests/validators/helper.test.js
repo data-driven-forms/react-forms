@@ -1,5 +1,5 @@
 import React from 'react';
-import { memoize, prepareMsg } from '../../validators/helpers';
+import { memoize, prepareMsg } from '../../common/helpers';
 
 describe('Validators helpers', () => {
   describe('memoize', () => {

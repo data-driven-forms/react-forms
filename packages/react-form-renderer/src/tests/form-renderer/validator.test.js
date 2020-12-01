@@ -2,10 +2,10 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 
-import FormRenderer from '../../files/form-renderer';
-import componentTypes from '../../files/component-types';
+import FormRenderer from '../../form-renderer/form-renderer';
+import componentTypes from '../../component-types/component-types';
 import FormTemplate from '../../../../../__mocks__/mock-form-template';
-import useFieldApi from '../../files/use-field-api';
+import useFieldApi from '../../use-field-api/use-field-api';
 
 describe('FormRenderer validator', () => {
   const TextField = (props) => {

@@ -4,10 +4,10 @@ import { act } from 'react-dom/test-utils';
 
 import FormTemplate from '../../../../../__mocks__/mock-form-template';
 import componentTypes from '../../../dist/cjs/component-types';
-import useFieldApi from '../../files/use-field-api';
-import FormRenderer from '../../files/form-renderer';
+import useFieldApi from '../../use-field-api/use-field-api';
+import FormRenderer from '../../form-renderer/form-renderer';
 
-import { reducer } from '../../form-renderer/condition';
+import { reducer } from '../../condition/condition';
 
 const TextField = (props) => {
   const { input } = useFieldApi(props);

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { childrenPropTypes } from '@data-driven-forms/common/src/prop-types-templates';
-import RendererContext from '../files/renderer-context';
-import Condition from './condition';
-import FormSpy from '../files/form-spy';
+import RendererContext from '../renderer-context';
+import Condition from '../condition';
+import FormSpy from '../form-spy';
 
 const FormFieldHideWrapper = ({ hideField, children }) => (hideField ? <div hidden>{children}</div> : children);
 

@@ -11,7 +11,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "start": "webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
-    "build": "rollup -c ./rollup.config.js && yarn build:typings",
+    "build": "node generate-index.js",
     "build:typings": "node ../../scripts/copy-files.js",
     "release": "semantic-release"
   },

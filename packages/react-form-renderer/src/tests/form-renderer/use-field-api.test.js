@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 
-import useFieldApi from '../../files/use-field-api';
-import componentTypes from '../../files/component-types';
+import useFieldApi from '../../use-field-api/use-field-api';
+import componentTypes from '../../component-types/component-types';
 import Form from '../../files/form';
-import RendererContext from '../../files/renderer-context';
-import validatorTypes from '../../files/validator-types';
+import RendererContext from '../../renderer-context/renderer-context';
+import validatorTypes from '../../validator-types/validator-types';
 
 describe('useFieldApi', () => {
   const Catcher = ({ children }) => children;

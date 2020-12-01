@@ -1,7 +1,7 @@
 import output from './output';
 import React from 'react';
-import defaultSchemaValidator from '../../files/default-schema-validator';
-import componentTypes from '../../files/component-types';
+import defaultSchemaValidator from '../../default-schema-validator/default-schema-validator';
+import componentTypes from '../../component-types/component-types';
 import { validatorTypes as validatorTypesDefault } from '../..';
 
 describe('Default schema validator', () => {
