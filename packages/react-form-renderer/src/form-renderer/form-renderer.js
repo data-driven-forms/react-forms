@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import Form from '../files/form';
+import Form from '../form';
 import arrayMutators from 'final-form-arrays';
 import PropTypes from 'prop-types';
 import createFocusDecorator from 'final-form-focus';

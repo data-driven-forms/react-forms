@@ -56,6 +56,7 @@ const createSuirCJSTransform = (env = 'commonjs') => [
         } else {
           throw new Error(`File with importName ${importName} does not exist`);
         }
+
         res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
         res = res.replace(/^\//, '');
         return res;
@@ -76,7 +77,7 @@ const createMuiTransform = (env) => [
       skipDefaultConversion: false
     },
     '@material-ui/core': {
-      transform: (importName) => env ? `@material-ui/core/${env}/${importName}` : `@material-ui/core/${importName}`,
+      transform: (importName) => (env ? `@material-ui/core/${env}/${importName}` : `@material-ui/core/${importName}`),
       preventFullImport: false,
       skipDefaultConversion: false
     }
@@ -133,7 +134,7 @@ const createPfReactTransform = (env) => [
     }
   },
   `pf-react-${env}`
-]
+];
 
 const createBluePrintTransform = (env) => [
   'transform-imports',
@@ -147,18 +148,55 @@ const createBluePrintTransform = (env) => [
     }
   },
   `BLUEPRINT-${env}`
-]
+];
 
 const createAntTransform = (env) => [
   'transform-imports',
   {
-    'antd': {
+    antd: {
       transform: (importName) => {
         let res;
         const files = glob.sync(
-          path.resolve(__dirname, `../../node_modules/antd/${env === 'cjs' ? 'lib' : 'es' }/${importName.split(/(?=[A-Z])/)
-            .join('-')
-            .toLowerCase()}/index.js`)
+          path.resolve(
+            __dirname,
+            `../../node_modules/antd/${env === 'cjs' ? 'lib' : 'es'}/${importName
+              .split(/(?=[A-Z])/)
+              .join('-')
+              .toLowerCase()}/index.js`
+          )
+        );
+        if (files.length > 0) {
+          res = files[0];
+        } else {
+          throw new Error(`File with importName ${importName} does not exist`);
+        }
+
+        res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
+        res = res.replace(/^\//, '');
+        return res;
+      }
+    }
+  },
+  `ant-${env}`
+];
+
+const carbonMapper = (importName) =>
+  ({
+    StructuredListWrapper: 'StructuredList',
+    StructuredListBody: 'StructuredList',
+    StructuredListRow: 'StructuredList',
+    StructuredListCell: 'StructuredList',
+    ProgressStep: 'ProgressIndicator'
+  }[importName] || importName);
+
+const createCarbonCJSTransform = (env) => [
+  'transform-imports',
+  {
+    'carbon-components-react': {
+      transform: (importName) => {
+        let res;
+        const files = glob.sync(
+          path.resolve(__dirname, `../../node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es'}/**/${carbonMapper(importName)}.js`)
         );
         if (files.length > 0) {
           res = files[0];
@@ -170,47 +208,21 @@ const createAntTransform = (env) => [
         res = res.replace(/^\//, '');
         return res;
       },
-    },
-  },
-  `ant-${env}`
-]
-
-const carbonMapper = (importName) => ({
-  StructuredListWrapper: 'StructuredList',
-  StructuredListBody: 'StructuredList',
-  StructuredListRow: 'StructuredList',
-  StructuredListCell: 'StructuredList',
-  ProgressStep: 'ProgressIndicator'
-}[importName] || importName)
-
-const createCarbonCJSTransform = (env) => [
-  'transform-imports',
-  {
-    'carbon-components-react': {
-      transform: (importName) => {
-        let res;
-        const files = glob.sync(path.resolve(__dirname, `../../node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es' }/**/${carbonMapper(importName)}.js`));
-        if (files.length > 0) {
-          res = files[0];
-        } else {
-          throw new Error(`File with importName ${importName} does not exist`);
-        }
-        res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
-        res = res.replace(/^\//, '');
-        return res;
-      },
       preventFullImport: false,
       skipDefaultConversion: false
     },
     'carbon-components-react/lib/components/StructuredList/StructuredList': {
       transform: (importName) => {
         let res;
-        const files = glob.sync(path.resolve(__dirname, `../../node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es' }/**/${carbonMapper(importName)}.js`));
+        const files = glob.sync(
+          path.resolve(__dirname, `../../node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es'}/**/${carbonMapper(importName)}.js`)
+        );
         if (files.length > 0) {
           res = files[0];
         } else {
           throw new Error(`File with importName ${importName} does not exist`);
         }
+
         res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
         res = res.replace(/^\//, '');
         return res;
@@ -221,12 +233,15 @@ const createCarbonCJSTransform = (env) => [
     'carbon-components-react/lib/components/ProgressIndicator/ProgressIndicator': {
       transform: (importName) => {
         let res;
-        const files = glob.sync(path.resolve(__dirname, `../../node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es' }/**/${carbonMapper(importName)}.js`));
+        const files = glob.sync(
+          path.resolve(__dirname, `../../node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es'}/**/${carbonMapper(importName)}.js`)
+        );
         if (files.length > 0) {
           res = files[0];
         } else {
           throw new Error(`File with importName ${importName} does not exist`);
         }
+
         res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
         res = res.replace(/^\//, '');
         return res;
@@ -240,12 +255,15 @@ const createCarbonCJSTransform = (env) => [
         let iconName = pascalToKebabCaseCarbonIcons(importName.replace(/\d+/, ''));
 
         let res;
-        const files = glob.sync(path.resolve(__dirname, `../../node_modules/@carbon/icons-react/${env === 'cjs' ? 'lib' : 'es' }/${iconName}/${size}.js`));
+        const files = glob.sync(
+          path.resolve(__dirname, `../../node_modules/@carbon/icons-react/${env === 'cjs' ? 'lib' : 'es'}/${iconName}/${size}.js`)
+        );
         if (files.length > 0) {
           res = files[0];
         } else {
           throw new Error(`File with importName ${importName} does not exist`);
         }
+
         res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
         res = res.replace(/^\//, '');
         return res;
@@ -261,23 +279,25 @@ module.exports = {
   extends: '../../babel.config.js',
   env: {
     cjs: {
+      presets: [['@babel/preset-env', { modules: 'commonjs' }]],
       plugins: [
         createSuirCJSTransform('commonjs'),
         createMuiTransform(),
         createPfReactTransform('js'),
         createBluePrintTransform('cjs'),
         createAntTransform('cjs'),
-        createCarbonCJSTransform('cjs'),
+        createCarbonCJSTransform('cjs')
       ]
     },
     esm: {
+      presets: [['@babel/preset-env', { modules: false }]],
       plugins: [
         createSuirCJSTransform('es'),
         createMuiTransform('esm'),
         createPfReactTransform('esm'),
         createBluePrintTransform('esm'),
         createAntTransform('esm'),
-        createCarbonCJSTransform('esm'),
+        createCarbonCJSTransform('esm')
       ]
     }
   }

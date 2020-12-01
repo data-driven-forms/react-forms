@@ -2,8 +2,8 @@ import React, { useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 
-import useFormApi from '../use-form-api/use-form-api';
-import parseCondition from '../parse-condition/parse-condition';
+import useFormApi from '../use-form-api';
+import parseCondition from '../parse-condition';
 
 export const reducer = (state, { type, sets }) => {
   switch (type) {

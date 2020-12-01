@@ -1,1 +1,1 @@
-export { default } from './data-types;';
+export { default } from './data-types';

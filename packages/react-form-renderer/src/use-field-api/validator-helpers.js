@@ -1,5 +1,5 @@
 import { memoize } from '../common/helpers';
-import { dataTypeValidator } from '../validators-old/validator-functions';
+import { dataTypeValidator } from '../validators/validator-functions';
 import composeValidators from '../compose-validators/compose-validators';
 
 export const convertToWarning = (validator) => (...args) => ({

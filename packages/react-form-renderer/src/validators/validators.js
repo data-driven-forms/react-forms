@@ -1,4 +1,4 @@
-import messages from '../validators-old/messages';
+import messages from '../validators/messages';
 
 const Validators = {
   messages,
