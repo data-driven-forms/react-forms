@@ -64,7 +64,6 @@
     "webpack-merge": "^4.1.4"
   },
   "dependencies": {
-    "@data-driven-forms/form-state-manager": "*",
     "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "react-final-form": "^6.5.0",
