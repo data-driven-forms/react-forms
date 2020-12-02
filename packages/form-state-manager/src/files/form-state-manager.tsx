@@ -57,9 +57,11 @@ const FormStateManager: React.ComponentType<FormStateManagerProps> = ({
     ...fieldArrayApi
   };
 
+  const finalRender = render ? render : children;
+
   return (
     <FormManagerContext.Provider value={managerState}>
-      <FormManagerContext.Consumer>{() => (render ? render(managerState) : children(managerState))}</FormManagerContext.Consumer>
+      <FormManagerContext.Consumer>{() => finalRender && finalRender(managerState)}</FormManagerContext.Consumer>
     </FormManagerContext.Provider>
   );
 };

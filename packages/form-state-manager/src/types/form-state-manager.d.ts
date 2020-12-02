@@ -5,8 +5,8 @@ import { Debug } from './manager-api';
 
 export interface FormStateManagerProps {
   onSubmit: (values: AnyObject) => void;
-  children: (props: AnyObject) => React.ReactNode;
-  render: (props: AnyObject) => React.ReactNode;
+  children?: (props: AnyObject) => React.ReactNode;
+  render?: (props: AnyObject) => React.ReactNode;
   clearOnUnmount?: boolean;
   subscription?: Subscription;
   clearedValue?: any;

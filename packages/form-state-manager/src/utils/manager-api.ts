@@ -251,7 +251,7 @@ const createManagerApi: CreateManagerApi = ({
   let runFormValidation = false;
   let revalidatedFields: Array<string> = [];
   let registeringField: string | number | undefined;
-  let isSilent = false;
+  let isSilent = 0;
   let silentRender: string[] = [];
   let runningValidators = 0;
   let flatSubmitErrors: AnyObject = {};
@@ -528,7 +528,7 @@ const createManagerApi: CreateManagerApi = ({
     return (subscribeTo: Array<string> = []) => {
       const changedAttributes = [...findDifference(snapshot, state), ...subscribeTo];
 
-      if (isSilent) {
+      if (isSilent > 0) {
         changedAttributes.forEach((attr) => addIfUnique(silentRender, attr));
       } else if (changedAttributes.length > 0) {
         rerender(changedAttributes);
@@ -745,7 +745,7 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function registerField(field: FieldConfig): void {
-    isSilent = !!field.silent;
+    isSilent = field.silent ? isSilent + 1 : isSilent;
     registeringField = field.internalId || field.name;
     batch(() => {
       const render = prepareRerender();
@@ -799,18 +799,18 @@ const createManagerApi: CreateManagerApi = ({
 
       render();
     });
-    isSilent = false;
+    isSilent = field.silent ? Math.min(isSilent - 1, 0) : isSilent;
     registeringField = undefined;
   }
 
   function afterSilentRegistration(field: Omit<FieldConfig, 'render'>) {
-    revalidateFields([field.name, ...(state.fieldListeners[field.name]?.validateFields || state.registeredFields.filter((n) => n !== field.name))]);
+    if (isSilent === 0 && silentRender.length > 0) {
+      revalidateFields([field.name, ...(state.fieldListeners[field.name]?.validateFields || state.registeredFields.filter((n) => n !== field.name))]);
 
-    if (config.validate) {
-      validateForm(config.validate);
-    }
+      if (config.validate) {
+        validateForm(config.validate);
+      }
 
-    if (silentRender.length > 0) {
       registeringField = field.internalId || field.name;
       rerender(silentRender);
       silentRender = [];
