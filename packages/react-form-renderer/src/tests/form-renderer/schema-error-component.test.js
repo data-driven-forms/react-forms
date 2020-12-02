@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import SchemaErrorComponent from '../../form-renderer-old/schema-error-component';
+import SchemaErrorComponent from '../../form-renderer/schema-error-component';
 
 describe('schemaErrorComponent', () => {
   it('renders correctly', () => {

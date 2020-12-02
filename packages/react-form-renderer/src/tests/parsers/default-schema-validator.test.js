@@ -1,8 +1,8 @@
-import output from './output';
 import React from 'react';
-import defaultSchemaValidator from '../../default-schema-validator/default-schema-validator';
-import componentTypes from '../../component-types/component-types';
-import { validatorTypes as validatorTypesDefault } from '../..';
+import output from './output';
+import defaultSchemaValidator from '../../default-schema-validator';
+import componentTypes from '../../component-types';
+import validatorTypesDefault from '../../validator-types';
 
 describe('Default schema validator', () => {
   let componentMapper;

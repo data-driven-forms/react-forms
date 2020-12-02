@@ -1,11 +1,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import FormRenderer from '../../form-renderer/form-renderer';
-import SchemaErrorComponent from '../../form-renderer-old/schema-error-component';
-import componentTypes from '../../component-types/component-types';
+import FormRenderer from '../../form-renderer';
+import SchemaErrorComponent from '../../form-renderer/schema-error-component';
+import componentTypes from '../../component-types';
 import FormTemplate from '../../../../../__mocks__/mock-form-template';
-import useFieldApi from '../../use-field-api/use-field-api';
+import useFieldApi from '../../use-field-api';
 
 const TextField = (props) => {
   const { input } = useFieldApi(props);

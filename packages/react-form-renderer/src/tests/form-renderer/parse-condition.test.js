@@ -1,4 +1,4 @@
-import parseCondition from '../../parse-condition/parse-condition';
+import parseCondition from '../../parse-condition';
 
 describe('parseCondition', () => {
   let condition;

@@ -1,6 +1,6 @@
 import { ValidatorType } from "./use-field-api";
 import { ReactNode } from "react";
-import { ValidatorMapper } from "../validator-mapper/validator-mapper";
+import { ValidatorMapper } from "../validator-mapper";
 import { DataType } from "../data-types";
 import { ValidatorFunction } from "../validators/validators";
 

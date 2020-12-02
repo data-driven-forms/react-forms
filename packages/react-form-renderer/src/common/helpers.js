@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { isValidElement } from 'react';
-import Validators from '../validators/validators';
+import Validators from '../validators';
 
 const HAS_PROP = {}.hasOwnProperty;
 export const TO_STRING = {}.toString;

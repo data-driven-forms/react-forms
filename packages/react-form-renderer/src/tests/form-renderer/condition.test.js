@@ -3,11 +3,11 @@ import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 
 import FormTemplate from '../../../../../__mocks__/mock-form-template';
-import componentTypes from '../../../dist/cjs/component-types';
-import useFieldApi from '../../use-field-api/use-field-api';
-import FormRenderer from '../../form-renderer/form-renderer';
+import componentTypes from '../../component-types';
+import useFieldApi from '../../use-field-api';
+import FormRenderer from '../../form-renderer';
 
-import { reducer } from '../../condition/condition';
+import { reducer } from '../../condition';
 
 const TextField = (props) => {
   const { input } = useFieldApi(props);

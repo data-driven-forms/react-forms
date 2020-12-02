@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 import React from 'react';
 import { mount } from 'enzyme';
-import FormRenderer from '../../form-renderer/form-renderer';
-import componentTypes from '../../component-types/component-types';
-import DefaultSchemaError from '../../schema-errors/schema-errors';
-import SchemaErrorComponent from '../../form-renderer-old/schema-error-component';
+import FormRenderer from '../../form-renderer';
+import componentTypes from '../../component-types';
+import DefaultSchemaError from '../../schema-errors';
+import SchemaErrorComponent from '../../form-renderer/schema-error-component';
 
 describe('schemaValidatorMapper', () => {
   let initialProps;

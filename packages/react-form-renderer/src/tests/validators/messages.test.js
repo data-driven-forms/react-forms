@@ -1,4 +1,4 @@
-import messages from '../../validators-old/messages';
+import messages from '../../validators/messages';
 
 describe('validator messages', () => {
   const getMessage = ({ defaultMessage }) => (typeof defaultMessage === 'function' ? defaultMessage(5) : defaultMessage);
