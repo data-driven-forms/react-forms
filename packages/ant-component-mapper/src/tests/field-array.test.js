@@ -1,9 +1,9 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
 
-import { reducer } from '../files/field-array';
+import { reducer } from '../field-array';
 
 import { componentMapper, FormTemplate } from '../index';
 

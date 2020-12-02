@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import FormRenderer from '@data-driven-forms/react-form-renderer';
+import { FormRenderer } from '@data-driven-forms/react-form-renderer';
 import 'antd/dist/antd.css';
 import './style.css';
 import demoSchema from '@data-driven-forms/common/src/demoschema';

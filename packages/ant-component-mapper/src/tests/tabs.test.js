@@ -1,15 +1,15 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
-import FormTemplate from '../files/form-template';
-import componentMapper from '../files/component-mapper';
+import FormTemplate from '../form-template';
+import componentMapper from '../component-mapper';
 
 import { Tabs } from 'antd';
 
-import WrapperTextField from '../files/text-field';
-import WrapperSlider from '../files/slider';
+import WrapperTextField from '../text-field';
+import WrapperSlider from '../slider';
 
 const { TabPane } = Tabs;
 

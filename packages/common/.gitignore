@@ -76,6 +76,7 @@ vendor
 !demo/*
 !config
 !.npmignore
+!.gitignore
 !babel.config.js
 !generate-packages.js
 !LICENSE
