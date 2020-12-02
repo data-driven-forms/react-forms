@@ -1,4 +1,4 @@
-import { getOptionLabel, createValue } from '../files/select';
+import { getOptionLabel, createValue } from '../select';
 
 describe('<Select />', () => {
   describe('helpers', () => {
