@@ -2,7 +2,8 @@ const glob = require('glob');
 const path = require('path');
 const fse = require('fs-extra');
 
-const src = path.resolve(__dirname, './src');
+const packagePath = process.cwd();
+const src = path.resolve(packagePath, './src');
 
 async function generatePackages() {
   const directories = glob
@@ -20,7 +21,7 @@ async function generatePackages() {
       module: `../esm/${dir}`,
       typings: 'index.d.ts'
     };
-    return fse.writeJSON(path.resolve(__dirname, dir, 'package.json'), pckg);
+    return fse.writeJSON(path.resolve(packagePath, dir, 'package.json'), pckg);
   });
 
   return Promise.all(cmds);

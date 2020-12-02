@@ -10,8 +10,8 @@
     "build": "yarn build:cjs && yarn build:esm && yarn build:typings && yarn build:packages",
     "build:cjs": "BABEL_ENV=cjs babel src --out-dir ./ --ignore \"src/tests/*\"",
     "build:esm": "BABEL_ENV=esm babel src --out-dir ./esm --ignore \"src/tests/*\"",
-    "build:typings": "node ./generate-typings.js",
-    "build:packages": "node ./generate-packages.js",
+    "build:typings": "node ../../scripts/generate-typings.js",
+    "build:packages": "node ../../scripts/generate-packages.js",
     "release": "semantic-release"
   },
   "repository": "git@github.com:data-driven-forms/react-forms.git",
