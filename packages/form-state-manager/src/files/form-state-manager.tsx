@@ -32,7 +32,7 @@ const FormStateManager: React.ComponentType<FormStateManagerProps> = ({
 
     pauseValidation();
 
-    subscribe({ name: internalId, render: rerender, subscription });
+    subscribe({ name: internalId, render: rerender, subscription }, false, true);
 
     return internalId;
   });
