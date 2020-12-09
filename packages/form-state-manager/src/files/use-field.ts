@@ -195,6 +195,8 @@ const useField = ({
     valueToReturn = valueToReturn.inputValue;
   }
 
+  const { initialValue, ...clearedProps } = props;
+
   return {
     input: {
       value: valueToReturn,
@@ -207,7 +209,7 @@ const useField = ({
       checked
     },
     meta: state!.meta,
-    ...props
+    ...clearedProps
   };
 };
 
