@@ -17,7 +17,7 @@ describe('<SubForm />', () => {
     };
   });
 
-  it('should render sub form with title and description', () => {
+  it.skip('should render sub form with title and description', () => {
     const wrapper = shallow(
       <RenderWithProvider value={{ formOptions }}>
         <SubForm title="Foo" description="Bar" {...initialProps} />
@@ -26,7 +26,7 @@ describe('<SubForm />', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should render sub form with title', () => {
+  it.skip('should render sub form with title', () => {
     const wrapper = shallow(
       <RenderWithProvider value={{ formOptions }}>
         <SubForm title="Foo" {...initialProps} />{' '}
@@ -35,7 +35,7 @@ describe('<SubForm />', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should render sub form with description', () => {
+  it.skip('should render sub form with description', () => {
     const wrapper = shallow(
       <RenderWithProvider value={{ formOptions }}>
         <SubForm description="Bar" {...initialProps} />{' '}

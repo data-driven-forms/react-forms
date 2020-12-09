@@ -32,28 +32,9 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
     }
   }
 >
-  <ReactFinalForm
-    decorators={
-      Array [
-        [Function],
-      ]
-    }
+  <Component
+    clearOnUnmount={false}
     initialValues={Object {}}
-    mutators={
-      Object {
-        "concat": [Function],
-        "insert": [Function],
-        "move": [Function],
-        "pop": [Function],
-        "push": [Function],
-        "remove": [Function],
-        "removeBatch": [Function],
-        "shift": [Function],
-        "swap": [Function],
-        "unshift": [Function],
-        "update": [Function],
-      }
-    }
     onSubmit={[Function]}
     render={[Function]}
     subscription={
@@ -269,7 +250,6 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
                                 "error": undefined,
                                 "initial": undefined,
                                 "invalid": false,
-                                "length": undefined,
                                 "modified": false,
                                 "modifiedSinceLastSubmit": false,
                                 "pristine": true,
@@ -281,10 +261,15 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
                                 "valid": true,
                                 "validating": false,
                                 "visited": false,
+                                "warning": undefined,
                               }
                             }
                             name="checkbox"
-                            rest={Object {}}
+                            rest={
+                              Object {
+                                "name": "checkbox",
+                              }
+                            }
                             showError={false}
                           >
                             <FormGroup
@@ -332,7 +317,6 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
                                           "error": undefined,
                                           "initial": undefined,
                                           "invalid": false,
-                                          "length": undefined,
                                           "modified": false,
                                           "modifiedSinceLastSubmit": false,
                                           "pristine": true,
@@ -344,6 +328,7 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
                                           "valid": true,
                                           "validating": false,
                                           "visited": false,
+                                          "warning": undefined,
                                         }
                                       }
                                       name="checkbox"
@@ -375,7 +360,6 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
                                             "error": undefined,
                                             "initial": undefined,
                                             "invalid": false,
-                                            "length": undefined,
                                             "modified": false,
                                             "modifiedSinceLastSubmit": false,
                                             "pristine": true,
@@ -387,6 +371,7 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
                                             "valid": true,
                                             "validating": false,
                                             "visited": false,
+                                            "warning": undefined,
                                           }
                                         }
                                         name="checkbox"
@@ -423,7 +408,6 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
                                                   "error": undefined,
                                                   "initial": undefined,
                                                   "invalid": false,
-                                                  "length": undefined,
                                                   "modified": false,
                                                   "modifiedSinceLastSubmit": false,
                                                   "pristine": true,
@@ -435,6 +419,7 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
                                                   "valid": true,
                                                   "validating": false,
                                                   "visited": false,
+                                                  "warning": undefined,
                                                 }
                                               }
                                               name="checkbox"
@@ -485,7 +470,6 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
                                           "error": undefined,
                                           "initial": undefined,
                                           "invalid": false,
-                                          "length": undefined,
                                           "modified": false,
                                           "modifiedSinceLastSubmit": false,
                                           "pristine": true,
@@ -497,6 +481,7 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
                                           "valid": true,
                                           "validating": false,
                                           "visited": false,
+                                          "warning": undefined,
                                         }
                                       }
                                       name="checkbox"
@@ -528,7 +513,6 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
                                             "error": undefined,
                                             "initial": undefined,
                                             "invalid": false,
-                                            "length": undefined,
                                             "modified": false,
                                             "modifiedSinceLastSubmit": false,
                                             "pristine": true,
@@ -540,6 +524,7 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
                                             "valid": true,
                                             "validating": false,
                                             "visited": false,
+                                            "warning": undefined,
                                           }
                                         }
                                         name="checkbox"
@@ -576,7 +561,6 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
                                                   "error": undefined,
                                                   "initial": undefined,
                                                   "invalid": false,
-                                                  "length": undefined,
                                                   "modified": false,
                                                   "modifiedSinceLastSubmit": false,
                                                   "pristine": true,
@@ -588,6 +572,7 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
                                                   "valid": true,
                                                   "validating": false,
                                                   "visited": false,
+                                                  "warning": undefined,
                                                 }
                                               }
                                               name="checkbox"
@@ -619,7 +604,7 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
                   </FormFieldHideWrapper>
                 </FormConditionWrapper>
               </SingleField>
-              <FormSpy>
+              <Component>
                 <FormControls
                   Button={[Function]}
                   ButtonGroup={[Function]}
@@ -658,59 +643,309 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
                   formSpyProps={
                     Object {
                       "active": undefined,
+                      "afterSilentRegistration": [Function],
+                      "batch": [Function],
+                      "blur": [Function],
+                      "change": [Function],
+                      "destroyOnUnregister": undefined,
                       "dirty": false,
                       "dirtyFields": Object {},
                       "dirtyFieldsSinceLastSubmit": Object {},
                       "dirtySinceLastSubmit": false,
                       "error": undefined,
                       "errors": Object {},
+                      "fieldListeners": Object {
+                        "1606921360405": Object {
+                          "count": 1,
+                          "fields": Object {
+                            "1606921360405": Object {
+                              "afterSubmit": undefined,
+                              "beforeSubmit": undefined,
+                              "isEqual": undefined,
+                              "render": [Function],
+                              "subscription": Object {
+                                "all": true,
+                              },
+                              "validate": undefined,
+                            },
+                          },
+                          "validateFields": undefined,
+                        },
+                        "1606921392384": Object {
+                          "count": 1,
+                          "fields": Object {
+                            "1606921392384": Object {
+                              "afterSubmit": undefined,
+                              "beforeSubmit": undefined,
+                              "isEqual": undefined,
+                              "render": [Function],
+                              "subscription": Object {
+                                "pristine": true,
+                                "submitting": true,
+                                "valid": true,
+                              },
+                              "validate": undefined,
+                            },
+                          },
+                          "validateFields": undefined,
+                        },
+                        "checkbox": Object {
+                          "asyncWatcher": Object {
+                            "registerValidator": [Function],
+                          },
+                          "count": 3,
+                          "fields": Object {
+                            "1606921360580": Object {
+                              "afterSubmit": undefined,
+                              "beforeSubmit": undefined,
+                              "isEqual": undefined,
+                              "render": [Function],
+                              "subscription": undefined,
+                              "validate": undefined,
+                            },
+                            "1606921383265": Object {
+                              "afterSubmit": undefined,
+                              "beforeSubmit": undefined,
+                              "isEqual": undefined,
+                              "render": [Function],
+                              "subscription": undefined,
+                              "validate": undefined,
+                            },
+                            "1606921390671": Object {
+                              "afterSubmit": undefined,
+                              "beforeSubmit": undefined,
+                              "isEqual": undefined,
+                              "render": [Function],
+                              "subscription": undefined,
+                              "validate": undefined,
+                            },
+                          },
+                          "state": Object {
+                            "meta": Object {
+                              "active": false,
+                              "data": Object {},
+                              "dirty": false,
+                              "dirtySinceLastSubmit": false,
+                              "error": undefined,
+                              "initial": undefined,
+                              "invalid": false,
+                              "modified": false,
+                              "modifiedSinceLastSubmit": false,
+                              "pristine": true,
+                              "submitError": undefined,
+                              "submitFailed": false,
+                              "submitSucceeded": false,
+                              "submitting": false,
+                              "touched": false,
+                              "valid": true,
+                              "validating": false,
+                              "visited": false,
+                              "warning": undefined,
+                            },
+                            "name": "checkbox",
+                            "value": undefined,
+                          },
+                          "validateFields": undefined,
+                        },
+                      },
+                      "fileInputs": Array [],
+                      "focus": [Function],
                       "form": Object {
+                        "active": undefined,
+                        "afterSilentRegistration": [Function],
                         "batch": [Function],
                         "blur": [Function],
                         "change": [Function],
-                        "destroyOnUnregister": false,
+                        "destroyOnUnregister": undefined,
+                        "dirty": false,
+                        "dirtyFields": Object {},
+                        "dirtyFieldsSinceLastSubmit": Object {},
+                        "dirtySinceLastSubmit": false,
+                        "error": undefined,
+                        "errors": Object {},
+                        "fieldListeners": Object {
+                          "1606921360405": Object {
+                            "count": 1,
+                            "fields": Object {
+                              "1606921360405": Object {
+                                "afterSubmit": undefined,
+                                "beforeSubmit": undefined,
+                                "isEqual": undefined,
+                                "render": [Function],
+                                "subscription": Object {
+                                  "all": true,
+                                },
+                                "validate": undefined,
+                              },
+                            },
+                            "validateFields": undefined,
+                          },
+                          "1606921392384": Object {
+                            "count": 1,
+                            "fields": Object {
+                              "1606921392384": Object {
+                                "afterSubmit": undefined,
+                                "beforeSubmit": undefined,
+                                "isEqual": undefined,
+                                "render": [Function],
+                                "subscription": Object {
+                                  "pristine": true,
+                                  "submitting": true,
+                                  "valid": true,
+                                },
+                                "validate": undefined,
+                              },
+                            },
+                            "validateFields": undefined,
+                          },
+                          "checkbox": Object {
+                            "asyncWatcher": Object {
+                              "registerValidator": [Function],
+                            },
+                            "count": 3,
+                            "fields": Object {
+                              "1606921360580": Object {
+                                "afterSubmit": undefined,
+                                "beforeSubmit": undefined,
+                                "isEqual": undefined,
+                                "render": [Function],
+                                "subscription": undefined,
+                                "validate": undefined,
+                              },
+                              "1606921383265": Object {
+                                "afterSubmit": undefined,
+                                "beforeSubmit": undefined,
+                                "isEqual": undefined,
+                                "render": [Function],
+                                "subscription": undefined,
+                                "validate": undefined,
+                              },
+                              "1606921390671": Object {
+                                "afterSubmit": undefined,
+                                "beforeSubmit": undefined,
+                                "isEqual": undefined,
+                                "render": [Function],
+                                "subscription": undefined,
+                                "validate": undefined,
+                              },
+                            },
+                            "state": Object {
+                              "meta": Object {
+                                "active": false,
+                                "data": Object {},
+                                "dirty": false,
+                                "dirtySinceLastSubmit": false,
+                                "error": undefined,
+                                "initial": undefined,
+                                "invalid": false,
+                                "modified": false,
+                                "modifiedSinceLastSubmit": false,
+                                "pristine": true,
+                                "submitError": undefined,
+                                "submitFailed": false,
+                                "submitSucceeded": false,
+                                "submitting": false,
+                                "touched": false,
+                                "valid": true,
+                                "validating": false,
+                                "visited": false,
+                                "warning": undefined,
+                              },
+                              "name": "checkbox",
+                              "value": undefined,
+                            },
+                            "validateFields": undefined,
+                          },
+                        },
+                        "fileInputs": Array [],
                         "focus": [Function],
                         "getFieldState": [Function],
+                        "getFieldValue": [Function],
                         "getRegisteredFields": [Function],
                         "getState": [Function],
+                        "handleSubmit": [Function],
+                        "hasSubmitErrors": false,
+                        "hasValidationErrors": false,
+                        "initialValues": Object {},
                         "initialize": [Function],
+                        "invalid": false,
                         "isValidationPaused": [Function],
-                        "mutators": Object {
-                          "concat": [Function],
-                          "insert": [Function],
-                          "move": [Function],
-                          "pop": [Function],
-                          "push": [Function],
-                          "remove": [Function],
-                          "removeBatch": [Function],
-                          "shift": [Function],
-                          "swap": [Function],
-                          "unshift": [Function],
-                          "update": [Function],
-                        },
+                        "modified": Object {},
+                        "modifiedSinceLastSubmit": false,
                         "pauseValidation": [Function],
+                        "pristine": true,
+                        "registerAsyncValidator": [Function],
                         "registerField": [Function],
+                        "registerInputFile": [Function],
+                        "registeredFields": Array [
+                          "checkbox",
+                        ],
+                        "rerender": [Function],
                         "reset": [Function],
                         "resetFieldState": [Function],
                         "restart": [Function],
                         "resumeValidation": [Function],
                         "setConfig": [Function],
+                        "setFieldState": [Function],
                         "submit": [Function],
+                        "submitError": undefined,
+                        "submitErrors": undefined,
+                        "submitFailed": false,
+                        "submitSucceeded": false,
+                        "submitting": false,
                         "subscribe": [Function],
+                        "touched": Object {},
+                        "unregisterField": [Function],
+                        "unregisterInputFile": [Function],
+                        "unsubscribe": [Function],
+                        "updateError": [Function],
+                        "updateValid": [Function],
+                        "valid": true,
+                        "validating": false,
+                        "values": Object {},
+                        "visited": Object {},
                       },
+                      "getFieldState": [Function],
+                      "getFieldValue": [Function],
+                      "getRegisteredFields": [Function],
+                      "getState": [Function],
+                      "handleSubmit": [Function],
                       "hasSubmitErrors": false,
                       "hasValidationErrors": false,
                       "initialValues": Object {},
+                      "initialize": [Function],
                       "invalid": false,
+                      "isValidationPaused": [Function],
                       "modified": Object {},
                       "modifiedSinceLastSubmit": false,
+                      "pauseValidation": [Function],
                       "pristine": true,
+                      "registerAsyncValidator": [Function],
+                      "registerField": [Function],
+                      "registerInputFile": [Function],
+                      "registeredFields": Array [
+                        "checkbox",
+                      ],
+                      "rerender": [Function],
+                      "reset": [Function],
+                      "resetFieldState": [Function],
+                      "restart": [Function],
+                      "resumeValidation": [Function],
+                      "setConfig": [Function],
+                      "setFieldState": [Function],
+                      "submit": [Function],
                       "submitError": undefined,
                       "submitErrors": undefined,
                       "submitFailed": false,
                       "submitSucceeded": false,
                       "submitting": false,
+                      "subscribe": [Function],
                       "touched": Object {},
+                      "unregisterField": [Function],
+                      "unregisterInputFile": [Function],
+                      "unsubscribe": [Function],
+                      "updateError": [Function],
+                      "updateValid": [Function],
                       "valid": true,
                       "validating": false,
                       "values": Object {},
@@ -774,13 +1009,13 @@ exports[`<MultipleChoiceList /> should render correctly 1`] = `
                     </div>
                   </ButtonGroup>
                 </FormControls>
-              </FormSpy>
+              </Component>
             </form>
           </Form>
         </FormWrapper>
       </FormTemplate>
     </PF3FormTemplate>
-  </ReactFinalForm>
+  </Component>
 </FormRenderer>
 `;
 
@@ -821,28 +1056,9 @@ exports[`<MultipleChoiceList /> should render in error state 1`] = `
     }
   }
 >
-  <ReactFinalForm
-    decorators={
-      Array [
-        [Function],
-      ]
-    }
+  <Component
+    clearOnUnmount={false}
     initialValues={Object {}}
-    mutators={
-      Object {
-        "concat": [Function],
-        "insert": [Function],
-        "move": [Function],
-        "pop": [Function],
-        "push": [Function],
-        "remove": [Function],
-        "removeBatch": [Function],
-        "shift": [Function],
-        "swap": [Function],
-        "unshift": [Function],
-        "update": [Function],
-      }
-    }
     onSubmit={[Function]}
     render={[Function]}
     subscription={
@@ -1116,22 +1332,26 @@ exports[`<MultipleChoiceList /> should render in error state 1`] = `
                                 "error": "Required",
                                 "initial": undefined,
                                 "invalid": true,
-                                "length": undefined,
                                 "modified": false,
                                 "modifiedSinceLastSubmit": false,
                                 "pristine": true,
                                 "submitError": undefined,
-                                "submitFailed": true,
+                                "submitFailed": false,
                                 "submitSucceeded": false,
                                 "submitting": false,
                                 "touched": true,
                                 "valid": false,
                                 "validating": false,
                                 "visited": false,
+                                "warning": undefined,
                               }
                             }
                             name="checkbox"
-                            rest={Object {}}
+                            rest={
+                              Object {
+                                "name": "checkbox",
+                              }
+                            }
                             showError="Required"
                           >
                             <FormGroup
@@ -1179,18 +1399,18 @@ exports[`<MultipleChoiceList /> should render in error state 1`] = `
                                           "error": "Required",
                                           "initial": undefined,
                                           "invalid": true,
-                                          "length": undefined,
                                           "modified": false,
                                           "modifiedSinceLastSubmit": false,
                                           "pristine": true,
                                           "submitError": undefined,
-                                          "submitFailed": true,
+                                          "submitFailed": false,
                                           "submitSucceeded": false,
                                           "submitting": false,
                                           "touched": true,
                                           "valid": false,
                                           "validating": false,
                                           "visited": false,
+                                          "warning": undefined,
                                         }
                                       }
                                       name="checkbox"
@@ -1222,18 +1442,18 @@ exports[`<MultipleChoiceList /> should render in error state 1`] = `
                                             "error": "Required",
                                             "initial": undefined,
                                             "invalid": true,
-                                            "length": undefined,
                                             "modified": false,
                                             "modifiedSinceLastSubmit": false,
                                             "pristine": true,
                                             "submitError": undefined,
-                                            "submitFailed": true,
+                                            "submitFailed": false,
                                             "submitSucceeded": false,
                                             "submitting": false,
                                             "touched": true,
                                             "valid": false,
                                             "validating": false,
                                             "visited": false,
+                                            "warning": undefined,
                                           }
                                         }
                                         name="checkbox"
@@ -1270,18 +1490,18 @@ exports[`<MultipleChoiceList /> should render in error state 1`] = `
                                                   "error": "Required",
                                                   "initial": undefined,
                                                   "invalid": true,
-                                                  "length": undefined,
                                                   "modified": false,
                                                   "modifiedSinceLastSubmit": false,
                                                   "pristine": true,
                                                   "submitError": undefined,
-                                                  "submitFailed": true,
+                                                  "submitFailed": false,
                                                   "submitSucceeded": false,
                                                   "submitting": false,
                                                   "touched": true,
                                                   "valid": false,
                                                   "validating": false,
                                                   "visited": false,
+                                                  "warning": undefined,
                                                 }
                                               }
                                               name="checkbox"
@@ -1332,18 +1552,18 @@ exports[`<MultipleChoiceList /> should render in error state 1`] = `
                                           "error": "Required",
                                           "initial": undefined,
                                           "invalid": true,
-                                          "length": undefined,
                                           "modified": false,
                                           "modifiedSinceLastSubmit": false,
                                           "pristine": true,
                                           "submitError": undefined,
-                                          "submitFailed": true,
+                                          "submitFailed": false,
                                           "submitSucceeded": false,
                                           "submitting": false,
                                           "touched": true,
                                           "valid": false,
                                           "validating": false,
                                           "visited": false,
+                                          "warning": undefined,
                                         }
                                       }
                                       name="checkbox"
@@ -1375,18 +1595,18 @@ exports[`<MultipleChoiceList /> should render in error state 1`] = `
                                             "error": "Required",
                                             "initial": undefined,
                                             "invalid": true,
-                                            "length": undefined,
                                             "modified": false,
                                             "modifiedSinceLastSubmit": false,
                                             "pristine": true,
                                             "submitError": undefined,
-                                            "submitFailed": true,
+                                            "submitFailed": false,
                                             "submitSucceeded": false,
                                             "submitting": false,
                                             "touched": true,
                                             "valid": false,
                                             "validating": false,
                                             "visited": false,
+                                            "warning": undefined,
                                           }
                                         }
                                         name="checkbox"
@@ -1423,18 +1643,18 @@ exports[`<MultipleChoiceList /> should render in error state 1`] = `
                                                   "error": "Required",
                                                   "initial": undefined,
                                                   "invalid": true,
-                                                  "length": undefined,
                                                   "modified": false,
                                                   "modifiedSinceLastSubmit": false,
                                                   "pristine": true,
                                                   "submitError": undefined,
-                                                  "submitFailed": true,
+                                                  "submitFailed": false,
                                                   "submitSucceeded": false,
                                                   "submitting": false,
                                                   "touched": true,
                                                   "valid": false,
                                                   "validating": false,
                                                   "visited": false,
+                                                  "warning": undefined,
                                                 }
                                               }
                                               name="checkbox"
@@ -1475,7 +1695,7 @@ exports[`<MultipleChoiceList /> should render in error state 1`] = `
                   </FormFieldHideWrapper>
                 </FormConditionWrapper>
               </SingleField>
-              <FormSpy>
+              <Component>
                 <FormControls
                   Button={[Function]}
                   ButtonGroup={[Function]}
@@ -1521,6 +1741,11 @@ exports[`<MultipleChoiceList /> should render in error state 1`] = `
                   formSpyProps={
                     Object {
                       "active": undefined,
+                      "afterSilentRegistration": [Function],
+                      "batch": [Function],
+                      "blur": [Function],
+                      "change": [Function],
+                      "destroyOnUnregister": undefined,
                       "dirty": false,
                       "dirtyFields": Object {},
                       "dirtyFieldsSinceLastSubmit": Object {},
@@ -1529,63 +1754,304 @@ exports[`<MultipleChoiceList /> should render in error state 1`] = `
                       "errors": Object {
                         "checkbox": "Required",
                       },
+                      "fieldListeners": Object {
+                        "1606921328826": Object {
+                          "count": 1,
+                          "fields": Object {
+                            "1606921328826": Object {
+                              "afterSubmit": undefined,
+                              "beforeSubmit": undefined,
+                              "isEqual": undefined,
+                              "render": [Function],
+                              "subscription": Object {
+                                "all": true,
+                              },
+                              "validate": undefined,
+                            },
+                          },
+                          "validateFields": undefined,
+                        },
+                        "1606921340740": Object {
+                          "count": 1,
+                          "fields": Object {
+                            "1606921340740": Object {
+                              "afterSubmit": undefined,
+                              "beforeSubmit": undefined,
+                              "isEqual": undefined,
+                              "render": [Function],
+                              "subscription": Object {
+                                "pristine": true,
+                                "submitting": true,
+                                "valid": true,
+                              },
+                              "validate": undefined,
+                            },
+                          },
+                          "validateFields": undefined,
+                        },
+                        "checkbox": Object {
+                          "asyncWatcher": Object {
+                            "registerValidator": [Function],
+                          },
+                          "count": 3,
+                          "fields": Object {
+                            "1606921332206": Object {
+                              "afterSubmit": undefined,
+                              "beforeSubmit": undefined,
+                              "isEqual": undefined,
+                              "render": [Function],
+                              "subscription": undefined,
+                              "validate": undefined,
+                            },
+                            "1606921342936": Object {
+                              "afterSubmit": undefined,
+                              "beforeSubmit": undefined,
+                              "isEqual": undefined,
+                              "render": [Function],
+                              "subscription": undefined,
+                              "validate": [Function],
+                            },
+                            "1606921351432": Object {
+                              "afterSubmit": undefined,
+                              "beforeSubmit": undefined,
+                              "isEqual": undefined,
+                              "render": [Function],
+                              "subscription": undefined,
+                              "validate": undefined,
+                            },
+                          },
+                          "state": Object {
+                            "meta": Object {
+                              "active": false,
+                              "data": Object {},
+                              "dirty": false,
+                              "dirtySinceLastSubmit": false,
+                              "error": "Required",
+                              "initial": undefined,
+                              "invalid": true,
+                              "modified": false,
+                              "modifiedSinceLastSubmit": false,
+                              "pristine": true,
+                              "submitError": undefined,
+                              "submitFailed": false,
+                              "submitSucceeded": false,
+                              "submitting": false,
+                              "touched": true,
+                              "valid": false,
+                              "validating": false,
+                              "visited": false,
+                              "warning": undefined,
+                            },
+                            "name": "checkbox",
+                            "value": undefined,
+                          },
+                          "validateFields": undefined,
+                        },
+                      },
+                      "fileInputs": Array [],
+                      "focus": [Function],
                       "form": Object {
+                        "active": undefined,
+                        "afterSilentRegistration": [Function],
                         "batch": [Function],
                         "blur": [Function],
                         "change": [Function],
-                        "destroyOnUnregister": false,
+                        "destroyOnUnregister": undefined,
+                        "dirty": false,
+                        "dirtyFields": Object {},
+                        "dirtyFieldsSinceLastSubmit": Object {},
+                        "dirtySinceLastSubmit": false,
+                        "error": undefined,
+                        "errors": Object {
+                          "checkbox": "Required",
+                        },
+                        "fieldListeners": Object {
+                          "1606921328826": Object {
+                            "count": 1,
+                            "fields": Object {
+                              "1606921328826": Object {
+                                "afterSubmit": undefined,
+                                "beforeSubmit": undefined,
+                                "isEqual": undefined,
+                                "render": [Function],
+                                "subscription": Object {
+                                  "all": true,
+                                },
+                                "validate": undefined,
+                              },
+                            },
+                            "validateFields": undefined,
+                          },
+                          "1606921340740": Object {
+                            "count": 1,
+                            "fields": Object {
+                              "1606921340740": Object {
+                                "afterSubmit": undefined,
+                                "beforeSubmit": undefined,
+                                "isEqual": undefined,
+                                "render": [Function],
+                                "subscription": Object {
+                                  "pristine": true,
+                                  "submitting": true,
+                                  "valid": true,
+                                },
+                                "validate": undefined,
+                              },
+                            },
+                            "validateFields": undefined,
+                          },
+                          "checkbox": Object {
+                            "asyncWatcher": Object {
+                              "registerValidator": [Function],
+                            },
+                            "count": 3,
+                            "fields": Object {
+                              "1606921332206": Object {
+                                "afterSubmit": undefined,
+                                "beforeSubmit": undefined,
+                                "isEqual": undefined,
+                                "render": [Function],
+                                "subscription": undefined,
+                                "validate": undefined,
+                              },
+                              "1606921342936": Object {
+                                "afterSubmit": undefined,
+                                "beforeSubmit": undefined,
+                                "isEqual": undefined,
+                                "render": [Function],
+                                "subscription": undefined,
+                                "validate": [Function],
+                              },
+                              "1606921351432": Object {
+                                "afterSubmit": undefined,
+                                "beforeSubmit": undefined,
+                                "isEqual": undefined,
+                                "render": [Function],
+                                "subscription": undefined,
+                                "validate": undefined,
+                              },
+                            },
+                            "state": Object {
+                              "meta": Object {
+                                "active": false,
+                                "data": Object {},
+                                "dirty": false,
+                                "dirtySinceLastSubmit": false,
+                                "error": "Required",
+                                "initial": undefined,
+                                "invalid": true,
+                                "modified": false,
+                                "modifiedSinceLastSubmit": false,
+                                "pristine": true,
+                                "submitError": undefined,
+                                "submitFailed": false,
+                                "submitSucceeded": false,
+                                "submitting": false,
+                                "touched": true,
+                                "valid": false,
+                                "validating": false,
+                                "visited": false,
+                                "warning": undefined,
+                              },
+                              "name": "checkbox",
+                              "value": undefined,
+                            },
+                            "validateFields": undefined,
+                          },
+                        },
+                        "fileInputs": Array [],
                         "focus": [Function],
                         "getFieldState": [Function],
+                        "getFieldValue": [Function],
                         "getRegisteredFields": [Function],
                         "getState": [Function],
+                        "handleSubmit": [Function],
+                        "hasSubmitErrors": false,
+                        "hasValidationErrors": true,
+                        "initialValues": Object {},
                         "initialize": [Function],
+                        "invalid": true,
                         "isValidationPaused": [Function],
-                        "mutators": Object {
-                          "concat": [Function],
-                          "insert": [Function],
-                          "move": [Function],
-                          "pop": [Function],
-                          "push": [Function],
-                          "remove": [Function],
-                          "removeBatch": [Function],
-                          "shift": [Function],
-                          "swap": [Function],
-                          "unshift": [Function],
-                          "update": [Function],
-                        },
+                        "modified": Object {},
+                        "modifiedSinceLastSubmit": false,
                         "pauseValidation": [Function],
+                        "pristine": true,
+                        "registerAsyncValidator": [Function],
                         "registerField": [Function],
+                        "registerInputFile": [Function],
+                        "registeredFields": Array [
+                          "checkbox",
+                        ],
+                        "rerender": [Function],
                         "reset": [Function],
                         "resetFieldState": [Function],
                         "restart": [Function],
                         "resumeValidation": [Function],
                         "setConfig": [Function],
+                        "setFieldState": [Function],
                         "submit": [Function],
+                        "submitError": undefined,
+                        "submitErrors": undefined,
+                        "submitFailed": false,
+                        "submitSucceeded": false,
+                        "submitting": false,
                         "subscribe": [Function],
+                        "touched": Object {},
+                        "unregisterField": [Function],
+                        "unregisterInputFile": [Function],
+                        "unsubscribe": [Function],
+                        "updateError": [Function],
+                        "updateValid": [Function],
+                        "valid": false,
+                        "validating": false,
+                        "values": Object {},
+                        "visited": Object {},
                       },
+                      "getFieldState": [Function],
+                      "getFieldValue": [Function],
+                      "getRegisteredFields": [Function],
+                      "getState": [Function],
+                      "handleSubmit": [Function],
                       "hasSubmitErrors": false,
                       "hasValidationErrors": true,
                       "initialValues": Object {},
+                      "initialize": [Function],
                       "invalid": true,
-                      "modified": Object {
-                        "checkbox": false,
-                      },
+                      "isValidationPaused": [Function],
+                      "modified": Object {},
                       "modifiedSinceLastSubmit": false,
+                      "pauseValidation": [Function],
                       "pristine": true,
+                      "registerAsyncValidator": [Function],
+                      "registerField": [Function],
+                      "registerInputFile": [Function],
+                      "registeredFields": Array [
+                        "checkbox",
+                      ],
+                      "rerender": [Function],
+                      "reset": [Function],
+                      "resetFieldState": [Function],
+                      "restart": [Function],
+                      "resumeValidation": [Function],
+                      "setConfig": [Function],
+                      "setFieldState": [Function],
+                      "submit": [Function],
                       "submitError": undefined,
                       "submitErrors": undefined,
-                      "submitFailed": true,
+                      "submitFailed": false,
                       "submitSucceeded": false,
                       "submitting": false,
-                      "touched": Object {
-                        "checkbox": true,
-                      },
+                      "subscribe": [Function],
+                      "touched": Object {},
+                      "unregisterField": [Function],
+                      "unregisterInputFile": [Function],
+                      "unsubscribe": [Function],
+                      "updateError": [Function],
+                      "updateValid": [Function],
                       "valid": false,
                       "validating": false,
                       "values": Object {},
-                      "visited": Object {
-                        "checkbox": false,
-                      },
+                      "visited": Object {},
                     }
                   }
                   onReset={[Function]}
@@ -1650,12 +2116,12 @@ exports[`<MultipleChoiceList /> should render in error state 1`] = `
                     </div>
                   </ButtonGroup>
                 </FormControls>
-              </FormSpy>
+              </Component>
             </form>
           </Form>
         </FormWrapper>
       </FormTemplate>
     </PF3FormTemplate>
-  </ReactFinalForm>
+  </Component>
 </FormRenderer>
 `;

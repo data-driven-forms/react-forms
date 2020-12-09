@@ -551,6 +551,7 @@ describe('useField', () => {
     expect(checkEmpty(false)).toEqual(false);
     expect(checkEmpty('A')).toEqual(false);
     expect(checkEmpty(0)).toEqual(false);
+    expect(checkEmpty(new Date())).toEqual(false);
 
     expect(checkEmpty([])).toEqual(true);
     expect(checkEmpty('')).toEqual(true);

@@ -63,29 +63,10 @@ exports[`<Input Addon> should render group button before input addon correctly 1
     }
   }
 >
-  <ReactFinalForm
-    decorators={
-      Array [
-        [Function],
-      ]
-    }
+  <Component
+    clearOnUnmount={false}
     initialValues={Object {}}
-    mutators={
-      Object {
-        "concat": [Function],
-        "insert": [Function],
-        "move": [Function],
-        "pop": [Function],
-        "push": [Function],
-        "remove": [Function],
-        "removeBatch": [Function],
-        "shift": [Function],
-        "swap": [Function],
-        "unshift": [Function],
-        "update": [Function],
-      }
-    }
-    onSubmit={[Function]}
+    onSubmit={[MockFunction]}
     render={[Function]}
     subscription={
       Object {
@@ -470,7 +451,6 @@ exports[`<Input Addon> should render group button before input addon correctly 1
                               "error": undefined,
                               "initial": undefined,
                               "invalid": false,
-                              "length": undefined,
                               "modified": false,
                               "modifiedSinceLastSubmit": false,
                               "pristine": true,
@@ -482,6 +462,7 @@ exports[`<Input Addon> should render group button before input addon correctly 1
                               "valid": true,
                               "validating": false,
                               "visited": false,
+                              "warning": undefined,
                             }
                           }
                         >
@@ -739,7 +720,7 @@ exports[`<Input Addon> should render group button before input addon correctly 1
         </FormTemplate>
       </PF3FormTemplate>
     </FormTemplate>
-  </ReactFinalForm>
+  </Component>
 </FormRenderer>
 `;
 
@@ -812,29 +793,10 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
     }
   }
 >
-  <ReactFinalForm
-    decorators={
-      Array [
-        [Function],
-      ]
-    }
+  <Component
+    clearOnUnmount={false}
     initialValues={Object {}}
-    mutators={
-      Object {
-        "concat": [Function],
-        "insert": [Function],
-        "move": [Function],
-        "pop": [Function],
-        "push": [Function],
-        "remove": [Function],
-        "removeBatch": [Function],
-        "shift": [Function],
-        "swap": [Function],
-        "unshift": [Function],
-        "update": [Function],
-      }
-    }
-    onSubmit={[Function]}
+    onSubmit={[MockFunction]}
     render={[Function]}
     subscription={
       Object {
@@ -1279,7 +1241,6 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
                               "error": undefined,
                               "initial": undefined,
                               "invalid": false,
-                              "length": undefined,
                               "modified": false,
                               "modifiedSinceLastSubmit": false,
                               "pristine": true,
@@ -1291,6 +1252,7 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
                               "valid": true,
                               "validating": false,
                               "visited": false,
+                              "warning": undefined,
                             }
                           }
                         >
@@ -1582,7 +1544,7 @@ exports[`<Input Addon> should render group mixed before input addon correctly 1`
         </FormTemplate>
       </PF3FormTemplate>
     </FormTemplate>
-  </ReactFinalForm>
+  </Component>
 </FormRenderer>
 `;
 
@@ -1638,29 +1600,10 @@ exports[`<Input Addon> should render single after input addon correctly 1`] = `
     }
   }
 >
-  <ReactFinalForm
-    decorators={
-      Array [
-        [Function],
-      ]
-    }
+  <Component
+    clearOnUnmount={false}
     initialValues={Object {}}
-    mutators={
-      Object {
-        "concat": [Function],
-        "insert": [Function],
-        "move": [Function],
-        "pop": [Function],
-        "push": [Function],
-        "remove": [Function],
-        "removeBatch": [Function],
-        "shift": [Function],
-        "swap": [Function],
-        "unshift": [Function],
-        "update": [Function],
-      }
-    }
-    onSubmit={[Function]}
+    onSubmit={[MockFunction]}
     render={[Function]}
     subscription={
       Object {
@@ -1935,7 +1878,6 @@ exports[`<Input Addon> should render single after input addon correctly 1`] = `
                               "error": undefined,
                               "initial": undefined,
                               "invalid": false,
-                              "length": undefined,
                               "modified": false,
                               "modifiedSinceLastSubmit": false,
                               "pristine": true,
@@ -1947,6 +1889,7 @@ exports[`<Input Addon> should render single after input addon correctly 1`] = `
                               "valid": true,
                               "validating": false,
                               "visited": false,
+                              "warning": undefined,
                             }
                           }
                         >
@@ -2060,7 +2003,7 @@ exports[`<Input Addon> should render single after input addon correctly 1`] = `
         </FormTemplate>
       </PF3FormTemplate>
     </FormTemplate>
-  </ReactFinalForm>
+  </Component>
 </FormRenderer>
 `;
 
@@ -2116,29 +2059,10 @@ exports[`<Input Addon> should render single before input addon correctly 1`] = `
     }
   }
 >
-  <ReactFinalForm
-    decorators={
-      Array [
-        [Function],
-      ]
-    }
+  <Component
+    clearOnUnmount={false}
     initialValues={Object {}}
-    mutators={
-      Object {
-        "concat": [Function],
-        "insert": [Function],
-        "move": [Function],
-        "pop": [Function],
-        "push": [Function],
-        "remove": [Function],
-        "removeBatch": [Function],
-        "shift": [Function],
-        "swap": [Function],
-        "unshift": [Function],
-        "update": [Function],
-      }
-    }
-    onSubmit={[Function]}
+    onSubmit={[MockFunction]}
     render={[Function]}
     subscription={
       Object {
@@ -2413,7 +2337,6 @@ exports[`<Input Addon> should render single before input addon correctly 1`] = `
                               "error": undefined,
                               "initial": undefined,
                               "invalid": false,
-                              "length": undefined,
                               "modified": false,
                               "modifiedSinceLastSubmit": false,
                               "pristine": true,
@@ -2425,6 +2348,7 @@ exports[`<Input Addon> should render single before input addon correctly 1`] = `
                               "valid": true,
                               "validating": false,
                               "visited": false,
+                              "warning": undefined,
                             }
                           }
                         >
@@ -2538,7 +2462,7 @@ exports[`<Input Addon> should render single before input addon correctly 1`] = `
         </FormTemplate>
       </PF3FormTemplate>
     </FormTemplate>
-  </ReactFinalForm>
+  </Component>
 </FormRenderer>
 `;
 
@@ -2593,29 +2517,10 @@ exports[`<Input Addon> should render single button after input addon correctly 1
     }
   }
 >
-  <ReactFinalForm
-    decorators={
-      Array [
-        [Function],
-      ]
-    }
+  <Component
+    clearOnUnmount={false}
     initialValues={Object {}}
-    mutators={
-      Object {
-        "concat": [Function],
-        "insert": [Function],
-        "move": [Function],
-        "pop": [Function],
-        "push": [Function],
-        "remove": [Function],
-        "removeBatch": [Function],
-        "shift": [Function],
-        "swap": [Function],
-        "unshift": [Function],
-        "update": [Function],
-      }
-    }
-    onSubmit={[Function]}
+    onSubmit={[MockFunction]}
     render={[Function]}
     subscription={
       Object {
@@ -2880,7 +2785,6 @@ exports[`<Input Addon> should render single button after input addon correctly 1
                               "error": undefined,
                               "initial": undefined,
                               "invalid": false,
-                              "length": undefined,
                               "modified": false,
                               "modifiedSinceLastSubmit": false,
                               "pristine": true,
@@ -2892,6 +2796,7 @@ exports[`<Input Addon> should render single button after input addon correctly 1
                               "valid": true,
                               "validating": false,
                               "visited": false,
+                              "warning": undefined,
                             }
                           }
                         >
@@ -3013,7 +2918,7 @@ exports[`<Input Addon> should render single button after input addon correctly 1
         </FormTemplate>
       </PF3FormTemplate>
     </FormTemplate>
-  </ReactFinalForm>
+  </Component>
 </FormRenderer>
 `;
 
@@ -3074,29 +2979,10 @@ exports[`<Input Addon> should render single button before input addon correctly 
     }
   }
 >
-  <ReactFinalForm
-    decorators={
-      Array [
-        [Function],
-      ]
-    }
+  <Component
+    clearOnUnmount={false}
     initialValues={Object {}}
-    mutators={
-      Object {
-        "concat": [Function],
-        "insert": [Function],
-        "move": [Function],
-        "pop": [Function],
-        "push": [Function],
-        "remove": [Function],
-        "removeBatch": [Function],
-        "shift": [Function],
-        "swap": [Function],
-        "unshift": [Function],
-        "update": [Function],
-      }
-    }
-    onSubmit={[Function]}
+    onSubmit={[MockFunction]}
     render={[Function]}
     subscription={
       Object {
@@ -3421,7 +3307,6 @@ exports[`<Input Addon> should render single button before input addon correctly 
                               "error": undefined,
                               "initial": undefined,
                               "invalid": false,
-                              "length": undefined,
                               "modified": false,
                               "modifiedSinceLastSubmit": false,
                               "pristine": true,
@@ -3433,6 +3318,7 @@ exports[`<Input Addon> should render single button before input addon correctly 
                               "valid": true,
                               "validating": false,
                               "visited": false,
+                              "warning": undefined,
                             }
                           }
                         >
@@ -3617,7 +3503,7 @@ exports[`<Input Addon> should render single button before input addon correctly 
         </FormTemplate>
       </PF3FormTemplate>
     </FormTemplate>
-  </ReactFinalForm>
+  </Component>
 </FormRenderer>
 `;
 
@@ -3711,29 +3597,10 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
     }
   }
 >
-  <ReactFinalForm
-    decorators={
-      Array [
-        [Function],
-      ]
-    }
+  <Component
+    clearOnUnmount={false}
     initialValues={Object {}}
-    mutators={
-      Object {
-        "concat": [Function],
-        "insert": [Function],
-        "move": [Function],
-        "pop": [Function],
-        "push": [Function],
-        "remove": [Function],
-        "removeBatch": [Function],
-        "shift": [Function],
-        "swap": [Function],
-        "unshift": [Function],
-        "update": [Function],
-      }
-    }
-    onSubmit={[Function]}
+    onSubmit={[MockFunction]}
     render={[Function]}
     subscription={
       Object {
@@ -4388,7 +4255,6 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                               "error": undefined,
                               "initial": undefined,
                               "invalid": false,
-                              "length": undefined,
                               "modified": false,
                               "modifiedSinceLastSubmit": false,
                               "pristine": true,
@@ -4400,6 +4266,7 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
                               "valid": true,
                               "validating": false,
                               "visited": false,
+                              "warning": undefined,
                             }
                           }
                         >
@@ -4880,6 +4747,6 @@ exports[`<Input Addon> should render the ultimate input addon correctly 1`] = `
         </FormTemplate>
       </PF3FormTemplate>
     </FormTemplate>
-  </ReactFinalForm>
+  </Component>
 </FormRenderer>
 `;

@@ -573,7 +573,7 @@ describe('managerApi', () => {
       array: [{ name: 'array[0].name', age: 'array[0].age' }]
     };
     const onSubmit = jest.fn();
-    const managerApi = createManagerApi({ onSubmit });
+    const managerApi = createManagerApi({ onSubmit: (values) => onSubmit(values) });
     const { registerField, change } = managerApi();
     registerField({ name: 'field', render: jest.fn() });
     registerField({ name: 'nested.name', render: jest.fn() });
@@ -765,7 +765,7 @@ describe('managerApi', () => {
     it('should send initialvalues to submit', () => {
       const onSubmit = jest.fn();
       const initialValues = { field: 'value1', nested: { level: 'value2' } };
-      const managerApi = createManagerApi({ onSubmit, initialValues });
+      const managerApi = createManagerApi({ onSubmit: (values) => onSubmit(values), initialValues });
 
       managerApi().handleSubmit({ preventDefault: jest.fn() });
 
@@ -808,7 +808,7 @@ describe('managerApi', () => {
     it('global subscription', () => {
       const managerApi = createManagerApi({ subscription: { valid: true } });
 
-      managerApi().registerField({ ...field1 });
+      managerApi().registerField({ ...field1, subscription: { valid: true } }, false, true);
       managerApi().registerField({ ...field2 });
 
       expect(renderField1).not.toHaveBeenCalled();
@@ -822,7 +822,7 @@ describe('managerApi', () => {
       managerApi().rerender(['valid']);
 
       expect(renderField1).toHaveBeenCalled();
-      expect(renderField2).toHaveBeenCalled();
+      expect(renderField2).not.toHaveBeenCalled();
     });
 
     it('field subscription only on valid', () => {
@@ -847,7 +847,7 @@ describe('managerApi', () => {
       expect(renderField2).toHaveBeenCalled();
     });
 
-    it('merge global and field subscription correctly', () => {
+    it('do not render when global subscription is set', () => {
       const managerApi = createManagerApi({ subscription: { validating: true } });
 
       managerApi().registerField({ ...field1 });
@@ -858,8 +858,8 @@ describe('managerApi', () => {
 
       managerApi().rerender(['validating']);
 
-      expect(renderField1).toHaveBeenCalled();
-      expect(renderField2).toHaveBeenCalled();
+      expect(renderField1).not.toHaveBeenCalled();
+      expect(renderField2).not.toHaveBeenCalled();
 
       renderField1.mockReset();
       renderField2.mockReset();

@@ -99,7 +99,7 @@ describe('FormRenderer validator', () => {
               [componentTypes.TEXT_FIELD]: TextFieldWarning
             }}
             schema={{
-              fields: [{ useWarnings: true, component: 'text-field', name: NAME, validate: [{ type: 'required', warning: true }] }]
+              fields: [{ component: 'text-field', name: NAME, validate: [{ type: 'required', warning: true }] }]
             }}
             onSubmit={jest.fn()}
           />
@@ -123,7 +123,7 @@ describe('FormRenderer validator', () => {
               [componentTypes.TEXT_FIELD]: TextFieldWarning
             }}
             schema={{
-              fields: [{ useWarnings: true, component: 'text-field', name: NAME, validate: [customValidator] }]
+              fields: [{ component: 'text-field', name: NAME, validate: [customValidator] }]
             }}
             onSubmit={jest.fn()}
           />
@@ -147,7 +147,7 @@ describe('FormRenderer validator', () => {
               [componentTypes.TEXT_FIELD]: TextFieldWarning
             }}
             schema={{
-              fields: [{ useWarnings: true, component: 'text-field', name: NAME, validate: [customValidator] }]
+              fields: [{ component: 'text-field', name: NAME, validate: [customValidator] }]
             }}
             onSubmit={jest.fn()}
           />

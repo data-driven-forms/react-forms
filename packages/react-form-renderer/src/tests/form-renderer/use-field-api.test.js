@@ -10,7 +10,6 @@ import validatorTypes from '../../files/validator-types';
 
 describe('useFieldApi', () => {
   const Catcher = ({ children }) => children;
-  const registerInputFileSpy = jest.fn();
 
   const TestField = (props) => {
     const rest = useFieldApi(props);
@@ -27,13 +26,10 @@ describe('useFieldApi', () => {
       const { onSubmit, ...props } = this.props;
       return (
         <Form onSubmit={onSubmit}>
-          {({ handleSubmit, form: { reset } }) => (
+          {({ handleSubmit, formOptions: { reset } }) => (
             <form onSubmit={handleSubmit}>
               <RendererContext.Provider
                 value={{
-                  formOptions: {
-                    registerInputFile: registerInputFileSpy
-                  },
                   validatorMapper: { required: () => (value) => (!value ? 'required' : undefined) }
                 }}
               >
@@ -56,7 +52,6 @@ describe('useFieldApi', () => {
       component: 'text-field',
       onSubmit: (values) => onSubmit(values)
     };
-    registerInputFileSpy.mockClear();
   });
 
   it('reloads type when component changes', () => {
@@ -162,23 +157,6 @@ describe('useFieldApi', () => {
     wrapper.update();
 
     expect(wrapper.find(Catcher).props().meta.initial).toEqual('pepa');
-  });
-
-  it('should assing correct value to type file input', () => {
-    const wrapper = mount(
-      <WrapperComponent
-        {...initialProps}
-        name="file-input"
-        type="file"
-        initialValue={{
-          inputValue: '',
-          inputFiles: []
-        }}
-      />
-    );
-
-    expect(wrapper.find('input').prop('value')).toEqual('');
-    expect(registerInputFileSpy).toHaveBeenCalledWith('file-input');
   });
 
   it('should not crash when passing validate directly', () => {

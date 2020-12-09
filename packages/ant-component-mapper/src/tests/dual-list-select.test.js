@@ -123,6 +123,8 @@ describe('DualListSelect', () => {
       wrapper.find('form').simulate('submit');
     });
 
-    expect(onSubmit).toHaveBeenCalledWith({});
+    expect(onSubmit).toHaveBeenCalledWith({
+      'dual-Menu': []
+    });
   });
 });

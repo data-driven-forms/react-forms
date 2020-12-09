@@ -51,29 +51,10 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
     }
   }
 >
-  <ReactFinalForm
-    decorators={
-      Array [
-        [Function],
-      ]
-    }
+  <Component
+    clearOnUnmount={false}
     initialValues={Object {}}
-    mutators={
-      Object {
-        "concat": [Function],
-        "insert": [Function],
-        "move": [Function],
-        "pop": [Function],
-        "push": [Function],
-        "remove": [Function],
-        "removeBatch": [Function],
-        "shift": [Function],
-        "swap": [Function],
-        "unshift": [Function],
-        "update": [Function],
-      }
-    }
-    onSubmit={[Function]}
+    onSubmit={[MockFunction]}
     render={[Function]}
     subscription={
       Object {
@@ -353,47 +334,87 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                 fields={Array []}
                                 formOptions={
                                   Object {
+                                    "active": undefined,
+                                    "afterSilentRegistration": [Function],
                                     "batch": [Function],
                                     "blur": [Function],
                                     "change": [Function],
-                                    "clearOnUnmount": false,
-                                    "clearedValue": undefined,
-                                    "concat": [Function],
-                                    "destroyOnUnregister": false,
+                                    "destroyOnUnregister": undefined,
+                                    "dirty": false,
+                                    "dirtyFields": Object {},
+                                    "dirtyFieldsSinceLastSubmit": Object {},
+                                    "dirtySinceLastSubmit": false,
+                                    "error": undefined,
+                                    "errors": Object {},
+                                    "fieldListeners": Object {
+                                      "1607416663369": Object {
+                                        "count": 1,
+                                        "fields": Object {
+                                          "1607416663369": Object {
+                                            "afterSubmit": undefined,
+                                            "beforeSubmit": undefined,
+                                            "isEqual": undefined,
+                                            "render": [Function],
+                                            "subscription": Object {
+                                              "pristine": true,
+                                              "submitting": true,
+                                              "valid": true,
+                                            },
+                                            "validate": undefined,
+                                          },
+                                        },
+                                        "validateFields": undefined,
+                                      },
+                                    },
+                                    "fileInputs": Array [],
                                     "focus": [Function],
                                     "getFieldState": [Function],
+                                    "getFieldValue": [Function],
                                     "getRegisteredFields": [Function],
                                     "getState": [Function],
                                     "handleSubmit": [Function],
+                                    "hasSubmitErrors": false,
+                                    "hasValidationErrors": false,
+                                    "initialValues": Object {},
                                     "initialize": [Function],
-                                    "insert": [Function],
+                                    "invalid": false,
                                     "isValidationPaused": [Function],
-                                    "move": [Function],
+                                    "modified": Object {},
+                                    "modifiedSinceLastSubmit": false,
                                     "onCancel": [Function],
                                     "onReset": [Function],
                                     "onSubmit": [MockFunction],
                                     "pauseValidation": [Function],
-                                    "pop": [Function],
                                     "pristine": true,
-                                    "push": [Function],
+                                    "registerAsyncValidator": [Function],
                                     "registerField": [Function],
                                     "registerInputFile": [Function],
-                                    "remove": [Function],
-                                    "removeBatch": [Function],
+                                    "registeredFields": Array [],
                                     "renderForm": [Function],
+                                    "rerender": [Function],
                                     "reset": [Function],
                                     "resetFieldState": [Function],
                                     "restart": [Function],
                                     "resumeValidation": [Function],
                                     "setConfig": [Function],
-                                    "shift": [Function],
+                                    "setFieldState": [Function],
                                     "submit": [Function],
+                                    "submitError": undefined,
+                                    "submitErrors": undefined,
+                                    "submitFailed": false,
+                                    "submitSucceeded": false,
+                                    "submitting": false,
                                     "subscribe": [Function],
-                                    "swap": [Function],
-                                    "unRegisterInputFile": [Function],
-                                    "unshift": [Function],
-                                    "update": [Function],
+                                    "touched": Object {},
+                                    "unregisterField": [Function],
+                                    "unregisterInputFile": [Function],
+                                    "unsubscribe": [Function],
+                                    "updateError": [Function],
+                                    "updateValid": [Function],
                                     "valid": true,
+                                    "validating": false,
+                                    "values": Object {},
+                                    "visited": Object {},
                                   }
                                 }
                                 handleNext={[Function]}
@@ -447,47 +468,87 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                   disableBack={true}
                                   formOptions={
                                     Object {
+                                      "active": undefined,
+                                      "afterSilentRegistration": [Function],
                                       "batch": [Function],
                                       "blur": [Function],
                                       "change": [Function],
-                                      "clearOnUnmount": false,
-                                      "clearedValue": undefined,
-                                      "concat": [Function],
-                                      "destroyOnUnregister": false,
+                                      "destroyOnUnregister": undefined,
+                                      "dirty": false,
+                                      "dirtyFields": Object {},
+                                      "dirtyFieldsSinceLastSubmit": Object {},
+                                      "dirtySinceLastSubmit": false,
+                                      "error": undefined,
+                                      "errors": Object {},
+                                      "fieldListeners": Object {
+                                        "1607416663369": Object {
+                                          "count": 1,
+                                          "fields": Object {
+                                            "1607416663369": Object {
+                                              "afterSubmit": undefined,
+                                              "beforeSubmit": undefined,
+                                              "isEqual": undefined,
+                                              "render": [Function],
+                                              "subscription": Object {
+                                                "pristine": true,
+                                                "submitting": true,
+                                                "valid": true,
+                                              },
+                                              "validate": undefined,
+                                            },
+                                          },
+                                          "validateFields": undefined,
+                                        },
+                                      },
+                                      "fileInputs": Array [],
                                       "focus": [Function],
                                       "getFieldState": [Function],
+                                      "getFieldValue": [Function],
                                       "getRegisteredFields": [Function],
                                       "getState": [Function],
                                       "handleSubmit": [Function],
+                                      "hasSubmitErrors": false,
+                                      "hasValidationErrors": false,
+                                      "initialValues": Object {},
                                       "initialize": [Function],
-                                      "insert": [Function],
+                                      "invalid": false,
                                       "isValidationPaused": [Function],
-                                      "move": [Function],
+                                      "modified": Object {},
+                                      "modifiedSinceLastSubmit": false,
                                       "onCancel": [Function],
                                       "onReset": [Function],
                                       "onSubmit": [MockFunction],
                                       "pauseValidation": [Function],
-                                      "pop": [Function],
                                       "pristine": true,
-                                      "push": [Function],
+                                      "registerAsyncValidator": [Function],
                                       "registerField": [Function],
                                       "registerInputFile": [Function],
-                                      "remove": [Function],
-                                      "removeBatch": [Function],
+                                      "registeredFields": Array [],
                                       "renderForm": [Function],
+                                      "rerender": [Function],
                                       "reset": [Function],
                                       "resetFieldState": [Function],
                                       "restart": [Function],
                                       "resumeValidation": [Function],
                                       "setConfig": [Function],
-                                      "shift": [Function],
+                                      "setFieldState": [Function],
                                       "submit": [Function],
+                                      "submitError": undefined,
+                                      "submitErrors": undefined,
+                                      "submitFailed": false,
+                                      "submitSucceeded": false,
+                                      "submitting": false,
                                       "subscribe": [Function],
-                                      "swap": [Function],
-                                      "unRegisterInputFile": [Function],
-                                      "unshift": [Function],
-                                      "update": [Function],
+                                      "touched": Object {},
+                                      "unregisterField": [Function],
+                                      "unregisterInputFile": [Function],
+                                      "unsubscribe": [Function],
+                                      "updateError": [Function],
+                                      "updateValid": [Function],
                                       "valid": true,
+                                      "validating": false,
+                                      "values": Object {},
+                                      "visited": Object {},
                                     }
                                   }
                                   handleNext={[Function]}
@@ -575,6 +636,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                           </Button>
                                         </Button>
                                         <SimpleNext
+                                          afterSilentRegistration={[Function]}
                                           batch={[Function]}
                                           blur={[Function]}
                                           buttonLabels={
@@ -586,44 +648,81 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
                                             }
                                           }
                                           change={[Function]}
-                                          clearOnUnmount={false}
-                                          concat={[Function]}
-                                          destroyOnUnregister={false}
+                                          dirty={false}
+                                          dirtyFields={Object {}}
+                                          dirtyFieldsSinceLastSubmit={Object {}}
+                                          dirtySinceLastSubmit={false}
+                                          errors={Object {}}
+                                          fieldListeners={
+                                            Object {
+                                              "1607416663369": Object {
+                                                "count": 1,
+                                                "fields": Object {
+                                                  "1607416663369": Object {
+                                                    "afterSubmit": undefined,
+                                                    "beforeSubmit": undefined,
+                                                    "isEqual": undefined,
+                                                    "render": [Function],
+                                                    "subscription": Object {
+                                                      "pristine": true,
+                                                      "submitting": true,
+                                                      "valid": true,
+                                                    },
+                                                    "validate": undefined,
+                                                  },
+                                                },
+                                                "validateFields": undefined,
+                                              },
+                                            }
+                                          }
+                                          fileInputs={Array []}
                                           focus={[Function]}
                                           getFieldState={[Function]}
+                                          getFieldValue={[Function]}
                                           getRegisteredFields={[Function]}
                                           getState={[Function]}
                                           handleNext={[Function]}
+                                          hasSubmitErrors={false}
+                                          hasValidationErrors={false}
+                                          initialValues={Object {}}
                                           initialize={[Function]}
-                                          insert={[Function]}
+                                          invalid={false}
                                           isValidationPaused={[Function]}
-                                          move={[Function]}
+                                          modified={Object {}}
+                                          modifiedSinceLastSubmit={false}
                                           next="step-2"
                                           onCancel={[Function]}
                                           onReset={[Function]}
                                           onSubmit={[MockFunction]}
                                           pauseValidation={[Function]}
-                                          pop={[Function]}
                                           pristine={true}
-                                          push={[Function]}
+                                          registerAsyncValidator={[Function]}
                                           registerField={[Function]}
                                           registerInputFile={[Function]}
-                                          remove={[Function]}
-                                          removeBatch={[Function]}
+                                          registeredFields={Array []}
                                           renderForm={[Function]}
+                                          rerender={[Function]}
                                           reset={[Function]}
                                           resetFieldState={[Function]}
                                           restart={[Function]}
                                           resumeValidation={[Function]}
                                           setConfig={[Function]}
-                                          shift={[Function]}
+                                          setFieldState={[Function]}
                                           submit={[Function]}
+                                          submitFailed={false}
+                                          submitSucceeded={false}
+                                          submitting={false}
                                           subscribe={[Function]}
-                                          swap={[Function]}
-                                          unRegisterInputFile={[Function]}
-                                          unshift={[Function]}
-                                          update={[Function]}
+                                          touched={Object {}}
+                                          unregisterField={[Function]}
+                                          unregisterInputFile={[Function]}
+                                          unsubscribe={[Function]}
+                                          updateError={[Function]}
+                                          updateValid={[Function]}
                                           valid={true}
+                                          validating={false}
+                                          values={Object {}}
+                                          visited={Object {}}
                                         >
                                           <Button
                                             bsStyle="primary"
@@ -683,7 +782,7 @@ exports[`<Wizard /> should render Wizard correctly 1`] = `
         </FormTemplate>
       </PF3FormTemplate>
     </FormTemplate>
-  </ReactFinalForm>
+  </Component>
 </FormRenderer>
 `;
 
@@ -743,29 +842,10 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
     }
   }
 >
-  <ReactFinalForm
-    decorators={
-      Array [
-        [Function],
-      ]
-    }
+  <Component
+    clearOnUnmount={false}
     initialValues={Object {}}
-    mutators={
-      Object {
-        "concat": [Function],
-        "insert": [Function],
-        "move": [Function],
-        "pop": [Function],
-        "push": [Function],
-        "remove": [Function],
-        "removeBatch": [Function],
-        "shift": [Function],
-        "swap": [Function],
-        "unshift": [Function],
-        "update": [Function],
-      }
-    }
-    onSubmit={[Function]}
+    onSubmit={[MockFunction]}
     render={[Function]}
     subscription={
       Object {
@@ -1095,47 +1175,133 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                 fields={Array []}
                                 formOptions={
                                   Object {
+                                    "active": undefined,
+                                    "afterSilentRegistration": [Function],
                                     "batch": [Function],
                                     "blur": [Function],
                                     "change": [Function],
-                                    "clearOnUnmount": false,
-                                    "clearedValue": undefined,
-                                    "concat": [Function],
-                                    "destroyOnUnregister": false,
+                                    "destroyOnUnregister": undefined,
+                                    "dirty": false,
+                                    "dirtyFields": Object {},
+                                    "dirtyFieldsSinceLastSubmit": Object {},
+                                    "dirtySinceLastSubmit": false,
+                                    "error": undefined,
+                                    "errors": Object {},
+                                    "fieldListeners": Object {
+                                      "1607416663376": Object {
+                                        "count": 1,
+                                        "fields": Object {
+                                          "1607416663376": Object {
+                                            "afterSubmit": undefined,
+                                            "beforeSubmit": undefined,
+                                            "isEqual": undefined,
+                                            "render": [Function],
+                                            "subscription": Object {
+                                              "pristine": true,
+                                              "submitting": true,
+                                              "valid": true,
+                                            },
+                                            "validate": undefined,
+                                          },
+                                        },
+                                        "validateFields": undefined,
+                                      },
+                                      "step": Object {
+                                        "asyncWatcher": Object {
+                                          "registerValidator": [Function],
+                                        },
+                                        "count": 1,
+                                        "fields": Object {
+                                          "1607416698361": Object {
+                                            "afterSubmit": undefined,
+                                            "beforeSubmit": undefined,
+                                            "isEqual": undefined,
+                                            "render": [Function],
+                                            "subscription": Object {
+                                              "value": true,
+                                            },
+                                            "validate": undefined,
+                                          },
+                                        },
+                                        "state": Object {
+                                          "meta": Object {
+                                            "active": false,
+                                            "data": Object {},
+                                            "dirty": false,
+                                            "dirtySinceLastSubmit": false,
+                                            "error": undefined,
+                                            "initial": undefined,
+                                            "invalid": false,
+                                            "modified": false,
+                                            "modifiedSinceLastSubmit": false,
+                                            "pristine": true,
+                                            "submitError": undefined,
+                                            "submitFailed": false,
+                                            "submitSucceeded": false,
+                                            "submitting": false,
+                                            "touched": false,
+                                            "valid": true,
+                                            "validating": false,
+                                            "visited": false,
+                                            "warning": undefined,
+                                          },
+                                          "name": "step",
+                                          "value": undefined,
+                                        },
+                                        "validateFields": undefined,
+                                      },
+                                    },
+                                    "fileInputs": Array [],
                                     "focus": [Function],
                                     "getFieldState": [Function],
+                                    "getFieldValue": [Function],
                                     "getRegisteredFields": [Function],
                                     "getState": [Function],
                                     "handleSubmit": [Function],
+                                    "hasSubmitErrors": false,
+                                    "hasValidationErrors": false,
+                                    "initialValues": Object {},
                                     "initialize": [Function],
-                                    "insert": [Function],
+                                    "invalid": false,
                                     "isValidationPaused": [Function],
-                                    "move": [Function],
+                                    "modified": Object {},
+                                    "modifiedSinceLastSubmit": false,
                                     "onCancel": [Function],
                                     "onReset": [Function],
                                     "onSubmit": [MockFunction],
                                     "pauseValidation": [Function],
-                                    "pop": [Function],
                                     "pristine": true,
-                                    "push": [Function],
+                                    "registerAsyncValidator": [Function],
                                     "registerField": [Function],
                                     "registerInputFile": [Function],
-                                    "remove": [Function],
-                                    "removeBatch": [Function],
+                                    "registeredFields": Array [
+                                      "step",
+                                    ],
                                     "renderForm": [Function],
+                                    "rerender": [Function],
                                     "reset": [Function],
                                     "resetFieldState": [Function],
                                     "restart": [Function],
                                     "resumeValidation": [Function],
                                     "setConfig": [Function],
-                                    "shift": [Function],
+                                    "setFieldState": [Function],
                                     "submit": [Function],
+                                    "submitError": undefined,
+                                    "submitErrors": undefined,
+                                    "submitFailed": false,
+                                    "submitSucceeded": false,
+                                    "submitting": false,
                                     "subscribe": [Function],
-                                    "swap": [Function],
-                                    "unRegisterInputFile": [Function],
-                                    "unshift": [Function],
-                                    "update": [Function],
+                                    "touched": Object {},
+                                    "unregisterField": [Function],
+                                    "unregisterInputFile": [Function],
+                                    "unsubscribe": [Function],
+                                    "updateError": [Function],
+                                    "updateValid": [Function],
                                     "valid": true,
+                                    "validating": false,
+                                    "values": Object {},
+                                    "visited": Object {},
                                   }
                                 }
                                 handleNext={[Function]}
@@ -1196,47 +1362,133 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                   disableBack={true}
                                   formOptions={
                                     Object {
+                                      "active": undefined,
+                                      "afterSilentRegistration": [Function],
                                       "batch": [Function],
                                       "blur": [Function],
                                       "change": [Function],
-                                      "clearOnUnmount": false,
-                                      "clearedValue": undefined,
-                                      "concat": [Function],
-                                      "destroyOnUnregister": false,
+                                      "destroyOnUnregister": undefined,
+                                      "dirty": false,
+                                      "dirtyFields": Object {},
+                                      "dirtyFieldsSinceLastSubmit": Object {},
+                                      "dirtySinceLastSubmit": false,
+                                      "error": undefined,
+                                      "errors": Object {},
+                                      "fieldListeners": Object {
+                                        "1607416663376": Object {
+                                          "count": 1,
+                                          "fields": Object {
+                                            "1607416663376": Object {
+                                              "afterSubmit": undefined,
+                                              "beforeSubmit": undefined,
+                                              "isEqual": undefined,
+                                              "render": [Function],
+                                              "subscription": Object {
+                                                "pristine": true,
+                                                "submitting": true,
+                                                "valid": true,
+                                              },
+                                              "validate": undefined,
+                                            },
+                                          },
+                                          "validateFields": undefined,
+                                        },
+                                        "step": Object {
+                                          "asyncWatcher": Object {
+                                            "registerValidator": [Function],
+                                          },
+                                          "count": 1,
+                                          "fields": Object {
+                                            "1607416698361": Object {
+                                              "afterSubmit": undefined,
+                                              "beforeSubmit": undefined,
+                                              "isEqual": undefined,
+                                              "render": [Function],
+                                              "subscription": Object {
+                                                "value": true,
+                                              },
+                                              "validate": undefined,
+                                            },
+                                          },
+                                          "state": Object {
+                                            "meta": Object {
+                                              "active": false,
+                                              "data": Object {},
+                                              "dirty": false,
+                                              "dirtySinceLastSubmit": false,
+                                              "error": undefined,
+                                              "initial": undefined,
+                                              "invalid": false,
+                                              "modified": false,
+                                              "modifiedSinceLastSubmit": false,
+                                              "pristine": true,
+                                              "submitError": undefined,
+                                              "submitFailed": false,
+                                              "submitSucceeded": false,
+                                              "submitting": false,
+                                              "touched": false,
+                                              "valid": true,
+                                              "validating": false,
+                                              "visited": false,
+                                              "warning": undefined,
+                                            },
+                                            "name": "step",
+                                            "value": undefined,
+                                          },
+                                          "validateFields": undefined,
+                                        },
+                                      },
+                                      "fileInputs": Array [],
                                       "focus": [Function],
                                       "getFieldState": [Function],
+                                      "getFieldValue": [Function],
                                       "getRegisteredFields": [Function],
                                       "getState": [Function],
                                       "handleSubmit": [Function],
+                                      "hasSubmitErrors": false,
+                                      "hasValidationErrors": false,
+                                      "initialValues": Object {},
                                       "initialize": [Function],
-                                      "insert": [Function],
+                                      "invalid": false,
                                       "isValidationPaused": [Function],
-                                      "move": [Function],
+                                      "modified": Object {},
+                                      "modifiedSinceLastSubmit": false,
                                       "onCancel": [Function],
                                       "onReset": [Function],
                                       "onSubmit": [MockFunction],
                                       "pauseValidation": [Function],
-                                      "pop": [Function],
                                       "pristine": true,
-                                      "push": [Function],
+                                      "registerAsyncValidator": [Function],
                                       "registerField": [Function],
                                       "registerInputFile": [Function],
-                                      "remove": [Function],
-                                      "removeBatch": [Function],
+                                      "registeredFields": Array [
+                                        "step",
+                                      ],
                                       "renderForm": [Function],
+                                      "rerender": [Function],
                                       "reset": [Function],
                                       "resetFieldState": [Function],
                                       "restart": [Function],
                                       "resumeValidation": [Function],
                                       "setConfig": [Function],
-                                      "shift": [Function],
+                                      "setFieldState": [Function],
                                       "submit": [Function],
+                                      "submitError": undefined,
+                                      "submitErrors": undefined,
+                                      "submitFailed": false,
+                                      "submitSucceeded": false,
+                                      "submitting": false,
                                       "subscribe": [Function],
-                                      "swap": [Function],
-                                      "unRegisterInputFile": [Function],
-                                      "unshift": [Function],
-                                      "update": [Function],
+                                      "touched": Object {},
+                                      "unregisterField": [Function],
+                                      "unregisterInputFile": [Function],
+                                      "unsubscribe": [Function],
+                                      "updateError": [Function],
+                                      "updateValid": [Function],
                                       "valid": true,
+                                      "validating": false,
+                                      "values": Object {},
+                                      "visited": Object {},
                                     }
                                   }
                                   handleNext={[Function]}
@@ -1331,6 +1583,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                           </Button>
                                         </Button>
                                         <ConditionalNext
+                                          afterSilentRegistration={[Function]}
                                           batch={[Function]}
                                           blur={[Function]}
                                           buttonLabels={
@@ -1342,18 +1595,92 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                             }
                                           }
                                           change={[Function]}
-                                          clearOnUnmount={false}
-                                          concat={[Function]}
-                                          destroyOnUnregister={false}
+                                          dirty={false}
+                                          dirtyFields={Object {}}
+                                          dirtyFieldsSinceLastSubmit={Object {}}
+                                          dirtySinceLastSubmit={false}
+                                          errors={Object {}}
+                                          fieldListeners={
+                                            Object {
+                                              "1607416663376": Object {
+                                                "count": 1,
+                                                "fields": Object {
+                                                  "1607416663376": Object {
+                                                    "afterSubmit": undefined,
+                                                    "beforeSubmit": undefined,
+                                                    "isEqual": undefined,
+                                                    "render": [Function],
+                                                    "subscription": Object {
+                                                      "pristine": true,
+                                                      "submitting": true,
+                                                      "valid": true,
+                                                    },
+                                                    "validate": undefined,
+                                                  },
+                                                },
+                                                "validateFields": undefined,
+                                              },
+                                              "step": Object {
+                                                "asyncWatcher": Object {
+                                                  "registerValidator": [Function],
+                                                },
+                                                "count": 1,
+                                                "fields": Object {
+                                                  "1607416698361": Object {
+                                                    "afterSubmit": undefined,
+                                                    "beforeSubmit": undefined,
+                                                    "isEqual": undefined,
+                                                    "render": [Function],
+                                                    "subscription": Object {
+                                                      "value": true,
+                                                    },
+                                                    "validate": undefined,
+                                                  },
+                                                },
+                                                "state": Object {
+                                                  "meta": Object {
+                                                    "active": false,
+                                                    "data": Object {},
+                                                    "dirty": false,
+                                                    "dirtySinceLastSubmit": false,
+                                                    "error": undefined,
+                                                    "initial": undefined,
+                                                    "invalid": false,
+                                                    "modified": false,
+                                                    "modifiedSinceLastSubmit": false,
+                                                    "pristine": true,
+                                                    "submitError": undefined,
+                                                    "submitFailed": false,
+                                                    "submitSucceeded": false,
+                                                    "submitting": false,
+                                                    "touched": false,
+                                                    "valid": true,
+                                                    "validating": false,
+                                                    "visited": false,
+                                                    "warning": undefined,
+                                                  },
+                                                  "name": "step",
+                                                  "value": undefined,
+                                                },
+                                                "validateFields": undefined,
+                                              },
+                                            }
+                                          }
+                                          fileInputs={Array []}
                                           focus={[Function]}
                                           getFieldState={[Function]}
+                                          getFieldValue={[Function]}
                                           getRegisteredFields={[Function]}
                                           getState={[Function]}
                                           handleNext={[Function]}
+                                          hasSubmitErrors={false}
+                                          hasValidationErrors={false}
+                                          initialValues={Object {}}
                                           initialize={[Function]}
-                                          insert={[Function]}
+                                          invalid={false}
                                           isValidationPaused={[Function]}
-                                          move={[Function]}
+                                          modified={Object {}}
+                                          modifiedSinceLastSubmit={false}
                                           nextStep={
                                             Object {
                                               "stepMapper": Object {
@@ -1366,29 +1693,41 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                           onReset={[Function]}
                                           onSubmit={[MockFunction]}
                                           pauseValidation={[Function]}
-                                          pop={[Function]}
                                           pristine={true}
-                                          push={[Function]}
+                                          registerAsyncValidator={[Function]}
                                           registerField={[Function]}
                                           registerInputFile={[Function]}
-                                          remove={[Function]}
-                                          removeBatch={[Function]}
+                                          registeredFields={
+                                            Array [
+                                              "step",
+                                            ]
+                                          }
                                           renderForm={[Function]}
+                                          rerender={[Function]}
                                           reset={[Function]}
                                           resetFieldState={[Function]}
                                           restart={[Function]}
                                           resumeValidation={[Function]}
                                           setConfig={[Function]}
-                                          shift={[Function]}
+                                          setFieldState={[Function]}
                                           submit={[Function]}
+                                          submitFailed={false}
+                                          submitSucceeded={false}
+                                          submitting={false}
                                           subscribe={[Function]}
-                                          swap={[Function]}
-                                          unRegisterInputFile={[Function]}
-                                          unshift={[Function]}
-                                          update={[Function]}
+                                          touched={Object {}}
+                                          unregisterField={[Function]}
+                                          unregisterInputFile={[Function]}
+                                          unsubscribe={[Function]}
+                                          updateError={[Function]}
+                                          updateValid={[Function]}
                                           valid={true}
+                                          validating={false}
+                                          values={Object {}}
+                                          visited={Object {}}
                                         >
                                           <SimpleNext
+                                            afterSilentRegistration={[Function]}
                                             batch={[Function]}
                                             blur={[Function]}
                                             buttonLabels={
@@ -1400,44 +1739,129 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
                                               }
                                             }
                                             change={[Function]}
-                                            clearOnUnmount={false}
-                                            concat={[Function]}
-                                            destroyOnUnregister={false}
+                                            dirty={false}
+                                            dirtyFields={Object {}}
+                                            dirtyFieldsSinceLastSubmit={Object {}}
+                                            dirtySinceLastSubmit={false}
                                             disabled={true}
+                                            errors={Object {}}
+                                            fieldListeners={
+                                              Object {
+                                                "1607416663376": Object {
+                                                  "count": 1,
+                                                  "fields": Object {
+                                                    "1607416663376": Object {
+                                                      "afterSubmit": undefined,
+                                                      "beforeSubmit": undefined,
+                                                      "isEqual": undefined,
+                                                      "render": [Function],
+                                                      "subscription": Object {
+                                                        "pristine": true,
+                                                        "submitting": true,
+                                                        "valid": true,
+                                                      },
+                                                      "validate": undefined,
+                                                    },
+                                                  },
+                                                  "validateFields": undefined,
+                                                },
+                                                "step": Object {
+                                                  "asyncWatcher": Object {
+                                                    "registerValidator": [Function],
+                                                  },
+                                                  "count": 1,
+                                                  "fields": Object {
+                                                    "1607416698361": Object {
+                                                      "afterSubmit": undefined,
+                                                      "beforeSubmit": undefined,
+                                                      "isEqual": undefined,
+                                                      "render": [Function],
+                                                      "subscription": Object {
+                                                        "value": true,
+                                                      },
+                                                      "validate": undefined,
+                                                    },
+                                                  },
+                                                  "state": Object {
+                                                    "meta": Object {
+                                                      "active": false,
+                                                      "data": Object {},
+                                                      "dirty": false,
+                                                      "dirtySinceLastSubmit": false,
+                                                      "error": undefined,
+                                                      "initial": undefined,
+                                                      "invalid": false,
+                                                      "modified": false,
+                                                      "modifiedSinceLastSubmit": false,
+                                                      "pristine": true,
+                                                      "submitError": undefined,
+                                                      "submitFailed": false,
+                                                      "submitSucceeded": false,
+                                                      "submitting": false,
+                                                      "touched": false,
+                                                      "valid": true,
+                                                      "validating": false,
+                                                      "visited": false,
+                                                      "warning": undefined,
+                                                    },
+                                                    "name": "step",
+                                                    "value": undefined,
+                                                  },
+                                                  "validateFields": undefined,
+                                                },
+                                              }
+                                            }
+                                            fileInputs={Array []}
                                             focus={[Function]}
                                             getFieldState={[Function]}
+                                            getFieldValue={[Function]}
                                             getRegisteredFields={[Function]}
                                             getState={[Function]}
                                             handleNext={[Function]}
+                                            hasSubmitErrors={false}
+                                            hasValidationErrors={false}
+                                            initialValues={Object {}}
                                             initialize={[Function]}
-                                            insert={[Function]}
+                                            invalid={false}
                                             isValidationPaused={[Function]}
-                                            move={[Function]}
+                                            modified={Object {}}
+                                            modifiedSinceLastSubmit={false}
                                             onCancel={[Function]}
                                             onReset={[Function]}
                                             onSubmit={[MockFunction]}
                                             pauseValidation={[Function]}
-                                            pop={[Function]}
                                             pristine={true}
-                                            push={[Function]}
+                                            registerAsyncValidator={[Function]}
                                             registerField={[Function]}
                                             registerInputFile={[Function]}
-                                            remove={[Function]}
-                                            removeBatch={[Function]}
+                                            registeredFields={
+                                              Array [
+                                                "step",
+                                              ]
+                                            }
                                             renderForm={[Function]}
+                                            rerender={[Function]}
                                             reset={[Function]}
                                             resetFieldState={[Function]}
                                             restart={[Function]}
                                             resumeValidation={[Function]}
                                             setConfig={[Function]}
-                                            shift={[Function]}
+                                            setFieldState={[Function]}
                                             submit={[Function]}
+                                            submitFailed={false}
+                                            submitSucceeded={false}
+                                            submitting={false}
                                             subscribe={[Function]}
-                                            swap={[Function]}
-                                            unRegisterInputFile={[Function]}
-                                            unshift={[Function]}
-                                            update={[Function]}
+                                            touched={Object {}}
+                                            unregisterField={[Function]}
+                                            unregisterInputFile={[Function]}
+                                            unsubscribe={[Function]}
+                                            updateError={[Function]}
+                                            updateValid={[Function]}
                                             valid={true}
+                                            validating={false}
+                                            values={Object {}}
+                                            visited={Object {}}
                                           >
                                             <Button
                                               bsStyle="primary"
@@ -1499,7 +1923,7 @@ exports[`<Wizard /> should render Wizard with conditional steps correctly 1`] = 
         </FormTemplate>
       </PF3FormTemplate>
     </FormTemplate>
-  </ReactFinalForm>
+  </Component>
 </FormRenderer>
 `;
 
@@ -1562,29 +1986,10 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
     }
   }
 >
-  <ReactFinalForm
-    decorators={
-      Array [
-        [Function],
-      ]
-    }
+  <Component
+    clearOnUnmount={false}
     initialValues={Object {}}
-    mutators={
-      Object {
-        "concat": [Function],
-        "insert": [Function],
-        "move": [Function],
-        "pop": [Function],
-        "push": [Function],
-        "remove": [Function],
-        "removeBatch": [Function],
-        "shift": [Function],
-        "swap": [Function],
-        "unshift": [Function],
-        "update": [Function],
-      }
-    }
-    onSubmit={[Function]}
+    onSubmit={[MockFunction]}
     render={[Function]}
     subscription={
       Object {
@@ -2060,47 +2465,87 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                 fields={Array []}
                                 formOptions={
                                   Object {
+                                    "active": undefined,
+                                    "afterSilentRegistration": [Function],
                                     "batch": [Function],
                                     "blur": [Function],
                                     "change": [Function],
-                                    "clearOnUnmount": false,
-                                    "clearedValue": undefined,
-                                    "concat": [Function],
-                                    "destroyOnUnregister": false,
+                                    "destroyOnUnregister": undefined,
+                                    "dirty": false,
+                                    "dirtyFields": Object {},
+                                    "dirtyFieldsSinceLastSubmit": Object {},
+                                    "dirtySinceLastSubmit": false,
+                                    "error": undefined,
+                                    "errors": Object {},
+                                    "fieldListeners": Object {
+                                      "1607416727086": Object {
+                                        "count": 1,
+                                        "fields": Object {
+                                          "1607416727086": Object {
+                                            "afterSubmit": undefined,
+                                            "beforeSubmit": undefined,
+                                            "isEqual": undefined,
+                                            "render": [Function],
+                                            "subscription": Object {
+                                              "pristine": true,
+                                              "submitting": true,
+                                              "valid": true,
+                                            },
+                                            "validate": undefined,
+                                          },
+                                        },
+                                        "validateFields": undefined,
+                                      },
+                                    },
+                                    "fileInputs": Array [],
                                     "focus": [Function],
                                     "getFieldState": [Function],
+                                    "getFieldValue": [Function],
                                     "getRegisteredFields": [Function],
                                     "getState": [Function],
                                     "handleSubmit": [Function],
+                                    "hasSubmitErrors": false,
+                                    "hasValidationErrors": false,
+                                    "initialValues": Object {},
                                     "initialize": [Function],
-                                    "insert": [Function],
+                                    "invalid": false,
                                     "isValidationPaused": [Function],
-                                    "move": [Function],
+                                    "modified": Object {},
+                                    "modifiedSinceLastSubmit": false,
                                     "onCancel": [Function],
                                     "onReset": [Function],
                                     "onSubmit": [MockFunction],
                                     "pauseValidation": [Function],
-                                    "pop": [Function],
                                     "pristine": true,
-                                    "push": [Function],
+                                    "registerAsyncValidator": [Function],
                                     "registerField": [Function],
                                     "registerInputFile": [Function],
-                                    "remove": [Function],
-                                    "removeBatch": [Function],
+                                    "registeredFields": Array [],
                                     "renderForm": [Function],
+                                    "rerender": [Function],
                                     "reset": [Function],
                                     "resetFieldState": [Function],
                                     "restart": [Function],
                                     "resumeValidation": [Function],
                                     "setConfig": [Function],
-                                    "shift": [Function],
+                                    "setFieldState": [Function],
                                     "submit": [Function],
+                                    "submitError": undefined,
+                                    "submitErrors": undefined,
+                                    "submitFailed": false,
+                                    "submitSucceeded": false,
+                                    "submitting": false,
                                     "subscribe": [Function],
-                                    "swap": [Function],
-                                    "unRegisterInputFile": [Function],
-                                    "unshift": [Function],
-                                    "update": [Function],
+                                    "touched": Object {},
+                                    "unregisterField": [Function],
+                                    "unregisterInputFile": [Function],
+                                    "unsubscribe": [Function],
+                                    "updateError": [Function],
+                                    "updateValid": [Function],
                                     "valid": true,
+                                    "validating": false,
+                                    "values": Object {},
+                                    "visited": Object {},
                                   }
                                 }
                                 handleNext={[Function]}
@@ -2154,47 +2599,87 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                   disableBack={true}
                                   formOptions={
                                     Object {
+                                      "active": undefined,
+                                      "afterSilentRegistration": [Function],
                                       "batch": [Function],
                                       "blur": [Function],
                                       "change": [Function],
-                                      "clearOnUnmount": false,
-                                      "clearedValue": undefined,
-                                      "concat": [Function],
-                                      "destroyOnUnregister": false,
+                                      "destroyOnUnregister": undefined,
+                                      "dirty": false,
+                                      "dirtyFields": Object {},
+                                      "dirtyFieldsSinceLastSubmit": Object {},
+                                      "dirtySinceLastSubmit": false,
+                                      "error": undefined,
+                                      "errors": Object {},
+                                      "fieldListeners": Object {
+                                        "1607416727086": Object {
+                                          "count": 1,
+                                          "fields": Object {
+                                            "1607416727086": Object {
+                                              "afterSubmit": undefined,
+                                              "beforeSubmit": undefined,
+                                              "isEqual": undefined,
+                                              "render": [Function],
+                                              "subscription": Object {
+                                                "pristine": true,
+                                                "submitting": true,
+                                                "valid": true,
+                                              },
+                                              "validate": undefined,
+                                            },
+                                          },
+                                          "validateFields": undefined,
+                                        },
+                                      },
+                                      "fileInputs": Array [],
                                       "focus": [Function],
                                       "getFieldState": [Function],
+                                      "getFieldValue": [Function],
                                       "getRegisteredFields": [Function],
                                       "getState": [Function],
                                       "handleSubmit": [Function],
+                                      "hasSubmitErrors": false,
+                                      "hasValidationErrors": false,
+                                      "initialValues": Object {},
                                       "initialize": [Function],
-                                      "insert": [Function],
+                                      "invalid": false,
                                       "isValidationPaused": [Function],
-                                      "move": [Function],
+                                      "modified": Object {},
+                                      "modifiedSinceLastSubmit": false,
                                       "onCancel": [Function],
                                       "onReset": [Function],
                                       "onSubmit": [MockFunction],
                                       "pauseValidation": [Function],
-                                      "pop": [Function],
                                       "pristine": true,
-                                      "push": [Function],
+                                      "registerAsyncValidator": [Function],
                                       "registerField": [Function],
                                       "registerInputFile": [Function],
-                                      "remove": [Function],
-                                      "removeBatch": [Function],
+                                      "registeredFields": Array [],
                                       "renderForm": [Function],
+                                      "rerender": [Function],
                                       "reset": [Function],
                                       "resetFieldState": [Function],
                                       "restart": [Function],
                                       "resumeValidation": [Function],
                                       "setConfig": [Function],
-                                      "shift": [Function],
+                                      "setFieldState": [Function],
                                       "submit": [Function],
+                                      "submitError": undefined,
+                                      "submitErrors": undefined,
+                                      "submitFailed": false,
+                                      "submitSucceeded": false,
+                                      "submitting": false,
                                       "subscribe": [Function],
-                                      "swap": [Function],
-                                      "unRegisterInputFile": [Function],
-                                      "unshift": [Function],
-                                      "update": [Function],
+                                      "touched": Object {},
+                                      "unregisterField": [Function],
+                                      "unregisterInputFile": [Function],
+                                      "unsubscribe": [Function],
+                                      "updateError": [Function],
+                                      "updateValid": [Function],
                                       "valid": true,
+                                      "validating": false,
+                                      "values": Object {},
+                                      "visited": Object {},
                                     }
                                   }
                                   handleNext={[Function]}
@@ -2282,6 +2767,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                           </Button>
                                         </Button>
                                         <SimpleNext
+                                          afterSilentRegistration={[Function]}
                                           batch={[Function]}
                                           blur={[Function]}
                                           buttonLabels={
@@ -2293,44 +2779,81 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
                                             }
                                           }
                                           change={[Function]}
-                                          clearOnUnmount={false}
-                                          concat={[Function]}
-                                          destroyOnUnregister={false}
+                                          dirty={false}
+                                          dirtyFields={Object {}}
+                                          dirtyFieldsSinceLastSubmit={Object {}}
+                                          dirtySinceLastSubmit={false}
+                                          errors={Object {}}
+                                          fieldListeners={
+                                            Object {
+                                              "1607416727086": Object {
+                                                "count": 1,
+                                                "fields": Object {
+                                                  "1607416727086": Object {
+                                                    "afterSubmit": undefined,
+                                                    "beforeSubmit": undefined,
+                                                    "isEqual": undefined,
+                                                    "render": [Function],
+                                                    "subscription": Object {
+                                                      "pristine": true,
+                                                      "submitting": true,
+                                                      "valid": true,
+                                                    },
+                                                    "validate": undefined,
+                                                  },
+                                                },
+                                                "validateFields": undefined,
+                                              },
+                                            }
+                                          }
+                                          fileInputs={Array []}
                                           focus={[Function]}
                                           getFieldState={[Function]}
+                                          getFieldValue={[Function]}
                                           getRegisteredFields={[Function]}
                                           getState={[Function]}
                                           handleNext={[Function]}
+                                          hasSubmitErrors={false}
+                                          hasValidationErrors={false}
+                                          initialValues={Object {}}
                                           initialize={[Function]}
-                                          insert={[Function]}
+                                          invalid={false}
                                           isValidationPaused={[Function]}
-                                          move={[Function]}
+                                          modified={Object {}}
+                                          modifiedSinceLastSubmit={false}
                                           next="step-2"
                                           onCancel={[Function]}
                                           onReset={[Function]}
                                           onSubmit={[MockFunction]}
                                           pauseValidation={[Function]}
-                                          pop={[Function]}
                                           pristine={true}
-                                          push={[Function]}
+                                          registerAsyncValidator={[Function]}
                                           registerField={[Function]}
                                           registerInputFile={[Function]}
-                                          remove={[Function]}
-                                          removeBatch={[Function]}
+                                          registeredFields={Array []}
                                           renderForm={[Function]}
+                                          rerender={[Function]}
                                           reset={[Function]}
                                           resetFieldState={[Function]}
                                           restart={[Function]}
                                           resumeValidation={[Function]}
                                           setConfig={[Function]}
-                                          shift={[Function]}
+                                          setFieldState={[Function]}
                                           submit={[Function]}
+                                          submitFailed={false}
+                                          submitSucceeded={false}
+                                          submitting={false}
                                           subscribe={[Function]}
-                                          swap={[Function]}
-                                          unRegisterInputFile={[Function]}
-                                          unshift={[Function]}
-                                          update={[Function]}
+                                          touched={Object {}}
+                                          unregisterField={[Function]}
+                                          unregisterInputFile={[Function]}
+                                          unsubscribe={[Function]}
+                                          updateError={[Function]}
+                                          updateValid={[Function]}
                                           valid={true}
+                                          validating={false}
+                                          values={Object {}}
+                                          visited={Object {}}
                                         >
                                           <Button
                                             bsStyle="primary"
@@ -2390,7 +2913,7 @@ exports[`<Wizard /> should render Wizard with stepsInfo correctly 1`] = `
         </FormTemplate>
       </PF3FormTemplate>
     </FormTemplate>
-  </ReactFinalForm>
+  </Component>
 </FormRenderer>
 `;
 
@@ -2446,29 +2969,10 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
     }
   }
 >
-  <ReactFinalForm
-    decorators={
-      Array [
-        [Function],
-      ]
-    }
+  <Component
+    clearOnUnmount={false}
     initialValues={Object {}}
-    mutators={
-      Object {
-        "concat": [Function],
-        "insert": [Function],
-        "move": [Function],
-        "pop": [Function],
-        "push": [Function],
-        "remove": [Function],
-        "removeBatch": [Function],
-        "shift": [Function],
-        "swap": [Function],
-        "unshift": [Function],
-        "update": [Function],
-      }
-    }
-    onSubmit={[Function]}
+    onSubmit={[MockFunction]}
     render={[Function]}
     subscription={
       Object {
@@ -2779,47 +3283,87 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                 fields={Array []}
                                 formOptions={
                                   Object {
+                                    "active": undefined,
+                                    "afterSilentRegistration": [Function],
                                     "batch": [Function],
                                     "blur": [Function],
                                     "change": [Function],
-                                    "clearOnUnmount": false,
-                                    "clearedValue": undefined,
-                                    "concat": [Function],
-                                    "destroyOnUnregister": false,
+                                    "destroyOnUnregister": undefined,
+                                    "dirty": false,
+                                    "dirtyFields": Object {},
+                                    "dirtyFieldsSinceLastSubmit": Object {},
+                                    "dirtySinceLastSubmit": false,
+                                    "error": undefined,
+                                    "errors": Object {},
+                                    "fieldListeners": Object {
+                                      "1607416644871": Object {
+                                        "count": 1,
+                                        "fields": Object {
+                                          "1607416644871": Object {
+                                            "afterSubmit": undefined,
+                                            "beforeSubmit": undefined,
+                                            "isEqual": undefined,
+                                            "render": [Function],
+                                            "subscription": Object {
+                                              "pristine": true,
+                                              "submitting": true,
+                                              "valid": true,
+                                            },
+                                            "validate": undefined,
+                                          },
+                                        },
+                                        "validateFields": undefined,
+                                      },
+                                    },
+                                    "fileInputs": Array [],
                                     "focus": [Function],
                                     "getFieldState": [Function],
+                                    "getFieldValue": [Function],
                                     "getRegisteredFields": [Function],
                                     "getState": [Function],
                                     "handleSubmit": [Function],
+                                    "hasSubmitErrors": false,
+                                    "hasValidationErrors": false,
+                                    "initialValues": Object {},
                                     "initialize": [Function],
-                                    "insert": [Function],
+                                    "invalid": false,
                                     "isValidationPaused": [Function],
-                                    "move": [Function],
+                                    "modified": Object {},
+                                    "modifiedSinceLastSubmit": false,
                                     "onCancel": [Function],
                                     "onReset": [Function],
                                     "onSubmit": [MockFunction],
                                     "pauseValidation": [Function],
-                                    "pop": [Function],
                                     "pristine": true,
-                                    "push": [Function],
+                                    "registerAsyncValidator": [Function],
                                     "registerField": [Function],
                                     "registerInputFile": [Function],
-                                    "remove": [Function],
-                                    "removeBatch": [Function],
+                                    "registeredFields": Array [],
                                     "renderForm": [Function],
+                                    "rerender": [Function],
                                     "reset": [Function],
                                     "resetFieldState": [Function],
                                     "restart": [Function],
                                     "resumeValidation": [Function],
                                     "setConfig": [Function],
-                                    "shift": [Function],
+                                    "setFieldState": [Function],
                                     "submit": [Function],
+                                    "submitError": undefined,
+                                    "submitErrors": undefined,
+                                    "submitFailed": false,
+                                    "submitSucceeded": false,
+                                    "submitting": false,
                                     "subscribe": [Function],
-                                    "swap": [Function],
-                                    "unRegisterInputFile": [Function],
-                                    "unshift": [Function],
-                                    "update": [Function],
+                                    "touched": Object {},
+                                    "unregisterField": [Function],
+                                    "unregisterInputFile": [Function],
+                                    "unsubscribe": [Function],
+                                    "updateError": [Function],
+                                    "updateValid": [Function],
                                     "valid": true,
+                                    "validating": false,
+                                    "values": Object {},
+                                    "visited": Object {},
                                   }
                                 }
                                 handleNext={[Function]}
@@ -2873,47 +3417,87 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                   disableBack={true}
                                   formOptions={
                                     Object {
+                                      "active": undefined,
+                                      "afterSilentRegistration": [Function],
                                       "batch": [Function],
                                       "blur": [Function],
                                       "change": [Function],
-                                      "clearOnUnmount": false,
-                                      "clearedValue": undefined,
-                                      "concat": [Function],
-                                      "destroyOnUnregister": false,
+                                      "destroyOnUnregister": undefined,
+                                      "dirty": false,
+                                      "dirtyFields": Object {},
+                                      "dirtyFieldsSinceLastSubmit": Object {},
+                                      "dirtySinceLastSubmit": false,
+                                      "error": undefined,
+                                      "errors": Object {},
+                                      "fieldListeners": Object {
+                                        "1607416644871": Object {
+                                          "count": 1,
+                                          "fields": Object {
+                                            "1607416644871": Object {
+                                              "afterSubmit": undefined,
+                                              "beforeSubmit": undefined,
+                                              "isEqual": undefined,
+                                              "render": [Function],
+                                              "subscription": Object {
+                                                "pristine": true,
+                                                "submitting": true,
+                                                "valid": true,
+                                              },
+                                              "validate": undefined,
+                                            },
+                                          },
+                                          "validateFields": undefined,
+                                        },
+                                      },
+                                      "fileInputs": Array [],
                                       "focus": [Function],
                                       "getFieldState": [Function],
+                                      "getFieldValue": [Function],
                                       "getRegisteredFields": [Function],
                                       "getState": [Function],
                                       "handleSubmit": [Function],
+                                      "hasSubmitErrors": false,
+                                      "hasValidationErrors": false,
+                                      "initialValues": Object {},
                                       "initialize": [Function],
-                                      "insert": [Function],
+                                      "invalid": false,
                                       "isValidationPaused": [Function],
-                                      "move": [Function],
+                                      "modified": Object {},
+                                      "modifiedSinceLastSubmit": false,
                                       "onCancel": [Function],
                                       "onReset": [Function],
                                       "onSubmit": [MockFunction],
                                       "pauseValidation": [Function],
-                                      "pop": [Function],
                                       "pristine": true,
-                                      "push": [Function],
+                                      "registerAsyncValidator": [Function],
                                       "registerField": [Function],
                                       "registerInputFile": [Function],
-                                      "remove": [Function],
-                                      "removeBatch": [Function],
+                                      "registeredFields": Array [],
                                       "renderForm": [Function],
+                                      "rerender": [Function],
                                       "reset": [Function],
                                       "resetFieldState": [Function],
                                       "restart": [Function],
                                       "resumeValidation": [Function],
                                       "setConfig": [Function],
-                                      "shift": [Function],
+                                      "setFieldState": [Function],
                                       "submit": [Function],
+                                      "submitError": undefined,
+                                      "submitErrors": undefined,
+                                      "submitFailed": false,
+                                      "submitSucceeded": false,
+                                      "submitting": false,
                                       "subscribe": [Function],
-                                      "swap": [Function],
-                                      "unRegisterInputFile": [Function],
-                                      "unshift": [Function],
-                                      "update": [Function],
+                                      "touched": Object {},
+                                      "unregisterField": [Function],
+                                      "unregisterInputFile": [Function],
+                                      "unsubscribe": [Function],
+                                      "updateError": [Function],
+                                      "updateValid": [Function],
                                       "valid": true,
+                                      "validating": false,
+                                      "values": Object {},
+                                      "visited": Object {},
                                     }
                                   }
                                   handleNext={[Function]}
@@ -3001,6 +3585,7 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                           </Button>
                                         </Button>
                                         <SimpleNext
+                                          afterSilentRegistration={[Function]}
                                           batch={[Function]}
                                           blur={[Function]}
                                           buttonLabels={
@@ -3012,44 +3597,81 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
                                             }
                                           }
                                           change={[Function]}
-                                          clearOnUnmount={false}
-                                          concat={[Function]}
-                                          destroyOnUnregister={false}
+                                          dirty={false}
+                                          dirtyFields={Object {}}
+                                          dirtyFieldsSinceLastSubmit={Object {}}
+                                          dirtySinceLastSubmit={false}
+                                          errors={Object {}}
+                                          fieldListeners={
+                                            Object {
+                                              "1607416644871": Object {
+                                                "count": 1,
+                                                "fields": Object {
+                                                  "1607416644871": Object {
+                                                    "afterSubmit": undefined,
+                                                    "beforeSubmit": undefined,
+                                                    "isEqual": undefined,
+                                                    "render": [Function],
+                                                    "subscription": Object {
+                                                      "pristine": true,
+                                                      "submitting": true,
+                                                      "valid": true,
+                                                    },
+                                                    "validate": undefined,
+                                                  },
+                                                },
+                                                "validateFields": undefined,
+                                              },
+                                            }
+                                          }
+                                          fileInputs={Array []}
                                           focus={[Function]}
                                           getFieldState={[Function]}
+                                          getFieldValue={[Function]}
                                           getRegisteredFields={[Function]}
                                           getState={[Function]}
                                           handleNext={[Function]}
+                                          hasSubmitErrors={false}
+                                          hasValidationErrors={false}
+                                          initialValues={Object {}}
                                           initialize={[Function]}
-                                          insert={[Function]}
+                                          invalid={false}
                                           isValidationPaused={[Function]}
-                                          move={[Function]}
+                                          modified={Object {}}
+                                          modifiedSinceLastSubmit={false}
                                           next="step-2"
                                           onCancel={[Function]}
                                           onReset={[Function]}
                                           onSubmit={[MockFunction]}
                                           pauseValidation={[Function]}
-                                          pop={[Function]}
                                           pristine={true}
-                                          push={[Function]}
+                                          registerAsyncValidator={[Function]}
                                           registerField={[Function]}
                                           registerInputFile={[Function]}
-                                          remove={[Function]}
-                                          removeBatch={[Function]}
+                                          registeredFields={Array []}
                                           renderForm={[Function]}
+                                          rerender={[Function]}
                                           reset={[Function]}
                                           resetFieldState={[Function]}
                                           restart={[Function]}
                                           resumeValidation={[Function]}
                                           setConfig={[Function]}
-                                          shift={[Function]}
+                                          setFieldState={[Function]}
                                           submit={[Function]}
+                                          submitFailed={false}
+                                          submitSucceeded={false}
+                                          submitting={false}
                                           subscribe={[Function]}
-                                          swap={[Function]}
-                                          unRegisterInputFile={[Function]}
-                                          unshift={[Function]}
-                                          update={[Function]}
+                                          touched={Object {}}
+                                          unregisterField={[Function]}
+                                          unregisterInputFile={[Function]}
+                                          unsubscribe={[Function]}
+                                          updateError={[Function]}
+                                          updateValid={[Function]}
                                           valid={true}
+                                          validating={false}
+                                          values={Object {}}
+                                          visited={Object {}}
                                         >
                                           <Button
                                             bsStyle="primary"
@@ -3109,6 +3731,6 @@ exports[`<Wizard /> should render Wizard with title correctly 1`] = `
         </FormTemplate>
       </PF3FormTemplate>
     </FormTemplate>
-  </ReactFinalForm>
+  </Component>
 </FormRenderer>
 `;
