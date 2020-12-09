@@ -56,7 +56,7 @@ const createFieldProps = (name, formOptions) => {
   };
 };
 
-const useFieldApi = ({ name, initializeOnMount, component, render, validate, resolveProps, ...props }) => {
+const useFieldApi = ({ name, component, render, validate, resolveProps, ...props }) => {
   const { validatorMapper, formOptions } = useContext(RendererContext);
 
   const { validate: resolvePropsValidate, ...resolvedProps } = resolveProps
@@ -126,6 +126,7 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
     isEqual: _isEqual,
     validate: _validate,
     type: _type,
+    initializeOnMount: _initializeOnMount,
     ...cleanProps
   } = enhancedProps;
 
