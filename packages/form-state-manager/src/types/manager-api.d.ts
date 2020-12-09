@@ -24,7 +24,7 @@ export type HandleSubmit = (event?: FormEvent) => void;
 export type RegisterField = (field: FieldConfig) => void;
 export type UnregisterField = (field: Omit<FieldConfig, 'render'>) => void;
 export type GetState = () => ManagerState;
-export type OnSubmit = (values: AnyObject) => any;
+export type OnSubmit = (values: AnyObject, formApi: ManagerState, event?: FormEvent) => any;
 export type GetFieldValue = (name: string) => any;
 export type GetFieldState = (name: string) => ExtendedFieldState | undefined;
 export type Focus = (name: string) => void;
@@ -33,7 +33,7 @@ export type UpdateValid = (valid: boolean) => void;
 export type UpdateError = (name: string, error: string | undefined) => void;
 export type Batch = (callback: Callback) => void;
 export type Render = () => void;
-export type Subscribe = (subscriberConfig: SubscriberConfig) => void;
+export type Subscribe = (subscriberConfig: SubscriberConfig, isField?: boolean, isForm?: boolean) => void;
 export type Unsubscribe = (subscriberConfig: Omit<SubscriberConfig, 'render'>) => void;
 export type Reset = (initialValues?: AnyObject) => void;
 export type Restart = () => void;
@@ -85,6 +85,7 @@ export interface FieldListener {
   asyncWatcher: AsyncWatcherApi;
   fields: FieldListenerFields;
   validateFields?: Array<string>;
+  isForm?: boolean;
 }
 
 export interface FieldListeners {

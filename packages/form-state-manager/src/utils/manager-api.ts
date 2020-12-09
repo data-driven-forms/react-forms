@@ -19,7 +19,8 @@ import CreateManagerApi, {
   ManagerApiFunctions,
   ExtendedFieldState,
   InitilizeInputFunction,
-  CreateManagerApiConfig
+  CreateManagerApiConfig,
+  FieldListener
 } from '../types/manager-api';
 import AnyObject from '../types/any-object';
 import FieldConfig, { IsEqual } from '../types/field-config';
@@ -33,7 +34,8 @@ import focusError from './focus-error';
 
 export const defaultIsEqual = (a: any, b: any) => a === b;
 
-const isLast = (fieldListeners: AnyObject, name: string) => fieldListeners?.[name]?.count === 1;
+const isLast = (fieldListeners: AnyObject, name: string, registeringFields: string[]) =>
+  fieldListeners?.[name]?.count - registeringFields.filter((field) => field === name).length === 1;
 
 const noState = (fieldListeners: AnyObject, name: string) => !fieldListeners?.[name]?.state;
 
@@ -256,6 +258,7 @@ const createManagerApi: CreateManagerApi = ({
   let runningValidators = 0;
   let flatSubmitErrors: AnyObject = {};
   let flatErrors: AnyObject = {};
+  const registeringFields: string[] = [];
 
   function updateRunningValidators(increment: number): void {
     runningValidators = Math.max(runningValidators + increment, 0);
@@ -610,7 +613,10 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function handleSubmit(event?: FormEvent): void {
-    event && event.preventDefault && event.preventDefault();
+    if (event) {
+      typeof event.preventDefault && typeof event.preventDefault === 'function' && event.preventDefault();
+      typeof event.stopPropagation && typeof event.stopPropagation === 'function' && event.stopPropagation();
+    }
 
     if (state.submitting) {
       return;
@@ -643,7 +649,7 @@ const createManagerApi: CreateManagerApi = ({
       return;
     }
 
-    const result = config.onSubmit(state.values);
+    const result = config.onSubmit({ ...state.values }, { ...state, values: { ...state.values } }, event);
 
     if (isPromise(result)) {
       setSubmitting();
@@ -747,6 +753,7 @@ const createManagerApi: CreateManagerApi = ({
   function registerField(field: FieldConfig): void {
     isSilent = field.silent ? isSilent + 1 : isSilent;
     registeringField = field.internalId || field.name;
+    field.silent && registeringFields.push(field.name);
     batch(() => {
       const render = prepareRerender();
       addIfUnique(state.registeredFields, field.name);
@@ -755,7 +762,11 @@ const createManagerApi: CreateManagerApi = ({
         shouldExecute(config.initializeOnMount, field.initializeOnMount) ||
         (!isInitialized(field.name) && typeof field.initialValue !== 'undefined')
       ) {
-        set(state.values, field.name, field.initialValue || get(state.initialValues, field.name));
+        set(
+          state.values,
+          field.name,
+          Object.prototype.hasOwnProperty.call(field, 'initialValue') ? field.initialValue : get(state.initialValues, field.name)
+        );
       }
 
       let setDirty = false;
@@ -815,6 +826,8 @@ const createManagerApi: CreateManagerApi = ({
       rerender(silentRender);
       silentRender = [];
       registeringField = undefined;
+
+      registeringFields.splice(registeringFields.indexOf(field.name), 1);
     }
   }
 
@@ -823,14 +836,22 @@ const createManagerApi: CreateManagerApi = ({
       const render = prepareRerender();
       delete state.fieldListeners[field.name].fields[field.internalId];
 
-      if (isLast(state.fieldListeners, field.name)) {
+      if (isLast(state.fieldListeners, field.name, registeringFields)) {
         state.registeredFields = state.registeredFields.filter((fieldName: string) => fieldName !== field.name);
         if (shouldExecute(config.clearOnUnmount || config.destroyOnUnregister, field.clearOnUnmount)) {
           set(state.values, field.name, field.value);
         }
+
+        updateError(field.name);
       }
 
       unsubscribe(field as SubscriberConfig);
+
+      revalidateFields(state.registeredFields);
+
+      if (config.validate) {
+        validateForm(config.validate);
+      }
 
       render();
     });
@@ -861,7 +882,7 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function getState(): ManagerState {
-    return { ...state };
+    return { ...state, values: { ...state.values } };
   }
 
   function updateValidating(validating: boolean) {
@@ -918,17 +939,34 @@ const createManagerApi: CreateManagerApi = ({
       subscribeTo && subscribeTo.forEach((to) => addIfUnique(batched, to));
       shouldRerender = true;
     } else {
+      if (config.subscription) {
+        let refreshForm: boolean | undefined = false;
+
+        traverseObject(config.subscription, (subscribed, key) => {
+          if (!refreshForm) {
+            refreshForm = subscribed && (key === 'all' || subscribeTo?.includes(key));
+          }
+        });
+
+        if (refreshForm) {
+          const formField = Object.values(state.fieldListeners)?.find((fieldListener: FieldListener) => fieldListener.isForm)?.fields[0];
+
+          if (formField) {
+            formField.render();
+            return;
+          }
+        }
+      }
+
       traverseObject(state.fieldListeners, (fieldListener) => {
         traverseObject(fieldListener.fields, (field, key) => {
           if (String(registeringField) !== String(key)) {
             let shouldRender: boolean | undefined = false;
 
-            const mergedSubscription = { ...config.subscription, ...field.subscription };
-
             if (!config.subscription && !field.subscription) {
               shouldRender = true;
-            } else {
-              traverseObject(mergedSubscription, (subscribed, key) => {
+            } else if (field.subscription) {
+              traverseObject(field.subscription, (subscribed, key) => {
                 if (!shouldRender) {
                   shouldRender = subscribed && (key === 'all' || subscribeTo?.includes(key));
                 }
@@ -955,7 +993,7 @@ const createManagerApi: CreateManagerApi = ({
     }
   }
 
-  function subscribe(subscriberConfig: SubscriberConfig, isField?: boolean): void {
+  function subscribe(subscriberConfig: SubscriberConfig, isField?: boolean, isForm?: boolean): void {
     state.fieldListeners[subscriberConfig.name] = {
       ...state.fieldListeners[subscriberConfig.name],
       ...(isField
@@ -977,12 +1015,16 @@ const createManagerApi: CreateManagerApi = ({
           beforeSubmit: subscriberConfig.beforeSubmit,
           isEqual: subscriberConfig.isEqual
         }
-      }
+      },
+      ...(isForm && { isForm: true })
     };
   }
 
   function unsubscribe(subscriberConfig: Omit<SubscriberConfig, 'render'>): void {
-    if (isLast(state.fieldListeners, String(subscriberConfig.name)) && noState(state.fieldListeners, String(subscriberConfig.name))) {
+    if (
+      isLast(state.fieldListeners, String(subscriberConfig.name), registeringFields) &&
+      noState(state.fieldListeners, String(subscriberConfig.name))
+    ) {
       delete state.fieldListeners[subscriberConfig.name];
     } else {
       state.fieldListeners[subscriberConfig.name].count = state.fieldListeners[subscriberConfig.name].count - 1;
@@ -1016,7 +1058,7 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function getRegisteredFields(): Array<string> {
-    return state.registeredFields;
+    return [...state.registeredFields];
   }
 
   return managerApi;
