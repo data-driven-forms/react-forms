@@ -37,6 +37,10 @@ const sanitizeValue = (event: OnChangeEvent): any => {
  * @param {Any} value Any JS variable to be check if is empty
  */
 export const checkEmpty = (value: any) => {
+  if (typeof value === 'object' && value instanceof Date) {
+    return false;
+  }
+
   if (typeof value === 'number') {
     return false;
   }
@@ -57,7 +61,6 @@ const defaultParse = (value?: any) => (value === '' ? undefined : value);
 
 const useField = ({
   name,
-  initialValue,
   clearOnUnmount,
   initializeOnMount,
   validate,
@@ -82,7 +85,9 @@ const useField = ({
 
     registerField({
       name,
-      initialValue: dataType ? convertValue(initialValue, dataType) : initialValue,
+      ...(Object.prototype.hasOwnProperty.call(props, 'initialValue') && {
+        initialValue: dataType ? convertValue(props.initialValue, dataType) : props.initialValue
+      }),
       initializeOnMount,
       render,
       validate,
