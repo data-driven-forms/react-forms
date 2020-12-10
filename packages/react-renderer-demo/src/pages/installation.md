@@ -22,7 +22,6 @@ Data Driven Forms team provides and mantains basic set of components for followi
 - [Semantic UI](/mappers/suir-component-mapper)
 - [BlueprintJS](/mappers/blueprint-component-mapper)
 - [PatternFly 4](/mappers/pf4-component-mapper)
-- [PatternFly 3](/mappers/pf3-component-mapper)
 - [Ant Design](/mappers/ant-component-mapper)
 - [Carbon Design](/mappers/carbon-component-mapper)
 

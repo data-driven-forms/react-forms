@@ -21,7 +21,6 @@ import clsx from 'clsx';
 
 import * as mui from '../stackblitz-templates/mui-templates';
 import * as pf4 from '../stackblitz-templates/pf4-templates';
-import * as pf3 from '../stackblitz-templates/pf3-templates';
 import * as blueprint from '../stackblitz-templates/blueprint-templates';
 import * as suir from '../stackblitz-templates/suir-template';
 import * as ant from '../stackblitz-templates/ant-templates';
@@ -32,7 +31,6 @@ import avalableMappers from '../helpers/available-mappers';
 const metadata = {
   mui,
   pf4,
-  pf3,
   blueprint,
   suir,
   ant,

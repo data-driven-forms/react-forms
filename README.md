@@ -17,7 +17,7 @@ Data Driven Forms is a React library used for rendering and managing forms with 
 
 :tada: Features :tada:
 - **Easily readable schema**, you don't need to know any HTML or JS to be able to write your own form schemas!
-- You can use your **own components** or use one of our **provided mappers** ([PatternFly 3](https://patternfly-react.surge.sh/patternfly-3/index.html), [PatternFly 4](https://patternfly-react.surge.sh/patternfly-4/), [Material-UI](https://material-ui.com/), [Ant Design](https://ant.design/)! and more, see below!)
+- You can use your **own components** or use one of our **provided mappers**: [PatternFly 4](https://patternfly-react.surge.sh/patternfly-4/), [Material-UI](https://material-ui.com/), [Ant Design](https://ant.design/)! and more, see below!)
 - **Form state manager** out-of-the-box (including error states!)
 - Fully **customizable** (you can use your own buttons, actions, etc.)!
 - **Conditional** fields!
@@ -36,7 +36,6 @@ Data Driven Forms is a React library used for rendering and managing forms with 
 - [Installation](#installation)
   - [React Form Renderer](#react-form-renderer)
   - [Material-UI Mapper](#material-ui-mapper)
-  - [PatternFly 3 Mapper](#patternfly-3-mapper)
   - [PatternFly 4 Mapper](#patternfly-4-mapper)
   - [BlueprintJS Mapper](#blueprintjs-mapper)
   - [Semantic UI Mapper](#semantic-ui-mapper)
@@ -79,16 +78,6 @@ $ npm install @data-driven-forms/mui-component-mapper -S
 
 ```console
 $ yarn add @data-driven-forms/mui-component-mapper
-```
-
-#### [PatternFly 3 Mapper](https://data-driven-forms.org/mappers/pf3-component-mapper)
-
-```console
-$ npm install @data-driven-forms/pf3-component-mapper -S
-```
-
-```console
-$ yarn add @data-driven-forms/pf3-component-mapper
 ```
 
 #### [PatternFly 4 Mapper](https://data-driven-forms.org/mappers/pf4-component-mapper)
@@ -237,7 +226,6 @@ Please use our [documentation site](https://data-driven-forms.org/). In case of 
 ### Useful links
 
 - [Data Driven Forms documentation](https://data-driven-forms.org/)
-- [PatternFly 3 Design documentation](https://www.patternfly.org/v3/)
 - [PatternFly 4 Design documentation](https://www.patternfly.org/v4/)
 - [Material-UI documentation](https://material-ui.com/)
 - [Ant Design documentation](https://ant.design/)
@@ -246,7 +234,6 @@ Please use our [documentation site](https://data-driven-forms.org/). In case of 
 - [IBM Carbon](https://www.carbondesignsystem.com/)
 - NPM
   - [React Form Renderer](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)
-  - [PatternFly 3 Mapper](https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper)
   - [PatternFly 4 Mapper](https://www.npmjs.com/package/@data-driven-forms/pf4-component-mapper)
   - [MaterialUI Mapper](https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper)
   - [Ant Design Mapper](https://www.npmjs.com/package/@data-driven-forms/ant-component-mapper)
@@ -275,7 +262,7 @@ yarn build
 Each package has a small playground `package/demo`, where you can test your changes.
 
 ```console
-cd packages/pf3-component-mapper
+cd packages/pf4-component-mapper
 yarn start
 ```
 
@@ -294,7 +281,7 @@ Tests needed to be run from the core folder.
 ```console
 yarn test
 
-yarn test packages/pf3-component-mapper
+yarn test packages/pf4-component-mapper
 ```
 
 #### Commits
@@ -306,7 +293,7 @@ Format:
 ```
 [type]([package]): message
 
-fix(pf3): title accepts node
+fix(pf4): title accepts node
 ```
 
 Types:
@@ -314,7 +301,7 @@ Types:
 - `fix`: a fix, will trigger new `_._.X` release
 
 Packages:
-- Please describe which package is being changed `pf3`, `renderer`, ...
+- Please describe which package is being changed `4`, `renderer`, ...
 
 Please, do not use Semantic Release, if you update only the demo.
 
