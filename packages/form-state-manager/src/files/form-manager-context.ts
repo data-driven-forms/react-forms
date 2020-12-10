@@ -39,7 +39,8 @@ const FormManagerContext = createContext<ManagerContextValue>({
   shift: noop,
   swap: noop,
   unshift: noop,
-  update: noop
+  update: noop,
+  updateFieldConfig: noop
 });
 
 export default FormManagerContext;

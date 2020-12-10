@@ -148,12 +148,19 @@ describe('useFieldApi', () => {
     expect(wrapper.find(Catcher).props().arrayValidator).toEqual(expect.any(Function));
   });
 
-  it('reloads initial value', () => {
-    const wrapper = mount(<WrapperComponent {...initialProps} />);
+  it('reloads initial value', async () => {
+    let wrapper;
+
+    await act(async () => {
+      wrapper = mount(<WrapperComponent {...initialProps} />);
+    });
+    wrapper.update();
 
     expect(wrapper.find(Catcher).props().meta.initial).toEqual(undefined);
 
-    wrapper.setProps({ initialValue: 'pepa' });
+    await act(async () => {
+      wrapper.setProps({ initialValue: 'pepa' });
+    });
     wrapper.update();
 
     expect(wrapper.find(Catcher).props().meta.initial).toEqual('pepa');

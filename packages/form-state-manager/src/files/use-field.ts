@@ -1,4 +1,4 @@
-import { useEffect, useContext, useReducer, useState } from 'react';
+import { useEffect, useContext, useReducer, useState, useRef } from 'react';
 import FormManagerContext from '../files/form-manager-context';
 import UseField, { OnChangeEvent, UseFieldData, Format } from '../types/use-field';
 import isEmpty from 'lodash/isEmpty';
@@ -78,8 +78,11 @@ const useField = ({
   allowNull,
   ...props
 }: UseField): UseFieldData => {
-  const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions, ...rest } = useContext(FormManagerContext);
+  const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions, updateFieldConfig, ...rest } = useContext(
+    FormManagerContext
+  );
   const [, render] = useReducer((count) => count + 1, 0);
+  const mounted = useRef(false);
   const [id] = useState(() => {
     const internalId = generateId();
 
@@ -131,6 +134,23 @@ const useField = ({
     change(name, parse(sanitizedValue, name));
   };
 
+  const validateToCheck = validate ? JSON.stringify(validate) : false;
+
+  useEffect(() => {
+    if (mounted.current) {
+      updateFieldConfig({
+        name,
+        internalId: id,
+        ...(Object.prototype.hasOwnProperty.call(props, 'initialValue') && {
+          initialValue: dataType ? convertValue(props.initialValue, dataType) : props.initialValue
+        }),
+        defaultValue: dataType ? convertValue(defaultValue, dataType) : defaultValue,
+        validate,
+        initializeOnMount
+      });
+    }
+  }, [dataType, validateToCheck, props.initialValue, defaultValue]); // eslint-disable-line react-hooks/exhaustive-deps
+
   useEffect(
     () => {
       formOptions.afterSilentRegistration({ name, internalId: id });
@@ -138,6 +158,8 @@ const useField = ({
       if (type === 'file') {
         formOptions.registerInputFile(name);
       }
+
+      mounted.current = true;
 
       return () => {
         if (type === 'file') {

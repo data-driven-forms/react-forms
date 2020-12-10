@@ -1,6 +1,6 @@
 import { FormEvent } from 'react';
 import AnyObject from './any-object';
-import { Batch, Change, ManagerState, GetState, Blur, Focus, Unsubscribe, Subscribe } from './manager-api';
+import { Batch, Change, ManagerState, GetState, Blur, Focus, Unsubscribe, Subscribe, UpdateFieldConfig } from './manager-api';
 import FieldConfig from './field-config';
 import FieldArrayApi from './use-field-array-api';
 
@@ -24,6 +24,7 @@ export interface ManagerContextValue extends FieldArrayApi {
   initialValues?: AnyObject;
   subscribe: Subscribe;
   unsubscribe: Unsubscribe;
+  updateFieldConfig: UpdateFieldConfig;
 }
 
 export interface ManagerContext {

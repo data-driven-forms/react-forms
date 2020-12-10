@@ -20,7 +20,8 @@ import CreateManagerApi, {
   ExtendedFieldState,
   InitilizeInputFunction,
   CreateManagerApiConfig,
-  FieldListener
+  FieldListener,
+  UpdatedConfig
 } from '../types/manager-api';
 import AnyObject from '../types/any-object';
 import FieldConfig, { IsEqual } from '../types/field-config';
@@ -244,6 +245,7 @@ const createManagerApi: CreateManagerApi = ({
     registerInputFile,
     unregisterInputFile,
     getRegisteredFields,
+    updateFieldConfig,
     ...initialFormState(initialValues)
   };
   let inBatch = 0;
@@ -388,6 +390,12 @@ const createManagerApi: CreateManagerApi = ({
       };
 
       state.registeredFields.forEach(resetFieldState);
+
+      revalidateFields(state.registeredFields);
+
+      if (config.validate) {
+        validateForm(config.validate);
+      }
 
       render();
     });
@@ -1059,6 +1067,60 @@ const createManagerApi: CreateManagerApi = ({
 
   function getRegisteredFields(): Array<string> {
     return [...state.registeredFields];
+  }
+
+  function updateFieldConfig(field: UpdatedConfig): void {
+    const { name, internalId, validate } = field;
+
+    state.fieldListeners[name].fields[internalId] = {
+      ...state.fieldListeners[name].fields[internalId],
+      validate
+    };
+
+    const render = prepareRerender();
+
+    if (
+      shouldExecute(config.initializeOnMount, field.initializeOnMount) ||
+      (!isInitialized(field.name) && typeof field.initialValue !== 'undefined')
+    ) {
+      set(
+        state.values,
+        field.name,
+        Object.prototype.hasOwnProperty.call(field, 'initialValue') ? field.initialValue : get(state.initialValues, field.name)
+      );
+    }
+
+    let setDirty = false;
+    if (!isInitialized(field.name) && typeof field.defaultValue !== 'undefined' && typeof get(state.values, field.name) === 'undefined') {
+      set(state.values, field.name, field.defaultValue);
+      setDirty = true;
+    }
+
+    if (setDirty) {
+      state.pristine = false;
+      state.dirty = true;
+      state.dirtyFields[field.name] = true;
+      state.fieldListeners[field.name].state.meta.dirty = true;
+      state.fieldListeners[field.name].state.meta.pristine = false;
+    }
+
+    setFieldState(name, (prev: FieldState) => ({
+      ...prev,
+      value: get(state.values, name),
+      ...(Object.prototype.hasOwnProperty.call(field, 'initialValue') && {
+        meta: {
+          ...prev.meta,
+          initial: field.initialValue
+        }
+      })
+    }));
+
+    revalidateFields([field.name, ...(state.fieldListeners[field.name]?.validateFields || state.registeredFields.filter((n) => n !== field.name))]);
+    if (config.validate) {
+      validateForm(config.validate);
+    }
+
+    render();
   }
 
   return managerApi;
