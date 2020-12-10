@@ -9,12 +9,12 @@ import ComposeValidators from '../types/compose-validators';
  * Synchronous validators are run in synchrounously and sync error is prioritized over async errors.
  * @returns {Function} New validation function
  */
-const composeValidators: ComposeValidators = (validators = []) => (value, allValues) => {
+const composeValidators: ComposeValidators = (validators = []) => (value, allValues, meta) => {
   const promises: Promise<any>[] = [];
   let index = 0;
   let error: any;
   while (validators.length > 0 && !error && index < validators.length) {
-    const result = validators[index](value, allValues);
+    const result = validators[index](value, allValues, meta);
     if (isPromise(result)) {
       promises.push(result as Promise<any>);
     } else {

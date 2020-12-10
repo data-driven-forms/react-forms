@@ -334,7 +334,7 @@ const createManagerApi: CreateManagerApi = ({
         .filter((validator) => validator !== undefined);
 
       if (validators.length > 0) {
-        const result = composeValidators(validators as Validator[])(value, state.values);
+        const result = composeValidators(validators as Validator[])(value, state.values, { ...state.fieldListeners[name].state.meta });
         if (isPromise(result)) {
           handleFieldError(name, true, undefined, true);
           (result as Promise<string | undefined>)

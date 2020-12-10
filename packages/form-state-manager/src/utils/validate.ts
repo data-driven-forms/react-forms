@@ -4,8 +4,8 @@ import { FieldLevelValidator, FormLevelValidator, FormLevelError } from '../type
 export const isPromise = (obj: AnyObject | PromiseLike<unknown> | string | undefined): boolean =>
   !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
 
-export const fieldLevelValidator: FieldLevelValidator = (validator, value, allValues, managerApi) => {
-  const result = validator(value, allValues);
+export const fieldLevelValidator: FieldLevelValidator = (validator, value, allValues, managerApi, meta) => {
+  const result = validator(value, allValues, meta);
   if (isPromise(result)) {
     const asyncResult = result as Promise<string | undefined>;
     managerApi().registerAsyncValidator(asyncResult);
