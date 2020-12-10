@@ -643,6 +643,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                 key="1"
                                                 onNavItemClick={[Function]}
                                                 step={0}
+                                                type="button"
                                               >
                                                 <li
                                                   className="pf-c-wizard__nav-item"
@@ -653,6 +654,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                     className="pf-c-wizard__nav-link pf-m-current"
                                                     disabled={false}
                                                     onClick={[Function]}
+                                                    type="button"
                                                   >
                                                     foo-step
                                                   </button>
@@ -665,6 +667,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                 key="2"
                                                 onNavItemClick={[Function]}
                                                 step={1}
+                                                type="button"
                                               >
                                                 <li
                                                   className="pf-c-wizard__nav-item"
@@ -675,6 +678,7 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                                                     className="pf-c-wizard__nav-link pf-m-disabled"
                                                     disabled={true}
                                                     onClick={[Function]}
+                                                    type="button"
                                                   >
                                                     bar-step
                                                   </button>
@@ -1723,6 +1727,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                   <button
                                                     aria-current="page"
                                                     class="pf-c-wizard__nav-link pf-m-current"
+                                                    type="button"
                                                   >
                                                     foo-step
                                                   </button>
@@ -1735,6 +1740,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                     aria-disabled="true"
                                                     class="pf-c-wizard__nav-link pf-m-disabled"
                                                     disabled=""
+                                                    type="button"
                                                   >
                                                     bar-step
                                                   </button>
@@ -1890,6 +1896,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                     <button
                                                       aria-current="page"
                                                       class="pf-c-wizard__nav-link pf-m-current"
+                                                      type="button"
                                                     >
                                                       foo-step
                                                     </button>
@@ -1902,6 +1909,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                       aria-disabled="true"
                                                       class="pf-c-wizard__nav-link pf-m-disabled"
                                                       disabled=""
+                                                      type="button"
                                                     >
                                                       bar-step
                                                     </button>
@@ -2179,6 +2187,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                             key="1"
                                                             onNavItemClick={[Function]}
                                                             step={0}
+                                                            type="button"
                                                           >
                                                             <li
                                                               className="pf-c-wizard__nav-item"
@@ -2189,6 +2198,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                                 className="pf-c-wizard__nav-link pf-m-current"
                                                                 disabled={false}
                                                                 onClick={[Function]}
+                                                                type="button"
                                                               >
                                                                 foo-step
                                                               </button>
@@ -2201,6 +2211,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                             key="2"
                                                             onNavItemClick={[Function]}
                                                             step={1}
+                                                            type="button"
                                                           >
                                                             <li
                                                               className="pf-c-wizard__nav-item"
@@ -2211,6 +2222,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                                 className="pf-c-wizard__nav-link pf-m-disabled"
                                                                 disabled={true}
                                                                 onClick={[Function]}
+                                                                type="button"
                                                               >
                                                                 bar-step
                                                               </button>
