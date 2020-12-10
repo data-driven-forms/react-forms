@@ -1,4 +1,4 @@
-import { useEffect, useContext, useReducer, useState } from 'react';
+import { useEffect, useContext, useReducer, useState, useRef } from 'react';
 import FormManagerContext from '../files/form-manager-context';
 import UseField, { OnChangeEvent, UseFieldData, Format } from '../types/use-field';
 import isEmpty from 'lodash/isEmpty';
@@ -37,6 +37,10 @@ const sanitizeValue = (event: OnChangeEvent): any => {
  * @param {Any} value Any JS variable to be check if is empty
  */
 export const checkEmpty = (value: any) => {
+  if (typeof value === 'object' && value instanceof Date) {
+    return false;
+  }
+
   if (typeof value === 'number') {
     return false;
   }
@@ -57,7 +61,6 @@ const defaultParse = (value?: any) => (value === '' ? undefined : value);
 
 const useField = ({
   name,
-  initialValue,
   clearOnUnmount,
   initializeOnMount,
   validate,
@@ -75,14 +78,19 @@ const useField = ({
   allowNull,
   ...props
 }: UseField): UseFieldData => {
-  const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions, ...rest } = useContext(FormManagerContext);
+  const { registerField, unregisterField, change, getFieldValue, blur, focus, formOptions, updateFieldConfig, ...rest } = useContext(
+    FormManagerContext
+  );
   const [, render] = useReducer((count) => count + 1, 0);
+  const mounted = useRef(false);
   const [id] = useState(() => {
     const internalId = generateId();
 
     registerField({
       name,
-      initialValue: dataType ? convertValue(initialValue, dataType) : initialValue,
+      ...(Object.prototype.hasOwnProperty.call(props, 'initialValue') && {
+        initialValue: dataType ? convertValue(props.initialValue, dataType) : props.initialValue
+      }),
       initializeOnMount,
       render,
       validate,
@@ -96,7 +104,7 @@ const useField = ({
 
     return internalId;
   });
-  const state = formOptions().getFieldState(name);
+  const state = formOptions.getFieldState(name);
 
   const finalClearedValue = Object.prototype.hasOwnProperty.call(props, 'clearedValue') ? props.clearedValue : rest.clearedValue;
 
@@ -126,17 +134,36 @@ const useField = ({
     change(name, parse(sanitizedValue, name));
   };
 
+  const validateToCheck = validate ? JSON.stringify(validate) : false;
+
+  useEffect(() => {
+    if (mounted.current) {
+      updateFieldConfig({
+        name,
+        internalId: id,
+        ...(Object.prototype.hasOwnProperty.call(props, 'initialValue') && {
+          initialValue: dataType ? convertValue(props.initialValue, dataType) : props.initialValue
+        }),
+        defaultValue: dataType ? convertValue(defaultValue, dataType) : defaultValue,
+        validate,
+        initializeOnMount
+      });
+    }
+  }, [dataType, validateToCheck, props.initialValue, defaultValue]); // eslint-disable-line react-hooks/exhaustive-deps
+
   useEffect(
     () => {
-      formOptions().afterSilentRegistration({ name, internalId: id });
+      formOptions.afterSilentRegistration({ name, internalId: id });
 
       if (type === 'file') {
-        formOptions().registerInputFile(name);
+        formOptions.registerInputFile(name);
       }
+
+      mounted.current = true;
 
       return () => {
         if (type === 'file') {
-          formOptions().unregisterInputFile(name);
+          formOptions.unregisterInputFile(name);
         }
 
         unregisterField({ name, clearOnUnmount, internalId: id, value: finalClearedValue });
@@ -154,7 +181,7 @@ const useField = ({
     }
   };
 
-  let valueToReturn = formOptions().getFieldValue(name);
+  let valueToReturn = formOptions.getFieldValue(name);
   let checked;
 
   if (type === 'checkbox') {
@@ -190,6 +217,8 @@ const useField = ({
     valueToReturn = valueToReturn.inputValue;
   }
 
+  const { initialValue, ...clearedProps } = props;
+
   return {
     input: {
       value: valueToReturn,
@@ -202,7 +231,7 @@ const useField = ({
       checked
     },
     meta: state!.meta,
-    ...props
+    ...clearedProps
   };
 };
 

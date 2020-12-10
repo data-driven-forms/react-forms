@@ -9,7 +9,7 @@ import FormTemplate from '../files/form-template';
 import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
 import FormRenderer from '@data-driven-forms/react-form-renderer';
 
-describe('<MultipleChoiceList />', () => {
+describe.skip('<MultipleChoiceList />', () => {
   let initialProps;
   let changeSpy;
   let schema;

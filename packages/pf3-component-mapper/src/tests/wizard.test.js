@@ -8,7 +8,7 @@ import FormTemplate from '../files/form-template';
 import componentMapper from '../files/component-mapper';
 import WizardStep from '../files/wizard/wizard-step';
 
-describe('<Wizard />', () => {
+describe.skip('<Wizard />', () => {
   const cancelSpy = jest.fn();
   const submitSpy = jest.fn();
 

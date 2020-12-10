@@ -11,7 +11,7 @@ exports[`<FormTabs /> should render form tabs 1`] = `
     }
   }
 >
-  <ReactFinalForm
+  <Component
     onSubmit={[Function]}
   >
     <FormTabs
@@ -249,7 +249,7 @@ exports[`<FormTabs /> should render form tabs 1`] = `
         </Uncontrolled(TabContainer)>
       </ForwardRef>
     </FormTabs>
-  </ReactFinalForm>
+  </Component>
 </RenderWithProvider>
 `;
 
@@ -264,7 +264,7 @@ exports[`<FormTabs /> should render form tabs with error state 1`] = `
     }
   }
 >
-  <ReactFinalForm
+  <Component
     onSubmit={[Function]}
   >
     <FormTabs
@@ -435,6 +435,6 @@ exports[`<FormTabs /> should render form tabs with error state 1`] = `
         </Uncontrolled(TabContainer)>
       </ForwardRef>
     </FormTabs>
-  </ReactFinalForm>
+  </Component>
 </RenderWithProvider>
 `;

@@ -1,3 +1,3 @@
-import { Form } from 'react-final-form';
+import { FormStateManager } from '@data-driven-forms/form-state-manager';
 
-export default Form;
+export default FormStateManager;

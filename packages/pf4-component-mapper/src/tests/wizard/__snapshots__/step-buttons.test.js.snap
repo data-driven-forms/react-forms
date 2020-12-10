@@ -2,7 +2,7 @@
 
 exports[`<WizardSTepButtons should add custom className to toolbar 1`] = `
 <RenderWithProvider>
-  <ReactFinalForm
+  <Component
     onSubmit={[Function]}
   >
     <WizardStepButtons
@@ -30,7 +30,7 @@ exports[`<WizardSTepButtons should add custom className to toolbar 1`] = `
       <footer
         className="pf-c-wizard__footer foo-class"
       >
-        <FormSpy>
+        <Component>
           <NextButton
             getState={[Function]}
             handleNext={[MockFunction]}
@@ -103,16 +103,16 @@ exports[`<WizardSTepButtons should add custom className to toolbar 1`] = `
               Cancel
             </button>
           </Button>
-        </FormSpy>
+        </Component>
       </footer>
     </WizardStepButtons>
-  </ReactFinalForm>
+  </Component>
 </RenderWithProvider>
 `;
 
 exports[`<WizardSTepButtons should render correctly 1`] = `
 <RenderWithProvider>
-  <ReactFinalForm
+  <Component
     onSubmit={[Function]}
   >
     <WizardStepButtons
@@ -139,7 +139,7 @@ exports[`<WizardSTepButtons should render correctly 1`] = `
       <footer
         className="pf-c-wizard__footer "
       >
-        <FormSpy>
+        <Component>
           <NextButton
             getState={[Function]}
             handleNext={[MockFunction]}
@@ -212,9 +212,9 @@ exports[`<WizardSTepButtons should render correctly 1`] = `
               Cancel
             </button>
           </Button>
-        </FormSpy>
+        </Component>
       </footer>
     </WizardStepButtons>
-  </ReactFinalForm>
+  </Component>
 </RenderWithProvider>
 `;

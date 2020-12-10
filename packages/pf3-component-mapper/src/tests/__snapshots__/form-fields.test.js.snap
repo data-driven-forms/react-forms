@@ -2,7 +2,7 @@
 
 exports[`FormFields <Checkbox /> should render single checkbox variant 1`] = `
 <RenderWithProvider>
-  <ReactFinalForm
+  <Component
     onSubmit={[Function]}
   >
     <Checkbox
@@ -15,29 +15,7 @@ exports[`FormFields <Checkbox /> should render single checkbox variant 1`] = `
       >
         <Pf3FormGroup
           hideLabel={true}
-          meta={
-            Object {
-              "active": false,
-              "data": Object {},
-              "dirty": false,
-              "dirtySinceLastSubmit": false,
-              "error": undefined,
-              "initial": undefined,
-              "invalid": false,
-              "length": undefined,
-              "modified": false,
-              "modifiedSinceLastSubmit": false,
-              "pristine": true,
-              "submitError": undefined,
-              "submitFailed": false,
-              "submitSucceeded": false,
-              "submitting": false,
-              "touched": false,
-              "valid": true,
-              "validating": false,
-              "visited": false,
-            }
-          }
+          meta={Object {}}
         >
           <FormGroup
             bsClass="form-group"
@@ -80,13 +58,13 @@ exports[`FormFields <Checkbox /> should render single checkbox variant 1`] = `
         </Pf3FormGroup>
       </SingleCheckbox>
     </Checkbox>
-  </ReactFinalForm>
+  </Component>
 </RenderWithProvider>
 `;
 
 exports[`FormFields <Checkbox /> should render single checkbox variant with a helper text 1`] = `
 <RenderWithProvider>
-  <ReactFinalForm
+  <Component
     onSubmit={[Function]}
   >
     <Checkbox
@@ -101,29 +79,7 @@ exports[`FormFields <Checkbox /> should render single checkbox variant with a he
       >
         <Pf3FormGroup
           hideLabel={true}
-          meta={
-            Object {
-              "active": false,
-              "data": Object {},
-              "dirty": false,
-              "dirtySinceLastSubmit": false,
-              "error": undefined,
-              "initial": undefined,
-              "invalid": false,
-              "length": undefined,
-              "modified": false,
-              "modifiedSinceLastSubmit": false,
-              "pristine": true,
-              "submitError": undefined,
-              "submitFailed": false,
-              "submitSucceeded": false,
-              "submitting": false,
-              "touched": false,
-              "valid": true,
-              "validating": false,
-              "visited": false,
-            }
-          }
+          meta={Object {}}
         >
           <FormGroup
             bsClass="form-group"
@@ -224,13 +180,13 @@ exports[`FormFields <Checkbox /> should render single checkbox variant with a he
         </Pf3FormGroup>
       </SingleCheckbox>
     </Checkbox>
-  </ReactFinalForm>
+  </Component>
 </RenderWithProvider>
 `;
 
 exports[`FormFields <Radio /> should render correctly 1`] = `
 <RenderWithProvider>
-  <ReactFinalForm
+  <Component
     onSubmit={[Function]}
   >
     <Radio
@@ -258,7 +214,6 @@ exports[`FormFields <Radio /> should render correctly 1`] = `
             "error": undefined,
             "initial": undefined,
             "invalid": false,
-            "length": undefined,
             "modified": false,
             "modifiedSinceLastSubmit": false,
             "pristine": true,
@@ -270,6 +225,7 @@ exports[`FormFields <Radio /> should render correctly 1`] = `
             "valid": true,
             "validating": false,
             "visited": false,
+            "warning": undefined,
           }
         }
       >
@@ -374,13 +330,13 @@ exports[`FormFields <Radio /> should render correctly 1`] = `
         </FormGroup>
       </Pf3FormGroup>
     </Radio>
-  </ReactFinalForm>
+  </Component>
 </RenderWithProvider>
 `;
 
 exports[`FormFields <Slider /> should render correctly 1`] = `
 <RenderWithProvider>
-  <ReactFinalForm
+  <Component
     onSubmit={[Function]}
   >
     <Slider
@@ -402,7 +358,6 @@ exports[`FormFields <Slider /> should render correctly 1`] = `
             "error": undefined,
             "initial": undefined,
             "invalid": false,
-            "length": undefined,
             "modified": false,
             "modifiedSinceLastSubmit": false,
             "pristine": true,
@@ -414,6 +369,7 @@ exports[`FormFields <Slider /> should render correctly 1`] = `
             "valid": true,
             "validating": false,
             "visited": false,
+            "warning": undefined,
           }
         }
       >
@@ -609,7 +565,7 @@ exports[`FormFields <Slider /> should render correctly 1`] = `
         </FormGroup>
       </Pf3FormGroup>
     </Slider>
-  </ReactFinalForm>
+  </Component>
 </RenderWithProvider>
 `;
 
@@ -623,7 +579,7 @@ exports[`FormFields <Switch /> should render Switch correctly 1`] = `
     }
   }
 >
-  <ReactFinalForm
+  <Component
     onSubmit={[Function]}
   >
     <Switch
@@ -644,25 +600,8 @@ exports[`FormFields <Switch /> should render Switch correctly 1`] = `
       <Pf3FormGroup
         meta={
           Object {
-            "active": false,
-            "data": Object {},
-            "dirty": true,
-            "dirtySinceLastSubmit": false,
-            "error": Object {},
-            "initial": undefined,
-            "invalid": true,
-            "length": undefined,
-            "modified": false,
-            "modifiedSinceLastSubmit": false,
-            "pristine": false,
-            "submitError": undefined,
-            "submitFailed": false,
-            "submitSucceeded": false,
-            "submitting": false,
+            "error": false,
             "touched": false,
-            "valid": false,
-            "validating": false,
-            "visited": false,
           }
         }
       >
@@ -674,14 +613,11 @@ exports[`FormFields <Switch /> should render Switch correctly 1`] = `
             className="form-group"
           >
             <Switch
-              checked={true}
               id="someIdKey"
+              name="Name of the field"
               offText="OFF"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
               onText="ON"
-              type="checkbox"
+              value=""
             >
               <div>
                 <label
@@ -695,24 +631,19 @@ exports[`FormFields <Switch /> should render Switch correctly 1`] = `
                   tabIndex={0}
                 >
                   <input
-                    checked={true}
                     id="someIdKey"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    onFocus={[Function]}
+                    name="Name of the field"
                     type="checkbox"
+                    value=""
                   />
                   <span
-                    className="pf3-switch-slider checked"
+                    className="pf3-switch-slider"
                   >
                     <span
                       className="on-text"
                       style={
                         Object {
-                          "WebkitTransform": "translateX(46px)",
                           "left": -46,
-                          "msTransform": "translateX(46px)",
-                          "transform": "translateX(46px)",
                           "width": 46,
                         }
                       }
@@ -721,22 +652,13 @@ exports[`FormFields <Switch /> should render Switch correctly 1`] = `
                     </span>
                     <span
                       className="divider"
-                      style={
-                        Object {
-                          "WebkitTransform": "translateX(46px)",
-                          "msTransform": "translateX(46px)",
-                          "transform": "translateX(46px)",
-                        }
-                      }
+                      style={Object {}}
                     />
                     <span
                       className="off-text"
                       style={
                         Object {
-                          "WebkitTransform": "translateX(80px)",
                           "left": 34,
-                          "msTransform": "translateX(80px)",
-                          "transform": "translateX(80px)",
                           "width": 46,
                         }
                       }
@@ -751,7 +673,7 @@ exports[`FormFields <Switch /> should render Switch correctly 1`] = `
         </FormGroup>
       </Pf3FormGroup>
     </Switch>
-  </ReactFinalForm>
+  </Component>
 </RenderWithProvider>
 `;
 
@@ -765,7 +687,7 @@ exports[`FormFields <Switch /> should render Switch with label correctly 1`] = `
     }
   }
 >
-  <ReactFinalForm
+  <Component
     onSubmit={[Function]}
   >
     <Switch
@@ -788,25 +710,8 @@ exports[`FormFields <Switch /> should render Switch with label correctly 1`] = `
         label="Label"
         meta={
           Object {
-            "active": false,
-            "data": Object {},
-            "dirty": true,
-            "dirtySinceLastSubmit": false,
-            "error": Object {},
-            "initial": undefined,
-            "invalid": true,
-            "length": undefined,
-            "modified": false,
-            "modifiedSinceLastSubmit": false,
-            "pristine": false,
-            "submitError": undefined,
-            "submitFailed": false,
-            "submitSucceeded": false,
-            "submitting": false,
+            "error": false,
             "touched": false,
-            "valid": false,
-            "validating": false,
-            "visited": false,
           }
         }
       >
@@ -828,14 +733,11 @@ exports[`FormFields <Switch /> should render Switch with label correctly 1`] = `
               </label>
             </ControlLabel>
             <Switch
-              checked={true}
               id="someIdKey"
+              name="Name of the field"
               offText="OFF"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
               onText="ON"
-              type="checkbox"
+              value=""
             >
               <div>
                 <label
@@ -849,24 +751,19 @@ exports[`FormFields <Switch /> should render Switch with label correctly 1`] = `
                   tabIndex={0}
                 >
                   <input
-                    checked={true}
                     id="someIdKey"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    onFocus={[Function]}
+                    name="Name of the field"
                     type="checkbox"
+                    value=""
                   />
                   <span
-                    className="pf3-switch-slider checked"
+                    className="pf3-switch-slider"
                   >
                     <span
                       className="on-text"
                       style={
                         Object {
-                          "WebkitTransform": "translateX(46px)",
                           "left": -46,
-                          "msTransform": "translateX(46px)",
-                          "transform": "translateX(46px)",
                           "width": 46,
                         }
                       }
@@ -875,22 +772,13 @@ exports[`FormFields <Switch /> should render Switch with label correctly 1`] = `
                     </span>
                     <span
                       className="divider"
-                      style={
-                        Object {
-                          "WebkitTransform": "translateX(46px)",
-                          "msTransform": "translateX(46px)",
-                          "transform": "translateX(46px)",
-                        }
-                      }
+                      style={Object {}}
                     />
                     <span
                       className="off-text"
                       style={
                         Object {
-                          "WebkitTransform": "translateX(80px)",
                           "left": 34,
-                          "msTransform": "translateX(80px)",
-                          "transform": "translateX(80px)",
                           "width": 46,
                         }
                       }
@@ -905,7 +793,7 @@ exports[`FormFields <Switch /> should render Switch with label correctly 1`] = `
         </FormGroup>
       </Pf3FormGroup>
     </Switch>
-  </ReactFinalForm>
+  </Component>
 </RenderWithProvider>
 `;
 
@@ -919,7 +807,7 @@ exports[`FormFields <Switch /> should render Switch with onText (custom prop) co
     }
   }
 >
-  <ReactFinalForm
+  <Component
     onSubmit={[Function]}
   >
     <Switch
@@ -941,25 +829,8 @@ exports[`FormFields <Switch /> should render Switch with onText (custom prop) co
       <Pf3FormGroup
         meta={
           Object {
-            "active": false,
-            "data": Object {},
-            "dirty": true,
-            "dirtySinceLastSubmit": false,
-            "error": Object {},
-            "initial": undefined,
-            "invalid": true,
-            "length": undefined,
-            "modified": false,
-            "modifiedSinceLastSubmit": false,
-            "pristine": false,
-            "submitError": undefined,
-            "submitFailed": false,
-            "submitSucceeded": false,
-            "submitting": false,
+            "error": false,
             "touched": false,
-            "valid": false,
-            "validating": false,
-            "visited": false,
           }
         }
       >
@@ -971,14 +842,11 @@ exports[`FormFields <Switch /> should render Switch with onText (custom prop) co
             className="form-group"
           >
             <Switch
-              checked={true}
               id="someIdKey"
+              name="Name of the field"
               offText="OFF"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
               onText="OnText"
-              type="checkbox"
+              value=""
             >
               <div>
                 <label
@@ -992,24 +860,19 @@ exports[`FormFields <Switch /> should render Switch with onText (custom prop) co
                   tabIndex={0}
                 >
                   <input
-                    checked={true}
                     id="someIdKey"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    onFocus={[Function]}
+                    name="Name of the field"
                     type="checkbox"
+                    value=""
                   />
                   <span
-                    className="pf3-switch-slider checked"
+                    className="pf3-switch-slider"
                   >
                     <span
                       className="on-text"
                       style={
                         Object {
-                          "WebkitTransform": "translateX(46px)",
                           "left": -46,
-                          "msTransform": "translateX(46px)",
-                          "transform": "translateX(46px)",
                           "width": 46,
                         }
                       }
@@ -1018,22 +881,13 @@ exports[`FormFields <Switch /> should render Switch with onText (custom prop) co
                     </span>
                     <span
                       className="divider"
-                      style={
-                        Object {
-                          "WebkitTransform": "translateX(46px)",
-                          "msTransform": "translateX(46px)",
-                          "transform": "translateX(46px)",
-                        }
-                      }
+                      style={Object {}}
                     />
                     <span
                       className="off-text"
                       style={
                         Object {
-                          "WebkitTransform": "translateX(80px)",
                           "left": 34,
-                          "msTransform": "translateX(80px)",
-                          "transform": "translateX(80px)",
                           "width": 46,
                         }
                       }
@@ -1048,7 +902,7 @@ exports[`FormFields <Switch /> should render Switch with onText (custom prop) co
         </FormGroup>
       </Pf3FormGroup>
     </Switch>
-  </ReactFinalForm>
+  </Component>
 </RenderWithProvider>
 `;
 
@@ -1062,7 +916,7 @@ exports[`FormFields <Switch /> should render Switch with placeholder correctly 1
     }
   }
 >
-  <ReactFinalForm
+  <Component
     onSubmit={[Function]}
   >
     <Switch
@@ -1084,25 +938,8 @@ exports[`FormFields <Switch /> should render Switch with placeholder correctly 1
       <Pf3FormGroup
         meta={
           Object {
-            "active": false,
-            "data": Object {},
-            "dirty": true,
-            "dirtySinceLastSubmit": false,
-            "error": Object {},
-            "initial": undefined,
-            "invalid": true,
-            "length": undefined,
-            "modified": false,
-            "modifiedSinceLastSubmit": false,
-            "pristine": false,
-            "submitError": undefined,
-            "submitFailed": false,
-            "submitSucceeded": false,
-            "submitting": false,
+            "error": false,
             "touched": false,
-            "valid": false,
-            "validating": false,
-            "visited": false,
           }
         }
       >
@@ -1114,14 +951,11 @@ exports[`FormFields <Switch /> should render Switch with placeholder correctly 1
             className="form-group"
           >
             <Switch
-              checked={true}
               id="someIdKey"
+              name="Name of the field"
               offText="OFF"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
               onText="ON"
-              type="checkbox"
+              value=""
             >
               <div>
                 <label
@@ -1135,24 +969,19 @@ exports[`FormFields <Switch /> should render Switch with placeholder correctly 1
                   tabIndex={0}
                 >
                   <input
-                    checked={true}
                     id="someIdKey"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    onFocus={[Function]}
+                    name="Name of the field"
                     type="checkbox"
+                    value=""
                   />
                   <span
-                    className="pf3-switch-slider checked"
+                    className="pf3-switch-slider"
                   >
                     <span
                       className="on-text"
                       style={
                         Object {
-                          "WebkitTransform": "translateX(46px)",
                           "left": -46,
-                          "msTransform": "translateX(46px)",
-                          "transform": "translateX(46px)",
                           "width": 46,
                         }
                       }
@@ -1161,22 +990,13 @@ exports[`FormFields <Switch /> should render Switch with placeholder correctly 1
                     </span>
                     <span
                       className="divider"
-                      style={
-                        Object {
-                          "WebkitTransform": "translateX(46px)",
-                          "msTransform": "translateX(46px)",
-                          "transform": "translateX(46px)",
-                        }
-                      }
+                      style={Object {}}
                     />
                     <span
                       className="off-text"
                       style={
                         Object {
-                          "WebkitTransform": "translateX(80px)",
                           "left": 34,
-                          "msTransform": "translateX(80px)",
-                          "transform": "translateX(80px)",
                           "width": 46,
                         }
                       }
@@ -1191,7 +1011,7 @@ exports[`FormFields <Switch /> should render Switch with placeholder correctly 1
         </FormGroup>
       </Pf3FormGroup>
     </Switch>
-  </ReactFinalForm>
+  </Component>
 </RenderWithProvider>
 `;
 
@@ -1205,7 +1025,7 @@ exports[`FormFields <Switch /> should render disabled Switch correctly 1`] = `
     }
   }
 >
-  <ReactFinalForm
+  <Component
     onSubmit={[Function]}
   >
     <Switch
@@ -1227,25 +1047,8 @@ exports[`FormFields <Switch /> should render disabled Switch correctly 1`] = `
       <Pf3FormGroup
         meta={
           Object {
-            "active": false,
-            "data": Object {},
-            "dirty": true,
-            "dirtySinceLastSubmit": false,
-            "error": Object {},
-            "initial": undefined,
-            "invalid": true,
-            "length": undefined,
-            "modified": false,
-            "modifiedSinceLastSubmit": false,
-            "pristine": false,
-            "submitError": undefined,
-            "submitFailed": false,
-            "submitSucceeded": false,
-            "submitting": false,
+            "error": false,
             "touched": false,
-            "valid": false,
-            "validating": false,
-            "visited": false,
           }
         }
       >
@@ -1257,15 +1060,12 @@ exports[`FormFields <Switch /> should render disabled Switch correctly 1`] = `
             className="form-group"
           >
             <Switch
-              checked={true}
               disabled={true}
               id="someIdKey"
+              name="Name of the field"
               offText="OFF"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
               onText="ON"
-              type="checkbox"
+              value=""
             >
               <div>
                 <label
@@ -1279,25 +1079,20 @@ exports[`FormFields <Switch /> should render disabled Switch correctly 1`] = `
                   tabIndex={-1}
                 >
                   <input
-                    checked={true}
                     disabled={true}
                     id="someIdKey"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    onFocus={[Function]}
+                    name="Name of the field"
                     type="checkbox"
+                    value=""
                   />
                   <span
-                    className="pf3-switch-slider checked"
+                    className="pf3-switch-slider"
                   >
                     <span
                       className="on-text"
                       style={
                         Object {
-                          "WebkitTransform": "translateX(46px)",
                           "left": -46,
-                          "msTransform": "translateX(46px)",
-                          "transform": "translateX(46px)",
                           "width": 46,
                         }
                       }
@@ -1306,22 +1101,13 @@ exports[`FormFields <Switch /> should render disabled Switch correctly 1`] = `
                     </span>
                     <span
                       className="divider"
-                      style={
-                        Object {
-                          "WebkitTransform": "translateX(46px)",
-                          "msTransform": "translateX(46px)",
-                          "transform": "translateX(46px)",
-                        }
-                      }
+                      style={Object {}}
                     />
                     <span
                       className="off-text"
                       style={
                         Object {
-                          "WebkitTransform": "translateX(80px)",
                           "left": 34,
-                          "msTransform": "translateX(80px)",
-                          "transform": "translateX(80px)",
                           "width": 46,
                         }
                       }
@@ -1336,7 +1122,7 @@ exports[`FormFields <Switch /> should render disabled Switch correctly 1`] = `
         </FormGroup>
       </Pf3FormGroup>
     </Switch>
-  </ReactFinalForm>
+  </Component>
 </RenderWithProvider>
 `;
 
@@ -1350,7 +1136,7 @@ exports[`FormFields <Switch /> should render mini Switch correctly 1`] = `
     }
   }
 >
-  <ReactFinalForm
+  <Component
     onSubmit={[Function]}
   >
     <Switch
@@ -1372,25 +1158,8 @@ exports[`FormFields <Switch /> should render mini Switch correctly 1`] = `
       <Pf3FormGroup
         meta={
           Object {
-            "active": false,
-            "data": Object {},
-            "dirty": true,
-            "dirtySinceLastSubmit": false,
-            "error": Object {},
-            "initial": undefined,
-            "invalid": true,
-            "length": undefined,
-            "modified": false,
-            "modifiedSinceLastSubmit": false,
-            "pristine": false,
-            "submitError": undefined,
-            "submitFailed": false,
-            "submitSucceeded": false,
-            "submitting": false,
+            "error": false,
             "touched": false,
-            "valid": false,
-            "validating": false,
-            "visited": false,
           }
         }
       >
@@ -1403,14 +1172,11 @@ exports[`FormFields <Switch /> should render mini Switch correctly 1`] = `
           >
             <Switch
               bsSize="mini"
-              checked={true}
               id="someIdKey"
+              name="Name of the field"
               offText="OFF"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
               onText="ON"
-              type="checkbox"
+              value=""
             >
               <div>
                 <label
@@ -1424,24 +1190,19 @@ exports[`FormFields <Switch /> should render mini Switch correctly 1`] = `
                   tabIndex={0}
                 >
                   <input
-                    checked={true}
                     id="someIdKey"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    onFocus={[Function]}
+                    name="Name of the field"
                     type="checkbox"
+                    value=""
                   />
                   <span
-                    className="pf3-switch-slider checked"
+                    className="pf3-switch-slider"
                   >
                     <span
                       className="on-text"
                       style={
                         Object {
-                          "WebkitTransform": "translateX(46px)",
                           "left": -46,
-                          "msTransform": "translateX(46px)",
-                          "transform": "translateX(46px)",
                           "width": 46,
                         }
                       }
@@ -1450,22 +1211,13 @@ exports[`FormFields <Switch /> should render mini Switch correctly 1`] = `
                     </span>
                     <span
                       className="divider"
-                      style={
-                        Object {
-                          "WebkitTransform": "translateX(46px)",
-                          "msTransform": "translateX(46px)",
-                          "transform": "translateX(46px)",
-                        }
-                      }
+                      style={Object {}}
                     />
                     <span
                       className="off-text"
                       style={
                         Object {
-                          "WebkitTransform": "translateX(80px)",
                           "left": 34,
-                          "msTransform": "translateX(80px)",
-                          "transform": "translateX(80px)",
                           "width": 46,
                         }
                       }
@@ -1480,7 +1232,7 @@ exports[`FormFields <Switch /> should render mini Switch correctly 1`] = `
         </FormGroup>
       </Pf3FormGroup>
     </Switch>
-  </ReactFinalForm>
+  </Component>
 </RenderWithProvider>
 `;
 
@@ -1494,7 +1246,7 @@ exports[`FormFields <Switch /> should render readOnly Switch correctly 1`] = `
     }
   }
 >
-  <ReactFinalForm
+  <Component
     onSubmit={[Function]}
   >
     <Switch
@@ -1516,25 +1268,8 @@ exports[`FormFields <Switch /> should render readOnly Switch correctly 1`] = `
       <Pf3FormGroup
         meta={
           Object {
-            "active": false,
-            "data": Object {},
-            "dirty": true,
-            "dirtySinceLastSubmit": false,
-            "error": Object {},
-            "initial": undefined,
-            "invalid": true,
-            "length": undefined,
-            "modified": false,
-            "modifiedSinceLastSubmit": false,
-            "pristine": false,
-            "submitError": undefined,
-            "submitFailed": false,
-            "submitSucceeded": false,
-            "submitting": false,
+            "error": false,
             "touched": false,
-            "valid": false,
-            "validating": false,
-            "visited": false,
           }
         }
       >
@@ -1546,15 +1281,12 @@ exports[`FormFields <Switch /> should render readOnly Switch correctly 1`] = `
             className="form-group"
           >
             <Switch
-              checked={true}
               id="someIdKey"
               isReadOnly={true}
+              name="Name of the field"
               offText="OFF"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
               onText="ON"
-              type="checkbox"
+              value=""
             >
               <div>
                 <label
@@ -1568,25 +1300,20 @@ exports[`FormFields <Switch /> should render readOnly Switch correctly 1`] = `
                   tabIndex={-1}
                 >
                   <input
-                    checked={true}
                     disabled={true}
                     id="someIdKey"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    onFocus={[Function]}
+                    name="Name of the field"
                     type="checkbox"
+                    value=""
                   />
                   <span
-                    className="pf3-switch-slider checked"
+                    className="pf3-switch-slider"
                   >
                     <span
                       className="on-text"
                       style={
                         Object {
-                          "WebkitTransform": "translateX(46px)",
                           "left": -46,
-                          "msTransform": "translateX(46px)",
-                          "transform": "translateX(46px)",
                           "width": 46,
                         }
                       }
@@ -1595,22 +1322,13 @@ exports[`FormFields <Switch /> should render readOnly Switch correctly 1`] = `
                     </span>
                     <span
                       className="divider"
-                      style={
-                        Object {
-                          "WebkitTransform": "translateX(46px)",
-                          "msTransform": "translateX(46px)",
-                          "transform": "translateX(46px)",
-                        }
-                      }
+                      style={Object {}}
                     />
                     <span
                       className="off-text"
                       style={
                         Object {
-                          "WebkitTransform": "translateX(80px)",
                           "left": 34,
-                          "msTransform": "translateX(80px)",
-                          "transform": "translateX(80px)",
                           "width": 46,
                         }
                       }
@@ -1625,7 +1343,7 @@ exports[`FormFields <Switch /> should render readOnly Switch correctly 1`] = `
         </FormGroup>
       </Pf3FormGroup>
     </Switch>
-  </ReactFinalForm>
+  </Component>
 </RenderWithProvider>
 `;
 
@@ -1639,7 +1357,7 @@ exports[`FormFields <Switch /> should render sm Switch correctly 1`] = `
     }
   }
 >
-  <ReactFinalForm
+  <Component
     onSubmit={[Function]}
   >
     <Switch
@@ -1661,25 +1379,8 @@ exports[`FormFields <Switch /> should render sm Switch correctly 1`] = `
       <Pf3FormGroup
         meta={
           Object {
-            "active": false,
-            "data": Object {},
-            "dirty": true,
-            "dirtySinceLastSubmit": false,
-            "error": Object {},
-            "initial": undefined,
-            "invalid": true,
-            "length": undefined,
-            "modified": false,
-            "modifiedSinceLastSubmit": false,
-            "pristine": false,
-            "submitError": undefined,
-            "submitFailed": false,
-            "submitSucceeded": false,
-            "submitting": false,
+            "error": false,
             "touched": false,
-            "valid": false,
-            "validating": false,
-            "visited": false,
           }
         }
       >
@@ -1692,14 +1393,11 @@ exports[`FormFields <Switch /> should render sm Switch correctly 1`] = `
           >
             <Switch
               bsSize="mn"
-              checked={true}
               id="someIdKey"
+              name="Name of the field"
               offText="OFF"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
               onText="ON"
-              type="checkbox"
+              value=""
             >
               <div>
                 <label
@@ -1713,24 +1411,19 @@ exports[`FormFields <Switch /> should render sm Switch correctly 1`] = `
                   tabIndex={0}
                 >
                   <input
-                    checked={true}
                     id="someIdKey"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    onFocus={[Function]}
+                    name="Name of the field"
                     type="checkbox"
+                    value=""
                   />
                   <span
-                    className="pf3-switch-slider checked"
+                    className="pf3-switch-slider"
                   >
                     <span
                       className="on-text"
                       style={
                         Object {
-                          "WebkitTransform": "translateX(46px)",
                           "left": -46,
-                          "msTransform": "translateX(46px)",
-                          "transform": "translateX(46px)",
                           "width": 46,
                         }
                       }
@@ -1739,22 +1432,13 @@ exports[`FormFields <Switch /> should render sm Switch correctly 1`] = `
                     </span>
                     <span
                       className="divider"
-                      style={
-                        Object {
-                          "WebkitTransform": "translateX(46px)",
-                          "msTransform": "translateX(46px)",
-                          "transform": "translateX(46px)",
-                        }
-                      }
+                      style={Object {}}
                     />
                     <span
                       className="off-text"
                       style={
                         Object {
-                          "WebkitTransform": "translateX(80px)",
                           "left": 34,
-                          "msTransform": "translateX(80px)",
-                          "transform": "translateX(80px)",
                           "width": 46,
                         }
                       }
@@ -1769,13 +1453,13 @@ exports[`FormFields <Switch /> should render sm Switch correctly 1`] = `
         </FormGroup>
       </Pf3FormGroup>
     </Switch>
-  </ReactFinalForm>
+  </Component>
 </RenderWithProvider>
 `;
 
 exports[`FormFields <TextField /> should render correctly 1`] = `
 <RenderWithProvider>
-  <ReactFinalForm
+  <Component
     onSubmit={[Function]}
   >
     <TextField
@@ -1791,7 +1475,6 @@ exports[`FormFields <TextField /> should render correctly 1`] = `
             "error": undefined,
             "initial": undefined,
             "invalid": false,
-            "length": undefined,
             "modified": false,
             "modifiedSinceLastSubmit": false,
             "pristine": true,
@@ -1803,6 +1486,7 @@ exports[`FormFields <TextField /> should render correctly 1`] = `
             "valid": true,
             "validating": false,
             "visited": false,
+            "warning": undefined,
           }
         }
       >
@@ -1835,13 +1519,13 @@ exports[`FormFields <TextField /> should render correctly 1`] = `
         </FormGroup>
       </Pf3FormGroup>
     </TextField>
-  </ReactFinalForm>
+  </Component>
 </RenderWithProvider>
 `;
 
 exports[`FormFields <TextField /> should render correctly with placeholder 1`] = `
 <RenderWithProvider>
-  <ReactFinalForm
+  <Component
     onSubmit={[Function]}
   >
     <TextField
@@ -1858,7 +1542,6 @@ exports[`FormFields <TextField /> should render correctly with placeholder 1`] =
             "error": undefined,
             "initial": undefined,
             "invalid": false,
-            "length": undefined,
             "modified": false,
             "modifiedSinceLastSubmit": false,
             "pristine": true,
@@ -1870,6 +1553,7 @@ exports[`FormFields <TextField /> should render correctly with placeholder 1`] =
             "valid": true,
             "validating": false,
             "visited": false,
+            "warning": undefined,
           }
         }
       >
@@ -1904,13 +1588,13 @@ exports[`FormFields <TextField /> should render correctly with placeholder 1`] =
         </FormGroup>
       </Pf3FormGroup>
     </TextField>
-  </ReactFinalForm>
+  </Component>
 </RenderWithProvider>
 `;
 
 exports[`FormFields <Textarea /> should render correctly 1`] = `
 <RenderWithProvider>
-  <ReactFinalForm
+  <Component
     onSubmit={[Function]}
   >
     <Textarea
@@ -1922,29 +1606,7 @@ exports[`FormFields <Textarea /> should render correctly 1`] = `
       meta={Object {}}
     >
       <Pf3FormGroup
-        meta={
-          Object {
-            "active": false,
-            "data": Object {},
-            "dirty": true,
-            "dirtySinceLastSubmit": false,
-            "error": Object {},
-            "initial": undefined,
-            "invalid": true,
-            "length": undefined,
-            "modified": false,
-            "modifiedSinceLastSubmit": false,
-            "pristine": false,
-            "submitError": undefined,
-            "submitFailed": false,
-            "submitSucceeded": false,
-            "submitting": false,
-            "touched": false,
-            "valid": false,
-            "validating": false,
-            "visited": false,
-          }
-        }
+        meta={Object {}}
       >
         <FormGroup
           bsClass="form-group"
@@ -1956,30 +1618,22 @@ exports[`FormFields <Textarea /> should render correctly 1`] = `
             <FormControl
               bsClass="form-control"
               componentClass="textarea"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
-              value={Object {}}
             >
               <textarea
                 className="form-control"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                value={Object {}}
               />
             </FormControl>
           </div>
         </FormGroup>
       </Pf3FormGroup>
     </Textarea>
-  </ReactFinalForm>
+  </Component>
 </RenderWithProvider>
 `;
 
 exports[`FormFields <Textarea /> should render correctly with placeholder 1`] = `
 <RenderWithProvider>
-  <ReactFinalForm
+  <Component
     onSubmit={[Function]}
   >
     <Textarea
@@ -1992,29 +1646,7 @@ exports[`FormFields <Textarea /> should render correctly with placeholder 1`] = 
       placeholder="placeholder"
     >
       <Pf3FormGroup
-        meta={
-          Object {
-            "active": false,
-            "data": Object {},
-            "dirty": true,
-            "dirtySinceLastSubmit": false,
-            "error": Object {},
-            "initial": undefined,
-            "invalid": true,
-            "length": undefined,
-            "modified": false,
-            "modifiedSinceLastSubmit": false,
-            "pristine": false,
-            "submitError": undefined,
-            "submitFailed": false,
-            "submitSucceeded": false,
-            "submitting": false,
-            "touched": false,
-            "valid": false,
-            "validating": false,
-            "visited": false,
-          }
-        }
+        meta={Object {}}
       >
         <FormGroup
           bsClass="form-group"
@@ -2026,25 +1658,17 @@ exports[`FormFields <Textarea /> should render correctly with placeholder 1`] = 
             <FormControl
               bsClass="form-control"
               componentClass="textarea"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
               placeholder="placeholder"
-              value={Object {}}
             >
               <textarea
                 className="form-control"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
                 placeholder="placeholder"
-                value={Object {}}
               />
             </FormControl>
           </div>
         </FormGroup>
       </Pf3FormGroup>
     </Textarea>
-  </ReactFinalForm>
+  </Component>
 </RenderWithProvider>
 `;

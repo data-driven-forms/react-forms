@@ -2,10 +2,16 @@
   "name": "@data-driven-forms/form-state-manager",
   "version": "0.0.1-beta.0",
   "description": "Form state management library for data driven forms",
-  "main": "index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "author": "Martin Marosi",
   "typings": "dist/cjs/index.d.ts",
-  "private": true,
+  "repository": "git@github.com:data-driven-forms/react-forms.git",
+  "keywords": [
+    "react",
+    "forms",
+    "javascript"
+  ],
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/plugin-proposal-class-properties": "^7.1.0",

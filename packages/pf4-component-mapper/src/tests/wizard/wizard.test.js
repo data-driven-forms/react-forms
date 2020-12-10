@@ -1,6 +1,5 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import toJSon from 'enzyme-to-json';
 import { TextInput, Button, WizardNavItem } from '@patternfly/react-core';
 import { act } from 'react-dom/test-utils';
 
@@ -10,6 +9,7 @@ import * as enterHandle from '@data-driven-forms/common/src/wizard/enter-handler
 import { componentMapper, FormTemplate } from '../../index';
 import reducer from '../../files/wizard/reducer';
 import WizardToggle from '../../files/wizard/wizard-toggle';
+import Wizard from '../../files/wizard';
 
 describe('<Wizard />', () => {
   let initialProps;
@@ -184,10 +184,10 @@ describe('<Wizard />', () => {
   it('should render correctly and unmount', () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
 
-    expect(toJSon(wrapper)).toMatchSnapshot();
+    expect(wrapper.find(Wizard)).toHaveLength(1);
     wrapper.unmount();
     wrapper.update();
-    expect(toJSon(wrapper)).toMatchSnapshot();
+    expect(wrapper.find(Wizard)).toHaveLength(0);
   });
 
   it('should open nav', async () => {
@@ -393,10 +393,10 @@ describe('<Wizard />', () => {
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
-    expect(toJSon(wrapper)).toMatchSnapshot();
+    expect(wrapper.find(Wizard)).toHaveLength(1);
     wrapper.unmount();
     wrapper.update();
-    expect(toJSon(wrapper)).toMatchSnapshot();
+    expect(wrapper.find(Wizard)).toHaveLength(0);
   });
 
   it('should render correctly with custom title and description', () => {
