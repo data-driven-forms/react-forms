@@ -106,34 +106,34 @@ const Footer = ({ open }) => {
           <Grid xs={12} md={8} item>
             <Paper elevation={0} className={clsx(classes.foooterCard, classes.foooterRight)}>
               <List>
-                <RepoLink href="https://github.com/data-driven-forms/react-forms" icon=<GhIcon /> label="React forms" />
-                <RepoLink href="https://discord.gg/6sBw6WM" icon=<DiscordIcon /> label="Discord server" />
-                <RepoLink href="https://twitter.com/DataDrivenForms" icon=<TwitterIcon /> label="@DataDrivenForms" />
+                <RepoLink href="https://github.com/data-driven-forms/react-forms" icon={<GhIcon />} label="React forms" />
+                <RepoLink href="https://discord.gg/6sBw6WM" icon={<DiscordIcon />} label="Discord server" />
+                <RepoLink href="https://twitter.com/DataDrivenForms" icon={<TwitterIcon />} label="@DataDrivenForms" />
               </List>
               <List>
                 <RepoLink
                   href="https://www.npmjs.com/package/@data-driven-forms/react-form-renderer"
-                  icon=<NpmSvgIcon />
+                  icon={<NpmSvgIcon />}
                   label="React form renderer"
                 />
                 <RepoLink
                   href="https://www.npmjs.com/package/@data-driven-forms/pf4-component-mapper"
-                  icon=<NpmSvgIcon />
+                  icon={<NpmSvgIcon />}
                   label="PF4 component mapper"
                 />
                 <RepoLink
                   href="https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper"
-                  icon=<NpmSvgIcon />
+                  icon={<NpmSvgIcon />}
                   label="PF3 component mapper"
                 />
                 <RepoLink
                   href="https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper"
-                  icon=<NpmSvgIcon />
+                  icon={<NpmSvgIcon />}
                   label="MUI component mapper"
                 />
                 <RepoLink
                   href="https://www.npmjs.com/package/@data-driven-forms/blueprint-component-mapper"
-                  icon=<NpmSvgIcon />
+                  icon={<NpmSvgIcon />}
                   label="Blueprint component mapper"
                 />
               </List>
