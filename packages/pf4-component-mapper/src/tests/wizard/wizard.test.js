@@ -9,6 +9,7 @@ import * as enterHandle from '@data-driven-forms/common/src/wizard/enter-handler
 
 import { componentMapper, FormTemplate } from '../../index';
 import reducer from '../../files/wizard/reducer';
+import commonReducer from '@data-driven-forms/common/src/wizard/reducer';
 import WizardToggle from '../../files/wizard/wizard-toggle';
 
 describe('<Wizard />', () => {
@@ -1873,6 +1874,65 @@ describe('<Wizard />', () => {
     it('returns default', () => {
       const initialState = { openNav: false };
       expect(reducer(initialState, { type: 'openNav' })).toEqual({ openNav: true });
+    });
+
+    it('common reducer - correctly assigns substepOf title when node', () => {
+      const initialState = {};
+      const formOptions = { getState: () => ({}) };
+      const customTitle = <span>Custom title</span>;
+      const fields = [
+        {
+          name: 'security',
+          title: 'Security',
+          nextStep: 'credentials',
+          substepOf: { name: 'Configuration', title: customTitle },
+          fields: []
+        },
+        {
+          name: 'credentials',
+          title: 'Credentials',
+          nextStep: 'summary',
+          substepOf: 'Configuration',
+          fields: []
+        },
+        {
+          name: 'summary',
+          title: 'Summary',
+          nextStep: 'pepa-step',
+          fields: []
+        },
+        {
+          name: 'pepa-step',
+          nextStep: 'pepa-step-2',
+          title: 'title',
+          substepOf: { name: 'pepa', title: 'pepa-title' },
+          fields: []
+        },
+        {
+          name: 'pepa-step-2',
+          title: 'title 2',
+          fields: [],
+          substepOf: 'pepa'
+        }
+      ];
+
+      expect(commonReducer(initialState, { type: 'finishLoading', payload: { formOptions, fields } })).toEqual({
+        loading: false,
+        navSchema: [
+          { index: 0, name: 'security', primary: true, substepOf: 'Configuration', substepOfTitle: customTitle, title: 'Security' },
+          {
+            index: 1,
+            name: 'credentials',
+            primary: false,
+            substepOf: 'Configuration',
+            substepOfTitle: customTitle,
+            title: 'Credentials'
+          },
+          { index: 2, name: 'summary', primary: true, substepOf: undefined, substepOfTitle: undefined, title: 'Summary' },
+          { index: 3, name: 'pepa-step', primary: true, substepOf: 'pepa', substepOfTitle: 'pepa-title', title: 'title' },
+          { index: 4, name: 'pepa-step-2', primary: false, substepOf: 'pepa', substepOfTitle: 'pepa-title', title: 'title 2' }
+        ]
+      });
     });
   });
 });
