@@ -167,7 +167,7 @@ const DynamicArray = ({ ...props }) => {
     ...buttonLabels
   };
 
-  const { dirty, submitFailed, error } = meta;
+  const { dirty, submitFailed, error, submitError } = meta;
   const isError = (dirty || submitFailed) && error && typeof error === 'string';
 
   return (
@@ -277,9 +277,9 @@ const DynamicArray = ({ ...props }) => {
                 ))
               )}
             </div>
-            {isError && (
+            {(isError || submitError) && (
               <div className="ddorg__suir__mapper__field-array-error">
-                <p>{error}</p>
+                <p>{error || submitError}</p>
               </div>
             )}
           </div>

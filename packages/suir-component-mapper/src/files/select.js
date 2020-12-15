@@ -65,7 +65,7 @@ const SuirSelect = ({
         fluid
         multiple={isMulti}
         label={label}
-        error={invalid && { content: meta.error }}
+        error={invalid && { content: meta.error || meta.submitError }}
         control={Dropdown}
         value={internalValue}
         {...rest}

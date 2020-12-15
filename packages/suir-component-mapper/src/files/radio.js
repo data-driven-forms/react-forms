@@ -52,7 +52,13 @@ const Radio = ({ name, ...props }) => {
   const invalid = validationError(meta, validateOnMount);
   return (
     <FormFieldGrid helperText={validationWarning(meta, validateOnMount) || helperText} HelperTextProps={HelperTextProps} {...FormFieldGridProps}>
-      <FormField {...FormFieldProps} disabled={isDisabled} required={isRequired} error={invalid && { content: meta.error }} label={label} />
+      <FormField
+        {...FormFieldProps}
+        disabled={isDisabled}
+        required={isRequired}
+        error={invalid && { content: meta.error || meta.submitError }}
+        label={label}
+      />
       {options.map((option) => (
         <RadioOption key={option.value} name={name} option={option} isDisabled={isDisabled} isReadOnly={isReadOnly} {...rest} />
       ))}

@@ -29,7 +29,7 @@ const Textarea = (props) => {
         disabled={isDisabled}
         readOnly={isReadOnly}
         {...input}
-        error={invalid && { content: meta.error }}
+        error={invalid && { content: meta.error || meta.submitError }}
         control={FormTextArea}
         {...rest}
       />
