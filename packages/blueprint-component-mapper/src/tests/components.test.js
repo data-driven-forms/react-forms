@@ -264,6 +264,18 @@ describe('formFields generated tests', () => {
             }
           }
         });
+
+        it('renders with error', () => {
+          const wrapper = mount(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
+          wrapper.find('form').simulate('submit');
+          expect(
+            wrapper
+              .find('.bp3-form-helper-text')
+              .last()
+              .text()
+          ).toEqual(errorText);
+          expect(wrapper.find('.bp3-intent-danger').length).toBeGreaterThanOrEqual(1);
+        });
       });
     });
   });
