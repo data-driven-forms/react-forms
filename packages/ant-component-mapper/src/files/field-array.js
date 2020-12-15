@@ -134,7 +134,7 @@ const DynamicArray = ({ ...props }) => {
     ...buttonLabels
   };
 
-  const { dirty, submitFailed, error } = meta;
+  const { dirty, submitFailed, error, submitError } = meta;
   const isError = (dirty || submitFailed) && error && typeof error === 'string';
   return (
     <AntForm
@@ -228,10 +228,10 @@ const DynamicArray = ({ ...props }) => {
                   )}
                 </Row>
               </Col>
-              {isError && (
+              {(isError || submitError) && (
                 <Col span={12}>
                   <Typography.Text type="danger" {...ErrorMessageProps}>
-                    {typeof error === 'object' ? error.name : error}
+                    {typeof error === 'object' ? error.name : error || submitError}
                   </Typography.Text>
                 </Col>
               )}
