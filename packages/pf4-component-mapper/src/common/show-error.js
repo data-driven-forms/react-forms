@@ -1,5 +1,9 @@
-const showError = ({ error, touched, warning }) => {
+const showError = ({ error, touched, warning, submitError }) => {
   if (touched && error) {
+    return { validated: 'error' };
+  }
+
+  if (touched && submitError) {
     return { validated: 'error' };
   }
 
