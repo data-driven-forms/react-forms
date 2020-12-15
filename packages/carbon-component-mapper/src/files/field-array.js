@@ -79,7 +79,7 @@ const FieldArray = (props) => {
     ...buttonLabels
   };
 
-  const invalid = (meta.touched || validateOnMount) && !Array.isArray(meta.error) && meta.error;
+  const invalid = (meta.touched || validateOnMount) && !Array.isArray(meta.error) && (meta.error || meta.submitError);
 
   return (
     <FormGroup

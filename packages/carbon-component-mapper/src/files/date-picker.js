@@ -10,7 +10,7 @@ import HelperTextBlock from '../common/helper-text-block';
 const DatePicker = (props) => {
   const { input, datePickerType, meta, DatePickerProps, validateOnMount, helperText, WrapperProps, ...rest } = useFieldApi(prepareProps(props));
 
-  const invalid = (meta.touched || validateOnMount) && meta.error;
+  const invalid = (meta.touched || validateOnMount) && (meta.error || meta.submitError);
   const warnText = (meta.touched || validateOnMount) && meta.warning;
 
   return (
