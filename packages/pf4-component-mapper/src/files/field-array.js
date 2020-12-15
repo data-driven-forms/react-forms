@@ -75,8 +75,8 @@ const DynamicArray = ({ ...props }) => {
   const { arrayValidator, label, description, fields: formFields, defaultItem, meta, minItems, maxItems, noItemsMessage, ...rest } = useFieldApi(
     props
   );
-  const { dirty, submitFailed, error } = meta;
-  const isError = (dirty || submitFailed) && error && typeof error === 'string';
+  const { dirty, submitFailed, error, submitError } = meta;
+  const isError = (dirty || submitFailed) && (error || submitError) && (typeof error === 'string' || typeof submitError === 'string');
 
   return (
     <FieldArray key={rest.input.name} name={rest.input.name} validate={arrayValidator}>
@@ -104,7 +104,7 @@ const DynamicArray = ({ ...props }) => {
             <GridItem sm={11}>
               {isError && (
                 <FormHelperText isHidden={false} isError={true}>
-                  {error}
+                  {error || submitError}
                 </FormHelperText>
               )}
             </GridItem>

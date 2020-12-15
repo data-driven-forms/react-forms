@@ -482,6 +482,17 @@ describe('FormFields', () => {
               ).toEqual(true);
             }
           });
+
+          it('renders with submit error', () => {
+            const wrapper = mount(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
+            wrapper.find('form').simulate('submit');
+            expect(
+              wrapper
+                .find('.pf-m-error')
+                .last()
+                .text()
+            ).toEqual(errorText);
+          });
         });
       });
     });
