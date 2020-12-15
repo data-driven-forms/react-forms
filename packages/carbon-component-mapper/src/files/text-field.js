@@ -9,7 +9,7 @@ import prepareProps from './prepare-props';
 const TextField = (props) => {
   const { input, meta, validateOnMount, ...rest } = useFieldApi(prepareProps(props));
 
-  const invalid = (meta.touched || validateOnMount) && meta.error;
+  const invalid = (meta.touched || validateOnMount) && (meta.error || meta.submitError);
   const warn = (meta.touched || validateOnMount) && meta.warning;
 
   return (

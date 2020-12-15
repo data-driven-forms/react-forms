@@ -13,8 +13,8 @@ const SingleCheckbox = (props) => {
 const MultipleChoiceList = (props) => {
   const { Wrapper, Checkbox, label, isRequired, helperText, meta, input, options, isDisabled, isReadOnly, description, ...rest } = useFieldApi(props);
 
-  const { error, touched } = meta;
-  const showError = touched && error;
+  const { error, touched, submitError } = meta;
+  const showError = touched && (error || submitError);
 
   return (
     <Wrapper
@@ -25,7 +25,7 @@ const MultipleChoiceList = (props) => {
       meta={meta}
       description={description}
       rest={rest}
-      error={error}
+      error={error || submitError}
       name={input.name}
     >
       {options.map((option) => (

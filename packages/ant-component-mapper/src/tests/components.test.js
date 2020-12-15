@@ -289,6 +289,21 @@ describe('formFields generated tests', () => {
             ).toEqual(true);
           }
         });
+
+        it('renders with submitError', async () => {
+          const wrapper = mount(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
+          await act(async () => {
+            wrapper.find('form').simulate('submit');
+          });
+          wrapper.update();
+          expect(
+            wrapper
+              .find('.ant-form-item-explain')
+              .last()
+              .text()
+          ).toEqual(errorText);
+          expect(wrapper.find('.ant-form-item-has-error').length).toBeGreaterThanOrEqual(1);
+        });
       });
     });
   });

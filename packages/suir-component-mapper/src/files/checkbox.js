@@ -40,7 +40,7 @@ export const SingleCheckbox = (props) => {
         label={label}
         error={
           invalid && {
-            content: meta.error,
+            content: meta.error || meta.submitError,
             pointing: 'left'
           }
         }

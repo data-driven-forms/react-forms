@@ -59,7 +59,7 @@ const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperTex
         {...FormFieldProps}
         {...(invalid && {
           error: {
-            content: meta.error,
+            content: meta.error || meta.submitError,
             pointing: 'left'
           }
         })}

@@ -236,7 +236,7 @@ const Select = (props) => {
   const Component =
     isMulti && isSearchClear ? ClearedMultiSelectFilterable : isMulti ? ClearedMultiSelect : isSearchClear ? ClearedSelectSearchable : ClearedSelect;
 
-  const invalidText = ((meta.touched || validateOnMount) && meta.error) || '';
+  const invalidText = ((meta.touched || validateOnMount) && (meta.error || meta.submitError)) || '';
   const text = ((meta.touched || validateOnMount) && meta.warning) || helperText;
 
   return (
