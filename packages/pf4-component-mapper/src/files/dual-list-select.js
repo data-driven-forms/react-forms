@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { DualListSelector } from '@patternfly/react-core';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
@@ -6,12 +6,30 @@ import isEqual from 'lodash/isEqual';
 
 import './dual-list-select.scss';
 import FormGroup from '../common/form-group';
+import DualListContext from './dual-list-context';
 
 const DualList = (props) => {
-  const { label, isRequired, helperText, meta, description, hideLabel, id, input, FormGroupProps, options, getValueFromNode, ...rest } = useFieldApi({
+  const {
+    label,
+    isRequired,
+    helperText,
+    meta,
+    description,
+    hideLabel,
+    id,
+    input,
+    FormGroupProps,
+    options,
+    getValueFromNode,
+    isSearchable,
+    isSortable,
+    ...rest
+  } = useFieldApi({
     ...props,
     isEqual: (current, initial) => isEqual([...(current || [])].sort(), [...(initial || [])].sort())
   });
+
+  const [sortConfig, setSortConfig] = useState(() => ({ left: isSortable && 'asc', right: isSortable && 'asc' }));
 
   const value = input.value || [];
 
@@ -46,6 +64,18 @@ const DualList = (props) => {
     filterOption = (option, input) => (option.value ? option.value.includes(input) : getValueFromNode(option).includes(input));
   }
 
+  if (isSortable) {
+    const sort = (direction, a, b) => (direction === 'asc' ? a.localeCompare(b) : b.localeCompare(a));
+
+    if (!getValueFromNode) {
+      leftOptions = leftOptions.sort((a, b) => sort(sortConfig.left, a.label || a, b.label || b));
+      rightOptions = rightOptions.sort((a, b) => sort(sortConfig.right, a.label || a, b.label || b));
+    } else {
+      leftOptions = leftOptions.sort((a, b) => sort(sortConfig.left, getValueFromNode(a.label || a), getValueFromNode(b.label || b)));
+      rightOptions = rightOptions.sort((a, b) => sort(sortConfig.right, getValueFromNode(a.label || a), getValueFromNode(b.label || b)));
+    }
+  }
+
   return (
     <FormGroup
       label={label}
@@ -57,23 +87,24 @@ const DualList = (props) => {
       id={id || input.name}
       FormGroupProps={FormGroupProps}
     >
-      <DualListSelector
-        availableOptions={leftOptions}
-        chosenOptions={rightOptions}
-        onListChange={onListChange}
-        id={id || input.name}
-        isSearchable
-        {...(getValueFromNode && {
-          addAll: onListChange,
-          addSelected: onListChange,
-          filterOption,
-          onOptionSelect: onListChange,
-          removeAll: onListChange,
-          removeSelected: onListChange
-        })}
-        {...rest}
-      />
-      {JSON.stringify(input.value, null, 2)}
+      <DualListContext.Provider value={{ sortConfig, setSortConfig }}>
+        <DualListSelector
+          availableOptions={leftOptions}
+          chosenOptions={rightOptions}
+          onListChange={onListChange}
+          id={id || input.name}
+          isSearchable={isSearchable}
+          {...(getValueFromNode && {
+            addAll: onListChange,
+            addSelected: onListChange,
+            filterOption,
+            onOptionSelect: onListChange,
+            removeAll: onListChange,
+            removeSelected: onListChange
+          })}
+          {...rest}
+        />
+      </DualListContext.Provider>
     </FormGroup>
   );
 };
@@ -85,7 +116,9 @@ DualList.propTypes = {
   description: PropTypes.node,
   hideLabel: PropTypes.bool,
   id: PropTypes.string,
-  getValueFromNode: PropTypes.func
+  getValueFromNode: PropTypes.func,
+  isSearchable: PropTypes.bool,
+  isSortable: PropTypes.bool
 };
 
 export default DualList;
