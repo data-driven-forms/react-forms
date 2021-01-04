@@ -4,7 +4,6 @@ import { DualListSelector } from '@patternfly/react-core';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import isEqual from 'lodash/isEqual';
 
-import './dual-list-select.scss';
 import FormGroup from '../common/form-group';
 import DualListContext from './dual-list-context';
 
