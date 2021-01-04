@@ -97,7 +97,6 @@ const DualList = (props) => {
             addAll: onListChange,
             addSelected: onListChange,
             filterOption,
-            onOptionSelect: onListChange,
             removeAll: onListChange,
             removeSelected: onListChange
           })}
