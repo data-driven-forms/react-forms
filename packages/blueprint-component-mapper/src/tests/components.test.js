@@ -3,10 +3,10 @@ import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
-import FormTemplate from '../files/form-template';
-import componentMapper from '../files/component-mapper';
+import FormTemplate from '../form-template/form-template';
+import componentMapper from '../component-mapper/component-mapper';
 import { validatorTypes } from '@data-driven-forms/react-form-renderer';
-import FormGroupWrapper from '../files/form-group';
+import FormGroupWrapper from '../form-group/form-group';
 
 describe('formFields generated tests', () => {
   const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (

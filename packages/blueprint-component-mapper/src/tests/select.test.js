@@ -3,11 +3,11 @@ import { mount } from 'enzyme';
 
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
 
-import FormTemplate from '../files/form-template';
-import componentMapper from '../files/component-mapper';
+import FormTemplate from '../form-template/form-template';
+import componentMapper from '../component-mapper/component-mapper';
 import { Select, MultiSelect } from '@blueprintjs/select';
 
-import { itemPredicate, tagRenderer, multiOnChange } from '../files/select';
+import { itemPredicate, tagRenderer, multiOnChange } from '../select/select';
 
 describe('<Select />', () => {
   it('renders select', () => {

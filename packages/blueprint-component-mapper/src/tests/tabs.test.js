@@ -4,11 +4,11 @@ import { mount } from 'enzyme';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
 import { Tabs as BTabs } from '@blueprintjs/core';
 
-import FormTemplate from '../files/form-template';
-import componentMapper from '../files/component-mapper';
-import Tabs from '../files/tabs';
-import WrapperTextField from '../files/text-field';
-import WrapperSlider from '../files/slider';
+import FormTemplate from '../form-template/form-template';
+import componentMapper from '../component-mapper/component-mapper';
+import Tabs from '../tabs/tabs';
+import WrapperTextField from '../text-field/text-field';
+import WrapperSlider from '../slider/slider';
 
 describe('<Tabs />', () => {
   it('renders correctly', () => {

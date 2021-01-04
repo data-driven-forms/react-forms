@@ -3,8 +3,8 @@ import { mount } from 'enzyme';
 
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
 
-import FormTemplate from '../files/form-template';
-import componentMapper from '../files/component-mapper';
+import FormTemplate from '../form-template/form-template';
+import componentMapper from '../component-mapper/component-mapper';
 import { Checkbox } from '@blueprintjs/core';
 
 describe('<Checkbox />', () => {

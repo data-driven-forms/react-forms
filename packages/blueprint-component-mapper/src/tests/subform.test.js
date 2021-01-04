@@ -3,11 +3,11 @@ import { mount } from 'enzyme';
 
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
 
-import FormTemplate from '../files/form-template';
-import componentMapper from '../files/component-mapper';
-import WrapperTextField from '../files/text-field';
-import WrapperSlider from '../files/slider';
-import SubForm from '../files/sub-form';
+import FormTemplate from '../form-template/form-template';
+import componentMapper from '../component-mapper/component-mapper';
+import WrapperTextField from '../text-field/text-field';
+import WrapperSlider from '../slider/slider';
+import SubForm from '../sub-form/sub-form';
 import { H3, H4 } from '@blueprintjs/core';
 
 describe('<Tabs />', () => {
