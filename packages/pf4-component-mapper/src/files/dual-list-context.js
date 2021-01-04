@@ -1,5 +1,5 @@
 import { createContext } from 'react';
 
-const DualListSelectContext = createContext({});
+const DualListContext = createContext({});
 
-export default DualListSelectContext;
+export default DualListContext;
