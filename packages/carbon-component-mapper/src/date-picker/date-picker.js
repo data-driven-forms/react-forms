@@ -5,7 +5,7 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import { DatePicker as CarbonDatePicker, DatePickerInput } from 'carbon-components-react';
 
 import prepareProps from './prepare-props';
-import HelperTextBlock from '../common/helper-text-block';
+import HelperTextBlock from '../helper-text-block/helper-text-block';
 
 const DatePicker = (props) => {
   const { input, datePickerType, meta, DatePickerProps, validateOnMount, helperText, WrapperProps, ...rest } = useFieldApi(prepareProps(props));

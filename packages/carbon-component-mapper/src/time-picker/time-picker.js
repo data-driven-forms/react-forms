@@ -5,7 +5,7 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import { TimePicker as CarbonTimePicker, TimePickerSelect, SelectItem } from 'carbon-components-react';
 
 import prepareProps from './prepare-props';
-import HelperTextBlock from '../common/helper-text-block';
+import HelperTextBlock from '../helper-text-block/helper-text-block';
 
 const TimePicker = (props) => {
   const { input, meta, twelveHoursFormat, timezones, validateOnMount, helperText, WrapperProps, ...rest } = useFieldApi(prepareProps(props));

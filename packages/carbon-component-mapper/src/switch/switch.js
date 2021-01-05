@@ -5,7 +5,7 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import { Toggle } from 'carbon-components-react';
 
 import prepareProps from './prepare-props';
-import HelperTextBlock from '../common/helper-text-block';
+import HelperTextBlock from '../helper-text-block/helper-text-block';
 
 const Switch = (props) => {
   const { input, meta, onText, offText, validateOnMount, helperText, WrapperProps, ...rest } = useFieldApi(prepareProps(props));
