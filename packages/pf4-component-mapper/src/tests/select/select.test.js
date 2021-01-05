@@ -3,9 +3,9 @@ import { mount } from 'enzyme';
 import isEqual from 'lodash/isEqual';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
 
-import Select from '../../common/select/select';
+import Select from '../../select/select/select';
 import { act } from 'react-dom/test-utils';
-import ValueContainer from '../../common/select/value-container';
+import ValueContainer from '../../select/select/value-container';
 import FormTemplate from '../../files/form-template';
 import componentMapper from '../../files/component-mapper';
 

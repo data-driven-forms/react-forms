@@ -8,8 +8,8 @@ import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms
 import * as enterHandle from '@data-driven-forms/common/src/wizard/enter-handler';
 
 import { componentMapper, FormTemplate } from '../../index';
-import reducer from '../../files/wizard/reducer';
-import WizardToggle from '../../files/wizard/wizard-toggle';
+import reducer from '../../wizard/wizard/reducer';
+import WizardToggle from '../../wizard/wizard/wizard-toggle';
 
 describe('<Wizard />', () => {
   let initialProps;
