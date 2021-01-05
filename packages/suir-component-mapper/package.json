@@ -11,11 +11,11 @@
   "license": "Apache-2.0",
   "scripts": {
     "start": "webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
-    "build": "yarn build:cjs && yarn build:esm && yarn build:umd && yarn build:typings",
-    "build:cjs": "BABEL_ENV=cjs rollup -c ./rollup.config.js --format=cjs --environment FORMAT:cjs",
-    "build:esm": "BABEL_ENV=esm rollup -c ./rollup.config.js --format=esm --environment FORMAT:esm",
-    "build:umd": "rollup -c ./rollup.config.js --format=umd --environment FORMAT:umd",
-    "build:typings": "node ../../scripts/copy-files.js",
+    "build": "yarn build:cjs && yarn build:esm && yarn build:typings && yarn build:packages",
+    "build:cjs": "BABEL_ENV=cjs babel src --out-dir ./ --ignore \"src/tests/*\"",
+    "build:esm": "BABEL_ENV=esm babel src --out-dir ./esm --ignore \"src/tests/*\"",
+    "build:typings": "node ../../scripts/generate-typings.js",
+    "build:packages": "node ../../scripts/generate-packages.js",
     "release": "semantic-release"
   },
   "repository": "git@github.com:data-driven-forms/react-forms.git",

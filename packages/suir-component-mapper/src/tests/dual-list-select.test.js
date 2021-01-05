@@ -3,8 +3,8 @@ import { act } from 'react-dom/test-utils';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
 import { componentMapper, FormTemplate } from '../index';
-import FormFieldGrid from '../common/form-field-grid';
-import FormField from '../common/form-field';
+import FormFieldGrid from '../form-field-grid/form-field-grid';
+import FormField from '../form-field/form-field';
 import { Input, Icon, Segment } from 'semantic-ui-react';
 
 describe('DualListSelect', () => {

@@ -9,7 +9,7 @@ import RenderWithProvider from '../../../../__mocks__/with-provider';
 import FormTemplate from '../files/form-template';
 import componentMapper from '../files/component-mapper';
 import { Radio, Dropdown } from 'semantic-ui-react';
-import HelperText from '../common/helper-text';
+import HelperText from '../helper-text/helper-text';
 
 const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (
   <FormRenderer
