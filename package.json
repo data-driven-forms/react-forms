@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build": "lerna run build --concurrency 1 --ignore @data-driven-forms/react-renderer-demo",
+    "build": "lerna run build --concurrency 1 --ignore @data-driven-forms/react-renderer-demo --ignore @data-driven-forms/pf3-component-mapper",
     "vendor": "lerna run vendor",
     "test": "jest --coverage",
     "test:ci": "jest --coverage --runInBand",
@@ -19,7 +19,7 @@
     "lint": "yarn eslint .",
     "lint:ts": "tslint -c ./tslint.json 'packages/**/*.d.ts'",
     "generate-template": "node ./scripts/generate-mapper.js",
-    "prepare": "echo 'called prepare in my-lerna-package'"
+    "preinstall": "git ls-files -i --exclude-from=.gitignore | xargs git rm --cached"
   },
   "workspaces": [
     "packages/**"
