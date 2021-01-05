@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import FormTemplate from '@data-driven-forms/common/src/form-template';
+import FormTemplate from '@data-driven-forms/common/form-template';
 import { Button, H1, H2 } from '@blueprintjs/core';
 import BlueprintContext from '../blueprint-context/blueprint-context';
 

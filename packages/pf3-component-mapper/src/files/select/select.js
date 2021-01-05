@@ -2,10 +2,10 @@ import React, { Component, createRef, Fragment, useState, useEffect } from 'reac
 import ReactSelect from 'react-select';
 import './react-select.scss';
 import PropTypes from 'prop-types';
-import { optionsPropType } from '@data-driven-forms/common/src/prop-types-templates';
-import fnToString from '@data-driven-forms/common/src/utils/fn-to-string';
-import DataDrivenSelect from '@data-driven-forms/common/src/select';
-import useIsMounted from '@data-driven-forms/common/src/hooks/use-is-mounted';
+import { optionsPropType } from '@data-driven-forms/common/prop-types-templates';
+import fnToString from '@data-driven-forms/common/utils/fn-to-string';
+import DataDrivenSelect from '@data-driven-forms/common/select';
+import useIsMounted from '@data-driven-forms/common/hooks/use-is-mounted';
 import { DropdownButton } from 'patternfly-react';
 import clsx from 'clsx';
 

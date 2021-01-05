@@ -4,7 +4,7 @@ import { TextField as MuiTextField } from '@material-ui/core';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
 import { validationError } from '../common/helpers';
-import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
+import { meta, input } from '@data-driven-forms/common/prop-types-templates';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const Textarea = (props) => {

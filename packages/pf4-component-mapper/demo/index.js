@@ -9,7 +9,7 @@ import { Title, Button, Toolbar, ToolbarGroup, ToolbarItem, Modal } from '@patte
 import { wizardSchema, wizardSchemaWithFunction, wizardSchemaSimple, wizardSchemaSubsteps, wizardSchemaMoreSubsteps } from './demo-schemas/wizard-schema';
 import sandboxSchema from './demo-schemas/sandbox';
 import dualSchema from './demo-schemas/dual-list-schema';
-import demoSchema from '@data-driven-forms/common/src/demoschema';
+import demoSchema from '@data-driven-forms/common/demoschema';
 import selectSchema from './demo-schemas/select-schema';
 
 const Summary = props => <div>Custom summary component.</div>;

@@ -2,7 +2,7 @@ import React, { useReducer, useEffect, useContext } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { FormSpy, WizardContext } from '@data-driven-forms/react-form-renderer';
-import Wizard from '@data-driven-forms/common/src/wizard/wizard';
+import Wizard from '@data-driven-forms/common/wizard/wizard';
 
 import { Bullseye, Backdrop, WizardNav, WizardHeader } from '@patternfly/react-core';
 

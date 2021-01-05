@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Checkbox as AntCheckbox } from 'antd';
-import MultipleChoiceListCommon, { wrapperProps } from '@data-driven-forms/common/src/multiple-choice-list';
+import MultipleChoiceListCommon, { wrapperProps } from '@data-driven-forms/common/multiple-choice-list';
 import FormGroup from '../form-group';
 
 const FinalCheckbox = ({ isDisabled, label, ...props }) => (

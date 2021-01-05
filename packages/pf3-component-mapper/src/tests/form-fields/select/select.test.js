@@ -5,7 +5,7 @@ import { mount } from 'enzyme';
 import isEqual from 'lodash/isEqual';
 import ReactSelect from 'react-select';
 import { DropdownButton } from 'patternfly-react';
-import DataDrivenSelect from '@data-driven-forms/common/src/select';
+import DataDrivenSelect from '@data-driven-forms/common/select';
 
 import SelectField from '../../../files/select/select';
 

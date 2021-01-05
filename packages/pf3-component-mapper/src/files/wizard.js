@@ -3,7 +3,7 @@ import WizardStep from './wizard/wizard-step';
 import PropTypes from 'prop-types';
 import { Wizard as PfWizard, Modal, Icon } from 'patternfly-react';
 import { WizardContext } from '@data-driven-forms/react-form-renderer';
-import Wizard from '@data-driven-forms/common/src/wizard/wizard';
+import Wizard from '@data-driven-forms/common/wizard/wizard';
 
 const defaultButtonLabels = {
   cancel: 'Cancel',

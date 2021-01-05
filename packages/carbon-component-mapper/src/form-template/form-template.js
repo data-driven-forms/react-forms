@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import { Form as CarbonForm, Button as CarbonButton, ButtonSet } from 'carbon-components-react';
 
-import FormTemplate from '@data-driven-forms/common/src/form-template';
+import FormTemplate from '@data-driven-forms/common/form-template';
 
 import './form-template.scss';
 

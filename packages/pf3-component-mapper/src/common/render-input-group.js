@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { InputGroup } from 'patternfly-react';
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
-import { childrenPropTypes } from '@data-driven-forms/common/src/prop-types-templates';
+import { childrenPropTypes } from '@data-driven-forms/common/prop-types-templates';
 
 const InputGroupWrapper = ({ inputAddon, children }) => {
   const formOptions = useFormApi();

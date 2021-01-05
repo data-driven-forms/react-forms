@@ -66,6 +66,7 @@
   },
   "peerDependencies": {},
   "dependencies": {
+    "@data-driven-forms/common": "*",
     "prop-types": ">=15.7.2"
   }
 }

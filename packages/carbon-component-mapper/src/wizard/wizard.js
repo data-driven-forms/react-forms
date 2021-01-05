@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-import WizardCommon from '@data-driven-forms/common/src/wizard/wizard';
+import WizardCommon from '@data-driven-forms/common/wizard/wizard';
 import { FormSpy, WizardContext } from '@data-driven-forms/react-form-renderer';
 import { Button, Column, Grid, Row } from 'carbon-components-react';
 

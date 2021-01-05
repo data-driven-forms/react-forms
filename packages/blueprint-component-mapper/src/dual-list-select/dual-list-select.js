@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import DualListSelectCommon from '@data-driven-forms/common/src/dual-list-select';
+import DualListSelectCommon from '@data-driven-forms/common/dual-list-select';
 import { Menu, MenuItem, ButtonGroup, Button, ControlGroup, InputGroup } from '@blueprintjs/core';
 import clsx from 'clsx';
 

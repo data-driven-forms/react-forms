@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Typography, Form as AntForm } from 'antd';
-import FormTemplate from '@data-driven-forms/common/src/form-template';
-import { childrenPropTypes } from '@data-driven-forms/common/src/prop-types-templates';
+import FormTemplate from '@data-driven-forms/common/form-template';
+import { childrenPropTypes } from '@data-driven-forms/common/prop-types-templates';
 
 const { Title, Paragraph } = Typography;
 

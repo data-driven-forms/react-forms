@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
-import DataDrivenSelect from '@data-driven-forms/common/src/select';
-import fnToString from '@data-driven-forms/common/src/utils/fn-to-string';
+import DataDrivenSelect from '@data-driven-forms/common/select';
+import fnToString from '@data-driven-forms/common/utils/fn-to-string';
 
 import { Select as CarbonSelect, MultiSelect, SelectItem, ComboBox } from 'carbon-components-react';
 import prepareProps from './prepare-props';

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button as PF3Button, Form } from 'patternfly-react';
 import './form-template.scss';
-import FormTemplate from '@data-driven-forms/common/src/form-template';
+import FormTemplate from '@data-driven-forms/common/form-template';
 
 export const FormWrapper = ({ children, ...props }) => (
   <Form className="ddorg__pf3-layout-components__form-wrapper" {...props}>

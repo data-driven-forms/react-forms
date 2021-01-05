@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { TextContent, Text } from '@patternfly/react-core';
-import validTextFields from '@data-driven-forms/common/src/utils/valid-text-fields';
+import validTextFields from '@data-driven-forms/common/utils/valid-text-fields';
 
 const PlainText = ({ component, label, name, variant, TextContentProps, ...rest }) => (
   <TextContent {...TextContentProps}>

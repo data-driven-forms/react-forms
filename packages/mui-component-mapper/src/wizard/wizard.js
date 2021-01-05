@@ -7,7 +7,7 @@ import { WizardContext } from '@data-driven-forms/react-form-renderer';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Wizard from '@data-driven-forms/common/src/wizard/wizard';
+import Wizard from '@data-driven-forms/common/wizard/wizard';
 import WizardNav from './wizard-nav';
 import WizardStepButtons from './step-buttons';
 

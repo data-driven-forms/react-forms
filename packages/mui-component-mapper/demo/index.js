@@ -7,7 +7,7 @@ import { componentMapper, FormTemplate } from '../src';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Typography from '@material-ui/core/Typography';
-import demoSchema from '@data-driven-forms/common/src/demoschema';
+import demoSchema from '@data-driven-forms/common/demoschema';
 import fieldArraySchema from './demo-schemas/field-array-schema';
 
 import Button from '@material-ui/core/Button';

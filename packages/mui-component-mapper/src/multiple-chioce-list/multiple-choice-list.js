@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Grid, Checkbox, FormControlLabel, FormLabel, FormGroup, FormControl, FormHelperText } from '@material-ui/core';
 
-import MultipleChoiceListCommon, { wrapperProps } from '@data-driven-forms/common/src/multiple-choice-list';
+import MultipleChoiceListCommon, { wrapperProps } from '@data-driven-forms/common/multiple-choice-list';
 import { validationError } from '../common/helpers';
 
 const CheckboxContext = createContext({});

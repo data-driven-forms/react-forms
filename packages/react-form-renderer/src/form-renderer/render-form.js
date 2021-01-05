@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { childrenPropTypes } from '@data-driven-forms/common/src/prop-types-templates';
+import { childrenPropTypes } from '@data-driven-forms/common/prop-types-templates';
 import RendererContext from '../renderer-context';
 import Condition from '../condition';
 import FormSpy from '../form-spy';

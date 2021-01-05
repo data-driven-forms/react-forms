@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox, FormGroup, ControlLabel, FieldLevelHelp } from 'patternfly-react';
-import MultipleChoiceListCommon, { wrapperProps } from '@data-driven-forms/common/src/multiple-choice-list';
+import MultipleChoiceListCommon, { wrapperProps } from '@data-driven-forms/common/multiple-choice-list';
 
 import RequiredLabel from './required-label';
 import renderHelperText from '../common/render-helper-text';

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
-import MultipleChoiceListCommon from '@data-driven-forms/common/src/multiple-choice-list';
+import MultipleChoiceListCommon from '@data-driven-forms/common/multiple-choice-list';
 
 const Wrapper = ({ label, children }) => (
   <div>

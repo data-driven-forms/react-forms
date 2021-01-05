@@ -66,6 +66,7 @@
     "@patternfly/react-icons": "^4.7.16"
   },
   "dependencies": {
+    "@data-driven-forms/common": "*",
     "prop-types": "^15.7.2",
     "downshift": "^5.4.3"
   },

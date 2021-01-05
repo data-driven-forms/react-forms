@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import DataDrivenSelect from '@data-driven-forms/common/src/select';
-import parseInternalValue from '@data-driven-forms/common/src/select/parse-internal-value';
+import DataDrivenSelect from '@data-driven-forms/common/select';
+import parseInternalValue from '@data-driven-forms/common/select/parse-internal-value';
 import Downshift from 'downshift';
 import { CaretDownIcon, CloseIcon, CircleNotchIcon } from '@patternfly/react-icons';
 

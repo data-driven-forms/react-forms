@@ -1,8 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { mountToJson } from 'enzyme-to-json';
-import selectNext from '../../wizard/wizard/node_modules/@data-driven-forms/common/src/wizard/select-next';
-import handleEnter from '@data-driven-forms/common/src/wizard/enter-handler';
+import selectNext from '../../wizard/wizard/node_modules/@data-driven-forms/common/wizard/select-next';
+import handleEnter from '@data-driven-forms/common/wizard/enter-handler';
 
 import RenderWithProvider from '../../../../../__mocks__/with-provider';
 

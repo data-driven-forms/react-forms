@@ -10,7 +10,7 @@ import wizardSchema from './demo-schemas/wizard-schema';
 import sandbox from './demo-schemas/sandbox';
 import Switch from "../src/form-fields/switch-field";
 
-import demoSchema from '@data-driven-forms/common/src/demoschema';
+import demoSchema from '@data-driven-forms/common/demoschema';
 
 const loadOptions = () => new Promise((res) => {
   setTimeout(() => {

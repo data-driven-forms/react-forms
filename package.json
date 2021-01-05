@@ -18,7 +18,8 @@
     "start-demo": "lerna run start --scope=@data-driven-forms/react-render-demo",
     "lint": "yarn eslint .",
     "lint:ts": "tslint -c ./tslint.json 'packages/**/*.d.ts'",
-    "generate-template": "node ./scripts/generate-mapper.js"
+    "generate-template": "node ./scripts/generate-mapper.js",
+    "prepare": "echo 'called prepare in my-lerna-package'"
   },
   "workspaces": [
     "packages/**"

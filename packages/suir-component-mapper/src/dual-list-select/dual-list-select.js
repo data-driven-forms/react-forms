@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import DualListSelectCommon from '@data-driven-forms/common/src/dual-list-select';
+import DualListSelectCommon from '@data-driven-forms/common/dual-list-select';
 import { Button, Grid, GridColumn, Input, Segment, Header } from 'semantic-ui-react';
 import FormField from '../form-field/form-field';
 import { createUseStyles } from 'react-jss';

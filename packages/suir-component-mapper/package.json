@@ -63,6 +63,7 @@
     "semantic-ui-react": "^0.88.2"
   },
   "dependencies": {
+    "@data-driven-forms/common": "*",
     "classnames": "^2.2.6",
     "clsx": "^1.0.4",
     "prop-types": "^15.7.2",

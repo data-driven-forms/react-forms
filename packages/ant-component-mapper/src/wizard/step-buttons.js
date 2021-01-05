@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'antd';
-import selectNext from '@data-driven-forms/common/src/wizard/select-next';
+import selectNext from '@data-driven-forms/common/wizard/select-next';
 
 const NextButton = ({ nextStep, handleNext, handleSubmit, buttonLabels, getState, valid, NextButtonProps, SubmitButtonProps }) => {
   return (

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import { componentMapper, FormTemplate } from '../src';
-import demoSchema from '@data-driven-forms/common/src/demoschema';
+import demoSchema from '@data-driven-forms/common/demoschema';
 import fieldArraySchema from './demo-schemas/field-array-schema';
 import dualListSchema from './demo-schemas/dual-list-select-schema';
 import wizardSchema from './demo-schemas/wizard-schema';

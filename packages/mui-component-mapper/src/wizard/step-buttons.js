@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-import selectNext from '@data-driven-forms/common/src/wizard/select-next';
+import selectNext from '@data-driven-forms/common/wizard/select-next';
 import { FormSpy } from '@data-driven-forms/react-form-renderer';
 import { Button, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';

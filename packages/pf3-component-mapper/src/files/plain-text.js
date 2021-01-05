@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import validTextFields from '@data-driven-forms/common/src/utils/valid-text-fields';
+import validTextFields from '@data-driven-forms/common/utils/valid-text-fields';
 
 const PlainText = ({ variant, label, name }) =>
   label.split('\n').map((paragraph, index) => React.createElement(variant, { key: `${name}-${index}` }, paragraph));

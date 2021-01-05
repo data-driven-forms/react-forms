@@ -5,7 +5,7 @@ import { TextInput, Button, WizardNavItem } from '@patternfly/react-core';
 import { act } from 'react-dom/test-utils';
 
 import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
-import * as enterHandle from '@data-driven-forms/common/src/wizard/enter-handler';
+import * as enterHandle from '@data-driven-forms/common/wizard/enter-handler';
 
 import { componentMapper, FormTemplate } from '../../index';
 import reducer from '../../wizard/wizard/reducer';

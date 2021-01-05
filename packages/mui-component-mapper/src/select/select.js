@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
 import { validationError } from '../common/helpers';
-import { meta } from '@data-driven-forms/common/src/prop-types-templates';
-import DDFSelect from '@data-driven-forms/common/src/select';
-import parseInternalValue from '@data-driven-forms/common/src/select/parse-internal-value';
+import { meta } from '@data-driven-forms/common/prop-types-templates';
+import DDFSelect from '@data-driven-forms/common/select';
+import parseInternalValue from '@data-driven-forms/common/select/parse-internal-value';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import { TextField, CircularProgress } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { WizardContext } from '@data-driven-forms/react-form-renderer';
-import Wizard from '@data-driven-forms/common/src/wizard/wizard';
+import Wizard from '@data-driven-forms/common/wizard/wizard';
 import WizardNav from './wizard-nav';
 import WizardStepButtons from './step-buttons';
 

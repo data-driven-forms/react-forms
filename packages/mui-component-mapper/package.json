@@ -64,6 +64,7 @@
     "react-dom": ">=16.13.1"
   },
   "dependencies": {
+    "@data-driven-forms/common": "*",
     "@date-io/date-fns": "^1.0.1",
     "@date-io/moment": "^1.0.1",
     "@material-ui/pickers": "^3.2.10",

@@ -67,6 +67,8 @@
     "react": ">=16.13.0",
     "react-dom": ">=16.13.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@data-driven-forms/common": "*"
+  },
   "postpublish": "export RELEASE_DEMO=true"
 }

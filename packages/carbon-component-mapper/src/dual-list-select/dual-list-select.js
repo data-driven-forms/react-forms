@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DualListSelectCommon from '@data-driven-forms/common/src/dual-list-select';
+import DualListSelectCommon from '@data-driven-forms/common/dual-list-select';
 import clsx from 'clsx';
 
 import { Grid, Row, Column, Button, FormGroup, Search, TooltipIcon } from 'carbon-components-react';

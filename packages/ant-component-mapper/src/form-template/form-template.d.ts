@@ -1,4 +1,4 @@
-import FormTemplateCommonProps from "@data-driven-forms/common/src/form-template";
+import FormTemplateCommonProps from "@data-driven-forms/common/form-template";
 
 export interface FormTemplateProps extends FormTemplateCommonProps {
   layout?: string;

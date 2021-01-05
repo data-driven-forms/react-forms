@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormControlLabel, FormHelperText, FormControl, FormGroup, FormLabel, Switch as MUISwitch } from '@material-ui/core';
-import { meta, input } from '@data-driven-forms/common/src/prop-types-templates';
+import { meta, input } from '@data-driven-forms/common/prop-types-templates';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
 import { validationError } from '../common/helpers';

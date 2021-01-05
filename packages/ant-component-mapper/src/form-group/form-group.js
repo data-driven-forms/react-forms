@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Form } from 'antd';
 import { validationError } from '../common/helpers';
-import { childrenPropTypes } from '@data-driven-forms/common/src/prop-types-templates';
+import { childrenPropTypes } from '@data-driven-forms/common/prop-types-templates';
 
 const FormGroup = ({ label, children, isRequired, FormItemProps, meta, validateOnMount, helperText, description, hideLabel }) => {
   const invalid = validationError(meta, validateOnMount);

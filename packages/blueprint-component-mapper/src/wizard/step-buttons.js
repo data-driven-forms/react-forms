@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import selectNext from '@data-driven-forms/common/src/wizard/select-next';
+import selectNext from '@data-driven-forms/common/wizard/select-next';
 import clsx from 'clsx';
 
 import { Button, Intent } from '@blueprintjs/core';

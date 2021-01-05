@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import WizardStep from './wizard-step';
 import PropTypes from 'prop-types';
 import { Steps, Modal } from 'antd';
-import Wizard from '@data-driven-forms/common/src/wizard/wizard';
+import Wizard from '@data-driven-forms/common/wizard/wizard';
 import { WizardContext } from '@data-driven-forms/react-form-renderer';
 
 const defaultButtonLabels = {

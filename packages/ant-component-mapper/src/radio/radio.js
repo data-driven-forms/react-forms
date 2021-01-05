@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Radio as AntRadio } from 'antd';
-import { wrapperProps } from '@data-driven-forms/common/src/multiple-choice-list';
+import { wrapperProps } from '@data-driven-forms/common/multiple-choice-list';
 import FormGroup from '../form-group';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
