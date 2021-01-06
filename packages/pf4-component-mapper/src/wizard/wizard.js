@@ -1,17 +1,17 @@
 import React, { useReducer, useEffect, useContext } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-import { FormSpy, WizardContext } from '@data-driven-forms/react-form-renderer';
+import { FormSpy, WizardContext } from './wizard-components/node_modules/@data-driven-forms/react-form-renderer';
 import Wizard from '@data-driven-forms/common/wizard/wizard';
 
 import { Bullseye, Backdrop, WizardNav, WizardHeader } from '@patternfly/react-core';
 
-import WizardStep from './wizard/wizard-step';
-import './wizard/wizard-styles.scss';
+import WizardStep from './wizard-components/wizard-step';
+import './wizard-components/wizard-styles.scss';
 
-import WizardNavigation from './wizard/wizard-nav';
-import reducer from './wizard/reducer';
-import WizardToggle from './wizard/wizard-toggle';
+import WizardNavigation from './wizard-components/wizard-nav';
+import reducer from './wizard-components/reducer';
+import WizardToggle from './wizard-components/wizard-toggle';
 
 const Modal = ({ children, container, inModal }) =>
   inModal
