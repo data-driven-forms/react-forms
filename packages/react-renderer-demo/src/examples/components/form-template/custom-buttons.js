@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
-import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
-import validatorTypes from '@data-driven-forms/react-form-renderer/dist/cjs/validator-types';
-import useFormApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-form-api';
-import FormSpy from '@data-driven-forms/react-form-renderer/dist/cjs/form-spy';
-import TextField from '@data-driven-forms/mui-component-mapper/dist/cjs/text-field';
+import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
+import componentTypes from '@data-driven-forms/react-form-renderer/component-types';
+import validatorTypes from '@data-driven-forms/react-form-renderer/validator-types';
+import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
+import FormSpy from '@data-driven-forms/react-form-renderer/form-spy';
+import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 import Button from '@material-ui/core/Button';
 
 const componentMapper = {

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { Fragment, useState } from 'react';
-import FormRender, { componentTypes, useFormApi, useFieldApi, FieldArray } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, componentTypes, useFormApi, useFieldApi, FieldArray } from '@data-driven-forms/react-form-renderer';
 
 const wrapperStyles = {
   padding: 16,
@@ -146,7 +146,7 @@ const FieldArrayProvider = () => {
 
   return (
     <React.Fragment>
-      <FormRender
+      <FormRenderer
         componentMapper={componentMapper}
         FormTemplate={FormTemplate}
         schema={schema}

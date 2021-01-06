@@ -1,6 +1,6 @@
 import React from 'react';
 import ComponentText from '@docs/components/component-example-text';
-import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
+import componentTypes from '@data-driven-forms/react-form-renderer/component-types';
 
 const schema = {
   fields: [
