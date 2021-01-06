@@ -27,7 +27,10 @@
   ],
   "jest": {
     "verbose": true,
-    "testPathIgnorePatterns": ["/node_modules/", "/pf3-component-mapper/"],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/pf3-component-mapper/"
+    ],
     "setupFiles": [
       "<rootDir>/config/jest.setup.js"
     ],
@@ -76,6 +79,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^2.4.0",
+    "fs-extra": "^9.0.1",
     "glob": "^7.1.6",
     "identity-obj-proxy": "^3.0.0",
     "inquirer": "^7.1.0",
