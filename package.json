@@ -16,7 +16,7 @@
     "release": "semantic-release",
     "codecov": "codecov",
     "start-demo": "lerna run start --scope=@data-driven-forms/react-render-demo",
-    "lint": "yarn eslint .",
+    "lint": "yarn eslint ./packages/*/src",
     "lint:ts": "tslint -c ./tslint.json 'packages/**/*.d.ts'",
     "generate-template": "node ./scripts/generate-mapper.js",
     "clean-build": "node ./scripts/clean-build.js",
