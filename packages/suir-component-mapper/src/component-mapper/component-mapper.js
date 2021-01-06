@@ -1,19 +1,19 @@
 import { componentTypes } from '@data-driven-forms/react-form-renderer';
-import SubForm from './sub-form';
-import Tabs from './tabs';
-import TextField from './text-field';
-import Textarea from './textarea';
-import Checkbox from './checkbox';
-import Switch from './switch';
-import TimePicker from './time-picker';
-import DatePicker from './date-picker';
-import PlainText from './plain-text';
-import Select from './select';
-import Radio from './radio';
-import Wizard from './wizard';
-import FieldArray from './field-array';
-import Slider from './slider';
-import DualListSelectWrapper from './dual-list-select';
+import SubForm from '../sub-form';
+import Tabs from '../tabs';
+import TextField from '../text-field';
+import Textarea from '../textarea';
+import Checkbox from '../checkbox';
+import Switch from '../switch';
+import TimePicker from '../time-picker';
+import DatePicker from '../date-picker';
+import PlainText from '../plain-text';
+import Select from '../select';
+import Radio from '../radio';
+import Wizard from '../wizard';
+import FieldArray from '../field-array';
+import Slider from '../slider';
+import DualListSelectWrapper from '../dual-list-select';
 
 export const components = {
   TextField,

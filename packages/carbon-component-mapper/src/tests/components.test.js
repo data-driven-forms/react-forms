@@ -2,11 +2,11 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 
-import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 
-import FormTemplate from '../files/form-template';
-import componentMapper from '../files/component-mapper';
-import WithDescription from '../common/with-description';
+import FormTemplate from '../form-template';
+import componentMapper from '../component-mapper';
+import WithDescription from '../with-description';
 
 describe('component tests', () => {
   const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (

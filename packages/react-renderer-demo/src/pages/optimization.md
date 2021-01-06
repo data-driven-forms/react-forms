@@ -30,7 +30,7 @@ In both of CJS and ESM, exported files follow the kebab case. All components are
 
 ```jsx
 --- { "switchable": false } ---
-import FormRenderer, { useField } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, useField } from '@data-driven-forms/react-form-renderer';
 ```
 
 Only the `FormRenderer` component is exported as a default. In all other packages, use only named exports.

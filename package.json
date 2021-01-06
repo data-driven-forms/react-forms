@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build": "lerna run build --concurrency 1 --ignore @data-driven-forms/react-renderer-demo --ignore @data-driven-forms/pf3-component-mapper",
+    "build": "yarn clean-build && lerna run build --concurrency 1 --ignore @data-driven-forms/react-renderer-demo --ignore @data-driven-forms/pf3-component-mapper",
     "vendor": "lerna run vendor",
     "test": "jest --coverage",
     "test:ci": "jest --coverage --runInBand",
@@ -27,6 +27,7 @@
   ],
   "jest": {
     "verbose": true,
+    "testPathIgnorePatterns": ["/node_modules/", "/pf3-component-mapper/"],
     "setupFiles": [
       "<rootDir>/config/jest.setup.js"
     ],
@@ -35,6 +36,7 @@
       "<rootDir>/packages/**/src/**/*.ts",
       "!<rootDir>/packages/**/src/**/*.d.ts",
       "!<rootDir>/packages/react-renderer-demo/**/*.js",
+      "!<rootDir>/packages/pf3-component-mapper/**/*.js",
       "!<rootDir>/packages/**/dist",
       "!<rootDir>/templates/**/*.js"
     ],

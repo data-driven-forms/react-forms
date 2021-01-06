@@ -4,12 +4,11 @@ import toJSon from 'enzyme-to-json';
 import { TextInput, Button, WizardNavItem } from '@patternfly/react-core';
 import { act } from 'react-dom/test-utils';
 
-import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import * as enterHandle from '@data-driven-forms/common/wizard/enter-handler';
 
 import { componentMapper, FormTemplate } from '../../index';
-import reducer from '../../wizard/wizard/reducer';
-import WizardToggle from '../../wizard/wizard/wizard-toggle';
+import reducer from '../../wizard/wizard-components/reducer';
 
 describe('<Wizard />', () => {
   let initialProps;
@@ -193,14 +192,14 @@ describe('<Wizard />', () => {
   it('should open nav', async () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find(WizardToggle).props().isOpen).toEqual(false);
+    expect(wrapper.find('WizardToggle').props().isOpen).toEqual(false);
 
     await act(async () => {
       wrapper.find('.pf-c-wizard__toggle').simulate('click');
     });
     wrapper.update();
 
-    expect(wrapper.find(WizardToggle).props().isOpen).toEqual(true);
+    expect(wrapper.find('WizardToggle').props().isOpen).toEqual(true);
   });
 
   it('should call enter handler when pressing enter', () => {

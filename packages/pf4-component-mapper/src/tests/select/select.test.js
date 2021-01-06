@@ -1,13 +1,13 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import isEqual from 'lodash/isEqual';
-import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import Select from '../../select/select/select';
 import { act } from 'react-dom/test-utils';
 import ValueContainer from '../../select/select/value-container';
-import FormTemplate from '../../files/form-template';
-import componentMapper from '../../files/component-mapper';
+import FormTemplate from '../../form-template';
+import componentMapper from '../../component-mapper';
 
 describe('<Select />', () => {
   let initialProps;

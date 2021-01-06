@@ -2,7 +2,7 @@ import React from 'react';
 import { mount as enzymeMount } from 'enzyme';
 import { mountToJson } from 'enzyme-to-json';
 
-import WizardStep, { RenderTitle } from '../../wizard/wizard/wizard-step';
+import WizardStep, { RenderTitle } from '../../wizard/wizard-components/wizard-step';
 import { Title } from '@patternfly/react-core';
 import { Form } from '@data-driven-forms/react-form-renderer';
 

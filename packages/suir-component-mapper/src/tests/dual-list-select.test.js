@@ -1,11 +1,9 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
 import { componentMapper, FormTemplate } from '../index';
-import FormFieldGrid from '../form-field-grid/form-field-grid';
-import FormField from '../form-field/form-field';
-import { Input, Icon, Segment } from 'semantic-ui-react';
+import { Input, Icon, Segment, FormField } from 'semantic-ui-react';
 
 describe('DualListSelect', () => {
   let onSubmit;
@@ -57,7 +55,7 @@ describe('DualListSelect', () => {
   it('renders correctly', () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find(FormFieldGrid)).toHaveLength(1);
+    expect(wrapper.find('FormFieldGrid')).toHaveLength(1);
     expect(wrapper.find(FormField)).toHaveLength(1);
     expect(wrapper.find('input[type="search"]')).toHaveLength(2);
     expect(wrapper.find(Input)).toHaveLength(2);

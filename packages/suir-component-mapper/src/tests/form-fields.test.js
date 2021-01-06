@@ -2,12 +2,12 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 import MultipleChoiceListCommon from '@data-driven-forms/common/multiple-choice-list';
-import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
-import Checkbox from '../files/checkbox';
+import { FormRenderer, componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
+import Checkbox from '../checkbox';
 
 import RenderWithProvider from '../../../../__mocks__/with-provider';
-import FormTemplate from '../files/form-template';
-import componentMapper from '../files/component-mapper';
+import FormTemplate from '../form-template';
+import componentMapper from '../component-mapper';
 import { Radio, Dropdown } from 'semantic-ui-react';
 import HelperText from '../helper-text/helper-text';
 

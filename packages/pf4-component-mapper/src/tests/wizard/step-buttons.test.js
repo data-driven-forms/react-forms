@@ -1,12 +1,12 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { mountToJson } from 'enzyme-to-json';
-import selectNext from '../../wizard/wizard/node_modules/@data-driven-forms/common/wizard/select-next';
+import selectNext from '@data-driven-forms/common/wizard/select-next';
 import handleEnter from '@data-driven-forms/common/wizard/enter-handler';
 
 import RenderWithProvider from '../../../../../__mocks__/with-provider';
 
-import WizardStepButtons from '../../wizard/wizard/step-buttons';
+import WizardStepButtons from '../../wizard/wizard-components/step-buttons';
 
 describe('<WizardSTepButtons', () => {
   let initialProps;

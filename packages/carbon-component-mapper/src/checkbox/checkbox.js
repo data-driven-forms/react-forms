@@ -5,8 +5,8 @@ import MultipleChoiceListCommon from '@data-driven-forms/common/multiple-choice-
 
 import { Checkbox as CarbonCheckbox, FormGroup } from 'carbon-components-react';
 
-import WithDescription from '../common/with-description';
-import prepareProps, { buildLabel } from './prepare-props';
+import WithDescription from '../with-description';
+import prepareProps, { buildLabel } from '../prepare-props';
 import HelperTextBlock from '../helper-text-block/helper-text-block';
 
 const Wrapper = ({ label, description, children, helperText, error, showError, isRequired }) => (

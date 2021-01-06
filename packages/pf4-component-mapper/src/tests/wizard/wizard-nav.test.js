@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 
-import WizardNavigation from '../../wizard/wizard/wizard-nav';
+import WizardNavigation from '../../wizard/wizard-components/wizard-nav';
 
 describe('WizardNav', () => {
   class ClassWrapper extends React.Component {

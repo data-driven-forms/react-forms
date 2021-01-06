@@ -1,6 +1,6 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import Tabs from '../files/tabs';
+import Tabs from '../tabs';
 import { mount, shallow } from 'enzyme';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 import { Tabs as PF4Tabs } from '@patternfly/react-core';

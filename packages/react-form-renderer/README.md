@@ -149,7 +149,7 @@ In order to Data Driven Forms in your component you need the renderer and a comp
 
 ```jsx
 import React from 'react';
-import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 import { componentMapper, FormTemplate } from '@data-driven-forms/pf4-component-mapper';
 
 const schema = {
@@ -176,7 +176,7 @@ You can also use custom mapper.
 
 ```jsx
 import React from 'react';
-import FormRenderer, { componentTypes, useFieldApi } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, componentTypes, useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const TextField = props => {
   const {label, input, meta, ...rest} = useFieldApi(props)

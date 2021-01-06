@@ -1,5 +1,5 @@
 import React from 'react';
-import WithDescription from '../common/with-description';
+import WithDescription from '../with-description';
 import IsRequired from '../is-required/is-required';
 
 export const buildLabel = (label, isRequired) => (label && (isRequired ? <IsRequired>{label}</IsRequired> : label)) || undefined;

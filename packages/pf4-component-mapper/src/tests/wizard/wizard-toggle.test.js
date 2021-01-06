@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import WizardToggle from '../../wizard/wizard/wizard-toggle';
+import WizardToggle from '../../wizard/wizard-components/wizard-toggle';
 
 describe('WizardToggle', () => {
   let initialProps;

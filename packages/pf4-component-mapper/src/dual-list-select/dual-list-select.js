@@ -30,7 +30,7 @@ import {
 } from '@patternfly/react-icons';
 
 import './dual-list-select.scss';
-import DualListSelectCommon from '../../../common/src/dual-list-select';
+import DualListSelectCommon from '@data-driven-forms/common/dual-list-select';
 import FormGroup from '../form-group/form-group';
 
 const List = ({ value, optionClick, noOptionsTitle, filterValue, filterValueText, selectedValues, ListProps, ListItemProps, ...rest }) => (

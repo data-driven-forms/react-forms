@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 
-import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 import FormTemplate from '../form-template/form-template';
 import componentMapper from '../component-mapper/component-mapper';
 import { validatorTypes } from '@data-driven-forms/react-form-renderer';

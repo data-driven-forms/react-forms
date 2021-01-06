@@ -1,9 +1,8 @@
 import React from 'react';
-import FormRenderer, { Form, FormSpy } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, Form, FormSpy } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import { FormTemplate } from '../index';
-import { Title, Description, Button } from '../files/form-template';
+import FormTemplate, { Title, Description, Button } from '../form-template';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 
 describe('FormTemplate PF4 Common', () => {
