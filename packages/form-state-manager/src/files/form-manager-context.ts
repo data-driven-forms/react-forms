@@ -19,7 +19,7 @@ const FormManagerContext = createContext<ManagerContextValue>({
   }),
   formOptions: createManagerApi({
     onSubmit: noop
-  }),
+  })(),
   getFieldValue: noop,
   getFieldState: () => undefined,
   blur: noop,
@@ -39,7 +39,8 @@ const FormManagerContext = createContext<ManagerContextValue>({
   shift: noop,
   swap: noop,
   unshift: noop,
-  update: noop
+  update: noop,
+  updateFieldConfig: noop
 });
 
 export default FormManagerContext;

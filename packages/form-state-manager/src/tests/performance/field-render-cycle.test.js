@@ -81,9 +81,9 @@ describe('useField rendering cycle', () => {
 
       return (
         <Fragment>
-          <button id="initialize" onClick={() => formOptions().initialize({ one: 'changed' })} />
-          <button id="reset" onClick={() => formOptions().reset()} />
-          <button id="resetfieldstate" onClick={() => formOptions().resetFieldState('one')} />
+          <button id="initialize" onClick={() => formOptions.initialize({ one: 'changed' })} />
+          <button id="reset" onClick={() => formOptions.reset()} />
+          <button id="resetfieldstate" onClick={() => formOptions.resetFieldState('one')} />
           <button id="submit" type="submit" />
         </Fragment>
       );

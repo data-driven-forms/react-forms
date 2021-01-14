@@ -14,7 +14,7 @@ const focusError = (errors: AnyObject, name?: string): void => {
 
     const errorKeys = Object.keys(errors);
 
-    const firstError = allInputs.find((inp) => errorKeys.includes(inp.name));
+    const firstError = allInputs.find((inp) => errorKeys.includes(inp.name) && errors[inp.name]);
 
     firstError && firstError.focus();
   }

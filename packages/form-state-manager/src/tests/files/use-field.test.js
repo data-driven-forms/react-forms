@@ -27,7 +27,7 @@ const SubscribedComponent = ({ fakeComponent, ...props }) => {
 };
 
 const DummyComponent = ({ subscriberProps, managerApi }) => (
-  <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+  <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
     <SubscribedComponent {...subscriberProps} />
   </FormManagerContext.Provider>
 );
@@ -265,7 +265,7 @@ describe('useField', () => {
       const managerApi = createManagerApi({});
 
       const wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <RenderWatch name="field" />
         </FormManagerContext.Provider>
       );
@@ -284,7 +284,7 @@ describe('useField', () => {
       const managerApi = createManagerApi({});
 
       const wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <RenderWatch name="field" subscription={{ valid: true }} />
         </FormManagerContext.Provider>
       );
@@ -310,7 +310,7 @@ describe('useField', () => {
       const managerApi = createManagerApi({ subscription: { valid: true } });
 
       const wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <RenderWatch name="field" subscription={{ valid: true }} />
         </FormManagerContext.Provider>
       );
@@ -499,7 +499,7 @@ describe('useField', () => {
       const managerApi = createManagerApi({});
 
       const wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <CleanButton name="field" value="some value" clearedValue={null} />
         </FormManagerContext.Provider>
       );
@@ -516,7 +516,7 @@ describe('useField', () => {
       const managerApi = createManagerApi({});
 
       const wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi, clearedValue: null }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi(), clearedValue: null }}>
           <CleanButton name="field" value="some value" />
         </FormManagerContext.Provider>
       );
@@ -533,7 +533,7 @@ describe('useField', () => {
       const managerApi = createManagerApi({});
 
       const wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi, clearedValue: null }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi(), clearedValue: null }}>
           <CleanButton name="field" value="some value" clearedValue="cleared" />
         </FormManagerContext.Provider>
       );
@@ -551,6 +551,7 @@ describe('useField', () => {
     expect(checkEmpty(false)).toEqual(false);
     expect(checkEmpty('A')).toEqual(false);
     expect(checkEmpty(0)).toEqual(false);
+    expect(checkEmpty(new Date())).toEqual(false);
 
     expect(checkEmpty([])).toEqual(true);
     expect(checkEmpty('')).toEqual(true);
@@ -576,7 +577,7 @@ describe('useField', () => {
 
     it('should parse string', async () => {
       wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Setter name="field" dataType="string" />
         </FormManagerContext.Provider>
       );
@@ -593,7 +594,7 @@ describe('useField', () => {
 
     it('should parse float', async () => {
       wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Setter name="field" dataType="float" />
         </FormManagerContext.Provider>
       );
@@ -610,7 +611,7 @@ describe('useField', () => {
 
     it('should parse number', async () => {
       wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Setter name="field" dataType="number" />
         </FormManagerContext.Provider>
       );
@@ -627,7 +628,7 @@ describe('useField', () => {
 
     it('should parse boolean', async () => {
       wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Setter name="field" dataType="boolean" />
         </FormManagerContext.Provider>
       );
@@ -644,7 +645,7 @@ describe('useField', () => {
 
     it('should parse integer', async () => {
       wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Setter name="field" dataType="integer" />
         </FormManagerContext.Provider>
       );
@@ -661,7 +662,7 @@ describe('useField', () => {
 
     it('should parse array of numbers', async () => {
       wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Setter name="field" dataType="number" value={['1', '2', '45']} />
         </FormManagerContext.Provider>
       );
@@ -676,7 +677,7 @@ describe('useField', () => {
 
     it('should parse initialValue - float', async () => {
       wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Setter name="field" dataType="float" initialValue="12.34" />
         </FormManagerContext.Provider>
       );
@@ -686,7 +687,7 @@ describe('useField', () => {
 
     it('should parse defaultValue - float', async () => {
       wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Setter name="field" dataType="float" defaultValue="12.34" />
         </FormManagerContext.Provider>
       );
@@ -696,7 +697,7 @@ describe('useField', () => {
 
     it('should parse defaultValue - objects', async () => {
       wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Setter name="field" dataType="float" defaultValue={[{ value: '23.67' }, { value: '123.34' }]} />
         </FormManagerContext.Provider>
       );
@@ -725,7 +726,7 @@ describe('useField', () => {
 
     it('checkbox with no value', async () => {
       wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Typper name="field" type="checkbox" spy={spy} />
         </FormManagerContext.Provider>
       );
@@ -787,7 +788,7 @@ describe('useField', () => {
       const spyHamster = jest.fn();
 
       wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Typper name="field" value="dog" type="checkbox" spy={spyDog} />
           <Typper name="field" value="cat" type="checkbox" spy={spyCat} />
           <Typper name="field" value="hamster" type="checkbox" spy={spyHamster} />
@@ -968,7 +969,7 @@ describe('useField', () => {
       const spyHamster = jest.fn();
 
       wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Typper name="field" value="dog" type="radio" spy={spyDog} />
           <Typper name="field" value="cat" type="radio" spy={spyCat} />
           <Typper name="field" value="hamster" type="radio" spy={spyHamster} />
@@ -1160,7 +1161,7 @@ describe('useField', () => {
     it('parse value on change', async () => {
       const parse = jest.fn().mockImplementation((value, name) => value * 2);
       wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Dummy name="field" parse={parse} />
         </FormManagerContext.Provider>
       );
@@ -1177,7 +1178,7 @@ describe('useField', () => {
     it('format value', async () => {
       const format = jest.fn().mockImplementation((value, name) => value * 2);
       wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Dummy name="field" format={format} />
         </FormManagerContext.Provider>
       );
@@ -1195,7 +1196,7 @@ describe('useField', () => {
     it('format value on blur', async () => {
       const format = jest.fn().mockImplementation((value, name) => value * 2);
       wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Dummy name="field" format={format} formatOnBlur />
         </FormManagerContext.Provider>
       );
@@ -1227,7 +1228,7 @@ describe('useField', () => {
 
     it('default parse and format handles undefined/empty string', async () => {
       wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Dummy name="field" />
         </FormManagerContext.Provider>
       );
@@ -1267,7 +1268,7 @@ describe('useField', () => {
 
     it('by default converts null to empty string', async () => {
       wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Dummy name="field" />
         </FormManagerContext.Provider>
       );
@@ -1292,7 +1293,7 @@ describe('useField', () => {
       console.error = jest.fn();
 
       wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Dummy name="field" allowNull />
         </FormManagerContext.Provider>
       );
@@ -1328,7 +1329,7 @@ describe('useField', () => {
 
     it('select and deselect multiple', async () => {
       wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Select name="field" multiple />
         </FormManagerContext.Provider>
       );
@@ -1390,7 +1391,7 @@ describe('useField', () => {
     it('register inputFile name and uregister', async () => {
       expect(managerApi().fileInputs).toEqual([]);
       wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Dummy name="field" type="file" />
         </FormManagerContext.Provider>
       );
@@ -1406,7 +1407,7 @@ describe('useField', () => {
 
     it('sanitize value', async () => {
       wrapper = mount(
-        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi }}>
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
           <Dummy name="field" type="file" />
         </FormManagerContext.Provider>
       );

@@ -1,7 +1,6 @@
 export { default as componentTypes } from './component-types';
 export { default as composeValidators } from './compose-validators';
 export { default as condition } from './condition';
-export { default as convertType } from './convert-type';
 export { default as dataTypes } from './data-types';
 export { default as defaultSchemaValidator } from './default-schema-validator';
 export { default as FieldArray } from './field-array';

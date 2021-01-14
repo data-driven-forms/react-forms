@@ -1,7 +1,6 @@
 import React from 'react';
 import { FormRenderer, Form, FormSpy } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
-import toJson from 'enzyme-to-json';
 import FormTemplate, { Title, Description, Button } from '../form-template';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 
@@ -86,7 +85,7 @@ describe('FormTemplate PF4 Common', () => {
         <FormTemplate {...initialProps} />
       </ContextWrapper>
     );
-    expect(toJson(wrapper)).toMatchSnapshot();
+    expect(wrapper.find('button').map((b) => b.text())).toEqual(['Submit', 'Cancel']);
     wrapper
       .find('button')
       .first()
@@ -111,7 +110,7 @@ describe('FormTemplate PF4 Common', () => {
         <FormTemplate {...initialProps} canReset={false} onCancel={undefined} />
       </ContextWrapper>
     );
-    expect(toJson(wrapper)).toMatchSnapshot();
+    expect(wrapper.find('button').map((b) => b.text())).toEqual(['Submit']);
   });
 
   it('should render buttons in correct order', () => {
@@ -120,7 +119,7 @@ describe('FormTemplate PF4 Common', () => {
         <FormTemplate {...initialProps} canSubmit canReset buttonOrder={['cancel', 'submit', 'reset']} />
       </ContextWrapper>
     );
-    expect(toJson(wrapper)).toMatchSnapshot();
+    expect(wrapper.find('button').map((b) => b.text())).toEqual(['Cancel', 'Submit', 'Reset']);
   });
 
   it('should add missing buttons if not defined in button order', () => {
@@ -129,7 +128,7 @@ describe('FormTemplate PF4 Common', () => {
         <FormTemplate {...initialProps} canSubmit canReset buttonOrder={[]} />
       </ContextWrapper>
     );
-    expect(toJson(wrapper)).toMatchSnapshot();
+    expect(wrapper.find('button').map((b) => b.text())).toEqual(['Submit', 'Reset', 'Cancel']);
   });
 
   it('should call cancel with form values', () => {

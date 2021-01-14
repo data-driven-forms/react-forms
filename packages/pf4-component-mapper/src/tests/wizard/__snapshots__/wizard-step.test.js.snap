@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<WizardStep /> should render correctly 1`] = `
-<ReactFinalForm
+<Component
   onSubmit={[MockFunction]}
 >
   <WizardStep
@@ -120,7 +120,7 @@ exports[`<WizardStep /> should render correctly 1`] = `
       <footer
         className="pf-c-wizard__footer "
       >
-        <FormSpy>
+        <Component>
           <NextButton
             getState={[MockFunction]}
             handleNext={[MockFunction]}
@@ -193,15 +193,15 @@ exports[`<WizardStep /> should render correctly 1`] = `
               Cancel
             </button>
           </Button>
-        </FormSpy>
+        </Component>
       </footer>
     </WizardStepButtons>
   </WizardStep>
-</ReactFinalForm>
+</Component>
 `;
 
 exports[`<WizardStep /> should render custom description 1`] = `
-<ReactFinalForm
+<Component
   onSubmit={[MockFunction]}
 >
   <WizardStep
@@ -328,7 +328,7 @@ exports[`<WizardStep /> should render custom description 1`] = `
       <footer
         className="pf-c-wizard__footer "
       >
-        <FormSpy>
+        <Component>
           <NextButton
             getState={[MockFunction]}
             handleNext={[MockFunction]}
@@ -401,15 +401,15 @@ exports[`<WizardStep /> should render custom description 1`] = `
               Cancel
             </button>
           </Button>
-        </FormSpy>
+        </Component>
       </footer>
     </WizardStepButtons>
   </WizardStep>
-</ReactFinalForm>
+</Component>
 `;
 
 exports[`<WizardStep /> should render title with showTitle 1`] = `
-<ReactFinalForm
+<Component
   onSubmit={[MockFunction]}
 >
   <WizardStep
@@ -565,7 +565,7 @@ exports[`<WizardStep /> should render title with showTitle 1`] = `
       <footer
         className="pf-c-wizard__footer "
       >
-        <FormSpy>
+        <Component>
           <NextButton
             getState={[MockFunction]}
             handleNext={[MockFunction]}
@@ -638,9 +638,9 @@ exports[`<WizardStep /> should render title with showTitle 1`] = `
               Cancel
             </button>
           </Button>
-        </FormSpy>
+        </Component>
       </footer>
     </WizardStepButtons>
   </WizardStep>
-</ReactFinalForm>
+</Component>
 `;

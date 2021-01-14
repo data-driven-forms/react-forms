@@ -10,7 +10,6 @@ export interface ValidatorType extends Object {
 export interface UseFieldApiConfig extends AnyObject {
   name: string;
   validate?: ValidatorType[];
-  useWarnings?: boolean;
 }
 export interface UseFieldApiComponentConfig extends UseFieldConfig<any>  {
   name: string;

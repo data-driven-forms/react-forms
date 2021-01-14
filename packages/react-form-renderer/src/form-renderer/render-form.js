@@ -18,7 +18,7 @@ FormFieldHideWrapper.defaultProps = {
 
 const FormConditionWrapper = ({ condition, children, field }) =>
   condition ? (
-    <FormSpy>
+    <FormSpy subscription={{ values: true }}>
       {({ values }) => (
         <Condition condition={condition} values={values} field={field}>
           {children}

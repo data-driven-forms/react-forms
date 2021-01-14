@@ -122,11 +122,6 @@ const Footer = ({ open }) => {
                   label="PF4 component mapper"
                 />
                 <RepoLink
-                  href="https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper"
-                  icon=<NpmSvgIcon />
-                  label="PF3 component mapper"
-                />
-                <RepoLink
                   href="https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper"
                   icon=<NpmSvgIcon />
                   label="MUI component mapper"

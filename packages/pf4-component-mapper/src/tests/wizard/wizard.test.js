@@ -1,6 +1,5 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import toJSon from 'enzyme-to-json';
 import { TextInput, Button, WizardNavItem } from '@patternfly/react-core';
 import { act } from 'react-dom/test-utils';
 
@@ -183,10 +182,10 @@ describe('<Wizard />', () => {
   it('should render correctly and unmount', () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
 
-    expect(toJSon(wrapper)).toMatchSnapshot();
+    expect(wrapper.find('WizardFunction')).toHaveLength(1);
     wrapper.unmount();
     wrapper.update();
-    expect(toJSon(wrapper)).toMatchSnapshot();
+    expect(wrapper.find('WizardFunction')).toHaveLength(0);
   });
 
   it('should open nav', async () => {
@@ -392,10 +391,10 @@ describe('<Wizard />', () => {
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
-    expect(toJSon(wrapper)).toMatchSnapshot();
+    expect(wrapper.find('WizardFunction')).toHaveLength(1);
     wrapper.unmount();
     wrapper.update();
-    expect(toJSon(wrapper)).toMatchSnapshot();
+    expect(wrapper.find('WizardFunction')).toHaveLength(0);
   });
 
   it('should render correctly with custom title and description', () => {

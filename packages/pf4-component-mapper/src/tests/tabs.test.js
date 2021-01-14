@@ -1,7 +1,6 @@
 import React from 'react';
-import toJson from 'enzyme-to-json';
 import Tabs from '../tabs';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 import { Tabs as PF4Tabs } from '@patternfly/react-core';
 
@@ -22,18 +21,19 @@ describe('Tabs component', () => {
   };
 
   it('should render tabs correctly', () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <RenderWithProvider
         value={{
           formOptions: {
-            renderForm: (fields, formOptions) => <div>{'Here would be form'}</div>
+            renderForm: (fields, formOptions) => <span className="content">Here would be form</span>
           }
         }}
       >
         <Tabs {...props}></Tabs>
       </RenderWithProvider>
     );
-    expect(toJson(wrapper.dive())).toMatchSnapshot();
+    expect(wrapper.find(PF4Tabs)).toHaveLength(1);
+    expect(wrapper.find('.content')).toHaveLength(2);
   });
 
   it('should switch tabs correctly', () => {
