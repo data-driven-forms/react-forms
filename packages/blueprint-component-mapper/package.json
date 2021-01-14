@@ -2,12 +2,9 @@
   "name": "@data-driven-forms/blueprint-component-mapper",
   "version": "2.17.0",
   "description": "Blueprint component mapper for data-driven-forms.",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "typings": "dist/cjs/index.d.ts",
-  "files": [
-    "dist/"
-  ],
+  "main": "index.js",
+  "module": "esm/index.js",
+  "typings": "index.d.ts",
   "license": "Apache-2.0",
   "scripts": {
     "start": "webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
