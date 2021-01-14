@@ -3,15 +3,15 @@ import { act } from 'react-dom/test-utils';
 import toJson from 'enzyme-to-json';
 import { FormGroup, Radio as PF4Radio } from '@patternfly/react-core';
 import { mount } from 'enzyme';
-import Checkbox from '../files/checkbox';
-import Switch from '../files/switch';
+import Checkbox from '../checkbox';
+import Switch from '../switch';
 
 import RenderWithProvider from '../../../../__mocks__/with-provider';
-import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
-import FormTemplate from '../files/form-template';
-import componentMapper from '../files/component-mapper';
+import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
+import FormTemplate from '../form-template';
+import componentMapper from '../component-mapper';
 import { validatorTypes } from '@data-driven-forms/react-form-renderer';
-import MultipleChoiceListCommon from '@data-driven-forms/common/src/multiple-choice-list';
+import MultipleChoiceListCommon from '@data-driven-forms/common/multiple-choice-list';
 
 describe('FormFields', () => {
   const props = {

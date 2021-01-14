@@ -1,6 +1,6 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
 
 import { List, ListItem, IconButton, Toolbar, TextField } from '@material-ui/core';
@@ -11,7 +11,7 @@ import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 import SortIcon from '@material-ui/icons/ArrowUpward';
 
 import { componentMapper, FormTemplate } from '../index';
-import FormFieldGrid from '../common/form-field-grid';
+import FormFieldGrid from '../form-field-grid';
 
 describe('DualListSelect', () => {
   let onSubmit;

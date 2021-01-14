@@ -10,8 +10,8 @@ Data Driven Forms is built in three module formats: CJS, ESM and UMD.
 
 ```jsx
 --- { "switchable": false } ---
-import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
-import useField from '@data-driven-forms/react-form-renderer/dist/cjs/use-field';
+import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
+import useField from '@data-driven-forms/react-form-renderer/use-field';
 ```
 
 ## ESM
@@ -30,7 +30,7 @@ In both of CJS and ESM, exported files follow the kebab case. All components are
 
 ```jsx
 --- { "switchable": false } ---
-import FormRenderer, { useField } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, useField } from '@data-driven-forms/react-form-renderer';
 ```
 
 Only the `FormRenderer` component is exported as a default. In all other packages, use only named exports.
@@ -57,7 +57,7 @@ const transformDDFImportsToCJS = [
   {
     '@data-driven-forms/react-form-renderer': {
       transform: (importName) =>
-        `@data-driven-forms/react-form-renderer/dist/cjs/${importName
+        `@data-driven-forms/react-form-renderer/${importName
               .split(/(?=[A-Z])/)
               .join('-')
               .toLowerCase()}.js`,
@@ -83,7 +83,7 @@ Result:
 --- { "switchable": false } ---
 import { useField } from '@data-driven-forms/react-form-renderer';
 // ^^ this will be converted to >>
-import useField from '@data-driven-forms/react-form-renderer/dist/cjs/use-field';
+import useField from '@data-driven-forms/react-form-renderer/use-field';
 ```
 
 </DocPage>

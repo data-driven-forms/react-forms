@@ -1,9 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import FormTabs from '../files/tabs';
+import FormTabs from '../tabs';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
-import FormRenderer, { validatorTypes } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import { componentMapper, FormTemplate } from '../index';
 import { Tab } from 'semantic-ui-react';
 

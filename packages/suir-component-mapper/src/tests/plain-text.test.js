@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import PlainText from '../files/plain-text';
+import PlainText from '../plain-text';
 
 describe('PlainText component', () => {
   it('renders correctly with three paragraphs', () => {

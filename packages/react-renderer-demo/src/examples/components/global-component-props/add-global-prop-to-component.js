@@ -1,9 +1,9 @@
 import React from 'react';
-import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
-import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
-import Switch from '@data-driven-forms/mui-component-mapper/dist/cjs/switch';
-import TextField from '@data-driven-forms/mui-component-mapper/dist/cjs/text-field';
-import FormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
+import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
+import componentTypes from '@data-driven-forms/react-form-renderer/component-types';
+import Switch from '@data-driven-forms/mui-component-mapper/switch';
+import TextField from '@data-driven-forms/mui-component-mapper/text-field';
+import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useInputClasses = makeStyles({

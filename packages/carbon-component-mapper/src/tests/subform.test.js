@@ -1,13 +1,13 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
-import FormTemplate from '../files/form-template';
-import componentMapper from '../files/component-mapper';
-import WrapperTextField from '../files/text-field';
-import WrapperSwitch from '../files/switch';
-import SubForm from '../files/sub-form';
+import FormTemplate from '../form-template';
+import componentMapper from '../component-mapper';
+import WrapperTextField from '../text-field';
+import WrapperSwitch from '../switch';
+import SubForm from '../sub-form';
 
 describe('<SubForm />', () => {
   it('renders correctly', () => {

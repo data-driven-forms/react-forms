@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import FormRenderer, { useFieldApi, componentTypes, validatorTypes } from '../src';
+import { FormRenderer, useFieldApi, componentTypes, validatorTypes } from '../src';
 import componentMapper from './form-fields-mapper';
 import FormTemplate from './form-template';
 

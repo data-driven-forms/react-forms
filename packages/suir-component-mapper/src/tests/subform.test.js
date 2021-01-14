@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import Subform from '../files/sub-form';
+import Subform from '../sub-form';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 import { Header } from 'semantic-ui-react';
 

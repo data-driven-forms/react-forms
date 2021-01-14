@@ -1,5 +1,5 @@
 import React from 'react';
-import Tabs from '../files/tabs';
+import Tabs from '../tabs';
 import { mount } from 'enzyme';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 import { Tabs as PF4Tabs } from '@patternfly/react-core';

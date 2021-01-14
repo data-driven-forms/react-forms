@@ -3,13 +3,11 @@ import { mount } from 'enzyme';
 import { TextInput, Button, WizardNavItem } from '@patternfly/react-core';
 import { act } from 'react-dom/test-utils';
 
-import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
-import * as enterHandle from '@data-driven-forms/common/src/wizard/enter-handler';
+import { FormRenderer, componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
+import * as enterHandle from '@data-driven-forms/common/wizard/enter-handler';
 
 import { componentMapper, FormTemplate } from '../../index';
-import reducer from '../../files/wizard/reducer';
-import WizardToggle from '../../files/wizard/wizard-toggle';
-import Wizard from '../../files/wizard';
+import reducer from '../../wizard/wizard-components/reducer';
 
 describe('<Wizard />', () => {
   let initialProps;
@@ -184,23 +182,23 @@ describe('<Wizard />', () => {
   it('should render correctly and unmount', () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find(Wizard)).toHaveLength(1);
+    expect(wrapper.find('WizardFunction')).toHaveLength(1);
     wrapper.unmount();
     wrapper.update();
-    expect(wrapper.find(Wizard)).toHaveLength(0);
+    expect(wrapper.find('WizardFunction')).toHaveLength(0);
   });
 
   it('should open nav', async () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find(WizardToggle).props().isOpen).toEqual(false);
+    expect(wrapper.find('WizardToggle').props().isOpen).toEqual(false);
 
     await act(async () => {
       wrapper.find('.pf-c-wizard__toggle').simulate('click');
     });
     wrapper.update();
 
-    expect(wrapper.find(WizardToggle).props().isOpen).toEqual(true);
+    expect(wrapper.find('WizardToggle').props().isOpen).toEqual(true);
   });
 
   it('should call enter handler when pressing enter', () => {
@@ -393,10 +391,10 @@ describe('<Wizard />', () => {
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
-    expect(wrapper.find(Wizard)).toHaveLength(1);
+    expect(wrapper.find('WizardFunction')).toHaveLength(1);
     wrapper.unmount();
     wrapper.update();
-    expect(wrapper.find(Wizard)).toHaveLength(0);
+    expect(wrapper.find('WizardFunction')).toHaveLength(0);
   });
 
   it('should render correctly with custom title and description', () => {

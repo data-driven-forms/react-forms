@@ -23,7 +23,7 @@ import FormExample from './formExample';
 import CodeEditor from '@docs/components/code-editor';
 
 const value = `import React from 'react';
-import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 import { componentMapper, FormTemplate } from '@data-driven-forms/pf4-component-mapper';
 
 const validatorMapper = {

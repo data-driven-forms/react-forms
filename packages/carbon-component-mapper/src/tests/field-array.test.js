@@ -1,11 +1,9 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
 
 import { componentMapper, FormTemplate } from '../index';
-
-import WithDescription from '../common/with-description';
 
 describe('<FieldArray/>', () => {
   let initialProps;
@@ -65,7 +63,7 @@ describe('<FieldArray/>', () => {
 
     expect(wrapper.find('input')).toHaveLength(0);
     expect(wrapper.text().includes(label)).toEqual(true);
-    expect(wrapper.find(WithDescription).props().description).toEqual(description);
+    expect(wrapper.find('WithDescription').props().description).toEqual(description);
     expect(wrapper.text().includes(noItemsMessage)).toEqual(true);
 
     expect(
@@ -85,7 +83,7 @@ describe('<FieldArray/>', () => {
 
     expect(wrapper.find('input')).toHaveLength(1);
     expect(wrapper.text().includes(label)).toEqual(true);
-    expect(wrapper.find(WithDescription).props().description).toEqual(description);
+    expect(wrapper.find('WithDescription').props().description).toEqual(description);
     expect(wrapper.text().includes(noItemsMessage)).toEqual(false);
 
     expect(

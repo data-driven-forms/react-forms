@@ -1,9 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
-import FormTemplate from '../files/form-template';
-import componentMapper from '../files/component-mapper';
+import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
+import FormTemplate from '../form-template';
+import componentMapper from '../component-mapper';
 import { Title, Text } from '@patternfly/react-core';
 
 describe('SubForm component', () => {

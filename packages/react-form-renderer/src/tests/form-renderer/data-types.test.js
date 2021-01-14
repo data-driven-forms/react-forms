@@ -1,9 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import FormRenderer from '../../files/form-renderer';
+import FormRenderer from '../../form-renderer';
 import FormTemplate from '../../../../../__mocks__/mock-form-template';
-import componentTypes from '../../files/component-types';
-import useFieldApi from '../../files/use-field-api';
+import componentTypes from '../../component-types';
+import useFieldApi from '../../use-field-api';
 
 const DataTypeInput = (props) => {
   const { input, type, label } = useFieldApi(props);

@@ -1,9 +1,9 @@
 import React from 'react';
-import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
-import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
-import validatorTypes from '@data-driven-forms/react-form-renderer/dist/cjs/validator-types';
-import FormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
-import TextField from '@data-driven-forms/mui-component-mapper/dist/cjs/text-field';
+import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
+import componentTypes from '@data-driven-forms/react-form-renderer/component-types';
+import validatorTypes from '@data-driven-forms/react-form-renderer/validator-types';
+import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template';
+import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField

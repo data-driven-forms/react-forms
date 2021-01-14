@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build": "lerna run build --concurrency 1 --ignore @data-driven-forms/react-renderer-demo",
+    "build": "yarn clean-build && lerna run build --concurrency 1 --ignore @data-driven-forms/react-renderer-demo --ignore @data-driven-forms/pf3-component-mapper",
     "vendor": "lerna run vendor",
     "test": "jest --coverage",
     "test:ci": "jest --coverage --runInBand",
@@ -16,15 +16,21 @@
     "release": "semantic-release",
     "codecov": "codecov",
     "start-demo": "lerna run start --scope=@data-driven-forms/react-render-demo",
-    "lint": "yarn eslint .",
+    "lint": "yarn eslint ./packages/*/src",
     "lint:ts": "tslint -c ./tslint.json 'packages/**/*.d.ts'",
-    "generate-template": "node ./scripts/generate-mapper.js"
+    "generate-template": "node ./scripts/generate-mapper.js",
+    "clean-build": "node ./scripts/clean-build.js",
+    "preinstall": "node ./scripts/clean-build.js"
   },
   "workspaces": [
     "packages/**"
   ],
   "jest": {
     "verbose": true,
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/pf3-component-mapper/"
+    ],
     "setupFiles": [
       "<rootDir>/config/jest.setup.js"
     ],
@@ -33,8 +39,10 @@
       "<rootDir>/packages/**/src/**/*.ts",
       "!<rootDir>/packages/**/src/**/*.d.ts",
       "!<rootDir>/packages/react-renderer-demo/**/*.js",
+      "!<rootDir>/packages/pf3-component-mapper/**/*.js",
       "!<rootDir>/packages/**/dist",
-      "!<rootDir>/templates/**/*.js"
+      "!<rootDir>/templates/**/*.js",
+      "!<rootDir>/packages/**/src/**/index.js"
     ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
@@ -72,6 +80,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^2.4.0",
+    "fs-extra": "^9.0.1",
     "glob": "^7.1.6",
     "identity-obj-proxy": "^3.0.0",
     "inquirer": "^7.1.0",
@@ -91,7 +100,20 @@
   },
   "release": {
     "monorepo": "./packages",
-    "branches": ["+([0-9])?(.{+([0-9]),x}).x", "master", "next", "next-major", {"name": "beta", "prerelease": true}, {"name": "alpha", "prerelease": true}],
+    "branches": [
+      "+([0-9])?(.{+([0-9]),x}).x",
+      "master",
+      "next",
+      "next-major",
+      {
+        "name": "beta",
+        "prerelease": true
+      },
+      {
+        "name": "alpha",
+        "prerelease": true
+      }
+    ],
     "plugins": [
       "@khala/npm-release-monorepo",
       [
