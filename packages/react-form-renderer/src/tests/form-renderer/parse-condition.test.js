@@ -543,4 +543,105 @@ describe('parseCondition', () => {
       expect(whenSpyY).toHaveBeenCalledWith(field);
     });
   });
+
+  it('simple condition - custom function', () => {
+    const customFunction = jest.fn().mockImplementation((value) => Boolean(value));
+
+    condition = {
+      when: 'x',
+      is: customFunction,
+      customArg: '123'
+    };
+
+    values = {
+      x: 1
+    };
+
+    expect(parseCondition(condition, values)).toEqual(positiveResult);
+    expect(customFunction).toHaveBeenCalledWith(1, { customArg: '123', when: 'x', is: expect.any(Function) });
+
+    values = {
+      x: 0
+    };
+
+    expect(parseCondition(condition, values)).toEqual(negativeResult);
+  });
+
+  describe('math operations', () => {
+    it('greaterThan', () => {
+      condition = {
+        when: 'x',
+        greaterThan: 0
+      };
+
+      values = {
+        x: 1
+      };
+
+      expect(parseCondition(condition, values)).toEqual(positiveResult);
+
+      values = {
+        x: 0
+      };
+
+      expect(parseCondition(condition, values)).toEqual(negativeResult);
+    });
+
+    it('greaterThanOrEqualTo', () => {
+      condition = {
+        when: 'x',
+        greaterThanOrEqualTo: 0
+      };
+
+      values = {
+        x: 0
+      };
+
+      expect(parseCondition(condition, values)).toEqual(positiveResult);
+
+      values = {
+        x: -1
+      };
+
+      expect(parseCondition(condition, values)).toEqual(negativeResult);
+    });
+
+    it('lessThan', () => {
+      condition = {
+        when: 'x',
+        lessThan: 0
+      };
+
+      values = {
+        x: -1
+      };
+
+      expect(parseCondition(condition, values)).toEqual(positiveResult);
+
+      values = {
+        x: 1
+      };
+
+      expect(parseCondition(condition, values)).toEqual(negativeResult);
+    });
+
+    it('lessThanOrEqualTo', () => {
+      condition = {
+        when: 'x',
+        lessThanOrEqualTo: 0
+      };
+
+      values = {
+        x: 0
+      };
+
+      expect(parseCondition(condition, values)).toEqual(positiveResult);
+
+      values = {
+        x: 1
+      };
+
+      expect(parseCondition(condition, values)).toEqual(negativeResult);
+    });
+  });
 });

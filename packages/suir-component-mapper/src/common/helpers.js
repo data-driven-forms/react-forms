@@ -1,9 +1,9 @@
 export const validationError = (meta, validateOnMount) => {
   if (validateOnMount) {
-    return meta.error;
+    return meta.error || meta.submitError;
   }
 
-  return meta.touched && meta.error;
+  return meta.touched && (meta.error || meta.submitError);
 };
 
 export const validationWarning = (meta, validateOnMount) => {

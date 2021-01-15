@@ -186,7 +186,7 @@ const DualList = ({
         required={isRequired}
         error={
           invalid && {
-            content: meta.error,
+            content: meta.error || meta.submitError,
             pointing: 'left',
             ...labelError
           }

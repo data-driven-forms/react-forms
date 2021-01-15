@@ -1,9 +1,10 @@
 import { TypographyProps } from "@material-ui/core";
-import { ReactNode } from "react";
+import { ElementType, ReactNode } from "react";
 
-export interface PlainTextProps extends TypographyProps {
+export interface PlainTextProps extends Omit<TypographyProps, 'component'> {
   label: ReactNode;
   name: string;
+  element?: ElementType;
 }
 
 declare const PlainText: React.ComponentType<PlainTextProps>;

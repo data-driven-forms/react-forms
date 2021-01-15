@@ -53,7 +53,7 @@ export const Switch = (props) => {
       <FormField
         required={isRequired}
         className={clsx(classes.root, className)}
-        error={invalid && { content: meta.error, pointing: 'left' }}
+        error={invalid && { content: meta.error || meta.submitError, pointing: 'left' }}
         {...rest}
         label={
           <FormCheckbox

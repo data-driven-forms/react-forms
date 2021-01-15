@@ -37,7 +37,7 @@ const TextField = (props) => {
         {...input}
         error={
           invalid && {
-            content: meta.error
+            content: meta.error || meta.submitError
           }
         }
       />

@@ -14,7 +14,7 @@ const TimePicker = (props) => {
   const [format, selectFormat] = useState('AM');
   const isMounted = useRef(false);
 
-  const invalid = (meta.touched || validateOnMount) && meta.error;
+  const invalid = (meta.touched || validateOnMount) && (meta.error || meta.submitError);
   const warnText = (meta.touched || validateOnMount) && meta.warning;
 
   let finalValue = input.value;

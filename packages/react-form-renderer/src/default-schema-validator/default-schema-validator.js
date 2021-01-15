@@ -114,11 +114,17 @@ const checkCondition = (condition, fieldName, isRoot) => {
       !condition.hasOwnProperty('is') &&
       !condition.hasOwnProperty('isEmpty') &&
       !condition.hasOwnProperty('isNotEmpty') &&
-      !condition.hasOwnProperty('pattern')
+      !condition.hasOwnProperty('pattern') &&
+      !condition.hasOwnProperty('greaterThan') &&
+      !condition.hasOwnProperty('greaterThanOrEqualTo') &&
+      !condition.hasOwnProperty('lessThan') &&
+      !condition.hasOwnProperty('lessThanOrEqualTo')
     ) {
       throw new DefaultSchemaError(`
       Error occured in field definition with name: "${fieldName}".
-      Field condition must have one of "is", "isEmpty", "isNotEmpty", "pattern" property! Properties received: [${Object.keys(condition)}].
+      Field condition must have one of "is", "isEmpty", "isNotEmpty", "pattern", "greaterThan", "greaterThanOrEqualTo", "lessThan", "lessThanOrEqualTo" property! Properties received: [${Object.keys(
+        condition
+      )}].
     `);
     }
 

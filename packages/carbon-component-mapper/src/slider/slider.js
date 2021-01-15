@@ -10,7 +10,7 @@ import HelperTextBlock from '../helper-text-block/helper-text-block';
 const Slider = (props) => {
   const { input, meta, isRequired, validateOnMount, helperText, WrapperProps, ...rest } = useFieldApi(prepareProps(props));
 
-  const invalid = (meta.touched || validateOnMount) && meta.error;
+  const invalid = (meta.touched || validateOnMount) && (meta.error || meta.submitError);
   const warnText = (meta.touched || validateOnMount) && meta.warning;
 
   return (

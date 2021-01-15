@@ -1,6 +1,6 @@
 ---
 name: Issue
-about: This is a general issue for Data Driven Forms library.
+about: Issues are intended for reporting bugs. If you have questions/ideas or if you need any help, please use Discussions first.
 title: ''
 labels: ''
 assignees: ''

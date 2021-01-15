@@ -123,6 +123,10 @@ const schemaNav = [
     linkText: 'Pattern'
   },
   {
+    component: 'comparators',
+    linkText: 'Comparators'
+  },
+  {
     component: 'condition-sequence',
     linkText: 'Sequence'
   },

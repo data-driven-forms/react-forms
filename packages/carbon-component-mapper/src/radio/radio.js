@@ -12,7 +12,7 @@ const Radio = (props) => {
     prepareProps({ type: 'radio', ...props })
   );
 
-  const invalid = (meta.touched || validateOnMount) && meta.error;
+  const invalid = (meta.touched || validateOnMount) && (meta.error || meta.submitError);
   const warnText = (meta.touched || validateOnMount) && meta.warning;
 
   return (

@@ -68,8 +68,8 @@ const FieldArray = (props) => {
 
   const { required } = useContext(BlueprintContext);
 
-  const { error, touched } = meta;
-  const showError = (validateOnMount || touched) && error;
+  const { error, touched, submitError } = meta;
+  const showError = (validateOnMount || touched) && (error || submitError);
 
   const text = showError ? error : helperText || description;
 

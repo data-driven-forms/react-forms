@@ -32,7 +32,7 @@ const DatePicker = (props) => {
         required={isRequired}
         error={
           invalid && {
-            content: meta.error
+            content: meta.error || meta.submitError
           }
         }
         {...rest}

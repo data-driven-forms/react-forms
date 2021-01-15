@@ -231,6 +231,17 @@ describe('formFields', () => {
             ).toEqual(true);
           }
         });
+
+        it('renders with error', () => {
+          const wrapper = mount(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
+          wrapper.find('form').simulate('submit');
+          expect(
+            wrapper
+              .find('.ui.pointing.prompt.label')
+              .last()
+              .text()
+          ).toEqual(errorText);
+        });
       });
     });
   });

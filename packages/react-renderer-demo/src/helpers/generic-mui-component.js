@@ -26,7 +26,8 @@ const mapperLinks = {
     'text-field': 'text-field',
     'time-picker': 'text-field',
     'checkbox-multiple': 'checkbox',
-    'text-area': 'textarea'
+    'text-area': 'textarea',
+    'plain-text': 'typography'
   },
   blueprint: {
     [componentTypes.TEXT_FIELD]: '#core/components/text-inputs',
