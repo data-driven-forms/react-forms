@@ -17,6 +17,7 @@ const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (
     FormTemplate={(props) => <FormTemplate {...props} />}
     schema={schema}
     componentMapper={componentMapper}
+    subscription={{ submitFailed: true }}
     {...props}
   />
 );
@@ -255,7 +256,7 @@ describe('formFields', () => {
           }
         });
 
-        it('renders with error', () => {
+        it('renders with submitError', () => {
           const wrapper = mount(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
           wrapper.find('form').simulate('submit');
           expect(

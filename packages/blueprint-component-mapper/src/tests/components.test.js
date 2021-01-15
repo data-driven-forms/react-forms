@@ -15,6 +15,7 @@ describe('formFields generated tests', () => {
       FormTemplate={(props) => <FormTemplate {...props} />}
       schema={schema}
       componentMapper={componentMapper}
+      subscription={{ submitFailed: true }}
       {...props}
     />
   );

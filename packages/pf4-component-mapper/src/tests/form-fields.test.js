@@ -48,6 +48,7 @@ describe('FormFields', () => {
         FormTemplate={(props) => <FormTemplate {...props} />}
         schema={schema}
         componentMapper={componentMapper}
+        subscription={{ submitFailed: true }}
         {...props}
       />
     );
@@ -305,9 +306,14 @@ describe('FormFields', () => {
             }
           });
 
-          it('renders with submit error', () => {
+          it('renders with submit error', async () => {
             const wrapper = mount(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
-            wrapper.find('form').simulate('submit');
+
+            await act(async () => {
+              wrapper.find('form').simulate('submit');
+            });
+            wrapper.update();
+
             expect(
               wrapper
                 .find('.pf-m-error')
