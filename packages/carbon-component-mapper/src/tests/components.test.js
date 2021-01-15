@@ -208,6 +208,20 @@ describe('component tests', () => {
           const wrapper = mount(<RendererWrapper schema={{ fields: [requiredField] }} />);
           expect(wrapper.find('.ddorg__carbon-component-mapper_is-required').text()).toEqual('*');
         });
+
+        it('renders with submitError', () => {
+          const wrapper = mount(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
+          wrapper.find('form').simulate('submit');
+
+          if (wrapper.find('#field-name-error-msg').length) {
+            expect(wrapper.find('#field-name-error-msg').text()).toEqual(errorText);
+            expect(wrapper.find('[invalid=true]').length).toBeGreaterThanOrEqual(1);
+          }
+
+          if (wrapper.find('.ddorg__carbon-error-helper-text').length) {
+            expect(wrapper.find('.ddorg__carbon-error-helper-text').text()).toEqual(errorText);
+          }
+        });
       });
     });
   });

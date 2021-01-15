@@ -22,8 +22,8 @@ export const FormGroupInternal = ({
 }) => {
   const { required } = useContext(BlueprintContext);
 
-  const { error, touched, warning } = meta;
-  const showError = (validateOnMount || touched) && error;
+  const { error, touched, warning, submitError } = meta;
+  const showError = (validateOnMount || touched) && (error || submitError);
   const showWarning = (validateOnMount || touched) && warning;
 
   const text = showError || showWarning || helperText || description;

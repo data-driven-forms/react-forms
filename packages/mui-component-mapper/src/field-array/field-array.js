@@ -133,12 +133,17 @@ const DynamicArray = ({ ...props }) => {
 
   const classes = useFielArrayStyles();
 
-  const { dirty, submitFailed, error } = meta;
+  const { dirty, submitFailed, error, submitError } = meta;
   const isError = (dirty || submitFailed) && error && typeof error === 'string';
 
   return (
     <FormFieldGrid {...FormFieldGridProps} className={clsx(classes.fieldArrayGroup, FormFieldGridProps.classname)}>
-      <FormControl component="fieldset" error={isError} {...FormControlProps} className={clsx(classes.formControl, FormControlProps.className)}>
+      <FormControl
+        component="fieldset"
+        error={isError || submitError}
+        {...FormControlProps}
+        className={clsx(classes.formControl, FormControlProps.className)}
+      >
         <FieldArray key={rest.input.name} name={rest.input.name} validate={arrayValidator}>
           {({ fields: { map, value = [], push, remove } }) => {
             const pushWrapper = () => {
@@ -204,9 +209,9 @@ const DynamicArray = ({ ...props }) => {
                     ))
                   )}
                 </Grid>
-                {isError && (
+                {(isError || submitError) && (
                   <Grid item xs={12}>
-                    <FormHelperText>{error}</FormHelperText>
+                    <FormHelperText>{error || submitError}</FormHelperText>
                   </Grid>
                 )}
               </Grid>

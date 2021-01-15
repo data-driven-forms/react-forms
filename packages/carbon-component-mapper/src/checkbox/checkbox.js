@@ -31,7 +31,7 @@ Wrapper.propTypes = {
 const SingleCheckbox = (props) => {
   const { input, meta, validateOnMount, helperText, WrapperProps, ...rest } = useFieldApi(prepareProps({ ...props, type: 'checkbox' }));
 
-  const invalid = (meta.touched || validateOnMount) && meta.error;
+  const invalid = (meta.touched || validateOnMount) && (meta.error || meta.submitError);
 
   const warnText = (meta.touched || validateOnMount) && meta.warning;
 

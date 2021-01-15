@@ -8,11 +8,11 @@ import fnToString from '@data-driven-forms/common/utils/fn-to-string';
 import { Select as CarbonSelect, MultiSelect, SelectItem, ComboBox } from 'carbon-components-react';
 import prepareProps from '../prepare-props';
 
-export const multiOnChange = (input, simpleValue) => ({ selectedItems }) => {
+export const multiOnChange = (input, simpleValue) => ({ selectedItem, selectedItems }) => {
   if (simpleValue) {
-    return input.onChange(selectedItems.map(({ value }) => value));
+    return input.onChange(selectedItems.map(({ value }) => value) || selectedItem.value);
   } else {
-    return input.onChange(selectedItems);
+    return input.onChange(selectedItems || selectedItem);
   }
 };
 
@@ -236,7 +236,7 @@ const Select = (props) => {
   const Component =
     isMulti && isSearchClear ? ClearedMultiSelectFilterable : isMulti ? ClearedMultiSelect : isSearchClear ? ClearedSelectSearchable : ClearedSelect;
 
-  const invalidText = ((meta.touched || validateOnMount) && meta.error) || '';
+  const invalidText = ((meta.touched || validateOnMount) && (meta.error || meta.submitError)) || '';
   const text = ((meta.touched || validateOnMount) && meta.warning) || helperText;
 
   return (

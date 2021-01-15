@@ -20,7 +20,7 @@ const TimePicker = (props) => {
         disabled={isDisabled}
         error={
           invalid && {
-            content: meta.error
+            content: meta.error || meta.submitError
           }
         }
         control={(props) => <input {...props} readOnly={isReadOnly} disabled={isDisabled} />}

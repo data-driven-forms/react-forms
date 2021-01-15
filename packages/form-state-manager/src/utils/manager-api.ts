@@ -646,6 +646,20 @@ const createManagerApi: CreateManagerApi = ({
       return;
     }
 
+    state.registeredFields.forEach((name) => {
+      const warning = getFieldState(name)?.meta.warning;
+
+      if (warning) {
+        setFieldState(name, (state) => ({
+          ...state,
+          meta: {
+            ...state.meta,
+            touched: true
+          }
+        }));
+      }
+    });
+
     let error = false;
     state.registeredFields.forEach((name) =>
       traverseObject(state.fieldListeners[name].fields, (field) => {
@@ -703,7 +717,8 @@ const createManagerApi: CreateManagerApi = ({
               submitFailed: state.submitFailed,
               submitSucceeded: state.submitSucceeded,
               submitError: flatSubmitErrors[name],
-              submitting: state.submitting
+              submitting: state.submitting,
+              ...(flatSubmitErrors[name] && { touched: true })
             }
           }),
           true

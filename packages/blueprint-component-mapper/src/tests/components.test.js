@@ -15,6 +15,7 @@ describe('formFields generated tests', () => {
       FormTemplate={(props) => <FormTemplate {...props} />}
       schema={schema}
       componentMapper={componentMapper}
+      subscription={{ submitFailed: true }}
       {...props}
     />
   );
@@ -262,6 +263,18 @@ describe('formFields generated tests', () => {
               expect(wrapper.find('.bp3-disabled').length).toBeGreaterThanOrEqual(1);
             }
           }
+        });
+
+        it('renders with error', () => {
+          const wrapper = mount(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
+          wrapper.find('form').simulate('submit');
+          expect(
+            wrapper
+              .find('.bp3-form-helper-text')
+              .last()
+              .text()
+          ).toEqual(errorText);
+          expect(wrapper.find('.bp3-intent-danger').length).toBeGreaterThanOrEqual(1);
         });
       });
     });

@@ -16,7 +16,10 @@ const createSchema = ({ formOptions, fields }) => {
         name: field.name,
         title: field.title,
         substepOf: field.substepOf?.name || field.substepOf,
-        substepOfTitle: field.substepOf?.title || field.substepOf,
+        substepOfTitle:
+          (field.substepOf === schema[schema.length - 1]?.substepOf && schema[schema.length - 1]?.substepOfTitle) ||
+          field.substepOf?.title ||
+          field.substepOf,
         index,
         primary: !schema[schema.length - 1] || !field.substepOf || field.substepOf !== schema[schema.length - 1].substepOf
       }

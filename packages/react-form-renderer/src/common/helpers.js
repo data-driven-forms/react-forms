@@ -65,28 +65,14 @@ export const prepareMsg = (msg, type, values) => {
   return { id: msg, defaultMessage: msg, values };
 };
 
-export const assign =
-  Object.assign ||
-  /* istanbul ignore next */
-  function(obj) {
-    for (let i = 1, len = arguments.length; i < len; ++i) {
-      let source = arguments[i];
-      if (source != null) {
-        for (let key in source) {
-          if (HAS_PROP.call(source, key)) {
-            obj[key] = source[key];
-          }
-        }
-      }
-    }
-
-    return obj;
-  };
+export const assign = Object.assign;
 
 export const prepare = (func) => (value, allValues, ...args) => func(value, allValues, ...args);
 
 export const isNumber = (num) => !isNaN(num) && (num !== 0 || ('' + num).trim() !== '');
 
-export const selectNum = (var1, var2) => (isNumber(var1) ? +var1 : arguments.length > 1 && isNumber(var2) ? +var2 : null);
+export function selectNum(var1, var2) {
+  return isNumber(var1) ? +var1 : arguments.length > 1 && isNumber(var2) ? +var2 : null;
+}
 
 export const trunc = (num) => (Math.trunc ? Math.trunc(num) : num < 0 ? Math.ceil(num) : Math.floor(num));
