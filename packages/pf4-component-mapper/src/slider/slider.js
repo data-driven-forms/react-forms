@@ -4,8 +4,6 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormGroup from '../form-group/form-group';
 import { Badge, Grid, GridItem } from '@patternfly/react-core';
 
-import './slider.scss';
-
 const Slider = (props) => {
   const { label, isRequired, helperText, meta, description, input, isReadOnly, isDisabled, id, FormGroupProps, ...rest } = useFieldApi(props);
 
@@ -21,13 +19,7 @@ const Slider = (props) => {
     >
       <Grid gutter="md">
         <GridItem span={10}>
-          <input
-            className={'ddorg__pf4-component-mapper__dual-list-slider-input '}
-            {...rest}
-            {...input}
-            type="range"
-            disabled={isDisabled || isReadOnly}
-          />
+          <input className={'pf-u-w-100'} {...rest} {...input} type="range" disabled={isDisabled || isReadOnly} />
         </GridItem>
         <GridItem span={2}>
           <Badge isRead>{input.value || (rest.max && rest.max / 2) || 50}</Badge>

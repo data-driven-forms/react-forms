@@ -29,7 +29,6 @@ import {
   AngleLeftIcon
 } from '@patternfly/react-icons';
 
-import './dual-list-select.scss';
 import DualListSelectCommon from '@data-driven-forms/common/dual-list-select';
 import FormGroup from '../form-group/form-group';
 

@@ -6,7 +6,7 @@ import { Bullseye, FormHelperText, Grid, GridItem } from '@patternfly/react-core
 
 import { AddCircleOIcon, CloseIcon } from '@patternfly/react-icons';
 
-import './final-form-array.scss';
+import './final-form-array.css';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const ArrayItem = ({ fields, fieldIndex, name, remove, length, minItems }) => {

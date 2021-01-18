@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './input.scss';
+import './input.css';
 
 const getInputString = (filter, value) => {
   if (typeof filter === 'string') {
