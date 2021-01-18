@@ -1,10 +1,10 @@
 import React from 'react';
-import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
-import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
+import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
+import componentTypes from '@data-driven-forms/react-form-renderer/component-types';
 
-import DatePicker from '@data-driven-forms/mui-component-mapper/dist/cjs/date-picker';
-import PlainText from '@data-driven-forms/mui-component-mapper/dist/cjs/plain-text';
-import FormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
+import DatePicker from '@data-driven-forms/mui-component-mapper/date-picker';
+import PlainText from '@data-driven-forms/mui-component-mapper/plain-text';
+import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template';
 
 const calculateAge = (birthday) => {
   let ageDifMs = Date.now() - birthday;
