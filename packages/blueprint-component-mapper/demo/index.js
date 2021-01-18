@@ -1,9 +1,8 @@
 /* eslint-disable */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import FormRenderer from '@data-driven-forms/react-form-renderer';
-import miqSchema from './demo-schemas/miq-schema';
-import { uiArraySchema, arraySchema, array1Schema, schema, uiSchema, conditionalSchema, arraySchemaDDF } from './demo-schemas/widget-schema';
+import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
+import { arraySchemaDDF } from './demo-schemas/widget-schema';
 import { componentMapper, FormTemplate } from '../src';
 import { Button } from '@blueprintjs/core';
 import {

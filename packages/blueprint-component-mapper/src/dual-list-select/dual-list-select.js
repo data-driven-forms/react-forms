@@ -4,27 +4,50 @@ import PropTypes from 'prop-types';
 import DualListSelectCommon from '@data-driven-forms/common/dual-list-select';
 import { Menu, MenuItem, ButtonGroup, Button, ControlGroup, InputGroup } from '@blueprintjs/core';
 import clsx from 'clsx';
+import { createUseStyles } from 'react-jss';
 
 import { FormGroupInternal } from '../form-group/form-group';
 
-import './dual-list-select.scss';
+const useStyles = createUseStyles({
+  menu: {
+    height: '80%',
+    overflow: 'auto'
+  },
+  buttonGroup: {
+    justifyContent: 'center'
+  },
+  wrapper: {
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    minHeight: 250
+  },
+  '@media (max-width: 768px)': {
+    wrapper: {
+      flexDirection: 'column'
+    }
+  }
+});
 
-const List = ({ value, optionClick, noOptionsTitle, filterValue, filterValueText, selectedValues, MenuProps, MenuItemProps }) => (
-  <Menu {...MenuProps} className={clsx('bp3-elevation-1', 'ddorg__blueprint_mapper--dls-menu', MenuProps.className)}>
-    {value.length < 1 && <MenuItem text={filterValue ? filterValueText : noOptionsTitle} disabled {...MenuItemProps} />}
-    {value.length > 0 &&
-      value.map(({ value, label, MenuItemProps: ItemMenuItemProps }) => (
-        <MenuItem
-          onClick={(e) => optionClick(e, value)}
-          key={value}
-          active={selectedValues.includes(value)}
-          text={label}
-          {...MenuItemProps}
-          {...ItemMenuItemProps}
-        />
-      ))}
-  </Menu>
-);
+const List = ({ value, optionClick, noOptionsTitle, filterValue, filterValueText, selectedValues, MenuProps, MenuItemProps }) => {
+  const { menu } = useStyles();
+
+  return (
+    <Menu {...MenuProps} className={clsx('bp3-elevation-1', menu, MenuProps.className)}>
+      {value.length < 1 && <MenuItem text={filterValue ? filterValueText : noOptionsTitle} disabled {...MenuItemProps} />}
+      {value.length > 0 &&
+        value.map(({ value, label, MenuItemProps: ItemMenuItemProps }) => (
+          <MenuItem
+            onClick={(e) => optionClick(e, value)}
+            key={value}
+            active={selectedValues.includes(value)}
+            text={label}
+            {...MenuItemProps}
+            {...ItemMenuItemProps}
+          />
+        ))}
+    </Menu>
+  );
+};
 
 List.propTypes = {
   value: PropTypes.arrayOf(
@@ -121,8 +144,10 @@ const DualListInternal = ({
   RightMenuProps,
   RightMenuItemProps
 }) => {
+  const { buttonGroup, wrapper } = useStyles();
+
   return (
-    <div {...WrapperProps} className={clsx('ddorg__blueprint_mapper--dls-wrapper', WrapperProps.className)}>
+    <div {...WrapperProps} className={clsx(wrapper, WrapperProps.className)}>
       <div {...LeftWrapperProps}>
         {leftTitle}
         <Toolbar
@@ -146,12 +171,7 @@ const DualListInternal = ({
           MenuItemProps={LeftMenuItemProps}
         />
       </div>
-      <ButtonGroup
-        vertical
-        alignText="center"
-        {...ButtonGroupProps}
-        className={clsx('ddorg__blueprint_mapper--dls-button-group', ButtonGroupProps.className)}
-      >
+      <ButtonGroup vertical alignText="center" {...ButtonGroupProps} className={clsx(buttonGroup, ButtonGroupProps.className)}>
         <Button
           disabled={state.selectedLeftValues.length === 0}
           onClick={handleMoveRight}

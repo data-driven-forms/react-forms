@@ -2,15 +2,26 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { useFieldApi, useFormApi, FieldArray as FieldArrayFF } from '@data-driven-forms/react-form-renderer';
+import { createUseStyles } from 'react-jss';
 
 import { Button, Intent, FormGroup } from '@blueprintjs/core';
 
 import BlueprintContext from '../blueprint-context/blueprint-context';
 
-import './field-array.scss';
+const useStyles = createUseStyles({
+  addContainer: {
+    display: 'flex',
+    flexFlow: 'row-reverse',
+    marginBottom: 15
+  },
+  remove: {
+    marginBottom: 15
+  }
+});
 
 const ArrayItem = ({ remove, fields, name, removeLabel, ArrayItemProps, RemoveButtonProps, disabledRemove }) => {
   const formOptions = useFormApi();
+  const { remove: removeCss } = useStyles();
 
   const editedFields = fields.map((field) => ({
     ...field,
@@ -25,7 +36,7 @@ const ArrayItem = ({ remove, fields, name, removeLabel, ArrayItemProps, RemoveBu
         intent={Intent.DANGER}
         disabled={disabledRemove}
         {...RemoveButtonProps}
-        className={clsx('ddorg__blueprint_mapper--field-array-remove', RemoveButtonProps && RemoveButtonProps.className)}
+        className={clsx(removeCss, RemoveButtonProps && RemoveButtonProps.className)}
       >
         {removeLabel}
       </Button>
@@ -68,6 +79,8 @@ const FieldArray = (props) => {
 
   const { required } = useContext(BlueprintContext);
 
+  const { addContainer } = useStyles();
+
   const { error, touched, submitError } = meta;
   const showError = (validateOnMount || touched) && (error || submitError);
 
@@ -100,10 +113,7 @@ const FieldArray = (props) => {
                 disabledRemove={fieldArrayProps.fields.length <= minItems}
               />
             ))}
-            <div
-              {...AddContainerProps}
-              className={clsx('ddorg__blueprint_mapper--field-array-add-container', AddContainerProps && AddContainerProps.className)}
-            >
+            <div {...AddContainerProps} className={clsx(addContainer, AddContainerProps && AddContainerProps.className)}>
               <Button
                 onClick={() => fieldArrayProps.fields.push(defaultItem)}
                 intent={Intent.SUCCESS}

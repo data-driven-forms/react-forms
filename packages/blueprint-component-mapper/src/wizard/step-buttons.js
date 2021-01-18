@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import selectNext from '@data-driven-forms/common/wizard/select-next';
 import clsx from 'clsx';
+import { createUseStyles } from 'react-jss';
 
 import { Button, Intent } from '@blueprintjs/core';
-
-import './step-buttons.scss';
 
 const NextButton = ({ nextStep, handleNext, buttonLabels, getState, handleSubmit, isDisabled, ...props }) => (
   <Button
@@ -33,6 +32,18 @@ NextButton.propTypes = {
   isDisabled: PropTypes.bool
 };
 
+const useStyles = createUseStyles({
+  buttonGroup: {
+    marginTop: 16,
+    display: 'flex',
+    justifyContent: 'space-between',
+
+    '& button:not(:first-child)': {
+      marginLeft: 8
+    }
+  }
+});
+
 const StepButtons = ({
   handleNext,
   currentStep,
@@ -47,27 +58,31 @@ const StepButtons = ({
   BackButtonProps,
   NextButtonProps,
   SubmitButtonProps
-}) => (
-  <div {...ButtonToolbarProps} className={clsx('ddorg__blueprint_mapper--wizard-button-group', ButtonToolbarProps && ButtonToolbarProps.className)}>
-    <Button onClick={formOptions.onCancel} minimal {...CancelButtonProps}>
-      {buttonLabels.cancel}
-    </Button>
-    <div {...DirectionButtonProps}>
-      <Button onClick={handlePrev} disabled={activeStepIndex === 0} {...BackButtonProps}>
-        {buttonLabels.back}
+}) => {
+  const { buttonGroup } = useStyles();
+
+  return (
+    <div {...ButtonToolbarProps} className={clsx(buttonGroup, ButtonToolbarProps && ButtonToolbarProps.className)}>
+      <Button onClick={formOptions.onCancel} minimal {...CancelButtonProps}>
+        {buttonLabels.cancel}
       </Button>
-      <NextButton
-        getState={formOptions.getState}
-        nextStep={currentStep.nextStep}
-        buttonLabels={buttonLabels}
-        handleNext={handleNext}
-        isDisabled={!formOptions.valid || isNextDisabled}
-        handleSubmit={formOptions.handleSubmit}
-        {...(currentStep.nextStep ? NextButtonProps : SubmitButtonProps)}
-      />
+      <div {...DirectionButtonProps}>
+        <Button onClick={handlePrev} disabled={activeStepIndex === 0} {...BackButtonProps}>
+          {buttonLabels.back}
+        </Button>
+        <NextButton
+          getState={formOptions.getState}
+          nextStep={currentStep.nextStep}
+          buttonLabels={buttonLabels}
+          handleNext={handleNext}
+          isDisabled={!formOptions.valid || isNextDisabled}
+          handleSubmit={formOptions.handleSubmit}
+          {...(currentStep.nextStep ? NextButtonProps : SubmitButtonProps)}
+        />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 StepButtons.propTypes = {
   currentStep: PropTypes.object,
