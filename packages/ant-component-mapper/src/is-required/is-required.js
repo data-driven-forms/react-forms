@@ -1,7 +1,7 @@
 import React from 'react';
 import { childrenPropTypes } from '@data-driven-forms/common/prop-types-templates';
 
-import './style.scss';
+import './is-required.css';
 
 const IsRequired = ({ children }) => (
   <React.Fragment>
