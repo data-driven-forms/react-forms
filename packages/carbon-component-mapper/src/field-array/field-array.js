@@ -1,18 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import { createUseStyles } from 'react-jss';
 
 import { useFieldApi, useFormApi, FieldArray as FieldArrayFF } from '@data-driven-forms/react-form-renderer';
 
 import { Button, FormGroup } from 'carbon-components-react';
 import { AddAlt32, Subtract32 } from '@carbon/icons-react';
 
-import './field-array.scss';
-
 import prepareProps from '../prepare-props';
+
+const useStyles = createUseStyles({
+  add: {
+    marginTop: 16
+  },
+  addContainer: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row-reverse'
+  },
+  remove: {
+    marginTop: 8,
+    marginBottom: 8
+  },
+  formGroup: {
+    '.bx--form__requirements': {
+      color: '#da1e28'
+    }
+  }
+});
 
 const ArrayItem = ({ remove, fields, name, removeText, buttonDisabled, RemoveButtonProps, ArrayItemProps }) => {
   const formOptions = useFormApi();
+  const { remove: removeStyle } = useStyles();
 
   const editedFields = fields.map((field) => ({
     ...field,
@@ -29,7 +49,7 @@ const ArrayItem = ({ remove, fields, name, removeText, buttonDisabled, RemoveBut
         kind="danger"
         onClick={remove}
         {...RemoveButtonProps}
-        className={clsx('ddorg__carbon-field-array-remove', RemoveButtonProps.className)}
+        className={clsx(removeStyle, RemoveButtonProps.className)}
       >
         {removeText}
       </Button>
@@ -73,6 +93,8 @@ const FieldArray = (props) => {
     validateOnMount
   } = useFieldApi(prepareProps(props));
 
+  const { formGroup, addContainer, add } = useStyles();
+
   const buttonLabelsFinal = {
     add: 'Add',
     remove: 'Remove',
@@ -88,7 +110,7 @@ const FieldArray = (props) => {
       message={Boolean(invalid)}
       messageText={invalid || ''}
       {...FormGroupProps}
-      className={clsx('ddorg__carbon-field-array-form-group', FormGroupProps.className)}
+      className={clsx(formGroup, FormGroupProps.className)}
     >
       <FieldArrayFF name={input.name} validate={arrayValidator}>
         {(fieldArrayProps) => (
@@ -106,14 +128,14 @@ const FieldArray = (props) => {
                 RemoveButtonProps={RemoveButtonProps}
               />
             ))}
-            <div {...AddContainerProps} className={clsx('ddorg__carbon-field-array-add-container', AddContainerProps.className)}>
+            <div {...AddContainerProps} className={clsx(addContainer, AddContainerProps.className)}>
               <Button
                 disabled={fieldArrayProps.fields.length >= maxItems}
                 renderIcon={AddAlt32}
                 id={`add-${input.name}`}
                 onClick={() => fieldArrayProps.fields.push(defaultItem)}
                 {...AddButtonProps}
-                className={clsx('ddorg__carbon-field-array-add', AddButtonProps.className)}
+                className={clsx(add, AddButtonProps.className)}
               >
                 {buttonLabelsFinal.add}
               </Button>

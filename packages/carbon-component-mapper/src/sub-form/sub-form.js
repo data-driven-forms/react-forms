@@ -1,16 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import { createUseStyles } from 'react-jss';
 
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
-import './sub-form.scss';
+const useStyles = createUseStyles({
+  subForm: {
+    '&>:not(:last-child)': {
+      marginBottom: 32
+    }
+  }
+});
 
 const SubForm = ({ fields, component, title, description, TitleElement, DescriptionElement, TitleProps, DescriptionProps, HeaderProps, ...rest }) => {
   const formOptions = useFormApi();
+  const { tab } = useStyles();
 
   return (
-    <div {...rest} className={clsx('ddorg__carbon-sub-form', rest.className)}>
+    <div {...rest} className={clsx(tab, rest.className)}>
       {(title || description) && (
         <div {...HeaderProps}>
           {title && React.createElement(TitleElement, TitleProps, title)}
