@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import WizardStepButtons from './step-buttons';
 
-import './wizard-step.scss';
+import './wizard-step.css';
 
 const WizardStep = ({ fields, formOptions, WizardStepProps, ...rest }) => (
   <Fragment>
