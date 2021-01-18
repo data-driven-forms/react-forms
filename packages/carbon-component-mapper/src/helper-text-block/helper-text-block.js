@@ -1,15 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { createUseStyles } from 'react-jss';
 
-import './helper-text-block.scss';
+const useStyles = createUseStyles({
+  helperTextStyle: {
+    color: '#da1e28',
+    display: 'block',
+    overflow: 'initial'
+  }
+});
 
 const HelperTextBlock = ({ helperText, errorText, warnText }) => {
+  const { helperTextStyle } = useStyles();
+
   if (errorText) {
-    return <div className="bx--form-requirement ddorg__carbon-error-helper-text">{errorText}</div>;
+    return <div className={`bx--form-requirement ddorg__carbon-error-helper-text ${helperTextStyle}`}>{errorText}</div>;
   }
 
   if (warnText) {
-    return <div className="bx--form-requirement ddorg__carbon-warning-helper-text">{warnText}</div>;
+    return <div className={`bx--form-requirement ddorg__carbon-error-helper-text ${helperTextStyle}`}>{warnText}</div>;
   }
 
   if (helperText) {

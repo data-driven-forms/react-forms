@@ -64,6 +64,7 @@
   "peerDependencies": {},
   "dependencies": {
     "@data-driven-forms/common": "*",
-    "prop-types": ">=15.7.2"
+    "prop-types": ">=15.7.2",
+    "react-jss": "^10.5.0"
   }
 }
