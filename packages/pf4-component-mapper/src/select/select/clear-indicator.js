@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { TimesCircleIcon } from '@patternfly/react-icons';
-import './clear-indicator.scss';
+import './clear-indicator.css';
 
 const ClearIndicator = ({ clearSelection }) => (
   <button

@@ -6,7 +6,12 @@ import parseInternalValue from '@data-driven-forms/common/select/parse-internal-
 import Downshift from 'downshift';
 import { CaretDownIcon, CloseIcon, CircleNotchIcon } from '@patternfly/react-icons';
 
-import './select-styles.scss';
+import './select-styles.css';
+import '@patternfly/react-styles/css/components/Select/select.css';
+import '@patternfly/react-styles/css/components/Chip/chip.css';
+import '@patternfly/react-styles/css/components/ChipGroup/chip-group.css';
+import '@patternfly/react-styles/css/components/Divider/divider.css';
+
 import Menu from './menu';
 import ClearIndicator from './clear-indicator';
 import ValueContainer from './value-container';

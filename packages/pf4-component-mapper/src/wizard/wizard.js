@@ -7,7 +7,7 @@ import Wizard from '@data-driven-forms/common/wizard/wizard';
 import { Bullseye, Backdrop, WizardNav, WizardHeader } from '@patternfly/react-core';
 
 import WizardStep from './wizard-components/wizard-step';
-import './wizard-components/wizard-styles.scss';
+import './wizard-components/wizard-styles.css';
 
 import WizardNavigation from './wizard-components/wizard-nav';
 import reducer from './wizard-components/reducer';

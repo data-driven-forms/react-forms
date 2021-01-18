@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import Option from './option';
 import EmptyOption from './empty-options';
 
-import './menu.scss';
+import './menu.css';
 
 const getScrollParent = (element) => {
   let style = getComputedStyle(element);
