@@ -14,7 +14,7 @@ const IsRequired = ({ children }) => {
 
   return (
     <React.Fragment>
-      <span className={isRequired} aria-hidden="true">
+      <span className={`ddorg__carbon-component-mapper_is-required ${isRequired}`} aria-hidden="true">
         *
       </span>
       {children}
