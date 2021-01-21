@@ -62,7 +62,7 @@ const WrappedFormTemplate = (props) => (
     ButtonGroup={ButtonGroup}
     Title={Title}
     Description={Description}
-    buttonOrder={['cancel', 'reset', 'submit']}
+    buttonOrder={['submit', 'reset', 'cancel']}
     Header={Header}
     {...props}
   />
