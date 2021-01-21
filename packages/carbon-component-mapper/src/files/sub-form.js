@@ -35,7 +35,7 @@ SubForm.propTypes = {
 };
 
 SubForm.defaultProps = {
-  TitleElement: 'h5',
+  TitleElement: 'h3',
   DescriptionElement: 'p'
 };
 
