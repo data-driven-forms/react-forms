@@ -7,7 +7,7 @@ import { TextInput, NumberInput } from 'carbon-components-react';
 import prepareProps from './prepare-props';
 
 const TextField = (props) => {
-  const { input, meta, validateOnMount, ...rest } = useFieldApi(prepareProps(props));
+  const { input, meta, validateOnMount, labelText, ...rest } = useFieldApi(prepareProps(props));
 
   const Component = input.type === 'number' ? NumberInput : TextInput;
 
@@ -23,6 +23,7 @@ const TextField = (props) => {
       invalidText={invalid || ''}
       warn={Boolean(warn)}
       warnText={warn || ''}
+      {...(input.type === 'number' ? { label: labelText } : { labelText })}
       {...rest}
     />
   );
