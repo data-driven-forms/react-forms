@@ -4,19 +4,20 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import { Radio as Pf4Radio } from '@patternfly/react-core';
 import FormGroup from '../common/form-group';
 
-const RadioOption = ({ name, option, isDisabled, isReadOnly }) => {
-  const { input } = useFieldApi({ name, value: option.value });
+const RadioOption = ({ name, option: { value, label, ...restOption }, isDisabled, isReadOnly }) => {
+  const { input } = useFieldApi({ name, value });
   return (
     <Pf4Radio
-      key={`${name}-${option.value}`}
+      key={`${name}-${value}`}
       {...input}
-      isChecked={input.value === option.value}
-      value={option.value}
-      onChange={() => input.onChange(option.value)}
-      label={option.label}
-      id={`${name}-${option.value}`}
-      aria-label={option.label}
+      isChecked={input.value === value}
+      value={value}
+      onChange={() => input.onChange(value)}
+      label={label}
+      id={`${name}-${value}`}
+      aria-label={label}
       isDisabled={isDisabled || isReadOnly}
+      {...restOption}
     />
   );
 };
