@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/common",
-  "version": "2.21.0",
+  "version": "2.21.1",
   "description": "Common components, helpers and other pieces of code",
   "license": "Apache-2.0",
   "main": "index.js",
