@@ -1,61 +1,137 @@
-This a custom component with a custom design. Things can be changed, after official PF4 release.
-
 ## Props
 
-Dual list select is wrapped in a form group, so it accepts all [form group props](/mappers/component-api#formgroupwrappedcomponents).
+Dual list select is wrapped in a form group, so it accepts all [form group props](/mappers/component-api#formgroupwrappedcomponents). It also accepts the same props as the [original component](https://www.patternfly.org/v4/components/dual-list-selector).
 
-|Props|Type|Default|Description|
-|-----|----|-------|-----------|
-|options|array|[]|`[{label, value}]`|
-|label|node||FormLabel primary text|
-|leftTitle|String|'Options'|Title for options|
-|rightTitle|String|'Selected'|Title for selected items|
-|moveLeftTitle|String|'Move selected to left'|Tooltip for move to left button|
-|moveRightTitle|String|'Move selected to right'|Tooltip for move to right button|
-|moveAllLeftTitle|String|'Move all to left'|Tooltip for move all to left button|
-|moveAllRightTitle|String|'Move all to right'|Tooltip for move all to right button|
-|allToLeft|Boolean|true|Hides all to left button|
-|allToRight|Boolean|true|Hides all to right button|
-|noValueTitle|String|'No selected'|Placeholder for empty value|
-|noOptionsTitle|String|'No available options'|Placeholder for empty options|
-|filterOptionsTitle|String|'Filter options'|Placeholder for options filter input|
-|filterValueTitle|String|'Filter selected value'|Placeholder for value filter input|
-|filterValueText|String|'Remove your filter to see all selected'|Placeholder for value when there is no filtered value|
-|filterOptionsText|String|'Remove your filter to see all options'|Placeholder for options when there is no filtered option|
-|renderStatus|function|'null'|A function that renders status text below the toolbar filter. For example, display how many items were selected: `({selected, options}) => "selected " + selected + " out of " + options`|
+The component implements three following custom props:
 
-### Customization
+|Props|Type|Description|
+|-----|----|-----------|
+|[options](/mappers/dual-list-select?mapper=pf4#options)|array|Array of options.|
+|[getValueFromNode](/mappers/dual-list-select?mapper=pf4#getvaluefromnode)|func|Use when a node is used to set value/label.|
+|[isSortable](/mappers/dual-list-select?mapper=pf4#issortable)|boolean|Allows to sort the list.|
 
-MUI DualListSelect provides fully customization. When the props offers Right/Left variant, you can pass props to `RightXXX` or to `LeftXXX` props. Example: `ListGridProps` is Right/Left, so there are two more props: `RightListGridProps` and `LeftListGridProps`. These props overrides the standard props, except `className`, that are being combined. All these props are objects.
+<br />
 
-|Props|Right/Left variant|
+---
+
+<br />
+
+### options
+
+*Array<string | node | dualListSelectOption>*
+
+You have multiple ways how to set up your options:
+
+<br />
+
+**A. Simple array**
+
+You can just provide an array of values:
+
+```jsx
+const options = ['value1', 'value2', ... ]
+```
+
+Or you can use node for additional customization (i.e. i11n):
+
+```jsx
+const options = [<span>value1</span>, <span>value2</span>, ... ]
+```
+
+In this case, you have to provide **getValueFromNode** to get a value from the nodes.
+
+<br />
+
+**B. Compley array** (of `dualListSelectOption`s)
+
+You can also use the custom options format of
+
+```jsx
+{
+    label: string | node;
+    value: string;
+}
+```
+
+```jsx
+const options = [{value: 'first-value', label: 'First value'}, {value: 'second-value', label: <span>Second value</span>}, ... ]
+```
+
+<br />
+
+---
+
+<br />
+
+### getValueFromNode
+
+*(node) => string*
+
+A simple function that receives a react node as an argument and returns its value. **Always provide this function, when you are using nodes in options!**
+
+|Node|getValueFromNode|
 |-----|----|
-|FormGroupProps||
-|ListProps|yes|
-|ListItemProps|yes|
-|ToolbarProps|yes|
-|FilterFieldProps|yes|
-|SearchIconProps|yes|
-|SearchIconButtonProps|yes|
-|SortIconButtonProps|yes|
-|SortIconProps|yes|
-|InternalGridProps|yes|
-|ListGridProps|yes|
-|TitleProps|yes|
-|ButtonsGridProps||
-|ButtonsInternalFlexProps||
-|ButtonFlexProps||
-|ToRightFlexProps||
-|IconButtonProps||
-|ToRightIconButtonProps||
-|IconProps||
-|AllToRightFlexProps||
-|AllToRightIconButtonProps||
-|AllToLeftFlexProps||
-|AllToLeftIconButtonProps||
-|ToLeftFlexProps||
-|ToLeftIconButtonProps||
-|ToRightIconProps||
-|AllToRightIconProps||
-|AllToLeftIconProps||
-|ToLeftIconProps||
+|`<span>value1</span>`|`(option) => option.props.children`|
+
+<br />
+
+---
+
+<br />
+
+### isSortable
+
+*boolean*
+
+This flag allows to sort options in both of options and selected options. However, you have to insert a sort button manually into [chosenOptionsActions](https://www.patternfly.org/v4/components/dual-list-selector#props) or [availableOptionsActions](https://www.patternfly.org/v4/components/dual-list-selector#props) arrays.
+#### SortButton
+
+You can use the provided button or implement your own button.
+
+**A. Provided button**
+
+This component requires a prop `position`: `left` (availableOption) | `right` (chosenOptions)
+
+```jsx
+import { DualListSortButton } from '@data-driven-forms/pf4-component-mapper';
+
+const dualListField = {
+    component: componentTypes.DUAL_LIST_SELECT,
+    name: 'sortable-dual-list',
+    options: ['z', 'a', 'b'],
+    isSortable: true,
+    availableOptionsActions: [<DualListSortButton position="left" key="sort" />],
+    chosenOptionsActions: [<DualListSortButton position="right" key="sort" />]
+}
+```
+
+**A. Custom implementation**
+
+Data Driven Forms provides an access to sort functionality via `DualListContext`.
+
+```jsx
+{
+    sortConfig: { left: 'asc' | 'desc', right: 'asc' | 'desc' },
+    setSortConfig: (newSortConfig) => void
+}
+```
+
+```jsx
+import { DualListContext } from '@data-driven-forms/pf4-component-mapper';
+
+const CustomRightSortButton = () => {
+  const { sortConfig, setSortConfig } = useContext(DualListContext);
+
+  return (
+    <button
+      onClick={
+        sortConfig.right === 'asc'
+          ? () => setSortConfig({ ...sortConfig, right: 'desc' })
+          : () => setSortConfig({ ...sortConfig, right: 'asc' })
+      }
+    >
+        Sort right values
+    </button>
+  );
+};
+```
