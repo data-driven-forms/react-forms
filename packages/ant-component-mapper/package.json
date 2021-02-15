@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/ant-component-mapper",
-  "version": "2.21.1",
+  "version": "2.22.0",
   "description": "Component mapper for Ant Design component mapper form data-driven-forms.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
