@@ -7,7 +7,7 @@ import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/comp
 
 export const docsLinks = {
   mui: 'https://material-ui.com/api/',
-  pf4: 'https://patternfly-react.surge.sh/documentation/react/components/',
+  pf4: 'https://patternfly-react.surge.sh/components/',
   pf3: 'https://patternfly-react-pf3.surge.sh/?path=/story/*',
   blueprint: 'https://blueprintjs.com/docs/',
   suir: 'https://react.semantic-ui.com/',

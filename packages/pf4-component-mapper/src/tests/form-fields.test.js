@@ -422,6 +422,10 @@ describe('FormFields', () => {
           });
 
           it('renders isDisabled', () => {
+            if (component === componentTypes.SLIDER) {
+              return;
+            }
+
             const disabledField = {
               ...field,
               isDisabled: true
@@ -448,16 +452,15 @@ describe('FormFields', () => {
           });
 
           it('renders isReadOnly', () => {
+            if (component === componentTypes.SELECT || component === componentTypes.SLIDER) {
+              return;
+            }
+
             const disabledField = {
               ...field,
               isReadOnly: true
             };
             const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField] }} />);
-
-            if (component === componentTypes.SELECT) {
-              expect(true);
-              return;
-            }
 
             if (component === componentTypes.TEXTAREA) {
               expect(
