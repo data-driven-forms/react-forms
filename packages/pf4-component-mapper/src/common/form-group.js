@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 
 import showError from './show-error';
 
-const FormGroup = ({ label, isRequired, helperText, meta, description, hideLabel, children, id, FormGroupProps }) => (
+const FormGroup = ({ label, isRequired, helperText, meta, validateOnMount, description, hideLabel, children, id, FormGroupProps }) => (
   <Pf4FormGroup
     isRequired={isRequired}
     label={!hideLabel && label}
     fieldId={id}
     helperText={(meta.touched && meta.warning) || helperText}
     helperTextInvalid={meta.error || meta.submitError}
-    {...showError(meta)}
+    {...showError(meta, validateOnMount)}
     {...FormGroupProps}
   >
     {description && (
@@ -30,6 +30,7 @@ FormGroup.propTypes = {
   meta: PropTypes.object.isRequired,
   description: PropTypes.node,
   hideLabel: PropTypes.bool,
+  validateOnMount: PropTypes.bool,
   id: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)]).isRequired,
   FormGroupProps: PropTypes.object

@@ -13,6 +13,7 @@ const DualList = (props) => {
     isRequired,
     helperText,
     meta,
+    validateOnMount,
     description,
     hideLabel,
     id,
@@ -81,6 +82,7 @@ const DualList = (props) => {
       isRequired={isRequired}
       helperText={helperText}
       meta={meta}
+      validateOnMount={validateOnMount}
       description={description}
       hideLabel={hideLabel}
       id={id || input.name}
@@ -109,6 +111,7 @@ const DualList = (props) => {
 
 DualList.propTypes = {
   label: PropTypes.node,
+  validateOnMount: PropTypes.bool,
   isRequired: PropTypes.bool,
   helperText: PropTypes.node,
   description: PropTypes.node,

@@ -96,6 +96,23 @@ Data Driven Forms supports all kinds of component, basic set is consisted of:
 - [Plain text](https://data-driven-forms.org/mappers/plain-text?mapper=pf4)
 - [Wizard](https://data-driven-forms.org/mappers/wizard?mapper=pf4)
 
+
+### ValidateOnMount
+
+PF4 mapper provides an option to validate a field when the component is mounted. Just set `validateOnMount` to `true`.
+
+```jsx
+{
+    component: 'text-field',
+    name: 'required-field',
+    validate: [{type: 'required'}],
+    validateOnMount: true
+}
+```
+
+This field will show the error immediately.
+
+
 ### Useful links
 
 - [Data Driven Forms documentation](https://data-driven-forms.org/)

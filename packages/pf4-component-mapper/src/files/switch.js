@@ -13,6 +13,7 @@ const Switch = (props) => {
     isRequired,
     helperText,
     meta,
+    validateOnMount,
     description,
     input,
     isReadOnly,
@@ -29,6 +30,7 @@ const Switch = (props) => {
       isRequired={isRequired}
       helperText={helperText}
       meta={meta}
+      validateOnMount={validateOnMount}
       description={description}
       hideLabel
       id={id || input.name}
@@ -48,6 +50,7 @@ const Switch = (props) => {
 
 Switch.propTypes = {
   label: PropTypes.node,
+  validateOnMount: PropTypes.bool,
   isReadOnly: PropTypes.bool,
   isRequired: PropTypes.bool,
   helperText: PropTypes.node,

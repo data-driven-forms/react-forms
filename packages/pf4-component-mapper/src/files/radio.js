@@ -35,7 +35,20 @@ const Radio = ({ name, options, type, ...props }) => {
    * You cannot assign type radio to PF4 radio buttons input. It will break and will not set input value, only checked property
    * It has to be reqular input and we have change the radio value manully to the option value
    */
-  const { label, isRequired, helperText, meta, description, hideLabel, input, isReadOnly, isDisabled, id, FormGroupProps } = useFieldApi({
+  const {
+    label,
+    isRequired,
+    helperText,
+    meta,
+    validateOnMount,
+    description,
+    hideLabel,
+    input,
+    isReadOnly,
+    isDisabled,
+    id,
+    FormGroupProps
+  } = useFieldApi({
     name,
     ...props
   });
@@ -45,6 +58,7 @@ const Radio = ({ name, options, type, ...props }) => {
       isRequired={isRequired}
       helperText={helperText}
       meta={meta}
+      validateOnMount={validateOnMount}
       description={description}
       hideLabel={hideLabel}
       id={id || input.name}
@@ -59,6 +73,7 @@ const Radio = ({ name, options, type, ...props }) => {
 
 Radio.propTypes = {
   label: PropTypes.node,
+  validateOnMount: PropTypes.bool,
   isReadOnly: PropTypes.bool,
   isRequired: PropTypes.bool,
   helperText: PropTypes.node,
