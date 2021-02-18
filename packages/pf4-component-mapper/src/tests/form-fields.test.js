@@ -321,6 +321,25 @@ describe('FormFields', () => {
             ).toEqual(errorText);
           });
 
+          it('renders with error and validateOnMount', async () => {
+            const errorField = {
+              ...field,
+              validate: [{ type: validatorTypes.REQUIRED }],
+              validateOnMount: true
+            };
+            let wrapper;
+            await act(async () => {
+              wrapper = mount(<RendererWrapper schema={{ fields: [errorField] }} />);
+            });
+            wrapper.update();
+            expect(
+              wrapper
+                .find('.pf-m-error')
+                .last()
+                .text()
+            ).toEqual(errorText);
+          });
+
           it('renders with helperText', () => {
             const helpertextField = {
               ...field,
