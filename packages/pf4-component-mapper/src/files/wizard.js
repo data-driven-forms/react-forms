@@ -40,6 +40,7 @@ const WizardInternal = ({
   hasNoBodyPadding,
   navAriaLabel,
   StepTemplate,
+  className,
   ...rest
 }) => {
   const {
@@ -86,7 +87,7 @@ const WizardInternal = ({
   return (
     <Modal inModal={inModal} container={state.container}>
       <div
-        className={`pf-c-wizard ${inModal ? '' : 'no-shadow'} ddorg__pf4-component-mapper__wizard`}
+        className={`pf-c-wizard ${inModal ? '' : 'no-shadow'} ddorg__pf4-component-mapper__wizard ${className ? className : ''}`}
         role="dialog"
         aria-modal={inModal ? 'true' : undefined}
         onKeyDown={onKeyDown}
@@ -165,7 +166,8 @@ WizardInternal.propTypes = {
   hasNoBodyPadding: PropTypes.bool,
   navAriaLabel: PropTypes.string,
   container: PropTypes.instanceOf(Element),
-  StepTemplate: PropTypes.elementType
+  StepTemplate: PropTypes.elementType,
+  className: PropTypes.string
 };
 
 const defaultLabels = {
