@@ -118,7 +118,7 @@ A field with this configuration will be shown only if the first name is Douglas.
 
 There are multiple condition types: [and](/schema/and), [or](/schema/or), [not](/schema/not), [sequence](/schema/condition-sequence) that can be [nested](/schema/condition-nesting).
 
-And there are multiple matchers: [is](/schema/is), [isEmpty](/schema/is-empty), [isNotTempy](/schema/is-not-empty), [pattern](/schema/pattern). Some of these matchers can be inverted by using [notMatch](/schema/not-match).
+And there are multiple matchers: [is](/schema/is), [isEmpty](/schema/is-empty), [isNotEmpty](/schema/is-not-empty), [pattern](/schema/pattern). Some of these matchers can be inverted by using [notMatch](/schema/not-match).
 
 There are also two actions that can be binded to conditions: [set](/schema/condition-set) and [visible](/schema/condition-visible).
 

@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build": "yarn clean-build && lerna run build --concurrency 1 --ignore @data-driven-forms/react-renderer-demo --ignore @data-driven-forms/pf3-component-mapper",
+    "build": "yarn clean-build && lerna run build --concurrency 1 --ignore @data-driven-forms/react-renderer-demo",
     "vendor": "lerna run vendor",
     "test": "jest --coverage",
     "test:ci": "jest --coverage --runInBand",
@@ -28,8 +28,7 @@
   "jest": {
     "verbose": true,
     "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/pf3-component-mapper/"
+      "/node_modules/"
     ],
     "setupFiles": [
       "<rootDir>/config/jest.setup.js"
@@ -39,7 +38,6 @@
       "<rootDir>/packages/**/src/**/*.ts",
       "!<rootDir>/packages/**/src/**/*.d.ts",
       "!<rootDir>/packages/react-renderer-demo/**/*.js",
-      "!<rootDir>/packages/pf3-component-mapper/**/*.js",
       "!<rootDir>/packages/**/dist",
       "!<rootDir>/templates/**/*.js",
       "!<rootDir>/packages/**/src/**/index.js"
@@ -143,7 +141,7 @@
         "assets": [
           "package.json"
         ],
-        "successComment": ":tada: This ${issue.pull_request ? 'PR is included' : 'issue has been resolved'} in version ${nextRelease.version} :tada:\n\nThe release is available on \n\n- [react-form-renderer (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)\n\n- [pf3-component-mapper (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper)\n\n- [pf4-component-mapper (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/pf4-component-mapper)\n\n- [mui-component-mapper (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper)\n\nDemo can be found [here](http://data-driven-forms.org/)!"
+        "successComment": ":tada: This ${issue.pull_request ? 'PR is included' : 'issue has been resolved'} in version ${nextRelease.version} :tada:\n\nThe release is available on \n\n- [react-form-renderer (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)\n\nDemo can be found [here](http://data-driven-forms.org/)!"
       },
       [
         "@semantic-release/git",

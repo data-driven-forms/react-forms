@@ -57,9 +57,11 @@ const WizardStepButtons = ({
             <Button type="button" variant="secondary" isDisabled={disableBack} onClick={handlePrev}>
               {back}
             </Button>
-            <Button type="button" variant="link" onClick={formOptions.onCancel}>
-              {cancel}
-            </Button>
+            <div className="pf-c-wizard__footer-cancel">
+              <Button type="button" variant="link" onClick={formOptions.onCancel}>
+                {cancel}
+              </Button>
+            </div>
           </React.Fragment>
         )}
       </FormSpy>

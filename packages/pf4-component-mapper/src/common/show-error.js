@@ -1,13 +1,13 @@
-const showError = ({ error, touched, warning, submitError }) => {
-  if (touched && error) {
+const showError = ({ error, touched, warning, submitError }, validateOnMount) => {
+  if ((touched || validateOnMount) && error) {
     return { validated: 'error' };
   }
 
-  if (touched && submitError) {
+  if ((touched || validateOnMount) && submitError) {
     return { validated: 'error' };
   }
 
-  if (touched && warning) {
+  if ((touched || validateOnMount) && warning) {
     return { validated: 'warning' };
   }
 
