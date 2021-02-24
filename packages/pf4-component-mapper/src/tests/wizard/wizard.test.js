@@ -224,6 +224,44 @@ describe('<Wizard />', () => {
     expect(enterHandle.default).toHaveBeenCalledWith(event, formOptions, '1', findCurrentStep, handleNext, handleSubmit);
   });
 
+  it('should call onCancel handler when pressing escape in modal', () => {
+    schema = {
+      fields: [
+        {
+          name: 'wizard',
+          component: 'wizard',
+          inModal: true,
+          fields: [
+            {
+              title: 'foo-step',
+              name: '1',
+              fields: [
+                {
+                  name: 'foo-field',
+                  component: 'text-field'
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+
+    const onCancel = jest.fn();
+
+    const wrapper = mount(<FormRenderer {...initialProps} schema={schema} onCancel={onCancel} />);
+
+    expect(onCancel).not.toHaveBeenCalled();
+
+    const wizard = wrapper.find('.pf-c-wizard');
+
+    const event = { key: 'Escape' };
+
+    wizard.props().onKeyDown(event);
+
+    expect(onCancel).toHaveBeenCalledWith(expect.any(Object), expect.any(Object));
+  });
+
   it('should render correctly with objects as substepOf and nodes titles', () => {
     schema = {
       fields: [
