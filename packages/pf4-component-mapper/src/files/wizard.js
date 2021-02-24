@@ -1,10 +1,9 @@
 import React, { useReducer, useEffect, useContext } from 'react';
-import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { FormSpy, WizardContext } from '@data-driven-forms/react-form-renderer';
 import Wizard from '@data-driven-forms/common/src/wizard/wizard';
 
-import { Bullseye, Backdrop, WizardNav, WizardHeader } from '@patternfly/react-core';
+import { WizardNav, WizardHeader, Modal as PF4Modal } from '@patternfly/react-core';
 
 import WizardStep from './wizard/wizard-step';
 import './wizard/wizard-styles.scss';
@@ -13,17 +12,20 @@ import WizardNavigation from './wizard/wizard-nav';
 import reducer from './wizard/reducer';
 import WizardToggle from './wizard/wizard-toggle';
 
-const Modal = ({ children, container, inModal }) =>
-  inModal
-    ? createPortal(
-        <Backdrop>
-          <Bullseye>
-            <div className="pf-c-modal-box pf-m-lg">{children}</div>
-          </Bullseye>
-        </Backdrop>,
-        container
-      )
-    : children;
+const Modal = ({ children, container, inModal, ...rest }) =>
+  inModal ? (
+    <PF4Modal variant="large" isOpen showClose={false} hasNoBodyWrapper appendTo={container} {...rest}>
+      {children}
+    </PF4Modal>
+  ) : (
+    children
+  );
+
+Modal.propTypes = {
+  children: PropTypes.node,
+  container: PropTypes.instanceOf(Element),
+  inModal: PropTypes.bool
+};
 
 const WizardInternal = ({
   inModal,
@@ -85,12 +87,18 @@ const WizardInternal = ({
   }
 
   return (
-    <Modal inModal={inModal} container={state.container}>
+    <Modal inModal={inModal} container={state.container} aria-labelledby={rest.name}>
       <div
         className={`pf-c-wizard ${inModal ? '' : 'no-shadow'} ddorg__pf4-component-mapper__wizard ${className ? className : ''}`}
         role="dialog"
         aria-modal={inModal ? 'true' : undefined}
-        onKeyDown={onKeyDown}
+        onKeyDown={(e) => {
+          onKeyDown(e);
+
+          if (e.key === 'Escape' && inModal) {
+            formOptions.onCancel();
+          }
+        }}
         {...rest}
       >
         {title && (

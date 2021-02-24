@@ -456,7 +456,9 @@ exports[`<Wizard /> should render correctly and unmount 1`] = `
                           }
                           name="wizard"
                         >
-                          <Modal>
+                          <Modal
+                            aria-labelledby="wizard"
+                          >
                             <div
                               className="pf-c-wizard no-shadow ddorg__pf4-component-mapper__wizard "
                               name="wizard"
@@ -1657,180 +1659,11 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                           name="wizard"
                         >
                           <Modal
+                            aria-labelledby="wizard"
                             container={
-                              <div>
-                                <div
-                                  class="pf-c-backdrop"
-                                >
-                                  <div
-                                    class="pf-l-bullseye"
-                                  >
-                                    <div
-                                      class="pf-c-modal-box pf-m-lg"
-                                    >
-                                      <div
-                                        aria-modal="true"
-                                        class="pf-c-wizard  ddorg__pf4-component-mapper__wizard "
-                                        name="wizard"
-                                        role="dialog"
-                                      >
-                                        <button
-                                          aria-expanded="false"
-                                          aria-label="Wizard Toggle"
-                                          class="pf-c-wizard__toggle "
-                                          type="button"
-                                        >
-                                          <ol
-                                            class="pf-c-wizard__toggle-list"
-                                          >
-                                            <li
-                                              class="pf-c-wizard__toggle-list-item"
-                                            >
-                                              <span
-                                                class="pf-c-wizard__toggle-num"
-                                              >
-                                                1
-                                              </span>
-                                               
-                                              foo-step
-                                            </li>
-                                          </ol>
-                                          <span
-                                            class="pf-c-wizard__toggle-icon"
-                                          >
-                                            <svg
-                                              aria-hidden="true"
-                                              fill="currentColor"
-                                              height="1em"
-                                              role="img"
-                                              style="vertical-align: -0.125em;"
-                                              viewBox="0 0 320 512"
-                                              width="1em"
-                                            >
-                                              <path
-                                                d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
-                                              />
-                                            </svg>
-                                          </span>
-                                        </button>
-                                        <div
-                                          class="pf-c-wizard__outer-wrap"
-                                        >
-                                          <div
-                                            class="pf-c-wizard__inner-wrap"
-                                          >
-                                            <nav
-                                              class="pf-c-wizard__nav"
-                                            >
-                                              <ol
-                                                class="pf-c-wizard__nav-list"
-                                              >
-                                                <li
-                                                  class="pf-c-wizard__nav-item"
-                                                >
-                                                  <button
-                                                    aria-current="page"
-                                                    class="pf-c-wizard__nav-link pf-m-current"
-                                                    type="button"
-                                                  >
-                                                    foo-step
-                                                  </button>
-                                                </li>
-                                                <li
-                                                  class="pf-c-wizard__nav-item"
-                                                >
-                                                  <button
-                                                    aria-current="false"
-                                                    aria-disabled="true"
-                                                    class="pf-c-wizard__nav-link pf-m-disabled"
-                                                    disabled=""
-                                                    type="button"
-                                                  >
-                                                    bar-step
-                                                  </button>
-                                                </li>
-                                              </ol>
-                                            </nav>
-                                            <div
-                                              class="pf-c-wizard__main"
-                                            >
-                                              <div
-                                                class="pf-c-wizard__main-body"
-                                              >
-                                                <div
-                                                  class="pf-c-form"
-                                                >
-                                                  <div
-                                                    class="pf-c-form__group"
-                                                  >
-                                                    <div
-                                                      class="pf-c-form__group-control"
-                                                    >
-                                                      <input
-                                                        aria-invalid="false"
-                                                        class="pf-c-form-control"
-                                                        id="foo-field"
-                                                        name="foo-field"
-                                                        type="text"
-                                                        value=""
-                                                      />
-                                                      
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <footer
-                                              class="pf-c-wizard__footer "
-                                            >
-                                              <button
-                                                aria-disabled="false"
-                                                class="pf-c-button pf-m-primary"
-                                                data-ouia-component-id="OUIA-Generated-Button-primary-8"
-                                                data-ouia-component-type="PF4/Button"
-                                                data-ouia-safe="true"
-                                                type="button"
-                                              >
-                                                Next
-                                              </button>
-                                              <button
-                                                aria-disabled="true"
-                                                class="pf-c-button pf-m-secondary pf-m-disabled"
-                                                data-ouia-component-id="OUIA-Generated-Button-secondary-8"
-                                                data-ouia-component-type="PF4/Button"
-                                                data-ouia-safe="true"
-                                                disabled=""
-                                                type="button"
-                                              >
-                                                Back
-                                              </button>
-                                              <div
-                                                class="pf-c-wizard__footer-cancel"
-                                              >
-                                                <button
-                                                  aria-disabled="false"
-                                                  class="pf-c-button pf-m-link"
-                                                  data-ouia-component-id="OUIA-Generated-Button-link-8"
-                                                  data-ouia-component-type="PF4/Button"
-                                                  data-ouia-safe="true"
-                                                  type="button"
-                                                >
-                                                  Cancel
-                                                </button>
-                                              </div>
-                                            </footer>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            }
-                            inModal={true}
-                          >
-                            <Portal
-                              containerInfo={
+                              <div
+                                class="pf-c-backdrop__open"
+                              >
                                 <div>
                                   <div
                                     class="pf-c-backdrop"
@@ -1839,8 +1672,16 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                       class="pf-l-bullseye"
                                     >
                                       <div
+                                        aria-labelledby="wizard"
+                                        aria-modal="true"
                                         class="pf-c-modal-box pf-m-lg"
+                                        data-ouia-component-id="OUIA-Generated-Modal-large-3"
+                                        data-ouia-component-type="PF4/ModalContent"
+                                        data-ouia-safe="true"
+                                        id="pf-modal-part-2"
+                                        role="dialog"
                                       >
+                                        
                                         <div
                                           aria-modal="true"
                                           class="pf-c-wizard  ddorg__pf4-component-mapper__wizard "
@@ -1959,7 +1800,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                 <button
                                                   aria-disabled="false"
                                                   class="pf-c-button pf-m-primary"
-                                                  data-ouia-component-id="OUIA-Generated-Button-primary-8"
+                                                  data-ouia-component-id="OUIA-Generated-Button-primary-9"
                                                   data-ouia-component-type="PF4/Button"
                                                   data-ouia-safe="true"
                                                   type="button"
@@ -1969,7 +1810,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                 <button
                                                   aria-disabled="true"
                                                   class="pf-c-button pf-m-secondary pf-m-disabled"
-                                                  data-ouia-component-id="OUIA-Generated-Button-secondary-8"
+                                                  data-ouia-component-id="OUIA-Generated-Button-secondary-9"
                                                   data-ouia-component-type="PF4/Button"
                                                   data-ouia-safe="true"
                                                   disabled=""
@@ -1983,7 +1824,7 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                   <button
                                                     aria-disabled="false"
                                                     class="pf-c-button pf-m-link"
-                                                    data-ouia-component-id="OUIA-Generated-Button-link-8"
+                                                    data-ouia-component-id="OUIA-Generated-Button-link-9"
                                                     data-ouia-component-type="PF4/Button"
                                                     data-ouia-safe="true"
                                                     type="button"
@@ -1999,79 +1840,54 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                     </div>
                                   </div>
                                 </div>
-                              }
-                            >
-                              <Backdrop>
+                              </div>
+                            }
+                            inModal={true}
+                          >
+                            <Modal
+                              actions={Array []}
+                              appendTo={
                                 <div
-                                  className="pf-c-backdrop"
+                                  class="pf-c-backdrop__open"
                                 >
-                                  <Bullseye>
+                                  <div>
                                     <div
-                                      className="pf-l-bullseye"
+                                      class="pf-c-backdrop"
                                     >
                                       <div
-                                        className="pf-c-modal-box pf-m-lg"
+                                        class="pf-l-bullseye"
                                       >
                                         <div
+                                          aria-labelledby="wizard"
                                           aria-modal="true"
-                                          className="pf-c-wizard  ddorg__pf4-component-mapper__wizard "
-                                          name="wizard"
-                                          onKeyDown={[Function]}
+                                          class="pf-c-modal-box pf-m-lg"
+                                          data-ouia-component-id="OUIA-Generated-Modal-large-3"
+                                          data-ouia-component-type="PF4/ModalContent"
+                                          data-ouia-safe="true"
+                                          id="pf-modal-part-2"
                                           role="dialog"
                                         >
-                                          <WizardToggle
-                                            activeStepIndex={0}
-                                            currentStep={
-                                              Object {
-                                                "fields": Array [
-                                                  Object {
-                                                    "component": "text-field",
-                                                    "name": "foo-field",
-                                                  },
-                                                ],
-                                                "name": "1",
-                                                "nextStep": "2",
-                                                "title": "foo-step",
-                                              }
-                                            }
-                                            dispatch={[Function]}
-                                            isOpen={false}
-                                            navSchema={
-                                              Array [
-                                                Object {
-                                                  "index": 0,
-                                                  "name": "1",
-                                                  "primary": true,
-                                                  "substepOf": undefined,
-                                                  "substepOfTitle": undefined,
-                                                  "title": "foo-step",
-                                                },
-                                                Object {
-                                                  "index": 1,
-                                                  "name": "2",
-                                                  "primary": true,
-                                                  "substepOf": undefined,
-                                                  "substepOfTitle": undefined,
-                                                  "title": "bar-step",
-                                                },
-                                              ]
-                                            }
+                                          
+                                          <div
+                                            aria-modal="true"
+                                            class="pf-c-wizard  ddorg__pf4-component-mapper__wizard "
+                                            name="wizard"
+                                            role="dialog"
                                           >
                                             <button
-                                              aria-expanded={false}
+                                              aria-expanded="false"
                                               aria-label="Wizard Toggle"
-                                              className="pf-c-wizard__toggle "
-                                              onClick={[Function]}
+                                              class="pf-c-wizard__toggle "
                                               type="button"
                                             >
                                               <ol
-                                                className="pf-c-wizard__toggle-list"
+                                                class="pf-c-wizard__toggle-list"
                                               >
                                                 <li
-                                                  className="pf-c-wizard__toggle-list-item"
+                                                  class="pf-c-wizard__toggle-list-item"
                                                 >
                                                   <span
-                                                    className="pf-c-wizard__toggle-num"
+                                                    class="pf-c-wizard__toggle-num"
                                                   >
                                                     1
                                                   </span>
@@ -2080,250 +1896,926 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                 </li>
                                               </ol>
                                               <span
-                                                className="pf-c-wizard__toggle-icon"
+                                                class="pf-c-wizard__toggle-icon"
                                               >
-                                                <CaretDownIcon
+                                                <svg
                                                   aria-hidden="true"
-                                                  color="currentColor"
-                                                  noVerticalAlign={false}
-                                                  size="sm"
+                                                  fill="currentColor"
+                                                  height="1em"
+                                                  role="img"
+                                                  style="vertical-align: -0.125em;"
+                                                  viewBox="0 0 320 512"
+                                                  width="1em"
                                                 >
-                                                  <svg
-                                                    aria-hidden="true"
-                                                    aria-labelledby={null}
-                                                    fill="currentColor"
-                                                    height="1em"
-                                                    role="img"
-                                                    style={
-                                                      Object {
-                                                        "verticalAlign": "-0.125em",
-                                                      }
-                                                    }
-                                                    viewBox="0 0 320 512"
-                                                    width="1em"
-                                                  >
-                                                    <path
-                                                      d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
-                                                    />
-                                                  </svg>
-                                                </CaretDownIcon>
+                                                  <path
+                                                    d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                                                  />
+                                                </svg>
                                               </span>
                                             </button>
-                                          </WizardToggle>
-                                          <div
-                                            className="pf-c-wizard__outer-wrap"
-                                          >
                                             <div
-                                              className="pf-c-wizard__inner-wrap"
+                                              class="pf-c-wizard__outer-wrap"
                                             >
-                                              <WizardNav
-                                                isOpen={false}
+                                              <div
+                                                class="pf-c-wizard__inner-wrap"
                                               >
                                                 <nav
-                                                  className="pf-c-wizard__nav"
+                                                  class="pf-c-wizard__nav"
                                                 >
                                                   <ol
-                                                    className="pf-c-wizard__nav-list"
+                                                    class="pf-c-wizard__nav-list"
                                                   >
-                                                    <FormSpy
-                                                      subscription={
-                                                        Object {
-                                                          "valid": true,
-                                                          "validating": true,
-                                                          "values": true,
-                                                        }
-                                                      }
+                                                    <li
+                                                      class="pf-c-wizard__nav-item"
                                                     >
-                                                      <WizardNavigation
-                                                        activeStepIndex={0}
-                                                        isDynamic={false}
-                                                        jumpToStep={[Function]}
-                                                        maxStepIndex={0}
-                                                        navSchema={
-                                                          Array [
-                                                            Object {
-                                                              "index": 0,
-                                                              "name": "1",
-                                                              "primary": true,
-                                                              "substepOf": undefined,
-                                                              "substepOfTitle": undefined,
-                                                              "title": "foo-step",
-                                                            },
-                                                            Object {
-                                                              "index": 1,
-                                                              "name": "2",
-                                                              "primary": true,
-                                                              "substepOf": undefined,
-                                                              "substepOfTitle": undefined,
-                                                              "title": "bar-step",
-                                                            },
-                                                          ]
-                                                        }
-                                                        setPrevSteps={[Function]}
-                                                        valid={true}
-                                                        validating={false}
-                                                        values={Object {}}
+                                                      <button
+                                                        aria-current="page"
+                                                        class="pf-c-wizard__nav-link pf-m-current"
+                                                        type="button"
                                                       >
-                                                        <Component
-                                                          activeStepIndex={0}
-                                                          isDynamic={false}
-                                                          jumpToStep={[Function]}
-                                                          maxStepIndex={0}
-                                                          navSchema={
-                                                            Array [
-                                                              Object {
-                                                                "index": 0,
-                                                                "name": "1",
-                                                                "primary": true,
-                                                                "substepOf": undefined,
-                                                                "substepOfTitle": undefined,
-                                                                "title": "foo-step",
-                                                              },
-                                                              Object {
-                                                                "index": 1,
-                                                                "name": "2",
-                                                                "primary": true,
-                                                                "substepOf": undefined,
-                                                                "substepOfTitle": undefined,
-                                                                "title": "bar-step",
-                                                              },
-                                                            ]
-                                                          }
-                                                          valid={true}
-                                                          validating={false}
-                                                        >
-                                                          <WizardNavItem
-                                                            content="foo-step"
-                                                            isCurrent={true}
-                                                            isDisabled={false}
-                                                            key="1"
-                                                            onNavItemClick={[Function]}
-                                                            step={0}
-                                                            type="button"
-                                                          >
-                                                            <li
-                                                              className="pf-c-wizard__nav-item"
-                                                            >
-                                                              <button
-                                                                aria-current="page"
-                                                                aria-disabled={null}
-                                                                className="pf-c-wizard__nav-link pf-m-current"
-                                                                disabled={false}
-                                                                onClick={[Function]}
-                                                                type="button"
-                                                              >
-                                                                foo-step
-                                                              </button>
-                                                            </li>
-                                                          </WizardNavItem>
-                                                          <WizardNavItem
-                                                            content="bar-step"
-                                                            isCurrent={false}
-                                                            isDisabled={true}
-                                                            key="2"
-                                                            onNavItemClick={[Function]}
-                                                            step={1}
-                                                            type="button"
-                                                          >
-                                                            <li
-                                                              className="pf-c-wizard__nav-item"
-                                                            >
-                                                              <button
-                                                                aria-current={false}
-                                                                aria-disabled={true}
-                                                                className="pf-c-wizard__nav-link pf-m-disabled"
-                                                                disabled={true}
-                                                                onClick={[Function]}
-                                                                type="button"
-                                                              >
-                                                                bar-step
-                                                              </button>
-                                                            </li>
-                                                          </WizardNavItem>
-                                                        </Component>
-                                                      </WizardNavigation>
-                                                    </FormSpy>
+                                                        foo-step
+                                                      </button>
+                                                    </li>
+                                                    <li
+                                                      class="pf-c-wizard__nav-item"
+                                                    >
+                                                      <button
+                                                        aria-current="false"
+                                                        aria-disabled="true"
+                                                        class="pf-c-wizard__nav-link pf-m-disabled"
+                                                        disabled=""
+                                                        type="button"
+                                                      >
+                                                        bar-step
+                                                      </button>
+                                                    </li>
                                                   </ol>
                                                 </nav>
-                                              </WizardNav>
-                                              <WizardStep
-                                                StepTemplate={[Function]}
-                                                buttonLabels={
-                                                  Object {
-                                                    "back": "Back",
-                                                    "cancel": "Cancel",
-                                                    "next": "Next",
-                                                    "submit": "Submit",
-                                                  }
-                                                }
-                                                disableBack={true}
-                                                fields={
-                                                  Array [
-                                                    Object {
-                                                      "component": "text-field",
-                                                      "name": "foo-field",
-                                                    },
-                                                  ]
-                                                }
-                                                formOptions={
-                                                  Object {
-                                                    "batch": [Function],
-                                                    "blur": [Function],
-                                                    "change": [Function],
-                                                    "clearOnUnmount": false,
-                                                    "clearedValue": undefined,
-                                                    "concat": [Function],
-                                                    "destroyOnUnregister": false,
-                                                    "focus": [Function],
-                                                    "getFieldState": [Function],
-                                                    "getRegisteredFields": [Function],
-                                                    "getState": [Function],
-                                                    "handleSubmit": [Function],
-                                                    "initialize": [Function],
-                                                    "insert": [Function],
-                                                    "isValidationPaused": [Function],
-                                                    "move": [Function],
-                                                    "onCancel": [Function],
-                                                    "onReset": [Function],
-                                                    "onSubmit": [MockFunction],
-                                                    "pauseValidation": [Function],
-                                                    "pop": [Function],
-                                                    "pristine": true,
-                                                    "push": [Function],
-                                                    "registerField": [Function],
-                                                    "registerInputFile": [Function],
-                                                    "remove": [Function],
-                                                    "removeBatch": [Function],
-                                                    "renderForm": [Function],
-                                                    "reset": [Function],
-                                                    "resetFieldState": [Function],
-                                                    "restart": [Function],
-                                                    "resumeValidation": [Function],
-                                                    "setConfig": [Function],
-                                                    "shift": [Function],
-                                                    "submit": [Function],
-                                                    "subscribe": [Function],
-                                                    "swap": [Function],
-                                                    "unRegisterInputFile": [Function],
-                                                    "unshift": [Function],
-                                                    "update": [Function],
-                                                    "valid": true,
-                                                  }
-                                                }
-                                                handleNext={[Function]}
-                                                handlePrev={[Function]}
-                                                name="1"
-                                                nextStep="2"
-                                                title="foo-step"
-                                              >
-                                                <WizardBody>
+                                                <div
+                                                  class="pf-c-wizard__main"
+                                                >
                                                   <div
-                                                    className="pf-c-wizard__main"
+                                                    class="pf-c-wizard__main-body"
                                                   >
                                                     <div
-                                                      className="pf-c-wizard__main-body"
+                                                      class="pf-c-form"
                                                     >
-                                                      <DefaultStepTemplate
+                                                      <div
+                                                        class="pf-c-form__group"
+                                                      >
+                                                        <div
+                                                          class="pf-c-form__group-control"
+                                                        >
+                                                          <input
+                                                            aria-invalid="false"
+                                                            class="pf-c-form-control"
+                                                            id="foo-field"
+                                                            name="foo-field"
+                                                            type="text"
+                                                            value=""
+                                                          />
+                                                          
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <footer
+                                                  class="pf-c-wizard__footer "
+                                                >
+                                                  <button
+                                                    aria-disabled="false"
+                                                    class="pf-c-button pf-m-primary"
+                                                    data-ouia-component-id="OUIA-Generated-Button-primary-9"
+                                                    data-ouia-component-type="PF4/Button"
+                                                    data-ouia-safe="true"
+                                                    type="button"
+                                                  >
+                                                    Next
+                                                  </button>
+                                                  <button
+                                                    aria-disabled="true"
+                                                    class="pf-c-button pf-m-secondary pf-m-disabled"
+                                                    data-ouia-component-id="OUIA-Generated-Button-secondary-9"
+                                                    data-ouia-component-type="PF4/Button"
+                                                    data-ouia-safe="true"
+                                                    disabled=""
+                                                    type="button"
+                                                  >
+                                                    Back
+                                                  </button>
+                                                  <div
+                                                    class="pf-c-wizard__footer-cancel"
+                                                  >
+                                                    <button
+                                                      aria-disabled="false"
+                                                      class="pf-c-button pf-m-link"
+                                                      data-ouia-component-id="OUIA-Generated-Button-link-9"
+                                                      data-ouia-component-type="PF4/Button"
+                                                      data-ouia-safe="true"
+                                                      type="button"
+                                                    >
+                                                      Cancel
+                                                    </button>
+                                                  </div>
+                                                </footer>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              }
+                              aria-describedby=""
+                              aria-label=""
+                              aria-labelledby="wizard"
+                              className=""
+                              hasNoBodyWrapper={true}
+                              isOpen={true}
+                              onClose={[Function]}
+                              ouiaSafe={true}
+                              showClose={false}
+                              title=""
+                              titleIconVariant={null}
+                              titleLabel=""
+                              variant="large"
+                            >
+                              <Portal
+                                containerInfo={
+                                  <div>
+                                    <div
+                                      class="pf-c-backdrop"
+                                    >
+                                      <div
+                                        class="pf-l-bullseye"
+                                      >
+                                        <div
+                                          aria-labelledby="wizard"
+                                          aria-modal="true"
+                                          class="pf-c-modal-box pf-m-lg"
+                                          data-ouia-component-id="OUIA-Generated-Modal-large-3"
+                                          data-ouia-component-type="PF4/ModalContent"
+                                          data-ouia-safe="true"
+                                          id="pf-modal-part-2"
+                                          role="dialog"
+                                        >
+                                          
+                                          <div
+                                            aria-modal="true"
+                                            class="pf-c-wizard  ddorg__pf4-component-mapper__wizard "
+                                            name="wizard"
+                                            role="dialog"
+                                          >
+                                            <button
+                                              aria-expanded="false"
+                                              aria-label="Wizard Toggle"
+                                              class="pf-c-wizard__toggle "
+                                              type="button"
+                                            >
+                                              <ol
+                                                class="pf-c-wizard__toggle-list"
+                                              >
+                                                <li
+                                                  class="pf-c-wizard__toggle-list-item"
+                                                >
+                                                  <span
+                                                    class="pf-c-wizard__toggle-num"
+                                                  >
+                                                    1
+                                                  </span>
+                                                   
+                                                  foo-step
+                                                </li>
+                                              </ol>
+                                              <span
+                                                class="pf-c-wizard__toggle-icon"
+                                              >
+                                                <svg
+                                                  aria-hidden="true"
+                                                  fill="currentColor"
+                                                  height="1em"
+                                                  role="img"
+                                                  style="vertical-align: -0.125em;"
+                                                  viewBox="0 0 320 512"
+                                                  width="1em"
+                                                >
+                                                  <path
+                                                    d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                                                  />
+                                                </svg>
+                                              </span>
+                                            </button>
+                                            <div
+                                              class="pf-c-wizard__outer-wrap"
+                                            >
+                                              <div
+                                                class="pf-c-wizard__inner-wrap"
+                                              >
+                                                <nav
+                                                  class="pf-c-wizard__nav"
+                                                >
+                                                  <ol
+                                                    class="pf-c-wizard__nav-list"
+                                                  >
+                                                    <li
+                                                      class="pf-c-wizard__nav-item"
+                                                    >
+                                                      <button
+                                                        aria-current="page"
+                                                        class="pf-c-wizard__nav-link pf-m-current"
+                                                        type="button"
+                                                      >
+                                                        foo-step
+                                                      </button>
+                                                    </li>
+                                                    <li
+                                                      class="pf-c-wizard__nav-item"
+                                                    >
+                                                      <button
+                                                        aria-current="false"
+                                                        aria-disabled="true"
+                                                        class="pf-c-wizard__nav-link pf-m-disabled"
+                                                        disabled=""
+                                                        type="button"
+                                                      >
+                                                        bar-step
+                                                      </button>
+                                                    </li>
+                                                  </ol>
+                                                </nav>
+                                                <div
+                                                  class="pf-c-wizard__main"
+                                                >
+                                                  <div
+                                                    class="pf-c-wizard__main-body"
+                                                  >
+                                                    <div
+                                                      class="pf-c-form"
+                                                    >
+                                                      <div
+                                                        class="pf-c-form__group"
+                                                      >
+                                                        <div
+                                                          class="pf-c-form__group-control"
+                                                        >
+                                                          <input
+                                                            aria-invalid="false"
+                                                            class="pf-c-form-control"
+                                                            id="foo-field"
+                                                            name="foo-field"
+                                                            type="text"
+                                                            value=""
+                                                          />
+                                                          
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <footer
+                                                  class="pf-c-wizard__footer "
+                                                >
+                                                  <button
+                                                    aria-disabled="false"
+                                                    class="pf-c-button pf-m-primary"
+                                                    data-ouia-component-id="OUIA-Generated-Button-primary-9"
+                                                    data-ouia-component-type="PF4/Button"
+                                                    data-ouia-safe="true"
+                                                    type="button"
+                                                  >
+                                                    Next
+                                                  </button>
+                                                  <button
+                                                    aria-disabled="true"
+                                                    class="pf-c-button pf-m-secondary pf-m-disabled"
+                                                    data-ouia-component-id="OUIA-Generated-Button-secondary-9"
+                                                    data-ouia-component-type="PF4/Button"
+                                                    data-ouia-safe="true"
+                                                    disabled=""
+                                                    type="button"
+                                                  >
+                                                    Back
+                                                  </button>
+                                                  <div
+                                                    class="pf-c-wizard__footer-cancel"
+                                                  >
+                                                    <button
+                                                      aria-disabled="false"
+                                                      class="pf-c-button pf-m-link"
+                                                      data-ouia-component-id="OUIA-Generated-Button-link-9"
+                                                      data-ouia-component-type="PF4/Button"
+                                                      data-ouia-safe="true"
+                                                      type="button"
+                                                    >
+                                                      Cancel
+                                                    </button>
+                                                  </div>
+                                                </footer>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                }
+                              >
+                                <ModalContent
+                                  actions={Array []}
+                                  aria-describedby=""
+                                  aria-label=""
+                                  aria-labelledby="wizard"
+                                  boxId="pf-modal-part-2"
+                                  className=""
+                                  descriptorId="pf-modal-part-4"
+                                  hasNoBodyWrapper={true}
+                                  isOpen={true}
+                                  labelId="pf-modal-part-3"
+                                  onClose={[Function]}
+                                  ouiaId="OUIA-Generated-Modal-large-3"
+                                  ouiaSafe={true}
+                                  showClose={false}
+                                  title=""
+                                  titleIconVariant={null}
+                                  titleLabel=""
+                                  variant="large"
+                                >
+                                  <Backdrop>
+                                    <div
+                                      className="pf-c-backdrop"
+                                    >
+                                      <FocusTrap
+                                        active={true}
+                                        className="pf-l-bullseye"
+                                        focusTrapOptions={
+                                          Object {
+                                            "clickOutsideDeactivates": true,
+                                          }
+                                        }
+                                        paused={false}
+                                        preventScrollOnDeactivate={false}
+                                      >
+                                        <div
+                                          className="pf-l-bullseye"
+                                        >
+                                          <ModalBox
+                                            aria-describedby={null}
+                                            aria-label=""
+                                            aria-labelledby="wizard"
+                                            className=""
+                                            data-ouia-component-id="OUIA-Generated-Modal-large-3"
+                                            data-ouia-component-type="PF4/ModalContent"
+                                            data-ouia-safe={true}
+                                            id="pf-modal-part-2"
+                                            style={Object {}}
+                                            variant="large"
+                                          >
+                                            <div
+                                              aria-describedby={null}
+                                              aria-label={null}
+                                              aria-labelledby="wizard"
+                                              aria-modal="true"
+                                              className="pf-c-modal-box pf-m-lg"
+                                              data-ouia-component-id="OUIA-Generated-Modal-large-3"
+                                              data-ouia-component-type="PF4/ModalContent"
+                                              data-ouia-safe={true}
+                                              id="pf-modal-part-2"
+                                              role="dialog"
+                                              style={Object {}}
+                                            >
+                                              <div
+                                                aria-modal="true"
+                                                className="pf-c-wizard  ddorg__pf4-component-mapper__wizard "
+                                                name="wizard"
+                                                onKeyDown={[Function]}
+                                                role="dialog"
+                                              >
+                                                <WizardToggle
+                                                  activeStepIndex={0}
+                                                  currentStep={
+                                                    Object {
+                                                      "fields": Array [
+                                                        Object {
+                                                          "component": "text-field",
+                                                          "name": "foo-field",
+                                                        },
+                                                      ],
+                                                      "name": "1",
+                                                      "nextStep": "2",
+                                                      "title": "foo-step",
+                                                    }
+                                                  }
+                                                  dispatch={[Function]}
+                                                  isOpen={false}
+                                                  navSchema={
+                                                    Array [
+                                                      Object {
+                                                        "index": 0,
+                                                        "name": "1",
+                                                        "primary": true,
+                                                        "substepOf": undefined,
+                                                        "substepOfTitle": undefined,
+                                                        "title": "foo-step",
+                                                      },
+                                                      Object {
+                                                        "index": 1,
+                                                        "name": "2",
+                                                        "primary": true,
+                                                        "substepOf": undefined,
+                                                        "substepOfTitle": undefined,
+                                                        "title": "bar-step",
+                                                      },
+                                                    ]
+                                                  }
+                                                >
+                                                  <button
+                                                    aria-expanded={false}
+                                                    aria-label="Wizard Toggle"
+                                                    className="pf-c-wizard__toggle "
+                                                    onClick={[Function]}
+                                                    type="button"
+                                                  >
+                                                    <ol
+                                                      className="pf-c-wizard__toggle-list"
+                                                    >
+                                                      <li
+                                                        className="pf-c-wizard__toggle-list-item"
+                                                      >
+                                                        <span
+                                                          className="pf-c-wizard__toggle-num"
+                                                        >
+                                                          1
+                                                        </span>
+                                                         
+                                                        foo-step
+                                                      </li>
+                                                    </ol>
+                                                    <span
+                                                      className="pf-c-wizard__toggle-icon"
+                                                    >
+                                                      <CaretDownIcon
+                                                        aria-hidden="true"
+                                                        color="currentColor"
+                                                        noVerticalAlign={false}
+                                                        size="sm"
+                                                      >
+                                                        <svg
+                                                          aria-hidden="true"
+                                                          aria-labelledby={null}
+                                                          fill="currentColor"
+                                                          height="1em"
+                                                          role="img"
+                                                          style={
+                                                            Object {
+                                                              "verticalAlign": "-0.125em",
+                                                            }
+                                                          }
+                                                          viewBox="0 0 320 512"
+                                                          width="1em"
+                                                        >
+                                                          <path
+                                                            d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                                                          />
+                                                        </svg>
+                                                      </CaretDownIcon>
+                                                    </span>
+                                                  </button>
+                                                </WizardToggle>
+                                                <div
+                                                  className="pf-c-wizard__outer-wrap"
+                                                >
+                                                  <div
+                                                    className="pf-c-wizard__inner-wrap"
+                                                  >
+                                                    <WizardNav
+                                                      isOpen={false}
+                                                    >
+                                                      <nav
+                                                        className="pf-c-wizard__nav"
+                                                      >
+                                                        <ol
+                                                          className="pf-c-wizard__nav-list"
+                                                        >
+                                                          <FormSpy
+                                                            subscription={
+                                                              Object {
+                                                                "valid": true,
+                                                                "validating": true,
+                                                                "values": true,
+                                                              }
+                                                            }
+                                                          >
+                                                            <WizardNavigation
+                                                              activeStepIndex={0}
+                                                              isDynamic={false}
+                                                              jumpToStep={[Function]}
+                                                              maxStepIndex={0}
+                                                              navSchema={
+                                                                Array [
+                                                                  Object {
+                                                                    "index": 0,
+                                                                    "name": "1",
+                                                                    "primary": true,
+                                                                    "substepOf": undefined,
+                                                                    "substepOfTitle": undefined,
+                                                                    "title": "foo-step",
+                                                                  },
+                                                                  Object {
+                                                                    "index": 1,
+                                                                    "name": "2",
+                                                                    "primary": true,
+                                                                    "substepOf": undefined,
+                                                                    "substepOfTitle": undefined,
+                                                                    "title": "bar-step",
+                                                                  },
+                                                                ]
+                                                              }
+                                                              setPrevSteps={[Function]}
+                                                              valid={true}
+                                                              validating={false}
+                                                              values={Object {}}
+                                                            >
+                                                              <Component
+                                                                activeStepIndex={0}
+                                                                isDynamic={false}
+                                                                jumpToStep={[Function]}
+                                                                maxStepIndex={0}
+                                                                navSchema={
+                                                                  Array [
+                                                                    Object {
+                                                                      "index": 0,
+                                                                      "name": "1",
+                                                                      "primary": true,
+                                                                      "substepOf": undefined,
+                                                                      "substepOfTitle": undefined,
+                                                                      "title": "foo-step",
+                                                                    },
+                                                                    Object {
+                                                                      "index": 1,
+                                                                      "name": "2",
+                                                                      "primary": true,
+                                                                      "substepOf": undefined,
+                                                                      "substepOfTitle": undefined,
+                                                                      "title": "bar-step",
+                                                                    },
+                                                                  ]
+                                                                }
+                                                                valid={true}
+                                                                validating={false}
+                                                              >
+                                                                <WizardNavItem
+                                                                  content="foo-step"
+                                                                  isCurrent={true}
+                                                                  isDisabled={false}
+                                                                  key="1"
+                                                                  onNavItemClick={[Function]}
+                                                                  step={0}
+                                                                  type="button"
+                                                                >
+                                                                  <li
+                                                                    className="pf-c-wizard__nav-item"
+                                                                  >
+                                                                    <button
+                                                                      aria-current="page"
+                                                                      aria-disabled={null}
+                                                                      className="pf-c-wizard__nav-link pf-m-current"
+                                                                      disabled={false}
+                                                                      onClick={[Function]}
+                                                                      type="button"
+                                                                    >
+                                                                      foo-step
+                                                                    </button>
+                                                                  </li>
+                                                                </WizardNavItem>
+                                                                <WizardNavItem
+                                                                  content="bar-step"
+                                                                  isCurrent={false}
+                                                                  isDisabled={true}
+                                                                  key="2"
+                                                                  onNavItemClick={[Function]}
+                                                                  step={1}
+                                                                  type="button"
+                                                                >
+                                                                  <li
+                                                                    className="pf-c-wizard__nav-item"
+                                                                  >
+                                                                    <button
+                                                                      aria-current={false}
+                                                                      aria-disabled={true}
+                                                                      className="pf-c-wizard__nav-link pf-m-disabled"
+                                                                      disabled={true}
+                                                                      onClick={[Function]}
+                                                                      type="button"
+                                                                    >
+                                                                      bar-step
+                                                                    </button>
+                                                                  </li>
+                                                                </WizardNavItem>
+                                                              </Component>
+                                                            </WizardNavigation>
+                                                          </FormSpy>
+                                                        </ol>
+                                                      </nav>
+                                                    </WizardNav>
+                                                    <WizardStep
+                                                      StepTemplate={[Function]}
+                                                      buttonLabels={
+                                                        Object {
+                                                          "back": "Back",
+                                                          "cancel": "Cancel",
+                                                          "next": "Next",
+                                                          "submit": "Submit",
+                                                        }
+                                                      }
+                                                      disableBack={true}
+                                                      fields={
+                                                        Array [
+                                                          Object {
+                                                            "component": "text-field",
+                                                            "name": "foo-field",
+                                                          },
+                                                        ]
+                                                      }
+                                                      formOptions={
+                                                        Object {
+                                                          "batch": [Function],
+                                                          "blur": [Function],
+                                                          "change": [Function],
+                                                          "clearOnUnmount": false,
+                                                          "clearedValue": undefined,
+                                                          "concat": [Function],
+                                                          "destroyOnUnregister": false,
+                                                          "focus": [Function],
+                                                          "getFieldState": [Function],
+                                                          "getRegisteredFields": [Function],
+                                                          "getState": [Function],
+                                                          "handleSubmit": [Function],
+                                                          "initialize": [Function],
+                                                          "insert": [Function],
+                                                          "isValidationPaused": [Function],
+                                                          "move": [Function],
+                                                          "onCancel": [Function],
+                                                          "onReset": [Function],
+                                                          "onSubmit": [MockFunction],
+                                                          "pauseValidation": [Function],
+                                                          "pop": [Function],
+                                                          "pristine": true,
+                                                          "push": [Function],
+                                                          "registerField": [Function],
+                                                          "registerInputFile": [Function],
+                                                          "remove": [Function],
+                                                          "removeBatch": [Function],
+                                                          "renderForm": [Function],
+                                                          "reset": [Function],
+                                                          "resetFieldState": [Function],
+                                                          "restart": [Function],
+                                                          "resumeValidation": [Function],
+                                                          "setConfig": [Function],
+                                                          "shift": [Function],
+                                                          "submit": [Function],
+                                                          "subscribe": [Function],
+                                                          "swap": [Function],
+                                                          "unRegisterInputFile": [Function],
+                                                          "unshift": [Function],
+                                                          "update": [Function],
+                                                          "valid": true,
+                                                        }
+                                                      }
+                                                      handleNext={[Function]}
+                                                      handlePrev={[Function]}
+                                                      name="1"
+                                                      nextStep="2"
+                                                      title="foo-step"
+                                                    >
+                                                      <WizardBody>
+                                                        <div
+                                                          className="pf-c-wizard__main"
+                                                        >
+                                                          <div
+                                                            className="pf-c-wizard__main-body"
+                                                          >
+                                                            <DefaultStepTemplate
+                                                              buttonLabels={
+                                                                Object {
+                                                                  "back": "Back",
+                                                                  "cancel": "Cancel",
+                                                                  "next": "Next",
+                                                                  "submit": "Submit",
+                                                                }
+                                                              }
+                                                              disableBack={true}
+                                                              fields={
+                                                                Array [
+                                                                  Object {
+                                                                    "component": "text-field",
+                                                                    "name": "foo-field",
+                                                                  },
+                                                                ]
+                                                              }
+                                                              formFields={
+                                                                Array [
+                                                                  Array [
+                                                                    <SingleField
+                                                                      component="text-field"
+                                                                      name="foo-field"
+                                                                    />,
+                                                                  ],
+                                                                ]
+                                                              }
+                                                              formOptions={
+                                                                Object {
+                                                                  "batch": [Function],
+                                                                  "blur": [Function],
+                                                                  "change": [Function],
+                                                                  "clearOnUnmount": false,
+                                                                  "clearedValue": undefined,
+                                                                  "concat": [Function],
+                                                                  "destroyOnUnregister": false,
+                                                                  "focus": [Function],
+                                                                  "getFieldState": [Function],
+                                                                  "getRegisteredFields": [Function],
+                                                                  "getState": [Function],
+                                                                  "handleSubmit": [Function],
+                                                                  "initialize": [Function],
+                                                                  "insert": [Function],
+                                                                  "isValidationPaused": [Function],
+                                                                  "move": [Function],
+                                                                  "onCancel": [Function],
+                                                                  "onReset": [Function],
+                                                                  "onSubmit": [MockFunction],
+                                                                  "pauseValidation": [Function],
+                                                                  "pop": [Function],
+                                                                  "pristine": true,
+                                                                  "push": [Function],
+                                                                  "registerField": [Function],
+                                                                  "registerInputFile": [Function],
+                                                                  "remove": [Function],
+                                                                  "removeBatch": [Function],
+                                                                  "renderForm": [Function],
+                                                                  "reset": [Function],
+                                                                  "resetFieldState": [Function],
+                                                                  "restart": [Function],
+                                                                  "resumeValidation": [Function],
+                                                                  "setConfig": [Function],
+                                                                  "shift": [Function],
+                                                                  "submit": [Function],
+                                                                  "subscribe": [Function],
+                                                                  "swap": [Function],
+                                                                  "unRegisterInputFile": [Function],
+                                                                  "unshift": [Function],
+                                                                  "update": [Function],
+                                                                  "valid": true,
+                                                                }
+                                                              }
+                                                              formRef={
+                                                                Object {
+                                                                  "current": <div
+                                                                    class="pf-c-form"
+                                                                  >
+                                                                    <div
+                                                                      class="pf-c-form__group"
+                                                                    >
+                                                                      <div
+                                                                        class="pf-c-form__group-control"
+                                                                      >
+                                                                        <input
+                                                                          aria-invalid="false"
+                                                                          class="pf-c-form-control"
+                                                                          id="foo-field"
+                                                                          name="foo-field"
+                                                                          type="text"
+                                                                          value=""
+                                                                        />
+                                                                        
+                                                                      </div>
+                                                                    </div>
+                                                                  </div>,
+                                                                }
+                                                              }
+                                                              handleNext={[Function]}
+                                                              handlePrev={[Function]}
+                                                              name="1"
+                                                              nextStep="2"
+                                                              title="foo-step"
+                                                            >
+                                                              <div
+                                                                className="pf-c-form"
+                                                              >
+                                                                <SingleField
+                                                                  component="text-field"
+                                                                  key="foo-field"
+                                                                  name="foo-field"
+                                                                >
+                                                                  <FormConditionWrapper
+                                                                    field={
+                                                                      Object {
+                                                                        "component": "text-field",
+                                                                        "name": "foo-field",
+                                                                      }
+                                                                    }
+                                                                  >
+                                                                    <FormFieldHideWrapper
+                                                                      hideField={false}
+                                                                    >
+                                                                      <TextField
+                                                                        component="text-field"
+                                                                        name="foo-field"
+                                                                      >
+                                                                        <FormGroup
+                                                                          id="foo-field"
+                                                                          meta={
+                                                                            Object {
+                                                                              "active": false,
+                                                                              "data": Object {},
+                                                                              "dirty": false,
+                                                                              "dirtySinceLastSubmit": false,
+                                                                              "error": undefined,
+                                                                              "initial": undefined,
+                                                                              "invalid": false,
+                                                                              "length": undefined,
+                                                                              "modified": false,
+                                                                              "modifiedSinceLastSubmit": false,
+                                                                              "pristine": true,
+                                                                              "submitError": undefined,
+                                                                              "submitFailed": false,
+                                                                              "submitSucceeded": false,
+                                                                              "submitting": false,
+                                                                              "touched": false,
+                                                                              "valid": true,
+                                                                              "validating": false,
+                                                                              "visited": false,
+                                                                            }
+                                                                          }
+                                                                        >
+                                                                          <FormGroup
+                                                                            fieldId="foo-field"
+                                                                            validated="default"
+                                                                          >
+                                                                            <div
+                                                                              className="pf-c-form__group"
+                                                                            >
+                                                                              <div
+                                                                                className="pf-c-form__group-control"
+                                                                              >
+                                                                                <TextInput
+                                                                                  id="foo-field"
+                                                                                  name="foo-field"
+                                                                                  onBlur={[Function]}
+                                                                                  onChange={[Function]}
+                                                                                  onFocus={[Function]}
+                                                                                  validated="default"
+                                                                                  value=""
+                                                                                >
+                                                                                  <TextInputBase
+                                                                                    aria-label={null}
+                                                                                    className=""
+                                                                                    id="foo-field"
+                                                                                    innerRef={null}
+                                                                                    isDisabled={false}
+                                                                                    isLeftTruncated={false}
+                                                                                    isReadOnly={false}
+                                                                                    isRequired={false}
+                                                                                    name="foo-field"
+                                                                                    onBlur={[Function]}
+                                                                                    onChange={[Function]}
+                                                                                    onFocus={[Function]}
+                                                                                    type="text"
+                                                                                    validated="default"
+                                                                                    value=""
+                                                                                  >
+                                                                                    <input
+                                                                                      aria-invalid={false}
+                                                                                      aria-label={null}
+                                                                                      className="pf-c-form-control"
+                                                                                      disabled={false}
+                                                                                      id="foo-field"
+                                                                                      name="foo-field"
+                                                                                      onBlur={[Function]}
+                                                                                      onChange={[Function]}
+                                                                                      onFocus={[Function]}
+                                                                                      readOnly={false}
+                                                                                      required={false}
+                                                                                      type="text"
+                                                                                      value=""
+                                                                                    />
+                                                                                  </TextInputBase>
+                                                                                </TextInput>
+                                                                              </div>
+                                                                            </div>
+                                                                          </FormGroup>
+                                                                        </FormGroup>
+                                                                      </TextField>
+                                                                    </FormFieldHideWrapper>
+                                                                  </FormConditionWrapper>
+                                                                </SingleField>
+                                                              </div>
+                                                            </DefaultStepTemplate>
+                                                          </div>
+                                                        </div>
+                                                      </WizardBody>
+                                                      <WizardStepButtons
                                                         buttonLabels={
                                                           Object {
                                                             "back": "Back",
@@ -2333,24 +2825,6 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                           }
                                                         }
                                                         disableBack={true}
-                                                        fields={
-                                                          Array [
-                                                            Object {
-                                                              "component": "text-field",
-                                                              "name": "foo-field",
-                                                            },
-                                                          ]
-                                                        }
-                                                        formFields={
-                                                          Array [
-                                                            Array [
-                                                              <SingleField
-                                                                component="text-field"
-                                                                name="foo-field"
-                                                              />,
-                                                            ],
-                                                          ]
-                                                        }
                                                         formOptions={
                                                           Object {
                                                             "batch": [Function],
@@ -2396,342 +2870,144 @@ exports[`<Wizard /> should render correctly in modal and unmount 1`] = `
                                                             "valid": true,
                                                           }
                                                         }
-                                                        formRef={
-                                                          Object {
-                                                            "current": <div
-                                                              class="pf-c-form"
-                                                            >
-                                                              <div
-                                                                class="pf-c-form__group"
-                                                              >
-                                                                <div
-                                                                  class="pf-c-form__group-control"
-                                                                >
-                                                                  <input
-                                                                    aria-invalid="false"
-                                                                    class="pf-c-form-control"
-                                                                    id="foo-field"
-                                                                    name="foo-field"
-                                                                    type="text"
-                                                                    value=""
-                                                                  />
-                                                                  
-                                                                </div>
-                                                              </div>
-                                                            </div>,
-                                                          }
-                                                        }
                                                         handleNext={[Function]}
                                                         handlePrev={[Function]}
-                                                        name="1"
                                                         nextStep="2"
-                                                        title="foo-step"
                                                       >
-                                                        <div
-                                                          className="pf-c-form"
+                                                        <footer
+                                                          className="pf-c-wizard__footer "
                                                         >
-                                                          <SingleField
-                                                            component="text-field"
-                                                            key="foo-field"
-                                                            name="foo-field"
-                                                          >
-                                                            <FormConditionWrapper
-                                                              field={
-                                                                Object {
-                                                                  "component": "text-field",
-                                                                  "name": "foo-field",
-                                                                }
-                                                              }
+                                                          <FormSpy>
+                                                            <NextButton
+                                                              batch={[Function]}
+                                                              blur={[Function]}
+                                                              change={[Function]}
+                                                              clearOnUnmount={false}
+                                                              concat={[Function]}
+                                                              destroyOnUnregister={false}
+                                                              focus={[Function]}
+                                                              getFieldState={[Function]}
+                                                              getRegisteredFields={[Function]}
+                                                              getState={[Function]}
+                                                              handleNext={[Function]}
+                                                              handleSubmit={[Function]}
+                                                              initialize={[Function]}
+                                                              insert={[Function]}
+                                                              isValidationPaused={[Function]}
+                                                              move={[Function]}
+                                                              nextLabel="Next"
+                                                              nextStep="2"
+                                                              onCancel={[Function]}
+                                                              onReset={[Function]}
+                                                              onSubmit={[MockFunction]}
+                                                              pauseValidation={[Function]}
+                                                              pop={[Function]}
+                                                              pristine={true}
+                                                              push={[Function]}
+                                                              registerField={[Function]}
+                                                              registerInputFile={[Function]}
+                                                              remove={[Function]}
+                                                              removeBatch={[Function]}
+                                                              renderForm={[Function]}
+                                                              reset={[Function]}
+                                                              resetFieldState={[Function]}
+                                                              restart={[Function]}
+                                                              resumeValidation={[Function]}
+                                                              setConfig={[Function]}
+                                                              shift={[Function]}
+                                                              submit={[Function]}
+                                                              submitLabel="Submit"
+                                                              subscribe={[Function]}
+                                                              swap={[Function]}
+                                                              unRegisterInputFile={[Function]}
+                                                              unshift={[Function]}
+                                                              update={[Function]}
+                                                              valid={true}
                                                             >
-                                                              <FormFieldHideWrapper
-                                                                hideField={false}
+                                                              <Button
+                                                                isDisabled={false}
+                                                                onClick={[Function]}
+                                                                type="button"
+                                                                variant="primary"
                                                               >
-                                                                <TextField
-                                                                  component="text-field"
-                                                                  name="foo-field"
+                                                                <button
+                                                                  aria-disabled={false}
+                                                                  aria-label={null}
+                                                                  className="pf-c-button pf-m-primary"
+                                                                  data-ouia-component-id="OUIA-Generated-Button-primary-9"
+                                                                  data-ouia-component-type="PF4/Button"
+                                                                  data-ouia-safe={true}
+                                                                  disabled={false}
+                                                                  onClick={[Function]}
+                                                                  role={null}
+                                                                  type="button"
                                                                 >
-                                                                  <FormGroup
-                                                                    id="foo-field"
-                                                                    meta={
-                                                                      Object {
-                                                                        "active": false,
-                                                                        "data": Object {},
-                                                                        "dirty": false,
-                                                                        "dirtySinceLastSubmit": false,
-                                                                        "error": undefined,
-                                                                        "initial": undefined,
-                                                                        "invalid": false,
-                                                                        "length": undefined,
-                                                                        "modified": false,
-                                                                        "modifiedSinceLastSubmit": false,
-                                                                        "pristine": true,
-                                                                        "submitError": undefined,
-                                                                        "submitFailed": false,
-                                                                        "submitSucceeded": false,
-                                                                        "submitting": false,
-                                                                        "touched": false,
-                                                                        "valid": true,
-                                                                        "validating": false,
-                                                                        "visited": false,
-                                                                      }
-                                                                    }
-                                                                  >
-                                                                    <FormGroup
-                                                                      fieldId="foo-field"
-                                                                      validated="default"
-                                                                    >
-                                                                      <div
-                                                                        className="pf-c-form__group"
-                                                                      >
-                                                                        <div
-                                                                          className="pf-c-form__group-control"
-                                                                        >
-                                                                          <TextInput
-                                                                            id="foo-field"
-                                                                            name="foo-field"
-                                                                            onBlur={[Function]}
-                                                                            onChange={[Function]}
-                                                                            onFocus={[Function]}
-                                                                            validated="default"
-                                                                            value=""
-                                                                          >
-                                                                            <TextInputBase
-                                                                              aria-label={null}
-                                                                              className=""
-                                                                              id="foo-field"
-                                                                              innerRef={null}
-                                                                              isDisabled={false}
-                                                                              isLeftTruncated={false}
-                                                                              isReadOnly={false}
-                                                                              isRequired={false}
-                                                                              name="foo-field"
-                                                                              onBlur={[Function]}
-                                                                              onChange={[Function]}
-                                                                              onFocus={[Function]}
-                                                                              type="text"
-                                                                              validated="default"
-                                                                              value=""
-                                                                            >
-                                                                              <input
-                                                                                aria-invalid={false}
-                                                                                aria-label={null}
-                                                                                className="pf-c-form-control"
-                                                                                disabled={false}
-                                                                                id="foo-field"
-                                                                                name="foo-field"
-                                                                                onBlur={[Function]}
-                                                                                onChange={[Function]}
-                                                                                onFocus={[Function]}
-                                                                                readOnly={false}
-                                                                                required={false}
-                                                                                type="text"
-                                                                                value=""
-                                                                              />
-                                                                            </TextInputBase>
-                                                                          </TextInput>
-                                                                        </div>
-                                                                      </div>
-                                                                    </FormGroup>
-                                                                  </FormGroup>
-                                                                </TextField>
-                                                              </FormFieldHideWrapper>
-                                                            </FormConditionWrapper>
-                                                          </SingleField>
-                                                        </div>
-                                                      </DefaultStepTemplate>
-                                                    </div>
+                                                                  Next
+                                                                </button>
+                                                              </Button>
+                                                            </NextButton>
+                                                            <Button
+                                                              isDisabled={true}
+                                                              onClick={[Function]}
+                                                              type="button"
+                                                              variant="secondary"
+                                                            >
+                                                              <button
+                                                                aria-disabled={true}
+                                                                aria-label={null}
+                                                                className="pf-c-button pf-m-secondary pf-m-disabled"
+                                                                data-ouia-component-id="OUIA-Generated-Button-secondary-9"
+                                                                data-ouia-component-type="PF4/Button"
+                                                                data-ouia-safe={true}
+                                                                disabled={true}
+                                                                onClick={[Function]}
+                                                                role={null}
+                                                                tabIndex={null}
+                                                                type="button"
+                                                              >
+                                                                Back
+                                                              </button>
+                                                            </Button>
+                                                            <div
+                                                              className="pf-c-wizard__footer-cancel"
+                                                            >
+                                                              <Button
+                                                                onClick={[Function]}
+                                                                type="button"
+                                                                variant="link"
+                                                              >
+                                                                <button
+                                                                  aria-disabled={false}
+                                                                  aria-label={null}
+                                                                  className="pf-c-button pf-m-link"
+                                                                  data-ouia-component-id="OUIA-Generated-Button-link-9"
+                                                                  data-ouia-component-type="PF4/Button"
+                                                                  data-ouia-safe={true}
+                                                                  disabled={false}
+                                                                  onClick={[Function]}
+                                                                  role={null}
+                                                                  type="button"
+                                                                >
+                                                                  Cancel
+                                                                </button>
+                                                              </Button>
+                                                            </div>
+                                                          </FormSpy>
+                                                        </footer>
+                                                      </WizardStepButtons>
+                                                    </WizardStep>
                                                   </div>
-                                                </WizardBody>
-                                                <WizardStepButtons
-                                                  buttonLabels={
-                                                    Object {
-                                                      "back": "Back",
-                                                      "cancel": "Cancel",
-                                                      "next": "Next",
-                                                      "submit": "Submit",
-                                                    }
-                                                  }
-                                                  disableBack={true}
-                                                  formOptions={
-                                                    Object {
-                                                      "batch": [Function],
-                                                      "blur": [Function],
-                                                      "change": [Function],
-                                                      "clearOnUnmount": false,
-                                                      "clearedValue": undefined,
-                                                      "concat": [Function],
-                                                      "destroyOnUnregister": false,
-                                                      "focus": [Function],
-                                                      "getFieldState": [Function],
-                                                      "getRegisteredFields": [Function],
-                                                      "getState": [Function],
-                                                      "handleSubmit": [Function],
-                                                      "initialize": [Function],
-                                                      "insert": [Function],
-                                                      "isValidationPaused": [Function],
-                                                      "move": [Function],
-                                                      "onCancel": [Function],
-                                                      "onReset": [Function],
-                                                      "onSubmit": [MockFunction],
-                                                      "pauseValidation": [Function],
-                                                      "pop": [Function],
-                                                      "pristine": true,
-                                                      "push": [Function],
-                                                      "registerField": [Function],
-                                                      "registerInputFile": [Function],
-                                                      "remove": [Function],
-                                                      "removeBatch": [Function],
-                                                      "renderForm": [Function],
-                                                      "reset": [Function],
-                                                      "resetFieldState": [Function],
-                                                      "restart": [Function],
-                                                      "resumeValidation": [Function],
-                                                      "setConfig": [Function],
-                                                      "shift": [Function],
-                                                      "submit": [Function],
-                                                      "subscribe": [Function],
-                                                      "swap": [Function],
-                                                      "unRegisterInputFile": [Function],
-                                                      "unshift": [Function],
-                                                      "update": [Function],
-                                                      "valid": true,
-                                                    }
-                                                  }
-                                                  handleNext={[Function]}
-                                                  handlePrev={[Function]}
-                                                  nextStep="2"
-                                                >
-                                                  <footer
-                                                    className="pf-c-wizard__footer "
-                                                  >
-                                                    <FormSpy>
-                                                      <NextButton
-                                                        batch={[Function]}
-                                                        blur={[Function]}
-                                                        change={[Function]}
-                                                        clearOnUnmount={false}
-                                                        concat={[Function]}
-                                                        destroyOnUnregister={false}
-                                                        focus={[Function]}
-                                                        getFieldState={[Function]}
-                                                        getRegisteredFields={[Function]}
-                                                        getState={[Function]}
-                                                        handleNext={[Function]}
-                                                        handleSubmit={[Function]}
-                                                        initialize={[Function]}
-                                                        insert={[Function]}
-                                                        isValidationPaused={[Function]}
-                                                        move={[Function]}
-                                                        nextLabel="Next"
-                                                        nextStep="2"
-                                                        onCancel={[Function]}
-                                                        onReset={[Function]}
-                                                        onSubmit={[MockFunction]}
-                                                        pauseValidation={[Function]}
-                                                        pop={[Function]}
-                                                        pristine={true}
-                                                        push={[Function]}
-                                                        registerField={[Function]}
-                                                        registerInputFile={[Function]}
-                                                        remove={[Function]}
-                                                        removeBatch={[Function]}
-                                                        renderForm={[Function]}
-                                                        reset={[Function]}
-                                                        resetFieldState={[Function]}
-                                                        restart={[Function]}
-                                                        resumeValidation={[Function]}
-                                                        setConfig={[Function]}
-                                                        shift={[Function]}
-                                                        submit={[Function]}
-                                                        submitLabel="Submit"
-                                                        subscribe={[Function]}
-                                                        swap={[Function]}
-                                                        unRegisterInputFile={[Function]}
-                                                        unshift={[Function]}
-                                                        update={[Function]}
-                                                        valid={true}
-                                                      >
-                                                        <Button
-                                                          isDisabled={false}
-                                                          onClick={[Function]}
-                                                          type="button"
-                                                          variant="primary"
-                                                        >
-                                                          <button
-                                                            aria-disabled={false}
-                                                            aria-label={null}
-                                                            className="pf-c-button pf-m-primary"
-                                                            data-ouia-component-id="OUIA-Generated-Button-primary-8"
-                                                            data-ouia-component-type="PF4/Button"
-                                                            data-ouia-safe={true}
-                                                            disabled={false}
-                                                            onClick={[Function]}
-                                                            role={null}
-                                                            type="button"
-                                                          >
-                                                            Next
-                                                          </button>
-                                                        </Button>
-                                                      </NextButton>
-                                                      <Button
-                                                        isDisabled={true}
-                                                        onClick={[Function]}
-                                                        type="button"
-                                                        variant="secondary"
-                                                      >
-                                                        <button
-                                                          aria-disabled={true}
-                                                          aria-label={null}
-                                                          className="pf-c-button pf-m-secondary pf-m-disabled"
-                                                          data-ouia-component-id="OUIA-Generated-Button-secondary-8"
-                                                          data-ouia-component-type="PF4/Button"
-                                                          data-ouia-safe={true}
-                                                          disabled={true}
-                                                          onClick={[Function]}
-                                                          role={null}
-                                                          tabIndex={null}
-                                                          type="button"
-                                                        >
-                                                          Back
-                                                        </button>
-                                                      </Button>
-                                                      <div
-                                                        className="pf-c-wizard__footer-cancel"
-                                                      >
-                                                        <Button
-                                                          onClick={[Function]}
-                                                          type="button"
-                                                          variant="link"
-                                                        >
-                                                          <button
-                                                            aria-disabled={false}
-                                                            aria-label={null}
-                                                            className="pf-c-button pf-m-link"
-                                                            data-ouia-component-id="OUIA-Generated-Button-link-8"
-                                                            data-ouia-component-type="PF4/Button"
-                                                            data-ouia-safe={true}
-                                                            disabled={false}
-                                                            onClick={[Function]}
-                                                            role={null}
-                                                            type="button"
-                                                          >
-                                                            Cancel
-                                                          </button>
-                                                        </Button>
-                                                      </div>
-                                                    </FormSpy>
-                                                  </footer>
-                                                </WizardStepButtons>
-                                              </WizardStep>
+                                                </div>
+                                              </div>
                                             </div>
-                                          </div>
+                                          </ModalBox>
                                         </div>
-                                      </div>
+                                      </FocusTrap>
                                     </div>
-                                  </Bullseye>
-                                </div>
-                              </Backdrop>
-                            </Portal>
+                                  </Backdrop>
+                                </ModalContent>
+                              </Portal>
+                            </Modal>
                           </Modal>
                         </WizardInternal>
                       </Wizard>
