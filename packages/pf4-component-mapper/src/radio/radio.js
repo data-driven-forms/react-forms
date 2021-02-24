@@ -4,19 +4,20 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import { Radio as Pf4Radio } from '@patternfly/react-core';
 import FormGroup from '../form-group/form-group';
 
-const RadioOption = ({ name, option, isDisabled, isReadOnly }) => {
-  const { input } = useFieldApi({ name, value: option.value });
+const RadioOption = ({ name, option: { value, label, ...restOption }, isDisabled, isReadOnly }) => {
+  const { input } = useFieldApi({ name, value });
   return (
     <Pf4Radio
-      key={`${name}-${option.value}`}
+      key={`${name}-${value}`}
       {...input}
-      isChecked={input.value === option.value}
-      value={option.value}
-      onChange={() => input.onChange(option.value)}
-      label={option.label}
-      id={`${name}-${option.value}`}
-      aria-label={option.label}
+      isChecked={input.value === value}
+      value={value}
+      onChange={() => input.onChange(value)}
+      label={label}
+      id={`${name}-${value}`}
+      aria-label={label}
       isDisabled={isDisabled || isReadOnly}
+      {...restOption}
     />
   );
 };
@@ -34,7 +35,20 @@ const Radio = ({ name, options, type, ...props }) => {
    * You cannot assign type radio to PF4 radio buttons input. It will break and will not set input value, only checked property
    * It has to be reqular input and we have change the radio value manully to the option value
    */
-  const { label, isRequired, helperText, meta, description, hideLabel, input, isReadOnly, isDisabled, id, FormGroupProps } = useFieldApi({
+  const {
+    label,
+    isRequired,
+    helperText,
+    meta,
+    validateOnMount,
+    description,
+    hideLabel,
+    input,
+    isReadOnly,
+    isDisabled,
+    id,
+    FormGroupProps
+  } = useFieldApi({
     name,
     ...props
   });
@@ -44,6 +58,7 @@ const Radio = ({ name, options, type, ...props }) => {
       isRequired={isRequired}
       helperText={helperText}
       meta={meta}
+      validateOnMount={validateOnMount}
       description={description}
       hideLabel={hideLabel}
       id={id || input.name}
@@ -58,6 +73,7 @@ const Radio = ({ name, options, type, ...props }) => {
 
 Radio.propTypes = {
   label: PropTypes.node,
+  validateOnMount: PropTypes.bool,
   isReadOnly: PropTypes.bool,
   isRequired: PropTypes.bool,
   helperText: PropTypes.node,

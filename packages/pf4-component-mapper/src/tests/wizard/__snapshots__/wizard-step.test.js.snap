@@ -173,26 +173,30 @@ exports[`<WizardStep /> should render correctly 1`] = `
               Back
             </button>
           </Button>
-          <Button
-            onClick={[MockFunction]}
-            type="button"
-            variant="link"
+          <div
+            className="pf-c-wizard__footer-cancel"
           >
-            <button
-              aria-disabled={false}
-              aria-label={null}
-              className="pf-c-button pf-m-link"
-              data-ouia-component-id="OUIA-Generated-Button-link-1"
-              data-ouia-component-type="PF4/Button"
-              data-ouia-safe={true}
-              disabled={false}
+            <Button
               onClick={[MockFunction]}
-              role={null}
               type="button"
+              variant="link"
             >
-              Cancel
-            </button>
-          </Button>
+              <button
+                aria-disabled={false}
+                aria-label={null}
+                className="pf-c-button pf-m-link"
+                data-ouia-component-id="OUIA-Generated-Button-link-1"
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe={true}
+                disabled={false}
+                onClick={[MockFunction]}
+                role={null}
+                type="button"
+              >
+                Cancel
+              </button>
+            </Button>
+          </div>
         </Component>
       </footer>
     </WizardStepButtons>
@@ -381,26 +385,30 @@ exports[`<WizardStep /> should render custom description 1`] = `
               Back
             </button>
           </Button>
-          <Button
-            onClick={[MockFunction]}
-            type="button"
-            variant="link"
+          <div
+            className="pf-c-wizard__footer-cancel"
           >
-            <button
-              aria-disabled={false}
-              aria-label={null}
-              className="pf-c-button pf-m-link"
-              data-ouia-component-id="OUIA-Generated-Button-link-5"
-              data-ouia-component-type="PF4/Button"
-              data-ouia-safe={true}
-              disabled={false}
+            <Button
               onClick={[MockFunction]}
-              role={null}
               type="button"
+              variant="link"
             >
-              Cancel
-            </button>
-          </Button>
+              <button
+                aria-disabled={false}
+                aria-label={null}
+                className="pf-c-button pf-m-link"
+                data-ouia-component-id="OUIA-Generated-Button-link-5"
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe={true}
+                disabled={false}
+                onClick={[MockFunction]}
+                role={null}
+                type="button"
+              >
+                Cancel
+              </button>
+            </Button>
+          </div>
         </Component>
       </footer>
     </WizardStepButtons>
@@ -618,26 +626,30 @@ exports[`<WizardStep /> should render title with showTitle 1`] = `
               Back
             </button>
           </Button>
-          <Button
-            onClick={[MockFunction]}
-            type="button"
-            variant="link"
+          <div
+            className="pf-c-wizard__footer-cancel"
           >
-            <button
-              aria-disabled={false}
-              aria-label={null}
-              className="pf-c-button pf-m-link"
-              data-ouia-component-id="OUIA-Generated-Button-link-2"
-              data-ouia-component-type="PF4/Button"
-              data-ouia-safe={true}
-              disabled={false}
+            <Button
               onClick={[MockFunction]}
-              role={null}
               type="button"
+              variant="link"
             >
-              Cancel
-            </button>
-          </Button>
+              <button
+                aria-disabled={false}
+                aria-label={null}
+                className="pf-c-button pf-m-link"
+                data-ouia-component-id="OUIA-Generated-Button-link-2"
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe={true}
+                disabled={false}
+                onClick={[MockFunction]}
+                role={null}
+                type="button"
+              >
+                Cancel
+              </button>
+            </Button>
+          </div>
         </Component>
       </footer>
     </WizardStepButtons>

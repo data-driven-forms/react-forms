@@ -279,6 +279,32 @@ describe('<WizardSTepButtons', () => {
       expect(handleSubmit).not.toHaveBeenCalled();
     });
 
+    it('nothing happen when ctrl is pressed', () => {
+      event = {
+        ...event,
+        ctrlKey: true
+      };
+
+      handleEnter(event, formOptions, activeStep, findCurrentStep, handleNext, handleSubmit);
+
+      expect(event.preventDefault).not.toHaveBeenCalled();
+      expect(handleNext).not.toHaveBeenCalled();
+      expect(handleSubmit).not.toHaveBeenCalled();
+    });
+
+    it('nothing happen when shift is pressed', () => {
+      event = {
+        ...event,
+        shiftKey: true
+      };
+
+      handleEnter(event, formOptions, activeStep, findCurrentStep, handleNext, handleSubmit);
+
+      expect(event.preventDefault).not.toHaveBeenCalled();
+      expect(handleNext).not.toHaveBeenCalled();
+      expect(handleSubmit).not.toHaveBeenCalled();
+    });
+
     it('nothing happen when target is button', () => {
       event = {
         ...event,

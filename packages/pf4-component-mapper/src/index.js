@@ -3,6 +3,8 @@ export { default as FormTemplate } from './form-template';
 export { default as Checkbox } from './checkbox';
 export { default as DatePicker } from './date-picker';
 export { default as DualListSelect } from './dual-list-select';
+export { default as DualListContext } from './dual-list-context';
+export { default as DualListSortButton } from './dual-list-sort-button';
 export { default as FieldArray } from './field-array';
 export { default as PlainText } from './plain-text';
 export { default as Radio } from './radio';
