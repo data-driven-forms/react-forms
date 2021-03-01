@@ -1,4 +1,4 @@
-import convertType from '../common/convert-type';
+import convertType from './convert-type';
 
 const convertInitialValue = (initialValue, dataType) => {
   if (initialValue === undefined || !dataType) {

@@ -249,9 +249,7 @@ describe('DualListSelect', () => {
       wrapper.find('form').simulate('submit');
     });
 
-    expect(onSubmit).toHaveBeenCalledWith({
-      'dual-StructuredListWrapper': []
-    });
+    expect(onSubmit).toHaveBeenCalledWith({});
   });
 
   it('switch all to right', async () => {
@@ -285,9 +283,7 @@ describe('DualListSelect', () => {
       wrapper.find('form').simulate('submit');
     });
 
-    expect(onSubmit).toHaveBeenCalledWith({
-      'dual-StructuredListWrapper': []
-    });
+    expect(onSubmit).toHaveBeenCalledWith({});
   });
 
   it('filters options', async () => {

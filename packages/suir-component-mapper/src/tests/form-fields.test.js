@@ -107,6 +107,7 @@ describe('formFields', () => {
           const errorField = {
             ...field,
             validate: [{ type: validatorTypes.REQUIRED, warning: true }],
+            useWarnings: true,
             validateOnMount: true
           };
           let wrapper;

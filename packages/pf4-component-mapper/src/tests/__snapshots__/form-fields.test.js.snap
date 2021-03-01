@@ -2,7 +2,7 @@
 
 exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
 <RenderWithProvider>
-  <Component
+  <ReactFinalForm
     onSubmit={[Function]}
   >
     <Switch
@@ -23,6 +23,7 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
             "error": undefined,
             "initial": undefined,
             "invalid": false,
+            "length": undefined,
             "modified": false,
             "modifiedSinceLastSubmit": false,
             "pristine": true,
@@ -34,7 +35,6 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
             "valid": true,
             "validating": false,
             "visited": false,
-            "warning": undefined,
           }
         }
       >
@@ -62,7 +62,6 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
                 onChange={[Function]}
                 onFocus={[Function]}
                 type="checkbox"
-                value=""
               >
                 <label
                   className="pf-c-switch"
@@ -83,7 +82,6 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
                     onChange={[Function]}
                     onFocus={[Function]}
                     type="checkbox"
-                    value=""
                   />
                   <span
                     className="pf-c-switch__toggle"
@@ -109,6 +107,6 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
         </FormGroup>
       </FormGroup>
     </Switch>
-  </Component>
+  </ReactFinalForm>
 </RenderWithProvider>
 `;

@@ -1,4 +1,4 @@
-import dataTypes from '../files/data-types';
+import dataTypes from '../data-types';
 
 /**
  * Casts string true/false to boolean

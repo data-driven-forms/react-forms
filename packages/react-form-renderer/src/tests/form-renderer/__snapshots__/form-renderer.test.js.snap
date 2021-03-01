@@ -34,10 +34,29 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
     }
   }
 >
-  <Component
-    clearOnUnmount={false}
+  <ReactFinalForm
+    decorators={
+      Array [
+        [Function],
+      ]
+    }
     initialValues={Object {}}
-    onSubmit={[MockFunction]}
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
+    onSubmit={[Function]}
     render={[Function]}
     subscription={
       Object {
@@ -171,7 +190,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               </FormFieldHideWrapper>
             </FormConditionWrapper>
           </SingleField>
-          <Component>
+          <FormSpy>
             <button
               disabled={false}
               type="submit"
@@ -192,11 +211,11 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
             >
               Cancel
             </button>
-          </Component>
+          </FormSpy>
         </form>
       </FormTemplate>
     </FormTemplate>
-  </Component>
+  </ReactFinalForm>
 </FormRenderer>
 `;
 
@@ -237,10 +256,29 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
     }
   }
 >
-  <Component
-    clearOnUnmount={false}
+  <ReactFinalForm
+    decorators={
+      Array [
+        [Function],
+      ]
+    }
     initialValues={Object {}}
-    onSubmit={[MockFunction]}
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
+    onSubmit={[Function]}
     render={[Function]}
     subscription={
       Object {
@@ -404,7 +442,7 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
               </FormFieldHideWrapper>
             </FormConditionWrapper>
           </SingleField>
-          <Component>
+          <FormSpy>
             <button
               disabled={false}
               type="submit"
@@ -425,10 +463,10 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
             >
               Cancel
             </button>
-          </Component>
+          </FormSpy>
         </form>
       </FormTemplate>
     </FormTemplate>
-  </Component>
+  </ReactFinalForm>
 </FormRenderer>
 `;

@@ -214,7 +214,8 @@ describe('FormFields', () => {
                 ...field,
                 helperText,
                 id: 'warning-field',
-                validate: [() => ({ type: 'warning', error: errorText })]
+                validate: [() => ({ type: 'warning', error: errorText })],
+                useWarnings: true
               };
 
               let wrapper;

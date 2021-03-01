@@ -8,7 +8,22 @@ exports[`renderForm function #condition should render condition field only if co
     }
   }
 >
-  <Component
+  <ReactFinalForm
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
     onSubmit={[MockFunction]}
   >
     <SingleField
@@ -40,12 +55,10 @@ exports[`renderForm function #condition should render condition field only if co
                 input={
                   Object {
                     "checked": undefined,
-                    "multiple": undefined,
                     "name": "a",
                     "onBlur": [Function],
                     "onChange": [Function],
                     "onFocus": [Function],
-                    "type": undefined,
                     "value": "",
                   }
                 }
@@ -58,6 +71,7 @@ exports[`renderForm function #condition should render condition field only if co
                     "error": undefined,
                     "initial": undefined,
                     "invalid": false,
+                    "length": undefined,
                     "modified": false,
                     "modifiedSinceLastSubmit": false,
                     "pristine": true,
@@ -69,10 +83,8 @@ exports[`renderForm function #condition should render condition field only if co
                     "valid": true,
                     "validating": false,
                     "visited": false,
-                    "warning": undefined,
                   }
                 }
-                name="a"
               >
                 <input
                   id="a"
@@ -117,12 +129,10 @@ exports[`renderForm function #condition should render condition field only if co
                 input={
                   Object {
                     "checked": undefined,
-                    "multiple": undefined,
                     "name": "c",
                     "onBlur": [Function],
                     "onChange": [Function],
                     "onFocus": [Function],
-                    "type": undefined,
                     "value": "",
                   }
                 }
@@ -135,6 +145,7 @@ exports[`renderForm function #condition should render condition field only if co
                     "error": undefined,
                     "initial": undefined,
                     "invalid": false,
+                    "length": undefined,
                     "modified": false,
                     "modifiedSinceLastSubmit": false,
                     "pristine": true,
@@ -146,10 +157,8 @@ exports[`renderForm function #condition should render condition field only if co
                     "valid": true,
                     "validating": false,
                     "visited": false,
-                    "warning": undefined,
                   }
                 }
-                name="c"
               >
                 <input
                   id="c"
@@ -208,7 +217,7 @@ exports[`renderForm function #condition should render condition field only if co
           }
         }
       >
-        <Component
+        <FormSpy
           subscription={
             Object {
               "values": true,
@@ -239,10 +248,10 @@ exports[`renderForm function #condition should render condition field only if co
             }
             values={Object {}}
           />
-        </Component>
+        </FormSpy>
       </FormConditionWrapper>
     </SingleField>
-  </Component>
+  </ReactFinalForm>
 </ContextWrapper>
 `;
 
@@ -254,7 +263,22 @@ exports[`renderForm function #condition should render condition field only if on
     }
   }
 >
-  <Component
+  <ReactFinalForm
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
     onSubmit={[MockFunction]}
   >
     <SingleField
@@ -286,12 +310,10 @@ exports[`renderForm function #condition should render condition field only if on
                 input={
                   Object {
                     "checked": undefined,
-                    "multiple": undefined,
                     "name": "a",
                     "onBlur": [Function],
                     "onChange": [Function],
                     "onFocus": [Function],
-                    "type": undefined,
                     "value": "",
                   }
                 }
@@ -304,6 +326,7 @@ exports[`renderForm function #condition should render condition field only if on
                     "error": undefined,
                     "initial": undefined,
                     "invalid": false,
+                    "length": undefined,
                     "modified": false,
                     "modifiedSinceLastSubmit": false,
                     "pristine": true,
@@ -315,10 +338,8 @@ exports[`renderForm function #condition should render condition field only if on
                     "valid": true,
                     "validating": false,
                     "visited": false,
-                    "warning": undefined,
                   }
                 }
-                name="a"
               >
                 <input
                   id="a"
@@ -363,12 +384,10 @@ exports[`renderForm function #condition should render condition field only if on
                 input={
                   Object {
                     "checked": undefined,
-                    "multiple": undefined,
                     "name": "b",
                     "onBlur": [Function],
                     "onChange": [Function],
                     "onFocus": [Function],
-                    "type": undefined,
                     "value": "",
                   }
                 }
@@ -381,6 +400,7 @@ exports[`renderForm function #condition should render condition field only if on
                     "error": undefined,
                     "initial": undefined,
                     "invalid": false,
+                    "length": undefined,
                     "modified": false,
                     "modifiedSinceLastSubmit": false,
                     "pristine": true,
@@ -392,10 +412,8 @@ exports[`renderForm function #condition should render condition field only if on
                     "valid": true,
                     "validating": false,
                     "visited": false,
-                    "warning": undefined,
                   }
                 }
-                name="b"
               >
                 <input
                   id="b"
@@ -442,7 +460,7 @@ exports[`renderForm function #condition should render condition field only if on
           }
         }
       >
-        <Component
+        <FormSpy
           subscription={
             Object {
               "values": true,
@@ -467,10 +485,10 @@ exports[`renderForm function #condition should render condition field only if on
             }
             values={Object {}}
           />
-        </Component>
+        </FormSpy>
       </FormConditionWrapper>
     </SingleField>
-  </Component>
+  </ReactFinalForm>
 </ContextWrapper>
 `;
 
@@ -482,7 +500,22 @@ exports[`renderForm function should render single field from defined componentTy
     }
   }
 >
-  <Component
+  <ReactFinalForm
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
     onSubmit={[MockFunction]}
   >
     <SingleField
@@ -515,7 +548,7 @@ exports[`renderForm function should render single field from defined componentTy
         </FormFieldHideWrapper>
       </FormConditionWrapper>
     </SingleField>
-  </Component>
+  </ReactFinalForm>
 </ContextWrapper>
 `;
 
@@ -527,7 +560,22 @@ exports[`renderForm function should render single field from with custom compone
     }
   }
 >
-  <Component
+  <ReactFinalForm
+    mutators={
+      Object {
+        "concat": [Function],
+        "insert": [Function],
+        "move": [Function],
+        "pop": [Function],
+        "push": [Function],
+        "remove": [Function],
+        "removeBatch": [Function],
+        "shift": [Function],
+        "swap": [Function],
+        "unshift": [Function],
+        "update": [Function],
+      }
+    }
     onSubmit={[MockFunction]}
   >
     <SingleField
@@ -559,12 +607,10 @@ exports[`renderForm function should render single field from with custom compone
                 input={
                   Object {
                     "checked": undefined,
-                    "multiple": undefined,
                     "name": "foo",
                     "onBlur": [Function],
                     "onChange": [Function],
                     "onFocus": [Function],
-                    "type": undefined,
                     "value": "",
                   }
                 }
@@ -577,6 +623,7 @@ exports[`renderForm function should render single field from with custom compone
                     "error": undefined,
                     "initial": undefined,
                     "invalid": false,
+                    "length": undefined,
                     "modified": false,
                     "modifiedSinceLastSubmit": false,
                     "pristine": true,
@@ -588,10 +635,8 @@ exports[`renderForm function should render single field from with custom compone
                     "valid": true,
                     "validating": false,
                     "visited": false,
-                    "warning": undefined,
                   }
                 }
-                name="foo"
               >
                 <input
                   id="foo"
@@ -607,6 +652,6 @@ exports[`renderForm function should render single field from with custom compone
         </FormFieldHideWrapper>
       </FormConditionWrapper>
     </SingleField>
-  </Component>
+  </ReactFinalForm>
 </ContextWrapper>
 `;
