@@ -2,13 +2,13 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 import { FormLabel } from '@material-ui/core';
-import MultipleChoiceListCommon from '@data-driven-forms/common/src/multiple-choice-list';
-import FormRenderer, { componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
-import Checkbox from '../files/checkbox';
+import MultipleChoiceListCommon from '@data-driven-forms/common/multiple-choice-list';
+import { FormRenderer, componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
+import Checkbox from '../checkbox';
 
 import RenderWithProvider from '../../../../__mocks__/with-provider';
-import FormTemplate from '../files/form-template';
-import componentMapper from '../files/component-mapper';
+import FormTemplate from '../form-template';
+import componentMapper from '../component-mapper';
 import { Radio } from '@material-ui/core';
 
 const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (
@@ -17,6 +17,7 @@ const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (
     FormTemplate={(props) => <FormTemplate {...props} />}
     schema={schema}
     componentMapper={componentMapper}
+    subscription={{ submitFailed: true }}
     {...props}
   />
 );
@@ -256,7 +257,7 @@ describe('formFields', () => {
           }
         });
 
-        it('renders with error', () => {
+        it('renders with submitError', () => {
           const wrapper = mount(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
           wrapper.find('form').simulate('submit');
           expect(

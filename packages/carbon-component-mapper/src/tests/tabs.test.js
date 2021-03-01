@@ -1,14 +1,14 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 import { Tabs as CarbonTabs, Tab } from 'carbon-components-react';
 
-import FormTemplate from '../files/form-template';
-import componentMapper from '../files/component-mapper';
-import Tabs from '../files/tabs';
-import WrapperTextField from '../files/text-field';
-import WrapperSwitch from '../files/switch';
+import FormTemplate from '../form-template';
+import componentMapper from '../component-mapper';
+import Tabs from '../tabs';
+import WrapperTextField from '../text-field';
+import WrapperSwitch from '../switch';
 
 describe('<Tabs />', () => {
   it('renders correctly', () => {

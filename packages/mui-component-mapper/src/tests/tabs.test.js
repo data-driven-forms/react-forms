@@ -2,9 +2,9 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { AppBar, Tabs, Tab } from '@material-ui/core';
 
-import FormTabs from '../files/tabs';
+import FormTabs from '../tabs';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
-import FormRenderer, { validatorTypes } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, validatorTypes } from '@data-driven-forms/react-form-renderer';
 import { componentMapper, FormTemplate } from '../index';
 
 describe('tabs', () => {

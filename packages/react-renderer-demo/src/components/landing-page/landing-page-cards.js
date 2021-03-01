@@ -23,7 +23,7 @@ import FormExample from './formExample';
 import CodeEditor from '@docs/components/code-editor';
 
 const value = `import React from 'react';
-import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 import { componentMapper, FormTemplate } from '@data-driven-forms/pf4-component-mapper';
 
 const validatorMapper = {
@@ -262,16 +262,6 @@ const LandingPageCards = () => {
               <RouterLink href="/mappers/pf4-component-mapper">
                 <a href="/mappers/pf4-component-mapper">
                   <img className={classes.logo} alt="pf4 logo" src="/pf4-logo.svg" />
-                </a>
-              </RouterLink>
-            </Grid>
-            <Grid item xs={6} md={4} xl={2}>
-              <Typography variant="h6" className={classes.textBottom}>
-                PatternFly 3
-              </Typography>
-              <RouterLink href="/mappers/pf3-component-mapper">
-                <a href="/mappers/pf3-component-mapper">
-                  <img className={classes.logo} alt="pf4 logo" src="/pf3-logo.svg" />
                 </a>
               </RouterLink>
             </Grid>

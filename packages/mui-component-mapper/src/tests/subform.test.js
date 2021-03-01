@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { Grid, Typography } from '@material-ui/core';
 
-import Subform from '../files/sub-form';
+import Subform from '../sub-form';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 
 describe('subform', () => {

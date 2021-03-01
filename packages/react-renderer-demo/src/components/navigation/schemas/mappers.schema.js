@@ -44,10 +44,6 @@ const mappersSchema = [
     linkText: 'Material UI mapper'
   },
   {
-    link: 'pf3-component-mapper',
-    linkText: 'PF3 mapper'
-  },
-  {
     link: 'pf4-component-mapper',
     linkText: 'PF4 mapper'
   },

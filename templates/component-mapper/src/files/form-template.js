@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import FormTemplate from '@data-driven-forms/common/src/form-template';
+import FormTemplate from '@data-driven-forms/common/form-template';
 
 export const Button = ({ label, buttonType, ...props }) => <button {...props}>{label}</button>;
 

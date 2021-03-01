@@ -1,15 +1,14 @@
 /* eslint-disable */
 import React from "react";
 import ReactDOM from "react-dom";
-import FormRenderer from '@data-driven-forms/react-form-renderer';
-import miqSchema from './demo-schemas/miq-schema';
-import { uiArraySchema, arraySchema, array1Schema, schema, uiSchema, conditionalSchema, arraySchemaDDF } from './demo-schemas/widget-schema';
+import { FormRenderer } from '@data-driven-forms/react-form-renderer';
+import { arraySchemaDDF } from './demo-schemas/widget-schema';
 import { componentMapper, FormTemplate } from '../src';
 import { Title, Button, Toolbar, ToolbarGroup, ToolbarItem, Modal } from '@patternfly/react-core';
 import { wizardSchema, wizardSchemaWithFunction, wizardSchemaSimple, wizardSchemaSubsteps, wizardSchemaMoreSubsteps } from './demo-schemas/wizard-schema';
 import sandboxSchema from './demo-schemas/sandbox';
 import dualSchema from './demo-schemas/dual-list-schema';
-import demoSchema from '@data-driven-forms/common/src/demoschema';
+import demoSchema from '@data-driven-forms/common/demoschema';
 import selectSchema from './demo-schemas/select-schema';
 
 const Summary = props => <div>Custom summary component.</div>;
@@ -24,7 +23,7 @@ const fieldArrayState = { schema: arraySchemaDDF, additionalOptions: {
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {schema: selectSchema, additionalOptions: {}} 
+        this.state = {schema: wizardSchema, additionalOptions: {}} 
     }
 
     render() {

@@ -1,4 +1,4 @@
-import composeValidators from '../../files/compose-validators';
+import composeValidators from '../../compose-validators';
 
 describe('Compose validators', () => {
   const syncValidator = (value) => (value === 'sync-error' ? 'sync-error' : undefined);

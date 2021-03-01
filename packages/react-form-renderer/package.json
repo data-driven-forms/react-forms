@@ -2,17 +2,16 @@
   "name": "@data-driven-forms/react-form-renderer",
   "version": "2.23.3",
   "description": "React form renderer for data-driven-forms.",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "typings": "dist/cjs/index.d.ts",
-  "files": [
-    "dist/"
-  ],
+  "main": "index.js",
+  "module": "esm/index.js",
   "license": "Apache-2.0",
   "scripts": {
     "start": "webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
-    "build": "rollup -c ./rollup.config.js && yarn build:typings",
-    "build:typings": "node ../../scripts/copy-files.js",
+    "build": "yarn build:cjs && yarn build:esm && yarn build:typings && yarn build:packages",
+    "build:cjs": "BABEL_ENV=cjs babel src --out-dir ./ --ignore \"src/tests/*\"",
+    "build:esm": "BABEL_ENV=esm babel src --out-dir ./esm --ignore \"src/tests/*\"",
+    "build:typings": "node ../../scripts/generate-typings.js",
+    "build:packages": "node ../../scripts/generate-packages.js",
     "release": "semantic-release"
   },
   "repository": "git@github.com:data-driven-forms/react-forms.git",

@@ -1,5 +1,5 @@
-import Validators from '../files/validators';
-import { assign } from './helpers';
+import Validators from '../validators';
+import { assign } from '../common/helpers';
 
 // user:pass BasicAuth (optional)
 const BASIC_AUTH = '(?:\\S+(?::\\S*)?@)?';

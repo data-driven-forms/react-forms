@@ -1,8 +1,8 @@
-import { dataTypeValidator, numericality } from '../../validators/';
-import Validator from '../../files/validators';
-import messages from '../../validators/messages';
-import validatorTypes from '../../files/validator-types';
-import validatorMapper from '../../files/validator-mapper';
+import { dataTypeValidator, numericality } from '../../validators/validator-functions';
+import Validator from '../../validators';
+import messages from '../../validators/validator-functions';
+import validatorTypes from '../../validator-types';
+import validatorMapper from '../../validator-mapper';
 
 describe('New validators', () => {
   describe('Required validator', () => {

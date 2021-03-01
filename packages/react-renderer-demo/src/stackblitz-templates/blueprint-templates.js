@@ -16,9 +16,9 @@ export const html = `
 
 export const code = `import React, { Component } from 'react';
 import { render } from 'react-dom';
-import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
-import FormTemplate from '@data-driven-forms/blueprint-component-mapper/dist/cjs/form-template';
-import componentMapper from '@data-driven-forms/blueprint-component-mapper/dist/cjs/component-mapper';
+import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
+import FormTemplate from '@data-driven-forms/blueprint-component-mapper/form-template';
+import componentMapper from '@data-driven-forms/blueprint-component-mapper/component-mapper';
 
 import schema from './schema'
 
@@ -41,9 +41,9 @@ render(<App />, document.getElementById('root'));`;
 
 export const wizardCode = `import React, { Component } from 'react';
 import { render } from 'react-dom';
-import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
-import BlueprintFormTemplate from '@data-driven-forms/blueprint-component-mapper/dist/cjs/form-template';
-import componentMapper from '@data-driven-forms/blueprint-component-mapper/dist/cjs/component-mapper';
+import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
+import BlueprintFormTemplate from '@data-driven-forms/blueprint-component-mapper/form-template';
+import componentMapper from '@data-driven-forms/blueprint-component-mapper/component-mapper';
 
 import schema from './schema'
 

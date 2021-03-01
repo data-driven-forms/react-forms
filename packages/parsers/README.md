@@ -39,7 +39,7 @@ For using Data Driven Forms in your component you need the renderer and a compon
 
 ```jsx
 import React from 'react';
-import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 import { componentMapper, FormTemplate } from '@data-driven-forms/pf4-component-mapper';
 
 import { mozilla } from '@data-driven-forms/parsers';

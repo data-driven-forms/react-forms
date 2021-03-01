@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { Button as PF4Button, ActionGroup, TextContent, Text } from '@patternfly/react-core';
 
-import { Button, Title, ButtonGroup, Description } from '../files/form-template';
+import { Button, Title, ButtonGroup, Description } from '../form-template';
 
 describe('Layout mapper', () => {
   it('should return PF4 Button', () => {

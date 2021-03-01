@@ -4,8 +4,12 @@
   "description": "Common components, helpers and other pieces of code",
   "license": "Apache-2.0",
   "main": "index.js",
-  "scripts": {},
-  "private": true,
+  "module": "esm/index.js",
+  "scripts": {
+    "build": "yarn build:cjs && yarn build:esm",
+    "build:cjs": "BABEL_ENV=cjs babel src --out-dir ./",
+    "build:esm": "BABEL_ENV=esm babel src --out-dir ./esm"
+  },
   "repository": "git@github.com:data-driven-forms/react-forms.git",
   "devDependencies": {
     "@babel/core": "^7.2.2",

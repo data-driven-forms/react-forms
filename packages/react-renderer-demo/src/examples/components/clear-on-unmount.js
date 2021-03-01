@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
-import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
-import FormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
-import TextField from '@data-driven-forms/mui-component-mapper/dist/cjs/text-field';
+import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
+import componentTypes from '@data-driven-forms/react-form-renderer/component-types';
+import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template';
+import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 import Typography from '@material-ui/core/Typography';
 
 const componentMapper = {

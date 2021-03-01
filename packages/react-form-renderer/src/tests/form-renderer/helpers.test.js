@@ -1,4 +1,4 @@
-import composeValidators from '../../files/compose-validators';
+import composeValidators from '../../compose-validators';
 
 describe('Form helpers', () => {
   describe('Compose validators helper', () => {

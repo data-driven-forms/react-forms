@@ -1,9 +1,9 @@
 /* eslint react/prop-types: "off" */
 import React, { useState } from 'react';
-import FormRender from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
-import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
-import useFieldApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-field-api';
-import useFormApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-form-api';
+import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
+import componentTypes from '@data-driven-forms/react-form-renderer/component-types';
+import useFieldApi from '@data-driven-forms/react-form-renderer/use-field-api';
+import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 
 const formGroupStyle = {
   display: 'flex',
@@ -137,7 +137,7 @@ const ComponentMapper = () => {
   };
   return (
     <div>
-      <FormRender
+      <FormRenderer
         componentMapper={componentMapper}
         FormTemplate={FormTemplate}
         schema={schema}

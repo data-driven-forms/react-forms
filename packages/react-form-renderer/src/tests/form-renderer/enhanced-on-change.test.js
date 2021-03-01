@@ -1,4 +1,4 @@
-import enhancedOnChange from '../../form-renderer/enhanced-on-change';
+import enhancedOnChange from '../../use-field-api/enhanced-on-change';
 
 describe('#enhancedOnChange', () => {
   const clearedValue = 'this is deleted value';

@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { componentTypes } from '../src';
-import FieldProvider from '../src/files/field-provider';
-import useFieldApi from '../src/files/use-field-api';
+import FieldProvider from '../src/field-provider';
+import useFieldApi from '../src/use-field-api';
 
 const TextField = (props) => (
   <FieldProvider

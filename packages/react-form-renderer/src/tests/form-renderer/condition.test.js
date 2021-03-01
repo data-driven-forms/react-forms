@@ -3,11 +3,11 @@ import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 
 import FormTemplate from '../../../../../__mocks__/mock-form-template';
-import componentTypes from '../../../dist/cjs/component-types';
-import useFieldApi from '../../files/use-field-api';
-import FormRenderer from '../../files/form-renderer';
+import componentTypes from '../../component-types';
+import useFieldApi from '../../use-field-api';
+import FormRenderer from '../../form-renderer';
 
-import { reducer } from '../../form-renderer/condition';
+import { reducer } from '../../condition';
 
 const TextField = (props) => {
   const { input } = useFieldApi(props);
@@ -34,7 +34,7 @@ describe('condition test', () => {
     };
   });
 
-  it('should render when condition is fulfill', () => {
+  it('should render when condition is fulfill', async () => {
     schema = {
       fields: [
         {
@@ -54,19 +54,26 @@ describe('condition test', () => {
       ]
     };
 
-    wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    await act(async () => {
+      wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
+    });
+    wrapper.update();
 
     expect(wrapper.find('input')).toHaveLength(1);
 
-    wrapper.find('input').simulate('change', { target: { value: 'show' } });
+    await act(async () => {
+      wrapper.find('input').simulate('change', { target: { value: 'show' } });
+    });
     wrapper.update();
 
     expect(wrapper.find('input')).toHaveLength(2);
 
-    wrapper
-      .find('input')
-      .first()
-      .simulate('change', { target: { value: 'dontshow' } });
+    await act(async () => {
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: 'dontshow' } });
+    });
     wrapper.update();
 
     expect(wrapper.find('input')).toHaveLength(1);
