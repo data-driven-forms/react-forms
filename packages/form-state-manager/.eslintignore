@@ -1,8 +1,0 @@
-/**/node_modules
-/**/dist
-/**/public
-/**/coverage
-/**/vendor.js
-/**/*.config.js
-/templates/
-packages/**/service-worker.js

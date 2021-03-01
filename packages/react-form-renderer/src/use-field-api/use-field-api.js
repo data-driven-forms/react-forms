@@ -1,10 +1,19 @@
-import { useEffect, useContext, useRef, useReducer } from 'react';
-import { useField } from '@data-driven-forms/form-state-manager';
+import { useEffect, useContext, useRef, useReducer, useState } from 'react';
+import { useField } from 'react-final-form';
+import enhancedOnChange from './enhanced-on-change';
 import RendererContext from '../renderer-context';
+import convertInitialValue from './convert-initial-value';
 import assignSpecialType from './assign-special-type';
 import componentTypes from '../component-types';
 import { prepareArrayValidator, getValidate } from './validator-helpers';
-import composeValidators from '../compose-validators';
+import composeValidators from './compose-validators';
+import isEqual from 'lodash/isEqual';
+
+const calculateInitialValue = (props) => {
+  if (Object.prototype.hasOwnProperty.call(props, 'initialValue') && Object.prototype.hasOwnProperty.call(props, 'dataType')) {
+    return convertInitialValue(props.initialValue, props.dataType);
+  }
+};
 
 const calculateArrayValidator = (props, validate, component, validatorMapper) => {
   if ((validate || props.dataType) && componentTypes.FIELD_ARRAY === component) {
@@ -12,15 +21,34 @@ const calculateArrayValidator = (props, validate, component, validatorMapper) =>
   }
 };
 
-const calculateValidate = (props, validate, component, validatorMapper) => {
+const calculateValidate = (props, validate, component, validatorMapper, setWarning, useWarnings) => {
   if ((validate || props.dataType) && componentTypes.FIELD_ARRAY !== component) {
-    return composeValidators(getValidate(validate, props.dataType, validatorMapper));
+    const validateFn = composeValidators(getValidate(validate, props.dataType, validatorMapper));
+
+    if (useWarnings) {
+      return async (...args) => {
+        setWarning(undefined);
+
+        const result = await validateFn(...args);
+
+        if (result?.type === 'warning') {
+          setWarning(result.error);
+
+          return;
+        }
+
+        return result;
+      };
+    }
+
+    return validateFn;
   }
 };
 
-const init = ({ props, validate, component, validatorMapper }) => ({
+const init = ({ props, validate, component, validatorMapper, setWarning, useWarnings }) => ({
+  initialValue: calculateInitialValue(props),
   arrayValidator: calculateArrayValidator(props, validate, component, validatorMapper),
-  validate: calculateValidate(props, validate, component, validatorMapper),
+  validate: calculateValidate(props, validate, component, validatorMapper, setWarning, useWarnings),
   type: assignSpecialType(component)
 });
 
@@ -56,8 +84,9 @@ const createFieldProps = (name, formOptions) => {
   };
 };
 
-const useFieldApi = ({ name, component, render, validate, resolveProps, ...props }) => {
+const useFieldApi = ({ name, initializeOnMount, component, render, validate, resolveProps, useWarnings, ...props }) => {
   const { validatorMapper, formOptions } = useContext(RendererContext);
+  const [warning, setWarning] = useState();
 
   const { validate: resolvePropsValidate, ...resolvedProps } = resolveProps
     ? resolveProps(props, createFieldProps(name, formOptions), formOptions) || {}
@@ -65,9 +94,9 @@ const useFieldApi = ({ name, component, render, validate, resolveProps, ...props
 
   const finalValidate = resolvePropsValidate || validate;
 
-  const [{ type, validate: stateValidate, arrayValidator }, dispatch] = useReducer(
+  const [{ type, initialValue, validate: stateValidate, arrayValidator }, dispatch] = useReducer(
     reducer,
-    { props: { ...props, ...resolvedProps }, validate: finalValidate, component, validatorMapper },
+    { props: { ...props, ...resolvedProps }, validate: finalValidate, component, validatorMapper, setWarning, useWarnings },
     init
   );
 
@@ -75,13 +104,13 @@ const useFieldApi = ({ name, component, render, validate, resolveProps, ...props
 
   const enhancedProps = {
     type,
-    name,
     ...props,
     ...resolvedProps,
+    ...(initialValue ? { initialValue } : {}),
     ...(stateValidate ? { validate: stateValidate } : {})
   };
 
-  const fieldProps = useField(enhancedProps);
+  const fieldProps = useField(name, enhancedProps);
 
   /** Reinitilize type */
   useEffect(() => {
@@ -98,7 +127,7 @@ const useFieldApi = ({ name, component, render, validate, resolveProps, ...props
     if (mounted.current) {
       dispatch({
         type: 'setValidators',
-        validate: calculateValidate(enhancedProps, finalValidate, component, validatorMapper),
+        validate: calculateValidate(enhancedProps, finalValidate, component, validatorMapper, setWarning, useWarnings),
         arrayValidator: calculateArrayValidator(enhancedProps, finalValidate, component, validatorMapper)
       });
     }
@@ -110,13 +139,61 @@ const useFieldApi = ({ name, component, render, validate, resolveProps, ...props
      */
   }, [finalValidate ? JSON.stringify(finalValidate) : false, component, enhancedProps.dataType]);
 
+  /** Re-convert initialValue when changed */
   useEffect(() => {
-    mounted.current = true;
+    if (mounted.current) {
+      const newInitialValue = calculateInitialValue(enhancedProps);
+      if (!isEqual(initialValue, newInitialValue)) {
+        dispatch({
+          type: 'setInitialValue',
+          initialValue: newInitialValue
+        });
+      }
+    }
+  }, [enhancedProps.initialValue, enhancedProps.dataType]);
 
-    return () => {
-      mounted.current = false;
-    };
-  }, []);
+  useEffect(() => {
+    /**
+     * Re initialize field when mounted to the Form
+     * This affects conditional fields
+     */
+    if (initializeOnMount) {
+      const value = Object.prototype.hasOwnProperty.call(enhancedProps, 'initialValue')
+        ? enhancedProps.initialValue
+        : formOptions.getFieldState(name).initial;
+      fieldProps.input.onChange(value);
+    }
+  }, [initializeOnMount, enhancedProps.initialValue, fieldProps.meta.initial, props.dataType]);
+
+  /**
+   * Prepare deleted value of field
+   */
+  const fieldClearedValue = Object.prototype.hasOwnProperty.call(props, 'clearedValue') ? props.clearedValue : formOptions.clearedValue;
+
+  useEffect(
+    () => {
+      mounted.current = true;
+      if (fieldProps.input.type === 'file') {
+        formOptions.registerInputFile(fieldProps.input.name);
+      }
+
+      return () => {
+        mounted.current = false;
+        /**
+         * Delete the value from form state when field is inmounted
+         */
+        if ((formOptions.clearOnUnmount || props.clearOnUnmount) && props.clearOnUnmount !== false) {
+          fieldProps.input.onChange(fieldClearedValue);
+        }
+
+        if (fieldProps.input.type === 'file') {
+          formOptions.unRegisterInputFile(fieldProps.input.name);
+        }
+      };
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   const {
     initialValue: _initialValue,
@@ -126,7 +203,6 @@ const useFieldApi = ({ name, component, render, validate, resolveProps, ...props
     isEqual: _isEqual,
     validate: _validate,
     type: _type,
-    initializeOnMount: _initializeOnMount,
     ...cleanProps
   } = enhancedProps;
 
@@ -136,7 +212,29 @@ const useFieldApi = ({ name, component, render, validate, resolveProps, ...props
   return {
     ...cleanProps,
     ...fieldProps,
-    ...(arrayValidator && { arrayValidator })
+    ...(arrayValidator && { arrayValidator }),
+    ...(useWarnings && {
+      meta: {
+        ...fieldProps.meta,
+        warning
+      }
+    }),
+    input: {
+      ...fieldProps.input,
+      value:
+        fieldProps.input.type === 'file' && typeof fieldProps.input.value === 'object' ? fieldProps.input.value.inputValue : fieldProps.input.value,
+      onChange: (...args) => {
+        enhancedOnChange(
+          {
+            ...fieldProps.meta,
+            dataType,
+            onChange: fieldProps.input.onChange,
+            clearedValue: fieldClearedValue
+          },
+          ...args
+        );
+      }
+    }
   };
 };
 

@@ -76,3 +76,5 @@ packages/**/size-snapshot.json
 
 # Node version manager configuration
 .nvmrc
+
+.DS_STORE

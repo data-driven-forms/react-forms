@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
+import arrayMutators from 'final-form-arrays';
 import renderForm from '../../form-renderer/render-form';
 import RendererContext from '../../renderer-context';
 import FormRenderer from '../../form-renderer';
@@ -35,7 +36,9 @@ describe('renderForm function', () => {
         }
       }}
     >
-      <Form onSubmit={jest.fn()}>{() => children}</Form>
+      <Form onSubmit={jest.fn()} mutators={{ ...arrayMutators }}>
+        {() => children}
+      </Form>
     </RendererContext.Provider>
   );
 
@@ -91,7 +94,7 @@ describe('renderForm function', () => {
       {
         component: componentTypes.TEXT_FIELD,
         name: 'foo',
-        dataType: 'number'
+        dataType: 'string'
       }
     ];
     const wrapper = mount(
@@ -105,7 +108,7 @@ describe('renderForm function', () => {
       />
     );
     expect(wrapper.find('div#error')).toHaveLength(0);
-    wrapper.find('input[name="foo"]').simulate('change', { target: { value: 'a' } });
+    wrapper.find('input[name="foo"]').simulate('change', { target: { value: 1 } });
     expect(wrapper.find('div#error')).toHaveLength(1);
   });
 
@@ -1358,7 +1361,7 @@ describe('renderForm function', () => {
 
       wrapper.find('form').simulate('submit');
 
-      expect(onSubmit).toHaveBeenCalledWith({ input: 'show_true', unmounted: true }, expect.any(Object), expect.any(Object));
+      expect(onSubmit).toHaveBeenCalledWith({ input: 'show_true', unmounted: true }, expect.any(Object), expect.any(Function));
       onSubmit.mockClear();
 
       wrapper
@@ -1370,7 +1373,7 @@ describe('renderForm function', () => {
       wrapper.find('form').simulate('submit');
       wrapper.update();
 
-      expect(onSubmit).toHaveBeenCalledWith({ input: 'show_false', unmounted: false }, expect.any(Object), expect.any(Object));
+      expect(onSubmit).toHaveBeenCalledWith({ input: 'show_false', unmounted: false }, expect.any(Object), expect.any(Function));
     });
 
     it('should set unefined value in initializeOnMount', () => {
@@ -1425,7 +1428,7 @@ describe('renderForm function', () => {
 
       wrapper.find('form').simulate('submit');
 
-      expect(onSubmit).toHaveBeenCalledWith({ input: 'show_true', unmounted: true }, expect.any(Object), expect.any(Object));
+      expect(onSubmit).toHaveBeenCalledWith({ input: 'show_true', unmounted: true }, expect.any(Object), expect.any(Function));
       onSubmit.mockClear();
 
       wrapper
@@ -1437,7 +1440,7 @@ describe('renderForm function', () => {
       wrapper.find('form').simulate('submit');
       wrapper.update();
 
-      expect(onSubmit).toHaveBeenCalledWith({ input: 'show_undef', unmounted: undefined }, expect.any(Object), expect.any(Object));
+      expect(onSubmit).toHaveBeenCalledWith({ input: 'show_undef', unmounted: undefined }, expect.any(Object), expect.any(Function));
     });
   });
 

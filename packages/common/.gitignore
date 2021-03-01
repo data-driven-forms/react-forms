@@ -85,3 +85,5 @@ vendor
 !README.md
 !tsconfig.json
 !generate-typings.js
+
+.DS_STORE

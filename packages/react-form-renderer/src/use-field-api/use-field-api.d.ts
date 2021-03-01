@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { FieldMetaState, FieldInputProps, UseFieldConfig } from 'react-final-form';
-import { AnyObject } from '../common-types/any-object';
+import { AnyObject } from '../common-types';
 
 export interface ValidatorType extends Object {
   type: string;
@@ -10,6 +10,7 @@ export interface ValidatorType extends Object {
 export interface UseFieldApiConfig extends AnyObject {
   name: string;
   validate?: ValidatorType[];
+  useWarnings?: boolean;
 }
 export interface UseFieldApiComponentConfig extends UseFieldConfig<any>  {
   name: string;

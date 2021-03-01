@@ -1,5 +1,5 @@
-import { FormStateManagerProps } from '@data-driven-forms/form-state-manager';
+import { FormProps } from 'react-final-form';
 
-declare const Form: React.ComponentType<FormStateManagerProps>;
+declare const Form: React.ComponentType<FormProps<{}>>;
 
 export default Form;
