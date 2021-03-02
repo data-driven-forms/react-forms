@@ -6,7 +6,7 @@ const packagePath = process.cwd();
 const src = path.resolve(packagePath, './src');
 
 function copyCss() {
-  const directories = glob.sync(`${src}/*/`).filter((name) => !name.includes('/tests/') && !name.includes('/common/'));
+  const directories = glob.sync(`${src}/*/`).filter((name) => !name.includes('/tests/'));
 
   directories.forEach((dir) => {
     const cssFiles = glob.sync(`${dir}/**/*.css`);
