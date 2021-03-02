@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
-import { formGroup } from './prop-types-templates';
+import { formGroup } from '../prop-types-templates';
 
 const SingleCheckbox = (props) => {
   const { input, Checkbox, ...rest } = useFieldApi({ ...props, type: 'checkbox' });
