@@ -5,13 +5,13 @@ const { copyFileSync } = require('fs');
 const packagePath = process.cwd();
 const src = path.resolve(packagePath, './src');
 
-async function copyCss() {
+function copyCss() {
   const directories = glob.sync(`${src}/*/`).filter((name) => !name.includes('/tests/') && !name.includes('/common/'));
 
-  directories.forEach(async (dir) => {
+  directories.forEach((dir) => {
     const cssFiles = glob.sync(`${dir}/**/*.css`);
 
-    cssFiles.forEach(async (file) => {
+    cssFiles.forEach((file) => {
       const fileName = file.replace(/^.*src\//, '');
 
       copyFileSync(file, `./${fileName}`);
@@ -20,9 +20,9 @@ async function copyCss() {
   });
 }
 
-async function run() {
+function run() {
   try {
-    await copyCss();
+    copyCss();
   } catch (err) {
     console.error(err);
     process.exit(1);
