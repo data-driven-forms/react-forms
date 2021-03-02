@@ -4,55 +4,48 @@ import DocPage from '@docs/doc-page';
 
 # Optimization
 
-Data Driven Forms is built in three module formats: CJS, ESM and UMD.
+Data Driven Forms is built in two module formats: CJS and ESM.
 
-## CJS
+By using a standard import path, **the module based on your environment will be used**. Browser environments are using ESM modules, environments based on NodeJS (testing) are using CJS.
+
+## Import only specific file
+
+Exported files follow the kebab case. All components are exported in default exports.
 
 ```jsx
---- { "switchable": false } ---
-import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
 import useField from '@data-driven-forms/react-form-renderer/use-field';
 ```
-
 ## ESM
 
-```jsx
---- { "switchable": false } ---
-import FormRenderer from '@data-driven-forms/react-form-renderer/dist/esm/form-renderer';
-import useField from '@data-driven-forms/react-form-renderer/dist/esm/use-field';
-```
+In case you need to import ESM module manually, you can do this by using `esm` in a path. However, we do not recommend it.
 
-In both of CJS and ESM, exported files follow the kebab case. All components are exported in default exports.
+```jsx
+import FormRenderer from '@data-driven-forms/react-form-renderer/esm/form-renderer';
+import useField from '@data-driven-forms/react-form-renderer/esm/use-field';
+```
 
 ## UMD
 
-**Recommendation: UMD is just a fallback option. We strongly recommend to use CJS or ESM. These two modules allow to better optimization via treeshaking and more modern language syntax.**
-
-```jsx
---- { "switchable": false } ---
-import { FormRenderer, useField } from '@data-driven-forms/react-form-renderer';
-```
-
-Only the `FormRenderer` component is exported as a default. In all other packages, use only named exports.
+UMD module format is no longer supported.
 
 ---
 
 ## Mixing imports
 
-**Do not mix** different module formats (for example `Renderer` imported from UMD and `componentMapper` from CJS), otherwise you will encounter this error:
+**Do not mix** different module formats (for example `Renderer` imported from ESM and `componentMapper` from CJS), otherwise you will encounter this error:
 
 `useField must be used inside of a <Form> component`
 
 ## Transforming imports in Babel
 
-You can automate tranforming imports to specific module formats by using [transform-imports](https://www.npmjs.com/package/babel-plugin-transform-imports) plugin in your Babel configuration. With that, you don't need to write explicit imports manually and you can still import everything from projects' roots.
+You can automate tranforming imports by using [transform-imports](https://www.npmjs.com/package/babel-plugin-transform-imports) plugin in your Babel configuration. With that, you don't need to write explicit imports manually and you can still import everything from projects' roots.
 
 Example:
 
 ```jsx
 // babel.config.js
 
-const transformDDFImportsToCJS = [
+const transformDDFImports = [
   'transform-imports',
   {
     '@data-driven-forms/react-form-renderer': {
@@ -63,7 +56,7 @@ const transformDDFImportsToCJS = [
               .toLowerCase()}.js`,
     }
   },
-  'react-form-renderer-cjs'
+  'react-form-renderer'
 ]
 
 ...
@@ -72,18 +65,19 @@ module.exports = {
     ...,
     plugins: [
         ...,
-        transformDDFImportsToCJS
+        transformDDFImports
     ]
 }
 ```
 
 Result:
 
-```jsx
---- { "switchable": false } ---
-import { useField } from '@data-driven-forms/react-form-renderer';
-// ^^ this will be converted to >>
-import useField from '@data-driven-forms/react-form-renderer/use-field';
-```
+
+`import { useField } from '@data-driven-forms/react-form-renderer';`
+
+will be converted to
+
+`import useField from '@data-driven-forms/react-form-renderer/use-field';`
+
 
 </DocPage>
