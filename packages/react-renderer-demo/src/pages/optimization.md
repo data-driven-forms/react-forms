@@ -72,12 +72,10 @@ module.exports = {
 
 Result:
 
-
-`import { useField } from '@data-driven-forms/react-form-renderer';`
-
-will be converted to
-
-`import useField from '@data-driven-forms/react-form-renderer/use-field';`
-
+```diff
+--- { "switchable": false } ---
+-import { useField } from '@data-driven-forms/react-form-renderer';
++import useField from '@data-driven-forms/react-form-renderer/use-field';
+```
 
 </DocPage>
