@@ -8,7 +8,7 @@ const src = path.resolve(packagePath, './src');
 async function generatePackages() {
   const directories = glob
     .sync(`${src}/*/`)
-    .filter((name) => !name.includes('/tests/') && !name.includes('/common/'))
+    .filter((name) => !name.includes('/tests/'))
     .map((path) =>
       path
         .replace(/\/$/, '')
