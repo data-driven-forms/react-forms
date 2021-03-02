@@ -103,7 +103,7 @@ const MdxComponents = {
       {children}
     </Typography>
   ),
-  code: (props) => <CodeEditor {...props} switchable />,
+  code: (props) => <CodeEditor {...props} />,
   a: MdLink,
   h1: (props) => <Heading {...props} level={4} component="h1" />,
   h2: (props) => <Heading {...props} level={5} component="h2" />,

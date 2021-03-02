@@ -211,7 +211,7 @@ const LandingPageCards = () => {
                 Write a schema
               </Typography>
               <div className={classes.editorWrapper}>
-                <CodeEditor showGutter={false} value={value} fontSize={11} switchable />
+                <CodeEditor showGutter={false} value={value} fontSize={11} />
               </div>
             </Grid>
             <Grid item xs={12} md={5}>

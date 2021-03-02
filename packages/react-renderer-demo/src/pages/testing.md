@@ -21,7 +21,7 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 
-import FormRenderer from '@data-driven-forms/react-form-renderer';
+import { FormRenderer } from '@data-driven-forms/react-form-renderer';
 import { componentMapper, FormTemplate } from '@data-driven-forms/mui-component-mapper';
 
 describe('<FormRendererTest />', () => {

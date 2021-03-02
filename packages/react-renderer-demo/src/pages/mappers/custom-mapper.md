@@ -99,7 +99,7 @@ const componentMapper = {
 And then use the component mapper in the form renderer component:
 
 ```jsx
-import FormRenderer from '@data-driven-forms/react-form-renderer';
+import { FormRenderer } from '@data-driven-forms/react-form-renderer';
 
 const Form = (props) => <FormRenderer
   componentMapper={componentMapper}
