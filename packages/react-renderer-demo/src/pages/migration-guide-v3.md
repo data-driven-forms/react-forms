@@ -16,6 +16,12 @@ PatternFly 3 mapper is now removed. You can still use the mapper from version 2,
 
 Migration should be simple - most of the components share the same API so replacing imports should work fine in most cases.
 
+```diff
+--- { "switchable": false } ---
+-import { componentMapper, FormTemplate } from '@data-driven-forms/pf3-component-mapper';
++import { componentMapper, FormTemplate } from '@data-driven-forms/pf4-component-mapper';
+```
+
 ---
 
 ## New build process
@@ -32,17 +38,11 @@ UMD format is no longer supported. The import paths for UMD packages now lead to
 
 Due to the new build process, you have to change your imports path, if you use relative imports of specific components or if you consume the specific module system package. There are no longer module system and the dist folder specified.
 
-**Before**
-
-`import useFieldApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-field-api';`
-
-<br />
-
-**After**
-
-`import useFieldApi from '@data-driven-forms/react-form-renderer/use-field-api';`
-
-<br />
+```diff
+--- { "switchable": false } ---
+-import useFieldApi from '@data-driven-forms/react-form-renderer/dist/cjs/use-field-api';;
++import useFieldApi from '@data-driven-forms/react-form-renderer/use-field-api';
+```
 
 You can use [babel-transform-plugin](/optimization#transformingimportsinbabel) to do this change for you.
 
@@ -50,19 +50,15 @@ You can use [babel-transform-plugin](/optimization#transformingimportsinbabel) t
 
 FormRenderer component is no longer a default export of the `react-form-renderer` package.
 
-**Before**
+```diff
+--- { "switchable": false } ---
+-import FormRenderer from '@data-driven-forms/react-form-renderer';
++import { FormRenderer } from '@data-driven-forms/react-form-renderer';
 
-`import FormRenderer from '@data-driven-forms/react-form-renderer';`
+// or
 
-<br />
-
-**After**
-
-`import { FormRenderer } from '@data-driven-forms/react-form-renderer';`
-
-or
-
-`import { FormRenderer } from '@data-driven-forms/react-form-renderer/form-renderer';`
++import { FormRenderer } from '@data-driven-forms/react-form-renderer/form-renderer';
+```
 
 <br />
 

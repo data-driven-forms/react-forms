@@ -48,7 +48,18 @@ const CodeEditor = ({ value, children, className, inExample }) => {
 
   const lang = className ? className.toLowerCase().replace('language-', '') : undefined;
   let content = value || children || '';
-  content = tranformImports(content);
+
+  // read props from code in --- { "key": value } ---\n format
+  let propsFromMD = content.match(/--- .* ---/);
+  if (propsFromMD) {
+    propsFromMD = JSON.parse(propsFromMD[0].replace(/-/g, ''));
+    content = content.replace(/--- .* ---\n/, '');
+  }
+
+  if (propsFromMD?.switchable !== false) {
+    content = tranformImports(content);
+  }
+
   content = content.substring(0, content.length - 1);
 
   return (
