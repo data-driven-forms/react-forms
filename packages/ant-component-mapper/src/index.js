@@ -14,3 +14,4 @@ export { default as Tabs } from './tabs';
 export { default as Textarea } from './textarea';
 export { default as TimePicker } from './time-picker';
 export { default as Wizard } from './wizard';
+export { default as validationError } from './validation-error';

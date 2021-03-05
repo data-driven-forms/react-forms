@@ -15,4 +15,5 @@ export { default as Switch } from './switch';
 export { default as Tabs } from './tabs';
 export { default as Textarea } from './textarea';
 export { default as TimePicker } from './time-picker';
-export { default as Wizard } from './wizard/wizard';
+export { default as Wizard } from './wizard';
+export { default as showError } from './show-error';

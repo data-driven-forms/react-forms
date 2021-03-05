@@ -29,7 +29,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import DualListSelectCommon from '@data-driven-forms/common/dual-list-select';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
-import { validationError } from '../common/helpers';
+import { validationError } from '../validation-error/validation-error';
 
 const useStyles = makeStyles(() => ({
   allToLeftIcon: {

@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
-import { FormFieldGridProps, HelperTextProps } from '../form-field-grid';
+import { FormFieldGridProps } from '../form-field-grid';
+import { HelperTextProps } from '../helper-text';
 
 export interface CommonFieldProps {
   isReadOnly?: boolean;
@@ -14,3 +15,5 @@ export interface CommonFieldProps {
   FormFieldGridProps?: FormFieldGridProps;
   HelperTextProps?: HelperTextProps;
 }
+
+export default CommonFieldProps;

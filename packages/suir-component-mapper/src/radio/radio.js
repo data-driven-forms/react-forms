@@ -4,7 +4,7 @@ import { FormRadio, FormField } from 'semantic-ui-react';
 import { wrapperProps } from '@data-driven-forms/common/multiple-choice-list';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
-import { validationError, validationWarning } from '../common/helpers';
+import { validationError, validationWarning } from '../helpers/helpers';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const RadioOption = ({ name, option, isDisabled, isReadOnly, ...props }) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
-import { validationError, validationWarning } from '../common/helpers';
+import { validationError, validationWarning } from '../helpers/helpers';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormField from '../form-field/form-field';
 

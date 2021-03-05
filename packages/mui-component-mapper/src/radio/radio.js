@@ -5,7 +5,7 @@ import { wrapperProps } from '@data-driven-forms/common/multiple-choice-list';
 import { makeStyles } from '@material-ui/core/styles';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
-import { validationError } from '../common/helpers';
+import { validationError } from '../validation-error/validation-error';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 const useStyles = makeStyles(() => ({

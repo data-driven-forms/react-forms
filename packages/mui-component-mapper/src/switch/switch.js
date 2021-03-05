@@ -4,7 +4,7 @@ import { FormControlLabel, FormHelperText, FormControl, FormGroup, FormLabel, Sw
 import { meta, input } from '@data-driven-forms/common/prop-types-templates';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
-import { validationError } from '../common/helpers';
+import { validationError } from '../validation-error/validation-error';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 export const Switch = (props) => {
