@@ -1,4 +1,4 @@
-import showError from '../common/show-error';
+import showError from '../show-error/show-error';
 
 describe('Show error on validation', () => {
   describe('show error', () => {

@@ -3,7 +3,7 @@ import { TextInput } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormGroup from '../form-group/form-group';
-import showError from '../common/show-error';
+import showError from '../show-error/show-error';
 
 const DatePicker = (props) => {
   const {

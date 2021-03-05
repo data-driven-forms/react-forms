@@ -2,7 +2,7 @@ import React from 'react';
 import { FormGroup as Pf4FormGroup, TextContent, Text } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 
-import showError from '../common/show-error';
+import showError from '../show-error/show-error';
 
 const FormGroup = ({ label, isRequired, helperText, meta, validateOnMount, description, hideLabel, children, id, FormGroupProps }) => (
   <Pf4FormGroup

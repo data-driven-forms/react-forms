@@ -1,7 +1,7 @@
 import { UseFieldApiComponentConfig, AnyObject } from "@data-driven-forms/react-form-renderer";
 import { CheckboxProps as SuirCheckboxProps } from 'semantic-ui-react';
 import { ReactNode } from "react";
-import { CommonFieldProps } from "../common/common-field-props";
+import { CommonFieldProps } from "../common-field-props/common-field-props";
 
 export interface CheckboxOption extends AnyObject {
   label: ReactNode;

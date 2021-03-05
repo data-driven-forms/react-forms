@@ -5,7 +5,7 @@ import { FormCheckbox, Header, FormField } from 'semantic-ui-react';
 import { createUseStyles } from 'react-jss';
 import clsx from 'clsx';
 
-import { validationError } from '../common/helpers';
+import { validationError } from '../helpers/helpers';
 import FormFieldGrid from '../form-field-grid/form-field-grid';
 
 const useStyles = createUseStyles({
