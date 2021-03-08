@@ -5,3 +5,5 @@ export const validationError = (meta, validateOnMount) => {
 
   return meta.touched && (meta.error || meta.submitError);
 };
+
+export default validationError;
