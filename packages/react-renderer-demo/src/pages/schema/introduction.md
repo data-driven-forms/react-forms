@@ -16,7 +16,7 @@ A schema is an object consists of fields:
 
 Other attribues, such as title or description, can be used in [form templates](/components/form-template).
 
-## Field defitinion
+## Field definition
 
 ```jsx
 {
@@ -51,7 +51,7 @@ Other attribues, such as title or description, can be used in [form templates](/
 
 *string*
 
-`name` represents the variable the form value is stored in. You can use [dot notatiton](https://final-form.org/docs/final-form/field-names) to create nested objects.
+`name` represents the variable the form value is stored in. You can use [dot notation](https://final-form.org/docs/final-form/field-names) to create nested objects.
 
 ```jsx
 {
