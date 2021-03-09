@@ -36,7 +36,7 @@ const useFielArrayStyles = makeStyles({
   }
 });
 
-const ArrayItem = ({ fields, fieldIndex, name, remove, length, minItems, removeLabel }) => {
+const ArrayItem = ({ fields, fieldIndex, name, remove, length, minItems, removeLabel, FieldContainerProps, FieldGroupGridProps, RemoveButtonGridProps, RemoveButtonProps }) => {
   const { renderForm } = useFormApi();
   const classes = useFielArrayStyles();
 
@@ -46,14 +46,14 @@ const ArrayItem = ({ fields, fieldIndex, name, remove, length, minItems, removeL
   });
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12}>
+    <Grid container spacing={3} {...FieldContainerProps}>
+      <Grid item xs={12} {...FieldGroupGridProps}>
         <Grid container spacing={3}>
           {renderForm([editedFields])}
         </Grid>
       </Grid>
-      <Grid item xs={12} className={classes.buttonsToEnd}>
-        <Button color="secondary" onClick={() => remove(fieldIndex)} disabled={length <= minItems}>
+      <Grid item xs={12} className={classes.buttonsToEnd} {...RemoveButtonGridProps}>
+        <Button color="secondary" onClick={() => remove(fieldIndex)} disabled={length <= minItems} {...RemoveButtonProps}>
           {removeLabel}
         </Button>
       </Grid>
@@ -68,7 +68,18 @@ ArrayItem.propTypes = {
   remove: PropTypes.func.isRequired,
   length: PropTypes.number,
   minItems: PropTypes.number,
-  removeLabel: PropTypes.node.isRequired
+  removeLabel: PropTypes.node.isRequired,
+  FieldContainerProps: PropTypes.object,
+  FieldGroupGridProps: PropTypes.object,
+  RemoveButtonGridProps: PropTypes.object,
+  RemoveButtonProps: PropTypes.object
+};
+
+ArrayItem.defaultProps = {
+  FieldContainerProps: {},
+  FieldGroupGridProps: {},
+  RemoveButtonGridProps: {},
+  RemoveButtonProps: {}
 };
 
 const defaultButtonLabels = {
@@ -122,6 +133,22 @@ const DynamicArray = ({ ...props }) => {
     FormFieldGridProps,
     FormControlProps,
     buttonLabels,
+    GridContainerProps,
+    HeaderGridProps,
+    HeaderProps,
+    UndoButtonProps,
+    RedoButtonProps,
+    AddButtonProps,
+    DescriptionGridProps,
+    DescriptionProps,
+    BodyGridProps,
+    NoItemsProps,
+    FormHelperTextGridProps,
+    FormHelperTextProps,
+    FieldContainerProps,
+    FieldGroupGridProps,
+    RemoveButtonGridProps,
+    RemoveButtonProps,
     ...rest
   } = useFieldApi(props);
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -167,31 +194,31 @@ const DynamicArray = ({ ...props }) => {
             };
 
             return (
-              <Grid container spacing={3}>
-                <Grid item xs={12} className={classes.header}>
+              <Grid container spacing={3} {...GridContainerProps}>
+                <Grid item xs={12} className={classes.header} {...HeaderGridProps}>
                   {label && (
-                    <Typography variant="h6" className={classes.label}>
+                    <Typography variant="h6" className={classes.label} {...HeaderProps}>
                       {label}
                     </Typography>
                   )}
-                  <IconButton color="primary" aria-label="undo" component="span" disabled={state.index === 0} onClick={undo}>
+                  <IconButton color="primary" aria-label="undo" component="span" disabled={state.index === 0} onClick={undo} {...UndoButtonProps}>
                     <UndoIcon />
                   </IconButton>
-                  <IconButton color="primary" aria-label="redo" component="span" disabled={state.index === state.history.length} onClick={redo}>
+                  <IconButton color="primary" aria-label="redo" component="span" disabled={state.index === state.history.length} onClick={redo} {...RedoButtonProps}>
                     <RedoIcon />
                   </IconButton>
-                  <Button color="primary" onClick={pushWrapper} disabled={value.length >= maxItems}>
+                  <Button color="primary" onClick={pushWrapper} disabled={value.length >= maxItems} {...AddButtonProps}>
                     {combinedButtonLabels.add}
                   </Button>
                 </Grid>
                 {description && (
-                  <Grid item xs={12}>
-                    <Typography variant="subtitle1">{description}</Typography>
+                  <Grid item xs={12} {...DescriptionGridProps}>
+                    <Typography variant="subtitle1" {...DescriptionProps}>{description}</Typography>
                   </Grid>
                 )}
-                <Grid item xs={12}>
+                <Grid item xs={12} {...BodyGridProps}>
                   {value.length <= 0 ? (
-                    <Typography variant="body1" gutterBottom className={classes.centerText}>
+                    <Typography variant="body1" gutterBottom className={classes.centerText} {...NoItemsProps}>
                       {noItemsMessage}
                     </Typography>
                   ) : (
@@ -205,13 +232,17 @@ const DynamicArray = ({ ...props }) => {
                         length={value.length}
                         minItems={minItems}
                         removeLabel={combinedButtonLabels.remove}
+                        FieldContainerProps={FieldContainerProps}
+                        FieldGroupGridProps={FieldGroupGridProps}
+                        RemoveButtonGridProps={RemoveButtonGridProps}
+                        RemoveButtonProps={RemoveButtonProps}
                       />
                     ))
                   )}
                 </Grid>
                 {(isError || submitError) && (
-                  <Grid item xs={12}>
-                    <FormHelperText>{error || submitError}</FormHelperText>
+                  <Grid item xs={12} {...FormHelperTextGridProps}>
+                    <FormHelperText {...FormHelperTextProps}>{error || submitError}</FormHelperText>
                   </Grid>
                 )}
               </Grid>
@@ -233,7 +264,23 @@ DynamicArray.propTypes = {
   noItemsMessage: PropTypes.node,
   FormControlProps: PropTypes.object,
   FormFieldGridProps: PropTypes.object,
-  buttonLabels: PropTypes.object
+  buttonLabels: PropTypes.object,
+  GridContainerProps: PropTypes.object,
+  HeaderGridProps: PropTypes.object,
+  HeaderProps: PropTypes.object,
+  UndoButtonProps: PropTypes.object,
+  RedoButtonProps: PropTypes.object,
+  AddButtonProps: PropTypes.object,
+  DescriptionGridProps: PropTypes.object,
+  DescriptionProps: PropTypes.object,
+  BodyGridProps: PropTypes.object,
+  NoItemsProps: PropTypes.object,
+  FormHelperTextGridProps: PropTypes.object,
+  FormHelperTextProps: PropTypes.object,
+  FieldContainerProps: PropTypes.object,
+  FieldGroupGridProps: PropTypes.object,
+  RemoveButtonGridProps: PropTypes.object,
+  RemoveButtonProps: PropTypes.object
 };
 
 DynamicArray.defaultProps = {
@@ -241,7 +288,23 @@ DynamicArray.defaultProps = {
   minItems: 0,
   noItemsMessage: 'No items added',
   FormControlProps: {},
-  FormFieldGridProps: {}
+  FormFieldGridProps: {},
+  GridContainerProps: {},
+  HeaderGridProps: {},
+  HeaderProps: {},
+  UndoButtonProps: {},
+  RedoButtonProps: {},
+  AddButtonProps: {},
+  DescriptionGridProps: {},
+  DescriptionProps: {},
+  BodyGridProps: {},
+  NoItemsProps: {},
+  FormHelperTextGridProps: {},
+  FormHelperTextProps: {},
+  FieldContainerProps: {},
+  FieldGroupGridProps: {},
+  RemoveButtonGridProps: {},
+  RemoveButtonProps: {}
 };
 
 export default DynamicArray;
