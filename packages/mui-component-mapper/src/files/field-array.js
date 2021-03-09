@@ -36,7 +36,19 @@ const useFielArrayStyles = makeStyles({
   }
 });
 
-const ArrayItem = ({ fields, fieldIndex, name, remove, length, minItems, removeLabel, FieldContainerProps, FieldGroupGridProps, RemoveButtonGridProps, RemoveButtonProps }) => {
+const ArrayItem = ({
+  fields,
+  fieldIndex,
+  name,
+  remove,
+  length,
+  minItems,
+  removeLabel,
+  FieldContainerProps,
+  FieldGroupGridProps,
+  RemoveButtonGridProps,
+  RemoveButtonProps
+}) => {
   const { renderForm } = useFormApi();
   const classes = useFielArrayStyles();
 
@@ -204,7 +216,14 @@ const DynamicArray = ({ ...props }) => {
                   <IconButton color="primary" aria-label="undo" component="span" disabled={state.index === 0} onClick={undo} {...UndoButtonProps}>
                     <UndoIcon />
                   </IconButton>
-                  <IconButton color="primary" aria-label="redo" component="span" disabled={state.index === state.history.length} onClick={redo} {...RedoButtonProps}>
+                  <IconButton
+                    color="primary"
+                    aria-label="redo"
+                    component="span"
+                    disabled={state.index === state.history.length}
+                    onClick={redo}
+                    {...RedoButtonProps}
+                  >
                     <RedoIcon />
                   </IconButton>
                   <Button color="primary" onClick={pushWrapper} disabled={value.length >= maxItems} {...AddButtonProps}>
@@ -213,7 +232,9 @@ const DynamicArray = ({ ...props }) => {
                 </Grid>
                 {description && (
                   <Grid item xs={12} {...DescriptionGridProps}>
-                    <Typography variant="subtitle1" {...DescriptionProps}>{description}</Typography>
+                    <Typography variant="subtitle1" {...DescriptionProps}>
+                      {description}
+                    </Typography>
                   </Grid>
                 )}
                 <Grid item xs={12} {...BodyGridProps}>
