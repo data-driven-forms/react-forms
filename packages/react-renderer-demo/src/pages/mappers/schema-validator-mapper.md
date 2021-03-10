@@ -14,7 +14,7 @@ For returning an error please use `DefaultSchemaError` imported from the rendere
 ## Schema
 
 ```jsx
-import FormRenderer, { DefaultSchemaError } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, DefaultSchemaError } from '@data-driven-forms/react-form-renderer';
 
 const schemaValidatorMapper = {
     components: {

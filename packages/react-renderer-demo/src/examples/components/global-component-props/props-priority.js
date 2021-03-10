@@ -1,8 +1,8 @@
 import React from 'react';
-import FormRenderer from '@data-driven-forms/react-form-renderer/dist/cjs/form-renderer';
-import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
-import Switch from '@data-driven-forms/mui-component-mapper/dist/cjs/switch';
-import FormTemplate from '@data-driven-forms/mui-component-mapper/dist/cjs/form-template';
+import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
+import componentTypes from '@data-driven-forms/react-form-renderer/component-types';
+import Switch from '@data-driven-forms/mui-component-mapper/switch';
+import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template';
 
 const PropsPriority = () => {
   const componentMapper = {

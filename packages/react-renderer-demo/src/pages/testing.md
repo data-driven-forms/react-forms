@@ -21,7 +21,7 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 
-import FormRenderer from '@data-driven-forms/react-form-renderer';
+import { FormRenderer } from '@data-driven-forms/react-form-renderer';
 import { componentMapper, FormTemplate } from '@data-driven-forms/mui-component-mapper';
 
 describe('<FormRendererTest />', () => {
@@ -153,7 +153,7 @@ Set up your renderer to make it easier to test the component-specific features. 
 import React from 'react';
 import { mount } from 'enzyme';
 
-import FormRenderer, { useFieldApi } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, useFieldApi } from '@data-driven-forms/react-form-renderer';
 import { FormTemplate } from '@data-driven-forms/mui-component-mapper';
 
 import toJson from 'enzyme-to-json';

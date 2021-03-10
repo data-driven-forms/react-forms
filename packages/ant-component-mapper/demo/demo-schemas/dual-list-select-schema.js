@@ -1,4 +1,4 @@
-import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
+import componentTypes from '@data-driven-forms/react-form-renderer/component-types';
 
 const options = [
   {

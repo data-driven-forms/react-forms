@@ -1,0 +1,8 @@
+.no-shadow {
+  box-shadow: none;
+}
+
+.ddorg__pf4-component-mapper__wizard {
+  height: calc(100vh - 48px);
+  max-height: 762px;
+}

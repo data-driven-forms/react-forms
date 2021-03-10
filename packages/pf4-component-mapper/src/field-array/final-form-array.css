@@ -1,0 +1,35 @@
+.ddf-final-form-group-remove-icon {
+    color: var(--pf-global--icon--Color--light);
+    height: 70%;
+}
+.ddf-final-form-group-remove-icon:hover:not(.disabled) {
+    color: var(--pf-global--icon--Color--dark);
+    cursor: pointer;
+}
+.ddf-final-form-group-remove-icon.disabled {
+    opacity: 0.5;
+}
+.final-form-array-add-container {
+    min-height: 36px !important;
+}
+.ddf-final-form-group-add-icon {
+    color: var(--pf-global--icon--Color--light);
+    min-height: 24px;
+    min-width: 24px;
+}
+.ddf-final-form-group-add-icon:hover:not(.disabled) {
+    color: var(--pf-global--icon--Color--dark);
+    cursor: pointer;
+}
+.ddf-final-form-group-add-icon.disabled {
+    opacity: 0.5;
+}
+.ddf-final-form-group-label {
+    margin: auto 0 auto var(--pf-global--spacer--md);
+}
+.ddf-final-form-hr {
+    color: var(global_BorderColor_100);
+}
+.ddf-final-form-array-grid:not(:last-child) {
+    margin-bottom: var(--pf-global--spacer--md);
+}

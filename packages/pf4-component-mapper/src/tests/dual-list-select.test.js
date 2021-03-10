@@ -1,13 +1,13 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
 
 import { DualListSelector, FormGroup } from '@patternfly/react-core';
 import { AngleDoubleLeftIcon, AngleLeftIcon, AngleRightIcon } from '@patternfly/react-icons';
 
 import { componentMapper, FormTemplate } from '../index';
-import DualListSortButton from '../files/dual-list-sort-button';
+import DualListSortButton from '../dual-list-sort-button';
 
 describe('DualListSelect', () => {
   let onSubmit;

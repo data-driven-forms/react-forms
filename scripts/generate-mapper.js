@@ -29,9 +29,8 @@ inquirer.prompt(QUESTIONS).then(async ({ componentmapper, typescript }) => {
 
   1. Update styles in "packages/${componentmapper}-component-mapper/demo/index.html"
   2. Add dependencies in "packages/${componentmapper}-component-mapper/package.json",
-  3. Mark the dependencies as globals/external in "packages/${componentmapper}-component-mapper/rollup.config.js"
-  4. (optional) Transform import to allow threeshake (bundle size optimization) in "packages/common/babel.config.js"
-  5. Have a fun and make some magic! :-)
+  3. (optional) Transform imports to allow threeshake (bundle size optimization) in "packages/common/babel.config.js"
+  4. Have a fun and make some magic! :-)
 
   Please visit https://data-driven-forms.org for more information.
 
@@ -48,7 +47,6 @@ inquirer.prompt(QUESTIONS).then(async ({ componentmapper, typescript }) => {
       files: [
         path.resolve(__dirname, `../packages/${componentmapper}-component-mapper/README.md`),
         path.resolve(__dirname, `../packages/${componentmapper}-component-mapper/package.json`),
-        path.resolve(__dirname, `../packages/${componentmapper}-component-mapper/rollup.config.js`),
         path.resolve(__dirname, `../packages/${componentmapper}-component-mapper/demo/index.js`)
       ],
       from: /\{\{componentmapper\}\}/g,
@@ -64,7 +62,7 @@ inquirer.prompt(QUESTIONS).then(async ({ componentmapper, typescript }) => {
     const optionTypeScriptPath = {
       files: [path.resolve(__dirname, `../packages/${componentmapper}-component-mapper/package.json`)],
       from: /\{\{typingspath\}\}/g,
-      to: typescript ? '\n  "typings": "dist/cjs/index.d.ts",' : ''
+      to: typescript ? '\n  "typings": "index.d.ts",' : ''
     };
     const optionTypeScriptCommand = {
       files: [path.resolve(__dirname, `../packages/${componentmapper}-component-mapper/package.json`)],
@@ -74,7 +72,7 @@ inquirer.prompt(QUESTIONS).then(async ({ componentmapper, typescript }) => {
     const optionTypeScriptScript = {
       files: [path.resolve(__dirname, `../packages/${componentmapper}-component-mapper/package.json`)],
       from: /\{\{buildtypingsscript\}\}/g,
-      to: typescript ? '\n    "build:typings": "node ../../scripts/copy-files.js",' : ''
+      to: typescript ? '\n    "build:typings": "node ../../scripts/generate-typings.js",' : ''
     };
 
     try {

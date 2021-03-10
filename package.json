@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build": "lerna run build --concurrency 1 --ignore @data-driven-forms/react-renderer-demo",
+    "build": "yarn clean-build && lerna run build --concurrency 1 --ignore @data-driven-forms/react-renderer-demo",
     "vendor": "lerna run vendor",
     "test": "jest --coverage",
     "test:ci": "jest --coverage --runInBand",
@@ -16,23 +16,31 @@
     "release": "semantic-release",
     "codecov": "codecov",
     "start-demo": "lerna run start --scope=@data-driven-forms/react-render-demo",
-    "lint": "yarn eslint .",
+    "lint": "yarn eslint ./packages/*/src --ext .js",
     "lint:ts": "tslint -c ./tslint.json 'packages/**/*.d.ts'",
-    "generate-template": "node ./scripts/generate-mapper.js"
+    "generate-template": "node ./scripts/generate-mapper.js",
+    "clean-build": "node ./scripts/clean-build.js",
+    "preinstall": "node ./scripts/clean-build.js"
   },
   "workspaces": [
     "packages/**"
   ],
   "jest": {
     "verbose": true,
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
     "setupFiles": [
       "<rootDir>/config/jest.setup.js"
     ],
     "collectCoverageFrom": [
       "<rootDir>/packages/**/src/**/*.js",
+      "<rootDir>/packages/**/src/**/*.ts",
+      "!<rootDir>/packages/**/src/**/*.d.ts",
       "!<rootDir>/packages/react-renderer-demo/**/*.js",
       "!<rootDir>/packages/**/dist",
-      "!<rootDir>/templates/**/*.js"
+      "!<rootDir>/templates/**/*.js",
+      "!<rootDir>/packages/**/src/**/index.js"
     ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
@@ -41,11 +49,12 @@
     "modulePathIgnorePatterns": [
       "<rootDir>/templates/"
     ],
-    "globalSetup": "<rootDir>/globalSetup.js"
+    "globalSetup": "<rootDir>/config/globalSetup.js"
   },
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.9.0",
-    "@babel/preset-typescript": "^7.9.0",
+    "@babel/eslint-parser": "^7.13.8",
+    "@babel/plugin-transform-runtime": "^7.13.9",
+    "@babel/preset-typescript": "^7.13.0",
     "@khala/commit-analyzer-wildcard": "^2.4.1",
     "@khala/npm-release-monorepo": "^2.4.1",
     "@khala/wildcard-release-notes": "^2.4.1",
@@ -59,17 +68,17 @@
     "atob-lite": "^2.0.0",
     "babel-plugin-transform-imports": "^2.0.0",
     "dtslint": "^3.6.4",
-    "eslint": "^6.8.0",
-    "eslint-config-i-am-meticulous": "^12.0.0",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-config-react-app": "^5.2.0",
-    "eslint-loader": "^3.0.3",
-    "eslint-plugin-flowtype": "^4.6.0",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.2",
-    "eslint-plugin-react": "^7.18.3",
-    "eslint-plugin-react-hooks": "^2.4.0",
+    "eslint": "^7.21.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-flowtype": "^5.3.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "fs-extra": "^9.0.1",
     "glob": "^7.1.6",
     "identity-obj-proxy": "^3.0.0",
     "inquirer": "^7.1.0",
@@ -89,7 +98,20 @@
   },
   "release": {
     "monorepo": "./packages",
-    "branches": ["+([0-9])?(.{+([0-9]),x}).x", "master", "next", "next-major", {"name": "beta", "prerelease": true}, {"name": "alpha", "prerelease": true}],
+    "branches": [
+      "+([0-9])?(.{+([0-9]),x}).x",
+      "master",
+      "next",
+      "next-major",
+      {
+        "name": "beta",
+        "prerelease": true
+      },
+      {
+        "name": "alpha",
+        "prerelease": true
+      }
+    ],
     "plugins": [
       "@khala/npm-release-monorepo",
       [
@@ -119,7 +141,7 @@
         "assets": [
           "package.json"
         ],
-        "successComment": ":tada: This ${issue.pull_request ? 'PR is included' : 'issue has been resolved'} in version ${nextRelease.version} :tada:\n\nThe release is available on \n\n- [react-form-renderer (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)\n\n- [pf3-component-mapper (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/pf3-component-mapper)\n\n- [pf4-component-mapper (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/pf4-component-mapper)\n\n- [mui-component-mapper (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper)\n\nDemo can be found [here](http://data-driven-forms.org/)!"
+        "successComment": ":tada: This ${issue.pull_request ? 'PR is included' : 'issue has been resolved'} in version ${nextRelease.version} :tada:\n\nThe release is available on \n\n- [react-form-renderer (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)\n\nDemo can be found [here](http://data-driven-forms.org/)!"
       },
       [
         "@semantic-release/git",

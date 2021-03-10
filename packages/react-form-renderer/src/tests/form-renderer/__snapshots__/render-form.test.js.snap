@@ -217,7 +217,13 @@ exports[`renderForm function #condition should render condition field only if co
           }
         }
       >
-        <FormSpy>
+        <FormSpy
+          subscription={
+            Object {
+              "values": true,
+            }
+          }
+        >
           <Component
             condition={
               Array [
@@ -454,7 +460,13 @@ exports[`renderForm function #condition should render condition field only if on
           }
         }
       >
-        <FormSpy>
+        <FormSpy
+          subscription={
+            Object {
+              "values": true,
+            }
+          }
+        >
           <Component
             condition={
               Object {

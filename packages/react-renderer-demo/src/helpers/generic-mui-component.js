@@ -3,12 +3,11 @@ import Typography from '@material-ui/core/Typography';
 
 import PropTypes from 'prop-types';
 
-import componentTypes from '@data-driven-forms/react-form-renderer/dist/cjs/component-types';
+import componentTypes from '@data-driven-forms/react-form-renderer/component-types';
 
 export const docsLinks = {
   mui: 'https://material-ui.com/api/',
   pf4: 'https://patternfly-react.surge.sh/components/',
-  pf3: 'https://patternfly-react-pf3.surge.sh/?path=/story/*',
   blueprint: 'https://blueprintjs.com/docs/',
   suir: 'https://react.semantic-ui.com/',
   ant: 'https://ant.design/components/',
@@ -89,7 +88,7 @@ const mapper = (activeMapper, component) => (mapperLinks[activeMapper] && mapper
 const GenericMuiComponent = ({ activeMapper = 'mui', component }) => (
   <Typography variant="body1" gutterBottom>
     This component also accepts all other original props, please see{' '}
-    <a target="__blank" rel="noreferrer noopener" href={`${docsLinks[activeMapper]}${activeMapper !== 'pf3' ? mapper(activeMapper, component) : ''}`}>
+    <a target="__blank" rel="noreferrer noopener" href={`${docsLinks[activeMapper]}${mapper(activeMapper, component)}`}>
       here
     </a>
     !

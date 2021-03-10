@@ -2,8 +2,8 @@ import React from 'react';
 import { Form as DDFForm } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
 import { Slider as AntSlider, Form as OriginalForm } from 'antd';
-import Slider from '../files/slider';
-import AntForm from '../common/form-wrapper';
+import Slider from '../slider';
+import FormGroup from '../form-group';
 
 const Form = (props) => (
   <OriginalForm>
@@ -20,7 +20,7 @@ describe('<Slider />', () => {
   it('should render default slider with label', () => {
     const wrapper = mount(<Form>{() => <Slider {...initialProps} />}</Form>);
     expect(wrapper.find(AntSlider)).toHaveLength(1);
-    expect(wrapper.find(AntForm)).toHaveLength(1);
+    expect(wrapper.find(FormGroup)).toHaveLength(1);
   });
 
   it('should have disabled prop when isDisabled is passed', () => {

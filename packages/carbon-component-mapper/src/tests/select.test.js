@@ -1,12 +1,12 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import FormRenderer, { componentTypes } from '@data-driven-forms/react-form-renderer';
+import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
-import FormTemplate from '../files/form-template';
-import componentMapper from '../files/component-mapper';
+import FormTemplate from '../form-template';
+import componentMapper from '../component-mapper';
 import { Select, MultiSelect, ComboBox } from 'carbon-components-react';
-import { multiOnChange } from '../files/select';
+import { multiOnChange } from '../select';
 
 describe('<Select />', () => {
   it('renders select', () => {

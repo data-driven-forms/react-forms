@@ -1,11 +1,7 @@
-const tranformImports = (content, env) => {
-  if (env === 'umd') {
-    return content;
-  }
-
+const tranformImports = (content) => {
   let newContent = content;
 
-  const regexp = RegExp('import.*data-driven-forms.*', 'g');
+  const regexp = RegExp('import.*{.*data-driven-forms.*', 'g');
   let match;
   const matches = [];
 
@@ -22,7 +18,7 @@ const tranformImports = (content, env) => {
       .split(',')
       .map(
         (imp) =>
-          `import ${imp} from '${pck}/dist/${env}/${imp
+          `import ${imp} from '${pck}/${imp
             .split(/(?=[A-Z])/)
             .join('-')
             .toLowerCase()}';`

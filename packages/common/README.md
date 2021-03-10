@@ -21,6 +21,6 @@ This packages is not released but can be referenced in mapper packages. Demo pac
 ## Usage
 ￼
 ```
-import demoSchema from '@data-driven-forms/common/src/demoschema';
+import demoSchema from '@data-driven-forms/common/demoschema';
 
 ```

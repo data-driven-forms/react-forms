@@ -43,7 +43,7 @@
     "rollup-pluginutils": "^2.8.2",
     "semantic-release": "^17.2.3"
   },
-  "peerDependencies": {
+  "dependencies": {
     "@data-driven-forms/react-form-renderer": "*"
   },
   "postpublish": "export RELEASE_DEMO=true"
