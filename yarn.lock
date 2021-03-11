@@ -2362,23 +2362,23 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@khala/commit-analyzer-wildcard@^2.4.1":
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/@khala/commit-analyzer-wildcard/-/commit-analyzer-wildcard-2.4.1.tgz#50ce5891f0726227a0cb1aa123e2345c35b38091"
-  integrity sha512-q1PTuPN/wTLUbF5uu8+UmxYH9at2FDrftnJu/aPQtJY8n/2kw+OYpxmiu3CNFUgo6bdvost3sWzlkkUChewV+w==
+"@khala/commit-analyzer-wildcard@^2.5.2":
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/@khala/commit-analyzer-wildcard/-/commit-analyzer-wildcard-2.5.2.tgz#0835029304b9164fdbcc8dae532fbbb54c43a694"
+  integrity sha512-ocKKBBAzdzMdCb2Wx4t63hKsFA61/dlO0rqjnjr2/d1dLKw+2T2Dj7oJ/N/ACaacu6/Yh9hN9sAfwCF8mQSrUw==
 
-"@khala/npm-release-monorepo@^2.4.1":
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/@khala/npm-release-monorepo/-/npm-release-monorepo-2.4.1.tgz#677018ace0982a4e5b4c9c840c8d52e168a98c25"
-  integrity sha512-tRdSNw7SylP+Lw4jQxHAB/8gY7X3T0awY8cbxLrizEwvs5odLIWGFFQKb6+rIfQuE5KtPIf71kACYuazd2vZFQ==
+"@khala/npm-release-monorepo@^2.5.2":
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/@khala/npm-release-monorepo/-/npm-release-monorepo-2.5.2.tgz#068369f09254571d4e8cdc0eba19a35ca1cae3c4"
+  integrity sha512-PfX+BKPuJxdCzY1ztYZsab7M3BFX7Zj7cuN8756tH5G58OLX/DLN1Jh+5ic7vaOWm1sMgECOc6gDnuN38/Jtwg==
   dependencies:
     "@semantic-release/npm" "^5.3.4"
     recursive-readdir "^2.2.2"
 
-"@khala/wildcard-release-notes@^2.4.1":
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/@khala/wildcard-release-notes/-/wildcard-release-notes-2.4.1.tgz#f355fda0373a8f24b7f0ad5c88fd42b7ffd26412"
-  integrity sha512-6ME6yiwsU/Zd5YbNyJP3yjjb/DAqWimrwvHlDzeo2kwi2KIoV33vw91IofHcTE/isFZKROdaEk5VbBNEcIzWIg==
+"@khala/wildcard-release-notes@^2.5.2":
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/@khala/wildcard-release-notes/-/wildcard-release-notes-2.5.2.tgz#d9d4aebe5b97a036ea1a027b490ac23c0c3e2e2d"
+  integrity sha512-OueIKwz4XN1xZTLNVZnoGLiFVFPJ4acZp6REoEk4mF79StNHyi75/tH6WIDzoPMSlwoto651GbWlgt0SS2z1Zw==
   dependencies:
     execa "^1.0.0"
     recursive-readdir "^2.2.2"
