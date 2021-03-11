@@ -13,16 +13,29 @@ const castToBoolean = (value) => {
 };
 
 /**
+ * Check if the value can be converted to number
+ * @param {Any} value value to be checked
+ */
+const canBeConvertedToNumber = (value) => !isNaN(Number(value)) && value !== '';
+
+/**
  * Changes the value type
  * @param {FieldDataTypes} dataType type for value conversion
  * @param {Any} value value to be converted
  */
-const convertType = (dataType, value) =>
-  ({
-    [dataTypes.INTEGER]: !isNaN(Number(value)) && parseInt(value),
-    [dataTypes.FLOAT]: !isNaN(Number(value)) && parseFloat(value),
-    [dataTypes.NUMBER]: Number(value),
-    [dataTypes.BOOLEAN]: castToBoolean(value)
-  }[dataType] || value);
+const convertType = (dataType, value) => {
+  switch (dataType) {
+    case dataTypes.INTEGER:
+      return canBeConvertedToNumber(value) ? parseInt(value) : value;
+    case dataTypes.FLOAT:
+      return canBeConvertedToNumber(value) ? parseFloat(value) : value;
+    case dataTypes.NUMBER:
+      return canBeConvertedToNumber(value) ? Number(value) : value;
+    case dataTypes.BOOLEAN:
+      return castToBoolean(value);
+    default:
+      return value;
+  }
+};
 
 export default convertType;
