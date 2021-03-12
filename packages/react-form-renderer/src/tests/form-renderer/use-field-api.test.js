@@ -215,4 +215,19 @@ describe('useFieldApi', () => {
     wrapper.update();
     expect(wrapper.find('input')).toHaveLength(1);
   });
+
+  it('omits FieldProps', () => {
+    const parse = jest.fn().mockImplementation((value) => value);
+    initialProps = {...initialProps, FieldProps: { parse }};
+
+    const wrapper = mount(<WrapperComponent {...initialProps} />);
+
+    expect(wrapper.find(Catcher).props().FieldProps).toEqual(undefined);
+    expect(parse.mock.calls).toHaveLength(0);
+
+    wrapper.find('input').simulate('change', { target: { value: 'ABC' } });
+    wrapper.update();
+
+    expect(parse.mock.calls).toHaveLength(1);
+  });
 });

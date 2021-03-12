@@ -10,7 +10,7 @@ import composeValidators from './compose-validators';
 import isEqual from 'lodash/isEqual';
 
 const calculateInitialValue = (props) => {
-  if (Object.prototype.hasOwnProperty.call(props, 'initialValue') && Object.prototype.hasOwnProperty.call(props, 'dataType')) {
+  if (Object.prototype.hasOwnProperty.call(props, 'initialValue') && props.dataType) {
     return convertInitialValue(props.initialValue, props.dataType);
   }
 };
@@ -84,33 +84,53 @@ const createFieldProps = (name, formOptions) => {
   };
 };
 
-const useFieldApi = ({ name, initializeOnMount, component, render, validate, resolveProps, useWarnings, ...props }) => {
+const useFieldApi = ({
+  name,
+  resolveProps,
+  ...props
+}) => {
   const { validatorMapper, formOptions } = useContext(RendererContext);
   const [warning, setWarning] = useState();
 
-  const { validate: resolvePropsValidate, ...resolvedProps } = resolveProps
+  const resolvedProps = resolveProps
     ? resolveProps(props, createFieldProps(name, formOptions), formOptions) || {}
     : {};
 
-  const finalValidate = resolvePropsValidate || validate;
+  const combinedProps = { ...props, ...resolvedProps};
+  const {
+    initializeOnMount,
+    component,
+    render,
+    validate,
+    useWarnings,
+    clearOnUnmount,
+    dataType,
+    FieldProps,
+    ...rest
+  } = combinedProps;
 
   const [{ type, initialValue, validate: stateValidate, arrayValidator }, dispatch] = useReducer(
     reducer,
-    { props: { ...props, ...resolvedProps }, validate: finalValidate, component, validatorMapper, setWarning, useWarnings },
+    { props: combinedProps, validate, component, validatorMapper, setWarning, useWarnings },
     init
   );
 
   const mounted = useRef(false);
 
   const enhancedProps = {
-    type,
-    ...props,
-    ...resolvedProps,
+    dataType,
+    type: combinedProps.type,
+    ...(Object.prototype.hasOwnProperty.call(combinedProps, 'initialValue')
+      ? {initialValue: combinedProps.initialValue}
+      : {}
+    ),
+    ...FieldProps,
+    ...(type ? { type } : {}),
     ...(initialValue ? { initialValue } : {}),
     ...(stateValidate ? { validate: stateValidate } : {})
   };
 
-  const fieldProps = useField(name, enhancedProps);
+  const field = useField(name, enhancedProps);
 
   /** Reinitilize type */
   useEffect(() => {
@@ -127,8 +147,8 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
     if (mounted.current) {
       dispatch({
         type: 'setValidators',
-        validate: calculateValidate(enhancedProps, finalValidate, component, validatorMapper, setWarning, useWarnings),
-        arrayValidator: calculateArrayValidator(enhancedProps, finalValidate, component, validatorMapper)
+        validate: calculateValidate(enhancedProps, validate, component, validatorMapper, setWarning, useWarnings),
+        arrayValidator: calculateArrayValidator(enhancedProps, validate, component, validatorMapper)
       });
     }
     /**
@@ -137,7 +157,7 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
      * Using stringify is acceptable here since the array is usually very small.
      * If we notice performance hit, we can implement custom hook with a deep equal functionality.
      */
-  }, [finalValidate ? JSON.stringify(finalValidate) : false, component, enhancedProps.dataType]);
+  }, [validate ? JSON.stringify(validate) : false, component, dataType]);
 
   /** Re-convert initialValue when changed */
   useEffect(() => {
@@ -150,7 +170,7 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
         });
       }
     }
-  }, [enhancedProps.initialValue, enhancedProps.dataType]);
+  }, [enhancedProps.initialValue, dataType]);
 
   useEffect(() => {
     /**
@@ -161,20 +181,20 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
       const value = Object.prototype.hasOwnProperty.call(enhancedProps, 'initialValue')
         ? enhancedProps.initialValue
         : formOptions.getFieldState(name).initial;
-      fieldProps.input.onChange(value);
+      field.input.onChange(value);
     }
-  }, [initializeOnMount, enhancedProps.initialValue, fieldProps.meta.initial, props.dataType]);
+  }, [initializeOnMount, enhancedProps.initialValue, field.meta.initial, dataType]);
 
   /**
    * Prepare deleted value of field
    */
-  const fieldClearedValue = Object.prototype.hasOwnProperty.call(props, 'clearedValue') ? props.clearedValue : formOptions.clearedValue;
+  const fieldClearedValue = Object.prototype.hasOwnProperty.call(rest, 'clearedValue') ? rest.clearedValue : formOptions.clearedValue;
 
   useEffect(
     () => {
       mounted.current = true;
-      if (fieldProps.input.type === 'file') {
-        formOptions.registerInputFile(fieldProps.input.name);
+      if (field.input.type === 'file') {
+        formOptions.registerInputFile(field.input.name);
       }
 
       return () => {
@@ -182,12 +202,12 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
         /**
          * Delete the value from form state when field is inmounted
          */
-        if ((formOptions.clearOnUnmount || props.clearOnUnmount) && props.clearOnUnmount !== false) {
-          fieldProps.input.onChange(fieldClearedValue);
+        if ((formOptions.clearOnUnmount || clearOnUnmount) && clearOnUnmount !== false) {
+          field.input.onChange(fieldClearedValue);
         }
 
-        if (fieldProps.input.type === 'file') {
-          formOptions.unRegisterInputFile(fieldProps.input.name);
+        if (field.input.type === 'file') {
+          formOptions.unRegisterInputFile(field.input.name);
         }
       };
     },
@@ -197,38 +217,33 @@ const useFieldApi = ({ name, initializeOnMount, component, render, validate, res
 
   const {
     initialValue: _initialValue,
-    clearOnUnmount,
-    dataType,
     clearedValue,
-    isEqual: _isEqual,
-    validate: _validate,
-    type: _type,
     ...cleanProps
-  } = enhancedProps;
+  } = rest;
 
   /**
    * construct component props necessary that would live in field provider
    */
   return {
     ...cleanProps,
-    ...fieldProps,
+    ...field,
     ...(arrayValidator && { arrayValidator }),
     ...(useWarnings && {
       meta: {
-        ...fieldProps.meta,
+        ...field.meta,
         warning
       }
     }),
     input: {
-      ...fieldProps.input,
+      ...field.input,
       value:
-        fieldProps.input.type === 'file' && typeof fieldProps.input.value === 'object' ? fieldProps.input.value.inputValue : fieldProps.input.value,
+        field.input.type === 'file' && typeof field.input.value === 'object' ? field.input.value.inputValue : field.input.value,
       onChange: (...args) => {
         enhancedOnChange(
           {
-            ...fieldProps.meta,
+            ...field.meta,
             dataType,
-            onChange: fieldProps.input.onChange,
+            onChange: field.input.onChange,
             clearedValue: fieldClearedValue
           },
           ...args
