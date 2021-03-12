@@ -121,7 +121,11 @@ const useFieldApi = ({
     dataType,
     type: combinedProps.type,
     ...(Object.prototype.hasOwnProperty.call(combinedProps, 'initialValue')
-      ? {initialValue: combinedProps.initialValue}
+      ? { initialValue: combinedProps.initialValue }
+      : {}
+    ),
+    ...(Object.prototype.hasOwnProperty.call(combinedProps, 'value')
+      ? { value: combinedProps.value }
       : {}
     ),
     ...FieldProps,
