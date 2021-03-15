@@ -29,6 +29,7 @@ Other attribues, such as title or description, can be used in [form templates](/
     clearOnUnmount: true,
     condition: { ... },
     dataType: 'string',
+    FieldProps: { ... },
     hideField: true,
     initializeOnMount: true,
     initialValue: 'default-login',
@@ -129,6 +130,14 @@ There are also two actions that can be binded to conditions: [set](/schema/condi
 one of strings: *integer | float | number | boolean | string*
 
 Data type sets the type the value will be converted to. Read more [here](/schema/data-types).
+
+---
+
+### FieldProps
+
+*object*
+
+You can pass additional [Final Form FieldProps](https://final-form.org/docs/react-final-form/types/FieldProps) via FieldProps object. This prop is made to avoid conflicts between Final Form props and component props.
 
 ---
 

@@ -66,4 +66,19 @@ FormRenderer component is no longer a default export of the `react-form-renderer
 
 All the mappers except Ant Design and PatternFly 4 were migrated to use JSS (CSS in JS), so you don't have to use any css-loader. (However, you still need to setup the loader in case you are using ant-component-mapper of pf4-component-mapper. If you are using PF4, you are probably using the loader right now, as you need it also for the core package.)
 
+## FieldProps introduction
+
+A new [FieldProps](/schema/introduction#fieldprops) props is introduced. This object serves to pass values to Final Form [useField configuration](https://final-form.org/docs/react-final-form/types/FieldProps). Do not use for natively supported props (`initialValue`, `validate`, ...).
+
+```diff
+{
+    name: 'component-with-complex-isEqual',
+    component: 'dual-list-selector',
+-   isEqual: (a, b) => isEqual(a, b),
++   FieldProps: {
++     isEqual: (a, b) => isEqual(a, b),
++   }
+}
+```
+
 </DocPage>
