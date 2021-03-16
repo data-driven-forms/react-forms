@@ -2,24 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
+import { styled } from '@material-ui/core/styles';
 
-const useFinalFormFieldStyles = makeStyles({
-  grid: {
-    position: 'relative'
+const StyledGrid = styled(Grid)({position: 'relative'});
+
+const FormFieldGrid = React.forwardRef(
+  function RefRenderFn(props, ref) {
+    const { children, ...rest } = props;
+    
+    return (
+      <StyledGrid ref={ref} item xs={12} {...rest}>
+        {children}
+      </StyledGrid>
+    );
   }
-});
-
-const FormFieldGrid = ({ children, className, ...props }) => {
-  const classes = useFinalFormFieldStyles();
-
-  return (
-    <Grid xs={12} item className={clsx(classes.grid, className)} {...props}>
-      {children}
-    </Grid>
-  );
-};
+);
 
 FormFieldGrid.propTypes = {
   children: PropTypes.node,
@@ -27,3 +24,25 @@ FormFieldGrid.propTypes = {
 };
 
 export default FormFieldGrid;
+
+export const withFormFieldGrid = (WrappedComponent) => {
+  const WithFormFieldGrid = forwardRef(
+    function  RefRenderFn(props, ref) {
+      const { GridItemProps, ...rest } = props;
+      return (
+        <FormFieldGrid {...GridItemProps}>
+          <WrappedComponent {...rest}/>
+        </FormFieldGrid>
+      )
+    }
+  );
+  WithFormFieldGrid.displayName = `WithFormFieldGrid(${getDisplayName(WrappedComponent)})`;
+  WithFormFieldGrid.propTypes = {
+    GridItemProps: PropTypes.object
+  };
+  return WithFormFieldGrid;
+};
+
+const getDisplayName = (WrappedComponent) => {
+  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+};
