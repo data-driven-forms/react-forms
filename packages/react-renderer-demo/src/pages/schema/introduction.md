@@ -44,7 +44,7 @@ Other attribues, such as title or description, can be used in [form templates](/
 
 *string*
 
-`component` is a string value representing used component. Available options depends on the component mapper. Data Driven Forms automatically checks if the component is available, if not, it shows an error message. You use [componentTypes](/schema/constants#componenttypes) to prevent typos.
+`component` is a string value representing used component. Available options depends on the component mapper. Data Driven Forms automatically checks if the component is available, if not, it shows an error message. You can use [componentTypes](/schema/constants#componenttypes) to prevent typos. This attribute is not required for fields of these components: `wizard`, `field-array` and `tabs` as these fields include only special components with no implementation.
 
 ---
 
