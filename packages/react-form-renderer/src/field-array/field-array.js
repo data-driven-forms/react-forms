@@ -1,3 +1,3 @@
-import { FieldArray } from 'react-final-form-arrays';
+import { FieldArray } from '@data-driven-forms/form-state-manager';
 
 export default FieldArray;

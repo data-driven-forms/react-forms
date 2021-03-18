@@ -1,10 +1,6 @@
-import dataTypes from '../data-types';
+import DataTypes, { DataType } from '../types/data-types';
 
-/**
- * Casts string true/false to boolean
- * @param {String} value value
- */
-const castToBoolean = (value) => {
+const castToBoolean = (value: any) => {
   if (typeof value === 'boolean') {
     return value;
   }
@@ -12,18 +8,17 @@ const castToBoolean = (value) => {
   return value === 'true';
 };
 
-/**
- * Check if the value can be converted to number
- * @param {Any} value value to be checked
- */
-const canBeConvertedToNumber = (value) => !isNaN(Number(value)) && value !== '';
+const dataTypes: DataTypes = {
+  INTEGER: 'integer',
+  FLOAT: 'float',
+  NUMBER: 'number',
+  BOOLEAN: 'boolean',
+  STRING: 'string'
+};
 
-/**
- * Changes the value type
- * @param {FieldDataTypes} dataType type for value conversion
- * @param {Any} value value to be converted
- */
-const convertType = (dataType, value) => {
+const canBeConvertedToNumber = (value: any): any => !isNaN(Number(value)) && value !== '';
+
+const convertType = (dataType: DataType, value: any): any  => {
   switch (dataType) {
     case dataTypes.INTEGER:
       return canBeConvertedToNumber(value) ? parseInt(value) : value;
