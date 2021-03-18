@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import AnyObject, { AnyBooleanObject } from './any-object';
 import { FormEvent } from 'react';
 import FieldConfig, { IsEqual, AfterSubmit, BeforeSubmit } from './field-config';

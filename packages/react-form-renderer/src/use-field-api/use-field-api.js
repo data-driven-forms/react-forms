@@ -69,14 +69,11 @@ const useFieldApi = ({
 
   const combinedProps = { ...props, ...resolvedProps};
   const {
-    initializeOnMount,
     component,
     render,
     validate,
-    useWarnings,
-    clearOnUnmount,
-    dataType,
     FieldProps,
+    dataType,
     ...rest
   } = combinedProps;
 
@@ -91,15 +88,7 @@ const useFieldApi = ({
   const enhancedProps = {
     name,
     dataType,
-    type: combinedProps.type,
-    ...(Object.prototype.hasOwnProperty.call(combinedProps, 'initialValue')
-      ? { initialValue: combinedProps.initialValue }
-      : {}
-    ),
-    ...(Object.prototype.hasOwnProperty.call(combinedProps, 'value')
-      ? { value: combinedProps.value }
-      : {}
-    ),
+    ...rest,
     ...FieldProps,
     ...(type ? { type } : {}),
     ...(stateValidate ? { validate: stateValidate } : {})
@@ -142,18 +131,22 @@ const useFieldApi = ({
     };
   }, []);
 
+  const finalProps = { ...rest, ...field };
+
   const {
     initialValue: _initialValue,
     clearedValue,
+    clearOnUnmount,
+    initializeOnMount,
+    dataType: _dataType,
     ...cleanProps
-  } = rest;
+  } = finalProps;
 
   /**
    * construct component props necessary that would live in field provider
    */
   return {
     ...cleanProps,
-    ...field,
     ...(arrayValidator && { arrayValidator })
   };
 };
