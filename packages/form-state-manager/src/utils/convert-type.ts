@@ -8,7 +8,7 @@ const castToBoolean = (value: any) => {
   return value === 'true';
 };
 
-const dataTypes: DataTypes = {
+export const dataTypes: DataTypes = {
   INTEGER: 'integer',
   FLOAT: 'float',
   NUMBER: 'number',
