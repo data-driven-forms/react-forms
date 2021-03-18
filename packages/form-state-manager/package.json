@@ -1,0 +1,69 @@
+{
+  "name": "@data-driven-forms/form-state-manager",
+  "version": "0.0.1-beta.0",
+  "description": "Form state management library for data driven forms",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "author": "Martin Marosi",
+  "typings": "dist/cjs/index.d.ts",
+  "repository": "git@github.com:data-driven-forms/react-forms.git",
+  "keywords": [
+    "react",
+    "forms",
+    "javascript"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "@rollup/plugin-typescript": "^5.0.2",
+    "@semantic-release/git": "^7.0.5",
+    "@semantic-release/npm": "^5.1.1",
+    "@types/react": "^16.9.43",
+    "@types/react-dom": "^16.9.8",
+    "@typescript-eslint/parser": "^3.8.0",
+    "@typescript-eslint/eslint-plugin": "^3.8.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "9.x",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-lodash": "^3.3.4",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "enzyme-to-json": "^3.3.4",
+    "html-webpack-plugin": "^3.2.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "rollup": "^1.23.1",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-globals": "^1.4.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-sourcemaps": "^0.5.0",
+    "rollup-plugin-terser": "^5.1.2",
+    "semantic-release": "^16.0.4",
+    "ts-loader": "^8.0.1",
+    "typescript": "^3.9.7",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10",
+    "webpack-merge": "^4.1.4"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "prop-types": "^15.7.2"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "license": "Apache-2.0",
+  "scripts": {
+    "lint": "eslint . --ext .ts",
+    "start": "webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
+    "build": "yarn lint && rollup -c ./rollup.config.js && yarn build:typings",
+    "build:typings": "node ../../scripts/copy-files.js --types"
+  }
+}

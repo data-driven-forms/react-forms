@@ -1,8 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import Form from '../form';
-import arrayMutators from 'final-form-arrays';
 import PropTypes from 'prop-types';
-import createFocusDecorator from 'final-form-focus';
 
 import RendererContext from '../renderer-context';
 import renderForm from './render-form';
@@ -25,8 +23,6 @@ const FormRenderer = ({
   schemaValidatorMapper,
   ...props
 }) => {
-  const [fileInputs, setFileInputs] = useState([]);
-  const focusDecorator = useRef(createFocusDecorator());
   let schemaError;
 
   const validatorMapperMerged = { ...defaultValidatorMapper, ...validatorMapper };
@@ -45,27 +41,20 @@ const FormRenderer = ({
     return <SchemaErrorComponent name={schemaError.name} message={schemaError.message} />;
   }
 
-  const registerInputFile = (name) => setFileInputs((prevFiles) => [...prevFiles, name]);
-
-  const unRegisterInputFile = (name) => setFileInputs((prevFiles) => [...prevFiles.splice(prevFiles.indexOf(name))]);
-
   return (
     <Form
       {...props}
-      onSubmit={(values, formApi, ...args) => onSubmit(values, { ...formApi, fileInputs }, ...args)}
-      mutators={{ ...arrayMutators }}
-      decorators={[focusDecorator.current]}
+      clearedValue={clearedValue}
+      clearOnUnmount={clearOnUnmount}
+      onSubmit={onSubmit}
       subscription={{ pristine: true, submitting: true, valid: true, ...subscription }}
-      render={({ handleSubmit, pristine, valid, form: { reset, mutators, getState, submit, ...form } }) => (
+      render={({ formOptions: { reset, getState, ...formOptions } }) => (
         <RendererContext.Provider
           value={{
             componentMapper,
             validatorMapper: validatorMapperMerged,
             actionMapper,
             formOptions: {
-              registerInputFile,
-              unRegisterInputFile,
-              pristine,
               onSubmit,
               onCancel: onCancel ? (...args) => onCancel(getState().values, ...args) : undefined,
               onReset: (...args) => {
@@ -73,15 +62,9 @@ const FormRenderer = ({
                 reset();
               },
               getState,
-              valid,
-              clearedValue,
-              submit,
-              handleSubmit,
               reset,
-              clearOnUnmount,
               renderForm,
-              ...mutators,
-              ...form
+              ...formOptions
             }
           }}
         >

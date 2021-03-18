@@ -1,3 +1,3 @@
-import { FormSpy } from 'react-final-form';
+import { FormSpy } from '@data-driven-forms/form-state-manager';
 
 export default FormSpy;
