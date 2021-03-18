@@ -3,7 +3,7 @@ import CodeExample from '@docs/code-example';
 
 <DocPage>
 
-# One row layout
+# MUI one row layout
 
 This example show how to place two fields in the same row. **Only for MUI mapper**.
 Other mappers can have similar solutions.
@@ -31,6 +31,6 @@ Please, don't forget that `<Grid item/>` has to rendered inside `<Grid container
 
 ## Preview
 
-<CodeExample source="components/examples/one-row-layout" mode="preview" />
+<CodeExample source="components/examples/mui-one-row-layout" mode="preview" />
 
 </DocPage>

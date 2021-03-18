@@ -4,8 +4,8 @@ const customExamplesSchema = [
     linkText: 'Sample example'
   },
   {
-    component: 'one-row-layout',
-    linkText: 'One row layout'
+    component: 'mui-one-row-layout',
+    linkText: 'MUI one row layout'
   }
 ];
 
