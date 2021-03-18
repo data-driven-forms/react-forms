@@ -1,4 +1,4 @@
-import { validationError } from '../common/helpers';
+import { validationError } from '../validation-error/validation-error';
 
 describe('form fields helpers', () => {
   describe('validationError', () => {

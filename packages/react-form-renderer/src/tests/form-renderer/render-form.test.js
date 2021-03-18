@@ -1647,7 +1647,7 @@ describe('renderForm function', () => {
 
     expect(wrapper.find('label').text()).toEqual(label);
     expect(resolveProps).toHaveBeenCalledWith(
-      { label: 'standard label' },
+      { label: 'standard label', component: 'custom-component' },
       expect.objectContaining({ meta: expect.any(Object), input: expect.any(Object) }),
       expect.any(Object)
     );

@@ -7,7 +7,7 @@ import FormField from '../form-field';
 import { createUseStyles } from 'react-jss';
 import clsx from 'clsx';
 import FormFieldGrid from '../form-field-grid';
-import { validationError, validationWarning } from '../common/helpers';
+import { validationError, validationWarning } from '../helpers/helpers';
 
 const useListStyles = createUseStyles({
   root: {

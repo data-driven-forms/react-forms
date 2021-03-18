@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
-import { validationError } from '../common/helpers';
+import { validationError } from '../validation-error/validation-error';
 import { meta } from '@data-driven-forms/common/prop-types-templates';
 import DDFSelect from '@data-driven-forms/common/select';
 import parseInternalValue from '@data-driven-forms/common/select/parse-internal-value';

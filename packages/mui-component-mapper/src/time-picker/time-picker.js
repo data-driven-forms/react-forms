@@ -4,7 +4,7 @@ import { MuiPickersUtilsProvider, TimePicker as MUITimePicker } from '@material-
 import MomentUtils from '@date-io/moment';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
-import { validationError } from '../common/helpers';
+import { validationError } from '../validation-error/validation-error';
 import { meta, input } from '@data-driven-forms/common/prop-types-templates';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 

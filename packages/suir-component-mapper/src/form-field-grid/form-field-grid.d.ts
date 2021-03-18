@@ -1,8 +1,5 @@
 import { ReactNode } from "react";
-
-export interface HelperTextProps {
-  className?: string;
-}
+import { HelperTextProps } from "../helper-text";
 
 export interface FormFieldGridProps {
   className?: string;

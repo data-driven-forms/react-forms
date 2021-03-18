@@ -16,7 +16,7 @@ A schema is an object consists of fields:
 
 Other attribues, such as title or description, can be used in [form templates](/components/form-template).
 
-## Field defitinion
+## Field definition
 
 ```jsx
 {
@@ -29,6 +29,7 @@ Other attribues, such as title or description, can be used in [form templates](/
     clearOnUnmount: true,
     condition: { ... },
     dataType: 'string',
+    FieldProps: { ... },
     hideField: true,
     initializeOnMount: true,
     initialValue: 'default-login',
@@ -43,7 +44,7 @@ Other attribues, such as title or description, can be used in [form templates](/
 
 *string*
 
-`component` is a string value representing used component. Available options depends on the component mapper. Data Driven Forms automatically checks if the component is available, if not, it shows an error message. You use [componentTypes](/schema/constants#componenttypes) to prevent typos.
+`component` is a string value representing used component. Available options depends on the component mapper. Data Driven Forms automatically checks if the component is available, if not, it shows an error message. You can use [componentTypes](/schema/constants#componenttypes) to prevent typos. This attribute is not required for fields of these components: `wizard`, `field-array` and `tabs` as these fields include only special components with no implementation.
 
 ---
 
@@ -51,7 +52,7 @@ Other attribues, such as title or description, can be used in [form templates](/
 
 *string*
 
-`name` represents the variable the form value is stored in. You can use [dot notatiton](https://final-form.org/docs/final-form/field-names) to create nested objects.
+`name` represents the variable the form value is stored in. You can use [dot notation](https://final-form.org/docs/final-form/field-names) to create nested objects.
 
 ```jsx
 {
@@ -129,6 +130,14 @@ There are also two actions that can be binded to conditions: [set](/schema/condi
 one of strings: *integer | float | number | boolean | string*
 
 Data type sets the type the value will be converted to. Read more [here](/schema/data-types).
+
+---
+
+### FieldProps
+
+*object*
+
+You can pass additional [Final Form FieldProps](https://final-form.org/docs/react-final-form/types/FieldProps) via FieldProps object. This prop is made to avoid conflicts between Final Form props and component props.
 
 ---
 

@@ -56,32 +56,45 @@ const createFieldProps = (name, formOptions) => {
   };
 };
 
-const useFieldApi = ({ name, component, render, validate, resolveProps, ...props }) => {
+const useFieldApi = ({
+  name,
+  resolveProps,
+  ...props
+}) => {
   const { validatorMapper, formOptions } = useContext(RendererContext);
 
-  const { validate: resolvePropsValidate, ...resolvedProps } = resolveProps
+  const resolvedProps = resolveProps
     ? resolveProps(props, createFieldProps(name, formOptions), formOptions) || {}
     : {};
 
-  const finalValidate = resolvePropsValidate || validate;
+  const combinedProps = { ...props, ...resolvedProps};
+  const {
+    component,
+    render,
+    validate,
+    FieldProps,
+    dataType,
+    ...rest
+  } = combinedProps;
 
   const [{ type, validate: stateValidate, arrayValidator }, dispatch] = useReducer(
     reducer,
-    { props: { ...props, ...resolvedProps }, validate: finalValidate, component, validatorMapper },
+    { props: combinedProps, validate, component, validatorMapper },
     init
   );
 
   const mounted = useRef(false);
 
   const enhancedProps = {
-    type,
     name,
-    ...props,
-    ...resolvedProps,
+    dataType,
+    ...rest,
+    ...FieldProps,
+    ...(type ? { type } : {}),
     ...(stateValidate ? { validate: stateValidate } : {})
   };
 
-  const fieldProps = useField(enhancedProps);
+  const field = useField(enhancedProps);
 
   /** Reinitilize type */
   useEffect(() => {
@@ -98,8 +111,8 @@ const useFieldApi = ({ name, component, render, validate, resolveProps, ...props
     if (mounted.current) {
       dispatch({
         type: 'setValidators',
-        validate: calculateValidate(enhancedProps, finalValidate, component, validatorMapper),
-        arrayValidator: calculateArrayValidator(enhancedProps, finalValidate, component, validatorMapper)
+        validate: calculateValidate(enhancedProps, validate, component, validatorMapper),
+        arrayValidator: calculateArrayValidator(enhancedProps, validate, component, validatorMapper)
       });
     }
     /**
@@ -108,7 +121,7 @@ const useFieldApi = ({ name, component, render, validate, resolveProps, ...props
      * Using stringify is acceptable here since the array is usually very small.
      * If we notice performance hit, we can implement custom hook with a deep equal functionality.
      */
-  }, [finalValidate ? JSON.stringify(finalValidate) : false, component, enhancedProps.dataType]);
+  }, [validate ? JSON.stringify(validate) : false, component, dataType]);
 
   useEffect(() => {
     mounted.current = true;
@@ -118,24 +131,22 @@ const useFieldApi = ({ name, component, render, validate, resolveProps, ...props
     };
   }, []);
 
+  const finalProps = { ...rest, ...field };
+
   const {
     initialValue: _initialValue,
-    clearOnUnmount,
-    dataType,
     clearedValue,
-    isEqual: _isEqual,
-    validate: _validate,
-    type: _type,
-    initializeOnMount: _initializeOnMount,
+    clearOnUnmount,
+    initializeOnMount,
+    dataType: _dataType,
     ...cleanProps
-  } = enhancedProps;
+  } = finalProps;
 
   /**
    * construct component props necessary that would live in field provider
    */
   return {
     ...cleanProps,
-    ...fieldProps,
     ...(arrayValidator && { arrayValidator })
   };
 };

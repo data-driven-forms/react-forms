@@ -12,7 +12,7 @@ import fieldArraySchema from './demo-schemas/field-array-schema';
 
 import Button from '@material-ui/core/Button';
 import wizardSchema from './demo-schemas/wizard-schema';
-import validatorTypes from '@data-driven-forms/react-form-renderer/dist/cjs/validator-types';
+import validatorTypes from '@data-driven-forms/react-form-renderer/validator-types';
 
 const theme = createMuiTheme({
   typography: {

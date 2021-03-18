@@ -8,7 +8,7 @@ const castToBoolean = (value: any) => {
   return value === 'true';
 };
 
-const dataTypes: DataTypes = {
+export const dataTypes: DataTypes = {
   INTEGER: 'integer',
   FLOAT: 'float',
   NUMBER: 'number',
@@ -16,13 +16,21 @@ const dataTypes: DataTypes = {
   STRING: 'string'
 };
 
-const convertType = (dataType: DataType, value: any): any =>
-  ({
-    [dataTypes.INTEGER]: !isNaN(Number(value)) && parseInt(value),
-    [dataTypes.FLOAT]: !isNaN(Number(value)) && parseFloat(value),
-    [dataTypes.NUMBER]: Number(value),
-    [dataTypes.BOOLEAN]: castToBoolean(value),
-    [dataTypes.STRING]: String(value)
-  }[dataType] || value);
+const canBeConvertedToNumber = (value: any): any => !isNaN(Number(value)) && value !== '';
+
+const convertType = (dataType: DataType, value: any): any  => {
+  switch (dataType) {
+    case dataTypes.INTEGER:
+      return canBeConvertedToNumber(value) ? parseInt(value) : value;
+    case dataTypes.FLOAT:
+      return canBeConvertedToNumber(value) ? parseFloat(value) : value;
+    case dataTypes.NUMBER:
+      return canBeConvertedToNumber(value) ? Number(value) : value;
+    case dataTypes.BOOLEAN:
+      return castToBoolean(value);
+    default:
+      return value;
+  }
+};
 
 export default convertType;

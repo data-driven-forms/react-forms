@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/react-form-renderer",
-  "version": "2.23.2",
+  "version": "3.2.0",
   "description": "React form renderer for data-driven-forms.",
   "main": "index.js",
   "module": "esm/index.js",

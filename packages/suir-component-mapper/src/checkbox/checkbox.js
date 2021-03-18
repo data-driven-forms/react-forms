@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormCheckbox } from 'semantic-ui-react';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
-import { validationError, validationWarning } from '../common/helpers';
+import { validationError, validationWarning } from '../helpers/helpers';
 import MultipleChoiceList from './multiple-choice-list';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 

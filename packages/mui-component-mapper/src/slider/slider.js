@@ -4,7 +4,7 @@ import { FormControl, FormGroup, FormHelperText, Slider as MUISlider, FormLabel,
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
-import { validationError } from '../common/helpers';
+import { validationError } from '../validation-error/validation-error';
 
 const Slider = (props) => {
   const {

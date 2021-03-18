@@ -96,10 +96,14 @@ const Footer = ({ open }) => {
           <Grid xs={12} md={4} item>
             <Paper elevation={0} className={classes.foooterCard}>
               <div>
-                <Typography variant="h5">Contribution</Typography>
-                <Typography>
+                <Typography gutterBottom variant="h5">
+                  Contribution
+                </Typography>
+                <Typography gutterBottom>
                   Please report any bugs, mistakes, suggestions and don&apos;t forget to contribute to the data-driven-forms/react-forms repository.
                 </Typography>
+                <Typography gutterBottom>Released under the APACHE-2.0 License.</Typography>
+                <Typography>Copyright © {new Date().getFullYear()} Data Driven Forms</Typography>
               </div>
             </Paper>
           </Grid>

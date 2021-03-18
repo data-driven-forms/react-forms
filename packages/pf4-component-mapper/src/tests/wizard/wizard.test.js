@@ -203,6 +203,7 @@ describe('<Wizard />', () => {
   });
 
   it('should call enter handler when pressing enter', () => {
+    // eslint-disable-next-line no-import-assign
     enterHandle.default = jest.fn();
 
     const wrapper = mount(<FormRenderer {...initialProps} />);

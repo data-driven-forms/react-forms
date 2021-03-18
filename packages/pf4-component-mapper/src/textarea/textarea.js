@@ -3,7 +3,7 @@ import { TextArea as Pf4TextArea } from '@patternfly/react-core';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import PropTypes from 'prop-types';
 import FormGroup from '../form-group/form-group';
-import showError from '../common/show-error';
+import showError from '../show-error/show-error';
 
 const Textarea = (props) => {
   const {

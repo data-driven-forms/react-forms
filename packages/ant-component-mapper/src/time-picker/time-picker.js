@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TimePicker as AntTimePicker } from 'antd';
-import { validationError } from '../common/helpers';
+import { validationError } from '../validation-error/validation-error';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormGroup from '../form-group';
 

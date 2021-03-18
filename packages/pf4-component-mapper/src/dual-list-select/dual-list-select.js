@@ -26,7 +26,9 @@ const DualList = (props) => {
     ...rest
   } = useFieldApi({
     ...props,
-    isEqual: (current, initial) => isEqual([...(current || [])].sort(), [...(initial || [])].sort())
+    FieldProps: {
+      isEqual: (current, initial) => isEqual([...(current || [])].sort(), [...(initial || [])].sort())
+    }
   });
 
   const [sortConfig, setSortConfig] = useState(() => ({ left: isSortable && 'asc', right: isSortable && 'asc' }));

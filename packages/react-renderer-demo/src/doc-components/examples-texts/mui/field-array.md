@@ -47,3 +47,24 @@ const fields = [
 ## Custom component
 
 To implement a custom component, please take a look [here](/components/field-array).
+
+### Composite props
+
+|name|type|default|target component|
+|----|----|-------|----------------|
+|GridContainerProps|`{}`|[Grid](https://material-ui.com/api/grid/)|
+|HeaderGridProps|`{}`|[Grid](https://material-ui.com/api/grid/)|
+|HeaderProps|`{}`|[Typography](https://material-ui.com/api/typography/)|
+|UndoButtonProps|`{}`|[Button](https://material-ui.com/api/button/)|
+|RedoButtonProps|`{}`|[Button](https://material-ui.com/api/button/)|
+|AddButtonProps|`{}`|[Button](https://material-ui.com/api/button/)|
+|DescriptionGridProps|`{}`|[Grid](https://material-ui.com/api/grid/)|
+|DescriptionProps|`{}`|[Typography](https://material-ui.com/api/typography/)|
+|BodyGridProps|`{}`|[Grid](https://material-ui.com/api/grid/)|
+|NoItemsProps|`{}`|[Typography](https://material-ui.com/api/typography/)|
+|FormHelperTextGridProps|`{}`|[Grid](https://material-ui.com/api/grid/)|
+|FormHelperTextProps|`{}`|[FormHelperText](https://material-ui.com/api/form-helper-text/)|
+|FieldContainerProps|`{}`|[Grid](https://material-ui.com/api/grid/)|
+|FieldGroupGridProps|`{}`|[Grid](https://material-ui.com/api/grid/)|
+|RemoveButtonGridProps|`{}`|[Grid](https://material-ui.com/api/grid/)|
+|RemoveButtonProps|`{}`|[Button](https://material-ui.com/api/button/)|

@@ -7,7 +7,7 @@ import DocPage from '@docs/doc-page';
 Form renderer is the core component of Data Driven Forms. It is used to generate and render forms.
 
 ```jsx
-import FormRenderer from '@data-driven-forms/react-form-renderer';
+import { FormRenderer } from '@data-driven-forms/react-form-renderer';
 
 const App = () => (<FormRenderer
   onSubmit={onSubmit}

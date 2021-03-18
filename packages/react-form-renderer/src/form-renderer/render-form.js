@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { childrenPropTypes } from '@data-driven-forms/common/prop-types-templates';
 import RendererContext from '../renderer-context';
 import Condition from '../condition';
 import FormSpy from '../form-spy';
@@ -31,7 +30,7 @@ const FormConditionWrapper = ({ condition, children, field }) =>
 
 FormConditionWrapper.propTypes = {
   condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  children: childrenPropTypes.isRequired,
+  children: PropTypes.node.isRequired,
   field: PropTypes.object
 };
 

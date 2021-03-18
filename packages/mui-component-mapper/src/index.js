@@ -16,4 +16,4 @@ export { default as TimePicker } from './time-picker';
 export { default as Wizard } from './wizard';
 export { default as FormFieldGrid } from './form-field-grid';
 export { default as MultipleChoiceList } from './multiple-chioce-list';
-export * from './common/helpers';
+export { default as validationError } from './validation-error';
