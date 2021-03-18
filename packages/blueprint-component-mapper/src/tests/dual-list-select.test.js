@@ -254,7 +254,9 @@ describe('DualListSelect', () => {
       wrapper.find('form').simulate('submit');
     });
 
-    expect(onSubmit).toHaveBeenCalledWith({});
+    expect(onSubmit).toHaveBeenCalledWith({
+      'dual-Menu': []
+    });
   });
 
   it('switch all to right', async () => {
@@ -288,7 +290,9 @@ describe('DualListSelect', () => {
       wrapper.find('form').simulate('submit');
     });
 
-    expect(onSubmit).toHaveBeenCalledWith({});
+    expect(onSubmit).toHaveBeenCalledWith({
+      'dual-Menu': []
+    });
   });
 
   it('filters options', async () => {
