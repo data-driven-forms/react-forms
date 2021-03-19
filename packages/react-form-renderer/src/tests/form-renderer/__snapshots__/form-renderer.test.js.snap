@@ -119,7 +119,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 }
               }
             >
-              <FormFieldHideWrapper
+              <Component
                 hideField={false}
               >
                 <TextField
@@ -139,7 +139,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                     />
                   </div>
                 </TextField>
-              </FormFieldHideWrapper>
+              </Component>
             </FormConditionWrapper>
           </SingleField>
           <SingleField
@@ -155,7 +155,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                 }
               }
             >
-              <FormFieldHideWrapper
+              <Component
                 hideField={false}
               >
                 <Component
@@ -168,7 +168,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
                     Select field
                   </div>
                 </Component>
-              </FormFieldHideWrapper>
+              </Component>
             </FormConditionWrapper>
           </SingleField>
           <Component>
@@ -336,7 +336,7 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                 }
               }
             >
-              <FormFieldHideWrapper
+              <Component
                 hideField={false}
               >
                 <TextField
@@ -357,7 +357,7 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                     />
                   </div>
                 </TextField>
-              </FormFieldHideWrapper>
+              </Component>
             </FormConditionWrapper>
           </SingleField>
           <SingleField
@@ -376,7 +376,7 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                 }
               }
             >
-              <FormFieldHideWrapper
+              <Component
                 hideField={true}
               >
                 <div
@@ -401,7 +401,7 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
                     </div>
                   </TextField>
                 </div>
-              </FormFieldHideWrapper>
+              </Component>
             </FormConditionWrapper>
           </SingleField>
           <Component>

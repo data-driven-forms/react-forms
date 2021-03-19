@@ -305,19 +305,41 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function handleFieldError(name: string, isValid: boolean, error: string | undefined = undefined, validating = false) {
-    setFieldState(name, (prev: FieldState) => ({
-      ...prev,
-      meta: {
-        ...prev.meta,
-        error,
-        valid: isValid,
-        invalid: !isValid,
-        validating,
-        warning: undefined
-      }
-    }));
+    const prevMeta = getFieldState(name)?.meta || {} as Meta;
+    const { error: prevError, valid: prevIsValid, validating: prevValidating } = prevMeta;
+    if (error !== prevError || isValid !== prevIsValid || validating !== prevValidating) {
+      setFieldState(name, (prev: FieldState) => ({
+        ...prev,
+        meta: {
+          ...prev.meta,
+          error,
+          valid: isValid,
+          invalid: !isValid,
+          validating,
+          warning: undefined
+        }
+      }));
+    }
 
     updateError(name, isValid ? undefined : error);
+  }
+
+  function handleFieldWarning(name: string, warning: string | undefined = undefined, validating = false) {
+    const prevMeta = getFieldState(name)?.meta || {} as Meta;
+    const { warning: prevWarning, validating: prevValidating } = prevMeta;
+    if (warning !== prevWarning || validating !== prevValidating) {
+      setFieldState(name, (prev: FieldState) => ({
+        ...prev,
+        meta: {
+          ...prev.meta,
+          warning,
+          error: undefined,
+          valid: true,
+          invalid: false,
+          validating
+        }
+      }));
+    }
   }
 
   async function validateField(name: string, value: any) {
@@ -338,38 +360,18 @@ const createManagerApi: CreateManagerApi = ({
         if (isPromise(result)) {
           handleFieldError(name, true, undefined, true);
           (result as Promise<string | undefined>)
-            .then(() => handleFieldError(name, true))
+            .then(() => handleFieldError(name, true, undefined, false))
             .catch((response) => {
               if (response?.type === 'warning') {
-                setFieldState(name, (prev: FieldState) => ({
-                  ...prev,
-                  meta: {
-                    ...prev.meta,
-                    warning: response.error,
-                    error: undefined,
-                    valid: true,
-                    invalid: false,
-                    validating: false
-                  }
-                }));
+                handleFieldWarning(name, response.error);
               } else {
-                handleFieldError(name, false, response as string | undefined);
+                handleFieldError(name, false, response as string | undefined, false);
               }
             });
           listener.registerValidator(result as Promise<string | undefined>);
         } else {
           if ((result as WarningObject)?.type === 'warning') {
-            setFieldState(name, (prev: FieldState) => ({
-              ...prev,
-              meta: {
-                ...prev.meta,
-                warning: (result as WarningObject)?.error,
-                error: undefined,
-                valid: true,
-                invalid: false,
-                validating: false
-              }
-            }));
+            handleFieldWarning(name, (result as WarningObject).error);
           } else {
             handleFieldError(name, !result, result as string | undefined);
           }
@@ -894,9 +896,10 @@ const createManagerApi: CreateManagerApi = ({
 
   function getFieldState(name: string): ExtendedFieldState | undefined {
     if (state.fieldListeners[name]) {
+      const fieldState = cloneDeep(state.fieldListeners[name].state);
       return {
-        ...state.fieldListeners[name].state,
-        ...state.fieldListeners[name].state.meta,
+        ...fieldState,
+        ...fieldState.meta,
         change: (value: any) => change(name, value),
         blur: () => change(name),
         focus: () => change(name)
@@ -958,7 +961,7 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function rerender(subscribeTo?: Array<string>) {
-    if (inBatch > 0) {
+        if (inBatch > 0) {
       subscribeTo && subscribeTo.forEach((to) => addIfUnique(batched, to));
       shouldRerender = true;
     } else {
