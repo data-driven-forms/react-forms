@@ -331,6 +331,29 @@ describe('useField', () => {
 
       expect(renderCount).toEqual(2);
     });
+
+    it.only('should only render field that changed its validation status', async () => {
+      const managerApi = createManagerApi({ subscription: { valid: true } });
+      const wrapper = mount(
+        <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
+          <RenderWatch validate={() => 'Error'} name="field-1" subscription={{ valid: true }} />
+          <RenderWatch validate={() => 'Error'} name="field-2" subscription={{ valid: true }} />
+        </FormManagerContext.Provider>
+      );
+
+      /**
+       * We have four renders after mount, two per each component
+       * One is after mount and the scond after initial validation
+       */
+      expect(renderCount).toEqual(4);
+      await act(async () => {
+        managerApi().change('field-1', 'foo');
+      });
+      /**
+       * Only field one should trigger render only one extra render should be triggered
+       */
+      expect(renderCount).toEqual(5);
+    });
   });
 
   describe('validation', () => {
@@ -1435,4 +1458,5 @@ describe('useField', () => {
       expect(wrapper.find('span').text()).toEqual('/path/');
     });
   });
+
 });

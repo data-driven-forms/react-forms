@@ -13,13 +13,13 @@ const asyncValidator1: Validator = (value) => new Promise((res, rej) => setTimeo
 const App = () => {
   return (
     <div style={{ padding: 20 }}>
-      <FormStateManager onSubmit={console.log}>
+      <FormStateManager subscription={{ valid: true, validating: true, pristine: true, invalid: true, submitting: true }} onSubmit={console.log}>
         {({ handleSubmit, ...state }) => {
           return (
             <form onSubmit={handleSubmit} name="field-2">
               <h1>There will be children</h1>
-              <TextField initialValue="foo" autocomplete="off" validate={asyncValidator} label="Field 2" name="field-2-23" id="field-2" type="text" />
-              <TextField autocomplete="off" validate={asyncValidator} label="Field 2" name="field-2" id="field-2" type="text" />
+              <TextField initialValue="foo" autoComplete="off" validate={asyncValidator} label="field-1" name="field-1" id="field-1" type="text" />
+              <TextField autoComplete="off" validate={asyncValidator} label="field-2" name="field-2" id="field-2" type="text" />
               <FormSpy>
                 {(props) => (
                   <pre>

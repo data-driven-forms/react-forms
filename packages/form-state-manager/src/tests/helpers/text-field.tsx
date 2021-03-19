@@ -13,6 +13,7 @@ const TextField: React.ComponentType<React.HTMLProps<HTMLInputElement> & TextFie
     meta: { valid, error, validating, touched },
     ...rest
   } = useField(props);
+  // console.log('render', {name: props.name, error, valid, validating});
   return (
     <div style={{ display: 'flex', flexDirection: 'column', margin: 16 }}>
       <label htmlFor={id}>{label}</label>

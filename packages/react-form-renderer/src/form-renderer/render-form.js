@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, memo } from 'react';
 import PropTypes from 'prop-types';
 import RendererContext from '../renderer-context';
 import Condition from '../condition';
 import FormSpy from '../form-spy';
 
-const FormFieldHideWrapper = ({ hideField, children }) => (hideField ? <div hidden>{children}</div> : children);
+const FormFieldHideWrapper = memo(({ hideField, children }) => (hideField ? <div hidden>{children}</div> : children), (prev, next) => {
+  return prev.hideField === next.hideField;
+});
 
 FormFieldHideWrapper.propTypes = {
   hideField: PropTypes.bool,
