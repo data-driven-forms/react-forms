@@ -85,5 +85,6 @@ vendor
 !README.md
 !tsconfig.json
 !generate-typings.js
+!rollup.config.js
 
 .DS_STORE
