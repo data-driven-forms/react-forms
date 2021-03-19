@@ -25,7 +25,7 @@ function cleanPackage(p) {
     }
   });
   const pattern = `{${positive.join(',')}}`;
-  const files = glob.sync(path.resolve(p, `./${pattern}`)).filter((item) => !negative.find((n) => item.includes(n) || item.includes('node_modules')));
+  const files = glob.sync(path.resolve(p, `./${pattern}`)).filter((item) => !negative.find((n) => item.endsWith(n) || item.includes('node_modules')));
   files.forEach((file) => {
     fse.removeSync(file);
   });
