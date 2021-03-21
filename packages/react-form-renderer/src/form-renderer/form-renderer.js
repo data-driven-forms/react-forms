@@ -103,7 +103,7 @@ FormRenderer.propTypes = {
   componentMapper: PropTypes.shape({
     [PropTypes.string]: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func])
   }).isRequired,
-  FormTemplate: PropTypes.func.isRequired,
+  FormTemplate: PropTypes.elementType.isRequired,
   validatorMapper: PropTypes.shape({
     [PropTypes.string]: PropTypes.func
   }),
