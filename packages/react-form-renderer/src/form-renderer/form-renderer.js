@@ -101,9 +101,9 @@ FormRenderer.propTypes = {
   subscription: PropTypes.shape({ [PropTypes.string]: PropTypes.bool }),
   clearedValue: PropTypes.any,
   componentMapper: PropTypes.shape({
-    [PropTypes.string]: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func])
+    [PropTypes.string]: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func, PropTypes.elementType])
   }).isRequired,
-  FormTemplate: PropTypes.func.isRequired,
+  FormTemplate: PropTypes.elementType.isRequired,
   validatorMapper: PropTypes.shape({
     [PropTypes.string]: PropTypes.func
   }),
