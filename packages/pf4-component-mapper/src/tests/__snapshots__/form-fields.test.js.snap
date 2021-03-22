@@ -2,7 +2,7 @@
 
 exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
 <RenderWithProvider>
-  <Component
+  <FormStateManager
     onSubmit={[Function]}
   >
     <Switch
@@ -109,6 +109,6 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
         </FormGroup>
       </FormGroup>
     </Switch>
-  </Component>
+  </FormStateManager>
 </RenderWithProvider>
 `;

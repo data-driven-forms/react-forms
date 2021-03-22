@@ -8,7 +8,7 @@ exports[`renderForm function #condition should render condition field only if co
     }
   }
 >
-  <Component
+  <FormStateManager
     onSubmit={[MockFunction]}
   >
     <SingleField
@@ -206,7 +206,7 @@ exports[`renderForm function #condition should render condition field only if co
           }
         }
       >
-        <Component
+        <FormSpy
           subscription={
             Object {
               "values": true,
@@ -237,10 +237,10 @@ exports[`renderForm function #condition should render condition field only if co
             }
             values={Object {}}
           />
-        </Component>
+        </FormSpy>
       </FormConditionWrapper>
     </SingleField>
-  </Component>
+  </FormStateManager>
 </ContextWrapper>
 `;
 
@@ -252,7 +252,7 @@ exports[`renderForm function #condition should render condition field only if on
     }
   }
 >
-  <Component
+  <FormStateManager
     onSubmit={[MockFunction]}
   >
     <SingleField
@@ -438,7 +438,7 @@ exports[`renderForm function #condition should render condition field only if on
           }
         }
       >
-        <Component
+        <FormSpy
           subscription={
             Object {
               "values": true,
@@ -463,10 +463,10 @@ exports[`renderForm function #condition should render condition field only if on
             }
             values={Object {}}
           />
-        </Component>
+        </FormSpy>
       </FormConditionWrapper>
     </SingleField>
-  </Component>
+  </FormStateManager>
 </ContextWrapper>
 `;
 
@@ -478,7 +478,7 @@ exports[`renderForm function should render single field from defined componentTy
     }
   }
 >
-  <Component
+  <FormStateManager
     onSubmit={[MockFunction]}
   >
     <SingleField
@@ -511,7 +511,7 @@ exports[`renderForm function should render single field from defined componentTy
         </Component>
       </FormConditionWrapper>
     </SingleField>
-  </Component>
+  </FormStateManager>
 </ContextWrapper>
 `;
 
@@ -523,7 +523,7 @@ exports[`renderForm function should render single field from with custom compone
     }
   }
 >
-  <Component
+  <FormStateManager
     onSubmit={[MockFunction]}
   >
     <SingleField
@@ -602,6 +602,6 @@ exports[`renderForm function should render single field from with custom compone
         </Component>
       </FormConditionWrapper>
     </SingleField>
-  </Component>
+  </FormStateManager>
 </ContextWrapper>
 `;

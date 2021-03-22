@@ -34,7 +34,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
     }
   }
 >
-  <Component
+  <FormStateManager
     clearOnUnmount={false}
     initialValues={Object {}}
     onSubmit={[MockFunction]}
@@ -171,7 +171,7 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
               </Component>
             </FormConditionWrapper>
           </SingleField>
-          <Component>
+          <FormSpy>
             <button
               disabled={false}
               type="submit"
@@ -192,11 +192,11 @@ exports[`<FormRenderer /> should render form from schema 1`] = `
             >
               Cancel
             </button>
-          </Component>
+          </FormSpy>
         </form>
       </FormTemplate>
     </FormTemplate>
-  </Component>
+  </FormStateManager>
 </FormRenderer>
 `;
 
@@ -237,7 +237,7 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
     }
   }
 >
-  <Component
+  <FormStateManager
     clearOnUnmount={false}
     initialValues={Object {}}
     onSubmit={[MockFunction]}
@@ -404,7 +404,7 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
               </Component>
             </FormConditionWrapper>
           </SingleField>
-          <Component>
+          <FormSpy>
             <button
               disabled={false}
               type="submit"
@@ -425,10 +425,10 @@ exports[`<FormRenderer /> should render hidden field 1`] = `
             >
               Cancel
             </button>
-          </Component>
+          </FormSpy>
         </form>
       </FormTemplate>
     </FormTemplate>
-  </Component>
+  </FormStateManager>
 </FormRenderer>
 `;
