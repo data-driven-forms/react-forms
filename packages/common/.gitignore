@@ -84,6 +84,7 @@ vendor
 !package.json
 !README.md
 !tsconfig.json
+!dev.tsconfig.json
 !generate-typings.js
 !rollup.config.js
 # because of the "config" string this fodler was not deleted with the clean script. Adding it to the list removes it.
