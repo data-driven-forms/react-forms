@@ -43,9 +43,9 @@
         "prism-react-renderer": "^1.1.1",
         "prop-types": "^15.7.2",
         "raw-loader": "^4.0.2",
-        "react": "^16.13.1",
+        "react": "^17.0.1",
         "react-copy-to-clipboard": "^5.0.2",
-        "react-dom": "^16.13.1",
+        "react-dom": "^17.0.1",
         "react-github-buttons": "^0.5.0",
         "react-sticky-box": "^0.9.3",
         "terser-webpack-plugin": "^4.2.3"

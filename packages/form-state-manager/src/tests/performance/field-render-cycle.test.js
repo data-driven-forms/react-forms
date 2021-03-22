@@ -2,9 +2,9 @@ import React, { useEffect, useContext, Fragment } from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 
-import useField from '../../files/use-field';
-import FormStateManager from '../../files/form-state-manager';
-import FormManagerContext from '../../files/form-manager-context';
+import useField from '../../use-field';
+import FormStateManager from '../../form-state-manager';
+import FormManagerContext from '../../form-manager-context';
 
 const Field = ({ fieldSpy, ...props }) => {
   const { input, id, ...rest } = useField(props);

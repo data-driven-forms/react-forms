@@ -8,7 +8,12 @@ const commonConfig = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: {
+          loader: 'ts-loader',
+          options: {
+            configFile: 'dev.tsconfig.json'
+          }
+        },
         exclude: /node_modules/
       }
     ]
@@ -31,7 +36,7 @@ const devConfig = {
     filename: '[name].[hash].js'
   },
   devtool: 'source-map',
-  plugins: [htmlPlugin]
+  plugins: [htmlPlugin],
 };
 
 module.exports = (env) =>

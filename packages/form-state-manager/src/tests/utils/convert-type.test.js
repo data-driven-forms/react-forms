@@ -1,4 +1,4 @@
-import convertType, { dataTypes } from '../../utils/convert-type';
+import convertType, { dataTypes } from '../../convert-type';
 
 describe('converTypes', () => {
     describe('integer', () => {

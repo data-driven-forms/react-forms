@@ -1,5 +1,5 @@
-import composeValidators from '../../files/compose-validators';
-import { isPromise } from '../../utils/validate';
+import composeValidators from '../../compose-validators';
+import { isPromise } from '../../validate';
 
 describe('composeValidators', () => {
   const one = (value) => new Promise((res, rej) => setTimeout(() => (value === 'one' ? rej('error-one') : res()), 200));

@@ -1,8 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import FormStateManager from '../../files/form-state-manager';
-import Field from '../../files/field';
+import FormStateManager from '../../form-state-manager';
+import Field from '../../field';
 
 describe('<Field />', () => {
   let wrapper;

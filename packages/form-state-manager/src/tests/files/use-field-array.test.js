@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
-import useField from '../../files/use-field';
-import useFieldArray from '../../files/use-field-array';
-import FormStateManager from '../../files/form-state-manager';
+import useField from '../../use-field';
+import useFieldArray from '../../use-field-array';
+import FormStateManager from '../../form-state-manager';
 
 const DummyInput = (props) => {
   const { input, meta } = useField({ ...props });
