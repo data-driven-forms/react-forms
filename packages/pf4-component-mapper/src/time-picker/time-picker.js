@@ -1,9 +1,8 @@
 import React from 'react';
 import FormGroup from '../form-group/form-group';
-import { TextInput } from '@patternfly/react-core';
+import { TimePicker as PF4TimePicker } from '@patternfly/react-core';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import PropTypes from 'prop-types';
-import showError from '../show-error/show-error';
 
 const TimePicker = (props) => {
   const {
@@ -33,14 +32,12 @@ const TimePicker = (props) => {
       id={id || input.name}
       FormGroupProps={FormGroupProps}
     >
-      <TextInput
-        {...showError(meta, validateOnMount)}
+      <PF4TimePicker
         {...input}
+        defaultTime={input.value}
         {...rest}
-        type="time"
         id={id || input.name}
-        isReadOnly={isReadOnly}
-        isDisabled={isDisabled}
+        isDisabled={isDisabled || isReadOnly}
       />
     </FormGroup>
   );

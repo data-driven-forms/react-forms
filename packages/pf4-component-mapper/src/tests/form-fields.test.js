@@ -312,7 +312,7 @@ describe('FormFields', () => {
                   .first()
                   .props().disabled
               ).toEqual(true);
-            } else if ([componentTypes.CHECKBOX, componentTypes.RADIO, componentTypes.SWITCH, componentTypes.SLIDER].includes(component)) {
+            } else if ([componentTypes.TIME_PICKER, componentTypes.CHECKBOX, componentTypes.RADIO, componentTypes.SWITCH, componentTypes.SLIDER].includes(component)) {
               expect(
                 wrapper
                   .find('input')
