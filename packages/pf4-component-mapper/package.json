@@ -59,7 +59,7 @@
     "webpack-merge": "^4.1.4"
   },
   "peerDependencies": {
-    "@data-driven-forms/react-form-renderer": ">=2.4.6",
+    "@data-driven-forms/react-form-renderer": ">=3.2.1",
     "@patternfly/react-core": "^4.101.3",
     "@patternfly/react-icons": "^4.9.5"
   },

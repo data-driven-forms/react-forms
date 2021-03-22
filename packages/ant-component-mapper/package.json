@@ -63,7 +63,7 @@
     "react-select": "^2.2.0"
   },
   "peerDependencies": {
-    "@data-driven-forms/react-form-renderer": ">=2.4.6",
+    "@data-driven-forms/react-form-renderer": ">=3.2.1",
     "antd": "^4.2.0",
     "react": ">=16.13.0",
     "react-dom": ">=16.13.0"
