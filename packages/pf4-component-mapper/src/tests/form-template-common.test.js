@@ -143,6 +143,7 @@ describe('FormTemplate PF4 Common', () => {
         onSubmit={jest.fn}
         FormTemplate={FormTemplate}
         initialValues={expectedValues}
+        componentMapper={{}}
       />
     );
 

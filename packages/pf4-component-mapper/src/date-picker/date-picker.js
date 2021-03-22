@@ -1,9 +1,8 @@
 import React from 'react';
-import { TextInput } from '@patternfly/react-core';
+import { DatePicker as PF4DatePicker } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormGroup from '../form-group/form-group';
-import showError from '../show-error/show-error';
 
 const DatePicker = (props) => {
   const {
@@ -33,14 +32,11 @@ const DatePicker = (props) => {
       id={id || input.name}
       FormGroupProps={FormGroupProps}
     >
-      <TextInput
+      <PF4DatePicker
         {...input}
-        {...showError(meta, validateOnMount)}
         {...rest}
-        type="date"
         id={id || input.name}
-        isReadOnly={isReadOnly}
-        isDisabled={isDisabled}
+        isDisabled={isDisabled || isReadOnly}
       />
     </FormGroup>
   );
