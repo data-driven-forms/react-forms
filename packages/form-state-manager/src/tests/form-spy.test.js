@@ -1,9 +1,9 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
-import FormManagerContext from '../files/form-manager-context';
-import createManagerApi from '../utils/manager-api';
-import FormSpy from '../files/form-spy';
+import FormManagerContext from '../form-manager-context';
+import createManagerApi from '../manager-api';
+import FormSpy from '../form-spy';
 
 describe('<FormSpy />', () => {
   it('should subscribe to changes', async () => {

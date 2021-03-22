@@ -1,5 +1,5 @@
-import { fieldLevelValidator } from '../../utils/validate';
-import createManagerApi from '../../utils/manager-api';
+import { fieldLevelValidator } from '../../validate';
+import createManagerApi from '../../manager-api';
 
 describe('validate', () => {
   describe('field level', () => {

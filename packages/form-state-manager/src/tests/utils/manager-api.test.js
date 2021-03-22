@@ -1,10 +1,9 @@
-import createManagerApi, { initialMeta, flatObject } from '../../utils/manager-api';
-import FORM_ERROR from '../../files/form-error';
-import * as focusError from '../../utils/focus-error';
+import createManagerApi, { initialMeta, flatObject } from '../../manager-api';
+import FORM_ERROR from '../../form-error';
+import * as focusError from '../../focus-error/focus-error';
 
 describe('managerApi', () => {
   let focusErrorSpy;
-
   beforeEach(() => {
     focusErrorSpy = jest.spyOn(focusError, 'default');
   });

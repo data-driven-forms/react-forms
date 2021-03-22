@@ -2,9 +2,9 @@
 import React, { useEffect } from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
-import FormManagerContext from '../../files/form-manager-context';
-import useField, { checkEmpty } from '../../files/use-field';
-import createManagerApi, { initialMeta } from '../../utils/manager-api';
+import FormManagerContext from '../../form-manager-context';
+import useField, { checkEmpty } from '../../use-field';
+import createManagerApi, { initialMeta } from '../../manager-api';
 
 const NonInputSpyComponent = ({ changeValue, onChange }) => <button id="fake-change" type="button" onClick={() => onChange(changeValue)}></button>;
 

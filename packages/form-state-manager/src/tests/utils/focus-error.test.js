@@ -1,4 +1,4 @@
-import focusError from '../../utils/focus-error';
+import focusError from '../../focus-error';
 
 describe('focusError', () => {
   it('focus first error element', async () => {

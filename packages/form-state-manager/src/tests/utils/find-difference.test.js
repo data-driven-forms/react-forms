@@ -1,4 +1,4 @@
-import findDifference from '../../utils/find-difference';
+import findDifference from '../../find-difference';
 
 describe('findDifference', () => {
   let oldState;
