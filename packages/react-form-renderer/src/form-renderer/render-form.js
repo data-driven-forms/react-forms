@@ -2,7 +2,59 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import RendererContext from '../renderer-context';
 import Condition from '../condition';
-import FormSpy from '../form-spy';
+import { memoize } from '../common/helpers';
+import { Field } from 'react-final-form';
+
+const mergeFunctionTrigger = (fn, field) => {
+  let internalTriggers = [];
+  const internalWhen = fn(field);
+  if (Array.isArray(internalWhen)) {
+    internalTriggers = [...internalWhen];
+  } else {
+    internalTriggers.push(internalWhen);
+  }
+
+  return internalTriggers;
+};
+
+const getConditionTriggers = memoize((condition, field) => {
+  let triggers = [];
+  if (Array.isArray(condition)) {
+    return condition.reduce((acc, item) => [...acc, ...getConditionTriggers(item, field)], []);
+  }
+
+  const {when, ...rest} = condition;
+  const nestedKeys = ['and', 'or', 'sequence'];
+  if (typeof when === 'string') {
+    triggers = [...triggers, when];
+  }
+
+  if (typeof when === 'function') {
+    triggers = [...triggers, ...mergeFunctionTrigger(when, field)];
+  }
+
+  if (Array.isArray(when)) {
+    when.forEach(item => {
+      if (typeof item === 'string') {
+        triggers = [...triggers, item];
+      }
+
+      if (typeof item === 'function') {
+        triggers = [...triggers, ...mergeFunctionTrigger(item, field)];
+      }
+    });
+  }
+
+  nestedKeys.forEach(key => {
+    if (typeof rest[key] !== 'undefined') {
+    rest[key].forEach(item => {
+      triggers = [...triggers, ...getConditionTriggers(item, field)];
+    });
+    }
+  });
+
+  return Array.from(new Set(triggers));
+});
 
 const FormFieldHideWrapper = ({ hideField, children }) => (hideField ? <div hidden>{children}</div> : children);
 
@@ -15,18 +67,66 @@ FormFieldHideWrapper.defaultProps = {
   hideField: false
 };
 
-const FormConditionWrapper = ({ condition, children, field }) =>
-  condition ? (
-    <FormSpy subscription={{ values: true }}>
-      {({ values }) => (
-        <Condition condition={condition} values={values} field={field}>
-          {children}
-        </Condition>
+const ConditionTriggerWrapper = ({condition, values, children, field}) => (
+  <Condition condition={condition} values={values} field={field}>
+    {children}
+  </Condition>
+);
+
+ConditionTriggerWrapper.propTypes = {
+  condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  children: PropTypes.node.isRequired,
+  field: PropTypes.object,
+  values: PropTypes.object.isRequired,
+};
+
+const ConditionTriggerDetector = ({ values = {}, triggers = [], children, condition, field }) => {
+  const internalTriggers = [...triggers];
+  if (internalTriggers.length === 0) {
+    return (
+      <ConditionTriggerWrapper condition={condition} values={values} field={field}>
+        {children}
+      </ConditionTriggerWrapper>
+    );
+  }
+
+  const name = internalTriggers.shift();
+  return (
+    <Field name={name} subscription={{ value: true }}>
+      {({input: {value}}) =>(
+        <ConditionTriggerDetector
+          triggers={[...internalTriggers]}
+          values={{...values, [name]: value}}
+          condition={condition}
+          field={field}
+        >
+        {children}
+        </ConditionTriggerDetector>
       )}
-    </FormSpy>
-  ) : (
-    children
+    </Field>
   );
+};
+
+ConditionTriggerDetector.propTypes = {
+  values: PropTypes.object,
+  triggers: PropTypes.arrayOf(PropTypes.string),
+  children: PropTypes.node,
+  condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  field: PropTypes.object.isRequired
+};
+
+const FormConditionWrapper = ({ condition, children, field }) => {
+  if (condition) {
+    const triggers = getConditionTriggers(condition, field);
+    return (
+    <ConditionTriggerDetector triggers={triggers} condition={condition} field={field}>
+      {children}
+    </ConditionTriggerDetector>
+  );
+  }
+
+  return children;
+};
 
 FormConditionWrapper.propTypes = {
   condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
@@ -111,6 +211,8 @@ SingleField.propTypes = {
   resolveProps: PropTypes.func
 };
 
-const renderForm = (fields) => fields.map((field) => (Array.isArray(field) ? renderForm(field) : <SingleField key={field.name} {...field} />));
+const renderForm = (fields) => {
+  return fields.map((field) => (Array.isArray(field) ? renderForm(field) : <SingleField key={field.name} {...field} />));
+};
 
 export default renderForm;
