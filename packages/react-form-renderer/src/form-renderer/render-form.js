@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import set from 'lodash/set';
 import RendererContext from '../renderer-context';
 import Condition from '../condition';
 import { Field } from 'react-final-form';
@@ -42,10 +43,10 @@ const ConditionTriggerDetector = ({ values = {}, triggers = [], children, condit
   const name = internalTriggers.shift();
   return (
     <Field name={name} subscription={{ value: true }}>
-      {({input: {value}}) =>(
+      {({input: {value}}) => (
         <ConditionTriggerDetector
           triggers={[...internalTriggers]}
-          values={{...values, [name]: value}}
+          values={set({...values}, name, value)}
           condition={condition}
           field={field}
         >
