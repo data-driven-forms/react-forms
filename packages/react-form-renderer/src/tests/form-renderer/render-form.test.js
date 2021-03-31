@@ -32,6 +32,8 @@ describe('renderForm function', () => {
         formOptions: {
           renderForm,
           getState: () => ({ dirty: true }),
+          internalRegisterField: jest.fn(),
+          internalUnRegisterField: jest.fn(),
           ...props.formOptions
         }
       }}

@@ -217,38 +217,227 @@ exports[`renderForm function #condition should render condition field only if co
           }
         }
       >
-        <FormSpy
-          subscription={
+        <ConditionTriggerDetector
+          condition={
+            Array [
+              Object {
+                "is": "x",
+                "when": Array [
+                  "a",
+                  "b",
+                ],
+              },
+              Object {
+                "pattern": /fuzz/,
+                "when": "c",
+              },
+            ]
+          }
+          field={
             Object {
-              "values": true,
+              "component": "custom-component",
+              "name": "foo",
             }
           }
+          triggers={
+            Array [
+              "a",
+              "b",
+              "c",
+            ]
+          }
         >
-          <Component
-            condition={
-              Array [
-                Object {
-                  "is": "x",
-                  "when": Array [
-                    "a",
-                    "b",
-                  ],
-                },
-                Object {
-                  "pattern": /fuzz/,
-                  "when": "c",
-                },
-              ]
-            }
-            field={
+          <ForwardRef(Field)
+            name="a"
+            subscription={
               Object {
-                "component": "custom-component",
-                "name": "foo",
+                "value": true,
               }
             }
-            values={Object {}}
-          />
-        </FormSpy>
+          >
+            <ConditionTriggerDetector
+              condition={
+                Array [
+                  Object {
+                    "is": "x",
+                    "when": Array [
+                      "a",
+                      "b",
+                    ],
+                  },
+                  Object {
+                    "pattern": /fuzz/,
+                    "when": "c",
+                  },
+                ]
+              }
+              field={
+                Object {
+                  "component": "custom-component",
+                  "name": "foo",
+                }
+              }
+              triggers={
+                Array [
+                  "b",
+                  "c",
+                ]
+              }
+              values={
+                Object {
+                  "a": "",
+                }
+              }
+            >
+              <ForwardRef(Field)
+                name="b"
+                subscription={
+                  Object {
+                    "value": true,
+                  }
+                }
+              >
+                <ConditionTriggerDetector
+                  condition={
+                    Array [
+                      Object {
+                        "is": "x",
+                        "when": Array [
+                          "a",
+                          "b",
+                        ],
+                      },
+                      Object {
+                        "pattern": /fuzz/,
+                        "when": "c",
+                      },
+                    ]
+                  }
+                  field={
+                    Object {
+                      "component": "custom-component",
+                      "name": "foo",
+                    }
+                  }
+                  triggers={
+                    Array [
+                      "c",
+                    ]
+                  }
+                  values={
+                    Object {
+                      "a": "",
+                      "b": "",
+                    }
+                  }
+                >
+                  <ForwardRef(Field)
+                    name="c"
+                    subscription={
+                      Object {
+                        "value": true,
+                      }
+                    }
+                  >
+                    <ConditionTriggerDetector
+                      condition={
+                        Array [
+                          Object {
+                            "is": "x",
+                            "when": Array [
+                              "a",
+                              "b",
+                            ],
+                          },
+                          Object {
+                            "pattern": /fuzz/,
+                            "when": "c",
+                          },
+                        ]
+                      }
+                      field={
+                        Object {
+                          "component": "custom-component",
+                          "name": "foo",
+                        }
+                      }
+                      triggers={Array []}
+                      values={
+                        Object {
+                          "a": "",
+                          "b": "",
+                          "c": "",
+                        }
+                      }
+                    >
+                      <ConditionTriggerWrapper
+                        condition={
+                          Array [
+                            Object {
+                              "is": "x",
+                              "when": Array [
+                                "a",
+                                "b",
+                              ],
+                            },
+                            Object {
+                              "pattern": /fuzz/,
+                              "when": "c",
+                            },
+                          ]
+                        }
+                        field={
+                          Object {
+                            "component": "custom-component",
+                            "name": "foo",
+                          }
+                        }
+                        values={
+                          Object {
+                            "a": "",
+                            "b": "",
+                            "c": "",
+                          }
+                        }
+                      >
+                        <Component
+                          condition={
+                            Array [
+                              Object {
+                                "is": "x",
+                                "when": Array [
+                                  "a",
+                                  "b",
+                                ],
+                              },
+                              Object {
+                                "pattern": /fuzz/,
+                                "when": "c",
+                              },
+                            ]
+                          }
+                          field={
+                            Object {
+                              "component": "custom-component",
+                              "name": "foo",
+                            }
+                          }
+                          values={
+                            Object {
+                              "a": "",
+                              "b": "",
+                              "c": "",
+                            }
+                          }
+                        />
+                      </ConditionTriggerWrapper>
+                    </ConditionTriggerDetector>
+                  </ForwardRef(Field)>
+                </ConditionTriggerDetector>
+              </ForwardRef(Field)>
+            </ConditionTriggerDetector>
+          </ForwardRef(Field)>
+        </ConditionTriggerDetector>
       </FormConditionWrapper>
     </SingleField>
   </ReactFinalForm>
@@ -460,32 +649,148 @@ exports[`renderForm function #condition should render condition field only if on
           }
         }
       >
-        <FormSpy
-          subscription={
+        <ConditionTriggerDetector
+          condition={
             Object {
-              "values": true,
+              "is": "x",
+              "when": Array [
+                "a",
+                "b",
+              ],
             }
           }
+          field={
+            Object {
+              "component": "custom-component",
+              "name": "foo",
+            }
+          }
+          triggers={
+            Array [
+              "a",
+              "b",
+            ]
+          }
         >
-          <Component
-            condition={
+          <ForwardRef(Field)
+            name="a"
+            subscription={
               Object {
-                "is": "x",
-                "when": Array [
-                  "a",
+                "value": true,
+              }
+            }
+          >
+            <ConditionTriggerDetector
+              condition={
+                Object {
+                  "is": "x",
+                  "when": Array [
+                    "a",
+                    "b",
+                  ],
+                }
+              }
+              field={
+                Object {
+                  "component": "custom-component",
+                  "name": "foo",
+                }
+              }
+              triggers={
+                Array [
                   "b",
-                ],
+                ]
               }
-            }
-            field={
-              Object {
-                "component": "custom-component",
-                "name": "foo",
+              values={
+                Object {
+                  "a": "",
+                }
               }
-            }
-            values={Object {}}
-          />
-        </FormSpy>
+            >
+              <ForwardRef(Field)
+                name="b"
+                subscription={
+                  Object {
+                    "value": true,
+                  }
+                }
+              >
+                <ConditionTriggerDetector
+                  condition={
+                    Object {
+                      "is": "x",
+                      "when": Array [
+                        "a",
+                        "b",
+                      ],
+                    }
+                  }
+                  field={
+                    Object {
+                      "component": "custom-component",
+                      "name": "foo",
+                    }
+                  }
+                  triggers={Array []}
+                  values={
+                    Object {
+                      "a": "",
+                      "b": "",
+                    }
+                  }
+                >
+                  <ConditionTriggerWrapper
+                    condition={
+                      Object {
+                        "is": "x",
+                        "when": Array [
+                          "a",
+                          "b",
+                        ],
+                      }
+                    }
+                    field={
+                      Object {
+                        "component": "custom-component",
+                        "name": "foo",
+                      }
+                    }
+                    values={
+                      Object {
+                        "a": "",
+                        "b": "",
+                      }
+                    }
+                  >
+                    <Component
+                      condition={
+                        Object {
+                          "is": "x",
+                          "when": Array [
+                            "a",
+                            "b",
+                          ],
+                        }
+                      }
+                      field={
+                        Object {
+                          "component": "custom-component",
+                          "name": "foo",
+                        }
+                      }
+                      values={
+                        Object {
+                          "a": "",
+                          "b": "",
+                        }
+                      }
+                    />
+                  </ConditionTriggerWrapper>
+                </ConditionTriggerDetector>
+              </ForwardRef(Field)>
+            </ConditionTriggerDetector>
+          </ForwardRef(Field)>
+        </ConditionTriggerDetector>
       </FormConditionWrapper>
     </SingleField>
   </ReactFinalForm>

@@ -1,5 +1,6 @@
-import React, { useReducer } from 'react';
+import React, { memo, useReducer } from 'react';
 import PropTypes from 'prop-types';
+import isEqual from 'lodash/isEqual';
 import { useFormApi, FieldArray } from '@data-driven-forms/react-form-renderer';
 
 import { Button, Header, ButtonGroup } from 'semantic-ui-react';
@@ -37,7 +38,7 @@ const useStyles = createUseStyles({
   }
 });
 
-const ArrayItem = ({
+const ArrayItem = memo(({
   fields,
   fieldIndex,
   name,
@@ -74,7 +75,7 @@ const ArrayItem = ({
       </div>
     </div>
   );
-};
+}, ({remove: _prevRemove, ...prev}, {remove: _nextRemove, ...next}) => isEqual(prev, next));
 
 ArrayItem.propTypes = {
   name: PropTypes.string,

@@ -14,6 +14,10 @@ export interface FormOptions extends FormApi {
   handleSubmit: () => Promise<AnyObject | undefined> | undefined;
   clearedValue?: any;
   renderForm: (fields: Field[]) => ReactNode[];
+  internalRegisterField: (name: string) => void;
+  internalUnregisterField: (name: string) => void;
+  getRegisteredFields: () => string[];
+  ffGetRegisteredFields: () => string[];
 }
 
 export interface RendererContextValue {

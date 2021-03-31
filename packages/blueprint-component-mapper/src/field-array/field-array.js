@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
+import React, { memo, useContext } from 'react';
 import PropTypes from 'prop-types';
+import isEqual from 'lodash/isEqual';
 import clsx from 'clsx';
 import { useFieldApi, useFormApi, FieldArray as FieldArrayFF } from '@data-driven-forms/react-form-renderer';
 import { createUseStyles } from 'react-jss';
@@ -19,7 +20,7 @@ const useStyles = createUseStyles({
   }
 });
 
-const ArrayItem = ({ remove, fields, name, removeLabel, ArrayItemProps, RemoveButtonProps, disabledRemove }) => {
+const ArrayItem = memo(({ remove, fields, name, removeLabel, ArrayItemProps, RemoveButtonProps, disabledRemove }) => {
   const formOptions = useFormApi();
   const { remove: removeCss } = useStyles();
 
@@ -42,7 +43,7 @@ const ArrayItem = ({ remove, fields, name, removeLabel, ArrayItemProps, RemoveBu
       </Button>
     </div>
   );
-};
+}, ({remove: _prevRemove, ...prev}, {remove: _nextRemove, ...next}) => isEqual(prev, next));
 
 ArrayItem.propTypes = {
   remove: PropTypes.func,

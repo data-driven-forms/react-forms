@@ -1,4 +1,5 @@
-import React, { useReducer } from 'react';
+import React, { memo, useReducer } from 'react';
+import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import { useFieldApi, useFormApi, FieldArray } from '@data-driven-forms/react-form-renderer';
 import { Row, Col, Button, Typography, Space } from 'antd';
@@ -6,7 +7,7 @@ import { UndoOutlined, RedoOutlined } from '@ant-design/icons';
 
 import FormGroup from '../form-group';
 
-const ArrayItem = ({
+const ArrayItem = memo(({
   fields,
   fieldIndex,
   name,
@@ -38,7 +39,7 @@ const ArrayItem = ({
       </Col>
     </Row>
   );
-};
+}, ({remove: _prevRemove, ...prev}, {remove: _nextRemove, ...next}) => isEqual(prev, next));
 
 ArrayItem.propTypes = {
   name: PropTypes.string,

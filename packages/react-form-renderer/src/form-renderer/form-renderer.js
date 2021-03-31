@@ -26,8 +26,20 @@ const FormRenderer = ({
   ...props
 }) => {
   const [fileInputs, setFileInputs] = useState([]);
+  const registeredFields = useRef({});
   const focusDecorator = useRef(createFocusDecorator());
   let schemaError;
+
+  const setRegisteredFields = (fn => registeredFields.current = fn({...registeredFields.current}));
+  const internalRegisterField = (name) => {
+    setRegisteredFields(prev => prev[name] ? ({...prev, [name]: prev[name] + 1}) : ({...prev, [name]: 1}));
+  };
+
+  const internalUnRegisterField = (name) => {
+    setRegisteredFields(({[name]: currentField, ...prev}) => currentField && currentField > 1 ? ({[name]: currentField - 1, ...prev}) : prev);
+  };
+
+  const internalGetRegisteredFields = () => Object.entries(registeredFields.current).reduce((acc, [name, value]) => value > 0 ? [...acc, name] : acc, []);
 
   const validatorMapperMerged = { ...defaultValidatorMapper, ...validatorMapper };
 
@@ -80,8 +92,12 @@ const FormRenderer = ({
               reset,
               clearOnUnmount,
               renderForm,
+              internalRegisterField,
+              internalUnRegisterField,
               ...mutators,
-              ...form
+              ...form,
+              ffGetRegisteredFields: form.getRegisteredFields,
+              getRegisteredFields: internalGetRegisteredFields,
             }
           }}
         >

@@ -87,6 +87,7 @@ const createFieldProps = (name, formOptions) => {
 const useFieldApi = ({
   name,
   resolveProps,
+  skipRegistration = false,
   ...props
 }) => {
   const { validatorMapper, formOptions } = useContext(RendererContext);
@@ -196,6 +197,10 @@ const useFieldApi = ({
 
   useEffect(
     () => {
+      if (!skipRegistration) {
+        formOptions.internalRegisterField(name);
+      }
+
       mounted.current = true;
       if (field.input.type === 'file') {
         formOptions.registerInputFile(field.input.name);
@@ -212,6 +217,10 @@ const useFieldApi = ({
 
         if (field.input.type === 'file') {
           formOptions.unRegisterInputFile(field.input.name);
+        }
+
+        if (!skipRegistration) {
+          formOptions.internalUnRegisterField(name);
         }
       };
     },
