@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import set from 'lodash/set';
+import { Field } from 'react-final-form';
 import RendererContext from '../renderer-context';
 import Condition from '../condition';
-import { Field } from 'react-final-form';
 import getConditionTriggers from '../get-condition-triggers';
 
 const FormFieldHideWrapper = ({ hideField, children }) => (hideField ? <div hidden>{children}</div> : children);
@@ -50,7 +50,7 @@ const ConditionTriggerDetector = ({ values = {}, triggers = [], children, condit
           condition={condition}
           field={field}
         >
-        {children}
+          {children}
         </ConditionTriggerDetector>
       )}
     </Field>
@@ -161,8 +161,6 @@ SingleField.propTypes = {
   resolveProps: PropTypes.func
 };
 
-const renderForm = (fields) => {
-  return fields.map((field) => (Array.isArray(field) ? renderForm(field) : <SingleField key={field.name} {...field} />));
-};
+const renderForm = (fields) =>fields.map((field) => (Array.isArray(field) ? renderForm(field) : <SingleField key={field.name} {...field} />));
 
 export default renderForm;

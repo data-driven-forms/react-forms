@@ -32,7 +32,9 @@ describe('useFieldApi', () => {
               <RendererContext.Provider
                 value={{
                   formOptions: {
-                    registerInputFile: registerInputFileSpy
+                    registerInputFile: registerInputFileSpy,
+                    internalRegisterField: jest.fn(),
+                    internalUnRegisterField: jest.fn(),
                   },
                   validatorMapper: { required: () => (value) => (!value ? 'required' : undefined) }
                 }}
@@ -197,7 +199,10 @@ describe('useFieldApi', () => {
             <RendererContext.Provider
               value={{
                 validatorMapper: { required: () => (value) => (!value ? 'required' : undefined), url: () => jest.fn() },
-                formOptions: {}
+                formOptions: {
+                  internalRegisterField: jest.fn(),
+                  internalUnRegisterField: jest.fn(),
+                }
               }}
             >
               <TestDummy validate={validate} />

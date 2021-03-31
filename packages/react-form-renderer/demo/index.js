@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import { FormRenderer, useFieldApi, componentTypes } from '../src';
+import { FormRenderer, useFieldApi, componentTypes, useFormApi } from '../src';
 import MuiTextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
@@ -108,9 +108,18 @@ const TextField = (props) => {
   );
 };
 
-const fields = [];
+const Spy = () => {
+  const formApi = useFormApi();
+  console.log(formApi);
+  return null;
+};
 
-for (let index = 0; index < 1000; index++) {
+const fields = [{
+  name: 'optionsSpy',
+  component: 'spy',
+}];
+
+for (let index = 0; index < 10; index++) {
   fields.push({
     name: `field-${index}`,
     label: `Text field ${index}`,
@@ -134,7 +143,8 @@ const App = () => {
     <div style={{ padding: 20 }}>
       <FormRenderer
         componentMapper={{
-          [componentTypes.TEXT_FIELD]: TextField
+          [componentTypes.TEXT_FIELD]: TextField,
+          spy: Spy
         }}
         onSubmit={console.log}
         FormTemplate={MuiFormTemplate}
