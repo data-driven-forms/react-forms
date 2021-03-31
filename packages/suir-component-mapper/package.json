@@ -63,6 +63,7 @@
     "@data-driven-forms/common": "*",
     "classnames": "^2.2.6",
     "clsx": "^1.0.4",
+    "lodash": "^4.17.21",
     "prop-types": "^15.7.2",
     "react-jss": "^10.1.1"
   }

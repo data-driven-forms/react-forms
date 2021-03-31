@@ -1,6 +1,7 @@
-import React, { useReducer } from 'react';
+import React, { memo, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { useFormApi, FieldArray } from '@data-driven-forms/react-form-renderer';
+import isEqual from 'lodash/isEqual';
 
 import { Grid, Button, Typography, FormControl, FormHelperText, IconButton } from '@material-ui/core';
 
@@ -36,7 +37,7 @@ const useFielArrayStyles = makeStyles({
   }
 });
 
-const ArrayItem = ({
+const ArrayItem = memo(({
   fields,
   fieldIndex,
   name,
@@ -71,7 +72,7 @@ const ArrayItem = ({
       </Grid>
     </Grid>
   );
-};
+}, ({remove: _prevRemove, ...prev}, {remove: _nextRemove, ...next}) => isEqual(prev, next));
 
 ArrayItem.propTypes = {
   name: PropTypes.string,

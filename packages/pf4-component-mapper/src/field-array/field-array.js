@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, memo } from 'react';
+import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import { useFormApi, FieldArray } from '@data-driven-forms/react-form-renderer';
 
@@ -9,7 +10,7 @@ import { AddCircleOIcon, CloseIcon } from '@patternfly/react-icons';
 import './final-form-array.css';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
-const ArrayItem = ({ fields, fieldIndex, name, remove, length, minItems }) => {
+const ArrayItem = memo(({ fields, fieldIndex, name, remove, length, minItems }) => {
   const { renderForm } = useFormApi();
 
   const widths = {
@@ -60,7 +61,7 @@ const ArrayItem = ({ fields, fieldIndex, name, remove, length, minItems }) => {
       </Grid>
     </React.Fragment>
   );
-};
+}, ({remove: _prevRemove, ...prev}, {remove: _nextRemove, ...next}) => isEqual(prev, next));
 
 ArrayItem.propTypes = {
   name: PropTypes.string,
