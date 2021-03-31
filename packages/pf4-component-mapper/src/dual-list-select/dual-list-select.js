@@ -4,6 +4,8 @@ import { DualListSelector } from '@patternfly/react-core';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import isEqual from 'lodash/isEqual';
 
+import DualListTree from '../dual-list-tree-select/dual-list-tree-select';
+
 import FormGroup from '../form-group';
 import DualListContext from '../dual-list-context';
 
@@ -124,4 +126,10 @@ DualList.propTypes = {
   isSortable: PropTypes.bool
 };
 
-export default DualList;
+const DualListWrapper = (props) => props.isTree ? <DualListTree {...props} /> : <DualList {...props}/>;
+
+DualListWrapper.propTypes = {
+  isTree: PropTypes.bool,
+};
+
+export default DualListWrapper;
