@@ -69,10 +69,10 @@ const FormConditionWrapper = ({ condition, children, field }) => {
   if (condition) {
     const triggers = getConditionTriggers(condition, field);
     return (
-    <ConditionTriggerDetector triggers={triggers} condition={condition} field={field}>
-      {children}
-    </ConditionTriggerDetector>
-  );
+      <ConditionTriggerDetector triggers={triggers} condition={condition} field={field}>
+        {children}
+      </ConditionTriggerDetector>
+    );
   }
 
   return children;
