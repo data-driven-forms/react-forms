@@ -30,6 +30,10 @@ describe('useFieldApi', () => {
             <form onSubmit={handleSubmit}>
               <RendererContext.Provider
                 value={{
+                  formOptions: {
+                    internalRegisterField: jest.fn(),
+                    internalUnRegisterField: jest.fn()
+                  },
                   validatorMapper: { required: () => (value) => (!value ? 'required' : undefined) }
                 }}
               >
@@ -182,7 +186,10 @@ describe('useFieldApi', () => {
             <RendererContext.Provider
               value={{
                 validatorMapper: { required: () => (value) => (!value ? 'required' : undefined), url: () => jest.fn() },
-                formOptions: {}
+                formOptions: {
+                  internalRegisterField: jest.fn(),
+                  internalUnRegisterField: jest.fn()
+                }
               }}
             >
               <TestDummy validate={validate} />
@@ -203,7 +210,7 @@ describe('useFieldApi', () => {
 
   it('omits FieldProps', () => {
     const parse = jest.fn().mockImplementation((value) => value);
-    initialProps = {...initialProps, FieldProps: { parse }};
+    initialProps = { ...initialProps, FieldProps: { parse } };
 
     const wrapper = mount(<WrapperComponent {...initialProps} />);
 

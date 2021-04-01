@@ -3,7 +3,7 @@ import { required, length, pattern, numericality } from '../validators/validator
 import url from '../validators/url-validator';
 import validatorTypes from '../validator-types';
 
-export default {
+const validatorMapper = {
   [validatorTypes.REQUIRED]: required,
   [validatorTypes.MIN_LENGTH]: ({ threshold, ...rest }) => length({ minimum: threshold, ...rest }),
   [validatorTypes.MAX_LENGTH]: ({ threshold, ...rest }) => length({ maximum: threshold, ...rest }),
@@ -16,3 +16,5 @@ export default {
     numericality({ [includeThreshold ? '>=' : '>']: value, ...rest }),
   [validatorTypes.URL]: ({ message, ...options }) => pattern({ pattern: url(options), message: message || 'String is not URL.' })
 };
+
+export default validatorMapper;

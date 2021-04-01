@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import FormRenderer from '../../form-renderer';
@@ -6,6 +7,24 @@ import SchemaErrorComponent from '../../form-renderer/schema-error-component';
 import componentTypes from '../../component-types';
 import FormTemplate from '../../../../../__mocks__/mock-form-template';
 import useFieldApi from '../../use-field-api';
+import useFormApi from '../../use-form-api';
+
+const PropsSpy = () => <Fragment />;
+const ContextSpy = ({ registerSpy, spyFF, ...props }) => {
+  useFieldApi(props);
+  const { getRegisteredFields, ffGetRegisteredFields, ...formApi } = useFormApi();
+  return (
+    <Fragment>
+      <button onClick={() => registerSpy(spyFF ? ffGetRegisteredFields() : getRegisteredFields())} id={props.name}></button>
+      <PropsSpy {...formApi} />
+    </Fragment>
+  );
+};
+
+const DuplicatedField = ({ name, ...props }) => {
+  useFieldApi({ name: name.split('@').pop(), ...props });
+  return <Fragment />;
+};
 
 const TextField = (props) => {
   const { input } = useFieldApi(props);
@@ -180,5 +199,126 @@ describe('<FormRenderer />', () => {
       wrapper.find('form').simulate('submit');
       expect(onSubmit).toHaveBeenCalledWith({ 'initial-convert': [{ value: 5 }, { value: 3 }, { value: 11 }, { value: 999 }] });
     });
+  });
+
+  it('should register new field to renderer context', () => {
+    const registerSpy = jest.fn();
+    const wrapper = mount(
+      <FormRenderer
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        componentMapper={{
+          spy: { component: ContextSpy, registerSpy }
+        }}
+        schema={{ fields: [{ component: 'spy', name: 'should-show' }] }}
+        onSubmit={jest.fn()}
+      />
+    );
+
+    const button = wrapper.find('button#should-show');
+    act(() => {
+      button.simulate('click');
+    });
+    expect(registerSpy).toHaveBeenCalledWith(['should-show']);
+  });
+
+  it('should un-register field after unmount', () => {
+    const registerSpy = jest.fn();
+    const wrapper = mount(
+      <FormRenderer
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        componentMapper={{
+          ...componentMapper,
+          spy: { component: ContextSpy, registerSpy }
+        }}
+        initialValues={{ x: 'a' }}
+        schema={{
+          fields: [
+            { component: 'spy', name: 'trigger' },
+            { component: 'text-field', name: 'x' },
+            { component: 'text-field', name: 'field-1', condition: { when: 'x', is: 'a' } }
+          ]
+        }}
+        onSubmit={jest.fn()}
+      />
+    );
+
+    const button = wrapper.find('button#trigger');
+    act(() => {
+      button.simulate('click');
+    });
+    expect(registerSpy).toHaveBeenCalledWith(['trigger', 'x', 'field-1']);
+    act(() => {
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: '' } });
+    });
+    act(() => {
+      button.simulate('click');
+    });
+    expect(registerSpy).toHaveBeenCalledWith(['trigger', 'x']);
+  });
+
+  it('should not un-register field after unmount with multiple fields coppies', () => {
+    const registerSpy = jest.fn();
+    const wrapper = mount(
+      <FormRenderer
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        componentMapper={{
+          ...componentMapper,
+          spy: { component: ContextSpy, registerSpy },
+          duplicate: DuplicatedField
+        }}
+        initialValues={{ x: 'a' }}
+        schema={{
+          fields: [
+            { component: 'spy', name: 'trigger' },
+            { component: 'text-field', name: 'x' },
+            { component: 'text-field', name: 'field-1', condition: { when: 'x', is: 'a' } },
+            { component: 'duplicate', name: 'dupe@field-1' }
+          ]
+        }}
+        onSubmit={jest.fn()}
+      />
+    );
+
+    const button = wrapper.find('button#trigger');
+    act(() => {
+      button.simulate('click');
+    });
+    expect(registerSpy).toHaveBeenCalledWith(['trigger', 'x', 'field-1']);
+    act(() => {
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: '' } });
+    });
+    act(() => {
+      button.simulate('click');
+    });
+    expect(registerSpy).toHaveBeenCalledWith(['trigger', 'x', 'field-1']);
+  });
+
+  it('should skip field registration', () => {
+    const registerSpy = jest.fn();
+    const wrapper = mount(
+      <FormRenderer
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        componentMapper={{
+          ...componentMapper,
+          spy: { component: ContextSpy, registerSpy },
+          duplicate: DuplicatedField
+        }}
+        initialValues={{ x: 'a' }}
+        schema={{ fields: [{ component: 'spy', name: 'trigger', skipRegistration: true }] }}
+        onSubmit={jest.fn()}
+      />
+    );
+
+    const button = wrapper.find('button#trigger');
+    act(() => {
+      button.simulate('click');
+    });
+    expect(registerSpy).toHaveBeenCalledWith([]);
   });
 });

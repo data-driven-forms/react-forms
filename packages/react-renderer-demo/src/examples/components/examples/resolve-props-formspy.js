@@ -6,38 +6,31 @@ import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template'
 import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 import Checkbox from '@data-driven-forms/mui-component-mapper/checkbox';
 
-const TextFieldWrapped = (props) => <FormSpy subscription={{values: true}}>
-    {() => <TextField {...props} />}
-</FormSpy>;
+const TextFieldWrapped = (props) => <FormSpy subscription={{ values: true }}>{() => <TextField {...props} />}</FormSpy>;
 
 const schema = {
-  fields: [{
-        name: 'custom_email',
-        label: 'Use custom email',
-        component: componentTypes.CHECKBOX,
+  fields: [
+    {
+      name: 'custom_email',
+      label: 'Use custom email',
+      component: componentTypes.CHECKBOX
     },
     {
-        name: 'email',
-        label: 'Email',
-        component: 'text-field-wrapper',
-        resolveProps: (_props, _field, formOptions) =>
-            formOptions.getState().values.custom_email
-            ? {isDisabled: false}
-            : {isDisabled: true}
-    }]
+      name: 'email',
+      label: 'Email',
+      component: 'text-field-wrapper',
+      resolveProps: (_props, _field, formOptions) => (formOptions.getState().values.custom_email ? { isDisabled: false } : { isDisabled: true })
+    }
+  ]
 };
 
 const componentMapper = {
-    [componentTypes.CHECKBOX]: Checkbox,
-    'text-field-wrapper': TextFieldWrapped,
+  [componentTypes.CHECKBOX]: Checkbox,
+  'text-field-wrapper': TextFieldWrapped
 };
 
-const ResolvePropsFormSpy = () =>
-      <FormRenderer
-        FormTemplate={FormTemplate}
-        componentMapper={componentMapper}
-        schema={schema}
-        onSubmit={console.log}
-      />;
+const ResolvePropsFormSpy = () => (
+  <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
+);
 
 export default ResolvePropsFormSpy;

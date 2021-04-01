@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form as DDFForm } from '@data-driven-forms/react-form-renderer';
+import { Form as DDFForm, RendererContext } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
 import { Slider as AntSlider, Form as OriginalForm } from 'antd';
 import Slider from '../slider';
@@ -7,7 +7,9 @@ import FormGroup from '../form-group';
 
 const Form = (props) => (
   <OriginalForm>
-    <DDFForm onSubmit={jest.fn()} {...props} />
+    <RendererContext.Provider value={{ formOptions: { internalRegisterField: jest.fn(), internalUnRegisterField: jest.fn() } }}>
+      <DDFForm onSubmit={jest.fn()} {...props} />
+    </RendererContext.Provider>
   </OriginalForm>
 );
 

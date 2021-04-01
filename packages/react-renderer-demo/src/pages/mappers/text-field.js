@@ -25,4 +25,6 @@ const variants = [
   }
 ];
 
-export default () => <ComponentText schema={schema} variants={variants} linkText="Text Field" />;
+const TextField = () => <ComponentText schema={schema} variants={variants} linkText="Text Field" />;
+
+export default TextField;

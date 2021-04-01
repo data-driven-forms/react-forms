@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Form from '../form';
 import PropTypes from 'prop-types';
 
@@ -23,7 +23,20 @@ const FormRenderer = ({
   schemaValidatorMapper,
   ...props
 }) => {
+  const registeredFields = useRef({});
   let schemaError;
+
+  const setRegisteredFields = (fn) => (registeredFields.current = fn({ ...registeredFields.current }));
+  const internalRegisterField = (name) => {
+    setRegisteredFields((prev) => (prev[name] ? { ...prev, [name]: prev[name] + 1 } : { ...prev, [name]: 1 }));
+  };
+
+  const internalUnRegisterField = (name) => {
+    setRegisteredFields(({ [name]: currentField, ...prev }) => (currentField && currentField > 1 ? { [name]: currentField - 1, ...prev } : prev));
+  };
+
+  const internalGetRegisteredFields = () =>
+    Object.entries(registeredFields.current).reduce((acc, [name, value]) => (value > 0 ? [...acc, name] : acc), []);
 
   const validatorMapperMerged = { ...defaultValidatorMapper, ...validatorMapper };
 
@@ -33,7 +46,9 @@ const FormRenderer = ({
     defaultSchemaValidator(schema, componentMapper, validatorTypes, actionTypes, schemaValidatorMapper);
   } catch (error) {
     schemaError = error;
+    // eslint-disable-next-line no-console
     console.error(error);
+    // eslint-disable-next-line no-console
     console.log('error: ', error.message);
   }
 
@@ -64,7 +79,11 @@ const FormRenderer = ({
               getState,
               reset,
               renderForm,
-              ...formOptions
+              ...formOptions,
+              internalRegisterField,
+              internalUnRegisterField,
+              ffGetRegisteredFields: formOptions.getRegisteredFields,
+              getRegisteredFields: internalGetRegisteredFields
             }
           }}
         >
@@ -84,9 +103,9 @@ FormRenderer.propTypes = {
   subscription: PropTypes.shape({ [PropTypes.string]: PropTypes.bool }),
   clearedValue: PropTypes.any,
   componentMapper: PropTypes.shape({
-    [PropTypes.string]: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func])
+    [PropTypes.string]: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func, PropTypes.elementType])
   }).isRequired,
-  FormTemplate: PropTypes.func.isRequired,
+  FormTemplate: PropTypes.elementType.isRequired,
   validatorMapper: PropTypes.shape({
     [PropTypes.string]: PropTypes.func
   }),

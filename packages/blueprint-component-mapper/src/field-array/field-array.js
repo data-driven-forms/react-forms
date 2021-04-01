@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
+import React, { memo, useContext } from 'react';
 import PropTypes from 'prop-types';
+import isEqual from 'lodash/isEqual';
 import clsx from 'clsx';
 import { useFieldApi, useFormApi, FieldArray as FieldArrayFF } from '@data-driven-forms/react-form-renderer';
 import { createUseStyles } from 'react-jss';
@@ -19,30 +20,33 @@ const useStyles = createUseStyles({
   }
 });
 
-const ArrayItem = ({ remove, fields, name, removeLabel, ArrayItemProps, RemoveButtonProps, disabledRemove }) => {
-  const formOptions = useFormApi();
-  const { remove: removeCss } = useStyles();
+const ArrayItem = memo(
+  ({ remove, fields, name, removeLabel, ArrayItemProps, RemoveButtonProps, disabledRemove }) => {
+    const formOptions = useFormApi();
+    const { remove: removeCss } = useStyles();
 
-  const editedFields = fields.map((field) => ({
-    ...field,
-    ...(field.name ? { name: `${name}.${field.name}` } : { name })
-  }));
+    const editedFields = fields.map((field) => ({
+      ...field,
+      ...(field.name ? { name: `${name}.${field.name}` } : { name })
+    }));
 
-  return (
-    <div {...ArrayItemProps}>
-      {formOptions.renderForm(editedFields, formOptions)}
-      <Button
-        onClick={remove}
-        intent={Intent.DANGER}
-        disabled={disabledRemove}
-        {...RemoveButtonProps}
-        className={clsx(removeCss, RemoveButtonProps && RemoveButtonProps.className)}
-      >
-        {removeLabel}
-      </Button>
-    </div>
-  );
-};
+    return (
+      <div {...ArrayItemProps}>
+        {formOptions.renderForm(editedFields, formOptions)}
+        <Button
+          onClick={remove}
+          intent={Intent.DANGER}
+          disabled={disabledRemove}
+          {...RemoveButtonProps}
+          className={clsx(removeCss, RemoveButtonProps && RemoveButtonProps.className)}
+        >
+          {removeLabel}
+        </Button>
+      </div>
+    );
+  },
+  ({ remove: _prevRemove, ...prev }, { remove: _nextRemove, ...next }) => isEqual(prev, next)
+);
 
 ArrayItem.propTypes = {
   remove: PropTypes.func,

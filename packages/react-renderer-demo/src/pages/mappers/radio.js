@@ -26,4 +26,6 @@ const variants = [
   }
 ];
 
-export default () => <ComponentText schema={schema} variants={variants} linkText="Radio" />;
+const Radio = () => <ComponentText schema={schema} variants={variants} linkText="Radio" />;
+
+export default Radio;

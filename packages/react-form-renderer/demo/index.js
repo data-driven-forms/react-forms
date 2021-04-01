@@ -1,56 +1,140 @@
 /* eslint-disable camelcase */
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import { FormRenderer, useFieldApi, componentTypes, validatorTypes } from '../src';
-import componentMapper from './form-fields-mapper';
-import FormTemplate from './form-template';
+import { FormRenderer, useFieldApi, componentTypes, useFormApi } from '../src';
+import MuiTextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
 
-// eslint-disable-next-line react/prop-types
-const TextField = (props) => {
-  const { input, label, isRequired } = useFieldApi(props);
+import { Button as MUIButton, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+import FormTemplate from '@data-driven-forms/common/form-template';
+
+const useStyles = makeStyles(() => ({
+  buttonGroup: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    '&>button:not(last-child)': {
+      marginLeft: 8
+    }
+  }
+}));
+
+const Form = ({ children, GridContainerProps, GridProps, ...props }) => (
+  <Grid item xs={12} {...GridProps}>
+    <form noValidate {...props}>
+      <Grid container item spacing={2} xs={12} {...GridContainerProps}>
+        {children}
+      </Grid>
+    </form>
+  </Grid>
+);
+
+Form.propTypes = {
+  children: PropTypes.node,
+  GridProps: PropTypes.object,
+  GridContainerProps: PropTypes.object
+};
+
+const Description = ({ children, GridProps, ...props }) => (
+  <Grid item xs={12} {...GridProps}>
+    <Typography variant="body1" gutterBottom {...props}>
+      {children}
+    </Typography>
+  </Grid>
+);
+
+Description.propTypes = {
+  children: PropTypes.node,
+  GridProps: PropTypes.object
+};
+
+const Title = ({ children, GridProps, ...props }) => (
+  <Grid item xs={12} {...GridProps}>
+    <Typography variant="h3" gutterBottom {...props}>
+      {children}
+    </Typography>
+  </Grid>
+);
+
+Title.propTypes = {
+  children: PropTypes.node,
+  GridProps: PropTypes.object
+};
+
+const ButtonGroup = ({ children, GridProps, ...props }) => {
+  const classes = useStyles();
   return (
-    <div>
-      <label>
-        {label}
-        {isRequired && '*'}
-      </label>
-      <input {...input} />
-    </div>
+    <Grid item xs={12} {...GridProps}>
+      <div className={classes.buttonGroup} {...props}>
+        {children}
+      </div>
+    </Grid>
   );
 };
 
-let key;
+ButtonGroup.propTypes = {
+  children: PropTypes.node,
+  GridProps: PropTypes.object
+};
 
-const fileSchema = {
-  fields: [
-    {
-      component: 'text-field',
-      name: 'required',
-      label: 'required'
-    },
-    {
-      component: 'text-field',
-      name: 'field',
-      label: 'field',
-      resolveProps: (y, x, formOptions) => {
-        const value = formOptions.getFieldState('required')?.value;
+const Button = ({ label, variant, children, buttonType, ...props }) => (
+  <MUIButton color={variant} variant="contained" {...props}>
+    {label || children}
+  </MUIButton>
+);
 
-        //console.log({ value });
+Button.propTypes = {
+  children: PropTypes.node,
+  label: PropTypes.node,
+  variant: PropTypes.string,
+  buttonType: PropTypes.string
+};
 
-        if (value) {
-          key = key || Date.now();
+const MuiFormTemplate = (props) => (
+  <FormTemplate FormWrapper={Form} Button={Button} ButtonGroup={ButtonGroup} Title={Title} Description={Description} {...props} />
+);
 
-          return {
-            isRequired: true,
-            validate: [{ type: validatorTypes.REQUIRED }],
-            key
-          };
-        } else {
-          key = undefined;
-        }
+export default MuiFormTemplate;
+
+// eslint-disable-next-line react/prop-types
+const TextField = (props) => {
+  const { input, label, isRequired, WrapperProps } = useFieldApi(props);
+  return (
+    <Grid item xs={12} {...WrapperProps}>
+      <MuiTextField {...input} label={label} required={isRequired} />
+    </Grid>
+  );
+};
+
+const Spy = () => {
+  const formApi = useFormApi();
+  console.log(formApi);
+  return null;
+};
+
+const fields = [{
+  name: 'optionsSpy',
+  component: 'spy',
+}];
+
+for (let index = 0; index < 10; index++) {
+  fields.push({
+    name: `field-${index}`,
+    label: `Text field ${index}`,
+    component: 'text-field',
+    ...(index > 0 ? {
+      condition: {
+        when: `field-${index - 1}`,
+        isEmpty: true
       }
-    }
-  ]
+    } : {})
+  });
+}
+
+const schema = {
+  fields
 };
 
 const App = () => {
@@ -59,13 +143,13 @@ const App = () => {
     <div style={{ padding: 20 }}>
       <FormRenderer
         componentMapper={{
-          ...componentMapper,
-          [componentTypes.TEXT_FIELD]: TextField
+          [componentTypes.TEXT_FIELD]: TextField,
+          spy: Spy
         }}
-        onSubmit={(values, ...args) => console.log(values, args)}
-        FormTemplate={FormTemplate}
-        schema={fileSchema}
-        subscription={{ values: true }}
+        onSubmit={console.log}
+        FormTemplate={MuiFormTemplate}
+        schema={schema}
+        subscription={{ pristine: false }}
       />
     </div>
   );

@@ -88,6 +88,34 @@ describe('DualListSelect', () => {
           <span key="pigeons">pigeons</span>
         ]
       }
+    ],
+    [
+      'tree variant',
+      {
+        isTree: true,
+        options: [
+          {
+            value: 'cats',
+            label: 'cats'
+          },
+          {
+            value: 'cats_1',
+            label: 'cats_1'
+          },
+          {
+            value: 'cats_2',
+            label: 'cats_2'
+          },
+          {
+            value: 'zebras',
+            label: 'zebras'
+          },
+          {
+            value: 'pigeons',
+            label: 'pigeons'
+          }
+        ]
+      }
     ]
   ].forEach(([title, props]) => {
     describe(`${title} values`, () => {
@@ -294,10 +322,12 @@ describe('DualListSelect', () => {
         ).toHaveLength(schema.fields[0].options.length);
         await act(async () => {
           wrapper
+            .find('.pf-c-dual-list-selector__tools-filter')
             .find('input')
             .last()
             .instance().value = 'cats';
           wrapper
+            .find('.pf-c-dual-list-selector__tools-filter')
             .find('input')
             .last()
             .simulate('change');

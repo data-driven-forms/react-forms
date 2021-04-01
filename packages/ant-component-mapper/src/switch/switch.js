@@ -23,7 +23,7 @@ export const Switch = (props) => {
     ...props,
     type: 'checkbox'
   });
-  const { name, value, onChange, onBlur } = input;
+  const { name, checked, onChange, onBlur } = input;
 
   return (
     <FormGroup
@@ -37,9 +37,9 @@ export const Switch = (props) => {
     >
       <AntSwitch
         {...rest}
-        defaultValue={input.value ? input.value : undefined}
+        defaultValue={input.checked ? input.checked : undefined}
         onChange={onChange}
-        checked={value}
+        checked={checked}
         name={name}
         onClick={onBlur}
         checkedChildren={onText}

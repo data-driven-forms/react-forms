@@ -1,12 +1,17 @@
 import React, { useContext, memo } from 'react';
 import PropTypes from 'prop-types';
+import set from 'lodash/set';
+import { Field } from '@data-driven-forms/form-state-manager';
 import RendererContext from '../renderer-context';
 import Condition from '../condition';
-import FormSpy from '../form-spy';
+import getConditionTriggers from '../get-condition-triggers';
 
-const FormFieldHideWrapper = memo(({ hideField, children }) => (hideField ? <div hidden>{children}</div> : children), (prev, next) => {
-  return prev.hideField === next.hideField;
-});
+const FormFieldHideWrapper = memo(
+  ({ hideField, children }) => (hideField ? <div hidden>{children}</div> : children),
+  (prev, next) => {
+    return prev.hideField === next.hideField;
+  }
+);
 
 FormFieldHideWrapper.propTypes = {
   hideField: PropTypes.bool,
@@ -17,18 +22,61 @@ FormFieldHideWrapper.defaultProps = {
   hideField: false
 };
 
-const FormConditionWrapper = ({ condition, children, field }) =>
-  condition ? (
-    <FormSpy subscription={{ values: true }}>
-      {({ values }) => (
-        <Condition condition={condition} values={values} field={field}>
+const ConditionTriggerWrapper = ({ condition, values, children, field }) => (
+  <Condition condition={condition} values={values} field={field}>
+    {children}
+  </Condition>
+);
+
+ConditionTriggerWrapper.propTypes = {
+  condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  children: PropTypes.node.isRequired,
+  field: PropTypes.object,
+  values: PropTypes.object.isRequired
+};
+
+const ConditionTriggerDetector = ({ values = {}, triggers = [], children, condition, field }) => {
+  const internalTriggers = [...triggers];
+  if (internalTriggers.length === 0) {
+    return (
+      <ConditionTriggerWrapper condition={condition} values={values} field={field}>
+        {children}
+      </ConditionTriggerWrapper>
+    );
+  }
+
+  const name = internalTriggers.shift();
+  return (
+    <Field name={name} subscription={{ value: true }}>
+      {({ input: { value } }) => (
+        <ConditionTriggerDetector triggers={[...internalTriggers]} values={set({ ...values }, name, value)} condition={condition} field={field}>
           {children}
-        </Condition>
+        </ConditionTriggerDetector>
       )}
-    </FormSpy>
-  ) : (
-    children
+    </Field>
   );
+};
+
+ConditionTriggerDetector.propTypes = {
+  values: PropTypes.object,
+  triggers: PropTypes.arrayOf(PropTypes.string),
+  children: PropTypes.node,
+  condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  field: PropTypes.object.isRequired
+};
+
+const FormConditionWrapper = ({ condition, children, field }) => {
+  if (condition) {
+    const triggers = getConditionTriggers(condition, field);
+    return (
+      <ConditionTriggerDetector triggers={triggers} condition={condition} field={field}>
+        {children}
+      </ConditionTriggerDetector>
+    );
+  }
+
+  return children;
+};
 
 FormConditionWrapper.propTypes = {
   condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),

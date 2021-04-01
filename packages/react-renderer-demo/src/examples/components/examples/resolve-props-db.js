@@ -5,44 +5,44 @@ import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template'
 import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 import Checkbox from '@data-driven-forms/mui-component-mapper/checkbox';
 
-const isEnabled = () => (_props, _field, formOptions) =>
-  formOptions.getState().values.custom_email
-  ? {isDisabled: false}
-  : {isDisabled: true};
+const isEnabled = () => (_props, _field, formOptions) => (formOptions.getState().values.custom_email ? { isDisabled: false } : { isDisabled: true });
 
 const actionMapper = {
   isEnabled
 };
 
 const schema = {
-  fields: [{
-        name: 'custom_email',
-        label: 'Use custom email',
-        component: 'checkbox',
+  fields: [
+    {
+      name: 'custom_email',
+      label: 'Use custom email',
+      component: 'checkbox'
     },
     {
-        name: 'email',
-        label: 'Email',
-        component: 'text-field',
-        actions: {
-          resolveProps: ['isEnabled']
-        }
-    }]
+      name: 'email',
+      label: 'Email',
+      component: 'text-field',
+      actions: {
+        resolveProps: ['isEnabled']
+      }
+    }
+  ]
 };
 
 const componentMapper = {
-    [componentTypes.CHECKBOX]: Checkbox,
-    [componentTypes.TEXT_FIELD]: TextField,
+  [componentTypes.CHECKBOX]: Checkbox,
+  [componentTypes.TEXT_FIELD]: TextField
 };
 
-const ResolvePropsDb = () =>
-      <FormRenderer
-        FormTemplate={FormTemplate}
-        componentMapper={componentMapper}
-        schema={schema}
-        onSubmit={console.log}
-        subscription={{ values: true }}
-        actionMapper={actionMapper}
-      />;
+const ResolvePropsDb = () => (
+  <FormRenderer
+    FormTemplate={FormTemplate}
+    componentMapper={componentMapper}
+    schema={schema}
+    onSubmit={console.log}
+    subscription={{ values: true }}
+    actionMapper={actionMapper}
+  />
+);
 
 export default ResolvePropsDb;
