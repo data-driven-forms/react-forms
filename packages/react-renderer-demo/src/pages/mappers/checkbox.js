@@ -21,4 +21,6 @@ const variants = [
   }
 ];
 
-export default () => <ComponentText schema={schema} variants={variants} linkText="Checkbox" />;
+const Checkbox = () => <ComponentText schema={schema} variants={variants} linkText="Checkbox" />;
+
+export default Checkbox;

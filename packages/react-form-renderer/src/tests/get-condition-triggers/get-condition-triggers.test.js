@@ -22,14 +22,14 @@ describe('getConditionTriggers', () => {
   });
 
   test('should extract name from and condition definition', () => {
-    expect(getConditionTriggers({ and: [{ when: 'a' }, {when: ['b', 'c']}, { when: () => 'd' }] })).toEqual(['a', 'b', 'c', 'd']);
+    expect(getConditionTriggers({ and: [{ when: 'a' }, { when: ['b', 'c'] }, { when: () => 'd' }] })).toEqual(['a', 'b', 'c', 'd']);
   });
 
   test('should extract name from or condition definition', () => {
-    expect(getConditionTriggers({ or: [{ when: 'a' }, {when: ['b', 'c']}, { when: () => 'd' }] })).toEqual(['a', 'b', 'c', 'd']);
+    expect(getConditionTriggers({ or: [{ when: 'a' }, { when: ['b', 'c'] }, { when: () => 'd' }] })).toEqual(['a', 'b', 'c', 'd']);
   });
 
   test('should extract name from array of conditions', () => {
-    expect(getConditionTriggers([{ when: 'a' }, {when: 'b'}])).toEqual(['a', 'b']);
+    expect(getConditionTriggers([{ when: 'a' }, { when: 'b' }])).toEqual(['a', 'b']);
   });
 });

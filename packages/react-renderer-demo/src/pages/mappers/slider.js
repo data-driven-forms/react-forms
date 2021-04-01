@@ -47,4 +47,6 @@ const variants = [
   }
 ];
 
-export default () => <ComponentText schema={schema} variants={variants} linkText="Slider" />;
+const Slider = () => <ComponentText schema={schema} variants={variants} linkText="Slider" />;
+
+export default Slider;

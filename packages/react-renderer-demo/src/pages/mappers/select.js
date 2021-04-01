@@ -51,4 +51,6 @@ const variants = [
   }
 ];
 
-export default () => <ComponentText schema={schema} variants={variants} linkText="Select" />;
+const Select = () => <ComponentText schema={schema} variants={variants} linkText="Select" />;
+
+export default Select;

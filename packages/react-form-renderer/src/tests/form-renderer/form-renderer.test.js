@@ -10,7 +10,7 @@ import useFieldApi from '../../use-field-api';
 import useFormApi from '../../use-form-api';
 
 const PropsSpy = () => <Fragment />;
-const ContextSpy = ({registerSpy, spyFF, ...props}) => {
+const ContextSpy = ({ registerSpy, spyFF, ...props }) => {
   useFieldApi(props);
   const { getRegisteredFields, ffGetRegisteredFields, ...formApi } = useFormApi();
   return (
@@ -21,8 +21,8 @@ const ContextSpy = ({registerSpy, spyFF, ...props}) => {
   );
 };
 
-const DuplicatedField = ({name, ...props}) => {
-  useFieldApi({name: name.split('@').pop(), ...props});
+const DuplicatedField = ({ name, ...props }) => {
+  useFieldApi({ name: name.split('@').pop(), ...props });
   return <Fragment />;
 };
 
@@ -207,9 +207,9 @@ describe('<FormRenderer />', () => {
       <FormRenderer
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
-          spy: {component: ContextSpy, registerSpy}
+          spy: { component: ContextSpy, registerSpy }
         }}
-        schema={{ fields: [{component: 'spy', name: 'should-show'}] }}
+        schema={{ fields: [{ component: 'spy', name: 'should-show' }] }}
         onSubmit={jest.fn()}
       />
     );
@@ -228,14 +228,16 @@ describe('<FormRenderer />', () => {
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
           ...componentMapper,
-          spy: {component: ContextSpy, registerSpy}
+          spy: { component: ContextSpy, registerSpy }
         }}
         initialValues={{ x: 'a' }}
-        schema={{ fields: [
-          {component: 'spy', name: 'trigger'},
-          {component: 'text-field', name: 'x'},
-          {component: 'text-field', name: 'field-1', condition: {when: 'x', is: 'a'}}
-        ] }}
+        schema={{
+          fields: [
+            { component: 'spy', name: 'trigger' },
+            { component: 'text-field', name: 'x' },
+            { component: 'text-field', name: 'field-1', condition: { when: 'x', is: 'a' } }
+          ]
+        }}
         onSubmit={jest.fn()}
       />
     );
@@ -246,7 +248,10 @@ describe('<FormRenderer />', () => {
     });
     expect(registerSpy).toHaveBeenCalledWith(['trigger', 'x', 'field-1']);
     act(() => {
-      wrapper.find('input').first().simulate('change', { target: { value: '' } });
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: '' } });
     });
     act(() => {
       button.simulate('click');
@@ -261,16 +266,18 @@ describe('<FormRenderer />', () => {
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
           ...componentMapper,
-          spy: {component: ContextSpy, registerSpy},
-          duplicate: DuplicatedField,
+          spy: { component: ContextSpy, registerSpy },
+          duplicate: DuplicatedField
         }}
         initialValues={{ x: 'a' }}
-        schema={{ fields: [
-          {component: 'spy', name: 'trigger'},
-          {component: 'text-field', name: 'x'},
-          {component: 'text-field', name: 'field-1', condition: {when: 'x', is: 'a'}},
-          {component: 'duplicate', name: 'dupe@field-1'}
-        ] }}
+        schema={{
+          fields: [
+            { component: 'spy', name: 'trigger' },
+            { component: 'text-field', name: 'x' },
+            { component: 'text-field', name: 'field-1', condition: { when: 'x', is: 'a' } },
+            { component: 'duplicate', name: 'dupe@field-1' }
+          ]
+        }}
         onSubmit={jest.fn()}
       />
     );
@@ -281,7 +288,10 @@ describe('<FormRenderer />', () => {
     });
     expect(registerSpy).toHaveBeenCalledWith(['trigger', 'x', 'field-1']);
     act(() => {
-      wrapper.find('input').first().simulate('change', { target: { value: '' } });
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', { target: { value: '' } });
     });
     act(() => {
       button.simulate('click');
@@ -296,13 +306,11 @@ describe('<FormRenderer />', () => {
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
           ...componentMapper,
-          spy: {component: ContextSpy, registerSpy},
-          duplicate: DuplicatedField,
+          spy: { component: ContextSpy, registerSpy },
+          duplicate: DuplicatedField
         }}
         initialValues={{ x: 'a' }}
-        schema={{ fields: [
-          {component: 'spy', name: 'trigger', skipRegistration: true},
-        ] }}
+        schema={{ fields: [{ component: 'spy', name: 'trigger', skipRegistration: true }] }}
         onSubmit={jest.fn()}
       />
     );

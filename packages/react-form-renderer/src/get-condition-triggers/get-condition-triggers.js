@@ -18,7 +18,7 @@ const getConditionTriggers = memoize((condition, field) => {
     return condition.reduce((acc, item) => [...acc, ...getConditionTriggers(item, field)], []);
   }
 
-  const {when, ...rest} = condition;
+  const { when, ...rest } = condition;
   const nestedKeys = ['and', 'or', 'sequence'];
   if (typeof when === 'string') {
     triggers = [...triggers, when];
@@ -29,7 +29,7 @@ const getConditionTriggers = memoize((condition, field) => {
   }
 
   if (Array.isArray(when)) {
-    when.forEach(item => {
+    when.forEach((item) => {
       if (typeof item === 'string') {
         triggers = [...triggers, item];
       }
@@ -40,11 +40,11 @@ const getConditionTriggers = memoize((condition, field) => {
     });
   }
 
-  nestedKeys.forEach(key => {
+  nestedKeys.forEach((key) => {
     if (typeof rest[key] !== 'undefined') {
-    rest[key].forEach(item => {
-      triggers = [...triggers, ...getConditionTriggers(item, field)];
-    });
+      rest[key].forEach((item) => {
+        triggers = [...triggers, ...getConditionTriggers(item, field)];
+      });
     }
   });
 

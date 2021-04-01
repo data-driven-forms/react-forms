@@ -32,13 +32,7 @@ const TimePicker = (props) => {
       id={id || input.name}
       FormGroupProps={FormGroupProps}
     >
-      <PF4TimePicker
-        {...input}
-        defaultTime={input.value}
-        {...rest}
-        id={id || input.name}
-        isDisabled={isDisabled || isReadOnly}
-      />
+      <PF4TimePicker {...input} defaultTime={input.value} {...rest} id={id || input.name} isDisabled={isDisabled || isReadOnly} />
     </FormGroup>
   );
 };

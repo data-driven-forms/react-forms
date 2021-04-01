@@ -30,4 +30,6 @@ const variants = [
   }
 ];
 
-export default () => <ComponentText schema={schema} variants={variants} linkText="Subform" />;
+const SubForm = () => <ComponentText schema={schema} variants={variants} linkText="Subform" />;
+
+export default SubForm;

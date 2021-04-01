@@ -84,31 +84,14 @@ const createFieldProps = (name, formOptions) => {
   };
 };
 
-const useFieldApi = ({
-  name,
-  resolveProps,
-  skipRegistration = false,
-  ...props
-}) => {
+const useFieldApi = ({ name, resolveProps, skipRegistration = false, ...props }) => {
   const { validatorMapper, formOptions } = useContext(RendererContext);
   const [warning, setWarning] = useState();
 
-  const resolvedProps = resolveProps
-    ? resolveProps(props, createFieldProps(name, formOptions), formOptions) || {}
-    : {};
+  const resolvedProps = resolveProps ? resolveProps(props, createFieldProps(name, formOptions), formOptions) || {} : {};
 
-  const combinedProps = { ...props, ...resolvedProps};
-  const {
-    initializeOnMount,
-    component,
-    render,
-    validate,
-    useWarnings,
-    clearOnUnmount,
-    dataType,
-    FieldProps,
-    ...rest
-  } = combinedProps;
+  const combinedProps = { ...props, ...resolvedProps };
+  const { initializeOnMount, component, render, validate, useWarnings, clearOnUnmount, dataType, FieldProps, ...rest } = combinedProps;
 
   const [{ type, initialValue, validate: stateValidate, arrayValidator }, dispatch] = useReducer(
     reducer,
@@ -121,14 +104,8 @@ const useFieldApi = ({
   const enhancedProps = {
     dataType,
     type: combinedProps.type,
-    ...(Object.prototype.hasOwnProperty.call(combinedProps, 'initialValue')
-      ? { initialValue: combinedProps.initialValue }
-      : {}
-    ),
-    ...(Object.prototype.hasOwnProperty.call(combinedProps, 'value')
-      ? { value: combinedProps.value }
-      : {}
-    ),
+    ...(Object.prototype.hasOwnProperty.call(combinedProps, 'initialValue') ? { initialValue: combinedProps.initialValue } : {}),
+    ...(Object.prototype.hasOwnProperty.call(combinedProps, 'value') ? { value: combinedProps.value } : {}),
     ...FieldProps,
     ...(type ? { type } : {}),
     ...(initialValue ? { initialValue } : {}),
@@ -228,11 +205,7 @@ const useFieldApi = ({
     []
   );
 
-  const {
-    initialValue: _initialValue,
-    clearedValue,
-    ...cleanProps
-  } = rest;
+  const { initialValue: _initialValue, clearedValue, ...cleanProps } = rest;
 
   /**
    * construct component props necessary that would live in field provider
@@ -249,8 +222,7 @@ const useFieldApi = ({
     }),
     input: {
       ...field.input,
-      value:
-        field.input.type === 'file' && typeof field.input.value === 'object' ? field.input.value.inputValue : field.input.value,
+      value: field.input.type === 'file' && typeof field.input.value === 'object' ? field.input.value.inputValue : field.input.value,
       onChange: (...args) => {
         enhancedOnChange(
           {

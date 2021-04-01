@@ -17,7 +17,7 @@ FormFieldHideWrapper.defaultProps = {
   hideField: false
 };
 
-const ConditionTriggerWrapper = ({condition, values, children, field}) => (
+const ConditionTriggerWrapper = ({ condition, values, children, field }) => (
   <Condition condition={condition} values={values} field={field}>
     {children}
   </Condition>
@@ -27,7 +27,7 @@ ConditionTriggerWrapper.propTypes = {
   condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   children: PropTypes.node.isRequired,
   field: PropTypes.object,
-  values: PropTypes.object.isRequired,
+  values: PropTypes.object.isRequired
 };
 
 const ConditionTriggerDetector = ({ values = {}, triggers = [], children, condition, field }) => {
@@ -43,13 +43,8 @@ const ConditionTriggerDetector = ({ values = {}, triggers = [], children, condit
   const name = internalTriggers.shift();
   return (
     <Field name={name} subscription={{ value: true }}>
-      {({input: {value}}) => (
-        <ConditionTriggerDetector
-          triggers={[...internalTriggers]}
-          values={set({...values}, name, value)}
-          condition={condition}
-          field={field}
-        >
+      {({ input: { value } }) => (
+        <ConditionTriggerDetector triggers={[...internalTriggers]} values={set({ ...values }, name, value)} condition={condition} field={field}>
           {children}
         </ConditionTriggerDetector>
       )}
@@ -161,6 +156,6 @@ SingleField.propTypes = {
   resolveProps: PropTypes.func
 };
 
-const renderForm = (fields) =>fields.map((field) => (Array.isArray(field) ? renderForm(field) : <SingleField key={field.name} {...field} />));
+const renderForm = (fields) => fields.map((field) => (Array.isArray(field) ? renderForm(field) : <SingleField key={field.name} {...field} />));
 
 export default renderForm;

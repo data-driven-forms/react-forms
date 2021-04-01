@@ -14,4 +14,6 @@ const schema = {
 };
 const variants = [...baseFieldProps];
 
-export default () => <ComponentText schema={schema} variants={variants} linkText="Time picker" />;
+const TimePicker = () => <ComponentText schema={schema} variants={variants} linkText="Time picker" />;
+
+export default TimePicker;

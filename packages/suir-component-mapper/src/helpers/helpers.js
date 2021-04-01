@@ -14,6 +14,9 @@ export const validationWarning = (meta, validateOnMount) => {
   return meta.touched && meta.warning;
 };
 
-export default {
-  validationError, validationWarning
+const helpers = {
+  validationError,
+  validationWarning
 };
+
+export default helpers;

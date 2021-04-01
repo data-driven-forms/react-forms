@@ -126,10 +126,10 @@ DualList.propTypes = {
   isSortable: PropTypes.bool
 };
 
-const DualListWrapper = (props) => props.isTree ? <DualListTree {...props} /> : <DualList {...props}/>;
+const DualListWrapper = (props) => (props.isTree ? <DualListTree {...props} /> : <DualList {...props} />);
 
 DualListWrapper.propTypes = {
-  isTree: PropTypes.bool,
+  isTree: PropTypes.bool
 };
 
 export default DualListWrapper;

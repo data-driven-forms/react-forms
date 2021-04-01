@@ -34,7 +34,7 @@ describe('useFieldApi', () => {
                   formOptions: {
                     registerInputFile: registerInputFileSpy,
                     internalRegisterField: jest.fn(),
-                    internalUnRegisterField: jest.fn(),
+                    internalUnRegisterField: jest.fn()
                   },
                   validatorMapper: { required: () => (value) => (!value ? 'required' : undefined) }
                 }}
@@ -201,7 +201,7 @@ describe('useFieldApi', () => {
                 validatorMapper: { required: () => (value) => (!value ? 'required' : undefined), url: () => jest.fn() },
                 formOptions: {
                   internalRegisterField: jest.fn(),
-                  internalUnRegisterField: jest.fn(),
+                  internalUnRegisterField: jest.fn()
                 }
               }}
             >
@@ -223,7 +223,7 @@ describe('useFieldApi', () => {
 
   it('omits FieldProps', () => {
     const parse = jest.fn().mockImplementation((value) => value);
-    initialProps = {...initialProps, FieldProps: { parse }};
+    initialProps = { ...initialProps, FieldProps: { parse } };
 
     const wrapper = mount(<WrapperComponent {...initialProps} />);
 
