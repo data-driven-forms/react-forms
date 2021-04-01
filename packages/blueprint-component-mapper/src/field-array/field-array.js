@@ -20,30 +20,33 @@ const useStyles = createUseStyles({
   }
 });
 
-const ArrayItem = memo(({ remove, fields, name, removeLabel, ArrayItemProps, RemoveButtonProps, disabledRemove }) => {
-  const formOptions = useFormApi();
-  const { remove: removeCss } = useStyles();
+const ArrayItem = memo(
+  ({ remove, fields, name, removeLabel, ArrayItemProps, RemoveButtonProps, disabledRemove }) => {
+    const formOptions = useFormApi();
+    const { remove: removeCss } = useStyles();
 
-  const editedFields = fields.map((field) => ({
-    ...field,
-    ...(field.name ? { name: `${name}.${field.name}` } : { name })
-  }));
+    const editedFields = fields.map((field) => ({
+      ...field,
+      ...(field.name ? { name: `${name}.${field.name}` } : { name })
+    }));
 
-  return (
-    <div {...ArrayItemProps}>
-      {formOptions.renderForm(editedFields, formOptions)}
-      <Button
-        onClick={remove}
-        intent={Intent.DANGER}
-        disabled={disabledRemove}
-        {...RemoveButtonProps}
-        className={clsx(removeCss, RemoveButtonProps && RemoveButtonProps.className)}
-      >
-        {removeLabel}
-      </Button>
-    </div>
-  );
-}, ({remove: _prevRemove, ...prev}, {remove: _nextRemove, ...next}) => isEqual(prev, next));
+    return (
+      <div {...ArrayItemProps}>
+        {formOptions.renderForm(editedFields, formOptions)}
+        <Button
+          onClick={remove}
+          intent={Intent.DANGER}
+          disabled={disabledRemove}
+          {...RemoveButtonProps}
+          className={clsx(removeCss, RemoveButtonProps && RemoveButtonProps.className)}
+        >
+          {removeLabel}
+        </Button>
+      </div>
+    );
+  },
+  ({ remove: _prevRemove, ...prev }, { remove: _nextRemove, ...next }) => isEqual(prev, next)
+);
 
 ArrayItem.propTypes = {
   remove: PropTypes.func,

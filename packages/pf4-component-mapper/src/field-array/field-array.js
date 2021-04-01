@@ -10,58 +10,61 @@ import { AddCircleOIcon, CloseIcon } from '@patternfly/react-icons';
 import './final-form-array.css';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
-const ArrayItem = memo(({ fields, fieldIndex, name, remove, length, minItems }) => {
-  const { renderForm } = useFormApi();
+const ArrayItem = memo(
+  ({ fields, fieldIndex, name, remove, length, minItems }) => {
+    const { renderForm } = useFormApi();
 
-  const widths = {
-    label: fields[0].label ? 5 : 0,
-    field: fields[0].label ? 7 : 12
-  };
+    const widths = {
+      label: fields[0].label ? 5 : 0,
+      field: fields[0].label ? 7 : 12
+    };
 
-  const editedFields = fields.map((field, index) => {
-    const computedName = field.name ? `${name}.${field.name}` : name;
-    return { ...field, name: computedName, key: `${name}-${index}`, hideLabel: true };
-  });
+    const editedFields = fields.map((field, index) => {
+      const computedName = field.name ? `${name}.${field.name}` : name;
+      return { ...field, name: computedName, key: `${name}-${index}`, hideLabel: true };
+    });
 
-  return (
-    <React.Fragment>
-      <Grid>
-        <GridItem sm={11}>
-          <hr className="ddf-final-form-hr" />
-        </GridItem>
-      </Grid>
-      <Grid>
-        <GridItem sm={11}>
-          {editedFields.map((field, index) => (
-            <Grid key={`${field.label}-${index}`} className="ddf-final-form-array-grid">
-              {widths.label > 0 && (
-                <GridItem sm={widths.label} key={`${field.label}-${index}`}>
-                  <label htmlFor={field.name}>
-                    {field.label}
-                    {field.isRequired && <span className="pf-c-form__label-required">*</span>}
-                  </label>
-                </GridItem>
-              )}
-              <GridItem sm={widths.field}>{renderForm([field])}</GridItem>
-            </Grid>
-          ))}
-        </GridItem>
-        <GridItem sm={1}>
-          {length > minItems && (
-            <Bullseye>
-              <CloseIcon onClick={() => remove(fieldIndex)} className="ddf-final-form-group-remove-icon" />
-            </Bullseye>
-          )}
-          {length <= minItems && (
-            <Bullseye>
-              <CloseIcon className="ddf-final-form-group-remove-icon disabled" />
-            </Bullseye>
-          )}
-        </GridItem>
-      </Grid>
-    </React.Fragment>
-  );
-}, ({remove: _prevRemove, ...prev}, {remove: _nextRemove, ...next}) => isEqual(prev, next));
+    return (
+      <React.Fragment>
+        <Grid>
+          <GridItem sm={11}>
+            <hr className="ddf-final-form-hr" />
+          </GridItem>
+        </Grid>
+        <Grid>
+          <GridItem sm={11}>
+            {editedFields.map((field, index) => (
+              <Grid key={`${field.label}-${index}`} className="ddf-final-form-array-grid">
+                {widths.label > 0 && (
+                  <GridItem sm={widths.label} key={`${field.label}-${index}`}>
+                    <label htmlFor={field.name}>
+                      {field.label}
+                      {field.isRequired && <span className="pf-c-form__label-required">*</span>}
+                    </label>
+                  </GridItem>
+                )}
+                <GridItem sm={widths.field}>{renderForm([field])}</GridItem>
+              </Grid>
+            ))}
+          </GridItem>
+          <GridItem sm={1}>
+            {length > minItems && (
+              <Bullseye>
+                <CloseIcon onClick={() => remove(fieldIndex)} className="ddf-final-form-group-remove-icon" />
+              </Bullseye>
+            )}
+            {length <= minItems && (
+              <Bullseye>
+                <CloseIcon className="ddf-final-form-group-remove-icon disabled" />
+              </Bullseye>
+            )}
+          </GridItem>
+        </Grid>
+      </React.Fragment>
+    );
+  },
+  ({ remove: _prevRemove, ...prev }, { remove: _nextRemove, ...next }) => isEqual(prev, next)
+);
 
 ArrayItem.propTypes = {
   name: PropTypes.string,

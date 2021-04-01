@@ -92,4 +92,6 @@ const variants = [
   }
 ];
 
-export default () => <ComponentText schema={schema} variants={variants} linkText="Wizard" />;
+const Wizard = () => <ComponentText schema={schema} variants={variants} linkText="Wizard" />;
+
+export default Wizard;

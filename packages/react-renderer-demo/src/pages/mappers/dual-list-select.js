@@ -36,4 +36,6 @@ const schema = {
 
 const variants = [...baseFieldProps];
 
-export default () => <ComponentText schema={schema} variants={variants} linkText="Dual list select" />;
+const DualListSelect = () => <ComponentText schema={schema} variants={variants} linkText="Dual list select" />;
+
+export default DualListSelect;

@@ -37,42 +37,45 @@ const useFielArrayStyles = makeStyles({
   }
 });
 
-const ArrayItem = memo(({
-  fields,
-  fieldIndex,
-  name,
-  remove,
-  length,
-  minItems,
-  removeLabel,
-  FieldContainerProps,
-  FieldGroupGridProps,
-  RemoveButtonGridProps,
-  RemoveButtonProps
-}) => {
-  const { renderForm } = useFormApi();
-  const classes = useFielArrayStyles();
+const ArrayItem = memo(
+  ({
+    fields,
+    fieldIndex,
+    name,
+    remove,
+    length,
+    minItems,
+    removeLabel,
+    FieldContainerProps,
+    FieldGroupGridProps,
+    RemoveButtonGridProps,
+    RemoveButtonProps
+  }) => {
+    const { renderForm } = useFormApi();
+    const classes = useFielArrayStyles();
 
-  const editedFields = fields.map((field, index) => {
-    const computedName = field.name ? `${name}.${field.name}` : name;
-    return { ...field, name: computedName, key: `${computedName}-${index}` };
-  });
+    const editedFields = fields.map((field, index) => {
+      const computedName = field.name ? `${name}.${field.name}` : name;
+      return { ...field, name: computedName, key: `${computedName}-${index}` };
+    });
 
-  return (
-    <Grid container spacing={3} {...FieldContainerProps}>
-      <Grid item xs={12} {...FieldGroupGridProps}>
-        <Grid container spacing={3}>
-          {renderForm([editedFields])}
+    return (
+      <Grid container spacing={3} {...FieldContainerProps}>
+        <Grid item xs={12} {...FieldGroupGridProps}>
+          <Grid container spacing={3}>
+            {renderForm([editedFields])}
+          </Grid>
+        </Grid>
+        <Grid item xs={12} className={classes.buttonsToEnd} {...RemoveButtonGridProps}>
+          <Button color="secondary" onClick={() => remove(fieldIndex)} disabled={length <= minItems} {...RemoveButtonProps}>
+            {removeLabel}
+          </Button>
         </Grid>
       </Grid>
-      <Grid item xs={12} className={classes.buttonsToEnd} {...RemoveButtonGridProps}>
-        <Button color="secondary" onClick={() => remove(fieldIndex)} disabled={length <= minItems} {...RemoveButtonProps}>
-          {removeLabel}
-        </Button>
-      </Grid>
-    </Grid>
-  );
-}, ({remove: _prevRemove, ...prev}, {remove: _nextRemove, ...next}) => isEqual(prev, next));
+    );
+  },
+  ({ remove: _prevRemove, ...prev }, { remove: _nextRemove, ...next }) => isEqual(prev, next)
+);
 
 ArrayItem.propTypes = {
   name: PropTypes.string,

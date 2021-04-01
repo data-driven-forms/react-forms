@@ -24,4 +24,6 @@ const variants = [
   }
 ];
 
-export default () => <ComponentText schema={schema} variants={variants} linkText="Switch" />;
+const Switch = () => <ComponentText schema={schema} variants={variants} linkText="Switch" />;
+
+export default Switch;

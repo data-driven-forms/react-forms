@@ -20,4 +20,6 @@ const variants = [
   }
 ];
 
-export default () => <ComponentText schema={schema} variants={variants} linkText="Textarea" />;
+const Textarea = () => <ComponentText schema={schema} variants={variants} linkText="Textarea" />;
+
+export default Textarea;

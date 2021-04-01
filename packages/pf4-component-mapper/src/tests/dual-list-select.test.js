@@ -90,7 +90,7 @@ describe('DualListSelect', () => {
       }
     ],
     [
-    'tree variant',
+      'tree variant',
       {
         isTree: true,
         options: [
@@ -116,7 +116,7 @@ describe('DualListSelect', () => {
           }
         ]
       }
-    ],
+    ]
   ].forEach(([title, props]) => {
     describe(`${title} values`, () => {
       beforeEach(() => {

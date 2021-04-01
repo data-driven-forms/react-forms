@@ -8,59 +8,57 @@ import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import Grid from '@material-ui/core/Grid';
 
 const TwoColumns = ({ fields }) => {
-    const { renderForm } = useFormApi();
+  const { renderForm } = useFormApi();
 
-    return (
-        <Grid container spacing={3}>
-            {
-                fields.map(field => (
-                    <Grid key={field.name} item xs={6}>
-                        {renderForm([field])}
-                    </Grid>
-                ))
-            }
+  return (
+    <Grid container spacing={3}>
+      {fields.map((field) => (
+        <Grid key={field.name} item xs={6}>
+          {renderForm([field])}
         </Grid>
-    );
+      ))}
+    </Grid>
+  );
 };
 
 const schema = {
-  fields: [{
-        name: 'layout',
-        component: 'two-columns',
-        fields: [{
-            name: 'first-name',
-            label: 'First name',
-            component: componentTypes.TEXT_FIELD,
+  fields: [
+    {
+      name: 'layout',
+      component: 'two-columns',
+      fields: [
+        {
+          name: 'first-name',
+          label: 'First name',
+          component: componentTypes.TEXT_FIELD
         },
         {
-            name: 'last-name',
-            label: 'Last name',
-            component: componentTypes.TEXT_FIELD,
+          name: 'last-name',
+          label: 'Last name',
+          component: componentTypes.TEXT_FIELD
         },
         {
-            name: 'address-1',
-            label: 'Address 1',
-            component: componentTypes.TEXT_FIELD,
+          name: 'address-1',
+          label: 'Address 1',
+          component: componentTypes.TEXT_FIELD
         },
         {
-            name: 'address-2',
-            label: 'Address 2',
-            component: componentTypes.TEXT_FIELD,
-        }]
-    }]
+          name: 'address-2',
+          label: 'Address 2',
+          component: componentTypes.TEXT_FIELD
+        }
+      ]
+    }
+  ]
 };
 
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField,
-  'two-columns': TwoColumns,
+  'two-columns': TwoColumns
 };
 
-const CustomLayoutComponent = () =>
-      <FormRenderer
-        FormTemplate={FormTemplate}
-        componentMapper={componentMapper}
-        schema={schema}
-        onSubmit={console.log}
-      />;
+const CustomLayoutComponent = () => (
+  <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />
+);
 
 export default CustomLayoutComponent;

@@ -20,4 +20,6 @@ const variants = [
   }
 ];
 
-export default () => <ComponentText schema={arraySchemaDDF} variants={variants} linkText="Field Array" />;
+const FieldArray = () => <ComponentText schema={arraySchemaDDF} variants={variants} linkText="Field Array" />;
+
+export default FieldArray;
