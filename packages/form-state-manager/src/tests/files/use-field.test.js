@@ -49,7 +49,7 @@ describe('useField', () => {
     expect(spy.prop('meta')).toEqual(initialMeta());
   });
 
-  it('should call register field on mount and unregister on unmount', () => {
+  it('should call register field on mount and unregister on unmount', async () => {
     const managerApi = createManagerApi(jest.fn());
     const api = managerApi();
     const registerSpy = jest.spyOn(api, 'registerField');
@@ -67,7 +67,9 @@ describe('useField', () => {
     };
     const wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy', initialValue: 'foo' }} managerApi={managerApi} />);
     expect(registerSpy).toHaveBeenCalledWith(registerArguments);
-    wrapper.unmount();
+    await act(async () => {
+      wrapper.unmount();
+    });
     expect(unregisterSpy).toHaveBeenCalledWith(unregisterArguments);
   });
 
@@ -332,7 +334,7 @@ describe('useField', () => {
       expect(renderCount).toEqual(2);
     });
 
-    it.only('should only render field that changed its validation status', async () => {
+    it('should only render field that changed its validation status', async () => {
       const managerApi = createManagerApi({ subscription: { valid: true } });
       const wrapper = mount(
         <FormManagerContext.Provider value={{ ...managerApi(), formOptions: managerApi() }}>
@@ -1458,5 +1460,4 @@ describe('useField', () => {
       expect(wrapper.find('span').text()).toEqual('/path/');
     });
   });
-
 });

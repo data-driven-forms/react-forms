@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/suir-component-mapper",
-  "version": "3.2.0",
+  "version": "3.4.0",
   "description": "Component mapper for Semantic ui react for data-driven-forms.",
   "main": "index.js",
   "module": "esm/index.js",
@@ -53,7 +53,7 @@
     "webpack-merge": "^4.1.4"
   },
   "peerDependencies": {
-    "@data-driven-forms/react-form-renderer": ">=2.2.0",
+    "@data-driven-forms/react-form-renderer": ">=3.2.1",
     "react": ">=16.13.1",
     "react-dom": ">=16.13.1",
     "semantic-ui-react": "^0.88.2"
@@ -62,6 +62,7 @@
     "@data-driven-forms/common": "*",
     "classnames": "^2.2.6",
     "clsx": "^1.0.4",
+    "lodash": "^4.17.21",
     "prop-types": "^15.7.2",
     "react-jss": "^10.1.1"
   }

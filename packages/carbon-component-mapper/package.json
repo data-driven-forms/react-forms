@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/carbon-component-mapper",
-  "version": "3.2.0",
+  "version": "3.4.0",
   "description": "carbon-component-mapper for data-driven-forms.",
   "main": "index.js",
   "module": "esm/index.js",
@@ -63,6 +63,7 @@
   "peerDependencies": {},
   "dependencies": {
     "@data-driven-forms/common": "*",
+    "lodash": "^4.17.21",
     "prop-types": ">=15.7.2",
     "react-jss": "^10.5.0"
   }

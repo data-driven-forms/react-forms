@@ -56,26 +56,13 @@ const createFieldProps = (name, formOptions) => {
   };
 };
 
-const useFieldApi = ({
-  name,
-  resolveProps,
-  ...props
-}) => {
+const useFieldApi = ({ name, resolveProps, skipRegistration = false, ...props }) => {
   const { validatorMapper, formOptions } = useContext(RendererContext);
 
-  const resolvedProps = resolveProps
-    ? resolveProps(props, createFieldProps(name, formOptions), formOptions) || {}
-    : {};
+  const resolvedProps = resolveProps ? resolveProps(props, createFieldProps(name, formOptions), formOptions) || {} : {};
 
-  const combinedProps = { ...props, ...resolvedProps};
-  const {
-    component,
-    render,
-    validate,
-    FieldProps,
-    dataType,
-    ...rest
-  } = combinedProps;
+  const combinedProps = { ...props, ...resolvedProps };
+  const { component, render, validate, FieldProps, dataType, ...rest } = combinedProps;
 
   const [{ type, validate: stateValidate, arrayValidator }, dispatch] = useReducer(
     reducer,
@@ -126,8 +113,16 @@ const useFieldApi = ({
   useEffect(() => {
     mounted.current = true;
 
+    if (!skipRegistration) {
+      formOptions.internalRegisterField(name);
+    }
+
     return () => {
       mounted.current = false;
+
+      if (!skipRegistration) {
+        formOptions.internalUnRegisterField(name);
+      }
     };
   }, []);
 
@@ -139,6 +134,7 @@ const useFieldApi = ({
     clearOnUnmount,
     initializeOnMount,
     dataType: _dataType,
+    isEqual: _isEqual,
     ...cleanProps
   } = finalProps;
 

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
+import isEqual from 'lodash/isEqual';
 import clsx from 'clsx';
 import { createUseStyles } from 'react-jss';
 
@@ -30,32 +31,35 @@ const useStyles = createUseStyles({
   }
 });
 
-const ArrayItem = ({ remove, fields, name, removeText, buttonDisabled, RemoveButtonProps, ArrayItemProps }) => {
-  const formOptions = useFormApi();
-  const { remove: removeStyle } = useStyles();
+const ArrayItem = memo(
+  ({ remove, fields, name, removeText, buttonDisabled, RemoveButtonProps, ArrayItemProps }) => {
+    const formOptions = useFormApi();
+    const { remove: removeStyle } = useStyles();
 
-  const editedFields = fields.map((field) => ({
-    ...field,
-    ...(field.name ? { name: `${name}.${field.name}` } : { name })
-  }));
+    const editedFields = fields.map((field) => ({
+      ...field,
+      ...(field.name ? { name: `${name}.${field.name}` } : { name })
+    }));
 
-  return (
-    <div {...ArrayItemProps}>
-      {formOptions.renderForm(editedFields, formOptions)}
-      <Button
-        disabled={buttonDisabled}
-        renderIcon={Subtract32}
-        id={`remove-${name}`}
-        kind="danger"
-        onClick={remove}
-        {...RemoveButtonProps}
-        className={clsx(removeStyle, RemoveButtonProps.className)}
-      >
-        {removeText}
-      </Button>
-    </div>
-  );
-};
+    return (
+      <div {...ArrayItemProps}>
+        {formOptions.renderForm(editedFields, formOptions)}
+        <Button
+          disabled={buttonDisabled}
+          renderIcon={Subtract32}
+          id={`remove-${name}`}
+          kind="danger"
+          onClick={remove}
+          {...RemoveButtonProps}
+          className={clsx(removeStyle, RemoveButtonProps.className)}
+        >
+          {removeText}
+        </Button>
+      </div>
+    );
+  },
+  ({ remove: _prevRemove, ...prev }, { remove: _nextRemove, ...next }) => isEqual(prev, next)
+);
 
 ArrayItem.propTypes = {
   remove: PropTypes.func,

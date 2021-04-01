@@ -1,4 +1,5 @@
-import React, { useReducer } from 'react';
+import React, { memo, useReducer } from 'react';
+import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import { useFieldApi, useFormApi, FieldArray } from '@data-driven-forms/react-form-renderer';
 import { Row, Col, Button, Typography, Space } from 'antd';
@@ -6,39 +7,42 @@ import { UndoOutlined, RedoOutlined } from '@ant-design/icons';
 
 import FormGroup from '../form-group';
 
-const ArrayItem = ({
-  fields,
-  fieldIndex,
-  name,
-  remove,
-  length,
-  minItems,
-  removeLabel,
-  ArrayItemProps,
-  FieldsContainerProps,
-  RemoveContainerProps,
-  RemoveButtonProps
-}) => {
-  const { renderForm } = useFormApi();
+const ArrayItem = memo(
+  ({
+    fields,
+    fieldIndex,
+    name,
+    remove,
+    length,
+    minItems,
+    removeLabel,
+    ArrayItemProps,
+    FieldsContainerProps,
+    RemoveContainerProps,
+    RemoveButtonProps
+  }) => {
+    const { renderForm } = useFormApi();
 
-  const editedFields = fields.map((field, index) => {
-    const computedName = field.name ? `${name}.${field.name}` : name;
-    return { ...field, name: computedName, key: `${computedName}-${index}` };
-  });
+    const editedFields = fields.map((field, index) => {
+      const computedName = field.name ? `${name}.${field.name}` : name;
+      return { ...field, name: computedName, key: `${computedName}-${index}` };
+    });
 
-  return (
-    <Row {...ArrayItemProps}>
-      <Col span={24} {...FieldsContainerProps}>
-        {renderForm([editedFields])}
-      </Col>
-      <Col span={24} {...RemoveContainerProps}>
-        <Button type="primary" danger {...RemoveButtonProps} onClick={() => remove(fieldIndex)} disabled={length <= minItems}>
-          {removeLabel}
-        </Button>
-      </Col>
-    </Row>
-  );
-};
+    return (
+      <Row {...ArrayItemProps}>
+        <Col span={24} {...FieldsContainerProps}>
+          {renderForm([editedFields])}
+        </Col>
+        <Col span={24} {...RemoveContainerProps}>
+          <Button type="primary" danger {...RemoveButtonProps} onClick={() => remove(fieldIndex)} disabled={length <= minItems}>
+            {removeLabel}
+          </Button>
+        </Col>
+      </Row>
+    );
+  },
+  ({ remove: _prevRemove, ...prev }, { remove: _nextRemove, ...next }) => isEqual(prev, next)
+);
 
 ArrayItem.propTypes = {
   name: PropTypes.string,

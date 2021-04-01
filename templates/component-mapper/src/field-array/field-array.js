@@ -1,8 +1,9 @@
 import React from 'react';
+import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import { useFieldApi, useFormApi, FieldArray as FieldArrayFF } from '@data-driven-forms/react-form-renderer';
 
-const ArrayItem = ({ remove, fields, name }) => {
+const ArrayItem = memo(({ remove, fields, name }) => {
   const formOptions = useFormApi();
 
   const editedFields = fields.map((field) => ({
@@ -16,7 +17,7 @@ const ArrayItem = ({ remove, fields, name }) => {
       <button onClick={remove}>Remove</button>
     </div>
   );
-};
+}, ({remove: _prevRemove, ...prev}, {remove: _nextRemove, ...next}) => isEqual(prev, next));
 
 ArrayItem.propTypes = {
   remove: PropTypes.func,

@@ -47,4 +47,6 @@ const schema = {
 };
 const variants = [];
 
-export default () => <ComponentText schema={schema} variants={variants} linkText="Tabs / Tab item" />;
+const Tabs = () => <ComponentText schema={schema} variants={variants} linkText="Tabs / Tab item" />;
+
+export default Tabs;

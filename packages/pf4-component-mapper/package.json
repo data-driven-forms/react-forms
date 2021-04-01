@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/pf4-component-mapper",
-  "version": "3.2.0",
+  "version": "3.4.0",
   "description": "Starter pf4-component-mapper for data-driven-forms.",
   "main": "index.js",
   "module": "esm/index.js",
@@ -28,8 +28,8 @@
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
-    "@patternfly/react-core": "^4.90.2",
-    "@patternfly/react-icons": "^4.8.4",
+    "@patternfly/react-core": "^4.101.3",
+    "@patternfly/react-icons": "^4.9.5",
     "@semantic-release/git": "^7.0.5",
     "@semantic-release/npm": "^5.1.1",
     "babel-core": "^7.0.0-bridge.0",
@@ -58,14 +58,15 @@
     "webpack-merge": "^4.1.4"
   },
   "peerDependencies": {
-    "@data-driven-forms/react-form-renderer": ">=2.4.6",
-    "@patternfly/react-core": "^4.90.2",
-    "@patternfly/react-icons": "^4.8.4"
+    "@data-driven-forms/react-form-renderer": ">=3.2.1",
+    "@patternfly/react-core": "^4.101.3",
+    "@patternfly/react-icons": "^4.9.5"
   },
   "dependencies": {
     "@data-driven-forms/common": "*",
     "prop-types": "^15.7.2",
-    "downshift": "^5.4.3"
+    "downshift": "^5.4.3",
+    "lodash": "^4.17.21"
   },
   "postpublish": "export RELEASE_DEMO=true"
 }

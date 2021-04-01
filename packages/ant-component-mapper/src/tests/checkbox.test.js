@@ -7,8 +7,6 @@ import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
 import { Checkbox } from 'antd';
 
-console.log({ FormRenderer });
-
 describe('<Checkbox />', () => {
   it('renders multiple checkbox', () => {
     const schema = {

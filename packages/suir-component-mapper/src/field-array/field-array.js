@@ -1,5 +1,6 @@
-import React, { useReducer } from 'react';
+import React, { memo, useReducer } from 'react';
 import PropTypes from 'prop-types';
+import isEqual from 'lodash/isEqual';
 import { useFormApi, FieldArray } from '@data-driven-forms/react-form-renderer';
 
 import { Button, Header, ButtonGroup } from 'semantic-ui-react';
@@ -37,44 +38,47 @@ const useStyles = createUseStyles({
   }
 });
 
-const ArrayItem = ({
-  fields,
-  fieldIndex,
-  name,
-  remove,
-  length,
-  minItems,
-  removeLabel,
-  RemoveButtonProps,
-  ArrayItemGridProps: { className: arrayItemClassName, ...ArrayItemGridProps },
-  ArrayItemFieldsGridProps
-}) => {
-  const { renderForm } = useFormApi();
-  const classes = useStyles();
+const ArrayItem = memo(
+  ({
+    fields,
+    fieldIndex,
+    name,
+    remove,
+    length,
+    minItems,
+    removeLabel,
+    RemoveButtonProps,
+    ArrayItemGridProps: { className: arrayItemClassName, ...ArrayItemGridProps },
+    ArrayItemFieldsGridProps
+  }) => {
+    const { renderForm } = useFormApi();
+    const classes = useStyles();
 
-  const editedFields = fields.map((field, index) => {
-    const computedName = field.name ? `${name}.${field.name}` : name;
-    return { ...field, name: computedName, key: `${computedName}-${index}` };
-  });
+    const editedFields = fields.map((field, index) => {
+      const computedName = field.name ? `${name}.${field.name}` : name;
+      return { ...field, name: computedName, key: `${computedName}-${index}` };
+    });
 
-  return (
-    <div className={clsx(classes.arrayItem, arrayItemClassName)} {...ArrayItemGridProps}>
-      <div {...ArrayItemFieldsGridProps}>{renderForm([editedFields])}</div>
-      <div>
-        <Button
-          icon="remove"
-          content={removeLabel}
-          basic
-          color="red"
-          {...RemoveButtonProps}
-          type="button"
-          onClick={() => remove(fieldIndex)}
-          disabled={length <= minItems}
-        />
+    return (
+      <div className={clsx(classes.arrayItem, arrayItemClassName)} {...ArrayItemGridProps}>
+        <div {...ArrayItemFieldsGridProps}>{renderForm([editedFields])}</div>
+        <div>
+          <Button
+            icon="remove"
+            content={removeLabel}
+            basic
+            color="red"
+            {...RemoveButtonProps}
+            type="button"
+            onClick={() => remove(fieldIndex)}
+            disabled={length <= minItems}
+          />
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  },
+  ({ remove: _prevRemove, ...prev }, { remove: _nextRemove, ...next }) => isEqual(prev, next)
+);
 
 ArrayItem.propTypes = {
   name: PropTypes.string,

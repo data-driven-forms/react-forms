@@ -311,7 +311,16 @@ describe('FormFields', () => {
                   .first()
                   .props().disabled
               ).toEqual(true);
-            } else if ([componentTypes.CHECKBOX, componentTypes.RADIO, componentTypes.SWITCH, componentTypes.SLIDER].includes(component)) {
+            } else if (
+              [
+                componentTypes.DATE_PICKER,
+                componentTypes.TIME_PICKER,
+                componentTypes.CHECKBOX,
+                componentTypes.RADIO,
+                componentTypes.SWITCH,
+                componentTypes.SLIDER
+              ].includes(component)
+            ) {
               expect(
                 wrapper
                   .find('input')

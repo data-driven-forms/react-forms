@@ -36,4 +36,6 @@ const variants = [
   }
 ];
 
-export default () => <ComponentText schema={schema} variants={variants} linkText="Date picker" />;
+const DatePicker = () => <ComponentText schema={schema} variants={variants} linkText="Date picker" />;
+
+export default DatePicker;

@@ -303,7 +303,7 @@ const useField = ({
     valueToReturn = valueToReturn.inputValue;
   }
 
-  const { initialValue, ...clearedProps } = props;
+  const { initialValue, clearedValue, isEqual, ...clearedProps } = props;
 
   return {
     input: {

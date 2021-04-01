@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/blueprint-component-mapper",
-  "version": "3.2.0",
+  "version": "3.4.0",
   "description": "Blueprint component mapper for data-driven-forms.",
   "main": "index.js",
   "module": "esm/index.js",
@@ -60,6 +60,7 @@
   "dependencies": {
     "@data-driven-forms/common": "*",
     "clsx": "^1.1.0",
+    "lodash": "^4.17.21",
     "prop-types": "^15.7.2",
     "react-jss": "^10.5.0"
   }
