@@ -56,6 +56,71 @@ describe('<Select />', () => {
     });
   });
 
+  it('should render initial value label text when only value is passed as initial value', () => {
+    const schema = {
+      fields: [
+        {
+          component: componentTypes.SELECT,
+          name: 'select',
+          label: 'select',
+          isSearchable: true,
+          isClearable: true,
+          options: [
+            { label: 'option 1', value: 1 },
+            { label: 'option 2', value: 2 }
+          ]
+        }
+      ]
+    };
+
+    const wrapper = mount(
+      <FormRenderer
+        initialValues={{ select: 1 }}
+        onSubmit={jest.fn()}
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        schema={schema}
+        componentMapper={componentMapper}
+      />
+    );
+
+    const valueInput = wrapper.find('input[name="select"]');
+    expect(valueInput).toHaveLength(1);
+    expect(valueInput.props().value).toEqual('option 1');
+  });
+
+  it('should render initial value label text when only value is passed as initial value with simpleValue option', () => {
+    const schema = {
+      fields: [
+        {
+          component: componentTypes.SELECT,
+          name: 'select',
+          label: 'select',
+          isSearchable: true,
+          isClearable: true,
+          simpleValue: true,
+          options: [
+            { label: 'option 1', value: 1 },
+            { label: 'option 2', value: 2 }
+          ]
+        }
+      ]
+    };
+
+    const wrapper = mount(
+      <FormRenderer
+        initialValues={{ select: 1 }}
+        onSubmit={jest.fn()}
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        schema={schema}
+        componentMapper={componentMapper}
+      />
+    );
+
+    const valueInput = wrapper.find('input[name="select"]');
+    expect(valueInput).toHaveLength(1);
+    expect(valueInput.props().value).toEqual('option 1');
+  });
+
   it('renders multi select', () => {
     const schema = {
       fields: [
