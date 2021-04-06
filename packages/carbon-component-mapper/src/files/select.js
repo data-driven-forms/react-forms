@@ -10,11 +10,14 @@ import prepareProps from './prepare-props';
 
 export const multiOnChange = (input, simpleValue) => ({ selectedItem, selectedItems }) => {
   if (simpleValue) {
-    return input.onChange(selectedItems.map(({ value }) => value) || selectedItem.value);
+    return input.onChange(selectedItems?.map(({ value }) => value) || selectedItem.value);
   } else {
     return input.onChange(selectedItems || selectedItem);
   }
 };
+
+const getMultiValue = (value, options) =>
+  (Array.isArray(value) ? value : [value]).map((item) => (typeof item === 'object' ? item : options.find(({ value }) => value === item))) || [];
 
 const ClearedMultiSelectFilterable = ({
   invalidText,
@@ -44,7 +47,7 @@ const ClearedMultiSelectFilterable = ({
     invalid={Boolean(invalidText)}
     invalidText={invalidText}
     items={options}
-    initialSelectedItems={Array.isArray(rest.value) ? rest.value : []}
+    initialSelectedItems={getMultiValue(rest.value, options)}
   />
 );
 
@@ -95,7 +98,7 @@ const ClearedMultiSelect = ({
     invalid={Boolean(invalidText)}
     invalidText={invalidText}
     items={options}
-    initialSelectedItems={Array.isArray(rest.value) ? rest.value : []}
+    initialSelectedItems={getMultiValue(rest.value, options)}
   />
 );
 
@@ -118,6 +121,8 @@ ClearedMultiSelect.propTypes = {
   isDisabled: PropTypes.bool
 };
 
+const getSelectValue = (value, isMulti) => (isMulti ? value : Array.isArray(value) ? value[0] : value);
+
 const ClearedSelect = ({
   isSearchable,
   isClearable,
@@ -134,9 +139,17 @@ const ClearedSelect = ({
   closeMenuOnSelect,
   originalOnChange,
   placeholder,
+  value,
   ...rest
 }) => (
-  <CarbonSelect disabled={isFetching} {...rest} id={rest.name} invalid={Boolean(invalidText)} invalidText={invalidText}>
+  <CarbonSelect
+    value={getSelectValue(value, isMulti)}
+    disabled={isFetching}
+    {...rest}
+    id={rest.name}
+    invalid={Boolean(invalidText)}
+    invalidText={invalidText}
+  >
     {isFetching && <SelectItem text={placeholder} value={''} />}
     {options.map((option, index) => (
       <SelectItem key={option.value || index} text={option.label} {...option} />
@@ -162,9 +175,18 @@ ClearedSelect.propTypes = {
   isDisabled: PropTypes.bool,
   isRequired: PropTypes.bool,
   isSearchable: PropTypes.bool,
-  isClearable: PropTypes.bool
+  isClearable: PropTypes.bool,
+  value: PropTypes.any
 };
 
+const getComboInitialValue = (value, options = []) => {
+  const result = Array.isArray(value) ? value[0] : value;
+  return typeof result === 'object' ? result : options.find(({ value }) => value === result) || result;
+};
+
+/**
+ * Combobox cannot be multi value
+ */
 const ClearedSelectSearchable = ({
   isSearchable,
   isClearable,
@@ -174,7 +196,7 @@ const ClearedSelectSearchable = ({
   hideSelectedOptions,
   noOptionsMessage,
   onInputChange,
-  options,
+  options = [],
   isFetching,
   invalid,
   classNamePrefix,
@@ -190,7 +212,7 @@ const ClearedSelectSearchable = ({
     id={rest.name}
     invalid={Boolean(invalidText)}
     invalidText={invalidText}
-    initialSelectedItem={rest.value}
+    initialSelectedItem={getComboInitialValue(rest.value, options)}
     items={options}
     placeholder={placeholder}
     titleText={labelText}
