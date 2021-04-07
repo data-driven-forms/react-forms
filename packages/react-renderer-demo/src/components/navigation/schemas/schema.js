@@ -4,6 +4,7 @@ import schemaNav from './schema.schema';
 import schemaHooks from './hooks.schema';
 import mappersSchema from './mappers.schema';
 import customExamplesSchema from './custom-examples.schema';
+import providedMappersSchema from './provider-mappers.schema';
 
 const schema = [
   {
@@ -39,6 +40,18 @@ const schema = [
     fields: mappersSchema
   },
   {
+    title: 'Provided mappers',
+    link: 'provided-mappers',
+    noRoute: true,
+    fields: providedMappersSchema
+  },
+  {
+    title: 'Examples',
+    link: 'examples',
+    noRoute: true,
+    fields: customExamplesSchema
+  },
+  {
     linkText: 'Form builder',
     link: 'live-editor'
   },
@@ -57,12 +70,6 @@ const schema = [
   {
     linkText: 'Optimization',
     link: 'optimization'
-  },
-  {
-    title: 'Examples',
-    link: 'examples',
-    noRoute: true,
-    fields: customExamplesSchema
   },
   {
     linkText: 'Releases',

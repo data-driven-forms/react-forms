@@ -211,7 +211,7 @@ This also supports using [async functions](/schema/async-validator).
 
 ### componentSpecificAttributes
 
-Each component defines its required and optional props. Read more [here](/mappers/component-api).
+Each component defines its required and optional props. Read more [here](/provided-mappers/component-api).
 
 ```jsx
 {

@@ -2,7 +2,7 @@ This a custom component with a custom design.
 
 ## Props
 
-Dual list select is wrapped in a form group, so it accepts all [form group props](/mappers/component-api#formgroupwrappedcomponents).
+Dual list select is wrapped in a form group, so it accepts all [form group props](/provided-mappers/component-api#formgroupwrappedcomponents).
 
 |Props|Type|Default|Description|
 |-----|----|-------|-----------|

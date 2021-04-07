@@ -55,7 +55,7 @@ All fields will be updated when values are changed. It will hurt the performance
 
 **A.**
 
-You can divide the form by using default [sub-form components](/mappers/sub-form).
+You can divide the form by using default [sub-form components](/provided-mappers/sub-form).
 
 ```
 {

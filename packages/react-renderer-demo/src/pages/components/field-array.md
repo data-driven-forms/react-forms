@@ -72,7 +72,7 @@ EXACT_LENGTH: ({threshold})
 
 ## Implementation
 
-All DDF mappers contain its own implementation [field array](/mappers/field-array?mapper=pf4)
+All DDF mappers contain its own implementation [field array](/provided-mappers/field-array?mapper=pf4)
 
 <CodeExamples source="components/field-array/pf4-demo" mode="preview" />
 
