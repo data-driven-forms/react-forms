@@ -67,7 +67,20 @@ export type IsValidationPaused = () => boolean;
 export type PauseValidation = () => void;
 export type ResumeValidation = () => void;
 export type AfterSilentRegistration = (field: Omit<FieldConfig, 'render'>) => void;
-export type SetConfig = (attribute: 'onSubmit'|'clearOnUnmount'|'initializeOnMount'|'validate'|'subscription'|'initialValues'|'debug'|'keepDirtyOnReinitialize'|'destroyOnUnregister'|'name', value: any) => void;
+export type SetConfig = (
+  attribute:
+    | 'onSubmit'
+    | 'clearOnUnmount'
+    | 'initializeOnMount'
+    | 'validate'
+    | 'subscription'
+    | 'initialValues'
+    | 'debug'
+    | 'keepDirtyOnReinitialize'
+    | 'destroyOnUnregister'
+    | 'name',
+  value: any
+) => void;
 export type RegisterInputFile = (name: string) => void;
 export type UnregisterInputFile = (name: string) => void;
 export type GetRegisteredFields = () => Array<string>;
@@ -502,7 +515,7 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function handleFieldError(name: string, isValid: boolean, error: string | undefined = undefined, validating = false) {
-    const prevMeta = getFieldState(name)?.meta || {} as Meta;
+    const prevMeta = getFieldState(name)?.meta || ({} as Meta);
     const { error: prevError, valid: prevIsValid, validating: prevValidating } = prevMeta;
     if (error !== prevError || isValid !== prevIsValid || validating !== prevValidating) {
       setFieldState(name, (prev: FieldState) => ({
@@ -522,7 +535,7 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function handleFieldWarning(name: string, warning: string | undefined = undefined, validating = false) {
-    const prevMeta = getFieldState(name)?.meta || {} as Meta;
+    const prevMeta = getFieldState(name)?.meta || ({} as Meta);
     const { warning: prevWarning, validating: prevValidating } = prevMeta;
     if (warning !== prevWarning || validating !== prevValidating) {
       setFieldState(name, (prev: FieldState) => ({
@@ -1092,7 +1105,7 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function getFieldState(name: string): ExtendedFieldState | undefined {
-    if (state.fieldListeners[name]) {
+    if (state.fieldListeners[name]?.state) {
       const fieldState = cloneDeep(state.fieldListeners[name].state);
       return {
         ...fieldState,
@@ -1102,6 +1115,8 @@ const createManagerApi: CreateManagerApi = ({
         focus: () => change(name)
       };
     }
+
+    return;
   }
 
   function getState(): ManagerState {
@@ -1158,7 +1173,7 @@ const createManagerApi: CreateManagerApi = ({
   }
 
   function rerender(subscribeTo?: Array<string>) {
-        if (inBatch > 0) {
+    if (inBatch > 0) {
       subscribeTo && subscribeTo.forEach((to) => addIfUnique(batched, to));
       shouldRerender = true;
     } else {
