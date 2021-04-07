@@ -14,7 +14,8 @@
     "build:typings": "node ../../scripts/generate-typings.js",
     "build:packages": "node ../../scripts/generate-packages.js",
     "build:css": "node ../../scripts/copy-css.js",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "test": "yarn --cwd ../.. test packages/pf4-component-mapper"
   },
   "repository": "git@github.com:data-driven-forms/react-forms.git",
   "keywords": [

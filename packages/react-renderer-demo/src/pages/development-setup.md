@@ -6,6 +6,25 @@ import DocPage from '@docs/doc-page';
 
 Data Driven Forms is a monorepo that uses [Lerna](https://github.com/lerna/lerna) and [yarn workspaces](https://classic.yarnpkg.com/blog/2017/08/02/introducing-workspaces/), so you can use all its commands as well.
 
+## Checklist before you send a PR
+
+Please follow following checklist if you are going to open a PR. It will help you make the PR finished.
+
+- [ ] `Yarn build` passes
+- [ ] `Yarn lint` passes
+- [ ] `Yarn test` passes
+- [ ] Test coverage for new code *(if applicable)*
+- [ ] Documentation update *(if applicable)*
+- [ ] **Correct commit message**
+   - format `fix|feat({scope}): {description}`
+   - i.e. `fix(pf3): wizard correctly handles next button`
+   - fix will release a new \_.\_.X version
+   - feat will release a new \_.X.\_ version (use when you introduce new features)
+     - we want to avoid any breaking changes, please contact us, if there is no way how to avoid them
+   - scope: package
+   - **if you update the documentation or tests, do not use this format**
+     - i.e. `Fix button on documenation example page`
+
 ## Install
 
 ```bash
@@ -48,12 +67,17 @@ yarn lerna clean # will delete all node_modules
 
 ## Tests
 
-Tests needed to be run from the core folder.
+You can test parsers using tests. Tests can be ran from core folder or from specific package.
 
-```bash
+```console
 yarn test
 
-yarn test packages/pf3-component-mapper
+yarn test --watchAll packages/pf4-component-mapper
+
+# or
+
+cd packages/pf4-component-mapper
+yarn test
 ```
 
 ## Commits
@@ -65,7 +89,7 @@ Format:
 ```
 [type]([package]): message
 
-fix(pf3): title accepts node
+fix(pf4): title accepts node
 ```
 
 Types:

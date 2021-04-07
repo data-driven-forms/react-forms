@@ -10,7 +10,8 @@
     "build:cjs": "BABEL_ENV=cjs babel src --out-dir ./",
     "build:esm": "BABEL_ENV=esm babel src --out-dir ./esm",
     "build:typings": "node ../../scripts/generate-typings.js",
-    "build:packages": "node ../../scripts/generate-packages.js"
+    "build:packages": "node ../../scripts/generate-packages.js",
+    "test": "yarn --cwd ../.. test packages/common"
   },
   "repository": "git@github.com:data-driven-forms/react-forms.git",
   "devDependencies": {
