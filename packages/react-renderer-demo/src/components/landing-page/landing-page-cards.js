@@ -265,7 +265,7 @@ const LandingPageCards = () => {
                 </a>
               </RouterLink>
             </Grid>
-            <Grid item xs={6} md={3} xl={2}>
+            <Grid item xs={6} md={4} xl={2}>
               <Typography variant="h6" className={classes.textBottom}>
                 BlueprintJS
               </Typography>
@@ -275,7 +275,7 @@ const LandingPageCards = () => {
                 </a>
               </RouterLink>
             </Grid>
-            <Grid item xs={6} md={3} xl={2}>
+            <Grid item xs={6} md={4} xl={2}>
               <Typography variant="h6" className={classes.textBottom}>
                 Semantic UI
               </Typography>
@@ -285,7 +285,7 @@ const LandingPageCards = () => {
                 </a>
               </RouterLink>
             </Grid>
-            <Grid item xs={6} md={3} xl={2}>
+            <Grid item xs={6} md={4} xl={2}>
               <Typography variant="h6" className={classes.textBottom}>
                 Ant Design
               </Typography>
@@ -295,7 +295,7 @@ const LandingPageCards = () => {
                 </a>
               </RouterLink>
             </Grid>
-            <Grid item xs={12} md={3} xl={12}>
+            <Grid item xs={6} md={4} xl={2}>
               <Typography variant="h6" className={classes.textBottom}>
                 Carbon Design System
               </Typography>
@@ -305,7 +305,7 @@ const LandingPageCards = () => {
                 </a>
               </RouterLink>
             </Grid>
-            <Grid item xs={12} md={8}>
+            <Grid item xs={8} md={8} xl={8}>
               <Typography variant="body2" gutterBottom className={classes.mappersText}>
                 This list represents a set of provided mappers. Each mapper brings all basic form components from its design system. You can
                 immediately use form inputs such as text fields, selects, radios, checkboxes or wizards. However, this selection does not limit you as
