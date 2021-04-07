@@ -39,7 +39,7 @@ const providedMappersSchema = [
     noRoute: true,
     title: 'Mapper components'
   },
-  ...baseExamples.sort((a, b) => a.linkText.localeCompare(b.linkText)),
+  ...baseExamples.sort((a, b) => a.linkText.localeCompare(b.linkText))
 ];
 
 export default providedMappersSchema;
