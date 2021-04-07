@@ -16,7 +16,7 @@ export interface FieldSpyProps {
   names: string[];
 }
 
-const FieldSpy: React.FunctionComponent<FieldSpyProps> = ({ names, children, onChange, subscription }) => {
+const FieldSpy: React.ComponentType<FieldSpyProps> = ({ names, children, onChange, subscription }) => {
   const { subscribe, unsubscribe, getState, formOptions, batch } = useContext(FormManagerContext);
   const [, rerender] = useReducer((prev) => prev + 1, 0);
 
@@ -53,6 +53,9 @@ const FieldSpy: React.FunctionComponent<FieldSpyProps> = ({ names, children, onC
 
   if (typeof children === 'function') {
     return children(newState);
+  } else if (children) {
+    // eslint-disable-next-line no-console
+    console.error(`Children of FieldSpy has to be a function, you provided: ${typeof children}`);
   }
 
   return null;

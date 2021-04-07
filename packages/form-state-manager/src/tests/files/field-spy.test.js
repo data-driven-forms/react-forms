@@ -185,4 +185,25 @@ describe('<FieldSpy />', () => {
 
     expect(render.mock.calls.length).toEqual(2);
   });
+
+  it('show error when children is not a function', async () => {
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
+
+    await act(async () => {
+      wrapper = mount(
+        <FormStateManager subscription={{ all: false }}>
+          {() => (
+            <FieldSpy names={['field-1']}>
+              <span>not a function</span>
+            </FieldSpy>
+          )}
+        </FormStateManager>
+      );
+    });
+    wrapper.update();
+
+    expect(consoleSpy).toHaveBeenCalledWith('Children of FieldSpy has to be a function, you provided: object');
+
+    consoleSpy.mockRestore();
+  });
 });
