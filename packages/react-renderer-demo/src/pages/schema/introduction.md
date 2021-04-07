@@ -194,7 +194,11 @@ Type is one of our provided validators: [required](/schema/required-validator), 
 
 Or you can implement your own via creating a [validator mapper](/mappers/validator-mapper).
 
-All provided validators let you change the message via `message` attribute or you can set them [globally](/schema/overwriting-default-message).
+**Message**
+
+All provided validators let you change the message via [message attribute](/schema/custom-validator-message) or you can set them [globally](/schema/overwriting-default-message).
+
+By default, each validator provides a default message in English.
 
 **function**
 
