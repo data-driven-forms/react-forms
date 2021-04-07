@@ -1,12 +1,12 @@
 const schemaNav = [
   {
+    component: 'introduction',
+    linkText: 'Introduction'
+  },
+  {
     subHeader: true,
     title: 'FieldProperties',
     noRoute: true
-  },
-  {
-    component: 'introduction',
-    linkText: 'Introduction'
   },
   {
     component: 'clear-on-unmount',
@@ -68,6 +68,10 @@ const schemaNav = [
   {
     component: 'custom-validator',
     linkText: 'Custom validator'
+  },
+  {
+    component: 'custom-validator-message',
+    linkText: 'Custom message'
   },
   {
     component: 'overwriting-default-message',
