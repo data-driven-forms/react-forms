@@ -94,11 +94,15 @@ yarn build
 
 3. Test a package
 
-You can test parsers using tests. Tests needed to be run from the core folder.
+You can test parsers using tests. Tests can be ran from core folder or from specific package.
 
 ```console
+yarn test --watchAll packages/pf4-component-mapper
+
+# or
+
 cd packages/pf4-component-mapper
-yarn test --watchAll packages/parsers
+yarn test
 ```
 
 4. How to clean?
