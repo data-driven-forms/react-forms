@@ -21,7 +21,7 @@ All you need is to [install](/installation) the form renderer and then to choose
 
 Then you can import `FormRenderer` from the `@data-driven-forms/react-form-renderer`. This component takes four required props: **FormTemplate**, **schema**, **componentMapper** and **onSubmit**. You can read about them [here](/components/renderer#requiredprops).
 
-Following example shows basic usage of Data Driven Forms library with our [Material UI mapper](/mappers/mui-component-mapper).
+Following example shows basic usage of Data Driven Forms library with our [Material UI mapper](/provided-mappers/mui-component-mapper).
 
 <CodeExample source="components/get-started/get-started" mode="preview" />
 

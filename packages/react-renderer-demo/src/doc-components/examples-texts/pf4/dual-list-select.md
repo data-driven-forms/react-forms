@@ -1,6 +1,6 @@
 ## Props
 
-Dual list select is wrapped in a form group, so it accepts all [form group props](/mappers/component-api#formgroupwrappedcomponents). It also accepts the same props as the [original component](https://www.patternfly.org/v4/components/dual-list-selector).
+Dual list select is wrapped in a form group, so it accepts all [form group props](/provided-mappers/component-api#formgroupwrappedcomponents). It also accepts the same props as the [original component](https://www.patternfly.org/v4/components/dual-list-selector).
 
 The component implements three following custom props:
 
