@@ -65,6 +65,18 @@ yarn dev
 yarn lerna clean # will delete all node_modules
 ```
 
+This command **does not remove** the root `node_module` folder.
+
+### Cleaning built files
+
+To clean built files use:
+
+```bash
+yarn clean-build
+```
+
+This script is also ran automatically before each build.
+
 ## Tests
 
 You can test parsers using tests. Tests can be ran from core folder or from specific package.
