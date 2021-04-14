@@ -20,7 +20,7 @@
     "lint:ts": "tslint -c ./tslint.json 'packages/**/*.d.ts'",
     "generate-template": "node ./scripts/generate-mapper.js",
     "clean-build": "node ./scripts/clean-build.js",
-    "preinstall": "node ./scripts/clean-build.js"
+    "prebuild": "node ./scripts/clean-build.js"
   },
   "workspaces": [
     "packages/**"
