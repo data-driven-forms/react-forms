@@ -56,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
   },
   emptyTarget: {
     height: '100%'
+  },
+  editor: {
+    width: '100%'
   }
 }));
 
@@ -204,7 +207,7 @@ const LiveEditor = () => {
                 </Box>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                <CodeEditor value={JSON.stringify(getSchema(), null, 2)} />
+                <CodeEditor keepLastLine editorClassname={classes.editor} value={JSON.stringify(getSchema(), null, 2)} />
               </ExpansionPanelDetails>
             </ExpansionPanel>
             <CopySnackbar open={openTooltip} handleClose={() => setOpenTooltip(false)} />
