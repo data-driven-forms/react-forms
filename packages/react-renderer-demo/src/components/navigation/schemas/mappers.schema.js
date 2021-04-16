@@ -17,10 +17,6 @@ const mappersSchema = [
     link: 'file-input'
   },
   {
-    linkText: 'Common components API',
-    link: 'component-api'
-  },
-  {
     subHeader: true,
     noRoute: true,
     title: 'Schema mappers'
