@@ -11,7 +11,7 @@ To achieve that you need to rerender the changing field on each form change. Tha
 
 ## Subscription example
 
-Using [subscription](/components/renderer#optionalprops) is a simple way how to let form to be rerendered each time values changed. However, this solution can bring a performance hit when used in large forms with tens of fields.
+Using [subscription](/components/renderer##subscription) is a simple way how to let form to be rerendered each time values changed. However, this solution can bring a performance hit when used in large forms with tens of fields.
 
 <CodeExample source="components/examples/resolve-props-subscription" mode="preview" />
 
