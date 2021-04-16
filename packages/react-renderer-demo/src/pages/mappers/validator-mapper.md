@@ -5,7 +5,7 @@ import CodeExample from '@docs/code-example';
 
 # Validator mapper
 
-If you need to expand default Data Driven Forms validator types, you can use [validatorMapper](/components/renderer#optionalprops).
+If you need to expand default Data Driven Forms validator types, you can use [validatorMapper](/components/renderer#validatormapper).
 
 ```jsx
 const customValidatorMapper = {

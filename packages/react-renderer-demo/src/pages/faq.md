@@ -17,7 +17,7 @@ import CodeExample from '@docs/code-example';
 
 **A.** Right now, there are two standard ways how to update the second component:
 
-1) Set [subscription](/components/renderer#optionalprops)
+1) Set [subscription](/components/renderer#subscription)
 
 ```jsx
 <FormRenderer

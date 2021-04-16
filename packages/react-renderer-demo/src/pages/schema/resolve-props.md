@@ -62,7 +62,7 @@ const componentMapper = {
 
 ## Change props according to state of other components
 
-You can get states of all other fields in the form via functions from `formOptions`. Don't forget to set the right [subscription](/components/renderer#optionalprops) to trigger `resolveProps` functions from changing other fields.
+You can get states of all other fields in the form via functions from `formOptions`. Don't forget to set the right [subscription](/components/renderer#subscription) to trigger `resolveProps` functions from changing other fields.
 
 ## Example
 
