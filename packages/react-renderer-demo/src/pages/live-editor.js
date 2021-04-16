@@ -9,9 +9,9 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import PanToolIcon from '@material-ui/icons/PanTool';
@@ -195,8 +195,8 @@ const LiveEditor = () => {
         debug={false}
         render={({ isValid, getSchema, ...props }) => (
           <BuilderTemplate {...props} className={classes.builderWrapper}>
-            <ExpansionPanel className={classes.expansionPanel}>
-              <ExpansionPanelSummary>
+            <Accordion className={classes.expansionPanel}>
+              <AccordionSummary>
                 <Box display="flex" justifyContent="space-between" alignItems="center" className={classes.builderControlsWrapper}>
                   <Typography>Click to preview schema</Typography>
                   <CopyToClipboard text={JSON.stringify(getSchema())} onCopy={() => setOpenTooltip(true)}>
@@ -205,11 +205,11 @@ const LiveEditor = () => {
                     </Button>
                   </CopyToClipboard>
                 </Box>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
+              </AccordionSummary>
+              <AccordionDetails>
                 <CodeEditor keepLastLine editorClassname={classes.editor} value={JSON.stringify(getSchema(), null, 2)} />
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
+              </AccordionDetails>
+            </Accordion>
             <CopySnackbar open={openTooltip} handleClose={() => setOpenTooltip(false)} />
           </BuilderTemplate>
         )}
