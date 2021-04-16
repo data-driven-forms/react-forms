@@ -16,6 +16,10 @@ import CheckIcon from '@material-ui/icons/Check';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
+import LinkIcon from '@material-ui/icons/Link';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+
 import Link from 'next/link';
 import clsx from 'clsx';
 
@@ -27,6 +31,8 @@ import * as ant from '../stackblitz-templates/ant-templates';
 import * as carbon from '../stackblitz-templates/carbon-templates';
 
 import avalableMappers from '../helpers/available-mappers';
+import GhIcon from './common/gh-svg-icon';
+import originalComponentLink from '../helpers/original-component-link';
 
 const metadata = {
   mui,
@@ -108,6 +114,10 @@ const useStyles = makeStyles((theme) => ({
         height: 500
       }
     }
+  },
+  buttonGroup: {
+    marginTop: 16,
+    marginBottom: 16
   }
 }));
 
@@ -149,63 +159,85 @@ const ComponentExample = ({ variants, schema, activeMapper, component }) => {
     ));
 
   return (
-    <Box display="flex" className={classes.box}>
-      <Card style={{ minHeight: 500 }} square>
-        <CardContent>
-          <Typography component="h3">Options</Typography>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Type</TableCell>
-                <TableCell>Required</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {variants.map(({ name, type, required }) => (
-                <TableRow key={name}>
-                  <TableCell>{name}</TableCell>
-                  <TableCell>{`${type}`}</TableCell>
-                  <TableCell>{required && <CheckIcon fontSize="small" />}</TableCell>
+    <React.Fragment>
+      <Box display="flex" className={classes.box}>
+        <Card style={{ minHeight: 500 }} square>
+          <CardContent>
+            <Typography component="h3">Options</Typography>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Type</TableCell>
+                  <TableCell>Required</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
-      <Box display="flex" className={classes.editorContainer}>
-        <div className={classes.smTabDown}>
-          <Tabs
-            value={activeMapper}
-            orientation="horizontal"
-            variant="fullWidth"
-            classes={{
-              indicator: classes.indicator
-            }}
-          >
-            {renderMapperTabs()}
-          </Tabs>
-        </div>
-        <div className={classes.smTabUp}>
-          <Tabs
-            value={activeMapper}
-            orientation="vertical"
-            variant="scrollable"
-            classes={{
-              indicator: classes.indicator
-            }}
-          >
-            {renderMapperTabs()}
-          </Tabs>
-        </div>
-        <div className={classes.spinnerCheat}>
-          <div id="code-target"></div>
-          <div className={classes.spinner}>
-            <CircularProgress color="secondary" size={80} />
+              </TableHead>
+              <TableBody>
+                {variants.map(({ name, type, required }) => (
+                  <TableRow key={name}>
+                    <TableCell>{name}</TableCell>
+                    <TableCell>{`${type}`}</TableCell>
+                    <TableCell>{required && <CheckIcon fontSize="small" />}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+        <Box display="flex" className={classes.editorContainer}>
+          <div className={classes.smTabDown}>
+            <Tabs
+              value={activeMapper}
+              orientation="horizontal"
+              variant="fullWidth"
+              classes={{
+                indicator: classes.indicator
+              }}
+            >
+              {renderMapperTabs()}
+            </Tabs>
           </div>
-        </div>
+          <div className={classes.smTabUp}>
+            <Tabs
+              value={activeMapper}
+              orientation="vertical"
+              variant="scrollable"
+              classes={{
+                indicator: classes.indicator
+              }}
+            >
+              {renderMapperTabs()}
+            </Tabs>
+          </div>
+          <div className={classes.spinnerCheat}>
+            <div id="code-target"></div>
+            <div className={classes.spinner}>
+              <CircularProgress color="secondary" size={80} />
+            </div>
+          </div>
+        </Box>
       </Box>
-    </Box>
+      <ButtonGroup fullWidth className={classes.buttonGroup}>
+        <Button
+          component="a"
+          rel="noopener noreferrer"
+          target="_blank"
+          href={originalComponentLink(activeMapper, component)}
+          startIcon={<LinkIcon />}
+        >
+          Original documentation
+        </Button>
+        <Button
+          component="a"
+          rel="noopener noreferrer"
+          target="_blank"
+          href={`https://github.com/data-driven-forms/react-forms/blob/master/packages/${activeMapper}-component-mapper/src/${component}/${component}.js`}
+          startIcon={<GhIcon />}
+        >
+          DDF implementation
+        </Button>
+      </ButtonGroup>
+    </React.Fragment>
   );
 };
 
