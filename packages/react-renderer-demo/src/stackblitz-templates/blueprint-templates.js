@@ -72,6 +72,7 @@ export const dependencies = {
   '@babel/runtime': '7.12.1',
   '@data-driven-forms/react-form-renderer': 'latest',
   '@data-driven-forms/blueprint-component-mapper': 'latest',
+  '@data-driven-forms/common': 'latest',
   '@blueprintjs/core': 'latest',
   '@blueprintjs/datetime': 'latest',
   '@blueprintjs/select': 'latest',

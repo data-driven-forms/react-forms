@@ -67,7 +67,9 @@ export const dependencies = {
   '@babel/runtime': '^7.12.1',
   '@data-driven-forms/react-form-renderer': 'latest',
   '@data-driven-forms/mui-component-mapper': 'latest',
+  '@data-driven-forms/common': 'latest',
   '@material-ui/core': 'latest',
   '@material-ui/icons': 'latest',
+  '@material-ui/styles': 'latest',
   'prop-types': 'latest'
 };
