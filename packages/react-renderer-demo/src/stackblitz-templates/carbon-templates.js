@@ -67,6 +67,7 @@ export const dependencies = {
   'react-dom': 'latest',
   '@data-driven-forms/react-form-renderer': 'latest',
   '@data-driven-forms/carbon-component-mapper': 'latest',
+  '@data-driven-forms/common': 'latest',
   '@carbon/icons-react': 'latest',
   'carbon-components': 'latest',
   'carbon-components-react': 'latest',
