@@ -65,6 +65,7 @@ export const dependencies = {
   'react-dom': 'latest',
   '@data-driven-forms/react-form-renderer': 'latest',
   '@data-driven-forms/ant-component-mapper': 'latest',
+  '@data-driven-forms/common': 'latest',
   antd: 'latest',
   '@ant-design/icons': 'latest',
   'prop-types': 'latest',

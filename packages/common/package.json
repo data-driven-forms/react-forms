@@ -16,6 +16,7 @@
   "repository": "git@github.com:data-driven-forms/react-forms.git",
   "devDependencies": {
     "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
@@ -45,14 +46,13 @@
     "webpack-merge": "^4.1.4"
   },
   "dependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
     "clsx": "^1.0.4",
     "lodash": "^4.17.15",
     "react-select": "^3.0.8",
     "prop-types": "^15.7.2"
   },
   "peerDependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": ">=16.13.1",
+    "react-dom": ">=16.13.1"
   }
 }

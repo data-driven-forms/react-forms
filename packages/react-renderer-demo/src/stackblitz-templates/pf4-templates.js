@@ -67,6 +67,7 @@ export const dependencies = {
   'react-dom': 'latest',
   '@data-driven-forms/react-form-renderer': 'latest',
   '@data-driven-forms/pf4-component-mapper': 'latest',
+  '@data-driven-forms/common': 'latest',
   '@patternfly/react-core': 'latest',
   '@patternfly/react-icons': 'latest',
   '@patternfly/react-styles': 'latest',

@@ -67,6 +67,7 @@ export const dependencies = {
   '@babel/runtime': '^7.13.10',
   '@data-driven-forms/react-form-renderer': 'latest',
   '@data-driven-forms/suir-component-mapper': 'latest',
+  '@data-driven-forms/common': 'latest',
   'semantic-ui-react': 'latest',
   'prop-types': 'latest'
 };
