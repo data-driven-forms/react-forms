@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import {
   GridProps,
   ListProps,
-  IconButtonProps,
+  ButtonProps,
   IconProps,
   ListItemProps,
   ListItemIconProps,
@@ -14,7 +14,8 @@ import {
   FormHelperTextProps,
   TypographyProps,
   ToolbarProps,
-  TextFieldProps
+  TextFieldProps,
+  PaperProps,
 } from "@material-ui/core";
 
 export interface DualListOption extends AnyObject {
@@ -57,17 +58,14 @@ interface InternalDualListSelectProps {
   ButtonsInternalGridProps?: GridProps;
   ButtonGridProps?: GridProps;
   ToRightGridProps?: GridProps;
-  IconButtonProps?: IconButtonProps;
-  ToRightIconButtonProps?: IconButtonProps;
-  IconProps?: IconProps;
-  AllToLeftIconProps?: IconProps;
+  ButtonProps?: ButtonProps;
+  ToRightIconButtonProps?: ButtonProps;
   AllToRightGridProps?: GridProps;
-  AllToRightIconButtonProps?: IconButtonProps;
+  AllToRightIconButtonProps?: ButtonProps;
   AllToLeftGridProps?: GridProps;
-  AllToLeftIconButtonProps?: IconButtonProps;
+  AllToLeftIconButtonProps?: ButtonProps;
   ToLeftGridProps?: GridProps;
-  ToLeftIconProps?: IconProps;
-  ToLeftIconButtonProps?: IconButtonProps;
+  ToLeftIconButtonProps?: ButtonProps;
   RightListGridProps?: GridProps;
   RightListProps?: ListProps;
   ListItemProps?: ListItemProps;
@@ -88,18 +86,22 @@ interface InternalDualListSelectProps {
   TitleProps?: TypographyProps;
   ToolbarProps?: ToolbarProps;
   FilterFieldProps?: TextFieldProps;
-  SortIconButtonProps?: IconButtonProps;
+  SortIconButtonProps?: ButtonProps;
   SortIconProps?: IconProps;
   LeftToolbarProps?: ToolbarProps;
   LeftFilterFieldProps?: TextFieldProps;
-  LeftSortIconButtonProps?: IconButtonProps;
+  LeftSortIconButtonProps?: ButtonProps;
   LeftSortIconProps?: IconProps;
   LeftTitleProps?: TypographyProps;
   RightToolbarProps?: ToolbarProps;
   RightFilterFieldProps?: TextFieldProps;
-  RightSortIconButtonProps?: IconButtonProps;
+  RightSortIconButtonProps?: ButtonProps;
   RightSortIconProps?: IconProps;
   RightTitleProps?: TypographyProps;
+  isFilterable?: Boolean;
+  PaperProps?: PaperProps;
+  LeftPaperProps?: PaperProps;
+  RightPaperProps?: PaperProps;
 }
 
 export type DualListSelectProps = InternalDualListSelectProps & UseFieldApiComponentConfig;
