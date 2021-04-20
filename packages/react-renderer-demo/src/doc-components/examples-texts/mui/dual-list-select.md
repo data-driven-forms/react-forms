@@ -22,6 +22,7 @@ Dual list select is wrapped in a form group, so it accepts all [form group props
 |filterValueText|String|'Remove your filter to see all selected'|Placeholder for value when there is no filtered value|
 |filterOptionsText|String|'Remove your filter to see all options'|Placeholder for options when there is no filtered option|
 |checkboxVariant|bool|false|Change list item to checkboxes|
+|isFilterable|bool|true|Shows toolbar for both lists|
 
 ### Options
 
@@ -53,14 +54,12 @@ MUI DualListSelect provides fully customization. When the props offers Right/Lef
 |ToRightGridProps||
 |IconButtonProps||
 |ToRightIconButtonProps||
-|IconProps||
 |AllToLeftIconProps||
 |AllToRightGridProps||
 |AllToRightIconButtonProps||
 |AllToLeftGridProps||
 |AllToLeftIconButtonProps||
 |ToLeftGridProps||
-|ToLeftIconProps||
 |ToLeftIconButtonProps||
 |ListItemProps|yes|
 |ListItemIconProps|yes|
@@ -74,3 +73,4 @@ MUI DualListSelect provides fully customization. When the props offers Right/Lef
 |FilterFieldProps|yes|
 |SortIconButtonProps|yes|
 |SortIconProps|yes|
+|PaperProps|yes|

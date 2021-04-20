@@ -16,12 +16,11 @@ import {
   FormHelperText,
   Toolbar,
   TextField,
-  Typography
+  Typography,
+  Paper,
+  Button
 } from '@material-ui/core';
 
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 import SortIcon from '@material-ui/icons/ArrowUpward';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -31,7 +30,7 @@ import DualListSelectCommon from '@data-driven-forms/common/dual-list-select';
 import FormFieldGrid from '../form-field-grid/form-field-grid';
 import { validationError } from '../validation-error/validation-error';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   allToLeftIcon: {
     transform: 'scaleX(-1)'
   },
@@ -44,7 +43,8 @@ const useStyles = makeStyles(() => ({
   },
   button: {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    margin: theme.spacing(0.5, 0)
   },
   buttonsGrid: {
     height: '100%',
@@ -71,57 +71,61 @@ const ListInternal = ({
   ListItemIconProps,
   ListItemTextProps,
   ListItemSecondaryActionProps,
-  checkboxVariant
+  checkboxVariant,
+  PaperProps,
+  LeftPaperProps
 }) => {
   const classes = useStyles();
 
   return (
-    <List component="nav" {...ListProps} className={clsx(classes.list, ListProps.className)}>
-      {value.length < 1 && (
-        <ListItem button disabled {...ListItemProps}>
-          <ListItemText primary={filterValue ? filterValueText : noOptionsTitle} />
-        </ListItem>
-      )}
-      {value.length > 0 &&
-        value.map(
-          ({
-            value,
-            label,
-            icon,
-            isCheckbox,
-            secondaryActions,
-            ListItemProps: ListItemPropsItem,
-            ListItemIconProps: ListItemIconPropsItem,
-            ListItemTextProps: ListItemTextPropsItem,
-            ListItemSecondaryActionProps: ListItemSecondaryActionPropsItem
-          }) => (
-            <ListItem
-              button
-              key={value}
-              selected={selectedValues.includes(value)}
-              onClick={(e) => optionClick(isCheckbox || checkboxVariant ? { ...e, ctrlKey: true } : e, value)}
-              {...ListItemProps}
-              {...ListItemPropsItem}
-            >
-              {(icon || isCheckbox || checkboxVariant) && (
-                <ListItemIcon {...ListItemIconProps} {...ListItemIconPropsItem}>
-                  {isCheckbox || checkboxVariant ? (
-                    <Checkbox edge="start" checked={selectedValues.includes(value)} tabIndex={-1} disableRipple />
-                  ) : (
-                    icon
-                  )}
-                </ListItemIcon>
-              )}
-              <ListItemText primary={label} {...ListItemTextProps} {...ListItemTextPropsItem} />
-              {secondaryActions && (
-                <ListItemSecondaryAction {...ListItemSecondaryActionProps} {...ListItemSecondaryActionPropsItem}>
-                  {secondaryActions}
-                </ListItemSecondaryAction>
-              )}
-            </ListItem>
-          )
+    <Paper {...PaperProps} {...LeftPaperProps} className={clsx(PaperProps && PaperProps.className, LeftPaperProps && LeftPaperProps.className)}>
+      <List component="div" role="list" dense {...ListProps} className={clsx(classes.list, ListProps.className)}>
+        {value.length < 1 && (
+          <ListItem button disabled {...ListItemProps}>
+            <ListItemText primary={filterValue ? filterValueText : noOptionsTitle} />
+          </ListItem>
         )}
-    </List>
+        {value.length > 0 &&
+          value.map(
+            ({
+              value,
+              label,
+              icon,
+              isCheckbox,
+              secondaryActions,
+              ListItemProps: ListItemPropsItem,
+              ListItemIconProps: ListItemIconPropsItem,
+              ListItemTextProps: ListItemTextPropsItem,
+              ListItemSecondaryActionProps: ListItemSecondaryActionPropsItem
+            }) => (
+              <ListItem
+                button
+                key={value}
+                selected={selectedValues.includes(value)}
+                onClick={(e) => optionClick(isCheckbox || checkboxVariant ? { ...e, ctrlKey: true } : e, value)}
+                {...ListItemProps}
+                {...ListItemPropsItem}
+              >
+                {(icon || isCheckbox || checkboxVariant) && (
+                  <ListItemIcon {...ListItemIconProps} {...ListItemIconPropsItem}>
+                    {isCheckbox || checkboxVariant ? (
+                      <Checkbox edge="start" checked={selectedValues.includes(value)} tabIndex={-1} disableRipple />
+                    ) : (
+                      icon
+                    )}
+                  </ListItemIcon>
+                )}
+                <ListItemText primary={label} {...ListItemTextProps} {...ListItemTextPropsItem} />
+                {secondaryActions && (
+                  <ListItemSecondaryAction {...ListItemSecondaryActionProps} {...ListItemSecondaryActionPropsItem}>
+                    {secondaryActions}
+                  </ListItemSecondaryAction>
+                )}
+              </ListItem>
+            )
+          )}
+      </List>
+    </Paper>
   );
 };
 
@@ -142,7 +146,9 @@ ListInternal.propTypes = {
   ListItemProps: PropTypes.object,
   ListItemIconProps: PropTypes.object,
   ListItemTextProps: PropTypes.object,
-  ListItemSecondaryActionProps: PropTypes.object
+  ListItemSecondaryActionProps: PropTypes.object,
+  PaperProps: PropTypes.object,
+  LeftPaperProps: PropTypes.object
 };
 
 ListInternal.defaultProps = {
@@ -252,6 +258,7 @@ const DualListSelect = ({
   filterValueTitle,
   filterValues,
   rightTitle,
+  isFilterable,
   // Props
   FormFieldGridProps,
   InternalGridProps,
@@ -265,14 +272,11 @@ const DualListSelect = ({
   ToRightGridProps,
   IconButtonProps,
   ToRightIconButtonProps,
-  IconProps,
-  AllToLeftIconProps,
   AllToRightGridProps,
   AllToRightIconButtonProps,
   AllToLeftGridProps,
   AllToLeftIconButtonProps,
   ToLeftGridProps,
-  ToLeftIconProps,
   ToLeftIconButtonProps,
   RightListGridProps,
   RightListProps,
@@ -305,7 +309,10 @@ const DualListSelect = ({
   RightFilterFieldProps,
   RightSortIconButtonProps,
   RightSortIconProps,
-  RightTitleProps
+  RightTitleProps,
+  PaperProps,
+  LeftPaperProps,
+  RightPaperProps
 }) => {
   const classes = useStyles();
   const invalid = validationError(meta, validateOnMount);
@@ -324,21 +331,23 @@ const DualListSelect = ({
                 {leftTitle}
               </Typography>
             )}
-            <ToolbarInternal
-              ToolbarProps={ToolbarProps}
-              LeftToolbarProps={LeftToolbarProps}
-              filterOptions={filterOptions}
-              filterOptionsTitle={filterOptionsTitle}
-              FilterFieldProps={FilterFieldProps}
-              sortOptions={sortOptions}
-              SortIconButtonProps={SortIconButtonProps}
-              SortIconProps={SortIconProps}
-              LeftSortIconProps={LeftSortIconProps}
-              LeftFilterFieldProps={LeftFilterFieldProps}
-              LeftSortIconButtonProps={LeftSortIconButtonProps}
-              filter={state.filterOptions}
-              sortDesc={state.sortLeftDesc}
-            />
+            {isFilterable && (
+              <ToolbarInternal
+                ToolbarProps={ToolbarProps}
+                LeftToolbarProps={LeftToolbarProps}
+                filterOptions={filterOptions}
+                filterOptionsTitle={filterOptionsTitle}
+                FilterFieldProps={FilterFieldProps}
+                sortOptions={sortOptions}
+                SortIconButtonProps={SortIconButtonProps}
+                SortIconProps={SortIconProps}
+                LeftSortIconProps={LeftSortIconProps}
+                LeftFilterFieldProps={LeftFilterFieldProps}
+                LeftSortIconButtonProps={LeftSortIconButtonProps}
+                filter={state.filterOptions}
+                sortDesc={state.sortLeftDesc}
+              />
+            )}
             <ListInternal
               optionClick={handleOptionsClick}
               value={leftValues}
@@ -352,6 +361,8 @@ const DualListSelect = ({
               ListItemIconProps={{ ...ListItemIconProps, ...LeftListItemIconProps }}
               ListItemTextProps={{ ...ListItemTextProps, ...LeftItemTextProps }}
               ListItemSecondaryActionProps={{ ...ListItemSecondaryActionProps, ...LeftItemSecondaryActionProps }}
+              PaperProps={PaperProps}
+              LeftPaperProps={LeftPaperProps}
             />
           </Grid>
           <Grid item xs={12} md={2} {...ButtonsGridProps}>
@@ -360,24 +371,6 @@ const DualListSelect = ({
               {...ButtonsInternalGridProps}
               className={clsx(classes.buttonsGrid, ButtonsInternalGridProps && ButtonsInternalGridProps.className)}
             >
-              <Grid
-                item
-                md={12}
-                sm={3}
-                {...ButtonGridProps}
-                {...ToRightGridProps}
-                className={clsx(classes.button, ButtonGridProps && ButtonGridProps.className, ToRightGridProps && ToRightGridProps.className)}
-              >
-                <IconButton
-                  disabled={leftValues.length === 0}
-                  onClick={handleMoveRight}
-                  title={moveRightTitle}
-                  {...IconButtonProps}
-                  {...ToRightIconButtonProps}
-                >
-                  <ChevronRightIcon {...IconProps} {...AllToLeftIconProps} />
-                </IconButton>
-              </Grid>
               {allToRight && (
                 <Grid
                   item
@@ -387,17 +380,59 @@ const DualListSelect = ({
                   {...AllToRightGridProps}
                   className={clsx(classes.button, ButtonGridProps && ButtonGridProps.className, AllToRightGridProps && AllToRightGridProps.className)}
                 >
-                  <IconButton
+                  <Button
+                    variant="outlined"
+                    size="small"
                     disabled={leftValues.length === 0}
                     onClick={handleClearLeftValues}
-                    title={moveAllRightTitle}
+                    aria-label={moveAllRightTitle}
                     {...IconButtonProps}
                     {...AllToRightIconButtonProps}
                   >
-                    <DoubleArrowIcon {...IconProps} {...AllToLeftIconProps} />
-                  </IconButton>
+                    ≫
+                  </Button>
                 </Grid>
               )}
+              <Grid
+                item
+                md={12}
+                sm={3}
+                {...ButtonGridProps}
+                {...ToRightGridProps}
+                className={clsx(classes.button, ButtonGridProps && ButtonGridProps.className, ToRightGridProps && ToRightGridProps.className)}
+              >
+                <Button
+                  variant="outlined"
+                  size="small"
+                  disabled={leftValues.length === 0}
+                  onClick={handleMoveRight}
+                  aria-label={moveRightTitle}
+                  {...IconButtonProps}
+                  {...ToRightIconButtonProps}
+                >
+                  &gt;
+                </Button>
+              </Grid>
+              <Grid
+                item
+                md={12}
+                sm={3}
+                {...ButtonGridProps}
+                {...ToLeftGridProps}
+                className={clsx(classes.button, ButtonGridProps && ButtonGridProps.className, ToLeftGridProps && ToLeftGridProps.className)}
+              >
+                <Button
+                  variant="outlined"
+                  size="small"
+                  disabled={rightValues.length === 0}
+                  onClick={handleMoveLeft}
+                  aria-label={moveLeftTitle}
+                  {...IconButtonProps}
+                  {...ToLeftIconButtonProps}
+                >
+                  &lt;
+                </Button>
+              </Grid>
               {allToLeft && (
                 <Grid
                   item
@@ -407,35 +442,19 @@ const DualListSelect = ({
                   {...AllToLeftGridProps}
                   className={clsx(classes.button, ButtonGridProps && ButtonGridProps.className, AllToLeftGridProps && AllToLeftGridProps.className)}
                 >
-                  <IconButton
+                  <Button
+                    variant="outlined"
+                    size="small"
                     disabled={rightValues.length === 0}
                     onClick={handleClearRightValues}
-                    title={moveAllLeftTitle}
+                    aria-label={moveAllLeftTitle}
                     {...IconButtonProps}
                     {...AllToLeftIconButtonProps}
                   >
-                    <DoubleArrowIcon className={classes.allToLeftIcon} {...IconProps} {...AllToLeftIconProps} />
-                  </IconButton>
+                    ≪
+                  </Button>
                 </Grid>
               )}
-              <Grid
-                item
-                md={12}
-                sm={3}
-                {...ButtonGridProps}
-                {...ToLeftGridProps}
-                className={clsx(classes.button, ButtonGridProps && ButtonGridProps.className, ToLeftGridProps && ToLeftGridProps.className)}
-              >
-                <IconButton
-                  disabled={rightValues.length === 0}
-                  onClick={handleMoveLeft}
-                  title={moveLeftTitle}
-                  {...IconButtonProps}
-                  {...ToLeftIconButtonProps}
-                >
-                  <ChevronLeftIcon {...IconProps} {...ToLeftIconProps} />
-                </IconButton>
-              </Grid>
             </Grid>
           </Grid>
           <Grid item xs={12} md={5} {...ListGridProps} {...RightListGridProps}>
@@ -444,21 +463,23 @@ const DualListSelect = ({
                 {rightTitle}
               </Typography>
             )}
-            <ToolbarInternal
-              ToolbarProps={ToolbarProps}
-              LeftToolbarProps={RightToolbarProps}
-              filterOptions={filterValues}
-              filterOptionsTitle={filterValueTitle}
-              FilterFieldProps={FilterFieldProps}
-              sortOptions={sortValues}
-              SortIconButtonProps={SortIconButtonProps}
-              SortIconProps={SortIconProps}
-              LeftSortIconProps={RightSortIconProps}
-              LeftFilterFieldProps={RightFilterFieldProps}
-              LeftSortIconButtonProps={RightSortIconButtonProps}
-              filter={state.filterValue}
-              sortDesc={state.sortRightDesc}
-            />
+            {isFilterable && (
+              <ToolbarInternal
+                ToolbarProps={ToolbarProps}
+                LeftToolbarProps={RightToolbarProps}
+                filterOptions={filterValues}
+                filterOptionsTitle={filterValueTitle}
+                FilterFieldProps={FilterFieldProps}
+                sortOptions={sortValues}
+                SortIconButtonProps={SortIconButtonProps}
+                SortIconProps={SortIconProps}
+                LeftSortIconProps={RightSortIconProps}
+                LeftFilterFieldProps={RightFilterFieldProps}
+                LeftSortIconButtonProps={RightSortIconButtonProps}
+                filter={state.filterValue}
+                sortDesc={state.sortRightDesc}
+              />
+            )}
             <ListInternal
               checkboxVariant={checkboxVariant}
               optionClick={handleValuesClick}
@@ -472,6 +493,8 @@ const DualListSelect = ({
               ListItemIconProps={{ ...ListItemIconProps, ...RightListItemIconProps }}
               ListItemTextProps={{ ...ListItemTextProps, ...RightItemTextProps }}
               ListItemSecondaryActionProps={{ ...ListItemSecondaryActionProps, ...RightItemSecondaryActionProps }}
+              PaperProps={PaperProps}
+              LeftPaperProps={RightPaperProps}
             />
           </Grid>
         </Grid>
@@ -521,6 +544,7 @@ DualListSelect.propTypes = {
   filterValues: PropTypes.func,
   rightValues: PropTypes.array,
   handleValuesClick: PropTypes.func,
+  isFilterable: PropTypes.bool,
   // props
   FormFieldGridProps: PropTypes.object,
   InternalGridProps: PropTypes.object,
@@ -534,14 +558,11 @@ DualListSelect.propTypes = {
   ToRightGridProps: PropTypes.object,
   IconButtonProps: PropTypes.object,
   ToRightIconButtonProps: PropTypes.object,
-  IconProps: PropTypes.object,
-  AllToLeftIconProps: PropTypes.object,
   AllToRightGridProps: PropTypes.object,
   AllToRightIconButtonProps: PropTypes.object,
   AllToLeftGridProps: PropTypes.object,
   AllToLeftIconButtonProps: PropTypes.object,
   ToLeftGridProps: PropTypes.object,
-  ToLeftIconProps: PropTypes.object,
   ToLeftIconButtonProps: PropTypes.object,
   RightListGridProps: PropTypes.object,
   RightListProps: PropTypes.object,
@@ -574,7 +595,10 @@ DualListSelect.propTypes = {
   RightFilterFieldProps: PropTypes.object,
   RightSortIconButtonProps: PropTypes.object,
   RightSortIconProps: PropTypes.object,
-  RightTitleProps: PropTypes.object
+  RightTitleProps: PropTypes.object,
+  PaperProps: PropTypes.object,
+  LeftPaperProps: PropTypes.object,
+  RightPaperProps: PropTypes.object
 };
 
 DualListSelect.defaultProps = {
@@ -592,7 +616,8 @@ DualListSelect.defaultProps = {
   filterValueText: 'Remove your filter to see all selected',
   options: [],
   allToLeft: true,
-  allToRight: true
+  allToRight: true,
+  isFilterable: true
 };
 
 const DualListSelectWrapper = (props) => <DualListSelectCommon {...props} DualListSelect={DualListSelect} />;
