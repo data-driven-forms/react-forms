@@ -5,7 +5,7 @@ import Wizard from '@data-driven-forms/common/wizard/wizard';
 import WizardNav from './wizard-nav';
 import WizardStepButtons from './step-buttons';
 
-const WizardInternal = ({ buttonLabels, stepsInfo }) => {
+const WizardInternal = ({ buttonLabels, stepsInfo, conditionalSubmitFlag }) => {
   const { formOptions, currentStep, handlePrev, onKeyDown, handleNext, activeStepIndex, prevSteps } = useContext(WizardContext);
 
   const buttonLabelsFinal = {
@@ -23,6 +23,7 @@ const WizardInternal = ({ buttonLabels, stepsInfo }) => {
         {currentStep.fields.map((item) => formOptions.renderForm([item], formOptions))}
         <WizardStepButtons
           {...currentStep}
+          conditionalSubmitFlag={conditionalSubmitFlag}
           formOptions={formOptions}
           buttonLabels={buttonLabelsFinal}
           handleNext={handleNext}
@@ -36,6 +37,7 @@ const WizardInternal = ({ buttonLabels, stepsInfo }) => {
 
 WizardInternal.propTypes = {
   buttonLabels: PropTypes.object,
+  conditionalSubmitFlag: PropTypes.string.isRequired,
   stepsInfo: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.node,

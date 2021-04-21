@@ -43,6 +43,7 @@ const WizardInternal = ({
   navAriaLabel,
   StepTemplate,
   className,
+  conditionalSubmitFlag,
   ...rest
 }) => {
   const {
@@ -137,6 +138,7 @@ const WizardInternal = ({
               </FormSpy>
             </WizardNav>
             <WizardStep
+              conditionalSubmitFlag={conditionalSubmitFlag}
               buttonLabels={buttonLabels}
               buttonsClassName={buttonsClassName}
               showTitles={showTitles}
@@ -175,7 +177,8 @@ WizardInternal.propTypes = {
   navAriaLabel: PropTypes.string,
   container: PropTypes.instanceOf(Element),
   StepTemplate: PropTypes.elementType,
-  className: PropTypes.string
+  className: PropTypes.string,
+  conditionalSubmitFlag: PropTypes.string.isRequired
 };
 
 const defaultLabels = {

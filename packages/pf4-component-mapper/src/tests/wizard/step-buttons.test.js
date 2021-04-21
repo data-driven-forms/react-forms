@@ -7,6 +7,12 @@ import handleEnter from '@data-driven-forms/common/wizard/enter-handler';
 import RenderWithProvider from '../../../../../__mocks__/with-provider';
 
 import WizardStepButtons from '../../wizard/wizard-components/step-buttons';
+import componentTypes from '@data-driven-forms/react-form-renderer/component-types';
+import { CONDITIONAL_SUBMIT_FLAG } from '@data-driven-forms/common/wizard';
+import validatorTypes from '@data-driven-forms/react-form-renderer/validator-types';
+import { FormRenderer } from '@data-driven-forms/react-form-renderer';
+import FormTemplate from '../../form-template';
+import componentMapper from '../../component-mapper';
 
 describe('<WizardSTepButtons', () => {
   let initialProps;
@@ -320,5 +326,59 @@ describe('<WizardSTepButtons', () => {
       expect(handleNext).not.toHaveBeenCalled();
       expect(handleSubmit).not.toHaveBeenCalled();
     });
+  });
+
+  it.only('conditional submit step', () => {
+    const submit = jest.fn();
+    const schema = {
+      fields: [
+        {
+          component: componentTypes.WIZARD,
+          name: 'wizard',
+          fields: [
+            {
+              name: 'first-step',
+              nextStep: {
+                when: 'name',
+                stepMapper: {
+                  aws: 'summary',
+                  submit: CONDITIONAL_SUBMIT_FLAG
+                }
+              },
+              fields: [
+                {
+                  component: componentTypes.TEXT_FIELD,
+                  name: 'name',
+                  validate: [{ type: validatorTypes.REQUIRED }]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+
+    const wrapper = mount(
+      <FormRenderer
+        componentMapper={componentMapper}
+        FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
+        onSubmit={submit}
+        schema={schema}
+      />
+    );
+
+    wrapper.find('input').instance().value = 'bla';
+    wrapper.find('input').simulate('change');
+    wrapper.update();
+
+    expect(wrapper.find('button.pf-c-button.pf-m-primary').text()).toEqual('Next');
+
+    wrapper.find('input').instance().value = 'submit';
+    wrapper.find('input').simulate('change');
+    wrapper.update();
+
+    expect(wrapper.find('button.pf-c-button.pf-m-primary').text()).toEqual('Submit');
+    wrapper.find('button.pf-c-button.pf-m-primary').simulate('click');
+    expect(submit).toHaveBeenCalledWith({ name: 'submit' }, expect.any(Object), expect.any(Object));
   });
 });

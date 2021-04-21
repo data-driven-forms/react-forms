@@ -110,6 +110,7 @@ const WizardInternal = ({
   ProgressIndicatorProps,
   vertical,
   WizardBodyProps,
+  conditionalSubmitFlag,
   ...props
 }) => {
   const { formOptions, currentStep, handlePrev, onKeyDown, handleNext, activeStepIndex, selectNext, jumpToStep } = useContext(WizardContext);
@@ -132,30 +133,34 @@ const WizardInternal = ({
     <div onKeyDown={onKeyDown} {...props}>
       <WizardLayout nav={nav ? nav : null} fields={fields} WizardBodyProps={WizardBodyProps} />
       <FormSpy>
-        {({ invalid, validating, submitting }) => (
-          <div {...ButtonSetProps} className={clsx(buttonSet, ButtonSetProps.className)}>
-            {currentStep.nextStep ? (
-              <Button
-                onClick={() => handleNext(selectNext(currentStep.nextStep, formOptions.getState))}
-                disabled={!formOptions.valid || invalid || validating || submitting}
-                {...NextButtonProps}
-              >
-                {finalButtoLabels.next}
+        {({ invalid, validating, submitting }) => {
+          const nextResult = currentStep.nextStep ? selectNext(currentStep.nextStep, formOptions.getState) : currentStep.nextStep;
+          const progressNext = nextResult !== conditionalSubmitFlag && currentStep.nextStep;
+          return (
+            <div {...ButtonSetProps} className={clsx(buttonSet, ButtonSetProps.className)}>
+              {progressNext ? (
+                <Button
+                  onClick={() => handleNext(nextResult)}
+                  disabled={!formOptions.valid || invalid || validating || submitting}
+                  {...NextButtonProps}
+                >
+                  {finalButtoLabels.next}
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => formOptions.handleSubmit()}
+                  disabled={!formOptions.valid || invalid || validating || submitting}
+                  {...SubmitButtonProps}
+                >
+                  {finalButtoLabels.submit}
+                </Button>
+              )}
+              <Button kind="secondary" onClick={handlePrev} disabled={activeStepIndex === 0} {...BackButtonProps}>
+                {finalButtoLabels.back}
               </Button>
-            ) : (
-              <Button
-                onClick={() => formOptions.handleSubmit()}
-                disabled={!formOptions.valid || invalid || validating || submitting}
-                {...SubmitButtonProps}
-              >
-                {finalButtoLabels.submit}
-              </Button>
-            )}
-            <Button kind="secondary" onClick={handlePrev} disabled={activeStepIndex === 0} {...BackButtonProps}>
-              {finalButtoLabels.back}
-            </Button>
-          </div>
-        )}
+            </div>
+          );
+        }}
       </FormSpy>
     </div>
   );
@@ -178,7 +183,8 @@ WizardInternal.propTypes = {
   ButtonSetProps: PropTypes.object,
   ProgressIndicatorProps: PropTypes.object,
   vertical: PropTypes.bool,
-  WizardBodyProps: PropTypes.object
+  WizardBodyProps: PropTypes.object,
+  conditionalSubmitFlag: PropTypes.string.isRequired
 };
 
 WizardInternal.defaultProps = {
