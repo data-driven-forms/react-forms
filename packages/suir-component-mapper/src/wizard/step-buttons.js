@@ -13,17 +13,21 @@ const useStyles = createUseStyles({
   }
 });
 
-const NextButton = ({ nextStep, valid, handleNext, nextLabel, getState, handleSubmit, submitLabel }) => (
-  <Button
-    icon={nextStep ? 'right arrow' : undefined}
-    color="blue"
-    labelPosition={nextStep ? 'right' : undefined}
-    content={nextStep ? nextLabel : submitLabel}
-    disabled={!valid || getState().validating || getState().submitting}
-    onClick={() => (nextStep ? handleNext(selectNext(nextStep, getState)) : handleSubmit())}
-    type="button"
-  />
-);
+const NextButton = ({ nextStep, valid, handleNext, nextLabel, getState, handleSubmit, submitLabel, conditionalSubmitFlag }) => {
+  const nextResult = nextStep ? selectNext(nextStep, getState) : nextStep;
+  const progressNext = nextResult !== conditionalSubmitFlag && nextStep;
+  return (
+    <Button
+      icon={progressNext ? 'right arrow' : undefined}
+      color="blue"
+      labelPosition={progressNext ? 'right' : undefined}
+      content={progressNext ? nextLabel : submitLabel}
+      disabled={!valid || getState().validating || getState().submitting}
+      onClick={() => (progressNext ? handleNext(nextResult) : handleSubmit())}
+      type="button"
+    />
+  );
+};
 
 NextButton.propTypes = {
   nextStep: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
@@ -32,10 +36,11 @@ NextButton.propTypes = {
   valid: PropTypes.bool,
   handleNext: PropTypes.func.isRequired,
   nextLabel: PropTypes.node.isRequired,
-  getState: PropTypes.func.isRequired
+  getState: PropTypes.func.isRequired,
+  conditionalSubmitFlag: PropTypes.string.isRequired
 };
 
-const WizardStepButtons = ({ buttons: Buttons, ...props }) => {
+const WizardStepButtons = ({ conditionalSubmitFlag, buttons: Buttons, ...props }) => {
   const classes = useStyles();
   if (Buttons) {
     return <Buttons {...props} />;
@@ -51,7 +56,7 @@ const WizardStepButtons = ({ buttons: Buttons, ...props }) => {
   } = props;
 
   return (
-    <FormSpy subscription={{ valid: true, validating: true, submitting: true }}>
+    <FormSpy subscription={{ values: true, valid: true, validating: true, submitting: true }}>
       {() => (
         <div className={classes.root}>
           <Button type="button" onClick={formOptions.onCancel}>
@@ -59,7 +64,14 @@ const WizardStepButtons = ({ buttons: Buttons, ...props }) => {
           </Button>
           <div>
             <Button icon="left arrow" labelPosition="left" content={back} type="button" disabled={disableBack} onClick={handlePrev} />
-            <NextButton {...formOptions} handleNext={handleNext} nextStep={nextStep} nextLabel={next} submitLabel={submit} />
+            <NextButton
+              {...formOptions}
+              conditionalSubmitFlag={conditionalSubmitFlag}
+              handleNext={handleNext}
+              nextStep={nextStep}
+              nextLabel={next}
+              submitLabel={submit}
+            />
           </div>
         </div>
       )}
@@ -71,6 +83,7 @@ WizardStepButtons.propTypes = {
   disableBack: PropTypes.bool,
   handlePrev: PropTypes.func.isRequired,
   handleNext: PropTypes.func.isRequired,
+  conditionalSubmitFlag: PropTypes.string.isRequired,
   nextStep: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.shape({

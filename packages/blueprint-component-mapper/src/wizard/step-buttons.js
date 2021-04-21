@@ -6,17 +6,21 @@ import { createUseStyles } from 'react-jss';
 
 import { Button, Intent } from '@blueprintjs/core';
 
-const NextButton = ({ nextStep, handleNext, buttonLabels, getState, handleSubmit, isDisabled, ...props }) => (
-  <Button
-    disabled={isDisabled}
-    onClick={() => (nextStep ? handleNext(selectNext(nextStep, getState)) : handleSubmit())}
-    rightIcon={nextStep ? 'arrow-right' : 'arrow-up'}
-    intent={Intent.SUCCESS}
-    {...props}
-  >
-    {nextStep ? buttonLabels.next : buttonLabels.submit}
-  </Button>
-);
+const NextButton = ({ nextStep, handleNext, buttonLabels, getState, handleSubmit, isDisabled, conditionalSubmitFlag, ...props }) => {
+  const nextResult = nextStep ? selectNext(nextStep, getState) : nextStep;
+  const progressNext = nextResult !== conditionalSubmitFlag && nextStep;
+  return (
+    <Button
+      disabled={isDisabled}
+      onClick={() => (progressNext ? handleNext(nextResult) : handleSubmit())}
+      rightIcon={progressNext ? 'arrow-right' : 'arrow-up'}
+      intent={Intent.SUCCESS}
+      {...props}
+    >
+      {progressNext ? buttonLabels.next : buttonLabels.submit}
+    </Button>
+  );
+};
 
 NextButton.propTypes = {
   handleNext: PropTypes.func,
@@ -29,7 +33,8 @@ NextButton.propTypes = {
   nextStep: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
   getState: PropTypes.func,
   handleSubmit: PropTypes.func,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
+  conditionalSubmitFlag: PropTypes.string.isRequired
 };
 
 const useStyles = createUseStyles({
@@ -57,7 +62,8 @@ const StepButtons = ({
   CancelButtonProps,
   BackButtonProps,
   NextButtonProps,
-  SubmitButtonProps
+  SubmitButtonProps,
+  conditionalSubmitFlag
 }) => {
   const { buttonGroup } = useStyles();
 
@@ -77,6 +83,7 @@ const StepButtons = ({
           handleNext={handleNext}
           isDisabled={!formOptions.valid || isNextDisabled}
           handleSubmit={formOptions.handleSubmit}
+          conditionalSubmitFlag={conditionalSubmitFlag}
           {...(currentStep.nextStep ? NextButtonProps : SubmitButtonProps)}
         />
       </div>
@@ -88,6 +95,7 @@ StepButtons.propTypes = {
   currentStep: PropTypes.object,
   handlePrev: PropTypes.func,
   handleNext: PropTypes.func,
+  conditionalSubmitFlag: PropTypes.string.isRequired,
   formOptions: PropTypes.shape({
     onCancel: PropTypes.func,
     renderForm: PropTypes.func,
