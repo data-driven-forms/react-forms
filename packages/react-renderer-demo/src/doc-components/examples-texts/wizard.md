@@ -44,10 +44,13 @@ D) **conditional submit step**
 
 Based on a form state value, a step can change into the last step in the wizard and show *submit* button instead of *next* button.
 
-With default constant:
+With default constant: `@@ddf-common-wizard__conditional-submit-step`
+
+You can import this constant:
 
 ```jsx
-import { CONDITIONAL_SUBMIT_FLAG } from '@data-driven-forms/common/wizard'; // const value = @@ddf-common-wizard__conditional-submit-step
+--- { "switchable": false } ---
+import { CONDITIONAL_SUBMIT_FLAG } from '@data-driven-forms/common/wizard';
 
 ...
 // next step definition
