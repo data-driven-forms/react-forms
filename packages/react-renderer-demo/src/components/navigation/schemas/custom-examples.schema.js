@@ -14,6 +14,10 @@ const customExamplesSchema = [
   {
     component: 'resolve-props-db',
     linkText: 'ResolveProps stored in DB'
+  },
+  {
+    component: 'custom-wizard',
+    linkText: 'Custom wizard'
   }
 ];
 
