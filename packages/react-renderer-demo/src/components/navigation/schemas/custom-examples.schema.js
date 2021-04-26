@@ -18,6 +18,14 @@ const customExamplesSchema = [
   {
     component: 'custom-wizard',
     linkText: 'Custom wizard'
+  },
+  {
+    component: 'custom-form-buttons',
+    linkText: 'Custom form buttons'
+  },
+  {
+    component: 'form-level-errors',
+    linkText: 'Form level errors'
   }
 ];
 
