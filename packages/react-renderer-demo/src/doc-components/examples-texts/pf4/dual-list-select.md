@@ -136,6 +136,6 @@ const CustomRightSortButton = () => {
 };
 ```
 
-### isTree
+### isTree
 
 `isTree` follows the same structure as the [original prop](https://www.patternfly.org/v4/components/dual-list-selector#duallistselector), but you have to provide `value` for all leaves (not folders). You can also use `label` instead of `text` to preserve the same API as the standard variant. There is no `getValueFromNode` option for the tree variant.
