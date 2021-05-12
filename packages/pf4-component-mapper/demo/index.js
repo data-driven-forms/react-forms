@@ -10,7 +10,7 @@ import sandboxSchema from './demo-schemas/sandbox';
 import dualSchema from './demo-schemas/dual-list-schema';
 import demoSchema from '@data-driven-forms/common/demoschema';
 import selectSchema from './demo-schemas/select-schema';
-
+import Playground from '@data-driven-forms/common/playground';
 const Summary = props => <div>Custom summary component.</div>;
 
 const fieldArrayState = { schema: arraySchemaDDF, additionalOptions: {
@@ -51,6 +51,8 @@ class App extends React.Component {
                         <Button onClick={() => this.setState(state => ({ schema: dualSchema, additionalOptions: {} }))}>Dual List</Button>
                     </ToolbarItem>
                 </ToolbarGroup>
+                <Playground/>
+                
             </Toolbar>
             <FormRenderer
                 onSubmit={console.log}

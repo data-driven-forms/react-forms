@@ -78,7 +78,7 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "fs-extra": "^9.0.1",
+    "fs-extra": "^9.1.0",
     "glob": "^7.1.6",
     "identity-obj-proxy": "^3.0.0",
     "inquirer": "^7.1.0",
@@ -155,5 +155,7 @@
       ]
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "yarn": "^1.22.10"
+  }
 }
