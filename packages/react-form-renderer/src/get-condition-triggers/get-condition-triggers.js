@@ -1,5 +1,3 @@
-import { memoize } from '../common';
-
 const mergeFunctionTrigger = (fn, field) => {
   let internalTriggers = [];
   const internalWhen = fn(field);
@@ -12,7 +10,7 @@ const mergeFunctionTrigger = (fn, field) => {
   return internalTriggers;
 };
 
-const getConditionTriggers = memoize((condition, field) => {
+const getConditionTriggers = (condition, field) => {
   let triggers = [];
   if (Array.isArray(condition)) {
     return condition.reduce((acc, item) => [...acc, ...getConditionTriggers(item, field)], []);
@@ -49,6 +47,6 @@ const getConditionTriggers = memoize((condition, field) => {
   });
 
   return Array.from(new Set(triggers));
-});
+};
 
 export default getConditionTriggers;
