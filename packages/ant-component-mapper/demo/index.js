@@ -15,7 +15,7 @@ const style = {
   position: 'relative',
   width:'70%',
   margin:'auto'
-}
+} 
 
 const App = () => (
   <div style={style}>

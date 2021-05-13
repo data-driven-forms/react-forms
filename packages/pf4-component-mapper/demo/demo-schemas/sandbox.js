@@ -16,7 +16,7 @@ const asyncLoadOptions = (searchValue) =>
     setTimeout(() => {
       if (searchValue && searchValue.trim() !== '') {
         return resolve(asyncOptions.filter(({ label }) => label.toLocaleLowerCase().includes(searchValue.trim().toLocaleLowerCase())));
-      }
+      } 
 
       return resolve(baseOptions);
     }, 2000)
