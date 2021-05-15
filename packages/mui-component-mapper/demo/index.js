@@ -4,7 +4,7 @@ import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-rend
 
 import Grid from '@material-ui/core/Grid';
 import { componentMapper, FormTemplate } from '../src';
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Typography from '@material-ui/core/Typography';
 import demoSchema from '@data-driven-forms/common/demoschema';
@@ -14,7 +14,7 @@ import Button from '@material-ui/core/Button';
 import wizardSchema from './demo-schemas/wizard-schema';
 import validatorTypes from '@data-driven-forms/react-form-renderer/validator-types';
 
-const theme = createMuiTheme({
+const theme = createTheme({
   typography: {
     useNextVariants: true
   }
