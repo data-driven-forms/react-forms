@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/pf4-component-mapper",
-  "version": "3.6.2",
+  "version": "3.6.3",
   "description": "Starter pf4-component-mapper for data-driven-forms.",
   "main": "index.js",
   "module": "esm/index.js",
