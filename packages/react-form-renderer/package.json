@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/react-form-renderer",
-  "version": "3.6.2",
+  "version": "3.7.0",
   "description": "React form renderer for data-driven-forms.",
   "main": "index.js",
   "module": "esm/index.js",
@@ -42,8 +42,8 @@
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.10.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "regenerator-runtime": "^0.12.1",
     "resolve-url-loader": "^3.0.0",
     "rollup": "^1.23.1",
@@ -73,8 +73,8 @@
     "react-final-form-arrays": "^3.1.1"
   },
   "peerDependencies": {
-    "react": ">=16.13.1",
-    "react-dom": ">=16.13.1"
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
   },
   "postpublish": "export RELEASE_DEMO=true"
 }

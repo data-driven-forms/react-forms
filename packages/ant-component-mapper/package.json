@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/ant-component-mapper",
-  "version": "3.6.2",
+  "version": "3.7.0",
   "description": "Component mapper for Ant Design component mapper form data-driven-forms.",
   "main": "index.js",
   "module": "esm/index.js",
@@ -43,8 +43,8 @@
     "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.10.0",
     "prop-types": "^15.6.2",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "regenerator-runtime": "^0.12.1",
     "resolve-url-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
@@ -66,8 +66,8 @@
   "peerDependencies": {
     "@data-driven-forms/react-form-renderer": ">=3.2.1",
     "antd": "^4.2.0",
-    "react": ">=16.13.0",
-    "react-dom": ">=16.13.0"
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
   },
   "dependencies": {
     "@data-driven-forms/common": "*",
