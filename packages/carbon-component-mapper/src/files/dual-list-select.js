@@ -67,7 +67,7 @@ List.propTypes = {
 
 const Toolbar = ({ sortTitle, onFilter, onSort, sortDirection, placeholder, ToolbarProps, SearchProps, SortProps }) => (
   <div {...ToolbarProps} className={clsx('ddorg__carbon-dual-list-toolbar', ToolbarProps.className)}>
-    <Search onChange={(e) => onFilter(e.target.value)} labelText="" placeHolderText={placeholder} {...SearchProps} />
+    <Search onChange={(e) => onFilter(e.target.value)} labelText="" placeholder={placeholder} {...SearchProps} />
     <TooltipIcon
       onClick={onSort}
       tooltipText={sortTitle}
