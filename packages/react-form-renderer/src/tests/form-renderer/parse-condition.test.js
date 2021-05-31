@@ -224,7 +224,7 @@ describe('parseCondition', () => {
       expect(parseCondition(condition, values)).toEqual(positiveResult);
     });
 
-    it('nested test 1 - true', () => {
+    it('nested test 2 - true', () => {
       condition = {
         or: [{ not: { when: 'x', pattern: /true/ } }, { not: { when: 'y', pattern: /true/ } }, { not: { when: 'z', pattern: /true/ } }]
       };
@@ -252,7 +252,7 @@ describe('parseCondition', () => {
       expect(parseCondition(condition, values)).toEqual(negativeResult);
     });
 
-    it('nested test 2 - true', () => {
+    it('nested test 3 - true', () => {
       condition = {
         and: [
           {
@@ -280,7 +280,7 @@ describe('parseCondition', () => {
       expect(parseCondition(condition, values)).toEqual(positiveResult);
     });
 
-    it('nested test 2 - true', () => {
+    it('nested test 4 - true', () => {
       condition = {
         and: [
           {
