@@ -328,7 +328,7 @@ describe('<WizardSTepButtons', () => {
     });
   });
 
-  it.only('conditional submit step', () => {
+  it('conditional submit step', () => {
     const submit = jest.fn();
     const schema = {
       fields: [
