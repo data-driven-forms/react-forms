@@ -21,7 +21,7 @@
     "it": true,
     "arguments": true
   },
-  "plugins": ["react"],
+  "plugins": ["react", "jest"],
   "extends": ["react-app", "eslint:recommended", "plugin:react/recommended", "plugin:prettier/recommended", "prettier"],
   "env": {
     "es6": true,
@@ -85,6 +85,8 @@
     "no-mixed-operators": "error",
     "no-unused-expressions": "error",
     "no-sequences": "error",
-    "react-hooks/exhaustive-deps": 0
+    "react-hooks/exhaustive-deps": 0,
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error"
   }
 }
