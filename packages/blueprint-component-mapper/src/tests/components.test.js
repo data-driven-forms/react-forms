@@ -266,7 +266,7 @@ describe('formFields generated tests', () => {
           }
         });
 
-        it('renders with error', () => {
+        it('renders with submit error', () => {
           const wrapper = mount(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
           wrapper.find('form').simulate('submit');
           expect(

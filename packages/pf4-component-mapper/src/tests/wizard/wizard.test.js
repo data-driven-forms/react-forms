@@ -1360,44 +1360,6 @@ describe('<Wizard />', () => {
       ).toEqual(true);
     });
 
-    it('disable nav when jumped into compileMapper step', () => {
-      const wrapper = mount(
-        <FormRenderer
-          schema={wizardSchema}
-          componentMapper={componentMapper}
-          FormTemplate={(props) => <FormTemplate {...props} showFormControls={false} />}
-          onSubmit={jest.fn()}
-          onCancel={jest.fn()}
-        />
-      );
-
-      changeValue(wrapper, 'aws');
-      nextButtonClick(wrapper);
-
-      expect(wrapper.find(WizardNavItem)).toHaveLength(3);
-
-      backButtonClick(wrapper);
-
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(0)
-          .props().isDisabled
-      ).toEqual(false);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(1)
-          .props().isDisabled
-      ).toEqual(true);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(2)
-          .props().isDisabled
-      ).toEqual(true);
-    });
-
     it('disable nav when jumped into compileMapper step from invalid step', () => {
       const wizardSchema = {
         fields: [
@@ -1908,7 +1870,7 @@ describe('<Wizard />', () => {
       expect(reducer(initialState, { type: 'closeNav' })).toEqual({ openNav: false });
     });
 
-    it('returns default', () => {
+    it('opens nav', () => {
       const initialState = { openNav: false };
       expect(reducer(initialState, { type: 'openNav' })).toEqual({ openNav: true });
     });
