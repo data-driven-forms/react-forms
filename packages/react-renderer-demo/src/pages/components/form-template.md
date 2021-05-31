@@ -56,6 +56,14 @@ import { FormTemplate } from '@data-driven-forms/pf4-component-mapper'
 
 ### Props
 
+#### alertProps
+
+*object*
+
+Props passed to `FormError` alert component.
+
+---
+
 #### buttonClassName
 
 *string*
