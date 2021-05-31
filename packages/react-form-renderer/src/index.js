@@ -8,6 +8,7 @@ export { default as FieldProvider } from './field-provider';
 export { default as FormRenderer } from './form-renderer';
 export { default as FormSpy } from './form-spy';
 export { default as Form } from './form';
+export { default as FormError } from './form-error';
 export { default as parseCondition } from './parse-condition';
 export { default as RendererContext } from './renderer-context';
 export { default as schemaErrors } from './schema-errors';
