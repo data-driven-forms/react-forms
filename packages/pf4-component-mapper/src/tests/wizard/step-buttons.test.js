@@ -1,7 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { mountToJson } from 'enzyme-to-json';
-import selectNext from '@data-driven-forms/common/wizard/select-next';
 import handleEnter from '@data-driven-forms/common/wizard/enter-handler';
 
 import RenderWithProvider from '../../../../../__mocks__/with-provider';
@@ -143,44 +142,6 @@ describe('<WizardSTepButtons', () => {
       .at(1)
       .simulate('click');
     expect(handlePrev).toHaveBeenCalled();
-  });
-
-  describe('.selectNext', () => {
-    const VALUE = 'value';
-    const EXPECTED_NEXT_STEP = 'barisko';
-
-    const GET_STATE = () => ({
-      values: {
-        foo: VALUE
-      }
-    });
-
-    it('should return string nextstep', () => {
-      const NEXTSTEP = EXPECTED_NEXT_STEP;
-
-      expect(selectNext(NEXTSTEP, GET_STATE)).toEqual(EXPECTED_NEXT_STEP);
-    });
-
-    it('should return stepmapper nextstep', () => {
-      const NEXTSTEP = {
-        when: 'foo',
-        stepMapper: {
-          [VALUE]: EXPECTED_NEXT_STEP
-        }
-      };
-
-      expect(selectNext(NEXTSTEP, GET_STATE)).toEqual(EXPECTED_NEXT_STEP);
-    });
-
-    it('should return custom func nextstep', () => {
-      const NEXTSTEP = ({ values }) => {
-        if (values.foo === VALUE) {
-          return EXPECTED_NEXT_STEP;
-        }
-      };
-
-      expect(selectNext(NEXTSTEP, GET_STATE)).toEqual(EXPECTED_NEXT_STEP);
-    });
   });
 
   describe('.handleEnter', () => {
