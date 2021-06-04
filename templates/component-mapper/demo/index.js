@@ -5,7 +5,7 @@ import { arraySchemaDDF } from './demo-schemas/widget-schema';
 import { componentMapper, FormTemplate } from '../src';
 import { wizardSchema } from './demo-schemas/wizard-schema';
 import sandboxSchema from './demo-schemas/sandbox';
-import demoSchema from '@data-driven-forms/common/demoschema';
+import demoSchema from '../../../shared/demoschema';
 
 const fieldArrayState = {
   schema: arraySchemaDDF,

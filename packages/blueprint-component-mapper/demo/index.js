@@ -13,7 +13,7 @@ import {
   wizardSchemaMoreSubsteps
 } from './demo-schemas/wizard-schema';
 import sandboxSchema from './demo-schemas/sandbox';
-import demoSchema from '@data-driven-forms/common/demoschema';
+import demoSchema from '../../../shared/demoschema';
 import dualListSchema from './demo-schemas/dual-list-schema';
 
 const Summary = (props) => <div>Custom summary component.</div>;
