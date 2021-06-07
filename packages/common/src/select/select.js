@@ -128,7 +128,8 @@ const Select = ({
         })
         .catch((error) => {
           dispatch({ type: 'setPromises', payload: { [inputValue]: false } });
-          throw error;
+          // eslint-disable-next-line no-console
+          console.error(error);
         });
     }
   };
