@@ -19,34 +19,45 @@ const App = () => (<FormRenderer
 
 ## Required props
 
-|Prop|Type|Description|
-|----|:--:|----------:|
-|[componentMapper](/mappers/custom-mapper)|object|Defines types of form field components. Field components can change the state of the form.|
-|[FormTemplate](/components/form-template)|Component|Components which defines a template of the form. This component receives two props from the renderer: `formFields` and `schema`. `formFields` is the content of the form. You should wrap this content into your `<form>` component and add form buttons.|
-|onSubmit|func|A submit callback which receives two arguments: `values` and `formApi`.|
-|schema|object|A schema which defines structure of the form.|
+### componentMapper
 
-## Optional props
+*object*
 
-|Prop|Type|Description|Default|
-|----|:--:|----------:|------:|
-|[actionMapper](/mappers/action-mapper)|object|Action mapper allows to map props to functions.||
-|[clearOnUnmount](/schema/clear-on-unmount)|bool|Will clear values of unmounted components. You can also set this to specific component in the form schema.|false|
-|[clearedValue](/schema/cleared-value)|any|Value that will be set to field with **initialValue** after deleting it. Useful for forms while editing.|undefined|
-|onReset|func|A reset callback. You don't need to manually clear the form values!||
-|onCancel|func|A cancel callback, which receives `values` as the first argument.||
-|debug|func|A function which will be called with every form update, i.e. `({ values }) => setValues(values)`, please take a look [here](https://final-form.org/docs/react-final-form/types/FormProps#debug)||
-|initialValues|object|An object of fields names as keys and values as their values.||
-|[schemaValidatorMapper](/mappers/schema-validator-mapper)|object|Schema validators mapper. You can control schemas of your components, validators and actions.||
-|subscription|object|You can pass your own [subscription](https://final-form.org/docs/react-final-form/types/FormProps#subscription), which will be added to default settings.|`{ pristine: true, submitting: true, valid: true }`|
-|[validate](/schema/introduction#validate)|func|A function which receives all form values and returns an object with errors.||
-|[validatorMapper](/mappers/validator-mapper)|object|A mapper containing custom validators, it's automatically merged with the default one.||
+Defines types of form field components. Field components can change the state of the form.
 
-## Schema
+You can use [globally defined attributes](/mappers/global-component-props).
 
-The root object of the schema represents the Form component. Please read more [here](/schema/introduction).
+[Read more](/mappers/custom-mapper).
 
-### Example
+---
+
+### FormTemplate
+
+*Component*
+
+Components which defines a template of the form. This component receives two props from the renderer: `formFields` and `schema`. `formFields` is the content of the form. You should wrap this content into your `<form>` component and add form buttons.
+
+[Read more](/components/form-template).
+
+---
+
+### onSubmit
+
+*(values, [formApi](/hooks/use-form-api)) => void*
+
+A submit callback which receives two arguments: `values` and `formApi`.
+
+[Read more]([/mappers/custom-mapper](https://final-form.org/docs/react-final-form/types/FormProps#onsubmit)).
+
+---
+
+### schema
+
+*object*
+
+A schema which defines structure of the form. Consists of [fields](/schema/introduction).
+
+**Example**
 
 ```javascript
 schema = {
@@ -59,5 +70,120 @@ schema = {
   }]
 };
 ```
+
+---
+
+## Optional props
+
+### actionMapper
+
+*object*
+
+Action mapper allows to map functions as props.
+
+[Read more](/mappers/action-mapper).
+
+---
+
+### clearOnUnmount
+
+*boolean*
+
+Will clear values of unmounted components. You can also set this to specific component in the form schema.
+
+[Read more](/schema/clear-on-unmount).
+
+---
+
+### clearedValue
+
+*any*
+
+Value that will be set to field with **initialValue** after deleting it. Useful for forms while editing.
+
+[Read more](/schema/cleared-value).
+
+---
+
+### onReset
+
+*func*
+
+A reset callback that refresh the form state to the initial state.
+
+---
+
+### onCancel
+
+*(values) => void*
+
+A cancel callback, which receives `values` as the first argument.
+
+---
+
+### debug
+
+*(formState) => void*
+
+A function which will be called with every form update, i.e. `({ values }) => setValues(values)`. 
+
+[Read more](https://final-form.org/docs/react-final-form/types/FormProps#debug)
+
+---
+
+### initialValues
+
+*object*
+
+An object of fields names as keys and values as their values.
+
+**Example**
+
+```jsx
+initialValues={{ name: 'initial-name', nested: { value: 'neste-value' }}}
+```
+
+---
+
+### schemaValidatorMapper
+
+*object*
+
+Schema validators mapper. You can control schemas of your components, validators and actions.
+
+[Read more](/mappers/schema-validator-mapper).
+
+---
+
+### subscription
+
+*object*
+
+You can pass your own [subscription](https://final-form.org/docs/react-final-form/types/FormProps#subscription), which will be added to default settings.
+
+**Default subscription**
+
+`{ pristine: true, submitting: true, valid: true }`
+
+---
+
+### validate
+
+*(values) => void | Errors*
+
+A function which receives all form values and returns an object with errors.
+
+[Read more]([/components/form-template](https://final-form.org/docs/react-final-form/types/FormProps#validate)).
+
+---
+
+### validatorMapper
+
+*object*
+
+A mapper containing custom validators, it's automatically merged with the default one.
+
+[Read more](/mappers/validator-mapper).
+
 
 </DocPage>

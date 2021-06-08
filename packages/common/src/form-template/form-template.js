@@ -121,6 +121,8 @@ const FormTemplate = ({
   descriptionProps,
   buttonGroupProps,
   buttonsProps,
+  alertProps,
+  BeforeError,
   ...rest
 }) => {
   const {
@@ -136,6 +138,14 @@ const FormTemplate = ({
           {(title || label) && <Title {...titleProps}>{title || label}</Title>}
           {description && <Description {...descriptionProps}>{description}</Description>}
         </Header>
+      )}
+      {BeforeError && (
+        <FormSpy subscription={{ submitError: true, error: true }}>
+          {() => {
+            const state = getState();
+            return <BeforeError formError={state.error || state.submitError} formSpyProps={state} alertProps={alertProps} />;
+          }}
+        </FormSpy>
       )}
       {formFields}
       {showFormControls && (
@@ -174,7 +184,9 @@ FormTemplate.propTypes = {
   titleProps: PropTypes.object,
   descriptionProps: PropTypes.object,
   buttonGroupProps: PropTypes.object,
-  buttonsProps: PropTypes.object
+  buttonsProps: PropTypes.object,
+  BeforeError: PropTypes.elementType,
+  alertProps: PropTypes.object
 };
 
 FormTemplate.defaultProps = {

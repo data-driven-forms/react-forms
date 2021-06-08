@@ -7,11 +7,6 @@ const reducer = (state, { type, payload, options = [] }) => {
         isLoading: false,
         promises: {}
       };
-    case 'loaded':
-      return {
-        ...state,
-        isLoading: false
-      };
     case 'startLoading':
       return {
         ...state,

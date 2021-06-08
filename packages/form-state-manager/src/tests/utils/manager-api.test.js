@@ -1104,6 +1104,26 @@ describe('managerApi', () => {
       expect(managerApi().hasValidationErrors).toEqual(true);
     });
 
+    it('should set form level error', () => {
+      const formErrorValidate = () => ({ [FORM_ERROR]: 'form-error-message' });
+      const render = jest.fn();
+      const managerApi = createManagerApi({ validate: formErrorValidate });
+      const { registerField, change } = managerApi();
+
+      registerField({ name: 'foo', render });
+      registerField({ name: 'bar', render });
+
+      change('foo', 'foo');
+      change('bar', 'baz');
+
+      expect(managerApi().getState().errors).toEqual({ [FORM_ERROR]: 'form-error-message' });
+      expect(managerApi().getState().valid).toEqual(false);
+      expect(managerApi().getState().invalid).toEqual(true);
+      expect(managerApi().getState().validating).toEqual(false);
+      expect(managerApi().getState().error).toEqual('form-error-message');
+      expect(managerApi().hasValidationErrors).toEqual(true);
+    });
+
     it('should fail sync level validation and set field error', () => {
       const render = jest.fn();
       const managerApi = createManagerApi({ validate: () => ({ nested: { foo: 'some-very-evil-error' } }) });

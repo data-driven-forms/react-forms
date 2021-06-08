@@ -1,6 +1,6 @@
 {
     "name": "@data-driven-forms/react-renderer-demo",
-    "version": "3.4.0",
+    "version": "3.7.0",
     "main": "firebaseFunctions.js",
     "description": "Documentation pages for data driven forms.",
     "engines": {
@@ -21,7 +21,7 @@
     },
     "dependencies": {
         "@babel/plugin-proposal-class-properties": "^7.12.1",
-        "@data-driven-forms/form-builder": "0.0.10-rc6",
+        "@data-driven-forms/form-builder": "0.0.11-rc3",
         "@data-driven-forms/mui-component-mapper": "*",
         "@data-driven-forms/react-form-renderer": "*",
         "@material-ui/core": "^4.11.0",

@@ -1,6 +1,6 @@
 ## Props
 
-Dual list select is wrapped in a form group, so it accepts all [form group props](/mappers/component-api#formgroupwrappedcomponents). It also accepts the same props as the [original component](https://www.patternfly.org/v4/components/dual-list-selector).
+Dual list select is wrapped in a form group, so it accepts all [form group props](/provided-mappers/component-api#formgroupwrappedcomponents). It also accepts the same props as the [original component](https://www.patternfly.org/v4/components/dual-list-selector).
 
 The component implements three following custom props:
 
@@ -136,6 +136,6 @@ const CustomRightSortButton = () => {
 };
 ```
 
-### isTree
+### isTree
 
 `isTree` follows the same structure as the [original prop](https://www.patternfly.org/v4/components/dual-list-selector#duallistselector), but you have to provide `value` for all leaves (not folders). You can also use `label` instead of `text` to preserve the same API as the standard variant. There is no `getValueFromNode` option for the tree variant.

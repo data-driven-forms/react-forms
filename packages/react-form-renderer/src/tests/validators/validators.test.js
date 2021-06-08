@@ -76,7 +76,7 @@ describe('New validators', () => {
       expect(validatorMapper[validatorTypes.MIN_ITEMS]({ threshold: 3 })(['1', '2', '3'])).toBeUndefined();
     });
 
-    it('should pass min items of 3 validation', () => {
+    it('should pass min items of 3 validation with message', () => {
       expect(validatorMapper[validatorTypes.MIN_ITEMS]({ threshold: 3, message: 'Too few' })(['1', '2'])).toBe('Too few');
     });
 
@@ -271,7 +271,7 @@ describe('New validators', () => {
         expect(dataTypeValidator('integer')()([1, 2, 3])).toBeUndefined();
       });
 
-      it('should fail validation of an array of strings', () => {
+      it('should fail validation of an array of strings to integer', () => {
         expect(dataTypeValidator('integer')()([1, 2, 2.1])).toBe('Value must be integer');
         expect(dataTypeValidator('integer')()([1, 2, 'foo'])).toBe('Value must be integer');
       });

@@ -8,6 +8,7 @@ import flattenDeep from 'lodash/flattenDeep';
 import handleEnter from './enter-handler';
 import reducer, { DYNAMIC_WIZARD_TYPES, findCurrentStep } from './reducer';
 import selectNext from './select-next';
+import { CONDITIONAL_SUBMIT_FLAG } from './consts';
 
 const Wizard = ({ fields, isDynamic, crossroads, Wizard, component, initialState, ...props }) => {
   const formOptions = useFormApi();
@@ -106,7 +107,12 @@ Wizard.propTypes = {
   crossroads: PropTypes.arrayOf(PropTypes.string),
   Wizard: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   component: PropTypes.any,
-  initialState: PropTypes.object
+  initialState: PropTypes.object,
+  conditionalSubmitFlag: PropTypes.string
+};
+
+Wizard.defaultProps = {
+  conditionalSubmitFlag: CONDITIONAL_SUBMIT_FLAG
 };
 
 export default Wizard;

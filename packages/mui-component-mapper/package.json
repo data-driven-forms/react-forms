@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/mui-component-mapper",
-  "version": "3.4.0",
+  "version": "3.7.0",
   "description": "Component mapper for Material ui component mapper form data-driven-forms.",
   "main": "index.js",
   "module": "esm/index.js",
@@ -14,7 +14,8 @@
     "build:typings": "node ../../scripts/generate-typings.js",
     "build:packages": "node ../../scripts/generate-packages.js",
     "vendor": "webpack --env vendor --config ./config/webpack.config.js",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "test": "yarn --cwd ../.. test packages/mui-component-mapper"
   },
   "repository": "git@github.com:data-driven-forms/react-forms.git",
   "devDependencies": {

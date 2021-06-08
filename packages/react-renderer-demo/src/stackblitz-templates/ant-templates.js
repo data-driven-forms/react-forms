@@ -61,10 +61,13 @@ class App extends Component {
 render(<App />, document.getElementById('root'));`;
 
 export const dependencies = {
-  react: '^16.12.0',
-  'react-dom': '^16.12.0',
+  react: 'latest',
+  'react-dom': 'latest',
   '@data-driven-forms/react-form-renderer': 'latest',
   '@data-driven-forms/ant-component-mapper': 'latest',
+  '@data-driven-forms/common': 'latest',
   antd: 'latest',
-  'prop-types': 'latest'
+  '@ant-design/icons': 'latest',
+  'prop-types': 'latest',
+  '@babel/runtime': '^7.12.1'
 };

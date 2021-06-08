@@ -4,6 +4,7 @@ import { mount } from 'enzyme';
 import { Button } from '@material-ui/core';
 
 import { componentMapper, FormTemplate } from '../index';
+import { CONDITIONAL_SUBMIT_FLAG } from '@data-driven-forms/common/wizard';
 
 describe('wizard', () => {
   let initialProps;
@@ -369,5 +370,52 @@ describe('wizard', () => {
     expect(onCancel).toHaveBeenCalledWith({
       aws: 'something'
     });
+  });
+
+  it('conditional submit step', () => {
+    const submit = jest.fn();
+    schema = {
+      fields: [
+        {
+          component: componentTypes.WIZARD,
+          name: 'wizard',
+          fields: [
+            {
+              name: 'first-step',
+              nextStep: {
+                when: 'name',
+                stepMapper: {
+                  aws: 'summary',
+                  submit: CONDITIONAL_SUBMIT_FLAG
+                }
+              },
+              fields: [
+                {
+                  component: componentTypes.TEXT_FIELD,
+                  name: 'name',
+                  validate: [{ type: validatorTypes.REQUIRED }]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+
+    const wrapper = mount(<FormRenderer {...initialProps} onSubmit={submit} schema={schema} />);
+
+    wrapper.find('input').instance().value = 'bla';
+    wrapper.find('input').simulate('change');
+    wrapper.update();
+
+    expect(wrapper.find('button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary').text()).toEqual('Continue');
+
+    wrapper.find('input').instance().value = 'submit';
+    wrapper.find('input').simulate('change');
+    wrapper.update();
+
+    expect(wrapper.find('button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary').text()).toEqual('Submit');
+    wrapper.find('button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary').simulate('click');
+    expect(submit).toHaveBeenCalledWith({ name: 'submit' }, expect.any(Object), expect.any(Object));
   });
 });

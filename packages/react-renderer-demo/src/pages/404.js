@@ -7,7 +7,7 @@ const rerouting = {
   '/renderer/development-setup': '/development-setup',
   '/renderer/component-mapping': '/mappers/custom-mapper',
   '/renderer/renderer-api': '/components/renderer',
-  '/renderer/component-api': '/mappers/component-api',
+  '/renderer/component-api': '/provided-mappers/component-api',
   '/renderer/form-template': '/components/form-template',
   '/renderer/unmounting': '/schema/clear-on-unmount',
   '/renderer/initialize-mount': '/schema/initialize-on-mount',
@@ -19,7 +19,8 @@ const rerouting = {
   '/renderer/dynamic-fields': '/components/field-array',
   '/renderer/schema-validator': '/mappers/schema-validator-mapper',
   '/renderer/condition': '/schema/introduction#condition',
-  '/renderer/validators': '/schema/introduction#validate'
+  '/renderer/validators': '/schema/introduction#validate',
+  '/mappers/component-api': '/provided-mappers/component-api'
 };
 
 const validatorHashMapper = {
@@ -53,6 +54,32 @@ const conditionHashMapper = {
   '#example': 'complex-condition-example'
 };
 
+const movedMappers = [
+  'ant-component-mapper',
+  'global-component-props',
+  'suir-component-mapper.md',
+  'blueprint-component-mapper',
+  'mui-component-mapper',
+  'switch',
+  'carbon-component-mapper',
+  'pf4-component-mapper',
+  'tabs',
+  'checkbox-multiple',
+  'plain-text',
+  'text-field',
+  'checkbox',
+  'radio',
+  'textarea',
+  'date-picker',
+  'select',
+  'time-picker',
+  'dual-list-select',
+  'slider',
+  'wizard',
+  'field-array',
+  'sub-form'
+];
+
 const Custom404 = () => {
   const { push, asPath } = useRouter();
   const [loading, setLoading] = useState(false);
@@ -83,6 +110,11 @@ const Custom404 = () => {
     } else if (rerouting[pathname]) {
       setLoading(true);
       push(`${rerouting[pathname]}${hash}`);
+    } else if (asPath.startsWith('/mappers') && movedMappers.includes(pathname.split('/').pop())) {
+      setLoading(true);
+      const component = pathname.split('/').pop();
+      const query = asPath.match(/\?mapper=.+/)?.[0];
+      push(`/provided-mappers/${component}${query ? query : hash}`);
     }
   }, []);
 

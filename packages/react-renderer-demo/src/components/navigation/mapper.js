@@ -39,8 +39,8 @@ const Item = ({ href, linkText, component, divider, level }) => {
         [classes.nested]: level > 0
       })}
       component={forwardRef((props, ref) => (
-        <RouterNavLink ref={ref} key={component} href={finalHref}>
-          <Link style={{ color: 'rgba(0, 0, 0, 0.87)' }} {...props} href={finalHref} />
+        <RouterNavLink key={component} href={finalHref}>
+          <Link ref={ref} style={{ color: 'rgba(0, 0, 0, 0.87)' }} {...props} href={finalHref} />
         </RouterNavLink>
       ))}
     >

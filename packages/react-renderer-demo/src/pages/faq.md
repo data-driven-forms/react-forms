@@ -17,7 +17,7 @@ import CodeExample from '@docs/code-example';
 
 **A.** Right now, there are two standard ways how to update the second component:
 
-1) Set [subscription](/components/renderer#optionalprops)
+1) Set [subscription](/components/renderer#subscription)
 
 ```jsx
 <FormRenderer
@@ -55,7 +55,7 @@ All fields will be updated when values are changed. It will hurt the performance
 
 **A.**
 
-You can divide the form by using default [sub-form components](/mappers/sub-form).
+You can divide the form by using default [sub-form components](/provided-mappers/sub-form).
 
 ```
 {

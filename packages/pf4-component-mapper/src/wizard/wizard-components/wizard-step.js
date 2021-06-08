@@ -94,7 +94,8 @@ WizardStep.propTypes = {
   customTitle: PropTypes.node,
   name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   hasNoBodyPadding: PropTypes.bool,
-  StepTemplate: PropTypes.elementType
+  StepTemplate: PropTypes.elementType,
+  conditionalSubmitFlag: PropTypes.string.isRequired
 };
 
 WizardStep.defaultProps = {

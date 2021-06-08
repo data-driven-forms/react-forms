@@ -705,6 +705,7 @@ const createManagerApi: CreateManagerApi = ({
           state.hasValidationErrors = true;
           state.valid = false;
           state.invalid = true;
+          state.error = state.errors?.[FORM_ERROR];
 
           flatErrors = flatObject(errors);
           Object.keys(flatErrors).forEach((name) => {
@@ -725,6 +726,7 @@ const createManagerApi: CreateManagerApi = ({
       state.hasValidationErrors = true;
       state.valid = false;
       state.invalid = true;
+      state.error = state.errors?.[FORM_ERROR];
     } else {
       state.errors = {};
       state.hasValidationErrors = false;
@@ -817,7 +819,7 @@ const createManagerApi: CreateManagerApi = ({
 
       state.active = name;
       state.visited[name] = true;
-      setFieldState(name, (prevState) => ({ ...prevState, meta: { ...prevState.meta, active: true } }));
+      setFieldState(name, (prevState) => ({ ...prevState, meta: { ...prevState.meta, visited: true, active: true } }));
 
       render();
     }
@@ -930,7 +932,7 @@ const createManagerApi: CreateManagerApi = ({
               submitSucceeded: state.submitSucceeded,
               submitError: flatSubmitErrors[name],
               submitting: state.submitting,
-              ...(flatSubmitErrors[name] && { touched: true })
+              ...(flatSubmitErrors[name] && { touched: true, valid: false, invalid: true })
             }
           }),
           true

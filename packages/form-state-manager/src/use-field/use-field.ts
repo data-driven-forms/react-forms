@@ -213,7 +213,7 @@ const useField = ({
       if (state?.value && Array.isArray(state.value)) {
         sanitizedValue = state.value.includes(finalValue) ? state.value.filter((v: any) => v !== finalValue) : [...state.value, finalValue];
       } else {
-        sanitizedValue = [finalValue];
+        sanitizedValue = sanitizedValue ? [finalValue] : [];
       }
     }
 

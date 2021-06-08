@@ -139,7 +139,7 @@ All packages are linked together by default, so if you run a `yarn build` in a p
 
 #### Tests
 
-Tests needed to be run from the core folder.
+Tests can be ran from the core folder or from specific packages.
 
 ```console
 yarn test

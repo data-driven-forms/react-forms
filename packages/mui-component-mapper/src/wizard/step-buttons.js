@@ -7,16 +7,20 @@ import { FormSpy } from '@data-driven-forms/react-form-renderer';
 import { Button, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-const NextButton = ({ nextStep, valid, handleNext, nextLabel, getState, handleSubmit, submitLabel }) => (
-  <Button
-    variant="contained"
-    color="primary"
-    disabled={!valid || getState().validating || getState().submitting}
-    onClick={() => (nextStep ? handleNext(selectNext(nextStep, getState)) : handleSubmit())}
-  >
-    {nextStep ? nextLabel : submitLabel}
-  </Button>
-);
+const NextButton = ({ nextStep, valid, handleNext, nextLabel, getState, handleSubmit, submitLabel, conditionalSubmitFlag }) => {
+  const nextResult = nextStep ? selectNext(nextStep, getState) : nextStep;
+  const progressNext = nextResult !== conditionalSubmitFlag && nextStep;
+  return (
+    <Button
+      variant="contained"
+      color="primary"
+      disabled={!valid || getState().validating || getState().submitting}
+      onClick={() => (progressNext ? handleNext(nextResult) : handleSubmit())}
+    >
+      {progressNext ? nextLabel : submitLabel}
+    </Button>
+  );
+};
 
 NextButton.propTypes = {
   nextStep: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
@@ -25,7 +29,8 @@ NextButton.propTypes = {
   valid: PropTypes.bool,
   handleNext: PropTypes.func.isRequired,
   nextLabel: PropTypes.node.isRequired,
-  getState: PropTypes.func.isRequired
+  getState: PropTypes.func.isRequired,
+  conditionalSubmitFlag: PropTypes.string.isRequired
 };
 
 const useStyles = makeStyles(() => ({
@@ -59,7 +64,8 @@ const WizardStepButtons = ({ buttons: Buttons, ...props }) => {
     handleNext,
     buttonLabels: { cancel, submit, back, next },
     formOptions,
-    ButtonContainerProps
+    ButtonContainerProps,
+    conditionalSubmitFlag
   } = props;
 
   return (
@@ -70,7 +76,7 @@ const WizardStepButtons = ({ buttons: Buttons, ...props }) => {
       {...ButtonContainerProps}
       className={clsx(classes.buttonsContainer, ButtonContainerProps.className)}
     >
-      <FormSpy subscription={{ valid: true, validating: true, submitting: true }}>
+      <FormSpy subscription={{ values: true, valid: true, validating: true, submitting: true }}>
         {() => (
           <React.Fragment>
             <Grid item md={2} xs={2}>
@@ -80,7 +86,14 @@ const WizardStepButtons = ({ buttons: Buttons, ...props }) => {
               <Button disabled={disableBack} onClick={handlePrev} className={classes.button}>
                 {back}
               </Button>
-              <NextButton {...formOptions} handleNext={handleNext} nextStep={nextStep} nextLabel={next} submitLabel={submit} />
+              <NextButton
+                {...formOptions}
+                conditionalSubmitFlag={conditionalSubmitFlag}
+                handleNext={handleNext}
+                nextStep={nextStep}
+                nextLabel={next}
+                submitLabel={submit}
+              />
             </Grid>
           </React.Fragment>
         )}
@@ -94,6 +107,7 @@ WizardStepButtons.propTypes = {
   disableBack: PropTypes.bool,
   handlePrev: PropTypes.func.isRequired,
   handleNext: PropTypes.func.isRequired,
+  conditionalSubmitFlag: PropTypes.string.isRequired,
   nextStep: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.shape({
