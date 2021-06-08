@@ -1,3 +1,3 @@
-import { FORM_ERROR } from 'final-form';
+import { FormError } from '@data-driven-forms/form-state-manager';
 
-export default FORM_ERROR;
+export default FormError;

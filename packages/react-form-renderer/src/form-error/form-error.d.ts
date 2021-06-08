@@ -1,3 +1,3 @@
-export const FormError: 'FINAL_FORM/form-error'
+export const FormError: 'data-driven-forms/FORM_ERROR'
 
 export default FormError;
