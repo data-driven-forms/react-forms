@@ -12,7 +12,7 @@ const FinalCheckbox = ({ label, isDisabled: _isDisabled, ...rest }) => {
   const {
     FormControlLabelProps,
     CheckboxProps,
-    props: { isRequired, isReadOnly, helperText, validate, isDisabled, ...props }
+    props: { isRequired, isReadOnly, helperText, validate, isDisabled, component, ...props }
   } = useContext(CheckboxContext);
   return (
     <FormControlLabel

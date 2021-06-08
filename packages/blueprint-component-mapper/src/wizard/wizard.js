@@ -11,7 +11,7 @@ const WizardInternal = ({ WizardProps, ...props }) => {
   return (
     <div onKeyDown={onKeyDown} {...WizardProps}>
       {currentStep.fields.map((item) => formOptions.renderForm([item], formOptions))}
-      <FormSpy subscription={{ valid: true, submitting: true, validating: true }}>
+      <FormSpy>
         {({ valid, submitting, validating }) => (
           <StepButtons isNextDisabled={!valid || submitting || validating} {...props} {...rest} currentStep={currentStep} formOptions={formOptions} />
         )}

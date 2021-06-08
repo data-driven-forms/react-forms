@@ -64,9 +64,10 @@ render(<App />, document.getElementById('root'));`;
 export const dependencies = {
   react: '^16.12.0',
   'react-dom': '^16.12.0',
-  '@babel/runtime': '7.12.1',
+  '@babel/runtime': '^7.13.10',
   '@data-driven-forms/react-form-renderer': 'latest',
   '@data-driven-forms/suir-component-mapper': 'latest',
+  '@data-driven-forms/common': 'latest',
   'semantic-ui-react': 'latest',
   'prop-types': 'latest'
 };

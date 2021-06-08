@@ -3,11 +3,8 @@ import { act } from 'react-dom/test-utils';
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
 
-import { List, ListItem, IconButton, Toolbar, TextField } from '@material-ui/core';
+import { List, ListItem, Toolbar, TextField, Paper, Button, IconButton } from '@material-ui/core';
 
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 import SortIcon from '@material-ui/icons/ArrowUpward';
 
 import { componentMapper, FormTemplate } from '../index';
@@ -18,6 +15,11 @@ describe('DualListSelect', () => {
   let initialProps;
   let schema;
 
+  const ALL_LEFT_POSITION = 3;
+  const ALL_RIGHT_POSITION = 0;
+  const RIGHT_POSITION = 1;
+  const LEFT_POSITION = 2;
+
   beforeEach(() => {
     onSubmit = jest.fn();
 
@@ -26,6 +28,9 @@ describe('DualListSelect', () => {
         {
           component: componentTypes.DUAL_LIST_SELECT,
           name: 'dual-list',
+          ButtonsGridProps: {
+            id: 'buttons-grid'
+          },
           options: [
             {
               value: 'cats',
@@ -67,10 +72,8 @@ describe('DualListSelect', () => {
     expect(wrapper.find(Toolbar)).toHaveLength(2);
     expect(wrapper.find(TextField)).toHaveLength(2);
     expect(wrapper.find(SortIcon)).toHaveLength(2);
-    expect(wrapper.find(ChevronRightIcon)).toHaveLength(1);
-    expect(wrapper.find(DoubleArrowIcon)).toHaveLength(2);
-    expect(wrapper.find(ChevronLeftIcon)).toHaveLength(1);
     expect(wrapper.find(List)).toHaveLength(2);
+    expect(wrapper.find(Paper)).toHaveLength(2);
     expect(wrapper.find(ListItem)).toHaveLength(schema.fields[0].options.length + 1); // + empty placeholder
   });
 
@@ -91,8 +94,9 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find(IconButton)
-        .at(1)
+        .find('#buttons-grid')
+        .find(Button)
+        .at(RIGHT_POSITION)
         .props()
         .onClick();
     });
@@ -130,8 +134,9 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find(IconButton)
-        .at(1)
+        .find('#buttons-grid')
+        .find(Button)
+        .at(RIGHT_POSITION)
         .props()
         .onClick();
     });
@@ -167,8 +172,9 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find(IconButton)
-        .at(1)
+        .find('#buttons-grid')
+        .find(Button)
+        .at(RIGHT_POSITION)
         .props()
         .onClick();
     });
@@ -216,8 +222,9 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find(IconButton)
-        .at(1)
+        .find('#buttons-grid')
+        .find(Button)
+        .at(RIGHT_POSITION)
         .props()
         .onClick();
     });
@@ -247,8 +254,9 @@ describe('DualListSelect', () => {
 
     await act(async () => {
       wrapper
-        .find(IconButton)
-        .at(4)
+        .find('#buttons-grid')
+        .find(Button)
+        .at(LEFT_POSITION)
         .props()
         .onClick();
     });
@@ -266,8 +274,9 @@ describe('DualListSelect', () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
     await act(async () => {
       wrapper
-        .find(IconButton)
-        .at(2)
+        .find('#buttons-grid')
+        .find(Button)
+        .at(ALL_RIGHT_POSITION)
         .props()
         .onClick();
     });
@@ -283,8 +292,9 @@ describe('DualListSelect', () => {
     const wrapper = mount(<FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />);
     await act(async () => {
       wrapper
-        .find(IconButton)
-        .at(3)
+        .find('#buttons-grid')
+        .find(Button)
+        .at(ALL_LEFT_POSITION)
         .props()
         .onClick();
     });
@@ -532,8 +542,9 @@ describe('DualListSelect', () => {
       wrapper.update();
       await act(async () => {
         wrapper
-          .find(IconButton)
-          .at(2)
+          .find('#buttons-grid')
+          .find(Button)
+          .at(ALL_RIGHT_POSITION)
           .props()
           .onClick();
       });
@@ -566,8 +577,9 @@ describe('DualListSelect', () => {
 
       await act(async () => {
         wrapper
-          .find(IconButton)
-          .at(3)
+          .find('#buttons-grid')
+          .find(Button)
+          .at(ALL_LEFT_POSITION)
           .props()
           .onClick();
       });

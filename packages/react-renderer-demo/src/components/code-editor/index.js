@@ -5,6 +5,7 @@ import Highlight, { defaultProps } from 'prism-react-renderer/';
 import ghTheme from 'prism-react-renderer/themes/github';
 import vsTheme from 'prism-react-renderer/themes/vsDark';
 import tranformImports from './transform-imports';
+import clsx from 'clsx';
 
 const useStyles = makeStyles({
   pre: {
@@ -43,7 +44,7 @@ const useStylesCode = makeStyles((theme) => ({
   }
 }));
 
-const CodeEditor = ({ value, children, className, inExample }) => {
+const CodeEditor = ({ value, children, className, inExample, editorClassname, keepLastLine }) => {
   const classes = useStylesCode({ inExample });
 
   const lang = className ? className.toLowerCase().replace('language-', '') : undefined;
@@ -60,10 +61,10 @@ const CodeEditor = ({ value, children, className, inExample }) => {
     content = tranformImports(content);
   }
 
-  content = content.substring(0, content.length - 1);
+  content = keepLastLine ? content : content.substring(0, content.length - 1);
 
   return (
-    <div className={classes.wrapper}>
+    <div className={clsx(classes.wrapper, editorClassname)}>
       <Highlight {...defaultProps} theme={lang === 'bash' ? ghTheme : vsTheme} code={content} language={lang || 'jsx'}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <Pre className={className} style={style}>
@@ -87,7 +88,9 @@ CodeEditor.propTypes = {
   value: PropTypes.string,
   children: PropTypes.string,
   className: PropTypes.string,
-  inExample: PropTypes.bool
+  inExample: PropTypes.bool,
+  editorClassname: PropTypes.string,
+  keepLastLine: PropTypes.bool
 };
 
 export default CodeEditor;

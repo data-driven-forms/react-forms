@@ -74,6 +74,10 @@ const jumpToStep = (state, index, valid, fields, crossroads, formOptions) => {
 
   const clickOnPreviousStep = state.prevSteps[index];
 
+  if (!clickOnPreviousStep) {
+    return state;
+  }
+
   if (clickOnPreviousStep) {
     let originalActiveStep;
 

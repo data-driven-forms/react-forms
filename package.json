@@ -20,7 +20,7 @@
     "lint:ts": "tslint -c ./tslint.json 'packages/**/*.d.ts'",
     "generate-template": "node ./scripts/generate-mapper.js",
     "clean-build": "node ./scripts/clean-build.js",
-    "preinstall": "node ./scripts/clean-build.js"
+    "prebuild": "node ./scripts/clean-build.js"
   },
   "workspaces": [
     "packages/**"
@@ -40,7 +40,8 @@
       "!<rootDir>/packages/react-renderer-demo/**/*.js",
       "!<rootDir>/packages/**/dist",
       "!<rootDir>/templates/**/*.js",
-      "!<rootDir>/packages/**/src/**/index.js"
+      "!<rootDir>/packages/**/src/**/index.js",
+      "!<rootDir>/shared/**/*.js"
     ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
@@ -73,6 +74,7 @@
     "eslint-loader": "^4.0.2",
     "eslint-plugin-flowtype": "^5.3.1",
     "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.3.6",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",

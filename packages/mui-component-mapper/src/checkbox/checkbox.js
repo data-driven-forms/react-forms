@@ -34,7 +34,6 @@ export const SingleCheckbox = (props) => {
   });
   const invalid = validationError(meta, validateOnMount);
   const text = invalid || ((meta.touched || validateOnMount) && meta.warning) || helperText || description;
-
   return (
     <FormFieldGrid {...FormFieldGridProps}>
       <FormControl required={isRequired} error={!!invalid} component="fieldset" {...FormControlProps}>

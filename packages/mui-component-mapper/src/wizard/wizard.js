@@ -7,7 +7,7 @@ import { WizardContext } from '@data-driven-forms/react-form-renderer';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Wizard from '@data-driven-forms/common/wizard/wizard';
+import Wizard from '@data-driven-forms/common/wizard';
 import WizardNav from './wizard-nav';
 import WizardStepButtons from './step-buttons';
 
@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const WizardInternal = ({ buttonLabels, stepsInfo, ButtonContainerProps, StepperProps, WizardBodyProps, WizardProps }) => {
+const WizardInternal = ({ buttonLabels, stepsInfo, ButtonContainerProps, StepperProps, WizardBodyProps, WizardProps, conditionalSubmitFlag }) => {
   const { formOptions, currentStep, handlePrev, onKeyDown, handleNext, activeStepIndex, prevSteps } = useContext(WizardContext);
 
   const classes = useStyles();
@@ -43,6 +43,7 @@ const WizardInternal = ({ buttonLabels, stepsInfo, ButtonContainerProps, Stepper
           handleNext={handleNext}
           handlePrev={handlePrev}
           disableBack={prevSteps.length === 0}
+          conditionalSubmitFlag={conditionalSubmitFlag}
           ButtonContainerProps={ButtonContainerProps}
         />
       </Grid>
@@ -63,7 +64,8 @@ WizardInternal.propTypes = {
   ButtonContainerProps: PropTypes.object,
   StepperProps: PropTypes.object,
   WizardBodyProps: PropTypes.object,
-  WizardProps: PropTypes.object
+  WizardProps: PropTypes.object,
+  conditionalSubmitFlag: PropTypes.string.isRequired
 };
 
 WizardInternal.defaultProps = {

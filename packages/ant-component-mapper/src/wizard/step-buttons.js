@@ -3,16 +3,28 @@ import PropTypes from 'prop-types';
 import { Button } from 'antd';
 import selectNext from '@data-driven-forms/common/wizard/select-next';
 
-const NextButton = ({ nextStep, handleNext, handleSubmit, buttonLabels, getState, valid, NextButtonProps, SubmitButtonProps }) => {
+const NextButton = ({
+  nextStep,
+  handleNext,
+  handleSubmit,
+  buttonLabels,
+  getState,
+  valid,
+  NextButtonProps,
+  SubmitButtonProps,
+  conditionalSubmitFlag
+}) => {
+  const nextResult = nextStep ? selectNext(nextStep, getState) : nextStep;
+  const progressNext = nextResult !== conditionalSubmitFlag && nextStep;
   return (
     <Button
       type="primary"
       htmlType="button"
-      onClick={() => (nextStep ? handleNext(selectNext(nextStep, getState)) : handleSubmit())}
+      onClick={() => (progressNext ? handleNext(nextResult) : handleSubmit())}
       disabled={!valid}
-      {...(nextStep ? NextButtonProps : SubmitButtonProps)}
+      {...(progressNext ? NextButtonProps : SubmitButtonProps)}
     >
-      {nextStep ? buttonLabels.next : buttonLabels.submit}
+      {progressNext ? buttonLabels.next : buttonLabels.submit}
     </Button>
   );
 };
@@ -30,7 +42,8 @@ NextButton.propTypes = {
     next: PropTypes.node.isRequired
   }).isRequired,
   NextButtonProps: PropTypes.object,
-  SubmitButtonProps: PropTypes.object
+  SubmitButtonProps: PropTypes.object,
+  conditionalSubmitFlag: PropTypes.string.isRequired
 };
 
 const WizardStepButtons = ({
@@ -44,7 +57,8 @@ const WizardStepButtons = ({
   NextButtonProps,
   CancelButtonProps,
   BackButtonProps,
-  SubmitButtonProps
+  SubmitButtonProps,
+  conditionalSubmitFlag
 }) => (
   <div {...ButtonProps}>
     {formOptions.onCancel && (
@@ -62,6 +76,7 @@ const WizardStepButtons = ({
       buttonLabels={buttonLabels}
       NextButtonProps={NextButtonProps}
       SubmitButtonProps={SubmitButtonProps}
+      conditionalSubmitFlag={conditionalSubmitFlag}
     />
   </div>
 );
@@ -70,6 +85,7 @@ WizardStepButtons.propTypes = {
   disableBack: PropTypes.bool,
   handlePrev: PropTypes.func.isRequired,
   handleNext: PropTypes.func.isRequired,
+  conditionalSubmitFlag: PropTypes.string.isRequired,
   nextStep: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.shape({

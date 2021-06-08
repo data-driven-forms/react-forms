@@ -1,10 +1,11 @@
 ## Docs for steps
 
-|Props|Type|Description|
-|----|-------------|----------------|
-|name|string,number|Name of the step|
-|nextStep|object/stepKey of next step/function|See below|
-|fields|array|As usual|
+|Props|Type|Required|Default|Description|
+|-----|----|--------|-------|-----------|
+|name|string,number|no|`undefined`|Name of the step|
+|nextStep|object/stepKey of next step/function|no|`undefined`|See below|
+|fields|array|yes|`undefined`|As usual|
+|conditionalSubmitFlag|string|no|`"@@ddf-common-wizard__conditional-submit-step"`|See below|
 
 ### nextStep
 
@@ -37,6 +38,61 @@ another option is to use custom function. The custom function receives as the fi
 
 ```jsx
 nextStep: ({ values }) => (values.aws === '123' &&& values.password === 'secret') ? 'secretStep' : 'genericStep'
+```
+
+D) **conditional submit step**
+
+Based on a form state value, a step can change into the last step in the wizard and show *submit* button instead of *next* button.
+
+With default constant: `@@ddf-common-wizard__conditional-submit-step`
+
+You can import this constant:
+
+```jsx
+--- { "switchable": false } ---
+import { CONDITIONAL_SUBMIT_FLAG } from '@data-driven-forms/common/wizard';
+
+...
+// next step definition
+
+nextStep: {
+        when: 'source-type',
+        stepMapper: {
+          aws: 'aws-step',
+          google: CONDITIONAL_SUBMIT_FLAG,
+          ...
+        },
+},
+```
+
+Or with custom constant value defined by `conditionalSubmitFlag` prop:
+
+```jsx
+const schema = {
+  fields: [{
+    {
+      "component": "wizard",
+      "name": "wizard",
+      // custom flag definition
+      conditionalSubmitFlag: 'make-me-final-step',
+      fields: [{
+        name: 'step-1',
+        // next step definition
+        nextStep: {
+          when: 'value',
+          stepMapper: {
+            "value-one": 'step-2',
+            "value-two": 'make-me-final-step',
+          },
+        }
+        ...
+      }, {
+        name: 'step-2'
+        ...
+      }]
+...
+  }}]
+}
 ```
 
 ### initialState

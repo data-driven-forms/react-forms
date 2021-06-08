@@ -186,13 +186,19 @@ A function allowing to compute field properties from the current state of the fi
 ```jsx
 {
     ...,
-    validate: [{type: 'required'}]
+    validate: [{type: 'required', message: 'This field is required'}]
 }
 ```
 
 Type is one of our provided validators: [required](/schema/required-validator), [length](/schema/length-validator), [URL](/schema/url-validator), [pattern](/schema/pattern-validator), [number value](/schema/number-value-validator). You can use [validatorTypes](/schema/constants#validatortypes) to prevent typos.
 
 Or you can implement your own via creating a [validator mapper](/mappers/validator-mapper).
+
+**Message**
+
+All provided validators let you change the message via [message attribute](/schema/custom-validator-message) or you can set them [globally](/schema/overwriting-default-message).
+
+By default, each validator provides a default message in English.
 
 **function**
 
@@ -211,7 +217,7 @@ This also supports using [async functions](/schema/async-validator).
 
 ### componentSpecificAttributes
 
-Each component defines its required and optional props. Read more [here](/mappers/component-api).
+Each component defines its required and optional props. Read more [here](/provided-mappers/component-api).
 
 ```jsx
 {

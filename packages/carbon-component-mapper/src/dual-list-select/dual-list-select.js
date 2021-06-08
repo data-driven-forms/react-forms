@@ -109,7 +109,7 @@ const Toolbar = ({ sortTitle, onFilter, onSort, sortDirection, placeholder, Tool
 
   return (
     <div {...ToolbarProps} className={clsx(toolbar, ToolbarProps.className)}>
-      <Search onChange={(e) => onFilter(e.target.value)} labelText="" placeHolderText={placeholder} {...SearchProps} />
+      <Search onChange={(e) => onFilter(e.target.value)} labelText="" placeholder={placeholder} {...SearchProps} />
       <TooltipIcon onClick={onSort} tooltipText={sortTitle} {...SortProps} className={clsx(tooltipButton, SortProps.className)}>
         {sortDirection ? <CaretSortDown32 /> : <CaretSortUp32 />}
       </TooltipIcon>

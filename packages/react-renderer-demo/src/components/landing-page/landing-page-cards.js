@@ -89,7 +89,7 @@ const buildFeatures = [
   {
     text: 'Multiple provided libraries - MaterialUI included!',
     Icon: LocalLibraryIcon,
-    link: '/mappers/component-api'
+    link: '/provided-mappers/component-api'
   },
   {
     text: 'Validation - basic types are provided, supports async validators!',
@@ -249,8 +249,8 @@ const LandingPageCards = () => {
               <Typography variant="h6" className={classes.textBottom}>
                 MaterialUI
               </Typography>
-              <RouterLink href="/mappers/mui-component-mapper">
-                <a href="/mappers/mui-component-mapper">
+              <RouterLink href="/provided-mappers/mui-component-mapper">
+                <a href="/provided-mappers/mui-component-mapper">
                   <img className={classes.logo} alt="material ui logo" src="/mui-logo.svg" />
                 </a>
               </RouterLink>
@@ -259,53 +259,53 @@ const LandingPageCards = () => {
               <Typography variant="h6" className={classes.textBottom}>
                 PatternFly 4
               </Typography>
-              <RouterLink href="/mappers/pf4-component-mapper">
-                <a href="/mappers/pf4-component-mapper">
+              <RouterLink href="/provided-mappers/pf4-component-mapper">
+                <a href="/provided-mappers/pf4-component-mapper">
                   <img className={classes.logo} alt="pf4 logo" src="/pf4-logo.svg" />
                 </a>
               </RouterLink>
             </Grid>
-            <Grid item xs={6} md={3} xl={2}>
+            <Grid item xs={6} md={4} xl={2}>
               <Typography variant="h6" className={classes.textBottom}>
                 BlueprintJS
               </Typography>
-              <RouterLink href="/mappers/blueprint-component-mapper">
-                <a href="/mappers/blueprint-component-mapper">
+              <RouterLink href="/provided-mappers/blueprint-component-mapper">
+                <a href="/provided-mappers/blueprint-component-mapper">
                   <img className={classes.logo} alt="blueprintjs logo" src="/blueprintjs-logo.svg" />
                 </a>
               </RouterLink>
             </Grid>
-            <Grid item xs={6} md={3} xl={2}>
+            <Grid item xs={6} md={4} xl={2}>
               <Typography variant="h6" className={classes.textBottom}>
                 Semantic UI
               </Typography>
-              <RouterLink href="/mappers/suir-component-mapper">
-                <a href="/mappers/suir-component-mapper">
+              <RouterLink href="/provided-mappers/suir-component-mapper">
+                <a href="/provided-mappers/suir-component-mapper">
                   <img className={classes.logo} alt="semantic ui logo" src="/semantic-ui-logo.svg" />
                 </a>
               </RouterLink>
             </Grid>
-            <Grid item xs={6} md={3} xl={2}>
+            <Grid item xs={6} md={4} xl={2}>
               <Typography variant="h6" className={classes.textBottom}>
                 Ant Design
               </Typography>
-              <RouterLink href="/mappers/ant-component-mapper">
-                <a href="/mappers/ant-component-mapper">
+              <RouterLink href="/provided-mappers/ant-component-mapper">
+                <a href="/provided-mappers/ant-component-mapper">
                   <img className={classes.logo} alt="ant logo" src="/ant-logo.svg" />
                 </a>
               </RouterLink>
             </Grid>
-            <Grid item xs={12} md={3} xl={12}>
+            <Grid item xs={6} md={4} xl={2}>
               <Typography variant="h6" className={classes.textBottom}>
                 Carbon Design System
               </Typography>
-              <RouterLink href="/mappers/carbon-component-mapper">
-                <a href="/mappers/carbon-component-mapper">
+              <RouterLink href="/provided-mappers/carbon-component-mapper">
+                <a href="/provided-mappers/carbon-component-mapper">
                   <img className={classes.logo} alt="ant logo" src="/carbon-logo.svg" />
                 </a>
               </RouterLink>
             </Grid>
-            <Grid item xs={12} md={8}>
+            <Grid item xs={8} md={8} xl={8}>
               <Typography variant="body2" gutterBottom className={classes.mappersText}>
                 This list represents a set of provided mappers. Each mapper brings all basic form components from its design system. You can
                 immediately use form inputs such as text fields, selects, radios, checkboxes or wizards. However, this selection does not limit you as

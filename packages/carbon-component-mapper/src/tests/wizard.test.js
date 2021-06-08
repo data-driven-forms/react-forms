@@ -3,6 +3,7 @@ import { FormRenderer, componentTypes, validatorTypes } from '@data-driven-forms
 import { mount } from 'enzyme';
 
 import { componentMapper, FormTemplate } from '../index';
+import { CONDITIONAL_SUBMIT_FLAG } from '@data-driven-forms/common/wizard';
 
 describe('wizard', () => {
   let initialProps;
@@ -364,5 +365,52 @@ describe('wizard', () => {
       googlesummary: 'google summary'
     });
     onSubmit.mockClear();
+  });
+
+  it('conditional submit step', () => {
+    const submit = jest.fn();
+    schema = {
+      fields: [
+        {
+          component: componentTypes.WIZARD,
+          name: 'wizard',
+          fields: [
+            {
+              name: 'first-step',
+              nextStep: {
+                when: 'name',
+                stepMapper: {
+                  aws: 'summary',
+                  submit: CONDITIONAL_SUBMIT_FLAG
+                }
+              },
+              fields: [
+                {
+                  component: componentTypes.TEXT_FIELD,
+                  name: 'name',
+                  validate: [{ type: validatorTypes.REQUIRED }]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+
+    const wrapper = mount(<FormRenderer {...initialProps} onSubmit={submit} schema={schema} />);
+
+    wrapper.find('input').instance().value = 'bla';
+    wrapper.find('input').simulate('change');
+    wrapper.update();
+
+    expect(wrapper.find('button.bx--btn.bx--btn--primary').text()).toEqual('Next');
+
+    wrapper.find('input').instance().value = 'submit';
+    wrapper.find('input').simulate('change');
+    wrapper.update();
+
+    expect(wrapper.find('button.bx--btn.bx--btn--primary').text()).toEqual('Submit');
+    wrapper.find('button.bx--btn.bx--btn--primary').simulate('click');
+    expect(submit).toHaveBeenCalledWith({ name: 'submit' }, expect.any(Object), expect.any(Object));
   });
 });

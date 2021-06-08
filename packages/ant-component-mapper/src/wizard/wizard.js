@@ -26,7 +26,8 @@ const WizardInternal = ({
   NextButtonProps,
   BackButtonProps,
   CancelButtonProps,
-  SubmitButtonProps
+  SubmitButtonProps,
+  conditionalSubmitFlag
 }) => {
   const { onKeyDown, formOptions, handleNext, handlePrev, prevSteps, currentStep, jumpToStep, activeStepIndex } = useContext(WizardContext);
 
@@ -53,6 +54,7 @@ const WizardInternal = ({
         BackButtonProps={BackButtonProps}
         CancelButtonProps={CancelButtonProps}
         SubmitButtonProps={SubmitButtonProps}
+        conditionalSubmitFlag={conditionalSubmitFlag}
       />
     </div>
   );
@@ -70,7 +72,8 @@ WizardInternal.propTypes = {
   NextButtonProps: PropTypes.object,
   BackButtonProps: PropTypes.object,
   CancelButtonProps: PropTypes.object,
-  SubmitButtonProps: PropTypes.object
+  SubmitButtonProps: PropTypes.object,
+  conditionalSubmitFlag: PropTypes.string.isRequired
 };
 
 const WizardFinal = ({ buttonLabels, ...props }) => (

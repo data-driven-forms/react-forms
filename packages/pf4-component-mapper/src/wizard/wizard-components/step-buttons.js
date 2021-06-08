@@ -4,16 +4,20 @@ import { Button } from '@patternfly/react-core';
 import selectNext from '@data-driven-forms/common/wizard/select-next';
 import { FormSpy } from '@data-driven-forms/react-form-renderer';
 
-const NextButton = ({ nextStep, valid, handleNext, nextLabel, getState, handleSubmit, submitLabel }) => (
-  <Button
-    variant="primary"
-    type="button"
-    isDisabled={!valid || getState().validating}
-    onClick={() => (nextStep ? handleNext(selectNext(nextStep, getState)) : handleSubmit())}
-  >
-    {nextStep ? nextLabel : submitLabel}
-  </Button>
-);
+const NextButton = ({ nextStep, valid, handleNext, nextLabel, getState, handleSubmit, submitLabel, conditionalSubmitFlag }) => {
+  const nextResult = nextStep ? selectNext(nextStep, getState) : nextStep;
+  const progressNext = nextResult !== conditionalSubmitFlag && nextStep;
+  return (
+    <Button
+      variant="primary"
+      type="button"
+      isDisabled={!valid || getState().validating}
+      onClick={() => (progressNext ? handleNext(selectNext(nextStep, getState)) : handleSubmit())}
+    >
+      {progressNext ? nextLabel : submitLabel}
+    </Button>
+  );
+};
 
 NextButton.propTypes = {
   nextStep: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
@@ -22,7 +26,8 @@ NextButton.propTypes = {
   valid: PropTypes.bool,
   handleNext: PropTypes.func.isRequired,
   nextLabel: PropTypes.node.isRequired,
-  getState: PropTypes.func.isRequired
+  getState: PropTypes.func.isRequired,
+  conditionalSubmitFlag: PropTypes.string.isRequired
 };
 
 const WizardStepButtons = ({
@@ -33,7 +38,8 @@ const WizardStepButtons = ({
   handleNext,
   buttonsClassName,
   buttonLabels: { cancel, submit, back, next },
-  formOptions
+  formOptions,
+  conditionalSubmitFlag
 }) => (
   <footer className={`pf-c-wizard__footer ${buttonsClassName ? buttonsClassName : ''}`}>
     {Buttons ? (
@@ -53,7 +59,14 @@ const WizardStepButtons = ({
       <FormSpy>
         {() => (
           <React.Fragment>
-            <NextButton {...formOptions} handleNext={handleNext} nextStep={nextStep} nextLabel={next} submitLabel={submit} />
+            <NextButton
+              {...formOptions}
+              conditionalSubmitFlag={conditionalSubmitFlag}
+              handleNext={handleNext}
+              nextStep={nextStep}
+              nextLabel={next}
+              submitLabel={submit}
+            />
             <Button type="button" variant="secondary" isDisabled={disableBack} onClick={handlePrev}>
               {back}
             </Button>
@@ -71,6 +84,7 @@ const WizardStepButtons = ({
 
 WizardStepButtons.propTypes = {
   disableBack: PropTypes.bool,
+  conditionalSubmitFlag: PropTypes.string.isRequired,
   handlePrev: PropTypes.func.isRequired,
   handleNext: PropTypes.func.isRequired,
   nextStep: PropTypes.oneOfType([

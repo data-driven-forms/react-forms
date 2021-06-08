@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/pf4-component-mapper",
-  "version": "3.4.0",
+  "version": "3.7.0",
   "description": "Starter pf4-component-mapper for data-driven-forms.",
   "main": "index.js",
   "module": "esm/index.js",
@@ -14,7 +14,8 @@
     "build:typings": "node ../../scripts/generate-typings.js",
     "build:packages": "node ../../scripts/generate-packages.js",
     "build:css": "node ../../scripts/copy-css.js",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "test": "yarn --cwd ../.. test packages/pf4-component-mapper"
   },
   "repository": "git@github.com:data-driven-forms/react-forms.git",
   "keywords": [

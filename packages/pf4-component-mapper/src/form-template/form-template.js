@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import FormTemplate from '@data-driven-forms/common/form-template';
 
-import { Button as PF4Button, ActionGroup, Form, TextContent, Text, TextVariants } from '@patternfly/react-core';
+import { Button as PF4Button, ActionGroup, Form, TextContent, Text, TextVariants, Alert } from '@patternfly/react-core';
 
 export const Button = ({ label, bsStyle, children, disabled, buttonType, ...props }) => (
   <PF4Button variant={buttonType === 'cancel' ? 'link' : bsStyle || 'secondary'} isDisabled={disabled} {...props}>
@@ -50,8 +50,39 @@ Description.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
 };
 
+export const FormError = ({ formError, alertProps }) => {
+  if (typeof formError === 'object' && formError.title) {
+    const { title, description, ...props } = formError;
+
+    return (
+      <Alert variant="danger" isInline title={title} {...props} {...alertProps}>
+        {description}
+      </Alert>
+    );
+  }
+
+  if (typeof formError === 'string') {
+    return <Alert variant="danger" isInline title={formError} {...alertProps} />;
+  }
+
+  return null;
+};
+
+FormError.propTypes = {
+  formError: PropTypes.any,
+  alertProps: PropTypes.object
+};
+
 const PF4FormTemplate = (props) => (
-  <FormTemplate FormWrapper={Form} Button={Button} ButtonGroup={ButtonGroup} Title={Title} Description={Description} {...props} />
+  <FormTemplate
+    BeforeError={FormError}
+    FormWrapper={Form}
+    Button={Button}
+    ButtonGroup={ButtonGroup}
+    Title={Title}
+    Description={Description}
+    {...props}
+  />
 );
 
 export default PF4FormTemplate;

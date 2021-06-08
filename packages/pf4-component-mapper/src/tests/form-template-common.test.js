@@ -1,8 +1,12 @@
 import React from 'react';
-import { FormRenderer, Form, FormSpy } from '@data-driven-forms/react-form-renderer';
+import { act } from 'react-dom/test-utils';
+import { FormRenderer, Form, FormSpy, FormError } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
+import { Alert } from '@patternfly/react-core';
+
 import FormTemplate, { Title, Description, Button } from '../form-template';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
+import componentMapper from '../component-mapper';
 
 describe('FormTemplate PF4 Common', () => {
   let initialProps;
@@ -10,7 +14,14 @@ describe('FormTemplate PF4 Common', () => {
   let formOptions;
 
   beforeEach(() => {
-    formOptions = { onSubmit: jest.fn(), onReset: jest.fn(), onCancel: jest.fn(), canReset: true, pristine: true };
+    formOptions = {
+      onSubmit: jest.fn(),
+      onReset: jest.fn(),
+      onCancel: jest.fn(),
+      canReset: true,
+      pristine: true,
+      getState: jest.fn().mockImplementation(() => ({}))
+    };
     ContextWrapper = ({ children, ...props }) => (
       <RenderWithProvider value={{ formOptions }}>
         <Form onSubmit={jest.fn()}>{() => children}</Form>
@@ -37,7 +48,7 @@ describe('FormTemplate PF4 Common', () => {
     expect(wrapper.find(Title)).toHaveLength(1);
     expect(wrapper.find(Description)).toHaveLength(0);
     expect(wrapper.find(Button)).toHaveLength(2);
-    expect(wrapper.find(FormSpy)).toHaveLength(1);
+    expect(wrapper.find(FormSpy)).toHaveLength(2);
   });
 
   it('should hide buttons', () => {
@@ -48,7 +59,7 @@ describe('FormTemplate PF4 Common', () => {
     );
 
     expect(wrapper.find(Button)).toHaveLength(0);
-    expect(wrapper.find(FormSpy)).toHaveLength(0);
+    expect(wrapper.find(FormSpy)).toHaveLength(1);
   });
 
   it('should render description', () => {
@@ -157,5 +168,87 @@ describe('FormTemplate PF4 Common', () => {
       .simulate('click');
 
     expect(onCancel).toHaveBeenCalledWith(expectedValues);
+  });
+
+  it('show form alert message', async () => {
+    const wrapper = mount(
+      <FormRenderer
+        schema={{
+          fields: [
+            {
+              component: 'text-field',
+              name: 'field'
+            }
+          ]
+        }}
+        validate={({ field }) => {
+          if (field) {
+            return { [FormError]: 'some error title' };
+          }
+        }}
+        onSubmit={jest.fn()}
+        FormTemplate={FormTemplate}
+        componentMapper={componentMapper}
+      />
+    );
+
+    expect(wrapper.find(Alert)).toHaveLength(0);
+
+    await act(async () => {
+      wrapper
+        .find('input')
+        .first()
+        .instance().value = 'cats';
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change');
+    });
+    wrapper.update();
+
+    expect(wrapper.find(Alert)).toHaveLength(1);
+    expect(wrapper.find(Alert).props().title).toEqual('some error title');
+    expect(wrapper.find(Alert).text()).toEqual('Danger alert:some error title');
+  });
+
+  it('show form alert message as object', async () => {
+    const wrapper = mount(
+      <FormRenderer
+        schema={{
+          fields: [
+            {
+              component: 'text-field',
+              name: 'field'
+            }
+          ]
+        }}
+        validate={({ field }) => {
+          if (field) {
+            return { [FormError]: { title: 'some error title', description: 'some description' } };
+          }
+        }}
+        onSubmit={jest.fn()}
+        FormTemplate={FormTemplate}
+        componentMapper={componentMapper}
+      />
+    );
+
+    expect(wrapper.find(Alert)).toHaveLength(0);
+
+    await act(async () => {
+      wrapper
+        .find('input')
+        .first()
+        .instance().value = 'cats';
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change');
+    });
+    wrapper.update();
+
+    expect(wrapper.find(Alert)).toHaveLength(1);
+    expect(wrapper.find(Alert).props().title).toEqual('some error title');
+    expect(wrapper.find(Alert).text()).toEqual('Danger alert:some error titlesome description');
   });
 });
