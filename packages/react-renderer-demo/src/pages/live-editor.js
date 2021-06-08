@@ -1,7 +1,7 @@
 /* eslint no-console: "off" */
-import React, { useState } from 'react';
-import componentTypes from '@data-driven-forms/react-form-renderer/component-types';
-import FormBuilder from '@data-driven-forms/form-builder/form-builder';
+import React from 'react';
+/* import componentTypes from '@data-driven-forms/react-form-renderer/component-types';
+import { FormBuilder } from '@data-driven-forms/form-builder/form-builder';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { pickerMapper, propertiesMapper, builderMapper, BuilderTemplate, fieldProperties } from '@data-driven-forms/form-builder/mui-builder-mappers';
 import { makeStyles } from '@material-ui/styles';
@@ -217,5 +217,9 @@ const LiveEditor = () => {
     </div>
   );
 };
+
+*/
+
+const LiveEditor = () => <h1>Will be back when editor is updated for the new state manager</h1>;
 
 export default LiveEditor;
