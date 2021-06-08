@@ -22,6 +22,10 @@ const schema = {
 const variants = [
   ...baseFieldProps,
   {
+    name: 'isMulti',
+    type: 'boolean'
+  },
+  {
     name: 'options',
     type: 'array'
   },
