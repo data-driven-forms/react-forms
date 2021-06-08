@@ -134,7 +134,7 @@ describe('multiple choice list', () => {
       wrapper
         .find('input')
         .first()
-        .simulate('change', { target: { checked: false } });
+        .simulate('change', { target: { checked: false, type: 'checkbox' } });
     });
     wrapper.update();
 
@@ -155,15 +155,14 @@ describe('multiple choice list', () => {
       meta: {
         active: false,
         data: {},
-        dirty: false,
+        dirty: true,
         dirtySinceLastSubmit: false,
         error: 'Required',
         initial: undefined,
         invalid: true,
-        length: undefined,
         modified: false,
         modifiedSinceLastSubmit: false,
-        pristine: true,
+        pristine: false,
         submitError: undefined,
         submitFailed: false,
         submitSucceeded: false,
@@ -171,7 +170,8 @@ describe('multiple choice list', () => {
         touched: true,
         valid: false,
         validating: false,
-        visited: true
+        visited: true,
+        warning: undefined
       },
       name: 'check',
       rest: {},
@@ -181,7 +181,7 @@ describe('multiple choice list', () => {
 
   it('show submit error', async () => {
     await act(async () => {
-      wrapper = mount(<FormRenderer {...rendererProps} onSubmit={() => ({ check: 'submitError' })} />);
+      wrapper = mount(<FormRenderer {...rendererProps} subscription={{ submitFailed: true }} onSubmit={() => ({ check: 'submitError' })} />);
     });
     wrapper.update();
 
@@ -204,7 +204,6 @@ describe('multiple choice list', () => {
         error: undefined,
         initial: undefined,
         invalid: true,
-        length: undefined,
         modified: false,
         modifiedSinceLastSubmit: false,
         pristine: true,
@@ -215,7 +214,8 @@ describe('multiple choice list', () => {
         touched: true,
         valid: false,
         validating: false,
-        visited: false
+        visited: false,
+        warning: undefined
       },
       name: 'check',
       rest: {},
