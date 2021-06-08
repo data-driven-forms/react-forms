@@ -24,7 +24,7 @@ exports[`renderForm function #condition should render condition field only if co
           }
         }
       >
-        <Component
+        <FormFieldHideWrapper
           hideField={false}
         >
           <CustomComponent
@@ -84,7 +84,7 @@ exports[`renderForm function #condition should render condition field only if co
               </TextField>
             </FieldProvider>
           </CustomComponent>
-        </Component>
+        </FormFieldHideWrapper>
       </FormConditionWrapper>
     </SingleField>
     <SingleField
@@ -100,7 +100,7 @@ exports[`renderForm function #condition should render condition field only if co
           }
         }
       >
-        <Component
+        <FormFieldHideWrapper
           hideField={false}
         >
           <CustomComponent
@@ -160,7 +160,7 @@ exports[`renderForm function #condition should render condition field only if co
               </TextField>
             </FieldProvider>
           </CustomComponent>
-        </Component>
+        </FormFieldHideWrapper>
       </FormConditionWrapper>
     </SingleField>
     <SingleField
@@ -457,7 +457,7 @@ exports[`renderForm function #condition should render condition field only if on
           }
         }
       >
-        <Component
+        <FormFieldHideWrapper
           hideField={false}
         >
           <CustomComponent
@@ -517,7 +517,7 @@ exports[`renderForm function #condition should render condition field only if on
               </TextField>
             </FieldProvider>
           </CustomComponent>
-        </Component>
+        </FormFieldHideWrapper>
       </FormConditionWrapper>
     </SingleField>
     <SingleField
@@ -533,7 +533,7 @@ exports[`renderForm function #condition should render condition field only if on
           }
         }
       >
-        <Component
+        <FormFieldHideWrapper
           hideField={false}
         >
           <CustomComponent
@@ -593,7 +593,7 @@ exports[`renderForm function #condition should render condition field only if on
               </TextField>
             </FieldProvider>
           </CustomComponent>
-        </Component>
+        </FormFieldHideWrapper>
       </FormConditionWrapper>
     </SingleField>
     <SingleField
@@ -799,7 +799,7 @@ exports[`renderForm function should render single field from defined componentTy
           }
         }
       >
-        <Component
+        <FormFieldHideWrapper
           hideField={false}
         >
           <Component
@@ -813,7 +813,7 @@ exports[`renderForm function should render single field from defined componentTy
               TextField
             </div>
           </Component>
-        </Component>
+        </FormFieldHideWrapper>
       </FormConditionWrapper>
     </SingleField>
   </FormStateManager>
@@ -844,7 +844,7 @@ exports[`renderForm function should render single field from with custom compone
           }
         }
       >
-        <Component
+        <FormFieldHideWrapper
           hideField={false}
         >
           <CustomComponent
@@ -904,7 +904,7 @@ exports[`renderForm function should render single field from with custom compone
               </TextField>
             </FieldProvider>
           </CustomComponent>
-        </Component>
+        </FormFieldHideWrapper>
       </FormConditionWrapper>
     </SingleField>
   </FormStateManager>

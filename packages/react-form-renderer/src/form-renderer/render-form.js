@@ -1,4 +1,4 @@
-import React, { useContext, memo } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from '@data-driven-forms/form-state-manager';
 import setWith from 'lodash/setWith';
@@ -6,12 +6,7 @@ import RendererContext from '../renderer-context';
 import Condition from '../condition';
 import getConditionTriggers from '../get-condition-triggers';
 
-const FormFieldHideWrapper = memo(
-  ({ hideField, children }) => (hideField ? <div hidden>{children}</div> : children),
-  (prev, next) => {
-    return prev.hideField === next.hideField;
-  }
-);
+const FormFieldHideWrapper = ({ hideField, children }) => (hideField ? <div hidden>{children}</div> : children);
 
 FormFieldHideWrapper.propTypes = {
   hideField: PropTypes.bool,
