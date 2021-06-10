@@ -5,6 +5,7 @@ import schemaHooks from './hooks.schema';
 import mappersSchema from './mappers.schema';
 import customExamplesSchema from './custom-examples.schema';
 import providedMappersSchema from './provider-mappers.schema';
+import utilitiesSchema from './utilities.schema';
 
 const schema = [
   {
@@ -44,6 +45,12 @@ const schema = [
     link: 'provided-mappers',
     noRoute: true,
     fields: providedMappersSchema
+  },
+  {
+    title: 'Utilities',
+    link: 'utilities',
+    noRoute: true,
+    fields: utilitiesSchema
   },
   {
     title: 'Examples',
