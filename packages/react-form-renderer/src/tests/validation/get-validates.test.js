@@ -51,7 +51,8 @@ describe('getValidates', () => {
           name: 'xx',
           component: 'componentDefault',
           resolveProps: (_props, _inputMeta, { getState }) => ({ validate: [{ type: getState().values['x'] }] })
-        }
+        },
+        { name: 'datatype-validation', component: 'default', dataType: 'number' }
       ]
     };
 
@@ -77,7 +78,8 @@ describe('getValidates', () => {
       'simple-resolve': [[{ type: 'from-resolve-props' }]],
       'component-actions-resolve': [[{ type: 'actions>resolveProps' }]],
       x: [[{ type: 'value-of-x' }]],
-      xx: [[{ type: 'value-of-x' }]]
+      xx: [[{ type: 'value-of-x' }]],
+      'datatype-validation': [[expect.any(Function)]]
     });
   });
 });

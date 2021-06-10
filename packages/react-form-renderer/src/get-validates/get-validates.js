@@ -1,6 +1,7 @@
 import get from 'lodash/get';
 
 import prepareComponentProps from '../prepare-component-props';
+import { dataTypeValidator } from '../validators/validator-functions';
 
 const getValidates = (schema, { componentMapper, actionMapper, values }, validations = {}) => {
   if (Array.isArray(schema)) {
@@ -30,6 +31,10 @@ const getValidates = (schema, { componentMapper, actionMapper, values }, validat
       }
 
       validate = validate || overrideProps.validate || componentProps.validate;
+
+      if (schema.dataType) {
+        validate = [...(validate || []), dataTypeValidator(schema.dataType)()];
+      }
 
       if (validate) {
         if (validations[schema.name]) {
