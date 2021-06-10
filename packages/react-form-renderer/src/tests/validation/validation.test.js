@@ -122,4 +122,32 @@ describe('validation', () => {
       ['some-value', options.values, {}]
     ]);
   });
+
+  it('handle warnings', async () => {
+    schema = {
+      fields: [
+        { name: 'warning', component: 'checkbox', validate: [{ type: 'required', warning: true }], useWarnings: true },
+        { name: 'error', component: 'select', validate: [{ type: 'required' }] }
+      ]
+    };
+    options = {};
+
+    const results = await validation(schema, options);
+
+    expect(results).toEqual({ error: 'Required', warning: { error: 'Required', type: 'warning' } });
+  });
+
+  it('omit warnings', async () => {
+    schema = {
+      fields: [
+        { name: 'warning', component: 'checkbox', validate: [{ type: 'required', warning: true }], useWarnings: true },
+        { name: 'error', component: 'select', validate: [{ type: 'required' }] }
+      ]
+    };
+    options = { omitWarnings: true };
+
+    const results = await validation(schema, options);
+
+    expect(results).toEqual({ error: 'Required' });
+  });
 });

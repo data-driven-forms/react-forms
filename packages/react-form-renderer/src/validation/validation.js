@@ -32,7 +32,7 @@ const validation = async (schema, options) => {
     throw new Error(`options argument has to be type of object, provided: ${typeof options}`);
   }
 
-  const { values, componentMapper, validatorMapper, actionMapper, schemaValidatorMapper } = options;
+  const { values, componentMapper, validatorMapper, actionMapper, schemaValidatorMapper, omitWarnings } = options;
 
   const validatorMapperMerged = { ...defaultValidatorMapper, ...validatorMapper };
 
@@ -59,8 +59,14 @@ const validation = async (schema, options) => {
     let index = 0;
 
     while (!error && index + 1 <= validates[name].length) {
-      const validateFn = composeValidators(getValidate(validates[name][index], schema.dataType, validatorMapperMerged));
-      error = await validateFn(get(values, name), values, {});
+      const validateFn = composeValidators(getValidate(validates[name][index], undefined, validatorMapperMerged));
+
+      const fieldError = await validateFn(get(values, name), values, {});
+
+      if (fieldError?.type !== 'warning' || (fieldError?.type === 'warning' && !omitWarnings)) {
+        error = fieldError;
+      }
+
       index = index + 1;
     }
 
