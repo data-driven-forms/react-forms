@@ -34,6 +34,8 @@ import avalableMappers from '../helpers/available-mappers';
 import GhIcon from './common/gh-svg-icon';
 import originalComponentLink from '../helpers/original-component-link';
 
+const correctComponent = (component) => (component === 'checkbox-multiple' ? 'checkbox' : component);
+
 const metadata = {
   mui,
   pf4,
@@ -158,6 +160,8 @@ const ComponentExample = ({ variants, schema, activeMapper, component }) => {
       />
     ));
 
+  const activeComponent = correctComponent(component);
+
   return (
     <React.Fragment>
       <Box display="flex" className={classes.box}>
@@ -222,7 +226,7 @@ const ComponentExample = ({ variants, schema, activeMapper, component }) => {
           component="a"
           rel="noopener noreferrer"
           target="_blank"
-          href={originalComponentLink(activeMapper, component)}
+          href={originalComponentLink(activeMapper, activeComponent)}
           startIcon={<LinkIcon />}
         >
           Original documentation
@@ -231,7 +235,7 @@ const ComponentExample = ({ variants, schema, activeMapper, component }) => {
           component="a"
           rel="noopener noreferrer"
           target="_blank"
-          href={`https://github.com/data-driven-forms/react-forms/blob/master/packages/${activeMapper}-component-mapper/src/${component}/${component}.js`}
+          href={`https://github.com/data-driven-forms/react-forms/blob/master/packages/${activeMapper}-component-mapper/src/${activeComponent}/${activeComponent}.js`}
           startIcon={<GhIcon />}
         >
           DDF implementation
