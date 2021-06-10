@@ -33,7 +33,14 @@ const Textarea = (props) => {
       id={id || input.name}
       FormGroupProps={FormGroupProps}
     >
-      <Pf4TextArea {...showError(meta, validateOnMount)} disabled={isDisabled || isReadOnly} {...input} id={id || input.name} {...rest} />
+      <Pf4TextArea
+        {...showError(meta, validateOnMount)}
+        isRequired={isRequired}
+        disabled={isDisabled || isReadOnly}
+        {...input}
+        id={id || input.name}
+        {...rest}
+      />
     </FormGroup>
   );
 };
