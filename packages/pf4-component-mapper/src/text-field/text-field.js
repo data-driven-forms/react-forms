@@ -33,7 +33,15 @@ const TextField = (props) => {
       id={id || input.name}
       FormGroupProps={FormGroupProps}
     >
-      <TextInput {...input} {...showError(meta, validateOnMount)} {...rest} id={id || input.name} isReadOnly={isReadOnly} isDisabled={isDisabled} />
+      <TextInput
+        {...input}
+        {...showError(meta, validateOnMount)}
+        {...rest}
+        id={id || input.name}
+        isRequired={isRequired}
+        isReadOnly={isReadOnly}
+        isDisabled={isDisabled}
+      />
     </FormGroup>
   );
 };
