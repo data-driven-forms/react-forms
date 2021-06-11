@@ -16,8 +16,10 @@ export const multiOnChange = (input, simpleValue) => ({ selectedItem, selectedIt
   }
 };
 
-const getMultiValue = (value, options) =>
-  (Array.isArray(value) ? value : [value]).map((item) => (typeof item === 'object' ? item : options.find(({ value }) => value === item))) || [];
+export const getMultiValue = (value, options) =>
+  (Array.isArray(value) ? value : value ? [value] : []).map((item) =>
+    typeof item === 'object' ? item : options.find(({ value }) => value === item)
+  );
 
 const ClearedMultiSelectFilterable = ({
   invalidText,

@@ -7,6 +7,7 @@ import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
 import { Select, MultiSelect, ComboBox } from 'carbon-components-react';
 import { multiOnChange } from '../select';
+import { getMultiValue } from '../select/select';
 
 describe('<Select />', () => {
   it('renders select', () => {
@@ -191,6 +192,40 @@ describe('<Select />', () => {
       multiOnChange(input, false)({ selectedItems: [{ value: '123' }, { value: '345' }] });
 
       expect(input.onChange).toHaveBeenCalledWith([{ value: '123' }, { value: '345' }]);
+    });
+  });
+
+  describe('getMultiValue', () => {
+    let value;
+    let options;
+
+    beforeEach(() => {
+      value = undefined;
+      options = [];
+    });
+
+    it('undefined', () => {
+      expect(getMultiValue(value, options)).toEqual([]);
+    });
+
+    it('array', () => {
+      value = ['dogs'];
+      options = [
+        { label: 'cats', value: 'cats' },
+        { label: 'dogs', value: 'dogs' }
+      ];
+
+      expect(getMultiValue(value, options)).toEqual([{ label: 'dogs', value: 'dogs' }]);
+    });
+
+    it('single', () => {
+      value = 'dogs';
+      options = [
+        { label: 'cats', value: 'cats' },
+        { label: 'dogs', value: 'dogs' }
+      ];
+
+      expect(getMultiValue(value, options)).toEqual([{ label: 'dogs', value: 'dogs' }]);
     });
   });
 });
