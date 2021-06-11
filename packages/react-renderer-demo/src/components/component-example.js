@@ -19,6 +19,7 @@ import Box from '@material-ui/core/Box';
 import LinkIcon from '@material-ui/icons/Link';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Alert from '@material-ui/lab/Alert';
 
 import Link from 'next/link';
 import clsx from 'clsx';
@@ -120,6 +121,9 @@ const useStyles = makeStyles((theme) => ({
   buttonGroup: {
     marginTop: 16,
     marginBottom: 16
+  },
+  alert: {
+    marginBottom: 8
   }
 }));
 
@@ -161,9 +165,16 @@ const ComponentExample = ({ variants, schema, activeMapper, component }) => {
     ));
 
   const activeComponent = correctComponent(component);
+  const showAlert = !['mui', 'pf4', 'ant'].includes(activeMapper);
 
   return (
     <React.Fragment>
+      {showAlert && (
+        <Alert severity="warning" className={classes.alert}>
+          Currently, we are dealing with &quot;Import error, cannot find file: ./cjs/react-is.development.js&quot; error that appears in examples
+          using react-jss. Thank you for your understanding
+        </Alert>
+      )}
       <Box display="flex" className={classes.box}>
         <Card style={{ minHeight: 500 }} square>
           <CardContent>
