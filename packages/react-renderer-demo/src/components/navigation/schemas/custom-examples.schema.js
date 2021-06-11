@@ -26,6 +26,10 @@ const customExamplesSchema = [
   {
     component: 'form-level-errors',
     linkText: 'Form level errors'
+  },
+  {
+    component: 'value-listener',
+    linkText: 'Value listener'
   }
 ];
 
