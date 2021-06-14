@@ -73,5 +73,6 @@ export const dependencies = {
   'carbon-components-react': 'latest',
   'carbon-icons': 'latest',
   'prop-types': 'latest',
-  '@babel/runtime': '^7.12.1'
+  '@babel/runtime': '^7.12.1',
+  clsx: 'latest'
 };
