@@ -275,6 +275,33 @@ const createCarbonCJSTransform = (env) => [
   `carbon-components-react-${env}`
 ];
 
+const createReactJSSTransform = (env) => [
+  'transform-imports',
+  {
+    'react-jss': {
+      transform: (importName) => {
+        let res;
+        const files = glob.sync(
+          path.resolve(
+            __dirname,
+            `../../node_modules/react-jss/dist/react-jss.${env}.js`
+          )
+        );
+        if (files.length > 0) {
+          res = files[0];
+        } else {
+          throw new Error(`File with importName ${importName} does not exist`);
+        }
+
+        res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
+        res = res.replace(/^\//, '');
+        return res;
+      }
+    }
+  },
+  `react-jss-${env}`
+];
+
 module.exports = {
   extends: '../../babel.config.js',
   env: {
@@ -286,7 +313,8 @@ module.exports = {
         createPfReactTransform('js'),
         createBluePrintTransform('cjs'),
         createAntTransform('cjs'),
-        createCarbonCJSTransform('cjs')
+        createCarbonCJSTransform('cjs'),
+        createReactJSSTransform('cjs')
       ]
     },
     esm: {
@@ -297,7 +325,8 @@ module.exports = {
         createPfReactTransform('esm'),
         createBluePrintTransform('esm'),
         createAntTransform('esm'),
-        createCarbonCJSTransform('esm')
+        createCarbonCJSTransform('esm'),
+        createReactJSSTransform('esm')
       ]
     }
   }
