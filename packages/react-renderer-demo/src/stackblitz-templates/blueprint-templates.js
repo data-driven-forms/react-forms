@@ -69,7 +69,7 @@ render(<App />, document.getElementById('root'));`;
 export const dependencies = {
   react: 'latest',
   'react-dom': 'latest',
-  '@babel/runtime': '7.12.1',
+  '@babel/runtime': '^7.12.1',
   '@data-driven-forms/react-form-renderer': 'latest',
   '@data-driven-forms/blueprint-component-mapper': 'latest',
   '@data-driven-forms/common': 'latest',
