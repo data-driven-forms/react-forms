@@ -269,6 +269,7 @@ const Select = (props) => {
       simpleValue={false}
       {...rest}
       {...input}
+      isMulti={isMulti}
       loadOptions={loadOptions}
       invalidText={invalidText}
       loadOptionsChangeCounter={loadOptionsChangeCounter}
