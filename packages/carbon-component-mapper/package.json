@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/carbon-component-mapper",
-  "version": "3.8.2",
+  "version": "3.8.3",
   "description": "carbon-component-mapper for data-driven-forms.",
   "main": "index.js",
   "module": "esm/index.js",
