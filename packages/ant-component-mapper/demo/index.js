@@ -1,15 +1,11 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { FormRenderer } from '@data-driven-forms/react-form-renderer';
 import 'antd/dist/antd.css';
 import './style.css';
-import demoSchema from '../../../shared/demoschema';
-import dualListSelectSchema from './demo-schemas/dual-list-select-schema'
 import { componentMapper, FormTemplate } from '../src';
-import wizardSchema from './demo-schemas/wizard-schema';
-import sliderSchema from './demo-schemas/slider-schema';
-import fieldArraySchema from './demo-schemas/field-array-schema';
+
+import Playground from '../../../shared/playground';
 
 const style = {
   position: 'relative',
@@ -17,13 +13,15 @@ const style = {
   margin:'auto'
 }
 
+/* TODO:
+  - pass all the related props to Playground
+  - do the same for all other mappers
+  */
 const App = () => (
   <div style={style}>
-    <FormRenderer
+    <Playground
       componentMapper={componentMapper}
       FormTemplate={(props) => <FormTemplate layout='vertical' {...props} />}
-      onSubmit={console.log}
-      schema={wizardSchema}
     />
   </div>
 );
