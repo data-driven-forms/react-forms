@@ -6,7 +6,6 @@ import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-rend
 import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
 import { Select, MultiSelect, ComboBox } from 'carbon-components-react';
-import { multiOnChange } from '../select';
 import { getMultiValue } from '../select/select';
 
 describe('<Select />', () => {
@@ -170,28 +169,6 @@ describe('<Select />', () => {
       );
 
       expect(wrapper.find(MultiSelect.Filterable)).toHaveLength(1);
-    });
-  });
-
-  describe('multichange', () => {
-    const input = {
-      onChange: jest.fn()
-    };
-
-    beforeEach(() => {
-      input.onChange.mockReset();
-    });
-
-    it('simpleValue', () => {
-      multiOnChange(input, true)({ selectedItems: [{ value: '123' }, { value: '345' }] });
-
-      expect(input.onChange).toHaveBeenCalledWith(['123', '345']);
-    });
-
-    it('not simple value', () => {
-      multiOnChange(input, false)({ selectedItems: [{ value: '123' }, { value: '345' }] });
-
-      expect(input.onChange).toHaveBeenCalledWith([{ value: '123' }, { value: '345' }]);
     });
   });
 

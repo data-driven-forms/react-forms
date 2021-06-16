@@ -8,13 +8,7 @@ import fnToString from '@data-driven-forms/common/utils/fn-to-string';
 import { Select as CarbonSelect, MultiSelect, SelectItem, ComboBox } from 'carbon-components-react';
 import prepareProps from '../prepare-props';
 
-export const multiOnChange = (input, simpleValue) => ({ selectedItem, selectedItems }) => {
-  if (simpleValue) {
-    return input.onChange(selectedItems?.map(({ value }) => value) || selectedItem.value);
-  } else {
-    return input.onChange(selectedItems || selectedItem);
-  }
-};
+const onChangeWrapper = (onChange) => ({ selectedItem, selectedItems }) => onChange(selectedItems || selectedItem);
 
 export const getMultiValue = (value, options) =>
   (Array.isArray(value) ? value : value ? [value] : []).map((item) =>
@@ -43,7 +37,7 @@ const ClearedMultiSelectFilterable = ({
     disabled={isDisabled}
     {...rest}
     placeholder={carbonLabel || placeholder}
-    onChange={originalOnChange}
+    onChange={onChangeWrapper(onChange)}
     titleText={rest.labelText}
     id={rest.name}
     invalid={Boolean(invalidText)}
@@ -94,7 +88,7 @@ const ClearedMultiSelect = ({
     disabled={isDisabled}
     {...rest}
     label={carbonLabel || placeholder}
-    onChange={originalOnChange}
+    onChange={onChangeWrapper(onChange)}
     titleText={rest.labelText}
     id={rest.name}
     invalid={Boolean(invalidText)}
@@ -206,6 +200,7 @@ const ClearedSelectSearchable = ({
   originalOnChange,
   placeholder,
   labelText,
+  onChange,
   ...rest
 }) => (
   <ComboBox
@@ -218,7 +213,7 @@ const ClearedSelectSearchable = ({
     items={options}
     placeholder={placeholder}
     titleText={labelText}
-    onChange={originalOnChange}
+    onChange={onChangeWrapper(onChange)}
   />
 );
 
@@ -273,7 +268,6 @@ const Select = (props) => {
       loadOptions={loadOptions}
       invalidText={invalidText}
       loadOptionsChangeCounter={loadOptionsChangeCounter}
-      originalOnChange={multiOnChange(input, rest.simpleValue)}
       helperText={text}
     />
   );
