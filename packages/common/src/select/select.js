@@ -11,8 +11,17 @@ import useIsMounted from '../hooks/use-is-mounted';
 const getSelectValue = (stateValue, simpleValue, isMulti, allOptions) =>
   simpleValue ? allOptions.filter(({ value }) => (isMulti ? stateValue.includes(value) : isEqual(value, stateValue))) : stateValue;
 
-const handleSelectChange = (option, simpleValue, isMulti, onChange) => {
+const handleSelectChange = (option, simpleValue, isMulti, onChange, allOptions) => {
   const sanitizedOption = !option && isMulti ? [] : option;
+
+  if (isMulti && option.find(({ selectAll }) => selectAll)) {
+    return onChange(allOptions.filter(({ selectAll }) => !selectAll).map(({ value }) => value));
+  }
+
+  if (isMulti && option.find(({ selectNone }) => selectNone)) {
+    return onChange([]);
+  }
+
   return simpleValue
     ? onChange(isMulti ? sanitizedOption.map((item) => item.value) : sanitizedOption ? sanitizedOption.value : undefined)
     : onChange(sanitizedOption);
@@ -147,7 +156,7 @@ const Select = ({
       classNamePrefix={classNamePrefix}
       isMulti={isMulti}
       value={getSelectValue(selectValue, simpleValue, isMulti, state.options)}
-      onChange={(option) => handleSelectChange(option, simpleValue, isMulti, onChange)}
+      onChange={(option) => handleSelectChange(option, simpleValue, isMulti, onChange, state.options)}
       onInputChange={onInputChange}
       isFetching={Object.values(state.promises).some((value) => value)}
       noOptionsMessage={renderNoOptionsMessage()}

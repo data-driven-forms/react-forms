@@ -313,6 +313,76 @@ describe('Select test', () => {
       ]);
       expect(inputValue).toEqual(['d', 'c']);
     });
+
+    it('selects all values', async () => {
+      field = { ...field, isMulti: true, options: [{ label: 'Select all', selectAll: true }, ...field.options] };
+
+      await act(async () => {
+        wrapper = mount(
+          <FormRenderer
+            {...rendererProps}
+            schema={{
+              fields: [
+                {
+                  ...field,
+                  component: componentTypes.SELECT,
+                  name: 'select'
+                }
+              ]
+            }}
+          />
+        );
+      });
+      wrapper.update();
+
+      await act(async () => {
+        wrapper
+          .find('#onChange')
+          .props()
+          .onClick([{ label: 'Select all', selectAll: true }]);
+      });
+      wrapper.update();
+
+      expect(state.value).toEqual([
+        { label: 'Dogs', value: 'd' },
+        { label: 'Cats', value: 'c' },
+        { label: 'Hamsters', value: 'h' }
+      ]);
+      expect(inputValue).toEqual(['d', 'c', 'h']);
+    });
+
+    it('selects none', async () => {
+      field = { ...field, isMulti: true, options: [{ label: 'Select none', selectNone: true }, ...field.options], initialValue: ['d', 'c', 'h'] };
+
+      await act(async () => {
+        wrapper = mount(
+          <FormRenderer
+            {...rendererProps}
+            schema={{
+              fields: [
+                {
+                  ...field,
+                  component: componentTypes.SELECT,
+                  name: 'select'
+                }
+              ]
+            }}
+          />
+        );
+      });
+      wrapper.update();
+
+      await act(async () => {
+        wrapper
+          .find('#onChange')
+          .props()
+          .onClick([{ label: 'Select none', selectNone: true }]);
+      });
+      wrapper.update();
+
+      expect(state.value).toEqual([]);
+      expect(inputValue).toEqual('');
+    });
   });
 
   describe('loadOptions', () => {
