@@ -25,8 +25,23 @@ const fieldArrayState = {
       number: [1, 2, 3, 4],
       minMax: [null, null, null, null]
     }
-  }
+  } 
 };
+
+// New code added
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function get() {
+    return _demoschema["default"];
+  }
+});
+
+var _demoschema = _interopRequireDefault(require("./demoschema"));
 
 class App extends React.Component {
   constructor(props) {
