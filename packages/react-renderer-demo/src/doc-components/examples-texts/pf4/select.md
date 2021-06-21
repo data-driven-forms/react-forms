@@ -30,3 +30,7 @@ const asyncLoadOptions = (searchValue) => new Promise(resolve => setTimeout(() =
   return resolve(options);
 }, 2000));
 ```
+
+import SelectCommon from '../select.md';
+
+<SelectCommon/>
