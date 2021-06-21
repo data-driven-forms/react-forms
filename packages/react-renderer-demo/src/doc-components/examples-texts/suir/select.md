@@ -3,3 +3,7 @@
 |----|----|-------|----------------|
 |FormFieldGridProps|object|`{}`|`div`|
 |HelperTextProps|object|`{}`|`p`|
+
+import SelectCommon from '../select.md';
+
+<SelectCommon/>

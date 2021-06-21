@@ -313,6 +313,174 @@ describe('Select test', () => {
       ]);
       expect(inputValue).toEqual(['d', 'c']);
     });
+
+    it('selects all values', async () => {
+      field = { ...field, isMulti: true, options: [{ label: 'Select all', selectAll: true }, ...field.options] };
+
+      await act(async () => {
+        wrapper = mount(
+          <FormRenderer
+            {...rendererProps}
+            schema={{
+              fields: [
+                {
+                  ...field,
+                  component: componentTypes.SELECT,
+                  name: 'select'
+                }
+              ]
+            }}
+          />
+        );
+      });
+      wrapper.update();
+
+      await act(async () => {
+        wrapper
+          .find('#onChange')
+          .props()
+          .onClick([{ label: 'Select all', selectAll: true }]);
+      });
+      wrapper.update();
+
+      expect(state.value).toEqual([
+        { label: 'Select all', selectAll: true },
+        { label: 'Dogs', value: 'd' },
+        { label: 'Cats', value: 'c' },
+        { label: 'Hamsters', value: 'h' }
+      ]);
+      expect(inputValue).toEqual(['d', 'c', 'h']);
+
+      // remove hamsters
+      await act(async () => {
+        wrapper
+          .find('#onChange')
+          .props()
+          .onClick([
+            { label: 'Select all', selectAll: true },
+            { label: 'Dogs', value: 'd' },
+            { label: 'Cats', value: 'c' }
+          ]);
+      });
+      wrapper.update();
+
+      expect(state.value).toEqual([
+        { label: 'Dogs', value: 'd' },
+        { label: 'Cats', value: 'c' }
+      ]);
+      expect(inputValue).toEqual(['d', 'c']);
+    });
+
+    it('selects none', async () => {
+      field = { ...field, isMulti: true, options: [{ label: 'Select none', selectNone: true }, ...field.options], initialValue: ['d', 'c', 'h'] };
+
+      await act(async () => {
+        wrapper = mount(
+          <FormRenderer
+            {...rendererProps}
+            schema={{
+              fields: [
+                {
+                  ...field,
+                  component: componentTypes.SELECT,
+                  name: 'select'
+                }
+              ]
+            }}
+          />
+        );
+      });
+      wrapper.update();
+
+      await act(async () => {
+        wrapper
+          .find('#onChange')
+          .props()
+          .onClick([{ label: 'Select none', selectNone: true }]);
+      });
+      wrapper.update();
+
+      expect(state.value).toEqual([{ label: 'Select none', selectNone: true }]);
+      expect(inputValue).toEqual('');
+
+      // adds one
+      await act(async () => {
+        wrapper
+          .find('#onChange')
+          .props()
+          .onClick([
+            { label: 'Select none', selectNone: true },
+            { label: 'Dogs', value: 'd' }
+          ]);
+      });
+      wrapper.update();
+
+      expect(state.value).toEqual([{ label: 'Dogs', value: 'd' }]);
+      expect(inputValue).toEqual(['d']);
+    });
+
+    it('with select all and select none at that same time', async () => {
+      field = {
+        ...field,
+        isMulti: true,
+        options: [
+          { label: 'Select all', selectAll: true, value: 'select-all' },
+          { label: 'Select none', selectNone: true, value: 'select-none' },
+          ...field.options
+        ]
+      };
+
+      await act(async () => {
+        wrapper = mount(
+          <FormRenderer
+            {...rendererProps}
+            schema={{
+              fields: [
+                {
+                  ...field,
+                  component: componentTypes.SELECT,
+                  name: 'select'
+                }
+              ]
+            }}
+          />
+        );
+      });
+      wrapper.update();
+
+      await act(async () => {
+        wrapper
+          .find('#onChange')
+          .props()
+          .onClick([{ label: 'Select all', selectAll: true, value: 'select-all' }]);
+      });
+      wrapper.update();
+
+      expect(state.value).toEqual([
+        { label: 'Select all', selectAll: true, value: 'select-all' },
+        { label: 'Dogs', value: 'd' },
+        { label: 'Cats', value: 'c' },
+        { label: 'Hamsters', value: 'h' }
+      ]);
+      expect(inputValue).toEqual(['d', 'c', 'h']);
+
+      await act(async () => {
+        wrapper
+          .find('#onChange')
+          .props()
+          .onClick([
+            { label: 'Select all', selectAll: true },
+            { label: 'Dogs', value: 'd' },
+            { label: 'Cats', value: 'c' },
+            { label: 'Hamsters', value: 'h' },
+            { label: 'Select none', selectNone: true, value: 'select-none' }
+          ]);
+      });
+      wrapper.update();
+
+      expect(state.value).toEqual([{ label: 'Select none', selectNone: true, value: 'select-none' }]);
+      expect(inputValue).toEqual([]);
+    });
   });
 
   describe('loadOptions', () => {
