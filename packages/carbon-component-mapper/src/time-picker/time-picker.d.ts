@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { UseFieldApiComponentConfig, AnyObject } from "@data-driven-forms/react-form-renderer";
 
-import { FormGroupProps } from "./form-group";
+import { FormGroupProps } from "../form-group";
 
 import { TimePickerProps as CarbonTimePickerProps, SelectItemProps } from 'carbon-components-react';
 
