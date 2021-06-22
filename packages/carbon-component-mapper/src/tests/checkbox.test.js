@@ -1,4 +1,5 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
@@ -46,5 +47,98 @@ describe('<Checkbox />', () => {
         .last()
         .props().labelText
     ).toEqual('option 2');
+  });
+
+  it('selects item in multiple checkbox', async () => {
+    const schema = {
+      fields: [
+        {
+          component: componentTypes.CHECKBOX,
+          name: 'check',
+          label: 'Please select on of options',
+          options: [
+            {
+              label: 'option 1',
+              value: 'option-1'
+            },
+            {
+              label: 'option 2',
+              value: 'option-2'
+            }
+          ]
+        }
+      ]
+    };
+    const eventCheck = {
+      target: {
+        checked: true,
+        type: 'checkbox'
+      }
+    };
+    const eventUncheck = {
+      target: {
+        checked: false,
+        type: 'checkbox'
+      }
+    };
+
+    const submitSpy = jest.fn();
+
+    const wrapper = mount(
+      <FormRenderer
+        onSubmit={(values) => submitSpy(values)}
+        FormTemplate={(props) => <FormTemplate {...props} />}
+        schema={schema}
+        componentMapper={componentMapper}
+      />
+    );
+
+    await act(async () => {
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', eventCheck);
+    });
+    wrapper.update();
+
+    await act(async () => {
+      wrapper.find('form').simulate('submit');
+    });
+    wrapper.update();
+
+    expect(submitSpy).toHaveBeenCalledWith({ check: ['option-1'] });
+    submitSpy.mockClear();
+
+    await act(async () => {
+      wrapper
+        .find('input')
+        .last()
+        .simulate('change', eventCheck);
+    });
+    wrapper.update();
+
+    await act(async () => {
+      wrapper.find('form').simulate('submit');
+    });
+    wrapper.update();
+
+    expect(submitSpy).toHaveBeenCalledWith({ check: ['option-1', 'option-2'] });
+    submitSpy.mockClear();
+
+    await act(async () => {
+      wrapper
+        .find('input')
+        .first()
+        .simulate('change', eventUncheck);
+    });
+    wrapper.update();
+
+    await act(async () => {
+      wrapper.find('form').simulate('submit');
+    });
+    wrapper.update();
+
+    expect(submitSpy).toHaveBeenCalledWith({ check: ['option-2'] });
+    submitSpy.mockClear();
   });
 });

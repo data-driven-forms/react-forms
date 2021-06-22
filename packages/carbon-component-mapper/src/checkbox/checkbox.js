@@ -43,7 +43,9 @@ const SingleCheckbox = (props) => {
   );
 };
 
-const SingleCheckboxInCommon = ({ label, isDisabled, id, ...props }) => <CarbonCheckbox id={id} labelText={label} disabled={isDisabled} />;
+const SingleCheckboxInCommon = ({ label, isDisabled, id, meta, option: { value, name, ...rest }, onChange, ...props }) => (
+  <CarbonCheckbox id={id} labelText={label} disabled={isDisabled} {...props} {...rest} onChange={(_value, _name, event) => onChange(event)} />
+);
 
 SingleCheckboxInCommon.propTypes = {
   label: PropTypes.node,
@@ -52,7 +54,10 @@ SingleCheckboxInCommon.propTypes = {
   isRequired: PropTypes.bool,
   name: PropTypes.string,
   id: PropTypes.string,
-  WrapperProps: PropTypes.object
+  WrapperProps: PropTypes.object,
+  meta: PropTypes.object,
+  option: PropTypes.object,
+  onChange: PropTypes.func
 };
 
 const Checkbox = ({ options, ...props }) =>
