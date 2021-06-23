@@ -1,6 +1,6 @@
 import SelectCommon from '../select.md';
 
-## Single select with categories
+## Single select with categories
 
 For single (not clearable/not searchable) select, you can use categories to group your options by adding an `options` array.
 
