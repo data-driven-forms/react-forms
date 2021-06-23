@@ -2,8 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Button as MUIButton, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import Alert from '@material-ui/lab/Alert';
+import AlertTitle from '@material-ui/lab/AlertTitle';
 
 import FormTemplate from '@data-driven-forms/common/form-template';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(() => ({
   buttonGroup: {
@@ -86,8 +89,53 @@ Button.propTypes = {
   buttonType: PropTypes.string
 };
 
+const useAlertStyles = makeStyles(() => ({
+  alert: {
+    width: '100%',
+    margin: 8
+  }
+}));
+
+export const FormError = ({ formError, alertProps }) => {
+  const { alert } = useAlertStyles();
+
+  if (typeof formError === 'object' && (formError.title || formError.title)) {
+    const { title, description, TitleProps, className, ...props } = formError;
+
+    return (
+      <Alert severity="error" {...props} {...alertProps} className={clsx(alert, alertProps?.className, className)}>
+        {title && <AlertTitle {...TitleProps}>{title}</AlertTitle>}
+        {description}
+      </Alert>
+    );
+  }
+
+  if (formError) {
+    return (
+      <Alert severity="error" {...alertProps} className={clsx(alert, alertProps?.className)}>
+        {formError}
+      </Alert>
+    );
+  }
+
+  return null;
+};
+
+FormError.propTypes = {
+  formError: PropTypes.any,
+  alertProps: PropTypes.object
+};
+
 const MuiFormTemplate = (props) => (
-  <FormTemplate FormWrapper={Form} Button={Button} ButtonGroup={ButtonGroup} Title={Title} Description={Description} {...props} />
+  <FormTemplate
+    BeforeError={FormError}
+    FormWrapper={Form}
+    Button={Button}
+    ButtonGroup={ButtonGroup}
+    Title={Title}
+    Description={Description}
+    {...props}
+  />
 );
 
 export default MuiFormTemplate;
