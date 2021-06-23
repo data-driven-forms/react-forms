@@ -5,7 +5,7 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import DataDrivenSelect from '@data-driven-forms/common/select';
 import fnToString from '@data-driven-forms/common/utils/fn-to-string';
 
-import { Select as CarbonSelect, MultiSelect, SelectItem, ComboBox } from 'carbon-components-react';
+import { Select as CarbonSelect, MultiSelect, SelectItem, ComboBox, SelectItemGroup } from 'carbon-components-react';
 import prepareProps from '../prepare-props';
 
 const onChangeWrapper = (onChange) => ({ selectedItem, selectedItems }) => onChange(selectedItems || selectedItem);
@@ -14,6 +14,21 @@ export const getMultiValue = (value, options) =>
   (Array.isArray(value) ? value : value ? [value] : []).map((item) =>
     typeof item === 'object' ? item : options.find(({ value }) => value === item)
   );
+
+const renderOptions = (options) =>
+  options.map((option, index) => {
+    const { options, ...rest } = option;
+
+    if (options) {
+      return (
+        <SelectItemGroup key={rest.value || index} text={rest.label} {...rest}>
+          {renderOptions(options)}
+        </SelectItemGroup>
+      );
+    }
+
+    return <SelectItem key={rest.value || index} text={rest.label} {...rest} />;
+  });
 
 const ClearedMultiSelectFilterable = ({
   invalidText,
@@ -147,9 +162,7 @@ const ClearedSelect = ({
     invalidText={invalidText}
   >
     {isFetching && <SelectItem text={placeholder} value={''} />}
-    {options.map((option, index) => (
-      <SelectItem key={option.value || index} text={option.label} {...option} />
-    ))}
+    {renderOptions(options)}
   </CarbonSelect>
 );
 
@@ -252,8 +265,15 @@ const Select = (props) => {
   }, [loadOptionsStr]);
   const isSearchClear = isSearchable || isClearable;
 
-  const Component =
-    isMulti && isSearchClear ? ClearedMultiSelectFilterable : isMulti ? ClearedMultiSelect : isSearchClear ? ClearedSelectSearchable : ClearedSelect;
+  let Component = ClearedSelect;
+
+  if (isMulti && isSearchClear) {
+    Component = ClearedMultiSelectFilterable;
+  } else if (isMulti) {
+    Component = ClearedMultiSelect;
+  } else if (isSearchClear) {
+    Component = ClearedSelectSearchable;
+  }
 
   const invalidText = ((meta.touched || validateOnMount) && (meta.error || meta.submitError)) || '';
   const text = ((meta.touched || validateOnMount) && meta.warning) || helperText;

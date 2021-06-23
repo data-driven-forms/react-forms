@@ -5,7 +5,7 @@ import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-rend
 
 import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
-import { Select, MultiSelect, ComboBox } from 'carbon-components-react';
+import { Select, MultiSelect, ComboBox, SelectItem, SelectItemGroup } from 'carbon-components-react';
 import { getMultiValue } from '../select/select';
 
 describe('<Select />', () => {
@@ -29,6 +29,42 @@ describe('<Select />', () => {
     );
 
     expect(wrapper.find(Select)).toHaveLength(1);
+  });
+
+  it('renders select with categories', () => {
+    const schema = {
+      fields: [
+        {
+          component: componentTypes.SELECT,
+          name: 'select',
+          label: 'select',
+          options: [
+            {
+              label: 'Category 1',
+              options: [
+                { label: 'value 1', value: '111' },
+                { label: 'value 2', value: '222' }
+              ]
+            },
+            {
+              label: 'Category 2',
+              options: [
+                { label: 'value 3', value: '333' },
+                { label: 'value 4', value: '444' }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+
+    const wrapper = mount(
+      <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
+    );
+
+    expect(wrapper.find(Select)).toHaveLength(1);
+    expect(wrapper.find(SelectItemGroup)).toHaveLength(2);
+    expect(wrapper.find(SelectItem)).toHaveLength(4);
   });
 
   ['isSearchable', 'isClearable'].forEach((setting) => {
