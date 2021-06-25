@@ -18,6 +18,9 @@ import Box from '@material-ui/core/Box';
 import LinkIcon from '@material-ui/icons/Link';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import CardHeader from '@material-ui/core/CardHeader';
+import IconButton from '@material-ui/core/IconButton';
 
 import Link from 'next/link';
 import clsx from 'clsx';
@@ -133,6 +136,24 @@ const useStyles = makeStyles((theme) => ({
   hidden: {
     height: 0,
     minHeight: 0
+  },
+  expand: {
+    transform: 'rotate(-90deg)'
+  },
+  hide: {
+    transform: 'rotate(90deg)'
+  },
+  tableHeader: {
+    paddingBottom: 0,
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    }
+  },
+  tableBody: {
+    paddingTop: 0
+  },
+  expandButton: {
+    width: '100%'
   }
 }));
 
@@ -144,6 +165,7 @@ const stringifyWithFunctions = (string) =>
 
 const ComponentExample = ({ variants, schema, activeMapper, component, schemaVariants }) => {
   const [variant, setVariant] = useState('basic');
+  const [expanded, setExpanded] = useState(true);
 
   const { pathname, push } = useRouter();
   const classes = useStyles();
@@ -204,28 +226,39 @@ const ComponentExample = ({ variants, schema, activeMapper, component, schemaVar
   return (
     <React.Fragment>
       <Box display="flex" className={classes.box}>
-        <Card style={{ minHeight: 500 }} square>
-          <CardContent>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Type</TableCell>
-                  <TableCell>Required</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {variants.map(({ name, type, required }) => (
-                  <TableRow key={name}>
-                    <TableCell>{name}</TableCell>
-                    <TableCell>{`${type}`}</TableCell>
-                    <TableCell>{required && <CheckIcon fontSize="small" />}</TableCell>
+        {expanded && (
+          <Card style={{ minHeight: 500 }} square>
+            <CardHeader
+              className={clsx(classes.tableHeader)}
+              title={expanded ? 'Options' : ''}
+              action={
+                <IconButton aria-label="hide options" onClick={() => setExpanded(!expanded)}>
+                  <ExpandMoreIcon className={classes.hide} />
+                </IconButton>
+              }
+            />
+            <CardContent className={classes.tableBody}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Type</TableCell>
+                    <TableCell>Required</TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
+                </TableHead>
+                <TableBody>
+                  {variants.map(({ name, type, required }) => (
+                    <TableRow key={name}>
+                      <TableCell>{name}</TableCell>
+                      <TableCell>{`${type}`}</TableCell>
+                      <TableCell>{required && <CheckIcon fontSize="small" />}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        )}
         <Box display="flex" className={classes.editorContainer}>
           <div className={classes.smTabDown}>
             <Tabs
@@ -240,6 +273,11 @@ const ComponentExample = ({ variants, schema, activeMapper, component, schemaVar
             </Tabs>
           </div>
           <div className={classes.smTabUp}>
+            {!expanded && (
+              <IconButton className={classes.expandButton} aria-label="expand options" onClick={() => setExpanded(!expanded)}>
+                <ExpandMoreIcon className={classes.expand} />
+              </IconButton>
+            )}
             <Tabs
               value={activeMapper}
               orientation="vertical"
