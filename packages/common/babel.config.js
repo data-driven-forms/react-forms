@@ -279,6 +279,7 @@ const createReactJSSTransform = (env) => [
   'transform-imports',
   {
     'react-jss': {
+      skipDefaultConversion: true,
       transform: (importName) => {
         let res;
         const files = glob.sync(
