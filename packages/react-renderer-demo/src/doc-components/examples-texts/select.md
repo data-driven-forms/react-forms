@@ -22,7 +22,7 @@ When is `true`, the select will store only values of the selected options. Other
 
 ## selectAll
 
-*boolean* | <Chip label="Experimental" color="secondary" />
+*boolean* | <Chip label="Experimental" color="secondary" component="span" />
 
 When provided to an option object, this option will select all available options.
 
@@ -40,7 +40,7 @@ options: [{
 
 ## selectNone
 
-*boolean* | <Chip label="Experimental" color="secondary" />
+*boolean* | <Chip label="Experimental" color="secondary" component="span" />
 
 
 When provided to an option object, this option will clear the selection.
