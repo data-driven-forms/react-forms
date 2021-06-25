@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import sdk from '@stackblitz/sdk';
@@ -95,7 +94,10 @@ const useStyles = makeStyles((theme) => ({
   spinnerCheat: {
     flex: 1,
     position: 'relative',
-    boxShadow: theme.shadows[1]
+    boxShadow: theme.shadows[1],
+    '& .longer + #code-target': {
+      maxHeight: 'calc(100% - 49px)'
+    }
   },
   spinner: {
     position: 'absolute',
@@ -123,28 +125,62 @@ const useStyles = makeStyles((theme) => ({
   },
   alert: {
     marginBottom: 8
+  },
+  variantTabs: {
+    height: 49,
+    background: '#eaeaea'
+  },
+  hidden: {
+    height: 0,
+    minHeight: 0
   }
 }));
 
-const ComponentExample = ({ variants, schema, activeMapper, component }) => {
+const stringifyWithFunctions = (string) =>
+  JSON.stringify(string, null, 2)
+    .replace(/<NEWLINE>/g, '\n')
+    .replace(/"<FUNCTION/g, '')
+    .replace(/FUNCTION>"/g, '');
+
+const ComponentExample = ({ variants, schema, activeMapper, component, schemaVariants }) => {
+  const [variant, setVariant] = useState('basic');
+
   const { pathname, push } = useRouter();
   const classes = useStyles();
+
+  const availableVariants = schemaVariants?.[activeMapper];
+  const selectedSchema = availableVariants?.find(({ value }) => value === variant)?.schema || schema;
+  const basicConfiguration = {
+    ...project,
+    dependencies: metadata[activeMapper].dependencies,
+    files: {
+      'index.html': metadata[activeMapper].html,
+      'index.js': metadata[activeMapper].code,
+      ...(component === 'wizard' && { 'index.js': metadata[activeMapper].wizardCode }),
+      'schema.js': `export default ${stringifyWithFunctions(selectedSchema)};`
+    }
+  };
+  const basicEditorSettings = { height: '100%', hideNavigation: true, forceEmbedLayout: true, openFile: 'schema.js' };
+
   useEffect(() => {
+    if (availableVariants && !availableVariants.map(({ value }) => value).includes(variant)) {
+      setVariant('basic');
+    }
+
+    sdk.embedProject('code-target', basicConfiguration, basicEditorSettings);
+  }, [activeMapper, schema]);
+
+  const handleVariantChange = (_e, newVariant) => {
+    setVariant(newVariant);
+
+    const schema = availableVariants.find(({ value }) => value === newVariant).schema;
+
     sdk.embedProject(
       'code-target',
-      {
-        ...project,
-        dependencies: metadata[activeMapper].dependencies,
-        files: {
-          'index.html': metadata[activeMapper].html,
-          'index.js': metadata[activeMapper].code,
-          ...(component === 'wizard' && { 'index.js': metadata[activeMapper].wizardCode }),
-          'schema.js': `export default ${JSON.stringify(schema, null, 2)};`
-        }
-      },
-      { height: '100%', hideNavigation: true, forceEmbedLayout: true, openFile: 'schema.js' }
+      { ...basicConfiguration, files: { ...basicConfiguration.files, 'schema.js': `export default ${stringifyWithFunctions(schema)};` } },
+      basicEditorSettings
     );
-  }, [activeMapper, schema]);
+  };
 
   const renderMapperTabs = () =>
     avalableMappers.map(({ title, mapper }) => (
@@ -170,7 +206,6 @@ const ComponentExample = ({ variants, schema, activeMapper, component }) => {
       <Box display="flex" className={classes.box}>
         <Card style={{ minHeight: 500 }} square>
           <CardContent>
-            <Typography component="h3">Options</Typography>
             <Table>
               <TableHead>
                 <TableRow>
@@ -217,7 +252,17 @@ const ComponentExample = ({ variants, schema, activeMapper, component }) => {
             </Tabs>
           </div>
           <div className={classes.spinnerCheat}>
-            <div id="code-target"></div>
+            <Tabs
+              hidden={!availableVariants}
+              value={variant}
+              className={clsx(availableVariants && classes.variantTabs, availableVariants ? 'longer' : classes.hidden)}
+              onChange={handleVariantChange}
+            >
+              {(availableVariants || []).map((variant) => (
+                <Tab label={variant.label} value={variant.value} key={variant.value} />
+              ))}
+            </Tabs>
+            <div id="code-target" className="pepa"></div>
             <div className={classes.spinner}>
               <CircularProgress color="secondary" size={80} />
             </div>
@@ -258,7 +303,8 @@ ComponentExample.propTypes = {
       type: PropTypes.string.isRequired,
       required: PropTypes.bool
     })
-  ).isRequired
+  ).isRequired,
+  schemaVariants: PropTypes.object
 };
 
 export default ComponentExample;
