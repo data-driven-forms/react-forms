@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ComponentExampleText = ({ linkText, schema, variants, schemaVariants }) => {
   const classes = useStyles();
-  const [activeMapper, component] = useComponentExample();
+  const [activeMapper, component, activeSchema] = useComponentExample();
 
   return (
     <div className={classes.wrapper}>
@@ -34,7 +34,14 @@ const ComponentExampleText = ({ linkText, schema, variants, schemaVariants }) =>
         <Heading level="4" component="h1">
           {`${avalableMappers.find(({ mapper }) => mapper === activeMapper)?.title} ${linkText}`}
         </Heading>
-        <ComponentExample variants={variants} schema={schema} activeMapper={activeMapper} component={component} schemaVariants={schemaVariants} />
+        <ComponentExample
+          variants={variants}
+          schema={schema}
+          activeMapper={activeMapper}
+          component={component}
+          schemaVariants={schemaVariants}
+          activeSchema={activeSchema}
+        />
         <br />
         <AdditionalComponentText activeMapper={activeMapper} component={component} />
       </div>
