@@ -163,15 +163,17 @@ const stringifyWithFunctions = (string) =>
     .replace(/"<FUNCTION/g, '')
     .replace(/FUNCTION>"/g, '');
 
-const ComponentExample = ({ variants, schema, activeMapper, component, schemaVariants }) => {
-  const [variant, setVariant] = useState('basic');
+const ComponentExample = ({ variants, schema, activeMapper, component, schemaVariants, activeSchema }) => {
   const [expanded, setExpanded] = useState(true);
 
   const { pathname, push } = useRouter();
   const classes = useStyles();
 
   const availableVariants = schemaVariants?.[activeMapper];
-  const selectedSchema = availableVariants?.find(({ value }) => value === variant)?.schema || schema;
+  const selectedSchema =
+    availableVariants?.find(({ value }) => value === activeSchema)?.schema ||
+    availableVariants?.find(({ value }) => value === 'basic')?.schema ||
+    schema;
   const basicConfiguration = {
     ...project,
     dependencies: metadata[activeMapper].dependencies,
@@ -185,35 +187,23 @@ const ComponentExample = ({ variants, schema, activeMapper, component, schemaVar
   const basicEditorSettings = { height: '100%', hideNavigation: true, forceEmbedLayout: true, openFile: 'schema.js' };
 
   useEffect(() => {
-    if (availableVariants && !availableVariants.map(({ value }) => value).includes(variant)) {
-      setVariant('basic');
+    if (activeSchema && !availableVariants?.find(({ value }) => value === activeSchema)) {
+      push(`${pathname}?mapper=${activeMapper}&schema=basic`);
     }
 
     sdk.embedProject('code-target', basicConfiguration, basicEditorSettings);
-  }, [activeMapper, schema]);
-
-  const handleVariantChange = (_e, newVariant) => {
-    setVariant(newVariant);
-
-    const schema = availableVariants.find(({ value }) => value === newVariant).schema;
-
-    sdk.embedProject(
-      'code-target',
-      { ...basicConfiguration, files: { ...basicConfiguration.files, 'schema.js': `export default ${stringifyWithFunctions(schema)};` } },
-      basicEditorSettings
-    );
-  };
+  }, [activeMapper, schema, activeSchema]);
 
   const renderMapperTabs = () =>
     avalableMappers.map(({ title, mapper }) => (
       <Tab
         key={mapper}
         value={mapper}
-        onClick={() => push(`${pathname}?mapper=${mapper}`)}
+        onClick={() => push(`${pathname}?mapper=${mapper}${activeSchema ? `&schema=${activeSchema}` : ''}`)}
         className={clsx(classes.tab, { active: activeMapper === mapper })}
         label={
-          <Link href={`${pathname}?mapper=${mapper}`}>
-            <a href={`${pathname}?mapper=${mapper}`} className={classes.tabLink}>
+          <Link href={`${pathname}?mapper=${mapper}${activeSchema ? `&schema=${activeSchema}` : ''}`}>
+            <a href={`${pathname}?mapper=${mapper}${activeSchema ? `&schema=${activeSchema}` : ''}`} className={classes.tabLink}>
               {title}
             </a>
           </Link>
@@ -292,12 +282,22 @@ const ComponentExample = ({ variants, schema, activeMapper, component, schemaVar
           <div className={classes.spinnerCheat}>
             <Tabs
               hidden={!availableVariants}
-              value={variant}
+              value={activeSchema || 'basic'}
               className={clsx(availableVariants && classes.variantTabs, availableVariants ? 'longer' : classes.hidden)}
-              onChange={handleVariantChange}
             >
               {(availableVariants || []).map((variant) => (
-                <Tab label={variant.label} value={variant.value} key={variant.value} />
+                <Tab
+                  onClick={() => push(`${pathname}?mapper=${activeMapper}&schema=${variant.value}`)}
+                  label={
+                    <Link href={`${pathname}?mapper=${activeMapper}&schema=${variant.value}`}>
+                      <a href={`${pathname}?mapper=${activeMapper}&schema=${variant.value}`} className={classes.tabLink}>
+                        {variant.label}
+                      </a>
+                    </Link>
+                  }
+                  value={variant.value}
+                  key={variant.value}
+                />
               ))}
             </Tabs>
             <div id="code-target" className="pepa"></div>
@@ -342,7 +342,8 @@ ComponentExample.propTypes = {
       required: PropTypes.bool
     })
   ).isRequired,
-  schemaVariants: PropTypes.object
+  schemaVariants: PropTypes.object,
+  activeSchema: PropTypes.string
 };
 
 export default ComponentExample;
