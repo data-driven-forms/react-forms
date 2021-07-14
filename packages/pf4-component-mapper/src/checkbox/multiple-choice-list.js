@@ -6,11 +6,14 @@ import { Checkbox } from '@patternfly/react-core';
 import MultipleChoiceListCommon, { wrapperProps } from '@data-driven-forms/common/multiple-choice-list';
 import FormGroup from '../form-group/form-group';
 
-const FinalCheckbox = (props) => <Checkbox isChecked={props.checked} {...props} onChange={(_value, e) => props.onChange(e)} />;
+const FinalCheckbox = ({ option, ...props }) => (
+  <Checkbox isChecked={props.checked} {...props} onChange={(_value, e) => props.onChange(e)} {...option} />
+);
 
 FinalCheckbox.propTypes = {
   checked: PropTypes.bool,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  option: PropTypes.object
 };
 
 const Wrapper = ({ meta, children, ...rest }) => (
