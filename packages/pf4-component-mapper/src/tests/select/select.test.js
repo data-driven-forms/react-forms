@@ -8,6 +8,7 @@ import { act } from 'react-dom/test-utils';
 import ValueContainer from '../../select/select/value-container';
 import FormTemplate from '../../form-template';
 import componentMapper from '../../component-mapper';
+import Option from '../../select/select/option';
 
 describe('<Select />', () => {
   let initialProps;
@@ -73,6 +74,42 @@ describe('<Select />', () => {
         .find('h1')
         .text()
     ).toEqual('Translated');
+  });
+
+  it('should render description', async () => {
+    const wrapper = mount(
+      <FormRenderer
+        onSubmit={jest.fn}
+        FormTemplate={FormTemplate}
+        componentMapper={componentMapper}
+        schema={{
+          fields: [
+            {
+              component: componentTypes.SELECT,
+              name: 'select',
+              options: [
+                {
+                  label: <h1>Translated</h1>,
+                  value: 'translated',
+                  description: 'some description'
+                }
+              ]
+            }
+          ]
+        }}
+      />
+    );
+
+    expect(wrapper.find(ValueContainer).find('h1')).toHaveLength(0);
+
+    wrapper.find('.pf-c-select__toggle').simulate('click');
+
+    expect(
+      wrapper
+        .find(Option)
+        .find('.ddorg__pf4-component-mapper__select-option-description')
+        .text()
+    ).toEqual('some description');
   });
 
   it('should return single simple value', async () => {
