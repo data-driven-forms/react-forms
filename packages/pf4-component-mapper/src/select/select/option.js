@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './option.css';
-
 import { CheckIcon } from '@patternfly/react-icons';
 
 const Option = ({ item, isActive, isSelected, ...props }) => (
@@ -21,7 +19,7 @@ const Option = ({ item, isActive, isSelected, ...props }) => (
           <CheckIcon />
         </span>
       )}
-      {item.description && <div className="ddorg__pf4-component-mapper__select-option-description">{item.description}</div>}
+      {item.description && <div className="pf-c-select__menu-item-description">{item.description}</div>}
     </button>
   </li>
 );

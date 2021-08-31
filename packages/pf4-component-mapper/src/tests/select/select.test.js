@@ -107,7 +107,7 @@ describe('<Select />', () => {
     expect(
       wrapper
         .find(Option)
-        .find('.ddorg__pf4-component-mapper__select-option-description')
+        .find('.pf-c-select__menu-item-description')
         .text()
     ).toEqual('some description');
   });
