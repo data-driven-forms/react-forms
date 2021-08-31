@@ -31,6 +31,16 @@ const asyncLoadOptions = (searchValue) => new Promise(resolve => setTimeout(() =
 }, 2000));
 ```
 
+## Description
+
+PF4 select can render a description for each option. Just add a `description` attribute to its object (can be `React.node`):
+
+```jsx
+options: [
+  { value: 'value', label: 'Some label', description: 'Some description' }
+]
+```
+
 import SelectCommon from '../select.md';
 
 <SelectCommon/>
