@@ -10,7 +10,13 @@
     "build": "rollup -c ./rollup.config.js",
     "test": "yarn --cwd ../.. test packages/parsers"
   },
-  "repository": "git@github.com:data-driven-forms/react-forms.git",
+  "homepage": "https://data-driven-forms.org/",
+  "bugs": "https://github.com/data-driven-forms/react-forms/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/data-driven-forms/react-forms",
+    "directory": "packages/parsers"
+  },
   "keywords": [
     "react",
     "forms",

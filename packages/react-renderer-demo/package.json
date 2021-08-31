@@ -2,7 +2,14 @@
     "name": "@data-driven-forms/react-renderer-demo",
     "version": "3.12.0",
     "main": "firebaseFunctions.js",
-    "description": "Documentation pages for data driven forms.",
+    "description": "Documentation page for Data Driven Forms.",
+    "homepage": "https://data-driven-forms.org/",
+    "bugs": "https://github.com/data-driven-forms/react-forms/issues",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/data-driven-forms/react-forms",
+      "directory": "packages/react-renderer-demo"
+    },
     "engines": {
         "node": "10"
     },

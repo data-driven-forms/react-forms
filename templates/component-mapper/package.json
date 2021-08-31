@@ -1,7 +1,7 @@
 {
   "name": "@data-driven-forms/{{componentmapper}}-component-mapper",
   "version": "0.0.0",
-  "description": "{{componentmapper}}-component-mapper for data-driven-forms.",
+  "description": "{{componentmapper}} React component mapper for Data Driven Forms.",
   "main": "index.js",
   "module": "esm/index.js",{{typingspath}}
   "license": "Apache-2.0",
@@ -14,7 +14,13 @@
     "build:css": "node ../../scripts/copy-css.js",{{buildtypingsscript}}
     "release": "semantic-release"
   },
-  "repository": "git@github.com:data-driven-forms/react-forms.git",
+  "homepage": "https://data-driven-forms.org/",
+  "bugs": "https://github.com/data-driven-forms/react-forms/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/data-driven-forms/react-forms",
+    "directory": "packages/{{componentmapper}}-component-mapper"
+  },
   "keywords": [
     "react",
     "forms",
