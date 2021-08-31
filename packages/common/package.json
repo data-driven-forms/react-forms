@@ -1,7 +1,7 @@
 {
   "name": "@data-driven-forms/common",
   "version": "3.12.0",
-  "description": "Common components, helpers and other pieces of code",
+  "description": "Common components, helpers and other pieces of code for Data Driven Forms",
   "license": "Apache-2.0",
   "main": "index.js",
   "module": "esm/index.js",
@@ -13,7 +13,13 @@
     "build:packages": "node ../../scripts/generate-packages.js",
     "test": "yarn --cwd ../.. test packages/common"
   },
-  "repository": "git@github.com:data-driven-forms/react-forms.git",
+  "homepage": "https://data-driven-forms.org/",
+  "bugs": "https://github.com/data-driven-forms/react-forms/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/data-driven-forms/react-forms",
+    "directory": "packages/common"
+  },
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/plugin-proposal-class-properties": "^7.1.0",

@@ -1,7 +1,7 @@
 {
   "name": "@data-driven-forms/blueprint-component-mapper",
   "version": "3.12.0",
-  "description": "Blueprint component mapper for data-driven-forms.",
+  "description": "BlueprintJS React component mapper for Data Driven Forms.",
   "main": "index.js",
   "module": "esm/index.js",
   "typings": "index.d.ts",
@@ -16,7 +16,13 @@
     "release": "semantic-release",
     "test": "yarn --cwd ../.. test packages/blueprint-component-mapper"
   },
-  "repository": "git@github.com:data-driven-forms/react-forms.git",
+  "homepage": "https://data-driven-forms.org/",
+  "bugs": "https://github.com/data-driven-forms/react-forms/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/data-driven-forms/react-forms",
+    "directory": "packages/blueprint-component-mapper"
+  },
   "keywords": [
     "react",
     "forms",

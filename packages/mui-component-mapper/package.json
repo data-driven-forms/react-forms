@@ -17,7 +17,13 @@
     "release": "semantic-release",
     "test": "yarn --cwd ../.. test packages/mui-component-mapper"
   },
-  "repository": "git@github.com:data-driven-forms/react-forms.git",
+  "homepage": "https://data-driven-forms.org/",
+  "bugs": "https://github.com/data-driven-forms/react-forms/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/data-driven-forms/react-forms",
+    "directory": "packages/mui-component-mapper"
+  },
   "devDependencies": {
     "@babel/core": "^7.1.6",
     "@babel/plugin-proposal-class-properties": "^7.2.3",
