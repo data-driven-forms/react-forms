@@ -145,7 +145,7 @@
         "assets": [
           "package.json"
         ],
-        "successComment": ":tada: This ${issue.pull_request ? 'PR is included' : 'issue has been resolved'} in version ${nextRelease.version} :tada:\n\nThe release is available on \n\n- [react-form-renderer (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)\n\nDemo can be found [here](http://data-driven-forms.org/)!"
+        "successComment": ":tada: This ${issue.pull_request ? 'PR is included' : 'issue has been resolved'} in version ${nextRelease.version} :tada:\n\nThe release is available on \n\n- [react-form-renderer (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)\n\n- [ant-component-mapper (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/ant-component-mapper)\n\n- [blueprint-component-mapper (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/blueprint-component-mapper)\n\n- [carbon-component-mapper (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/carbon-component-mapper)\n\n- [mui-component-mapper (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper)\n\n- [pf4-component-mapper (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/pf4-component-mapper)\n\n- [suir-component-mapper (@latest dist-tag)](https://www.npmjs.com/package/@data-driven-forms/suir-component-mapper)\n\n[Data-Driven-Forms.org](http://data-driven-forms.org/)!"
       },
       [
         "@semantic-release/git",
