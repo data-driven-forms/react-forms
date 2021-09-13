@@ -50,14 +50,15 @@ const createSuirCJSTransform = (env = 'commonjs') => [
     'semantic-ui-react': {
       transform: (importName) => {
         let res;
-        const files = glob.sync(path.resolve(__dirname, `../../node_modules/semantic-ui-react/dist/${env}/**/${importName}.js`));
+        const files = glob.sync(path.resolve(__dirname, `../{..,suir-component-mapper}/node_modules/semantic-ui-react/dist/${env}/**/${importName}.js`));
+
         if (files.length > 0) {
           res = files[0];
         } else {
           throw new Error(`File with importName ${importName} does not exist`);
         }
 
-        res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
+        res = res.replace(/^.*node_modules\//, '');
         res = res.replace(/^\//, '');
         return res;
       },
@@ -92,7 +93,7 @@ const createPfReactTransform = (env) => [
       transform: (importName) => {
         let res;
         const files = glob.sync(
-          path.resolve(__dirname, `../../node_modules/@patternfly/react-core/dist/${env}/**/${mapper[importName] || importName}.js`)
+          path.resolve(__dirname, `../{..,pf4-component-mapper}//node_modules/@patternfly/react-core/dist/${env}/**/${mapper[importName] || importName}.js`)
         );
         if (files.length > 0) {
           res = files[0];
@@ -100,7 +101,7 @@ const createPfReactTransform = (env) => [
           throw new Error(`File with importName ${importName} does not exist`);
         }
 
-        res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
+        res = res.replace(/^.*node_modules\//, '');
         res = res.replace(/^\//, '');
         return res;
       },
@@ -115,23 +116,6 @@ const createPfReactTransform = (env) => [
           .toLowerCase()}`,
       preventFullImport: true
     },
-    'patternfly-react': {
-      transform: (importName) => {
-        let res;
-        const files = glob.sync(path.resolve(__dirname, `../../node_modules/patternfly-react/dist/${env}/**/${importName}.js`));
-        if (files.length > 0) {
-          res = files[0];
-        } else {
-          throw new Error(`File with importName ${importName} does not exist`);
-        }
-
-        res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
-        res = res.replace(/^\//, '');
-        return res;
-      },
-      preventFullImport: false,
-      skipDefaultConversion: false
-    }
   },
   `pf-react-${env}`
 ];
@@ -159,7 +143,7 @@ const createAntTransform = (env) => [
         const files = glob.sync(
           path.resolve(
             __dirname,
-            `../../node_modules/antd/${env === 'cjs' ? 'lib' : 'es'}/${importName
+            `../{..,ant-component-mapper}/node_modules/antd/${env === 'cjs' ? 'lib' : 'es'}/${importName
               .split(/(?=[A-Z])/)
               .join('-')
               .toLowerCase()}/index.js`
@@ -171,7 +155,7 @@ const createAntTransform = (env) => [
           throw new Error(`File with importName ${importName} does not exist`);
         }
 
-        res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
+        res = res.replace(/^.*node_modules\//, '');
         res = res.replace(/^\//, '');
         return res;
       }
@@ -196,7 +180,7 @@ const createCarbonCJSTransform = (env) => [
       transform: (importName) => {
         let res;
         const files = glob.sync(
-          path.resolve(__dirname, `../../node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es'}/**/${carbonMapper(importName)}.js`)
+          path.resolve(__dirname, `../{..,carbon-component-mapper}/node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es'}/**/${carbonMapper(importName)}.js`)
         );
         if (files.length > 0) {
           res = files[0];
@@ -204,7 +188,7 @@ const createCarbonCJSTransform = (env) => [
           throw new Error(`File with importName ${importName} does not exist`);
         }
 
-        res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
+        res = res.replace(/^.*node_modules\//, '');
         res = res.replace(/^\//, '');
         return res;
       },
@@ -215,7 +199,7 @@ const createCarbonCJSTransform = (env) => [
       transform: (importName) => {
         let res;
         const files = glob.sync(
-          path.resolve(__dirname, `../../node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es'}/**/${carbonMapper(importName)}.js`)
+          path.resolve(__dirname, `../{..,carbon-component-mapper}/node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es'}/**/${carbonMapper(importName)}.js`)
         );
         if (files.length > 0) {
           res = files[0];
@@ -223,7 +207,7 @@ const createCarbonCJSTransform = (env) => [
           throw new Error(`File with importName ${importName} does not exist`);
         }
 
-        res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
+        res = res.replace(/^.*node_modules\//, '');
         res = res.replace(/^\//, '');
         return res;
       },
@@ -234,7 +218,7 @@ const createCarbonCJSTransform = (env) => [
       transform: (importName) => {
         let res;
         const files = glob.sync(
-          path.resolve(__dirname, `../../node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es'}/**/${carbonMapper(importName)}.js`)
+          path.resolve(__dirname, `../{..,carbon-component-mapper}/node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es'}/**/${carbonMapper(importName)}.js`)
         );
         if (files.length > 0) {
           res = files[0];
@@ -242,7 +226,7 @@ const createCarbonCJSTransform = (env) => [
           throw new Error(`File with importName ${importName} does not exist`);
         }
 
-        res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
+        res = res.replace(/^.*node_modules\//, '');
         res = res.replace(/^\//, '');
         return res;
       },
@@ -256,7 +240,7 @@ const createCarbonCJSTransform = (env) => [
 
         let res;
         const files = glob.sync(
-          path.resolve(__dirname, `../../node_modules/@carbon/icons-react/${env === 'cjs' ? 'lib' : 'es'}/${iconName}/${size}.js`)
+          path.resolve(__dirname, `../{..,carbon-component-mapper}/node_modules/@carbon/icons-react/${env === 'cjs' ? 'lib' : 'es'}/${iconName}/${size}.js`)
         );
         if (files.length > 0) {
           res = files[0];
@@ -264,7 +248,7 @@ const createCarbonCJSTransform = (env) => [
           throw new Error(`File with importName ${importName} does not exist`);
         }
 
-        res = res.replace(path.resolve(__dirname, '../../node_modules/'), '');
+        res = res.replace(/^.*node_modules\//, '');
         res = res.replace(/^\//, '');
         return res;
       },
