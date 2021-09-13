@@ -314,6 +314,53 @@ describe('Select test', () => {
       expect(inputValue).toEqual(['d', 'c']);
     });
 
+    it('selects null value - clears selection', async () => {
+      field = { ...field, isMulti: true };
+
+      await act(async () => {
+        wrapper = mount(
+          <FormRenderer
+            {...rendererProps}
+            schema={{
+              fields: [
+                {
+                  ...field,
+                  component: componentTypes.SELECT,
+                  name: 'select'
+                }
+              ]
+            }}
+          />
+        );
+      });
+      wrapper.update();
+
+      await act(async () => {
+        wrapper
+          .find('#onChange')
+          .props()
+          .onClick([{ value: 'd' }, { value: 'c' }]);
+      });
+      wrapper.update();
+
+      expect(state.value).toEqual([
+        { label: 'Dogs', value: 'd' },
+        { label: 'Cats', value: 'c' }
+      ]);
+      expect(inputValue).toEqual(['d', 'c']);
+
+      await act(async () => {
+        wrapper
+          .find('#onChange')
+          .props()
+          .onClick(null);
+      });
+      wrapper.update();
+
+      expect(state.value).toEqual([]);
+      expect(inputValue).toEqual([]);
+    });
+
     it('selects all values', async () => {
       field = { ...field, isMulti: true, options: [{ label: 'Select all', selectAll: true }, ...field.options] };
 

@@ -42,11 +42,11 @@ const handleSelectChange = (option, simpleValue, isMulti, onChange, allOptions, 
 
   const sanitizedOption = !enhanceOption && isMulti ? [] : enhanceOption;
 
-  if (isMulti && enhanceOption.find(({ selectAll }) => selectAll)) {
+  if (isMulti && sanitizedOption.find(({ selectAll }) => selectAll)) {
     return onChange(allOptions.filter(({ selectAll, selectNone }) => !selectAll && !selectNone).map(({ value }) => value));
   }
 
-  if (isMulti && enhanceOption.find(({ selectNone }) => selectNone)) {
+  if (isMulti && sanitizedOption.find(({ selectNone }) => selectNone)) {
     return onChange([]);
   }
 
