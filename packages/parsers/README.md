@@ -12,17 +12,10 @@ Parsers for [Data Driven Forms](https://github.com/data-driven-forms/react-forms
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Parsers](#parsers)
-  - [ManageIQ parser](#manageiq-parser)
-  - [Mozilla JSON schema parser](#mozilla-json-schema-parser)
-- [Useful links](#useful-links)
-- [Development setup](#development-setup)
-  - [Commits](#commits)
-  - [Changes to documentation](#changes-to-documentation)
-- [Contribution](#contribution)
+- [More information](#more-information)
 - [LICENSE](#license)
 
-### Installation
+# Installation
 
 ```console
 $ npm install @data-driven-forms/parsers -S
@@ -33,7 +26,9 @@ $ yarn add @data-driven-forms/parsers
 ```
 
 
-### Usage
+# Usage
+
+**THIS REPO IS NOT CURRENTLY MAINTAINED, IF YOU WANT TO USE IT, PLEASE LET US KNOW**
 
 For using Data Driven Forms in your component you need the renderer and a component mapper, which provides formFields components and layoutFields components.
 
@@ -66,85 +61,10 @@ const Form = () => (
 )
 ```
 
-### Parsers
+# More information
 
-#### ManageIQ parser
+For more information please check the root [repository](https://github.com/data-driven-forms/react-forms) or our [documentation page](https://data-driven-forms.org/).
 
-#### Mozilla JSON schema parser
-
-### Useful links
-
-- [Data Driven Forms documentation](https://data-driven-forms.org/)
-
-### Development setup
-
-Data Driven Forms is a monorepo that uses [Lerna](https://github.com/lerna/lerna) and [yarn workspaces](https://classic.yarnpkg.com/blog/2017/08/02/introducing-workspaces/), so you can use all its commands as well.
-
-1. Install
-
-```console
-yarn install
-```
-
-2. Build
-
-```console
-yarn build
-```
-
-3. Test a package
-
-You can test parsers using tests. Tests can be ran from core folder or from specific package.
-
-```console
-yarn test --watchAll packages/pf4-component-mapper
-
-# or
-
-cd packages/pf4-component-mapper
-yarn test
-```
-
-4. How to clean?
-
-```console
-yarn lerna clean # will delete all node_modules
-```
-
-All packages are linked together by default, so if you run a `yarn build` in a package, all other packages are updated to the latest version of that package.
-
-
-#### Commits
-
-Data Driven Forms uses [Semantic Release](https://github.com/semantic-release/commit-analyzer)
-
-Format:
-
-```
-[type]([package]): message
-
-fix(pf4): title accepts node
-```
-
-Types:
-- `feat`: a new feature, will trigger new `_.X._` release
-- `fix`: a fix, will trigger new `_._.X` release
-
-Packages:
-- Please describe which package is being changed `pf3`, `renderer`, ...
-
-Please, do not use Semantic Release, if you update only the demo.
-
-All packages are releasing together and they share the version number.
-
-#### Changes to documentation
-
-If your changes influence API or add new features, you should describe these new options in the `react-renderer-demo` repository. Thanks!
-
-### Contribution
-
-We welcome any community contribution. Don't be afraid to report bug or to create issues and pull-requests! :trophy:
-
-### LICENSE
+# LICENSE
 
 Apache License 2.0

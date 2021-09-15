@@ -29,16 +29,16 @@ yarn build
 ### Generate component examples from mappers
 ```bash
 cd packages/react-renderer-demo
-yarn generate:examples 
+yarn generate:examples
 ```
 ### Run bundle analyzer
 ```bash
 cd packages/react-renderer-demo
-yarn analyze 
+yarn analyze
 ```
 
 ### Emulate firebase server locally
 ```bash
 cd packages/react-renderer-demo
-yarn build && yarn serve 
+yarn build && yarn serve
 ```
