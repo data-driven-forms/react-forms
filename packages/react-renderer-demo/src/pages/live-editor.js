@@ -4,7 +4,7 @@ import componentTypes from '@data-driven-forms/react-form-renderer/component-typ
 import FormBuilder from '@data-driven-forms/form-builder/form-builder';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { pickerMapper, propertiesMapper, builderMapper, BuilderTemplate, fieldProperties } from '@data-driven-forms/form-builder/mui-builder-mappers';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
