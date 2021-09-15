@@ -43,8 +43,8 @@
         "clsx": "^1.1.1",
         "codesandbox": "2.2.1",
         "docsearch.js": "^2.6.3",
-        "firebase-admin": "^8.12.1",
-        "firebase-functions": "^3.6.1",
+        "firebase-admin": "^9.11.1",
+        "firebase-functions": "^3.15.5",
         "markdown-to-jsx": "^7.1.1",
         "next": "10.0.5",
         "next-offline": "^5.0.2",
@@ -62,8 +62,8 @@
         "@babel/cli": "^7.12.10",
         "cpx": "^1.5.0",
         "cross-env": "^7.0.3",
-        "firebase-functions-test": "^0.2.1",
-        "firebase-tools": "^7.7.10",
+        "firebase-functions-test": "^0.3.2",
+        "firebase-tools": "^9.18.0",
         "rimraf": "^3.0.2"
     }
 }
