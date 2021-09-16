@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import Option from './option';

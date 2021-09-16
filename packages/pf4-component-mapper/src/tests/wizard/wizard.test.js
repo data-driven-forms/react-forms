@@ -983,8 +983,7 @@ describe('<Wizard />', () => {
     });
     wrapper.update();
 
-    console.log(wrapper
-      .find('.pf-c-wizard__nav-item').debug());
+    console.log(wrapper.find('.pf-c-wizard__nav-item').debug());
 
     expect(
       wrapper
