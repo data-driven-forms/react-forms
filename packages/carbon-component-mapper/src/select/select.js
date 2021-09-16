@@ -214,6 +214,7 @@ const ClearedSelectSearchable = ({
   placeholder,
   labelText,
   onChange,
+  value,
   ...rest
 }) => (
   <ComboBox
@@ -222,7 +223,7 @@ const ClearedSelectSearchable = ({
     id={rest.name}
     invalid={Boolean(invalidText)}
     invalidText={invalidText}
-    initialSelectedItem={getComboInitialValue(rest.value, options)}
+    initialSelectedItem={getComboInitialValue(value, options)}
     items={options}
     placeholder={placeholder}
     titleText={labelText}
@@ -249,7 +250,8 @@ ClearedSelectSearchable.propTypes = {
   isRequired: PropTypes.bool,
   isSearchable: PropTypes.bool,
   isClearable: PropTypes.bool,
-  labelText: PropTypes.string
+  labelText: PropTypes.string,
+  value: PropTypes.any
 };
 
 const Select = (props) => {

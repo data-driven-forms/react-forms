@@ -7,7 +7,7 @@
   "typings": "index.d.ts",
   "license": "Apache-2.0",
   "scripts": {
-    "start": "webpack-dev-server --env dev --config ./config/webpack.config.js --open --hot",
+    "start": "webpack-dev-server --config ./config/webpack.config.js --open --hot",
     "build": "yarn build:cjs && yarn build:esm && yarn build:typings && yarn build:packages",
     "build:cjs": "BABEL_ENV=cjs babel src --out-dir ./ --ignore \"src/tests/*\"",
     "build:esm": "BABEL_ENV=esm babel src --out-dir ./esm --ignore \"src/tests/*\"",
@@ -24,47 +24,13 @@
     "directory": "packages/suir-component-mapper"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.6",
-    "@babel/plugin-proposal-class-properties": "^7.2.3",
-    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
-    "@babel/preset-env": "^7.1.6",
-    "@babel/preset-react": "^7.0.0",
-    "@semantic-release/git": "^7.0.5",
-    "@semantic-release/npm": "^5.1.1",
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "9.x",
-    "babel-jest": "^23.6.0",
-    "babel-loader": "^8.0.4",
-    "babel-plugin-lodash": "^3.3.4",
-    "css-loader": "^1.0.1",
-    "enzyme": "^3.7.0",
-    "enzyme-to-json": "^3.3.4",
-    "glob": "^7.1.6",
-    "html-webpack-plugin": "^3.2.0",
-    "mini-css-extract-plugin": "^0.4.4",
-    "node-sass": "^4.10.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "regenerator-runtime": "^0.12.1",
-    "resolve-url-loader": "^3.0.0",
-    "rollup-plugin-sourcemaps": "^0.5.0",
-    "rollup-pluginutils": "^2.8.2",
-    "sass-loader": "^7.1.0",
-    "semantic-release": "^17.2.3",
-    "semantic-ui-react": "^0.88.2",
-    "style-loader": "^0.23.1",
-    "url-loader": "^1.1.2",
-    "webpack": "^4.25.1",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10",
-    "webpack-merge": "^4.1.4"
+    "semantic-ui-react": "^2.0.3"
   },
   "peerDependencies": {
     "@data-driven-forms/react-form-renderer": ">=3.2.1",
     "react": "^16.13.1 || ^17.0.2",
     "react-dom": "^16.13.1 || ^17.0.2",
-    "semantic-ui-react": "^0.88.2"
+    "semantic-ui-react": "^2.0.3"
   },
   "dependencies": {
     "@data-driven-forms/common": "*",

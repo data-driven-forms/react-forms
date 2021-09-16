@@ -35,7 +35,14 @@ const devConfig = {
       {
         test: /\.(png|jpg|gif|svg|woff|ttf|eot)/,
         type: 'asset/resource'
-      }
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'ts-loader',
+        },
+      },
     ]
   }
 };

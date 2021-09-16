@@ -215,7 +215,7 @@ describe('DualListSelect', () => {
           wrapper
             .find('.pf-c-dual-list-selector__controls-item')
             .find('button')
-            .first()
+            .at(1)
             .simulate('click');
         });
         wrapper.update();
