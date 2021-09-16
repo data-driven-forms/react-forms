@@ -376,13 +376,13 @@ describe('wizard', () => {
     wrapper.find('input').simulate('change');
     wrapper.update();
 
-    expect(wrapper.find('button.bp3-button.bp3-intent-success').text()).toEqual('Nextarrow-right');
+    expect(wrapper.find('button.bp3-button.bp3-intent-success').text()).toEqual('Next');
 
     wrapper.find('input').instance().value = 'submit';
     wrapper.find('input').simulate('change');
     wrapper.update();
 
-    expect(wrapper.find('button.bp3-button.bp3-intent-success').text()).toEqual('Submitarrow-up');
+    expect(wrapper.find('button.bp3-button.bp3-intent-success').text()).toEqual('Submit');
     wrapper.find('button.bp3-button.bp3-intent-success').simulate('click');
     expect(submit).toHaveBeenCalledWith({ name: 'submit' }, expect.any(Object), expect.any(Object));
   });

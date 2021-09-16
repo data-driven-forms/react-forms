@@ -922,7 +922,7 @@ describe('<Wizard />', () => {
     jest.useRealTimers();
   });
 
-  it('should disabled navigation when validating - this fails locally, not on CI', async () => {
+  it('should disabled navigation when validating', async () => {
     jest.useFakeTimers();
 
     const asyncValidator = jest.fn().mockImplementation(() => new Promise((res) => setTimeout(() => res(), 50)));
@@ -962,7 +962,11 @@ describe('<Wizard />', () => {
 
     await act(async () => {
       wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
-      jest.advanceTimersByTime(100);
+    });
+    wrapper.update();
+
+    await act(async () => {
+      jest.runAllTimers();
     });
     wrapper.update();
 
@@ -971,9 +975,16 @@ describe('<Wizard />', () => {
         .find(Button)
         .first()
         .simulate('click');
-      jest.advanceTimersByTime(100);
     });
     wrapper.update();
+
+    await act(async () => {
+      jest.runAllTimers();
+    });
+    wrapper.update();
+
+    console.log(wrapper
+      .find('.pf-c-wizard__nav-item').debug());
 
     expect(
       wrapper

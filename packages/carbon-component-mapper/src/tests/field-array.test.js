@@ -91,7 +91,7 @@ describe('<FieldArray/>', () => {
         .find('#remove-button')
         .first()
         .text()
-    ).toEqual('CUSTOM REMOVE');
+    ).toEqual('dangerCUSTOM REMOVE');
   });
 
   it('allow to add/remove named fields', async () => {

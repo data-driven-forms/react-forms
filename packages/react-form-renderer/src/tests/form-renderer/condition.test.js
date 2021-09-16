@@ -271,7 +271,7 @@ describe('condition test', () => {
         .find('button')
         .at(1)
         .simulate('click');
-      jest.advanceTimersByTime(1);
+      jest.runAllTimers();
     });
     wrapper.update();
 
