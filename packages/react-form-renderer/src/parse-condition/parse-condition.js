@@ -47,13 +47,13 @@ export const parseCondition = (condition, values, field) => {
   let positiveResult = {
     visible: true,
     ...condition.then,
-    result: true
+    result: true,
   };
 
   let negativeResult = {
     visible: false,
     ...condition.else,
-    result: false
+    result: false,
   };
 
   if (Array.isArray(condition)) {
@@ -76,7 +76,7 @@ export const parseCondition = (condition, values, field) => {
         return {
           sets: [...acc.sets, ...(result.set ? [result.set] : [])],
           visible: acc.visible || result.visible,
-          result: acc.result || result.result
+          result: acc.result || result.result,
         };
       },
       { ...negativeResult, sets: [] }

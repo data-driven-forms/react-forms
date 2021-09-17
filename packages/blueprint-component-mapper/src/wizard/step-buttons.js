@@ -27,14 +27,14 @@ NextButton.propTypes = {
   formOptions: PropTypes.shape({
     onCancel: PropTypes.func,
     renderForm: PropTypes.func,
-    getState: PropTypes.func
+    getState: PropTypes.func,
   }),
   buttonLabels: PropTypes.object,
   nextStep: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.object]),
   getState: PropTypes.func,
   handleSubmit: PropTypes.func,
   isDisabled: PropTypes.bool,
-  conditionalSubmitFlag: PropTypes.string.isRequired
+  conditionalSubmitFlag: PropTypes.string.isRequired,
 };
 
 const useStyles = createUseStyles({
@@ -44,9 +44,9 @@ const useStyles = createUseStyles({
     justifyContent: 'space-between',
 
     '& button:not(:first-child)': {
-      marginLeft: 8
-    }
-  }
+      marginLeft: 8,
+    },
+  },
 });
 
 const StepButtons = ({
@@ -63,7 +63,7 @@ const StepButtons = ({
   BackButtonProps,
   NextButtonProps,
   SubmitButtonProps,
-  conditionalSubmitFlag
+  conditionalSubmitFlag,
 }) => {
   const { buttonGroup } = useStyles();
 
@@ -101,7 +101,7 @@ StepButtons.propTypes = {
     renderForm: PropTypes.func,
     getState: PropTypes.func,
     handleSubmit: PropTypes.func,
-    valid: PropTypes.bool
+    valid: PropTypes.bool,
   }),
   activeStepIndex: PropTypes.number,
   buttonLabels: PropTypes.object,
@@ -111,7 +111,7 @@ StepButtons.propTypes = {
   CancelButtonProps: PropTypes.object,
   BackButtonProps: PropTypes.object,
   NextButtonProps: PropTypes.object,
-  SubmitButtonProps: PropTypes.object
+  SubmitButtonProps: PropTypes.object,
 };
 
 export default StepButtons;

@@ -42,28 +42,28 @@ describe('multiple choice list', () => {
           options: [
             {
               value: 'cats',
-              label: 'l cats'
+              label: 'l cats',
             },
             {
               value: 'cats_1',
-              label: 'l cats_1'
+              label: 'l cats_1',
             },
             {
               value: 'cats_2',
-              label: 'l cats_2'
+              label: 'l cats_2',
             },
             {
               value: 'zebras',
-              label: 'l zebras'
+              label: 'l zebras',
             },
             {
               value: 'pigeons',
-              label: 'l pigeons'
-            }
-          ]
-        }
-      ]
-    }
+              label: 'l pigeons',
+            },
+          ],
+        },
+      ],
+    },
   };
 
   it('renders correctly', async () => {
@@ -97,11 +97,11 @@ describe('multiple choice list', () => {
         touched: false,
         valid: true,
         validating: false,
-        visited: false
+        visited: false,
       },
       name: 'check',
       rest: {},
-      showError: false
+      showError: false,
     });
     expect(wrapper.find(SingleCheckbox)).toHaveLength(5);
 
@@ -115,7 +115,7 @@ describe('multiple choice list', () => {
         <FormRenderer
           {...rendererProps}
           schema={{
-            fields: [{ ...rendererProps.schema.fields[0], validate: [{ type: 'required' }] }]
+            fields: [{ ...rendererProps.schema.fields[0], validate: [{ type: 'required' }] }],
           }}
         />
       );
@@ -123,10 +123,7 @@ describe('multiple choice list', () => {
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find('input')
-        .first()
-        .simulate('focus');
+      wrapper.find('input').first().simulate('focus');
     });
     wrapper.update();
 
@@ -139,10 +136,7 @@ describe('multiple choice list', () => {
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find('input')
-        .first()
-        .simulate('blur');
+      wrapper.find('input').first().simulate('blur');
     });
     wrapper.update();
 
@@ -171,11 +165,11 @@ describe('multiple choice list', () => {
         touched: true,
         valid: false,
         validating: false,
-        visited: true
+        visited: true,
       },
       name: 'check',
       rest: {},
-      showError: 'Required'
+      showError: 'Required',
     });
   });
 
@@ -215,11 +209,11 @@ describe('multiple choice list', () => {
         touched: true,
         valid: false,
         validating: false,
-        visited: false
+        visited: false,
       },
       name: 'check',
       rest: {},
-      showError: 'submitError'
+      showError: 'submitError',
     });
   });
 });

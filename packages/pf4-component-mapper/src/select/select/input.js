@@ -35,7 +35,7 @@ const Input = ({ inputRef, isSearchable, isDisabled, getInputProps, value, ...pr
           event.stopPropagation();
           inputProps.onKeyDown(event, ...args);
         },
-        onChange: inputProps.onChange || Function
+        onChange: inputProps.onChange || Function,
       }}
     />
   );
@@ -46,7 +46,7 @@ Input.propTypes = {
   isSearchable: PropTypes.bool,
   isDisabled: PropTypes.bool,
   getInputProps: PropTypes.func.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)])
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
 };
 
 export default Input;

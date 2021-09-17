@@ -9,12 +9,12 @@ const translateLabel = (id, locale = 'en') =>
   ({
     en: {
       name: 'User name',
-      password: 'Password'
+      password: 'Password',
     },
     jp: {
       name: '名前',
-      password: 'パスワード'
-    }
+      password: 'パスワード',
+    },
   }[locale][id]);
 
 const schema = {
@@ -24,25 +24,25 @@ const schema = {
       component: componentTypes.TEXT_FIELD,
       name: 'name',
       actions: {
-        label: ['translateLabel', 'name', 'jp']
-      }
+        label: ['translateLabel', 'name', 'jp'],
+      },
     },
     {
       component: componentTypes.TEXT_FIELD,
       name: 'password',
       actions: {
-        label: ['translateLabel', 'password', 'jp']
-      }
-    }
-  ]
+        label: ['translateLabel', 'password', 'jp'],
+      },
+    },
+  ],
 };
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 const actionMapper = {
-  translateLabel
+  translateLabel,
 };
 
 const ActionMapper = () => (

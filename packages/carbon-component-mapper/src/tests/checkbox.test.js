@@ -19,15 +19,15 @@ describe('<Checkbox />', () => {
           options: [
             {
               label: 'option 1',
-              value: 1
+              value: 1,
             },
             {
               label: 'option 2',
-              value: 2
-            }
-          ]
-        }
-      ]
+              value: 2,
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(
@@ -35,18 +35,8 @@ describe('<Checkbox />', () => {
     );
 
     expect(wrapper.find(Checkbox)).toHaveLength(2);
-    expect(
-      wrapper
-        .find(Checkbox)
-        .first()
-        .props().labelText
-    ).toEqual('option 1');
-    expect(
-      wrapper
-        .find(Checkbox)
-        .last()
-        .props().labelText
-    ).toEqual('option 2');
+    expect(wrapper.find(Checkbox).first().props().labelText).toEqual('option 1');
+    expect(wrapper.find(Checkbox).last().props().labelText).toEqual('option 2');
   });
 
   it('selects item in multiple checkbox', async () => {
@@ -59,27 +49,27 @@ describe('<Checkbox />', () => {
           options: [
             {
               label: 'option 1',
-              value: 'option-1'
+              value: 'option-1',
             },
             {
               label: 'option 2',
-              value: 'option-2'
-            }
-          ]
-        }
-      ]
+              value: 'option-2',
+            },
+          ],
+        },
+      ],
     };
     const eventCheck = {
       target: {
         checked: true,
-        type: 'checkbox'
-      }
+        type: 'checkbox',
+      },
     };
     const eventUncheck = {
       target: {
         checked: false,
-        type: 'checkbox'
-      }
+        type: 'checkbox',
+      },
     };
 
     const submitSpy = jest.fn();
@@ -94,10 +84,7 @@ describe('<Checkbox />', () => {
     );
 
     await act(async () => {
-      wrapper
-        .find('input')
-        .first()
-        .simulate('change', eventCheck);
+      wrapper.find('input').first().simulate('change', eventCheck);
     });
     wrapper.update();
 
@@ -110,10 +97,7 @@ describe('<Checkbox />', () => {
     submitSpy.mockClear();
 
     await act(async () => {
-      wrapper
-        .find('input')
-        .last()
-        .simulate('change', eventCheck);
+      wrapper.find('input').last().simulate('change', eventCheck);
     });
     wrapper.update();
 
@@ -126,10 +110,7 @@ describe('<Checkbox />', () => {
     submitSpy.mockClear();
 
     await act(async () => {
-      wrapper
-        .find('input')
-        .first()
-        .simulate('change', eventUncheck);
+      wrapper.find('input').first().simulate('change', eventUncheck);
     });
     wrapper.update();
 

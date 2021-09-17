@@ -5,20 +5,8 @@ import FormGroup from '../form-group';
 import { Slider as PF4Slider } from '@patternfly/react-core';
 
 const Slider = (props) => {
-  const {
-    label,
-    isRequired,
-    helperText,
-    meta,
-    validateOnMount,
-    description,
-    input,
-    isReadOnly,
-    isDisabled,
-    id,
-    FormGroupProps,
-    ...rest
-  } = useFieldApi(props);
+  const { label, isRequired, helperText, meta, validateOnMount, description, input, isReadOnly, isDisabled, id, FormGroupProps, ...rest } =
+    useFieldApi(props);
 
   return (
     <FormGroup
@@ -45,7 +33,7 @@ Slider.propTypes = {
   description: PropTypes.node,
   isDisabled: PropTypes.bool,
   id: PropTypes.string,
-  FormGroupProps: PropTypes.object
+  FormGroupProps: PropTypes.object,
 };
 
 export default Slider;

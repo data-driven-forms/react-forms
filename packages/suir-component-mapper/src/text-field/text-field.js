@@ -37,7 +37,7 @@ const TextField = (props) => {
         {...input}
         error={
           invalid && {
-            content: meta.error || meta.submitError
+            content: meta.error || meta.submitError,
           }
         }
       />
@@ -55,12 +55,12 @@ TextField.propTypes = {
   validateOnMount: PropTypes.bool,
   /** Sub component customization */
   FormFieldGridProps: PropTypes.object,
-  HelpertextProps: PropTypes.object
+  HelpertextProps: PropTypes.object,
 };
 
 TextField.defaultProps = {
   FormFieldGridProps: {},
-  HelpertextProps: {}
+  HelpertextProps: {},
 };
 
 export default TextField;

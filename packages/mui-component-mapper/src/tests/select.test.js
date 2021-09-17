@@ -23,7 +23,7 @@ describe('<Select />', () => {
         const options = [
           { value: '1', label: 'one' },
           { value: 'key', label: 'this label' },
-          { value: '2', label: 'two' }
+          { value: '2', label: 'two' },
         ];
 
         expect(getOptionLabel('key', options)).toEqual('this label');
@@ -40,7 +40,7 @@ describe('<Select />', () => {
       it('is multi - array with objects', () => {
         const option = [
           { label: 'label', value: '123' },
-          { label: 'label 2', value: '456' }
+          { label: 'label 2', value: '456' },
         ];
 
         expect(createValue(option, true)).toEqual(option);

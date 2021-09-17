@@ -8,22 +8,22 @@ const schema = {
       component: componentTypes.PLAIN_TEXT,
       name: 'plain-text-component',
       label: `Lorem ipsum sem velit. Mauris scelerisque tortor sed lorem dapibus, bibendum scelerisque ligula consequat. Quisque fringilla luctus.
-Vestibulum vulputate inceptos himenaeos.`
-    }
-  ]
+Vestibulum vulputate inceptos himenaeos.`,
+    },
+  ],
 };
 
 const variants = [
   {
     name: 'name',
     type: 'string',
-    required: true
+    required: true,
   },
   {
     name: 'label',
     type: 'string',
-    required: true
-  }
+    required: true,
+  },
 ];
 
 const PlainText = () => <ComponentText schema={schema} variants={variants} linkText="Plain text" />;

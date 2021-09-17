@@ -52,7 +52,7 @@ const SuirSelect = ({
           key: value,
           text: label,
           value,
-          ...rest
+          ...rest,
         }))}
         onChange={(_event, { value }) => {
           if (isMulti) {
@@ -99,7 +99,7 @@ SuirSelect.propTypes = {
   closeMenuOnSelect: PropTypes.bool,
   /** Sub components customization API */
   FormFieldGridProps: PropTypes.object,
-  HelpertextProps: PropTypes.object
+  HelpertextProps: PropTypes.object,
 };
 
 SuirSelect.defaultProps = {
@@ -107,7 +107,7 @@ SuirSelect.defaultProps = {
   noOptionsMessage: 'No option found',
   options: [],
   FormFieldGridProps: {},
-  HelpertextProps: {}
+  HelpertextProps: {},
 };
 
 const Select = (props) => {

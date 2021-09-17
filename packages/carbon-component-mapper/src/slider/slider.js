@@ -37,7 +37,7 @@ Slider.propTypes = {
   label: PropTypes.node,
   labelText: PropTypes.node,
   description: PropTypes.node,
-  WrapperProps: PropTypes.object
+  WrapperProps: PropTypes.object,
 };
 
 export default Slider;

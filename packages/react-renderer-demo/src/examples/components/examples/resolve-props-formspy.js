@@ -13,20 +13,20 @@ const schema = {
     {
       name: 'custom_email',
       label: 'Use custom email',
-      component: componentTypes.CHECKBOX
+      component: componentTypes.CHECKBOX,
     },
     {
       name: 'email',
       label: 'Email',
       component: 'text-field-wrapper',
-      resolveProps: (_props, _field, formOptions) => (formOptions.getState().values.custom_email ? { isDisabled: false } : { isDisabled: true })
-    }
-  ]
+      resolveProps: (_props, _field, formOptions) => (formOptions.getState().values.custom_email ? { isDisabled: false } : { isDisabled: true }),
+    },
+  ],
 };
 
 const componentMapper = {
   [componentTypes.CHECKBOX]: Checkbox,
-  'text-field-wrapper': TextFieldWrapped
+  'text-field-wrapper': TextFieldWrapped,
 };
 
 const ResolvePropsFormSpy = () => (

@@ -13,9 +13,9 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     justifyContent: 'flex-end',
     '&>button:not(last-child)': {
-      marginLeft: 8
-    }
-  }
+      marginLeft: 8,
+    },
+  },
 }));
 
 const Form = ({ children, GridContainerProps, GridProps, ...props }) => (
@@ -31,7 +31,7 @@ const Form = ({ children, GridContainerProps, GridProps, ...props }) => (
 Form.propTypes = {
   children: PropTypes.node,
   GridProps: PropTypes.object,
-  GridContainerProps: PropTypes.object
+  GridContainerProps: PropTypes.object,
 };
 
 const Description = ({ children, GridProps, ...props }) => (
@@ -44,7 +44,7 @@ const Description = ({ children, GridProps, ...props }) => (
 
 Description.propTypes = {
   children: PropTypes.node,
-  GridProps: PropTypes.object
+  GridProps: PropTypes.object,
 };
 
 const Title = ({ children, GridProps, ...props }) => (
@@ -57,7 +57,7 @@ const Title = ({ children, GridProps, ...props }) => (
 
 Title.propTypes = {
   children: PropTypes.node,
-  GridProps: PropTypes.object
+  GridProps: PropTypes.object,
 };
 
 const ButtonGroup = ({ children, GridProps, ...props }) => {
@@ -73,7 +73,7 @@ const ButtonGroup = ({ children, GridProps, ...props }) => {
 
 ButtonGroup.propTypes = {
   children: PropTypes.node,
-  GridProps: PropTypes.object
+  GridProps: PropTypes.object,
 };
 
 const Button = ({ label, variant, children, buttonType, ...props }) => (
@@ -86,14 +86,14 @@ Button.propTypes = {
   children: PropTypes.node,
   label: PropTypes.node,
   variant: PropTypes.string,
-  buttonType: PropTypes.string
+  buttonType: PropTypes.string,
 };
 
 const useAlertStyles = makeStyles(() => ({
   alert: {
     width: '100%',
-    margin: 8
-  }
+    margin: 8,
+  },
 }));
 
 export const FormError = ({ formError, alertProps }) => {
@@ -123,7 +123,7 @@ export const FormError = ({ formError, alertProps }) => {
 
 FormError.propTypes = {
   formError: PropTypes.any,
-  alertProps: PropTypes.object
+  alertProps: PropTypes.object,
 };
 
 const MuiFormTemplate = (props) => (

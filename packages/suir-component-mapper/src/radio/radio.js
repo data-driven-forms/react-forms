@@ -26,7 +26,7 @@ RadioOption.propTypes = {
   name: PropTypes.string.isRequired,
   option: PropTypes.shape({ label: PropTypes.node.isRequired, value: PropTypes.any.isRequired }).isRequired,
   isReadOnly: PropTypes.bool,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
 };
 
 const Radio = ({ name, ...props }) => {
@@ -47,7 +47,7 @@ const Radio = ({ name, ...props }) => {
   } = useFieldApi({
     ...props,
     name,
-    type: 'radio'
+    type: 'radio',
   });
   const invalid = validationError(meta, validateOnMount);
   return (
@@ -71,7 +71,7 @@ Radio.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.any,
-      label: PropTypes.node
+      label: PropTypes.node,
     })
   ),
   label: PropTypes.node.isRequired,
@@ -81,14 +81,14 @@ Radio.propTypes = {
   /** Sub components customization API */
   FormFieldGridProps: PropTypes.object,
   FormFieldProps: PropTypes.object,
-  HelperTextProps: PropTypes.object
+  HelperTextProps: PropTypes.object,
 };
 
 Radio.defaultProps = {
   options: [],
   FormFieldGridProps: {},
   FormFieldProps: {},
-  HelperTextProps: {}
+  HelperTextProps: {},
 };
 
 export default Radio;

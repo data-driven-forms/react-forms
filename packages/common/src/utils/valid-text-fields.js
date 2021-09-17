@@ -22,7 +22,7 @@ const validTextFields = [
   'samp',
   'small',
   'sub',
-  'sup'
+  'sup',
 ];
 
 export default validTextFields;

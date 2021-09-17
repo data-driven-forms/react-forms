@@ -49,12 +49,12 @@ const MultipleChoiceList = (props) => {
 MultipleChoiceList.propTypes = {
   name: PropTypes.string.isRequired,
   Wrapper: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  Checkbox: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+  Checkbox: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
 };
 
 export default MultipleChoiceList;
 
 export const wrapperProps = {
   ...formGroup,
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };

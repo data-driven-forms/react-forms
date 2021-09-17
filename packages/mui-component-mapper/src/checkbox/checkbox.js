@@ -30,7 +30,7 @@ export const SingleCheckbox = (props) => {
     ...rest
   } = useFieldApi({
     ...props,
-    type: 'checkbox'
+    type: 'checkbox',
   });
   const invalid = validationError(meta, validateOnMount);
   const text = invalid || ((meta.touched || validateOnMount) && meta.warning) || helperText || description;
@@ -48,7 +48,7 @@ export const SingleCheckbox = (props) => {
                 value={input.name}
                 inputProps={{
                   readOnly: isReadOnly,
-                  ...inputProps
+                  ...inputProps,
                 }}
                 {...rest}
               />
@@ -79,7 +79,7 @@ SingleCheckbox.propTypes = {
   FormControlLabelProps: PropTypes.object,
   CheckboxProps: PropTypes.object,
   FormLabelProps: PropTypes.object,
-  FormHelperTextProps: PropTypes.object
+  FormHelperTextProps: PropTypes.object,
 };
 
 SingleCheckbox.defaultProps = {
@@ -89,13 +89,13 @@ SingleCheckbox.defaultProps = {
   FormControlLabelProps: {},
   CheckboxProps: {},
   FormLabelProps: {},
-  FormHelperTextProps: {}
+  FormHelperTextProps: {},
 };
 
 const Checkbox = ({ options, ...props }) => (options ? <MultipleChoiceList options={options} {...props} /> : <SingleCheckbox {...props} />);
 
 Checkbox.propTypes = {
-  options: PropTypes.array
+  options: PropTypes.array,
 };
 
 export default Checkbox;

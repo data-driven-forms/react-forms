@@ -9,19 +9,19 @@ import FormTemplate from '@data-driven-forms/common/form-template';
 
 const useStyles = createUseStyles({
   buttons: {
-    marginTop: 48
+    marginTop: 48,
   },
   header: {
     marginBottom: 40,
     div: {
-      marginTop: 8
-    }
+      marginTop: 8,
+    },
   },
   form: {
     '&>:not(:last-child)': {
-      marginBottom: 32
-    }
-  }
+      marginBottom: 32,
+    },
+  },
 });
 
 export const Button = ({ label, buttonType, ...props }) => (
@@ -32,7 +32,7 @@ export const Button = ({ label, buttonType, ...props }) => (
 
 Button.propTypes = {
   label: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-  buttonType: PropTypes.string
+  buttonType: PropTypes.string,
 };
 
 export const ButtonGroup = ({ children, className, ...props }) => {
@@ -47,19 +47,19 @@ export const ButtonGroup = ({ children, className, ...props }) => {
 
 ButtonGroup.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export const Title = ({ children, ...props }) => <h3 {...props}>{children}</h3>;
 
 Title.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };
 
 export const Description = ({ children, ...props }) => <div {...props}>{children}</div>;
 
 Description.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };
 
 export const Form = ({ children, className, ...props }) => {
@@ -74,7 +74,7 @@ export const Form = ({ children, className, ...props }) => {
 
 Form.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export const Header = (props) => {

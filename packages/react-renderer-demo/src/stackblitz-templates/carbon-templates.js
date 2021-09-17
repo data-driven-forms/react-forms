@@ -74,5 +74,5 @@ export const dependencies = {
   'carbon-icons': 'latest',
   'prop-types': 'latest',
   '@babel/runtime': '^7.12.1',
-  clsx: 'latest'
+  clsx: 'latest',
 };

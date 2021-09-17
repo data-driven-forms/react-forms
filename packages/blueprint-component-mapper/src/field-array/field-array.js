@@ -13,11 +13,11 @@ const useStyles = createUseStyles({
   addContainer: {
     display: 'flex',
     flexFlow: 'row-reverse',
-    marginBottom: 15
+    marginBottom: 15,
   },
   remove: {
-    marginBottom: 15
-  }
+    marginBottom: 15,
+  },
 });
 
 const ArrayItem = memo(
@@ -27,7 +27,7 @@ const ArrayItem = memo(
 
     const editedFields = fields.map((field) => ({
       ...field,
-      ...(field.name ? { name: `${name}.${field.name}` } : { name })
+      ...(field.name ? { name: `${name}.${field.name}` } : { name }),
     }));
 
     return (
@@ -55,7 +55,7 @@ ArrayItem.propTypes = {
   removeLabel: PropTypes.node,
   ArrayItemProps: PropTypes.object,
   RemoveButtonProps: PropTypes.object,
-  disabledRemove: PropTypes.bool
+  disabledRemove: PropTypes.bool,
 };
 
 const FieldArray = (props) => {
@@ -78,7 +78,7 @@ const FieldArray = (props) => {
     isRequired,
     FormGroupProps,
     maxItems,
-    minItems
+    minItems,
   } = useFieldApi(props);
 
   const { required } = useContext(BlueprintContext);
@@ -96,7 +96,7 @@ const FieldArray = (props) => {
   const combinedLabels = {
     add: 'Add',
     remove: 'Remove',
-    ...buttonLabels
+    ...buttonLabels,
   };
 
   return (
@@ -152,11 +152,11 @@ FieldArray.propTypes = {
   helperText: PropTypes.node,
   isRequired: PropTypes.bool,
   maxItems: PropTypes.number,
-  minItems: PropTypes.number
+  minItems: PropTypes.number,
 };
 
 FieldArray.defaultProps = {
-  noItemsMessage: 'No items'
+  noItemsMessage: 'No items',
 };
 
 export default FieldArray;

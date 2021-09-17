@@ -34,7 +34,7 @@ FormGroup.propTypes = {
   validateOnMount: PropTypes.bool,
   helperText: PropTypes.node,
   description: PropTypes.node,
-  hideLabel: PropTypes.bool
+  hideLabel: PropTypes.bool,
 };
 
 export default FormGroup;

@@ -16,24 +16,24 @@ import MdxComponents from './mdx/mdx-components';
 const options = {
   overrides: {
     a: {
-      component: MdxComponents.a
-    }
-  }
+      component: MdxComponents.a,
+    },
+  },
 };
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    transformOrigin: 'top right'
+    transformOrigin: 'top right',
   },
   list: {
     maxWidth: theme.spacing(40),
     maxHeight: theme.spacing(40),
-    overflow: 'auto'
+    overflow: 'auto',
   },
   listItem: {
     display: 'flex',
-    flexDirection: 'column'
-  }
+    flexDirection: 'column',
+  },
 }));
 
 const getNotifications = () => fetch(`/notifications?end=${Date.now()}`).then((data) => data.json());
@@ -97,7 +97,7 @@ NotificationPanel.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   setNewMessages: PropTypes.func.isRequired,
-  anchorRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.any })]).isRequired
+  anchorRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.any })]).isRequired,
 };
 
 export default NotificationPanel;

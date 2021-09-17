@@ -16,11 +16,11 @@ describe('parseCondition', () => {
   it('simple condition - true', () => {
     condition = {
       when: 'x',
-      is: 'yes'
+      is: 'yes',
     };
 
     values = {
-      x: 'yes'
+      x: 'yes',
     };
 
     expect(parseCondition(condition, values)).toEqual(positiveResult);
@@ -29,11 +29,11 @@ describe('parseCondition', () => {
   it('simple condition - false', () => {
     condition = {
       when: 'x',
-      is: 'yes'
+      is: 'yes',
     };
 
     values = {
-      x: 'no'
+      x: 'no',
     };
 
     expect(parseCondition(condition, values)).toEqual(negativeResult);
@@ -43,13 +43,13 @@ describe('parseCondition', () => {
     condition = {
       and: [
         { when: 'x', is: 'true' },
-        { when: 'y', is: 'true' }
-      ]
+        { when: 'y', is: 'true' },
+      ],
     };
 
     values = {
       x: 'true',
-      y: 'true'
+      y: 'true',
     };
 
     expect(parseCondition(condition, values)).toEqual(positiveResult);
@@ -59,13 +59,13 @@ describe('parseCondition', () => {
     condition = {
       and: [
         { when: 'x', is: 'true' },
-        { when: 'y', is: 'true' }
-      ]
+        { when: 'y', is: 'true' },
+      ],
     };
 
     values = {
       x: 'true',
-      y: 'false'
+      y: 'false',
     };
 
     expect(parseCondition(condition, values)).toEqual(negativeResult);
@@ -75,13 +75,13 @@ describe('parseCondition', () => {
     condition = {
       or: [
         { when: 'x', is: 'true' },
-        { when: 'y', is: 'true' }
-      ]
+        { when: 'y', is: 'true' },
+      ],
     };
 
     values = {
       x: 'false',
-      y: 'true'
+      y: 'true',
     };
 
     expect(parseCondition(condition, values)).toEqual(positiveResult);
@@ -91,13 +91,13 @@ describe('parseCondition', () => {
     condition = {
       or: [
         { when: 'x', is: 'true' },
-        { when: 'y', is: 'true' }
-      ]
+        { when: 'y', is: 'true' },
+      ],
     };
 
     values = {
       x: 'false',
-      y: 'false'
+      y: 'false',
     };
 
     expect(parseCondition(condition, values)).toEqual(negativeResult);
@@ -105,11 +105,11 @@ describe('parseCondition', () => {
 
   it('not condition - "true"', () => {
     condition = {
-      not: { when: 'x', is: 'true' }
+      not: { when: 'x', is: 'true' },
     };
 
     values = {
-      x: 'true'
+      x: 'true',
     };
 
     expect(parseCondition(condition, values)).toEqual(negativeResult);
@@ -117,11 +117,11 @@ describe('parseCondition', () => {
 
   it('not condition - "false"', () => {
     condition = {
-      not: { when: 'x', is: 'true' }
+      not: { when: 'x', is: 'true' },
     };
 
     values = {
-      x: 'false'
+      x: 'false',
     };
 
     expect(parseCondition(condition, values)).toEqual(positiveResult);
@@ -131,13 +131,13 @@ describe('parseCondition', () => {
     condition = {
       not: [
         { when: 'x', is: 'true' },
-        { when: 'y', is: 'true' }
-      ]
+        { when: 'y', is: 'true' },
+      ],
     };
 
     values = {
       x: 'false',
-      y: 'false'
+      y: 'false',
     };
 
     expect(parseCondition(condition, values)).toEqual(positiveResult);
@@ -147,13 +147,13 @@ describe('parseCondition', () => {
     condition = {
       not: [
         { when: 'x', is: 'true' },
-        { when: 'y', is: 'true' }
-      ]
+        { when: 'y', is: 'true' },
+      ],
     };
 
     values = {
       x: 'true',
-      y: 'true'
+      y: 'true',
     };
 
     expect(parseCondition(condition, values)).toEqual(negativeResult);
@@ -162,12 +162,12 @@ describe('parseCondition', () => {
   it('backwards compatibility - and condition - true', () => {
     condition = [
       { when: 'x', is: 'true' },
-      { when: 'y', is: 'true' }
+      { when: 'y', is: 'true' },
     ];
 
     values = {
       x: 'true',
-      y: 'true'
+      y: 'true',
     };
 
     expect(parseCondition(condition, values)).toEqual(positiveResult);
@@ -176,12 +176,12 @@ describe('parseCondition', () => {
   it('backwards compatibility - and condition - false', () => {
     condition = [
       { when: 'x', is: 'true' },
-      { when: 'y', is: 'true' }
+      { when: 'y', is: 'true' },
     ];
 
     values = {
       x: 'true',
-      y: 'false'
+      y: 'false',
     };
 
     expect(parseCondition(condition, values)).toEqual(negativeResult);
@@ -192,7 +192,7 @@ describe('parseCondition', () => {
 
     values = {
       x: 'false',
-      y: 'true'
+      y: 'true',
     };
 
     expect(parseCondition(condition, values)).toEqual(positiveResult);
@@ -203,7 +203,7 @@ describe('parseCondition', () => {
 
     values = {
       x: 'false',
-      y: 'false'
+      y: 'false',
     };
 
     expect(parseCondition(condition, values)).toEqual(negativeResult);
@@ -212,13 +212,13 @@ describe('parseCondition', () => {
   describe('nested conditions', () => {
     it('nested test 1 - true', () => {
       condition = {
-        or: [{ not: { when: 'x', pattern: /true/ } }, { not: { when: 'y', pattern: /true/ } }, { not: { when: 'z', pattern: /true/ } }]
+        or: [{ not: { when: 'x', pattern: /true/ } }, { not: { when: 'y', pattern: /true/ } }, { not: { when: 'z', pattern: /true/ } }],
       };
 
       values = {
         x: 'false',
         y: 'false',
-        z: 'false'
+        z: 'false',
       };
 
       expect(parseCondition(condition, values)).toEqual(positiveResult);
@@ -226,13 +226,13 @@ describe('parseCondition', () => {
 
     it('nested test 2 - true', () => {
       condition = {
-        or: [{ not: { when: 'x', pattern: /true/ } }, { not: { when: 'y', pattern: /true/ } }, { not: { when: 'z', pattern: /true/ } }]
+        or: [{ not: { when: 'x', pattern: /true/ } }, { not: { when: 'y', pattern: /true/ } }, { not: { when: 'z', pattern: /true/ } }],
       };
 
       values = {
         x: 'true',
         y: 'false',
-        z: 'false'
+        z: 'false',
       };
 
       expect(parseCondition(condition, values)).toEqual(positiveResult);
@@ -240,13 +240,13 @@ describe('parseCondition', () => {
 
     it('nested test 1 - false', () => {
       condition = {
-        or: [{ not: { when: 'x', pattern: /true/ } }, { not: { when: 'y', pattern: /true/ } }, { not: { when: 'z', pattern: /true/ } }]
+        or: [{ not: { when: 'x', pattern: /true/ } }, { not: { when: 'y', pattern: /true/ } }, { not: { when: 'z', pattern: /true/ } }],
       };
 
       values = {
         x: 'true',
         y: 'true',
-        z: 'true'
+        z: 'true',
       };
 
       expect(parseCondition(condition, values)).toEqual(negativeResult);
@@ -258,23 +258,23 @@ describe('parseCondition', () => {
           {
             and: [
               { when: 'x', pattern: /true/ },
-              { when: 'z', is: 'true' }
-            ]
+              { when: 'z', is: 'true' },
+            ],
           },
           {
             or: [
               { when: 'y', pattern: /true/ },
-              { when: 'a', is: 'true' }
-            ]
-          }
-        ]
+              { when: 'a', is: 'true' },
+            ],
+          },
+        ],
       };
 
       values = {
         x: 'true',
         z: 'true',
         y: 'true',
-        a: 'false'
+        a: 'false',
       };
 
       expect(parseCondition(condition, values)).toEqual(positiveResult);
@@ -286,23 +286,23 @@ describe('parseCondition', () => {
           {
             and: [
               { when: 'x', pattern: /true/ },
-              { when: 'z', is: 'true' }
-            ]
+              { when: 'z', is: 'true' },
+            ],
           },
           {
             or: [
               { when: 'y', pattern: /true/ },
-              { when: 'a', is: 'true' }
-            ]
-          }
-        ]
+              { when: 'a', is: 'true' },
+            ],
+          },
+        ],
       };
 
       values = {
         x: 'true',
         z: 'true',
         y: 'false',
-        a: 'true'
+        a: 'true',
       };
 
       expect(parseCondition(condition, values)).toEqual(positiveResult);
@@ -314,23 +314,23 @@ describe('parseCondition', () => {
           {
             and: [
               { when: 'x', pattern: /true/ },
-              { when: 'z', is: 'true' }
-            ]
+              { when: 'z', is: 'true' },
+            ],
           },
           {
             or: [
               { when: 'y', pattern: /true/ },
-              { when: 'a', is: 'true' }
-            ]
-          }
-        ]
+              { when: 'a', is: 'true' },
+            ],
+          },
+        ],
       };
 
       values = {
         x: 'false',
         z: 'true',
         y: 'false',
-        a: 'true'
+        a: 'true',
       };
 
       expect(parseCondition(condition, values)).toEqual(negativeResult);
@@ -341,19 +341,19 @@ describe('parseCondition', () => {
     condition = {
       sequence: [
         { when: 'z', is: 'true' },
-        { when: 'x', is: 'true' }
-      ]
+        { when: 'x', is: 'true' },
+      ],
     };
 
     values = {
       x: 'true',
-      z: 'false'
+      z: 'false',
     };
 
     positiveResult = {
       result: true,
       visible: true,
-      sets: []
+      sets: [],
     };
 
     expect(parseCondition(condition, values)).toEqual(positiveResult);
@@ -363,19 +363,19 @@ describe('parseCondition', () => {
     condition = {
       sequence: [
         { when: 'z', is: 'true' },
-        { when: 'x', is: 'true' }
-      ]
+        { when: 'x', is: 'true' },
+      ],
     };
 
     values = {
       x: 'false',
-      z: 'false'
+      z: 'false',
     };
 
     negativeResult = {
       result: false,
       visible: false,
-      sets: []
+      sets: [],
     };
 
     expect(parseCondition(condition, values)).toEqual(negativeResult);
@@ -386,20 +386,20 @@ describe('parseCondition', () => {
       sequence: [
         { when: 'x', is: 'true', then: { set: { a: 'aa' } } },
         { when: 'z', is: 'true', then: { set: { b: 'bb' } } },
-        { when: 'y', is: 'true', then: { set: { c: 'cc' } } }
-      ]
+        { when: 'y', is: 'true', then: { set: { c: 'cc' } } },
+      ],
     };
 
     values = {
       x: 'true',
       z: 'false',
-      y: 'true'
+      y: 'true',
     };
 
     positiveResult = {
       result: true,
       visible: true,
-      sets: [{ a: 'aa' }, { c: 'cc' }]
+      sets: [{ a: 'aa' }, { c: 'cc' }],
     };
 
     expect(parseCondition(condition, values)).toEqual(positiveResult);
@@ -410,18 +410,18 @@ describe('parseCondition', () => {
       then: { set: { a: 'aa' } },
       and: [
         { when: 'x', is: 'true' },
-        { when: 'y', is: 'true' }
-      ]
+        { when: 'y', is: 'true' },
+      ],
     };
 
     values = {
       x: 'true',
-      y: 'true'
+      y: 'true',
     };
 
     positiveResult = {
       ...positiveResult,
-      set: { a: 'aa' }
+      set: { a: 'aa' },
     };
 
     expect(parseCondition(condition, values)).toEqual(positiveResult);
@@ -432,13 +432,13 @@ describe('parseCondition', () => {
       then: { set: { a: 'aa' } },
       and: [
         { when: 'x', is: 'true' },
-        { when: 'y', is: 'true' }
-      ]
+        { when: 'y', is: 'true' },
+      ],
     };
 
     values = {
       x: 'false',
-      y: 'true'
+      y: 'true',
     };
 
     expect(parseCondition(condition, values)).toEqual(negativeResult);
@@ -449,18 +449,18 @@ describe('parseCondition', () => {
       else: { set: { a: 'aa' } },
       and: [
         { when: 'x', is: 'true' },
-        { when: 'y', is: 'true' }
-      ]
+        { when: 'y', is: 'true' },
+      ],
     };
 
     values = {
       x: 'false',
-      y: 'true'
+      y: 'true',
     };
 
     negativeResult = {
       ...negativeResult,
-      set: { a: 'aa' }
+      set: { a: 'aa' },
     };
 
     expect(parseCondition(condition, values)).toEqual(negativeResult);
@@ -468,7 +468,7 @@ describe('parseCondition', () => {
 
   describe('when function', () => {
     const field = {
-      name: 'field-name'
+      name: 'field-name',
     };
 
     it('when is function', () => {
@@ -476,11 +476,11 @@ describe('parseCondition', () => {
 
       condition = {
         when: whenSpy,
-        is: 'yes'
+        is: 'yes',
       };
 
       values = {
-        x: 'yes'
+        x: 'yes',
       };
 
       expect(parseCondition(condition, values, field)).toEqual(positiveResult);
@@ -492,12 +492,12 @@ describe('parseCondition', () => {
 
       condition = {
         when: whenSpy,
-        is: 'true'
+        is: 'true',
       };
 
       values = {
         x: 'true',
-        y: 'true'
+        y: 'true',
       };
 
       expect(parseCondition(condition, values, field)).toEqual(positiveResult);
@@ -509,12 +509,12 @@ describe('parseCondition', () => {
 
       condition = {
         when: whenSpy,
-        is: 'true'
+        is: 'true',
       };
 
       values = {
         x: 'false',
-        y: 'false'
+        y: 'false',
       };
 
       expect(parseCondition(condition, values, field)).toEqual(negativeResult);
@@ -529,12 +529,12 @@ describe('parseCondition', () => {
 
       condition = {
         when: whenSpy,
-        is: 'true'
+        is: 'true',
       };
 
       values = {
         x: 'true',
-        y: 'true'
+        y: 'true',
       };
 
       expect(parseCondition(condition, values, field)).toEqual(positiveResult);
@@ -550,18 +550,18 @@ describe('parseCondition', () => {
     condition = {
       when: 'x',
       is: customFunction,
-      customArg: '123'
+      customArg: '123',
     };
 
     values = {
-      x: 1
+      x: 1,
     };
 
     expect(parseCondition(condition, values)).toEqual(positiveResult);
     expect(customFunction).toHaveBeenCalledWith(1, { customArg: '123', when: 'x', is: expect.any(Function) });
 
     values = {
-      x: 0
+      x: 0,
     };
 
     expect(parseCondition(condition, values)).toEqual(negativeResult);
@@ -571,17 +571,17 @@ describe('parseCondition', () => {
     it('greaterThan', () => {
       condition = {
         when: 'x',
-        greaterThan: 0
+        greaterThan: 0,
       };
 
       values = {
-        x: 1
+        x: 1,
       };
 
       expect(parseCondition(condition, values)).toEqual(positiveResult);
 
       values = {
-        x: 0
+        x: 0,
       };
 
       expect(parseCondition(condition, values)).toEqual(negativeResult);
@@ -590,17 +590,17 @@ describe('parseCondition', () => {
     it('greaterThanOrEqualTo', () => {
       condition = {
         when: 'x',
-        greaterThanOrEqualTo: 0
+        greaterThanOrEqualTo: 0,
       };
 
       values = {
-        x: 0
+        x: 0,
       };
 
       expect(parseCondition(condition, values)).toEqual(positiveResult);
 
       values = {
-        x: -1
+        x: -1,
       };
 
       expect(parseCondition(condition, values)).toEqual(negativeResult);
@@ -609,17 +609,17 @@ describe('parseCondition', () => {
     it('lessThan', () => {
       condition = {
         when: 'x',
-        lessThan: 0
+        lessThan: 0,
       };
 
       values = {
-        x: -1
+        x: -1,
       };
 
       expect(parseCondition(condition, values)).toEqual(positiveResult);
 
       values = {
-        x: 1
+        x: 1,
       };
 
       expect(parseCondition(condition, values)).toEqual(negativeResult);
@@ -628,17 +628,17 @@ describe('parseCondition', () => {
     it('lessThanOrEqualTo', () => {
       condition = {
         when: 'x',
-        lessThanOrEqualTo: 0
+        lessThanOrEqualTo: 0,
       };
 
       values = {
-        x: 0
+        x: 0,
       };
 
       expect(parseCondition(condition, values)).toEqual(positiveResult);
 
       values = {
-        x: 1
+        x: 1,
       };
 
       expect(parseCondition(condition, values)).toEqual(negativeResult);

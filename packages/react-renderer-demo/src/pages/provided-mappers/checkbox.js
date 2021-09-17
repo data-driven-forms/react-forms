@@ -8,17 +8,17 @@ const schema = {
     {
       component: componentTypes.CHECKBOX,
       label: 'Checkbox',
-      name: 'checkbox'
-    }
-  ]
+      name: 'checkbox',
+    },
+  ],
 };
 const variants = [
   ...baseFieldProps,
   {
     name: 'options',
     type: 'array',
-    required: false
-  }
+    required: false,
+  },
 ];
 
 const Checkbox = () => <ComponentText schema={schema} variants={variants} linkText="Checkbox" />;

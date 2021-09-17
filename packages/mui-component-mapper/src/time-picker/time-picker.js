@@ -62,12 +62,12 @@ TimePicker.propTypes = {
   locale: PropTypes.string,
   description: PropTypes.node,
   FormFieldGridProps: PropTypes.object,
-  MuiPickersUtilsProviderProps: PropTypes.object
+  MuiPickersUtilsProviderProps: PropTypes.object,
 };
 
 TimePicker.defaultProps = {
   FormFieldGridProps: {},
-  MuiPickersUtilsProviderProps: {}
+  MuiPickersUtilsProviderProps: {},
 };
 
 export default TimePicker;

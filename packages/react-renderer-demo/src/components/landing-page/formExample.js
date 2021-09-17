@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     width: '100%',
     flexFlow: 'row-reverse',
-    padding: 8
-  }
+    padding: 8,
+  },
 }));
 
 const FormTemplate = ({ formFields }) => {
@@ -44,7 +44,7 @@ const FormTemplate = ({ formFields }) => {
 };
 
 FormTemplate.propTypes = {
-  formFields: PropTypes.any
+  formFields: PropTypes.any,
 };
 
 const FormExample = ({ setFormState }) => (
@@ -53,7 +53,7 @@ const FormExample = ({ setFormState }) => (
     onSubmit={(values) => setFormState(values)}
     componentMapper={{
       [componentTypes.TEXT_FIELD]: TextField,
-      [componentTypes.CHECKBOX]: Checkbox
+      [componentTypes.CHECKBOX]: Checkbox,
     }}
     schema={{
       fields: [
@@ -64,9 +64,9 @@ const FormExample = ({ setFormState }) => (
           isRequired: true,
           validate: [
             {
-              type: validatorTypes.REQUIRED
-            }
-          ]
+              type: validatorTypes.REQUIRED,
+            },
+          ],
         },
         {
           component: componentTypes.TEXT_FIELD,
@@ -75,14 +75,14 @@ const FormExample = ({ setFormState }) => (
           isRequired: true,
           validate: [
             {
-              type: validatorTypes.REQUIRED
+              type: validatorTypes.REQUIRED,
             },
             {
               type: validatorTypes.PATTERN,
               pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$',
-              message: 'Not valid email'
-            }
-          ]
+              message: 'Not valid email',
+            },
+          ],
         },
         {
           component: componentTypes.TEXT_FIELD,
@@ -91,25 +91,25 @@ const FormExample = ({ setFormState }) => (
           isRequired: true,
           validate: [
             {
-              type: 'same-email'
-            }
-          ]
+              type: 'same-email',
+            },
+          ],
         },
         {
           component: componentTypes.CHECKBOX,
           name: 'newsletters',
-          label: 'I want to receive newsletter'
-        }
-      ]
+          label: 'I want to receive newsletter',
+        },
+      ],
     }}
     validatorMapper={{
-      'same-email': () => (value, allValues) => (value !== allValues.email ? 'Email does not match' : undefined)
+      'same-email': () => (value, allValues) => value !== allValues.email ? 'Email does not match' : undefined,
     }}
   />
 );
 
 FormExample.propTypes = {
-  setFormState: PropTypes.func
+  setFormState: PropTypes.func,
 };
 
 export default FormExample;

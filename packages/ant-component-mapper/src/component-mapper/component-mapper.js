@@ -30,7 +30,7 @@ export const components = {
   Wizard,
   DualListSelect,
   FieldArray,
-  Slider
+  Slider,
 };
 
 const componentMapper = {
@@ -48,7 +48,7 @@ const componentMapper = {
   [componentTypes.WIZARD]: Wizard,
   [componentTypes.SLIDER]: Slider,
   [componentTypes.DUAL_LIST_SELECT]: DualListSelect,
-  [componentTypes.FIELD_ARRAY]: FieldArray
+  [componentTypes.FIELD_ARRAY]: FieldArray,
 };
 
 export default componentMapper;

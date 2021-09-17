@@ -29,11 +29,11 @@ Option.propTypes = {
     label: PropTypes.node,
     isDisabled: PropTypes.bool,
     disabled: PropTypes.bool,
-    description: PropTypes.node
+    description: PropTypes.node,
   }).isRequired,
   isActive: PropTypes.bool,
   isSelected: PropTypes.bool,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
 };
 
 export default Option;

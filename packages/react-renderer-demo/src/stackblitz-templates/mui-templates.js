@@ -71,5 +71,5 @@ export const dependencies = {
   '@material-ui/core': 'latest',
   '@material-ui/icons': 'latest',
   '@material-ui/styles': 'latest',
-  'prop-types': 'latest'
+  'prop-types': 'latest',
 };

@@ -10,7 +10,7 @@ const Slider = ({ input, step, ...props }) => <BSlider stepSize={step} {...props
 
 Slider.propTypes = {
   input: PropTypes.object,
-  step: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  step: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 const WrapperSlider = (props) => <FormGroupWrapper {...props} Component={Slider} />;

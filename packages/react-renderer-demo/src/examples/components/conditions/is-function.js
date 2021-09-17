@@ -20,20 +20,20 @@ const schema = {
     {
       component: componentTypes.DATE_PICKER,
       name: 'field-1',
-      label: 'Are you older than 18 years?'
+      label: 'Are you older than 18 years?',
     },
     {
       component: componentTypes.PLAIN_TEXT,
       name: 'field-2',
       label: 'Older than 18 years!',
-      condition: { when: 'field-1', is: isFunction, desiredAge: 18 }
-    }
-  ]
+      condition: { when: 'field-1', is: isFunction, desiredAge: 18 },
+    },
+  ],
 };
 
 const componentMapper = {
   [componentTypes.DATE_PICKER]: DatePicker,
-  [componentTypes.PLAIN_TEXT]: PlainText
+  [componentTypes.PLAIN_TEXT]: PlainText,
 };
 
 const IsCondition = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;

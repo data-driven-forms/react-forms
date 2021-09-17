@@ -52,27 +52,27 @@ describe('<FormRenderer />', () => {
       [componentTypes.DATE_PICKER]: () => <div className="nested-item">Date picker</div>,
       [componentTypes.TIME_PICKER]: () => <div className="nested-item">Time picker</div>,
       [componentTypes.TEXTAREA]: () => <div className="nested-item">Textarea field</div>,
-      [componentTypes.SELECT]: () => <div className="nested-item">Select field</div>
+      [componentTypes.SELECT]: () => <div className="nested-item">Select field</div>,
     };
 
     schema = {
       fields: [
         {
           component: componentTypes.TEXT_FIELD,
-          name: 'component1'
+          name: 'component1',
         },
         {
           component: componentTypes.SELECT,
-          name: 'secret'
-        }
-      ]
+          name: 'secret',
+        },
+      ],
     };
 
     initialProps = {
       componentMapper,
       FormTemplate: (props) => <FormTemplate {...props} />,
       onSubmit: jest.fn(),
-      schema
+      schema,
     };
   });
 
@@ -94,9 +94,9 @@ describe('<FormRenderer />', () => {
     const schemaWithError = {
       fields: [
         {
-          name: 'field without component key'
-        }
-      ]
+          name: 'field without component key',
+        },
+      ],
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} schema={schemaWithError} />);
@@ -113,10 +113,7 @@ describe('<FormRenderer />', () => {
     const wrapper = mount(<FormRenderer {...initialProps} canReset onReset={onReset} />);
     wrapper.find('input#component1').simulate('change', { target: { value: 'foo' } });
     wrapper.update();
-    wrapper
-      .find('button')
-      .at(1)
-      .simulate('click');
+    wrapper.find('button').at(1).simulate('click');
     expect(onReset).toHaveBeenCalled();
   });
 
@@ -131,15 +128,15 @@ describe('<FormRenderer />', () => {
             {
               component: componentTypes.TEXT_FIELD,
               name: 'visible',
-              label: 'Visible'
+              label: 'Visible',
             },
             {
               component: componentTypes.TEXT_FIELD,
               name: 'hidden',
               label: 'Hidden',
-              hideField: true
-            }
-          ]
+              hideField: true,
+            },
+          ],
         }}
         onSubmit={onSubmit}
       />
@@ -156,9 +153,9 @@ describe('<FormRenderer />', () => {
             component: componentTypes.TEXT_FIELD,
             name: 'initial-convert',
             initialValue: '5',
-            dataType: 'integer'
-          }
-        ]
+            dataType: 'integer',
+          },
+        ],
       };
       const wrapper = mount(<FormRenderer {...initialProps} schema={schema} onSubmit={(values) => onSubmit(values)} />);
       wrapper.find('form').simulate('submit');
@@ -173,9 +170,9 @@ describe('<FormRenderer />', () => {
             component: componentTypes.TEXT_FIELD,
             name: 'initial-convert',
             initialValue: ['5', 3, '11', '999'],
-            dataType: 'integer'
-          }
-        ]
+            dataType: 'integer',
+          },
+        ],
       };
       const wrapper = mount(<FormRenderer {...initialProps} schema={schema} onSubmit={(values) => onSubmit(values)} />);
       wrapper.find('form').simulate('submit');
@@ -190,9 +187,9 @@ describe('<FormRenderer />', () => {
             component: componentTypes.TEXT_FIELD,
             name: 'initial-convert',
             initialValue: [{ value: '5' }, { value: 3 }, { value: '11' }, { value: '999' }],
-            dataType: 'integer'
-          }
-        ]
+            dataType: 'integer',
+          },
+        ],
       };
       const wrapper = mount(<FormRenderer {...initialProps} schema={schema} onSubmit={(values) => onSubmit(values)} />);
 
@@ -207,7 +204,7 @@ describe('<FormRenderer />', () => {
       <FormRenderer
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
-          spy: { component: ContextSpy, registerSpy }
+          spy: { component: ContextSpy, registerSpy },
         }}
         schema={{ fields: [{ component: 'spy', name: 'should-show' }] }}
         onSubmit={jest.fn()}
@@ -228,15 +225,15 @@ describe('<FormRenderer />', () => {
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
           ...componentMapper,
-          spy: { component: ContextSpy, registerSpy }
+          spy: { component: ContextSpy, registerSpy },
         }}
         initialValues={{ x: 'a' }}
         schema={{
           fields: [
             { component: 'spy', name: 'trigger' },
             { component: 'text-field', name: 'x' },
-            { component: 'text-field', name: 'field-1', condition: { when: 'x', is: 'a' } }
-          ]
+            { component: 'text-field', name: 'field-1', condition: { when: 'x', is: 'a' } },
+          ],
         }}
         onSubmit={jest.fn()}
       />
@@ -267,7 +264,7 @@ describe('<FormRenderer />', () => {
         componentMapper={{
           ...componentMapper,
           spy: { component: ContextSpy, registerSpy },
-          duplicate: DuplicatedField
+          duplicate: DuplicatedField,
         }}
         initialValues={{ x: 'a' }}
         schema={{
@@ -275,8 +272,8 @@ describe('<FormRenderer />', () => {
             { component: 'spy', name: 'trigger' },
             { component: 'text-field', name: 'x' },
             { component: 'text-field', name: 'field-1', condition: { when: 'x', is: 'a' } },
-            { component: 'duplicate', name: 'dupe@field-1' }
-          ]
+            { component: 'duplicate', name: 'dupe@field-1' },
+          ],
         }}
         onSubmit={jest.fn()}
       />
@@ -307,7 +304,7 @@ describe('<FormRenderer />', () => {
         componentMapper={{
           ...componentMapper,
           spy: { component: ContextSpy, registerSpy },
-          duplicate: DuplicatedField
+          duplicate: DuplicatedField,
         }}
         initialValues={{ x: 'a' }}
         schema={{ fields: [{ component: 'spy', name: 'trigger', skipRegistration: true }] }}

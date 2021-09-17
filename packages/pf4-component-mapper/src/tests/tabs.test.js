@@ -10,14 +10,14 @@ describe('Tabs component', () => {
       {
         title: 'cosiTitle',
         name: 'cosiName',
-        fields: []
+        fields: [],
       },
       {
         title: 'cosiTitle2',
         name: 'cosiName2',
-        fields: []
-      }
-    ]
+        fields: [],
+      },
+    ],
   };
 
   it('should render tabs correctly', () => {
@@ -25,8 +25,8 @@ describe('Tabs component', () => {
       <RenderWithProvider
         value={{
           formOptions: {
-            renderForm: (fields, formOptions) => <span className="content">Here would be form</span>
-          }
+            renderForm: (fields, formOptions) => <span className="content">Here would be form</span>,
+          },
         }}
       >
         <Tabs {...props}></Tabs>
@@ -41,8 +41,8 @@ describe('Tabs component', () => {
       <RenderWithProvider
         value={{
           formOptions: {
-            renderForm: (fields, formOptions) => <div>{'Here would be form'}</div>
-          }
+            renderForm: (fields, formOptions) => <div>{'Here would be form'}</div>,
+          },
         }}
       >
         <Tabs {...props}></Tabs>

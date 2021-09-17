@@ -87,7 +87,7 @@ Slider.propTypes = {
   InputGridProps: PropTypes.object,
   BeforeGridProps: PropTypes.object,
   SliderGridProps: PropTypes.object,
-  AfterGridProps: PropTypes.object
+  AfterGridProps: PropTypes.object,
 };
 
 export default Slider;

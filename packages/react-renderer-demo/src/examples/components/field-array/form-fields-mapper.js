@@ -5,14 +5,14 @@ import { FormRenderer, componentTypes, useFormApi, useFieldApi, FieldArray } fro
 const wrapperStyles = {
   padding: 16,
   borderRadius: 4,
-  fontFamily: 'Roboto'
+  fontFamily: 'Roboto',
 };
 
 const getBackgroundColor = (variant) =>
   ({
     primary: 'RebeccaPurple',
     add: 'LimeGreen',
-    remove: '#FF4136'
+    remove: '#FF4136',
   }[variant] || '#888');
 
 const getButtonStyle = (variant) => ({
@@ -22,7 +22,7 @@ const getButtonStyle = (variant) => ({
   borderRadius: 4,
   cursor: 'pointer',
   border: 'none',
-  marginRight: 4
+  marginRight: 4,
 });
 
 const Button = ({ children, label, variant, ...props }) => (
@@ -100,7 +100,7 @@ const FieldArrayCustom = (props) => {
 
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField,
-  [componentTypes.FIELD_ARRAY]: FieldArrayCustom
+  [componentTypes.FIELD_ARRAY]: FieldArrayCustom,
 };
 
 const FormTemplate = ({ formFields }) => {
@@ -130,16 +130,16 @@ const FieldArrayProvider = () => {
           {
             component: componentTypes.TEXT_FIELD,
             name: 'name',
-            label: 'Name'
+            label: 'Name',
           },
           {
             component: componentTypes.TEXT_FIELD,
             name: 'lastName',
-            label: 'Last Name'
-          }
-        ]
-      }
-    ]
+            label: 'Last Name',
+          },
+        ],
+      },
+    ],
   };
 
   const onSubmit = (values) => console.log(values);

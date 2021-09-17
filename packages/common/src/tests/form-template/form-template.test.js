@@ -17,7 +17,7 @@ describe('FormTemplate', () => {
 
   const fields = [
     { name: 'field1', component: componentTypes.TEXT_FIELD },
-    { name: 'field2', component: componentTypes.TEXT_FIELD }
+    { name: 'field2', component: componentTypes.TEXT_FIELD },
   ];
 
   const FormError = ({ formError }) => <span className="formError">{formError}</span>;
@@ -53,8 +53,8 @@ describe('FormTemplate', () => {
     FormTemplate: FormTemplateTest,
     componentMapper: { [componentTypes.TEXT_FIELD]: DummyField },
     schema: {
-      fields
-    }
+      fields,
+    },
   };
 
   it('Renders correctly', async () => {
@@ -85,7 +85,7 @@ describe('FormTemplate', () => {
           schema={{
             title: 'some-title',
             description: 'some-description',
-            fields
+            fields,
           }}
           FormTemplate={(props) => <FormTemplateTest {...props} canReset />}
         />
@@ -112,7 +112,7 @@ describe('FormTemplate', () => {
           onCancel={jest.fn()}
           schema={{
             label: 'some-title',
-            fields
+            fields,
           }}
           FormTemplate={(props) => <FormTemplateTest {...props} canReset />}
         />
@@ -146,14 +146,8 @@ describe('FormTemplate', () => {
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find('input')
-        .first()
-        .instance().value = 'y';
-      wrapper
-        .find('input')
-        .first()
-        .simulate('change');
+      wrapper.find('input').first().instance().value = 'y';
+      wrapper.find('input').first().simulate('change');
     });
     wrapper.update();
 
@@ -234,12 +228,7 @@ describe('FormTemplate', () => {
     });
     wrapper.update();
 
-    expect(
-      wrapper
-        .find(ButtonGroup)
-        .find('span')
-        .props().className
-    ).toEqual('custom-button-classname');
+    expect(wrapper.find(ButtonGroup).find('span').props().className).toEqual('custom-button-classname');
   });
 
   it('Hide form controls', async () => {
@@ -283,7 +272,7 @@ describe('FormTemplate', () => {
         <FormRenderer
           {...rendererProps}
           onSubmit={() => ({
-            [ERROR]: 'form error'
+            [ERROR]: 'form error',
           })}
         />
       );

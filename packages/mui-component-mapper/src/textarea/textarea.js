@@ -37,7 +37,7 @@ const Textarea = (props) => {
         required={isRequired}
         inputProps={{
           readOnly: isReadOnly,
-          ...inputProps
+          ...inputProps,
         }}
         {...rest}
         multiline
@@ -58,12 +58,12 @@ Textarea.propTypes = {
   validateOnMount: PropTypes.bool,
   description: PropTypes.node,
   FormFieldGridProps: PropTypes.object,
-  inputProps: PropTypes.object
+  inputProps: PropTypes.object,
 };
 
 Textarea.defaultProps = {
   FormFieldGridProps: {},
-  inputProps: {}
+  inputProps: {},
 };
 
 export default Textarea;

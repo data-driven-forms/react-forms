@@ -29,8 +29,8 @@ const DualList = (props) => {
   } = useFieldApi({
     ...props,
     FieldProps: {
-      isEqual: (current, initial) => isEqual([...(current || [])].sort(), [...(initial || [])].sort())
-    }
+      isEqual: (current, initial) => isEqual([...(current || [])].sort(), [...(initial || [])].sort()),
+    },
   });
 
   const [sortConfig, setSortConfig] = useState(() => ({ left: isSortable && 'asc', right: isSortable && 'asc' }));
@@ -104,7 +104,7 @@ const DualList = (props) => {
             addSelected: onListChange,
             filterOption,
             removeAll: onListChange,
-            removeSelected: onListChange
+            removeSelected: onListChange,
           })}
           {...rest}
         />
@@ -123,13 +123,13 @@ DualList.propTypes = {
   id: PropTypes.string,
   getValueFromNode: PropTypes.func,
   isSearchable: PropTypes.bool,
-  isSortable: PropTypes.bool
+  isSortable: PropTypes.bool,
 };
 
 const DualListWrapper = (props) => (props.isTree ? <DualListTree {...props} /> : <DualList {...props} />);
 
 DualListWrapper.propTypes = {
-  isTree: PropTypes.bool
+  isTree: PropTypes.bool,
 };
 
 export default DualListWrapper;

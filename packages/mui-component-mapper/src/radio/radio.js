@@ -11,9 +11,9 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 const useStyles = makeStyles(() => ({
   grid: {
     '&:first-child': {
-      marginTop: 8
-    }
-  }
+      marginTop: 8,
+    },
+  },
 }));
 
 const RadioOption = ({ name, option, isDisabled, isReadOnly, FormControlLabelProps, RadioProps: { inputProps, ...RadioProps }, ...props }) => {
@@ -29,7 +29,7 @@ const RadioOption = ({ name, option, isDisabled, isReadOnly, FormControlLabelPro
           onChange={() => input.onChange(option.value)}
           inputProps={{
             readOnly: isReadOnly,
-            ...inputProps
+            ...inputProps,
           }}
           {...RadioProps}
         />
@@ -47,7 +47,7 @@ RadioOption.propTypes = {
   isReadOnly: PropTypes.bool,
   isDisabled: PropTypes.bool,
   FormControlLabelProps: PropTypes.object,
-  RadioProps: PropTypes.object
+  RadioProps: PropTypes.object,
 };
 
 const Radio = ({ name, ...props }) => {
@@ -69,7 +69,7 @@ const Radio = ({ name, ...props }) => {
   } = useFieldApi({
     ...props,
     name,
-    type: 'radio'
+    type: 'radio',
   });
   const classes = useStyles();
   const invalid = validationError(meta, validateOnMount);
@@ -94,7 +94,7 @@ Radio.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.any,
-      label: PropTypes.node
+      label: PropTypes.node,
     })
   ),
   label: PropTypes.node.isRequired,
@@ -105,7 +105,7 @@ Radio.propTypes = {
   FormControlLabelProps: PropTypes.object,
   RadioProps: PropTypes.object,
   FormLabelProps: PropTypes.object,
-  FormHelperTextProps: PropTypes.object
+  FormHelperTextProps: PropTypes.object,
 };
 
 Radio.defaultProps = {
@@ -115,7 +115,7 @@ Radio.defaultProps = {
   FormControlLabelProps: {},
   RadioProps: {},
   FormLabelProps: {},
-  FormHelperTextProps: {}
+  FormHelperTextProps: {},
 };
 
 export default Radio;

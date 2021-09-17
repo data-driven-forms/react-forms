@@ -11,7 +11,7 @@ const getVisibleFields = (schema, values) => {
     if (result.visible) {
       return {
         ...schema,
-        ...(schema.fields && { fields: getVisibleFields(schema.fields, values).filter(Boolean) })
+        ...(schema.fields && { fields: getVisibleFields(schema.fields, values).filter(Boolean) }),
       };
     } else {
       return null;
@@ -20,7 +20,7 @@ const getVisibleFields = (schema, values) => {
 
   return {
     ...schema,
-    ...(schema.fields && { fields: getVisibleFields(schema.fields, values).filter(Boolean) })
+    ...(schema.fields && { fields: getVisibleFields(schema.fields, values).filter(Boolean) }),
   };
 };
 

@@ -21,13 +21,13 @@ describe('<Select />', () => {
       options: [
         {
           label: 'First option',
-          value: 1
+          value: 1,
         },
         {
           label: 'Second option',
-          value: 2
-        }
-      ]
+          value: 2,
+        },
+      ],
     };
   });
 
@@ -49,11 +49,11 @@ describe('<Select />', () => {
               options: [
                 {
                   label: <h1>Translated</h1>,
-                  value: 'translated'
-                }
-              ]
-            }
-          ]
+                  value: 'translated',
+                },
+              ],
+            },
+          ],
         }}
       />
     );
@@ -68,12 +68,7 @@ describe('<Select />', () => {
     });
     wrapper.update();
 
-    expect(
-      wrapper
-        .find(ValueContainer)
-        .find('h1')
-        .text()
-    ).toEqual('Translated');
+    expect(wrapper.find(ValueContainer).find('h1').text()).toEqual('Translated');
   });
 
   it('should render description', async () => {
@@ -91,11 +86,11 @@ describe('<Select />', () => {
                 {
                   label: <h1>Translated</h1>,
                   value: 'translated',
-                  description: 'some description'
-                }
-              ]
-            }
-          ]
+                  description: 'some description',
+                },
+              ],
+            },
+          ],
         }}
       />
     );
@@ -104,12 +99,7 @@ describe('<Select />', () => {
 
     wrapper.find('.pf-c-select__toggle').simulate('click');
 
-    expect(
-      wrapper
-        .find(Option)
-        .find('.pf-c-select__menu-item-description')
-        .text()
-    ).toEqual('some description');
+    expect(wrapper.find(Option).find('.pf-c-select__menu-item-description').text()).toEqual('some description');
   });
 
   it('should return single simple value', async () => {
@@ -195,12 +185,12 @@ describe('<Select />', () => {
       ...initialProps.options,
       {
         label: '3',
-        value: 3
+        value: 3,
       },
       {
         label: '4',
-        value: 4
-      }
+        value: 4,
+      },
     ];
     const wrapper = mount(<Select {...initialProps} options={options} value={value} isMulti closeMenuOnSelect={false} />);
 
@@ -219,10 +209,7 @@ describe('<Select />', () => {
     const wrapper = mount(<Select {...initialProps} value={value} isMulti closeMenuOnSelect={false} />);
 
     await act(async () => {
-      wrapper
-        .find('button.pf-c-button.pf-m-plain')
-        .first()
-        .simulate('click');
+      wrapper.find('button.pf-c-button.pf-m-plain').first().simulate('click');
     });
 
     expect(onChange).toHaveBeenCalledWith([2]);
@@ -233,11 +220,11 @@ describe('<Select />', () => {
       isMulti: true,
       options: [
         { label: 'a', value: 1 },
-        { label: 'b', value: 2 }
+        { label: 'b', value: 2 },
       ],
       name: 'foo',
       onChange: Function,
-      value: [1, 2]
+      value: [1, 2],
     };
     const wrapper = mount(<Select {...props} />);
     const mappedProps = wrapper.find(Select).props();
@@ -249,7 +236,7 @@ describe('<Select />', () => {
       name: 'foo',
       options: [
         { label: 'a', value: 1 },
-        { label: 'b', value: 2 }
+        { label: 'b', value: 2 },
       ],
       placeholder: 'Choose...',
       showLessLabel: 'Show less',
@@ -260,7 +247,7 @@ describe('<Select />', () => {
       value: [1, 2],
       loadingMessage: 'Loading...',
       noOptionsMessage: 'No options',
-      noResultsMessage: 'No results found'
+      noResultsMessage: 'No results found',
     });
   });
 

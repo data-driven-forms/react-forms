@@ -10,18 +10,18 @@ const schema = {
     {
       component: componentTypes.TEXT_FIELD,
       name: 'field-with-initial-value',
-      label: 'Will be set to null when you delete value from input'
+      label: 'Will be set to null when you delete value from input',
     },
     {
       component: componentTypes.TEXT_FIELD,
       name: 'field-withouth-initial-value',
-      label: 'Value will be undefined when field is empty'
-    }
-  ]
+      label: 'Value will be undefined when field is empty',
+    },
+  ],
 };
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 const ClearedValueExample = () => {
@@ -30,7 +30,7 @@ const ClearedValueExample = () => {
     <div>
       <FormRenderer
         initialValues={{
-          'field-with-initial-value': 'Delete me!'
+          'field-with-initial-value': 'Delete me!',
         }}
         clearedValue={null}
         FormTemplate={FormTemplate}

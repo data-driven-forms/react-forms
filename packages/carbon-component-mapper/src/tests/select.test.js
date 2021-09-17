@@ -18,10 +18,10 @@ describe('<Select />', () => {
           label: 'select',
           options: [
             { label: 'option 1', value: 1 },
-            { label: 'option 2', value: 2 }
-          ]
-        }
-      ]
+            { label: 'option 2', value: 2 },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(
@@ -43,19 +43,19 @@ describe('<Select />', () => {
               label: 'Category 1',
               options: [
                 { label: 'value 1', value: '111' },
-                { label: 'value 2', value: '222' }
-              ]
+                { label: 'value 2', value: '222' },
+              ],
             },
             {
               label: 'Category 2',
               options: [
                 { label: 'value 3', value: '333' },
-                { label: 'value 4', value: '444' }
-              ]
-            }
-          ]
-        }
-      ]
+                { label: 'value 4', value: '444' },
+              ],
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(
@@ -78,10 +78,10 @@ describe('<Select />', () => {
             [setting]: true,
             options: [
               { label: 'option 1', value: 1 },
-              { label: 'option 2', value: 2 }
-            ]
-          }
-        ]
+              { label: 'option 2', value: 2 },
+            ],
+          },
+        ],
       };
 
       const wrapper = mount(
@@ -103,10 +103,10 @@ describe('<Select />', () => {
           isClearable: true,
           options: [
             { label: 'option 1', value: 1 },
-            { label: 'option 2', value: 2 }
-          ]
-        }
-      ]
+            { label: 'option 2', value: 2 },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(
@@ -136,10 +136,10 @@ describe('<Select />', () => {
           simpleValue: true,
           options: [
             { label: 'option 1', value: 1 },
-            { label: 'option 2', value: 2 }
-          ]
-        }
-      ]
+            { label: 'option 2', value: 2 },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(
@@ -168,10 +168,10 @@ describe('<Select />', () => {
           isMulti: true,
           options: [
             { label: 'option 1', value: 1 },
-            { label: 'option 2', value: 2 }
-          ]
-        }
-      ]
+            { label: 'option 2', value: 2 },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(
@@ -194,10 +194,10 @@ describe('<Select />', () => {
             [setting]: true,
             options: [
               { label: 'option 1', value: 1 },
-              { label: 'option 2', value: 2 }
-            ]
-          }
-        ]
+              { label: 'option 2', value: 2 },
+            ],
+          },
+        ],
       };
 
       const wrapper = mount(
@@ -225,7 +225,7 @@ describe('<Select />', () => {
       value = ['dogs'];
       options = [
         { label: 'cats', value: 'cats' },
-        { label: 'dogs', value: 'dogs' }
+        { label: 'dogs', value: 'dogs' },
       ];
 
       expect(getMultiValue(value, options)).toEqual([{ label: 'dogs', value: 'dogs' }]);
@@ -235,7 +235,7 @@ describe('<Select />', () => {
       value = 'dogs';
       options = [
         { label: 'cats', value: 'cats' },
-        { label: 'dogs', value: 'dogs' }
+        { label: 'dogs', value: 'dogs' },
       ];
 
       expect(getMultiValue(value, options)).toEqual([{ label: 'dogs', value: 'dogs' }]);

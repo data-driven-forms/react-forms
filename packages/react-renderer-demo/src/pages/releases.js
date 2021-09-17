@@ -6,7 +6,7 @@ import { Heading } from '../components/mdx/mdx-components';
 import mdxComponents from '@docs/components/mdx/mdx-components';
 
 const options = {
-  overrides: { a: mdxComponents.link }
+  overrides: { a: mdxComponents.link },
 };
 
 const parseData = (data) =>

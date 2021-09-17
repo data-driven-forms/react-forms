@@ -32,7 +32,7 @@ describe('FormRenderer validator', () => {
         expect(value).toEqual(VALUE);
         expect(allValues).toEqual({
           other: '111',
-          [NAME]: VALUE
+          [NAME]: VALUE,
         });
         expect(meta).toEqual(META);
       }
@@ -42,10 +42,10 @@ describe('FormRenderer validator', () => {
       <FormRenderer
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
-          [componentTypes.TEXT_FIELD]: TextField
+          [componentTypes.TEXT_FIELD]: TextField,
         }}
         schema={{
-          fields: [{ component: 'text-field', name: NAME, validate: [validator] }]
+          fields: [{ component: 'text-field', name: NAME, validate: [validator] }],
         }}
         onSubmit={jest.fn()}
         initialValues={{ other: '111' }}
@@ -76,10 +76,10 @@ describe('FormRenderer validator', () => {
           <FormRenderer
             FormTemplate={FormTemplate}
             componentMapper={{
-              [componentTypes.TEXT_FIELD]: TextFieldWarning
+              [componentTypes.TEXT_FIELD]: TextFieldWarning,
             }}
             schema={{
-              fields: [{ component: 'text-field', name: NAME, validate: [{ type: 'required', warning: true }] }]
+              fields: [{ component: 'text-field', name: NAME, validate: [{ type: 'required', warning: true }] }],
             }}
             onSubmit={jest.fn()}
           />
@@ -96,10 +96,10 @@ describe('FormRenderer validator', () => {
           <FormRenderer
             FormTemplate={FormTemplate}
             componentMapper={{
-              [componentTypes.TEXT_FIELD]: TextFieldWarning
+              [componentTypes.TEXT_FIELD]: TextFieldWarning,
             }}
             schema={{
-              fields: [{ useWarnings: true, component: 'text-field', name: NAME, validate: [{ type: 'required', warning: true }] }]
+              fields: [{ useWarnings: true, component: 'text-field', name: NAME, validate: [{ type: 'required', warning: true }] }],
             }}
             onSubmit={jest.fn()}
           />
@@ -120,10 +120,10 @@ describe('FormRenderer validator', () => {
           <FormRenderer
             FormTemplate={FormTemplate}
             componentMapper={{
-              [componentTypes.TEXT_FIELD]: TextFieldWarning
+              [componentTypes.TEXT_FIELD]: TextFieldWarning,
             }}
             schema={{
-              fields: [{ useWarnings: true, component: 'text-field', name: NAME, validate: [customValidator] }]
+              fields: [{ useWarnings: true, component: 'text-field', name: NAME, validate: [customValidator] }],
             }}
             onSubmit={jest.fn()}
           />
@@ -144,10 +144,10 @@ describe('FormRenderer validator', () => {
           <FormRenderer
             FormTemplate={FormTemplate}
             componentMapper={{
-              [componentTypes.TEXT_FIELD]: TextFieldWarning
+              [componentTypes.TEXT_FIELD]: TextFieldWarning,
             }}
             schema={{
-              fields: [{ useWarnings: true, component: 'text-field', name: NAME, validate: [customValidator] }]
+              fields: [{ useWarnings: true, component: 'text-field', name: NAME, validate: [customValidator] }],
             }}
             onSubmit={jest.fn()}
           />

@@ -107,7 +107,7 @@ const InternalSelect = ({
               ...textFieldInputProps,
               ...inputProps,
               readOnly: !isSearchable,
-              placeholder: !internalValue || internalValue.length === 0 ? placeholder : undefined
+              placeholder: !internalValue || internalValue.length === 0 ? placeholder : undefined,
             }}
           />
         )}
@@ -150,7 +150,7 @@ InternalSelect.propTypes = {
   onBlur: PropTypes.func,
   TextFieldProps: PropTypes.object,
   inputProps: PropTypes.object,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
 };
 
 InternalSelect.defaultProps = {
@@ -158,7 +158,7 @@ InternalSelect.defaultProps = {
   FormFieldGridProps: {},
   TextFieldProps: {},
   inputProps: {},
-  loadingText: 'Loading...'
+  loadingText: 'Loading...',
 };
 
 const Select = (props) => {

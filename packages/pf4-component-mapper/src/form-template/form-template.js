@@ -17,13 +17,13 @@ Button.propTypes = {
   bsStyle: PropTypes.string,
   disabled: PropTypes.bool,
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-  buttonType: PropTypes.string
+  buttonType: PropTypes.string,
 };
 
 export const ButtonGroup = ({ children, ...props }) => <ActionGroup {...props}>{children}</ActionGroup>;
 
 ButtonGroup.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };
 
 export const Title = ({ children, ...props }) => (
@@ -35,7 +35,7 @@ export const Title = ({ children, ...props }) => (
 );
 
 Title.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };
 
 export const Description = ({ children, ...props }) => (
@@ -47,7 +47,7 @@ export const Description = ({ children, ...props }) => (
 );
 
 Description.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };
 
 export const FormError = ({ formError, alertProps }) => {
@@ -70,7 +70,7 @@ export const FormError = ({ formError, alertProps }) => {
 
 FormError.propTypes = {
   formError: PropTypes.any,
-  alertProps: PropTypes.object
+  alertProps: PropTypes.object,
 };
 
 const PF4FormTemplate = (props) => (

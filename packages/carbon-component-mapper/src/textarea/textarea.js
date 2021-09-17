@@ -22,7 +22,7 @@ Textarea.propTypes = {
   label: PropTypes.node,
   labelText: PropTypes.node,
   description: PropTypes.node,
-  helperText: PropTypes.node
+  helperText: PropTypes.node,
 };
 
 export default Textarea;

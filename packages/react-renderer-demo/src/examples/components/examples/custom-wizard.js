@@ -30,10 +30,10 @@ const schema = {
               validate: [{ type: 'required' }],
               options: [
                 { label: 'Step a', value: 'step-a' },
-                { label: 'Step b', value: 'step-b' }
-              ]
-            }
-          ]
+                { label: 'Step b', value: 'step-b' },
+              ],
+            },
+          ],
         },
         {
           name: 'step-a',
@@ -44,9 +44,9 @@ const schema = {
               name: 'a-value',
               isRequired: true,
               validate: [{ type: 'required' }],
-              label: 'A value'
-            }
-          ]
+              label: 'A value',
+            },
+          ],
         },
         {
           name: 'step-b',
@@ -57,13 +57,13 @@ const schema = {
               name: 'b-value',
               isRequired: true,
               validate: [{ type: 'required' }],
-              label: 'B value'
-            }
-          ]
-        }
-      ]
-    }
-  ]
+              label: 'B value',
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 const WizardInternal = (props) => {

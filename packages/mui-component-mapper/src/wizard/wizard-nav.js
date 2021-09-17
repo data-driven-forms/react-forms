@@ -7,8 +7,8 @@ import { Stepper, Step, StepLabel } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
   stepper: {
-    width: '100%'
-  }
+    width: '100%',
+  },
 }));
 
 const WizardNav = ({ StepperProps, stepsInfo, activeStepIndex }) => {
@@ -32,14 +32,14 @@ WizardNav.propTypes = {
       title: PropTypes.node,
       label: PropTypes.node,
       StepLabelProps: PropTypes.object,
-      StepProps: PropTypes.object
+      StepProps: PropTypes.object,
     })
   ),
-  activeStepIndex: PropTypes.number
+  activeStepIndex: PropTypes.number,
 };
 
 WizardNav.defaultProps = {
-  StepperProps: {}
+  StepperProps: {},
 };
 
 export default WizardNav;

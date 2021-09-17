@@ -24,10 +24,10 @@ WizardNav.propTypes = {
       title: PropTypes.node,
       label: PropTypes.node,
       StepLabelProps: PropTypes.object,
-      StepProps: PropTypes.object
+      StepProps: PropTypes.object,
     })
   ),
-  activeStepIndex: PropTypes.number
+  activeStepIndex: PropTypes.number,
 };
 
 export default WizardNav;

@@ -31,7 +31,7 @@ FormTabs.propTypes = {
   fields: PropTypes.array.isRequired,
   dataType: PropTypes.any,
   validate: PropTypes.any,
-  component: PropTypes.any
+  component: PropTypes.any,
 };
 
 export default FormTabs;

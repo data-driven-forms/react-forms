@@ -16,7 +16,7 @@ const Form = (props) => (
 describe('<Slider />', () => {
   const initialProps = {
     label: 'Slider',
-    name: 'slider'
+    name: 'slider',
   };
 
   it('should render default slider with label', () => {

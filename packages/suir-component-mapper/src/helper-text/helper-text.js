@@ -5,8 +5,8 @@ import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
   root: {
-    marginTop: 0
-  }
+    marginTop: 0,
+  },
 });
 
 const HelperText = ({ className, children }) => {
@@ -20,7 +20,7 @@ const HelperText = ({ className, children }) => {
 
 HelperText.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 export default HelperText;

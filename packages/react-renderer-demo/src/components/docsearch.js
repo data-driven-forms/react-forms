@@ -10,43 +10,43 @@ const useStyles = makeStyles((theme) => ({
   docSearchWrapper: {
     marginRight: 16,
     '& .algolia-docsearch-suggestion.algolia-docsearch-suggestion__main.algolia-docsearch-suggestion__secondary': {
-      textDecoration: 'none'
+      textDecoration: 'none',
     },
     '& .algolia-autocomplete .algolia-docsearch-suggestion--title': {
-      marginBottom: 0
+      marginBottom: 0,
     },
     '& .ds-dropdown-menu': {
       [theme.breakpoints.down('sm')]: {
         position: 'fixed !important',
         top: '50px !important',
         maxWidth: '100% !important',
-        minWidth: '100%'
+        minWidth: '100%',
       },
       '& [class^=ds-dataset-]': {
-        borderRadius: 0
+        borderRadius: 0,
       },
       '&:before': {
-        display: 'none'
-      }
-    }
+        display: 'none',
+      },
+    },
   },
   docSearchInput: {
     '& input': {
-      color: 'white'
+      color: 'white',
     },
     '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
-      borderBottomColor: 'white'
+      borderBottomColor: 'white',
     },
     '& .MuiInput-underline:after': {
-      borderBottomColor: 'white'
+      borderBottomColor: 'white',
     },
     '& .MuiInput-underline:before': {
-      borderBottomColor: 'transparent'
-    }
+      borderBottomColor: 'transparent',
+    },
   },
   docSearchIcon: {
-    fill: 'white'
-  }
+    fill: 'white',
+  },
 }));
 
 const DocSearch = () => {
@@ -61,7 +61,7 @@ const DocSearch = () => {
         event.button = 0;
         push(suggestion.url.replace('https://data-driven-forms.org', ''));
         input.close();
-      }
+      },
       // debug: true, // Set debug to true if you want to inspect the dropdown.
     });
   }, [push]);
@@ -77,7 +77,7 @@ const DocSearch = () => {
             <InputAdornment position="start">
               <Search className={classes.docSearchIcon} />
             </InputAdornment>
-          )
+          ),
         }}
       />
     </form>

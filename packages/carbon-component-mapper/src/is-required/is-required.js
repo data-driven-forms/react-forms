@@ -5,8 +5,8 @@ import { createUseStyles } from 'react-jss';
 const useStyles = createUseStyles({
   isRequired: {
     color: '#E0182D',
-    marginRight: 4
-  }
+    marginRight: 4,
+  },
 });
 
 const IsRequired = ({ children }) => {
@@ -23,7 +23,7 @@ const IsRequired = ({ children }) => {
 };
 
 IsRequired.propTypes = {
-  children: childrenPropTypes
+  children: childrenPropTypes,
 };
 
 export default IsRequired;

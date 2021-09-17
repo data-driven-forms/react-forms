@@ -14,7 +14,7 @@ const getValidates = (schema, { componentMapper, actionMapper, values }, validat
         component: schema.component,
         rest: schema,
         componentMapper,
-        actionMapper
+        actionMapper,
       });
 
       let resolveProps = mergedResolveProps || overrideProps.resolveProps || componentProps.resolveProps;

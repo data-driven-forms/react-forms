@@ -5,10 +5,10 @@ import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template'
 import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 import Checkbox from '@data-driven-forms/mui-component-mapper/checkbox';
 
-const isEnabled = () => (_props, _field, formOptions) => (formOptions.getState().values.custom_email ? { isDisabled: false } : { isDisabled: true });
+const isEnabled = () => (_props, _field, formOptions) => formOptions.getState().values.custom_email ? { isDisabled: false } : { isDisabled: true };
 
 const actionMapper = {
-  isEnabled
+  isEnabled,
 };
 
 const schema = {
@@ -16,22 +16,22 @@ const schema = {
     {
       name: 'custom_email',
       label: 'Use custom email',
-      component: 'checkbox'
+      component: 'checkbox',
     },
     {
       name: 'email',
       label: 'Email',
       component: 'text-field',
       actions: {
-        resolveProps: ['isEnabled']
-      }
-    }
-  ]
+        resolveProps: ['isEnabled'],
+      },
+    },
+  ],
 };
 
 const componentMapper = {
   [componentTypes.CHECKBOX]: Checkbox,
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 const ResolvePropsDb = () => (

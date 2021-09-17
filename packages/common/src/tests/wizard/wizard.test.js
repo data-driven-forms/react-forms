@@ -14,13 +14,13 @@ describe('wizard test', () => {
       name: 'step1',
       nextStep: 'step2',
       title: 'step1',
-      fields: []
+      fields: [],
     },
     {
       name: 'step2',
       substepOf: { title: 'title', name: 'eaa' },
       nextStep: 'step3',
-      fields: []
+      fields: [],
     },
     {
       name: 'step3',
@@ -28,20 +28,20 @@ describe('wizard test', () => {
       nextStep: {
         when: 'field1',
         stepMapper: {
-          x: 'step4'
-        }
+          x: 'step4',
+        },
       },
-      fields: []
+      fields: [],
     },
     { name: 'step4', nextStep: ({ values }) => values.field2, fields: [] },
-    { name: 'step5', fields: [] }
+    { name: 'step5', fields: [] },
   ];
 
   // expected navSchema
   const navSchema = [
     { index: 0, name: 'step1', primary: true, substepOf: undefined, substepOfTitle: undefined, title: 'step1' },
     { index: 1, name: 'step2', primary: true, substepOf: 'eaa', substepOfTitle: 'title', title: undefined },
-    { index: 2, name: 'step3', primary: false, substepOf: 'eaa', substepOfTitle: 'title', title: undefined }
+    { index: 2, name: 'step3', primary: false, substepOf: 'eaa', substepOfTitle: 'title', title: undefined },
   ];
 
   const spyState = (newState) => {
@@ -78,10 +78,10 @@ describe('wizard test', () => {
         {
           name: 'wizard',
           component: componentTypes.WIZARD,
-          fields
-        }
-      ]
-    }
+          fields,
+        },
+      ],
+    },
   };
 
   it('handle next and handle prev', async () => {
@@ -97,7 +97,7 @@ describe('wizard test', () => {
       isDynamic: true,
       maxStepIndex: 0,
       navSchema,
-      prevSteps: []
+      prevSteps: [],
     });
 
     await act(async () => {
@@ -112,7 +112,7 @@ describe('wizard test', () => {
       isDynamic: true,
       maxStepIndex: 1,
       navSchema,
-      prevSteps: ['step1']
+      prevSteps: ['step1'],
     });
 
     await act(async () => {
@@ -127,7 +127,7 @@ describe('wizard test', () => {
       isDynamic: true,
       maxStepIndex: 1,
       navSchema,
-      prevSteps: ['step1', 'step2']
+      prevSteps: ['step1', 'step2'],
     });
   });
 
@@ -142,7 +142,7 @@ describe('wizard test', () => {
       { index: 1, name: 'step2', primary: true, substepOf: 'eaa', substepOfTitle: 'title', title: undefined },
       { index: 2, name: 'step3', primary: false, substepOf: 'eaa', substepOfTitle: 'title', title: undefined },
       { index: 3, name: 'step4', primary: true, substepOf: undefined, substepOfTitle: undefined, title: undefined },
-      { index: 4, name: 'step5', primary: true, substepOf: undefined, substepOfTitle: undefined, title: undefined }
+      { index: 4, name: 'step5', primary: true, substepOf: undefined, substepOfTitle: undefined, title: undefined },
     ]);
   });
 
@@ -164,7 +164,7 @@ describe('wizard test', () => {
       isDynamic: true,
       maxStepIndex: 1,
       navSchema,
-      prevSteps: ['step1']
+      prevSteps: ['step1'],
     });
   });
 
@@ -191,7 +191,7 @@ describe('wizard test', () => {
       isDynamic: true,
       maxStepIndex: 1,
       navSchema,
-      prevSteps: ['step1', 'step2']
+      prevSteps: ['step1', 'step2'],
     });
   });
 
@@ -218,7 +218,7 @@ describe('wizard test', () => {
       isDynamic: true,
       maxStepIndex: 1,
       navSchema,
-      prevSteps: ['step1', 'step2']
+      prevSteps: ['step1', 'step2'],
     });
   });
 
@@ -234,10 +234,10 @@ describe('wizard test', () => {
                 name: 'wizard',
                 fields,
                 initialState: {
-                  prevSteps: ['step1', 'step2', 'step3']
-                }
-              }
-            ]
+                  prevSteps: ['step1', 'step2', 'step3'],
+                },
+              },
+            ],
           }}
         />
       );
@@ -258,7 +258,7 @@ describe('wizard test', () => {
       isDynamic: true,
       maxStepIndex: 0,
       navSchema,
-      prevSteps: []
+      prevSteps: [],
     });
   });
 
@@ -276,7 +276,7 @@ describe('wizard test', () => {
           {...rendererProps}
           componentMapper={{
             ...rendererProps.componentMapper,
-            [componentTypes.TEXT_FIELD]: DummyTextField
+            [componentTypes.TEXT_FIELD]: DummyTextField,
           }}
           onSubmit={(values) => submitSpy(values)}
           schema={{
@@ -291,22 +291,22 @@ describe('wizard test', () => {
                       when: 'value1',
                       stepMapper: {
                         x: 'step2',
-                        y: 'step3'
-                      }
+                        y: 'step3',
+                      },
                     },
-                    fields: [{ component: componentTypes.TEXT_FIELD, name: 'value1', initialValue: 'x' }]
+                    fields: [{ component: componentTypes.TEXT_FIELD, name: 'value1', initialValue: 'x' }],
                   },
                   {
                     name: 'step2',
-                    fields: [{ component: componentTypes.TEXT_FIELD, name: 'value2', initialValue: 'x-value2' }]
+                    fields: [{ component: componentTypes.TEXT_FIELD, name: 'value2', initialValue: 'x-value2' }],
                   },
                   {
                     name: 'step3',
-                    fields: [{ component: componentTypes.TEXT_FIELD, name: 'value3', initialValue: 'x-value3' }]
-                  }
-                ]
-              }
-            ]
+                    fields: [{ component: componentTypes.TEXT_FIELD, name: 'value3', initialValue: 'x-value3' }],
+                  },
+                ],
+              },
+            ],
           }}
         />
       );

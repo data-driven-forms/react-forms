@@ -19,8 +19,8 @@ import { headerToId } from './list-of-contents';
 const itemStyles = makeStyles(() => ({
   a: {
     textDecoration: 'none',
-    color: 'inherit'
-  }
+    color: 'inherit',
+  },
 }));
 
 const Item = ({ text, setOpen }) => {
@@ -37,19 +37,19 @@ const Item = ({ text, setOpen }) => {
 
 Item.propTypes = {
   text: PropTypes.string.isRequired,
-  setOpen: PropTypes.func.isRequired
+  setOpen: PropTypes.func.isRequired,
 };
 
 const contentStyles = makeStyles(() => ({
   button: {
     paddingRight: 0,
-    marginTop: '-24px'
+    marginTop: '-24px',
   },
   wrapper: {
     width: '100%',
     display: 'flex',
-    justifyContent: 'flex-end'
-  }
+    justifyContent: 'flex-end',
+  },
 }));
 
 const ListOfContents = ({ found }) => {
@@ -98,7 +98,7 @@ const ListOfContents = ({ found }) => {
 };
 
 ListOfContents.propTypes = {
-  found: PropTypes.array
+  found: PropTypes.array,
 };
 
 export default ListOfContents;

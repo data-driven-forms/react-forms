@@ -24,7 +24,7 @@ import Footer from './footer';
 import dynamic from 'next/dynamic';
 import NotificationPanel from './notification-panel';
 const DocSearch = dynamic(import('./docsearch'), {
-  ssr: false
+  ssr: false,
 });
 
 export const drawerWidth = 240;
@@ -36,74 +36,74 @@ const useStyles = makeStyles((theme) => ({
     backgroundRepeat: 'no-repeat',
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    })
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   mainGradientShift: {
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
+      duration: theme.transitions.duration.leavingScreen,
+    }),
   },
   root: {
     display: 'flex',
-    minHeight: 'calc(100vh - 16px)'
+    minHeight: 'calc(100vh - 16px)',
   },
   appBar: {
     position: 'fixed',
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
+      duration: theme.transitions.duration.leavingScreen,
+    }),
   },
   contentWrapper: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
     minHeight: '100%',
-    paddingTop: 86
+    paddingTop: 86,
   },
   menuButton: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   hide: {
-    display: 'none'
+    display: 'none',
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0
+    flexShrink: 0,
   },
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
   },
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',
     padding: '0 8px',
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   },
   content: {
     flexGrow: 1,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
+      duration: theme.transitions.duration.leavingScreen,
     }),
     [theme.breakpoints.up('md')]: {
-      marginLeft: -drawerWidth
-    }
+      marginLeft: -drawerWidth,
+    },
   },
   contentShift: {
     [theme.breakpoints.up('md')]: {
       transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen
+        duration: theme.transitions.duration.enteringScreen,
       }),
-      marginLeft: 0
-    }
+      marginLeft: 0,
+    },
   },
   menuIcons: {
-    fill: theme.palette.common.white
+    fill: theme.palette.common.white,
   },
   rightAppBar: {
     right: 0,
@@ -112,10 +112,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: '100% 100vh',
     backgroundRepeat: 'no-repeat',
     zIndex: 900,
-    paddingLeft: 48
+    paddingLeft: 48,
   },
   toolbarOverride: {
-    zIndex: 1000
+    zIndex: 1000,
   },
   appBarShift: {
     [theme.breakpoints.up('md')]: {
@@ -123,10 +123,10 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: drawerWidth,
       transition: theme.transitions.create(['margin', 'width'], {
         easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen
-      })
-    }
-  }
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    },
+  },
 }));
 
 const Layout = ({ children }) => {
@@ -171,7 +171,7 @@ const Layout = ({ children }) => {
         <Toolbar
           className={clsx(classes.appBar, {
             [classes.toolbarOverride]: !open,
-            [classes.appBarShift]: open
+            [classes.appBarShift]: open,
           })}
         >
           <IconButton
@@ -191,7 +191,7 @@ const Layout = ({ children }) => {
             anchor="left"
             open={open && window && window.innerWidth > 960}
             classes={{
-              paper: classes.drawerPaper
+              paper: classes.drawerPaper,
             }}
           >
             <Navigation searchRef={searchRef} closeNav={handleDrawerClose} />
@@ -205,10 +205,10 @@ const Layout = ({ children }) => {
             anchor="left"
             open={open && window && window.innerWidth < 960}
             classes={{
-              paper: classes.drawerPaper
+              paper: classes.drawerPaper,
             }}
             ModalProps={{
-              keepMounted: true
+              keepMounted: true,
             }}
           >
             <Navigation closeNav={handleDrawerClose} />
@@ -217,7 +217,7 @@ const Layout = ({ children }) => {
         </Hidden>
         <div
           className={clsx(classes.drawerHeader, classes.appBar, classes.rightAppBar, {
-            [classes.appBarShift]: open
+            [classes.appBarShift]: open,
           })}
         >
           <DocSearch />
@@ -244,7 +244,7 @@ const Layout = ({ children }) => {
           className={clsx(classes.content, {
             [classes.contentShift]: open,
             [classes.mainGradient]: router.pathname === '/',
-            [classes.mainGradientShift]: router.pathname === '/' && open
+            [classes.mainGradientShift]: router.pathname === '/' && open,
           })}
         >
           <div className={classes.contentWrapper}>
@@ -252,7 +252,7 @@ const Layout = ({ children }) => {
               className="DocSearch-content"
               style={{
                 paddingRight: 32,
-                paddingLeft: 32
+                paddingLeft: 32,
               }}
             >
               {children}
@@ -269,7 +269,7 @@ const Layout = ({ children }) => {
 };
 
 Layout.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)])
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
 };
 
 export default Layout;

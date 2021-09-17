@@ -24,7 +24,7 @@ const Modal = ({ children, container, inModal, ...rest }) =>
 Modal.propTypes = {
   children: PropTypes.node,
   container: PropTypes.instanceOf(Element),
-  inModal: PropTypes.bool
+  inModal: PropTypes.bool,
 };
 
 const WizardInternal = ({
@@ -58,7 +58,7 @@ const WizardInternal = ({
     navSchema,
     activeStepIndex,
     maxStepIndex,
-    isDynamic
+    isDynamic,
   } = useContext(WizardContext);
   const [state, dispatch] = useReducer(reducer, { loading: true, container, openNav: false });
 
@@ -162,7 +162,7 @@ WizardInternal.propTypes = {
     submit: PropTypes.node.isRequired,
     cancel: PropTypes.node.isRequired,
     back: PropTypes.node.isRequired,
-    next: PropTypes.node.isRequired
+    next: PropTypes.node.isRequired,
   }).isRequired,
   buttonsClassName: PropTypes.string,
   title: PropTypes.any,
@@ -178,14 +178,14 @@ WizardInternal.propTypes = {
   container: PropTypes.instanceOf(Element),
   StepTemplate: PropTypes.elementType,
   className: PropTypes.string,
-  conditionalSubmitFlag: PropTypes.string.isRequired
+  conditionalSubmitFlag: PropTypes.string.isRequired,
 };
 
 const defaultLabels = {
   submit: 'Submit',
   cancel: 'Cancel',
   back: 'Back',
-  next: 'Next'
+  next: 'Next',
 };
 
 const WizardFunction = ({ buttonLabels, ...props }) => (
@@ -196,12 +196,12 @@ WizardFunction.propTypes = {
   buttonLabels: PropTypes.shape({
     submit: PropTypes.node,
     cancel: PropTypes.node,
-    back: PropTypes.node
-  })
+    back: PropTypes.node,
+  }),
 };
 
 WizardFunction.defaultProps = {
-  buttonLabels: {}
+  buttonLabels: {},
 };
 
 export default WizardFunction;

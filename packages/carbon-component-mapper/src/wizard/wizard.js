@@ -11,18 +11,18 @@ import { ProgressStep, ProgressIndicator } from 'carbon-components-react/lib/com
 
 const useStyles = createUseStyles({
   horizontalNav: {
-    marginBottom: 48
+    marginBottom: 48,
   },
   buttonSet: {
     marginTop: 48,
     flexFirection: 'row-reverse',
-    display: 'flex'
+    display: 'flex',
   },
   body: {
     '&>:not(:last-child)': {
-      marginBottom: 32
-    }
-  }
+      marginBottom: 32,
+    },
+  },
 });
 
 const WizardNav = ({ stepsInfo, jumpToStep, ...props }) => {
@@ -44,18 +44,18 @@ const WizardNav = ({ stepsInfo, jumpToStep, ...props }) => {
 WizardNav.propTypes = {
   stepsInfo: PropTypes.arrayOf(
     PropTypes.shape({
-      title: PropTypes.node
+      title: PropTypes.node,
     })
   ),
   currentIndex: PropTypes.number,
   jumpToStep: PropTypes.func,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 const defaultLabels = {
   submit: 'Submit',
   back: 'Back',
-  next: 'Next'
+  next: 'Next',
 };
 
 const Layout = ({ nav, fields, WizardBodyProps }) => {
@@ -74,7 +74,7 @@ const Layout = ({ nav, fields, WizardBodyProps }) => {
 Layout.propTypes = {
   nav: PropTypes.node,
   fields: PropTypes.node,
-  WizardBodyProps: PropTypes.object
+  WizardBodyProps: PropTypes.object,
 };
 
 const VerticalLayout = ({ nav, fields, WizardBodyProps }) => {
@@ -97,7 +97,7 @@ const VerticalLayout = ({ nav, fields, WizardBodyProps }) => {
 VerticalLayout.propTypes = {
   nav: PropTypes.node,
   fields: PropTypes.node,
-  WizardBodyProps: PropTypes.object
+  WizardBodyProps: PropTypes.object,
 };
 
 const WizardInternal = ({
@@ -119,7 +119,7 @@ const WizardInternal = ({
 
   const finalButtoLabels = {
     ...defaultLabels,
-    ...buttonLabels
+    ...buttonLabels,
   };
 
   const nav = stepsInfo && (
@@ -169,13 +169,13 @@ const WizardInternal = ({
 WizardInternal.propTypes = {
   stepsInfo: PropTypes.arrayOf(
     PropTypes.shape({
-      title: PropTypes.node
+      title: PropTypes.node,
     })
   ),
   buttonLabels: PropTypes.shape({
     submit: PropTypes.node,
     back: PropTypes.node,
-    next: PropTypes.node
+    next: PropTypes.node,
   }),
   BackButtonProps: PropTypes.object,
   NextButtonProps: PropTypes.object,
@@ -184,7 +184,7 @@ WizardInternal.propTypes = {
   ProgressIndicatorProps: PropTypes.object,
   vertical: PropTypes.bool,
   WizardBodyProps: PropTypes.object,
-  conditionalSubmitFlag: PropTypes.string.isRequired
+  conditionalSubmitFlag: PropTypes.string.isRequired,
 };
 
 WizardInternal.defaultProps = {
@@ -193,7 +193,7 @@ WizardInternal.defaultProps = {
   SubmitButtonProps: {},
   ButtonSetProps: {},
   ProgressIndicatorProps: {},
-  WizardBodyProps: {}
+  WizardBodyProps: {},
 };
 
 const Wizard = (props) => <WizardCommon Wizard={WizardInternal} {...props} />;

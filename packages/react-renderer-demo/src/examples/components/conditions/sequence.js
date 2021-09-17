@@ -12,7 +12,7 @@ const schema = {
       component: componentTypes.TEXT_FIELD,
       name: 'field-1',
       label: 'What do you like?',
-      helperText: 'Write dog or cat here.'
+      helperText: 'Write dog or cat here.',
     },
     {
       component: componentTypes.TEXT_FIELD,
@@ -28,16 +28,16 @@ const schema = {
             notMatch: 'true',
             pattern: /^(cat|dog)/i,
             then: { set: { 'field-2': 'I love something else!' } },
-            else: { visible: true }
-          }
-        ]
-      }
-    }
-  ]
+            else: { visible: true },
+          },
+        ],
+      },
+    },
+  ],
 };
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 const SequenceCondition = () => (

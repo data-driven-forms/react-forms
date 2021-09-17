@@ -80,8 +80,8 @@ describe('validation', () => {
         { name: 'double-fail-2', component: 'select', dataType: 'number' },
         { name: 'combined-fail', component: 'select', dataType: 'number', validate: [{ type: 'required' }] },
         { name: 'combined-fail-1', component: 'select', dataType: 'number', validate: [{ type: 'required' }] },
-        { name: 'combined-pass', component: 'select', dataType: 'number', validate: [{ type: 'required' }] }
-      ]
+        { name: 'combined-pass', component: 'select', dataType: 'number', validate: [{ type: 'required' }] },
+      ],
     };
     options = {
       values: {
@@ -93,11 +93,11 @@ describe('validation', () => {
         'double-fail': 'ccc',
         'double-fail-2': 'ccc',
         'combined-fail-1': 'string',
-        'combined-pass': 123
+        'combined-pass': 123,
       },
       validatorMapper: {
-        custom: () => () => 'custom error validator'
-      }
+        custom: () => () => 'custom error validator',
+      },
     };
 
     const results = await validation(schema, options);
@@ -115,11 +115,11 @@ describe('validation', () => {
       'double-fail-1': 'Required',
       'double-fail-2': 'Values must be number',
       'combined-fail': 'Required',
-      'combined-fail-1': 'Values must be number'
+      'combined-fail-1': 'Values must be number',
     });
     expect(asyncValidate.mock.calls).toEqual([
       [undefined, options.values, {}],
-      ['some-value', options.values, {}]
+      ['some-value', options.values, {}],
     ]);
   });
 
@@ -127,8 +127,8 @@ describe('validation', () => {
     schema = {
       fields: [
         { name: 'warning', component: 'checkbox', validate: [{ type: 'required', warning: true }], useWarnings: true },
-        { name: 'error', component: 'select', validate: [{ type: 'required' }] }
-      ]
+        { name: 'error', component: 'select', validate: [{ type: 'required' }] },
+      ],
     };
     options = {};
 
@@ -141,8 +141,8 @@ describe('validation', () => {
     schema = {
       fields: [
         { name: 'warning', component: 'checkbox', validate: [{ type: 'required', warning: true }], useWarnings: true },
-        { name: 'error', component: 'select', validate: [{ type: 'required' }] }
-      ]
+        { name: 'error', component: 'select', validate: [{ type: 'required' }] },
+      ],
     };
     options = { omitWarnings: true };
 

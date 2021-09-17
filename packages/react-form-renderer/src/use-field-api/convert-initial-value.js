@@ -10,7 +10,7 @@ const convertInitialValue = (initialValue, dataType) => {
       typeof value === 'object'
         ? {
             ...value,
-            value: Object.prototype.hasOwnProperty.call(value, 'value') ? convertType(dataType, value.value) : value
+            value: Object.prototype.hasOwnProperty.call(value, 'value') ? convertType(dataType, value.value) : value,
           }
         : convertType(dataType, value)
     );

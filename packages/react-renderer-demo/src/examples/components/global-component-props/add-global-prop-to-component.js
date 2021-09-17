@@ -9,9 +9,9 @@ import { makeStyles } from '@material-ui/core/styles';
 const useInputClasses = makeStyles({
   root: {
     '& label': {
-      color: 'tomato'
-    }
-  }
+      color: 'tomato',
+    },
+  },
 });
 
 const AddGlobalPropToComponent = () => {
@@ -19,14 +19,14 @@ const AddGlobalPropToComponent = () => {
   const componentMapper = {
     [componentTypes.TEXT_FIELD]: {
       component: TextField,
-      classes: inputClasses
+      classes: inputClasses,
     },
     [componentTypes.SWITCH]: {
       component: Switch,
       FormControlLabelProps: {
-        labelPlacement: 'bottom'
-      }
-    }
+        labelPlacement: 'bottom',
+      },
+    },
   };
 
   const schema = {
@@ -35,14 +35,14 @@ const AddGlobalPropToComponent = () => {
         component: componentTypes.TEXT_FIELD,
         name: 'custom-text-field',
         label: 'Custom label color',
-        helperText: 'nice'
+        helperText: 'nice',
       },
       {
         component: componentTypes.SWITCH,
         name: 'custom-switch-field',
-        label: 'Label is on the bottom of the switch'
-      }
-    ]
+        label: 'Label is on the bottom of the switch',
+      },
+    ],
   };
   return <FormRenderer FormTemplate={FormTemplate} schema={schema} componentMapper={componentMapper} onSubmit={console.log} />;
 };

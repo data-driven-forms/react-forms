@@ -25,7 +25,7 @@ const ShareButton = ({ path }) => (
 );
 
 ShareButton.propTypes = {
-  path: PropTypes.string.isRequired
+  path: PropTypes.string.isRequired,
 };
 
 export default ShareButton;

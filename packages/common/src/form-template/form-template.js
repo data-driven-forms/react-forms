@@ -36,7 +36,7 @@ export const FormControls = ({
   ButtonGroup,
   formSpyProps,
   buttonsProps,
-  buttonGroupProps
+  buttonGroupProps,
 }) => {
   if (FormButtons) {
     return <FormButtons />;
@@ -60,7 +60,7 @@ export const FormControls = ({
     reset: canReset ? (
       <Button key="form-reset" type="button" buttonType="reset" disabled={pristine} onClick={onReset} label={resetLabel} {...reset} />
     ) : null,
-    cancel: onCancel ? <Button key="form-cancel" type="button" buttonType="cancel" onClick={onCancel} label={cancelLabel} {...cancel} /> : null
+    cancel: onCancel ? <Button key="form-cancel" type="button" buttonType="cancel" onClick={onCancel} label={cancelLabel} {...cancel} /> : null,
   };
 
   return (
@@ -88,12 +88,12 @@ FormControls.propTypes = {
     pristine: PropTypes.bool,
     validating: PropTypes.bool,
     form: PropTypes.shape({
-      reset: PropTypes.func
+      reset: PropTypes.func,
     }),
-    values: PropTypes.object
+    values: PropTypes.object,
   }),
   buttonGroupProps: PropTypes.object,
-  buttonsProps: PropTypes.object
+  buttonsProps: PropTypes.object,
 };
 
 FormControls.defaultProps = {
@@ -103,7 +103,7 @@ FormControls.defaultProps = {
   canReset: false,
   canSubmit: false,
   buttonOrder: ['submit', 'reset', 'cancel'],
-  buttonsProps: {}
+  buttonsProps: {},
 };
 
 const FormTemplate = ({
@@ -127,7 +127,7 @@ const FormTemplate = ({
 }) => {
   const {
     schema: { title, description, label },
-    formFields
+    formFields,
   } = rest;
   const { onReset, onCancel, getState, handleSubmit } = useFormApi();
 
@@ -186,13 +186,13 @@ FormTemplate.propTypes = {
   buttonGroupProps: PropTypes.object,
   buttonsProps: PropTypes.object,
   BeforeError: PropTypes.elementType,
-  alertProps: PropTypes.object
+  alertProps: PropTypes.object,
 };
 
 FormTemplate.defaultProps = {
   showFormControls: true,
   disableSubmit: [],
-  Header: React.Fragment
+  Header: React.Fragment,
 };
 
 export default FormTemplate;

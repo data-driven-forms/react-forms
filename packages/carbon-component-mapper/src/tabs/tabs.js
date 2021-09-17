@@ -10,9 +10,9 @@ import { useFormApi } from '@data-driven-forms/react-form-renderer';
 const useStyles = createUseStyles({
   tab: {
     '&>:not(:last-child)': {
-      marginBottom: 32
-    }
-  }
+      marginBottom: 32,
+    },
+  },
 });
 
 const Tabs = ({ fields, component, name, TabWrapperProps, ...props }) => {
@@ -41,13 +41,13 @@ Tabs.propTypes = {
       name: PropTypes.string,
       fields: PropTypes.array,
       title: PropTypes.node,
-      label: PropTypes.node
+      label: PropTypes.node,
     })
-  )
+  ),
 };
 
 Tabs.defaultProps = {
-  TabWrapperProps: {}
+  TabWrapperProps: {},
 };
 
 export default Tabs;

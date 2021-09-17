@@ -5,8 +5,8 @@ import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
   root: {
-    margin: '1em 0 0.25em 0 !important'
-  }
+    margin: '1em 0 0.25em 0 !important',
+  },
 });
 
 const FormField = ({ className, ...props }) => {

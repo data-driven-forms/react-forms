@@ -11,13 +11,13 @@ const Form = ({ children, ...props }) => (
 );
 
 Form.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 const Description = ({ children, ...props }) => <span {...props}>{children}</span>;
 
 Description.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 const Title = ({ children, ...props }) => (
@@ -27,13 +27,13 @@ const Title = ({ children, ...props }) => (
 );
 
 Title.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 const ButtonGroup = ({ children, ...props }) => <div {...props}>{children}</div>;
 
 ButtonGroup.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 const Button = ({ label, children, buttonType, variant, ...props }) => (
@@ -46,7 +46,7 @@ Button.propTypes = {
   children: PropTypes.node,
   label: PropTypes.node,
   variant: PropTypes.string,
-  buttonType: PropTypes.string
+  buttonType: PropTypes.string,
 };
 
 const MuiFormTemplate = (props) => (

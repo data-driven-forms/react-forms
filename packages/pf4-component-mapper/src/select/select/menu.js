@@ -45,7 +45,7 @@ const checkScrollVisibility = (scrollableParent, selectRoot, menuRoot) => {
   return {
     rootPosition: parentProportions.y,
     cropSize: rootProportions.y + rootProportions.height - parentProportions.y,
-    maxHeight: window.innerHeight - menuProportions.top + 1
+    maxHeight: window.innerHeight - menuProportions.top + 1,
   };
 };
 
@@ -56,12 +56,12 @@ const MenuPortal = ({ selectToggleRef, menuPortalTarget, children }) => {
   useEffect(() => {
     setCropSize({ maxHeight: window.innerHeight - menuRef.current.getBoundingClientRect().top - 4 });
     const scrollParentElement = getScrollParent(selectToggleRef.current);
-    const scrollHandler = function() {
+    const scrollHandler = function () {
       setCropSize(checkScrollVisibility(scrollParentElement, selectToggleRef.current, menuRef.current));
       setPosition(getMenuPosition(selectToggleRef.current));
     };
 
-    const resizeHandler = function() {
+    const resizeHandler = function () {
       setCropSize((prevSize) => ({ ...prevSize, maxHeight: window.innerHeight - menuRef.current.getBoundingClientRect().top - 4 }));
       setPosition(getMenuPosition(selectToggleRef.current));
     };
@@ -78,8 +78,8 @@ const MenuPortal = ({ selectToggleRef, menuPortalTarget, children }) => {
   const sizedMenu = React.cloneElement(children, {
     style: {
       maxHeight: cropSize < 0 ? maxHeight + cropSize : maxHeight,
-      overflow: 'auto'
-    }
+      overflow: 'auto',
+    },
   });
   const portalDiv = (
     <div
@@ -91,7 +91,7 @@ const MenuPortal = ({ selectToggleRef, menuPortalTarget, children }) => {
         top: cropSize < 0 ? rootPosition : top,
         left: position.left,
         width: position.width,
-        overflow: 'hidden'
+        overflow: 'hidden',
       }}
     >
       {cropSize < 0 ? <div style={{ position: 'relative', top: cropSize, width: position.width }}>{sizedMenu}</div> : sizedMenu}
@@ -116,7 +116,7 @@ const Menu = ({
   isFetching,
   menuPortalTarget,
   menuIsPortal,
-  selectToggleRef
+  selectToggleRef,
 }) => {
   const filteredOptions = isSearchable ? filterOptions(options, filterValue) : options;
   const menuItems = (
@@ -136,7 +136,7 @@ const Menu = ({
           index,
           isActive: highlightedIndex === index,
           isSelected: isMulti ? !!selectedItem.find(({ value }) => item.value === value) : selectedItem === item.value,
-          onMouseUp: (e) => e.stopPropagation() // we need this to prevent issues with portal menu not selecting a option
+          onMouseUp: (e) => e.stopPropagation(), // we need this to prevent issues with portal menu not selecting a option
         });
         return <Option key={item.key || item.value || (typeof item.label === 'string' && item.label) || item} item={item} {...itemProps} />;
       })}

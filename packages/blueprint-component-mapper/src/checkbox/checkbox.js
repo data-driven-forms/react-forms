@@ -17,7 +17,7 @@ const SingleCheckbox = ({ input, isDisabled, disabled, label, providerRequired, 
         <span>
           {label} {providerRequired}
         </span>
-      )
+      ),
     })}
     disabled={disabled || isDisabled}
     {...input}
@@ -30,7 +30,7 @@ SingleCheckbox.propTypes = {
   label: PropTypes.node,
   isRequired: PropTypes.bool,
   providerRequired: PropTypes.node,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
 };
 
 const Wrapper = ({ children, isRequired, showError, error, validateOnMount, ...props }) => {
@@ -52,7 +52,7 @@ Wrapper.propTypes = {
   isRequired: PropTypes.bool,
   showError: PropTypes.bool,
   error: PropTypes.string,
-  validateOnMount: PropTypes.bool
+  validateOnMount: PropTypes.bool,
 };
 
 const WrapperCheckbox = (props) =>
@@ -63,7 +63,7 @@ const WrapperCheckbox = (props) =>
   );
 
 WrapperCheckbox.propTypes = {
-  options: PropTypes.array
+  options: PropTypes.array,
 };
 
 export default WrapperCheckbox;

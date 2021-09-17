@@ -12,7 +12,7 @@ describe('WizardToggle', () => {
       activeStepIndex: 0,
       currentStep: {
         title: 'Title',
-        name: 1
+        name: 1,
       },
       dispatch,
       isOpen: false,
@@ -23,9 +23,9 @@ describe('WizardToggle', () => {
           substepOf: undefined,
           substepOfTitle: undefined,
           index: 0,
-          primary: true
-        }
-      ]
+          primary: true,
+        },
+      ],
     };
   });
 
@@ -43,7 +43,7 @@ describe('WizardToggle', () => {
   it('closes dropdown', () => {
     initialProps = {
       ...initialProps,
-      isOpen: true
+      isOpen: true,
     };
 
     const wrapper = mount(<WizardToggle {...initialProps} />);
@@ -67,7 +67,7 @@ describe('WizardToggle', () => {
       ...initialProps,
       currentStep: {
         title: 'Title special',
-        name: 3
+        name: 3,
       },
       navSchema: [
         {
@@ -76,7 +76,7 @@ describe('WizardToggle', () => {
           substepOf: undefined,
           substepOfTitle: undefined,
           index: 0,
-          primary: true
+          primary: true,
         },
         {
           name: 2,
@@ -84,7 +84,7 @@ describe('WizardToggle', () => {
           substepOf: 'substep',
           substepOfTitle: 'substep title',
           index: 1,
-          primary: true
+          primary: true,
         },
         {
           name: 3,
@@ -92,24 +92,14 @@ describe('WizardToggle', () => {
           substepOf: 'substep',
           substepOfTitle: 'substep title',
           index: 2,
-          primary: true
-        }
-      ]
+          primary: true,
+        },
+      ],
     };
 
     const wrapper = mount(<WizardToggle {...initialProps} />);
 
-    expect(
-      wrapper
-        .find('.pf-c-wizard__toggle-list-item')
-        .first()
-        .text()
-    ).toEqual('2 substep title');
-    expect(
-      wrapper
-        .find('.pf-c-wizard__toggle-list-item')
-        .last()
-        .text()
-    ).toEqual('Title special');
+    expect(wrapper.find('.pf-c-wizard__toggle-list-item').first().text()).toEqual('2 substep title');
+    expect(wrapper.find('.pf-c-wizard__toggle-list-item').last().text()).toEqual('Title special');
   });
 });

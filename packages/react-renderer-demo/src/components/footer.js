@@ -22,8 +22,8 @@ import DiscordIcon from './common/discord-svg-icon';
 const useRepoLinkStyles = makeStyles(() => ({
   listLink: {
     display: 'flex',
-    alignContent: 'center'
-  }
+    alignContent: 'center',
+  },
 }));
 
 const RepoLink = ({ href, icon, label }) => {
@@ -55,32 +55,32 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 0,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
+      duration: theme.transitions.duration.leavingScreen,
+    }),
   },
   footerShift: {
     marginLeft: drawerWidth,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
+      duration: theme.transitions.duration.leavingScreen,
+    }),
   },
   foooterCard: {
     backgroundColor: 'transparent',
     margin: 16,
     padding: 24,
     borderRadius: 2,
-    display: 'flex'
+    display: 'flex',
   },
   foooterRight: {
-    float: 'right'
+    float: 'right',
   },
   listHeader: {
     display: 'flex',
     alignItems: 'center',
     color: theme.palette.grey[800],
-    fontSize: 16
-  }
+    fontSize: 16,
+  },
 }));
 
 const Footer = ({ open }) => {
@@ -89,7 +89,7 @@ const Footer = ({ open }) => {
     <React.Fragment>
       <footer
         className={clsx(classes.footer, {
-          [classes.footerShift]: open
+          [classes.footerShift]: open,
         })}
       >
         <Grid container justify="space-between">

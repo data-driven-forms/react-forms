@@ -17,12 +17,12 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 16,
     [theme.breakpoints.up('md')]: {
       paddingLeft: 'calc((100% - (768px + 17%)) / 2)',
-      paddingRight: 'calc((100% - (768px + 17%)) / 2)'
-    }
+      paddingRight: 'calc((100% - (768px + 17%)) / 2)',
+    },
   },
   link: {
-    textDecoration: 'none'
-  }
+    textDecoration: 'none',
+  },
 }));
 
 const ConnectedLinks = () => {

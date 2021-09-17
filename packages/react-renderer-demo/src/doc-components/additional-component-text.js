@@ -14,7 +14,7 @@ const Checkbox = ({ activeMapper, component }) => {
 
 Checkbox.propTypes = {
   activeMapper: PropTypes.string.isRequired,
-  component: PropTypes.string.isRequired
+  component: PropTypes.string.isRequired,
 };
 
 export default Checkbox;

@@ -25,7 +25,7 @@ export const convertOptions = (options, sort) => {
     id: options.value || options.key || options.label || options.text,
     isChecked: false,
     ...options,
-    ...(options.children && { children: convertOptions(options.children, sort).filter(Boolean) })
+    ...(options.children && { children: convertOptions(options.children, sort).filter(Boolean) }),
   };
 };
 
@@ -46,7 +46,7 @@ export const selectedOptions = (options, value, selected) => {
     if (someSelected.length) {
       return {
         ...options,
-        children: someSelected
+        children: someSelected,
       };
     }
   }
@@ -69,26 +69,13 @@ export const getValueFromSelected = (options, newValue = []) => {
 };
 
 const DualListTreeSelect = (props) => {
-  const {
-    label,
-    isRequired,
-    helperText,
-    meta,
-    validateOnMount,
-    description,
-    hideLabel,
-    id,
-    input,
-    FormGroupProps,
-    options,
-    isSortable,
-    ...rest
-  } = useFieldApi({
-    ...props,
-    FieldProps: {
-      isEqual: (current, initial) => isEqual([...(current || [])].sort(), [...(initial || [])].sort())
-    }
-  });
+  const { label, isRequired, helperText, meta, validateOnMount, description, hideLabel, id, input, FormGroupProps, options, isSortable, ...rest } =
+    useFieldApi({
+      ...props,
+      FieldProps: {
+        isEqual: (current, initial) => isEqual([...(current || [])].sort(), [...(initial || [])].sort()),
+      },
+    });
 
   const [sortConfig, setSortConfig] = useState(() => ({ left: isSortable && 'asc', right: isSortable && 'asc' }));
 
@@ -134,7 +121,7 @@ DualListTreeSelect.propTypes = {
   hideLabel: PropTypes.bool,
   id: PropTypes.string,
   isSearchable: PropTypes.bool,
-  isSortable: PropTypes.bool
+  isSortable: PropTypes.bool,
 };
 
 export default DualListTreeSelect;

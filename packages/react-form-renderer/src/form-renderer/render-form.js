@@ -11,11 +11,11 @@ const FormFieldHideWrapper = ({ hideField, children }) => (hideField ? <div hidd
 
 FormFieldHideWrapper.propTypes = {
   hideField: PropTypes.bool,
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired,
 };
 
 FormFieldHideWrapper.defaultProps = {
-  hideField: false
+  hideField: false,
 };
 
 const ConditionTriggerWrapper = ({ condition, values, children, field }) => (
@@ -28,7 +28,7 @@ ConditionTriggerWrapper.propTypes = {
   condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   children: PropTypes.node.isRequired,
   field: PropTypes.object,
-  values: PropTypes.object.isRequired
+  values: PropTypes.object.isRequired,
 };
 
 const ConditionTriggerDetector = ({ values = {}, triggers = [], children, condition, field }) => {
@@ -63,7 +63,7 @@ ConditionTriggerDetector.propTypes = {
   triggers: PropTypes.arrayOf(PropTypes.string),
   children: PropTypes.node,
   condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  field: PropTypes.object.isRequired
+  field: PropTypes.object.isRequired,
 };
 
 const FormConditionWrapper = ({ condition, children, field }) => {
@@ -82,7 +82,7 @@ const FormConditionWrapper = ({ condition, children, field }) => {
 FormConditionWrapper.propTypes = {
   condition: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   children: PropTypes.node.isRequired,
-  field: PropTypes.object
+  field: PropTypes.object,
 };
 
 const SingleField = ({ component, condition, hideField, ...rest }) => {
@@ -107,9 +107,9 @@ SingleField.propTypes = {
   validate: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object])),
   initialValue: PropTypes.any,
   actions: PropTypes.shape({
-    [PropTypes.string]: PropTypes.func
+    [PropTypes.string]: PropTypes.func,
   }),
-  resolveProps: PropTypes.func
+  resolveProps: PropTypes.func,
 };
 
 const renderForm = (fields) => fields.map((field) => (Array.isArray(field) ? renderForm(field) : <SingleField key={field.name} {...field} />));

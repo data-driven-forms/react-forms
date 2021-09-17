@@ -1,7 +1,7 @@
 const prepareComponentProps = ({ component, rest, componentMapper, actionMapper }) => {
   let componentProps = {
     component,
-    ...rest
+    ...rest,
   };
 
   const componentBinding = componentMapper[component];
@@ -19,10 +19,10 @@ const prepareComponentProps = ({ component, rest, componentMapper, actionMapper 
         ? {
             resolveProps: (...args) => ({
               ...mapperProps.resolveProps(...args),
-              ...rest.resolveProps(...args)
-            })
+              ...rest.resolveProps(...args),
+            }),
           }
-        : {})
+        : {}),
     };
   } else {
     Component = componentBinding;
@@ -43,7 +43,7 @@ const prepareComponentProps = ({ component, rest, componentMapper, actionMapper 
     if (componentProps.resolveProps && overrideProps.resolveProps) {
       mergedResolveProps = (...args) => ({
         ...componentProps.resolveProps(...args),
-        ...overrideProps.resolveProps(...args)
+        ...overrideProps.resolveProps(...args),
       });
     }
 
@@ -55,7 +55,7 @@ const prepareComponentProps = ({ component, rest, componentMapper, actionMapper 
     componentProps,
     overrideProps,
     mergedResolveProps,
-    Component
+    Component,
   };
 };
 

@@ -8,8 +8,8 @@ import { useFormApi } from '@data-driven-forms/react-form-renderer';
 const useStyles = makeStyles(() => ({
   grid: {
     paddingRight: 0,
-    paddingLeft: 0
-  }
+    paddingLeft: 0,
+  },
 }));
 
 const SubForm = ({
@@ -59,7 +59,7 @@ SubForm.propTypes = {
   TitleProps: PropTypes.object,
   DescriptionProps: PropTypes.object,
   DescriptionGridProps: PropTypes.object,
-  ItemsGridProps: PropTypes.object
+  ItemsGridProps: PropTypes.object,
 };
 
 export default SubForm;

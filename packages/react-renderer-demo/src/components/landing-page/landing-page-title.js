@@ -10,11 +10,11 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: '0.6px',
     textAlign: 'center',
     textTransform: 'uppercase',
-    fontFamily: '"Montserrat", sans-serif'
+    fontFamily: '"Montserrat", sans-serif',
   },
   logoWord: {
-    display: 'inline-block'
-  }
+    display: 'inline-block',
+  },
 }));
 
 const LandingPageTitle = () => {

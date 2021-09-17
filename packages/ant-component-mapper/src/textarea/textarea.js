@@ -8,20 +8,8 @@ import FormGroup from '../form-group';
 const { TextArea } = Input;
 
 const Textarea = (props) => {
-  const {
-    input,
-    isReadOnly,
-    isDisabled,
-    placeholder,
-    isRequired,
-    label,
-    helperText,
-    description,
-    validateOnMount,
-    meta,
-    FormItemProps,
-    ...rest
-  } = useFieldApi(props);
+  const { input, isReadOnly, isDisabled, placeholder, isRequired, label, helperText, description, validateOnMount, meta, FormItemProps, ...rest } =
+    useFieldApi(props);
 
   return (
     <FormGroup
@@ -54,7 +42,7 @@ Textarea.propTypes = {
   helperText: PropTypes.node,
   validateOnMount: PropTypes.bool,
   description: PropTypes.node,
-  FormItemProps: PropTypes.object
+  FormItemProps: PropTypes.object,
 };
 
 export default Textarea;

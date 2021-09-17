@@ -19,7 +19,7 @@ const ArrayItem = memo(
     ArrayItemProps,
     FieldsContainerProps,
     RemoveContainerProps,
-    RemoveButtonProps
+    RemoveButtonProps,
   }) => {
     const { renderForm } = useFormApi();
 
@@ -55,17 +55,17 @@ ArrayItem.propTypes = {
   ArrayItemProps: PropTypes.object.isRequired,
   FieldsContainerProps: PropTypes.object.isRequired,
   RemoveContainerProps: PropTypes.object.isRequired,
-  RemoveButtonProps: PropTypes.object.isRequired
+  RemoveButtonProps: PropTypes.object.isRequired,
 };
 
 const defaultButtonLabels = {
   add: 'ADD',
-  remove: 'REMOVE'
+  remove: 'REMOVE',
 };
 
 const initialState = {
   index: 0,
-  history: []
+  history: [],
 };
 
 export const reducer = (state, { type, action }) => {
@@ -73,22 +73,22 @@ export const reducer = (state, { type, action }) => {
     case 'redo':
       return {
         ...state,
-        index: state.index + 1
+        index: state.index + 1,
       };
     case 'action':
       return {
         index: state.index + 1,
-        history: [...state.history.slice(0, state.index), action]
+        history: [...state.history.slice(0, state.index), action],
       };
     case 'undo':
       return {
         ...state,
-        index: state.index - 1
+        index: state.index - 1,
       };
     case 'resetHistory':
       return {
         ...state,
-        history: state.history.slice(0, state.index)
+        history: state.history.slice(0, state.index),
       };
     default:
       return state;
@@ -135,7 +135,7 @@ const DynamicArray = ({ ...props }) => {
 
   const combinedButtonLabels = {
     ...defaultButtonLabels,
-    ...buttonLabels
+    ...buttonLabels,
   };
 
   const { dirty, submitFailed, error, submitError } = meta;
@@ -272,7 +272,7 @@ DynamicArray.propTypes = {
   AddButtonProps: PropTypes.object,
   FieldArrayDescriptionProps: PropTypes.object,
   NoItemsMessageProps: PropTypes.object,
-  ErrorMessageProps: PropTypes.object
+  ErrorMessageProps: PropTypes.object,
 };
 
 DynamicArray.defaultProps = {
@@ -294,7 +294,7 @@ DynamicArray.defaultProps = {
   AddButtonProps: {},
   FieldArrayDescriptionProps: {},
   NoItemsMessageProps: {},
-  ErrorMessageProps: {}
+  ErrorMessageProps: {},
 };
 
 export default DynamicArray;

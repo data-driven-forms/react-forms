@@ -6,8 +6,8 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 
 const useStyles = makeStyles({
   toExampleLink: {
-    textDecoration: 'none'
-  }
+    textDecoration: 'none',
+  },
 });
 
 const ExampleLink = ({ to, text = 'To example' }) => {
@@ -28,7 +28,7 @@ const ExampleLink = ({ to, text = 'To example' }) => {
 
 ExampleLink.propTypes = {
   to: PropTypes.string.isRequired,
-  text: PropTypes.node
+  text: PropTypes.node,
 };
 
 export default ExampleLink;

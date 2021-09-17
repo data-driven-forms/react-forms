@@ -16,10 +16,10 @@ describe('<Select />', () => {
           name: 'select',
           options: [
             { label: 'option 1', value: 1 },
-            { label: 'option 2', value: 2 }
-          ]
-        }
-      ]
+            { label: 'option 2', value: 2 },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(
@@ -38,10 +38,10 @@ describe('<Select />', () => {
           isMulti: true,
           options: [
             { label: 'option 1', value: 1 },
-            { label: 'option 2', value: 2 }
-          ]
-        }
-      ]
+            { label: 'option 2', value: 2 },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(

@@ -20,7 +20,7 @@ const Wizard = ({ fields, isDynamic, crossroads, Wizard, component, initialState
     maxStepIndex: 0,
     ...initialState,
     isDynamic: isDynamic || fields.some(({ nextStep }) => DYNAMIC_WIZARD_TYPES.includes(typeof nextStep)),
-    loading: true
+    loading: true,
   });
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const Wizard = ({ fields, isDynamic, crossroads, Wizard, component, initialState
     // Add the final step fields to history
     const finalRegisteredFieldsHistory = {
       ...state.registeredFieldsHistory,
-      [state.activeStep]: getRegisteredFields()
+      [state.activeStep]: getRegisteredFields(),
     };
 
     const finalObject = {};
@@ -81,7 +81,7 @@ const Wizard = ({ fields, isDynamic, crossroads, Wizard, component, initialState
         formOptions: {
           ...formOptions,
           onCancel,
-          handleSubmit
+          handleSubmit,
         },
         navSchema: state.navSchema,
         activeStepIndex: state.activeStepIndex,
@@ -89,7 +89,7 @@ const Wizard = ({ fields, isDynamic, crossroads, Wizard, component, initialState
         isDynamic: state.isDynamic,
         crossroads,
         prevSteps: state.prevSteps,
-        selectNext
+        selectNext,
       }}
     >
       <Wizard {...props} />
@@ -100,7 +100,7 @@ const Wizard = ({ fields, isDynamic, crossroads, Wizard, component, initialState
 Wizard.propTypes = {
   fields: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+      name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     })
   ).isRequired,
   isDynamic: PropTypes.bool,
@@ -108,11 +108,11 @@ Wizard.propTypes = {
   Wizard: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   component: PropTypes.any,
   initialState: PropTypes.object,
-  conditionalSubmitFlag: PropTypes.string
+  conditionalSubmitFlag: PropTypes.string,
 };
 
 Wizard.defaultProps = {
-  conditionalSubmitFlag: CONDITIONAL_SUBMIT_FLAG
+  conditionalSubmitFlag: CONDITIONAL_SUBMIT_FLAG,
 };
 
 export default Wizard;
@@ -128,7 +128,7 @@ export const wizardProps = {
   activeStepIndex: PropTypes.number,
   maxStepIndex: PropTypes.number,
   formOptions: PropTypes.shape({
-    onCancel: PropTypes.func
+    onCancel: PropTypes.func,
   }),
-  prevSteps: PropTypes.array
+  prevSteps: PropTypes.array,
 };

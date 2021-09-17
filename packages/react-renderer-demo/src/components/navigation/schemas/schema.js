@@ -10,90 +10,90 @@ import utilitiesSchema from './utilities.schema';
 const schema = [
   {
     link: 'introduction',
-    linkText: 'Introduction'
+    linkText: 'Introduction',
   },
   {
     linkText: 'Installation',
-    link: 'installation'
+    link: 'installation',
   },
   {
     title: 'Schema',
     noRoute: true,
     link: 'schema',
-    fields: schemaNav
+    fields: schemaNav,
   },
   {
     title: 'Components',
     link: 'components',
     noRoute: true,
-    fields: schemaRenderer
+    fields: schemaRenderer,
   },
   {
     title: 'Hooks',
     link: 'hooks',
     noRoute: true,
-    fields: schemaHooks
+    fields: schemaHooks,
   },
   {
     title: 'Mappers',
     link: 'mappers',
     noRoute: true,
-    fields: mappersSchema
+    fields: mappersSchema,
   },
   {
     title: 'Provided mappers',
     link: 'provided-mappers',
     noRoute: true,
-    fields: providedMappersSchema
+    fields: providedMappersSchema,
   },
   {
     title: 'Utilities',
     link: 'utilities',
     noRoute: true,
-    fields: utilitiesSchema
+    fields: utilitiesSchema,
   },
   {
     title: 'Examples',
     link: 'examples',
     noRoute: true,
-    fields: customExamplesSchema
+    fields: customExamplesSchema,
   },
   {
     linkText: 'Form builder',
-    link: 'live-editor'
+    link: 'live-editor',
   },
   {
     linkText: 'Testing',
-    link: 'testing'
+    link: 'testing',
   },
   {
     linkText: 'Typescript',
-    link: 'typescript'
+    link: 'typescript',
   },
   {
     linkText: 'Development setup',
-    link: 'development-setup'
+    link: 'development-setup',
   },
   {
     linkText: 'Optimization',
-    link: 'optimization'
+    link: 'optimization',
   },
   {
     linkText: 'Releases',
-    link: 'releases'
+    link: 'releases',
   },
   {
     linkText: 'FAQ',
-    link: 'faq'
+    link: 'faq',
   },
   {
     link: 'migration-guide-v3',
-    linkText: 'Migration guide to version 3'
+    linkText: 'Migration guide to version 3',
   },
   {
     link: 'migration-guide',
-    linkText: 'Migration guide to version 2'
-  }
+    linkText: 'Migration guide to version 2',
+  },
 ];
 
 const getNextLink = (item, itemIndex, source) => {
@@ -103,7 +103,7 @@ const getNextLink = (item, itemIndex, source) => {
 
   return {
     link: nextItem.link,
-    label: nextItem.linkText || nextItem.title
+    label: nextItem.linkText || nextItem.title,
   };
 };
 
@@ -113,7 +113,7 @@ const getPrevLink = (item, itemIndex, source) => {
 
   return {
     link: prevItem.link,
-    label: prevItem.linkText || prevItem.title
+    label: prevItem.linkText || prevItem.title,
   };
 };
 
@@ -129,9 +129,9 @@ export const flatSchema = flatMap(schema, (item) =>
           child.link = child.link || child.component;
           return {
             ...child,
-            link: `${item.link}${child.link.match(/^\?/) ? '' : '/'}${child.link}`
+            link: `${item.link}${child.link.match(/^\?/) ? '' : '/'}${child.link}`,
           };
-        })
+        }),
       ]
     : [item]
 )
@@ -142,8 +142,8 @@ export const flatSchema = flatMap(schema, (item) =>
       {
         ...curr,
         prev: getPrevLink(curr, currentIndex, source),
-        next: getNextLink(curr, currentIndex, source)
-      }
+        next: getNextLink(curr, currentIndex, source),
+      },
     ],
     []
   );

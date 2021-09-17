@@ -28,7 +28,7 @@ export const components = {
   SubForm,
   Wizard,
   DualListSelect,
-  Slider
+  Slider,
 };
 
 const componentMapper = {
@@ -46,7 +46,7 @@ const componentMapper = {
   [componentTypes.WIZARD]: Wizard,
   [componentTypes.FIELD_ARRAY]: FieldArray,
   [componentTypes.DUAL_LIST_SELECT]: DualListSelect,
-  [componentTypes.SLIDER]: Slider
+  [componentTypes.SLIDER]: Slider,
 };
 
 export default componentMapper;

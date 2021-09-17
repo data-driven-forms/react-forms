@@ -73,5 +73,5 @@ export const dependencies = {
   '@patternfly/react-styles': 'latest',
   'prop-types': 'latest',
   '@babel/runtime': '^7.12.1',
-  tslib: '^2.0.0'
+  tslib: '^2.0.0',
 };
