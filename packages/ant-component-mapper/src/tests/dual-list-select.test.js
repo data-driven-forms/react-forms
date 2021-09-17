@@ -22,34 +22,34 @@ describe('DualListSelect', () => {
           options: [
             {
               value: 'cats',
-              label: 'cats'
+              label: 'cats',
             },
             {
               value: 'cats_1',
-              label: 'cats_1'
+              label: 'cats_1',
             },
             {
               value: 'cats_2',
-              label: 'cats_2'
+              label: 'cats_2',
             },
             {
               value: 'zebras',
-              label: 'zebras'
+              label: 'zebras',
             },
             {
               value: 'pigeons',
-              label: 'pigeons'
-            }
-          ]
-        }
-      ]
+              label: 'pigeons',
+            },
+          ],
+        },
+      ],
     };
 
     initialProps = {
       onSubmit: (values) => onSubmit(values),
       componentMapper,
       FormTemplate: (props) => <FormTemplate {...props} showFormControls={false} />,
-      schema
+      schema,
     };
   });
 
@@ -71,20 +71,12 @@ describe('DualListSelect', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper
-        .find('.ant-transfer-list-content-item')
-        .first()
-        .props()
-        .onClick({});
+      wrapper.find('.ant-transfer-list-content-item').first().props().onClick({});
     });
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find('button')
-        .at(0)
-        .props()
-        .onClick();
+      wrapper.find('button').at(0).props().onClick();
     });
     wrapper.update();
 
@@ -103,20 +95,12 @@ describe('DualListSelect', () => {
     expect(onSubmit).toHaveBeenCalledWith({ 'dual-Menu': ['cats'] });
     onSubmit.mockClear();
     await act(async () => {
-      wrapper
-        .find('.ant-transfer-list-content-item')
-        .last()
-        .props()
-        .onClick({});
+      wrapper.find('.ant-transfer-list-content-item').last().props().onClick({});
     });
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find('button')
-        .at(1)
-        .props()
-        .onClick();
+      wrapper.find('button').at(1).props().onClick();
     });
     wrapper.update();
     await act(async () => {

@@ -25,20 +25,20 @@ const schema = {
     {
       component: componentTypes.TEXT_FIELD,
       name: 'original',
-      label: 'Change me'
+      label: 'Change me',
     },
     {
       component: componentTypes.TEXT_FIELD,
       name: 'updated',
       label: 'Updated value',
-      isReadOnly: true
+      isReadOnly: true,
     },
     {
       component: 'field-listener',
       name: 'listener',
-      hideField: true
-    }
-  ]
+      hideField: true,
+    },
+  ],
 };
 
 const ValueListener = () => (
@@ -46,7 +46,7 @@ const ValueListener = () => (
     schema={schema}
     componentMapper={{
       [componentTypes.TEXT_FIELD]: TextField,
-      'field-listener': FieldListener
+      'field-listener': FieldListener,
     }}
     FormTemplate={FormTemplate}
     onSubmit={console.log}

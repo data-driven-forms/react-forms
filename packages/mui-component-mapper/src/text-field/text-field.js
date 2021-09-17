@@ -38,7 +38,7 @@ const TextField = (props) => {
         required={isRequired}
         inputProps={{
           readOnly: isReadOnly,
-          ...inputProps
+          ...inputProps,
         }}
         {...rest}
       />
@@ -58,7 +58,7 @@ TextField.propTypes = {
   validateOnMount: PropTypes.bool,
   description: PropTypes.node,
   inputProps: PropTypes.object,
-  FormFieldGridProps: PropTypes.object
+  FormFieldGridProps: PropTypes.object,
 };
 
 export default TextField;

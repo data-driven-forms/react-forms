@@ -24,7 +24,7 @@ const getSelectValue = (stateValue, simpleValue, isMulti, allOptions) => {
     enhancedValue = [
       ...enhancedValue,
       ...(hasSelectAll && selectedAll ? [simpleValue ? hasSelectAll.value : hasSelectAll] : []),
-      ...(hasSelectNone && selectedNone ? [simpleValue ? hasSelectNone.value : hasSelectNone] : [])
+      ...(hasSelectNone && selectedNone ? [simpleValue ? hasSelectNone.value : hasSelectNone] : []),
     ];
   }
 
@@ -79,7 +79,7 @@ const Select = ({
     isLoading: false,
     options: propsOptions,
     promises: {},
-    isInitialLoaded: false
+    isInitialLoaded: false,
   });
 
   const isMounted = useIsMounted();
@@ -159,7 +159,7 @@ const Select = ({
             dispatch({
               type: 'setPromises',
               payload: { [inputValue]: false },
-              options
+              options,
             });
           }
         })
@@ -180,7 +180,7 @@ const Select = ({
   return (
     <SelectComponent
       className={clsx(classNamePrefix, {
-        'has-error': invalid
+        'has-error': invalid,
       })}
       {...props}
       isDisabled={props.isDisabled || props.isReadOnly}
@@ -219,7 +219,7 @@ Select.propTypes = {
   noOptionsMessage: PropTypes.node,
   isSearchable: PropTypes.bool,
   SelectComponent: PropTypes.elementType.isRequired,
-  noValueUpdates: PropTypes.bool
+  noValueUpdates: PropTypes.bool,
 };
 
 Select.defaultProps = {
@@ -229,7 +229,7 @@ Select.defaultProps = {
   pluckSingleValue: true,
   placeholder: 'Choose...',
   isSearchable: false,
-  isClearable: false
+  isClearable: false,
 };
 
 export default Select;

@@ -80,7 +80,7 @@ Select.propTypes = {
   options: PropTypes.arrayOf(PropTypes.shape({ value: PropTypes.any.isRequired, label: PropTypes.node.isRequired })).isRequired,
   description: PropTypes.node,
   FormItemProps: PropTypes.object,
-  isMulti: PropTypes.bool
+  isMulti: PropTypes.bool,
 };
 
 export default Select;

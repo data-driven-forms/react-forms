@@ -13,8 +13,8 @@ describe('#enhancedOnChange', () => {
       target: {
         type: 'checkbox',
         value: 'not me',
-        checked: false
-      }
+        checked: false,
+      },
     };
     expect(enhancedOnChange({ onChange: (value) => value, clearedValue }, value)).toEqual(value);
   });
@@ -23,8 +23,8 @@ describe('#enhancedOnChange', () => {
     const value = {
       target: {
         value: 'Me',
-        checked: 'not me'
-      }
+        checked: 'not me',
+      },
     };
     expect(enhancedOnChange({ onChange: (value) => value, clearedValue }, value)).toEqual('Me');
   });
@@ -34,16 +34,16 @@ describe('#enhancedOnChange', () => {
     const valueFalse = {
       target: {
         checked: false,
-        type: 'checkbox'
-      }
+        type: 'checkbox',
+      },
     };
     expect(enhancedOnChange({ onChange: (value) => value, clearedValue, initial }, valueFalse)).toEqual(valueFalse);
 
     const valueTrue = {
       target: {
         checked: true,
-        type: 'checkbox'
-      }
+        type: 'checkbox',
+      },
     };
     expect(enhancedOnChange({ onChange: (value) => value, clearedValue, initial }, valueTrue)).toEqual(valueTrue);
   });
@@ -101,7 +101,7 @@ describe('#enhancedOnChange', () => {
       const value = { target: { value: 'fakepath/file.foo', files: [], type: 'file' } };
       const expectedValue = {
         inputValue: 'fakepath/file.foo',
-        inputFiles: []
+        inputFiles: [],
       };
       expect(enhancedOnChange({ onChange: (value) => value }, value)).toEqual(expectedValue);
     });

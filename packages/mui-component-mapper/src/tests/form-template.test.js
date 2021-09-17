@@ -37,9 +37,9 @@ describe('<FormTemplate />', () => {
           fields: [
             {
               component: 'text-field',
-              name: 'field'
-            }
-          ]
+              name: 'field',
+            },
+          ],
         }}
         validate={({ field }) => {
           if (field) {
@@ -55,14 +55,8 @@ describe('<FormTemplate />', () => {
     expect(wrapper.find(Alert)).toHaveLength(0);
 
     await act(async () => {
-      wrapper
-        .find('input')
-        .first()
-        .instance().value = 'cats';
-      wrapper
-        .find('input')
-        .first()
-        .simulate('change');
+      wrapper.find('input').first().instance().value = 'cats';
+      wrapper.find('input').first().simulate('change');
     });
     wrapper.update();
 
@@ -77,9 +71,9 @@ describe('<FormTemplate />', () => {
           fields: [
             {
               component: 'text-field',
-              name: 'field'
-            }
-          ]
+              name: 'field',
+            },
+          ],
         }}
         validate={({ field }) => {
           if (field) {
@@ -95,14 +89,8 @@ describe('<FormTemplate />', () => {
     expect(wrapper.find(Alert)).toHaveLength(0);
 
     await act(async () => {
-      wrapper
-        .find('input')
-        .first()
-        .instance().value = 'cats';
-      wrapper
-        .find('input')
-        .first()
-        .simulate('change');
+      wrapper.find('input').first().instance().value = 'cats';
+      wrapper.find('input').first().simulate('change');
     });
     wrapper.update();
 

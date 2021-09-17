@@ -2,33 +2,33 @@ const baseFieldProps = [
   {
     name: 'name',
     type: 'string',
-    required: true
+    required: true,
   },
   {
     name: 'label',
     type: 'string',
-    required: false
+    required: false,
   },
   {
     name: 'helperText',
     type: 'string',
-    required: false
+    required: false,
   },
   {
     name: 'description',
     type: 'string',
-    required: false
+    required: false,
   },
   {
     name: 'isDisabled',
     type: 'boolean',
-    required: false
+    required: false,
   },
   {
     name: 'isReadOnly',
     type: 'boolean',
-    required: false
-  }
+    required: false,
+  },
 ];
 
 export default baseFieldProps;

@@ -21,16 +21,16 @@ describe('<Tabs />', () => {
             {
               title: 'title 1',
               name: 'tab1',
-              fields: [{ label: 'some-label', component: componentTypes.SWITCH, name: 'switch' }]
+              fields: [{ label: 'some-label', component: componentTypes.SWITCH, name: 'switch' }],
             },
             {
               title: 'title 2',
               name: 'tab2',
-              fields: [{ label: 'some-label', component: componentTypes.TEXT_FIELD, name: 'text_field' }]
-            }
-          ]
-        }
-      ]
+              fields: [{ label: 'some-label', component: componentTypes.TEXT_FIELD, name: 'text_field' }],
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(

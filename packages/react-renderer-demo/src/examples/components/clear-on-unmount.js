@@ -6,7 +6,7 @@ import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 import Typography from '@material-ui/core/Typography';
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 const schema = {
@@ -15,7 +15,7 @@ const schema = {
       component: componentTypes.TEXT_FIELD,
       name: 'condition-1',
       label: 'First condition',
-      helperText: 'Type John to show conditional fields'
+      helperText: 'Type John to show conditional fields',
     },
     {
       component: componentTypes.TEXT_FIELD,
@@ -25,8 +25,8 @@ const schema = {
       clearOnUnmount: true,
       condition: {
         when: 'condition-1',
-        is: 'John'
-      }
+        is: 'John',
+      },
     },
     {
       component: componentTypes.TEXT_FIELD,
@@ -35,10 +35,10 @@ const schema = {
       helperText: 'Change "First condition" field value to hide this field. When this field appears again it will preserve its previous value.',
       condition: {
         when: 'condition-1',
-        is: 'John'
-      }
-    }
-  ]
+        is: 'John',
+      },
+    },
+  ],
 };
 
 const ClearOnUnmount = () => {

@@ -13,7 +13,7 @@ const schema = {
       name: 'field-1',
       label: 'Field 1',
       helperText: 'To show field 2 type anything else than cat here!',
-      initialValue: 'cat'
+      initialValue: 'cat',
     },
     {
       component: componentTypes.TEXT_FIELD,
@@ -22,14 +22,14 @@ const schema = {
       initialValue: 'I am shown!',
       isDisabled: true,
       condition: {
-        not: { when: 'field-1', is: 'cat' }
-      }
-    }
-  ]
+        not: { when: 'field-1', is: 'cat' },
+      },
+    },
+  ],
 };
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 const NotCondition = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;

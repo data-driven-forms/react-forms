@@ -18,7 +18,7 @@ import {
   TextField,
   Typography,
   Paper,
-  Button
+  Button,
 } from '@material-ui/core';
 
 import SortIcon from '@material-ui/icons/ArrowUpward';
@@ -32,31 +32,31 @@ import { validationError } from '../validation-error/validation-error';
 
 const useStyles = makeStyles((theme) => ({
   allToLeftIcon: {
-    transform: 'scaleX(-1)'
+    transform: 'scaleX(-1)',
   },
   upsideDown: {
-    transform: 'scaleY(-1)'
+    transform: 'scaleY(-1)',
   },
   list: {
     height: 300,
-    overflow: 'auto'
+    overflow: 'auto',
   },
   button: {
     display: 'flex',
     justifyContent: 'center',
-    margin: theme.spacing(0.5, 0)
+    margin: theme.spacing(0.5, 0),
   },
   buttonsGrid: {
     height: '100%',
-    alignContent: 'center'
+    alignContent: 'center',
   },
   filter: {
-    width: '100%'
+    width: '100%',
   },
   toolbar: {
     paddingLeft: 16,
-    paddingRight: 16
-  }
+    paddingRight: 16,
+  },
 }));
 
 const ListInternal = ({
@@ -73,7 +73,7 @@ const ListInternal = ({
   ListItemSecondaryActionProps,
   checkboxVariant,
   PaperProps,
-  LeftPaperProps
+  LeftPaperProps,
 }) => {
   const classes = useStyles();
 
@@ -96,7 +96,7 @@ const ListInternal = ({
               ListItemProps: ListItemPropsItem,
               ListItemIconProps: ListItemIconPropsItem,
               ListItemTextProps: ListItemTextPropsItem,
-              ListItemSecondaryActionProps: ListItemSecondaryActionPropsItem
+              ListItemSecondaryActionProps: ListItemSecondaryActionPropsItem,
             }) => (
               <ListItem
                 button
@@ -133,7 +133,7 @@ ListInternal.propTypes = {
   value: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired
+      label: PropTypes.string.isRequired,
     })
   ),
   optionClick: PropTypes.func.isRequired,
@@ -148,12 +148,12 @@ ListInternal.propTypes = {
   ListItemTextProps: PropTypes.object,
   ListItemSecondaryActionProps: PropTypes.object,
   PaperProps: PropTypes.object,
-  LeftPaperProps: PropTypes.object
+  LeftPaperProps: PropTypes.object,
 };
 
 ListInternal.defaultProps = {
   value: [],
-  ListProps: {}
+  ListProps: {},
 };
 
 const ToolbarInternal = ({
@@ -169,7 +169,7 @@ const ToolbarInternal = ({
   LeftFilterFieldProps,
   LeftSortIconButtonProps,
   filter,
-  sortDesc
+  sortDesc,
 }) => {
   const classes = useStyles();
 
@@ -220,7 +220,7 @@ ToolbarInternal.propTypes = {
   LeftFilterFieldProps: PropTypes.object,
   LeftSortIconButtonProps: PropTypes.object,
   filter: PropTypes.string,
-  sortDesc: PropTypes.bool
+  sortDesc: PropTypes.bool,
 };
 
 const DualListSelect = ({
@@ -312,7 +312,7 @@ const DualListSelect = ({
   RightTitleProps,
   PaperProps,
   LeftPaperProps,
-  RightPaperProps
+  RightPaperProps,
 }) => {
   const classes = useStyles();
   const invalid = validationError(meta, validateOnMount);
@@ -528,7 +528,7 @@ DualListSelect.propTypes = {
   hideLabel: PropTypes.bool,
   id: PropTypes.string,
   input: PropTypes.shape({
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
   }),
   meta: PropTypes.any,
   state: PropTypes.object,
@@ -598,7 +598,7 @@ DualListSelect.propTypes = {
   RightTitleProps: PropTypes.object,
   PaperProps: PropTypes.object,
   LeftPaperProps: PropTypes.object,
-  RightPaperProps: PropTypes.object
+  RightPaperProps: PropTypes.object,
 };
 
 DualListSelect.defaultProps = {
@@ -617,7 +617,7 @@ DualListSelect.defaultProps = {
   options: [],
   allToLeft: true,
   allToRight: true,
-  isFilterable: true
+  isFilterable: true,
 };
 
 const DualListSelectWrapper = (props) => <DualListSelectCommon {...props} DualListSelect={DualListSelect} />;

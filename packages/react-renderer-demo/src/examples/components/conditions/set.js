@@ -18,11 +18,11 @@ const schema = {
         is: 'User123',
         notMatch: true,
         then: {
-          set: { useDefaultNickName: false }
+          set: { useDefaultNickName: false },
         },
-        else: { visible: true, set: { useDefaultNickName: true } }
+        else: { visible: true, set: { useDefaultNickName: true } },
       },
-      description: 'set: {} is used to reset the setter'
+      description: 'set: {} is used to reset the setter',
     },
     {
       component: componentTypes.TEXT_FIELD,
@@ -32,17 +32,17 @@ const schema = {
         when: 'useDefaultNickName',
         is: true,
         then: {
-          set: { nickname: 'User123' }
+          set: { nickname: 'User123' },
         },
-        else: { visible: true, set: {} }
-      }
-    }
-  ]
+        else: { visible: true, set: {} },
+      },
+    },
+  ],
 };
 
 const componentMapper = {
   [componentTypes.CHECKBOX]: Checkbox,
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 const SetAction = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;

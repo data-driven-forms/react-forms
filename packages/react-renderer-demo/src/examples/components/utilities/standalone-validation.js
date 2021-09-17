@@ -33,8 +33,8 @@ const schema = {
     { name: 'double-fail-2', component: 'select', dataType: 'number' },
     { name: 'combined-fail', component: 'select', dataType: 'number', validate: [{ type: 'required' }] },
     { name: 'combined-fail-1', component: 'select', dataType: 'number', validate: [{ type: 'required' }] },
-    { name: 'combined-pass', component: 'select', dataType: 'number', validate: [{ type: 'required' }] }
-  ]
+    { name: 'combined-pass', component: 'select', dataType: 'number', validate: [{ type: 'required' }] },
+  ],
 };
 
 const options = {
@@ -47,11 +47,11 @@ const options = {
     'double-fail': 'ccc',
     'double-fail-2': 'ccc',
     'combined-fail-1': 'string',
-    'combined-pass': 123
+    'combined-pass': 123,
   },
   validatorMapper: {
-    custom: () => () => 'custom error validator'
-  }
+    custom: () => () => 'custom error validator',
+  },
 };
 
 const StandaloneValidation = () => {

@@ -39,15 +39,15 @@ const miqParser = (
           newField.validate = [
             {
               type: validatorTypes.PATTERN,
-              pattern: field.validator_rule
-            }
+              pattern: field.validator_rule,
+            },
           ];
         }
 
         if (field.required) {
           newField.validate = newField.validate || [];
           newField.validate.push({
-            type: validatorTypes.REQUIRED
+            type: validatorTypes.REQUIRED,
           });
         }
 
@@ -91,7 +91,7 @@ const miqParser = (
         title: group.label,
         name: group.id,
         fields: fieldsArray,
-        component: componentTypes.SUB_FORM
+        component: componentTypes.SUB_FORM,
       });
     });
     formTabs.push({
@@ -99,7 +99,7 @@ const miqParser = (
       description: tab.description,
       name: tab.id,
       fields: groups,
-      component: componentTypes.TAB_ITEM
+      component: componentTypes.TAB_ITEM,
     });
   });
 
@@ -110,14 +110,14 @@ const miqParser = (
       {
         fields: formTabs,
         component: componentTypes.TABS,
-        name
-      }
-    ]
+        name,
+      },
+    ],
   };
 
   return {
     schema,
-    defaultValues
+    defaultValues,
   };
 };
 

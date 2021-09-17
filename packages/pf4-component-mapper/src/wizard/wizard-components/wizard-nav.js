@@ -65,7 +65,7 @@ WizardNavigationInternal.propTypes = {
   jumpToStep: PropTypes.func.isRequired,
   navSchema: PropTypes.array.isRequired,
   valid: PropTypes.bool.isRequired,
-  validating: PropTypes.bool.isRequired
+  validating: PropTypes.bool.isRequired,
 };
 
 const WizardNavigation = ({ setPrevSteps, crossroads, values, ...props }) => {
@@ -75,7 +75,7 @@ const WizardNavigation = ({ setPrevSteps, crossroads, values, ...props }) => {
         ? crossroads.reduce(
             (acc, curr) => ({
               ...acc,
-              [curr]: get(values, curr)
+              [curr]: get(values, curr),
             }),
             {}
           )
@@ -88,7 +88,7 @@ const WizardNavigation = ({ setPrevSteps, crossroads, values, ...props }) => {
       const modifiedRoad = crossroads.reduce(
         (acc, curr) => ({
           ...acc,
-          [curr]: get(values, curr)
+          [curr]: get(values, curr),
         }),
         {}
       );
@@ -105,7 +105,7 @@ const WizardNavigation = ({ setPrevSteps, crossroads, values, ...props }) => {
 WizardNavigation.propTypes = {
   setPrevSteps: PropTypes.func.isRequired,
   values: PropTypes.object.isRequired,
-  crossroads: PropTypes.arrayOf(PropTypes.string)
+  crossroads: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default WizardNavigation;

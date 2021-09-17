@@ -20,7 +20,7 @@ const FormTabs = ({ fields, ...rest }) => {
 };
 
 FormTabs.propTypes = {
-  fields: PropTypes.array.isRequired
+  fields: PropTypes.array.isRequired,
 };
 
 export default FormTabs;

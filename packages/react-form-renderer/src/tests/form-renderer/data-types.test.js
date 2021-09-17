@@ -23,7 +23,7 @@ describe('data types', () => {
     initialProps = {
       FormTemplate: (props) => <FormTemplate {...props} />,
       componentMapper: {
-        [componentTypes.TEXT_FIELD]: DataTypeInput
+        [componentTypes.TEXT_FIELD]: DataTypeInput,
       },
       schema: {
         fields: [
@@ -32,10 +32,10 @@ describe('data types', () => {
             name: 'data-type-text',
             label: 'Data type test',
             type: 'text',
-            dataType: 'integer'
-          }
-        ]
-      }
+            dataType: 'integer',
+          },
+        ],
+      },
     };
   });
 
@@ -49,23 +49,17 @@ describe('data types', () => {
      * validator should prevent submit if anything else than number is passed to the input
      */
     input.simulate('change', { target: { value: 'sadsad' } });
-    wrapper
-      .find('button')
-      .first()
-      .simulate('click');
+    wrapper.find('button').first().simulate('click');
     expect(onSubmit).not.toHaveBeenCalled();
 
     input.simulate('change', { target: { value: '123' } });
     wrapper.update();
 
-    wrapper
-      .find('form')
-      .first()
-      .simulate('submit');
+    wrapper.find('form').first().simulate('submit');
 
     expect(onSubmit).toHaveBeenCalledWith(
       expect.objectContaining({
-        'data-type-text': 123
+        'data-type-text': 123,
       }),
       expect.anything(),
       expect.anything()

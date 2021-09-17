@@ -13,7 +13,7 @@ describe('SubForm component', () => {
     initialProps = {
       componentMapper,
       FormTemplate,
-      onSubmit: jest.fn()
+      onSubmit: jest.fn(),
     };
   });
 
@@ -28,11 +28,11 @@ describe('SubForm component', () => {
           fields: [
             {
               component: componentTypes.TEXT_FIELD,
-              name: 'some input'
-            }
-          ]
-        }
-      ]
+              name: 'some input',
+            },
+          ],
+        },
+      ],
     };
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
 
@@ -51,11 +51,11 @@ describe('SubForm component', () => {
           fields: [
             {
               component: componentTypes.TEXT_FIELD,
-              name: 'some input'
-            }
-          ]
-        }
-      ]
+              name: 'some input',
+            },
+          ],
+        },
+      ],
     };
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
 
@@ -74,11 +74,11 @@ describe('SubForm component', () => {
           fields: [
             {
               component: componentTypes.TEXT_FIELD,
-              name: 'some input'
-            }
-          ]
-        }
-      ]
+              name: 'some input',
+            },
+          ],
+        },
+      ],
     };
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
 

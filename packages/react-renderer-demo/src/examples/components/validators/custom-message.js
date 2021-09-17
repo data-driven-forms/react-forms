@@ -6,7 +6,7 @@ import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 import validatorTypes from '@data-driven-forms/react-form-renderer/validator-types';
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 const schema = {
   fields: [
@@ -14,9 +14,9 @@ const schema = {
       component: componentTypes.TEXT_FIELD,
       name: 'custom-validator',
       validate: [{ type: validatorTypes.REQUIRED, message: 'This field is required' }],
-      validateOnMount: true
-    }
-  ]
+      validateOnMount: true,
+    },
+  ],
 };
 
 const CustomMessage = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;

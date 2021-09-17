@@ -6,7 +6,7 @@ export const initialState = {
   sortLeftDesc: true,
   sortRightDesc: true,
   filterOptions: '',
-  filterValue: ''
+  filterValue: '',
 };
 
 const reducer = (state, { type, value, values, isRight }) => {
@@ -15,37 +15,37 @@ const reducer = (state, { type, value, values, isRight }) => {
       return {
         ...state,
         ...(isRight ? { selectedLeftValues: values } : { selectedRightValues: values }),
-        ...(isRight ? { lastLeftClicked: value } : { lastRightClicked: value })
+        ...(isRight ? { lastLeftClicked: value } : { lastRightClicked: value }),
       };
     case 'setFilterValue':
       return {
         ...state,
-        filterValue: value
+        filterValue: value,
       };
     case 'setFilterOptions':
       return {
         ...state,
-        filterOptions: value
+        filterOptions: value,
       };
     case 'sortValue':
       return {
         ...state,
-        sortRightDesc: !state.sortRightDesc
+        sortRightDesc: !state.sortRightDesc,
       };
     case 'sortOptions':
       return {
         ...state,
-        sortLeftDesc: !state.sortLeftDesc
+        sortLeftDesc: !state.sortLeftDesc,
       };
     case 'clearRightValues':
       return {
         ...state,
-        selectedRightValues: []
+        selectedRightValues: [],
       };
     case 'clearLeftOptions':
       return {
         ...state,
-        selectedLeftValues: []
+        selectedLeftValues: [],
       };
     default:
       return state;

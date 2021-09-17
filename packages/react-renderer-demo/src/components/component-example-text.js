@@ -13,15 +13,15 @@ const useStyles = makeStyles((theme) => ({
   wrapper: {
     [theme.breakpoints.up('md')]: {
       display: 'flex',
-      justifyContent: 'center'
-    }
+      justifyContent: 'center',
+    },
   },
   content: {
     [theme.breakpoints.up('md')]: {
       maxWidth: 'calc(768px + 17%)',
-      width: 'calc(768px + 17%)'
-    }
-  }
+      width: 'calc(768px + 17%)',
+    },
+  },
 }));
 
 const ComponentExampleText = ({ linkText, schema, variants, schemaVariants }) => {
@@ -53,11 +53,11 @@ ComponentExampleText.propTypes = {
   linkText: PropTypes.string.isRequired,
   schema: PropTypes.object.isRequired,
   variants: PropTypes.arrayOf(PropTypes.object),
-  schemaVariants: PropTypes.object
+  schemaVariants: PropTypes.object,
 };
 
 ComponentExampleText.defaultProps = {
-  variants: []
+  variants: [],
 };
 
 export default ComponentExampleText;

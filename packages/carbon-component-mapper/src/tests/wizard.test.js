@@ -29,9 +29,9 @@ describe('wizard', () => {
                   component: componentTypes.TEXT_FIELD,
                   name: 'aws',
                   label: 'somelabel',
-                  validate: [{ type: validatorTypes.REQUIRED }]
-                }
-              ]
+                  validate: [{ type: validatorTypes.REQUIRED }],
+                },
+              ],
             },
             {
               name: 'summary',
@@ -39,13 +39,13 @@ describe('wizard', () => {
                 {
                   component: componentTypes.TEXTAREA,
                   name: 'summary',
-                  label: 'somelabel'
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  label: 'somelabel',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
     onSubmit = jest.fn();
     onCancel = jest.fn();
@@ -54,25 +54,15 @@ describe('wizard', () => {
       FormTemplate: (props) => <FormTemplate {...props} showFormControls={false} />,
       schema,
       onSubmit: (values) => onSubmit(values),
-      onCancel: (values) => onCancel(values)
+      onCancel: (values) => onCancel(values),
     };
   });
 
   it('simple next and back', () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
 
-    expect(
-      wrapper
-        .find('.bx--progress-label')
-        .first()
-        .text()
-    ).toEqual('First step');
-    expect(
-      wrapper
-        .find('.bx--progress-label')
-        .last()
-        .text()
-    ).toEqual('Summary');
+    expect(wrapper.find('.bx--progress-label').first().text()).toEqual('First step');
+    expect(wrapper.find('.bx--progress-label').last().text()).toEqual('Summary');
 
     expect(wrapper.find('input[name="aws"]')).toHaveLength(1);
 
@@ -100,10 +90,7 @@ describe('wizard', () => {
 
     expect(wrapper.find('textarea[name="summary"]')).toHaveLength(1);
 
-    wrapper
-      .find('button.bx--progress-step-button')
-      .first()
-      .simulate('click'); // back in navigation
+    wrapper.find('button.bx--progress-step-button').first().simulate('click'); // back in navigation
     wrapper.update();
 
     expect(wrapper.find('input[name="aws"]')).toHaveLength(1);
@@ -116,26 +103,16 @@ describe('wizard', () => {
         fields: [
           {
             ...initialProps.schema.fields[0],
-            vertical: true
-          }
-        ]
-      }
+            vertical: true,
+          },
+        ],
+      },
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} />);
 
-    expect(
-      wrapper
-        .find('.bx--progress-label')
-        .first()
-        .text()
-    ).toEqual('First step');
-    expect(
-      wrapper
-        .find('.bx--progress-label')
-        .last()
-        .text()
-    ).toEqual('Summary');
+    expect(wrapper.find('.bx--progress-label').first().text()).toEqual('First step');
+    expect(wrapper.find('.bx--progress-label').last().text()).toEqual('Summary');
 
     expect(wrapper.find('input[name="aws"]')).toHaveLength(1);
 
@@ -163,10 +140,7 @@ describe('wizard', () => {
 
     expect(wrapper.find('textarea[name="summary"]')).toHaveLength(1);
 
-    wrapper
-      .find('button.bx--progress-step-button')
-      .first()
-      .simulate('click'); // back in navigation
+    wrapper.find('button.bx--progress-step-button').first().simulate('click'); // back in navigation
     wrapper.update();
 
     expect(wrapper.find('input[name="aws"]')).toHaveLength(1);
@@ -187,17 +161,17 @@ describe('wizard', () => {
                 when: 'aws',
                 stepMapper: {
                   aws: 'summary',
-                  google: 'google'
-                }
+                  google: 'google',
+                },
               },
               fields: [
                 {
                   component: componentTypes.TEXT_FIELD,
                   name: 'aws',
                   validate: [{ type: validatorTypes.REQUIRED }],
-                  label: 'somelabel'
-                }
-              ]
+                  label: 'somelabel',
+                },
+              ],
             },
             {
               name: 'summary',
@@ -205,9 +179,9 @@ describe('wizard', () => {
                 {
                   component: componentTypes.TEXT_FIELD,
                   name: 'summary',
-                  label: 'somelabel'
-                }
-              ]
+                  label: 'somelabel',
+                },
+              ],
             },
             {
               name: 'google',
@@ -215,13 +189,13 @@ describe('wizard', () => {
                 {
                   component: componentTypes.TEXT_FIELD,
                   name: 'googlesummary',
-                  label: 'somelabel'
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  label: 'somelabel',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
@@ -272,17 +246,17 @@ describe('wizard', () => {
                 when: 'aws',
                 stepMapper: {
                   aws: 'summary',
-                  google: 'google'
-                }
+                  google: 'google',
+                },
               },
               fields: [
                 {
                   component: componentTypes.TEXT_FIELD,
                   name: 'aws',
                   validate: [{ type: validatorTypes.REQUIRED }],
-                  label: 'somelabel'
-                }
-              ]
+                  label: 'somelabel',
+                },
+              ],
             },
             {
               name: 'summary',
@@ -290,9 +264,9 @@ describe('wizard', () => {
                 {
                   component: componentTypes.TEXTAREA,
                   name: 'summary',
-                  label: 'somelabel'
-                }
-              ]
+                  label: 'somelabel',
+                },
+              ],
             },
             {
               name: 'google',
@@ -300,13 +274,13 @@ describe('wizard', () => {
                 {
                   component: componentTypes.TEXTAREA,
                   name: 'googlesummary',
-                  label: 'somelabel'
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  label: 'somelabel',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
@@ -318,14 +292,8 @@ describe('wizard', () => {
     wrapper.find('button#next').simulate('click');
     wrapper.update();
 
-    wrapper
-      .find('textarea')
-      .first()
-      .instance().value = 'summary';
-    wrapper
-      .find('textarea')
-      .first()
-      .simulate('change');
+    wrapper.find('textarea').first().instance().value = 'summary';
+    wrapper.find('textarea').first().simulate('change');
     wrapper.update();
 
     wrapper.find('button#submit').simulate('click');
@@ -333,7 +301,7 @@ describe('wizard', () => {
 
     expect(onSubmit).toHaveBeenCalledWith({
       aws: 'aws',
-      summary: 'summary'
+      summary: 'summary',
     });
     onSubmit.mockClear();
 
@@ -347,14 +315,8 @@ describe('wizard', () => {
     wrapper.find('button#next').simulate('click');
     wrapper.update();
 
-    wrapper
-      .find('textarea')
-      .first()
-      .instance().value = 'google summary';
-    wrapper
-      .find('textarea')
-      .first()
-      .simulate('change');
+    wrapper.find('textarea').first().instance().value = 'google summary';
+    wrapper.find('textarea').first().simulate('change');
     wrapper.update();
 
     wrapper.find('button#submit').simulate('click');
@@ -362,7 +324,7 @@ describe('wizard', () => {
 
     expect(onSubmit).toHaveBeenCalledWith({
       aws: 'google',
-      googlesummary: 'google summary'
+      googlesummary: 'google summary',
     });
     onSubmit.mockClear();
   });
@@ -381,20 +343,20 @@ describe('wizard', () => {
                 when: 'name',
                 stepMapper: {
                   aws: 'summary',
-                  submit: CONDITIONAL_SUBMIT_FLAG
-                }
+                  submit: CONDITIONAL_SUBMIT_FLAG,
+                },
               },
               fields: [
                 {
                   component: componentTypes.TEXT_FIELD,
                   name: 'name',
-                  validate: [{ type: validatorTypes.REQUIRED }]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  validate: [{ type: validatorTypes.REQUIRED }],
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} onSubmit={submit} schema={schema} />);

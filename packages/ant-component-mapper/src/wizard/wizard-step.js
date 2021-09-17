@@ -17,13 +17,13 @@ const WizardStep = ({ fields, formOptions, WizardStepProps, ...rest }) => (
 WizardStep.propTypes = {
   fields: PropTypes.array,
   formOptions: PropTypes.shape({
-    renderForm: PropTypes.func.isRequired
+    renderForm: PropTypes.func.isRequired,
   }).isRequired,
-  WizardStepProps: PropTypes.object
+  WizardStepProps: PropTypes.object,
 };
 
 WizardStep.defaultProps = {
-  fields: []
+  fields: [],
 };
 
 export default WizardStep;

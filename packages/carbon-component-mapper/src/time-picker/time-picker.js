@@ -22,7 +22,7 @@ const TimePicker = (props) => {
     let [hours = '00', minutes = '00'] = input.value
       .toLocaleTimeString('en-us', {
         hour12: !!twelveHoursFormat,
-        timeZone: timezones?.find(({ value }) => value === timezone)?.showAs
+        timeZone: timezones?.find(({ value }) => value === timezone)?.showAs,
       })
       .split(':');
 
@@ -111,10 +111,10 @@ TimePicker.propTypes = {
     PropTypes.shape({
       value: PropTypes.string.isRequired,
       label: PropTypes.node.isRequired,
-      showAs: PropTypes.string.isRequired
+      showAs: PropTypes.string.isRequired,
     })
   ),
-  WrapperProps: PropTypes.object
+  WrapperProps: PropTypes.object,
 };
 
 export default TimePicker;

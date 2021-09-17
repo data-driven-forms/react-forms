@@ -8,20 +8,20 @@ const schema = {
     {
       component: componentTypes.SWITCH,
       label: 'Switch',
-      name: 'switch'
-    }
-  ]
+      name: 'switch',
+    },
+  ],
 };
 const variants = [
   ...baseFieldProps,
   {
     name: 'onText',
-    type: 'string'
+    type: 'string',
   },
   {
     name: 'offText',
-    type: 'string'
-  }
+    type: 'string',
+  },
 ];
 
 const Switch = () => <ComponentText schema={schema} variants={variants} linkText="Switch" />;

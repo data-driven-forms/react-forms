@@ -25,7 +25,7 @@ Wrapper.propTypes = {
   helperText: PropTypes.node,
   error: PropTypes.node,
   showError: PropTypes.bool,
-  isRequired: PropTypes.bool
+  isRequired: PropTypes.bool,
 };
 
 const SingleCheckbox = (props) => {
@@ -57,7 +57,7 @@ SingleCheckboxInCommon.propTypes = {
   WrapperProps: PropTypes.object,
   meta: PropTypes.object,
   option: PropTypes.object,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
 const Checkbox = ({ options, ...props }) =>
@@ -68,7 +68,7 @@ const Checkbox = ({ options, ...props }) =>
   );
 
 Checkbox.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.node, value: PropTypes.any }))
+  options: PropTypes.arrayOf(PropTypes.shape({ label: PropTypes.node, value: PropTypes.any })),
 };
 
 export default Checkbox;

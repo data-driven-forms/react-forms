@@ -11,27 +11,27 @@ const schema = {
       options: [
         {
           value: 'cats',
-          label: 'cats'
+          label: 'cats',
         },
         {
           value: 'cats_1',
-          label: 'cats_1'
+          label: 'cats_1',
         },
         {
           value: 'cats_2',
-          label: 'cats_2'
+          label: 'cats_2',
         },
         {
           value: 'zebras',
-          label: 'zebras'
+          label: 'zebras',
         },
         {
           value: 'pigeons',
-          label: 'pigeons'
-        }
-      ]
-    }
-  ]
+          label: 'pigeons',
+        },
+      ],
+    },
+  ],
 };
 
 const treeSchmea = {
@@ -45,57 +45,57 @@ const treeSchmea = {
           label: 'Animals',
           hasBadge: true,
           badgeProps: {
-            isRead: true
+            isRead: true,
           },
           children: [
             {
               value: 'lions',
-              label: 'Lions'
+              label: 'Lions',
             },
             {
               value: 'dogs',
-              label: 'Dogs'
+              label: 'Dogs',
             },
             {
               label: 'Birds',
               children: [
                 {
                   label: 'Pigeons',
-                  value: 'pigens'
-                }
-              ]
-            }
-          ]
+                  value: 'pigens',
+                },
+              ],
+            },
+          ],
         },
         {
           label: 'Cars',
           children: [
             {
               value: 'suv',
-              label: 'SUVs'
+              label: 'SUVs',
             },
             {
               value: 'hatchbacks',
-              label: 'Hatchbacks'
+              label: 'Hatchbacks',
             },
             {
               value: 'sedans',
-              label: 'Sedans'
+              label: 'Sedans',
             },
             {
               label: 'Military',
               children: [
                 {
                   label: 'Jeeps',
-                  value: 'jeep'
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  value: 'jeep',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 const variants = [...baseFieldProps];
@@ -104,7 +104,7 @@ const basicVariant = { schema, label: 'Basic', value: 'basic' };
 const treeVariant = { schema: treeSchmea, label: 'Tree', value: 'tree' };
 
 const schemaVariants = {
-  pf4: [basicVariant, treeVariant]
+  pf4: [basicVariant, treeVariant],
 };
 
 const DualListSelect = () => <ComponentText schema={schema} variants={variants} linkText="Dual list select" schemaVariants={schemaVariants} />;

@@ -11,25 +11,25 @@ describe('getValidates', () => {
       complexResolve: {
         component: noop,
         resolveProps: () => ({
-          validate: [{ type: 'complexResolve' }]
-        })
+          validate: [{ type: 'complexResolve' }],
+        }),
       },
       componentDefault: {
         component: noop,
-        validate: [{ type: 'componentDefault' }]
+        validate: [{ type: 'componentDefault' }],
       },
       componentActions: {
         component: noop,
         actions: {
-          validate: ['componentAction']
-        }
+          validate: ['componentAction'],
+        },
       },
       componentActionsResolve: {
         component: noop,
         actions: {
-          resolveProps: ['returnValidate']
-        }
-      }
+          resolveProps: ['returnValidate'],
+        },
+      },
     };
 
     const schema = {
@@ -50,22 +50,22 @@ describe('getValidates', () => {
         {
           name: 'xx',
           component: 'componentDefault',
-          resolveProps: (_props, _inputMeta, { getState }) => ({ validate: [{ type: getState().values['x'] }] })
+          resolveProps: (_props, _inputMeta, { getState }) => ({ validate: [{ type: getState().values['x'] }] }),
         },
-        { name: 'datatype-validation', component: 'default', dataType: 'number' }
-      ]
+        { name: 'datatype-validation', component: 'default', dataType: 'number' },
+      ],
     };
 
     const actionMapper = {
       componentAction: () => [{ type: 'from-action' }],
-      returnValidate: () => () => ({ validate: [{ type: 'actions>resolveProps' }] })
+      returnValidate: () => () => ({ validate: [{ type: 'actions>resolveProps' }] }),
     };
 
     expect(
       getValidates(schema, {
         componentMapper,
         actionMapper,
-        values
+        values,
       })
     ).toEqual({
       'complex-resolve': [[{ type: 'complexResolve' }]],
@@ -79,7 +79,7 @@ describe('getValidates', () => {
       'component-actions-resolve': [[{ type: 'actions>resolveProps' }]],
       x: [[{ type: 'value-of-x' }]],
       xx: [[{ type: 'value-of-x' }]],
-      'datatype-validation': [[expect.any(Function)]]
+      'datatype-validation': [[expect.any(Function)]],
     });
   });
 });

@@ -30,31 +30,31 @@ const schema = {
         {
           name: 'first-name',
           label: 'First name',
-          component: componentTypes.TEXT_FIELD
+          component: componentTypes.TEXT_FIELD,
         },
         {
           name: 'last-name',
           label: 'Last name',
-          component: componentTypes.TEXT_FIELD
+          component: componentTypes.TEXT_FIELD,
         },
         {
           name: 'address-1',
           label: 'Address 1',
-          component: componentTypes.TEXT_FIELD
+          component: componentTypes.TEXT_FIELD,
         },
         {
           name: 'address-2',
           label: 'Address 2',
-          component: componentTypes.TEXT_FIELD
-        }
-      ]
-    }
-  ]
+          component: componentTypes.TEXT_FIELD,
+        },
+      ],
+    },
+  ],
 };
 
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField,
-  'two-columns': TwoColumns
+  'two-columns': TwoColumns,
 };
 
 const CustomLayoutComponent = () => (

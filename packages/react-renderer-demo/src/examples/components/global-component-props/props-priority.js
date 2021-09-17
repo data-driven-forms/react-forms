@@ -9,9 +9,9 @@ const PropsPriority = () => {
     [componentTypes.SWITCH]: {
       component: Switch,
       FormControlLabelProps: {
-        labelPlacement: 'bottom'
-      }
-    }
+        labelPlacement: 'bottom',
+      },
+    },
   };
 
   const schema = {
@@ -19,17 +19,17 @@ const PropsPriority = () => {
       {
         component: componentTypes.SWITCH,
         name: 'switch-field-bottom',
-        label: 'Label is on the bottom of the switch by default'
+        label: 'Label is on the bottom of the switch by default',
       },
       {
         component: componentTypes.SWITCH,
         name: 'switch-field-end',
         label: 'Label is on the right because schema props have higher priority',
         FormControlLabelProps: {
-          labelPlacement: 'end'
-        }
-      }
-    ]
+          labelPlacement: 'end',
+        },
+      },
+    ],
   };
   return <FormRenderer FormTemplate={FormTemplate} schema={schema} componentMapper={componentMapper} onSubmit={console.log} />;
 };

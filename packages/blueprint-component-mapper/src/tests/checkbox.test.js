@@ -17,15 +17,15 @@ describe('<Checkbox />', () => {
           options: [
             {
               label: 'option 1',
-              value: 1
+              value: 1,
             },
             {
               label: 'option 2',
-              value: 2
-            }
-          ]
-        }
-      ]
+              value: 2,
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(
@@ -33,18 +33,8 @@ describe('<Checkbox />', () => {
     );
 
     expect(wrapper.find(Checkbox)).toHaveLength(2);
-    expect(
-      wrapper
-        .find(Checkbox)
-        .first()
-        .props().label
-    ).toEqual('option 1');
-    expect(
-      wrapper
-        .find(Checkbox)
-        .last()
-        .props().label
-    ).toEqual('option 2');
+    expect(wrapper.find(Checkbox).first().props().label).toEqual('option 1');
+    expect(wrapper.find(Checkbox).last().props().label).toEqual('option 2');
   });
 
   it('renders multiple required checkbox', () => {
@@ -58,26 +48,21 @@ describe('<Checkbox />', () => {
           options: [
             {
               label: 'option 1',
-              value: 1
+              value: 1,
             },
             {
               label: 'option 2',
-              value: 2
-            }
-          ]
-        }
-      ]
+              value: 2,
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(
       <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
     );
 
-    expect(
-      wrapper
-        .find('.bp3-text-muted')
-        .last()
-        .text()
-    ).toEqual('(required)');
+    expect(wrapper.find('.bp3-text-muted').last().text()).toEqual('(required)');
   });
 });

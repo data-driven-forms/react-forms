@@ -69,5 +69,5 @@ export const dependencies = {
   '@data-driven-forms/suir-component-mapper': 'latest',
   '@data-driven-forms/common': 'latest',
   'semantic-ui-react': 'latest',
-  'prop-types': 'latest'
+  'prop-types': 'latest',
 };

@@ -13,7 +13,7 @@ const Form = ({ children, ...props }) => (
 );
 
 Form.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 const useStyles = createUseStyles({
@@ -21,9 +21,9 @@ const useStyles = createUseStyles({
     marginTop: 16,
 
     '& button:not(:first-child)': {
-      marginLeft: 8
-    }
-  }
+      marginLeft: 8,
+    },
+  },
 });
 
 const ButtonGroup = ({ children, ...props }) => {
@@ -37,19 +37,19 @@ const ButtonGroup = ({ children, ...props }) => {
 };
 
 ButtonGroup.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 const Title = ({ children, ...props }) => <H1 {...props}>{children}</H1>;
 
 Title.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 const Description = ({ children, ...props }) => <H2 {...props}>{children}</H2>;
 
 Description.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 const InnerButton = ({ label, buttonType, ...props }) => (
@@ -61,7 +61,7 @@ const InnerButton = ({ label, buttonType, ...props }) => (
 InnerButton.propTypes = {
   children: PropTypes.node,
   label: PropTypes.node,
-  buttonType: PropTypes.string
+  buttonType: PropTypes.string,
 };
 
 const BlueprintFormTemplate = ({ requiredLabelInfo, ...props }) => (
@@ -71,7 +71,7 @@ const BlueprintFormTemplate = ({ requiredLabelInfo, ...props }) => (
 );
 
 BlueprintFormTemplate.propTypes = {
-  requiredLabelInfo: PropTypes.node
+  requiredLabelInfo: PropTypes.node,
 };
 
 export default BlueprintFormTemplate;

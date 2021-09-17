@@ -299,13 +299,13 @@ describe('New validators', () => {
       Validator.messages = {
         ...Validator.messages,
         required: 'Foo required',
-        tooShort: 'Bar'
+        tooShort: 'Bar',
       };
     });
     afterAll(() => {
       // reset custom messages ovverides for validators
       Validator.messages = {
-        ...messages
+        ...messages,
       };
     });
 

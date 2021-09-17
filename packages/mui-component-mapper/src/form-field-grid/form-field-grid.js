@@ -7,8 +7,8 @@ import clsx from 'clsx';
 
 const useFinalFormFieldStyles = makeStyles({
   grid: {
-    position: 'relative'
-  }
+    position: 'relative',
+  },
 });
 
 const FormFieldGrid = ({ children, className, ...props }) => {
@@ -23,7 +23,7 @@ const FormFieldGrid = ({ children, className, ...props }) => {
 
 FormFieldGrid.propTypes = {
   children: PropTypes.node,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default FormFieldGrid;

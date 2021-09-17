@@ -31,7 +31,7 @@ describe('formFields', () => {
   const options = [
     { label: 'Cat', value: 'cats' },
     { label: 'Dog', value: 'dogs' },
-    { label: 'Hamster', value: 'hamsters' }
+    { label: 'Hamster', value: 'hamsters' },
   ];
 
   const componentsWithOptions = [componentTypes.RADIO, componentTypes.SELECT];
@@ -50,7 +50,7 @@ describe('formFields', () => {
       componentTypes.DATE_PICKER,
       componentTypes.TIME_PICKER,
       componentTypes.SWITCH,
-      componentTypes.SELECT
+      componentTypes.SELECT,
     ].forEach((component) => {
       describe(`Component type: ${component}`, () => {
         beforeEach(() => {
@@ -61,7 +61,7 @@ describe('formFields', () => {
           if (componentsWithOptions.includes(component)) {
             field = {
               ...field,
-              options
+              options,
             };
           }
 
@@ -77,12 +77,7 @@ describe('formFields', () => {
             expect(wrapper.find(componentMapper[component])).toHaveLength(1);
           }
 
-          expect(
-            wrapper
-              .find('label')
-              .first()
-              .text()
-          ).toEqual(field.label);
+          expect(wrapper.find('label').first().text()).toEqual(field.label);
           expect(wrapper.find('.ui.pointing.prompt.label')).toHaveLength(0);
           expect(wrapper.find(HelperText)).toHaveLength(0);
           expect(wrapper.find('.required.field')).toHaveLength(0);
@@ -91,16 +86,11 @@ describe('formFields', () => {
         it('renders with error', () => {
           const errorField = {
             ...field,
-            validate: [{ type: validatorTypes.REQUIRED }]
+            validate: [{ type: validatorTypes.REQUIRED }],
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [errorField] }} />);
           wrapper.find('form').simulate('submit');
-          expect(
-            wrapper
-              .find('.ui.pointing.prompt.label')
-              .last()
-              .text()
-          ).toEqual(errorText);
+          expect(wrapper.find('.ui.pointing.prompt.label').last().text()).toEqual(errorText);
         });
 
         it('renders with warning', async () => {
@@ -108,7 +98,7 @@ describe('formFields', () => {
             ...field,
             validate: [{ type: validatorTypes.REQUIRED, warning: true }],
             useWarnings: true,
-            validateOnMount: true
+            validateOnMount: true,
           };
           let wrapper;
 
@@ -117,56 +107,36 @@ describe('formFields', () => {
           });
           wrapper.update();
 
-          expect(
-            wrapper
-              .find(HelperText)
-              .last()
-              .text()
-          ).toEqual(errorText);
+          expect(wrapper.find(HelperText).last().text()).toEqual(errorText);
         });
 
         it('renders with helperText', () => {
           const helpertextField = {
             ...field,
-            helperText
+            helperText,
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [helpertextField] }} />);
 
-          expect(
-            wrapper
-              .find(HelperText)
-              .last()
-              .text()
-          ).toEqual(helperText);
+          expect(wrapper.find(HelperText).last().text()).toEqual(helperText);
         });
 
         it('renders with error and helperText', () => {
           const errorFields = {
             ...field,
             helperText,
-            validate: [{ type: validatorTypes.REQUIRED }]
+            validate: [{ type: validatorTypes.REQUIRED }],
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [errorFields] }} />);
           wrapper.find('form').simulate('submit');
 
-          expect(
-            wrapper
-              .find('.ui.pointing.prompt.label')
-              .last()
-              .text()
-          ).toEqual(errorText);
-          expect(
-            wrapper
-              .find(HelperText)
-              .last()
-              .text()
-          ).toEqual(helperText);
+          expect(wrapper.find('.ui.pointing.prompt.label').last().text()).toEqual(errorText);
+          expect(wrapper.find(HelperText).last().text()).toEqual(helperText);
         });
 
         it('renders isRequired', () => {
           const requiredField = {
             ...field,
-            isRequired: true
+            isRequired: true,
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [requiredField] }} />);
           if (component === componentTypes.TEXTAREA) {
@@ -179,70 +149,40 @@ describe('formFields', () => {
         it('renders isDisabled', () => {
           const disabledField = {
             ...field,
-            isDisabled: true
+            isDisabled: true,
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField] }} />);
 
           if (component === componentTypes.TEXTAREA) {
-            expect(
-              wrapper
-                .find('textarea')
-                .first()
-                .props().disabled
-            ).toEqual(true);
+            expect(wrapper.find('textarea').first().props().disabled).toEqual(true);
           } else if (component === componentTypes.SELECT) {
-            expect(
-              wrapper
-                .find(Dropdown)
-                .first()
-                .prop('disabled')
-            ).toEqual(true);
+            expect(wrapper.find(Dropdown).first().prop('disabled')).toEqual(true);
           } else {
-            expect(
-              wrapper
-                .find('input')
-                .first()
-                .props().disabled
-            ).toEqual(true);
+            expect(wrapper.find('input').first().props().disabled).toEqual(true);
           }
         });
 
         it('renders isReadOnly', () => {
           const disabledField = {
             ...field,
-            isReadOnly: true
+            isReadOnly: true,
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField] }} />);
 
           if (component === componentTypes.TEXTAREA) {
-            expect(
-              wrapper
-                .find('textarea')
-                .first()
-                .props().readOnly
-            ).toEqual(true);
+            expect(wrapper.find('textarea').first().props().readOnly).toEqual(true);
           } else if (component === componentTypes.SELECT) {
             /**SUIR select does not have read only prop */
             expect(true);
           } else {
-            expect(
-              wrapper
-                .find('input')
-                .first()
-                .props().readOnly
-            ).toEqual(true);
+            expect(wrapper.find('input').first().props().readOnly).toEqual(true);
           }
         });
 
         it('renders with submitError', () => {
           const wrapper = mount(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
           wrapper.find('form').simulate('submit');
-          expect(
-            wrapper
-              .find('.ui.pointing.prompt.label')
-              .last()
-              .text()
-          ).toEqual(errorText);
+          expect(wrapper.find('.ui.pointing.prompt.label').last().text()).toEqual(errorText);
         });
       });
     });
@@ -257,8 +197,8 @@ describe('formFields', () => {
         options: [
           { label: 'Cat', value: 'cats' },
           { label: 'Dog', value: 'dogs' },
-          { label: 'Hamster', value: 'hamsters' }
-        ]
+          { label: 'Hamster', value: 'hamsters' },
+        ],
       };
     });
 
@@ -281,19 +221,14 @@ describe('formFields', () => {
           {
             component: componentTypes.CHECKBOX,
             name: 'foo',
-            validate: [{ type: validatorTypes.REQUIRED }]
-          }
-        ]
+            validate: [{ type: validatorTypes.REQUIRED }],
+          },
+        ],
       };
       const wrapper = mount(<RendererWrapper schema={schema} />);
       wrapper.find('form').simulate('submit');
 
-      expect(
-        wrapper
-          .find('.ui.pointing.prompt.label')
-          .last()
-          .text()
-      ).toEqual(errorText);
+      expect(wrapper.find('.ui.pointing.prompt.label').last().text()).toEqual(errorText);
     });
 
     it('renders with helperText', () => {
@@ -302,18 +237,13 @@ describe('formFields', () => {
           {
             component: componentTypes.CHECKBOX,
             name: 'foo',
-            helperText
-          }
-        ]
+            helperText,
+          },
+        ],
       };
       const wrapper = mount(<RendererWrapper schema={schema} />);
 
-      expect(
-        wrapper
-          .find(HelperText)
-          .last()
-          .text()
-      ).toEqual(helperText);
+      expect(wrapper.find(HelperText).last().text()).toEqual(helperText);
     });
 
     it('renders with error and helperText', () => {
@@ -323,26 +253,16 @@ describe('formFields', () => {
             component: componentTypes.CHECKBOX,
             name: 'foo',
             helperText,
-            validate: [{ type: validatorTypes.REQUIRED }]
-          }
-        ]
+            validate: [{ type: validatorTypes.REQUIRED }],
+          },
+        ],
       };
       const wrapper = mount(<RendererWrapper schema={schema} />);
       wrapper.find('form').simulate('submit');
 
-      expect(
-        wrapper
-          .find('.ui.pointing.prompt.label')
-          .last()
-          .text()
-      ).toEqual(errorText);
+      expect(wrapper.find('.ui.pointing.prompt.label').last().text()).toEqual(errorText);
 
-      expect(
-        wrapper
-          .find(HelperText)
-          .last()
-          .text()
-      ).toEqual(helperText);
+      expect(wrapper.find(HelperText).last().text()).toEqual(helperText);
     });
   });
 });

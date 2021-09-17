@@ -6,20 +6,8 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormGroup from '../form-group';
 
 const TimePicker = (props) => {
-  const {
-    input,
-    isReadOnly,
-    isDisabled,
-    placeholder,
-    isRequired,
-    label,
-    helperText,
-    description,
-    validateOnMount,
-    meta,
-    FormItemProps,
-    ...rest
-  } = useFieldApi(props);
+  const { input, isReadOnly, isDisabled, placeholder, isRequired, label, helperText, description, validateOnMount, meta, FormItemProps, ...rest } =
+    useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
 
   return (
@@ -59,11 +47,11 @@ TimePicker.propTypes = {
   validateOnMount: PropTypes.bool,
   locale: PropTypes.string,
   description: PropTypes.node,
-  FormItemProps: PropTypes.object
+  FormItemProps: PropTypes.object,
 };
 
 TimePicker.defaultProps = {
-  placeholder: 'Select date'
+  placeholder: 'Select date',
 };
 
 export default TimePicker;

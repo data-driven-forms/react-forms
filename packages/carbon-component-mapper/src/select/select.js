@@ -8,7 +8,10 @@ import fnToString from '@data-driven-forms/common/utils/fn-to-string';
 import { Select as CarbonSelect, MultiSelect, SelectItem, ComboBox, SelectItemGroup } from 'carbon-components-react';
 import prepareProps from '../prepare-props';
 
-const onChangeWrapper = (onChange) => ({ selectedItem, selectedItems }) => onChange(selectedItems || selectedItem);
+const onChangeWrapper =
+  (onChange) =>
+  ({ selectedItem, selectedItems }) =>
+    onChange(selectedItems || selectedItem);
 
 export const getMultiValue = (value, options) =>
   (Array.isArray(value) ? value : value ? [value] : []).map((item) =>
@@ -78,7 +81,7 @@ ClearedMultiSelectFilterable.propTypes = {
   carbonLabel: PropTypes.node,
   placeholder: PropTypes.node,
   isRequired: PropTypes.bool,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
 };
 
 const ClearedMultiSelect = ({
@@ -129,7 +132,7 @@ ClearedMultiSelect.propTypes = {
   carbonLabel: PropTypes.node,
   placeholder: PropTypes.node,
   isRequired: PropTypes.bool,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
 };
 
 const getSelectValue = (value, isMulti) => (isMulti ? value : Array.isArray(value) ? value[0] : value);
@@ -185,7 +188,7 @@ ClearedSelect.propTypes = {
   isRequired: PropTypes.bool,
   isSearchable: PropTypes.bool,
   isClearable: PropTypes.bool,
-  value: PropTypes.any
+  value: PropTypes.any,
 };
 
 const getComboInitialValue = (value, options = []) => {
@@ -251,7 +254,7 @@ ClearedSelectSearchable.propTypes = {
   isSearchable: PropTypes.bool,
   isClearable: PropTypes.bool,
   labelText: PropTypes.string,
-  value: PropTypes.any
+  value: PropTypes.any,
 };
 
 const Select = (props) => {
@@ -301,13 +304,13 @@ Select.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      label: PropTypes.node
+      label: PropTypes.node,
     })
-  )
+  ),
 };
 
 Select.defaultProps = {
-  loadingMessage: 'Loading...'
+  loadingMessage: 'Loading...',
 };
 
 export default Select;

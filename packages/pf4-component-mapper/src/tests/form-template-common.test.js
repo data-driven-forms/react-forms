@@ -20,7 +20,7 @@ describe('FormTemplate PF4 Common', () => {
       onCancel: jest.fn(),
       canReset: true,
       pristine: true,
-      getState: jest.fn().mockImplementation(() => ({}))
+      getState: jest.fn().mockImplementation(() => ({})),
     };
     ContextWrapper = ({ children, ...props }) => (
       <RenderWithProvider value={{ formOptions }}>
@@ -29,14 +29,14 @@ describe('FormTemplate PF4 Common', () => {
     );
     initialProps = {
       formFields: <div>Formfields</div>,
-      schema: {}
+      schema: {},
     };
   });
 
   it('should render title', () => {
     initialProps = {
       ...initialProps,
-      schema: { title: 'I am title' }
+      schema: { title: 'I am title' },
     };
 
     const wrapper = mount(
@@ -65,7 +65,7 @@ describe('FormTemplate PF4 Common', () => {
   it('should render description', () => {
     initialProps = {
       ...initialProps,
-      schema: { description: 'I am description' }
+      schema: { description: 'I am description' },
     };
 
     const wrapper = mount(
@@ -97,18 +97,9 @@ describe('FormTemplate PF4 Common', () => {
       </ContextWrapper>
     );
     expect(wrapper.find('button').map((b) => b.text())).toEqual(['Submit', 'Cancel']);
-    wrapper
-      .find('button')
-      .first()
-      .simulate('click');
-    wrapper
-      .find('button')
-      .at(1)
-      .simulate('click');
-    wrapper
-      .find('button')
-      .last()
-      .simulate('click');
+    wrapper.find('button').first().simulate('click');
+    wrapper.find('button').at(1).simulate('click');
+    wrapper.find('button').last().simulate('click');
 
     expect(formOptions.onSubmit).not.toHaveBeenCalled();
     expect(formOptions.onReset).not.toHaveBeenCalled();
@@ -162,10 +153,7 @@ describe('FormTemplate PF4 Common', () => {
 
     const CANCEL_INDEX = 1;
 
-    wrapper
-      .find('button')
-      .at(CANCEL_INDEX)
-      .simulate('click');
+    wrapper.find('button').at(CANCEL_INDEX).simulate('click');
 
     expect(onCancel).toHaveBeenCalledWith(expectedValues);
   });
@@ -177,9 +165,9 @@ describe('FormTemplate PF4 Common', () => {
           fields: [
             {
               component: 'text-field',
-              name: 'field'
-            }
-          ]
+              name: 'field',
+            },
+          ],
         }}
         validate={({ field }) => {
           if (field) {
@@ -195,14 +183,8 @@ describe('FormTemplate PF4 Common', () => {
     expect(wrapper.find(Alert)).toHaveLength(0);
 
     await act(async () => {
-      wrapper
-        .find('input')
-        .first()
-        .instance().value = 'cats';
-      wrapper
-        .find('input')
-        .first()
-        .simulate('change');
+      wrapper.find('input').first().instance().value = 'cats';
+      wrapper.find('input').first().simulate('change');
     });
     wrapper.update();
 
@@ -218,9 +200,9 @@ describe('FormTemplate PF4 Common', () => {
           fields: [
             {
               component: 'text-field',
-              name: 'field'
-            }
-          ]
+              name: 'field',
+            },
+          ],
         }}
         validate={({ field }) => {
           if (field) {
@@ -236,14 +218,8 @@ describe('FormTemplate PF4 Common', () => {
     expect(wrapper.find(Alert)).toHaveLength(0);
 
     await act(async () => {
-      wrapper
-        .find('input')
-        .first()
-        .instance().value = 'cats';
-      wrapper
-        .find('input')
-        .first()
-        .simulate('change');
+      wrapper.find('input').first().instance().value = 'cats';
+      wrapper.find('input').first().simulate('change');
     });
     wrapper.update();
 

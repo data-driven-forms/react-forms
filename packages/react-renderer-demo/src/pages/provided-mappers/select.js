@@ -26,10 +26,10 @@ const schema = {
       options: [
         { label: 'Dogs', value: '1' },
         { label: 'Cats', value: '2' },
-        { label: 'Hamsters', value: '3' }
-      ]
-    }
-  ]
+        { label: 'Hamsters', value: '3' },
+      ],
+    },
+  ],
 };
 
 const basicVariant = { schema, label: 'Basic', value: 'basic' };
@@ -42,43 +42,43 @@ const schemaVariants = {
   blueprint: [basicVariant, multiVariant],
   suir: [basicVariant, multiVariant, loadOptionsVariant],
   ant: [basicVariant, multiVariant, loadOptionsVariant],
-  carbon: [basicVariant, multiVariant, loadOptionsVariant]
+  carbon: [basicVariant, multiVariant, loadOptionsVariant],
 };
 
 const variants = [
   ...baseFieldProps,
   {
     name: 'isMulti',
-    type: 'boolean'
+    type: 'boolean',
   },
   {
     name: 'options',
-    type: 'array'
+    type: 'array',
   },
   {
     name: 'noOptionsMessage',
-    type: 'string'
+    type: 'string',
   },
   {
     name: 'placeholder',
-    type: 'string'
+    type: 'string',
   },
   {
     name: 'isSearchable',
-    type: 'boolean'
+    type: 'boolean',
   },
   {
     name: 'isClearable',
-    type: 'boolean'
+    type: 'boolean',
   },
   {
     name: 'simpleValue',
-    type: 'boolean'
+    type: 'boolean',
   },
   {
     name: 'loadOptions',
-    type: 'func'
-  }
+    type: 'func',
+  },
 ];
 
 const Select = () => <ComponentText schema={schema} variants={variants} linkText="Select" schemaVariants={schemaVariants} />;

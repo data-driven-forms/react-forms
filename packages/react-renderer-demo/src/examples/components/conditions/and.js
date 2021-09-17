@@ -12,13 +12,13 @@ const schema = {
       component: componentTypes.TEXT_FIELD,
       name: 'field-1',
       label: 'Field 1',
-      helperText: 'To show field 3 type a cat here...'
+      helperText: 'To show field 3 type a cat here...',
     },
     {
       component: componentTypes.TEXT_FIELD,
       name: 'field-2',
       label: 'Field 1',
-      helperText: '...and dog here.'
+      helperText: '...and dog here.',
     },
     {
       component: componentTypes.TEXT_FIELD,
@@ -29,15 +29,15 @@ const schema = {
       condition: {
         and: [
           { when: 'field-1', is: 'cat' },
-          { when: 'field-2', is: 'dog' }
-        ]
-      }
-    }
-  ]
+          { when: 'field-2', is: 'dog' },
+        ],
+      },
+    },
+  ],
 };
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 const AndCondition = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;

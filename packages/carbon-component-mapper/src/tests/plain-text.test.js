@@ -13,15 +13,15 @@ describe('<PlainText />', () => {
         {
           component: componentTypes.PLAIN_TEXT,
           name: 'check',
-          label: 'I am happy text'
+          label: 'I am happy text',
         },
         {
           component: componentTypes.PLAIN_TEXT,
           name: 'header',
           label: 'header',
-          element: 'h1'
-        }
-      ]
+          element: 'h1',
+        },
+      ],
     };
 
     const wrapper = mount(

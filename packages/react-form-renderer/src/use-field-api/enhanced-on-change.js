@@ -14,7 +14,7 @@ const sanitizeValue = (event) => {
     if (event.target.type === 'file') {
       return {
         inputValue: event.target.value,
-        inputFiles: event.target.files
+        inputFiles: event.target.files,
       };
     }
 

@@ -9,7 +9,7 @@ import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 import Button from '@material-ui/core/Button';
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 const schema = {
@@ -22,11 +22,11 @@ const schema = {
       isRequired: true,
       validate: [
         {
-          type: validatorTypes.REQUIRED
-        }
-      ]
-    }
-  ]
+          type: validatorTypes.REQUIRED,
+        },
+      ],
+    },
+  ],
 };
 
 const FormTemplate = ({ formFields, schema }) => {

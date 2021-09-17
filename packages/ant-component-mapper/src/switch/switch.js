@@ -21,7 +21,7 @@ export const Switch = (props) => {
     ...rest
   } = useFieldApi({
     ...props,
-    type: 'checkbox'
+    type: 'checkbox',
   });
   const { name, checked, onChange, onBlur } = input;
 
@@ -60,7 +60,7 @@ Switch.propTypes = {
   onText: PropTypes.node,
   offText: PropTypes.node,
   description: PropTypes.node,
-  FormItemProps: PropTypes.object
+  FormItemProps: PropTypes.object,
 };
 
 export default Switch;

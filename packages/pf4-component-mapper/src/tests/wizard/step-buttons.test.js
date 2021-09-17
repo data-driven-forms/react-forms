@@ -21,7 +21,7 @@ describe('<WizardSTepButtons', () => {
         cancel: 'Cancel',
         next: 'Next',
         submit: 'Submit',
-        back: 'Back'
+        back: 'Back',
       },
       formOptions: {
         onCancel: jest.fn(),
@@ -29,11 +29,11 @@ describe('<WizardSTepButtons', () => {
         submit: jest.fn(),
         valid: true,
         getState: () => ({
-          validating: false
-        })
+          validating: false,
+        }),
       },
       handlePrev: jest.fn(),
-      handleNext: jest.fn()
+      handleNext: jest.fn(),
     };
   });
 
@@ -64,10 +64,7 @@ describe('<WizardSTepButtons', () => {
       </RenderWithProvider>
     );
 
-    wrapper
-      .find('button')
-      .at(0)
-      .simulate('click');
+    wrapper.find('button').at(0).simulate('click');
     expect(handleNext).toHaveBeenCalledWith('next-step');
   });
 
@@ -81,23 +78,20 @@ describe('<WizardSTepButtons', () => {
           handleNext={handleNext}
           formOptions={{
             ...initialProps.formOptions,
-            getState: () => ({ values: { foo: 'foo' } })
+            getState: () => ({ values: { foo: 'foo' } }),
           }}
           nextStep={{
             when: 'foo',
             stepMapper: {
               foo: 'bar',
-              qux: 'quaxx'
-            }
+              qux: 'quaxx',
+            },
           }}
         />
       </RenderWithProvider>
     );
 
-    wrapper
-      .find('button')
-      .at(0)
-      .simulate('click');
+    wrapper.find('button').at(0).simulate('click');
     expect(handleNext).toHaveBeenCalledWith('bar');
   });
 
@@ -108,10 +102,7 @@ describe('<WizardSTepButtons', () => {
         <WizardStepButtons {...initialProps} formOptions={{ ...initialProps.formOptions, handleSubmit }} nextStep={undefined} />
       </RenderWithProvider>
     );
-    wrapper
-      .find('button')
-      .at(0)
-      .simulate('click');
+    wrapper.find('button').at(0).simulate('click');
     expect(handleSubmit).toHaveBeenCalled();
   });
 
@@ -123,10 +114,7 @@ describe('<WizardSTepButtons', () => {
         <WizardStepButtons {...initialProps} formOptions={{ ...initialProps.formOptions, onCancel, getState: () => ({ values: VALUES }) }} />
       </RenderWithProvider>
     );
-    wrapper
-      .find('button')
-      .last()
-      .simulate('click');
+    wrapper.find('button').last().simulate('click');
     expect(onCancel).toHaveBeenCalled();
   });
 
@@ -137,10 +125,7 @@ describe('<WizardSTepButtons', () => {
         <WizardStepButtons {...initialProps} handlePrev={handlePrev} disableBack={false} />
       </RenderWithProvider>
     );
-    wrapper
-      .find('button')
-      .at(1)
-      .simulate('click');
+    wrapper.find('button').at(1).simulate('click');
     expect(handlePrev).toHaveBeenCalled();
   });
 
@@ -161,15 +146,15 @@ describe('<WizardSTepButtons', () => {
 
       event = {
         target: {
-          type: 'notbutton'
+          type: 'notbutton',
         },
         key: 'Enter',
-        preventDefault: jest.fn()
+        preventDefault: jest.fn(),
       };
       formOptions = {
         valid: true,
         getRegisteredFields,
-        getState: () => ({ validating: false })
+        getState: () => ({ validating: false }),
       };
       activeStep = 'active-step';
       findCurrentStep = jest.fn().mockImplementation(() => ({ nextStep }));
@@ -209,7 +194,7 @@ describe('<WizardSTepButtons', () => {
       formOptions = {
         valid: false,
         getRegisteredFields,
-        getState: () => ({ validating: false })
+        getState: () => ({ validating: false }),
       };
 
       handleEnter(event, formOptions, activeStep, findCurrentStep, handleNext, handleSubmit);
@@ -223,7 +208,7 @@ describe('<WizardSTepButtons', () => {
       formOptions = {
         valid: true,
         getRegisteredFields,
-        getState: () => ({ validating: true })
+        getState: () => ({ validating: true }),
       };
 
       handleEnter(event, formOptions, activeStep, findCurrentStep, handleNext, handleSubmit);
@@ -236,7 +221,7 @@ describe('<WizardSTepButtons', () => {
     it('nothing happen when key is not enter', () => {
       event = {
         ...event,
-        key: 'Spacebar'
+        key: 'Spacebar',
       };
 
       handleEnter(event, formOptions, activeStep, findCurrentStep, handleNext, handleSubmit);
@@ -249,7 +234,7 @@ describe('<WizardSTepButtons', () => {
     it('nothing happen when ctrl is pressed', () => {
       event = {
         ...event,
-        ctrlKey: true
+        ctrlKey: true,
       };
 
       handleEnter(event, formOptions, activeStep, findCurrentStep, handleNext, handleSubmit);
@@ -262,7 +247,7 @@ describe('<WizardSTepButtons', () => {
     it('nothing happen when shift is pressed', () => {
       event = {
         ...event,
-        shiftKey: true
+        shiftKey: true,
       };
 
       handleEnter(event, formOptions, activeStep, findCurrentStep, handleNext, handleSubmit);
@@ -277,8 +262,8 @@ describe('<WizardSTepButtons', () => {
         ...event,
         target: {
           ...event.target,
-          type: 'button'
-        }
+          type: 'button',
+        },
       };
 
       handleEnter(event, formOptions, activeStep, findCurrentStep, handleNext, handleSubmit);
@@ -303,20 +288,20 @@ describe('<WizardSTepButtons', () => {
                 when: 'name',
                 stepMapper: {
                   aws: 'summary',
-                  submit: CONDITIONAL_SUBMIT_FLAG
-                }
+                  submit: CONDITIONAL_SUBMIT_FLAG,
+                },
               },
               fields: [
                 {
                   component: componentTypes.TEXT_FIELD,
                   name: 'name',
-                  validate: [{ type: validatorTypes.REQUIRED }]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  validate: [{ type: validatorTypes.REQUIRED }],
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(

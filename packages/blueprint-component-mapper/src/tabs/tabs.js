@@ -19,7 +19,7 @@ const Tabs = ({ component, name, fields, ...props }) => {
 Tabs.propTypes = {
   component: PropTypes.string,
   name: PropTypes.string,
-  fields: PropTypes.array
+  fields: PropTypes.array,
 };
 
 export default Tabs;

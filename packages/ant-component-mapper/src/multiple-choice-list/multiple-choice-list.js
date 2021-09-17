@@ -13,7 +13,7 @@ const FinalCheckbox = ({ isDisabled, label, ...props }) => (
 
 FinalCheckbox.propTypes = {
   isDisabled: PropTypes.bool,
-  label: PropTypes.node
+  label: PropTypes.node,
 };
 
 const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperText, description, FormItemProps }) => (
@@ -31,15 +31,15 @@ const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperTex
 );
 
 Wrapper.propTypes = {
-  ...wrapperProps
+  ...wrapperProps,
 };
 
 const MultipleChoiceList = (props) => <MultipleChoiceListCommon {...props} Wrapper={Wrapper} Checkbox={FinalCheckbox} />;
 
 MultipleChoiceList.propTypes = {
   input: PropTypes.shape({
-    name: PropTypes.string.isRequired
-  })
+    name: PropTypes.string.isRequired,
+  }),
 };
 
 export default MultipleChoiceList;

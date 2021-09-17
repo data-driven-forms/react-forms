@@ -44,7 +44,7 @@ const metadata = {
   blueprint,
   suir,
   ant,
-  carbon
+  carbon,
 };
 
 const project = {
@@ -52,29 +52,29 @@ const project = {
     compile: {
       trigger: 'auto',
       action: 'hmr',
-      clearConsole: false
-    }
+      clearConsole: false,
+    },
   },
-  template: 'javascript'
+  template: 'javascript',
 };
 
 const useStyles = makeStyles((theme) => ({
   box: {
     [theme.breakpoints.down('sm')]: {
-      flexDirection: 'column-reverse'
-    }
+      flexDirection: 'column-reverse',
+    },
   },
   smTabDown: {
     display: 'none',
     [theme.breakpoints.down('sm')]: {
-      display: 'block'
-    }
+      display: 'block',
+    },
   },
   smTabUp: {
     display: 'block',
     [theme.breakpoints.down('sm')]: {
-      display: 'none'
-    }
+      display: 'none',
+    },
   },
   tab: {
     minWidth: 'initial',
@@ -83,78 +83,78 @@ const useStyles = makeStyles((theme) => ({
       background: theme.palette.common.white,
       boxShadow: theme.shadows[1],
       '&:last-child': {
-        marginBottom: 2
-      }
-    }
+        marginBottom: 2,
+      },
+    },
   },
   indicator: {
-    width: 4
+    width: 4,
   },
   tabLink: {
     textDecoration: 'none',
-    color: 'inherit'
+    color: 'inherit',
   },
   spinnerCheat: {
     flex: 1,
     position: 'relative',
     boxShadow: theme.shadows[1],
     '& .longer + #code-target': {
-      maxHeight: 'calc(100% - 49px)'
-    }
+      maxHeight: 'calc(100% - 49px)',
+    },
   },
   spinner: {
     position: 'absolute',
     top: 'calc(50% - 40px)',
     left: 'calc(50% - 40px)',
-    zIndex: -1
+    zIndex: -1,
   },
   editorContainer: {
     minHeight: 500,
     flex: 1,
     [theme.breakpoints.down('sm')]: {
       marginBottom: 16,
-      flexDirection: 'column'
+      flexDirection: 'column',
     },
     '& iframe': {
       border: 'none',
       [theme.breakpoints.down('sm')]: {
-        height: 500
-      }
-    }
+        height: 500,
+      },
+    },
   },
   buttonGroup: {
     marginTop: 16,
-    marginBottom: 16
+    marginBottom: 16,
   },
   alert: {
-    marginBottom: 8
+    marginBottom: 8,
   },
   variantTabs: {
     height: 49,
-    background: '#eaeaea'
+    background: '#eaeaea',
   },
   hidden: {
     height: 0,
-    minHeight: 0
+    minHeight: 0,
   },
   expand: {
-    transform: 'rotate(-90deg)'
+    transform: 'rotate(-90deg)',
   },
   hide: {
-    transform: 'rotate(90deg)'
+    transform: 'rotate(90deg)',
   },
   tableHeader: {
     paddingBottom: 0,
     [theme.breakpoints.down('sm')]: {
-      display: 'none'
-    }
+      display: 'none',
+    },
   },
   tableBody: {
-    paddingTop: 0
+    paddingTop: 0,
   },
   expandButton: {
-    width: '100%'
-  }
+    width: '100%',
+  },
 }));
 
 const stringifyWithFunctions = (string) =>
@@ -181,8 +181,8 @@ const ComponentExample = ({ variants, schema, activeMapper, component, schemaVar
       'index.html': metadata[activeMapper].html,
       'index.js': metadata[activeMapper].code,
       ...(component === 'wizard' && { 'index.js': metadata[activeMapper].wizardCode }),
-      'schema.js': `export default ${stringifyWithFunctions(selectedSchema)};`
-    }
+      'schema.js': `export default ${stringifyWithFunctions(selectedSchema)};`,
+    },
   };
   const basicEditorSettings = { height: '100%', hideNavigation: true, forceEmbedLayout: true, openFile: 'schema.js' };
 
@@ -256,7 +256,7 @@ const ComponentExample = ({ variants, schema, activeMapper, component, schemaVar
               orientation="horizontal"
               variant="fullWidth"
               classes={{
-                indicator: classes.indicator
+                indicator: classes.indicator,
               }}
             >
               {renderMapperTabs()}
@@ -273,7 +273,7 @@ const ComponentExample = ({ variants, schema, activeMapper, component, schemaVar
               orientation="vertical"
               variant="scrollable"
               classes={{
-                indicator: classes.indicator
+                indicator: classes.indicator,
               }}
             >
               {renderMapperTabs()}
@@ -339,11 +339,11 @@ ComponentExample.propTypes = {
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
-      required: PropTypes.bool
+      required: PropTypes.bool,
     })
   ).isRequired,
   schemaVariants: PropTypes.object,
-  activeSchema: PropTypes.string
+  activeSchema: PropTypes.string,
 };
 
 export default ComponentExample;

@@ -12,7 +12,7 @@ const schema = {
       component: componentTypes.TEXT_FIELD,
       name: 'field-1',
       label: 'Field 1',
-      helperText: 'To show field 2 write anything here!'
+      helperText: 'To show field 2 write anything here!',
     },
     {
       component: componentTypes.TEXT_FIELD,
@@ -20,13 +20,13 @@ const schema = {
       label: 'Field 2',
       initialValue: 'I am shown!',
       isDisabled: true,
-      condition: { when: 'field-1', isNotEmpty: true }
-    }
-  ]
+      condition: { when: 'field-1', isNotEmpty: true },
+    },
+  ],
 };
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 const IsNotEmpty = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;

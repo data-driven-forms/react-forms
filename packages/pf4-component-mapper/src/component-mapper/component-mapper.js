@@ -31,7 +31,7 @@ const mapper = {
   [componentTypes.PLAIN_TEXT]: PlainText,
   [componentTypes.FIELD_ARRAY]: FieldArray,
   [componentTypes.DUAL_LIST_SELECT]: DualListSelect,
-  [componentTypes.SLIDER]: Slider
+  [componentTypes.SLIDER]: Slider,
 };
 
 export default mapper;
@@ -47,9 +47,9 @@ export const components = {
   Switch,
   PlainText,
   DualListSelect,
-  Slider
+  Slider,
 };
 
 export const rawComponents = {
-  RawSelect
+  RawSelect,
 };

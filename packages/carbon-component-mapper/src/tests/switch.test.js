@@ -17,9 +17,9 @@ describe('<Switch />', () => {
           component: componentTypes.SWITCH,
           name: 'switch',
           label: 'Switch',
-          initialValue: true
-        }
-      ]
+          initialValue: true,
+        },
+      ],
     };
 
     const wrapper = mount(

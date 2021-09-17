@@ -25,7 +25,7 @@ ValueContainer.propTypes = {
   isMulti: PropTypes.bool,
   getInputProps: PropTypes.func.isRequired,
   isSearchable: PropTypes.bool,
-  inputRef: PropTypes.object
+  inputRef: PropTypes.object,
 };
 
 export default ValueContainer;

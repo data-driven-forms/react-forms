@@ -8,9 +8,9 @@ const schema = {
     {
       component: componentTypes.TIME_PICKER,
       label: 'Time Picker',
-      name: 'time-picker'
-    }
-  ]
+      name: 'time-picker',
+    },
+  ],
 };
 const variants = [...baseFieldProps];
 

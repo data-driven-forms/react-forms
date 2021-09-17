@@ -19,7 +19,7 @@ const changeToDefaultComponent = (schema) => {
   return {
     ...schema,
     ...(schema.component && { component: DEFAULT_COMPONENT }),
-    ...(schema.fields && { fields: changeToDefaultComponent(schema.fields) })
+    ...(schema.fields && { fields: changeToDefaultComponent(schema.fields) }),
   };
 };
 

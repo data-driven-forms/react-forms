@@ -4,7 +4,7 @@ const avalableMappers = [
   { title: 'BJS', mapper: 'blueprint' },
   { title: 'SUIR', mapper: 'suir' },
   { title: 'ANT', mapper: 'ant' },
-  { title: 'Carbon', mapper: 'carbon' }
+  { title: 'Carbon', mapper: 'carbon' },
 ];
 
 export default avalableMappers;

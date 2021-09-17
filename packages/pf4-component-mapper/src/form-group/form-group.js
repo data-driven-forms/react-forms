@@ -33,7 +33,7 @@ FormGroup.propTypes = {
   validateOnMount: PropTypes.bool,
   id: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)]).isRequired,
-  FormGroupProps: PropTypes.object
+  FormGroupProps: PropTypes.object,
 };
 
 export default FormGroup;

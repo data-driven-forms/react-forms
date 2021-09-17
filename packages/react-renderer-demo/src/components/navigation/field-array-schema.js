@@ -15,17 +15,17 @@ const arraySchemaDDF = {
           isRequired: true,
           validate: [
             {
-              type: 'required'
-            }
-          ]
+              type: 'required',
+            },
+          ],
         },
         {
           component: 'text-field',
           name: 'lastName',
           label: 'Last Name',
-          placeholder: 'Stavitel'
-        }
-      ]
+          placeholder: 'Stavitel',
+        },
+      ],
     },
     {
       component: 'field-array',
@@ -35,9 +35,9 @@ const arraySchemaDDF = {
       fields: [
         {
           component: 'text-field',
-          label: 'Item'
-        }
-      ]
+          label: 'Item',
+        },
+      ],
     },
     {
       component: 'field-array',
@@ -49,9 +49,9 @@ const arraySchemaDDF = {
         {
           component: 'text-field',
           label: 'Item',
-          type: 'number'
-        }
-      ]
+          type: 'number',
+        },
+      ],
     },
     {
       component: 'field-array',
@@ -66,13 +66,13 @@ const arraySchemaDDF = {
           isRequired: true,
           validate: [
             {
-              type: 'required'
-            }
-          ]
-        }
-      ]
-    }
-  ]
+              type: 'required',
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 export default arraySchemaDDF;

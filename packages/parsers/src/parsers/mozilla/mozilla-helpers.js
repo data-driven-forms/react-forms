@@ -64,7 +64,7 @@ export const componentMapper = (type, dataType) =>
     boolean: { component: componentTypes.CHECKBOX, type: 'checkbox', dataType },
     checkbox: { component: componentTypes.CHECKBOX, type: 'checkbox', dataType },
     checkboxes: { component: componentTypes.CHECKBOX, type: 'checkbox', dataType },
-    radio: { component: componentTypes.RADIO, type: 'radio', dataType }
+    radio: { component: componentTypes.RADIO, type: 'radio', dataType },
   }[type]);
 
 /**
@@ -154,10 +154,10 @@ export const createDynamicListWithFixed = (schema, uiSchema, key) => [
                 {
                   label: 'Please Choose',
                   value: undefined,
-                  disabled: true
+                  disabled: true,
                 },
                 { label: 'Yes', value: true },
-                { label: 'No', value: false }
+                { label: 'No', value: false },
               ]
             : ['Yes', 'No'];
       }
@@ -169,9 +169,9 @@ export const createDynamicListWithFixed = (schema, uiSchema, key) => [
       name: `${key}.items.${index}`,
       ...componentMapper((uiSchema.items && uiSchema.items[index]['ui:widget']) || type, type),
       options,
-      ...rest
+      ...rest,
     };
-  })
+  }),
 ];
 
 export const buildConditionalFields = (properties, dependencies, key) => ({
@@ -187,12 +187,12 @@ export const buildConditionalFields = (properties, dependencies, key) => ({
           ...newProperty[propertyKey],
           condition: {
             when: key,
-            is: conditionValues
-          }
-        }
+            is: conditionValues,
+          },
+        },
       }),
       {}
     );
     return { ...acc, ...enhancedProperties };
-  }, {})
+  }, {}),
 });

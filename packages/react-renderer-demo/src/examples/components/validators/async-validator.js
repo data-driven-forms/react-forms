@@ -5,7 +5,7 @@ import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template'
 import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 const mockEndpoint = (value) =>
   new Promise((resolve, reject) => {
@@ -36,9 +36,9 @@ const schema = {
       name: 'async-validator',
       label: 'Async validator',
       helperText: 'Type name John to fail validation. Validation will take 2 seconds.',
-      validate: [asyncValidator]
-    }
-  ]
+      validate: [asyncValidator],
+    },
+  ],
 };
 
 const AsyncValidator = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;

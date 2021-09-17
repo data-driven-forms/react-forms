@@ -7,7 +7,7 @@ const validatorTypes = {
   MIN_NUMBER_VALUE: 'min-number-value',
   MAX_NUMBER_VALUE: 'max-number-value',
   PATTERN: 'pattern',
-  URL: 'url'
+  URL: 'url',
 };
 
 export default validatorTypes;

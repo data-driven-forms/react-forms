@@ -10,7 +10,7 @@ import HelperTextBlock from '../helper-text-block/helper-text-block';
 const Switch = (props) => {
   const { input, meta, onText, offText, validateOnMount, helperText, WrapperProps, ...rest } = useFieldApi({
     ...prepareProps(props),
-    type: 'checkbox'
+    type: 'checkbox',
   });
 
   const invalid = (meta.touched || validateOnMount) && (meta.error || meta.submitError);
@@ -33,7 +33,7 @@ Switch.propTypes = {
   label: PropTypes.node,
   labelText: PropTypes.node,
   description: PropTypes.node,
-  WrapperProps: PropTypes.object
+  WrapperProps: PropTypes.object,
 };
 
 export default Switch;

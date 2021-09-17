@@ -33,33 +33,33 @@ import {
   NO_OPTIONS_TITLE,
   NO_VALUE_TITLE,
   RIGHT_TITLE,
-  STEP
+  STEP,
 } from '../helpers/field-properties';
 
 const useStyles = makeStyles((theme) => ({
   builderWrapper: {
-    width: '100%'
+    width: '100%',
   },
   close: {
-    padding: theme.spacing(0.5)
+    padding: theme.spacing(0.5),
   },
   builderControlsWrapper: {
-    width: '100%'
+    width: '100%',
   },
   builderButton: {
     '&:not(:last-child)': {
-      marginRight: 8
-    }
+      marginRight: 8,
+    },
   },
   expansionPanel: {
-    marginBottom: 8
+    marginBottom: 8,
   },
   emptyTarget: {
-    height: '100%'
+    height: '100%',
   },
   editor: {
-    width: '100%'
-  }
+    width: '100%',
+  },
 }));
 
 const EmptyTarget = () => {
@@ -81,7 +81,7 @@ const reducedMapper = {
   ...builderMapper,
   [componentTypes.DATE_PICKER]: undefined,
   'sub-form': undefined,
-  EmptyTarget
+  EmptyTarget,
 };
 
 const componentProperties = {
@@ -93,11 +93,11 @@ const componentProperties = {
       fieldProperties.INPUT_TYPE,
       fieldProperties.IS_DISABLED,
       fieldProperties.IS_READ_ONLY,
-      fieldProperties.HIDE_FIELD
-    ]
+      fieldProperties.HIDE_FIELD,
+    ],
   },
   [componentTypes.CHECKBOX]: {
-    attributes: [fieldProperties.LABEL, fieldProperties.IS_DISABLED, fieldProperties.OPTIONS, fieldProperties.HIDE_FIELD]
+    attributes: [fieldProperties.LABEL, fieldProperties.IS_DISABLED, fieldProperties.OPTIONS, fieldProperties.HIDE_FIELD],
   },
   [componentTypes.SELECT]: {
     attributes: [
@@ -106,13 +106,13 @@ const componentProperties = {
       fieldProperties.IS_DISABLED,
       fieldProperties.PLACEHOLDER,
       fieldProperties.HELPER_TEXT,
-      fieldProperties.HIDE_FIELD
-    ]
+      fieldProperties.HIDE_FIELD,
+    ],
   },
   [componentTypes.PLAIN_TEXT]: { attributes: [fieldProperties.MULTI_LINE_LABEL] },
   [componentTypes.RADIO]: { attributes: [fieldProperties.LABEL, fieldProperties.IS_DISABLED, fieldProperties.OPTIONS, fieldProperties.HIDE_FIELD] },
   [componentTypes.SWITCH]: {
-    attributes: [fieldProperties.LABEL, fieldProperties.IS_READ_ONLY, fieldProperties.IS_DISABLED, fieldProperties.HIDE_FIELD]
+    attributes: [fieldProperties.LABEL, fieldProperties.IS_READ_ONLY, fieldProperties.IS_DISABLED, fieldProperties.HIDE_FIELD],
   },
   [componentTypes.TEXTAREA]: {
     attributes: [
@@ -120,11 +120,11 @@ const componentProperties = {
       fieldProperties.HELPER_TEXT,
       fieldProperties.IS_READ_ONLY,
       fieldProperties.IS_DISABLED,
-      fieldProperties.HIDE_FIELD
-    ]
+      fieldProperties.HIDE_FIELD,
+    ],
   },
   [componentTypes.SLIDER]: {
-    attributes: [fieldProperties.LABEL, fieldProperties.HELPER_TEXT, fieldProperties.DESCRIPTION, fieldProperties.HIDE_FIELD, MIN, MAX, STEP]
+    attributes: [fieldProperties.LABEL, fieldProperties.HELPER_TEXT, fieldProperties.DESCRIPTION, fieldProperties.HIDE_FIELD, MIN, MAX, STEP],
   },
   [componentTypes.DUAL_LIST_SELECT]: {
     attributes: [
@@ -143,9 +143,9 @@ const componentProperties = {
       FILTER_VALUE_TITLE,
       FILTER_VALUE_TEXT,
       FILTER_OPTIONS_TEXT,
-      CHECKBOX_VARIANT
-    ]
-  }
+      CHECKBOX_VARIANT,
+    ],
+  },
 };
 
 const CopySnackbar = ({ open, handleClose }) => {
@@ -154,7 +154,7 @@ const CopySnackbar = ({ open, handleClose }) => {
     <Snackbar
       anchorOrigin={{
         vertical: 'bottom',
-        horizontal: 'right'
+        horizontal: 'right',
       }}
       open={open}
       autoHideDuration={6000}
@@ -163,7 +163,7 @@ const CopySnackbar = ({ open, handleClose }) => {
       action={[
         <IconButton key="close" aria-label="close" color="inherit" className={classes.close} onClick={handleClose}>
           <CloseIcon />
-        </IconButton>
+        </IconButton>,
       ]}
     />
   );
@@ -171,7 +171,7 @@ const CopySnackbar = ({ open, handleClose }) => {
 
 CopySnackbar.propTypes = {
   open: PropTypes.bool,
-  handleClose: PropTypes.func
+  handleClose: PropTypes.func,
 };
 
 const LiveEditor = () => {

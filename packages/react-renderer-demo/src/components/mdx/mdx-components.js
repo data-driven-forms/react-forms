@@ -23,23 +23,23 @@ const useHeadingStyles = makeStyles(() => ({
   anchor: {
     textDecoration: 'none',
     color: 'inherit',
-    fontWeight: 'inherit'
+    fontWeight: 'inherit',
   },
   heading: {
     '& button': {
-      visibility: 'hidden'
+      visibility: 'hidden',
     },
     '&:hover button': {
-      visibility: 'initial'
-    }
+      visibility: 'initial',
+    },
   },
   offset: {
     paddingTop: 92, // compensate for fixed header size and spacing
-    marginTop: -92 // compensate for fixed header size and spacing
+    marginTop: -92, // compensate for fixed header size and spacing
   },
   link: {
-    fontWeight: 'initial'
-  }
+    fontWeight: 'initial',
+  },
 }));
 
 export const Heading = ({ level, children, component }) => {
@@ -62,14 +62,14 @@ export const Heading = ({ level, children, component }) => {
 const tableStyles = makeStyles((theme) => ({
   table: {
     [theme.breakpoints.down('sm')]: {
-      tableLayout: 'fixed'
-    }
+      tableLayout: 'fixed',
+    },
   },
   cell: {
     [theme.breakpoints.down('sm')]: {
-      overflow: 'overlay'
-    }
-  }
+      overflow: 'overlay',
+    },
+  },
 }));
 
 const StyledCell = (props) => {
@@ -130,7 +130,7 @@ const MdxComponents = {
   th: ({ children }) => <StyledCell>{children}</StyledCell>,
   inlineCode: ({ children }) => (
     <code style={{ background: 'white', borderRadius: 3, fontFamily: 'courier, monospace', padding: '3px' }}>{children}</code>
-  )
+  ),
 };
 
 export default MdxComponents;

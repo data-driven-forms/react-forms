@@ -6,7 +6,7 @@ export const docsLinks = {
   blueprint: 'https://blueprintjs.com/docs/',
   suir: 'https://react.semantic-ui.com/',
   ant: 'https://ant.design/components/',
-  carbon: 'https://react.carbondesignsystem.com/?path=/story/'
+  carbon: 'https://react.carbondesignsystem.com/?path=/story/',
 };
 
 const mapperLinks = {
@@ -23,7 +23,7 @@ const mapperLinks = {
     [componentTypes.TEXTAREA]: 'text-area',
     [componentTypes.PLAIN_TEXT]: 'text',
     [componentTypes.DUAL_LIST_SELECT]: 'dual-list-selector',
-    [componentTypes.SLIDER]: 'slider'
+    [componentTypes.SLIDER]: 'slider',
   },
   mui: {
     'date-picker': 'text-field',
@@ -37,7 +37,7 @@ const mapperLinks = {
     [componentTypes.RADIO]: 'radio',
     [componentTypes.TABS]: 'tabs',
     [componentTypes.SWITCH]: 'switch',
-    [componentTypes.SLIDER]: 'slider'
+    [componentTypes.SLIDER]: 'slider',
   },
   blueprint: {
     [componentTypes.TEXT_FIELD]: '#core/components/text-inputs',
@@ -55,7 +55,7 @@ const mapperLinks = {
     [componentTypes.PLAIN_TEXT]: '#core/components/text',
     [componentTypes.BUTTON]: '#core/components/button',
     [componentTypes.DUAL_LIST_SELECT]: '',
-    [componentTypes.SLIDER]: '#core/components/sliders'
+    [componentTypes.SLIDER]: '#core/components/sliders',
   },
   ant: {
     [componentTypes.TEXT_FIELD]: 'input',
@@ -72,7 +72,7 @@ const mapperLinks = {
     [componentTypes.PLAIN_TEXT]: 'typography/#Typography.Paragraph',
     [componentTypes.BUTTON]: 'button',
     [componentTypes.DUAL_LIST_SELECT]: 'transfer',
-    [componentTypes.SLIDER]: 'slider'
+    [componentTypes.SLIDER]: 'slider',
   },
   carbon: {
     [componentTypes.TEXT_FIELD]: 'textinput',
@@ -89,8 +89,8 @@ const mapperLinks = {
     [componentTypes.PLAIN_TEXT]: '',
     [componentTypes.BUTTON]: 'button',
     [componentTypes.DUAL_LIST_SELECT]: 'transfer',
-    [componentTypes.SLIDER]: 'slider'
-  }
+    [componentTypes.SLIDER]: 'slider',
+  },
 };
 
 const mapper = (activeMapper, component) => (mapperLinks[activeMapper] && mapperLinks[activeMapper][component]) || ``;

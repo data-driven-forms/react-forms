@@ -23,7 +23,7 @@ const DatePicker = (props) => {
     locale = 'en',
     FormFieldGridProps,
     MuiPickersUtilsProviderProps,
-    DatePickerProps
+    DatePickerProps,
   } = useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
 
@@ -63,13 +63,13 @@ DatePicker.propTypes = {
   description: PropTypes.node,
   FormFieldGridProps: PropTypes.object,
   MuiPickersUtilsProviderProps: PropTypes.object,
-  DatePickerProps: PropTypes.object
+  DatePickerProps: PropTypes.object,
 };
 
 DatePicker.defaultProps = {
   FormFieldGridProps: {},
   MuiPickersUtilsProviderProps: {},
-  DatePickerProps: {}
+  DatePickerProps: {},
 };
 
 export default DatePicker;

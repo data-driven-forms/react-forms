@@ -21,11 +21,11 @@ PlainText.propTypes = {
   label: PropTypes.node.isRequired,
   name: PropTypes.string.isRequired,
   TextContentProps: PropTypes.object,
-  component: PropTypes.string
+  component: PropTypes.string,
 };
 
 PlainText.defaultProps = {
-  variant: 'p'
+  variant: 'p',
 };
 
 export default PlainText;

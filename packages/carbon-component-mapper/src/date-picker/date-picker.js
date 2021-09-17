@@ -28,11 +28,11 @@ DatePicker.propTypes = {
   isRequired: PropTypes.bool,
   datePickerType: PropTypes.string,
   DatePickerProps: PropTypes.object,
-  WrapperProps: PropTypes.object
+  WrapperProps: PropTypes.object,
 };
 
 DatePicker.defaultProps = {
-  datePickerType: 'single'
+  datePickerType: 'single',
 };
 
 export default DatePicker;

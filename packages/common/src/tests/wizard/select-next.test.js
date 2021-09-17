@@ -6,8 +6,8 @@ describe('selectNext', () => {
 
   const GET_STATE = () => ({
     values: {
-      foo: VALUE
-    }
+      foo: VALUE,
+    },
   });
 
   it('should return string nextstep', () => {
@@ -20,8 +20,8 @@ describe('selectNext', () => {
     const NEXTSTEP = {
       when: 'foo',
       stepMapper: {
-        [VALUE]: EXPECTED_NEXT_STEP
-      }
+        [VALUE]: EXPECTED_NEXT_STEP,
+      },
     };
 
     expect(selectNext(NEXTSTEP, GET_STATE)).toEqual(EXPECTED_NEXT_STEP);

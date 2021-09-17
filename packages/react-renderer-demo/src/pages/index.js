@@ -11,7 +11,7 @@ import LandingPageCards from '@docs/components/landing-page/landing-page-cards';
 const useStyles = makeStyles((theme) => ({
   landingPageContainer: {
     marginTop: 128,
-    paddingBottom: 48
+    paddingBottom: 48,
   },
   landingPageText: {
     marginTop: 48,
@@ -19,20 +19,20 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.common.white,
     maxWidth: 540,
     marginLeft: 'auto',
-    marginRight: 'auto'
+    marginRight: 'auto',
   },
   getStartedLink: {
     display: 'block',
     textAlign: 'center',
-    marginTop: 48
+    marginTop: 48,
   },
   npmLink: {
     display: 'flex',
     justifyContent: 'center',
-    marginTop: 24
+    marginTop: 24,
   },
   getStartedAnchor: {
-    textDecoration: 'none'
+    textDecoration: 'none',
   },
   getStartedButton: {
     border: `1px solid ${theme.palette.common.white}`,
@@ -40,22 +40,22 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.common.white,
     paddingLeft: 16,
     paddingRight: 16,
-    textTransform: 'none'
+    textTransform: 'none',
   },
   gitHubStar: {
     textDecoration: 'none',
     '& button': {
       lineHeight: 1.43,
       padding: '1px 6px',
-      maxHeight: 20
+      maxHeight: 20,
     },
     '& a': {
       padding: '2px 5px',
       lineHeight: 1.43,
       fontFamily: 'sans-serif',
-      maxHeight: 20
-    }
-  }
+      maxHeight: 20,
+    },
+  },
 }));
 
 const LandingPage = () => {

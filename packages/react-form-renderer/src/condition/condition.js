@@ -10,13 +10,13 @@ export const reducer = (state, { type, sets }) => {
     case 'formResetted':
       return {
         ...state,
-        initial: true
+        initial: true,
       };
     case 'rememberSets':
       return {
         ...state,
         initial: false,
-        sets
+        sets,
       };
     default:
       return state;
@@ -30,7 +30,7 @@ const Condition = React.memo(
 
     const [state, dispatch] = useReducer(reducer, {
       sets: [],
-      initial: true
+      initial: true,
     });
 
     const conditionResult = parseCondition(condition, values, field);
@@ -88,31 +88,31 @@ const conditionProps = {
   notMatch: PropTypes.any,
   then: PropTypes.shape({
     visible: PropTypes.bool,
-    set: PropTypes.object
+    set: PropTypes.object,
   }),
   else: PropTypes.shape({
     visible: PropTypes.bool,
-    set: PropTypes.object
-  })
+    set: PropTypes.object,
+  }),
 };
 
 const nestedConditions = {
   or: PropTypes.oneOfType([PropTypes.shape(conditionProps), PropTypes.arrayOf(PropTypes.shape(conditionProps))]),
   and: PropTypes.oneOfType([PropTypes.shape(conditionProps), PropTypes.arrayOf(PropTypes.shape(conditionProps))]),
   not: PropTypes.oneOfType([PropTypes.shape(conditionProps), PropTypes.arrayOf(PropTypes.shape(conditionProps))]),
-  sequence: PropTypes.arrayOf(PropTypes.shape(conditionProps))
+  sequence: PropTypes.arrayOf(PropTypes.shape(conditionProps)),
 };
 
 const conditionsProps = {
   ...conditionProps,
-  ...nestedConditions
+  ...nestedConditions,
 };
 
 Condition.propTypes = {
   condition: PropTypes.oneOfType([PropTypes.shape(conditionsProps), PropTypes.arrayOf(PropTypes.shape(conditionsProps))]),
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired,
   values: PropTypes.object.isRequired,
-  field: PropTypes.object.isRequired
+  field: PropTypes.object.isRequired,
 };
 
 export default Condition;

@@ -17,7 +17,7 @@ const submitFunction = async (values, formApi) => {
   formData.append(formApi.fileInputs[0], fileList[0]);
   return {
     base64Encoded,
-    formData
+    formData,
   };
 };
 

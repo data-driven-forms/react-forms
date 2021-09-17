@@ -76,5 +76,5 @@ export const dependencies = {
   '@blueprintjs/core': 'latest',
   '@blueprintjs/datetime': 'latest',
   '@blueprintjs/select': 'latest',
-  'prop-types': 'latest'
+  'prop-types': 'latest',
 };

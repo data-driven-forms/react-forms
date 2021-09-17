@@ -20,7 +20,7 @@ const componentMapper = {
         {getState().values['chosen-way']}
       </Typography>
     );
-  }
+  },
 };
 
 const schema = {
@@ -37,8 +37,8 @@ const schema = {
             when: 'selection',
             stepMapper: {
               'way-1': 'way-1',
-              'way-2': 'way-2'
-            }
+              'way-2': 'way-2',
+            },
           },
           fields: [
             {
@@ -47,9 +47,9 @@ const schema = {
               label: 'Select your way',
               isRequired: true,
               options: [{ label: 'Please choose your way' }, { value: 'way-1', label: 'way-1' }, { value: 'way-2', label: 'way-2' }],
-              validate: [{ type: 'required' }]
-            }
-          ]
+              validate: [{ type: 'required' }],
+            },
+          ],
         },
         {
           title: 'Way 1',
@@ -60,13 +60,13 @@ const schema = {
               initializeOnMount: true,
               hideField: true,
               name: 'chosen-way',
-              initialValue: 'User chose the first way'
+              initialValue: 'User chose the first way',
             },
             {
               component: 'Summary',
-              name: 'summary'
-            }
-          ]
+              name: 'summary',
+            },
+          ],
         },
         {
           title: 'Way 2',
@@ -77,17 +77,17 @@ const schema = {
               initializeOnMount: true,
               hideField: true,
               name: 'chosen-way',
-              initialValue: 'User chose the second way'
+              initialValue: 'User chose the second way',
             },
             {
               component: 'Summary',
-              name: 'summary'
-            }
-          ]
-        }
-      ]
-    }
-  ]
+              name: 'summary',
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 const FormTemplateWrapper = (props) => <FormTemplate {...props} showFormControls={false} />;

@@ -11,12 +11,12 @@ import { validationError, validationWarning } from '../helpers/helpers';
 
 const useListStyles = createUseStyles({
   root: {
-    padding: '.25em'
+    padding: '.25em',
   },
   selected: {
     color: 'white',
-    background: '#2185d0'
-  }
+    background: '#2185d0',
+  },
 });
 
 const List = ({
@@ -38,7 +38,7 @@ const List = ({
           <div
             className={clsx(classes.root, className, {
               [classes.selected]: selectedValues.includes(value),
-              [selectedClassName]: selectedValues.includes(value)
+              [selectedClassName]: selectedValues.includes(value),
             })}
             {...OptionProps}
             onClick={(e) => optionClick(e, value)}
@@ -56,7 +56,7 @@ List.propTypes = {
   value: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired
+      label: PropTypes.string.isRequired,
     })
   ),
   optionClick: PropTypes.func.isRequired,
@@ -64,12 +64,12 @@ List.propTypes = {
   filterValue: PropTypes.string,
   filterValueText: PropTypes.node,
   selectedValues: PropTypes.array,
-  OptionProps: PropTypes.shape({ className: PropTypes.string, selectedClassName: PropTypes.string })
+  OptionProps: PropTypes.shape({ className: PropTypes.string, selectedClassName: PropTypes.string }),
 };
 
 List.defaultProps = {
   value: [],
-  OptionProps: {}
+  OptionProps: {},
 };
 
 const Toolbar = ({ sortTitle, onFilter, onSort, sortDirection, value, placeholder, id, sortUpIcon, sortDownIcon, ...rest }) => (
@@ -98,34 +98,34 @@ Toolbar.propTypes = {
   placeholder: PropTypes.string,
   id: PropTypes.string,
   sortUpIcon: PropTypes.string,
-  sortDownIcon: PropTypes.string
+  sortDownIcon: PropTypes.string,
 };
 
 Toolbar.defaultProps = {
   sortUpIcon: 'sort amount up',
-  sortDownIcon: 'sort amount down'
+  sortDownIcon: 'sort amount down',
 };
 
 const useDualListStyles = createUseStyles({
   dualListButtons: {
     display: 'flex !important',
     alignItems: 'flex-start',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   transferButton: {
     display: 'block !important',
-    margin: 'auto !important'
+    margin: 'auto !important',
   },
   formField: {
     '&>label': {
-      display: 'inline-block !important'
-    }
+      display: 'inline-block !important',
+    },
   },
   '@media screen and (max-width: 767px)': {
     transferButton: {
-      transform: 'rotate(90deg)'
-    }
-  }
+      transform: 'rotate(90deg)',
+    },
+  },
 });
 
 const DualList = ({
@@ -175,7 +175,7 @@ const DualList = ({
   OptionsHeaderProps,
   ValuesHeaderProps,
   HelperTextProps,
-  FormFieldGridProps
+  FormFieldGridProps,
 }) => {
   const invalid = validationError(meta, validateOnMount);
   const classes = useDualListStyles();
@@ -188,7 +188,7 @@ const DualList = ({
           invalid && {
             content: meta.error || meta.submitError,
             pointing: 'left',
-            ...labelError
+            ...labelError,
           }
         }
         id={id || input.name}
@@ -338,7 +338,7 @@ DualList.propTypes = {
   filterOptionsText: PropTypes.node,
   id: PropTypes.string,
   input: PropTypes.shape({
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
   }),
   meta: PropTypes.any,
   state: PropTypes.object,
@@ -368,7 +368,7 @@ DualList.propTypes = {
   OptionsHeaderProps: PropTypes.object,
   ValuesHeaderProps: PropTypes.object,
   HelperTextProps: PropTypes.object,
-  FormFieldGridProps: PropTypes.object
+  FormFieldGridProps: PropTypes.object,
 };
 
 DualList.defaultProps = {
@@ -399,7 +399,7 @@ DualList.defaultProps = {
   OptionsHeaderProps: {},
   ValuesHeaderProps: {},
   HelperTextProps: {},
-  FormFieldGridProps: {}
+  FormFieldGridProps: {},
 };
 
 const DualListSelectWrapper = (props) => <DualListSelectCommon {...props} DualListSelect={DualList} />;

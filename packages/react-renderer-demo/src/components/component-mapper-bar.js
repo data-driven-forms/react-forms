@@ -15,15 +15,15 @@ const useStyles = makeStyles((theme) => ({
     marginTop: -48,
     [theme.breakpoints.down('xs')]: {
       marginTop: 'initial',
-      flexDirection: 'row'
-    }
+      flexDirection: 'row',
+    },
   },
   npm: {
     display: 'grid',
     '& img': {
-      margin: 'auto'
-    }
-  }
+      margin: 'auto',
+    },
+  },
 }));
 
 const ComponentMapperBar = ({ prefix, href }) => {
@@ -57,7 +57,7 @@ const ComponentMapperBar = ({ prefix, href }) => {
 
 ComponentMapperBar.propTypes = {
   prefix: PropTypes.string.isRequired,
-  href: PropTypes.string.isRequired
+  href: PropTypes.string.isRequired,
 };
 
 export default ComponentMapperBar;

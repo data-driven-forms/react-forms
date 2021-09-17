@@ -24,9 +24,9 @@ const schema = {
       component: 'custom-component',
       name: 'some-name',
       label: 'Custom component prop',
-      validate: [{ type: validatorTypes.REQUIRED, message: 'I am a required field' }]
-    }
-  ]
+      validate: [{ type: validatorTypes.REQUIRED, message: 'I am a required field' }],
+    },
+  ],
 };
 
 const SampleExample = () => {

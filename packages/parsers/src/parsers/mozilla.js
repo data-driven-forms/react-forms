@@ -14,7 +14,7 @@ import {
   replaceKeys,
   orderSchema,
   createDynamicListWithFixed,
-  buildConditionalFields
+  buildConditionalFields,
 } from './mozilla/mozilla-helpers';
 
 const keyReplacements = {
@@ -22,7 +22,7 @@ const keyReplacements = {
   anyOf: 'options',
   enum: 'options',
   format: 'type',
-  autofocus: 'autoFocus'
+  autofocus: 'autoFocus',
 };
 
 /**
@@ -56,11 +56,11 @@ const prepareSubForm = ({ schema, fields, uiSchema, key }) => ({
       // eslint-disable-line no-use-before-define
       properties: fields[key].properties,
       type: 'object',
-      required: fields[key].required
+      required: fields[key].required,
     },
     uiSchema[key],
     key
-  )
+  ),
 });
 
 /**
@@ -83,7 +83,7 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) =>
         {
           // eslint-disable-line no-use-before-define
           type: 'object',
-          properties: buildConditionalFields(fields, dependencies, key)
+          properties: buildConditionalFields(fields, dependencies, key),
         },
         uiSchema,
         keyPrefix
@@ -121,7 +121,7 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) =>
           { ...fields[key] }, // eslint-disable-line no-use-before-define
           uiSchema[key],
           key
-        )
+        ),
       };
       /**
        * Create new schema if a field is a dynamic list for adding/removing fields and there are some fixed form fields
@@ -135,7 +135,7 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) =>
           { ...fields[key], type: 'array', items: fields[key].items, additionalItems: fields[key].additionalItems },
           uiSchema[key],
           key
-        )
+        ),
       };
       /**
        * Create new schema if a field is another type of array form with only one item
@@ -149,11 +149,11 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) =>
             itemDefault: fields[key].items.default,
             items: { ...fields[key].items, default: [fields[key].items.default] },
             type: 'array',
-            title: fields[key].title
+            title: fields[key].title,
           },
           uiSchema[key],
           key
-        )
+        ),
       };
       /**
        * Yet another definition for SUB form
@@ -181,7 +181,7 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) =>
           fields[key].type,
         fields[key].type
       ),
-      ...createFieldOptions(uiSchema[key])
+      ...createFieldOptions(uiSchema[key]),
     };
 
     /**
@@ -200,8 +200,8 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) =>
           ...field.validate,
           {
             type: validatorTypes.MIN_NUMBER_VALUE,
-            value: field.minimum
-          }
+            value: field.minimum,
+          },
         ];
         delete field.minimum;
       }
@@ -211,8 +211,8 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) =>
           ...field.validate,
           {
             type: validatorTypes.MAX_NUMBER_VALUE,
-            value: field.maximum
-          }
+            value: field.maximum,
+          },
         ];
         delete field.maximum;
       }
@@ -224,7 +224,7 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) =>
     if (Object.prototype.hasOwnProperty.call(field, 'enum')) {
       field.enum = field.enum.map((item, index) => ({
         value: item,
-        label: (field.enumNames && field.enumNames[index]) || item
+        label: (field.enumNames && field.enumNames[index]) || item,
       }));
       delete field.enumNames;
     }
@@ -246,7 +246,7 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) =>
       if (!field.enum) {
         field.enum = [
           { label: 'Yes', value: true },
-          { label: 'No', value: false }
+          { label: 'No', value: false },
         ];
       }
 
@@ -256,7 +256,7 @@ const createFieldsFromObject = (schema, uiSchema = {}, keyPrefix) =>
       if (!field.isRequired && field.component === componentTypes.SELECT) {
         field.enum.unshift({
           label: 'Please Choose',
-          disabled: field.isRequired
+          disabled: field.isRequired,
         });
       }
     }
@@ -343,7 +343,7 @@ function convertSchema(schema, uiSchema = {}, key) {
       nestedSchema.itemDefault = Object.keys(schema.items.properties).reduce(
         (acc, curr) => ({
           ...acc,
-          [curr]: schema.items.properties[curr].default
+          [curr]: schema.items.properties[curr].default,
         }),
         {}
       );
@@ -356,7 +356,7 @@ function convertSchema(schema, uiSchema = {}, key) {
         name: key,
         label: schema.title,
         validate: validatorBuilder({ schema, key }),
-        options: schema.items.enum.map((value, index) => ({ value, label: (schema.items.enumNames && schema.items.enumNames[index]) || value }))
+        options: schema.items.enum.map((value, index) => ({ value, label: (schema.items.enumNames && schema.items.enumNames[index]) || value })),
       };
       /**
        * Dynamic items list with fixed elements
@@ -379,11 +379,11 @@ function convertSchema(schema, uiSchema = {}, key) {
       nestedSchema.fields = [
         convertSchema(
           {
-            ...schema.items
+            ...schema.items,
           },
           uiSchema && uiSchema.items,
           `${key}`
-        )
+        ),
       ];
 
       /**
@@ -400,7 +400,7 @@ function convertSchema(schema, uiSchema = {}, key) {
     return {
       ...meta,
       ...nestedSchema,
-      key
+      key,
     };
   }
 
@@ -412,7 +412,7 @@ function convertSchema(schema, uiSchema = {}, key) {
     return {
       ...meta,
       fields: createFieldsFromObject(schema, uiSchema, key),
-      key
+      key,
     };
   }
 }
@@ -437,7 +437,7 @@ const initialize = (schema, uiSchema = {}) => {
 
   return {
     schema: convertSchema(inputSchema, uiSchema),
-    defaultValues
+    defaultValues,
   };
 };
 

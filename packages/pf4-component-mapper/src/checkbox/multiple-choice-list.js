@@ -13,7 +13,7 @@ const FinalCheckbox = ({ option, ...props }) => (
 FinalCheckbox.propTypes = {
   checked: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
-  option: PropTypes.object
+  option: PropTypes.object,
 };
 
 const Wrapper = ({ meta, children, ...rest }) => (
@@ -23,7 +23,7 @@ const Wrapper = ({ meta, children, ...rest }) => (
 );
 
 Wrapper.propTypes = {
-  ...wrapperProps
+  ...wrapperProps,
 };
 
 const MultipleChoiceList = (props) => <MultipleChoiceListCommon {...props} Wrapper={Wrapper} Checkbox={FinalCheckbox} />;

@@ -22,11 +22,11 @@ const schema = {
               component: componentTypes.TEXT_FIELD,
               validate: [
                 {
-                  type: validatorTypes.REQUIRED
-                }
-              ]
-            }
-          ]
+                  type: validatorTypes.REQUIRED,
+                },
+              ],
+            },
+          ],
         },
         {
           name: '2',
@@ -37,13 +37,13 @@ const schema = {
               name: 'carrot',
               label: 'Carrot',
               title: 'Carrot',
-              component: componentTypes.TEXT_FIELD
-            }
-          ]
-        }
-      ]
-    }
-  ]
+              component: componentTypes.TEXT_FIELD,
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 const variants = [];
 

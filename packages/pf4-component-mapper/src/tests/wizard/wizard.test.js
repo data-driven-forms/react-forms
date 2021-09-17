@@ -22,38 +22,23 @@ describe('<Wizard />', () => {
   let wrapper;
 
   const nextButtonClick = (wrapper) => {
-    wrapper
-      .find('.pf-c-wizard__footer')
-      .find('button')
-      .at(0)
-      .simulate('click');
+    wrapper.find('.pf-c-wizard__footer').find('button').at(0).simulate('click');
 
     wrapper.update();
   };
 
   const backButtonClick = (wrapper) => {
-    wrapper
-      .find('.pf-c-wizard__footer')
-      .find('button')
-      .at(1)
-      .simulate('click');
+    wrapper.find('.pf-c-wizard__footer').find('button').at(1).simulate('click');
     wrapper.update();
   };
 
   const cancelButtonClick = (wrapper) => {
-    wrapper
-      .find('.pf-c-wizard__footer')
-      .find('button')
-      .at(2)
-      .simulate('click');
+    wrapper.find('.pf-c-wizard__footer').find('button').at(2).simulate('click');
     wrapper.update();
   };
 
   const closeIconClickWithHeader = (wrapper) => {
-    wrapper
-      .find('button')
-      .at(0)
-      .simulate('click');
+    wrapper.find('button').at(0).simulate('click');
     wrapper.update();
   };
 
@@ -67,7 +52,7 @@ describe('<Wizard />', () => {
     initialValues = {
       'foo-field': 'foo-field-value',
       'bar-field': 'bar-field-value',
-      'not-visited-field': 'not-visted-field-value'
+      'not-visited-field': 'not-visted-field-value',
     };
 
     schema = {
@@ -82,10 +67,10 @@ describe('<Wizard />', () => {
               fields: [
                 {
                   name: 'foo-field',
-                  component: 'text-field'
-                }
+                  component: 'text-field',
+                },
               ],
-              nextStep: '2'
+              nextStep: '2',
             },
             {
               name: '2',
@@ -93,13 +78,13 @@ describe('<Wizard />', () => {
               fields: [
                 {
                   name: 'bar-field',
-                  component: 'text-field'
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  component: 'text-field',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
 
     initialProps = {
@@ -107,7 +92,7 @@ describe('<Wizard />', () => {
       componentMapper,
       FormTemplate: (props) => <FormTemplate showFormControls={false} {...props} />,
       onSubmit: jest.fn(),
-      onCancel: jest.fn()
+      onCancel: jest.fn(),
     };
 
     nestedSchema = {
@@ -122,10 +107,10 @@ describe('<Wizard />', () => {
               fields: [
                 {
                   name: 'nested.foo-field',
-                  component: 'text-field'
-                }
+                  component: 'text-field',
+                },
               ],
-              nextStep: '2'
+              nextStep: '2',
             },
             {
               name: '2',
@@ -133,23 +118,23 @@ describe('<Wizard />', () => {
               fields: [
                 {
                   name: 'nested.second.bar-field',
-                  component: 'text-field'
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  component: 'text-field',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
 
     initialValuesNestedSchema = {
       nested: {
         'foo-field': 'foo-field-value',
         second: {
-          'bar-field': 'bar-field-value'
-        }
+          'bar-field': 'bar-field-value',
+        },
       },
-      'not-visited-field': 'not-visted-field-value'
+      'not-visited-field': 'not-visted-field-value',
     };
 
     Title = () => 'Title';
@@ -170,13 +155,13 @@ describe('<Wizard />', () => {
               fields: [
                 {
                   name: 'foo-field',
-                  component: 'text-field'
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  component: 'text-field',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
   });
 
@@ -237,13 +222,13 @@ describe('<Wizard />', () => {
               fields: [
                 {
                   name: 'foo-field',
-                  component: 'text-field'
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  component: 'text-field',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
 
     const onCancel = jest.fn();
@@ -274,48 +259,32 @@ describe('<Wizard />', () => {
               name: 'first-step',
               fields: [],
               nextStep: 'middle-step',
-              substepOf: { name: 'summary', title: <h2>Custom title 2</h2> }
+              substepOf: { name: 'summary', title: <h2>Custom title 2</h2> },
             },
             {
               name: 'middle-step',
               title: 'middle-step',
               fields: [],
               substepOf: 'summary',
-              nextStep: 'end'
+              nextStep: 'end',
             },
             {
               name: 'end',
               title: <h3>Custom title 3</h3>,
-              fields: []
-            }
-          ]
-        }
-      ]
+              fields: [],
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
 
-    expect(
-      wrapper
-        .find(WizardNavItem)
-        .first()
-        .props().content
-    ).toEqual(<h2>Custom title 2</h2>);
+    expect(wrapper.find(WizardNavItem).first().props().content).toEqual(<h2>Custom title 2</h2>);
 
-    expect(
-      wrapper
-        .find(WizardNavItem)
-        .first()
-        .children()
-        .find(WizardNavItem)
-    ).toHaveLength(2);
+    expect(wrapper.find(WizardNavItem).first().children().find(WizardNavItem)).toHaveLength(2);
 
-    expect(
-      wrapper
-        .find(WizardNavItem)
-        .last()
-        .props().content
-    ).toEqual(<h3>Custom title 3</h3>);
+    expect(wrapper.find(WizardNavItem).last().props().content).toEqual(<h3>Custom title 3</h3>);
   });
 
   it('should render correctly with custom StepTemplate on field', () => {
@@ -331,11 +300,11 @@ describe('<Wizard />', () => {
               title: <h1>Custom title</h1>,
               name: 'first-step',
               fields: [],
-              StepTemplate
-            }
-          ]
-        }
-      ]
+              StepTemplate,
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
@@ -356,11 +325,11 @@ describe('<Wizard />', () => {
             {
               title: <h1>Custom title</h1>,
               name: 'first-step',
-              fields: []
-            }
-          ]
-        }
-      ]
+              fields: [],
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
@@ -383,11 +352,11 @@ describe('<Wizard />', () => {
               title: <h1>Custom title</h1>,
               name: 'first-step',
               fields: [],
-              StepTemplate: StepTemplateField
-            }
-          ]
-        }
-      ]
+              StepTemplate: StepTemplateField,
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
@@ -410,10 +379,10 @@ describe('<Wizard />', () => {
               fields: [
                 {
                   name: 'foo-field',
-                  component: 'text-field'
-                }
+                  component: 'text-field',
+                },
               ],
-              nextStep: '2'
+              nextStep: '2',
             },
             {
               name: '2',
@@ -421,13 +390,13 @@ describe('<Wizard />', () => {
               fields: [
                 {
                   name: 'bar-field',
-                  component: 'text-field'
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  component: 'text-field',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
@@ -460,13 +429,13 @@ describe('<Wizard />', () => {
               fields: [
                 {
                   name: 'foo-field',
-                  component: 'text-field'
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  component: 'text-field',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
@@ -507,16 +476,16 @@ describe('<Wizard />', () => {
       maxStepIndex: 1,
       navSchema: [
         { index: 0, name: '1', primary: true, substepOf: undefined, substepOfTitle: undefined, title: 'foo-step' },
-        { index: 1, name: '2', primary: true, substepOf: undefined, substepOfTitle: undefined, title: 'bar-step' }
+        { index: 1, name: '2', primary: true, substepOf: undefined, substepOfTitle: undefined, title: 'bar-step' },
       ],
       prevSteps: ['1'],
-      registeredFieldsHistory: { 1: ['foo-field'] }
+      registeredFieldsHistory: { 1: ['foo-field'] },
     };
 
     expect(onSubmit).toHaveBeenCalledWith(
       {
         'foo-field': 'foo-field-value',
-        'bar-field': 'bar-field-value'
+        'bar-field': 'bar-field-value',
       },
       formOptions,
       state
@@ -537,7 +506,7 @@ describe('<Wizard />', () => {
       loading: expect.any(Boolean),
       maxStepIndex: expect.any(Number),
       navSchema: expect.any(Object),
-      prevSteps: expect.any(Array)
+      prevSteps: expect.any(Array),
     });
 
     expect(onCancel).toHaveBeenCalledWith(initialValues, state);
@@ -559,7 +528,7 @@ describe('<Wizard />', () => {
       loading: expect.any(Boolean),
       maxStepIndex: expect.any(Number),
       navSchema: expect.any(Object),
-      prevSteps: expect.any(Array)
+      prevSteps: expect.any(Array),
     });
 
     expect(onCancel).toHaveBeenCalledWith(initialValues, state);
@@ -581,9 +550,9 @@ describe('<Wizard />', () => {
         nested: {
           'foo-field': 'foo-field-value',
           second: {
-            'bar-field': 'bar-field-value'
-          }
-        }
+            'bar-field': 'bar-field-value',
+          },
+        },
       },
       formOptions,
       state
@@ -594,20 +563,8 @@ describe('<Wizard />', () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
 
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(2);
-    expect(
-      wrapper
-        .find('.pf-c-wizard__nav-item')
-        .first()
-        .childAt(0)
-        .text()
-    ).toEqual('foo-step');
-    expect(
-      wrapper
-        .find('.pf-c-wizard__nav-item')
-        .last()
-        .childAt(0)
-        .text()
-    ).toEqual('bar-step');
+    expect(wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).text()).toEqual('foo-step');
+    expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).text()).toEqual('bar-step');
   });
 
   it('should jump when click simple navigation', () => {
@@ -620,21 +577,13 @@ describe('<Wizard />', () => {
     expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
 
     // click on first nav link
-    wrapper
-      .find('.pf-c-wizard__nav-item')
-      .first()
-      .childAt(0)
-      .simulate('click');
+    wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).simulate('click');
     wrapper.update();
 
     expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
 
     // go back
-    wrapper
-      .find('.pf-c-wizard__nav-item')
-      .last()
-      .childAt(0)
-      .simulate('click');
+    wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).simulate('click');
     wrapper.update();
 
     expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
@@ -650,11 +599,7 @@ describe('<Wizard />', () => {
 
     // click on first nav link
     await act(async () => {
-      wrapper
-        .find('.pf-c-wizard__nav-item')
-        .first()
-        .childAt(0)
-        .simulate('click');
+      wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).simulate('click');
     });
     wrapper.update();
 
@@ -674,10 +619,10 @@ describe('<Wizard />', () => {
               fields: [
                 {
                   name: 'foo-field',
-                  component: 'text-field'
-                }
+                  component: 'text-field',
+                },
               ],
-              nextStep: '2'
+              nextStep: '2',
             },
             {
               name: '2',
@@ -686,34 +631,21 @@ describe('<Wizard />', () => {
               fields: [
                 {
                   name: 'bar-field',
-                  component: 'text-field'
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  component: 'text-field',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
 
     expect(wrapper.find('.pf-c-wizard__nav-list')).toHaveLength(2);
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(3);
-    expect(
-      wrapper
-        .find('.pf-c-wizard__nav-item')
-        .at(1)
-        .childAt(0)
-        .text()
-    ).toEqual('barbar');
-    expect(
-      wrapper
-        .find('.pf-c-wizard__nav-list')
-        .last()
-        .childAt(0)
-        .childAt(0)
-        .text()
-    ).toEqual('bar-step');
+    expect(wrapper.find('.pf-c-wizard__nav-item').at(1).childAt(0).text()).toEqual('barbar');
+    expect(wrapper.find('.pf-c-wizard__nav-list').last().childAt(0).childAt(0).text()).toEqual('bar-step');
   });
 
   it('should jump with substeps', () => {
@@ -729,10 +661,10 @@ describe('<Wizard />', () => {
               fields: [
                 {
                   name: 'foo-field',
-                  component: 'text-field'
-                }
+                  component: 'text-field',
+                },
               ],
-              nextStep: '2'
+              nextStep: '2',
             },
             {
               name: '2',
@@ -741,13 +673,13 @@ describe('<Wizard />', () => {
               fields: [
                 {
                   name: 'bar-field',
-                  component: 'text-field'
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  component: 'text-field',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
@@ -759,21 +691,13 @@ describe('<Wizard />', () => {
     expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
 
     // click on first nav link
-    wrapper
-      .find('.pf-c-wizard__nav-item')
-      .first()
-      .childAt(0)
-      .simulate('click');
+    wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).simulate('click');
     wrapper.update();
 
     expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
 
     // go back through the primary step
-    wrapper
-      .find('.pf-c-wizard__nav-item')
-      .at(1)
-      .childAt(0)
-      .simulate('click');
+    wrapper.find('.pf-c-wizard__nav-item').at(1).childAt(0).simulate('click');
     wrapper.update();
 
     expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
@@ -783,11 +707,7 @@ describe('<Wizard />', () => {
     expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
 
     // go back through the substep
-    wrapper
-      .find('.pf-c-wizard__nav-item')
-      .last()
-      .childAt(0)
-      .simulate('click');
+    wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).simulate('click');
     wrapper.update();
 
     expect(wrapper.find(TextInput).props().name).toEqual('bar-field');
@@ -807,10 +727,10 @@ describe('<Wizard />', () => {
               fields: [
                 {
                   name: 'foo-field',
-                  component: 'text-field'
-                }
+                  component: 'text-field',
+                },
               ],
-              nextStep: '2'
+              nextStep: '2',
             },
             {
               name: '2',
@@ -819,13 +739,13 @@ describe('<Wizard />', () => {
               fields: [
                 {
                   name: 'bar-field',
-                  component: 'text-field'
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  component: 'text-field',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
@@ -840,11 +760,7 @@ describe('<Wizard />', () => {
     expect(wrapper.find('.pf-c-wizard__nav-link.pf-m-disabled')).toHaveLength(0);
 
     // click on first nav link
-    wrapper
-      .find('.pf-c-wizard__nav-item')
-      .first()
-      .childAt(0)
-      .simulate('click');
+    wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).simulate('click');
     wrapper.update();
 
     expect(wrapper.find(TextInput).props().name).toEqual('foo-field');
@@ -873,10 +789,10 @@ describe('<Wizard />', () => {
                 {
                   name: 'foo-field',
                   component: 'text-field',
-                  validate: [asyncValidator]
-                }
+                  validate: [asyncValidator],
+                },
               ],
-              nextStep: 'ba'
+              nextStep: 'ba',
             },
             {
               title: 'bar-step',
@@ -884,13 +800,13 @@ describe('<Wizard />', () => {
               fields: [
                 {
                   name: 'bar-field',
-                  component: 'text-field'
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  component: 'text-field',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
 
     let wrapper;
@@ -900,24 +816,14 @@ describe('<Wizard />', () => {
     });
     wrapper.update();
 
-    expect(
-      wrapper
-        .find(Button)
-        .first()
-        .props().isDisabled
-    ).toEqual(true);
+    expect(wrapper.find(Button).first().props().isDisabled).toEqual(true);
 
     await act(async () => {
       jest.runAllTimers();
     });
     wrapper.update();
 
-    expect(
-      wrapper
-        .find(Button)
-        .first()
-        .props().isDisabled
-    ).toEqual(false);
+    expect(wrapper.find(Button).first().props().isDisabled).toEqual(false);
 
     jest.useRealTimers();
   });
@@ -940,10 +846,10 @@ describe('<Wizard />', () => {
                 {
                   name: 'foo-field',
                   component: 'text-field',
-                  validate: [asyncValidator]
-                }
+                  validate: [asyncValidator],
+                },
               ],
-              nextStep: 'bar'
+              nextStep: 'bar',
             },
             {
               title: 'bar-step',
@@ -951,13 +857,13 @@ describe('<Wizard />', () => {
               fields: [
                 {
                   name: 'bar-field',
-                  component: 'text-field'
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  component: 'text-field',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
 
     await act(async () => {
@@ -971,10 +877,7 @@ describe('<Wizard />', () => {
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find(Button)
-        .first()
-        .simulate('click');
+      wrapper.find(Button).first().simulate('click');
     });
     wrapper.update();
 
@@ -983,19 +886,10 @@ describe('<Wizard />', () => {
     });
     wrapper.update();
 
-    expect(
-      wrapper
-        .find('.pf-c-wizard__nav-item')
-        .last()
-        .childAt(0)
-        .prop('aria-disabled')
-    ).toEqual(null);
+    expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).prop('aria-disabled')).toEqual(null);
 
     await act(async () => {
-      wrapper
-        .find(Button)
-        .at(1)
-        .simulate('click');
+      wrapper.find(Button).at(1).simulate('click');
     });
     wrapper.update();
 
@@ -1005,13 +899,7 @@ describe('<Wizard />', () => {
     });
     wrapper.update();
 
-    expect(
-      wrapper
-        .find('.pf-c-wizard__nav-item')
-        .last()
-        .childAt(0)
-        .prop('aria-disabled')
-    ).toEqual(true);
+    expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).prop('aria-disabled')).toEqual(true);
 
     await act(async () => {
       jest.advanceTimersByTime(100);
@@ -1023,13 +911,7 @@ describe('<Wizard />', () => {
     });
     wrapper.update();
 
-    expect(
-      wrapper
-        .find('.pf-c-wizard__nav-item')
-        .last()
-        .childAt(0)
-        .prop('aria-disabled')
-    ).toEqual(null);
+    expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).prop('aria-disabled')).toEqual(null);
 
     jest.useRealTimers();
   });
@@ -1048,10 +930,10 @@ describe('<Wizard />', () => {
                 {
                   name: 'foo-field',
                   label: 'foo',
-                  component: componentTypes.TEXT_FIELD
-                }
+                  component: componentTypes.TEXT_FIELD,
+                },
               ],
-              nextStep: '2'
+              nextStep: '2',
             },
             {
               name: '2',
@@ -1065,11 +947,11 @@ describe('<Wizard />', () => {
                   component: componentTypes.TEXT_FIELD,
                   validate: [
                     {
-                      type: validatorTypes.REQUIRED
-                    }
-                  ]
-                }
-              ]
+                      type: validatorTypes.REQUIRED,
+                    },
+                  ],
+                },
+              ],
             },
             {
               name: '3',
@@ -1079,13 +961,13 @@ describe('<Wizard />', () => {
                 {
                   name: 'conan-field',
                   label: 'conan',
-                  component: componentTypes.TEXT_FIELD
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  component: componentTypes.TEXT_FIELD,
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(
@@ -1098,129 +980,52 @@ describe('<Wizard />', () => {
       />
     );
 
-    expect(
-      wrapper
-        .find('.pf-c-wizard__main-body')
-        .children()
-        .last()
-        .childAt(0)
-        .text()
-    ).toEqual('foo ');
+    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('foo ');
     expect(wrapper.find('.pf-c-wizard__nav-item')).toHaveLength(4);
 
     nextButtonClick(wrapper);
 
-    expect(
-      wrapper
-        .find('.pf-c-wizard__main-body')
-        .children()
-        .last()
-        .childAt(0)
-        .text()
-    ).toEqual('bar ');
+    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar ');
 
     nextButtonClick(wrapper);
 
     // however, it is not possible because form is invalid
-    expect(
-      wrapper
-        .find('.pf-c-wizard__main-body')
-        .children()
-        .last()
-        .childAt(0)
-        .text()
-    ).toEqual('bar ');
+    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar ');
 
     changeValue(wrapper, 'hello');
     nextButtonClick(wrapper);
 
     // voila
-    expect(
-      wrapper
-        .find('.pf-c-wizard__main-body')
-        .children()
-        .last()
-        .childAt(0)
-        .text()
-    ).toEqual('conan ');
-    expect(
-      wrapper
-        .find('.pf-c-wizard__nav-item')
-        .last()
-        .childAt(0)
-        .prop('aria-disabled')
-    ).toEqual(null);
+    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('conan ');
+    expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).prop('aria-disabled')).toEqual(null);
 
     backButtonClick(wrapper);
 
-    expect(
-      wrapper
-        .find('.pf-c-wizard__main-body')
-        .children()
-        .last()
-        .childAt(0)
-        .text()
-    ).toEqual('bar ');
+    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar ');
 
     changeValue(wrapper, '');
     nextButtonClick(wrapper);
 
     // it is invalid :(
-    expect(
-      wrapper
-        .find('.pf-c-wizard__main-body')
-        .children()
-        .last()
-        .childAt(0)
-        .text()
-    ).toEqual('bar ');
+    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('bar ');
 
     // let's look if last nav item is disabled (click event is working with 'disabled' <a> element)
-    expect(
-      wrapper
-        .find('.pf-c-wizard__nav-item')
-        .last()
-        .childAt(0)
-        .prop('aria-disabled')
-    ).toEqual(true);
+    expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).prop('aria-disabled')).toEqual(true);
 
     // go to first step
-    wrapper
-      .find('.pf-c-wizard__nav-item')
-      .first()
-      .childAt(0)
-      .simulate('click');
+    wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).simulate('click');
     wrapper.update();
 
     // still invalid :(
-    expect(
-      wrapper
-        .find('.pf-c-wizard__main-body')
-        .children()
-        .last()
-        .childAt(0)
-        .text()
-    ).toEqual('foo ');
-    expect(
-      wrapper
-        .find('.pf-c-wizard__nav-item')
-        .last()
-        .childAt(0)
-        .prop('aria-disabled')
-    ).toEqual(true);
+    expect(wrapper.find('.pf-c-wizard__main-body').children().last().childAt(0).text()).toEqual('foo ');
+    expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).prop('aria-disabled')).toEqual(true);
 
     // make form valid again
     nextButtonClick(wrapper);
     changeValue(wrapper, 'hello');
     nextButtonClick(wrapper);
 
-    expect(
-      wrapper
-        .find('.pf-c-wizard__nav-item')
-        .last()
-        .childAt(0)
-        .prop('aria-disabled')
-    ).toEqual(null);
+    expect(wrapper.find('.pf-c-wizard__nav-item').last().childAt(0).prop('aria-disabled')).toEqual(null);
   });
 
   describe('predicting steps', () => {
@@ -1242,16 +1047,16 @@ describe('<Wizard />', () => {
                 when: 'source.source-type',
                 stepMapper: {
                   aws: 'aws',
-                  google: 'google'
-                }
+                  google: 'google',
+                },
               },
               fields: [
                 {
                   name: 'source.source-type',
                   label: 'Source type',
-                  component: componentTypes.TEXT_FIELD
-                }
-              ]
+                  component: componentTypes.TEXT_FIELD,
+                },
+              ],
             },
             {
               title: SECOND_TITLE_AWS,
@@ -1261,9 +1066,9 @@ describe('<Wizard />', () => {
                 {
                   component: componentTypes.TEXT_FIELD,
                   name: 'aws-field',
-                  label: 'Aws field part'
-                }
-              ]
+                  label: 'Aws field part',
+                },
+              ],
             },
             {
               title: SECOND_TITLE_GOOLE,
@@ -1273,18 +1078,18 @@ describe('<Wizard />', () => {
                 {
                   component: componentTypes.TEXT_FIELD,
                   name: 'google.google-field',
-                  label: 'Google field part'
-                }
-              ]
+                  label: 'Google field part',
+                },
+              ],
             },
             {
               title: THIRD_TITLE,
               fields: [],
-              name: 'summary'
-            }
-          ]
-        }
-      ]
+              name: 'summary',
+            },
+          ],
+        },
+      ],
     };
 
     it('predict steps with dynamic wizard', () => {
@@ -1299,35 +1104,15 @@ describe('<Wizard />', () => {
       );
 
       expect(wrapper.find(WizardNavItem)).toHaveLength(1);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(0)
-          .text()
-      ).toEqual(FIRST_TITLE);
+      expect(wrapper.find(WizardNavItem).at(0).text()).toEqual(FIRST_TITLE);
 
       changeValue(wrapper, 'aws');
       nextButtonClick(wrapper);
 
       expect(wrapper.find(WizardNavItem)).toHaveLength(3);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(0)
-          .text()
-      ).toEqual(FIRST_TITLE);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(1)
-          .text()
-      ).toEqual(SECOND_TITLE_AWS);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(2)
-          .text()
-      ).toEqual(THIRD_TITLE);
+      expect(wrapper.find(WizardNavItem).at(0).text()).toEqual(FIRST_TITLE);
+      expect(wrapper.find(WizardNavItem).at(1).text()).toEqual(SECOND_TITLE_AWS);
+      expect(wrapper.find(WizardNavItem).at(2).text()).toEqual(THIRD_TITLE);
     });
 
     it('disable nav when jumped into compileMapper step', () => {
@@ -1348,24 +1133,9 @@ describe('<Wizard />', () => {
 
       backButtonClick(wrapper);
 
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(0)
-          .props().isDisabled
-      ).toEqual(false);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(1)
-          .props().isDisabled
-      ).toEqual(true);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(2)
-          .props().isDisabled
-      ).toEqual(true);
+      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(true);
+      expect(wrapper.find(WizardNavItem).at(2).props().isDisabled).toEqual(true);
     });
 
     it('disable nav when jumped into compileMapper step from invalid step', () => {
@@ -1381,16 +1151,16 @@ describe('<Wizard />', () => {
                 nextStep: {
                   when: 'source.source-type',
                   stepMapper: {
-                    aws: 'aws'
-                  }
+                    aws: 'aws',
+                  },
                 },
                 fields: [
                   {
                     name: 'source.source-type',
                     label: 'Source type',
-                    component: componentTypes.TEXT_FIELD
-                  }
-                ]
+                    component: componentTypes.TEXT_FIELD,
+                  },
+                ],
               },
               {
                 title: SECOND_TITLE_AWS,
@@ -1401,13 +1171,13 @@ describe('<Wizard />', () => {
                     component: componentTypes.TEXT_FIELD,
                     name: 'aws-field',
                     label: 'Aws field part',
-                    validate: [{ type: validatorTypes.REQUIRED }]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
+                    validate: [{ type: validatorTypes.REQUIRED }],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
       };
 
       const wrapper = mount(
@@ -1424,34 +1194,14 @@ describe('<Wizard />', () => {
       nextButtonClick(wrapper);
 
       expect(wrapper.find(WizardNavItem)).toHaveLength(2);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(0)
-          .props().isDisabled
-      ).toEqual(false);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(1)
-          .props().isDisabled
-      ).toEqual(false);
+      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(false);
 
       changeValue(wrapper, undefined);
       backButtonClick(wrapper);
 
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(0)
-          .props().isDisabled
-      ).toEqual(false);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(1)
-          .props().isDisabled
-      ).toEqual(true);
+      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(true);
     });
 
     it('disable nav when jumped into step with function nextStep', () => {
@@ -1470,9 +1220,9 @@ describe('<Wizard />', () => {
                   {
                     name: 'source.source-type',
                     label: 'Source type',
-                    component: componentTypes.TEXT_FIELD
-                  }
-                ]
+                    component: componentTypes.TEXT_FIELD,
+                  },
+                ],
               },
               {
                 title: SECOND_TITLE_AWS,
@@ -1482,19 +1232,19 @@ describe('<Wizard />', () => {
                   {
                     component: componentTypes.TEXT_FIELD,
                     name: 'aws-field',
-                    label: 'Aws field part'
-                  }
-                ]
-              }
-            ]
-          }
-        ]
+                    label: 'Aws field part',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
       };
 
       const EXPECTED_VALUES = {
         source: {
-          'source-type': 'aws'
-        }
+          'source-type': 'aws',
+        },
       };
 
       const wrapper = mount(
@@ -1514,18 +1264,8 @@ describe('<Wizard />', () => {
 
       backButtonClick(wrapper);
 
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(0)
-          .props().isDisabled
-      ).toEqual(false);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(1)
-          .props().isDisabled
-      ).toEqual(true);
+      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(true);
 
       const firstArgumentOfLastNextStepCall = NEXTSTEP_FUNCTION.mock.calls[NEXTSTEP_FUNCTION.mock.calls.length - 1][0];
       expect(firstArgumentOfLastNextStepCall).toEqual({ values: EXPECTED_VALUES });
@@ -1547,9 +1287,9 @@ describe('<Wizard />', () => {
                   {
                     name: 'source.source-type',
                     label: 'Source type',
-                    component: componentTypes.TEXT_FIELD
-                  }
-                ]
+                    component: componentTypes.TEXT_FIELD,
+                  },
+                ],
               },
               {
                 title: SECOND_TITLE_AWS,
@@ -1559,13 +1299,13 @@ describe('<Wizard />', () => {
                   {
                     component: componentTypes.TEXT_FIELD,
                     name: 'aws-field',
-                    label: 'Aws field part'
-                  }
-                ]
-              }
-            ]
-          }
-        ]
+                    label: 'Aws field part',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
       };
 
       const wrapper = mount(
@@ -1582,34 +1322,14 @@ describe('<Wizard />', () => {
       nextButtonClick(wrapper);
 
       expect(wrapper.find(WizardNavItem)).toHaveLength(2);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(0)
-          .props().isDisabled
-      ).toEqual(false);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(1)
-          .props().isDisabled
-      ).toEqual(false);
+      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(false);
 
       backButtonClick(wrapper);
 
       expect(wrapper.find(WizardNavItem)).toHaveLength(2);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(0)
-          .props().isDisabled
-      ).toEqual(false);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(1)
-          .props().isDisabled
-      ).toEqual(true);
+      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(true);
     });
 
     it('crossroads variable predicts in realtime', () => {
@@ -1627,31 +1347,31 @@ describe('<Wizard />', () => {
                   when: 'source.source-type',
                   stepMapper: {
                     aws: 'aws',
-                    google: 'summary'
-                  }
+                    google: 'summary',
+                  },
                 },
                 fields: [
                   {
                     name: 'source.source-type',
                     label: 'Source type',
-                    component: componentTypes.TEXT_FIELD
-                  }
-                ]
+                    component: componentTypes.TEXT_FIELD,
+                  },
+                ],
               },
               {
                 title: 'second-step',
                 name: 'aws',
                 nextStep: 'summary',
-                fields: []
+                fields: [],
               },
               {
                 title: 'summary',
                 name: 'summary',
-                fields: []
-              }
-            ]
-          }
-        ]
+                fields: [],
+              },
+            ],
+          },
+        ],
       };
 
       const wrapper = mount(<FormRenderer {...initialProps} schema={wizardSchema} />);
@@ -1662,118 +1382,44 @@ describe('<Wizard />', () => {
 
       // predict steps for aws
       expect(wrapper.find(WizardNavItem)).toHaveLength(3);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(0)
-          .props().isDisabled
-      ).toEqual(false);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(1)
-          .props().isDisabled
-      ).toEqual(true);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(2)
-          .props().isDisabled
-      ).toEqual(true);
+      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(true);
+      expect(wrapper.find(WizardNavItem).at(2).props().isDisabled).toEqual(true);
 
       changeValue(wrapper, 'google');
 
       // predict steps for google
       expect(wrapper.find(WizardNavItem)).toHaveLength(2);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(0)
-          .props().isDisabled
-      ).toEqual(false);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(1)
-          .props().isDisabled
-      ).toEqual(true);
+      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(true);
 
       nextButtonClick(wrapper);
 
       expect(wrapper.find(WizardNavItem)).toHaveLength(2);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(0)
-          .props().isDisabled
-      ).toEqual(false);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(1)
-          .props().isDisabled
-      ).toEqual(false);
+      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(false);
 
       // click on first nav link
-      wrapper
-        .find('.pf-c-wizard__nav-item')
-        .first()
-        .childAt(0)
-        .simulate('click');
+      wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).simulate('click');
       wrapper.update();
 
       // keep the second step enabled
       expect(wrapper.find(WizardNavItem)).toHaveLength(2);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(0)
-          .props().isDisabled
-      ).toEqual(false);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(1)
-          .props().isDisabled
-      ).toEqual(false);
+      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(false);
 
       changeValue(wrapper, 'aws');
 
       expect(wrapper.find(WizardNavItem)).toHaveLength(3);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(0)
-          .props().isDisabled
-      ).toEqual(false);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(1)
-          .props().isDisabled
-      ).toEqual(true);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(2)
-          .props().isDisabled
-      ).toEqual(true);
+      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(true);
+      expect(wrapper.find(WizardNavItem).at(2).props().isDisabled).toEqual(true);
 
       changeValue(wrapper, 'google');
 
       expect(wrapper.find(WizardNavItem)).toHaveLength(2);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(0)
-          .props().isDisabled
-      ).toEqual(false);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(1)
-          .props().isDisabled
-      ).toEqual(true);
+      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(true);
     });
 
     it('crossroads variable predicts in realtime - disableForwardJumping', () => {
@@ -1791,32 +1437,32 @@ describe('<Wizard />', () => {
                   when: 'source.source-type',
                   stepMapper: {
                     aws: 'aws',
-                    google: 'summary'
-                  }
+                    google: 'summary',
+                  },
                 },
                 disableForwardJumping: true,
                 fields: [
                   {
                     name: 'source.source-type',
                     label: 'Source type',
-                    component: componentTypes.TEXT_FIELD
-                  }
-                ]
+                    component: componentTypes.TEXT_FIELD,
+                  },
+                ],
               },
               {
                 title: 'second-step',
                 name: 'aws',
                 nextStep: 'summary',
-                fields: []
+                fields: [],
               },
               {
                 title: 'summary',
                 name: 'summary',
-                fields: []
-              }
-            ]
-          }
-        ]
+                fields: [],
+              },
+            ],
+          },
+        ],
       };
 
       const wrapper = mount(<FormRenderer {...initialProps} schema={wizardSchema} />);
@@ -1827,43 +1473,19 @@ describe('<Wizard />', () => {
 
       // predict steps for google
       expect(wrapper.find(WizardNavItem)).toHaveLength(2);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(0)
-          .props().isDisabled
-      ).toEqual(false);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(1)
-          .props().isDisabled
-      ).toEqual(true);
+      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(true);
 
       nextButtonClick(wrapper);
 
       // click on first nav link
-      wrapper
-        .find('.pf-c-wizard__nav-item')
-        .first()
-        .childAt(0)
-        .simulate('click');
+      wrapper.find('.pf-c-wizard__nav-item').first().childAt(0).simulate('click');
       wrapper.update();
 
       // keep the second step enabled
       expect(wrapper.find(WizardNavItem)).toHaveLength(2);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(0)
-          .props().isDisabled
-      ).toEqual(false);
-      expect(
-        wrapper
-          .find(WizardNavItem)
-          .at(1)
-          .props().isDisabled
-      ).toEqual(true);
+      expect(wrapper.find(WizardNavItem).at(0).props().isDisabled).toEqual(false);
+      expect(wrapper.find(WizardNavItem).at(1).props().isDisabled).toEqual(true);
     });
   });
 
@@ -1893,34 +1515,34 @@ describe('<Wizard />', () => {
           title: 'Security',
           nextStep: 'credentials',
           substepOf: { name: 'Configuration', title: customTitle },
-          fields: []
+          fields: [],
         },
         {
           name: 'credentials',
           title: 'Credentials',
           nextStep: 'summary',
           substepOf: 'Configuration',
-          fields: []
+          fields: [],
         },
         {
           name: 'summary',
           title: 'Summary',
           nextStep: 'pepa-step',
-          fields: []
+          fields: [],
         },
         {
           name: 'pepa-step',
           nextStep: 'pepa-step-2',
           title: 'title',
           substepOf: { name: 'pepa', title: 'pepa-title' },
-          fields: []
+          fields: [],
         },
         {
           name: 'pepa-step-2',
           title: 'title 2',
           fields: [],
-          substepOf: 'pepa'
-        }
+          substepOf: 'pepa',
+        },
       ];
 
       expect(commonReducer(initialState, { type: 'finishLoading', payload: { formOptions, fields } })).toEqual({
@@ -1933,12 +1555,12 @@ describe('<Wizard />', () => {
             primary: false,
             substepOf: 'Configuration',
             substepOfTitle: customTitle,
-            title: 'Credentials'
+            title: 'Credentials',
           },
           { index: 2, name: 'summary', primary: true, substepOf: undefined, substepOfTitle: undefined, title: 'Summary' },
           { index: 3, name: 'pepa-step', primary: true, substepOf: 'pepa', substepOfTitle: 'pepa-title', title: 'title' },
-          { index: 4, name: 'pepa-step-2', primary: false, substepOf: 'pepa', substepOfTitle: 'pepa-title', title: 'title 2' }
-        ]
+          { index: 4, name: 'pepa-step-2', primary: false, substepOf: 'pepa', substepOfTitle: 'pepa-title', title: 'title 2' },
+        ],
       });
     });
   });

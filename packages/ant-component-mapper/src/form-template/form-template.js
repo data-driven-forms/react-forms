@@ -15,11 +15,11 @@ const Form = ({ children, onSubmit, ...props }) => (
 Form.propTypes = {
   layout: PropTypes.string,
   onSubmit: PropTypes.func,
-  children: childrenPropTypes
+  children: childrenPropTypes,
 };
 
 Form.defaultProps = {
-  layout: 'vertical'
+  layout: 'vertical',
 };
 
 const Description = ({ children, ...props }) => (
@@ -29,7 +29,7 @@ const Description = ({ children, ...props }) => (
 );
 
 Description.propTypes = {
-  children: childrenPropTypes
+  children: childrenPropTypes,
 };
 
 const TitleComponent = ({ children, ...props }) => (
@@ -39,7 +39,7 @@ const TitleComponent = ({ children, ...props }) => (
 );
 
 TitleComponent.propTypes = {
-  children: childrenPropTypes
+  children: childrenPropTypes,
 };
 
 const ButtonGroup = ({ children, ...props }) => (
@@ -49,7 +49,7 @@ const ButtonGroup = ({ children, ...props }) => (
 );
 
 ButtonGroup.propTypes = {
-  children: childrenPropTypes
+  children: childrenPropTypes,
 };
 
 const ButtonComponent = ({ label, variant, children, buttonType, ...props }) => (
@@ -63,7 +63,7 @@ ButtonComponent.propTypes = {
   label: PropTypes.node,
   variant: PropTypes.string,
   buttonType: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.string,
 };
 
 const AntFormTemplate = ({ layout, formWrapperProps, ...props }) => (
@@ -80,7 +80,7 @@ const AntFormTemplate = ({ layout, formWrapperProps, ...props }) => (
 
 AntFormTemplate.propTypes = {
   layout: PropTypes.string,
-  formWrapperProps: PropTypes.object
+  formWrapperProps: PropTypes.object,
 };
 
 export default AntFormTemplate;
