@@ -13,33 +13,28 @@ describe('Compose validators', () => {
       })
     );
 
-  it('should pass async validator', () => {
-    return composeValidators([asyncValidator])('Good value').then((result) => {
-      expect(result).toBeUndefined();
-    });
+  it('should pass async validator', async () => {
+    const result = await composeValidators([asyncValidator])('Good value');
+    expect(result).toBeUndefined();
   });
 
-  it('should fail async validator', () => {
-    return composeValidators([asyncValidator])('error').then((result) => {
-      expect(result).toBe('Async validation failed');
-    });
+  it('should fail async validator', async () => {
+    const result = await composeValidators([asyncValidator])('error');
+    expect(result).toBe('Async validation failed');
   });
 
-  it('should pass async validator but fail sync sequence', () => {
-    return composeValidators([asyncValidator, syncValidator])('sync-error').then((result) => {
-      expect(result).toBe('sync-error');
-    });
+  it('should pass async validator but fail sync sequence', async () => {
+    const result = await composeValidators([asyncValidator, syncValidator])('sync-error');
+    expect(result).toBe('sync-error');
   });
 
-  it('should fail async validator before running sync', () => {
-    return composeValidators([asyncValidator, syncValidator])('error').then((result) => {
-      expect(result).toBe('Async validation failed');
-    });
+  it('should fail async validator before running sync', async () => {
+    const result = await composeValidators([asyncValidator, syncValidator])('error');
+    expect(result).toBe('Async validation failed');
   });
 
-  it('should pass async and sync validation', () => {
-    return composeValidators([asyncValidator, syncValidator])('good').then((result) => {
-      expect(result).toBeUndefined();
-    });
+  it('should pass async and sync validation', async () => {
+    const result = await composeValidators([asyncValidator, syncValidator])('good');
+    expect(result).toBeUndefined();
   });
 });

@@ -15,47 +15,43 @@ describe('composeValidators', () => {
     expect(result).toEqual('error-three');
   });
 
-  it('should fail second async validator', (done) => {
+  it('should fail second async validator', async () => {
     expect.assertions(2);
     const validator = composeValidators([one, two, three]);
     const result = validator('two');
     expect(isPromise(result)).toEqual(true);
-    return result.catch((result) => {
+    await result.catch((result) => {
       expect(result).toEqual('error-two');
-      done();
     });
   });
 
-  it('should fail first async validator', (done) => {
+  it('should fail first async validator', async () => {
     expect.assertions(2);
     const validator = composeValidators([one, two, three]);
     const result = validator('one');
     expect(isPromise(result)).toBe(true);
-    return result.catch((result) => {
+    await result.catch((result) => {
       expect(result).toEqual('error-one');
-      done();
     });
   });
 
-  it('should pass all validators', (done) => {
+  it('should pass all validators', async () => {
     expect.assertions(2);
     const validator = composeValidators([one, two, three]);
     const result = validator('ok');
     expect(isPromise(result)).toEqual(true);
-    return result.then((result) => {
+    await result.then((result) => {
       expect(result).toBeUndefined();
-      done();
     });
   });
 
-  it('should pass all async validators', (done) => {
+  it('should pass all async validators', async () => {
     expect.assertions(2);
     const validator = composeValidators([one, two]);
     const result = validator('ok');
     expect(isPromise(result)).toEqual(true);
-    return result.then((result) => {
+    await result.then((result) => {
       expect(result).toBeUndefined();
-      done();
     });
   });
 
