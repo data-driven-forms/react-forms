@@ -108,7 +108,7 @@ describe('DualListSelect', () => {
     });
 
     expect(onSubmit).toHaveBeenCalledWith({
-      'dual-Menu': []
+      'dual-Menu': [],
     });
   });
 });

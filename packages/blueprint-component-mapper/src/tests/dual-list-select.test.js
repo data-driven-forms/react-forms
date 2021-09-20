@@ -185,7 +185,7 @@ describe('DualListSelect', () => {
     });
 
     expect(onSubmit).toHaveBeenCalledWith({
-      'dual-Menu': []
+      'dual-Menu': [],
     });
   });
 
@@ -213,7 +213,7 @@ describe('DualListSelect', () => {
     });
 
     expect(onSubmit).toHaveBeenCalledWith({
-      'dual-Menu': []
+      'dual-Menu': [],
     });
   });
 

@@ -349,7 +349,7 @@ describe('Select test', () => {
       wrapper.update();
 
       expect(state.value).toEqual([]);
-      expect(inputValue).toEqual([]);
+      expect(inputValue).toEqual('');
     });
 
     it('selects all values', async () => {
@@ -439,7 +439,7 @@ describe('Select test', () => {
       wrapper.update();
 
       expect(state.value).toEqual([{ label: 'Select none', selectNone: true }]);
-      expect(inputValue).toEqual('');
+      expect(inputValue).toEqual([]);
 
       // adds one
       await act(async () => {
@@ -517,7 +517,7 @@ describe('Select test', () => {
       wrapper.update();
 
       expect(state.value).toEqual([{ label: 'Select none', selectNone: true, value: 'select-none' }]);
-      expect(inputValue).toEqual([]);
+      expect(inputValue).toEqual('');
     });
   });
 

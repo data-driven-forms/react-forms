@@ -7,12 +7,12 @@ describe('findDifference', () => {
   it('should skip functions', () => {
     oldState = {
       pristine: false,
-      function: () => 'bbb'
+      function: () => 'bbb',
     };
 
     newState = {
       pristine: true,
-      function: () => 'aaa'
+      function: () => 'aaa',
     };
 
     expect(findDifference(oldState, newState)).toEqual(['pristine']);
@@ -20,11 +20,11 @@ describe('findDifference', () => {
 
   it('should skip keys from denyList', () => {
     oldState = {
-      fieldListeners: { name: 'pepa' }
+      fieldListeners: { name: 'pepa' },
     };
 
     newState = {
-      fieldListeners: { name: 'john' }
+      fieldListeners: { name: 'john' },
     };
 
     expect(findDifference(oldState, newState)).toEqual([]);
@@ -35,22 +35,22 @@ describe('findDifference', () => {
       pristine: true,
       dirty: false,
       values: {
-        nested: 'a'
+        nested: 'a',
       },
       initialValues: {
-        nested: 'b'
-      }
+        nested: 'b',
+      },
     };
 
     newState = {
       pristine: false,
       dirty: false,
       values: {
-        nested: 'aa'
+        nested: 'aa',
       },
       initialValues: {
-        nested: 'b'
-      }
+        nested: 'b',
+      },
     };
 
     expect(findDifference(oldState, newState)).toEqual(['pristine', 'values']);

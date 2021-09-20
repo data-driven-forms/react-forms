@@ -193,7 +193,7 @@ describe('DualListSelect', () => {
         });
 
         expect(onSubmit).toHaveBeenCalledWith({
-          'dual-list': []
+          'dual-list': [],
         });
       });
 
@@ -222,7 +222,7 @@ describe('DualListSelect', () => {
         });
 
         expect(onSubmit).toHaveBeenCalledWith({
-          'dual-list': []
+          'dual-list': [],
         });
       });
 

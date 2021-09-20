@@ -185,7 +185,7 @@ describe('DualListSelect', () => {
     });
 
     expect(onSubmit).toHaveBeenCalledWith({
-      'dual-StructuredListWrapper': []
+      'dual-StructuredListWrapper': [],
     });
   });
 
@@ -215,7 +215,7 @@ describe('DualListSelect', () => {
     });
 
     expect(onSubmit).toHaveBeenCalledWith({
-      'dual-StructuredListWrapper': []
+      'dual-StructuredListWrapper': [],
     });
   });
 
