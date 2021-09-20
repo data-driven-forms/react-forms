@@ -5,8 +5,8 @@ describe('wizard reducer', () => {
   const getState = () => ({
     values: {
       field1: 'x',
-      field2: 'step5'
-    }
+      field2: 'step5',
+    },
   });
 
   beforeEach(() => {
@@ -14,12 +14,12 @@ describe('wizard reducer', () => {
       {
         name: 'step1',
         nextStep: 'step2',
-        title: 'step1'
+        title: 'step1',
       },
       {
         name: 'step2',
         substepOf: { title: 'title', name: 'eaa' },
-        nextStep: 'step3'
+        nextStep: 'step3',
       },
       {
         name: 'step3',
@@ -27,12 +27,12 @@ describe('wizard reducer', () => {
         nextStep: {
           when: 'field1',
           stepMapper: {
-            x: 'step4'
-          }
-        }
+            x: 'step4',
+          },
+        },
       },
       { name: 'step4', nextStep: ({ values }) => values.field2 },
-      { name: 'step5' }
+      { name: 'step5' },
     ];
   });
 
@@ -47,8 +47,8 @@ describe('wizard reducer', () => {
           { index: 1, name: 'step2', primary: true, substepOf: 'eaa', substepOfTitle: 'title', title: undefined },
           { index: 2, name: 'step3', primary: false, substepOf: 'eaa', substepOfTitle: 'title', title: undefined },
           { index: 3, name: 'step4', primary: true, substepOf: undefined, substepOfTitle: undefined, title: undefined },
-          { index: 4, name: 'step5', primary: true, substepOf: undefined, substepOfTitle: undefined, title: undefined }
-        ]
+          { index: 4, name: 'step5', primary: true, substepOf: undefined, substepOfTitle: undefined, title: undefined },
+        ],
       });
     });
   });
@@ -62,7 +62,7 @@ describe('wizard reducer', () => {
         registeredFields: { step1: ['field1'] },
         maxStepIndex: 1,
         isDynamic: true,
-        navSchema: [{ index: 0, name: 'step1', primary: true, substepOf: undefined, substepOfTitle: undefined, title: 'step1' }]
+        navSchema: [{ index: 0, name: 'step1', primary: true, substepOf: undefined, substepOfTitle: undefined, title: 'step1' }],
       };
       const nextStep = 'step3';
       const formOptions = { getState, getRegisteredFields: () => ['field3'] };
@@ -77,11 +77,11 @@ describe('wizard reducer', () => {
           { index: 1, name: 'step2', primary: true, substepOf: 'eaa', substepOfTitle: 'title', title: undefined },
           { index: 2, name: 'step3', primary: false, substepOf: 'eaa', substepOfTitle: 'title', title: undefined },
           { index: 3, name: 'step4', primary: true, substepOf: undefined, substepOfTitle: undefined, title: undefined },
-          { index: 4, name: 'step5', primary: true, substepOf: undefined, substepOfTitle: undefined, title: undefined }
+          { index: 4, name: 'step5', primary: true, substepOf: undefined, substepOfTitle: undefined, title: undefined },
         ],
         prevSteps: ['step1', 'step2'],
         registeredFields: { step1: ['field1'] },
-        registeredFieldsHistory: { step2: ['field3'] }
+        registeredFieldsHistory: { step2: ['field3'] },
       });
     });
 
@@ -93,7 +93,7 @@ describe('wizard reducer', () => {
         registeredFields: { step1: ['field1'] },
         maxStepIndex: 1,
         isDynamic: false,
-        navSchema: [{ index: 0, name: 'step1', primary: true, substepOf: undefined, substepOfTitle: undefined, title: 'step1' }]
+        navSchema: [{ index: 0, name: 'step1', primary: true, substepOf: undefined, substepOfTitle: undefined, title: 'step1' }],
       };
       const nextStep = 'step3';
       const formOptions = { getState, getRegisteredFields: () => ['field3'] };
@@ -106,7 +106,7 @@ describe('wizard reducer', () => {
         navSchema: [{ index: 0, name: 'step1', primary: true, substepOf: undefined, substepOfTitle: undefined, title: 'step1' }],
         prevSteps: ['step1', 'step2'],
         registeredFields: { step1: ['field1'] },
-        registeredFieldsHistory: { step2: ['field3'] }
+        registeredFieldsHistory: { step2: ['field3'] },
       });
     });
 
@@ -118,7 +118,7 @@ describe('wizard reducer', () => {
         registeredFields: { step1: ['field1'] },
         maxStepIndex: 1,
         isDynamic: true,
-        navSchema: [{ index: 0, name: 'step1', primary: true, substepOf: undefined, substepOfTitle: undefined, title: 'step1' }]
+        navSchema: [{ index: 0, name: 'step1', primary: true, substepOf: undefined, substepOfTitle: undefined, title: 'step1' }],
       };
       const nextStep = 'step2';
       const formOptions = { getState, getRegisteredFields: () => ['field3'] };
@@ -133,11 +133,11 @@ describe('wizard reducer', () => {
           { index: 1, name: 'step2', primary: true, substepOf: 'eaa', substepOfTitle: 'title', title: undefined },
           { index: 2, name: 'step3', primary: false, substepOf: 'eaa', substepOfTitle: 'title', title: undefined },
           { index: 3, name: 'step4', primary: true, substepOf: undefined, substepOfTitle: undefined, title: undefined },
-          { index: 4, name: 'step5', primary: true, substepOf: undefined, substepOfTitle: undefined, title: undefined }
+          { index: 4, name: 'step5', primary: true, substepOf: undefined, substepOfTitle: undefined, title: undefined },
         ],
         prevSteps: ['step1', 'step2'],
         registeredFields: { step1: ['field1'] },
-        registeredFieldsHistory: { step1: ['field3'] }
+        registeredFieldsHistory: { step1: ['field3'] },
       });
     });
   });
@@ -157,7 +157,7 @@ describe('wizard reducer', () => {
 
     it('click on the same step', () => {
       expect(reducer({ activeStepIndex: 1 }, { type: 'jumpToStep', payload: { index, valid, fields, crossroads, formOptions } })).toEqual({
-        activeStepIndex: 1
+        activeStepIndex: 1,
       });
     });
 
@@ -208,9 +208,9 @@ describe('wizard reducer', () => {
           { index: 1, name: 'step2', primary: true, substepOf: 'eaa', substepOfTitle: 'title', title: undefined },
           { index: 2, name: 'step3', primary: false, substepOf: 'eaa', substepOfTitle: 'title', title: undefined },
           { index: 3, name: 'step4', primary: true, substepOf: undefined, substepOfTitle: undefined, title: undefined },
-          { index: 4, name: 'step5', primary: true, substepOf: undefined, substepOfTitle: undefined, title: undefined }
+          { index: 4, name: 'step5', primary: true, substepOf: undefined, substepOfTitle: undefined, title: undefined },
         ],
-        prevSteps: ['step1', 'step2']
+        prevSteps: ['step1', 'step2'],
       });
     });
 
@@ -254,9 +254,9 @@ describe('wizard reducer', () => {
           { index: 1, name: 'step2', primary: true, substepOf: 'eaa', substepOfTitle: 'title', title: undefined },
           { index: 2, name: 'step3', primary: false, substepOf: 'eaa', substepOfTitle: 'title', title: undefined },
           { index: 3, name: 'step4', primary: true, substepOf: undefined, substepOfTitle: undefined, title: undefined },
-          { index: 4, name: 'step5', primary: true, substepOf: undefined, substepOfTitle: undefined, title: undefined }
+          { index: 4, name: 'step5', primary: true, substepOf: undefined, substepOfTitle: undefined, title: undefined },
         ],
-        prevSteps: ['step1']
+        prevSteps: ['step1'],
       });
     });
   });

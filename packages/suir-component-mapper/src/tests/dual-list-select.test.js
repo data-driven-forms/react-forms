@@ -21,34 +21,34 @@ describe('DualListSelect', () => {
           options: [
             {
               value: 'cats',
-              label: 'cats'
+              label: 'cats',
             },
             {
               value: 'cats_1',
-              label: 'cats_1'
+              label: 'cats_1',
             },
             {
               value: 'cats_2',
-              label: 'cats_2'
+              label: 'cats_2',
             },
             {
               value: 'zebras',
-              label: 'zebras'
+              label: 'zebras',
             },
             {
               value: 'pigeons',
-              label: 'pigeons'
-            }
-          ]
-        }
-      ]
+              label: 'pigeons',
+            },
+          ],
+        },
+      ],
     };
 
     initialProps = {
       onSubmit: (values) => onSubmit(values),
       componentMapper,
       FormTemplate,
-      schema
+      schema,
     };
   });
 
@@ -285,16 +285,10 @@ describe('DualListSelect', () => {
         .findWhere((node) => typeof node.prop('value') === 'string')
     ).toHaveLength(schema.fields[0].options.length);
     await act(async () => {
-      wrapper
-        .find('input')
-        .first()
-        .instance().value = 'cats';
+      wrapper.find('input').first().instance().value = 'cats';
     });
     await act(async () => {
-      wrapper
-        .find('input')
-        .first()
-        .simulate('change');
+      wrapper.find('input').first().simulate('change');
     });
     wrapper.update();
 
@@ -321,17 +315,11 @@ describe('DualListSelect', () => {
         .findWhere((node) => typeof node.prop('value') === 'string')
     ).toHaveLength(schema.fields[0].options.length);
     await act(async () => {
-      wrapper
-        .find('input')
-        .last()
-        .instance().value = 'cats';
+      wrapper.find('input').last().instance().value = 'cats';
     });
 
     await act(async () => {
-      wrapper
-        .find('input')
-        .last()
-        .simulate('change');
+      wrapper.find('input').last().simulate('change');
     });
     wrapper.update();
 
@@ -494,17 +482,11 @@ describe('DualListSelect', () => {
     it('switch all visible to right', async () => {
       const wrapper = mount(<FormRenderer {...initialProps} />);
       await act(async () => {
-        wrapper
-          .find('input')
-          .first()
-          .instance().value = 'cats';
+        wrapper.find('input').first().instance().value = 'cats';
       });
 
       await act(async () => {
-        wrapper
-          .find('input')
-          .first()
-          .simulate('change');
+        wrapper.find('input').first().simulate('change');
       });
       wrapper.update();
       await act(async () => {
@@ -528,16 +510,10 @@ describe('DualListSelect', () => {
     it('switch all visible to left', async () => {
       const wrapper = mount(<FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />);
       await act(async () => {
-        wrapper
-          .find('input')
-          .last()
-          .instance().value = 'cats';
+        wrapper.find('input').last().instance().value = 'cats';
       });
       await act(async () => {
-        wrapper
-          .find('input')
-          .last()
-          .simulate('change');
+        wrapper.find('input').last().simulate('change');
       });
       wrapper.update();
 

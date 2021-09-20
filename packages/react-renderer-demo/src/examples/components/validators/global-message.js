@@ -8,12 +8,12 @@ import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template'
 import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 Validators.messages = {
   ...Validators.messages,
-  required: 'Required'
+  required: 'Required',
 };
 
 const schema = {
@@ -26,9 +26,9 @@ const schema = {
       isRequired: true,
       validate: [
         {
-          type: validatorTypes.REQUIRED
-        }
-      ]
+          type: validatorTypes.REQUIRED,
+        },
+      ],
     },
     {
       component: componentTypes.TEXT_FIELD,
@@ -39,11 +39,11 @@ const schema = {
       validate: [
         {
           type: validatorTypes.REQUIRED,
-          message: 'Local validator message override'
-        }
-      ]
-    }
-  ]
+          message: 'Local validator message override',
+        },
+      ],
+    },
+  ],
 };
 
 const OverridingMessage = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;

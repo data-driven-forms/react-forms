@@ -5,7 +5,7 @@ import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template'
 import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 const schema = {
   title: 'Start typing',
@@ -13,9 +13,9 @@ const schema = {
     {
       component: componentTypes.TEXT_FIELD,
       name: 'name',
-      label: 'name'
-    }
-  ]
+      label: 'name',
+    },
+  ],
 };
 
 const validate = (values) => {

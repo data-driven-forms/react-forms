@@ -55,6 +55,7 @@ exports[`FormFields should render with onText/OffText Switch correctly 1`] = `
                 id="someIdKey"
                 isChecked={true}
                 isDisabled={false}
+                isReversed={false}
                 label="I am on"
                 labelOff="Turned off"
                 name="Name of the field"

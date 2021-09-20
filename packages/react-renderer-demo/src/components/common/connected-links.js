@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import makeStyles from '@material-ui/styles/makeStyles';
+import { makeStyles } from '@material-ui/core/styles';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import Link from 'next/link';
@@ -17,12 +17,12 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 16,
     [theme.breakpoints.up('md')]: {
       paddingLeft: 'calc((100% - (768px + 17%)) / 2)',
-      paddingRight: 'calc((100% - (768px + 17%)) / 2)'
-    }
+      paddingRight: 'calc((100% - (768px + 17%)) / 2)',
+    },
   },
   link: {
-    textDecoration: 'none'
-  }
+    textDecoration: 'none',
+  },
 }));
 
 const ConnectedLinks = () => {

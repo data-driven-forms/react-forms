@@ -23,7 +23,7 @@ export const SingleCheckbox = (props) => {
     ...rest
   } = useFieldApi({
     ...props,
-    type: 'checkbox'
+    type: 'checkbox',
   });
   const invalid = validationError(meta, validateOnMount);
 
@@ -41,7 +41,7 @@ export const SingleCheckbox = (props) => {
         error={
           invalid && {
             content: meta.error || meta.submitError,
-            pointing: 'left'
+            pointing: 'left',
           }
         }
       />
@@ -59,7 +59,7 @@ SingleCheckbox.propTypes = {
   validateOnMount: PropTypes.bool,
   /** Sub components customization API */
   FormFieldGridProps: PropTypes.object,
-  HelperTextProps: PropTypes.object
+  HelperTextProps: PropTypes.object,
 };
 
 const Checkbox = ({ options, ...props }) => (options ? <MultipleChoiceList options={options} {...props} /> : <SingleCheckbox {...props} />);
@@ -68,12 +68,12 @@ Checkbox.propTypes = {
   options: PropTypes.array,
   /** Sub components customization API */
   FormFieldGridProps: PropTypes.object,
-  HelperTextProps: PropTypes.object
+  HelperTextProps: PropTypes.object,
 };
 
 Checkbox.defaultProps = {
   FormFieldGridProps: {},
-  HelperTextProps: {}
+  HelperTextProps: {},
 };
 
 export default Checkbox;

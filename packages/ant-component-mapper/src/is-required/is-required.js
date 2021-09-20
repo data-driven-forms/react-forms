@@ -13,7 +13,7 @@ const IsRequired = ({ children }) => (
 );
 
 IsRequired.propTypes = {
-  children: childrenPropTypes
+  children: childrenPropTypes,
 };
 
 export default IsRequired;

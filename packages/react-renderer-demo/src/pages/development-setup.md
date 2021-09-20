@@ -6,42 +6,35 @@ import DocPage from '@docs/doc-page';
 
 Data Driven Forms is a monorepo that uses [Lerna](https://github.com/lerna/lerna) and [yarn workspaces](https://classic.yarnpkg.com/blog/2017/08/02/introducing-workspaces/), so you can use all its commands as well.
 
-## Checklist before you send a PR
+---
 
-Please follow following checklist if you are going to open a PR. It will help you make the PR finished.
+## Requirements
 
-- [ ] `Yarn build` passes
-- [ ] `Yarn lint` passes
-- [ ] `Yarn test` passes
-- [ ] Test coverage for new code *(if applicable)*
-- [ ] Documentation update *(if applicable)*
-- [ ] **Correct commit message**
-   - format `fix|feat({scope}): {description}`
-   - i.e. `fix(pf3): wizard correctly handles next button`
-   - fix will release a new \_.\_.X version
-   - feat will release a new \_.X.\_ version (use when you introduce new features)
-     - we want to avoid any breaking changes, please contact us, if there is no way how to avoid them
-   - scope: package
-   - **if you update the documentation or tests, do not use this format**
-     - i.e. `Fix button on documenation example page`
+- **○ NodeJS 14**
 
-## Install
+- **○ Unix like OS (MacOS, Linux)**
+
+We do not support developing on Windows at this moment. However, we would welcome any PR to change this.
+
+---
+
+## Common commands
+
+### Install
 
 ```bash
 yarn install
 ```
 
-## Build
+### Build
 
 ```bash
 yarn build
 ```
 
-All packages are linked together by default, so if you run a `yarn build` in a package, all other packages are updated to the latest version of that package.
+All packages are linked together by default, so if you run a `yarn build` in a package, all other packages are updated to the latest version of that package. A package has to be built first before it is used in other package.
 
-Don't forget to build all packages, which are linked together!
-
-## Run a package
+### Run a playground
 
 Each package has a small playground `package/demo`, where you can test your changes.
 
@@ -50,7 +43,7 @@ cd packages/pf3-component-mapper
 yarn start
 ```
 
-## Run documentation
+### Run documentation
 
 The documentation is a server-side rendered React application based on [NextJS framework](https://nextjs.org/).
 
@@ -59,29 +52,25 @@ cd packages/react-renderer-demo
 yarn dev
 ```
 
-## How to clean?
+### How to clean node_modules
 
 ```bash
-yarn lerna clean # will delete all node_modules
+yarn lerna clean
+rm -rf node_modules
 ```
-
-This command **does not remove** the root `node_module` folder.
-
 ### Cleaning built files
 
-To clean built files use:
+To clean built files use following command: (This script is also ran automatically before each build.)
 
 ```bash
 yarn clean-build
 ```
 
-This script is also ran automatically before each build.
+### Tests
 
-## Tests
+Tests can be ran from core folder or from specific package.
 
-You can test parsers using tests. Tests can be ran from core folder or from specific package.
-
-```console
+```bash
 yarn test
 
 yarn test --watchAll packages/pf4-component-mapper
@@ -92,73 +81,113 @@ cd packages/pf4-component-mapper
 yarn test
 ```
 
-## Commits
+---
 
-Data Driven Forms uses [Semantic Release](https://github.com/semantic-release/commit-analyzer)
+## Checklist before you send a PR
 
-Format:
+Please follow following checklist if you are going to open a PR. It will help you make the PR finished.
 
-```
-[type]([package]): message
+### Build passes
 
-fix(pf4): title accepts node
-```
+Run `yarn build` in root folder to build all packages. You can run this command only in package you changed. All packages are linked by default, you have to build them first.
 
-Types:
-- `feat`: a new feature, will trigger new `_.X._` release
-- `fix`: a fix, will trigger new `_._.X` release
+### Linter passes
 
-Packages:
-- Please describe which package is being changed `pf3`, `renderer`, ...
+Run `yarn lint` in root folder to check if the code is correctly formatted. You can use `yarn lint --fix` to automatically correct issues.
+### Write tests
 
-Please, do not use Semantic Release, if you update only the demo.
+All new code should be properly tested. Run `yarn test` in root folder to test all files. Check codecoverage report to see uncovered lines of code. We are using [Jest](https://jestjs.io/) and [Enzyme](https://enzymejs.github.io/enzyme/).
 
-All packages are releasing together and they share the version number.
+### Documentation update
 
-## Changes to documentation
+If you introduce a new feature, you should document this change in our documentation. The documentation is located in `react-renderer-demo` package and it is a web application based on [NextJS](https://nextjs.org/). We do not write tests for the documentation.
 
-If your changes influence API or add new features, you should describe these new options in the `react-renderer-demo` repository. Thanks!
+`yarn dev` starts a local version of the documentation.
+
+`yarn build` prepares files for deployment.
+
+`yarn serve` emulates the web application running in local emulator.
+
+### Correct commit message
+
+A correct commit message is important, because we are using [semantic release](https://github.com/semantic-release/commit-analyzer) to automatically releease new versions. These messages are also used in our release notes, so other users can see what is being changed.
+
+**My change introduces a new feature**
+
+Prefix your commit message with `feat` and specify the package that is being changed. An example: `feat(pf4): a new dual list integration`. If you change multiple packages, you can use `feat(common): ...` or `feat(all): ...`.
+
+**My change fixes a bug or technical debt**
+
+Prefix your commit message with `fix`. Otherwise, the same rules apply. An example: `fix(pf4): fixed missed proptype in select`.
+
+**My change does not change any released package**
+
+If your change does not change any of the released packages, you can simple just descibe the change, an example: `Fix button on documenation example page`. This also applies for any change in the documentation repo.
+
+**My change introduces a breaking change**
+
+We are trying to avoid breaking changes. Please, open an issue and discuss the issue with us, we will try to come up with alternative options.
+
+---
 
 ## Generating a mapper template
 
-To generate a mapper template, run:
+We provide a simple CLI tool for generating component mappers. It will create a based project structure and dummy components.
 
 ```bash
 yarn generate-template
 ```
 
-This command starts a CLI, that provides an interface for generating mappers. A mapper folder will be created and it will be populated with all neccesary files.
+---
+
 ## Adding form component example
 
 To add additional examples of [custom form components](/examples/sample-example), please follow these steps.
 
-1. Create a new markdown file in this directory: https://github.com/data-driven-forms/react-forms/tree/master/packages/react-renderer-demo/src/pages/examples.
-2. Wrap the whole content into `DocPage` component:
+(1) Create a new markdown file in this directory: https://github.com/data-driven-forms/react-forms/tree/master/packages/react-renderer-demo/src/pages/examples.
+
+<br />
+
+(2) Wrap the whole content into `DocPage` component:
+
 ```md
 import DocPage from '@docs/doc-page';
 
 <DocPage>
   Your content
 </DocPage>
-
 ```
-3. Add this information to the file:
-    1.  Description of the component
-    2. A problem it may help to solve
-    3. Example of the component implementation and usage in a form
-4. To create an example follow these steps:
-    1. Create a new JS file in this directory: https://github.com/data-driven-forms/react-forms/tree/master/packages/react-renderer-demo/src/examples/components/examples
-    2. Import the code example using this path `components/examples/<file name without extenstion>`
+
+<br />
+
+(3) Add this information to the file:
+
+&nbsp;&nbsp;&nbsp;&nbsp;(a) Description of the component
+
+&nbsp;&nbsp;&nbsp;&nbsp;(b) A problem it may help to solve
+
+&nbsp;&nbsp;&nbsp;&nbsp;(c) Example of the component implementation and usage in a form
+
+<br />
+
+(4) To create an example follow these steps:
+
+&nbsp;&nbsp;&nbsp;&nbsp;(a) Create a new JS file in this directory: https://github.com/data-driven-forms/react-forms/tree/master/packages/react-renderer-demo/src/examples/components/examples
+
+&nbsp;&nbsp;&nbsp;&nbsp;(b) Import the code example using this path `components/examples/<file name without extenstion>`
 
 ```md
-
 import CodeExample from '@docs/code-example';
 
 <CodeExample source="components/examples/sample-example" mode="preview" />
-
 ```
-5. Add the component to the navigation. Add a new object to this file: https://github.com/data-driven-forms/react-forms/blob/master/packages/react-renderer-demo/src/components/navigation/schemas/custom-examples.schema.js
-    1. Title: text of the link
-    2. Component: exact filename of the **markdown file**
+
+<br />
+
+(5) Add the component to the navigation. Add a new object to this file: https://github.com/data-driven-forms/react-forms/blob/master/packages/react-renderer-demo/src/components/navigation/schemas/custom-examples.schema.js
+
+&nbsp;&nbsp;&nbsp;&nbsp;(a) Title: text of the link
+
+&nbsp;&nbsp;&nbsp;&nbsp;(b) Component: exact filename of the **markdown file**
 
 </DocPage>

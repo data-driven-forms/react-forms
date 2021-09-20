@@ -10,7 +10,7 @@ describe('Default schema validator', () => {
     componentMapper = {
       foo: () => <div>Component</div>,
       invalidComponent: 'baz',
-      [componentTypes.TABS]: ({ children }) => <div>{children}</div>
+      [componentTypes.TABS]: ({ children }) => <div>{children}</div>,
     };
   });
   it('should fail if input is not a object', () => {
@@ -35,9 +35,9 @@ describe('Default schema validator', () => {
         {
           fields: [
             {
-              component: 'foo'
-            }
-          ]
+              component: 'foo',
+            },
+          ],
         },
         componentMapper
       )
@@ -51,9 +51,9 @@ describe('Default schema validator', () => {
           fields: [
             {
               component: 'foo',
-              key: 'some key'
-            }
-          ]
+              key: 'some key',
+            },
+          ],
         },
         componentMapper
       )
@@ -67,9 +67,9 @@ describe('Default schema validator', () => {
           fields: [
             {
               component: 'blarghs',
-              name: 'foo'
-            }
-          ]
+              name: 'foo',
+            },
+          ],
         },
         componentMapper
       )
@@ -83,9 +83,9 @@ describe('Default schema validator', () => {
           fields: [
             {
               component: 'invalidComponent',
-              name: 'foo'
-            }
-          ]
+              name: 'foo',
+            },
+          ],
         },
         componentMapper
       )
@@ -100,9 +100,9 @@ describe('Default schema validator', () => {
             {
               component: 'foo',
               name: 'foo',
-              condition: ''
-            }
-          ]
+              condition: '',
+            },
+          ],
         },
         componentMapper
       )
@@ -117,9 +117,9 @@ describe('Default schema validator', () => {
             {
               component: 'foo',
               name: 'foo',
-              condition: {}
-            }
-          ]
+              condition: {},
+            },
+          ],
         },
         componentMapper
       )
@@ -134,9 +134,9 @@ describe('Default schema validator', () => {
             {
               component: 'foo',
               name: 'foo',
-              condition: { when: 'Foo' }
-            }
-          ]
+              condition: { when: 'Foo' },
+            },
+          ],
         },
         componentMapper
       )
@@ -151,9 +151,9 @@ describe('Default schema validator', () => {
             {
               component: 'foo',
               name: 'foo',
-              condition: { when: 123, is: 456 }
-            }
-          ]
+              condition: { when: 123, is: 456 },
+            },
+          ],
         },
         componentMapper
       )
@@ -168,9 +168,9 @@ describe('Default schema validator', () => {
             {
               component: 'foo',
               name: 'foo',
-              condition: { when: 'Foo', pattern: 456 }
-            }
-          ]
+              condition: { when: 'Foo', pattern: 456 },
+            },
+          ],
         },
         componentMapper
       )
@@ -185,9 +185,9 @@ describe('Default schema validator', () => {
             {
               component: 'foo',
               name: 'foo',
-              condition: { when: 'Foo', pattern: '^pattern' }
-            }
-          ]
+              condition: { when: 'Foo', pattern: '^pattern' },
+            },
+          ],
         },
         componentMapper
       )
@@ -202,9 +202,9 @@ describe('Default schema validator', () => {
             {
               component: 'foo',
               name: 'foo',
-              condition: { when: 'Foo', is: () => true }
-            }
-          ]
+              condition: { when: 'Foo', is: () => true },
+            },
+          ],
         },
         componentMapper
       )
@@ -219,9 +219,9 @@ describe('Default schema validator', () => {
             {
               component: 'foo',
               name: 'foo',
-              condition: { when: 'Foo', greaterThan: 1 }
-            }
-          ]
+              condition: { when: 'Foo', greaterThan: 1 },
+            },
+          ],
         },
         componentMapper
       )
@@ -236,9 +236,9 @@ describe('Default schema validator', () => {
             {
               component: 'foo',
               name: 'foo',
-              condition: { when: 'Foo', greaterThanOrEqualTo: 1 }
-            }
-          ]
+              condition: { when: 'Foo', greaterThanOrEqualTo: 1 },
+            },
+          ],
         },
         componentMapper
       )
@@ -253,9 +253,9 @@ describe('Default schema validator', () => {
             {
               component: 'foo',
               name: 'foo',
-              condition: { when: 'Foo', lessThan: 1 }
-            }
-          ]
+              condition: { when: 'Foo', lessThan: 1 },
+            },
+          ],
         },
         componentMapper
       )
@@ -270,9 +270,9 @@ describe('Default schema validator', () => {
             {
               component: 'foo',
               name: 'foo',
-              condition: { when: 'Foo', lessThanOrEqualTo: 1 }
-            }
-          ]
+              condition: { when: 'Foo', lessThanOrEqualTo: 1 },
+            },
+          ],
         },
         componentMapper
       )
@@ -287,9 +287,9 @@ describe('Default schema validator', () => {
             {
               component: 'foo',
               name: 'foo',
-              condition: { when: 'Foo', isEmpty: true, notMatch: true }
-            }
-          ]
+              condition: { when: 'Foo', isEmpty: true, notMatch: true },
+            },
+          ],
         },
         componentMapper
       )
@@ -304,9 +304,9 @@ describe('Default schema validator', () => {
             {
               component: 'foo',
               name: 'foo',
-              validate: {}
-            }
-          ]
+              validate: {},
+            },
+          ],
         },
         componentMapper
       )
@@ -321,9 +321,9 @@ describe('Default schema validator', () => {
             {
               component: 'foo',
               name: 'foo',
-              validate: undefined
-            }
-          ]
+              validate: undefined,
+            },
+          ],
         },
         componentMapper
       )
@@ -339,9 +339,9 @@ describe('Default schema validator', () => {
             {
               component: 'foo',
               name: 'foo',
-              validate: [functionValidator]
-            }
-          ]
+              validate: [functionValidator],
+            },
+          ],
         },
         componentMapper
       )
@@ -356,9 +356,9 @@ describe('Default schema validator', () => {
             {
               component: 'foo',
               name: 'foo',
-              validate: ['']
-            }
-          ]
+              validate: [''],
+            },
+          ],
         },
         componentMapper
       )
@@ -373,9 +373,9 @@ describe('Default schema validator', () => {
             {
               component: 'foo',
               name: 'foo',
-              validate: [{}]
-            }
-          ]
+              validate: [{}],
+            },
+          ],
         },
         componentMapper
       )
@@ -392,11 +392,11 @@ describe('Default schema validator', () => {
               name: 'foo',
               validate: [
                 {
-                  type: 'magic'
-                }
-              ]
-            }
-          ]
+                  type: 'magic',
+                },
+              ],
+            },
+          ],
         },
         componentMapper
       )
@@ -413,11 +413,11 @@ describe('Default schema validator', () => {
               name: 'foo',
               validate: [
                 {
-                  type: 'magic'
-                }
-              ]
-            }
-          ]
+                  type: 'magic',
+                },
+              ],
+            },
+          ],
         },
         componentMapper,
         ['magic']
@@ -433,9 +433,9 @@ describe('Default schema validator', () => {
             {
               component: 'foo',
               name: 'foo',
-              dataType: 'foo'
-            }
-          ]
+              dataType: 'foo',
+            },
+          ],
         },
         componentMapper
       )
@@ -447,9 +447,9 @@ describe('Default schema validator', () => {
             {
               component: 'foo',
               name: 'foo',
-              dataType: {}
-            }
-          ]
+              dataType: {},
+            },
+          ],
         },
         componentMapper
       )
@@ -469,7 +469,7 @@ describe('Default schema validator', () => {
           radio: () => <div />,
           select: () => <div />,
           'date-picker': () => <div />,
-          'time-picker': () => <div />
+          'time-picker': () => <div />,
         },
         Object.values(validatorTypesDefault)
       )
@@ -491,10 +491,10 @@ describe('Default schema validator', () => {
                 component: 'foo',
                 name,
                 actions: {
-                  [prop]: [action]
-                }
-              }
-            ]
+                  [prop]: [action],
+                },
+              },
+            ],
           },
           componentMapper,
           [],
@@ -512,10 +512,10 @@ describe('Default schema validator', () => {
                 component: 'foo',
                 name,
                 actions: {
-                  [prop]: ['nonsense']
-                }
-              }
-            ]
+                  [prop]: ['nonsense'],
+                },
+              },
+            ],
           },
           componentMapper,
           [],
@@ -533,10 +533,10 @@ describe('Default schema validator', () => {
                 component: 'foo',
                 name,
                 actions: {
-                  [prop]: []
-                }
-              }
-            ]
+                  [prop]: [],
+                },
+              },
+            ],
           },
           componentMapper,
           [],
@@ -554,10 +554,10 @@ describe('Default schema validator', () => {
                 component: 'foo',
                 name,
                 actions: {
-                  [prop]: undefined
-                }
-              }
-            ]
+                  [prop]: undefined,
+                },
+              },
+            ],
           },
           componentMapper,
           [],
@@ -576,10 +576,10 @@ describe('Default schema validator', () => {
               component: 'foo',
               name: 'foo',
               condition: {
-                and: [{ when: 'x', is: 'y' }]
-              }
-            }
-          ]
+                and: [{ when: 'x', is: 'y' }],
+              },
+            },
+          ],
         },
         componentMapper,
         [],
@@ -595,10 +595,10 @@ describe('Default schema validator', () => {
               component: 'foo',
               name: 'foo',
               condition: {
-                or: [{ when: 'x', is: 'y' }]
-              }
-            }
-          ]
+                or: [{ when: 'x', is: 'y' }],
+              },
+            },
+          ],
         },
         componentMapper,
         [],
@@ -616,10 +616,10 @@ describe('Default schema validator', () => {
               component: 'foo',
               name: 'foo',
               condition: {
-                and: { when: 'x', is: 'y' }
-              }
-            }
-          ]
+                and: { when: 'x', is: 'y' },
+              },
+            },
+          ],
         },
         componentMapper,
         [],
@@ -635,10 +635,10 @@ describe('Default schema validator', () => {
               component: 'foo',
               name: 'foo',
               condition: {
-                or: { when: 'x', is: 'y' }
-              }
-            }
-          ]
+                or: { when: 'x', is: 'y' },
+              },
+            },
+          ],
         },
         componentMapper,
         [],
@@ -655,12 +655,12 @@ describe('Default schema validator', () => {
               name: 'foo',
               condition: [
                 {
-                  and: { when: 'x', is: 'y' }
+                  and: { when: 'x', is: 'y' },
                 },
-                { when: 'foo', is: 'bar' }
-              ]
-            }
-          ]
+                { when: 'foo', is: 'bar' },
+              ],
+            },
+          ],
         },
         componentMapper,
         [],
@@ -678,10 +678,10 @@ describe('Default schema validator', () => {
               component: 'foo',
               name: 'foo',
               condition: {
-                sequence: { when: 'x', is: 'y' }
-              }
-            }
-          ]
+                sequence: { when: 'x', is: 'y' },
+              },
+            },
+          ],
         },
         componentMapper,
         [],
@@ -700,11 +700,11 @@ describe('Default schema validator', () => {
               name: 'foo',
               condition: [
                 {
-                  sequence: [{ when: 'x', is: 'y' }]
-                }
-              ]
-            }
-          ]
+                  sequence: [{ when: 'x', is: 'y' }],
+                },
+              ],
+            },
+          ],
         },
         componentMapper,
         [],
@@ -723,11 +723,11 @@ describe('Default schema validator', () => {
               name: 'foo',
               condition: [
                 {
-                  and: [{ when: 'x', is: 'y', then: { set: { x: 'x' } } }]
-                }
-              ]
-            }
-          ]
+                  and: [{ when: 'x', is: 'y', then: { set: { x: 'x' } } }],
+                },
+              ],
+            },
+          ],
         },
         componentMapper,
         [],
@@ -744,11 +744,11 @@ describe('Default schema validator', () => {
               name: 'foo',
               condition: [
                 {
-                  and: [{ when: 'x', is: 'y', else: { set: { x: 'x' } } }]
-                }
-              ]
-            }
-          ]
+                  and: [{ when: 'x', is: 'y', else: { set: { x: 'x' } } }],
+                },
+              ],
+            },
+          ],
         },
         componentMapper,
         [],
@@ -768,10 +768,10 @@ describe('Default schema validator', () => {
               condition: {
                 when: 'x',
                 is: 'x',
-                then: { visible: 'pepa' }
-              }
-            }
-          ]
+                then: { visible: 'pepa' },
+              },
+            },
+          ],
         },
         componentMapper,
         [],
@@ -789,10 +789,10 @@ describe('Default schema validator', () => {
               condition: {
                 when: 'x',
                 is: 'x',
-                else: { visible: 'pepa' }
-              }
-            }
-          ]
+                else: { visible: 'pepa' },
+              },
+            },
+          ],
         },
         componentMapper,
         [],
@@ -812,10 +812,10 @@ describe('Default schema validator', () => {
               condition: {
                 when: 'x',
                 is: 'x',
-                then: { set: 'pepa' }
-              }
-            }
-          ]
+                then: { set: 'pepa' },
+              },
+            },
+          ],
         },
         componentMapper,
         [],
@@ -833,10 +833,10 @@ describe('Default schema validator', () => {
               condition: {
                 when: 'x',
                 is: 'x',
-                then: { set: ['pepa'] }
-              }
-            }
-          ]
+                then: { set: ['pepa'] },
+              },
+            },
+          ],
         },
         componentMapper,
         [],
@@ -853,9 +853,9 @@ describe('Default schema validator', () => {
             {
               component: 'foo',
               name: 'foo',
-              condition: { when: 'Foo', pattern: '^pattern', then: { set: { password: '1234' }, visible: true } }
-            }
-          ]
+              condition: { when: 'Foo', pattern: '^pattern', then: { set: { password: '1234' }, visible: true } },
+            },
+          ],
         },
         componentMapper
       )
@@ -871,11 +871,11 @@ describe('Default schema validator', () => {
               condition: {
                 sequence: [
                   { when: 'Foo', pattern: '^pattern', then: { set: { password: '1234' }, visible: true } },
-                  { and: [{ when: 'Foo', pattern: '^pattern' }], else: { visible: true } }
-                ]
-              }
-            }
-          ]
+                  { and: [{ when: 'Foo', pattern: '^pattern' }], else: { visible: true } },
+                ],
+              },
+            },
+          ],
         },
         componentMapper
       )
@@ -888,9 +888,9 @@ describe('Default schema validator', () => {
             {
               component: 'foo',
               name: 'foo',
-              condition: { and: [{ when: 'Foo', pattern: '^pattern' }], else: { visible: true } }
-            }
-          ]
+              condition: { and: [{ when: 'Foo', pattern: '^pattern' }], else: { visible: true } },
+            },
+          ],
         },
         componentMapper
       )

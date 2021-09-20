@@ -15,7 +15,7 @@ describe('enterHandler', () => {
     formOptions = { valid: true, getState: () => ({ validating: false }), getRegisteredFields };
     activeStep = 'activeStep';
     findCurrentStep = jest.fn().mockImplementation(() => ({
-      nextStep: 'nextStep'
+      nextStep: 'nextStep',
     }));
     handleNext = jest.fn();
     handleSubmit = jest.fn();
@@ -59,7 +59,7 @@ describe('enterHandler', () => {
 
   it('pressed enter and submit', () => {
     findCurrentStep = jest.fn().mockImplementation(() => ({
-      nextStep: undefined
+      nextStep: undefined,
     }));
 
     enterHandler(e, formOptions, activeStep, findCurrentStep, handleNext, handleSubmit);
@@ -96,7 +96,7 @@ describe('enterHandler', () => {
   it('pressed enter with custom buttons', () => {
     findCurrentStep = jest.fn().mockImplementation(() => ({
       nextStep: undefined,
-      buttons: 'something'
+      buttons: 'something',
     }));
 
     enterHandler(e, formOptions, activeStep, findCurrentStep, handleNext, handleSubmit);

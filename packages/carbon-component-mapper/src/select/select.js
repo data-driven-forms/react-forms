@@ -5,19 +5,33 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import DataDrivenSelect from '@data-driven-forms/common/select';
 import fnToString from '@data-driven-forms/common/utils/fn-to-string';
 
-import { Select as CarbonSelect, MultiSelect, SelectItem, ComboBox } from 'carbon-components-react';
+import { Select as CarbonSelect, MultiSelect, SelectItem, ComboBox, SelectItemGroup } from 'carbon-components-react';
 import prepareProps from '../prepare-props';
 
-export const multiOnChange = (input, simpleValue) => ({ selectedItem, selectedItems }) => {
-  if (simpleValue) {
-    return input.onChange(selectedItems?.map(({ value }) => value) || selectedItem.value);
-  } else {
-    return input.onChange(selectedItems || selectedItem);
-  }
-};
+const onChangeWrapper =
+  (onChange) =>
+  ({ selectedItem, selectedItems }) =>
+    onChange(selectedItems || selectedItem);
 
-const getMultiValue = (value, options) =>
-  (Array.isArray(value) ? value : [value]).map((item) => (typeof item === 'object' ? item : options.find(({ value }) => value === item))) || [];
+export const getMultiValue = (value, options) =>
+  (Array.isArray(value) ? value : value ? [value] : []).map((item) =>
+    typeof item === 'object' ? item : options.find(({ value }) => value === item)
+  );
+
+const renderOptions = (options) =>
+  options.map((option, index) => {
+    const { options, ...rest } = option;
+
+    if (options) {
+      return (
+        <SelectItemGroup key={rest.value || index} text={rest.label} {...rest}>
+          {renderOptions(options)}
+        </SelectItemGroup>
+      );
+    }
+
+    return <SelectItem key={rest.value || index} text={rest.label} {...rest} />;
+  });
 
 const ClearedMultiSelectFilterable = ({
   invalidText,
@@ -41,7 +55,7 @@ const ClearedMultiSelectFilterable = ({
     disabled={isDisabled}
     {...rest}
     placeholder={carbonLabel || placeholder}
-    onChange={originalOnChange}
+    onChange={onChangeWrapper(onChange)}
     titleText={rest.labelText}
     id={rest.name}
     invalid={Boolean(invalidText)}
@@ -67,7 +81,7 @@ ClearedMultiSelectFilterable.propTypes = {
   carbonLabel: PropTypes.node,
   placeholder: PropTypes.node,
   isRequired: PropTypes.bool,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
 };
 
 const ClearedMultiSelect = ({
@@ -92,7 +106,7 @@ const ClearedMultiSelect = ({
     disabled={isDisabled}
     {...rest}
     label={carbonLabel || placeholder}
-    onChange={originalOnChange}
+    onChange={onChangeWrapper(onChange)}
     titleText={rest.labelText}
     id={rest.name}
     invalid={Boolean(invalidText)}
@@ -118,7 +132,7 @@ ClearedMultiSelect.propTypes = {
   carbonLabel: PropTypes.node,
   placeholder: PropTypes.node,
   isRequired: PropTypes.bool,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
 };
 
 const getSelectValue = (value, isMulti) => (isMulti ? value : Array.isArray(value) ? value[0] : value);
@@ -151,9 +165,7 @@ const ClearedSelect = ({
     invalidText={invalidText}
   >
     {isFetching && <SelectItem text={placeholder} value={''} />}
-    {options.map((option, index) => (
-      <SelectItem key={option.value || index} text={option.label} {...option} />
-    ))}
+    {renderOptions(options)}
   </CarbonSelect>
 );
 
@@ -176,7 +188,7 @@ ClearedSelect.propTypes = {
   isRequired: PropTypes.bool,
   isSearchable: PropTypes.bool,
   isClearable: PropTypes.bool,
-  value: PropTypes.any
+  value: PropTypes.any,
 };
 
 const getComboInitialValue = (value, options = []) => {
@@ -204,6 +216,8 @@ const ClearedSelectSearchable = ({
   originalOnChange,
   placeholder,
   labelText,
+  onChange,
+  value,
   ...rest
 }) => (
   <ComboBox
@@ -212,11 +226,11 @@ const ClearedSelectSearchable = ({
     id={rest.name}
     invalid={Boolean(invalidText)}
     invalidText={invalidText}
-    initialSelectedItem={getComboInitialValue(rest.value, options)}
+    initialSelectedItem={getComboInitialValue(value, options)}
     items={options}
     placeholder={placeholder}
     titleText={labelText}
-    onChange={originalOnChange}
+    onChange={onChangeWrapper(onChange)}
   />
 );
 
@@ -239,7 +253,8 @@ ClearedSelectSearchable.propTypes = {
   isRequired: PropTypes.bool,
   isSearchable: PropTypes.bool,
   isClearable: PropTypes.bool,
-  labelText: PropTypes.string
+  labelText: PropTypes.string,
+  value: PropTypes.any,
 };
 
 const Select = (props) => {
@@ -255,8 +270,15 @@ const Select = (props) => {
   }, [loadOptionsStr]);
   const isSearchClear = isSearchable || isClearable;
 
-  const Component =
-    isMulti && isSearchClear ? ClearedMultiSelectFilterable : isMulti ? ClearedMultiSelect : isSearchClear ? ClearedSelectSearchable : ClearedSelect;
+  let Component = ClearedSelect;
+
+  if (isMulti && isSearchClear) {
+    Component = ClearedMultiSelectFilterable;
+  } else if (isMulti) {
+    Component = ClearedMultiSelect;
+  } else if (isSearchClear) {
+    Component = ClearedSelectSearchable;
+  }
 
   const invalidText = ((meta.touched || validateOnMount) && (meta.error || meta.submitError)) || '';
   const text = ((meta.touched || validateOnMount) && meta.warning) || helperText;
@@ -267,10 +289,10 @@ const Select = (props) => {
       simpleValue={false}
       {...rest}
       {...input}
+      isMulti={isMulti}
       loadOptions={loadOptions}
       invalidText={invalidText}
       loadOptionsChangeCounter={loadOptionsChangeCounter}
-      originalOnChange={multiOnChange(input, rest.simpleValue)}
       helperText={text}
     />
   );
@@ -282,13 +304,13 @@ Select.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      label: PropTypes.node
+      label: PropTypes.node,
     })
-  )
+  ),
 };
 
 Select.defaultProps = {
-  loadingMessage: 'Loading...'
+  loadingMessage: 'Loading...',
 };
 
 export default Select;

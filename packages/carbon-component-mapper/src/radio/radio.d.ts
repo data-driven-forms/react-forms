@@ -1,4 +1,4 @@
-import { FormGroupProps as CommonFormGroupProps } from "./form-group";
+import { FormGroupProps as CommonFormGroupProps } from "../form-group";
 import { UseFieldApiComponentConfig, AnyObject } from "@data-driven-forms/react-form-renderer";
 import { ReactNode } from "react";
 

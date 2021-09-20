@@ -1,4 +1,4 @@
-import { ConditionDefinition } from "../../condition";
+import { ConditionDefinition } from "../condition";
 
 declare function getConditionTriggers(params:ConditionDefinition | ConditionDefinition[]): string[];
 

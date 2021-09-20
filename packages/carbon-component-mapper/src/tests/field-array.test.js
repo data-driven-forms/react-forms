@@ -18,11 +18,11 @@ describe('<FieldArray/>', () => {
         [componentTypes.FIELD_ARRAY]: {
           component: componentMapper[componentTypes.FIELD_ARRAY],
           AddButtonProps: { id: 'add-button' },
-          RemoveButtonProps: { id: 'remove-button' }
-        }
+          RemoveButtonProps: { id: 'remove-button' },
+        },
       },
       FormTemplate,
-      onSubmit: (values) => onSubmit(values)
+      onSubmit: (values) => onSubmit(values),
     };
   });
 
@@ -43,18 +43,18 @@ describe('<FieldArray/>', () => {
             noItemsMessage,
             buttonLabels: {
               add: 'CUSTOM ADD',
-              remove: 'CUSTOM REMOVE'
+              remove: 'CUSTOM REMOVE',
             },
             fields: [
               {
                 component: componentTypes.TEXT_FIELD,
                 name: 'name',
-                label: 'name'
-              }
-            ]
-          }
-        ]
-      }
+                label: 'name',
+              },
+            ],
+          },
+        ],
+      },
     };
 
     await act(async () => {
@@ -66,18 +66,10 @@ describe('<FieldArray/>', () => {
     expect(wrapper.find('WithDescription').props().description).toEqual(description);
     expect(wrapper.text().includes(noItemsMessage)).toEqual(true);
 
-    expect(
-      wrapper
-        .find('#add-button')
-        .first()
-        .text()
-    ).toEqual('CUSTOM ADD');
+    expect(wrapper.find('#add-button').first().text()).toEqual('CUSTOM ADD');
 
     await act(async () => {
-      wrapper
-        .find('#add-button')
-        .first()
-        .simulate('click');
+      wrapper.find('#add-button').first().simulate('click');
     });
     wrapper.update();
 
@@ -86,12 +78,7 @@ describe('<FieldArray/>', () => {
     expect(wrapper.find('WithDescription').props().description).toEqual(description);
     expect(wrapper.text().includes(noItemsMessage)).toEqual(false);
 
-    expect(
-      wrapper
-        .find('#remove-button')
-        .first()
-        .text()
-    ).toEqual('CUSTOM REMOVE');
+    expect(wrapper.find('#remove-button').first().text()).toEqual('dangerCUSTOM REMOVE');
   });
 
   it('allow to add/remove named fields', async () => {
@@ -107,17 +94,17 @@ describe('<FieldArray/>', () => {
               {
                 component: componentTypes.TEXT_FIELD,
                 name: 'name',
-                label: 'name'
+                label: 'name',
               },
               {
                 component: componentTypes.TEXT_FIELD,
                 name: 'lastName',
-                label: 'last name'
-              }
-            ]
-          }
-        ]
-      }
+                label: 'last name',
+              },
+            ],
+          },
+        ],
+      },
     };
 
     await act(async () => {
@@ -133,10 +120,7 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper
-        .find('#add-button')
-        .first()
-        .simulate('click');
+      wrapper.find('#add-button').first().simulate('click');
     });
     wrapper.update();
 
@@ -146,16 +130,13 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: [{ name: 'enter a name', lastName: 'enter a last name' }]
+      nicePeople: [{ name: 'enter a name', lastName: 'enter a last name' }],
     });
 
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper
-        .find('#remove-button')
-        .first()
-        .simulate('click');
+      wrapper.find('#remove-button').first().simulate('click');
     });
     wrapper.update();
 
@@ -165,7 +146,7 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: []
+      nicePeople: [],
     });
   });
 
@@ -181,12 +162,12 @@ describe('<FieldArray/>', () => {
             fields: [
               {
                 component: componentTypes.TEXT_FIELD,
-                label: 'name'
-              }
-            ]
-          }
-        ]
-      }
+                label: 'name',
+              },
+            ],
+          },
+        ],
+      },
     };
 
     await act(async () => {
@@ -202,10 +183,7 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper
-        .find('#add-button')
-        .first()
-        .simulate('click');
+      wrapper.find('#add-button').first().simulate('click');
     });
     wrapper.update();
 
@@ -215,16 +193,13 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: ['defaultItem']
+      nicePeople: ['defaultItem'],
     });
 
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper
-        .find('#remove-button')
-        .first()
-        .simulate('click');
+      wrapper.find('#remove-button').first().simulate('click');
     });
     wrapper.update();
 
@@ -234,7 +209,7 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: []
+      nicePeople: [],
     });
   });
 
@@ -252,12 +227,12 @@ describe('<FieldArray/>', () => {
             fields: [
               {
                 component: componentTypes.TEXT_FIELD,
-                label: 'name'
-              }
-            ]
-          }
-        ]
-      }
+                label: 'name',
+              },
+            ],
+          },
+        ],
+      },
     };
 
     await act(async () => {
@@ -265,10 +240,7 @@ describe('<FieldArray/>', () => {
     });
 
     await act(async () => {
-      wrapper
-        .find('#add-button')
-        .first()
-        .simulate('click');
+      wrapper.find('#add-button').first().simulate('click');
     });
     wrapper.update();
 
@@ -278,15 +250,12 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: ['defaultItem']
+      nicePeople: ['defaultItem'],
     });
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper
-        .find('#add-button')
-        .first()
-        .simulate('click');
+      wrapper.find('#add-button').first().simulate('click');
     });
     wrapper.update();
 
@@ -296,15 +265,12 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: ['defaultItem', 'defaultItem']
+      nicePeople: ['defaultItem', 'defaultItem'],
     });
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper
-        .find('#add-button')
-        .first()
-        .simulate('click');
+      wrapper.find('#add-button').first().simulate('click');
     });
     wrapper.update();
 
@@ -314,15 +280,12 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: ['defaultItem', 'defaultItem']
+      nicePeople: ['defaultItem', 'defaultItem'],
     });
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper
-        .find('#remove-button')
-        .first()
-        .simulate('click');
+      wrapper.find('#remove-button').first().simulate('click');
     });
     wrapper.update();
 
@@ -332,15 +295,12 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: ['defaultItem']
+      nicePeople: ['defaultItem'],
     });
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper
-        .find('#remove-button')
-        .first()
-        .simulate('click');
+      wrapper.find('#remove-button').first().simulate('click');
     });
     wrapper.update();
 
@@ -350,7 +310,7 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: ['defaultItem']
+      nicePeople: ['defaultItem'],
     });
   });
 
@@ -366,12 +326,12 @@ describe('<FieldArray/>', () => {
             fields: [
               {
                 component: componentTypes.TEXT_FIELD,
-                label: 'name'
-              }
-            ]
-          }
-        ]
-      }
+                label: 'name',
+              },
+            ],
+          },
+        ],
+      },
     };
 
     await act(async () => {
@@ -381,10 +341,7 @@ describe('<FieldArray/>', () => {
     expect(wrapper.find('.bx--form__requirements')).toHaveLength(0);
 
     await act(async () => {
-      wrapper
-        .find('#add-button')
-        .first()
-        .simulate('click');
+      wrapper.find('#add-button').first().simulate('click');
     });
     wrapper.update();
 

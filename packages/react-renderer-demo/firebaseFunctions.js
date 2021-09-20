@@ -58,3 +58,37 @@ exports.nextjsFunc = functions.https.onRequest((req, res) => {
     }
   });
 });
+
+const github = require('@actions/github');
+
+exports.sendComment = functions.https.onRequest(async (request, response) => {
+  const token = functions.config().bot.token;
+  const octokit = github.getOctokit(token);
+
+  const { message, issueNumber, commentId } = request.body;
+
+  functions.logger.log('updating/creating comment', request.body);
+  try {
+    if (commentId) {
+      await octokit.rest.issues.updateComment({
+        owner: 'data-driven-forms',
+        repo: 'react-forms',
+        // eslint-disable-next-line camelcase
+        comment_id: commentId,
+        body: message
+      });
+      response.send(`Comment ${commentId} updated with message: ${message}`);
+    } else {
+      await octokit.rest.issues.createComment({
+        owner: 'data-driven-forms',
+        repo: 'react-forms',
+        // eslint-disable-next-line camelcase
+        issue_number: issueNumber,
+        body: message
+      });
+      response.send(`Comment in issue ${issueNumber} created with message: ${message}`);
+    }
+  } catch (e) {
+    response.status(500).send('Something broke!');
+  }
+});

@@ -2,7 +2,7 @@ import { FieldArrayField, UseFieldApiComponentConfig } from "@data-driven-forms/
 import { ReactNode } from "react";
 import { ButtonProps, FormGroupProps as CarbonFormGroupProps } from "carbon-components-react";
 
-import { FormGroupProps } from './form-group';
+import { FormGroupProps } from '../form-group';
 
 export interface FieldArrayButtonLabels {
   add: ReactNode;

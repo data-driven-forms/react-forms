@@ -12,7 +12,7 @@ EmptyOptions.propTypes = {
   noResultsMessage: PropTypes.node.isRequired,
   getInputProps: PropTypes.func.isRequired,
   isSearchable: PropTypes.bool,
-  isFetching: PropTypes.bool
+  isFetching: PropTypes.bool,
 };
 
 export default EmptyOptions;

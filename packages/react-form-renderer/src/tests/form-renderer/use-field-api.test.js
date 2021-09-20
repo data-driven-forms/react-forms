@@ -32,9 +32,9 @@ describe('useFieldApi', () => {
                 value={{
                   formOptions: {
                     internalRegisterField: jest.fn(),
-                    internalUnRegisterField: jest.fn()
+                    internalUnRegisterField: jest.fn(),
                   },
-                  validatorMapper: { required: () => (value) => (!value ? 'required' : undefined) }
+                  validatorMapper: { required: () => (value) => !value ? 'required' : undefined },
                 }}
               >
                 <TestField reset={reset} {...props} />
@@ -54,7 +54,7 @@ describe('useFieldApi', () => {
     initialProps = {
       name: 'some-name',
       component: 'text-field',
-      onSubmit: (values) => onSubmit(values)
+      onSubmit: (values) => onSubmit(values),
     };
   });
 
@@ -105,10 +105,7 @@ describe('useFieldApi', () => {
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find(Catcher)
-        .props()
-        .reset();
+      wrapper.find(Catcher).props().reset();
     });
     wrapper.update();
 
@@ -123,7 +120,7 @@ describe('useFieldApi', () => {
   it('reloads array validator when dataType changes', () => {
     initialProps = {
       ...initialProps,
-      component: componentTypes.FIELD_ARRAY
+      component: componentTypes.FIELD_ARRAY,
     };
 
     const wrapper = mount(<WrapperComponent {...initialProps} />);
@@ -139,7 +136,7 @@ describe('useFieldApi', () => {
   it('reloads array validator when validate changes', () => {
     initialProps = {
       ...initialProps,
-      component: componentTypes.FIELD_ARRAY
+      component: componentTypes.FIELD_ARRAY,
     };
 
     const wrapper = mount(<WrapperComponent {...initialProps} />);
@@ -174,7 +171,7 @@ describe('useFieldApi', () => {
     const TestDummy = ({ validate }) => {
       const { input } = useFieldApi({
         name: 'foo',
-        validate: validate ? [{ type: validatorTypes.REQUIRED }] : [{ type: validatorTypes.URL }]
+        validate: validate ? [{ type: validatorTypes.REQUIRED }] : [{ type: validatorTypes.URL }],
       });
       return <input {...input} id="foo" />;
     };
@@ -185,11 +182,11 @@ describe('useFieldApi', () => {
           <form onSubmit={handleSubmit}>
             <RendererContext.Provider
               value={{
-                validatorMapper: { required: () => (value) => (!value ? 'required' : undefined), url: () => jest.fn() },
+                validatorMapper: { required: () => (value) => !value ? 'required' : undefined, url: () => jest.fn() },
                 formOptions: {
                   internalRegisterField: jest.fn(),
-                  internalUnRegisterField: jest.fn()
-                }
+                  internalUnRegisterField: jest.fn(),
+                },
               }}
             >
               <TestDummy validate={validate} />

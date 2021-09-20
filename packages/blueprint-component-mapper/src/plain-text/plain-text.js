@@ -10,7 +10,7 @@ const PlainText = ({ component, label, name, ...props }) => {
 PlainText.propTypes = {
   component: PropTypes.string,
   label: PropTypes.node,
-  name: PropTypes.string
+  name: PropTypes.string,
 };
 
 export default PlainText;

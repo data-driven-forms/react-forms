@@ -69,5 +69,5 @@ export const dependencies = {
   antd: 'latest',
   '@ant-design/icons': 'latest',
   'prop-types': 'latest',
-  '@babel/runtime': '^7.12.1'
+  '@babel/runtime': '^7.12.1',
 };

@@ -6,7 +6,7 @@ import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template'
 import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 const schema = {
   title: 'Start typing',
@@ -19,9 +19,9 @@ const schema = {
       validate: [
         {
           type: validatorTypes.PATTERN,
-          pattern: /^Foo$/i
-        }
-      ]
+          pattern: /^Foo$/i,
+        },
+      ],
     },
     {
       component: componentTypes.TEXT_FIELD,
@@ -32,11 +32,11 @@ const schema = {
         {
           type: validatorTypes.PATTERN,
           pattern: '^Foo$',
-          flags: 'i'
-        }
-      ]
-    }
-  ]
+          flags: 'i',
+        },
+      ],
+    },
+  ],
 };
 
 const PatternValidators = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;

@@ -13,22 +13,22 @@ import prepareProps from '../prepare-props';
 
 const useStyles = createUseStyles({
   add: {
-    marginTop: 16
+    marginTop: 16,
   },
   addContainer: {
     width: '100%',
     display: 'flex',
-    flexDirection: 'row-reverse'
+    flexDirection: 'row-reverse',
   },
   remove: {
     marginTop: 8,
-    marginBottom: 8
+    marginBottom: 8,
   },
   formGroup: {
     '.bx--form__requirements': {
-      color: '#da1e28'
-    }
-  }
+      color: '#da1e28',
+    },
+  },
 });
 
 const ArrayItem = memo(
@@ -38,7 +38,7 @@ const ArrayItem = memo(
 
     const editedFields = fields.map((field) => ({
       ...field,
-      ...(field.name ? { name: `${name}.${field.name}` } : { name })
+      ...(field.name ? { name: `${name}.${field.name}` } : { name }),
     }));
 
     return (
@@ -68,12 +68,12 @@ ArrayItem.propTypes = {
   removeText: PropTypes.node,
   buttonDisabled: PropTypes.bool,
   RemoveButtonProps: PropTypes.object,
-  ArrayItemProps: PropTypes.object
+  ArrayItemProps: PropTypes.object,
 };
 
 ArrayItem.defaultProps = {
   RemoveButtonProps: {},
-  ArrayItemProps: {}
+  ArrayItemProps: {},
 };
 
 const FieldArray = (props) => {
@@ -94,7 +94,7 @@ const FieldArray = (props) => {
     buttonLabels,
     noItemsMessage,
     meta,
-    validateOnMount
+    validateOnMount,
   } = useFieldApi(prepareProps(props));
 
   const { formGroup, addContainer, add } = useStyles();
@@ -102,7 +102,7 @@ const FieldArray = (props) => {
   const buttonLabelsFinal = {
     add: 'Add',
     remove: 'Remove',
-    ...buttonLabels
+    ...buttonLabels,
   };
 
   const invalid = (meta.touched || validateOnMount) && !Array.isArray(meta.error) && (meta.error || meta.submitError);
@@ -157,7 +157,7 @@ FieldArray.propTypes = {
   minItems: PropTypes.number,
   buttonLabels: PropTypes.shape({
     add: PropTypes.node,
-    remove: PropTypes.node
+    remove: PropTypes.node,
   }),
   AddContainerProps: PropTypes.object,
   AddButtonProps: PropTypes.object,
@@ -167,7 +167,7 @@ FieldArray.propTypes = {
   RemoveButtonProps: PropTypes.object,
   defaultItem: PropTypes.any,
   isRequired: PropTypes.bool,
-  fields: PropTypes.array
+  fields: PropTypes.array,
 };
 
 FieldArray.defaultProps = {
@@ -179,7 +179,7 @@ FieldArray.defaultProps = {
   FormGroupProps: {},
   WrapperProps: {},
   ArrayItemProps: {},
-  RemoveButtonProps: {}
+  RemoveButtonProps: {},
 };
 
 export default FieldArray;

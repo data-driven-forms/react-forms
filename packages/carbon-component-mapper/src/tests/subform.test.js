@@ -22,10 +22,10 @@ describe('<SubForm />', () => {
           DescriptionElement: 'small',
           fields: [
             { label: 'label', component: componentTypes.SWITCH, name: 'switch' },
-            { label: 'label', component: componentTypes.TEXT_FIELD, name: 'text_field' }
-          ]
-        }
-      ]
+            { label: 'label', component: componentTypes.TEXT_FIELD, name: 'text_field' },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(

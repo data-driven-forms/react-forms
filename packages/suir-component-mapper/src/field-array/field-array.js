@@ -14,28 +14,28 @@ import FormField from '../form-field/form-field';
 const useStyles = createUseStyles({
   buttonGroup: {
     display: 'flex',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   },
   arrayItem: {
-    marginBottom: '1em'
+    marginBottom: '1em',
   },
   arrayItems: {
-    marginTop: '1em'
+    marginTop: '1em',
   },
   error: {
-    color: '#9f3a38 !important'
+    color: '#9f3a38 !important',
   },
   noItems: {
-    paddingBottom: '1em'
+    paddingBottom: '1em',
   },
   noMargin: {
-    margin: '0 !important'
+    margin: '0 !important',
   },
   arrayHeader: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });
 
 const ArrayItem = memo(
@@ -49,7 +49,7 @@ const ArrayItem = memo(
     removeLabel,
     RemoveButtonProps,
     ArrayItemGridProps: { className: arrayItemClassName, ...ArrayItemGridProps },
-    ArrayItemFieldsGridProps
+    ArrayItemFieldsGridProps,
   }) => {
     const { renderForm } = useFormApi();
     const classes = useStyles();
@@ -90,23 +90,23 @@ ArrayItem.propTypes = {
   removeLabel: PropTypes.node.isRequired,
   RemoveButtonProps: PropTypes.object,
   ArrayItemGridProps: PropTypes.object,
-  ArrayItemFieldsGridProps: PropTypes.object
+  ArrayItemFieldsGridProps: PropTypes.object,
 };
 
 ArrayItem.defaultProps = {
   RemoveButtonProps: {},
   ArrayItemGridProps: {},
-  ArrayItemFieldsGridProps: {}
+  ArrayItemFieldsGridProps: {},
 };
 
 const defaultButtonLabels = {
   add: 'ADD',
-  remove: 'REMOVE'
+  remove: 'REMOVE',
 };
 
 const initialState = {
   index: 0,
-  history: []
+  history: [],
 };
 
 export const reducer = (state, { type, action }) => {
@@ -114,22 +114,22 @@ export const reducer = (state, { type, action }) => {
     case 'redo':
       return {
         ...state,
-        index: state.index + 1
+        index: state.index + 1,
       };
     case 'action':
       return {
         index: state.index + 1,
-        history: [...state.history.slice(0, state.index), action]
+        history: [...state.history.slice(0, state.index), action],
       };
     case 'undo':
       return {
         ...state,
-        index: state.index - 1
+        index: state.index - 1,
       };
     case 'resetHistory':
       return {
         ...state,
-        history: state.history.slice(0, state.index)
+        history: state.history.slice(0, state.index),
       };
     default:
       return state;
@@ -168,7 +168,7 @@ const DynamicArray = ({ ...props }) => {
 
   const combinedButtonLabels = {
     ...defaultButtonLabels,
-    ...buttonLabels
+    ...buttonLabels,
   };
 
   const { dirty, submitFailed, error, submitError } = meta;
@@ -207,14 +207,14 @@ const DynamicArray = ({ ...props }) => {
                     isError && {
                       content: error,
                       color: 'red',
-                      pointing: 'left'
+                      pointing: 'left',
                     }
                   }
                   control={() => (
                     <Header
                       floated="left"
                       className={clsx(classes.noMargin, {
-                        [classes.error]: isError
+                        [classes.error]: isError,
                       })}
                       size="large"
                     >
@@ -315,7 +315,7 @@ DynamicArray.propTypes = {
   NoItemsProps: PropTypes.object,
   RemoveButtonProps: PropTypes.object,
   ArrayItemGridProps: PropTypes.object,
-  ArrayItemFieldsGridProps: PropTypes.object
+  ArrayItemFieldsGridProps: PropTypes.object,
 };
 
 DynamicArray.defaultProps = {
@@ -334,7 +334,7 @@ DynamicArray.defaultProps = {
   NoItemsProps: {},
   RemoveButtonProps: {},
   ArrayItemGridProps: {},
-  ArrayItemFieldsGridProps: {}
+  ArrayItemFieldsGridProps: {},
 };
 
 export default DynamicArray;

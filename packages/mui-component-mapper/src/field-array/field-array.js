@@ -16,25 +16,25 @@ import clsx from 'clsx';
 
 const useFielArrayStyles = makeStyles({
   formControl: {
-    width: '100%'
+    width: '100%',
   },
   centerText: {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   buttonsToEnd: {
     display: 'flex',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   },
   header: {
-    display: 'flex'
+    display: 'flex',
   },
   label: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   fieldArrayGroup: {
-    marginBottom: 32
-  }
+    marginBottom: 32,
+  },
 });
 
 const ArrayItem = memo(
@@ -49,7 +49,7 @@ const ArrayItem = memo(
     FieldContainerProps,
     FieldGroupGridProps,
     RemoveButtonGridProps,
-    RemoveButtonProps
+    RemoveButtonProps,
   }) => {
     const { renderForm } = useFormApi();
     const classes = useFielArrayStyles();
@@ -88,24 +88,24 @@ ArrayItem.propTypes = {
   FieldContainerProps: PropTypes.object,
   FieldGroupGridProps: PropTypes.object,
   RemoveButtonGridProps: PropTypes.object,
-  RemoveButtonProps: PropTypes.object
+  RemoveButtonProps: PropTypes.object,
 };
 
 ArrayItem.defaultProps = {
   FieldContainerProps: {},
   FieldGroupGridProps: {},
   RemoveButtonGridProps: {},
-  RemoveButtonProps: {}
+  RemoveButtonProps: {},
 };
 
 const defaultButtonLabels = {
   add: 'ADD',
-  remove: 'REMOVE'
+  remove: 'REMOVE',
 };
 
 const initialState = {
   index: 0,
-  history: []
+  history: [],
 };
 
 export const reducer = (state, { type, action }) => {
@@ -113,22 +113,22 @@ export const reducer = (state, { type, action }) => {
     case 'redo':
       return {
         ...state,
-        index: state.index + 1
+        index: state.index + 1,
       };
     case 'action':
       return {
         index: state.index + 1,
-        history: [...state.history.slice(0, state.index), action]
+        history: [...state.history.slice(0, state.index), action],
       };
     case 'undo':
       return {
         ...state,
-        index: state.index - 1
+        index: state.index - 1,
       };
     case 'resetHistory':
       return {
         ...state,
-        history: state.history.slice(0, state.index)
+        history: state.history.slice(0, state.index),
       };
     default:
       return state;
@@ -171,7 +171,7 @@ const DynamicArray = ({ ...props }) => {
 
   const combinedButtonLabels = {
     ...defaultButtonLabels,
-    ...buttonLabels
+    ...buttonLabels,
   };
 
   const classes = useFielArrayStyles();
@@ -305,7 +305,7 @@ DynamicArray.propTypes = {
   FieldContainerProps: PropTypes.object,
   FieldGroupGridProps: PropTypes.object,
   RemoveButtonGridProps: PropTypes.object,
-  RemoveButtonProps: PropTypes.object
+  RemoveButtonProps: PropTypes.object,
 };
 
 DynamicArray.defaultProps = {
@@ -329,7 +329,7 @@ DynamicArray.defaultProps = {
   FieldContainerProps: {},
   FieldGroupGridProps: {},
   RemoveButtonGridProps: {},
-  RemoveButtonProps: {}
+  RemoveButtonProps: {},
 };
 
 export default DynamicArray;

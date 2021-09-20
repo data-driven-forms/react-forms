@@ -83,8 +83,8 @@ const FormRenderer = ({
               internalRegisterField,
               internalUnRegisterField,
               ffGetRegisteredFields: formOptions.getRegisteredFields,
-              getRegisteredFields: internalGetRegisteredFields
-            }
+              getRegisteredFields: internalGetRegisteredFields,
+            },
           }}
         >
           <FormTemplate formFields={renderForm(schema.fields)} schema={schema} />
@@ -103,31 +103,31 @@ FormRenderer.propTypes = {
   subscription: PropTypes.shape({ [PropTypes.string]: PropTypes.bool }),
   clearedValue: PropTypes.any,
   componentMapper: PropTypes.shape({
-    [PropTypes.string]: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func, PropTypes.elementType])
+    [PropTypes.string]: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func, PropTypes.elementType]),
   }).isRequired,
   FormTemplate: PropTypes.elementType.isRequired,
   validatorMapper: PropTypes.shape({
-    [PropTypes.string]: PropTypes.func
+    [PropTypes.string]: PropTypes.func,
   }),
   actionMapper: PropTypes.shape({
-    [PropTypes.string]: PropTypes.func
+    [PropTypes.string]: PropTypes.func,
   }),
   schemaValidatorMapper: PropTypes.shape({
     components: PropTypes.shape({
-      [PropTypes.string]: PropTypes.func
+      [PropTypes.string]: PropTypes.func,
     }),
     validators: PropTypes.shape({
-      [PropTypes.string]: PropTypes.func
+      [PropTypes.string]: PropTypes.func,
     }),
     actions: PropTypes.shape({
-      [PropTypes.string]: PropTypes.func
-    })
-  })
+      [PropTypes.string]: PropTypes.func,
+    }),
+  }),
 };
 
 FormRenderer.defaultProps = {
   initialValues: {},
-  clearOnUnmount: false
+  clearOnUnmount: false,
 };
 
 export default FormRenderer;

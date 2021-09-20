@@ -13,7 +13,7 @@ const WizardInternal = ({ buttonLabels, stepsInfo, conditionalSubmitFlag }) => {
     submit: 'Submit',
     cancel: 'Cancel',
     back: 'Back',
-    ...buttonLabels
+    ...buttonLabels,
   };
 
   return (
@@ -43,9 +43,9 @@ WizardInternal.propTypes = {
       title: PropTypes.node,
       label: PropTypes.node,
       StepLabelProps: PropTypes.object,
-      StepProps: PropTypes.object
+      StepProps: PropTypes.object,
     })
-  )
+  ),
 };
 
 const SuirWizard = (props) => <Wizard Wizard={WizardInternal} {...props} />;

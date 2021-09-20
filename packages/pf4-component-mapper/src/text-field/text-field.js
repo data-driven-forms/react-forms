@@ -6,21 +6,8 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import showError from '../show-error/show-error';
 
 const TextField = (props) => {
-  const {
-    label,
-    isRequired,
-    helperText,
-    meta,
-    validateOnMount,
-    description,
-    hideLabel,
-    input,
-    isReadOnly,
-    isDisabled,
-    id,
-    FormGroupProps,
-    ...rest
-  } = useFieldApi(props);
+  const { label, isRequired, helperText, meta, validateOnMount, description, hideLabel, input, isReadOnly, isDisabled, id, FormGroupProps, ...rest } =
+    useFieldApi(props);
   return (
     <FormGroup
       label={label}
@@ -33,7 +20,15 @@ const TextField = (props) => {
       id={id || input.name}
       FormGroupProps={FormGroupProps}
     >
-      <TextInput {...input} {...showError(meta, validateOnMount)} {...rest} id={id || input.name} isReadOnly={isReadOnly} isDisabled={isDisabled} />
+      <TextInput
+        {...input}
+        {...showError(meta, validateOnMount)}
+        {...rest}
+        id={id || input.name}
+        isRequired={isRequired}
+        isReadOnly={isReadOnly}
+        isDisabled={isDisabled}
+      />
     </FormGroup>
   );
 };
@@ -48,7 +43,7 @@ TextField.propTypes = {
   hideLabel: PropTypes.bool,
   isDisabled: PropTypes.bool,
   id: PropTypes.string,
-  FormGroupProps: PropTypes.object
+  FormGroupProps: PropTypes.object,
 };
 
 export default TextField;

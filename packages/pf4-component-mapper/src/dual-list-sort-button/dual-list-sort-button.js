@@ -26,7 +26,7 @@ const DualListSortButton = ({ position, ...rest }) => {
 };
 
 DualListSortButton.propTypes = {
-  position: PropTypes.oneOf(['left', 'right'])
+  position: PropTypes.oneOf(['left', 'right']),
 };
 
 export default DualListSortButton;

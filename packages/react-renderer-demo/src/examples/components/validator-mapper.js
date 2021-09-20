@@ -14,7 +14,7 @@ const schema = {
       component: componentTypes.TEXT_FIELD,
       name: 'password',
       helperText: 'Include upper letter, number and one ? _ :',
-      validate: [{ type: 'password' }]
+      validate: [{ type: 'password' }],
     },
     {
       component: componentTypes.TEXT_FIELD,
@@ -22,25 +22,27 @@ const schema = {
       type: 'password',
       name: 'password-message',
       helperText: 'Include upper letter, number and one ? _ :',
-      validate: [{ type: 'password', message: 'Heslo musí obashovat velké písmeno, číslo a jeden znak z: ? _ :' }]
-    }
-  ]
+      validate: [{ type: 'password', message: 'Heslo musí obashovat velké písmeno, číslo a jeden znak z: ? _ :' }],
+    },
+  ],
 };
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 const validatorMapper = {
-  password: ({ message }) => (value) => {
-    if (!value) {
-      return;
-    }
+  password:
+    ({ message }) =>
+    (value) => {
+      if (!value) {
+        return;
+      }
 
-    if (!value.match(/[A-Z]/) || !value.match(/\d/) || !value.match(/\?_:/)) {
-      return message || 'Password has to contain upper letter, number and one of ? _ :';
-    }
-  }
+      if (!value.match(/[A-Z]/) || !value.match(/\d/) || !value.match(/\?_:/)) {
+        return message || 'Password has to contain upper letter, number and one of ? _ :';
+      }
+    },
 };
 
 const ValidatorMapper = () => (

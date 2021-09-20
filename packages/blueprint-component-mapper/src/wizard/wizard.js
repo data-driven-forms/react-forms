@@ -21,14 +21,14 @@ const WizardInternal = ({ WizardProps, ...props }) => {
 };
 
 WizardInternal.propTypes = {
-  WizardProps: PropTypes.object
+  WizardProps: PropTypes.object,
 };
 
 const defaultLabels = {
   submit: 'Submit',
   cancel: 'Cancel',
   back: 'Back',
-  next: 'Next'
+  next: 'Next',
 };
 
 const Wizard = ({ buttonLabels, ...props }) => (
@@ -36,7 +36,7 @@ const Wizard = ({ buttonLabels, ...props }) => (
 );
 
 Wizard.propTypes = {
-  buttonLabels: PropTypes.object
+  buttonLabels: PropTypes.object,
 };
 
 export default Wizard;

@@ -10,11 +10,11 @@ const PlainText = ({ variant, label, name, ...rest }) =>
 PlainText.propTypes = {
   variant: PropTypes.oneOf(validTextFields),
   label: PropTypes.node.isRequired,
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
 };
 
 PlainText.defaultProps = {
-  variant: 'p'
+  variant: 'p',
 };
 
 export default PlainText;

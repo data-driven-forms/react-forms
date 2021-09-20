@@ -11,14 +11,14 @@ describe('subform', () => {
       {
         title: 'cosiTitle',
         name: 'cosiName',
-        fields: []
+        fields: [],
       },
       {
         title: 'cosiTitle2',
         name: 'cosiName2',
-        fields: []
-      }
-    ]
+        fields: [],
+      },
+    ],
   };
 
   const TITLE = 'TIIIITLE';
@@ -29,8 +29,8 @@ describe('subform', () => {
       <RenderWithProvider
         value={{
           formOptions: {
-            renderForm: jest.fn().mockImplementation(() => <h1>Content</h1>)
-          }
+            renderForm: jest.fn().mockImplementation(() => <h1>Content</h1>),
+          },
         }}
       >
         <Subform {...props} />
@@ -47,8 +47,8 @@ describe('subform', () => {
       <RenderWithProvider
         value={{
           formOptions: {
-            renderForm: jest.fn().mockImplementation(() => <h1>Content</h1>)
-          }
+            renderForm: jest.fn().mockImplementation(() => <h1>Content</h1>),
+          },
         }}
       >
         <Subform {...props} title={TITLE} />
@@ -57,12 +57,7 @@ describe('subform', () => {
 
     expect(wrapper.find(Grid)).toHaveLength(3);
     expect(wrapper.find(Typography)).toHaveLength(1);
-    expect(
-      wrapper
-        .find(Typography)
-        .text()
-        .includes(TITLE)
-    ).toEqual(true);
+    expect(wrapper.find(Typography).text().includes(TITLE)).toEqual(true);
     expect(wrapper.find('h1')).toHaveLength(1);
   });
 
@@ -71,8 +66,8 @@ describe('subform', () => {
       <RenderWithProvider
         value={{
           formOptions: {
-            renderForm: jest.fn().mockImplementation(() => <h1>Content</h1>)
-          }
+            renderForm: jest.fn().mockImplementation(() => <h1>Content</h1>),
+          },
         }}
       >
         <Subform {...props} description={DESCRIPTION} />
@@ -81,12 +76,7 @@ describe('subform', () => {
 
     expect(wrapper.find(Grid)).toHaveLength(3);
     expect(wrapper.find(Typography)).toHaveLength(1);
-    expect(
-      wrapper
-        .find(Typography)
-        .text()
-        .includes(DESCRIPTION)
-    ).toEqual(true);
+    expect(wrapper.find(Typography).text().includes(DESCRIPTION)).toEqual(true);
     expect(wrapper.find('h1')).toHaveLength(1);
   });
 
@@ -95,8 +85,8 @@ describe('subform', () => {
       <RenderWithProvider
         value={{
           formOptions: {
-            renderForm: jest.fn().mockImplementation(() => <h1>Content</h1>)
-          }
+            renderForm: jest.fn().mockImplementation(() => <h1>Content</h1>),
+          },
         }}
       >
         <Subform {...props} title={TITLE} description={DESCRIPTION} />
@@ -105,20 +95,8 @@ describe('subform', () => {
 
     expect(wrapper.find(Grid)).toHaveLength(4);
     expect(wrapper.find(Typography)).toHaveLength(2);
-    expect(
-      wrapper
-        .find(Typography)
-        .first()
-        .text()
-        .includes(TITLE)
-    ).toEqual(true);
-    expect(
-      wrapper
-        .find(Typography)
-        .last()
-        .text()
-        .includes(DESCRIPTION)
-    ).toEqual(true);
+    expect(wrapper.find(Typography).first().text().includes(TITLE)).toEqual(true);
+    expect(wrapper.find(Typography).last().text().includes(DESCRIPTION)).toEqual(true);
     expect(wrapper.find('h1')).toHaveLength(1);
   });
 });

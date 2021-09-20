@@ -19,10 +19,10 @@ describe('<Select />', () => {
           label: 'select',
           options: [
             { label: 'option 1', value: 1 },
-            { label: 'option 2', value: 2 }
-          ]
-        }
-      ]
+            { label: 'option 2', value: 2 },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(
@@ -43,10 +43,10 @@ describe('<Select />', () => {
           isMulti: true,
           options: [
             { label: 'option 1', value: 1 },
-            { label: 'option 2', value: 2 }
-          ]
-        }
-      ]
+            { label: 'option 2', value: 2 },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(
@@ -82,7 +82,7 @@ describe('<Select />', () => {
     expect(
       tagRenderer('1', [
         { value: 2, label: '1' },
-        { value: '1', label: 'selected' }
+        { value: '1', label: 'selected' },
       ])
     ).toEqual('selected');
   });

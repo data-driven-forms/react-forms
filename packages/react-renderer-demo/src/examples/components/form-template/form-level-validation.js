@@ -12,11 +12,11 @@ import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import red from '@material-ui/core/colors/red';
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 const schema = {
@@ -29,9 +29,9 @@ const schema = {
       isRequired: true,
       validate: [
         {
-          type: validatorTypes.REQUIRED
-        }
-      ]
+          type: validatorTypes.REQUIRED,
+        },
+      ],
     },
     {
       component: componentTypes.TEXT_FIELD,
@@ -41,17 +41,17 @@ const schema = {
       isRequired: true,
       validate: [
         {
-          type: validatorTypes.REQUIRED
-        }
-      ]
-    }
-  ]
+          type: validatorTypes.REQUIRED,
+        },
+      ],
+    },
+  ],
 };
 
 const useFormErrorsStyle = makeStyles(() => ({
   listError: {
-    color: red[500] // you can use your theme color if you have theme provider
-  }
+    color: red[500], // you can use your theme color if you have theme provider
+  },
 }));
 
 const FormErrors = () => {

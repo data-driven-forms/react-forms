@@ -21,7 +21,7 @@ const SubForm = ({ title, description, fields, ...props }) => {
 SubForm.propTypes = {
   title: PropTypes.node,
   description: PropTypes.node,
-  fields: PropTypes.array
+  fields: PropTypes.array,
 };
 
 export default SubForm;

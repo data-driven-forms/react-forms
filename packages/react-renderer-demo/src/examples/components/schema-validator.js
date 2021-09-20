@@ -7,7 +7,7 @@ import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template'
 import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 const schema = {
@@ -15,13 +15,13 @@ const schema = {
     {
       component: componentTypes.TEXT_FIELD,
       name: 'i-am-okey',
-      label: 'I am label'
+      label: 'I am label',
     },
     {
       component: componentTypes.TEXT_FIELD,
-      name: 'need-label'
-    }
-  ]
+      name: 'need-label',
+    },
+  ],
 };
 
 const schemaValidatorMapper = {
@@ -30,8 +30,8 @@ const schemaValidatorMapper = {
       if (!field.label) {
         throw new DefaultSchemaError(`Missing label prop in "${field.name}" component`);
       }
-    }
-  }
+    },
+  },
 };
 
 const SchemaValidationExample = () => (

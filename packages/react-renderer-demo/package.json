@@ -1,10 +1,17 @@
 {
     "name": "@data-driven-forms/react-renderer-demo",
-    "version": "3.7.0",
+    "version": "3.12.1",
     "main": "firebaseFunctions.js",
-    "description": "Documentation pages for data driven forms.",
+    "description": "Documentation page for Data Driven Forms.",
+    "homepage": "https://data-driven-forms.org/",
+    "bugs": "https://github.com/data-driven-forms/react-forms/issues",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/data-driven-forms/react-forms",
+        "directory": "packages/react-renderer-demo"
+    },
     "engines": {
-        "node": "10"
+        "node": "14"
     },
     "private": true,
     "scripts": {
@@ -20,8 +27,8 @@
         "generate:examples": "node ./scripts/generate-component-examples && yarn lint --fix"
     },
     "dependencies": {
-        "@babel/plugin-proposal-class-properties": "^7.12.1",
-        "@data-driven-forms/form-builder": "0.0.11-rc3",
+        "@actions/github": "^5.0.0",
+        "@data-driven-forms/form-builder": "0.0.12-rc1",
         "@data-driven-forms/mui-component-mapper": "*",
         "@data-driven-forms/react-form-renderer": "*",
         "@material-ui/core": "^4.11.0",
@@ -29,33 +36,34 @@
         "@material-ui/styles": "^4.10.0",
         "@mdx-js/loader": "^1.6.22",
         "@mdx-js/react": "^1.6.22",
-        "@next/bundle-analyzer": "^10.0.5",
-        "@next/mdx": "^10.0.5",
+        "@next/bundle-analyzer": "^11.1.2",
+        "@next/mdx": "^11.1.2",
         "@stackblitz/sdk": "^1.5.2",
         "clsx": "^1.1.1",
         "codesandbox": "2.2.1",
         "docsearch.js": "^2.6.3",
-        "firebase-admin": "^8.12.1",
-        "firebase-functions": "^3.6.1",
+        "firebase-admin": "^9.11.1",
+        "firebase-functions": "^3.15.5",
         "markdown-to-jsx": "^7.1.1",
-        "next": "10.0.5",
-        "next-offline": "^5.0.2",
+        "next": "11.1.2",
+        "next-offline": "^5.0.5",
         "prism-react-renderer": "^1.1.1",
         "prop-types": "^15.7.2",
         "raw-loader": "^4.0.2",
-        "react": "^17.0.1",
+        "react": "^17.0.2",
         "react-copy-to-clipboard": "^5.0.2",
-        "react-dom": "^17.0.1",
+        "react-dom": "^17.0.2",
         "react-github-buttons": "^0.5.0",
         "react-sticky-box": "^0.9.3",
-        "terser-webpack-plugin": "^4.2.3"
+        "terser-webpack-plugin": "^5.2.4",
+        "webpack": "^5.52.1"
     },
     "devDependencies": {
         "@babel/cli": "^7.12.10",
         "cpx": "^1.5.0",
         "cross-env": "^7.0.3",
-        "firebase-functions-test": "^0.2.1",
-        "firebase-tools": "^7.7.10",
+        "firebase-functions-test": "^0.3.2",
+        "firebase-tools": "^9.18.0",
         "rimraf": "^3.0.2"
     }
 }

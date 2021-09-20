@@ -16,7 +16,7 @@ const ArrayItem = memo(
 
     const widths = {
       label: fields[0].label ? 5 : 0,
-      field: fields[0].label ? 7 : 12
+      field: fields[0].label ? 7 : 12,
     };
 
     const editedFields = fields.map((field, index) => {
@@ -72,13 +72,22 @@ ArrayItem.propTypes = {
   fields: PropTypes.arrayOf(PropTypes.object),
   remove: PropTypes.func.isRequired,
   length: PropTypes.number,
-  minItems: PropTypes.number
+  minItems: PropTypes.number,
 };
 
 const DynamicArray = ({ ...props }) => {
-  const { arrayValidator, label, description, fields: formFields, defaultItem, meta, minItems, maxItems, noItemsMessage, ...rest } = useFieldApi(
-    props
-  );
+  const {
+    arrayValidator,
+    label,
+    description,
+    fields: formFields,
+    defaultItem,
+    meta,
+    minItems,
+    maxItems,
+    noItemsMessage,
+    ...rest
+  } = useFieldApi(props);
   const { dirty, submitFailed, error, submitError } = meta;
   const isError = (dirty || submitFailed) && (error || submitError) && (typeof error === 'string' || typeof submitError === 'string');
 
@@ -138,13 +147,13 @@ DynamicArray.propTypes = {
   defaultItem: PropTypes.any,
   minItems: PropTypes.number,
   maxItems: PropTypes.number,
-  noItemsMessage: PropTypes.node
+  noItemsMessage: PropTypes.node,
 };
 
 DynamicArray.defaultProps = {
   maxItems: Infinity,
   minItems: 0,
-  noItemsMessage: 'No items added'
+  noItemsMessage: 'No items added',
 };
 
 export default DynamicArray;

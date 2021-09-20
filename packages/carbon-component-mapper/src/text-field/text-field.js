@@ -38,7 +38,7 @@ TextField.propTypes = {
   isRequired: PropTypes.bool,
   label: PropTypes.node,
   labelText: PropTypes.node,
-  description: PropTypes.node
+  description: PropTypes.node,
 };
 
 export default TextField;

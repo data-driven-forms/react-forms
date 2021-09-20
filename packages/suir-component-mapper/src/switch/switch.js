@@ -12,15 +12,15 @@ import FormField from '../form-field/form-field';
 const useStyles = createUseStyles({
   root: {
     '&>.field': {
-      display: 'inline-block'
-    }
+      display: 'inline-block',
+    },
   },
   errorLabel: {
     '&:after': {
       content: '"*"',
-      color: '#db2828'
-    }
-  }
+      color: '#db2828',
+    },
+  },
 });
 
 export const Switch = (props) => {
@@ -43,7 +43,7 @@ export const Switch = (props) => {
     ...rest
   } = useFieldApi({
     ...props,
-    type: 'checkbox'
+    type: 'checkbox',
   });
   const invalid = validationError(meta, validateOnMount);
   const classes = useStyles();
@@ -58,7 +58,7 @@ export const Switch = (props) => {
         label={
           <FormCheckbox
             className={clsx({
-              [classes.errorLabel]: isRequired
+              [classes.errorLabel]: isRequired,
             })}
             toggle
             label={controlLabel || label}
@@ -84,12 +84,12 @@ Switch.propTypes = {
   description: PropTypes.node,
   /** Sub components customization API */
   FormFieldGridProps: PropTypes.object,
-  HelpertextProps: PropTypes.object
+  HelpertextProps: PropTypes.object,
 };
 
 Switch.defaultProps = {
   FormFieldGridProps: {},
-  HelpertextProps: {}
+  HelpertextProps: {},
 };
 
 export default Switch;

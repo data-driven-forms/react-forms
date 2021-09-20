@@ -16,7 +16,7 @@ const DatePicker = ({ input, disabled, placeholder, valueRenderer, PopoverProps,
 
 DatePicker.defaultProps = {
   placeholder: 'Select date...',
-  valueRenderer: (value) => value.toString()
+  valueRenderer: (value) => value.toString(),
 };
 
 DatePicker.propTypes = {
@@ -25,7 +25,7 @@ DatePicker.propTypes = {
   placeholder: PropTypes.node,
   valueRenderer: PropTypes.func,
   PopoverProps: PropTypes.object,
-  ButtonProps: PropTypes.object
+  ButtonProps: PropTypes.object,
 };
 
 const WrapperDatePicker = (props) => <FormGroupWrapper {...props} Component={DatePicker} />;

@@ -11,7 +11,7 @@ import {
   StructuredListWrapper,
   StructuredListRow,
   StructuredListBody,
-  StructuredListCell
+  StructuredListCell,
 } from 'carbon-components-react/lib/components/StructuredList/StructuredList';
 
 import { buildLabel } from '../prepare-props';
@@ -21,11 +21,11 @@ const useStyles = createUseStyles({
     maxHeight: 500,
     overflow: 'auto',
     display: 'block',
-    marginBottom: 0
+    marginBottom: 0,
   },
   dualListBody: {
     width: '100%',
-    display: 'inline-table'
+    display: 'inline-table',
   },
   buttonWrapper: {
     flexDirection: 'column',
@@ -36,20 +36,20 @@ const useStyles = createUseStyles({
       maxWidth: '100%',
       '@media (max-width: 1055px)': {
         svg: {
-          transform: 'rotate(90deg)'
-        }
-      }
+          transform: 'rotate(90deg)',
+        },
+      },
     },
     '& button:not(:last-child)': {
-      marginBottom: 8
-    }
+      marginBottom: 8,
+    },
   },
   toolbar: {
-    display: 'flex'
+    display: 'flex',
   },
   tooltipButton: {
-    background: '#c2c1c1 !important'
-  }
+    background: '#c2c1c1 !important',
+  },
 });
 
 const EmptyList = ({ message }) => (
@@ -63,7 +63,7 @@ const EmptyList = ({ message }) => (
 );
 
 EmptyList.propTypes = {
-  message: PropTypes.string
+  message: PropTypes.string,
 };
 
 const List = ({ options, selectedValues, handleOptionsClick, noTitle, ListProps, BodyProps }) => {
@@ -101,7 +101,7 @@ List.propTypes = {
   handleOptionsClick: PropTypes.func,
   noTitle: PropTypes.node,
   ListProps: PropTypes.object,
-  BodyProps: PropTypes.object
+  BodyProps: PropTypes.object,
 };
 
 const Toolbar = ({ sortTitle, onFilter, onSort, sortDirection, placeholder, ToolbarProps, SearchProps, SortProps }) => {
@@ -125,7 +125,7 @@ Toolbar.propTypes = {
   placeholder: PropTypes.string,
   ToolbarProps: PropTypes.object,
   SearchProps: PropTypes.object,
-  SortProps: PropTypes.object
+  SortProps: PropTypes.object,
 };
 
 const isEmpty = (array) => array.length === 0;
@@ -183,7 +183,7 @@ const DualListSelectInner = ({
   LeftListProps,
   LeftBodyProps,
   RightListProps,
-  RightBodyProps
+  RightBodyProps,
 }) => {
   const { buttonWrapper } = useStyles();
 
@@ -318,7 +318,7 @@ DualListSelectInner.propTypes = {
   LeftListProps: PropTypes.object,
   LeftBodyProps: PropTypes.object,
   RightListProps: PropTypes.object,
-  RightBodyProps: PropTypes.object
+  RightBodyProps: PropTypes.object,
 };
 
 DualListSelectInner.defaultProps = {
@@ -357,7 +357,7 @@ DualListSelectInner.defaultProps = {
   LeftListProps: {},
   LeftBodyProps: {},
   RightListProps: {},
-  RightBodyProps: {}
+  RightBodyProps: {},
 };
 
 const DualListSelect = (props) => <DualListSelectCommon {...props} DualListSelect={DualListSelectInner} />;

@@ -14,7 +14,7 @@ const validatorMapper = {
     numericality({ [includeThreshold ? '<=' : '<']: value, ...rest }),
   [validatorTypes.MIN_NUMBER_VALUE]: ({ value, includeThreshold = true, ...rest }) =>
     numericality({ [includeThreshold ? '>=' : '>']: value, ...rest }),
-  [validatorTypes.URL]: ({ message, ...options }) => pattern({ pattern: url(options), message: message || 'String is not URL.' })
+  [validatorTypes.URL]: ({ message, ...options }) => pattern({ pattern: url(options), message: message || 'String is not URL.' }),
 };
 
 export default validatorMapper;

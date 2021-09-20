@@ -8,21 +8,21 @@ const schema = {
     {
       component: componentTypes.TEXT_FIELD,
       label: 'First name',
-      name: 'first-name'
-    }
-  ]
+      name: 'first-name',
+    },
+  ],
 };
 
 const variants = [
   ...baseFieldProps,
   {
     name: 'placeholder',
-    type: 'string'
+    type: 'string',
   },
   {
     name: 'type',
-    type: 'string'
-  }
+    type: 'string',
+  },
 ];
 
 const TextField = () => <ComponentText schema={schema} variants={variants} linkText="Text Field" />;

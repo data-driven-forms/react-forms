@@ -18,7 +18,7 @@ const DualListSelect = (props) => {
   } = useFieldApi(props);
   const dataSource = options.map((option) => ({
     key: option.value,
-    ...option
+    ...option,
   }));
   return (
     <FormGroup

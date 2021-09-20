@@ -21,8 +21,8 @@ const createSchema = ({ formOptions, fields }) => {
           field.substepOf?.title ||
           field.substepOf,
         index,
-        primary: !schema[schema.length - 1] || !field.substepOf || field.substepOf !== schema[schema.length - 1].substepOf
-      }
+        primary: !schema[schema.length - 1] || !field.substepOf || field.substepOf !== schema[schema.length - 1].substepOf,
+      },
     ];
 
     let nextStep = field.nextStep;
@@ -59,9 +59,9 @@ const handleNext = (state, nextStep, formOptions, fields) => {
     navSchema: state.isDynamic
       ? createSchema({
           fields,
-          formOptions
+          formOptions,
         })
-      : state.navSchema
+      : state.navSchema,
   };
 };
 
@@ -88,7 +88,7 @@ const jumpToStep = (state, index, valid, fields, crossroads, formOptions) => {
       ...state,
       activeStep: state.prevSteps[index],
       prevSteps: includeActiveStep ? state.prevSteps : [...state.prevSteps, state.activeStep],
-      activeStepIndex: index
+      activeStepIndex: index,
     };
 
     const INDEXING_BY_ZERO = 1;
@@ -103,7 +103,7 @@ const jumpToStep = (state, index, valid, fields, crossroads, formOptions) => {
     const invalidStepShouldDisableNav = valid === false;
 
     let updatedState = {
-      ...newState
+      ...newState,
     };
 
     if (dynamicStepShouldDisableNav && !hardcodedCrossroads) {
@@ -111,16 +111,16 @@ const jumpToStep = (state, index, valid, fields, crossroads, formOptions) => {
         ...updatedState,
         navSchema: createSchema({
           formOptions,
-          fields
+          fields,
         }),
         prevSteps: newState.prevSteps.slice(0, index),
-        maxStepIndex: index
+        maxStepIndex: index,
       };
     } else if (currentStep.disableForwardJumping) {
       updatedState = {
         ...updatedState,
         prevSteps: newState.prevSteps.slice(0, index),
-        maxStepIndex: index
+        maxStepIndex: index,
       };
     } else if (invalidStepShouldDisableNav) {
       const indexOfCurrentStep = newState.prevSteps.indexOf(originalActiveStep);
@@ -128,7 +128,7 @@ const jumpToStep = (state, index, valid, fields, crossroads, formOptions) => {
       updatedState = {
         ...updatedState,
         prevSteps: newState.prevSteps.slice(0, indexOfCurrentStep + INDEXING_BY_ZERO),
-        maxStepIndex: newState.prevSteps.slice(0, indexOfCurrentStep + INDEXING_BY_ZERO).length - INDEXING_BY_ZERO
+        maxStepIndex: newState.prevSteps.slice(0, indexOfCurrentStep + INDEXING_BY_ZERO).length - INDEXING_BY_ZERO,
       };
     }
 
@@ -144,8 +144,8 @@ const reducer = (state, { type, payload }) => {
         loading: false,
         navSchema: createSchema({
           fields: payload.fields,
-          formOptions: payload.formOptions
-        })
+          formOptions: payload.formOptions,
+        }),
       };
     case 'handleNext':
       return handleNext(state, payload.nextStep, payload.formOptions, payload.fields);
@@ -156,8 +156,8 @@ const reducer = (state, { type, payload }) => {
         maxStepIndex: state.activeStepIndex,
         navSchema: createSchema({
           fields: payload.fields,
-          formOptions: payload.formOptions
-        })
+          formOptions: payload.formOptions,
+        }),
       };
     case 'jumpToStep':
       return jumpToStep(state, payload.index, payload.valid, payload.fields, payload.crossroads, payload.formOptions);

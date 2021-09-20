@@ -16,7 +16,7 @@ describe('<FieldArray/>', () => {
     initialProps = {
       componentMapper,
       FormTemplate,
-      onSubmit: (values) => onSubmit(values)
+      onSubmit: (values) => onSubmit(values),
     };
   });
 
@@ -37,17 +37,17 @@ describe('<FieldArray/>', () => {
             noItemsMessage,
             buttonLabels: {
               add: 'CUSTOM ADD',
-              remove: 'CUSTOM REMOVE'
+              remove: 'CUSTOM REMOVE',
             },
             fields: [
               {
                 component: componentTypes.TEXT_FIELD,
-                name: 'name'
-              }
-            ]
-          }
-        ]
-      }
+                name: 'name',
+              },
+            ],
+          },
+        ],
+      },
     };
 
     await act(async () => {
@@ -60,10 +60,7 @@ describe('<FieldArray/>', () => {
     expect(wrapper.text().includes(noItemsMessage)).toEqual(true);
 
     await act(async () => {
-      wrapper
-        .find('AddCircleOIcon')
-        .first()
-        .simulate('click');
+      wrapper.find('AddCircleOIcon').first().simulate('click');
     });
     wrapper.update();
 
@@ -85,16 +82,16 @@ describe('<FieldArray/>', () => {
             fields: [
               {
                 component: componentTypes.TEXT_FIELD,
-                name: 'name'
+                name: 'name',
               },
               {
                 component: componentTypes.TEXT_FIELD,
-                name: 'lastName'
-              }
-            ]
-          }
-        ]
-      }
+                name: 'lastName',
+              },
+            ],
+          },
+        ],
+      },
     };
 
     await act(async () => {
@@ -110,10 +107,7 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper
-        .find('AddCircleOIcon')
-        .first()
-        .simulate('click');
+      wrapper.find('AddCircleOIcon').first().simulate('click');
     });
     wrapper.update();
 
@@ -123,16 +117,13 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: [{ name: 'enter a name', lastName: 'enter a last name' }]
+      nicePeople: [{ name: 'enter a name', lastName: 'enter a last name' }],
     });
 
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper
-        .find('CloseIcon')
-        .first()
-        .simulate('click');
+      wrapper.find('CloseIcon').first().simulate('click');
     });
     wrapper.update();
 
@@ -142,7 +133,7 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: []
+      nicePeople: [],
     });
   });
 
@@ -157,12 +148,12 @@ describe('<FieldArray/>', () => {
             defaultItem: 'defaultItem',
             fields: [
               {
-                component: componentTypes.TEXT_FIELD
-              }
-            ]
-          }
-        ]
-      }
+                component: componentTypes.TEXT_FIELD,
+              },
+            ],
+          },
+        ],
+      },
     };
 
     await act(async () => {
@@ -178,10 +169,7 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper
-        .find('AddCircleOIcon')
-        .first()
-        .simulate('click');
+      wrapper.find('AddCircleOIcon').first().simulate('click');
     });
     wrapper.update();
 
@@ -191,16 +179,13 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: ['defaultItem']
+      nicePeople: ['defaultItem'],
     });
 
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper
-        .find('CloseIcon')
-        .first()
-        .simulate('click');
+      wrapper.find('CloseIcon').first().simulate('click');
     });
     wrapper.update();
 
@@ -210,7 +195,7 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: []
+      nicePeople: [],
     });
   });
 
@@ -227,12 +212,12 @@ describe('<FieldArray/>', () => {
             maxItems: 2,
             fields: [
               {
-                component: componentTypes.TEXT_FIELD
-              }
-            ]
-          }
-        ]
-      }
+                component: componentTypes.TEXT_FIELD,
+              },
+            ],
+          },
+        ],
+      },
     };
 
     await act(async () => {
@@ -240,10 +225,7 @@ describe('<FieldArray/>', () => {
     });
 
     await act(async () => {
-      wrapper
-        .find('AddCircleOIcon')
-        .first()
-        .simulate('click');
+      wrapper.find('AddCircleOIcon').first().simulate('click');
     });
     wrapper.update();
 
@@ -253,15 +235,12 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: ['defaultItem']
+      nicePeople: ['defaultItem'],
     });
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper
-        .find('AddCircleOIcon')
-        .first()
-        .simulate('click');
+      wrapper.find('AddCircleOIcon').first().simulate('click');
     });
     wrapper.update();
 
@@ -271,15 +250,12 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: ['defaultItem', 'defaultItem']
+      nicePeople: ['defaultItem', 'defaultItem'],
     });
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper
-        .find('AddCircleOIcon')
-        .first()
-        .simulate('click');
+      wrapper.find('AddCircleOIcon').first().simulate('click');
     });
     wrapper.update();
 
@@ -289,15 +265,12 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: ['defaultItem', 'defaultItem']
+      nicePeople: ['defaultItem', 'defaultItem'],
     });
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper
-        .find('CloseIcon')
-        .first()
-        .simulate('click');
+      wrapper.find('CloseIcon').first().simulate('click');
     });
     wrapper.update();
 
@@ -307,15 +280,12 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: ['defaultItem']
+      nicePeople: ['defaultItem'],
     });
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper
-        .find('CloseIcon')
-        .first()
-        .simulate('click');
+      wrapper.find('CloseIcon').first().simulate('click');
     });
     wrapper.update();
 
@@ -325,7 +295,7 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: ['defaultItem']
+      nicePeople: ['defaultItem'],
     });
   });
 
@@ -340,12 +310,12 @@ describe('<FieldArray/>', () => {
             validate: [{ type: validatorTypes.MIN_ITEMS, threshold: 3 }],
             fields: [
               {
-                component: componentTypes.TEXT_FIELD
-              }
-            ]
-          }
-        ]
-      }
+                component: componentTypes.TEXT_FIELD,
+              },
+            ],
+          },
+        ],
+      },
     };
 
     await act(async () => {
@@ -355,10 +325,7 @@ describe('<FieldArray/>', () => {
     expect(wrapper.find(FormHelperText)).toHaveLength(0);
 
     await act(async () => {
-      wrapper
-        .find('AddCircleOIcon')
-        .first()
-        .simulate('click');
+      wrapper.find('AddCircleOIcon').first().simulate('click');
     });
     wrapper.update();
 
@@ -387,12 +354,12 @@ describe('<FieldArray/>', () => {
             fields: [
               {
                 component: componentTypes.TEXT_FIELD,
-                label: 'foo'
-              }
-            ]
-          }
-        ]
-      }
+                label: 'foo',
+              },
+            ],
+          },
+        ],
+      },
     };
 
     await act(async () => {
@@ -402,12 +369,7 @@ describe('<FieldArray/>', () => {
     expect(wrapper.find('label[id="label"]')).toHaveLength(1);
     expect(wrapper.find('h4[id="message"]')).toHaveLength(1);
     expect(wrapper.find('h3[id="desc"]')).toHaveLength(1);
-    expect(
-      wrapper
-        .find('AddCircleOIcon')
-        .props()
-        .className.includes('disabled')
-    ).toEqual(false);
+    expect(wrapper.find('AddCircleOIcon').props().className.includes('disabled')).toEqual(false);
     expect(wrapper.find('CloseIcon')).toHaveLength(0);
   });
 
@@ -426,12 +388,12 @@ describe('<FieldArray/>', () => {
             fields: [
               {
                 component: componentTypes.TEXT_FIELD,
-                label: 'foo'
-              }
-            ]
-          }
-        ]
-      }
+                label: 'foo',
+              },
+            ],
+          },
+        ],
+      },
     };
 
     await act(async () => {
@@ -441,28 +403,11 @@ describe('<FieldArray/>', () => {
     expect(wrapper.find('label[id="label"]')).toHaveLength(1);
     expect(wrapper.find('h4[id="message"]')).toHaveLength(0);
     expect(wrapper.find('h3[id="desc"]')).toHaveLength(1);
-    expect(
-      wrapper
-        .find('AddCircleOIcon')
-        .props()
-        .className.includes('disabled')
-    ).toEqual(false);
+    expect(wrapper.find('AddCircleOIcon').props().className.includes('disabled')).toEqual(false);
     expect(wrapper.find('CloseIcon')).toHaveLength(2);
     expect(wrapper.find('CloseIcon')).toHaveLength(2);
-    expect(
-      wrapper
-        .find('CloseIcon')
-        .first()
-        .props()
-        .className.includes('disabled')
-    ).toEqual(false);
-    expect(
-      wrapper
-        .find('CloseIcon')
-        .last()
-        .props()
-        .className.includes('disabled')
-    ).toEqual(false);
+    expect(wrapper.find('CloseIcon').first().props().className.includes('disabled')).toEqual(false);
+    expect(wrapper.find('CloseIcon').last().props().className.includes('disabled')).toEqual(false);
   });
 
   it('should remove nested field to form', async () => {
@@ -477,12 +422,12 @@ describe('<FieldArray/>', () => {
             fields: [
               {
                 component: componentTypes.TEXT_FIELD,
-                label: 'foo'
-              }
-            ]
-          }
-        ]
-      }
+                label: 'foo',
+              },
+            ],
+          },
+        ],
+      },
     };
 
     await act(async () => {
@@ -513,12 +458,12 @@ describe('<FieldArray/>', () => {
               {
                 component: componentTypes.TEXT_FIELD,
                 name: 'nested-component',
-                label: 'foo'
-              }
-            ]
-          }
-        ]
-      }
+                label: 'foo',
+              },
+            ],
+          },
+        ],
+      },
     };
 
     await act(async () => {
@@ -541,12 +486,12 @@ describe('<FieldArray/>', () => {
             fields: [
               {
                 component: componentTypes.TEXT_FIELD,
-                label: 'foo'
-              }
-            ]
-          }
-        ]
-      }
+                label: 'foo',
+              },
+            ],
+          },
+        ],
+      },
     };
 
     await act(async () => {

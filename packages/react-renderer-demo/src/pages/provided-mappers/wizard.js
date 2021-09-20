@@ -16,15 +16,15 @@ const schema = {
             when: 'source-type',
             stepMapper: {
               aws: 'aws',
-              google: 'google'
-            }
+              google: 'google',
+            },
           },
           fields: [
             {
               component: componentTypes.TEXTAREA,
               name: 'source-name',
               type: 'text',
-              label: 'Source name'
+              label: 'Source name',
             },
             {
               component: componentTypes.SELECT,
@@ -33,24 +33,24 @@ const schema = {
               isRequired: true,
               options: [
                 {
-                  label: 'Please Choose'
+                  label: 'Please Choose',
                 },
                 {
                   value: 'aws',
-                  label: 'Aws'
+                  label: 'Aws',
                 },
                 {
                   value: 'google',
-                  label: 'Google'
-                }
+                  label: 'Google',
+                },
               ],
               validate: [
                 {
-                  type: validatorTypes.REQUIRED
-                }
-              ]
-            }
-          ]
+                  type: validatorTypes.REQUIRED,
+                },
+              ],
+            },
+          ],
         },
         {
           title: 'Configure AWS',
@@ -59,9 +59,9 @@ const schema = {
             {
               component: componentTypes.TEXT_FIELD,
               name: 'aws-field',
-              label: 'Aws field part'
-            }
-          ]
+              label: 'Aws field part',
+            },
+          ],
         },
         {
           name: 'google',
@@ -70,26 +70,26 @@ const schema = {
             {
               component: componentTypes.TEXT_FIELD,
               name: 'google-field',
-              label: 'Google field part'
-            }
-          ]
-        }
-      ]
-    }
-  ]
+              label: 'Google field part',
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 const variants = [
   {
     name: 'name',
     type: 'string',
-    required: true
+    required: true,
   },
   {
     name: 'fields',
     type: 'array',
-    required: true
-  }
+    required: true,
+  },
 ];
 
 const Wizard = () => <ComponentText schema={schema} variants={variants} linkText="Wizard" />;

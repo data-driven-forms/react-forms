@@ -27,7 +27,7 @@ NextButton.propTypes = {
   handleNext: PropTypes.func.isRequired,
   nextLabel: PropTypes.node.isRequired,
   getState: PropTypes.func.isRequired,
-  conditionalSubmitFlag: PropTypes.string.isRequired
+  conditionalSubmitFlag: PropTypes.string.isRequired,
 };
 
 const WizardStepButtons = ({
@@ -39,7 +39,7 @@ const WizardStepButtons = ({
   buttonsClassName,
   buttonLabels: { cancel, submit, back, next },
   formOptions,
-  conditionalSubmitFlag
+  conditionalSubmitFlag,
 }) => (
   <footer className={`pf-c-wizard__footer ${buttonsClassName ? buttonsClassName : ''}`}>
     {Buttons ? (
@@ -91,22 +91,22 @@ WizardStepButtons.propTypes = {
     PropTypes.string,
     PropTypes.shape({
       when: PropTypes.string.isRequired,
-      stepMapper: PropTypes.object.isRequired
+      stepMapper: PropTypes.object.isRequired,
     }),
-    PropTypes.func
+    PropTypes.func,
   ]),
   buttonLabels: PropTypes.shape({
     submit: PropTypes.node.isRequired,
     cancel: PropTypes.node.isRequired,
     back: PropTypes.node.isRequired,
-    next: PropTypes.node.isRequired
+    next: PropTypes.node.isRequired,
   }).isRequired,
   buttonsClassName: PropTypes.string,
   buttons: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   formOptions: PropTypes.shape({
     getState: PropTypes.func.isRequired,
-    onCancel: PropTypes.func.isRequired
-  })
+    onCancel: PropTypes.func.isRequired,
+  }),
 };
 
 export default WizardStepButtons;

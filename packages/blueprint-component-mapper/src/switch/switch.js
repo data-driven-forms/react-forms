@@ -15,7 +15,7 @@ const Switch = ({ input, isRequired, label, onText, offText, providerRequired, .
         <span>
           {label} {providerRequired}
         </span>
-      )
+      ),
     })}
     {...input}
   />
@@ -27,7 +27,7 @@ Switch.propTypes = {
   label: PropTypes.node,
   onText: PropTypes.node,
   offText: PropTypes.node,
-  providerRequired: PropTypes.node
+  providerRequired: PropTypes.node,
 };
 
 const WrapperSwitch = (props) => <FormGroupWrapper {...props} hideLabel type="checkbox" Component={Switch} />;

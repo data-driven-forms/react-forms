@@ -19,12 +19,12 @@ PlainText.propTypes = {
   label: PropTypes.node.isRequired,
   name: PropTypes.string.isRequired,
   component: PropTypes.any,
-  element: PropTypes.elementType
+  element: PropTypes.elementType,
 };
 
 PlainText.defaultProps = {
   variant: 'body1',
-  gutterBottom: true
+  gutterBottom: true,
 };
 
 export default PlainText;

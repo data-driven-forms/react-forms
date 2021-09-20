@@ -7,7 +7,7 @@ const SchemaErrorComponent = ({ name, message }) => (
       padding: 5,
       border: '1px solid #bbb',
       borderCollapse: 'collapse',
-      borderRadius: 2
+      borderRadius: 2,
     }}
   >
     <h1 style={{ fontSize: 24, marginBottom: 5 }}>Form could not be rendered, because of invalid form schema.</h1>
@@ -19,7 +19,7 @@ const SchemaErrorComponent = ({ name, message }) => (
 
 SchemaErrorComponent.propTypes = {
   name: PropTypes.string.isRequired,
-  message: PropTypes.string.isRequired
+  message: PropTypes.string.isRequired,
 };
 
 export default SchemaErrorComponent;

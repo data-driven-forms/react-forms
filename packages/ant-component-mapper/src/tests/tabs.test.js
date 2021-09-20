@@ -26,18 +26,18 @@ describe('<Tabs />', () => {
               title: 'title 1',
               name: 'tab1',
               description: 'desc 1',
-              fields: [{ component: componentTypes.SLIDER, name: 'slider' }]
+              fields: [{ component: componentTypes.SLIDER, name: 'slider' }],
             },
             {
               component: componentTypes.TAB_ITEM,
               title: 'title 2',
               name: 'tab2',
               description: 'desc 2',
-              fields: [{ component: componentTypes.TEXT_FIELD, name: 'text_field' }]
-            }
-          ]
-        }
-      ]
+              fields: [{ component: componentTypes.TEXT_FIELD, name: 'text_field' }],
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(

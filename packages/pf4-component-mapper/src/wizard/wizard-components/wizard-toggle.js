@@ -38,7 +38,7 @@ WizardToggle.propTypes = {
   currentStep: PropTypes.object,
   navSchema: PropTypes.array,
   isOpen: PropTypes.bool,
-  dispatch: PropTypes.func
+  dispatch: PropTypes.func,
 };
 
 export default WizardToggle;

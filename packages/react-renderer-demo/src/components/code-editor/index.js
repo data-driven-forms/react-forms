@@ -16,9 +16,9 @@ const useStyles = makeStyles({
     overflow: 'auto',
     '& .token-line': {
       lineHeight: '1.3em',
-      height: '1.3em'
-    }
-  }
+      height: '1.3em',
+    },
+  },
 });
 
 const Pre = ({ children, ...props }) => {
@@ -31,7 +31,7 @@ const Pre = ({ children, ...props }) => {
 };
 
 Pre.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)])
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)]),
 };
 
 const useStylesCode = makeStyles((theme) => ({
@@ -39,9 +39,9 @@ const useStylesCode = makeStyles((theme) => ({
     position: 'relative',
     maxWidth: '100%',
     [theme.breakpoints.down('sm')]: {
-      maxWidth: (props) => (props.inExample ? '100%' : 'calc(100vw - 64px)')
-    }
-  }
+      maxWidth: (props) => (props.inExample ? '100%' : 'calc(100vw - 64px)'),
+    },
+  },
 }));
 
 const CodeEditor = ({ value, children, className, inExample, editorClassname, keepLastLine }) => {
@@ -90,7 +90,7 @@ CodeEditor.propTypes = {
   className: PropTypes.string,
   inExample: PropTypes.bool,
   editorClassname: PropTypes.string,
-  keepLastLine: PropTypes.bool
+  keepLastLine: PropTypes.bool,
 };
 
 export default CodeEditor;

@@ -13,7 +13,7 @@ const schema = {
       name: 'field-1',
       label: 'Field 1',
       helperText: 'To show field 2 remove the cat!',
-      initialValue: 'blablacatbla'
+      initialValue: 'blablacatbla',
     },
     {
       component: componentTypes.TEXT_FIELD,
@@ -21,13 +21,13 @@ const schema = {
       label: 'Field 2',
       initialValue: 'I am shown!',
       isDisabled: true,
-      condition: { when: 'field-1', pattern: /cat/, notMatch: true }
-    }
-  ]
+      condition: { when: 'field-1', pattern: /cat/, notMatch: true },
+    },
+  ],
 };
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 const NotMatch = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;

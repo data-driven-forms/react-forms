@@ -18,7 +18,7 @@ describe('TimePicker', () => {
     initialProps = {
       onSubmit: (values) => onSubmit(values),
       componentMapper,
-      FormTemplate
+      FormTemplate,
     };
   });
 
@@ -28,9 +28,9 @@ describe('TimePicker', () => {
         {
           component: componentTypes.TIME_PICKER,
           name: 'time-picker',
-          twelveHoursFormat: true
-        }
-      ]
+          twelveHoursFormat: true,
+        },
+      ],
     };
 
     wrapper = mount(<FormRenderer schema={schema} {...initialProps} />);
@@ -76,9 +76,9 @@ describe('TimePicker', () => {
       fields: [
         {
           component: componentTypes.TIME_PICKER,
-          name: 'time-picker'
-        }
-      ]
+          name: 'time-picker',
+        },
+      ],
     };
 
     wrapper = mount(<FormRenderer schema={schema} {...initialProps} />);
@@ -98,7 +98,7 @@ describe('TimePicker', () => {
     });
     wrapper.update();
 
-    expect(wrapper.find('input').props().value).toEqual('00:00');
+    expect(wrapper.find('input').props().value).toEqual('24:00');
     expect(onSubmit.mock.calls[0][0]['time-picker'].getHours()).toEqual(0);
     expect(onSubmit.mock.calls[0][0]['time-picker'].getMinutes()).toEqual(0);
   });
@@ -108,9 +108,9 @@ describe('TimePicker', () => {
       fields: [
         {
           component: componentTypes.TIME_PICKER,
-          name: 'time-picker'
-        }
-      ]
+          name: 'time-picker',
+        },
+      ],
     };
 
     wrapper = mount(<FormRenderer schema={schema} {...initialProps} />);
@@ -164,10 +164,10 @@ describe('TimePicker', () => {
           twelveHoursFormat: true,
           timezones: [
             { label: 'UTC', value: 'UTC', showAs: 'UTC' },
-            { label: 'EST', value: 'EAST', showAs: 'Pacific/Easter' }
-          ]
-        }
-      ]
+            { label: 'EST', value: 'EAST', showAs: 'Pacific/Easter' },
+          ],
+        },
+      ],
     };
 
     wrapper = mount(<FormRenderer schema={schema} {...initialProps} />);

@@ -17,7 +17,7 @@ const PlainText = ({ label, name, TypographyProps, ...rest }) => (
 PlainText.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  TypographyProps: PropTypes.object
+  TypographyProps: PropTypes.object,
 };
 
 export default PlainText;

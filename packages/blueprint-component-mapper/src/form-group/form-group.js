@@ -58,7 +58,7 @@ FormGroupInternal.propTypes = {
   FormGroupProps: PropTypes.object,
   hideLabel: PropTypes.bool,
   meta: PropTypes.object,
-  input: PropTypes.object
+  input: PropTypes.object,
 };
 
 const FormGroupWrapper = (props) => {

@@ -69,7 +69,6 @@ module.exports = withBundleAnalyzer(
 
         config.optimization.minimizer = [
           new TerserPlugin({
-            cache: true,
             parallel: false,
             terserOptions: {
               keep_classnames: true, // eslint-disable-line camelcase

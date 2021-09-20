@@ -3,17 +3,17 @@ const reducer = (state, { type }) => {
     case 'openNav':
       return {
         ...state,
-        openNav: true
+        openNav: true,
       };
     case 'closeNav':
       return {
         ...state,
-        openNav: false
+        openNav: false,
       };
     case 'finishLoading':
       return {
         ...state,
-        loading: false
+        loading: false,
       };
     case 'setContainer':
       return { ...state, container: state.container || document.createElement('div') };

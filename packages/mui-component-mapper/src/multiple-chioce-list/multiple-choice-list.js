@@ -12,7 +12,7 @@ const FinalCheckbox = ({ label, isDisabled: _isDisabled, ...rest }) => {
   const {
     FormControlLabelProps,
     CheckboxProps,
-    props: { isRequired, isReadOnly, helperText, validate, isDisabled, component, ...props }
+    props: { isRequired, isReadOnly, helperText, validate, isDisabled, component, ...props },
   } = useContext(CheckboxContext);
   return (
     <FormControlLabel
@@ -29,7 +29,7 @@ const FinalCheckbox = ({ label, isDisabled: _isDisabled, ...rest }) => {
 
 FinalCheckbox.propTypes = {
   isDisabled: PropTypes.bool,
-  label: PropTypes.node
+  label: PropTypes.node,
 };
 
 const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperText, description }) => {
@@ -47,7 +47,7 @@ const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperTex
 };
 
 Wrapper.propTypes = {
-  ...wrapperProps
+  ...wrapperProps,
 };
 
 const MultipleChoiceList = ({
@@ -69,7 +69,7 @@ const MultipleChoiceList = ({
 
 MultipleChoiceList.propTypes = {
   input: PropTypes.shape({
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
   }),
   FormFieldGridProps: PropTypes.object,
   FormControlProps: PropTypes.object,
@@ -77,7 +77,7 @@ MultipleChoiceList.propTypes = {
   FormControlLabelProps: PropTypes.object,
   CheckboxProps: PropTypes.object,
   FormLabelProps: PropTypes.object,
-  FormHelperTextProps: PropTypes.object
+  FormHelperTextProps: PropTypes.object,
 };
 MultipleChoiceList.defaultProps = {
   FormFieldGridProps: {},
@@ -86,7 +86,7 @@ MultipleChoiceList.defaultProps = {
   FormControlLabelProps: {},
   CheckboxProps: {},
   FormLabelProps: {},
-  FormHelperTextProps: {}
+  FormHelperTextProps: {},
 };
 
 export default MultipleChoiceList;

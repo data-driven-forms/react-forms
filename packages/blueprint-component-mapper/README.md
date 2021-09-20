@@ -10,18 +10,19 @@ Blueprint component mapper for [Data Driven Forms](https://github.com/data-drive
 
 **Table of Contents**
 
+- [More information](#more-information)
 - [Installation](#installation)
   - [React Form Renderer](#react-form-renderer)
   - [Blueprint Mapper](#blueprint-mapper)
 - [Usage](#usage)
 - [Basic provided components](#basic-provided-components)
 - [Useful links](#useful-links)
-- [Development setup](#development-setup)
-  - [Tests](#tests)
-  - [Commits](#commits)
-  - [Changes to documentation](#changes-to-documentation)
 - [Contribution](#contribution)
 - [LICENSE](#license)
+
+### More information
+
+For more information please check the root [repository](https://github.com/data-driven-forms/react-forms) or our [documentation page](https://data-driven-forms.org/).
 
 ### Installation
 
@@ -102,77 +103,6 @@ Data Driven Forms supports all kinds of component, basic set is consisted of:
 - NPM
   - [React Form Renderer](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)
   - [Blueprint 4 Mapper](https://www.npmjs.com/package/@data-driven-forms/blueprint-component-mapper)
-
-
-### Development setup
-
-Data Driven Forms is a monorepo that uses [Lerna](https://github.com/lerna/lerna) and [yarn workspaces](https://classic.yarnpkg.com/blog/2017/08/02/introducing-workspaces/), so you can use all its commands as well.
-
-1. Install
-
-```console
-yarn install
-```
-
-2. Build
-
-```console
-yarn build
-```
-
-3. Run a package
-
-Each package has a small playground `package/demo`, where you can test your changes.
-
-```console
-cd packages/blueprint-component-mapper
-yarn start
-```
-
-4. How to clean?
-
-```console
-yarn lerna clean # will delete all node_modules
-```
-
-All packages are linked together by default, so if you run a `yarn build` in a package, all other packages are updated to the latest version of that package.
-
-#### Tests
-
-Tests can be ran from the core folder or from specific packages.
-
-```console
-yarn test
-
-yarn test packages/blueprint-component-mapper
-```
-
-#### Commits
-
-Data Driven Forms uses [Semantic Release](https://github.com/semantic-release/commit-analyzer)
-
-Format:
-
-```
-[type]([package]): message
-
-fix(blueprint): title accepts node
-```
-
-Types:
-- `feat`: a new feature, will trigger new `_.X._` release
-- `fix`: a fix, will trigger new `_._.X` release
-
-Packages:
-- Please describe which package is being changed `pf3`, `renderer`, ...
-
-Please, do not use Semantic Release, if you update only the demo.
-
-All packages are releasing together and they share the version number.
-
-#### Changes to documentation
-
-If your changes influence API or add new features, you should describe these new options in the `react-renderer-demo` repository. Thanks!
 
 ### Contribution
 

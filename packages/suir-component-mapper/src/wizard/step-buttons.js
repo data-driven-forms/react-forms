@@ -9,8 +9,8 @@ import { Button } from 'semantic-ui-react';
 const useStyles = createUseStyles({
   root: {
     display: 'flex',
-    justifyContent: 'space-between'
-  }
+    justifyContent: 'space-between',
+  },
 });
 
 const NextButton = ({ nextStep, valid, handleNext, nextLabel, getState, handleSubmit, submitLabel, conditionalSubmitFlag }) => {
@@ -37,7 +37,7 @@ NextButton.propTypes = {
   handleNext: PropTypes.func.isRequired,
   nextLabel: PropTypes.node.isRequired,
   getState: PropTypes.func.isRequired,
-  conditionalSubmitFlag: PropTypes.string.isRequired
+  conditionalSubmitFlag: PropTypes.string.isRequired,
 };
 
 const WizardStepButtons = ({ conditionalSubmitFlag, buttons: Buttons, ...props }) => {
@@ -52,7 +52,7 @@ const WizardStepButtons = ({ conditionalSubmitFlag, buttons: Buttons, ...props }
     nextStep,
     handleNext,
     buttonLabels: { cancel, submit, back, next },
-    formOptions
+    formOptions,
   } = props;
 
   return (
@@ -88,21 +88,21 @@ WizardStepButtons.propTypes = {
     PropTypes.string,
     PropTypes.shape({
       when: PropTypes.string.isRequired,
-      stepMapper: PropTypes.object.isRequired
+      stepMapper: PropTypes.object.isRequired,
     }),
-    PropTypes.func
+    PropTypes.func,
   ]),
   buttonLabels: PropTypes.shape({
     submit: PropTypes.node.isRequired,
     cancel: PropTypes.node.isRequired,
     back: PropTypes.node.isRequired,
-    next: PropTypes.node.isRequired
+    next: PropTypes.node.isRequired,
   }).isRequired,
   buttons: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   formOptions: PropTypes.shape({
     getState: PropTypes.func.isRequired,
-    onCancel: PropTypes.func.isRequired
-  })
+    onCancel: PropTypes.func.isRequired,
+  }),
 };
 
 export default WizardStepButtons;

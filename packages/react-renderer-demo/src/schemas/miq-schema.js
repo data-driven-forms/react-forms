@@ -62,7 +62,7 @@ const input = {
                   values_method: null,
                   values_method_options: {},
                   options: {
-                    protected: false
+                    protected: false,
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -87,9 +87,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4328',
@@ -110,7 +110,7 @@ const input = {
                   values_method: null,
                   values_method_options: {},
                   options: {
-                    protected: false
+                    protected: false,
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -135,9 +135,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4329',
@@ -158,7 +158,7 @@ const input = {
                   values_method: null,
                   values_method_options: {},
                   options: {
-                    protected: false
+                    protected: false,
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -183,9 +183,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4330',
@@ -206,7 +206,7 @@ const input = {
                   values_method: null,
                   values_method_options: {},
                   options: {
-                    protected: false
+                    protected: false,
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -231,9 +231,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4331',
@@ -254,7 +254,7 @@ const input = {
                   values_method: null,
                   values_method_options: {},
                   options: {
-                    protected: false
+                    protected: false,
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -279,9 +279,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4332',
@@ -302,7 +302,7 @@ const input = {
                   values_method: null,
                   values_method_options: {},
                   options: {
-                    protected: false
+                    protected: false,
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -327,9 +327,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4333',
@@ -350,7 +350,7 @@ const input = {
                   values_method: null,
                   values_method_options: {},
                   options: {
-                    protected: false
+                    protected: false,
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -375,9 +375,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4334',
@@ -398,7 +398,7 @@ const input = {
                   values_method: null,
                   values_method_options: {},
                   options: {
-                    protected: false
+                    protected: false,
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -423,9 +423,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4335',
@@ -446,7 +446,7 @@ const input = {
                   values_method: null,
                   values_method_options: {},
                   options: {
-                    protected: false
+                    protected: false,
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -471,11 +471,11 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
-                }
-              ]
+                  dialog_field_responders: [],
+                },
+              ],
             },
             {
               href: 'http://localhost:3000/api/service_dialogs/638',
@@ -509,7 +509,7 @@ const input = {
                   values_method: null,
                   values_method_options: {},
                   options: {
-                    protected: false
+                    protected: false,
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -534,13 +534,13 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
-                }
-              ]
-            }
-          ]
+                  dialog_field_responders: [],
+                },
+              ],
+            },
+          ],
         },
         {
           href: 'http://localhost:3000/api/service_dialogs/554',
@@ -587,7 +587,7 @@ const input = {
                   values_method: null,
                   values_method_options: {},
                   options: {
-                    protected: false
+                    protected: false,
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -612,9 +612,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4338',
@@ -635,7 +635,7 @@ const input = {
                   values_method: null,
                   values_method_options: {},
                   options: {
-                    protected: false
+                    protected: false,
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -660,11 +660,11 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
-                }
-              ]
+                  dialog_field_responders: [],
+                },
+              ],
             },
             {
               href: 'http://localhost:3000/api/service_dialogs/640',
@@ -697,13 +697,13 @@ const input = {
                   values: [
                     ['1', 'One'],
                     ['2', 'Two'],
-                    ['3', 'Three']
+                    ['3', 'Three'],
                   ],
                   values_method: null,
                   values_method_options: {},
                   options: {
                     sort_by: 'description',
-                    sort_order: 'ascending'
+                    sort_order: 'ascending',
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -728,9 +728,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4340',
@@ -750,13 +750,13 @@ const input = {
                   values: [
                     ['1', 'One'],
                     ['2', 'Two'],
-                    ['3', 'Three']
+                    ['3', 'Three'],
                   ],
                   values_method: null,
                   values_method_options: {},
                   options: {
                     sort_by: 'value',
-                    sort_order: 'ascending'
+                    sort_order: 'ascending',
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -781,9 +781,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4341',
@@ -803,13 +803,13 @@ const input = {
                   values: [
                     ['1', 'One'],
                     ['2', 'Two'],
-                    ['3', 'Three']
+                    ['3', 'Three'],
                   ],
                   values_method: null,
                   values_method_options: {},
                   options: {
                     sort_by: 'description',
-                    sort_order: 'ascending'
+                    sort_order: 'ascending',
                   },
                   created_at: '2018-10-23T14:29:03Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -834,13 +834,13 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
-                }
-              ]
-            }
-          ]
+                  dialog_field_responders: [],
+                },
+              ],
+            },
+          ],
         },
         {
           href: 'http://localhost:3000/api/service_dialogs/555',
@@ -887,14 +887,14 @@ const input = {
                     [null, '<None>'],
                     ['1', 'One'],
                     ['3', 'Three'],
-                    ['2', 'Two']
+                    ['2', 'Two'],
                   ],
                   values_method: null,
                   values_method_options: {},
                   options: {
                     sort_by: 'description',
                     sort_order: 'ascending',
-                    force_multi_value: false
+                    force_multi_value: false,
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -919,9 +919,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4343',
@@ -942,14 +942,14 @@ const input = {
                     [null, '<None>'],
                     ['1', 'One'],
                     ['3', 'Three'],
-                    ['2', 'Two']
+                    ['2', 'Two'],
                   ],
                   values_method: null,
                   values_method_options: {},
                   options: {
                     sort_by: 'description',
                     sort_order: 'ascending',
-                    force_multi_value: false
+                    force_multi_value: false,
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -974,9 +974,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4344',
@@ -997,14 +997,14 @@ const input = {
                     [null, '<None>'],
                     ['1', 'One'],
                     ['3', 'Three'],
-                    ['2', 'Two']
+                    ['2', 'Two'],
                   ],
                   values_method: null,
                   values_method_options: {},
                   options: {
                     sort_by: 'description',
                     sort_order: 'ascending',
-                    force_multi_value: true
+                    force_multi_value: true,
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -1029,9 +1029,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4345',
@@ -1052,14 +1052,14 @@ const input = {
                     [null, '<None>'],
                     ['1', 'One'],
                     ['2', 'Two'],
-                    ['3', 'Three']
+                    ['3', 'Three'],
                   ],
                   values_method: null,
                   values_method_options: {},
                   options: {
                     sort_by: 'value',
                     sort_order: 'ascending',
-                    force_multi_value: false
+                    force_multi_value: false,
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -1084,13 +1084,13 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
-                }
-              ]
-            }
-          ]
+                  dialog_field_responders: [],
+                },
+              ],
+            },
+          ],
         },
         {
           href: 'http://localhost:3000/api/service_dialogs/556',
@@ -1137,7 +1137,7 @@ const input = {
                   values_method: null,
                   values_method_options: {},
                   options: {
-                    show_past_dates: false
+                    show_past_dates: false,
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -1162,9 +1162,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4347',
@@ -1185,7 +1185,7 @@ const input = {
                   values_method: null,
                   values_method_options: {},
                   options: {
-                    show_past_dates: true
+                    show_past_dates: true,
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -1210,11 +1210,11 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
-                }
-              ]
+                  dialog_field_responders: [],
+                },
+              ],
             },
             {
               href: 'http://localhost:3000/api/service_dialogs/643',
@@ -1248,7 +1248,7 @@ const input = {
                   values_method: null,
                   values_method_options: {},
                   options: {
-                    show_past_dates: false
+                    show_past_dates: false,
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -1273,9 +1273,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4349',
@@ -1296,7 +1296,7 @@ const input = {
                   values_method: null,
                   values_method_options: {},
                   options: {
-                    show_past_dates: true
+                    show_past_dates: true,
                   },
                   created_at: '2018-10-23T14:26:49Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -1321,13 +1321,13 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
-                }
-              ]
-            }
-          ]
+                  dialog_field_responders: [],
+                },
+              ],
+            },
+          ],
         },
         {
           href: 'http://localhost:3000/api/service_dialogs/557',
@@ -1377,7 +1377,7 @@ const input = {
                     category_id: null,
                     force_single_value: false,
                     sort_by: 'description',
-                    sort_order: 'ascending'
+                    sort_order: 'ascending',
                   },
                   created_at: '2018-10-23T14:26:50Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -1402,9 +1402,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4351',
@@ -1428,7 +1428,7 @@ const input = {
                     category_id: null,
                     force_single_value: true,
                     sort_by: 'description',
-                    sort_order: 'ascending'
+                    sort_order: 'ascending',
                   },
                   created_at: '2018-10-23T14:26:50Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -1453,9 +1453,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4352',
@@ -1476,23 +1476,23 @@ const input = {
                     {
                       id: null,
                       name: '<None>',
-                      description: '<None>'
+                      description: '<None>',
                     },
                     {
                       id: 36,
                       name: 'gold',
-                      description: 'Gold'
+                      description: 'Gold',
                     },
                     {
                       id: 37,
                       name: 'platinum',
-                      description: 'Platinum'
+                      description: 'Platinum',
                     },
                     {
                       id: 35,
                       name: 'silver',
-                      description: 'Silver'
-                    }
+                      description: 'Silver',
+                    },
                   ],
                   values_method: null,
                   values_method_options: {},
@@ -1503,7 +1503,7 @@ const input = {
                     sort_order: 'ascending',
                     category_description: 'Service Level',
                     category_name: 'service_level',
-                    category_single_value: true
+                    category_single_value: true,
                   },
                   created_at: '2018-10-23T14:26:50Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -1528,13 +1528,13 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
-                }
-              ]
-            }
-          ]
+                  dialog_field_responders: [],
+                },
+              ],
+            },
+          ],
         },
         {
           href: 'http://localhost:3000/api/service_dialogs/558',
@@ -1581,7 +1581,7 @@ const input = {
                   values_method: null,
                   values_method_options: {},
                   options: {
-                    protected: false
+                    protected: false,
                   },
                   created_at: '2018-10-23T14:26:50Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -1606,9 +1606,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4354',
@@ -1629,7 +1629,7 @@ const input = {
                   values_method: null,
                   values_method_options: {},
                   options: {
-                    protected: false
+                    protected: false,
                   },
                   created_at: '2018-10-23T14:26:50Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -1654,9 +1654,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4355',
@@ -1677,7 +1677,7 @@ const input = {
                   values_method: null,
                   values_method_options: {},
                   options: {
-                    protected: false
+                    protected: false,
                   },
                   created_at: '2018-10-23T14:26:50Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -1702,9 +1702,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4356',
@@ -1725,7 +1725,7 @@ const input = {
                   values_method: null,
                   values_method_options: {},
                   options: {
-                    protected: false
+                    protected: false,
                   },
                   created_at: '2018-10-23T14:26:50Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -1750,9 +1750,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4357',
@@ -1773,14 +1773,14 @@ const input = {
                     [null, '<None>'],
                     ['1', 'One'],
                     ['3', 'Three'],
-                    ['2', 'Two']
+                    ['2', 'Two'],
                   ],
                   values_method: null,
                   values_method_options: {},
                   options: {
                     sort_by: 'description',
                     sort_order: 'ascending',
-                    force_multi_value: false
+                    force_multi_value: false,
                   },
                   created_at: '2018-10-23T14:26:50Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -1805,9 +1805,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4358',
@@ -1827,13 +1827,13 @@ const input = {
                   values: [
                     ['1', 'One'],
                     ['2', 'Two'],
-                    ['3', 'Three']
+                    ['3', 'Three'],
                   ],
                   values_method: null,
                   values_method_options: {},
                   options: {
                     sort_by: 'description',
-                    sort_order: 'ascending'
+                    sort_order: 'ascending',
                   },
                   created_at: '2018-10-23T14:26:50Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -1858,9 +1858,9 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
+                  dialog_field_responders: [],
                 },
                 {
                   href: 'http://localhost:3000/api/service_dialogs/4359',
@@ -1881,7 +1881,7 @@ const input = {
                   values_method: null,
                   values_method_options: {},
                   options: {
-                    show_past_dates: false
+                    show_past_dates: false,
                   },
                   created_at: '2018-10-23T14:26:50Z',
                   updated_at: '2018-10-23T14:29:03Z',
@@ -1906,44 +1906,44 @@ const input = {
                     ae_class: null,
                     ae_instance: null,
                     ae_message: null,
-                    ae_attributes: {}
+                    ae_attributes: {},
                   },
-                  dialog_field_responders: []
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
+                  dialog_field_responders: [],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
   actions: [
     {
       name: 'refresh_dialog_fields',
       method: 'post',
-      href: 'http://localhost:3000/api/service_dialogs/57'
+      href: 'http://localhost:3000/api/service_dialogs/57',
     },
     {
       name: 'delete',
       method: 'post',
-      href: 'http://localhost:3000/api/service_dialogs/57'
+      href: 'http://localhost:3000/api/service_dialogs/57',
     },
     {
       name: 'edit',
       method: 'post',
-      href: 'http://localhost:3000/api/service_dialogs/57'
+      href: 'http://localhost:3000/api/service_dialogs/57',
     },
     {
       name: 'copy',
       method: 'post',
-      href: 'http://localhost:3000/api/service_dialogs/57'
+      href: 'http://localhost:3000/api/service_dialogs/57',
     },
     {
       name: 'delete',
       method: 'delete',
-      href: 'http://localhost:3000/api/service_dialogs/57'
-    }
-  ]
+      href: 'http://localhost:3000/api/service_dialogs/57',
+    },
+  ],
 };
 
 export default input;

@@ -21,7 +21,7 @@ describe('WizardNav', () => {
       navSchema: [{ title: 'step' }],
       setPrevSteps: jest.fn(),
       values: { name: 'value 1' },
-      crossroads: ['name']
+      crossroads: ['name'],
     };
 
     const wrapper = mount(<ClassWrapper {...initialProps} />);

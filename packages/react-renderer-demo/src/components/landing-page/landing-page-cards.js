@@ -84,33 +84,33 @@ const buildFeatures = [
   {
     text: 'State management provided by Final Form!',
     Icon: ArchiveIcon,
-    href: 'https://final-form.org/react'
+    href: 'https://final-form.org/react',
   },
   {
     text: 'Multiple provided libraries - MaterialUI included!',
     Icon: LocalLibraryIcon,
-    link: '/provided-mappers/component-api'
+    link: '/provided-mappers/component-api',
   },
   {
     text: 'Validation - basic types are provided, supports async validators!',
     Icon: VerifiedUserIcon,
-    link: '/schema/introduction#validate'
+    link: '/schema/introduction#validate',
   },
   {
     text: 'Conditions - hide and modify fields according to values of other fields!',
     Icon: PlaylistAddCheckIcon,
-    link: '/schema/introduction#condition'
+    link: '/schema/introduction#condition',
   },
   {
     text: 'Fully customizable - you can use any components you are using right now!',
     Icon: EditAttributesIcon,
-    link: '/mappers/custom-mapper'
+    link: '/mappers/custom-mapper',
   },
   {
     text: 'Online editor - you can build your form using comfy DnD!',
     Icon: CreateIcon,
-    link: '/live-editor'
-  }
+    link: '/live-editor',
+  },
 ].map(({ text, Icon, href, link }, idx) => {
   const children = (
     <ListItem button>
@@ -141,7 +141,7 @@ const buildFeatures = [
 const useStyles = makeStyles((theme) => ({
   cardsContainer: {
     backgroundColor: theme.palette.common.white,
-    minHeight: '100vh'
+    minHeight: '100vh',
   },
   codeSnippet: {
     margin: '8px 0px',
@@ -153,49 +153,49 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 14,
     borderRadius: 3,
     border: '1px solid #979797',
-    maxWidth: 'calc(100vw - 64px)'
+    maxWidth: 'calc(100vw - 64px)',
   },
   languageSh: {
-    padding: '2px 6px'
+    padding: '2px 6px',
   },
   card: {
     backgroundColor: theme.palette.grey[100],
     margin: 16,
     padding: 24,
-    borderRadius: 2
+    borderRadius: 2,
   },
   cardCenter: {
     backgroundColor: theme.palette.grey[100],
     margin: 16,
     padding: 24,
     borderRadius: 2,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   divider: {
-    marginBottom: 16
+    marginBottom: 16,
   },
   cardQuestion: {
-    color: '#F28D63'
+    color: '#F28D63',
   },
   editorWrapper: {
     background: '#1d1f21',
-    padding: 16
+    padding: 16,
   },
   formState: {
     marginTop: 16,
     padding: 16,
-    marginBottom: 16
+    marginBottom: 16,
   },
   textBottom: {
-    marginBottom: 16
+    marginBottom: 16,
   },
   mappersText: {
-    marginTop: 16
+    marginTop: 16,
   },
   logo: {
     height: 100,
-    width: 'auto'
-  }
+    width: 'auto',
+  },
 }));
 
 const LandingPageCards = () => {

@@ -60,8 +60,8 @@ const Select = ({ input, options, placeholder, isSearchable, noOptionsMessage, i
         onItemSelect: (item) => multiOnChange(item, input),
         tagInputProps: {
           ...props.tagInputProps,
-          onRemove: (item) => multiOnChange({ value: item }, input)
-        }
+          onRemove: (item) => multiOnChange({ value: item }, input),
+        },
       })}
       {...input}
     >
@@ -78,13 +78,13 @@ Select.propTypes = {
   noOptionsMessage: PropTypes.node,
   tagInputProps: PropTypes.object,
   isMulti: PropTypes.bool,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
 };
 
 Select.defaultProps = {
   noOptionsMessage: 'No options found',
   placeholder: 'Please select',
-  isSearchable: false
+  isSearchable: false,
 };
 
 const WrapperSelect = (props) => <FormGroupWrapper {...props} Component={Select} />;

@@ -13,21 +13,21 @@ const schema = {
         {
           name: 'carrot',
           label: 'Carrot',
-          component: componentTypes.TEXT_FIELD
-        }
-      ]
-    }
-  ]
+          component: componentTypes.TEXT_FIELD,
+        },
+      ],
+    },
+  ],
 };
 const variants = [
   {
     name: 'title',
-    type: 'string'
+    type: 'string',
   },
   {
     name: 'description',
-    type: 'string'
-  }
+    type: 'string',
+  },
 ];
 
 const SubForm = () => <ComponentText schema={schema} variants={variants} linkText="Subform" />;

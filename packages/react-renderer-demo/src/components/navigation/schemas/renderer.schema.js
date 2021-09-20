@@ -2,37 +2,37 @@ const schemaRenderer = [
   {
     subHeader: true,
     title: 'Renderer',
-    noRoute: true
+    noRoute: true,
   },
   {
     component: 'renderer',
-    linkText: 'Renderer'
+    linkText: 'Renderer',
   },
   {
     component: 'form-template',
-    linkText: 'Form template'
+    linkText: 'Form template',
   },
   {
     subHeader: true,
     title: 'Form components',
-    noRoute: true
+    noRoute: true,
   },
   {
     component: 'field-array',
-    linkText: 'Field array'
+    linkText: 'Field array',
   },
   {
     component: 'field-provider',
-    linkText: 'Field provider'
+    linkText: 'Field provider',
   },
   {
     component: 'form',
-    linkText: 'Form'
+    linkText: 'Form',
   },
   {
     component: 'form-spy',
-    linkText: 'Form spy'
-  }
+    linkText: 'Form spy',
+  },
 ];
 
 export default schemaRenderer;

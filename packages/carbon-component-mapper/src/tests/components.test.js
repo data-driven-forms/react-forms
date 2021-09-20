@@ -18,8 +18,8 @@ describe('component tests', () => {
         ...componentMapper,
         'text-field-number': {
           component: componentMapper[componentTypes.TEXT_FIELD],
-          type: 'number'
-        }
+          type: 'number',
+        },
       }}
       {...props}
     />
@@ -33,7 +33,7 @@ describe('component tests', () => {
   const options = [
     { label: 'Cat', value: 'cats' },
     { label: 'Dog', value: 'dogs' },
-    { label: 'Hamster', value: 'hamsters' }
+    { label: 'Hamster', value: 'hamsters' },
   ];
 
   const componentsWithOptions = [componentTypes.RADIO, componentTypes.SELECT];
@@ -54,7 +54,7 @@ describe('component tests', () => {
       componentTypes.SWITCH,
       componentTypes.SELECT,
       componentTypes.SLIDER,
-      'text-field-number'
+      'text-field-number',
     ].forEach((component) => {
       describe(`Component type: ${component}`, () => {
         beforeEach(() => {
@@ -65,7 +65,7 @@ describe('component tests', () => {
           if (componentsWithOptions.includes(component)) {
             field = {
               ...field,
-              options
+              options,
             };
           }
 
@@ -81,19 +81,14 @@ describe('component tests', () => {
             expect(wrapper.find('NumberInput')).toHaveLength(1);
           } else {
             expect(wrapper.find(componentMapper[component])).toHaveLength(1);
-            expect(
-              wrapper
-                .find('label')
-                .text()
-                .includes(field.label)
-            ).toEqual(true);
+            expect(wrapper.find('label').text().includes(field.label)).toEqual(true);
           }
         });
 
         it('renders with error', () => {
           const errorField = {
             ...field,
-            validate: [{ type: validatorTypes.REQUIRED }]
+            validate: [{ type: validatorTypes.REQUIRED }],
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [errorField] }} />);
           wrapper.find('form').simulate('submit');
@@ -113,7 +108,7 @@ describe('component tests', () => {
             const errorField = {
               ...field,
               validate: [{ type: validatorTypes.REQUIRED, warning: true }],
-              validateOnMount: true
+              validateOnMount: true,
             };
             let wrapper;
 
@@ -128,53 +123,38 @@ describe('component tests', () => {
             if (helperText.length) {
               expect(helperText.text()).toEqual(errorText);
             } else {
-              expect(
-                wrapper
-                  .find('.bx--form-requirement')
-                  .last()
-                  .text()
-              ).toEqual(errorText);
+              expect(wrapper.find('.bx--form-requirement').last().text()).toEqual(errorText);
             }
           });
 
           it('renders with helperText', () => {
             const helpertextField = {
               ...field,
-              helperText
+              helperText,
             };
             const wrapper = mount(<RendererWrapper schema={{ fields: [helpertextField] }} />);
 
-            expect(
-              wrapper
-                .find('.bx--form__helper-text')
-                .last()
-                .text()
-            ).toEqual(helperText);
+            expect(wrapper.find('.bx--form__helper-text').last().text()).toEqual(helperText);
           });
 
           it('renders with description and helperText', () => {
             const descriptionField = {
               ...field,
               description,
-              helperText
+              helperText,
             };
             const wrapper = mount(<RendererWrapper schema={{ fields: [descriptionField] }} />);
 
             expect(wrapper.find(WithDescription)).toHaveLength(1);
 
-            expect(
-              wrapper
-                .find('.bx--form__helper-text')
-                .last()
-                .text()
-            ).toEqual(helperText);
+            expect(wrapper.find('.bx--form__helper-text').last().text()).toEqual(helperText);
           });
 
           it('renders with error and helperText', () => {
             const errorFields = {
               ...field,
               helperText,
-              validate: [{ type: validatorTypes.REQUIRED }]
+              validate: [{ type: validatorTypes.REQUIRED }],
             };
             const wrapper = mount(<RendererWrapper schema={{ fields: [errorFields] }} />);
             wrapper.find('form').simulate('submit');
@@ -195,7 +175,7 @@ describe('component tests', () => {
         it('renders with description', () => {
           const descriptionField = {
             ...field,
-            description
+            description,
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [descriptionField] }} />);
 
@@ -205,7 +185,7 @@ describe('component tests', () => {
         it('renders isDisabled', () => {
           const disabledField = {
             ...field,
-            isDisabled: true
+            isDisabled: true,
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField] }} />);
 
@@ -215,7 +195,7 @@ describe('component tests', () => {
         it('renders isRequired', () => {
           const requiredField = {
             ...field,
-            isRequired: true
+            isRequired: true,
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [requiredField] }} />);
           expect(wrapper.find('.ddorg__carbon-component-mapper_is-required').text()).toEqual('*');

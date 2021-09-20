@@ -64,7 +64,7 @@ SubForm.propTypes = {
   RowProps: PropTypes.object,
   ColProps: PropTypes.object,
   component: PropTypes.string,
-  name: PropTypes.string
+  name: PropTypes.string,
 };
 
 export default SubForm;

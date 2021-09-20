@@ -8,32 +8,32 @@ const schema = {
     {
       component: componentTypes.DATE_PICKER,
       label: 'Date Picker',
-      name: 'date-picker'
-    }
-  ]
+      name: 'date-picker',
+    },
+  ],
 };
 const variants = [
   ...baseFieldProps,
   {
     name: 'showTodayButton',
     type: 'boolean',
-    required: false
+    required: false,
   },
   {
     name: 'todayButtonLabel',
     type: 'string',
-    required: false
+    required: false,
   },
   {
     name: 'closeOnDaySelect',
     type: 'boolean',
-    required: false
+    required: false,
   },
   {
     name: 'isClearable',
     type: 'boolean',
-    required: false
-  }
+    required: false,
+  },
 ];
 
 const DatePicker = () => <ComponentText schema={schema} variants={variants} linkText="Date picker" />;

@@ -8,7 +8,7 @@ import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 const formGroupStyle = {
   display: 'flex',
   flexDirection: 'column',
-  marginBottom: 16
+  marginBottom: 16,
 };
 
 const inputStyles = {
@@ -18,21 +18,21 @@ const inputStyles = {
   display: 'inline-block',
   border: '1px solid #ccc',
   borderRadius: 4,
-  boxSizing: 'border-box'
+  boxSizing: 'border-box',
 };
 
 const paragraphStyle = {
   marginTop: 0,
-  marginBottom: 4
+  marginBottom: 4,
 };
 
 const requiredStyle = {
   color: 'red',
-  marginLeft: 2
+  marginLeft: 2,
 };
 
 const errorStyle = {
-  color: 'orangered'
+  color: 'orangered',
 };
 
 const getButtonStyle = (variant) => ({
@@ -42,7 +42,7 @@ const getButtonStyle = (variant) => ({
   borderRadius: 4,
   cursor: 'pointer',
   border: 'none',
-  marginRight: 4
+  marginRight: 4,
 });
 
 const Button = ({ children, label, variant, ...props }) => (
@@ -83,7 +83,7 @@ const TextField = (props) => {
       style={{
         ...formGroupStyle,
         ...(isRequired && requiredStyle),
-        ...(error && touched && errorStyle)
+        ...(error && touched && errorStyle),
       }}
     >
       <label style={{ color: 'initial' }} htmlFor={input.name}>
@@ -99,7 +99,7 @@ const TextField = (props) => {
 
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField,
-  'custom-component-type': TextField
+  'custom-component-type': TextField,
 };
 
 const ComponentMapper = () => {
@@ -112,28 +112,28 @@ const ComponentMapper = () => {
         label: 'First name',
         isRequired: true,
         validate: [(value) => (!value || value.lenght === 0 ? 'Required' : undefined)],
-        customProp: true
+        customProp: true,
       },
       {
         component: componentTypes.TEXT_FIELD,
         name: 'last-name',
         label: 'Last name',
         isRequired: true,
-        validate: [(value) => (!value || value.lenght === 0 ? 'Required' : undefined)]
+        validate: [(value) => (!value || value.lenght === 0 ? 'Required' : undefined)],
       },
       {
         component: componentTypes.TEXT_FIELD,
         name: 'age',
         label: 'Your age',
-        type: 'number'
+        type: 'number',
       },
       {
         component: 'custom-component-type',
         name: 'password',
         label: 'Your password',
-        type: 'password'
-      }
-    ]
+        type: 'password',
+      },
+    ],
   };
   return (
     <div>

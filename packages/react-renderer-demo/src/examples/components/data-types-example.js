@@ -13,26 +13,26 @@ const schema = {
       name: 'typed-number',
       label: 'Typed number',
       type: 'number',
-      dataType: dataTypes.FLOAT
+      dataType: dataTypes.FLOAT,
     },
     {
       component: componentTypes.TEXT_FIELD,
       name: 'untyped-number',
       label: 'Number without type',
-      type: 'number'
+      type: 'number',
     },
     {
       component: componentTypes.TEXT_FIELD,
       name: 'string-as-number',
       label: 'String as number',
       type: 'string',
-      dataType: dataTypes.INTEGER
-    }
-  ]
+      dataType: dataTypes.INTEGER,
+    },
+  ],
 };
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 const DataTypesExample = () => {

@@ -14,7 +14,7 @@ const schema = {
       component: componentTypes.TEXT_FIELD,
       name: 'field-1',
       label: 'Field 1',
-      helperText: 'To show field 2 type a cat'
+      helperText: 'To show field 2 type a cat',
     },
     {
       component: componentTypes.TEXT_FIELD,
@@ -23,8 +23,8 @@ const schema = {
       helperText: 'To show field 3 type a cat as the second word',
       condition: {
         when: 'field-1',
-        is: 'cat'
-      }
+        is: 'cat',
+      },
     },
     {
       component: componentTypes.TEXT_FIELD,
@@ -32,21 +32,21 @@ const schema = {
       label: 'Field 3',
       condition: {
         when: 'field-2',
-        pattern: /^\w+ cat/
+        pattern: /^\w+ cat/,
       },
-      initialValue: 'We all love cats!'
+      initialValue: 'We all love cats!',
     },
     {
       component: componentTypes.CHECKBOX,
       name: 'check-1',
       label: 'I want to be a true',
-      condition: { when: 'field-3', isNotEmpty: true }
+      condition: { when: 'field-3', isNotEmpty: true },
     },
     {
       component: componentTypes.CHECKBOX,
       name: 'check-2',
       label: 'I also want to be true',
-      condition: { when: 'field-3', isNotEmpty: true }
+      condition: { when: 'field-3', isNotEmpty: true },
     },
     {
       component: componentTypes.CHECKBOX,
@@ -55,10 +55,10 @@ const schema = {
       condition: {
         and: [
           { when: 'check-1', is: true },
-          { when: 'check-2', is: true }
-        ]
+          { when: 'check-2', is: true },
+        ],
       },
-      initialValue: true
+      initialValue: true,
     },
     {
       component: componentTypes.PLAIN_TEXT,
@@ -69,20 +69,20 @@ const schema = {
           {
             and: [
               { when: 'check-1', is: true },
-              { when: 'check-2', is: true }
-            ]
+              { when: 'check-2', is: true },
+            ],
           },
-          { not: { when: 'check-3', isNotEmpty: true } }
-        ]
-      }
-    }
-  ]
+          { not: { when: 'check-3', isNotEmpty: true } },
+        ],
+      },
+    },
+  ],
 };
 
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField,
   [componentTypes.PLAIN_TEXT]: PlainText,
-  [componentTypes.CHECKBOX]: Checkbox
+  [componentTypes.CHECKBOX]: Checkbox,
 };
 
 const FormTemplateWrapper = (props) => <FormTemplate {...props} showFormControls={false} />;

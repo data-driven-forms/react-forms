@@ -18,7 +18,7 @@ const FieldProvider = ({ Component, render, ...props }) => {
 
 FieldProvider.propTypes = {
   Component: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]),
-  render: PropTypes.func
+  render: PropTypes.func,
 };
 
 export default FieldProvider;

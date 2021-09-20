@@ -19,19 +19,19 @@ const schema = {
           return {
             helperText: 'Validated',
             style: {
-              background: 'greenyellow'
-            }
+              background: 'greenyellow',
+            },
           };
         }
 
         return {};
-      }
-    }
-  ]
+      },
+    },
+  ],
 };
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 const ResolveProps = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;

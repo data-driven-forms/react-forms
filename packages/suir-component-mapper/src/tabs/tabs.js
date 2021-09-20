@@ -9,7 +9,7 @@ const TabContent = ({ name, fields, formOptions }) => <Fragment key={name}>{form
 TabContent.propTypes = {
   name: PropTypes.string.isRequired,
   fields: PropTypes.array.isRequired,
-  formOptions: PropTypes.shape({ renderForm: PropTypes.func.isRequired }).isRequired
+  formOptions: PropTypes.shape({ renderForm: PropTypes.func.isRequired }).isRequired,
 };
 
 const FormTabs = ({ fields, TabProps, TabPaneProps }) => {
@@ -21,7 +21,7 @@ const FormTabs = ({ fields, TabProps, TabPaneProps }) => {
       <TabPane {...TabPaneProps} key={index}>
         <TabContent {...field} formOptions={formOptions} />
       </TabPane>
-    )
+    ),
   }));
   return <Tab renderActiveOnly={false} {...TabProps} panes={panes} />;
 };
@@ -29,12 +29,12 @@ const FormTabs = ({ fields, TabProps, TabPaneProps }) => {
 FormTabs.propTypes = {
   fields: PropTypes.array.isRequired,
   TabProps: PropTypes.object,
-  TabPaneProps: PropTypes.object
+  TabPaneProps: PropTypes.object,
 };
 
 FormTabs.defaultProps = {
   TabProps: {},
-  TabPaneProps: {}
+  TabPaneProps: {},
 };
 
 export default FormTabs;

@@ -50,11 +50,7 @@ const MenuRenderer = ({ schema }) => {
   return <React.Fragment>{renderItems(schema)}</React.Fragment>;
 };
 
-const searchFunction = (linkText = '', value) =>
-  linkText
-    .toLowerCase()
-    .replace(/ /g, '')
-    .includes(value.toLowerCase().replace(/ /g, ''));
+const searchFunction = (linkText = '', value) => linkText.toLowerCase().replace(/ /g, '').includes(value.toLowerCase().replace(/ /g, ''));
 
 const filterSchema = (schema, value) => {
   if (schema.fields) {
@@ -63,7 +59,7 @@ const filterSchema = (schema, value) => {
       return {
         ...schema,
         open: true,
-        fields: result
+        fields: result,
       };
     }
 
@@ -101,7 +97,7 @@ const findSelected = (schema, currentLocation, level = 1) => {
       ...schema,
       open: schema.link === currentLocation[level],
       level,
-      fields: findSelected(schema.fields, currentLocation, level + 1)
+      fields: findSelected(schema.fields, currentLocation, level + 1),
     };
   }
 

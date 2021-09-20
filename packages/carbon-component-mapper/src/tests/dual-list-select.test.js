@@ -4,7 +4,7 @@ import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-rend
 import { mount } from 'enzyme';
 
 import { componentMapper, FormTemplate } from '../index';
-import { StructuredListWrapper, Search, StructuredListRow, Button, TooltipIcon } from 'carbon-components-react';
+import { Search, Button, TooltipIcon } from 'carbon-components-react';
 
 describe('DualListSelect', () => {
   let onSubmit;
@@ -22,44 +22,44 @@ describe('DualListSelect', () => {
           options: [
             {
               value: 'cats',
-              label: 'cats'
+              label: 'cats',
             },
             {
               value: 'cats_1',
-              label: 'cats_1'
+              label: 'cats_1',
             },
             {
               value: 'cats_2',
-              label: 'cats_2'
+              label: 'cats_2',
             },
             {
               value: 'zebras',
-              label: 'zebras'
+              label: 'zebras',
             },
             {
               value: 'pigeons',
-              label: 'pigeons'
-            }
-          ]
-        }
-      ]
+              label: 'pigeons',
+            },
+          ],
+        },
+      ],
     };
 
     initialProps = {
       onSubmit: (values) => onSubmit(values),
       componentMapper,
       FormTemplate: (props) => <FormTemplate {...props} showFormControls={false} />,
-      schema
+      schema,
     };
   });
 
   it('renders correctly', () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find(StructuredListWrapper)).toHaveLength(2);
+    expect(wrapper.find('StructuredListWrapper')).toHaveLength(2);
     expect(wrapper.find(Search)).toHaveLength(2);
     expect(wrapper.find(Button)).toHaveLength(4);
-    expect(wrapper.find(StructuredListRow)).toHaveLength(schema.fields[0].options.length + 1); // + empty placeholder
+    expect(wrapper.find('StructuredListRow')).toHaveLength(schema.fields[0].options.length + 1); // + empty placeholder
   });
 
   it('switch left option', async () => {
@@ -70,19 +70,12 @@ describe('DualListSelect', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper
-        .find(StructuredListRow)
-        .first()
-        .props()
-        .onClick({});
+      wrapper.find('StructuredListRow').first().props().onClick({});
     });
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find('button#move-right')
-        .props()
-        .onClick();
+      wrapper.find('button#move-right').props().onClick({});
     });
     wrapper.update();
 
@@ -97,32 +90,17 @@ describe('DualListSelect', () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
 
     await act(async () => {
-      wrapper
-        .find(StructuredListWrapper)
-        .first()
-        .find(StructuredListRow)
-        .first()
-        .props()
-        .onClick({});
+      wrapper.find('StructuredListWrapper').first().find('StructuredListRow').first().props().onClick({});
     });
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find(StructuredListWrapper)
-        .first()
-        .find(StructuredListRow)
-        .last()
-        .props()
-        .onClick({ ctrlKey: true });
+      wrapper.find('StructuredListWrapper').first().find('StructuredListRow').last().props().onClick({ ctrlKey: true });
     });
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find('button#move-right')
-        .props()
-        .onClick();
+      wrapper.find('button#move-right').props().onClick({});
     });
     wrapper.update();
 
@@ -135,32 +113,17 @@ describe('DualListSelect', () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
 
     await act(async () => {
-      wrapper
-        .find(StructuredListWrapper)
-        .first()
-        .find(StructuredListRow)
-        .first()
-        .props()
-        .onClick({});
+      wrapper.find('StructuredListWrapper').first().find('StructuredListRow').first().props().onClick({});
     });
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find(StructuredListWrapper)
-        .first()
-        .find(StructuredListRow)
-        .last()
-        .props()
-        .onClick({ shiftKey: true });
+      wrapper.find('StructuredListWrapper').first().find('StructuredListRow').last().props().onClick({ shiftKey: true });
     });
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find('button#move-right')
-        .props()
-        .onClick();
+      wrapper.find('button#move-right').props().onClick({});
     });
     wrapper.update();
 
@@ -175,43 +138,22 @@ describe('DualListSelect', () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
 
     await act(async () => {
-      wrapper
-        .find(StructuredListWrapper)
-        .first()
-        .find(StructuredListRow)
-        .first()
-        .props()
-        .onClick({});
+      wrapper.find('StructuredListWrapper').first().find('StructuredListRow').first().props().onClick({});
     });
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find(StructuredListWrapper)
-        .first()
-        .find(StructuredListRow)
-        .last()
-        .props()
-        .onClick({ shiftKey: true });
+      wrapper.find('StructuredListWrapper').first().find('StructuredListRow').last().props().onClick({ shiftKey: true });
     });
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find(StructuredListWrapper)
-        .first()
-        .find(StructuredListRow)
-        .first()
-        .props()
-        .onClick({ ctrlKey: true });
+      wrapper.find('StructuredListWrapper').first().find('StructuredListRow').first().props().onClick({ ctrlKey: true });
     });
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find('button#move-right')
-        .props()
-        .onClick();
+      wrapper.find('button#move-right').props().onClick({});
     });
     wrapper.update();
 
@@ -230,19 +172,12 @@ describe('DualListSelect', () => {
     expect(onSubmit).toHaveBeenCalledWith({ 'dual-StructuredListWrapper': ['cats'] });
     onSubmit.mockClear();
     await act(async () => {
-      wrapper
-        .find(StructuredListRow)
-        .last()
-        .props()
-        .onClick({});
+      wrapper.find('StructuredListRow').last().props().onClick({});
     });
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find('button#move-all-left')
-        .props()
-        .onClick();
+      wrapper.find('button#move-all-left').props().onClick({});
     });
     wrapper.update();
     await act(async () => {
@@ -257,10 +192,7 @@ describe('DualListSelect', () => {
   it('switch all to right', async () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
     await act(async () => {
-      wrapper
-        .find('button#move-all-right')
-        .props()
-        .onClick();
+      wrapper.find('button#move-all-right').props().onClick({});
     });
     wrapper.update();
     await act(async () => {
@@ -275,10 +207,7 @@ describe('DualListSelect', () => {
       <FormRenderer {...initialProps} initialValues={{ 'dual-StructuredListWrapper': schema.fields[0].options.map(({ value }) => value) }} />
     );
     await act(async () => {
-      wrapper
-        .find('button#move-all-left')
-        .props()
-        .onClick();
+      wrapper.find('button#move-all-left').props().onClick({});
     });
     wrapper.update();
     await act(async () => {
@@ -293,36 +222,20 @@ describe('DualListSelect', () => {
   it('filters options', async () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
 
-    expect(
-      wrapper
-        .find(StructuredListWrapper)
-        .first()
-        .find(StructuredListRow)
-    ).toHaveLength(schema.fields[0].options.length);
+    expect(wrapper.find('StructuredListWrapper').first().find('StructuredListRow')).toHaveLength(schema.fields[0].options.length);
     await act(async () => {
-      wrapper
-        .find('input')
-        .first()
-        .instance().value = 'cats';
+      wrapper.find('input').first().instance().value = 'cats';
     });
     await act(async () => {
-      wrapper
-        .find('input')
-        .first()
-        .simulate('change');
+      wrapper.find('input').first().simulate('change');
     });
     wrapper.update();
 
-    expect(
-      wrapper
-        .find(StructuredListWrapper)
-        .first()
-        .find(StructuredListRow)
-    ).toHaveLength(3);
+    expect(wrapper.find('StructuredListWrapper').first().find('StructuredListRow')).toHaveLength(3);
     wrapper
-      .find(StructuredListWrapper)
+      .find('StructuredListWrapper')
       .first()
-      .find(StructuredListRow)
+      .find('StructuredListRow')
       .forEach((option) => expect(option.text()).toEqual(expect.stringContaining('cats')));
   });
 
@@ -331,109 +244,43 @@ describe('DualListSelect', () => {
       <FormRenderer {...initialProps} initialValues={{ 'dual-StructuredListWrapper': schema.fields[0].options.map(({ value }) => value) }} />
     );
 
-    expect(
-      wrapper
-        .find(StructuredListWrapper)
-        .last()
-        .find(StructuredListRow)
-    ).toHaveLength(schema.fields[0].options.length);
+    expect(wrapper.find('StructuredListWrapper').last().find('StructuredListRow')).toHaveLength(schema.fields[0].options.length);
     await act(async () => {
-      wrapper
-        .find('input')
-        .last()
-        .instance().value = 'cats';
+      wrapper.find('input').last().instance().value = 'cats';
     });
 
     await act(async () => {
-      wrapper
-        .find('input')
-        .last()
-        .simulate('change');
+      wrapper.find('input').last().simulate('change');
     });
     wrapper.update();
 
-    expect(
-      wrapper
-        .find(StructuredListWrapper)
-        .last()
-        .find(StructuredListRow)
-    ).toHaveLength(3);
+    expect(wrapper.find('StructuredListWrapper').last().find('StructuredListRow')).toHaveLength(3);
     wrapper
-      .find(StructuredListWrapper)
+      .find('StructuredListWrapper')
       .last()
-      .find(StructuredListRow)
+      .find('StructuredListRow')
       .forEach((option) => expect(option.text()).toEqual(expect.stringContaining('cats')));
   });
 
   it('sort options', async () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
 
-    expect(
-      wrapper
-        .find(StructuredListWrapper)
-        .first()
-        .find(StructuredListRow)
-        .first()
-        .text()
-    ).toEqual('cats');
-    expect(
-      wrapper
-        .find(StructuredListWrapper)
-        .first()
-        .find(StructuredListRow)
-        .last()
-        .text()
-    ).toEqual('zebras');
+    expect(wrapper.find('StructuredListWrapper').first().find('StructuredListRow').first().text()).toEqual('cats');
+    expect(wrapper.find('StructuredListWrapper').first().find('StructuredListRow').last().text()).toEqual('zebras');
     await act(async () => {
-      wrapper
-        .find(TooltipIcon)
-        .at(0)
-        .props()
-        .onClick();
+      wrapper.find(TooltipIcon).at(0).props().onClick({});
     });
     wrapper.update();
 
-    expect(
-      wrapper
-        .find(StructuredListWrapper)
-        .first()
-        .find(StructuredListRow)
-        .first()
-        .text()
-    ).toEqual('zebras');
-    expect(
-      wrapper
-        .find(StructuredListWrapper)
-        .first()
-        .find(StructuredListRow)
-        .last()
-        .text()
-    ).toEqual('cats');
+    expect(wrapper.find('StructuredListWrapper').first().find('StructuredListRow').first().text()).toEqual('zebras');
+    expect(wrapper.find('StructuredListWrapper').first().find('StructuredListRow').last().text()).toEqual('cats');
     await act(async () => {
-      wrapper
-        .find(TooltipIcon)
-        .at(0)
-        .props()
-        .onClick();
+      wrapper.find(TooltipIcon).at(0).props().onClick({});
     });
     wrapper.update();
 
-    expect(
-      wrapper
-        .find(StructuredListWrapper)
-        .first()
-        .find(StructuredListRow)
-        .first()
-        .text()
-    ).toEqual('cats');
-    expect(
-      wrapper
-        .find(StructuredListWrapper)
-        .first()
-        .find(StructuredListRow)
-        .last()
-        .text()
-    ).toEqual('zebras');
+    expect(wrapper.find('StructuredListWrapper').first().find('StructuredListRow').first().text()).toEqual('cats');
+    expect(wrapper.find('StructuredListWrapper').first().find('StructuredListRow').last().text()).toEqual('zebras');
   });
 
   it('sort value', async () => {
@@ -441,96 +288,37 @@ describe('DualListSelect', () => {
       <FormRenderer {...initialProps} initialValues={{ 'dual-StructuredListWrapper': schema.fields[0].options.map(({ value }) => value) }} />
     );
 
-    expect(
-      wrapper
-        .find(StructuredListWrapper)
-        .last()
-        .find(StructuredListRow)
-        .first()
-        .text()
-    ).toEqual('cats');
-    expect(
-      wrapper
-        .find(StructuredListWrapper)
-        .last()
-        .find(StructuredListRow)
-        .last()
-        .text()
-    ).toEqual('zebras');
+    expect(wrapper.find('StructuredListWrapper').last().find('StructuredListRow').first().text()).toEqual('cats');
+    expect(wrapper.find('StructuredListWrapper').last().find('StructuredListRow').last().text()).toEqual('zebras');
     await act(async () => {
-      wrapper
-        .find(TooltipIcon)
-        .last()
-        .props()
-        .onClick();
+      wrapper.find(TooltipIcon).last().props().onClick({});
     });
     wrapper.update();
 
-    expect(
-      wrapper
-        .find(StructuredListWrapper)
-        .last()
-        .find(StructuredListRow)
-        .first()
-        .text()
-    ).toEqual('zebras');
-    expect(
-      wrapper
-        .find(StructuredListWrapper)
-        .last()
-        .find(StructuredListRow)
-        .last()
-        .text()
-    ).toEqual('cats');
+    expect(wrapper.find('StructuredListWrapper').last().find('StructuredListRow').first().text()).toEqual('zebras');
+    expect(wrapper.find('StructuredListWrapper').last().find('StructuredListRow').last().text()).toEqual('cats');
     await act(async () => {
-      wrapper
-        .find(TooltipIcon)
-        .last()
-        .props()
-        .onClick();
+      wrapper.find(TooltipIcon).last().props().onClick({});
     });
     wrapper.update();
 
-    expect(
-      wrapper
-        .find(StructuredListWrapper)
-        .last()
-        .find(StructuredListRow)
-        .first()
-        .text()
-    ).toEqual('cats');
-    expect(
-      wrapper
-        .find(StructuredListWrapper)
-        .last()
-        .find(StructuredListRow)
-        .last()
-        .text()
-    ).toEqual('zebras');
+    expect(wrapper.find('StructuredListWrapper').last().find('StructuredListRow').first().text()).toEqual('cats');
+    expect(wrapper.find('StructuredListWrapper').last().find('StructuredListRow').last().text()).toEqual('zebras');
   });
 
   describe('filtered options', () => {
     it('switch all visible to right', async () => {
       const wrapper = mount(<FormRenderer {...initialProps} />);
       await act(async () => {
-        wrapper
-          .find('input')
-          .first()
-          .instance().value = 'cats';
+        wrapper.find('input').first().instance().value = 'cats';
       });
 
       await act(async () => {
-        wrapper
-          .find('input')
-          .first()
-          .simulate('change');
+        wrapper.find('input').first().simulate('change');
       });
       wrapper.update();
       await act(async () => {
-        wrapper
-          .find('button#move-all-right')
-          .props()
-          .onClick();
+        wrapper.find('button#move-all-right').props().onClick({});
       });
       wrapper.update();
 
@@ -548,24 +336,15 @@ describe('DualListSelect', () => {
         <FormRenderer {...initialProps} initialValues={{ 'dual-StructuredListWrapper': schema.fields[0].options.map(({ value }) => value) }} />
       );
       await act(async () => {
-        wrapper
-          .find('input')
-          .last()
-          .instance().value = 'cats';
+        wrapper.find('input').last().instance().value = 'cats';
       });
       await act(async () => {
-        wrapper
-          .find('input')
-          .last()
-          .simulate('change');
+        wrapper.find('input').last().simulate('change');
       });
       wrapper.update();
 
       await act(async () => {
-        wrapper
-          .find('button#move-all-left')
-          .props()
-          .onClick();
+        wrapper.find('button#move-all-left').props().onClick({});
       });
       wrapper.update();
 

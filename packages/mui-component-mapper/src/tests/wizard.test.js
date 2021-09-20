@@ -20,11 +20,11 @@ describe('wizard', () => {
           name: 'wizard',
           stepsInfo: [
             {
-              title: 'AWS step'
+              title: 'AWS step',
             },
             {
-              title: 'Summary'
-            }
+              title: 'Summary',
+            },
           ],
           fields: [
             {
@@ -34,22 +34,22 @@ describe('wizard', () => {
                 {
                   component: componentTypes.TEXT_FIELD,
                   name: 'aws',
-                  validate: [{ type: validatorTypes.REQUIRED }]
-                }
-              ]
+                  validate: [{ type: validatorTypes.REQUIRED }],
+                },
+              ],
             },
             {
               name: 'summary',
               fields: [
                 {
                   component: componentTypes.TEXTAREA,
-                  name: 'summary'
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  name: 'summary',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
     onSubmit = jest.fn();
     onCancel = jest.fn();
@@ -58,62 +58,33 @@ describe('wizard', () => {
       FormTemplate: (props) => <FormTemplate {...props} showFormControls={false} />,
       schema,
       onSubmit: (values) => onSubmit(values),
-      onCancel: (values) => onCancel(values)
+      onCancel: (values) => onCancel(values),
     };
   });
 
   it('simple next and back', () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
 
-    expect(
-      wrapper
-        .find('.MuiStepLabel-active')
-        .first()
-        .text()
-    ).toEqual('AWS step');
+    expect(wrapper.find('.MuiStepLabel-active').first().text()).toEqual('AWS step');
 
-    wrapper
-      .find(Button)
-      .last()
-      .simulate('click'); // disabled next
+    wrapper.find(Button).last().simulate('click'); // disabled next
     wrapper.update();
 
-    expect(
-      wrapper
-        .find('.MuiStepLabel-active')
-        .first()
-        .text()
-    ).toEqual('AWS step');
+    expect(wrapper.find('.MuiStepLabel-active').first().text()).toEqual('AWS step');
 
     wrapper.find('input').instance().value = 'something';
     wrapper.find('input').simulate('change');
     wrapper.update();
 
-    wrapper
-      .find(Button)
-      .last()
-      .simulate('click'); // next
+    wrapper.find(Button).last().simulate('click'); // next
     wrapper.update();
 
-    expect(
-      wrapper
-        .find('.MuiStepLabel-active')
-        .first()
-        .text()
-    ).toEqual('Summary');
+    expect(wrapper.find('.MuiStepLabel-active').first().text()).toEqual('Summary');
 
-    wrapper
-      .find(Button)
-      .at(1)
-      .simulate('click'); // back
+    wrapper.find(Button).at(1).simulate('click'); // back
     wrapper.update();
 
-    expect(
-      wrapper
-        .find('.MuiStepLabel-active')
-        .first()
-        .text()
-    ).toEqual('AWS step');
+    expect(wrapper.find('.MuiStepLabel-active').first().text()).toEqual('AWS step');
   });
 
   it('conditional next', () => {
@@ -126,11 +97,11 @@ describe('wizard', () => {
           description: 'A description',
           stepsInfo: [
             {
-              title: 'First step'
+              title: 'First step',
             },
             {
-              title: 'Last step'
-            }
+              title: 'Last step',
+            },
           ],
           fields: [
             {
@@ -139,65 +110,52 @@ describe('wizard', () => {
                 when: 'aws',
                 stepMapper: {
                   aws: 'summary',
-                  google: 'google'
-                }
+                  google: 'google',
+                },
               },
               fields: [
                 {
                   component: componentTypes.TEXT_FIELD,
                   name: 'aws',
-                  validate: [{ type: validatorTypes.REQUIRED }]
-                }
-              ]
+                  validate: [{ type: validatorTypes.REQUIRED }],
+                },
+              ],
             },
             {
               name: 'summary',
               fields: [
                 {
                   component: componentTypes.TEXT_FIELD,
-                  name: 'summary'
-                }
-              ]
+                  name: 'summary',
+                },
+              ],
             },
             {
               name: 'google',
               fields: [
                 {
                   component: componentTypes.TEXT_FIELD,
-                  name: 'googlesummary'
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  name: 'googlesummary',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
 
-    expect(
-      wrapper
-        .find('.MuiStepLabel-active')
-        .first()
-        .text()
-    ).toEqual('First step');
+    expect(wrapper.find('.MuiStepLabel-active').first().text()).toEqual('First step');
 
     wrapper.find('input').instance().value = 'aws';
     wrapper.find('input').simulate('change');
     wrapper.update();
 
-    wrapper
-      .find(Button)
-      .last()
-      .simulate('click'); // next
+    wrapper.find(Button).last().simulate('click'); // next
     wrapper.update();
 
-    expect(
-      wrapper
-        .find('.MuiStepLabel-active')
-        .first()
-        .text()
-    ).toEqual('Last step');
+    expect(wrapper.find('.MuiStepLabel-active').first().text()).toEqual('Last step');
     expect(wrapper.find('input').instance().name).toEqual('summary');
 
     wrapper
@@ -206,12 +164,7 @@ describe('wizard', () => {
       .simulate('click');
     wrapper.update();
 
-    expect(
-      wrapper
-        .find('.MuiStepLabel-active')
-        .first()
-        .text()
-    ).toEqual('First step');
+    expect(wrapper.find('.MuiStepLabel-active').first().text()).toEqual('First step');
 
     wrapper.find('input').instance().value = 'google';
     wrapper.find('input').simulate('change');
@@ -223,12 +176,7 @@ describe('wizard', () => {
       .simulate('click');
     wrapper.update();
 
-    expect(
-      wrapper
-        .find('.MuiStepLabel-active')
-        .first()
-        .text()
-    ).toEqual('Last step');
+    expect(wrapper.find('.MuiStepLabel-active').first().text()).toEqual('Last step');
     expect(wrapper.find('input').instance().name).toEqual('googlesummary');
   });
 
@@ -247,38 +195,38 @@ describe('wizard', () => {
                 when: 'aws',
                 stepMapper: {
                   aws: 'summary',
-                  google: 'google'
-                }
+                  google: 'google',
+                },
               },
               fields: [
                 {
                   component: componentTypes.TEXT_FIELD,
                   name: 'aws',
-                  validate: [{ type: validatorTypes.REQUIRED }]
-                }
-              ]
+                  validate: [{ type: validatorTypes.REQUIRED }],
+                },
+              ],
             },
             {
               name: 'summary',
               fields: [
                 {
                   component: componentTypes.TEXTAREA,
-                  name: 'summary'
-                }
-              ]
+                  name: 'summary',
+                },
+              ],
             },
             {
               name: 'google',
               fields: [
                 {
                   component: componentTypes.TEXTAREA,
-                  name: 'googlesummary'
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  name: 'googlesummary',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
@@ -287,69 +235,42 @@ describe('wizard', () => {
     wrapper.find('input').simulate('change');
     wrapper.update();
 
-    wrapper
-      .find(Button)
-      .last()
-      .simulate('click');
+    wrapper.find(Button).last().simulate('click');
     wrapper.update();
 
-    wrapper
-      .find('textarea')
-      .first()
-      .instance().value = 'summary';
-    wrapper
-      .find('textarea')
-      .first()
-      .simulate('change');
+    wrapper.find('textarea').first().instance().value = 'summary';
+    wrapper.find('textarea').first().simulate('change');
     wrapper.update();
 
-    wrapper
-      .find(Button)
-      .last()
-      .simulate('click');
+    wrapper.find(Button).last().simulate('click');
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
       aws: 'aws',
-      summary: 'summary'
+      summary: 'summary',
     });
     onSubmit.mockClear();
 
-    wrapper
-      .find(Button)
-      .at(1)
-      .simulate('click');
+    wrapper.find(Button).at(1).simulate('click');
     wrapper.update();
 
     wrapper.find('input').instance().value = 'google';
     wrapper.find('input').simulate('change');
     wrapper.update();
 
-    wrapper
-      .find(Button)
-      .last()
-      .simulate('click');
+    wrapper.find(Button).last().simulate('click');
     wrapper.update();
 
-    wrapper
-      .find('textarea')
-      .first()
-      .instance().value = 'google summary';
-    wrapper
-      .find('textarea')
-      .first()
-      .simulate('change');
+    wrapper.find('textarea').first().instance().value = 'google summary';
+    wrapper.find('textarea').first().simulate('change');
     wrapper.update();
 
-    wrapper
-      .find(Button)
-      .last()
-      .simulate('click');
+    wrapper.find(Button).last().simulate('click');
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
       aws: 'google',
-      googlesummary: 'google summary'
+      googlesummary: 'google summary',
     });
     onSubmit.mockClear();
   });
@@ -361,14 +282,11 @@ describe('wizard', () => {
     wrapper.find('input').simulate('change');
     wrapper.update();
 
-    wrapper
-      .find(Button)
-      .first()
-      .simulate('click'); // disabled next
+    wrapper.find(Button).first().simulate('click'); // disabled next
     wrapper.update();
 
     expect(onCancel).toHaveBeenCalledWith({
-      aws: 'something'
+      aws: 'something',
     });
   });
 
@@ -386,20 +304,20 @@ describe('wizard', () => {
                 when: 'name',
                 stepMapper: {
                   aws: 'summary',
-                  submit: CONDITIONAL_SUBMIT_FLAG
-                }
+                  submit: CONDITIONAL_SUBMIT_FLAG,
+                },
               },
               fields: [
                 {
                   component: componentTypes.TEXT_FIELD,
                   name: 'name',
-                  validate: [{ type: validatorTypes.REQUIRED }]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  validate: [{ type: validatorTypes.REQUIRED }],
+                },
+              ],
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} onSubmit={submit} schema={schema} />);

@@ -12,20 +12,9 @@ describe('schemaErrorComponent', () => {
     expect(wrapper.find('h1')).toHaveLength(1);
 
     expect(wrapper.find('h2')).toHaveLength(1);
-    expect(
-      wrapper
-        .find('h2')
-        .text()
-        .includes(name)
-    ).toEqual(true);
+    expect(wrapper.find('h2').text().includes(name)).toEqual(true);
 
     expect(wrapper.find('p')).toHaveLength(2);
-    expect(
-      wrapper
-        .find('p')
-        .first()
-        .text()
-        .includes(message)
-    ).toEqual(true);
+    expect(wrapper.find('p').first().text().includes(message)).toEqual(true);
   });
 });

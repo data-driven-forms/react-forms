@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 
 const RendererContext = createContext({
-  formOptions: {}
+  formOptions: {},
 });
 
 export default RendererContext;

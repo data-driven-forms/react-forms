@@ -1,168 +1,168 @@
 const schemaNav = [
   {
     component: 'introduction',
-    linkText: 'Introduction'
+    linkText: 'Introduction',
   },
   {
     subHeader: true,
     title: 'FieldProperties',
-    noRoute: true
+    noRoute: true,
   },
   {
     component: 'clear-on-unmount',
-    linkText: 'Clear on unmount'
+    linkText: 'Clear on unmount',
   },
   {
     component: 'cleared-value',
-    linkText: 'Cleared value'
+    linkText: 'Cleared value',
   },
   {
     component: 'initialize-on-mount',
-    linkText: 'Initialize on mount'
+    linkText: 'Initialize on mount',
   },
   {
     component: 'data-types',
-    linkText: 'Data types'
+    linkText: 'Data types',
   },
   {
     component: 'constants',
-    linkText: 'Constants'
+    linkText: 'Constants',
   },
   {
     component: 'resolve-props',
-    linkText: 'Resolve props'
+    linkText: 'Resolve props',
   },
   {
     subHeader: true,
     title: 'Validation',
-    noRoute: true
+    noRoute: true,
   },
   {
     component: 'async-validator',
-    linkText: 'Async validator'
+    linkText: 'Async validator',
   },
   {
     component: 'length-validator',
-    linkText: 'Length validator'
+    linkText: 'Length validator',
   },
   {
     linkText: 'Number value validator',
-    component: 'number-value-validator'
+    component: 'number-value-validator',
   },
   {
     component: 'pattern-validator',
-    linkText: 'Pattern validator'
+    linkText: 'Pattern validator',
   },
   {
     component: 'record-level-validation',
-    linkText: 'Record level validator'
+    linkText: 'Record level validator',
   },
   {
     component: 'required-validator',
-    linkText: 'Required validator'
+    linkText: 'Required validator',
   },
   {
     component: 'url-validator',
-    linkText: 'URL validator'
+    linkText: 'URL validator',
   },
   {
     component: 'custom-validator',
-    linkText: 'Custom validator'
+    linkText: 'Custom validator',
   },
   {
     component: 'custom-validator-message',
-    linkText: 'Custom message'
+    linkText: 'Custom message',
   },
   {
     component: 'overwriting-default-message',
-    linkText: 'Overwriting default message'
+    linkText: 'Overwriting default message',
   },
   {
     component: 'validator-mapper',
-    linkText: 'Validator mapper'
+    linkText: 'Validator mapper',
   },
   {
     component: 'validator-warnings',
-    linkText: 'Warnings'
+    linkText: 'Warnings',
   },
   {
     subHeader: true,
     title: 'Condition',
-    noRoute: true
+    noRoute: true,
   },
   {
     component: 'condition-schema',
-    linkText: 'Schema'
+    linkText: 'Schema',
   },
   {
     component: 'and',
-    linkText: 'And'
+    linkText: 'And',
   },
   {
     component: 'not',
-    linkText: 'Not'
+    linkText: 'Not',
   },
   {
     component: 'or',
-    linkText: 'Or'
+    linkText: 'Or',
   },
   {
     component: 'is',
-    linkText: 'Is'
+    linkText: 'Is',
   },
   {
     component: 'is-empty',
-    linkText: 'Is empty'
+    linkText: 'Is empty',
   },
   {
     component: 'is-not-empty',
-    linkText: 'Is not empty'
+    linkText: 'Is not empty',
   },
   {
     component: 'not-match',
-    linkText: 'Not match'
+    linkText: 'Not match',
   },
   {
     component: 'pattern',
-    linkText: 'Pattern'
+    linkText: 'Pattern',
   },
   {
     component: 'comparators',
-    linkText: 'Comparators'
+    linkText: 'Comparators',
   },
   {
     component: 'condition-sequence',
-    linkText: 'Sequence'
+    linkText: 'Sequence',
   },
   {
     component: 'condition-nesting',
-    linkText: 'Condition nesting'
+    linkText: 'Condition nesting',
   },
   {
     component: 'condition-actions',
-    linkText: 'Conditional actions'
+    linkText: 'Conditional actions',
   },
   {
     component: 'condition-set',
-    linkText: 'Conditional set value'
+    linkText: 'Conditional set value',
   },
   {
     component: 'condition-visible',
-    linkText: 'Conditional visibility'
+    linkText: 'Conditional visibility',
   },
   {
     component: 'complex-condition-example',
-    linkText: 'Complex condition example'
+    linkText: 'Complex condition example',
   },
   {
     subHeader: true,
     title: 'Actions',
-    noRoute: true
+    noRoute: true,
   },
   {
     component: 'actions',
-    linkText: 'Action mapper'
-  }
+    linkText: 'Action mapper',
+  },
 ];
 
 export default schemaNav;

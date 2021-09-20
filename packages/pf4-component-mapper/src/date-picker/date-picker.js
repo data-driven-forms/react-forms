@@ -5,21 +5,8 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormGroup from '../form-group/form-group';
 
 const DatePicker = (props) => {
-  const {
-    label,
-    isRequired,
-    helperText,
-    meta,
-    validateOnMount,
-    description,
-    hideLabel,
-    input,
-    isReadOnly,
-    isDisabled,
-    id,
-    FormGroupProps,
-    ...rest
-  } = useFieldApi(props);
+  const { label, isRequired, helperText, meta, validateOnMount, description, hideLabel, input, isReadOnly, isDisabled, id, FormGroupProps, ...rest } =
+    useFieldApi(props);
   return (
     <FormGroup
       label={label}
@@ -47,7 +34,7 @@ DatePicker.propTypes = {
   hideLabel: PropTypes.bool,
   isDisabled: PropTypes.bool,
   id: PropTypes.string,
-  FormGroupProps: PropTypes.object
+  FormGroupProps: PropTypes.object,
 };
 
 export default DatePicker;

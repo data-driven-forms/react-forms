@@ -7,7 +7,7 @@ const WithDescription = ({ labelText, description }) => <Tooltip triggerText={la
 
 WithDescription.propTypes = {
   labelText: PropTypes.node,
-  description: PropTypes.node
+  description: PropTypes.node,
 };
 
 export default WithDescription;

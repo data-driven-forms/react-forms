@@ -29,11 +29,11 @@ const useHeadingStyles = makeStyles((theme) => ({
   anchor: {
     textDecoration: 'none',
     color: 'inherit',
-    fontWeight: 'inherit'
+    fontWeight: 'inherit',
   },
   wrapper: {
     flexGrow: 1,
-    display: 'flex'
+    display: 'flex',
   },
   heading: {
     paddingTop: 4,
@@ -42,12 +42,12 @@ const useHeadingStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     '& button': {
-      visibility: 'hidden'
+      visibility: 'hidden',
     },
     '&:hover button': {
-      visibility: 'initial'
-    }
-  }
+      visibility: 'initial',
+    },
+  },
 }));
 
 export const Heading = ({ level, children, component }) => {
@@ -70,27 +70,27 @@ export const Heading = ({ level, children, component }) => {
 const useStyles = makeStyles((theme) => ({
   container: {
     [theme.breakpoints.down('sm')]: {
-      maxWidth: 'calc(100vw - 64px)'
-    }
+      maxWidth: 'calc(100vw - 64px)',
+    },
   },
   codeWrapper: {
     background: '#1D1F21',
     paddingTop: 16,
     paddingBottom: 16,
-    borderRadius: 4
+    borderRadius: 4,
   },
   componentPanel: {
-    padding: 16
+    padding: 16,
   },
   accordion: {
     border: 'none',
     boxShadow: 'none',
     background: 'none',
-    padding: 0
+    padding: 0,
   },
   accordionSummary: {
-    padding: 0
-  }
+    padding: 0,
+  },
 }));
 
 const index = `<!DOCTYPE html>
@@ -122,7 +122,7 @@ const getPayload = (code, sourceFiles = {}) =>
     files: {
       ...sourceFiles,
       'public/index.html': {
-        content: index
+        content: index,
       },
       'package.json': {
         content: {
@@ -138,26 +138,26 @@ const getPayload = (code, sourceFiles = {}) =>
             '@material-ui/icons': 'latest',
             react: '16.12.0',
             'react-dom': '16.12.0',
-            'react-scripts': '3.0.1'
+            'react-scripts': '3.0.1',
           },
           devDependencies: { typescript: '3.8.3' },
           scripts: {
             start: 'react-scripts start',
             build: 'react-scripts build',
             test: 'react-scripts test --env=jsdom',
-            eject: 'react-scripts eject'
+            eject: 'react-scripts eject',
           },
-          browserslist: ['>0.2%', 'not dead', 'not ie <= 11', 'not op_mini all']
-        }
+          browserslist: ['>0.2%', 'not dead', 'not ie <= 11', 'not op_mini all'],
+        },
       },
       'src/index.js': {
         content:
-          'import React from "react";\nimport ReactDOM from "react-dom";\n\nimport App from "./App";\n\nconst rootElement = document.getElementById("root");\nReactDOM.render(\n  <React.StrictMode>\n    <App />\n  </React.StrictMode>,\n  rootElement\n);\n'
+          'import React from "react";\nimport ReactDOM from "react-dom";\n\nimport App from "./App";\n\nconst rootElement = document.getElementById("root");\nReactDOM.render(\n  <React.StrictMode>\n    <App />\n  </React.StrictMode>,\n  rootElement\n);\n',
       },
       'src/App.js': {
-        content: code
-      }
-    }
+        content: code,
+      },
+    },
   });
 
 const CodeExample = ({ source, mode }) => {
@@ -262,11 +262,11 @@ const CodeExample = ({ source, mode }) => {
 
 CodeExample.propTypes = {
   source: PropTypes.string.isRequired,
-  mode: PropTypes.oneOf(['code', 'preview'])
+  mode: PropTypes.oneOf(['code', 'preview']),
 };
 
 CodeExample.defaultProps = {
-  mode: 'code'
+  mode: 'code',
 };
 
 export default CodeExample;

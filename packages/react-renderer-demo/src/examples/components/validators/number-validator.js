@@ -6,7 +6,7 @@ import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template'
 import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 const schema = {
   title: 'Start typing',
@@ -21,16 +21,16 @@ const schema = {
         {
           type: validatorTypes.MIN_NUMBER_VALUE,
           includeThreshold: true,
-          value: 1.36
+          value: 1.36,
         },
         {
           type: validatorTypes.MAX_NUMBER_VALUE,
           includeThreshold: false,
-          value: 33.3
-        }
-      ]
-    }
-  ]
+          value: 33.3,
+        },
+      ],
+    },
+  ],
 };
 
 const NumberValueValidators = () => (

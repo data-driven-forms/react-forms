@@ -14,7 +14,7 @@ export const RenderTitle = ({ title, customTitle }) =>
 
 RenderTitle.propTypes = {
   title: PropTypes.node,
-  customTitle: PropTypes.node
+  customTitle: PropTypes.node,
 };
 
 const DefaultStepTemplate = ({ formFields, formRef, title, customTitle, showTitle, showTitles }) => (
@@ -28,12 +28,12 @@ DefaultStepTemplate.propTypes = {
   title: PropTypes.node,
   formFields: PropTypes.array.isRequired,
   formOptions: PropTypes.shape({
-    renderForm: PropTypes.func.isRequired
+    renderForm: PropTypes.func.isRequired,
   }).isRequired,
   showTitles: PropTypes.bool,
   showTitle: PropTypes.bool,
   customTitle: PropTypes.node,
-  formRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.instanceOf(Element) })])
+  formRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.instanceOf(Element) })]),
 };
 
 const WizardStep = ({
@@ -87,7 +87,7 @@ WizardStep.propTypes = {
   description: PropTypes.node,
   fields: PropTypes.array.isRequired,
   formOptions: PropTypes.shape({
-    renderForm: PropTypes.func.isRequired
+    renderForm: PropTypes.func.isRequired,
   }).isRequired,
   showTitles: PropTypes.bool,
   showTitle: PropTypes.bool,
@@ -95,11 +95,11 @@ WizardStep.propTypes = {
   name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   hasNoBodyPadding: PropTypes.bool,
   StepTemplate: PropTypes.elementType,
-  conditionalSubmitFlag: PropTypes.string.isRequired
+  conditionalSubmitFlag: PropTypes.string.isRequired,
 };
 
 WizardStep.defaultProps = {
-  StepTemplate: DefaultStepTemplate
+  StepTemplate: DefaultStepTemplate,
 };
 
 export default WizardStep;

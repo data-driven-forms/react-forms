@@ -6,7 +6,7 @@ import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template'
 import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 const schema = {
@@ -20,13 +20,13 @@ const schema = {
       validate: [
         {
           type: validatorTypes.MIN_LENGTH,
-          threshold: 5
+          threshold: 5,
         },
         {
           type: validatorTypes.MAX_LENGTH,
-          threshold: 10
-        }
-      ]
+          threshold: 10,
+        },
+      ],
     },
     {
       component: componentTypes.TEXT_FIELD,
@@ -36,11 +36,11 @@ const schema = {
       validate: [
         {
           type: validatorTypes.EXACT_LENGTH,
-          threshold: 3
-        }
-      ]
-    }
-  ]
+          threshold: 3,
+        },
+      ],
+    },
+  ],
 };
 
 const LengthValidators = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;

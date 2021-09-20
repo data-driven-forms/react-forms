@@ -39,7 +39,7 @@ describe('Select test', () => {
   const rendererProps = {
     onSubmit: jest.fn(),
     FormTemplate: ({ formFields }) => formFields,
-    componentMapper: { [componentTypes.SELECT]: WrapperSelect }
+    componentMapper: { [componentTypes.SELECT]: WrapperSelect },
   };
 
   class ClassDummy extends React.Component {
@@ -59,8 +59,8 @@ describe('Select test', () => {
       options: [
         { label: 'Dogs', value: 'd' },
         { label: 'Cats', value: 'c' },
-        { label: 'Hamsters', value: 'h' }
-      ]
+        { label: 'Hamsters', value: 'h' },
+      ],
     };
   });
 
@@ -75,9 +75,9 @@ describe('Select test', () => {
                 {
                   ...field,
                   component: componentTypes.SELECT,
-                  name: 'select'
-                }
-              ]
+                  name: 'select',
+                },
+              ],
             }}
           />
         );
@@ -98,10 +98,10 @@ describe('Select test', () => {
         options: [
           { label: 'Dogs', value: 'd' },
           { label: 'Cats', value: 'c' },
-          { label: 'Hamsters', value: 'h' }
+          { label: 'Hamsters', value: 'h' },
         ],
         placeholder: 'Choose...',
-        value: []
+        value: [],
       });
       expect(wrapper.find('#noOptionsMessage').text()).toEqual('No options');
     });
@@ -116,9 +116,9 @@ describe('Select test', () => {
                 {
                   ...field,
                   component: componentTypes.SELECT,
-                  name: 'select'
-                }
-              ]
+                  name: 'select',
+                },
+              ],
             }}
           />
         );
@@ -126,10 +126,7 @@ describe('Select test', () => {
       wrapper.update();
 
       await act(async () => {
-        wrapper
-          .find('#onChange')
-          .props()
-          .onClick({ value: 'd' });
+        wrapper.find('#onChange').props().onClick({ value: 'd' });
       });
       wrapper.update();
 
@@ -137,10 +134,7 @@ describe('Select test', () => {
       expect(inputValue).toEqual('d');
 
       await act(async () => {
-        wrapper
-          .find('#onChange')
-          .props()
-          .onClick({ value: 'c' });
+        wrapper.find('#onChange').props().onClick({ value: 'c' });
       });
       wrapper.update();
 
@@ -159,9 +153,9 @@ describe('Select test', () => {
                   ...field,
                   initialValue: 'c',
                   component: componentTypes.SELECT,
-                  name: 'select'
-                }
-              ]
+                  name: 'select',
+                },
+              ],
             }}
           />
         );
@@ -179,10 +173,10 @@ describe('Select test', () => {
                 options: [{ label: 'new cats', value: 'cc' }],
                 initialValue: 'c',
                 component: componentTypes.SELECT,
-                name: 'select'
-              }
-            ]
-          }
+                name: 'select',
+              },
+            ],
+          },
         });
       });
       wrapper.update();
@@ -202,9 +196,9 @@ describe('Select test', () => {
                   noValueUpdates: true,
                   initialValue: 'c',
                   component: componentTypes.SELECT,
-                  name: 'select'
-                }
-              ]
+                  name: 'select',
+                },
+              ],
             }}
           />
         );
@@ -223,10 +217,10 @@ describe('Select test', () => {
                 options: [{ label: 'new cats', value: 'cc' }],
                 initialValue: 'c',
                 component: componentTypes.SELECT,
-                name: 'select'
-              }
-            ]
-          }
+                name: 'select',
+              },
+            ],
+          },
         });
       });
       wrapper.update();
@@ -248,9 +242,9 @@ describe('Select test', () => {
                 {
                   ...field,
                   component: componentTypes.SELECT,
-                  name: 'select'
-                }
-              ]
+                  name: 'select',
+                },
+              ],
             }}
           />
         );
@@ -271,10 +265,10 @@ describe('Select test', () => {
         options: [
           { label: 'Dogs', value: 'd' },
           { label: 'Cats', value: 'c' },
-          { label: 'Hamsters', value: 'h' }
+          { label: 'Hamsters', value: 'h' },
         ],
         placeholder: 'Choose...',
-        value: []
+        value: [],
       });
     });
 
@@ -290,9 +284,9 @@ describe('Select test', () => {
                 {
                   ...field,
                   component: componentTypes.SELECT,
-                  name: 'select'
-                }
-              ]
+                  name: 'select',
+                },
+              ],
             }}
           />
         );
@@ -309,9 +303,221 @@ describe('Select test', () => {
 
       expect(state.value).toEqual([
         { label: 'Dogs', value: 'd' },
-        { label: 'Cats', value: 'c' }
+        { label: 'Cats', value: 'c' },
       ]);
       expect(inputValue).toEqual(['d', 'c']);
+    });
+
+    it('selects null value - clears selection', async () => {
+      field = { ...field, isMulti: true };
+
+      await act(async () => {
+        wrapper = mount(
+          <FormRenderer
+            {...rendererProps}
+            schema={{
+              fields: [
+                {
+                  ...field,
+                  component: componentTypes.SELECT,
+                  name: 'select',
+                },
+              ],
+            }}
+          />
+        );
+      });
+      wrapper.update();
+
+      await act(async () => {
+        wrapper
+          .find('#onChange')
+          .props()
+          .onClick([{ value: 'd' }, { value: 'c' }]);
+      });
+      wrapper.update();
+
+      expect(state.value).toEqual([
+        { label: 'Dogs', value: 'd' },
+        { label: 'Cats', value: 'c' },
+      ]);
+      expect(inputValue).toEqual(['d', 'c']);
+
+      await act(async () => {
+        wrapper.find('#onChange').props().onClick(null);
+      });
+      wrapper.update();
+
+      expect(state.value).toEqual([]);
+      expect(inputValue).toEqual([]);
+    });
+
+    it('selects all values', async () => {
+      field = { ...field, isMulti: true, options: [{ label: 'Select all', selectAll: true }, ...field.options] };
+
+      await act(async () => {
+        wrapper = mount(
+          <FormRenderer
+            {...rendererProps}
+            schema={{
+              fields: [
+                {
+                  ...field,
+                  component: componentTypes.SELECT,
+                  name: 'select',
+                },
+              ],
+            }}
+          />
+        );
+      });
+      wrapper.update();
+
+      await act(async () => {
+        wrapper
+          .find('#onChange')
+          .props()
+          .onClick([{ label: 'Select all', selectAll: true }]);
+      });
+      wrapper.update();
+
+      expect(state.value).toEqual([
+        { label: 'Select all', selectAll: true },
+        { label: 'Dogs', value: 'd' },
+        { label: 'Cats', value: 'c' },
+        { label: 'Hamsters', value: 'h' },
+      ]);
+      expect(inputValue).toEqual(['d', 'c', 'h']);
+
+      // remove hamsters
+      await act(async () => {
+        wrapper
+          .find('#onChange')
+          .props()
+          .onClick([
+            { label: 'Select all', selectAll: true },
+            { label: 'Dogs', value: 'd' },
+            { label: 'Cats', value: 'c' },
+          ]);
+      });
+      wrapper.update();
+
+      expect(state.value).toEqual([
+        { label: 'Dogs', value: 'd' },
+        { label: 'Cats', value: 'c' },
+      ]);
+      expect(inputValue).toEqual(['d', 'c']);
+    });
+
+    it('selects none', async () => {
+      field = { ...field, isMulti: true, options: [{ label: 'Select none', selectNone: true }, ...field.options], initialValue: ['d', 'c', 'h'] };
+
+      await act(async () => {
+        wrapper = mount(
+          <FormRenderer
+            {...rendererProps}
+            schema={{
+              fields: [
+                {
+                  ...field,
+                  component: componentTypes.SELECT,
+                  name: 'select',
+                },
+              ],
+            }}
+          />
+        );
+      });
+      wrapper.update();
+
+      await act(async () => {
+        wrapper
+          .find('#onChange')
+          .props()
+          .onClick([{ label: 'Select none', selectNone: true }]);
+      });
+      wrapper.update();
+
+      expect(state.value).toEqual([{ label: 'Select none', selectNone: true }]);
+      expect(inputValue).toEqual('');
+
+      // adds one
+      await act(async () => {
+        wrapper
+          .find('#onChange')
+          .props()
+          .onClick([
+            { label: 'Select none', selectNone: true },
+            { label: 'Dogs', value: 'd' },
+          ]);
+      });
+      wrapper.update();
+
+      expect(state.value).toEqual([{ label: 'Dogs', value: 'd' }]);
+      expect(inputValue).toEqual(['d']);
+    });
+
+    it('with select all and select none at that same time', async () => {
+      field = {
+        ...field,
+        isMulti: true,
+        options: [
+          { label: 'Select all', selectAll: true, value: 'select-all' },
+          { label: 'Select none', selectNone: true, value: 'select-none' },
+          ...field.options,
+        ],
+      };
+
+      await act(async () => {
+        wrapper = mount(
+          <FormRenderer
+            {...rendererProps}
+            schema={{
+              fields: [
+                {
+                  ...field,
+                  component: componentTypes.SELECT,
+                  name: 'select',
+                },
+              ],
+            }}
+          />
+        );
+      });
+      wrapper.update();
+
+      await act(async () => {
+        wrapper
+          .find('#onChange')
+          .props()
+          .onClick([{ label: 'Select all', selectAll: true, value: 'select-all' }]);
+      });
+      wrapper.update();
+
+      expect(state.value).toEqual([
+        { label: 'Select all', selectAll: true, value: 'select-all' },
+        { label: 'Dogs', value: 'd' },
+        { label: 'Cats', value: 'c' },
+        { label: 'Hamsters', value: 'h' },
+      ]);
+      expect(inputValue).toEqual(['d', 'c', 'h']);
+
+      await act(async () => {
+        wrapper
+          .find('#onChange')
+          .props()
+          .onClick([
+            { label: 'Select all', selectAll: true },
+            { label: 'Dogs', value: 'd' },
+            { label: 'Cats', value: 'c' },
+            { label: 'Hamsters', value: 'h' },
+            { label: 'Select none', selectNone: true, value: 'select-none' },
+          ]);
+      });
+      wrapper.update();
+
+      expect(state.value).toEqual([{ label: 'Select none', selectNone: true, value: 'select-none' }]);
+      expect(inputValue).toEqual([]);
     });
   });
 
@@ -325,7 +531,7 @@ describe('Select test', () => {
             setTimeout(() => {
               return resolve([
                 { value: '111', label: 'first' },
-                { value: '222', label: 'second' }
+                { value: '222', label: 'second' },
               ]);
             }, 1)
           )
@@ -342,9 +548,9 @@ describe('Select test', () => {
                 {
                   ...field,
                   component: componentTypes.SELECT,
-                  name: 'select'
-                }
-              ]
+                  name: 'select',
+                },
+              ],
             }}
           />
         );
@@ -359,7 +565,7 @@ describe('Select test', () => {
         isFetching: true,
         isSearchable: false,
         options: [],
-        placeholder: undefined
+        placeholder: undefined,
       });
 
       await act(async () => {
@@ -380,10 +586,10 @@ describe('Select test', () => {
         isSearchable: false,
         options: [
           { label: 'first', value: '111' },
-          { label: 'second', value: '222' }
+          { label: 'second', value: '222' },
         ],
         placeholder: 'Choose...',
-        value: []
+        value: [],
       });
 
       jest.useRealTimers();
@@ -393,7 +599,7 @@ describe('Select test', () => {
       const loadOptions = jest.fn().mockImplementation(() =>
         Promise.resolve([
           { value: '111', label: 'first' },
-          { value: '222', label: 'second' }
+          { value: '222', label: 'second' },
         ])
       );
 
@@ -409,9 +615,9 @@ describe('Select test', () => {
                   ...field,
                   initialValue: '333',
                   component: componentTypes.SELECT,
-                  name: 'select'
-                }
-              ]
+                  name: 'select',
+                },
+              ],
             }}
           />
         );
@@ -424,7 +630,7 @@ describe('Select test', () => {
       const loadOptions = jest.fn().mockImplementation(() =>
         Promise.resolve([
           { value: '111', label: 'first' },
-          { value: '222', label: 'second' }
+          { value: '222', label: 'second' },
         ])
       );
 
@@ -440,9 +646,9 @@ describe('Select test', () => {
                   ...field,
                   initialValue: ['333', '111'],
                   component: componentTypes.SELECT,
-                  name: 'select'
-                }
-              ]
+                  name: 'select',
+                },
+              ],
             }}
           />
         );
@@ -455,7 +661,7 @@ describe('Select test', () => {
       const loadOptions = jest.fn().mockImplementation(() =>
         Promise.resolve([
           { value: '111', label: 'first' },
-          { value: '222', label: 'second' }
+          { value: '222', label: 'second' },
         ])
       );
 
@@ -471,9 +677,9 @@ describe('Select test', () => {
                   ...field,
                   initialValue: ['333'],
                   component: componentTypes.SELECT,
-                  name: 'select'
-                }
-              ]
+                  name: 'select',
+                },
+              ],
             }}
           />
         );
@@ -486,7 +692,7 @@ describe('Select test', () => {
       const loadOptions = jest.fn().mockImplementation(() =>
         Promise.resolve([
           { value: '111', label: 'first' },
-          { value: '222', label: 'second' }
+          { value: '222', label: 'second' },
         ])
       );
 
@@ -502,9 +708,9 @@ describe('Select test', () => {
                   ...field,
                   initialValue: '333',
                   component: componentTypes.SELECT,
-                  name: 'select'
-                }
-              ]
+                  name: 'select',
+                },
+              ],
             }}
           />
         );
@@ -517,7 +723,7 @@ describe('Select test', () => {
       const loadOptions = jest.fn().mockImplementation(() =>
         Promise.resolve([
           { value: '111', label: 'first' },
-          { value: '222', label: 'second' }
+          { value: '222', label: 'second' },
         ])
       );
 
@@ -532,9 +738,9 @@ describe('Select test', () => {
                 {
                   ...field,
                   component: componentTypes.SELECT,
-                  name: 'select'
-                }
-              ]
+                  name: 'select',
+                },
+              ],
             }}
           />
         );
@@ -544,10 +750,7 @@ describe('Select test', () => {
       loadOptions.mockClear();
 
       await act(async () => {
-        wrapper
-          .find('#onInputChange')
-          .props()
-          .onClick('search term');
+        wrapper.find('#onInputChange').props().onClick('search term');
       });
       wrapper.update();
 
@@ -563,7 +766,7 @@ describe('Select test', () => {
         .mockImplementationOnce(() =>
           Promise.resolve([
             { value: '111', label: 'first' },
-            { value: '222', label: 'second' }
+            { value: '222', label: 'second' },
           ])
         )
         .mockImplementation(() => Promise.reject('error'));
@@ -579,9 +782,9 @@ describe('Select test', () => {
                 {
                   ...field,
                   component: componentTypes.SELECT,
-                  name: 'select'
-                }
-              ]
+                  name: 'select',
+                },
+              ],
             }}
           />
         );
@@ -591,10 +794,7 @@ describe('Select test', () => {
       loadOptions.mockClear();
 
       await act(async () => {
-        wrapper
-          .find('#onInputChange')
-          .props()
-          .onClick('search term');
+        wrapper.find('#onInputChange').props().onClick('search term');
       });
       wrapper.update();
 
@@ -608,7 +808,7 @@ describe('Select test', () => {
       const loadOptions = jest.fn().mockImplementation(() =>
         Promise.resolve([
           { value: '111', label: 'first' },
-          { value: '222', label: 'second' }
+          { value: '222', label: 'second' },
         ])
       );
 
@@ -624,9 +824,9 @@ describe('Select test', () => {
                   ...field,
                   initialValue: ['333'],
                   component: componentTypes.SELECT,
-                  name: 'select'
-                }
-              ]
+                  name: 'select',
+                },
+              ],
             }}
           />
         );
@@ -635,7 +835,7 @@ describe('Select test', () => {
 
       expect(state.options).toEqual([
         { label: 'first', value: '111' },
-        { label: 'second', value: '222' }
+        { label: 'second', value: '222' },
       ]);
 
       await act(async () => {
@@ -648,10 +848,10 @@ describe('Select test', () => {
                 options: [],
                 isMulti: true,
                 component: componentTypes.SELECT,
-                name: 'select'
-              }
-            ]
-          }
+                name: 'select',
+              },
+            ],
+          },
         });
       });
       wrapper.update();
@@ -662,7 +862,7 @@ describe('Select test', () => {
     it('should refresh options when loadOptionsChangeCounter function changed', async () => {
       let options = [
         { label: 'first', value: '111' },
-        { label: 'second', value: '222' }
+        { label: 'second', value: '222' },
       ];
       const loadOptions = () => Promise.resolve(options);
 
@@ -678,9 +878,9 @@ describe('Select test', () => {
                   ...field,
                   initialValue: ['333'],
                   component: componentTypes.SELECT,
-                  name: 'select'
-                }
-              ]
+                  name: 'select',
+                },
+              ],
             }}
           />
         );
@@ -689,7 +889,7 @@ describe('Select test', () => {
 
       expect(state.options).toEqual([
         { label: 'first', value: '111' },
-        { label: 'second', value: '222' }
+        { label: 'second', value: '222' },
       ]);
 
       options = [{ label: 'new option', value: 'new' }];
@@ -705,10 +905,10 @@ describe('Select test', () => {
                 isMulti: true,
                 loadOptionsChangeCounter: 1,
                 component: componentTypes.SELECT,
-                name: 'select'
-              }
-            ]
-          }
+                name: 'select',
+              },
+            ],
+          },
         });
       });
       wrapper.update();
@@ -720,7 +920,7 @@ describe('Select test', () => {
   describe('reducer', () => {
     it('default', () => {
       expect(reducer({ initialState: true }, { type: 'default' })).toEqual({
-        initialState: true
+        initialState: true,
       });
     });
   });
