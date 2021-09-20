@@ -1,6 +1,8 @@
 import { fieldLevelValidator } from '../../validate';
 import createManagerApi from '../../manager-api';
 
+import 'core-js/fn/set-immediate';
+
 describe('validate', () => {
   describe('field level', () => {
     it('should validate sync field level function', () => {
@@ -22,18 +24,14 @@ describe('validate', () => {
       const promise = fieldLevelValidator(validator, 'foo', {}, managerApi);
       jest.runAllTimers();
       expect(managerApi().validating).toBe(true);
-      return promise.catch((result) => {
+      return promise.catch(async (result) => {
         expect(result).toEqual('failed');
-        /**
-         * we need to call setImmediate to synchronize the jest test
-         */
-        setImmediate(() => {
-          expect(managerApi().validating).toBe(false);
-        });
+        await (async () => Promise.resolve())();
+        expect(managerApi().validating).toBe(false);
       });
     });
 
-    it('should correctly keep validating flag set until all async validators are resolved', (done) => {
+    it('should correctly keep validating flag set until all async validators are resolved', async () => {
       jest.useFakeTimers();
       const managerApi = createManagerApi(jest.fn());
       const slowValidator = () => new Promise((resolve) => setTimeout(() => resolve('first'), 1000));
@@ -61,10 +59,9 @@ describe('validate', () => {
        * Run enough time to resolve the slower first validator
        */
       jest.runAllTimers();
-      setImmediate(() => {
-        expect(managerApi().validating).toBe(false);
-        done();
-      });
+
+      await (async () => Promise.resolve())();
+      expect(managerApi().validating).toBe(false);
     });
   });
 
