@@ -1,8 +1,6 @@
 import { fieldLevelValidator } from '../../validate';
 import createManagerApi from '../../manager-api';
 
-import 'core-js/fn/set-immediate';
-
 describe('validate', () => {
   describe('field level', () => {
     it('should validate sync field level function', () => {
