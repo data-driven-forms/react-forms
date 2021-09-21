@@ -3,6 +3,8 @@ import FORM_ERROR from '../../form-error';
 import * as focusError from '../../focus-error/focus-error';
 
 describe('managerApi', () => {
+  const flushPromises = async () => Promise.resolve();
+
   let focusErrorSpy;
   beforeEach(() => {
     focusErrorSpy = jest.spyOn(focusError, 'default');
@@ -10,6 +12,7 @@ describe('managerApi', () => {
 
   afterEach(() => {
     focusErrorSpy.mockClear();
+    jest.useRealTimers();
   });
 
   it('should create managerApi getter', () => {
@@ -21,8 +24,8 @@ describe('managerApi', () => {
     const initialValues = {
       field: 'value',
       nested: {
-        some: 'nested_value'
-      }
+        some: 'nested_value',
+      },
     };
     const managerApi = createManagerApi({ initialValues });
     expect(managerApi().initialValues).toEqual(initialValues);
@@ -43,14 +46,14 @@ describe('managerApi', () => {
               {
                 superNested: [
                   {
-                    lastName: 'michael'
-                  }
-                ]
-              }
-            ]
-          }
-        }
-      }
+                    lastName: 'michael',
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      },
     };
 
     const result = {
@@ -62,7 +65,7 @@ describe('managerApi', () => {
       'nested.some.very.nestedObjects[0].name': 'john',
       'nested.some.very.nestedObjects[1].name': 'jane',
       'nested.some.very.nestedObjects[1].lastname': 'smith',
-      'nested.some.very.nestier[0].superNested[0].lastName': 'michael'
+      'nested.some.very.nestier[0].superNested[0].lastName': 'michael',
     };
 
     expect(flatObject(values)).toEqual(result);
@@ -243,7 +246,7 @@ describe('managerApi', () => {
       valid: true,
       validating: false,
       values: { some: { nested: 'value' } },
-      visited: {}
+      visited: {},
     });
   });
 
@@ -263,10 +266,10 @@ describe('managerApi', () => {
         state: {
           name: 'field',
           value: undefined,
-          meta: initialMeta(undefined)
+          meta: initialMeta(undefined),
         },
-        fields: { [internalId]: { render, subscription: undefined } }
-      }
+        fields: { [internalId]: { render, subscription: undefined } },
+      },
     });
   });
 
@@ -291,13 +294,13 @@ describe('managerApi', () => {
         state: {
           name: 'field',
           value: undefined,
-          meta: initialMeta(undefined)
+          meta: initialMeta(undefined),
         },
         fields: {
           [internalId]: { render, subscription: undefined },
-          [internalId1]: { render: render1, subscription: subscription1 }
-        }
-      }
+          [internalId1]: { render: render1, subscription: subscription1 },
+        },
+      },
     });
   });
 
@@ -336,13 +339,13 @@ describe('managerApi', () => {
         state: {
           name: 'field',
           value: undefined,
-          meta: initialMeta(undefined)
+          meta: initialMeta(undefined),
         },
         fields: {
           [internalId]: { render, subscription: undefined },
-          [internalId1]: { render: render1, subscription: subscription1 }
-        }
-      }
+          [internalId1]: { render: render1, subscription: subscription1 },
+        },
+      },
     });
     expect(managerApi().registeredFields).toEqual(['field']);
 
@@ -355,12 +358,12 @@ describe('managerApi', () => {
         state: {
           name: 'field',
           value: undefined,
-          meta: initialMeta(undefined)
+          meta: initialMeta(undefined),
         },
         fields: {
-          [internalId1]: { render: render1, subscription: subscription1 }
-        }
-      }
+          [internalId1]: { render: render1, subscription: subscription1 },
+        },
+      },
     });
     expect(managerApi().registeredFields).toEqual(['field']);
 
@@ -373,10 +376,10 @@ describe('managerApi', () => {
         state: {
           name: 'field',
           value: undefined,
-          meta: initialMeta(undefined)
+          meta: initialMeta(undefined),
         },
-        fields: {}
-      }
+        fields: {},
+      },
     });
     expect(managerApi().registeredFields).toEqual([]);
   });
@@ -396,9 +399,9 @@ describe('managerApi', () => {
         meta: {
           ...initialMeta('123'),
           dirty: true,
-          pristine: false
+          pristine: false,
         },
-        value: '345'
+        value: '345',
       });
       expect(managerApi().registeredFields).toEqual(['field']);
 
@@ -410,7 +413,7 @@ describe('managerApi', () => {
       expect(managerApi().fieldListeners.field.state).toEqual({
         name: 'field',
         meta: initialMeta('123'),
-        value: '123'
+        value: '123',
       });
       expect(managerApi().registeredFields).toEqual(['field']);
 
@@ -423,7 +426,7 @@ describe('managerApi', () => {
       expect(managerApi().fieldListeners.field.state).toEqual({
         name: 'field',
         meta: initialMeta('457'),
-        value: '457'
+        value: '457',
       });
       expect(managerApi().registeredFields).toEqual(['field']);
     });
@@ -442,9 +445,9 @@ describe('managerApi', () => {
         meta: {
           ...initialMeta('123'),
           dirty: true,
-          pristine: false
+          pristine: false,
         },
-        value: '345'
+        value: '345',
       });
       expect(managerApi().registeredFields).toEqual(['field']);
 
@@ -456,7 +459,7 @@ describe('managerApi', () => {
       expect(managerApi().fieldListeners.field.state).toEqual({
         name: 'field',
         meta: initialMeta('123'),
-        value: '123'
+        value: '123',
       });
       expect(managerApi().registeredFields).toEqual(['field']);
     });
@@ -475,9 +478,9 @@ describe('managerApi', () => {
         meta: {
           ...initialMeta('123'),
           dirty: true,
-          pristine: false
+          pristine: false,
         },
-        value: '345'
+        value: '345',
       });
       expect(managerApi().registeredFields).toEqual(['field']);
 
@@ -489,7 +492,7 @@ describe('managerApi', () => {
       expect(managerApi().fieldListeners.field.state).toEqual({
         name: 'field',
         meta: initialMeta('123'),
-        value: '123'
+        value: '123',
       });
       expect(managerApi().registeredFields).toEqual(['field']);
     });
@@ -567,9 +570,9 @@ describe('managerApi', () => {
       field: 'field',
       nested: {
         name: 'nested.name',
-        age: 'nested.age'
+        age: 'nested.age',
       },
-      array: [{ name: 'array[0].name', age: 'array[0].age' }]
+      array: [{ name: 'array[0].name', age: 'array[0].age' }],
     };
     const onSubmit = jest.fn();
     const managerApi = createManagerApi({ onSubmit: (values) => onSubmit(values) });
@@ -682,13 +685,13 @@ describe('managerApi', () => {
       valid: true,
       validating: false,
       visited: false,
-      modifiedSinceLastSubmit: false
+      modifiedSinceLastSubmit: false,
     };
     const managerApi = createManagerApi({});
     const { registerField } = managerApi();
     registerField({
       name: 'field',
-      initialValue: { foo: 'bar' }
+      initialValue: { foo: 'bar' },
     });
     expect(managerApi().getFieldState('field')).toEqual(expectedValue);
   });
@@ -711,7 +714,7 @@ describe('managerApi', () => {
     managerApi().registerField({
       name: 'field',
       render: jest.fn(),
-      internalId: 1
+      internalId: 1,
     });
 
     expect(managerApi().fieldListeners.field.state.meta.touched).toEqual(false);
@@ -997,7 +1000,7 @@ describe('managerApi', () => {
 
       expect(debug).toHaveBeenCalledWith(
         expect.objectContaining({
-          values: initialValues
+          values: initialValues,
         })
       );
     });
@@ -1016,10 +1019,10 @@ describe('managerApi', () => {
           fields: {
             field: {
               render,
-              subscription: { valid: true }
-            }
-          }
-        }
+              subscription: { valid: true },
+            },
+          },
+        },
       });
     });
 
@@ -1035,10 +1038,10 @@ describe('managerApi', () => {
           fields: {
             id: {
               render,
-              subscription: { valid: true }
-            }
-          }
-        }
+              subscription: { valid: true },
+            },
+          },
+        },
       });
     });
 
@@ -1139,7 +1142,9 @@ describe('managerApi', () => {
       expect(managerApi().getFieldState('nested.foo').meta.error).toEqual('some-very-evil-error');
     });
 
-    it('should fail async level validation and set field error', (done) => {
+    it('should fail async level validation and set field error', async () => {
+      expect.assertions(6);
+
       const asyncValidateWithError = () => Promise.reject({ nested: { foo: 'some-very-evil-error' } });
 
       const render = jest.fn();
@@ -1148,19 +1153,17 @@ describe('managerApi', () => {
 
       registerField({ name: 'nested.foo', render });
 
-      setImmediate(() => {
-        expect(managerApi().getState().valid).toEqual(false);
-        expect(managerApi().getState().invalid).toEqual(true);
-        expect(managerApi().getState().validating).toEqual(false);
-        expect(managerApi().hasValidationErrors).toEqual(true);
-        expect(managerApi().getState().errors).toEqual({ nested: { foo: 'some-very-evil-error' } });
-        expect(managerApi().getFieldState('nested.foo').meta.error).toEqual('some-very-evil-error');
+      await flushPromises();
 
-        done();
-      });
+      expect(managerApi().getState().valid).toEqual(false);
+      expect(managerApi().getState().invalid).toEqual(true);
+      expect(managerApi().getState().validating).toEqual(false);
+      expect(managerApi().hasValidationErrors).toEqual(true);
+      expect(managerApi().getState().errors).toEqual({ nested: { foo: 'some-very-evil-error' } });
+      expect(managerApi().getFieldState('nested.foo').meta.error).toEqual('some-very-evil-error');
     });
 
-    it('should pass async level validation', () => {
+    it('should pass async level validation', async () => {
       jest.useFakeTimers();
       const render = jest.fn();
       const managerApi = createManagerApi({ validate: asyncValidate });
@@ -1193,15 +1196,14 @@ describe('managerApi', () => {
       /**
        * After validation finishes
        */
-      jest.advanceTimersByTime(6);
-      setImmediate(() => {
-        expect(managerApi().getState().errors).toEqual({});
-        expect(managerApi().getState().valid).toEqual(true);
-        expect(managerApi().getState().validating).toEqual(false);
-      });
+      await jest.advanceTimersByTime(6);
+
+      expect(managerApi().getState().errors).toEqual({});
+      expect(managerApi().getState().valid).toEqual(true);
+      expect(managerApi().getState().validating).toEqual(false);
     });
 
-    it('should fail async level validation', () => {
+    it('should fail async level validation', async () => {
       jest.useFakeTimers();
       const render = jest.fn();
       const managerApi = createManagerApi({ validate: asyncValidate });
@@ -1220,7 +1222,7 @@ describe('managerApi', () => {
       expect(managerApi().getState().valid).toEqual(true);
       expect(managerApi().getState().validating).toEqual(true);
 
-      jest.advanceTimersByTime(5);
+      await jest.advanceTimersByTime(5);
 
       /**
        * While validation in progress
@@ -1229,21 +1231,19 @@ describe('managerApi', () => {
       expect(managerApi().getState().valid).toEqual(true);
       expect(managerApi().getState().validating).toEqual(true);
 
-      jest.advanceTimersByTime(5);
-
       /**
        * After validation finishes
        */
-      jest.advanceTimersByTime(6);
-      setImmediate(() => {
-        expect(managerApi().getState().errors).toEqual({
-          foo: 'error'
-        });
-        expect(managerApi().getState().valid).toEqual(false);
-        expect(managerApi().getState().invalid).toEqual(true);
-        expect(managerApi().getState().validating).toEqual(false);
-        expect(managerApi().hasValidationErrors).toEqual(true);
+      await jest.runAllTimers();
+      await flushPromises();
+
+      expect(managerApi().getState().errors).toEqual({
+        foo: 'error',
       });
+      expect(managerApi().getState().valid).toEqual(false);
+      expect(managerApi().getState().invalid).toEqual(true);
+      expect(managerApi().getState().validating).toEqual(false);
+      expect(managerApi().hasValidationErrors).toEqual(true);
     });
 
     it('should fail and then pass sync validation', () => {
@@ -1256,7 +1256,7 @@ describe('managerApi', () => {
       change('foo', 'foo');
 
       expect(managerApi().getState().errors).toEqual({
-        foo: 'error'
+        foo: 'error',
       });
       expect(managerApi().getState().valid).toEqual(false);
       expect(managerApi().getState().invalid).toEqual(true);
@@ -1272,8 +1272,9 @@ describe('managerApi', () => {
       expect(managerApi().hasValidationErrors).toEqual(false);
     });
 
-    it('should fail and then pass async validation', () => {
+    it('should fail and then pass async validation', async () => {
       jest.useFakeTimers();
+
       const render = jest.fn();
       const managerApi = createManagerApi({ validate: asyncValidate });
       const { registerField, change } = managerApi();
@@ -1282,29 +1283,30 @@ describe('managerApi', () => {
 
       change('foo', 'foo');
 
-      jest.advanceTimersByTime(10);
-      setImmediate(() => {
-        expect(managerApi().getState().errors).toEqual({
-          foo: 'error'
-        });
-        expect(managerApi().getState().valid).toEqual(false);
-        expect(managerApi().getState().invalid).toEqual(true);
-        expect(managerApi().getState().validating).toEqual(false);
-        expect(managerApi().hasValidationErrors).toEqual(true);
+      await jest.runAllTimers();
+      await flushPromises();
 
-        change('foo', 'ok');
-        jest.advanceTimersByTime(10);
-        setImmediate(() => {
-          expect(managerApi().getState().errors).toEqual({});
-          expect(managerApi().getState().valid).toEqual(true);
-          expect(managerApi().getState().invalid).toEqual(false);
-          expect(managerApi().getState().validating).toEqual(false);
-          expect(managerApi().hasValidationErrors).toEqual(false);
-        });
+      expect(managerApi().getState().errors).toEqual({
+        foo: 'error',
       });
+      expect(managerApi().getState().valid).toEqual(false);
+      expect(managerApi().getState().invalid).toEqual(true);
+      expect(managerApi().getState().validating).toEqual(false);
+      expect(managerApi().hasValidationErrors).toEqual(true);
+
+      change('foo', 'ok');
+
+      await jest.runAllTimers();
+      await flushPromises();
+
+      expect(managerApi().getState().errors).toEqual({});
+      expect(managerApi().getState().valid).toEqual(true);
+      expect(managerApi().getState().invalid).toEqual(false);
+      expect(managerApi().getState().validating).toEqual(false);
+      expect(managerApi().hasValidationErrors).toEqual(false);
     });
 
-    it('should reset error state when revalidated', () => {
+    it('should reset error state when revalidated', async () => {
       jest.useFakeTimers();
       const render = jest.fn();
       const managerApi = createManagerApi({ validate: asyncValidate });
@@ -1314,35 +1316,33 @@ describe('managerApi', () => {
 
       change('foo', 'foo');
 
-      jest.advanceTimersByTime(10);
-      setImmediate(() => {
-        expect(managerApi().getState().errors).toEqual({
-          foo: 'error'
-        });
-        expect(managerApi().getState().valid).toEqual(false);
-        expect(managerApi().getState().invalid).toEqual(true);
-        expect(managerApi().getState().validating).toEqual(false);
-        expect(managerApi().hasValidationErrors).toEqual(true);
-
-        change('foo', 'foo');
-
-        expect(managerApi().getState().errors).toEqual({});
-        expect(managerApi().getState().valid).toEqual(true);
-        expect(managerApi().getState().invalid).toEqual(false);
-        expect(managerApi().getState().validating).toEqual(true);
-        expect(managerApi().hasValidationErrors).toEqual(false);
-
-        jest.advanceTimersByTime(10);
-        setImmediate(() => {
-          expect(managerApi().getState().errors).toEqual({
-            foo: 'error'
-          });
-          expect(managerApi().getState().valid).toEqual(false);
-          expect(managerApi().getState().invalid).toEqual(true);
-          expect(managerApi().getState().validating).toEqual(false);
-          expect(managerApi().hasValidationErrors).toEqual(true);
-        });
+      await jest.advanceTimersByTime(10);
+      await flushPromises();
+      expect(managerApi().getState().errors).toEqual({
+        foo: 'error',
       });
+      expect(managerApi().getState().valid).toEqual(false);
+      expect(managerApi().getState().invalid).toEqual(true);
+      expect(managerApi().getState().validating).toEqual(false);
+      expect(managerApi().hasValidationErrors).toEqual(true);
+
+      change('foo', 'foo');
+
+      expect(managerApi().getState().errors).toEqual({});
+      expect(managerApi().getState().valid).toEqual(true);
+      expect(managerApi().getState().invalid).toEqual(false);
+      expect(managerApi().getState().validating).toEqual(true);
+      expect(managerApi().hasValidationErrors).toEqual(false);
+
+      await jest.advanceTimersByTime(10);
+      await flushPromises();
+      expect(managerApi().getState().errors).toEqual({
+        foo: 'error',
+      });
+      expect(managerApi().getState().valid).toEqual(false);
+      expect(managerApi().getState().invalid).toEqual(true);
+      expect(managerApi().getState().validating).toEqual(false);
+      expect(managerApi().hasValidationErrors).toEqual(true);
     });
   });
 
@@ -1356,7 +1356,7 @@ describe('managerApi', () => {
       const getErrorState = () => {
         let { valid, invalid, validating, errors } = managerApi();
         let {
-          meta: { error: fieldError, valid: fieldValid, validating: fieldValidating, invalid: fieldInvalid }
+          meta: { error: fieldError, valid: fieldValid, validating: fieldValidating, invalid: fieldInvalid },
         } = getFieldState('foo');
 
         return { valid, invalid, validating, errors, fieldError, fieldValid, fieldValidating, fieldInvalid };
@@ -1374,17 +1374,17 @@ describe('managerApi', () => {
         fieldError: 'form-error',
         fieldValid: false,
         fieldInvalid: true,
-        fieldValidating: false
+        fieldValidating: false,
       });
     });
 
-    it('should initialy fail sync form level, but pass on second run validation', (done) => {
+    it('should initialy fail sync form level, but pass on second run validation', async () => {
       const managerApi = createManagerApi({ validate: formLevelValidate });
       const { change, registerField } = managerApi();
       const getErrorState = (api) => {
         let { valid, invalid, validating, errors, getFieldState } = api();
         let {
-          meta: { error: fieldError, valid: fieldValid, validating: fieldValidating, invalid: fieldInvalid }
+          meta: { error: fieldError, valid: fieldValid, validating: fieldValidating, invalid: fieldInvalid },
         } = getFieldState('foo');
 
         return { valid, invalid, validating, errors, fieldError, fieldValid, fieldValidating, fieldInvalid };
@@ -1403,34 +1403,32 @@ describe('managerApi', () => {
         fieldError: 'form-error',
         fieldValid: false,
         fieldInvalid: true,
-        fieldValidating: false
+        fieldValidating: false,
       });
 
       change('foo', 'ok');
 
-      setImmediate(() => {
-        expectedResult = getErrorState(managerApi);
-        expect(expectedResult).toEqual({
-          valid: true,
-          invalid: false,
-          validating: false,
-          errors: {},
-          fieldError: undefined,
-          fieldValid: true,
-          fieldInvalid: false,
-          fieldValidating: false
-        });
-        done();
+      await flushPromises();
+      expectedResult = getErrorState(managerApi);
+      expect(expectedResult).toEqual({
+        valid: true,
+        invalid: false,
+        validating: false,
+        errors: {},
+        fieldError: undefined,
+        fieldValid: true,
+        fieldInvalid: false,
+        fieldValidating: false,
       });
     });
 
-    it('should pass sync form level, but fail sync field level validation', (done) => {
+    it('should pass sync form level, but fail sync field level validation', async () => {
       const managerApi = createManagerApi({ validate: formLevelValidate });
       const { change, registerField, getFieldState } = managerApi();
       const getErrorState = () => {
         let { valid, invalid, validating, errors } = managerApi();
         let {
-          meta: { error: fieldError, valid: fieldValid, validating: fieldValidating, invalid: fieldInvalid }
+          meta: { error: fieldError, valid: fieldValid, validating: fieldValidating, invalid: fieldInvalid },
         } = getFieldState('foo');
 
         return { valid, invalid, validating, errors, fieldError, fieldValid, fieldValidating, fieldInvalid };
@@ -1439,29 +1437,27 @@ describe('managerApi', () => {
       registerField({ name: 'foo', validate: fieldLevelValidate, render: jest.fn() });
 
       change('foo', 'bar');
-      setImmediate(() => {
-        let expectedResult = getErrorState();
-        expect(expectedResult).toEqual({
-          valid: false,
-          invalid: true,
-          validating: false,
-          errors: { foo: 'field-error' },
-          fieldError: 'field-error',
-          fieldValid: false,
-          fieldInvalid: true,
-          fieldValidating: false
-        });
-        done();
+      await flushPromises();
+      let expectedResult = getErrorState();
+      expect(expectedResult).toEqual({
+        valid: false,
+        invalid: true,
+        validating: false,
+        errors: { foo: 'field-error' },
+        fieldError: 'field-error',
+        fieldValid: false,
+        fieldInvalid: true,
+        fieldValidating: false,
       });
     });
 
-    it('should fail first sync field level validation, but pass on second round', (done) => {
+    it('should fail first sync field level validation, but pass on second round', async () => {
       const managerApi = createManagerApi({ validate: formLevelValidate });
       const { change, registerField, getFieldState } = managerApi();
       const getErrorState = () => {
         let { valid, invalid, validating, errors } = managerApi();
         let {
-          meta: { error: fieldError, valid: fieldValid, validating: fieldValidating, invalid: fieldInvalid }
+          meta: { error: fieldError, valid: fieldValid, validating: fieldValidating, invalid: fieldInvalid },
         } = getFieldState('foo');
 
         return { valid, invalid, validating, errors, fieldError, fieldValid, fieldValidating, fieldInvalid };
@@ -1470,34 +1466,31 @@ describe('managerApi', () => {
       registerField({ name: 'foo', validate: fieldLevelValidate, render: jest.fn() });
 
       change('foo', 'bar');
-      setImmediate(() => {
-        let expectedResult = getErrorState();
-        expect(expectedResult).toEqual({
-          valid: false,
-          invalid: true,
-          validating: false,
-          errors: { foo: 'field-error' },
-          fieldError: 'field-error',
-          fieldValid: false,
-          fieldInvalid: true,
-          fieldValidating: false
-        });
+      await flushPromises();
+      let expectedResult = getErrorState();
+      expect(expectedResult).toEqual({
+        valid: false,
+        invalid: true,
+        validating: false,
+        errors: { foo: 'field-error' },
+        fieldError: 'field-error',
+        fieldValid: false,
+        fieldInvalid: true,
+        fieldValidating: false,
+      });
 
-        change('foo', 'ok');
-        setImmediate(() => {
-          expectedResult = getErrorState();
-          expect(expectedResult).toEqual({
-            valid: true,
-            invalid: false,
-            validating: false,
-            errors: {},
-            fieldError: undefined,
-            fieldValid: true,
-            fieldInvalid: false,
-            fieldValidating: false
-          });
-          done();
-        });
+      change('foo', 'ok');
+      await flushPromises();
+      expectedResult = getErrorState();
+      expect(expectedResult).toEqual({
+        valid: true,
+        invalid: false,
+        validating: false,
+        errors: {},
+        fieldError: undefined,
+        fieldValid: true,
+        fieldInvalid: false,
+        fieldValidating: false,
       });
     });
   });
@@ -1512,7 +1505,7 @@ describe('managerApi', () => {
       .fn()
       .mockImplementation((value) => new Promise((res, rej) => setTimeout(() => (value === 'two' ? rej('error-two') : res()), 200)));
 
-    it('should pass first sync validation but fail second sync validation', (done) => {
+    it('should pass first sync validation but fail second sync validation', async () => {
       const render = jest.fn();
 
       const managerApi = createManagerApi({});
@@ -1520,13 +1513,11 @@ describe('managerApi', () => {
       managerApi().registerField({ name: 'field', validate: syncValidate2, render, internalId: 2 });
 
       managerApi().change('field', 'two');
-      setImmediate(() => {
-        expect(managerApi().errors).toEqual({ field: 'error-two' });
-        done();
-      });
+      await flushPromises();
+      expect(managerApi().errors).toEqual({ field: 'error-two' });
     });
 
-    it('should fail first sync validation but pass second sync validation', (done) => {
+    it('should fail first sync validation but pass second sync validation', async () => {
       const render = jest.fn();
 
       const managerApi = createManagerApi({});
@@ -1535,10 +1526,8 @@ describe('managerApi', () => {
 
       managerApi().change('field', 'one');
 
-      setImmediate(() => {
-        expect(managerApi().errors).toEqual({ field: 'error-one' });
-        done();
-      });
+      await flushPromises();
+      expect(managerApi().errors).toEqual({ field: 'error-one' });
     });
 
     it('should pass both sync validation', () => {
@@ -1553,25 +1542,26 @@ describe('managerApi', () => {
       expect(managerApi().errors).toEqual({});
     });
 
-    it('should pass first async validation but fail second async validation', (done) => {
+    it('should pass first async validation but fail second async validation', async () => {
       jest.useFakeTimers();
       const render = jest.fn();
 
       const managerApi = createManagerApi({});
       managerApi().registerField({ name: 'field', validate: asyncValidate1, render, internalId: 1 });
       managerApi().registerField({ name: 'field', validate: asyncValidate2, render, internalId: 2 });
-      jest.advanceTimersByTime(200);
-
+      await jest.advanceTimersByTime(200);
+      await flushPromises();
+      await flushPromises();
       managerApi().change('field', 'two');
-      jest.advanceTimersByTime(200);
-
-      setImmediate(() => {
-        expect(managerApi().errors).toEqual({ field: 'error-two' });
-        done();
-      });
+      await jest.runAllTimers();
+      await flushPromises();
+      await flushPromises();
+      expect(managerApi().errors).toEqual({ field: 'error-two' });
     });
 
-    it('should pass both async validation', (done) => {
+    it('should pass both async validation', async () => {
+      jest.useFakeTimers();
+
       const render = jest.fn();
 
       const managerApi = createManagerApi({});
@@ -1581,51 +1571,46 @@ describe('managerApi', () => {
 
       managerApi().change('field', 'ok');
       jest.advanceTimersByTime(200);
+      await flushPromises();
 
-      setImmediate(() => {
-        expect(managerApi().errors).toEqual({});
-        done();
-      });
+      expect(managerApi().errors).toEqual({});
     });
 
-    it('should pass first sync validation but fail second async validation', (done) => {
+    it('should pass first sync validation but fail second async validation', async () => {
       jest.useFakeTimers();
       const render = jest.fn();
 
       const managerApi = createManagerApi({});
       managerApi().registerField({ name: 'field', validate: syncValidate1, render, internalId: 1 });
       managerApi().registerField({ name: 'field', validate: asyncValidate2, render, internalId: 2 });
-      jest.advanceTimersByTime(200);
+      await jest.advanceTimersByTime(200);
 
       managerApi().change('field', 'two');
-      jest.advanceTimersByTime(200);
+      await jest.advanceTimersByTime(200);
 
-      setImmediate(() => {
-        expect(managerApi().errors).toEqual({ field: 'error-two' });
-        done();
-      });
+      await flushPromises();
+      await flushPromises();
+      expect(managerApi().errors).toEqual({ field: 'error-two' });
     });
 
-    it('should fail sync validation but pass second async validation', (done) => {
+    it('should fail sync validation but pass second async validation', async () => {
       jest.useFakeTimers();
       const render = jest.fn();
 
       const managerApi = createManagerApi({});
       managerApi().registerField({ name: 'field', validate: syncValidate1, render, internalId: 1 });
       managerApi().registerField({ name: 'field', validate: asyncValidate2, render, internalId: 2 });
-      jest.advanceTimersByTime(200);
-      setImmediate(() => {
-        managerApi().change('field', 'one');
-        jest.advanceTimersByTime(200);
+      await jest.advanceTimersByTime(200);
+      await flushPromises();
+      managerApi().change('field', 'one');
+      await jest.advanceTimersByTime(200);
 
-        setImmediate(() => {
-          expect(managerApi().errors).toEqual({ field: 'error-one' });
-          done();
-        });
-      });
+      await flushPromises();
+      await flushPromises();
+      expect(managerApi().errors).toEqual({ field: 'error-one' });
     });
 
-    it('should set form.validating when fields are validating', async (done) => {
+    it('should set form.validating when fields are validating', async () => {
       expect.assertions(8);
       jest.useFakeTimers();
       const render = jest.fn();
@@ -1637,28 +1622,25 @@ describe('managerApi', () => {
       expect(managerApi().getFieldState('field').validating).toEqual(true);
       expect(managerApi().getState().validating).toEqual(true);
 
-      jest.runAllTimers();
+      await jest.runAllTimers();
 
-      setImmediate(() => {
-        expect(managerApi().getFieldState('field').validating).toEqual(false);
-        expect(managerApi().getState().validating).toEqual(false);
+      await flushPromises();
+      expect(managerApi().getFieldState('field').validating).toEqual(false);
+      expect(managerApi().getState().validating).toEqual(false);
 
-        managerApi().change('field', 'ok');
+      managerApi().change('field', 'ok');
 
-        expect(managerApi().getFieldState('field').validating).toEqual(true);
-        expect(managerApi().getState().validating).toEqual(true);
+      expect(managerApi().getFieldState('field').validating).toEqual(true);
+      expect(managerApi().getState().validating).toEqual(true);
 
-        jest.runAllTimers();
+      await jest.runAllTimers();
 
-        setImmediate(() => {
-          expect(managerApi().getFieldState('field').validating).toEqual(false);
-          expect(managerApi().getState().validating).toEqual(false);
-          done();
-        });
-      });
+      await flushPromises();
+      expect(managerApi().getFieldState('field').validating).toEqual(false);
+      expect(managerApi().getState().validating).toEqual(false);
     });
 
-    it('should reset field.error when validating', async (done) => {
+    it('should reset field.error when validating', async () => {
       expect.assertions(8);
       jest.useFakeTimers();
       const render = jest.fn();
@@ -1666,27 +1648,26 @@ describe('managerApi', () => {
       const managerApi = createManagerApi({});
       managerApi().registerField({ name: 'field', initialValue: 'one', validate: asyncValidate1, render, internalId: 1 });
 
-      jest.runAllTimers();
+      await jest.runAllTimers();
+      await flushPromises();
+      await flushPromises();
 
-      setImmediate(() => {
-        expect(managerApi().getFieldState('field').error).toEqual('error-one');
-        expect(managerApi().getFieldState('field').valid).toEqual(false);
-        expect(managerApi().getFieldState('field').invalid).toEqual(true);
+      expect(managerApi().getFieldState('field').error).toEqual('error-one');
+      expect(managerApi().getFieldState('field').valid).toEqual(false);
+      expect(managerApi().getFieldState('field').invalid).toEqual(true);
 
-        managerApi().change('field', 'ok');
+      managerApi().change('field', 'ok');
 
-        expect(managerApi().getFieldState('field').error).toEqual(undefined);
-        expect(managerApi().getFieldState('field').valid).toEqual(true);
-        expect(managerApi().getFieldState('field').invalid).toEqual(false);
+      expect(managerApi().getFieldState('field').error).toEqual(undefined);
+      expect(managerApi().getFieldState('field').valid).toEqual(true);
+      expect(managerApi().getFieldState('field').invalid).toEqual(false);
 
-        jest.runAllTimers();
+      await jest.runAllTimers();
+      await flushPromises();
+      await flushPromises();
 
-        setImmediate(() => {
-          expect(managerApi().getFieldState('field').validating).toEqual(false);
-          expect(managerApi().getState().validating).toEqual(false);
-          done();
-        });
-      });
+      expect(managerApi().getFieldState('field').validating).toEqual(false);
+      expect(managerApi().getState().validating).toEqual(false);
     });
   });
 
@@ -1705,7 +1686,7 @@ describe('managerApi', () => {
       expect(managerApi().pristine).toEqual(false);
       expect(managerApi().values).toEqual({
         foo: 'foo',
-        bar: 'baz'
+        bar: 'baz',
       });
       expect(managerApi().initialValues).toEqual({});
 
@@ -1717,11 +1698,11 @@ describe('managerApi', () => {
       expect(managerApi().pristine).toEqual(true);
       expect(managerApi().values).toEqual({
         foo: { bar: 'foobar' },
-        bar: '123'
+        bar: '123',
       });
       expect(managerApi().initialValues).toEqual({
         foo: { bar: 'foobar' },
-        bar: '123'
+        bar: '123',
       });
       expect(managerApi().fieldListeners['bar'].state.meta.pristine).toEqual(true);
       expect(managerApi().fieldListeners['bar'].state.meta.dirty).toEqual(false);
@@ -1744,7 +1725,7 @@ describe('managerApi', () => {
         expect(managerApi().values).toEqual({
           foo: { bar: 'foo' },
           bar: 'baz',
-          initial: 'initial value'
+          initial: 'initial value',
         });
         expect(managerApi().initialValues).toEqual({});
 
@@ -1754,11 +1735,11 @@ describe('managerApi', () => {
         expect(managerApi().values).toEqual({
           foo: { bar: 'foo' },
           bar: 'baz',
-          initial: 'some_value'
+          initial: 'some_value',
         });
         expect(managerApi().initialValues).toEqual({
           initial: 'some_value',
-          foo: { bar: 'foobar' }
+          foo: { bar: 'foobar' },
         });
       });
     });
@@ -1849,11 +1830,11 @@ describe('managerApi', () => {
       managerApi().registerField({ name: 'field', render: jest.fn(), defaultValue: 'john' });
 
       expect(managerApi().values).toEqual({
-        field: 'john'
+        field: 'john',
       });
       expect(managerApi().initialValues).toEqual({});
       expect(managerApi().dirtyFields).toEqual({
-        field: true
+        field: true,
       });
       expect(managerApi().pristine).toEqual(false);
       expect(managerApi().dirty).toEqual(true);
@@ -1870,7 +1851,7 @@ describe('managerApi', () => {
       managerApi().registerField({ name: 'field', render: jest.fn(), defaultValue: 'john' });
 
       expect(managerApi().values).toEqual({
-        field: 'initial'
+        field: 'initial',
       });
       expect(managerApi().initialValues).toEqual({ field: 'initial' });
       expect(managerApi().dirtyFields).toEqual({});
@@ -1889,7 +1870,7 @@ describe('managerApi', () => {
       managerApi().registerField({ name: 'field', render: jest.fn(), defaultValue: 'john', initialValue: 'initial' });
 
       expect(managerApi().values).toEqual({
-        field: 'initial'
+        field: 'initial',
       });
       expect(managerApi().initialValues).toEqual({});
       expect(managerApi().dirtyFields).toEqual({});
@@ -1912,7 +1893,7 @@ describe('managerApi', () => {
 
       expect(managerApi().getFieldState('field').meta.data).toEqual({
         a: 'abc',
-        b: { c: 'y', d: 'zz' }
+        b: { c: 'y', d: 'zz' },
       });
     });
   });
@@ -2183,7 +2164,7 @@ describe('managerApi', () => {
         initialValue: 'warning',
         validate: (value) => (value === 'warning' ? { type: 'warning', error: someError } : 'error'),
         render,
-        internalId: 1
+        internalId: 1,
       });
 
       expect(managerApi().getFieldState('field').meta.warning).toEqual(someError);
@@ -2206,7 +2187,7 @@ describe('managerApi', () => {
       expect(managerApi().getFieldState('field').meta.invalid).toEqual(false);
     });
 
-    it('should save type: warning as warning - async', (done) => {
+    it('should save type: warning as warning - async', async () => {
       expect.assertions(2);
 
       const asyncValidate = jest.fn().mockImplementation(() => Promise.reject({ type: 'warning', error: someError }));
@@ -2214,14 +2195,14 @@ describe('managerApi', () => {
       const managerApi = createManagerApi({});
       managerApi().registerField({ name: 'field', validate: asyncValidate, render, internalId: 1 });
 
-      setImmediate(() => {
-        expect(managerApi().getFieldState('field').meta.warning).toEqual(someError);
-        expect(managerApi().getFieldState('field').meta.error).toEqual(undefined);
-        done();
-      });
+      await flushPromises();
+      await flushPromises();
+
+      expect(managerApi().getFieldState('field').meta.warning).toEqual(someError);
+      expect(managerApi().getFieldState('field').meta.error).toEqual(undefined);
     });
 
-    it('warning should rewrite error - async', (done) => {
+    it('warning should rewrite error - async', async () => {
       expect.assertions(18);
 
       const asyncValidate = jest
@@ -2233,38 +2214,40 @@ describe('managerApi', () => {
 
       expect(managerApi().getFieldState('field').meta.validating).toEqual(true);
 
-      setImmediate(() => {
-        expect(managerApi().getFieldState('field').meta.warning).toEqual(someError);
-        expect(managerApi().getFieldState('field').meta.error).toEqual(undefined);
-        expect(managerApi().getFieldState('field').meta.valid).toEqual(true);
-        expect(managerApi().getFieldState('field').meta.invalid).toEqual(false);
-        expect(managerApi().getFieldState('field').meta.validating).toEqual(false);
+      await flushPromises();
+      await flushPromises();
 
-        managerApi().change('field', 'error');
+      expect(managerApi().getFieldState('field').meta.warning).toEqual(someError);
+      expect(managerApi().getFieldState('field').meta.error).toEqual(undefined);
+      expect(managerApi().getFieldState('field').meta.valid).toEqual(true);
+      expect(managerApi().getFieldState('field').meta.invalid).toEqual(false);
+      expect(managerApi().getFieldState('field').meta.validating).toEqual(false);
 
-        expect(managerApi().getFieldState('field').meta.validating).toEqual(true);
+      managerApi().change('field', 'error');
 
-        setImmediate(() => {
-          expect(managerApi().getFieldState('field').meta.warning).toEqual(undefined);
-          expect(managerApi().getFieldState('field').meta.error).toEqual('error');
-          expect(managerApi().getFieldState('field').meta.valid).toEqual(false);
-          expect(managerApi().getFieldState('field').meta.invalid).toEqual(true);
-          expect(managerApi().getFieldState('field').meta.validating).toEqual(false);
+      expect(managerApi().getFieldState('field').meta.validating).toEqual(true);
 
-          managerApi().change('field', 'warning');
+      await flushPromises();
+      await flushPromises();
 
-          expect(managerApi().getFieldState('field').meta.validating).toEqual(true);
+      expect(managerApi().getFieldState('field').meta.warning).toEqual(undefined);
+      expect(managerApi().getFieldState('field').meta.error).toEqual('error');
+      expect(managerApi().getFieldState('field').meta.valid).toEqual(false);
+      expect(managerApi().getFieldState('field').meta.invalid).toEqual(true);
+      expect(managerApi().getFieldState('field').meta.validating).toEqual(false);
 
-          setImmediate(() => {
-            expect(managerApi().getFieldState('field').meta.warning).toEqual(someError);
-            expect(managerApi().getFieldState('field').meta.error).toEqual(undefined);
-            expect(managerApi().getFieldState('field').meta.valid).toEqual(true);
-            expect(managerApi().getFieldState('field').meta.invalid).toEqual(false);
-            expect(managerApi().getFieldState('field').meta.validating).toEqual(false);
-            done();
-          });
-        });
-      });
+      managerApi().change('field', 'warning');
+
+      expect(managerApi().getFieldState('field').meta.validating).toEqual(true);
+
+      await flushPromises();
+      await flushPromises();
+
+      expect(managerApi().getFieldState('field').meta.warning).toEqual(someError);
+      expect(managerApi().getFieldState('field').meta.error).toEqual(undefined);
+      expect(managerApi().getFieldState('field').meta.valid).toEqual(true);
+      expect(managerApi().getFieldState('field').meta.invalid).toEqual(false);
+      expect(managerApi().getFieldState('field').meta.validating).toEqual(false);
     });
   });
 
@@ -2339,7 +2322,7 @@ describe('managerApi', () => {
     expect(managerApi().getState().dirty).toEqual(false);
   });
 
-  describe('fileInput', () => {
+  it('fileInput', () => {
     const managerApi = createManagerApi({ onSubmit: jest.fn() });
 
     expect(managerApi().fileInputs).toEqual([]);
