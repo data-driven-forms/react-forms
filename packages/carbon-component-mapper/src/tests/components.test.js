@@ -202,7 +202,9 @@ describe('component tests', () => {
         });
 
         it('renders with submitError', () => {
-          const wrapper = mount(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
+          const wrapper = mount(
+            <RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} subscription={{ submitErrors: true }} />
+          );
           wrapper.find('form').simulate('submit');
 
           if (wrapper.find('#field-name-error-msg').length) {
