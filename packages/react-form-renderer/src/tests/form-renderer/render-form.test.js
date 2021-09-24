@@ -33,8 +33,8 @@ describe('renderForm function', () => {
           getState: () => ({ dirty: true }),
           internalRegisterField: jest.fn(),
           internalUnRegisterField: jest.fn(),
-          ...props.formOptions
-        }
+          ...props.formOptions,
+        },
       }}
     >
       <Form onSubmit={jest.fn()}>{() => children}</Form>
@@ -50,13 +50,13 @@ describe('renderForm function', () => {
     const formFields = [
       {
         component: componentTypes.TEXT_FIELD,
-        name: 'foo'
-      }
+        name: 'foo',
+      },
     ];
     const wrapper = mount(
       <ContextWrapper
         componentMapper={{
-          [componentTypes.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div {...props}>TextField</div>
+          [componentTypes.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <div {...props}>TextField</div>,
         }}
       >
         {renderForm(formFields)}
@@ -70,14 +70,14 @@ describe('renderForm function', () => {
       [
         {
           component: componentTypes.TEXT_FIELD,
-          name: 'foo'
-        }
-      ]
+          name: 'foo',
+        },
+      ],
     ];
     const wrapper = mount(
       <ContextWrapper
         componentMapper={{
-          [componentTypes.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <h1 {...props}>TextField</h1>
+          [componentTypes.TEXT_FIELD]: ({ FieldProvider, dataType, ...props }) => <h1 {...props}>TextField</h1>,
         }}
       >
         {renderForm(formFields)}
@@ -93,8 +93,8 @@ describe('renderForm function', () => {
       {
         component: componentTypes.TEXT_FIELD,
         name: 'foo',
-        dataType: 'number'
-      }
+        dataType: 'number',
+      },
     ];
     const wrapper = mount(
       <FormRenderer
@@ -102,7 +102,7 @@ describe('renderForm function', () => {
         schema={{ fields: formFields }}
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
-          [componentTypes.TEXT_FIELD]: TextField
+          [componentTypes.TEXT_FIELD]: TextField,
         }}
       />
     );
@@ -121,10 +121,10 @@ describe('renderForm function', () => {
         validate: [
           {
             type: validatorTypes.REQUIRED,
-            message: 'Bar'
-          }
-        ]
-      }
+            message: 'Bar',
+          },
+        ],
+      },
     ];
     const wrapper = mount(
       <FormRenderer
@@ -132,7 +132,7 @@ describe('renderForm function', () => {
         schema={{ fields: formFields }}
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
-          [componentTypes.TEXT_FIELD]: TextField
+          [componentTypes.TEXT_FIELD]: TextField,
         }}
       />
     );
@@ -149,8 +149,8 @@ describe('renderForm function', () => {
         component: componentTypes.TEXT_FIELD,
         name: 'foo',
         dataType: 'string',
-        validate: [cannotBeOdd]
-      }
+        validate: [cannotBeOdd],
+      },
     ];
     const wrapper = mount(
       <FormRenderer
@@ -158,7 +158,7 @@ describe('renderForm function', () => {
         schema={{ fields: formFields }}
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
-          [componentTypes.TEXT_FIELD]: TextField
+          [componentTypes.TEXT_FIELD]: TextField,
         }}
       />
     );
@@ -175,8 +175,8 @@ describe('renderForm function', () => {
         component: componentTypes.TEXT_FIELD,
         name: 'foo',
         dataType: 'string',
-        validate: [cannotBeEven]
-      }
+        validate: [cannotBeEven],
+      },
     ];
     const wrapper = mount(
       <FormRenderer
@@ -184,7 +184,7 @@ describe('renderForm function', () => {
         schema={{ fields: formFields }}
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
-          [componentTypes.TEXT_FIELD]: TextField
+          [componentTypes.TEXT_FIELD]: TextField,
         }}
       />
     );
@@ -196,7 +196,7 @@ describe('renderForm function', () => {
   it('should use custom validatoMapper and default validatorMapper', () => {
     const customType = 'custom';
     const customValidatorMapper = {
-      [customType]: () => (value) => (value > 5 ? undefined : 'Error')
+      [customType]: () => (value) => value > 5 ? undefined : 'Error',
     };
 
     const formFields = [
@@ -205,13 +205,13 @@ describe('renderForm function', () => {
         name: 'foo',
         validate: [
           {
-            type: validatorTypes.REQUIRED
+            type: validatorTypes.REQUIRED,
           },
           {
-            type: customType
-          }
-        ]
-      }
+            type: customType,
+          },
+        ],
+      },
     ];
 
     const onSubmit = jest.fn();
@@ -230,7 +230,7 @@ describe('renderForm function', () => {
       <FormRenderer
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
-          'custom-component': TextField
+          'custom-component': TextField,
         }}
         validatorMapper={customValidatorMapper}
         schema={{ fields: formFields }}
@@ -263,13 +263,13 @@ describe('renderForm function', () => {
     const formFields = [
       {
         component: 'custom-component',
-        name: 'foo'
-      }
+        name: 'foo',
+      },
     ];
     const wrapper = mount(
       <ContextWrapper
         componentMapper={{
-          'custom-component': CustomComponent
+          'custom-component': CustomComponent,
         }}
       >
         {renderForm(formFields)}
@@ -283,14 +283,14 @@ describe('renderForm function', () => {
     const formFields = [
       {
         component: 'custom-component',
-        name: 'foo'
-      }
+        name: 'foo',
+      },
     ];
 
     const wrapper = mount(
       <ContextWrapper
         componentMapper={{
-          'custom-component': CustomComponent
+          'custom-component': CustomComponent,
         }}
       >
         {renderForm(formFields)}
@@ -305,21 +305,21 @@ describe('renderForm function', () => {
       const formFields = [
         {
           component: 'custom-component',
-          name: 'bar'
+          name: 'bar',
         },
         {
           component: 'custom-component',
           name: 'foo',
           condition: {
             when: 'bar',
-            is: 'fuzz'
-          }
-        }
+            is: 'fuzz',
+          },
+        },
       ];
       const wrapper = mount(
         <ContextWrapper
           componentMapper={{
-            'custom-component': CustomComponent
+            'custom-component': CustomComponent,
           }}
         >
           {renderForm(formFields)}
@@ -336,7 +336,7 @@ describe('renderForm function', () => {
       const formFields = [
         {
           component: 'custom-component',
-          name: 'bar'
+          name: 'bar',
         },
         {
           component: 'custom-component',
@@ -344,15 +344,15 @@ describe('renderForm function', () => {
           condition: {
             when: 'bar',
             is: 'fuzz',
-            notMatch: true
-          }
-        }
+            notMatch: true,
+          },
+        },
       ];
 
       const wrapper = mount(
         <ContextWrapper
           componentMapper={{
-            'custom-component': CustomComponent
+            'custom-component': CustomComponent,
           }}
         >
           {renderForm(formFields)}
@@ -373,22 +373,22 @@ describe('renderForm function', () => {
       const formFields = [
         {
           component: 'custom-component',
-          name: 'bar'
+          name: 'bar',
         },
         {
           component: 'custom-component',
           name: 'foo',
           condition: {
             when: 'bar',
-            isNotEmpty: true
-          }
-        }
+            isNotEmpty: true,
+          },
+        },
       ];
 
       const wrapper = mount(
         <ContextWrapper
           componentMapper={{
-            'custom-component': CustomComponent
+            'custom-component': CustomComponent,
           }}
         >
           {renderForm(formFields)}
@@ -405,22 +405,22 @@ describe('renderForm function', () => {
       const formFields = [
         {
           component: 'custom-component',
-          name: 'bar'
+          name: 'bar',
         },
         {
           component: 'custom-component',
           name: 'foo',
           condition: {
             when: 'bar',
-            isEmpty: true
-          }
-        }
+            isEmpty: true,
+          },
+        },
       ];
 
       const wrapper = mount(
         <ContextWrapper
           componentMapper={{
-            'custom-component': CustomComponent
+            'custom-component': CustomComponent,
           }}
         >
           {renderForm(formFields)}
@@ -441,21 +441,21 @@ describe('renderForm function', () => {
       const formFields = [
         {
           component: 'custom-component',
-          name: 'bar'
+          name: 'bar',
         },
         {
           component: 'custom-component',
           name: 'foo',
           condition: {
             when: 'bar',
-            pattern: /fuzz/
-          }
-        }
+            pattern: /fuzz/,
+          },
+        },
       ];
       const wrapper = mount(
         <ContextWrapper
           componentMapper={{
-            'custom-component': CustomComponent
+            'custom-component': CustomComponent,
           }}
         >
           {renderForm(formFields)}
@@ -472,21 +472,21 @@ describe('renderForm function', () => {
       const formFields = [
         {
           component: 'custom-component',
-          name: 'bar'
+          name: 'bar',
         },
         {
           component: 'custom-component',
           name: 'foo',
           condition: {
             when: 'bar',
-            pattern: 'fuzz'
-          }
-        }
+            pattern: 'fuzz',
+          },
+        },
       ];
       const wrapper = mount(
         <ContextWrapper
           componentMapper={{
-            'custom-component': CustomComponent
+            'custom-component': CustomComponent,
           }}
         >
           {renderForm(formFields)}
@@ -503,7 +503,7 @@ describe('renderForm function', () => {
       const formFields = [
         {
           component: 'custom-component',
-          name: 'bar'
+          name: 'bar',
         },
         {
           component: 'custom-component',
@@ -511,14 +511,14 @@ describe('renderForm function', () => {
           condition: {
             when: 'bar',
             pattern: 'fuzz',
-            flags: 'i'
-          }
-        }
+            flags: 'i',
+          },
+        },
       ];
       const wrapper = mount(
         <ContextWrapper
           componentMapper={{
-            'custom-component': CustomComponent
+            'custom-component': CustomComponent,
           }}
         >
           {renderForm(formFields)}
@@ -534,7 +534,7 @@ describe('renderForm function', () => {
       const formFields = [
         {
           component: 'custom-component',
-          name: 'bar'
+          name: 'bar',
         },
         {
           component: 'custom-component',
@@ -542,14 +542,14 @@ describe('renderForm function', () => {
           condition: {
             when: 'bar',
             pattern: /fuzz/,
-            notMatch: true
-          }
-        }
+            notMatch: true,
+          },
+        },
       ];
       const wrapper = mount(
         <ContextWrapper
           componentMapper={{
-            'custom-component': CustomComponent
+            'custom-component': CustomComponent,
           }}
         >
           {renderForm(formFields)}
@@ -570,25 +570,25 @@ describe('renderForm function', () => {
       const formFields = [
         {
           component: 'custom-component',
-          name: 'a'
+          name: 'a',
         },
         {
           component: 'custom-component',
-          name: 'b'
+          name: 'b',
         },
         {
           component: 'custom-component',
           name: 'foo',
           condition: {
             when: ['a', 'b'],
-            is: 'x'
-          }
-        }
+            is: 'x',
+          },
+        },
       ];
       const wrapper = mount(
         <ContextWrapper
           componentMapper={{
-            'custom-component': CustomComponent
+            'custom-component': CustomComponent,
           }}
         >
           {renderForm(formFields)}
@@ -611,11 +611,11 @@ describe('renderForm function', () => {
       const formFields = [
         {
           component: 'custom-component',
-          name: 'a'
+          name: 'a',
         },
         {
           component: 'custom-component',
-          name: 'c'
+          name: 'c',
         },
         {
           component: 'custom-component',
@@ -623,19 +623,19 @@ describe('renderForm function', () => {
           condition: [
             {
               when: ['a', 'b'],
-              is: 'x'
+              is: 'x',
             },
             {
               when: 'c',
-              pattern: /fuzz/
-            }
-          ]
-        }
+              pattern: /fuzz/,
+            },
+          ],
+        },
       ];
       const wrapper = mount(
         <ContextWrapper
           componentMapper={{
-            'custom-component': CustomComponent
+            'custom-component': CustomComponent,
           }}
         >
           {renderForm(formFields)}
@@ -661,22 +661,22 @@ describe('renderForm function', () => {
       const formFields = [
         {
           component: 'custom-component',
-          name: 'foo'
+          name: 'foo',
         },
         {
           component: 'custom-component',
           name: 'foo.bar',
           condition: {
             when: 'foo',
-            is: 'fuzz'
-          }
-        }
+            is: 'fuzz',
+          },
+        },
       ];
 
       const wrapper = mount(
         <ContextWrapper
           componentMapper={{
-            'custom-component': CustomComponent
+            'custom-component': CustomComponent,
           }}
         >
           {renderForm(formFields)}
@@ -695,20 +695,20 @@ describe('renderForm function', () => {
       const formFields = [
         {
           component: 'custom-component',
-          name: 'nested.a'
+          name: 'nested.a',
         },
         {
           component: 'custom-component',
-          name: 'b'
+          name: 'b',
         },
         {
           component: 'custom-component',
           name: 'foo',
           condition: {
             when: ['nested.a', 'b'],
-            is: 'x'
-          }
-        }
+            is: 'x',
+          },
+        },
       ];
       const wrapper = mount(
         <FormRenderer
@@ -716,7 +716,7 @@ describe('renderForm function', () => {
           schema={{ fields: formFields }}
           onSubmit={jest.fn()}
           componentMapper={{
-            'custom-component': CustomComponent
+            'custom-component': CustomComponent,
           }}
         />
       );
@@ -738,7 +738,7 @@ describe('renderForm function', () => {
       fields: [
         {
           component,
-          name: 'foo'
+          name: 'foo',
         },
         {
           component,
@@ -748,8 +748,8 @@ describe('renderForm function', () => {
           clearOnUnmount,
           condition: {
             when: 'foo',
-            is: 'bar'
-          }
+            is: 'bar',
+          },
         },
         {
           component,
@@ -759,10 +759,10 @@ describe('renderForm function', () => {
           clearOnUnmount,
           condition: {
             when: 'foo',
-            is: 'barrr'
-          }
-        }
-      ]
+            is: 'barrr',
+          },
+        },
+      ],
     });
 
     const TextField = (props) => {
@@ -786,7 +786,7 @@ describe('renderForm function', () => {
         <FormRenderer
           FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
-            'custom-component': TextField
+            'custom-component': TextField,
           }}
           schema={formFields(true)}
           onSubmit={(values) => onSubmit(values)}
@@ -820,7 +820,7 @@ describe('renderForm function', () => {
         <FormRenderer
           FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
-            'custom-component': TextField
+            'custom-component': TextField,
           }}
           schema={formFields()}
           onSubmit={(values) => onSubmit(values)}
@@ -857,7 +857,7 @@ describe('renderForm function', () => {
         <FormRenderer
           FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
-            'custom-component': TextField
+            'custom-component': TextField,
           }}
           schema={formFields()}
           onSubmit={(values) => onSubmit(values)}
@@ -893,7 +893,7 @@ describe('renderForm function', () => {
         <FormRenderer
           FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
-            'custom-component': TextField
+            'custom-component': TextField,
           }}
           schema={formFields(false)}
           onSubmit={(values) => onSubmit(values)}
@@ -930,7 +930,7 @@ describe('renderForm function', () => {
         <FormRenderer
           FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
-            [componentTypes.TEXT_FIELD]: TextField
+            [componentTypes.TEXT_FIELD]: TextField,
           }}
           schema={formFields(undefined, componentTypes.TEXT_FIELD)}
           onSubmit={(values) => onSubmit(values)}
@@ -965,7 +965,7 @@ describe('renderForm function', () => {
         <FormRenderer
           FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
-            [componentTypes.TEXT_FIELD]: TextField
+            [componentTypes.TEXT_FIELD]: TextField,
           }}
           schema={formFields(undefined, componentTypes.TEXT_FIELD)}
           onSubmit={(values) => onSubmit(values)}
@@ -1000,7 +1000,7 @@ describe('renderForm function', () => {
         fields: [
           {
             component: componentTypes.TEXT_FIELD,
-            name: 'foo'
+            name: 'foo',
           },
           {
             component: componentTypes.TEXT_FIELD,
@@ -1010,10 +1010,10 @@ describe('renderForm function', () => {
             clearOnUnmount: true,
             condition: {
               when: 'foo',
-              is: 'show'
-            }
-          }
-        ]
+              is: 'show',
+            },
+          },
+        ],
       };
 
       const onSubmit = jest.fn();
@@ -1022,7 +1022,7 @@ describe('renderForm function', () => {
         <FormRenderer
           FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
-            [componentTypes.TEXT_FIELD]: TextField
+            [componentTypes.TEXT_FIELD]: TextField,
           }}
           schema={schema}
           onSubmit={(values) => onSubmit(values)}
@@ -1062,7 +1062,7 @@ describe('renderForm function', () => {
         fields: [
           {
             component: componentTypes.TEXT_FIELD,
-            name: 'foo'
+            name: 'foo',
           },
           {
             component: componentTypes.TEXT_FIELD,
@@ -1071,10 +1071,10 @@ describe('renderForm function', () => {
             clearOnUnmount: true,
             condition: {
               when: 'foo',
-              is: 'show'
-            }
-          }
-        ]
+              is: 'show',
+            },
+          },
+        ],
       };
 
       const onSubmit = jest.fn();
@@ -1083,7 +1083,7 @@ describe('renderForm function', () => {
         <FormRenderer
           FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
-            [componentTypes.TEXT_FIELD]: TextField
+            [componentTypes.TEXT_FIELD]: TextField,
           }}
           schema={schema}
           onSubmit={(values) => onSubmit(values)}
@@ -1135,7 +1135,7 @@ describe('renderForm function', () => {
       fields: [
         {
           component: componentTypes.TEXT_FIELD,
-          name: SHOWER_FIELD
+          name: SHOWER_FIELD,
         },
         {
           component: componentTypes.TEXT_FIELD,
@@ -1144,17 +1144,14 @@ describe('renderForm function', () => {
           ...(initialValue ? { initialValue } : {}),
           condition: {
             when: SHOWER_FIELD,
-            is: SHOW_VALUE
-          }
-        }
-      ]
+            is: SHOW_VALUE,
+          },
+        },
+      ],
     });
 
     const updateInput = (wrapper, position, value) => {
-      wrapper
-        .find('input')
-        .at(position)
-        .simulate('change', { target: { value } });
+      wrapper.find('input').at(position).simulate('change', { target: { value } });
       wrapper.update();
     };
 
@@ -1170,12 +1167,12 @@ describe('renderForm function', () => {
         <FormRenderer
           FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
-            [componentTypes.TEXT_FIELD]: TextField
+            [componentTypes.TEXT_FIELD]: TextField,
           }}
           schema={formFields(SET_INITIALIZE_ON_MOUNT)}
           onSubmit={(values) => onSubmit(values)}
           initialValues={{
-            [INITIALIZED_FIELD]: INITIAL_VALUE
+            [INITIALIZED_FIELD]: INITIAL_VALUE,
           }}
         />
       );
@@ -1209,12 +1206,12 @@ describe('renderForm function', () => {
         <FormRenderer
           FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
-            [componentTypes.TEXT_FIELD]: TextField
+            [componentTypes.TEXT_FIELD]: TextField,
           }}
           schema={formFields(UNSET_INITIALIZE_ON_MOUNT)}
           onSubmit={(values) => onSubmit(values)}
           initialValues={{
-            [INITIALIZED_FIELD]: INITIAL_VALUE
+            [INITIALIZED_FIELD]: INITIAL_VALUE,
           }}
         />
       );
@@ -1249,12 +1246,12 @@ describe('renderForm function', () => {
         <FormRenderer
           FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
-            [componentTypes.TEXT_FIELD]: TextField
+            [componentTypes.TEXT_FIELD]: TextField,
           }}
           schema={formFields(SET_INITIALIZE_ON_MOUNT, SCHEMA_INITIAL_VALUE)}
           onSubmit={(values) => onSubmit(values)}
           initialValues={{
-            [INITIALIZED_FIELD]: INITIAL_VALUE
+            [INITIALIZED_FIELD]: INITIAL_VALUE,
           }}
         />
       );
@@ -1284,7 +1281,7 @@ describe('renderForm function', () => {
         <FormRenderer
           FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
-            [componentTypes.TEXT_FIELD]: TextField
+            [componentTypes.TEXT_FIELD]: TextField,
           }}
           schema={formFields(SET_INITIALIZE_ON_MOUNT, SCHEMA_INITIAL_VALUE)}
           onSubmit={(values) => onSubmit(values)}
@@ -1313,7 +1310,7 @@ describe('renderForm function', () => {
         fields: [
           {
             component: componentTypes.TEXT_FIELD,
-            name: 'input'
+            name: 'input',
           },
           {
             component: componentTypes.TEXT_FIELD,
@@ -1322,8 +1319,8 @@ describe('renderForm function', () => {
             initializeOnMount: true,
             condition: {
               when: 'input',
-              is: 'show_false'
-            }
+              is: 'show_false',
+            },
           },
           {
             component: componentTypes.TEXT_FIELD,
@@ -1333,10 +1330,10 @@ describe('renderForm function', () => {
             initializeOnMount: true,
             condition: {
               when: 'input',
-              is: 'show_true'
-            }
-          }
-        ]
+              is: 'show_true',
+            },
+          },
+        ],
       };
 
       const onSubmit = jest.fn();
@@ -1345,7 +1342,7 @@ describe('renderForm function', () => {
         <FormRenderer
           FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
-            [componentTypes.TEXT_FIELD]: TextField
+            [componentTypes.TEXT_FIELD]: TextField,
           }}
           schema={schema}
           onSubmit={onSubmit}
@@ -1380,7 +1377,7 @@ describe('renderForm function', () => {
         fields: [
           {
             component: componentTypes.TEXT_FIELD,
-            name: 'input'
+            name: 'input',
           },
           {
             component: componentTypes.TEXT_FIELD,
@@ -1389,8 +1386,8 @@ describe('renderForm function', () => {
             initializeOnMount: true,
             condition: {
               when: 'input',
-              is: 'show_undef'
-            }
+              is: 'show_undef',
+            },
           },
           {
             component: componentTypes.TEXT_FIELD,
@@ -1400,10 +1397,10 @@ describe('renderForm function', () => {
             initializeOnMount: true,
             condition: {
               when: 'input',
-              is: 'show_true'
-            }
-          }
-        ]
+              is: 'show_true',
+            },
+          },
+        ],
       };
 
       const onSubmit = jest.fn();
@@ -1412,7 +1409,7 @@ describe('renderForm function', () => {
         <FormRenderer
           FormTemplate={(props) => <FormTemplate {...props} />}
           componentMapper={{
-            [componentTypes.TEXT_FIELD]: TextField
+            [componentTypes.TEXT_FIELD]: TextField,
           }}
           schema={schema}
           onSubmit={onSubmit}
@@ -1450,7 +1447,7 @@ describe('renderForm function', () => {
 
     const action = 'loadLabel';
     const customActionMapper = {
-      [action]: intl
+      [action]: intl,
     };
 
     const formFields = [
@@ -1459,14 +1456,14 @@ describe('renderForm function', () => {
         name: 'foo',
         label: 'standard label',
         actions: {
-          label: [action, id]
-        }
+          label: [action, id],
+        },
       },
       {
         component: 'custom-component',
         name: 'bar',
-        label: 'standard label'
-      }
+        label: 'standard label',
+      },
     ];
 
     const CustomComponent = ({ label }) => <label>{label}</label>;
@@ -1475,7 +1472,7 @@ describe('renderForm function', () => {
       <FormRenderer
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
-          'custom-component': CustomComponent
+          'custom-component': CustomComponent,
         }}
         schema={{ fields: formFields }}
         onSubmit={jest.fn()}
@@ -1485,18 +1482,8 @@ describe('renderForm function', () => {
 
     expect(intl).toHaveBeenCalledWith(id);
     expect(intl.mock.calls).toHaveLength(1);
-    expect(
-      wrapper
-        .find('label')
-        .first()
-        .text()
-    ).toEqual(`translated ${id}`);
-    expect(
-      wrapper
-        .find('label')
-        .last()
-        .text()
-    ).toEqual('standard label');
+    expect(wrapper.find('label').first().text()).toEqual(`translated ${id}`);
+    expect(wrapper.find('label').last().text()).toEqual('standard label');
   });
 
   it('should use actions from componentMapper', () => {
@@ -1505,15 +1492,15 @@ describe('renderForm function', () => {
     const actionMapper = 'loadLabelMapper';
 
     const customActionMapper = {
-      [actionMapper]: () => mapperLabel
+      [actionMapper]: () => mapperLabel,
     };
 
     const formFields = [
       {
         component: 'custom-component',
         name: 'foo',
-        label: 'standard label'
-      }
+        label: 'standard label',
+      },
     ];
 
     const CustomComponent = ({ label }) => <label>{label}</label>;
@@ -1525,9 +1512,9 @@ describe('renderForm function', () => {
           'custom-component': {
             component: CustomComponent,
             actions: {
-              label: [actionMapper]
-            }
-          }
+              label: [actionMapper],
+            },
+          },
         }}
         schema={{ fields: formFields }}
         onSubmit={jest.fn()}
@@ -1550,7 +1537,7 @@ describe('renderForm function', () => {
     const customActionMapper = {
       [actionField]: () => fieldLabel,
       [actionMapper]: () => mapperLabel,
-      [idActionmapper]: () => mappedId
+      [idActionmapper]: () => mappedId,
     };
 
     const formFields = [
@@ -1559,9 +1546,9 @@ describe('renderForm function', () => {
         name: 'foo',
         label: 'standard label',
         actions: {
-          label: [actionField]
-        }
-      }
+          label: [actionField],
+        },
+      },
     ];
 
     const CustomComponent = ({ label, id }) => <label id={id}>{label}</label>;
@@ -1574,9 +1561,9 @@ describe('renderForm function', () => {
             component: CustomComponent,
             actions: {
               label: [actionMapper],
-              id: [idActionmapper]
-            }
-          }
+              id: [idActionmapper],
+            },
+          },
         }}
         schema={{ fields: formFields }}
         onSubmit={jest.fn()}
@@ -1595,9 +1582,9 @@ describe('renderForm function', () => {
           component: 'text-field',
           name: 'props-from-mapper',
           label: 'Number field',
-          type: 'number'
-        }
-      ]
+          type: 'number',
+        },
+      ],
     };
     const wrapper = mount(
       <FormRenderer
@@ -1608,8 +1595,8 @@ describe('renderForm function', () => {
           'text-field': {
             component: TextField,
             className: 'composite-class',
-            type: 'text'
-          }
+            type: 'text',
+          },
         }}
       />
     );
@@ -1627,8 +1614,8 @@ describe('renderForm function', () => {
         component: 'custom-component',
         name: 'foo',
         label: 'standard label',
-        resolveProps
-      }
+        resolveProps,
+      },
     ];
 
     const CustomComponent = (props) => {
@@ -1640,7 +1627,7 @@ describe('renderForm function', () => {
       <FormRenderer
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
-          'custom-component': CustomComponent
+          'custom-component': CustomComponent,
         }}
         schema={{ fields: formFields }}
         onSubmit={jest.fn()}
@@ -1665,8 +1652,8 @@ describe('renderForm function', () => {
         component: 'custom-component',
         name: 'foo',
         label: 'standard label',
-        resolveProps: () => ({ label })
-      }
+        resolveProps: () => ({ label }),
+      },
     ];
 
     const CustomComponent = (props) => {
@@ -1682,9 +1669,9 @@ describe('renderForm function', () => {
             component: CustomComponent,
             resolveProps: () => ({
               id,
-              label: mapperLabel
-            })
-          }
+              label: mapperLabel,
+            }),
+          },
         }}
         schema={{ fields: formFields }}
         onSubmit={jest.fn()}
@@ -1700,7 +1687,7 @@ describe('renderForm function', () => {
     const label = 'Some super label';
 
     const actionMapper = {
-      resolveProps: () => () => ({ label })
+      resolveProps: () => () => ({ label }),
     };
 
     const formFields = [
@@ -1709,8 +1696,8 @@ describe('renderForm function', () => {
         name: 'foo',
         label: 'standard label',
         resolveProps: () => ({ id, label: 'nonsense' }),
-        actions: { resolveProps: ['resolveProps'] }
-      }
+        actions: { resolveProps: ['resolveProps'] },
+      },
     ];
 
     const CustomComponent = (props) => {
@@ -1722,7 +1709,7 @@ describe('renderForm function', () => {
       <FormRenderer
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
-          'custom-component': CustomComponent
+          'custom-component': CustomComponent,
         }}
         schema={{ fields: formFields }}
         onSubmit={jest.fn()}

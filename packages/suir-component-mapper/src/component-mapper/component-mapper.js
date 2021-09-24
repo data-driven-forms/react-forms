@@ -26,7 +26,7 @@ export const components = {
   TimePicker,
   PlainText,
   SubForm,
-  Wizard
+  Wizard,
 };
 
 const componentMapper = {
@@ -44,7 +44,7 @@ const componentMapper = {
   [componentTypes.WIZARD]: Wizard,
   [componentTypes.FIELD_ARRAY]: FieldArray,
   [componentTypes.SLIDER]: Slider,
-  [componentTypes.DUAL_LIST_SELECT]: DualListSelectWrapper
+  [componentTypes.DUAL_LIST_SELECT]: DualListSelectWrapper,
 };
 
 export default componentMapper;

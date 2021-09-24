@@ -17,7 +17,7 @@ describe('<Field />', () => {
       onBlur: expect.any(Function),
       onChange: expect.any(Function),
       onFocus: expect.any(Function),
-      value: initialProps.initialValue
+      value: initialProps.initialValue,
     });
   });
 
@@ -31,7 +31,7 @@ describe('<Field />', () => {
       onBlur: expect.any(Function),
       onChange: expect.any(Function),
       onFocus: expect.any(Function),
-      value: initialProps.initialValue
+      value: initialProps.initialValue,
     });
   });
 
@@ -46,7 +46,7 @@ describe('<Field />', () => {
       onBlur: expect.any(Function),
       onChange: expect.any(Function),
       onFocus: expect.any(Function),
-      value: initialProps.initialValue
+      value: initialProps.initialValue,
     });
   });
 
@@ -58,7 +58,7 @@ describe('<Field />', () => {
       onBlur: expect.any(Function),
       onChange: expect.any(Function),
       onFocus: expect.any(Function),
-      value: initialProps.initialValue
+      value: initialProps.initialValue,
     });
   });
 });

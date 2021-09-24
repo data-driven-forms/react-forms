@@ -31,13 +31,13 @@ SubForm.propTypes = {
   component: PropTypes.any,
   HeaderProps: PropTypes.object,
   DescriptionProps: PropTypes.shape({ element: PropTypes.string.isRequired }),
-  FormFieldsGridProps: PropTypes.shape({ element: PropTypes.string.isRequired })
+  FormFieldsGridProps: PropTypes.shape({ element: PropTypes.string.isRequired }),
 };
 
 SubForm.defaultProps = {
   HeaderProps: {},
   DescriptionProps: { element: 'p' },
-  FormFieldsGridProps: { element: 'div' }
+  FormFieldsGridProps: { element: 'div' },
 };
 
 export default SubForm;

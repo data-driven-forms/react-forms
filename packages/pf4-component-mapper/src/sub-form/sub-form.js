@@ -36,7 +36,7 @@ SubForm.propTypes = {
   title: PropTypes.node,
   description: PropTypes.node,
   validate: PropTypes.any,
-  component: PropTypes.any
+  component: PropTypes.any,
 };
 
 export default SubForm;

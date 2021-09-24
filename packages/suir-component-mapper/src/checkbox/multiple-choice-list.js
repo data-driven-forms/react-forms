@@ -12,35 +12,35 @@ const useStyles = createUseStyles({
   header: {
     marginBottom: '0 !important',
     display: 'inline',
-    fontSize: '0.92857143em !important'
+    fontSize: '0.92857143em !important',
   },
   error: {
-    color: '#9f3a38 !important'
+    color: '#9f3a38 !important',
   },
   items: {
-    marginBottom: '1em'
+    marginBottom: '1em',
   },
   required: {
     '&:after': {
       content: '"*"',
       margin: '-0.2em 0 0 0.2em',
-      color: '#db2828'
-    }
-  }
+      color: '#db2828',
+    },
+  },
 });
 
 const CheckboxContext = createContext({});
 
 const FinalCheckbox = ({ label, isDisabled: _isDisabled, ...rest }) => {
   const {
-    props: { isRequired, isReadOnly, helperText, validate, isDisabled, meta, ...props }
+    props: { isRequired, isReadOnly, helperText, validate, isDisabled, meta, ...props },
   } = useContext(CheckboxContext);
   return <FormCheckbox {...rest} {...props} disabled={isDisabled} label={label} />;
 };
 
 FinalCheckbox.propTypes = {
   isDisabled: PropTypes.bool,
-  label: PropTypes.node
+  label: PropTypes.node,
 };
 
 const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperText }) => {
@@ -51,7 +51,7 @@ const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperTex
     FormFieldProps,
     HelperTextProps,
     OptionsListProps: { className: optionsClassName, ...OptionsListProps },
-    HeaderProps: { className: headerClassname, ...HeaderProps }
+    HeaderProps: { className: headerClassname, ...HeaderProps },
   } = useContext(CheckboxContext);
   return (
     <FormFieldGrid helperText={helperText} HelperTextProps={HelperTextProps} {...FormFieldGridProps}>
@@ -60,8 +60,8 @@ const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperTex
         {...(invalid && {
           error: {
             content: meta.error || meta.submitError,
-            pointing: 'left'
-          }
+            pointing: 'left',
+          },
         })}
         label={
           <Header
@@ -80,7 +80,7 @@ const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperTex
 };
 
 Wrapper.propTypes = {
-  ...wrapperProps
+  ...wrapperProps,
 };
 
 const MultipleChoiceList = ({ FormFieldGridProps, FormFieldProps, HeaderProps, OptionsListProps, HelperTextProps, ...props }) => (
@@ -94,7 +94,7 @@ MultipleChoiceList.propTypes = {
   FormFieldProps: PropTypes.object,
   HeaderProps: PropTypes.object,
   OptionsListProps: PropTypes.object,
-  HelperTextProps: PropTypes.object
+  HelperTextProps: PropTypes.object,
 };
 
 MultipleChoiceList.defaultProps = {
@@ -102,7 +102,7 @@ MultipleChoiceList.defaultProps = {
   FormFieldProps: {},
   HeaderProps: {},
   OptionsListProps: {},
-  HelperTextProps: {}
+  HelperTextProps: {},
 };
 
 export default MultipleChoiceList;

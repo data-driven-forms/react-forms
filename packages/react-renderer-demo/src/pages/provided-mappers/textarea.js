@@ -8,16 +8,16 @@ const schema = {
     {
       component: componentTypes.TEXTAREA,
       label: 'Long text',
-      name: 'long-text'
-    }
-  ]
+      name: 'long-text',
+    },
+  ],
 };
 const variants = [
   ...baseFieldProps,
   {
     name: 'placeholder',
-    type: 'string'
-  }
+    type: 'string',
+  },
 ];
 
 const Textarea = () => <ComponentText schema={schema} variants={variants} linkText="Textarea" />;

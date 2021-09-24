@@ -19,6 +19,7 @@ const Option = ({ item, isActive, isSelected, ...props }) => (
           <CheckIcon />
         </span>
       )}
+      {item.description && <div className="pf-c-select__menu-item-description">{item.description}</div>}
     </button>
   </li>
 );
@@ -27,11 +28,12 @@ Option.propTypes = {
   item: PropTypes.shape({
     label: PropTypes.node,
     isDisabled: PropTypes.bool,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    description: PropTypes.node,
   }).isRequired,
   isActive: PropTypes.bool,
   isSelected: PropTypes.bool,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
 };
 
 export default Option;

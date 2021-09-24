@@ -8,58 +8,58 @@ describe('DualListTreeSelect', () => {
       label: 'bb',
       hasBadge: true,
       badgeProps: {
-        isRead: true
+        isRead: true,
       },
       children: [
         {
           value: 'value1',
-          label: 'c'
+          label: 'c',
         },
         {
           value: 'value2',
-          label: 'a'
+          label: 'a',
         },
         {
           label: 'Folder 2',
           children: [
             {
               label: 'value 3',
-              value: 'value 3'
-            }
-          ]
-        }
-      ]
+              value: 'value 3',
+            },
+          ],
+        },
+      ],
     },
     {
       label: 'aaa',
       hasBadge: true,
       badgeProps: {
-        isRead: true
+        isRead: true,
       },
       children: [
         {
           value: 'value12',
-          label: 'a'
+          label: 'a',
         },
         {
           value: 'value23',
-          label: 'z'
+          label: 'z',
         },
         {
           value: 'value231',
-          label: 't'
+          label: 't',
         },
         {
           label: 'Folder 2',
           children: [
             {
               label: 'xsd',
-              value: 'zsadas'
-            }
-          ]
-        }
-      ]
-    }
+              value: 'zsadas',
+            },
+          ],
+        },
+      ],
+    },
   ];
 
   it('getValueFromSelected', () => {
@@ -80,35 +80,35 @@ describe('DualListTreeSelect', () => {
       expect(result).toEqual([
         {
           badgeProps: {
-            isRead: true
+            isRead: true,
           },
           children: [
             {
               children: [
                 {
                   label: 'value 3',
-                  value: 'value 3'
-                }
+                  value: 'value 3',
+                },
               ],
-              label: 'Folder 2'
-            }
+              label: 'Folder 2',
+            },
           ],
           hasBadge: true,
-          label: 'bb'
+          label: 'bb',
         },
         {
           badgeProps: {
-            isRead: true
+            isRead: true,
           },
           children: [
             {
               label: 'a',
-              value: 'value12'
-            }
+              value: 'value12',
+            },
           ],
           hasBadge: true,
-          label: 'aaa'
-        }
+          label: 'aaa',
+        },
       ]);
       expect(getValueFromSelected(result)).toEqual(['value 3', 'value12']);
     });
@@ -118,47 +118,47 @@ describe('DualListTreeSelect', () => {
       expect(result).toEqual([
         {
           badgeProps: {
-            isRead: true
+            isRead: true,
           },
           children: [
             {
               label: 'c',
-              value: 'value1'
+              value: 'value1',
             },
             {
               label: 'a',
-              value: 'value2'
-            }
+              value: 'value2',
+            },
           ],
           hasBadge: true,
-          label: 'bb'
+          label: 'bb',
         },
         {
           badgeProps: {
-            isRead: true
+            isRead: true,
           },
           children: [
             {
               label: 'z',
-              value: 'value23'
+              value: 'value23',
             },
             {
               label: 't',
-              value: 'value231'
+              value: 'value231',
             },
             {
               children: [
                 {
                   label: 'xsd',
-                  value: 'zsadas'
-                }
+                  value: 'zsadas',
+                },
               ],
-              label: 'Folder 2'
-            }
+              label: 'Folder 2',
+            },
           ],
           hasBadge: true,
-          label: 'aaa'
-        }
+          label: 'aaa',
+        },
       ]);
       expect(getValueFromSelected(result)).toEqual(['value1', 'value2', 'value23', 'value231', 'zsadas']);
     });
@@ -173,7 +173,7 @@ describe('DualListTreeSelect', () => {
       expect(convertOptions(options)).toEqual([
         {
           badgeProps: {
-            isRead: true
+            isRead: true,
           },
           children: [
             {
@@ -181,14 +181,14 @@ describe('DualListTreeSelect', () => {
               isChecked: false,
               label: 'c',
               text: 'c',
-              value: 'value1'
+              value: 'value1',
             },
             {
               id: 'value2',
               isChecked: false,
               label: 'a',
               text: 'a',
-              value: 'value2'
+              value: 'value2',
             },
             {
               children: [
@@ -197,24 +197,24 @@ describe('DualListTreeSelect', () => {
                   isChecked: false,
                   label: 'value 3',
                   text: 'value 3',
-                  value: 'value 3'
-                }
+                  value: 'value 3',
+                },
               ],
               id: 'Folder 2',
               isChecked: false,
               label: 'Folder 2',
-              text: 'Folder 2'
-            }
+              text: 'Folder 2',
+            },
           ],
           hasBadge: true,
           id: 'bb',
           isChecked: false,
           label: 'bb',
-          text: 'bb'
+          text: 'bb',
         },
         {
           badgeProps: {
-            isRead: true
+            isRead: true,
           },
           children: [
             {
@@ -222,21 +222,21 @@ describe('DualListTreeSelect', () => {
               isChecked: false,
               label: 'a',
               text: 'a',
-              value: 'value12'
+              value: 'value12',
             },
             {
               id: 'value23',
               isChecked: false,
               label: 'z',
               text: 'z',
-              value: 'value23'
+              value: 'value23',
             },
             {
               id: 'value231',
               isChecked: false,
               label: 't',
               text: 't',
-              value: 'value231'
+              value: 'value231',
             },
             {
               children: [
@@ -245,21 +245,21 @@ describe('DualListTreeSelect', () => {
                   isChecked: false,
                   label: 'xsd',
                   text: 'xsd',
-                  value: 'zsadas'
-                }
+                  value: 'zsadas',
+                },
               ],
               id: 'Folder 2',
               isChecked: false,
               label: 'Folder 2',
-              text: 'Folder 2'
-            }
+              text: 'Folder 2',
+            },
           ],
           hasBadge: true,
           id: 'aaa',
           isChecked: false,
           label: 'aaa',
-          text: 'aaa'
-        }
+          text: 'aaa',
+        },
       ]);
     });
 
@@ -267,7 +267,7 @@ describe('DualListTreeSelect', () => {
       expect(convertOptions(options, 'asc')).toEqual([
         {
           badgeProps: {
-            isRead: true
+            isRead: true,
           },
           children: [
             {
@@ -275,7 +275,7 @@ describe('DualListTreeSelect', () => {
               isChecked: false,
               label: 'a',
               text: 'a',
-              value: 'value12'
+              value: 'value12',
             },
             {
               children: [
@@ -284,38 +284,38 @@ describe('DualListTreeSelect', () => {
                   isChecked: false,
                   label: 'xsd',
                   text: 'xsd',
-                  value: 'zsadas'
-                }
+                  value: 'zsadas',
+                },
               ],
               id: 'Folder 2',
               isChecked: false,
               label: 'Folder 2',
-              text: 'Folder 2'
+              text: 'Folder 2',
             },
             {
               id: 'value231',
               isChecked: false,
               label: 't',
               text: 't',
-              value: 'value231'
+              value: 'value231',
             },
             {
               id: 'value23',
               isChecked: false,
               label: 'z',
               text: 'z',
-              value: 'value23'
-            }
+              value: 'value23',
+            },
           ],
           hasBadge: true,
           id: 'aaa',
           isChecked: false,
           label: 'aaa',
-          text: 'aaa'
+          text: 'aaa',
         },
         {
           badgeProps: {
-            isRead: true
+            isRead: true,
           },
           children: [
             {
@@ -323,14 +323,14 @@ describe('DualListTreeSelect', () => {
               isChecked: false,
               label: 'a',
               text: 'a',
-              value: 'value2'
+              value: 'value2',
             },
             {
               id: 'value1',
               isChecked: false,
               label: 'c',
               text: 'c',
-              value: 'value1'
+              value: 'value1',
             },
             {
               children: [
@@ -339,21 +339,21 @@ describe('DualListTreeSelect', () => {
                   isChecked: false,
                   label: 'value 3',
                   text: 'value 3',
-                  value: 'value 3'
-                }
+                  value: 'value 3',
+                },
               ],
               id: 'Folder 2',
               isChecked: false,
               label: 'Folder 2',
-              text: 'Folder 2'
-            }
+              text: 'Folder 2',
+            },
           ],
           hasBadge: true,
           id: 'bb',
           isChecked: false,
           label: 'bb',
-          text: 'bb'
-        }
+          text: 'bb',
+        },
       ]);
     });
 
@@ -361,7 +361,7 @@ describe('DualListTreeSelect', () => {
       expect(convertOptions(options, 'desc')).toEqual([
         {
           badgeProps: {
-            isRead: true
+            isRead: true,
           },
           children: [
             {
@@ -371,38 +371,38 @@ describe('DualListTreeSelect', () => {
                   isChecked: false,
                   label: 'value 3',
                   text: 'value 3',
-                  value: 'value 3'
-                }
+                  value: 'value 3',
+                },
               ],
               id: 'Folder 2',
               isChecked: false,
               label: 'Folder 2',
-              text: 'Folder 2'
+              text: 'Folder 2',
             },
             {
               id: 'value1',
               isChecked: false,
               label: 'c',
               text: 'c',
-              value: 'value1'
+              value: 'value1',
             },
             {
               id: 'value2',
               isChecked: false,
               label: 'a',
               text: 'a',
-              value: 'value2'
-            }
+              value: 'value2',
+            },
           ],
           hasBadge: true,
           id: 'bb',
           isChecked: false,
           label: 'bb',
-          text: 'bb'
+          text: 'bb',
         },
         {
           badgeProps: {
-            isRead: true
+            isRead: true,
           },
           children: [
             {
@@ -410,14 +410,14 @@ describe('DualListTreeSelect', () => {
               isChecked: false,
               label: 'z',
               text: 'z',
-              value: 'value23'
+              value: 'value23',
             },
             {
               id: 'value231',
               isChecked: false,
               label: 't',
               text: 't',
-              value: 'value231'
+              value: 'value231',
             },
             {
               children: [
@@ -426,28 +426,28 @@ describe('DualListTreeSelect', () => {
                   isChecked: false,
                   label: 'xsd',
                   text: 'xsd',
-                  value: 'zsadas'
-                }
+                  value: 'zsadas',
+                },
               ],
               id: 'Folder 2',
               isChecked: false,
               label: 'Folder 2',
-              text: 'Folder 2'
+              text: 'Folder 2',
             },
             {
               id: 'value12',
               isChecked: false,
               label: 'a',
               text: 'a',
-              value: 'value12'
-            }
+              value: 'value12',
+            },
           ],
           hasBadge: true,
           id: 'aaa',
           isChecked: false,
           label: 'aaa',
-          text: 'aaa'
-        }
+          text: 'aaa',
+        },
       ]);
     });
   });

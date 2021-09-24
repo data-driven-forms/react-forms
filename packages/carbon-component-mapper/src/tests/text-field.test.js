@@ -29,9 +29,9 @@ describe('<TextInput and NumberInput />', () => {
           label: 'Please enter a value',
           type: 'number',
           step: 1,
-          initialValue: 1
-        }
-      ]
+          initialValue: 1,
+        },
+      ],
     };
 
     const wrapper = mount(
@@ -55,9 +55,9 @@ describe('<TextInput and NumberInput />', () => {
           label: 'Please enter a value',
           type: 'number',
           step: 1,
-          initialValue: 1
-        }
-      ]
+          initialValue: 1,
+        },
+      ],
     };
     await act(async () => {
       wrapper = mount(
@@ -74,10 +74,7 @@ describe('<TextInput and NumberInput />', () => {
     expect(wrapper.find('input')).toHaveLength(1);
 
     await act(async () => {
-      wrapper
-        .find('button.up-icon')
-        .first()
-        .simulate('click');
+      wrapper.find('button.up-icon').first().simulate('click');
     });
     await act(async () => {
       wrapper.find('form').simulate('submit');
@@ -95,9 +92,9 @@ describe('<TextInput and NumberInput />', () => {
           label: 'Please enter a value',
           type: 'number',
           step: 1,
-          initialValue: 5
-        }
-      ]
+          initialValue: 5,
+        },
+      ],
     };
     await act(async () => {
       wrapper = mount(
@@ -114,10 +111,7 @@ describe('<TextInput and NumberInput />', () => {
     expect(wrapper.find('input')).toHaveLength(1);
 
     await act(async () => {
-      wrapper
-        .find('button.down-icon')
-        .first()
-        .simulate('click');
+      wrapper.find('button.down-icon').first().simulate('click');
     });
     await act(async () => {
       wrapper.find('form').simulate('submit');
@@ -133,9 +127,9 @@ describe('<TextInput and NumberInput />', () => {
           component: componentTypes.TEXT_FIELD,
           name: 'input',
           label: 'Please enter a value',
-          initialValue: 'test'
-        }
-      ]
+          initialValue: 'test',
+        },
+      ],
     };
 
     const wrapper = mount(

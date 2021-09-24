@@ -6,7 +6,7 @@ import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template'
 import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 const schema = {
   title: 'Start typing',
@@ -18,9 +18,9 @@ const schema = {
       helperText: 'type some address like: https://data-driven-forms.org/',
       validate: [
         {
-          type: validatorTypes.URL
-        }
-      ]
+          type: validatorTypes.URL,
+        },
+      ],
     },
     {
       component: componentTypes.TEXT_FIELD,
@@ -30,9 +30,9 @@ const schema = {
       validate: [
         {
           type: validatorTypes.URL,
-          protocol: 'ddf'
-        }
-      ]
+          protocol: 'ddf',
+        },
+      ],
     },
     {
       component: componentTypes.TEXT_FIELD,
@@ -42,11 +42,11 @@ const schema = {
       validate: [
         {
           type: validatorTypes.URL,
-          protocolIdentifier: false
-        }
-      ]
-    }
-  ]
+          protocolIdentifier: false,
+        },
+      ],
+    },
+  ],
 };
 
 const UrlValidators = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;

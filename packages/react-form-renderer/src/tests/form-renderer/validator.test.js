@@ -32,7 +32,7 @@ describe('FormRenderer validator', () => {
         expect(value).toEqual(VALUE);
         expect(allValues).toEqual({
           other: '111',
-          [NAME]: VALUE
+          [NAME]: VALUE,
         });
         expect(meta).toEqual(META);
       }
@@ -42,10 +42,10 @@ describe('FormRenderer validator', () => {
       <FormRenderer
         FormTemplate={(props) => <FormTemplate {...props} />}
         componentMapper={{
-          [componentTypes.TEXT_FIELD]: TextField
+          [componentTypes.TEXT_FIELD]: TextField,
         }}
         schema={{
-          fields: [{ component: 'text-field', name: NAME, validate: [validator] }]
+          fields: [{ component: 'text-field', name: NAME, validate: [validator] }],
         }}
         onSubmit={jest.fn()}
         initialValues={{ other: '111' }}

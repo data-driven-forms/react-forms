@@ -16,7 +16,7 @@ const GenericMuiComponent = ({ activeMapper = 'mui', component }) => (
 
 GenericMuiComponent.propTypes = {
   activeMapper: PropTypes.string,
-  component: PropTypes.string
+  component: PropTypes.string,
 };
 
 export default GenericMuiComponent;

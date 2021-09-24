@@ -26,7 +26,7 @@ const DummyArrayHookSpy = () => Fragment;
 const DummyArray = ({ compositeField, ...props }) => {
   const hookValue = useFieldArray(props);
   const {
-    fields: { map, value }
+    fields: { map, value },
   } = hookValue;
   const Component = compositeField ? CompositeDummyInput : DummyInput;
   return (
@@ -52,18 +52,8 @@ describe('useFieldArray', () => {
         </FormStateManager>
       );
       expect(wrapper.find('input')).toHaveLength(2);
-      expect(
-        wrapper
-          .find('input')
-          .at(0)
-          .prop('name')
-      ).toEqual('simple-array[0]');
-      expect(
-        wrapper
-          .find('input')
-          .at(1)
-          .prop('name')
-      ).toEqual('simple-array[1]');
+      expect(wrapper.find('input').at(0).prop('name')).toEqual('simple-array[0]');
+      expect(wrapper.find('input').at(1).prop('name')).toEqual('simple-array[1]');
       expect(wrapper.find(DummyArrayHookSpy).prop('value')).toEqual(['one', 'two']);
     });
 
@@ -77,7 +67,7 @@ describe('useFieldArray', () => {
                 compositeField
                 initialValue={[
                   { 'first-field': 'one-first', 'second-field': 'one-second' },
-                  { 'first-field': 'two-first', 'second-field': 'two-second' }
+                  { 'first-field': 'two-first', 'second-field': 'two-second' },
                 ]}
               />
             </Fragment>
@@ -85,33 +75,13 @@ describe('useFieldArray', () => {
         </FormStateManager>
       );
       expect(wrapper.find('input')).toHaveLength(4);
-      expect(
-        wrapper
-          .find('input')
-          .at(0)
-          .prop('name')
-      ).toEqual('composite-array[0].first-field');
-      expect(
-        wrapper
-          .find('input')
-          .at(1)
-          .prop('name')
-      ).toEqual('composite-array[0].second-field');
-      expect(
-        wrapper
-          .find('input')
-          .at(2)
-          .prop('name')
-      ).toEqual('composite-array[1].first-field');
-      expect(
-        wrapper
-          .find('input')
-          .at(3)
-          .prop('name')
-      ).toEqual('composite-array[1].second-field');
+      expect(wrapper.find('input').at(0).prop('name')).toEqual('composite-array[0].first-field');
+      expect(wrapper.find('input').at(1).prop('name')).toEqual('composite-array[0].second-field');
+      expect(wrapper.find('input').at(2).prop('name')).toEqual('composite-array[1].first-field');
+      expect(wrapper.find('input').at(3).prop('name')).toEqual('composite-array[1].second-field');
       expect(wrapper.find(DummyArrayHookSpy).prop('value')).toEqual([
         { 'first-field': 'one-first', 'second-field': 'one-second' },
-        { 'first-field': 'two-first', 'second-field': 'two-second' }
+        { 'first-field': 'two-first', 'second-field': 'two-second' },
       ]);
     });
 
@@ -125,7 +95,7 @@ describe('useFieldArray', () => {
                 compositeField
                 initialValue={[
                   { 'first-field': 'one-first', 'second-field': 'one-second' },
-                  { 'first-field': 'two-first', 'second-field': 'two-second' }
+                  { 'first-field': 'two-first', 'second-field': 'two-second' },
                 ]}
               />
             </Fragment>
@@ -179,24 +149,9 @@ describe('useFieldArray', () => {
         <FormStateManager initialValues={{ 'remove-array': ['one', 'two', 'three'] }}>{() => <DummyArray name="remove-array" />}</FormStateManager>
       );
       expect(wrapper.find('input')).toHaveLength(3);
-      expect(
-        wrapper
-          .find('input')
-          .at(0)
-          .prop('value')
-      ).toEqual('one');
-      expect(
-        wrapper
-          .find('input')
-          .at(1)
-          .prop('value')
-      ).toEqual('two');
-      expect(
-        wrapper
-          .find('input')
-          .at(2)
-          .prop('value')
-      ).toEqual('three');
+      expect(wrapper.find('input').at(0).prop('value')).toEqual('one');
+      expect(wrapper.find('input').at(1).prop('value')).toEqual('two');
+      expect(wrapper.find('input').at(2).prop('value')).toEqual('three');
       /**
        * remove second field
        */
@@ -206,18 +161,8 @@ describe('useFieldArray', () => {
       wrapper.update();
 
       expect(wrapper.find('input')).toHaveLength(2);
-      expect(
-        wrapper
-          .find('input')
-          .at(0)
-          .prop('value')
-      ).toEqual('one');
-      expect(
-        wrapper
-          .find('input')
-          .at(1)
-          .prop('value')
-      ).toEqual('three');
+      expect(wrapper.find('input').at(0).prop('value')).toEqual('one');
+      expect(wrapper.find('input').at(1).prop('value')).toEqual('three');
       expect(wrapper.find(DummyArrayHookSpy).prop('value')).toEqual(['one', 'three']);
     });
 
@@ -270,12 +215,7 @@ describe('useFieldArray', () => {
       wrapper.update();
 
       expect(wrapper.find('input')).toHaveLength(2);
-      expect(
-        wrapper
-          .find('input')
-          .at(0)
-          .prop('value')
-      ).toEqual('new-value');
+      expect(wrapper.find('input').at(0).prop('value')).toEqual('new-value');
     });
 
     it('should move the fourh field to second place', () => {
@@ -293,30 +233,10 @@ describe('useFieldArray', () => {
       wrapper.update();
 
       expect(wrapper.find('input')).toHaveLength(4);
-      expect(
-        wrapper
-          .find('input')
-          .at(0)
-          .prop('value')
-      ).toEqual('one');
-      expect(
-        wrapper
-          .find('input')
-          .at(1)
-          .prop('value')
-      ).toEqual('four');
-      expect(
-        wrapper
-          .find('input')
-          .at(2)
-          .prop('value')
-      ).toEqual('two');
-      expect(
-        wrapper
-          .find('input')
-          .at(3)
-          .prop('value')
-      ).toEqual('three');
+      expect(wrapper.find('input').at(0).prop('value')).toEqual('one');
+      expect(wrapper.find('input').at(1).prop('value')).toEqual('four');
+      expect(wrapper.find('input').at(2).prop('value')).toEqual('two');
+      expect(wrapper.find('input').at(3).prop('value')).toEqual('three');
       expect(wrapper.find(DummyArrayHookSpy).prop('value')).toEqual(['one', 'four', 'two', 'three']);
     });
 
@@ -335,30 +255,10 @@ describe('useFieldArray', () => {
       wrapper.update();
 
       expect(wrapper.find('input')).toHaveLength(4);
-      expect(
-        wrapper
-          .find('input')
-          .at(0)
-          .prop('value')
-      ).toEqual('one');
-      expect(
-        wrapper
-          .find('input')
-          .at(1)
-          .prop('value')
-      ).toEqual('four');
-      expect(
-        wrapper
-          .find('input')
-          .at(2)
-          .prop('value')
-      ).toEqual('three');
-      expect(
-        wrapper
-          .find('input')
-          .at(3)
-          .prop('value')
-      ).toEqual('two');
+      expect(wrapper.find('input').at(0).prop('value')).toEqual('one');
+      expect(wrapper.find('input').at(1).prop('value')).toEqual('four');
+      expect(wrapper.find('input').at(2).prop('value')).toEqual('three');
+      expect(wrapper.find('input').at(3).prop('value')).toEqual('two');
       expect(wrapper.find(DummyArrayHookSpy).prop('value')).toEqual(['one', 'four', 'three', 'two']);
     });
 
@@ -377,18 +277,8 @@ describe('useFieldArray', () => {
 
       expect(wrapper.find(DummyArrayHookSpy).prop('value')).toEqual(['two', 'one']);
       expect(wrapper.find('input')).toHaveLength(2);
-      expect(
-        wrapper
-          .find('input')
-          .at(0)
-          .prop('value')
-      ).toEqual('two');
-      expect(
-        wrapper
-          .find('input')
-          .at(1)
-          .prop('value')
-      ).toEqual('one');
+      expect(wrapper.find('input').at(0).prop('value')).toEqual('two');
+      expect(wrapper.find('input').at(1).prop('value')).toEqual('one');
     });
 
     it('should insert field into the middle of an field array', () => {
@@ -409,30 +299,10 @@ describe('useFieldArray', () => {
       wrapper.update();
 
       expect(wrapper.find('input')).toHaveLength(4);
-      expect(
-        wrapper
-          .find('input')
-          .at(0)
-          .prop('value')
-      ).toEqual('one');
-      expect(
-        wrapper
-          .find('input')
-          .at(1)
-          .prop('value')
-      ).toEqual('');
-      expect(
-        wrapper
-          .find('input')
-          .at(2)
-          .prop('value')
-      ).toEqual('new-value');
-      expect(
-        wrapper
-          .find('input')
-          .at(3)
-          .prop('value')
-      ).toEqual('two');
+      expect(wrapper.find('input').at(0).prop('value')).toEqual('one');
+      expect(wrapper.find('input').at(1).prop('value')).toEqual('');
+      expect(wrapper.find('input').at(2).prop('value')).toEqual('new-value');
+      expect(wrapper.find('input').at(3).prop('value')).toEqual('two');
     });
 
     it('should concat an array to the end of the field array', () => {
@@ -443,24 +313,9 @@ describe('useFieldArray', () => {
       });
       wrapper.update();
       expect(wrapper.find('input')).toHaveLength(3);
-      expect(
-        wrapper
-          .find('input')
-          .at(0)
-          .prop('value')
-      ).toEqual('one');
-      expect(
-        wrapper
-          .find('input')
-          .at(1)
-          .prop('value')
-      ).toEqual('two');
-      expect(
-        wrapper
-          .find('input')
-          .at(2)
-          .prop('value')
-      ).toEqual('three');
+      expect(wrapper.find('input').at(0).prop('value')).toEqual('one');
+      expect(wrapper.find('input').at(1).prop('value')).toEqual('two');
+      expect(wrapper.find('input').at(2).prop('value')).toEqual('three');
       expect(wrapper.find(DummyArrayHookSpy).prop('value')).toEqual(['one', 'two', 'three']);
     });
 
@@ -474,12 +329,7 @@ describe('useFieldArray', () => {
       });
       wrapper.update();
       expect(wrapper.find('input')).toHaveLength(1);
-      expect(
-        wrapper
-          .find('input')
-          .at(0)
-          .prop('value')
-      ).toEqual('two');
+      expect(wrapper.find('input').at(0).prop('value')).toEqual('two');
       expect(wrapper.find(DummyArrayHookSpy).prop('value')).toEqual(['two']);
     });
   });

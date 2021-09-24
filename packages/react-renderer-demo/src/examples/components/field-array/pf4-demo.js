@@ -8,7 +8,7 @@ import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 
 const componentMapper = {
   [componentTypes.FIELD_ARRAY]: FieldArray,
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 const schema = {
@@ -29,17 +29,17 @@ const schema = {
           isRequired: true,
           validate: [
             {
-              type: validatorTypes.REQUIRED
-            }
-          ]
+              type: validatorTypes.REQUIRED,
+            },
+          ],
         },
         {
           component: componentTypes.TEXT_FIELD,
           name: 'lastName',
           label: 'Last Name',
-          placeholder: 'Stavitel'
-        }
-      ]
+          placeholder: 'Stavitel',
+        },
+      ],
     },
     {
       component: componentTypes.FIELD_ARRAY,
@@ -49,9 +49,9 @@ const schema = {
       fields: [
         {
           component: componentTypes.TEXT_FIELD,
-          label: 'Item'
-        }
-      ]
+          label: 'Item',
+        },
+      ],
     },
     {
       component: componentTypes.FIELD_ARRAY,
@@ -62,9 +62,9 @@ const schema = {
         {
           component: componentTypes.TEXT_FIELD,
           label: 'Item',
-          type: 'number'
-        }
-      ]
+          type: 'number',
+        },
+      ],
     },
     {
       component: componentTypes.FIELD_ARRAY,
@@ -78,18 +78,18 @@ const schema = {
           isRequired: true,
           validate: [
             {
-              type: validatorTypes.REQUIRED
-            }
-          ]
-        }
-      ]
-    }
-  ]
+              type: validatorTypes.REQUIRED,
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 const initialValues = {
   number: [1, 2, 3, 4],
-  minMax: [null, null, null, null]
+  minMax: [null, null, null, null],
 };
 
 const onSubmit = (values) => console.log(values);

@@ -40,7 +40,7 @@ const DEFAULT_OPTIONS = {
   port: true,
   path: true,
   search: true,
-  hash: true
+  hash: true,
 };
 
 let url = (options) => buildReg(defaultOptions(options), false);
@@ -66,7 +66,7 @@ function buildReg(options, capture) {
         group(options.ipv4, IPV4, capture),
         group(options.ipv6, IPV6, capture),
         group(options.host, HOST, capture),
-        group(options.local, 'localhost', capture)
+        group(options.local, 'localhost', capture),
       ]
         .filter((g) => g)
         .join('|')})` +

@@ -30,7 +30,7 @@ export const Switch = (props) => {
     ...rest
   } = useFieldApi({
     ...props,
-    type: 'checkbox'
+    type: 'checkbox',
   });
   const invalid = validationError(meta, validateOnMount);
   const text = invalid || ((meta.touched || validateOnMount) && meta.warning) || helperText || description;
@@ -77,7 +77,7 @@ Switch.propTypes = {
   FormControlLabelProps: PropTypes.object,
   SwitchProps: PropTypes.object,
   FormLabelProps: PropTypes.object,
-  FormHelperTextProps: PropTypes.object
+  FormHelperTextProps: PropTypes.object,
 };
 
 Switch.defaultProps = {
@@ -87,7 +87,7 @@ Switch.defaultProps = {
   FormControlLabelProps: {},
   SwitchProps: {},
   FormLabelProps: {},
-  FormHelperTextProps: {}
+  FormHelperTextProps: {},
 };
 
 export default Switch;

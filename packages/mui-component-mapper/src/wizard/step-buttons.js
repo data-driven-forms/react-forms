@@ -30,24 +30,24 @@ NextButton.propTypes = {
   handleNext: PropTypes.func.isRequired,
   nextLabel: PropTypes.node.isRequired,
   getState: PropTypes.func.isRequired,
-  conditionalSubmitFlag: PropTypes.string.isRequired
+  conditionalSubmitFlag: PropTypes.string.isRequired,
 };
 
 const useStyles = makeStyles(() => ({
   wizardBody: {
     padding: 24,
-    margin: 0
+    margin: 0,
   },
   buttons: {
     display: 'flex',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   },
   button: {
-    marginRight: 16
+    marginRight: 16,
   },
   buttonsContainer: {
-    marginTop: 36
-  }
+    marginTop: 36,
+  },
 }));
 
 const WizardStepButtons = ({ buttons: Buttons, ...props }) => {
@@ -65,7 +65,7 @@ const WizardStepButtons = ({ buttons: Buttons, ...props }) => {
     buttonLabels: { cancel, submit, back, next },
     formOptions,
     ButtonContainerProps,
-    conditionalSubmitFlag
+    conditionalSubmitFlag,
   } = props;
 
   return (
@@ -112,25 +112,25 @@ WizardStepButtons.propTypes = {
     PropTypes.string,
     PropTypes.shape({
       when: PropTypes.string.isRequired,
-      stepMapper: PropTypes.object.isRequired
+      stepMapper: PropTypes.object.isRequired,
     }),
-    PropTypes.func
+    PropTypes.func,
   ]),
   buttonLabels: PropTypes.shape({
     submit: PropTypes.node.isRequired,
     cancel: PropTypes.node.isRequired,
     back: PropTypes.node.isRequired,
-    next: PropTypes.node.isRequired
+    next: PropTypes.node.isRequired,
   }).isRequired,
   buttons: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   formOptions: PropTypes.shape({
     getState: PropTypes.func.isRequired,
-    onCancel: PropTypes.func.isRequired
-  })
+    onCancel: PropTypes.func.isRequired,
+  }),
 };
 
 WizardStepButtons.defaultProps = {
-  ButtonContainerProps: {}
+  ButtonContainerProps: {},
 };
 
 export default WizardStepButtons;

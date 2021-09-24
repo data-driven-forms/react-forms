@@ -9,7 +9,7 @@ const prepareProps = ({ isDisabled, isReadOnly, isRequired = false, label, descr
   labelText: buildLabel(label, isRequired),
   readOnly: isReadOnly,
   ...props,
-  ...(description ? { labelText: <WithDescription description={description} labelText={buildLabel(label || props.labelText, isRequired)} /> } : {})
+  ...(description ? { labelText: <WithDescription description={description} labelText={buildLabel(label || props.labelText, isRequired)} /> } : {}),
 });
 
 export default prepareProps;

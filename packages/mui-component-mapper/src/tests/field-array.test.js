@@ -17,7 +17,7 @@ describe('<FieldArray/>', () => {
     initialProps = {
       componentMapper,
       FormTemplate,
-      onSubmit: (values) => onSubmit(values)
+      onSubmit: (values) => onSubmit(values),
     };
   });
 
@@ -34,17 +34,17 @@ describe('<FieldArray/>', () => {
             noItemsMessage: 'I have no items',
             buttonLabels: {
               add: 'CUSTOM ADD',
-              remove: 'CUSTOM REMOVE'
+              remove: 'CUSTOM REMOVE',
             },
             fields: [
               {
                 component: componentTypes.TEXT_FIELD,
-                name: 'name'
-              }
-            ]
-          }
-        ]
-      }
+                name: 'name',
+              },
+            ],
+          },
+        ],
+      },
     };
 
     await act(async () => {
@@ -52,31 +52,11 @@ describe('<FieldArray/>', () => {
     });
 
     expect(wrapper.find(Typography)).toHaveLength(3);
-    expect(
-      wrapper
-        .find(Typography)
-        .first()
-        .text()
-    ).toEqual('I am label');
-    expect(
-      wrapper
-        .find(Typography)
-        .at(1)
-        .text()
-    ).toEqual('I am description');
-    expect(
-      wrapper
-        .find(Typography)
-        .last()
-        .text()
-    ).toEqual('I have no items');
+    expect(wrapper.find(Typography).first().text()).toEqual('I am label');
+    expect(wrapper.find(Typography).at(1).text()).toEqual('I am description');
+    expect(wrapper.find(Typography).last().text()).toEqual('I have no items');
 
-    expect(
-      wrapper
-        .find(Button)
-        .first()
-        .text()
-    ).toEqual('CUSTOM ADD');
+    expect(wrapper.find(Button).first().text()).toEqual('CUSTOM ADD');
 
     await act(async () => {
       wrapper
@@ -86,12 +66,7 @@ describe('<FieldArray/>', () => {
     });
     wrapper.update();
 
-    expect(
-      wrapper
-        .find(Button)
-        .at(1)
-        .text()
-    ).toEqual('CUSTOM REMOVE');
+    expect(wrapper.find(Button).at(1).text()).toEqual('CUSTOM REMOVE');
     expect(wrapper.find(Typography)).toHaveLength(2);
   });
 
@@ -107,16 +82,16 @@ describe('<FieldArray/>', () => {
             fields: [
               {
                 component: componentTypes.TEXT_FIELD,
-                name: 'name'
+                name: 'name',
               },
               {
                 component: componentTypes.TEXT_FIELD,
-                name: 'lastName'
-              }
-            ]
-          }
-        ]
-      }
+                name: 'lastName',
+              },
+            ],
+          },
+        ],
+      },
     };
 
     await act(async () => {
@@ -145,7 +120,7 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: [{ name: 'enter a name', lastName: 'enter a last name' }]
+      nicePeople: [{ name: 'enter a name', lastName: 'enter a last name' }],
     });
 
     onSubmit.mockClear();
@@ -164,7 +139,7 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: []
+      nicePeople: [],
     });
   });
 
@@ -179,12 +154,12 @@ describe('<FieldArray/>', () => {
             defaultItem: 'defaultItem',
             fields: [
               {
-                component: componentTypes.TEXT_FIELD
-              }
-            ]
-          }
-        ]
-      }
+                component: componentTypes.TEXT_FIELD,
+              },
+            ],
+          },
+        ],
+      },
     };
 
     await act(async () => {
@@ -213,7 +188,7 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: ['defaultItem']
+      nicePeople: ['defaultItem'],
     });
 
     onSubmit.mockClear();
@@ -232,7 +207,7 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: []
+      nicePeople: [],
     });
   });
 
@@ -249,12 +224,12 @@ describe('<FieldArray/>', () => {
             maxItems: 2,
             fields: [
               {
-                component: componentTypes.TEXT_FIELD
-              }
-            ]
-          }
-        ]
-      }
+                component: componentTypes.TEXT_FIELD,
+              },
+            ],
+          },
+        ],
+      },
     };
 
     await act(async () => {
@@ -275,7 +250,7 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: ['defaultItem']
+      nicePeople: ['defaultItem'],
     });
     onSubmit.mockClear();
 
@@ -293,7 +268,7 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: ['defaultItem', 'defaultItem']
+      nicePeople: ['defaultItem', 'defaultItem'],
     });
     onSubmit.mockClear();
 
@@ -311,7 +286,7 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: ['defaultItem', 'defaultItem']
+      nicePeople: ['defaultItem', 'defaultItem'],
     });
     onSubmit.mockClear();
 
@@ -329,7 +304,7 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: ['defaultItem']
+      nicePeople: ['defaultItem'],
     });
     onSubmit.mockClear();
 
@@ -347,7 +322,7 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: ['defaultItem']
+      nicePeople: ['defaultItem'],
     });
   });
 
@@ -362,12 +337,12 @@ describe('<FieldArray/>', () => {
             validate: [{ type: validatorTypes.MIN_ITEMS, threshold: 3 }],
             fields: [
               {
-                component: componentTypes.TEXT_FIELD
-              }
-            ]
-          }
-        ]
-      }
+                component: componentTypes.TEXT_FIELD,
+              },
+            ],
+          },
+        ],
+      },
     };
 
     await act(async () => {
@@ -407,12 +382,12 @@ describe('<FieldArray/>', () => {
             defaultItem: { name: 'enter a name', lastName: 'enter a last name' },
             fields: [
               {
-                component: componentTypes.TEXT_FIELD
-              }
-            ]
-          }
-        ]
-      }
+                component: componentTypes.TEXT_FIELD,
+              },
+            ],
+          },
+        ],
+      },
     };
 
     await act(async () => {
@@ -433,7 +408,7 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: [{ name: 'enter a name', lastName: 'enter a last name' }]
+      nicePeople: [{ name: 'enter a name', lastName: 'enter a last name' }],
     });
 
     onSubmit.mockClear();
@@ -452,7 +427,7 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: []
+      nicePeople: [],
     });
 
     onSubmit.mockClear();
@@ -471,7 +446,7 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: [{ name: 'enter a name', lastName: 'enter a last name' }]
+      nicePeople: [{ name: 'enter a name', lastName: 'enter a last name' }],
     });
 
     onSubmit.mockClear();
@@ -490,7 +465,7 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: []
+      nicePeople: [],
     });
 
     await act(async () => {
@@ -507,7 +482,7 @@ describe('<FieldArray/>', () => {
     wrapper.update();
 
     expect(onSubmit).toHaveBeenCalledWith({
-      nicePeople: [{ name: 'enter a name', lastName: 'enter a last name' }]
+      nicePeople: [{ name: 'enter a name', lastName: 'enter a last name' }],
     });
 
     await act(async () => {

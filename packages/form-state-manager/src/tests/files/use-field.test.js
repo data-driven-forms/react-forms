@@ -13,7 +13,7 @@ const SpyComponent = ({ initialValue, meta, validate, initializeOnMount, ...prop
 const SubscribedComponent = ({ fakeComponent, ...props }) => {
   const {
     input: { value, onChange, onFocus, onBlur, checked },
-    meta
+    meta,
   } = useField(props);
   return (
     <div>
@@ -59,11 +59,11 @@ describe('useField', () => {
       initialValue: 'foo',
       render: expect.any(Function),
       internalId: expect.any(Number),
-      silent: true
+      silent: true,
     };
     const unregisterArguments = {
       name: 'spy',
-      internalId: expect.any(Number)
+      internalId: expect.any(Number),
     };
     const wrapper = mount(<DummyComponent subscriberProps={{ name: 'spy', initialValue: 'foo' }} managerApi={managerApi} />);
     expect(registerSpy).toHaveBeenCalledWith(registerArguments);
@@ -366,7 +366,7 @@ describe('useField', () => {
       const managerApi = createManagerApi({});
       const subscriberProps = {
         name: 'sync-validate',
-        validate: fooValidator
+        validate: fooValidator,
       };
       const wrapper = mount(<DummyComponent managerApi={managerApi} subscriberProps={subscriberProps} />);
       const spy = wrapper.find(SpyComponent);
@@ -393,7 +393,7 @@ describe('useField', () => {
       const managerApi = createManagerApi({});
       const subscriberProps = {
         name: 'sync-validate',
-        validate: asyncValidator
+        validate: asyncValidator,
       };
       const wrapper = mount(<DummyComponent managerApi={managerApi} subscriberProps={subscriberProps} />);
       const spy = wrapper.find(SpyComponent);
@@ -431,7 +431,7 @@ describe('useField', () => {
       const managerApi = createManagerApi({});
       const subscriberProps = {
         name: 'sync-validate',
-        validate: fooValidator
+        validate: fooValidator,
       };
       const wrapper = mount(<DummyComponent managerApi={managerApi} subscriberProps={subscriberProps} />);
       const input = wrapper.find('input');
@@ -441,14 +441,14 @@ describe('useField', () => {
         input.simulate('change', { target: { value: 'foo' } });
       });
       expect(managerApi().errors).toEqual({
-        'sync-validate': 'error'
+        'sync-validate': 'error',
       });
 
       await act(async () => {
         input.simulate('change', { target: { value: 'bar' } });
       });
       expect(managerApi().errors).toEqual({
-        'sync-validate': undefined
+        'sync-validate': undefined,
       });
     });
 
@@ -463,7 +463,7 @@ describe('useField', () => {
       const managerApi = createManagerApi({});
       const subscriberProps = {
         name: 'async-validate',
-        validate: asyncValidator
+        validate: asyncValidator,
       };
 
       const wrapper = mount(<DummyComponent managerApi={managerApi} subscriberProps={subscriberProps} />);
@@ -513,7 +513,7 @@ describe('useField', () => {
     beforeEach(() => {
       CleanButton = (props) => {
         const {
-          input: { onChange }
+          input: { onChange },
         } = useField(props);
 
         return <button onClick={() => onChange(undefined)}>clear</button>;
@@ -593,7 +593,7 @@ describe('useField', () => {
 
       Setter = (props) => {
         const {
-          input: { onChange }
+          input: { onChange },
         } = useField(props);
 
         return <input onChange={(e) => onChange(props.value || e)} />;
@@ -764,7 +764,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'checkbox',
-        value: ''
+        value: '',
       });
       spy.mockReset();
 
@@ -784,7 +784,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'checkbox',
-        value: ''
+        value: '',
       });
 
       // >>>>>>>>>>>>>>>> DESELECT
@@ -803,7 +803,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'checkbox',
-        value: ''
+        value: '',
       });
     });
 
@@ -829,7 +829,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'checkbox',
-        value: 'dog'
+        value: 'dog',
       });
       expect(spyCat).toHaveBeenCalledWith({
         checked: false,
@@ -839,7 +839,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'checkbox',
-        value: 'cat'
+        value: 'cat',
       });
       expect(spyHamster).toHaveBeenCalledWith({
         checked: false,
@@ -849,7 +849,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'checkbox',
-        value: 'hamster'
+        value: 'hamster',
       });
       spyDog.mockReset();
       spyCat.mockReset();
@@ -874,7 +874,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'checkbox',
-        value: 'dog'
+        value: 'dog',
       });
       expect(spyCat).toHaveBeenCalledWith({
         checked: true,
@@ -884,7 +884,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'checkbox',
-        value: 'cat'
+        value: 'cat',
       });
       expect(spyHamster).toHaveBeenCalledWith({
         checked: false,
@@ -894,7 +894,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'checkbox',
-        value: 'hamster'
+        value: 'hamster',
       });
       spyDog.mockReset();
       spyCat.mockReset();
@@ -919,7 +919,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'checkbox',
-        value: 'dog'
+        value: 'dog',
       });
       expect(spyCat).toHaveBeenCalledWith({
         checked: true,
@@ -929,7 +929,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'checkbox',
-        value: 'cat'
+        value: 'cat',
       });
       expect(spyHamster).toHaveBeenCalledWith({
         checked: true,
@@ -939,7 +939,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'checkbox',
-        value: 'hamster'
+        value: 'hamster',
       });
       spyDog.mockReset();
       spyCat.mockReset();
@@ -964,7 +964,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'checkbox',
-        value: 'dog'
+        value: 'dog',
       });
       expect(spyCat).toHaveBeenCalledWith({
         checked: true,
@@ -974,7 +974,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'checkbox',
-        value: 'cat'
+        value: 'cat',
       });
       expect(spyHamster).toHaveBeenCalledWith({
         checked: false,
@@ -984,7 +984,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'checkbox',
-        value: 'hamster'
+        value: 'hamster',
       });
     });
 
@@ -1010,7 +1010,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'radio',
-        value: 'dog'
+        value: 'dog',
       });
       expect(spyCat).toHaveBeenCalledWith({
         checked: false,
@@ -1020,7 +1020,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'radio',
-        value: 'cat'
+        value: 'cat',
       });
       expect(spyHamster).toHaveBeenCalledWith({
         checked: false,
@@ -1030,7 +1030,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'radio',
-        value: 'hamster'
+        value: 'hamster',
       });
       spyDog.mockReset();
       spyCat.mockReset();
@@ -1055,7 +1055,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'radio',
-        value: 'dog'
+        value: 'dog',
       });
       expect(spyCat).toHaveBeenCalledWith({
         checked: true,
@@ -1065,7 +1065,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'radio',
-        value: 'cat'
+        value: 'cat',
       });
       expect(spyHamster).toHaveBeenCalledWith({
         checked: false,
@@ -1075,7 +1075,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'radio',
-        value: 'hamster'
+        value: 'hamster',
       });
       spyDog.mockReset();
       spyCat.mockReset();
@@ -1100,7 +1100,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'radio',
-        value: 'dog'
+        value: 'dog',
       });
       expect(spyCat).toHaveBeenCalledWith({
         checked: false,
@@ -1110,7 +1110,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'radio',
-        value: 'cat'
+        value: 'cat',
       });
       expect(spyHamster).toHaveBeenCalledWith({
         checked: true,
@@ -1120,7 +1120,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'radio',
-        value: 'hamster'
+        value: 'hamster',
       });
       spyDog.mockReset();
       spyCat.mockReset();
@@ -1145,7 +1145,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'radio',
-        value: 'dog'
+        value: 'dog',
       });
       expect(spyCat).toHaveBeenCalledWith({
         checked: false,
@@ -1155,7 +1155,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'radio',
-        value: 'cat'
+        value: 'cat',
       });
       expect(spyHamster).toHaveBeenCalledWith({
         checked: true,
@@ -1165,7 +1165,7 @@ describe('useField', () => {
         onChange: expect.any(Function),
         onFocus: expect.any(Function),
         type: 'radio',
-        value: 'hamster'
+        value: 'hamster',
       });
     });
   });
@@ -1362,30 +1362,21 @@ describe('useField', () => {
       expect(wrapper.find('select').props().value).toEqual([]);
 
       await act(async () => {
-        wrapper
-          .find('option')
-          .first()
-          .simulate('change');
+        wrapper.find('option').first().simulate('change');
       });
       wrapper.update();
 
       expect(wrapper.find('select').props().value).toEqual(['dogs']);
 
       await act(async () => {
-        wrapper
-          .find('option')
-          .last()
-          .simulate('change');
+        wrapper.find('option').last().simulate('change');
       });
       wrapper.update();
 
       expect(wrapper.find('select').props().value).toEqual(['dogs', 'hamsters']);
 
       await act(async () => {
-        wrapper
-          .find('option')
-          .first()
-          .simulate('change');
+        wrapper.find('option').first().simulate('change');
       });
       wrapper.update();
 
@@ -1402,7 +1393,7 @@ describe('useField', () => {
 
       Dummy = (props) => {
         const {
-          input: { value, ...rest }
+          input: { value, ...rest },
         } = useField(props);
         return (
           <React.Fragment>
@@ -1445,8 +1436,8 @@ describe('useField', () => {
             target: {
               value: '/path/',
               files: ['blabla'],
-              type: 'file'
-            }
+              type: 'file',
+            },
           });
       });
       wrapper.update();
@@ -1454,8 +1445,8 @@ describe('useField', () => {
       expect(managerApi().getState().values).toEqual({
         field: {
           inputFiles: ['blabla'],
-          inputValue: '/path/'
-        }
+          inputValue: '/path/',
+        },
       });
       expect(wrapper.find('span').text()).toEqual('/path/');
     });

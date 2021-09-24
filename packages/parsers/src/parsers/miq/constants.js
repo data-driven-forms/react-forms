@@ -7,7 +7,7 @@ export const componentMap = {
   DialogFieldTextAreaBox: componentTypes.TEXTAREA,
   DialogFieldDropDownList: componentTypes.SELECT,
   DialogFieldDateControl: componentTypes.DATE_PICKER,
-  DialogFieldDateTimeControl: componentTypes.TIME_PICKER
+  DialogFieldDateTimeControl: componentTypes.TIME_PICKER,
 };
 
 // for true values
@@ -18,7 +18,7 @@ export const neededAttributes = [
   ['data_type', 'dataType'],
   ['required', 'isRequired'],
   ['read_only', 'isReadOnly'],
-  ['description', 'helperText']
+  ['description', 'helperText'],
 ];
 
 // for false values

@@ -12,7 +12,7 @@ const NextButton = ({
   valid,
   NextButtonProps,
   SubmitButtonProps,
-  conditionalSubmitFlag
+  conditionalSubmitFlag,
 }) => {
   const nextResult = nextStep ? selectNext(nextStep, getState) : nextStep;
   const progressNext = nextResult !== conditionalSubmitFlag && nextStep;
@@ -39,11 +39,11 @@ NextButton.propTypes = {
     submit: PropTypes.node.isRequired,
     cancel: PropTypes.node.isRequired,
     back: PropTypes.node.isRequired,
-    next: PropTypes.node.isRequired
+    next: PropTypes.node.isRequired,
   }).isRequired,
   NextButtonProps: PropTypes.object,
   SubmitButtonProps: PropTypes.object,
-  conditionalSubmitFlag: PropTypes.string.isRequired
+  conditionalSubmitFlag: PropTypes.string.isRequired,
 };
 
 const WizardStepButtons = ({
@@ -58,7 +58,7 @@ const WizardStepButtons = ({
   CancelButtonProps,
   BackButtonProps,
   SubmitButtonProps,
-  conditionalSubmitFlag
+  conditionalSubmitFlag,
 }) => (
   <div {...ButtonProps}>
     {formOptions.onCancel && (
@@ -90,18 +90,18 @@ WizardStepButtons.propTypes = {
     PropTypes.string,
     PropTypes.shape({
       when: PropTypes.string.isRequired,
-      stepMapper: PropTypes.object.isRequired
-    })
+      stepMapper: PropTypes.object.isRequired,
+    }),
   ]),
   buttonLabels: PropTypes.object.isRequired,
   formOptions: PropTypes.shape({
-    onCancel: PropTypes.func.isRequired
+    onCancel: PropTypes.func.isRequired,
   }).isRequired,
   ButtonProps: PropTypes.object,
   NextButtonProps: PropTypes.object,
   BackButtonProps: PropTypes.object,
   CancelButtonProps: PropTypes.object,
-  SubmitButtonProps: PropTypes.object
+  SubmitButtonProps: PropTypes.object,
 };
 
 export default WizardStepButtons;

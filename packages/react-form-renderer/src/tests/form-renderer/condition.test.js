@@ -28,9 +28,9 @@ describe('condition test', () => {
     initialProps = {
       FormTemplate,
       componentMapper: {
-        [componentTypes.TEXT_FIELD]: TextField
+        [componentTypes.TEXT_FIELD]: TextField,
       },
-      onSubmit: (values) => onSubmit(values)
+      onSubmit: (values) => onSubmit(values),
     };
   });
 
@@ -39,7 +39,7 @@ describe('condition test', () => {
       fields: [
         {
           component: componentTypes.TEXT_FIELD,
-          name: 'field-1'
+          name: 'field-1',
         },
         {
           component: componentTypes.TEXT_FIELD,
@@ -47,11 +47,11 @@ describe('condition test', () => {
           condition: [
             {
               when: 'field-1',
-              is: 'show'
-            }
-          ]
-        }
-      ]
+              is: 'show',
+            },
+          ],
+        },
+      ],
     };
 
     await act(async () => {
@@ -85,7 +85,7 @@ describe('condition test', () => {
       fields: [
         {
           component: componentTypes.TEXT_FIELD,
-          name: 'field-1'
+          name: 'field-1',
         },
         {
           component: componentTypes.TEXT_FIELD,
@@ -93,11 +93,11 @@ describe('condition test', () => {
           condition: [
             {
               when: whenSpy,
-              is: 'show'
-            }
-          ]
-        }
-      ]
+              is: 'show',
+            },
+          ],
+        },
+      ],
     };
 
     wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
@@ -125,7 +125,7 @@ describe('condition test', () => {
       fields: [
         {
           component: componentTypes.TEXT_FIELD,
-          name: 'field-1'
+          name: 'field-1',
         },
         {
           component: componentTypes.TEXT_FIELD,
@@ -135,12 +135,12 @@ describe('condition test', () => {
             is: 'show',
             then: {
               set: {
-                'field-2': 'someValue'
-              }
-            }
-          }
-        }
-      ]
+                'field-2': 'someValue',
+              },
+            },
+          },
+        },
+      ],
     };
 
     await act(async () => {
@@ -166,7 +166,7 @@ describe('condition test', () => {
 
     expect(onSubmit).toHaveBeenCalledWith({
       'field-1': 'show',
-      'field-2': 'someValue'
+      'field-2': 'someValue',
     });
   });
 
@@ -175,7 +175,7 @@ describe('condition test', () => {
       fields: [
         {
           component: componentTypes.TEXT_FIELD,
-          name: 'field-1'
+          name: 'field-1',
         },
         {
           component: componentTypes.TEXT_FIELD,
@@ -185,12 +185,12 @@ describe('condition test', () => {
             is: 'show',
             then: {
               set: {
-                'field-2': 'someValue'
-              }
-            }
-          }
-        }
-      ]
+                'field-2': 'someValue',
+              },
+            },
+          },
+        },
+      ],
     };
 
     await act(async () => {
@@ -208,7 +208,7 @@ describe('condition test', () => {
 
     expect(onSubmit).toHaveBeenCalledWith({
       'field-1': 'show',
-      'field-2': 'someValue'
+      'field-2': 'someValue',
     });
   });
 
@@ -217,7 +217,7 @@ describe('condition test', () => {
       fields: [
         {
           component: componentTypes.TEXT_FIELD,
-          name: 'field-1'
+          name: 'field-1',
         },
         {
           component: componentTypes.TEXT_FIELD,
@@ -227,12 +227,12 @@ describe('condition test', () => {
             is: 'show',
             then: {
               set: {
-                'field-2': 'someValue'
-              }
-            }
-          }
-        }
-      ]
+                'field-2': 'someValue',
+              },
+            },
+          },
+        },
+      ],
     };
 
     await act(async () => {
@@ -261,17 +261,14 @@ describe('condition test', () => {
 
     expect(onSubmit).toHaveBeenCalledWith({
       'field-1': 'dontshow',
-      'field-2': 'someValue'
+      'field-2': 'someValue',
     });
     onSubmit.mockClear();
 
     await act(async () => {
       //Reset
-      wrapper
-        .find('button')
-        .at(1)
-        .simulate('click');
-      jest.advanceTimersByTime(1);
+      wrapper.find('button').at(1).simulate('click');
+      jest.runAllTimers();
     });
     wrapper.update();
 
@@ -282,7 +279,7 @@ describe('condition test', () => {
 
     expect(onSubmit).toHaveBeenCalledWith({
       'field-1': 'show',
-      'field-2': 'someValue'
+      'field-2': 'someValue',
     });
   });
 
@@ -291,7 +288,7 @@ describe('condition test', () => {
       fields: [
         {
           component: componentTypes.TEXT_FIELD,
-          name: 'field-1'
+          name: 'field-1',
         },
         {
           component: componentTypes.TEXT_FIELD,
@@ -304,32 +301,32 @@ describe('condition test', () => {
                 then: {
                   set: {
                     'field-2': 'someValue',
-                    'field-3': 'someValue3'
-                  }
-                }
+                    'field-3': 'someValue3',
+                  },
+                },
               },
               {
                 when: 'field-1',
                 is: 'not',
                 then: {
                   set: {
-                    'field-4': 'someValue4'
-                  }
-                }
+                    'field-4': 'someValue4',
+                  },
+                },
               },
               {
                 when: 'field-1',
                 is: 'show',
                 then: {
                   set: {
-                    'field-5': 'someValuu5'
-                  }
-                }
-              }
-            ]
-          }
-        }
-      ]
+                    'field-5': 'someValuu5',
+                  },
+                },
+              },
+            ],
+          },
+        },
+      ],
     };
 
     await act(async () => {
@@ -353,14 +350,14 @@ describe('condition test', () => {
       'field-1': 'show',
       'field-2': 'someValue',
       'field-3': 'someValue3',
-      'field-5': 'someValuu5'
+      'field-5': 'someValuu5',
     });
   });
 
   describe('reducer', () => {
     it('returns default', () => {
       const initialState = {
-        a: 'bb'
+        a: 'bb',
       };
 
       expect(reducer(initialState, { type: 'nonsesne' })).toEqual(initialState);

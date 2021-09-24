@@ -5,7 +5,7 @@
 This package exists to share code used by more than one data-driven-forms package, such as:
 
 - shared interfaces - propTypes
-- common mappers code 
+- common mappers code
   - wizard
   - select
   - multiplechoice list
@@ -15,12 +15,13 @@ This package exists to share code used by more than one data-driven-forms packag
 
 ...and some boring config files etc.
 
-￼
-This packages is not released but can be referenced in mapper packages. Demo packages does not have access to common package!
-
 ## Usage
 ￼
 ```
 import demoSchema from '../../../shared/demoschema';
 
 ```
+
+# More information
+
+For more information please check the root [repository](https://github.com/data-driven-forms/react-forms) or our [documentation page](https://data-driven-forms.org/).

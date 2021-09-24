@@ -19,7 +19,7 @@ const ClearIndicator = ({ clearSelection }) => (
 );
 
 ClearIndicator.propTypes = {
-  clearSelection: PropTypes.func.isRequired
+  clearSelection: PropTypes.func.isRequired,
 };
 
 export default ClearIndicator;

@@ -12,7 +12,7 @@ import {
   orderingSchema,
   uiOrderingSchema,
   anyOfSelectSchema,
-  conditionalSchema
+  conditionalSchema,
 } from './schemas';
 import { simpleSchemaResult, nestedSchemaResult, arraySchemaResult, numbersSchemaResult, widgetsExpectedResult } from './expected-parser-results';
 import mozillaSchemaParser from '../../parsers/mozilla';
@@ -44,7 +44,7 @@ describe('Mozilla json schema parser', () => {
         fixedItemsList: { additionalItems: undefined },
         minItemsList: { name: 'Default name' },
         defaultsAndMinItems: ['carp', 'trout', 'bream'],
-        fixedNoToolbar: { additionalItems: { items: 'lorem ipsum' } }
+        fixedNoToolbar: { additionalItems: { items: 'lorem ipsum' } },
       })
     );
   });
@@ -67,9 +67,9 @@ describe('Mozilla json schema parser', () => {
       readonly: 'I am read-only.',
       secret: 'I m a hidden string.',
       string: {
-        color: '#151ce6'
+        color: '#151ce6',
       },
-      widgetOptions: 'I am yellow'
+      widgetOptions: 'I am yellow',
     });
   });
 
@@ -81,21 +81,21 @@ describe('Mozilla json schema parser', () => {
       title: 'A registration form',
       fields: [
         expect.objectContaining({
-          name: 'firstName'
+          name: 'firstName',
         }),
         expect.objectContaining({
-          name: 'lastName'
+          name: 'lastName',
         }),
         expect.objectContaining({
-          name: 'bio'
+          name: 'bio',
         }),
         expect.objectContaining({
-          name: 'age'
+          name: 'age',
         }),
         expect.objectContaining({
-          name: 'password'
-        })
-      ]
+          name: 'password',
+        }),
+      ],
     };
     expect(schema).toEqual(expectedResult);
     expect(defaultValues).toEqual({});
@@ -112,27 +112,27 @@ describe('Mozilla json schema parser', () => {
           name: 'authentication',
           options: [
             {
-              label: 'Please Choose'
+              label: 'Please Choose',
             },
             {
               value: 'oauth',
-              label: 'OAuth 2.0'
+              label: 'OAuth 2.0',
             },
             {
               value: 'basic',
-              label: 'Basic Authentication'
+              label: 'Basic Authentication',
             },
             {
               value: 'none',
-              label: 'No Authentication needed'
-            }
-          ]
-        })
-      ])
+              label: 'No Authentication needed',
+            },
+          ],
+        }),
+      ]),
     });
     expect(schema).toEqual(expectedSchema);
     expect(defaultValues).toEqual({
-      authentication: 'none'
+      authentication: 'none',
     });
   });
 
@@ -147,19 +147,19 @@ describe('Mozilla json schema parser', () => {
           name: 'url',
           validate: [
             {
-              type: 'required'
+              type: 'required',
             },
             {
               type: 'pattern',
-              pattern: '^(http|https)://*'
-            }
-          ]
+              pattern: '^(http|https)://*',
+            },
+          ],
         }),
         expect.objectContaining({
-          name: 'verify_ssl'
+          name: 'verify_ssl',
         }),
         expect.objectContaining({
-          name: 'secret'
+          name: 'secret',
         }),
         expect.arrayContaining([
           expect.objectContaining({
@@ -168,47 +168,47 @@ describe('Mozilla json schema parser', () => {
             type: 'text',
             options: [
               {
-                label: 'Please Choose'
+                label: 'Please Choose',
               },
               {
                 label: 'OAuth 2.0',
-                value: 'oauth'
+                value: 'oauth',
               },
               {
                 label: 'Basic Authentication',
-                value: 'basic'
+                value: 'basic',
               },
               {
                 label: 'No Authentication needed',
-                value: 'none'
-              }
-            ]
+                value: 'none',
+              },
+            ],
           }),
           expect.objectContaining({
             component: 'text-field',
             condition: { when: 'authentication', is: ['oauth'] },
             name: 'token',
-            type: 'text'
+            type: 'text',
           }),
           expect.objectContaining({
             component: 'text-field',
             condition: { when: 'authentication', is: ['basic'] },
             name: 'userid',
-            type: 'text'
+            type: 'text',
           }),
           expect.objectContaining({
             component: 'text-field',
             condition: { when: 'authentication', is: ['basic'] },
             type: 'password',
-            name: 'password'
-          })
-        ])
-      ]
+            name: 'password',
+          }),
+        ]),
+      ],
     };
     expect(schema).toEqual(expectedSchema);
     expect(defaultValues).toEqual({
       authentication: 'none',
-      verify_ssl: true // eslint-disable-line camelcase
+      verify_ssl: true, // eslint-disable-line camelcase
     });
   });
 });

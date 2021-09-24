@@ -6,8 +6,8 @@ const useStyles = createUseStyles({
   helperTextStyle: {
     color: '#da1e28',
     display: 'block',
-    overflow: 'initial'
-  }
+    overflow: 'initial',
+  },
 });
 
 const HelperTextBlock = ({ helperText, errorText, warnText }) => {
@@ -31,7 +31,7 @@ const HelperTextBlock = ({ helperText, errorText, warnText }) => {
 HelperTextBlock.propTypes = {
   helperText: PropTypes.node,
   errorText: PropTypes.node,
-  warnText: PropTypes.node
+  warnText: PropTypes.node,
 };
 
 export default HelperTextBlock;

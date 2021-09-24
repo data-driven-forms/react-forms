@@ -11,21 +11,21 @@ import { FormGroupInternal } from '../form-group/form-group';
 const useStyles = createUseStyles({
   menu: {
     height: '80%',
-    overflow: 'auto'
+    overflow: 'auto',
   },
   buttonGroup: {
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   wrapper: {
     display: 'flex',
     justifyContent: 'space-evenly',
-    minHeight: 250
+    minHeight: 250,
   },
   '@media (max-width: 768px)': {
     wrapper: {
-      flexDirection: 'column'
-    }
-  }
+      flexDirection: 'column',
+    },
+  },
 });
 
 const List = ({ value, optionClick, noOptionsTitle, filterValue, filterValueText, selectedValues, MenuProps, MenuItemProps }) => {
@@ -53,7 +53,7 @@ List.propTypes = {
   value: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired
+      label: PropTypes.string.isRequired,
     })
   ),
   optionClick: PropTypes.func.isRequired,
@@ -63,13 +63,13 @@ List.propTypes = {
   selectedValues: PropTypes.array,
   checkboxVariant: PropTypes.bool,
   MenuProps: PropTypes.object,
-  MenuItemProps: PropTypes.object
+  MenuItemProps: PropTypes.object,
 };
 
 List.defaultProps = {
   value: [],
   MenuProps: {},
-  MenuItemProps: {}
+  MenuItemProps: {},
 };
 
 const Toolbar = ({ sortTitle, onFilter, onSort, sortDirection, value, placeholder, ControlGroupProps, InputGroupProps, ButtonProps }) => (
@@ -88,13 +88,13 @@ Toolbar.propTypes = {
   placeholder: PropTypes.string,
   ControlGroupProps: PropTypes.object,
   InputGroupProps: PropTypes.object,
-  ButtonProps: PropTypes.object
+  ButtonProps: PropTypes.object,
 };
 
 Toolbar.defaultProps = {
   ControlGroupProps: {},
   InputGroupProps: {},
-  ButtonProps: {}
+  ButtonProps: {},
 };
 
 const DualListInternal = ({
@@ -142,7 +142,7 @@ const DualListInternal = ({
   LeftMenuProps,
   LeftMenuItemProps,
   RightMenuProps,
-  RightMenuItemProps
+  RightMenuItemProps,
 }) => {
   const { buttonGroup, wrapper } = useStyles();
 
@@ -278,7 +278,7 @@ DualListInternal.propTypes = {
   LeftMenuProps: PropTypes.object,
   LeftMenuItemProps: PropTypes.object,
   RightMenuProps: PropTypes.object,
-  RightMenuItemProps: PropTypes.object
+  RightMenuItemProps: PropTypes.object,
 };
 
 DualListInternal.defaultProps = {
@@ -314,7 +314,7 @@ DualListInternal.defaultProps = {
   LeftMenuProps: {},
   LeftMenuItemProps: {},
   RightMenuProps: {},
-  RightMenuItemProps: {}
+  RightMenuItemProps: {},
 };
 
 const DualListWrapper = (props) => <FormGroupInternal {...props} Component={DualListInternal} />;

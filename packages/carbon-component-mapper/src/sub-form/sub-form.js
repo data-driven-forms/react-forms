@@ -8,9 +8,9 @@ import { useFormApi } from '@data-driven-forms/react-form-renderer';
 const useStyles = createUseStyles({
   subForm: {
     '&>:not(:last-child)': {
-      marginBottom: 32
-    }
-  }
+      marginBottom: 32,
+    },
+  },
 });
 
 const SubForm = ({ fields, component, title, description, TitleElement, DescriptionElement, TitleProps, DescriptionProps, HeaderProps, ...rest }) => {
@@ -39,12 +39,12 @@ SubForm.propTypes = {
   DescriptionElement: PropTypes.string,
   TitleProps: PropTypes.object,
   DescriptionProps: PropTypes.object,
-  HeaderProps: PropTypes.object
+  HeaderProps: PropTypes.object,
 };
 
 SubForm.defaultProps = {
   TitleElement: 'h3',
-  DescriptionElement: 'p'
+  DescriptionElement: 'p',
 };
 
 export default SubForm;

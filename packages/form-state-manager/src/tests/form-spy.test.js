@@ -25,7 +25,7 @@ describe('<FormSpy />', () => {
         values: {},
         valid: true,
         validating: false,
-        invalid: false
+        invalid: false,
       })
     );
 

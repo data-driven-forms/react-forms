@@ -21,7 +21,7 @@ const calculateValidate = (props, validate, component, validatorMapper) => {
 const init = ({ props, validate, component, validatorMapper }) => ({
   arrayValidator: calculateArrayValidator(props, validate, component, validatorMapper),
   validate: calculateValidate(props, validate, component, validatorMapper),
-  type: assignSpecialType(component)
+  type: assignSpecialType(component),
 });
 
 const reducer = (state, { type, specialType, validate, arrayValidator, initialValue }) => {
@@ -29,18 +29,18 @@ const reducer = (state, { type, specialType, validate, arrayValidator, initialVa
     case 'setType':
       return {
         ...state,
-        type: specialType
+        type: specialType,
       };
     case 'setValidators':
       return {
         ...state,
         validate,
-        arrayValidator
+        arrayValidator,
       };
     case 'setInitialValue':
       return {
         ...state,
-        initialValue
+        initialValue,
       };
     default:
       return state;
@@ -52,7 +52,7 @@ const createFieldProps = (name, formOptions) => {
 
   return {
     meta,
-    input: { name, value }
+    input: { name, value },
   };
 };
 
@@ -78,7 +78,7 @@ const useFieldApi = ({ name, resolveProps, skipRegistration = false, ...props })
     ...rest,
     ...FieldProps,
     ...(type ? { type } : {}),
-    ...(stateValidate ? { validate: stateValidate } : {})
+    ...(stateValidate ? { validate: stateValidate } : {}),
   };
 
   const field = useField(enhancedProps);
@@ -99,7 +99,7 @@ const useFieldApi = ({ name, resolveProps, skipRegistration = false, ...props })
       dispatch({
         type: 'setValidators',
         validate: calculateValidate(enhancedProps, validate, component, validatorMapper),
-        arrayValidator: calculateArrayValidator(enhancedProps, validate, component, validatorMapper)
+        arrayValidator: calculateArrayValidator(enhancedProps, validate, component, validatorMapper),
       });
     }
     /**
@@ -143,7 +143,7 @@ const useFieldApi = ({ name, resolveProps, skipRegistration = false, ...props })
    */
   return {
     ...cleanProps,
-    ...(arrayValidator && { arrayValidator })
+    ...(arrayValidator && { arrayValidator }),
   };
 };
 

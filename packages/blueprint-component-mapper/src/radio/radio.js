@@ -15,7 +15,7 @@ const Radio = ({ input, label, isRequired, providerRequired, ...props }) => (
         <span>
           {label} {providerRequired}
         </span>
-      )
+      ),
     })}
     {...propsCatcher(props)}
     {...input}
@@ -27,7 +27,7 @@ Radio.propTypes = {
   input: PropTypes.object,
   label: PropTypes.node,
   isRequired: PropTypes.bool,
-  providerRequired: PropTypes.node
+  providerRequired: PropTypes.node,
 };
 
 const WrapperRadio = (props) => <FormGroupWrapper {...props} hideLabel Component={Radio} component="not-radio" />;

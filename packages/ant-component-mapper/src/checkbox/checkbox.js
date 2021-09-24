@@ -9,7 +9,7 @@ import FormGroup from '../form-group';
 export const SingleCheckbox = (props) => {
   const { input, isReadOnly, isDisabled, isRequired, label, helperText, description, validateOnMount, meta, FormItemProps, ...rest } = useFieldApi({
     ...props,
-    type: 'checkbox'
+    type: 'checkbox',
   });
 
   return (
@@ -45,13 +45,13 @@ SingleCheckbox.propTypes = {
   helperText: PropTypes.node,
   description: PropTypes.node,
   validateOnMount: PropTypes.bool,
-  FormItemProps: PropTypes.object
+  FormItemProps: PropTypes.object,
 };
 
 const Checkbox = ({ options, ...props }) => (options ? <MultipleChoiceList options={options} {...props} /> : <SingleCheckbox {...props} />);
 
 Checkbox.propTypes = {
-  options: PropTypes.array
+  options: PropTypes.array,
 };
 
 export default Checkbox;

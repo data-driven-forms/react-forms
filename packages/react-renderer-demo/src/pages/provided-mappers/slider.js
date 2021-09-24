@@ -10,41 +10,41 @@ const schema = {
       label: 'Distance',
       min: 1,
       max: 100,
-      step: 1
-    }
-  ]
+      step: 1,
+    },
+  ],
 };
 
 const variants = [
   {
     name: 'name',
     type: 'string',
-    required: true
+    required: true,
   },
   {
     name: 'label',
-    type: 'string'
+    type: 'string',
   },
   {
     name: 'helperText',
-    type: 'string'
+    type: 'string',
   },
   {
     name: 'description',
-    type: 'string'
+    type: 'string',
   },
   {
     name: 'min',
-    type: 'number'
+    type: 'number',
   },
   {
     name: 'max',
-    type: 'number'
+    type: 'number',
   },
   {
     name: 'step',
-    type: 'number'
-  }
+    type: 'number',
+  },
 ];
 
 const Slider = () => <ComponentText schema={schema} variants={variants} linkText="Slider" />;

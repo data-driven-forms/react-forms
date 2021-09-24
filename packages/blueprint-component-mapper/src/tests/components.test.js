@@ -28,7 +28,7 @@ describe('formFields generated tests', () => {
   const options = [
     { label: 'Cat', value: 'cats' },
     { label: 'Dog', value: 'dogs' },
-    { label: 'Hamster', value: 'hamsters' }
+    { label: 'Hamster', value: 'hamsters' },
   ];
 
   const componentsWithOptions = [componentTypes.RADIO, componentTypes.SELECT];
@@ -48,7 +48,7 @@ describe('formFields generated tests', () => {
       componentTypes.TIME_PICKER,
       componentTypes.SWITCH,
       componentTypes.SELECT,
-      componentTypes.SLIDER
+      componentTypes.SLIDER,
     ].forEach((component) => {
       describe(`Component type: ${component}`, () => {
         beforeEach(() => {
@@ -59,7 +59,7 @@ describe('formFields generated tests', () => {
           if (componentsWithOptions.includes(component)) {
             field = {
               ...field,
-              options
+              options,
             };
           }
 
@@ -72,21 +72,10 @@ describe('formFields generated tests', () => {
           if (component === componentTypes.RADIO) {
             expect(wrapper.find('.bp3-radio')).toHaveLength(options.length);
           } else if (component === componentTypes.SWITCH) {
-            expect(
-              wrapper
-                .find('.bp3-switch')
-                .first()
-                .text()
-                .includes(field.label)
-            ).toEqual(true);
+            expect(wrapper.find('.bp3-switch').first().text().includes(field.label)).toEqual(true);
           } else {
             expect(wrapper.find(componentMapper[component])).toHaveLength(1);
-            expect(
-              wrapper
-                .find('label')
-                .text()
-                .includes(field.label)
-            ).toEqual(true);
+            expect(wrapper.find('label').text().includes(field.label)).toEqual(true);
           }
 
           expect(wrapper.find(FormGroupWrapper)).toHaveLength(1);
@@ -96,16 +85,11 @@ describe('formFields generated tests', () => {
         it('renders with error', () => {
           const errorField = {
             ...field,
-            validate: [{ type: validatorTypes.REQUIRED }]
+            validate: [{ type: validatorTypes.REQUIRED }],
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [errorField] }} />);
           wrapper.find('form').simulate('submit');
-          expect(
-            wrapper
-              .find('.bp3-form-helper-text')
-              .last()
-              .text()
-          ).toEqual(errorText);
+          expect(wrapper.find('.bp3-form-helper-text').last().text()).toEqual(errorText);
           expect(wrapper.find('.bp3-intent-danger').length).toBeGreaterThanOrEqual(1);
         });
 
@@ -113,7 +97,7 @@ describe('formFields generated tests', () => {
           const errorField = {
             ...field,
             validate: [{ type: validatorTypes.REQUIRED, warning: true }],
-            validateOnMount: true
+            validateOnMount: true,
           };
           let wrapper;
 
@@ -122,115 +106,75 @@ describe('formFields generated tests', () => {
           });
           wrapper.update();
 
-          expect(
-            wrapper
-              .find('.bp3-form-helper-text')
-              .last()
-              .text()
-          ).toEqual(errorText);
+          expect(wrapper.find('.bp3-form-helper-text').last().text()).toEqual(errorText);
           expect(wrapper.find('.bp3-intent-warning').length).toBeGreaterThanOrEqual(1);
         });
 
         it('renders with helperText', () => {
           const helpertextField = {
             ...field,
-            helperText
+            helperText,
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [helpertextField] }} />);
 
-          expect(
-            wrapper
-              .find('.bp3-form-helper-text')
-              .last()
-              .text()
-          ).toEqual(helperText);
+          expect(wrapper.find('.bp3-form-helper-text').last().text()).toEqual(helperText);
         });
 
         it('renders with description', () => {
           const descriptionField = {
             ...field,
-            description
+            description,
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [descriptionField] }} />);
 
-          expect(
-            wrapper
-              .find('.bp3-form-helper-text')
-              .last()
-              .text()
-          ).toEqual(description);
+          expect(wrapper.find('.bp3-form-helper-text').last().text()).toEqual(description);
         });
 
         it('renders with description and helperText', () => {
           const descriptionField = {
             ...field,
             description,
-            helperText
+            helperText,
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [descriptionField] }} />);
 
-          expect(
-            wrapper
-              .find('.bp3-form-helper-text')
-              .last()
-              .text()
-          ).toEqual(helperText);
+          expect(wrapper.find('.bp3-form-helper-text').last().text()).toEqual(helperText);
         });
 
         it('renders with error and helperText', () => {
           const errorFields = {
             ...field,
             helperText,
-            validate: [{ type: validatorTypes.REQUIRED }]
+            validate: [{ type: validatorTypes.REQUIRED }],
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [errorFields] }} />);
           wrapper.find('form').simulate('submit');
 
-          expect(
-            wrapper
-              .find('.bp3-form-helper-text')
-              .last()
-              .text()
-          ).toEqual(errorText);
+          expect(wrapper.find('.bp3-form-helper-text').last().text()).toEqual(errorText);
         });
 
         it('renders isRequired', () => {
           const requiredField = {
             ...field,
-            isRequired: true
+            isRequired: true,
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [requiredField] }} />);
 
-          expect(
-            wrapper
-              .find('.bp3-text-muted')
-              .last()
-              .text()
-          ).toEqual('(required)');
+          expect(wrapper.find('.bp3-text-muted').last().text()).toEqual('(required)');
         });
 
         it('renders isDisabled', () => {
           const disabledField = {
             ...field,
-            isDisabled: true
+            isDisabled: true,
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField] }} />);
 
           if (component === componentTypes.TEXTAREA) {
-            expect(
-              wrapper
-                .find('textarea')
-                .first()
-                .props().disabled
-            ).toEqual(true);
+            expect(wrapper.find('textarea').first().props().disabled).toEqual(true);
           } else {
             if (!wrapper.find('.bp3-disabled')) {
-              expect(
-                wrapper
-                  .find('input')
-                  .first()
-                  .props().disabled
-              ).toEqual(true);
+              expect(wrapper.find('input').first().props().disabled).toEqual(true);
             } else {
               expect(wrapper.find('.bp3-disabled').length).toBeGreaterThanOrEqual(1);
             }
@@ -240,25 +184,15 @@ describe('formFields generated tests', () => {
         it('renders isReadOnly', () => {
           const disabledField = {
             ...field,
-            isReadOnly: true
+            isReadOnly: true,
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField] }} />);
 
           if (component === componentTypes.TEXTAREA) {
-            expect(
-              wrapper
-                .find('textarea')
-                .first()
-                .props().disabled
-            ).toEqual(true);
+            expect(wrapper.find('textarea').first().props().disabled).toEqual(true);
           } else {
             if (!wrapper.find('.bp3-disabled')) {
-              expect(
-                wrapper
-                  .find('input')
-                  .first()
-                  .props().disabled
-              ).toEqual(true);
+              expect(wrapper.find('input').first().props().disabled).toEqual(true);
             } else {
               expect(wrapper.find('.bp3-disabled').length).toBeGreaterThanOrEqual(1);
             }
@@ -268,12 +202,7 @@ describe('formFields generated tests', () => {
         it('renders with submit error', () => {
           const wrapper = mount(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
           wrapper.find('form').simulate('submit');
-          expect(
-            wrapper
-              .find('.bp3-form-helper-text')
-              .last()
-              .text()
-          ).toEqual(errorText);
+          expect(wrapper.find('.bp3-form-helper-text').last().text()).toEqual(errorText);
           expect(wrapper.find('.bp3-intent-danger').length).toBeGreaterThanOrEqual(1);
         });
       });

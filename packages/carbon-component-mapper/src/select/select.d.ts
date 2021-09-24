@@ -1,4 +1,4 @@
-import { FormGroupProps } from "./form-group";
+import { FormGroupProps } from "../form-group";
 import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-renderer";
 
 import { SelectItemProps, SelectProps as CarbonSelectProps } from 'carbon-components-react';

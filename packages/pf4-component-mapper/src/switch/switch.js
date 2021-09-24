@@ -23,7 +23,7 @@ const Switch = (props) => {
     ...rest
   } = useFieldApi({
     ...props,
-    type: 'checkbox'
+    type: 'checkbox',
   });
   return (
     <FormGroup
@@ -59,7 +59,7 @@ Switch.propTypes = {
   id: PropTypes.string,
   onText: PropTypes.node,
   offText: PropTypes.node,
-  FormGroupProps: PropTypes.object
+  FormGroupProps: PropTypes.object,
 };
 
 export default Switch;

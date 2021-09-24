@@ -6,7 +6,7 @@ const wizardSchema = {
       component: componentTypes.WIZARD,
       name: 'wizzard',
       buttonLabels: {
-        submit: 'Add new source'
+        submit: 'Add new source',
       },
       buttonsClassName: 'Foo',
       fields: [
@@ -17,15 +17,15 @@ const wizardSchema = {
             when: 'source-type',
             stepMapper: {
               aws: 'aws',
-              google: 'google'
-            }
+              google: 'google',
+            },
           },
           fields: [
             {
               component: componentTypes.TEXTAREA,
               name: 'source-name',
               type: 'text',
-              label: 'Source name'
+              label: 'Source name',
             },
             {
               component: componentTypes.SELECT,
@@ -34,24 +34,24 @@ const wizardSchema = {
               isRequired: true,
               options: [
                 {
-                  label: 'Please Choose'
+                  label: 'Please Choose',
                 },
                 {
                   value: 'aws',
-                  label: 'Aws'
+                  label: 'Aws',
                 },
                 {
                   value: 'google',
-                  label: 'Google'
-                }
+                  label: 'Google',
+                },
               ],
               validate: [
                 {
-                  type: validatorTypes.REQUIRED
-                }
-              ]
-            }
-          ]
+                  type: validatorTypes.REQUIRED,
+                },
+              ],
+            },
+          ],
         },
         {
           title: 'Configure AWS',
@@ -61,9 +61,9 @@ const wizardSchema = {
             {
               component: componentTypes.TEXT_FIELD,
               name: 'aws-field',
-              label: 'Aws field part'
-            }
-          ]
+              label: 'Aws field part',
+            },
+          ],
         },
         {
           name: 'google',
@@ -72,13 +72,13 @@ const wizardSchema = {
             {
               component: componentTypes.TEXT_FIELD,
               name: 'google-field',
-              label: 'Google field part'
-            }
-          ]
-        }
-      ]
-    }
-  ]
+              label: 'Google field part',
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 export default wizardSchema;

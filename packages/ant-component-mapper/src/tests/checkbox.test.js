@@ -19,15 +19,15 @@ describe('<Checkbox />', () => {
           options: [
             {
               label: 'option 1',
-              value: 1
+              value: 1,
             },
             {
               label: 'option 2',
-              value: 2
-            }
-          ]
-        }
-      ]
+              value: 2,
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(
@@ -35,18 +35,8 @@ describe('<Checkbox />', () => {
     );
 
     expect(wrapper.find(Checkbox)).toHaveLength(2);
-    expect(
-      wrapper
-        .find(Checkbox)
-        .first()
-        .props().children
-    ).toEqual('option 1');
-    expect(
-      wrapper
-        .find(Checkbox)
-        .last()
-        .props().children
-    ).toEqual('option 2');
+    expect(wrapper.find(Checkbox).first().props().children).toEqual('option 1');
+    expect(wrapper.find(Checkbox).last().props().children).toEqual('option 2');
     expect(wrapper.find('.ant-form-item-required')).toHaveLength(0);
   });
 
@@ -61,15 +51,15 @@ describe('<Checkbox />', () => {
           options: [
             {
               label: 'option 1',
-              value: 1
+              value: 1,
             },
             {
               label: 'option 2',
-              value: 2
-            }
-          ]
-        }
-      ]
+              value: 2,
+            },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(

@@ -20,7 +20,7 @@ const rerouting = {
   '/renderer/schema-validator': '/mappers/schema-validator-mapper',
   '/renderer/condition': '/schema/introduction#condition',
   '/renderer/validators': '/schema/introduction#validate',
-  '/mappers/component-api': '/provided-mappers/component-api'
+  '/mappers/component-api': '/provided-mappers/component-api',
 };
 
 const validatorHashMapper = {
@@ -33,7 +33,7 @@ const validatorHashMapper = {
   '#asyncvalidator': 'async-validator',
   '#customvalidatormapper': 'validator-mapper',
   '#recordlevelvalidation': 'record-level-validation',
-  '#overwritingdefaultmessages': 'overwriting-default-message'
+  '#overwritingdefaultmessages': 'overwriting-default-message',
 };
 
 const conditionHashMapper = {
@@ -51,7 +51,7 @@ const conditionHashMapper = {
   '#conditionalactions': 'condition-actions',
   '#set': 'condition-set',
   '#visible': 'condition-visible',
-  '#example': 'complex-condition-example'
+  '#example': 'complex-condition-example',
 };
 
 const movedMappers = [
@@ -77,7 +77,7 @@ const movedMappers = [
   'slider',
   'wizard',
   'field-array',
-  'sub-form'
+  'sub-form',
 ];
 
 const Custom404 = () => {

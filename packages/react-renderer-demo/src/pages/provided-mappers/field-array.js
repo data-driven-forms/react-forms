@@ -6,18 +6,18 @@ const variants = [
   {
     name: 'name',
     type: 'string',
-    required: true
+    required: true,
   },
   {
     name: 'label',
     type: 'string',
-    required: false
+    required: false,
   },
   {
     name: 'description',
     type: 'string',
-    required: false
-  }
+    required: false,
+  },
 ];
 
 const FieldArray = () => <ComponentText schema={arraySchemaDDF} variants={variants} linkText="Field Array" />;

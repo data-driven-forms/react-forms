@@ -23,10 +23,10 @@ describe('<Tabs />', () => {
           description: 'desc',
           fields: [
             { component: componentTypes.SLIDER, name: 'slider' },
-            { component: componentTypes.TEXT_FIELD, name: 'text_field' }
-          ]
-        }
-      ]
+            { component: componentTypes.TEXT_FIELD, name: 'text_field' },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(

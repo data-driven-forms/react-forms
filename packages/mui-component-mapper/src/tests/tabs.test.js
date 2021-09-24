@@ -13,18 +13,18 @@ describe('tabs', () => {
       {
         title: 'cosiTitle',
         name: 'cosiName',
-        fields: []
+        fields: [],
       },
       {
         title: 'cosiTitle2',
         name: 'cosiName2',
-        fields: []
-      }
-    ]
+        fields: [],
+      },
+    ],
   };
 
   const formOptions = {
-    renderForm: jest.fn().mockImplementation(() => <h1>Content</h1>)
+    renderForm: jest.fn().mockImplementation(() => <h1>Content</h1>),
   };
 
   it('should render tabs correctly', () => {
@@ -47,35 +47,15 @@ describe('tabs', () => {
       </RenderWithProvider>
     );
 
-    expect(
-      wrapper
-        .find(Tab)
-        .first()
-        .props().selected
-    ).toEqual(true);
-    expect(
-      wrapper
-        .find(Tab)
-        .last()
-        .props().selected
-    ).toEqual(false);
+    expect(wrapper.find(Tab).first().props().selected).toEqual(true);
+    expect(wrapper.find(Tab).last().props().selected).toEqual(false);
 
     const secondTabButton = wrapper.find('button').last();
     secondTabButton.simulate('click');
     wrapper.update();
 
-    expect(
-      wrapper
-        .find(Tab)
-        .first()
-        .props().selected
-    ).toEqual(false);
-    expect(
-      wrapper
-        .find(Tab)
-        .last()
-        .props().selected
-    ).toEqual(true);
+    expect(wrapper.find(Tab).first().props().selected).toEqual(false);
+    expect(wrapper.find(Tab).last().props().selected).toEqual(true);
   });
 
   it('validate all tabs', () => {
@@ -99,9 +79,9 @@ describe('tabs', () => {
                     {
                       component: 'text-field',
                       name: 'name',
-                      validate: [{ type: validatorTypes.REQUIRED }]
-                    }
-                  ]
+                      validate: [{ type: validatorTypes.REQUIRED }],
+                    },
+                  ],
                 },
                 {
                   name: 'tabitem2',
@@ -110,13 +90,13 @@ describe('tabs', () => {
                     {
                       component: 'text-field',
                       name: 'password',
-                      validate: [{ type: validatorTypes.REQUIRED }]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+                      validate: [{ type: validatorTypes.REQUIRED }],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
         }}
       />
     );

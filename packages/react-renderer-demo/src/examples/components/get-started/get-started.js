@@ -7,7 +7,7 @@ import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template'
 import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 const schema = {
@@ -19,9 +19,9 @@ const schema = {
       isRequired: true,
       validate: [
         {
-          type: validatorTypes.REQUIRED
-        }
-      ]
+          type: validatorTypes.REQUIRED,
+        },
+      ],
     },
     {
       name: 'last-name',
@@ -30,17 +30,17 @@ const schema = {
       isRequired: true,
       validate: [
         {
-          type: validatorTypes.REQUIRED
-        }
-      ]
+          type: validatorTypes.REQUIRED,
+        },
+      ],
     },
     {
       name: 'age',
       label: 'Age',
       component: componentTypes.TEXT_FIELD,
-      type: 'number'
-    }
-  ]
+      type: 'number',
+    },
+  ],
 };
 
 const FormTemplateCanReset = (props) => <FormTemplate {...props} canReset />;

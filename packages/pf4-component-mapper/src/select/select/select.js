@@ -91,7 +91,7 @@ const stateReducer = (state, changes, isMulti) => {
         ...state,
         ...changes,
         highlightedIndex: undefined, // reset the item focus to prevent initial scroll and portal menu warping
-        inputValue: undefined
+        inputValue: undefined,
       };
     case Downshift.stateChangeTypes.keyDownEnter:
     case Downshift.stateChangeTypes.clickItem:
@@ -99,24 +99,24 @@ const stateReducer = (state, changes, isMulti) => {
         ...changes,
         isOpen: isMulti ? state.isOpen : !state.isOpen,
         highlightedIndex: state.highlightedIndex,
-        inputValue: isMulti ? state.inputValue : changes.inputValue // prevent filter value change after option click
+        inputValue: isMulti ? state.inputValue : changes.inputValue, // prevent filter value change after option click
       };
     case Downshift.stateChangeTypes.controlledPropUpdatedSelectedItem:
       return {
         ...changes,
-        inputValue: state.inputValue
+        inputValue: state.inputValue,
       };
     case Downshift.stateChangeTypes.mouseUp:
       if (typeof changes.inputValue === 'string') {
         return {
-          ...changes
+          ...changes,
         };
       }
 
       if (Array.isArray(changes.inputValue) && typeof changes.inputValue[0] === 'string') {
         return {
           ...changes,
-          inputValue: changes.inputValue[0]
+          inputValue: changes.inputValue[0],
         };
       }
 
@@ -124,13 +124,13 @@ const stateReducer = (state, changes, isMulti) => {
         return {
           ...state,
           ...changes,
-          inputValue: ''
+          inputValue: '',
         };
       }
 
       return {
         ...changes,
-        inputValue: state.inputValue
+        inputValue: state.inputValue,
       };
     default:
       return changes;
@@ -237,7 +237,7 @@ InternalSelect.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.any,
-      label: PropTypes.any
+      label: PropTypes.any,
     })
   ).isRequired,
   value: PropTypes.any,
@@ -255,7 +255,7 @@ InternalSelect.propTypes = {
   onInputChange: PropTypes.func,
   loadingMessage: PropTypes.node,
   menuPortalTarget: PropTypes.any,
-  menuIsPortal: PropTypes.bool
+  menuIsPortal: PropTypes.bool,
 };
 
 const Select = ({ menuIsPortal, ...props }) => {
@@ -273,7 +273,7 @@ Select.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.any,
-      label: PropTypes.any
+      label: PropTypes.any,
     })
   ),
   onChange: PropTypes.func.isRequired,
@@ -284,7 +284,7 @@ Select.propTypes = {
   menuIsPortal: PropTypes.bool,
   placeholder: PropTypes.string,
   noResultsMessage: PropTypes.node,
-  noOptionsMessage: PropTypes.node
+  noOptionsMessage: PropTypes.node,
 };
 
 Select.defaultProps = {
@@ -299,7 +299,7 @@ Select.defaultProps = {
   isSearchable: false,
   isClearable: false,
   noResultsMessage: 'No results found',
-  noOptionsMessage: 'No options'
+  noOptionsMessage: 'No options',
 };
 
 export default Select;

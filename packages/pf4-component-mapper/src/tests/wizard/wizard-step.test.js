@@ -17,7 +17,7 @@ describe('<WizardStep />', () => {
         renderForm: (item) => <div key={item}>{item}</div>,
         onCancel: jest.fn(),
         handleSubmit: jest.fn(),
-        getState: jest.fn()
+        getState: jest.fn(),
       },
       handlePrev: jest.fn(),
       handleNext: jest.fn(),
@@ -25,10 +25,10 @@ describe('<WizardStep />', () => {
         cancel: 'Cancel',
         next: 'Next',
         submit: 'Submit',
-        back: 'Back'
+        back: 'Back',
       },
       title: 'title',
-      description: 'description'
+      description: 'description',
     };
   });
 
@@ -68,12 +68,7 @@ describe('<WizardStep />', () => {
       const wrapper = mount(<RenderTitle title={TITLE} />);
 
       expect(wrapper.find(Title)).toHaveLength(1);
-      expect(
-        wrapper
-          .find(Title)
-          .html()
-          .includes(TITLE)
-      ).toEqual(true);
+      expect(wrapper.find(Title).html().includes(TITLE)).toEqual(true);
     });
 
     it('should render custom title', () => {
@@ -81,12 +76,7 @@ describe('<WizardStep />', () => {
 
       expect(wrapper.find(Title)).toHaveLength(0);
       expect(wrapper.find('h3')).toHaveLength(1);
-      expect(
-        wrapper
-          .find('h3')
-          .html()
-          .includes(CUSTOM_TITLE)
-      ).toEqual(true);
+      expect(wrapper.find('h3').html().includes(CUSTOM_TITLE)).toEqual(true);
     });
   });
 });

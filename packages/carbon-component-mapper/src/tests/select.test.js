@@ -5,8 +5,8 @@ import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-rend
 
 import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
-import { Select, MultiSelect, ComboBox } from 'carbon-components-react';
-import { multiOnChange } from '../select';
+import { Select, MultiSelect, ComboBox, SelectItem, SelectItemGroup } from 'carbon-components-react';
+import { getMultiValue } from '../select/select';
 
 describe('<Select />', () => {
   it('renders select', () => {
@@ -18,10 +18,10 @@ describe('<Select />', () => {
           label: 'select',
           options: [
             { label: 'option 1', value: 1 },
-            { label: 'option 2', value: 2 }
-          ]
-        }
-      ]
+            { label: 'option 2', value: 2 },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(
@@ -29,6 +29,42 @@ describe('<Select />', () => {
     );
 
     expect(wrapper.find(Select)).toHaveLength(1);
+  });
+
+  it('renders select with categories', () => {
+    const schema = {
+      fields: [
+        {
+          component: componentTypes.SELECT,
+          name: 'select',
+          label: 'select',
+          options: [
+            {
+              label: 'Category 1',
+              options: [
+                { label: 'value 1', value: '111' },
+                { label: 'value 2', value: '222' },
+              ],
+            },
+            {
+              label: 'Category 2',
+              options: [
+                { label: 'value 3', value: '333' },
+                { label: 'value 4', value: '444' },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+
+    const wrapper = mount(
+      <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
+    );
+
+    expect(wrapper.find(Select)).toHaveLength(1);
+    expect(wrapper.find(SelectItemGroup)).toHaveLength(2);
+    expect(wrapper.find(SelectItem)).toHaveLength(4);
   });
 
   ['isSearchable', 'isClearable'].forEach((setting) => {
@@ -42,10 +78,10 @@ describe('<Select />', () => {
             [setting]: true,
             options: [
               { label: 'option 1', value: 1 },
-              { label: 'option 2', value: 2 }
-            ]
-          }
-        ]
+              { label: 'option 2', value: 2 },
+            ],
+          },
+        ],
       };
 
       const wrapper = mount(
@@ -67,10 +103,10 @@ describe('<Select />', () => {
           isClearable: true,
           options: [
             { label: 'option 1', value: 1 },
-            { label: 'option 2', value: 2 }
-          ]
-        }
-      ]
+            { label: 'option 2', value: 2 },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(
@@ -100,10 +136,10 @@ describe('<Select />', () => {
           simpleValue: true,
           options: [
             { label: 'option 1', value: 1 },
-            { label: 'option 2', value: 2 }
-          ]
-        }
-      ]
+            { label: 'option 2', value: 2 },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(
@@ -132,10 +168,10 @@ describe('<Select />', () => {
           isMulti: true,
           options: [
             { label: 'option 1', value: 1 },
-            { label: 'option 2', value: 2 }
-          ]
-        }
-      ]
+            { label: 'option 2', value: 2 },
+          ],
+        },
+      ],
     };
 
     const wrapper = mount(
@@ -158,10 +194,10 @@ describe('<Select />', () => {
             [setting]: true,
             options: [
               { label: 'option 1', value: 1 },
-              { label: 'option 2', value: 2 }
-            ]
-          }
-        ]
+              { label: 'option 2', value: 2 },
+            ],
+          },
+        ],
       };
 
       const wrapper = mount(
@@ -172,25 +208,37 @@ describe('<Select />', () => {
     });
   });
 
-  describe('multichange', () => {
-    const input = {
-      onChange: jest.fn()
-    };
+  describe('getMultiValue', () => {
+    let value;
+    let options;
 
     beforeEach(() => {
-      input.onChange.mockReset();
+      value = undefined;
+      options = [];
     });
 
-    it('simpleValue', () => {
-      multiOnChange(input, true)({ selectedItems: [{ value: '123' }, { value: '345' }] });
-
-      expect(input.onChange).toHaveBeenCalledWith(['123', '345']);
+    it('undefined', () => {
+      expect(getMultiValue(value, options)).toEqual([]);
     });
 
-    it('not simple value', () => {
-      multiOnChange(input, false)({ selectedItems: [{ value: '123' }, { value: '345' }] });
+    it('array', () => {
+      value = ['dogs'];
+      options = [
+        { label: 'cats', value: 'cats' },
+        { label: 'dogs', value: 'dogs' },
+      ];
 
-      expect(input.onChange).toHaveBeenCalledWith([{ value: '123' }, { value: '345' }]);
+      expect(getMultiValue(value, options)).toEqual([{ label: 'dogs', value: 'dogs' }]);
+    });
+
+    it('single', () => {
+      value = 'dogs';
+      options = [
+        { label: 'cats', value: 'cats' },
+        { label: 'dogs', value: 'dogs' },
+      ];
+
+      expect(getMultiValue(value, options)).toEqual([{ label: 'dogs', value: 'dogs' }]);
     });
   });
 });

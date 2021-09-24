@@ -7,10 +7,8 @@ import { FormGroup, RadioButtonGroup, RadioButton } from 'carbon-components-reac
 import prepareProps from '../prepare-props';
 import HelperTextBlock from '../helper-text-block/helper-text-block';
 
-const Radio = (props) => {
-  const { labelText, disabled, input, options, FormGroupProps, helperText, meta, validateOnMount, ...rest } = useFieldApi(
-    prepareProps({ type: 'radio', ...props })
-  );
+const Radio = ({ component, ...props }) => {
+  const { labelText, disabled, input, options, FormGroupProps, helperText, meta, validateOnMount, ...rest } = useFieldApi(prepareProps(props));
 
   const invalid = (meta.touched || validateOnMount) && (meta.error || meta.submitError);
   const warnText = (meta.touched || validateOnMount) && meta.warning;
@@ -28,6 +26,7 @@ const Radio = (props) => {
 };
 
 Radio.propTypes = {
+  component: PropTypes.string,
   FormGroupProps: PropTypes.object,
   isDisabled: PropTypes.bool,
   label: PropTypes.node,
@@ -35,9 +34,9 @@ Radio.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.node,
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     })
-  )
+  ),
 };
 
 export default Radio;

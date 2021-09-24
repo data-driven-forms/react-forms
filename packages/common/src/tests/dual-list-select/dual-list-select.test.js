@@ -30,7 +30,7 @@ describe('dual list select', () => {
     handleClearLeftValues,
     handleClearRightValues,
     state,
-    input: { value }
+    input: { value },
   }) => {
     spyState({ ...state, leftValues, rightValues, value });
 
@@ -64,28 +64,28 @@ describe('dual list select', () => {
           options: [
             {
               value: 'cats',
-              label: 'cats'
+              label: 'cats',
             },
             {
               value: 'cats_1',
-              label: 'cats_1'
+              label: 'cats_1',
             },
             {
               value: 'cats_2',
-              label: 'cats_2'
+              label: 'cats_2',
             },
             {
               value: 'zebras',
-              label: 'zebras'
+              label: 'zebras',
             },
             {
               value: 'pigeons',
-              label: 'pigeons'
-            }
-          ]
-        }
-      ]
-    }
+              label: 'pigeons',
+            },
+          ],
+        },
+      ],
+    },
   };
 
   it('move one left', async () => {
@@ -103,21 +103,18 @@ describe('dual list select', () => {
         { label: 'cats', value: 'cats' },
         { label: 'cats_1', value: 'cats_1' },
         { label: 'pigeons', value: 'pigeons' },
-        { label: 'zebras', value: 'zebras' }
+        { label: 'zebras', value: 'zebras' },
       ],
       rightValues: [{ label: 'cats_2', value: 'cats_2' }],
       selectedLeftValues: [],
       selectedRightValues: [],
       sortLeftDesc: true,
       sortRightDesc: true,
-      value: ['cats_2']
+      value: ['cats_2'],
     });
 
     await act(async () => {
-      wrapper
-        .find('#handleValuesClick')
-        .props()
-        .onClick(event, 'cats_2');
+      wrapper.find('#handleValuesClick').props().onClick(event, 'cats_2');
     });
     wrapper.update();
 
@@ -130,14 +127,14 @@ describe('dual list select', () => {
         { label: 'cats', value: 'cats' },
         { label: 'cats_1', value: 'cats_1' },
         { label: 'pigeons', value: 'pigeons' },
-        { label: 'zebras', value: 'zebras' }
+        { label: 'zebras', value: 'zebras' },
       ],
       rightValues: [{ label: 'cats_2', value: 'cats_2' }],
       selectedLeftValues: [],
       selectedRightValues: ['cats_2'],
       sortLeftDesc: true,
       sortRightDesc: true,
-      value: ['cats_2']
+      value: ['cats_2'],
     });
 
     await act(async () => {
@@ -155,14 +152,14 @@ describe('dual list select', () => {
         { label: 'cats_1', value: 'cats_1' },
         { label: 'cats_2', value: 'cats_2' },
         { label: 'pigeons', value: 'pigeons' },
-        { label: 'zebras', value: 'zebras' }
+        { label: 'zebras', value: 'zebras' },
       ],
       rightValues: [],
       selectedLeftValues: [],
       selectedRightValues: [],
       sortLeftDesc: true,
       sortRightDesc: true,
-      value: []
+      value: [],
     });
   });
 
@@ -182,21 +179,18 @@ describe('dual list select', () => {
         { label: 'cats_1', value: 'cats_1' },
         { label: 'cats_2', value: 'cats_2' },
         { label: 'pigeons', value: 'pigeons' },
-        { label: 'zebras', value: 'zebras' }
+        { label: 'zebras', value: 'zebras' },
       ],
       rightValues: [],
       selectedLeftValues: [],
       selectedRightValues: [],
       sortLeftDesc: true,
       sortRightDesc: true,
-      value: ''
+      value: '',
     });
 
     await act(async () => {
-      wrapper
-        .find('#handleOptionsClick')
-        .props()
-        .onClick(event, 'cats_2');
+      wrapper.find('#handleOptionsClick').props().onClick(event, 'cats_2');
     });
     wrapper.update();
 
@@ -210,14 +204,14 @@ describe('dual list select', () => {
         { label: 'cats_1', value: 'cats_1' },
         { label: 'cats_2', value: 'cats_2' },
         { label: 'pigeons', value: 'pigeons' },
-        { label: 'zebras', value: 'zebras' }
+        { label: 'zebras', value: 'zebras' },
       ],
       rightValues: [],
       selectedLeftValues: ['cats_2'],
       selectedRightValues: [],
       sortLeftDesc: true,
       sortRightDesc: true,
-      value: ''
+      value: '',
     });
 
     await act(async () => {
@@ -234,14 +228,14 @@ describe('dual list select', () => {
         { label: 'cats', value: 'cats' },
         { label: 'cats_1', value: 'cats_1' },
         { label: 'pigeons', value: 'pigeons' },
-        { label: 'zebras', value: 'zebras' }
+        { label: 'zebras', value: 'zebras' },
       ],
       rightValues: [{ label: 'cats_2', value: 'cats_2' }],
       selectedLeftValues: [],
       selectedRightValues: [],
       sortLeftDesc: true,
       sortRightDesc: true,
-      value: ['cats_2']
+      value: ['cats_2'],
     });
   });
 
@@ -252,10 +246,7 @@ describe('dual list select', () => {
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find('#handleOptionsClick')
-        .props()
-        .onClick(event, 'cats_2');
+      wrapper.find('#handleOptionsClick').props().onClick(event, 'cats_2');
     });
     wrapper.update();
 
@@ -280,17 +271,17 @@ describe('dual list select', () => {
       leftValues: [
         { label: 'cats', value: 'cats' },
         { label: 'pigeons', value: 'pigeons' },
-        { label: 'zebras', value: 'zebras' }
+        { label: 'zebras', value: 'zebras' },
       ],
       rightValues: [
         { label: 'cats_1', value: 'cats_1' },
-        { label: 'cats_2', value: 'cats_2' }
+        { label: 'cats_2', value: 'cats_2' },
       ],
       selectedLeftValues: [],
       selectedRightValues: [],
       sortLeftDesc: true,
       sortRightDesc: true,
-      value: ['cats_2', 'cats_1']
+      value: ['cats_2', 'cats_1'],
     });
   });
 
@@ -301,10 +292,7 @@ describe('dual list select', () => {
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find('#handleOptionsClick')
-        .props()
-        .onClick(event, 'cats_2');
+      wrapper.find('#handleOptionsClick').props().onClick(event, 'cats_2');
     });
     wrapper.update();
 
@@ -338,14 +326,14 @@ describe('dual list select', () => {
         { label: 'cats', value: 'cats' },
         { label: 'cats_2', value: 'cats_2' },
         { label: 'pigeons', value: 'pigeons' },
-        { label: 'zebras', value: 'zebras' }
+        { label: 'zebras', value: 'zebras' },
       ],
       rightValues: [{ label: 'cats_1', value: 'cats_1' }],
       selectedLeftValues: [],
       selectedRightValues: [],
       sortLeftDesc: true,
       sortRightDesc: true,
-      value: ['cats_1']
+      value: ['cats_1'],
     });
   });
 
@@ -356,10 +344,7 @@ describe('dual list select', () => {
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find('#handleOptionsClick')
-        .props()
-        .onClick(event, 'cats');
+      wrapper.find('#handleOptionsClick').props().onClick(event, 'cats');
     });
     wrapper.update();
 
@@ -383,18 +368,18 @@ describe('dual list select', () => {
       lastRightClicked: undefined,
       leftValues: [
         { label: 'pigeons', value: 'pigeons' },
-        { label: 'zebras', value: 'zebras' }
+        { label: 'zebras', value: 'zebras' },
       ],
       rightValues: [
         { label: 'cats', value: 'cats' },
         { label: 'cats_1', value: 'cats_1' },
-        { label: 'cats_2', value: 'cats_2' }
+        { label: 'cats_2', value: 'cats_2' },
       ],
       selectedLeftValues: [],
       selectedRightValues: [],
       sortLeftDesc: true,
       sortRightDesc: true,
-      value: ['cats', 'cats_1', 'cats_2']
+      value: ['cats', 'cats_1', 'cats_2'],
     });
   });
 
@@ -419,14 +404,14 @@ describe('dual list select', () => {
         { label: 'cats_1', value: 'cats_1' },
         { label: 'cats_2', value: 'cats_2' },
         { label: 'pigeons', value: 'pigeons' },
-        { label: 'zebras', value: 'zebras' }
+        { label: 'zebras', value: 'zebras' },
       ],
       rightValues: [],
       selectedLeftValues: [],
       selectedRightValues: [],
       sortLeftDesc: true,
       sortRightDesc: true,
-      value: []
+      value: [],
     });
   });
 
@@ -452,13 +437,13 @@ describe('dual list select', () => {
         { label: 'cats_1', value: 'cats_1' },
         { label: 'cats_2', value: 'cats_2' },
         { label: 'pigeons', value: 'pigeons' },
-        { label: 'zebras', value: 'zebras' }
+        { label: 'zebras', value: 'zebras' },
       ],
       selectedLeftValues: [],
       selectedRightValues: [],
       sortLeftDesc: true,
       sortRightDesc: true,
-      value: ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras']
+      value: ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'],
     });
   });
 
@@ -469,10 +454,7 @@ describe('dual list select', () => {
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find('#filterOptions')
-        .props()
-        .onClick('cats_');
+      wrapper.find('#filterOptions').props().onClick('cats_');
     });
     wrapper.update();
 
@@ -483,14 +465,14 @@ describe('dual list select', () => {
       lastRightClicked: undefined,
       leftValues: [
         { label: 'cats_1', value: 'cats_1' },
-        { label: 'cats_2', value: 'cats_2' }
+        { label: 'cats_2', value: 'cats_2' },
       ],
       rightValues: [],
       selectedLeftValues: [],
       selectedRightValues: [],
       sortLeftDesc: true,
       sortRightDesc: true,
-      value: ''
+      value: '',
     });
   });
 
@@ -501,10 +483,7 @@ describe('dual list select', () => {
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find('#filterValues')
-        .props()
-        .onClick('cats_');
+      wrapper.find('#filterValues').props().onClick('cats_');
     });
     wrapper.update();
 
@@ -516,13 +495,13 @@ describe('dual list select', () => {
       leftValues: [],
       rightValues: [
         { label: 'cats_1', value: 'cats_1' },
-        { label: 'cats_2', value: 'cats_2' }
+        { label: 'cats_2', value: 'cats_2' },
       ],
       selectedLeftValues: [],
       selectedRightValues: [],
       sortLeftDesc: true,
       sortRightDesc: true,
-      value: ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras']
+      value: ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'],
     });
   });
 
@@ -547,14 +526,14 @@ describe('dual list select', () => {
         { label: 'pigeons', value: 'pigeons' },
         { label: 'cats_2', value: 'cats_2' },
         { label: 'cats_1', value: 'cats_1' },
-        { label: 'cats', value: 'cats' }
+        { label: 'cats', value: 'cats' },
       ],
       rightValues: [],
       selectedLeftValues: [],
       selectedRightValues: [],
       sortLeftDesc: false,
       sortRightDesc: true,
-      value: ''
+      value: '',
     });
 
     await act(async () => {
@@ -572,14 +551,14 @@ describe('dual list select', () => {
         { label: 'cats_1', value: 'cats_1' },
         { label: 'cats_2', value: 'cats_2' },
         { label: 'pigeons', value: 'pigeons' },
-        { label: 'zebras', value: 'zebras' }
+        { label: 'zebras', value: 'zebras' },
       ],
       rightValues: [],
       selectedLeftValues: [],
       selectedRightValues: [],
       sortLeftDesc: true,
       sortRightDesc: true,
-      value: ''
+      value: '',
     });
   });
 
@@ -605,13 +584,13 @@ describe('dual list select', () => {
         { label: 'pigeons', value: 'pigeons' },
         { label: 'cats_2', value: 'cats_2' },
         { label: 'cats_1', value: 'cats_1' },
-        { label: 'cats', value: 'cats' }
+        { label: 'cats', value: 'cats' },
       ],
       selectedLeftValues: [],
       selectedRightValues: [],
       sortLeftDesc: true,
       sortRightDesc: false,
-      value: ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras']
+      value: ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'],
     });
 
     await act(async () => {
@@ -630,13 +609,13 @@ describe('dual list select', () => {
         { label: 'cats_1', value: 'cats_1' },
         { label: 'cats_2', value: 'cats_2' },
         { label: 'pigeons', value: 'pigeons' },
-        { label: 'zebras', value: 'zebras' }
+        { label: 'zebras', value: 'zebras' },
       ],
       selectedLeftValues: [],
       selectedRightValues: [],
       sortLeftDesc: true,
       sortRightDesc: true,
-      value: ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras']
+      value: ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'],
     });
   });
 });

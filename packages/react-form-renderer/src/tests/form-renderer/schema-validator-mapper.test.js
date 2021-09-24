@@ -15,13 +15,13 @@ describe('schemaValidatorMapper', () => {
     initialProps = {
       componentMapper: {
         [componentTypes.TEXT_FIELD]: () => <div>heeeellooo</div>,
-        [componentTypes.SUB_FORM]: () => <div>heeeellooo</div>
+        [componentTypes.SUB_FORM]: () => <div>heeeellooo</div>,
       },
       validatorMapper: {
-        custom: () => () => undefined
+        custom: () => () => undefined,
       },
       actionMapper: {
-        translateString: () => 'string'
+        translateString: () => 'string',
       },
       FormTemplate: () => <div>heeeellooo</div>,
       onSubmit: jest.fn(),
@@ -32,11 +32,11 @@ describe('schemaValidatorMapper', () => {
             name: 'field-input',
             validate: [{ type: 'custom' }],
             actions: {
-              label: ['translateString']
-            }
-          }
-        ]
-      }
+              label: ['translateString'],
+            },
+          },
+        ],
+      },
     };
     schemaValidatorMapper = {};
     _console = console.error;
@@ -54,8 +54,8 @@ describe('schemaValidatorMapper', () => {
           if (!field.customProp) {
             throw new DefaultSchemaError(`Please include "customProp" in ${field.name}`);
           }
-        }
-      }
+        },
+      },
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} schemaValidatorMapper={schemaValidatorMapper} />);
@@ -70,8 +70,8 @@ describe('schemaValidatorMapper', () => {
           if (!validator.customProp) {
             throw new DefaultSchemaError(`Please include "customProp" in custom validator in ${fieldName}`);
           }
-        }
-      }
+        },
+      },
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} schemaValidatorMapper={schemaValidatorMapper} />);
@@ -88,8 +88,8 @@ describe('schemaValidatorMapper', () => {
           if (!action.length < 2) {
             throw new DefaultSchemaError(`TranslateString actions has to have two arguments in: ${fieldName}`);
           }
-        }
-      }
+        },
+      },
     };
 
     const wrapper = mount(<FormRenderer {...initialProps} schemaValidatorMapper={schemaValidatorMapper} />);
@@ -108,10 +108,10 @@ describe('schemaValidatorMapper', () => {
             {
               component: componentTypes.SUB_FORM,
               name: 'subform',
-              ...initialProps.schema
-            }
-          ]
-        }
+              ...initialProps.schema,
+            },
+          ],
+        },
       };
     });
 
@@ -122,8 +122,8 @@ describe('schemaValidatorMapper', () => {
             if (!field.customProp) {
               throw new DefaultSchemaError(`Please include "customProp" in ${field.name}`);
             }
-          }
-        }
+          },
+        },
       };
 
       const wrapper = mount(<FormRenderer {...initialProps} schemaValidatorMapper={schemaValidatorMapper} />);
@@ -138,8 +138,8 @@ describe('schemaValidatorMapper', () => {
             if (!validator.customProp) {
               throw new DefaultSchemaError(`Please include "customProp" in custom validator in ${fieldName}`);
             }
-          }
-        }
+          },
+        },
       };
 
       const wrapper = mount(<FormRenderer {...initialProps} schemaValidatorMapper={schemaValidatorMapper} />);
@@ -156,8 +156,8 @@ describe('schemaValidatorMapper', () => {
             if (!action.length < 2) {
               throw new DefaultSchemaError(`TranslateString actions has to have two arguments in: ${fieldName}`);
             }
-          }
-        }
+          },
+        },
       };
 
       const wrapper = mount(<FormRenderer {...initialProps} schemaValidatorMapper={schemaValidatorMapper} />);

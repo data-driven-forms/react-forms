@@ -16,14 +16,14 @@ const RadioOption = ({ name, option, ...rest }) => {
 
 RadioOption.propTypes = {
   name: PropTypes.string.isRequired,
-  option: PropTypes.shape({ label: PropTypes.string.isRequired, value: PropTypes.any.isRequired }).isRequired
+  option: PropTypes.shape({ label: PropTypes.string.isRequired, value: PropTypes.any.isRequired }).isRequired,
 };
 
 const Radio = ({ name, ...props }) => {
   const { options, isDisabled, label, isRequired, helperText, description, isReadOnly, meta, validateOnMount, FormItemProps, ...rest } = useFieldApi({
     ...props,
     name,
-    type: 'radio'
+    type: 'radio',
   });
 
   return (
@@ -50,18 +50,18 @@ Radio.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.any,
-      label: PropTypes.node
+      label: PropTypes.node,
     })
   ),
   label: PropTypes.node.isRequired,
   isDisabled: PropTypes.bool,
   isReadOnly: PropTypes.bool,
   description: PropTypes.node,
-  FormItemProps: PropTypes.object
+  FormItemProps: PropTypes.object,
 };
 
 Radio.defaultProps = {
-  options: []
+  options: [],
 };
 
 export default Radio;

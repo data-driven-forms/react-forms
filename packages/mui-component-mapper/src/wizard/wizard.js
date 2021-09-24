@@ -14,8 +14,8 @@ import WizardStepButtons from './step-buttons';
 const useStyles = makeStyles(() => ({
   wizardBody: {
     padding: 24,
-    margin: 0
-  }
+    margin: 0,
+  },
 }));
 
 const WizardInternal = ({ buttonLabels, stepsInfo, ButtonContainerProps, StepperProps, WizardBodyProps, WizardProps, conditionalSubmitFlag }) => {
@@ -28,7 +28,7 @@ const WizardInternal = ({ buttonLabels, stepsInfo, ButtonContainerProps, Stepper
     submit: 'Submit',
     cancel: 'Cancel',
     back: 'Back',
-    ...buttonLabels
+    ...buttonLabels,
   };
 
   return (
@@ -58,18 +58,18 @@ WizardInternal.propTypes = {
       title: PropTypes.node,
       label: PropTypes.node,
       StepLabelProps: PropTypes.object,
-      StepProps: PropTypes.object
+      StepProps: PropTypes.object,
     })
   ),
   ButtonContainerProps: PropTypes.object,
   StepperProps: PropTypes.object,
   WizardBodyProps: PropTypes.object,
   WizardProps: PropTypes.object,
-  conditionalSubmitFlag: PropTypes.string.isRequired
+  conditionalSubmitFlag: PropTypes.string.isRequired,
 };
 
 WizardInternal.defaultProps = {
-  WizardBodyProps: {}
+  WizardBodyProps: {},
 };
 
 const MuiWizard = (props) => <Wizard Wizard={WizardInternal} {...props} />;

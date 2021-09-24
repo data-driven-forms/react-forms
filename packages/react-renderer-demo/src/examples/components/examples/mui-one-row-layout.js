@@ -10,19 +10,19 @@ const schema = {
       name: 'first-name',
       label: 'First name',
       component: componentTypes.TEXT_FIELD,
-      FormFieldGridProps: { xs: 6 }
+      FormFieldGridProps: { xs: 6 },
     },
     {
       name: 'last-name',
       label: 'Last name',
       component: componentTypes.TEXT_FIELD,
-      FormFieldGridProps: { xs: 6 }
-    }
-  ]
+      FormFieldGridProps: { xs: 6 },
+    },
+  ],
 };
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 const OneRowLayout = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;

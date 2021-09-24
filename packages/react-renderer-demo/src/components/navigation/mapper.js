@@ -36,7 +36,7 @@ const Item = ({ href, linkText, component, divider, level }) => {
       selected={href.replace(query, '') === router.asPath.replace(query, '')}
       key={href || linkText}
       className={clsx(classes.item, {
-        [classes.nested]: level > 0
+        [classes.nested]: level > 0,
       })}
       component={forwardRef((props, ref) => (
         <RouterNavLink key={component} href={finalHref}>
@@ -55,7 +55,7 @@ Item.propTypes = {
   href: PropTypes.string.isRequired,
   linkText: PropTypes.string,
   component: PropTypes.node,
-  divider: PropTypes.bool
+  divider: PropTypes.bool,
 };
 
 const FinalList = ({ title, level, link, fields, previousLinks = [], renderItems, openable = true, open = false }) => {
@@ -84,8 +84,8 @@ const FinalList = ({ title, level, link, fields, previousLinks = [], renderItems
 const useSubHeaderStyles = makeStyles((theme) => ({
   subHeader: {
     color: theme.palette.text.primary,
-    paddingLeft: 24
-  }
+    paddingLeft: 24,
+  },
 }));
 
 const SubHeader = ({ title }) => {
@@ -96,7 +96,7 @@ const SubHeader = ({ title }) => {
 const Mapper = {
   Wrapper: FinalList,
   Item,
-  SubHeader
+  SubHeader,
 };
 
 export default Mapper;

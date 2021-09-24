@@ -9,11 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import { useRouter } from 'next/router';
 import StickyBox from 'react-sticky-box';
 
-export const headerToId = (header) =>
-  header
-    .replace(/#/g, '')
-    .replace(/ /g, '')
-    .toLowerCase();
+export const headerToId = (header) => header.replace(/#/g, '').replace(/ /g, '').toLowerCase();
 
 const useLinkStyles = makeStyles((theme) => ({
   link: {
@@ -27,8 +23,8 @@ const useLinkStyles = makeStyles((theme) => ({
     paddingRight: 16,
     paddingTop: 8,
     paddingBottom: 8,
-    fontWeight: 'inherit'
-  }
+    fontWeight: 'inherit',
+  },
 }));
 
 const ListHeader = ({ text }) => {
@@ -52,18 +48,18 @@ const ListHeader = ({ text }) => {
 };
 
 ListHeader.propTypes = {
-  text: PropTypes.string.isRequired
+  text: PropTypes.string.isRequired,
 };
 
 const useStyles = makeStyles((theme) => ({
   fixedContainer: {
-    paddingLeft: 16
+    paddingLeft: 16,
   },
   listItem: {
-    padding: 0
+    padding: 0,
   },
   listItemText: {
-    margin: 0
+    margin: 0,
   },
   listItemActive: {
     position: 'relative',
@@ -75,20 +71,20 @@ const useStyles = makeStyles((theme) => ({
       content: '""',
       width: 2,
       height: '100%',
-      background: theme.palette.grey[700]
-    }
+      background: theme.palette.grey[700],
+    },
   },
   contentHeader: {
     paddingLeft: 16,
-    paddingRight: 16
+    paddingRight: 16,
   },
   hidden: {
-    height: '100%'
+    height: '100%',
   },
   headerLink: {
     color: 'inherit',
-    textDecoration: 'none'
-  }
+    textDecoration: 'none',
+  },
 }));
 
 const ListOfContents = ({ found = [] }) => {
@@ -146,7 +142,7 @@ const ListOfContents = ({ found = [] }) => {
 };
 
 ListOfContents.propTypes = {
-  found: PropTypes.array
+  found: PropTypes.array,
 };
 
 export default ListOfContents;

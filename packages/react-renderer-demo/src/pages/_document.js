@@ -44,7 +44,7 @@ class MyDocument extends Document {
             line-height: 1.43 !important;
             letter-spacing: 0.01071em !important;
             background-color: #fafafa !important;
-          }`
+          }`,
             }}
           />
         </Head>
@@ -64,12 +64,12 @@ class MyDocument extends Document {
                   gtag('config', 'UA-164334905-1');
                 }
               })()
-                `
+                `,
             }}
           ></script>
           <script
             dangerouslySetInnerHTML={{
-              __html: `window.addEventListener("load", function(){window.wpcc.init({"border":"thin","corners":"small","colors":{"popup":{"background":"#f6f6f6","text":"#000000","border":"#555555"},"button":{"background":"#555555","text":"#ffffff"}}})});`
+              __html: `window.addEventListener("load", function(){window.wpcc.init({"border":"thin","corners":"small","colors":{"popup":{"background":"#f6f6f6","text":"#000000","border":"#555555"},"button":{"background":"#555555","text":"#ffffff"}}})});`,
             }}
           />
         </body>
@@ -107,7 +107,7 @@ MyDocument.getInitialProps = async (ctx) => {
 
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />)
+      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
     });
 
   const initialProps = await Document.getInitialProps(ctx);
@@ -119,8 +119,8 @@ MyDocument.getInitialProps = async (ctx) => {
       <React.Fragment key="styles">
         {initialProps.styles}
         {sheets.getStyleElement()}
-      </React.Fragment>
-    ]
+      </React.Fragment>,
+    ],
   };
 };
 

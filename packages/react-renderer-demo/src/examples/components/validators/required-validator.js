@@ -6,7 +6,7 @@ import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template'
 import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 
 const componentMapper = {
-  [componentTypes.TEXT_FIELD]: TextField
+  [componentTypes.TEXT_FIELD]: TextField,
 };
 
 const schema = {
@@ -19,11 +19,11 @@ const schema = {
       isRequired: true,
       validate: [
         {
-          type: validatorTypes.REQUIRED
-        }
-      ]
-    }
-  ]
+          type: validatorTypes.REQUIRED,
+        },
+      ],
+    },
+  ],
 };
 
 const RequiredValidator = () => <FormRenderer FormTemplate={FormTemplate} componentMapper={componentMapper} schema={schema} onSubmit={console.log} />;

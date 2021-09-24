@@ -80,7 +80,7 @@ export const numericality = memoize(
     greaterThanOrEqualTo,
     '<=': lessOrEqual,
     lessThanOrEqualTo,
-    message
+    message,
   } = {}) => {
     equal = selectNum(equal, equalTo);
     diff = selectNum(diff, otherThan);
@@ -180,19 +180,19 @@ export const dataTypeValidator = (type) =>
       pattern({
         pattern: /^\d*$/,
         message: 'Value must be integer',
-        ...options
+        ...options,
       }),
     boolean: (options) => booleanValidator({ message: 'Field value has to be boolean', ...options }),
     number: (options) =>
       pattern({
         pattern: /^\d*[.]{0,1}\d*$/,
         message: 'Values must be number',
-        ...options
+        ...options,
       }),
     float: (options) =>
       pattern({
         pattern: /^\d*[.]{0,1}\d*$/,
         message: 'Values must be number',
-        ...options
-      })
+        ...options,
+      }),
   }[type]);

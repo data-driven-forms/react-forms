@@ -12,19 +12,19 @@ import ListOfContentsMobile from '../helpers/list-of-contents-select';
 
 const useStyles = makeStyles((theme) => ({
   hidden: {
-    height: '100%'
+    height: '100%',
   },
   wrapper: {
     justifyContent: 'center',
     [theme.breakpoints.down('sm')]: {
-      flexDirection: 'column-reverse'
-    }
+      flexDirection: 'column-reverse',
+    },
   },
   content: {
     [theme.breakpoints.up('md')]: {
-      maxWidth: 768
-    }
-  }
+      maxWidth: 768,
+    },
+  },
 }));
 
 const DocPage = ({ children }) => {
@@ -54,7 +54,7 @@ const DocPage = ({ children }) => {
 };
 
 DocPage.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 export default DocPage;

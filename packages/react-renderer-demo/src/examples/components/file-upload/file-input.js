@@ -35,7 +35,7 @@ const FileUploadComponent = (props) => {
 
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField,
-  'file-upload': FileUploadComponent
+  'file-upload': FileUploadComponent,
 };
 
 const schema = {
@@ -43,20 +43,20 @@ const schema = {
     {
       component: componentTypes.TEXT_FIELD,
       label: 'Regular test field',
-      name: 'regular-field'
+      name: 'regular-field',
     },
     {
       component: 'file-upload',
       label: 'File upload',
       name: 'file-upload-field-name',
       type: 'file',
-      validate: [{ type: validatorTypes.REQUIRED }, { type: 'file-size', maxSize: 40000 }]
-    }
-  ]
+      validate: [{ type: validatorTypes.REQUIRED }, { type: 'file-size', maxSize: 40000 }],
+    },
+  ],
 };
 
 const validatorMapper = {
-  'file-size': fileSizeValidator
+  'file-size': fileSizeValidator,
 };
 
 const FormWithFileUpload = () => {

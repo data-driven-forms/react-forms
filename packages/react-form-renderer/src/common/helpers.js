@@ -67,7 +67,10 @@ export const prepareMsg = (msg, type, values) => {
 
 export const assign = Object.assign;
 
-export const prepare = (func) => (value, allValues, ...args) => func(value, allValues, ...args);
+export const prepare =
+  (func) =>
+  (value, allValues, ...args) =>
+    func(value, allValues, ...args);
 
 export const isNumber = (num) => !isNaN(num) && (num !== 0 || ('' + num).trim() !== '');
 

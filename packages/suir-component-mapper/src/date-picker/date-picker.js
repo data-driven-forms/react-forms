@@ -32,7 +32,7 @@ const DatePicker = (props) => {
         required={isRequired}
         error={
           invalid && {
-            content: meta.error || meta.submitError
+            content: meta.error || meta.submitError,
           }
         }
         {...rest}
@@ -53,12 +53,12 @@ DatePicker.propTypes = {
   description: PropTypes.node,
   /** Sub components customization API */
   FormFieldGridProps: PropTypes.object,
-  HelperTextProps: PropTypes.object
+  HelperTextProps: PropTypes.object,
 };
 
 DatePicker.defaultProps = {
   FormFieldGridProps: {},
-  HelperTextProps: {}
+  HelperTextProps: {},
 };
 
 export default DatePicker;

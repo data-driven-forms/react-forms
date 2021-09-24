@@ -13,18 +13,18 @@ const schema = {
       options: [
         { label: 'Dog', value: '1' },
         { label: 'Cats', value: '2' },
-        { label: 'Hamsters', value: '3' }
-      ]
-    }
-  ]
+        { label: 'Hamsters', value: '3' },
+      ],
+    },
+  ],
 };
 const variants = [
   ...baseFieldProps,
   {
     name: 'options',
     type: 'array',
-    required: false
-  }
+    required: false,
+  },
 ];
 
 const CheckboxMultiple = () => <ComponentText schema={schema} variants={variants} linkText="Checkbox multiple" />;

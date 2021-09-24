@@ -9,7 +9,7 @@ import propsCatcher from '../props-catcher/props-catcher';
 const TimePicker = ({ input, ...props }) => <BTimePicker id={input.name} {...propsCatcher(props)} {...input} value={input.value || null} />;
 
 TimePicker.propTypes = {
-  input: PropTypes.object
+  input: PropTypes.object,
 };
 
 const WrapperTimePicker = (props) => <FormGroupWrapper {...props} Component={TimePicker} />;

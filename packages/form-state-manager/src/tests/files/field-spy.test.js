@@ -160,10 +160,7 @@ describe('<FieldSpy />', () => {
     expect(render.mock.calls.length).toEqual(2);
 
     await act(async () => {
-      const input = wrapper
-        .find('button')
-        .first()
-        .simulate('click');
+      const input = wrapper.find('button').first().simulate('click');
     });
     wrapper.update();
 

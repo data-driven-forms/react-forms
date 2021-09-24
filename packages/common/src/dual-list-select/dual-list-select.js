@@ -34,8 +34,8 @@ const DualListSelectCommon = (props) => {
   const { DualListSelect, ...rest } = useFieldApi({
     ...props,
     FieldProps: {
-      isEqual: (current, initial) => isEqual([...(current || [])].sort(), [...(initial || [])].sort())
-    }
+      isEqual: (current, initial) => isEqual([...(current || [])].sort(), [...(initial || [])].sort()),
+    },
   });
 
   const leftValues = rest.options
@@ -98,7 +98,7 @@ const DualListSelectCommon = (props) => {
 };
 
 DualListSelectCommon.propTypes = {
-  DualListSelect: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
+  DualListSelect: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
 };
 
 export default DualListSelectCommon;
