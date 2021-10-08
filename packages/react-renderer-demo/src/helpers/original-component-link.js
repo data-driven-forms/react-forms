@@ -6,7 +6,7 @@ export const docsLinks = {
   blueprint: 'https://blueprintjs.com/docs/',
   suir: 'https://react.semantic-ui.com/',
   ant: 'https://ant.design/components/',
-  carbon: 'https://react.carbondesignsystem.com/?path=/story/',
+  carbon: 'https://react.carbondesignsystem.com/?path=/story/components-',
 };
 
 const mapperLinks = {
