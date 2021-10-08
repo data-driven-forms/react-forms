@@ -1723,4 +1723,34 @@ describe('renderForm function', () => {
     expect(wrapper.find('label').text()).toEqual(label);
     expect(wrapper.find('label').props().id).toEqual(id);
   });
+
+  describe('#initialValues', () => {
+    it('initialValues has a higher priority than initialValue', () => {
+      const onSubmit = jest.fn();
+      const wrapper = mount(
+        <FormRenderer
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          componentMapper={{
+            'custom-component': TextField,
+          }}
+          schema={{
+            fields: [
+              {
+                component: 'custom-component',
+                name: 'testField',
+                initialValue: 'lower-priority',
+              },
+            ],
+          }}
+          onSubmit={(values) => onSubmit(values)}
+          initialValues={{ testField: 'higher-priority' }}
+        />
+      );
+
+      expect(wrapper.find('input').instance().value).toEqual('higher-priority');
+
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith({ testField: 'higher-priority' });
+    });
+  });
 });
