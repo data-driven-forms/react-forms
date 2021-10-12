@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Popper from '@material-ui/core/Popper';
-import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
+import Popper from '@mui/material/Popper';
+import Grow from '@mui/material/Grow';
+import Paper from '@mui/material/Paper';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
 import Markdown from 'markdown-to-jsx';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 import MdxComponents from './mdx/mdx-components';
 

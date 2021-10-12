@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import TextField from '@material-ui/core/TextField';
+import TextField from '@mui/material/TextField';
 import { useRouter } from 'next/router';
 import Mapper from './mapper';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import { navStyles } from './nav-styles';
 
 const useStyles = makeStyles(navStyles);

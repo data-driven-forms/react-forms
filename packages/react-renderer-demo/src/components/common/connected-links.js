@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import ChevronRight from '@material-ui/icons/ChevronRight';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import makeStyles from '@mui/styles/makeStyles';
+import ChevronRight from '@mui/icons-material/ChevronRight';
+import ChevronLeft from '@mui/icons-material/ChevronLeft';
 import Link from 'next/link';
 
 import MenuContext from '../navigation/menu-context';
@@ -31,7 +31,7 @@ const ConnectedLinks = () => {
   const prevLink = `/${useMapperLink(prev && prev.link)}`;
   const nextLink = `/${useMapperLink(next && next.link)}`;
   return (
-    <Grid container justify="space-between" className={classNames.linksContainer}>
+    <Grid container justifyContent="space-between" className={classNames.linksContainer}>
       <Grid item>
         {prev && prev.link && (
           <Link href={prevLink}>

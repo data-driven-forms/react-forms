@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@mui/material/CircularProgress';
+import makeStyles from '@mui/styles/makeStyles';
 import PropTypes from 'prop-types';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import sdk from '@stackblitz/sdk';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import CheckIcon from '@material-ui/icons/Check';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
-import LinkIcon from '@material-ui/icons/Link';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import CardHeader from '@material-ui/core/CardHeader';
-import IconButton from '@material-ui/core/IconButton';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import CheckIcon from '@mui/icons-material/Check';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+import LinkIcon from '@mui/icons-material/Link';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import CardHeader from '@mui/material/CardHeader';
+import IconButton from '@mui/material/IconButton';
 
 import Link from 'next/link';
 import clsx from 'clsx';
@@ -60,19 +60,19 @@ const project = {
 
 const useStyles = makeStyles((theme) => ({
   box: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       flexDirection: 'column-reverse',
     },
   },
   smTabDown: {
     display: 'none',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       display: 'block',
     },
   },
   smTabUp: {
     display: 'block',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       display: 'none',
     },
   },
@@ -111,13 +111,13 @@ const useStyles = makeStyles((theme) => ({
   editorContainer: {
     minHeight: 500,
     flex: 1,
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       marginBottom: 16,
       flexDirection: 'column',
     },
     '& iframe': {
       border: 'none',
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('md')]: {
         height: 500,
       },
     },
@@ -145,7 +145,7 @@ const useStyles = makeStyles((theme) => ({
   },
   tableHeader: {
     paddingBottom: 0,
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       display: 'none',
     },
   },
@@ -222,7 +222,7 @@ const ComponentExample = ({ variants, schema, activeMapper, component, schemaVar
               className={clsx(classes.tableHeader)}
               title={expanded ? 'Options' : ''}
               action={
-                <IconButton aria-label="hide options" onClick={() => setExpanded(!expanded)}>
+                <IconButton aria-label="hide options" onClick={() => setExpanded(!expanded)} size="large">
                   <ExpandMoreIcon className={classes.hide} />
                 </IconButton>
               }
@@ -264,7 +264,7 @@ const ComponentExample = ({ variants, schema, activeMapper, component, schemaVar
           </div>
           <div className={classes.smTabUp}>
             {!expanded && (
-              <IconButton className={classes.expandButton} aria-label="expand options" onClick={() => setExpanded(!expanded)}>
+              <IconButton className={classes.expandButton} aria-label="expand options" onClick={() => setExpanded(!expanded)} size="large">
                 <ExpandMoreIcon className={classes.expand} />
               </IconButton>
             )}

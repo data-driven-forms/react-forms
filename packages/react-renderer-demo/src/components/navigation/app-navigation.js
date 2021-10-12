@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import Link from '@material-ui/core/Link';
-import List from '@material-ui/core/List';
-import ListSubheader from '@material-ui/core/ListSubheader';
+import Link from '@mui/material/Link';
+import List from '@mui/material/List';
+import ListSubheader from '@mui/material/ListSubheader';
 import RouterLink from 'next/link';
-import { makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import makeStyles from '@mui/styles/makeStyles';
+import IconButton from '@mui/material/IconButton';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 import { navStyles } from './nav-styles';
 import MenuRenderer from './menu-renderer';
@@ -26,7 +26,7 @@ const Navigation = ({ closeNav, searchRef }) => {
               <Link style={{ cursor: 'pointer' }}>Data driven forms</Link>
             </RouterLink>
           </span>
-          <IconButton edge="end" onClick={closeNav}>
+          <IconButton edge="end" onClick={closeNav} size="large">
             <ChevronLeftIcon />
           </IconButton>
         </ListSubheader>

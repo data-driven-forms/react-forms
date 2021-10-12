@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
-import IconButton from '@material-ui/core/IconButton';
+import IconButton from '@mui/material/IconButton';
 
-import LanguageIcon from '@material-ui/icons/Language';
-import GitHubIcon from '@material-ui/icons/GitHub';
+import LanguageIcon from '@mui/icons-material/Language';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'row-reverse',
     marginTop: -48,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: 'initial',
       flexDirection: 'row',
     },
@@ -39,7 +39,7 @@ const ComponentMapperBar = ({ prefix, href }) => {
       >
         <img src={`https://badge.fury.io/js/%40data-driven-forms%2F${prefix}-component-mapper.svg`} alt="current version" />
       </a>
-      <IconButton aria-label="web" title="Library web" href={href} rel="noopener noreferrer" target="_blank">
+      <IconButton aria-label="web" title="Library web" href={href} rel="noopener noreferrer" target="_blank" size="large">
         <LanguageIcon />
       </IconButton>
       <IconButton
@@ -48,6 +48,7 @@ const ComponentMapperBar = ({ prefix, href }) => {
         href={`https://github.com/data-driven-forms/react-forms/tree/master/packages/${prefix}-component-mapper`}
         rel="noopener noreferrer"
         target="_blank"
+        size="large"
       >
         <GitHubIcon />
       </IconButton>

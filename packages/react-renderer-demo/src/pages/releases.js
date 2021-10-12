@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Grid from '@material-ui/core/Grid';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Grid from '@mui/material/Grid';
+import CircularProgress from '@mui/material/CircularProgress';
 import Markdown from 'markdown-to-jsx';
 import { Heading } from '../components/mdx/mdx-components';
 import mdxComponents from '@docs/components/mdx/mdx-components';
@@ -43,7 +43,7 @@ const ReleasesPage = () => {
         Releases
       </Heading>
       {!data ? (
-        <Grid container direction="row" justify="center" alignItems="center">
+        <Grid container direction="row" justifyContent="center" alignItems="center">
           <CircularProgress disableShrink />
         </Grid>
       ) : (

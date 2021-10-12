@@ -4,7 +4,7 @@ import componentTypes from '@data-driven-forms/react-form-renderer/component-typ
 import Switch from '@data-driven-forms/mui-component-mapper/switch';
 import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useInputClasses = makeStyles({
   root: {

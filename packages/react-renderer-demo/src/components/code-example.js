@@ -1,29 +1,29 @@
 /* eslint-disable react/prop-types */
 import React, { Fragment, useEffect, useState, useRef } from 'react';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
-import Box from '@material-ui/core/Box';
-import CodeIcon from '@material-ui/icons/Code';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
+import Grid from '@mui/material/Grid';
+import makeStyles from '@mui/styles/makeStyles';
+import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
+import Box from '@mui/material/Box';
+import CodeIcon from '@mui/icons-material/Code';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
 import PropTypes from 'prop-types';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Paper from '@material-ui/core/Paper';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Paper from '@mui/material/Paper';
 import clsx from 'clsx';
-import grey from '@material-ui/core/colors/grey';
-import IconButton from '@material-ui/core/IconButton';
+import IconButton from '@mui/material/IconButton';
 import { getParameters } from 'codesandbox/lib/api/define';
-import Tooltip from '@material-ui/core/Tooltip';
+import Tooltip from '@mui/material/Tooltip';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-
 import GhIcon from './common/gh-svg-icon';
+
 import CodesandboxIcon from './common/code-sandbox-svg-icon';
 import CodeEditor from './code-editor';
 import { headerToId } from '../helpers/list-of-contents';
 import ShareButton from './mdx/share-button';
+import { grey } from '@mui/material/colors';
 
 const useHeadingStyles = makeStyles((theme) => ({
   anchor: {
@@ -69,7 +69,7 @@ export const Heading = ({ level, children, component }) => {
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       maxWidth: 'calc(100vw - 64px)',
     },
   },
@@ -134,8 +134,8 @@ const getPayload = (code, sourceFiles = {}) =>
           dependencies: {
             '@data-driven-forms/mui-component-mapper': 'latest',
             '@data-driven-forms/react-form-renderer': 'latest',
-            '@material-ui/core': 'latest',
-            '@material-ui/icons': 'latest',
+            '@mui/material': 'latest',
+            '@mui/icons-material': 'latest',
             react: '16.12.0',
             'react-dom': '16.12.0',
             'react-scripts': '3.0.1',
@@ -189,7 +189,7 @@ const CodeExample = ({ source, mode }) => {
               className={classes.accordionSummary}
               expandIcon={
                 <Tooltip title="Expand code example">
-                  <IconButton>
+                  <IconButton size="large">
                     <CodeIcon />
                   </IconButton>
                 </Tooltip>
@@ -204,7 +204,7 @@ const CodeExample = ({ source, mode }) => {
                 <form action="https://codesandbox.io/api/v1/sandboxes/define" method="POST" target="_blank">
                   <input type="hidden" name="parameters" value={getPayload(codeSource, sourceFiles)} />
                   <Tooltip title="Edit in codesandbox">
-                    <IconButton disableFocusRipple type="submit" onClick={(event) => event.stopPropagation()}>
+                    <IconButton disableFocusRipple type="submit" onClick={(event) => event.stopPropagation()} size="large">
                       <CodesandboxIcon />
                     </IconButton>
                   </Tooltip>
@@ -216,7 +216,7 @@ const CodeExample = ({ source, mode }) => {
                   onClick={(event) => event.stopPropagation()}
                 >
                   <Tooltip title="View source on github">
-                    <IconButton>
+                    <IconButton size="large">
                       <GhIcon style={{ color: grey[700] }} />
                     </IconButton>
                   </Tooltip>

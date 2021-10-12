@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 
-import Grid from '@material-ui/core/Grid';
-import Hidden from '@material-ui/core/Hidden';
+import Grid from '@mui/material/Grid';
+import Hidden from '@mui/material/Hidden';
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 import ListOfContents from '../helpers/list-of-contents';
 import ListOfContentsMobile from '../helpers/list-of-contents-select';
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
   wrapper: {
     justifyContent: 'center',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       flexDirection: 'column-reverse',
     },
   },
@@ -45,7 +45,7 @@ const DocPage = ({ children }) => {
         <Hidden mdUp>
           <ListOfContentsMobile found={found} />
         </Hidden>
-        <Hidden smDown className={classes.hidden}>
+        <Hidden mdDown className={classes.hidden}>
           <ListOfContents found={found} />
         </Hidden>
       </Grid>

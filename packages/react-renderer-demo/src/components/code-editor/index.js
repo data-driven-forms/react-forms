@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import makeStyles from '@material-ui/core/styles/makeStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import Highlight, { defaultProps } from 'prism-react-renderer/';
 import ghTheme from 'prism-react-renderer/themes/github';
 import vsTheme from 'prism-react-renderer/themes/vsDark';
@@ -38,7 +38,7 @@ const useStylesCode = makeStyles((theme) => ({
   wrapper: {
     position: 'relative',
     maxWidth: '100%',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       maxWidth: (props) => (props.inExample ? '100%' : 'calc(100vw - 64px)'),
     },
   },

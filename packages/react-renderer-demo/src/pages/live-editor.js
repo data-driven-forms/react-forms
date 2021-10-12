@@ -4,17 +4,17 @@ import componentTypes from '@data-driven-forms/react-form-renderer/component-typ
 import FormBuilder from '@data-driven-forms/form-builder/form-builder';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { pickerMapper, propertiesMapper, builderMapper, BuilderTemplate, fieldProperties } from '@data-driven-forms/form-builder/mui-builder-mappers';
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import Typography from '@material-ui/core/Typography';
-import CloseIcon from '@material-ui/icons/Close';
-import PanToolIcon from '@material-ui/icons/PanTool';
+import makeStyles from '@mui/styles/makeStyles';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import Typography from '@mui/material/Typography';
+import CloseIcon from '@mui/icons-material/Close';
+import PanToolIcon from '@mui/icons-material/PanTool';
 import PropTypes from 'prop-types';
 import componentMapper from '@data-driven-forms/mui-component-mapper/component-mapper';
 
@@ -161,7 +161,7 @@ const CopySnackbar = ({ open, handleClose }) => {
       onClose={handleClose}
       message={<span>Form schema was copied to clipboard</span>}
       action={[
-        <IconButton key="close" aria-label="close" color="inherit" className={classes.close} onClick={handleClose}>
+        <IconButton key="close" aria-label="close" color="inherit" className={classes.close} onClick={handleClose} size="large">
           <CloseIcon />
         </IconButton>,
       ]}

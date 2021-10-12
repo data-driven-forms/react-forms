@@ -1,16 +1,16 @@
 const muiTransformPlugin = [
   'transform-imports',
   {
-    '@material-ui/core': {
-      transform: (importName) => `@material-ui/core/${importName}`,
+    '@mui/material': {
+      transform: (importName) => `@mui/material/${importName}`,
       preventFullImport: false,
-      skipDefaultConversion: false
-    }
+      skipDefaultConversion: false,
+    },
   },
-  'MUI-CJS'
+  'MUI-CJS',
 ];
 
 module.exports = {
   presets: [['next/babel']],
-  plugins: [muiTransformPlugin]
+  plugins: [muiTransformPlugin],
 };

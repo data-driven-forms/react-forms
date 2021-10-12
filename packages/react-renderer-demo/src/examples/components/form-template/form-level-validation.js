@@ -6,14 +6,14 @@ import validatorTypes from '@data-driven-forms/react-form-renderer/validator-typ
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import FormSpy from '@data-driven-forms/react-form-renderer/form-spy';
 import TextField from '@data-driven-forms/mui-component-mapper/text-field';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import { makeStyles } from '@material-ui/core/styles';
-import red from '@material-ui/core/colors/red';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import makeStyles from '@mui/styles/makeStyles';
+import { red } from '@mui/material/colors';
 
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField,

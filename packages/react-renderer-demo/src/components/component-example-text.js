@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ComponentExample from '@docs/components/component-example';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 import { Heading } from './mdx/mdx-components';
 import avalableMappers from '../helpers/available-mappers';
