@@ -8,6 +8,7 @@ import componentTypes from '../component-types';
 import { prepareArrayValidator, getValidate } from './validator-helpers';
 import composeValidators from './compose-validators';
 import isEqual from 'lodash/isEqual';
+import get from 'lodash/get';
 
 const calculateInitialValue = (props) => {
   if (Object.prototype.hasOwnProperty.call(props, 'initialValue') && props.dataType) {
@@ -88,6 +89,10 @@ const useFieldApi = ({ name, resolveProps, skipRegistration = false, ...props })
   const { validatorMapper, formOptions } = useContext(RendererContext);
   const [warning, setWarning] = useState();
 
+  // if there is field initial value, we have to check form initialValues
+  // initialValues should have higher priority
+  const formInitialValue = Object.prototype.hasOwnProperty.call(props, 'initialValue') ? get(formOptions.initialValues, name) : undefined;
+
   const resolvedProps = resolveProps ? resolveProps(props, createFieldProps(name, formOptions), formOptions) || {} : {};
 
   const combinedProps = { ...props, ...resolvedProps };
@@ -112,7 +117,7 @@ const useFieldApi = ({ name, resolveProps, skipRegistration = false, ...props })
     ...(stateValidate ? { validate: stateValidate } : {}),
   };
 
-  const field = useField(name, enhancedProps);
+  const field = useField(name, { ...enhancedProps, ...(typeof formInitialValue !== 'undefined' && { initialValue: formInitialValue }) });
 
   /** Reinitilize type */
   useEffect(() => {
