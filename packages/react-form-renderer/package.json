@@ -30,7 +30,7 @@
   "devDependencies": {
   },
   "dependencies": {
-    "final-form": "^4.20.0",
+    "final-form": "^4.20.4",
     "final-form-arrays": "^3.0.2",
     "final-form-focus": "^1.1.2",
     "lodash": "^4.17.15",
