@@ -1,6 +1,6 @@
 {
   "name": "@data-driven-forms/react-form-renderer",
-  "version": "3.12.1",
+  "version": "3.12.2",
   "description": "React Form Renderer. Data Driven Forms converts JSON form definitions into fully functional React forms.",
   "main": "index.js",
   "module": "esm/index.js",
@@ -27,8 +27,7 @@
     "forms",
     "javascript"
   ],
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "dependencies": {
     "final-form": "^4.20.4",
     "final-form-arrays": "^3.0.2",
