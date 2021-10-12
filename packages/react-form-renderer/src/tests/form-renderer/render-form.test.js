@@ -1,4 +1,5 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import arrayMutators from 'final-form-arrays';
@@ -1751,6 +1752,100 @@ describe('renderForm function', () => {
 
       wrapper.find('form').simulate('submit');
       expect(onSubmit).toHaveBeenCalledWith({ testField: 'higher-priority' });
+    });
+
+    it('empty initialValues ', () => {
+      const onSubmit = jest.fn();
+      const wrapper = mount(
+        <FormRenderer
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          componentMapper={{
+            'custom-component': TextField,
+          }}
+          schema={{
+            fields: [
+              {
+                component: 'custom-component',
+                name: 'testField',
+                initialValue: 'lower-priority',
+              },
+            ],
+          }}
+          onSubmit={(values) => onSubmit(values)}
+          initialValues={{ testField: undefined }}
+        />
+      );
+
+      expect(wrapper.find('input').instance().value).toEqual('lower-priority');
+
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith({ testField: 'lower-priority' });
+    });
+
+    it('null initialValues ', () => {
+      const onSubmit = jest.fn();
+      const wrapper = mount(
+        <FormRenderer
+          FormTemplate={(props) => <FormTemplate {...props} />}
+          componentMapper={{
+            'custom-component': TextField,
+          }}
+          schema={{
+            fields: [
+              {
+                component: 'custom-component',
+                name: 'testField',
+                initialValue: 'lower-priority',
+              },
+            ],
+          }}
+          onSubmit={(values) => onSubmit(values)}
+          initialValues={{ testField: null }}
+        />
+      );
+
+      expect(wrapper.find('input').instance().value).toEqual('');
+
+      wrapper.find('form').simulate('submit');
+      expect(onSubmit).toHaveBeenCalledWith({ testField: null });
+    });
+
+    it('use initialValue when initialOnMount', async () => {
+      const onSubmit = jest.fn();
+      let wrapper;
+
+      await act(async () => {
+        wrapper = mount(
+          <FormRenderer
+            FormTemplate={(props) => <FormTemplate {...props} />}
+            componentMapper={{
+              'custom-component': TextField,
+            }}
+            schema={{
+              fields: [
+                {
+                  component: 'custom-component',
+                  name: 'testField',
+                  initialValue: 'lower-priority',
+                  initializeOnMount: true,
+                },
+              ],
+            }}
+            onSubmit={(values) => onSubmit(values)}
+            initialValues={{ testField: 'higher-priority' }}
+          />
+        );
+      });
+      wrapper.update();
+
+      expect(wrapper.find('input').instance().value).toEqual('lower-priority');
+
+      await act(async () => {
+        wrapper.find('form').simulate('submit');
+      });
+      wrapper.update();
+
+      expect(onSubmit).toHaveBeenCalledWith({ testField: 'lower-priority' });
     });
   });
 });
