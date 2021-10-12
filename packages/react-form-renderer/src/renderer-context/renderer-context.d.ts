@@ -18,6 +18,7 @@ export interface FormOptions extends FormApi {
   internalUnregisterField: (name: string) => void;
   getRegisteredFields: () => string[];
   ffGetRegisteredFields: () => string[];
+  initialValues: AnyObject;
 }
 
 export interface RendererContextValue {

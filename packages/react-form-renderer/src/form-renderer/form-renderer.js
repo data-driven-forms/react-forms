@@ -101,6 +101,7 @@ const FormRenderer = ({
               ...form,
               ffGetRegisteredFields: form.getRegisteredFields,
               getRegisteredFields: internalGetRegisteredFields,
+              initialValues: props.initialValues,
             },
           }}
         >
@@ -140,6 +141,7 @@ FormRenderer.propTypes = {
       [PropTypes.string]: PropTypes.func,
     }),
   }),
+  initialValues: PropTypes.object,
 };
 
 FormRenderer.defaultProps = {
