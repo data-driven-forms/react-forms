@@ -1,65 +1,47 @@
-import React, { Fragment, memo } from 'react';
+import React, { memo } from 'react';
 import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import { useFormApi, FieldArray } from '@data-driven-forms/react-form-renderer';
 
-import { Bullseye, FormHelperText, Grid, GridItem } from '@patternfly/react-core';
+import { Bullseye, Button, Flex, FlexItem, FormFieldGroup, FormFieldGroupHeader, FormHelperText, Grid, GridItem } from '@patternfly/react-core';
 
-import { AddCircleOIcon, CloseIcon } from '@patternfly/react-icons';
+import { TrashIcon } from '@patternfly/react-icons';
 
 import './final-form-array.css';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
-const ArrayItem = memo(
-  ({ fields, fieldIndex, name, remove, length, minItems }) => {
-    const { renderForm } = useFormApi();
+const Spacer = () => <span className="ddf-final-form-spacer" />;
 
-    const widths = {
-      label: fields[0].label ? 5 : 0,
-      field: fields[0].label ? 7 : 12,
-    };
+const ArrayItem = memo(
+  ({ fields, fieldIndex, name, remove, length, minItems, buttonLabels, isLast }) => {
+    const { renderForm } = useFormApi();
 
     const editedFields = fields.map((field, index) => {
       const computedName = field.name ? `${name}.${field.name}` : name;
-      return { ...field, name: computedName, key: `${name}-${index}`, hideLabel: true };
+      return { ...field, name: computedName, key: `${name}-${index}` };
     });
+
+    const isRemoveDisabled = length <= minItems;
 
     return (
       <React.Fragment>
-        <Grid>
-          <GridItem sm={11}>
-            <hr className="ddf-final-form-hr" />
-          </GridItem>
-        </Grid>
-        <Grid>
-          <GridItem sm={11}>
-            {editedFields.map((field, index) => (
-              <Grid key={`${field.label}-${index}`} className="ddf-final-form-array-grid">
-                {widths.label > 0 && (
-                  <GridItem sm={widths.label} key={`${field.label}-${index}`}>
-                    <label htmlFor={field.name}>
-                      {field.label}
-                      {field.isRequired && <span className="pf-c-form__label-required">*</span>}
-                    </label>
-                  </GridItem>
-                )}
-                <GridItem sm={widths.field}>{renderForm([field])}</GridItem>
-              </Grid>
-            ))}
-          </GridItem>
-          <GridItem sm={1}>
-            {length > minItems && (
-              <Bullseye>
-                <CloseIcon onClick={() => remove(fieldIndex)} className="ddf-final-form-group-remove-icon" />
-              </Bullseye>
-            )}
-            {length <= minItems && (
-              <Bullseye>
-                <CloseIcon className="ddf-final-form-group-remove-icon disabled" />
-              </Bullseye>
-            )}
-          </GridItem>
-        </Grid>
+        <Flex>
+          <FlexItem className="pf-c-form" grow={{ default: 'flex_1' }}>
+            {editedFields.map((field) => renderForm([field]))}
+          </FlexItem>
+          <FlexItem>
+            {editedFields[0].label && <Spacer />}
+            <Button
+              variant="plain"
+              aria-label={buttonLabels.remove}
+              disabled={isRemoveDisabled}
+              {...(!isRemoveDisabled && { onClick: () => remove(fieldIndex) })}
+            >
+              <TrashIcon />
+            </Button>
+          </FlexItem>
+        </Flex>
+        {!isLast && editedFields.length > 1 && <hr className="ddf-final-form-hr" />}
       </React.Fragment>
     );
   },
@@ -73,6 +55,10 @@ ArrayItem.propTypes = {
   remove: PropTypes.func.isRequired,
   length: PropTypes.number,
   minItems: PropTypes.number,
+  buttonLabels: PropTypes.shape({
+    remove: PropTypes.node,
+  }),
+  isLast: PropTypes.bool,
 };
 
 const DynamicArray = ({ ...props }) => {
@@ -86,22 +72,49 @@ const DynamicArray = ({ ...props }) => {
     minItems,
     maxItems,
     noItemsMessage,
+    buttonLabels,
     ...rest
   } = useFieldApi(props);
   const { dirty, submitFailed, error, submitError } = meta;
   const isError = (dirty || submitFailed) && (error || submitError) && (typeof error === 'string' || typeof submitError === 'string');
 
+  const combinedButtonLabels = {
+    add: 'Add item',
+    removeAll: 'Delete all',
+    remove: 'Remove',
+    ...buttonLabels,
+  };
+
   return (
     <FieldArray key={rest.input.name} name={rest.input.name} validate={arrayValidator}>
-      {({ fields: { map, value = [], push, remove } }) => (
-        <Fragment>
-          {label && <GridItem sm={12}>{label}</GridItem>}
-          {description && <GridItem sm={12}>{description}</GridItem>}
-          {value.length <= 0 && (
-            <Bullseye>
-              <GridItem sm={12}>{noItemsMessage}</GridItem>
-            </Bullseye>
-          )}
+      {({ fields: { map, value = [], push, remove, removeBatch } }) => (
+        <FormFieldGroup
+          header={
+            <FormFieldGroupHeader
+              titleText={{ text: label, id: props.name }}
+              titleDescription={description}
+              actions={
+                <React.Fragment>
+                  <Button
+                    variant="link"
+                    isDisabled={value.length === 0}
+                    {...(value.length !== 0 && { onClick: () => removeBatch(value.map((_, index) => index)) })}
+                  >
+                    {combinedButtonLabels.removeAll}
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    isDisabled={value.length >= maxItems}
+                    {...(!(value.length >= maxItems) && { onClick: () => push(defaultItem) })}
+                  >
+                    {combinedButtonLabels.add}
+                  </Button>
+                </React.Fragment>
+              }
+            />
+          }
+        >
+          {value.length <= 0 && <Bullseye>{noItemsMessage}</Bullseye>}
           {map((name, index) => (
             <ArrayItem
               key={`${name}-${index}`}
@@ -111,6 +124,8 @@ const DynamicArray = ({ ...props }) => {
               remove={remove}
               length={value.length}
               minItems={minItems}
+              buttonLabels={combinedButtonLabels}
+              isLast={value.length === index + 1}
             />
           ))}
           <Grid>
@@ -121,26 +136,15 @@ const DynamicArray = ({ ...props }) => {
                 </FormHelperText>
               )}
             </GridItem>
-            <GridItem sm={1} className="final-form-array-add-container">
-              {value.length < maxItems && (
-                <Bullseye>
-                  <AddCircleOIcon onClick={() => push(defaultItem)} className="ddf-final-form-group-add-icon" />
-                </Bullseye>
-              )}
-              {value.length >= maxItems && (
-                <Bullseye>
-                  <AddCircleOIcon className="ddf-final-form-group-add-icon disabled" />
-                </Bullseye>
-              )}
-            </GridItem>
           </Grid>
-        </Fragment>
+        </FormFieldGroup>
       )}
     </FieldArray>
   );
 };
 
 DynamicArray.propTypes = {
+  name: PropTypes.string,
   label: PropTypes.node,
   description: PropTypes.node,
   fields: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -148,6 +152,11 @@ DynamicArray.propTypes = {
   minItems: PropTypes.number,
   maxItems: PropTypes.number,
   noItemsMessage: PropTypes.node,
+  buttonLabels: PropTypes.shape({
+    add: PropTypes.node,
+    remove: PropTypes.node,
+    removeAll: PropTypes.node,
+  }),
 };
 
 DynamicArray.defaultProps = {
