@@ -32,6 +32,7 @@ interface componentMapper extends ComponentMapper {
   [ComponentTypes.FIELD_ARRAY]: React.ComponentType;
   [ComponentTypes.DUAL_LIST_SELECT]: React.ComponentType;
   [ComponentTypes.SLIDER]: React.ComponentType;
+  [ComponentTypes.FIELD_ARRAY_ITEM]: React.ComponentType;
 }
 
 interface RawComponents {

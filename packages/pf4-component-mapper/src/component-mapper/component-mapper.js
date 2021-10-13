@@ -15,6 +15,7 @@ import Switch from '../switch';
 import PlainText from '../plain-text';
 import DualListSelect from '../dual-list-select';
 import Slider from '../slider';
+import FieldArrayItem from '../field-array-item';
 
 const mapper = {
   [componentTypes.TEXT_FIELD]: TextField,
@@ -32,6 +33,7 @@ const mapper = {
   [componentTypes.FIELD_ARRAY]: FieldArray,
   [componentTypes.DUAL_LIST_SELECT]: DualListSelect,
   [componentTypes.SLIDER]: Slider,
+  [componentTypes.FIELD_ARRAY_ITEM]: FieldArrayItem,
 };
 
 export default mapper;

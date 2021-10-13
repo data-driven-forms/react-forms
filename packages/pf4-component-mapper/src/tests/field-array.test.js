@@ -500,4 +500,55 @@ describe('<FieldArray/>', () => {
 
     expect(wrapper.find({ name: 'foo[0]' })).toBeTruthy();
   });
+
+  it('should hide the whole field', async () => {
+    initialProps = {
+      ...initialProps,
+      schema: {
+        fields: [
+          {
+            component: componentTypes.FIELD_ARRAY,
+            name: 'hide-field',
+            fields: [
+              {
+                component: componentTypes.TEXT_FIELD,
+                name: 'select',
+                label: 'Shown label',
+              },
+              {
+                component: componentTypes.TEXT_FIELD,
+                name: 'hidden',
+                label: 'Hidden label',
+                condition: {
+                  when: ({ name }) => name.replace('hidden', 'select'),
+                  isNotEmpty: true,
+                },
+              },
+            ],
+          },
+        ],
+      },
+    };
+
+    await act(async () => {
+      wrapper = mount(<FormRenderer {...initialProps} />);
+    });
+
+    await act(async () => {
+      wrapper.find('AddCircleOIcon').first().simulate('click');
+    });
+    wrapper.update();
+
+    expect(wrapper.find('label')).toHaveLength(1);
+    expect(wrapper.find('label').text()).toEqual('Shown label');
+
+    await act(async () => {
+      wrapper.find('input').first().instance().value = 'something';
+      wrapper.find('input').first().simulate('change');
+    });
+    wrapper.update();
+
+    expect(wrapper.find('label')).toHaveLength(2);
+    expect(wrapper.find('label').last().text()).toEqual('Hidden label');
+  });
 });

@@ -1,0 +1,3 @@
+.ddf-final-form-array-grid:not(:last-child) {
+    margin-bottom: var(--pf-global--spacer--md);
+}

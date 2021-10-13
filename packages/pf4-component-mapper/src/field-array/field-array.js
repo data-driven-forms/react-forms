@@ -1,7 +1,7 @@
 import React, { Fragment, memo } from 'react';
 import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
-import { useFormApi, FieldArray } from '@data-driven-forms/react-form-renderer';
+import { useFormApi, FieldArray, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import { Bullseye, FormHelperText, Grid, GridItem } from '@patternfly/react-core';
 
@@ -33,19 +33,18 @@ const ArrayItem = memo(
         </Grid>
         <Grid>
           <GridItem sm={11}>
-            {editedFields.map((field, index) => (
-              <Grid key={`${field.label}-${index}`} className="ddf-final-form-array-grid">
-                {widths.label > 0 && (
-                  <GridItem sm={widths.label} key={`${field.label}-${index}`}>
-                    <label htmlFor={field.name}>
-                      {field.label}
-                      {field.isRequired && <span className="pf-c-form__label-required">*</span>}
-                    </label>
-                  </GridItem>
-                )}
-                <GridItem sm={widths.field}>{renderForm([field])}</GridItem>
-              </Grid>
-            ))}
+            {editedFields.map(({ condition, ...field }, index) =>
+              renderForm([
+                {
+                  name: field.name,
+                  component: componentTypes.FIELD_ARRAY_ITEM,
+                  field,
+                  index,
+                  widths,
+                  ...(condition && { condition }),
+                },
+              ])
+            )}
           </GridItem>
           <GridItem sm={1}>
             {length > minItems && (

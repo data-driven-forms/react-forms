@@ -7,6 +7,7 @@ export { default as DualListSelectTree } from './dual-list-tree-select';
 export { default as DualListContext } from './dual-list-context';
 export { default as DualListSortButton } from './dual-list-sort-button';
 export { default as FieldArray } from './field-array';
+export { default as FieldArrayItem } from './field-array-item';
 export { default as PlainText } from './plain-text';
 export { default as Radio } from './radio';
 export { default as Select } from './select';

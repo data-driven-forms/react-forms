@@ -30,6 +30,3 @@
 .ddf-final-form-hr {
     color: var(global_BorderColor_100);
 }
-.ddf-final-form-array-grid:not(:last-child) {
-    margin-bottom: var(--pf-global--spacer--md);
-}
