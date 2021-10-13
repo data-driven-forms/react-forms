@@ -11,6 +11,7 @@ PF4 component mapper provides an experimental implementation of field array.
 |minItems|`number`|Remove button is disabled, if the length of the array is equal or smaller.|
 |maxItems|`number`|Add button is disabled, if the length of the array is equal or bigger.|
 |noItemsMessage|`node`|A message which is shown, when there are no items in the array.|
+|buttonLabels|`object`|`{add: 'Add item', remove: 'Remove', removeAll: 'Delete all'}` sets labels of buttons.|
 
 ## Naming
 
