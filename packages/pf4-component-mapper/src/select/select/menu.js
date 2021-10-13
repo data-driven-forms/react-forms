@@ -131,6 +131,18 @@ const Menu = ({
         />
       )}
       {filteredOptions.map((item, index) => {
+        if (item.group) {
+          return (
+            <div className="pf-c-select__menu-group" key={`group-${index}`}>
+              <div className="pf-c-select__menu-group-title">{item.group}</div>
+            </div>
+          );
+        }
+
+        if (item.divider) {
+          return <hr className="pf-c-divider" key={`divider-${index}`} />;
+        }
+
         const itemProps = getItemProps({
           item,
           index,
