@@ -238,6 +238,7 @@ InternalSelect.propTypes = {
     PropTypes.shape({
       value: PropTypes.any,
       label: PropTypes.any,
+      divider: PropTypes.bool,
     })
   ).isRequired,
   value: PropTypes.any,
