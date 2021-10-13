@@ -1,6 +1,7 @@
 const componentTypes = {
   TEXT_FIELD: 'text-field',
   FIELD_ARRAY: 'field-array',
+  FIELD_ARRAY_ITEM: 'field-array-item',
   CHECKBOX: 'checkbox',
   SUB_FORM: 'sub-form',
   RADIO: 'radio',
