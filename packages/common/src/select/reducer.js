@@ -1,9 +1,11 @@
+export const flatOptions = (options) => options.flatMap((option) => (option.options ? [{ group: option.label }, ...option.options] : [option]));
+
 const reducer = (state, { type, payload, options = [] }) => {
   switch (type) {
     case 'updateOptions':
       return {
         ...state,
-        options: payload,
+        options: state.useFlatOptions ? flatOptions(payload) : payload,
         isLoading: false,
         promises: {},
       };
@@ -15,7 +17,7 @@ const reducer = (state, { type, payload, options = [] }) => {
     case 'setOptions':
       return {
         ...state,
-        options: payload,
+        options: state.useFlatOptions ? flatOptions(payload) : payload,
       };
     case 'initialLoaded':
       return {
@@ -29,7 +31,9 @@ const reducer = (state, { type, payload, options = [] }) => {
           ...state.promises,
           ...payload,
         },
-        options: [...state.options, ...options.filter(({ value }) => !state.options.find((option) => option.value === value))],
+        options: state.useFlatOptions
+          ? flatOptions([...state.options, ...options.filter(({ value }) => !state.options.find((option) => option.value === value))])
+          : [...state.options, ...options.filter(({ value }) => !state.options.find((option) => option.value === value))],
       };
     default:
       return state;
