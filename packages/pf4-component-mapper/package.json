@@ -30,13 +30,13 @@
     "javascript"
   ],
   "devDependencies": {
-    "@patternfly/react-core": "^4.101.3",
-    "@patternfly/react-icons": "^4.9.5"
+    "@patternfly/react-core": "^4.157.3",
+    "@patternfly/react-icons": "^4.11.7"
   },
   "peerDependencies": {
     "@data-driven-forms/react-form-renderer": ">=3.2.1",
-    "@patternfly/react-core": "^4.101.3",
-    "@patternfly/react-icons": "^4.9.5"
+    "@patternfly/react-core": "^4.157.3",
+    "@patternfly/react-icons": "^4.11.7"
   },
   "dependencies": {
     "@data-driven-forms/common": "*",
