@@ -20,6 +20,7 @@ Available keys:
 {
   TEXT_FIELD,
   FIELD_ARRAY,
+  FIELD_ARRAY_ITEM,
   CHECKBOX,
   SUB_FORM,
   RADIO,
