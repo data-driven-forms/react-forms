@@ -2,7 +2,7 @@ import componentTypes from '@data-driven-forms/react-form-renderer/component-typ
 
 export const docsLinks = {
   mui: 'https://material-ui.com/api/',
-  pf4: 'https://patternfly-react.surge.sh/components/',
+  pf4: 'https://www.patternfly.org/v4/components/',
   blueprint: 'https://blueprintjs.com/docs/',
   suir: 'https://react.semantic-ui.com/',
   ant: 'https://ant.design/components/',
@@ -24,6 +24,7 @@ const mapperLinks = {
     [componentTypes.PLAIN_TEXT]: 'text',
     [componentTypes.DUAL_LIST_SELECT]: 'dual-list-selector',
     [componentTypes.SLIDER]: 'slider',
+    [componentTypes.FIELD_ARRAY]: 'form#field-groups',
   },
   mui: {
     'date-picker': 'text-field',
