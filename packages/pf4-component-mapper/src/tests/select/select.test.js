@@ -102,6 +102,83 @@ describe('<Select />', () => {
     expect(wrapper.find(Option).find('.pf-c-select__menu-item-description').text()).toEqual('some description');
   });
 
+  it('should render groups and dividers', async () => {
+    const onSubmit = jest.fn();
+
+    const wrapper = mount(
+      <FormRenderer
+        onSubmit={(values) => onSubmit(values)}
+        FormTemplate={FormTemplate}
+        componentMapper={componentMapper}
+        schema={{
+          fields: [
+            {
+              component: 'select',
+              name: 'select-with-categories',
+              label: 'With categories',
+              options: [
+                {
+                  label: 'Category 1',
+                  options: [
+                    { label: 'value 1', value: '111' },
+                    { label: 'value 2', value: '222' },
+                  ],
+                },
+                { divider: true },
+                { label: 'independent 1', value: '1112333' },
+                { divider: true },
+                {
+                  label: 'Category 2',
+                  options: [
+                    { label: 'value 3', value: '333' },
+                    { label: 'value 4', value: '444' },
+                  ],
+                },
+                { divider: true },
+                { label: 'independent 2', value: '11111' },
+              ],
+            },
+          ],
+        }}
+      />
+    );
+
+    wrapper.find('.pf-c-select__toggle').simulate('click');
+
+    expect(wrapper.find('.pf-c-select__menu-group-title')).toHaveLength(2);
+
+    expect(wrapper.find('.pf-c-select__menu-group-title').first().text()).toEqual('Category 1');
+    expect(wrapper.find('.pf-c-select__menu-group-title').last().text()).toEqual('Category 2');
+
+    expect(wrapper.find('.pf-c-divider')).toHaveLength(3);
+
+    expect(wrapper.find('.pf-c-select__menu-item')).toHaveLength(6);
+    expect(wrapper.find('.pf-c-select__menu-item').map((opt) => opt.text())).toEqual([
+      'value 1',
+      'value 2',
+      'independent 1',
+      'value 3',
+      'value 4',
+      'independent 2',
+    ]);
+
+    await act(async () => {
+      wrapper.find('button.pf-c-select__menu-item').first().simulate('click');
+    });
+    wrapper.update();
+
+    wrapper.find('.pf-c-select__toggle').simulate('click');
+
+    expect(wrapper.find('.pf-c-select__menu-item').first().find('.pf-c-select__menu-item-icon')).toHaveLength(1); // first option is checked
+
+    await act(async () => {
+      wrapper.find('form').first().simulate('submit');
+    });
+    wrapper.update();
+
+    expect(onSubmit).toHaveBeenCalledWith({ 'select-with-categories': '111' });
+  });
+
   it('should return single simple value', async () => {
     const wrapper = mount(<Select {...initialProps} />);
     wrapper.find('.pf-c-select__toggle').simulate('click');
