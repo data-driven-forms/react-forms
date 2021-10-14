@@ -69,11 +69,36 @@ const itemToString = (value, isMulti, showMore, handleShowMore, handleChange) =>
 };
 
 // TODO fix the value of internal select not to be an array all the time. It forces the filter value to be an array and it crashes sometimes.
-const filterOptions = (options, filterValue = '') =>
-  options.filter(({ label }) => {
-    const filter = Array.isArray(filterValue) && filterValue.length > 0 ? filterValue[0] : filterValue;
-    return label.toLowerCase().includes(filter.toLowerCase());
-  });
+const filterOptions = (options, filterValue = '') => {
+  const filter = (Array.isArray(filterValue) && filterValue.length > 0 ? filterValue[0] : filterValue).toLowerCase();
+
+  if (!filter) {
+    return options;
+  }
+
+  return options
+    .map((option) => {
+      if (option.options) {
+        const filteredNested = option.options.map((option) => (option.label?.toLowerCase().includes(filter) ? option : null)).filter(Boolean);
+
+        if (filteredNested.length === 0) {
+          return null;
+        }
+
+        return {
+          ...option,
+          options: filteredNested,
+        };
+      }
+
+      if (option.label?.toLowerCase().includes(filter)) {
+        return option;
+      }
+
+      return null;
+    })
+    .filter(Boolean);
+};
 
 const getValue = (isMulti, option, value) => {
   if (!isMulti || !option) {
@@ -154,6 +179,7 @@ const InternalSelect = ({
   loadingMessage,
   menuPortalTarget,
   menuIsPortal,
+  originalOptions,
   ...props
 }) => {
   const [showMore, setShowMore] = useState(false);
@@ -223,6 +249,7 @@ const InternalSelect = ({
                 menuPortalTarget={menuPortalTarget}
                 menuIsPortal={menuIsPortal}
                 selectToggleRef={selectToggleRef}
+                originalOptions={originalOptions}
               />
             )}
           </div>
@@ -257,6 +284,7 @@ InternalSelect.propTypes = {
   loadingMessage: PropTypes.node,
   menuPortalTarget: PropTypes.any,
   menuIsPortal: PropTypes.bool,
+  originalOptions: PropTypes.array,
 };
 
 const Select = ({ menuIsPortal, ...props }) => {
