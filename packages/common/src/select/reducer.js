@@ -3,6 +3,7 @@ export const init = ({ propsOptions, optionsTransformer }) => ({
   options: optionsTransformer ? optionsTransformer(propsOptions) : propsOptions,
   promises: {},
   isInitialLoaded: false,
+  ...(optionsTransformer && { originalOptions: propsOptions }),
 });
 
 const reducer = (state, { type, payload, options = [], optionsTransformer }) => {
@@ -13,6 +14,7 @@ const reducer = (state, { type, payload, options = [], optionsTransformer }) => 
         options: optionsTransformer ? optionsTransformer(payload) : payload,
         isLoading: false,
         promises: {},
+        ...(optionsTransformer && { originalOptions: payload }),
       };
     case 'startLoading':
       return {
@@ -23,6 +25,7 @@ const reducer = (state, { type, payload, options = [], optionsTransformer }) => 
       return {
         ...state,
         options: optionsTransformer ? optionsTransformer(payload) : payload,
+        ...(optionsTransformer && { originalOptions: payload }),
       };
     case 'initialLoaded':
       return {
@@ -39,6 +42,9 @@ const reducer = (state, { type, payload, options = [], optionsTransformer }) => 
         options: optionsTransformer
           ? optionsTransformer([...state.options, ...options.filter(({ value }) => !state.options.find((option) => option.value === value))])
           : [...state.options, ...options.filter(({ value }) => !state.options.find((option) => option.value === value))],
+        ...(optionsTransformer && {
+          originalOptions: [...state.options, ...options.filter(({ value }) => !state.options.find((option) => option.value === value))],
+        }),
       };
     default:
       return state;
