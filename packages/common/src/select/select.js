@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import isEqual from 'lodash/isEqual';
 import fnToString from '../utils/fn-to-string';
-import reducer, { flatOptions } from './reducer';
+import reducer, { init } from './reducer';
 import useIsMounted from '../hooks/use-is-mounted';
 
 const getSelectValue = (stateValue, simpleValue, isMulti, allOptions) => {
@@ -73,16 +73,11 @@ const Select = ({
   loadOptionsChangeCounter,
   SelectComponent,
   noValueUpdates,
-  useFlatOptions,
+  optionsTransformer,
   ...props
 }) => {
-  const [state, dispatch] = useReducer(reducer, {
-    isLoading: false,
-    options: useFlatOptions ? flatOptions(propsOptions) : propsOptions,
-    useFlatOptions,
-    promises: {},
-    isInitialLoaded: false,
-  });
+  const [state, originalDispatch] = useReducer(reducer, { optionsTransformer, propsOptions }, init);
+  const dispatch = (action) => originalDispatch({ ...action, optionsTransformer });
 
   const isMounted = useIsMounted();
 
@@ -222,7 +217,7 @@ Select.propTypes = {
   isSearchable: PropTypes.bool,
   SelectComponent: PropTypes.elementType.isRequired,
   noValueUpdates: PropTypes.bool,
-  useFlatOptions: PropTypes.bool,
+  optionsTransformer: PropTypes.func,
 };
 
 Select.defaultProps = {
