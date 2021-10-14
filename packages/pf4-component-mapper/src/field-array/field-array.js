@@ -95,13 +95,15 @@ const DynamicArray = ({ ...props }) => {
               titleDescription={description}
               actions={
                 <React.Fragment>
-                  <Button
-                    variant="link"
-                    isDisabled={value.length === 0}
-                    {...(value.length !== 0 && { onClick: () => removeBatch(value.map((_, index) => index)) })}
-                  >
-                    {combinedButtonLabels.removeAll}
-                  </Button>
+                  {minItems === 0 && (
+                    <Button
+                      variant="link"
+                      isDisabled={value.length === 0}
+                      {...(value.length !== 0 && { onClick: () => removeBatch(value.map((_, index) => index)) })}
+                    >
+                      {combinedButtonLabels.removeAll}
+                    </Button>
+                  )}
                   <Button
                     variant="secondary"
                     isDisabled={value.length >= maxItems}

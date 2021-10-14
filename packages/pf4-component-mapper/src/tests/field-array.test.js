@@ -306,7 +306,7 @@ describe('<FieldArray/>', () => {
     });
 
     await act(async () => {
-      wrapper.find('button').at(1).simulate('click');
+      wrapper.find('button').at(0).simulate('click');
     });
     wrapper.update();
 
@@ -321,7 +321,7 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper.find('button').at(1).simulate('click');
+      wrapper.find('button').at(0).simulate('click');
     });
     wrapper.update();
 
@@ -336,7 +336,7 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper.find('button').at(1).simulate('click');
+      wrapper.find('button').at(0).simulate('click');
     });
     wrapper.update();
 
