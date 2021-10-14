@@ -179,6 +179,74 @@ describe('<Select />', () => {
     expect(onSubmit).toHaveBeenCalledWith({ 'select-with-categories': '111' });
   });
 
+  it('filters with nested options', async () => {
+    const wrapper = mount(
+      <FormRenderer
+        onSubmit={jest.fn()}
+        FormTemplate={FormTemplate}
+        componentMapper={componentMapper}
+        schema={{
+          fields: [
+            {
+              component: 'select',
+              name: 'select-with-categories',
+              label: 'With categories',
+              isSearchable: true,
+              options: [
+                {
+                  label: 'Category 1',
+                  options: [
+                    { label: 'value 1', value: '111' },
+                    { label: 'value 2', value: '222' },
+                  ],
+                },
+                { divider: true },
+                { label: 'independent 1', value: '1112333' },
+                { divider: true },
+                {
+                  label: 'Category 2',
+                  options: [
+                    { label: 'value 3', value: '333' },
+                    { label: 'value 4', value: '444' },
+                  ],
+                },
+                { divider: true },
+                { label: 'independent 2', value: '11111' },
+              ],
+            },
+          ],
+        }}
+      />
+    );
+
+    wrapper.find('.pf-c-select__toggle').simulate('click');
+
+    await act(async () => {
+      const search = wrapper.find('input');
+      search.instance().value = 'value';
+      search.simulate('change');
+    });
+    wrapper.update();
+
+    expect(wrapper.find('.pf-c-select__menu-group-title')).toHaveLength(2);
+    expect(wrapper.find('.pf-c-divider')).toHaveLength(0);
+
+    expect(wrapper.find('.pf-c-select__menu-item')).toHaveLength(4);
+    expect(wrapper.find('.pf-c-select__menu-item').map((opt) => opt.text())).toEqual(['value 1', 'value 2', 'value 3', 'value 4']);
+
+    await act(async () => {
+      const search = wrapper.find('input');
+      search.instance().value = 'independent';
+      search.simulate('change');
+    });
+    wrapper.update();
+
+    expect(wrapper.find('.pf-c-select__menu-group-title')).toHaveLength(0);
+    expect(wrapper.find('.pf-c-divider')).toHaveLength(0);
+
+    expect(wrapper.find('.pf-c-select__menu-item')).toHaveLength(2);
+    expect(wrapper.find('.pf-c-select__menu-item').map((opt) => opt.text())).toEqual(['independent 1', 'independent 2']);
+  });
   it('should return single simple value', async () => {
     const wrapper = mount(<Select {...initialProps} />);
     wrapper.find('.pf-c-select__toggle').simulate('click');
