@@ -19,7 +19,7 @@ const Select = (props) => {
       id={id || input.name}
       FormGroupProps={FormGroupProps}
     >
-      <DataDrivenSelect {...input} {...rest} isDisabled={isDisabled || isReadOnly} useFlatOptions />
+      <DataDrivenSelect {...input} {...rest} isDisabled={isDisabled || isReadOnly} />
     </FormGroup>
   );
 };

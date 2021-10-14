@@ -1,11 +1,16 @@
-export const flatOptions = (options) => options.flatMap((option) => (option.options ? [{ group: option.label }, ...option.options] : [option]));
+export const init = ({ propsOptions, optionsTransformer }) => ({
+  isLoading: false,
+  options: optionsTransformer ? optionsTransformer(propsOptions) : propsOptions,
+  promises: {},
+  isInitialLoaded: false,
+});
 
-const reducer = (state, { type, payload, options = [] }) => {
+const reducer = (state, { type, payload, options = [], optionsTransformer }) => {
   switch (type) {
     case 'updateOptions':
       return {
         ...state,
-        options: state.useFlatOptions ? flatOptions(payload) : payload,
+        options: optionsTransformer ? optionsTransformer(payload) : payload,
         isLoading: false,
         promises: {},
       };
@@ -17,7 +22,7 @@ const reducer = (state, { type, payload, options = [] }) => {
     case 'setOptions':
       return {
         ...state,
-        options: state.useFlatOptions ? flatOptions(payload) : payload,
+        options: optionsTransformer ? optionsTransformer(payload) : payload,
       };
     case 'initialLoaded':
       return {
@@ -31,8 +36,8 @@ const reducer = (state, { type, payload, options = [] }) => {
           ...state.promises,
           ...payload,
         },
-        options: state.useFlatOptions
-          ? flatOptions([...state.options, ...options.filter(({ value }) => !state.options.find((option) => option.value === value))])
+        options: optionsTransformer
+          ? optionsTransformer([...state.options, ...options.filter(({ value }) => !state.options.find((option) => option.value === value))])
           : [...state.options, ...options.filter(({ value }) => !state.options.find((option) => option.value === value))],
       };
     default:
