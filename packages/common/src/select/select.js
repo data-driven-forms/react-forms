@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import isEqual from 'lodash/isEqual';
 import fnToString from '../utils/fn-to-string';
-import reducer from './reducer';
+import reducer, { init } from './reducer';
 import useIsMounted from '../hooks/use-is-mounted';
 
 const getSelectValue = (stateValue, simpleValue, isMulti, allOptions) => {
@@ -16,7 +16,9 @@ const getSelectValue = (stateValue, simpleValue, isMulti, allOptions) => {
 
   if (hasSelectAll || hasSelectNone) {
     enhancedValue = enhancedValue || [];
-    const optionsLength = allOptions.filter(({ selectAll, selectNone }) => !selectAll && !selectNone).length;
+    const optionsLength = allOptions.filter(
+      ({ selectAll, selectNone, divider, options }) => !selectAll && !selectNone && !divider && !options
+    ).length;
 
     const selectedAll = optionsLength === enhancedValue.length;
     const selectedNone = enhancedValue.length === 0;
@@ -43,7 +45,7 @@ const handleSelectChange = (option, simpleValue, isMulti, onChange, allOptions, 
   const sanitizedOption = !enhanceOption && isMulti ? [] : enhanceOption;
 
   if (isMulti && sanitizedOption.find(({ selectAll }) => selectAll)) {
-    return onChange(allOptions.filter(({ selectAll, selectNone }) => !selectAll && !selectNone).map(({ value }) => value));
+    return onChange(allOptions.filter(({ selectAll, selectNone, value }) => !selectAll && !selectNone && value).map(({ value }) => value));
   }
 
   if (isMulti && sanitizedOption.find(({ selectNone }) => selectNone)) {
@@ -73,14 +75,11 @@ const Select = ({
   loadOptionsChangeCounter,
   SelectComponent,
   noValueUpdates,
+  optionsTransformer,
   ...props
 }) => {
-  const [state, dispatch] = useReducer(reducer, {
-    isLoading: false,
-    options: propsOptions,
-    promises: {},
-    isInitialLoaded: false,
-  });
+  const [state, originalDispatch] = useReducer(reducer, { optionsTransformer, propsOptions }, init);
+  const dispatch = (action) => originalDispatch({ ...action, optionsTransformer });
 
   const isMounted = useIsMounted();
 
@@ -145,6 +144,7 @@ const Select = ({
         onChange={() => {}}
         {...loadingProps}
         noOptionsMessage={renderNoOptionsMessage()}
+        {...(state.originalOptions && { originalOptions: state.originalOptions })}
       />
     );
   }
@@ -194,6 +194,7 @@ const Select = ({
       noOptionsMessage={renderNoOptionsMessage()}
       hideSelectedOptions={false}
       closeMenuOnSelect={!isMulti}
+      {...(state.originalOptions && { originalOptions: state.originalOptions })}
     />
   );
 };
@@ -220,6 +221,7 @@ Select.propTypes = {
   isSearchable: PropTypes.bool,
   SelectComponent: PropTypes.elementType.isRequired,
   noValueUpdates: PropTypes.bool,
+  optionsTransformer: PropTypes.func,
 };
 
 Select.defaultProps = {
