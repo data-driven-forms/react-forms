@@ -130,9 +130,9 @@ describe('TimePicker', () => {
     });
     wrapper.update();
 
-    expect(wrapper.find('input').props().value).toEqual('13:28');
+    expect(wrapper.find('input').props().value).toEqual('13:27');
     expect(onSubmit.mock.calls[0][0]['time-picker'].getHours()).toEqual(13);
-    expect(onSubmit.mock.calls[0][0]['time-picker'].getMinutes()).toEqual(28);
+    expect(onSubmit.mock.calls[0][0]['time-picker'].getMinutes()).toEqual(27);
     onSubmit.mockReset();
 
     await act(async () => {

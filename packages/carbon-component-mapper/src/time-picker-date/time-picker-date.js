@@ -47,7 +47,7 @@ const TimePickerDate = (props) => {
       hours = hours % 24;
     }
 
-    minutes = minutes % 59;
+    minutes = minutes % 60;
     const enhancedValue = new Date(`Jan 1 2000 ${hours}:${minutes}:00 ${timezone}`);
 
     input.onChange(enhancedValue);
