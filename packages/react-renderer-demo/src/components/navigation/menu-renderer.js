@@ -1,12 +1,17 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
+import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/router';
 import Mapper from './mapper';
-import makeStyles from '@mui/styles/makeStyles';
-import { navStyles } from './nav-styles';
 
-const useStyles = makeStyles(navStyles);
+const StyledSearchButton = styled(TextField)(() => ({
+  '&.searchButton': {
+    width: '100%',
+    paddingLeft: 16,
+    paddingRight: 16,
+  },
+}));
 
 const createLink = (...args) => args.join('/');
 
@@ -129,23 +134,23 @@ const current = memoizeCurrent();
 const Menu = ({ schema, searchRef }) => {
   const router = useRouter();
   const [value, setValue] = useState('');
-  const classes = useStyles();
   const currentLocation = router.asPath.replace(/\?.*/, '').split('/');
 
   const schemaFiltered = value !== '' ? search(schema, value) : current(schema, currentLocation);
 
   return (
     <React.Fragment>
-      <TextField
+      <StyledSearchButton
         id="standard-search"
         placeholder="Search"
         type="search"
         margin="normal"
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        className={classes.searchButton}
+        className={'searchButton'}
         inputRef={searchRef}
         autoFocus
+        variant="standard"
       />
       <MenuRenderer schema={schemaFiltered} />
     </React.Fragment>

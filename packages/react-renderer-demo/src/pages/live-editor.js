@@ -4,7 +4,7 @@ import componentTypes from '@data-driven-forms/react-form-renderer/component-typ
 import FormBuilder from '@data-driven-forms/form-builder/form-builder';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { pickerMapper, propertiesMapper, builderMapper, BuilderTemplate, fieldProperties } from '@data-driven-forms/form-builder/mui-builder-mappers';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
@@ -36,46 +36,43 @@ import {
   STEP,
 } from '../helpers/field-properties';
 
-const useStyles = makeStyles((theme) => ({
-  builderWrapper: {
+const Root = styled('div')(({ theme }) => ({
+  '& .builderWrapper': {
     width: '100%',
   },
-  close: {
-    padding: theme.spacing(0.5),
-  },
-  builderControlsWrapper: {
+  '& .builderControlsWrapper': {
     width: '100%',
   },
-  builderButton: {
+  '& .builderButton': {
     '&:not(:last-child)': {
       marginRight: 8,
     },
   },
-  expansionPanel: {
+  '& .expansionPanel': {
     marginBottom: 8,
   },
-  emptyTarget: {
-    height: '100%',
-  },
-  editor: {
+  '& .editor': {
     width: '100%',
   },
 }));
 
-const EmptyTarget = () => {
-  const classes = useStyles();
-  return (
-    <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" className={classes.emptyTarget}>
-      <Typography variant="h3" gutterBottom>
-        There are no fields yet.
-      </Typography>
-      <Typography variant="h4">
-        <PanToolIcon />
-        &nbsp; You can add fields by dragging from the menu on the left.
-      </Typography>
-    </Box>
-  );
-};
+const StyledBox = styled(Box)(() => ({
+  '&.emptyTarget': {
+    height: '100%',
+  },
+}));
+
+const EmptyTarget = () => (
+  <StyledBox display="flex" justifyContent="center" alignItems="center" flexDirection="column" className={'emptyTarget'}>
+    <Typography variant="h3" gutterBottom>
+      There are no fields yet.
+    </Typography>
+    <Typography variant="h4">
+      <PanToolIcon />
+      &nbsp; You can add fields by dragging from the menu on the left.
+    </Typography>
+  </StyledBox>
+);
 
 const reducedMapper = {
   ...builderMapper,
@@ -148,8 +145,13 @@ const componentProperties = {
   },
 };
 
+const StyledClose = styled(IconButton)(({ theme }) => ({
+  '& .close': {
+    padding: theme.spacing(0.5),
+  },
+}));
+
 const CopySnackbar = ({ open, handleClose }) => {
-  const classes = useStyles();
   return (
     <Snackbar
       anchorOrigin={{
@@ -161,9 +163,9 @@ const CopySnackbar = ({ open, handleClose }) => {
       onClose={handleClose}
       message={<span>Form schema was copied to clipboard</span>}
       action={[
-        <IconButton key="close" aria-label="close" color="inherit" className={classes.close} onClick={handleClose} size="large">
+        <StyledClose key="close" aria-label="close" color="inherit" className={'close'} onClick={handleClose} size="large">
           <CloseIcon />
-        </IconButton>,
+        </StyledClose>,
       ]}
     />
   );
@@ -175,10 +177,9 @@ CopySnackbar.propTypes = {
 };
 
 const LiveEditor = () => {
-  const classes = useStyles();
   const [openTooltip, setOpenTooltip] = useState(false);
   return (
-    <div>
+    <Root>
       <Typography variant="h4" component="h1" gutterBottom>
         Form builder
       </Typography>
@@ -194,27 +195,27 @@ const LiveEditor = () => {
         mode="subset"
         debug={false}
         render={({ isValid, getSchema, ...props }) => (
-          <BuilderTemplate {...props} className={classes.builderWrapper}>
-            <Accordion className={classes.expansionPanel}>
+          <BuilderTemplate {...props} className={'builderWrapper'}>
+            <Accordion className={'expansionPanel'}>
               <AccordionSummary>
-                <Box display="flex" justifyContent="space-between" alignItems="center" className={classes.builderControlsWrapper}>
+                <Box display="flex" justifyContent="space-between" alignItems="center" className={'builderControlsWrapper'}>
                   <Typography>Click to preview schema</Typography>
                   <CopyToClipboard text={JSON.stringify(getSchema())} onCopy={() => setOpenTooltip(true)}>
-                    <Button variant="contained" color="primary" className={classes.builderButton} onClick={(event) => event.stopPropagation()}>
+                    <Button variant="contained" color="primary" className={'builderButton'} onClick={(event) => event.stopPropagation()}>
                       Copy schema
                     </Button>
                   </CopyToClipboard>
                 </Box>
               </AccordionSummary>
               <AccordionDetails>
-                <CodeEditor keepLastLine editorClassname={classes.editor} value={JSON.stringify(getSchema(), null, 2)} />
+                <CodeEditor keepLastLine editorClassname={'editor'} value={JSON.stringify(getSchema(), null, 2)} />
               </AccordionDetails>
             </Accordion>
             <CopySnackbar open={openTooltip} handleClose={() => setOpenTooltip(false)} />
           </BuilderTemplate>
         )}
       />
-    </div>
+    </Root>
   );
 };
 

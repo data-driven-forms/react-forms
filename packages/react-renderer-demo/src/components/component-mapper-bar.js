@@ -1,15 +1,21 @@
 import React from 'react';
+import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
-
-import makeStyles from '@mui/styles/makeStyles';
 
 import IconButton from '@mui/material/IconButton';
 
 import LanguageIcon from '@mui/icons-material/Language';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
+const PREFIX = 'ComponentMapperBar';
+
+const classes = {
+  root: `${PREFIX}-root`,
+  npm: `${PREFIX}-npm`,
+};
+
+const Root = styled('div')(({ theme }) => ({
+  [`&.${classes.root}`]: {
     display: 'flex',
     flexDirection: 'row-reverse',
     marginTop: -48,
@@ -18,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'row',
     },
   },
-  npm: {
+
+  [`& .${classes.npm}`]: {
     display: 'grid',
     '& img': {
       margin: 'auto',
@@ -27,10 +34,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ComponentMapperBar = ({ prefix, href }) => {
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
+    <Root className={classes.root}>
       <a
         href={`https://badge.fury.io/js/%40data-driven-forms%2F${prefix}-component-mapper`}
         rel="noopener noreferrer"
@@ -52,7 +57,7 @@ const ComponentMapperBar = ({ prefix, href }) => {
       >
         <GitHubIcon />
       </IconButton>
-    </div>
+    </Root>
   );
 };
 

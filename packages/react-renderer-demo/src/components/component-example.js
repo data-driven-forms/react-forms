@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/router';
 import CircularProgress from '@mui/material/CircularProgress';
-import makeStyles from '@mui/styles/makeStyles';
 import PropTypes from 'prop-types';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -36,6 +36,146 @@ import avalableMappers from '../helpers/available-mappers';
 import GhIcon from './common/gh-svg-icon';
 import originalComponentLink from '../helpers/original-component-link';
 
+const PREFIX = 'ComponentExample';
+
+const classes = {
+  box: `${PREFIX}-box`,
+  smTabDown: `${PREFIX}-smTabDown`,
+  smTabUp: `${PREFIX}-smTabUp`,
+  tab: `${PREFIX}-tab`,
+  indicator: `${PREFIX}-indicator`,
+  tabLink: `${PREFIX}-tabLink`,
+  spinnerCheat: `${PREFIX}-spinnerCheat`,
+  spinner: `${PREFIX}-spinner`,
+  editorContainer: `${PREFIX}-editorContainer`,
+  buttonGroup: `${PREFIX}-buttonGroup`,
+  alert: `${PREFIX}-alert`,
+  variantTabs: `${PREFIX}-variantTabs`,
+  hidden: `${PREFIX}-hidden`,
+  expand: `${PREFIX}-expand`,
+  hide: `${PREFIX}-hide`,
+  tableHeader: `${PREFIX}-tableHeader`,
+  tableBody: `${PREFIX}-tableBody`,
+  expandButton: `${PREFIX}-expandButton`,
+};
+
+// TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
+const Root = styled('div')(({ theme }) => ({
+  [`& .${classes.box}`]: {
+    [theme.breakpoints.down('md')]: {
+      flexDirection: 'column-reverse',
+    },
+  },
+
+  [`& .${classes.smTabDown}`]: {
+    display: 'none',
+    [theme.breakpoints.down('md')]: {
+      display: 'block',
+    },
+  },
+
+  [`& .${classes.smTabUp}`]: {
+    display: 'block',
+    [theme.breakpoints.down('md')]: {
+      display: 'none',
+    },
+  },
+
+  [`& .${classes.tab}`]: {
+    minWidth: 'initial',
+    '&.active': {
+      color: '#000',
+      background: theme.palette.common.white,
+      boxShadow: theme.shadows[1],
+      '&:last-child': {
+        marginBottom: 2,
+      },
+    },
+  },
+
+  [`& .${classes.indicator}`]: {
+    width: 4,
+  },
+
+  [`& .${classes.tabLink}`]: {
+    textDecoration: 'none',
+    color: 'inherit',
+  },
+
+  [`& .${classes.spinnerCheat}`]: {
+    flex: 1,
+    position: 'relative',
+    boxShadow: theme.shadows[1],
+    '& .longer + #code-target': {
+      maxHeight: 'calc(100% - 49px)',
+    },
+  },
+
+  [`& .${classes.spinner}`]: {
+    position: 'absolute',
+    top: 'calc(50% - 40px)',
+    left: 'calc(50% - 40px)',
+    zIndex: -1,
+  },
+
+  [`& .${classes.editorContainer}`]: {
+    minHeight: 500,
+    flex: 1,
+    [theme.breakpoints.down('md')]: {
+      marginBottom: 16,
+      flexDirection: 'column',
+    },
+    '& iframe': {
+      border: 'none',
+      [theme.breakpoints.down('md')]: {
+        height: 500,
+      },
+    },
+  },
+
+  [`& .${classes.buttonGroup}`]: {
+    marginTop: 16,
+    marginBottom: 16,
+  },
+
+  [`& .${classes.alert}`]: {
+    marginBottom: 8,
+  },
+
+  [`& .${classes.variantTabs}`]: {
+    height: 49,
+    background: '#eaeaea',
+  },
+
+  [`& .${classes.hidden}`]: {
+    height: 0,
+    minHeight: 0,
+  },
+
+  [`& .${classes.expand}`]: {
+    transform: 'rotate(-90deg)',
+  },
+
+  [`& .${classes.hide}`]: {
+    transform: 'rotate(90deg)',
+  },
+
+  [`& .${classes.tableHeader}`]: {
+    paddingBottom: 0,
+    [theme.breakpoints.down('md')]: {
+      display: 'none',
+    },
+  },
+
+  [`& .${classes.tableBody}`]: {
+    paddingTop: 0,
+  },
+
+  [`& .${classes.expandButton}`]: {
+    width: '100%',
+  },
+}));
+
 const correctComponent = (component) => (component === 'checkbox-multiple' ? 'checkbox' : component);
 
 const metadata = {
@@ -58,105 +198,6 @@ const project = {
   template: 'javascript',
 };
 
-const useStyles = makeStyles((theme) => ({
-  box: {
-    [theme.breakpoints.down('md')]: {
-      flexDirection: 'column-reverse',
-    },
-  },
-  smTabDown: {
-    display: 'none',
-    [theme.breakpoints.down('md')]: {
-      display: 'block',
-    },
-  },
-  smTabUp: {
-    display: 'block',
-    [theme.breakpoints.down('md')]: {
-      display: 'none',
-    },
-  },
-  tab: {
-    minWidth: 'initial',
-    '&.active': {
-      color: '#000',
-      background: theme.palette.common.white,
-      boxShadow: theme.shadows[1],
-      '&:last-child': {
-        marginBottom: 2,
-      },
-    },
-  },
-  indicator: {
-    width: 4,
-  },
-  tabLink: {
-    textDecoration: 'none',
-    color: 'inherit',
-  },
-  spinnerCheat: {
-    flex: 1,
-    position: 'relative',
-    boxShadow: theme.shadows[1],
-    '& .longer + #code-target': {
-      maxHeight: 'calc(100% - 49px)',
-    },
-  },
-  spinner: {
-    position: 'absolute',
-    top: 'calc(50% - 40px)',
-    left: 'calc(50% - 40px)',
-    zIndex: -1,
-  },
-  editorContainer: {
-    minHeight: 500,
-    flex: 1,
-    [theme.breakpoints.down('md')]: {
-      marginBottom: 16,
-      flexDirection: 'column',
-    },
-    '& iframe': {
-      border: 'none',
-      [theme.breakpoints.down('md')]: {
-        height: 500,
-      },
-    },
-  },
-  buttonGroup: {
-    marginTop: 16,
-    marginBottom: 16,
-  },
-  alert: {
-    marginBottom: 8,
-  },
-  variantTabs: {
-    height: 49,
-    background: '#eaeaea',
-  },
-  hidden: {
-    height: 0,
-    minHeight: 0,
-  },
-  expand: {
-    transform: 'rotate(-90deg)',
-  },
-  hide: {
-    transform: 'rotate(90deg)',
-  },
-  tableHeader: {
-    paddingBottom: 0,
-    [theme.breakpoints.down('md')]: {
-      display: 'none',
-    },
-  },
-  tableBody: {
-    paddingTop: 0,
-  },
-  expandButton: {
-    width: '100%',
-  },
-}));
-
 const stringifyWithFunctions = (string) =>
   JSON.stringify(string, null, 2)
     .replace(/<NEWLINE>/g, '\n')
@@ -167,8 +208,6 @@ const ComponentExample = ({ variants, schema, activeMapper, component, schemaVar
   const [expanded, setExpanded] = useState(true);
 
   const { pathname, push } = useRouter();
-  const classes = useStyles();
-
   const availableVariants = schemaVariants?.[activeMapper];
   const selectedSchema =
     availableVariants?.find(({ value }) => value === activeSchema)?.schema ||
@@ -214,7 +253,7 @@ const ComponentExample = ({ variants, schema, activeMapper, component, schemaVar
   const activeComponent = correctComponent(component);
 
   return (
-    <React.Fragment>
+    <Root>
       <Box display="flex" className={classes.box}>
         {expanded && (
           <Card style={{ minHeight: 500 }} square>
@@ -327,7 +366,7 @@ const ComponentExample = ({ variants, schema, activeMapper, component, schemaVar
           DDF implementation
         </Button>
       </ButtonGroup>
-    </React.Fragment>
+    </Root>
   );
 };
 

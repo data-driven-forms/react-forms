@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 
 const componentMapper = {
@@ -48,32 +48,29 @@ const schema = {
   ],
 };
 
-const useFormErrorsStyle = makeStyles(() => ({
-  listError: {
+const StyledError = styled(ListItemText)(() => ({
+  '&.listError': {
     color: red[500], // you can use your theme color if you have theme provider
   },
 }));
 
-const FormErrors = () => {
-  const classes = useFormErrorsStyle();
-  return (
-    <FormSpy>
-      {({ errors }) => (
-        <List>
-          {Object.entries(errors).map(([key, error]) =>
-            error ? (
-              <ListItem button component="li" key={key}>
-                <ListItemText className={classes.listError}>
-                  {key}: {error}
-                </ListItemText>
-              </ListItem>
-            ) : null
-          )}
-        </List>
-      )}
-    </FormSpy>
-  );
-};
+const FormErrors = () => (
+  <FormSpy>
+    {({ errors }) => (
+      <List>
+        {Object.entries(errors).map(([key, error]) =>
+          error ? (
+            <ListItem button component="li" key={key}>
+              <StyledError className={'listError'}>
+                {key}: {error}
+              </StyledError>
+            </ListItem>
+          ) : null
+        )}
+      </List>
+    )}
+  </FormSpy>
+);
 
 const FormTemplate = ({ formFields, schema }) => {
   const { handleSubmit, onReset, onCancel, getState } = useFormApi();

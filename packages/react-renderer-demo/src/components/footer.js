@@ -30,7 +30,7 @@ const RepoLink = ({ href, icon, label }) => (
   <ListItem>
     <ListItemText
       primary={
-        <StyledLink href={href} target="_blank" rel="noopener noreferrer" className="listLink" color="inherit" underline="none">
+        <StyledLink href={href} target="_blank" rel="noopener noreferrer" className="listLink" color="inherit" underline="hover">
           <SvgIcon>{icon}</SvgIcon>
           &nbsp;
           {label}

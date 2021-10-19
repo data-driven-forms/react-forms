@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import Popper from '@mui/material/Popper';
 import Grow from '@mui/material/Grow';
@@ -9,9 +10,33 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Markdown from 'markdown-to-jsx';
-import makeStyles from '@mui/styles/makeStyles';
 
 import MdxComponents from './mdx/mdx-components';
+
+const PREFIX = 'NotificationPanel';
+
+const classes = {
+  paper: `${PREFIX}-paper`,
+  list: `${PREFIX}-list`,
+  listItem: `${PREFIX}-listItem`,
+};
+
+const StyledPopper = styled(Popper)(({ theme }) => ({
+  [`& .${classes.paper}`]: {
+    transformOrigin: 'top right',
+  },
+
+  [`& .${classes.list}`]: {
+    maxWidth: theme.spacing(40),
+    maxHeight: theme.spacing(40),
+    overflow: 'auto',
+  },
+
+  [`& .${classes.listItem}`]: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+}));
 
 const options = {
   overrides: {
@@ -21,27 +46,11 @@ const options = {
   },
 };
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    transformOrigin: 'top right',
-  },
-  list: {
-    maxWidth: theme.spacing(40),
-    maxHeight: theme.spacing(40),
-    overflow: 'auto',
-  },
-  listItem: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-}));
-
 const getNotifications = () => fetch(`/notifications?end=${Date.now()}`).then((data) => data.json());
 
 const createNotificationId = (notification) => notification.activeTill.toString();
 
 const NotificationPanel = ({ isOpen, onClose, anchorRef, setNewMessages }) => {
-  const classes = useStyles();
   const [notifications, setNotifications] = useState([]);
   useEffect(() => {
     getNotifications()
@@ -57,7 +66,15 @@ const NotificationPanel = ({ isOpen, onClose, anchorRef, setNewMessages }) => {
   }, [setNewMessages]);
 
   return (
-    <Popper id="notifications-popup" open={isOpen} anchorEl={anchorRef.current} placement="bottom-end" transition disablePortal role={undefined}>
+    <StyledPopper
+      id="notifications-popup"
+      open={isOpen}
+      anchorEl={anchorRef.current}
+      placement="bottom-end"
+      transition
+      disablePortal
+      role={undefined}
+    >
       {({ TransitionProps }) => (
         <ClickAwayListener onClickAway={onClose}>
           <Grow in={isOpen} {...TransitionProps}>
@@ -89,7 +106,7 @@ const NotificationPanel = ({ isOpen, onClose, anchorRef, setNewMessages }) => {
           </Grow>
         </ClickAwayListener>
       )}
-    </Popper>
+    </StyledPopper>
   );
 };
 

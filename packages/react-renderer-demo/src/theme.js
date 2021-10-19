@@ -1,11 +1,14 @@
-import { createTheme, adaptV4Theme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 
-const theme = createTheme(
-  adaptV4Theme({
-    typography: {
-      useNextVariants: true,
+const theme = createTheme({
+  components: {
+    MuiLink: {
+      defaultProps: {
+        underline: 'hover',
+        color: '#3f51b5',
+      },
     },
-  })
-);
+  },
+});
 
 export default theme;

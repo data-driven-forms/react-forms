@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import List from '@mui/material/List';
@@ -13,19 +14,28 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { headerToId } from '../../helpers/list-of-contents';
 import ShareButton from './share-button';
-import makeStyles from '@mui/styles/makeStyles';
 import { useRouter } from 'next/router';
 
 import RouterLink from 'next/link';
 import CodeEditor from '../code-editor';
 
-const useHeadingStyles = makeStyles(() => ({
-  anchor: {
+const PREFIX = 'MdxComponents';
+
+const classes = {
+  anchor: `${PREFIX}-anchor`,
+  heading: `${PREFIX}-heading`,
+  offset: `${PREFIX}-offset`,
+  link: `${PREFIX}-link`,
+};
+
+const Root = styled('code')(() => ({
+  [`& .${classes.anchor}`]: {
     textDecoration: 'none',
     color: 'inherit',
     fontWeight: 'inherit',
   },
-  heading: {
+
+  [`& .${classes.heading}`]: {
     '& button': {
       visibility: 'hidden',
     },
@@ -33,69 +43,97 @@ const useHeadingStyles = makeStyles(() => ({
       visibility: 'initial',
     },
   },
-  offset: {
+
+  [`& .${classes.offset}`]: {
     paddingTop: 92, // compensate for fixed header size and spacing
     marginTop: -92, // compensate for fixed header size and spacing
   },
-  link: {
+
+  [`& .${classes.link}`]: {
+    fontWeight: 'initial',
+  },
+}));
+
+const StyledHeading = styled('div')(() => ({
+  [`& .${classes.anchor}`]: {
+    textDecoration: 'none',
+    color: 'inherit',
+    fontWeight: 'inherit',
+  },
+
+  [`& .${classes.heading}`]: {
+    '& button': {
+      visibility: 'hidden',
+    },
+    '&:hover button': {
+      visibility: 'initial',
+    },
+  },
+
+  [`& .${classes.offset}`]: {
+    paddingTop: 92, // compensate for fixed header size and spacing
+    marginTop: -92, // compensate for fixed header size and spacing
+  },
+
+  [`& .${classes.link}`]: {
     fontWeight: 'initial',
   },
 }));
 
 export const Heading = ({ level, children, component }) => {
   const router = useRouter();
-  const classes = useHeadingStyles();
   const id = headerToId(children);
   const path = `${router.asPath}#${id}`;
   return (
-    <div id={id} className={classes.offset} data-scroll="true">
+    <StyledHeading id={id} className={classes.offset} data-scroll="true">
       <Typography id={`heading-${id}`} className={classes.heading} variant={`h${level}`} component={component}>
         <a href={path} className={classes.anchor} data-mdlink="md-heading">
           {children}
           <ShareButton path={path} />
         </a>
       </Typography>
-    </div>
+    </StyledHeading>
   );
 };
 
-const tableStyles = makeStyles((theme) => ({
-  table: {
-    [theme.breakpoints.down('md')]: {
-      tableLayout: 'fixed',
-    },
-  },
-  cell: {
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  '&.cell': {
     [theme.breakpoints.down('md')]: {
       overflow: 'overlay',
     },
   },
 }));
 
-const StyledCell = (props) => {
-  const { cell } = tableStyles();
+const StyledCell = (props) => <StyledTableCell {...props} className={'cell'} />;
 
-  return <TableCell {...props} className={cell} />;
-};
+const StyledTableComp = styled(Table)(({ theme }) => ({
+  '&.table': {
+    [theme.breakpoints.down('md')]: {
+      tableLayout: 'fixed',
+    },
+  },
+}));
 
-const StyledTable = (props) => {
-  const { table } = tableStyles();
+const StyledTable = (props) => <StyledTableComp {...props} className={'table'} />;
 
-  return <Table {...props} className={table} />;
-};
+const StyledLink = styled(Link)(() => ({
+  '& .link': {
+    fontWeight: 'initial',
+  },
+}));
 
-const MdLink = ({ href, children }) => {
-  const classes = useHeadingStyles();
-  return href.startsWith('/') ? (
+const MdLink = ({ href, children }) =>
+  href.startsWith('/') ? (
     <RouterLink href={href}>
-      <Link href={href}>{children}</Link>
+      <Link href={href} underline="hover">
+        {children}
+      </Link>
     </RouterLink>
   ) : (
-    <Link className={classes.link} href={href} rel="noopener noreferrer" target="_blank">
+    <StyledLink underline="hover" className={'link'} href={href} rel="noopener noreferrer" target="_blank">
       {children}
-    </Link>
+    </StyledLink>
   );
-};
 
 const MdxComponents = {
   p: ({ children }) => (
@@ -129,7 +167,7 @@ const MdxComponents = {
   td: ({ children }) => <StyledCell>{children}</StyledCell>,
   th: ({ children }) => <StyledCell>{children}</StyledCell>,
   inlineCode: ({ children }) => (
-    <code style={{ background: 'white', borderRadius: 3, fontFamily: 'courier, monospace', padding: '3px' }}>{children}</code>
+    <Root style={{ background: 'white', borderRadius: 3, fontFamily: 'courier, monospace', padding: '3px' }}>{children}</Root>
   ),
 };
 

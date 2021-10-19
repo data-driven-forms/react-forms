@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { Fragment, useEffect, useState, useRef } from 'react';
 import Grid from '@mui/material/Grid';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
@@ -25,17 +25,17 @@ import { headerToId } from '../helpers/list-of-contents';
 import ShareButton from './mdx/share-button';
 import { grey } from '@mui/material/colors';
 
-const useHeadingStyles = makeStyles((theme) => ({
-  anchor: {
+const HeadingRoot = styled('div')(({ theme }) => ({
+  '& .anchor': {
     textDecoration: 'none',
     color: 'inherit',
     fontWeight: 'inherit',
   },
-  wrapper: {
+  '&.wrapper': {
     flexGrow: 1,
     display: 'flex',
   },
-  heading: {
+  '& .heading': {
     paddingTop: 4,
     fontSize: theme.typography.pxToRem(20),
     fontWeight: theme.typography.fontWeightRegular,
@@ -52,44 +52,44 @@ const useHeadingStyles = makeStyles((theme) => ({
 
 export const Heading = ({ level, children, component }) => {
   const router = useRouter();
-  const classes = useHeadingStyles();
   const id = headerToId(children);
   const path = `${router.asPath}#${id}`;
   return (
-    <div id={id} className={classes.wrapper} data-scroll="true">
-      <Typography id={`heading-${id}`} className={classes.heading} variant={`h${level}`} component={component}>
-        <a href={path} className={classes.anchor} data-mdlink="md-heading">
+    <HeadingRoot id={id} className={'wrapper'} data-scroll="true">
+      <Typography id={`heading-${id}`} className={'heading'} variant={`h${level}`} component={component}>
+        <a href={path} className={'anchor'} data-mdlink="md-heading">
           {children}
           <ShareButton path={path} />
         </a>
       </Typography>
-    </div>
+    </HeadingRoot>
   );
 };
 
-const useStyles = makeStyles((theme) => ({
-  container: {
+const ExampleRoot = styled(Grid)(({ theme }) => ({
+  '&.container': {
     [theme.breakpoints.down('md')]: {
       maxWidth: 'calc(100vw - 64px)',
     },
   },
-  codeWrapper: {
+  '& .codeWrapper': {
     background: '#1D1F21',
     paddingTop: 16,
     paddingBottom: 16,
     borderRadius: 4,
   },
-  componentPanel: {
+  '& .componentPanel': {
     padding: 16,
   },
-  accordion: {
+  '& .accordion': {
     border: 'none',
     boxShadow: 'none',
     background: 'none',
     padding: 0,
   },
-  accordionSummary: {
+  '& .accordionSummary': {
     padding: 0,
+    width: '100%',
   },
 }));
 
@@ -179,14 +179,13 @@ const CodeExample = ({ source, mode }) => {
       setCodeSource(file.default);
     });
   }, [source]);
-  const classes = useStyles();
   if (mode === 'preview') {
     return (
-      <Grid container spacing={0} className={clsx('DocRawComponent', classes.container)}>
+      <ExampleRoot container spacing={0} className={clsx('DocRawComponent', 'container')}>
         <Grid item xs={12}>
-          <Accordion className={classes.accordion}>
+          <Accordion className={'accordion'}>
             <AccordionSummary
-              className={classes.accordionSummary}
+              className={'accordionSummary'}
               expandIcon={
                 <Tooltip title="Expand code example">
                   <IconButton size="large">
@@ -223,24 +222,24 @@ const CodeExample = ({ source, mode }) => {
                 </Link>
               </Box>
             </AccordionSummary>
-            <AccordionDetails className={clsx(classes.accordionDetail, classes.codeWrapper)}>
+            <AccordionDetails className={clsx('accordionDetail', 'codeWrapper')}>
               <CodeEditor value={codeSource} inExample />
             </AccordionDetails>
           </Accordion>
         </Grid>
         {Component && (
-          <Grid className={classes.formContainer} item xs={12}>
-            <Paper className={classes.componentPanel}>
+          <Grid className={'formContainer'} item xs={12}>
+            <Paper className={'componentPanel'}>
               <Component />
             </Paper>
           </Grid>
         )}
-      </Grid>
+      </ExampleRoot>
     );
   }
 
   return (
-    <Grid container spacing={0} className="DocRawComponent">
+    <ExampleRoot container spacing={0} className="DocRawComponent">
       <Grid item xs={12}>
         <Box display="flex" justifyContent="flex-end">
           <Link
@@ -253,10 +252,10 @@ const CodeExample = ({ source, mode }) => {
           </Link>
         </Box>
       </Grid>
-      <Grid item xs={12} className={classes.codeWrapper}>
+      <Grid item xs={12} className={'codeWrapper'}>
         <CodeEditor value={codeSource} />
       </Grid>
-    </Grid>
+    </ExampleRoot>
   );
 };
 

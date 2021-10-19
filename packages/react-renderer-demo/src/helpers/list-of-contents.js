@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -11,8 +11,8 @@ import StickyBox from 'react-sticky-box';
 
 export const headerToId = (header) => header.replace(/#/g, '').replace(/ /g, '').toLowerCase();
 
-const useLinkStyles = makeStyles((theme) => ({
-  link: {
+const StyledA = styled('a')(({ theme }) => ({
+  '&.link': {
     textDecoration: 'none',
     color: theme.palette.text.secondary,
     overflow: 'hidden',
@@ -28,7 +28,6 @@ const useLinkStyles = makeStyles((theme) => ({
 }));
 
 const ListHeader = ({ text }) => {
-  const classes = useLinkStyles();
   const router = useRouter();
   const level = (text.match(/#/g) || []).length;
 
@@ -38,12 +37,12 @@ const ListHeader = ({ text }) => {
 
   const labelText = text.replace(/#/g, '');
   return (
-    <a className={classes.link} href={`${router.pathname}#${headerToId(text)}`} title={labelText}>
+    <StyledA className={'link'} href={`${router.pathname}#${headerToId(text)}`} title={labelText}>
       {[...new Array(level - 1)].map((_v, index) => (
         <React.Fragment key={index}>&nbsp;&nbsp;</React.Fragment>
       ))}
       {labelText}
-    </a>
+    </StyledA>
   );
 };
 
@@ -51,17 +50,17 @@ ListHeader.propTypes = {
   text: PropTypes.string.isRequired,
 };
 
-const useStyles = makeStyles((theme) => ({
-  fixedContainer: {
+const StyledStickyBox = styled(StickyBox)(({ theme }) => ({
+  '& .fixedContainer': {
     paddingLeft: 16,
   },
-  listItem: {
+  '& .listItem': {
     padding: 0,
   },
-  listItemText: {
+  '& .listItemText': {
     margin: 0,
   },
-  listItemActive: {
+  '& .listItemActive': {
     position: 'relative',
     background: theme.palette.common.white,
     '&::before': {
@@ -74,14 +73,14 @@ const useStyles = makeStyles((theme) => ({
       background: theme.palette.grey[700],
     },
   },
-  contentHeader: {
+  '& .contentHeader': {
     paddingLeft: 16,
     paddingRight: 16,
   },
-  hidden: {
+  '& .hidden': {
     height: '100%',
   },
-  headerLink: {
+  '& .headerLink': {
     color: 'inherit',
     textDecoration: 'none',
   },
@@ -113,15 +112,14 @@ const ListOfContents = ({ found = [] }) => {
       document.removeEventListener('scroll', scrollListener);
     };
   }, []);
-  const classes = useStyles();
 
   const header = found[0].replace(/# /, '');
 
   return (
-    <StickyBox offsetTop={96} offsetBottom={20}>
-      <div className={classes.fixedContainer}>
-        <Typography className={classes.contentHeader} component="h3">
-          <a className={classes.headerLink} href={`${router.pathname}#${headerToId(header)}`} title={header}>
+    <StyledStickyBox offsetTop={96} offsetBottom={20}>
+      <div className={'fixedContainer'}>
+        <Typography className={'contentHeader'} component="h3">
+          <a className={'headerLink'} href={`${router.pathname}#${headerToId(header)}`} title={header}>
             {header}
           </a>
         </Typography>
@@ -129,15 +127,15 @@ const ListOfContents = ({ found = [] }) => {
           {found.map((text) => (
             <ListItem
               onClick={() => setActive(headerToId(text))}
-              className={clsx(classes.listItem, { [classes.listItemActive]: headerToId(text) === activeItem })}
+              className={clsx('listItem', { listItemActive: headerToId(text) === activeItem })}
               key={text}
             >
-              <ListItemText className={classes.listItemText} primary={<ListHeader text={text} />} />
+              <ListItemText className={'listItemText'} primary={<ListHeader text={text} />} />
             </ListItem>
           ))}
         </List>
       </div>
-    </StickyBox>
+    </StyledStickyBox>
   );
 };
 
