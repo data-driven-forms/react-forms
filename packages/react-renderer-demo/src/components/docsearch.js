@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import makeStyles from '@material-ui/core/styles/makeStyles';
-import Search from '@material-ui/icons/Search';
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import Search from '@mui/icons-material/Search';
 import docsearch from 'docsearch.js';
 import { useRouter } from 'next/router';
+import { styled } from '@mui/material/styles';
 
-const useStyles = makeStyles((theme) => ({
-  docSearchWrapper: {
+const Root = styled('form')(({ theme }) => ({
+  '&.wrapper': {
     marginRight: 16,
     '& .algolia-docsearch-suggestion.algolia-docsearch-suggestion__main.algolia-docsearch-suggestion__secondary': {
       textDecoration: 'none',
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: 0,
     },
     '& .ds-dropdown-menu': {
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('md')]: {
         position: 'fixed !important',
         top: '50px !important',
         maxWidth: '100% !important',
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  docSearchInput: {
+  '& .search-input': {
     '& input': {
       color: 'white',
     },
@@ -44,13 +44,12 @@ const useStyles = makeStyles((theme) => ({
       borderBottomColor: 'transparent',
     },
   },
-  docSearchIcon: {
+  '& .search-icon': {
     fill: 'white',
   },
 }));
 
 const DocSearch = () => {
-  const classes = useStyles();
   const { push } = useRouter();
   useEffect(() => {
     docsearch({
@@ -66,21 +65,22 @@ const DocSearch = () => {
     });
   }, [push]);
   return (
-    <form className={classes.docSearchWrapper}>
+    <Root className="wrapper">
       <TextField
+        variant="standard"
         id="data-driven-forms-search"
         type="search"
         placeholder="Search..."
-        className={classes.docSearchInput}
+        className="search-input"
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <Search className={classes.docSearchIcon} />
+              <Search className="search-icon" />
             </InputAdornment>
           ),
         }}
       />
-    </form>
+    </Root>
   );
 };
 

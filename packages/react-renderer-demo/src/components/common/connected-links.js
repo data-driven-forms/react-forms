@@ -1,16 +1,24 @@
 import React, { useContext } from 'react';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import ChevronRight from '@material-ui/icons/ChevronRight';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import { styled } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import ChevronRight from '@mui/icons-material/ChevronRight';
+import ChevronLeft from '@mui/icons-material/ChevronLeft';
 import Link from 'next/link';
 
 import MenuContext from '../navigation/menu-context';
 import useMapperLink from '../../hooks/use-mapper-link';
+import { grey } from '@mui/material/colors';
 
-const useStyles = makeStyles((theme) => ({
-  linksContainer: {
+const PREFIX = 'ConnectedLinks';
+
+const classes = {
+  linksContainer: `${PREFIX}-linksContainer`,
+  link: `${PREFIX}-link`,
+};
+
+const StyledGrid = styled(Grid)(({ theme }) => ({
+  [`&.${classes.linksContainer}`]: {
     paddingLeft: 32,
     paddingRight: 32,
     marginTop: 64,
@@ -20,22 +28,26 @@ const useStyles = makeStyles((theme) => ({
       paddingRight: 'calc((100% - (768px + 17%)) / 2)',
     },
   },
-  link: {
+
+  [`& .${classes.link}`]: {
     textDecoration: 'none',
+    '& button': {
+      color: `${grey[900]} !important`,
+    },
   },
 }));
 
 const ConnectedLinks = () => {
   const { prev, next } = useContext(MenuContext);
-  const classNames = useStyles();
+
   const prevLink = `/${useMapperLink(prev && prev.link)}`;
   const nextLink = `/${useMapperLink(next && next.link)}`;
   return (
-    <Grid container justify="space-between" className={classNames.linksContainer}>
+    <StyledGrid container justifyContent="space-between" className={classes.linksContainer}>
       <Grid item>
         {prev && prev.link && (
           <Link href={prevLink}>
-            <a className={classNames.link} href={prevLink}>
+            <a className={classes.link} href={prevLink}>
               <Button>
                 <ChevronLeft />
                 {prev.label}
@@ -47,7 +59,7 @@ const ConnectedLinks = () => {
       <Grid item>
         {next && next.link && (
           <Link href={nextLink}>
-            <a className={classNames.link} href={nextLink}>
+            <a className={classes.link} href={nextLink}>
               <Button>
                 {next.label}
                 <ChevronRight />
@@ -56,7 +68,7 @@ const ConnectedLinks = () => {
           </Link>
         )}
       </Grid>
-    </Grid>
+    </StyledGrid>
   );
 };
 

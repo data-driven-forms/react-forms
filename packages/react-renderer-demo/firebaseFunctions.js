@@ -9,8 +9,8 @@ const nextjsDistDir = join('src', require('./src/next.config.js').distDir);
 const nextjsServer = next({
   dev: isDev,
   conf: {
-    distDir: nextjsDistDir
-  }
+    distDir: nextjsDistDir,
+  },
 });
 const nextjsHandle = nextjsServer.getRequestHandler();
 
@@ -40,7 +40,7 @@ exports.nextjsFunc = functions.https.onRequest((req, res) => {
             .map(({ 'created-at': createdAt, active_till: activeTill, ...notification }) => ({
               ...notification,
               activeTill: activeTill.toDate(),
-              'created-at': createdAt ? createdAt.toDate : undefined // eslint-disable-line camelcase
+              'created-at': createdAt ? createdAt.toDate : undefined, // eslint-disable-line camelcase
             }));
           res.status(200).json(data);
           res.finished = true;
@@ -75,7 +75,7 @@ exports.sendComment = functions.https.onRequest(async (request, response) => {
         repo: 'react-forms',
         // eslint-disable-next-line camelcase
         comment_id: commentId,
-        body: message
+        body: message,
       });
       response.send(`Comment ${commentId} updated with message: ${message}`);
     } else {
@@ -84,7 +84,7 @@ exports.sendComment = functions.https.onRequest(async (request, response) => {
         repo: 'react-forms',
         // eslint-disable-next-line camelcase
         issue_number: issueNumber,
-        body: message
+        body: message,
       });
       response.send(`Comment in issue ${issueNumber} created with message: ${message}`);
     }

@@ -1,23 +1,24 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/router';
 
-import Button from '@material-ui/core/Button';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuList from '@material-ui/core/MenuList';
+import Button from '@mui/material/Button';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Grow from '@mui/material/Grow';
+import Paper from '@mui/material/Paper';
+import Popper from '@mui/material/Popper';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
 
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 import { headerToId } from './list-of-contents';
+import { grey } from '@mui/material/colors';
 
-const itemStyles = makeStyles(() => ({
-  a: {
+const StyledMenuItem = styled(MenuItem)(() => ({
+  '&.a': {
     textDecoration: 'none',
     color: 'inherit',
   },
@@ -26,12 +27,11 @@ const itemStyles = makeStyles(() => ({
 const Item = ({ text, setOpen }) => {
   const router = useRouter();
   const labelText = text.replace(/#/g, '');
-  const styles = itemStyles();
 
   return (
-    <MenuItem onClick={() => setOpen(false)} component="a" className={styles.a} href={`${router.pathname}#${headerToId(text)}`} title={labelText}>
+    <StyledMenuItem onClick={() => setOpen(false)} component="a" className={'a'} href={`${router.pathname}#${headerToId(text)}`} title={labelText}>
       {labelText}
-    </MenuItem>
+    </StyledMenuItem>
   );
 };
 
@@ -40,12 +40,13 @@ Item.propTypes = {
   setOpen: PropTypes.func.isRequired,
 };
 
-const contentStyles = makeStyles(() => ({
-  button: {
+const Root = styled('div')(() => ({
+  '& .button': {
     paddingRight: 0,
     marginTop: '-24px',
+    color: grey[900],
   },
-  wrapper: {
+  '&.wrapper': {
     width: '100%',
     display: 'flex',
     justifyContent: 'flex-end',
@@ -54,7 +55,6 @@ const contentStyles = makeStyles(() => ({
 
 const ListOfContents = ({ found }) => {
   const [open, setOpen] = useState(false);
-  const styles = contentStyles();
   const anchorRef = useRef(null);
 
   const handleListKeyDown = (event) => {
@@ -65,12 +65,12 @@ const ListOfContents = ({ found }) => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <Root className={'wrapper'}>
       <ClickAwayListener onClickAway={() => setOpen(false)}>
         <div>
           <Button
             ref={anchorRef}
-            className={styles.button}
+            className={'button'}
             aria-controls={open ? 'menu-list-grow' : undefined}
             aria-haspopup="true"
             onClick={() => setOpen((prevOpen) => !prevOpen)}
@@ -93,7 +93,7 @@ const ListOfContents = ({ found }) => {
           </Popper>
         </div>
       </ClickAwayListener>
-    </div>
+    </Root>
   );
 };
 

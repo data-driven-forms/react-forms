@@ -6,7 +6,7 @@ import validatorTypes from '@data-driven-forms/react-form-renderer/validator-typ
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import FormSpy from '@data-driven-forms/react-form-renderer/form-spy';
 import TextField from '@data-driven-forms/mui-component-mapper/text-field';
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField,

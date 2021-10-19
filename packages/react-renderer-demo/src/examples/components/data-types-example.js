@@ -4,7 +4,7 @@ import componentTypes from '@data-driven-forms/react-form-renderer/component-typ
 import dataTypes from '@data-driven-forms/react-form-renderer/data-types';
 import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template';
 import TextField from '@data-driven-forms/mui-component-mapper/text-field';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 
 const schema = {
   fields: [

@@ -1,9 +1,10 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@mui/material/Typography';
 
-const useStyles = makeStyles((theme) => ({
-  landingHeading: {
+import { styled } from '@mui/material/styles';
+
+const Title = styled(Typography)(({ theme }) => ({
+  '&.root': {
     color: theme.palette.common.white,
     fontSize: 48,
     fontWeight: 700,
@@ -12,23 +13,19 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'uppercase',
     fontFamily: '"Montserrat", sans-serif',
   },
-  logoWord: {
+  '& .logo': {
     display: 'inline-block',
   },
 }));
 
-const LandingPageTitle = () => {
-  const classes = useStyles();
-
-  return (
-    <Typography className={classes.landingHeading} variant="h1" component="h2" gutterBottom>
-      Data driven{' '}
-      <span className={classes.logoWord}>
-        f<img alt="O" src="/logo.svg" />
-        rms
-      </span>
-    </Typography>
-  );
-};
+const LandingPageTitle = () => (
+  <Title className="root" variant="h1" component="h2" gutterBottom>
+    Data driven{' '}
+    <span className="logo">
+      f<img alt="O" src="/logo.svg" />
+      rms
+    </span>
+  </Title>
+);
 
 export default LandingPageTitle;

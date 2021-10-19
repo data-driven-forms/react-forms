@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import RouterLink from 'next/link';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Link from '@material-ui/core/Link';
+import { styled } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Link from '@mui/material/Link';
 
-import ArchiveIcon from '@material-ui/icons/Archive';
-import CreateIcon from '@material-ui/icons/Create';
-import EditAttributesIcon from '@material-ui/icons/EditAttributes';
-import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
-import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
-import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
+import ArchiveIcon from '@mui/icons-material/Archive';
+import CreateIcon from '@mui/icons-material/Create';
+import EditAttributesIcon from '@mui/icons-material/EditAttributes';
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
+import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 
 import FormExample from './formExample';
 
@@ -138,12 +138,12 @@ const buildFeatures = [
   );
 });
 
-const useStyles = makeStyles((theme) => ({
-  cardsContainer: {
+const Root = styled(Grid)(({ theme }) => ({
+  '&.cardsContainer': {
     backgroundColor: theme.palette.common.white,
     minHeight: '100vh',
   },
-  codeSnippet: {
+  '& .codeSnippet': {
     margin: '8px 0px',
     padding: '8px 0px',
     marginBottom: 23,
@@ -155,44 +155,44 @@ const useStyles = makeStyles((theme) => ({
     border: '1px solid #979797',
     maxWidth: 'calc(100vw - 64px)',
   },
-  languageSh: {
+  '& .languageSh': {
     padding: '2px 6px',
   },
-  card: {
+  '& .card': {
     backgroundColor: theme.palette.grey[100],
     margin: 16,
     padding: 24,
     borderRadius: 2,
   },
-  cardCenter: {
+  '& .cardCenter': {
     backgroundColor: theme.palette.grey[100],
     margin: 16,
     padding: 24,
     borderRadius: 2,
     textAlign: 'center',
   },
-  divider: {
+  '& .divider': {
     marginBottom: 16,
   },
-  cardQuestion: {
+  '& .cardQuestion': {
     color: '#F28D63',
   },
-  editorWrapper: {
+  '& .editorWrapper': {
     background: '#1d1f21',
     padding: 16,
   },
-  formState: {
+  '& .formState': {
     marginTop: 16,
     padding: 16,
     marginBottom: 16,
   },
-  textBottom: {
+  '& .textBottom': {
     marginBottom: 16,
   },
-  mappersText: {
+  '& .mappersText': {
     marginTop: 16,
   },
-  logo: {
+  '& .logo': {
     height: 100,
     width: 'auto',
   },
@@ -200,25 +200,25 @@ const useStyles = makeStyles((theme) => ({
 
 const LandingPageCards = () => {
   const [formState, setFormState] = useState(undefined);
-  const classes = useStyles();
+
   return (
-    <Grid container direction="row" justify="space-evenly" className={classes.cardsContainer}>
+    <Root container direction="row" justifyContent="space-evenly" className="cardsContainer">
       <Grid item xs={11} md={11}>
-        <Paper elevation={0} className={classes.card}>
-          <Grid container direction="row" justify="space-evenly">
+        <Paper elevation={0} className="card">
+          <Grid container direction="row" justifyContent="space-evenly">
             <Grid item xs={12} md={5}>
-              <Typography className={classes.cardQuestion} variant="h6" gutterBottom>
+              <Typography className="cardQuestion" variant="h6" gutterBottom>
                 Write a schema
               </Typography>
-              <div className={classes.editorWrapper}>
+              <div className="editorWrapper">
                 <CodeEditor showGutter={false} value={value} fontSize={11} />
               </div>
             </Grid>
             <Grid item xs={12} md={5}>
-              <Typography className={classes.cardQuestion} variant="h6" gutterBottom>
+              <Typography className="cardQuestion" variant="h6" gutterBottom>
                 Render it
               </Typography>
-              <Paper elevation={3} className={classes.formState} square>
+              <Paper elevation={3} className="formState" square>
                 <FormExample setFormState={setFormState} />
                 {!formState ? (
                   <Typography variant="body2">Click on the button to show values</Typography>
@@ -226,7 +226,7 @@ const LandingPageCards = () => {
                   <pre>{JSON.stringify(formState, null, 2)}</pre>
                 )}
               </Paper>
-              <Typography className={classes.cardQuestion} variant="h6" gutterBottom>
+              <Typography className="cardQuestion" variant="h6" gutterBottom>
                 Available features
               </Typography>
               <List component="nav" aria-label="features">
@@ -240,73 +240,73 @@ const LandingPageCards = () => {
         </Paper>
       </Grid>
       <Grid item xs={11} md={11}>
-        <Paper elevation={0} className={classes.cardCenter}>
-          <Typography className={classes.cardQuestion} variant="h6" gutterBottom>
+        <Paper elevation={0} className="cardCenter">
+          <Typography className="cardQuestion" variant="h6" gutterBottom>
             Available mappers
           </Typography>
-          <Grid container direction="row" justify="space-evenly">
+          <Grid container direction="row" justifyContent="space-evenly">
             <Grid item xs={6} md={4} xl={2}>
-              <Typography variant="h6" className={classes.textBottom}>
+              <Typography variant="h6" className="textBottom">
                 MaterialUI
               </Typography>
               <RouterLink href="/provided-mappers/mui-component-mapper">
                 <a href="/provided-mappers/mui-component-mapper">
-                  <img className={classes.logo} alt="material ui logo" src="/mui-logo.svg" />
+                  <img className="logo" alt="material ui logo" src="/mui-logo.svg" />
                 </a>
               </RouterLink>
             </Grid>
             <Grid item xs={6} md={4} xl={2}>
-              <Typography variant="h6" className={classes.textBottom}>
+              <Typography variant="h6" className="textBottom">
                 PatternFly 4
               </Typography>
               <RouterLink href="/provided-mappers/pf4-component-mapper">
                 <a href="/provided-mappers/pf4-component-mapper">
-                  <img className={classes.logo} alt="pf4 logo" src="/pf4-logo.svg" />
+                  <img className="logo" alt="pf4 logo" src="/pf4-logo.svg" />
                 </a>
               </RouterLink>
             </Grid>
             <Grid item xs={6} md={4} xl={2}>
-              <Typography variant="h6" className={classes.textBottom}>
+              <Typography variant="h6" className="textBottom">
                 BlueprintJS
               </Typography>
               <RouterLink href="/provided-mappers/blueprint-component-mapper">
                 <a href="/provided-mappers/blueprint-component-mapper">
-                  <img className={classes.logo} alt="blueprintjs logo" src="/blueprintjs-logo.svg" />
+                  <img className="logo" alt="blueprintjs logo" src="/blueprintjs-logo.svg" />
                 </a>
               </RouterLink>
             </Grid>
             <Grid item xs={6} md={4} xl={2}>
-              <Typography variant="h6" className={classes.textBottom}>
+              <Typography variant="h6" className="textBottom">
                 Semantic UI
               </Typography>
               <RouterLink href="/provided-mappers/suir-component-mapper">
                 <a href="/provided-mappers/suir-component-mapper">
-                  <img className={classes.logo} alt="semantic ui logo" src="/semantic-ui-logo.svg" />
+                  <img className="logo" alt="semantic ui logo" src="/semantic-ui-logo.svg" />
                 </a>
               </RouterLink>
             </Grid>
             <Grid item xs={6} md={4} xl={2}>
-              <Typography variant="h6" className={classes.textBottom}>
+              <Typography variant="h6" className="textBottom">
                 Ant Design
               </Typography>
               <RouterLink href="/provided-mappers/ant-component-mapper">
                 <a href="/provided-mappers/ant-component-mapper">
-                  <img className={classes.logo} alt="ant logo" src="/ant-logo.svg" />
+                  <img className="logo" alt="ant logo" src="/ant-logo.svg" />
                 </a>
               </RouterLink>
             </Grid>
             <Grid item xs={6} md={4} xl={2}>
-              <Typography variant="h6" className={classes.textBottom}>
+              <Typography variant="h6" className="textBottom">
                 Carbon Design System
               </Typography>
               <RouterLink href="/provided-mappers/carbon-component-mapper">
                 <a href="/provided-mappers/carbon-component-mapper">
-                  <img className={classes.logo} alt="ant logo" src="/carbon-logo.svg" />
+                  <img className="logo" alt="ant logo" src="/carbon-logo.svg" />
                 </a>
               </RouterLink>
             </Grid>
             <Grid item xs={8} md={8} xl={8}>
-              <Typography variant="body2" gutterBottom className={classes.mappersText}>
+              <Typography variant="body2" gutterBottom className="mappersText">
                 This list represents a set of provided mappers. Each mapper brings all basic form components from its design system. You can
                 immediately use form inputs such as text fields, selects, radios, checkboxes or wizards. However, this selection does not limit you as
                 integrating custom components is simple as it can be - all it takes is just{' '}
@@ -319,7 +319,7 @@ const LandingPageCards = () => {
           </Grid>
         </Paper>
       </Grid>
-    </Grid>
+    </Root>
   );
 };
 

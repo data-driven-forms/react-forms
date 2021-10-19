@@ -1,28 +1,36 @@
 /* eslint-disable react/prop-types */
 import React, { useState, forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import Typography from '@material-ui/core/Typography';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import Collapse from '@material-ui/core/Collapse';
-import makeStyles from '@material-ui/core/styles/makeStyles';
-import Link from '@material-ui/core/Link';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListSubheader from '@mui/material/ListSubheader';
+import Typography from '@mui/material/Typography';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import Collapse from '@mui/material/Collapse';
+import { styled } from '@mui/material/styles';
+import Link from '@mui/material/Link';
 import RouterNavLink from 'next/link';
 import { useRouter } from 'next/router';
 
-import { navStyles } from './nav-styles';
 import { query } from './find-connected-links';
 import useMapperLink from '../../hooks/use-mapper-link';
 import clsx from 'clsx';
 
-const useStyles = makeStyles(navStyles);
+const StyledListItem = styled(ListItem)(() => ({
+  '&.item': {
+    padding: '8px 16px !important',
+    justifyContent: 'flex-start !important',
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontSize: '0.875rem',
+  },
+  '&.nested': {
+    padding: '8px 16px 8px 32px !important',
+  },
+}));
 
 const Item = ({ href, linkText, component, divider, level }) => {
-  const classes = useStyles();
   const router = useRouter();
   const link = useMapperLink(href.replace('/?', '?'));
 
@@ -30,13 +38,13 @@ const Item = ({ href, linkText, component, divider, level }) => {
   const finalHref = queryMapper && link.match(query) ? `${link.replace(query, '')}${queryMapper}` : link;
 
   return (
-    <ListItem
+    <StyledListItem
       divider={divider}
       button
       selected={href.replace(query, '') === router.asPath.replace(query, '')}
       key={href || linkText}
-      className={clsx(classes.item, {
-        [classes.nested]: level > 0,
+      className={clsx('item', {
+        nested: level > 0,
       })}
       component={forwardRef((props, ref) => (
         <RouterNavLink key={component} href={finalHref}>
@@ -47,7 +55,7 @@ const Item = ({ href, linkText, component, divider, level }) => {
       <Typography variant="button" gutterBottom style={{ textTransform: 'capitalize', fontWeight: 'initial' }}>
         {linkText}
       </Typography>
-    </ListItem>
+    </StyledListItem>
   );
 };
 
@@ -58,17 +66,28 @@ Item.propTypes = {
   divider: PropTypes.bool,
 };
 
+const StyledList = styled(List)(() => ({
+  '& .listItem': {
+    padding: '8px 16px 8px 16px !important',
+    justifyContent: 'flex-start !important',
+  },
+  '& .listItemText': {
+    '&>span': {
+      fontSize: 14,
+    },
+  },
+}));
+
 const FinalList = ({ title, level, link, fields, previousLinks = [], renderItems, openable = true, open = false }) => {
   const [isOpen, setIsOpen] = useState(openable ? open : true);
 
   const closeNav = () => setIsOpen((state) => !state);
-  const classes = useStyles();
 
   return (
-    <List key={title} component="nav">
+    <StyledList key={title} component="nav">
       {title && (
-        <ListItem button onClick={openable ? closeNav : null} className={classes.listItem}>
-          <ListItemText primary={title} className={classes.listItemText} />
+        <ListItem button onClick={openable ? closeNav : null} className={'listItem'}>
+          <ListItemText primary={title} className={'listItemText'} />
           {openable ? isOpen ? <ExpandLess /> : <ExpandMore /> : null}
         </ListItem>
       )}
@@ -77,21 +96,18 @@ const FinalList = ({ title, level, link, fields, previousLinks = [], renderItems
           {renderItems(fields, level + 1, [...previousLinks, link])}
         </List>
       </Collapse>
-    </List>
+    </StyledList>
   );
 };
 
-const useSubHeaderStyles = makeStyles((theme) => ({
-  subHeader: {
+const StyledSubHeader = styled(ListSubheader)(({ theme }) => ({
+  '&.subHeader': {
     color: theme.palette.text.primary,
     paddingLeft: 24,
   },
 }));
 
-const SubHeader = ({ title }) => {
-  const classes = useSubHeaderStyles();
-  return <ListSubheader className={classes.subHeader}>{title}</ListSubheader>;
-};
+const SubHeader = ({ title }) => <StyledSubHeader className={'subHeader'}>{title}</StyledSubHeader>;
 
 const Mapper = {
   Wrapper: FinalList,
