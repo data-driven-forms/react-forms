@@ -9,7 +9,7 @@ const availableMappers = [
   { title: 'PF4', mapper: 'pf4' },
   { title: 'BJS', mapper: 'blueprint' },
   { title: 'SUIR', mapper: 'suir' },
-  { title: 'ANT', mapper: 'ant' }
+  { title: 'ANT', mapper: 'ant' },
 ];
 
 const targetDirectory = path.resolve(__dirname, '../doc-components');
@@ -17,17 +17,12 @@ const targetDirectory = path.resolve(__dirname, '../doc-components');
 const mdSources = availableMappers.reduce(
   (acc, curr) => ({
     ...acc,
-    [curr.mapper]: glob.sync(path.resolve(__dirname, `../doc-components/examples-texts/${curr.mapper}/*.md`)).map((path) => path.split('/').pop())
+    [curr.mapper]: glob.sync(path.resolve(__dirname, `../doc-components/examples-texts/${curr.mapper}/*.md`)).map((path) => path.split('/').pop()),
   }),
   {}
 );
 
-const filesToGenerate = glob.sync(path.resolve(__dirname, '../pages/component-example/*.js')).map((path) =>
-  path
-    .split('/')
-    .pop()
-    .replace('.js', '')
-);
+const filesToGenerate = glob.sync(path.resolve(__dirname, '../pages/component-example/*.js')).map((path) => path.split('/').pop().replace('.js', ''));
 
 const fileTemplate = `import React from 'react';
 import PropTypes from 'prop-types';
