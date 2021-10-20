@@ -11,7 +11,7 @@
         "directory": "packages/react-renderer-demo"
     },
     "engines": {
-        "node": "14"
+        "node": ">12"
     },
     "private": true,
     "scripts": {
@@ -42,8 +42,8 @@
         "clsx": "^1.1.1",
         "codesandbox": "2.2.1",
         "docsearch.js": "^2.6.3",
-        "firebase-admin": "^9.11.1",
-        "firebase-functions": "^3.15.5",
+        "firebase-admin": "^10.0.0",
+        "firebase-functions": "^3.15.7",
         "markdown-to-jsx": "^7.1.1",
         "next": "11.1.2",
         "next-offline": "^5.0.5",
@@ -62,8 +62,8 @@
         "@babel/cli": "^7.12.10",
         "cpx": "^1.5.0",
         "cross-env": "^7.0.3",
-        "firebase-functions-test": "^0.3.2",
-        "firebase-tools": "^9.18.0",
+        "firebase-functions-test": "^0.3.3",
+        "firebase-tools": "^9.20.0",
         "rimraf": "^3.0.2"
     }
 }
