@@ -11,7 +11,7 @@
         "directory": "packages/react-renderer-demo"
     },
     "engines": {
-        "node": "16"
+        "node": "14"
     },
     "private": true,
     "scripts": {

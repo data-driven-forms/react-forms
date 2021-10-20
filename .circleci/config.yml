@@ -5,7 +5,7 @@ jobs:
   build:
     working_directory: ~/react-forms
     docker:
-      - image: circleci/node:16
+      - image: circleci/node:14
     steps:
       - checkout
       - run:
@@ -33,7 +33,7 @@ jobs:
   release:
     working_directory: ~/react-forms
     docker:
-      - image: circleci/node:16
+      - image: circleci/node:14
     steps:
       - attach_workspace:
           at: ~/react-forms
@@ -45,7 +45,7 @@ jobs:
   predeploy:
     working_directory: ~/react-forms
     docker:
-      - image: circleci/node:16
+      - image: circleci/node:14
     steps:
       - attach_workspace:
           at: ~/react-forms
@@ -60,7 +60,7 @@ jobs:
   deploy:
     working_directory: ~/react-forms
     docker:
-      - image: circleci/node:16
+      - image: circleci/node:14
     steps:
       - attach_workspace:
           at: ~/react-forms
