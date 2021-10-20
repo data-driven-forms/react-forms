@@ -19,7 +19,7 @@ const FormTabs = ({ fields, AppBarProps, TabsProps, TabProps }) => {
   return (
     <div>
       <AppBar position="static" {...AppBarProps}>
-        <Tabs value={activeTab} onChange={(_e, tabIndex) => setActiveTab(tabIndex)} {...TabsProps}>
+        <Tabs textColor="inherit" value={activeTab} onChange={(_e, tabIndex) => setActiveTab(tabIndex)} {...TabsProps}>
           {fields.map(({ title, name }) => (
             <Tab key={name} label={title} {...TabProps} />
           ))}
