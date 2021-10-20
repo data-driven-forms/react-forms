@@ -10,7 +10,7 @@ Data Driven Forms is a monorepo that uses [Lerna](https://github.com/lerna/lerna
 
 ## Requirements
 
-- **○ NodeJS 16**
+- **○ NodeJS 14**
 
 - **○ Unix like OS (MacOS, Linux)**
 
