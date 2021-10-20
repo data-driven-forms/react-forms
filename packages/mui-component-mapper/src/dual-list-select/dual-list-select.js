@@ -19,11 +19,11 @@ import {
   Typography,
   Paper,
   Button,
-} from '@material-ui/core';
+} from '@mui/material';
 
-import SortIcon from '@material-ui/icons/ArrowUpward';
+import SortIcon from '@mui/icons-material/ArrowUpward';
 
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 import DualListSelectCommon from '@data-driven-forms/common/dual-list-select';
 
@@ -191,7 +191,15 @@ const ToolbarInternal = ({
         {...LeftFilterFieldProps}
         className={clsx(classes.filter, FilterFieldProps && FilterFieldProps.className, LeftFilterFieldProps && LeftFilterFieldProps.className)}
       />
-      <IconButton aria-label="sort options" edge="end" onClick={sortOptions} color="inherit" {...SortIconButtonProps} {...LeftSortIconButtonProps}>
+      <IconButton
+        aria-label="sort options"
+        edge="end"
+        onClick={sortOptions}
+        color="inherit"
+        {...SortIconButtonProps}
+        {...LeftSortIconButtonProps}
+        size="large"
+      >
         <SortIcon
           {...SortIconProps}
           {...LeftSortIconProps}

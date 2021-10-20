@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import { AppBar, Tab, Tabs } from '@material-ui/core';
+import { AppBar, Tab, Tabs } from '@mui/material';
 
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 

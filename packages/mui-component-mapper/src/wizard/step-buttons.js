@@ -4,8 +4,8 @@ import clsx from 'clsx';
 
 import selectNext from '@data-driven-forms/common/wizard/select-next';
 import { FormSpy } from '@data-driven-forms/react-form-renderer';
-import { Button, Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Button, Grid } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 
 const NextButton = ({ nextStep, valid, handleNext, nextLabel, getState, handleSubmit, submitLabel, conditionalSubmitFlag }) => {
   const nextResult = nextStep ? selectNext(nextStep, getState) : nextStep;
@@ -72,7 +72,7 @@ const WizardStepButtons = ({ buttons: Buttons, ...props }) => {
     <Grid
       container
       direction="row"
-      justify="space-evenly"
+      justifyContent="space-evenly"
       {...ButtonContainerProps}
       className={clsx(classes.buttonsContainer, ButtonContainerProps.className)}
     >

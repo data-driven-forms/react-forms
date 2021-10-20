@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MuiPickersUtilsProvider, DatePicker as MUIDatePicker } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
+
+import MUIDatePicker from '@mui/lab/DatePicker';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
 import { validationError } from '../validation-error/validation-error';
@@ -29,7 +31,7 @@ const DatePicker = (props) => {
 
   return (
     <FormFieldGrid {...FormFieldGridProps}>
-      <MuiPickersUtilsProvider locale={locale} utils={MomentUtils} {...MuiPickersUtilsProviderProps}>
+      <LocalizationProvider locale={locale} adapter={AdapterDateFns} {...MuiPickersUtilsProviderProps}>
         <MUIDatePicker
           fullWidth
           margin="normal"
@@ -44,7 +46,7 @@ const DatePicker = (props) => {
           value={input.value || null}
           {...DatePickerProps}
         />
-      </MuiPickersUtilsProvider>
+      </LocalizationProvider>
     </FormFieldGrid>
   );
 };

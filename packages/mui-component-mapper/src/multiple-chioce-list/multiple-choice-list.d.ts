@@ -7,7 +7,7 @@ import {
   CheckboxProps as MUICheckboxProps,
   FormLabelProps as MUIFormLabelProps,
   FormHelperTextProps as MUIFormHelperTextProps
-} from '@material-ui/core';
+} from '@mui/material';
 
 interface InternalCheckboxProps extends AnyObject {
   FormFieldGridProps: GridProps,

@@ -2,9 +2,9 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { FormRenderer, FormError } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
-import { Typography } from '@material-ui/core';
-import Alert from '@material-ui/lab/Alert';
-import AlertTitle from '@material-ui/lab/AlertTitle';
+import { Typography } from '@mui/material';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 import { componentMapper, FormTemplate } from '../';
 

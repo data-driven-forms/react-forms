@@ -16,7 +16,7 @@ import {
   ToolbarProps,
   TextFieldProps,
   PaperProps,
-} from "@material-ui/core";
+} from "@mui/material";
 
 export interface DualListOption extends AnyObject {
   value: any;

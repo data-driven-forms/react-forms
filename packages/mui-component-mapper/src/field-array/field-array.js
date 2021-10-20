@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { useFormApi, FieldArray } from '@data-driven-forms/react-form-renderer';
 import isEqual from 'lodash/isEqual';
 
-import { Grid, Button, Typography, FormControl, FormHelperText, IconButton } from '@material-ui/core';
+import { Grid, Button, Typography, FormControl, FormHelperText, IconButton } from '@mui/material';
 
-import { makeStyles } from '@material-ui/core/styles';
-import RedoIcon from '@material-ui/icons/Redo';
-import UndoIcon from '@material-ui/icons/Undo';
+import makeStyles from '@mui/styles/makeStyles';
+import RedoIcon from '@mui/icons-material/Redo';
+import UndoIcon from '@mui/icons-material/Undo';
 
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 
@@ -217,7 +217,15 @@ const DynamicArray = ({ ...props }) => {
                       {label}
                     </Typography>
                   )}
-                  <IconButton color="primary" aria-label="undo" component="span" disabled={state.index === 0} onClick={undo} {...UndoButtonProps}>
+                  <IconButton
+                    color="primary"
+                    aria-label="undo"
+                    component="span"
+                    disabled={state.index === 0}
+                    onClick={undo}
+                    {...UndoButtonProps}
+                    size="large"
+                  >
                     <UndoIcon />
                   </IconButton>
                   <IconButton
@@ -227,6 +235,7 @@ const DynamicArray = ({ ...props }) => {
                     disabled={state.index === state.history.length}
                     onClick={redo}
                     {...RedoButtonProps}
+                    size="large"
                   >
                     <RedoIcon />
                   </IconButton>

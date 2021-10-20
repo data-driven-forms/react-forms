@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Button as MUIButton, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import Alert from '@material-ui/lab/Alert';
-import AlertTitle from '@material-ui/lab/AlertTitle';
+import { Grid, Button as MUIButton, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 import FormTemplate from '@data-driven-forms/common/form-template';
 import clsx from 'clsx';

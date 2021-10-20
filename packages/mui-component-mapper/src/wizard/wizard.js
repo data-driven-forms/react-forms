@@ -4,8 +4,8 @@ import clsx from 'clsx';
 
 import { WizardContext } from '@data-driven-forms/react-form-renderer';
 
-import { Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 
 import Wizard from '@data-driven-forms/common/wizard';
 import WizardNav from './wizard-nav';

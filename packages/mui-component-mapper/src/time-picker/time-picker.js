@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MuiPickersUtilsProvider, TimePicker as MUITimePicker } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
+import MUITimePicker from '@mui/lab/TimePicker';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
 import { validationError } from '../validation-error/validation-error';
@@ -29,7 +30,7 @@ const TimePicker = (props) => {
 
   return (
     <FormFieldGrid {...FormFieldGridProps}>
-      <MuiPickersUtilsProvider locale={locale} utils={MomentUtils} {...MuiPickersUtilsProviderProps}>
+      <LocalizationProvider locale={locale} adapter={AdapterDateFns} {...MuiPickersUtilsProviderProps}>
         <MUITimePicker
           fullWidth
           margin="normal"
@@ -44,7 +45,7 @@ const TimePicker = (props) => {
           value={input.value || null}
           {...rest}
         />
-      </MuiPickersUtilsProvider>
+      </LocalizationProvider>
     </FormFieldGrid>
   );
 };
