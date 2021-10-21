@@ -98,7 +98,7 @@ TimePickerBase.propTypes = {
   WrapperProps: PropTypes.object,
   input: PropTypes.shape({
     name: PropTypes.string,
-    value: PropTypes.oneOf(PropTypes.string, PropTypes.date),
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.date]),
   }).isRequired,
   enhnancedOnBlur: PropTypes.func,
   enhancedOnChange: PropTypes.func,
