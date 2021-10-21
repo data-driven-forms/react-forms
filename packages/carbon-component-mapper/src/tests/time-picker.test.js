@@ -207,4 +207,38 @@ describe('TimePicker', () => {
     expect(onSubmit.mock.calls[0][0]['time-picker'].getHours()).toEqual(10);
     expect(onSubmit.mock.calls[0][0]['time-picker'].getMinutes()).toEqual(35);
   });
+
+  it('handles initial value', async () => {
+    const date = new Date().setHours(18, 57, 0, 0);
+    schema = {
+      fields: [
+        {
+          component: componentTypes.TIME_PICKER,
+          name: 'time-picker',
+          initialValue: date,
+          twelveHoursFormat: true,
+          timezones: [
+            { label: 'UTC', value: 'UTC' },
+            { label: 'EST', value: 'EAST' },
+          ],
+        },
+      ],
+    };
+
+    wrapper = mount(<FormRenderer schema={schema} {...initialProps} />);
+
+    expect(wrapper.find('input').props().value).toEqual(new Date().setHours(18, 57, 0, 0));
+
+    await act(async () => {
+      wrapper.find('input').simulate('change', { target: { value: '00:35' } });
+    });
+    wrapper.update();
+
+    await act(async () => {
+      wrapper.find('form').simulate('submit');
+    });
+    wrapper.update();
+
+    expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '00:35' });
+  });
 });

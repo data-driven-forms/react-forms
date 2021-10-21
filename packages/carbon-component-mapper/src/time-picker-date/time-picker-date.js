@@ -66,6 +66,7 @@ const TimePickerDate = (props) => {
     <TimePickerBase
       WrapperProps={WrapperProps}
       input={input}
+      initialLoad={meta.touched}
       enhnancedOnBlur={enhnancedOnBlur}
       finalValue={finalValue}
       invalid={invalid}
@@ -84,6 +85,7 @@ TimePickerDate.propTypes = {
   isDisabled: PropTypes.bool,
   isReadOnly: PropTypes.bool,
   isRequired: PropTypes.bool,
+  initialLoad: PropTypes.bool,
   label: PropTypes.node,
   labelText: PropTypes.node,
   description: PropTypes.node,
