@@ -26,6 +26,10 @@ class App extends React.Component {
   }
 
   render() {
+    const date = new Date();
+    date.setHours(18);
+    const date2 = new Date();
+    date2.setHours(0,0,0,0);
     return (
       <div style={{ widht: '100%' }}>
         <div style={{ maxWidth: 800, marginLeft: 'auto', marginRight: 'auto' }}>
@@ -37,7 +41,7 @@ class App extends React.Component {
               Wizard
             </Button>
             <Button onClick={() => this.setState((state) => fieldArrayState)}>arraySchema</Button>
-            <Button onClick={() => this.setState((state) => ({ schema: sandboxSchema, additionalOptions: {} }))}>Sandbox</Button>
+            <Button onClick={() => this.setState((state) => ({ schema: sandboxSchema, additionalOptions: { initialValues: { date_time_control_1: date, date_time_control_2: date2} } }))}>Sandbox</Button>
             <Button onClick={() => this.setState((state) => ({ schema: demoSchema, additionalOptions: {} }))}>Super schema</Button>
           </div>
           <FormRenderer

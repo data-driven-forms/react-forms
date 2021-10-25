@@ -7,9 +7,8 @@ import TimePickerBase from '../time-picker-base';
 
 const TimePickerDate = (props) => {
   const { input, meta, twelveHoursFormat, timezones, validateOnMount, helperText, WrapperProps, ...rest } = useFieldApi(prepareProps(props));
-
   const [timezone, selectTimezone] = useState(timezones ? timezones[0]?.value : '');
-  const [format, selectFormat] = useState('AM');
+  const [format, selectFormat] = useState(() => input.value?.getHours?.() >= 12 ? "PM" : "AM");
   const isMounted = useRef(false);
 
   const invalid = (meta.touched || validateOnMount) && (meta.error || meta.submitError);
@@ -66,7 +65,7 @@ const TimePickerDate = (props) => {
     <TimePickerBase
       WrapperProps={WrapperProps}
       input={input}
-      initialLoad={meta.touched}
+      format={format}
       enhnancedOnBlur={enhnancedOnBlur}
       finalValue={finalValue}
       invalid={invalid}
@@ -85,7 +84,6 @@ TimePickerDate.propTypes = {
   isDisabled: PropTypes.bool,
   isReadOnly: PropTypes.bool,
   isRequired: PropTypes.bool,
-  initialLoad: PropTypes.bool,
   label: PropTypes.node,
   labelText: PropTypes.node,
   description: PropTypes.node,

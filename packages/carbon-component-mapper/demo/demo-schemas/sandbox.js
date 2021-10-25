@@ -453,12 +453,14 @@ const output = {
                   name: 'date_time_control_1',
                   label: 'Timepicker',
                   title: 'Timepicker',
+                  twelveHoursFormat: true,
                   component: components.TIME_PICKER
                 },
                 {
                   name: 'date_time_control_2',
                   label: 'Timepicker with past days',
                   title: 'Timepicker with past days',
+                  twelveHoursFormat: true,
                   component: components.TIME_PICKER
                 }
               ],
