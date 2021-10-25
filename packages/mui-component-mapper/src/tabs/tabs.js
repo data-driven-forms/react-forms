@@ -1,23 +1,17 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { AppBar, Tab, Tabs } from '@mui/material';
+import { AppBar, Grid, Tab, Tabs } from '@mui/material';
+
+import FormFieldGrid from '../form-field-grid';
 
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
-const TabContent = ({ name, fields, formOptions }) => <Fragment key={name}>{formOptions.renderForm(fields, formOptions)}</Fragment>;
-
-TabContent.propTypes = {
-  name: PropTypes.string.isRequired,
-  fields: PropTypes.array.isRequired,
-  formOptions: PropTypes.shape({ renderForm: PropTypes.func.isRequired }).isRequired,
-};
-
-const FormTabs = ({ fields, AppBarProps, TabsProps, TabProps }) => {
+const FormTabs = ({ fields, AppBarProps, TabsProps, TabProps, FormFieldGridProps, GridItemProps }) => {
   const formOptions = useFormApi();
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <div>
+    <FormFieldGrid container {...FormFieldGridProps}>
       <AppBar position="static" {...AppBarProps}>
         <Tabs textColor="inherit" value={activeTab} onChange={(_e, tabIndex) => setActiveTab(tabIndex)} {...TabsProps}>
           {fields.map(({ title, name }) => (
@@ -25,12 +19,10 @@ const FormTabs = ({ fields, AppBarProps, TabsProps, TabProps }) => {
           ))}
         </Tabs>
       </AppBar>
-      {fields.map((field, index) => (
-        <div key={field.name} hidden={index !== activeTab}>
-          <TabContent {...field} name={field.name} formOptions={formOptions} />
-        </div>
-      ))}
-    </div>
+      <Grid container item xs={12} spacing={2} sx={{ mt: 1 }} {...GridItemProps}>
+        {formOptions.renderForm(fields[activeTab].fields)}
+      </Grid>
+    </FormFieldGrid>
   );
 };
 
@@ -39,12 +31,16 @@ FormTabs.propTypes = {
   AppBarProps: PropTypes.object,
   TabsProps: PropTypes.object,
   TabProps: PropTypes.object,
+  FormFieldGridProps: PropTypes.object,
+  GridItemProps: PropTypes.object,
 };
 
 FormTabs.defaultProps = {
   AppBarProps: {},
   TabsProps: {},
   TabProps: {},
+  FormFieldGridProps: {},
+  GridItemProps: {},
 };
 
 export default FormTabs;

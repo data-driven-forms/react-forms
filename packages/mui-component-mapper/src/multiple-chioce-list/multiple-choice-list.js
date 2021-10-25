@@ -36,7 +36,7 @@ const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperTex
   const invalid = validationError(meta, validateOnMount);
   const { FormFieldGridProps, FormControlProps, FormLabelProps, FormGroupProps, FormHelperTextProps } = useContext(CheckboxContext);
   return (
-    <Grid container {...FormFieldGridProps}>
+    <Grid container item xs={12} {...FormFieldGridProps}>
       <FormControl required={isRequired} error={!!invalid} component="fieldset" {...FormControlProps}>
         <FormLabel {...FormLabelProps}>{label}</FormLabel>
         <FormGroup {...FormGroupProps}>{children}</FormGroup>

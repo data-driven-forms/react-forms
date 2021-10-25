@@ -1,11 +1,11 @@
 import React, { memo, useReducer } from 'react';
+import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import { useFormApi, FieldArray } from '@data-driven-forms/react-form-renderer';
 import isEqual from 'lodash/isEqual';
 
 import { Grid, Button, Typography, FormControl, FormHelperText, IconButton } from '@mui/material';
 
-import makeStyles from '@mui/styles/makeStyles';
 import RedoIcon from '@mui/icons-material/Redo';
 import UndoIcon from '@mui/icons-material/Undo';
 
@@ -14,25 +14,36 @@ import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import FormFieldGrid from '../form-field-grid/form-field-grid';
 import clsx from 'clsx';
 
-const useFielArrayStyles = makeStyles({
-  formControl: {
+const PREFIX = 'DynamicArray';
+
+const classes = {
+  formControl: `${PREFIX}-formControl`,
+  centerText: `${PREFIX}-centerText`,
+  buttonsToEnd: `${PREFIX}-buttonsToEnd`,
+  header: `${PREFIX}-header`,
+  label: `${PREFIX}-label`,
+  fieldArrayGroup: `${PREFIX}-fieldArrayGroup`,
+};
+
+const StyledFormFieldGrid = styled(FormFieldGrid)({
+  [`& .${classes.formControl}`]: {
     width: '100%',
   },
-  centerText: {
+  [`& .${classes.centerText}`]: {
     display: 'flex',
     justifyContent: 'center',
   },
-  buttonsToEnd: {
+  [`& .${classes.buttonsToEnd}`]: {
     display: 'flex',
     justifyContent: 'flex-end',
   },
-  header: {
+  [`& .${classes.header}`]: {
     display: 'flex',
   },
-  label: {
+  [`& .${classes.label}`]: {
     flexGrow: 1,
   },
-  fieldArrayGroup: {
+  [`&.${classes.fieldArrayGroup}`]: {
     marginBottom: 32,
   },
 });
@@ -52,7 +63,6 @@ const ArrayItem = memo(
     RemoveButtonProps,
   }) => {
     const { renderForm } = useFormApi();
-    const classes = useFielArrayStyles();
 
     const editedFields = fields.map((field, index) => {
       const computedName = field.name ? `${name}.${field.name}` : name;
@@ -174,13 +184,11 @@ const DynamicArray = ({ ...props }) => {
     ...buttonLabels,
   };
 
-  const classes = useFielArrayStyles();
-
   const { dirty, submitFailed, error, submitError } = meta;
   const isError = (dirty || submitFailed) && error && typeof error === 'string';
 
   return (
-    <FormFieldGrid {...FormFieldGridProps} className={clsx(classes.fieldArrayGroup, FormFieldGridProps.classname)}>
+    <StyledFormFieldGrid {...FormFieldGridProps} className={clsx(classes.fieldArrayGroup, FormFieldGridProps.classname)}>
       <FormControl
         component="fieldset"
         error={isError || submitError}
@@ -284,7 +292,7 @@ const DynamicArray = ({ ...props }) => {
           }}
         </FieldArray>
       </FormControl>
-    </FormFieldGrid>
+    </StyledFormFieldGrid>
   );
 };
 
