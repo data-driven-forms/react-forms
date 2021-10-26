@@ -36,7 +36,9 @@
   "peerDependencies": {
     "@data-driven-forms/react-form-renderer": ">=3.2.1",
     "@patternfly/react-core": "^4.157.3",
-    "@patternfly/react-icons": "^4.11.7"
+    "@patternfly/react-icons": "^4.11.7",
+    "react": "^16.13.1 || ^17.0.2",
+    "react-dom": "^16.13.1 || ^17.0.2"
   },
   "dependencies": {
     "@data-driven-forms/common": "*",
