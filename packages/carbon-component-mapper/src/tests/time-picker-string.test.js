@@ -193,7 +193,7 @@ describe('TimePicker<String>', () => {
     onSubmit.mockReset();
 
     await act(async () => {
-      wrapper.find('select#time-picker-12h').simulate('change', { target: { value: 'UTC' } });
+      wrapper.find('select#time-picker-timezones').simulate('change', { target: { value: 'UTC' } });
     });
     wrapper.update();
 
@@ -203,7 +203,7 @@ describe('TimePicker<String>', () => {
     wrapper.update();
 
     expect(wrapper.find('input').props().value).toEqual('00:35');
-    expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '00:35 UTC EST' });
+    expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '00:35 AM UTC' });
   });
 
   it('handles initial value', async () => {

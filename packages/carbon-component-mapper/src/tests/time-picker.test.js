@@ -194,7 +194,7 @@ describe('TimePicker', () => {
     onSubmit.mockReset();
 
     await act(async () => {
-      wrapper.find('select#time-picker-12h').simulate('change', { target: { value: 'UTC' } });
+      wrapper.find('select#time-picker-timezones').simulate('change', { target: { value: 'UTC' } });
     });
     wrapper.update();
 
@@ -203,8 +203,47 @@ describe('TimePicker', () => {
     });
     wrapper.update();
 
-    expect(wrapper.find('input').props().value).toEqual('10:35');
-    expect(onSubmit.mock.calls[0][0]['time-picker'].getHours()).toEqual(10);
+    expect(wrapper.find('input').props().value).toEqual('05:35');
+    expect(onSubmit.mock.calls[0][0]['time-picker'].getHours()).toEqual(5);
     expect(onSubmit.mock.calls[0][0]['time-picker'].getMinutes()).toEqual(35);
+  });
+
+  it('handles initial value', async () => {
+    schema = {
+      fields: [
+        {
+          component: componentTypes.TIME_PICKER,
+          name: 'time-picker',
+          initialValue: new Date('December 17, 1995 16:00:00'),
+          twelveHoursFormat: true,
+        },
+      ],
+    };
+
+    await act(async () => {
+      wrapper = mount(<FormRenderer schema={schema} {...initialProps} />);
+    });
+    wrapper.update();
+
+    expect(wrapper.find('input').props().value).toEqual('04:00');
+    expect(wrapper.find('select').props().defaultValue).toEqual('PM');
+
+    await act(async () => {
+      wrapper.find('input').simulate('change', { target: { value: '03:00' } });
+    });
+    wrapper.update();
+
+    await act(async () => {
+      wrapper.find('input').simulate('blur');
+    });
+    wrapper.update();
+
+    await act(async () => {
+      wrapper.find('form').simulate('submit');
+    });
+    wrapper.update();
+
+    expect(onSubmit.mock.calls[0][0]['time-picker'].getHours()).toEqual(15);
+    expect(onSubmit.mock.calls[0][0]['time-picker'].getMinutes()).toEqual(0);
   });
 });

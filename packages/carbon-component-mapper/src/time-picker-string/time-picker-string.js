@@ -42,6 +42,8 @@ const TimePickerString = (props) => {
       warnText={warnText}
       selectFormat={selectFormat}
       selectTimezone={selectTimezone}
+      format={format}
+      timezone={timezone}
       {...rest}
     />
   );

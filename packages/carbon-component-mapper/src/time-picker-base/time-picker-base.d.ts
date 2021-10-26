@@ -20,6 +20,8 @@ interface InternalTimePickerBaseProps extends CarbonTimePickerProps, AnyObject {
     warnText?: ReactNode;
     selectFormat: (value: 'AM' | 'PM') => void;
     selectTimezone: (value: string) => void;
+    format?: 'AM' | 'PM';
+    defaultTimezone?: string;
 }
 
 export type TimePickerBaseProps = InternalTimePickerBaseProps & FormGroupProps;

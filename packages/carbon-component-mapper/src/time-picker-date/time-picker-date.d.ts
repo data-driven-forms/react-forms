@@ -12,6 +12,7 @@ export interface Timezone extends SelectItemProps {
 interface InternalTimePickerProps extends CarbonTimePickerProps {
     twelveHoursFormat?: boolean;
     timezones?: Timezone[];
+    defaultTimezone?: string;
 }
 
 export type TimePickerDateProps = InternalTimePickerProps & FormGroupProps & UseFieldApiComponentConfig;
