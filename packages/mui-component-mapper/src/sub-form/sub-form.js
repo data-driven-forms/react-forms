@@ -47,7 +47,7 @@ const SubForm = ({
           </Typography>
         </Grid>
       )}
-      <Grid item xs={12} container {...ItemsGridProps}>
+      <Grid item xs={12} container rowSpacing={2} {...ItemsGridProps}>
         {renderForm(fields)}
       </Grid>
     </StyledGrid>

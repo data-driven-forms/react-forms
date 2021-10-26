@@ -19,9 +19,19 @@ const FormTabs = ({ fields, AppBarProps, TabsProps, TabProps, FormFieldGridProps
           ))}
         </Tabs>
       </AppBar>
-      <Grid container item xs={12} spacing={2} sx={{ mt: 1 }} {...GridItemProps}>
-        {formOptions.renderForm(fields[activeTab].fields)}
-      </Grid>
+      {fields.map(({ fields, name }, index) => (
+        <Grid
+          key={name || index}
+          container
+          item
+          xs={12}
+          rowSpacing={2}
+          sx={{ mt: 1, ...(index !== activeTab && { display: 'none' }) }}
+          {...GridItemProps}
+        >
+          {formOptions.renderForm(fields)}
+        </Grid>
+      ))}
     </FormFieldGrid>
   );
 };
@@ -44,3 +54,15 @@ FormTabs.defaultProps = {
 };
 
 export default FormTabs;
+
+/*
+        {fields.map(({ fields }, index) =>
+          index === activeTab ? (
+            formOptions.renderForm(fields)
+          ) : (
+            <Grid container item xs={12} sx={{ display: 'none' }}>
+              {formOptions.renderForm(fields)}
+            </Grid>
+          )
+        )}
+        */

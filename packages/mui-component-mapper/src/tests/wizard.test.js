@@ -65,12 +65,12 @@ describe('wizard', () => {
   it('simple next and back', () => {
     const wrapper = mount(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find('.MuiStepLabel-active').first().text()).toEqual('AWS step');
+    expect(wrapper.find('.MuiStepLabel-label .Mui-active').first().text()).toEqual('AWS step');
 
     wrapper.find(Button).last().simulate('click'); // disabled next
     wrapper.update();
 
-    expect(wrapper.find('.MuiStepLabel-active').first().text()).toEqual('AWS step');
+    expect(wrapper.find('.MuiStepLabel-label .Mui-active').first().text()).toEqual('AWS step');
 
     wrapper.find('input').instance().value = 'something';
     wrapper.find('input').simulate('change');
@@ -79,12 +79,12 @@ describe('wizard', () => {
     wrapper.find(Button).last().simulate('click'); // next
     wrapper.update();
 
-    expect(wrapper.find('.MuiStepLabel-active').first().text()).toEqual('Summary');
+    expect(wrapper.find('.MuiStepLabel-label .Mui-active').first().text()).toEqual('Summary');
 
     wrapper.find(Button).at(1).simulate('click'); // back
     wrapper.update();
 
-    expect(wrapper.find('.MuiStepLabel-active').first().text()).toEqual('AWS step');
+    expect(wrapper.find('.MuiStepLabel-label .Mui-active').first().text()).toEqual('AWS step');
   });
 
   it('conditional next', () => {
@@ -146,7 +146,7 @@ describe('wizard', () => {
 
     const wrapper = mount(<FormRenderer {...initialProps} schema={schema} />);
 
-    expect(wrapper.find('.MuiStepLabel-active').first().text()).toEqual('First step');
+    expect(wrapper.find('.MuiStepLabel-label .Mui-active').first().text()).toEqual('First step');
 
     wrapper.find('input').instance().value = 'aws';
     wrapper.find('input').simulate('change');
@@ -155,7 +155,7 @@ describe('wizard', () => {
     wrapper.find(Button).last().simulate('click'); // next
     wrapper.update();
 
-    expect(wrapper.find('.MuiStepLabel-active').first().text()).toEqual('Last step');
+    expect(wrapper.find('.MuiStepLabel-label .Mui-active').first().text()).toEqual('Last step');
     expect(wrapper.find('input').instance().name).toEqual('summary');
 
     wrapper
@@ -164,7 +164,7 @@ describe('wizard', () => {
       .simulate('click');
     wrapper.update();
 
-    expect(wrapper.find('.MuiStepLabel-active').first().text()).toEqual('First step');
+    expect(wrapper.find('.MuiStepLabel-label .Mui-active').first().text()).toEqual('First step');
 
     wrapper.find('input').instance().value = 'google';
     wrapper.find('input').simulate('change');
@@ -176,7 +176,7 @@ describe('wizard', () => {
       .simulate('click');
     wrapper.update();
 
-    expect(wrapper.find('.MuiStepLabel-active').first().text()).toEqual('Last step');
+    expect(wrapper.find('.MuiStepLabel-label .Mui-active').first().text()).toEqual('Last step');
     expect(wrapper.find('input').instance().name).toEqual('googlesummary');
   });
 

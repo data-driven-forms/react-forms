@@ -6,7 +6,7 @@ import FormFieldGrid from '../form-field-grid/form-field-grid';
 import { validationError } from '../validation-error/validation-error';
 import { meta, input } from '@data-driven-forms/common/prop-types-templates';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
-import { TextField } from '@material-ui/core';
+import { TextField } from '@mui/material';
 
 const TimePicker = (props) => {
   const {

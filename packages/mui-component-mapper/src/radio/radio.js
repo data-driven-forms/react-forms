@@ -16,7 +16,7 @@ const classes = {
 
 const StyledFormFieldGrid = styled(FormFieldGrid)(() => ({
   [`&.${classes.grid}`]: {
-    '&:first-child': {
+    '&:first-of-type': {
       marginTop: 8,
     },
   },
