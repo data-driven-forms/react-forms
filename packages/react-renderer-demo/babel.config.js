@@ -1,8 +1,8 @@
 const muiTransformPlugin = [
   'transform-imports',
   {
-    '@material-ui/core': {
-      transform: (importName) => `@material-ui/core/${importName}`,
+    '@mui/material': {
+      transform: (importName) => `@mui/material/${importName}`,
       preventFullImport: false,
       skipDefaultConversion: false
     }

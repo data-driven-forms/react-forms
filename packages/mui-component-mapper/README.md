@@ -8,7 +8,7 @@ Material-UI component mapper for [Data Driven Forms](https://github.com/data-dri
 
 :book: For more information please visit the [documentation](https://data-driven-forms.org/). :book:
 
-[Material-IU docs](https://material-ui.com/)
+[Material-IU docs](https://mui.com/)
 
 
 **Table of Contents**
@@ -102,7 +102,7 @@ Data Driven Forms supports all kinds of component, basic set is consisted of:
 ### Useful links
 
 - [Data Driven Forms documentation](https://data-driven-forms.org/)
-- [Material-UI documentation](https://material-ui.com/)
+- [Material-UI documentation](https://mui.com/)
 - NPM
   - [React Form Renderer](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)
   - [MaterialUI Mapper](https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper)

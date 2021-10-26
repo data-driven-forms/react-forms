@@ -1,7 +1,6 @@
 import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-renderer";
-import { TimePickerProps as MuiTimePickerProps } from '@material-ui/pickers';
+import { TimePickerProps as MuiTimePickerProps } from '@mui/lab';
 import { ReactNode } from "react";
-import { MuiPickersUtilsProviderProps } from "@material-ui/pickers/MuiPickersUtilsProvider";
 import { GridProps } from "@mui/material";
 interface InternalTimePickerProps extends MuiTimePickerProps {
   isReadOnly?: boolean;
@@ -9,8 +8,6 @@ interface InternalTimePickerProps extends MuiTimePickerProps {
   isRequired?: boolean;
   description?: ReactNode;
   validateOnMount?: boolean;
-  locale?: string;
-  MuiPickersUtilsProviderProps?: MuiPickersUtilsProviderProps;
   FormFieldGridProps?: GridProps;
 }
 

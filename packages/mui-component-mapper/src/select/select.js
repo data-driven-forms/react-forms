@@ -9,7 +9,7 @@ import parseInternalValue from '@data-driven-forms/common/select/parse-internal-
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
 import { TextField, CircularProgress } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import Autocomplete from '@mui/material/Autocomplete';
+import { Autocomplete } from '@mui/material';
 
 /**
  * Returns label of selected option

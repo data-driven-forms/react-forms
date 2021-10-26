@@ -1,7 +1,7 @@
 import componentTypes from '@data-driven-forms/react-form-renderer/component-types';
 
 export const docsLinks = {
-  mui: 'https://material-ui.com/api/',
+  mui: 'https://mui.com/api/',
   pf4: 'https://www.patternfly.org/v4/components/',
   blueprint: 'https://blueprintjs.com/docs/',
   suir: 'https://react.semantic-ui.com/',
