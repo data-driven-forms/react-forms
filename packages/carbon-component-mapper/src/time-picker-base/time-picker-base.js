@@ -18,6 +18,8 @@ const TimePickerBase = ({
   warnText,
   selectFormat,
   selectTimezone,
+  format,
+  timezone,
   ...rest
 }) => (
   <div {...WrapperProps}>
@@ -34,13 +36,23 @@ const TimePickerBase = ({
       {...rest}
     >
       {twelveHoursFormat && (
-        <TimePickerSelect labelText="Period" id={`${rest.id || input.name}-12h`} onChange={({ target: { value } }) => selectFormat(value)}>
+        <TimePickerSelect
+          defaultValue={format}
+          labelText="Period"
+          id={`${rest.id || input.name}-12h`}
+          onChange={({ target: { value } }) => selectFormat(value)}
+        >
           <SelectItem value="AM" text="AM" />
           <SelectItem value="PM" text="PM" />
         </TimePickerSelect>
       )}
       {timezones && (
-        <TimePickerSelect labelText="Timezone" id={`${rest.id || input.name}-timezones`} onChange={({ target: { value } }) => selectTimezone(value)}>
+        <TimePickerSelect
+          defaultValue={timezone}
+          labelText="Timezone"
+          id={`${rest.id || input.name}-timezones`}
+          onChange={({ target: { value } }) => selectTimezone(value)}
+        >
           {timezones.map(({ showAs, ...tz }) => (
             <SelectItem key={tz.value} text={tz.label} {...tz} />
           ))}
@@ -78,6 +90,8 @@ TimePickerBase.propTypes = {
   warnText: PropTypes.node,
   selectFormat: PropTypes.func.isRequired,
   selectTimezone: PropTypes.func.isRequired,
+  format: PropTypes.oneOf(['AM', 'PM']),
+  timezone: PropTypes.string,
 };
 
 export default TimePickerBase;
