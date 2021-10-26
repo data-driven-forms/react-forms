@@ -1,4 +1,5 @@
 import React from 'react';
+import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
@@ -19,41 +20,57 @@ import {
   Typography,
   Paper,
   Button,
-} from '@material-ui/core';
+} from '@mui/material';
 
-import SortIcon from '@material-ui/icons/ArrowUpward';
-
-import { makeStyles } from '@material-ui/core/styles';
+import SortIcon from '@mui/icons-material/ArrowUpward';
 
 import DualListSelectCommon from '@data-driven-forms/common/dual-list-select';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
 import { validationError } from '../validation-error/validation-error';
 
-const useStyles = makeStyles((theme) => ({
-  allToLeftIcon: {
+const PREFIX = 'DualListSelectWrapper';
+
+const classes = {
+  allToLeftIcon: `${PREFIX}-allToLeftIcon`,
+  upsideDown: `${PREFIX}-upsideDown`,
+  list: `${PREFIX}-list`,
+  button: `${PREFIX}-button`,
+  buttonsGrid: `${PREFIX}-buttonsGrid`,
+  filter: `${PREFIX}-filter`,
+  toolbar: `${PREFIX}-toolbar`,
+};
+
+const StyledDualListSelect = styled(FormFieldGrid)(({ theme }) => ({
+  [`& .${classes.allToLeftIcon}`]: {
     transform: 'scaleX(-1)',
   },
-  upsideDown: {
+
+  [`& .${classes.upsideDown}`]: {
     transform: 'scaleY(-1)',
   },
-  list: {
+
+  [`& .${classes.list}`]: {
     height: 300,
     overflow: 'auto',
   },
-  button: {
+
+  [`& .${classes.button}`]: {
     display: 'flex',
     justifyContent: 'center',
     margin: theme.spacing(0.5, 0),
   },
-  buttonsGrid: {
+
+  [`& .${classes.buttonsGrid}`]: {
     height: '100%',
     alignContent: 'center',
   },
-  filter: {
+
+  [`& .${classes.filter}`]: {
     width: '100%',
   },
-  toolbar: {
+
+  [`& .${classes.toolbar}`]: {
     paddingLeft: 16,
     paddingRight: 16,
   },
@@ -74,60 +91,56 @@ const ListInternal = ({
   checkboxVariant,
   PaperProps,
   LeftPaperProps,
-}) => {
-  const classes = useStyles();
-
-  return (
-    <Paper {...PaperProps} {...LeftPaperProps} className={clsx(PaperProps && PaperProps.className, LeftPaperProps && LeftPaperProps.className)}>
-      <List component="div" role="list" dense {...ListProps} className={clsx(classes.list, ListProps.className)}>
-        {value.length < 1 && (
-          <ListItem button disabled {...ListItemProps}>
-            <ListItemText primary={filterValue ? filterValueText : noOptionsTitle} />
-          </ListItem>
+}) => (
+  <Paper {...PaperProps} {...LeftPaperProps} className={clsx(PaperProps && PaperProps.className, LeftPaperProps && LeftPaperProps.className)}>
+    <List component="div" role="list" dense {...ListProps} className={clsx(classes.list, ListProps.className)}>
+      {value.length < 1 && (
+        <ListItem button disabled {...ListItemProps}>
+          <ListItemText primary={filterValue ? filterValueText : noOptionsTitle} />
+        </ListItem>
+      )}
+      {value.length > 0 &&
+        value.map(
+          ({
+            value,
+            label,
+            icon,
+            isCheckbox,
+            secondaryActions,
+            ListItemProps: ListItemPropsItem,
+            ListItemIconProps: ListItemIconPropsItem,
+            ListItemTextProps: ListItemTextPropsItem,
+            ListItemSecondaryActionProps: ListItemSecondaryActionPropsItem,
+          }) => (
+            <ListItem
+              button
+              key={value}
+              selected={selectedValues.includes(value)}
+              onClick={(e) => optionClick(isCheckbox || checkboxVariant ? { ...e, ctrlKey: true } : e, value)}
+              {...ListItemProps}
+              {...ListItemPropsItem}
+            >
+              {(icon || isCheckbox || checkboxVariant) && (
+                <ListItemIcon {...ListItemIconProps} {...ListItemIconPropsItem}>
+                  {isCheckbox || checkboxVariant ? (
+                    <Checkbox edge="start" checked={selectedValues.includes(value)} tabIndex={-1} disableRipple />
+                  ) : (
+                    icon
+                  )}
+                </ListItemIcon>
+              )}
+              <ListItemText primary={label} {...ListItemTextProps} {...ListItemTextPropsItem} />
+              {secondaryActions && (
+                <ListItemSecondaryAction {...ListItemSecondaryActionProps} {...ListItemSecondaryActionPropsItem}>
+                  {secondaryActions}
+                </ListItemSecondaryAction>
+              )}
+            </ListItem>
+          )
         )}
-        {value.length > 0 &&
-          value.map(
-            ({
-              value,
-              label,
-              icon,
-              isCheckbox,
-              secondaryActions,
-              ListItemProps: ListItemPropsItem,
-              ListItemIconProps: ListItemIconPropsItem,
-              ListItemTextProps: ListItemTextPropsItem,
-              ListItemSecondaryActionProps: ListItemSecondaryActionPropsItem,
-            }) => (
-              <ListItem
-                button
-                key={value}
-                selected={selectedValues.includes(value)}
-                onClick={(e) => optionClick(isCheckbox || checkboxVariant ? { ...e, ctrlKey: true } : e, value)}
-                {...ListItemProps}
-                {...ListItemPropsItem}
-              >
-                {(icon || isCheckbox || checkboxVariant) && (
-                  <ListItemIcon {...ListItemIconProps} {...ListItemIconPropsItem}>
-                    {isCheckbox || checkboxVariant ? (
-                      <Checkbox edge="start" checked={selectedValues.includes(value)} tabIndex={-1} disableRipple />
-                    ) : (
-                      icon
-                    )}
-                  </ListItemIcon>
-                )}
-                <ListItemText primary={label} {...ListItemTextProps} {...ListItemTextPropsItem} />
-                {secondaryActions && (
-                  <ListItemSecondaryAction {...ListItemSecondaryActionProps} {...ListItemSecondaryActionPropsItem}>
-                    {secondaryActions}
-                  </ListItemSecondaryAction>
-                )}
-              </ListItem>
-            )
-          )}
-      </List>
-    </Paper>
-  );
-};
+    </List>
+  </Paper>
+);
 
 ListInternal.propTypes = {
   value: PropTypes.arrayOf(
@@ -170,41 +183,41 @@ const ToolbarInternal = ({
   LeftSortIconButtonProps,
   filter,
   sortDesc,
-}) => {
-  const classes = useStyles();
-
-  return (
-    <Toolbar
-      variant="dense"
-      {...ToolbarProps}
-      {...LeftToolbarProps}
-      className={clsx(classes.toolbar, ToolbarProps && ToolbarProps.className, LeftToolbarProps && LeftToolbarProps.className)}
+}) => (
+  <Toolbar
+    variant="dense"
+    {...ToolbarProps}
+    {...LeftToolbarProps}
+    className={clsx(classes.toolbar, ToolbarProps && ToolbarProps.className, LeftToolbarProps && LeftToolbarProps.className)}
+  >
+    <TextField
+      edge="start"
+      id="options-search"
+      label={filterOptionsTitle}
+      onChange={({ target: { value } }) => filterOptions(value)}
+      value={filter}
+      type="search"
+      {...FilterFieldProps}
+      {...LeftFilterFieldProps}
+      className={clsx(classes.filter, FilterFieldProps && FilterFieldProps.className, LeftFilterFieldProps && LeftFilterFieldProps.className)}
+    />
+    <IconButton
+      aria-label="sort options"
+      edge="end"
+      onClick={sortOptions}
+      color="inherit"
+      {...SortIconButtonProps}
+      {...LeftSortIconButtonProps}
+      size="large"
     >
-      <TextField
-        edge="start"
-        id="options-search"
-        label={filterOptionsTitle}
-        onChange={({ target: { value } }) => filterOptions(value)}
-        value={filter}
-        type="search"
-        {...FilterFieldProps}
-        {...LeftFilterFieldProps}
-        className={clsx(classes.filter, FilterFieldProps && FilterFieldProps.className, LeftFilterFieldProps && LeftFilterFieldProps.className)}
+      <SortIcon
+        {...SortIconProps}
+        {...LeftSortIconProps}
+        className={clsx(!sortDesc && classes.upsideDown, SortIconProps && SortIconProps.className, LeftSortIconProps && LeftSortIconProps.className)}
       />
-      <IconButton aria-label="sort options" edge="end" onClick={sortOptions} color="inherit" {...SortIconButtonProps} {...LeftSortIconButtonProps}>
-        <SortIcon
-          {...SortIconProps}
-          {...LeftSortIconProps}
-          className={clsx(
-            !sortDesc && classes.upsideDown,
-            SortIconProps && SortIconProps.className,
-            LeftSortIconProps && LeftSortIconProps.className
-          )}
-        />
-      </IconButton>
-    </Toolbar>
-  );
-};
+    </IconButton>
+  </Toolbar>
+);
 
 ToolbarInternal.propTypes = {
   ToolbarProps: PropTypes.object,
@@ -314,12 +327,11 @@ const DualListSelect = ({
   LeftPaperProps,
   RightPaperProps,
 }) => {
-  const classes = useStyles();
   const invalid = validationError(meta, validateOnMount);
   const text = invalid || ((meta.touched || validateOnMount) && meta.warning) || helperText || description;
 
   return (
-    <FormFieldGrid {...FormFieldGridProps}>
+    <StyledDualListSelect {...FormFieldGridProps}>
       <FormControl fullWidth required={isRequired} error={!!invalid} component="fieldset" {...FormControlProps}>
         <FormLabel component="legend" {...FormLabelProps}>
           {label}
@@ -500,7 +512,7 @@ const DualListSelect = ({
         </Grid>
         {text && <FormHelperText {...FormHelperTextProps}>{text}</FormHelperText>}
       </FormControl>
-    </FormFieldGrid>
+    </StyledDualListSelect>
   );
 };
 

@@ -1,7 +1,7 @@
 import { UseFieldApiComponentConfig } from "@data-driven-forms/react-form-renderer";
-import { AutocompleteProps } from "@material-ui/lab/Autocomplete";
+import { AutocompleteProps } from '@mui/material/Autocomplete';
 import { ReactNode } from "react";
-import { GridProps, TextFieldProps, InputProps } from "@material-ui/core";
+import { GridProps, TextFieldProps, InputProps } from "@mui/material";
 
 interface InternalSelectProps<T> extends AutocompleteProps<T, boolean | undefined, boolean | undefined, boolean | undefined> {
   isRequired?: boolean;

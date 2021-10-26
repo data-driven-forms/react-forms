@@ -3,9 +3,9 @@ import { act } from 'react-dom/test-utils';
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
 
-import { List, ListItem, Toolbar, TextField, Paper, Button, IconButton } from '@material-ui/core';
+import { List, ListItem, Toolbar, TextField, Paper, Button, IconButton } from '@mui/material';
 
-import SortIcon from '@material-ui/icons/ArrowUpward';
+import SortIcon from '@mui/icons-material/ArrowUpward';
 
 import { componentMapper, FormTemplate } from '../index';
 import FormFieldGrid from '../form-field-grid';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 
 import PlainText from '../plain-text';
 

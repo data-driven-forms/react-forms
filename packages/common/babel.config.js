@@ -181,7 +181,7 @@ const createCarbonCJSTransform = (env) => [
         let res;
         const files = glob.sync(
           path.resolve(__dirname, `../{..,carbon-component-mapper}/node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es'}/**/${carbonMapper(importName)}.js`)
-        );
+        ).filter(path => !path.includes('/next/'));
         if (files.length > 0) {
           res = files[0];
         } else {
@@ -200,7 +200,7 @@ const createCarbonCJSTransform = (env) => [
         let res;
         const files = glob.sync(
           path.resolve(__dirname, `../{..,carbon-component-mapper}/node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es'}/**/${carbonMapper(importName)}.js`)
-        );
+        ).filter(path => !path.includes('/next/'));
         if (files.length > 0) {
           res = files[0];
         } else {
@@ -219,7 +219,7 @@ const createCarbonCJSTransform = (env) => [
         let res;
         const files = glob.sync(
           path.resolve(__dirname, `../{..,carbon-component-mapper}/node_modules/carbon-components-react/${env === 'cjs' ? 'lib' : 'es'}/**/${carbonMapper(importName)}.js`)
-        );
+        ).filter(path => !path.includes('/next/'));
         if (files.length > 0) {
           res = files[0];
         } else {

@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import { Grid, Checkbox, FormControlLabel, FormLabel, FormGroup, FormControl, FormHelperText } from '@material-ui/core';
+import { Grid, Checkbox, FormControlLabel, FormLabel, FormGroup, FormControl, FormHelperText } from '@mui/material';
 
 import MultipleChoiceListCommon, { wrapperProps } from '@data-driven-forms/common/multiple-choice-list';
 import { validationError } from '../validation-error/validation-error';
@@ -36,7 +36,7 @@ const Wrapper = ({ label, isRequired, children, meta, validateOnMount, helperTex
   const invalid = validationError(meta, validateOnMount);
   const { FormFieldGridProps, FormControlProps, FormLabelProps, FormGroupProps, FormHelperTextProps } = useContext(CheckboxContext);
   return (
-    <Grid container {...FormFieldGridProps}>
+    <Grid container item xs={12} {...FormFieldGridProps}>
       <FormControl required={isRequired} error={!!invalid} component="fieldset" {...FormControlProps}>
         <FormLabel {...FormLabelProps}>{label}</FormLabel>
         <FormGroup {...FormGroupProps}>{children}</FormGroup>

@@ -60,7 +60,7 @@ describe('<FieldArray/>', () => {
     expect(wrapper.text().includes(noItemsMessage)).toEqual(true);
 
     await act(async () => {
-      wrapper.find('AddCircleOIcon').first().simulate('click');
+      wrapper.find('button').at(1).simulate('click');
     });
     wrapper.update();
 
@@ -107,7 +107,7 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper.find('AddCircleOIcon').first().simulate('click');
+      wrapper.find('button').at(1).simulate('click');
     });
     wrapper.update();
 
@@ -123,7 +123,88 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper.find('CloseIcon').first().simulate('click');
+      wrapper.find('TrashIcon').first().simulate('click');
+    });
+    wrapper.update();
+
+    await act(async () => {
+      wrapper.find('form').simulate('submit');
+    });
+    wrapper.update();
+
+    expect(onSubmit).toHaveBeenCalledWith({
+      nicePeople: [],
+    });
+  });
+
+  it('allow to remove all', async () => {
+    initialProps = {
+      ...initialProps,
+      schema: {
+        fields: [
+          {
+            component: componentTypes.FIELD_ARRAY,
+            name: 'nicePeople',
+            defaultItem: { name: 'enter a name', lastName: 'enter a last name' },
+            fields: [
+              {
+                component: componentTypes.TEXT_FIELD,
+                name: 'name',
+              },
+              {
+                component: componentTypes.TEXT_FIELD,
+                name: 'lastName',
+              },
+            ],
+          },
+        ],
+      },
+    };
+
+    await act(async () => {
+      wrapper = mount(<FormRenderer {...initialProps} />);
+    });
+
+    await act(async () => {
+      wrapper.find('form').simulate('submit');
+    });
+    wrapper.update();
+
+    expect(onSubmit).toHaveBeenCalledWith({});
+    onSubmit.mockClear();
+
+    await act(async () => {
+      wrapper.find('button').at(1).simulate('click');
+    });
+    wrapper.update();
+
+    await act(async () => {
+      wrapper.find('button').at(1).simulate('click');
+    });
+    wrapper.update();
+
+    await act(async () => {
+      wrapper.find('button').at(1).simulate('click');
+    });
+    wrapper.update();
+
+    await act(async () => {
+      wrapper.find('form').simulate('submit');
+    });
+    wrapper.update();
+
+    expect(onSubmit).toHaveBeenCalledWith({
+      nicePeople: [
+        { name: 'enter a name', lastName: 'enter a last name' },
+        { name: 'enter a name', lastName: 'enter a last name' },
+        { name: 'enter a name', lastName: 'enter a last name' },
+      ],
+    });
+
+    onSubmit.mockClear();
+
+    await act(async () => {
+      wrapper.find('button').first().simulate('click');
     });
     wrapper.update();
 
@@ -169,7 +250,7 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper.find('AddCircleOIcon').first().simulate('click');
+      wrapper.find('button').at(1).simulate('click');
     });
     wrapper.update();
 
@@ -185,7 +266,7 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper.find('CloseIcon').first().simulate('click');
+      wrapper.find('TrashIcon').first().simulate('click');
     });
     wrapper.update();
 
@@ -225,7 +306,7 @@ describe('<FieldArray/>', () => {
     });
 
     await act(async () => {
-      wrapper.find('AddCircleOIcon').first().simulate('click');
+      wrapper.find('button').at(0).simulate('click');
     });
     wrapper.update();
 
@@ -240,7 +321,7 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper.find('AddCircleOIcon').first().simulate('click');
+      wrapper.find('button').at(0).simulate('click');
     });
     wrapper.update();
 
@@ -255,7 +336,7 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper.find('AddCircleOIcon').first().simulate('click');
+      wrapper.find('button').at(0).simulate('click');
     });
     wrapper.update();
 
@@ -270,7 +351,7 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper.find('CloseIcon').first().simulate('click');
+      wrapper.find('TrashIcon').first().simulate('click');
     });
     wrapper.update();
 
@@ -285,7 +366,7 @@ describe('<FieldArray/>', () => {
     onSubmit.mockClear();
 
     await act(async () => {
-      wrapper.find('CloseIcon').first().simulate('click');
+      wrapper.find('TrashIcon').first().simulate('click');
     });
     wrapper.update();
 
@@ -325,7 +406,7 @@ describe('<FieldArray/>', () => {
     expect(wrapper.find(FormHelperText)).toHaveLength(0);
 
     await act(async () => {
-      wrapper.find('AddCircleOIcon').first().simulate('click');
+      wrapper.find('button').at(1).simulate('click');
     });
     wrapper.update();
 
@@ -369,8 +450,8 @@ describe('<FieldArray/>', () => {
     expect(wrapper.find('label[id="label"]')).toHaveLength(1);
     expect(wrapper.find('h4[id="message"]')).toHaveLength(1);
     expect(wrapper.find('h3[id="desc"]')).toHaveLength(1);
-    expect(wrapper.find('AddCircleOIcon').props().className.includes('disabled')).toEqual(false);
-    expect(wrapper.find('CloseIcon')).toHaveLength(0);
+    expect(wrapper.find('button').at(1).props().isDisabled).toEqual(undefined);
+    expect(wrapper.find('TrashIcon')).toHaveLength(0);
   });
 
   it('should render array field correctly with props and initial values', async () => {
@@ -403,11 +484,11 @@ describe('<FieldArray/>', () => {
     expect(wrapper.find('label[id="label"]')).toHaveLength(1);
     expect(wrapper.find('h4[id="message"]')).toHaveLength(0);
     expect(wrapper.find('h3[id="desc"]')).toHaveLength(1);
-    expect(wrapper.find('AddCircleOIcon').props().className.includes('disabled')).toEqual(false);
-    expect(wrapper.find('CloseIcon')).toHaveLength(2);
-    expect(wrapper.find('CloseIcon')).toHaveLength(2);
-    expect(wrapper.find('CloseIcon').first().props().className.includes('disabled')).toEqual(false);
-    expect(wrapper.find('CloseIcon').last().props().className.includes('disabled')).toEqual(false);
+    expect(wrapper.find('button').at(1).props().isDisabled).toEqual(undefined);
+    expect(wrapper.find('TrashIcon')).toHaveLength(2);
+    expect(wrapper.find('TrashIcon')).toHaveLength(2);
+    expect(wrapper.find('TrashIcon').first().props().isDisabled).toEqual(undefined);
+    expect(wrapper.find('TrashIcon').last().props().isDisabled).toEqual(undefined);
   });
 
   it('should remove nested field to form', async () => {
@@ -437,7 +518,7 @@ describe('<FieldArray/>', () => {
     expect(wrapper.find('input')).toHaveLength(1);
 
     await act(async () => {
-      wrapper.find('CloseIcon').simulate('click');
+      wrapper.find('TrashIcon').simulate('click');
     });
 
     wrapper.update();

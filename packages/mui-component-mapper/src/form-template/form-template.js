@@ -1,15 +1,21 @@
 import React from 'react';
+import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
-import { Grid, Button as MUIButton, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import Alert from '@material-ui/lab/Alert';
-import AlertTitle from '@material-ui/lab/AlertTitle';
+import { Grid, Button as MUIButton, Typography } from '@mui/material';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 import FormTemplate from '@data-driven-forms/common/form-template';
 import clsx from 'clsx';
 
-const useStyles = makeStyles(() => ({
-  buttonGroup: {
+const PREFIX = 'MuiFormTemplate';
+
+const classes = {
+  buttonGroup: `${PREFIX}-buttonGroup`,
+};
+
+const StyledButtonGroup = styled(Grid)(() => ({
+  [`& .${classes.buttonGroup}`]: {
     display: 'flex',
     justifyContent: 'flex-end',
     '&>button:not(last-child)': {
@@ -21,7 +27,7 @@ const useStyles = makeStyles(() => ({
 const Form = ({ children, GridContainerProps, GridProps, ...props }) => (
   <Grid item xs={12} {...GridProps}>
     <form noValidate {...props}>
-      <Grid container item spacing={2} xs={12} {...GridContainerProps}>
+      <Grid container rowSpacing={2} item xs={12} {...GridContainerProps}>
         {children}
       </Grid>
     </form>
@@ -60,16 +66,13 @@ Title.propTypes = {
   GridProps: PropTypes.object,
 };
 
-const ButtonGroup = ({ children, GridProps, ...props }) => {
-  const classes = useStyles();
-  return (
-    <Grid item xs={12} {...GridProps}>
-      <div className={classes.buttonGroup} {...props}>
-        {children}
-      </div>
-    </Grid>
-  );
-};
+const ButtonGroup = ({ children, GridProps, ...props }) => (
+  <StyledButtonGroup item xs={12} {...GridProps}>
+    <div className={classes.buttonGroup} {...props}>
+      {children}
+    </div>
+  </StyledButtonGroup>
+);
 
 ButtonGroup.propTypes = {
   children: PropTypes.node,
@@ -89,32 +92,30 @@ Button.propTypes = {
   buttonType: PropTypes.string,
 };
 
-const useAlertStyles = makeStyles(() => ({
-  alert: {
+const StyledAlert = styled(Alert)(() => ({
+  '& .alert': {
     width: '100%',
     margin: 8,
   },
 }));
 
 export const FormError = ({ formError, alertProps }) => {
-  const { alert } = useAlertStyles();
-
   if (typeof formError === 'object' && (formError.title || formError.title)) {
     const { title, description, TitleProps, className, ...props } = formError;
 
     return (
-      <Alert severity="error" {...props} {...alertProps} className={clsx(alert, alertProps?.className, className)}>
+      <StyledAlert severity="error" {...props} {...alertProps} className={clsx('alert', alertProps?.className, className)}>
         {title && <AlertTitle {...TitleProps}>{title}</AlertTitle>}
         {description}
-      </Alert>
+      </StyledAlert>
     );
   }
 
   if (formError) {
     return (
-      <Alert severity="error" {...alertProps} className={clsx(alert, alertProps?.className)}>
+      <StyledAlert severity="error" {...alertProps} className={clsx('alert', alertProps?.className)}>
         {formError}
-      </Alert>
+      </StyledAlert>
     );
   }
 

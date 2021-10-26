@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MuiPickersUtilsProvider, DatePicker as MUIDatePicker } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
+
+import MUIDatePicker from '@mui/lab/DatePicker';
 
 import FormFieldGrid from '../form-field-grid/form-field-grid';
 import { validationError } from '../validation-error/validation-error';
 import { meta, input } from '@data-driven-forms/common/prop-types-templates';
 import { useFieldApi } from '@data-driven-forms/react-form-renderer';
+import { TextField } from '@mui/material';
 
 const DatePicker = (props) => {
   const {
@@ -20,31 +21,32 @@ const DatePicker = (props) => {
     description,
     validateOnMount,
     meta,
-    locale = 'en',
     FormFieldGridProps,
-    MuiPickersUtilsProviderProps,
     DatePickerProps,
   } = useFieldApi(props);
   const invalid = validationError(meta, validateOnMount);
 
   return (
     <FormFieldGrid {...FormFieldGridProps}>
-      <MuiPickersUtilsProvider locale={locale} utils={MomentUtils} {...MuiPickersUtilsProviderProps}>
-        <MUIDatePicker
-          fullWidth
-          margin="normal"
-          label={label}
-          helperText={invalid || ((meta.touched || validateOnMount) && meta.warning) || helperText || description}
-          disabled={isDisabled || isReadOnly}
-          placeholder={placeholder}
-          required={isRequired}
-          error={!!invalid}
-          readOnly={isReadOnly}
-          {...input}
-          value={input.value || null}
-          {...DatePickerProps}
-        />
-      </MuiPickersUtilsProvider>
+      <MUIDatePicker
+        renderInput={(props) => (
+          <TextField
+            {...props}
+            fullWidth
+            margin="normal"
+            label={label}
+            helperText={invalid || ((meta.touched || validateOnMount) && meta.warning) || helperText || description}
+            placeholder={placeholder}
+            required={isRequired}
+            error={!!invalid}
+          />
+        )}
+        disabled={isDisabled || isReadOnly}
+        readOnly={isReadOnly}
+        {...input}
+        value={input.value || null}
+        {...DatePickerProps}
+      />
     </FormFieldGrid>
   );
 };
@@ -59,7 +61,6 @@ DatePicker.propTypes = {
   label: PropTypes.node,
   helperText: PropTypes.node,
   validateOnMount: PropTypes.bool,
-  locale: PropTypes.string,
   description: PropTypes.node,
   FormFieldGridProps: PropTypes.object,
   MuiPickersUtilsProviderProps: PropTypes.object,
@@ -68,7 +69,6 @@ DatePicker.propTypes = {
 
 DatePicker.defaultProps = {
   FormFieldGridProps: {},
-  MuiPickersUtilsProviderProps: {},
   DatePickerProps: {},
 };
 
