@@ -1,4 +1,5 @@
 /* eslint no-console: "off" */
+/*
 import React, { useState } from 'react';
 import componentTypes from '@data-driven-forms/react-form-renderer/component-types';
 import FormBuilder from '@data-driven-forms/form-builder/form-builder';
@@ -218,5 +219,9 @@ const LiveEditor = () => {
     </Root>
   );
 };
+
+*/
+
+const LiveEditor = () => 'TODO: update editor to mui v5';
 
 export default LiveEditor;
