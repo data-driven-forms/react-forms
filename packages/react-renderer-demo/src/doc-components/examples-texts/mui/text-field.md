@@ -5,4 +5,4 @@ import Common from './common.md';
 ### Composite props
 |name|type|default|target component|
 |----|----|-------|----------------|
-|FormFieldGridProps|object|`{}`|[Grid](https://material-ui.com/api/grid/)|
+|FormFieldGridProps|object|`{}`|[Grid](https://mui.com/api/grid/)|

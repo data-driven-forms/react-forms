@@ -5,8 +5,8 @@ import Common from './common.md';
 ### Composite props
 |name|type|default|target component|
 |----|----|-------|----------------|
-|AppBarProps|object|`{}`|[App bar](https://material-ui.com/api/app-bar/#appbar-api)|
-|TabsProps|object|`{}`|[Tabs](https://material-ui.com/api/tabs/)|
-|TabProps|object|`{}`|[Tab](https://material-ui.com/api/tab/)|
-|FormFieldGridProps|object|`{}`|[Grid](https://material-ui.com/api/tab/)|
-|GridItemProps|object|`{}`|[Grid](https://material-ui.com/api/grid/)|
+|AppBarProps|object|`{}`|[App bar](https://mui.com/api/app-bar/#appbar-api)|
+|TabsProps|object|`{}`|[Tabs](https://mui.com/api/tabs/)|
+|TabProps|object|`{}`|[Tab](https://mui.com/api/tab/)|
+|FormFieldGridProps|object|`{}`|[Grid](https://mui.com/api/tab/)|
+|GridItemProps|object|`{}`|[Grid](https://mui.com/api/grid/)|

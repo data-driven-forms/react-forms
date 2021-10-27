@@ -68,8 +68,8 @@ export const dependencies = {
   '@data-driven-forms/react-form-renderer': 'latest',
   '@data-driven-forms/mui-component-mapper': 'latest',
   '@data-driven-forms/common': 'latest',
-  '@material-ui/core': 'latest',
-  '@material-ui/icons': 'latest',
-  '@material-ui/styles': 'latest',
+  '@mui/icons-material': 'latest',
+  '@mui/material': 'latest',
+  '@mui/styles': 'latest',
   'prop-types': 'latest',
 };

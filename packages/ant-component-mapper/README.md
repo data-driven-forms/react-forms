@@ -101,7 +101,7 @@ Data Driven Forms supports all kinds of component, basic set is consisted of:
 ### Useful links
 
 - [Data Driven Forms documentation](https://data-driven-forms.org/)
-- [Material-UI documentation](https://material-ui.com/)
+- [Material-UI documentation](https://mui.com/)
 - NPM
   - [React Form Renderer](https://www.npmjs.com/package/@data-driven-forms/react-form-renderer)
   - [MaterialUI Mapper](https://www.npmjs.com/package/@data-driven-forms/ant-component-mapper)
