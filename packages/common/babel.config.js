@@ -294,7 +294,7 @@ module.exports = {
       presets: [['@babel/preset-env', { modules: 'commonjs' }]],
       plugins: [
         createSuirCJSTransform('commonjs'),
-        createMuiTransform(),
+        createMuiTransform('node'),
         createPfReactTransform('js'),
         createBluePrintTransform('cjs'),
         createAntTransform('cjs'),
@@ -306,7 +306,7 @@ module.exports = {
       presets: [['@babel/preset-env', { modules: false }]],
       plugins: [
         createSuirCJSTransform('es'),
-        createMuiTransform('esm'),
+        createMuiTransform(),
         createPfReactTransform('esm'),
         createBluePrintTransform('esm'),
         createAntTransform('esm'),
