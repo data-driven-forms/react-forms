@@ -36,4 +36,47 @@ MUI mapper provides an option to validate a field when the component is mounted.
 
 This field will show the error immediately.
 
+## Migration to version 5
+
+MaterialUI (now known just as MUI) recently released a version 5 that introduces a lot of new features and some breaking changes. Data Driven Forms follows this release with our integration in `mui-component-mapper`. Due to inability to release new version of packages independently, we are going to introduce new changes as a feature release to not disrupt any other mappers. We deeply apologise for any issues it can introduce, but we agreed that this is the best way that won't break any of our current workflows.
+
+### Migration
+
+#### Convert your app to use MUI 5
+
+Please follow [official migration guide](https://mui.com/guides/migration-v4/). *Note: emotion packages are being installed by the mapper itself.*
+
+#### Use beta version of the mapper
+
+Use `3.16.0-v5-beta` version (or check if there is any newer version of v5 version [here](https://www.npmjs.com/package/@data-driven-forms/mui-component-mapper).)
+
+<br />
+
+**And that's it!**
+
+<br />
+
+`mui-component-mapper` itself does not require any additional migration steps!
+
+Only if you are using `date-picker` or `time-picker`, you have to provide `LocalizationProvider` ([read more](https://mui.com/components/time-picker/#localization)), the components themselves do not longer contain it.
+
+### Feedback
+
+If you encounter any issues, please let us know in [our Issues section](https://github.com/data-driven-forms/react-forms/issues).
+
+### What if I do not want to migrate
+
+Please lock your `mui-component-mapper` version in `package.json`:
+
+```diff
+# package.json
+
++ "@data-driven-forms/mui-component-mapper": "^3.15.5",
+- "@data-driven-forms/mui-component-mapper": "3.15.5",
+```
+
+For any future bug fixes, we will use `3.15` as a base version. (example: next bugfix would be `3.15.6` and these versions will be tagged as `deprecated`.)
+
+In the near future, we will support bugfixes for Material-UI v4 mapper version, but no new features will be implemented. We are open to accept PRs by community. Also, this older version should work with the latest `react-form-renderer` at least until Data Driven Forms version 4 is released.
+
 </DocPage>
