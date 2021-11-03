@@ -1,6 +1,6 @@
 export type DataType = 'integer'|'float'|'number'|'boolean'|'string';
 
-interface dataTypes {
+interface IdataTypes {
   INTEGER: 'integer';
   FLOAT: 'float';
   NUMBER: 'number';
@@ -8,6 +8,6 @@ interface dataTypes {
   STRING: 'string';
 }
 
-declare const dataTypes: dataTypes;
+declare const dataTypes: IdataTypes;
 
 export default dataTypes;
