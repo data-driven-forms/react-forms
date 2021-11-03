@@ -44,16 +44,18 @@ async function generateIndexTypes(from, to) {
         exportName = kebabToCamel(file.split('/').shift());
       }
 
-      let name = fileSource.match(/export default *[a-zA-Z\d;]+\n/gm);
-      if (name !== null) {
-        name = name.pop().replace('export default', '').replace(/\n/, '').replace(';', '').trim();
-      } else {
-        name = kebabToCamel(file.split('/').shift());
-      }
+      if (fileSource) {
+        let name = fileSource.match(/export default *[a-zA-Z\d;]+\n/gm);
+        if (name !== null) {
+          name = name.pop().replace('export default', '').replace(/\n/, '').replace(';', '').trim();
+        } else {
+          name = kebabToCamel(file.split('/').shift());
+        }
 
-      exportName = name;
-      if (!name) {
-        throw new Error(`module name missing!: ${file}\n`);
+        exportName = name;
+        if (!name) {
+          throw new Error(`module name missing!: ${file}\n`);
+        }
       }
     }
 
