@@ -1,7 +1,6 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/styles';
-import theme from '../theme';
 
 class MyDocument extends Document {
   render() {
@@ -15,7 +14,7 @@ class MyDocument extends Document {
           <link rel="apple-touch-icon" href="/192x192.png"></link>
           <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
           {/* PWA primary color */}
-          <meta name="theme-color" content={theme.palette.primary.main} />
+          <meta name="theme-color" content="#430f8f" />
           <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
           <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" />
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
