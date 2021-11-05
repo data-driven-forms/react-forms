@@ -1,6 +1,6 @@
 {
     "name": "@data-driven-forms/react-renderer-demo",
-    "version": "3.15.6",
+    "version": "3.15.7",
     "main": "firebaseFunctions.js",
     "description": "Documentation page for Data Driven Forms.",
     "homepage": "https://data-driven-forms.org/",
