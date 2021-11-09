@@ -28,7 +28,7 @@
     },
     "dependencies": {
         "@actions/github": "^5.0.0",
-        "@data-driven-forms/form-builder": "0.0.12-rc1",
+        "@data-driven-forms/form-builder": "0.0.13-rc1",
         "@data-driven-forms/mui-component-mapper": "*",
         "@data-driven-forms/react-form-renderer": "*",
         "@emotion/react": "^11.4.1",
