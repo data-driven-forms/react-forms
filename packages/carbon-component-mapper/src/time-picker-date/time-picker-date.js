@@ -6,10 +6,12 @@ import prepareProps from '../prepare-props';
 import TimePickerBase from '../time-picker-base';
 
 const TimePickerDate = (props) => {
-  const { input, meta, twelveHoursFormat, timezones, validateOnMount, helperText, WrapperProps, ...rest } = useFieldApi(prepareProps(props));
+  const { input, meta, twelveHoursFormat, timezones, validateOnMount, helperText, WrapperProps, defaultTimezone, ...rest } = useFieldApi(
+    prepareProps(props)
+  );
 
-  const [timezone, selectTimezone] = useState(timezones ? timezones[0]?.value : '');
-  const [format, selectFormat] = useState('AM');
+  const [timezone, selectTimezone] = useState(defaultTimezone || timezones ? timezones[0]?.value : '');
+  const [format, selectFormat] = useState(() => (input.value?.getHours?.() >= 12 ? 'PM' : 'AM'));
   const isMounted = useRef(false);
 
   const invalid = (meta.touched || validateOnMount) && (meta.error || meta.submitError);
@@ -75,6 +77,8 @@ const TimePickerDate = (props) => {
       warnText={warnText}
       selectFormat={selectFormat}
       selectTimezone={selectTimezone}
+      format={format}
+      timezone={timezone}
       {...rest}
     />
   );
@@ -96,6 +100,7 @@ TimePickerDate.propTypes = {
     })
   ),
   WrapperProps: PropTypes.object,
+  defaultTimezone: PropTypes.string,
 };
 
 export default TimePickerDate;

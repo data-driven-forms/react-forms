@@ -4,6 +4,7 @@ This component also accepts all other original props, please see [here](https://
 
 |Props|Description|default|
 |-----|-----------|-------|
+|defaultTimezone|string - a value of default timezone, use only in Date varian|undefined|
 |useStringFormat|boolean - save value as string|false|
 |twelveHoursFormat|boolean - if true an AM/PM selector is shown|false|
 |timezones|array of timezones - if not empty, an timezone selector is shown|undefined|
