@@ -6,7 +6,7 @@ import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template'
 import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 import Select from '@data-driven-forms/mui-component-mapper/select';
 import Wizard from '@data-driven-forms/mui-component-mapper/wizard';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField,

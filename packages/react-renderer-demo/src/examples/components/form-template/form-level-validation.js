@@ -6,14 +6,14 @@ import validatorTypes from '@data-driven-forms/react-form-renderer/validator-typ
 import useFormApi from '@data-driven-forms/react-form-renderer/use-form-api';
 import FormSpy from '@data-driven-forms/react-form-renderer/form-spy';
 import TextField from '@data-driven-forms/mui-component-mapper/text-field';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import { makeStyles } from '@material-ui/core/styles';
-import red from '@material-ui/core/colors/red';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import { styled } from '@mui/material/styles';
+import { red } from '@mui/material/colors';
 
 const componentMapper = {
   [componentTypes.TEXT_FIELD]: TextField,
@@ -48,32 +48,29 @@ const schema = {
   ],
 };
 
-const useFormErrorsStyle = makeStyles(() => ({
-  listError: {
+const StyledError = styled(ListItemText)(() => ({
+  '&.listError': {
     color: red[500], // you can use your theme color if you have theme provider
   },
 }));
 
-const FormErrors = () => {
-  const classes = useFormErrorsStyle();
-  return (
-    <FormSpy>
-      {({ errors }) => (
-        <List>
-          {Object.entries(errors).map(([key, error]) =>
-            error ? (
-              <ListItem button component="li" key={key}>
-                <ListItemText className={classes.listError}>
-                  {key}: {error}
-                </ListItemText>
-              </ListItem>
-            ) : null
-          )}
-        </List>
-      )}
-    </FormSpy>
-  );
-};
+const FormErrors = () => (
+  <FormSpy>
+    {({ errors }) => (
+      <List>
+        {Object.entries(errors).map(([key, error]) =>
+          error ? (
+            <ListItem button component="li" key={key}>
+              <StyledError className={'listError'}>
+                {key}: {error}
+              </StyledError>
+            </ListItem>
+          ) : null
+        )}
+      </List>
+    )}
+  </FormSpy>
+);
 
 const FormTemplate = ({ formFields, schema }) => {
   const { handleSubmit, onReset, onCancel, getState } = useFormApi();

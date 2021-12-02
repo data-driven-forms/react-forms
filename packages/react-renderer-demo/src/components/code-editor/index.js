@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import makeStyles from '@material-ui/core/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import Highlight, { defaultProps } from 'prism-react-renderer/';
 import ghTheme from 'prism-react-renderer/themes/github';
 import vsTheme from 'prism-react-renderer/themes/vsDark';
 import tranformImports from './transform-imports';
 import clsx from 'clsx';
 
-const useStyles = makeStyles({
-  pre: {
+const StyledPre = styled('pre')({
+  '&.pre': {
     maxWidth: '100vw',
     textAlign: 'left',
     margin: '1em 0',
@@ -21,32 +21,27 @@ const useStyles = makeStyles({
   },
 });
 
-const Pre = ({ children, ...props }) => {
-  const classes = useStyles();
-  return (
-    <pre {...props} className={classes.pre}>
-      {children}
-    </pre>
-  );
-};
+const Pre = ({ children, ...props }) => (
+  <StyledPre {...props} className={'pre'}>
+    {children}
+  </StyledPre>
+);
 
 Pre.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)]),
 };
 
-const useStylesCode = makeStyles((theme) => ({
-  wrapper: {
+const Root = styled('div')(({ theme }) => ({
+  '&.wrapper': {
     position: 'relative',
     maxWidth: '100%',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       maxWidth: (props) => (props.inExample ? '100%' : 'calc(100vw - 64px)'),
     },
   },
 }));
 
 const CodeEditor = ({ value, children, className, inExample, editorClassname, keepLastLine }) => {
-  const classes = useStylesCode({ inExample });
-
   const lang = className ? className.toLowerCase().replace('language-', '') : undefined;
   let content = value || children || '';
 
@@ -64,7 +59,7 @@ const CodeEditor = ({ value, children, className, inExample, editorClassname, ke
   content = keepLastLine ? content : content.substring(0, content.length - 1);
 
   return (
-    <div className={clsx(classes.wrapper, editorClassname)}>
+    <Root className={clsx('wrapper', editorClassname)}>
       <Highlight {...defaultProps} theme={lang === 'bash' ? ghTheme : vsTheme} code={content} language={lang || 'jsx'}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <Pre className={className} style={style}>
@@ -80,7 +75,7 @@ const CodeEditor = ({ value, children, className, inExample, editorClassname, ke
           </Pre>
         )}
       </Highlight>
-    </div>
+    </Root>
   );
 };
 

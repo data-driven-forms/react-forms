@@ -1,12 +1,18 @@
 import React from 'react';
+import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
-import { Typography, Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Typography, Grid } from '@mui/material';
 
 import { useFormApi } from '@data-driven-forms/react-form-renderer';
 
-const useStyles = makeStyles(() => ({
-  grid: {
+const PREFIX = 'SubForm';
+
+const classes = {
+  grid: `${PREFIX}-grid`,
+};
+
+const StyledGrid = styled(Grid)(() => ({
+  [`&.${classes.grid}`]: {
     paddingRight: 0,
     paddingLeft: 0,
   },
@@ -25,10 +31,8 @@ const SubForm = ({
   ...rest
 }) => {
   const { renderForm } = useFormApi();
-  const classes = useStyles();
-
   return (
-    <Grid item xs={12} container className={classes.grid} {...rest}>
+    <StyledGrid item xs={12} container className={classes.grid} {...rest}>
       {title && (
         <Grid item xs={12} {...TitleGridProps}>
           <Typography variant="h5" {...TitleProps}>
@@ -43,10 +47,10 @@ const SubForm = ({
           </Typography>
         </Grid>
       )}
-      <Grid item xs={12} container {...ItemsGridProps}>
+      <Grid item xs={12} container rowSpacing={2} {...ItemsGridProps}>
         {renderForm(fields)}
       </Grid>
-    </Grid>
+    </StyledGrid>
   );
 };
 

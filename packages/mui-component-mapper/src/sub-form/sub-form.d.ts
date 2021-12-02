@@ -1,5 +1,5 @@
 import { Field } from "@data-driven-forms/react-form-renderer";
-import { GridProps, TypographyProps } from "@material-ui/core";
+import { GridProps, TypographyProps } from "@mui/material";
 import { ReactNode } from "react";
 
 export interface SubFormProps {

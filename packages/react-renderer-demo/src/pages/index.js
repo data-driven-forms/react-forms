@@ -1,19 +1,20 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import Link from 'next/link';
 import { Star } from 'react-github-buttons';
 
 import LandingPageTitle from '@docs/components/landing-page/landing-page-title';
 import LandingPageCards from '@docs/components/landing-page/landing-page-cards';
 
-const useStyles = makeStyles((theme) => ({
-  landingPageContainer: {
+import { styled } from '@mui/material/styles';
+
+const Root = styled(Typography)(({ theme }) => ({
+  '&.landing-page-root': {
     marginTop: 128,
     paddingBottom: 48,
   },
-  landingPageText: {
+  '& .landing-page-text': {
     marginTop: 48,
     textAlign: 'center',
     color: theme.palette.common.white,
@@ -21,28 +22,29 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     marginRight: 'auto',
   },
-  getStartedLink: {
+  '& .landing-page-get-started-link': {
     display: 'block',
     textAlign: 'center',
     marginTop: 48,
   },
-  npmLink: {
+  '& .landing-page-npm-link': {
     display: 'flex',
     justifyContent: 'center',
     marginTop: 24,
   },
-  getStartedAnchor: {
+  '& .get-started-anchor': {
     textDecoration: 'none',
   },
-  getStartedButton: {
+  '& .get-started-button': {
     border: `1px solid ${theme.palette.common.white}`,
     borderRadius: 2,
     color: theme.palette.common.white,
+    padding: 5,
     paddingLeft: 16,
     paddingRight: 16,
     textTransform: 'none',
   },
-  gitHubStar: {
+  '& .github-star': {
     textDecoration: 'none',
     '& button': {
       lineHeight: 1.43,
@@ -58,36 +60,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LandingPage = () => {
-  const classes = useStyles();
-  return (
-    <React.Fragment>
-      <div className={classes.landingPageContainer}>
-        <LandingPageTitle />
-        <Typography className={classes.landingPageText}>
-          Data Driven Forms converts JSON form definitions into fully functional React forms.
-        </Typography>
-        <div className={classes.getStartedLink}>
-          <Link href="/introduction">
-            <a className={classes.getStartedAnchor} href="/introduction">
-              <Button variant="outlined" className={classes.getStartedButton}>
-                Get started
-              </Button>
-            </a>
-          </Link>
-        </div>
-        <div className={classes.npmLink}>
-          <span className={classes.gitHubStar}>
-            <Star owner="data-driven-forms" repo="react-forms" />
-          </span>
-          <a href="https://badge.fury.io/js/%40data-driven-forms%2Freact-form-renderer" rel="noopener noreferrer" target="_blank">
-            <img src="https://badge.fury.io/js/%40data-driven-forms%2Freact-form-renderer.svg" alt="current version" />
+const LandingPage = () => (
+  <React.Fragment>
+    <Root className="landing-page-root" as="div">
+      <LandingPageTitle />
+      <Typography className="landing-page-text">Data Driven Forms converts JSON form definitions into fully functional React forms.</Typography>
+      <div className="landing-page-get-started-link">
+        <Link href="/introduction">
+          <a className="get-started-anchor" href="/introduction">
+            <Button variant="outlined" className="get-started-button">
+              Get started
+            </Button>
           </a>
-        </div>
+        </Link>
       </div>
-      <LandingPageCards />
-    </React.Fragment>
-  );
-};
+      <div className="landing-page-npm-link">
+        <span className="github-star">
+          <Star owner="data-driven-forms" repo="react-forms" />
+        </span>
+        <a href="https://badge.fury.io/js/%40data-driven-forms%2Freact-form-renderer" rel="noopener noreferrer" target="_blank">
+          <img src="https://badge.fury.io/js/%40data-driven-forms%2Freact-form-renderer.svg" alt="current version" />
+        </a>
+      </div>
+    </Root>
+    <LandingPageCards />
+  </React.Fragment>
+);
 
 export default LandingPage;

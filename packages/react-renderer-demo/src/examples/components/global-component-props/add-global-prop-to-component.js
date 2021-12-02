@@ -1,25 +1,24 @@
 import React from 'react';
+import { styled } from '@mui/material/styles';
 import FormRenderer from '@data-driven-forms/react-form-renderer/form-renderer';
 import componentTypes from '@data-driven-forms/react-form-renderer/component-types';
 import Switch from '@data-driven-forms/mui-component-mapper/switch';
 import TextField from '@data-driven-forms/mui-component-mapper/text-field';
 import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template';
-import { makeStyles } from '@material-ui/core/styles';
 
-const useInputClasses = makeStyles({
-  root: {
+const StyledTextInput = styled(TextField)(() => ({
+  '&.root': {
     '& label': {
       color: 'tomato',
     },
   },
-});
+}));
 
 const AddGlobalPropToComponent = () => {
-  const inputClasses = useInputClasses();
   const componentMapper = {
     [componentTypes.TEXT_FIELD]: {
-      component: TextField,
-      classes: inputClasses,
+      component: StyledTextInput,
+      classNamep: 'root',
     },
     [componentTypes.SWITCH]: {
       component: Switch,

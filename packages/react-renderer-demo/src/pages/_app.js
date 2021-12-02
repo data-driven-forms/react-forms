@@ -1,8 +1,9 @@
 import React from 'react';
 import App from 'next/app';
 import Head from 'next/head';
-import { ThemeProvider } from '@material-ui/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import { StyledEngineProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import theme from '../theme';
 import Layout from '@docs/components/layout';
 import { MDXProvider } from '@mdx-js/react';
@@ -25,15 +26,17 @@ export default class MyApp extends App {
         <Head>
           <title>Data driven forms</title>
         </Head>
-        <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <MDXProvider components={MdxComponents}>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </MDXProvider>
-        </ThemeProvider>
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <CssBaseline />
+            <MDXProvider components={MdxComponents}>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </MDXProvider>
+          </ThemeProvider>
+        </StyledEngineProvider>
       </React.Fragment>
     );
   }

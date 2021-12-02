@@ -1,25 +1,30 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
-import { FormLabel } from '@material-ui/core';
+import { FormLabel } from '@mui/material';
 import MultipleChoiceListCommon from '@data-driven-forms/common/multiple-choice-list';
 import { FormRenderer, componentTypes, validatorTypes } from '@data-driven-forms/react-form-renderer';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+
 import Checkbox from '../checkbox';
 
 import RenderWithProvider from '../../../../__mocks__/with-provider';
 import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
-import { Radio } from '@material-ui/core';
+import { Radio } from '@mui/material';
 
 const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (
-  <FormRenderer
-    onSubmit={jest.fn()}
-    FormTemplate={(props) => <FormTemplate {...props} />}
-    schema={schema}
-    componentMapper={componentMapper}
-    subscription={{ submitFailed: true }}
-    {...props}
-  />
+  <LocalizationProvider dateAdapter={AdapterDateFns}>
+    <FormRenderer
+      onSubmit={jest.fn()}
+      FormTemplate={(props) => <FormTemplate {...props} />}
+      schema={schema}
+      componentMapper={componentMapper}
+      subscription={{ submitFailed: true }}
+      {...props}
+    />
+  </LocalizationProvider>
 );
 
 describe('formFields', () => {
@@ -172,7 +177,7 @@ describe('formFields', () => {
           };
           const wrapper = mount(<RendererWrapper schema={{ fields: [requiredField] }} />);
 
-          expect(wrapper.find('.MuiFormLabel-asterisk')).toHaveLength(1);
+          expect(wrapper.find('span.MuiFormLabel-asterisk')).toHaveLength(1);
         });
 
         it('renders isDisabled', () => {
@@ -184,8 +189,6 @@ describe('formFields', () => {
 
           if (component === componentTypes.TEXTAREA) {
             expect(wrapper.find('textarea').first().props().disabled).toEqual(true);
-          } else if (component === componentTypes.SLIDER) {
-            expect(wrapper.find('.Mui-disabled')).toHaveLength(2);
           } else {
             expect(wrapper.find('input').first().props().disabled).toEqual(true);
           }
@@ -201,7 +204,7 @@ describe('formFields', () => {
           if (component === componentTypes.TEXTAREA) {
             expect(wrapper.find('textarea').first().props().readOnly).toEqual(true);
           } else if (component === componentTypes.SLIDER) {
-            expect(wrapper.find('.Mui-disabled')).toHaveLength(2);
+            expect(wrapper.find('input').first().props().disabled).toEqual(true);
           } else {
             expect(wrapper.find('input').first().props().readOnly).toEqual(true);
           }

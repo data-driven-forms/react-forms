@@ -1,18 +1,24 @@
 import React, { useContext } from 'react';
+import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
 import { WizardContext } from '@data-driven-forms/react-form-renderer';
 
-import { Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from '@mui/material';
 
 import Wizard from '@data-driven-forms/common/wizard';
 import WizardNav from './wizard-nav';
 import WizardStepButtons from './step-buttons';
 
-const useStyles = makeStyles(() => ({
-  wizardBody: {
+const PREFIX = 'MuiWizard';
+
+const classes = {
+  wizardBody: `${PREFIX}-wizardBody`,
+};
+
+const StyledWizard = styled(Grid)(() => ({
+  [`& .${classes.wizardBody}`]: {
     padding: 24,
     margin: 0,
   },
@@ -20,8 +26,6 @@ const useStyles = makeStyles(() => ({
 
 const WizardInternal = ({ buttonLabels, stepsInfo, ButtonContainerProps, StepperProps, WizardBodyProps, WizardProps, conditionalSubmitFlag }) => {
   const { formOptions, currentStep, handlePrev, onKeyDown, handleNext, activeStepIndex, prevSteps } = useContext(WizardContext);
-
-  const classes = useStyles();
 
   const buttonLabelsFinal = {
     next: 'Continue',
@@ -32,7 +36,7 @@ const WizardInternal = ({ buttonLabels, stepsInfo, ButtonContainerProps, Stepper
   };
 
   return (
-    <Grid container spacing={3} {...WizardProps} onKeyDown={onKeyDown}>
+    <StyledWizard container {...WizardProps} onKeyDown={onKeyDown}>
       {stepsInfo && <WizardNav StepperProps={StepperProps} stepsInfo={stepsInfo} activeStepIndex={activeStepIndex} />}
       <Grid container spacing={2} {...WizardBodyProps} className={clsx(classes.wizardBody, WizardBodyProps.className)}>
         {currentStep.fields.map((item) => formOptions.renderForm([item], formOptions))}
@@ -47,7 +51,7 @@ const WizardInternal = ({ buttonLabels, stepsInfo, ButtonContainerProps, Stepper
           ButtonContainerProps={ButtonContainerProps}
         />
       </Grid>
-    </Grid>
+    </StyledWizard>
   );
 };
 

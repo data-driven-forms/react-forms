@@ -1,24 +1,31 @@
 import React from 'react';
+import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
+import IconButton from '@mui/material/IconButton';
 
-import IconButton from '@material-ui/core/IconButton';
+import LanguageIcon from '@mui/icons-material/Language';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
-import LanguageIcon from '@material-ui/icons/Language';
-import GitHubIcon from '@material-ui/icons/GitHub';
+const PREFIX = 'ComponentMapperBar';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
+const classes = {
+  root: `${PREFIX}-root`,
+  npm: `${PREFIX}-npm`,
+};
+
+const Root = styled('div')(({ theme }) => ({
+  [`&.${classes.root}`]: {
     display: 'flex',
     flexDirection: 'row-reverse',
     marginTop: -48,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: 'initial',
       flexDirection: 'row',
     },
   },
-  npm: {
+
+  [`& .${classes.npm}`]: {
     display: 'grid',
     '& img': {
       margin: 'auto',
@@ -27,10 +34,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ComponentMapperBar = ({ prefix, href }) => {
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
+    <Root className={classes.root}>
       <a
         href={`https://badge.fury.io/js/%40data-driven-forms%2F${prefix}-component-mapper`}
         rel="noopener noreferrer"
@@ -39,7 +44,7 @@ const ComponentMapperBar = ({ prefix, href }) => {
       >
         <img src={`https://badge.fury.io/js/%40data-driven-forms%2F${prefix}-component-mapper.svg`} alt="current version" />
       </a>
-      <IconButton aria-label="web" title="Library web" href={href} rel="noopener noreferrer" target="_blank">
+      <IconButton aria-label="web" title="Library web" href={href} rel="noopener noreferrer" target="_blank" size="large">
         <LanguageIcon />
       </IconButton>
       <IconButton
@@ -48,10 +53,11 @@ const ComponentMapperBar = ({ prefix, href }) => {
         href={`https://github.com/data-driven-forms/react-forms/tree/master/packages/${prefix}-component-mapper`}
         rel="noopener noreferrer"
         target="_blank"
+        size="large"
       >
         <GitHubIcon />
       </IconButton>
-    </div>
+    </Root>
   );
 };
 

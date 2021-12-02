@@ -5,9 +5,9 @@ import ComponentMapperBar from '@docs/component-mapper-bar';
 
 # MaterialUI mapper
 
-<ComponentMapperBar prefix="mui" href="https://material-ui.com/" />
+<ComponentMapperBar prefix="mui" href="https://mui.com/" />
 
-MaterialUI mapper provides components from [MaterialUI React library](https://material-ui.com/).
+MaterialUI mapper provides components from [MaterialUI React library](https://mui.com/).
 
 ## Installation
 
@@ -19,7 +19,7 @@ or
 yarn add @data-driven-forms/mui-component-mapper
 ```
 
-MaterialUI has to be installed seperately. Please follow their [guidelines](https://material-ui.com/getting-started/installation/).
+MaterialUI has to be installed seperately. Please follow their [guidelines](https://mui.com/getting-started/installation/).
 
 ## ValidateOnMount
 
