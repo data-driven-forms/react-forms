@@ -95,6 +95,7 @@ const Root = styled('div')(({ theme }) => ({
 
   [`& .${classes.indicator}`]: {
     width: 4,
+    backgroundColor: '#f50057',
   },
 
   [`& .${classes.tabLink}`]: {
@@ -116,6 +117,7 @@ const Root = styled('div')(({ theme }) => ({
     top: 'calc(50% - 40px)',
     left: 'calc(50% - 40px)',
     zIndex: -1,
+    color: '#f50057',
   },
 
   [`& .${classes.editorContainer}`]: {
@@ -341,7 +343,7 @@ const ComponentExample = ({ variants, schema, activeMapper, component, schemaVar
             </Tabs>
             <div id="code-target" className="pepa"></div>
             <div className={classes.spinner}>
-              <CircularProgress color="secondary" size={80} />
+              <CircularProgress color="inherit" size={80} />
             </div>
           </div>
         </Box>
@@ -353,6 +355,8 @@ const ComponentExample = ({ variants, schema, activeMapper, component, schemaVar
           target="_blank"
           href={originalComponentLink(activeMapper, activeComponent)}
           startIcon={<LinkIcon />}
+          color="inherit"
+          sx={{ borderColor: '#c6c6c6' }}
         >
           Original documentation
         </Button>
@@ -362,6 +366,8 @@ const ComponentExample = ({ variants, schema, activeMapper, component, schemaVar
           target="_blank"
           href={`https://github.com/data-driven-forms/react-forms/blob/master/packages/${activeMapper}-component-mapper/src/${activeComponent}/${activeComponent}.js`}
           startIcon={<GhIcon />}
+          color="inherit"
+          sx={{ borderColor: '#c6c6c6' }}
         >
           DDF implementation
         </Button>
