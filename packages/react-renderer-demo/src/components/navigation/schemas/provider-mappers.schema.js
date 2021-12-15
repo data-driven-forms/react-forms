@@ -37,6 +37,15 @@ const providedMappersSchema = [
   {
     subHeader: true,
     noRoute: true,
+    title: 'Community mappers',
+  },
+  {
+    link: 'aws-northstar',
+    linkText: 'AWS Northstar',
+  },
+  {
+    subHeader: true,
+    noRoute: true,
     title: 'Mapper components',
   },
   ...baseExamples.sort((a, b) => a.linkText.localeCompare(b.linkText)),
