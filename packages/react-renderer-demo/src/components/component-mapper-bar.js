@@ -33,16 +33,16 @@ const Root = styled('div')(({ theme }) => ({
   },
 }));
 
-const ComponentMapperBar = ({ prefix, href }) => {
+const ComponentMapperBar = ({ prefix, href, github, npm, npmSvg }) => {
   return (
     <Root className={classes.root}>
       <a
-        href={`https://badge.fury.io/js/%40data-driven-forms%2F${prefix}-component-mapper`}
+        href={npm || `https://badge.fury.io/js/%40data-driven-forms%2F${prefix}-component-mapper`}
         rel="noopener noreferrer"
         target="_blank"
         className={classes.npm}
       >
-        <img src={`https://badge.fury.io/js/%40data-driven-forms%2F${prefix}-component-mapper.svg`} alt="current version" />
+        <img src={npmSvg || `https://badge.fury.io/js/%40data-driven-forms%2F${prefix}-component-mapper.svg`} alt="current version" />
       </a>
       <IconButton aria-label="web" title="Library web" href={href} rel="noopener noreferrer" target="_blank" size="large">
         <LanguageIcon />
@@ -50,7 +50,7 @@ const ComponentMapperBar = ({ prefix, href }) => {
       <IconButton
         aria-label="github"
         title="Git Hub package"
-        href={`https://github.com/data-driven-forms/react-forms/tree/master/packages/${prefix}-component-mapper`}
+        href={github || `https://github.com/data-driven-forms/react-forms/tree/master/packages/${prefix}-component-mapper`}
         rel="noopener noreferrer"
         target="_blank"
         size="large"
@@ -64,6 +64,9 @@ const ComponentMapperBar = ({ prefix, href }) => {
 ComponentMapperBar.propTypes = {
   prefix: PropTypes.string.isRequired,
   href: PropTypes.string.isRequired,
+  github: PropTypes.string.isRequired,
+  npm: PropTypes.string.isRequired,
+  npmSvg: PropTypes.string.isRequired,
 };
 
 export default ComponentMapperBar;
