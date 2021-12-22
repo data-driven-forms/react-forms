@@ -147,6 +147,14 @@ const Root = styled('div')(({ theme }) => ({
   [`& .${classes.variantTabs}`]: {
     height: 49,
     background: '#eaeaea',
+
+    '& .Mui-selected': {
+      color: 'black',
+    },
+
+    '& .MuiTabs-indicator': {
+      backgroundColor: '#f50057',
+    },
   },
 
   [`& .${classes.hidden}`]: {
