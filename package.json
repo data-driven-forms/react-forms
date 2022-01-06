@@ -85,6 +85,7 @@
     "@khala/commit-analyzer-wildcard": "^2.5.2",
     "@khala/npm-release-monorepo": "^2.5.2",
     "@khala/wildcard-release-notes": "^2.5.2",
+    "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^9.0.1",
     "@semantic-release/github": "^7.2.3",
     "@semantic-release/npm": "^7.1.3",
@@ -177,6 +178,11 @@
             "packages/*/package.json"
           ],
           "message": "Release of new version: ${nextRelease.version} <no> [skip ci]"
+        }
+      ],
+      [
+        "@semantic-release/exec", {
+          "prepareCmd": "node ./scripts/update-common.js ${nextRelease.version}"
         }
       ]
     ]
