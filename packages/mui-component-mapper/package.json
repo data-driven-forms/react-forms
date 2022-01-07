@@ -30,7 +30,7 @@
     "@mui/styles": "^5.0.2"
   },
   "peerDependencies": {
-    "@data-driven-forms/react-form-renderer": ">=3.2.1",
+    "@data-driven-forms/react-form-renderer": "*",
     "@mui/icons-material": "^5.0.5",
     "@mui/material": "^5.0.6",
     "@mui/styles": "^5.0.2",

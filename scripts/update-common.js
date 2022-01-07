@@ -12,12 +12,12 @@ const files = glob.sync(`${root}/packages/*/package.json`);
 console.log('Files to replace: ', files.join(',\n'), '\n');
 console.log('Replacing to: ', `"@data-driven-forms/common": "^${nextVersion}"`, '\n');
 
-const optionTypeScriptPath = {
+const replaceConfig = {
   files,
-  from: '"@data-driven-forms/common": "*"',
-  to: `"@data-driven-forms/common": "^${nextVersion}"`,
+  from: ['"@data-driven-forms/common": "*"', '"@data-driven-forms/react-form-renderer": "*"'],
+  to: [`"@data-driven-forms/common": "^${nextVersion}"`, `"@data-driven-forms/react-form-renderer": "^${nextVersion}"`],
 };
 
-(async () => await replace(optionTypeScriptPath))();
+(async () => await replace(replaceConfig))();
 
 console.log('Common package version successfully updated!\n');
