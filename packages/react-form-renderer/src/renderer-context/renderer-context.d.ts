@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { FormApi } from 'final-form';
 import ComponentMapper from '../common-types/component-mapper';
 import { ValidatorMapper } from '../validator-mapper';
@@ -28,8 +28,6 @@ export interface RendererContextValue {
   formOptions: FormOptions;
 }
 
-interface RendererContext {
-  value: RendererContextValue;
-}
+declare const RendererContext: React.Context<RendererContextValue>;
 
 export default RendererContext;
