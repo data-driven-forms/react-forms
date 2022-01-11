@@ -51,16 +51,35 @@ export const collectLegacyConditions = ({fields}) => {
     if (!condition) return;
 
     const key = `legacy-${name}-${counter}`;
+    const {when, and, is, not, or, isEmpty, isNotEmpty, notMatch, pattern} = condition;
+
+    let thenClause;
+    let elseClause;
+    if (condition.then) {
+    } else {
+      thenClause = {
+        [name]: {visible: false},
+      };
+    }
+
+    if (condition.else) {
+    } else {
+      elseClause = {
+        [name]: {visible: true},
+      };
+    }
 
     conditions[key] = {
-      when: condition.when,
-      is: condition.is,
-      then: {
-        [name]: {visible: false},
-      },
-      else: {
-        [name]: {visible: true},
-      },
+      when,
+      is,
+      and,
+      or,
+      isEmpty,
+      isNotEmpty,
+      notMatch,
+      pattern,
+      then: thenClause,
+      else: elseClause,
     };
 
     prevName = name;
