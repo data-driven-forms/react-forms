@@ -1,12 +1,12 @@
 const TerserPlugin = require('terser-webpack-plugin');
 const withMDX = require('@next/mdx')({
-  extension: /\.mdx?$/
+  extension: /\.mdx?$/,
 });
 const path = require('path');
 const withOffline = require('next-offline');
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true'
+  enabled: process.env.ANALYZE === 'true',
 });
 
 module.exports = withBundleAnalyzer(
@@ -21,9 +21,9 @@ module.exports = withBundleAnalyzer(
             options: {
               cacheName: 'offlineCache',
               expiration: {
-                maxEntries: 200
-              }
-            }
+                maxEntries: 200,
+              },
+            },
           },
           {
             urlPattern: /\.(png|svg)$/,
@@ -31,9 +31,9 @@ module.exports = withBundleAnalyzer(
             options: {
               cacheName: 'imageCache',
               expiration: {
-                maxEntries: 200
-              }
-            }
+                maxEntries: 200,
+              },
+            },
           },
           {
             urlPattern: /data-driven-forms.firebaseio.com/,
@@ -42,12 +42,12 @@ module.exports = withBundleAnalyzer(
               cacheableResponse: {
                 statuses: [0, 200],
                 headers: {
-                  'x-test': 'true'
-                }
-              }
-            }
-          }
-        ]
+                  'x-test': 'true',
+                },
+              },
+            },
+          },
+        ],
       },
       crossOrigin: 'anonymous',
       pageExtensions: ['js', 'jsx', 'md', 'mdx'],
@@ -64,7 +64,7 @@ module.exports = withBundleAnalyzer(
           '@docs/code-example': path.resolve(__dirname, './components/code-example'),
           '@docs/hooks': path.resolve(__dirname, './hooks'),
           '@docs/doc-page': path.resolve(__dirname, './components/doc-page'),
-          '@docs/component-mapper-bar': path.resolve(__dirname, './components/component-mapper-bar')
+          '@docs/component-mapper-bar': path.resolve(__dirname, './components/component-mapper-bar'),
         };
 
         config.optimization.minimizer = [
@@ -72,12 +72,12 @@ module.exports = withBundleAnalyzer(
             parallel: false,
             terserOptions: {
               keep_classnames: true, // eslint-disable-line camelcase
-              keep_fnames: true // eslint-disable-line camelcase
-            }
-          })
+              keep_fnames: true, // eslint-disable-line camelcase
+            },
+          }),
         ];
         return config;
-      }
+      },
     })
   )
 );
