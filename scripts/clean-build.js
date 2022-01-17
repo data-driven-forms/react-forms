@@ -9,15 +9,30 @@ const glob = require('glob');
 const root = path.resolve(__dirname, '../');
 const x = glob.sync(path.resolve(root, './packages/*'));
 
+const ignore = fse.readFileSync(path.resolve(root, './.gitignore'), 'utf8');
+const ignores = ignore
+  .split('\n')
+  .filter((line) => !(line.length === 0 || line[0] === '#'))
+  .filter((item) => !item.includes('node_modules'));
+
 function cleanPackage(p) {
-  const ignore = fse.readFileSync(path.resolve(p, './.gitignore'), 'utf8');
-  const ignores = ignore
-    .split('\n')
-    .filter((line) => !(line.length === 0 || line[0] === '#'))
-    .filter((item) => !item.includes('node_modules'));
+  let packageIgnore;
+  let packageIgnores;
+
+  // try to load package specific gitignore
+  try {
+    packageIgnore = fse.readFileSync(path.resolve(p, './.gitignore'), 'utf8');
+    if(packageIgnore) {
+      packageIgnores = packageIgnore
+      .split('\n')
+      .filter((line) => !(line.length === 0 || line[0] === '#'))
+      .filter((item) => !item.includes('node_modules'));
+    }
+  } catch {}
+
   const positive = [];
   const negative = [];
-  ignores.forEach((item) => {
+  (packageIgnores || ignores).forEach((item) => {
     if (item[0] === '!') {
       negative.push(item.replace(/^!/, ''));
     } else {
