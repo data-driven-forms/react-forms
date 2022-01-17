@@ -94,7 +94,7 @@
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "babel-plugin-transform-imports": "^2.0.0",
     "dtslint": "^4.2.1",
-    "eslint": "^8.7.0",
+    "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-react-app": "^7.0.0",
     "eslint-loader": "^4.0.2",
