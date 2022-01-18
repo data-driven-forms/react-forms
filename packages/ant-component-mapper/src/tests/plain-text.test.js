@@ -1,14 +1,13 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
-import { Typography } from 'antd';
 
 describe('<PlainText />', () => {
-  it('renders multiple checkbox', () => {
+  it('renders correctly', () => {
     const schema = {
       fields: [
         {
@@ -19,10 +18,10 @@ describe('<PlainText />', () => {
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
     );
 
-    expect(wrapper.find(Typography.Paragraph).text()).toEqual('I am happy text');
+    expect(screen.getByText('I am happy text')).toBeInTheDocument();
   });
 });

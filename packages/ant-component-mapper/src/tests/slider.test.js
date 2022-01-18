@@ -1,9 +1,9 @@
 import React from 'react';
 import { Form as DDFForm, RendererContext } from '@data-driven-forms/react-form-renderer';
-import { mount } from 'enzyme';
-import { Slider as AntSlider, Form as OriginalForm } from 'antd';
+import { render, screen } from '@testing-library/react';
+
+import { Form as OriginalForm } from 'antd';
 import Slider from '../slider';
-import FormGroup from '../form-group';
 
 const Form = (props) => (
   <OriginalForm>
@@ -20,26 +20,29 @@ describe('<Slider />', () => {
   };
 
   it('should render default slider with label', () => {
-    const wrapper = mount(<Form>{() => <Slider {...initialProps} />}</Form>);
-    expect(wrapper.find(AntSlider)).toHaveLength(1);
-    expect(wrapper.find(FormGroup)).toHaveLength(1);
+    render(<Form>{() => <Slider {...initialProps} />}</Form>);
+
+    expect(screen.getByRole('slider')).toBeInTheDocument();
+    expect(screen.getByText('Slider')).toBeInTheDocument();
   });
 
   it('should have disabled prop when isDisabled is passed', () => {
-    const wrapper = mount(<Form>{() => <Slider {...initialProps} isDisabled />}</Form>);
-    expect(wrapper.find(AntSlider).prop('disabled')).toBe(true);
+    render(<Form>{() => <Slider {...initialProps} isDisabled />}</Form>);
+
+    expect(screen.getByRole('slider')).toHaveAttribute('aria-disabled', 'true');
   });
 
   it('should set value to array after first render if range propery is true', () => {
-    const wrapper = mount(<Form>{() => <Slider {...initialProps} range isDisabled />}</Form>);
-    wrapper.update();
-    expect(wrapper.find(AntSlider).prop('value')).toEqual([0, 100]);
+    render(<Form>{() => <Slider {...initialProps} range isDisabled />}</Form>);
+
+    expect(screen.getAllByRole('slider')[0]).toHaveAttribute('aria-valuenow', '0');
+    expect(screen.getAllByRole('slider')[1]).toHaveAttribute('aria-valuenow', '100');
   });
 
   it('min/max should default to 0/100', () => {
-    const wrapper = mount(<Form>{() => <Slider {...initialProps} />}</Form>);
-    wrapper.update();
-    expect(wrapper.find(AntSlider).prop('min')).toBe(0);
-    expect(wrapper.find(AntSlider).prop('max')).toBe(100);
+    render(<Form>{() => <Slider {...initialProps} />}</Form>);
+
+    expect(screen.getByRole('slider')).toHaveAttribute('aria-valuemin', '0');
+    expect(screen.getByRole('slider')).toHaveAttribute('aria-valuemax', '100');
   });
 });

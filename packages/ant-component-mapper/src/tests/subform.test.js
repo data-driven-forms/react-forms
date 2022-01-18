@@ -1,18 +1,12 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
-import WrapperTextField from '../text-field';
-import WrapperSlider from '../slider';
-import SubForm from '../sub-form';
-import { Typography } from 'antd';
 
-const { Title, Paragraph } = Typography;
-
-describe('<Tabs />', () => {
+describe('<Subform />', () => {
   it('renders correctly', () => {
     const schema = {
       fields: [
@@ -23,20 +17,19 @@ describe('<Tabs />', () => {
           description: 'desc',
           fields: [
             { component: componentTypes.SLIDER, name: 'slider' },
-            { component: componentTypes.TEXT_FIELD, name: 'text_field' },
+            { component: componentTypes.TEXT_FIELD, name: 'text_field', 'aria-label': 'text-field' },
           ],
         },
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
     );
 
-    expect(wrapper.find(SubForm)).toHaveLength(1);
-    expect(wrapper.find(WrapperTextField)).toHaveLength(1);
-    expect(wrapper.find(WrapperSlider)).toHaveLength(1);
-    expect(wrapper.find(Title).text()).toEqual('Title');
-    expect(wrapper.find(Paragraph).text()).toEqual('desc');
+    expect(screen.getByText('Title')).toBeInTheDocument();
+    expect(screen.getByText('desc')).toBeInTheDocument();
+    expect(screen.getByRole('slider')).toBeInTheDocument();
+    expect(screen.getByLabelText('text-field')).toBeInTheDocument();
   });
 });

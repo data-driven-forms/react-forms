@@ -1,12 +1,11 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { act } from 'react-dom/test-utils';
+import { act, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
 import { validatorTypes } from '@data-driven-forms/react-form-renderer';
-import FormGroupWrapper from '../form-group';
 
 describe('formFields generated tests', () => {
   const RendererWrapper = ({ schema = { fields: [] }, ...props }) => (
@@ -67,17 +66,15 @@ describe('formFields generated tests', () => {
         });
 
         it('renders correctly', () => {
-          const wrapper = mount(<RendererWrapper schema={schema} />);
+          render(<RendererWrapper schema={schema} />);
 
           if (component === componentTypes.RADIO) {
-            expect(wrapper.find('.ant-radio-wrapper')).toHaveLength(options.length);
-          } else {
-            expect(wrapper.find(componentMapper[component])).toHaveLength(1);
-            expect(wrapper.find('label').text().includes(field.label)).toEqual(true);
+            options.forEach((option) => {
+              expect(screen.getByText(option.label)).toBeInTheDocument();
+            });
           }
 
-          expect(wrapper.find(FormGroupWrapper)).toHaveLength(1);
-          expect(wrapper.find('.ant-form-item-explain')).toHaveLength(0);
+          expect(screen.getByText(field.label)).toBeInTheDocument();
         });
 
         it('renders with error', async () => {
@@ -85,13 +82,13 @@ describe('formFields generated tests', () => {
             ...field,
             validate: [{ type: validatorTypes.REQUIRED }],
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [errorField] }} />);
+          render(<RendererWrapper schema={{ fields: [errorField] }} />);
+
           await act(async () => {
-            wrapper.find('form').simulate('submit');
+            userEvent.click(screen.getByText('Submit'));
           });
-          wrapper.update();
-          expect(wrapper.find('.ant-form-item-explain').last().text()).toEqual(errorText);
-          expect(wrapper.find('.ant-form-item-has-error').length).toBeGreaterThanOrEqual(1);
+
+          expect(screen.getByText(errorText)).toBeInTheDocument();
         });
 
         it('renders with warning', async () => {
@@ -101,15 +98,12 @@ describe('formFields generated tests', () => {
             useWarnings: true,
             validateOnMount: true,
           };
-          let wrapper;
 
           await act(async () => {
-            wrapper = mount(<RendererWrapper schema={{ fields: [errorField] }} />);
+            render(<RendererWrapper schema={{ fields: [errorField] }} />);
           });
-          wrapper.update();
 
-          expect(wrapper.find('.ant-form-item-explain').last().text()).toEqual(errorText);
-          expect(wrapper.find('.ant-form-item-has-warning').length).toBeGreaterThanOrEqual(1);
+          expect(screen.getByText(errorText)).toBeInTheDocument();
         });
 
         it('renders with error and validateOnMount', async () => {
@@ -118,13 +112,11 @@ describe('formFields generated tests', () => {
             validate: [{ type: validatorTypes.REQUIRED }],
             validateOnMount: true,
           };
-          let wrapper;
           await act(async () => {
-            wrapper = mount(<RendererWrapper schema={{ fields: [errorField] }} />);
+            render(<RendererWrapper schema={{ fields: [errorField] }} />);
           });
-          wrapper.update();
-          expect(wrapper.find('.ant-form-item-explain').last().text()).toEqual(errorText);
-          expect(wrapper.find('.ant-form-item-has-error').length).toBeGreaterThanOrEqual(1);
+
+          expect(screen.getByText(errorText)).toBeInTheDocument();
         });
 
         it('renders with helperText', () => {
@@ -132,9 +124,10 @@ describe('formFields generated tests', () => {
             ...field,
             helperText,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [helpertextField] }} />);
 
-          expect(wrapper.find('.ant-form-item-explain').last().text()).toEqual(helperText);
+          render(<RendererWrapper schema={{ fields: [helpertextField] }} />);
+
+          expect(screen.getByText(helperText)).toBeInTheDocument();
         });
 
         it('renders with description', () => {
@@ -142,9 +135,10 @@ describe('formFields generated tests', () => {
             ...field,
             description,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [descriptionField] }} />);
 
-          expect(wrapper.find('.ant-form-item-explain').last().text()).toEqual(description);
+          render(<RendererWrapper schema={{ fields: [descriptionField] }} />);
+
+          expect(screen.getByText(description)).toBeInTheDocument();
         });
 
         it('renders with description and helperText', () => {
@@ -153,9 +147,10 @@ describe('formFields generated tests', () => {
             description,
             helperText,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [descriptionField] }} />);
 
-          expect(wrapper.find('.ant-form-item-explain').last().text()).toEqual(helperText);
+          render(<RendererWrapper schema={{ fields: [descriptionField] }} />);
+
+          expect(screen.getByText(helperText)).toBeInTheDocument();
         });
 
         it('renders with error and helperText', async () => {
@@ -164,13 +159,14 @@ describe('formFields generated tests', () => {
             helperText,
             validate: [{ type: validatorTypes.REQUIRED }],
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [errorFields] }} />);
-          await act(async () => {
-            wrapper.find('form').simulate('submit');
-          });
-          wrapper.update();
 
-          expect(wrapper.find('.ant-form-item-explain').last().text()).toEqual(errorText);
+          render(<RendererWrapper schema={{ fields: [errorFields] }} />);
+
+          await act(async () => {
+            userEvent.click(screen.getByText('Submit'));
+          });
+
+          expect(screen.getByText(errorText)).toBeInTheDocument();
         });
 
         it('renders isRequired', () => {
@@ -178,67 +174,70 @@ describe('formFields generated tests', () => {
             ...field,
             isRequired: true,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [requiredField] }} />);
+
+          render(<RendererWrapper schema={{ fields: [requiredField] }} />);
 
           if (component === componentTypes.CHECKBOX) {
-            expect(wrapper.find('.ddorg__ant-component-mapper_is-required').text()).toEqual('*');
+            expect(screen.getByText('*')).toBeInTheDocument();
           } else {
-            expect(wrapper.find('.ant-form-item-required')).toHaveLength(1);
+            expect(screen.getByText(field.label)).toHaveClass('ant-form-item-required');
           }
         });
 
         it('renders isDisabled', () => {
+          const labelText = 'field';
+
           const disabledField = {
             ...field,
             isDisabled: true,
+            'aria-label': labelText,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField] }} />);
 
-          if (component === componentTypes.TEXTAREA) {
-            expect(wrapper.find('textarea').first().props().disabled).toEqual(true);
+          const { container } = render(<RendererWrapper schema={{ fields: [disabledField] }} />);
+
+          if (component === componentTypes.SLIDER) {
+            expect(screen.getByRole('slider')).toHaveAttribute('aria-disabled', 'true');
           } else if (component === componentTypes.RADIO) {
-            expect(wrapper.find('.ant-radio-disabled').length).toBeGreaterThanOrEqual(1);
-          } else if (component === componentTypes.CHECKBOX) {
-            expect(wrapper.find('.ant-checkbox-disabled').length).toBeGreaterThanOrEqual(1);
-          } else if (component === componentTypes.SWITCH) {
-            expect(wrapper.find('.ant-switch-disabled').length).toBeGreaterThanOrEqual(1);
-          } else if (component === componentTypes.SLIDER) {
-            expect(wrapper.find('.ant-slider-disabled').length).toBeGreaterThanOrEqual(1);
+            expect(container.getElementsByTagName('input')[0].disabled).toEqual(true);
+          } else if (component === componentTypes.SELECT) {
+            expect(screen.getAllByLabelText(labelText)[0]).toHaveClass('ant-select-disabled');
           } else {
-            expect(wrapper.find('input').first().props().disabled).toEqual(true);
+            expect(screen.getAllByLabelText(labelText)[0]).toBeDisabled();
           }
         });
 
         it('renders isReadOnly', () => {
+          const labelText = 'field';
+
           const disabledField = {
             ...field,
             isReadOnly: true,
+            'aria-label': labelText,
           };
-          const wrapper = mount(<RendererWrapper schema={{ fields: [disabledField] }} />);
 
-          if (component === componentTypes.TEXTAREA) {
-            expect(wrapper.find('textarea').first().props().readOnly).toEqual(true);
+          const { container } = render(<RendererWrapper schema={{ fields: [disabledField] }} />);
+
+          if (component === componentTypes.SLIDER) {
+            expect(screen.getByRole('slider')).toHaveAttribute('aria-disabled', 'true');
           } else if (component === componentTypes.RADIO) {
-            expect(wrapper.find('.ant-radio-disabled').length).toBeGreaterThanOrEqual(1);
-          } else if (component === componentTypes.CHECKBOX) {
-            expect(wrapper.find('.ant-checkbox-disabled').length).toBeGreaterThanOrEqual(1);
-          } else if (component === componentTypes.SWITCH) {
-            expect(wrapper.find('.ant-switch-disabled').length).toBeGreaterThanOrEqual(1);
-          } else if (component === componentTypes.SLIDER) {
-            expect(wrapper.find('.ant-slider-disabled').length).toBeGreaterThanOrEqual(1);
+            expect(container.getElementsByTagName('input')[0].disabled).toEqual(true);
+          } else if (component === componentTypes.SELECT) {
+            expect(screen.getAllByLabelText(labelText)[0]).toHaveClass('ant-select-disabled');
+          } else if (component === componentTypes.TEXTAREA || componentTypes.TEXT_FIELD === component) {
+            expect(screen.getAllByLabelText(labelText)[0]).toHaveAttribute('readonly', '');
           } else {
-            expect(wrapper.find('input').first().props().readOnly).toEqual(true);
+            expect(screen.getAllByLabelText(labelText)[0]).toBeDisabled();
           }
         });
 
         it('renders with submitError', async () => {
-          const wrapper = mount(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
+          render(<RendererWrapper schema={schema} onSubmit={() => ({ [field.name]: errorText })} />);
+
           await act(async () => {
-            wrapper.find('form').simulate('submit');
+            userEvent.click(screen.getByText('Submit'));
           });
-          wrapper.update();
-          expect(wrapper.find('.ant-form-item-explain').last().text()).toEqual(errorText);
-          expect(wrapper.find('.ant-form-item-has-error').length).toBeGreaterThanOrEqual(1);
+
+          expect(screen.getByText(errorText)).toBeInTheDocument();
         });
       });
     });
