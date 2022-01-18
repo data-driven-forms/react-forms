@@ -183,6 +183,7 @@ const ToolbarInternal = ({
   LeftSortIconButtonProps,
   filter,
   sortDesc,
+  isValue,
 }) => (
   <Toolbar
     variant="dense"
@@ -192,7 +193,7 @@ const ToolbarInternal = ({
   >
     <TextField
       edge="start"
-      id="options-search"
+      aria-label={isValue ? 'value-search' : 'options-search'}
       label={filterOptionsTitle}
       onChange={({ target: { value } }) => filterOptions(value)}
       value={filter}
@@ -202,7 +203,7 @@ const ToolbarInternal = ({
       className={clsx(classes.filter, FilterFieldProps && FilterFieldProps.className, LeftFilterFieldProps && LeftFilterFieldProps.className)}
     />
     <IconButton
-      aria-label="sort options"
+      aria-label={isValue ? 'sort value' : 'sort options'}
       edge="end"
       onClick={sortOptions}
       color="inherit"
@@ -234,6 +235,7 @@ ToolbarInternal.propTypes = {
   LeftSortIconButtonProps: PropTypes.object,
   filter: PropTypes.string,
   sortDesc: PropTypes.bool,
+  isValue: PropTypes.bool,
 };
 
 const DualListSelect = ({
@@ -490,6 +492,7 @@ const DualListSelect = ({
                 LeftSortIconButtonProps={RightSortIconButtonProps}
                 filter={state.filterValue}
                 sortDesc={state.sortRightDesc}
+                isValue
               />
             )}
             <ListInternal

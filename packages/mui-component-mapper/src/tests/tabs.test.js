@@ -1,6 +1,7 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { AppBar, Tabs, Tab } from '@mui/material';
+
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import FormTabs from '../tabs';
 import RenderWithProvider from '../../../../__mocks__/with-provider';
@@ -28,39 +29,35 @@ describe('tabs', () => {
   };
 
   it('should render tabs correctly', () => {
-    const wrapper = mount(
+    render(
       <RenderWithProvider value={{ formOptions }}>
         <FormTabs {...props} />
       </RenderWithProvider>
     );
 
-    expect(wrapper.find(AppBar)).toHaveLength(1);
-    expect(wrapper.find(Tabs)).toHaveLength(1);
-    expect(wrapper.find(Tab)).toHaveLength(2);
-    expect(wrapper.find('h1')).toHaveLength(2);
+    expect(screen.getByText('cosiTitle')).toBeInTheDocument();
+    expect(screen.getByText('cosiTitle2')).toBeInTheDocument();
   });
 
   it('should switch tabs correctly', () => {
-    const wrapper = mount(
+    render(
       <RenderWithProvider value={{ formOptions }}>
         <FormTabs {...props} />
       </RenderWithProvider>
     );
 
-    expect(wrapper.find(Tab).first().props().selected).toEqual(true);
-    expect(wrapper.find(Tab).last().props().selected).toEqual(false);
+    expect(screen.getByText('cosiTitle')).toHaveAttribute('aria-selected', 'true');
+    expect(screen.getByText('cosiTitle2')).toHaveAttribute('aria-selected', 'false');
 
-    const secondTabButton = wrapper.find('button').last();
-    secondTabButton.simulate('click');
-    wrapper.update();
+    userEvent.click(screen.getByText('cosiTitle2'));
 
-    expect(wrapper.find(Tab).first().props().selected).toEqual(false);
-    expect(wrapper.find(Tab).last().props().selected).toEqual(true);
+    expect(screen.getByText('cosiTitle')).toHaveAttribute('aria-selected', 'false');
+    expect(screen.getByText('cosiTitle2')).toHaveAttribute('aria-selected', 'true');
   });
 
   it('validate all tabs', () => {
     const onSubmit = jest.fn();
-    const wrapper = mount(
+    render(
       <FormRenderer
         componentMapper={componentMapper}
         FormTemplate={(props) => <FormTemplate {...props} />}
@@ -80,6 +77,7 @@ describe('tabs', () => {
                       component: 'text-field',
                       name: 'name',
                       validate: [{ type: validatorTypes.REQUIRED }],
+                      inputProps: { 'aria-label': 'name' },
                     },
                   ],
                 },
@@ -91,6 +89,7 @@ describe('tabs', () => {
                       component: 'text-field',
                       name: 'password',
                       validate: [{ type: validatorTypes.REQUIRED }],
+                      inputProps: { 'aria-label': 'password' },
                     },
                   ],
                 },
@@ -101,24 +100,13 @@ describe('tabs', () => {
       />
     );
 
-    wrapper
-      .find('input')
-      .first()
-      .simulate('change', { target: { value: 'NAME' } });
-    wrapper.update();
-
-    wrapper.find('form').simulate('submit');
-    wrapper.update();
+    userEvent.type(screen.getByLabelText('name'), 'NAME');
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).not.toHaveBeenCalled();
 
-    wrapper
-      .find('input')
-      .last()
-      .simulate('change', { target: { value: 'PASSWORD' } });
-    wrapper.update();
-
-    wrapper.find('form').simulate('submit');
+    userEvent.type(screen.getByLabelText('password'), 'PASSWORD');
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({ name: 'NAME', password: 'PASSWORD' });
   });
