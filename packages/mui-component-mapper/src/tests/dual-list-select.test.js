@@ -1,25 +1,15 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
-import { mount } from 'enzyme';
-
-import { List, ListItem, Toolbar, TextField, Paper, Button, IconButton } from '@mui/material';
-
-import SortIcon from '@mui/icons-material/ArrowUpward';
 
 import { componentMapper, FormTemplate } from '../index';
-import FormFieldGrid from '../form-field-grid';
 
 describe('DualListSelect', () => {
   let onSubmit;
   let initialProps;
   let schema;
-
-  const ALL_LEFT_POSITION = 3;
-  const ALL_RIGHT_POSITION = 0;
 
   beforeEach(() => {
     onSubmit = jest.fn();
@@ -67,15 +57,16 @@ describe('DualListSelect', () => {
   });
 
   it('renders correctly', () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+    render(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find(FormFieldGrid)).toHaveLength(1);
-    expect(wrapper.find(Toolbar)).toHaveLength(2);
-    expect(wrapper.find(TextField)).toHaveLength(2);
-    expect(wrapper.find(SortIcon)).toHaveLength(2);
-    expect(wrapper.find(List)).toHaveLength(2);
-    expect(wrapper.find(Paper)).toHaveLength(2);
-    expect(wrapper.find(ListItem)).toHaveLength(schema.fields[0].options.length + 1); // + empty placeholder
+    expect(screen.getByText('cats')).toBeInTheDocument();
+    expect(screen.getByText('cats_1')).toBeInTheDocument();
+    expect(screen.getByText('cats_2')).toBeInTheDocument();
+    expect(screen.getByText('zebras')).toBeInTheDocument();
+    expect(screen.getByText('pigeons')).toBeInTheDocument();
+    expect(screen.getByLabelText('Filter options')).toBeInTheDocument();
+    expect(screen.getByLabelText('Filter selected value')).toBeInTheDocument();
+    expect(screen.getByText('No selected')).toBeInTheDocument();
   });
 
   it('switch left option', async () => {
@@ -140,133 +131,166 @@ describe('DualListSelect', () => {
   });
 
   it('switch all to right', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
-    await act(async () => {
-      wrapper.find('#buttons-grid').find(Button).at(ALL_RIGHT_POSITION).props().onClick();
-    });
-    wrapper.update();
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
+    render(<FormRenderer {...initialProps} />);
+
+    userEvent.click(screen.getByLabelText('Move all to right'));
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({ 'dual-list': ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'] });
   });
 
   it('switch all to left', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />);
-    await act(async () => {
-      wrapper.find('#buttons-grid').find(Button).at(ALL_LEFT_POSITION).props().onClick();
-    });
-    wrapper.update();
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
+    render(<FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />);
+
+    userEvent.click(screen.getByLabelText('Move all to left'));
+    userEvent.click(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledWith({});
   });
 
   it('filters options', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+    render(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find(List).first().find(ListItem)).toHaveLength(schema.fields[0].options.length);
-    await act(async () => {
-      wrapper.find('input').first().instance().value = 'cats';
-    });
-    await act(async () => {
-      wrapper.find('input').first().simulate('change');
-    });
-    wrapper.update();
+    userEvent.type(screen.getByLabelText('Filter options'), 'cats');
 
-    expect(wrapper.find(List).first().find(ListItem)).toHaveLength(3);
-    wrapper
-      .find(List)
-      .first()
-      .find(ListItem)
-      .forEach((option) => expect(option.text()).toEqual(expect.stringContaining('cats')));
+    expect(screen.getByText('cats')).toBeInTheDocument();
+    expect(screen.getByText('cats_1')).toBeInTheDocument();
+    expect(screen.getByText('cats_2')).toBeInTheDocument();
+    expect(() => screen.getByText('zebras')).toThrow();
+    expect(() => screen.getByText('pigeons')).toThrow();
   });
 
   it('filters value', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />);
+    render(<FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />);
 
-    expect(wrapper.find(List).last().find(ListItem)).toHaveLength(schema.fields[0].options.length);
-    await act(async () => {
-      wrapper.find('input').last().instance().value = 'cats';
-    });
+    userEvent.type(screen.getByLabelText('Filter selected value'), 'cats');
 
-    await act(async () => {
-      wrapper.find('input').last().simulate('change');
-    });
-    wrapper.update();
-
-    expect(wrapper.find(List).last().find(ListItem)).toHaveLength(3);
-    wrapper
-      .find(List)
-      .last()
-      .find(ListItem)
-      .forEach((option) => expect(option.text()).toEqual(expect.stringContaining('cats')));
+    expect(screen.getByText('cats')).toBeInTheDocument();
+    expect(screen.getByText('cats_1')).toBeInTheDocument();
+    expect(screen.getByText('cats_2')).toBeInTheDocument();
+    expect(() => screen.getByText('zebras')).toThrow();
+    expect(() => screen.getByText('pigeons')).toThrow();
   });
 
   it('sort options', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+    render(<FormRenderer {...initialProps} />);
 
-    expect(wrapper.find(List).first().find(ListItem).first().text()).toEqual('cats');
-    expect(wrapper.find(List).first().find(ListItem).last().text()).toEqual('zebras');
-    await act(async () => {
-      wrapper.find(IconButton).at(0).props().onClick();
-    });
-    wrapper.update();
+    expect(screen.getAllByRole('button').map((b) => b.textContent)).toEqual([
+      '',
+      'cats',
+      'cats_1',
+      'cats_2',
+      'pigeons',
+      'zebras',
+      '≫',
+      '>',
+      '<',
+      '≪',
+      '',
+      'No selected',
+      'Submit',
+    ]);
 
-    expect(wrapper.find(List).first().find(ListItem).first().text()).toEqual('zebras');
-    expect(wrapper.find(List).first().find(ListItem).last().text()).toEqual('cats');
-    await act(async () => {
-      wrapper.find(IconButton).at(0).props().onClick();
-    });
-    wrapper.update();
+    userEvent.click(screen.getByLabelText('sort options'));
 
-    expect(wrapper.find(List).first().find(ListItem).first().text()).toEqual('cats');
-    expect(wrapper.find(List).first().find(ListItem).last().text()).toEqual('zebras');
+    expect(screen.getAllByRole('button').map((b) => b.textContent)).toEqual([
+      '',
+      'zebras',
+      'pigeons',
+      'cats_2',
+      'cats_1',
+      'cats',
+      '≫',
+      '>',
+      '<',
+      '≪',
+      '',
+      'No selected',
+      'Submit',
+    ]);
+
+    userEvent.click(screen.getByLabelText('sort options'));
+
+    expect(screen.getAllByRole('button').map((b) => b.textContent)).toEqual([
+      '',
+      'cats',
+      'cats_1',
+      'cats_2',
+      'pigeons',
+      'zebras',
+      '≫',
+      '>',
+      '<',
+      '≪',
+      '',
+      'No selected',
+      'Submit',
+    ]);
   });
 
   it('sort value', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />);
+    render(<FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />);
 
-    expect(wrapper.find(List).last().find(ListItem).first().text()).toEqual('cats');
-    expect(wrapper.find(List).last().find(ListItem).last().text()).toEqual('zebras');
-    await act(async () => {
-      wrapper.find(IconButton).last().props().onClick();
-    });
-    wrapper.update();
+    expect(screen.getAllByRole('button').map((b) => b.textContent)).toEqual([
+      '',
+      'No available options',
+      '≫',
+      '>',
+      '<',
+      '≪',
+      '',
+      'cats',
+      'cats_1',
+      'cats_2',
+      'pigeons',
+      'zebras',
+      'Submit',
+    ]);
 
-    expect(wrapper.find(List).last().find(ListItem).first().text()).toEqual('zebras');
-    expect(wrapper.find(List).last().find(ListItem).last().text()).toEqual('cats');
-    await act(async () => {
-      wrapper.find(IconButton).last().props().onClick();
-    });
-    wrapper.update();
+    userEvent.click(screen.getByLabelText('sort value'));
 
-    expect(wrapper.find(List).last().find(ListItem).first().text()).toEqual('cats');
-    expect(wrapper.find(List).last().find(ListItem).last().text()).toEqual('zebras');
+    expect(screen.getAllByRole('button').map((b) => b.textContent)).toEqual([
+      '',
+      'No available options',
+      '≫',
+      '>',
+      '<',
+      '≪',
+      '',
+      'zebras',
+      'pigeons',
+      'cats_2',
+      'cats_1',
+      'cats',
+      'Submit',
+    ]);
+
+    userEvent.click(screen.getByLabelText('sort value'));
+
+    expect(screen.getAllByRole('button').map((b) => b.textContent)).toEqual([
+      '',
+      'No available options',
+      '≫',
+      '>',
+      '<',
+      '≪',
+      '',
+      'cats',
+      'cats_1',
+      'cats_2',
+      'pigeons',
+      'zebras',
+      'Submit',
+    ]);
   });
 
   describe('filtered options', () => {
     it('switch all visible to right', async () => {
-      const wrapper = mount(<FormRenderer {...initialProps} />);
-      await act(async () => {
-        wrapper.find('input').first().instance().value = 'cats';
-      });
+      render(<FormRenderer {...initialProps} />);
 
-      await act(async () => {
-        wrapper.find('input').first().simulate('change');
-      });
-      wrapper.update();
-      await act(async () => {
-        wrapper.find('#buttons-grid').find(Button).at(ALL_RIGHT_POSITION).props().onClick();
-      });
-      wrapper.update();
-
-      await act(async () => {
-        wrapper.find('form').simulate('submit');
-      });
+      userEvent.type(screen.getByLabelText('Filter options'), 'cats');
+      userEvent.click(screen.getByLabelText('Move all to right'));
+      userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ 'dual-list': ['cats', 'cats_1', 'cats_2'] });
     });
@@ -274,23 +298,11 @@ describe('DualListSelect', () => {
 
   describe('filtered value', () => {
     it('switch all visible to left', async () => {
-      const wrapper = mount(<FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />);
-      await act(async () => {
-        wrapper.find('input').last().instance().value = 'cats';
-      });
-      await act(async () => {
-        wrapper.find('input').last().simulate('change');
-      });
-      wrapper.update();
+      render(<FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />);
 
-      await act(async () => {
-        wrapper.find('#buttons-grid').find(Button).at(ALL_LEFT_POSITION).props().onClick();
-      });
-      wrapper.update();
-
-      await act(async () => {
-        wrapper.find('form').simulate('submit');
-      });
+      userEvent.type(screen.getByLabelText('Filter selected value'), 'cats');
+      userEvent.click(screen.getByLabelText('Move all to left'));
+      userEvent.click(screen.getByText('Submit'));
 
       expect(onSubmit).toHaveBeenCalledWith({ 'dual-list': ['zebras', 'pigeons'] });
     });
