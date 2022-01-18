@@ -1,5 +1,8 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 import { mount } from 'enzyme';
 
@@ -17,8 +20,6 @@ describe('DualListSelect', () => {
 
   const ALL_LEFT_POSITION = 3;
   const ALL_RIGHT_POSITION = 0;
-  const RIGHT_POSITION = 1;
-  const LEFT_POSITION = 2;
 
   beforeEach(() => {
     onSubmit = jest.fn();
@@ -78,128 +79,64 @@ describe('DualListSelect', () => {
   });
 
   it('switch left option', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+    render(<FormRenderer {...initialProps} />);
 
-    wrapper.find('form').simulate('submit');
+    userEvent.click(screen.getByText('Submit'));
+
     expect(onSubmit).toHaveBeenCalledWith({});
-    onSubmit.mockClear();
 
-    await act(async () => {
-      wrapper.find(ListItem).first().simulate('click');
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('cats'));
+    userEvent.click(screen.getByLabelText('Move selected to right'));
+    userEvent.click(screen.getByText('Submit'));
 
-    await act(async () => {
-      wrapper.find('#buttons-grid').find(Button).at(RIGHT_POSITION).props().onClick();
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-
-    expect(onSubmit).toHaveBeenCalledWith({ 'dual-list': ['cats'] });
+    expect(onSubmit).toHaveBeenLastCalledWith({ 'dual-list': ['cats'] });
   });
 
   it('switch left option with holding ctrl', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+    render(<FormRenderer {...initialProps} />);
 
-    await act(async () => {
-      wrapper.find(List).first().find(ListItem).first().simulate('click');
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('cats'));
+    userEvent.click(screen.getByText('zebras'), { ctrlKey: true });
+    userEvent.click(screen.getByLabelText('Move selected to right'));
+    userEvent.click(screen.getByText('Submit'));
 
-    await act(async () => {
-      wrapper.find(List).first().find(ListItem).last().simulate('click', { ctrlKey: true });
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('#buttons-grid').find(Button).at(RIGHT_POSITION).props().onClick();
-    });
-    wrapper.update();
-
-    wrapper.find('form').simulate('submit');
-
-    expect(onSubmit).toHaveBeenCalledWith({ 'dual-list': ['cats', 'zebras'] });
+    expect(onSubmit).toHaveBeenLastCalledWith({ 'dual-list': ['cats', 'zebras'] });
   });
 
   it('switch left option with holding shift', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+    render(<FormRenderer {...initialProps} />);
 
-    await act(async () => {
-      wrapper.find(List).first().find(ListItem).first().simulate('click');
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('cats'));
+    userEvent.click(screen.getByText('zebras'), { shiftKey: true });
+    userEvent.click(screen.getByLabelText('Move selected to right'));
+    userEvent.click(screen.getByText('Submit'));
 
-    await act(async () => {
-      wrapper.find(List).first().find(ListItem).last().simulate('click', { shiftKey: true });
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('#buttons-grid').find(Button).at(RIGHT_POSITION).props().onClick();
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-
-    expect(onSubmit).toHaveBeenCalledWith({ 'dual-list': ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'] });
+    expect(onSubmit).toHaveBeenLastCalledWith({ 'dual-list': ['cats', 'cats_1', 'cats_2', 'pigeons', 'zebras'] });
   });
 
   it('switch left option with holding and removing by ctrl', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} />);
+    render(<FormRenderer {...initialProps} />);
 
-    await act(async () => {
-      wrapper.find(List).first().find(ListItem).first().simulate('click');
-    });
-    wrapper.update();
+    userEvent.click(screen.getByText('cats'));
+    userEvent.click(screen.getByText('zebras'), { shiftKey: true });
+    userEvent.click(screen.getByText('cats'), { ctrlKey: true });
+    userEvent.click(screen.getByLabelText('Move selected to right'));
+    userEvent.click(screen.getByText('Submit'));
 
-    await act(async () => {
-      wrapper.find(List).first().find(ListItem).last().simulate('click', { shiftKey: true });
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find(List).first().find(ListItem).first().simulate('click', { ctrlKey: true });
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('#buttons-grid').find(Button).at(RIGHT_POSITION).props().onClick();
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-
-    expect(onSubmit).toHaveBeenCalledWith({ 'dual-list': ['cats_1', 'cats_2', 'pigeons', 'zebras'] });
+    expect(onSubmit).toHaveBeenLastCalledWith({ 'dual-list': ['cats_1', 'cats_2', 'pigeons', 'zebras'] });
   });
 
   it('switch right option', async () => {
-    const wrapper = mount(<FormRenderer {...initialProps} initialValues={{ 'dual-list': ['cats'] }} />);
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
-    expect(onSubmit).toHaveBeenCalledWith({ 'dual-list': ['cats'] });
-    onSubmit.mockClear();
-    await act(async () => {
-      wrapper.find(ListItem).last().simulate('click');
-    });
-    wrapper.update();
+    render(<FormRenderer {...initialProps} initialValues={{ 'dual-list': ['cats'] }} />);
 
-    await act(async () => {
-      wrapper.find('#buttons-grid').find(Button).at(LEFT_POSITION).props().onClick();
-    });
-    wrapper.update();
-    await act(async () => {
-      wrapper.find('form').simulate('submit');
-    });
+    userEvent.click(screen.getByText('Submit'));
+    expect(onSubmit).toHaveBeenLastCalledWith({ 'dual-list': ['cats'] });
 
-    expect(onSubmit).toHaveBeenCalledWith({});
+    userEvent.click(screen.getByText('cats'));
+    userEvent.click(screen.getByLabelText('Move selected to left'));
+    userEvent.click(screen.getByText('Submit'));
+
+    expect(onSubmit).toHaveBeenLastCalledWith({});
   });
 
   it('switch all to right', async () => {
