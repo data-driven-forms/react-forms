@@ -1,11 +1,10 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
-import { Checkbox } from 'antd';
 
 describe('<Checkbox />', () => {
   it('renders multiple checkbox', () => {
@@ -30,14 +29,12 @@ describe('<Checkbox />', () => {
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
     );
 
-    expect(wrapper.find(Checkbox)).toHaveLength(2);
-    expect(wrapper.find(Checkbox).first().props().children).toEqual('option 1');
-    expect(wrapper.find(Checkbox).last().props().children).toEqual('option 2');
-    expect(wrapper.find('.ant-form-item-required')).toHaveLength(0);
+    expect(screen.getByText('option 1')).toBeInTheDocument();
+    expect(screen.getByText('option 2')).toBeInTheDocument();
   });
 
   it('renders multiple required checkbox', () => {
@@ -62,10 +59,10 @@ describe('<Checkbox />', () => {
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
     );
 
-    expect(wrapper.find('.ant-form-item-required')).toHaveLength(1);
+    expect(screen.getByText('check')).toHaveClass('ant-form-item-required');
   });
 });

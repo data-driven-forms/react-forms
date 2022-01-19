@@ -1,17 +1,10 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
-
-import { Tabs } from 'antd';
-
-import WrapperTextField from '../text-field';
-import WrapperSlider from '../slider';
-
-const { TabPane } = Tabs;
 
 describe('<Tabs />', () => {
   it('renders correctly', () => {
@@ -26,28 +19,28 @@ describe('<Tabs />', () => {
               title: 'title 1',
               name: 'tab1',
               description: 'desc 1',
-              fields: [{ component: componentTypes.SLIDER, name: 'slider' }],
+              fields: [{ component: componentTypes.SLIDER, name: 'slider', 'aria-label': 'slider' }],
             },
             {
               component: componentTypes.TAB_ITEM,
               title: 'title 2',
               name: 'tab2',
               description: 'desc 2',
-              fields: [{ component: componentTypes.TEXT_FIELD, name: 'text_field' }],
+              fields: [{ component: componentTypes.TEXT_FIELD, name: 'text_field', 'aria-label': 'text-field' }],
             },
           ],
         },
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
     );
 
-    expect(wrapper.find(Tabs)).toHaveLength(1);
-    expect(wrapper.find(Tabs)).toHaveLength(1);
-    expect(wrapper.find(TabPane)).toHaveLength(2);
-    expect(wrapper.find(WrapperTextField)).toHaveLength(1);
-    expect(wrapper.find(WrapperSlider)).toHaveLength(1);
+    expect(screen.getByText('title 1')).toBeInTheDocument();
+    expect(screen.getByText('title 2')).toBeInTheDocument();
+
+    expect(screen.getByRole('slider')).toBeInTheDocument();
+    expect(() => screen.getByLabelText('text-area')).toThrow();
   });
 });

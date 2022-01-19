@@ -1,19 +1,19 @@
 import React from 'react';
-import { mount } from 'enzyme';
-
+import { act, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import FormTemplate from '../form-template';
 import componentMapper from '../component-mapper';
-import { Select } from 'antd';
 
 describe('<Select />', () => {
-  it('renders select', () => {
+  it('renders select', async () => {
     const schema = {
       fields: [
         {
           component: componentTypes.SELECT,
           name: 'select',
+          label: 'Select',
           options: [
             { label: 'option 1', value: 1 },
             { label: 'option 2', value: 2 },
@@ -22,11 +22,18 @@ describe('<Select />', () => {
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
     );
 
-    expect(wrapper.find(Select)).toHaveLength(1);
+    expect(screen.getByText('Select')).toBeInTheDocument();
+
+    await act(async () => {
+      userEvent.click(screen.getByText('Please choose'));
+    });
+
+    expect(screen.getByText('option 1')).toBeInTheDocument();
+    expect(screen.getByText('option 2')).toBeInTheDocument();
   });
 
   it('renders multi select', () => {
@@ -36,6 +43,7 @@ describe('<Select />', () => {
           component: componentTypes.SELECT,
           name: 'select',
           isMulti: true,
+          'aria-label': 'select',
           options: [
             { label: 'option 1', value: 1 },
             { label: 'option 2', value: 2 },
@@ -44,10 +52,10 @@ describe('<Select />', () => {
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
     );
 
-    expect(wrapper.find(Select).props().mode).toEqual('multiple');
+    expect(screen.getAllByLabelText('select')[0]).toHaveClass('ant-select-multiple');
   });
 });
