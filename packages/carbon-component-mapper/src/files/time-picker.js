@@ -7,7 +7,7 @@ import TimePickerDate from './time-picker-date';
 const TimePicker = ({ useStringFormat, ...props }) => (useStringFormat ? <TimePickerString {...props} /> : <TimePickerDate {...props} />);
 
 TimePicker.propTypes = {
-  useStringFormat: PropTypes.bool,
+  useStringFormat: PropTypes.bool
 };
 
 export default TimePicker;

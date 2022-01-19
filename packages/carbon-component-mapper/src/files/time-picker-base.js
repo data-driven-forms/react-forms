@@ -75,12 +75,12 @@ TimePickerBase.propTypes = {
     PropTypes.shape({
       value: PropTypes.string.isRequired,
       label: PropTypes.node.isRequired,
-      showAs: PropTypes.string,
+      showAs: PropTypes.string
     })
   ),
   WrapperProps: PropTypes.object,
   input: PropTypes.shape({
-    name: PropTypes.string,
+    name: PropTypes.string
   }).isRequired,
   enhnancedOnBlur: PropTypes.func,
   enhancedOnChange: PropTypes.func,
@@ -91,7 +91,7 @@ TimePickerBase.propTypes = {
   selectFormat: PropTypes.func.isRequired,
   selectTimezone: PropTypes.func.isRequired,
   format: PropTypes.oneOf(['AM', 'PM']),
-  timezone: PropTypes.string,
+  timezone: PropTypes.string
 };
 
 export default TimePickerBase;

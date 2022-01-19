@@ -61,11 +61,11 @@ TimePickerString.propTypes = {
     PropTypes.shape({
       value: PropTypes.string.isRequired,
       label: PropTypes.node.isRequired,
-      showAs: PropTypes.string,
+      showAs: PropTypes.string
     })
   ),
   WrapperProps: PropTypes.object,
-  useStringFormat: PropTypes.bool,
+  useStringFormat: PropTypes.bool
 };
 
 export default TimePickerString;

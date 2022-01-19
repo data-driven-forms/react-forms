@@ -20,10 +20,10 @@ describe('TimePicker<String>', () => {
       componentMapper: {
         [componentTypes.TIME_PICKER]: {
           component: TimePicker,
-          useStringFormat: true,
-        },
+          useStringFormat: true
+        }
       },
-      FormTemplate,
+      FormTemplate
     };
   });
 
@@ -33,9 +33,9 @@ describe('TimePicker<String>', () => {
         {
           component: componentTypes.TIME_PICKER,
           name: 'time-picker',
-          twelveHoursFormat: true,
-        },
-      ],
+          twelveHoursFormat: true
+        }
+      ]
     };
 
     wrapper = mount(<FormRenderer schema={schema} {...initialProps} />);
@@ -79,9 +79,9 @@ describe('TimePicker<String>', () => {
       fields: [
         {
           component: componentTypes.TIME_PICKER,
-          name: 'time-picker',
-        },
-      ],
+          name: 'time-picker'
+        }
+      ]
     };
 
     wrapper = mount(<FormRenderer schema={schema} {...initialProps} />);
@@ -110,9 +110,9 @@ describe('TimePicker<String>', () => {
       fields: [
         {
           component: componentTypes.TIME_PICKER,
-          name: 'time-picker',
-        },
-      ],
+          name: 'time-picker'
+        }
+      ]
     };
 
     wrapper = mount(<FormRenderer schema={schema} {...initialProps} />);
@@ -164,10 +164,10 @@ describe('TimePicker<String>', () => {
           twelveHoursFormat: true,
           timezones: [
             { label: 'UTC', value: 'UTC' },
-            { label: 'EST', value: 'EAST' },
-          ],
-        },
-      ],
+            { label: 'EST', value: 'EAST' }
+          ]
+        }
+      ]
     };
 
     wrapper = mount(<FormRenderer schema={schema} {...initialProps} />);
@@ -216,10 +216,10 @@ describe('TimePicker<String>', () => {
           twelveHoursFormat: true,
           timezones: [
             { label: 'UTC', value: 'UTC' },
-            { label: 'EST', value: 'EAST' },
-          ],
-        },
-      ],
+            { label: 'EST', value: 'EAST' }
+          ]
+        }
+      ]
     };
 
     wrapper = mount(<FormRenderer schema={schema} {...initialProps} />);
