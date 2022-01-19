@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
-import FormTemplate from '../form-template';
+import FormTemplate from '../files/form-template';
 import { act } from 'react-dom/test-utils';
 import TimePicker from '../files/time-picker';
 
