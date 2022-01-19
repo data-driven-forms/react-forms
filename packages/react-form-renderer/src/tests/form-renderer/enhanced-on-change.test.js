@@ -65,6 +65,11 @@ describe('#enhancedOnChange', () => {
       expect(enhancedOnChange({ onChange: (value) => value, initial, clearedValue }, '')).toEqual(clearedValue);
     });
 
+    it('should not set delete value after sending date', () => {
+      const value = new Date(2021, 7, 20);
+      expect(enhancedOnChange({ onChange: (value) => value, initial, clearedValue }, value)).toEqual(value);
+    });
+
     it('should not set delete value after sending number 0', () => {
       const value = 0;
       expect(enhancedOnChange({ onChange: (value) => value, initial, clearedValue }, value)).toEqual(value);
