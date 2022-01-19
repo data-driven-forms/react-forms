@@ -42,6 +42,10 @@ const checkEmpty = (value) => {
     return false;
   }
 
+  if (value instanceof Date) {
+    return false;
+  }
+
   if (!isEmpty(value)) {
     return false;
   }

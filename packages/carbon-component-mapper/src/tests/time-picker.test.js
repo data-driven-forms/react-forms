@@ -98,7 +98,7 @@ describe('TimePicker', () => {
     });
     wrapper.update();
 
-    expect(wrapper.find('input').props().value).toEqual('24:00');
+    expect(wrapper.find('input').props().value).toEqual('00:00');
     expect(onSubmit.mock.calls[0][0]['time-picker'].getHours()).toEqual(0);
     expect(onSubmit.mock.calls[0][0]['time-picker'].getMinutes()).toEqual(0);
   });
