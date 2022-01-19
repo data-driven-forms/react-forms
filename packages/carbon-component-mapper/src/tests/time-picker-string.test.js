@@ -4,10 +4,10 @@ import { mount } from 'enzyme';
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import FormTemplate from '../form-template';
-import componentMapper from '../component-mapper';
 import { act } from 'react-dom/test-utils';
+import TimePicker from '../files/time-picker';
 
-describe('TimePicker', () => {
+describe('TimePicker<String>', () => {
   let initialProps;
   let onSubmit;
   let wrapper;
@@ -17,7 +17,12 @@ describe('TimePicker', () => {
     onSubmit = jest.fn();
     initialProps = {
       onSubmit: (values) => onSubmit(values),
-      componentMapper,
+      componentMapper: {
+        [componentTypes.TIME_PICKER]: {
+          component: TimePicker,
+          useStringFormat: true,
+        },
+      },
       FormTemplate,
     };
   });
@@ -50,9 +55,8 @@ describe('TimePicker', () => {
     });
     wrapper.update();
 
-    expect(wrapper.find('input').props().value).toEqual('12:35');
-    expect(onSubmit.mock.calls[0][0]['time-picker'].getHours()).toEqual(12);
-    expect(onSubmit.mock.calls[0][0]['time-picker'].getMinutes()).toEqual(35);
+    expect(wrapper.find('input').props().value).toEqual('00:35');
+    expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '00:35 PM' });
 
     onSubmit.mockReset();
 
@@ -66,12 +70,11 @@ describe('TimePicker', () => {
     });
     wrapper.update();
 
-    expect(wrapper.find('input').props().value).toEqual('12:35');
-    expect(onSubmit.mock.calls[0][0]['time-picker'].getHours()).toEqual(0);
-    expect(onSubmit.mock.calls[0][0]['time-picker'].getMinutes()).toEqual(35);
+    expect(wrapper.find('input').props().value).toEqual('00:35');
+    expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '00:35 AM' });
   });
 
-  it('handle invalid date', async () => {
+  it('does not handle invalid date', async () => {
     schema = {
       fields: [
         {
@@ -98,9 +101,8 @@ describe('TimePicker', () => {
     });
     wrapper.update();
 
-    expect(wrapper.find('input').props().value).toEqual('24:00');
-    expect(onSubmit.mock.calls[0][0]['time-picker'].getHours()).toEqual(0);
-    expect(onSubmit.mock.calls[0][0]['time-picker'].getMinutes()).toEqual(0);
+    expect(wrapper.find('input').props().value).toEqual('aa:BB');
+    expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': 'aa:BB' });
   });
 
   it('handle change', async () => {
@@ -130,9 +132,8 @@ describe('TimePicker', () => {
     });
     wrapper.update();
 
-    expect(wrapper.find('input').props().value).toEqual('13:27');
-    expect(onSubmit.mock.calls[0][0]['time-picker'].getHours()).toEqual(13);
-    expect(onSubmit.mock.calls[0][0]['time-picker'].getMinutes()).toEqual(27);
+    expect(wrapper.find('input').props().value).toEqual('13:87');
+    expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '13:87' });
     onSubmit.mockReset();
 
     await act(async () => {
@@ -150,9 +151,8 @@ describe('TimePicker', () => {
     });
     wrapper.update();
 
-    expect(wrapper.find('input').props().value).toEqual('01:16');
-    expect(onSubmit.mock.calls[0][0]['time-picker'].getHours()).toEqual(1);
-    expect(onSubmit.mock.calls[0][0]['time-picker'].getMinutes()).toEqual(16);
+    expect(wrapper.find('input').props().value).toEqual('25:16');
+    expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '25:16' });
   });
 
   it('change timezone', async () => {
@@ -163,8 +163,8 @@ describe('TimePicker', () => {
           name: 'time-picker',
           twelveHoursFormat: true,
           timezones: [
-            { label: 'UTC', value: 'UTC', showAs: 'UTC' },
-            { label: 'EST', value: 'EAST', showAs: 'Pacific/Easter' },
+            { label: 'UTC', value: 'UTC' },
+            { label: 'EST', value: 'EAST' },
           ],
         },
       ],
@@ -187,9 +187,8 @@ describe('TimePicker', () => {
     });
     wrapper.update();
 
-    expect(wrapper.find('input').props().value).toEqual('05:35');
-    expect(onSubmit.mock.calls[0][0]['time-picker'].getHours()).toEqual(5);
-    expect(onSubmit.mock.calls[0][0]['time-picker'].getMinutes()).toEqual(35);
+    expect(wrapper.find('input').props().value).toEqual('00:35');
+    expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '00:35 AM EST' });
 
     onSubmit.mockReset();
 
@@ -203,9 +202,8 @@ describe('TimePicker', () => {
     });
     wrapper.update();
 
-    expect(wrapper.find('input').props().value).toEqual('05:35');
-    expect(onSubmit.mock.calls[0][0]['time-picker'].getHours()).toEqual(5);
-    expect(onSubmit.mock.calls[0][0]['time-picker'].getMinutes()).toEqual(35);
+    expect(wrapper.find('input').props().value).toEqual('00:35');
+    expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '00:35 AM UTC' });
   });
 
   it('handles initial value', async () => {
@@ -214,27 +212,22 @@ describe('TimePicker', () => {
         {
           component: componentTypes.TIME_PICKER,
           name: 'time-picker',
-          initialValue: new Date('December 17, 1995 16:00:00'),
+          initialValue: '12:57 PM EAST',
           twelveHoursFormat: true,
+          timezones: [
+            { label: 'UTC', value: 'UTC' },
+            { label: 'EST', value: 'EAST' },
+          ],
         },
       ],
     };
 
-    await act(async () => {
-      wrapper = mount(<FormRenderer schema={schema} {...initialProps} />);
-    });
-    wrapper.update();
+    wrapper = mount(<FormRenderer schema={schema} {...initialProps} />);
 
-    expect(wrapper.find('input').props().value).toEqual('04:00');
-    expect(wrapper.find('select').props().defaultValue).toEqual('PM');
+    expect(wrapper.find('input').props().value).toEqual('12:57');
 
     await act(async () => {
-      wrapper.find('input').simulate('change', { target: { value: '03:00' } });
-    });
-    wrapper.update();
-
-    await act(async () => {
-      wrapper.find('input').simulate('blur');
+      wrapper.find('input').simulate('change', { target: { value: '00:35' } });
     });
     wrapper.update();
 
@@ -243,7 +236,6 @@ describe('TimePicker', () => {
     });
     wrapper.update();
 
-    expect(onSubmit.mock.calls[0][0]['time-picker'].getHours()).toEqual(15);
-    expect(onSubmit.mock.calls[0][0]['time-picker'].getMinutes()).toEqual(0);
+    expect(onSubmit).toHaveBeenLastCalledWith({ 'time-picker': '00:35 PM EAST' });
   });
 });
