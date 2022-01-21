@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
@@ -28,13 +28,12 @@ describe('<Checkbox />', () => {
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
     );
 
-    expect(wrapper.find(Checkbox)).toHaveLength(2);
-    expect(wrapper.find(Checkbox).first().props().label).toEqual('option 1');
-    expect(wrapper.find(Checkbox).last().props().label).toEqual('option 2');
+    expect(screen.getByText('option 1')).toBeInTheDocument();
+    expect(screen.getByText('option 2')).toBeInTheDocument();
   });
 
   it('renders multiple required checkbox', () => {
@@ -59,10 +58,10 @@ describe('<Checkbox />', () => {
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
     );
 
-    expect(wrapper.find('.bp3-text-muted').last().text()).toEqual('(required)');
+    expect(screen.getByText('(required)')).toBeInTheDocument();
   });
 });

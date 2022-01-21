@@ -1,11 +1,10 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-renderer';
 
 import FormTemplate from '../form-template/form-template';
 import componentMapper from '../component-mapper/component-mapper';
-import { Text } from '@blueprintjs/core';
 
 describe('<PlainText />', () => {
   it('renders multiple checkbox', () => {
@@ -19,10 +18,10 @@ describe('<PlainText />', () => {
       ],
     };
 
-    const wrapper = mount(
+    render(
       <FormRenderer onSubmit={jest.fn()} FormTemplate={(props) => <FormTemplate {...props} />} schema={schema} componentMapper={componentMapper} />
     );
 
-    expect(wrapper.find(Text).text()).toEqual('I am happy text');
+    expect(screen.getByText('I am happy text')).toBeInTheDocument();
   });
 });
