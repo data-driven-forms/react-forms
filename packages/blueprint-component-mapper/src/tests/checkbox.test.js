@@ -5,7 +5,6 @@ import { FormRenderer, componentTypes } from '@data-driven-forms/react-form-rend
 
 import FormTemplate from '../form-template/form-template';
 import componentMapper from '../component-mapper/component-mapper';
-import { Checkbox } from '@blueprintjs/core';
 
 describe('<Checkbox />', () => {
   it('renders multiple checkbox', () => {
