@@ -168,13 +168,76 @@ describe('DualListSelect', () => {
     expect(() => screen.getByText('pigeons')).toThrow();
   });
 
-  // ICON BUTTONS ARE TO REACHABLE
-  it.skip('sort options', async () => {
-    render(<FormRenderer {...initialProps} />);
+  it('sort options', async () => {
+    const { container } = render(<FormRenderer {...initialProps} />);
+
+    expect([...container.getElementsByClassName('bp3-menu-item')].map((el) => el.text)).toEqual([
+      'cats',
+      'cats_1',
+      'cats_2',
+      'pigeons',
+      'zebras',
+      'No selected',
+    ]);
+
+    userEvent.click(screen.getByTitle('Sort options'));
+
+    expect([...container.getElementsByClassName('bp3-menu-item')].map((el) => el.text)).toEqual([
+      'zebras',
+      'pigeons',
+      'cats_2',
+      'cats_1',
+      'cats',
+      'No selected',
+    ]);
+
+    userEvent.click(screen.getByTitle('Sort options'));
+
+    expect([...container.getElementsByClassName('bp3-menu-item')].map((el) => el.text)).toEqual([
+      'cats',
+      'cats_1',
+      'cats_2',
+      'pigeons',
+      'zebras',
+      'No selected',
+    ]);
   });
 
-  it.skip('sort value', async () => {
-    render(<FormRenderer {...initialProps} />);
+  it('sort value', async () => {
+    const { container } = render(
+      <FormRenderer {...initialProps} initialValues={{ 'dual-list': schema.fields[0].options.map(({ value }) => value) }} />
+    );
+
+    expect([...container.getElementsByClassName('bp3-menu-item')].map((el) => el.text)).toEqual([
+      'No available options',
+      'cats',
+      'cats_1',
+      'cats_2',
+      'pigeons',
+      'zebras',
+    ]);
+
+    userEvent.click(screen.getByTitle('Sort value'));
+
+    expect([...container.getElementsByClassName('bp3-menu-item')].map((el) => el.text)).toEqual([
+      'No available options',
+      'zebras',
+      'pigeons',
+      'cats_2',
+      'cats_1',
+      'cats',
+    ]);
+
+    userEvent.click(screen.getByTitle('Sort value'));
+
+    expect([...container.getElementsByClassName('bp3-menu-item')].map((el) => el.text)).toEqual([
+      'No available options',
+      'cats',
+      'cats_1',
+      'cats_2',
+      'pigeons',
+      'zebras',
+    ]);
   });
 
   describe('filtered options', () => {
